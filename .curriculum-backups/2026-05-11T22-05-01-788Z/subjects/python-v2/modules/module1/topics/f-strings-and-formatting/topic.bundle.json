@@ -1,0 +1,188 @@
+{
+  "topicId": "f-strings-and-formatting",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-1",
+  "sectionSlug": "python-v2-1-string-foundations",
+  "prefix": "pyv2_1",
+  "minutes": 22,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.label",
+    "summaryKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.cards.sketch1.title",
+      "sketchId": "sketch2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "quiz4",
+            "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.projectSteps.quiz4.title",
+            "exerciseKey": "quiz4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "quiz5",
+            "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.projectSteps.quiz5.title",
+            "exerciseKey": "quiz5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-1.f-strings-and-formatting.sketch1.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.f-strings-and-formatting.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-1.f-strings-and-formatting.sketch2.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.f-strings-and-formatting.sketch2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz1",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz3",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "name"
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz4",
+      "language": "python",
+      "starterCode": "city = ''\n# Write your f-string below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "I live in New York",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "I live in New York",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "city = 'New York'\nprint(f'I live in {city}')"
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz5",
+      "language": "python",
+      "starterCode": "temperature = 0\n# Write your format method code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "The temperature is 75 degrees.",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "The temperature is 75 degrees.",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "temperature = 75\nprint('The temperature is {} degrees.'.format(temperature))"
+      }
+    }
+  ]
+}

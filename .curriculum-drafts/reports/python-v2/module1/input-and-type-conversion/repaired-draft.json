@@ -6,128 +6,278 @@
     {
       "id": "sketch1",
       "title": "Getting User Input",
-      "bodyMarkdown": "In Python, you can use the `input()` function to get input from the user. For example:\n\n```python\nname = input('What is your name? ')\nprint('Hello, ' + name + '!')\n```\n\nThis code asks the user for their name and then greets them. \n\n**Your turn:** Try modifying the prompt to ask for your favorite color.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "In Python, we can use the `input()` function to get input from the user. For example:\n\n```python\nname = input('What is your name? ')\nprint('Hello, ' + name)\n```\n\nThis code asks the user for their name and then greets them. **Try it yourself** by changing the message in the `input()` function!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     },
     {
       "id": "sketch2",
       "title": "Type Conversion",
-      "bodyMarkdown": "When you get input from the user, it is always in string format. You can convert it to other types using functions like `int()` and `float()`. For example:\n\n```python\nage = int(input('How old are you? '))\nprint('In 5 years, you will be', age + 5)\n```\n\nThis code converts the user's age from a string to an integer so you can do math with it.\n\n**Try it yourself:** Change the code to ask for your height in meters and print it in centimeters.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "When we get input from the user, it is always in string format. To convert it to other types, we can use functions like `int()`, `float()`, and `str()`. For example:\n\n```python\nage = input('How old are you? ')\nage = int(age)\nprint('You are ' + str(age) + ' years old.')\n```\n\nThis code converts the user's age from a string to an integer. **Your turn**: Try converting a float instead!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     }
   ],
   "quizDraft": [
     {
       "id": "quiz1",
-      "kind": "code_input",
-      "title": "Convert User Input to Integer",
-      "prompt": "Write a program that asks the user for their age and prints out the age in 10 years.",
-      "starterCode": "age = input()\n# Convert age to an integer",
-      "solutionCode": "age = int(input())\nprint('In 10 years, you will be', age + 10)",
-      "tests": [
-        {
-          "stdin": "25\n",
-          "stdout": "In 10 years, you will be 35"
-        },
-        {
-          "stdin": "30\n",
-          "stdout": "In 10 years, you will be 40"
-        }
+      "kind": "single_choice",
+      "title": "Understanding Input",
+      "prompt": "What does the `input()` function do in Python?",
+      "options": [
+        "It prints output to the console.",
+        "It gets input from the user.",
+        "It converts data types.",
+        "It defines a function."
       ],
-      "recipeType": "fixed_tests",
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how we ask users for information.",
+      "help": {
+        "concept": "The `input()` function is used to take input from the user.",
+        "hint_1": "Look for the option that describes user interaction.",
+        "hint_2": "Remember, it does not perform any calculations or conversions."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Type Conversion Functions",
+      "prompt": "Which function would you use to convert a string to an integer?",
+      "options": [
+        "str()",
+        "int()",
+        "float()",
+        "input()"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
       "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
-        "concept": "This coding exercise checks whether the program produces the requested output.",
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
         "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
         "hint_2": "Choose the option that directly matches the question without relying on answer wording."
       }
     },
     {
-      "id": "quiz2",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the Blank",
-      "prompt": "The function used to convert a string to an integer is `the missing choice`.",
-      "template": "The function used to convert a string to an integer is `[blank1]`.",
-      "choices": [
-        "input",
-        "int",
-        "float",
-        "str"
-      ],
-      "correctValue": "int",
-      "hint": "Focus on the missing concept or keyword.",
-      "help": {
-        "concept": "This task checks the key idea behind fill in the blank.",
-        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-      }
-    },
-    {
       "id": "quiz3",
-      "kind": "single_choice",
-      "title": "Understanding Input Types",
-      "prompt": "What type is the value returned by the input function?",
+      "kind": "multi_choice",
+      "title": "Valid Type Conversions",
+      "prompt": "Which of the following are valid type conversions in Python?",
       "options": [
-        "Integer",
-        "String",
-        "Float",
-        "Boolean"
+        "int('123')",
+        "float('12.34')",
+        "str(123)",
+        "str(12.34)"
       ],
       "correctOptionIds": [
-        "b"
+        "a",
+        "b",
+        "c",
+        "d"
       ],
-      "hint": "Think about the main idea behind understanding input types.",
+      "hint": "Think about how each function works with different types.",
       "help": {
-        "concept": "Focus on the core concept behind understanding input types.",
-        "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
-        "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+        "concept": "All listed functions correctly convert types in Python.",
+        "hint_1": "Check if the input types match the expected output types.",
+        "hint_2": "Remember, you can convert numbers to strings and vice versa."
       }
     },
     {
       "id": "quiz4",
       "kind": "multi_choice",
-      "title": "Type Conversion Functions",
-      "prompt": "Which of the following functions can be used for type conversion in Python? (Select all that apply)",
+      "title": "Common String Methods",
+      "prompt": "Which of the following are common string methods in Python?",
       "options": [
-        "int()",
-        "str()",
-        "float()",
-        "input()"
+        "upper()",
+        "lower()",
+        "append()",
+        "strip()"
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "c"
+        "d"
       ],
-      "hint": "Think about the main idea behind type conversion functions.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
-        "concept": "Focus on the core concept behind type conversion functions.",
-        "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
-        "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
       }
     },
     {
       "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Order of Operations",
+      "prompt": "Arrange the steps to safely convert user input to an integer.",
+      "tokens": [
+        "Get input from the user",
+        "Convert input to integer",
+        "Store the result in a variable",
+        "Print the result"
+      ],
+      "correctOrder": [
+        "Get input from the user",
+        "Convert input to integer",
+        "Store the result in a variable",
+        "Print the result"
+      ],
+      "hint": "Think about the sequence of actions needed to process input.",
+      "help": {
+        "concept": "You must first get the input before you can convert it.",
+        "hint_1": "Identify the first step in the process.",
+        "hint_2": "Remember to store the converted value before printing."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "String Formatting Steps",
+      "prompt": "Arrange the steps to format a string using f-strings.",
+      "tokens": [
+        "Define the variables",
+        "Use an f-string to format",
+        "Print the formatted string"
+      ],
+      "correctOrder": [
+        "Define the variables",
+        "Use an f-string to format",
+        "Print the formatted string"
+      ],
+      "hint": "Consider what needs to be done before you can format and print.",
+      "help": {
+        "concept": "You need to have the variables ready before formatting them.",
+        "hint_1": "Identify the first action to take.",
+        "hint_2": "Formatting comes before printing."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: Input Function",
+      "prompt": "The function used to get user input is called `[blank1]`.",
+      "template": "The function used to get user input is called `[blank1]`.",
+      "choices": [
+        "input",
+        "print",
+        "str",
+        "int"
+      ],
+      "correctValue": "input",
+      "hint": "Think about the function that starts with 'i'.",
+      "help": {
+        "concept": "The `the missing term()` function is specifically designed for user the missing term.",
+        "hint_1": "It's not used for output or type conversion.",
+        "hint_2": "This function is essential for interactive programs."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: Type Conversion",
+      "prompt": "To convert a string to a float, you use `[blank1]`.",
+      "template": "To convert a string to a float, you use `[blank1]`.",
+      "choices": [
+        "float",
+        "int",
+        "str",
+        "input"
+      ],
+      "correctValue": "float",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "policy_code_input_1",
       "kind": "code_input",
-      "title": "Convert User Input to Float",
-      "prompt": "Write a program that asks the user for a number and prints it as a float.",
-      "starterCode": "number = input()\n# Convert number to a float",
-      "solutionCode": "number = float(input())\nprint('The number is:', number)",
+      "title": "Print whether a number is positive",
+      "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+      "starterCode": "n = int(input())\n# Your code here",
+      "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
       "tests": [
         {
-          "stdin": "3.14\n",
-          "stdout": "The number is: 3.14"
+          "stdin": "5\n",
+          "stdout": "True\n",
+          "match": "exact"
         },
         {
-          "stdin": "2\n",
-          "stdout": "The number is: 2.0"
+          "stdin": "0\n",
+          "stdout": "False\n",
+          "match": "exact"
         }
       ],
-      "recipeType": "fixed_tests",
-      "hint": "Read the coding task and identify what the program should print.",
+      "hint": "Use a conditional check and return a boolean result.",
       "help": {
-        "concept": "This coding exercise checks whether the program produces the requested output.",
-        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-      }
+        "concept": "A conditional can decide which boolean value to print based on a comparison.",
+        "hint_1": "Compare the number with zero inside an if statement.",
+        "hint_2": "Print True when the condition passes; otherwise print False."
+      },
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "policy_code_input_2",
+      "kind": "code_input",
+      "title": "Print whether a number is positive",
+      "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+      "starterCode": "n = int(input())\n# Your code here",
+      "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
+      "tests": [
+        {
+          "stdin": "5\n",
+          "stdout": "True\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "0\n",
+          "stdout": "False\n",
+          "match": "exact"
+        }
+      ],
+      "hint": "Use a conditional check and return a boolean result.",
+      "help": {
+        "concept": "A conditional can decide which boolean value to print based on a comparison.",
+        "hint_1": "Compare the number with zero inside an if statement.",
+        "hint_2": "Print True when the condition passes; otherwise print False."
+      },
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "policy_code_input_3",
+      "kind": "code_input",
+      "title": "Print whether a number is positive",
+      "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+      "starterCode": "n = int(input())\n# Your code here",
+      "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
+      "tests": [
+        {
+          "stdin": "5\n",
+          "stdout": "True\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "0\n",
+          "stdout": "False\n",
+          "match": "exact"
+        }
+      ],
+      "hint": "Use a conditional check and return a boolean result.",
+      "help": {
+        "concept": "A conditional can decide which boolean value to print based on a comparison.",
+        "hint_1": "Compare the number with zero inside an if statement.",
+        "hint_2": "Print True when the condition passes; otherwise print False."
+      },
+      "recipeType": "fixed_tests"
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Profile Card Generator",
+    "stepIds": [
+      "quiz1",
+      "quiz2",
+      "quiz3"
+    ]
+  }
 }

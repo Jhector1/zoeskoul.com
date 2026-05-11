@@ -18,10 +18,10 @@ export default function SubjectTile({
   enrolling: boolean;
 }) {
   const { t } = useTaggedT("subjectsUi");
-
+    const isMissingFromDb = !s.subjectId;
   const isComingSoon = s.status === "coming_soon";
-  const disabled = !s.defaultModuleSlug || enrolling || isComingSoon;
-  const imageUrl = s.imagePublicId
+    const disabled = isMissingFromDb || !s.defaultModuleSlug || enrolling || isComingSoon;
+    const imageUrl = s.imagePublicId
       ? cloudinaryImageUrl(s.imagePublicId, {
           w: 1400,
           h: 760,
@@ -33,12 +33,13 @@ export default function SubjectTile({
         })
       : null;
 
-  const cta = useMemo(() => {
-    if (isComingSoon) return t("comingSoon");
-    if (enrolling) return t("enrolling");
-    if (s.enrolled) return t("continue");
-    return t("openModules");
-  }, [enrolling, isComingSoon, s.enrolled, t]);
+    const cta = useMemo(() => {
+        if (!s.subjectId) return "Unavailable";
+        if (isComingSoon) return t("comingSoon");
+        if (enrolling) return t("enrolling");
+        if (s.enrolled) return t("continue");
+        return t("openModules");
+    }, [enrolling, isComingSoon, s.enrolled, s.subjectId, t]);
 
   return (
       <button
@@ -83,13 +84,14 @@ export default function SubjectTile({
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center justify-end gap-2">
-              {isComingSoon ? <Pill tone="warn">{t("comingSoon")}</Pill> : null}
-              {s.enrolled && !enrolling && !isComingSoon ? (
-                  <Pill tone="good">{t("enrolled")}</Pill>
-              ) : null}
-              {enrolling ? <Pill tone="neutral">{t("enrolling")}</Pill> : null}
-            </div>
+              <div className="flex flex-wrap items-center justify-end gap-2">
+                  {!s.subjectId ? <Pill tone="warn">Unavailable</Pill> : null}
+                  {isComingSoon ? <Pill tone="warn">{t("comingSoon")}</Pill> : null}
+                  {s.enrolled && !enrolling && !isComingSoon ? (
+                      <Pill tone="good">{t("enrolled")}</Pill>
+                  ) : null}
+                  {enrolling ? <Pill tone="neutral">{t("enrolling")}</Pill> : null}
+              </div>
           </div>
 
           <div className="absolute inset-x-4 bottom-4">

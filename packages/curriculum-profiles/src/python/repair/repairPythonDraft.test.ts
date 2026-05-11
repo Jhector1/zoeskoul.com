@@ -1062,4 +1062,294 @@ describe("repairPythonDraft", () => {
             },
         ]);
     });
-});
+    it("adds missing stdin values for wrapped multi-parameter function exercises", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "reading-error-messages",
+                title: "Reading Error Messages",
+                summary: "Practice fixing common Python errors.",
+            } as any,
+            draft: {
+                title: "Reading Error Messages",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "quiz11",
+                        kind: "code_input",
+                        title: "Correcting a Type Error",
+                        prompt: "Fix the function so it adds the values.",
+                        starterCode: "def add_numbers(a, b):\n    return a + b",
+                        solutionCode: "def add_numbers(a, b):\n    return a + int(b)",
+                        tests: [
+                            {
+                                stdin: "12\n",
+                                stdout: "13",
+                                match: "includes",
+                            },
+                        ],
+                        hint: "Use int conversion.",
+                        help: {
+                            concept: "Convert text before arithmetic.",
+                            hint_1: "One value may be a string.",
+                            hint_2: "Use int() before adding.",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+
+        expect(exercise.tests[0].stdin).toBe("12\n1\n");
+        expect(exercise.tests[0].stdout.trim()).toBe("13");
+    });
+
+    it("normalizes repaired drafts to the planned exercise policy mix", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "running-python-code",
+                title: "Running Python Code",
+                summary: "Run Python programs and understand printed output.",
+                plannedExerciseCounts: {
+                    total: 11,
+                    dominantKind: "code_input",
+                    counts: {
+                        single_choice: 2,
+                        multi_choice: 2,
+                        drag_reorder: 2,
+                        fill_blank_choice: 2,
+                        code_input: 3,
+                    },
+                },
+            } as any,
+            draft: {
+                title: "Running Python Code",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "q1",
+                        kind: "single_choice",
+                        title: "Choose the output",
+                        prompt: "What does print('Hi') do?",
+                        options: ["Shows Hi", "Deletes Hi", "Installs Python"],
+                        correctOptionIds: ["a"],
+                        hint: "Think about output.",
+                        help: {
+                            concept: "print() displays output.",
+                            hint_1: "It writes to the console.",
+                            hint_2: "The text appears when the program runs.",
+                        },
+                    },
+                    {
+                        id: "q2",
+                        kind: "multi_choice",
+                        title: "Choose valid print calls",
+                        prompt: "Which are valid Python print calls?",
+                        options: ["print('Hi')", "print(42)", "print Hi"],
+                        correctOptionIds: ["a", "b"],
+                        hint: "Function calls use parentheses.",
+                        help: {
+                            concept: "print() is called with parentheses.",
+                            hint_1: "Strings can be printed.",
+                            hint_2: "Numbers can be printed too.",
+                        },
+                    },
+                    {
+                        id: "q3",
+                        kind: "fill_blank_choice",
+                        title: "Fill the function name",
+                        prompt: "Choose the function that displays output.",
+                        template: "___('Hello')",
+                        choices: ["print", "input", "int", "str"],
+                        correctValue: "print",
+                        hint: "Use the output function.",
+                        help: {
+                            concept: "print() displays values.",
+                            hint_1: "It sends text to output.",
+                            hint_2: "It is commonly used in first programs.",
+                        },
+                    },
+                    {
+                        id: "q4",
+                        kind: "fill_blank_choice",
+                        title: "Fill the string",
+                        prompt: "Choose the text that gets printed.",
+                        template: "print(___)",
+                        choices: ["'Hello'", "Hello", "print", "input"],
+                        correctValue: "'Hello'",
+                        hint: "A string literal needs quotes.",
+                        help: {
+                            concept: "Strings are written with quotes.",
+                            hint_1: "The quoted text is printed.",
+                            hint_2: "Unquoted words are treated like names.",
+                        },
+                    },
+                    {
+                        id: "q5",
+                        kind: "drag_reorder",
+                        title: "Order the program steps",
+                        prompt: "Put the steps in order to run a simple program.",
+                        items: [
+                            "Write a print statement",
+                            "Run the program",
+                            "Read the output",
+                        ],
+                        correctOrder: [
+                            "Write a print statement",
+                            "Run the program",
+                            "Read the output",
+                        ],
+                        hint: "Code is written before it runs.",
+                        help: {
+                            concept: "Programs run after you write code.",
+                            hint_1: "Start by writing the statement.",
+                            hint_2: "Then run it and inspect output.",
+                        },
+                    },
+                    {
+                        id: "q6",
+                        kind: "drag_reorder",
+                        title: "Order a simple Python file",
+                        prompt: "Put these lines in a sensible order.",
+                        items: [
+                            "name = input()",
+                            "message = 'Hello, ' + name",
+                            "print(message)",
+                        ],
+                        correctOrder: [
+                            "name = input()",
+                            "message = 'Hello, ' + name",
+                            "print(message)",
+                        ],
+                        hint: "Read input before using it.",
+                        help: {
+                            concept: "A program can read, transform, then print.",
+                            hint_1: "Create the value before printing it.",
+                            hint_2: "The final line displays the result.",
+                        },
+                    },
+                    {
+                        id: "q7",
+                        kind: "code_input",
+                        title: "Print Hello",
+                        prompt: "Print Hello.",
+                        starterCode: "# Write your code below\n",
+                        solutionCode: "print('Hello')\n",
+                        tests: [{ stdin: "", stdout: "Hello\n", match: "exact" }],
+                        hint: "Use print().",
+                        help: {
+                            concept: "print() displays text.",
+                            hint_1: "Put the text in quotes.",
+                            hint_2: "Call print with parentheses.",
+                        },
+                    },
+                    {
+                        id: "q8",
+                        kind: "code_input",
+                        title: "Print a number",
+                        prompt: "Print 42.",
+                        starterCode: "# Write your code below\n",
+                        solutionCode: "print(42)\n",
+                        tests: [{ stdin: "", stdout: "42\n", match: "exact" }],
+                        hint: "Use print().",
+                        help: {
+                            concept: "print() can display numbers.",
+                            hint_1: "Numbers do not need quotes.",
+                            hint_2: "Place the number inside print().",
+                        },
+                    },
+                    {
+                        id: "q9",
+                        kind: "code_input",
+                        title: "Read and print text",
+                        prompt: "Read one line and print it.",
+                        starterCode: "text = input()\n# Write your code below\n",
+                        solutionCode: "text = input()\nprint(text)\n",
+                        tests: [{ stdin: "Python\n", stdout: "Python\n", match: "exact" }],
+                        hint: "Print the value you read.",
+                        help: {
+                            concept: "input() reads text and print() displays it.",
+                            hint_1: "Store the input in a variable.",
+                            hint_2: "Pass that variable to print().",
+                        },
+                    },
+                    {
+                        id: "q10",
+                        kind: "code_input",
+                        title: "Extra code exercise 1",
+                        prompt: "This extra code exercise should be dropped.",
+                        starterCode: "# Write your code below\n",
+                        solutionCode: "print('extra 1')\n",
+                        tests: [{ stdin: "", stdout: "extra 1\n", match: "exact" }],
+                        hint: "Extra.",
+                        help: {
+                            concept: "Extra code input.",
+                            hint_1: "This should not remain.",
+                            hint_2: "The policy only allows three code_input exercises.",
+                        },
+                    },
+                    {
+                        id: "q11",
+                        kind: "code_input",
+                        title: "Extra code exercise 2",
+                        prompt: "This extra code exercise should also be dropped.",
+                        starterCode: "# Write your code below\n",
+                        solutionCode: "print('extra 2')\n",
+                        tests: [{ stdin: "", stdout: "extra 2\n", match: "exact" }],
+                        hint: "Extra.",
+                        help: {
+                            concept: "Extra code input.",
+                            hint_1: "This should not remain.",
+                            hint_2: "The policy only allows three code_input exercises.",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        type ExerciseKind =
+            | "single_choice"
+            | "multi_choice"
+            | "drag_reorder"
+            | "fill_blank_choice"
+            | "code_input";
+
+        const counts = result.draft.quizDraft.reduce<Record<ExerciseKind, number>>(
+            (acc, exercise) => {
+                const kind = exercise.kind as ExerciseKind;
+                acc[kind] += 1;
+                return acc;
+            },
+            {
+                single_choice: 0,
+                multi_choice: 0,
+                drag_reorder: 0,
+                fill_blank_choice: 0,
+                code_input: 0,
+            },
+        );
+
+        expect(result.draft.quizDraft).toHaveLength(11);
+        expect(counts).toEqual({
+            single_choice: 2,
+            multi_choice: 2,
+            drag_reorder: 2,
+            fill_blank_choice: 2,
+            code_input: 3,
+        });
+
+        expect(result.draft.quizDraft.some((exercise: any) => exercise.id === "q10")).toBe(false);
+        expect(result.draft.quizDraft.some((exercise: any) => exercise.id === "q11")).toBe(false);
+
+        expect(
+            result.draft.quizDraft.filter((exercise: any) => exercise.kind === "single_choice"),
+        ).toHaveLength(2);
+
+        expect(
+            result.draft.quizDraft.filter((exercise: any) => exercise.kind === "multi_choice"),
+        ).toHaveLength(2);
+    });});

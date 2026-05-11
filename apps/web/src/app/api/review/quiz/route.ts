@@ -54,6 +54,17 @@ type RegistryTopic = {
   meta?: unknown;
 };
 
+
+function resolveMaxAttempts(
+    stepMaxAttempts: number | null | undefined,
+    parentMaxAttempts: number | null | undefined,
+    fallback: number | null,
+): number | null {
+  if (stepMaxAttempts !== undefined) return stepMaxAttempts;
+  if (parentMaxAttempts !== undefined) return parentMaxAttempts;
+  return fallback;
+}
+
 function reviewRegistryMissingResponse(
     subjectSlug: string,
     moduleSlug: string,
@@ -222,8 +233,11 @@ export async function POST(req: Request) {
 
   const mode = spec.mode ?? "quiz";
   const n = spec.n ?? 4;
-  const defaultMaxAttempts = spec.maxAttempts ?? 1;
-  const actorKey = actorKeyOf(actor);
+  const defaultMaxAttempts = resolveMaxAttempts(
+      undefined,
+      spec.maxAttempts,
+      1,
+  );  const actorKey = actorKeyOf(actor);
 
   const quizKey = buildReviewQuizKey(spec);
 
@@ -348,8 +362,11 @@ export async function POST(req: Request) {
           seedPolicy: st.seedPolicy ?? "global",
           salt: `${quizKey}|step=${st.id}|slot=${i + 1}`,
         },
-        maxAttempts: st.maxAttempts ?? (spec.maxAttempts ?? 10),
-      };
+        maxAttempts: resolveMaxAttempts(
+            st.maxAttempts,
+            spec.maxAttempts,
+            null,
+        ),      };
     });
   } else {
     const rng = rngFromActor({

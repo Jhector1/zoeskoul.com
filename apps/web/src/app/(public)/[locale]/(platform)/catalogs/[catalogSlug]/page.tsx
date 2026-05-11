@@ -49,7 +49,7 @@ export default async function CatalogDetailPage({
 
     const subjects = selectVisibleSubjectsForActor(
         await withSubjectEnrollment(mappedSubjects),
-    );
+    ).filter((subject) => subject.subjectId);
     return (
         <div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white/90">
             <div className="ui-container py-6 sm:py-8 lg:py-10">

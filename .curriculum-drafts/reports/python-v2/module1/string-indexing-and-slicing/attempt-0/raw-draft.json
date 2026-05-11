@@ -4,102 +4,195 @@
   "minutes": 25,
   "sketchBlocks": [
     {
-      "id": "1",
+      "id": "sketch1",
       "title": "Understanding String Indexing",
-      "bodyMarkdown": "In Python, strings are sequences of characters. Each character in a string has a unique index, starting from 0. For example, in the string `\"Hello\"`, the character `H` is at index 0, `e` at index 1, and so on.\n\n**Example:**\n```python\nmy_string = \"Hello\"\nprint(my_string[0])  # Output: H\n```\n\n**Your turn:** Try accessing the character at index 1."
+      "bodyMarkdown": "In Python, strings are sequences of characters. Each character in a string has an index, starting from 0. For example, in the string `\"Hello\"`, the character `H` is at index 0, `e` is at index 1, and so on. You can access individual characters using their index:\n\n```python\nmy_string = \"Hello\"\nprint(my_string[0])  # Output: H\n```\n\nTry it yourself: What does `my_string[1]` output?"
     },
     {
-      "id": "2",
-      "title": "Exploring String Slicing",
-      "bodyMarkdown": "String slicing allows you to extract a substring from a string. The syntax is `string[start:end]`, where `start` is the index of the first character and `end` is the index where the slice stops (not inclusive).\n\n**Example:**\n```python\nmy_string = \"Hello, World!\"\nprint(my_string[0:5])  # Output: Hello\n```\n\n**Try it yourself:** Modify the slice to get the substring `World`."
+      "id": "sketch2",
+      "title": "Using String Slicing",
+      "bodyMarkdown": "Slicing allows you to access a substring by specifying a start and end index. The syntax is `string[start:end]`, where `start` is inclusive and `end` is exclusive. For example:\n\n```python\nmy_string = \"Hello, World!\"\nprint(my_string[0:5])  # Output: Hello\n```\n\nThis prints the characters from index 0 to 4. Try this: What does `my_string[7:12]` return?"
     }
   ],
   "quizDraft": [
     {
-      "id": "1",
-      "kind": "code_input",
-      "title": "Extract a Substring",
-      "prompt": "Write a Python program that extracts the substring 'Python' from the string 'I love Python programming'.",
-      "starterCode": "my_string = 'I love Python programming'\n# Your code here to extract 'Python'",
-      "solutionCode": "my_string = 'I love Python programming'\nsubstring = my_string[7:13]\nprint(substring)",
-      "tests": [
-        {
-          "input": "",
-          "output": "Python"
-        }
-      ]
-    },
-    {
-      "id": "2",
-      "kind": "code_input",
-      "title": "Access a Character",
-      "prompt": "Write a Python program that accesses the first character of the string 'Hello, World!'.",
-      "starterCode": "my_string = 'Hello, World!'\n# Your code here to access the first character",
-      "solutionCode": "my_string = 'Hello, World!'\nfirst_character = my_string[0]\nprint(first_character)",
-      "tests": [
-        {
-          "input": "",
-          "output": "H"
-        }
-      ]
-    },
-    {
-      "id": "3",
+      "id": "quiz1",
       "kind": "single_choice",
       "title": "What is the index of the first character in a string?",
-      "prompt": "In Python, what is the index of the first character in a string?",
+      "prompt": "In Python, string indexing starts at which number?",
       "options": [
-        "0",
         "1",
-        "-1",
-        "None"
+        "0",
+        "2",
+        "None of the above"
       ],
       "correctOptionIds": [
-        "a"
+        "b"
       ],
-      "hint": "Indexes start from zero in Python.",
+      "hint": "Think about how counting starts in programming.",
       "help": {
-        "concept": "In Python, string indexing starts at 0, meaning the first character is at index 0.",
-        "hint_1": "Consider how counting starts in programming languages.",
-        "hint_2": "Think about the first character's position in the string."
+        "concept": "String indexing in Python starts at 0.",
+        "hint_1": "The first character is accessed with index 0.",
+        "hint_2": "Remember, counting in programming often starts from zero."
       }
     },
     {
-      "id": "4",
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "What does slicing a string do?",
+      "prompt": "What is the purpose of string slicing in Python?",
+      "options": [
+        "To change the string",
+        "To access a part of the string",
+        "To count characters",
+        "To concatenate strings"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider how you can extract a portion of a string.",
+      "help": {
+        "concept": "Slicing allows you to extract a substring from a string.",
+        "hint_1": "It involves specifying a start and end index.",
+        "hint_2": "Think about how you can get a substring from a larger string."
+      }
+    },
+    {
+      "id": "quiz3",
       "kind": "multi_choice",
       "title": "Which of the following are valid ways to slice a string?",
-      "prompt": "Select all valid ways to slice the string 'Hello, World!'",
+      "prompt": "Select all valid slicing methods.",
       "options": [
-        "my_string[0:5]",
-        "my_string[7:12]",
-        "my_string[:5]",
-        "my_string[5:]"
+        "string[1:4]",
+        "string[:3]",
+        "string[3:]",
+        "string[4:1]"
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "c",
-        "d"
+        "c"
       ],
-      "hint": "Slicing syntax is string[start:end].",
+      "hint": "Remember that the end index is exclusive.",
       "help": {
-        "concept": "All provided options are valid ways to slice a string in Python.",
-        "hint_1": "Remember that the end index is not included in the slice.",
-        "hint_2": "Check how omitting indices affects the slice."
+        "concept": "Slicing syntax allows for various valid forms.",
+        "hint_1": "The end index must be greater than the start index for a valid slice.",
+        "hint_2": "You can omit the start or end index to slice from the beginning or to the end."
       }
     },
     {
-      "id": "5",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the blank",
-      "prompt": "In Python, the last character of a string can be accessed using the index ___ .",
-      "template": "In Python, the last character of a string can be accessed using the index ___ .",
-      "choices": [
-        "-1",
-        "0",
-        "length of string - 1"
+      "id": "quiz4",
+      "kind": "drag_reorder",
+      "title": "Order the steps to slice a string.",
+      "prompt": "Arrange the steps to correctly slice a string.",
+      "tokens": [
+        "Identify the string",
+        "Determine start and end indices",
+        "Use the slicing syntax",
+        "Access the substring"
       ],
-      "correctValue": "length of string - 1"
+      "correctOrder": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "hint": "Think about what you need to do first before slicing.",
+      "help": {
+        "concept": "Slicing requires knowing the string and indices.",
+        "hint_1": "You can't slice without knowing what string you're working with.",
+        "hint_2": "The slicing syntax comes after determining indices."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank for string slicing.",
+      "prompt": "To slice a string from index 2 to 5, you would use `string[2:______]`.",
+      "template": "To slice a string from index 2 to 5, you would use `string[2:______]`.",
+      "choices": [
+        "5",
+        "6",
+        "4",
+        "3"
+      ],
+      "correctValue": "5"
+    },
+    {
+      "id": "quiz6",
+      "kind": "fill_blank_choice",
+      "title": "Complete the string indexing statement.",
+      "prompt": "The character at index 0 of the string `\"Python\"` is `______`.",
+      "template": "The character at index 0 of the string `\"Python\"` is `______`.",
+      "choices": [
+        "P",
+        "y",
+        "t",
+        "n"
+      ],
+      "correctValue": "P"
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Extract a substring using slicing.",
+      "prompt": "Write a function that takes a string and returns the substring from index 1 to 4.",
+      "starterCode": "def extract_substring(s):\n    # Your code here\n",
+      "solutionCode": "def extract_substring(s):\n    return s[1:4]",
+      "tests": [
+        {
+          "input": "Hello",
+          "output": "ell"
+        },
+        {
+          "input": "Python",
+          "output": "yth"
+        }
+      ]
+    },
+    {
+      "id": "quiz8",
+      "kind": "code_input",
+      "title": "Access a character by index.",
+      "prompt": "Write a function that returns the character at index 2 of a given string.",
+      "starterCode": "def char_at_index(s):\n    # Your code here\n",
+      "solutionCode": "def char_at_index(s):\n    return s[2]",
+      "tests": [
+        {
+          "input": "Hello",
+          "output": "l"
+        },
+        {
+          "input": "Python",
+          "output": "t"
+        }
+      ]
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Slice the last three characters.",
+      "prompt": "Write a function that returns the last three characters of a string.",
+      "starterCode": "def last_three_chars(s):\n    # Your code here\n",
+      "solutionCode": "def last_three_chars(s):\n    return s[-3:]",
+      "tests": [
+        {
+          "input": "Hello",
+          "output": "llo"
+        },
+        {
+          "input": "Python",
+          "output": "hon"
+        }
+      ]
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Profile Card Generator",
+    "stepIds": [
+      "quiz7",
+      "quiz8",
+      "quiz9"
+    ]
+  }
 }

@@ -16,18 +16,18 @@
       "message": "Added a short line-by-line explanation after a multi-line code example."
     },
     {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz4",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_drag_reorder_1",
+      "message": "Added a fallback drag_reorder exercise to satisfy the planned exercise mix for \"f-strings-and-formatting\"."
     },
     {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz5",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_drag_reorder_2",
+      "message": "Added a fallback drag_reorder exercise to satisfy the planned exercise mix for \"f-strings-and-formatting\"."
     }
   ]
 }

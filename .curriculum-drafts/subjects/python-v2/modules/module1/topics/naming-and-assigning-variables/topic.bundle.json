@@ -30,10 +30,13 @@
       "titleKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 3,
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -44,25 +47,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "q4",
-            "titleKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.projectSteps.q4.title",
-            "exerciseKey": "q4",
+            "id": "q7",
+            "titleKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.projectSteps.q7.title",
+            "exerciseKey": "q7",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           },
           {
-            "id": "q5",
-            "titleKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.projectSteps.q5.title",
-            "exerciseKey": "q5",
+            "id": "q8",
+            "titleKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.projectSteps.q8.title",
+            "exerciseKey": "q8",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
+          },
+          {
+            "id": "q9",
+            "titleKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.projectSteps.q9.title",
+            "exerciseKey": "q9",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
           }
         ]
       }
@@ -97,12 +109,12 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
       "id": "q2",
-      "kind": "multi_choice",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q2",
@@ -110,69 +122,193 @@
         "a",
         "b",
         "c",
-        "d",
-        "e"
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "d"
+          "c"
         ]
       }
     },
     {
-      "id": "q3",
-      "kind": "fill_blank_choice",
+      "id": "q4",
+      "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q3",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "reassignment"
-      }
-    },
-    {
-      "id": "q4",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q4",
-      "language": "python",
-      "starterCode": "favorite_color = ''\n# Assign your favorite color here\nprint(favorite_color)",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "blue\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "favorite_color = 'blue'\nprint(favorite_color)"
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
       "id": "q5",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q5",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "25"
+      }
+    },
+    {
+      "id": "q6",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q6",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'blue'"
+      }
+    },
+    {
+      "id": "q7",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q5",
+      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q7",
       "language": "python",
-      "starterCode": "score = 10\n# Reassign score to a new value\nprint(score)",
+      "starterCode": "name = ''\nprint(name)",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "20\n",
+            "stdin": "12\n",
+            "stdout": "Your Name",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Your Name",
             "match": "exact"
           }
         ],
-        "solutionCode": "score = 10\nscore = 20\nprint(score)"
+        "solutionCode": "name = 'Your Name'\nprint(name)"
+      }
+    },
+    {
+      "id": "q8",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q8",
+      "language": "python",
+      "starterCode": "score = int(input())\n# Reassign the score here\nprint(score)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "20",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "20",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "score = int(input())\nscore = 20\nprint(score)"
+      }
+    },
+    {
+      "id": "q9",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q9",
+      "language": "python",
+      "starterCode": "name = ''\n# Use an f-string to print here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Hello, Your Name!",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Hello, Your Name!",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "name = 'Your Name'\nprint(f'Hello, {name}!')"
+      }
+    },
+    {
+      "id": "policy_multi_choice_1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.policy_multi_choice_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "policy_drag_reorder_1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.policy_drag_reorder_1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     }
   ]

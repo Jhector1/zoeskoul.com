@@ -1,0 +1,121 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-3": {
+        "range-and-counting": {
+          "label": "Range and Counting Patterns",
+          "summary": "Use range to repeat code a controlled number of times.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Range"
+            },
+            "sketch1": {
+              "title": "Counting with Range"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "quiz1": {
+              "title": "Using Range to Count"
+            },
+            "quiz5": {
+              "title": "Counting by Twos"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Using Range to Count",
+              "prompt": "Write a program that uses a for loop with range to print numbers from 0 to 9.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply using range to count in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "for i in range(10):\n    # Your code here"
+            },
+            "quiz2": {
+              "title": "Fill in the Blank",
+              "prompt": "The `range(1, 10)` function generates numbers starting from 1 up to (but not including) the missing choice.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The range goes up to [blank1]",
+              "choices": [
+                "9",
+                "10",
+                "11"
+              ]
+            },
+            "quiz3": {
+              "title": "Understanding Range",
+              "prompt": "What does `range(0, 5)` produce?",
+              "hint": "Think about the main idea behind understanding range.",
+              "help": {
+                "concept": "Focus on the core concept behind understanding range.",
+                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+              },
+              "options": {
+                "a": "0, 1, 2, 3, 4, 5",
+                "b": "0, 1, 2, 3, 4",
+                "c": "1, 2, 3, 4, 5"
+              }
+            },
+            "quiz4": {
+              "title": "Using Range Correctly",
+              "prompt": "Which of the following are valid uses of the range function?",
+              "hint": "Think about the main idea behind using range correctly.",
+              "help": {
+                "concept": "Focus on the core concept behind using range correctly.",
+                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+              },
+              "options": {
+                "a": "range(5)",
+                "b": "range(1, 10)",
+                "c": "range(10, 1)",
+                "d": "range(0, 10, 2)"
+              }
+            },
+            "quiz5": {
+              "title": "Counting by Twos",
+              "prompt": "Write a program that uses range to print even numbers from 0 to 20.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply counting by twos in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "for i in range(0, 21, 2):\n    # Your code here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-3": {
+        "range-and-counting": {
+          "sketch1": {
+            "title": "Understanding Range",
+            "bodyMarkdown": "In Python, the `range()` function generates a sequence of numbers. It can be used in loops to repeat actions a specific number of times. For example, `for i in range(5):` will iterate 5 times, with `i` taking values from 0 to 4. \n\n**Example:**\n```python\nfor i in range(5):\n    print(i)\n```\nThis will output:\n```\n0\n1\n2\n3\n4\n```\n\n**Your turn:** Try using `range()` to print numbers from 1 to 10.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch2": {
+            "title": "Counting with Range",
+            "bodyMarkdown": "You can also specify a starting point and a step in the `range()` function. For instance, `range(1, 10, 2)` will generate numbers starting from 1 up to (but not including) 10, counting by 2s. \n\n**Example:**\n```python\nfor i in range(1, 10, 2):\n    print(i)\n```\nThis will output:\n```\n1\n3\n5\n7\n9\n```\n\n**Try this:** Modify the range to count by 3s.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

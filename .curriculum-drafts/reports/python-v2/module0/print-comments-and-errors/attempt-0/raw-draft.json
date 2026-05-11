@@ -4,19 +4,19 @@
   "minutes": 20,
   "sketchBlocks": [
     {
-      "id": "1",
-      "title": "Using Print Statements",
-      "bodyMarkdown": "In Python, the `print()` function is used to display output to the console. For example:\n\n```python\nprint(\"Hello, World!\")\n```\n\nThis line of code will output `Hello, World!` to the console. \n\n**Your turn:** Try changing the message inside the quotes to print your name!"
+      "id": "print_statements",
+      "title": "Understanding Print Statements",
+      "bodyMarkdown": "In Python, the `print()` function is used to display output. For example:\n\n```python\nprint('Hello, World!')\n```\nThis code will output `Hello, World!` to the console. \n\n**Your turn:** Try changing the message inside the print function to see different outputs!"
     },
     {
-      "id": "2",
-      "title": "Understanding Comments",
-      "bodyMarkdown": "Comments are used to explain code and are ignored by the Python interpreter. You can create a comment by using the `#` symbol. For example:\n\n```python\n# This is a comment\nprint(\"This will run\")\n```\n\nThe comment will not affect the output. \n\n**Try this:** Add a comment above your print statement explaining what it does."
+      "id": "comments_in_python",
+      "title": "Using Comments",
+      "bodyMarkdown": "Comments are used to explain code and are ignored by the Python interpreter. You can create a comment by using the `#` symbol. For example:\n\n```python\n# This is a comment\nprint('This will run')\n```\nThe comment will not affect the output. \n\n**Try this:** Add a comment above your print statement to describe what it does."
     },
     {
-      "id": "3",
+      "id": "syntax_errors",
       "title": "Common Syntax Errors",
-      "bodyMarkdown": "Syntax errors occur when the code is not written correctly. For example:\n\n```python\nprint(\"Hello World\"\n```\n\nThis code will raise a syntax error because the closing parenthesis is missing. Always check for matching parentheses and correct syntax.\n\n**Try it yourself:** Intentionally create a syntax error in your code and see what message Python gives you."
+      "bodyMarkdown": "Syntax errors occur when the code does not follow the correct format. For example:\n\n```python\nprint('Hello World'\n```\nThis code will raise a syntax error because the closing parenthesis is missing. \n\n**Try it yourself:** Write a print statement with a missing quote or parenthesis and see the error message!"
     }
   ],
   "quizDraft": [
@@ -24,11 +24,11 @@
       "id": "q1",
       "kind": "single_choice",
       "title": "What does the print function do?",
-      "prompt": "Select the correct answer.",
+      "prompt": "Choose the correct answer.",
       "options": [
-        "It stores data in a variable.",
+        "It creates a variable.",
         "It displays output to the console.",
-        "It creates a new function.",
+        "It defines a function.",
         "It imports a library."
       ],
       "correctOptionIds": [
@@ -37,29 +37,29 @@
       "hint": "Think about what happens when you run a print statement.",
       "help": {
         "concept": "The print function is used to output data to the console.",
-        "hint_1": "Look for the answer that describes displaying information.",
-        "hint_2": "Remember, print is not for storing or creating functions."
+        "hint_1": "Look for the option that describes displaying information.",
+        "hint_2": "Consider what you see when you run a print statement."
       }
     },
     {
       "id": "q2",
       "kind": "single_choice",
-      "title": "What is the purpose of a comment in Python?",
+      "title": "What symbol is used for comments in Python?",
       "prompt": "Select the correct answer.",
       "options": [
-        "To execute code.",
-        "To explain the code.",
-        "To create a variable.",
-        "To define a function."
+        "//",
+        "#",
+        "/*",
+        "--"
       ],
       "correctOptionIds": [
         "b"
       ],
-      "hint": "Consider why you might want to add notes in your code.",
+      "hint": "Comments are ignored by the interpreter.",
       "help": {
-        "concept": "Comments help explain what the code does without affecting execution.",
-        "hint_1": "Think about what you would want to remember about your code.",
-        "hint_2": "Comments are not executed by Python."
+        "concept": "In Python, comments start with the # symbol.",
+        "hint_1": "Think about how you can add notes in your code.",
+        "hint_2": "Look for the symbol that is commonly used for comments."
       }
     },
     {
@@ -68,50 +68,136 @@
       "title": "Which of the following are common syntax errors?",
       "prompt": "Select all that apply.",
       "options": [
-        "Missing parentheses",
+        "Missing a closing parenthesis",
         "Using a variable without defining it",
-        "Incorrect indentation",
-        "Adding a comment"
+        "Adding a comment",
+        "Forgetting a quote in a string"
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "c"
+        "d"
       ],
-      "hint": "Think about mistakes that would prevent your code from running.",
+      "hint": "Think about what can cause your code to not run.",
       "help": {
-        "concept": "Syntax errors occur when the code does not follow the correct structure.",
-        "hint_1": "Look for options that describe issues with code structure.",
-        "hint_2": "Comments do not cause syntax errors."
+        "concept": "Syntax errors occur when the code does not follow the correct format.",
+        "hint_1": "Consider what happens when you forget punctuation.",
+        "hint_2": "Look for options that describe mistakes in code structure."
       }
     },
     {
       "id": "q4",
+      "kind": "multi_choice",
+      "title": "Which statements are true about print statements?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "They can display strings.",
+        "They can only display numbers.",
+        "They can be used to debug code.",
+        "They must always be followed by a semicolon."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider the versatility of the print function.",
+      "help": {
+        "concept": "Print statements can show various types of data and help with debugging.",
+        "hint_1": "Think about how you can use print to check values.",
+        "hint_2": "Remember that Python does not require semicolons at the end of statements."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "drag_reorder",
+      "title": "Order the steps to fix a syntax error.",
+      "prompt": "Arrange the steps in the correct order.",
+      "tokens": [
+        "Identify the error message.",
+        "Locate the line of code with the error.",
+        "Correct the mistake.",
+        "Run the code again."
+      ],
+      "correctOrder": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "id": "q6",
+      "kind": "drag_reorder",
+      "title": "Arrange the components of a print statement.",
+      "prompt": "Put the parts of the print statement in the correct order.",
+      "tokens": [
+        "('Hello, World!')",
+        "print",
+        "()"
+      ],
+      "correctOrder": [
+        "2",
+        "3",
+        "1"
+      ]
+    },
+    {
+      "id": "q7",
       "kind": "fill_blank_choice",
-      "title": "Complete the statement: In Python, comments start with _____",
-      "prompt": "Choose the correct answer.",
-      "template": "In Python, comments start with _____",
+      "title": "Complete the print statement.",
+      "prompt": "Fill in the blank to create a valid print statement.",
+      "template": "print([blank1])",
+      "choices": [
+        "'Hello, World!'",
+        "Hello, World!",
+        "print('Hello, World!')"
+      ],
+      "correctValue": "'Hello, World!'"
+    },
+    {
+      "id": "q8",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank to comment in Python.",
+      "prompt": "Complete the line to create a comment.",
+      "template": "[blank1] This is a comment",
       "choices": [
         "#",
         "//",
-        "/*",
-        "/* */"
+        "/*"
       ],
       "correctValue": "#"
     },
     {
-      "id": "q5",
+      "id": "code_input_1",
       "kind": "code_input",
-      "title": "Fix the Syntax Error",
-      "prompt": "The following code has a syntax error. Fix it so it runs correctly.",
-      "starterCode": "print(\"Hello, World!\"\n",
-      "solutionCode": "print(\"Hello, World!\")",
-      "tests": [
-        {
-          "input": "",
-          "output": "Hello, World!"
-        }
-      ]
+      "title": "Create a simple print program",
+      "prompt": "Write a program that prints your name and age.",
+      "starterCode": "print('My name is')\nprint('My age is')",
+      "solutionCode": "print('My name is Zoe')\nprint('My age is 25')"
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Fix the syntax error",
+      "prompt": "Correct the following code to make it run without errors:\n\n```python\nprint('Hello World'\n```",
+      "starterCode": "print('Hello World'",
+      "solutionCode": "print('Hello World')"
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Print a message with a comment",
+      "prompt": "Write a print statement and add a comment above it.",
+      "starterCode": "# This will print a greeting\nprint('Hello!')",
+      "solutionCode": "# This will print a greeting\nprint('Hello!')"
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Personal Introduction Program",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
 }

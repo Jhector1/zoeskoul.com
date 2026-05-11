@@ -10,91 +10,189 @@
               "title": "Understanding Conditional Logic"
             },
             "sketch1": {
-              "title": "Checking Special Cases"
+              "title": "Using Early Checks"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Practice"
+              "title": "Grade Checker Project"
             }
           },
           "projectSteps": {
-            "quiz_3": {
-              "title": "Implementing Early Checks"
+            "quiz_9": {
+              "title": "Check for Zero Division"
             },
-            "quiz_4": {
-              "title": "Validating User Input"
+            "quiz_10": {
+              "title": "Check Age Group"
             },
-            "quiz_5": {
-              "title": "Checking for Special Cases in Lists"
+            "quiz_11": {
+              "title": "Check for Negative Numbers"
             }
           },
           "quiz": {
             "quiz_1": {
-              "title": "Identifying Special Cases",
-              "prompt": "Which of the following are examples of special cases that should be checked first in conditional logic?",
-              "hint": "Think about conditions that could cause errors if not handled first.",
+              "title": "What does the following code check first?",
+              "prompt": "```python\nage = 20\nif age < 18:\n    print('Minor')\nelif age >= 18:\n    print('Adult')\n```",
+              "hint": "Look at the first condition in the if statement.",
               "help": {
-                "concept": "Special cases are conditions that can lead to unexpected behavior if not checked early.",
-                "hint_1": "Consider scenarios where an input might not be valid.",
-                "hint_2": "Look for checks that prevent further processing if the input is not suitable."
+                "concept": "The code checks if the age is less than 18 first.",
+                "hint_1": "Focus on the comparison operator used in the first if statement.",
+                "hint_2": "Consider what happens if the age is 20."
               },
               "options": {
-                "a": "Checking if a variable is None",
-                "b": "Checking if a number is even",
-                "c": "Checking if a string is empty",
-                "d": "Checking if a list is not empty"
+                "a": "Checks if age is less than 18",
+                "b": "Checks if age is equal to 18",
+                "c": "Checks if age is greater than 18",
+                "d": "Checks if age is not a number"
               }
             },
             "quiz_2": {
-              "title": "Completing the Conditional Statement",
-              "prompt": "Fill in the blank: To check if a variable `x` is not None, we can use the condition `if x the missing choice:`.",
+              "title": "What will the following code output?",
+              "prompt": "```python\nnumber = 0\nif number == 0:\n    print('Zero')\nelse:\n    print('Not Zero')\n```",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "Zero",
+                "b": "Not Zero",
+                "c": "Error",
+                "d": "None"
+              }
+            },
+            "quiz_3": {
+              "title": "Which of the following are benefits of using early checks?",
+              "prompt": "Select all that apply.",
+              "hint": "Think about code readability and error prevention.",
+              "help": {
+                "concept": "Early checks can improve code clarity and prevent runtime errors.",
+                "hint_1": "Consider how early checks can simplify decision-making.",
+                "hint_2": "Think about how they can prevent common errors."
+              },
+              "options": {
+                "a": "Improves code readability",
+                "b": "Prevents runtime errors",
+                "c": "Makes code longer",
+                "d": "Simplifies decision-making"
+              }
+            },
+            "quiz_4": {
+              "title": "Which conditions should be checked first in a program?",
+              "prompt": "Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "Zero values",
+                "b": "Negative values",
+                "c": "Valid inputs",
+                "d": "Default cases"
+              }
+            },
+            "quiz_5": {
+              "title": "Order the following checks from most specific to least specific.",
+              "prompt": "Arrange the checks in the correct order.",
+              "hint": "Think about the logical order of the steps.",
+              "help": {
+                "concept": "This task is about understanding the sequence behind order the following checks from most specific to least specific..",
+                "hint_1": "Find the step that must happen first before the others make sense.",
+                "hint_2": "Check which action depends on a previous step already being completed."
+              },
+              "tokens": {
+                "t1": "Check if input is a number",
+                "t2": "Check if input is positive",
+                "t3": "Check if input is zero",
+                "t4": "Check if input is valid"
+              }
+            },
+            "quiz_6": {
+              "title": "Arrange the following code checks in the order they should be executed.",
+              "prompt": "Order the checks correctly.",
+              "hint": "Think about the logical order of the steps.",
+              "help": {
+                "concept": "This task is about understanding the sequence behind arrange the following code checks in the order they should be executed..",
+                "hint_1": "Find the step that must happen first before the others make sense.",
+                "hint_2": "Check which action depends on a previous step already being completed."
+              },
+              "tokens": {
+                "t1": "Check if user is logged in",
+                "t2": "Check if user has permissions",
+                "t3": "Check if user is an admin",
+                "t4": "Check if user exists"
+              }
+            },
+            "quiz_7": {
+              "title": "Fill in the blank: Early checks help to prevent ______.",
+              "prompt": "Early checks help to prevent the missing choice.",
               "hint": "Focus on the missing concept or keyword.",
               "help": {
-                "concept": "This task checks the key idea behind completing the conditional statement.",
+                "concept": "This task checks the key idea behind fill in the blank: early checks help to prevent ______..",
                 "hint_1": "Look for the word or phrase that best matches the lesson concept.",
                 "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
               },
-              "template": "if x [blank1]:",
+              "template": "Early checks help to prevent the missing choice.\n\nAnswer: [blank1]",
               "choices": [
-                "is not None",
-                "is None",
-                "== None"
+                "errors",
+                "complexity",
+                "redundancy",
+                "confusion"
               ]
             },
-            "quiz_3": {
-              "title": "Implementing Early Checks",
-              "prompt": "Write a function that checks if a number is positive, negative, or zero. Ensure you check for zero first. Then read the input value, call the function, and print the returned result.",
+            "quiz_8": {
+              "title": "Fill in the blank: The first condition in an if statement is checked ______.",
+              "prompt": "The first condition in an if statement is checked the missing choice.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank: the the missing term condition in an if statement is checked ______..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The first condition in an if statement is checked the missing choice.\n\nAnswer: [blank1]",
+              "choices": [
+                "last",
+                "first",
+                "only if previous conditions fail",
+                "never"
+              ]
+            },
+            "quiz_9": {
+              "title": "Check for Zero Division",
+              "prompt": "Write a function that checks if a number is zero before dividing 10 by that number. Then read the input value, call the function, and print the returned result.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "def divide_by_number(number):\n    # Check if number is zero\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(divide_by_number(number))"
+            },
+            "quiz_10": {
+              "title": "Check Age Group",
+              "prompt": "Write a function that checks the age and returns 'Minor' if under 18, 'Adult' if 18 or older. Then read the input value, call the function, and print the returned result.",
               "hint": "Break the task into the main code steps first.",
               "help": {
-                "concept": "This task checks whether you can apply implementing early checks in a working solution.",
+                "concept": "This task checks whether you can apply check age group in a working solution.",
                 "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
                 "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
               },
-              "starterCode": "def check_number(num):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_number(num))"
+              "starterCode": "def check_age(age):\n    # Check age\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_age(age))"
             },
-            "quiz_4": {
-              "title": "Validating User Input",
-              "prompt": "Create a function that checks if a user input is valid. It should return a message if the input is empty or if it's a number. Then read the input value, call the function, and print the returned result.",
+            "quiz_11": {
+              "title": "Check for Negative Numbers",
+              "prompt": "Write a function that checks if a number is negative and returns 'Negative' or 'Positive'. Then read the input value, call the function, and print the returned result.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "def validate_input(user_input):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nuser_input = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(validate_input(user_input))"
-            },
-            "quiz_5": {
-              "title": "Checking for Special Cases in Lists",
-              "prompt": "Write a function that checks if a list is empty before processing it. Return a message if it is empty. Then read the input value, call the function, and print the returned result.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "def process_list(my_list):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nmy_list = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(process_list(my_list))"
+              "starterCode": "def check_number(num):\n    # Check if number is negative\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_number(num))"
             }
           }
         }
@@ -107,11 +205,11 @@
         "checking-special-cases-first": {
           "sketch_1": {
             "title": "Understanding Conditional Logic",
-            "bodyMarkdown": "In programming, we often need to make decisions based on certain conditions. For example, if we want to check if a number is positive, negative, or zero, we can use conditional statements. Here's a simple example:\n\n```python\nnumber = 5\nif number > 0:\n    print('Positive')\nelif number < 0:\n    print('Negative')\nelse:\n    print('Zero')\n```\n\nIn this code, we check if the number is greater than zero first. If it is, we print 'Positive'. If not, we check if it's less than zero. This way, we handle special cases first. **Try it yourself:** Change the value of `number` and see how the output changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "Conditional logic allows programs to make decisions based on certain conditions. For example, consider the following code:\n\n```python\nage = 18\nif age < 18:\n    print('You are a minor.')\nelif age >= 18:\n    print('You are an adult.')\n```\n\nIn this example, we check if the age is less than 18 first. This is a clear way to handle different age groups. \n\n**Your turn:** Try changing the value of `age` and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           },
           "sketch_2": {
-            "title": "Checking Special Cases",
-            "bodyMarkdown": "When writing conditions, it's often helpful to check for special cases first. For instance, if you're validating user input, you might want to check if the input is empty before proceeding with other checks. Here's an example:\n\n```python\nuser_input = ''\nif not user_input:\n    print('Input cannot be empty')\nelif user_input.isdigit():\n    print('Input is a number')\nelse:\n    print('Input is something else')\n```\n\nIn this example, we check if `user_input` is empty first. This makes our code clearer and prevents errors. **Your turn:** Modify the code to check for other special cases, like if the input is a letter.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "title": "Using Early Checks",
+            "bodyMarkdown": "Early checks can simplify your conditional statements. For instance, if you want to check if a number is zero before performing division, you can do:\n\n```python\nnumber = 0\nif number == 0:\n    print('Cannot divide by zero!')\nelse:\n    result = 10 / number\n    print(result)\n```\n\nThis way, you avoid errors and make your code easier to read. \n\n**Try this:** Modify the code to check for negative numbers as well!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

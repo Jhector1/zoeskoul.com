@@ -1,6 +1,4 @@
 {
   "attempt": 0,
-  "status": "failed",
-  "retryable": true,
-  "errorCode": "INVALID_TOPIC_AUTHORING_DRAFT"
+  "status": "success"
 }

@@ -16,32 +16,25 @@
       "message": "Added a short line-by-line explanation after a multi-line code example."
     },
     {
-      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "code_input_1",
-      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_code_input_1",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"indentation-and-blocks\"."
     },
     {
-      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "code_input_2",
-      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_code_input_2",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"indentation-and-blocks\"."
     },
     {
-      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "code_input_3",
-      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
-    },
-    {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "code_input_2",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_code_input_3",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"indentation-and-blocks\"."
     }
   ]
 }

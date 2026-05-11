@@ -13,6 +13,9 @@
     "./sql": {
       "types": "./dist/sql/index.d.ts",
       "default": "./dist/sql/index.js"
+    }, "./review": {
+      "types": "./dist/review/index.d.ts",
+      "default": "./dist/review/index.js"
     }
   },
   "scripts": {

@@ -74,11 +74,13 @@ export async function evaluateTopicDraft(args: {
     const hintWarnings = validateExerciseHints(draft);
     const hintCritiqueIssues = buildHintCritiqueIssues(hintWarnings);
 
-    const policyCritiqueIssues = buildExercisePolicyCritiqueIssues({
+    const policyCritiqueIssues =    buildExercisePolicyCritiqueIssues({
         draft,
         policy: args.seed.exercisePolicy,
         plannedCounts: args.seed.plannedExerciseCounts,
+        generationTargets: args.seed.generationTargets,
     });
+
 
     const multiChoiceCompletenessIssues = buildMultiChoiceCompletenessIssues({
         draft,

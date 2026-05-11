@@ -6,87 +6,189 @@
     {
       "id": "sketch1",
       "title": "Introduction to F-Strings",
-      "bodyMarkdown": "F-strings are a way to format strings in Python. They allow you to embed expressions inside string literals, using curly braces `{}`. For example:\n\n```python\nname = 'Alice'\nage = 30\nformatted_string = f'My name is {name} and I am {age} years old.'\nprint(formatted_string)\n```\n\nThis will output: `My name is Alice and I am 30 years old.`\n\n**Try it yourself:** Modify the variables `name` and `age` to see how the output changes!"
+      "bodyMarkdown": "F-strings are a way to format strings in Python. They allow you to embed expressions inside string literals, using curly braces `{}`. For example:\n\n```python\nname = 'Alice'\nage = 30\nformatted_string = f'My name is {name} and I am {age} years old.'\nprint(formatted_string)\n```\n\nThis will output: `My name is Alice and I am 30 years old.`\n\n**Try it yourself:** Modify the variables and see how the output changes."
     },
     {
       "id": "sketch2",
       "title": "Using Format Method",
-      "bodyMarkdown": "Another way to format strings is by using the `format()` method. Here's how it works:\n\n```python\nname = 'Bob'\nage = 25\nformatted_string = 'My name is {} and I am {} years old.'.format(name, age)\nprint(formatted_string)\n```\n\nThis will also output: `My name is Bob and I am 25 years old.`\n\n**Your turn:** Try changing the values of `name` and `age` to see the difference!"
+      "bodyMarkdown": "Another way to format strings is by using the `format()` method. For example:\n\n```python\nname = 'Bob'\nage = 25\nformatted_string = 'My name is {} and I am {} years old.'.format(name, age)\nprint(formatted_string)\n```\n\nThis will output: `My name is Bob and I am 25 years old.`\n\n**Your turn:** Change the values of `name` and `age` to see different outputs."
     }
   ],
   "quizDraft": [
     {
       "id": "quiz1",
       "kind": "single_choice",
-      "title": "What does the following code print?",
-      "prompt": "```python\nname = 'Charlie'\nprint(f'Hello, {name}!')\n```",
-      "hint": "Look at how the f-string is constructed.",
-      "help": {
-        "concept": "F-strings allow you to embed variable values directly into strings.",
-        "hint_1": "Check how the variable `name` is used inside the f-string.",
-        "hint_2": "The output will include the value of `name`."
-      },
+      "title": "What does f-string allow you to do?",
+      "prompt": "F-strings allow you to embed expressions inside string literals.",
       "options": [
-        "Hello, Charlie!",
-        "Hello, name!",
-        "Hello, !",
-        "Hello, Charlie"
+        "True",
+        "False"
       ],
       "correctOptionIds": [
         "a"
-      ]
+      ],
+      "hint": "Think about how f-strings work in Python.",
+      "help": {
+        "concept": "F-strings allow for inline expressions within strings.",
+        "hint_1": "They use curly braces to include variables or expressions.",
+        "hint_2": "Look at how f-strings are structured in Python."
+      }
     },
     {
       "id": "quiz2",
-      "kind": "multi_choice",
-      "title": "Which of the following are valid ways to format strings in Python?",
-      "prompt": "Select all that apply.",
-      "hint": "Think about the methods available for string formatting.",
-      "help": {
-        "concept": "Python provides multiple ways to format strings, including f-strings and the format method.",
-        "hint_1": "Remember the syntax for f-strings and the format method.",
-        "hint_2": "Look for options that use these methods correctly."
-      },
+      "kind": "single_choice",
+      "title": "Which method is used for traditional string formatting?",
+      "prompt": "What method can you use to format strings without f-strings?",
       "options": [
-        "f'My name is {name}'",
-        "'My name is {}'.format(name)",
-        "'My name is %s' % name",
-        "'My name is {0}'.format(name)"
+        "format()",
+        "join()",
+        "split()",
+        "replace()"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider the method that allows you to insert values into a string.",
+      "help": {
+        "concept": "The format() method is used for string formatting.",
+        "hint_1": "It allows you to replace placeholders in a string.",
+        "hint_2": "Think about how you can use it with curly braces."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Which of the following are valid f-string expressions?",
+      "prompt": "Select all valid f-string expressions.",
+      "options": [
+        "f'Hello, {name}'",
+        "f'{age} years old'",
+        "f'Value: {5 + 5}'",
+        "f'Name: {name, age}'"
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "d"
-      ]
-    },
-    {
-      "id": "quiz3",
-      "kind": "fill_blank_choice",
-      "title": "Complete the f-string: `f'Hello, {____}!'`",
-      "prompt": "Fill in the blank with the correct variable name.",
-      "choices": [
-        "name",
-        "greeting",
-        "age"
+        "c"
       ],
-      "template": "f'Hello, {____}!'",
-      "correctValue": "name"
+      "hint": "Look for expressions that correctly embed variables or calculations.",
+      "help": {
+        "concept": "F-strings can include variables and expressions.",
+        "hint_1": "Check if the syntax is correct for embedding values.",
+        "hint_2": "Remember that only one expression can be inside the braces."
+      }
     },
     {
       "id": "quiz4",
-      "kind": "code_input",
-      "title": "Create a formatted string",
-      "prompt": "Write Python code that defines a variable `city` and uses an f-string to print 'I live in {city}'.",
-      "starterCode": "city = ''\n# Write your f-string below\n",
-      "solutionCode": "city = 'New York'\nprint(f'I live in {city}')"
+      "kind": "multi_choice",
+      "title": "What are the benefits of using f-strings?",
+      "prompt": "Choose all the benefits of using f-strings.",
+      "options": [
+        "More readable",
+        "Faster than other methods",
+        "Supports expressions",
+        "Requires less code"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "hint": "Think about the advantages of f-strings over other formatting methods.",
+      "help": {
+        "concept": "F-strings improve readability and performance.",
+        "hint_1": "Consider how they simplify the syntax.",
+        "hint_2": "Look at how they handle expressions directly."
+      }
     },
     {
       "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank with the correct f-string syntax.",
+      "prompt": "To create an f-string, start with an `f` before the string: `f'Hello, {____}'`.",
+      "template": "f'Hello, {blank1}'",
+      "choices": [
+        "name",
+        "age",
+        "print"
+      ],
+      "correctValue": "name",
+      "hint": "Think about what variable you want to include in the greeting.",
+      "help": {
+        "concept": "F-strings embed variables into strings.",
+        "hint_1": "The variable should be defined before using it.",
+        "hint_2": "Make sure to use the correct variable name."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "fill_blank_choice",
+      "title": "Complete the string formatting method.",
+      "prompt": "Using the format method, you can write: 'My name is {} and I am {}.'.format(____, age)",
+      "template": "'My name is {} and I am {}.'.format({blank1}, age)",
+      "choices": [
+        "name",
+        "print",
+        "input"
+      ],
+      "correctValue": "name",
+      "hint": "Consider what you want to insert into the string.",
+      "help": {
+        "concept": "The format method replaces placeholders with values.",
+        "hint_1": "Make sure to match the order of the variables.",
+        "hint_2": "Think about the variable that represents your name."
+      }
+    },
+    {
+      "id": "quiz7",
       "kind": "code_input",
-      "title": "Using format method",
-      "prompt": "Define a variable `temperature` and print 'The temperature is {temperature} degrees.' using the format method.",
-      "starterCode": "temperature = 0\n# Write your format method code below\n",
-      "solutionCode": "temperature = 75\nprint('The temperature is {} degrees.'.format(temperature))"
+      "title": "Create a formatted string using f-strings.",
+      "prompt": "Write a program that uses f-strings to print a greeting with your name and age.",
+      "starterCode": "name = 'YourName'\nage = 25\n",
+      "solutionCode": "print(f'Hello, my name is {name} and I am {age} years old.')",
+      "tests": [
+        {
+          "input": "",
+          "output": "Hello, my name is YourName and I am 25 years old."
+        }
+      ]
+    },
+    {
+      "id": "quiz8",
+      "kind": "code_input",
+      "title": "Use the format method to create a string.",
+      "prompt": "Write a program that formats a string with your name and age using the format method.",
+      "starterCode": "name = 'YourName'\nage = 25\n",
+      "solutionCode": "print('My name is {} and I am {}.'.format(name, age))",
+      "tests": [
+        {
+          "input": "",
+          "output": "My name is YourName and I am 25."
+        }
+      ]
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Combine variables in a string.",
+      "prompt": "Write a program that combines two variables into a single formatted string.",
+      "starterCode": "first_name = 'John'\nlast_name = 'Doe'\n",
+      "solutionCode": "print(f'Full name: {first_name} {last_name}')",
+      "tests": [
+        {
+          "input": "",
+          "output": "Full name: John Doe"
+        }
+      ]
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Profile Card Generator",
+    "stepIds": [
+      "quiz7",
+      "quiz8",
+      "quiz9"
+    ]
+  }
 }

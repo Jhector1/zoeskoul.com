@@ -15,8 +15,22 @@ export async function fetchReviewQuiz(spec: ReviewQuizSpec, signal?: AbortSignal
   const text = await res.text();
 
   const json = text ? JSON.parse(text) : null;
-  if (!res.ok) throw new Error(json?.message ?? "Failed to load quiz.");
+  if (!res.ok) {
+    const issues = Array.isArray(json?.issues)
+        ? json.issues
+            .map((issue: any) => {
+              const path = Array.isArray(issue.path) ? issue.path.join(".") : "";
+              return path ? `${path}: ${issue.message}` : issue.message;
+            })
+            .join("; ")
+        : "";
 
+    throw new Error(
+        issues
+            ? `${json?.message ?? "Failed to load quiz."}: ${issues}`
+            : json?.message ?? "Failed to load quiz.",
+    );
+  }
   // ✅ server returns quizKey too
   return json as { questions: any[]; quizKey: string };
 }

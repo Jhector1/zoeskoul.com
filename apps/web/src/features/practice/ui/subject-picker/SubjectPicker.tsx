@@ -10,6 +10,7 @@ import { useTaggedT } from "@/i18n/tagged";
 
 export type SubjectCard = {
     slug: string;
+    subjectId?: string | null;
     title: string;
     description: string;
     defaultModuleSlug: string | null;
@@ -93,6 +94,7 @@ export default function SubjectPicker({
     }
 
     async function pickSubject(s: SubjectCard) {
+        if (!s.subjectId) return;
         if (s.status !== "active") return;
         if (!s.defaultModuleSlug) return;
         if (enrollingSlug) return;

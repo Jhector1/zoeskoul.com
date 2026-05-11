@@ -6,12 +6,12 @@
     {
       "id": "sketch_1",
       "title": "Understanding Tracebacks",
-      "bodyMarkdown": "When your Python program encounters an error, it generates a traceback. This traceback shows the sequence of function calls that led to the error, along with the line number where the error occurred. For example:\n\n```\nTraceback (most recent call last):\n  File \"example.py\", line 5, in <module>\n    print(hello)\nNameError: name 'hello' is not defined\n```\n\nIn this example, the error is a `NameError`, indicating that the variable `hello` was not defined. The traceback tells us that the error occurred in `example.py` on line 5. \n\n**Your turn:** Try running a Python program with an intentional error and observe the traceback."
+      "bodyMarkdown": "When your Python program encounters an error, it generates a traceback. This traceback shows the sequence of function calls that led to the error. For example:\n\n```\nTraceback (most recent call last):\n  File \"example.py\", line 2, in <module>\n    print(10 / 0)\nZeroDivisionError: division by zero\n```\n\nIn this example, the error occurred on line 2 of `example.py`, where the program attempted to divide by zero. The last line of the traceback indicates the type of error that occurred. \n\n**Your turn:** Try running a program that divides by zero to see the traceback."
     },
     {
       "id": "sketch_2",
-      "title": "Common Error Types",
-      "bodyMarkdown": "There are several common types of errors you might encounter in Python:\n\n1. **SyntaxError**: This occurs when Python encounters incorrect syntax. For example:\n   ```\n   print('Hello World'\n   ```\n   This will raise a `SyntaxError` because of the missing closing parenthesis.\n\n2. **TypeError**: This happens when an operation is applied to an object of inappropriate type. For example:\n   ```\n   print('Hello' + 5)\n   ```\n   This will raise a `TypeError` because you cannot concatenate a string and an integer.\n\n**Try this:** Create a small program that includes both a `SyntaxError` and a `TypeError` and run it to see the tracebacks."
+      "title": "Locating the Error",
+      "bodyMarkdown": "To fix an error, first identify the line number indicated in the traceback. In the previous example, the error is on line 2. You can then check the code on that line to understand what went wrong. \n\nFor instance, if you see:\n\n```python\nprint(10 / 0)\n```\n\nYou know that you need to change the divisor to a non-zero value. \n\n**Try this:** Modify the code to avoid division by zero and run it again."
     }
   ],
   "quizDraft": [
@@ -19,88 +19,202 @@
       "id": "quiz_1",
       "kind": "single_choice",
       "title": "Identifying Error Types",
-      "prompt": "What type of error is raised when you try to use a variable that hasn't been defined?",
+      "prompt": "What type of error is indicated by the traceback message 'ZeroDivisionError'?",
       "options": [
-        "SyntaxError",
-        "NameError",
-        "TypeError",
-        "ValueError"
+        "Syntax Error",
+        "Runtime Error",
+        "Logical Error",
+        "Indentation Error"
       ],
       "correctOptionIds": [
         "b"
       ],
-      "hint": "Think about what happens when Python can't find a variable.",
+      "hint": "Think about errors that occur during program execution.",
       "help": {
-        "concept": "A NameError occurs when you try to use a variable that hasn't been defined in the current scope.",
-        "hint_1": "This error specifically indicates that the name you are trying to use is not recognized.",
-        "hint_2": "Look for errors related to undefined variables in your code."
+        "concept": "A ZeroDivisionError occurs when a program attempts to divide a number by zero.",
+        "hint_1": "This error happens while the program is running.",
+        "hint_2": "Look for errors that are not related to the syntax of the code."
       }
     },
     {
       "id": "quiz_2",
       "kind": "single_choice",
-      "title": "Understanding Tracebacks",
-      "prompt": "In a traceback, what does the line number indicate?",
+      "title": "Understanding Traceback Components",
+      "prompt": "In a traceback, what does the last line typically indicate?",
       "options": [
-        "The line where the error was raised",
-        "The line where the program starts",
-        "The line where the function is defined",
-        "The line where the program ends"
+        "The file name",
+        "The line number",
+        "The type of error",
+        "The function name"
       ],
       "correctOptionIds": [
-        "a"
+        "c"
       ],
-      "hint": "The traceback shows the path the program took to reach the error.",
+      "hint": "The last line usually describes what went wrong.",
       "help": {
-        "concept": "The line number in a traceback indicates where the error occurred in your code.",
-        "hint_1": "This helps you locate the exact point of failure.",
-        "hint_2": "Tracebacks provide a detailed path of function calls leading to the error."
+        "concept": "The last line of a traceback provides the type of error that occurred.",
+        "hint_1": "It helps you understand the nature of the problem.",
+        "hint_2": "Focus on what the error message is telling you."
       }
     },
     {
       "id": "quiz_3",
       "kind": "multi_choice",
-      "title": "Common Python Errors",
-      "prompt": "Which of the following are common types of errors in Python? (Select all that apply)",
+      "title": "Common Error Types",
+      "prompt": "Which of the following are common types of errors you might encounter in Python? (Select all that apply)",
       "options": [
-        "SyntaxError",
-        "NameError",
-        "TypeError",
-        "LogicError"
+        "Syntax Error",
+        "Type Error",
+        "ZeroDivisionError",
+        "File Not Found Error"
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "c"
+        "c",
+        "d"
       ],
-      "hint": "Think about the errors that can occur during code execution.",
+      "hint": "Think about errors that can occur during coding and execution.",
       "help": {
-        "concept": "Common errors in Python include SyntaxError, NameError, and TypeError, while LogicError is not a standard error type.",
-        "hint_1": "SyntaxError occurs due to incorrect syntax, NameError for undefined variables, and TypeError for type mismatches.",
-        "hint_2": "LogicError is not a recognized error type in Python."
+        "concept": "Errors can occur due to incorrect syntax, type mismatches, or runtime issues.",
+        "hint_1": "Consider errors that prevent the program from running correctly.",
+        "hint_2": "Look for errors that relate to both syntax and runtime conditions."
       }
     },
     {
       "id": "quiz_4",
-      "kind": "fill_blank_choice",
-      "title": "Completing the Error Message",
-      "prompt": "A `NameError` occurs when you try to use a variable that is __________.",
-      "template": "A `NameError` occurs when you try to use a variable that is {blank}.",
-      "choices": [
-        "undefined",
-        "incorrect",
-        "out of scope",
-        "not callable"
+      "kind": "multi_choice",
+      "title": "Reading a Traceback",
+      "prompt": "What information can you gather from a traceback? (Select all that apply)",
+      "options": [
+        "The line number where the error occurred",
+        "The type of error",
+        "The variable values at the time of the error",
+        "The sequence of function calls leading to the error"
       ],
-      "correctValue": "undefined"
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Tracebacks provide specific details about the error.",
+      "help": {
+        "concept": "Tracebacks show where the error happened and what type of error it was.",
+        "hint_1": "They do not typically show variable values.",
+        "hint_2": "Focus on the structure of the traceback."
+      }
     },
     {
       "id": "quiz_5",
+      "kind": "drag_reorder",
+      "title": "Order of Traceback Information",
+      "prompt": "Arrange the components of a traceback in the order they appear.",
+      "tokens": [
+        "Error Type",
+        "Line Number",
+        "File Name",
+        "Function Call Sequence"
+      ],
+      "correctOrder": [
+        3,
+        2,
+        1,
+        0
+      ],
+      "hint": "Think about how tracebacks are structured.",
+      "help": {
+        "concept": "Tracebacks list the function calls leading to the error, followed by the error details.",
+        "hint_1": "The last part of the traceback is the error type.",
+        "hint_2": "The first part shows the sequence of calls."
+      }
+    },
+    {
+      "id": "quiz_6",
+      "kind": "drag_reorder",
+      "title": "Fixing Errors",
+      "prompt": "Put the steps to fix an error in the correct order.",
+      "tokens": [
+        "Identify the line number from the traceback",
+        "Understand the error type",
+        "Modify the code to fix the error",
+        "Run the program again"
+      ],
+      "correctOrder": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "hint": "Think about the logical steps you take when debugging.",
+      "help": {
+        "concept": "Fixing errors involves understanding and modifying the code based on the traceback.",
+        "hint_1": "Start with identifying where the problem is.",
+        "hint_2": "Always run the program again after making changes."
+      }
+    },
+    {
+      "id": "quiz_7",
       "kind": "code_input",
-      "title": "Fixing a Syntax Error",
-      "prompt": "Fix the syntax error in the following code:\n\n```python\nprint('Hello World'\n```",
-      "starterCode": "print('Hello World'",
-      "solutionCode": "print('Hello World')"
+      "title": "Fixing a Division Error",
+      "prompt": "Fix the following code to avoid a ZeroDivisionError:\n\n```python\nresult = 10 / 0\nprint(result)\n```",
+      "starterCode": "result = 10 / 0\nprint(result)",
+      "solutionCode": "result = 10 / 1\nprint(result)",
+      "hint": "Change the divisor to a non-zero number.",
+      "help": {
+        "concept": "A ZeroDivisionError occurs when dividing by zero, so use a different number.",
+        "hint_1": "Look at the division operation in the code.",
+        "hint_2": "Make sure the divisor is not zero."
+      }
+    },
+    {
+      "id": "quiz_8",
+      "kind": "code_input",
+      "title": "Handling Errors Gracefully",
+      "prompt": "Modify the following code to handle a potential division error:\n\n```python\nnum = 10\ndenom = 0\nresult = num / denom\nprint(result)\n```",
+      "starterCode": "num = 10\ndenom = 0\nresult = num / denom\nprint(result)",
+      "solutionCode": "num = 10\n\ndenom = 0\ntry:\n    result = num / denom\nexcept ZeroDivisionError:\n    result = 'Error: Division by zero'\nprint(result)",
+      "hint": "Use a try-except block to catch the error.",
+      "help": {
+        "concept": "Using try-except allows you to handle errors without crashing the program.",
+        "hint_1": "Wrap the division in a try block.",
+        "hint_2": "Catch the ZeroDivisionError and provide a fallback."
+      }
+    },
+    {
+      "id": "quiz_9",
+      "kind": "code_input",
+      "title": "Debugging a Syntax Error",
+      "prompt": "Correct the syntax error in the following code:\n\n```python\nprint('Hello World'\n```",
+      "starterCode": "print('Hello World'\n",
+      "solutionCode": "print('Hello World')",
+      "hint": "Check for missing parentheses.",
+      "help": {
+        "concept": "Syntax errors occur due to incorrect code structure.",
+        "hint_1": "Look for unmatched parentheses.",
+        "hint_2": "Ensure all function calls are properly closed."
+      }
+    },
+    {
+      "id": "quiz_10",
+      "kind": "code_input",
+      "title": "Using Assertions",
+      "prompt": "Add an assertion to check that the denominator is not zero before performing division:\n\n```python\nnum = 10\n\ndenom = 0\nresult = num / denom\nprint(result)\n```",
+      "starterCode": "num = 10\n\ndenom = 0\nresult = num / denom\nprint(result)",
+      "solutionCode": "num = 10\n\ndenom = 0\nassert denom != 0, 'Denominator cannot be zero'\nresult = num / denom\nprint(result)",
+      "hint": "Use an assertion to validate conditions before executing code.",
+      "help": {
+        "concept": "Assertions help catch errors early by checking conditions.",
+        "hint_1": "Make sure to assert that the denominator is not zero.",
+        "hint_2": "Assertions can prevent runtime errors."
+      }
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Personal Introduction Program",
+    "stepIds": [
+      "quiz_7",
+      "quiz_8",
+      "quiz_9"
+    ]
+  }
 }

@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-1": {
+        "input-and-type-conversion": {
+          "label": "Input and Type Conversion",
+          "summary": "Use input, int, float, and str to handle user-entered values.",
+          "cards": {
+            "sketch0": {
+              "title": "Getting User Input"
+            },
+            "sketch1": {
+              "title": "Type Conversion"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "quiz1": {
+              "title": "Convert User Input to Integer"
+            },
+            "quiz5": {
+              "title": "Convert User Input to Float"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Convert User Input to Integer",
+              "prompt": "Write a program that asks the user for their age and prints out the age in 10 years.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "age = input()\n# Convert age to an integer"
+            },
+            "quiz2": {
+              "title": "Fill in the Blank",
+              "prompt": "The function used to convert a string to an integer is `the missing choice`.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The function used to convert a string to an integer is `[blank1]`.",
+              "choices": [
+                "input",
+                "int",
+                "float",
+                "str"
+              ]
+            },
+            "quiz3": {
+              "title": "Understanding Input Types",
+              "prompt": "What type is the value returned by the input function?",
+              "hint": "Think about the main idea behind understanding input types.",
+              "help": {
+                "concept": "Focus on the core concept behind understanding input types.",
+                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+              },
+              "options": {
+                "a": "Integer",
+                "b": "String",
+                "c": "Float",
+                "d": "Boolean"
+              }
+            },
+            "quiz4": {
+              "title": "Type Conversion Functions",
+              "prompt": "Which of the following functions can be used for type conversion in Python? (Select all that apply)",
+              "hint": "Think about the main idea behind type conversion functions.",
+              "help": {
+                "concept": "Focus on the core concept behind type conversion functions.",
+                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+              },
+              "options": {
+                "a": "int()",
+                "b": "str()",
+                "c": "float()",
+                "d": "input()"
+              }
+            },
+            "quiz5": {
+              "title": "Convert User Input to Float",
+              "prompt": "Write a program that asks the user for a number and prints it as a float.",
+              "hint": "Read the coding task and identify what the program should print.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "number = input()\n# Convert number to a float"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-1": {
+        "input-and-type-conversion": {
+          "sketch1": {
+            "title": "Getting User Input",
+            "bodyMarkdown": "In Python, you can use the `input()` function to get input from the user. For example:\n\n```python\nname = input('What is your name? ')\nprint('Hello, ' + name + '!')\n```\n\nThis code asks the user for their name and then greets them. \n\n**Your turn:** Try modifying the prompt to ask for your favorite color.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch2": {
+            "title": "Type Conversion",
+            "bodyMarkdown": "When you get input from the user, it is always in string format. You can convert it to other types using functions like `int()` and `float()`. For example:\n\n```python\nage = int(input('How old are you? '))\nprint('In 5 years, you will be', age + 5)\n```\n\nThis code converts the user's age from a string to an integer so you can do math with it.\n\n**Try it yourself:** Change the code to ask for your height in meters and print it in centimeters.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

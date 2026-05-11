@@ -1,0 +1,205 @@
+{
+  "topicId": "comparisons-and-truth-values",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-2",
+  "sectionSlug": "python-v2-2-conditional-basics",
+  "prefix": "pyv2_2",
+  "minutes": 22,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.label",
+    "summaryKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.cards.sketch0.title",
+      "sketchId": "comparison_operators",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.cards.sketch1.title",
+      "sketchId": "truthiness",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_input_1",
+            "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.projectSteps.code_input_1.title",
+            "exerciseKey": "code_input_1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_input_2",
+            "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.projectSteps.code_input_2.title",
+            "exerciseKey": "code_input_2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_input_3",
+            "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.projectSteps.code_input_3.title",
+            "exerciseKey": "code_input_3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "comparison_operators",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.comparisons-and-truth-values.comparison_operators.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.comparisons-and-truth-values.comparison_operators.bodyMarkdown"
+    },
+    {
+      "id": "truthiness",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.comparisons-and-truth-values.truthiness.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.comparisons-and-truth-values.truthiness.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.multi_choice_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.fill_blank_choice_1",
+      "choiceCount": 2,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "True"
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.code_input_1",
+      "language": "python",
+      "starterCode": "number = int(input())\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Greater",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Greater",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "number = int(input())\nif number > 10:\n    print('Greater')\nelse:\n    print('Smaller')"
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.code_input_2",
+      "language": "python",
+      "starterCode": "value = ''\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Falsy",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Falsy",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "value = ''\nif value:\n    print('Truthy')\nelse:\n    print('Falsy')"
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.code_input_3",
+      "language": "python",
+      "starterCode": "age = 20\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Adult",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Adult",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "age = 20\nif age < 18:\n    print('Minor')\nelif age < 65:\n    print('Adult')\nelse:\n    print('Senior')"
+      }
+    }
+  ]
+}

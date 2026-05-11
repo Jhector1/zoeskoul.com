@@ -1,5 +1,30 @@
 {
   "topicId": "what-python-is",
-  "ok": true,
-  "issues": []
+  "ok": false,
+  "issues": [
+    {
+      "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy targets 2 \"single_choice\" exercise(s), but the draft has 1."
+    },
+    {
+      "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy targets 2 \"multi_choice\" exercise(s), but the draft has 1."
+    },
+    {
+      "code": "EXERCISE_POLICY_KIND_OVER_TARGET",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy targets 3 \"code_input\" exercise(s), but the draft has 4."
+    },
+    {
+      "code": "EXERCISE_POLICY_TOTAL_MISMATCH",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Exercise policy expects 11 total exercise(s), but the draft has 10."
+    }
+  ]
 }

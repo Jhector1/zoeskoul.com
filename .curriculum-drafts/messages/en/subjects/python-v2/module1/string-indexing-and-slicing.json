@@ -10,49 +10,30 @@
               "title": "Understanding String Indexing"
             },
             "sketch1": {
-              "title": "Exploring String Slicing"
+              "title": "Using String Slicing"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Practice"
+              "title": "Profile Card Generator"
             }
           },
           "projectSteps": {
-            "1": {
-              "title": "Extract a Substring"
+            "quiz7": {
+              "title": "Extract a substring using slicing."
             },
-            "2": {
-              "title": "Access a Character"
+            "quiz8": {
+              "title": "Access a character by index."
+            },
+            "quiz9": {
+              "title": "Slice the last three characters."
             }
           },
           "quiz": {
-            "1": {
-              "title": "Extract a Substring",
-              "prompt": "Write a Python program that extracts the substring 'Python' from the string 'I love Python programming'.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "my_string = 'I love Python programming'\n# Your code here to extract 'Python'"
-            },
-            "2": {
-              "title": "Access a Character",
-              "prompt": "Write a Python program that accesses the first character of the string 'Hello, World!'.",
-              "hint": "Break the task into the main code steps first.",
-              "help": {
-                "concept": "This task checks whether you can apply access a character in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-              },
-              "starterCode": "my_string = 'Hello, World!'\n# Your code here to access the first character"
-            },
-            "3": {
+            "quiz1": {
               "title": "What is the index of the first character in a string?",
-              "prompt": "In Python, what is the index of the first character in a string?",
+              "prompt": "In Python, string indexing starts at which number?",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -60,42 +41,156 @@
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "0",
-                "b": "1",
-                "c": "-1",
-                "d": "None"
+                "a": "1",
+                "b": "0",
+                "c": "2",
+                "d": "None of the above"
               }
             },
-            "4": {
-              "title": "Which of the following are valid ways to slice a string?",
-              "prompt": "Select all valid ways to slice the string 'Hello, World!'",
-              "hint": "Slicing syntax is string[start:end].",
+            "quiz2": {
+              "title": "What does slicing a string do?",
+              "prompt": "What is the purpose of string slicing in Python?",
+              "hint": "Consider how you can extract a portion of a string.",
               "help": {
-                "concept": "All provided options are valid ways to slice a string in Python.",
-                "hint_1": "Remember that the end index is not included in the slice.",
-                "hint_2": "Check how omitting indices affects the slice."
+                "concept": "Slicing allows you to extract a substring from a string.",
+                "hint_1": "It involves specifying a start and end index.",
+                "hint_2": "Think about how you can get a substring from a larger string."
               },
               "options": {
-                "a": "my_string[0:5]",
-                "b": "my_string[7:12]",
-                "c": "my_string[:5]"
+                "a": "To change the string",
+                "b": "To access a part of the string",
+                "c": "To count characters",
+                "d": "To concatenate strings"
               }
             },
-            "5": {
-              "title": "Fill in the blank",
-              "prompt": "In Python, the last character of a string can be accessed using the index the missing choice .",
+            "quiz3": {
+              "title": "Which of the following are valid ways to slice a string?",
+              "prompt": "Select all valid slicing methods.",
+              "hint": "Remember that the end index is exclusive.",
+              "help": {
+                "concept": "Slicing syntax allows for various valid forms.",
+                "hint_1": "The end index must be greater than the start index for a valid slice.",
+                "hint_2": "You can omit the start or end index to slice from the beginning or to the end."
+              },
+              "options": {
+                "a": "string[1:4]",
+                "b": "string[:3]",
+                "c": "string[4:1]"
+              }
+            },
+            "quiz4": {
+              "title": "Order the steps to slice a string.",
+              "prompt": "Arrange the steps to correctly slice a string.",
+              "hint": "Think about what you need to do first before slicing.",
+              "help": {
+                "concept": "Slicing requires knowing the string and indices.",
+                "hint_1": "You can't slice without knowing what string you're working with.",
+                "hint_2": "The slicing syntax comes after determining indices."
+              },
+              "tokens": {
+                "t1": "Identify the string",
+                "t2": "Determine start and end indices",
+                "t3": "Use the slicing syntax",
+                "t4": "Access the substring"
+              }
+            },
+            "quiz5": {
+              "title": "Fill in the blank for string slicing.",
+              "prompt": "To slice a string from index 2 to 5, you would use `string[2:the missing choice]`.",
               "hint": "Focus on the missing concept or keyword.",
               "help": {
-                "concept": "This task checks the key idea behind fill in the blank.",
+                "concept": "This task checks the key idea behind fill in the blank for string slicing..",
                 "hint_1": "Look for the word or phrase that best matches the lesson concept.",
                 "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
               },
-              "template": "In Python, the last character of a string can be accessed using the index [blank1] .",
+              "template": "To slice a string from index 2 to 5, you would use `string[2:[blank1]]`.",
               "choices": [
-                "-1",
-                "0",
-                "length of string - 1"
+                "5",
+                "6",
+                "4",
+                "3"
               ]
+            },
+            "quiz6": {
+              "title": "Complete the string indexing statement.",
+              "prompt": "The character at index 0 of the string `\"Python\"` is `the missing choice`.",
+              "hint": "Focus on the missing concept rather than the exact missing term.",
+              "help": {
+                "concept": "The blank should be completed with the term that fits the job being described.",
+                "hint_1": "Think about what the missing part needs to do in the statement.",
+                "hint_2": "Choose the term that best completes the meaning of the statement."
+              },
+              "template": "The character at index 0 of the string `\"Python\"` is `[blank1]`.",
+              "choices": [
+                "P",
+                "y",
+                "t",
+                "n"
+              ]
+            },
+            "quiz7": {
+              "title": "Extract a substring using slicing.",
+              "prompt": "Write a function that takes a string and returns the substring from index 1 to 4. Then read the input values, call the function, and print the returned result.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply extract a substring using slicing. in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "def extract_substring(s):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(extract_substring(s))"
+            },
+            "quiz8": {
+              "title": "Access a character by index.",
+              "prompt": "Write a function that returns the character at index 2 of a given string. Then read the input values, call the function, and print the returned result.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply access a character by index. in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "def char_at_index(s):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(char_at_index(s))"
+            },
+            "quiz9": {
+              "title": "Slice the last three characters.",
+              "prompt": "Write a function that returns the last three characters of a string. Then read the input values, call the function, and print the returned result.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply slice the last three characters. in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "def last_three_chars(s):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(last_three_chars(s))"
+            },
+            "policy_multi_choice_1": {
+              "title": "Choose good run-and-check habits",
+              "prompt": "Which habits help when practicing \"String Indexing and Slicing\"?",
+              "hint": "Good practice means running code and checking what happened.",
+              "help": {
+                "concept": "Running small pieces of code and reading the output helps you understand Python behavior.",
+                "hint_1": "Output and errors both give useful feedback.",
+                "hint_2": "Testing small changes is easier than debugging many changes at once."
+              },
+              "options": {
+                "a": "Run the code after writing it",
+                "b": "Read the output carefully",
+                "c": "Ignore error messages",
+                "d": "Change many lines at once without testing"
+              }
+            },
+            "policy_drag_reorder_1": {
+              "title": "Order the run-and-check workflow",
+              "prompt": "Put the steps in order for practicing \"String Indexing and Slicing\".",
+              "hint": "You need code before you can run it.",
+              "help": {
+                "concept": "A basic Python workflow is write code, run it, then inspect the result.",
+                "hint_1": "The output appears after running.",
+                "hint_2": "Errors are also useful feedback."
+              },
+              "tokens": {
+                "t1": "Write a small piece of Python code",
+                "t2": "Run the code",
+                "t3": "Read the output or error message"
+              }
             }
           }
         }
@@ -106,13 +201,13 @@
     "python-v2": {
       "python-v2-1": {
         "string-indexing-and-slicing": {
-          "1": {
+          "sketch1": {
             "title": "Understanding String Indexing",
-            "bodyMarkdown": "In Python, strings are sequences of characters. Each character in a string has a unique index, starting from 0. For example, in the string `\"Hello\"`, the character `H` is at index 0, `e` at index 1, and so on.\n\n**Example:**\n```python\nmy_string = \"Hello\"\nprint(my_string[0])  # Output: H\n```\n\n**Your turn:** Try accessing the character at index 1.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "In Python, strings are sequences of characters. Each character in a string has an index, starting from 0. For example, in the string `\"Hello\"`, the character `H` is at index 0, `e` is at index 1, and so on. You can access individual characters using their index:\n\n```python\nmy_string = \"Hello\"\nprint(my_string[0])  # Output: H\n```\n\nTry it yourself: What does `my_string[1]` output?\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           },
-          "2": {
-            "title": "Exploring String Slicing",
-            "bodyMarkdown": "String slicing allows you to extract a substring from a string. The syntax is `string[start:end]`, where `start` is the index of the first character and `end` is the index where the slice stops (not inclusive).\n\n**Example:**\n```python\nmy_string = \"Hello, World!\"\nprint(my_string[0:5])  # Output: Hello\n```\n\n**Try it yourself:** Modify the slice to get the substring `World`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "sketch2": {
+            "title": "Using String Slicing",
+            "bodyMarkdown": "Slicing allows you to access a substring by specifying a start and end index. The syntax is `string[start:end]`, where `start` is inclusive and `end` is exclusive. For example:\n\n```python\nmy_string = \"Hello, World!\"\nprint(my_string[0:5])  # Output: Hello\n```\n\nThis prints the characters from index 0 to 4. Try this: What does `my_string[7:12]` return?\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

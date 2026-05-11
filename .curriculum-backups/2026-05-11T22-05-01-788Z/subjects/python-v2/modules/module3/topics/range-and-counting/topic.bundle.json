@@ -1,0 +1,178 @@
+{
+  "topicId": "range-and-counting",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-3",
+  "sectionSlug": "python-v2-3-for-loops",
+  "prefix": "pyv2_3",
+  "minutes": 22,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-3.range-and-counting.label",
+    "summaryKey": "topics.python-v2.python-v2-3.range-and-counting.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.range-and-counting.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.range-and-counting.cards.sketch1.title",
+      "sketchId": "sketch2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-3.range-and-counting.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-3.range-and-counting.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "quiz1",
+            "titleKey": "topics.python-v2.python-v2-3.range-and-counting.projectSteps.quiz1.title",
+            "exerciseKey": "quiz1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "quiz5",
+            "titleKey": "topics.python-v2.python-v2-3.range-and-counting.projectSteps.quiz5.title",
+            "exerciseKey": "quiz5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.range-and-counting.sketch1.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.range-and-counting.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.range-and-counting.sketch2.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.range-and-counting.sketch2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.quiz1",
+      "language": "python",
+      "starterCode": "for i in range(10):\n    # Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "for i in range(10):\n    print(i)"
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.quiz2",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "10"
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.quiz3",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.quiz4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.quiz5",
+      "language": "python",
+      "starterCode": "for i in range(0, 21, 2):\n    # Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "0\n2\n4\n6\n8\n10\n12\n14\n16\n18\n20\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "for i in range(0, 21, 2):\n    print(i)"
+      }
+    }
+  ]
+}

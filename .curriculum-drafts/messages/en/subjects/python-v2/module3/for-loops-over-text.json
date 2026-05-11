@@ -10,93 +10,186 @@
               "title": "Introduction to For Loops"
             },
             "sketch1": {
-              "title": "Counting Characters in a String"
+              "title": "Using Range with For Loops"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Practice"
+              "title": "Mini Text Analyzer"
             }
           },
           "projectSteps": {
-            "quiz_1": {
-              "title": "Print Each Character"
+            "code_input_1": {
+              "title": "Print each character in a string"
             },
-            "quiz_5": {
-              "title": "Count Vowels in a String"
+            "code_input_2": {
+              "title": "Count from 0 to 9"
+            },
+            "code_input_3": {
+              "title": "Loop through a list of fruits"
             }
           },
           "quiz": {
-            "quiz-1": {
-              "title": "Print Each Character",
-              "prompt": "Write a for loop that prints each character of the string `\"Hello, World!\"`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "single_choice_1": {
+              "title": "What does a for loop do?",
+              "prompt": "A for loop allows you to:",
+              "hint": "Think about how loops help in repeating actions.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "A for loop is used to iterate over a sequence, executing a block of code multiple times.",
+                "hint_1": "Consider the purpose of loops in programming.",
+                "hint_2": "Look for the option that describes repeating actions."
               },
-              "starterCode": "for char in \"Hello, World!\":\n    # Your code here"
+              "options": {
+                "a": "Repeat a block of code a specific number of times",
+                "b": "Stop the program",
+                "c": "Create a new function",
+                "d": "Define a variable"
+              }
             },
-            "quiz-2": {
-              "title": "Complete the Loop",
-              "prompt": "Fill in the blank to complete the for loop that counts characters in a string.\n\n```python\ncount = 0\nfor char in \"______\":\n    count += 1\nprint(count)\n```",
-              "hint": "Focus on the missing concept or keyword.",
+            "single_choice_2": {
+              "title": "What will the following code output?",
+              "prompt": "```python\nfor char in \"abc\":\n    print(char)\n```",
+              "hint": "Think about how print statements work inside loops.",
               "help": {
-                "concept": "This task checks the key idea behind complete the loop.",
-                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-              },
-              "template": "count = 0\nfor char in \"{blank}\":\n    count += 1\nprint(count)",
-              "choices": [
-                "\"hello\"",
-                "\"world\"",
-                "\"Python\""
-              ]
-            },
-            "quiz-3": {
-              "title": "For Loop Output",
-              "prompt": "What will the following code output?\n\n```python\nfor char in \"abc\":\n    print(char)\n```",
-              "hint": "Think about the main idea behind for loop output.",
-              "help": {
-                "concept": "Focus on the core concept behind for loop output.",
-                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
-                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+                "concept": "The loop iterates over each character and prints them on separate lines.",
+                "hint_1": "Consider how the print function behaves with each iteration.",
+                "hint_2": "Look at how the output is formatted in the loop."
               },
               "options": {
                 "a": "abc",
-                "b": "a\nb\nc",
-                "c": "Error",
-                "d": "None"
+                "b": "a b c",
+                "c": "Error"
               }
             },
-            "quiz-4": {
-              "title": "Valid For Loop Syntax",
-              "prompt": "Which of the following are valid for loop syntax in Python? (Select all that apply)",
-              "hint": "Think about the main idea behind valid for loop syntax.",
+            "multi_choice_1": {
+              "title": "Which of the following are valid uses of for loops?",
+              "prompt": "Select all that apply.",
+              "hint": "Consider the different ways you can use loops in Python.",
               "help": {
-                "concept": "Focus on the core concept behind valid for loop syntax.",
-                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
-                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+                "concept": "For loops can iterate over sequences and perform actions multiple times.",
+                "hint_1": "Think about the types of sequences you can loop through.",
+                "hint_2": "Remember how loops can control the number of repetitions."
               },
               "options": {
-                "a": "for i in range(5):",
-                "b": "for char in \"text\":",
-                "c": "for (i = 0; i < 5; i++):",
-                "d": "for item in list:"
+                "a": "Iterating over a string",
+                "b": "Counting with a variable",
+                "c": "Repeating an action a set number of times",
+                "d": "Creating a list"
               }
             },
-            "quiz-5": {
-              "title": "Count Vowels in a String",
-              "prompt": "Write a for loop that counts the number of vowels in the string `\"Hello, World!\"`.",
+            "multi_choice_2": {
+              "title": "Which statements about the range function are true?",
+              "prompt": "Select all that apply.",
+              "hint": "Think about how range is used in loops and its parameters.",
+              "help": {
+                "concept": "The range function creates a sequence of numbers that can be iterated over.",
+                "hint_1": "Consider the default starting point of range.",
+                "hint_2": "Remember that range can take both start and end values."
+              },
+              "options": {
+                "a": "It generates a sequence of numbers",
+                "b": "It can be used in for loops",
+                "c": "It starts counting from 1 by default",
+                "d": "It can take two arguments to specify a start and end"
+              }
+            },
+            "drag_reorder_1": {
+              "title": "Order the steps to create a for loop.",
+              "prompt": "Arrange the following steps in the correct order.",
+              "hint": "Think about the logical order of the steps.",
+              "help": {
+                "concept": "This task is about understanding the sequence behind order the steps to create a for loop..",
+                "hint_1": "Find the step that must happen first before the others make sense.",
+                "hint_2": "Check which action depends on a previous step already being completed."
+              },
+              "tokens": {
+                "t1": "Define the sequence to iterate over",
+                "t2": "Use the for keyword",
+                "t3": "Specify the variable to hold the current item",
+                "t4": "Write the code block to execute"
+              }
+            },
+            "drag_reorder_2": {
+              "title": "Order the steps to use range in a for loop.",
+              "prompt": "Arrange the following steps in the correct order.",
+              "hint": "Think about the logical order of the steps.",
+              "help": {
+                "concept": "This task is about understanding the sequence behind order the steps to use range in a for loop..",
+                "hint_1": "Find the step that must happen first before the others make sense.",
+                "hint_2": "Check which action depends on a previous step already being completed."
+              },
+              "tokens": {
+                "t1": "Call range with the desired number",
+                "t2": "Use the for keyword",
+                "t3": "Specify the variable to hold the current number",
+                "t4": "Write the code block to execute"
+              }
+            },
+            "fill_blank_choice_1": {
+              "title": "Complete the for loop syntax.",
+              "prompt": "The syntax for a for loop is: `for [blank1] in sequence:`",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind complete the for loop syntax..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The syntax for a for loop is: `for [blank1] in sequence:`",
+              "choices": [
+                "item",
+                "index",
+                "value"
+              ]
+            },
+            "fill_blank_choice_2": {
+              "title": "Complete the range function call.",
+              "prompt": "To create a range from 0 to 4, you would write: `range([blank1])`",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind complete the range function call..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "To create a range from 0 to 4, you would write: `range([blank1])`",
+              "choices": [
+                "5",
+                "4",
+                "0"
+              ]
+            },
+            "code_input_1": {
+              "title": "Print each character in a string",
+              "prompt": "Write a for loop that prints each character in the string 'Python'.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "vowels = 'aeiou'\ncount = 0\nfor char in \"Hello, World!\":\n    # Your code here\nprint(count)"
+              "starterCode": "string = 'Python'\n# Write your for loop here"
+            },
+            "code_input_2": {
+              "title": "Count from 0 to 9",
+              "prompt": "Use a for loop with range to print numbers from 0 to 9.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply count from 0 to 9 in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "# Write your for loop here"
+            },
+            "code_input_3": {
+              "title": "Loop through a list of fruits",
+              "prompt": "Create a for loop that prints each fruit in the list ['apple', 'banana', 'cherry'].",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "fruits = ['apple', 'banana', 'cherry']\n# Write your for loop here"
             }
           }
         }
@@ -107,13 +200,13 @@
     "python-v2": {
       "python-v2-3": {
         "for-loops-over-text": {
-          "intro-to-for-loops": {
+          "intro_to_for_loops": {
             "title": "Introduction to For Loops",
-            "bodyMarkdown": "In Python, a for loop allows you to iterate over a sequence, such as a string. This means you can access each character in the string one by one. For example, if you have the string `\"hello\"`, you can loop through it to print each character:\n\n```python\nfor char in \"hello\":\n    print(char)\n```\n\nThis will output:\n```\nh\ne\nl\nl\no\n```\n\n**Try it yourself:** Write a for loop to print each character in the string `\"Python\"`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "In Python, a for loop allows you to iterate over a sequence, such as a string. This means you can access each character in the string one by one. For example, if you have the string `\"hello\"`, you can loop through it and print each character:\n\n```python\nfor char in \"hello\":\n    print(char)\n```\n\nThis will output:\n```\nh\ne\nl\nl\no\n```\n\n**Try it yourself:** Modify the string and see how the output changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           },
-          "counting-characters": {
-            "title": "Counting Characters in a String",
-            "bodyMarkdown": "You can also use a for loop to count the number of characters in a string. For example:\n\n```python\ncount = 0\nfor char in \"hello\":\n    count += 1\nprint(count)\n```\n\nThis will output `5`, which is the number of characters in the string `\"hello\"`.\n\n**Your turn:** Modify the code to count the characters in the string `\"programming\"`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "using_range_with_for_loops": {
+            "title": "Using Range with For Loops",
+            "bodyMarkdown": "You can also use the `range()` function with for loops to repeat actions a specific number of times. For example:\n\n```python\nfor i in range(5):\n    print(i)\n```\n\nThis will print numbers from 0 to 4. The `range(5)` generates a sequence of numbers from 0 up to (but not including) 5.\n\n**Your turn:** Change the number in `range()` to see how many times the loop runs.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

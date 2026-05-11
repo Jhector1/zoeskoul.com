@@ -1,0 +1,163 @@
+{
+  "title": "Running Python Code",
+  "summary": "Use the ZoeSkoul browser code editor, Run button, and output panel to execute Python code.",
+  "minutes": 18,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Running Python Code",
+      "bodyMarkdown": "In this topic, you'll learn how to run Python code using the ZoeSkoul browser code editor. You'll see how to print messages and understand the basic syntax of Python. For example, to print a message, you can use the `print()` function:\n\n```python\nprint('Hello, World!')\n```\n\nTry it yourself by typing the code in the editor and clicking Run!"
+    },
+    {
+      "id": "sketch2",
+      "title": "Understanding Syntax Errors",
+      "bodyMarkdown": "Syntax errors occur when the code does not follow the correct format. For example, if you forget to close a parenthesis in a print statement:\n\n```python\nprint('Hello, World!'\n```\n\nThis will raise a syntax error. Make sure to check your code for any missing symbols. Your turn: Fix the syntax error in the example above!"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "What does the print function do?",
+      "prompt": "Select the correct answer.",
+      "options": [
+        "It runs the code.",
+        "It outputs text to the screen.",
+        "It saves the code to a file.",
+        "It creates a variable."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what happens when you want to display information.",
+      "help": {
+        "concept": "The print function is used to display output to the user.",
+        "hint_1": "Look for the option that describes displaying text.",
+        "hint_2": "Remember, print is not for saving or running code."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Which of the following are valid print statements?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "print('Hello')",
+        "print(Hello)",
+        "print('Hello, World!')",
+        "print(123)"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Check for proper syntax in each option.",
+      "help": {
+        "concept": "Valid print statements must have correct syntax and quotation marks for strings.",
+        "hint_1": "Look for options that include quotes around text.",
+        "hint_2": "Numbers can be printed without quotes."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "fill_blank_choice",
+      "title": "Complete the print statement.",
+      "prompt": "Fill in the blank to correctly print a message.",
+      "template": "print('[blank1]')",
+      "choices": [
+        "Hello, World!",
+        "Hello World!",
+        "Hello, World!"
+      ],
+      "correctValue": "Hello, World!"
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Identify the syntax error.",
+      "prompt": "What is missing in this print statement?",
+      "template": "print('Hello, World!')",
+      "choices": [
+        "Closing parenthesis",
+        "Quotation marks",
+        "Comma"
+      ],
+      "correctValue": "Closing parenthesis"
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Order the steps to run Python code.",
+      "prompt": "Arrange the steps in the correct order.",
+      "tokens": [
+        "Type code in the editor.",
+        "Click Run.",
+        "Check the output panel."
+      ],
+      "correctOrder": [
+        "Type code in the editor.",
+        "Click Run.",
+        "Check the output panel."
+      ]
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Arrange the components of a print statement.",
+      "prompt": "Put the parts of the print statement in the correct order.",
+      "tokens": [
+        "print",
+        "(",
+        "'Hello, World!'",
+        ")"
+      ],
+      "correctOrder": [
+        "print",
+        "(",
+        "'Hello, World!'",
+        ")"
+      ]
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Print Your Name",
+      "prompt": "Write a Python code that prints your name.",
+      "starterCode": "print('')",
+      "solutionCode": "print('Your Name')"
+    },
+    {
+      "id": "quiz8",
+      "kind": "code_input",
+      "title": "Fix the Syntax Error",
+      "prompt": "Correct the following code to print 'Hello, World!'",
+      "starterCode": "print('Hello, World!')",
+      "solutionCode": "print('Hello, World!')"
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Output a Number",
+      "prompt": "Write a code that prints the number 10.",
+      "starterCode": "print()",
+      "solutionCode": "print(10)"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Print a Simple Message",
+      "prompt": "Create a print statement that outputs 'Learning Python!'",
+      "starterCode": "print('')",
+      "solutionCode": "print('Learning Python!')"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Print Multiple Values",
+      "prompt": "Write a code that prints 'Hello' and 'World' on the same line.",
+      "starterCode": "print('Hello', 'World')",
+      "solutionCode": "print('Hello', 'World')"
+    }
+  ]
+}

@@ -60,4 +60,16 @@ export type TopicSeed = {
     modulePrefix: string;
     moduleOrder: number;
     sectionOrder: number;
+    generationTargets?: {
+        quizBankMin: number;
+        quizBankTarget: number;
+        quizVisibleDefault: number;
+        quizVisibleMax: number;
+
+        projectCodeInputMin: number;
+        projectCodeInputTarget: number;
+        projectCodeInputMax: number;
+
+        maxAttempts: number | null;
+    };
 };

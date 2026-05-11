@@ -5,7 +5,7 @@
       "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
       "category": "text",
       "severity": "medium",
-      "field": "sketchBlocks.2.bodyMarkdown",
+      "field": "sketchBlocks.sketch2.bodyMarkdown",
       "message": "Added a short line-by-line explanation after a multi-line code example."
     }
   ]

@@ -1,0 +1,276 @@
+{
+  "title": "And, Or, and Not",
+  "summary": "Combine conditions with boolean operators.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Boolean Operators",
+      "bodyMarkdown": "Boolean operators allow us to combine multiple conditions in programming. The three main operators are **AND**, **OR**, and **NOT**. \n\n**AND** returns True only if both conditions are True. \n**OR** returns True if at least one condition is True. \n**NOT** inverts the truth value of a condition. \n\n**Example:** \n```python\nage = 20\nif age >= 18 and age < 65:\n    print('Eligible for work')\n``` \nIn this example, the message will print only if both conditions are met. \n\n**Your turn:** Try changing the age value and see how it affects the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using Boolean Logic in Conditions",
+      "bodyMarkdown": "When writing conditions, you can combine them using boolean logic. For instance, you can check if a number is both greater than 10 and less than 20 using the **AND** operator. \n\n**Example:** \n```python\nnumber = 15\nif number > 10 and number < 20:\n    print('Number is between 10 and 20')\n``` \nThis will print the message if the number is indeed between 10 and 20. \n\n**Try it yourself:** Modify the number and see what happens!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Understanding AND Operator",
+      "prompt": "What will be the output of the following code?\n```python\nx = 5\nif x > 3 and x < 10:\n    print('In range')\nelse:\n    print('Out of range')\n```",
+      "options": [
+        "In range",
+        "Out of range"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider both conditions in the if statement.",
+      "help": {
+        "concept": "The AND operator requires both conditions to be true.",
+        "hint_1": "Check if x is greater than 3.",
+        "hint_2": "Now check if x is less than 10."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Understanding OR Operator",
+      "prompt": "What will be the output of the following code?\n```python\nx = 5\nif x < 3 or x > 10:\n    print('Out of range')\nelse:\n    print('In range')\n```",
+      "options": [
+        "Out of range",
+        "In range"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what OR requires to return true.",
+      "help": {
+        "concept": "The OR operator returns true if at least one condition is true.",
+        "hint_1": "Is x less than 3?",
+        "hint_2": "Is x greater than 10?"
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Identifying True Conditions",
+      "prompt": "Which of the following conditions will return True?\nSelect all that apply.",
+      "options": [
+        "5 > 3 and 5 < 10",
+        "5 < 3 or 5 > 10",
+        "not (5 < 3)",
+        "5 == 5 and 5 != 5"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Think about the main idea behind identifying true conditions.",
+      "help": {
+        "concept": "Focus on the core concept behind identifying true conditions.",
+        "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+        "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Combining Conditions",
+      "prompt": "Which combinations of conditions will result in 'Eligible' being printed?\nSelect all that apply.",
+      "options": [
+        "age >= 18 and age < 65",
+        "age < 18 or age >= 65",
+        "not (age < 18)",
+        "age == 30 and age != 30"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Think about the main idea behind combining conditions.",
+      "help": {
+        "concept": "Focus on the core concept behind combining conditions.",
+        "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+        "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: AND Operator",
+      "prompt": "Complete the statement: `if x > 10 ___ x < 20:`",
+      "template": "",
+      "choices": [
+        "and",
+        "or",
+        "not"
+      ],
+      "correctValue": "and",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind fill in the blank: the missing term operator.",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: NOT Operator",
+      "prompt": "Complete the statement: `if not (x > 10):` means that x is ___ 10.",
+      "template": "",
+      "choices": [
+        "greater than",
+        "less than",
+        "equal to"
+      ],
+      "correctValue": "less than",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind fill in the blank: not operator.",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "drag_reorder",
+      "title": "Order of Operations",
+      "prompt": "Arrange the following conditions in the correct order of evaluation.",
+      "tokens": [
+        "not (x < 5)",
+        "x > 10",
+        "x < 20",
+        "x > 0 and x < 100"
+      ],
+      "correctOrder": [
+        "x > 10",
+        "x < 20",
+        "x > 0 and x < 100",
+        "not (x < 5)"
+      ],
+      "hint": "Think about the logical order of the steps.",
+      "help": {
+        "concept": "This task is about understanding the sequence behind order of operations.",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "title": "Combining Conditions",
+      "prompt": "Arrange the following statements to form a valid if condition.",
+      "tokens": [
+        "if",
+        "x > 5",
+        "and",
+        "x < 10"
+      ],
+      "correctOrder": [
+        "if",
+        "x > 5",
+        "and",
+        "x < 10"
+      ],
+      "hint": "Focus on the logical order of the parts.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Think about which part must come first.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Check Eligibility",
+      "prompt": "Write a function that checks if a person is eligible to vote. A person is eligible if they are 18 years or older. Then read the input value, call the function, and print the returned result.",
+      "starterCode": "def is_eligible(age):\n    # Check if age is 18 or older\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_eligible(age))",
+      "solutionCode": "def is_eligible(age):\n    if age >= 18:\n        return True\n    else:\n        return False\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_eligible(age))",
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply check eligibility in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "False",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "True",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Check Range",
+      "prompt": "Write a function that checks if a number is between 10 and 20 (inclusive). Then read the input value, call the function, and print the returned result.",
+      "starterCode": "def is_in_range(num):\n    # Check if num is between 10 and 20\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_in_range(num))",
+      "solutionCode": "def is_in_range(num):\n    if num >= 10 and num <= 20:\n        return True\n    return False\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_in_range(num))",
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply check range in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "True",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "True",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Check Even or Odd",
+      "prompt": "Write a function that checks if a number is even or odd. Return 'Even' or 'Odd'. Then read the input value, call the function, and print the returned result.",
+      "starterCode": "def check_even_odd(num):\n    # Check if num is even or odd\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_even_odd(num))",
+      "solutionCode": "def check_even_odd(num):\n    if num % 2 == 0:\n        return 'Even'\n    else:\n        return 'Odd'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_even_odd(num))",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "Even",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Even",
+          "match": "exact"
+        }
+      ]
+    }
+  ],
+  "projectDraft": {
+    "title": "Grade Checker",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

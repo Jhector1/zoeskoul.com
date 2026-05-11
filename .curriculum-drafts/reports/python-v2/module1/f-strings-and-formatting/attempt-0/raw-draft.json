@@ -4,96 +4,155 @@
   "minutes": 22,
   "sketchBlocks": [
     {
-      "id": "sketch-1",
-      "title": "Introduction to F-Strings",
-      "bodyMarkdown": "F-strings, or formatted string literals, allow you to embed expressions inside string literals, using curly braces `{}`. This makes it easy to create dynamic strings. For example:\n\n```python\nname = 'Alice'\nage = 30\nprint(f'My name is {name} and I am {age} years old.')\n```\n\nThis will output: `My name is Alice and I am 30 years old.`\n\n**Try it yourself:** Modify the variables `name` and `age` to see how the output changes."
+      "id": "sketch1",
+      "title": "Understanding F-Strings",
+      "bodyMarkdown": "F-strings, or formatted string literals, allow you to embed expressions inside string literals, using curly braces `{}`. For example:\n\n```python\nname = 'Alice'\nage = 30\nprint(f'My name is {name} and I am {age} years old.')\n```\n\nThis will output: `My name is Alice and I am 30 years old.`\n\n**Your turn:** Try creating your own f-string with different variables!"
     },
     {
-      "id": "sketch-2",
+      "id": "sketch2",
       "title": "Using Format Method",
-      "bodyMarkdown": "You can also format strings using the `format()` method. Here's how:\n\n```python\nname = 'Bob'\nage = 25\nformatted_string = 'My name is {} and I am {} years old.'.format(name, age)\nprint(formatted_string)\n```\n\nThis will output: `My name is Bob and I am 25 years old.`\n\n**Your turn:** Change the values of `name` and `age` and see the new output."
+      "bodyMarkdown": "You can also format strings using the `.format()` method. For example:\n\n```python\nname = 'Bob'\nage = 25\nformatted_string = 'My name is {} and I am {} years old.'.format(name, age)\nprint(formatted_string)\n```\n\nThis will output: `My name is Bob and I am 25 years old.`\n\n**Try this:** Modify the example to include a favorite color!"
     }
   ],
   "quizDraft": [
     {
-      "id": "quiz-1",
-      "kind": "code_input",
-      "title": "Create a Formatted String",
-      "prompt": "Write a program that takes a user's name and age, and prints a formatted string using f-strings.",
-      "starterCode": "name = input('Enter your name: ')\nage = input('Enter your age: ')\n# Write your f-string below\n",
-      "solutionCode": "name = input('Enter your name: ')\nage = input('Enter your age: ')\nprint(f'My name is {name} and I am {age} years old.')",
-      "tests": [
-        {
-          "input": "Alice\n30\n",
-          "output": "My name is Alice and I am 30 years old."
-        },
-        {
-          "input": "Bob\n25\n",
-          "output": "My name is Bob and I am 25 years old."
-        }
-      ]
-    },
-    {
-      "id": "quiz-2",
-      "kind": "fill_blank_choice",
-      "title": "Complete the F-String",
-      "prompt": "Fill in the blank to complete the f-string: `print(f'My name is {____} and I am {age} years old.')`",
-      "choices": [
-        "name",
-        "age",
-        "address"
-      ],
-      "correctValue": "name"
-    },
-    {
-      "id": "quiz-3",
+      "id": "quiz1",
       "kind": "single_choice",
-      "title": "What does f-string allow?",
-      "prompt": "What is the main purpose of f-strings in Python?",
+      "title": "What does the following code print?",
+      "prompt": "```python\nname = 'Charlie'\nage = 22\nprint(f'Hello, my name is {name} and I am {age} years old.')\n```",
       "options": [
-        "To create multi-line strings",
-        "To embed expressions inside string literals",
-        "To format numbers only",
-        "To create lists"
+        "Hello, my name is Charlie and I am 22 years old.",
+        "Hello, my name is {name} and I am {age} years old.",
+        "Hello, my name is Charlie and I am age years old.",
+        "Hello, my name is Charlie and I am 22."
       ],
       "correctOptionIds": [
-        "b"
-      ]
+        "a"
+      ],
+      "hint": "Check how f-strings work in Python.",
+      "help": {
+        "concept": "F-strings allow you to embed variables directly in the string.",
+        "hint_1": "Look for the output format of the print statement.",
+        "hint_2": "Make sure to consider the variable values used in the f-string."
+      }
     },
     {
-      "id": "quiz-4",
+      "id": "quiz2",
       "kind": "multi_choice",
-      "title": "Identify Valid Formatting Methods",
-      "prompt": "Which of the following are valid methods for formatting strings in Python?",
+      "title": "Which of the following are valid ways to format strings in Python?",
+      "prompt": "Select all that apply.",
       "options": [
         "Using f-strings",
-        "Using the format() method",
-        "Using concatenation",
-        "Using the print() function"
+        "Using the .format() method",
+        "Using string concatenation",
+        "Using the % operator"
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "c"
+        "c",
+        "d"
+      ],
+      "hint": "Think about the different methods available for string formatting.",
+      "help": {
+        "concept": "Python provides multiple ways to format strings.",
+        "hint_1": "Consider both modern and older methods.",
+        "hint_2": "Look for methods that allow variable insertion into strings."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "fill_blank_choice",
+      "title": "Complete the f-string.",
+      "prompt": "To include a variable in an f-string, use `{[blank1]}`.",
+      "template": "The variable is defined as `name = 'Zoe'`. The f-string is `f'My name is {[blank1]}'`.",
+      "choices": [
+        "name",
+        "age",
+        "print"
+      ],
+      "correctValue": "name"
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Complete the format method.",
+      "prompt": "The format method is called like this: `'Hello, my name is {}.'.format([blank1])`.",
+      "template": "If the variable is `name = 'Zoe'`, fill in the blank.",
+      "choices": [
+        "name",
+        "age",
+        "print"
+      ],
+      "correctValue": "name"
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Order the steps to create an f-string.",
+      "prompt": "Arrange the following steps in the correct order.",
+      "tokens": [
+        "Define your variables.",
+        "Use an f-string to format your output.",
+        "Print the f-string.",
+        "Write your f-string with curly braces."
+      ],
+      "correctOrder": [
+        0,
+        3,
+        1,
+        2
       ]
     },
     {
-      "id": "quiz-5",
-      "kind": "code_input",
-      "title": "Format with the format() Method",
-      "prompt": "Write a program that takes a user's name and age, and prints a formatted string using the format() method.",
-      "starterCode": "name = input('Enter your name: ')\nage = input('Enter your age: ')\n# Write your format method below\n",
-      "solutionCode": "name = input('Enter your name: ')\nage = input('Enter your age: ')\nprint('My name is {} and I am {} years old.'.format(name, age))",
-      "tests": [
-        {
-          "input": "Charlie\n22\n",
-          "output": "My name is Charlie and I am 22 years old."
-        },
-        {
-          "input": "Diana\n28\n",
-          "output": "My name is Diana and I am 28 years old."
-        }
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Order the steps to use the format method.",
+      "prompt": "Arrange the following steps in the correct order.",
+      "tokens": [
+        "Define your variables.",
+        "Write the format string with placeholders.",
+        "Call the format method on the string.",
+        "Print the formatted string."
+      ],
+      "correctOrder": [
+        0,
+        1,
+        2,
+        3
       ]
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Create a formatted greeting.",
+      "prompt": "Write a program that asks for a user's name and age, then prints a greeting using an f-string.",
+      "starterCode": "name = input('What is your name? ')\nage = input('How old are you? ')\n",
+      "solutionCode": "name = input('What is your name? ')\nage = input('How old are you? ')\nprint(f'Hello, my name is {name} and I am {age} years old.')"
+    },
+    {
+      "id": "quiz8",
+      "kind": "code_input",
+      "title": "Format a string using the format method.",
+      "prompt": "Write a program that asks for a user's favorite color and prints it using the format method.",
+      "starterCode": "color = input('What is your favorite color? ')\n",
+      "solutionCode": "color = input('What is your favorite color? ')\nprint('Your favorite color is {}.'.format(color))"
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Create a profile card.",
+      "prompt": "Build a simple profile card generator that asks for user details and prints a formatted result.",
+      "starterCode": "name = input('Enter your name: ')\nage = input('Enter your age: ')\ncolor = input('Enter your favorite color: ')\n",
+      "solutionCode": "name = input('Enter your name: ')\nage = input('Enter your age: ')\ncolor = input('Enter your favorite color: ')\nprint(f'Profile Card:\\nName: {name}\\nAge: {age}\\nFavorite Color: {color}')"
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Profile Card Generator",
+    "stepIds": [
+      "quiz7",
+      "quiz8",
+      "quiz9"
+    ]
+  }
 }

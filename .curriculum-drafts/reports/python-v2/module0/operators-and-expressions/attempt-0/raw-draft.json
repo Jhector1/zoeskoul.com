@@ -4,102 +4,176 @@
   "minutes": 22,
   "sketchBlocks": [
     {
-      "id": "1",
-      "title": "Understanding Operators",
-      "bodyMarkdown": "In Python, operators are special symbols that perform operations on variables and values. For example, the `+` operator adds two numbers together. Here's a simple example:\n\n```python\nresult = 5 + 3\nprint(result)  # This will output 8\n```\n\nTry it yourself! Change the numbers and see what happens."
+      "id": "sketch1",
+      "title": "Understanding Arithmetic Operators",
+      "bodyMarkdown": "Arithmetic operators are used to perform mathematical operations. The most common arithmetic operators are addition (+), subtraction (-), multiplication (*), and division (/). For example, if you want to add two numbers, you can write:\n\n```python\nresult = 5 + 3\nprint(result)  # This will output 8\n```\n\nTry it yourself: Change the numbers and see what the output is!"
     },
     {
-      "id": "2",
+      "id": "sketch2",
       "title": "Comparison Operators",
-      "bodyMarkdown": "Comparison operators compare two values and return a boolean result (True or False). For example, the `==` operator checks if two values are equal:\n\n```python\nis_equal = (5 == 5)\nprint(is_equal)  # This will output True\n```\n\nYour turn! Try comparing different values."
+      "bodyMarkdown": "Comparison operators compare two values and return a boolean result (True or False). The common comparison operators are equal (==), not equal (!=), greater than (>), and less than (<). For example:\n\n```python\nis_equal = (5 == 5)\nprint(is_equal)  # This will output True\n```\n\nYour turn: Try comparing different values!"
+    },
+    {
+      "id": "sketch3",
+      "title": "Boolean Operators",
+      "bodyMarkdown": "Boolean operators are used to combine conditional statements. The main boolean operators are AND, OR, and NOT. For example:\n\n```python\nis_true = (5 > 3) and (3 < 10)\nprint(is_true)  # This will output True\n```\n\nTry this: Change the conditions and see how the output changes!"
     }
   ],
   "quizDraft": [
     {
-      "id": "q1",
+      "id": "quiz1",
       "kind": "single_choice",
-      "title": "What does the `+` operator do?",
+      "title": "What does the expression 10 / 2 evaluate to?",
       "prompt": "Choose the correct answer.",
       "options": [
-        "Subtracts two numbers",
-        "Adds two numbers",
-        "Divides two numbers",
-        "Multiplies two numbers"
-      ],
-      "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Think about how you combine values.",
-      "help": {
-        "concept": "The `+` operator is used for addition in Python.",
-        "hint_1": "It's commonly used to add two numbers together.",
-        "hint_2": "Remember, it can also be used to concatenate strings."
-      }
-    },
-    {
-      "id": "q2",
-      "kind": "single_choice",
-      "title": "What will the expression `5 == 5` evaluate to?",
-      "prompt": "Choose the correct answer.",
-      "options": [
-        "True",
-        "False",
-        "None",
-        "Error"
+        "5",
+        "2",
+        "10",
+        "20"
       ],
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Consider what it means for two values to be equal.",
+      "hint": "Think about how division works.",
       "help": {
-        "concept": "The `==` operator checks for equality between two values.",
-        "hint_1": "If both values are the same, it returns True.",
-        "hint_2": "If they are different, it returns False."
+        "concept": "Division operator (/) divides the left operand by the right operand.",
+        "hint_1": "What is 10 divided by 2?",
+        "hint_2": "Remember that division gives you the quotient."
       }
     },
     {
-      "id": "q3",
-      "kind": "multi_choice",
-      "title": "Which of the following are comparison operators?",
-      "prompt": "Select all that apply.",
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Which operator checks if two values are equal?",
+      "prompt": "Select the correct operator.",
       "options": [
         "==",
         "!=",
         ">",
-        "+"
+        "<"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "This operator returns True if both values are the same.",
+      "help": {
+        "concept": "The equality operator checks if two values are equal.",
+        "hint_1": "It uses two equal signs.",
+        "hint_2": "Think about how you would ask if two things are the same."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Which of the following are boolean operators?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "AND",
+        "OR",
+        "NOT",
+        "EQUAL"
       ],
       "correctOptionIds": [
         "a",
         "b",
         "c"
       ],
-      "hint": "Look for operators that compare values.",
+      "hint": "These operators are used to combine conditions.",
       "help": {
-        "concept": "Comparison operators are used to compare two values.",
-        "hint_1": "They return a boolean result.",
-        "hint_2": "Think about operators that check for equality or inequality."
+        "concept": "Boolean operators are used to evaluate logical expressions.",
+        "hint_1": "Think about how you can combine true/false statements.",
+        "hint_2": "These operators help in decision-making in programming."
       }
     },
     {
-      "id": "q4",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the blank: The operator `>` checks if the left value is _____ than the right value.",
-      "template": "The operator `>` checks if the left value is _____ than the right value.",
-      "choices": [
-        "greater",
-        "less",
-        "equal",
-        "not equal"
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Which expressions will evaluate to True?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "5 > 3",
+        "3 < 2",
+        "10 == 10",
+        "4 != 4"
       ],
-      "correctValue": "greater"
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Evaluate each expression carefully.",
+      "help": {
+        "concept": "Comparison operators return boolean values based on the comparison.",
+        "hint_1": "What does each comparison mean?",
+        "hint_2": "Remember that '!=' means not equal."
+      }
     },
     {
-      "id": "q5",
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Order the arithmetic operations from highest to lowest precedence.",
+      "prompt": "Drag the operations to the correct order.",
+      "tokens": [
+        "Addition (+)",
+        "Multiplication (*)",
+        "Subtraction (-)",
+        "Division (/)"
+      ],
+      "correctOrder": [
+        "Multiplication (*)",
+        "Division (/)",
+        "Addition (+)",
+        "Subtraction (-)"
+      ]
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Order the comparison operators from least to most strict.",
+      "prompt": "Drag the operators to the correct order.",
+      "tokens": [
+        "Equal (==)",
+        "Not Equal (!=)",
+        "Greater Than (>)",
+        "Less Than (<)"
+      ],
+      "correctOrder": [
+        "Equal (==)",
+        "Not Equal (!=)",
+        "Greater Than (>)",
+        "Less Than (<)"
+      ]
+    },
+    {
+      "id": "quiz7",
       "kind": "code_input",
-      "title": "Write a program to check if a number is even or odd.",
-      "prompt": "Use the modulus operator `%` to determine if a number is even or odd.",
-      "starterCode": "number = 10\n# Check if the number is even or odd\n",
-      "solutionCode": "number = 10\nif number % 2 == 0:\n    print('Even')\nelse:\n    print('Odd')"
+      "title": "Calculate the area of a rectangle.",
+      "prompt": "Write a program that calculates the area of a rectangle with width 5 and height 10.",
+      "starterCode": "width = 5\nheight = 10\n# Calculate area here",
+      "solutionCode": "width = 5\nheight = 10\narea = width * height\nprint(area)  # This should output 50"
+    },
+    {
+      "id": "quiz8",
+      "kind": "code_input",
+      "title": "Check if a number is even or odd.",
+      "prompt": "Write a program that checks if a number is even or odd.",
+      "starterCode": "number = 4\n# Check if the number is even or odd here",
+      "solutionCode": "number = 4\nif number % 2 == 0:\n    print('Even')\nelse:\n    print('Odd')"
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Determine the maximum of two numbers.",
+      "prompt": "Write a program that finds the maximum of two numbers.",
+      "starterCode": "num1 = 10\nnum2 = 20\n# Find the maximum here",
+      "solutionCode": "num1 = 10\nnum2 = 20\nmax_num = num1 if num1 > num2 else num2\nprint(max_num)  # This should output 20"
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Personal Introduction Program",
+    "stepIds": [
+      "quiz7",
+      "quiz8",
+      "quiz9"
+    ]
+  }
 }

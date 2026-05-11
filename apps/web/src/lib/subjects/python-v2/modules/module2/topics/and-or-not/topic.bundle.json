@@ -25,29 +25,18 @@
       "height": 420
     },
     {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.python-v2.python-v2-2.and-or-not.cards.sketch2.title",
-      "sketchId": "sketch_3",
-      "height": 420
-    },
-    {
-      "id": "sketch3",
-      "kind": "sketch",
-      "titleKey": "topics.python-v2.python-v2-2.and-or-not.cards.sketch3.title",
-      "sketchId": "sketch_4",
-      "height": 420
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.python-v2.python-v2-2.and-or-not.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 2,
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -58,34 +47,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz_3",
-            "titleKey": "topics.python-v2.python-v2-2.and-or-not.projectSteps.quiz_3.title",
-            "exerciseKey": "quiz_3",
+            "id": "quiz_7",
+            "titleKey": "topics.python-v2.python-v2-2.and-or-not.projectSteps.quiz_7.title",
+            "exerciseKey": "quiz_7",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           },
           {
-            "id": "quiz_4",
-            "titleKey": "topics.python-v2.python-v2-2.and-or-not.projectSteps.quiz_4.title",
-            "exerciseKey": "quiz_4",
+            "id": "quiz_8",
+            "titleKey": "topics.python-v2.python-v2-2.and-or-not.projectSteps.quiz_8.title",
+            "exerciseKey": "quiz_8",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           },
           {
-            "id": "quiz_5",
-            "titleKey": "topics.python-v2.python-v2-2.and-or-not.projectSteps.quiz_5.title",
-            "exerciseKey": "quiz_5",
+            "id": "quiz_9",
+            "titleKey": "topics.python-v2.python-v2-2.and-or-not.projectSteps.quiz_9.title",
+            "exerciseKey": "quiz_9",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           }
         ]
       }
@@ -103,24 +92,12 @@
       "archetype": "paragraph",
       "titleKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_2.title",
       "bodyKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_2.bodyMarkdown"
-    },
-    {
-      "id": "sketch_3",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_3.title",
-      "bodyKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_3.bodyMarkdown"
-    },
-    {
-      "id": "sketch_4",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_4.title",
-      "bodyKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_4.bodyMarkdown"
     }
   ],
   "exercises": [
     {
       "id": "quiz_1",
-      "kind": "multi_choice",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_1",
@@ -131,97 +108,220 @@
         "d"
       ],
       "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "quiz_2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz_3",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c",
+          "b",
           "d"
         ]
       }
     },
     {
-      "id": "quiz_2",
-      "kind": "fill_blank_choice",
+      "id": "quiz_4",
+      "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_2",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "and"
-      }
-    },
-    {
-      "id": "quiz_3",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_3",
-      "language": "python",
-      "starterCode": "def is_between(num):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_between(num))",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "12\n",
-            "stdout": "True",
-            "match": "exact"
-          },
-          {
-            "stdin": "20\n",
-            "stdout": "True",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "def is_between(num):\n    return num >= 10 and num <= 20\n\n# Test the function\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_between(num))"
-      }
-    },
-    {
-      "id": "quiz_4",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_4",
-      "language": "python",
-      "starterCode": "def is_not_empty(s):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_not_empty(s))",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "12\n",
-            "stdout": "True",
-            "match": "exact"
-          },
-          {
-            "stdin": "20\n",
-            "stdout": "True",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "def is_not_empty(s):\n    return not s == ''\n\n# Test the function\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_not_empty(s))"
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
       "id": "quiz_5",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_5",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "x is less than or equal to 10"
+      }
+    },
+    {
+      "id": "quiz_6",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_6",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "False"
+      }
+    },
+    {
+      "id": "quiz_7",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_5",
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_7",
       "language": "python",
-      "starterCode": "def is_eligible(age, is_member):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nis_member = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(is_eligible(age, is_member))",
+      "starterCode": "def check_discount(is_member, amount_spent):\n    # Check eligibility\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nis_member = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\namount_spent = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(check_discount(is_member, amount_spent))",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "20\n",
-            "stdout": "False",
+            "stdin": "True, 50\n1\n",
+            "stdout": "True",
+            "match": "exact"
+          },
+          {
+            "stdin": "False, 150\n1\n",
+            "stdout": "True",
+            "match": "exact"
+          },
+          {
+            "stdin": "False, 50\n1\n",
+            "stdout": "True",
             "match": "exact"
           }
         ],
-        "solutionCode": "def is_eligible(age, is_member):\n    return (age < 18 or age > 65) and is_member\n\n# Test the function\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nis_member = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(is_eligible(age, is_member))"
+        "solutionCode": "def check_discount(is_member, amount_spent):\n    if is_member or amount_spent > 100:\n        return True\n    return False\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nis_member = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\namount_spent = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(check_discount(is_member, amount_spent))"
+      }
+    },
+    {
+      "id": "quiz_8",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_8",
+      "language": "python",
+      "starterCode": "def is_in_range(number):\n    # Check if number is in range\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_in_range(number))",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "15",
+            "stdout": "True",
+            "match": "exact"
+          },
+          {
+            "stdin": "9",
+            "stdout": "False",
+            "match": "exact"
+          },
+          {
+            "stdin": "20",
+            "stdout": "True",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def is_in_range(number):\n    if number >= 10 and number <= 20:\n        return True\n    return False\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_in_range(number))"
+      }
+    },
+    {
+      "id": "quiz_9",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_9",
+      "language": "python",
+      "starterCode": "def negate(value):\n    # Negate the value\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(negate(value))",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "True",
+            "stdout": "False",
+            "match": "exact"
+          },
+          {
+            "stdin": "False",
+            "stdout": "True",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def negate(value):\n    return not value\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(negate(value))"
+      }
+    },
+    {
+      "id": "policy_multi_choice_1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.policy_multi_choice_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "policy_drag_reorder_1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.policy_drag_reorder_1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     }
   ]

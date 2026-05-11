@@ -5,22 +5,64 @@
       "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
       "category": "text",
       "severity": "medium",
-      "field": "sketchBlocks.1.bodyMarkdown",
+      "field": "sketchBlocks.sketch1.bodyMarkdown",
       "message": "Added a short line-by-line explanation after a multi-line code example."
     },
     {
       "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
       "category": "text",
       "severity": "medium",
-      "field": "sketchBlocks.2.bodyMarkdown",
+      "field": "sketchBlocks.sketch2.bodyMarkdown",
       "message": "Added a short line-by-line explanation after a multi-line code example."
     },
     {
-      "code": "PYTHON_TESTS_DERIVED_FROM_SOLUTION",
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch3.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_HARDCODED_INPUT_VARIABLE_REPAIRED",
       "category": "recipe",
       "severity": "high",
-      "field": "q5",
-      "message": "Derived stdin/stdout tests by running a no-input Python solution that already prints output."
+      "field": "quiz8",
+      "message": "Replaced a hardcoded beginner variable assignment with int(input()) so stdin/stdout tests validate the intended behavior."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz7",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz8",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz9",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_fill_blank_choice_1",
+      "message": "Added a fallback fill_blank_choice exercise to satisfy the planned exercise mix for \"operators-and-expressions\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_fill_blank_choice_2",
+      "message": "Added a fallback fill_blank_choice exercise to satisfy the planned exercise mix for \"operators-and-expressions\"."
     }
   ]
 }

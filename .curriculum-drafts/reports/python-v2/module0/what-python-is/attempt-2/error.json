@@ -1,0 +1,12 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Starter code reveals solution at python-v2-0/python-v2-0-setup-and-first-programs/what-python-is\n\n- q10: starterCode is identical to solutionCode after removing comments and whitespace.\n\nRegenerate this topic. Starter code should scaffold the task, not contain the completed solution.",
+  "stack": "RetryableTopicValidationError: Starter code reveals solution at python-v2-0/python-v2-0-setup-and-first-programs/what-python-is\n\n- q10: starterCode is identical to solutionCode after removing comments and whitespace.\n\nRegenerate this topic. Starter code should scaffold the task, not contain the completed solution.\n    at validateStarterCodeDoesNotRevealSolution (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/validate/validateStarterCodeDoesNotRevealSolution.js:27:15)\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:279:17)\n    at async runCompileSubject (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-subject.js:24:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:27:13)",
+  "code": "STARTER_CODE_REVEALS_SOLUTION",
+  "retryable": true,
+  "details": {
+    "failures": [
+      "q10: starterCode is identical to solutionCode after removing comments and whitespace."
+    ]
+  }
+}

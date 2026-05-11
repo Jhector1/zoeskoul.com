@@ -21,7 +21,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-3.loop-debugging.cards.sketch1.title",
-      "sketchId": "common-errors",
+      "sketchId": "common-loop-errors",
       "height": 420
     },
     {
@@ -30,10 +30,13 @@
       "titleKey": "topics.python-v2.python-v2-3.loop-debugging.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 3,
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -44,25 +47,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "loop_debugging_quiz_1",
-            "titleKey": "topics.python-v2.python-v2-3.loop-debugging.projectSteps.loop_debugging_quiz_1.title",
-            "exerciseKey": "loop-debugging-quiz-1",
+            "id": "loop_debugging_practice",
+            "titleKey": "topics.python-v2.python-v2-3.loop-debugging.projectSteps.loop_debugging_practice.title",
+            "exerciseKey": "loop-debugging-practice",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           },
           {
-            "id": "loop_debugging_quiz_5",
-            "titleKey": "topics.python-v2.python-v2-3.loop-debugging.projectSteps.loop_debugging_quiz_5.title",
-            "exerciseKey": "loop-debugging-quiz-5",
+            "id": "loop_sum_calculation",
+            "titleKey": "topics.python-v2.python-v2-3.loop-debugging.projectSteps.loop_sum_calculation.title",
+            "exerciseKey": "loop-sum-calculation",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
+          },
+          {
+            "id": "loop_conditional_practice",
+            "titleKey": "topics.python-v2.python-v2-3.loop-debugging.projectSteps.loop_conditional_practice.title",
+            "exerciseKey": "loop-conditional-practice",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
           }
         ]
       }
@@ -76,52 +88,19 @@
       "bodyKey": "sketches.python-v2.python-v2-3.loop-debugging.loop-debugging-intro.bodyMarkdown"
     },
     {
-      "id": "common-errors",
+      "id": "common-loop-errors",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-3.loop-debugging.common-errors.title",
-      "bodyKey": "sketches.python-v2.python-v2-3.loop-debugging.common-errors.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-3.loop-debugging.common-loop-errors.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.loop-debugging.common-loop-errors.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "loop-debugging-quiz-1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debugging-quiz-1",
-      "language": "python",
-      "starterCode": "count = 0\nwhile count < 10:\n    print(count)\n    # Fix the code here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "count = 0\nwhile count < 10:\n    print(count)\n    count += 1"
-      }
-    },
-    {
-      "id": "loop-debugging-quiz-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debugging-quiz-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "6"
-      }
-    },
-    {
-      "id": "loop-debugging-quiz-3",
+      "id": "loop-error-identification",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debugging-quiz-3",
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-error-identification",
       "optionIds": [
         "a",
         "b",
@@ -134,11 +113,74 @@
       }
     },
     {
-      "id": "loop-debugging-quiz-4",
+      "id": "loop-output-prediction",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-output-prediction",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "loop-reorder",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-reorder",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "loop-blank-increment",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-blank-increment",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "+="
+      }
+    },
+    {
+      "id": "loop-blank-condition",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-blank-condition",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "<"
+      }
+    },
+    {
+      "id": "loop-usage-scenarios",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debugging-quiz-4",
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-usage-scenarios",
       "optionIds": [
         "a",
         "b",
@@ -149,29 +191,127 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
+          "b",
           "c"
         ]
       }
     },
     {
-      "id": "loop-debugging-quiz-5",
+      "id": "loop-structure-identification",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-structure-identification",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "loop-debugging-practice",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debugging-quiz-5",
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debugging-practice",
       "language": "python",
-      "starterCode": "count = 5\nwhile count > 0:\n    # Write your code here",
+      "starterCode": "count = 0\nwhile count < 5:\n    print(count)\n    count += 2",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "5\n4\n3\n2\n1\n",
+            "stdin": "12\n",
+            "stdout": "0\n1\n2\n3\n4",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "0\n1\n2\n3\n4",
             "match": "exact"
           }
         ],
-        "solutionCode": "count = 5\nwhile count > 0:\n    print(count)\n    count -= 1"
+        "solutionCode": "count = 0\nwhile count < 5:\n    print(count)\n    count += 1"
+      }
+    },
+    {
+      "id": "loop-sum-calculation",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-sum-calculation",
+      "language": "python",
+      "starterCode": "total = 0\nfor i in range(1, 11):\n    # Add your code here\nprint(total)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "55",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "55",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "total = 0\nfor i in range(1, 11):\n    total += i\nprint(total)"
+      }
+    },
+    {
+      "id": "loop-conditional-practice",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-conditional-practice",
+      "language": "python",
+      "starterCode": "count = 0\nwhile count <= 10:\n    # Add your code here\n    count += 1",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "1\n3\n5\n7\n9",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "1\n3\n5\n7\n9",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "count = 0\nwhile count <= 10:\n    if count % 2 != 0:\n        print(count)\n    count += 1"
+      }
+    },
+    {
+      "id": "policy_drag_reorder_1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.policy_drag_reorder_1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     }
   ]

@@ -30,10 +30,13 @@
       "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 2,
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -44,34 +47,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "3",
-            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.3.title",
-            "exerciseKey": "3",
+            "id": "q9",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.q9.title",
+            "exerciseKey": "q9",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           },
           {
-            "id": "4",
-            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.4.title",
-            "exerciseKey": "4",
+            "id": "q10",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.q10.title",
+            "exerciseKey": "q10",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           },
           {
-            "id": "5",
-            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.5.title",
-            "exerciseKey": "5",
+            "id": "q11",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.q11.title",
+            "exerciseKey": "q11",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           }
         ]
       }
@@ -93,11 +96,45 @@
   ],
   "exercises": [
     {
-      "id": "1",
+      "id": "q1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "q3",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.1",
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q3",
       "optionIds": [
         "a",
         "b",
@@ -107,56 +144,134 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "b"
+          "a",
+          "c"
         ]
       }
     },
     {
-      "id": "2",
+      "id": "q4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "q5",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.2",
-      "choiceCount": 4,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q5",
+      "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "else"
+        "value": "true"
       }
     },
     {
-      "id": "3",
+      "id": "q6",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q6",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "false"
+      }
+    },
+    {
+      "id": "q7",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q7",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "q8",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q8",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "q9",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.3",
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q9",
       "language": "python",
-      "starterCode": "score = int(input())\n# Your code here",
+      "starterCode": "grade = 75\n# Your code here",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "12\n",
-            "stdout": "You failed.",
+            "stdout": "You passed!",
             "match": "exact"
           },
           {
             "stdin": "20\n",
-            "stdout": "You failed.",
+            "stdout": "You passed!",
             "match": "exact"
           }
         ],
-        "solutionCode": "score = int(input())\nif score >= 50:\n    print('You passed!')\nelse:\n    print('You failed.')"
+        "solutionCode": "grade = 75\nif grade >= 60:\n    print('You passed!')\nelse:\n    print('You failed!')"
       }
     },
     {
-      "id": "4",
+      "id": "q10",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.4",
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q10",
       "language": "python",
-      "starterCode": "age = 17\n# Your code here",
+      "starterCode": "age = int(input())\n# Your code here",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -168,21 +283,21 @@
           },
           {
             "stdin": "20\n",
-            "stdout": "You are not eligible to vote.",
+            "stdout": "You are eligible to vote.",
             "match": "exact"
           }
         ],
-        "solutionCode": "age = 17\nif age >= 18:\n    print('You are eligible to vote.')\nelse:\n    print('You are not eligible to vote.')"
+        "solutionCode": "age = int(input())\nif age >= 18:\n    print('You are eligible to vote.')\nelse:\n    print('You are not eligible to vote.')"
       }
     },
     {
-      "id": "5",
+      "id": "q11",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.5",
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q11",
       "language": "python",
-      "starterCode": "temperature = 25\n# Your code here",
+      "starterCode": "temperature = 30\n# Your code here",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -198,7 +313,7 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "temperature = 25\nif temperature > 30:\n    print('It is hot.')\nelif temperature >= 20:\n    print('It is warm.')\nelse:\n    print('It is cold.')"
+        "solutionCode": "temperature = 30\nif temperature > 30:\n    print('It is hot.')\nelif temperature > 20:\n    print('It is warm.')\nelse:\n    print('It is cold.')"
       }
     }
   ]

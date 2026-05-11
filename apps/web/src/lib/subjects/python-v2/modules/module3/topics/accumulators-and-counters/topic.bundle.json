@@ -30,10 +30,13 @@
       "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 3,
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -44,25 +47,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz1",
-            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.quiz1.title",
-            "exerciseKey": "quiz1",
+            "id": "code1",
+            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.code1.title",
+            "exerciseKey": "code1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           },
           {
-            "id": "quiz5",
-            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.quiz5.title",
-            "exerciseKey": "quiz5",
+            "id": "code2",
+            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.code2.title",
+            "exerciseKey": "code2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
+          },
+          {
+            "id": "code3",
+            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.code3.title",
+            "exerciseKey": "code3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
           }
         ]
       }
@@ -85,40 +97,41 @@
   "exercises": [
     {
       "id": "quiz1",
-      "kind": "code_input",
-      "purpose": "project",
+      "kind": "single_choice",
+      "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz1",
-      "language": "python",
-      "starterCode": "total = 0\n\n# Your code here\n\nprint(total)",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "5050",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "total = 0\nfor number in range(1, 101):\n    total += number\nprint(total)"
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
       }
     },
     {
       "id": "quiz2",
-      "kind": "fill_blank_choice",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz2",
-      "choiceCount": 3,
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "count"
+        "kind": "single_choice",
+        "optionId": "b"
       }
     },
     {
       "id": "quiz3",
-      "kind": "single_choice",
+      "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz3",
@@ -129,8 +142,12 @@
         "d"
       ],
       "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
       }
     },
     {
@@ -149,30 +166,135 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c",
-          "d"
+          "c"
         ]
       }
     },
     {
       "id": "quiz5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz6",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "code1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz5",
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.code1",
       "language": "python",
-      "starterCode": "count = 0\ntext = 'experience'\n\n# Your code here\n\nprint(count)",
+      "starterCode": "sum = 0\nfor number in range(1, 101):\n    # Add your code here\nprint(sum)",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "",
-            "stdout": "4",
+            "stdout": "5050\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "count = 0\ntext = 'experience'\nfor char in text:\n    if char == 'e':\n        count += 1\nprint(count)"
+        "solutionCode": "sum = 0\nfor number in range(1, 101):\n    sum += number\nprint(sum)"
+      }
+    },
+    {
+      "id": "code2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.code2",
+      "language": "python",
+      "starterCode": "text = 'banana'\ncount = 0\nfor char in text:\n    # Add your code here\nprint(count)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "3\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = 'banana'\ncount = 0\nfor char in text:\n    if char == 'a':\n        count += 1\nprint(count)"
+      }
+    },
+    {
+      "id": "code3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.code3",
+      "language": "python",
+      "starterCode": "total = 0\ncount = 0\nfor number in range(1, 11):\n    # Add your code here\naverage = total / count\nprint(average)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "5.5\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "total = 0\ncount = 0\nfor number in range(1, 11):\n    total += number\n    count += 1\naverage = total / count\nprint(average)"
+      }
+    },
+    {
+      "id": "policy_fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.policy_fill_blank_choice_1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "if"
+      }
+    },
+    {
+      "id": "policy_fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.policy_fill_blank_choice_2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "if"
       }
     }
   ]

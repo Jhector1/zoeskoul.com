@@ -28,6 +28,7 @@ export default function CatalogSubjectGridClient({
     }
 
     async function pickSubject(subject: SubjectCard) {
+        if (!subject.subjectId) return;
         if (subject.status !== "active") return;
         if (!subject.defaultModuleSlug) return;
         if (enrollingSlug) return;

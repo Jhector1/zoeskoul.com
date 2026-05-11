@@ -16,88 +16,182 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Practice"
+              "title": "Mini Number Game"
             }
           },
           "projectSteps": {
-            "loop_debugging_quiz_1": {
-              "title": "Fix the Infinite Loop"
+            "loop_debugging_practice": {
+              "title": "Debugging a Loop"
             },
-            "loop_debugging_quiz_5": {
-              "title": "Count Down with a While Loop"
+            "loop_sum_calculation": {
+              "title": "Calculating the Sum with a Loop"
+            },
+            "loop_conditional_practice": {
+              "title": "Using Conditional Statements in Loops"
             }
           },
           "quiz": {
-            "loop-debugging-quiz-1": {
-              "title": "Fix the Infinite Loop",
-              "prompt": "The following code has an infinite loop. Identify and fix the issue.\n\n```python\ncount = 0\nwhile count < 10:\n    print(count)\n    # Fix the code here\n```",
-              "hint": "Break the task into the main code steps first.",
-              "help": {
-                "concept": "This task checks whether you can apply fix the infinite loop in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-              },
-              "starterCode": "count = 0\nwhile count < 10:\n    print(count)\n    # Fix the code here"
-            },
-            "loop-debugging-quiz-2": {
-              "title": "Complete the Loop",
-              "prompt": "Fill in the blank to complete the loop that prints numbers from 1 to 5:\n\n```python\nfor i in range(the missing choice):\n    print(i)\n```",
-              "hint": "Focus on the missing concept or keyword.",
-              "help": {
-                "concept": "This task checks the key idea behind complete the loop.",
-                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-              },
-              "template": "for i in range([blank1]):\n    print(i)",
-              "choices": [
-                "5",
-                "6",
-                "1",
-                "0"
-              ]
-            },
-            "loop-debugging-quiz-3": {
-              "title": "Identify the Error",
-              "prompt": "What is the main issue with the following loop?\n\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n```",
-              "hint": "Think about how the loop variable is updated.",
-              "help": {
-                "concept": "The loop variable 'count' is not being updated, leading to an infinite loop.",
-                "hint_1": "Check if 'count' is being incremented inside the loop.",
-                "hint_2": "Make sure to update 'count' to avoid the infinite loop."
-              },
-              "options": {
-                "a": "The loop will run indefinitely.",
-                "b": "The loop will print numbers from 0 to 4.",
-                "c": "The loop will never run.",
-                "d": "The loop will print numbers from 1 to 5."
-              }
-            },
-            "loop-debugging-quiz-4": {
-              "title": "Choose All Correct Statements",
-              "prompt": "Which of the following statements about loops are true? (Select all that apply)",
-              "hint": "Think about the main idea behind choose all correct statements.",
-              "help": {
-                "concept": "Focus on the core concept behind choose all correct statements.",
-                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
-                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
-              },
-              "options": {
-                "a": "A while loop can run indefinitely.",
-                "b": "A for loop must always have a range.",
-                "c": "You can use break to exit a loop.",
-                "d": "Loops cannot be nested."
-              }
-            },
-            "loop-debugging-quiz-5": {
-              "title": "Count Down with a While Loop",
-              "prompt": "Write a while loop that counts down from 5 to 1 and prints each number.",
+            "loop-error-identification": {
+              "title": "Identifying Loop Errors",
+              "prompt": "What type of error is present in the following code?\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count -= 1\n```",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "count = 5\nwhile count > 0:\n    # Write your code here"
+              "options": {
+                "a": "Infinite loop",
+                "b": "Off-by-one error",
+                "c": "Syntax error",
+                "d": "Logic error"
+              }
+            },
+            "loop-output-prediction": {
+              "title": "Predicting Loop Output",
+              "prompt": "What will be the output of the following code?\n```python\nfor i in range(3):\n    print(i)\n```",
+              "hint": "Think about how the `range` function works.",
+              "help": {
+                "concept": "The `range(n)` function generates numbers from 0 to n-1.",
+                "hint_1": "Count the numbers generated by `range(3)`.",
+                "hint_2": "Remember that the last number is not included in the output."
+              },
+              "options": {
+                "a": "0\n1\n2\n3",
+                "b": "0\n1\n2",
+                "c": "1\n2\n3",
+                "d": "0\n1\n2\n3\n4"
+              }
+            },
+            "loop-reorder": {
+              "title": "Reordering Loop Steps",
+              "prompt": "Arrange the steps to correctly implement a while loop that counts from 0 to 4.",
+              "hint": "Think about the logical order of the steps.",
+              "help": {
+                "concept": "This task is about understanding the sequence behind reordering loop steps.",
+                "hint_1": "Find the step that must happen first before the others make sense.",
+                "hint_2": "Check which action depends on a previous step already being completed."
+              },
+              "tokens": {
+                "t1": "Initialize count to 0",
+                "t2": "Check if count is less than 5",
+                "t3": "Print count",
+                "t4": "Increment count by 1"
+              }
+            },
+            "loop-blank-increment": {
+              "title": "Completing the Loop Increment",
+              "prompt": "Fill in the blank to correctly increment the count in the loop:\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count the missing choice 1\n```",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind completing the loop increment.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "Fill in the blank to correctly increment the count in the loop:\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count the missing choice 1\n```\n\nAnswer: [blank1]",
+              "choices": [
+                "+=",
+                "-=",
+                "*=",
+                "/="
+              ]
+            },
+            "loop-blank-condition": {
+              "title": "Completing the Loop Condition",
+              "prompt": "Fill in the blank to set the correct loop condition:\n```python\ncount = 0\nwhile count the missing choice 5:\n    print(count)\n    count += 1\n```",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind completing the loop condition.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "Fill in the blank to set the correct loop condition:\n```python\ncount = 0\nwhile count the missing choice 5:\n    print(count)\n    count += 1\n```\n\nAnswer: [blank1]",
+              "choices": [
+                "<",
+                ">",
+                "==",
+                "<="
+              ]
+            },
+            "loop-usage-scenarios": {
+              "title": "Identifying Loop Usage Scenarios",
+              "prompt": "Which of the following are valid scenarios for using loops? (Select all that apply)",
+              "hint": "Think about tasks that require repetition or iteration.",
+              "help": {
+                "concept": "Loops are used to perform actions repeatedly based on conditions.",
+                "hint_1": "Consider tasks that involve multiple items or repeated actions.",
+                "hint_2": "Displaying a message once does not require a loop."
+              },
+              "options": {
+                "a": "Iterating over a list of items",
+                "b": "Repeating a task until a condition is met",
+                "c": "Calculating the sum of numbers",
+                "d": "Displaying a message once"
+              }
+            },
+            "loop-structure-identification": {
+              "title": "Identifying Loop Structures",
+              "prompt": "Which of the following are types of loops in Python? (Select all that apply)",
+              "hint": "Think about the loop structures available in Python.",
+              "help": {
+                "concept": "Python has specific loop structures for iteration.",
+                "hint_1": "Consider the common loops used in Python programming.",
+                "hint_2": "One of the options is not a standard loop in Python."
+              },
+              "options": {
+                "a": "for loop",
+                "b": "while loop",
+                "c": "do-while loop",
+                "d": "foreach loop"
+              }
+            },
+            "loop-debugging-practice": {
+              "title": "Debugging a Loop",
+              "prompt": "Fix the following code to ensure it counts from 0 to 4 without skipping numbers:\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count += 2\n```",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply debugging a loop in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "count = 0\nwhile count < 5:\n    print(count)\n    count += 2"
+            },
+            "loop-sum-calculation": {
+              "title": "Calculating the Sum with a Loop",
+              "prompt": "Write a loop that calculates the sum of numbers from 1 to 10 and prints the result.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply calculating the sum with a loop in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "total = 0\nfor i in range(1, 11):\n    # Add your code here\nprint(total)"
+            },
+            "loop-conditional-practice": {
+              "title": "Using Conditional Statements in Loops",
+              "prompt": "Write a while loop that prints numbers from 0 to 10, but skips even numbers.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply using conditional statements in loops in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "count = 0\nwhile count <= 10:\n    # Add your code here\n    count += 1"
+            },
+            "policy_drag_reorder_1": {
+              "title": "Order the run-and-check workflow",
+              "prompt": "Put the steps in order for practicing \"Loop Debugging\".",
+              "hint": "You need code before you can run it.",
+              "help": {
+                "concept": "A basic Python workflow is write code, run it, then inspect the result.",
+                "hint_1": "The output appears after running.",
+                "hint_2": "Errors are also useful feedback."
+              },
+              "tokens": {
+                "t1": "Write a small piece of Python code",
+                "t2": "Run the code",
+                "t3": "Read the output or error message"
+              }
             }
           }
         }
@@ -110,11 +204,11 @@
         "loop-debugging": {
           "loop-debugging-intro": {
             "title": "Understanding Loop Debugging",
-            "bodyMarkdown": "When working with loops, it's essential to understand how the loop variable changes with each iteration. For example, consider the following code:\n\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count += 1\n```\n\nIn this example, the loop will print the values from 0 to 4. If we forget to increment `count`, the loop will run indefinitely. \n\n**Your turn:** Modify the code to print numbers from 1 to 5.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "Loop debugging involves tracing the values of variables within loops to identify issues such as infinite loops or skipped iterations. For example, consider the following code:\n\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count += 1\n```\nIn this example, the loop will print numbers from 0 to 4. If we mistakenly set `count += 2`, the loop will skip some numbers. \n\n**Your turn:** Modify the code to see how changing the increment affects the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           },
-          "common-errors": {
+          "common-loop-errors": {
             "title": "Common Loop Errors",
-            "bodyMarkdown": "One common error in loops is the off-by-one error. This occurs when the loop iterates one time too many or too few. For example:\n\n```python\nfor i in range(5):\n    print(i)\n```\n\nThis will print 0 to 4, but if you wanted to print 1 to 5, you would need to adjust the range. \n\n**Try this:** Change the range to print numbers from 1 to 5.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "Common errors in loops include off-by-one errors and infinite loops. An off-by-one error occurs when the loop runs one time too many or too few. For instance:\n\n```python\nfor i in range(5):\n    print(i)\n```\nThis will print numbers 0 to 4. If you mistakenly use `range(6)`, it will print 0 to 5, which may not be the intended behavior. \n\n**Try this:** Change the range and observe the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

@@ -18,9 +18,12 @@ export function makeQuizSpec(args: any) {
     topic: args.topic,
     difficulty: args.difficulty ?? "easy",
     n: args.n ?? 3,
+    min: args.min,
+    max: args.max,
+    selectionMode: args.selectionMode ?? "fixed",
     allowReveal: args.allowReveal ?? true,
     preferKind: args.preferKind ?? null,
-    maxAttempts: args.maxAttempts ?? 10,
+    maxAttempts: args.maxAttempts,
     runtime: args.runtime ?? null,
   };
 }
@@ -59,7 +62,7 @@ export function makeProjectSpec(args: any) {
     difficulty: args.difficulty ?? "easy",
     preferKind: args.preferKind ?? null,
     allowReveal: args.allowReveal ?? true,
-    maxAttempts: args.maxAttempts ?? 10,
+    maxAttempts: args.maxAttempts,
     steps: args.steps,
     runtime: args.runtime ?? null,
   };

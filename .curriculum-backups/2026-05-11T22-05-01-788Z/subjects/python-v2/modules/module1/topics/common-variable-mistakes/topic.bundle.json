@@ -1,0 +1,191 @@
+{
+  "topicId": "common-variable-mistakes",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-1",
+  "sectionSlug": "python-v2-1-variables-and-assignment",
+  "prefix": "pyv2_1",
+  "minutes": 18,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-1.common-variable-mistakes.label",
+    "summaryKey": "topics.python-v2.python-v2-1.common-variable-mistakes.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-1.common-variable-mistakes.cards.sketch0.title",
+      "sketchId": "1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-1.common-variable-mistakes.cards.sketch1.title",
+      "sketchId": "2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-1.common-variable-mistakes.cards.sketch2.title",
+      "sketchId": "3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-1.common-variable-mistakes.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-1.common-variable-mistakes.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1",
+            "titleKey": "topics.python-v2.python-v2-1.common-variable-mistakes.projectSteps.q1.title",
+            "exerciseKey": "q1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q5",
+            "titleKey": "topics.python-v2.python-v2-1.common-variable-mistakes.projectSteps.q5.title",
+            "exerciseKey": "q5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-1.common-variable-mistakes.1.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.common-variable-mistakes.1.bodyMarkdown"
+    },
+    {
+      "id": "2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-1.common-variable-mistakes.2.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.common-variable-mistakes.2.bodyMarkdown"
+    },
+    {
+      "id": "3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-1.common-variable-mistakes.3.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.common-variable-mistakes.3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.q1",
+      "language": "python",
+      "starterCode": "#This is a variable\nanimal = ''\nprint(animal)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "dog\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "animal = 'dog'\nprint(animal)"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.q2",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'banana'"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.q3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.q4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.q5",
+      "language": "python",
+      "starterCode": "print(favorite color)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "red\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "favorite_color = 'red'\nprint(favorite_color)"
+      }
+    }
+  ]
+}

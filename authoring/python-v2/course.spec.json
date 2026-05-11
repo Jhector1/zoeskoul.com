@@ -63,9 +63,18 @@
       "minimums": {
         "technicalTopicCodeInputMin": 1,
         "topicExerciseMin": 4
+      },
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 8,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 3,
+        "projectCodeInputTarget": 3,
+        "projectCodeInputMax": 5,
+        "maxAttempts": null
       }
-    },
-    "projectPolicy": {
+    },    "projectPolicy": {
       "minProjectsBeforeCapstone": 2,
       "capstoneRequired": true
     },

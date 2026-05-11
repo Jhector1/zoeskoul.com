@@ -10,24 +10,30 @@
               "title": "Introduction to Python's Uses"
             },
             "sketch1": {
-              "title": "Python in Web Development"
+              "title": "Python in Data Science"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Practice"
+              "title": "Personal Introduction Program"
             }
           },
           "projectSteps": {
-            "q5": {
+            "quiz9": {
               "title": "Create a simple Python program that prints your name."
+            },
+            "quiz10": {
+              "title": "Write a program to calculate the sum of two numbers."
+            },
+            "quiz11": {
+              "title": "Write a program that checks if a number is even or odd."
             }
           },
           "quiz": {
-            "q1": {
-              "title": "What is one common use of Python?",
-              "prompt": "Select one of the following options.",
+            "quiz1": {
+              "title": "What is Python commonly used for?",
+              "prompt": "Select the correct answer.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -35,30 +41,30 @@
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "Building mobile applications",
-                "b": "Web development",
-                "c": "Creating video games",
-                "d": "Designing graphics"
+                "a": "Web development",
+                "b": "Cooking recipes",
+                "c": "Gardening",
+                "d": "Painting"
               }
             },
-            "q2": {
-              "title": "Which framework is commonly used for web development in Python?",
-              "prompt": "Choose the correct framework.",
-              "hint": "Think about the frameworks that help build web applications using Python.",
+            "quiz2": {
+              "title": "Which library is used for data visualization in Python?",
+              "prompt": "Choose the correct library.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Flask and Django are both popular frameworks for web development in Python.",
-                "hint_1": "One is lightweight and easy to get started with, while the other is more feature-rich.",
-                "hint_2": "Both frameworks are widely recognized in the Python community."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "Flask",
-                "b": "Unity",
-                "c": "Django",
-                "d": "Both Flask and Django"
+                "a": "NumPy",
+                "b": "Matplotlib",
+                "c": "Requests",
+                "d": "Beautiful Soup"
               }
             },
-            "q3": {
-              "title": "Select all the areas where Python is commonly used.",
+            "quiz3": {
+              "title": "Select all fields where Python is used.",
               "prompt": "Choose all correct answers.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
@@ -67,32 +73,95 @@
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "Data analysis",
-                "b": "Web development",
+                "a": "Web development",
+                "b": "Data analysis",
                 "c": "Game development",
-                "d": "Machine learning"
+                "d": "Cooking"
               }
             },
-            "q4": {
-              "title": "Python is widely used for __________.",
-              "prompt": "Fill in the blank with the correct term.",
-              "hint": "Focus on the missing concept or keyword.",
+            "quiz4": {
+              "title": "Which of the following are Python libraries?",
+              "prompt": "Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This task checks the key idea behind python is widely used for __________..",
-                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "template": "Python is widely used for __________.",
+              "options": {
+                "a": "Pandas",
+                "b": "Flask",
+                "c": "Photoshop",
+                "d": "Django"
+              }
+            },
+            "quiz5": {
+              "title": "Order the steps to create a simple Python program.",
+              "prompt": "Arrange the steps in the correct order.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Write the code",
+                "t2": "Run the program",
+                "t3": "Check the output",
+                "t4": "Save the file"
+              }
+            },
+            "quiz6": {
+              "title": "Arrange the Python data types from simplest to most complex.",
+              "prompt": "Put the data types in order.",
+              "hint": "Consider how data types are structured.",
+              "help": {
+                "concept": "Data types vary in complexity from simple to complex.",
+                "hint_1": "Think about how each type can hold data.",
+                "hint_2": "Start with the most basic type."
+              },
+              "tokens": {
+                "t1": "Integer",
+                "t2": "List",
+                "t3": "String",
+                "t4": "Dictionary"
+              }
+            },
+            "quiz7": {
+              "title": "Fill in the blank: Python is often used for ______.",
+              "prompt": "Choose the correct word.",
+              "hint": "Think about the fields where Python excels.",
+              "help": {
+                "concept": "Python is a powerful tool for analyzing data.",
+                "hint_1": "Consider tasks that involve numbers and statistics.",
+                "hint_2": "This field is crucial in business and research."
+              },
+              "template": "Python is often used for [blank1].",
               "choices": [
-                "automation",
+                "data analysis",
                 "cooking",
-                "painting",
                 "gardening"
               ]
             },
-            "q5": {
+            "quiz8": {
+              "title": "Fill in the blank: A popular web framework in Python is ______.",
+              "prompt": "Choose the correct word.",
+              "hint": "Think about frameworks used for building websites.",
+              "help": {
+                "concept": "the missing term is a lightweight framework for web development in Python.",
+                "hint_1": "This framework is known for its simplicity.",
+                "hint_2": "It is often used for small to medium web applications."
+              },
+              "template": "A popular web framework in Python is [blank1].",
+              "choices": [
+                "Flask",
+                "Photoshop",
+                "Excel"
+              ]
+            },
+            "quiz9": {
               "title": "Create a simple Python program that prints your name.",
-              "prompt": "Write Python code to print your name.",
+              "prompt": "Write a program that outputs your name.",
               "hint": "Break the task into the main code steps first.",
               "help": {
                 "concept": "This task checks whether you can apply create a simple python program that prints your name. in a working solution.",
@@ -100,6 +169,28 @@
                 "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
               },
               "starterCode": "print('Your Name')"
+            },
+            "quiz10": {
+              "title": "Write a program to calculate the sum of two numbers.",
+              "prompt": "Create a program that takes two numbers and prints their sum.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply write a program to calculate the sum of two numbers. in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "# Write your code below"
+            },
+            "quiz11": {
+              "title": "Write a program that checks if a number is even or odd.",
+              "prompt": "Create a program that checks if a number is even or odd.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "# Write your code below"
             }
           }
         }
@@ -110,13 +201,13 @@
     "python-v2": {
       "python-v2-0": {
         "what-python-is": {
-          "1": {
+          "sketch1": {
             "title": "Introduction to Python's Uses",
-            "bodyMarkdown": "Python is a versatile programming language used in various fields. It is popular for automation, web development, data analysis, and artificial intelligence. For example, you can use Python to automate repetitive tasks like renaming files or scraping data from websites. **Try it yourself:** Think of a task you do repeatedly that could be automated with Python."
+            "bodyMarkdown": "Python is a versatile programming language used in various fields. It is popular for automation, web development, data analysis, and artificial intelligence. For example, you can use Python to automate repetitive tasks like file management or data entry. **Try it yourself:** Think of a task in your daily life that could be automated using Python."
           },
-          "2": {
-            "title": "Python in Web Development",
-            "bodyMarkdown": "Python is widely used in web development with frameworks like Django and Flask. These frameworks help developers build robust web applications quickly. For instance, a simple web app can be created using Flask with just a few lines of code. Here’s a basic example:\n\n```python\nfrom flask import Flask\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return 'Hello, World!'\n\nif __name__ == '__main__':\n    app.run(debug=True)\n```\n\n**Try this:** Modify the message returned by the `home` function to greet yourself!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "sketch2": {
+            "title": "Python in Data Science",
+            "bodyMarkdown": "In data science, Python is used to analyze and visualize data. Libraries like Pandas and Matplotlib make it easy to manipulate and plot data. For instance, you can load a dataset and create a simple graph to visualize trends. Here’s a basic example:\n\n```python\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndata = {'Year': [2020, 2021, 2022], 'Sales': [150, 200, 250]}\ndf = pd.DataFrame(data)\ndf.plot(x='Year', y='Sales', kind='line')\nplt.show()\n```\n**Your turn:** Modify the data to see how the graph changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

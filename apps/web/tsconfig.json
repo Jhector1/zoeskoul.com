@@ -15,7 +15,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@zoeskoul/curriculum-contracts": ["../../packages/curriculum-contracts/src/index.ts"],
+      "@zoeskoul/curriculum-contracts": ["../../packages/curriculum-contracts/src/index.js"],
 //      "@zoeskoul/practice-checks": ["../../packages/practice-checks/src/index.ts"],
       "@zoeskoul-sql-datasets": ["../../packages/curriculum-profiles/dist/sql/datasets/index.js"],
       "@zoeskoul-code-input-expected": ["../../packages/curriculum-profiles/src/base/codeInputExpected.ts"]

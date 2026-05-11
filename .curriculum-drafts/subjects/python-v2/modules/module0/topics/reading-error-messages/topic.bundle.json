@@ -31,9 +31,12 @@
       "quiz": {
         "difficulty": "easy",
         "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -44,16 +47,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz_5",
-            "titleKey": "topics.python-v2.python-v2-0.reading-error-messages.projectSteps.quiz_5.title",
-            "exerciseKey": "quiz_5",
+            "id": "quiz_7",
+            "titleKey": "topics.python-v2.python-v2-0.reading-error-messages.projectSteps.quiz_7.title",
+            "exerciseKey": "quiz_7",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz_8",
+            "titleKey": "topics.python-v2.python-v2-0.reading-error-messages.projectSteps.quiz_8.title",
+            "exerciseKey": "quiz_8",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz_9",
+            "titleKey": "topics.python-v2.python-v2-0.reading-error-messages.projectSteps.quiz_9.title",
+            "exerciseKey": "quiz_9",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
           }
         ]
       }
@@ -105,7 +126,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "c"
       }
     },
     {
@@ -125,28 +146,134 @@
         "optionIds": [
           "a",
           "b",
-          "c"
+          "c",
+          "d"
         ]
       }
     },
     {
       "id": "quiz_4",
-      "kind": "fill_blank_choice",
+      "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.quiz_4",
-      "choiceCount": 4,
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "undefined"
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
       }
     },
     {
       "id": "quiz_5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.quiz_5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz_6",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.quiz_6",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz_7",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.quiz_5",
+      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.quiz_7",
+      "language": "python",
+      "starterCode": "result = 10 / 0\nprint(result)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "10.0",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "10.0",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "result = 10 / 1\nprint(result)"
+      }
+    },
+    {
+      "id": "quiz_8",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.quiz_8",
+      "language": "python",
+      "starterCode": "result = 10 / 1\n\nnum = 10\ndenom = 0\nresult = num / denom\nprint(result)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Error: Division by zero",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Error: Division by zero",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "result = 10 / 1\n\nnum = 10\n\ndenom = 0\ntry:\n    result = num / denom\nexcept ZeroDivisionError:\n    result = 'Error: Division by zero'\nprint(result)"
+      }
+    },
+    {
+      "id": "quiz_9",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.quiz_9",
       "language": "python",
       "starterCode": "print('Hello World'",
       "showExpectedExample": true,
@@ -154,12 +281,41 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "Hello World\n",
+            "stdin": "12\n",
+            "stdout": "Hello World",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Hello World",
             "match": "exact"
           }
         ],
         "solutionCode": "print('Hello World')"
+      }
+    },
+    {
+      "id": "policy_fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.policy_fill_blank_choice_1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "if"
+      }
+    },
+    {
+      "id": "policy_fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.policy_fill_blank_choice_2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "if"
       }
     }
   ]

@@ -1,0 +1,189 @@
+{
+  "topicId": "while-loop-basics",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-3",
+  "sectionSlug": "python-v2-3-while-loops",
+  "prefix": "pyv2_3",
+  "minutes": 24,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-3.while-loop-basics.label",
+    "summaryKey": "topics.python-v2.python-v2-3.while-loop-basics.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.while-loop-basics.cards.sketch0.title",
+      "sketchId": "while-loop-introduction",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.while-loop-basics.cards.sketch1.title",
+      "sketchId": "while-loop-with-break",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-3.while-loop-basics.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-3.while-loop-basics.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "while_loop_code_example_1",
+            "titleKey": "topics.python-v2.python-v2-3.while-loop-basics.projectSteps.while_loop_code_example_1.title",
+            "exerciseKey": "while-loop-code-example-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "while_loop_code_example_2",
+            "titleKey": "topics.python-v2.python-v2-3.while-loop-basics.projectSteps.while_loop_code_example_2.title",
+            "exerciseKey": "while-loop-code-example-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "while-loop-introduction",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.while-loop-basics.while-loop-introduction.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.while-loop-basics.while-loop-introduction.bodyMarkdown"
+    },
+    {
+      "id": "while-loop-with-break",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.while-loop-basics.while-loop-with-break.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.while-loop-basics.while-loop-with-break.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "while-loop-usage",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.while-loop-usage",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "while-loop-break",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.while-loop-break",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "while-loop-blank",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.while-loop-blank",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "true"
+      }
+    },
+    {
+      "id": "while-loop-code-example-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.while-loop-code-example-1",
+      "language": "python",
+      "starterCode": "count = 1\nwhile count <= 5:\n    # Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "1\n2\n3\n4\n5",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "1\n2\n3\n4\n5",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "count = 1\nwhile count <= 5:\n    print(count)\n    count += 1"
+      }
+    },
+    {
+      "id": "while-loop-code-example-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.while-loop-code-example-2",
+      "language": "python",
+      "starterCode": "count = 1\nwhile True:\n    # Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "1\n2\n3\n4\n5",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "1\n2\n3\n4\n5",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "count = 1\nwhile True:\n    print(count)\n    if count >= 5:\n        break\n    count += 1"
+      }
+    }
+  ]
+}

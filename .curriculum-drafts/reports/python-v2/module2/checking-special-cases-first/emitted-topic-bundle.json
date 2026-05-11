@@ -30,10 +30,13 @@
       "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 2,
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -44,34 +47,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz_3",
-            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.quiz_3.title",
-            "exerciseKey": "quiz_3",
+            "id": "quiz_9",
+            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.quiz_9.title",
+            "exerciseKey": "quiz_9",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           },
           {
-            "id": "quiz_4",
-            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.quiz_4.title",
-            "exerciseKey": "quiz_4",
+            "id": "quiz_10",
+            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.quiz_10.title",
+            "exerciseKey": "quiz_10",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           },
           {
-            "id": "quiz_5",
-            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.quiz_5.title",
-            "exerciseKey": "quiz_5",
+            "id": "quiz_11",
+            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.quiz_11.title",
+            "exerciseKey": "quiz_11",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           }
         ]
       }
@@ -94,7 +97,7 @@
   "exercises": [
     {
       "id": "quiz_1",
-      "kind": "multi_choice",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_1",
@@ -105,111 +108,213 @@
         "d"
       ],
       "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz_2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz_3",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
         "kind": "multi_choice",
         "optionIds": [
           "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "quiz_4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
           "c"
         ]
       }
     },
     {
-      "id": "quiz_2",
-      "kind": "fill_blank_choice",
+      "id": "quiz_5",
+      "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_2",
-      "choiceCount": 3,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "is not None"
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t4",
+          "t3",
+          "t2"
+        ]
       }
     },
     {
-      "id": "quiz_3",
+      "id": "quiz_6",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_6",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t4",
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz_7",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_7",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "errors"
+      }
+    },
+    {
+      "id": "quiz_8",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_8",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "first"
+      }
+    },
+    {
+      "id": "quiz_9",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_3",
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_9",
       "language": "python",
-      "starterCode": "def check_number(num):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_number(num))",
+      "starterCode": "def divide_by_number(number):\n    # Check if number is zero\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(divide_by_number(number))",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "0",
-            "stdout": "Zero",
+            "stdout": "Cannot divide by zero!",
             "match": "exact"
           },
           {
             "stdin": "5",
-            "stdout": "Positive",
+            "stdout": "2.0",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def divide_by_number(number):\n    if number == 0:\n        return 'Cannot divide by zero!'\n    else:\n        return 10 / number\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(divide_by_number(number))"
+      }
+    },
+    {
+      "id": "quiz_10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_10",
+      "language": "python",
+      "starterCode": "def check_age(age):\n    # Check age\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_age(age))",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "17",
+            "stdout": "Minor",
             "match": "exact"
           },
           {
-            "stdin": "-3",
+            "stdin": "20",
+            "stdout": "Adult",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def check_age(age):\n    if age < 18:\n        return 'Minor'\n    else:\n        return 'Adult'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_age(age))"
+      }
+    },
+    {
+      "id": "quiz_11",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_11",
+      "language": "python",
+      "starterCode": "def check_number(num):\n    # Check if number is negative\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_number(num))",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "-1",
             "stdout": "Negative",
             "match": "exact"
-          }
-        ],
-        "solutionCode": "def check_number(num):\n    if num == 0:\n        return 'Zero'\n    elif num > 0:\n        return 'Positive'\n    else:\n        return 'Negative'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_number(num))"
-      }
-    },
-    {
-      "id": "quiz_4",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_4",
-      "language": "python",
-      "starterCode": "def validate_input(user_input):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nuser_input = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(validate_input(user_input))",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "''",
-            "stdout": "Input cannot be empty",
-            "match": "exact"
           },
           {
-            "stdin": "'123'",
-            "stdout": "Input is a number",
-            "match": "exact"
-          },
-          {
-            "stdin": "'abc'",
-            "stdout": "Input is something else",
+            "stdin": "1",
+            "stdout": "Positive",
             "match": "exact"
           }
         ],
-        "solutionCode": "def validate_input(user_input):\n    if not user_input:\n        return 'Input cannot be empty'\n    elif user_input.isdigit():\n        return 'Input is a number'\n    else:\n        return 'Input is something else'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nuser_input = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(validate_input(user_input))"
-      }
-    },
-    {
-      "id": "quiz_5",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_5",
-      "language": "python",
-      "starterCode": "def process_list(my_list):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nmy_list = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(process_list(my_list))",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "[]",
-            "stdout": "List is empty",
-            "match": "exact"
-          },
-          {
-            "stdin": "[1, 2, 3]",
-            "stdout": "Processing list",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "def process_list(my_list):\n    if not my_list:\n        return 'List is empty'\n    return 'Processing list'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nmy_list = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(process_list(my_list))"
+        "solutionCode": "def check_number(num):\n    if num < 0:\n        return 'Negative'\n    else:\n        return 'Positive'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_number(num))"
       }
     }
   ]

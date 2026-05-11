@@ -14,14 +14,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.running-python-code.cards.sketch0.title",
-      "sketchId": "sketch_1",
+      "sketchId": "sketch1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.running-python-code.cards.sketch1.title",
-      "sketchId": "sketch_2",
+      "sketchId": "sketch2",
       "height": 420
     },
     {
@@ -31,9 +31,12 @@
       "quiz": {
         "difficulty": "easy",
         "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -44,16 +47,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz_5",
-            "titleKey": "topics.python-v2.python-v2-0.running-python-code.projectSteps.quiz_5.title",
-            "exerciseKey": "quiz_5",
+            "id": "code1",
+            "titleKey": "topics.python-v2.python-v2-0.running-python-code.projectSteps.code1.title",
+            "exerciseKey": "code1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
+          },
+          {
+            "id": "code2",
+            "titleKey": "topics.python-v2.python-v2-0.running-python-code.projectSteps.code2.title",
+            "exerciseKey": "code2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code3",
+            "titleKey": "topics.python-v2.python-v2-0.running-python-code.projectSteps.code3.title",
+            "exerciseKey": "code3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
           }
         ]
       }
@@ -61,25 +82,25 @@
   ],
   "sketches": [
     {
-      "id": "sketch_1",
+      "id": "sketch1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.running-python-code.sketch_1.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.running-python-code.sketch_1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.running-python-code.sketch1.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.running-python-code.sketch1.bodyMarkdown"
     },
     {
-      "id": "sketch_2",
+      "id": "sketch2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.running-python-code.sketch_2.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.running-python-code.sketch_2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.running-python-code.sketch2.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.running-python-code.sketch2.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz_1",
+      "id": "quiz1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz_1",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz1",
       "optionIds": [
         "a",
         "b",
@@ -92,11 +113,11 @@
       }
     },
     {
-      "id": "quiz_2",
+      "id": "quiz2",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz_2",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz2",
       "optionIds": [
         "a",
         "b",
@@ -104,15 +125,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "quiz_3",
+      "id": "quiz3",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz_3",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz3",
       "optionIds": [
         "a",
         "b",
@@ -122,28 +143,100 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b"
+          "c"
         ]
       }
     },
     {
-      "id": "quiz_4",
-      "kind": "fill_blank_choice",
+      "id": "quiz4",
+      "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz_4",
-      "choiceCount": 3,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "World"
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
       }
     },
     {
-      "id": "quiz_5",
+      "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz5",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "4"
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz6",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "print"
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz7",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz8",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "code1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz_5",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.code1",
       "language": "python",
       "starterCode": "// Write your answer below",
       "showExpectedExample": true,
@@ -152,11 +245,53 @@
         "tests": [
           {
             "stdin": "",
-            "stdout": "Your Name\n",
+            "stdout": "Your Name",
             "match": "exact"
           }
         ],
         "solutionCode": "print('Your Name')"
+      }
+    },
+    {
+      "id": "code2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.code2",
+      "language": "python",
+      "starterCode": "// Write your answer below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "5",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(2 + 3)"
+      }
+    },
+    {
+      "id": "code3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.code3",
+      "language": "python",
+      "starterCode": "// Write your answer below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Hello, welcome to Python!",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print('Hello, welcome to Python!')"
       }
     }
   ]

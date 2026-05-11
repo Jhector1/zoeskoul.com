@@ -12,8 +12,36 @@
       "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
       "category": "text",
       "severity": "medium",
-      "field": "sketchBlocks.common-errors.bodyMarkdown",
+      "field": "sketchBlocks.common-loop-errors.bodyMarkdown",
       "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "loop-debugging-practice",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "loop-sum-calculation",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "loop-conditional-practice",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_drag_reorder_1",
+      "message": "Added a fallback drag_reorder exercise to satisfy the planned exercise mix for \"loop-debugging\"."
     }
   ]
 }

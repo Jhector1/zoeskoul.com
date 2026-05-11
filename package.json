@@ -25,9 +25,10 @@
 
     "curr:course": "node scripts/curriculum-course.mjs",
 
-    "curr:test": "node --test packages/curriculum-compiler/test",
-    "curr:test:golden": "node --test packages/curriculum-compiler/test/golden.spec.ts",
+    "curr:test": "vitest run packages/curriculum-compiler",
 
+
+    "curr:test:golden": "vitest run packages/curriculum-compiler/src/**/*.golden.test.ts",
     "test:curriculum": "vitest run",
     "test:curriculum:watch": "vitest"
   },"packageManager": "pnpm@10.33.0",

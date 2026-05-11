@@ -1,0 +1,153 @@
+{
+  "title": "F-Strings and Formatting",
+  "summary": "Create readable output with f-strings and formatted values.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to F-Strings",
+      "bodyMarkdown": "F-strings are a way to embed expressions inside string literals, using curly braces `{}`. For example, if you have a variable `name = 'Alice'`, you can create a greeting with f-strings like this:\n\n```python\nname = 'Alice'\nprint(f'Hello, {name}!')\n```\nThis will output `Hello, Alice!`. Try it yourself by changing the name!"
+    },
+    {
+      "id": "sketch2",
+      "title": "Using Format Method",
+      "bodyMarkdown": "Another way to format strings is by using the `format()` method. For example:\n\n```python\nage = 30\nprint('I am {} years old.'.format(age))\n```\nThis will output `I am 30 years old.`. Experiment with different values for `age`!"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "What does the following code output?",
+      "prompt": "name = 'Bob'\nprint(f'Hello, {name}!')",
+      "hint": "Look closely at how the variable is used in the f-string.",
+      "help": {
+        "concept": "F-strings allow you to embed variables directly in strings.",
+        "hint_1": "The output will include the value of the variable `name`.",
+        "hint_2": "Think about how the f-string is constructed."
+      },
+      "options": [
+        "Hello, Bob!",
+        "Hello, name!",
+        "Hello, {name}!",
+        "Hello, 'Bob'!"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Which of the following are valid ways to format strings in Python?",
+      "prompt": "Select all that apply.",
+      "hint": "Consider the different string formatting methods available.",
+      "help": {
+        "concept": "Python supports multiple string formatting techniques.",
+        "hint_1": "F-strings are one method, but there are others.",
+        "hint_2": "Think about the `format()` method and `%` formatting."
+      },
+      "options": [
+        "Using f-strings",
+        "Using the format() method",
+        "Using % formatting",
+        "Using string concatenation"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "quiz3",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank to create a formatted string.",
+      "prompt": "age = 25\nprint(f'I am [blank1] years old.')",
+      "hint": "What value should replace the blank to show the age?",
+      "choices": [
+        "25",
+        "age",
+        "print"
+      ],
+      "correctValue": "25"
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Complete the string formatting using format method.",
+      "prompt": "name = 'Charlie'\nprint('Hello, {}!'.format([blank1]))",
+      "hint": "What should you put in the blank to greet Charlie?",
+      "choices": [
+        "name",
+        "Charlie",
+        "print"
+      ],
+      "correctValue": "Charlie"
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Order the steps to create a formatted string using f-strings.",
+      "prompt": "Arrange the following steps in the correct order.",
+      "tokens": [
+        "Define a variable with a value.",
+        "Use f-string syntax with curly braces.",
+        "Print the formatted string."
+      ],
+      "correctOrder": [
+        "Define a variable with a value.",
+        "Use f-string syntax with curly braces.",
+        "Print the formatted string."
+      ]
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Order the steps to use the format method.",
+      "prompt": "Arrange the steps to format a string using the format method.",
+      "tokens": [
+        "Define a string with placeholders.",
+        "Call the format method with values.",
+        "Print the formatted string."
+      ],
+      "correctOrder": [
+        "Define a string with placeholders.",
+        "Call the format method with values.",
+        "Print the formatted string."
+      ]
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Create a greeting using f-strings.",
+      "prompt": "Write a program that takes a user's name and prints a greeting using f-strings.",
+      "starterCode": "name = input('Enter your name: ')\n# Write your greeting here\n",
+      "solutionCode": "name = input('Enter your name: ')\nprint(f'Hello, {name}!')"
+    },
+    {
+      "id": "quiz8",
+      "kind": "code_input",
+      "title": "Format a string with age.",
+      "prompt": "Write a program that takes a user's age and prints a formatted string.",
+      "starterCode": "age = input('Enter your age: ')\n# Write your formatted string here\n",
+      "solutionCode": "age = input('Enter your age: ')\nprint(f'I am {age} years old.')"
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Use the format method to create a message.",
+      "prompt": "Write a program that takes a user's favorite color and prints a message using the format method.",
+      "starterCode": "color = input('Enter your favorite color: ')\n# Write your message here\n",
+      "solutionCode": "color = input('Enter your favorite color: ')\nprint('Your favorite color is {}.'.format(color))"
+    }
+  ],
+  "projectDraft": {
+    "title": "Profile Card Generator",
+    "stepIds": [
+      "quiz7",
+      "quiz8",
+      "quiz9"
+    ]
+  }
+}

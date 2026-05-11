@@ -1,0 +1,40 @@
+{
+  "topicId": "running-python-code",
+  "repairs": [
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz7",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz8",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz10",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz11",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz9",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    }
+  ]
+}

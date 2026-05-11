@@ -4,109 +4,164 @@
   "minutes": 22,
   "sketchBlocks": [
     {
-      "id": "1",
-      "title": "Understanding Operators",
-      "bodyMarkdown": "In Python, operators are special symbols that perform operations on variables and values. For example, the `+` operator adds two numbers together. Here's a simple example:\n\n```python\nresult = 5 + 3\nprint(result)  # This will output 8\n```\n\n**Your turn:** Try changing the numbers and see what happens!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "id": "sketch1",
+      "title": "Understanding Arithmetic Operators",
+      "bodyMarkdown": "Arithmetic operators are used to perform mathematical operations. The most common arithmetic operators are addition (+), subtraction (-), multiplication (*), and division (/). For example, if you want to add two numbers, you can write:\n\n```python\nresult = 5 + 3\nprint(result)  # This will output 8\n```\n\nTry it yourself: Change the numbers and see what the output is!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     },
     {
-      "id": "2",
+      "id": "sketch2",
       "title": "Comparison Operators",
-      "bodyMarkdown": "Comparison operators compare two values and return a boolean result (True or False). For example, the `==` operator checks if two values are equal:\n\n```python\nis_equal = (5 == 5)\nprint(is_equal)  # This will output True\n```\n\n**Try this:** Change one of the values to see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "Comparison operators compare two values and return a boolean result (True or False). The common comparison operators are equal (==), not equal (!=), greater than (>), and less than (<). For example:\n\n```python\nis_equal = (5 == 5)\nprint(is_equal)  # This will output True\n```\n\nYour turn: Try comparing different values!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "sketch3",
+      "title": "Boolean Operators",
+      "bodyMarkdown": "Boolean operators are used to combine conditional statements. The main boolean operators are AND, OR, and NOT. For example:\n\n```python\nis_true = (5 > 3) and (3 < 10)\nprint(is_true)  # This will output True\n```\n\nTry this: Change the conditions and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     }
   ],
   "quizDraft": [
     {
-      "id": "q1",
+      "id": "quiz1",
       "kind": "single_choice",
-      "title": "What does the `+` operator do?",
+      "title": "What does the expression 10 / 2 evaluate to?",
       "prompt": "Choose the correct answer.",
       "options": [
-        "Subtracts two numbers",
-        "Adds two numbers",
-        "Divides two numbers",
-        "Multiplies two numbers"
+        "5",
+        "2",
+        "10",
+        "20"
       ],
       "correctOptionIds": [
-        "b"
+        "a"
       ],
-      "hint": "Think about how you combine two quantities.",
+      "hint": "Think about how division works.",
       "help": {
-        "concept": "The `+` operator is used for addition in Python.",
-        "hint_1": "It's commonly used to add numbers together.",
-        "hint_2": "Look for the option that describes combining values."
+        "concept": "Division operator (/) divides the left operand by the right operand.",
+        "hint_1": "What is 10 divided by 2?",
+        "hint_2": "Remember that division gives you the quotient."
       }
     },
     {
-      "id": "q2",
+      "id": "quiz2",
       "kind": "single_choice",
-      "title": "Which of the following is a comparison operator?",
-      "prompt": "Choose the correct answer.",
+      "title": "Which operator checks if two values are equal?",
+      "prompt": "Select the correct operator.",
       "options": [
-        "+",
-        "-",
         "==",
-        "*"
+        "!=",
+        ">",
+        "<"
       ],
       "correctOptionIds": [
-        "c"
+        "a"
       ],
-      "hint": "This operator checks for equality between two values.",
+      "hint": "This operator returns True if both values are the same.",
       "help": {
-        "concept": "Comparison operators are used to compare values.",
-        "hint_1": "Look for the operator that checks if two values are the same.",
-        "hint_2": "It's not an arithmetic operator."
+        "concept": "The equality operator checks if two values are equal.",
+        "hint_1": "It uses two equal signs.",
+        "hint_2": "Think about how you would ask if two things are the same."
       }
     },
     {
-      "id": "q3",
+      "id": "quiz3",
       "kind": "multi_choice",
-      "title": "Which of the following are valid arithmetic operators in Python?",
+      "title": "Which of the following are boolean operators?",
       "prompt": "Select all that apply.",
       "options": [
-        "+",
-        "-",
-        "/",
-        "=="
+        "AND",
+        "OR",
+        "NOT",
+        "EQUAL"
       ],
       "correctOptionIds": [
         "a",
         "b",
         "c"
       ],
-      "hint": "Think about how you perform calculations.",
+      "hint": "Read the question and connect it to the specific lesson example.",
       "help": {
-        "concept": "Arithmetic operators perform mathematical operations.",
-        "hint_1": "Look for operators that perform addition, subtraction, or division.",
-        "hint_2": "One of the options is not an arithmetic operator."
+        "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Remove options from unrelated Python areas, then choose the one that fits the question."
       }
     },
     {
-      "id": "q4",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the blank: The operator `==` is used to check if two values are ______.",
-      "prompt": "Choose the correct word.",
-      "template": "The operator `==` is used to check if two values are _____.",
-      "choices": [
-        "equal",
-        "different",
-        "greater",
-        "less"
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Which expressions will evaluate to True?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "5 > 3",
+        "3 < 2",
+        "10 == 10",
+        "4 != 4"
       ],
-      "correctValue": "equal",
-      "hint": "Focus on the missing concept or keyword.",
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Evaluate each expression carefully.",
       "help": {
-        "concept": "This task checks the key idea behind fill in the blank: the operator `==` is used to check if two values are ______..",
-        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+        "concept": "Comparison operators return boolean values based on the comparison.",
+        "hint_1": "What does each comparison mean?",
+        "hint_2": "Remember that '!=' means not equal."
       }
     },
     {
-      "id": "q5",
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Order the arithmetic operations from highest to lowest precedence.",
+      "prompt": "Drag the operations to the correct order.",
+      "tokens": [
+        "Addition (+)",
+        "Multiplication (*)",
+        "Subtraction (-)",
+        "Division (/)"
+      ],
+      "correctOrder": [
+        "Multiplication (*)",
+        "Division (/)",
+        "Addition (+)",
+        "Subtraction (-)"
+      ],
+      "hint": "Think about the logical order of the steps.",
+      "help": {
+        "concept": "This task is about understanding the sequence behind order the arithmetic operations from highest to lowest precedence..",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Order the comparison operators from least to most strict.",
+      "prompt": "Drag the operators to the correct order.",
+      "tokens": [
+        "Equal (==)",
+        "Not Equal (!=)",
+        "Greater Than (>)",
+        "Less Than (<)"
+      ],
+      "correctOrder": [
+        "Equal (==)",
+        "Not Equal (!=)",
+        "Greater Than (>)",
+        "Less Than (<)"
+      ],
+      "hint": "Think about the logical order of the steps.",
+      "help": {
+        "concept": "This task is about understanding the sequence behind order the comparison operators from least to most strict..",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
+    },
+    {
+      "id": "quiz7",
       "kind": "code_input",
-      "title": "Calculate the sum of two numbers.",
-      "prompt": "Write a program that takes two numbers and prints their sum.",
-      "starterCode": "num1 = 10\nnum2 = 5\n# Write your code here to calculate the sum",
-      "solutionCode": "num1 = 10\nnum2 = 5\nsum_result = num1 + num2\nprint(sum_result)  # This will output 15",
+      "title": "Calculate the area of a rectangle.",
+      "prompt": "Write a program that calculates the area of a rectangle with width 5 and height 10.",
+      "starterCode": "width = 5\nheight = 10\n# Calculate area here",
+      "solutionCode": "width = 5\nheight = 10\narea = width * height\nprint(area)  # This should output 50",
       "recipeType": "fixed_tests",
       "hint": "Read the coding task and identify what the program should print.",
       "help": {
@@ -116,11 +171,118 @@
       },
       "tests": [
         {
-          "stdin": "",
-          "stdout": "15\n",
+          "stdin": "12\n",
+          "stdout": "50",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "50",
           "match": "exact"
         }
       ]
+    },
+    {
+      "id": "quiz8",
+      "kind": "code_input",
+      "title": "Check if a number is even or odd.",
+      "prompt": "Write a program that checks if a number is even or odd.",
+      "starterCode": "number = int(input())\n# Check if the number is even or odd here",
+      "solutionCode": "number = int(input())\nif number % 2 == 0:\n    print('Even')\nelse:\n    print('Odd')",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "Even",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Even",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Determine the maximum of two numbers.",
+      "prompt": "Write a program that finds the maximum of two numbers.",
+      "starterCode": "num1 = 10\nnum2 = 20\n# Find the maximum here",
+      "solutionCode": "num1 = 10\nnum2 = 20\nmax_num = num1 if num1 > num2 else num2\nprint(max_num)  # This should output 20",
+      "recipeType": "fixed_tests",
+      "hint": "Read the coding task and identify what the program should print.",
+      "help": {
+        "concept": "This coding exercise checks whether the program produces the requested output.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "20",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "20",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "policy_fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Choose the missing Python keyword",
+      "prompt": "Fill in the missing Python keyword so the statement is valid.",
+      "template": "___ value > 0:\n    print('positive')",
+      "choices": [
+        "if",
+        "for",
+        "def",
+        "class"
+      ],
+      "correctValue": "if",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "policy_fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Choose the missing Python keyword",
+      "prompt": "Fill in the missing Python keyword so the statement is valid.",
+      "template": "___ value > 0:\n    print('positive')",
+      "choices": [
+        "if",
+        "for",
+        "def",
+        "class"
+      ],
+      "correctValue": "if",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Personal Introduction Program",
+    "stepIds": [
+      "quiz7",
+      "quiz8",
+      "quiz9"
+    ]
+  }
 }

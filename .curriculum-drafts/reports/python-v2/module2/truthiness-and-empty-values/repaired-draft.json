@@ -4,31 +4,29 @@
   "minutes": 20,
   "sketchBlocks": [
     {
-      "id": "1",
+      "id": "sketch1",
       "title": "Understanding Truthiness",
-      "bodyMarkdown": "In Python, certain values are considered 'falsy', meaning they evaluate to `False` in a boolean context. These include:\n- `None`\n- `0` (zero)\n- `''` (empty string)\n- `[]` (empty list)\n- `{}` (empty dictionary)\n\nFor example:\n```python\nvalue = ''\nif value:\n    print('This is truthy')\nelse:\n    print('This is falsy')\n```\nIn this code, since `value` is an empty string, it will print 'This is falsy'.\n\n**Try it yourself:** Modify the `value` variable to test other falsy values.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "In Python, certain values are considered 'falsy', meaning they evaluate to `False` in a boolean context. These include:\n- `None`\n- `0` (zero)\n- `''` (empty string)\n\nFor example:\n```python\nvalue = ''\nif value:\n    print('This is truthy')\nelse:\n    print('This is falsy')\n```\nIn this case, the output will be 'This is falsy'.\n\n**Your turn:** Try changing `value` to `0` and see what happens!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     },
     {
-      "id": "2",
+      "id": "sketch2",
       "title": "Using Truthiness in Conditions",
-      "bodyMarkdown": "You can use truthiness to control the flow of your program. For instance:\n```python\nuser_input = input('Enter something: ')\nif user_input:\n    print('You entered:', user_input)\nelse:\n    print('No input provided.')\n```\nIn this example, if the user enters nothing, it will print 'No input provided.'\n\n**Your turn:** Change the prompt to ask for a number and see how it behaves with different inputs.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "You can use truthiness to control the flow of your program. For instance:\n```python\nuser_input = None\nif user_input:\n    print('Input received')\nelse:\n    print('No input provided')\n```\nHere, since `user_input` is `None`, the output will be 'No input provided'.\n\n**Try this:** Modify `user_input` to an empty string and observe the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     }
   ],
   "quizDraft": [
     {
-      "id": "1",
-      "kind": "multi_choice",
+      "id": "quiz1",
+      "kind": "single_choice",
       "title": "Identifying Falsy Values",
-      "prompt": "Which of the following values are considered falsy in Python?",
+      "prompt": "Which of the following values is considered falsy in Python?",
       "options": [
-        "0",
+        "1",
+        "True",
         "'' (empty string)",
-        "None",
-        "1"
+        "'Hello'"
       ],
       "correctOptionIds": [
-        "a",
-        "b",
         "c"
       ],
       "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
@@ -39,105 +37,242 @@
       }
     },
     {
-      "id": "2",
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Truthiness of Zero",
+      "prompt": "What will be the output of the following code?\n```python\nvalue = 0\nif value:\n    print('This is truthy')\nelse:\n    print('This is falsy')\n```",
+      "options": [
+        "This is truthy",
+        "This is falsy"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider how Python treats the number zero in conditions.",
+      "help": {
+        "concept": "Zero is considered a falsy value in Python.",
+        "hint_1": "Think about how numeric values behave in boolean contexts.",
+        "hint_2": "Remember that zero is one of the falsy values."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Identifying Truthy Values",
+      "prompt": "Which of the following values are considered truthy in Python? (Select all that apply)",
+      "options": [
+        "1",
+        "None",
+        "'Hello'",
+        "0"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Think about values that would evaluate to True in a condition.",
+      "help": {
+        "concept": "In Python, non-empty strings and non-zero numbers are considered truthy.",
+        "hint_1": "Recall which values are considered truthy.",
+        "hint_2": "Look for values that are not empty or zero."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Understanding None and Empty Strings",
+      "prompt": "Which of the following statements are true regarding None and empty strings? (Select all that apply)",
+      "options": [
+        "None is falsy",
+        "An empty string is truthy",
+        "None is equivalent to an empty string",
+        "Both None and empty strings evaluate to False"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Consider how Python treats None and empty strings in conditions.",
+      "help": {
+        "concept": "Both None and empty strings are considered falsy in Python.",
+        "hint_1": "Think about how these values behave in boolean contexts.",
+        "hint_2": "Remember that None is not the same as an empty string."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Order of Truthy and Falsy Values",
+      "prompt": "Arrange the following values from falsy to truthy.",
+      "tokens": [
+        "0",
+        "'' (empty string)",
+        "'Hello'",
+        "1"
+      ],
+      "correctOrder": [
+        "0",
+        "'' (empty string)",
+        "1",
+        "'Hello'"
+      ],
+      "hint": "Think about the logical order of the steps.",
+      "help": {
+        "concept": "This task is about understanding the sequence behind order of truthy and falsy values.",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
+    },
+    {
+      "id": "quiz6",
       "kind": "fill_blank_choice",
-      "title": "Complete the Condition",
-      "prompt": "Fill in the blank: In Python, the value the missing choice is considered falsy.",
+      "title": "Completing the Statement",
+      "prompt": "In Python, the value [blank1] is considered falsy.",
       "template": "In Python, the value [blank1] is considered falsy.",
       "choices": [
         "None",
-        "True",
         "1",
-        "Hello"
+        "True"
       ],
       "correctValue": "None",
       "hint": "Focus on the missing concept or keyword.",
       "help": {
-        "concept": "This task checks the key idea behind complete the condition.",
+        "concept": "This task checks the key idea behind completing the statement.",
         "hint_1": "Look for the word or phrase that best matches the lesson concept.",
         "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
       }
     },
     {
-      "id": "3",
-      "kind": "code_input",
-      "title": "Check for Empty Input",
-      "prompt": "Write a program that checks if the user input is empty and prints a message accordingly.",
-      "starterCode": "user_input = input()\n# Check if user_input is empty",
-      "solutionCode": "user_input = input()\nif user_input:\n    print('You entered:', user_input)\nelse:\n    print('No input provided.')",
-      "recipeType": "fixed_tests",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Completing the Statement",
+      "prompt": "An empty string evaluates to [blank1] in a boolean context.",
+      "template": "An empty string evaluates to [blank1] in a boolean context.",
+      "choices": [
+        "True",
+        "False",
+        "None"
+      ],
+      "correctValue": "False",
+      "hint": "Focus on the missing concept or keyword.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-      },
-      "tests": [
-        {
-          "stdin": "12\n",
-          "stdout": "You entered: 12",
-          "match": "exact"
-        },
-        {
-          "stdin": "20\n",
-          "stdout": "You entered: 20",
-          "match": "exact"
-        }
-      ]
+        "concept": "This task checks the key idea behind completing the statement.",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
     },
     {
-      "id": "4",
-      "kind": "code_input",
-      "title": "Evaluate Falsy Values",
-      "prompt": "Create a function that takes a value and returns whether it is truthy or falsy. Then read the input values, call the function, and print the returned result.",
-      "starterCode": "def evaluate_value(value):\n    # Determine if value is truthy or falsy\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(evaluate_value(value))",
-      "solutionCode": "def evaluate_value(value):\n    return 'Truthy' if value else 'Falsy'\n\n# Test the function\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(evaluate_value(value))",
-      "recipeType": "fixed_tests",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "title": "Order of Evaluation",
+      "prompt": "Arrange the following values from least to most truthy.",
+      "tokens": [
+        "None",
+        "0",
+        "'' (empty string)",
+        "'Hello'"
+      ],
+      "correctOrder": [
+        "None",
+        "0",
+        "'' (empty string)",
+        "'Hello'"
+      ],
+      "hint": "Think about the logical order of the steps.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-      },
-      "tests": [
-        {
-          "stdin": "12\n",
-          "stdout": "Truthy",
-          "match": "exact"
-        },
-        {
-          "stdin": "20\n",
-          "stdout": "Truthy",
-          "match": "exact"
-        }
-      ]
+        "concept": "This task is about understanding the sequence behind order of evaluation.",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
     },
     {
-      "id": "5",
+      "id": "policy_code_input_1",
       "kind": "code_input",
-      "title": "Check Multiple Values",
-      "prompt": "Write a program that checks multiple values and prints which are truthy or falsy.",
-      "starterCode": "_inputs = []\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nvalues = [0, '', None, 'Hello', 5]\n# Check each value",
-      "solutionCode": "_inputs = []\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nvalues = [0, '', None, 'Hello', 5]\nfor value in values:\n    if value:\n        print(f'{value} is Truthy')\n    else:\n        print(f'{value} is Falsy')",
-      "recipeType": "fixed_tests",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-      "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-      },
+      "title": "Check whether text is empty",
+      "prompt": "Read a line of text. Print `True` when the line is not empty and `False` when it is empty.",
+      "starterCode": "text = input()\n# Your code here",
+      "solutionCode": "text = input()\nif text:\n    print(True)\nelse:\n    print(False)",
       "tests": [
         {
-          "stdin": "12\n",
-          "stdout": "0 is Falsy\n is Falsy\nNone is Falsy\nHello is Truthy\n5 is Truthy",
+          "stdin": "hello\n",
+          "stdout": "True\n",
           "match": "exact"
         },
         {
-          "stdin": "20\n",
-          "stdout": "0 is Falsy\n is Falsy\nNone is Falsy\nHello is Truthy\n5 is Truthy",
+          "stdin": "\n",
+          "stdout": "False\n",
           "match": "exact"
         }
-      ]
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This coding exercise checks whether the program produces the requested output.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "policy_code_input_2",
+      "kind": "code_input",
+      "title": "Check whether text is empty",
+      "prompt": "Read a line of text. Print `True` when the line is not empty and `False` when it is empty.",
+      "starterCode": "text = input()\n# Your code here",
+      "solutionCode": "text = input()\nif text:\n    print(True)\nelse:\n    print(False)",
+      "tests": [
+        {
+          "stdin": "hello\n",
+          "stdout": "True\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "\n",
+          "stdout": "False\n",
+          "match": "exact"
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This coding exercise checks whether the program produces the requested output.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "policy_code_input_3",
+      "kind": "code_input",
+      "title": "Check whether text is empty",
+      "prompt": "Read a line of text. Print `True` when the line is not empty and `False` when it is empty.",
+      "starterCode": "text = input()\n# Your code here",
+      "solutionCode": "text = input()\nif text:\n    print(True)\nelse:\n    print(False)",
+      "tests": [
+        {
+          "stdin": "hello\n",
+          "stdout": "True\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "\n",
+          "stdout": "False\n",
+          "match": "exact"
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This coding exercise checks whether the program produces the requested output.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "recipeType": "fixed_tests"
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Grade Checker Project",
+    "stepIds": [
+      "quiz1",
+      "quiz2",
+      "quiz3"
+    ]
+  }
 }

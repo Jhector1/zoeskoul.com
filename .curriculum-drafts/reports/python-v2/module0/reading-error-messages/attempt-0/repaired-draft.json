@@ -6,12 +6,12 @@
     {
       "id": "sketch_1",
       "title": "Understanding Tracebacks",
-      "bodyMarkdown": "When your Python program encounters an error, it generates a traceback. This traceback shows the sequence of function calls that led to the error, along with the line number where the error occurred. For example:\n\n```\nTraceback (most recent call last):\n  line 5, in code editor\n    print(hello)\nNameError: name 'hello' is not defined\n```\n\nIn this example, the error is a `NameError`, indicating that the variable `hello` was not defined. The traceback tells us that the error occurred in `the code editor` on line 5. \n\n**Your turn:** Try running a Python program with an intentional error and observe the traceback.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "When your Python program encounters an error, it generates a traceback. This traceback shows the sequence of function calls that led to the error. For example:\n\n```\nTraceback (most recent call last):\n  line 2, in code editor\n    print(10 / 0)\nZeroDivisionError: division by zero\n```\n\nIn this example, the error occurred on line 2 of `the code editor`, where the program attempted to divide by zero. The last line of the traceback indicates the type of error that occurred. \n\n**Your turn:** Try running a program that divides by zero to see the traceback.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     },
     {
       "id": "sketch_2",
-      "title": "Common Error Types",
-      "bodyMarkdown": "There are several common types of errors you might encounter in Python:\n\n1. **SyntaxError**: This occurs when Python encounters incorrect syntax. For example:\n   ```\n   print('Hello World'\n   ```\n   This will raise a `SyntaxError` because of the missing closing parenthesis.\n\n2. **TypeError**: This happens when an operation is applied to an object of inappropriate type. For example:\n   ```\n   print('Hello' + 5)\n   ```\n   This will raise a `TypeError` because you cannot concatenate a string and an integer.\n\n**Try this:** Create a small program that includes both a `SyntaxError` and a `TypeError` and run it to see the tracebacks."
+      "title": "Locating the Error",
+      "bodyMarkdown": "To fix an error, first identify the line number indicated in the traceback. In the previous example, the error is on line 2. You can then check the code on that line to understand what went wrong. \n\nFor instance, if you see:\n\n```python\nprint(10 / 0)\n```\n\nYou know that you need to change the divisor to a non-zero value. \n\n**Try this:** Modify the code to avoid division by zero and run it again."
     }
   ],
   "quizDraft": [
@@ -19,58 +19,35 @@
       "id": "quiz_1",
       "kind": "single_choice",
       "title": "Identifying Error Types",
-      "prompt": "What type of error is raised when you try to use a variable that hasn't been defined?",
+      "prompt": "What type of error is indicated by the traceback message 'ZeroDivisionError'?",
       "options": [
-        "SyntaxError",
-        "NameError",
-        "TypeError",
-        "ValueError"
+        "Syntax Error",
+        "Runtime Error",
+        "Logical Error",
+        "Indentation Error"
       ],
       "correctOptionIds": [
         "b"
       ],
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "hint": "Think about errors that occur during program execution.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+        "concept": "A ZeroDivisionError occurs when a program attempts to divide a number by zero.",
+        "hint_1": "This error happens while the program is running.",
+        "hint_2": "Look for errors that are not related to the syntax of the code."
       }
     },
     {
       "id": "quiz_2",
       "kind": "single_choice",
-      "title": "Understanding Tracebacks",
-      "prompt": "In a traceback, what does the line number indicate?",
+      "title": "Understanding Traceback Components",
+      "prompt": "In a traceback, what does the last line typically indicate?",
       "options": [
-        "The line where the error was raised",
-        "The line where the program starts",
-        "The line where the function is defined",
-        "The line where the program ends"
+        "The file name",
+        "The line number",
+        "The type of error",
+        "The function name"
       ],
       "correctOptionIds": [
-        "a"
-      ],
-      "hint": "The traceback shows the path the program took to reach the error.",
-      "help": {
-        "concept": "The line number in a traceback indicates where the error occurred in your code.",
-        "hint_1": "This helps you locate the exact point of failure.",
-        "hint_2": "Tracebacks provide a detailed path of function calls leading to the error."
-      }
-    },
-    {
-      "id": "quiz_3",
-      "kind": "multi_choice",
-      "title": "Common Python Errors",
-      "prompt": "Which of the following are common types of errors in Python? (Select all that apply)",
-      "options": [
-        "SyntaxError",
-        "NameError",
-        "TypeError",
-        "LogicError"
-      ],
-      "correctOptionIds": [
-        "a",
-        "b",
         "c"
       ],
       "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
@@ -81,46 +58,228 @@
       }
     },
     {
-      "id": "quiz_4",
-      "kind": "fill_blank_choice",
-      "title": "Completing the Error Message",
-      "prompt": "A `NameError` occurs when you try to use a variable that is __________.",
-      "template": "A `NameError` occurs when you try to use a variable that is {blank}.",
-      "choices": [
-        "undefined",
-        "incorrect",
-        "out of scope",
-        "not callable"
+      "id": "quiz_3",
+      "kind": "multi_choice",
+      "title": "Common Error Types",
+      "prompt": "Which of the following are common types of errors you might encounter in Python? (Select all that apply)",
+      "options": [
+        "Syntax Error",
+        "Type Error",
+        "ZeroDivisionError",
+        "File Not Found Error"
       ],
-      "correctValue": "undefined",
-      "hint": "Focus on the missing concept or keyword.",
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "hint": "Think about errors that can occur during coding and execution.",
       "help": {
-        "concept": "This task checks the key idea behind completing the error message.",
-        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+        "concept": "Errors can occur due to incorrect syntax, type mismatches, or runtime issues.",
+        "hint_1": "Consider errors that prevent the program from running correctly.",
+        "hint_2": "Look for errors that relate to both syntax and runtime conditions."
+      }
+    },
+    {
+      "id": "quiz_4",
+      "kind": "multi_choice",
+      "title": "Reading a Traceback",
+      "prompt": "What information can you gather from a traceback? (Select all that apply)",
+      "options": [
+        "The line number where the error occurred",
+        "The type of error",
+        "The variable values at the time of the error",
+        "The sequence of function calls leading to the error"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Tracebacks provide specific details about the error.",
+      "help": {
+        "concept": "Tracebacks show where the error happened and what type of error it was.",
+        "hint_1": "They do not typically show variable values.",
+        "hint_2": "Focus on the structure of the traceback."
       }
     },
     {
       "id": "quiz_5",
-      "kind": "code_input",
-      "title": "Fixing a Syntax Error",
-      "prompt": "Fix the syntax error in the following code:\n\n```python\nprint('Hello World'\n```",
-      "starterCode": "print('Hello World'",
-      "solutionCode": "print('Hello World')",
-      "recipeType": "fixed_tests",
-      "hint": "Break the task into the main code steps first.",
+      "kind": "drag_reorder",
+      "title": "Order of Traceback Information",
+      "prompt": "Arrange the components of a traceback in the order they appear.",
+      "tokens": [
+        "Error Type",
+        "Line Number",
+        "File Name",
+        "Function Call Sequence"
+      ],
+      "correctOrder": [
+        "Error Type",
+        "Line Number",
+        "File Name",
+        "Function Call Sequence"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
       "help": {
-        "concept": "This task checks whether you can apply fixing a syntax error in a working solution.",
-        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz_6",
+      "kind": "drag_reorder",
+      "title": "Fixing Errors",
+      "prompt": "Put the steps to fix an error in the correct order.",
+      "tokens": [
+        "Identify the line number from the traceback",
+        "Understand the error type",
+        "Modify the code to fix the error",
+        "Run the program again"
+      ],
+      "correctOrder": [
+        "Identify the line number from the traceback",
+        "Understand the error type",
+        "Modify the code to fix the error",
+        "Run the program again"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz_7",
+      "kind": "code_input",
+      "title": "Fixing a Division Error",
+      "prompt": "Fix the following code to avoid a ZeroDivisionError:\n\n```python\nresult = 10 / 0\nprint(result)\n```",
+      "starterCode": "result = 10 / 0\nprint(result)",
+      "solutionCode": "result = 10 / 1\nprint(result)",
+      "recipeType": "fixed_tests",
+      "hint": "Change the divisor to a non-zero number.",
+      "help": {
+        "concept": "A ZeroDivisionError occurs when dividing by zero, so use a different number.",
+        "hint_1": "Look at the division operation in the code.",
+        "hint_2": "Make sure the divisor is not zero."
       },
       "tests": [
         {
-          "stdin": "",
-          "stdout": "Hello World\n",
+          "stdin": "12\n",
+          "stdout": "10.0",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "10.0",
           "match": "exact"
         }
       ]
+    },
+    {
+      "id": "quiz_8",
+      "kind": "code_input",
+      "title": "Handling Errors Gracefully",
+      "prompt": "Modify the following code to handle a potential division error:\n\n```python\nnum = 10\ndenom = 0\nresult = num / denom\nprint(result)\n```",
+      "starterCode": "result = 10 / 1\n\nnum = 10\ndenom = 0\nresult = num / denom\nprint(result)",
+      "solutionCode": "result = 10 / 1\n\nnum = 10\n\ndenom = 0\ntry:\n    result = num / denom\nexcept ZeroDivisionError:\n    result = 'Error: Division by zero'\nprint(result)",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "Error: Division by zero",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Error: Division by zero",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "quiz_9",
+      "kind": "code_input",
+      "title": "Debugging a Syntax Error",
+      "prompt": "Correct the syntax error in the following code:\n\n```python\nprint('Hello World'\n```",
+      "starterCode": "print('Hello World'",
+      "solutionCode": "print('Hello World')",
+      "recipeType": "fixed_tests",
+      "hint": "Check for missing parentheses.",
+      "help": {
+        "concept": "Syntax errors occur due to incorrect code structure.",
+        "hint_1": "Look for unmatched parentheses.",
+        "hint_2": "Ensure all function calls are properly closed."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "Hello World",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Hello World",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "policy_fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Choose the missing Python keyword",
+      "prompt": "Fill in the missing Python keyword so the statement is valid.",
+      "template": "___ value > 0:\n    print('positive')",
+      "choices": [
+        "if",
+        "for",
+        "def",
+        "class"
+      ],
+      "correctValue": "if",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "policy_fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Choose the missing Python keyword",
+      "prompt": "Fill in the missing Python keyword so the statement is valid.",
+      "template": "___ value > 0:\n    print('positive')",
+      "choices": [
+        "if",
+        "for",
+        "def",
+        "class"
+      ],
+      "correctValue": "if",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Personal Introduction Program",
+    "stepIds": [
+      "quiz_7",
+      "quiz_8",
+      "quiz_9"
+    ]
+  }
 }

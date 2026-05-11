@@ -1,31 +1,27 @@
 
 import { describe, expect, it, vi } from "vitest";
 
-vi.mock("@zoeskoul/curriculum-profiles", () => ({
-    getProfileAdapter: vi.fn(() => ({
-        buildTopicSeed: vi.fn(({ blueprint, module, section, topic }) => ({
-            subjectSlug: "sql",
-            profileId: blueprint.profileId,
-            moduleSlug: module.slug,
-            sectionSlug: section.slug,
-            topicId: topic.topicId,
-            order: topic.order,
-            title: topic.title,
-            summary: topic.summary,
-            minutes: topic.minutes,
-            moduleTitle: module.title,
-            modulePurpose: module.purpose,
-            moduleObjectives: module.learningObjectives,
-            guidedExercises: module.guidedExercises,
-            quizFocus: module.quizFocus,
-            moduleProject: module.moduleProject,
-            sectionTitle: section.title,
-            sourceLocale: "en",
-            targetLocales: ["en"],
-            exercisePolicy: module.exercisePolicy,
+vi.mock("@zoeskoul/curriculum-profiles", async (importOriginal) => {
+    const actual = await importOriginal<typeof import("@zoeskoul/curriculum-profiles")>();
+
+    return {
+        ...actual,
+        getProfileExercisePolicy: vi.fn(() => ({
+            total: 11,
+            dominantKind: "code_input",
+            counts: {
+                single_choice: 2,
+                multi_choice: 2,
+                drag_reorder: 2,
+                fill_blank_choice: 2,
+                code_input: 3,
+            },
         })),
-    })),
-}));
+        getSqlModuleDatasetPolicy: vi.fn(() => ({
+            datasetId: "orders",
+        })),
+    };
+});
 
 import { buildTopicSeedFromPlanNode } from "./buildTopicSeedFromPlanNode.js";
 
@@ -69,6 +65,5 @@ describe("buildTopicSeedFromPlanNode", () => {
 
         expect(seed.exercisePolicy).toBeDefined();
         expect(seed.plannedExerciseCounts).toBeDefined();
-        expect(seed.plannedExerciseCounts?.total).toBe(5);
-    });
+        expect(seed.plannedExerciseCounts?.total).toBe(11);    });
 });

@@ -1,0 +1,221 @@
+{
+  "title": "Reading Error Messages",
+  "summary": "Learn how to read tracebacks and locate the line that needs attention.",
+  "minutes": 18,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Tracebacks",
+      "bodyMarkdown": "When a Python program encounters an error, it generates a traceback. This traceback provides information about the error, including the type of error and the line number where it occurred. For example:\n\n```\nTraceback (most recent call last):\n  File \"example.py\", line 3, in <module>\n    print(10 / 0)\nZeroDivisionError: division by zero\n```\n\nIn this case, the error is a `ZeroDivisionError`, and it occurred on line 3 of `example.py`. Understanding this information helps you debug your code effectively. Try it yourself: Look for the line number and error type in a traceback."
+    },
+    {
+      "id": "sketch2",
+      "title": "Common Error Types",
+      "bodyMarkdown": "Python has several common error types, including:\n- `SyntaxError`: Indicates a syntax issue in your code.\n- `TypeError`: Occurs when an operation is applied to an inappropriate type.\n- `NameError`: Happens when a variable is not defined.\n\nFor example, if you try to use a variable that hasn't been defined, you'll see a `NameError`:\n\n```\nprint(undeclared_variable)\n```\n\nThis will raise a `NameError` because `undeclared_variable` does not exist. Your turn: Identify the error type in the following code snippet."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Identifying Traceback Information",
+      "prompt": "What information does a traceback provide when an error occurs?",
+      "options": [
+        "The name of the file only",
+        "The error type and line number",
+        "The output of the program",
+        "The variables used in the program"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Look for details about the error and where it happened.",
+      "help": {
+        "concept": "A traceback provides crucial information about errors, including the type of error and the line number where it occurred.",
+        "hint_1": "Focus on what the traceback displays when an error happens.",
+        "hint_2": "Remember that it shows both the error type and the line number."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Understanding ZeroDivisionError",
+      "prompt": "What does a ZeroDivisionError indicate?",
+      "options": [
+        "You are trying to divide by zero.",
+        "You have a syntax error in your code.",
+        "A variable is not defined.",
+        "You are using an incorrect type."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what happens when you divide a number by zero.",
+      "help": {
+        "concept": "A ZeroDivisionError occurs when a division operation attempts to divide by zero, which is mathematically undefined.",
+        "hint_1": "Consider the implications of dividing by zero in mathematics.",
+        "hint_2": "This error specifically relates to division operations."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Common Python Errors",
+      "prompt": "Which of the following are common Python error types?",
+      "options": [
+        "SyntaxError",
+        "TypeError",
+        "ValueError",
+        "NameError"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about the errors you might encounter while coding.",
+      "help": {
+        "concept": "Common Python error types include SyntaxError, TypeError, and NameError, among others.",
+        "hint_1": "Recall the errors that arise from incorrect syntax or operations.",
+        "hint_2": "Not all errors listed are common; identify the ones you often see."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Identifying Errors in Code",
+      "prompt": "Select all the lines that would cause an error.",
+      "options": [
+        "print(10 / 0)",
+        "print('Hello, World!')",
+        "print(5 + '5')",
+        "x = undeclared_variable"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Look for operations that are not valid in Python.",
+      "help": {
+        "concept": "Errors can occur from division by zero, type mismatches, and using undefined variables.",
+        "hint_1": "Think about what each line is trying to do and whether it's valid.",
+        "hint_2": "Identify operations that Python cannot perform."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "title": "Completing the Error Message",
+      "prompt": "A `NameError` occurs when you try to use a variable that is __________.",
+      "template": "A `NameError` occurs when you try to use a variable that is [blank1].",
+      "choices": [
+        "not defined",
+        "defined",
+        "a string",
+        "an integer"
+      ],
+      "correctValue": "not defined"
+    },
+    {
+      "id": "quiz6",
+      "kind": "fill_blank_choice",
+      "title": "Understanding Syntax Errors",
+      "prompt": "A `SyntaxError` indicates that there is a __________ in your code.",
+      "template": "A `SyntaxError` indicates that there is a [blank1] in your code.",
+      "choices": [
+        "mistake",
+        "variable",
+        "function",
+        "loop"
+      ],
+      "correctValue": "mistake"
+    },
+    {
+      "id": "quiz7",
+      "kind": "drag_reorder",
+      "title": "Order of Error Types",
+      "prompt": "Arrange the following error types in order of occurrence from least to most common.",
+      "tokens": [
+        "ZeroDivisionError",
+        "NameError",
+        "SyntaxError",
+        "TypeError"
+      ],
+      "correctOrder": [
+        "ZeroDivisionError",
+        "TypeError",
+        "NameError",
+        "SyntaxError"
+      ]
+    },
+    {
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "title": "Traceback Steps",
+      "prompt": "Arrange the steps of reading a traceback.",
+      "tokens": [
+        "Identify the error type",
+        "Locate the line number",
+        "Read the error message",
+        "Understand the context"
+      ],
+      "correctOrder": [
+        "Read the error message",
+        "Identify the error type",
+        "Locate the line number",
+        "Understand the context"
+      ]
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Fixing a Division Error",
+      "prompt": "Fix the following code to avoid a ZeroDivisionError.",
+      "starterCode": "def divide_numbers(a, b):\n    return a / b\n\ndivide_numbers(10, 0)",
+      "solutionCode": "def divide_numbers(a, b):\n    if b == 0:\n        return 'Cannot divide by zero'\n    return a / b\n\ndivide_numbers(10, 2)",
+      "hint": "Check how you handle the division operation.",
+      "help": {
+        "concept": "You need to ensure that the divisor is not zero before performing the division.",
+        "hint_1": "Think about adding a condition to check the divisor.",
+        "hint_2": "What should happen if the divisor is zero?"
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Handling Undefined Variables",
+      "prompt": "Modify the code to handle the case where a variable is not defined.",
+      "starterCode": "def print_variable(var):\n    print(var)\n\nprint_variable(undeclared_variable)",
+      "solutionCode": "def print_variable(var):\n    try:\n        print(var)\n    except NameError:\n        print('Variable is not defined')\n\nprint_variable('Hello')",
+      "hint": "Consider using a try-except block to catch errors.",
+      "help": {
+        "concept": "Using try-except blocks allows you to handle exceptions gracefully.",
+        "hint_1": "What happens if the variable is not defined?",
+        "hint_2": "Think about how to catch the NameError."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Correcting a Type Error",
+      "prompt": "Fix the code to avoid a TypeError when adding a number and a string.",
+      "starterCode": "def add_numbers(a, b):\n    return a + b\n\nadd_numbers(5, '5')",
+      "solutionCode": "def add_numbers(a, b):\n    return a + int(b)\n\nadd_numbers(5, '5')",
+      "hint": "Think about how to convert the string to a number.",
+      "help": {
+        "concept": "You need to ensure that both operands are of the same type before performing the addition.",
+        "hint_1": "What conversion can you apply to the string?",
+        "hint_2": "Consider using int() to convert the string."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Personal Introduction Program",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

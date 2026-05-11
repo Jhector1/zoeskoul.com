@@ -14,6 +14,27 @@
       "severity": "medium",
       "field": "sketchBlocks.2.bodyMarkdown",
       "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_code_input_1",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"values-types-and-literals\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_code_input_2",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"values-types-and-literals\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_code_input_3",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"values-types-and-literals\"."
     }
   ]
 }

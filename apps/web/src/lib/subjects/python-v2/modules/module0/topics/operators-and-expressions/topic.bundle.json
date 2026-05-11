@@ -14,14 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.cards.sketch0.title",
-      "sketchId": "1",
+      "sketchId": "sketch1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.cards.sketch1.title",
-      "sketchId": "2",
+      "sketchId": "sketch2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.cards.sketch2.title",
+      "sketchId": "sketch3",
       "height": 420
     },
     {
@@ -31,9 +38,12 @@
       "quiz": {
         "difficulty": "easy",
         "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -44,16 +54,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "q5",
-            "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.projectSteps.q5.title",
-            "exerciseKey": "q5",
+            "id": "quiz7",
+            "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.projectSteps.quiz7.title",
+            "exerciseKey": "quiz7",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz8",
+            "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.projectSteps.quiz8.title",
+            "exerciseKey": "quiz8",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz9",
+            "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.projectSteps.quiz9.title",
+            "exerciseKey": "quiz9",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
           }
         ]
       }
@@ -61,25 +89,31 @@
   ],
   "sketches": [
     {
-      "id": "1",
+      "id": "sketch1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.operators-and-expressions.1.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.operators-and-expressions.1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sketch1.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sketch1.bodyMarkdown"
     },
     {
-      "id": "2",
+      "id": "sketch2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.operators-and-expressions.2.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.operators-and-expressions.2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sketch2.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sketch2.bodyMarkdown"
+    },
+    {
+      "id": "sketch3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sketch3.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sketch3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "q1",
+      "id": "quiz1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.q1",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz1",
       "optionIds": [
         "a",
         "b",
@@ -88,15 +122,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "q2",
+      "id": "quiz2",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.q2",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz2",
       "optionIds": [
         "a",
         "b",
@@ -105,15 +139,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "c"
+        "optionId": "a"
       }
     },
     {
-      "id": "q3",
+      "id": "quiz3",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.q3",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz3",
       "optionIds": [
         "a",
         "b",
@@ -130,36 +164,169 @@
       }
     },
     {
-      "id": "q4",
-      "kind": "fill_blank_choice",
+      "id": "quiz4",
+      "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.q4",
-      "choiceCount": 4,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "equal"
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
       }
     },
     {
-      "id": "q5",
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t2",
+          "t4",
+          "t1",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz6",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz7",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.q5",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz7",
       "language": "python",
-      "starterCode": "num1 = 10\nnum2 = 5\n# Write your code here to calculate the sum",
+      "starterCode": "width = 5\nheight = 10\n# Calculate area here",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "15\n",
+            "stdin": "12\n",
+            "stdout": "50",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "50",
             "match": "exact"
           }
         ],
-        "solutionCode": "num1 = 10\nnum2 = 5\nsum_result = num1 + num2\nprint(sum_result)  # This will output 15"
+        "solutionCode": "width = 5\nheight = 10\narea = width * height\nprint(area)  # This should output 50"
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz8",
+      "language": "python",
+      "starterCode": "number = int(input())\n# Check if the number is even or odd here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Even",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Even",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "number = int(input())\nif number % 2 == 0:\n    print('Even')\nelse:\n    print('Odd')"
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz9",
+      "language": "python",
+      "starterCode": "num1 = 10\nnum2 = 20\n# Find the maximum here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "20",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "20",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "num1 = 10\nnum2 = 20\nmax_num = num1 if num1 > num2 else num2\nprint(max_num)  # This should output 20"
+      }
+    },
+    {
+      "id": "policy_fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.policy_fill_blank_choice_1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "if"
+      }
+    },
+    {
+      "id": "policy_fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.policy_fill_blank_choice_2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "if"
       }
     }
   ]

@@ -1,0 +1,61 @@
+{
+  "topicId": "and-or-not",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch1.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz9",
+      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+    },
+    {
+      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz10",
+      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+    },
+    {
+      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz11",
+      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz9",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz10",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz11",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    }
+  ]
+}

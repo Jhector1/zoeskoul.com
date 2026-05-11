@@ -15,3 +15,4 @@ export * from "./code/validateCodeAgainstTests.js";
 export * from "./code/validateSemantic.js";
 export * from "./code/validateSemanticPython.js";
 export * from "./sql/index.js";
+export * from "./review/buildReviewFromManifestCore.js";

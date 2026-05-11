@@ -1,0 +1,279 @@
+{
+  "title": "Running Python Code",
+  "summary": "Use the ZoeSkoul browser code editor, Run button, and output panel to execute Python code.",
+  "minutes": 18,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Running Python Code",
+      "bodyMarkdown": "In this topic, you'll learn how to run Python code using the ZoeSkoul browser code editor. You'll see how to print messages and understand the basic syntax of Python. For example, to print a message, you can use the `print()` function:\n\n```python\nprint('Hello, World!')\n```\n\nTry it yourself by typing the code in the editor and clicking Run!"
+    },
+    {
+      "id": "sketch2",
+      "title": "Understanding Syntax Errors",
+      "bodyMarkdown": "Syntax errors occur when the code does not follow the correct format. For example, if you forget to close a parenthesis in a print statement:\n\n```python\nprint('Hello, World!'\n```\n\nThis will raise a syntax error. Make sure to check your code for any missing symbols. Your turn: Fix the syntax error in the example above!"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "What does the print function do?",
+      "prompt": "Select the correct answer.",
+      "options": [
+        "It runs the code.",
+        "It outputs text to the screen.",
+        "It saves the code to a file.",
+        "It creates a variable."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what happens when you want to display information.",
+      "help": {
+        "concept": "The print function is used to display output to the user.",
+        "hint_1": "Look for the option that describes displaying text.",
+        "hint_2": "Remember, print is not for saving or running code."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Which of the following are valid print statements?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "print('Hello')",
+        "print('Hello, World!')",
+        "print(123)"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Check for proper syntax in each option.",
+      "help": {
+        "concept": "Valid print statements must have correct syntax and quotation marks for strings.",
+        "hint_1": "Look for options that include quotes around text.",
+        "hint_2": "Numbers can be printed without quotes."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "fill_blank_choice",
+      "title": "Complete the print statement.",
+      "prompt": "Fill in the blank to correctly print a message.",
+      "template": "print('[blank1]')",
+      "choices": [
+        "Hello, World!",
+        "Hello World!"
+      ],
+      "correctValue": "Hello, World!",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the print statement..",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Identify the syntax error.",
+      "prompt": "What is missing in this print statement?",
+      "template": "print('Hello, World!')\n\nAnswer: [blank1]",
+      "choices": [
+        "Closing parenthesis",
+        "Quotation marks",
+        "Comma"
+      ],
+      "correctValue": "Closing parenthesis",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind identify the syntax error..",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Order the steps to run Python code.",
+      "prompt": "Arrange the steps in the correct order.",
+      "tokens": [
+        "Type code in the editor.",
+        "Click Run.",
+        "Check the output panel."
+      ],
+      "correctOrder": [
+        "Type code in the editor.",
+        "Click Run.",
+        "Check the output panel."
+      ],
+      "hint": "Think about the logical order of the steps.",
+      "help": {
+        "concept": "This task is about understanding the sequence behind order the steps to run python code..",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Arrange the components of a print statement.",
+      "prompt": "Put the parts of the print statement in the correct order.",
+      "tokens": [
+        "print",
+        "(",
+        "'Hello, World!'",
+        ")"
+      ],
+      "correctOrder": [
+        "print",
+        "(",
+        "'Hello, World!'",
+        ")"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Print Your Name",
+      "prompt": "Write a Python code that prints your name.",
+      "starterCode": "print('')",
+      "solutionCode": "print('Your Name')",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "Your Name",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Your Name",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "quiz8",
+      "kind": "code_input",
+      "title": "Fix the Syntax Error",
+      "prompt": "Correct the following code to print 'Hello, World!'",
+      "starterCode": "# Write your code below",
+      "solutionCode": "print('Hello, World!')",
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply fix the syntax error in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "Hello, World!",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Hello, World!",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Output a Number",
+      "prompt": "Write a code that prints the number 10.",
+      "starterCode": "print()",
+      "solutionCode": "print(10)",
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply output a number in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "10",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "10",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Print a Simple Message",
+      "prompt": "Create a print statement that outputs 'Learning Python!'",
+      "starterCode": "print('')",
+      "solutionCode": "print('Learning Python!')",
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply print a simple message in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "Learning Python!",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Learning Python!",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Print Multiple Values",
+      "prompt": "Write a code that prints 'Hello' and 'World' on the same line.",
+      "starterCode": "# Write your code below",
+      "solutionCode": "print('Hello', 'World')",
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply print multiple values in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "Hello World",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Hello World",
+          "match": "exact"
+        }
+      ]
+    }
+  ]
+}

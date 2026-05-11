@@ -1,6 +1,4 @@
 {
   "attempt": 0,
-  "status": "failed",
-  "retryable": true,
-  "errorCode": "WORKSPACE_FILESYSTEM_POLICY_VIOLATION"
+  "status": "success"
 }

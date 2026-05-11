@@ -1,0 +1,178 @@
+{
+  "topicId": "loop-debugging",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-3",
+  "sectionSlug": "python-v2-3-while-loops",
+  "prefix": "pyv2_3",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-3.loop-debugging.label",
+    "summaryKey": "topics.python-v2.python-v2-3.loop-debugging.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.loop-debugging.cards.sketch0.title",
+      "sketchId": "loop-debugging-intro",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.loop-debugging.cards.sketch1.title",
+      "sketchId": "common-errors",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-3.loop-debugging.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-3.loop-debugging.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "loop_debugging_quiz_1",
+            "titleKey": "topics.python-v2.python-v2-3.loop-debugging.projectSteps.loop_debugging_quiz_1.title",
+            "exerciseKey": "loop-debugging-quiz-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "loop_debugging_quiz_5",
+            "titleKey": "topics.python-v2.python-v2-3.loop-debugging.projectSteps.loop_debugging_quiz_5.title",
+            "exerciseKey": "loop-debugging-quiz-5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "loop-debugging-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.loop-debugging.loop-debugging-intro.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.loop-debugging.loop-debugging-intro.bodyMarkdown"
+    },
+    {
+      "id": "common-errors",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.loop-debugging.common-errors.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.loop-debugging.common-errors.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "loop-debugging-quiz-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debugging-quiz-1",
+      "language": "python",
+      "starterCode": "count = 0\nwhile count < 10:\n    print(count)\n    # Fix the code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "count = 0\nwhile count < 10:\n    print(count)\n    count += 1"
+      }
+    },
+    {
+      "id": "loop-debugging-quiz-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debugging-quiz-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "6"
+      }
+    },
+    {
+      "id": "loop-debugging-quiz-3",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debugging-quiz-3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "loop-debugging-quiz-4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debugging-quiz-4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "loop-debugging-quiz-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debugging-quiz-5",
+      "language": "python",
+      "starterCode": "count = 5\nwhile count > 0:\n    # Write your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "5\n4\n3\n2\n1\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "count = 5\nwhile count > 0:\n    print(count)\n    count -= 1"
+      }
+    }
+  ]
+}

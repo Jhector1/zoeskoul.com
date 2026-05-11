@@ -1,4 +1,6 @@
 {
   "attempt": 1,
-  "status": "success"
+  "status": "failed",
+  "retryable": true,
+  "errorCode": "SEMANTIC_VALIDATION_FAILED"
 }

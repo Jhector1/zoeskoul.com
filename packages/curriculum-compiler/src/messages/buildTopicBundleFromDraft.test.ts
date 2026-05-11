@@ -336,7 +336,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
                 title: "Read and add",
                 prompt: "Read a number and print the number plus one.",
                 starterCode: "n = int(input())\n# your code\n",
-                solutionCode: "n = int(input())\nprint(n + 1)\n",
+                solutionCode: "n = int(input())\nprint(n + 1)",
                 tests: [{ stdin: "3\n", stdout: "4\n", match: "exact" }],
                 hint: "Convert the input before adding.",
                 help: {
@@ -353,7 +353,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
             recipe: {
                 type: "fixed_tests",
                 tests: [{ stdin: "3\n", stdout: "4\n", match: "exact" }],
-                solutionCode: "n = int(input())\nprint(n + 1)\n",
+                solutionCode: "n = int(input())\nprint(n + 1)",
             },
         });
     });
@@ -379,6 +379,6 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
                     },
                 }),
             }),
-        ).toThrow(/needs at least one stdin\/stdout test case/i);
-    });
+        )
+            .toThrow(/needs either tests or semanticChecks/i);    });
 });

@@ -1,4 +1,3 @@
-
 import type {
     ResolvedExercisePolicy,
     TopicAuthoringDraft,
@@ -15,10 +14,15 @@ const KINDS = [
 ] as const;
 
 type Kind = (typeof KINDS)[number];
+
 type PlannedExerciseCounts = NonNullable<TopicSeed["plannedExerciseCounts"]>;
+
+type GenerationTargets = TopicSeed["generationTargets"];
+
 function dominantKind(mix: Record<Kind, number>): Kind {
     return dominantKinds(mix)[0] ?? "single_choice";
 }
+
 function dominantKinds(mix: Record<Kind, number>): Kind[] {
     const maxValue = Math.max(...KINDS.map((kind) => mix[kind]));
     return KINDS.filter((kind) => mix[kind] === maxValue);
@@ -64,12 +68,63 @@ function toMix(counts: Record<Kind, number>): Record<Kind, number> {
     };
 }
 
+function buildGenerationTargetIssues(args: {
+    draft: TopicAuthoringDraft;
+    generationTargets?: GenerationTargets;
+}): CritiqueIssue[] {
+    const targets = args.generationTargets;
+
+    if (!targets) {
+        return [];
+    }
+
+    const quizCount = args.draft.quizDraft.filter(
+        (exercise) => exercise.kind !== "code_input",
+    ).length;
+
+    const codeInputCount = args.draft.quizDraft.filter(
+        (exercise) => exercise.kind === "code_input",
+    ).length;
+
+    const issues: CritiqueIssue[] = [];
+
+    if (quizCount < targets.quizBankMin) {
+        issues.push({
+            code: "QUIZ_BANK_TOO_SMALL",
+            category: "clarity",
+            severity: "error",
+            message: `Expected at least ${targets.quizBankMin} non-code quiz exercise(s), but the draft has ${quizCount}.`,
+        });
+    }
+
+    if (codeInputCount < targets.projectCodeInputMin) {
+        issues.push({
+            code: "PROJECT_CODE_INPUT_TOO_SMALL",
+            category: "clarity",
+            severity: "error",
+            message: `Expected at least ${targets.projectCodeInputMin} code_input project exercise(s), but the draft has ${codeInputCount}.`,
+        });
+    }
+
+    if (codeInputCount > targets.projectCodeInputMax) {
+        issues.push({
+            code: "PROJECT_CODE_INPUT_TOO_LARGE",
+            category: "clarity",
+            severity: "warn",
+            message: `Expected no more than ${targets.projectCodeInputMax} code_input project exercise(s), but the draft has ${codeInputCount}. Extra code_input exercises may be ignored by the project card.`,
+        });
+    }
+
+    return issues;
+}
+
 function buildCountBasedIssues(args: {
     counts: Record<Kind, number>;
     plannedCounts: PlannedExerciseCounts;
+    generationTargets?: GenerationTargets;
 }): CritiqueIssue[] {
     const issues: CritiqueIssue[] = [];
-    const { counts, plannedCounts } = args;
+    const { counts, plannedCounts, generationTargets } = args;
 
     for (const kind of KINDS) {
         const expected = plannedCounts.counts[kind] ?? 0;
@@ -79,8 +134,6 @@ function buildCountBasedIssues(args: {
 
         const delta = Math.abs(actual - expected);
 
-        // Code input is the one kind that should stay strict because it affects
-        // whether technical topics have real coding practice.
         if (kind === "code_input" && actual < expected) {
             issues.push({
                 code: "EXERCISE_POLICY_CODE_INPUT_UNDER_TARGET",
@@ -91,8 +144,6 @@ function buildCountBasedIssues(args: {
             continue;
         }
 
-        // For non-code exercise kinds, exact counts are guidance, not a hard
-        // correctness requirement. A one-exercise swap is common and usually okay.
         issues.push({
             code:
                 actual < expected
@@ -110,11 +161,7 @@ function buildCountBasedIssues(args: {
         issues.push({
             code: "EXERCISE_POLICY_DOMINANT_KIND_MISMATCH",
             category: "clarity",
-            severity:
-                plannedCounts.dominantKind === "code_input" &&
-                counts.code_input < (plannedCounts.counts.code_input ?? 0)
-                    ? "error"
-                    : "warn",
+            severity: generationTargets ? "warn" : "error",
             message: `Exercise policy expects "${plannedCounts.dominantKind}" to be dominant, but the draft is dominated by "${actualDominants.join(" / ")}".`,
         });
     }
@@ -137,6 +184,7 @@ function buildCountBasedIssues(args: {
 function buildMixBasedIssues(args: {
     counts: Record<Kind, number>;
     policy: ResolvedExercisePolicy;
+    generationTargets?: GenerationTargets;
 }): CritiqueIssue[] {
     const actualMix = toMix(args.counts);
     const targetMix = args.policy.mix as Record<Kind, number>;
@@ -149,7 +197,7 @@ function buildMixBasedIssues(args: {
         issues.push({
             code: "EXERCISE_POLICY_DOMINANT_KIND_MISMATCH",
             category: "clarity",
-            severity: "error",
+            severity: args.generationTargets ? "warn" : "error",
             message: `Exercise policy expects "${desiredDominant}" to be dominant, but the draft is dominated by "${actualDominant}".`,
         });
     }
@@ -159,7 +207,8 @@ function buildMixBasedIssues(args: {
             code: "EXERCISE_POLICY_CODE_INPUT_TOO_LOW",
             category: "clarity",
             severity: "error",
-            message: "Exercise policy expects a code_input-heavy topic, but the draft does not contain enough code_input exercises.",
+            message:
+                "Exercise policy expects a code_input-heavy topic, but the draft does not contain enough code_input exercises.",
         });
     }
 
@@ -168,7 +217,8 @@ function buildMixBasedIssues(args: {
             code: "EXERCISE_POLICY_CODE_INPUT_MISSING",
             category: "clarity",
             severity: "error",
-            message: "Exercise policy expects code_input exercises, but the draft contains none.",
+            message:
+                "Exercise policy expects code_input exercises, but the draft contains none.",
         });
     }
 
@@ -192,6 +242,7 @@ export function buildExercisePolicyCritiqueIssues(args: {
     draft: TopicAuthoringDraft;
     policy?: ResolvedExercisePolicy;
     plannedCounts?: PlannedExerciseCounts;
+    generationTargets?: GenerationTargets;
 }): CritiqueIssue[] {
     const counts = countKinds(args.draft);
     const total = Object.values(counts).reduce((sum, value) => sum + value, 0);
@@ -202,24 +253,38 @@ export function buildExercisePolicyCritiqueIssues(args: {
                 code: "EXERCISE_POLICY_EMPTY_DRAFT",
                 category: "clarity",
                 severity: "error",
-                message: "Draft has no exercises, so it cannot satisfy the exercise policy.",
+                message:
+                    "Draft has no exercises, so it cannot satisfy the exercise policy.",
             },
         ];
     }
 
+    const issues: CritiqueIssue[] = [];
+
+    issues.push(
+        ...buildGenerationTargetIssues({
+            draft: args.draft,
+            generationTargets: args.generationTargets,
+        }),
+    );
+
     if (args.plannedCounts) {
-        return buildCountBasedIssues({
-            counts,
-            plannedCounts: args.plannedCounts,
-        });
+        issues.push(
+            ...buildCountBasedIssues({
+                counts,
+                plannedCounts: args.plannedCounts,
+                generationTargets: args.generationTargets,
+            }),
+        );
+    } else if (args.policy) {
+        issues.push(
+            ...buildMixBasedIssues({
+                counts,
+                policy: args.policy,
+                generationTargets: args.generationTargets,
+            }),
+        );
     }
 
-    if (args.policy) {
-        return buildMixBasedIssues({
-            counts,
-            policy: args.policy,
-        });
-    }
-
-    return [];
+    return issues;
 }

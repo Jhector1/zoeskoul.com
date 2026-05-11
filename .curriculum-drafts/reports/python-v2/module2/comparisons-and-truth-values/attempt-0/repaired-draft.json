@@ -6,134 +6,281 @@
     {
       "id": "comparison_operators",
       "title": "Understanding Comparison Operators",
-      "bodyMarkdown": "In Python, comparison operators are used to compare two values. The result of a comparison is either True or False. Here are the main comparison operators:\n\n- `==` (equal to)\n- `!=` (not equal to)\n- `>` (greater than)\n- `<` (less than)\n- `>=` (greater than or equal to)\n- `<=` (less than or equal to)\n\n### Example:\n```python\nx = 5\nprint(x == 5)  # This will print True\nprint(x > 3)    # This will print True\nprint(x < 2)    # This will print False\n```\n\n### Your turn:\nTry changing the value of `x` and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "In Python, comparison operators are used to compare two values. The result of a comparison is either `True` or `False`. Here are the main comparison operators:\n\n- `==` : Equal to\n- `!=` : Not equal to\n- `>` : Greater than\n- `<` : Less than\n- `>=` : Greater than or equal to\n- `<=` : Less than or equal to\n\n**Example:**\n```python\nx = 10\nprint(x > 5)  # This will print True\nprint(x == 10) # This will print True\n```\n\n**Your turn:** Try changing the value of `x` and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     },
     {
       "id": "truthiness",
       "title": "Understanding Truthiness",
-      "bodyMarkdown": "In Python, not all values are considered equal when it comes to truthiness. For example:\n- Non-zero numbers are considered True.\n- An empty string (`''`) is considered False.\n- The value `None` is also considered False.\n\n### Example:\n```python\nif x:\n    print('x is True')\nelse:\n    print('x is False')\n```\n\n### Try it yourself:\nChange `x` to different values like `0`, `1`, `''`, and `None` to see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "In Python, not all values are considered equal when it comes to truthiness. For example, the following values are considered `False`:\n- `0`\n- `None`\n- `''` (empty string)\n- `[]` (empty list)\n\n**Example:**\n```python\nif []:\n    print('This will not print')\nelse:\n    print('This will print')  # This will print\n```\n\n**Try this:** Check what happens when you replace `[]` with `1` or `''`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     }
   ],
   "quizDraft": [
     {
-      "id": "multi_choice_1",
-      "kind": "multi_choice",
-      "title": "Identifying True and False Values",
-      "prompt": "Which of the following values are considered True in Python?",
+      "id": "quiz_1",
+      "kind": "single_choice",
+      "title": "What is the result of `5 < 3`?",
+      "prompt": "Choose the correct answer.",
       "options": [
-        "0",
-        "1",
-        "''",
-        "None"
+        "True",
+        "False",
+        "None",
+        "Error"
       ],
       "correctOptionIds": [
         "b"
       ],
-      "hint": "Think about which values are non-zero or non-empty.",
+      "hint": "Think about the relationship between the two numbers.",
       "help": {
-        "concept": "In Python, only non-zero numbers and non-empty strings are considered True.",
-        "hint_1": "Remember that 0 and empty strings are treated as False.",
-        "hint_2": "Focus on the values that are not zero or empty."
+        "concept": "A comparison checks if one value is less than another.",
+        "hint_1": "5 is not less than 3.",
+        "hint_2": "Remember the definition of the less than operator."
       }
     },
     {
-      "id": "fill_blank_choice_1",
+      "id": "quiz_2",
+      "kind": "single_choice",
+      "title": "Which of the following is a comparison operator?",
+      "prompt": "Select the correct option.",
+      "options": [
+        "&&",
+        "==",
+        "||",
+        "!"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Look for the operator that checks for equality.",
+      "help": {
+        "concept": "Comparison operators are used to compare two values.",
+        "hint_1": "One of these checks if two values are equal.",
+        "hint_2": "Think about how you would check if two numbers are the same."
+      }
+    },
+    {
+      "id": "quiz_3",
+      "kind": "multi_choice",
+      "title": "Which values are considered False in Python?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "0",
+        "None",
+        "1",
+        "''"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz_4",
+      "kind": "multi_choice",
+      "title": "Select all comparison operators.",
+      "prompt": "Choose all correct answers.",
+      "options": [
+        "==",
+        "!=",
+        ">",
+        "&&"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Look for operators that compare values.",
+      "help": {
+        "concept": "Comparison operators compare two values and return True or False.",
+        "hint_1": "Two of these check for equality or inequality.",
+        "hint_2": "One of these is not a comparison operator."
+      }
+    },
+    {
+      "id": "quiz_5",
       "kind": "fill_blank_choice",
-      "title": "Complete the Comparison",
-      "prompt": "The expression `5 > 3` evaluates to the missing choice.",
-      "template": "The expression `5 > 3` evaluates to [blank1].",
+      "title": "Fill in the blank: `5 [blank1] 3` returns False.",
+      "prompt": "Choose the correct operator.",
+      "template": "5 [blank1] 3",
+      "choices": [
+        ">",
+        "<",
+        "==",
+        "!="
+      ],
+      "correctValue": "<",
+      "hint": "Think about how 5 compares to 3.",
+      "help": {
+        "concept": "The operator determines the relationship between the two numbers.",
+        "hint_1": "5 is greater than 3.",
+        "hint_2": "What operator checks if one number is less than another?"
+      }
+    },
+    {
+      "id": "quiz_6",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: An empty list is considered [blank1].",
+      "prompt": "Choose the correct value.",
+      "template": "An empty list is considered [blank1].",
       "choices": [
         "True",
-        "False"
+        "False",
+        "None",
+        "0"
       ],
-      "correctValue": "True",
-      "hint": "Focus on the missing concept or keyword.",
+      "correctValue": "False",
+      "hint": "Think about how Python treats empty collections.",
       "help": {
-        "concept": "This task checks the key idea behind complete the comparison.",
-        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+        "concept": "Empty collections are generally treated as the missing term in boolean contexts.",
+        "hint_1": "Consider what happens in an if statement.",
+        "hint_2": "What do you know about truthiness?"
       }
     },
     {
-      "id": "code_input_1",
-      "kind": "code_input",
-      "title": "Check Comparison",
-      "prompt": "Write a program that checks if a number is greater than 10 and prints 'Greater' or 'Smaller'.",
-      "starterCode": "number = int(input())\n# Your code here",
-      "solutionCode": "number = int(input())\nif number > 10:\n    print('Greater')\nelse:\n    print('Smaller')",
-      "recipeType": "fixed_tests",
-      "hint": "Break the task into the main code steps first.",
+      "id": "quiz_7",
+      "kind": "drag_reorder",
+      "title": "Order the comparison operators from least to most strict.",
+      "prompt": "Arrange the operators correctly.",
+      "tokens": [
+        "==",
+        "!=",
+        ">",
+        "<"
+      ],
+      "correctOrder": [
+        "<",
+        ">",
+        "==",
+        "!="
+      ],
+      "hint": "Think about how strict each operator is in determining equality or inequality.",
       "help": {
-        "concept": "This task checks whether you can apply check comparison in a working solution.",
-        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-      },
-      "tests": [
-        {
-          "stdin": "12\n",
-          "stdout": "Greater",
-          "match": "exact"
-        },
-        {
-          "stdin": "20\n",
-          "stdout": "Greater",
-          "match": "exact"
-        }
-      ]
+        "concept": "Operators can be ranked based on how they compare values.",
+        "hint_1": "Less strict operators allow for more flexibility.",
+        "hint_2": "Which operator is the most strict in terms of equality?"
+      }
     },
     {
-      "id": "code_input_2",
-      "kind": "code_input",
-      "title": "Truthiness Check",
-      "prompt": "Write a program that checks if a variable is truthy or falsy and prints the result.",
-      "starterCode": "value = ''\n# Your code here",
-      "solutionCode": "value = ''\nif value:\n    print('Truthy')\nelse:\n    print('Falsy')",
-      "recipeType": "fixed_tests",
-      "hint": "Break the task into the main code steps first.",
+      "id": "quiz_8",
+      "kind": "drag_reorder",
+      "title": "Order the values from least to most truthy.",
+      "prompt": "Arrange the values correctly.",
+      "tokens": [
+        "0",
+        "1",
+        "None",
+        "''",
+        "[]"
+      ],
+      "correctOrder": [
+        "None",
+        "0",
+        "''",
+        "[]",
+        "1"
+      ],
+      "hint": "Consider which values are considered false in Python.",
       "help": {
-        "concept": "This task checks whether you can apply truthiness check in a working solution.",
-        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-      },
-      "tests": [
-        {
-          "stdin": "12\n",
-          "stdout": "Falsy",
-          "match": "exact"
-        },
-        {
-          "stdin": "20\n",
-          "stdout": "Falsy",
-          "match": "exact"
-        }
-      ]
+        "concept": "Truthiness determines how values are treated in boolean contexts.",
+        "hint_1": "Some values are inherently false.",
+        "hint_2": "Think about how each value behaves in an if statement."
+      }
     },
     {
-      "id": "code_input_3",
+      "id": "policy_code_input_1",
       "kind": "code_input",
-      "title": "Multiple Comparisons",
-      "prompt": "Write a program that checks multiple conditions and prints the appropriate message.",
-      "starterCode": "age = 20\n# Your code here",
-      "solutionCode": "age = 20\nif age < 18:\n    print('Minor')\nelif age < 65:\n    print('Adult')\nelse:\n    print('Senior')",
-      "recipeType": "fixed_tests",
-      "hint": "Break the task into the main code steps first.",
-      "help": {
-        "concept": "This task checks whether you can apply multiple comparisons in a working solution.",
-        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-      },
+      "title": "Print whether a number is positive",
+      "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+      "starterCode": "n = int(input())\n# Your code here",
+      "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
       "tests": [
         {
-          "stdin": "12\n",
-          "stdout": "Adult",
+          "stdin": "5\n",
+          "stdout": "True\n",
           "match": "exact"
         },
         {
-          "stdin": "20\n",
-          "stdout": "Adult",
+          "stdin": "0\n",
+          "stdout": "False\n",
           "match": "exact"
         }
-      ]
+      ],
+      "hint": "Use a conditional check and return a boolean result.",
+      "help": {
+        "concept": "A conditional can decide which boolean value to print based on a comparison.",
+        "hint_1": "Compare the number with zero inside an if statement.",
+        "hint_2": "Print True when the condition passes; otherwise print False."
+      },
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "policy_code_input_2",
+      "kind": "code_input",
+      "title": "Print whether a number is positive",
+      "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+      "starterCode": "n = int(input())\n# Your code here",
+      "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
+      "tests": [
+        {
+          "stdin": "5\n",
+          "stdout": "True\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "0\n",
+          "stdout": "False\n",
+          "match": "exact"
+        }
+      ],
+      "hint": "Use a conditional check and return a boolean result.",
+      "help": {
+        "concept": "A conditional can decide which boolean value to print based on a comparison.",
+        "hint_1": "Compare the number with zero inside an if statement.",
+        "hint_2": "Print True when the condition passes; otherwise print False."
+      },
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "policy_code_input_3",
+      "kind": "code_input",
+      "title": "Print whether a number is positive",
+      "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+      "starterCode": "n = int(input())\n# Your code here",
+      "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
+      "tests": [
+        {
+          "stdin": "5\n",
+          "stdout": "True\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "0\n",
+          "stdout": "False\n",
+          "match": "exact"
+        }
+      ],
+      "hint": "Use a conditional check and return a boolean result.",
+      "help": {
+        "concept": "A conditional can decide which boolean value to print based on a comparison.",
+        "hint_1": "Compare the number with zero inside an if statement.",
+        "hint_2": "Print True when the condition passes; otherwise print False."
+      },
+      "recipeType": "fixed_tests"
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Grade Checker",
+    "stepIds": [
+      "quiz_1",
+      "quiz_2",
+      "quiz_3"
+    ]
+  }
 }

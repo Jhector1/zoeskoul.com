@@ -200,7 +200,10 @@ function codeInputIds(draft: TopicAuthoringDraft) {
         .map((exercise) => exercise.id);
 }
 
-function buildProjectStepIds(draft: TopicAuthoringDraft) {
+function buildProjectStepIds(
+    draft: TopicAuthoringDraft,
+    maxSteps = 5,
+) {
     const codeIds = codeInputIds(draft);
     const codeIdSet = new Set(codeIds);
 
@@ -208,7 +211,7 @@ function buildProjectStepIds(draft: TopicAuthoringDraft) {
         codeIdSet.has(id),
     );
 
-    return uniqueNonEmpty([...explicitStepIds, ...codeIds]);
+    return uniqueNonEmpty([...explicitStepIds, ...codeIds]).slice(0, maxSteps);
 }
 
 function quizExercises(draft: TopicAuthoringDraft) {
@@ -238,9 +241,17 @@ export function buildTopicBundleFromDraft(args: {
     });
     const prefix = seed.modulePrefix;
 
-    const projectStepIds = buildProjectStepIds(draft);
+    const targets = seed.generationTargets;
+    const projectStepIds = buildProjectStepIds(
+        draft,
+        targets?.projectCodeInputTarget ?? 3,
+    );
+
     const quizOnlyExercises = quizExercises(draft);
 
+    const quizVisibleDefault = targets?.quizVisibleDefault ?? 4;
+    const quizVisibleMax = targets?.quizVisibleMax ?? 6;
+    const maxAttempts = targets?.maxAttempts ?? null;
     const sketchCards: ManifestCard[] = draft.sketchBlocks.map((block, index) => ({
         id: `sketch${index}`,
         kind: "sketch" as const,
@@ -268,10 +279,13 @@ export function buildTopicBundleFromDraft(args: {
                     ),
                     quiz: {
                         difficulty: "easy",
-                        n: Math.min(5, quizOnlyExercises.length),
+                        n: Math.min(quizVisibleDefault, quizOnlyExercises.length),
+                        min: Math.min(quizVisibleDefault, quizOnlyExercises.length),
+                        max: Math.min(quizVisibleMax, quizOnlyExercises.length),
+                        selectionMode: "random",
                         allowReveal: true,
                         preferKind: null,
-                        maxAttempts: 10,
+                        maxAttempts,
                     },
                 },
             ]
@@ -293,7 +307,7 @@ export function buildTopicBundleFromDraft(args: {
                         difficulty: "easy",
                         allowReveal: true,
                         preferKind: "code_input",
-                        maxAttempts: 10,
+                        maxAttempts,
                         steps: projectStepIds.map((exerciseId) => {
                             const stepId = projectStepIdFromExerciseId(exerciseId);
 
@@ -309,7 +323,7 @@ export function buildTopicBundleFromDraft(args: {
                                 difficulty: "easy",
                                 preferKind: "code_input",
                                 seedPolicy: "global",
-                                maxAttempts: 10,
+                                maxAttempts,
                             };
                         }),
                     },

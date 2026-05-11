@@ -16,18 +16,25 @@
       "message": "Added a short line-by-line explanation after a multi-line code example."
     },
     {
-      "code": "PYTHON_INPUT_PROMPT_REMOVED",
-      "category": "recipe",
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
       "severity": "medium",
-      "field": "quiz1",
-      "message": "Removed interactive input prompts from Python code_input starter and solution code so fixed tests only validate program output."
+      "field": "policy_code_input_1",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"input-and-type-conversion\"."
     },
     {
-      "code": "PYTHON_INPUT_PROMPT_REMOVED",
-      "category": "recipe",
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
       "severity": "medium",
-      "field": "quiz5",
-      "message": "Removed interactive input prompts from Python code_input starter and solution code so fixed tests only validate program output."
+      "field": "policy_code_input_2",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"input-and-type-conversion\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_code_input_3",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"input-and-type-conversion\"."
     }
   ]
 }

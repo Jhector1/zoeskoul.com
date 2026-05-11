@@ -1655,6 +1655,287 @@ async function repairCrossExerciseClassDependencies(args: {
         quizDraft,
     };
 }
+function buildTopicAwareSingleChoiceFallback(
+    seed: TopicSeed,
+    id: string,
+): PythonDraftExercise {
+    return {
+        id,
+        kind: "single_choice",
+        title: "Identify the result of running code",
+        prompt: `In "${seed.title}", what should you check after running a Python program?`,
+        options: [
+            "The output shown by the program",
+            "Only the file name",
+            "Whether Python deletes the code",
+            "Whether comments are printed automatically",
+        ],
+        correctOptionIds: ["a"],
+        hint: "Running code lets you inspect what the program displays.",
+        help: {
+            concept: "When you run Python code, the most important feedback is usually the output or error message.",
+            hint_1: "Look at the console or output area.",
+            hint_2: "Printed values appear after the program runs.",
+        },
+    };
+}
+
+function buildTopicAwareMultiChoiceFallback(
+    seed: TopicSeed,
+    id: string,
+): PythonDraftExercise {
+    return {
+        id,
+        kind: "multi_choice",
+        title: "Choose good run-and-check habits",
+        prompt: `Which habits help when practicing "${seed.title}"?`,
+        options: [
+            "Run the code after writing it",
+            "Read the output carefully",
+            "Ignore error messages",
+            "Change many lines at once without testing",
+        ],
+        correctOptionIds: ["a", "b"],
+        hint: "Good practice means running code and checking what happened.",
+        help: {
+            concept: "Running small pieces of code and reading the output helps you understand Python behavior.",
+            hint_1: "Output and errors both give useful feedback.",
+            hint_2: "Testing small changes is easier than debugging many changes at once.",
+        },
+    };
+}
+
+
+
+
+
+function countNonEmptyStdinLines(stdin: unknown): number {
+    return String(stdin ?? "")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean).length;
+}
+
+function hasFunctionWrapper(source: unknown): boolean {
+    return /\b_inputs\s*=\s*\[\]/.test(String(source ?? "")) &&
+        /\b_parse_arg\b/.test(String(source ?? ""));
+}
+
+function appendSafeMissingFunctionInputs(args: {
+    stdin: string;
+    missingCount: number;
+}): string {
+    const lines = args.stdin
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean);
+
+    for (let index = 0; index < args.missingCount; index += 1) {
+        // Use 1 as a safe default:
+        // - avoids division by zero
+        // - works with int(...)
+        // - works with arithmetic examples
+        lines.push("1");
+    }
+
+    return `${lines.join("\n")}\n`;
+}
+
+function repairFunctionWrapperTestsWithMissingInputs(
+    exercise: PythonCodeInputExercise,
+): PythonCodeInputExercise | null {
+    if (!hasFunctionWrapper(exercise.solutionCode)) return null;
+
+    const signature = extractFunctionSignature(exercise);
+    if (!signature || signature.params.length < 2) return null;
+
+    const tests = Array.isArray(exercise.tests) ? exercise.tests : [];
+    if (tests.length < 1) return null;
+
+    let changed = false;
+
+    const nextTests = tests.map((test) => {
+        const existingCount = countNonEmptyStdinLines(test.stdin);
+        const missingCount = signature.params.length - existingCount;
+
+        if (missingCount <= 0) return test;
+
+        changed = true;
+
+        return {
+            ...test,
+            stdin: appendSafeMissingFunctionInputs({
+                stdin: String(test.stdin ?? ""),
+                missingCount,
+            }),
+        };
+    });
+
+    if (!changed) return null;
+
+    return {
+        ...exercise,
+        tests: nextTests,
+    };
+}
+
+
+
+function buildTopicAwareDragReorderFallback(
+    seed: TopicSeed,
+    id: string,
+): PythonDraftExercise {
+    const tokens = [
+        "Write a small piece of Python code",
+        "Run the code",
+        "Read the output or error message",
+    ];
+
+    return {
+        id,
+        kind: "drag_reorder",
+        title: "Order the run-and-check workflow",
+        prompt: `Put the steps in order for practicing "${seed.title}".`,
+        tokens,
+        correctOrder: tokens,
+        hint: "You need code before you can run it.",
+        help: {
+            concept: "A basic Python workflow is write code, run it, then inspect the result.",
+            hint_1: "The output appears after running.",
+            hint_2: "Errors are also useful feedback.",
+        },
+    };
+}
+function buildPolicyFallbackExercise(args: {
+    seed: TopicSeed;
+    kind: PythonPolicyExerciseKind;
+    index: number;
+}): PythonDraftExercise {
+    const id = `policy_${args.kind}_${args.index}`;
+
+    switch (args.kind) {
+        case "single_choice":
+            return buildTopicAwareSingleChoiceFallback(args.seed, id);
+
+        case "multi_choice":
+            return buildTopicAwareMultiChoiceFallback(args.seed, id);
+
+        case "drag_reorder":
+            return buildTopicAwareDragReorderFallback(args.seed, id);
+
+        case "fill_blank_choice":
+            if (looksLikeConditionalTopic(args.seed)) {
+                return buildConditionalFillBlankExercise(id);
+            }
+            return buildGenericFillBlankExercise(id);
+
+        case "code_input":
+            if (looksLikeTruthinessTopic(args.seed)) {
+                return buildTruthinessCodeInputExercise(id);
+            }
+            return buildGenericCodeInputExercise(id);
+    }
+}
+function appendPolicyFallbackExercisesForAllKinds(args: {
+    seed: TopicSeed;
+    draft: TopicAuthoringDraft;
+    report: RepairReport;
+}): TopicAuthoringDraft {
+    const planned = args.seed.plannedExerciseCounts;
+    if (!planned) return args.draft;
+
+    const counts = countKinds(args.draft);
+    const quizDraft = [...args.draft.quizDraft];
+
+    for (const kind of PYTHON_POLICY_EXERCISE_KINDS) {
+        const target = planned.counts[kind] ?? 0;
+        let index = 1;
+
+        while (counts[kind] < target) {
+            const exercise = buildPolicyFallbackExercise({
+                seed: args.seed,
+                kind,
+                index,
+            });
+
+            quizDraft.push(exercise);
+            counts[kind] += 1;
+            index += 1;
+
+            args.report.repairs.push({
+                code: "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+                category: "other",
+                severity: "medium",
+                field: exercise.id,
+                message: `Added a fallback ${kind} exercise to satisfy the planned exercise mix for "${args.seed.topicId}".`,
+            });
+        }
+    }
+
+    return {
+        ...args.draft,
+        quizDraft,
+    };
+}
+const PYTHON_POLICY_EXERCISE_KINDS = [
+    "single_choice",
+    "multi_choice",
+    "drag_reorder",
+    "fill_blank_choice",
+    "code_input",
+] as const;
+
+type PythonPolicyExerciseKind = (typeof PYTHON_POLICY_EXERCISE_KINDS)[number];
+
+function normalizePolicyExerciseCounts(args: {
+    seed: TopicSeed;
+    draft: TopicAuthoringDraft;
+    report: RepairReport;
+}): TopicAuthoringDraft {
+    const planned = args.seed.plannedExerciseCounts;
+    if (!planned) return args.draft;
+
+    const keptCounts: Record<PythonPolicyExerciseKind, number> = {
+        single_choice: 0,
+        multi_choice: 0,
+        drag_reorder: 0,
+        fill_blank_choice: 0,
+        code_input: 0,
+    };
+
+    const quizDraft: TopicAuthoringDraft["quizDraft"] = [];
+
+    for (const exercise of args.draft.quizDraft) {
+        const kind = exercise.kind as PythonPolicyExerciseKind;
+        const target = planned.counts[kind] ?? 0;
+
+        if (keptCounts[kind] < target) {
+            quizDraft.push(exercise);
+            keptCounts[kind] += 1;
+            continue;
+        }
+
+        args.report.repairs.push({
+            code: "PYTHON_POLICY_EXTRA_EXERCISE_DROPPED",
+            category: "other",
+            severity: "medium",
+            field: exercise.id,
+            message: `Dropped extra ${kind} exercise to satisfy the planned exercise mix for "${args.seed.topicId}".`,
+        });
+    }
+
+    const nextDraft: TopicAuthoringDraft = {
+        ...args.draft,
+        quizDraft,
+    };
+
+    return appendPolicyFallbackExercisesForAllKinds({
+        seed: args.seed,
+        draft: nextDraft,
+        report: args.report,
+    });
+}
+
 
 function appendPolicyFallbackExercises(args: {
     seed: TopicSeed;
@@ -1885,13 +2166,27 @@ export async function repairPythonDraft(args: {
             const functionRuntimeRepair = rewriteFunctionReturnExercise(afterHardcodedFunctionRepair);
             const afterFunctionRuntimeRepair =
                 functionRuntimeRepair ?? afterHardcodedFunctionRepair;
+            const missingFunctionInputRepair =
+                repairFunctionWrapperTestsWithMissingInputs(afterFunctionRuntimeRepair);
 
+            const afterMissingFunctionInputRepair =
+                missingFunctionInputRepair ?? afterFunctionRuntimeRepair;
+
+            if (missingFunctionInputRepair) {
+                report.repairs.push({
+                    code: "PYTHON_FUNCTION_STDIN_ARITY_REPAIRED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Added safe missing stdin values for a wrapped Python function exercise whose tests provided fewer input lines than the function parameters.",
+                });
+            }
             const commaSeparatedStdinRepair =
-                normalizeCommaSeparatedStdinForFunctionParams(afterFunctionRuntimeRepair);
+                normalizeCommaSeparatedStdinForFunctionParams(afterMissingFunctionInputRepair);
 
             const afterCommaSeparatedStdinRepair =
-                commaSeparatedStdinRepair ?? afterFunctionRuntimeRepair;
-
+                commaSeparatedStdinRepair ?? afterMissingFunctionInputRepair;
             if (commaSeparatedStdinRepair) {
                 report.repairs.push({
                     code: "PYTHON_COMMA_SEPARATED_STDIN_REPAIRED",
@@ -2115,7 +2410,7 @@ export async function repairPythonDraft(args: {
         report,
     });
 
-    nextDraft = appendPolicyFallbackExercises({
+    nextDraft = normalizePolicyExerciseCounts({
         seed: args.seed,
         draft: nextDraft,
         report,

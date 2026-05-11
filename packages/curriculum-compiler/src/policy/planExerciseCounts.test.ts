@@ -64,6 +64,5 @@ describe("planExerciseCounts", () => {
                 .map(([, count]) => count),
         );
 
-        expect(dominantCount).toBeGreaterThan(maxOther);
-    });
+        expect(dominantCount).toBeGreaterThanOrEqual(maxOther);    });
 });

@@ -30,10 +30,13 @@
       "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 3,
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -44,25 +47,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz1",
-            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.quiz1.title",
-            "exerciseKey": "quiz1",
+            "id": "policy_code_input_1",
+            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.policy_code_input_1.title",
+            "exerciseKey": "policy_code_input_1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           },
           {
-            "id": "quiz5",
-            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.quiz5.title",
-            "exerciseKey": "quiz5",
+            "id": "policy_code_input_2",
+            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.policy_code_input_2.title",
+            "exerciseKey": "policy_code_input_2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
+          },
+          {
+            "id": "policy_code_input_3",
+            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.policy_code_input_3.title",
+            "exerciseKey": "policy_code_input_3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
           }
         ]
       }
@@ -85,45 +97,41 @@
   "exercises": [
     {
       "id": "quiz1",
-      "kind": "code_input",
-      "purpose": "project",
+      "kind": "single_choice",
+      "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz1",
-      "language": "python",
-      "starterCode": "age = input()\n# Convert age to an integer",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "25\n",
-            "stdout": "In 10 years, you will be 35",
-            "match": "exact"
-          },
-          {
-            "stdin": "30\n",
-            "stdout": "In 10 years, you will be 40",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "age = int(input())\nprint('In 10 years, you will be', age + 10)"
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
       }
     },
     {
       "id": "quiz2",
-      "kind": "fill_blank_choice",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz2",
-      "choiceCount": 4,
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "int"
+        "kind": "single_choice",
+        "optionId": "b"
       }
     },
     {
       "id": "quiz3",
-      "kind": "single_choice",
+      "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz3",
@@ -134,8 +142,13 @@
         "d"
       ],
       "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
       }
     },
     {
@@ -155,34 +168,152 @@
         "optionIds": [
           "a",
           "b",
-          "c"
+          "d"
         ]
       }
     },
     {
       "id": "quiz5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz6",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz7",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "input"
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz8",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "float"
+      }
+    },
+    {
+      "id": "policy_code_input_1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz5",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.policy_code_input_1",
       "language": "python",
-      "starterCode": "number = input()\n# Convert number to a float",
+      "starterCode": "n = int(input())\n# Your code here",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "3.14\n",
-            "stdout": "The number is: 3.14",
+            "stdin": "5\n",
+            "stdout": "True\n",
             "match": "exact"
           },
           {
-            "stdin": "2\n",
-            "stdout": "The number is: 2.0",
+            "stdin": "0\n",
+            "stdout": "False\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "number = float(input())\nprint('The number is:', number)"
+        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
+      }
+    },
+    {
+      "id": "policy_code_input_2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.policy_code_input_2",
+      "language": "python",
+      "starterCode": "n = int(input())\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "5\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "False\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
+      }
+    },
+    {
+      "id": "policy_code_input_3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.policy_code_input_3",
+      "language": "python",
+      "starterCode": "n = int(input())\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "5\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "False\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
       }
     }
   ]

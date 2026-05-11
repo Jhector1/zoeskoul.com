@@ -16,18 +16,24 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Practice"
+              "title": "Personal Introduction Program"
             }
           },
           "projectSteps": {
-            "q5": {
-              "title": "Create and print variables"
+            "policy_code_input_1": {
+              "title": "Print whether a number is positive"
+            },
+            "policy_code_input_2": {
+              "title": "Print whether a number is positive"
+            },
+            "policy_code_input_3": {
+              "title": "Print whether a number is positive"
             }
           },
           "quiz": {
             "q1": {
               "title": "What is the data type of the value 3.14?",
-              "prompt": "Choose the correct data type for the value 3.14.",
+              "prompt": "Choose the correct data type.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -43,23 +49,23 @@
             },
             "q2": {
               "title": "Which of the following is a string?",
-              "prompt": "Identify the string from the options below.",
+              "prompt": "Select the correct option.",
               "hint": "Strings are enclosed in quotes.",
               "help": {
                 "concept": "Strings are sequences of characters enclosed in quotes.",
                 "hint_1": "Look for the option that has quotes around it.",
-                "hint_2": "Remember that numbers and boolean values are not strings."
+                "hint_2": "The other options are numbers or boolean values."
               },
               "options": {
                 "a": "42",
                 "b": "3.14",
-                "c": "True",
-                "d": "\"Hello, World!\""
+                "c": "\"Hello\"",
+                "d": "True"
               }
             },
             "q3": {
-              "title": "Select all valid Python data types.",
-              "prompt": "Choose all the correct data types from the options below.",
+              "title": "Which of the following are valid Python data types?",
+              "prompt": "Select all that apply.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -69,37 +75,125 @@
               "options": {
                 "a": "String",
                 "b": "Integer",
-                "c": "Float",
-                "d": "Character"
+                "c": "Character",
+                "d": "Float",
+                "e": "Boolean"
               }
             },
             "q4": {
-              "title": "Fill in the blank: The value ___ represents the absence of a value in Python.",
-              "prompt": "Choose the correct word to fill in the blank.",
-              "hint": "This is a special type in Python.",
-              "help": {
-                "concept": "the missing term is used to signify no value or a null value in Python.",
-                "hint_1": "It's different from False or an empty string.",
-                "hint_2": "Think about how you would represent 'nothing' in programming."
-              },
-              "template": "The value ___ represents the absence of a value in Python.",
-              "choices": [
-                "None",
-                "Null",
-                "False",
-                "Empty"
-              ]
-            },
-            "q5": {
-              "title": "Create and print variables",
-              "prompt": "Write Python code to create variables of different types and print them.",
+              "title": "Identify the correct ways to represent None in Python.",
+              "prompt": "Select all that apply.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "# Create variables\nname = \"\"\nage = 0\nheight = 0.0\nis_student = False\nfavorite_color = None\n\n# Print the variables"
+              "options": {
+                "a": "None",
+                "b": "null",
+                "c": "nil",
+                "d": "undefined"
+              }
+            },
+            "q5": {
+              "title": "Fill in the blank: The value `\"Hello\"` is a __________.",
+              "prompt": "Choose the correct data type.",
+              "hint": "Think about how text is represented in Python.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank: the value `\"hello\"` is a __________..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The value `[blank1]` is a string.",
+              "choices": [
+                "string",
+                "integer",
+                "float"
+              ]
+            },
+            "q6": {
+              "title": "Fill in the blank: The value `42` is a __________.",
+              "prompt": "Choose the correct data type.",
+              "hint": "Consider what type of number 42 is.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank: the value `42` is a __________..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The value `[blank1]` is a integer.",
+              "choices": [
+                "boolean",
+                "integer",
+                "string"
+              ]
+            },
+            "q7": {
+              "title": "Arrange the following data types in order from most specific to most general.",
+              "prompt": "Drag and drop to reorder.",
+              "hint": "Think about the logical order of the steps.",
+              "help": {
+                "concept": "This task is about understanding the sequence behind arrange the following data types in order from most specific to most general..",
+                "hint_1": "Find the step that must happen first before the others make sense.",
+                "hint_2": "Check which action depends on a previous step already being completed."
+              },
+              "tokens": {
+                "t1": "String",
+                "t2": "Integer",
+                "t3": "Float",
+                "t4": "Boolean",
+                "t5": "None"
+              }
+            },
+            "q8": {
+              "title": "Arrange the following values from least to most complex.",
+              "prompt": "Drag and drop to reorder.",
+              "hint": "Think about the logical order of the steps.",
+              "help": {
+                "concept": "This task is about understanding the sequence behind arrange the following values from least to most complex..",
+                "hint_1": "Find the step that must happen first before the others make sense.",
+                "hint_2": "Check which action depends on a previous step already being completed."
+              },
+              "tokens": {
+                "t1": "42",
+                "t2": "\"Hello\"",
+                "t3": "3.14",
+                "t4": "True",
+                "t5": "None"
+              }
+            },
+            "policy_code_input_1": {
+              "title": "Print whether a number is positive",
+              "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+              "hint": "Use a conditional check and return a boolean result.",
+              "help": {
+                "concept": "A conditional can decide which boolean value to print based on a comparison.",
+                "hint_1": "Compare the number with zero inside an if statement.",
+                "hint_2": "Print True when the condition passes; otherwise print False."
+              },
+              "starterCode": "n = int(input())\n# Your code here"
+            },
+            "policy_code_input_2": {
+              "title": "Print whether a number is positive",
+              "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+              "hint": "Use a conditional check and return a boolean result.",
+              "help": {
+                "concept": "A conditional can decide which boolean value to print based on a comparison.",
+                "hint_1": "Compare the number with zero inside an if statement.",
+                "hint_2": "Print True when the condition passes; otherwise print False."
+              },
+              "starterCode": "n = int(input())\n# Your code here"
+            },
+            "policy_code_input_3": {
+              "title": "Print whether a number is positive",
+              "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+              "hint": "Use a conditional check and return a boolean result.",
+              "help": {
+                "concept": "A conditional can decide which boolean value to print based on a comparison.",
+                "hint_1": "Compare the number with zero inside an if statement.",
+                "hint_2": "Print True when the condition passes; otherwise print False."
+              },
+              "starterCode": "n = int(input())\n# Your code here"
             }
           }
         }
@@ -112,11 +206,11 @@
         "values-types-and-literals": {
           "1": {
             "title": "Understanding Data Types",
-            "bodyMarkdown": "In Python, data types are essential for defining the kind of data you are working with. The most common data types include:\n\n- **Strings**: Text data enclosed in quotes. For example, `\"Hello, World!\"`.\n- **Integers**: Whole numbers like `42`.\n- **Floats**: Decimal numbers like `3.14`.\n- **Booleans**: Represents `True` or `False`.\n- **None**: A special type representing the absence of a value.\n\n### Example:\n```python\n# This is a string\nname = \"Alice\"\n\n# This is an integer\nage = 30\n\n# This is a float\nheight = 5.5\n\n# This is a boolean\nis_student = True\n\n# This is None\nfavorite_color = None\n```\n\n### Your turn:\nTry creating variables of different types and print them out!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "In Python, data types are essential for defining the nature of data. The main types include:\n\n- **Strings**: Text enclosed in quotes, e.g., `\"Hello, World!\"`\n- **Integers**: Whole numbers, e.g., `42`\n- **Floats**: Decimal numbers, e.g., `3.14`\n- **Booleans**: Represents `True` or `False`\n- **None**: Represents the absence of a value.\n\n### Example:\n```python\nname = \"Alice\"  # String\nage = 30        # Integer\nheight = 5.5    # Float\nis_student = True  # Boolean\nnothing = None  # None\n```\n\n### Your turn:\nTry creating variables of different types!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           },
           "2": {
             "title": "Printing Values",
-            "bodyMarkdown": "The `print()` function in Python is used to display output. You can print different types of data, and Python will handle them appropriately.\n\n### Example:\n```python\n# Printing different types of values\nprint(\"Name:\", name)\nprint(\"Age:\", age)\nprint(\"Height:\", height)\nprint(\"Is Student:\", is_student)\nprint(\"Favorite Color:\", favorite_color)\n```\n\n### Try it yourself:\nModify the values of the variables and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "The `print()` function is used to display output in Python. You can print different data types directly.\n\n### Example:\n```python\nprint(\"Hello, World!\")  # Prints a string\nprint(42)                # Prints an integer\nprint(3.14)             # Prints a float\nprint(True)             # Prints a boolean\nprint(None)             # Prints None\n```\n\n### Try it yourself:\nWrite a program that prints your name and age!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

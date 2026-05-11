@@ -6,86 +6,199 @@
     {
       "id": "while-loop-intro",
       "title": "Introduction to While Loops",
-      "bodyMarkdown": "A while loop allows you to repeat a block of code as long as a specified condition is true. For example, if you want to count from 1 to 5, you can use a while loop like this:\n\n```python\ncount = 1\nwhile count <= 5:\n    print(count)\n    count += 1\n```\n\nIn this example, the loop continues until `count` is greater than 5. Each time the loop runs, it prints the current value of `count` and then increases it by 1.\n\n**Your turn:** Try modifying the code to count from 1 to 10."
+      "bodyMarkdown": "A while loop repeatedly executes a block of code as long as a specified condition is true. For example, if we want to count from 1 to 5, we can use a while loop like this:\n\n```python\ncount = 1\nwhile count <= 5:\n    print(count)\n    count += 1\n```\nThis code will print numbers 1 through 5. \n\n**Your turn:** Try modifying the condition to count to 10 instead!"
     },
     {
       "id": "while-loop-break",
       "title": "Using Break in While Loops",
-      "bodyMarkdown": "You can use the `break` statement to exit a while loop prematurely. For instance:\n\n```python\ncount = 1\nwhile True:\n    print(count)\n    if count == 5:\n        break\n    count += 1\n```\n\nHere, the loop will run indefinitely until `count` equals 5, at which point it will break out of the loop.\n\n**Try this:** Change the condition to break when `count` equals 3."
+      "bodyMarkdown": "The `break` statement can be used to exit a while loop prematurely. For example:\n\n```python\ncount = 1\nwhile True:\n    print(count)\n    if count == 5:\n        break\n    count += 1\n```\nThis loop will print numbers 1 to 5 and then stop. \n\n**Try this:** Change the break condition to stop at 3."
     }
   ],
   "quizDraft": [
     {
-      "id": "while-loop-usage",
+      "id": "q1",
       "kind": "single_choice",
       "title": "What does a while loop do?",
-      "prompt": "A while loop repeats a block of code until a condition becomes false.",
-      "hint": "Think about how long the loop should run.",
-      "help": {
-        "concept": "A while loop continues executing as long as its condition is true.",
-        "hint_1": "Consider the condition that controls the loop's execution.",
-        "hint_2": "Identify what happens when the condition is no longer true."
-      },
+      "prompt": "A while loop executes a block of code as long as a condition is:",
       "options": [
-        "It runs a block of code only once.",
-        "It repeats a block of code indefinitely.",
-        "It repeats a block of code until a condition is false.",
-        "It runs a block of code based on user input."
+        "True",
+        "False",
+        "Undefined",
+        "Null"
       ],
       "correctOptionIds": [
-        "c"
-      ]
+        "a"
+      ],
+      "hint": "Think about the condition that controls the loop.",
+      "help": {
+        "concept": "A while loop continues to execute as long as its condition evaluates to true.",
+        "hint_1": "The loop will stop when the condition becomes false.",
+        "hint_2": "Focus on what happens when the condition is no longer met."
+      }
     },
     {
-      "id": "while-loop-break-example",
-      "kind": "multi_choice",
-      "title": "Which statements correctly describe the use of break in while loops?",
-      "prompt": "Select all that apply.",
-      "hint": "Think about how break affects the loop's execution.",
-      "help": {
-        "concept": "The break statement is used to exit a loop before it naturally terminates.",
-        "hint_1": "Break can be used to stop a loop based on a condition.",
-        "hint_2": "Consider scenarios where you might want to exit a loop early."
-      },
+      "id": "q2",
+      "kind": "single_choice",
+      "title": "What will the following code print?\n```python\ncount = 1\nwhile count < 3:\n    print(count)\n    count += 1\n```",
+      "prompt": "What is the output of the code?",
       "options": [
-        "Break can stop a loop when a certain condition is met.",
-        "Break will cause the loop to run forever.",
-        "Using break can help avoid infinite loops.",
-        "Break can only be used in for loops."
+        "1\n2",
+        "1\n2\n3",
+        "2\n3",
+        "1\n3"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider how many times the loop will run based on the condition.",
+      "help": {
+        "concept": "The loop runs while count is less than 3.",
+        "hint_1": "Count starts at 1 and increments by 1 each time.",
+        "hint_2": "Think about the final value of count when the loop stops."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "multi_choice",
+      "title": "Which of the following are valid uses of a while loop?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "Counting up to a number",
+        "Waiting for user input",
+        "Iterating over a list",
+        "Repeating an action until a condition is false"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about scenarios where you need to repeat actions based on conditions.",
+      "help": {
+        "concept": "While loops are useful for repeating actions until a specific condition is met.",
+        "hint_1": "Consider tasks that require waiting or counting.",
+        "hint_2": "Not all iterations need to be over a list."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Which statements about the break statement are true?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "It exits the loop immediately",
+        "It can be used in for loops only",
+        "It can be used in while loops",
+        "It can skip to the next iteration"
       ],
       "correctOptionIds": [
         "a",
         "c"
+      ],
+      "hint": "Think about how break affects the flow of a loop.",
+      "help": {
+        "concept": "The break statement is used to exit a loop before it naturally ends.",
+        "hint_1": "It can be used in both while and for loops.",
+        "hint_2": "It does not skip iterations; it stops the loop."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "drag_reorder",
+      "title": "Order the steps of a while loop execution.",
+      "prompt": "Arrange the following steps in the correct order.",
+      "tokens": [
+        "Check the condition",
+        "Execute the loop body",
+        "Update the loop variable",
+        "Repeat until the condition is false"
+      ],
+      "correctOrder": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "hint": "Think about the sequence of actions that occur in a loop.",
+      "help": {
+        "concept": "A while loop checks the condition, executes the body, updates variables, and repeats.",
+        "hint_1": "The condition is checked before executing the loop body.",
+        "hint_2": "Updating the loop variable is crucial for eventually stopping the loop."
+      }
+    },
+    {
+      "id": "q6",
+      "kind": "drag_reorder",
+      "title": "Arrange the following code snippets to create a while loop that counts from 1 to 5.",
+      "prompt": "Put the snippets in the correct order.",
+      "tokens": [
+        "count = 1",
+        "while count <= 5:",
+        "print(count)",
+        "count += 1"
+      ],
+      "correctOrder": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "hint": "Consider how to initialize the loop variable and what needs to happen inside the loop.",
+      "help": {
+        "concept": "The loop variable must be initialized before the loop starts.",
+        "hint_1": "The print statement should be inside the loop body.",
+        "hint_2": "Make sure to update the variable to avoid an infinite loop."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Counting with a While Loop",
+      "prompt": "Write a while loop that counts from 1 to 10 and prints each number.",
+      "starterCode": "count = 1\nwhile count <= 10:\n    # Your code here\n",
+      "solutionCode": "count = 1\nwhile count <= 10:\n    print(count)\n    count += 1\n",
+      "tests": [
+        {
+          "input": "",
+          "output": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n"
+        }
       ]
     },
     {
-      "id": "while-loop-count",
-      "kind": "fill_blank_choice",
-      "title": "Complete the while loop to count from 1 to 5.",
-      "prompt": "Fill in the blank to complete the code:\n\n```python\ncount = 1\nwhile count <= 5:\n    print(___)\n    count += 1\n```",
-      "choices": [
-        "count",
-        "count + 1",
-        "5",
-        "count - 1"
-      ],
-      "correctValue": "count"
-    },
-    {
-      "id": "while-loop-safety",
+      "id": "code_input_2",
       "kind": "code_input",
-      "title": "Create a while loop that counts to 10.",
-      "prompt": "Write a while loop that counts from 1 to 10 and prints each number.",
+      "title": "Using Break in a While Loop",
+      "prompt": "Write a while loop that counts from 1 to 10 but breaks when it reaches 5.",
       "starterCode": "count = 1\nwhile count <= 10:\n    # Your code here\n",
-      "solutionCode": "count = 1\nwhile count <= 10:\n    print(count)\n    count += 1\n"
+      "solutionCode": "count = 1\nwhile count <= 10:\n    if count == 5:\n        break\n    print(count)\n    count += 1\n",
+      "tests": [
+        {
+          "input": "",
+          "output": "1\n2\n3\n4\n"
+        }
+      ]
     },
     {
-      "id": "while-loop-conditional",
+      "id": "code_input_3",
       "kind": "code_input",
-      "title": "Modify the while loop to stop at 7.",
-      "prompt": "Change the while loop to count from 1 to 7 instead of 10.",
-      "starterCode": "count = 1\nwhile count <= 10:\n    print(count)\n    count += 1\n",
-      "solutionCode": "count = 1\nwhile count <= 7:\n    print(count)\n    count += 1\n"
+      "title": "Counting Down with a While Loop",
+      "prompt": "Write a while loop that counts down from 5 to 1 and prints each number.",
+      "starterCode": "count = 5\nwhile count > 0:\n    # Your code here\n",
+      "solutionCode": "count = 5\nwhile count > 0:\n    print(count)\n    count -= 1\n",
+      "tests": [
+        {
+          "input": "",
+          "output": "5\n4\n3\n2\n1\n"
+        }
+      ]
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Mini Number Game",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
 }

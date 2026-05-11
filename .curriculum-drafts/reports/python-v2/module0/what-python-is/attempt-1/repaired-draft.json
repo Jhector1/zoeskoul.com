@@ -4,69 +4,48 @@
   "minutes": 12,
   "sketchBlocks": [
     {
-      "id": "1",
+      "id": "sketch_1",
       "title": "Introduction to Python's Uses",
-      "bodyMarkdown": "Python is a versatile programming language used in various fields. It is popular for automation, web development, data analysis, and artificial intelligence. For example, you can use Python to automate repetitive tasks like renaming files or scraping data from websites. **Try it yourself:** Think of a task you do repeatedly that could be automated with Python."
+      "bodyMarkdown": "Python is a versatile programming language used in various fields. It can automate repetitive tasks, build web applications, analyze data, and even develop artificial intelligence. For example, you can use Python to write a simple script that automates sending emails. **Try it yourself:** Think of a task you do repeatedly and consider how Python could help automate it."
     },
     {
-      "id": "2",
-      "title": "Python in Web Development",
-      "bodyMarkdown": "Python is widely used in web development with frameworks like Django and Flask. These frameworks help developers build robust web applications quickly. For instance, a simple web app can be created using Flask with just a few lines of code. Here’s a basic example:\n\n```python\nfrom flask import Flask\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return 'Hello, World!'\n\nif __name__ == '__main__':\n    app.run(debug=True)\n```\n\n**Try this:** Modify the message returned by the `home` function to greet yourself!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "id": "sketch_2",
+      "title": "Python in Data Science",
+      "bodyMarkdown": "In data science, Python is widely used for data analysis and visualization. Libraries like Pandas and Matplotlib make it easy to manipulate data and create graphs. For instance, you can load a dataset and plot its values. **Your turn:** Imagine you have a dataset of sales figures. How would you visualize this data using Python?"
     }
   ],
   "quizDraft": [
     {
-      "id": "q1",
+      "id": "quiz_1",
       "kind": "single_choice",
-      "title": "What is one common use of Python?",
-      "prompt": "Select one of the following options.",
+      "title": "What is Python commonly used for?",
+      "prompt": "Select the best answer.",
       "options": [
+        "Creating complex video games",
         "Building mobile applications",
-        "Web development",
-        "Creating video games",
+        "Automating tasks and data analysis",
         "Designing graphics"
       ],
       "correctOptionIds": [
-        "b"
+        "c"
       ],
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "hint": "Think about the tasks that require automation or data processing.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+        "concept": "Python is often used for automation, data analysis, web development, and AI.",
+        "hint_1": "Consider the areas where Python's simplicity and power shine.",
+        "hint_2": "Look for applications that involve processing data or automating tasks."
       }
     },
     {
-      "id": "q2",
-      "kind": "single_choice",
-      "title": "Which framework is commonly used for web development in Python?",
-      "prompt": "Choose the correct framework.",
-      "options": [
-        "Flask",
-        "Unity",
-        "Django",
-        "Both Flask and Django"
-      ],
-      "correctOptionIds": [
-        "d"
-      ],
-      "hint": "Think about the frameworks that help build web applications using Python.",
-      "help": {
-        "concept": "Flask and Django are both popular frameworks for web development in Python.",
-        "hint_1": "One is lightweight and easy to get started with, while the other is more feature-rich.",
-        "hint_2": "Both frameworks are widely recognized in the Python community."
-      }
-    },
-    {
-      "id": "q3",
+      "id": "quiz_2",
       "kind": "multi_choice",
-      "title": "Select all the areas where Python is commonly used.",
-      "prompt": "Choose all correct answers.",
+      "title": "Which of the following are applications of Python?",
+      "prompt": "Select all that apply.",
       "options": [
-        "Data analysis",
         "Web development",
+        "Data analysis",
         "Game development",
-        "Machine learning"
+        "Artificial intelligence"
       ],
       "correctOptionIds": [
         "a",
@@ -81,46 +60,206 @@
       }
     },
     {
-      "id": "q4",
+      "id": "quiz_3",
       "kind": "fill_blank_choice",
-      "title": "Python is widely used for __________.",
+      "title": "Python is often used for __________.",
       "prompt": "Fill in the blank with the correct term.",
-      "template": "Python is widely used for __________.",
+      "template": "Fill in the blank with the correct term.\n\nAnswer: [blank1]",
       "choices": [
         "automation",
-        "cooking",
-        "painting",
-        "gardening"
+        "graphics design",
+        "hardware programming"
       ],
       "correctValue": "automation",
-      "hint": "Focus on the missing concept or keyword.",
+      "hint": "Think about what Python excels at.",
       "help": {
-        "concept": "This task checks the key idea behind python is widely used for __________..",
+        "concept": "This task checks the key idea behind python is often used for __________..",
         "hint_1": "Look for the word or phrase that best matches the lesson concept.",
         "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
       }
     },
     {
-      "id": "q5",
+      "id": "quiz_4",
+      "kind": "fill_blank_choice",
+      "title": "In data science, Python is commonly used with __________.",
+      "prompt": "Fill in the blank with the correct library.",
+      "template": "Fill in the blank with the correct library.\n\nAnswer: [blank1]",
+      "choices": [
+        "Pandas",
+        "Photoshop",
+        "Unity"
+      ],
+      "correctValue": "Pandas",
+      "hint": "Consider popular libraries for data manipulation.",
+      "help": {
+        "concept": "This task checks the key idea behind in data science, python is commonly used with __________..",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "quiz_5",
       "kind": "code_input",
-      "title": "Create a simple Python program that prints your name.",
-      "prompt": "Write Python code to print your name.",
-      "starterCode": "print('Your Name')",
-      "solutionCode": "print('Zoe Skoul')",
+      "title": "Automate a simple task",
+      "prompt": "Write a Python program that prints a message indicating a task is automated. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "def automate_task():\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(automate_task())",
+      "solutionCode": "def automate_task():\n    print('Task has been automated!')\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(automate_task())",
       "recipeType": "fixed_tests",
       "hint": "Break the task into the main code steps first.",
       "help": {
-        "concept": "This task checks whether you can apply create a simple python program that prints your name. in a working solution.",
+        "concept": "This task checks whether you can apply automate a simple task in a working solution.",
         "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
         "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
       },
       "tests": [
         {
-          "stdin": "",
-          "stdout": "Zoe Skoul\n",
+          "stdin": "12\n",
+          "stdout": "Task has been automated!\nNone",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Task has been automated!\nNone",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "quiz_6",
+      "kind": "code_input",
+      "title": "Data analysis with Python",
+      "prompt": "Write a Python program that uses Pandas to create a DataFrame and print it. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "import pandas as pd\n\ndef create_dataframe():\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(create_dataframe())",
+      "solutionCode": "import pandas as pd\n\ndef create_dataframe():\n    data = {'Name': ['Alice', 'Bob'], 'Age': [25, 30]}\n    df = pd.DataFrame(data)\n    print(df)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(create_dataframe())",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "13",
+          "match": "includes"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "21",
+          "match": "includes"
+        }
+      ]
+    },
+    {
+      "id": "quiz_7",
+      "kind": "drag_reorder",
+      "title": "Order the steps to automate a task",
+      "prompt": "Arrange the steps in the correct order.",
+      "tokens": [
+        "Identify the task",
+        "Write the Python code",
+        "Test the automation",
+        "Run the code"
+      ],
+      "correctOrder": [
+        "Identify the task",
+        "Write the Python code",
+        "Run the code",
+        "Test the automation"
+      ],
+      "hint": "Think about the logical order of the steps.",
+      "help": {
+        "concept": "This task is about understanding the sequence behind order the steps to automate a task.",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
+    },
+    {
+      "id": "quiz_8",
+      "kind": "drag_reorder",
+      "title": "Order the steps to create a DataFrame",
+      "prompt": "Arrange the steps in the correct order.",
+      "tokens": [
+        "Import Pandas",
+        "Create a dictionary",
+        "Convert to DataFrame",
+        "Print the DataFrame"
+      ],
+      "correctOrder": [
+        "Import Pandas",
+        "Create a dictionary",
+        "Convert to DataFrame",
+        "Print the DataFrame"
+      ],
+      "hint": "Think about the logical order of the steps.",
+      "help": {
+        "concept": "This task is about understanding the sequence behind order the steps to create a dataframe.",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
+    },
+    {
+      "id": "quiz_9",
+      "kind": "code_input",
+      "title": "Print a greeting message",
+      "prompt": "Write a Python program that prints 'Hello, World!' Then read the input values, call the function, and print the returned result.",
+      "starterCode": "def greet():\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(greet())",
+      "solutionCode": "def greet():\n    print('Hello, World!')\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(greet())",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "Hello, World!\nNone",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Hello, World!\nNone",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "quiz_10",
+      "kind": "code_input",
+      "title": "Calculate the sum of two numbers",
+      "prompt": "Write a Python program that calculates and prints the sum of 5 and 10. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "def calculate_sum():\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(calculate_sum())",
+      "solutionCode": "def calculate_sum():\n    result = 5 + 10\n    print(result)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(calculate_sum())",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "15\nNone",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "15\nNone",
           "match": "exact"
         }
       ]
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Personal Introduction Program",
+    "stepIds": [
+      "quiz_5",
+      "quiz_6",
+      "quiz_9"
+    ]
+  }
 }

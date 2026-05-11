@@ -10,6 +10,18 @@ export type CourseSpecExercisePolicy = {
         technicalTopicCodeInputMin?: number;
         topicExerciseMin?: number;
     };
+    generationTargets?: {
+        quizBankMin?: number;
+        quizBankTarget?: number;
+        quizVisibleDefault?: number;
+        quizVisibleMax?: number;
+
+        projectCodeInputMin?: number;
+        projectCodeInputTarget?: number;
+        projectCodeInputMax?: number;
+
+        maxAttempts?: number | null;
+    };
 };
 
 export type CourseSpecProjectPolicy = {

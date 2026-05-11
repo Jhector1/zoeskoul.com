@@ -6,96 +6,197 @@
     {
       "id": "sketch1",
       "title": "Getting User Input",
-      "bodyMarkdown": "In Python, you can use the `input()` function to get input from the user. For example:\n\n```python\nname = input('What is your name? ')\nprint('Hello, ' + name + '!')\n```\n\nThis code asks the user for their name and then greets them. \n\n**Your turn:** Try modifying the prompt to ask for your favorite color."
+      "bodyMarkdown": "In Python, we can use the `input()` function to get input from the user. For example:\n\n```python\nname = input('What is your name? ')\nprint('Hello, ' + name)\n```\n\nThis code asks the user for their name and then greets them. **Try it yourself** by changing the message in the `input()` function!"
     },
     {
       "id": "sketch2",
       "title": "Type Conversion",
-      "bodyMarkdown": "When you get input from the user, it is always in string format. You can convert it to other types using functions like `int()` and `float()`. For example:\n\n```python\nage = int(input('How old are you? '))\nprint('In 5 years, you will be', age + 5)\n```\n\nThis code converts the user's age from a string to an integer so you can do math with it.\n\n**Try it yourself:** Change the code to ask for your height in meters and print it in centimeters."
+      "bodyMarkdown": "When we get input from the user, it is always in string format. To convert it to other types, we can use functions like `int()`, `float()`, and `str()`. For example:\n\n```python\nage = input('How old are you? ')\nage = int(age)\nprint('You are ' + str(age) + ' years old.')\n```\n\nThis code converts the user's age from a string to an integer. **Your turn**: Try converting a float instead!"
     }
   ],
   "quizDraft": [
     {
       "id": "quiz1",
-      "kind": "code_input",
-      "title": "Convert User Input to Integer",
-      "prompt": "Write a program that asks the user for their age and prints out the age in 10 years.",
-      "starterCode": "age = input('Enter your age: ')\n# Convert age to an integer\n",
-      "solutionCode": "age = int(input('Enter your age: '))\nprint('In 10 years, you will be', age + 10)",
-      "tests": [
-        {
-          "input": "25\n",
-          "output": "In 10 years, you will be 35"
-        },
-        {
-          "input": "30\n",
-          "output": "In 10 years, you will be 40"
-        }
-      ]
-    },
-    {
-      "id": "quiz2",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the Blank",
-      "prompt": "The function used to convert a string to an integer is `______`.",
-      "template": "The function used to convert a string to an integer is `______`.",
-      "choices": [
-        "input",
-        "int",
-        "float",
-        "str"
-      ],
-      "correctValue": "int"
-    },
-    {
-      "id": "quiz3",
       "kind": "single_choice",
-      "title": "Understanding Input Types",
-      "prompt": "What type is the value returned by the input function?",
+      "title": "Understanding Input",
+      "prompt": "What does the `input()` function do in Python?",
       "options": [
-        "Integer",
-        "String",
-        "Float",
-        "Boolean"
+        "It prints output to the console.",
+        "It gets input from the user.",
+        "It converts data types.",
+        "It defines a function."
       ],
       "correctOptionIds": [
         "b"
-      ]
+      ],
+      "hint": "Think about how we ask users for information.",
+      "help": {
+        "concept": "The `input()` function is used to take input from the user.",
+        "hint_1": "Look for the option that describes user interaction.",
+        "hint_2": "Remember, it does not perform any calculations or conversions."
+      }
     },
     {
-      "id": "quiz4",
-      "kind": "multi_choice",
+      "id": "quiz2",
+      "kind": "single_choice",
       "title": "Type Conversion Functions",
-      "prompt": "Which of the following functions can be used for type conversion in Python? (Select all that apply)",
+      "prompt": "Which function would you use to convert a string to an integer?",
       "options": [
-        "int()",
         "str()",
+        "int()",
         "float()",
         "input()"
       ],
       "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider which function changes data types to a whole number.",
+      "help": {
+        "concept": "The `int()` function converts a string or float to an integer.",
+        "hint_1": "Think about the function that starts with 'i'.",
+        "hint_2": "This function is specifically for converting to whole numbers."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Valid Type Conversions",
+      "prompt": "Which of the following are valid type conversions in Python?",
+      "options": [
+        "int('123')",
+        "float('12.34')",
+        "str(123)",
+        "str(12.34)"
+      ],
+      "correctOptionIds": [
         "a",
         "b",
-        "c"
-      ]
+        "c",
+        "d"
+      ],
+      "hint": "Think about how each function works with different types.",
+      "help": {
+        "concept": "All listed functions correctly convert types in Python.",
+        "hint_1": "Check if the input types match the expected output types.",
+        "hint_2": "Remember, you can convert numbers to strings and vice versa."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Common String Methods",
+      "prompt": "Which of the following are common string methods in Python?",
+      "options": [
+        "upper()",
+        "lower()",
+        "append()",
+        "strip()"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about methods that modify or return strings.",
+      "help": {
+        "concept": "Methods like `upper()`, `lower()`, and `strip()` are used with strings.",
+        "hint_1": "Consider which methods are used to change case or remove spaces.",
+        "hint_2": "One of the options is not a string method."
+      }
     },
     {
       "id": "quiz5",
-      "kind": "code_input",
-      "title": "Convert User Input to Float",
-      "prompt": "Write a program that asks the user for a number and prints it as a float.",
-      "starterCode": "number = input('Enter a number: ')\n# Convert number to a float\n",
-      "solutionCode": "number = float(input('Enter a number: '))\nprint('The number is:', number)",
-      "tests": [
-        {
-          "input": "3.14\n",
-          "output": "The number is: 3.14"
-        },
-        {
-          "input": "2\n",
-          "output": "The number is: 2.0"
-        }
-      ]
+      "kind": "drag_reorder",
+      "title": "Order of Operations",
+      "prompt": "Arrange the steps to safely convert user input to an integer.",
+      "tokens": [
+        "Get input from the user",
+        "Convert input to integer",
+        "Store the result in a variable",
+        "Print the result"
+      ],
+      "correctOrder": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "hint": "Think about the sequence of actions needed to process input.",
+      "help": {
+        "concept": "You must first get the input before you can convert it.",
+        "hint_1": "Identify the first step in the process.",
+        "hint_2": "Remember to store the converted value before printing."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "String Formatting Steps",
+      "prompt": "Arrange the steps to format a string using f-strings.",
+      "tokens": [
+        "Define the variables",
+        "Use an f-string to format",
+        "Print the formatted string"
+      ],
+      "correctOrder": [
+        0,
+        1,
+        2
+      ],
+      "hint": "Consider what needs to be done before you can format and print.",
+      "help": {
+        "concept": "You need to have the variables ready before formatting them.",
+        "hint_1": "Identify the first action to take.",
+        "hint_2": "Formatting comes before printing."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: Input Function",
+      "prompt": "The function used to get user input is called `[blank1]`.",
+      "template": "The function used to get user input is called `[blank1]`.",
+      "choices": [
+        "input",
+        "print",
+        "str",
+        "int"
+      ],
+      "correctValue": "input",
+      "hint": "Think about the function that starts with 'i'.",
+      "help": {
+        "concept": "The `input()` function is specifically designed for user input.",
+        "hint_1": "It's not used for output or type conversion.",
+        "hint_2": "This function is essential for interactive programs."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: Type Conversion",
+      "prompt": "To convert a string to a float, you use `[blank1]`.",
+      "template": "To convert a string to a float, you use `[blank1]`.",
+      "choices": [
+        "float",
+        "int",
+        "str",
+        "input"
+      ],
+      "correctValue": "float",
+      "hint": "Consider which function is specifically for floating-point numbers.",
+      "help": {
+        "concept": "The `float()` function converts strings to floating-point numbers.",
+        "hint_1": "It's not the `int()` or `str()` function.",
+        "hint_2": "This function allows for decimal values."
+      }
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Profile Card Generator",
+    "stepIds": [
+      "quiz1",
+      "quiz2",
+      "quiz3"
+    ]
+  }
 }

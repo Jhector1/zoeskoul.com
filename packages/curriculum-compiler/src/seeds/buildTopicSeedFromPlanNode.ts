@@ -106,6 +106,37 @@ export function buildTopicSeedFromPlanNode(args: {
                 resultShape: moduleRuntimeDefaults.resultShape,
             }
             : workspaceRuntimeDefaults;
+
+    const policyTargets =
+        args.spec?.policy?.exercisePolicy?.generationTargets ?? {};
+
+    const generationTargets = {
+        quizBankMin: policyTargets.quizBankMin ?? 6,
+        quizBankTarget: policyTargets.quizBankTarget ?? 8,
+        quizVisibleDefault: policyTargets.quizVisibleDefault ?? 4,
+        quizVisibleMax: policyTargets.quizVisibleMax ?? 6,
+
+        projectCodeInputMin: policyTargets.projectCodeInputMin ?? 3,
+        projectCodeInputTarget: policyTargets.projectCodeInputTarget ?? 3,
+        projectCodeInputMax: policyTargets.projectCodeInputMax ?? 5,
+
+        maxAttempts: policyTargets.maxAttempts ?? null,
+    };
+
+    const totalGeneratedExercises =
+        generationTargets.quizBankTarget +
+        generationTargets.projectCodeInputTarget;
+
+    const plannedExerciseCounts = planExerciseCounts({
+        policy: exercisePolicy,
+        total: totalGeneratedExercises,
+        constraints: {
+            code_input: {
+                min: generationTargets.projectCodeInputTarget,
+                max: generationTargets.projectCodeInputTarget,
+            },
+        },
+    });
     return {
         ...baseSeed,
 
@@ -125,10 +156,8 @@ export function buildTopicSeedFromPlanNode(args: {
 
         exercisePolicy,
         workspacePolicy,
-        plannedExerciseCounts: planExerciseCounts({
-            policy: exercisePolicy,
-            total: 5,
-        }),
+        generationTargets,
+        plannedExerciseCounts,
         moduleRuntimeDefaults: mergedRuntimeDefaults,
     };
 }

@@ -6,90 +6,222 @@
     {
       "id": "1",
       "title": "Understanding If, Elif, and Else",
-      "bodyMarkdown": "In Python, we use `if`, `elif`, and `else` statements to control the flow of our programs based on conditions. For example:\n\n```python\nage = 18\nif age < 18:\n    print('You are a minor.')\nelif age == 18:\n    print('You are just an adult.')\nelse:\n    print('You are an adult.')\n```\n\nIn this example, the program checks the value of `age`. If it's less than 18, it prints that the person is a minor. If it's exactly 18, it prints a different message. Otherwise, it states that the person is an adult.\n\n**Your turn:** Try changing the value of `age` and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "In Python, `if`, `elif`, and `else` are used to control the flow of your program based on conditions. For example:\n\n```python\nage = 18\nif age < 18:\n    print('You are a minor.')\nelif age == 18:\n    print('You are just an adult.')\nelse:\n    print('You are an adult.')\n```\n\nIn this example, the program checks the value of `age` and prints a message based on the condition that is true. \n\n**Your turn:** Try changing the value of `age` to see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     },
     {
       "id": "2",
       "title": "Comparison Operators",
-      "bodyMarkdown": "Comparison operators are used to compare values. The most common ones are:\n- `==` (equal to)\n- `!=` (not equal to)\n- `<` (less than)\n- `>` (greater than)\n- `<=` (less than or equal to)\n- `>=` (greater than or equal to)\n\nFor example:\n\n```python\nnumber = 10\nif number > 5:\n    print('Number is greater than 5')\nelse:\n    print('Number is 5 or less')\n```\n\nThis code checks if `number` is greater than 5 and prints the appropriate message.\n\n**Try it yourself:** Modify the value of `number` and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "Comparison operators are used to compare values. The most common ones are:\n- `==` (equal to)\n- `!=` (not equal to)\n- `<` (less than)\n- `>` (greater than)\n- `<=` (less than or equal to)\n- `>=` (greater than or equal to)\n\nFor example:\n\n```python\nnumber = 10\nif number > 5:\n    print('Number is greater than 5')\nelse:\n    print('Number is 5 or less')\n```\n\n**Try this:** Change the value of `number` and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     }
   ],
   "quizDraft": [
     {
-      "id": "1",
-      "kind": "multi_choice",
-      "title": "Understanding If Statements",
-      "prompt": "Which of the following statements correctly describes the use of `if`, `elif`, and `else`?",
+      "id": "q1",
+      "kind": "single_choice",
+      "title": "What does the `elif` keyword do?",
+      "prompt": "Choose the correct answer.",
       "options": [
-        "They are used to define functions.",
-        "They control the flow of the program based on conditions.",
-        "They are used to create loops.",
-        "They are only used for numerical comparisons."
+        "It starts a new conditional block.",
+        "It is used to check multiple conditions.",
+        "It ends the conditional block.",
+        "It is the same as `else`."
       ],
       "correctOptionIds": [
         "b"
       ],
-      "hint": "Think about how programs make decisions based on conditions.",
+      "hint": "Think about how you can check for additional conditions after an `if` statement.",
       "help": {
-        "concept": "If, elif, and else statements allow a program to execute different blocks of code based on whether certain conditions are true or false.",
-        "hint_1": "Consider how these statements can change the output based on different inputs.",
-        "hint_2": "Remember that they are not used for defining functions or creating loops."
+        "concept": "The `elif` keyword allows you to check another condition if the previous `if` condition was false.",
+        "hint_1": "Consider how you would handle multiple conditions in your code.",
+        "hint_2": "Remember that `elif` stands for 'else if'."
       }
     },
     {
-      "id": "2",
-      "kind": "fill_blank_choice",
-      "title": "Complete the Statement",
-      "prompt": "In Python, the `if` statement is used to check a condition, and if it is true, the code inside the block will run. If it is false, the code will move to the the missing choice statement.",
-      "template": "In Python, the `if` statement is used to check a condition, and if it is true, the code inside the block will run. If it is false, the code will move to the [blank1] statement.",
-      "choices": [
-        "elif",
-        "else",
-        "for",
-        "while"
+      "id": "q2",
+      "kind": "single_choice",
+      "title": "Which of the following is a valid comparison operator?",
+      "prompt": "Select the correct option.",
+      "options": [
+        "==>",
+        "!=",
+        "===",
+        "<=>"
       ],
-      "correctValue": "else",
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "multi_choice",
+      "title": "Which of the following statements are true about `if` statements?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "They can be nested.",
+        "They must always have an `else` block.",
+        "They can have multiple `elif` blocks.",
+        "They can only check one condition."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Think about how you can structure your conditions in Python.",
+      "help": {
+        "concept": "You can nest `if` statements and have multiple `elif` blocks for checking various conditions.",
+        "hint_1": "Consider how you would write a series of conditions.",
+        "hint_2": "Remember that `else` is optional."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Which of the following are valid uses of boolean logic in conditions?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "Using `and` to combine conditions.",
+        "Using `or` to check if at least one condition is true.",
+        "Using `not` to reverse a condition.",
+        "Using `xor` to check for exclusive conditions."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about how you can combine conditions to create more complex checks.",
+      "help": {
+        "concept": "Boolean logic allows you to combine multiple conditions using `and`, `or`, and `not`.",
+        "hint_1": "Consider how each operator affects the truth value of the conditions.",
+        "hint_2": "Remember that `xor` is not a standard operator in Python."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Complete the statement: In Python, the `if` statement is used to check if a condition is [blank1].",
+      "prompt": "Complete the statement: In Python, the `if` statement is used to check if a condition is [blank1].",
+      "template": "In Python, the `if` statement is used to check if a condition is [blank1].",
+      "choices": [
+        "true",
+        "false",
+        "none"
+      ],
+      "correctValue": "true",
       "hint": "Focus on the missing concept or keyword.",
       "help": {
-        "concept": "This task checks the key idea behind complete the statement.",
+        "concept": "This task checks the key idea behind complete the statement: in python, the `if` statement is used to check if a condition is [blank1]..",
         "hint_1": "Look for the word or phrase that best matches the lesson concept.",
         "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
       }
     },
     {
-      "id": "3",
+      "id": "q6",
+      "kind": "fill_blank_choice",
+      "title": "Complete the statement: The `else` block is executed when the `if` condition is [blank1].",
+      "prompt": "Complete the statement: The `else` block is executed when the `if` condition is [blank1].",
+      "template": "The `else` block is executed when the `if` condition is [blank1].",
+      "choices": [
+        "true",
+        "false",
+        "none"
+      ],
+      "correctValue": "false",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the statement: the `else` block is executed when the `if` condition is [blank1]..",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "q7",
+      "kind": "drag_reorder",
+      "title": "Order the steps to create a simple if-elif-else structure.",
+      "prompt": "Arrange the following steps in the correct order.",
+      "tokens": [
+        "Write the if condition.",
+        "Write the else block.",
+        "Write the elif condition.",
+        "Check the condition."
+      ],
+      "correctOrder": [
+        "Write the if condition.",
+        "Write the else block.",
+        "Write the elif condition.",
+        "Check the condition."
+      ],
+      "hint": "Think about the logical order of the steps.",
+      "help": {
+        "concept": "This task is about understanding the sequence behind order the steps to create a simple if-elif-else structure..",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
+    },
+    {
+      "id": "q8",
+      "kind": "drag_reorder",
+      "title": "Order the following comparison operators from least to most strict.",
+      "prompt": "Arrange the operators in order of strictness.",
+      "tokens": [
+        "==",
+        "!=",
+        "<",
+        ">"
+      ],
+      "correctOrder": [
+        "==",
+        "!=",
+        "<",
+        ">"
+      ],
+      "hint": "Think about the logical order of the steps.",
+      "help": {
+        "concept": "This task is about understanding the sequence behind order the following comparison operators from least to most strict..",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
+    },
+    {
+      "id": "q9",
       "kind": "code_input",
       "title": "Grade Checker",
-      "prompt": "Write a program that checks a student's score and prints whether they passed or failed. A score of 50 or above is a pass.",
-      "starterCode": "score = int(input())\n# Your code here",
-      "solutionCode": "score = int(input())\nif score >= 50:\n    print('You passed!')\nelse:\n    print('You failed.')",
+      "prompt": "Write a program that checks a student's grade and prints whether they passed or failed.",
+      "starterCode": "grade = 75\n# Your code here",
+      "solutionCode": "grade = 75\nif grade >= 60:\n    print('You passed!')\nelse:\n    print('You failed!')",
       "recipeType": "fixed_tests",
-      "hint": "Break the task into the main code steps first.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
-        "concept": "This task checks whether you can apply grade checker in a working solution.",
-        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
       },
       "tests": [
         {
           "stdin": "12\n",
-          "stdout": "You failed.",
+          "stdout": "You passed!",
           "match": "exact"
         },
         {
           "stdin": "20\n",
-          "stdout": "You failed.",
+          "stdout": "You passed!",
           "match": "exact"
         }
       ]
     },
     {
-      "id": "4",
+      "id": "q10",
       "kind": "code_input",
       "title": "Eligibility Checker",
-      "prompt": "Create a program that checks if a person is eligible to vote. A person must be at least 18 years old to vote.",
-      "starterCode": "age = 17\n# Your code here",
-      "solutionCode": "age = 17\nif age >= 18:\n    print('You are eligible to vote.')\nelse:\n    print('You are not eligible to vote.')",
+      "prompt": "Write a program that checks if a person is eligible to vote based on their age.",
+      "starterCode": "age = int(input())\n# Your code here",
+      "solutionCode": "age = int(input())\nif age >= 18:\n    print('You are eligible to vote.')\nelse:\n    print('You are not eligible to vote.')",
       "recipeType": "fixed_tests",
       "hint": "Break the task into the main code steps first.",
       "help": {
@@ -105,18 +237,18 @@
         },
         {
           "stdin": "20\n",
-          "stdout": "You are not eligible to vote.",
+          "stdout": "You are eligible to vote.",
           "match": "exact"
         }
       ]
     },
     {
-      "id": "5",
+      "id": "q11",
       "kind": "code_input",
       "title": "Temperature Checker",
-      "prompt": "Write a program that checks the temperature and prints whether it's hot, warm, or cold. Use the following criteria: hot (above 30), warm (20 to 30), cold (below 20).",
-      "starterCode": "temperature = 25\n# Your code here",
-      "solutionCode": "temperature = 25\nif temperature > 30:\n    print('It is hot.')\nelif temperature >= 20:\n    print('It is warm.')\nelse:\n    print('It is cold.')",
+      "prompt": "Write a program that checks the temperature and prints whether it's hot, warm, or cold.",
+      "starterCode": "temperature = 30\n# Your code here",
+      "solutionCode": "temperature = 30\nif temperature > 30:\n    print('It is hot.')\nelif temperature > 20:\n    print('It is warm.')\nelse:\n    print('It is cold.')",
       "recipeType": "fixed_tests",
       "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
@@ -137,5 +269,13 @@
         }
       ]
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Grade and Eligibility Checker",
+    "stepIds": [
+      "q9",
+      "q10",
+      "q11"
+    ]
+  }
 }

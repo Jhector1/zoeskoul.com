@@ -4,114 +4,197 @@
   "minutes": 25,
   "sketchBlocks": [
     {
-      "id": "intro-to-for-loops",
+      "id": "intro_to_for_loops",
       "title": "Introduction to For Loops",
-      "bodyMarkdown": "In Python, a for loop allows you to iterate over a sequence, such as a string. This means you can access each character in the string one by one. For example, if you have the string `\"hello\"`, you can loop through it to print each character:\n\n```python\nfor char in \"hello\":\n    print(char)\n```\n\nThis will output:\n```\nh\ne\nl\nl\no\n```\n\n**Try it yourself:** Write a for loop to print each character in the string `\"Python\"`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "In Python, a for loop allows you to iterate over a sequence, such as a string. This means you can access each character in the string one by one. For example, if you have the string `\"hello\"`, you can loop through it and print each character:\n\n```python\nfor char in \"hello\":\n    print(char)\n```\n\nThis will output:\n```\nh\ne\nl\nl\no\n```\n\n**Try it yourself:** Modify the string and see how the output changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     },
     {
-      "id": "counting-characters",
-      "title": "Counting Characters in a String",
-      "bodyMarkdown": "You can also use a for loop to count the number of characters in a string. For example:\n\n```python\ncount = 0\nfor char in \"hello\":\n    count += 1\nprint(count)\n```\n\nThis will output `5`, which is the number of characters in the string `\"hello\"`.\n\n**Your turn:** Modify the code to count the characters in the string `\"programming\"`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "id": "using_range_with_for_loops",
+      "title": "Using Range with For Loops",
+      "bodyMarkdown": "You can also use the `range()` function with for loops to repeat actions a specific number of times. For example:\n\n```python\nfor i in range(5):\n    print(i)\n```\n\nThis will print numbers from 0 to 4. The `range(5)` generates a sequence of numbers from 0 up to (but not including) 5.\n\n**Your turn:** Change the number in `range()` to see how many times the loop runs.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     }
   ],
   "quizDraft": [
     {
-      "id": "quiz-1",
-      "kind": "code_input",
-      "title": "Print Each Character",
-      "prompt": "Write a for loop that prints each character of the string `\"Hello, World!\"`.",
-      "starterCode": "for char in \"Hello, World!\":\n    # Your code here",
-      "solutionCode": "for char in \"Hello, World!\":\n    print(char)",
-      "recipeType": "fixed_tests",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-      "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-      },
-      "tests": [
-        {
-          "stdin": "12\n",
-          "stdout": "H\ne\nl\nl\no\n,\n \nW\no\nr\nl\nd\n!",
-          "match": "exact"
-        },
-        {
-          "stdin": "20\n",
-          "stdout": "H\ne\nl\nl\no\n,\n \nW\no\nr\nl\nd\n!",
-          "match": "exact"
-        }
-      ]
-    },
-    {
-      "id": "quiz-2",
-      "kind": "fill_blank_choice",
-      "title": "Complete the Loop",
-      "prompt": "Fill in the blank to complete the for loop that counts characters in a string.\n\n```python\ncount = 0\nfor char in \"______\":\n    count += 1\nprint(count)\n```",
-      "template": "count = 0\nfor char in \"{blank}\":\n    count += 1\nprint(count)",
-      "choices": [
-        "\"hello\"",
-        "\"world\"",
-        "\"Python\""
-      ],
-      "correctValue": "\"hello\"",
-      "hint": "Focus on the missing concept or keyword.",
-      "help": {
-        "concept": "This task checks the key idea behind complete the loop.",
-        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-      }
-    },
-    {
-      "id": "quiz-3",
+      "id": "single_choice_1",
       "kind": "single_choice",
-      "title": "For Loop Output",
-      "prompt": "What will the following code output?\n\n```python\nfor char in \"abc\":\n    print(char)\n```",
+      "title": "What does a for loop do?",
+      "prompt": "A for loop allows you to:",
       "options": [
-        "abc",
-        "a\nb\nc",
-        "Error",
-        "None"
+        "Repeat a block of code a specific number of times",
+        "Stop the program",
+        "Create a new function",
+        "Define a variable"
       ],
       "correctOptionIds": [
-        "b"
+        "a"
       ],
-      "hint": "Think about the main idea behind for loop output.",
+      "hint": "Think about how loops help in repeating actions.",
       "help": {
-        "concept": "Focus on the core concept behind for loop output.",
-        "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
-        "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+        "concept": "A for loop is used to iterate over a sequence, executing a block of code multiple times.",
+        "hint_1": "Consider the purpose of loops in programming.",
+        "hint_2": "Look for the option that describes repeating actions."
       }
     },
     {
-      "id": "quiz-4",
-      "kind": "multi_choice",
-      "title": "Valid For Loop Syntax",
-      "prompt": "Which of the following are valid for loop syntax in Python? (Select all that apply)",
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "What will the following code output?",
+      "prompt": "```python\nfor char in \"abc\":\n    print(char)\n```",
       "options": [
-        "for i in range(5):",
-        "for char in \"text\":",
-        "for (i = 0; i < 5; i++):",
-        "for item in list:"
+        "abc",
+        "a b c",
+        "Error"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Think about how print statements work inside loops.",
+      "help": {
+        "concept": "The loop iterates over each character and prints them on separate lines.",
+        "hint_1": "Consider how the print function behaves with each iteration.",
+        "hint_2": "Look at how the output is formatted in the loop."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Which of the following are valid uses of for loops?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "Iterating over a string",
+        "Counting with a variable",
+        "Repeating an action a set number of times",
+        "Creating a list"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Consider the different ways you can use loops in Python.",
+      "help": {
+        "concept": "For loops can iterate over sequences and perform actions multiple times.",
+        "hint_1": "Think about the types of sequences you can loop through.",
+        "hint_2": "Remember how loops can control the number of repetitions."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Which statements about the range function are true?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "It generates a sequence of numbers",
+        "It can be used in for loops",
+        "It starts counting from 1 by default",
+        "It can take two arguments to specify a start and end"
       ],
       "correctOptionIds": [
         "a",
         "b",
         "d"
       ],
-      "hint": "Think about the main idea behind valid for loop syntax.",
+      "hint": "Think about how range is used in loops and its parameters.",
       "help": {
-        "concept": "Focus on the core concept behind valid for loop syntax.",
-        "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
-        "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+        "concept": "The range function creates a sequence of numbers that can be iterated over.",
+        "hint_1": "Consider the default starting point of range.",
+        "hint_2": "Remember that range can take both start and end values."
       }
     },
     {
-      "id": "quiz-5",
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order the steps to create a for loop.",
+      "prompt": "Arrange the following steps in the correct order.",
+      "tokens": [
+        "Define the sequence to iterate over",
+        "Use the for keyword",
+        "Specify the variable to hold the current item",
+        "Write the code block to execute"
+      ],
+      "correctOrder": [
+        "Define the sequence to iterate over",
+        "Use the for keyword",
+        "Specify the variable to hold the current item",
+        "Write the code block to execute"
+      ],
+      "hint": "Think about the logical order of the steps.",
+      "help": {
+        "concept": "This task is about understanding the sequence behind order the steps to create a for loop..",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "Order the steps to use range in a for loop.",
+      "prompt": "Arrange the following steps in the correct order.",
+      "tokens": [
+        "Call range with the desired number",
+        "Use the for keyword",
+        "Specify the variable to hold the current number",
+        "Write the code block to execute"
+      ],
+      "correctOrder": [
+        "Call range with the desired number",
+        "Use the for keyword",
+        "Specify the variable to hold the current number",
+        "Write the code block to execute"
+      ],
+      "hint": "Think about the logical order of the steps.",
+      "help": {
+        "concept": "This task is about understanding the sequence behind order the steps to use range in a for loop..",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Complete the for loop syntax.",
+      "prompt": "The syntax for a for loop is: `for [blank1] in sequence:`",
+      "template": "The syntax for a for loop is: `for [blank1] in sequence:`",
+      "choices": [
+        "item",
+        "index",
+        "value"
+      ],
+      "correctValue": "item",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the for loop syntax..",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Complete the range function call.",
+      "prompt": "To create a range from 0 to 4, you would write: `range([blank1])`",
+      "template": "To create a range from 0 to 4, you would write: `range([blank1])`",
+      "choices": [
+        "5",
+        "4",
+        "0"
+      ],
+      "correctValue": "5",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the range function call..",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "code_input_1",
       "kind": "code_input",
-      "title": "Count Vowels in a String",
-      "prompt": "Write a for loop that counts the number of vowels in the string `\"Hello, World!\"`.",
-      "starterCode": "vowels = 'aeiou'\ncount = 0\nfor char in \"Hello, World!\":\n    # Your code here\nprint(count)",
-      "solutionCode": "vowels = 'aeiou'\ncount = 0\nfor char in \"Hello, World!\":\n    if char.lower() in vowels:\n        count += 1\nprint(count)",
+      "title": "Print each character in a string",
+      "prompt": "Write a for loop that prints each character in the string 'Python'.",
+      "starterCode": "string = 'Python'\n# Write your for loop here",
+      "solutionCode": "string = 'Python'\nfor char in string:\n    print(char)",
       "recipeType": "fixed_tests",
       "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
@@ -122,15 +205,77 @@
       "tests": [
         {
           "stdin": "12\n",
-          "stdout": "3",
+          "stdout": "P\ny\nt\nh\no\nn",
           "match": "exact"
         },
         {
           "stdin": "20\n",
-          "stdout": "3",
+          "stdout": "P\ny\nt\nh\no\nn",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Count from 0 to 9",
+      "prompt": "Use a for loop with range to print numbers from 0 to 9.",
+      "starterCode": "# Write your for loop here",
+      "solutionCode": "for i in range(10):\n    print(i)",
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply count from 0 to 9 in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "0\n1\n2\n3\n4\n5\n6\n7\n8\n9",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "0\n1\n2\n3\n4\n5\n6\n7\n8\n9",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Loop through a list of fruits",
+      "prompt": "Create a for loop that prints each fruit in the list ['apple', 'banana', 'cherry'].",
+      "starterCode": "fruits = ['apple', 'banana', 'cherry']\n# Write your for loop here",
+      "solutionCode": "fruits = ['apple', 'banana', 'cherry']\nfor fruit in fruits:\n    print(fruit)",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "apple\nbanana\ncherry",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "apple\nbanana\ncherry",
           "match": "exact"
         }
       ]
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Mini Text Analyzer",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
 }

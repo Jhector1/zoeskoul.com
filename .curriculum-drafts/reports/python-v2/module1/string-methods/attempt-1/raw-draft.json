@@ -6,27 +6,27 @@
     {
       "id": "sketch1",
       "title": "Introduction to String Methods",
-      "bodyMarkdown": "In Python, strings are sequences of characters. You can manipulate strings using various methods. For example, the `lower()` method converts all characters in a string to lowercase.\n\n**Example:**\n```python\ntext = 'Hello World'\nprint(text.lower())  # Output: hello world\n```\n\n**Your turn:** Try using the `upper()` method to convert the string to uppercase."
+      "bodyMarkdown": "In Python, strings are sequences of characters. You can manipulate strings using various methods. For example, the `lower()` method converts all characters in a string to lowercase. Here's a simple example:\n\n```python\ntext = 'Hello World'\nprint(text.lower())  # Output: hello world\n```\nTry it yourself: Use the `upper()` method to convert the string to uppercase."
     },
     {
       "id": "sketch2",
-      "title": "Using the strip() Method",
-      "bodyMarkdown": "The `strip()` method removes any leading and trailing whitespace from a string.\n\n**Example:**\n```python\ntext = '   Hello World   '\nprint(text.strip())  # Output: 'Hello World'\n```\n\n**Try it yourself:** Use `strip()` on a string with extra spaces."
+      "title": "Using the strip Method",
+      "bodyMarkdown": "The `strip()` method removes any leading and trailing whitespace from a string. This is useful for cleaning up user input. For example:\n\n```python\nuser_input = '   Hello   '\nclean_input = user_input.strip()\nprint(clean_input)  # Output: 'Hello'\n```\nYour turn: Experiment with the `strip()` method on different strings."
     },
     {
       "id": "sketch3",
       "title": "Replacing Substrings",
-      "bodyMarkdown": "You can replace parts of a string using the `replace()` method. This method takes two arguments: the substring to be replaced and the new substring.\n\n**Example:**\n```python\ntext = 'Hello World'\nnew_text = text.replace('World', 'Python')\nprint(new_text)  # Output: Hello Python\n```\n\n**Try this:** Replace 'Hello' with 'Hi' in a string."
+      "bodyMarkdown": "You can replace parts of a string using the `replace()` method. This method takes two arguments: the substring to replace and the new substring. For example:\n\n```python\ntext = 'I like apples'\nnew_text = text.replace('apples', 'bananas')\nprint(new_text)  # Output: I like bananas\n```\nTry this: Replace 'like' with 'love' in a string."
     },
     {
       "id": "sketch4",
       "title": "Splitting Strings",
-      "bodyMarkdown": "The `split()` method divides a string into a list based on a specified delimiter. By default, it splits by whitespace.\n\n**Example:**\n```python\ntext = 'Hello World'\nwords = text.split()\nprint(words)  # Output: ['Hello', 'World']\n```\n\n**Your turn:** Split a string of your choice into words."
+      "bodyMarkdown": "The `split()` method divides a string into a list of substrings based on a specified delimiter. By default, it splits by whitespace. For example:\n\n```python\ntext = 'apple,banana,cherry'\nfruits = text.split(',')\nprint(fruits)  # Output: ['apple', 'banana', 'cherry']\n```\nTry it yourself: Split a sentence into words."
     },
     {
       "id": "sketch5",
       "title": "Joining Strings",
-      "bodyMarkdown": "To join a list of strings into a single string, use the `join()` method. You specify the string that will separate the elements.\n\n**Example:**\n```python\nwords = ['Hello', 'World']\njoined_text = ' '.join(words)\nprint(joined_text)  # Output: Hello World\n```\n\n**Try it yourself:** Join a list of your favorite fruits into a single string."
+      "bodyMarkdown": "The `join()` method is used to concatenate a list of strings into a single string with a specified separator. For example:\n\n```python\nfruits = ['apple', 'banana', 'cherry']\nresult = ', '.join(fruits)\nprint(result)  # Output: apple, banana, cherry\n```\nYour turn: Join a list of words into a sentence."
     }
   ],
   "quizDraft": [
@@ -34,74 +34,178 @@
       "id": "quiz1",
       "kind": "single_choice",
       "title": "What does the lower() method do?",
-      "prompt": "Select the correct answer.",
+      "prompt": "Choose the correct answer.",
       "options": [
         "Converts a string to uppercase",
-        "Removes whitespace from a string",
         "Converts a string to lowercase",
+        "Removes whitespace from a string",
         "Replaces a substring in a string"
       ],
       "correctOptionIds": [
-        "c"
+        "b"
       ],
-      "hint": "Think about how the method affects the case of the letters.",
+      "hint": "Think about how the method changes the case of letters.",
       "help": {
         "concept": "The lower() method is used to convert all characters in a string to lowercase.",
-        "hint_1": "This method does not affect the original string.",
-        "hint_2": "It returns a new string with all lowercase letters."
+        "hint_1": "This method affects the case of letters in the string.",
+        "hint_2": "Remember, it does not remove spaces or change the string's length."
       }
     },
     {
       "id": "quiz2",
+      "kind": "single_choice",
+      "title": "What does the strip() method do?",
+      "prompt": "Choose the correct answer.",
+      "options": [
+        "Removes all characters from a string",
+        "Removes leading and trailing whitespace",
+        "Converts a string to lowercase",
+        "Splits a string into a list"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider what happens to spaces at the start and end of a string.",
+      "help": {
+        "concept": "The strip() method removes whitespace from both ends of a string.",
+        "hint_1": "It does not affect spaces between words.",
+        "hint_2": "Think about how it cleans up user input."
+      }
+    },
+    {
+      "id": "quiz3",
       "kind": "multi_choice",
-      "title": "Which of the following methods can be used to manipulate strings?",
+      "title": "Which of the following methods can modify a string?",
       "prompt": "Select all that apply.",
       "options": [
+        "lower()",
         "strip()",
         "replace()",
-        "join()",
-        "append()"
+        "split()"
       ],
       "correctOptionIds": [
         "a",
         "b",
         "c"
       ],
-      "hint": "Consider common string operations.",
+      "hint": "Think about which methods actually change the string.",
       "help": {
-        "concept": "strip(), replace(), and join() are all valid string methods.",
-        "hint_1": "append() is not a string method; it's used with lists.",
-        "hint_2": "Think about what each method does to a string."
+        "concept": "lower(), strip(), and replace() can modify the original string or return a new one.",
+        "hint_1": "split() does not modify the string; it creates a list instead.",
+        "hint_2": "Only some methods return a modified version of the string."
       }
     },
     {
-      "id": "quiz3",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the blank: The method used to remove whitespace from both ends of a string is called ___.",
-      "prompt": "Choose the correct method.",
-      "template": "The method used to remove whitespace from both ends of a string is called ___.",
-      "choices": [
-        "strip()",
-        "trim()",
-        "remove()"
-      ],
-      "correctValue": "strip()"
-    },
-    {
       "id": "quiz4",
-      "kind": "code_input",
-      "title": "Using the split() method",
-      "prompt": "Write a program that splits the string 'Python is fun' into a list of words.",
-      "starterCode": "text = 'Python is fun'\n# Your code here to split the text",
-      "solutionCode": "text = 'Python is fun'\nwords = text.split()\nprint(words)"
+      "kind": "multi_choice",
+      "title": "What are the correct uses of the split() method?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "To divide a string into a list",
+        "To join a list into a string",
+        "To specify a delimiter",
+        "To remove whitespace"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider what the split() method does to a string.",
+      "help": {
+        "concept": "split() divides a string into a list based on a delimiter.",
+        "hint_1": "It does not join strings or remove whitespace.",
+        "hint_2": "Think about how you can specify what character to split by."
+      }
     },
     {
       "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "title": "Using the replace() method, you can change 'cat' to [blank1] in the string 'The cat is here.'",
+      "prompt": "Fill in the blank with the correct word.",
+      "choices": [
+        "dog",
+        "cat",
+        "fish"
+      ],
+      "correctValue": "dog"
+    },
+    {
+      "id": "quiz6",
+      "kind": "fill_blank_choice",
+      "title": "To remove whitespace from both ends of a string, use the [blank1] method.",
+      "prompt": "Fill in the blank with the correct method name.",
+      "choices": [
+        "strip",
+        "split",
+        "join"
+      ],
+      "correctValue": "strip"
+    },
+    {
+      "id": "quiz7",
+      "kind": "drag_reorder",
+      "title": "Order the steps to convert a string to lowercase.",
+      "prompt": "Drag the steps into the correct order.",
+      "tokens": [
+        "Create a string variable",
+        "Call the lower() method",
+        "Print the result"
+      ],
+      "correctOrder": [
+        "Create a string variable",
+        "Call the lower() method",
+        "Print the result"
+      ]
+    },
+    {
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "title": "Order the steps to split a string.",
+      "prompt": "Drag the steps into the correct order.",
+      "tokens": [
+        "Define the string",
+        "Call the split() method",
+        "Store the result in a list",
+        "Print the list"
+      ],
+      "correctOrder": [
+        "Define the string",
+        "Call the split() method",
+        "Store the result in a list",
+        "Print the list"
+      ]
+    },
+    {
+      "id": "quiz9",
       "kind": "code_input",
-      "title": "Joining a List of Strings",
-      "prompt": "Write a program that joins the list ['Python', 'is', 'awesome'] into a single string with spaces.",
-      "starterCode": "words = ['Python', 'is', 'awesome']\n# Your code here to join the words",
-      "solutionCode": "words = ['Python', 'is', 'awesome']\njoined_text = ' '.join(words)\nprint(joined_text)"
+      "title": "Convert a string to lowercase",
+      "prompt": "Write a program that takes a string input and converts it to lowercase.",
+      "starterCode": "user_input = input('Enter a string: ')\n# Convert to lowercase\n",
+      "solutionCode": "user_input = input('Enter a string: ')\nlowercase_string = user_input.lower()\nprint(lowercase_string)"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Replace a word in a string",
+      "prompt": "Write a program that replaces 'hello' with 'hi' in a given string.",
+      "starterCode": "text = 'hello world'\n# Replace 'hello' with 'hi'\n",
+      "solutionCode": "text = 'hello world'\nnew_text = text.replace('hello', 'hi')\nprint(new_text)"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Join a list of strings",
+      "prompt": "Write a program that joins a list of words into a single string with spaces.",
+      "starterCode": "words = ['Python', 'is', 'fun']\n# Join the words with spaces\n",
+      "solutionCode": "words = ['Python', 'is', 'fun']\njoined_string = ' '.join(words)\nprint(joined_string)"
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Profile Card Generator",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
 }

@@ -6,87 +6,152 @@
     {
       "id": "1",
       "title": "Understanding Variables",
-      "bodyMarkdown": "In Python, a variable is a name that refers to a value. For example, if we write `age = 25`, we are creating a variable named `age` that holds the value `25`. This allows us to use `age` later in our code instead of the number `25`. \n\n**Example:**\n```python\nage = 25\nprint(age)  # This will output: 25\n```\n\n**Your turn:** Try creating a variable called `name` and assign it your name."
+      "bodyMarkdown": "In Python, a variable is a name that refers to a value. For example, if you write `age = 25`, the variable `age` now holds the value `25`. You can change the value of `age` later by reassigning it, like `age = 30`. \n\n**Example:**\n```python\nage = 25\nprint(age)  # Output: 25\nage = 30\nprint(age)  # Output: 30\n```\n\n**Your turn:** Try creating a variable for your favorite number and print it."
     },
     {
       "id": "2",
-      "title": "Reassigning Variables",
-      "bodyMarkdown": "You can change the value of a variable at any time. This is called reassignment. For example, if we initially set `age = 25` and later want to update it to `26`, we can simply write:\n\n**Example:**\n```python\nage = 25\nage = 26\nprint(age)  # This will output: 26\n```\n\n**Try this:** Change the value of `age` to your current age."
+      "title": "Variable Naming Conventions",
+      "bodyMarkdown": "When naming variables, it's important to choose names that are descriptive. For example, instead of using `x`, use `favorite_color`. This makes your code easier to read. \n\n**Example:**\n```python\nfavorite_color = 'blue'\nprint(favorite_color)  # Output: blue\n```\n\n**Try this:** Create a variable for your name and print it."
     }
   ],
   "quizDraft": [
     {
       "id": "q1",
       "kind": "single_choice",
-      "title": "What is a variable in Python?",
-      "prompt": "A variable is a name that refers to a value.",
-      "hint": "Think about how we store information in a program.",
-      "help": {
-        "concept": "A variable allows us to store data that can be referenced later in the code.",
-        "hint_1": "Consider how you might use a name to refer to a number.",
-        "hint_2": "Remember the example where we assigned a number to a name."
-      },
+      "title": "What is a variable?",
+      "prompt": "A variable is a name that refers to a:",
       "options": [
-        "A way to store data",
-        "A type of function",
-        "A method for input",
-        "A way to output data"
+        "Function",
+        "Value",
+        "Loop",
+        "Condition"
       ],
       "correctOptionIds": [
-        "a"
-      ]
+        "b"
+      ],
+      "hint": "Think about what a variable holds.",
+      "help": {
+        "concept": "A variable is used to store data values.",
+        "hint_1": "Variables can hold different types of data.",
+        "hint_2": "Consider what you can assign to a variable."
+      }
     },
     {
       "id": "q2",
-      "kind": "multi_choice",
-      "title": "Which of the following are valid variable names in Python?",
-      "prompt": "Select all that apply.",
-      "hint": "Think about the rules for naming variables.",
-      "help": {
-        "concept": "Variable names must start with a letter or underscore and can contain letters, numbers, and underscores.",
-        "hint_1": "Avoid starting variable names with numbers.",
-        "hint_2": "Remember that spaces and special characters are not allowed."
-      },
+      "kind": "single_choice",
+      "title": "Which of the following is a valid variable name?",
+      "prompt": "Choose the correct variable name:",
       "options": [
-        "my_variable",
-        "2nd_variable",
-        "variable-name",
-        "_privateVariable",
-        "variable 1"
+        "1st_variable",
+        "first variable",
+        "first_variable",
+        "first-variable"
       ],
       "correctOptionIds": [
-        "a",
-        "d"
-      ]
+        "c"
+      ],
+      "hint": "Variable names cannot start with a number.",
+      "help": {
+        "concept": "Variable names must start with a letter or underscore and can contain letters, numbers, and underscores.",
+        "hint_1": "Spaces are not allowed in variable names.",
+        "hint_2": "Dashes are not valid in variable names."
+      }
     },
     {
       "id": "q3",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the blank: In Python, you can change the value of a variable using _____ .",
-      "prompt": "Complete the sentence.",
-      "template": "In Python, you can change the value of a variable using _____ .",
-      "choices": [
-        "reassignment",
-        "declaration",
-        "initialization"
+      "kind": "multi_choice",
+      "title": "Which of the following are valid variable names?",
+      "prompt": "Select all valid variable names:",
+      "options": [
+        "my_variable",
+        "my-variable",
+        "myVariable",
+        "2ndVariable"
       ],
-      "correctValue": "reassignment"
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider the rules for naming variables.",
+      "help": {
+        "concept": "Variable names can include letters, numbers, and underscores but cannot start with a number.",
+        "hint_1": "Look for names that follow the naming conventions.",
+        "hint_2": "Spaces and special characters are not allowed."
+      }
     },
     {
       "id": "q4",
-      "kind": "code_input",
-      "title": "Create and print a variable",
-      "prompt": "Write Python code to create a variable named `favorite_color` and assign it your favorite color. Then, print the variable.",
-      "starterCode": "favorite_color = ''\n# Assign your favorite color here\nprint(favorite_color)",
-      "solutionCode": "favorite_color = 'blue'\nprint(favorite_color)"
+      "kind": "drag_reorder",
+      "title": "Order the steps to create a variable.",
+      "prompt": "Arrange the steps to create a variable in Python.",
+      "tokens": [
+        "Choose a name for the variable",
+        "Assign a value to the variable",
+        "Use the variable in your code"
+      ],
+      "correctOrder": [
+        0,
+        1,
+        2
+      ]
     },
     {
       "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank to create a variable.",
+      "prompt": "To create a variable named `age`, you write: `age = [blank1]`.",
+      "template": "age = [blank1]",
+      "choices": [
+        "25",
+        "age",
+        "print"
+      ],
+      "correctValue": "25"
+    },
+    {
+      "id": "q6",
+      "kind": "fill_blank_choice",
+      "title": "Complete the variable assignment.",
+      "prompt": "To assign your favorite color to a variable, you write: `favorite_color = [blank1]`.",
+      "template": "favorite_color = [blank1]",
+      "choices": [
+        "'blue'",
+        "'color'",
+        "'favorite'"
+      ],
+      "correctValue": "'blue'"
+    },
+    {
+      "id": "q7",
       "kind": "code_input",
-      "title": "Reassign a variable",
-      "prompt": "Write Python code to create a variable named `score`, assign it a value of `10`, then reassign it to `20` and print it.",
-      "starterCode": "score = 10\n# Reassign score to a new value\nprint(score)",
+      "title": "Create and print a variable.",
+      "prompt": "Write Python code to create a variable named `name` and assign it your name. Then print the variable.",
+      "starterCode": "name = ''\nprint(name)",
+      "solutionCode": "name = 'Your Name'\nprint(name)"
+    },
+    {
+      "id": "q8",
+      "kind": "code_input",
+      "title": "Reassign a variable.",
+      "prompt": "Write Python code to create a variable `score`, assign it a value of `10`, then reassign it to `20` and print it.",
+      "starterCode": "score = 10\n# Reassign the score here\nprint(score)",
       "solutionCode": "score = 10\nscore = 20\nprint(score)"
+    },
+    {
+      "id": "q9",
+      "kind": "code_input",
+      "title": "Using f-strings for output.",
+      "prompt": "Create a variable `name` with your name and use an f-string to print 'Hello, {name}!'",
+      "starterCode": "name = ''\n# Use an f-string to print here\n",
+      "solutionCode": "name = 'Your Name'\nprint(f'Hello, {name}!')"
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Profile Card Generator",
+    "stepIds": [
+      "q7",
+      "q8",
+      "q9"
+    ]
+  }
 }

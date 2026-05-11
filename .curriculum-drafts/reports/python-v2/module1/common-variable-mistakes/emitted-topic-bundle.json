@@ -37,10 +37,13 @@
       "titleKey": "topics.python-v2.python-v2-1.common-variable-mistakes.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 3,
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -51,25 +54,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "q1",
-            "titleKey": "topics.python-v2.python-v2-1.common-variable-mistakes.projectSteps.q1.title",
-            "exerciseKey": "q1",
+            "id": "policy_code_input_1",
+            "titleKey": "topics.python-v2.python-v2-1.common-variable-mistakes.projectSteps.policy_code_input_1.title",
+            "exerciseKey": "policy_code_input_1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           },
           {
-            "id": "q5",
-            "titleKey": "topics.python-v2.python-v2-1.common-variable-mistakes.projectSteps.q5.title",
-            "exerciseKey": "q5",
+            "id": "policy_code_input_2",
+            "titleKey": "topics.python-v2.python-v2-1.common-variable-mistakes.projectSteps.policy_code_input_2.title",
+            "exerciseKey": "policy_code_input_2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
+          },
+          {
+            "id": "policy_code_input_3",
+            "titleKey": "topics.python-v2.python-v2-1.common-variable-mistakes.projectSteps.policy_code_input_3.title",
+            "exerciseKey": "policy_code_input_3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
           }
         ]
       }
@@ -98,40 +110,41 @@
   "exercises": [
     {
       "id": "q1",
-      "kind": "code_input",
-      "purpose": "project",
+      "kind": "single_choice",
+      "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.q1",
-      "language": "python",
-      "starterCode": "animal = ''\nprint(animal)",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "dog\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "animal = 'dog'\nprint(animal)"
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
       }
     },
     {
       "id": "q2",
-      "kind": "fill_blank_choice",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.q2",
-      "choiceCount": 3,
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "'banana'"
+        "kind": "single_choice",
+        "optionId": "b"
       }
     },
     {
       "id": "q3",
-      "kind": "single_choice",
+      "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.q3",
@@ -142,8 +155,12 @@
         "d"
       ],
       "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
       }
     },
     {
@@ -162,29 +179,155 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
+          "b",
           "c"
         ]
       }
     },
     {
       "id": "q5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.q5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "q6",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.q6",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t3",
+          "t2",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "q7",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.q7",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "letter"
+      }
+    },
+    {
+      "id": "q8",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.q8",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "quotes"
+      }
+    },
+    {
+      "id": "policy_code_input_1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.q5",
+      "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.policy_code_input_1",
       "language": "python",
-      "starterCode": "print(favorite color)",
+      "starterCode": "n = int(input())\n# Your code here",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "red\n",
+            "stdin": "5\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "False\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "favorite_color = 'red'\nprint(favorite_color)"
+        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
+      }
+    },
+    {
+      "id": "policy_code_input_2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.policy_code_input_2",
+      "language": "python",
+      "starterCode": "n = int(input())\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "5\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "False\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
+      }
+    },
+    {
+      "id": "policy_code_input_3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.policy_code_input_3",
+      "language": "python",
+      "starterCode": "n = int(input())\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "5\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "False\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
       }
     }
   ]

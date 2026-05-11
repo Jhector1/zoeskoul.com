@@ -4,69 +4,92 @@
   "minutes": 12,
   "sketchBlocks": [
     {
-      "id": "1",
+      "id": "sketch1",
       "title": "Introduction to Python's Uses",
-      "bodyMarkdown": "Python is a versatile programming language used in various fields. It can automate tasks, develop web applications, analyze data, and even power artificial intelligence. For example, you can write a simple script to automate file organization on your computer. **Try it yourself:** Think of a task you do repeatedly and consider how Python could help."
+      "bodyMarkdown": "Python is a versatile programming language used in various fields. It is popular for automation, web development, data analysis, and artificial intelligence. For example, you can use Python to automate repetitive tasks like file management or data entry. **Try it yourself:** Think of a task in your daily life that could be automated using Python."
     },
     {
-      "id": "2",
-      "title": "Python in Automation",
-      "bodyMarkdown": "One of the most popular uses of Python is automation. For instance, you can create a script that renames files in a folder. Here's a simple example:\n\n```python\nimport os\n\n# Specify the directory\nfolder = 'my_folder'\n\n# Loop through the files in the directory\nfor filename in os.listdir(folder):\n    if filename.endswith('.txt'):\n        new_name = filename.replace('.txt', '_old.txt')\n        os.rename(os.path.join(folder, filename), os.path.join(folder, new_name))\n```\nThis code changes all `.txt` files in `my_folder` to have `_old` appended to their names. **Your turn:** Modify the code to change the file extension instead.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "id": "sketch2",
+      "title": "Python in Data Science",
+      "bodyMarkdown": "In data science, Python is used to analyze and visualize data. Libraries like Pandas and Matplotlib make it easy to manipulate and plot data. For instance, you can load a dataset and create a simple graph to visualize trends. Here’s a basic example:\n\n```python\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndata = {'Year': [2020, 2021, 2022], 'Sales': [150, 200, 250]}\ndf = pd.DataFrame(data)\ndf.plot(x='Year', y='Sales', kind='line')\nplt.show()\n```\n**Your turn:** Modify the data to see how the graph changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     }
   ],
   "quizDraft": [
     {
-      "id": "q1",
+      "id": "quiz1",
       "kind": "single_choice",
       "title": "What is Python commonly used for?",
-      "prompt": "Select the best answer.",
+      "prompt": "Select the correct answer.",
       "options": [
-        "Only for web development",
-        "Only for data analysis",
-        "Automation, web apps, data analysis, and AI",
-        "Only for game development"
+        "Web development",
+        "Cooking recipes",
+        "Gardening",
+        "Painting"
       ],
       "correctOptionIds": [
-        "c"
+        "a"
       ],
-      "hint": "Think about the various fields where Python is applied.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
-        "concept": "Python is a general-purpose language used in many areas including automation, web development, data analysis, and artificial intelligence.",
-        "hint_1": "Consider the different industries that utilize Python.",
-        "hint_2": "Look for the answer that encompasses multiple applications of Python."
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
       }
     },
     {
-      "id": "q2",
+      "id": "quiz2",
       "kind": "single_choice",
-      "title": "Which of the following is a benefit of using Python?",
-      "prompt": "Choose the correct option.",
+      "title": "Which library is used for data visualization in Python?",
+      "prompt": "Choose the correct library.",
       "options": [
-        "It is only used by professional programmers",
-        "It has a simple syntax that is easy to learn",
-        "It requires advanced knowledge of programming concepts",
-        "It is only used for scientific computing"
+        "NumPy",
+        "Matplotlib",
+        "Requests",
+        "Beautiful Soup"
       ],
       "correctOptionIds": [
         "b"
       ],
-      "hint": "Think about how Python is designed for beginners.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
-        "concept": "Python's syntax is designed to be readable and straightforward, making it accessible for beginners.",
-        "hint_1": "Consider how the syntax compares to other programming languages.",
-        "hint_2": "Look for the option that highlights Python's ease of use."
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
       }
     },
     {
-      "id": "q3",
+      "id": "quiz3",
       "kind": "multi_choice",
-      "title": "Select all the areas where Python is commonly used.",
+      "title": "Select all fields where Python is used.",
       "prompt": "Choose all correct answers.",
       "options": [
         "Web development",
         "Data analysis",
         "Game development",
-        "Automation"
+        "Cooking"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Which of the following are Python libraries?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "Pandas",
+        "Flask",
+        "Photoshop",
+        "Django"
       ],
       "correctOptionIds": [
         "a",
@@ -81,38 +104,161 @@
       }
     },
     {
-      "id": "q4",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the blank: Python is often used for __________.",
-      "prompt": "Choose the correct word to complete the sentence.",
-      "template": "Python is often used for __________.",
-      "choices": [
-        "data science",
-        "cooking",
-        "painting",
-        "gardening"
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Order the steps to create a simple Python program.",
+      "prompt": "Arrange the steps in the correct order.",
+      "tokens": [
+        "Write the code",
+        "Run the program",
+        "Check the output",
+        "Save the file"
       ],
-      "correctValue": "data science",
-      "hint": "Focus on the missing concept or keyword.",
+      "correctOrder": [
+        "Write the code",
+        "Run the program",
+        "Check the output",
+        "Save the file"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
       "help": {
-        "concept": "This task checks the key idea behind fill in the blank: python is often used for __________..",
-        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
       }
     },
     {
-      "id": "q5",
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Arrange the Python data types from simplest to most complex.",
+      "prompt": "Put the data types in order.",
+      "tokens": [
+        "Integer",
+        "List",
+        "String",
+        "Dictionary"
+      ],
+      "correctOrder": [
+        "Integer",
+        "List",
+        "String",
+        "Dictionary"
+      ],
+      "hint": "Consider how data types are structured.",
+      "help": {
+        "concept": "Data types vary in complexity from simple to complex.",
+        "hint_1": "Think about how each type can hold data.",
+        "hint_2": "Start with the most basic type."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: Python is often used for ______.",
+      "prompt": "Choose the correct word.",
+      "template": "Python is often used for [blank1].",
+      "choices": [
+        "data analysis",
+        "cooking",
+        "gardening"
+      ],
+      "correctValue": "data analysis",
+      "hint": "Think about the fields where Python excels.",
+      "help": {
+        "concept": "Python is a powerful tool for analyzing data.",
+        "hint_1": "Consider tasks that involve numbers and statistics.",
+        "hint_2": "This field is crucial in business and research."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: A popular web framework in Python is ______.",
+      "prompt": "Choose the correct word.",
+      "template": "A popular web framework in Python is [blank1].",
+      "choices": [
+        "Flask",
+        "Photoshop",
+        "Excel"
+      ],
+      "correctValue": "Flask",
+      "hint": "Think about frameworks used for building websites.",
+      "help": {
+        "concept": "the missing term is a lightweight framework for web development in Python.",
+        "hint_1": "This framework is known for its simplicity.",
+        "hint_2": "It is often used for small to medium web applications."
+      }
+    },
+    {
+      "id": "quiz9",
       "kind": "code_input",
-      "title": "Automate File Renaming",
-      "prompt": "Write a Python script that renames all '.txt' files in a specified folder by appending '_old' to their names.",
-      "starterCode": "import os\n\n# Specify the directory\nfolder = 'my_folder'\n\n# Your code here",
-      "solutionCode": "import os\n\nfolder = 'my_folder'\n\nfor filename in os.listdir(folder):\n    if filename.endswith('.txt'):\n        new_name = filename.replace('.txt', '_old.txt')\n        os.rename(os.path.join(folder, filename), os.path.join(folder, new_name))",
+      "title": "Create a simple Python program that prints your name.",
+      "prompt": "Write a program that outputs your name.",
+      "starterCode": "print('Your Name')",
+      "solutionCode": "print('Zoe Skoul')",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Zoe Skoul"
+        }
+      ],
+      "recipeType": "fixed_tests",
       "hint": "Break the task into the main code steps first.",
       "help": {
-        "concept": "This task checks whether you can apply automate file renaming in a working solution.",
+        "concept": "This task checks whether you can apply create a simple python program that prints your name. in a working solution.",
         "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
         "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
       }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Write a program to calculate the sum of two numbers.",
+      "prompt": "Create a program that takes two numbers and prints their sum.",
+      "starterCode": "# Write your code below",
+      "solutionCode": "a = 5\nb = 10\nsum = a + b\nprint(sum)",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "15"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply write a program to calculate the sum of two numbers. in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Write a program that checks if a number is even or odd.",
+      "prompt": "Create a program that checks if a number is even or odd.",
+      "starterCode": "# Write your code below",
+      "solutionCode": "number = 4\nif number % 2 == 0:\n    print('Even')\nelse:\n    print('Odd')",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Even"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Personal Introduction Program",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
 }

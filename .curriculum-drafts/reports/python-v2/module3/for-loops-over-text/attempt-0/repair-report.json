@@ -5,28 +5,35 @@
       "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
       "category": "text",
       "severity": "medium",
-      "field": "sketchBlocks.intro-to-for-loops.bodyMarkdown",
+      "field": "sketchBlocks.intro_to_for_loops.bodyMarkdown",
       "message": "Added a short line-by-line explanation after a multi-line code example."
     },
     {
       "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
       "category": "text",
       "severity": "medium",
-      "field": "sketchBlocks.counting-characters.bodyMarkdown",
+      "field": "sketchBlocks.using_range_with_for_loops.bodyMarkdown",
       "message": "Added a short line-by-line explanation after a multi-line code example."
     },
     {
       "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
       "category": "recipe",
       "severity": "high",
-      "field": "quiz-1",
+      "field": "code_input_1",
       "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
     },
     {
       "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
       "category": "recipe",
       "severity": "high",
-      "field": "quiz-5",
+      "field": "code_input_2",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "code_input_3",
       "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
     }
   ]

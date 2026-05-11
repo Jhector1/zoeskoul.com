@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-2": {
+        "indentation-and-blocks": {
+          "label": "Indentation and Blocks",
+          "summary": "Understand why indentation controls structure in Python.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Indentation"
+            },
+            "sketch1": {
+              "title": "Nested Indentation"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_input_1": {
+              "title": "Indentation Check"
+            },
+            "code_input_2": {
+              "title": "Nested Indentation Function"
+            },
+            "code_input_3": {
+              "title": "Multiple Conditions"
+            }
+          },
+          "quiz": {
+            "multi_choice_1": {
+              "title": "Identifying Correct Indentation",
+              "prompt": "Which of the following code snippets will run without an IndentationError?",
+              "hint": "Look for the snippets that maintain proper indentation levels.",
+              "help": {
+                "concept": "Indentation in Python defines the blocks of code that belong to control structures like if statements.",
+                "hint_1": "Check if the print statements are indented correctly under their respective if statements.",
+                "hint_2": "Remember that all lines within the same block must have the same level of indentation."
+              },
+              "options": {
+                "a": "if x > 10:\nprint('x is greater than 10')",
+                "b": "if x > 10:\n    print('x is greater than 10')\nprint('Done')",
+                "c": "if x > 10:\n    print('x is greater than 10')\n    print('Done')\nelse:\nprint('x is 10 or less')"
+              }
+            },
+            "fill_blank_choice_1": {
+              "title": "Complete the Indentation",
+              "prompt": "Fill in the blank to complete the if statement:\n\n```python\nif x > 5:\n    the missing choice\n```",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind complete the indentation.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "if x > 5:\n    [blank1]",
+              "choices": [
+                "print('x is greater than 5')",
+                "print('x is less than or equal to 5')",
+                "x += 1"
+              ]
+            },
+            "code_input_1": {
+              "title": "Indentation Check",
+              "prompt": "Write a function that checks if a number is positive, negative, or zero. Use proper indentation. Then read the input value, call the function, and print the returned result.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply indentation check in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "def check_number(num):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_number(num))"
+            },
+            "code_input_2": {
+              "title": "Nested Indentation Function",
+              "prompt": "Create a function that checks if a number is even or odd and also checks if it is positive or negative. Then read the input value, call the function, and print the returned result.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply nested indentation function in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "def even_or_odd(num):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(even_or_odd(num))"
+            },
+            "code_input_3": {
+              "title": "Multiple Conditions",
+              "prompt": "Write a function that checks if a number is between 1 and 10 (inclusive) and returns a message accordingly. Then read the input value, call the function, and print the returned result.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply multiple conditions in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "def check_range(num):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_range(num))"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-2": {
+        "indentation-and-blocks": {
+          "indentation-basics": {
+            "title": "Understanding Indentation",
+            "bodyMarkdown": "In Python, indentation is not just for readability; it defines the structure of the code. For example:\n\n```python\nif condition:\n    # This block is executed if the condition is true\n    print('Condition is true')\nelse:\n    # This block is executed if the condition is false\n    print('Condition is false')\n```\n\nIn this example, the indented lines under the `if` and `else` statements are part of their respective blocks. If you forget to indent, Python will raise an `IndentationError`. \n\n**Your turn:** Try writing your own `if` statement with an `else` block and see how indentation affects the flow.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "nested-indentation": {
+            "title": "Nested Indentation",
+            "bodyMarkdown": "You can also nest `if` statements inside each other. For example:\n\n```python\nif outer_condition:\n    if inner_condition:\n        print('Both conditions are true')\n    else:\n        print('Outer is true, inner is false')\nelse:\n    print('Outer condition is false')\n```\n\nHere, the inner `if` statement is only executed if the `outer_condition` is true. Proper indentation is crucial to maintain the correct structure. \n\n**Try this:** Modify the conditions and see how it changes the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

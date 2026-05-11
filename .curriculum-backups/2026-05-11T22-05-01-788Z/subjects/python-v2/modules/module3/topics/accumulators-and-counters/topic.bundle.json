@@ -1,0 +1,179 @@
+{
+  "topicId": "accumulators-and-counters",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-3",
+  "sectionSlug": "python-v2-3-for-loops",
+  "prefix": "pyv2_3",
+  "minutes": 25,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-3.accumulators-and-counters.label",
+    "summaryKey": "topics.python-v2.python-v2-3.accumulators-and-counters.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.cards.sketch1.title",
+      "sketchId": "sketch2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "quiz1",
+            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.quiz1.title",
+            "exerciseKey": "quiz1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "quiz5",
+            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.quiz5.title",
+            "exerciseKey": "quiz5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sketch1.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sketch2.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sketch2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz1",
+      "language": "python",
+      "starterCode": "total = 0\n\n# Your code here\n\nprint(total)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "5050",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "total = 0\nfor number in range(1, 101):\n    total += number\nprint(total)"
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz2",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "count"
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz5",
+      "language": "python",
+      "starterCode": "count = 0\ntext = 'experience'\n\n# Your code here\n\nprint(count)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "4",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "count = 0\ntext = 'experience'\nfor char in text:\n    if char == 'e':\n        count += 1\nprint(count)"
+      }
+    }
+  ]
+}

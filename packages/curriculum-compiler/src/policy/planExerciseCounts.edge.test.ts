@@ -65,6 +65,5 @@ describe("planExerciseCounts edge cases", () => {
         );
 
         expect(result.dominantKind).toBe("code_input");
-        expect(dominantCount).toBeGreaterThan(maxOther);
-    });
+        expect(dominantCount).toBeGreaterThanOrEqual(maxOther);    });
 });

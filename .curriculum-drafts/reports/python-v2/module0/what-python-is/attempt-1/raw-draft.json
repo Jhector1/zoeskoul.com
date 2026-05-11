@@ -4,103 +4,162 @@
   "minutes": 12,
   "sketchBlocks": [
     {
-      "id": "1",
+      "id": "sketch_1",
       "title": "Introduction to Python's Uses",
-      "bodyMarkdown": "Python is a versatile programming language used in various fields. It is popular for automation, web development, data analysis, and artificial intelligence. For example, you can use Python to automate repetitive tasks like renaming files or scraping data from websites. **Try it yourself:** Think of a task you do repeatedly that could be automated with Python."
+      "bodyMarkdown": "Python is a versatile programming language used in various fields. It can automate repetitive tasks, build web applications, analyze data, and even develop artificial intelligence. For example, you can use Python to write a simple script that automates sending emails. **Try it yourself:** Think of a task you do repeatedly and consider how Python could help automate it."
     },
     {
-      "id": "2",
-      "title": "Python in Web Development",
-      "bodyMarkdown": "Python is widely used in web development with frameworks like Django and Flask. These frameworks help developers build robust web applications quickly. For instance, a simple web app can be created using Flask with just a few lines of code. Here’s a basic example:\n\n```python\nfrom flask import Flask\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return 'Hello, World!'\n\nif __name__ == '__main__':\n    app.run(debug=True)\n```\n\n**Try this:** Modify the message returned by the `home` function to greet yourself!"
+      "id": "sketch_2",
+      "title": "Python in Data Science",
+      "bodyMarkdown": "In data science, Python is widely used for data analysis and visualization. Libraries like Pandas and Matplotlib make it easy to manipulate data and create graphs. For instance, you can load a dataset and plot its values. **Your turn:** Imagine you have a dataset of sales figures. How would you visualize this data using Python?"
     }
   ],
   "quizDraft": [
     {
-      "id": "q1",
+      "id": "quiz_1",
       "kind": "single_choice",
-      "title": "What is one common use of Python?",
-      "prompt": "Select one of the following options.",
+      "title": "What is Python commonly used for?",
+      "prompt": "Select the best answer.",
+      "hint": "Think about the tasks that require automation or data processing.",
+      "help": {
+        "concept": "Python is often used for automation, data analysis, web development, and AI.",
+        "hint_1": "Consider the areas where Python's simplicity and power shine.",
+        "hint_2": "Look for applications that involve processing data or automating tasks."
+      },
       "options": [
+        "Creating complex video games",
         "Building mobile applications",
-        "Web development",
-        "Creating video games",
+        "Automating tasks and data analysis",
         "Designing graphics"
       ],
       "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Think about where Python is commonly applied in technology.",
-      "help": {
-        "concept": "Python is often used for web development due to its simplicity and powerful frameworks.",
-        "hint_1": "Consider the areas where Python excels compared to other languages.",
-        "hint_2": "Look for the option that mentions web applications."
-      }
+        "c"
+      ]
     },
     {
-      "id": "q2",
-      "kind": "single_choice",
-      "title": "Which framework is commonly used for web development in Python?",
-      "prompt": "Choose the correct framework.",
-      "options": [
-        "Flask",
-        "Unity",
-        "Django",
-        "Both Flask and Django"
-      ],
-      "correctOptionIds": [
-        "d"
-      ],
-      "hint": "Think about the frameworks that help build web applications using Python.",
-      "help": {
-        "concept": "Flask and Django are both popular frameworks for web development in Python.",
-        "hint_1": "One is lightweight and easy to get started with, while the other is more feature-rich.",
-        "hint_2": "Both frameworks are widely recognized in the Python community."
-      }
-    },
-    {
-      "id": "q3",
+      "id": "quiz_2",
       "kind": "multi_choice",
-      "title": "Select all the areas where Python is commonly used.",
-      "prompt": "Choose all correct answers.",
+      "title": "Which of the following are applications of Python?",
+      "prompt": "Select all that apply.",
+      "hint": "Think about the various fields where Python is utilized.",
+      "help": {
+        "concept": "Python is used in web development, data analysis, automation, and more.",
+        "hint_1": "Identify the fields that benefit from Python's capabilities.",
+        "hint_2": "Consider both traditional programming and emerging technologies."
+      },
       "options": [
-        "Data analysis",
         "Web development",
+        "Data analysis",
         "Game development",
-        "Machine learning"
+        "Artificial intelligence"
       ],
       "correctOptionIds": [
         "a",
         "b",
         "d"
-      ],
-      "hint": "Think about the industries and fields that benefit from Python's capabilities.",
-      "help": {
-        "concept": "Python is versatile and used in various domains including data science and machine learning.",
-        "hint_1": "Consider the fields where Python's libraries are particularly strong.",
-        "hint_2": "Look for options that relate to data processing and AI."
-      }
+      ]
     },
     {
-      "id": "q4",
+      "id": "quiz_3",
       "kind": "fill_blank_choice",
-      "title": "Python is widely used for __________.",
+      "title": "Python is often used for __________.",
       "prompt": "Fill in the blank with the correct term.",
-      "template": "Python is widely used for __________.",
+      "hint": "Think about what Python excels at.",
       "choices": [
         "automation",
-        "cooking",
-        "painting",
-        "gardening"
+        "graphics design",
+        "hardware programming"
       ],
       "correctValue": "automation"
     },
     {
-      "id": "q5",
+      "id": "quiz_4",
+      "kind": "fill_blank_choice",
+      "title": "In data science, Python is commonly used with __________.",
+      "prompt": "Fill in the blank with the correct library.",
+      "hint": "Consider popular libraries for data manipulation.",
+      "choices": [
+        "Pandas",
+        "Photoshop",
+        "Unity"
+      ],
+      "correctValue": "Pandas"
+    },
+    {
+      "id": "quiz_5",
       "kind": "code_input",
-      "title": "Create a simple Python program that prints your name.",
-      "prompt": "Write Python code to print your name.",
-      "starterCode": "print('Your Name')",
-      "solutionCode": "print('Zoe Skoul')"
+      "title": "Automate a simple task",
+      "prompt": "Write a Python program that prints a message indicating a task is automated.",
+      "starterCode": "def automate_task():\n    # Your code here\n    pass",
+      "solutionCode": "def automate_task():\n    print('Task has been automated!')\nautomate_task()"
+    },
+    {
+      "id": "quiz_6",
+      "kind": "code_input",
+      "title": "Data analysis with Python",
+      "prompt": "Write a Python program that uses Pandas to create a DataFrame and print it.",
+      "starterCode": "import pandas as pd\n\ndef create_dataframe():\n    # Your code here\n    pass",
+      "solutionCode": "import pandas as pd\n\ndef create_dataframe():\n    data = {'Name': ['Alice', 'Bob'], 'Age': [25, 30]}\n    df = pd.DataFrame(data)\n    print(df)\n\ncreate_dataframe()"
+    },
+    {
+      "id": "quiz_7",
+      "kind": "drag_reorder",
+      "title": "Order the steps to automate a task",
+      "prompt": "Arrange the steps in the correct order.",
+      "tokens": [
+        "Identify the task",
+        "Write the Python code",
+        "Test the automation",
+        "Run the code"
+      ],
+      "correctOrder": [
+        "Identify the task",
+        "Write the Python code",
+        "Run the code",
+        "Test the automation"
+      ]
+    },
+    {
+      "id": "quiz_8",
+      "kind": "drag_reorder",
+      "title": "Order the steps to create a DataFrame",
+      "prompt": "Arrange the steps in the correct order.",
+      "tokens": [
+        "Import Pandas",
+        "Create a dictionary",
+        "Convert to DataFrame",
+        "Print the DataFrame"
+      ],
+      "correctOrder": [
+        "Import Pandas",
+        "Create a dictionary",
+        "Convert to DataFrame",
+        "Print the DataFrame"
+      ]
+    },
+    {
+      "id": "quiz_9",
+      "kind": "code_input",
+      "title": "Print a greeting message",
+      "prompt": "Write a Python program that prints 'Hello, World!'",
+      "starterCode": "def greet():\n    # Your code here\n    pass",
+      "solutionCode": "def greet():\n    print('Hello, World!')\ngreet()"
+    },
+    {
+      "id": "quiz_10",
+      "kind": "code_input",
+      "title": "Calculate the sum of two numbers",
+      "prompt": "Write a Python program that calculates and prints the sum of 5 and 10.",
+      "starterCode": "def calculate_sum():\n    # Your code here\n    pass",
+      "solutionCode": "def calculate_sum():\n    result = 5 + 10\n    print(result)\n\ncalculate_sum()"
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Personal Introduction Program",
+    "stepIds": [
+      "quiz_5",
+      "quiz_6",
+      "quiz_9"
+    ]
+  }
 }

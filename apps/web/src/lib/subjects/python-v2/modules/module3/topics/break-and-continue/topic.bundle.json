@@ -18,22 +18,18 @@
       "height": 420
     },
     {
-      "id": "sketch1",
-      "kind": "sketch",
-      "titleKey": "topics.python-v2.python-v2-3.break-and-continue.cards.sketch1.title",
-      "sketchId": "sketch2",
-      "height": 420
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.python-v2.python-v2-3.break-and-continue.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 3,
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -44,25 +40,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz1",
-            "titleKey": "topics.python-v2.python-v2-3.break-and-continue.projectSteps.quiz1.title",
-            "exerciseKey": "quiz1",
+            "id": "q9",
+            "titleKey": "topics.python-v2.python-v2-3.break-and-continue.projectSteps.q9.title",
+            "exerciseKey": "q9",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           },
           {
-            "id": "quiz2",
-            "titleKey": "topics.python-v2.python-v2-3.break-and-continue.projectSteps.quiz2.title",
-            "exerciseKey": "quiz2",
+            "id": "q10",
+            "titleKey": "topics.python-v2.python-v2-3.break-and-continue.projectSteps.q10.title",
+            "exerciseKey": "q10",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
+          },
+          {
+            "id": "q11",
+            "titleKey": "topics.python-v2.python-v2-3.break-and-continue.projectSteps.q11.title",
+            "exerciseKey": "q11",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
           }
         ]
       }
@@ -74,63 +79,15 @@
       "archetype": "paragraph",
       "titleKey": "sketches.python-v2.python-v2-3.break-and-continue.sketch1.title",
       "bodyKey": "sketches.python-v2.python-v2-3.break-and-continue.sketch1.bodyMarkdown"
-    },
-    {
-      "id": "sketch2",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-3.break-and-continue.sketch2.title",
-      "bodyKey": "sketches.python-v2.python-v2-3.break-and-continue.sketch2.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.quiz1",
-      "language": "python",
-      "starterCode": "for i in range(1, 11):\n    # Add your code here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "1\n2\n3\n4\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "for i in range(1, 11):\n    if i == 5:\n        break\n    print(i)"
-      }
-    },
-    {
-      "id": "quiz2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.quiz2",
-      "language": "python",
-      "starterCode": "for i in range(1, 11):\n    # Add your code here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "1\n2\n3\n4\n6\n7\n8\n9\n10\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "for i in range(1, 11):\n    if i == 5:\n        continue\n    print(i)"
-      }
-    },
-    {
-      "id": "quiz3",
+      "id": "q1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.quiz3",
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.q1",
       "optionIds": [
         "a",
         "b",
@@ -143,11 +100,28 @@
       }
     },
     {
-      "id": "quiz4",
+      "id": "q2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.q2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "q3",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.quiz4",
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.q3",
       "optionIds": [
         "a",
         "b",
@@ -163,15 +137,169 @@
       }
     },
     {
-      "id": "quiz5",
+      "id": "q4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.q4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.q5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "q6",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.q6",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "q7",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.quiz5",
-      "choiceCount": 3,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.q7",
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
         "value": "exit"
+      }
+    },
+    {
+      "id": "q8",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.q8",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "skip"
+      }
+    },
+    {
+      "id": "q9",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.q9",
+      "language": "python",
+      "starterCode": "for i in range(11):\n    # Add your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "0\n1\n2\n3\n4",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "0\n1\n2\n3\n4",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "for i in range(11):\n    if i == 5:\n        break\n    print(i)"
+      }
+    },
+    {
+      "id": "q10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.q10",
+      "language": "python",
+      "starterCode": "for i in range(11):\n    # Add your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "0\n1\n2\n3\n4\n6\n7\n8\n9\n10",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "0\n1\n2\n3\n4\n6\n7\n8\n9\n10",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "for i in range(11):\n    if i == 5:\n        continue\n    print(i)"
+      }
+    },
+    {
+      "id": "q11",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.q11",
+      "language": "python",
+      "starterCode": "for i in range(11):\n    # Add your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "0\n1\n2\n3\n4\n6\n7",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "0\n1\n2\n3\n4\n6\n7",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "for i in range(11):\n    if i == 5:\n        continue\n    if i == 8:\n        break\n    print(i)"
       }
     }
   ]

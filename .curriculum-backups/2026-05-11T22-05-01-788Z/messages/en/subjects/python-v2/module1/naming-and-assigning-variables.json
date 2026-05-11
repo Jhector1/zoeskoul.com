@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-1": {
+        "naming-and-assigning-variables": {
+          "label": "Naming and Assigning Variables",
+          "summary": "Use clear variable names and understand reassignment.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Variables"
+            },
+            "sketch1": {
+              "title": "Reassigning Variables"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "q4": {
+              "title": "Create and print a variable"
+            },
+            "q5": {
+              "title": "Reassign a variable"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "What is a variable in Python?",
+              "prompt": "A variable is a name that refers to a value.",
+              "hint": "Think about how we store information in a program.",
+              "help": {
+                "concept": "A variable allows us to store data that can be referenced later in the code.",
+                "hint_1": "Consider how you might use a name to refer to a number.",
+                "hint_2": "Remember the example where we assigned a number to a name."
+              },
+              "options": {
+                "a": "A way to store data",
+                "b": "A type of function",
+                "c": "A method for input",
+                "d": "A way to output data"
+              }
+            },
+            "q2": {
+              "title": "Which of the following are valid variable names in Python?",
+              "prompt": "Select all that apply.",
+              "hint": "Think about the rules for naming variables.",
+              "help": {
+                "concept": "Variable names must start with a letter or underscore and can contain letters, numbers, and underscores.",
+                "hint_1": "Avoid starting variable names with numbers.",
+                "hint_2": "Remember that spaces and special characters are not allowed."
+              },
+              "options": {
+                "a": "my_variable",
+                "b": "2nd_variable",
+                "c": "variable-name",
+                "d": "_privateVariable",
+                "e": "variable 1"
+              }
+            },
+            "q3": {
+              "title": "Fill in the blank: In Python, you can change the value of a variable using _____ .",
+              "prompt": "Complete the sentence.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank: in python, you can change the value of a variable using _____ ..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "In Python, you can change the value of a variable using _____ .",
+              "choices": [
+                "reassignment",
+                "declaration",
+                "initialization"
+              ]
+            },
+            "q4": {
+              "title": "Create and print a variable",
+              "prompt": "Write Python code to create a variable named `favorite_color` and assign it your favorite color. Then, print the variable.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply create and print a variable in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "favorite_color = ''\n# Assign your favorite color here\nprint(favorite_color)"
+            },
+            "q5": {
+              "title": "Reassign a variable",
+              "prompt": "Write Python code to create a variable named `score`, assign it a value of `10`, then reassign it to `20` and print it.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply reassign a variable in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "score = 10\n# Reassign score to a new value\nprint(score)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-1": {
+        "naming-and-assigning-variables": {
+          "1": {
+            "title": "Understanding Variables",
+            "bodyMarkdown": "In Python, a variable is a name that refers to a value. For example, if we write `age = 25`, we are creating a variable named `age` that holds the value `25`. This allows us to use `age` later in our code instead of the number `25`. \n\n**Example:**\n```python\nage = 25\nprint(age)  # This will output: 25\n```\n\n**Your turn:** Try creating a variable called `name` and assign it your name.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "2": {
+            "title": "Reassigning Variables",
+            "bodyMarkdown": "You can change the value of a variable at any time. This is called reassignment. For example, if we initially set `age = 25` and later want to update it to `26`, we can simply write:\n\n**Example:**\n```python\nage = 25\nage = 26\nprint(age)  # This will output: 26\n```\n\n**Try this:** Change the value of `age` to your current age.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

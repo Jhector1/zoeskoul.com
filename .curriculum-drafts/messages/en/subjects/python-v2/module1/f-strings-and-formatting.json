@@ -16,86 +16,177 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Practice"
+              "title": "Profile Card Generator"
             }
           },
           "projectSteps": {
-            "quiz4": {
-              "title": "Create a formatted string"
+            "quiz7": {
+              "title": "Create a greeting using f-strings."
             },
-            "quiz5": {
-              "title": "Using format method"
+            "quiz8": {
+              "title": "Format a string with age."
+            },
+            "quiz9": {
+              "title": "Use the format method to create a message."
             }
           },
           "quiz": {
             "quiz1": {
-              "title": "What does the following code print?",
-              "prompt": "```python\nname = 'Charlie'\nprint(f'Hello, {name}!')\n```",
-              "hint": "Look at how the f-string is constructed.",
+              "title": "What does the following code output?",
+              "prompt": "name = 'Bob'\nprint(f'Hello, {name}!')",
+              "hint": "Look closely at how the variable is used in the f-string.",
               "help": {
-                "concept": "F-strings allow you to embed variable values directly into strings.",
-                "hint_1": "Check how the variable `name` is used inside the f-string.",
-                "hint_2": "The output will include the value of `name`."
+                "concept": "F-strings allow you to embed variables directly in strings.",
+                "hint_1": "The output will include the value of the variable `name`.",
+                "hint_2": "Think about how the f-string is constructed."
               },
               "options": {
-                "a": "Hello, Charlie!",
-                "b": "Hello, name!",
-                "c": "Hello, !"
+                "a": "Hello, Bob!",
+                "b": "Hello, name!"
               }
             },
             "quiz2": {
               "title": "Which of the following are valid ways to format strings in Python?",
               "prompt": "Select all that apply.",
-              "hint": "Think about the methods available for string formatting.",
+              "hint": "Consider the different string formatting methods available.",
               "help": {
-                "concept": "Python provides multiple ways to format strings, including f-strings and the format method.",
-                "hint_1": "Remember the syntax for f-strings and the format method.",
-                "hint_2": "Look for options that use these methods correctly."
+                "concept": "Python supports multiple string formatting techniques.",
+                "hint_1": "F-strings are one method, but there are others.",
+                "hint_2": "Think about the `format()` method and `%` formatting."
               },
               "options": {
-                "a": "f'My name is {name}'",
-                "b": "'My name is {}'.format(name)",
-                "c": "'My name is %s' % name",
-                "d": "'My name is {0}'.format(name)"
+                "a": "Using f-strings",
+                "b": "Using the format() method",
+                "c": "Using % formatting",
+                "d": "Using string concatenation"
               }
             },
             "quiz3": {
-              "title": "Complete the f-string: `f'Hello, {____}!'`",
-              "prompt": "Fill in the blank with the correct variable name.",
-              "hint": "Focus on the missing concept or keyword.",
+              "title": "Fill in the blank to create a formatted string.",
+              "prompt": "age = 25\nprint(f'I am the missing choice years old.')",
+              "hint": "What value should replace the blank to show the age?",
               "help": {
-                "concept": "This task checks the key idea behind complete the f-string: `f'hello, {____}!'`.",
+                "concept": "This task checks the key idea behind fill in the blank to create a formatted string..",
                 "hint_1": "Look for the word or phrase that best matches the lesson concept.",
                 "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
               },
-              "template": "f'Hello, {____}!'",
+              "template": "age = 25\nprint(f'I am the missing choice years old.')\n\nAnswer: [blank1]",
               "choices": [
-                "name",
-                "greeting",
-                "age"
+                "25",
+                "age",
+                "print"
               ]
             },
             "quiz4": {
-              "title": "Create a formatted string",
-              "prompt": "Write Python code that defines a variable `city` and uses an f-string to print 'I live in {city}'.",
-              "hint": "Break the task into the main code steps first.",
+              "title": "Complete the string formatting using format method.",
+              "prompt": "name = 'Charlie'\nprint('Hello, {}!'.format(the missing choice))",
+              "hint": "What should you put in the blank to greet the missing term?",
               "help": {
-                "concept": "This task checks whether you can apply create a formatted string in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+                "concept": "This task checks the key idea behind complete the string formatting using format method..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
               },
-              "starterCode": "city = ''\n# Write your f-string below"
+              "template": "name = 'Charlie'\nprint('Hello, {}!'.format(the missing choice))\n\nAnswer: [blank1]",
+              "choices": [
+                "name",
+                "Charlie",
+                "print"
+              ]
             },
             "quiz5": {
-              "title": "Using format method",
-              "prompt": "Define a variable `temperature` and print 'The temperature is {temperature} degrees.' using the format method.",
-              "hint": "Break the task into the main code steps first.",
+              "title": "Order the steps to create a formatted string using f-strings.",
+              "prompt": "Arrange the following steps in the correct order.",
+              "hint": "Think about the logical order of the steps.",
               "help": {
-                "concept": "This task checks whether you can apply using format method in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+                "concept": "This task is about understanding the sequence behind order the steps to create a formatted string using f-strings..",
+                "hint_1": "Find the step that must happen first before the others make sense.",
+                "hint_2": "Check which action depends on a previous step already being completed."
               },
-              "starterCode": "temperature = 0\n# Write your format method code below"
+              "tokens": {
+                "t1": "Define a variable with a value.",
+                "t2": "Use f-string syntax with curly braces.",
+                "t3": "Print the formatted string."
+              }
+            },
+            "quiz6": {
+              "title": "Order the steps to use the format method.",
+              "prompt": "Arrange the steps to format a string using the format method.",
+              "hint": "Think about the logical order of the steps.",
+              "help": {
+                "concept": "This task is about understanding the sequence behind order the steps to use the format method..",
+                "hint_1": "Find the step that must happen first before the others make sense.",
+                "hint_2": "Check which action depends on a previous step already being completed."
+              },
+              "tokens": {
+                "t1": "Define a string with placeholders.",
+                "t2": "Call the format method with values.",
+                "t3": "Print the formatted string."
+              }
+            },
+            "quiz7": {
+              "title": "Create a greeting using f-strings.",
+              "prompt": "Write a program that takes a user's name and prints a greeting using f-strings.",
+              "hint": "Read the task \"Create a greeting using f-strings.\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Create a greeting using f-strings.\".",
+                "hint_1": "Use the statement or expression that matches the required behavior.",
+                "hint_2": "Run the code and compare the output panel with the expected result."
+              },
+              "starterCode": "name = input()\n# Write your greeting here"
+            },
+            "quiz8": {
+              "title": "Format a string with age.",
+              "prompt": "Write a program that takes a user's age and prints a formatted string.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "age = input()\n# Write your formatted string here"
+            },
+            "quiz9": {
+              "title": "Use the format method to create a message.",
+              "prompt": "Write a program that takes a user's favorite color and prints a message using the format method.",
+              "hint": "Read the task \"Use the format method to create a message.\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Use the format method to create a message.\".",
+                "hint_1": "Use the statement or expression that matches the required behavior.",
+                "hint_2": "Run the code and compare the output panel with the expected result."
+              },
+              "starterCode": "color = input()\n# Write your message here"
+            },
+            "policy_single_choice_1": {
+              "title": "Identify the result of running code",
+              "prompt": "In \"F-Strings and Formatting\", what should you check after running a Python program?",
+              "hint": "Running code lets you inspect what the program displays.",
+              "help": {
+                "concept": "When you run Python code, the most important feedback is usually the output or error message.",
+                "hint_1": "Look at the console or output area.",
+                "hint_2": "Printed values appear after the program runs."
+              },
+              "options": {
+                "a": "The output shown by the program",
+                "b": "Only the file name",
+                "c": "Whether Python deletes the code",
+                "d": "Whether comments are printed automatically"
+              }
+            },
+            "policy_multi_choice_1": {
+              "title": "Choose good run-and-check habits",
+              "prompt": "Which habits help when practicing \"F-Strings and Formatting\"?",
+              "hint": "Good practice means running code and checking what happened.",
+              "help": {
+                "concept": "Running small pieces of code and reading the output helps you understand Python behavior.",
+                "hint_1": "Output and errors both give useful feedback.",
+                "hint_2": "Testing small changes is easier than debugging many changes at once."
+              },
+              "options": {
+                "a": "Run the code after writing it",
+                "b": "Read the output carefully",
+                "c": "Ignore error messages",
+                "d": "Change many lines at once without testing"
+              }
             }
           }
         }
@@ -108,11 +199,11 @@
         "f-strings-and-formatting": {
           "sketch1": {
             "title": "Introduction to F-Strings",
-            "bodyMarkdown": "F-strings are a way to format strings in Python. They allow you to embed expressions inside string literals, using curly braces `{}`. For example:\n\n```python\nname = 'Alice'\nage = 30\nformatted_string = f'My name is {name} and I am {age} years old.'\nprint(formatted_string)\n```\n\nThis will output: `My name is Alice and I am 30 years old.`\n\n**Try it yourself:** Modify the variables `name` and `age` to see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "F-strings are a way to embed expressions inside string literals, using curly braces `{}`. For example, if you have a variable `name = 'Alice'`, you can create a greeting with f-strings like this:\n\n```python\nname = 'Alice'\nprint(f'Hello, {name}!')\n```\nThis will output `Hello, Alice!`. Try it yourself by changing the name!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           },
           "sketch2": {
             "title": "Using Format Method",
-            "bodyMarkdown": "Another way to format strings is by using the `format()` method. Here's how it works:\n\n```python\nname = 'Bob'\nage = 25\nformatted_string = 'My name is {} and I am {} years old.'.format(name, age)\nprint(formatted_string)\n```\n\nThis will also output: `My name is Bob and I am 25 years old.`\n\n**Your turn:** Try changing the values of `name` and `age` to see the difference!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "Another way to format strings is by using the `format()` method. For example:\n\n```python\nage = 30\nprint('I am {} years old.'.format(age))\n```\nThis will output `I am 30 years old.`. Experiment with different values for `age`!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

@@ -8,6 +8,37 @@ function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
 }
 
+
+
+
+
+
+function stripPythonComments(source: string): string {
+    return source
+        .split("\n")
+        .map((line) => line.replace(/#.*$/, ""))
+        .join("\n");
+}
+
+function normalizeCodeForCompare(source: unknown): string {
+    return stripPythonComments(String(source ?? ""))
+        .replace(/\s+/g, "")
+        .trim();
+}
+
+function starterRevealsSolution(starterCode: unknown, solutionCode: unknown): boolean {
+    const starter = normalizeCodeForCompare(starterCode);
+    const solution = normalizeCodeForCompare(solutionCode);
+
+    return !!starter && !!solution && starter === solution;
+}
+
+function defaultStarterCodeForProfile(profileId: unknown): string {
+    return String(profileId ?? "").trim() === "sql"
+        ? "-- Write your SQL query below\n"
+        : "# Write your code below\n";
+}
+
 function isChoiceFillBlankValid(exercise: any): boolean {
     if (exercise?.kind !== "fill_blank_choice") return true;
 
@@ -233,7 +264,9 @@ export async function repairIncompleteExercises(args: {
             return {
                 ...exercise,
                 kind: "code_input" as const,
-                starterCode: normalizeText(exercise.starterCode),
+                starterCode: starterRevealsSolution(exercise.starterCode, exercise.solutionCode)
+                    ? defaultStarterCodeForProfile(args.seed.profileId)
+                    : normalizeText(exercise.starterCode),
                 solutionCode: normalizeText(exercise.solutionCode),
                 recipeType: repairedRecipeType,
                 datasetId: datasetId || undefined,

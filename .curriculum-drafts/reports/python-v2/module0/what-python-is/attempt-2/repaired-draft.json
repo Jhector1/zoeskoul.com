@@ -1,0 +1,251 @@
+{
+  "title": "What Python Is Used For",
+  "summary": "Understand Python's role in automation, web apps, data, beginner programming, and AI.",
+  "minutes": 12,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Python's Uses",
+      "bodyMarkdown": "Python is a versatile programming language used for various applications. It excels in automation, web development, data analysis, and artificial intelligence. For instance, you can automate repetitive tasks with Python scripts, build dynamic web applications using frameworks like Django, analyze data with libraries like Pandas, and create machine learning models with TensorFlow. **Try it yourself**: Think of a task in your daily life that could be automated with Python."
+    },
+    {
+      "id": "sketch2",
+      "title": "Python in Data Science",
+      "bodyMarkdown": "In data science, Python is widely used for data manipulation and analysis. Libraries such as NumPy and Matplotlib allow you to perform complex calculations and visualize data effectively. For example, you can use Python to analyze sales data and create graphs to represent trends. **Your turn**: Consider how you might use Python to analyze a dataset relevant to your interests."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "single_choice",
+      "title": "What is Python commonly used for?",
+      "prompt": "Select the best option that describes a common use of Python.",
+      "options": [
+        "Creating hardware components",
+        "Web development",
+        "Designing graphics",
+        "Building mobile applications"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "single_choice",
+      "title": "Which library is used for data analysis in Python?",
+      "prompt": "Choose the library that is primarily used for data analysis.",
+      "options": [
+        "Pandas",
+        "Flask",
+        "Django",
+        "Matplotlib"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "multi_choice",
+      "title": "Select all the areas where Python is used.",
+      "prompt": "Which of the following are applications of Python?",
+      "options": [
+        "Web development",
+        "Data analysis",
+        "Game development",
+        "Mobile app development"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Which libraries are used for machine learning in Python?",
+      "prompt": "Select all libraries that are commonly used for machine learning.",
+      "options": [
+        "TensorFlow",
+        "NumPy",
+        "Pandas",
+        "Scikit-learn"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: Python is often used for ________ tasks.",
+      "prompt": "Complete the sentence with the correct term.",
+      "template": "Python is often used for [blank1] tasks.",
+      "choices": [
+        "automating",
+        "designing",
+        "cooking"
+      ],
+      "correctValue": "automating",
+      "hint": "Think about tasks that can be repeated without manual effort.",
+      "help": {
+        "concept": "Automation is a key area where Python excels.",
+        "hint_1": "Consider how Python can simplify repetitive tasks.",
+        "hint_2": "Python scripts can automate various processes."
+      }
+    },
+    {
+      "id": "q6",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: A popular framework for web development in Python is ________.",
+      "prompt": "Complete the sentence with the correct framework name.",
+      "template": "A popular framework for web development in Python is [blank1].",
+      "choices": [
+        "Django",
+        "Pandas",
+        "NumPy"
+      ],
+      "correctValue": "Django",
+      "hint": "Think about frameworks that help build web applications.",
+      "help": {
+        "concept": "the missing term is a high-level web framework for Python.",
+        "hint_1": "This framework simplifies web development tasks.",
+        "hint_2": "the missing term follows the model-view-template (MVT) architecture."
+      }
+    },
+    {
+      "id": "q7",
+      "kind": "drag_reorder",
+      "title": "Order the steps to create a simple Python program.",
+      "prompt": "Arrange the following steps in the correct order.",
+      "tokens": [
+        "Write code in the editor",
+        "Click Run",
+        "Check the output panel"
+      ],
+      "correctOrder": [
+        "Write code in the editor",
+        "Click Run",
+        "Check the output panel"
+      ],
+      "hint": "Think about the sequence of actions when coding.",
+      "help": {
+        "concept": "The order of actions is crucial for running a program.",
+        "hint_1": "You need to write code before executing it.",
+        "hint_2": "After running, the output should be checked."
+      }
+    },
+    {
+      "id": "q8",
+      "kind": "drag_reorder",
+      "title": "Arrange the components of a Python print statement.",
+      "prompt": "Put the components of a print statement in the correct order.",
+      "tokens": [
+        "print(",
+        "Hello, World!",
+        ")"
+      ],
+      "correctOrder": [
+        "print(",
+        "Hello, World!",
+        ")"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "q9",
+      "kind": "code_input",
+      "title": "Create a simple print statement.",
+      "prompt": "Write a Python program that prints 'Hello, World!' to the output panel.",
+      "starterCode": "print('')",
+      "solutionCode": "print('Hello, World!')",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Hello, World!"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply create a simple print statement. in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      }
+    },
+    {
+      "id": "q10",
+      "kind": "code_input",
+      "title": "Calculate the sum of two numbers.",
+      "prompt": "Write a program that calculates the sum of 5 and 10 and prints the result.",
+      "starterCode": "result = 5 + 10\nprint(result)",
+      "solutionCode": "result = 5 + 10\nprint(result)",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "15"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "q11",
+      "kind": "code_input",
+      "title": "Create a variable and print it.",
+      "prompt": "Define a variable named 'greeting' with the value 'Hello!' and print it.",
+      "starterCode": "greeting = ''\nprint(greeting)",
+      "solutionCode": "greeting = 'Hello!'\nprint(greeting)",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Hello!"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply create a variable and print it. in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      }
+    }
+  ]
+}

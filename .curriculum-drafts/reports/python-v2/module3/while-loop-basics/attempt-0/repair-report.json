@@ -16,18 +16,18 @@
       "message": "Added a short line-by-line explanation after a multi-line code example."
     },
     {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "while-loop-safety",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_fill_blank_choice_1",
+      "message": "Added a fallback fill_blank_choice exercise to satisfy the planned exercise mix for \"while-loop-basics\"."
     },
     {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "while-loop-conditional",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_fill_blank_choice_2",
+      "message": "Added a fallback fill_blank_choice exercise to satisfy the planned exercise mix for \"while-loop-basics\"."
     }
   ]
 }

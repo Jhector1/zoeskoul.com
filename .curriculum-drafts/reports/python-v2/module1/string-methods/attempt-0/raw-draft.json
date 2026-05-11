@@ -6,27 +6,27 @@
     {
       "id": "sketch1",
       "title": "Introduction to String Methods",
-      "bodyMarkdown": "In Python, strings are sequences of characters. You can manipulate strings using various methods. For example, the `lower()` method converts all characters in a string to lowercase. Here's a quick example:\n\n```python\ntext = 'Hello World'\nprint(text.lower())  # Output: hello world\n```\n\n**Your turn:** Try using the `upper()` method to convert the string to uppercase."
+      "bodyMarkdown": "In Python, strings are sequences of characters, and they come with a variety of built-in methods that allow us to manipulate them easily. For example, the `lower()` method converts all characters in a string to lowercase. Here's a quick example:\n\n```python\ntext = 'Hello World'\nprint(text.lower())  # Output: hello world\n```\n\n**Your turn:** Try using the `upper()` method to convert the string to uppercase."
     },
     {
       "id": "sketch2",
-      "title": "Using strip() to Clean Strings",
-      "bodyMarkdown": "The `strip()` method removes any leading and trailing whitespace from a string. For instance:\n\n```python\ntext = '   Hello World   '\nprint(text.strip())  # Output: 'Hello World'\n```\n\n**Try this:** Use `strip()` on a string with extra spaces and see the result."
+      "title": "Using the strip Method",
+      "bodyMarkdown": "The `strip()` method is used to remove any leading and trailing whitespace from a string. This is particularly useful when processing user input. For example:\n\n```python\nuser_input = '   Hello   '\ncleaned_input = user_input.strip()\nprint(cleaned_input)  # Output: 'Hello'\n```\n\n**Try it yourself:** Modify the example to use `strip()` on a string with spaces at both ends."
     },
     {
       "id": "sketch3",
       "title": "Replacing Substrings",
-      "bodyMarkdown": "You can replace parts of a string using the `replace()` method. For example:\n\n```python\ntext = 'Hello World'\nnew_text = text.replace('World', 'Python')\nprint(new_text)  # Output: Hello Python\n```\n\n**Try it yourself:** Change 'Hello' to 'Hi' using `replace()`."
+      "bodyMarkdown": "The `replace()` method allows you to replace a specified substring with another substring. For instance:\n\n```python\ntext = 'I love Python'\nnew_text = text.replace('love', 'enjoy')\nprint(new_text)  # Output: I enjoy Python\n```\n\n**Your turn:** Change the word 'Python' to 'programming' in the example."
     },
     {
       "id": "sketch4",
       "title": "Splitting Strings",
-      "bodyMarkdown": "The `split()` method divides a string into a list based on a specified separator. For example:\n\n```python\ntext = 'apple,banana,cherry'\nfruits = text.split(',')\nprint(fruits)  # Output: ['apple', 'banana', 'cherry']\n```\n\n**Your turn:** Split a string of your choice using a different separator."
+      "bodyMarkdown": "The `split()` method divides a string into a list based on a specified delimiter. By default, it splits by whitespace. For example:\n\n```python\nsentence = 'Python is fun'\nwords = sentence.split()\nprint(words)  # Output: ['Python', 'is', 'fun']\n```\n\n**Try this:** Use `split()` to break a sentence into words using a comma as a delimiter."
     },
     {
       "id": "sketch5",
       "title": "Joining Strings",
-      "bodyMarkdown": "To combine a list of strings into a single string, use the `join()` method. For example:\n\n```python\nfruits = ['apple', 'banana', 'cherry']\nresult = ', '.join(fruits)\nprint(result)  # Output: apple, banana, cherry\n```\n\n**Try this:** Join a list of your favorite colors into a single string."
+      "bodyMarkdown": "The `join()` method is used to concatenate a list of strings into a single string with a specified separator. For example:\n\n```python\nwords = ['Python', 'is', 'awesome']\njoined_string = ' '.join(words)\nprint(joined_string)  # Output: Python is awesome\n```\n\n**Your turn:** Create a list of your favorite fruits and join them into a single string separated by commas."
     }
   ],
   "quizDraft": [
@@ -44,65 +44,183 @@
       "correctOptionIds": [
         "b"
       ],
-      "hint": "Think about how the method affects the case of the letters in a string.",
+      "hint": "Think about how the method changes the case of letters.",
       "help": {
         "concept": "The lower() method is used to convert all characters in a string to lowercase.",
-        "hint_1": "Look for the option that describes changing uppercase letters to lowercase.",
-        "hint_2": "Remember that lower() does not affect non-alphabetic characters."
+        "hint_1": "This method is often used for case-insensitive comparisons.",
+        "hint_2": "Look for the option that mentions lowercase."
       }
     },
     {
       "id": "quiz2",
-      "kind": "multi_choice",
-      "title": "Which methods can be used to manipulate strings?",
-      "prompt": "Select all that apply.",
+      "kind": "single_choice",
+      "title": "What does the strip() method do?",
+      "prompt": "Select the correct answer.",
       "options": [
+        "Removes all characters from a string",
+        "Removes leading and trailing whitespace",
+        "Splits a string into a list",
+        "Joins a list into a string"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider what happens to spaces at the beginning and end of a string.",
+      "help": {
+        "concept": "The strip() method removes whitespace from both ends of a string.",
+        "hint_1": "This method is useful for cleaning up user input.",
+        "hint_2": "Look for the option that mentions whitespace."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Which of the following methods can be used to manipulate strings?",
+      "prompt": "Select all correct answers.",
+      "options": [
+        "lower()",
         "strip()",
-        "replace()",
         "append()",
-        "split()"
+        "replace()"
       ],
       "correctOptionIds": [
         "a",
         "b",
         "d"
       ],
-      "hint": "Consider methods that are specifically designed for string manipulation.",
+      "hint": "Think about the methods that are specifically designed for string manipulation.",
       "help": {
-        "concept": "strip(), replace(), and split() are all string methods, while append() is not.",
-        "hint_1": "Think about what each method does and if it applies to strings.",
-        "hint_2": "Only choose methods that are commonly used with strings."
+        "concept": "Methods like lower(), strip(), and replace() are used to manipulate strings.",
+        "hint_1": "Append() is not a string method; consider what it does.",
+        "hint_2": "Look for methods that directly affect string content."
       }
     },
     {
-      "id": "quiz3",
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Which methods can split a string into a list?",
+      "prompt": "Select all correct answers.",
+      "options": [
+        "split()",
+        "join()",
+        "replace()",
+        "lower()"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider which method is specifically designed to break a string into parts.",
+      "help": {
+        "concept": "The split() method is used to divide a string into a list based on a delimiter.",
+        "hint_1": "Join() does the opposite of splitting.",
+        "hint_2": "Replace() and lower() do not split strings."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Order the steps to use the replace() method.",
+      "prompt": "Arrange the steps in the correct order.",
+      "tokens": [
+        "1. Call the replace() method on the string.",
+        "2. Specify the substring to replace.",
+        "3. Specify the new substring.",
+        "4. Store the result in a new variable."
+      ],
+      "correctOrder": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "hint": "Think about the sequence of actions needed to replace text in a string.",
+      "help": {
+        "concept": "Using replace() involves calling the method and providing the necessary parameters.",
+        "hint_1": "You need to specify both what to replace and what to replace it with.",
+        "hint_2": "Don't forget to store the result!"
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Order the steps to join a list of strings.",
+      "prompt": "Arrange the steps in the correct order.",
+      "tokens": [
+        "1. Create a list of strings.",
+        "2. Choose a separator string.",
+        "3. Call the join() method on the separator.",
+        "4. Store the result in a new variable."
+      ],
+      "correctOrder": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "hint": "Consider the sequence of actions needed to combine strings from a list.",
+      "help": {
+        "concept": "Joining strings involves creating a list and using a separator to concatenate them.",
+        "hint_1": "You need to create the list before you can join it.",
+        "hint_2": "The join() method is called on the separator, not the list."
+      }
+    },
+    {
+      "id": "quiz7",
       "kind": "fill_blank_choice",
-      "title": "Fill in the blank: The method used to remove whitespace from both ends of a string is called ___.",
+      "title": "Fill in the blank: The method used to remove whitespace from both ends of a string is called [blank1].",
       "prompt": "Choose the correct method.",
-      "template": "The method used to remove whitespace from both ends of a string is called ___.",
+      "template": "The method used to remove whitespace from both ends of a string is called [blank1].",
       "choices": [
         "strip()",
         "trim()",
-        "cut()",
-        "remove()"
+        "clean()"
       ],
       "correctValue": "strip()"
     },
     {
-      "id": "quiz4",
-      "kind": "code_input",
-      "title": "Use the replace() method",
-      "prompt": "Write a program that replaces 'Python' with 'Java' in the string 'I love Python programming'.",
-      "starterCode": "text = 'I love Python programming'\n# Use the replace() method here\n",
-      "solutionCode": "text = 'I love Python programming'\nnew_text = text.replace('Python', 'Java')\nprint(new_text)"
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: To convert a string to lowercase, you would use the [blank1] method.",
+      "prompt": "Choose the correct method.",
+      "template": "To convert a string to lowercase, you would use the [blank1] method.",
+      "choices": [
+        "lower()",
+        "downcase()",
+        "casefold()"
+      ],
+      "correctValue": "lower()"
     },
     {
-      "id": "quiz5",
+      "id": "quiz9",
       "kind": "code_input",
-      "title": "Join a list of strings",
-      "prompt": "Write a program that joins the list ['dog', 'cat', 'mouse'] into a single string separated by commas.",
-      "starterCode": "animals = ['dog', 'cat', 'mouse']\n# Use the join() method here\n",
-      "solutionCode": "animals = ['dog', 'cat', 'mouse']\nresult = ', '.join(animals)\nprint(result)"
+      "title": "Create a function to format a user's name.",
+      "prompt": "Write a function that takes a user's full name as input and returns it in title case (first letter of each word capitalized).",
+      "starterCode": "def format_name(full_name):\n    # Your code here\n    return formatted_name",
+      "solutionCode": "def format_name(full_name):\n    formatted_name = full_name.title()\n    return formatted_name"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Count the number of words in a sentence.",
+      "prompt": "Write a function that takes a sentence and returns the number of words in it.",
+      "starterCode": "def count_words(sentence):\n    # Your code here\n    return word_count",
+      "solutionCode": "def count_words(sentence):\n    words = sentence.split()\n    word_count = len(words)\n    return word_count"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Create a greeting message.",
+      "prompt": "Write a function that takes a name and returns a greeting message.",
+      "starterCode": "def greet(name):\n    # Your code here\n    return message",
+      "solutionCode": "def greet(name):\n    message = f'Hello, {name}!'\n    return message"
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Profile Card Generator",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
 }

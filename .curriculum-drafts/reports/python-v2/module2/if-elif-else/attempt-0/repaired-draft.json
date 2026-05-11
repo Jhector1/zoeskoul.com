@@ -6,143 +6,276 @@
     {
       "id": "1",
       "title": "Understanding If, Elif, and Else",
-      "bodyMarkdown": "In Python, we use `if`, `elif`, and `else` statements to control the flow of our programs based on conditions. \n\n### Example:\n```python\nage = 18\nif age < 18:\n    print('You are a minor.')\nelif age == 18:\n    print('You are just an adult!')\nelse:\n    print('You are an adult.')\n```\nIn this example, the program checks the value of `age`. If `age` is less than 18, it prints 'You are a minor.' If `age` is exactly 18, it prints 'You are just an adult!'. For any age greater than 18, it prints 'You are an adult.'\n\n### Your turn:\nTry changing the value of `age` and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "In Python, `if`, `elif`, and `else` are used to control the flow of your program based on conditions. For example:\n\n```python\nage = 18\nif age < 18:\n    print('You are a minor.')\nelif age == 18:\n    print('You are just an adult.')\nelse:\n    print('You are an adult.')\n```\n\nIn this example, the program checks the value of `age` and prints a message based on the condition that is true. \n\n**Your turn:** Try changing the value of `age` to see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     },
     {
       "id": "2",
       "title": "Comparison Operators",
-      "bodyMarkdown": "Comparison operators are used to compare two values. The most common ones are:\n- `==` (equal to)\n- `!=` (not equal to)\n- `>` (greater than)\n- `<` (less than)\n- `>=` (greater than or equal to)\n- `<=` (less than or equal to)\n\n### Example:\n```python\nnumber = 10\nif number > 5:\n    print('Number is greater than 5')\nelse:\n    print('Number is 5 or less')\n```\nIn this example, the program checks if `number` is greater than 5. If it is, it prints 'Number is greater than 5'. Otherwise, it prints 'Number is 5 or less'.\n\n### Try it yourself:\nChange the value of `number` and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "Comparison operators are used to compare values. The most common ones are:\n- `==` (equal to)\n- `!=` (not equal to)\n- `<` (less than)\n- `>` (greater than)\n- `<=` (less than or equal to)\n- `>=` (greater than or equal to)\n\nFor example:\n\n```python\nnumber = 10\nif number > 5:\n    print('Number is greater than 5')\nelse:\n    print('Number is 5 or less')\n```\n\n**Try this:** Change the value of `number` and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     }
   ],
   "quizDraft": [
     {
-      "id": "1",
-      "kind": "code_input",
-      "title": "Determine Age Group",
-      "prompt": "Write a program that checks the age of a person and prints whether they are a child, a teenager, or an adult.",
-      "starterCode": "age = int(input())\n# Your code here",
-      "solutionCode": "age = int(input())\nif age < 13:\n    print('Child')\nelif age < 20:\n    print('Teenager')\nelse:\n    print('Adult')",
-      "tests": [
-        {
-          "stdin": "age = 10\nif age < 13:\n    print('Child')\nelif age < 20:\n    print('Teenager')\nelse:\n    print('Adult')\n",
-          "stdout": "Child"
-        },
-        {
-          "stdin": "age = 15\nif age < 13:\n    print('Child')\nelif age < 20:\n    print('Teenager')\nelse:\n    print('Adult')\n",
-          "stdout": "Teenager"
-        },
-        {
-          "stdin": "age = 25\nif age < 13:\n    print('Child')\nelif age < 20:\n    print('Teenager')\nelse:\n    print('Adult')\n",
-          "stdout": "Adult"
-        }
-      ],
-      "recipeType": "fixed_tests",
-      "hint": "Break the task into the main code steps first.",
-      "help": {
-        "concept": "This task checks whether you can apply determine age group in a working solution.",
-        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-      }
-    },
-    {
-      "id": "2",
-      "kind": "multi_choice",
-      "title": "Identify the Correct Output",
-      "prompt": "What will the following code print?\n```python\nx = 10\nif x < 5:\n    print('Less than 5')\nelif x < 15:\n    print('Less than 15')\nelse:\n    print('15 or more')\n```",
+      "id": "q1",
+      "kind": "single_choice",
+      "title": "What does the `elif` keyword do?",
+      "prompt": "Choose the correct answer.",
       "options": [
-        "Less than 5",
-        "Less than 15",
-        "15 or more"
+        "It starts a new conditional block.",
+        "It is used to check multiple conditions.",
+        "It ends the conditional block.",
+        "It is the same as `else`."
       ],
       "correctOptionIds": [
         "b"
       ],
-      "hint": "Think about the main idea behind identify the correct output.",
+      "hint": "Think about how you can check for additional conditions after an `if` statement.",
       "help": {
-        "concept": "Focus on the core concept behind identify the correct output.",
-        "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
-        "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+        "concept": "The `elif` keyword allows you to check another condition if the previous `if` condition was false.",
+        "hint_1": "Consider how you would handle multiple conditions in your code.",
+        "hint_2": "Remember that `elif` stands for 'else if'."
       }
     },
     {
-      "id": "3",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the Blank",
-      "prompt": "In Python, the `the missing choice` statement is used to specify a block of code that runs if the condition is false.",
-      "template": "If the condition is false, the `[blank1]` block will execute.",
-      "choices": [
-        "if",
-        "elif",
-        "else"
+      "id": "q2",
+      "kind": "single_choice",
+      "title": "Which of the following is a valid comparison operator?",
+      "prompt": "Select the correct option.",
+      "options": [
+        "==>",
+        "!=",
+        "===",
+        "<=>"
       ],
-      "correctValue": "else",
-      "hint": "Focus on the missing concept or keyword.",
-      "help": {
-        "concept": "This task checks the key idea behind fill in the blank.",
-        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-      }
-    },
-    {
-      "id": "4",
-      "kind": "code_input",
-      "title": "Grade Checker",
-      "prompt": "Write a program that checks a student's score and prints their grade based on the following criteria:\n- 90 and above: A\n- 80 to 89: B\n- 70 to 79: C\n- 60 to 69: D\n- Below 60: F",
-      "starterCode": "score = int(input())\n# Your code here",
-      "solutionCode": "score = int(input())\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelif score >= 60:\n    print('D')\nelse:\n    print('F')",
-      "tests": [
-        {
-          "stdin": "score = 95\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelif score >= 60:\n    print('D')\nelse:\n    print('F')\n",
-          "stdout": "A"
-        },
-        {
-          "stdin": "score = 75\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelif score >= 60:\n    print('D')\nelse:\n    print('F')\n",
-          "stdout": "C"
-        },
-        {
-          "stdin": "score = 50\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelif score >= 60:\n    print('D')\nelse:\n    print('F')\n",
-          "stdout": "F"
-        }
+      "correctOptionIds": [
+        "b"
       ],
-      "recipeType": "fixed_tests",
-      "hint": "Break the task into the main code steps first.",
-      "help": {
-        "concept": "This task checks whether you can apply grade checker in a working solution.",
-        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-      }
-    },
-    {
-      "id": "5",
-      "kind": "code_input",
-      "title": "Temperature Checker",
-      "prompt": "Write a program that checks the temperature and prints whether it's cold, warm, or hot based on the following criteria:\n- Below 15: Cold\n- 15 to 25: Warm\n- Above 25: Hot",
-      "starterCode": "temperature = 20\n# Your code here",
-      "solutionCode": "temperature = 20\nif temperature < 15:\n    print('Cold')\nelif temperature <= 25:\n    print('Warm')\nelse:\n    print('Hot')",
-      "tests": [
-        {
-          "stdin": "temperature = 10\nif temperature < 15:\n    print('Cold')\nelif temperature <= 25:\n    print('Warm')\nelse:\n    print('Hot')\n",
-          "stdout": "Warm",
-          "match": "exact"
-        },
-        {
-          "stdin": "temperature = 20\nif temperature < 15:\n    print('Cold')\nelif temperature <= 25:\n    print('Warm')\nelse:\n    print('Hot')\n",
-          "stdout": "Warm",
-          "match": "exact"
-        },
-        {
-          "stdin": "temperature = 30\nif temperature < 15:\n    print('Cold')\nelif temperature <= 25:\n    print('Warm')\nelse:\n    print('Hot')\n",
-          "stdout": "Warm",
-          "match": "exact"
-        }
-      ],
-      "recipeType": "fixed_tests",
       "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
         "concept": "This support text was repaired because the original wording revealed the answer too directly.",
         "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
         "hint_2": "Choose the option that directly matches the question without relying on answer wording."
       }
+    },
+    {
+      "id": "q3",
+      "kind": "multi_choice",
+      "title": "Which of the following statements are true about `if` statements?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "They can be nested.",
+        "They must always have an `else` block.",
+        "They can have multiple `elif` blocks.",
+        "They can only check one condition."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Think about how you can structure your conditions in Python.",
+      "help": {
+        "concept": "You can nest `if` statements and have multiple `elif` blocks for checking various conditions.",
+        "hint_1": "Consider how you would write a series of conditions.",
+        "hint_2": "Remember that `else` is optional."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Which of the following are valid uses of boolean logic in conditions?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "Using `and` to combine conditions.",
+        "Using `or` to check if at least one condition is true.",
+        "Using `not` to reverse a condition.",
+        "Using `xor` to check for exclusive conditions."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about how you can combine conditions to create more complex checks.",
+      "help": {
+        "concept": "Boolean logic allows you to combine multiple conditions using `and`, `or`, and `not`.",
+        "hint_1": "Consider how each operator affects the truth value of the conditions.",
+        "hint_2": "Remember that `xor` is not a standard operator in Python."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Complete the statement: In Python, the `if` statement is used to check if a condition is [blank1].",
+      "prompt": "Complete the statement: In Python, the `if` statement is used to check if a condition is [blank1].",
+      "template": "In Python, the `if` statement is used to check if a condition is [blank1].",
+      "choices": [
+        "true",
+        "false",
+        "none"
+      ],
+      "correctValue": "true",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the statement: in python, the `if` statement is used to check if a condition is [blank1]..",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "q6",
+      "kind": "fill_blank_choice",
+      "title": "Complete the statement: The `else` block is executed when the `if` condition is [blank1].",
+      "prompt": "Complete the statement: The `else` block is executed when the `if` condition is [blank1].",
+      "template": "The `else` block is executed when the `if` condition is [blank1].",
+      "choices": [
+        "true",
+        "false",
+        "none"
+      ],
+      "correctValue": "false",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the statement: the `else` block is executed when the `if` condition is [blank1]..",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "q7",
+      "kind": "drag_reorder",
+      "title": "Order the steps to create a simple if-elif-else structure.",
+      "prompt": "Arrange the following steps in the correct order.",
+      "tokens": [
+        "Write the if condition.",
+        "Write the else block.",
+        "Write the elif condition.",
+        "Check the condition."
+      ],
+      "correctOrder": [
+        "Write the if condition.",
+        "Write the else block.",
+        "Write the elif condition.",
+        "Check the condition."
+      ],
+      "hint": "Think about the logical order of the steps.",
+      "help": {
+        "concept": "This task is about understanding the sequence behind order the steps to create a simple if-elif-else structure..",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
+    },
+    {
+      "id": "q8",
+      "kind": "drag_reorder",
+      "title": "Order the following comparison operators from least to most strict.",
+      "prompt": "Arrange the operators in order of strictness.",
+      "tokens": [
+        "==",
+        "!=",
+        "<",
+        ">"
+      ],
+      "correctOrder": [
+        "==",
+        "!=",
+        "<",
+        ">"
+      ],
+      "hint": "Think about the logical order of the steps.",
+      "help": {
+        "concept": "This task is about understanding the sequence behind order the following comparison operators from least to most strict..",
+        "hint_1": "Find the step that must happen first before the others make sense.",
+        "hint_2": "Check which action depends on a previous step already being completed."
+      }
+    },
+    {
+      "id": "q9",
+      "kind": "code_input",
+      "title": "Grade Checker",
+      "prompt": "Write a program that checks a student's grade and prints whether they passed or failed.",
+      "starterCode": "grade = 75\n# Your code here",
+      "solutionCode": "grade = 75\nif grade >= 60:\n    print('You passed!')\nelse:\n    print('You failed!')",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "You passed!",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "You passed!",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "kind": "code_input",
+      "title": "Eligibility Checker",
+      "prompt": "Write a program that checks if a person is eligible to vote based on their age.",
+      "starterCode": "age = int(input())\n# Your code here",
+      "solutionCode": "age = int(input())\nif age >= 18:\n    print('You are eligible to vote.')\nelse:\n    print('You are not eligible to vote.')",
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply eligibility checker in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "You are not eligible to vote.",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "You are eligible to vote.",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "kind": "code_input",
+      "title": "Temperature Checker",
+      "prompt": "Write a program that checks the temperature and prints whether it's hot, warm, or cold.",
+      "starterCode": "temperature = 30\n# Your code here",
+      "solutionCode": "temperature = 30\nif temperature > 30:\n    print('It is hot.')\nelif temperature > 20:\n    print('It is warm.')\nelse:\n    print('It is cold.')",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "It is warm.",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "It is warm.",
+          "match": "exact"
+        }
+      ]
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Grade and Eligibility Checker",
+    "stepIds": [
+      "q9",
+      "q10",
+      "q11"
+    ]
+  }
 }

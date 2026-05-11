@@ -14,21 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.cards.sketch0.title",
-      "sketchId": "1",
+      "sketchId": "print_statements",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.cards.sketch1.title",
-      "sketchId": "2",
+      "sketchId": "comments_in_python",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.cards.sketch2.title",
-      "sketchId": "3",
+      "sketchId": "syntax_errors",
       "height": 420
     },
     {
@@ -38,9 +38,12 @@
       "quiz": {
         "difficulty": "easy",
         "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -51,16 +54,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "q5",
-            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.q5.title",
-            "exerciseKey": "q5",
+            "id": "code_input_1",
+            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.code_input_1.title",
+            "exerciseKey": "code_input_1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
+          },
+          {
+            "id": "code_input_2",
+            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.code_input_2.title",
+            "exerciseKey": "code_input_2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_input_3",
+            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.code_input_3.title",
+            "exerciseKey": "code_input_3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
           }
         ]
       }
@@ -68,22 +89,22 @@
   ],
   "sketches": [
     {
-      "id": "1",
+      "id": "print_statements",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.1.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.print_statements.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.print_statements.bodyMarkdown"
     },
     {
-      "id": "2",
+      "id": "comments_in_python",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.2.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.comments_in_python.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.comments_in_python.bodyMarkdown"
     },
     {
-      "id": "3",
+      "id": "syntax_errors",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.3.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.3.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.syntax_errors.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.syntax_errors.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -138,41 +159,172 @@
         "optionIds": [
           "a",
           "b",
-          "c"
+          "d"
         ]
       }
     },
     {
       "id": "q4",
-      "kind": "fill_blank_choice",
+      "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q4",
-      "choiceCount": 4,
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "q6",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q6",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "q7",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q7",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'Hello, World!'"
+      }
+    },
+    {
+      "id": "q8",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q8",
+      "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
         "value": "#"
       }
     },
     {
-      "id": "q5",
+      "id": "code_input_1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q5",
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.code_input_1",
       "language": "python",
-      "starterCode": "print(\"Hello, World!\"",
+      "starterCode": "print('My name is')\nprint('My age is')",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "Hello, World!",
+            "stdin": "12\n",
+            "stdout": "My name is Zoe\nMy age is 25",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "My name is Zoe\nMy age is 25",
             "match": "exact"
           }
         ],
-        "solutionCode": "print(\"Hello, World!\")"
+        "solutionCode": "print('My name is Zoe')\nprint('My age is 25')"
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.code_input_2",
+      "language": "python",
+      "starterCode": "print('Hello World'",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Hello World",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Hello World",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print('Hello World')"
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.code_input_3",
+      "language": "python",
+      "starterCode": "# Write your code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Hello!",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Hello!",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "# This will print a greeting\nprint('Hello!')"
       }
     }
   ]

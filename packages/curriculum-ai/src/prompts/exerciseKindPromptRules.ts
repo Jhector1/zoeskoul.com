@@ -61,6 +61,9 @@ const GENERIC_EXERCISE_KIND_RULES: ExerciseKindRule[] = [
         requiredFields: ["starterCode", "solutionCode"],
         shapeRules: [
             "solutionCode must never be empty.",
+            "starterCode must be scaffolding only, not a completed answer.",
+            "starterCode must not be identical to solutionCode after removing comments and whitespace.",
+            "For beginner Python exercises, starterCode may contain TODO comments, placeholder variables, or an incomplete print/input structure, but the completed logic must appear only in solutionCode.",
         ],
     },
 ];

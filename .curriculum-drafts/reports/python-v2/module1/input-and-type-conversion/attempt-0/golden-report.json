@@ -1,20 +1,5 @@
 {
   "topicId": "input-and-type-conversion",
-  "ok": false,
-  "issues": [
-    {
-      "code": "CODE_PROFILE_SOLUTION_OUTPUT_MISMATCH",
-      "category": "tests",
-      "severity": "error",
-      "exerciseId": "quiz4",
-      "message": "Exercise \"quiz4\" solutionCode does not satisfy its published tests."
-    },
-    {
-      "code": "CODE_PROFILE_SOLUTION_OUTPUT_MISMATCH",
-      "category": "tests",
-      "severity": "error",
-      "exerciseId": "quiz5",
-      "message": "Exercise \"quiz5\" solutionCode does not satisfy its published tests."
-    }
-  ]
+  "ok": true,
+  "issues": []
 }

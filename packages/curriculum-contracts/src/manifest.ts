@@ -53,7 +53,7 @@ export type ManifestProjectStep = {
   difficulty?: "easy" | "medium" | "hard";
   preferKind?: ExerciseKind | null;
   seedPolicy?: "global" | "step";
-  maxAttempts?: number;
+  maxAttempts?: number | null;
 };
 
 export type ManifestCard =
@@ -68,25 +68,28 @@ export type ManifestCard =
       id: string;
       kind: "quiz";
       titleKey: string;
-      quiz: {
-        difficulty: "easy" | "medium" | "hard";
-        n: number;
-        allowReveal?: boolean;
-        preferKind?: ExerciseKind | null;
-        maxAttempts?: number;
-      };
+  quiz: {
+    difficulty: "easy" | "medium" | "hard";
+    n: number;
+    min?: number;
+    max?: number;
+    selectionMode?: "random" | "fixed";
+    allowReveal?: boolean;
+    preferKind?: ExerciseKind | null;
+    maxAttempts?: number | null;
+  };
     }
   | {
       id: string;
       kind: "project";
       titleKey: string;
-      project: {
-        difficulty: "easy" | "medium" | "hard";
-        allowReveal?: boolean;
-        preferKind?: ExerciseKind | null;
-        maxAttempts?: number;
-        steps: ManifestProjectStep[];
-      };
+  project: {
+    difficulty: "easy" | "medium" | "hard";
+    allowReveal?: boolean;
+    preferKind?: ExerciseKind | null;
+    maxAttempts?: number | null;
+    steps: ManifestProjectStep[];
+  };
     };
 
 export type ManifestSketch =

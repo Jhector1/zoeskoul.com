@@ -6,87 +6,195 @@
     {
       "id": "sketch1",
       "title": "Understanding Accumulators",
-      "bodyMarkdown": "Accumulators are variables that keep a running total or count. For example, if you want to find the total of numbers from 1 to 5, you can use an accumulator. Here's how it works:\n\n```python\n# Initialize the accumulator\nsum = 0\n\n# Loop through numbers 1 to 5\nfor number in range(1, 6):\n    sum += number  # Add each number to the accumulator\n\nprint(sum)  # Output: 15\n```\n\nIn this example, we start with `sum` set to 0. As we loop through each number, we add it to `sum`. After the loop, `sum` contains the total.\n\n**Try it yourself:** Modify the code to calculate the total of numbers from 1 to 10."
+      "bodyMarkdown": "An accumulator is a variable that keeps a running total. For example, if you want to sum numbers from 1 to 5, you can use an accumulator to add each number in a loop:\n\n```python\nsum = 0\nfor number in range(1, 6):\n    sum += number  # Add the current number to the sum\nprint(sum)  # Output: 15\n```\n\n**Your turn:** Try modifying the range to sum numbers from 1 to 10."
     },
     {
       "id": "sketch2",
       "title": "Using Counters",
-      "bodyMarkdown": "Counters are similar to accumulators but are used to count occurrences. For example, if you want to count how many times a specific letter appears in a string, you can use a counter:\n\n```python\n# Initialize the counter\ncount = 0\n\n# String to check\ntext = 'hello world'\n\n# Loop through each character in the string\nfor char in text:\n    if char == 'o':\n        count += 1  # Increment the counter if 'o' is found\n\nprint(count)  # Output: 2\n```\n\nIn this example, we count how many times the letter 'o' appears in the string. After the loop, `count` holds the total occurrences.\n\n**Try this:** Change the letter to count how many times 'l' appears."
+      "bodyMarkdown": "A counter is a variable that counts occurrences. For instance, if you want to count how many times a specific letter appears in a string:\n\n```python\ntext = 'hello'\ncount = 0\nfor char in text:\n    if char == 'l':\n        count += 1  # Increment the counter\nprint(count)  # Output: 2\n```\n\n**Try this:** Change the letter to count a different character."
     }
   ],
   "quizDraft": [
     {
       "id": "quiz1",
-      "kind": "code_input",
-      "title": "Calculate Total with Accumulator",
-      "prompt": "Write a program that calculates the total of numbers from 1 to 100 using an accumulator.",
-      "starterCode": "total = 0\n\n# Your code here\n\nprint(total)",
-      "solutionCode": "total = 0\nfor number in range(1, 101):\n    total += number\nprint(total)",
-      "tests": [
-        {
-          "input": "",
-          "output": "5050"
-        }
-      ]
-    },
-    {
-      "id": "quiz2",
-      "kind": "fill_blank_choice",
-      "title": "Complete the Counter Code",
-      "prompt": "Fill in the blank to count how many times the letter 'a' appears in the string 'banana'.\n\n```python\ncount = 0\ntext = 'banana'\nfor char in text:\n    if char == 'a':\n        count += 1\nprint(___)\n```",
-      "template": "print(___)",
-      "choices": [
-        "count",
-        "text",
-        "char"
-      ],
-      "correctValue": "count"
-    },
-    {
-      "id": "quiz3",
       "kind": "single_choice",
-      "title": "What is an Accumulator?",
-      "prompt": "What does an accumulator do in programming?",
+      "title": "What is an accumulator?",
+      "prompt": "An accumulator is used to:",
       "options": [
-        "It counts occurrences of a value.",
-        "It stores a running total or summary.",
-        "It loops through a sequence of values.",
-        "It resets a variable to zero."
+        "Count occurrences of an item",
+        "Keep a running total",
+        "Store a single value",
+        "None of the above"
       ],
       "correctOptionIds": [
         "b"
-      ]
+      ],
+      "hint": "Think about how totals are calculated in loops.",
+      "help": {
+        "concept": "Accumulators are variables that sum values over iterations.",
+        "hint_1": "They are often initialized to zero and updated in a loop.",
+        "hint_2": "Look for the option that describes a variable that adds up values."
+      }
     },
     {
-      "id": "quiz4",
-      "kind": "multi_choice",
-      "title": "Identify the Correct Uses of Counters",
-      "prompt": "Which of the following are correct uses of counters? (Select all that apply)",
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "What does a counter do?",
+      "prompt": "A counter is used to:",
       "options": [
-        "Counting the number of even numbers in a list.",
-        "Calculating the total sum of a list.",
-        "Counting how many times a specific word appears in a text.",
-        "Tracking the number of iterations in a loop."
+        "Sum values",
+        "Count occurrences",
+        "Store a list of items",
+        "None of the above"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider how you would track how many times something happens.",
+      "help": {
+        "concept": "Counters are variables that keep track of how many times an event occurs.",
+        "hint_1": "They are often incremented in loops.",
+        "hint_2": "Look for the option that describes counting."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Identify the correct uses of accumulators.",
+      "prompt": "Which of the following are valid uses of accumulators?",
+      "options": [
+        "Calculating the total of a list of numbers",
+        "Counting the number of items in a collection",
+        "Keeping track of a running average",
+        "Summing values in a loop"
       ],
       "correctOptionIds": [
         "a",
         "c",
         "d"
-      ]
+      ],
+      "hint": "Think about how accumulators are used in calculations.",
+      "help": {
+        "concept": "Accumulators are primarily used for summing or averaging values.",
+        "hint_1": "They are not typically used for counting items.",
+        "hint_2": "Look for options that involve summing or averaging."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Identify the correct statements about counters.",
+      "prompt": "Which of the following statements about counters are true?",
+      "options": [
+        "Counters can be reset to zero.",
+        "Counters are used to sum values.",
+        "Counters can track occurrences of specific items.",
+        "Counters are always initialized to one."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider how counters are typically used in programming.",
+      "help": {
+        "concept": "Counters are often reset and used for tracking occurrences.",
+        "hint_1": "They are not used for summing values.",
+        "hint_2": "Think about how counters are initialized."
+      }
     },
     {
       "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Order the steps to use an accumulator.",
+      "prompt": "Arrange the steps to correctly use an accumulator in a loop.",
+      "tokens": [
+        "Initialize the accumulator",
+        "Add values to the accumulator",
+        "Use the accumulator after the loop"
+      ],
+      "correctOrder": [
+        0,
+        1,
+        2
+      ],
+      "hint": "Think about the sequence of actions needed to sum values.",
+      "help": {
+        "concept": "Accumulators must be initialized before use and updated in the loop.",
+        "hint_1": "You need to set it up before adding values.",
+        "hint_2": "The final step involves using the accumulated total."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Order the steps to use a counter.",
+      "prompt": "Arrange the steps to correctly use a counter in a loop.",
+      "tokens": [
+        "Initialize the counter",
+        "Check condition to increment",
+        "Use the counter after the loop"
+      ],
+      "correctOrder": [
+        0,
+        1,
+        2
+      ],
+      "hint": "Consider how you would track occurrences in a loop.",
+      "help": {
+        "concept": "Counters must be initialized and updated based on conditions.",
+        "hint_1": "You need to set it up before checking conditions.",
+        "hint_2": "The final step involves using the counted value."
+      }
+    },
+    {
+      "id": "code1",
       "kind": "code_input",
-      "title": "Count Specific Characters",
-      "prompt": "Write a program that counts how many times the letter 'e' appears in the string 'experience'.",
-      "starterCode": "count = 0\ntext = 'experience'\n\n# Your code here\n\nprint(count)",
-      "solutionCode": "count = 0\ntext = 'experience'\nfor char in text:\n    if char == 'e':\n        count += 1\nprint(count)",
+      "title": "Sum Numbers with an Accumulator",
+      "prompt": "Write a program that sums numbers from 1 to 100 using an accumulator.",
+      "starterCode": "sum = 0\nfor number in range(1, 101):\n    # Add your code here\nprint(sum)",
+      "solutionCode": "sum = 0\nfor number in range(1, 101):\n    sum += number\nprint(sum)",
       "tests": [
         {
           "input": "",
-          "output": "2"
+          "output": "5050\n"
+        }
+      ]
+    },
+    {
+      "id": "code2",
+      "kind": "code_input",
+      "title": "Count Occurrences of a Character",
+      "prompt": "Write a program that counts how many times the letter 'a' appears in a given string.",
+      "starterCode": "text = 'banana'\ncount = 0\nfor char in text:\n    # Add your code here\nprint(count)",
+      "solutionCode": "text = 'banana'\ncount = 0\nfor char in text:\n    if char == 'a':\n        count += 1\nprint(count)",
+      "tests": [
+        {
+          "input": "",
+          "output": "3\n"
+        }
+      ]
+    },
+    {
+      "id": "code3",
+      "kind": "code_input",
+      "title": "Calculate Running Average",
+      "prompt": "Write a program that calculates the running average of numbers from 1 to 10.",
+      "starterCode": "total = 0\ncount = 0\nfor number in range(1, 11):\n    # Add your code here\naverage = total / count\nprint(average)",
+      "solutionCode": "total = 0\ncount = 0\nfor number in range(1, 11):\n    total += number\n    count += 1\naverage = total / count\nprint(average)",
+      "tests": [
+        {
+          "input": "",
+          "output": "5.5\n"
         }
       ]
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Mini Number Game",
+    "stepIds": [
+      "code1",
+      "code2",
+      "code3"
+    ]
+  }
 }

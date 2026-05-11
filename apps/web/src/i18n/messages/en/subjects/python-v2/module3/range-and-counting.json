@@ -7,77 +7,70 @@
           "summary": "Use range to repeat code a controlled number of times.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Range"
+              "title": "Understanding the Range Function"
             },
             "sketch1": {
-              "title": "Counting with Range"
+              "title": "Counting with Loops"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Practice"
+              "title": "Mini Number Game"
             }
           },
           "projectSteps": {
-            "quiz1": {
-              "title": "Using Range to Count"
+            "policy_code_input_1": {
+              "title": "Print whether a number is positive"
             },
-            "quiz5": {
-              "title": "Counting by Twos"
+            "policy_code_input_2": {
+              "title": "Print whether a number is positive"
+            },
+            "policy_code_input_3": {
+              "title": "Print whether a number is positive"
             }
           },
           "quiz": {
             "quiz1": {
-              "title": "Using Range to Count",
-              "prompt": "Write a program that uses a for loop with range to print numbers from 0 to 9.",
-              "hint": "Break the task into the main code steps first.",
+              "title": "What does `range(3)` produce?",
+              "prompt": "Select the correct output of `list(range(3))`.",
+              "hint": "Think about how many numbers are generated starting from 0.",
               "help": {
-                "concept": "This task checks whether you can apply using range to count in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-              },
-              "starterCode": "for i in range(10):\n    # Your code here"
-            },
-            "quiz2": {
-              "title": "Fill in the Blank",
-              "prompt": "The `range(1, 10)` function generates numbers starting from 1 up to (but not including) the missing choice.",
-              "hint": "Focus on the missing concept or keyword.",
-              "help": {
-                "concept": "This task checks the key idea behind fill in the blank.",
-                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-              },
-              "template": "The range goes up to [blank1]",
-              "choices": [
-                "9",
-                "10",
-                "11"
-              ]
-            },
-            "quiz3": {
-              "title": "Understanding Range",
-              "prompt": "What does `range(0, 5)` produce?",
-              "hint": "Think about the main idea behind understanding range.",
-              "help": {
-                "concept": "Focus on the core concept behind understanding range.",
-                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
-                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+                "concept": "The `range()` function starts at 0 and goes up to, but does not include, the stop value.",
+                "hint_1": "The output list includes numbers starting from 0.",
+                "hint_2": "Count how many numbers are produced before reaching 3."
               },
               "options": {
-                "a": "0, 1, 2, 3, 4, 5",
-                "b": "0, 1, 2, 3, 4",
-                "c": "1, 2, 3, 4, 5"
+                "a": "[0, 1, 2]",
+                "b": "[1, 2, 3]",
+                "c": "[0, 1, 2, 3]",
+                "d": "[1, 2]"
               }
             },
-            "quiz4": {
-              "title": "Using Range Correctly",
-              "prompt": "Which of the following are valid uses of the range function?",
-              "hint": "Think about the main idea behind using range correctly.",
+            "quiz2": {
+              "title": "How do you create a range from 1 to 5?",
+              "prompt": "Choose the correct syntax.",
+              "hint": "Consider the endpoint of the range.",
               "help": {
-                "concept": "Focus on the core concept behind using range correctly.",
-                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
-                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+                "concept": "The `stop` value in `range()` is exclusive.",
+                "hint_1": "You need to include 5 in your count.",
+                "hint_2": "The range starts at 1 and ends before the stop value."
+              },
+              "options": {
+                "a": "range(1, 5)",
+                "b": "range(1, 6)",
+                "c": "range(5)",
+                "d": "range(0, 5)"
+              }
+            },
+            "quiz3": {
+              "title": "Which of the following are valid uses of `range()`?",
+              "prompt": "Select all that apply.",
+              "hint": "Think about how `range()` generates numbers.",
+              "help": {
+                "concept": "The `range()` function can take different parameters to generate sequences.",
+                "hint_1": "The first two options are straightforward uses of range.",
+                "hint_2": "The last option uses a step value."
               },
               "options": {
                 "a": "range(5)",
@@ -86,16 +79,117 @@
                 "d": "range(0, 10, 2)"
               }
             },
-            "quiz5": {
-              "title": "Counting by Twos",
-              "prompt": "Write a program that uses range to print even numbers from 0 to 20.",
-              "hint": "Break the task into the main code steps first.",
+            "quiz4": {
+              "title": "What happens if you use `range(5, 1)`?",
+              "prompt": "Choose all correct statements.",
+              "hint": "Consider how `range()` behaves with decreasing values.",
               "help": {
-                "concept": "This task checks whether you can apply counting by twos in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+                "concept": "The `range()` function does not produce numbers if the start is greater than the stop without a negative step.",
+                "hint_1": "Think about the expected output when the start is greater than the stop.",
+                "hint_2": "What would you expect if you tried to count down without specifying a step?"
               },
-              "starterCode": "for i in range(0, 21, 2):\n    # Your code here"
+              "options": {
+                "a": "It produces an empty range.",
+                "b": "It counts down from 5 to 1.",
+                "c": "It raises an error.",
+                "d": "It produces numbers in reverse."
+              }
+            },
+            "quiz5": {
+              "title": "Order the steps to use `range()` in a loop.",
+              "prompt": "Arrange the following steps in the correct order.",
+              "hint": "Think about the logical order of the steps.",
+              "help": {
+                "concept": "This task is about understanding the sequence behind order the steps to use `range()` in a loop..",
+                "hint_1": "Find the step that must happen first before the others make sense.",
+                "hint_2": "Check which action depends on a previous step already being completed."
+              },
+              "tokens": {
+                "t1": "1. Define a loop with `for`.",
+                "t2": "2. Use `range()` to specify the numbers.",
+                "t3": "3. Execute the loop body.",
+                "t4": "4. Start the loop."
+              }
+            },
+            "quiz6": {
+              "title": "Arrange the output of this code: `for i in range(3): print(i)`.",
+              "prompt": "Put the outputs in the correct order.",
+              "hint": "Think about the logical order of the steps.",
+              "help": {
+                "concept": "This task is about understanding the sequence behind arrange the output of this code: `for i in range(3): print(i)`..",
+                "hint_1": "Find the step that must happen first before the others make sense.",
+                "hint_2": "Check which action depends on a previous step already being completed."
+              },
+              "tokens": {
+                "t1": "0",
+                "t2": "1",
+                "t3": "2"
+              }
+            },
+            "quiz7": {
+              "title": "Complete the range function: `range([blank1])`.",
+              "prompt": "Fill in the blank to produce numbers from 0 to 4.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind complete the range function: `range([blank1])`..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "range([blank1])",
+              "choices": [
+                "5",
+                "4",
+                "3"
+              ]
+            },
+            "quiz8": {
+              "title": "Complete the loop: `for i in range(0, [blank1]):`.",
+              "prompt": "Fill in the blank to loop 5 times.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind complete the loop: `for i in range(0, [blank1]):`..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "for i in range(0, [blank1]):",
+              "choices": [
+                "5",
+                "6",
+                "4"
+              ]
+            },
+            "policy_code_input_1": {
+              "title": "Print whether a number is positive",
+              "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+              "hint": "Use a conditional check and return a boolean result.",
+              "help": {
+                "concept": "A conditional can decide which boolean value to print based on a comparison.",
+                "hint_1": "Compare the number with zero inside an if statement.",
+                "hint_2": "Print True when the condition passes; otherwise print False."
+              },
+              "starterCode": "n = int(input())\n# Your code here"
+            },
+            "policy_code_input_2": {
+              "title": "Print whether a number is positive",
+              "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+              "hint": "Use a conditional check and return a boolean result.",
+              "help": {
+                "concept": "A conditional can decide which boolean value to print based on a comparison.",
+                "hint_1": "Compare the number with zero inside an if statement.",
+                "hint_2": "Print True when the condition passes; otherwise print False."
+              },
+              "starterCode": "n = int(input())\n# Your code here"
+            },
+            "policy_code_input_3": {
+              "title": "Print whether a number is positive",
+              "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+              "hint": "Use a conditional check and return a boolean result.",
+              "help": {
+                "concept": "A conditional can decide which boolean value to print based on a comparison.",
+                "hint_1": "Compare the number with zero inside an if statement.",
+                "hint_2": "Print True when the condition passes; otherwise print False."
+              },
+              "starterCode": "n = int(input())\n# Your code here"
             }
           }
         }
@@ -107,12 +201,12 @@
       "python-v2-3": {
         "range-and-counting": {
           "sketch1": {
-            "title": "Understanding Range",
-            "bodyMarkdown": "In Python, the `range()` function generates a sequence of numbers. It can be used in loops to repeat actions a specific number of times. For example, `for i in range(5):` will iterate 5 times, with `i` taking values from 0 to 4. \n\n**Example:**\n```python\nfor i in range(5):\n    print(i)\n```\nThis will output:\n```\n0\n1\n2\n3\n4\n```\n\n**Your turn:** Try using `range()` to print numbers from 1 to 10.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "title": "Understanding the Range Function",
+            "bodyMarkdown": "The `range()` function in Python generates a sequence of numbers. It can take one, two, or three arguments: `start`, `stop`, and `step`. For example, `range(5)` generates numbers from 0 to 4. \n\n**Example:**\n```python\nfor i in range(5):\n    print(i)\n```\nThis will output:\n```\n0\n1\n2\n3\n4\n```\n\n**Your turn:** Try using `range(1, 10, 2)` to see what numbers it generates!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           },
           "sketch2": {
-            "title": "Counting with Range",
-            "bodyMarkdown": "You can also specify a starting point and a step in the `range()` function. For instance, `range(1, 10, 2)` will generate numbers starting from 1 up to (but not including) 10, counting by 2s. \n\n**Example:**\n```python\nfor i in range(1, 10, 2):\n    print(i)\n```\nThis will output:\n```\n1\n3\n5\n7\n9\n```\n\n**Try this:** Modify the range to count by 3s.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "title": "Counting with Loops",
+            "bodyMarkdown": "You can use `for` loops with `range()` to count. For instance, if you want to count from 1 to 5, you can do:\n\n**Example:**\n```python\nfor count in range(1, 6):\n    print(count)\n```\nThis will output:\n```\n1\n2\n3\n4\n5\n```\n\n**Try this:** Modify the range to count from 5 to 10.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

@@ -19,21 +19,21 @@
       "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
       "category": "recipe",
       "severity": "high",
-      "field": "quiz_3",
+      "field": "quiz_9",
       "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
     },
     {
       "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
       "category": "recipe",
       "severity": "high",
-      "field": "quiz_4",
+      "field": "quiz_10",
       "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
     },
     {
       "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
       "category": "recipe",
       "severity": "high",
-      "field": "quiz_5",
+      "field": "quiz_11",
       "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
     }
   ]

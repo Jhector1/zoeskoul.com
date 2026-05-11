@@ -51,10 +51,13 @@
       "titleKey": "topics.python-v2.python-v2-1.string-methods.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 3,
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
-        "maxAttempts": 10
+        "maxAttempts": null
       }
     },
     {
@@ -65,25 +68,34 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "maxAttempts": 10,
+        "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz4",
-            "titleKey": "topics.python-v2.python-v2-1.string-methods.projectSteps.quiz4.title",
-            "exerciseKey": "quiz4",
+            "id": "quiz9",
+            "titleKey": "topics.python-v2.python-v2-1.string-methods.projectSteps.quiz9.title",
+            "exerciseKey": "quiz9",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
           },
           {
-            "id": "quiz5",
-            "titleKey": "topics.python-v2.python-v2-1.string-methods.projectSteps.quiz5.title",
-            "exerciseKey": "quiz5",
+            "id": "quiz10",
+            "titleKey": "topics.python-v2.python-v2-1.string-methods.projectSteps.quiz10.title",
+            "exerciseKey": "quiz10",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
-            "maxAttempts": 10
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz11",
+            "titleKey": "topics.python-v2.python-v2-1.string-methods.projectSteps.quiz11.title",
+            "exerciseKey": "quiz11",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
           }
         ]
       }
@@ -141,10 +153,27 @@
     },
     {
       "id": "quiz2",
-      "kind": "multi_choice",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz3",
       "optionIds": [
         "a",
         "b",
@@ -156,72 +185,172 @@
         "optionIds": [
           "a",
           "b",
-          "d"
+          "c"
         ]
       }
     },
     {
-      "id": "quiz3",
-      "kind": "fill_blank_choice",
+      "id": "quiz4",
+      "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz3",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "strip()"
-      }
-    },
-    {
-      "id": "quiz4",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz4",
-      "language": "python",
-      "starterCode": "text = 'I love Python programming'\n# Use the replace() method here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "12\n",
-            "stdout": "I love Java programming",
-            "match": "exact"
-          },
-          {
-            "stdin": "20\n",
-            "stdout": "I love Java programming",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "text = 'I love Python programming'\nnew_text = text.replace('Python', 'Java')\nprint(new_text)"
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
       }
     },
     {
       "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz5",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "dog"
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz6",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "strip"
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz7",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz8",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz9",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz5",
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz9",
       "language": "python",
-      "starterCode": "animals = ['dog', 'cat', 'mouse']\n# Use the join() method here",
+      "starterCode": "user_input = input()\n# Convert to lowercase",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "12\n",
-            "stdout": "dog, cat, mouse",
+            "stdout": "12",
             "match": "exact"
           },
           {
             "stdin": "20\n",
-            "stdout": "dog, cat, mouse",
+            "stdout": "20",
             "match": "exact"
           }
         ],
-        "solutionCode": "animals = ['dog', 'cat', 'mouse']\nresult = ', '.join(animals)\nprint(result)"
+        "solutionCode": "user_input = input()\nlowercase_string = user_input.lower()\nprint(lowercase_string)"
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz10",
+      "language": "python",
+      "starterCode": "text = 'hello world'\n# Replace 'hello' with 'hi'",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "hi world",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "hi world",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = 'hello world'\nnew_text = text.replace('hello', 'hi')\nprint(new_text)"
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz11",
+      "language": "python",
+      "starterCode": "words = ['Python', 'is', 'fun']\n# Join the words with spaces",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Python is fun",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Python is fun",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "words = ['Python', 'is', 'fun']\njoined_string = ' '.join(words)\nprint(joined_string)"
       }
     }
   ]

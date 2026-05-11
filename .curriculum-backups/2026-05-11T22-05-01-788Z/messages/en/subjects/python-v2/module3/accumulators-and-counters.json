@@ -1,0 +1,122 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-3": {
+        "accumulators-and-counters": {
+          "label": "Accumulators and Counters",
+          "summary": "Build totals, counts, and running summaries in loops.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Accumulators"
+            },
+            "sketch1": {
+              "title": "Using Counters"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "quiz1": {
+              "title": "Calculate Total with Accumulator"
+            },
+            "quiz5": {
+              "title": "Count Specific Characters"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Calculate Total with Accumulator",
+              "prompt": "Write a program that calculates the total of numbers from 1 to 100 using an accumulator.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "total = 0\n\n# Your code here\n\nprint(total)"
+            },
+            "quiz2": {
+              "title": "Complete the Counter Code",
+              "prompt": "Fill in the blank to count how many times the letter 'a' appears in the string 'banana'.\n\n```python\ncount = 0\ntext = 'banana'\nfor char in text:\n    if char == 'a':\n        count += 1\nprint(the missing choice)\n```",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "print([blank1])",
+              "choices": [
+                "count",
+                "text",
+                "char"
+              ]
+            },
+            "quiz3": {
+              "title": "What is an Accumulator?",
+              "prompt": "What does an accumulator do in programming?",
+              "hint": "Think about the main idea behind what is an accumulator?.",
+              "help": {
+                "concept": "Focus on the core concept behind what is an accumulator?.",
+                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+              },
+              "options": {
+                "a": "It counts occurrences of a value.",
+                "b": "It stores a running total or summary.",
+                "c": "It loops through a sequence of values.",
+                "d": "It resets a variable to zero."
+              }
+            },
+            "quiz4": {
+              "title": "Identify the Correct Uses of Counters",
+              "prompt": "Which of the following are correct uses of counters? (Select all that apply)",
+              "hint": "Think about the main idea behind identify the correct uses of counters.",
+              "help": {
+                "concept": "Focus on the core concept behind identify the correct uses of counters.",
+                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+              },
+              "options": {
+                "a": "Counting the number of even numbers in a list.",
+                "b": "Calculating the total sum of a list.",
+                "c": "Counting how many times a specific word appears in a text.",
+                "d": "Tracking the number of iterations in a loop."
+              }
+            },
+            "quiz5": {
+              "title": "Count Specific Characters",
+              "prompt": "Write a program that counts how many times the letter 'e' appears in the string 'experience'.",
+              "hint": "Read the coding task and identify what the program should print.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Use the Python statement or expression that matches the required output.",
+                "hint_2": "Run the code and compare the output panel with the expected result."
+              },
+              "starterCode": "count = 0\ntext = 'experience'\n\n# Your code here\n\nprint(count)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-3": {
+        "accumulators-and-counters": {
+          "sketch1": {
+            "title": "Understanding Accumulators",
+            "bodyMarkdown": "Accumulators are variables that keep a running total or count. For example, if you want to find the total of numbers from 1 to 5, you can use an accumulator. Here's how it works:\n\n```python\n# Initialize the accumulator\nsum = 0\n\n# Loop through numbers 1 to 5\nfor number in range(1, 6):\n    sum += number  # Add each number to the accumulator\n\nprint(sum)  # Output: 15\n```\n\nIn this example, we start with `sum` set to 0. As we loop through each number, we add it to `sum`. After the loop, `sum` contains the total.\n\n**Try it yourself:** Modify the code to calculate the total of numbers from 1 to 10.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch2": {
+            "title": "Using Counters",
+            "bodyMarkdown": "Counters are similar to accumulators but are used to count occurrences. For example, if you want to count how many times a specific letter appears in a string, you can use a counter:\n\n```python\n# Initialize the counter\ncount = 0\n\n# String to check\ntext = 'hello world'\n\n# Loop through each character in the string\nfor char in text:\n    if char == 'o':\n        count += 1  # Increment the counter if 'o' is found\n\nprint(count)  # Output: 2\n```\n\nIn this example, we count how many times the letter 'o' appears in the string. After the loop, `count` holds the total occurrences.\n\n**Try this:** Change the letter to count how many times 'l' appears.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}
