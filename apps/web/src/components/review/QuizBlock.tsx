@@ -372,7 +372,38 @@ export default function QuizBlock({
     const stablePracticeKey = getStablePracticeQuestionKey(q);
     return practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id] ?? null;
   }
+    function isFlowDone(q: ReviewQuestion): boolean {
+        if (isExcused(q.id)) return true;
 
+        if (q.kind === "practice") {
+            const ps = getPracticeStateForQuestion(q);
+
+            const itemResult = (ps?.item as any)?.result;
+            const resultOk = itemResult?.ok === true;
+
+            /**
+             * Keep this in sync with QuizPracticeCard.
+             * The card may show "Correct" from ps.item.result.ok before ps.ok
+             * has been promoted into the saved practice state.
+             */
+            const isCorrect = ps?.ok === true || resultOk;
+
+            if (isCorrect) return true;
+
+            const maxA = ps?.maxAttempts;
+            const outOfAttempts =
+                !!ps &&
+                !unlimitedAttempts &&
+                typeof maxA === "number" &&
+                Number.isFinite(maxA) &&
+                ps.attempts >= maxA;
+
+            if (!strictSequential && outOfAttempts) return true;
+            return false;
+        }
+
+        return getQuestionOk(q) === true;
+    }
   function getQuestionOk(q: ReviewQuestion): boolean | null {
     if (q.kind === "mcq") {
       if (!local.checkedById[q.id]) return null;
@@ -397,46 +428,66 @@ export default function QuizBlock({
     if (q.kind === "practice") return practiceBank.isPracticeChecked(q);
     return Boolean(local.checkedById[q.id]);
   }
+    function isUnlocked(index: number): boolean {
+        if (!prereqsMet) return false;
 
-  function isUnlocked(index: number): boolean {
-    if (!prereqsMet) return false;
+        /**
+         * Once the quiz/exercise set is completed, unlock navigation.
+         * This prevents users from getting trapped when they go back to
+         * a previously checked but incorrect exercise.
+         */
+        if (isCompleted) return true;
 
-    const current = questions[index];
+        if (!sequential) return true;
+        if (index === 0) return true;
 
-    /**
-     * Practice/code exercises should behave like sketch cards:
-     * each visible exercise can be opened, edited, checked, and navigated
-     * independently.
-     *
-     * Sequential gating is still kept for non-practice quiz questions.
-     */
-    if (current?.kind === "practice") return true;
+        for (let i = 0; i < index; i++) {
+            const prev = questions[i];
+            if (!prev) return false;
+            if (!isFlowDone(prev)) return false;
+        }
 
-    if (!sequential) return true;
-    if (index === 0) return true;
-
-    const prev = questions[index - 1];
-    if (isExcused(prev.id)) return true;
-
-    const ok = getQuestionOk(prev) === true;
-
-    if (!ok) {
-      if (strictSequential) return false;
-
-      if (prev.kind === "practice") {
-        const ps = getPracticeStateForQuestion(prev);
-        const maxA = ps?.maxAttempts;
-        const attemptsCapped =
-            !!ps &&
-            !unlimitedAttempts &&
-            typeof maxA === "number" &&
-            Number.isFinite(maxA) &&
-            ps.attempts >= maxA;
-        if (attemptsCapped) return true;
-      }
+        return true;
     }
-    return ok;
-  }
+  // function isUnlocked(index: number): boolean {
+  //   if (!prereqsMet) return false;
+  //
+  //   const current = questions[index];
+  //
+  //   /**
+  //    * Practice/code exercises should behave like sketch cards:
+  //    * each visible exercise can be opened, edited, checked, and navigated
+  //    * independently.
+  //    *
+  //    * Sequential gating is still kept for non-practice quiz questions.
+  //    */
+  //   if (current?.kind === "practice") return true;
+  //
+  //   if (!sequential) return true;
+  //   if (index === 0) return true;
+  //
+  //   const prev = questions[index - 1];
+  //   if (isExcused(prev.id)) return true;
+  //
+  //   const ok = getQuestionOk(prev) === true;
+  //
+  //   if (!ok) {
+  //     if (strictSequential) return false;
+  //
+  //     if (prev.kind === "practice") {
+  //       const ps = getPracticeStateForQuestion(prev);
+  //       const maxA = ps?.maxAttempts;
+  //       const attemptsCapped =
+  //           !!ps &&
+  //           !unlimitedAttempts &&
+  //           typeof maxA === "number" &&
+  //           Number.isFinite(maxA) &&
+  //           ps.attempts >= maxA;
+  //       if (attemptsCapped) return true;
+  //     }
+  //   }
+  //   return ok;
+  // }
 
   const summary = useMemo(() => {
     let checkedCount = 0;
@@ -896,27 +947,7 @@ export default function QuizBlock({
     }
   }
 
-  function isFlowDone(q: ReviewQuestion): boolean {
-    if (isExcused(q.id)) return true;
 
-    if (q.kind === "practice") {
-      const ps = getPracticeStateForQuestion(q);
-      if (ps?.ok === true) return true;
-
-      const maxA = ps?.maxAttempts;
-      const outOfAttempts =
-          !!ps &&
-          !unlimitedAttempts &&
-          typeof maxA === "number" &&
-          Number.isFinite(maxA) &&
-          ps.attempts >= maxA;
-
-      if (!strictSequential && outOfAttempts) return true;
-      return false;
-    }
-
-    return getQuestionOk(q) === true;
-  }
 
   function hasExplain(q: ReviewQuestion) {
     const ex = (q as any).explain;
@@ -1037,9 +1068,18 @@ export default function QuizBlock({
     );
   }
 
-  const nextSlideIndex =
-      navigationMode === "slideshow" ? findNextUnlockedIndex(activeIndex) : -1;
 
+    const activeQuestion = questions[activeIndex] ?? null;
+
+    const activeQuestionDone =
+        isCompleted || (activeQuestion ? isFlowDone(activeQuestion) : false);
+
+    const hasNextQuestion = activeIndex < Math.max(0, questions.length - 1);
+
+    const nextSlideIndex =
+        navigationMode === "slideshow" && hasNextQuestion && activeQuestionDone
+            ? activeIndex + 1
+            : -1;
   function renderQuestionItem(q: ReviewQuestion, idx: number) {
     const unlocked = isUnlocked(idx);
     const stablePracticeKey = getStablePracticeQuestionKey(q);

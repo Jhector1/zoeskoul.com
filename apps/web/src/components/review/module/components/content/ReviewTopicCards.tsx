@@ -134,7 +134,9 @@ export default function ReviewTopicCards({
       viewCards.length,
     ],
   );
-
+  const activeCard = viewCards[activeCardIndex] ?? null;
+  const activeCardDone = activeCard ? isCardDoneFromState(activeCard, tp) : false;
+  const hasNextCard = activeCardIndex < Math.max(0, viewCards.length - 1);
   return (
     <div className="flex min-h-0 shrink-0 flex-col">
       <AnimatePresence initial={false} mode="wait">
@@ -155,7 +157,7 @@ export default function ReviewTopicCards({
             getKey={(card: any) => card.id}
             getProgressLabel={(index, total) => `Item ${index + 1} of ${total}`}
             canGoPrev={activeCardIndex > 0}
-            canGoNext={activeCardIndex < Math.max(0, viewCards.length - 1)}
+            canGoNext={hasNextCard && activeCardDone}
             onPrev={() => handleNavigate(activeCardIndex - 1)}
             onNext={() => handleNavigate(activeCardIndex + 1)}
             renderItem={(card: any, cardIndex: number) => {
