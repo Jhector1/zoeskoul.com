@@ -181,6 +181,7 @@ function FullIDEInner({
     } = state;
 
     const { activeFile, entryFile, tabFiles, currentWorkspace } = derived;
+    const [explorerCollapsed, setExplorerCollapsed] = useState(false);
     const currentWorkspaceRef = useRef(currentWorkspace);
 
     useEffect(() => {
@@ -343,6 +344,7 @@ function FullIDEInner({
             canRedo={history.canRedo}
             onUndo={actions.undo}
             onRedo={actions.redo}
+            onToggleExplorer={viewport.isDesktop ? () => setExplorerCollapsed(true) : undefined}
             services={services}
             actions={{
                 setInlineEdit: actions.setInlineEdit,
@@ -518,6 +520,13 @@ function FullIDEInner({
                         onMouseDownDivider={(e) => actions.onMouseDownDivider(e, splitRef.current)}
                         onPointerDownDivider={(e) => actions.onPointerDownDivider(e, splitRef.current)}
                         onKeyDownDivider={(e) => actions.onKeyDownDivider(e, splitRef.current)}
+                        explorerCollapsed={explorerCollapsed}
+                        onToggleExplorer={() => setExplorerCollapsed((value) => !value)}
+                        showHistoryControls={services.explorer.showHistoryControls}
+                        canUndo={history.canUndo}
+                        canRedo={history.canRedo}
+                        onUndo={actions.undo}
+                        onRedo={actions.redo}
                         explorer={explorerPane}
                         editor={editorPane}
                     />

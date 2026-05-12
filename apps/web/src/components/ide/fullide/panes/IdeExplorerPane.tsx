@@ -10,7 +10,7 @@ import type {
     ImportedWorkspaceFile,
 } from "@/components/ide/workspaceHook/workspace.policy";
 import type { Toast } from "@/components/ide/types";
-import { IconFile, IconFolder } from "../icons";
+import { IconChevronRight, IconFile, IconFolder } from "../icons";
 import { cn } from "@/lib/cn";
 import { PlusIcon, Redo2, Undo2 } from "lucide-react";
 import Tooltip from "@/components/ui/Tooltip";
@@ -38,6 +38,7 @@ type Props = {
     canRedo: boolean;
     onUndo: () => void;
     onRedo: () => void;
+    onToggleExplorer?: () => void;
     services: FullIDEServices;
     actions: {
         setInlineEdit: (value: any) => void;
@@ -137,6 +138,7 @@ export default function IdeExplorerPane({
                                             canRedo,
                                             onUndo,
                                             onRedo,
+                                            onToggleExplorer,
                                             services,
                                         }: Props) {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -293,6 +295,19 @@ export default function IdeExplorerPane({
               </span>
                         ) : null}
                     </div>
+                    {onToggleExplorer ? (
+                        <Tooltip tip="Collapse explorer" side="bottom">
+                            <button
+                                type="button"
+                                onClick={onToggleExplorer}
+                                aria-label="Collapse explorer"
+                                className="grid h-8 w-8 place-items-center rounded-lg border border-neutral-200 bg-white text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
+                            >
+                                <IconChevronRight className="h-4 w-4 rotate-180" />
+                            </button>
+                        </Tooltip>
+                    ) : null}
+
                 </div>
             </div>
 

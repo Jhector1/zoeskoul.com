@@ -34,7 +34,7 @@ import {
 import { hasReviewModule } from "@/lib/subjects/registry";
 // import { SECTIONS, TOPICS } from "@/lib/subjects/data";
 import { getLocaleFromCookie } from "@/serverUtils";
-import {SECTIONS, TOPICS} from "@/lib/subjects";
+import { SECTIONS, TOPICS } from "@/lib/subjects";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -53,7 +53,6 @@ type RegistryTopic = {
   genKey?: string | null;
   meta?: unknown;
 };
-
 
 function resolveMaxAttempts(
     stepMaxAttempts: number | null | undefined,
@@ -233,11 +232,8 @@ export async function POST(req: Request) {
 
   const mode = spec.mode ?? "quiz";
   const n = spec.n ?? 4;
-  const defaultMaxAttempts = resolveMaxAttempts(
-      undefined,
-      spec.maxAttempts,
-      1,
-  );  const actorKey = actorKeyOf(actor);
+  const defaultMaxAttempts = resolveMaxAttempts(undefined, spec.maxAttempts, 1);
+  const actorKey = actorKeyOf(actor);
 
   const quizKey = buildReviewQuizKey(spec);
 
@@ -312,6 +308,7 @@ export async function POST(req: Request) {
 
   if (mode === "project") {
     const steps = spec.steps ?? [];
+
     if (!steps.length) {
       return bodyJsonWithGuestCookie(
           { message: "Project spec requires steps[]." },
@@ -320,9 +317,33 @@ export async function POST(req: Request) {
       );
     }
 
+    const safeSteps: Array<(typeof steps)[number] & { topic: string }> = [];
+
+    for (const [index, st] of steps.entries()) {
+      if (!st.topic) {
+        return bodyJsonWithGuestCookie(
+            {
+              message: "Project step requires a topic.",
+              detail: {
+                stepId: st.id,
+                stepIndex: index,
+                parentTopic: spec.topic ?? null,
+              },
+            },
+            400,
+            setGuestId,
+        );
+      }
+
+      safeSteps.push({
+        ...st,
+        topic: st.topic,
+      });
+    }
+
     const qk = shortHash(quizKey);
 
-    for (const st of steps) {
+    for (const st of safeSteps) {
       const dbSlug = toDbTopicSlug(st.topic);
 
       if (!allowedTopicSlugs.includes(dbSlug)) {
@@ -342,7 +363,7 @@ export async function POST(req: Request) {
       }
     }
 
-    questions = steps.map((st, i) => {
+    questions = safeSteps.map((st, i) => {
       const dbSlug = toDbTopicSlug(st.topic);
 
       return {
@@ -366,7 +387,8 @@ export async function POST(req: Request) {
             st.maxAttempts,
             spec.maxAttempts,
             null,
-        ),      };
+        ),
+      };
     });
   } else {
     const rng = rngFromActor({
@@ -423,6 +445,11 @@ export async function POST(req: Request) {
 
     for (let i = 0; i < n; i++) {
       const pickedTopic = pickedTopics[i];
+
+      if (!pickedTopic) {
+        break;
+      }
+
       const pool = poolBySlug.get(pickedTopic)!;
 
       const used = usedByTopic.get(pickedTopic) ?? new Set<string>();
@@ -485,9 +512,7 @@ export async function POST(req: Request) {
         requested: mode === "project" ? (spec.steps?.length ?? 0) : n,
         generated: Array.isArray(outQuestions) ? outQuestions.length : undefined,
         truncated:
-            mode === "quiz"
-                ? Array.isArray(outQuestions) && outQuestions.length < n
-                : false,
+            mode === "quiz" ? Array.isArray(outQuestions) && outQuestions.length < n : false,
         frozen: true,
       },
       200,
