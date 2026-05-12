@@ -5,57 +5,8 @@
       "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
       "category": "text",
       "severity": "medium",
-      "field": "sketchBlocks.1.bodyMarkdown",
+      "field": "sketchBlocks.sk2.bodyMarkdown",
       "message": "Added a short line-by-line explanation after a multi-line code example."
-    },
-    {
-      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
-      "category": "text",
-      "severity": "medium",
-      "field": "sketchBlocks.2.bodyMarkdown",
-      "message": "Added a short line-by-line explanation after a multi-line code example."
-    },
-    {
-      "code": "PYTHON_HARDCODED_INPUT_VARIABLE_REPAIRED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "q8",
-      "message": "Replaced a hardcoded beginner variable assignment with int(input()) so stdin/stdout tests validate the intended behavior."
-    },
-    {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "q9",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
-    },
-    {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "q7",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
-    },
-    {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "q8",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
-    },
-    {
-      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
-      "category": "other",
-      "severity": "medium",
-      "field": "policy_multi_choice_1",
-      "message": "Added a fallback multi_choice exercise to satisfy the planned exercise mix for \"naming-and-assigning-variables\"."
-    },
-    {
-      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
-      "category": "other",
-      "severity": "medium",
-      "field": "policy_drag_reorder_1",
-      "message": "Added a fallback drag_reorder exercise to satisfy the planned exercise mix for \"naming-and-assigning-variables\"."
     }
   ]
 }

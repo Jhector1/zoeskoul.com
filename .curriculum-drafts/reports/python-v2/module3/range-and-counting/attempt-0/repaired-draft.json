@@ -4,275 +4,317 @@
   "minutes": 22,
   "sketchBlocks": [
     {
-      "id": "sketch1",
-      "title": "Understanding the Range Function",
-      "bodyMarkdown": "The `range()` function in Python generates a sequence of numbers. It can take one, two, or three arguments: `start`, `stop`, and `step`. For example, `range(5)` generates numbers from 0 to 4. \n\n**Example:**\n```python\nfor i in range(5):\n    print(i)\n```\nThis will output:\n```\n0\n1\n2\n3\n4\n```\n\n**Your turn:** Try using `range(1, 10, 2)` to see what numbers it generates!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "id": "range-basics",
+      "title": "What range does in a for loop",
+      "bodyMarkdown": "A `for` loop can repeat code a specific number of times with `range()`.\n\n```python\nfor n in range(5):\n    print(n)\n```\n\nThis prints:\n\n```python\n0\n1\n2\n3\n4\n```\n\nStep by step:\n- `range(5)` creates counting values starting at `0`\n- it stops *before* `5`\n- the loop variable `n` takes each value one at a time\n- `print(n)` runs once for each value\n\nA common beginner surprise is that `range(5)` does **not** include `5`.\n\nWorked example:\n\n```python\nfor count in range(3):\n    print(\"Clap\")\n```\n\nThis prints `Clap` three times because the loop runs for `0`, `1`, and `2`.\n\nTry it yourself: type one of these examples in the code editor, click Run, and check the output panel. Then change `range(5)` to `range(2)` or `range(7)` and see how many lines appear."
     },
     {
-      "id": "sketch2",
-      "title": "Counting with Loops",
-      "bodyMarkdown": "You can use `for` loops with `range()` to count. For instance, if you want to count from 1 to 5, you can do:\n\n**Example:**\n```python\nfor count in range(1, 6):\n    print(count)\n```\nThis will output:\n```\n1\n2\n3\n4\n5\n```\n\n**Try this:** Modify the range to count from 5 to 10.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "id": "start-stop-step",
+      "title": "Counting with start, stop, and step",
+      "bodyMarkdown": "You can give `range()` more control with up to three numbers:\n\n```python\nrange(start, stop, step)\n```\n\nExample:\n\n```python\nfor n in range(2, 8, 2):\n    print(n)\n```\n\nThis prints:\n\n```python\n2\n4\n6\n```\n\nLine by line:\n- `2` is the starting value\n- `8` is the stopping point, but it is not included\n- `2` means count by twos\n\nAnother example:\n\n```python\nfor n in range(1, 6):\n    print(n)\n```\n\nThis prints `1` through `5`.\n\nSo:\n- `range(5)` means `0, 1, 2, 3, 4`\n- `range(1, 6)` means `1, 2, 3, 4, 5`\n- `range(2, 8, 2)` means `2, 4, 6`\n\nYour turn: change the step in the example from `2` to `3`. Click Run and check which numbers appear in the output panel."
+    },
+    {
+      "id": "counting-patterns",
+      "title": "Using range for counting patterns",
+      "bodyMarkdown": "A loop with `range()` is useful when you want a counting pattern.\n\nExample:\n\n```python\nfor n in range(1, 4):\n    print(\"Round\", n)\n```\n\nOutput:\n\n```python\nRound 1\nRound 2\nRound 3\n```\n\nWhat happens here:\n- the loop starts at `1`\n- it stops before `4`\n- each time, `n` is printed after the word `Round`\n\nYou can also count backward with a negative step:\n\n```python\nfor n in range(5, 0, -1):\n    print(n)\n```\n\nThis prints:\n\n```python\n5\n4\n3\n2\n1\n```\n\nThis is helpful for countdowns.\n\nTry this: type the countdown example in the code editor, click Run, and check the output panel. Then change the start value or the step to make a different countdown.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     }
   ],
   "quizDraft": [
     {
-      "id": "quiz1",
+      "id": "sc-range-five",
       "kind": "single_choice",
-      "title": "What does `range(3)` produce?",
-      "prompt": "Select the correct output of `list(range(3))`.",
+      "title": "What does range(5) produce?",
+      "prompt": "In Python, which list of values matches `range(5)` in a `for` loop?",
       "options": [
-        "[0, 1, 2]",
-        "[1, 2, 3]",
-        "[0, 1, 2, 3]",
-        "[1, 2]"
+        "0, 1, 2, 3, 4",
+        "1, 2, 3, 4, 5",
+        "0, 1, 2, 3, 4, 5",
+        "5 only"
       ],
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Think about how many numbers are generated starting from 0.",
+      "hint": "It starts at 0 and stops before 5.",
       "help": {
-        "concept": "The `range()` function starts at 0 and goes up to, but does not include, the stop value.",
-        "hint_1": "The output list includes numbers starting from 0.",
-        "hint_2": "Count how many numbers are produced before reaching 3."
+        "concept": "`range(stop)` counts from 0 up to, but not including, `stop`.",
+        "hint_1": "List the values a loop variable would take: first 0, then 1, and keep going until just before 5.",
+        "hint_2": "The last value is one less than 5, not 5 itself."
       }
     },
     {
-      "id": "quiz2",
+      "id": "sc-step-two",
       "kind": "single_choice",
-      "title": "How do you create a range from 1 to 5?",
-      "prompt": "Choose the correct syntax.",
+      "title": "Count by twos",
+      "prompt": "What is printed by this code?\n\n```python\nfor n in range(2, 7, 2):\n    print(n)\n```",
       "options": [
-        "range(1, 5)",
-        "range(1, 6)",
-        "range(5)",
-        "range(0, 5)"
+        "2, 4, 6",
+        "2, 4, 6, 8",
+        "3, 5, 7",
+        "2, 3, 4, 5, 6"
       ],
       "correctOptionIds": [
-        "b"
+        "a"
       ],
-      "hint": "Consider the endpoint of the range.",
+      "hint": "Start at 2 and add 2 each time, but stop before 7.",
       "help": {
-        "concept": "The `stop` value in `range()` is exclusive.",
-        "hint_1": "You need to include 5 in your count.",
-        "hint_2": "The range starts at 1 and ends before the stop value."
+        "concept": "`range(start, stop, step)` begins at `start`, adds `step` each loop, and never includes `stop`.",
+        "hint_1": "Write the values in order: begin with 2, then 4, then 6. Check whether the next value would still be below 7.",
+        "hint_2": "The loop prints three even numbers and does not print 8."
       }
     },
     {
-      "id": "quiz3",
+      "id": "mc-range-true-statements",
       "kind": "multi_choice",
-      "title": "Which of the following are valid uses of `range()`?",
-      "prompt": "Select all that apply.",
+      "title": "True statements about range",
+      "prompt": "Choose all true statements about Python `range()`.",
       "options": [
-        "range(5)",
-        "range(1, 10)",
-        "range(10, 1)",
-        "range(0, 10, 2)"
+        "`range(4)` gives 0, 1, 2, 3",
+        "The stop value is included in the loop",
+        "`range(1, 5)` can be used to count 1 through 4",
+        "`range(2, 10, 2)` can count by twos"
       ],
       "correctOptionIds": [
         "a",
-        "b",
+        "c",
         "d"
       ],
-      "hint": "Think about how `range()` generates numbers.",
+      "hint": "Think about where counting starts and whether the stop value is included.",
       "help": {
-        "concept": "The `range()` function can take different parameters to generate sequences.",
-        "hint_1": "The first two options are straightforward uses of range.",
-        "hint_2": "The last option uses a step value."
+        "concept": "`range()` can start at 0 by default, can use a custom start, and stops before the stop value.",
+        "hint_1": "`range(4)` begins at 0. A three-part range can also skip by a step value.",
+        "hint_2": "Look for statements that match 'stop is excluded' and 'step can change the counting pattern.'"
       }
     },
     {
-      "id": "quiz4",
+      "id": "mc-off-by-one",
       "kind": "multi_choice",
-      "title": "What happens if you use `range(5, 1)`?",
-      "prompt": "Choose all correct statements.",
+      "title": "Spot the loops that run three times",
+      "prompt": "Choose all loops that run exactly 3 times.",
       "options": [
-        "It produces an empty range.",
-        "It counts down from 5 to 1.",
-        "It raises an error.",
-        "It produces numbers in reverse."
+        "`for n in range(3):`",
+        "`for n in range(1, 4):`",
+        "`for n in range(2, 6):`",
+        "`for n in range(5, 1, -2):`"
       ],
       "correctOptionIds": [
-        "a"
+        "a",
+        "b"
       ],
-      "hint": "Consider how `range()` behaves with decreasing values.",
+      "hint": "Count how many values each range produces.",
       "help": {
-        "concept": "The `range()` function does not produce numbers if the start is greater than the stop without a negative step.",
-        "hint_1": "Think about the expected output when the start is greater than the stop.",
-        "hint_2": "What would you expect if you tried to count down without specifying a step?"
+        "concept": "The number of loop runs depends on how many values the range generates.",
+        "hint_1": "Test each one by listing the values: for example, `range(3)` gives 0, 1, 2.",
+        "hint_2": "Two of these ranges produce three values; the others produce four or two."
       }
     },
     {
-      "id": "quiz5",
+      "id": "dr-build-basic-range-loop",
       "kind": "drag_reorder",
-      "title": "Order the steps to use `range()` in a loop.",
-      "prompt": "Arrange the following steps in the correct order.",
+      "title": "Build a counting loop",
+      "prompt": "Put the code pieces in order to make a valid Python loop that prints 0, 1, and 2.",
       "tokens": [
-        "1. Define a loop with `for`.",
-        "2. Use `range()` to specify the numbers.",
-        "3. Execute the loop body.",
-        "4. Start the loop."
+        "for n in range(3):",
+        "print(n)"
       ],
       "correctOrder": [
-        "1. Define a loop with `for`.",
-        "2. Use `range()` to specify the numbers.",
-        "3. Execute the loop body.",
-        "4. Start the loop."
+        "for n in range(3):",
+        "print(n)"
       ],
-      "hint": "Think about the logical order of the steps.",
+      "hint": "A `for` loop starts with the header line, then an indented print line.",
       "help": {
-        "concept": "This task is about understanding the sequence behind order the steps to use `range()` in a loop..",
-        "hint_1": "Find the step that must happen first before the others make sense.",
-        "hint_2": "Check which action depends on a previous step already being completed."
+        "concept": "Python `for` loops need a header with `for`, `in`, and `range(...)`, followed by an indented body.",
+        "hint_1": "The line ending with `:` must come before the indented `print` line.",
+        "hint_2": "The loop variable belongs in both the header and the print statement."
       }
     },
     {
-      "id": "quiz6",
+      "id": "dr-countdown-order",
       "kind": "drag_reorder",
-      "title": "Arrange the output of this code: `for i in range(3): print(i)`.",
-      "prompt": "Put the outputs in the correct order.",
+      "title": "Order the countdown values",
+      "prompt": "A loop uses `range(5, 0, -1)`. Put the values of `n` in the order they appear.",
       "tokens": [
-        "0",
+        "3",
         "1",
-        "2"
-      ],
-      "correctOrder": [
-        "0",
-        "1",
-        "2"
-      ],
-      "hint": "Think about the logical order of the steps.",
-      "help": {
-        "concept": "This task is about understanding the sequence behind arrange the output of this code: `for i in range(3): print(i)`..",
-        "hint_1": "Find the step that must happen first before the others make sense.",
-        "hint_2": "Check which action depends on a previous step already being completed."
-      }
-    },
-    {
-      "id": "quiz7",
-      "kind": "fill_blank_choice",
-      "title": "Complete the range function: `range([blank1])`.",
-      "prompt": "Fill in the blank to produce numbers from 0 to 4.",
-      "template": "range([blank1])",
-      "choices": [
         "5",
         "4",
-        "3"
+        "2"
       ],
-      "correctValue": "5",
-      "hint": "Focus on the missing concept or keyword.",
+      "correctOrder": [
+        "5",
+        "4",
+        "3",
+        "2",
+        "1"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
       "help": {
-        "concept": "This task checks the key idea behind complete the range function: `range([blank1])`..",
-        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
       }
     },
     {
-      "id": "quiz8",
+      "id": "fb-range-stop",
       "kind": "fill_blank_choice",
-      "title": "Complete the loop: `for i in range(0, [blank1]):`.",
-      "prompt": "Fill in the blank to loop 5 times.",
-      "template": "for i in range(0, [blank1]):",
+      "title": "Fill the stop value",
+      "prompt": "Complete the code so the loop prints `1 2 3 4` on separate lines.",
+      "template": "for n in range(1, [blank1]):\n    print(n)",
       "choices": [
+        "4",
         "5",
         "6",
-        "4"
+        "1"
       ],
       "correctValue": "5",
-      "hint": "Focus on the missing concept or keyword.",
+      "hint": "The loop should start at 1 and stop before the missing value.",
       "help": {
-        "concept": "This task checks the key idea behind complete the loop: `for i in range(0, [blank1]):`..",
-        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+        "concept": "In `range(start, stop)`, Python includes `start` but excludes `stop`.",
+        "hint_1": "To print up to 4, the stop value must be one more than 4.",
+        "hint_2": "The missing number is the first value that should not be printed."
       }
     },
     {
-      "id": "policy_code_input_1",
-      "kind": "code_input",
-      "title": "Print whether a number is positive",
-      "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
-      "starterCode": "n = int(input())\n# Your code here",
-      "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
-      "tests": [
-        {
-          "stdin": "5\n",
-          "stdout": "True\n",
-          "match": "exact"
-        },
-        {
-          "stdin": "0\n",
-          "stdout": "False\n",
-          "match": "exact"
-        }
+      "id": "fb-step-value",
+      "kind": "fill_blank_choice",
+      "title": "Choose the step",
+      "prompt": "Complete the code so it prints `0, 2, 4` on separate lines.",
+      "template": "for n in range(0, 6, [blank1]):\n    print(n)",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "4"
       ],
-      "hint": "Use a conditional check and return a boolean result.",
+      "correctValue": "2",
+      "hint": "The numbers increase by the same amount each time.",
       "help": {
-        "concept": "A conditional can decide which boolean value to print based on a comparison.",
-        "hint_1": "Compare the number with zero inside an if statement.",
-        "hint_2": "Print True when the condition passes; otherwise print False."
-      },
-      "recipeType": "fixed_tests"
+        "concept": "The third value in `range(start, stop, step)` controls how much the count changes each loop.",
+        "hint_1": "From 0 to the missing term to 4, the pattern adds the same number each time.",
+        "hint_2": "The step is the difference between consecutive printed values."
+      }
     },
     {
-      "id": "policy_code_input_2",
+      "id": "ci-print-zero-to-four",
       "kind": "code_input",
-      "title": "Print whether a number is positive",
-      "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
-      "starterCode": "n = int(input())\n# Your code here",
-      "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
+      "title": "Print 0 through 4",
+      "prompt": "Write Python code that uses a `for` loop with `range()` to print the numbers 0 through 4, one per line.",
+      "starterCode": "n = int(input())\n\n# TODO: use a for loop with range() to print 0 through 4",
+      "solutionCode": "n = int(input())\n\nfor n in range(5):\n    print(n)",
       "tests": [
         {
-          "stdin": "5\n",
-          "stdout": "True\n",
-          "match": "exact"
-        },
-        {
-          "stdin": "0\n",
-          "stdout": "False\n",
-          "match": "exact"
+          "stdin": "",
+          "stdout": "0\n1\n2\n3\n4\n"
         }
       ],
-      "hint": "Use a conditional check and return a boolean result.",
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Print 0 through 4\" and identify the required result.",
       "help": {
-        "concept": "A conditional can decide which boolean value to print based on a comparison.",
-        "hint_1": "Compare the number with zero inside an if statement.",
-        "hint_2": "Print True when the condition passes; otherwise print False."
-      },
-      "recipeType": "fixed_tests"
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Print 0 through 4\".",
+        "hint_1": "Use the statement or expression that matches the required behavior.",
+        "hint_2": "Run the code and compare the output panel with the expected result."
+      }
     },
     {
-      "id": "policy_code_input_3",
+      "id": "ci-print-one-to-five",
       "kind": "code_input",
-      "title": "Print whether a number is positive",
-      "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
-      "starterCode": "n = int(input())\n# Your code here",
-      "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
+      "title": "Print 1 through 5",
+      "prompt": "Write Python code that uses `range()` to print the numbers 1 through 5, one per line.",
+      "starterCode": "n = int(input())\n\n# TODO: print 1 through 5 using range()",
+      "solutionCode": "n = int(input())\n\nfor n in range(1, 6):\n    print(n)",
       "tests": [
         {
-          "stdin": "5\n",
-          "stdout": "True\n",
-          "match": "exact"
-        },
-        {
-          "stdin": "0\n",
-          "stdout": "False\n",
-          "match": "exact"
+          "stdin": "",
+          "stdout": "1\n2\n3\n4\n5\n"
         }
       ],
-      "hint": "Use a conditional check and return a boolean result.",
+      "recipeType": "fixed_tests",
+      "hint": "This time the loop should start at 1, not 0.",
       "help": {
-        "concept": "A conditional can decide which boolean value to print based on a comparison.",
-        "hint_1": "Compare the number with zero inside an if statement.",
-        "hint_2": "Print True when the condition passes; otherwise print False."
-      },
-      "recipeType": "fixed_tests"
+        "concept": "When you want counting to begin at a number other than 0, use `range(start, stop)`.",
+        "hint_1": "The stop value should be one more than the last number you want to print.",
+        "hint_2": "Use a loop that starts at 1 and stops before 6."
+      }
+    },
+    {
+      "id": "ci-even-under-ten",
+      "kind": "code_input",
+      "title": "Print even numbers under 10",
+      "prompt": "Write Python code that prints the even numbers less than 10: 0, 2, 4, 6, and 8. Print each number on its own line.",
+      "starterCode": "n = int(input())\n\n# TODO: print even numbers less than 10",
+      "solutionCode": "n = int(input())\n\nfor n in range(0, 10, 2):\n    print(n)",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "0\n2\n4\n6\n8\n"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the step part of `range()`.",
+      "help": {
+        "concept": "A step value lets `range()` skip numbers and follow a pattern such as counting by twos.",
+        "hint_1": "Start at 0 and increase by 2 each time.",
+        "hint_2": "The stop value should be 10 so that 8 is included but 10 is not."
+      }
+    },
+    {
+      "id": "ci-countdown-from-input",
+      "kind": "code_input",
+      "title": "Countdown from input",
+      "prompt": "Write Python code that reads one whole number from input and prints a countdown from that number down to 1, one number per line.\n\nFor example, if the input is `4`, the output should be:\n`4`\n`3`\n`2`\n`1`",
+      "starterCode": "n = int(input())\n# TODO: print a countdown from n to 1",
+      "solutionCode": "n = int(input())\nfor value in range(n, 0, -1):\n    print(value)",
+      "tests": [
+        {
+          "stdin": "4\n",
+          "stdout": "4\n3\n2\n1\n"
+        },
+        {
+          "stdin": "1\n",
+          "stdout": "1\n"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Countdown from input\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Countdown from input\".",
+        "hint_1": "Use the statement or expression that matches the required behavior.",
+        "hint_2": "Run the code and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "ci-repeat-word",
+      "kind": "code_input",
+      "title": "Repeat a word a set number of times",
+      "prompt": "Write Python code that reads a word on the first line and a whole number on the second line. Print the word that many times, one per line.\n\nExample input:\n`Hi`\n`3`\n\nExample output:\n`Hi`\n`Hi`\n`Hi`",
+      "starterCode": "word = input()\ntimes = int(input())\n# TODO: print word 'times' times",
+      "solutionCode": "word = input()\ntimes = int(input())\nfor _ in range(times):\n    print(word)",
+      "tests": [
+        {
+          "stdin": "Hi\n3\n",
+          "stdout": "Hi\nHi\nHi\n"
+        },
+        {
+          "stdin": "Go\n1\n",
+          "stdout": "Go\n"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the coding task and identify what the program should print.",
+      "help": {
+        "concept": "This coding exercise checks whether the program produces the requested output.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Run the code and compare the output panel with the expected result."
+      }
     }
   ],
   "projectDraft": {
-    "title": "Mini Number Game",
+    "title": "Range Practice Project",
     "stepIds": [
-      "quiz1",
-      "quiz2",
-      "quiz3"
+      "ci-print-zero-to-four",
+      "ci-print-one-to-five",
+      "ci-even-under-ten",
+      "ci-countdown-from-input",
+      "ci-repeat-word"
     ]
   }
 }

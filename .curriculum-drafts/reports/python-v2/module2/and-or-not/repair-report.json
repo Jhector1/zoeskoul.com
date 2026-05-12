@@ -5,64 +5,8 @@
       "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
       "category": "text",
       "severity": "medium",
-      "field": "sketchBlocks.sketch_1.bodyMarkdown",
+      "field": "sketchBlocks.sketch_combining_clear_rules.bodyMarkdown",
       "message": "Added a short line-by-line explanation after a multi-line code example."
-    },
-    {
-      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
-      "category": "text",
-      "severity": "medium",
-      "field": "sketchBlocks.sketch_2.bodyMarkdown",
-      "message": "Added a short line-by-line explanation after a multi-line code example."
-    },
-    {
-      "code": "PYTHON_FUNCTION_STDIN_ARITY_REPAIRED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz_7",
-      "message": "Added safe missing stdin values for a wrapped Python function exercise whose tests provided fewer input lines than the function parameters."
-    },
-    {
-      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz_7",
-      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
-    },
-    {
-      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz_8",
-      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
-    },
-    {
-      "code": "PYTHON_HARDCODED_FUNCTION_EXAMPLE_REPAIRED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz_9",
-      "message": "Replaced hardcoded example usage in a function exercise with a stdin/stdout wrapper so published tests validate the intended behavior."
-    },
-    {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz_7",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
-    },
-    {
-      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
-      "category": "other",
-      "severity": "medium",
-      "field": "policy_multi_choice_1",
-      "message": "Added a fallback multi_choice exercise to satisfy the planned exercise mix for \"and-or-not\"."
-    },
-    {
-      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
-      "category": "other",
-      "severity": "medium",
-      "field": "policy_drag_reorder_1",
-      "message": "Added a fallback drag_reorder exercise to satisfy the planned exercise mix for \"and-or-not\"."
     }
   ]
 }

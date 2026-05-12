@@ -7,186 +7,219 @@
           "summary": "Use the ZoeSkoul browser code editor, Run button, and output panel to execute Python code.",
           "cards": {
             "sketch0": {
-              "title": "Introduction to Running Python Code"
+              "title": "How code runs in ZoeSkoul"
             },
             "sketch1": {
-              "title": "Understanding Output"
+              "title": "Using print with text"
+            },
+            "sketch2": {
+              "title": "Comments and simple syntax mistakes"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Personal Introduction Program"
+              "title": "Run and check simple Python programs"
             }
           },
           "projectSteps": {
-            "code1": {
-              "title": "Print Your Name"
+            "ci_print_greeting": {
+              "title": "Print a greeting"
             },
-            "code2": {
-              "title": "Sum Two Numbers"
+            "ci_two_lines": {
+              "title": "Print two lines in order"
             },
-            "code3": {
-              "title": "Print a Greeting"
+            "ci_comment_and_output": {
+              "title": "Use a comment and print"
+            },
+            "ci_fix_quotes": {
+              "title": "Print quoted text correctly"
+            },
+            "ci_print_expression": {
+              "title": "Print an expression result"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "What does the print function do?",
-              "prompt": "Select the correct answer.",
-              "hint": "Think about what you see after running your code.",
+            "sc_runner_parts": {
+              "title": "Main parts of the runner",
+              "prompt": "Which answer correctly describes how you run Python code in this lesson?",
+              "hint": "Think about the editor, the Run button, and where printed text appears.",
               "help": {
-                "concept": "The print function is used to display output to the user.",
-                "hint_1": "Look for the answer that describes displaying information.",
-                "hint_2": "Consider what happens when you run a print statement."
+                "concept": "This question checks whether you know the basic browser workflow: write code in the code editor, click Run, and read results in the output panel.",
+                "hint_1": "Look for the option that mentions typing code first, then running it, then reading printed output.",
+                "hint_2": "The correct answer includes all three parts: code editor, Run button, and output panel."
               },
               "options": {
-                "a": "It saves the code to a file.",
-                "b": "It displays output on the screen.",
-                "c": "It runs the code in the background.",
-                "d": "It compiles the code."
+                "a": "Type code in the code editor, click Run, and read the result in the output panel.",
+                "b": "Write code in a document and wait for it to run automatically.",
+                "c": "Type code into the output panel and click Run there.",
+                "d": "Click Run before writing code so Python can create the program for you."
               }
             },
-            "quiz2": {
-              "title": "What will this code output? `print('Hello')`",
-              "prompt": "Choose the correct output.",
-              "hint": "Think about what the print function outputs.",
+            "sc_print_purpose": {
+              "title": "What print does",
+              "prompt": "What does `print(\"Hello\")` do when you click Run?",
+              "hint": "Focus on what appears after Python executes the line.",
               "help": {
-                "concept": "The print function outputs exactly what is inside the parentheses.",
-                "hint_1": "Consider if there are any extra characters in the output.",
-                "hint_2": "Remember that the output matches the string exactly."
+                "concept": "This question checks the role of `print(...)`: it displays a value in the output panel.",
+                "hint_1": "The line does not create a comment or ask for input; it sends text outward.",
+                "hint_2": "Think about the exact word inside the quotes and where that word is shown after running."
               },
               "options": {
-                "a": "Hello",
-                "b": "Hello World",
-                "c": "Error"
+                "a": "It shows the text Hello in the output panel.",
+                "b": "It turns Hello into a comment.",
+                "c": "It removes the word Hello from the program.",
+                "d": "It asks the learner to type Hello."
               }
             },
-            "quiz3": {
-              "title": "Which of the following are valid Python print statements?",
-              "prompt": "Select all that apply.",
-              "hint": "Look for statements that use correct syntax.",
+            "mc_valid_print_lines": {
+              "title": "Valid print statements",
+              "prompt": "Choose all lines that are valid Python print statements.",
+              "hint": "Check for the print name, parentheses, and properly closed quotes.",
               "help": {
-                "concept": "Valid print statements must have correct syntax and use quotes for strings.",
-                "hint_1": "Check if the text is enclosed in quotes.",
-                "hint_2": "Consider how expressions can be printed."
+                "concept": "A valid beginner `print(...)` statement needs correct spelling, matching parentheses, and complete string quotes when printing text.",
+                "hint_1": "Any option with a missing quote or missing parenthesis is not valid syntax.",
+                "hint_2": "Look for lines where `print` is followed by parentheses and the text string starts and ends with quotes."
               },
               "options": {
-                "a": "print('Hello')",
-                "b": "print('Hello', 'World')",
-                "c": "print(1 + 1)"
+                "a": "print(\"Hi\")",
+                "b": "print(5)",
+                "c": "print \"Hi\""
               }
             },
-            "quiz4": {
-              "title": "What can you do in the ZoeSkoul code editor?",
-              "prompt": "Select all that apply.",
-              "hint": "Think about the features available in the browser code runner.",
+            "mc_comments_behavior": {
+              "title": "What comments do",
+              "prompt": "Choose all correct statements about comments in beginner Python code.",
+              "hint": "Think about lines that start with `#`.",
               "help": {
-                "concept": "The ZoeSkoul code editor allows you to run code and see output.",
-                "hint_1": "Consider what actions you can perform in the editor.",
-                "hint_2": "Remember that saving files is not an option."
+                "concept": "Comments are notes for humans. Python ignores them during execution, so they do not produce output by themselves.",
+                "hint_1": "A comment can explain code, but it is not executed like a `print(...)` statement.",
+                "hint_2": "Select the statements that match `#` lines being ignored by Python and useful for explanation."
               },
               "options": {
-                "a": "Run Python code",
-                "b": "Save files",
-                "c": "Check output in the output panel",
-                "d": "Create multiple files"
+                "a": "A comment starts with `#`.",
+                "b": "Python ignores a comment when the code runs.",
+                "c": "A comment always appears in the output panel.",
+                "d": "A comment is required on every line of code."
               }
             },
-            "quiz5": {
-              "title": "Complete the statement: The output of `print(2 + 2)` is [blank1].",
-              "prompt": "Complete the statement: The output of `print(2 + 2)` is [blank1].",
-              "hint": "Focus on the missing concept or keyword.",
+            "dr_run_steps": {
+              "title": "Order the run process",
+              "prompt": "Put these actions in the correct order for checking a Python program in ZoeSkoul.",
+              "hint": "Start with writing code and end with reading the result.",
               "help": {
-                "concept": "This task checks the key idea behind complete the statement: the output of `print(2 + 2)` is [blank1]..",
-                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+                "concept": "This question checks the normal workflow for using the browser runner: write code, run it, then inspect the output.",
+                "hint_1": "You cannot inspect output before the program has been run.",
+                "hint_2": "The correct sequence begins in the code editor, then uses Run, then finishes in the output panel."
               },
-              "template": "The output of `print(2 + 2)` is [blank1].",
+              "tokens": {
+                "t1": "Type Python code in the code editor",
+                "t2": "Click Run",
+                "t3": "Read the output panel"
+              }
+            },
+            "dr_program_flow": {
+              "title": "Top-to-bottom execution",
+              "prompt": "Arrange the printed lines in the order Python produces them for this code: `print(\"One\")` then `print(\"Two\")`.",
+              "hint": "Arrange the pieces in the order Python uses them.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "One",
+                "t2": "Two"
+              }
+            },
+            "fb_comment_symbol": {
+              "title": "Comment marker",
+              "prompt": "Complete the Python comment line with the correct symbol.",
+              "hint": "Look at the blank, then choose the word or symbol that makes the idea correct.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "[blank1] this line is a comment",
               "choices": [
-                "4",
-                "2 + 2",
-                "Error"
-              ]
-            },
-            "quiz6": {
-              "title": "Fill in the blank: To display text in Python, you use the [blank1] function.",
-              "prompt": "Fill in the blank: To display text in Python, you use the [blank1] function.",
-              "hint": "Focus on the missing concept or keyword.",
-              "help": {
-                "concept": "This task checks the key idea behind fill in the blank: to display text in python, you use the [blank1] function..",
-                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-              },
-              "template": "To display text in Python, you use the [blank1] function.",
-              "choices": [
+                "#",
                 "print",
-                "display",
-                "output"
+                "\"",
+                "="
               ]
             },
-            "quiz7": {
-              "title": "Order the steps to run Python code.",
-              "prompt": "Arrange the steps in the correct order.",
-              "hint": "Think about the logical order of the steps.",
+            "fb_print_output_word": {
+              "title": "Predict simple output",
+              "prompt": "Fill in the missing output for this code.",
+              "hint": "Look at the exact text inside the quotes.",
               "help": {
-                "concept": "This task is about understanding the sequence behind order the steps to run python code..",
-                "hint_1": "Find the step that must happen first before the others make sense.",
-                "hint_2": "Check which action depends on a previous step already being completed."
+                "concept": "When `print(...)` contains a string, Python displays that exact string in the output panel.",
+                "hint_1": "The output matches the word between the quotation marks.",
+                "hint_2": "Do not add extra punctuation or code words; use the printed text itself."
               },
-              "tokens": {
-                "t1": "Type code in the editor.",
-                "t2": "Click Run.",
-                "t3": "Check the output panel."
-              }
+              "template": "Code: `print(\"Start\")` → Output: [blank1]",
+              "choices": [
+                "Start",
+                "print",
+                "\"Start\"",
+                "Run"
+              ]
             },
-            "quiz8": {
-              "title": "Arrange the components of the ZoeSkoul environment.",
-              "prompt": "Put the components in the correct order.",
-              "hint": "Think about the logical order of the steps.",
+            "ci_print_greeting": {
+              "title": "Print a greeting",
+              "prompt": "Write Python code that prints exactly `Hello, ZoeSkoul!` on one line.",
+              "hint": "Use one `print(...)` statement with the exact text.",
               "help": {
-                "concept": "This task is about understanding the sequence behind arrange the components of the zoeskoul environment..",
-                "hint_1": "Find the step that must happen first before the others make sense.",
-                "hint_2": "Check which action depends on a previous step already being completed."
+                "concept": "This exercise practices the simplest run cycle: write one valid `print(...)` statement and check the exact output.",
+                "hint_1": "Put the message inside quotes so Python treats it as text.",
+                "hint_2": "Your program should produce one line of output with the greeting and punctuation exactly as shown."
               },
-              "tokens": {
-                "t1": "Output panel",
-                "t2": "Code editor",
-                "t3": "Run button"
-              }
+              "starterCode": "# Write your code below"
             },
-            "code1": {
-              "title": "Print Your Name",
-              "prompt": "Write a program that prints your name.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "ci_two_lines": {
+              "title": "Print two lines in order",
+              "prompt": "Write Python code that prints `First` on one line and `Second` on the next line.",
+              "hint": "Use two separate `print(...)` statements.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "concept": "This exercise checks top-to-bottom execution: each `print(...)` runs in order and creates its own output line.",
+                "hint_1": "The first line of code should produce the first line of output.",
+                "hint_2": "Write one print for `First` and another print below it for `Second`."
+              },
+              "starterCode": "# Print two lines below"
+            },
+            "ci_comment_and_output": {
+              "title": "Use a comment and print",
+              "prompt": "Write Python code with a comment on the first line and a `print(...)` statement on the second line that prints `Ready`.",
+              "hint": "Read the coding task and identify what the program should print.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "// Write your answer below"
+              "starterCode": "# Add a comment here\n# Then write a print statement below"
             },
-            "code2": {
-              "title": "Sum Two Numbers",
-              "prompt": "Write a program that prints the sum of 2 and 3.",
-              "hint": "Break the task into the main code steps first.",
+            "ci_fix_quotes": {
+              "title": "Print quoted text correctly",
+              "prompt": "Write Python code that prints exactly `Learning Python`.",
+              "hint": "Read the task \"Print quoted text correctly\" and identify the required result.",
               "help": {
-                "concept": "This task checks whether you can apply sum two numbers in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print quoted text correctly\".",
+                "hint_1": "Write the code that creates exactly the requested output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "// Write your answer below"
+              "starterCode": "print("
             },
-            "code3": {
-              "title": "Print a Greeting",
-              "prompt": "Write a program that prints a greeting message.",
-              "hint": "Break the task into the main code steps first.",
+            "ci_print_expression": {
+              "title": "Print an expression result",
+              "prompt": "Write Python code that prints the result of `3 + 4`.",
+              "hint": "You can place a math expression directly inside `print(...)`.",
               "help": {
-                "concept": "This task checks whether you can apply print a greeting in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+                "concept": "Python can evaluate a simple expression first and then print the resulting value.",
+                "hint_1": "Do not put the expression in quotes if you want Python to calculate it.",
+                "hint_2": "Use `print(...)` around the addition so the output panel shows the computed number."
               },
-              "starterCode": "// Write your answer below"
+              "starterCode": "# Print the result of an addition"
             }
           }
         }
@@ -197,13 +230,17 @@
     "python-v2": {
       "python-v2-0": {
         "running-python-code": {
-          "sketch1": {
-            "title": "Introduction to Running Python Code",
-            "bodyMarkdown": "In this section, we will learn how to run Python code using the ZoeSkoul browser code editor. To start, you can type your code in the editor and click the 'Run' button to see the output in the output panel. \n\n**Example:**\n```python\nprint('Hello, World!')\n```\nThis code will display 'Hello, World!' in the output panel when you run it. \n\n**Your turn:** Try writing your own print statement!"
+          "sketch_run_cycle": {
+            "title": "How code runs in ZoeSkoul",
+            "bodyMarkdown": "In this course, you write Python code in the **code editor**, click **Run**, and read the result in the **output panel**.\n\nA Python program is a list of instructions. Python reads them from top to bottom. When it reaches a `print(...)` statement, it sends text or values to the output panel.\n\nExample:\n\n```python\nprint(\"Hello\")\nprint(\"Python\")\n```\n\nWalk through it:\n- The first line prints `Hello`\n- The second line prints `Python`\n- The output panel shows the lines in the same order\n\nSo the output is:\n\n```text\nHello\nPython\n```\n\n**Your turn:** Change `\"Python\"` to your name, click **Run**, and check the output panel."
           },
-          "sketch2": {
-            "title": "Understanding Output",
-            "bodyMarkdown": "The output panel shows the results of your code execution. It's important to understand what your code is doing by observing the output. \n\n**Example:**\n```python\nprint('The sum of 2 and 3 is', 2 + 3)\n```\nThis will print 'The sum of 2 and 3 is 5'. \n\n**Try this:** Modify the numbers in the print statement to see different results!"
+          "sketch_print_and_strings": {
+            "title": "Using print with text",
+            "bodyMarkdown": "The `print(...)` statement displays something in the output panel. Text in Python is usually written inside quotes.\n\nExample:\n\n```python\nprint(\"I am learning Python\")\n```\n\nHere is what each part does:\n- `print` tells Python to display something\n- `(` and `)` wrap the value to display\n- `\"I am learning Python\"` is a string value\n\nYou can also print numbers:\n\n```python\nprint(7)\nprint(3 + 2)\n```\n\nThis prints the value of each expression.\n\n**Practice this:** Replace `7` with your favorite number and replace `3 + 2` with a different addition. Click **Run** and compare the output.\n\nStep through it: read each statement from top to bottom. Notice which names are created, which values are passed into built-in tools, and what output the code is meant to show."
+          },
+          "sketch_comments_and_errors": {
+            "title": "Comments and simple syntax mistakes",
+            "bodyMarkdown": "A comment starts with `#`. Python ignores comments when the code runs.\n\nExample:\n\n```python\n# This line is a comment\nprint(\"Ready\")\n```\n\nOnly `Ready` appears in the output panel.\n\nBeginners also see syntax mistakes sometimes. A syntax mistake means Python cannot understand the code as written.\n\nFor example, this is incorrect because the closing quote is missing:\n\n```python\nprint(\"Hello)\n```\n\nThis version is correct:\n\n```python\nprint(\"Hello\")\n```\n\nStep through it:\n- The opening quote starts the string\n- The closing quote ends the string\n- The closing parenthesis finishes the `print(...)` statement\n\n**Your turn:** Write one comment line, then a `print(...)` line below it. Click **Run** and notice that only the printed text appears."
           }
         }
       }

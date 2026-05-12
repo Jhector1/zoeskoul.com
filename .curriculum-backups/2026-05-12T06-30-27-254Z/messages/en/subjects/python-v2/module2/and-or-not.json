@@ -1,0 +1,256 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-2": {
+        "and-or-not": {
+          "label": "And, Or, and Not",
+          "summary": "Combine conditions with boolean operators.",
+          "cards": {
+            "sketch0": {
+              "title": "Using and to require two things"
+            },
+            "sketch1": {
+              "title": "Using or and not"
+            },
+            "sketch2": {
+              "title": "Combining conditions in real if statements"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Build logic checkers with and, or, and not"
+            }
+          },
+          "projectSteps": {
+            "code_ticket_check": {
+              "title": "Check event entry"
+            },
+            "code_free_day": {
+              "title": "Weekend or holiday"
+            },
+            "code_not_logged_in": {
+              "title": "Prompt when not logged in"
+            },
+            "code_score_certificate": {
+              "title": "Certificate decision"
+            },
+            "code_range_check": {
+              "title": "Check if a number is in range"
+            }
+          },
+          "quiz": {
+            "sc_and_true": {
+              "title": "When does and become true?",
+              "prompt": "Which statement about `A and B` is correct?",
+              "hint": "Think about a rule where two requirements must both be met.",
+              "help": {
+                "concept": "The `and` operator combines two conditions and returns true only if each condition is true.",
+                "hint_1": "Compare `and` with a situation like 'old enough and has permission'. Missing either one should fail.",
+                "hint_2": "Ask yourself what happens if one side is false. With `and`, that makes the whole result false."
+              },
+              "options": {
+                "a": "It is true only when both A and B are true.",
+                "b": "It is true when either A or B is true.",
+                "c": "It is always the opposite of A.",
+                "d": "It is true whenever A is false."
+              }
+            },
+            "sc_not_flip": {
+              "title": "What does not do?",
+              "prompt": "If `logged_in = False`, what does `not logged_in` evaluate to?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "False",
+                "b": "0",
+                "c": "True",
+                "d": "None"
+              }
+            },
+            "mc_or_cases": {
+              "title": "Choose the true or expressions",
+              "prompt": "Which expressions evaluate to `True`? Choose all correct answers.",
+              "hint": "With `or`, only one side needs to be true.",
+              "help": {
+                "concept": "The `or` operator returns true when at least one of its two conditions is true.",
+                "hint_1": "Check each side of each expression separately, then see whether at least one side is true.",
+                "hint_2": "Any expression with one true side and one false side still becomes true with `or`."
+              },
+              "options": {
+                "a": "True or False",
+                "b": "False or False",
+                "c": "3 > 5 or 10 > 2",
+                "d": "7 == 8 or 1 > 4"
+              }
+            },
+            "mc_valid_age_and_name": {
+              "title": "Valid input checks",
+              "prompt": "A program should accept input only when the user is at least 18 and the name is not empty. Which conditions match that rule? Choose all correct answers.",
+              "hint": "The rule needs both age and a non-empty name.",
+              "help": {
+                "concept": "Equivalent boolean conditions can be written in different ways, but they must still require both parts of the rule to be satisfied.",
+                "hint_1": "One part checks adulthood. The other part checks that the string is not empty.",
+                "hint_2": "A condition using `not (age < 18)` means the same as being 18 or older."
+              },
+              "options": {
+                "a": "age >= 18 and name != \"\"",
+                "b": "age >= 18 or name != \"\"",
+                "c": "not (age < 18) and name != \"\"",
+                "d": "age > 18 and name == \"\""
+              }
+            },
+            "dr_build_and_condition": {
+              "title": "Build an and condition",
+              "prompt": "Put the tokens in order to make a valid Python condition that checks whether `score` is at least 50 and `passed` is true.",
+              "hint": "Focus on the logical order of the parts.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Think about which part must come first.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "tokens": {
+                "t1": "score",
+                "t2": ">=",
+                "t3": "50",
+                "t4": "and",
+                "t5": "passed"
+              }
+            },
+            "dr_if_elif_else_logic": {
+              "title": "Order the branches",
+              "prompt": "Arrange these lines into a valid `if` / `elif` / `else` structure.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "if age < 13:",
+                "t2": "print(\"child\")",
+                "t3": "elif age < 18:",
+                "t4": "print(\"teen\")",
+                "t5": "else:",
+                "t6": "print(\"adult\")"
+              }
+            },
+            "fb_not_condition": {
+              "title": "Complete a not check",
+              "prompt": "Choose the missing word to make the condition true when `ready` is false.",
+              "hint": "You need the operator that reverses a boolean value.",
+              "help": {
+                "concept": "Use `the missing term` when you want a condition to be true for the opposite boolean value.",
+                "hint_1": "If `ready` is false, the condition should still pass.",
+                "hint_2": "Choose the operator that turns false into true inside the `if` check."
+              },
+              "template": "if [blank1] ready:\n    print(\"Wait\")",
+              "choices": [
+                "and",
+                "or",
+                "not",
+                "elif"
+              ]
+            },
+            "fb_or_operator": {
+              "title": "Complete an either-or rule",
+              "prompt": "Choose the operator that makes the condition true when either comparison is true.",
+              "hint": "Focus on the missing concept rather than the exact missing term.",
+              "help": {
+                "concept": "The blank should be completed with the term that fits the job being described.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the term that best completes the meaning of the statement."
+              },
+              "template": "if temp < 0 [blank1] temp > 30:\n    print(\"Extreme\")",
+              "choices": [
+                "and",
+                "or",
+                "not",
+                "="
+              ]
+            },
+            "code_ticket_check": {
+              "title": "Check event entry",
+              "prompt": "Write Python code that reads two lines: an integer age and a string `yes` or `no` for whether the person has an ID. Print `allowed` if the age is at least 18 and the ID answer is `yes`. Otherwise print `denied`.",
+              "hint": "Read the task \"Check event entry\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Check event entry\".",
+                "hint_1": "Use the statement or expression that matches the required behavior.",
+                "hint_2": "Run the code and compare the output panel with the expected result."
+              },
+              "starterCode": "age = int(input())\nhas_id = input().strip()\n\n# TODO: print allowed or denied"
+            },
+            "code_free_day": {
+              "title": "Weekend or holiday",
+              "prompt": "Write Python code that reads two lines, each containing `True` or `False`: `is_weekend` and `is_holiday`. Print `rest` if either value is true. Otherwise print `work`.",
+              "hint": "Read the task \"Weekend or holiday\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Weekend or holiday\".",
+                "hint_1": "Use the statement or expression that matches the required behavior.",
+                "hint_2": "Run the code and compare the output panel with the expected result."
+              },
+              "starterCode": "is_weekend = input().strip() == \"True\"\nis_holiday = input().strip() == \"True\"\n\n# TODO: print rest or work"
+            },
+            "code_not_logged_in": {
+              "title": "Prompt when not logged in",
+              "prompt": "Write Python code that reads one line containing `True` or `False` for `logged_in`. If the user is not logged in, print `please sign in`. Otherwise print `welcome`.",
+              "hint": "Read the coding task and identify what the program should print.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Run the code and compare the output panel with the expected result."
+              },
+              "starterCode": "logged_in = input().strip() == \"True\"\n\n# TODO: print the correct message"
+            },
+            "code_score_certificate": {
+              "title": "Certificate decision",
+              "prompt": "Write Python code that reads an integer score and a second line containing `True` or `False` for `late`. Print `certificate` if the score is at least 80 and the work is not late. Print `passed` if the score is at least 80 and the work is late. Otherwise print `practice`.",
+              "hint": "Read the task \"Certificate decision\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Certificate decision\".",
+                "hint_1": "Use the statement or expression that matches the required behavior.",
+                "hint_2": "Run the code and compare the output panel with the expected result."
+              },
+              "starterCode": "score = int(input())\nlate = input().strip() == \"True\"\n\n# TODO: print certificate, passed, or practice"
+            },
+            "code_range_check": {
+              "title": "Check if a number is in range",
+              "prompt": "Write Python code that reads one integer `n`. Print `in range` if `n` is at least 10 and at most 20. Otherwise print `out of range`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print in range or out of range"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-2": {
+        "and-or-not": {
+          "sketch_and_basics": {
+            "title": "Using and to require two things",
+            "bodyMarkdown": "Boolean operators let you combine conditions. Use `and` when **both** parts must be true.\n\nExample:\n\n```python\nage = 20\nhas_id = True\n\nif age >= 18 and has_id:\n    print(\"Allowed in\")\nelse:\n    print(\"Not allowed\")\n```\n\nStep by step:\n- `age >= 18` checks whether the age is at least 18.\n- `has_id` is already a boolean value.\n- `and` joins them.\n- The `if` block runs only when **both** are true.\n\nWorked example:\n- If `age` is `20` and `has_id` is `True`, the output is `Allowed in`.\n- If `age` is `20` but `has_id` is `False`, the output is `Not allowed`.\n\nTry it yourself: change `age` or `has_id`, click Run, and check the output panel."
+          },
+          "sketch_or_not": {
+            "title": "Using or and not",
+            "bodyMarkdown": "Use `or` when **at least one** condition must be true. Use `not` to flip a boolean value.\n\nExample:\n\n```python\nis_weekend = False\nis_holiday = True\n\nif is_weekend or is_holiday:\n    print(\"No school\")\n\nlogged_in = False\n\nif not logged_in:\n    print(\"Please sign in\")\n```\n\nLine by line:\n- `is_weekend or is_holiday` is true if either value is true.\n- Since `is_holiday` is `True`, `No school` prints.\n- `logged_in` is `False`.\n- `not logged_in` becomes `True`, so `Please sign in` prints.\n\nWorked example:\n- `False or True` becomes `True`.\n- `not False` becomes `True`.\n\nYour turn: change the boolean values, click Run, and predict what appears in the output panel before you check."
+          },
+          "sketch_combining_clear_rules": {
+            "title": "Combining conditions in real if statements",
+            "bodyMarkdown": "You can use boolean operators to write clearer branching rules.\n\nExample:\n\n```python\nscore = 82\nlate = False\n\nif score >= 80 and not late:\n    print(\"Certificate\")\nelif score >= 80 and late:\n    print(\"Passed, but no certificate\")\nelse:\n    print(\"Keep practicing\")\n```\n\nHow this works:\n- First, Python checks `score >= 80 and not late`.\n- If `score` is `82`, then `score >= 80` is true.\n- If `late` is `False`, then `not late` is true.\n- Because both parts are true, Python prints `Certificate` and stops checking the later branches.\n\nThis is useful for rules like eligibility, validation, and classification.\n\nTry this: change `score` to `75`, then change `late` to `True`, and see which branch runs each time.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

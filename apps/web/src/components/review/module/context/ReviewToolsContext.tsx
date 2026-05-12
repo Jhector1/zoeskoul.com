@@ -526,7 +526,12 @@ export function ReviewToolsProvider({
       registryRef.current.set(id, nextArgs);
 
       if (!had || prevKey !== nextKey) setRegistryTick((x) => x + 1);
+        const targetKey = nextArgs.exerciseKey ?? id;
+        const currentBound = useReviewRuntimeStore.getState().tool.boundExerciseKey;
 
+        if (currentBound === targetKey && prevKey !== nextKey) {
+            defer(() => bindNow(id));
+        }
       if (requestedId === id) {
         defer(() => bindNow(id));
       }

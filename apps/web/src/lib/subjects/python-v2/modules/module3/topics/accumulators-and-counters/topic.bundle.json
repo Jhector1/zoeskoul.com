@@ -14,14 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "sk1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "sk2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.cards.sketch2.title",
+      "sketchId": "sk3",
       "height": 420
     },
     {
@@ -50,27 +57,45 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "code1",
-            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.code1.title",
-            "exerciseKey": "code1",
+            "id": "ex9",
+            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.ex9.title",
+            "exerciseKey": "ex9",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "code2",
-            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.code2.title",
-            "exerciseKey": "code2",
+            "id": "ex10",
+            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.ex10.title",
+            "exerciseKey": "ex10",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "code3",
-            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.code3.title",
-            "exerciseKey": "code3",
+            "id": "ex11",
+            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.ex11.title",
+            "exerciseKey": "ex11",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ex12",
+            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.ex12.title",
+            "exerciseKey": "ex12",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ex13",
+            "titleKey": "topics.python-v2.python-v2-3.accumulators-and-counters.projectSteps.ex13.title",
+            "exerciseKey": "ex13",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -82,25 +107,48 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "sk1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sketch1.title",
-      "bodyKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sk1.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sk1.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sk2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sketch2.title",
-      "bodyKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sk2.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sk2.bodyMarkdown"
+    },
+    {
+      "id": "sk3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sk3.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.accumulators-and-counters.sk3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "ex1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz1",
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "ex2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex2",
       "optionIds": [
         "a",
         "b",
@@ -113,28 +161,11 @@
       }
     },
     {
-      "id": "quiz2",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz2",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
-      }
-    },
-    {
-      "id": "quiz3",
+      "id": "ex3",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz3",
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex3",
       "optionIds": [
         "a",
         "b",
@@ -145,156 +176,227 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "ex4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
           "d"
         ]
       }
     },
     {
-      "id": "quiz4",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz4",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "c"
-        ]
-      }
-    },
-    {
-      "id": "quiz5",
+      "id": "ex5",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz5",
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex5",
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3"
+          "t3",
+          "t4"
         ]
       }
     },
     {
-      "id": "quiz6",
+      "id": "ex6",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.quiz6",
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex6",
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3"
+          "t3",
+          "t4"
         ]
       }
     },
     {
-      "id": "code1",
+      "id": "ex7",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex7",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "0"
+      }
+    },
+    {
+      "id": "ex8",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex8",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "total"
+      }
+    },
+    {
+      "id": "ex9",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.code1",
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex9",
       "language": "python",
-      "starterCode": "sum = 0\nfor number in range(1, 101):\n    # Add your code here\nprint(sum)",
+      "starterCode": "parts = input().split()\ntotal = 0\n\n# TODO: loop through parts, add each number to total\n\nprint(total)",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "5050\n",
+            "stdin": "3 5 2\n",
+            "stdout": "10\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "10 0 -4 7\n",
+            "stdout": "13\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "sum = 0\nfor number in range(1, 101):\n    sum += number\nprint(sum)"
+        "solutionCode": "parts = input().split()\ntotal = 0\n\nfor part in parts:\n    total = total + int(part)\n\nprint(total)"
       }
     },
     {
-      "id": "code2",
+      "id": "ex10",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.code2",
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex10",
       "language": "python",
-      "starterCode": "text = 'banana'\ncount = 0\nfor char in text:\n    # Add your code here\nprint(count)",
+      "starterCode": "word = input()\nvowel_count = 0\n\n# TODO: loop through the characters in word\n# TODO: if the character is a vowel, increase vowel_count\n\nprint(vowel_count)",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
+            "stdin": "banana\n",
             "stdout": "3\n",
             "match": "exact"
+          },
+          {
+            "stdin": "sky\n",
+            "stdout": "0\n",
+            "match": "exact"
           }
         ],
-        "solutionCode": "text = 'banana'\ncount = 0\nfor char in text:\n    if char == 'a':\n        count += 1\nprint(count)"
+        "solutionCode": "word = input()\nvowel_count = 0\n\nfor ch in word:\n    if ch in \"aeiou\":\n        vowel_count = vowel_count + 1\n\nprint(vowel_count)"
       }
     },
     {
-      "id": "code3",
+      "id": "ex11",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.code3",
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex11",
       "language": "python",
-      "starterCode": "total = 0\ncount = 0\nfor number in range(1, 11):\n    # Add your code here\naverage = total / count\nprint(average)",
+      "starterCode": "parts = input().split()\neven_total = 0\n\n# TODO: loop through the parts\n# TODO: convert each part to an integer\n# TODO: if the number is even, add it to even_total\n\nprint(even_total)",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "5.5\n",
+            "stdin": "4 7 2 9 6\n",
+            "stdout": "12\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "1 3 5 8\n",
+            "stdout": "8\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "total = 0\ncount = 0\nfor number in range(1, 11):\n    total += number\n    count += 1\naverage = total / count\nprint(average)"
+        "solutionCode": "parts = input().split()\neven_total = 0\n\nfor part in parts:\n    n = int(part)\n    if n % 2 == 0:\n        even_total = even_total + n\n\nprint(even_total)"
       }
     },
     {
-      "id": "policy_fill_blank_choice_1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
+      "id": "ex12",
+      "kind": "code_input",
+      "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.policy_fill_blank_choice_1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "if"
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex12",
+      "language": "python",
+      "starterCode": "parts = input().split()\ncount = 0\n\n# TODO: loop through the parts\n# TODO: count numbers greater than 0\n\nprint(count)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "-2 5 0 3 -1\n",
+            "stdout": "2\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "1 2 3 4\n",
+            "stdout": "4\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "parts = input().split()\ncount = 0\n\nfor part in parts:\n    n = int(part)\n    if n > 0:\n        count = count + 1\n\nprint(count)"
       }
     },
     {
-      "id": "policy_fill_blank_choice_2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
+      "id": "ex13",
+      "kind": "code_input",
+      "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.policy_fill_blank_choice_2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "if"
+      "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex13",
+      "language": "python",
+      "starterCode": "word = input()\nresult = \"\"\n\n# TODO: loop through each character in word\n# TODO: add the character and a dash to result\n\nprint(result)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "code\n",
+            "stdout": "c-o-d-e-\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "hi\n",
+            "stdout": "h-i-\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "word = input()\nresult = \"\"\n\nfor ch in word:\n    result = result + ch + \"-\"\n\nprint(result)"
       }
     }
   ]

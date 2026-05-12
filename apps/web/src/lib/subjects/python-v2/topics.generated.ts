@@ -22,13 +22,11 @@ import stringMethodsJson from "./modules/module1/topics/string-methods/topic.bun
 import andOrNotJson from "./modules/module2/topics/and-or-not/topic.bundle.json";
 import checkingSpecialCasesFirstJson from "./modules/module2/topics/checking-special-cases-first/topic.bundle.json";
 import comparisonsAndTruthValuesJson from "./modules/module2/topics/comparisons-and-truth-values/topic.bundle.json";
-import guardClausesJson from "./modules/module2/topics/guard-clauses/topic.bundle.json";
 import ifElifElseJson from "./modules/module2/topics/if-elif-else/topic.bundle.json";
 import indentationAndBlocksJson from "./modules/module2/topics/indentation-and-blocks/topic.bundle.json";
 import truthinessAndEmptyValuesJson from "./modules/module2/topics/truthiness-and-empty-values/topic.bundle.json";
 import accumulatorsAndCountersJson from "./modules/module3/topics/accumulators-and-counters/topic.bundle.json";
 import breakAndContinueJson from "./modules/module3/topics/break-and-continue/topic.bundle.json";
-import forLoopsOverSequencesJson from "./modules/module3/topics/for-loops-over-sequences/topic.bundle.json";
 import forLoopsOverTextJson from "./modules/module3/topics/for-loops-over-text/topic.bundle.json";
 import loopDebuggingJson from "./modules/module3/topics/loop-debugging/topic.bundle.json";
 import rangeAndCountingJson from "./modules/module3/topics/range-and-counting/topic.bundle.json";
@@ -50,13 +48,11 @@ const stringMethods = stringMethodsJson as SlimTopicManifest;
 const andOrNot = andOrNotJson as SlimTopicManifest;
 const checkingSpecialCasesFirst = checkingSpecialCasesFirstJson as SlimTopicManifest;
 const comparisonsAndTruthValues = comparisonsAndTruthValuesJson as SlimTopicManifest;
-const guardClauses = guardClausesJson as SlimTopicManifest;
 const ifElifElse = ifElifElseJson as SlimTopicManifest;
 const indentationAndBlocks = indentationAndBlocksJson as SlimTopicManifest;
 const truthinessAndEmptyValues = truthinessAndEmptyValuesJson as SlimTopicManifest;
 const accumulatorsAndCounters = accumulatorsAndCountersJson as SlimTopicManifest;
 const breakAndContinue = breakAndContinueJson as SlimTopicManifest;
-const forLoopsOverSequences = forLoopsOverSequencesJson as SlimTopicManifest;
 const forLoopsOverText = forLoopsOverTextJson as SlimTopicManifest;
 const loopDebugging = loopDebuggingJson as SlimTopicManifest;
 const rangeAndCounting = rangeAndCountingJson as SlimTopicManifest;
@@ -78,13 +74,11 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "and-or-not": andOrNot,
   "checking-special-cases-first": checkingSpecialCasesFirst,
   "comparisons-and-truth-values": comparisonsAndTruthValues,
-  "guard-clauses": guardClauses,
   "if-elif-else": ifElifElse,
   "indentation-and-blocks": indentationAndBlocks,
   "truthiness-and-empty-values": truthinessAndEmptyValues,
   "accumulators-and-counters": accumulatorsAndCounters,
   "break-and-continue": breakAndContinue,
-  "for-loops-over-sequences": forLoopsOverSequences,
   "for-loops-over-text": forLoopsOverText,
   "loop-debugging": loopDebugging,
   "range-and-counting": rangeAndCounting,

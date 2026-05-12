@@ -73,6 +73,31 @@ export function buildResetModuleProgress(
         moduleCompletedAt: undefined,
     } as any;
 }
+function dropRuntimeForQuizCard(topicState: any, quizCardId: string) {
+    const runtime = topicState?.runtimeStateV2;
+    if (!runtime) return topicState;
+
+    const nextExercises = Object.fromEntries(
+        Object.entries(runtime.exercises ?? {}).filter(([, value]) => {
+            return String((value as any)?.cardId ?? "") !== quizCardId;
+        }),
+    );
+
+    const nextCards = Object.fromEntries(
+        Object.entries(runtime.cards ?? {}).filter(([, value]) => {
+            return String((value as any)?.cardId ?? "") !== quizCardId;
+        }),
+    );
+
+    return {
+        ...topicState,
+        runtimeStateV2: {
+            ...runtime,
+            exercises: nextExercises,
+            cards: nextCards,
+        },
+    };
+}
 
 export function buildResetTopicProgress(progress: any, tid: string) {
     const nextTopics = { ...(progress?.topics ?? {}) };
@@ -87,16 +112,21 @@ export function buildResetTopicProgress(progress: any, tid: string) {
         quizState: {},
         sketchState: {},
         toolState: {},
+        runtimeStateV2: {
+            exercises: {},
+            cards: {},
+        },
         completed: false,
         completedAt: undefined,
     };
 
     return {
         ...progress,
+        moduleCompleted: false,
+        moduleCompletedAt: undefined,
         topics: nextTopics,
     };
 }
-
 export function buildMarkCardDoneProgress(
     progress: any,
     viewTid: string,
@@ -161,15 +191,25 @@ export function buildQuizResetProgress(
     const nextQuizzesDone = { ...(tp0.quizzesDone ?? {}) };
     delete nextQuizzesDone[quizCardId];
 
+    const nextTopic = dropRuntimeForQuizCard(
+        {
+            ...tp0,
+            quizVersion: (tp0.quizVersion ?? 0) + 1,
+            quizState: nextQuizState,
+            quizzesDone: nextQuizzesDone,
+            completed: false,
+            completedAt: undefined,
+        },
+        quizCardId,
+    );
+
     return {
         ...progress,
+        moduleCompleted: false,
+        moduleCompletedAt: undefined,
         topics: {
             ...(progress?.topics ?? {}),
-            [viewTid]: {
-                ...tp0,
-                quizState: nextQuizState,
-                quizzesDone: nextQuizzesDone,
-            },
+            [viewTid]: nextTopic,
         },
     };
 }

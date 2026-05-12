@@ -7,190 +7,223 @@
           "summary": "Understand Python's role in automation, web apps, data, beginner programming, and AI.",
           "cards": {
             "sketch0": {
-              "title": "Introduction to Python's Uses"
+              "title": "Python solves many kinds of problems"
             },
             "sketch1": {
-              "title": "Python in Data Science"
+              "title": "A worked example: automation"
+            },
+            "sketch2": {
+              "title": "Python in web apps, data, and AI"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Personal Introduction Program"
+              "title": "Python use cases mini output project"
             }
           },
           "projectSteps": {
-            "quiz9": {
-              "title": "Create a simple Python program that prints your name."
+            "ci_print_usecase_automation": {
+              "title": "Print an automation message"
             },
-            "quiz10": {
-              "title": "Write a program to calculate the sum of two numbers."
+            "ci_two_usecases": {
+              "title": "Print two Python use cases"
             },
-            "quiz11": {
-              "title": "Write a program that checks if a number is even or odd."
+            "ci_web_data_ai": {
+              "title": "Print three areas"
+            },
+            "ci_personal_usecase_label": {
+              "title": "Label a Python use"
+            },
+            "ci_beginner_message": {
+              "title": "Print a beginner-friendly message"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "What is Python commonly used for?",
-              "prompt": "Select the correct answer.",
+            "sc-python-use-general": {
+              "title": "Python is used for many tasks",
+              "prompt": "Which statement best describes Python?",
+              "hint": "Look for the choice that includes several different kinds of work, not just one.",
+              "help": {
+                "concept": "Python is a general-purpose language, so it is used in multiple areas such as automation, web apps, data work, beginner learning, and AI.",
+                "hint_1": "A language used only for one narrow job would not match Python's common real-world use.",
+                "hint_2": "Choose the option that says Python can be used across different kinds of projects."
+              },
+              "options": {
+                "a": "Python is only for making video games.",
+                "b": "Python is a general-purpose language used in many areas.",
+                "c": "Python can only print text and nothing else.",
+                "d": "Python is only for designing images."
+              }
+            },
+            "sc-automation-example": {
+              "title": "Recognize automation",
+              "prompt": "Which task is the best example of using Python for automation?",
+              "hint": "Think about repeated steps that code can do for you.",
+              "help": {
+                "concept": "Automation means using Python to handle repeated or routine actions instead of doing each step manually.",
+                "hint_1": "Look for the option where the same kind of action happens again and again.",
+                "hint_2": "The best answer involves Python helping with a repetitive task rather than a physical activity."
+              },
+              "options": {
+                "a": "Using Python to rename many items in a repeated pattern",
+                "b": "Using Python to kick a soccer ball",
+                "c": "Using Python to paint a wall by hand",
+                "d": "Using Python to eat lunch"
+              }
+            },
+            "mc-common-uses": {
+              "title": "Common uses of Python",
+              "prompt": "Choose all common uses of Python.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "Web development",
-                "b": "Cooking recipes",
-                "c": "Gardening",
-                "d": "Painting"
+                "a": "Automation",
+                "b": "Web apps",
+                "c": "Data analysis",
+                "d": "Washing dishes by hand"
               }
             },
-            "quiz2": {
-              "title": "Which library is used for data visualization in Python?",
-              "prompt": "Choose the correct library.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "mc-beginner-friendly-reasons": {
+              "title": "Why beginners start with Python",
+              "prompt": "Choose all reasons Python is often beginner-friendly.",
+              "hint": "Think about readability and quick feedback from simple code.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Python is often beginner-friendly because its syntax is readable and small programs can show results quickly.",
+                "hint_1": "Look for choices about understanding code and seeing output, not about needing complex setup.",
+                "hint_2": "Two options describe beginner advantages: easier reading and quick visible results."
               },
               "options": {
-                "a": "NumPy",
-                "b": "Matplotlib",
-                "c": "Requests",
-                "d": "Beautiful Soup"
+                "a": "Its code is often easier to read than many languages.",
+                "b": "Simple programs can show output quickly.",
+                "c": "It requires many files for even tiny programs.",
+                "d": "Beginners must install many packages before printing text."
               }
             },
-            "quiz3": {
-              "title": "Select all fields where Python is used.",
-              "prompt": "Choose all correct answers.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "options": {
-                "a": "Web development",
-                "b": "Data analysis",
-                "c": "Game development",
-                "d": "Cooking"
-              }
-            },
-            "quiz4": {
-              "title": "Which of the following are Python libraries?",
-              "prompt": "Select all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "options": {
-                "a": "Pandas",
-                "b": "Flask",
-                "c": "Photoshop",
-                "d": "Django"
-              }
-            },
-            "quiz5": {
-              "title": "Order the steps to create a simple Python program.",
-              "prompt": "Arrange the steps in the correct order.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+            "dr-usecase-order": {
+              "title": "From idea to output",
+              "prompt": "Put these steps in a sensible order for exploring a Python use case in the browser runner.",
+              "hint": "Arrange the pieces in the order Python uses them.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
                 "hint_1": "Start with the piece that introduces the idea or action.",
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "Write the code",
-                "t2": "Run the program",
-                "t3": "Check the output",
-                "t4": "Save the file"
+                "t1": "Check the output panel",
+                "t2": "Type Python code in the code editor",
+                "t3": "Click Run",
+                "t4": "Compare the output with your expectation"
               }
             },
-            "quiz6": {
-              "title": "Arrange the Python data types from simplest to most complex.",
-              "prompt": "Put the data types in order.",
-              "hint": "Consider how data types are structured.",
+            "dr-automation-sequence": {
+              "title": "Understand an automation example",
+              "prompt": "Arrange these ideas from a repeated task to Python output.",
+              "hint": "Start with the repeated job, then the code, then the printed result.",
               "help": {
-                "concept": "Data types vary in complexity from simple to complex.",
-                "hint_1": "Think about how each type can hold data.",
-                "hint_2": "Start with the most basic type."
+                "concept": "Automation starts with a repeated task, then Python instructions describe it, and finally the program produces output.",
+                "hint_1": "A real-world repeated need comes before writing code about it.",
+                "hint_2": "The printed messages happen after the Python instructions are run."
               },
               "tokens": {
-                "t1": "Integer",
-                "t2": "List",
-                "t3": "String",
-                "t4": "Dictionary"
+                "t1": "See repeated messages in the output panel",
+                "t2": "Notice a repeated task",
+                "t3": "Write Python print statements for the task",
+                "t4": "Click Run"
               }
             },
-            "quiz7": {
-              "title": "Fill in the blank: Python is often used for ______.",
-              "prompt": "Choose the correct word.",
-              "hint": "Think about the fields where Python excels.",
+            "fb-python-general-purpose": {
+              "title": "Complete the idea",
+              "prompt": "Fill in the blank to complete the sentence about Python.",
+              "hint": "Python is not limited to one narrow job.",
               "help": {
-                "concept": "Python is a powerful tool for analyzing data.",
-                "hint_1": "Consider tasks that involve numbers and statistics.",
-                "hint_2": "This field is crucial in business and research."
+                "concept": "A the missing term language can be used in many different kinds of projects.",
+                "hint_1": "The missing phrase describes a language with many uses.",
+                "hint_2": "Choose the option that means 'useful across many tasks.'"
               },
-              "template": "Python is often used for [blank1].",
+              "template": "Python is a [blank1] language.",
               "choices": [
-                "data analysis",
-                "cooking",
-                "gardening"
+                "general-purpose",
+                "physical",
+                "paper-only",
+                "single-use"
               ]
             },
-            "quiz8": {
-              "title": "Fill in the blank: A popular web framework in Python is ______.",
-              "prompt": "Choose the correct word.",
-              "hint": "Think about frameworks used for building websites.",
+            "fb-data-use": {
+              "title": "Python and data",
+              "prompt": "Fill in the blank with a common Python use.",
+              "hint": "Think about organizing and studying information.",
               "help": {
-                "concept": "the missing term is a lightweight framework for web development in Python.",
-                "hint_1": "This framework is known for its simplicity.",
-                "hint_2": "It is often used for small to medium web applications."
+                "concept": "Python is widely used for the missing term work such as organizing, analyzing, and exploring information.",
+                "hint_1": "The missing word names work done with information and results.",
+                "hint_2": "Choose the option connected to analyzing information, not a physical task."
               },
-              "template": "A popular web framework in Python is [blank1].",
+              "template": "Python is often used for [blank1] analysis.",
               "choices": [
-                "Flask",
-                "Photoshop",
-                "Excel"
+                "data",
+                "shoe",
+                "wall",
+                "plate"
               ]
             },
-            "quiz9": {
-              "title": "Create a simple Python program that prints your name.",
-              "prompt": "Write a program that outputs your name.",
-              "hint": "Break the task into the main code steps first.",
+            "ci-print-usecase-automation": {
+              "title": "Print an automation message",
+              "prompt": "Write Python code that prints exactly: Python helps automate repeated tasks.",
+              "hint": "Use one print statement with the full sentence inside quotes.",
               "help": {
-                "concept": "This task checks whether you can apply create a simple python program that prints your name. in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+                "concept": "The `print()` statement sends text to the output panel exactly as written, including spaces and punctuation.",
+                "hint_1": "You need one line of code that prints the whole sentence.",
+                "hint_2": "Put the message inside parentheses and quotation marks so Python treats it as text."
               },
-              "starterCode": "print('Your Name')"
+              "starterCode": "# TODO: print the required sentence"
             },
-            "quiz10": {
-              "title": "Write a program to calculate the sum of two numbers.",
-              "prompt": "Create a program that takes two numbers and prints their sum.",
-              "hint": "Break the task into the main code steps first.",
+            "ci-two-usecases": {
+              "title": "Print two Python use cases",
+              "prompt": "Write Python code that prints these two lines exactly in this order:\nAutomation\nData analysis",
+              "hint": "Use two print statements, one for each line.",
               "help": {
-                "concept": "This task checks whether you can apply write a program to calculate the sum of two numbers. in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+                "concept": "Each `print()` call creates its own line in the output panel unless you change that behavior.",
+                "hint_1": "The output needs two separate lines in a specific order.",
+                "hint_2": "Write one `print()` for the first word and another `print()` for the second phrase."
               },
-              "starterCode": "# Write your code below"
+              "starterCode": "# TODO: print the two required lines"
             },
-            "quiz11": {
-              "title": "Write a program that checks if a number is even or odd.",
-              "prompt": "Create a program that checks if a number is even or odd.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "ci-web-data-ai": {
+              "title": "Print three areas",
+              "prompt": "Write Python code that prints exactly these three lines:\nWeb apps\nData\nAI",
+              "hint": "Use one print statement per line of output.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "concept": "Multiple `print()` statements are a simple way to show several related outputs in order.",
+                "hint_1": "There should be three output lines, not one long line.",
+                "hint_2": "Match the capitalization and order shown in the prompt."
+              },
+              "starterCode": "# TODO: print the three lines exactly"
+            },
+            "ci-personal-usecase-label": {
+              "title": "Label a Python use",
+              "prompt": "Write Python code that prints exactly: One Python use: web apps",
+              "hint": "Read the coding task and identify what the program should print.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "# Write your code below"
+              "starterCode": "# TODO: print the required labeled sentence"
+            },
+            "ci-beginner-message": {
+              "title": "Print a beginner-friendly message",
+              "prompt": "Write Python code that prints exactly these two lines:\nPython is beginner-friendly.\nIt is used in many fields.",
+              "hint": "Use two print statements and match the punctuation exactly.",
+              "help": {
+                "concept": "Exact output exercises check whether your printed text matches the required lines character by character.",
+                "hint_1": "There are two sentences, each ending with a period.",
+                "hint_2": "Print the first sentence on one line and the second sentence on the next line."
+              },
+              "starterCode": "# TODO: print both required lines"
             }
           }
         }
@@ -201,13 +234,17 @@
     "python-v2": {
       "python-v2-0": {
         "what-python-is": {
-          "sketch1": {
-            "title": "Introduction to Python's Uses",
-            "bodyMarkdown": "Python is a versatile programming language used in various fields. It is popular for automation, web development, data analysis, and artificial intelligence. For example, you can use Python to automate repetitive tasks like file management or data entry. **Try it yourself:** Think of a task in your daily life that could be automated using Python."
+          "sketch-1": {
+            "title": "Python solves many kinds of problems",
+            "bodyMarkdown": "Python is a general-purpose programming language. That means people use it for many different kinds of work, not just one narrow task.\n\nBeginners often start with Python because its code is usually easier to read than many other languages. Professionals also use it for real projects such as automation, web apps, data work, and AI.\n\nHere are some common uses:\n\n- **Automation**: repeating tasks automatically\n- **Web apps**: building parts of websites and online tools\n- **Data work**: cleaning, analyzing, and exploring information\n- **Beginner programming**: learning core coding ideas\n- **AI and machine learning**: working with models and predictions\n\nA tiny Python program can already do useful work. For example:\n\n```python\nprint(\"Hello!\")\nprint(\"Python can automate tasks.\")\n```\n\nStep through it:\n\n- `print(\"Hello!\")` sends `Hello!` to the output panel.\n- `print(\"Python can automate tasks.\")` sends a second message.\n\nThis program is simple, but it shows an important idea: Python lets you give clear instructions and see results right away.\n\n**Your turn:** Type the code in the code editor, click Run, and then change the second message to a different Python use case."
           },
-          "sketch2": {
-            "title": "Python in Data Science",
-            "bodyMarkdown": "In data science, Python is used to analyze and visualize data. Libraries like Pandas and Matplotlib make it easy to manipulate and plot data. For instance, you can load a dataset and create a simple graph to visualize trends. Here’s a basic example:\n\n```python\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndata = {'Year': [2020, 2021, 2022], 'Sales': [150, 200, 250]}\ndf = pd.DataFrame(data)\ndf.plot(x='Year', y='Sales', kind='line')\nplt.show()\n```\n**Your turn:** Modify the data to see how the graph changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "sketch-2": {
+            "title": "A worked example: automation",
+            "bodyMarkdown": "Automation means using code to handle repeated steps for you.\n\nImagine you want to label three tasks as done. Instead of typing the same message again and again in different places, Python can produce the output for you.\n\n```python\nprint(\"Task 1 done\")\nprint(\"Task 2 done\")\nprint(\"Task 3 done\")\n```\n\nWalk through it:\n\n- The first line prints `Task 1 done`.\n- The second line prints `Task 2 done`.\n- The third line prints `Task 3 done`.\n\nThis is still a very small example, but it shows the idea behind automation: Python can repeat clear instructions accurately.\n\nPeople use this same idea on bigger jobs too, such as renaming data, generating reports, or processing many items in order.\n\n**Your turn:** Change the messages so they print three chores, reminders, or study tasks. Click Run and check the output panel."
+          },
+          "sketch-3": {
+            "title": "Python in web apps, data, and AI",
+            "bodyMarkdown": "Python is also popular beyond beginner exercises.\n\nFor **web apps**, Python can help power the logic behind websites and online tools.\n\nFor **data**, Python can help people organize information, calculate results, and inspect patterns.\n\nFor **AI**, Python is often used to prepare data and work with machine learning tools.\n\nEven when the projects become advanced, the beginner idea stays the same: Python code gives instructions that produce output or behavior.\n\nHere is a simple output example connected to data and AI topics:\n\n```python\nprint(\"Data can be organized and analyzed.\")\nprint(\"AI systems often use Python tools.\")\n```\n\nStep through it:\n\n- The first line prints a message about data work.\n- The second line prints a message about AI work.\n\nYou do not need advanced syntax yet to understand the main point: Python is useful in many fields.\n\n**Practice this:** Replace one line with a message about web apps, then click Run and compare the output with what you expected."
           }
         }
       }

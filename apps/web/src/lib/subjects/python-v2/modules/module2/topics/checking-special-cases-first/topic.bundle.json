@@ -14,14 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.cards.sketch0.title",
-      "sketchId": "sketch_1",
+      "sketchId": "special-cases-come-first",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.cards.sketch1.title",
-      "sketchId": "sketch_2",
+      "sketchId": "broad-vs-specific",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.cards.sketch2.title",
+      "sketchId": "using-elif-for-clear-branches",
       "height": 420
     },
     {
@@ -50,27 +57,45 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz_9",
-            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.quiz_9.title",
-            "exerciseKey": "quiz_9",
+            "id": "code_invalid_before_range",
+            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.code_invalid_before_range.title",
+            "exerciseKey": "code-invalid-before-range",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz_10",
-            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.quiz_10.title",
-            "exerciseKey": "quiz_10",
+            "id": "code_perfect_before_pass",
+            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.code_perfect_before_pass.title",
+            "exerciseKey": "code-perfect-before-pass",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz_11",
-            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.quiz_11.title",
-            "exerciseKey": "quiz_11",
+            "id": "code_empty_yes_other",
+            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.code_empty_yes_other.title",
+            "exerciseKey": "code-empty-yes-other",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_zero_before_small",
+            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.code_zero_before_small.title",
+            "exerciseKey": "code-zero-before-small",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_invalid_code_first",
+            "titleKey": "topics.python-v2.python-v2-2.checking-special-cases-first.projectSteps.code_invalid_code_first.title",
+            "exerciseKey": "code-invalid-code-first",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -82,25 +107,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch_1",
+      "id": "special-cases-come-first",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-2.checking-special-cases-first.sketch_1.title",
-      "bodyKey": "sketches.python-v2.python-v2-2.checking-special-cases-first.sketch_1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-2.checking-special-cases-first.special-cases-come-first.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.checking-special-cases-first.special-cases-come-first.bodyMarkdown"
     },
     {
-      "id": "sketch_2",
+      "id": "broad-vs-specific",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-2.checking-special-cases-first.sketch_2.title",
-      "bodyKey": "sketches.python-v2.python-v2-2.checking-special-cases-first.sketch_2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-2.checking-special-cases-first.broad-vs-specific.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.checking-special-cases-first.broad-vs-specific.bodyMarkdown"
+    },
+    {
+      "id": "using-elif-for-clear-branches",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.checking-special-cases-first.using-elif-for-clear-branches.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.checking-special-cases-first.using-elif-for-clear-branches.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz_1",
+      "id": "sc-special-before-general",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_1",
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.sc-special-before-general",
       "optionIds": [
         "a",
         "b",
@@ -109,15 +140,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "quiz_2",
+      "id": "sc-output-perfect-score",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_2",
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.sc-output-perfect-score",
       "optionIds": [
         "a",
         "b",
@@ -126,15 +157,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "c"
       }
     },
     {
-      "id": "quiz_3",
+      "id": "mc-good-special-case-order",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_3",
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.mc-good-special-case-order",
       "optionIds": [
         "a",
         "b",
@@ -145,70 +176,43 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
-          "d"
-        ]
-      }
-    },
-    {
-      "id": "quiz_4",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_4",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
           "c"
         ]
       }
     },
     {
-      "id": "quiz_5",
-      "kind": "drag_reorder",
+      "id": "mc-values-hit-first-branch",
+      "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_5",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.mc-values-hit-first-branch",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t4",
-          "t3",
-          "t2"
+        "kind": "multi_choice",
+        "optionIds": [
+          "b"
         ]
       }
     },
     {
-      "id": "quiz_6",
+      "id": "dr-order-score-checks",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_6",
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.dr-order-score-checks",
       "tokenIds": [
         "t1",
         "t2",
-        "t3",
-        "t4"
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
-          "t4",
           "t1",
           "t2",
           "t3"
@@ -216,105 +220,202 @@
       }
     },
     {
-      "id": "quiz_7",
+      "id": "dr-order-input-validation",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.dr-order-input-validation",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fb-empty-string-check",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_7",
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.fb-empty-string-check",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "errors"
+        "value": "\"\""
       }
     },
     {
-      "id": "quiz_8",
+      "id": "fb-elif-keyword",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_8",
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.fb-elif-keyword",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "first"
+        "value": "elif"
       }
     },
     {
-      "id": "quiz_9",
+      "id": "code-invalid-before-range",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_9",
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range",
       "language": "python",
-      "starterCode": "def divide_by_number(number):\n    # Check if number is zero\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(divide_by_number(number))",
+      "starterCode": "age = int(input())\n\n# TODO: print Invalid, Child, or Older",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "0",
-            "stdout": "Cannot divide by zero!",
+            "stdin": "-3\n",
+            "stdout": "Invalid\n",
             "match": "exact"
           },
           {
-            "stdin": "5",
-            "stdout": "2.0",
+            "stdin": "8\n",
+            "stdout": "Child\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Older\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "def divide_by_number(number):\n    if number == 0:\n        return 'Cannot divide by zero!'\n    else:\n        return 10 / number\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(divide_by_number(number))"
+        "solutionCode": "age = int(input())\n\nif age < 0:\n    print(\"Invalid\")\nelif age < 13:\n    print(\"Child\")\nelse:\n    print(\"Older\")"
       }
     },
     {
-      "id": "quiz_10",
+      "id": "code-perfect-before-pass",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_10",
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass",
       "language": "python",
-      "starterCode": "def check_age(age):\n    # Check age\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_age(age))",
+      "starterCode": "score = int(input())\n\n# TODO: print Perfect, Pass, or Fail",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "17",
-            "stdout": "Minor",
+            "stdin": "100\n",
+            "stdout": "Perfect\n",
             "match": "exact"
           },
           {
-            "stdin": "20",
-            "stdout": "Adult",
+            "stdin": "75\n",
+            "stdout": "Pass\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "40\n",
+            "stdout": "Fail\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "def check_age(age):\n    if age < 18:\n        return 'Minor'\n    else:\n        return 'Adult'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_age(age))"
+        "solutionCode": "score = int(input())\n\nif score == 100:\n    print(\"Perfect\")\nelif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")"
       }
     },
     {
-      "id": "quiz_11",
+      "id": "code-empty-yes-other",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.quiz_11",
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other",
       "language": "python",
-      "starterCode": "def check_number(num):\n    # Check if number is negative\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_number(num))",
+      "starterCode": "text = input()\n\n# TODO: print Empty, Confirmed, or Other",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "-1",
-            "stdout": "Negative",
+            "stdin": "\n",
+            "stdout": "Empty\n",
             "match": "exact"
           },
           {
-            "stdin": "1",
-            "stdout": "Positive",
+            "stdin": "yes\n",
+            "stdout": "Confirmed\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "hello\n",
+            "stdout": "Other\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "def check_number(num):\n    if num < 0:\n        return 'Negative'\n    else:\n        return 'Positive'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_number(num))"
+        "solutionCode": "text = input()\n\nif text == \"\":\n    print(\"Empty\")\nelif text == \"yes\":\n    print(\"Confirmed\")\nelse:\n    print(\"Other\")"
+      }
+    },
+    {
+      "id": "code-zero-before-small",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small",
+      "language": "python",
+      "starterCode": "n = int(input())\n\n# TODO: print Zero, Small, or Large",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "0\n",
+            "stdout": "Zero\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "7\n",
+            "stdout": "Small\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "15\n",
+            "stdout": "Large\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\n\nif n == 0:\n    print(\"Zero\")\nelif n <= 10:\n    print(\"Small\")\nelse:\n    print(\"Large\")"
+      }
+    },
+    {
+      "id": "code-invalid-code-first",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first",
+      "language": "python",
+      "starterCode": "code = int(input())\n\n# TODO: print Invalid, Start, or Continue",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "-1\n",
+            "stdout": "Invalid\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "Start\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "5\n",
+            "stdout": "Continue\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "code = int(input())\n\nif code < 0:\n    print(\"Invalid\")\nelif code == 0:\n    print(\"Start\")\nelse:\n    print(\"Continue\")"
       }
     }
   ]

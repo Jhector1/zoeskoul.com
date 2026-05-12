@@ -30,6 +30,7 @@ export function classifyCodeRunFailure(
     language: string,
     run: any,
     source: "run" | "check" = "run",
+    code?: string | null,
 ) {
     const lang = String(language ?? "").toLowerCase();
 
@@ -37,7 +38,7 @@ export function classifyCodeRunFailure(
         return classifySqlRunFailure(run, source);
     }
 
-    return classifyProgrammingRunFailure(language, run, source);
+    return classifyProgrammingRunFailure(language, run, source, code);
 }
 
 /**
@@ -80,7 +81,7 @@ export function pickRunFeedbackFromResult(args: {
     }
 
     if (result.ok === false) {
-        return classifyCodeRunFailure(args.language, result, "run");
+        return classifyCodeRunFailure(args.language, result, "run", args.code);
     }
 
     return null;

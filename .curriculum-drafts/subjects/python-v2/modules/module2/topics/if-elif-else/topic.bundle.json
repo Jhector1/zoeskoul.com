@@ -14,14 +14,28 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.sketch0.title",
-      "sketchId": "1",
+      "sketchId": "sketch_if_basic",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.sketch1.title",
-      "sketchId": "2",
+      "sketchId": "sketch_if_else",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.sketch2.title",
+      "sketchId": "sketch_elif_chain",
+      "height": 420
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.sketch3.title",
+      "sketchId": "sketch_order_matters",
       "height": 420
     },
     {
@@ -50,27 +64,45 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "q9",
-            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.q9.title",
-            "exerciseKey": "q9",
+            "id": "code_positive_negative_zero",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.code_positive_negative_zero.title",
+            "exerciseKey": "code_positive_negative_zero",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "q10",
-            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.q10.title",
-            "exerciseKey": "q10",
+            "id": "code_pass_fail",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.code_pass_fail.title",
+            "exerciseKey": "code_pass_fail",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "q11",
-            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.q11.title",
-            "exerciseKey": "q11",
+            "id": "code_grade_checker",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.code_grade_checker.title",
+            "exerciseKey": "code_grade_checker",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_empty_or_text",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.code_empty_or_text.title",
+            "exerciseKey": "code_empty_or_text",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_even_odd",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.code_even_odd.title",
+            "exerciseKey": "code_even_odd",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -82,25 +114,37 @@
   ],
   "sketches": [
     {
-      "id": "1",
+      "id": "sketch_if_basic",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.1.title",
-      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_if_basic.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_if_basic.bodyMarkdown"
     },
     {
-      "id": "2",
+      "id": "sketch_if_else",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.2.title",
-      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_if_else.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_if_else.bodyMarkdown"
+    },
+    {
+      "id": "sketch_elif_chain",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_elif_chain.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_elif_chain.bodyMarkdown"
+    },
+    {
+      "id": "sketch_order_matters",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_order_matters.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_order_matters.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "q1",
+      "id": "sc_if_runs_true",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q1",
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.sc_if_runs_true",
       "optionIds": [
         "a",
         "b",
@@ -113,11 +157,11 @@
       }
     },
     {
-      "id": "q2",
+      "id": "sc_elif_role",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q2",
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.sc_elif_role",
       "optionIds": [
         "a",
         "b",
@@ -130,11 +174,11 @@
       }
     },
     {
-      "id": "q3",
+      "id": "mc_valid_conditional_facts",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q3",
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.mc_valid_conditional_facts",
       "optionIds": [
         "a",
         "b",
@@ -145,16 +189,17 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "c",
+          "d"
         ]
       }
     },
     {
-      "id": "q4",
+      "id": "mc_truthy_values",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q4",
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.mc_truthy_values",
       "optionIds": [
         "a",
         "b",
@@ -164,42 +209,17 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
           "b",
           "c"
         ]
       }
     },
     {
-      "id": "q5",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q5",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "true"
-      }
-    },
-    {
-      "id": "q6",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q6",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "false"
-      }
-    },
-    {
-      "id": "q7",
+      "id": "dr_branch_order",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q7",
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.dr_branch_order",
       "tokenIds": [
         "t1",
         "t2",
@@ -217,103 +237,192 @@
       }
     },
     {
-      "id": "q8",
+      "id": "dr_specific_before_general",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q8",
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.dr_specific_before_general",
       "tokenIds": [
         "t1",
         "t2",
-        "t3",
-        "t4"
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3",
-          "t4"
+          "t3"
         ]
       }
     },
     {
-      "id": "q9",
-      "kind": "code_input",
-      "purpose": "project",
+      "id": "fb_else_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q9",
-      "language": "python",
-      "starterCode": "grade = 75\n# Your code here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "12\n",
-            "stdout": "You passed!",
-            "match": "exact"
-          },
-          {
-            "stdin": "20\n",
-            "stdout": "You passed!",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "grade = 75\nif grade >= 60:\n    print('You passed!')\nelse:\n    print('You failed!')"
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.fb_else_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "else"
       }
     },
     {
-      "id": "q10",
-      "kind": "code_input",
-      "purpose": "project",
+      "id": "fb_comparison_operator",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q10",
-      "language": "python",
-      "starterCode": "age = int(input())\n# Your code here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "12\n",
-            "stdout": "You are not eligible to vote.",
-            "match": "exact"
-          },
-          {
-            "stdin": "20\n",
-            "stdout": "You are eligible to vote.",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "age = int(input())\nif age >= 18:\n    print('You are eligible to vote.')\nelse:\n    print('You are not eligible to vote.')"
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.fb_comparison_operator",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": ">="
       }
     },
     {
-      "id": "q11",
+      "id": "code_positive_negative_zero",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.q11",
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero",
       "language": "python",
-      "starterCode": "temperature = 30\n# Your code here",
+      "starterCode": "n = int(input())\n\n# TODO: print positive, negative, or zero",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "12\n",
-            "stdout": "It is warm.",
+            "stdin": "7\n",
+            "stdout": "positive\n",
             "match": "exact"
           },
           {
-            "stdin": "20\n",
-            "stdout": "It is warm.",
+            "stdin": "-2\n",
+            "stdout": "negative\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "zero\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "temperature = 30\nif temperature > 30:\n    print('It is hot.')\nelif temperature > 20:\n    print('It is warm.')\nelse:\n    print('It is cold.')"
+        "solutionCode": "n = int(input())\n\nif n > 0:\n    print(\"positive\")\nelif n < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")"
+      }
+    },
+    {
+      "id": "code_pass_fail",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail",
+      "language": "python",
+      "starterCode": "score = int(input())\n\n# TODO: print pass or fail",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "60\n",
+            "stdout": "pass\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "59\n",
+            "stdout": "fail\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "score = int(input())\n\nif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"fail\")"
+      }
+    },
+    {
+      "id": "code_grade_checker",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker",
+      "language": "python",
+      "starterCode": "score = int(input())\n\n# TODO: print A, B, C, or F",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "95\n",
+            "stdout": "A\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "84\n",
+            "stdout": "B\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "72\n",
+            "stdout": "C\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "40\n",
+            "stdout": "F\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "score = int(input())\n\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelif score >= 70:\n    print(\"C\")\nelse:\n    print(\"F\")"
+      }
+    },
+    {
+      "id": "code_empty_or_text",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text",
+      "language": "python",
+      "starterCode": "text = input()\n\n# TODO: print empty or text",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "hello\n",
+            "stdout": "text\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "\n",
+            "stdout": "empty\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = input()\n\nif text:\n    print(\"text\")\nelse:\n    print(\"empty\")"
+      }
+    },
+    {
+      "id": "code_even_odd",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd",
+      "language": "python",
+      "starterCode": "n = int(input())\n\n# TODO: print even or odd",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "8\n",
+            "stdout": "even\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "5\n",
+            "stdout": "odd\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\n\nif n % 2 == 0:\n    print(\"even\")\nelse:\n    print(\"odd\")"
       }
     }
   ]

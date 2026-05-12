@@ -14,7 +14,22 @@
       "curriculum": {
         "plannedModuleCount": 4,
         "isTerminalRelease": false,
-        "moreComingMessageKey": "subjects.python-v2.moreComingSoon"
+        "moreComingMessageKey": "subjects.python-v2.moreComingSoon",
+        "finalCapstone": {
+          "titleKey": "subjects.python-v2.finalCapstone.title",
+          "descriptionKey": "subjects.python-v2.finalCapstone.description",
+          "requirementsKey": "subjects.python-v2.finalCapstone.requirements",
+          "skills": [
+            "input",
+            "variables",
+            "strings",
+            "conditionals",
+            "loops",
+            "output"
+          ],
+          "placement": "afterModule3",
+          "required": true
+        }
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,
@@ -38,8 +53,8 @@
       "order": 0,
       "titleKey": "modules.python-v2.python-v2-0.title",
       "descriptionKey": "modules.python-v2.python-v2-0.description",
-      "weekStart": null,
-      "weekEnd": null,
+      "weekStart": 1,
+      "weekEnd": 1,
       "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "code",
@@ -62,7 +77,8 @@
         "whyKeys": [
           "modules.python-v2.python-v2-0.why.0",
           "modules.python-v2.python-v2-0.why.1"
-        ]
+        ],
+        "moduleReviewKey": "modules.python-v2.python-v2-0.moduleReview"
       },
       "sections": [
         {
@@ -115,8 +131,8 @@
       "order": 1,
       "titleKey": "modules.python-v2.python-v2-1.title",
       "descriptionKey": "modules.python-v2.python-v2-1.description",
-      "weekStart": null,
-      "weekEnd": null,
+      "weekStart": 2,
+      "weekEnd": 2,
       "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "code",
@@ -141,7 +157,9 @@
         "whyKeys": [
           "modules.python-v2.python-v2-1.why.0",
           "modules.python-v2.python-v2-1.why.1"
-        ]
+        ],
+        "prerequisiteReminderKey": "modules.python-v2.python-v2-1.prerequisiteReminder",
+        "moduleReviewKey": "modules.python-v2.python-v2-1.moduleReview"
       },
       "sections": [
         {
@@ -194,8 +212,8 @@
       "order": 2,
       "titleKey": "modules.python-v2.python-v2-2.title",
       "descriptionKey": "modules.python-v2.python-v2-2.description",
-      "weekStart": null,
-      "weekEnd": null,
+      "weekStart": 3,
+      "weekEnd": 3,
       "accessOverride": null,
       "runtimeDefaults": {
         "kind": "code",
@@ -220,7 +238,9 @@
         "whyKeys": [
           "modules.python-v2.python-v2-2.why.0",
           "modules.python-v2.python-v2-2.why.1"
-        ]
+        ],
+        "prerequisiteReminderKey": "modules.python-v2.python-v2-2.prerequisiteReminder",
+        "moduleReviewKey": "modules.python-v2.python-v2-2.moduleReview"
       },
       "sections": [
         {
@@ -273,8 +293,8 @@
       "order": 3,
       "titleKey": "modules.python-v2.python-v2-3.title",
       "descriptionKey": "modules.python-v2.python-v2-3.description",
-      "weekStart": null,
-      "weekEnd": null,
+      "weekStart": 4,
+      "weekEnd": 4,
       "accessOverride": null,
       "runtimeDefaults": {
         "kind": "code",
@@ -299,7 +319,10 @@
         "whyKeys": [
           "modules.python-v2.python-v2-3.why.0",
           "modules.python-v2.python-v2-3.why.1"
-        ]
+        ],
+        "finalCapstoneKey": "subjects.python-v2.finalCapstone.title",
+        "prerequisiteReminderKey": "modules.python-v2.python-v2-3.prerequisiteReminder",
+        "moduleReviewKey": "modules.python-v2.python-v2-3.moduleReview"
       },
       "sections": [
         {

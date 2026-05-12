@@ -14,21 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "sk-what-is-an-expression",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "sk-comparison-and-boolean",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.cards.sketch2.title",
-      "sketchId": "sketch3",
+      "sketchId": "sk-parentheses-order",
       "height": 420
     },
     {
@@ -57,27 +57,45 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz7",
-            "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.projectSteps.quiz7.title",
-            "exerciseKey": "quiz7",
+            "id": "ci_arithmetic_output",
+            "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.projectSteps.ci_arithmetic_output.title",
+            "exerciseKey": "ci-arithmetic-output",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz8",
-            "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.projectSteps.quiz8.title",
-            "exerciseKey": "quiz8",
+            "id": "ci_parentheses_output",
+            "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.projectSteps.ci_parentheses_output.title",
+            "exerciseKey": "ci-parentheses-output",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz9",
-            "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.projectSteps.quiz9.title",
-            "exerciseKey": "quiz9",
+            "id": "ci_comparison_output",
+            "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.projectSteps.ci_comparison_output.title",
+            "exerciseKey": "ci-comparison-output",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_boolean_and_output",
+            "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.projectSteps.ci_boolean_and_output.title",
+            "exerciseKey": "ci-boolean-and-output",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_two_line_expression_check",
+            "titleKey": "topics.python-v2.python-v2-0.operators-and-expressions.projectSteps.ci_two_line_expression_check.title",
+            "exerciseKey": "ci-two-line-expression-check",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -89,31 +107,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "sk-what-is-an-expression",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sketch1.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sk-what-is-an-expression.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sk-what-is-an-expression.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sk-comparison-and-boolean",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sketch2.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sk-comparison-and-boolean.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sk-comparison-and-boolean.bodyMarkdown"
     },
     {
-      "id": "sketch3",
+      "id": "sk-parentheses-order",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sketch3.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sketch3.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sk-parentheses-order.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.operators-and-expressions.sk-parentheses-order.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-expression-definition",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz1",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.sc-expression-definition",
       "optionIds": [
         "a",
         "b",
@@ -126,11 +144,11 @@
       }
     },
     {
-      "id": "quiz2",
+      "id": "sc-parentheses-effect",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz2",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.sc-parentheses-effect",
       "optionIds": [
         "a",
         "b",
@@ -139,15 +157,35 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "c"
       }
     },
     {
-      "id": "quiz3",
+      "id": "mc-comparison-results",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz3",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.mc-comparison-results",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "mc-boolean-operators",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.mc-boolean-operators",
       "optionIds": [
         "a",
         "b",
@@ -159,58 +197,16 @@
         "optionIds": [
           "a",
           "b",
-          "c"
+          "d"
         ]
       }
     },
     {
-      "id": "quiz4",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz4",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "c"
-        ]
-      }
-    },
-    {
-      "id": "quiz5",
+      "id": "dr-arithmetic-order",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz5",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t2",
-          "t4",
-          "t1",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "quiz6",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz6",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.dr-arithmetic-order",
       "tokenIds": [
         "t1",
         "t2",
@@ -228,105 +224,154 @@
       }
     },
     {
-      "id": "quiz7",
-      "kind": "code_input",
-      "purpose": "project",
+      "id": "dr-boolean-evaluation",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz7",
-      "language": "python",
-      "starterCode": "width = 5\nheight = 10\n# Calculate area here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "12\n",
-            "stdout": "50",
-            "match": "exact"
-          },
-          {
-            "stdin": "20\n",
-            "stdout": "50",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "width = 5\nheight = 10\narea = width * height\nprint(area)  # This should output 50"
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.dr-boolean-evaluation",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
-      "id": "quiz8",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz8",
-      "language": "python",
-      "starterCode": "number = int(input())\n# Check if the number is even or odd here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "12\n",
-            "stdout": "Even",
-            "match": "exact"
-          },
-          {
-            "stdin": "20\n",
-            "stdout": "Even",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "number = int(input())\nif number % 2 == 0:\n    print('Even')\nelse:\n    print('Odd')"
-      }
-    },
-    {
-      "id": "quiz9",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.quiz9",
-      "language": "python",
-      "starterCode": "num1 = 10\nnum2 = 20\n# Find the maximum here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "12\n",
-            "stdout": "20",
-            "match": "exact"
-          },
-          {
-            "stdin": "20\n",
-            "stdout": "20",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "num1 = 10\nnum2 = 20\nmax_num = num1 if num1 > num2 else num2\nprint(max_num)  # This should output 20"
-      }
-    },
-    {
-      "id": "policy_fill_blank_choice_1",
+      "id": "fb-equality-operator",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.policy_fill_blank_choice_1",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.fb-equality-operator",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "if"
+        "value": "+"
       }
     },
     {
-      "id": "policy_fill_blank_choice_2",
+      "id": "fb-boolean-or",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.policy_fill_blank_choice_2",
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.fb-boolean-or",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "if"
+        "value": "*"
+      }
+    },
+    {
+      "id": "ci-arithmetic-output",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-arithmetic-output",
+      "language": "python",
+      "starterCode": "# Write Python code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "17\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(7 + 5 * 2)"
+      }
+    },
+    {
+      "id": "ci-parentheses-output",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-parentheses-output",
+      "language": "python",
+      "starterCode": "# Write Python code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "24\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print((7 + 5) * 2)"
+      }
+    },
+    {
+      "id": "ci-comparison-output",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-comparison-output",
+      "language": "python",
+      "starterCode": "# Write Python code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "True\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(9 - 4)"
+      }
+    },
+    {
+      "id": "ci-boolean-and-output",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-boolean-and-output",
+      "language": "python",
+      "starterCode": "# Write Python code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "True\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print((6 + 2) * 3)"
+      }
+    },
+    {
+      "id": "ci-two-line-expression-check",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-two-line-expression-check",
+      "language": "python",
+      "starterCode": "# Write Python code below\n# Print the first result\n# Print the second result",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "14\n20\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(2 + 3 * 4)\nprint((2 + 3) * 4)"
       }
     }
   ]

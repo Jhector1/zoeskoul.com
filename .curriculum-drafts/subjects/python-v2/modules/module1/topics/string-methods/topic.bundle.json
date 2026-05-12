@@ -14,35 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-1.string-methods.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "sketch-1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-1.string-methods.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "sketch-2",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-1.string-methods.cards.sketch2.title",
-      "sketchId": "sketch3",
-      "height": 420
-    },
-    {
-      "id": "sketch3",
-      "kind": "sketch",
-      "titleKey": "topics.python-v2.python-v2-1.string-methods.cards.sketch3.title",
-      "sketchId": "sketch4",
-      "height": 420
-    },
-    {
-      "id": "sketch4",
-      "kind": "sketch",
-      "titleKey": "topics.python-v2.python-v2-1.string-methods.cards.sketch4.title",
-      "sketchId": "sketch5",
+      "sketchId": "sketch-3",
       "height": 420
     },
     {
@@ -71,27 +57,45 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz9",
-            "titleKey": "topics.python-v2.python-v2-1.string-methods.projectSteps.quiz9.title",
-            "exerciseKey": "quiz9",
+            "id": "code_1",
+            "titleKey": "topics.python-v2.python-v2-1.string-methods.projectSteps.code_1.title",
+            "exerciseKey": "code-1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz10",
-            "titleKey": "topics.python-v2.python-v2-1.string-methods.projectSteps.quiz10.title",
-            "exerciseKey": "quiz10",
+            "id": "code_2",
+            "titleKey": "topics.python-v2.python-v2-1.string-methods.projectSteps.code_2.title",
+            "exerciseKey": "code-2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz11",
-            "titleKey": "topics.python-v2.python-v2-1.string-methods.projectSteps.quiz11.title",
-            "exerciseKey": "quiz11",
+            "id": "code_3",
+            "titleKey": "topics.python-v2.python-v2-1.string-methods.projectSteps.code_3.title",
+            "exerciseKey": "code-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_4",
+            "titleKey": "topics.python-v2.python-v2-1.string-methods.projectSteps.code_4.title",
+            "exerciseKey": "code-4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_5",
+            "titleKey": "topics.python-v2.python-v2-1.string-methods.projectSteps.code_5.title",
+            "exerciseKey": "code-5",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -103,43 +107,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.string-methods.sketch1.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.string-methods.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-1.string-methods.sketch-1.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.string-methods.sketch-1.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.string-methods.sketch2.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.string-methods.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-1.string-methods.sketch-2.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.string-methods.sketch-2.bodyMarkdown"
     },
     {
-      "id": "sketch3",
+      "id": "sketch-3",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.string-methods.sketch3.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.string-methods.sketch3.bodyMarkdown"
-    },
-    {
-      "id": "sketch4",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.string-methods.sketch4.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.string-methods.sketch4.bodyMarkdown"
-    },
-    {
-      "id": "sketch5",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.string-methods.sketch5.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.string-methods.sketch5.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-1.string-methods.sketch-3.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.string-methods.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz1",
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.sc-1",
       "optionIds": [
         "a",
         "b",
@@ -152,11 +144,11 @@
       }
     },
     {
-      "id": "quiz2",
+      "id": "sc-2",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz2",
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.sc-2",
       "optionIds": [
         "a",
         "b",
@@ -165,15 +157,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "c"
       }
     },
     {
-      "id": "quiz3",
+      "id": "mc-1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz3",
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.mc-1",
       "optionIds": [
         "a",
         "b",
@@ -185,16 +177,16 @@
         "optionIds": [
           "a",
           "b",
-          "c"
+          "d"
         ]
       }
     },
     {
-      "id": "quiz4",
+      "id": "mc-2",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz4",
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.mc-2",
       "optionIds": [
         "a",
         "b",
@@ -205,60 +197,16 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "b"
         ]
       }
     },
     {
-      "id": "quiz5",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz5",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "dog"
-      }
-    },
-    {
-      "id": "quiz6",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz6",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "strip"
-      }
-    },
-    {
-      "id": "quiz7",
+      "id": "dr-1",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz7",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "quiz8",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz8",
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.dr-1",
       "tokenIds": [
         "t1",
         "t2",
@@ -276,81 +224,179 @@
       }
     },
     {
-      "id": "quiz9",
-      "kind": "code_input",
-      "purpose": "project",
+      "id": "dr-2",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz9",
-      "language": "python",
-      "starterCode": "user_input = input()\n# Convert to lowercase",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "12\n",
-            "stdout": "12",
-            "match": "exact"
-          },
-          {
-            "stdin": "20\n",
-            "stdout": "20",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "user_input = input()\nlowercase_string = user_input.lower()\nprint(lowercase_string)"
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.dr-2",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
-      "id": "quiz10",
-      "kind": "code_input",
-      "purpose": "project",
+      "id": "fb-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz10",
-      "language": "python",
-      "starterCode": "text = 'hello world'\n# Replace 'hello' with 'hi'",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "12\n",
-            "stdout": "hi world",
-            "match": "exact"
-          },
-          {
-            "stdin": "20\n",
-            "stdout": "hi world",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "text = 'hello world'\nnew_text = text.replace('hello', 'hi')\nprint(new_text)"
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.fb-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "strip"
       }
     },
     {
-      "id": "quiz11",
+      "id": "fb-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.fb-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "\" \""
+      }
+    },
+    {
+      "id": "code-1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.quiz11",
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-1",
       "language": "python",
-      "starterCode": "words = ['Python', 'is', 'fun']\n# Join the words with spaces",
+      "starterCode": "text = input()\n# Convert text to lowercase and print it",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "12\n",
-            "stdout": "Python is fun",
+            "stdin": "HeLLo WoRLD\n",
+            "stdout": "hello world\n",
             "match": "exact"
           },
           {
-            "stdin": "20\n",
-            "stdout": "Python is fun",
+            "stdin": "PYTHON\n",
+            "stdout": "python\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "words = ['Python', 'is', 'fun']\njoined_string = ' '.join(words)\nprint(joined_string)"
+        "solutionCode": "text = input()\nprint(text.lower())"
+      }
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-2",
+      "language": "python",
+      "starterCode": "text = input()\n# Remove outside spaces and print the result",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  Ada  \n",
+            "stdout": "Ada\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "   hello world   \n",
+            "stdout": "hello world\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = input()\nprint(text.strip())"
+      }
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-3",
+      "language": "python",
+      "starterCode": "text = input()\n# Replace cat with dog and print the result",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "my cat is sleepy\n",
+            "stdout": "my dog is sleepy\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "cat cat\n",
+            "stdout": "dog dog\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = input()\nprint(text.replace(\"cat\", \"dog\"))"
+      }
+    },
+    {
+      "id": "code-4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-4",
+      "language": "python",
+      "starterCode": "text = input()\nparts = text.split(\",\")\n# Print each part on its own line",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "red,blue,green\n",
+            "stdout": "red\nblue\ngreen\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "one,two,three\n",
+            "stdout": "one\ntwo\nthree\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = input()\nparts = text.split(\",\")\nprint(parts[0])\nprint(parts[1])\nprint(parts[2])"
+      }
+    },
+    {
+      "id": "code-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-5",
+      "language": "python",
+      "starterCode": "text = input()\n# Remove outside spaces\n# Split by commas\n# Join with \" | \" and print",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": " apple,banana,cherry \n",
+            "stdout": "apple | banana | cherry\n",
+            "match": "exact"
+          },
+          {
+            "stdin": " red,blue \n",
+            "stdout": "red | blue\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = input()\nclean = text.strip()\nparts = clean.split(\",\")\nresult = \" | \".join(parts)\nprint(result)"
       }
     }
   ]

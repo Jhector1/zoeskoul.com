@@ -1,0 +1,253 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-0": {
+        "operators-and-expressions": {
+          "label": "Operators and Expressions",
+          "summary": "Combine values with arithmetic, comparison, and boolean operators.",
+          "cards": {
+            "sketch0": {
+              "title": "What expressions do"
+            },
+            "sketch1": {
+              "title": "Comparison and boolean results"
+            },
+            "sketch2": {
+              "title": "Parentheses change the order"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice with operators and expressions"
+            }
+          },
+          "projectSteps": {
+            "ci_arithmetic_output": {
+              "title": "Print an arithmetic result"
+            },
+            "ci_parentheses_output": {
+              "title": "Use parentheses in print"
+            },
+            "ci_comparison_output": {
+              "title": "Print a comparison result"
+            },
+            "ci_boolean_and_output": {
+              "title": "Print a boolean expression"
+            },
+            "ci_two_line_expression_check": {
+              "title": "Compare two grouped expressions"
+            }
+          },
+          "quiz": {
+            "sc-expression-definition": {
+              "title": "Identify an expression",
+              "prompt": "Which description best matches a Python expression?",
+              "hint": "Think about code that produces a value.",
+              "help": {
+                "concept": "An expression is a piece of Python code that Python evaluates to get a value, such as `2 + 3` or `5 > 1`.",
+                "hint_1": "Ask which choice describes something Python can evaluate into a result.",
+                "hint_2": "A full program can contain many parts, but an expression is the part that becomes a value like a number, string, or boolean."
+              },
+              "options": {
+                "a": "Code that produces a value when Python evaluates it",
+                "b": "A comment that explains what the program does",
+                "c": "A blank line between two statements",
+                "d": "Only a line that uses print()"
+              }
+            },
+            "sc-parentheses-effect": {
+              "title": "See what parentheses change",
+              "prompt": "What is the output of `print((2 + 3) * 4)`?",
+              "hint": "Evaluate the part inside the parentheses first.",
+              "help": {
+                "concept": "Parentheses in Python expressions force the grouped part to be evaluated before the surrounding operations.",
+                "hint_1": "First find the value of `2 + 3`, then use that result in the multiplication.",
+                "hint_2": "Without parentheses, multiplication would happen before addition, but this expression changes that order."
+              },
+              "options": {
+                "a": "12",
+                "b": "14",
+                "c": "20",
+                "d": "24"
+              }
+            },
+            "mc-comparison-results": {
+              "title": "Choose the true comparisons",
+              "prompt": "Which expressions evaluate to `True`? Choose all that apply.",
+              "hint": "Check each comparison carefully from left to right.",
+              "help": {
+                "concept": "Comparison operators like `>`, `==`, and `!=` produce boolean values based on whether the comparison is correct.",
+                "hint_1": "Test each expression separately and ask whether the comparison statement is actually true.",
+                "hint_2": "Remember that `==` checks equality and `!=` checks whether two values are different."
+              },
+              "options": {
+                "a": "5 > 2",
+                "b": "3 == 4",
+                "c": "7 != 8",
+                "d": "1 > 9"
+              }
+            },
+            "mc-boolean-operators": {
+              "title": "Reason about boolean operators",
+              "prompt": "Which expressions evaluate to `True`? Choose all that apply.",
+              "hint": "Use the meanings of `and`, `or`, and `not`.",
+              "help": {
+                "concept": "Boolean operators combine or change truth values: `and` needs both parts true, `or` needs at least one true, and `not` flips a boolean result.",
+                "hint_1": "Check the smaller comparisons first, then apply the boolean operator to those results.",
+                "hint_2": "For `or`, one true side is enough. For `and`, a single false side makes the whole expression false."
+              },
+              "options": {
+                "a": "(5 > 2) and (1 < 0)",
+                "b": "(5 > 2) or (1 < 0)",
+                "c": "not (3 == 3)",
+                "d": "not (4 < 2)"
+              }
+            },
+            "dr-arithmetic-order": {
+              "title": "Order the evaluation steps",
+              "prompt": "Arrange the steps for evaluating `2 + 3 * 4` in the correct order.",
+              "hint": "Multiplication happens before addition here.",
+              "help": {
+                "concept": "Python follows operator precedence, so multiplication is evaluated before addition unless parentheses change the grouping.",
+                "hint_1": "Do not add 2 and 3 first in this expression.",
+                "hint_2": "Find the product of `3 * 4`, then combine that result with 2."
+              },
+              "tokens": {
+                "t1": "Evaluate `3 * 4`",
+                "t2": "Get `12`",
+                "t3": "Add `2 + 12`",
+                "t4": "Get `14`"
+              }
+            },
+            "dr-boolean-evaluation": {
+              "title": "Order a boolean expression",
+              "prompt": "Arrange the steps for evaluating `(5 > 2) and (3 < 10)` in the correct order.",
+              "hint": "Evaluate each comparison before applying `and`.",
+              "help": {
+                "concept": "In a boolean expression with comparisons, Python first evaluates the comparison parts, then combines their boolean results with operators like `and`.",
+                "hint_1": "Find the truth value of `5 > 2` and `3 < 10` before deciding the final result.",
+                "hint_2": "If both comparison results are true, `and` gives a true final result."
+              },
+              "tokens": {
+                "t1": "Evaluate `5 > 2`",
+                "t2": "Evaluate `3 < 10`",
+                "t3": "Combine `True and True`",
+                "t4": "Get `True`"
+              }
+            },
+            "fb-equality-operator": {
+              "title": "Complete an equality check",
+              "prompt": "Choose the operator that makes this expression test whether two values are equal.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "print(4 [blank1] 4)",
+              "choices": [
+                "=",
+                "==",
+                "!=",
+                ">"
+              ]
+            },
+            "fb-boolean-or": {
+              "title": "Complete a boolean expression",
+              "prompt": "Choose the word that makes the whole expression `True`.",
+              "hint": "Focus on the missing concept rather than the exact missing term.",
+              "help": {
+                "concept": "The blank should be completed with the term that fits the job being described.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the term that best completes the meaning of the statement."
+              },
+              "template": "print((2 > 5) [blank1] (3 < 8))",
+              "choices": [
+                "and",
+                "or",
+                "not",
+                "=="
+              ]
+            },
+            "ci-arithmetic-output": {
+              "title": "Print an arithmetic result",
+              "prompt": "Write Python code that prints the result of `7 + 5 * 2`.",
+              "hint": "Use `print()` with the expression inside it.",
+              "help": {
+                "concept": "An arithmetic expression can be placed directly inside `print()`, and Python will evaluate it before showing the result.",
+                "hint_1": "You do not need to print the numbers separately; print the whole expression.",
+                "hint_2": "Multiplication happens before addition, so the output should come from evaluating the expression as written."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-parentheses-output": {
+              "title": "Use parentheses in print",
+              "prompt": "Write Python code that prints the result of `(7 + 5) * 2`.",
+              "hint": "Put the grouped expression inside `print()`.",
+              "help": {
+                "concept": "Parentheses change the order of evaluation by making Python calculate the grouped part first.",
+                "hint_1": "Add 7 and 5 before multiplying by 2.",
+                "hint_2": "Your code should show one final number in the output panel, not the expression text."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-comparison-output": {
+              "title": "Print a comparison result",
+              "prompt": "Write Python code that prints whether `9` is greater than `4`.",
+              "hint": "Use a comparison expression inside `print()`.",
+              "help": {
+                "concept": "Comparison expressions such as `>` evaluate to boolean values, which Python prints as `True` or `False`.",
+                "hint_1": "You are not printing words yourself; let Python evaluate the comparison.",
+                "hint_2": "Place the greater-than comparison directly inside `print()`."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-boolean-and-output": {
+              "title": "Print a boolean expression",
+              "prompt": "Write Python code that prints the result of `(6 > 2) and (1 < 3)`.",
+              "hint": "Both comparison parts should be inside one printed expression.",
+              "help": {
+                "concept": "The `and` operator combines two boolean results and returns `True` only when both sides are true.",
+                "hint_1": "First notice that each comparison can be evaluated to a boolean value.",
+                "hint_2": "Put the full boolean expression inside `print()` so Python shows the final truth value."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-two-line-expression-check": {
+              "title": "Compare two grouped expressions",
+              "prompt": "Write Python code that prints two lines: first the result of `2 + 3 * 4`, then the result of `(2 + 3) * 4`.",
+              "hint": "Use two separate `print()` calls.",
+              "help": {
+                "concept": "Two expressions that use the same numbers can produce different results when parentheses change the grouping.",
+                "hint_1": "The first line should use the expression without extra parentheses around `2 + 3`.",
+                "hint_2": "The second line should group `2 + 3` before multiplying, so the two outputs will be different."
+              },
+              "starterCode": "# Write Python code below\n# Print the first result\n# Print the second result"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-0": {
+        "operators-and-expressions": {
+          "sk-what-is-an-expression": {
+            "title": "What expressions do",
+            "bodyMarkdown": "An **expression** is code that produces a value. Python can evaluate expressions made from numbers, strings, and operators.\n\nFor example:\n\n```python\nprint(2 + 3)\nprint(10 - 4)\nprint(3 * 5)\nprint(8 / 2)\n```\n\nThis prints:\n\n```python\n5\n6\n15\n4.0\n```\n\nLine by line:\n- `2 + 3` adds two numbers.\n- `10 - 4` subtracts.\n- `3 * 5` multiplies.\n- `8 / 2` divides and gives `4.0`.\n\nYou can also put expressions inside `print()` to see the result right away.\n\n**Try it yourself:** Type one of these lines in the code editor, click Run, and then change one number to predict the new output before you check the output panel."
+          },
+          "sk-comparison-and-boolean": {
+            "title": "Comparison and boolean results",
+            "bodyMarkdown": "Some operators compare values. A comparison expression produces either `True` or `False`.\n\n```python\nprint(5 > 2)\nprint(3 == 4)\nprint(7 != 7)\n```\n\nOutput:\n\n```python\nTrue\nFalse\nFalse\n```\n\nStep by step:\n- `5 > 2` asks whether 5 is greater than 2.\n- `3 == 4` asks whether the two values are equal.\n- `7 != 7` asks whether the two values are different.\n\nBoolean operators combine comparison results:\n\n```python\nprint((5 > 2) and (3 < 10))\nprint((5 < 2) or (3 < 10))\nprint(not (4 == 4))\n```\n\nThese use:\n- `and` when both parts must be true\n- `or` when at least one part must be true\n- `not` to flip `True` to `False` or `False` to `True`\n\n**Your turn:** Change one comparison so the final result switches from `True` to `False`, then click Run and check the output panel."
+          },
+          "sk-parentheses-order": {
+            "title": "Parentheses change the order",
+            "bodyMarkdown": "Python follows an order when it evaluates expressions. Multiplication and division happen before addition and subtraction unless you use parentheses.\n\n```python\nprint(2 + 3 * 4)\nprint((2 + 3) * 4)\n```\n\nOutput:\n\n```python\n14\n20\n```\n\nWhy?\n- In `2 + 3 * 4`, Python does `3 * 4` first, then adds 2.\n- In `(2 + 3) * 4`, the parentheses make Python add first.\n\nParentheses are useful when you want your code to match your thinking clearly.\n\nAnother example:\n\n```python\nprint(10 - 2 * 3)\nprint((10 - 2) * 3)\n```\n\nThese give different answers because the grouping is different.\n\n**Try this:** Write both versions of an expression with and without parentheses, click Run, and compare the output panel to see how grouping changes the result.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,198 +4,226 @@
       "python-v2-0": {
         "operators-and-expressions": {
           "label": "Operators and Expressions",
-          "summary": "Combine values with arithmetic, comparison, and boolean operators.",
+          "summary": "Combine numbers and strings with arithmetic operators and parentheses.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Arithmetic Operators"
+              "title": "What expressions do"
             },
             "sketch1": {
-              "title": "Comparison Operators"
+              "title": "More arithmetic expression patterns"
             },
             "sketch2": {
-              "title": "Boolean Operators"
+              "title": "Parentheses change the order"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Personal Introduction Program"
+              "title": "Practice with operators and expressions"
             }
           },
           "projectSteps": {
-            "quiz7": {
-              "title": "Calculate the area of a rectangle."
+            "ci_arithmetic_output": {
+              "title": "Print an arithmetic result"
             },
-            "quiz8": {
-              "title": "Check if a number is even or odd."
+            "ci_parentheses_output": {
+              "title": "Use parentheses in print"
             },
-            "quiz9": {
-              "title": "Determine the maximum of two numbers."
+            "ci_comparison_output": {
+              "title": "Print a subtraction result"
+            },
+            "ci_boolean_and_output": {
+              "title": "Print a grouped arithmetic result"
+            },
+            "ci_two_line_expression_check": {
+              "title": "Compare two grouped expressions"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "What does the expression 10 / 2 evaluate to?",
-              "prompt": "Choose the correct answer.",
-              "hint": "Think about how division works.",
+            "sc-expression-definition": {
+              "title": "Identify an expression",
+              "prompt": "Which description best matches a Python expression?",
+              "hint": "Think about code that Python can evaluate into a value.",
               "help": {
-                "concept": "Division operator (/) divides the left operand by the right operand.",
-                "hint_1": "What is 10 divided by 2?",
-                "hint_2": "Remember that division gives you the quotient."
+                "concept": "An expression is a piece of Python code that Python evaluates to get a value, such as `2 + 3`, `\"Hi\"`, or `4 * 5`.",
+                "hint_1": "Ask which choice describes something Python can evaluate into a result.",
+                "hint_2": "A full program can contain many parts, but an expression is the part that becomes a value like a number or string."
               },
               "options": {
-                "a": "5",
-                "b": "2",
-                "c": "10",
-                "d": "20"
+                "a": "Code that produces a value when Python evaluates it",
+                "b": "A comment that explains what the program does",
+                "c": "A blank line between two statements",
+                "d": "Only a line that uses print()"
               }
             },
-            "quiz2": {
-              "title": "Which operator checks if two values are equal?",
-              "prompt": "Select the correct operator.",
-              "hint": "This operator returns True if both values are the same.",
+            "sc-parentheses-effect": {
+              "title": "See what parentheses change",
+              "prompt": "What is the output of `print((2 + 3) * 4)`?",
+              "hint": "Evaluate the part inside the parentheses first.",
               "help": {
-                "concept": "The equality operator checks if two values are equal.",
-                "hint_1": "It uses two equal signs.",
-                "hint_2": "Think about how you would ask if two things are the same."
+                "concept": "Parentheses in Python expressions force the grouped part to be evaluated before the surrounding operations.",
+                "hint_1": "First find the value of `2 + 3`, then use that result in the multiplication.",
+                "hint_2": "Without parentheses, multiplication would happen before addition, but this expression changes that order."
               },
               "options": {
-                "a": "==",
-                "b": "!=",
-                "c": ">",
-                "d": "<"
+                "a": "12",
+                "b": "14",
+                "c": "20",
+                "d": "24"
               }
             },
-            "quiz3": {
-              "title": "Which of the following are boolean operators?",
-              "prompt": "Select all that apply.",
-              "hint": "Read the question and connect it to the specific lesson example.",
+            "mc-comparison-results": {
+              "title": "Choose the arithmetic expressions",
+              "prompt": "Which examples are arithmetic expressions? Choose all that apply.",
+              "hint": "Arithmetic expressions use numbers with operators such as +, -, *, or /.",
               "help": {
-                "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
-                "hint_1": "Compare each option to the exact topic named in the question.",
-                "hint_2": "Remove options from unrelated Python areas, then choose the one that fits the question."
+                "concept": "Arithmetic expressions combine numbers and operators to produce a number result.",
+                "hint_1": "Look for examples that Python can calculate as number expressions.",
+                "hint_2": "Do not choose plain words or full sentences."
               },
               "options": {
-                "a": "AND",
-                "b": "OR",
-                "c": "NOT",
-                "d": "EQUAL"
+                "a": "`3 + 4`",
+                "b": "`\"hello\"`",
+                "c": "`10 - 2 * 3`",
+                "d": "`print`"
               }
             },
-            "quiz4": {
-              "title": "Which expressions will evaluate to True?",
-              "prompt": "Select all that apply.",
-              "hint": "Evaluate each expression carefully.",
+            "mc-boolean-operators": {
+              "title": "Choose expressions that use parentheses well",
+              "prompt": "Which expressions use parentheses to make the order clearer? Choose all that apply.",
+              "hint": "Parentheses can show which part should be calculated first.",
               "help": {
-                "concept": "Comparison operators return boolean values based on the comparison.",
-                "hint_1": "What does each comparison mean?",
-                "hint_2": "Remember that '!=' means not equal."
+                "concept": "Parentheses group part of an expression so Python evaluates that group first.",
+                "hint_1": "Look for expressions with `(` and `)` around a smaller calculation.",
+                "hint_2": "Good parentheses make the intended calculation easier to read."
               },
               "options": {
-                "a": "5 > 3",
-                "b": "3 < 2",
-                "c": "10 == 10",
-                "d": "4 != 4"
+                "a": "`(2 + 3) * 4`",
+                "b": "`10 - (2 * 3)`",
+                "c": "`7 + 5`",
+                "d": "`(8 / 2) + 1`"
               }
             },
-            "quiz5": {
-              "title": "Order the arithmetic operations from highest to lowest precedence.",
-              "prompt": "Drag the operations to the correct order.",
-              "hint": "Think about the logical order of the steps.",
+            "dr-arithmetic-order": {
+              "title": "Order the evaluation steps",
+              "prompt": "Arrange the steps for evaluating `2 + 3 * 4` in the correct order.",
+              "hint": "Multiplication happens before addition here.",
               "help": {
-                "concept": "This task is about understanding the sequence behind order the arithmetic operations from highest to lowest precedence..",
-                "hint_1": "Find the step that must happen first before the others make sense.",
-                "hint_2": "Check which action depends on a previous step already being completed."
+                "concept": "Python follows operator precedence, so multiplication is evaluated before addition unless parentheses change the grouping.",
+                "hint_1": "Do not add 2 and 3 first in this expression.",
+                "hint_2": "Find the product of `3 * 4`, then combine that result with 2."
               },
               "tokens": {
-                "t1": "Addition (+)",
-                "t2": "Multiplication (*)",
-                "t3": "Subtraction (-)",
-                "t4": "Division (/)"
+                "t1": "Evaluate `3 * 4`",
+                "t2": "Get `12`",
+                "t3": "Add `2 + 12`",
+                "t4": "Get `14`"
               }
             },
-            "quiz6": {
-              "title": "Order the comparison operators from least to most strict.",
-              "prompt": "Drag the operators to the correct order.",
-              "hint": "Think about the logical order of the steps.",
+            "dr-boolean-evaluation": {
+              "title": "Order a grouped arithmetic expression",
+              "prompt": "Arrange the steps for evaluating `(5 + 2) * 3` in the correct order.",
+              "hint": "Evaluate the expression inside the parentheses first.",
               "help": {
-                "concept": "This task is about understanding the sequence behind order the comparison operators from least to most strict..",
-                "hint_1": "Find the step that must happen first before the others make sense.",
-                "hint_2": "Check which action depends on a previous step already being completed."
+                "concept": "Python evaluates parentheses before multiplying, adding, or subtracting outside the group.",
+                "hint_1": "Start with the expression inside the parentheses.",
+                "hint_2": "After the parentheses become one value, multiply that value by 3."
               },
               "tokens": {
-                "t1": "Equal (==)",
-                "t2": "Not Equal (!=)",
-                "t3": "Greater Than (>)",
-                "t4": "Less Than (<)"
+                "t1": "Evaluate `5 + 2`",
+                "t2": "Get `7`",
+                "t3": "Multiply `7 * 3`",
+                "t4": "Get `21`"
               }
             },
-            "quiz7": {
-              "title": "Calculate the area of a rectangle.",
-              "prompt": "Write a program that calculates the area of a rectangle with width 5 and height 10.",
-              "hint": "Read the coding task and identify what the program should print.",
+            "fb-equality-operator": {
+              "title": "Complete an addition expression",
+              "prompt": "Choose the operator that adds the two numbers.",
+              "hint": "Use the arithmetic symbol for addition.",
               "help": {
-                "concept": "This coding exercise checks whether the program produces the requested output.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "The `+` operator adds numbers in Python.",
+                "hint_1": "Read the expression as a math sentence.",
+                "hint_2": "Choose the symbol that means add."
               },
-              "starterCode": "width = 5\nheight = 10\n# Calculate area here"
-            },
-            "quiz8": {
-              "title": "Check if a number is even or odd.",
-              "prompt": "Write a program that checks if a number is even or odd.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "number = int(input())\n# Check if the number is even or odd here"
-            },
-            "quiz9": {
-              "title": "Determine the maximum of two numbers.",
-              "prompt": "Write a program that finds the maximum of two numbers.",
-              "hint": "Read the coding task and identify what the program should print.",
-              "help": {
-                "concept": "This coding exercise checks whether the program produces the requested output.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "num1 = 10\nnum2 = 20\n# Find the maximum here"
-            },
-            "policy_fill_blank_choice_1": {
-              "title": "Choose the missing Python keyword",
-              "prompt": "Fill in the missing Python keyword so the statement is valid.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
-              },
-              "template": "___ value > 0:\n    print('positive')",
+              "template": "print(4 [blank1] 4)",
               "choices": [
-                "if",
-                "for",
-                "def",
-                "class"
+                "+",
+                "-",
+                "*",
+                "/"
               ]
             },
-            "policy_fill_blank_choice_2": {
-              "title": "Choose the missing Python keyword",
-              "prompt": "Fill in the missing Python keyword so the statement is valid.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+            "fb-boolean-or": {
+              "title": "Complete a multiplication expression",
+              "prompt": "Choose the operator that multiplies the two numbers.",
+              "hint": "Use the Python arithmetic symbol for multiplication.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "The `*` operator multiplies numbers in Python.",
+                "hint_1": "Think of the symbol Python uses instead of the multiplication sign ×.",
+                "hint_2": "Choose the operator that makes `3 times 4`."
               },
-              "template": "___ value > 0:\n    print('positive')",
+              "template": "print(3 [blank1] 4)",
               "choices": [
-                "if",
-                "for",
-                "def",
-                "class"
+                "+",
+                "-",
+                "*",
+                "/"
               ]
+            },
+            "ci-arithmetic-output": {
+              "title": "Print an arithmetic result",
+              "prompt": "Write Python code that prints the result of `7 + 5 * 2`.",
+              "hint": "Use `print()` with the expression inside it.",
+              "help": {
+                "concept": "An arithmetic expression can be placed directly inside `print()`, and Python will evaluate it before showing the result.",
+                "hint_1": "You do not need to print the numbers separately; print the whole expression.",
+                "hint_2": "Multiplication happens before addition, so the output should come from evaluating the expression as written."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-parentheses-output": {
+              "title": "Use parentheses in print",
+              "prompt": "Write Python code that prints the result of `(7 + 5) * 2`.",
+              "hint": "Put the grouped expression inside `print()`.",
+              "help": {
+                "concept": "Parentheses change the order of evaluation by making Python calculate the grouped part first.",
+                "hint_1": "Add 7 and 5 before multiplying by 2.",
+                "hint_2": "Your code should show one final number in the output panel, not the expression text."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-comparison-output": {
+              "title": "Print a subtraction result",
+              "prompt": "Write Python code that prints the result of `9 - 4`.",
+              "hint": "Put the arithmetic expression inside `print()`.",
+              "help": {
+                "concept": "Python can calculate an arithmetic expression and display its value in the output panel.",
+                "hint_1": "You are not printing words yourself; let Python evaluate the arithmetic expression.",
+                "hint_2": "The output should be one number."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-boolean-and-output": {
+              "title": "Print a grouped arithmetic result",
+              "prompt": "Write Python code that prints the result of `(6 + 2) * 3`.",
+              "hint": "Use parentheses so Python adds before multiplying.",
+              "help": {
+                "concept": "Parentheses let you group an arithmetic expression so that part is evaluated first.",
+                "hint_1": "First notice which arithmetic part should be evaluated inside parentheses.",
+                "hint_2": "The output should be one number."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-two-line-expression-check": {
+              "title": "Compare two grouped expressions",
+              "prompt": "Write Python code that prints two lines: first the result of `2 + 3 * 4`, then the result of `(2 + 3) * 4`.",
+              "hint": "Use two separate `print()` calls.",
+              "help": {
+                "concept": "Two expressions that use the same numbers can produce different results when parentheses change the grouping.",
+                "hint_1": "The first line should use the expression without extra parentheses around `2 + 3`.",
+                "hint_2": "The second line should group `2 + 3` before multiplying, so the two outputs will be different."
+              },
+              "starterCode": "# Write Python code below\n# Print the first result\n# Print the second result"
             }
           }
         }
@@ -206,17 +234,17 @@
     "python-v2": {
       "python-v2-0": {
         "operators-and-expressions": {
-          "sketch1": {
-            "title": "Understanding Arithmetic Operators",
-            "bodyMarkdown": "Arithmetic operators are used to perform mathematical operations. The most common arithmetic operators are addition (+), subtraction (-), multiplication (*), and division (/). For example, if you want to add two numbers, you can write:\n\n```python\nresult = 5 + 3\nprint(result)  # This will output 8\n```\n\nTry it yourself: Change the numbers and see what the output is!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "sk-what-is-an-expression": {
+            "title": "What expressions do",
+            "bodyMarkdown": "An **expression** is code that produces a value. Python can evaluate expressions made from numbers, strings, and operators.\n\nFor example:\n\n```python\nprint(2 + 3)\nprint(10 - 4)\nprint(3 * 5)\nprint(8 / 2)\n```\n\nThis prints:\n\n```python\n5\n6\n15\n4.0\n```\n\nStep through it:\n- `2 + 3` adds two numbers.\n- `10 - 4` subtracts.\n- `3 * 5` multiplies.\n- `8 / 2` divides and gives `4.0`.\n\nYou can also put expressions inside `print()` to see the result right away.\n\n**Your turn:** Type one of these lines in the code editor, click Run, and then change one number to predict the new output before you check the output panel."
           },
-          "sketch2": {
-            "title": "Comparison Operators",
-            "bodyMarkdown": "Comparison operators compare two values and return a boolean result (True or False). The common comparison operators are equal (==), not equal (!=), greater than (>), and less than (<). For example:\n\n```python\nis_equal = (5 == 5)\nprint(is_equal)  # This will output True\n```\n\nYour turn: Try comparing different values!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "sk-comparison-and-boolean": {
+            "title": "More arithmetic expression patterns",
+            "bodyMarkdown": "Python can combine arithmetic operators in the same expression. Parentheses help make the order easier to see.\n\n```python\nprint(5 + 2 * 3)\nprint((5 + 2) * 3)\nprint(10 - 4 / 2)\n```\n\nOutput:\n\n```text\n11\n21\n8.0\n```\n\nWalk through it:\n- `5 + 2 * 3` multiplies first, then adds.\n- `(5 + 2) * 3` adds inside the parentheses first.\n- `10 - 4 / 2` divides first, then subtracts.\n\n**Predict before running:** What do you think `print((8 - 3) * 2)` will show? Type it in the editor, click **Run**, and check the output panel."
           },
-          "sketch3": {
-            "title": "Boolean Operators",
-            "bodyMarkdown": "Boolean operators are used to combine conditional statements. The main boolean operators are AND, OR, and NOT. For example:\n\n```python\nis_true = (5 > 3) and (3 < 10)\nprint(is_true)  # This will output True\n```\n\nTry this: Change the conditions and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "sk-parentheses-order": {
+            "title": "Parentheses change the order",
+            "bodyMarkdown": "Python follows an order when it evaluates expressions. Multiplication and division happen before addition and subtraction unless you use parentheses.\n\n```python\nprint(2 + 3 * 4)\nprint((2 + 3) * 4)\n```\n\nOutput:\n\n```python\n14\n20\n```\n\nWhy?\n- In `2 + 3 * 4`, Python does `3 * 4` first, then adds 2.\n- In `(2 + 3) * 4`, the parentheses make Python add first.\n\nParentheses are useful when you want your code to match your thinking clearly.\n\nAnother example:\n\n```python\nprint(10 - 2 * 3)\nprint((10 - 2) * 3)\n```\n\nThese give different answers because the grouping is different.\n\n**Practice this:** Write both versions of an expression with and without parentheses, click Run, and compare the output panel to see how grouping changes the result.\n\nStep through it: read each statement from top to bottom. Notice which names are created, which values are passed into built-in tools, and what output the code is meant to show."
           }
         }
       }

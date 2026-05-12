@@ -70,8 +70,8 @@
         "quizVisibleDefault": 4,
         "quizVisibleMax": 6,
         "projectCodeInputMin": 3,
-        "projectCodeInputTarget": 3,
-        "projectCodeInputMax": 5,
+        "projectCodeInputTarget": 5,
+        "projectCodeInputMax": 7,
         "maxAttempts": null
       }
     },    "projectPolicy": {

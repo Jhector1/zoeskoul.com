@@ -1,157 +1,313 @@
 {
   "title": "Naming and Assigning Variables",
-  "summary": "Use clear variable names and understand reassignment.",
+  "summary": "Use clear variable names, assign values with =, and update variables by reassignment.",
   "minutes": 22,
   "sketchBlocks": [
     {
-      "id": "1",
-      "title": "Understanding Variables",
-      "bodyMarkdown": "In Python, a variable is a name that refers to a value. For example, if you write `age = 25`, the variable `age` now holds the value `25`. You can change the value of `age` later by reassigning it, like `age = 30`. \n\n**Example:**\n```python\nage = 25\nprint(age)  # Output: 25\nage = 30\nprint(age)  # Output: 30\n```\n\n**Your turn:** Try creating a variable for your favorite number and print it."
+      "id": "sk1",
+      "title": "What a variable does",
+      "bodyMarkdown": "A variable is a name that stores a value so your program can use it later. In Python, you create a variable with `=`.\n\n```python\nscore = 10\nprint(score)\n```\n\nThis prints `10` in the output panel.\n\nStep by step:\n- `score` is the variable name.\n- `=` assigns the value on the right to the name on the left.\n- `print(score)` shows the stored value.\n\nWorked example:\n\n```python\ncity = \"Lagos\"\nprint(city)\n```\n\nHere, the variable `city` stores the text `\"Lagos\"`.\n\nTry it yourself: change `city` to your own city, click Run, and check the output panel."
     },
     {
-      "id": "2",
-      "title": "Variable Naming Conventions",
-      "bodyMarkdown": "When naming variables, it's important to choose names that are descriptive. For example, instead of using `x`, use `favorite_color`. This makes your code easier to read. \n\n**Example:**\n```python\nfavorite_color = 'blue'\nprint(favorite_color)  # Output: blue\n```\n\n**Try this:** Create a variable for your name and print it."
+      "id": "sk2",
+      "title": "Choose clear variable names",
+      "bodyMarkdown": "Good variable names help you understand code quickly. A clear name tells you what the value means.\n\n```python\nage = 14\nfavorite_color = \"blue\"\n```\n\nThese names are clearer than short names like `a` or `x`.\n\nA few beginner-friendly rules:\n- Use letters, numbers, and underscores.\n- Start with a letter or underscore, not a number.\n- Use names that describe the value.\n- Spaces are not allowed in variable names.\n\nWorked example:\n\n```python\nstudent_name = \"Mina\"\nprint(student_name)\n```\n\n`student_name` is easier to understand than just `s`.\n\nYour turn: rename `student_name` to another clear name such as `player_name` or `pet_name`, then click Run."
+    },
+    {
+      "id": "sk3",
+      "title": "Reassignment updates a variable",
+      "bodyMarkdown": "A variable can change. When you assign a new value to the same name, the old value is replaced.\n\n```python\nlevel = 1\nprint(level)\nlevel = 2\nprint(level)\n```\n\nLine by line:\n- `level = 1` stores `1`.\n- `print(level)` shows `1`.\n- `level = 2` updates the same variable.\n- `print(level)` now shows `2`.\n\nWorked example:\n\n```python\nname = \"Ava\"\nprint(name)\nname = \"Noah\"\nprint(name)\n```\n\nThe second assignment changes the stored value from `\"Ava\"` to `\"Noah\"`.\n\nTry this: change the second value to your own name and check how the output changes."
     }
   ],
   "quizDraft": [
     {
       "id": "q1",
       "kind": "single_choice",
-      "title": "What is a variable?",
-      "prompt": "A variable is a name that refers to a:",
+      "title": "What assignment does",
+      "prompt": "What does `score = 10` do in Python?",
+      "hint": "Look at what `=` means when creating or updating a variable.",
+      "help": {
+        "concept": "Assignment stores a value in a variable name so the program can use that value later.",
+        "hint_1": "The name is on the left and the value is on the right.",
+        "hint_2": "This line does not print anything by itself; it stores `10` under a name."
+      },
       "options": [
-        "Function",
-        "Value",
-        "Loop",
-        "Condition"
+        "It stores the value 10 in the variable `score`.",
+        "It prints 10 to the output panel.",
+        "It compares `score` and 10 to see if they are equal.",
+        "It turns `score` into a string."
       ],
       "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Think about what a variable holds.",
-      "help": {
-        "concept": "A variable is used to store data values.",
-        "hint_1": "Variables can hold different types of data.",
-        "hint_2": "Consider what you can assign to a variable."
-      }
+        "a"
+      ]
     },
     {
       "id": "q2",
       "kind": "single_choice",
-      "title": "Which of the following is a valid variable name?",
-      "prompt": "Choose the correct variable name:",
+      "title": "Best variable name",
+      "prompt": "Which variable name is the clearest choice for storing a person's age?",
+      "hint": "Pick the name that tells you what the value means.",
+      "help": {
+        "concept": "Clear variable names make code easier to read because the name describes the stored value.",
+        "hint_1": "A descriptive word is better than a single letter when both are allowed.",
+        "hint_2": "Choose the option that directly says what number is being stored."
+      },
       "options": [
-        "1st_variable",
-        "first variable",
-        "first_variable",
-        "first-variable"
+        "x",
+        "n",
+        "age",
+        "thing"
       ],
       "correctOptionIds": [
         "c"
-      ],
-      "hint": "Variable names cannot start with a number.",
-      "help": {
-        "concept": "Variable names must start with a letter or underscore and can contain letters, numbers, and underscores.",
-        "hint_1": "Spaces are not allowed in variable names.",
-        "hint_2": "Dashes are not valid in variable names."
-      }
+      ]
     },
     {
       "id": "q3",
       "kind": "multi_choice",
-      "title": "Which of the following are valid variable names?",
-      "prompt": "Select all valid variable names:",
+      "title": "Valid Python variable names",
+      "prompt": "Choose all names that are valid Python variable names.",
+      "hint": "Check for spaces and whether the name starts with a number.",
+      "help": {
+        "concept": "Python variable names can use letters, numbers, and underscores, but they cannot contain spaces or begin with a digit.",
+        "hint_1": "An underscore is allowed in a name.",
+        "hint_2": "Reject any option with a space or one that starts with `2`."
+      },
       "options": [
-        "my_variable",
-        "my-variable",
-        "myVariable",
-        "2ndVariable"
+        "user_name",
+        "2score",
+        "favorite color",
+        "level1"
       ],
       "correctOptionIds": [
         "a",
-        "c"
-      ],
-      "hint": "Consider the rules for naming variables.",
-      "help": {
-        "concept": "Variable names can include letters, numbers, and underscores but cannot start with a number.",
-        "hint_1": "Look for names that follow the naming conventions.",
-        "hint_2": "Spaces and special characters are not allowed."
-      }
+        "d"
+      ]
     },
     {
       "id": "q4",
-      "kind": "drag_reorder",
-      "title": "Order the steps to create a variable.",
-      "prompt": "Arrange the steps to create a variable in Python.",
-      "tokens": [
-        "Choose a name for the variable",
-        "Assign a value to the variable",
-        "Use the variable in your code"
+      "kind": "multi_choice",
+      "title": "Effects of reassignment",
+      "prompt": "Choose all true statements about this code:\n\n```python\npoints = 5\npoints = 8\n```",
+      "hint": "Think about what value the variable has after the second assignment.",
+      "help": {
+        "concept": "Reassignment replaces the previous value stored in the same variable name.",
+        "hint_1": "After the second line, the variable keeps the newer value, not both values.",
+        "hint_2": "One statement should mention replacement, and another should mention the final stored value."
+      },
+      "options": [
+        "`points` ends with the value 8.",
+        "The value 5 is replaced by the new assignment.",
+        "`points` stores both 5 and 8 at the same time.",
+        "The second line prints 8 automatically."
       ],
-      "correctOrder": [
-        0,
-        1,
-        2
+      "correctOptionIds": [
+        "a",
+        "b"
       ]
     },
     {
       "id": "q5",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the blank to create a variable.",
-      "prompt": "To create a variable named `age`, you write: `age = [blank1]`.",
-      "template": "age = [blank1]",
-      "choices": [
-        "25",
-        "age",
-        "print"
+      "kind": "drag_reorder",
+      "title": "Build a simple assignment program",
+      "prompt": "Put the lines in the correct order to store a name and print it.",
+      "hint": "Assign the value before trying to print the variable.",
+      "help": {
+        "concept": "A variable must be assigned before it is used in `print`.",
+        "hint_1": "The line with the string value should come before the line that displays the variable.",
+        "hint_2": "Start with the assignment, then use `print(...)`."
+      },
+      "tokens": [
+        "print(name)",
+        "name = \"Lina\""
       ],
-      "correctValue": "25"
+      "correctOrder": [
+        "name = \"Lina\"",
+        "print(name)"
+      ]
     },
     {
       "id": "q6",
-      "kind": "fill_blank_choice",
-      "title": "Complete the variable assignment.",
-      "prompt": "To assign your favorite color to a variable, you write: `favorite_color = [blank1]`.",
-      "template": "favorite_color = [blank1]",
-      "choices": [
-        "'blue'",
-        "'color'",
-        "'favorite'"
+      "kind": "drag_reorder",
+      "title": "Order a reassignment example",
+      "prompt": "Arrange the lines so the program prints `1` and then `2`.",
+      "hint": "The first print must happen before the variable is updated.",
+      "help": {
+        "concept": "To show both the old and new values, print once before reassignment and once after reassignment.",
+        "hint_1": "The update to `count` should happen between the two print lines.",
+        "hint_2": "Start by storing `1`, then print, then change the value, then print again."
+      },
+      "tokens": [
+        "print(count)",
+        "count = 2",
+        "count = 1",
+        "print(count)"
       ],
-      "correctValue": "'blue'"
+      "correctOrder": [
+        "count = 1",
+        "print(count)",
+        "count = 2",
+        "print(count)"
+      ]
     },
     {
       "id": "q7",
-      "kind": "code_input",
-      "title": "Create and print a variable.",
-      "prompt": "Write Python code to create a variable named `name` and assign it your name. Then print the variable.",
-      "starterCode": "name = ''\nprint(name)",
-      "solutionCode": "name = 'Your Name'\nprint(name)"
+      "kind": "fill_blank_choice",
+      "title": "Complete the variable name",
+      "prompt": "Choose the best word to complete the assignment.",
+      "hint": "Pick the name that matches the value `16`.",
+      "help": {
+        "concept": "A clear variable name should describe the meaning of the value being stored.",
+        "hint_1": "The value looks like an age, so the name should describe that idea.",
+        "hint_2": "Choose the option that would make the line easy to read for another person."
+      },
+      "template": "[blank1] = 16",
+      "choices": [
+        "print",
+        "age",
+        "hello world",
+        "=="
+      ],
+      "correctValue": "age"
     },
     {
       "id": "q8",
-      "kind": "code_input",
-      "title": "Reassign a variable.",
-      "prompt": "Write Python code to create a variable `score`, assign it a value of `10`, then reassign it to `20` and print it.",
-      "starterCode": "score = 10\n# Reassign the score here\nprint(score)",
-      "solutionCode": "score = 10\nscore = 20\nprint(score)"
+      "kind": "fill_blank_choice",
+      "title": "Complete the reassignment",
+      "prompt": "Fill the blank so the variable is updated to a new number.",
+      "hint": "The blank should be the new value on the right side of `=`.",
+      "help": {
+        "concept": "Reassignment changes a variable by giving it a new value with `=`.",
+        "hint_1": "The variable name is already provided, so only the replacement value is missing.",
+        "hint_2": "Choose the number that would become the new stored value after the line runs."
+      },
+      "template": "score = [blank1]",
+      "choices": [
+        "score",
+        "7",
+        "print",
+        "\"score\""
+      ],
+      "correctValue": "7"
     },
     {
       "id": "q9",
       "kind": "code_input",
-      "title": "Using f-strings for output.",
-      "prompt": "Create a variable `name` with your name and use an f-string to print 'Hello, {name}!'",
-      "starterCode": "name = ''\n# Use an f-string to print here\n",
-      "solutionCode": "name = 'Your Name'\nprint(f'Hello, {name}!')"
+      "title": "Store and print one value",
+      "prompt": "Write Python code that stores the number `12` in a variable named `age` and prints the value.\n\nType code in the code editor, click Run, and check the output panel.",
+      "hint": "Assign `12` to `age`, then print the variable.",
+      "help": {
+        "concept": "A basic assignment uses `name = value`, and `print(name)` displays the stored value.",
+        "hint_1": "You need one assignment line and one print line.",
+        "hint_2": "The variable name must be `age`, and the printed result should come from the variable."
+      },
+      "starterCode": "# Store 12 in a variable named age\n# Then print the variable\n",
+      "solutionCode": "age = 12\nprint(age)\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "12\n"
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "kind": "code_input",
+      "title": "Store text in a clear variable",
+      "prompt": "Write Python code that stores the text `\"Maya\"` in a variable named `student_name` and prints it.\n\nType code in the code editor, click Run, and check the output panel.",
+      "hint": "Use quotes for the text value and print the variable name.",
+      "help": {
+        "concept": "String values need quotes, and descriptive variable names make code easier to understand.",
+        "hint_1": "The variable name should be `student_name`, not a shorter name.",
+        "hint_2": "Assign the text first, then use `print(...)` to show it."
+      },
+      "starterCode": "# Store the name in student_name\n# Print the variable\n",
+      "solutionCode": "student_name = \"Maya\"\nprint(student_name)\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Maya\n"
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "kind": "code_input",
+      "title": "Update a variable",
+      "prompt": "Write Python code that:\n1. stores `3` in a variable named `level`\n2. changes `level` to `4`\n3. prints `level`\n\nType code in the code editor, click Run, and check the output panel.",
+      "hint": "Use the same variable name twice, then print after the update.",
+      "help": {
+        "concept": "Reassignment means giving a new value to an existing variable name.",
+        "hint_1": "The first value is only temporary because the second assignment replaces it.",
+        "hint_2": "Print after the second assignment so the output shows the updated value."
+      },
+      "starterCode": "# Create level\n# Update level\n# Print level\n",
+      "solutionCode": "level = 3\nlevel = 4\nprint(level)\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "4\n"
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "kind": "code_input",
+      "title": "Read input into a variable",
+      "prompt": "Write Python code that reads one line of input into a variable named `city` and then prints it.\n\nExample: if the input is `Tokyo`, the output should be `Tokyo`.\n\nType code in the code editor, click Run, and check the output panel.",
+      "hint": "Use `input()` to read the text, store it in `city`, then print `city`.",
+      "help": {
+        "concept": "Input can be stored in a variable and reused later in the program.",
+        "hint_1": "The value from `input()` should go on the right side of `=`.",
+        "hint_2": "After storing the input in `city`, display that same variable."
+      },
+      "starterCode": "# Read one line into city\n# Print city\n",
+      "solutionCode": "city = input()\nprint(city)\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "Tokyo\n",
+          "stdout": "Tokyo\n"
+        },
+        {
+          "stdin": "Nairobi\n",
+          "stdout": "Nairobi\n"
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "kind": "code_input",
+      "title": "Print before and after reassignment",
+      "prompt": "Write Python code that stores `\"red\"` in a variable named `color`, prints it, changes `color` to `\"green\"`, and prints it again.\n\nType code in the code editor, click Run, and check the output panel.",
+      "hint": "Print once before changing the variable and once after changing it.",
+      "help": {
+        "concept": "Printing before and after reassignment shows how a variable's value changes over time.",
+        "hint_1": "The first printed value should come from the original assignment.",
+        "hint_2": "After updating `color`, print the same variable name again to show the new value."
+      },
+      "starterCode": "# Store the first color\n# Print it\n# Change the color\n# Print it again\n",
+      "solutionCode": "color = \"red\"\nprint(color)\ncolor = \"green\"\nprint(color)\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "red\ngreen\n"
+        }
+      ]
     }
   ],
   "projectDraft": {
-    "title": "Profile Card Generator",
+    "title": "Variable Practice Project",
     "stepIds": [
-      "q7",
-      "q8",
-      "q9"
+      "q9",
+      "q10",
+      "q11",
+      "q12",
+      "q13"
     ]
   }
 }

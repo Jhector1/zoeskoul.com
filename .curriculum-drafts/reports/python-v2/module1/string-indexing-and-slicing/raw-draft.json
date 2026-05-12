@@ -4,195 +4,327 @@
   "minutes": 25,
   "sketchBlocks": [
     {
-      "id": "sketch1",
-      "title": "Understanding String Indexing",
-      "bodyMarkdown": "In Python, strings are sequences of characters. Each character in a string has an index, starting from 0. For example, in the string `\"Hello\"`, the character `H` is at index 0, `e` is at index 1, and so on. You can access individual characters using their index:\n\n```python\nmy_string = \"Hello\"\nprint(my_string[0])  # Output: H\n```\n\nTry it yourself: What does `my_string[1]` output?"
+      "id": "sketch_index_basics",
+      "title": "Indexing gets one character",
+      "bodyMarkdown": "A string is a sequence of characters, and each character has a position called an **index**. In Python, indexing starts at `0`, not `1`.\n\n```python\nword = \"python\"\nprint(word[0])\nprint(word[3])\n```\n\nOutput:\n\n```python\np\nh\n```\n\nStep by step:\n- `word[0]` means the character at index `0`, which is `p`\n- `word[3]` means the character at index `3`, which is `h`\n\nYou can also use negative indexes to count from the end:\n\n```python\nword = \"python\"\nprint(word[-1])\nprint(word[-2])\n```\n\nThis prints `n` and then `o`.\n\nTry it yourself: Type the example in the code editor, click Run, and then change the index values to see which characters appear in the output panel."
     },
     {
-      "id": "sketch2",
-      "title": "Using String Slicing",
-      "bodyMarkdown": "Slicing allows you to access a substring by specifying a start and end index. The syntax is `string[start:end]`, where `start` is inclusive and `end` is exclusive. For example:\n\n```python\nmy_string = \"Hello, World!\"\nprint(my_string[0:5])  # Output: Hello\n```\n\nThis prints the characters from index 0 to 4. Try this: What does `my_string[7:12]` return?"
+      "id": "sketch_slice_basics",
+      "title": "Slicing gets part of a string",
+      "bodyMarkdown": "A **slice** gives you a substring, which is a smaller part of the original string. The basic form is `text[start:end]`.\n\nPython includes the `start` index, but stops **before** the `end` index.\n\n```python\ntext = \"banana\"\nprint(text[1:4])\n```\n\nOutput:\n\n```python\nana\n```\n\nWhy?\n- index `1` is `a`\n- index `2` is `n`\n- index `3` is `a`\n- index `4` is not included\n\nSo `text[1:4]` becomes `ana`.\n\nYou can leave out one side:\n\n```python\ntext = \"banana\"\nprint(text[:3])\nprint(text[3:])\n```\n\nStep by step:\n- `text[:3]` starts at the beginning and stops before index `3`, so it gives `ban`\n- `text[3:]` starts at index `3` and goes to the end, so it gives `ana`\n\nYour turn: Change `\"banana\"` to your own word and try different slice ranges like `[0:2]`, `[2:5]`, and `[:4]`."
+    },
+    {
+      "id": "sketch_common_patterns",
+      "title": "Common patterns with indexes and slices",
+      "bodyMarkdown": "Indexing and slicing are useful for many beginner tasks, like getting the first letter, the last letter, or everything except one part.\n\n```python\nname = \"Mila\"\nprint(name[0])\nprint(name[-1])\nprint(name[1:3])\n```\n\nOutput:\n\n```python\nM\na\nil\n```\n\nLine by line:\n- `name[0]` gets the first character\n- `name[-1]` gets the last character\n- `name[1:3]` gets characters from index `1` up to, but not including, index `3`\n\nA worked example:\nIf `code = \"ABCD1234\"`, then:\n- `code[:4]` is `ABCD`\n- `code[4:]` is `1234`\n- `code[-2:]` is `34`\n\nBe careful: if you use a single index that does not exist, Python gives an error. Slices are more forgiving, but indexes must point to a real character.\n\nTry this: Write Python code that stores a word in a variable, prints the first character, prints the last character, and then prints the middle part with a slice."
     }
   ],
   "quizDraft": [
     {
-      "id": "quiz1",
+      "id": "sc_index_zero_start",
       "kind": "single_choice",
-      "title": "What is the index of the first character in a string?",
-      "prompt": "In Python, string indexing starts at which number?",
+      "title": "Where does string indexing start?",
+      "prompt": "In Python, what index gives the first character of a string?",
+      "hint": "Python counts string positions starting from zero.",
+      "help": {
+        "concept": "A string index is the position of one character. Python uses zero-based indexing, so the first character is at position 0.",
+        "hint_1": "Think about `word[0]` and what character it returns.",
+        "hint_2": "The first character is not at 1 in Python; it is at the very first numeric position."
+      },
       "options": [
-        "1",
         "0",
-        "2",
-        "None of the above"
+        "1",
+        "-1",
+        "first"
       ],
       "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Think about how counting starts in programming.",
-      "help": {
-        "concept": "String indexing in Python starts at 0.",
-        "hint_1": "The first character is accessed with index 0.",
-        "hint_2": "Remember, counting in programming often starts from zero."
-      }
+        "a"
+      ]
     },
     {
-      "id": "quiz2",
+      "id": "sc_slice_end_rule",
       "kind": "single_choice",
-      "title": "What does slicing a string do?",
-      "prompt": "What is the purpose of string slicing in Python?",
+      "title": "How slice end positions work",
+      "prompt": "What does `text[1:4]` do in Python?",
+      "hint": "A slice includes the start index and stops before the end index.",
+      "help": {
+        "concept": "In a slice like `text[start:end]`, Python includes the character at `start` but does not include the character at `end`.",
+        "hint_1": "Check whether index 4 is part of the result or just the stopping point.",
+        "hint_2": "The slice begins at index 1 and collects characters up to, but not including, index 4."
+      },
       "options": [
-        "To change the string",
-        "To access a part of the string",
-        "To count characters",
-        "To concatenate strings"
+        "It gets only the character at index 4",
+        "It gets characters from index 1 through index 4, including both",
+        "It gets characters from index 1 up to, but not including, index 4",
+        "It removes characters from index 1 to index 4"
       ],
       "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Consider how you can extract a portion of a string.",
-      "help": {
-        "concept": "Slicing allows you to extract a substring from a string.",
-        "hint_1": "It involves specifying a start and end index.",
-        "hint_2": "Think about how you can get a substring from a larger string."
-      }
+        "c"
+      ]
     },
     {
-      "id": "quiz3",
+      "id": "mc_negative_and_open_slices",
       "kind": "multi_choice",
-      "title": "Which of the following are valid ways to slice a string?",
-      "prompt": "Select all valid slicing methods.",
+      "title": "Recognize true string facts",
+      "prompt": "Choose all true statements about Python string indexing and slicing.",
+      "hint": "Think about negative indexes and slices with a missing start or end.",
+      "help": {
+        "concept": "Negative indexes count from the end of the string, and slices can omit the start or end to mean 'from the beginning' or 'to the end.'",
+        "hint_1": "Check whether `-1` refers to the last character and whether `[:3]` starts at the beginning.",
+        "hint_2": "More than one statement is correct here; look for the ones that match Python's actual indexing and slicing behavior."
+      },
       "options": [
-        "string[1:4]",
-        "string[:3]",
-        "string[3:]",
-        "string[4:1]"
+        "`text[-1]` gets the last character",
+        "`text[:3]` starts at the beginning and stops before index 3",
+        "`text[2:]` starts at index 2 and goes to the end",
+        "`text[1:4]` includes the character at index 4"
       ],
       "correctOptionIds": [
         "a",
         "b",
         "c"
-      ],
-      "hint": "Remember that the end index is exclusive.",
-      "help": {
-        "concept": "Slicing syntax allows for various valid forms.",
-        "hint_1": "The end index must be greater than the start index for a valid slice.",
-        "hint_2": "You can omit the start or end index to slice from the beginning or to the end."
-      }
+      ]
     },
     {
-      "id": "quiz4",
+      "id": "mc_valid_examples",
+      "kind": "multi_choice",
+      "title": "Pick the expressions that return substrings",
+      "prompt": "For `word = \"planet\"`, which expressions return a substring rather than a single character? Choose all that apply.",
+      "hint": "A substring usually comes from a slice with a colon.",
+      "help": {
+        "concept": "Indexing with one number returns one character, while slicing with a colon returns a substring.",
+        "hint_1": "Look for expressions that use `:` inside the brackets.",
+        "hint_2": "Single indexes like `[0]` or `[-1]` return one character, but slice forms return a section of the string."
+      },
+      "options": [
+        "`word[0]`",
+        "`word[1:4]`",
+        "`word[:2]`",
+        "`word[-1]`"
+      ],
+      "correctOptionIds": [
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "dr_build_first_last_middle",
       "kind": "drag_reorder",
-      "title": "Order the steps to slice a string.",
-      "prompt": "Arrange the steps to correctly slice a string.",
+      "title": "Order the steps to inspect a string",
+      "prompt": "Put these steps in the correct order to write a program that stores a word, prints its first character, then prints its last character.",
+      "hint": "Start by creating the string variable before trying to index it.",
+      "help": {
+        "concept": "To use indexing, you first need a string variable. Then you can print characters using index expressions in a logical order.",
+        "hint_1": "The variable assignment must happen before either `print` line.",
+        "hint_2": "After the string exists, print index 0 first, then print index -1."
+      },
       "tokens": [
-        "Identify the string",
-        "Determine start and end indices",
-        "Use the slicing syntax",
-        "Access the substring"
+        "word = \"robot\"",
+        "print(word[0])",
+        "print(word[-1])"
       ],
       "correctOrder": [
-        "1",
-        "2",
-        "3",
-        "4"
-      ],
-      "hint": "Think about what you need to do first before slicing.",
+        "word = \"robot\"",
+        "print(word[0])",
+        "print(word[-1])"
+      ]
+    },
+    {
+      "id": "dr_slice_reasoning",
+      "kind": "drag_reorder",
+      "title": "Order the slice explanation",
+      "prompt": "Arrange the reasoning steps for `text = \"banana\"` and `text[1:4]`.",
+      "hint": "Think about where the slice starts and where it stops.",
       "help": {
-        "concept": "Slicing requires knowing the string and indices.",
-        "hint_1": "You can't slice without knowing what string you're working with.",
-        "hint_2": "The slicing syntax comes after determining indices."
-      }
-    },
-    {
-      "id": "quiz5",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the blank for string slicing.",
-      "prompt": "To slice a string from index 2 to 5, you would use `string[2:______]`.",
-      "template": "To slice a string from index 2 to 5, you would use `string[2:______]`.",
-      "choices": [
-        "5",
-        "6",
-        "4",
-        "3"
+        "concept": "A slice starts at the first index, includes each character up to the stopping point, and excludes the end index.",
+        "hint_1": "Begin with the rule for the start index, then collect the included characters, then stop before the end index.",
+        "hint_2": "The explanation should move from index 1, through the included letters, and then mention that index 4 is excluded."
+      },
+      "tokens": [
+        "Start at index 1",
+        "Include the characters at indexes 1, 2, and 3",
+        "Stop before index 4"
       ],
-      "correctValue": "5"
+      "correctOrder": [
+        "Start at index 1",
+        "Include the characters at indexes 1, 2, and 3",
+        "Stop before index 4"
+      ]
     },
     {
-      "id": "quiz6",
+      "id": "fb_first_char_index",
       "kind": "fill_blank_choice",
-      "title": "Complete the string indexing statement.",
-      "prompt": "The character at index 0 of the string `\"Python\"` is `______`.",
-      "template": "The character at index 0 of the string `\"Python\"` is `______`.",
+      "title": "Fill the index for the first character",
+      "prompt": "Complete the code so it gets the first character of a string.",
+      "hint": "The first character uses Python's starting index.",
+      "help": {
+        "concept": "Python strings use zero-based indexing, so the first character is accessed with index 0.",
+        "hint_1": "This is the smallest normal index used to access a character from the front.",
+        "hint_2": "It is not 1 and not a negative index from the end."
+      },
+      "template": "print(name[[blank1]])",
       "choices": [
-        "P",
-        "y",
-        "t",
-        "n"
+        "0",
+        "1",
+        "-1",
+        "2"
       ],
-      "correctValue": "P"
+      "correctValue": "0"
     },
     {
-      "id": "quiz7",
+      "id": "fb_open_end_slice",
+      "kind": "fill_blank_choice",
+      "title": "Fill the missing slice part",
+      "prompt": "Complete the code so it gets everything from index 2 to the end.",
+      "hint": "A slice can leave out the ending position.",
+      "help": {
+        "concept": "When you want a slice to continue to the end of the string, you leave the end side empty.",
+        "hint_1": "The code should start at index 2 and not specify a stopping index.",
+        "hint_2": "You need the slice form with a colon after 2, not a single index."
+      },
+      "template": "print(word[[blank1]])",
+      "choices": [
+        "2",
+        "2:",
+        ":2",
+        "1:2"
+      ],
+      "correctValue": "2:"
+    },
+    {
+      "id": "code_first_and_last",
       "kind": "code_input",
-      "title": "Extract a substring using slicing.",
-      "prompt": "Write a function that takes a string and returns the substring from index 1 to 4.",
-      "starterCode": "def extract_substring(s):\n    # Your code here\n",
-      "solutionCode": "def extract_substring(s):\n    return s[1:4]",
+      "title": "Print the first and last characters",
+      "prompt": "Write Python code that reads one word from input. Print the first character on one line and the last character on the next line.",
+      "hint": "Use index 0 for the first character and a negative index for the last one.",
+      "help": {
+        "concept": "A single index gets one character from a string. Index 0 gets the first character, and index -1 gets the last character.",
+        "hint_1": "Read the word into a variable, then use two separate `print` calls.",
+        "hint_2": "The second `print` should use an index that counts from the end of the string."
+      },
+      "starterCode": "word = input()\n# TODO: print the first character\n# TODO: print the last character\n",
+      "solutionCode": "word = input()\nprint(word[0])\nprint(word[-1])\n",
+      "recipeType": "fixed_tests",
       "tests": [
         {
-          "input": "Hello",
-          "output": "ell"
+          "stdin": "planet\n",
+          "stdout": "p\nt\n"
         },
         {
-          "input": "Python",
-          "output": "yth"
+          "stdin": "hi\n",
+          "stdout": "h\ni\n"
         }
       ]
     },
     {
-      "id": "quiz8",
+      "id": "code_middle_slice",
       "kind": "code_input",
-      "title": "Access a character by index.",
-      "prompt": "Write a function that returns the character at index 2 of a given string.",
-      "starterCode": "def char_at_index(s):\n    # Your code here\n",
-      "solutionCode": "def char_at_index(s):\n    return s[2]",
+      "title": "Print a slice from index 1 to 4",
+      "prompt": "Write Python code that reads one word from input and prints the slice from index 1 up to, but not including, index 4.",
+      "hint": "Use a slice with start 1 and end 4.",
+      "help": {
+        "concept": "A slice like `text[1:4]` starts at index 1 and stops before index 4, returning a substring.",
+        "hint_1": "Read the input into a variable and print one slice expression.",
+        "hint_2": "The slice should include indexes 1, 2, and 3 only."
+      },
+      "starterCode": "word = input()\n# TODO: print the required slice\n",
+      "solutionCode": "word = input()\nprint(word[1:4])\n",
+      "recipeType": "fixed_tests",
       "tests": [
         {
-          "input": "Hello",
-          "output": "l"
+          "stdin": "banana\n",
+          "stdout": "ana\n"
         },
         {
-          "input": "Python",
-          "output": "t"
+          "stdin": "planet\n",
+          "stdout": "lan\n"
         }
       ]
     },
     {
-      "id": "quiz9",
+      "id": "code_prefix_suffix",
       "kind": "code_input",
-      "title": "Slice the last three characters.",
-      "prompt": "Write a function that returns the last three characters of a string.",
-      "starterCode": "def last_three_chars(s):\n    # Your code here\n",
-      "solutionCode": "def last_three_chars(s):\n    return s[-3:]",
+      "title": "Print the first three and the rest",
+      "prompt": "Write Python code that reads one word from input. Print the first three characters on one line, then print the remaining characters on the next line.",
+      "hint": "Use one slice that stops before index 3 and another slice that starts at index 3.",
+      "help": {
+        "concept": "Open-ended slices let you take the beginning or the end of a string. `text[:3]` gets the first part, and `text[3:]` gets the rest.",
+        "hint_1": "You need two `print` calls and two different slices of the same word.",
+        "hint_2": "The first slice leaves out the start, and the second slice leaves out the end."
+      },
+      "starterCode": "word = input()\n# TODO: print the first three characters\n# TODO: print the rest of the word\n",
+      "solutionCode": "word = input()\nprint(word[:3])\nprint(word[3:])\n",
+      "recipeType": "fixed_tests",
       "tests": [
         {
-          "input": "Hello",
-          "output": "llo"
+          "stdin": "banana\n",
+          "stdout": "ban\nana\n"
         },
         {
-          "input": "Python",
-          "output": "hon"
+          "stdin": "sunset\n",
+          "stdout": "sun\nset\n"
+        }
+      ]
+    },
+    {
+      "id": "code_last_two",
+      "kind": "code_input",
+      "title": "Print the last two characters",
+      "prompt": "Write Python code that reads one word from input and prints its last two characters.",
+      "hint": "Use a slice that starts two positions from the end.",
+      "help": {
+        "concept": "Negative indexes can be used in slices. A slice starting at `-2` returns the last two characters of a string.",
+        "hint_1": "Read the word, then print one slice using a negative start index.",
+        "hint_2": "The slice should begin near the end and continue to the end automatically."
+      },
+      "starterCode": "word = input()\n# TODO: print the last two characters\n",
+      "solutionCode": "word = input()\nprint(word[-2:])\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "planet\n",
+          "stdout": "et\n"
+        },
+        {
+          "stdin": "code\n",
+          "stdout": "de\n"
+        }
+      ]
+    },
+    {
+      "id": "code_wrap_edges",
+      "kind": "code_input",
+      "title": "Build a short edge summary",
+      "prompt": "Write Python code that reads one word from input and prints a new string made from the first character, a hyphen, and the last character. For example, if the input is `robot`, the output should be `r-t`.",
+      "hint": "Get one character from the front and one from the end, then join them with `-`.",
+      "help": {
+        "concept": "You can combine indexed characters and normal string text in one `print` statement to build a new output string.",
+        "hint_1": "Read the word into a variable, then use `word[0]` and a character from the end.",
+        "hint_2": "Print three pieces together: the first character, the hyphen text, and the last character."
+      },
+      "starterCode": "word = input()\n# TODO: print first character, then '-', then last character\n",
+      "solutionCode": "word = input()\nprint(word[0] + \"-\" + word[-1])\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "robot\n",
+          "stdout": "r-t\n"
+        },
+        {
+          "stdin": "sun\n",
+          "stdout": "s-n\n"
         }
       ]
     }
   ],
   "projectDraft": {
-    "title": "Profile Card Generator",
+    "title": "String slicing practice set",
     "stepIds": [
-      "quiz7",
-      "quiz8",
-      "quiz9"
+      "code_first_and_last",
+      "code_middle_slice",
+      "code_prefix_suffix",
+      "code_last_two",
+      "code_wrap_edges"
     ]
   }
 }

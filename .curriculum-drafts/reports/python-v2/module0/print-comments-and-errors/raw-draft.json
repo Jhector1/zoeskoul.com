@@ -4,200 +4,308 @@
   "minutes": 20,
   "sketchBlocks": [
     {
-      "id": "print_statements",
-      "title": "Understanding Print Statements",
-      "bodyMarkdown": "In Python, the `print()` function is used to display output. For example:\n\n```python\nprint('Hello, World!')\n```\nThis code will output `Hello, World!` to the console. \n\n**Your turn:** Try changing the message inside the print function to see different outputs!"
+      "id": "sketch-print-basics",
+      "title": "Printing text to the output panel",
+      "bodyMarkdown": "Python uses `print()` to show output.\n\nWhen you write text, put it inside quotes so Python knows it is a string.\n\n```python\nprint(\"Hello\")\nprint(\"Welcome to Python\")\n```\n\nIf you click Run, the output panel shows:\n\n```text\nHello\nWelcome to Python\n```\n\nStep by step:\n- `print(\"Hello\")` displays `Hello`\n- `print(\"Welcome to Python\")` displays `Welcome to Python`\n- Each `print()` starts a new line in the output panel\n\nWorked example:\n\n```python\nprint(\"My name is Ava\")\nprint(\"I like coding\")\n```\n\nOutput:\n\n```text\nMy name is Ava\nI like coding\n```\n\nTry it yourself: change one of the messages, click Run, and check how the output panel changes."
     },
     {
-      "id": "comments_in_python",
-      "title": "Using Comments",
-      "bodyMarkdown": "Comments are used to explain code and are ignored by the Python interpreter. You can create a comment by using the `#` symbol. For example:\n\n```python\n# This is a comment\nprint('This will run')\n```\nThe comment will not affect the output. \n\n**Try this:** Add a comment above your print statement to describe what it does."
+      "id": "sketch-comments",
+      "title": "Comments are notes for people, not output",
+      "bodyMarkdown": "A comment starts with `#`. Python ignores comments when the program runs.\n\n```python\n# This is a comment\nprint(\"Hi\")\n# This line explains the next message\nprint(\"Bye\")\n```\n\nOutput:\n\n```text\nHi\nBye\n```\n\nLine by line:\n- `# This is a comment` is ignored by Python\n- `print(\"Hi\")` runs and shows `Hi`\n- `# This line explains the next message` is also ignored\n- `print(\"Bye\")` runs and shows `Bye`\n\nComments are useful for reminders and explanations.\n\nWorked example:\n\n```python\n# Introduce the program\nprint(\"Student profile\")\n# Show a hobby\nprint(\"Hobby: drawing\")\n```\n\nTry this: add your own comment above a `print()` line. Click Run and notice that the comment does not appear in the output panel."
     },
     {
-      "id": "syntax_errors",
-      "title": "Common Syntax Errors",
-      "bodyMarkdown": "Syntax errors occur when the code does not follow the correct format. For example:\n\n```python\nprint('Hello World'\n```\nThis code will raise a syntax error because the closing parenthesis is missing. \n\n**Try it yourself:** Write a print statement with a missing quote or parenthesis and see the error message!"
+      "id": "sketch-first-errors",
+      "title": "What a first syntax error looks like",
+      "bodyMarkdown": "A syntax error happens when Python cannot read your code because the structure is broken.\n\nA common beginner mistake is forgetting a quote or a parenthesis.\n\n```python\nprint(\"Hello\"\n```\n\nThis causes an error because the closing `)` is missing.\n\nAnother example:\n\n```python\nprint(\"Hello)\n```\n\nThis causes an error because the string is missing its closing quote.\n\nCorrect version:\n\n```python\nprint(\"Hello\")\n```\n\nStep by step:\n- `print(` starts the print call\n- `\"Hello\"` is the text to display\n- `)` closes the print call\n\nYour turn: type a correct `print()` line in the code editor, click Run, and check the output panel. Then carefully remove one quote and see how the error changes."
     }
   ],
   "quizDraft": [
     {
-      "id": "q1",
+      "id": "sc-print-purpose",
       "kind": "single_choice",
-      "title": "What does the print function do?",
-      "prompt": "Choose the correct answer.",
+      "title": "What print does",
+      "prompt": "What does `print(\"Hello\")` do in Python?",
+      "hint": "Think about what appears in the output panel after you click Run.",
+      "help": {
+        "concept": "`print()` sends a value to the output panel so you can see program output.",
+        "hint_1": "This line is not a comment and not an error. It runs and shows text.",
+        "hint_2": "Look for the choice that describes displaying `Hello` in the output panel."
+      },
       "options": [
-        "It creates a variable.",
-        "It displays output to the console.",
-        "It defines a function.",
-        "It imports a library."
+        "It displays Hello in the output panel.",
+        "It turns Hello into a comment.",
+        "It creates a syntax error every time.",
+        "It hides Hello from the program."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "sc-comment-line",
+      "kind": "single_choice",
+      "title": "Recognizing a comment",
+      "prompt": "Which line is a Python comment?",
+      "hint": "A Python comment starts with a special symbol.",
+      "help": {
+        "concept": "In Python, a comment begins with `#` and is ignored when the code runs.",
+        "hint_1": "Only one option starts with the comment marker used in Python.",
+        "hint_2": "Choose the line that begins with `#`, not a `print()` call."
+      },
+      "options": [
+        "print(\"Note\")",
+        "# Note for the reader",
+        "\"Note\"",
+        "print(# Note)"
       ],
       "correctOptionIds": [
         "b"
-      ],
-      "hint": "Think about what happens when you run a print statement.",
-      "help": {
-        "concept": "The print function is used to output data to the console.",
-        "hint_1": "Look for the option that describes displaying information.",
-        "hint_2": "Consider what you see when you run a print statement."
-      }
+      ]
     },
     {
-      "id": "q2",
-      "kind": "single_choice",
-      "title": "What symbol is used for comments in Python?",
-      "prompt": "Select the correct answer.",
-      "options": [
-        "//",
-        "#",
-        "/*",
-        "--"
-      ],
-      "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Comments are ignored by the interpreter.",
-      "help": {
-        "concept": "In Python, comments start with the # symbol.",
-        "hint_1": "Think about how you can add notes in your code.",
-        "hint_2": "Look for the symbol that is commonly used for comments."
-      }
-    },
-    {
-      "id": "q3",
+      "id": "mc-valid-print-lines",
       "kind": "multi_choice",
-      "title": "Which of the following are common syntax errors?",
-      "prompt": "Select all that apply.",
-      "options": [
-        "Missing a closing parenthesis",
-        "Using a variable without defining it",
-        "Adding a comment",
-        "Forgetting a quote in a string"
-      ],
-      "correctOptionIds": [
-        "a",
-        "b",
-        "d"
-      ],
-      "hint": "Think about what can cause your code to not run.",
+      "title": "Valid print statements",
+      "prompt": "Choose all lines that are valid Python print statements.",
+      "hint": "A valid print statement here needs `print`, parentheses, and correctly closed quotes.",
       "help": {
-        "concept": "Syntax errors occur when the code does not follow the correct format.",
-        "hint_1": "Consider what happens when you forget punctuation.",
-        "hint_2": "Look for options that describe mistakes in code structure."
-      }
-    },
-    {
-      "id": "q4",
-      "kind": "multi_choice",
-      "title": "Which statements are true about print statements?",
-      "prompt": "Select all that apply.",
+        "concept": "A basic Python `print()` call needs matching parentheses and matching quotes around text.",
+        "hint_1": "Check each option for two things: are the quotes closed, and is the closing `)` present?",
+        "hint_2": "Two options are complete and balanced; the others are missing a quote or a parenthesis."
+      },
       "options": [
-        "They can display strings.",
-        "They can only display numbers.",
-        "They can be used to debug code.",
-        "They must always be followed by a semicolon."
+        "print(\"Hi\")",
+        "print(\"Hi\"",
+        "print(\"Bye\")",
+        "print(Bye\")"
       ],
       "correctOptionIds": [
         "a",
         "c"
-      ],
-      "hint": "Consider the versatility of the print function.",
+      ]
+    },
+    {
+      "id": "mc-comments-behavior",
+      "kind": "multi_choice",
+      "title": "How comments behave",
+      "prompt": "Choose all true statements about Python comments.",
+      "hint": "Think about whether comments run as output and how they begin.",
       "help": {
-        "concept": "Print statements can show various types of data and help with debugging.",
-        "hint_1": "Think about how you can use print to check values.",
-        "hint_2": "Remember that Python does not require semicolons at the end of statements."
-      }
-    },
-    {
-      "id": "q5",
-      "kind": "drag_reorder",
-      "title": "Order the steps to fix a syntax error.",
-      "prompt": "Arrange the steps in the correct order.",
-      "tokens": [
-        "Identify the error message.",
-        "Locate the line of code with the error.",
-        "Correct the mistake.",
-        "Run the code again."
+        "concept": "Comments are notes for humans. Python ignores them during execution, and they start with `#`.",
+        "hint_1": "A comment does not print text, but it does help explain code.",
+        "hint_2": "Select the choices about starting with `#` and being ignored when the program runs."
+      },
+      "options": [
+        "They start with `#`.",
+        "They are shown in the output panel as normal output.",
+        "Python ignores them when running the program.",
+        "They must be inside `print()`."
       ],
-      "correctOrder": [
-        "1",
-        "2",
-        "3",
-        "4"
+      "correctOptionIds": [
+        "a",
+        "c"
       ]
     },
     {
-      "id": "q6",
+      "id": "dr-run-simple-program",
       "kind": "drag_reorder",
-      "title": "Arrange the components of a print statement.",
-      "prompt": "Put the parts of the print statement in the correct order.",
+      "title": "Order the program lines",
+      "prompt": "Arrange these lines to make a simple program that shows a title and then a greeting.",
+      "hint": "The comment can go first, and the title should print before the greeting.",
+      "help": {
+        "concept": "Python runs top to bottom, so the order of lines controls the order of output.",
+        "hint_1": "Place the comment before the code it describes.",
+        "hint_2": "The line printing `Title` should come before the line printing `Hello`."
+      },
       "tokens": [
-        "('Hello, World!')",
+        "# Program start",
+        "print(\"Title\")",
+        "print(\"Hello\")"
+      ],
+      "correctOrder": [
+        "# Program start",
+        "print(\"Title\")",
+        "print(\"Hello\")"
+      ]
+    },
+    {
+      "id": "dr-build-valid-print",
+      "kind": "drag_reorder",
+      "title": "Build a correct print call",
+      "prompt": "Put the tokens in order to form a valid Python line that prints Hi.",
+      "hint": "A print call starts with the function name, then `(`, then the quoted text, then `)`.",
+      "help": {
+        "concept": "A Python function call has a fixed structure: name, opening parenthesis, argument, closing parenthesis.",
+        "hint_1": "The quoted string belongs inside the parentheses.",
+        "hint_2": "Start with `print`, then open the parenthesis, place the text, and close it."
+      },
+      "tokens": [
         "print",
-        "()"
+        "(",
+        "\"Hi\"",
+        ")"
       ],
       "correctOrder": [
-        "2",
-        "3",
-        "1"
+        "print",
+        "(",
+        "\"Hi\"",
+        ")"
       ]
     },
     {
-      "id": "q7",
+      "id": "fb-comment-symbol",
       "kind": "fill_blank_choice",
-      "title": "Complete the print statement.",
-      "prompt": "Fill in the blank to create a valid print statement.",
-      "template": "print([blank1])",
-      "choices": [
-        "'Hello, World!'",
-        "Hello, World!",
-        "print('Hello, World!')"
-      ],
-      "correctValue": "'Hello, World!'"
-    },
-    {
-      "id": "q8",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the blank to comment in Python.",
-      "prompt": "Complete the line to create a comment.",
-      "template": "[blank1] This is a comment",
+      "title": "Fill the comment marker",
+      "prompt": "Complete the line so it becomes a Python comment.",
+      "hint": "Python comments begin with one symbol before the text.",
+      "help": {
+        "concept": "The `#` symbol marks the rest of the line as a comment in Python.",
+        "hint_1": "You are not looking for quotes or parentheses here.",
+        "hint_2": "Choose the symbol Python uses to start a comment."
+      },
+      "template": "[blank1] this line explains the program",
       "choices": [
         "#",
-        "//",
-        "/*"
+        "print",
+        "\"",
+        ")"
       ],
       "correctValue": "#"
     },
     {
-      "id": "code_input_1",
-      "kind": "code_input",
-      "title": "Create a simple print program",
-      "prompt": "Write a program that prints your name and age.",
-      "starterCode": "print('My name is')\nprint('My age is')",
-      "solutionCode": "print('My name is Zoe')\nprint('My age is 25')"
+      "id": "fb-complete-print-text",
+      "kind": "fill_blank_choice",
+      "title": "Complete the printed text",
+      "prompt": "Choose the value that correctly completes this print statement.",
+      "hint": "The missing part should be a quoted string, because `print()` is printing text.",
+      "help": {
+        "concept": "Text in Python must be inside quotes when used as a string literal.",
+        "hint_1": "A bare word like `Hello` is not the same as a string literal.",
+        "hint_2": "Pick the option with matching quotes around the word."
+      },
+      "template": "print([blank1])",
+      "choices": [
+        "Hello",
+        "\"Hello\"",
+        "# Hello",
+        "(Hello)"
+      ],
+      "correctValue": "\"Hello\""
     },
     {
-      "id": "code_input_2",
+      "id": "ci-print-one-line",
+      "kind": "code_input",
+      "title": "Print a welcome message",
+      "prompt": "Write Python code that prints exactly `Welcome to Python` on one line.",
+      "hint": "Use one `print()` call with the text inside quotes.",
+      "help": {
+        "concept": "To display text, use `print()` with a string literal in quotes.",
+        "hint_1": "The output should be one line only, with the exact capitalization shown.",
+        "hint_2": "Put the message inside quotes and pass it to `print()`."
+      },
+      "starterCode": "# Write Python code below\n",
+      "solutionCode": "print(\"Welcome to Python\")\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Welcome to Python\n"
+        }
+      ]
+    },
+    {
+      "id": "ci-two-lines",
+      "kind": "code_input",
+      "title": "Print two lines",
+      "prompt": "Write Python code that prints `Name: Alex` on the first line and `City: Lima` on the second line.",
+      "hint": "Use two separate `print()` statements in the correct order.",
+      "help": {
+        "concept": "Each `print()` call normally writes its output on a new line.",
+        "hint_1": "The first line should show the name label and value, and the second line should show the city label and value.",
+        "hint_2": "Write one `print()` for `Name: Alex` and another `print()` for `City: Lima`."
+      },
+      "starterCode": "# Print the two required lines\n",
+      "solutionCode": "print(\"Name: Alex\")\nprint(\"City: Lima\")\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Name: Alex\nCity: Lima\n"
+        }
+      ]
+    },
+    {
+      "id": "ci-comment-and-output",
+      "kind": "code_input",
+      "title": "Use a comment and print",
+      "prompt": "Write Python code with a comment on the first line and a `print()` statement on the second line that prints exactly `Ready`.",
+      "hint": "The comment should start with `#`, and only the `print()` line should appear in the output panel.",
+      "help": {
+        "concept": "Comments are ignored by Python, so they can appear in code without changing the printed output.",
+        "hint_1": "Your first line can be any comment, but the second line must print the required word.",
+        "hint_2": "Add a line starting with `#`, then a `print()` call that outputs `Ready`."
+      },
+      "starterCode": "# Add your comment here\n# Then write the print line below\n",
+      "solutionCode": "# This program is ready\nprint(\"Ready\")\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Ready\n"
+        }
+      ]
+    },
+    {
+      "id": "ci-fix-missing-paren",
       "kind": "code_input",
       "title": "Fix the syntax error",
-      "prompt": "Correct the following code to make it run without errors:\n\n```python\nprint('Hello World'\n```",
-      "starterCode": "print('Hello World'",
-      "solutionCode": "print('Hello World')"
+      "prompt": "The starter code has a syntax error. Fix it so the program prints exactly `Hello`.",
+      "hint": "Check whether the `print()` call is fully closed.",
+      "help": {
+        "concept": "A missing parenthesis in a function call causes a syntax error because Python cannot finish reading the statement.",
+        "hint_1": "The text is already correct; the structure around it is incomplete.",
+        "hint_2": "Make sure the `print(` line ends with the closing symbol that matches the opening `(`."
+      },
+      "starterCode": "print(\"Hello\"\n",
+      "solutionCode": "print(\"Hello\")\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Hello\n"
+        }
+      ]
     },
     {
-      "id": "code_input_3",
+      "id": "ci-personal-intro",
       "kind": "code_input",
-      "title": "Print a message with a comment",
-      "prompt": "Write a print statement and add a comment above it.",
-      "starterCode": "# This will print a greeting\nprint('Hello!')",
-      "solutionCode": "# This will print a greeting\nprint('Hello!')"
+      "title": "Build a tiny introduction",
+      "prompt": "Write Python code that prints these three lines exactly:\n`About me`\n`Name: Sam`\n`Favorite color: Green`",
+      "hint": "Use three `print()` statements, one for each line, in the same order as shown.",
+      "help": {
+        "concept": "A short multi-line program can be built from several `print()` statements that run from top to bottom.",
+        "hint_1": "The first line is a heading, and the next two lines are labeled details.",
+        "hint_2": "Write one `print()` for `About me`, then one for `Name: Sam`, then one for `Favorite color: Green`."
+      },
+      "starterCode": "# Write your introduction program below\n",
+      "solutionCode": "print(\"About me\")\nprint(\"Name: Sam\")\nprint(\"Favorite color: Green\")\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "About me\nName: Sam\nFavorite color: Green\n"
+        }
+      ]
     }
   ],
   "projectDraft": {
-    "title": "Personal Introduction Program",
+    "title": "Personal introduction printer",
     "stepIds": [
-      "code_input_1",
-      "code_input_2",
-      "code_input_3"
+      "ci-print-one-line",
+      "ci-two-lines",
+      "ci-comment-and-output",
+      "ci-fix-missing-paren",
+      "ci-personal-intro"
     ]
   }
 }

@@ -14,14 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "sketch_input_returns_text",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "sketch_convert_numbers",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.cards.sketch2.title",
+      "sketchId": "sketch_str_and_output",
       "height": 420
     },
     {
@@ -50,27 +57,45 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "policy_code_input_1",
-            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.policy_code_input_1.title",
-            "exerciseKey": "policy_code_input_1",
+            "id": "code_echo_name",
+            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.code_echo_name.title",
+            "exerciseKey": "code_echo_name",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "policy_code_input_2",
-            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.policy_code_input_2.title",
-            "exerciseKey": "policy_code_input_2",
+            "id": "code_add_two_ages",
+            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.code_add_two_ages.title",
+            "exerciseKey": "code_add_two_ages",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "policy_code_input_3",
-            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.policy_code_input_3.title",
-            "exerciseKey": "policy_code_input_3",
+            "id": "code_double_price",
+            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.code_double_price.title",
+            "exerciseKey": "code_double_price",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_age_next_year",
+            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.code_age_next_year.title",
+            "exerciseKey": "code_age_next_year",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_profile_line",
+            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.code_profile_line.title",
+            "exerciseKey": "code_profile_line",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -82,25 +107,48 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "sketch_input_returns_text",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch1.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_input_returns_text.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_input_returns_text.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sketch_convert_numbers",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch2.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_convert_numbers.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_convert_numbers.bodyMarkdown"
+    },
+    {
+      "id": "sketch_str_and_output",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_str_and_output.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_str_and_output.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc_input_type",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz1",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.sc_input_type",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "sc_best_conversion_decimal",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.sc_best_conversion_decimal",
       "optionIds": [
         "a",
         "b",
@@ -113,11 +161,11 @@
       }
     },
     {
-      "id": "quiz2",
-      "kind": "single_choice",
+      "id": "mc_valid_number_conversions",
+      "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz2",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.mc_valid_number_conversions",
       "optionIds": [
         "a",
         "b",
@@ -125,16 +173,19 @@
         "d"
       ],
       "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
       }
     },
     {
-      "id": "quiz3",
+      "id": "mc_true_statements_conversion",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz3",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.mc_true_statements_conversion",
       "optionIds": [
         "a",
         "b",
@@ -146,38 +197,16 @@
         "optionIds": [
           "a",
           "b",
-          "c",
-          "d"
+          "c"
         ]
       }
     },
     {
-      "id": "quiz4",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz4",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "d"
-        ]
-      }
-    },
-    {
-      "id": "quiz5",
+      "id": "dr_steps_add_one",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz5",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.dr_steps_add_one",
       "tokenIds": [
         "t1",
         "t2",
@@ -195,125 +224,179 @@
       }
     },
     {
-      "id": "quiz6",
+      "id": "dr_build_message_number",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz6",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.dr_build_message_number",
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3"
+          "t3",
+          "t4"
         ]
       }
     },
     {
-      "id": "quiz7",
+      "id": "fb_int_conversion",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz7",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.fb_int_conversion",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "input"
+        "value": "int"
       }
     },
     {
-      "id": "quiz8",
+      "id": "fb_str_message",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz8",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.fb_str_message",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "float"
+        "value": "str"
       }
     },
     {
-      "id": "policy_code_input_1",
+      "id": "code_echo_name",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.policy_code_input_1",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_echo_name",
       "language": "python",
-      "starterCode": "n = int(input())\n# Your code here",
+      "starterCode": "# Read a name and print a greeting\n# TODO: use input() and print()",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "5\n",
-            "stdout": "True\n",
+            "stdin": "Maya\n",
+            "stdout": "Hello, Maya!\n",
             "match": "exact"
           },
           {
-            "stdin": "0\n",
-            "stdout": "False\n",
+            "stdin": "Leo\n",
+            "stdout": "Hello, Leo!\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
+        "solutionCode": "name = input()\nprint(\"Hello, \" + name + \"!\")"
       }
     },
     {
-      "id": "policy_code_input_2",
+      "id": "code_add_two_ages",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.policy_code_input_2",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_add_two_ages",
       "language": "python",
-      "starterCode": "n = int(input())\n# Your code here",
+      "starterCode": "# Read two whole numbers and print their sum\nfirst = input()\nsecond = input()\n# TODO: convert and print",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "5\n",
-            "stdout": "True\n",
+            "stdin": "3\n4\n",
+            "stdout": "7\n",
             "match": "exact"
           },
           {
-            "stdin": "0\n",
-            "stdout": "False\n",
+            "stdin": "10\n25\n",
+            "stdout": "35\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
+        "solutionCode": "first = int(input())\nsecond = int(input())\nprint(first + second)"
       }
     },
     {
-      "id": "policy_code_input_3",
+      "id": "code_double_price",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.policy_code_input_3",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_double_price",
       "language": "python",
-      "starterCode": "n = int(input())\n# Your code here",
+      "starterCode": "# Read a decimal number and print double its value\nvalue = input()\n# TODO: convert and print",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "5\n",
-            "stdout": "True\n",
+            "stdin": "2.5\n",
+            "stdout": "5.0\n",
             "match": "exact"
           },
           {
-            "stdin": "0\n",
-            "stdout": "False\n",
+            "stdin": "1.2\n",
+            "stdout": "2.4\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
+        "solutionCode": "value = float(input())\nprint(value * 2)"
+      }
+    },
+    {
+      "id": "code_age_next_year",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_age_next_year",
+      "language": "python",
+      "starterCode": "# Read an age and print next year's age\n# TODO: complete the program",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Next year: 13\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "30\n",
+            "stdout": "Next year: 31\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "age = int(input())\nprint(\"Next year: \" + str(age + 1))"
+      }
+    },
+    {
+      "id": "code_profile_line",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_profile_line",
+      "language": "python",
+      "starterCode": "# Read a name and an age, then print a profile line\nname = input()\nage = input()\n# TODO: convert age and print the sentence",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Ava\n9\n",
+            "stdout": "Ava is 9 years old\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Noah\n14\n",
+            "stdout": "Noah is 14 years old\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "name = input()\nage = int(input())\nprint(name + \" is \" + str(age) + \" years old\")"
       }
     }
   ]

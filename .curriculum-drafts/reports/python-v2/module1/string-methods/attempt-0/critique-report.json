@@ -1,12 +1,5 @@
 {
   "topicId": "string-methods",
   "ok": true,
-  "issues": [
-    {
-      "code": "MULTI_CHOICE_TOO_FEW_CORRECT_OPTIONS",
-      "category": "clarity",
-      "severity": "warn",
-      "message": "Multi-choice exercise \"quiz4\" looks like it should have multiple correct answers, but only 1 correct option is marked."
-    }
-  ]
+  "issues": []
 }

@@ -4,228 +4,345 @@
   "minutes": 22,
   "sketchBlocks": [
     {
-      "id": "sketch_1",
-      "title": "Understanding Conditional Logic",
-      "bodyMarkdown": "Conditional logic allows programs to make decisions based on certain conditions. For example, consider the following code:\n\n```python\nage = 18\nif age < 18:\n    print('You are a minor.')\nelif age >= 18:\n    print('You are an adult.')\n```\n\nIn this example, we check if the age is less than 18 first. This is a clear way to handle different age groups. \n\n**Your turn:** Try changing the value of `age` and see how the output changes!"
+      "id": "special-cases-come-first",
+      "title": "Why check special cases first?",
+      "bodyMarkdown": "When a program has several possible paths, it often helps to check the unusual or important cases first. This makes your logic easier to read because the exceptions are handled early, and the more ordinary case can come later.\n\nFor example, imagine a ticket checker:\n\n```python\nage = 0\n\nif age < 0:\n    print(\"Invalid age\")\nelif age == 0:\n    print(\"Newborn ticket\")\nelse:\n    print(\"Regular age group\")\n```\n\nStep by step:\n- `if age < 0:` checks an invalid input first.\n- `elif age == 0:` checks a special edge case next.\n- `else:` handles everything left over.\n\nThis order is useful because invalid or rare values can be separated before the normal path.\n\nIf you put the broad case too early, later checks may never run.\n\n**Try it yourself:** Type the code in the code editor, change `age` to `-2`, `0`, and `5`, click Run, and compare the output panel each time."
     },
     {
-      "id": "sketch_2",
-      "title": "Using Early Checks",
-      "bodyMarkdown": "Early checks can simplify your conditional statements. For instance, if you want to check if a number is zero before performing division, you can do:\n\n```python\nnumber = 0\nif number == 0:\n    print('Cannot divide by zero!')\nelse:\n    result = 10 / number\n    print(result)\n```\n\nThis way, you avoid errors and make your code easier to read. \n\n**Try this:** Modify the code to check for negative numbers as well!"
+      "id": "broad-vs-specific",
+      "title": "Put specific checks before broad checks",
+      "bodyMarkdown": "A common mistake is writing a broad condition before a more specific one. Python stops at the first matching branch, so order matters.\n\nLook at this example:\n\n```python\nscore = 100\n\nif score >= 60:\n    print(\"Pass\")\nelif score == 100:\n    print(\"Perfect score\")\nelse:\n    print(\"Needs work\")\n```\n\nHere, `score == 100` is a special case, but it comes after `score >= 60`. Since `100` is also greater than or equal to `60`, Python prints `Pass` and never reaches `Perfect score`.\n\nA clearer version is:\n\n```python\nscore = 100\n\nif score == 100:\n    print(\"Perfect score\")\nelif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Needs work\")\n```\n\nNow the special case is checked first.\n\n**Worked example:**\n- If `score` is `100`, output is `Perfect score`.\n- If `score` is `75`, output is `Pass`.\n- If `score` is `40`, output is `Needs work`.\n\n**Your turn:** Change the value of `score` and run the code to see which branch is chosen."
+    },
+    {
+      "id": "using-elif-for-clear-branches",
+      "title": "Use `elif` to separate cases clearly",
+      "bodyMarkdown": "When only one branch should run, `if` / `elif` / `else` is a good pattern. It lets you list cases in a clear order from most special to most general.\n\nExample:\n\n```python\ntext = \"\"\n\nif text == \"\":\n    print(\"Empty string\")\nelif text == \"yes\":\n    print(\"Confirmed\")\nelse:\n    print(\"Other text\")\n```\n\nLine by line:\n- `text == \"\"` checks the special case of an empty string.\n- `text == \"yes\"` checks a specific meaningful value.\n- `else` catches every other string.\n\nThis is easier to understand than mixing broad and narrow checks in the wrong order.\n\n**Try this:** Replace `text` with `\"yes\"`, `\"hello\"`, and `\"\"`. Click Run and check the output panel after each change."
     }
   ],
   "quizDraft": [
     {
-      "id": "quiz_1",
+      "id": "sc-special-before-general",
       "kind": "single_choice",
-      "title": "What does the following code check first?",
-      "prompt": "```python\nage = 20\nif age < 18:\n    print('Minor')\nelif age >= 18:\n    print('Adult')\n```",
-      "hint": "Look at the first condition in the if statement.",
+      "title": "Choose the best ordering",
+      "prompt": "Why is it usually better to check a special case before a broad case in an `if` / `elif` chain?",
+      "hint": "Python uses the first branch whose condition is true.",
       "help": {
-        "concept": "The code checks if the age is less than 18 first.",
-        "hint_1": "Focus on the comparison operator used in the first if statement.",
-        "hint_2": "Consider what happens if the age is 20."
+        "concept": "In an `if` / `elif` chain, Python checks conditions from top to bottom and stops at the first true one. A broad condition can hide a more specific case if it appears first.",
+        "hint_1": "Think about what happens when one value matches both a specific condition and a wider condition.",
+        "hint_2": "If the wider condition is first, Python will take that branch and skip the later special-case branch."
       },
       "options": [
-        "Checks if age is less than 18",
-        "Checks if age is equal to 18",
-        "Checks if age is greater than 18",
-        "Checks if age is not a number"
+        "Because Python runs every matching branch in order",
+        "Because a broad condition placed first can prevent the special case from being reached",
+        "Because `elif` only works with numbers",
+        "Because special cases must always be written in `else`"
       ],
       "correctOptionIds": [
-        "a"
+        "b"
       ]
     },
     {
-      "id": "quiz_2",
+      "id": "sc-output-perfect-score",
       "kind": "single_choice",
-      "title": "What will the following code output?",
-      "prompt": "```python\nnumber = 0\nif number == 0:\n    print('Zero')\nelse:\n    print('Not Zero')\n```",
-      "hint": "Think about the value of 'number' before the check.",
+      "title": "Predict the output",
+      "prompt": "What does this code print when `score = 100`?\n\n```python\nscore = 100\n\nif score >= 60:\n    print(\"Pass\")\nelif score == 100:\n    print(\"Perfect\")\nelse:\n    print(\"Fail\")\n```",
+      "hint": "Check which condition becomes true first.",
       "help": {
-        "concept": "The code checks if the number is zero.",
-        "hint_1": "What does the condition 'number == 0' evaluate to?",
-        "hint_2": "Consider what the print statement will output based on the condition."
+        "concept": "Python evaluates `if` and `elif` branches in order. Even if a later condition is also true, it will not run once an earlier true branch is found.",
+        "hint_1": "Ask whether `100 >= 60` is true before thinking about the `elif` line.",
+        "hint_2": "Once the first branch matches, Python prints from that branch and skips the rest."
       },
       "options": [
-        "Zero",
-        "Not Zero",
-        "Error",
-        "None"
+        "Perfect",
+        "Fail",
+        "Pass",
+        "It prints both Pass and Perfect"
       ],
       "correctOptionIds": [
-        "a"
-      ]
-    },
-    {
-      "id": "quiz_3",
-      "kind": "multi_choice",
-      "title": "Which of the following are benefits of using early checks?",
-      "prompt": "Select all that apply.",
-      "hint": "Think about code readability and error prevention.",
-      "help": {
-        "concept": "Early checks can improve code clarity and prevent runtime errors.",
-        "hint_1": "Consider how early checks can simplify decision-making.",
-        "hint_2": "Think about how they can prevent common errors."
-      },
-      "options": [
-        "Improves code readability",
-        "Prevents runtime errors",
-        "Makes code longer",
-        "Simplifies decision-making"
-      ],
-      "correctOptionIds": [
-        "a",
-        "b",
-        "d"
-      ]
-    },
-    {
-      "id": "quiz_4",
-      "kind": "multi_choice",
-      "title": "Which conditions should be checked first in a program?",
-      "prompt": "Select all that apply.",
-      "hint": "Think about conditions that could cause errors or affect logic.",
-      "help": {
-        "concept": "Check for conditions that could lead to errors or are critical for logic.",
-        "hint_1": "Consider edge cases like zero or negative values.",
-        "hint_2": "Think about conditions that could change the flow of the program."
-      },
-      "options": [
-        "Zero values",
-        "Negative values",
-        "Valid inputs",
-        "Default cases"
-      ],
-      "correctOptionIds": [
-        "a",
-        "b",
         "c"
       ]
     },
     {
-      "id": "quiz_5",
-      "kind": "drag_reorder",
-      "title": "Order the following checks from most specific to least specific.",
-      "prompt": "Arrange the checks in the correct order.",
-      "tokens": [
-        "Check if input is a number",
-        "Check if input is positive",
-        "Check if input is zero",
-        "Check if input is valid"
+      "id": "mc-good-special-case-order",
+      "kind": "multi_choice",
+      "title": "Find the good examples",
+      "prompt": "Which snippets check a special case before a broader case? Choose all that apply.",
+      "hint": "Look for a narrow condition placed above a wider one.",
+      "help": {
+        "concept": "A special case is a narrower condition, such as `score == 100`, while a broad case covers more values, such as `score >= 60`. Good ordering puts the narrower case first.",
+        "hint_1": "Check whether the first condition is a subset of a later condition or the other way around.",
+        "hint_2": "A good answer handles the exact edge case before the condition that would also include it."
+      },
+      "options": [
+        "if score == 100: ... elif score >= 60: ...",
+        "if age >= 0: ... elif age == 0: ...",
+        "if text == \"\": ... elif text != \"\": ...",
+        "if number > 0: ... elif number == 1: ..."
       ],
-      "correctOrder": [
-        "Check if input is a number",
-        "Check if input is valid",
-        "Check if input is zero",
-        "Check if input is positive"
+      "correctOptionIds": [
+        "a",
+        "c"
       ]
     },
     {
-      "id": "quiz_6",
-      "kind": "drag_reorder",
-      "title": "Arrange the following code checks in the order they should be executed.",
-      "prompt": "Order the checks correctly.",
-      "tokens": [
-        "Check if user is logged in",
-        "Check if user has permissions",
-        "Check if user is an admin",
-        "Check if user exists"
+      "id": "mc-values-hit-first-branch",
+      "kind": "multi_choice",
+      "title": "Which values take the first branch?",
+      "prompt": "Consider this code:\n\n```python\nif n == 0:\n    print(\"zero\")\nelif n <= 10:\n    print(\"small\")\nelse:\n    print(\"big\")\n```\n\nWhich values print `zero`? Choose all that apply.",
+      "hint": "Only one exact value can make `n == 0` true.",
+      "help": {
+        "concept": "An equality check like `n == 0` matches only one exact value. If that first condition is true, later branches are skipped.",
+        "hint_1": "Test each option against the first line, not the second line.",
+        "hint_2": "The first branch needs the value to be exactly zero, not just less than or equal to ten."
+      },
+      "options": [
+        "-1",
+        "0",
+        "1",
+        "10"
       ],
-      "correctOrder": [
-        "Check if user exists",
-        "Check if user is logged in",
-        "Check if user has permissions",
-        "Check if user is an admin"
+      "correctOptionIds": [
+        "b"
       ]
     },
     {
-      "id": "quiz_7",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the blank: Early checks help to prevent ______.",
-      "prompt": "Early checks help to prevent [blank1].",
-      "choices": [
-        "errors",
-        "complexity",
-        "redundancy",
-        "confusion"
+      "id": "dr-order-score-checks",
+      "kind": "drag_reorder",
+      "title": "Order the branches",
+      "prompt": "Arrange these conditions from best to worst order for a grading check where `100` should get a special message before normal passing scores.",
+      "hint": "Put the most specific condition first.",
+      "help": {
+        "concept": "When one condition is more specific than another, the specific one should come earlier so it is not hidden by a broader match.",
+        "hint_1": "An exact equality check for `100` is narrower than a pass-range check.",
+        "hint_2": "The catch-all branch belongs last because it handles everything not matched earlier."
+      },
+      "tokens": [
+        "if score == 100",
+        "elif score >= 60",
+        "else"
       ],
-      "correctValue": "errors"
+      "correctOrder": [
+        "if score == 100",
+        "elif score >= 60",
+        "else"
+      ]
     },
     {
-      "id": "quiz_8",
-      "kind": "fill_blank_choice",
-      "title": "Fill in the blank: The first condition in an if statement is checked ______.",
-      "prompt": "The first condition in an if statement is checked [blank1].",
-      "choices": [
-        "last",
-        "first",
-        "only if previous conditions fail",
-        "never"
+      "id": "dr-order-input-validation",
+      "kind": "drag_reorder",
+      "title": "Order validation logic",
+      "prompt": "Arrange these checks in a clear order for an age classifier. Invalid ages should be handled before normal ages.",
+      "hint": "Start with the impossible value range.",
+      "help": {
+        "concept": "Validation often works best when invalid or exceptional inputs are checked first, then special valid cases, then the general case.",
+        "hint_1": "A negative age is invalid, so it should be checked before any normal age category.",
+        "hint_2": "After invalid input, place the exact edge case before the broad remaining case."
+      },
+      "tokens": [
+        "if age < 0",
+        "elif age == 0",
+        "else"
       ],
-      "correctValue": "first"
+      "correctOrder": [
+        "if age < 0",
+        "elif age == 0",
+        "else"
+      ]
     },
     {
-      "id": "quiz_9",
+      "id": "fb-empty-string-check",
+      "kind": "fill_blank_choice",
+      "title": "Complete the special-case check",
+      "prompt": "Fill in the missing value so the code checks for an empty string first.",
+      "hint": "An empty string has no characters.",
+      "help": {
+        "concept": "In Python, an empty string is written with two quotes and nothing between them. It is a common special case to check before other text values.",
+        "hint_1": "You need the string literal that contains zero characters.",
+        "hint_2": "Look for the choice that is just opening and closing quotes with nothing inside."
+      },
+      "template": "if text == [blank1]:\n    print(\"Empty\")",
+      "choices": [
+        "\"\"",
+        "\" \"",
+        "None",
+        "0"
+      ],
+      "correctValue": "\"\""
+    },
+    {
+      "id": "fb-elif-keyword",
+      "kind": "fill_blank_choice",
+      "title": "Choose the right keyword",
+      "prompt": "Fill in the missing keyword to check a second condition only if the first one was false.",
+      "hint": "This keyword combines `else` and `if`.",
+      "help": {
+        "concept": "Use `elif` in Python when you want another condition checked only if earlier conditions in the same chain were false.",
+        "hint_1": "It is not `if`, because that would start a separate condition block.",
+        "hint_2": "It is the keyword used between `if` and `else` in a multi-branch chain."
+      },
+      "template": "if score == 100:\n    print(\"Perfect\")\n[blank1] score >= 60:\n    print(\"Pass\")",
+      "choices": [
+        "else",
+        "elif",
+        "then",
+        "loop"
+      ],
+      "correctValue": "elif"
+    },
+    {
+      "id": "code-invalid-before-range",
       "kind": "code_input",
-      "title": "Check for Zero Division",
-      "prompt": "Write a function that checks if a number is zero before dividing 10 by that number.",
-      "starterCode": "def divide_by_number(number):\n    # Check if number is zero\n    pass",
-      "solutionCode": "def divide_by_number(number):\n    if number == 0:\n        return 'Cannot divide by zero!'\n    else:\n        return 10 / number",
+      "title": "Check invalid input first",
+      "prompt": "Write Python code that reads one integer age from input. If the age is less than 0, print `Invalid`. Otherwise, if the age is less than 13, print `Child`. In all other cases, print `Older`.",
+      "hint": "Handle the impossible age before the normal age groups.",
+      "help": {
+        "concept": "When one input is invalid or exceptional, checking it first keeps the rest of the branching logic simpler and clearer.",
+        "hint_1": "Read the age with `input()`, convert it to `int`, then test `age < 0` before the other conditions.",
+        "hint_2": "After the invalid check, the next branch should cover ages from 0 up to 12, and the final branch handles the rest."
+      },
+      "starterCode": "age = int(input())\n\n# TODO: print Invalid, Child, or Older\n",
+      "solutionCode": "age = int(input())\n\nif age < 0:\n    print(\"Invalid\")\nelif age < 13:\n    print(\"Child\")\nelse:\n    print(\"Older\")\n",
+      "recipeType": "fixed_tests",
       "tests": [
         {
-          "input": "0",
-          "output": "Cannot divide by zero!"
+          "stdin": "-3\n",
+          "stdout": "Invalid\n"
         },
         {
-          "input": "5",
-          "output": "2.0"
+          "stdin": "8\n",
+          "stdout": "Child\n"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Older\n"
         }
       ]
     },
     {
-      "id": "quiz_10",
+      "id": "code-perfect-before-pass",
       "kind": "code_input",
-      "title": "Check Age Group",
-      "prompt": "Write a function that checks the age and returns 'Minor' if under 18, 'Adult' if 18 or older.",
-      "starterCode": "def check_age(age):\n    # Check age\n    pass",
-      "solutionCode": "def check_age(age):\n    if age < 18:\n        return 'Minor'\n    else:\n        return 'Adult'",
+      "title": "Print a special message for 100",
+      "prompt": "Write Python code that reads one integer score. If the score is exactly 100, print `Perfect`. Otherwise, if the score is at least 60, print `Pass`. In all other cases, print `Fail`.",
+      "hint": "The exact score of 100 should be checked before the wider passing range.",
+      "help": {
+        "concept": "An exact match like `score == 100` is more specific than a broad range like `score >= 60`, so it should come first in the branch order.",
+        "hint_1": "Use `int(input())` to read the score, then test the equality case before the pass-range case.",
+        "hint_2": "If you put the pass check first, a score of 100 would never reach the special message."
+      },
+      "starterCode": "score = int(input())\n\n# TODO: print Perfect, Pass, or Fail\n",
+      "solutionCode": "score = int(input())\n\nif score == 100:\n    print(\"Perfect\")\nelif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")\n",
+      "recipeType": "fixed_tests",
       "tests": [
         {
-          "input": "17",
-          "output": "Minor"
+          "stdin": "100\n",
+          "stdout": "Perfect\n"
         },
         {
-          "input": "20",
-          "output": "Adult"
+          "stdin": "75\n",
+          "stdout": "Pass\n"
+        },
+        {
+          "stdin": "40\n",
+          "stdout": "Fail\n"
         }
       ]
     },
     {
-      "id": "quiz_11",
+      "id": "code-empty-yes-other",
       "kind": "code_input",
-      "title": "Check for Negative Numbers",
-      "prompt": "Write a function that checks if a number is negative and returns 'Negative' or 'Positive'.",
-      "starterCode": "def check_number(num):\n    # Check if number is negative\n    pass",
-      "solutionCode": "def check_number(num):\n    if num < 0:\n        return 'Negative'\n    else:\n        return 'Positive'",
+      "title": "Handle empty text first",
+      "prompt": "Write Python code that reads one line of text. If the text is an empty string, print `Empty`. Otherwise, if the text is `yes`, print `Confirmed`. In all other cases, print `Other`.",
+      "hint": "Check the empty string before the named text value.",
+      "help": {
+        "concept": "Special text values such as an empty string are often best handled first so the remaining text cases are easier to read.",
+        "hint_1": "Read the text with `input()`. Compare it to `\"\"` for the empty-string case.",
+        "hint_2": "After the empty check, compare the text to `\"yes\"`, then use `else` for everything else."
+      },
+      "starterCode": "text = input()\n\n# TODO: print Empty, Confirmed, or Other\n",
+      "solutionCode": "text = input()\n\nif text == \"\":\n    print(\"Empty\")\nelif text == \"yes\":\n    print(\"Confirmed\")\nelse:\n    print(\"Other\")\n",
+      "recipeType": "fixed_tests",
       "tests": [
         {
-          "input": "-1",
-          "output": "Negative"
+          "stdin": "\n",
+          "stdout": "Empty\n"
         },
         {
-          "input": "1",
-          "output": "Positive"
+          "stdin": "yes\n",
+          "stdout": "Confirmed\n"
+        },
+        {
+          "stdin": "hello\n",
+          "stdout": "Other\n"
+        }
+      ]
+    },
+    {
+      "id": "code-zero-before-small",
+      "kind": "code_input",
+      "title": "Check zero before a wider range",
+      "prompt": "Write Python code that reads one integer `n`. If `n` is exactly 0, print `Zero`. Otherwise, if `n` is less than or equal to 10, print `Small`. In all other cases, print `Large`.",
+      "hint": "The exact value 0 belongs to the wider `<= 10` range, so order matters.",
+      "help": {
+        "concept": "When a special value is included inside a broader range, the exact-value check must come first or it will be hidden by the range check.",
+        "hint_1": "Read the number, then compare with `== 0` before using `<= 10`.",
+        "hint_2": "The second branch should catch values like 1 and 10, while the final branch handles numbers above 10."
+      },
+      "starterCode": "n = int(input())\n\n# TODO: print Zero, Small, or Large\n",
+      "solutionCode": "n = int(input())\n\nif n == 0:\n    print(\"Zero\")\nelif n <= 10:\n    print(\"Small\")\nelse:\n    print(\"Large\")\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "0\n",
+          "stdout": "Zero\n"
+        },
+        {
+          "stdin": "7\n",
+          "stdout": "Small\n"
+        },
+        {
+          "stdin": "15\n",
+          "stdout": "Large\n"
+        }
+      ]
+    },
+    {
+      "id": "code-invalid-code-first",
+      "kind": "code_input",
+      "title": "Validate a code before normal cases",
+      "prompt": "Write Python code that reads one integer code. If the code is less than 0, print `Invalid`. Otherwise, if the code is 0, print `Start`. In all other cases, print `Continue`.",
+      "hint": "Check the invalid negative case before the exact zero case and the general case.",
+      "help": {
+        "concept": "Input validation often comes first, followed by exact edge cases, and then the general remaining case.",
+        "hint_1": "Use `int(input())`, then test whether the code is negative before checking whether it equals zero.",
+        "hint_2": "After the first two branches, the final `else` should handle all positive values."
+      },
+      "starterCode": "code = int(input())\n\n# TODO: print Invalid, Start, or Continue\n",
+      "solutionCode": "code = int(input())\n\nif code < 0:\n    print(\"Invalid\")\nelif code == 0:\n    print(\"Start\")\nelse:\n    print(\"Continue\")\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "-1\n",
+          "stdout": "Invalid\n"
+        },
+        {
+          "stdin": "0\n",
+          "stdout": "Start\n"
+        },
+        {
+          "stdin": "5\n",
+          "stdout": "Continue\n"
         }
       ]
     }
   ],
   "projectDraft": {
-    "title": "Grade Checker Project",
+    "title": "Practice checking special cases first",
     "stepIds": [
-      "quiz_9",
-      "quiz_10",
-      "quiz_11"
+      "code-invalid-before-range",
+      "code-perfect-before-pass",
+      "code-empty-yes-other",
+      "code-zero-before-small",
+      "code-invalid-code-first"
     ]
   }
 }

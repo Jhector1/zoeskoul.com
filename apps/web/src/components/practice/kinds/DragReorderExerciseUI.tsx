@@ -11,7 +11,9 @@ function move<T>(arr: T[], from: number, to: number) {
   const copy = arr.slice();
   const [item] = copy.splice(from, 1);
   const clamped = Math.max(0, Math.min(to, copy.length));
+
   copy.splice(clamped, 0, item);
+
   return copy;
 }
 
@@ -43,7 +45,11 @@ export default function DragReorderExerciseUI({
 }) {
   const tokensById = useMemo(() => {
     const m = new Map<string, Token>();
-    for (const t of exercise.tokens ?? []) m.set(String(t.id), t);
+
+    for (const t of exercise.tokens ?? []) {
+      m.set(String(t.id), t);
+    }
+
     return m;
   }, [exercise.tokens]);
 
@@ -61,12 +67,14 @@ export default function DragReorderExerciseUI({
   const [draftOrder, setDraftOrder] = useState<string[] | null>(null);
   const [dropOverId, setDropOverId] = useState<string | null>(null);
   const [dropSide, setDropSide] = useState<DropSide>(null);
+
   const lastPreviewKey = useRef<string>("");
 
   const renderOrder = draftOrder ?? order;
 
   function apply(next: string[]) {
     if (disabled) return;
+
     onChange(next);
   }
 
@@ -79,29 +87,36 @@ export default function DragReorderExerciseUI({
   }
 
   function computeSide(e: React.DragEvent, el: HTMLElement): DropSide {
-    const r = el.getBoundingClientRect();
-    const midX = r.left + r.width / 2;
-    return e.clientX < midX ? "before" : "after";
+    const rect = el.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+
+    return e.clientY < midY ? "before" : "after";
   }
 
   function previewMove(overId: string, side: DropSide) {
     if (disabled || !draggingId || overId === draggingId || !side) return;
 
     const key = `${draggingId}|${overId}|${side}`;
+
     if (lastPreviewKey.current === key) return;
+
     lastPreviewKey.current = key;
 
-    const cur = (draftOrder ?? order).slice();
-    const from = cur.indexOf(draggingId);
-    const overIdx = cur.indexOf(overId);
-    if (from < 0 || overIdx < 0) return;
+    const current = (draftOrder ?? order).slice();
+    const from = current.indexOf(draggingId);
+    const overIndex = current.indexOf(overId);
 
-    let to = overIdx + (side === "after" ? 1 : 0);
-    if (to > from) to -= 1;
+    if (from < 0 || overIndex < 0) return;
+
+    let to = overIndex + (side === "after" ? 1 : 0);
+
+    if (to > from) {
+      to -= 1;
+    }
 
     if (to === from) return;
 
-    setDraftOrder(move(cur, from, to));
+    setDraftOrder(move(current, from, to));
   }
 
   return (
@@ -125,27 +140,33 @@ export default function DragReorderExerciseUI({
 
         <div className="mt-4 ui-soft p-3">
           <div className="text-xs font-extrabold text-neutral-600 dark:text-white/70">
-            Drag to reorder (or use arrows)
+            Drag to reorder steps, or use the up and down arrows.
           </div>
 
           <LayoutGroup id="drag-reorder">
             <motion.div
                 layout
                 transition={LAYOUT_SPRING}
-                className="ui-drag-zone mt-3 flex flex-wrap gap-2"
+                className="ui-drag-zone mt-3 flex flex-col gap-2"
                 onDragOver={(e) => {
                   if (disabled) return;
+
                   e.preventDefault();
                 }}
                 onDrop={() => {
                   if (disabled) return;
-                  if (draftOrder && draggingId) apply(draftOrder);
+
+                  if (draftOrder && draggingId) {
+                    apply(draftOrder);
+                  }
+
                   resetDnDState();
                 }}
             >
               {renderOrder.map((id, idx) => {
-                const t = tokensById.get(id);
-                if (!t) return null;
+                const token = tokensById.get(id);
+
+                if (!token) return null;
 
                 const isDragging = draggingId === id;
                 const isOver = dropOverId === id && !isDragging;
@@ -158,22 +179,38 @@ export default function DragReorderExerciseUI({
                         draggable={!disabled}
                         onDragStart={() => {
                           if (disabled) return;
+
                           setDraggingId(id);
                           setDraftOrder(order);
                         }}
                         onDragEnd={resetDnDState}
                         onDragOver={(e) => {
                           if (disabled || !draggingId) return;
+
                           e.preventDefault();
 
-                          const side = computeSide(e, e.currentTarget as HTMLElement);
+                          const side = computeSide(
+                              e,
+                              e.currentTarget as HTMLElement,
+                          );
+
                           setDropOverId(id);
                           setDropSide(side);
                           previewMove(id, side);
                         }}
                         onDragLeave={(e) => {
-                          const toEl = e.relatedTarget as Node | null;
-                          if (toEl && (e.currentTarget as HTMLElement).contains(toEl)) return;
+                          const toEl =
+                              e.relatedTarget as Node | null;
+
+                          if (
+                              toEl &&
+                              (
+                                  e.currentTarget as HTMLElement
+                              ).contains(toEl)
+                          ) {
+                            return;
+                          }
+
                           if (dropOverId === id) {
                             setDropOverId(null);
                             setDropSide(null);
@@ -182,12 +219,17 @@ export default function DragReorderExerciseUI({
                         }}
                         onDrop={(e) => {
                           if (disabled) return;
+
                           e.preventDefault();
-                          if (draftOrder && draggingId) apply(draftOrder);
+
+                          if (draftOrder && draggingId) {
+                            apply(draftOrder);
+                          }
+
                           resetDnDState();
                         }}
                         className={[
-                          "ui-drag-chip group",
+                          "ui-drag-chip group w-full justify-between",
                           disabled && "ui-drag-chip--disabled",
                           isDragging && "ui-drag-chip--dragging",
                           isOver && "ui-drag-chip--over",
@@ -209,38 +251,63 @@ export default function DragReorderExerciseUI({
                                       ? "ui-drag-indicator--before"
                                       : "ui-drag-indicator--after",
                                 ].join(" ")}
-                                initial={{ opacity: 0, scaleY: 0.6 }}
-                                animate={{ opacity: 1, scaleY: 1 }}
-                                exit={{ opacity: 0, scaleY: 0.6 }}
+                                initial={{
+                                  opacity: 0,
+                                  scaleY: 0.6,
+                                }}
+                                animate={{
+                                  opacity: 1,
+                                  scaleY: 1,
+                                }}
+                                exit={{
+                                  opacity: 0,
+                                  scaleY: 0.6,
+                                }}
                                 transition={{ duration: 0.12 }}
                                 aria-hidden="true"
                             />
                         ) : null}
                       </AnimatePresence>
 
-                      <span className="ui-drag-handle" aria-hidden="true">
-                    ≡
-                  </span>
-                      <span>{t.text}</span>
+                      <div className="flex min-w-0 items-center gap-2">
+                                        <span
+                                            className="ui-drag-handle shrink-0"
+                                            aria-hidden="true"
+                                        >
+                                            ≡
+                                        </span>
 
-                      <div className="ui-drag-actions ml-1 flex items-center gap-1">
+                        <span className="min-w-0 truncate">
+                                            {token.text}
+                                        </span>
+                      </div>
+
+                      <div className="ui-drag-actions ml-3 flex shrink-0 items-center gap-1">
                         <button
                             type="button"
                             disabled={disabled || idx === 0}
-                            onClick={() => apply(move(order, idx, idx - 1))}
+                            onClick={() =>
+                                apply(move(order, idx, idx - 1))
+                            }
                             className="ui-drag-actionbtn"
-                            aria-label="Move left"
+                            aria-label="Move up"
                         >
-                          ←
+                          ↑
                         </button>
+
                         <button
                             type="button"
-                            disabled={disabled || idx === order.length - 1}
-                            onClick={() => apply(move(order, idx, idx + 1))}
+                            disabled={
+                                disabled ||
+                                idx === order.length - 1
+                            }
+                            onClick={() =>
+                                apply(move(order, idx, idx + 1))
+                            }
                             className="ui-drag-actionbtn"
-                            aria-label="Move right"
+                            aria-label="Move down"
                         >
-                          →
+                          ↓
                         </button>
                       </div>
                     </motion.div>
@@ -255,16 +322,21 @@ export default function DragReorderExerciseUI({
               <div className="text-xs font-extrabold text-neutral-600 dark:text-white/70">
                 Correct order
               </div>
-              <div className="mt-2 flex flex-wrap gap-2">
+
+              <div className="mt-2 flex flex-col gap-2">
                 {reviewCorrectTokenIds
                     .map((id) => tokensById.get(String(id)))
                     .filter(Boolean)
-                    .map((t) => (
+                    .map((token, index) => (
                         <div
-                            key={t!.id}
-                            className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-xs font-extrabold text-neutral-800 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/85"
+                            key={token!.id}
+                            className="flex items-center gap-2 rounded-xl border border-neutral-200 bg-white px-3 py-2 text-xs font-extrabold text-neutral-800 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/85"
                         >
-                          {t!.text}
+                                    <span className="shrink-0 text-neutral-500 dark:text-white/45">
+                                        {index + 1}.
+                                    </span>
+
+                          <span>{token!.text}</span>
                         </div>
                     ))}
               </div>
@@ -273,7 +345,10 @@ export default function DragReorderExerciseUI({
 
         {exercise.hint ? (
             <div className="mt-3 text-xs font-extrabold text-neutral-500 dark:text-white/60">
-              Hint: <span className="font-bold text-neutral-700 dark:text-white/70">{exercise.hint}</span>
+              Hint:{" "}
+              <span className="font-bold text-neutral-700 dark:text-white/70">
+                        {exercise.hint}
+                    </span>
             </div>
         ) : null}
       </div>

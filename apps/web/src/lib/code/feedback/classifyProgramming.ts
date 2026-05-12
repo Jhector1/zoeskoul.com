@@ -16,6 +16,15 @@ function joinedRunText(run: any) {
         .filter(Boolean)
         .join("\n");
 }
+function getLastNonEmptyCodeLine(code?: string | null): number | null {
+    const lines = String(code ?? "").split(/\r?\n/);
+
+    for (let i = lines.length - 1; i >= 0; i -= 1) {
+        if (lines[i].trim()) return i + 1;
+    }
+
+    return null;
+}
 
 function parseFirstLineNumber(text: string): number | null {
     const patterns = [
@@ -39,6 +48,7 @@ function makeFeedback(args: {
     title: string;
     message: string;
     raw?: string | null;
+    line?: number | null;
 }): CodeFeedback {
     return {
         area: "code",
@@ -47,14 +57,22 @@ function makeFeedback(args: {
         tone: args.tone,
         title: args.title,
         message: args.message,
-        line: args.raw ? parseFirstLineNumber(args.raw) : null,
+        line:
+            typeof args.line === "number"
+                ? args.line
+                : args.raw
+                    ? parseFirstLineNumber(args.raw)
+                    : null,
         column: null,
         raw: args.raw ?? null,
     };
 }
 
-function classifyPython(raw: string, source: FeedbackSource): CodeFeedback {
-    const s = raw.toLowerCase();
+function classifyPython(
+    raw: string,
+    source: FeedbackSource,
+    code?: string | null,
+): CodeFeedback {    const s = raw.toLowerCase();
 
     if (s.includes("indentationerror")) {
         return makeFeedback({
@@ -93,8 +111,13 @@ function classifyPython(raw: string, source: FeedbackSource): CodeFeedback {
         s.includes("'(' was never closed") ||
         s.includes("'[' was never closed") ||
         s.includes("'{' was never closed") ||
-        s.includes("unexpected eof while parsing")
+        s.includes("unexpected eof while parsing") ||
+        s.includes("incomplete statement")
     ) {
+        const eofLike =
+            s.includes("unexpected eof while parsing") ||
+            s.includes("incomplete statement");
+
         return makeFeedback({
             source,
             kind: "syntax",
@@ -102,6 +125,7 @@ function classifyPython(raw: string, source: FeedbackSource): CodeFeedback {
             title: "Missing closing symbol",
             message: "Check for a missing closing parenthesis, bracket, or brace.",
             raw,
+            line: eofLike ? getLastNonEmptyCodeLine(code) : undefined,
         });
     }
 
@@ -316,11 +340,12 @@ export function classifyProgrammingRunFailure(
     language: string,
     run: any,
     source: FeedbackSource = "run",
+    code?: string | null,
 ): CodeFeedback {
     const raw = joinedRunText(run);
     const lang = String(language ?? "").toLowerCase();
 
-    if (lang === "python") return classifyPython(raw, source);
+    if (lang === "python") return classifyPython(raw, source, code);
     if (lang === "javascript" || lang === "js" || lang === "typescript" || lang === "ts") {
         return classifyJavaScript(raw, source);
     }

@@ -7,190 +7,223 @@
           "summary": "Build totals, counts, and running summaries in loops.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Accumulators"
+              "title": "What accumulators and counters do"
             },
             "sketch1": {
-              "title": "Using Counters"
+              "title": "Counting only when a condition is true"
+            },
+            "sketch2": {
+              "title": "Building running totals and summaries"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Mini Number Game"
+              "title": "Practice Accumulators and Counters"
             }
           },
           "projectSteps": {
-            "code1": {
-              "title": "Sum Numbers with an Accumulator"
+            "ex9": {
+              "title": "Sum all numbers from input"
             },
-            "code2": {
-              "title": "Count Occurrences of a Character"
+            "ex10": {
+              "title": "Count vowels in a word"
             },
-            "code3": {
-              "title": "Calculate Running Average"
+            "ex11": {
+              "title": "Add only even numbers"
+            },
+            "ex12": {
+              "title": "Count positive numbers"
+            },
+            "ex13": {
+              "title": "Build a dashed word"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "What is an accumulator?",
-              "prompt": "An accumulator is used to:",
-              "hint": "Think about how totals are calculated in loops.",
-              "help": {
-                "concept": "Accumulators are variables that sum values over iterations.",
-                "hint_1": "They are often initialized to zero and updated in a loop.",
-                "hint_2": "Look for the option that describes a variable that adds up values."
-              },
-              "options": {
-                "a": "Count occurrences of an item",
-                "b": "Keep a running total",
-                "c": "Store a single value",
-                "d": "None of the above"
-              }
-            },
-            "quiz2": {
-              "title": "What does a counter do?",
-              "prompt": "A counter is used to:",
-              "hint": "Consider how you would track how many times something happens.",
-              "help": {
-                "concept": "Counters are variables that keep track of how many times an event occurs.",
-                "hint_1": "They are often incremented in loops.",
-                "hint_2": "Look for the option that describes counting."
-              },
-              "options": {
-                "a": "Sum values",
-                "b": "Count occurrences",
-                "c": "Store a list of items",
-                "d": "None of the above"
-              }
-            },
-            "quiz3": {
-              "title": "Identify the correct uses of accumulators.",
-              "prompt": "Which of the following are valid uses of accumulators?",
-              "hint": "Think about how accumulators are used in calculations.",
-              "help": {
-                "concept": "Accumulators are primarily used for summing or averaging values.",
-                "hint_1": "They are not typically used for counting items.",
-                "hint_2": "Look for options that involve summing or averaging."
-              },
-              "options": {
-                "a": "Calculating the total of a list of numbers",
-                "b": "Counting the number of items in a collection",
-                "c": "Keeping track of a running average",
-                "d": "Summing values in a loop"
-              }
-            },
-            "quiz4": {
-              "title": "Identify the correct statements about counters.",
-              "prompt": "Which of the following statements about counters are true?",
-              "hint": "Consider how counters are typically used in programming.",
-              "help": {
-                "concept": "Counters are often reset and used for tracking occurrences.",
-                "hint_1": "They are not used for summing values.",
-                "hint_2": "Think about how counters are initialized."
-              },
-              "options": {
-                "a": "Counters can be reset to zero.",
-                "b": "Counters are used to sum values.",
-                "c": "Counters can track occurrences of specific items.",
-                "d": "Counters are always initialized to one."
-              }
-            },
-            "quiz5": {
-              "title": "Order the steps to use an accumulator.",
-              "prompt": "Arrange the steps to correctly use an accumulator in a loop.",
-              "hint": "Think about the sequence of actions needed to sum values.",
-              "help": {
-                "concept": "Accumulators must be initialized before use and updated in the loop.",
-                "hint_1": "You need to set it up before adding values.",
-                "hint_2": "The final step involves using the accumulated total."
-              },
-              "tokens": {
-                "t1": "Initialize the accumulator",
-                "t2": "Add values to the accumulator",
-                "t3": "Use the accumulator after the loop"
-              }
-            },
-            "quiz6": {
-              "title": "Order the steps to use a counter.",
-              "prompt": "Arrange the steps to correctly use a counter in a loop.",
-              "hint": "Consider how you would track occurrences in a loop.",
-              "help": {
-                "concept": "Counters must be initialized and updated based on conditions.",
-                "hint_1": "You need to set it up before checking conditions.",
-                "hint_2": "The final step involves using the counted value."
-              },
-              "tokens": {
-                "t1": "Initialize the counter",
-                "t2": "Check condition to increment",
-                "t3": "Use the counter after the loop"
-              }
-            },
-            "code1": {
-              "title": "Sum Numbers with an Accumulator",
-              "prompt": "Write a program that sums numbers from 1 to 100 using an accumulator.",
+            "ex1": {
+              "title": "Identify the accumulator",
+              "prompt": "In this code, which variable is the accumulator?\n\n```python\nnumbers = [2, 4, 6]\ntotal = 0\nfor n in numbers:\n    total = total + n\nprint(total)\n```",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "sum = 0\nfor number in range(1, 101):\n    # Add your code here\nprint(sum)"
+              "options": {
+                "a": "numbers",
+                "b": "n",
+                "c": "total",
+                "d": "print"
+              }
             },
-            "code2": {
-              "title": "Count Occurrences of a Character",
-              "prompt": "Write a program that counts how many times the letter 'a' appears in a given string.",
+            "ex2": {
+              "title": "Choose the best starting value",
+              "prompt": "You want to count how many letters in a word are vowels. What is the best starting value for the counter variable?",
+              "hint": "A counter tracks how many matches have happened so far.",
+              "help": {
+                "concept": "Counters usually begin at zero because before the loop starts, no matching items have been counted yet.",
+                "hint_1": "Ask what the count should be before checking any letters.",
+                "hint_2": "Before the loop runs, the number of vowels found is none."
+              },
+              "options": {
+                "a": "1",
+                "b": "0",
+                "c": "\"\"",
+                "d": "True"
+              }
+            },
+            "ex3": {
+              "title": "Pick the counter patterns",
+              "prompt": "Which code lines are valid ways to increase a counter by 1? Choose all correct answers.",
+              "hint": "A counter update should use the old value and add one.",
+              "help": {
+                "concept": "A counter update increases the current stored count by one, so the new value depends on the old value.",
+                "hint_1": "Look for assignments where the variable becomes itself plus `1`.",
+                "hint_2": "Reject lines that reset the variable or subtract instead of increasing."
+              },
+              "options": {
+                "a": "count = count + 1",
+                "b": "count += 1",
+                "c": "count = 1",
+                "d": "count = count - 1"
+              }
+            },
+            "ex4": {
+              "title": "Find true statements about accumulators",
+              "prompt": "Which statements are true about accumulators in beginner Python loops? Choose all correct answers.",
+              "hint": "Think about what an accumulator stores and how it changes during the loop.",
+              "help": {
+                "concept": "An accumulator keeps a running result across iterations and is updated repeatedly based on each item in the loop.",
+                "hint_1": "Some accumulators add numbers, and some build strings.",
+                "hint_2": "Look for statements about starting values and repeated updates inside the loop."
+              },
+              "options": {
+                "a": "An accumulator can start at 0 when building a numeric total.",
+                "b": "An accumulator can be updated inside a for loop.",
+                "c": "An accumulator must always store text, not numbers.",
+                "d": "An accumulator can build a string step by step."
+              }
+            },
+            "ex5": {
+              "title": "Order the counting steps",
+              "prompt": "Arrange these steps to count how many vowels are in a word.",
+              "hint": "Start by setting up the counter before the loop begins.",
+              "help": {
+                "concept": "A counting loop follows a common pattern: initialize, iterate, test, then update when the condition is true.",
+                "hint_1": "The counter must exist before you can increase it.",
+                "hint_2": "The condition check happens inside the loop before the counter changes."
+              },
+              "tokens": {
+                "t1": "Set `vowel_count = 0`",
+                "t2": "Loop through each character in the word",
+                "t3": "Check whether the character is a vowel",
+                "t4": "Increase `vowel_count` by 1"
+              }
+            },
+            "ex6": {
+              "title": "Order the running total logic",
+              "prompt": "Arrange these code ideas in the correct order for summing numbers in a list.",
+              "hint": "A running total starts before the loop and is printed after the loop.",
+              "help": {
+                "concept": "To build a total, you initialize the accumulator, loop through items, update the total each time, and then use the final result after the loop ends.",
+                "hint_1": "The print step belongs at the end, after all numbers have been processed.",
+                "hint_2": "The update step must happen inside the loop, after each number is visited."
+              },
+              "tokens": {
+                "t1": "Set `total = 0`",
+                "t2": "Loop through each number",
+                "t3": "Update `total` with the current number",
+                "t4": "Print `total`"
+              }
+            },
+            "ex7": {
+              "title": "Fill the counter start value",
+              "prompt": "Complete the code so the counter starts correctly.",
+              "hint": "Before the loop counts anything, the count should show no matches yet.",
+              "help": {
+                "concept": "A counter begins at zero because zero items have been counted before the loop starts.",
+                "hint_1": "This is the usual starting value for counting occurrences.",
+                "hint_2": "Use the number that represents none counted so far."
+              },
+              "template": "count = [blank1]",
+              "choices": [
+                "0",
+                "1",
+                "\"\"",
+                "count"
+              ]
+            },
+            "ex8": {
+              "title": "Fill the accumulator variable",
+              "prompt": "Complete the line so it adds the current number to the running total.",
+              "hint": "The same variable should appear on both sides when updating a running the missing term.",
+              "help": {
+                "concept": "An accumulator update uses the current stored the missing term and combines it with the new item to make the next the missing term.",
+                "hint_1": "The missing name is the variable that stores the running sum.",
+                "hint_2": "Use the variable that should keep growing as the loop continues."
+              },
+              "template": "[blank1] = total + n",
+              "choices": [
+                "n",
+                "print",
+                "total",
+                "numbers"
+              ]
+            },
+            "ex9": {
+              "title": "Sum all numbers from input",
+              "prompt": "Write Python code that reads one line of space-separated integers, adds them all, and prints the total.\n\nExample input:\n`3 5 2`\n\nExpected output:\n`10`\n\nType code in the code editor, click Run, and check the output panel.",
+              "hint": "Read the task \"Sum all numbers from input\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Sum all numbers from input\".",
+                "hint_1": "Write the code that creates exactly the requested output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "parts = input().split()\ntotal = 0\n\n# TODO: loop through parts, add each number to total\n\nprint(total)"
+            },
+            "ex10": {
+              "title": "Count vowels in a word",
+              "prompt": "Write Python code that reads one word, counts how many lowercase vowels it contains, and prints the count.\n\nCount these vowels: `a`, `e`, `i`, `o`, `u`.\n\nExample input:\n`banana`\n\nExpected output:\n`3`\n\nType code in the code editor, click Run, and check the output panel.",
               "hint": "Read the coding task and identify what the program should print.",
               "help": {
                 "concept": "This coding exercise checks whether the program produces the requested output.",
-                "hint_1": "Use the Python statement or expression that matches the required output.",
-                "hint_2": "Run the code and compare the output panel with the expected result."
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "text = 'banana'\ncount = 0\nfor char in text:\n    # Add your code here\nprint(count)"
+              "starterCode": "word = input()\nvowel_count = 0\n\n# TODO: loop through the characters in word\n# TODO: if the character is a vowel, increase vowel_count\n\nprint(vowel_count)"
             },
-            "code3": {
-              "title": "Calculate Running Average",
-              "prompt": "Write a program that calculates the running average of numbers from 1 to 10.",
+            "ex11": {
+              "title": "Add only even numbers",
+              "prompt": "Write Python code that reads one line of space-separated integers, adds only the even numbers, and prints the total.\n\nExample input:\n`4 7 2 9 6`\n\nExpected output:\n`12`\n\nType code in the code editor, click Run, and check the output panel.",
+              "hint": "Read the task \"Add only even numbers\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Add only even numbers\".",
+                "hint_1": "Write the code that creates exactly the requested output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "parts = input().split()\neven_total = 0\n\n# TODO: loop through the parts\n# TODO: convert each part to an integer\n# TODO: if the number is even, add it to even_total\n\nprint(even_total)"
+            },
+            "ex12": {
+              "title": "Count positive numbers",
+              "prompt": "Write Python code that reads one line of space-separated integers, counts how many are greater than zero, and prints the count.\n\nExample input:\n`-2 5 0 3 -1`\n\nExpected output:\n`2`\n\nType code in the code editor, click Run, and check the output panel.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "total = 0\ncount = 0\nfor number in range(1, 11):\n    # Add your code here\naverage = total / count\nprint(average)"
+              "starterCode": "parts = input().split()\ncount = 0\n\n# TODO: loop through the parts\n# TODO: count numbers greater than 0\n\nprint(count)"
             },
-            "policy_fill_blank_choice_1": {
-              "title": "Choose the missing Python keyword",
-              "prompt": "Fill in the missing Python keyword so the statement is valid.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+            "ex13": {
+              "title": "Build a dashed word",
+              "prompt": "Write Python code that reads one word and prints its characters joined with dashes after each character.\n\nExample input:\n`code`\n\nExpected output:\n`c-o-d-e-`\n\nType code in the code editor, click Run, and check the output panel.",
+              "hint": "Read the coding task and identify what the program should print.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "template": "___ value > 0:\n    print('positive')",
-              "choices": [
-                "if",
-                "for",
-                "def",
-                "class"
-              ]
-            },
-            "policy_fill_blank_choice_2": {
-              "title": "Choose the missing Python keyword",
-              "prompt": "Fill in the missing Python keyword so the statement is valid.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
-              },
-              "template": "___ value > 0:\n    print('positive')",
-              "choices": [
-                "if",
-                "for",
-                "def",
-                "class"
-              ]
+              "starterCode": "word = input()\nresult = \"\"\n\n# TODO: loop through each character in word\n# TODO: add the character and a dash to result\n\nprint(result)"
             }
           }
         }
@@ -201,13 +234,17 @@
     "python-v2": {
       "python-v2-3": {
         "accumulators-and-counters": {
-          "sketch1": {
-            "title": "Understanding Accumulators",
-            "bodyMarkdown": "An accumulator is a variable that keeps a running total. For example, if you want to sum numbers from 1 to 5, you can use an accumulator to add each number in a loop:\n\n```python\nsum = 0\nfor number in range(1, 6):\n    sum += number  # Add the current number to the sum\nprint(sum)  # Output: 15\n```\n\n**Your turn:** Try modifying the range to sum numbers from 1 to 10.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "sk1": {
+            "title": "What accumulators and counters do",
+            "bodyMarkdown": "When a loop runs many times, you often want to **remember something across iterations**. Two common patterns are:\n\n- **Counter**: keeps track of how many times something happens\n- **Accumulator**: builds up a total or combined result\n\nA counter usually starts at `0` and goes up by `1`.\nAn accumulator often starts at `0` for numbers, or `\"\"` for text.\n\nHere is a simple example that adds numbers:\n\n```python\nnumbers = [3, 5, 2]\ntotal = 0\n\nfor n in numbers:\n    total = total + n\n\nprint(total)\n```\n\nWalk through it:\n\n- `total = 0` sets the starting value\n- The loop visits `3`, then `5`, then `2`\n- Each time, `total` becomes the old total plus the new number\n- At the end, `total` is `10`\n\nYou can also count items:\n\n```python\nword = \"banana\"\ncount = 0\n\nfor ch in word:\n    count = count + 1\n\nprint(count)\n```\n\nThis prints `6` because the loop runs once for each character.\n\n**Your turn:** Type one of these examples in the code editor, click Run, and then change the starting value or the data to see how the result changes."
           },
-          "sketch2": {
-            "title": "Using Counters",
-            "bodyMarkdown": "A counter is a variable that counts occurrences. For instance, if you want to count how many times a specific letter appears in a string:\n\n```python\ntext = 'hello'\ncount = 0\nfor char in text:\n    if char == 'l':\n        count += 1  # Increment the counter\nprint(count)  # Output: 2\n```\n\n**Try this:** Change the letter to count a different character.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "sk2": {
+            "title": "Counting only when a condition is true",
+            "bodyMarkdown": "A counter becomes more useful when you only increase it for certain items.\n\nFor example, count how many vowels are in a word:\n\n```python\nword = \"banana\"\nvowel_count = 0\n\nfor ch in word:\n    if ch in \"aeiou\":\n        vowel_count = vowel_count + 1\n\nprint(vowel_count)\n```\n\nStep through it:\n\n- `word = \"banana\"` stores the text to check\n- `vowel_count = 0` starts the counter at zero\n- `for ch in word:` looks at each character\n- `if ch in \"aeiou\":` checks whether the character is a vowel\n- `vowel_count = vowel_count + 1` increases the counter only for vowels\n\nThe output is `3` because `banana` has `a`, `a`, and `a`.\n\nThis pattern is common:\n\n1. Start with `0`\n2. Loop through data\n3. Test a condition\n4. Increase the counter when the condition is true\n\n**Your turn:** Change `word` to `\"education\"` or your own word. Click Run and check the output panel."
+          },
+          "sk3": {
+            "title": "Building running totals and summaries",
+            "bodyMarkdown": "An accumulator can do more than add every item. It can build a result based on a rule.\n\nExample: add only even numbers.\n\n```python\nnumbers = [4, 7, 2, 9, 6]\neven_total = 0\n\nfor n in numbers:\n    if n % 2 == 0:\n        even_total = even_total + n\n\nprint(even_total)\n```\n\nWalk through it:\n\n- Start with `even_total = 0`\n- Check each number in the list\n- `n % 2 == 0` means the number is even\n- Add only the even numbers: `4`, `2`, and `6`\n- The final result is `12`\n\nYou can also build text with an accumulator:\n\n```python\nword = \"code\"\nresult = \"\"\n\nfor ch in word:\n    result = result + ch + \"-\"\n\nprint(result)\n```\n\nThis prints `c-o-d-e-`.\n\nSo accumulators are not only for math totals. They can also build strings and summaries.\n\n**Practice this:** Change the list or the word, click Run, and predict the output before you check the output panel."
           }
         }
       }

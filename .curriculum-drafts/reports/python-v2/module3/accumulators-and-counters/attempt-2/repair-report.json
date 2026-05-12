@@ -1,0 +1,19 @@
+{
+  "topicId": "accumulators-and-counters",
+  "repairs": [
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "code-count-long-words",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_CROSS_EXERCISE_CLASS_CONTEXT_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "code-count-long-words",
+      "message": "Prepended shared class/setup context needed by this code_input exercise so it can run independently."
+    }
+  ]
+}

@@ -1,40 +1,4 @@
 {
   "topicId": "comparisons-and-truth-values",
-  "repairs": [
-    {
-      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
-      "category": "text",
-      "severity": "medium",
-      "field": "sketchBlocks.comparison_operators.bodyMarkdown",
-      "message": "Added a short line-by-line explanation after a multi-line code example."
-    },
-    {
-      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
-      "category": "text",
-      "severity": "medium",
-      "field": "sketchBlocks.truthiness.bodyMarkdown",
-      "message": "Added a short line-by-line explanation after a multi-line code example."
-    },
-    {
-      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
-      "category": "other",
-      "severity": "medium",
-      "field": "policy_code_input_1",
-      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"comparisons-and-truth-values\"."
-    },
-    {
-      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
-      "category": "other",
-      "severity": "medium",
-      "field": "policy_code_input_2",
-      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"comparisons-and-truth-values\"."
-    },
-    {
-      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
-      "category": "other",
-      "severity": "medium",
-      "field": "policy_code_input_3",
-      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"comparisons-and-truth-values\"."
-    }
-  ]
+  "repairs": []
 }

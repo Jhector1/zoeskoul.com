@@ -14,14 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "truthy-basics",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "numbers-and-none",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.cards.sketch2.title",
+      "sketchId": "using-truthiness-carefully",
       "height": 420
     },
     {
@@ -50,27 +57,45 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "policy_code_input_1",
-            "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.projectSteps.policy_code_input_1.title",
-            "exerciseKey": "policy_code_input_1",
+            "id": "code_classify_string",
+            "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.projectSteps.code_classify_string.title",
+            "exerciseKey": "code-classify-string",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "policy_code_input_2",
-            "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.projectSteps.policy_code_input_2.title",
-            "exerciseKey": "policy_code_input_2",
+            "id": "code_classify_number",
+            "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.projectSteps.code_classify_number.title",
+            "exerciseKey": "code-classify-number",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "policy_code_input_3",
-            "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.projectSteps.policy_code_input_3.title",
-            "exerciseKey": "policy_code_input_3",
+            "id": "code_check_missing_word",
+            "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.projectSteps.code_check_missing_word.title",
+            "exerciseKey": "code-check-missing-word",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_points_message",
+            "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.projectSteps.code_points_message.title",
+            "exerciseKey": "code-points-message",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_two_inputs_both_present",
+            "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.projectSteps.code_two_inputs_both_present.title",
+            "exerciseKey": "code-two-inputs-both-present",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -82,45 +107,36 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "truthy-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.sketch1.title",
-      "bodyKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.truthy-basics.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.truthy-basics.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "numbers-and-none",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.sketch2.title",
-      "bodyKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.numbers-and-none.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.numbers-and-none.bodyMarkdown"
+    },
+    {
+      "id": "using-truthiness-carefully",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.using-truthiness-carefully.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.using-truthiness-carefully.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-falsy-empty-string",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.quiz1",
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.sc-falsy-empty-string",
       "optionIds": [
         "a",
         "b",
         "c",
         "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "c"
-      }
-    },
-    {
-      "id": "quiz2",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.quiz2",
-      "optionIds": [
-        "a",
-        "b"
       ],
       "expected": {
         "kind": "single_choice",
@@ -128,11 +144,28 @@
       }
     },
     {
-      "id": "quiz3",
+      "id": "sc-none-truthiness",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.sc-none-truthiness",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-falsy-values",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.quiz3",
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.mc-falsy-values",
       "optionIds": [
         "a",
         "b",
@@ -143,16 +176,17 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
+          "b",
           "c"
         ]
       }
     },
     {
-      "id": "quiz4",
+      "id": "mc-truthy-values",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.quiz4",
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.mc-truthy-values",
       "optionIds": [
         "a",
         "b",
@@ -163,67 +197,22 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "d"
+          "b"
         ]
       }
     },
     {
-      "id": "quiz5",
+      "id": "dr-check-empty-input-order",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.quiz5",
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.dr-check-empty-input-order",
       "tokenIds": [
         "t1",
         "t2",
         "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t4",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "quiz6",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.quiz6",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "None"
-      }
-    },
-    {
-      "id": "quiz7",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.quiz7",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "False"
-      }
-    },
-    {
-      "id": "quiz8",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.quiz8",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
+        "t4",
+        "t5"
       ],
       "expected": {
         "kind": "drag_reorder",
@@ -231,86 +220,197 @@
           "t1",
           "t2",
           "t3",
-          "t4"
+          "t4",
+          "t5"
         ]
       }
     },
     {
-      "id": "policy_code_input_1",
-      "kind": "code_input",
-      "purpose": "project",
+      "id": "dr-check-none-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.policy_code_input_1",
-      "language": "python",
-      "starterCode": "text = input()\n# Your code here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "hello\n",
-            "stdout": "True\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "\n",
-            "stdout": "False\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "text = input()\nif text:\n    print(True)\nelse:\n    print(False)"
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.dr-check-none-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
       }
     },
     {
-      "id": "policy_code_input_2",
-      "kind": "code_input",
-      "purpose": "project",
+      "id": "fb-zero-falsy",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.policy_code_input_2",
-      "language": "python",
-      "starterCode": "text = input()\n# Your code here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "hello\n",
-            "stdout": "True\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "\n",
-            "stdout": "False\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "text = input()\nif text:\n    print(True)\nelse:\n    print(False)"
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.fb-zero-falsy",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "falsy"
       }
     },
     {
-      "id": "policy_code_input_3",
+      "id": "fb-nonempty-string",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.fb-nonempty-string",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "truthy"
+      }
+    },
+    {
+      "id": "code-classify-string",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.policy_code_input_3",
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string",
       "language": "python",
-      "starterCode": "text = input()\n# Your code here",
+      "starterCode": "text = input()\n# TODO: print \"empty\" if text is empty, otherwise print \"not empty\"",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "hello\n",
-            "stdout": "True\n",
+            "stdin": "\n",
+            "stdout": "empty\n",
             "match": "exact"
           },
           {
-            "stdin": "\n",
-            "stdout": "False\n",
+            "stdin": "hello\n",
+            "stdout": "not empty\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "text = input()\nif text:\n    print(True)\nelse:\n    print(False)"
+        "solutionCode": "text = input()\nif text:\n    print(\"not empty\")\nelse:\n    print(\"empty\")"
+      }
+    },
+    {
+      "id": "code-classify-number",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number",
+      "language": "python",
+      "starterCode": "number = int(input())\n# TODO: print the correct message based on the number's truthiness",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "0\n",
+            "stdout": "falsy number\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "8\n",
+            "stdout": "truthy number\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "-2\n",
+            "stdout": "truthy number\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "number = int(input())\nif number:\n    print(\"truthy number\")\nelse:\n    print(\"falsy number\")"
+      }
+    },
+    {
+      "id": "code-check-missing-word",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word",
+      "language": "python",
+      "starterCode": "value = input()\n# TODO: if the input text is exactly \"None\", print \"missing\"; otherwise print \"present\"",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "None\n",
+            "stdout": "missing\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "apple\n",
+            "stdout": "present\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "value = input()\nif value == \"None\":\n    print(\"missing\")\nelse:\n    print(\"present\")"
+      }
+    },
+    {
+      "id": "code-points-message",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message",
+      "language": "python",
+      "starterCode": "points = int(input())\n# TODO: print the correct message",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "0\n",
+            "stdout": "no points\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "14\n",
+            "stdout": "points recorded\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "points = int(input())\nif points:\n    print(\"points recorded\")\nelse:\n    print(\"no points\")"
+      }
+    },
+    {
+      "id": "code-two-inputs-both-present",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present",
+      "language": "python",
+      "starterCode": "first = input()\nsecond = input()\n# TODO: print \"both present\" only when both strings are non-empty",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Ava\nLee\n",
+            "stdout": "both present\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Ava\n\n",
+            "stdout": "missing one\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "\n\n",
+            "stdout": "missing one\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "first = input()\nsecond = input()\nif first and second:\n    print(\"both present\")\nelse:\n    print(\"missing one\")"
       }
     }
   ]

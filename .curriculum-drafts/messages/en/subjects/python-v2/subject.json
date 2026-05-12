@@ -3,7 +3,12 @@
     "python-v2": {
       "title": "Python for Beginners",
       "description": "A beginner-friendly Python foundations course that helps learners start from zero and build small interactive programs using values, variables, input, strings, conditions, and loops.",
-      "moreComingSoon": "More Python for Beginners lessons are coming soon."
+      "moreComingSoon": "More Python for Beginners lessons are coming soon.",
+      "finalCapstone": {
+        "title": "Final Capstone: Beginner Python Assistant",
+        "description": "Build one complete interactive program that asks for input, stores values, uses strings, makes decisions with if/elif/else, repeats work with a loop, and prints a clear final result.",
+        "requirements": "Use the code editor, click Run, and check the output panel. Your program should include input(), variables, at least one f-string or string method, one conditional section, one loop, and a final summary output."
+      }
     }
   },
   "modules": {
@@ -19,7 +24,8 @@
         "why": [
           "Builds confidence with getting started with python.",
           "Prepares learners for the next skills in the course."
-        ]
+        ],
+        "moduleReview": "Review: You learned how to run code, print output, use comments, read simple errors, and evaluate basic expressions."
       },
       "python-v2-1": {
         "title": "Variables, Input, and Strings",
@@ -32,7 +38,9 @@
         "why": [
           "Builds confidence with variables, input, and strings.",
           "Prepares learners for the next skills in the course."
-        ]
+        ],
+        "prerequisiteReminder": "Before Module 1, make sure you can type code in the editor, click Run, read the output panel, and use print() with simple values.",
+        "moduleReview": "Review: You learned how to store values, collect input, convert input, use string tools, and format output."
       },
       "python-v2-2": {
         "title": "Conditions and Logic",
@@ -45,7 +53,9 @@
         "why": [
           "Builds confidence with conditions and logic.",
           "Prepares learners for the next skills in the course."
-        ]
+        ],
+        "prerequisiteReminder": "Before Module 2, make sure you can create variables, collect input, convert input with int() or float(), and build clear output with strings or f-strings.",
+        "moduleReview": "Review: You learned how to choose between paths with if/elif/else, comparisons, truthiness, and boolean logic."
       },
       "python-v2-3": {
         "title": "Loops and Iteration",
@@ -58,7 +68,9 @@
         "why": [
           "Builds confidence with loops and iteration.",
           "Prepares learners for the next skills in the course."
-        ]
+        ],
+        "prerequisiteReminder": "Before Module 3, make sure you can write if/elif/else decisions, compare values, and explain which branch will run.",
+        "moduleReview": "Review: You learned how to repeat work with for loops, while loops, range(), counters, accumulators, break, and continue."
       }
     }
   },

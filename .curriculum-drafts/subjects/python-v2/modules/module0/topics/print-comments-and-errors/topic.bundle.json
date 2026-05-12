@@ -14,21 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.cards.sketch0.title",
-      "sketchId": "print_statements",
+      "sketchId": "sketch-print-basics",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.cards.sketch1.title",
-      "sketchId": "comments_in_python",
+      "sketchId": "sketch-comments",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.cards.sketch2.title",
-      "sketchId": "syntax_errors",
+      "sketchId": "sketch-first-errors",
       "height": 420
     },
     {
@@ -57,27 +57,45 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "code_input_1",
-            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.code_input_1.title",
-            "exerciseKey": "code_input_1",
+            "id": "ci_print_one_line",
+            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.ci_print_one_line.title",
+            "exerciseKey": "ci-print-one-line",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "code_input_2",
-            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.code_input_2.title",
-            "exerciseKey": "code_input_2",
+            "id": "ci_two_lines",
+            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.ci_two_lines.title",
+            "exerciseKey": "ci-two-lines",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "code_input_3",
-            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.code_input_3.title",
-            "exerciseKey": "code_input_3",
+            "id": "ci_comment_and_output",
+            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.ci_comment_and_output.title",
+            "exerciseKey": "ci-comment-and-output",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_fix_missing_paren",
+            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.ci_fix_missing_paren.title",
+            "exerciseKey": "ci-fix-missing-paren",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_personal_intro",
+            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.ci_personal_intro.title",
+            "exerciseKey": "ci-personal-intro",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -89,31 +107,48 @@
   ],
   "sketches": [
     {
-      "id": "print_statements",
+      "id": "sketch-print-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.print_statements.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.print_statements.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch-print-basics.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch-print-basics.bodyMarkdown"
     },
     {
-      "id": "comments_in_python",
+      "id": "sketch-comments",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.comments_in_python.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.comments_in_python.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch-comments.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch-comments.bodyMarkdown"
     },
     {
-      "id": "syntax_errors",
+      "id": "sketch-first-errors",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.syntax_errors.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.syntax_errors.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch-first-errors.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch-first-errors.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "q1",
+      "id": "sc-print-purpose",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q1",
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.sc-print-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-comment-line",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.sc-comment-line",
       "optionIds": [
         "a",
         "b",
@@ -126,49 +161,28 @@
       }
     },
     {
-      "id": "q2",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q2",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
-      }
-    },
-    {
-      "id": "q3",
+      "id": "mc-valid-print-lines",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q3",
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.mc-valid-print-lines",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
-          "b",
-          "d"
+          "a"
         ]
       }
     },
     {
-      "id": "q4",
+      "id": "mc-comments-behavior",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q4",
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.mc-comments-behavior",
       "optionIds": [
         "a",
         "b",
@@ -184,11 +198,31 @@
       }
     },
     {
-      "id": "q5",
+      "id": "dr-run-simple-program",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q5",
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.dr-run-simple-program",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "dr-build-valid-print",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.dr-build-valid-print",
       "tokenIds": [
         "t1",
         "t2",
@@ -206,125 +240,157 @@
       }
     },
     {
-      "id": "q6",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q6",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "q7",
+      "id": "fb-comment-symbol",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q7",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "'Hello, World!'"
-      }
-    },
-    {
-      "id": "q8",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q8",
-      "choiceCount": 3,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.fb-comment-symbol",
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
         "value": "#"
       }
     },
     {
-      "id": "code_input_1",
-      "kind": "code_input",
-      "purpose": "project",
+      "id": "fb-complete-print-text",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.code_input_1",
-      "language": "python",
-      "starterCode": "print('My name is')\nprint('My age is')",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "12\n",
-            "stdout": "My name is Zoe\nMy age is 25",
-            "match": "exact"
-          },
-          {
-            "stdin": "20\n",
-            "stdout": "My name is Zoe\nMy age is 25",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "print('My name is Zoe')\nprint('My age is 25')"
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.fb-complete-print-text",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "Hello"
       }
     },
     {
-      "id": "code_input_2",
+      "id": "ci-print-one-line",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.code_input_2",
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line",
       "language": "python",
-      "starterCode": "print('Hello World'",
+      "starterCode": "# Write Python code below",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "12\n",
-            "stdout": "Hello World",
+            "stdin": "",
+            "stdout": "Welcome to Python\n",
             "match": "exact"
           },
           {
-            "stdin": "20\n",
-            "stdout": "Hello World",
+            "stdin": "",
+            "stdout": "Welcome to Python\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "print('Hello World')"
+        "solutionCode": "print(\"Welcome to Python\")"
       }
     },
     {
-      "id": "code_input_3",
+      "id": "ci-two-lines",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.code_input_3",
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-two-lines",
       "language": "python",
-      "starterCode": "# Write your code below",
+      "starterCode": "# Print the two required lines",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "12\n",
-            "stdout": "Hello!",
+            "stdin": "",
+            "stdout": "Name: Alex\nCity: Lima\n",
             "match": "exact"
           },
           {
-            "stdin": "20\n",
-            "stdout": "Hello!",
+            "stdin": "",
+            "stdout": "Name: Alex\nCity: Lima\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "# This will print a greeting\nprint('Hello!')"
+        "solutionCode": "print(\"Name: Alex\")\nprint(\"City: Lima\")"
+      }
+    },
+    {
+      "id": "ci-comment-and-output",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output",
+      "language": "python",
+      "starterCode": "# Add your comment here\n# Then write the print line below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ready\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "Ready\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "# This program is ready\nprint(\"Ready\")"
+      }
+    },
+    {
+      "id": "ci-fix-missing-paren",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren",
+      "language": "python",
+      "starterCode": "print(\"Hello\"",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Hello\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "Hello\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"Hello\")"
+      }
+    },
+    {
+      "id": "ci-personal-intro",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-personal-intro",
+      "language": "python",
+      "starterCode": "# Write your introduction program below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "About me\nName: Sam\nFavorite color: Green\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "About me\nName: Sam\nFavorite color: Green\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"About me\")\nprint(\"Name: Sam\")\nprint(\"Favorite color: Green\")"
       }
     }
   ]

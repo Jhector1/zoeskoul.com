@@ -31,7 +31,36 @@ function readAbortKind(ref: React.MutableRefObject<AbortKind>): AbortKind {
 }
 
 
+function normalizePythonSyntaxErrorForLearners(args: {
+    stderr: string;
+    code: string;
+    filename?: string;
+}) {
+    const { stderr, code, filename = "main.py" } = args;
 
+    const isUnexpectedEof =
+        /unexpected EOF while parsing/i.test(stderr) ||
+        /was never closed/i.test(stderr) ||
+        /EOF while scanning/i.test(stderr);
+
+    if (!isUnexpectedEof) {
+        return stderr.replace(/File "script\.py"/g, `File "${filename}"`);
+    }
+
+    const lines = code.split(/\r?\n/);
+    let lastNonEmptyLine = lines.length;
+
+    for (let i = lines.length - 1; i >= 0; i -= 1) {
+        if (lines[i].trim()) {
+            lastNonEmptyLine = i + 1;
+            break;
+        }
+    }
+
+    return stderr
+        .replace(/File "script\.py", line \d+/g, `File "${filename}", line ${lastNonEmptyLine}`)
+        .replace(/SyntaxError: unexpected EOF while parsing/g, "SyntaxError: incomplete statement. Check for a missing closing parenthesis, quote, or bracket.");
+}
 
 function isCanceledResult(r: RunResult | null | undefined) {
     return r?.status === "Canceled";
@@ -373,7 +402,16 @@ export function useTerminalRunner(args: {
                 lines.push({ type: "err", text: cleanTermText(r.compile_output) });
             }
             if (r.stderr) {
-                lines.push({ type: "err", text: cleanTermText(r.stderr) });
+                const stderr =
+                    lang === "python"
+                        ? normalizePythonSyntaxErrorForLearners({
+                            stderr: r.stderr,
+                            code,
+                            filename: "main.py",
+                        })
+                        : r.stderr;
+
+                lines.push({ type: "err", text: cleanTermText(stderr) });
             }
             if (r.message) {
                 lines.push({ type: "err", text: cleanTermText(r.message) });
@@ -384,7 +422,7 @@ export function useTerminalRunner(args: {
 
             return lines;
         },
-        [],
+        [lang, code],
     );
 
     const runOnce = React.useCallback(
@@ -543,13 +581,42 @@ export function useTerminalRunner(args: {
             const stdoutText = cleanTermText(r.stdout ?? "");
             const extraErrs: TermLine[] = [];
 
-            if (r.compile_output) extraErrs.push({ type: "err", text: cleanTermText(r.compile_output) });
-            if (r.stderr) extraErrs.push({ type: "err", text: cleanTermText(r.stderr) });
-            if (r.message) extraErrs.push({ type: "err", text: cleanTermText(r.message) });
-            if (r.error && !isCanceledResult(r)) {
-                extraErrs.push({ type: "err", text: cleanTermText(r.error) });
+            if (r.compile_output) {
+                extraErrs.push({
+                    type: "err",
+                    text: cleanTermText(r.compile_output),
+                });
             }
 
+            if (r.stderr) {
+                const stderr =
+                    lang === "python"
+                        ? normalizePythonSyntaxErrorForLearners({
+                            stderr: r.stderr,
+                            code,
+                            filename: "main.py",
+                        })
+                        : r.stderr;
+
+                extraErrs.push({
+                    type: "err",
+                    text: cleanTermText(stderr),
+                });
+            }
+
+            if (r.message) {
+                extraErrs.push({
+                    type: "err",
+                    text: cleanTermText(r.message),
+                });
+            }
+
+            if (r.error && !isCanceledResult(r)) {
+                extraErrs.push({
+                    type: "err",
+                    text: cleanTermText(r.error),
+                });
+            }
             if (syntheticPrompt) {
                 const prevRunLines = stripTrailingProcessing(getRunLines(runId));
                 const prevStdout = cleanTermText(probePrefix ?? "");
@@ -629,7 +696,7 @@ export function useTerminalRunner(args: {
             setInputPrompt("");
             setRunState("idle");
         },
-        [getRunLines, inputPlan.prompts, replaceRunLines, stripTrailingProcessing],
+        [code, getRunLines, inputPlan.prompts, lang, replaceRunLines, stripTrailingProcessing],
     );
 
     const cancelRun = React.useCallback(() => {

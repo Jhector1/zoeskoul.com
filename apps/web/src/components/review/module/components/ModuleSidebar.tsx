@@ -520,7 +520,7 @@ function ModuleSidebar({
                                 "Reset all progress in this module",
                             )}
                         >
-                            {ui.t("reset", {}, "Reset")}
+                            {ui.t("reset", {}, "Reset Module")}
                         </button>
                     </div>
                 </div>

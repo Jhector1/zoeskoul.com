@@ -240,14 +240,19 @@ export default function ReviewTopicCards({
                         );
                       });
                     }}
+
                     onQuizReset={(quizCardId) => {
+                      useReviewRuntimeStore.getState().clearRuntimeForCard(viewTid, quizCardId);
+
                       setProgress((prev: any) => {
                         const next = buildQuizResetProgress(
-                          prev,
-                          viewTid,
-                          quizCardId,
+                            prev,
+                            viewTid,
+                            quizCardId,
                         );
+
                         queueMicrotask(() => flushNow(next));
+
                         return next;
                       });
                     }}

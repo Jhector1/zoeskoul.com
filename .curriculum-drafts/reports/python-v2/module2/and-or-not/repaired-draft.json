@@ -4,200 +4,57 @@
   "minutes": 25,
   "sketchBlocks": [
     {
-      "id": "sketch_1",
-      "title": "Understanding Boolean Logic",
-      "bodyMarkdown": "Boolean logic is fundamental in programming. It allows us to combine conditions using operators like AND, OR, and NOT. For example, if we want to check if a number is both greater than 10 AND less than 20, we can write:\n\n```python\nif number > 10 and number < 20:\n    print('Number is between 10 and 20')\n```\n\nTry it yourself: Modify the condition to check if a number is outside this range.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "id": "sketch_and_basics",
+      "title": "Using and to require two things",
+      "bodyMarkdown": "Boolean operators let you combine conditions. Use `and` when **both** parts must be true.\n\nExample:\n\n```python\nage = 20\nhas_id = True\n\nif age >= 18 and has_id:\n    print(\"Allowed in\")\nelse:\n    print(\"Not allowed\")\n```\n\nStep by step:\n- `age >= 18` checks whether the age is at least 18.\n- `has_id` is already a boolean value.\n- `and` joins them.\n- The `if` block runs only when **both** are true.\n\nWorked example:\n- If `age` is `20` and `has_id` is `True`, the output is `Allowed in`.\n- If `age` is `20` but `has_id` is `False`, the output is `Not allowed`.\n\nTry it yourself: change `age` or `has_id`, click Run, and check the output panel."
     },
     {
-      "id": "sketch_2",
-      "title": "Using OR in Conditions",
-      "bodyMarkdown": "The OR operator allows us to check multiple conditions. For instance, if we want to check if a number is either less than 10 OR greater than 20, we can write:\n\n```python\nif number < 10 or number > 20:\n    print('Number is outside the range of 10 to 20')\n```\n\nYour turn: Change the condition to check for a number that is either less than 5 or greater than 15.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "id": "sketch_or_not",
+      "title": "Using or and not",
+      "bodyMarkdown": "Use `or` when **at least one** condition must be true. Use `not` to flip a boolean value.\n\nExample:\n\n```python\nis_weekend = False\nis_holiday = True\n\nif is_weekend or is_holiday:\n    print(\"No school\")\n\nlogged_in = False\n\nif not logged_in:\n    print(\"Please sign in\")\n```\n\nLine by line:\n- `is_weekend or is_holiday` is true if either value is true.\n- Since `is_holiday` is `True`, `No school` prints.\n- `logged_in` is `False`.\n- `not logged_in` becomes `True`, so `Please sign in` prints.\n\nWorked example:\n- `False or True` becomes `True`.\n- `not False` becomes `True`.\n\nYour turn: change the boolean values, click Run, and predict what appears in the output panel before you check."
+    },
+    {
+      "id": "sketch_combining_clear_rules",
+      "title": "Combining conditions in real if statements",
+      "bodyMarkdown": "You can use boolean operators to write clearer branching rules.\n\nExample:\n\n```python\nscore = 82\nlate = False\n\nif score >= 80 and not late:\n    print(\"Certificate\")\nelif score >= 80 and late:\n    print(\"Passed, but no certificate\")\nelse:\n    print(\"Keep practicing\")\n```\n\nHow this works:\n- First, Python checks `score >= 80 and not late`.\n- If `score` is `82`, then `score >= 80` is true.\n- If `late` is `False`, then `not late` is true.\n- Because both parts are true, Python prints `Certificate` and stops checking the later branches.\n\nThis is useful for rules like eligibility, validation, and classification.\n\nTry this: change `score` to `75`, then change `late` to `True`, and see which branch runs each time.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     }
   ],
   "quizDraft": [
     {
-      "id": "quiz_1",
+      "id": "sc_and_true",
       "kind": "single_choice",
-      "title": "What does the AND operator do?",
-      "prompt": "Select the correct definition of the AND operator.",
+      "title": "When does and become true?",
+      "prompt": "Which statement about `A and B` is correct?",
       "options": [
-        "It checks if at least one condition is true.",
-        "It checks if both conditions are true.",
-        "It negates a condition.",
-        "It combines multiple conditions without checks."
-      ],
-      "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Think about how conditions must relate to each other.",
-      "help": {
-        "concept": "The AND operator requires both conditions to be true for the overall expression to be true.",
-        "hint_1": "Remember, both sides of the AND must be true.",
-        "hint_2": "If either condition is false, the result is false."
-      }
-    },
-    {
-      "id": "quiz_2",
-      "kind": "single_choice",
-      "title": "What will this condition evaluate to: (5 > 3) and (3 > 2)?",
-      "prompt": "Choose the correct evaluation result.",
-      "options": [
-        "True",
-        "False",
-        "None",
-        "Error"
+        "It is true only when both A and B are true.",
+        "It is true when either A or B is true.",
+        "It is always the opposite of A.",
+        "It is true whenever A is false."
       ],
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "hint": "Think about a rule where two requirements must both be met.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+        "concept": "The `and` operator combines two conditions and returns true only if each condition is true.",
+        "hint_1": "Compare `and` with a situation like 'old enough and has permission'. Missing either one should fail.",
+        "hint_2": "Ask yourself what happens if one side is false. With `and`, that makes the whole result false."
       }
     },
     {
-      "id": "quiz_3",
-      "kind": "multi_choice",
-      "title": "Which of the following are valid uses of the OR operator?",
-      "prompt": "Select all that apply.",
+      "id": "sc_not_flip",
+      "kind": "single_choice",
+      "title": "What does not do?",
+      "prompt": "If `logged_in = False`, what does `not logged_in` evaluate to?",
       "options": [
-        "if x < 10 or x > 20:",
-        "if x == 5 or x == 10:",
-        "if x > 5 and x < 10:",
-        "if not x == 0 or x == 1:"
-      ],
-      "correctOptionIds": [
-        "a",
-        "b",
-        "d"
-      ],
-      "hint": "Look for conditions that allow for multiple true scenarios.",
-      "help": {
-        "concept": "The OR operator allows for multiple conditions to be true for the overall expression to be true.",
-        "hint_1": "Identify which conditions can be true independently.",
-        "hint_2": "Remember, only one condition needs to be true for OR."
-      }
-    },
-    {
-      "id": "quiz_4",
-      "kind": "drag_reorder",
-      "title": "Order the steps to evaluate a boolean expression using AND.",
-      "prompt": "Arrange the steps in the correct order.",
-      "tokens": [
-        "Evaluate the first condition.",
-        "If the first condition is true, evaluate the second condition.",
-        "Return true if both conditions are true.",
-        "Return false if the first condition is false."
-      ],
-      "correctOrder": [
-        "Evaluate the first condition.",
-        "If the first condition is true, evaluate the second condition.",
-        "Return true if both conditions are true.",
-        "Return false if the first condition is false."
-      ],
-      "hint": "Think about how each condition affects the next.",
-      "help": {
-        "concept": "The evaluation of conditions in AND requires sequential checking.",
-        "hint_1": "Start with the first condition and see if it holds.",
-        "hint_2": "Only check the second condition if the first is true."
-      }
-    },
-    {
-      "id": "quiz_5",
-      "kind": "fill_blank_choice",
-      "title": "Complete the statement using NOT.",
-      "prompt": "Fill in the blank: NOT x > 10 means the missing choice.",
-      "template": "NOT x > 10 means [blank1].",
-      "choices": [
-        "x is less than or equal to 10",
-        "x is greater than 10",
-        "x is equal to 10",
-        "x is not a number"
-      ],
-      "correctValue": "x is less than or equal to 10",
-      "hint": "Think about how NOT reverses the condition.",
-      "help": {
-        "concept": "The NOT operator negates the truth value of the condition.",
-        "hint_1": "If x > 10 is true, what does NOT mean?",
-        "hint_2": "Consider what happens to the condition when negated."
-      }
-    },
-    {
-      "id": "quiz_6",
-      "kind": "fill_blank_choice",
-      "title": "Identify the result of NOT True.",
-      "prompt": "Fill in the blank: NOT True is the missing choice.",
-      "template": "NOT True is [blank1].",
-      "choices": [
-        "True",
         "False",
-        "None",
-        "Error"
+        "0",
+        "True",
+        "None"
       ],
-      "correctValue": "False",
-      "hint": "Think about the basic truth values.",
-      "help": {
-        "concept": "The NOT operator flips the truth value.",
-        "hint_1": "What is the opposite of True?",
-        "hint_2": "Remember, NOT changes the value to its opposite."
-      }
-    },
-    {
-      "id": "quiz_7",
-      "kind": "code_input",
-      "title": "Check eligibility for a discount",
-      "prompt": "Write a function that checks if a customer is eligible for a discount. They must be a member OR have spent more than $100. Then read the input values, call the function, and print the returned result.",
-      "starterCode": "def check_discount(is_member, amount_spent):\n    # Check eligibility\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nis_member = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\namount_spent = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(check_discount(is_member, amount_spent))",
-      "solutionCode": "def check_discount(is_member, amount_spent):\n    if is_member or amount_spent > 100:\n        return True\n    return False\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nis_member = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\namount_spent = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(check_discount(is_member, amount_spent))",
-      "tests": [
-        {
-          "stdin": "True, 50\n1\n",
-          "stdout": "True",
-          "match": "exact"
-        },
-        {
-          "stdin": "False, 150\n1\n",
-          "stdout": "True",
-          "match": "exact"
-        },
-        {
-          "stdin": "False, 50\n1\n",
-          "stdout": "True",
-          "match": "exact"
-        }
+      "correctOptionIds": [
+        "c"
       ],
-      "recipeType": "fixed_tests",
-      "hint": "Break the task into the main code steps first.",
-      "help": {
-        "concept": "This task checks whether you can apply check eligibility for a discount in a working solution.",
-        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-      }
-    },
-    {
-      "id": "quiz_8",
-      "kind": "code_input",
-      "title": "Determine if a number is in range",
-      "prompt": "Write a function that checks if a number is between 10 and 20, inclusive. Then read the input value, call the function, and print the returned result.",
-      "starterCode": "def is_in_range(number):\n    # Check if number is in range\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_in_range(number))",
-      "solutionCode": "def is_in_range(number):\n    if number >= 10 and number <= 20:\n        return True\n    return False\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_in_range(number))",
-      "tests": [
-        {
-          "stdin": "15",
-          "stdout": "True"
-        },
-        {
-          "stdin": "9",
-          "stdout": "False"
-        },
-        {
-          "stdin": "20",
-          "stdout": "True"
-        }
-      ],
-      "recipeType": "fixed_tests",
       "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
         "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -206,81 +63,293 @@
       }
     },
     {
-      "id": "quiz_9",
-      "kind": "code_input",
-      "title": "Negate a condition",
-      "prompt": "Write a function that returns the negation of a boolean value. Then read the input values, call the function, and print the returned result.",
-      "starterCode": "def negate(value):\n    # Negate the value\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(negate(value))",
-      "solutionCode": "def negate(value):\n    return not value\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(negate(value))",
-      "tests": [
-        {
-          "stdin": "True",
-          "stdout": "False"
-        },
-        {
-          "stdin": "False",
-          "stdout": "True"
-        }
-      ],
-      "recipeType": "fixed_tests",
-      "hint": "Break the task into the main code steps first.",
-      "help": {
-        "concept": "This task checks whether you can apply negate a condition in a working solution.",
-        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-      }
-    },
-    {
-      "id": "policy_multi_choice_1",
+      "id": "mc_or_cases",
       "kind": "multi_choice",
-      "title": "Choose good run-and-check habits",
-      "prompt": "Which habits help when practicing \"And, Or, and Not\"?",
+      "title": "Choose the true or expressions",
+      "prompt": "Which expressions evaluate to `True`? Choose all correct answers.",
       "options": [
-        "Run the code after writing it",
-        "Read the output carefully",
-        "Ignore error messages",
-        "Change many lines at once without testing"
+        "True or False",
+        "False or False",
+        "3 > 5 or 10 > 2",
+        "7 == 8 or 1 > 4"
       ],
       "correctOptionIds": [
         "a",
-        "b"
+        "c"
       ],
-      "hint": "Good practice means running code and checking what happened.",
+      "hint": "With `or`, only one side needs to be true.",
       "help": {
-        "concept": "Running small pieces of code and reading the output helps you understand Python behavior.",
-        "hint_1": "Output and errors both give useful feedback.",
-        "hint_2": "Testing small changes is easier than debugging many changes at once."
+        "concept": "The `or` operator returns true when at least one of its two conditions is true.",
+        "hint_1": "Check each side of each expression separately, then see whether at least one side is true.",
+        "hint_2": "Any expression with one true side and one false side still becomes true with `or`."
       }
     },
     {
-      "id": "policy_drag_reorder_1",
+      "id": "mc_valid_age_and_name",
+      "kind": "multi_choice",
+      "title": "Valid input checks",
+      "prompt": "A program should accept input only when the user is at least 18 and the name is not empty. Which conditions match that rule? Choose all correct answers.",
+      "options": [
+        "age >= 18 and name != \"\"",
+        "age >= 18 or name != \"\"",
+        "not (age < 18) and name != \"\"",
+        "age > 18 and name == \"\""
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "The rule needs both age and a non-empty name.",
+      "help": {
+        "concept": "Equivalent boolean conditions can be written in different ways, but they must still require both parts of the rule to be satisfied.",
+        "hint_1": "One part checks adulthood. The other part checks that the string is not empty.",
+        "hint_2": "A condition using `not (age < 18)` means the same as being 18 or older."
+      }
+    },
+    {
+      "id": "dr_build_and_condition",
       "kind": "drag_reorder",
-      "title": "Order the run-and-check workflow",
-      "prompt": "Put the steps in order for practicing \"And, Or, and Not\".",
+      "title": "Build an and condition",
+      "prompt": "Put the tokens in order to make a valid Python condition that checks whether `score` is at least 50 and `passed` is true.",
       "tokens": [
-        "Write a small piece of Python code",
-        "Run the code",
-        "Read the output or error message"
+        "score",
+        ">=",
+        "50",
+        "and",
+        "passed"
       ],
       "correctOrder": [
-        "Write a small piece of Python code",
-        "Run the code",
-        "Read the output or error message"
+        "score",
+        ">=",
+        "50",
+        "and",
+        "passed"
       ],
-      "hint": "You need code before you can run it.",
+      "hint": "Focus on the logical order of the parts.",
       "help": {
-        "concept": "A basic Python workflow is write code, run it, then inspect the result.",
-        "hint_1": "The output appears after running.",
-        "hint_2": "Errors are also useful feedback."
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Think about which part must come first.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "dr_if_elif_else_logic",
+      "kind": "drag_reorder",
+      "title": "Order the branches",
+      "prompt": "Arrange these lines into a valid `if` / `elif` / `else` structure.",
+      "tokens": [
+        "if age < 13:",
+        "print(\"child\")",
+        "elif age < 18:",
+        "print(\"teen\")",
+        "else:",
+        "print(\"adult\")"
+      ],
+      "correctOrder": [
+        "if age < 13:",
+        "print(\"child\")",
+        "elif age < 18:",
+        "print(\"teen\")",
+        "else:",
+        "print(\"adult\")"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fb_not_condition",
+      "kind": "fill_blank_choice",
+      "title": "Complete a not check",
+      "prompt": "Choose the missing word to make the condition true when `ready` is false.",
+      "template": "if [blank1] ready:\n    print(\"Wait\")",
+      "choices": [
+        "and",
+        "or",
+        "not",
+        "elif"
+      ],
+      "correctValue": "not",
+      "hint": "You need the operator that reverses a boolean value.",
+      "help": {
+        "concept": "Use `the missing term` when you want a condition to be true for the opposite boolean value.",
+        "hint_1": "If `ready` is false, the condition should still pass.",
+        "hint_2": "Choose the operator that turns false into true inside the `if` check."
+      }
+    },
+    {
+      "id": "fb_or_operator",
+      "kind": "fill_blank_choice",
+      "title": "Complete an either-or rule",
+      "prompt": "Choose the operator that makes the condition true when either comparison is true.",
+      "template": "if temp < 0 [blank1] temp > 30:\n    print(\"Extreme\")",
+      "choices": [
+        "and",
+        "or",
+        "not",
+        "="
+      ],
+      "correctValue": "or",
+      "hint": "Focus on the missing concept rather than the exact missing term.",
+      "help": {
+        "concept": "The blank should be completed with the term that fits the job being described.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the term that best completes the meaning of the statement."
+      }
+    },
+    {
+      "id": "code_ticket_check",
+      "kind": "code_input",
+      "title": "Check event entry",
+      "prompt": "Write Python code that reads two lines: an integer age and a string `yes` or `no` for whether the person has an ID. Print `allowed` if the age is at least 18 and the ID answer is `yes`. Otherwise print `denied`.",
+      "starterCode": "age = int(input())\nhas_id = input().strip()\n\n# TODO: print allowed or denied",
+      "solutionCode": "age = int(input())\nhas_id = input().strip()\n\nif age >= 18 and has_id == \"yes\":\n    print(\"allowed\")\nelse:\n    print(\"denied\")",
+      "tests": [
+        {
+          "stdin": "20\nyes\n",
+          "stdout": "allowed\n"
+        },
+        {
+          "stdin": "20\nno\n",
+          "stdout": "denied\n"
+        },
+        {
+          "stdin": "16\nyes\n",
+          "stdout": "denied\n"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Check event entry\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Check event entry\".",
+        "hint_1": "Use the statement or expression that matches the required behavior.",
+        "hint_2": "Run the code and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "code_free_day",
+      "kind": "code_input",
+      "title": "Weekend or holiday",
+      "prompt": "Write Python code that reads two lines, each containing `True` or `False`: `is_weekend` and `is_holiday`. Print `rest` if either value is true. Otherwise print `work`.",
+      "starterCode": "is_weekend = input().strip() == \"True\"\nis_holiday = input().strip() == \"True\"\n\n# TODO: print rest or work",
+      "solutionCode": "is_weekend = input().strip() == \"True\"\nis_holiday = input().strip() == \"True\"\n\nif is_weekend or is_holiday:\n    print(\"rest\")\nelse:\n    print(\"work\")",
+      "tests": [
+        {
+          "stdin": "False\nTrue\n",
+          "stdout": "rest\n"
+        },
+        {
+          "stdin": "False\nFalse\n",
+          "stdout": "work\n"
+        },
+        {
+          "stdin": "True\nFalse\n",
+          "stdout": "rest\n"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Weekend or holiday\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Weekend or holiday\".",
+        "hint_1": "Use the statement or expression that matches the required behavior.",
+        "hint_2": "Run the code and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "code_not_logged_in",
+      "kind": "code_input",
+      "title": "Prompt when not logged in",
+      "prompt": "Write Python code that reads one line containing `True` or `False` for `logged_in`. If the user is not logged in, print `please sign in`. Otherwise print `welcome`.",
+      "starterCode": "logged_in = input().strip() == \"True\"\n\n# TODO: print the correct message",
+      "solutionCode": "logged_in = input().strip() == \"True\"\n\nif not logged_in:\n    print(\"please sign in\")\nelse:\n    print(\"welcome\")",
+      "tests": [
+        {
+          "stdin": "False\n",
+          "stdout": "please sign in\n"
+        },
+        {
+          "stdin": "True\n",
+          "stdout": "welcome\n"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the coding task and identify what the program should print.",
+      "help": {
+        "concept": "This coding exercise checks whether the program produces the requested output.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Run the code and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "code_score_certificate",
+      "kind": "code_input",
+      "title": "Certificate decision",
+      "prompt": "Write Python code that reads an integer score and a second line containing `True` or `False` for `late`. Print `certificate` if the score is at least 80 and the work is not late. Print `passed` if the score is at least 80 and the work is late. Otherwise print `practice`.",
+      "starterCode": "score = int(input())\nlate = input().strip() == \"True\"\n\n# TODO: print certificate, passed, or practice",
+      "solutionCode": "score = int(input())\nlate = input().strip() == \"True\"\n\nif score >= 80 and not late:\n    print(\"certificate\")\nelif score >= 80 and late:\n    print(\"passed\")\nelse:\n    print(\"practice\")",
+      "tests": [
+        {
+          "stdin": "82\nFalse\n",
+          "stdout": "certificate\n"
+        },
+        {
+          "stdin": "82\nTrue\n",
+          "stdout": "passed\n"
+        },
+        {
+          "stdin": "70\nFalse\n",
+          "stdout": "practice\n"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Certificate decision\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Certificate decision\".",
+        "hint_1": "Use the statement or expression that matches the required behavior.",
+        "hint_2": "Run the code and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "code_range_check",
+      "kind": "code_input",
+      "title": "Check if a number is in range",
+      "prompt": "Write Python code that reads one integer `n`. Print `in range` if `n` is at least 10 and at most 20. Otherwise print `out of range`.",
+      "starterCode": "n = int(input())\n\n# TODO: print in range or out of range",
+      "solutionCode": "n = int(input())\n\nif n >= 10 and n <= 20:\n    print(\"in range\")\nelse:\n    print(\"out of range\")",
+      "tests": [
+        {
+          "stdin": "10\n",
+          "stdout": "in range\n"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "in range\n"
+        },
+        {
+          "stdin": "25\n",
+          "stdout": "out of range\n"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
       }
     }
   ],
   "projectDraft": {
-    "title": "Grade Checker",
+    "title": "Build logic checkers with and, or, and not",
     "stepIds": [
-      "quiz_7",
-      "quiz_8",
-      "quiz_9"
+      "code_ticket_check",
+      "code_free_day",
+      "code_not_logged_in",
+      "code_score_certificate",
+      "code_range_check"
     ]
   }
 }

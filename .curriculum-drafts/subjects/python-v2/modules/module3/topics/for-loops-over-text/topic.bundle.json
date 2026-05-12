@@ -14,14 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.cards.sketch0.title",
-      "sketchId": "intro_to_for_loops",
+      "sketchId": "sketch-1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.cards.sketch1.title",
-      "sketchId": "using_range_with_for_loops",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.cards.sketch2.title",
+      "sketchId": "sketch-3",
       "height": 420
     },
     {
@@ -50,27 +57,45 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "code_input_1",
-            "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.projectSteps.code_input_1.title",
-            "exerciseKey": "code_input_1",
+            "id": "code_1",
+            "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.projectSteps.code_1.title",
+            "exerciseKey": "code-1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "code_input_2",
-            "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.projectSteps.code_input_2.title",
-            "exerciseKey": "code_input_2",
+            "id": "code_2",
+            "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.projectSteps.code_2.title",
+            "exerciseKey": "code-2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "code_input_3",
-            "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.projectSteps.code_input_3.title",
-            "exerciseKey": "code_input_3",
+            "id": "code_3",
+            "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.projectSteps.code_3.title",
+            "exerciseKey": "code-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_4",
+            "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.projectSteps.code_4.title",
+            "exerciseKey": "code-4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_5",
+            "titleKey": "topics.python-v2.python-v2-3.for-loops-over-text.projectSteps.code_5.title",
+            "exerciseKey": "code-5",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -82,25 +107,31 @@
   ],
   "sketches": [
     {
-      "id": "intro_to_for_loops",
+      "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-3.for-loops-over-text.intro_to_for_loops.title",
-      "bodyKey": "sketches.python-v2.python-v2-3.for-loops-over-text.intro_to_for_loops.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-3.for-loops-over-text.sketch-1.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.for-loops-over-text.sketch-1.bodyMarkdown"
     },
     {
-      "id": "using_range_with_for_loops",
+      "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-3.for-loops-over-text.using_range_with_for_loops.title",
-      "bodyKey": "sketches.python-v2.python-v2-3.for-loops-over-text.using_range_with_for_loops.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-3.for-loops-over-text.sketch-2.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.for-loops-over-text.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.for-loops-over-text.sketch-3.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.for-loops-over-text.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "single_choice_1",
+      "id": "sc-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.single_choice_1",
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.sc-1",
       "optionIds": [
         "a",
         "b",
@@ -113,15 +144,16 @@
       }
     },
     {
-      "id": "single_choice_2",
+      "id": "sc-2",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.single_choice_2",
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.sc-2",
       "optionIds": [
         "a",
         "b",
-        "c"
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "single_choice",
@@ -129,11 +161,31 @@
       }
     },
     {
-      "id": "multi_choice_1",
+      "id": "mc-1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.multi_choice_1",
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.mc-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "mc-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.mc-2",
       "optionIds": [
         "a",
         "b",
@@ -150,170 +202,201 @@
       }
     },
     {
-      "id": "multi_choice_2",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.multi_choice_2",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "d"
-        ]
-      }
-    },
-    {
-      "id": "drag_reorder_1",
+      "id": "dr-1",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.drag_reorder_1",
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.dr-1",
       "tokenIds": [
         "t1",
         "t2",
-        "t3",
-        "t4"
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
-          "t1",
-          "t2",
           "t3",
-          "t4"
+          "t1",
+          "t2"
         ]
       }
     },
     {
-      "id": "drag_reorder_2",
+      "id": "dr-2",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.drag_reorder_2",
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.dr-2",
       "tokenIds": [
         "t1",
         "t2",
         "t3",
-        "t4"
+        "t4",
+        "t5"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
-          "t1",
-          "t2",
+          "t5",
+          "t4",
           "t3",
-          "t4"
+          "t1",
+          "t2"
         ]
       }
     },
     {
-      "id": "fill_blank_choice_1",
+      "id": "fb-1",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.fill_blank_choice_1",
-      "choiceCount": 3,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.fb-1",
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "item"
+        "value": "ch"
       }
     },
     {
-      "id": "fill_blank_choice_2",
+      "id": "fb-2",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.fill_blank_choice_2",
-      "choiceCount": 3,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.fb-2",
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "5"
+        "value": "\"e\""
       }
     },
     {
-      "id": "code_input_1",
+      "id": "code-1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code_input_1",
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1",
       "language": "python",
-      "starterCode": "string = 'Python'\n# Write your for loop here",
+      "starterCode": "text = input()\n\n# TODO: loop through text and print each character on its own line",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "12\n",
-            "stdout": "P\ny\nt\nh\no\nn",
+            "stdin": "cat\n",
+            "stdout": "c\na\nt\n",
             "match": "exact"
           },
           {
-            "stdin": "20\n",
-            "stdout": "P\ny\nt\nh\no\nn",
+            "stdin": "Hi!\n",
+            "stdout": "H\ni\n!\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "string = 'Python'\nfor char in string:\n    print(char)"
+        "solutionCode": "text = input()\nfor ch in text:\n    print(ch)"
       }
     },
     {
-      "id": "code_input_2",
+      "id": "code-2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code_input_2",
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2",
       "language": "python",
-      "starterCode": "# Write your for loop here",
+      "starterCode": "text = input()\ncount = 0\n\n# TODO: count how many times 'a' appears\n\nprint(count)",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "12\n",
-            "stdout": "0\n1\n2\n3\n4\n5\n6\n7\n8\n9",
+            "stdin": "banana\n",
+            "stdout": "3\n",
             "match": "exact"
           },
           {
-            "stdin": "20\n",
-            "stdout": "0\n1\n2\n3\n4\n5\n6\n7\n8\n9",
+            "stdin": "pear\n",
+            "stdout": "1\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "for i in range(10):\n    print(i)"
+        "solutionCode": "text = input()\ncount = 0\nfor ch in text:\n    if ch == \"a\":\n        count = count + 1\nprint(count)"
       }
     },
     {
-      "id": "code_input_3",
+      "id": "code-3",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code_input_3",
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3",
       "language": "python",
-      "starterCode": "fruits = ['apple', 'banana', 'cherry']\n# Write your for loop here",
+      "starterCode": "text = input()\n\n# TODO: print only vowels, one per line",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "12\n",
-            "stdout": "apple\nbanana\ncherry",
+            "stdin": "banana\n",
+            "stdout": "a\na\na\n",
             "match": "exact"
           },
           {
-            "stdin": "20\n",
-            "stdout": "apple\nbanana\ncherry",
+            "stdin": "code\n",
+            "stdout": "o\ne\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "fruits = ['apple', 'banana', 'cherry']\nfor fruit in fruits:\n    print(fruit)"
+        "solutionCode": "text = input()\nfor ch in text:\n    if ch in \"aeiou\":\n        print(ch)"
+      }
+    },
+    {
+      "id": "code-4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4",
+      "language": "python",
+      "starterCode": "text = input()\ncount = 0\n\n# TODO: count uppercase letters\n\nprint(count)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Hi THERE!\n",
+            "stdout": "6\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "abc\n",
+            "stdout": "0\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = input()\ncount = 0\nfor ch in text:\n    if ch == ch.upper() and ch != ch.lower():\n        count = count + 1\nprint(count)"
+      }
+    },
+    {
+      "id": "code-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5",
+      "language": "python",
+      "starterCode": "text = input()\nresult = \"\"\n\n# TODO: add non-space characters to result\n\nprint(result)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "a b c\n",
+            "stdout": "abc\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "hi there\n",
+            "stdout": "hithere\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = input()\nresult = \"\"\nfor ch in text:\n    if ch != \" \":\n        result = result + ch\nprint(result)"
       }
     }
   ]

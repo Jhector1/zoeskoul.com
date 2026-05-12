@@ -7,189 +7,223 @@
           "summary": "Loop through a string one character at a time.",
           "cards": {
             "sketch0": {
-              "title": "Introduction to For Loops"
+              "title": "A string can be looped through character by character"
             },
             "sketch1": {
-              "title": "Using Range with For Loops"
+              "title": "The loop variable changes each time"
+            },
+            "sketch2": {
+              "title": "Use loops over text to count or filter"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Mini Text Analyzer"
+              "title": "Text Loop Practice"
             }
           },
           "projectSteps": {
-            "code_input_1": {
-              "title": "Print each character in a string"
+            "code_1": {
+              "title": "Print each character on its own line"
             },
-            "code_input_2": {
-              "title": "Count from 0 to 9"
+            "code_2": {
+              "title": "Count the letter a"
             },
-            "code_input_3": {
-              "title": "Loop through a list of fruits"
+            "code_3": {
+              "title": "Print only vowels"
+            },
+            "code_4": {
+              "title": "Count uppercase letters"
+            },
+            "code_5": {
+              "title": "Build text without spaces"
             }
           },
           "quiz": {
-            "single_choice_1": {
-              "title": "What does a for loop do?",
-              "prompt": "A for loop allows you to:",
-              "hint": "Think about how loops help in repeating actions.",
+            "sc-1": {
+              "title": "What does the loop visit?",
+              "prompt": "In Python, what does `for ch in \"dog\":` loop over?",
+              "hint": "Think about what a string is made of.",
               "help": {
-                "concept": "A for loop is used to iterate over a sequence, executing a block of code multiple times.",
-                "hint_1": "Consider the purpose of loops in programming.",
-                "hint_2": "Look for the option that describes repeating actions."
+                "concept": "A string is a sequence of characters, so a `for` loop over a string takes one character at a time in order.",
+                "hint_1": "The loop does not take the whole word at once.",
+                "hint_2": "For `\"dog\"`, the loop variable becomes `\"d\"`, then `\"o\"`, then `\"g\"`."
               },
               "options": {
-                "a": "Repeat a block of code a specific number of times",
-                "b": "Stop the program",
-                "c": "Create a new function",
-                "d": "Define a variable"
+                "a": "Each character in the string",
+                "b": "Each word in the string",
+                "c": "Only the first character",
+                "d": "Only the last character"
               }
             },
-            "single_choice_2": {
-              "title": "What will the following code output?",
-              "prompt": "```python\nfor char in \"abc\":\n    print(char)\n```",
-              "hint": "Think about how print statements work inside loops.",
+            "sc-2": {
+              "title": "What prints?",
+              "prompt": "What is printed by this code?\n\n```python\nfor ch in \"hi\":\n    print(ch)\n```",
+              "hint": "Check what `print(ch)` does on each loop.",
               "help": {
-                "concept": "The loop iterates over each character and prints them on separate lines.",
-                "hint_1": "Consider how the print function behaves with each iteration.",
-                "hint_2": "Look at how the output is formatted in the loop."
+                "concept": "The loop runs once for each character, and `print` outputs the current character on its own line each time.",
+                "hint_1": "The first loop uses `h`, and the second loop uses `i`.",
+                "hint_2": "There are two lines of output, one for each character in order."
               },
               "options": {
-                "a": "abc",
-                "b": "a b c",
-                "c": "Error"
+                "a": "hi",
+                "b": "h i on one line",
+                "c": "h on one line, then i on the next line",
+                "d": "Nothing prints"
               }
             },
-            "multi_choice_1": {
-              "title": "Which of the following are valid uses of for loops?",
-              "prompt": "Select all that apply.",
-              "hint": "Consider the different ways you can use loops in Python.",
-              "help": {
-                "concept": "For loops can iterate over sequences and perform actions multiple times.",
-                "hint_1": "Think about the types of sequences you can loop through.",
-                "hint_2": "Remember how loops can control the number of repetitions."
-              },
-              "options": {
-                "a": "Iterating over a string",
-                "b": "Counting with a variable",
-                "c": "Repeating an action a set number of times",
-                "d": "Creating a list"
-              }
-            },
-            "multi_choice_2": {
-              "title": "Which statements about the range function are true?",
-              "prompt": "Select all that apply.",
-              "hint": "Think about how range is used in loops and its parameters.",
-              "help": {
-                "concept": "The range function creates a sequence of numbers that can be iterated over.",
-                "hint_1": "Consider the default starting point of range.",
-                "hint_2": "Remember that range can take both start and end values."
-              },
-              "options": {
-                "a": "It generates a sequence of numbers",
-                "b": "It can be used in for loops",
-                "c": "It starts counting from 1 by default",
-                "d": "It can take two arguments to specify a start and end"
-              }
-            },
-            "drag_reorder_1": {
-              "title": "Order the steps to create a for loop.",
-              "prompt": "Arrange the following steps in the correct order.",
-              "hint": "Think about the logical order of the steps.",
-              "help": {
-                "concept": "This task is about understanding the sequence behind order the steps to create a for loop..",
-                "hint_1": "Find the step that must happen first before the others make sense.",
-                "hint_2": "Check which action depends on a previous step already being completed."
-              },
-              "tokens": {
-                "t1": "Define the sequence to iterate over",
-                "t2": "Use the for keyword",
-                "t3": "Specify the variable to hold the current item",
-                "t4": "Write the code block to execute"
-              }
-            },
-            "drag_reorder_2": {
-              "title": "Order the steps to use range in a for loop.",
-              "prompt": "Arrange the following steps in the correct order.",
-              "hint": "Think about the logical order of the steps.",
-              "help": {
-                "concept": "This task is about understanding the sequence behind order the steps to use range in a for loop..",
-                "hint_1": "Find the step that must happen first before the others make sense.",
-                "hint_2": "Check which action depends on a previous step already being completed."
-              },
-              "tokens": {
-                "t1": "Call range with the desired number",
-                "t2": "Use the for keyword",
-                "t3": "Specify the variable to hold the current number",
-                "t4": "Write the code block to execute"
-              }
-            },
-            "fill_blank_choice_1": {
-              "title": "Complete the for loop syntax.",
-              "prompt": "The syntax for a for loop is: `for [blank1] in sequence:`",
-              "hint": "Focus on the missing concept or keyword.",
-              "help": {
-                "concept": "This task checks the key idea behind complete the for loop syntax..",
-                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-              },
-              "template": "The syntax for a for loop is: `for [blank1] in sequence:`",
-              "choices": [
-                "item",
-                "index",
-                "value"
-              ]
-            },
-            "fill_blank_choice_2": {
-              "title": "Complete the range function call.",
-              "prompt": "To create a range from 0 to 4, you would write: `range([blank1])`",
-              "hint": "Focus on the missing concept or keyword.",
-              "help": {
-                "concept": "This task checks the key idea behind complete the range function call..",
-                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-              },
-              "template": "To create a range from 0 to 4, you would write: `range([blank1])`",
-              "choices": [
-                "5",
-                "4",
-                "0"
-              ]
-            },
-            "code_input_1": {
-              "title": "Print each character in a string",
-              "prompt": "Write a for loop that prints each character in the string 'Python'.",
+            "mc-1": {
+              "title": "Valid loop variable names",
+              "prompt": "Choose all variable names that could correctly be used in this loop: `for ___ in \"sun\":`",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_1": "Compare each option to the exact topic named in the question.",
+                "hint_2": "Remove options from unrelated Python areas, then choose the one that fits the question."
               },
-              "starterCode": "string = 'Python'\n# Write your for loop here"
+              "options": {
+                "a": "ch",
+                "b": "letter",
+                "c": "2char",
+                "d": "my char"
+              }
             },
-            "code_input_2": {
-              "title": "Count from 0 to 9",
-              "prompt": "Use a for loop with range to print numbers from 0 to 9.",
-              "hint": "Break the task into the main code steps first.",
+            "mc-2": {
+              "title": "What can you do inside the loop?",
+              "prompt": "Choose all actions that make sense when looping over a string one character at a time.",
+              "hint": "Think about tasks done once for each character.",
               "help": {
-                "concept": "This task checks whether you can apply count from 0 to 9 in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+                "concept": "A loop over text is useful for processing each character, such as printing, counting matches, or checking conditions.",
+                "hint_1": "If the loop variable holds one character, you can compare it to a letter.",
+                "hint_2": "You can also update a counter or print the current character during each loop."
               },
-              "starterCode": "# Write your for loop here"
+              "options": {
+                "a": "Print each character",
+                "b": "Count how many times a letter appears",
+                "c": "Compare the current character to \"a\"",
+                "d": "Install a package before the loop runs"
+              }
             },
-            "code_input_3": {
-              "title": "Loop through a list of fruits",
-              "prompt": "Create a for loop that prints each fruit in the list ['apple', 'banana', 'cherry'].",
+            "dr-1": {
+              "title": "Build a simple text loop",
+              "prompt": "Put the code lines in the correct order to print each character in `cat`.",
+              "hint": "Arrange the pieces in the order Python uses them.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "for ch in word:",
+                "t2": "print(ch)",
+                "t3": "word = \"cat\""
+              }
+            },
+            "dr-2": {
+              "title": "Order the counting steps",
+              "prompt": "Arrange these lines to count how many `a` characters are in `banana`.",
+              "hint": "Arrange the pieces in the order Python uses them.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "if ch == \"a\":",
+                "t2": "count = count + 1",
+                "t3": "for ch in text:",
+                "t4": "count = 0",
+                "t5": "text = \"banana\""
+              }
+            },
+            "fb-1": {
+              "title": "Complete the loop variable",
+              "prompt": "Fill in the missing part so the loop prints each character in the string.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_1": "Think about what the missing part needs to do in the statement.",
+                "hint_2": "Choose the term that best completes the meaning of the statement."
+              },
+              "template": "for [blank1] in \"code\":\n    print(ch)",
+              "choices": [
+                "ch",
+                "in",
+                "print",
+                "\"code\""
+              ]
+            },
+            "fb-2": {
+              "title": "Complete the condition",
+              "prompt": "Fill in the missing value so the code counts `e` characters.",
+              "hint": "Focus on the missing concept rather than the exact missing term.",
+              "help": {
+                "concept": "The blank should be completed with the term that fits the job being described.",
+                "hint_1": "Think about what the missing part needs to do in the statement.",
+                "hint_2": "Choose the term that best completes the meaning of the statement."
+              },
+              "template": "if ch == [blank1]:\n    count = count + 1",
+              "choices": [
+                "\"a\"",
+                "\"e\"",
+                "e",
+                "count"
+              ]
+            },
+            "code-1": {
+              "title": "Print each character on its own line",
+              "prompt": "Write Python code that reads one line of text from input and prints each character on its own line in the same order.",
+              "hint": "Read the task \"Print each character on its own line\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print each character on its own line\".",
+                "hint_1": "Write the code that creates exactly the requested output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "text = input()\n\n# TODO: loop through text and print each character on its own line"
+            },
+            "code-2": {
+              "title": "Count the letter a",
+              "prompt": "Write Python code that reads one line of text and prints how many times the character `a` appears.",
+              "hint": "Read the coding task and identify what the program should print.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Use the Python statement or expression that matches the required output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "text = input()\ncount = 0\n\n# TODO: count how many times 'a' appears\n\nprint(count)"
+            },
+            "code-3": {
+              "title": "Print only vowels",
+              "prompt": "Write Python code that reads one line of text and prints only the vowels (`a`, `e`, `i`, `o`, `u`) from that text, one per line, in order.",
+              "hint": "Read the task \"Print only vowels\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print only vowels\".",
+                "hint_1": "Write the code that creates exactly the requested output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "text = input()\n\n# TODO: print only vowels, one per line"
+            },
+            "code-4": {
+              "title": "Count uppercase letters",
+              "prompt": "Write Python code that reads one line of text and prints the number of uppercase letters. Count a character if it is equal to its uppercase version and is different from its lowercase version.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "fruits = ['apple', 'banana', 'cherry']\n# Write your for loop here"
+              "starterCode": "text = input()\ncount = 0\n\n# TODO: count uppercase letters\n\nprint(count)"
+            },
+            "code-5": {
+              "title": "Build text without spaces",
+              "prompt": "Write Python code that reads one line of text and prints the same text without spaces. Keep all other characters in the same order.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "text = input()\nresult = \"\"\n\n# TODO: add non-space characters to result\n\nprint(result)"
             }
           }
         }
@@ -200,13 +234,17 @@
     "python-v2": {
       "python-v2-3": {
         "for-loops-over-text": {
-          "intro_to_for_loops": {
-            "title": "Introduction to For Loops",
-            "bodyMarkdown": "In Python, a for loop allows you to iterate over a sequence, such as a string. This means you can access each character in the string one by one. For example, if you have the string `\"hello\"`, you can loop through it and print each character:\n\n```python\nfor char in \"hello\":\n    print(char)\n```\n\nThis will output:\n```\nh\ne\nl\nl\no\n```\n\n**Try it yourself:** Modify the string and see how the output changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "sketch-1": {
+            "title": "A string can be looped through character by character",
+            "bodyMarkdown": "A `for` loop can visit each character in a string from left to right. This is useful when you want to inspect text, count letters, or build a new result.\n\n```python\nword = \"cat\"\nfor ch in word:\n    print(ch)\n```\n\nOutput:\n\n```python\nc\na\nt\n```\n\nWalk through it:\n- `word` stores the text `\"cat\"`.\n- `for ch in word:` means: take one character at a time from the string.\n- On the first loop, `ch` is `\"c\"`.\n- On the second loop, `ch` is `\"a\"`.\n- On the third loop, `ch` is `\"t\"`.\n- `print(ch)` shows the current character in the output panel.\n\nWorked example:\n\n```python\nname = \"Mia\"\nfor letter in name:\n    print(\"Letter:\", letter)\n```\n\nThis prints each letter on its own line with a label.\n\nYour turn: Type the example in the code editor, click Run, and then change `\"Mia\"` to your own name. Check the output panel to see each character."
           },
-          "using_range_with_for_loops": {
-            "title": "Using Range with For Loops",
-            "bodyMarkdown": "You can also use the `range()` function with for loops to repeat actions a specific number of times. For example:\n\n```python\nfor i in range(5):\n    print(i)\n```\n\nThis will print numbers from 0 to 4. The `range(5)` generates a sequence of numbers from 0 up to (but not including) 5.\n\n**Your turn:** Change the number in `range()` to see how many times the loop runs.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "sketch-2": {
+            "title": "The loop variable changes each time",
+            "bodyMarkdown": "In a `for` loop over text, the loop variable holds the current character. You can name it anything helpful, such as `ch`, `letter`, or `char`.\n\n```python\ntext = \"hi!\"\nfor char in text:\n    print(char)\n```\n\nStep through it:\n- `text = \"hi!\"` stores a string.\n- `for char in text:` starts a loop over that string.\n- `print(char)` prints the current character each time the loop runs.\n\nThe variable `char` is not the whole string. It is just one character during each loop.\n\nWorked example:\n\n```python\ntext = \"go\"\nfor char in text:\n    print(char, \"is the current character\")\n```\n\nFirst `char` is `\"g\"`, then it becomes `\"o\"`.\n\nYour turn: Change the variable name from `char` to `letter`. Run the code again and notice that the behavior stays the same."
+          },
+          "sketch-3": {
+            "title": "Use loops over text to count or filter",
+            "bodyMarkdown": "Looping over text becomes powerful when you do something with each character, such as counting vowels or printing only certain letters.\n\n```python\ntext = \"banana\"\ncount = 0\n\nfor ch in text:\n    if ch == \"a\":\n        count = count + 1\n\nprint(count)\n```\n\nWalk through it:\n- `count = 0` starts the counter at zero.\n- The loop checks each character in `\"banana\"`.\n- When the character is `\"a\"`, the counter increases by 1.\n- After the loop ends, `print(count)` shows the total.\n\nThe output is `3` because `banana` has three `a` characters.\n\nAnother example:\n\n```python\ntext = \"apple\"\nfor ch in text:\n    if ch != \"p\":\n        print(ch)\n```\n\nThis prints every character except `p`.\n\nPractice this: In the code editor, change the text to `\"avocado\"` and see how the count changes after you click Run."
           }
         }
       }

@@ -1,33 +1,4 @@
 {
   "topicId": "accumulators-and-counters",
-  "repairs": [
-    {
-      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
-      "category": "text",
-      "severity": "medium",
-      "field": "sketchBlocks.sketch1.bodyMarkdown",
-      "message": "Added a short line-by-line explanation after a multi-line code example."
-    },
-    {
-      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
-      "category": "text",
-      "severity": "medium",
-      "field": "sketchBlocks.sketch2.bodyMarkdown",
-      "message": "Added a short line-by-line explanation after a multi-line code example."
-    },
-    {
-      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
-      "category": "other",
-      "severity": "medium",
-      "field": "policy_fill_blank_choice_1",
-      "message": "Added a fallback fill_blank_choice exercise to satisfy the planned exercise mix for \"accumulators-and-counters\"."
-    },
-    {
-      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
-      "category": "other",
-      "severity": "medium",
-      "field": "policy_fill_blank_choice_2",
-      "message": "Added a fallback fill_blank_choice exercise to satisfy the planned exercise mix for \"accumulators-and-counters\"."
-    }
-  ]
+  "repairs": []
 }

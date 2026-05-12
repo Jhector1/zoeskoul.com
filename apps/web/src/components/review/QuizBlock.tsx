@@ -408,25 +408,41 @@ export default function QuizBlock({
 
         return getQuestionOk(q) === true;
     }
-  function getQuestionOk(q: ReviewQuestion): boolean | null {
-    if (q.kind === "mcq") {
-      if (!local.checkedById[q.id]) return null;
-      return local.answers[q.id] === q.answerId;
-    }
-    if (q.kind === "numeric") {
-      if (!local.checkedById[q.id]) return null;
-      const v = Number(local.answers[q.id]);
-      if (!Number.isFinite(v)) return false;
-      const tol = q.tolerance ?? 0;
-      return Math.abs(v - q.answer) <= tol;
-    }
-    if (q.kind === "practice") {
-      const ps = getPracticeStateForQuestion(q);
-      return ps ? ps.ok : null;
-    }
-    return null;
-  }
+    function getQuestionOk(q: ReviewQuestion): boolean | null {
+        if (q.kind === "mcq") {
+            if (!local.checkedById[q.id]) return null;
+            return local.answers[q.id] === q.answerId;
+        }
 
+        if (q.kind === "numeric") {
+            if (!local.checkedById[q.id]) return null;
+
+            const v = Number(local.answers[q.id]);
+            if (!Number.isFinite(v)) return false;
+
+            const tol = q.tolerance ?? 0;
+            return Math.abs(v - q.answer) <= tol;
+        }
+
+        if (q.kind === "practice") {
+            const ps = getPracticeStateForQuestion(q);
+            if (!ps) return null;
+
+            const itemResult = (ps.item as any)?.result;
+
+            if (typeof itemResult?.ok === "boolean") {
+                return itemResult.ok;
+            }
+
+            if (typeof ps.ok === "boolean") {
+                return ps.ok;
+            }
+
+            return null;
+        }
+
+        return null;
+    }
   function isQuestionChecked(q: ReviewQuestion): boolean {
     if (isExcused(q.id)) return true;
     if (q.kind === "practice") return practiceBank.isPracticeChecked(q);
@@ -545,18 +561,24 @@ export default function QuizBlock({
       const ps = practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id];
 
       if (ps) {
-        const nextMeta = {
-          attempts:
-              ps.attempts ??
-              practiceMeta[stablePracticeKey]?.attempts ??
-              practiceMeta[q.id]?.attempts ??
-              0,
-          ok:
-              ps.ok ??
-              practiceMeta[stablePracticeKey]?.ok ??
-              practiceMeta[q.id]?.ok ??
-              null,
-        };
+          const itemResultOk =
+              typeof (ps.item as any)?.result?.ok === "boolean"
+                  ? Boolean((ps.item as any).result.ok)
+                  : null;
+
+          const nextMeta = {
+              attempts:
+                  ps.attempts ??
+                  practiceMeta[stablePracticeKey]?.attempts ??
+                  practiceMeta[q.id]?.attempts ??
+                  0,
+              ok:
+                  itemResultOk ??
+                  ps.ok ??
+                  practiceMeta[stablePracticeKey]?.ok ??
+                  practiceMeta[q.id]?.ok ??
+                  null,
+          };
 
         practiceMeta[stablePracticeKey] = nextMeta;
 

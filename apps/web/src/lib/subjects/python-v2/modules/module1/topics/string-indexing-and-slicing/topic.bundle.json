@@ -14,14 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "sketch_index_basics",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "sketch_slice_basics",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.cards.sketch2.title",
+      "sketchId": "sketch_common_patterns",
       "height": 420
     },
     {
@@ -50,27 +57,45 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz7",
-            "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.projectSteps.quiz7.title",
-            "exerciseKey": "quiz7",
+            "id": "code_first_and_last",
+            "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.projectSteps.code_first_and_last.title",
+            "exerciseKey": "code_first_and_last",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz8",
-            "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.projectSteps.quiz8.title",
-            "exerciseKey": "quiz8",
+            "id": "code_middle_slice",
+            "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.projectSteps.code_middle_slice.title",
+            "exerciseKey": "code_middle_slice",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz9",
-            "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.projectSteps.quiz9.title",
-            "exerciseKey": "quiz9",
+            "id": "code_prefix_suffix",
+            "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.projectSteps.code_prefix_suffix.title",
+            "exerciseKey": "code_prefix_suffix",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_last_two",
+            "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.projectSteps.code_last_two.title",
+            "exerciseKey": "code_last_two",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_wrap_edges",
+            "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.projectSteps.code_wrap_edges.title",
+            "exerciseKey": "code_wrap_edges",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -82,25 +107,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "sketch_index_basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch1.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch_index_basics.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch_index_basics.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sketch_slice_basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch2.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch_slice_basics.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch_slice_basics.bodyMarkdown"
+    },
+    {
+      "id": "sketch_common_patterns",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch_common_patterns.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch_common_patterns.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc_index_zero_start",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz1",
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.sc_index_zero_start",
       "optionIds": [
         "a",
         "b",
@@ -109,15 +140,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "quiz2",
+      "id": "sc_slice_end_rule",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz2",
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.sc_slice_end_rule",
       "optionIds": [
         "a",
         "b",
@@ -126,19 +157,20 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "c"
       }
     },
     {
-      "id": "quiz3",
+      "id": "mc_negative_and_open_slices",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz3",
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.mc_negative_and_open_slices",
       "optionIds": [
         "a",
         "b",
-        "c"
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "multi_choice",
@@ -150,135 +182,11 @@
       }
     },
     {
-      "id": "quiz4",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz4",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "quiz5",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz5",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "5"
-      }
-    },
-    {
-      "id": "quiz6",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz6",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "P"
-      }
-    },
-    {
-      "id": "quiz7",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz7",
-      "language": "python",
-      "starterCode": "def extract_substring(s):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(extract_substring(s))",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "Hello",
-            "stdout": "ell",
-            "match": "exact"
-          },
-          {
-            "stdin": "Python",
-            "stdout": "yth",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "def extract_substring(s):\n    return s[1:4]\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(extract_substring(s))"
-      }
-    },
-    {
-      "id": "quiz8",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz8",
-      "language": "python",
-      "starterCode": "def char_at_index(s):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(char_at_index(s))",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "Hello",
-            "stdout": "l",
-            "match": "exact"
-          },
-          {
-            "stdin": "Python",
-            "stdout": "t",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "def char_at_index(s):\n    return s[2]\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(char_at_index(s))"
-      }
-    },
-    {
-      "id": "quiz9",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz9",
-      "language": "python",
-      "starterCode": "def last_three_chars(s):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(last_three_chars(s))",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "Hello",
-            "stdout": "llo",
-            "match": "exact"
-          },
-          {
-            "stdin": "Python",
-            "stdout": "hon",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "def last_three_chars(s):\n    return s[-3:]\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(last_three_chars(s))"
-      }
-    },
-    {
-      "id": "policy_multi_choice_1",
+      "id": "mc_valid_examples",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.policy_multi_choice_1",
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.mc_valid_examples",
       "optionIds": [
         "a",
         "b",
@@ -288,17 +196,17 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
-          "b"
+          "b",
+          "c"
         ]
       }
     },
     {
-      "id": "policy_drag_reorder_1",
+      "id": "dr_build_first_last_middle",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.policy_drag_reorder_1",
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.dr_build_first_last_middle",
       "tokenIds": [
         "t1",
         "t2",
@@ -311,6 +219,180 @@
           "t2",
           "t3"
         ]
+      }
+    },
+    {
+      "id": "dr_slice_reasoning",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.dr_slice_reasoning",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fb_first_char_index",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.fb_first_char_index",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "0"
+      }
+    },
+    {
+      "id": "fb_open_end_slice",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.fb_open_end_slice",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "2"
+      }
+    },
+    {
+      "id": "code_first_and_last",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last",
+      "language": "python",
+      "starterCode": "word = input()\n# TODO: print the first character\n# TODO: print the last character",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "planet\n",
+            "stdout": "p\nt\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "hi\n",
+            "stdout": "h\ni\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "word = input()\nprint(word[0])\nprint(word[-1])"
+      }
+    },
+    {
+      "id": "code_middle_slice",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice",
+      "language": "python",
+      "starterCode": "word = input()\n# TODO: print the required slice",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "banana\n",
+            "stdout": "ana\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "planet\n",
+            "stdout": "lan\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "word = input()\nprint(word[1:4])"
+      }
+    },
+    {
+      "id": "code_prefix_suffix",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix",
+      "language": "python",
+      "starterCode": "word = input()\n# TODO: print the first three characters\n# TODO: print the rest of the word",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "banana\n",
+            "stdout": "ban\nana\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "sunset\n",
+            "stdout": "sun\nset\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "word = input()\nprint(word[:3])\nprint(word[3:])"
+      }
+    },
+    {
+      "id": "code_last_two",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_last_two",
+      "language": "python",
+      "starterCode": "word = input()\n# TODO: print the last two characters",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "planet\n",
+            "stdout": "et\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "code\n",
+            "stdout": "de\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "word = input()\nprint(word[-2:])"
+      }
+    },
+    {
+      "id": "code_wrap_edges",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges",
+      "language": "python",
+      "starterCode": "word = input()\n# TODO: print first character, then '-', then last character",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "robot\n",
+            "stdout": "r-t\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "sun\n",
+            "stdout": "s-n\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "word = input()\nprint(word[0] + \"-\" + word[-1])"
       }
     }
   ]

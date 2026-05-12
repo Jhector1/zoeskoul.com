@@ -45,7 +45,7 @@ export async function gradeProgrammingCodeInput(args: {
         } as any);
 
         if (!run?.ok) {
-            const feedback = classifyProgrammingRunFailure(language, run, "check");
+            const feedback = classifyProgrammingRunFailure(language, run, "check", code);
 
             return {
                 ok: false,

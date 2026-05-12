@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
 import { countAnswered } from "../utils";
 import { buildResetModuleProgress, buildResetTopicProgress } from "../actions";
+import {useReviewRuntimeStore} from "@/components/review/module/runtime/reviewRuntimeStore";
 
 type PendingChange =
     | { kind: "module" }
@@ -100,20 +101,27 @@ export function useReviewReset({
         toolUnbindCodeInput();
 
         if (pending.kind === "module") {
+            useReviewRuntimeStore.getState().clearRuntimeForModule();
+
             const next = buildResetModuleProgress(progress, firstTopicId || "");
+
             setProgress(next);
             setActiveTopicId(firstTopicId || "");
             setViewTopicId(firstTopicId || "");
             flushNow(next);
             cancelPendingChange();
+
             return;
         }
 
         const tid = pending.tid ?? "";
+
         if (!tid) {
             cancelPendingChange();
             return;
         }
+
+        useReviewRuntimeStore.getState().clearRuntimeForTopic(tid);
 
         setProgress((p: any) => {
             const next = buildResetTopicProgress(p, tid);

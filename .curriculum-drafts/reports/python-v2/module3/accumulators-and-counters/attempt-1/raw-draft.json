@@ -1,0 +1,334 @@
+{
+  "title": "Accumulators and Counters",
+  "summary": "Build totals, counts, and running summaries in loops.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "sketch-accumulator-basics",
+      "title": "Using a loop to build a total",
+      "bodyMarkdown": "An **accumulator** is a variable that keeps a running total while a loop repeats. You usually start it before the loop, then update it inside the loop.\n\nExample:\n\n```python\nnumbers = [3, 5, 2]\ntotal = 0\n\nfor n in numbers:\n    total = total + n\n\nprint(total)\n```\n\nStep by step:\n\n- `total` starts at `0`\n- first loop: `total` becomes `0 + 3`, so it is `3`\n- second loop: `total` becomes `3 + 5`, so it is `8`\n- third loop: `total` becomes `8 + 2`, so it is `10`\n\nThe final output is `10`.\n\nThis pattern is useful for sums, scores, and totals.\n\n**Try it yourself:** change the list to different numbers, click Run, and check how the total changes in the output panel."
+    },
+    {
+      "id": "sketch-counter-basics",
+      "title": "Using a loop to count things",
+      "bodyMarkdown": "A **counter** tracks how many times something happens. It often starts at `0`, then increases by `1` when a condition is true.\n\nExample:\n\n```python\nword = \"banana\"\ncount = 0\n\nfor letter in word:\n    if letter == \"a\":\n        count = count + 1\n\nprint(count)\n```\n\nLine by line:\n\n- `count = 0` sets up the counter\n- the loop checks each letter in `\"banana\"`\n- when the letter is `\"a\"`, the counter goes up by `1`\n- after the loop, `print(count)` shows the total number of matches\n\nThe output is `3` because `banana` has three `a` letters.\n\n**Your turn:** change the word or the target letter, then click Run and compare the new output."
+    },
+    {
+      "id": "sketch-accumulator-and-counter-together",
+      "title": "Combining totals and counts",
+      "bodyMarkdown": "Sometimes one loop needs both an accumulator and a counter.\n\nExample:\n\n```python\nnumbers = [4, 7, 2, 9]\ntotal = 0\ncount_big = 0\n\nfor n in numbers:\n    total = total + n\n    if n >= 5:\n        count_big = count_big + 1\n\nprint(total)\nprint(count_big)\n```\n\nWhat happens:\n\n- `total` adds every number: `4 + 7 + 2 + 9 = 22`\n- `count_big` only increases for numbers that are at least `5`\n- those numbers are `7` and `9`, so the count is `2`\n\nThis loop gives two useful results from one pass through the data.\n\n**Try this:** change the condition from `n >= 5` to `n > 7` and see how the count changes."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "sc-accumulator-purpose",
+      "kind": "single_choice",
+      "title": "What an accumulator does",
+      "prompt": "In a Python loop, what is an accumulator mainly used for?",
+      "hint": "Think about a variable that keeps a running total as the loop continues.",
+      "help": {
+        "concept": "An accumulator stores a value that is updated again and again during a loop, often for totals or combined results.",
+        "hint_1": "Look for the choice about building up one result across many loop iterations.",
+        "hint_2": "It is not the loop variable itself. It is the variable that keeps changing to hold the growing result."
+      },
+      "options": [
+        "To store a running total or combined result",
+        "To stop the loop automatically after one step",
+        "To rename the loop variable each time",
+        "To print every value without storing anything"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "sc-counter-update",
+      "kind": "single_choice",
+      "title": "How a counter changes",
+      "prompt": "Which line correctly updates a counter named `count` when one more match is found?",
+      "hint": "A counter usually increases by one.",
+      "help": {
+        "concept": "A counter tracks how many times something happens, so each new match should increase the value by exactly 1.",
+        "hint_1": "Look for the line that uses the old value of `count` and adds one to it.",
+        "hint_2": "The correct update does not reset the counter to 1 every time."
+      },
+      "options": [
+        "count = 0",
+        "count = count + 1",
+        "count = count + count",
+        "print(count)"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "mc-accumulator-counter-examples",
+      "kind": "multi_choice",
+      "title": "Pick the accumulator and counter tasks",
+      "prompt": "Which tasks are good examples of using an accumulator or a counter in a loop? Choose all that apply.",
+      "hint": "Look for tasks that build a total or count matches while looping.",
+      "help": {
+        "concept": "Accumulators collect a running result, and counters count how many times a condition is met during iteration.",
+        "hint_1": "Summing numbers is an accumulator task, and counting matching items is a counter task.",
+        "hint_2": "Choices about renaming variables or changing loop syntax are not examples of totals or counts."
+      },
+      "options": [
+        "Adding all numbers in a list to get one total",
+        "Counting how many letters in a word are vowels",
+        "Changing the name of the loop variable on each pass",
+        "Keeping track of how many scores are above 80"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "mc-good-start-values",
+      "kind": "multi_choice",
+      "title": "Choose good starting values",
+      "prompt": "You are about to loop through numbers and compute a sum in `total` and a match count in `count`. Which starting values make sense? Choose all that apply.",
+      "hint": "Think about the usual starting point before anything has been added or counted.",
+      "help": {
+        "concept": "Before a loop processes any items, a sum usually starts at zero and a counter usually starts at zero because nothing has been added or counted yet.",
+        "hint_1": "Ask what the total should be before seeing any numbers, and what the count should be before finding any matches.",
+        "hint_2": "Starting with a nonzero value would already include extra amount or extra matches before the loop begins."
+      },
+      "options": [
+        "total = 0",
+        "count = 0",
+        "total = 1",
+        "count = 5"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "dr-sum-loop-order",
+      "kind": "drag_reorder",
+      "title": "Order the sum steps",
+      "prompt": "Put these steps in the correct order to create a loop that adds numbers from a list into `total`.",
+      "hint": "Start by creating the running total before the loop begins.",
+      "help": {
+        "concept": "A sum loop needs setup first, then iteration, then the accumulator update, and finally output after the loop finishes.",
+        "hint_1": "The variable that stores the total must exist before the loop can update it.",
+        "hint_2": "Printing belongs after the loop if you want the final total rather than many intermediate values."
+      },
+      "tokens": [
+        "total = 0",
+        "for n in numbers:",
+        "total = total + n",
+        "print(total)"
+      ],
+      "correctOrder": [
+        "total = 0",
+        "for n in numbers:",
+        "total = total + n",
+        "print(total)"
+      ]
+    },
+    {
+      "id": "dr-count-condition-order",
+      "kind": "drag_reorder",
+      "title": "Order the counting logic",
+      "prompt": "Arrange these pieces to count how many letters in `word` are equal to `\"a\"`.",
+      "hint": "Set up the counter first, then loop, then check the condition, then increase the counter.",
+      "help": {
+        "concept": "A counting loop needs a counter variable, iteration over items, a condition to test, and an increment when the condition is true.",
+        "hint_1": "The `if` check must happen inside the loop because each letter is tested one at a time.",
+        "hint_2": "The counter update should happen only after the condition is checked."
+      },
+      "tokens": [
+        "count = 0",
+        "for letter in word:",
+        "if letter == \"a\":",
+        "count = count + 1"
+      ],
+      "correctOrder": [
+        "count = 0",
+        "for letter in word:",
+        "if letter == \"a\":",
+        "count = count + 1"
+      ]
+    },
+    {
+      "id": "fb-counter-fill",
+      "kind": "fill_blank_choice",
+      "title": "Complete the counter update",
+      "prompt": "Choose the missing code that increases the counter by one inside a loop.",
+      "hint": "A counter update uses the old value and adds one.",
+      "help": {
+        "concept": "To increase a counter, Python needs an expression that takes the current value and adds 1.",
+        "hint_1": "The missing part should be an expression, not a variable name by itself.",
+        "hint_2": "It should use `count` on both sides so the new value depends on the old value."
+      },
+      "template": "count = [blank1]",
+      "choices": [
+        "count + 1",
+        "0",
+        "print(count)",
+        "\"count\""
+      ],
+      "correctValue": "count + 1"
+    },
+    {
+      "id": "fb-accumulator-start",
+      "kind": "fill_blank_choice",
+      "title": "Start a total correctly",
+      "prompt": "Choose the best starting value for an accumulator named `total` before adding numbers in a loop.",
+      "hint": "Before any numbers are added, the total should represent nothing added yet.",
+      "help": {
+        "concept": "An accumulator for addition should start at the neutral value for adding numbers, so the first update works correctly.",
+        "hint_1": "If you start too high, the final sum will include extra value that was never in the looped data.",
+        "hint_2": "Think about what total you have before the loop has processed even one number."
+      },
+      "template": "total = [blank1]",
+      "choices": [
+        "0",
+        "1",
+        "\"\"",
+        "total + 1"
+      ],
+      "correctValue": "0"
+    },
+    {
+      "id": "code-sum-three-inputs",
+      "kind": "code_input",
+      "title": "Add three numbers",
+      "prompt": "Write Python code that reads three whole numbers, one per line. Use an accumulator named `total` in a loop to add them, then print the final total.",
+      "hint": "Start `total` before the loop, then repeat three times with `range(3)`.",
+      "help": {
+        "concept": "An accumulator starts before the loop and is updated each time a new number is read.",
+        "hint_1": "Inside the loop, read one number with `int(input())` and add it to `total`.",
+        "hint_2": "After the loop finishes, print the final value of `total` once."
+      },
+      "starterCode": "total = 0\n\n# Read 3 numbers and add them to total\n\nprint(total)\n",
+      "solutionCode": "total = 0\n\nfor _ in range(3):\n    number = int(input())\n    total = total + number\n\nprint(total)\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "4\n5\n6\n",
+          "stdout": "15\n"
+        },
+        {
+          "stdin": "10\n0\n-3\n",
+          "stdout": "7\n"
+        }
+      ]
+    },
+    {
+      "id": "code-count-a-letters",
+      "kind": "code_input",
+      "title": "Count letter a",
+      "prompt": "Write Python code that reads one word, counts how many times the letter `a` appears, and prints the count.",
+      "hint": "Use a counter that increases only when the current letter is `a`.",
+      "help": {
+        "concept": "A counter increases by one each time a loop finds a character that matches the target condition.",
+        "hint_1": "Loop through the input word one letter at a time.",
+        "hint_2": "Inside the loop, compare each letter to `\"a\"` and update the counter only for matches."
+      },
+      "starterCode": "word = input()\ncount = 0\n\n# Loop through the word and count the letter a\n\nprint(count)\n",
+      "solutionCode": "word = input()\ncount = 0\n\nfor letter in word:\n    if letter == \"a\":\n        count = count + 1\n\nprint(count)\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "banana\n",
+          "stdout": "3\n"
+        },
+        {
+          "stdin": "sky\n",
+          "stdout": "0\n"
+        }
+      ]
+    },
+    {
+      "id": "code-count-long-words",
+      "kind": "code_input",
+      "title": "Count long words",
+      "prompt": "Write Python code that reads an integer `n`, then reads `n` words. Count how many of those words have length 5 or more, and print the count.",
+      "hint": "Use a counter and increase it only for words whose length is at least 5.",
+      "help": {
+        "concept": "A counter can track how many looped items meet a condition, such as a minimum word length.",
+        "hint_1": "First read `n`, then use a loop that runs `n` times to read each word.",
+        "hint_2": "For each word, check `len(word) >= 5` before increasing the counter."
+      },
+      "starterCode": "n = int(input())\ncount = 0\n\n# Read n words and count the ones with length 5 or more\n\nprint(count)\n",
+      "solutionCode": "n = int(input())\ncount = 0\n\nfor _ in range(n):\n    word = input().strip()\n    if len(word) >= 5:\n        count = count + 1\n\nprint(count)\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "4\napple\nsun\nriver\ncat\n",
+          "stdout": "2\n"
+        },
+        {
+          "stdin": "3\nhi\nthere\nworld\n",
+          "stdout": "2\n"
+        }
+      ]
+    },
+    {
+      "id": "code-sum-even-only",
+      "kind": "code_input",
+      "title": "Add only even numbers",
+      "prompt": "Write Python code that reads an integer `n`, then reads `n` whole numbers. Add only the even numbers to `total` and print the final total.",
+      "hint": "Check each number with `% 2` before adding it.",
+      "help": {
+        "concept": "An accumulator can be updated conditionally so only values that match a rule are included in the total.",
+        "hint_1": "Use a loop to read each number one at a time.",
+        "hint_2": "Only when the number is even should you add it to `total`."
+      },
+      "starterCode": "n = int(input())\ntotal = 0\n\n# Read n numbers and add only the even ones\n\nprint(total)\n",
+      "solutionCode": "n = int(input())\ntotal = 0\n\nfor _ in range(n):\n    number = int(input())\n    if number % 2 == 0:\n        total = total + number\n\nprint(total)\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "5\n1\n2\n3\n4\n5\n",
+          "stdout": "6\n"
+        },
+        {
+          "stdin": "4\n8\n7\n6\n1\n",
+          "stdout": "14\n"
+        }
+      ]
+    },
+    {
+      "id": "code-running-total-last",
+      "kind": "code_input",
+      "title": "Print the final running total",
+      "prompt": "Write Python code that reads an integer `n`, then reads `n` whole numbers. Use `total` to keep a running sum, and after the loop prints the final total.",
+      "hint": "This is a basic accumulator pattern: start at zero, add each input number, print once at the end.",
+      "help": {
+        "concept": "A running total is built by repeatedly adding each new value to the accumulator during the loop.",
+        "hint_1": "Read `n` first so you know how many numbers to process.",
+        "hint_2": "Do not print inside the loop if the goal is only the final total."
+      },
+      "starterCode": "n = int(input())\ntotal = 0\n\n# Read n numbers and update total each time\n\nprint(total)\n",
+      "solutionCode": "n = int(input())\ntotal = 0\n\nfor _ in range(n):\n    number = int(input())\n    total = total + number\n\nprint(total)\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "4\n3\n3\n3\n3\n",
+          "stdout": "12\n"
+        },
+        {
+          "stdin": "3\n10\n-2\n1\n",
+          "stdout": "9\n"
+        }
+      ]
+    }
+  ],
+  "projectDraft": {
+    "title": "Practice Accumulators and Counters",
+    "stepIds": [
+      "code-sum-three-inputs",
+      "code-count-a-letters",
+      "code-count-long-words",
+      "code-sum-even-only",
+      "code-running-total-last"
+    ]
+  }
+}

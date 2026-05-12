@@ -4,7 +4,7 @@
     "unlockEnabled": "UNLOCK ENABLED",
     "collapseTitle": "Collapse sidebar",
     "resetTitle": "Reset all progress in this module",
-    "reset": "Reset",
+    "reset": "Reset Module",
     "current": "CURRENT",
     "nextModule": {
       "title": "Next module",

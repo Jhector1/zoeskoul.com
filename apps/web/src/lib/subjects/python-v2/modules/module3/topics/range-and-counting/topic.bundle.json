@@ -14,14 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-3.range-and-counting.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "sk-range-basics",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-3.range-and-counting.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "sk-range-start-stop",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.range-and-counting.cards.sketch2.title",
+      "sketchId": "sk-range-step-patterns",
       "height": 420
     },
     {
@@ -50,27 +57,45 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "policy_code_input_1",
-            "titleKey": "topics.python-v2.python-v2-3.range-and-counting.projectSteps.policy_code_input_1.title",
-            "exerciseKey": "policy_code_input_1",
+            "id": "ci_print_zero_to_four",
+            "titleKey": "topics.python-v2.python-v2-3.range-and-counting.projectSteps.ci_print_zero_to_four.title",
+            "exerciseKey": "ci-print-zero-to-four",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "policy_code_input_2",
-            "titleKey": "topics.python-v2.python-v2-3.range-and-counting.projectSteps.policy_code_input_2.title",
-            "exerciseKey": "policy_code_input_2",
+            "id": "ci_print_one_to_five",
+            "titleKey": "topics.python-v2.python-v2-3.range-and-counting.projectSteps.ci_print_one_to_five.title",
+            "exerciseKey": "ci-print-one-to-five",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "policy_code_input_3",
-            "titleKey": "topics.python-v2.python-v2-3.range-and-counting.projectSteps.policy_code_input_3.title",
-            "exerciseKey": "policy_code_input_3",
+            "id": "ci_even_under_ten",
+            "titleKey": "topics.python-v2.python-v2-3.range-and-counting.projectSteps.ci_even_under_ten.title",
+            "exerciseKey": "ci-even-under-ten",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_countdown_three_to_one",
+            "titleKey": "topics.python-v2.python-v2-3.range-and-counting.projectSteps.ci_countdown_three_to_one.title",
+            "exerciseKey": "ci-countdown-three-to-one",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_print_squares_one_to_four",
+            "titleKey": "topics.python-v2.python-v2-3.range-and-counting.projectSteps.ci_print_squares_one_to_four.title",
+            "exerciseKey": "ci-print-squares-one-to-four",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -82,25 +107,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "sk-range-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-3.range-and-counting.sketch1.title",
-      "bodyKey": "sketches.python-v2.python-v2-3.range-and-counting.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-3.range-and-counting.sk-range-basics.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.range-and-counting.sk-range-basics.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sk-range-start-stop",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-3.range-and-counting.sketch2.title",
-      "bodyKey": "sketches.python-v2.python-v2-3.range-and-counting.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-3.range-and-counting.sk-range-start-stop.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.range-and-counting.sk-range-start-stop.bodyMarkdown"
+    },
+    {
+      "id": "sk-range-step-patterns",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.range-and-counting.sk-range-step-patterns.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.range-and-counting.sk-range-step-patterns.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-range-five-values",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.quiz1",
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.sc-range-five-values",
       "optionIds": [
         "a",
         "b",
@@ -113,11 +144,11 @@
       }
     },
     {
-      "id": "quiz2",
+      "id": "sc-range-start-stop",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.quiz2",
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.sc-range-start-stop",
       "optionIds": [
         "a",
         "b",
@@ -130,11 +161,11 @@
       }
     },
     {
-      "id": "quiz3",
+      "id": "mc-true-about-range",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.quiz3",
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.mc-true-about-range",
       "optionIds": [
         "a",
         "b",
@@ -145,17 +176,17 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
+          "c",
           "d"
         ]
       }
     },
     {
-      "id": "quiz4",
+      "id": "mc-even-loop-options",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.quiz4",
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.mc-even-loop-options",
       "optionIds": [
         "a",
         "b",
@@ -165,21 +196,23 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a"
+          "a",
+          "b"
         ]
       }
     },
     {
-      "id": "quiz5",
+      "id": "dr-build-basic-range-loop",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.quiz5",
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.dr-build-basic-range-loop",
       "tokenIds": [
         "t1",
         "t2",
         "t3",
-        "t4"
+        "t4",
+        "t5"
       ],
       "expected": {
         "kind": "drag_reorder",
@@ -187,130 +220,187 @@
           "t1",
           "t2",
           "t3",
-          "t4"
+          "t4",
+          "t5"
         ]
       }
     },
     {
-      "id": "quiz6",
+      "id": "dr-build-step-range",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.quiz6",
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.dr-build-step-range",
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4",
+        "t5"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3"
+          "t3",
+          "t4",
+          "t5"
         ]
       }
     },
     {
-      "id": "quiz7",
+      "id": "fb-stop-not-included",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.quiz7",
-      "choiceCount": 3,
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.fb-stop-not-included",
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "5"
+        "value": "excluded"
       }
     },
     {
-      "id": "quiz8",
+      "id": "fb-step-even-pattern",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.quiz8",
-      "choiceCount": 3,
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.fb-step-even-pattern",
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "5"
+        "value": "2"
       }
     },
     {
-      "id": "policy_code_input_1",
+      "id": "ci-print-zero-to-four",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.policy_code_input_1",
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-zero-to-four",
       "language": "python",
-      "starterCode": "n = int(input())\n# Your code here",
+      "starterCode": "# Write your code below",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "5\n",
-            "stdout": "True\n",
+            "stdin": "",
+            "stdout": "0\n1\n2\n3\n4\n",
             "match": "exact"
           },
           {
-            "stdin": "0\n",
-            "stdout": "False\n",
+            "stdin": "",
+            "stdout": "0\n1\n2\n3\n4\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
+        "solutionCode": "for n in range(5):\n    print(n)"
       }
     },
     {
-      "id": "policy_code_input_2",
+      "id": "ci-print-one-to-five",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.policy_code_input_2",
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-one-to-five",
       "language": "python",
-      "starterCode": "n = int(input())\n# Your code here",
+      "starterCode": "# Write your code below",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "5\n",
-            "stdout": "True\n",
+            "stdin": "",
+            "stdout": "1\n2\n3\n4\n5\n",
             "match": "exact"
           },
           {
-            "stdin": "0\n",
-            "stdout": "False\n",
+            "stdin": "",
+            "stdout": "1\n2\n3\n4\n5\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
+        "solutionCode": "for n in range(1, 6):\n    print(n)"
       }
     },
     {
-      "id": "policy_code_input_3",
+      "id": "ci-even-under-ten",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.policy_code_input_3",
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-even-under-ten",
       "language": "python",
-      "starterCode": "n = int(input())\n# Your code here",
+      "starterCode": "# Write your code below",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "5\n",
-            "stdout": "True\n",
+            "stdin": "",
+            "stdout": "0\n2\n4\n6\n8\n",
             "match": "exact"
           },
           {
-            "stdin": "0\n",
-            "stdout": "False\n",
+            "stdin": "",
+            "stdout": "0\n2\n4\n6\n8\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
+        "solutionCode": "for n in range(0, 10, 2):\n    print(n)"
+      }
+    },
+    {
+      "id": "ci-countdown-three-to-one",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-countdown-three-to-one",
+      "language": "python",
+      "starterCode": "# Write your code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "3\n2\n1\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "3\n2\n1\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "for n in range(3, 0, -1):\n    print(n)"
+      }
+    },
+    {
+      "id": "ci-print-squares-one-to-four",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-squares-one-to-four",
+      "language": "python",
+      "starterCode": "# Write your code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1\n4\n9\n16\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "1\n4\n9\n16\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "for n in range(1, 5):\n    print(n * n)"
       }
     }
   ]

@@ -865,9 +865,9 @@ export function useReviewModuleController({
                 void navigateToResolvedTarget(nextTarget, "push");
             }
 
-            if (tool.boundId !== targetExerciseKey) {
+            // if (tool.boundId !== targetExerciseKey) {
                 tool.bindCodeInput(args as any);
-            }
+            // }
         },
         [
             tool.bindCodeInput,

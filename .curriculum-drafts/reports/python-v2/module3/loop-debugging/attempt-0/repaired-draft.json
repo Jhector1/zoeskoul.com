@@ -4,31 +4,211 @@
   "minutes": 20,
   "sketchBlocks": [
     {
-      "id": "loop-debugging-intro",
-      "title": "Understanding Loop Debugging",
-      "bodyMarkdown": "Loop debugging involves tracing the values of variables within loops to identify issues such as infinite loops or skipped iterations. For example, consider the following code:\n\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count += 1\n```\nIn this example, the loop will print numbers from 0 to 4. If we mistakenly set `count += 2`, the loop will skip some numbers. \n\n**Your turn:** Modify the code to see how changing the increment affects the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "id": "trace-while-state",
+      "title": "Trace the loop state one step at a time",
+      "bodyMarkdown": "A `while` loop keeps running **while its condition is true**. When you debug one, the most important question is: **what changes each time through the loop?** Usually that is a counter variable.\n\nWorked example:\n\n```python\ncount = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1\n```\n\nStep by step:\n- `count` starts as `1`\n- `1 <= 3` is true, so the loop runs and prints `1`\n- then `count` becomes `2`\n- `2 <= 3` is true, so it prints `2`\n- then `count` becomes `3`\n- `3 <= 3` is true, so it prints `3`\n- then `count` becomes `4`\n- `4 <= 3` is false, so the loop stops\n\nOutput:\n\n```python\n1\n2\n3\n```\n\nA common debugging trick is to track the variable values on paper or add temporary `print()` lines.\n\nTry it yourself: change `count = 1` to `count = 0`, click Run, and check how the output changes."
     },
     {
-      "id": "common-loop-errors",
-      "title": "Common Loop Errors",
-      "bodyMarkdown": "Common errors in loops include off-by-one errors and infinite loops. An off-by-one error occurs when the loop runs one time too many or too few. For instance:\n\n```python\nfor i in range(5):\n    print(i)\n```\nThis will print numbers 0 to 4. If you mistakenly use `range(6)`, it will print 0 to 5, which may not be the intended behavior. \n\n**Try this:** Change the range and observe the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "id": "find-off-by-one",
+      "title": "Spot off-by-one errors",
+      "bodyMarkdown": "An **off-by-one error** happens when a loop runs one time too many or one time too few. This often comes from using `<` when you meant `<=`, or starting the counter at the wrong value.\n\nExample:\n\n```python\ncount = 1\nwhile count < 3:\n    print(count)\n    count = count + 1\n```\n\nLine by line:\n- start with `count = 1`\n- `1 < 3` is true, so print `1`\n- increase to `2`\n- `2 < 3` is true, so print `2`\n- increase to `3`\n- `3 < 3` is false, so stop\n\nThis prints:\n\n```python\n1\n2\n```\n\nIf you expected `1 2 3`, the condition is too strict. Changing `< 3` to `<= 3` fixes it.\n\nYour turn: write down the values a loop checks when it starts at `0` and uses `while count < 3:`."
+    },
+    {
+      "id": "avoid-stuck-loops",
+      "title": "Avoid repeated work and infinite loops",
+      "bodyMarkdown": "A loop can get stuck if the variable in the condition never changes in the right direction. That causes repeated work.\n\nBuggy example:\n\n```python\ncount = 1\nwhile count <= 3:\n    print(count)\n```\n\nWhy this is a problem:\n- `count` starts at `1`\n- `1 <= 3` is true\n- the loop prints `1`\n- but `count` never changes\n- the condition stays true forever\n\nA fixed version updates the counter:\n\n```python\ncount = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1\n```\n\nWhen debugging, ask:\n- Does the loop variable change?\n- Does it move toward making the condition false?\n- Is the update inside the loop body?\n\nTry this: move `count = count + 1` outside the loop in your head. What would happen when you click Run?\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     }
   ],
   "quizDraft": [
     {
-      "id": "loop-error-identification",
+      "id": "loop-debug-sc-1",
       "kind": "single_choice",
-      "title": "Identifying Loop Errors",
-      "prompt": "What type of error is present in the following code?\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count -= 1\n```",
+      "title": "What causes the loop to stop?",
+      "prompt": "In a `while` loop, what makes the loop stop running?",
       "options": [
-        "Infinite loop",
-        "Off-by-one error",
-        "Syntax error",
-        "Logic error"
+        "It stops when the condition becomes false.",
+        "It stops after one print statement.",
+        "It stops only when Python reaches the end of the program.",
+        "It stops whenever the variable name changes."
       ],
       "correctOptionIds": [
         "a"
       ],
+      "hint": "Check what happens when the condition is no longer true.",
+      "help": {
+        "concept": "A `while` loop repeats only while its condition evaluates to true. It stops at the first check where the condition is false.",
+        "hint_1": "Think about the condition after each loop update.",
+        "hint_2": "The loop does not stop because of printing; it stops when the condition fails."
+      }
+    },
+    {
+      "id": "loop-debug-sc-2",
+      "kind": "single_choice",
+      "title": "Find the off-by-one condition",
+      "prompt": "You want to print `1`, `2`, and `3` with a loop that starts at `count = 1`. Which condition should the `while` loop use?",
+      "options": [
+        "`while count < 3:`",
+        "`while count <= 3:`",
+        "`while count == 3:`",
+        "`while count != 1:`"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "The loop must still run when `count` is 3.",
+      "help": {
+        "concept": "Off-by-one errors often come from choosing `<` instead of `<=` when the last value should still be included.",
+        "hint_1": "Ask whether the condition is true at `count = 3`.",
+        "hint_2": "A strict less-than check would stop before printing the last number."
+      }
+    },
+    {
+      "id": "loop-debug-mc-1",
+      "kind": "multi_choice",
+      "title": "Signs of an infinite loop",
+      "prompt": "Choose all situations that can make a `while` loop run forever.",
+      "options": [
+        "The loop variable never changes inside the loop.",
+        "The loop variable changes away from the stopping value.",
+        "The loop prints a value each time.",
+        "The loop condition eventually becomes false."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Look for cases where the condition can stay true again and again.",
+      "help": {
+        "concept": "Infinite loops happen when the loop condition never becomes false, often because the loop variable is not updated or is updated in the wrong direction.",
+        "hint_1": "Check whether the variable in the condition changes at all.",
+        "hint_2": "Also check whether the update moves the value toward stopping, not away from it."
+      }
+    },
+    {
+      "id": "loop-debug-mc-2",
+      "kind": "multi_choice",
+      "title": "Useful debugging actions",
+      "prompt": "Choose all actions that help debug a `while` loop.",
+      "options": [
+        "Trace the loop variable value on each pass.",
+        "Add a temporary `print()` to show the counter.",
+        "Ignore the condition and only read the final output.",
+        "Check whether the update is inside the loop body."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about ways to see the loop variable and condition over time.",
+      "help": {
+        "concept": "Debugging loops is easier when you trace the changing values and compare them with the condition that controls repetition.",
+        "hint_1": "Actions that reveal each step of the counter are helpful.",
+        "hint_2": "Writing down values or printing them temporarily can show repeated or skipped work."
+      }
+    },
+    {
+      "id": "loop-debug-dr-1",
+      "kind": "drag_reorder",
+      "title": "Order the loop steps",
+      "prompt": "Put these steps in the correct order for one full cycle of a typical `while` loop.",
+      "tokens": [
+        "Check the condition",
+        "Run the loop body",
+        "Update the loop variable",
+        "Check the condition again"
+      ],
+      "correctOrder": [
+        "Check the condition",
+        "Run the loop body",
+        "Update the loop variable",
+        "Check the condition again"
+      ],
+      "hint": "A `while` loop checks before it runs the body.",
+      "help": {
+        "concept": "A `while` loop first checks its condition, then runs the body if true, then updates values, and finally returns to the condition check.",
+        "hint_1": "The condition check happens before printing or updating.",
+        "hint_2": "After the update, the loop goes back to test the condition again."
+      }
+    },
+    {
+      "id": "loop-debug-dr-2",
+      "kind": "drag_reorder",
+      "title": "Trace the values",
+      "prompt": "Arrange the values of `count` in the order they are checked by this code: `count = 1` then `while count <= 3:` with `count = count + 1` inside the loop.",
+      "tokens": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correctOrder": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "loop-debug-fb-1",
+      "kind": "fill_blank_choice",
+      "title": "Complete the stopping condition",
+      "prompt": "Fill in the missing value so the loop includes 3 as the last printed number.",
+      "template": "while count <= [blank1]:",
+      "choices": [
+        "2",
+        "3",
+        "4",
+        "count"
+      ],
+      "correctValue": "3",
+      "hint": "The condition must still be true when `count` is the missing term.",
+      "help": {
+        "concept": "To include the last number in a `while` loop, the condition must allow that value before stopping.",
+        "hint_1": "If the loop starts at 1 and should print through the missing term, the boundary must include the missing term.",
+        "hint_2": "A smaller boundary would stop too early."
+      }
+    },
+    {
+      "id": "loop-debug-fb-2",
+      "kind": "fill_blank_choice",
+      "title": "Complete the update",
+      "prompt": "Fill in the missing code so the counter moves forward by 1 each time.",
+      "template": "count = [blank1]",
+      "choices": [
+        "count",
+        "count + 1",
+        "1",
+        "count - 1"
+      ],
+      "correctValue": "count + 1",
+      "hint": "The new value should be one more than the old value.",
+      "help": {
+        "concept": "A counter update changes the loop variable so the condition can eventually become false.",
+        "hint_1": "The right side should use the current value of `count` plus one.",
+        "hint_2": "Without increasing the counter, the loop may repeat the same work."
+      }
+    },
+    {
+      "id": "loop-debug-code-1",
+      "kind": "code_input",
+      "title": "Fix a stuck counter loop",
+      "prompt": "Write Python code that prints the numbers 1 through 3, one per line, using a `while` loop. The loop must update the counter so it stops correctly.",
+      "starterCode": "# TODO: print 1, 2, 3 using a while loop\ncount = 1",
+      "solutionCode": "count = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "1\n2\n3\n"
+        }
+      ],
+      "recipeType": "fixed_tests",
       "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
         "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -37,245 +217,106 @@
       }
     },
     {
-      "id": "loop-output-prediction",
-      "kind": "single_choice",
-      "title": "Predicting Loop Output",
-      "prompt": "What will be the output of the following code?\n```python\nfor i in range(3):\n    print(i)\n```",
-      "options": [
-        "0\n1\n2\n3",
-        "0\n1\n2",
-        "1\n2\n3",
-        "0\n1\n2\n3\n4"
-      ],
-      "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Think about how the `range` function works.",
-      "help": {
-        "concept": "The `range(n)` function generates numbers from 0 to n-1.",
-        "hint_1": "Count the numbers generated by `range(3)`.",
-        "hint_2": "Remember that the last number is not included in the output."
-      }
-    },
-    {
-      "id": "loop-reorder",
-      "kind": "drag_reorder",
-      "title": "Reordering Loop Steps",
-      "prompt": "Arrange the steps to correctly implement a while loop that counts from 0 to 4.",
-      "tokens": [
-        "Initialize count to 0",
-        "Check if count is less than 5",
-        "Print count",
-        "Increment count by 1"
-      ],
-      "correctOrder": [
-        "Initialize count to 0",
-        "Check if count is less than 5",
-        "Print count",
-        "Increment count by 1"
-      ],
-      "hint": "Think about the logical order of the steps.",
-      "help": {
-        "concept": "This task is about understanding the sequence behind reordering loop steps.",
-        "hint_1": "Find the step that must happen first before the others make sense.",
-        "hint_2": "Check which action depends on a previous step already being completed."
-      }
-    },
-    {
-      "id": "loop-blank-increment",
-      "kind": "fill_blank_choice",
-      "title": "Completing the Loop Increment",
-      "prompt": "Fill in the blank to correctly increment the count in the loop:\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count the missing choice 1\n```",
-      "template": "Fill in the blank to correctly increment the count in the loop:\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count the missing choice 1\n```\n\nAnswer: [blank1]",
-      "choices": [
-        "+=",
-        "-=",
-        "*=",
-        "/="
-      ],
-      "correctValue": "+=",
-      "hint": "Focus on the missing concept or keyword.",
-      "help": {
-        "concept": "This task checks the key idea behind completing the loop increment.",
-        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-      }
-    },
-    {
-      "id": "loop-blank-condition",
-      "kind": "fill_blank_choice",
-      "title": "Completing the Loop Condition",
-      "prompt": "Fill in the blank to set the correct loop condition:\n```python\ncount = 0\nwhile count the missing choice 5:\n    print(count)\n    count += 1\n```",
-      "template": "Fill in the blank to set the correct loop condition:\n```python\ncount = 0\nwhile count the missing choice 5:\n    print(count)\n    count += 1\n```\n\nAnswer: [blank1]",
-      "choices": [
-        "<",
-        ">",
-        "==",
-        "<="
-      ],
-      "correctValue": "<",
-      "hint": "Focus on the missing concept or keyword.",
-      "help": {
-        "concept": "This task checks the key idea behind completing the loop condition.",
-        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-      }
-    },
-    {
-      "id": "loop-usage-scenarios",
-      "kind": "multi_choice",
-      "title": "Identifying Loop Usage Scenarios",
-      "prompt": "Which of the following are valid scenarios for using loops? (Select all that apply)",
-      "options": [
-        "Iterating over a list of items",
-        "Repeating a task until a condition is met",
-        "Calculating the sum of numbers",
-        "Displaying a message once"
-      ],
-      "correctOptionIds": [
-        "a",
-        "b",
-        "c"
-      ],
-      "hint": "Think about tasks that require repetition or iteration.",
-      "help": {
-        "concept": "Loops are used to perform actions repeatedly based on conditions.",
-        "hint_1": "Consider tasks that involve multiple items or repeated actions.",
-        "hint_2": "Displaying a message once does not require a loop."
-      }
-    },
-    {
-      "id": "loop-structure-identification",
-      "kind": "multi_choice",
-      "title": "Identifying Loop Structures",
-      "prompt": "Which of the following are types of loops in Python? (Select all that apply)",
-      "options": [
-        "for loop",
-        "while loop",
-        "do-while loop",
-        "foreach loop"
-      ],
-      "correctOptionIds": [
-        "a",
-        "b"
-      ],
-      "hint": "Think about the loop structures available in Python.",
-      "help": {
-        "concept": "Python has specific loop structures for iteration.",
-        "hint_1": "Consider the common loops used in Python programming.",
-        "hint_2": "One of the options is not a standard loop in Python."
-      }
-    },
-    {
-      "id": "loop-debugging-practice",
+      "id": "loop-debug-code-2",
       "kind": "code_input",
-      "title": "Debugging a Loop",
-      "prompt": "Fix the following code to ensure it counts from 0 to 4 without skipping numbers:\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count += 2\n```",
-      "starterCode": "count = 0\nwhile count < 5:\n    print(count)\n    count += 2",
-      "solutionCode": "count = 0\nwhile count < 5:\n    print(count)\n    count += 1",
-      "recipeType": "fixed_tests",
-      "hint": "Break the task into the main code steps first.",
-      "help": {
-        "concept": "This task checks whether you can apply debugging a loop in a working solution.",
-        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-      },
+      "title": "Print from 0 to 2",
+      "prompt": "Write Python code that uses a `while` loop to print `0`, `1`, and `2`, one per line.",
+      "starterCode": "# TODO: print 0, 1, 2 with a while loop\nn = 0",
+      "solutionCode": "n = 0\nwhile n < 3:\n    print(n)\n    n = n + 1",
       "tests": [
         {
-          "stdin": "12\n",
-          "stdout": "0\n1\n2\n3\n4",
-          "match": "exact"
-        },
-        {
-          "stdin": "20\n",
-          "stdout": "0\n1\n2\n3\n4",
-          "match": "exact"
+          "stdin": "",
+          "stdout": "0\n1\n2\n"
         }
-      ]
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Begin at 0 and stop before the value reaches 3.",
+      "help": {
+        "concept": "The starting value and condition work together to decide exactly which numbers a loop prints.",
+        "hint_1": "A loop starting at 0 can use a less-than boundary to stop before 3.",
+        "hint_2": "Print the counter, then increase it by 1 each time."
+      }
     },
     {
-      "id": "loop-sum-calculation",
+      "id": "loop-debug-code-3",
       "kind": "code_input",
-      "title": "Calculating the Sum with a Loop",
-      "prompt": "Write a loop that calculates the sum of numbers from 1 to 10 and prints the result.",
-      "starterCode": "total = 0\nfor i in range(1, 11):\n    # Add your code here\nprint(total)",
-      "solutionCode": "total = 0\nfor i in range(1, 11):\n    total += i\nprint(total)",
-      "recipeType": "fixed_tests",
-      "hint": "Break the task into the main code steps first.",
-      "help": {
-        "concept": "This task checks whether you can apply calculating the sum with a loop in a working solution.",
-        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-      },
+      "title": "Count down safely",
+      "prompt": "Write Python code that prints `3`, `2`, and `1`, one per line, using a `while` loop.",
+      "starterCode": "# TODO: print 3, 2, 1 using a while loop\nn = 3",
+      "solutionCode": "n = 3\nwhile n >= 1:\n    print(n)\n    n = n - 1",
       "tests": [
         {
-          "stdin": "12\n",
-          "stdout": "55",
-          "match": "exact"
-        },
-        {
-          "stdin": "20\n",
-          "stdout": "55",
-          "match": "exact"
+          "stdin": "",
+          "stdout": "3\n2\n1\n"
         }
-      ]
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Count down safely\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Count down safely\".",
+        "hint_1": "Use the statement or expression that matches the required behavior.",
+        "hint_2": "Run the code and compare the output panel with the expected result."
+      }
     },
     {
-      "id": "loop-conditional-practice",
+      "id": "loop-debug-code-4",
       "kind": "code_input",
-      "title": "Using Conditional Statements in Loops",
-      "prompt": "Write a while loop that prints numbers from 0 to 10, but skips even numbers.",
-      "starterCode": "count = 0\nwhile count <= 10:\n    # Add your code here\n    count += 1",
-      "solutionCode": "count = 0\nwhile count <= 10:\n    if count % 2 != 0:\n        print(count)\n    count += 1",
-      "recipeType": "fixed_tests",
-      "hint": "Break the task into the main code steps first.",
-      "help": {
-        "concept": "This task checks whether you can apply using conditional statements in loops in a working solution.",
-        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-      },
+      "title": "Repeat a word a set number of times",
+      "prompt": "Read one word from input. Then use a `while` loop to print that word exactly 3 times, one per line.",
+      "starterCode": "word = input()\n# TODO: print word exactly 3 times using a while loop",
+      "solutionCode": "word = input()\ncount = 0\nwhile count < 3:\n    print(word)\n    count = count + 1",
       "tests": [
         {
-          "stdin": "12\n",
-          "stdout": "1\n3\n5\n7\n9",
-          "match": "exact"
+          "stdin": "hi\n",
+          "stdout": "hi\nhi\nhi\n"
         },
         {
-          "stdin": "20\n",
-          "stdout": "1\n3\n5\n7\n9",
-          "match": "exact"
+          "stdin": "loop\n",
+          "stdout": "loop\nloop\nloop\n"
         }
-      ]
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the coding task and identify what the program should print.",
+      "help": {
+        "concept": "This coding exercise checks whether the program produces the requested output.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Run the code and compare the output panel with the expected result."
+      }
     },
     {
-      "id": "policy_drag_reorder_1",
-      "kind": "drag_reorder",
-      "title": "Order the run-and-check workflow",
-      "prompt": "Put the steps in order for practicing \"Loop Debugging\".",
-      "tokens": [
-        "Write a small piece of Python code",
-        "Run the code",
-        "Read the output or error message"
+      "id": "loop-debug-code-5",
+      "kind": "code_input",
+      "title": "Sum numbers from 1 to n",
+      "prompt": "Read one integer `n` from input. Use a `while` loop to add the numbers from 1 through `n`, then print the total.",
+      "starterCode": "n = int(input())\n# TODO: use a while loop to compute the sum from 1 to n",
+      "solutionCode": "n = int(input())\ntotal = 0\ncount = 1\nwhile count <= n:\n    total = total + count\n    count = count + 1\nprint(total)",
+      "tests": [
+        {
+          "stdin": "3\n",
+          "stdout": "6\n"
+        },
+        {
+          "stdin": "5\n",
+          "stdout": "15\n"
+        }
       ],
-      "correctOrder": [
-        "Write a small piece of Python code",
-        "Run the code",
-        "Read the output or error message"
-      ],
-      "hint": "You need code before you can run it.",
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Sum numbers from 1 to n\" and identify the required result.",
       "help": {
-        "concept": "A basic Python workflow is write code, run it, then inspect the result.",
-        "hint_1": "The output appears after running.",
-        "hint_2": "Errors are also useful feedback."
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Sum numbers from 1 to n\".",
+        "hint_1": "Use the statement or expression that matches the required behavior.",
+        "hint_2": "Run the code and compare the output panel with the expected result."
       }
     }
   ],
   "projectDraft": {
-    "title": "Mini Number Game",
+    "title": "While Loop Debugging Practice",
     "stepIds": [
-      "loop-debugging-practice",
-      "loop-sum-calculation",
-      "loop-conditional-practice"
+      "loop-debug-code-1",
+      "loop-debug-code-2",
+      "loop-debug-code-3",
+      "loop-debug-code-4",
+      "loop-debug-code-5"
     ]
   }
 }

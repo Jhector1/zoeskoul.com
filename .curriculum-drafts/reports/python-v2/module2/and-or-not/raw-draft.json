@@ -4,215 +4,352 @@
   "minutes": 25,
   "sketchBlocks": [
     {
-      "id": "sketch_1",
-      "title": "Understanding Boolean Logic",
-      "bodyMarkdown": "Boolean logic is fundamental in programming. It allows us to combine conditions using operators like AND, OR, and NOT. For example, if we want to check if a number is both greater than 10 AND less than 20, we can write:\n\n```python\nif number > 10 and number < 20:\n    print('Number is between 10 and 20')\n```\n\nTry it yourself: Modify the condition to check if a number is outside this range."
+      "id": "sketch_and_basics",
+      "title": "Using and to require two things",
+      "bodyMarkdown": "Boolean operators let you combine conditions. Use `and` when **both** parts must be true.\n\nExample:\n\n```python\nage = 20\nhas_id = True\n\nif age >= 18 and has_id:\n    print(\"Allowed in\")\nelse:\n    print(\"Not allowed\")\n```\n\nStep by step:\n- `age >= 18` checks whether the age is at least 18.\n- `has_id` is already a boolean value.\n- `and` joins them.\n- The `if` block runs only when **both** are true.\n\nWorked example:\n- If `age` is `20` and `has_id` is `True`, the output is `Allowed in`.\n- If `age` is `20` but `has_id` is `False`, the output is `Not allowed`.\n\nTry it yourself: change `age` or `has_id`, click Run, and check the output panel."
     },
     {
-      "id": "sketch_2",
-      "title": "Using OR in Conditions",
-      "bodyMarkdown": "The OR operator allows us to check multiple conditions. For instance, if we want to check if a number is either less than 10 OR greater than 20, we can write:\n\n```python\nif number < 10 or number > 20:\n    print('Number is outside the range of 10 to 20')\n```\n\nYour turn: Change the condition to check for a number that is either less than 5 or greater than 15."
+      "id": "sketch_or_not",
+      "title": "Using or and not",
+      "bodyMarkdown": "Use `or` when **at least one** condition must be true. Use `not` to flip a boolean value.\n\nExample:\n\n```python\nis_weekend = False\nis_holiday = True\n\nif is_weekend or is_holiday:\n    print(\"No school\")\n\nlogged_in = False\n\nif not logged_in:\n    print(\"Please sign in\")\n```\n\nLine by line:\n- `is_weekend or is_holiday` is true if either value is true.\n- Since `is_holiday` is `True`, `No school` prints.\n- `logged_in` is `False`.\n- `not logged_in` becomes `True`, so `Please sign in` prints.\n\nWorked example:\n- `False or True` becomes `True`.\n- `not False` becomes `True`.\n\nYour turn: change the boolean values, click Run, and predict what appears in the output panel before you check."
+    },
+    {
+      "id": "sketch_combining_clear_rules",
+      "title": "Combining conditions in real if statements",
+      "bodyMarkdown": "You can use boolean operators to write clearer branching rules.\n\nExample:\n\n```python\nscore = 82\nlate = False\n\nif score >= 80 and not late:\n    print(\"Certificate\")\nelif score >= 80 and late:\n    print(\"Passed, but no certificate\")\nelse:\n    print(\"Keep practicing\")\n```\n\nHow this works:\n- First, Python checks `score >= 80 and not late`.\n- If `score` is `82`, then `score >= 80` is true.\n- If `late` is `False`, then `not late` is true.\n- Because both parts are true, Python prints `Certificate` and stops checking the later branches.\n\nThis is useful for rules like eligibility, validation, and classification.\n\nTry this: change `score` to `75`, then change `late` to `True`, and see which branch runs each time."
     }
   ],
   "quizDraft": [
     {
-      "id": "quiz_1",
+      "id": "sc_and_true",
       "kind": "single_choice",
-      "title": "What does the AND operator do?",
-      "prompt": "Select the correct definition of the AND operator.",
+      "title": "When does and become true?",
+      "prompt": "Which statement about `A and B` is correct?",
       "options": [
-        "It checks if at least one condition is true.",
-        "It checks if both conditions are true.",
-        "It negates a condition.",
-        "It combines multiple conditions without checks."
-      ],
-      "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Think about how conditions must relate to each other.",
-      "help": {
-        "concept": "The AND operator requires both conditions to be true for the overall expression to be true.",
-        "hint_1": "Remember, both sides of the AND must be true.",
-        "hint_2": "If either condition is false, the result is false."
-      }
-    },
-    {
-      "id": "quiz_2",
-      "kind": "single_choice",
-      "title": "What will this condition evaluate to: (5 > 3) and (3 > 2)?",
-      "prompt": "Choose the correct evaluation result.",
-      "options": [
-        "True",
-        "False",
-        "None",
-        "Error"
+        "It is true only when both A and B are true.",
+        "It is true when either A or B is true.",
+        "It is always the opposite of A.",
+        "It is true whenever A is false."
       ],
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Evaluate each comparison separately.",
+      "hint": "Think about a rule where two requirements must both be met.",
       "help": {
-        "concept": "Both comparisons must be true for the AND condition to be true.",
-        "hint_1": "Check if both parts of the condition hold true.",
-        "hint_2": "If both comparisons are true, the overall result is true."
+        "concept": "The `and` operator combines two conditions and returns true only if each condition is true.",
+        "hint_1": "Compare `and` with a situation like 'old enough and has permission'. Missing either one should fail.",
+        "hint_2": "Ask yourself what happens if one side is false. With `and`, that makes the whole result false."
       }
     },
     {
-      "id": "quiz_3",
-      "kind": "multi_choice",
-      "title": "Which of the following are valid uses of the OR operator?",
-      "prompt": "Select all that apply.",
+      "id": "sc_not_flip",
+      "kind": "single_choice",
+      "title": "What does not do?",
+      "prompt": "If `logged_in = False`, what does `not logged_in` evaluate to?",
       "options": [
-        "if x < 10 or x > 20:",
-        "if x == 5 or x == 10:",
-        "if x > 5 and x < 10:",
-        "if not x == 0 or x == 1:"
+        "False",
+        "0",
+        "True",
+        "None"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "`not` flips a boolean value.",
+      "help": {
+        "concept": "The `not` operator reverses a boolean: true becomes false, and false becomes true.",
+        "hint_1": "Start with the given value of `logged_in`, then apply the opposite.",
+        "hint_2": "Since the original value is false, `not` changes it to the other boolean value."
+      }
+    },
+    {
+      "id": "mc_or_cases",
+      "kind": "multi_choice",
+      "title": "Choose the true or expressions",
+      "prompt": "Which expressions evaluate to `True`? Choose all correct answers.",
+      "options": [
+        "True or False",
+        "False or False",
+        "3 > 5 or 10 > 2",
+        "7 == 8 or 1 > 4"
       ],
       "correctOptionIds": [
         "a",
-        "b",
-        "d"
+        "c"
       ],
-      "hint": "Look for conditions that allow for multiple true scenarios.",
+      "hint": "With `or`, only one side needs to be true.",
       "help": {
-        "concept": "The OR operator allows for multiple conditions to be true for the overall expression to be true.",
-        "hint_1": "Identify which conditions can be true independently.",
-        "hint_2": "Remember, only one condition needs to be true for OR."
+        "concept": "The `or` operator returns true when at least one of its two conditions is true.",
+        "hint_1": "Check each side of each expression separately, then see whether at least one side is true.",
+        "hint_2": "Any expression with one true side and one false side still becomes true with `or`."
       }
     },
     {
-      "id": "quiz_4",
+      "id": "mc_valid_age_and_name",
+      "kind": "multi_choice",
+      "title": "Valid input checks",
+      "prompt": "A program should accept input only when the user is at least 18 and the name is not empty. Which conditions match that rule? Choose all correct answers.",
+      "options": [
+        "age >= 18 and name != \"\"",
+        "age >= 18 or name != \"\"",
+        "not (age < 18) and name != \"\"",
+        "age > 18 and name == \"\""
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "The rule needs both age and a non-empty name.",
+      "help": {
+        "concept": "Equivalent boolean conditions can be written in different ways, but they must still require both parts of the rule to be satisfied.",
+        "hint_1": "One part checks adulthood. The other part checks that the string is not empty.",
+        "hint_2": "A condition using `not (age < 18)` means the same as being 18 or older."
+      }
+    },
+    {
+      "id": "dr_build_and_condition",
       "kind": "drag_reorder",
-      "title": "Order the steps to evaluate a boolean expression using AND.",
-      "prompt": "Arrange the steps in the correct order.",
+      "title": "Build an and condition",
+      "prompt": "Put the tokens in order to make a valid Python condition that checks whether `score` is at least 50 and `passed` is true.",
       "tokens": [
-        "Evaluate the first condition.",
-        "If the first condition is true, evaluate the second condition.",
-        "Return true if both conditions are true.",
-        "Return false if the first condition is false."
+        "score",
+        ">=",
+        "50",
+        "and",
+        "passed"
       ],
       "correctOrder": [
-        0,
-        1,
-        2,
-        3
+        "score",
+        ">=",
+        "50",
+        "and",
+        "passed"
       ],
-      "hint": "Think about how each condition affects the next.",
+      "hint": "Write the comparison first, then join it with the boolean variable.",
       "help": {
-        "concept": "The evaluation of conditions in AND requires sequential checking.",
-        "hint_1": "Start with the first condition and see if it holds.",
-        "hint_2": "Only check the second condition if the first is true."
+        "concept": "A combined condition can join a comparison like `score >= 50` with another boolean value using `and`.",
+        "hint_1": "Start with the variable being compared to 50.",
+        "hint_2": "After the comparison, place `and`, then the boolean variable that must also be true."
       }
     },
     {
-      "id": "quiz_5",
+      "id": "dr_if_elif_else_logic",
+      "kind": "drag_reorder",
+      "title": "Order the branches",
+      "prompt": "Arrange these lines into a valid `if` / `elif` / `else` structure.",
+      "tokens": [
+        "if age < 13:",
+        "    print(\"child\")",
+        "elif age < 18:",
+        "    print(\"teen\")",
+        "else:",
+        "    print(\"adult\")"
+      ],
+      "correctOrder": [
+        "if age < 13:",
+        "    print(\"child\")",
+        "elif age < 18:",
+        "    print(\"teen\")",
+        "else:",
+        "    print(\"adult\")"
+      ],
+      "hint": "Python checks `if` first, then `elif`, then `else` last.",
+      "help": {
+        "concept": "An `if` / `elif` / `else` chain must follow Python's branching order, with each block's indented action directly after its condition.",
+        "hint_1": "Place the first condition and its print line together before the `elif` branch.",
+        "hint_2": "The `else` branch has no condition, so it must come after all earlier checks."
+      }
+    },
+    {
+      "id": "fb_not_condition",
       "kind": "fill_blank_choice",
-      "title": "Complete the statement using NOT.",
-      "prompt": "Fill in the blank: NOT x > 10 means ____.",
-      "template": "NOT x > 10 means [blank1].",
+      "title": "Complete a not check",
+      "prompt": "Choose the missing word to make the condition true when `ready` is false.",
+      "template": "if [blank1] ready:\n    print(\"Wait\")",
       "choices": [
-        "x is less than or equal to 10",
-        "x is greater than 10",
-        "x is equal to 10",
-        "x is not a number"
+        "and",
+        "or",
+        "not",
+        "elif"
       ],
-      "correctValue": "x is less than or equal to 10",
-      "hint": "Think about how NOT reverses the condition.",
+      "correctValue": "not",
+      "hint": "You need the operator that reverses a boolean value.",
       "help": {
-        "concept": "The NOT operator negates the truth value of the condition.",
-        "hint_1": "If x > 10 is true, what does NOT mean?",
-        "hint_2": "Consider what happens to the condition when negated."
+        "concept": "Use `not` when you want a condition to be true for the opposite boolean value.",
+        "hint_1": "If `ready` is false, the condition should still pass.",
+        "hint_2": "Choose the operator that turns false into true inside the `if` check."
       }
     },
     {
-      "id": "quiz_6",
+      "id": "fb_or_operator",
       "kind": "fill_blank_choice",
-      "title": "Identify the result of NOT True.",
-      "prompt": "Fill in the blank: NOT True is ____.",
-      "template": "NOT True is [blank1].",
+      "title": "Complete an either-or rule",
+      "prompt": "Choose the operator that makes the condition true when either comparison is true.",
+      "template": "if temp < 0 [blank1] temp > 30:\n    print(\"Extreme\")",
       "choices": [
-        "True",
-        "False",
-        "None",
-        "Error"
+        "and",
+        "or",
+        "not",
+        "="
       ],
-      "correctValue": "False",
-      "hint": "Think about the basic truth values.",
+      "correctValue": "or",
+      "hint": "The rule should work for one side or the other.",
       "help": {
-        "concept": "The NOT operator flips the truth value.",
-        "hint_1": "What is the opposite of True?",
-        "hint_2": "Remember, NOT changes the value to its opposite."
+        "concept": "Use `or` when a result should happen if at least one condition is true.",
+        "hint_1": "A temperature cannot be below 0 and above 30 at the same time.",
+        "hint_2": "Because either extreme should count, you need the operator that accepts one true side."
       }
     },
     {
-      "id": "quiz_7",
+      "id": "code_ticket_check",
       "kind": "code_input",
-      "title": "Check eligibility for a discount",
-      "prompt": "Write a function that checks if a customer is eligible for a discount. They must be a member OR have spent more than $100.",
-      "starterCode": "def check_discount(is_member, amount_spent):\n    # Check eligibility\n    pass",
-      "solutionCode": "def check_discount(is_member, amount_spent):\n    if is_member or amount_spent > 100:\n        return True\n    return False",
+      "title": "Check event entry",
+      "prompt": "Write Python code that reads two lines: an integer age and a string `yes` or `no` for whether the person has an ID. Print `allowed` if the age is at least 18 and the ID answer is `yes`. Otherwise print `denied`.",
+      "hint": "You need both conditions to be true.",
+      "help": {
+        "concept": "This task uses `and` to require two checks at the same time: age and ID status.",
+        "hint_1": "Read the age as an integer, then read the second line as text and compare it to `yes`.",
+        "hint_2": "Print one word when both checks pass, and the other word for every other case."
+      },
+      "starterCode": "age = int(input())\nhas_id = input().strip()\n\n# TODO: print allowed or denied\n",
+      "solutionCode": "age = int(input())\nhas_id = input().strip()\n\nif age >= 18 and has_id == \"yes\":\n    print(\"allowed\")\nelse:\n    print(\"denied\")\n",
+      "recipeType": "fixed_tests",
       "tests": [
         {
-          "input": "True, 50",
-          "output": "True"
+          "stdin": "20\nyes\n",
+          "stdout": "allowed\n"
         },
         {
-          "input": "False, 150",
-          "output": "True"
+          "stdin": "20\nno\n",
+          "stdout": "denied\n"
         },
         {
-          "input": "False, 50",
-          "output": "False"
+          "stdin": "16\nyes\n",
+          "stdout": "denied\n"
         }
       ]
     },
     {
-      "id": "quiz_8",
+      "id": "code_free_day",
       "kind": "code_input",
-      "title": "Determine if a number is in range",
-      "prompt": "Write a function that checks if a number is between 10 and 20, inclusive.",
-      "starterCode": "def is_in_range(number):\n    # Check if number is in range\n    pass",
-      "solutionCode": "def is_in_range(number):\n    if number >= 10 and number <= 20:\n        return True\n    return False",
+      "title": "Weekend or holiday",
+      "prompt": "Write Python code that reads two lines, each containing `True` or `False`: `is_weekend` and `is_holiday`. Print `rest` if either value is true. Otherwise print `work`.",
+      "hint": "This is an either-one-is-enough rule.",
+      "help": {
+        "concept": "This task uses `or` because one true condition is enough to choose the `rest` branch.",
+        "hint_1": "Convert each input line into a boolean by comparing the text to `True`.",
+        "hint_2": "If at least one of the two booleans is true, print the first output word."
+      },
+      "starterCode": "is_weekend = input().strip() == \"True\"\nis_holiday = input().strip() == \"True\"\n\n# TODO: print rest or work\n",
+      "solutionCode": "is_weekend = input().strip() == \"True\"\nis_holiday = input().strip() == \"True\"\n\nif is_weekend or is_holiday:\n    print(\"rest\")\nelse:\n    print(\"work\")\n",
+      "recipeType": "fixed_tests",
       "tests": [
         {
-          "input": "15",
-          "output": "True"
+          "stdin": "False\nTrue\n",
+          "stdout": "rest\n"
         },
         {
-          "input": "9",
-          "output": "False"
+          "stdin": "False\nFalse\n",
+          "stdout": "work\n"
         },
         {
-          "input": "20",
-          "output": "True"
+          "stdin": "True\nFalse\n",
+          "stdout": "rest\n"
         }
       ]
     },
     {
-      "id": "quiz_9",
+      "id": "code_not_logged_in",
       "kind": "code_input",
-      "title": "Negate a condition",
-      "prompt": "Write a function that returns the negation of a boolean value.",
-      "starterCode": "def negate(value):\n    # Negate the value\n    pass",
-      "solutionCode": "def negate(value):\n    return not value",
+      "title": "Prompt when not logged in",
+      "prompt": "Write Python code that reads one line containing `True` or `False` for `logged_in`. If the user is not logged in, print `please sign in`. Otherwise print `welcome`.",
+      "hint": "Use `not` to check the opposite of the boolean value.",
+      "help": {
+        "concept": "The `not` operator is useful when the branch should run for the opposite of a stored boolean value.",
+        "hint_1": "Turn the input text into a boolean first.",
+        "hint_2": "The first message should print when the boolean value is false."
+      },
+      "starterCode": "logged_in = input().strip() == \"True\"\n\n# TODO: print the correct message\n",
+      "solutionCode": "logged_in = input().strip() == \"True\"\n\nif not logged_in:\n    print(\"please sign in\")\nelse:\n    print(\"welcome\")\n",
+      "recipeType": "fixed_tests",
       "tests": [
         {
-          "input": "True",
-          "output": "False"
+          "stdin": "False\n",
+          "stdout": "please sign in\n"
         },
         {
-          "input": "False",
-          "output": "True"
+          "stdin": "True\n",
+          "stdout": "welcome\n"
+        }
+      ]
+    },
+    {
+      "id": "code_score_certificate",
+      "kind": "code_input",
+      "title": "Certificate decision",
+      "prompt": "Write Python code that reads an integer score and a second line containing `True` or `False` for `late`. Print `certificate` if the score is at least 80 and the work is not late. Print `passed` if the score is at least 80 and the work is late. Otherwise print `practice`.",
+      "hint": "Check the most specific successful case first.",
+      "help": {
+        "concept": "When multiple branches depend on combined conditions, check the more specific rule first so the correct branch runs.",
+        "hint_1": "There are two score-80-or-more cases, and they differ by whether `late` is true or false.",
+        "hint_2": "Use `not late` for the certificate branch, then a second branch for the other score-passing case."
+      },
+      "starterCode": "score = int(input())\nlate = input().strip() == \"True\"\n\n# TODO: print certificate, passed, or practice\n",
+      "solutionCode": "score = int(input())\nlate = input().strip() == \"True\"\n\nif score >= 80 and not late:\n    print(\"certificate\")\nelif score >= 80 and late:\n    print(\"passed\")\nelse:\n    print(\"practice\")\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "82\nFalse\n",
+          "stdout": "certificate\n"
+        },
+        {
+          "stdin": "82\nTrue\n",
+          "stdout": "passed\n"
+        },
+        {
+          "stdin": "70\nFalse\n",
+          "stdout": "practice\n"
+        }
+      ]
+    },
+    {
+      "id": "code_range_check",
+      "kind": "code_input",
+      "title": "Check if a number is in range",
+      "prompt": "Write Python code that reads one integer `n`. Print `in range` if `n` is at least 10 and at most 20. Otherwise print `out of range`.",
+      "hint": "The number must satisfy both comparisons.",
+      "help": {
+        "concept": "A range check often uses `and` because the value must be above one limit and below another limit at the same time.",
+        "hint_1": "Write one comparison for the lower bound and one for the upper bound.",
+        "hint_2": "Join the two comparisons with the operator that requires both to be true."
+      },
+      "starterCode": "n = int(input())\n\n# TODO: print in range or out of range\n",
+      "solutionCode": "n = int(input())\n\nif n >= 10 and n <= 20:\n    print(\"in range\")\nelse:\n    print(\"out of range\")\n",
+      "recipeType": "fixed_tests",
+      "tests": [
+        {
+          "stdin": "10\n",
+          "stdout": "in range\n"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "in range\n"
+        },
+        {
+          "stdin": "25\n",
+          "stdout": "out of range\n"
         }
       ]
     }
   ],
   "projectDraft": {
-    "title": "Grade Checker",
+    "title": "Build logic checkers with and, or, and not",
     "stepIds": [
-      "quiz_7",
-      "quiz_8",
-      "quiz_9"
+      "code_ticket_check",
+      "code_free_day",
+      "code_not_logged_in",
+      "code_score_certificate",
+      "code_range_check"
     ]
   }
 }

@@ -7,191 +7,221 @@
           "summary": "Understand why indentation controls structure in Python.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Indentation"
+              "title": "Why indentation matters"
             },
             "sketch1": {
-              "title": "Nested Indentation"
+              "title": "Lines with the same indentation belong together"
+            },
+            "sketch2": {
+              "title": "Each branch has its own block"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Grade Checker Project"
+              "title": "Practice with indentation and conditional blocks"
             }
           },
           "projectSteps": {
-            "policy_code_input_1": {
-              "title": "Print whether a number is positive"
+            "code_basic_if_output": {
+              "title": "Print from an if block"
             },
-            "policy_code_input_2": {
-              "title": "Print whether a number is positive"
+            "code_two_lines_in_block": {
+              "title": "Use two lines in one block"
             },
-            "policy_code_input_3": {
-              "title": "Print whether a number is positive"
+            "code_elif_branches": {
+              "title": "Classify with if elif else"
+            },
+            "code_special_case_first": {
+              "title": "Check the special case first"
+            },
+            "code_nested_if_basic": {
+              "title": "Use an if inside another if"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "What does indentation control in Python?",
-              "prompt": "Choose the correct answer.",
-              "hint": "Think about how Python interprets blocks of code.",
+            "sc-indent-purpose": {
+              "title": "What indentation does",
+              "prompt": "In Python, what does indentation mainly tell the program?",
+              "hint": "Think about which lines belong under an `if` or `else`.",
               "help": {
-                "concept": "Indentation in Python is used to define blocks of code, such as those following `if`, `for`, and `while` statements.",
-                "hint_1": "Consider how indentation affects the flow of control in your programs.",
-                "hint_2": "Remember that without proper indentation, Python will raise an error."
+                "concept": "Python uses indentation to define blocks of code. A block is the set of lines that belong to a statement like `if`, `elif`, or `else`.",
+                "hint_1": "Look for the choice about grouping lines under a conditional branch.",
+                "hint_2": "It is not mainly about decoration or comments. It controls structure."
               },
               "options": {
-                "a": "It controls the speed of execution.",
-                "b": "It defines the structure of the code.",
-                "c": "It is only for readability.",
-                "d": "It has no effect on the code."
+                "a": "Which lines belong to the same block",
+                "b": "Which variables are strings",
+                "c": "How many times a line will run",
+                "d": "Whether print adds a new line"
               }
             },
-            "quiz2": {
-              "title": "What happens if you forget to indent a block?",
-              "prompt": "Choose the correct answer.",
-              "hint": "Think about how Python handles errors related to code structure.",
+            "sc-outside-block": {
+              "title": "Line outside the block",
+              "prompt": "What is true about a line that is not indented under an `if` statement?",
+              "hint": "Compare a line aligned with `if` to a line indented under it.",
               "help": {
-                "concept": "Indentation is crucial in Python; forgetting to indent will lead to an error.",
-                "hint_1": "Errors related to indentation are common for beginners.",
-                "hint_2": "Check the structure of your code if you encounter an IndentationError."
+                "concept": "A line aligned with the `if` statement is outside that `if` block, so it is not controlled by the condition in the same way as indented lines are.",
+                "hint_1": "A line at the left edge is separate from the indented branch.",
+                "hint_2": "If the condition is false, the outside line can still run because it is not part of the skipped block."
               },
               "options": {
-                "a": "The code will run without issues.",
-                "b": "Python will raise an IndentationError.",
-                "c": "The code will be ignored.",
-                "d": "It will execute the next line."
+                "a": "It is always ignored",
+                "b": "It belongs to the `if` block",
+                "c": "It is outside the `if` block",
+                "d": "It turns the `if` into an `else`"
               }
             },
-            "quiz3": {
-              "title": "Which of the following are valid uses of indentation?",
-              "prompt": "Select all that apply.",
-              "hint": "Think about where indentation is necessary in control structures.",
+            "mc-same-block": {
+              "title": "Choose all lines in the block",
+              "prompt": "Consider this code:\n\n```python\nif True:\n    print(\"A\")\n    print(\"B\")\nprint(\"C\")\n```\n\nWhich lines are inside the `if` block? Choose all correct answers.",
+              "hint": "Only the indented lines under `if True:` belong to that block.",
               "help": {
-                "concept": "Indentation is used in control structures like if statements and loops to define blocks of code.",
-                "hint_1": "Comments do not require indentation.",
-                "hint_2": "Nesting is a common practice in Python that relies on indentation."
+                "concept": "In Python, all lines directly under a statement and indented the same amount are part of that block.",
+                "hint_1": "Check which lines are shifted to the right under `if True:`.",
+                "hint_2": "The two `print` lines with matching indentation are grouped together; the left-aligned line is separate."
               },
               "options": {
-                "a": "Defining a block of code under an if statement.",
-                "b": "Creating a loop.",
-                "c": "Making comments.",
-                "d": "Nesting if statements."
+                "a": "print(\"A\")",
+                "b": "print(\"B\")",
+                "c": "print(\"C\")",
+                "d": "if True:"
               }
             },
-            "quiz4": {
-              "title": "Identify the correct indentation levels for the following code:",
-              "prompt": "Arrange the following lines in the correct order.",
-              "hint": "Consider the structure of nested if statements.",
+            "mc-branch-blocks": {
+              "title": "Valid ideas about blocks",
+              "prompt": "Which statements about Python blocks are correct? Choose all correct answers.",
+              "hint": "Think about indentation level and how `if`/`elif`/`else` branches are grouped.",
               "help": {
-                "concept": "Indentation levels must reflect the hierarchy of conditions.",
-                "hint_1": "The inner if statement must be indented under the outer if statement.",
-                "hint_2": "The else statement should align with its corresponding if statement."
+                "concept": "Blocks in Python are formed by indentation. Each branch can have its own block, and matching indentation groups lines together.",
+                "hint_1": "Look for statements about same indentation and separate branch bodies.",
+                "hint_2": "Reject any choice that says indentation is only visual or optional."
               },
               "options": {
-                "a": "A command",
-                "b": "A table name"
+                "a": "Lines with the same indentation under an `if` can belong to the same block",
+                "b": "An `else` branch can have its own indented block",
+                "c": "Indentation in Python is only for readability and does not affect execution",
+                "d": "A line outside the block must be indented more than the `if` line"
               }
             },
-            "quiz5": {
-              "title": "Fill in the blank to complete the statement: In Python, indentation is used to define a ______.",
-              "prompt": "Fill in the blank to complete the statement: In Python, indentation is used to define a the missing choice.",
-              "hint": "Focus on the missing concept or keyword.",
+            "dr-if-else-structure": {
+              "title": "Build a simple if-else",
+              "prompt": "Arrange the tokens to form a valid Python `if`/`else` structure that prints `yes` when `x > 0` and `no` otherwise.",
+              "hint": "Arrange the pieces in the order Python uses them.",
               "help": {
-                "concept": "This task checks the key idea behind fill in the blank to complete the statement: in python, indentation is used to define a ______..",
-                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-              },
-              "template": "In Python, indentation is used to define a [blank1].",
-              "choices": [
-                "variable",
-                "block of code",
-                "function",
-                "class"
-              ]
-            },
-            "quiz6": {
-              "title": "Fill in the blank to complete the statement: Forgetting to indent will raise an ______.",
-              "prompt": "Fill in the blank to complete the statement: Forgetting to indent will raise an the missing choice.",
-              "hint": "Focus on the missing concept or keyword.",
-              "help": {
-                "concept": "This task checks the key idea behind fill in the blank to complete the statement: forgetting to indent will raise an ______..",
-                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
-                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-              },
-              "template": "Forgetting to indent will raise an [blank1].",
-              "choices": [
-                "IndentationError",
-                "SyntaxError",
-                "TypeError",
-                "ValueError"
-              ]
-            },
-            "quiz7": {
-              "title": "Arrange the steps to create a nested if statement.",
-              "prompt": "Arrange the steps to create a nested if statement.",
-              "hint": "Think about the logical order of the steps.",
-              "help": {
-                "concept": "This task is about understanding the sequence behind arrange the steps to create a nested if statement..",
-                "hint_1": "Find the step that must happen first before the others make sense.",
-                "hint_2": "Check which action depends on a previous step already being completed."
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "Write the outer if condition.",
-                "t2": "Write the inner if condition.",
-                "t3": "Indent the inner if condition.",
-                "t4": "Write the code for the inner if.",
-                "t5": "Write the code for the outer if."
+                "t1": "if x > 0:",
+                "t2": "print(\"yes\")",
+                "t3": "else:",
+                "t4": "print(\"no\")"
               }
             },
-            "quiz8": {
-              "title": "Arrange the steps to fix an IndentationError.",
-              "prompt": "Arrange the steps to fix an IndentationError.",
-              "hint": "Think about the logical order of the steps.",
+            "dr-two-line-block": {
+              "title": "Arrange a two-line block",
+              "prompt": "Arrange the tokens to make a valid program where both messages are inside the `if` block.",
+              "hint": "Both `print` lines should stay under the `if` line with the same indentation.",
               "help": {
-                "concept": "This task is about understanding the sequence behind arrange the steps to fix an indentationerror..",
-                "hint_1": "Find the step that must happen first before the others make sense.",
-                "hint_2": "Check which action depends on a previous step already being completed."
+                "concept": "Multiple lines can belong to one block when they are indented equally under the same header line.",
+                "hint_1": "Put the `if` header first, then the two indented lines.",
+                "hint_2": "The two `print` lines should be consecutive and both shifted right the same amount."
               },
               "tokens": {
-                "t1": "Identify the line causing the error.",
-                "t2": "Check the indentation levels.",
-                "t3": "Correct the indentation.",
-                "t4": "Run the code again."
+                "t1": "if score >= 50:",
+                "t2": "print(\"pass\")",
+                "t3": "print(\"good effort\")"
               }
             },
-            "policy_code_input_1": {
-              "title": "Print whether a number is positive",
-              "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
-              "hint": "Use a conditional check and return a boolean result.",
+            "fb-indent-after-if": {
+              "title": "Complete the block header",
+              "prompt": "Choose the missing word to complete the conditional line.",
+              "hint": "A conditional branch starts with Python's keyword for checking a condition.",
               "help": {
-                "concept": "A conditional can decide which boolean value to print based on a comparison.",
-                "hint_1": "Compare the number with zero inside an if statement.",
-                "hint_2": "Print True when the condition passes; otherwise print False."
+                "concept": "Python starts a basic conditional with the `the missing term` keyword, followed by a condition and a colon.",
+                "hint_1": "You use this keyword before a condition like `x > 3`.",
+                "hint_2": "It is the first branch keyword, not the fallback branch."
               },
-              "starterCode": "n = int(input())\n# Your code here"
+              "template": "[blank1] score >= 80:",
+              "choices": [
+                "if",
+                "else",
+                "print",
+                "input"
+              ]
             },
-            "policy_code_input_2": {
-              "title": "Print whether a number is positive",
-              "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
-              "hint": "Use a conditional check and return a boolean result.",
+            "fb-line-in-block": {
+              "title": "Choose the indented line",
+              "prompt": "Pick the line that correctly fills the blank so the print statement is inside the `if` block.",
+              "hint": "The line inside the block must be indented.",
               "help": {
-                "concept": "A conditional can decide which boolean value to print based on a comparison.",
-                "hint_1": "Compare the number with zero inside an if statement.",
-                "hint_2": "Print True when the condition passes; otherwise print False."
+                "concept": "A statement belongs to an `if` block only when it is indented under the `if` line.",
+                "hint_1": "Look for the choice with spaces before `print`.",
+                "hint_2": "The correct line is not left-aligned; it is shifted right to show block membership."
               },
-              "starterCode": "n = int(input())\n# Your code here"
+              "template": "if ready:\n[blank1]",
+              "choices": [
+                "print(\"Go\")",
+                "if print(\"Go\")",
+                ": print(\"Go\")"
+              ]
             },
-            "policy_code_input_3": {
-              "title": "Print whether a number is positive",
-              "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
-              "hint": "Use a conditional check and return a boolean result.",
+            "code-basic-if-output": {
+              "title": "Print from an if block",
+              "prompt": "Write Python code that reads one integer. If the number is greater than 10, print `big`. Otherwise print `small`.",
+              "hint": "Read the task \"Print from an if block\" and identify the required result.",
               "help": {
-                "concept": "A conditional can decide which boolean value to print based on a comparison.",
-                "hint_1": "Compare the number with zero inside an if statement.",
-                "hint_2": "Print True when the condition passes; otherwise print False."
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print from an if block\".",
+                "hint_1": "Write the code that creates exactly the requested output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "n = int(input())\n# Your code here"
+              "starterCode": "n = int(input())\n\n# TODO: print \"big\" if n > 10, otherwise print \"small\""
+            },
+            "code-two-lines-in-block": {
+              "title": "Use two lines in one block",
+              "prompt": "Write Python code that reads one integer. If the number is at least 5, print `high` on one line and `checked` on the next line. Otherwise print only `low`.",
+              "hint": "Read the task \"Use two lines in one block\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Use two lines in one block\".",
+                "hint_1": "Write the code that creates exactly the requested output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: write the conditional output"
+            },
+            "code-elif-branches": {
+              "title": "Classify with if elif else",
+              "prompt": "Write Python code that reads one integer. Print `positive` if it is greater than 0, `negative` if it is less than 0, and `zero` otherwise.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print positive, negative, or zero"
+            },
+            "code-special-case-first": {
+              "title": "Check the special case first",
+              "prompt": "Write Python code that reads one integer score. Print `perfect` if the score is exactly 100. Otherwise, if the score is at least 60, print `pass`. In all other cases, print `retry`.",
+              "hint": "Read the task \"Check the special case first\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Check the special case first\".",
+                "hint_1": "Write the code that creates exactly the requested output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "score = int(input())\n\n# TODO: print perfect, pass, or retry"
+            },
+            "code-nested-if-basic": {
+              "title": "Use an if inside another if",
+              "prompt": "Write Python code that reads one integer age. If the age is at least 13, then check one more condition: if the age is at least 18, print `adult`; otherwise print `teen`. If the age is less than 13, print `child`.",
+              "hint": "Start with the outer age check, then place another `if` inside that block.",
+              "help": {
+                "concept": "Nested conditionals use one indented block inside another. The inner `if` only runs when the outer condition is true.",
+                "hint_1": "First separate ages below 13 from ages 13 and above.",
+                "hint_2": "Inside the outer true branch, compare again to decide between the two older groups."
+              },
+              "starterCode": "age = int(input())\n\n# TODO: use a nested if to print child, teen, or adult"
             }
           }
         }
@@ -202,13 +232,17 @@
     "python-v2": {
       "python-v2-2": {
         "indentation-and-blocks": {
-          "indentation-basics": {
-            "title": "Understanding Indentation",
-            "bodyMarkdown": "In Python, indentation is not just for readability; it defines the structure of the code. For example:\n\n```python\nif condition:\n    # This block is executed if the condition is true\n    print('Condition is true')\nelse:\n    # This block is executed if the condition is false\n    print('Condition is false')\n```\n\nIn this example, the indented lines under `if` and `else` are part of their respective blocks. If you forget to indent, Python will raise an `IndentationError`. \n\n**Your turn:** Try creating your own `if` statement with an `else` block and see how indentation affects the flow of your program.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "indentation-intro": {
+            "title": "Why indentation matters",
+            "bodyMarkdown": "In Python, indentation is not just for style. It tells Python which lines belong inside a block.\n\nA block is a group of lines that run together after a statement like `if`, `elif`, or `else`.\n\n```python\nage = 16\n\nif age >= 18:\n    print(\"adult\")\nprint(\"done\")\n```\n\nWalk through it:\n- `if age >= 18:` checks a condition.\n- The indented line under it belongs to the `if` block.\n- `print(\"done\")` is not indented, so it is outside the block.\n- Because `16 >= 18` is false, Python skips `print(\"adult\")` and still runs `print(\"done\")`.\n\nWorked example output:\n\n```python\ndone\n```\n\nIf you indent a line, you are saying, \"This line is part of that block.\"\n\nYour turn: Type the example in the code editor, click Run, then change `age` to `20` and check how the output panel changes."
           },
-          "nested-indentation": {
-            "title": "Nested Indentation",
-            "bodyMarkdown": "You can also nest `if` statements. Here's an example:\n\n```python\nif outer_condition:\n    if inner_condition:\n        print('Both conditions are true')\n    else:\n        print('Outer is true, inner is false')\nelse:\n    print('Outer condition is false')\n```\n\nIn this case, the inner `if` statement is only executed if the outer condition is true. Remember, proper indentation is crucial to avoid errors.\n\n**Try this:** Modify the conditions and see how the output changes based on your indentation.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "same-indent-same-block": {
+            "title": "Lines with the same indentation belong together",
+            "bodyMarkdown": "Inside a block, lines that have the same indentation level are grouped together.\n\n```python\nscore = 85\n\nif score >= 80:\n    print(\"Great job\")\n    print(\"You passed the target\")\nprint(\"Check complete\")\n```\n\nStep through it:\n- `if score >= 80:` starts a conditional block.\n- The next two lines are indented the same amount, so both are inside the `if` block.\n- `print(\"Check complete\")` is back at the left side, so it runs after the block.\n\nIf `score` is `85`, the output is:\n\n```python\nGreat job\nYou passed the target\nCheck complete\n```\n\nIf `score` were `60`, the first two lines would be skipped, but `Check complete` would still print.\n\nYour turn: Change `score` to `60`, click Run, and compare the output panel with the earlier result."
+          },
+          "if-elif-else-blocks": {
+            "title": "Each branch has its own block",
+            "bodyMarkdown": "With `if`, `elif`, and `else`, each branch can have its own indented block.\n\n```python\nnumber = 0\n\nif number > 0:\n    print(\"positive\")\nelif number < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")\n```\n\nHow this works:\n- `if number > 0:` checks the first condition.\n- `elif number < 0:` is checked only if the first condition is false.\n- `else:` runs if the earlier conditions are false.\n- The indented line under each branch belongs only to that branch.\n\nFor `number = 0`, the output is:\n\n```python\nzero\n```\n\nA common beginner mistake is forgetting to indent the line after `if` or `else`. Python needs that indentation to know what should run in that branch.\n\nPractice this: Change `number` to `7` and then to `-3`. Click Run each time and watch which block runs.\n\nStep through it: read each statement from top to bottom. Notice which names are created, which values are passed into built-in tools, and what output the code is meant to show."
           }
         }
       }

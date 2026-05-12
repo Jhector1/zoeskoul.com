@@ -2,45 +2,58 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
-import { useSpeak } from "./_shared/useSpeak";
-import {
-    normalizePresentableOptions,
-} from "@/lib/practice/presentationOrder";
+import { normalizePresentableOptions } from "@/lib/practice/presentationOrder";
 import { useRandomizedOptions } from "./_shared/useRandomizedOptions";
+import type { FillBlankChoiceExercise } from "@/lib/practice/types";
 
-type Exercise = {
-    title: string;
-    prompt: string;
-    template: string;
-    choices: string[];
-    correct?: string;
-    locale?: string;
-    hint?: string;
-    audio?: boolean;
-};
+const BLANK_PATTERN = /\[blank[^\]]*\]|_{2,}/gi;
 
 function renderTemplate(template: string, fill: string) {
-    return template.replace(/_{2,}/g, fill || "______");
+    return template.replace(BLANK_PATTERN, fill || "______");
 }
 
-function renderSentenceWithBlank(template: string, fill: string) {
-    const parts = template.split(/_{2,}/g);
+function getBlankCharCount(choices: string[]) {
+    const longest = Math.max(...choices.map((choice) => choice.length), 8);
+
+    // Deterministic width based on the longest choice.
+    // Adds breathing room but caps very long answers.
+    return Math.min(Math.max(longest + 4, 14), 36);
+}
+
+function renderSentenceWithBlank(
+    template: string,
+    fill: string,
+    blankCharCount: number,
+) {
+    const parts = template.split(BLANK_PATTERN);
+    const underline = "_".repeat(blankCharCount);
 
     return (
-        <>
+        <span className="inline-flex flex-wrap items-end gap-y-3">
             {parts.map((part, index) => (
                 <React.Fragment key={`${part}-${index}`}>
                     <span>{part}</span>
+
                     {index < parts.length - 1 ? (
-                        <span className="mx-1 inline-flex align-middle">
-              <span className={fill ? "ui-pill-good" : "ui-pill-neutral"}>
-                {fill || "Choose"}
-              </span>
-            </span>
+                        <span
+                            className="mx-2 inline-flex flex-col items-center align-bottom leading-none"
+                            style={{ width: `${blankCharCount}ch` }}
+                        >
+                            <span className="min-h-[1rem] max-w-full truncate whitespace-nowrap text-center text-sm font-semibold leading-none text-current">
+                                {fill || "\u00A0"}
+                            </span>
+
+                            <span
+                                className="-mt-0.5 block w-full overflow-hidden whitespace-nowrap text-center leading-none text-current"
+                                aria-hidden="true"
+                            >
+                                {underline}
+                            </span>
+                        </span>
                     ) : null}
                 </React.Fragment>
             ))}
-        </>
+        </span>
     );
 }
 
@@ -53,7 +66,7 @@ export default function FillBlankChoiceExerciseUI({
                                                       ok,
                                                       reviewCorrectValue = null,
                                                   }: {
-    exercise: Exercise;
+    exercise: FillBlankChoiceExercise;
     value: string;
     onChangeValue: (v: string) => void;
     disabled: boolean;
@@ -61,15 +74,11 @@ export default function FillBlankChoiceExerciseUI({
     ok: boolean | null;
     reviewCorrectValue?: string | null;
 }) {
-    const { speak, ttsStatus } = useSpeak();
-
     const [selected, setSelected] = useState<string>(value ?? "");
 
     useEffect(() => {
         setSelected(value ?? "");
     }, [value]);
-
-    const audioEnabled = exercise.audio === true;
 
     const normalizedChoices = useMemo(
         () => normalizePresentableOptions(exercise.choices ?? []),
@@ -78,26 +87,16 @@ export default function FillBlankChoiceExerciseUI({
 
     const choices = useRandomizedOptions(normalizedChoices);
 
-    const spokenSentence = useMemo(
-        () => renderTemplate(exercise.template, selected),
-        [exercise.template, selected],
+    const blankCharCount = useMemo(
+        () => getBlankCharCount(normalizedChoices.map((choice) => choice.text)),
+        [normalizedChoices],
     );
 
     const choose = (choice: string) => {
         if (disabled) return;
+
         setSelected(choice);
         onChangeValue(choice);
-    };
-
-    const listenCurrent = () =>
-        void speak(spokenSentence, { voice: "marin", speed: 1.0 });
-
-    const listenCorrect = () => {
-        if (!reviewCorrectValue) return;
-        void speak(renderTemplate(exercise.template, reviewCorrectValue), {
-            voice: "marin",
-            speed: 1.0,
-        });
     };
 
     return (
@@ -107,26 +106,13 @@ export default function FillBlankChoiceExerciseUI({
             </div>
 
             <div className="ui-review-note space-y-3 border-none">
-                <div className="flex items-start justify-between gap-3">
-                    {audioEnabled ? (
-                        <button
-                            type="button"
-                            className="ui-btn-secondary"
-                            onClick={listenCurrent}
-                            disabled={disabled}
-                        >
-                            Listen
-                        </button>
-                    ) : null}
+                <div className="ui-title-sm leading-10">
+                    {renderSentenceWithBlank(
+                        exercise.template,
+                        selected,
+                        blankCharCount,
+                    )}
                 </div>
-
-                <div className="ui-title-sm leading-8">
-                    {renderSentenceWithBlank(exercise.template, selected)}
-                </div>
-
-                {audioEnabled && ttsStatus ? (
-                    <div className="ui-quiz-status">{ttsStatus}</div>
-                ) : null}
             </div>
 
             <div className="grid gap-2 sm:grid-cols-2">
@@ -139,7 +125,11 @@ export default function FillBlankChoiceExerciseUI({
                             type="button"
                             onClick={() => choose(choice.text)}
                             disabled={disabled}
-                            className={active ? "ui-review-topic-btn-active" : "ui-review-topic-btn"}
+                            className={
+                                active
+                                    ? "ui-review-topic-btn-active"
+                                    : "ui-review-topic-btn"
+                            }
                         >
                             <div className="ui-title-sm">{choice.text}</div>
                         </button>
@@ -151,20 +141,10 @@ export default function FillBlankChoiceExerciseUI({
                 <div className="ui-review-note-danger space-y-3">
                     <div>
                         <div className="ui-kicker">Correct answer</div>
-                        <div className="ui-title-sm mt-1">{reviewCorrectValue}</div>
-                    </div>
-
-                    {audioEnabled ? (
-                        <div>
-                            <button
-                                type="button"
-                                className="ui-btn-secondary"
-                                onClick={listenCorrect}
-                            >
-                                Listen
-                            </button>
+                        <div className="ui-title-sm mt-1">
+                            {reviewCorrectValue}
                         </div>
-                    ) : null}
+                    </div>
                 </div>
             ) : null}
         </div>

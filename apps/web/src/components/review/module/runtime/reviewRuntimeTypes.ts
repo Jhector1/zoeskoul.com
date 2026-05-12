@@ -245,6 +245,11 @@ export type ReviewRuntimeActions = {
   syncActiveTarget: (target: import("./reviewRoute").ReviewResolvedRouteTarget | null) => void;
 
   queueAutosave: () => void;
+
+
+  clearRuntimeForTopic: (topicId: string) => void;
+  clearRuntimeForCard: (topicId: string, cardId: string) => void;
+  clearRuntimeForModule: () => void;
   flushNow: () => Promise<void>;
 };
 

@@ -1,33 +1,4 @@
 {
   "topicId": "print-comments-and-errors",
-  "repairs": [
-    {
-      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
-      "category": "text",
-      "severity": "medium",
-      "field": "sketchBlocks.comments_in_python.bodyMarkdown",
-      "message": "Added a short line-by-line explanation after a multi-line code example."
-    },
-    {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "code_input_2",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
-    },
-    {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "code_input_1",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
-    },
-    {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "code_input_3",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
-    }
-  ]
+  "repairs": []
 }

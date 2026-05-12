@@ -53,6 +53,7 @@ export default async function PracticePage() {
             const view = manifestMap[s.slug];
 
             return {
+                subjectId: s.id,
                 slug: s.slug,
                 title: view?.title ?? s.title,
                 description: view?.description ?? s.description ?? "",

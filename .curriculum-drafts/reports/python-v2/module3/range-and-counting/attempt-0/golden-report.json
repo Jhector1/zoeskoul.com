@@ -1,5 +1,27 @@
 {
   "topicId": "range-and-counting",
-  "ok": true,
-  "issues": []
+  "ok": false,
+  "issues": [
+    {
+      "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "ci-print-zero-to-four",
+      "message": "Exercise \"ci-print-zero-to-four\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "ci-print-one-to-five",
+      "message": "Exercise \"ci-print-one-to-five\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "ci-even-under-ten",
+      "message": "Exercise \"ci-even-under-ten\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+    }
+  ]
 }
