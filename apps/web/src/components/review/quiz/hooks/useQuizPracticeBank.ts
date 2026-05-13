@@ -783,7 +783,7 @@ export function useQuizPracticeBank(args: {
                   allowReveal: (q as any).fetch.allowReveal ? true : undefined,
                   preferKind: (q as any).fetch.preferKind ?? undefined,
                   salt: (q as any).fetch.salt ?? undefined,
-                  preferPurpose: "mixed",
+                  preferPurpose: (q as any).fetch.preferPurpose ?? "mixed",
                   purposePolicy: "fallback",
                   exerciseKey:
                     (q as any).exercise?.id ??

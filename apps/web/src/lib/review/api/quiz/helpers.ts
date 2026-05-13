@@ -1,10 +1,13 @@
 import { createHash } from "crypto";
 import { PracticeKind } from "@zoeskoul/db";
 
+export type ReviewExercisePurpose = "quiz" | "project";
+
 export type PoolItem = {
     key: string;
     w: number;
     kind?: string | null;
+    purpose?: string | null;
 };
 
 type IntRng = {
@@ -19,6 +22,10 @@ export function stableJsonHash(v: unknown) {
     return shortHash(JSON.stringify(v ?? null));
 }
 
+function normalizePurpose(value: unknown): ReviewExercisePurpose {
+    return value === "project" ? "project" : "quiz";
+}
+
 export function readPoolFromTopicMeta(meta: any): PoolItem[] {
     const raw = meta?.pool;
     if (!Array.isArray(raw)) return [];
@@ -28,8 +35,21 @@ export function readPoolFromTopicMeta(meta: any): PoolItem[] {
             key: String(p?.key ?? "").trim(),
             w: Math.max(0, Math.floor(Number(p?.w ?? 0))),
             kind: p?.kind ? String(p.kind).trim() : undefined,
+            // Legacy DB rows may be missing purpose; keep those quiz-safe and
+            // rely on curriculum sync to refresh stale PracticeTopic.meta.pool.
+            purpose: p?.purpose ? String(p.purpose).trim() : "quiz",
         }))
         .filter((p) => p.key && Number.isFinite(p.w) && p.w > 0);
+}
+
+export function filterPoolByPurpose(
+    pool: PoolItem[],
+    purpose: string | null | undefined,
+) {
+    if (!purpose) return pool;
+
+    const wanted = normalizePurpose(purpose);
+    return pool.filter((p) => normalizePurpose(p.purpose) === wanted);
 }
 
 export function filterPoolByPreferKind(
@@ -37,8 +57,17 @@ export function filterPoolByPreferKind(
     preferKind: PracticeKind | null | undefined,
 ) {
     if (!preferKind) return pool;
+
     const wanted = String(preferKind);
     return pool.filter((p) => !p.kind || String(p.kind) === wanted);
+}
+
+export function filterPoolForPurposeAndKind(
+    pool: PoolItem[],
+    purpose: string | null | undefined,
+    preferKind: PracticeKind | null | undefined,
+) {
+    return filterPoolByPreferKind(filterPoolByPurpose(pool, purpose), preferKind);
 }
 
 export function weightedPickKey(rng: IntRng, pool: PoolItem[]) {

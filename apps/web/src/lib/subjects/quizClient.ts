@@ -40,9 +40,11 @@ export function buildReviewQuizKey(
 ) {
   const isProject = (spec as any)?.mode === "project";
   const allowReveal = bool01((spec as any).allowReveal);
+  const selectionVersion = "purpose-v3";
 
   const base = [
     "review-quiz",
+    `selection=${selectionVersion}`,
     `subject=${spec.subject}`,
     `module=${(spec as any).module ?? ""}`,
     `section=${(spec as any).section ?? ""}`,

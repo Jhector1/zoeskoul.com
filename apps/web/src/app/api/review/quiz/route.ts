@@ -1,5 +1,3 @@
-// src/app/api/review/quiz/route.ts
-import { PracticeKind } from "@zoeskoul/db";
 import { prisma } from "@/lib/prisma";
 import {
   getActor,
@@ -21,7 +19,8 @@ import {
 } from "@/lib/review/api/access/resolveReviewAccess";
 import { buildReviewQuizKey } from "@/lib/review/api/quiz/keys";
 import {
-  filterPoolByPreferKind,
+  filterPoolForPurposeAndKind,
+  type PoolItem,
   pickTopicsForQuizPreferUnique,
   pickUniqueExerciseKey,
   readPoolFromTopicMeta,
@@ -38,6 +37,10 @@ import { SECTIONS, TOPICS } from "@/lib/subjects";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+function defaultPurposeForMode(mode: "quiz" | "project") {
+  return mode === "project" ? "project" : "quiz";
+}
 
 type RegistrySection = {
   slug: string;
@@ -231,6 +234,7 @@ export async function POST(req: Request) {
   };
 
   const mode = spec.mode ?? "quiz";
+  const defaultPurpose = defaultPurposeForMode(mode);
   const n = spec.n ?? 4;
   const defaultMaxAttempts = resolveMaxAttempts(undefined, spec.maxAttempts, 1);
   const actorKey = actorKeyOf(actor);
@@ -378,6 +382,7 @@ export async function POST(req: Request) {
           topic: dbSlug,
           difficulty: st.difficulty ?? spec.difficulty ?? "easy",
           allowReveal: Boolean(spec.allowReveal),
+          preferPurpose: defaultPurposeForMode("project"),
           preferKind: st.preferKind ?? spec.preferKind ?? null,
           exerciseKey: st.exerciseKey ?? undefined,
           seedPolicy: st.seedPolicy ?? "global",
@@ -403,21 +408,14 @@ export async function POST(req: Request) {
 
     const uniqPickedTopics = Array.from(new Set(pickedTopics));
 
-    const topicRows = await prisma.practiceTopic.findMany({
-      where: { slug: { in: uniqPickedTopics } },
-      select: { slug: true, meta: true },
-    });
+    const poolBySlug = new Map<string, PoolItem[]>();
 
-    const poolBySlug = new Map<
-        string,
-        { key: string; w: number; kind?: string | null }[]
-    >();
-
-    for (const row of topicRows) {
-      const pool = readPoolFromTopicMeta((row as any).meta);
+    for (const slug of uniqPickedTopics) {
+      const topic = findRegistryTopic(slug);
+      const pool = readPoolFromTopicMeta(topic?.meta);
       poolBySlug.set(
-          row.slug,
-          filterPoolByPreferKind(pool, spec.preferKind ?? null),
+          slug,
+          filterPoolForPurposeAndKind(pool, "quiz", spec.preferKind ?? null),
       );
     }
 
@@ -429,9 +427,10 @@ export async function POST(req: Request) {
       return bodyJsonWithGuestCookie(
           {
             message:
-                "Cannot generate a no-duplicate quiz because some topics have empty meta.pool (or preferKind filtered everything out).",
+                "Cannot generate a no-duplicate quiz because some topics have no exercises after purpose/preferKind filtering.",
             detail: {
               missingPool,
+              preferPurpose: "quiz",
               preferKind: spec.preferKind ?? null,
             },
           },
@@ -469,6 +468,7 @@ export async function POST(req: Request) {
           topic: pickedTopic,
           difficulty: spec.difficulty ?? "easy",
           allowReveal: Boolean(spec.allowReveal),
+          preferPurpose: defaultPurpose,
           preferKind: spec.preferKind ?? null,
           exerciseKey,
           salt: `${quizKey}|topic=${pickedTopic}|slot=${i + 1}|q=${i + 1}|k=${exerciseKey}`,

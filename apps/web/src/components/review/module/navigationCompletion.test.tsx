@@ -22,14 +22,53 @@ import {
 
 import ReviewTopicCompletion from "./components/content/ReviewTopicCompletion";
 
-function card(overrides: Partial<ReviewCard> & { id: string }): ReviewCard {
+type CardOverrides = Partial<ReviewCard> & { id: string };
+
+function card(overrides: CardOverrides): ReviewCard {
+    const type = overrides.type ?? "text";
+
+    if (type === "text") {
+        return {
+            type: "text",
+            title: overrides.title ?? overrides.id,
+            markdown: "",
+            ...overrides,
+        } as unknown as ReviewCard;
+    }
+
+    if (type === "sketch") {
+        return {
+            type: "sketch",
+            title: overrides.title ?? overrides.id,
+            sketchId: overrides.id,
+            ...overrides,
+        } as unknown as ReviewCard;
+    }
+
+    if (type === "quiz") {
+        return {
+            type: "quiz",
+            title: overrides.title ?? overrides.id,
+            spec: {},
+            ...overrides,
+        } as unknown as ReviewCard;
+    }
+
+    if (type === "project") {
+        return {
+            type: "project",
+            title: overrides.title ?? overrides.id,
+            spec: {},
+            ...overrides,
+        } as unknown as ReviewCard;
+    }
+
     return {
-        id: overrides.id,
-        type: overrides.type ?? "paragraph",
+        type: "video",
         title: overrides.title ?? overrides.id,
-        body: overrides.body ?? "",
+        url: "",
         ...overrides,
-    } as ReviewCard;
+    } as unknown as ReviewCard;
 }
 
 function topic(
@@ -40,10 +79,10 @@ function topic(
     return {
         id,
         label: id,
-        summary: null,
+        summary: "",
         cards,
         ...overrides,
-    } as ReviewModule["topics"][number];
+    } as unknown as ReviewModule["topics"][number];
 }
 
 function progressTopic(progress: any, topicId: string) {
@@ -55,7 +94,7 @@ describe("review module completion/navigation source of truth", () => {
         const topicId = "input-and-type-conversion";
 
         const cards = [
-            card({ id: "read-intro", type: "paragraph" }),
+            card({ id: "read-intro", type: "text" }),
             card({ id: "practice-sketch", type: "sketch" }),
             card({ id: "profile-line", type: "quiz" }),
         ];
@@ -69,9 +108,7 @@ describe("review module completion/navigation source of truth", () => {
             sessionSize: 3,
         });
 
-        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(
-            false,
-        );
+        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(false);
 
         progress = buildMarkCardDoneProgress(progress, topicId, cards[0]);
 
@@ -80,9 +117,7 @@ describe("review module completion/navigation source of truth", () => {
             sessionSize: 3,
         });
 
-        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(
-            false,
-        );
+        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(false);
 
         progress = buildMarkCardDoneProgress(progress, topicId, cards[1]);
 
@@ -91,9 +126,7 @@ describe("review module completion/navigation source of truth", () => {
             sessionSize: 3,
         });
 
-        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(
-            false,
-        );
+        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(false);
 
         progress = buildQuizPassProgress(progress, topicId, "profile-line");
 
@@ -102,19 +135,14 @@ describe("review module completion/navigation source of truth", () => {
             sessionSize: 3,
         });
 
-        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(
-            true,
-        );
+        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(true);
     });
-
-
-
 
     it("marks a topic complete when the final quiz passes even if earlier reading cards were not explicitly marked done", () => {
         const topicId = "input-and-type-conversion";
 
         const cards = [
-            card({ id: "read-intro", type: "paragraph" }),
+            card({ id: "read-intro", type: "text" }),
             card({ id: "practice-note", type: "sketch" }),
             card({ id: "profile-line", type: "quiz" }),
         ];
@@ -123,16 +151,9 @@ describe("review module completion/navigation source of truth", () => {
             topics: {},
         };
 
-        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(
-            false,
-        );
+        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(false);
 
-        progress = buildQuizPassProgress(
-            progress,
-            topicId,
-            "profile-line",
-            cards,
-        );
+        progress = buildQuizPassProgress(progress, topicId, "profile-line", cards);
 
         expect(progress.topics[topicId].readingDone).toMatchObject({
             "read-intro": true,
@@ -148,24 +169,20 @@ describe("review module completion/navigation source of truth", () => {
             sessionSize: 3,
         });
 
-        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(
-            true,
-        );
+        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(true);
     });
-
-
 
     it("marks module progress from topic completion only, not from quiz UI state alone", () => {
         const topicAId = "variables-and-strings";
         const topicBId = "input-and-type-conversion";
 
         const topicACards = [
-            card({ id: "read-a", type: "paragraph" }),
+            card({ id: "read-a", type: "text" }),
             card({ id: "quiz-a", type: "quiz" }),
         ];
 
         const topicBCards = [
-            card({ id: "read-b", type: "paragraph" }),
+            card({ id: "read-b", type: "text" }),
             card({ id: "quiz-b", type: "quiz" }),
         ];
 
@@ -188,13 +205,8 @@ describe("review module completion/navigation source of truth", () => {
         progress = buildMarkCardDoneProgress(progress, topicAId, topicACards[0]);
         progress = buildQuizPassProgress(progress, topicAId, "quiz-a");
 
-        expect(isTopicComplete(topicACards, progressTopic(progress, topicAId), topicAId)).toBe(
-            true,
-        );
-
-        expect(isTopicComplete(topicBCards, progressTopic(progress, topicBId), topicBId)).toBe(
-            false,
-        );
+        expect(isTopicComplete(topicACards, progressTopic(progress, topicAId), topicAId)).toBe(true);
+        expect(isTopicComplete(topicBCards, progressTopic(progress, topicBId), topicBId)).toBe(false);
 
         expect(moduleCompleteFromProgress(progress, topics)).toBe(false);
         expect(getModuleProgress(topics, progress)).toEqual({
@@ -206,9 +218,7 @@ describe("review module completion/navigation source of truth", () => {
         progress = buildMarkCardDoneProgress(progress, topicBId, topicBCards[0]);
         progress = buildQuizPassProgress(progress, topicBId, "quiz-b");
 
-        expect(isTopicComplete(topicBCards, progressTopic(progress, topicBId), topicBId)).toBe(
-            true,
-        );
+        expect(isTopicComplete(topicBCards, progressTopic(progress, topicBId), topicBId)).toBe(true);
 
         expect(moduleCompleteFromProgress(progress, topics)).toBe(true);
         expect(getModuleProgress(topics, progress)).toEqual({
@@ -222,7 +232,7 @@ describe("review module completion/navigation source of truth", () => {
         const topicId = "input-and-type-conversion";
 
         const cards = [
-            card({ id: "read-intro", type: "paragraph" }),
+            card({ id: "read-intro", type: "text" }),
             card({ id: "profile-line", type: "quiz" }),
         ];
 
@@ -235,16 +245,12 @@ describe("review module completion/navigation source of truth", () => {
         progress = buildMarkCardDoneProgress(progress, topicId, cards[0]);
         progress = buildQuizPassProgress(progress, topicId, "profile-line");
 
-        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(
-            true,
-        );
+        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(true);
         expect(moduleCompleteFromProgress(progress, topics)).toBe(true);
 
         progress = buildQuizResetProgress(progress, topicId, "profile-line");
 
-        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(
-            false,
-        );
+        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(false);
         expect(moduleCompleteFromProgress(progress, topics)).toBe(false);
     });
 

@@ -4,9 +4,11 @@ import {ReviewQuizRequestSpec} from "@/lib/review/api/quiz/schemas";
 
 export function buildReviewQuizKey(spec: ReviewQuizRequestSpec) {
     const mode = spec.mode ?? "quiz";
+    const selectionVersion = "purpose-v3";
 
     const base = [
         "review-quiz",
+        `selection=${selectionVersion}`,
         `mode=${mode}`,
         `subject=${spec.subject}`,
         `module=${spec.moduleSlug}`,
