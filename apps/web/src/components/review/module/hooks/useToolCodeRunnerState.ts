@@ -164,6 +164,23 @@ function workspaceWithEntryCode(
     return changed ? { ...workspace, nodes } : workspace;
 }
 
+function workspaceHasNonBlankEntryCode(workspace: WorkspaceStateV2 | null | undefined) {
+    return Boolean(String(deriveEntryCode(workspace) ?? "").trim());
+}
+
+function hydrateWorkspaceShellWithCode(
+    workspace: WorkspaceStateV2 | null | undefined,
+    code: string | null | undefined,
+) {
+    const nextCode = String(code ?? "");
+    if (!nextCode.trim()) return workspace ?? null;
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return workspace ?? null;
+    }
+    if (workspaceHasNonBlankEntryCode(workspace)) return workspace;
+    return workspaceWithEntryCode(workspace, nextCode);
+}
+
 
 function ideConfigKey(config: LearningIdeConfig | null | undefined) {
     return JSON.stringify(config ?? null);
@@ -448,9 +465,25 @@ export function useToolCodeRunnerState(args: {
 
             if (effectiveBoundId.includes(":")) return null;
         }
+
+        /**
+         * Exercise routes can reach the tool pane before the formal bind step
+         * completes. In that window, prefer the already-created runtime
+         * exercise over topic.toolState so a stale blank saved snapshot does not
+         * win against the manifest-backed starter workspace.
+         */
+        const pendingExerciseStoreKey = resolveExerciseStoreKey(
+            exercises,
+            effectiveToolKey,
+            scopeKey,
+        );
+        const pendingExercise =
+            pendingExerciseStoreKey ? exercises[pendingExerciseStoreKey] ?? null : null;
+        if (pendingExercise) return pendingExercise;
+
         const resolved = getTopicProgressState((progress as any)?.topics ?? {}, viewTid);
         return (resolved.topic as any)?.toolState?.[effectiveToolKey] ?? null;
-    }, [progress, viewTid, effectiveToolKey, effectiveBoundId, exercises]);
+    }, [progress, viewTid, effectiveToolKey, effectiveBoundId, exercises, scopeKey]);
 
     const initialLang = (saved?.lang as WorkspaceLanguage) ?? defaultLang;
     const initialWorkspace =
@@ -683,22 +716,32 @@ export function useToolCodeRunnerState(args: {
             const storeKey = resolveExerciseStoreKey(exercises, effectiveBoundId);
             s = storeKey ? exercises[storeKey] ?? null : null;
         } else {
-            const cardKey = isCardToolKey(effectiveToolKey)
-                ? cardStateKeyFromToolKey(effectiveToolKey)
+            const pendingExerciseStoreKey = !isCardToolKey(effectiveToolKey)
+                ? resolveExerciseStoreKey(exercises, effectiveToolKey, scopeKey)
                 : null;
+            const pendingExercise =
+                pendingExerciseStoreKey ? exercises[pendingExerciseStoreKey] ?? null : null;
 
-            const runtimeCards = useReviewRuntimeStore.getState().cards ?? {};
-            const runtimeCard = cardKey
-                ? runtimeCards[cardKey] ?? null
-                : null;
+            if (pendingExercise) {
+                s = pendingExercise;
+            } else {
+                const cardKey = isCardToolKey(effectiveToolKey)
+                    ? cardStateKeyFromToolKey(effectiveToolKey)
+                    : null;
 
-            if (runtimeCard?.workspaceStatus === "ready" && runtimeCard?.toolWorkspace) {
-                s = {
-                    lang: runtimeCard.toolLang ?? defaultLang,
-                    code: runtimeCard.toolCode ?? "",
-                    stdin: runtimeCard.toolStdin ?? "",
-                    workspace: runtimeCard.toolWorkspace,
-                };
+                const runtimeCards = useReviewRuntimeStore.getState().cards ?? {};
+                const runtimeCard = cardKey
+                    ? runtimeCards[cardKey] ?? null
+                    : null;
+
+                if (runtimeCard?.workspaceStatus === "ready" && runtimeCard?.toolWorkspace) {
+                    s = {
+                        lang: runtimeCard.toolLang ?? defaultLang,
+                        code: runtimeCard.toolCode ?? "",
+                        stdin: runtimeCard.toolStdin ?? "",
+                        workspace: runtimeCard.toolWorkspace,
+                    };
+                }
             }
         }
         /**
@@ -855,7 +898,10 @@ export function useToolCodeRunnerState(args: {
                 args2.exerciseKey ?? null,
             ) ?? inputId;
 
-            const nextWorkspace = args2.workspace ?? null;
+            const nextWorkspace = hydrateWorkspaceShellWithCode(
+                args2.workspace ?? null,
+                args2.code,
+            );
             const nextToolKey = `exercise:${targetKey}`;
             const nextIdentity = `${viewTid}::${nextToolKey}::${versionStr}`;
             const snapshotOverridesSaved = args2.preferSnapshot === true;
@@ -865,10 +911,12 @@ export function useToolCodeRunnerState(args: {
                     : exercises[targetKey] ??
                       ((getTopicProgressState((progress as any)?.topics ?? {}, viewTid).topic as any)?.toolState?.[nextToolKey] ??
                       null);
-            const savedWorkspace =
+            const savedWorkspace = hydrateWorkspaceShellWithCode(
                 savedForBind?.workspace && typeof savedForBind.workspace === "object"
                     ? (savedForBind.workspace as WorkspaceStateV2)
-                    : null;
+                    : null,
+                typeof savedForBind?.code === "string" ? savedForBind.code : "",
+            );
 
             const savedWorkspaceCode = deriveEntryCode(savedWorkspace);
             const incomingWorkspaceCode = deriveEntryCode(nextWorkspace);
@@ -896,28 +944,33 @@ export function useToolCodeRunnerState(args: {
                 ? savedWorkspace
                 : nextWorkspace;
 
-            const workspaceForBindCode = deriveEntryCode(workspaceForBind);
+            const nextSnapCode =
+                deriveEntryCode(workspaceForBind) ||
+                (typeof savedForBind?.code === "string" && savedForBind.code.trim() !== ""
+                    ? savedForBind.code
+                    : "") ||
+                (typeof args2.code === "string" ? args2.code : "");
+            const hydratedWorkspaceForBind = hydrateWorkspaceShellWithCode(
+                workspaceForBind,
+                nextSnapCode,
+            );
+            const workspaceForBindCode = deriveEntryCode(hydratedWorkspaceForBind);
 
             const nextSnap: ToolSnap = {
                 topicId: viewTid,
                 toolKey: nextToolKey,
                 lang: (savedForBind?.language as WorkspaceLanguage) ?? args2.lang,
-                code:
-                    workspaceForBindCode ||
-                    (typeof savedForBind?.code === "string" && savedForBind.code.trim() !== ""
-                        ? savedForBind.code
-                        : "") ||
-                    (typeof args2.code === "string" ? args2.code : ""),
+                code: nextSnapCode,
                 stdin:
-                    typeof workspaceForBind?.stdin === "string"
-                        ? workspaceForBind.stdin
+                    typeof hydratedWorkspaceForBind?.stdin === "string"
+                        ? hydratedWorkspaceForBind.stdin
                         : typeof savedForBind?.stdin === "string"
                             ? savedForBind.stdin
                             : typeof args2.stdin === "string"
                                 ? args2.stdin
                                 : "",
-                workspace: workspaceForBind,
-                workspaceKey: workspaceKeyOf(workspaceForBind),
+                workspace: hydratedWorkspaceForBind,
+                workspaceKey: workspaceKeyOf(hydratedWorkspaceForBind),
                 sqlDialect:
                     (savedForBind as any)?.sqlDialect ??
                     (savedForBind?.workspace as any)?.sqlDialect ??

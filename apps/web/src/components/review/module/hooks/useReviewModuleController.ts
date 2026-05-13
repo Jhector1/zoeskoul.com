@@ -96,7 +96,6 @@ function firstNonBlank(...values: Array<string | null | undefined>) {
 
 export function useReviewModuleController({
                                               mod,
-                                              onModuleCompleteChange,
                                               canUnlockAll = false,
                                               footerInsetPx = 0,
                                               navigationMode,
@@ -366,9 +365,7 @@ export function useReviewModuleController({
             )}`,
     });
 
-    useEffect(() => {
-        onModuleCompleteChange?.(moduleComplete || Boolean((progress as any)?.moduleCompleted));
-    }, [moduleComplete, progress, onModuleCompleteChange]);
+
 
     useEffect(() => {
         if (!progressHydrated) return;

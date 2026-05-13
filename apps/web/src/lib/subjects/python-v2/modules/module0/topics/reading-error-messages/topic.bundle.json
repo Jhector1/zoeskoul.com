@@ -122,7 +122,10 @@
       "id": "using-line-numbers",
       "archetype": "paragraph",
       "titleKey": "sketches.python-v2.python-v2-0.reading-error-messages.using-line-numbers.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.reading-error-messages.using-line-numbers.bodyMarkdown"
+      "bodyKey": "sketches.python-v2.python-v2-0.reading-error-messages.using-line-numbers.bodyMarkdown",
+      "workspace": {
+        "starterCode": "print(\"One\")\nprint(\"Two\")\nprint(\"Three\")\nprint(\"Four\")"
+      }
     }
   ],
   "exercises": [

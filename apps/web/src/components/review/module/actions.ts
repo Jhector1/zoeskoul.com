@@ -1,6 +1,7 @@
 import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
 import type { ReviewProgressState } from "@/lib/subjects/progressTypes";
 import {
+    isQuizLikeCard,
     markCardDoneInTopicState,
     normalizeTopicProgressForCards,
 } from "./progressKeys";
@@ -148,15 +149,37 @@ export function buildQuizPassProgress(
     progress: any,
     viewTid: string,
     quizId: string,
+    topicCards: readonly ReviewCard[] = [],
 ) {
-    const tp0: any = progress?.topics?.[viewTid] ?? {};
-    const quizzesDone = { ...(tp0.quizzesDone ?? {}), [quizId]: true };
+    let nextTopic: any = progress?.topics?.[viewTid] ?? {};
+
+    /**
+     * Passing a quiz means the learner has completed the active assessment
+     * for this topic. Any non-quiz reading/sketch cards in the same topic
+     * should not keep the topic locked forever, especially after refresh,
+     * direct navigation, or auto-advance.
+     *
+     * Quiz/project cards still complete only through their own pass handlers.
+     */
+    for (const card of topicCards) {
+        if (!isQuizLikeCard(card)) {
+            nextTopic = markCardDoneInTopicState(nextTopic, card);
+        }
+    }
+
+    nextTopic = {
+        ...nextTopic,
+        quizzesDone: {
+            ...(nextTopic.quizzesDone ?? {}),
+            [quizId]: true,
+        },
+    };
 
     return {
         ...progress,
         topics: {
             ...(progress?.topics ?? {}),
-            [viewTid]: { ...tp0, quizzesDone },
+            [viewTid]: nextTopic,
         },
     };
 }

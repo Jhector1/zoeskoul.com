@@ -227,26 +227,74 @@ function getInitialStdin(manifest: AnyRecord) {
   );
 }
 
+function hasUsableStarterFilesSource(value: unknown): boolean {
+  const source = unwrapStarterFiles(value);
+
+  if (Array.isArray(source)) {
+    return source.length > 0;
+  }
+
+  if (isRecord(source)) {
+    return Object.entries(source).some(([path, value]) => {
+      if (
+        [
+          "entryFile",
+          "entryFilePath",
+          "mainFile",
+          "mainFilePath",
+          "language",
+          "lang",
+        ].includes(path)
+      ) {
+        return false;
+      }
+
+      if (typeof value === "string") return true;
+      if (isRecord(value)) return true;
+      return false;
+    });
+  }
+
+  return false;
+}
+
+function firstUsableStarterFilesSource(...values: Array<unknown>) {
+  for (const value of values) {
+    if (hasUsableStarterFilesSource(value)) return value;
+  }
+
+  return null;
+}
+
 export function getStarterFilesSource(manifest: AnyRecord) {
   const normalized = normalizeManifestShape(manifest);
-  return (
-      normalized.workspace?.starterFiles ??
-      normalized.workspace?.files ??
-      normalized.workspace?.initialFiles ??
-      normalized.workspace?.workspaceFiles ??
-      normalized.starterFiles ??
-      normalized.files ??
-      normalized.initialFiles ??
-      normalized.workspaceFiles ??
-      normalized.recipe?.starterFiles ??
-      normalized.recipe?.files ??
-      normalized.recipe?.initialFiles ??
-      null
+
+  return firstUsableStarterFilesSource(
+      normalized.workspace?.starterFiles,
+      normalized.workspace?.files,
+      normalized.workspace?.initialFiles,
+      normalized.workspace?.workspaceFiles,
+      normalized.starterFiles,
+      normalized.files,
+      normalized.initialFiles,
+      normalized.workspaceFiles,
+      normalized.recipe?.starterFiles,
+      normalized.recipe?.files,
+      normalized.recipe?.initialFiles,
   );
 }
 
 export function getStarterCode(manifest: AnyRecord) {
   return explicitStarterCodeFromManifest(manifest);
+}
+
+function pickNonBlankString(...values: Array<unknown>) {
+  for (const value of values) {
+    if (typeof value !== "string") continue;
+    if (!value.trim()) continue;
+    return value;
+  }
+  return "";
 }
 
 function stableStarterNodeId(kind: "file" | "folder", path: string): NodeId {
@@ -432,7 +480,21 @@ export function deriveEntryCode(
       ? String(entryNode.content ?? "")
       : null;
 }
+function hasUsableWorkspaceContent(
+    workspace: WorkspaceStateV2 | null | undefined,
+): boolean {
+  if (!isWorkspaceStateV2(workspace)) {
+    return false;
+  }
 
+  return workspace.nodes.some((node) => {
+    if (node.kind !== "file") {
+      return false;
+    }
+
+    return String(node.content ?? "").trim().length > 0;
+  });
+}
 function getEntryFileFromStarterFiles(raw: unknown): string {
   const source = unwrapStarterFiles(raw);
   if (!Array.isArray(source)) return "";
@@ -459,7 +521,8 @@ export function resolveExerciseWorkspace(args: {
 
   // Preserve real saved user work when the runtime intentionally passes it in.
   // This prevents user edits from being overwritten on refresh/re-render.
-  if (isWorkspace(args.saved)) {
+  // But ignore blank saved workspaces so empty DB state does not hide starter code.
+  if (isWorkspace(args.saved) && hasUsableWorkspaceContent(args.saved)) {
     return cloneWorkspace(args.saved);
   }
 
@@ -481,16 +544,22 @@ export function resolveExerciseWorkspace(args: {
     return cloneWorkspace(savedFromManifest);
   }
 
-  const starterFilesSource =
-      getStarterFilesSource(manifest) || args.entry?.starterFiles;
+  const starterFilesSource = firstUsableStarterFilesSource(
+      getStarterFilesSource(manifest),
+      args.entry?.starterFiles,
+  );
 
   const explicitEntryFile = getEntryFile({ manifest, language });
   const entryFromStarterFiles = getEntryFileFromStarterFiles(starterFilesSource);
   const entryFile = entryFromStarterFiles || explicitEntryFile;
   const stdin = String(getInitialStdin(manifest) ?? "");
 
-  const starterCode = String(
-      getStarterCode(manifest) ?? args.entry?.starterCode ?? "",
+  const starterCode = pickNonBlankString(
+      getStarterCode(manifest),
+      args.entry?.starterCode,
+      manifest.workspace?.starterCode,
+      manifest.starterCode,
+      manifest.recipe?.starterCode,
   );
 
   let starterFiles = normalizeStarterFiles(starterFilesSource, entryFile);

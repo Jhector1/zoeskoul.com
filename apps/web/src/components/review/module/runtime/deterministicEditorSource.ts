@@ -16,10 +16,31 @@ function manifestHasStarter(manifest: any, entry: ReviewTargetEntry) {
   const item = entry?.item ?? manifest;
   const source = item?.spec ?? item ?? {};
   const workspaceContainer = source?.workspace ?? manifest?.workspace ?? {};
-  const hasFiles = (value: unknown) =>
-    Array.isArray(value)
-      ? value.length > 0
-      : !!value && typeof value === "object" && Object.keys(value as Record<string, unknown>).length > 0;
+  const hasFiles = (value: unknown) => {
+    if (Array.isArray(value)) return value.length > 0;
+
+    if (!!value && typeof value === "object") {
+      return Object.entries(value as Record<string, unknown>).some(([key, entry]) => {
+        if (
+          [
+            "entryFile",
+            "entryFilePath",
+            "mainFile",
+            "mainFilePath",
+            "language",
+            "lang",
+          ].includes(key)
+        ) {
+          return false;
+        }
+
+        if (typeof entry === "string") return entry.trim().length > 0;
+        return !!entry && typeof entry === "object";
+      });
+    }
+
+    return false;
+  };
   const workspaceCandidate =
     entry.starterWorkspace ??
     workspaceContainer ??
@@ -37,7 +58,7 @@ function manifestHasStarter(manifest: any, entry: ReviewTargetEntry) {
 
   return Boolean(
       hasFiles(entry.starterFiles) ||
-      (typeof entry.starterCode === "string" && entry.starterCode.length > 0) ||
+      (typeof entry.starterCode === "string" && entry.starterCode.trim().length > 0) ||
       hasFiles(workspaceContainer?.starterFiles) ||
       hasFiles(workspaceContainer?.initialFiles) ||
       hasFiles(workspaceContainer?.workspaceFiles) ||

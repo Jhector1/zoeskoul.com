@@ -89,53 +89,66 @@ export default function ReviewTopicCards({
   const storeCards = useReviewRuntimeStore((s) => s.cards);
 
   const handleNavigate = React.useCallback(
-    (index: number) => {
-      const clampedIndex = Math.max(0, Math.min(viewCards.length - 1, index));
-      if (clampedIndex === activeCardIndex) return;
+      (index: number) => {
+        const clampedIndex = Math.max(0, Math.min(viewCards.length - 1, index));
+        if (clampedIndex === activeCardIndex) return;
 
-      /**
-       * Flush sketch/card refs first. Then merge the latest Zustand runtime
-       * into ReviewProgressState before changing cards.
-       */
-      sketch?.flushAll?.();
+        /**
+         * Slideshow navigation is the source of truth for reading/sketch card
+         * completion. If a learner leaves a non-quiz card, that card is done.
+         *
+         * Quiz/project cards are completed only by their own pass handlers.
+         */
+        const fromCard = viewCards[activeCardIndex] ?? null;
 
-      setProgress((prev: any) => {
-        const runtimeState = useReviewRuntimeStore.getState();
+        sketch?.flushAll?.();
 
-        reviewDebug("4_NAV_BEFORE_MERGE ReviewTopicCards.handleNavigate", {
-          fromIndex: activeCardIndex,
-          toIndex: clampedIndex,
-          runtimeExerciseKeys: Object.keys(runtimeState.exercises ?? {}),
-          runtimeCardKeys: Object.keys(runtimeState.cards ?? {}),
-          prevTopicKeys: Object.keys(prev?.topics ?? {}),
+        setProgress((prev: any) => {
+          const runtimeState = useReviewRuntimeStore.getState();
+
+          reviewDebug("4_NAV_BEFORE_MERGE ReviewTopicCards.handleNavigate", {
+            fromIndex: activeCardIndex,
+            toIndex: clampedIndex,
+            runtimeExerciseKeys: Object.keys(runtimeState.exercises ?? {}),
+            runtimeCardKeys: Object.keys(runtimeState.cards ?? {}),
+            prevTopicKeys: Object.keys(prev?.topics ?? {}),
+          });
+
+          let next = prev;
+
+          if (fromCard && !isQuizLikeCard(fromCard)) {
+            next = buildMarkCardDoneProgress(next, viewTid, fromCard);
+          }
+
+          next = mergeRuntimeIntoProgress(next, runtimeState);
+
+          reviewDebug("5_NAV_AFTER_MERGE ReviewTopicCards.handleNavigate", {
+            fromIndex: activeCardIndex,
+            toIndex: clampedIndex,
+            nextTopicKeys: Object.keys(next?.topics ?? {}),
+          });
+
+          queueMicrotask(() => flushNow(next));
+
+          return next;
         });
 
-        const next = mergeRuntimeIntoProgress(prev, runtimeState);
-
-        reviewDebug("5_NAV_AFTER_MERGE ReviewTopicCards.handleNavigate", {
-          fromIndex: activeCardIndex,
-          toIndex: clampedIndex,
-          nextTopicKeys: Object.keys(next?.topics ?? {}),
-        });
-
-        queueMicrotask(() => flushNow(next));
-
-        return next;
-      });
-
-      onActiveCardIndexChange?.(clampedIndex);
-    },
-    [
-      activeCardIndex,
-      flushNow,
-      onActiveCardIndexChange,
-      setProgress,
-      sketch,
-      viewCards.length,
-    ],
+        onActiveCardIndexChange?.(clampedIndex);
+      },
+      [
+        activeCardIndex,
+        flushNow,
+        onActiveCardIndexChange,
+        setProgress,
+        sketch,
+        viewCards,
+        viewTid,
+      ],
   );
   const activeCard = viewCards[activeCardIndex] ?? null;
   const activeCardDone = activeCard ? isCardDoneFromState(activeCard, tp) : false;
+  const activeCardCanAdvance =
+      activeCardDone || (activeCard ? !isQuizLikeCard(activeCard) : false);
   const hasNextCard = activeCardIndex < Math.max(0, viewCards.length - 1);
   return (
     <div className="flex min-h-0 shrink-0 flex-col">
@@ -157,7 +170,7 @@ export default function ReviewTopicCards({
             getKey={(card: any) => card.id}
             getProgressLabel={(index, total) => `Item ${index + 1} of ${total}`}
             canGoPrev={activeCardIndex > 0}
-            canGoNext={hasNextCard && activeCardDone}
+            canGoNext={hasNextCard && activeCardCanAdvance}
             onPrev={() => handleNavigate(activeCardIndex - 1)}
             onNext={() => handleNavigate(activeCardIndex + 1)}
             renderItem={(card: any, cardIndex: number) => {
@@ -220,8 +233,7 @@ export default function ReviewTopicCards({
                       onSubmit?.();
 
                       setProgress((prev: any) => {
-                        const next = buildQuizPassProgress(prev, viewTid, quizId);
-                        queueMicrotask(() => {
+                        const next = buildQuizPassProgress(prev, viewTid, quizId, viewCards);                        queueMicrotask(() => {
                           flushNow(next);
                           scrollToNextActionable(cardIndex, next);
                         });

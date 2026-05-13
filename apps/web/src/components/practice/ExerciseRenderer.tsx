@@ -156,6 +156,69 @@ function firstNonBlank(...values: Array<string | null | undefined>) {
     return undefined;
 }
 
+function getWorkspaceFromAnyState(value: any): WorkspaceStateV2 | null {
+    if (value?.workspace?.version === 2) return value.workspace as WorkspaceStateV2;
+    if (value?.codeWorkspace?.version === 2) return value.codeWorkspace as WorkspaceStateV2;
+    if (value?.ideWorkspace?.version === 2) return value.ideWorkspace as WorkspaceStateV2;
+    return null;
+}
+
+function workspaceHasNonBlankFile(workspace: WorkspaceStateV2 | null | undefined) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return false;
+    }
+
+    return workspace.nodes.some((node: any) => {
+        if (node?.kind !== "file") return false;
+        return String(node.content ?? "").trim().length > 0;
+    });
+}
+
+function isUserOwnedWorkspaceState(value: any) {
+    return (
+        value?.userEdited === true ||
+        value?.workspaceOrigin === "user" ||
+        value?.workspaceOrigin === "saved"
+    );
+}
+
+function resolvePreferredExerciseWorkspace(args: {
+    savedState: any;
+    savedWorkspace: WorkspaceStateV2 | null | undefined;
+    starterWorkspace: WorkspaceStateV2 | null | undefined;
+}) {
+    const { savedState, savedWorkspace, starterWorkspace } = args;
+
+    if (!savedWorkspace || savedWorkspace.version !== 2) {
+        return starterWorkspace ?? null;
+    }
+
+    const starterHasContent = workspaceHasNonBlankFile(starterWorkspace);
+    const savedHasContent = workspaceHasNonBlankFile(savedWorkspace);
+
+    /**
+     * Important:
+     * old buggy saves could mark an empty workspace as "saved"/user-owned.
+     * That is not meaningful learner work, so it must not override starter code.
+     */
+    if (isUserOwnedWorkspaceState(savedState)) {
+        if (starterHasContent && !savedHasContent) {
+            return starterWorkspace ?? savedWorkspace;
+        }
+        return savedWorkspace;
+    }
+
+    /**
+     * Do not let a blank non-user pending/sync workspace erase real starter code.
+     * This is the race that can leave the Tools editor blank on first load.
+     */
+    if (starterHasContent && !savedHasContent) {
+        return starterWorkspace ?? savedWorkspace;
+    }
+
+    return savedWorkspace;
+}
+
 function CodeInputWithTools(props: {
     exercise: CodeInputExerciseWithSqlExtras;
     current: any;
@@ -228,22 +291,16 @@ function CodeInputWithTools(props: {
     const curCode = (current as any).code ?? exercise.starterCode ?? "";
     const curStdin = (current as any).codeStdin ?? "";
 
-    const curWorkspace =
-        (current as any).workspace && (current as any).workspace.version === 2
-            ? ((current as any).workspace as WorkspaceStateV2)
-            : (current as any).codeWorkspace && (current as any).codeWorkspace.version === 2
-                ? ((current as any).codeWorkspace as WorkspaceStateV2)
-                : (current as any).ideWorkspace && (current as any).ideWorkspace.version === 2
-                    ? ((current as any).ideWorkspace as WorkspaceStateV2)
-                    : (exercise as any).workspace && (exercise as any).workspace.version === 2
-                        ? ((exercise as any).workspace as WorkspaceStateV2)
-                        : (exercise as any).initialWorkspace &&
-                        (exercise as any).initialWorkspace.version === 2
-                            ? ((exercise as any).initialWorkspace as WorkspaceStateV2)
-                            : resolveExerciseWorkspace({
-                                language: curLang as any,
-                                manifest: exercise,
-                            });
+    const manifestStarterWorkspace = resolveExerciseWorkspace({
+        language: curLang as any,
+        manifest: exercise,
+    });
+    const currentWorkspace = getWorkspaceFromAnyState(current);
+    const curWorkspace = resolvePreferredExerciseWorkspace({
+        savedState: current,
+        savedWorkspace: currentWorkspace,
+        starterWorkspace: manifestStarterWorkspace,
+    });
 
     const stableExerciseId = getStableExerciseId({
         exerciseStateId,
@@ -338,7 +395,11 @@ function CodeInputWithTools(props: {
         [patchExercise, exerciseKey, updateCurrent],
     );
 
-    const activeWorkspace = storeExercise?.workspace ?? curWorkspace;
+    const activeWorkspace = resolvePreferredExerciseWorkspace({
+        savedState: storeExercise ?? current,
+        savedWorkspace: storeExercise?.workspace ?? curWorkspace,
+        starterWorkspace: manifestStarterWorkspace,
+    });
     const activeCode =
         deriveEntryCode(activeWorkspace) ??
         storeExercise?.code ??
@@ -1032,17 +1093,13 @@ export default function ExerciseRenderer({
         const starterWorkspace = resolveExerciseWorkspace({
             language: ((exCode as any).language || "python") as any,
             manifest: exCode,
-            saved:
-                (current as any).workspace?.version === 2
-                    ? (current as any).workspace
-                    : (current as any).codeWorkspace?.version === 2
-                        ? (current as any).codeWorkspace
-                        : (current as any).ideWorkspace?.version === 2
-                            ? (current as any).ideWorkspace
-                            : null,
         });
 
-        const activeWorkspace = storeExercise?.workspace ?? starterWorkspace;
+        const activeWorkspace = resolvePreferredExerciseWorkspace({
+            savedState: storeExercise ?? current,
+            savedWorkspace: storeExercise?.workspace ?? getWorkspaceFromAnyState(current),
+            starterWorkspace,
+        });
 
         const activeCode =
             deriveEntryCode(activeWorkspace) ??

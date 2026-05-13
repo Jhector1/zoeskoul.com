@@ -1,16 +1,12 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/lib/cn";
 import BannerCard from "./BannerCard";
 
 export default function TopicOutro({
                                        topic,
-                                       onContinue,
-                                       continueLabel = "Continue",
                                    }: {
     topic: any;
-    onContinue?: () => void;
     continueLabel?: string;
 }) {
     const outro = topic?.outro ?? null;
@@ -38,17 +34,6 @@ export default function TopicOutro({
                         </ul>
                     ) : null}
                 </div>
-            }
-            actions={
-                onContinue ? (
-                    <button
-                        type="button"
-                        onClick={onContinue}
-                        className={cn("ui-btn-primary px-4")}
-                    >
-                        {continueLabel} <span aria-hidden>→</span>
-                    </button>
-                ) : null
             }
         />
     );

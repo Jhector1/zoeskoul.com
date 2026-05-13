@@ -482,10 +482,15 @@ function targetHasStarter(entryOrManifest: any, maybeEntry?: import("./reviewTar
 }
 
 function workspaceHasUsableFile(workspace: WorkspaceStateV2 | null | undefined) {
-    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) return false;
-    return workspace.nodes.some((node: any) => node?.kind === "file");
-}
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return false;
+    }
 
+    return workspace.nodes.some((node: any) => {
+        if (node?.kind !== "file") return false;
+        return String(node.content ?? "").trim().length > 0;
+    });
+}
 
 function workspaceLanguage(workspace: WorkspaceStateV2 | null | undefined) {
     return String((workspace as any)?.language ?? "").trim().toLowerCase();
@@ -2322,6 +2327,26 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         }
 
         if (target.kind === "exercise") {
+            const baseManifest = registryEntry?.toolManifest ?? registryEntry?.item ?? null;
+            const routeExerciseManifest = baseManifest
+                ? {
+                    ...baseManifest,
+                    starterCode:
+                        registryEntry?.starterCode ??
+                        baseManifest?.starterCode ??
+                        baseManifest?.workspace?.starterCode ??
+                        baseManifest?.recipe?.starterCode,
+                    starterFiles:
+                        registryEntry?.starterFiles ??
+                        baseManifest?.starterFiles ??
+                        baseManifest?.workspace?.starterFiles ??
+                        baseManifest?.recipe?.starterFiles,
+                    workspace:
+                        registryEntry?.starterWorkspace ??
+                        baseManifest?.workspace ??
+                        null,
+                }
+                : baseManifest;
             get().ensureExercise({
                 exerciseKey: target.exerciseStateKey,
                 subjectSlug: subjectSlug ?? "",
@@ -2329,7 +2354,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 sectionSlug: target.sectionSlug,
                 topicId: target.topicId,
                 cardId: target.cardId,
-                manifest: registryEntry?.toolManifest ?? registryEntry?.item,
+                manifest: routeExerciseManifest,
             });
             // Automatically bind if it's an exercise target
             get().bindExerciseTool(target.exerciseStateKey);

@@ -3,7 +3,6 @@ import type { FlowNavigationConfig } from "@/components/review/navigation/FlowNa
 
 export type ReviewModulePageProps = {
     mod: ReviewModule;
-    onModuleCompleteChange?: (done: boolean) => void;
     canUnlockAll?: boolean;
     footerInsetPx?: number;
     navigationMode?: FlowNavigationConfig;

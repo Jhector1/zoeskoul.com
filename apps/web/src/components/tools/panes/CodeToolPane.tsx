@@ -215,9 +215,12 @@ type SqlTableSnapshot = {
 
 type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
 function reviewWorkspaceHasNonEmptyFile(workspace: WorkspaceStateV2 | null | undefined) {
-    // Starter/review workspaces are authoritative. Any workspace with at least
-    // one file node counts as usable, even if that file contains fallback text.
-    return Boolean(workspace?.nodes?.some((node: any) => node?.kind === "file"));
+    return Boolean(
+        workspace?.nodes?.some((node: any) => {
+            if (node?.kind !== "file") return false;
+            return String(node.content ?? "").trim().length > 0;
+        }),
+    );
 }
 
 function forceWorkspaceHasContent(workspace: WorkspaceStateV2 | null | undefined) {
@@ -397,8 +400,17 @@ function isExerciseEditorScope(value: string | null | undefined) {
 
 function isCardEditorScope(value: string | null | undefined) {
     if (!value) return false;
-    if (value.startsWith("card:")) return true;
-    if (value.endsWith(":general")) return true;
+
+    const key = value.trim();
+    if (!key) return false;
+
+    // Explicit card/sketch runtime keys only.
+    if (key.startsWith("card:")) return true;
+
+    // Only treat it as a card scope if the key explicitly contains a card segment.
+    // Do NOT treat every ":general" key as a sketch/card editor.
+    if (key.includes(":card:")) return true;
+
     return false;
 }
 
@@ -509,11 +521,26 @@ export default function CodeToolPane(props: {
 
     const cardRuntimeKey = useMemo(() => {
         if (!isCardEditorScope(editorExerciseStateKey)) return null;
+
         if (editorExerciseStateKey.startsWith("card:")) {
             return editorExerciseStateKey.replace(/^card:/, "");
         }
-        return editorExerciseStateKey.replace(/:general$/, "");
+
+        return editorExerciseStateKey;
     }, [editorExerciseStateKey]);
+
+
+    const editorMode: "exercise" | "sketch" | "none" = exerciseKey
+        ? "exercise"
+        : cardRuntimeKey
+            ? "sketch"
+            : "none";
+
+    const isExerciseEditorMode = editorMode === "exercise";
+    const isSketchEditorMode = editorMode === "sketch";
+    const hasBindableEditorTarget = editorMode !== "none";
+
+
     const derivedEditorOwnerKey = exerciseKey ?? cardRuntimeKey ?? null;
     const explicitEditorOwnerKey =
         typeof editorOwnerKey === "string" && isBindableEditorOwnerKey(editorOwnerKey)
@@ -523,8 +550,12 @@ export default function CodeToolPane(props: {
     const editorRuntime = useReviewRuntimeStore((s) =>
         resolvedEditorOwnerKey ? s.editorRuntimes[resolvedEditorOwnerKey] ?? null : null,
     );
-    const patchEditorWorkspace = useReviewRuntimeStore((s) => s.patchEditorWorkspace);
 
+    const exerciseRuntime = useReviewRuntimeStore((s) =>
+        exerciseKey ? s.exercises[exerciseKey] ?? null : null,
+    );
+
+    const patchEditorWorkspace = useReviewRuntimeStore((s) => s.patchEditorWorkspace);
     /**
      * REVIEW DIRECT WORKSPACE MODE
      *
@@ -533,10 +564,13 @@ export default function CodeToolPane(props: {
      * that workspace is the only source for FullIDE.
      */
     const reviewDirectWorkspace =
-        editorRuntime?.workspaceStatus === "ready" && editorRuntime.workspace
+        editorRuntime?.workspaceStatus === "ready" &&
+        reviewWorkspaceHasNonEmptyFile(editorRuntime.workspace)
             ? editorRuntime.workspace
-            : null;
-
+            : exerciseRuntime?.workspaceStatus === "ready" &&
+            reviewWorkspaceHasNonEmptyFile(exerciseRuntime.workspace)
+                ? exerciseRuntime.workspace
+                : null;
     useEffect(() => {
         if (!reviewToolPaneDebugEnabled()) return;
 
@@ -561,11 +595,15 @@ export default function CodeToolPane(props: {
 
     const reviewDirectWorkspaceReady = !!reviewDirectWorkspace;
     const hasEditorTarget = Boolean(
-        exerciseKey ||
-        editorRuntime ||
-        reviewWorkspaceHasNonEmptyFile(toolWorkspace),
+        hasBindableEditorTarget ||
+        reviewWorkspaceHasNonEmptyFile(editorRuntime?.workspace) ||
+        reviewWorkspaceHasNonEmptyFile(exerciseRuntime?.workspace) ||
+        forceWorkspaceHasContent(toolWorkspace),
     );
-    const isReviewRouteMode = Boolean(resolvedEditorOwnerKey && hasEditorTarget);
+
+    const isReviewRouteMode = Boolean(resolvedEditorOwnerKey && hasBindableEditorTarget);
+
+
     const reviewDirectWorkspaceError = editorRuntime?.workspaceStatus === "error";
     const effectiveLanguage = (isReviewRouteMode ? editorRuntime?.language : null) ?? toolLang;
     const isSql = effectiveLanguage === "sql";
@@ -625,29 +663,83 @@ export default function CodeToolPane(props: {
         setLocalWorkspaceDraft(readReviewWorkspaceDraft(resolvedEditorOwnerKey));
     }, [isReviewRouteMode, resolvedEditorOwnerKey, workspaceContextKey]);
 
-    const exerciseWorkspaceReady = Boolean(exerciseKey && editorRuntime?.workspaceStatus === "ready" && editorRuntime.workspace);
-    const cardWorkspaceReady = Boolean(cardRuntimeKey && editorRuntime?.workspaceStatus === "ready" && editorRuntime.workspace);
-    const runtimeWorkspaceError = Boolean(isReviewRouteMode && editorRuntime?.workspaceStatus === "error");
+    const exerciseWorkspaceReady = Boolean(
+        exerciseKey &&
+        (
+            reviewWorkspaceHasNonEmptyFile(editorRuntime?.workspace) ||
+            reviewWorkspaceHasNonEmptyFile(exerciseRuntime?.workspace)
+        )
+    );
 
+    const cardWorkspaceReady = Boolean(
+        cardRuntimeKey &&
+        reviewWorkspaceHasNonEmptyFile(editorRuntime?.workspace)
+    );
+
+    function createDefaultToolWorkspace(language: string | null | undefined): WorkspaceStateV2 {
+        const now = Date.now();
+        const normalizedLanguage = asWorkspaceLanguage(language);
+
+        return {
+            version: 2,
+            language: normalizedLanguage,
+            nodes: [
+                {
+                    id: "file:main.py",
+                    kind: "file",
+                    name: "main.py",
+                    parentId: null,
+                    content: "",
+                    createdAt: now,
+                    updatedAt: now,
+                },
+            ],
+            openTabs: ["file:main.py"],
+            activeFileId: "file:main.py",
+            entryFileId: "file:main.py",
+            stdin: "",
+            expanded: [],
+            leftPct: 40,
+        };
+    }
+    const runtimeWorkspaceError = Boolean(isReviewRouteMode && editorRuntime?.workspaceStatus === "error");
     const directRuntimeWorkspace = useMemo(() => {
         if (isReviewRouteMode) {
-            return editorRuntime?.workspaceStatus === "ready"
-                ? (editorRuntime?.workspace ?? null)
-                : null;
+            // Review/exercise route: blank runtime workspace should NOT hide starter code.
+            if (
+                editorRuntime?.workspaceStatus === "ready" &&
+                reviewWorkspaceHasNonEmptyFile(editorRuntime.workspace)
+            ) {
+                return editorRuntime.workspace;
+            }
+
+            if (
+                exerciseRuntime?.workspaceStatus === "ready" &&
+                reviewWorkspaceHasNonEmptyFile(exerciseRuntime.workspace)
+            ) {
+                return exerciseRuntime.workspace;
+            }
+
+            return null;
         }
 
-        if (reviewWorkspaceHasNonEmptyFile(toolWorkspace)) {
+        // Normal tool/sketch route: blank file workspace is still valid.
+        // This preserves the old behavior where an unbound sketch/editor can show
+        // an empty editor and still save through onChangeWorkspace.
+        if (forceWorkspaceHasContent(toolWorkspace)) {
             return toolWorkspace ?? null;
         }
 
-        return toolWorkspace ?? null;
+        return createDefaultToolWorkspace(effectiveLanguage);
     }, [
         isReviewRouteMode,
         editorRuntime?.workspaceStatus,
         editorRuntime?.workspace,
+        exerciseRuntime?.workspaceStatus,
+        exerciseRuntime?.workspace,
         toolWorkspace,
+        effectiveLanguage,
     ]);
-
     const finalReviewWorkspace = useMemo(() => {
         if (
             isReviewRouteMode &&
@@ -723,7 +815,8 @@ export default function CodeToolPane(props: {
     const showNoEditorTarget =
         !runtimeWorkspaceError &&
         !canRenderEditor &&
-        !showLoadingMask;
+        !showLoadingMask &&
+        hasBindableEditorTarget;
 
     const [loadingTimedOut, setLoadingTimedOut] = useState(false);
 
@@ -944,7 +1037,34 @@ export default function CodeToolPane(props: {
         ) {
             return;
         }
+        if (boundId && workspace && forceWorkspaceHasContent(workspace)) {
+            const next = extractWorkspaceSnapshot(workspace);
 
+            syncCodeInputSnapshot?.(boundId, {
+                workspace,
+                codeWorkspace: workspace,
+                ideWorkspace: workspace,
+
+                code: next.code,
+                source: next.code,
+
+                stdin: next.stdin,
+                codeStdin: next.stdin,
+
+                language: effectiveLanguage,
+                lang: effectiveLanguage,
+
+                updateOrigin: "user",
+                workspaceOrigin: "user",
+                userEdited: true,
+
+                submitted: false,
+                feedbackDismissed: true,
+                dismissFeedbackOnEdit: true,
+
+                updatedAt: Date.now(),
+            });
+        }
         const workspaceKey = workspaceKeyOf(workspace ?? null);
 
         if (lastHandledWorkspaceKeyRef.current === workspaceKey) {
@@ -982,11 +1102,16 @@ export default function CodeToolPane(props: {
             emitWorkspaceUpstreamRef.current(pending ?? null);
         }, 220);
     }, [
-        emitWorkspaceUpstream,
-        finalReviewWorkspace,
-        isReviewRouteMode,
-        usesWorkspaceShell,
-    ]);
+            boundId,
+            effectiveLanguage,
+            emitWorkspaceUpstream,
+            finalReviewWorkspace,
+            isReviewRouteMode,
+            syncCodeInputSnapshot,
+            usesWorkspaceShell,
+        ]
+
+    );
 
     useEffect(() => {
         return () => {
@@ -1127,9 +1252,14 @@ export default function CodeToolPane(props: {
                 ) : showNoEditorTarget ? (
                     <div className="absolute inset-0 z-10 flex items-center justify-center bg-neutral-950/20">
                         <div className="max-w-sm rounded-2xl border border-white/10 bg-black/35 p-5 text-center text-white/80 shadow-xl">
-                            <div className="text-sm font-semibold text-white">No editor is bound</div>
+                            <div className="text-sm font-semibold text-white">
+                                {isSketchEditorMode ? "No sketch editor is bound" : "No exercise editor is bound"}
+                            </div>
+
                             <div className="mt-2 text-xs leading-5 text-white/60">
-                                Select a code exercise or sketch that has starter files to open the editor here.
+                                {isSketchEditorMode
+                                    ? "This sketch does not have a ready workspace yet."
+                                    : "This exercise does not have a ready workspace yet."}
                             </div>
                         </div>
                     </div>

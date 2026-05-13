@@ -388,6 +388,16 @@ function hasSavedExerciseContent(value: any) {
     return Boolean(hasNonBlankCode || hasSketch || hasProgressState);
 }
 
+function hasSavedExerciseEditorContent(value: any) {
+    const workspace = getSavedWorkspace(value);
+
+    return Boolean(
+        workspaceHasNonBlankCode(workspace) ||
+        (typeof value?.code === "string" && value.code.trim().length > 0) ||
+        (typeof value?.source === "string" && value.source.trim().length > 0),
+    );
+}
+
 
 function getSavedExerciseCode(value: any, workspace: any) {
     const workspaceCode = deriveEntryCode(workspace) ?? "";
@@ -964,6 +974,17 @@ export function useReviewProgress(args: {
                 const existingExercise = runtimeNow.exercises[canonicalExerciseKey] ?? null;
                 const parts = canonicalExerciseKey.split(":");
                 const savedWorkspace = getSavedWorkspace(saved);
+                const savedHasEditorContent = hasSavedExerciseEditorContent(saved);
+
+                /**
+                 * Progress-only saved entries are still useful, but they must not
+                 * pre-seed a runtime exercise before the real manifest-backed
+                 * exercise registers. Otherwise a blank DB/local patch becomes the
+                 * initial "manifest" and starterCode never gets a chance to win.
+                 */
+                if (!savedHasEditorContent && !existingExercise) {
+                    return;
+                }
 
                 const savedMatchesCurrentStarter = savedStarterHashMatchesRuntimeStarter({
                     saved,
@@ -982,23 +1003,26 @@ export function useReviewProgress(args: {
                 const shouldDropSavedWorkspace =
                     !savedMatchesCurrentStarter && Boolean(existingExercise?.starterHash);
 
+                const shouldHydrateEditorState =
+                    savedHasEditorContent && !shouldDropSavedWorkspace;
+
                 const workspace =
-                    shouldDropSavedWorkspace
+                    !shouldHydrateEditorState
                         ? existingExercise?.workspace ??
                         existingExercise?.codeWorkspace ??
                         existingExercise?.ideWorkspace ??
                         null
                         : savedWorkspace;
 
-                const code = shouldDropSavedWorkspace
+                const code = !shouldHydrateEditorState
                     ? existingExercise?.code ?? existingExercise?.source ?? undefined
                     : getSavedExerciseCode(saved, savedWorkspace);
 
-                const stdin = shouldDropSavedWorkspace
+                const stdin = !shouldHydrateEditorState
                     ? existingExercise?.stdin ?? existingExercise?.codeStdin ?? ""
                     : getSavedExerciseStdin(saved, savedWorkspace);
 
-                const language = shouldDropSavedWorkspace
+                const language = !shouldHydrateEditorState
                     ? existingExercise?.language ?? existingExercise?.lang ?? "python"
                     : getSavedExerciseLanguage(
                         saved,
@@ -1006,7 +1030,7 @@ export function useReviewProgress(args: {
                         existingExercise?.language ?? "python",
                     );
 
-                const userEdited = shouldDropSavedWorkspace
+                const userEdited = !shouldHydrateEditorState
                     ? existingExercise?.userEdited ?? false
                     : isUserSavedState(saved) ||
                     (Boolean(savedWorkspace) &&
@@ -1014,7 +1038,7 @@ export function useReviewProgress(args: {
                         saved?.workspaceOrigin !== "empty" &&
                         saved?.userEdited !== false);
 
-                const workspaceOrigin = shouldDropSavedWorkspace
+                const workspaceOrigin = !shouldHydrateEditorState
                     ? existingExercise?.workspaceOrigin ?? "starter"
                     : saved?.workspaceOrigin ??
                     (userEdited ? "saved" : Boolean(savedWorkspace) ? "starter" : undefined);
@@ -1052,9 +1076,9 @@ export function useReviewProgress(args: {
                         parts.slice(5).join(":"),
                     language,
                     lang: saved?.lang ?? saved?.language ?? language,
-                    workspace: workspace ?? saved?.workspace,
-                    codeWorkspace: workspace ?? saved?.codeWorkspace,
-                    ideWorkspace: workspace ?? saved?.ideWorkspace,
+                    workspace,
+                    codeWorkspace: workspace,
+                    ideWorkspace: workspace,
                     code,
                     source: code,
                     stdin,
@@ -1084,6 +1108,7 @@ export function useReviewProgress(args: {
                     cardIdHint,
                     userEdited: incomingExercise.userEdited,
                     workspaceOrigin: incomingExercise.workspaceOrigin,
+                    savedHasEditorContent,
                     workspaceDroppedBecauseStarterChanged: shouldDropSavedWorkspace,
                     workspace: summarizeWorkspaceForSave(workspace),
                 });

@@ -220,11 +220,16 @@
    * Review Quiz tokens
    * ========================= */
   .ui-quiz-card {
-    @apply rounded-xl border p-3 border-neutral-200 bg-neutral-50;
+    @apply rounded-xl border p-3;
+    background-color: rgb(var(--ui-surface-2) / 0.96);
+    border-color: rgb(var(--ui-border) / 0.82);
+    color: rgb(var(--ui-text) / 1);
   }
 
   .dark .ui-quiz-card {
-    @apply border-white/10 bg-white/[0.03];
+    background-color: rgb(var(--ui-surface-2) / 0.96);
+    border-color: rgb(var(--ui-border) / 0.82);
+    color: rgb(var(--ui-text) / 1);
   }
 
   .ui-quiz-card--locked {
