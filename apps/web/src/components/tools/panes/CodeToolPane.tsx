@@ -565,10 +565,10 @@ export default function CodeToolPane(props: {
      */
     const reviewDirectWorkspace =
         editorRuntime?.workspaceStatus === "ready" &&
-        reviewWorkspaceHasNonEmptyFile(editorRuntime.workspace)
+        forceWorkspaceHasContent(editorRuntime.workspace)
             ? editorRuntime.workspace
             : exerciseRuntime?.workspaceStatus === "ready" &&
-            reviewWorkspaceHasNonEmptyFile(exerciseRuntime.workspace)
+            forceWorkspaceHasContent(exerciseRuntime.workspace)
                 ? exerciseRuntime.workspace
                 : null;
     useEffect(() => {
@@ -596,8 +596,8 @@ export default function CodeToolPane(props: {
     const reviewDirectWorkspaceReady = !!reviewDirectWorkspace;
     const hasEditorTarget = Boolean(
         hasBindableEditorTarget ||
-        reviewWorkspaceHasNonEmptyFile(editorRuntime?.workspace) ||
-        reviewWorkspaceHasNonEmptyFile(exerciseRuntime?.workspace) ||
+        forceWorkspaceHasContent(editorRuntime?.workspace) ||
+        forceWorkspaceHasContent(exerciseRuntime?.workspace) ||
         forceWorkspaceHasContent(toolWorkspace),
     );
 
@@ -666,14 +666,14 @@ export default function CodeToolPane(props: {
     const exerciseWorkspaceReady = Boolean(
         exerciseKey &&
         (
-            reviewWorkspaceHasNonEmptyFile(editorRuntime?.workspace) ||
-            reviewWorkspaceHasNonEmptyFile(exerciseRuntime?.workspace)
+            forceWorkspaceHasContent(editorRuntime?.workspace) ||
+            forceWorkspaceHasContent(exerciseRuntime?.workspace)
         )
     );
 
     const cardWorkspaceReady = Boolean(
         cardRuntimeKey &&
-        reviewWorkspaceHasNonEmptyFile(editorRuntime?.workspace)
+        forceWorkspaceHasContent(editorRuntime?.workspace)
     );
 
     function createDefaultToolWorkspace(language: string | null | undefined): WorkspaceStateV2 {
@@ -708,14 +708,14 @@ export default function CodeToolPane(props: {
             // Review/exercise route: blank runtime workspace should NOT hide starter code.
             if (
                 editorRuntime?.workspaceStatus === "ready" &&
-                reviewWorkspaceHasNonEmptyFile(editorRuntime.workspace)
+                forceWorkspaceHasContent(editorRuntime.workspace)
             ) {
                 return editorRuntime.workspace;
             }
 
             if (
                 exerciseRuntime?.workspaceStatus === "ready" &&
-                reviewWorkspaceHasNonEmptyFile(exerciseRuntime.workspace)
+                forceWorkspaceHasContent(exerciseRuntime.workspace)
             ) {
                 return exerciseRuntime.workspace;
             }

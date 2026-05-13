@@ -148,6 +148,7 @@ export default function QuizPracticeCard(props: {
   const runtimeExercise = useReviewRuntimeStore(
       (s) => s.exercises[exerciseKeyForTools] ?? null,
   );
+  const ensureRuntimeExercise = useReviewRuntimeStore((s) => s.ensureExercise);
 
   const runtimeExerciseCode = useMemo(() => {
     return (
@@ -155,6 +156,30 @@ export default function QuizPracticeCard(props: {
         (typeof runtimeExercise?.code === "string" ? runtimeExercise.code : "")
     );
   }, [runtimeExercise]);
+
+  useEffect(() => {
+    if (!ex) return;
+    if (ex.kind !== "code_input") return;
+    if (!ps?.item) return;
+
+    ensureRuntimeExercise({
+      exerciseKey: exerciseKeyForTools,
+      subjectSlug: (q as any).fetch?.subject ?? "",
+      moduleSlug: (q as any).fetch?.module ?? "",
+      sectionSlug: (q as any).fetch?.section,
+      topicId: normalizeTopicProgressKey((q as any).fetch?.topic ?? ""),
+      cardId: ownerCardId ?? "",
+      manifest: ex,
+      saved: ps.item,
+    });
+  }, [
+    ensureRuntimeExercise,
+    ex,
+    exerciseKeyForTools,
+    ownerCardId,
+    ps?.item,
+    q,
+  ]);
 
   const attemptsCapped = useMemo(() => {
     if (!ps) return false;

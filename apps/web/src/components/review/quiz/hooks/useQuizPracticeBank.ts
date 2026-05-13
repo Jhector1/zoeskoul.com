@@ -239,21 +239,21 @@ function getRuntimePracticePatchForQuestion(
         /**
          * Strongest signal: this is the currently active/bound Tools exercise.
          */
-        if (activeExerciseKey && key === activeExerciseKey) score += 3000;
-        if (boundExerciseKey && key === boundExerciseKey) score += 3000;
-        if (activeExerciseKey && valueExerciseKey === activeExerciseKey) score += 2500;
-        if (boundExerciseKey && valueExerciseKey === boundExerciseKey) score += 2500;
+        if (activeExerciseKey && key === activeExerciseKey) score += 700;
+        if (boundExerciseKey && key === boundExerciseKey) score += 700;
+        if (activeExerciseKey && valueExerciseKey === activeExerciseKey) score += 650;
+        if (boundExerciseKey && valueExerciseKey === boundExerciseKey) score += 650;
 
         /**
          * Exact question/exercise identity.
          */
         for (const wantedId of wantedIds) {
-          if (key === wantedId) score += 1200;
-          if (valueExerciseKey === wantedId) score += 1100;
-          if (valueExerciseId === wantedId) score += 1000;
+          if (key === wantedId) score += 5000;
+          if (valueExerciseKey === wantedId) score += 4800;
+          if (valueExerciseId === wantedId) score += 4600;
 
-          if (key.endsWith(`:${wantedId}`)) score += 800;
-          if (valueExerciseKey.endsWith(`:${wantedId}`)) score += 750;
+          if (key.endsWith(`:${wantedId}`)) score += 4200;
+          if (valueExerciseKey.endsWith(`:${wantedId}`)) score += 4000;
         }
 
         /**
@@ -292,16 +292,21 @@ function getRuntimePracticePatchForQuestion(
           key,
           value,
           score,
+          hasIdentityMatch,
+          hasActiveMatch,
           updatedAt: Number.isFinite(updatedAt) ? updatedAt : 0,
         };
       })
-      .filter(Boolean)
+      .filter(Boolean);
+
+  const identityCandidates = candidates.filter((candidate: any) => candidate.hasIdentityMatch);
+  const rankedCandidates = (identityCandidates.length ? identityCandidates : candidates)
       .sort((a: any, b: any) => {
         if (b.score !== a.score) return b.score - a.score;
         return b.updatedAt - a.updatedAt;
       });
 
-  const found = candidates[0];
+  const found = rankedCandidates[0];
 
   if (!found) return null;
 

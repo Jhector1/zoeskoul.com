@@ -130,38 +130,49 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
 
         let score = 0;
 
-        if (activeExerciseKey && key === activeExerciseKey) score += 3000;
-        if (boundExerciseKey && key === boundExerciseKey) score += 3000;
-        if (activeExerciseKey && valueExerciseKey === activeExerciseKey) score += 2500;
-        if (boundExerciseKey && valueExerciseKey === boundExerciseKey) score += 2500;
+        if (activeExerciseKey && key === activeExerciseKey) score += 700;
+        if (boundExerciseKey && key === boundExerciseKey) score += 700;
+        if (activeExerciseKey && valueExerciseKey === activeExerciseKey) score += 650;
+        if (boundExerciseKey && valueExerciseKey === boundExerciseKey) score += 650;
 
         for (const wantedId of wantedIds) {
-          if (key === wantedId) score += 1200;
-          if (valueExerciseKey === wantedId) score += 1100;
-          if (valueExerciseId === wantedId) score += 1000;
+          if (key === wantedId) score += 5000;
+          if (valueExerciseKey === wantedId) score += 4800;
+          if (valueExerciseId === wantedId) score += 4600;
 
-          if (key.endsWith(`:${wantedId}`)) score += 800;
-          if (valueExerciseKey.endsWith(`:${wantedId}`)) score += 750;
+          if (key.endsWith(`:${wantedId}`)) score += 4200;
+          if (valueExerciseKey.endsWith(`:${wantedId}`)) score += 4000;
         }
 
         if (score <= 0) return null;
 
         const updatedAt = Number(value.updatedAt ?? 0);
+        const hasIdentityMatch = Array.from(wantedIds).some((wantedId) => (
+          key === wantedId ||
+          valueExerciseKey === wantedId ||
+          valueExerciseId === wantedId ||
+          key.endsWith(`:${wantedId}`) ||
+          valueExerciseKey.endsWith(`:${wantedId}`)
+        ));
 
         return {
           key,
           value,
           score,
+          hasIdentityMatch,
           updatedAt: Number.isFinite(updatedAt) ? updatedAt : 0,
         };
       })
-      .filter(Boolean)
+      .filter(Boolean);
+
+  const identityCandidates = candidates.filter((candidate: any) => candidate.hasIdentityMatch);
+  const rankedCandidates = (identityCandidates.length ? identityCandidates : candidates)
       .sort((a: any, b: any) => {
         if (b.score !== a.score) return b.score - a.score;
         return b.updatedAt - a.updatedAt;
       });
 
-  const found = candidates[0];
+  const found = rankedCandidates[0];
   if (!found) return null;
 
   const estate = found.value;
@@ -340,6 +351,10 @@ export default function QuizBlock({
       );
     });
   }, [activeRuntimeExerciseKey, questions]);
+  const routeExerciseQuestionId = useMemo(() => {
+    if (routeExerciseIndex < 0) return null;
+    return questions[routeExerciseIndex]?.id ?? null;
+  }, [questions, routeExerciseIndex]);
 
   useEffect(() => {
     onPassRef.current = onPass;
@@ -837,12 +852,12 @@ export default function QuizBlock({
     if (quizLoading) return;
     if (!questions.length) return;
 
-    const restoreKey = `${resetKey}:restore`;
+    const restoreKey = `${resetKey}:restore:${routeExerciseQuestionId ?? "flow"}`;
     if (restoreQuestionKeyRef.current === restoreKey) return;
 
     if (navigationMode === "slideshow") {
       restoreQuestionKeyRef.current = restoreKey;
-      setActiveIndex(findCurrentActivityQuestionIndex());
+      setActiveIndex(routeExerciseIndex >= 0 ? routeExerciseIndex : findCurrentActivityQuestionIndex());
       return;
     }
 
@@ -853,7 +868,7 @@ export default function QuizBlock({
     const tryRestore = () => {
       if (cancelled) return;
 
-      const qid = findCurrentActivityQuestionId();
+      const qid = routeExerciseQuestionId ?? findCurrentActivityQuestionId();
       if (!qid) {
         restoreQuestionKeyRef.current = restoreKey;
         scrollToFooter();
@@ -900,6 +915,8 @@ export default function QuizBlock({
     quizLoading,
     questions,
     resetKey,
+    routeExerciseIndex,
+    routeExerciseQuestionId,
     findCurrentActivityQuestionId,
     findCurrentActivityQuestionIndex,
     reduceMotion,
