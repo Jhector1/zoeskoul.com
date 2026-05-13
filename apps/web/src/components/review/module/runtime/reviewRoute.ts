@@ -106,7 +106,7 @@ function getTopicLookup(mod: ReviewModule): Map<string, TopicLookup> {
 
 function getProjectExerciseEntries(card: Extract<ReviewCard, { type: "project" }>) {
     const steps = Array.isArray(card.spec?.steps) ? card.spec.steps : [];
-    return steps.map((step: any) => {
+    return steps.map((step) => {
         const exerciseId =
             typeof step?.exerciseKey === "string" && step.exerciseKey.trim()
                 ? step.exerciseKey.trim()

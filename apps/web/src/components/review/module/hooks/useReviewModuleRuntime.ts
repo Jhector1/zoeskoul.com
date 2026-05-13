@@ -7,6 +7,7 @@ import {
     type LearningIdeConfig,
     mergeLearningIdeConfigs,
 } from "@/lib/ide/learningIdeConfig";
+import type { UnknownRecord } from "../runtime/reviewRuntimeTypes";
 
 type Args = {
     subjectSlug: string;
@@ -14,9 +15,13 @@ type Args = {
     viewTopic: ReviewModule["topics"][number] | null;
 };
 
+type ReviewModuleWithMeta = ReviewModule & {
+    meta?: UnknownRecord | null;
+};
+
 export function useReviewModuleRuntime({ subjectSlug, mod, viewTopic }: Args) {
     const { codeEnabled } = useMemo(() => {
-        const meta = (mod as any)?.meta;
+        const meta = (mod as ReviewModuleWithMeta).meta;
         return toolsPolicyForSubject(subjectSlug, meta);
     }, [subjectSlug, mod]);
 
@@ -24,34 +29,39 @@ export function useReviewModuleRuntime({ subjectSlug, mod, viewTopic }: Args) {
         () =>
             resolveToolDefaults({
                 subjectSlug,
-                moduleMeta: (mod as any)?.meta,
+                moduleMeta: (mod as ReviewModuleWithMeta).meta,
             }),
         [subjectSlug, mod],
     );
 
     const moduleRuntime =
-        (mod as any)?.runtimeDefaults ??
-        (mod as any)?.meta?.runtimeDefaults ??
+        mod.runtimeDefaults ??
+        ((mod as ReviewModuleWithMeta).meta?.runtimeDefaults as UnknownRecord | null | undefined) ??
         null;
     const moduleIdeConfig =
-        ((mod as any)?.serviceDefaults as LearningIdeConfig | null | undefined) ??
-        ((mod as any)?.meta?.serviceDefaults as LearningIdeConfig | null | undefined) ??
+        mod.serviceDefaults ??
+        ((mod as ReviewModuleWithMeta).meta?.serviceDefaults as LearningIdeConfig | null | undefined) ??
         null;
 
     const effectiveRuntime =
-        (viewTopic as any)?.meta?.runtimeDefaults ??
+        ((viewTopic?.meta?.runtimeDefaults as UnknownRecord | null | undefined) ??
         moduleRuntime ??
-        null;
+        null);
+    const effectiveRuntimeRecord = effectiveRuntime as UnknownRecord | null;
+    const effectiveRuntimeLanguage =
+        typeof effectiveRuntimeRecord?.language === "string"
+            ? effectiveRuntimeRecord.language
+            : undefined;
     const effectiveIdeConfig = mergeLearningIdeConfigs(
         moduleIdeConfig,
-        ((viewTopic as any)?.meta?.serviceDefaults as LearningIdeConfig | null | undefined) ?? null,
+        (viewTopic?.meta?.serviceDefaults as LearningIdeConfig | null | undefined) ?? null,
     );
 
     const topicSqlFallback = useMemo(() => {
         const resolved = resolveCourseSqlRunnerConfig({
             subjectSlug,
-            language: effectiveRuntime?.language,
-            topicRuntimeDefaults: (viewTopic as any)?.meta?.runtimeDefaults ?? null,
+            language: effectiveRuntimeLanguage,
+            topicRuntimeDefaults: (viewTopic?.meta?.runtimeDefaults as UnknownRecord | null | undefined) ?? null,
             moduleRuntimeDefaults: moduleRuntime,
             runtimeDefaults: effectiveRuntime,
             defaultSqlDialect: toolDefaults.defaultSqlDialect,
@@ -59,7 +69,7 @@ export function useReviewModuleRuntime({ subjectSlug, mod, viewTopic }: Args) {
 
         if (!resolved.isSql || !resolved.sqlDatasetId) return null;
         return resolved;
-    }, [subjectSlug, effectiveRuntime, viewTopic, moduleRuntime, toolDefaults.defaultSqlDialect]);
+    }, [subjectSlug, effectiveRuntimeLanguage, effectiveRuntime, viewTopic, moduleRuntime, toolDefaults.defaultSqlDialect]);
 
     return {
         codeEnabled,

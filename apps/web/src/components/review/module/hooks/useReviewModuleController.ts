@@ -56,6 +56,7 @@ import {
 } from "../runtime/reviewRoute";
 
 import { buildReviewTargetRegistry } from "../runtime/reviewTargetRegistry";
+import { resolveFlowNavigationConfig } from "@/components/review/navigation/FlowNavigator";
 
 function registryEntryToRouteTarget(entry: any): ReviewResolvedRouteTarget | null {
     if (!entry) return null;
@@ -120,10 +121,7 @@ export function useReviewModuleController({
     const sectionSlug = (params as any)?.sectionSlug;
     const unlockAll = Boolean(canUnlockAll);
 
-    const resolvedNavModes = useMemo(() => {
-        const { resolveFlowNavigationConfig } = require("@/components/review/navigation/FlowNavigator");
-        return resolveFlowNavigationConfig(navigationMode);
-    }, [navigationMode]);
+    const resolvedNavModes = useMemo(() => resolveFlowNavigationConfig(navigationMode), [navigationMode]);
 
     const topics = Array.isArray(mod?.topics) ? mod.topics : [];
     const firstTopicId = topics[0]?.id ?? "";

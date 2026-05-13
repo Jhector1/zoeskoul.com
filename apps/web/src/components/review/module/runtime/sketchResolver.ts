@@ -1,9 +1,9 @@
 import type { SketchState } from "./reviewRuntimeTypes";
 
 function cloneJson<T>(value: T): T {
-  if (typeof (globalThis as any).structuredClone === "function") {
+  if (typeof globalThis.structuredClone === "function") {
     try {
-      return (globalThis as any).structuredClone(value);
+      return globalThis.structuredClone(value);
     } catch {
       // fall through
     }
@@ -15,7 +15,7 @@ function cloneJson<T>(value: T): T {
 export function createEmptySketch(): SketchState {
   return {
     version: 1,
-    elements: [],
+    data: {},
   };
 }
 

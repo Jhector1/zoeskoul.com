@@ -1,19 +1,55 @@
+import type { Actor } from "@/lib/practice/actor";
+import {
+    ReviewQuizSpecSchema,
+} from "@/lib/review/api/quiz/schemas";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+type ReviewQuizQuestion = {
+    kind: "practice";
+    id: string;
+    fetch: {
+        topic?: string;
+        preferPurpose?: "quiz" | "project" | "mixed";
+        preferKind?: string | null;
+        exerciseKey?: string;
+    };
+};
+
+type StoredQuizRow = {
+    questions: ReviewQuizQuestion[];
+};
+
+type ReviewQuizInstanceFindUniqueArgs = {
+    where: {
+        actorKey_quizKey: {
+            actorKey: string;
+            quizKey: string;
+        };
+    };
+};
+
+type ReviewQuizInstanceCreateArgs = {
+    data: {
+        actorKey: string;
+        quizKey: string;
+        questions: ReviewQuizQuestion[];
+    };
+};
+
 const mockDb = vi.hoisted(() => ({
-    quizRows: new Map<string, { questions: any[] }>(),
+    quizRows: new Map<string, StoredQuizRow>(),
     practiceTopicFindMany: vi.fn(async () => []),
 }));
 
 vi.mock("@/lib/prisma", () => ({
     prisma: {
         reviewQuizInstance: {
-            findUnique: vi.fn(async ({ where }: any) => {
+            findUnique: vi.fn(async ({ where }: ReviewQuizInstanceFindUniqueArgs) => {
                 const key = `${where.actorKey_quizKey.actorKey}|${where.actorKey_quizKey.quizKey}`;
                 const row = mockDb.quizRows.get(key);
                 return row ? { questions: row.questions } : null;
             }),
-            create: vi.fn(async ({ data }: any) => {
+            create: vi.fn(async ({ data }: ReviewQuizInstanceCreateArgs) => {
                 const key = `${data.actorKey}|${data.quizKey}`;
                 mockDb.quizRows.set(key, { questions: data.questions });
                 return { id: "review-quiz-1", ...data };
@@ -28,7 +64,7 @@ vi.mock("@/lib/prisma", () => ({
 
 vi.mock("@/lib/practice/actor", () => ({
     getActor: vi.fn(async () => ({ userId: "user-1", guestId: null })),
-    ensureGuestId: vi.fn((actor: any) => ({ actor, setGuestId: null })),
+    ensureGuestId: vi.fn((actor: Actor) => ({ actor, setGuestId: null })),
     actorKeyOf: vi.fn(() => "u:test-user"),
     attachGuestCookie: vi.fn((res: Response) => res),
 }));
@@ -47,7 +83,7 @@ vi.mock("@/lib/review/api/access/resolveReviewAccess", () => ({
             moduleSlug: parts.find((part) => part.startsWith("module="))?.slice(7) ?? null,
         };
     }),
-    resolveReviewAccess: vi.fn(async (_args: any) => ({
+    resolveReviewAccess: vi.fn(async () => ({
         ok: true,
         mode: "standard",
         bypassBilling: false,
@@ -160,16 +196,16 @@ describe("/api/review/quiz route", () => {
         // If code_input appears in a normal quiz after this change, first check
         // for stale reviewQuizInstance rows or an outdated manifest build. Reset
         // the quiz/topic and regenerate manifests before digging deeper.
-        const spec = {
+        const spec = ReviewQuizSpecSchema.parse({
             subject: "sql",
             moduleSlug: "sql-module-1",
             topic: "sql.quiz-topic",
             n: 1,
             mode: "quiz" as const,
             preferKind: null,
-        };
+        });
 
-        const v3Key = buildReviewQuizKey(spec as any);
+        const v3Key = buildReviewQuizKey(spec);
         const v2Key = v3Key.replace("selection=purpose-v3", "selection=purpose-v2");
 
         mockDb.quizRows.set(`u:test-user|${v2Key}`, {
@@ -205,16 +241,16 @@ describe("/api/review/quiz route", () => {
         const route = await import("./route");
         const { buildReviewQuizKey } = await import("@/lib/review/api/quiz/keys");
 
-        const spec = {
+        const spec = ReviewQuizSpecSchema.parse({
             subject: "sql",
             moduleSlug: "sql-module-1",
             topic: "sql.quiz-topic",
             n: 1,
             mode: "quiz" as const,
             preferKind: null,
-        };
+        });
 
-        const quizKey = buildReviewQuizKey(spec as any);
+        const quizKey = buildReviewQuizKey(spec);
         mockDb.quizRows.set(`u:test-user|${quizKey}`, {
             questions: [
                 {

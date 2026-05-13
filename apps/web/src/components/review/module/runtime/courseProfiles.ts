@@ -5,7 +5,7 @@ import {
   type ResolvedSqlRunnerConfig,
 } from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
 
-type AnyRecord = Record<string, any>;
+type UnknownRecord = Record<string, unknown>;
 
 export type CourseProfileId = "python" | "sql" | "java" | "javascript" | "cpp" | "c" | "generic";
 
@@ -29,7 +29,7 @@ export type FileSeed = {
   solutionCode?: string;
 };
 
-function isRecord(value: unknown): value is AnyRecord {
+function isRecord(value: unknown): value is UnknownRecord {
   return !!value && typeof value === "object" && !Array.isArray(value);
 }
 
@@ -110,19 +110,26 @@ export function getCourseProfile(args: {
 export function resolveCourseLanguage(args: {
   subjectSlug?: string | null;
   language?: string | null;
-  runtimeDefaults?: AnyRecord | null;
-  target?: AnyRecord | null;
+  runtimeDefaults?: UnknownRecord | null;
+  target?: unknown;
 }): WorkspaceLanguage {
-  const profile = getCourseProfile({ subjectSlug: args.subjectSlug, language: args.language });
-  const target = args.target?.spec ?? args.target ?? {};
+  const profile = getCourseProfile({
+    subjectSlug: args.subjectSlug,
+    language: args.language,
+  });
+  const targetRecord = isRecord(args.target) ? args.target : null;
+  const target = isRecord(targetRecord?.spec)
+    ? targetRecord.spec
+    : targetRecord ?? {};
   const runtime = isRecord(target.runtime) ? target.runtime : {};
   const workspace = isRecord(target.workspace) ? target.workspace : {};
+  const recipe = isRecord(target.recipe) ? target.recipe : {};
 
   return (
     cleanLanguage(target.language) ??
     cleanLanguage(target.lang) ??
     cleanLanguage(workspace.language) ??
-    cleanLanguage(target.recipe?.language) ??
+    cleanLanguage(recipe.language) ??
     cleanLanguage(runtime.language) ??
     cleanLanguage(args.runtimeDefaults?.language) ??
     cleanLanguage(args.runtimeDefaults?.lang) ??
@@ -153,7 +160,8 @@ function firstCode(...values: unknown[]) {
  * may all define starter/support files. SQL datasets are not resolved here.
  */
 export function resolveFileSeed(target: unknown): FileSeed {
-  const source = isRecord((target as any)?.spec) ? (target as any).spec : target;
+  const targetRecord = isRecord(target) ? target : null;
+  const source = isRecord(targetRecord?.spec) ? targetRecord.spec : target;
   if (!isRecord(source)) return {};
 
   const workspace = isRecord(source.workspace) ? source.workspace : {};
@@ -233,17 +241,22 @@ function getDatasetFromRuntime(runtime: unknown) {
 }
 
 function getDatasetFromTarget(target: unknown): string | undefined {
-  const source = isRecord((target as any)?.spec) ? (target as any).spec : target;
+  const targetRecord = isRecord(target) ? target : null;
+  const source = isRecord(targetRecord?.spec) ? targetRecord.spec : target;
   if (!isRecord(source)) return undefined;
+  const recipe = isRecord(source.recipe) ? source.recipe : {};
+  const expected = isRecord(source.expected) ? source.expected : {};
+  const expectedRuntime = isRecord(expected.runtime) ? expected.runtime : {};
+  const workspace = isRecord(source.workspace) ? source.workspace : {};
 
   return (
     getDatasetFromRuntime(source.runtime) ??
     cleanString(source.datasetId) ??
     cleanString(source.runtimeDefaultDatasetId) ??
-    cleanString(source.recipe?.datasetId) ??
-    getDatasetFromRuntime(source.expected?.runtime) ??
-    cleanString(source.workspace?.datasetId) ??
-    cleanString(source.workspace?.runtimeDefaultDatasetId)
+    cleanString(recipe.datasetId) ??
+    getDatasetFromRuntime(expectedRuntime) ??
+    cleanString(workspace.datasetId) ??
+    cleanString(workspace.runtimeDefaultDatasetId)
   );
 }
 
@@ -262,17 +275,21 @@ export function resolveRuntimeDefaultDataset(args: {
   subjectSlug?: string | null;
   language?: string | null;
   target?: unknown;
-  topicRuntimeDefaults?: AnyRecord | null;
-  moduleRuntimeDefaults?: AnyRecord | null;
-  runtimeDefaults?: AnyRecord | null;
+  topicRuntimeDefaults?: UnknownRecord | null;
+  moduleRuntimeDefaults?: UnknownRecord | null;
+  runtimeDefaults?: UnknownRecord | null;
 }): RuntimeDatasetResolution {
   const profile = getCourseProfile({ subjectSlug: args.subjectSlug, language: args.language });
   if (profile.id !== "sql") return { source: "none" };
 
   const targetDatasetId = getDatasetFromTarget(args.target);
   if (targetDatasetId) {
-    const target = isRecord((args.target as any)?.spec) ? (args.target as any).spec : args.target;
-    const targetKind = isRecord(target) && cleanString(target.archetype)?.includes("sketch") ? "sketch" : "exercise";
+    const targetRecord = isRecord(args.target) ? args.target : null;
+    const target = isRecord(targetRecord?.spec) ? targetRecord.spec : args.target;
+    const targetKind =
+      isRecord(target) && cleanString(target.archetype)?.includes("sketch")
+        ? "sketch"
+        : "exercise";
     return { datasetId: targetDatasetId, source: targetKind as "exercise" | "sketch" };
   }
 
@@ -294,16 +311,18 @@ export function resolveRuntimeDefaultDataset(args: {
 
 function resolveSqlDialect(args: {
   target?: unknown;
-  topicRuntimeDefaults?: AnyRecord | null;
-  moduleRuntimeDefaults?: AnyRecord | null;
-  runtimeDefaults?: AnyRecord | null;
+  topicRuntimeDefaults?: UnknownRecord | null;
+  moduleRuntimeDefaults?: UnknownRecord | null;
+  runtimeDefaults?: UnknownRecord | null;
   fallback?: SqlDialect;
 }): SqlDialect {
-  const source = isRecord((args.target as any)?.spec) ? (args.target as any).spec : args.target;
-  const runtime = isRecord((source as any)?.runtime) ? (source as AnyRecord).runtime : {};
+  const targetRecord = isRecord(args.target) ? args.target : null;
+  const source = isRecord(targetRecord?.spec) ? targetRecord.spec : args.target;
+  const sourceRecord = isRecord(source) ? source : {};
+  const runtime = isRecord(sourceRecord.runtime) ? sourceRecord.runtime : {};
   return (
-    cleanString((source as AnyRecord)?.fixedSqlDialect) ??
-    cleanString((source as AnyRecord)?.sqlDialect) ??
+    cleanString(sourceRecord.fixedSqlDialect) ??
+    cleanString(sourceRecord.sqlDialect) ??
     cleanString(runtime.fixedSqlDialect) ??
     cleanString(runtime.sqlDialect) ??
     cleanString(args.topicRuntimeDefaults?.fixedSqlDialect) ??
@@ -321,9 +340,9 @@ export function resolveCourseSqlRunnerConfig(args: {
   subjectSlug?: string | null;
   language?: string | null;
   target?: unknown;
-  topicRuntimeDefaults?: AnyRecord | null;
-  moduleRuntimeDefaults?: AnyRecord | null;
-  runtimeDefaults?: AnyRecord | null;
+  topicRuntimeDefaults?: UnknownRecord | null;
+  moduleRuntimeDefaults?: UnknownRecord | null;
+  runtimeDefaults?: UnknownRecord | null;
   defaultSqlDialect?: SqlDialect;
 }): ResolvedSqlRunnerConfig & { datasetResolution: RuntimeDatasetResolution } {
   const datasetResolution = resolveRuntimeDefaultDataset(args);
@@ -331,7 +350,7 @@ export function resolveCourseSqlRunnerConfig(args: {
     subjectSlug: args.subjectSlug,
     language: args.language,
     runtimeDefaults: args.runtimeDefaults,
-    target: isRecord(args.target) ? (args.target as AnyRecord) : null,
+    target: isRecord(args.target) ? args.target : null,
   });
 
   if (getCourseProfile({ subjectSlug: args.subjectSlug, language }).id !== "sql") {

@@ -4,30 +4,36 @@ import React from "react";
 import TopicShell from "../../components/TopicShell";
 import ReviewTopicCards from "./ReviewTopicCards";
 import ReviewTopicCompletion from "./ReviewTopicCompletion";
-import type { ReviewCard } from "@/lib/subjects/types";
+import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
+import type {
+    ReviewProgressState,
+    ReviewTopicProgress,
+} from "@/lib/subjects/progressTypes";
+import type { SubjectFinishState } from "../../types/subjectFinish.types";
+import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
 
 type Props = {
     leftCollapsedEff: boolean;
     onOpenTopics: () => void;
     mainScrollRef: React.RefObject<HTMLElement | null>;
     padStyle: React.CSSProperties;
-    viewTopic: any;
+    viewTopic: ReviewModule["topics"][number] | null;
     viewCards: ReviewCard[];
     viewTid: string;
     activeCardIndex: number;
     navModes: { cards: "scroll" | "slideshow"; quiz: "scroll" | "slideshow" };
     reduceMotion: boolean;
-    tp: any;
+    tp: ReviewTopicProgress;
     progressHydrated: boolean;
     versionStr: string;
     prereqsForAllQuizzes: boolean;
-    sketch: any;
-    setProgress: React.Dispatch<any>;
-    flushNow: (next: any) => void;
+    sketch: ReturnType<typeof useDebouncedSketchState>;
+    setProgress: React.Dispatch<React.SetStateAction<ReviewProgressState>>;
+    flushNow: (next: ReviewProgressState) => void;
     onRun?: () => void;
     onReveal?: () => void;
     onSubmit?: () => void;
-    scrollToNextActionable: (fromIndex: number, nextProgress: any) => void;
+    scrollToNextActionable: (fromIndex: number, nextProgress: ReviewProgressState) => void;
     setCardEl: (id: string) => (el: HTMLDivElement | null) => void;
     viewIsComplete: boolean;
     onContinue?: () => void;
@@ -37,7 +43,7 @@ type Props = {
     moduleSlug: string;
     sectionSlug?: string;
     defaultToolLanguage?: string;
-    subjectFinish: any;
+    subjectFinish: SubjectFinishState | null;
     onOpenCertificate: () => void;
     onActiveCardIndexChange?: (index: number) => void;
 };

@@ -1,11 +1,13 @@
 import {create} from "zustand";
 import type {WorkspaceStateV2} from "@/components/ide/types";
+import type {LooseManifestRecord} from "./reviewTargetRegistry";
 import type {
     CardRuntimeState,
     EditorRuntimeState,
     ExerciseRuntimeState,
     ReviewRuntimeState,
     ReviewRuntimeStore,
+    UnknownRecord,
     WorkspaceOrigin,
 } from "./reviewRuntimeTypes";
 import {getCardStateKey} from "./exerciseKeys";
@@ -22,6 +24,9 @@ type InternalStore = ReviewRuntimeStore & {
     _flushToolSnapshotCb: (() => void) | null;
 };
 
+type RuntimeManifestRecord = LooseManifestRecord;
+type RuntimeSavedExerciseRecord = Partial<ExerciseRuntimeState> & UnknownRecord;
+
 function isWorkspace(value: unknown): value is WorkspaceStateV2 {
     return (
         !!value &&
@@ -29,6 +34,35 @@ function isWorkspace(value: unknown): value is WorkspaceStateV2 {
         (value as any).version === 2 &&
         Array.isArray((value as any).nodes)
     );
+}
+
+function asRecord(value: unknown): UnknownRecord | null {
+    return typeof value === "object" && value !== null
+        ? (value as UnknownRecord)
+        : null;
+}
+
+function asManifestRecord(value: unknown): RuntimeManifestRecord | null {
+    return asRecord(value) as RuntimeManifestRecord | null;
+}
+
+function asSavedExerciseRecord(value: unknown): RuntimeSavedExerciseRecord | null {
+    return asRecord(value) as RuntimeSavedExerciseRecord | null;
+}
+
+function asStringRecord(value: unknown): Record<string, string> | undefined {
+    if (!value || typeof value !== "object") return undefined;
+
+    const entries = Object.entries(value);
+    if (entries.some(([, entry]) => typeof entry !== "string")) {
+        return undefined;
+    }
+
+    return Object.fromEntries(entries) as Record<string, string>;
+}
+
+function isSavedSketchState(value: unknown): value is import("@/components/sketches/subjects/types").SavedSketchState {
+    return !!value && typeof value === "object" && "data" in value;
 }
 
 function deriveCodeFromWorkspace(workspace: WorkspaceStateV2 | null | undefined) {
@@ -264,7 +298,7 @@ function normalizeWorkspacePatch(args: {
 }
 
 function getPatchWorkspace(
-    patch: Record<string, any>,
+    patch: UnknownRecord,
     existing?: ExerciseRuntimeState,
 ) {
     if (isWorkspace(patch.workspace)) return patch.workspace;
@@ -696,16 +730,31 @@ function starterLoopTrace(label: string, payload: Record<string, any>) {
 
 function resolveCardToolSeed(args: {
     language: string;
-    toolManifest?: any;
+    toolManifest?: unknown;
     existing?: CardRuntimeState;
     entry?: import("./reviewTargetRegistry").ReviewTargetEntry | null;
-}) {
-    const manifest = args.toolManifest ?? args.entry?.item;
+}): {
+    workspaceStatus: "pending" | "ready" | "error";
+    workspaceSeedMode?: "starter" | "empty" | "restored";
+    workspaceOrigin?: WorkspaceOrigin;
+    userEdited?: boolean;
+    starterHash?: string;
+    workspace: WorkspaceStateV2 | null;
+    code: string;
+    stdin: string;
+    lang: WorkspaceStateV2["language"];
+    sourceType: string;
+} {
+    const manifest = asManifestRecord(args.toolManifest ?? args.entry?.item);
+    const resolvedLanguage = resolveCourseLanguage({
+        language: args.entry?.language ?? args.language,
+        target: manifest ?? args.entry?.item ?? null,
+    });
     const hasStarter = targetHasStarter(manifest, args.entry);
     const starterWorkspace =
         manifest || args.entry
             ? resolveExerciseWorkspace({
-                language: args.entry?.language ?? args.language,
+                language: args.entry?.language ?? resolvedLanguage,
                 manifest,
                 entry: args.entry,
             })
@@ -715,7 +764,7 @@ function resolveCardToolSeed(args: {
         savedState: args.existing,
         savedWorkspace: args.existing?.toolWorkspace,
         starterWorkspace,
-        language: args.entry?.language ?? args.language,
+        language: args.entry?.language ?? resolvedLanguage,
     });
 
     if (
@@ -746,7 +795,7 @@ function resolveCardToolSeed(args: {
                 (typeof args.existing.toolWorkspace?.stdin === "string"
                     ? args.existing.toolWorkspace.stdin
                     : ""),
-            lang: args.existing.toolLang ?? args.language,
+            lang: args.existing.toolLang ?? resolvedLanguage,
             sourceType: "existing",
         };
     }
@@ -755,7 +804,7 @@ function resolveCardToolSeed(args: {
         const workspace =
             starterWorkspace ??
             resolveExerciseWorkspace({
-                language: args.entry?.language ?? args.language,
+                language: args.entry?.language ?? resolvedLanguage,
                 manifest,
                 entry: args.entry,
             });
@@ -793,7 +842,7 @@ function resolveCardToolSeed(args: {
                 workspace: null,
                 code: "",
                 stdin: "",
-                lang: args.entry?.language ?? args.language,
+                lang: resolvedLanguage,
                 sourceType: "starter-error",
             };
         }
@@ -807,7 +856,7 @@ function resolveCardToolSeed(args: {
             workspace,
             code: deriveCodeFromWorkspace(workspace),
             stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
-            lang: args.entry?.language ?? args.language,
+            lang: resolvedLanguage,
             sourceType: seedMode === "starter" ? "starter" : "empty",
         };
     }
@@ -821,7 +870,7 @@ function resolveCardToolSeed(args: {
         workspace: null,
         code: "",
         stdin: "",
-        lang: args.language,
+        lang: resolvedLanguage,
         sourceType: "pending",
     };
 }
@@ -831,10 +880,25 @@ function resolveEditorRuntimeSeed(args: {
     existing?: EditorRuntimeState | null;
     existingCard?: CardRuntimeState | null;
     existingExercise?: ExerciseRuntimeState | null;
-}) {
-    const starterWorkspace = resolveExerciseWorkspace({
+}): {
+    workspaceStatus: "pending" | "ready" | "error";
+    workspaceSeedMode: "starter" | "empty" | "restored";
+    workspaceOrigin?: WorkspaceOrigin;
+    userEdited?: boolean;
+    starterHash?: string;
+    workspace: WorkspaceStateV2 | null;
+    code: string;
+    stdin: string;
+    language: WorkspaceStateV2["language"];
+} {
+    const manifest = asManifestRecord(args.source.manifest);
+    const resolvedLanguage = resolveCourseLanguage({
         language: args.source.language,
-        manifest: args.source.manifest,
+        target: manifest ?? args.source.entry?.item ?? null,
+    });
+    const starterWorkspace = resolveExerciseWorkspace({
+        language: resolvedLanguage,
+        manifest,
         entry: args.source.entry,
     });
     const starterWorkspaceHash = workspaceHash(starterWorkspace);
@@ -842,7 +906,7 @@ function resolveEditorRuntimeSeed(args: {
         savedState: args.existing,
         savedWorkspace: args.existing?.workspace,
         starterWorkspace,
-        language: args.source.language,
+        language: resolvedLanguage,
     });
 
     if (
@@ -874,7 +938,7 @@ function resolveEditorRuntimeSeed(args: {
             stdin:
                 args.existing.stdin ??
                 (typeof args.existing.workspace?.stdin === "string" ? args.existing.workspace.stdin : ""),
-            language: args.existing.language ?? args.source.language,
+            language: args.existing.language ?? resolvedLanguage,
         };
     }
 
@@ -890,7 +954,7 @@ function resolveEditorRuntimeSeed(args: {
         savedState: legacyState,
         savedWorkspace: legacyWorkspace,
         starterWorkspace,
-        language: args.source.language,
+        language: resolvedLanguage,
     });
 
     if (
@@ -929,9 +993,13 @@ function resolveEditorRuntimeSeed(args: {
                     : args.existingCard?.toolStdin) ??
                 (typeof legacyWorkspace.stdin === "string" ? legacyWorkspace.stdin : ""),
             language:
-                (args.source.ownerKind === "exercise"
-                    ? args.existingExercise?.language ?? args.existingExercise?.lang
-                    : args.existingCard?.toolLang) ?? args.source.language,
+                resolveCourseLanguage({
+                    language:
+                        (args.source.ownerKind === "exercise"
+                            ? args.existingExercise?.language ?? args.existingExercise?.lang
+                            : args.existingCard?.toolLang) ?? resolvedLanguage,
+                    target: manifest ?? args.source.entry?.item ?? null,
+                }),
         };
     }
 
@@ -957,7 +1025,7 @@ function resolveEditorRuntimeSeed(args: {
             entryTargetSlug: args.source.entry?.targetSlug,
             starterFiles: args.source.entry?.starterFiles,
             starterCodeLength: typeof args.source.entry?.starterCode === "string" ? args.source.entry.starterCode.length : 0,
-            itemWorkspace: args.source.entry?.item?.workspace ?? args.source.manifest?.workspace ?? null,
+            itemWorkspace: args.source.entry?.item?.workspace ?? manifest?.workspace ?? null,
         });
         return {
             workspaceStatus: "error" as const,
@@ -965,7 +1033,7 @@ function resolveEditorRuntimeSeed(args: {
             workspace: null,
             code: "",
             stdin: "",
-            language: args.source.language,
+            language: resolvedLanguage,
         };
     }
 
@@ -978,7 +1046,7 @@ function resolveEditorRuntimeSeed(args: {
         workspace,
         code: deriveCodeFromWorkspace(workspace),
         stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
-        language: args.source.language,
+        language: resolvedLanguage,
     };
 }
 
@@ -1067,7 +1135,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                     cardId,
                     targetKind: "exercise",
                 });
-            const effectiveManifest = manifest ?? entry?.item;
+            const effectiveManifest = asManifestRecord(manifest ?? entry?.item);
+            const savedRecord = asSavedExerciseRecord(saved);
 
             const existingWorkspaceLooksEmpty = !workspaceHasUsableFile(existing?.workspace);
 
@@ -1091,20 +1160,20 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 language:
                     effectiveManifest?.language ??
                     effectiveManifest?.lang ??
-                    saved?.language ??
-                    saved?.lang ??
+                    savedRecord?.language ??
+                    savedRecord?.lang ??
                     entry?.language,
                 runtimeDefaults: entry?.runtimeDefaults ?? entry?.topicRuntimeDefaults ?? entry?.moduleRuntimeDefaults ?? null,
                 target: effectiveManifest ?? entry?.item ?? null,
             });
 
             const rawSavedWorkspace =
-                saved && isWorkspace(saved.workspace)
-                    ? saved.workspace
-                    : saved && isWorkspace(saved.codeWorkspace)
-                        ? saved.codeWorkspace
-                        : saved && isWorkspace(saved.ideWorkspace)
-                            ? saved.ideWorkspace
+                savedRecord && isWorkspace(savedRecord.workspace)
+                    ? savedRecord.workspace
+                    : savedRecord && isWorkspace(savedRecord.codeWorkspace)
+                        ? savedRecord.codeWorkspace
+                        : savedRecord && isWorkspace(savedRecord.ideWorkspace)
+                            ? savedRecord.ideWorkspace
                             : null;
 
             const starterWorkspace = resolveExerciseWorkspace({
@@ -1222,26 +1291,33 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
             }
 
             const stdin =
-                trustedSavedWorkspace && typeof saved?.stdin === "string"
-                    ? saved.stdin
-                    : trustedSavedWorkspace && typeof saved?.codeStdin === "string"
-                        ? saved.codeStdin
+                (() => {
+                    const manifestWorkspace = asRecord(effectiveManifest?.workspace);
+                    return (
+                trustedSavedWorkspace && typeof savedRecord?.stdin === "string"
+                    ? savedRecord.stdin
+                    : trustedSavedWorkspace && typeof savedRecord?.codeStdin === "string"
+                        ? savedRecord.codeStdin
                         : typeof workspace.stdin === "string"
                             ? workspace.stdin
-                            : typeof effectiveManifest?.workspace?.initialStdin === "string"
-                                ? effectiveManifest.workspace.initialStdin
+                            : typeof manifestWorkspace?.initialStdin === "string"
+                                ? manifestWorkspace.initialStdin
                                 : typeof effectiveManifest?.initialStdin === "string"
                                     ? effectiveManifest.initialStdin
                                     : typeof effectiveManifest?.stdin === "string"
                                         ? effectiveManifest.stdin
-                                        : "";
+                                        : ""
+                    );
+                })();
+
+            const recipeRecord = asManifestRecord(effectiveManifest?.recipe);
 
             const normalized = normalizeWorkspacePatch({workspace, stdin});
             const starterHash = workspaceHash(starterWorkspace);
             const savedUserEdited = Boolean(
-                saved?.userEdited === true ||
-                saved?.workspaceOrigin === "user" ||
-                saved?.workspaceOrigin === "saved",
+                savedRecord?.userEdited === true ||
+                savedRecord?.workspaceOrigin === "user" ||
+                savedRecord?.workspaceOrigin === "saved",
             );
             const workspaceOrigin: WorkspaceOrigin =
                 savedWorkspace
@@ -1258,7 +1334,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 topicId,
                 cardId,
                 manifestId: effectiveManifest?.id,
-                savedPatch: summarizeExercisePatch(saved),
+                savedPatch: summarizeExercisePatch(savedRecord),
                 resolvedWorkspace: summarizeExerciseWorkspace(workspace),
                 stdin,
             });
@@ -1271,45 +1347,47 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 topicId,
                 cardId,
                 exerciseId:
-                    typeof saved?.exerciseId === "string"
-                        ? saved.exerciseId
-                        : typeof saved?.stableExerciseId === "string"
-                            ? saved.stableExerciseId
+                    typeof savedRecord?.exerciseId === "string"
+                        ? savedRecord.exerciseId
+                        : typeof savedRecord?.stableExerciseId === "string"
+                            ? savedRecord.stableExerciseId
                             : getFinalExerciseIdFromKey(exerciseKey),
                 language,
                 workspace: normalized.workspace,
                 stdin,
-                runner: saved?.runner ?? {},
-                answer: saved?.answer ?? {
+                runner: savedRecord?.runner ?? {},
+                answer: savedRecord?.answer ?? {
                     revealed: false,
                     solutionCode:
-                        effectiveManifest?.recipe?.solutionCode ??
-                        effectiveManifest?.solutionCode ??
-                        undefined,
+                        (typeof recipeRecord?.solutionCode === "string"
+                            ? recipeRecord.solutionCode
+                            : typeof effectiveManifest?.solutionCode === "string"
+                                ? effectiveManifest.solutionCode
+                                : undefined),
                     solutionFiles:
-                        effectiveManifest?.recipe?.solutionFiles ??
-                        effectiveManifest?.solutionFiles ??
+                        asStringRecord(recipeRecord?.solutionFiles) ??
+                        asStringRecord(effectiveManifest?.solutionFiles) ??
                         undefined,
                 },
                 sketch: resolveSketchState({
-                    savedSketch: saved?.sketch ?? null,
-                    starterSketch: effectiveManifest?.starterSketch ?? null,
+                    savedSketch: isSavedSketchState(savedRecord?.sketch) ? savedRecord.sketch : null,
+                    starterSketch: isSavedSketchState(effectiveManifest?.starterSketch) ? effectiveManifest.starterSketch : null,
                 }),
-                status: saved?.status ?? "not_started",
+                status: savedRecord?.status ?? "not_started",
                 workspaceStatus: registryHasStarter && !workspaceNonEmpty ? "error" : "ready",
                 workspaceOrigin,
                 userEdited: savedUserEdited,
                 starterHash,
                 updatedAt:
-                    typeof saved?.updatedAt === "number" ? saved.updatedAt : Date.now(),
+                    typeof savedRecord?.updatedAt === "number" ? savedRecord.updatedAt : Date.now(),
 
                 code:
                     trustedSavedWorkspace &&
                     workspaceHasUsableFile(rawSavedWorkspace) &&
-                    typeof saved?.code === "string"
-                        ? saved.code
+                    typeof savedRecord?.code === "string"
+                        ? savedRecord.code
                         : normalized.code,
-                lang: trustedSavedWorkspace && typeof saved?.lang === "string" ? saved.lang : language,
+                lang: trustedSavedWorkspace && typeof savedRecord?.lang === "string" ? savedRecord.lang : language,
                 codeWorkspace: normalized.workspace,
                 ideWorkspace: normalized.workspace,
                 codeStdin: stdin,
@@ -1680,7 +1758,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 entryKind: entry?.targetKind,
                 entryStarterFilesCount: Array.isArray(entry?.starterFiles) ? entry.starterFiles.length : null,
                 entryStarterCodeLength: typeof entry?.starterCode === "string" ? entry.starterCode.length : null,
-                toolManifestId: toolManifest?.id,
+                toolManifestId: asManifestRecord(toolManifest)?.id,
             });
 
             const resolvedTool = resolveCardToolSeed({
@@ -2327,23 +2405,25 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         }
 
         if (target.kind === "exercise") {
-            const baseManifest = registryEntry?.toolManifest ?? registryEntry?.item ?? null;
+            const baseManifest = asManifestRecord(registryEntry?.toolManifest ?? registryEntry?.item ?? null);
+            const baseWorkspace = asRecord(baseManifest?.workspace);
+            const baseRecipe = asRecord(baseManifest?.recipe);
             const routeExerciseManifest = baseManifest
                 ? {
                     ...baseManifest,
                     starterCode:
                         registryEntry?.starterCode ??
                         baseManifest?.starterCode ??
-                        baseManifest?.workspace?.starterCode ??
-                        baseManifest?.recipe?.starterCode,
+                        (typeof baseWorkspace?.starterCode === "string" ? baseWorkspace.starterCode : undefined) ??
+                        (typeof baseRecipe?.starterCode === "string" ? baseRecipe.starterCode : undefined),
                     starterFiles:
                         registryEntry?.starterFiles ??
                         baseManifest?.starterFiles ??
-                        baseManifest?.workspace?.starterFiles ??
-                        baseManifest?.recipe?.starterFiles,
+                        baseWorkspace?.starterFiles ??
+                        baseRecipe?.starterFiles,
                     workspace:
                         registryEntry?.starterWorkspace ??
-                        baseManifest?.workspace ??
+                        baseManifest.workspace ??
                         null,
                 }
                 : baseManifest;

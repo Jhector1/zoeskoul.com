@@ -1,29 +1,42 @@
 "use client";
 
 import React from "react";
+import type { ReviewModule } from "@/lib/subjects/types";
 import SubjectFinishBanner from "../../components/finish/SubjectFinishBanner";
+import type { SubjectFinishState } from "../../types/subjectFinish.types";
+
+type ReviewTopicCompletionViewTopic = Pick<
+    ReviewModule["topics"][number],
+    "id" | "label" | "summary"
+> & {
+    outro?: {
+        title?: string;
+        body?: string;
+        bullets?: string[];
+    } | null;
+};
 
 type Props = {
     viewIsComplete: boolean;
-    viewTopic: any;
+    viewTopic: ReviewTopicCompletionViewTopic | null;
     onContinue?: () => void;
     continueLabel?: string;
     showSubjectFinish: boolean;
     subjectSlug: string;
-    subjectFinish: any;
+    subjectFinish: SubjectFinishState | null;
     onOpenCertificate: () => void;
 };
 
 export default function ReviewTopicCompletion({
-                                                  viewIsComplete,
-                                                  viewTopic,
-                                                  onContinue,
-                                                  continueLabel = "Continue",
-                                                  showSubjectFinish,
-                                                  subjectSlug,
-                                                  subjectFinish,
-                                                  onOpenCertificate,
-                                              }: Props) {
+    viewIsComplete,
+    viewTopic,
+    onContinue,
+    continueLabel = "Continue",
+    showSubjectFinish,
+    subjectSlug,
+    subjectFinish,
+    onOpenCertificate,
+}: Props) {
     const showContinue = viewIsComplete && Boolean(onContinue);
 
     return (

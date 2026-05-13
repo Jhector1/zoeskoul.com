@@ -93,12 +93,14 @@ export function syncTabDefaults(
     tab: DiagramTabKey,
     defaults: Box[],
 ): DiagramPositions {
+    let changed = false;
     const next = { ...prev };
     const valid = new Set(defaults.map((b) => diagramPosKey(tab, b.id)));
 
     for (const key of Object.keys(next)) {
         if (key.startsWith(`${tab}:`) && !valid.has(key)) {
             delete next[key];
+            changed = true;
         }
     }
 
@@ -106,10 +108,11 @@ export function syncTabDefaults(
         const key = diagramPosKey(tab, box.id);
         if (!next[key]) {
             next[key] = { x: box.x, y: box.y };
+            changed = true;
         }
     }
 
-    return next;
+    return changed ? next : prev;
 }
 
 export function buildTablesCanvasLayout(
@@ -157,4 +160,3 @@ export function buildTablesCanvasLayout(
         height: y + rowMaxH + pad,
     };
 }
-

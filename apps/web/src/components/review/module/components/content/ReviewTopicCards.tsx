@@ -4,7 +4,11 @@ import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import type { ReviewCard } from "@/lib/subjects/types";
-import type { SavedQuizState } from "@/lib/subjects/progressTypes";
+import type {
+  ReviewProgressState,
+  ReviewTopicProgress,
+  SavedQuizState,
+} from "@/lib/subjects/progressTypes";
 
 import CardRenderer from "@/components/review/module/CardRenderer";
 import FlowNavigator from "@/components/review/navigation/FlowNavigator";
@@ -21,6 +25,7 @@ import {
 } from "../../actions";
 
 import { getCardStateKey } from "../../runtime/exerciseKeys";
+import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
 
 const TOPIC_PANE_ANIM = {
   initial: { opacity: 0, y: 10 },
@@ -39,18 +44,18 @@ type Props = {
   activeCardIndex: number;
   navModes: { cards: "scroll" | "slideshow"; quiz: "scroll" | "slideshow" };
   reduceMotion: boolean;
-  tp: any;
+  tp: ReviewTopicProgress;
   progressHydrated: boolean;
   versionStr: string;
   prereqsForAllQuizzes: boolean;
   viewTid: string;
-  sketch: any;
-  setProgress: React.Dispatch<any>;
-  flushNow: (next: any) => void;
+  sketch: ReturnType<typeof useDebouncedSketchState>;
+  setProgress: React.Dispatch<React.SetStateAction<ReviewProgressState>>;
+  flushNow: (next: ReviewProgressState) => void;
   onRun?: () => void;
   onReveal?: () => void;
   onSubmit?: () => void;
-  scrollToNextActionable: (fromIndex: number, nextProgress: any) => void;
+  scrollToNextActionable: (fromIndex: number, nextProgress: ReviewProgressState) => void;
   setCardEl: (id: string) => (el: HTMLDivElement | null) => void;
 
   subjectSlug: string;
@@ -103,7 +108,7 @@ export default function ReviewTopicCards({
 
         sketch?.flushAll?.();
 
-        setProgress((prev: any) => {
+        setProgress((prev) => {
           const runtimeState = useReviewRuntimeStore.getState();
 
           reviewDebug("4_NAV_BEFORE_MERGE ReviewTopicCards.handleNavigate", {
@@ -167,13 +172,13 @@ export default function ReviewTopicCards({
             activeIndex={activeCardIndex}
             onActiveIndexChange={handleNavigate}
             reduceMotion={reduceMotion}
-            getKey={(card: any) => card.id}
+            getKey={(card) => card.id}
             getProgressLabel={(index, total) => `Item ${index + 1} of ${total}`}
             canGoPrev={activeCardIndex > 0}
             canGoNext={hasNextCard && activeCardCanAdvance}
             onPrev={() => handleNavigate(activeCardIndex - 1)}
             onNext={() => handleNavigate(activeCardIndex + 1)}
-            renderItem={(card: any, cardIndex: number) => {
+            renderItem={(card, cardIndex: number) => {
               const cardKey = getCardStateKey({
                 subjectSlug,
                 moduleSlug,
@@ -219,7 +224,7 @@ export default function ReviewTopicCards({
                       sketch?.saveSketchDebounced?.(cardKey, state, false);
                     }}
                     onMarkDone={() => {
-                      setProgress((prev: any) => {
+                      setProgress((prev) => {
                         const next = buildMarkCardDoneProgress(prev, viewTid, card);
                         queueMicrotask(() => {
                           flushNow(next);
@@ -232,8 +237,9 @@ export default function ReviewTopicCards({
                     onQuizPass={(quizId) => {
                       onSubmit?.();
 
-                      setProgress((prev: any) => {
-                        const next = buildQuizPassProgress(prev, viewTid, quizId, viewCards);                        queueMicrotask(() => {
+                      setProgress((prev) => {
+                        const next = buildQuizPassProgress(prev, viewTid, quizId, viewCards);
+                        queueMicrotask(() => {
                           flushNow(next);
                           scrollToNextActionable(cardIndex, next);
                         });
@@ -241,9 +247,9 @@ export default function ReviewTopicCards({
                       });
                     }}
                     onQuizStateChange={(quizCardId, state) => {
-                      if ((state as any)?.revealUsed) onReveal?.();
+                      if ("revealUsed" in state && state.revealUsed) onReveal?.();
 
-                      setProgress((prev: any) => {
+                      setProgress((prev) => {
                         const next = buildQuizStateProgress(prev, viewTid, quizCardId, state);
 
                         return mergeRuntimeIntoProgress(
@@ -256,7 +262,7 @@ export default function ReviewTopicCards({
                     onQuizReset={(quizCardId) => {
                       useReviewRuntimeStore.getState().clearRuntimeForCard(viewTid, quizCardId);
 
-                      setProgress((prev: any) => {
+                      setProgress((prev) => {
                         const next = buildQuizResetProgress(
                             prev,
                             viewTid,

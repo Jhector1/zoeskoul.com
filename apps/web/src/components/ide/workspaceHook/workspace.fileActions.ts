@@ -76,7 +76,7 @@ function ensureFolderPath(args: {
   baseParentId: NodeId | null;
   folderNames: string[];
 }) {
-  let nextNodes = [...args.nodes];
+  const nextNodes = [...args.nodes];
   let parentId = args.baseParentId;
   const expandedIds = new Set<NodeId>();
 
@@ -759,7 +759,7 @@ export function importExternalFiles(args: {
       (a, b) => normalizeImportPath(a.path).length - normalizeImportPath(b.path).length,
   );
 
-  let next = [...nodes];
+  const next = [...nodes];
 
   for (const imported of sorted) {
     const parts = normalizeImportPath(imported.path);

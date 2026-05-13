@@ -1,11 +1,63 @@
 import type { ReviewProgressState } from "@/lib/review/progressTypes";
 import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
-import type { ReviewRuntimeStore } from "./reviewRuntimeTypes";
+import type {
+  CardRuntimeState,
+  ExerciseRuntimeState,
+  ReviewRuntimeStore,
+} from "./reviewRuntimeTypes";
 import { reviewDebug, summarizePracticePatch, summarizeWorkspace } from "./reviewDebug";
 import { deriveEntryCode } from "./exerciseWorkspaceResolver";
 import { reviewSaveDebug } from "./reviewSaveDebug";
 
 type RuntimeLike = Pick<ReviewRuntimeStore, "exercises" | "cards">;
+type UnknownRecord = Record<string, unknown>;
+type RuntimeExerciseLike = ExerciseRuntimeState & {
+  stableExerciseId?: string;
+  exerciseStateId?: string;
+  slotId?: string;
+  key?: string;
+  id?: string;
+  submitted?: boolean;
+  result?: unknown;
+};
+type ExercisePatchRecord = UnknownRecord & {
+  code?: string;
+  source?: string;
+  codeLang?: string;
+  language?: string;
+  lang?: string;
+  stdin?: string;
+  codeStdin?: string;
+  userEdited?: boolean;
+  workspaceOrigin?: string;
+  starterHash?: string;
+  workspace?: unknown;
+  codeWorkspace?: unknown;
+  ideWorkspace?: unknown;
+  updatedAt?: number;
+  submitted?: unknown;
+  result?: unknown;
+  answer?: unknown;
+  runner?: unknown;
+};
+type QuizStateRecord = UnknownRecord & {
+  practiceItemPatch?: Record<string, UnknownRecord>;
+};
+type TopicProgressRecord = UnknownRecord & {
+  runtimeStateV2?: {
+    exercises?: Record<string, unknown>;
+    cards?: Record<string, unknown>;
+  };
+  quizState?: Record<string, QuizStateRecord>;
+  sketchState?: Record<string, unknown>;
+  toolState?: Record<string, UnknownRecord>;
+};
+
+function asRecord(value: unknown): UnknownRecord | null {
+  return typeof value === "object" && value !== null
+    ? (value as UnknownRecord)
+    : null;
+}
 
 function hasRuntimeState(runtime: RuntimeLike) {
   return (
@@ -18,8 +70,8 @@ function isWorkspace(value: unknown) {
   return (
     !!value &&
     typeof value === "object" &&
-    (value as any).version === 2 &&
-    Array.isArray((value as any).nodes)
+    (value as { version?: number }).version === 2 &&
+    Array.isArray((value as { nodes?: unknown }).nodes)
   );
 }
 
@@ -43,7 +95,10 @@ function lastKeySegment(value: unknown) {
   return parts[parts.length - 1] ?? raw;
 }
 
-function getExerciseAliasKeys(exerciseKey: string, estate: any) {
+function getExerciseAliasKeys(
+  exerciseKey: string,
+  estate: RuntimeExerciseLike,
+) {
   const keys = new Set<string>();
 
   addAlias(keys, exerciseKey);
@@ -64,7 +119,9 @@ function getExerciseAliasKeys(exerciseKey: string, estate: any) {
   return [...keys];
 }
 
-function getExercisePatchForQuizState(estate: any) {
+function getExercisePatchForQuizState(
+  estate: RuntimeExerciseLike,
+): ExercisePatchRecord {
   const workspace =
     isWorkspace(estate.workspace)
       ? estate.workspace
@@ -161,8 +218,8 @@ export function mergeRuntimeIntoProgress(
 ): ReviewProgressState {
   if (!hasRuntimeState(runtime)) return progress;
 
-  const nextTopics: Record<string, any> = {
-    ...(((progress as any).topics ?? {}) as Record<string, any>),
+  const nextTopics: Record<string, TopicProgressRecord> = {
+    ...((progress.topics ?? {}) as Record<string, TopicProgressRecord>),
   };
 
   let changed = false;
@@ -175,7 +232,7 @@ export function mergeRuntimeIntoProgress(
   };
 
   for (const [exerciseKey, rawEstate] of Object.entries(runtime.exercises ?? {})) {
-    const estate = rawEstate as any;
+    const estate = rawEstate as RuntimeExerciseLike;
 
     const topicId =
       typeof estate.topicId === "string" && estate.topicId
@@ -194,11 +251,11 @@ export function mergeRuntimeIntoProgress(
 
     const oldRuntime = topic.runtimeStateV2 ?? {};
     const oldRuntimeExercises = oldRuntime.exercises ?? {};
-    const oldExercise = oldRuntimeExercises[exerciseKey];
+    const oldExercise = asRecord(oldRuntimeExercises[exerciseKey]);
 
     const shouldWriteRuntime =
       !oldExercise ||
-      Number(estate.updatedAt ?? 0) >= Number(oldExercise.updatedAt ?? 0);
+      Number(estate.updatedAt ?? 0) >= Number(oldExercise?.updatedAt ?? 0);
 
     if (shouldWriteRuntime) {
       const nextRuntime = {
@@ -237,8 +294,8 @@ export function mergeRuntimeIntoProgress(
         exerciseKey,
         aliases,
         patchSummary: summarizePracticePatch(patch),
-        runtimeWorkspace: summarizeWorkspace((estate as any).workspace),
-        oldAliases: aliases.reduce((acc: any, alias) => {
+        runtimeWorkspace: summarizeWorkspace(estate.workspace),
+        oldAliases: aliases.reduce<Record<string, ReturnType<typeof summarizePracticePatch>>>((acc, alias) => {
           acc[alias] = summarizePracticePatch(oldPracticePatch[alias]);
           return acc;
         }, {}),
@@ -269,7 +326,7 @@ export function mergeRuntimeIntoProgress(
   }
 
   for (const [cardKey, rawCardState] of Object.entries(runtime.cards ?? {})) {
-    const cstate = rawCardState as any;
+    const cstate = rawCardState as CardRuntimeState;
 
     const topicId =
       typeof cstate.topicId === "string" && cstate.topicId
@@ -288,11 +345,11 @@ export function mergeRuntimeIntoProgress(
 
     const oldRuntime = topic.runtimeStateV2 ?? {};
     const oldRuntimeCards = oldRuntime.cards ?? {};
-    const oldCard = oldRuntimeCards[cardKey];
+    const oldCard = asRecord(oldRuntimeCards[cardKey]);
 
     const shouldWriteRuntime =
       !oldCard ||
-      Number(cstate.updatedAt ?? 0) >= Number(oldCard.updatedAt ?? 0);
+      Number(cstate.updatedAt ?? 0) >= Number(oldCard?.updatedAt ?? 0);
 
     if (shouldWriteRuntime) {
       const nextRuntime = {
@@ -336,7 +393,7 @@ export function mergeRuntimeIntoProgress(
       const legacyToolKey = `card:${cardId}`;
       const oldToolState = topic.toolState ?? {};
 
-      const buildToolEntry = (oldEntry: any) => ({
+      const buildToolEntry = (oldEntry: UnknownRecord | undefined) => ({
         ...oldEntry,
         lang: cstate.toolLang ?? oldEntry?.lang ?? "python",
         code: cstate.toolCode ?? oldEntry?.code ?? "",
@@ -361,19 +418,19 @@ export function mergeRuntimeIntoProgress(
 
   if (!changed) return progress;
   const next = {
-    ...(progress as any),
+    ...progress,
     topics: nextTopics,
   } as ReviewProgressState;
 
   reviewSaveDebug("mergeRuntimeIntoProgress", {
     changed,
-    activeTopicId: (progress as any)?.activeTopicId ?? null,
-    activeTopicKey: normalizeTopicProgressKey((progress as any)?.activeTopicId),
+    activeTopicId: progress.activeTopicId ?? null,
+    activeTopicKey: normalizeTopicProgressKey(progress.activeTopicId),
     runtimeExerciseKeys: Object.keys(runtime.exercises ?? {}),
     runtimeCardKeys: Object.keys(runtime.cards ?? {}),
     outputTopicKeys: Object.keys(next.topics ?? {}),
     topicSummary: Object.fromEntries(
-      Object.entries(next.topics ?? {}).map(([topicKey, topic]: any) => [
+      Object.entries(next.topics ?? {}).map(([topicKey, topic]) => [
         topicKey,
         {
           exercises: Object.keys(topic?.runtimeStateV2?.exercises ?? {}),
@@ -382,7 +439,7 @@ export function mergeRuntimeIntoProgress(
           tools: Object.keys(topic?.toolState ?? {}),
           quizCards: Object.keys(topic?.quizState ?? {}),
           practicePatchExerciseKeys: Object.values(topic?.quizState ?? {}).flatMap(
-            (quizState: any) => Object.keys(quizState?.practiceItemPatch ?? {}),
+            (quizState) => Object.keys(quizState?.practiceItemPatch ?? {}),
           ),
         },
       ]),

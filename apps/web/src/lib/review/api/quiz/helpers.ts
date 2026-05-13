@@ -26,19 +26,29 @@ function normalizePurpose(value: unknown): ReviewExercisePurpose {
     return value === "project" ? "project" : "quiz";
 }
 
-export function readPoolFromTopicMeta(meta: any): PoolItem[] {
-    const raw = meta?.pool;
+function asRecord(value: unknown): Record<string, unknown> | null {
+    return typeof value === "object" && value !== null
+        ? (value as Record<string, unknown>)
+        : null;
+}
+
+export function readPoolFromTopicMeta(meta: unknown): PoolItem[] {
+    const raw = asRecord(meta)?.pool;
     if (!Array.isArray(raw)) return [];
 
     return raw
-        .map((p: any) => ({
-            key: String(p?.key ?? "").trim(),
-            w: Math.max(0, Math.floor(Number(p?.w ?? 0))),
-            kind: p?.kind ? String(p.kind).trim() : undefined,
+        .map((value) => {
+            const item = asRecord(value);
+
+            return {
+                key: String(item?.key ?? "").trim(),
+                w: Math.max(0, Math.floor(Number(item?.w ?? 0))),
+                kind: item?.kind ? String(item.kind).trim() : undefined,
             // Legacy DB rows may be missing purpose; keep those quiz-safe and
             // rely on curriculum sync to refresh stale PracticeTopic.meta.pool.
-            purpose: p?.purpose ? String(p.purpose).trim() : "quiz",
-        }))
+                purpose: item?.purpose ? String(item.purpose).trim() : "quiz",
+            };
+        })
         .filter((p) => p.key && Number.isFinite(p.w) && p.w > 0);
 }
 

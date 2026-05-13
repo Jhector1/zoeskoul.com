@@ -1,3 +1,5 @@
+import type { FileNode, WorkspaceStateV2 } from "@/components/ide/types";
+
 export function isExerciseDebugEnabled() {
   if (typeof window === "undefined") return false;
 
@@ -18,23 +20,24 @@ export function isWorkspaceLike(value: unknown) {
   return (
     !!value &&
     typeof value === "object" &&
-    (value as any).version === 2 &&
-    Array.isArray((value as any).nodes)
+    (value as WorkspaceStateV2).version === 2 &&
+    Array.isArray((value as WorkspaceStateV2).nodes)
   );
 }
 
-export function getExerciseWorkspaceCode(workspace: any) {
+export function getExerciseWorkspaceCode(workspace: unknown) {
   if (!isWorkspaceLike(workspace)) return null;
+  const safeWorkspace = workspace as WorkspaceStateV2;
 
-  const entryId = workspace.entryFileId || workspace.activeFileId;
-  const file = workspace.nodes.find(
-    (node: any) => node?.kind === "file" && node.id === entryId,
+  const entryId = safeWorkspace.entryFileId || safeWorkspace.activeFileId;
+  const file = safeWorkspace.nodes.find(
+    (node) => node.kind === "file" && node.id === entryId,
   );
 
   return file?.kind === "file" ? String(file.content ?? "") : null;
 }
 
-export function summarizeExerciseWorkspace(workspace: any) {
+export function summarizeExerciseWorkspace(workspace: unknown) {
   if (!isWorkspaceLike(workspace)) {
     return {
       hasWorkspace: false,
@@ -46,10 +49,11 @@ export function summarizeExerciseWorkspace(workspace: any) {
       files: [],
     };
   }
+  const safeWorkspace = workspace as WorkspaceStateV2;
 
-  const files = workspace.nodes
-    .filter((node: any) => node?.kind === "file")
-    .map((node: any) => ({
+  const files = safeWorkspace.nodes
+    .filter((node): node is FileNode => node.kind === "file")
+    .map((node) => ({
       id: node.id,
       name: node.name,
       contentPreview: String(node.content ?? "").slice(0, 120),
@@ -58,17 +62,17 @@ export function summarizeExerciseWorkspace(workspace: any) {
   return {
     hasWorkspace: true,
     code: getExerciseWorkspaceCode(workspace),
-    stdin: workspace.stdin ?? "",
-    language: workspace.language ?? "",
-    entryFileId: workspace.entryFileId ?? "",
-    activeFileId: workspace.activeFileId ?? "",
+    stdin: safeWorkspace.stdin ?? "",
+    language: safeWorkspace.language ?? "",
+    entryFileId: safeWorkspace.entryFileId ?? "",
+    activeFileId: safeWorkspace.activeFileId ?? "",
     fileCount: files.length,
     files,
   };
 }
 
-export function summarizeExercisePatch(patch: any) {
-  if (!patch) {
+export function summarizeExercisePatch(patch: unknown) {
+  if (!patch || typeof patch !== "object") {
     return {
       exists: false,
       code: null,
@@ -78,34 +82,38 @@ export function summarizeExercisePatch(patch: any) {
     };
   }
 
+  const patchRecord = patch as Record<string, unknown>;
   const workspace =
-    patch.workspace ?? patch.codeWorkspace ?? patch.ideWorkspace ?? null;
+    patchRecord.workspace ?? patchRecord.codeWorkspace ?? patchRecord.ideWorkspace ?? null;
 
   return {
     exists: true,
-    code: typeof patch.code === "string" ? patch.code : null,
-    source: typeof patch.source === "string" ? patch.source : null,
+    code: typeof patchRecord.code === "string" ? patchRecord.code : null,
+    source: typeof patchRecord.source === "string" ? patchRecord.source : null,
     codeStdin:
-      typeof patch.codeStdin === "string"
-        ? patch.codeStdin
-        : typeof patch.stdin === "string"
-          ? patch.stdin
+      typeof patchRecord.codeStdin === "string"
+        ? patchRecord.codeStdin
+        : typeof patchRecord.stdin === "string"
+          ? patchRecord.stdin
           : "",
     codeLang:
-      typeof patch.codeLang === "string"
-        ? patch.codeLang
-        : typeof patch.lang === "string"
-          ? patch.lang
-          : typeof patch.language === "string"
-            ? patch.language
+      typeof patchRecord.codeLang === "string"
+        ? patchRecord.codeLang
+        : typeof patchRecord.lang === "string"
+          ? patchRecord.lang
+          : typeof patchRecord.language === "string"
+            ? patchRecord.language
             : "",
     hasWorkspace: isWorkspaceLike(workspace),
     workspaceCode: getExerciseWorkspaceCode(workspace),
-    keys: Object.keys(patch),
+    keys: Object.keys(patchRecord),
   };
 }
 
-export function exerciseDebug(label: string, payload?: Record<string, any>) {
+export function exerciseDebug(
+  label: string,
+  payload?: Record<string, unknown>,
+) {
   if (!isExerciseDebugEnabled()) return;
 
   try {

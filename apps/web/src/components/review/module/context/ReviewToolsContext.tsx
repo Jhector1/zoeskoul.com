@@ -14,6 +14,10 @@ import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
+import type {
+  UnknownRecord,
+  WorkspaceOrigin,
+} from "../runtime/reviewRuntimeTypes";
 import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
 import { useDebouncedSketchState } from "../hooks/useDebouncedSketchState";
 
@@ -25,6 +29,30 @@ type SqlTableSnapshot = {
 };
 
 type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
+type CodeInputPatch = UnknownRecord & {
+  userEdited?: boolean;
+  workspaceOrigin?: WorkspaceOrigin;
+  updateOrigin?: string;
+  dismissFeedbackOnEdit?: boolean;
+  feedbackDismissed?: boolean;
+  preferSnapshot?: boolean;
+  exerciseKey?: string;
+  workspace?: WorkspaceStateV2 | null;
+  codeWorkspace?: WorkspaceStateV2 | null;
+  ideWorkspace?: WorkspaceStateV2 | null;
+  codeLang?: WorkspaceLanguage;
+  language?: WorkspaceLanguage;
+  code?: string;
+  codeStdin?: string;
+  stdin?: string;
+  ideConfig?: LearningIdeConfig | null;
+  codeSqlDialect?: SqlDialect;
+  sqlDialect?: SqlDialect;
+  sqlDatasetId?: string;
+  sqlSchemaSql?: string;
+  sqlSeedSql?: string;
+  sqlInitialTableSnapshots?: SqlTableSnapshots;
+};
 
 export type RegisterArgs = {
   lang: WorkspaceLanguage;
@@ -42,7 +70,7 @@ export type RegisterArgs = {
   sqlSeedSql?: string;
   sqlInitialTableSnapshots?: SqlTableSnapshots;
 
-  onPatch: (patch: any) => void;
+  onPatch: (patch: CodeInputPatch) => void;
 };
 
 export type RunFeedbackEntry = {
@@ -77,10 +105,10 @@ export type ReviewToolsValue = {
   setRunFeedback: (id: string, feedback: CodeFeedback | null) => void;
   clearRunFeedback: (id: string) => void;
 
-  syncCodeInputSnapshot: (id: string, patch: any) => void;
-  patchCodeInput: (id: string, patch: any) => void;
+  syncCodeInputSnapshot: (id: string, patch: CodeInputPatch) => void;
+  patchCodeInput: (id: string, patch: CodeInputPatch) => void;
 
-  sketch?: any;
+  sketch?: ReturnType<typeof useDebouncedSketchState>;
 };
 
 const Ctx = createContext<ReviewToolsValue | null>(null);
@@ -108,7 +136,7 @@ function firstNonBlank(...values: Array<string | null | undefined>) {
   }
   return undefined;
 }
-function isRealUserWorkspaceEdit(patch: any) {
+function isRealUserWorkspaceEdit(patch: CodeInputPatch) {
     return (
         patch?.userEdited === true ||
         patch?.workspaceOrigin === "user" ||
@@ -241,13 +269,16 @@ export function ReviewToolsProvider({
   }, []);
 
   useEffect(() => {
+    const timers = unbindTimersRef.current;
     return () => {
-      for (const timer of unbindTimersRef.current.values()) {
+      for (const timer of timers.values()) {
         window.clearTimeout(timer);
       }
-      unbindTimersRef.current.clear();
+      timers.clear();
     };
   }, []);
+
+  const [boundId, setBoundId] = useState<string | null>(null);
 
   const clearRunFeedback = useCallback((id: string) => {
     if (!id) return;
@@ -306,7 +337,7 @@ export function ReviewToolsProvider({
                         workspaceOrigin: "user",
                     }
                     : {}),
-            } as any);
+            });
         },
         [getRegistryEntryForToolKey, patchExercise],
     );
@@ -347,7 +378,7 @@ export function ReviewToolsProvider({
   );
 
   const syncCodeInputSnapshot = useCallback(
-    (id: string, patch: any) => {
+    (id: string, patch: CodeInputPatch) => {
       if (!id) return;
 
       const cur = registryRef.current.get(id);
@@ -411,7 +442,7 @@ export function ReviewToolsProvider({
                     dismissFeedbackOnEdit: true,
                     userEdited: true,
                     updateOrigin: "user",
-                    workspaceOrigin: "user",
+                    workspaceOrigin: "user" as const,
                 }
                 : {};
 
@@ -427,17 +458,17 @@ export function ReviewToolsProvider({
             ...(userEdited
                 ? {
                     userEdited: true,
-                    workspaceOrigin: "user",
+                    workspaceOrigin: "user" as const,
                 }
                 : {}),
             ...feedbackDismissPatch,
-        } as any);
+        });
     },
     [patchExercise],
   );
 
     const patchCodeInput = useCallback(
-        (id: string, patch: any) => {
+        (id: string, patch: CodeInputPatch) => {
             if (!id) return;
 
             clearRunFeedback(id);
@@ -753,6 +784,10 @@ export function ReviewToolsProvider({
     lastResetRef.current = resetKey;
   }, [resetKey, externalBoundId, bindExerciseTool, storeUnbindExerciseTool, onUnbindFromToolsPanel]);
 
+  useEffect(() => {
+    setBoundId(getInputIdForToolKey((externalBoundId ?? storeBoundId) ?? null) ?? null);
+  }, [externalBoundId, storeBoundId, registryTick, getInputIdForToolKey]);
+
   const value = useMemo<ReviewToolsValue>(
     () => ({
       enabled: Boolean(enabled),
@@ -765,7 +800,7 @@ export function ReviewToolsProvider({
 
       setCodeInputMeta,
 
-      boundId: getInputIdForToolKey((externalBoundId ?? storeBoundId) ?? null) ?? null,
+      boundId,
       isBound,
       ensureVisible: enabled ? ensureVisible : undefined,
 
@@ -785,9 +820,7 @@ export function ReviewToolsProvider({
       requestBindNext,
       unbindCodeInput,
       setCodeInputMeta,
-      externalBoundId,
-      storeBoundId,
-      getInputIdForToolKey,
+      boundId,
       isBound,
       ensureVisible,
       getRunFeedbackEntry,

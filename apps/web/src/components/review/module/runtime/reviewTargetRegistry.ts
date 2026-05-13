@@ -1,9 +1,37 @@
 import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
+import type { UnknownRecord } from "./reviewRuntimeTypes";
 import { getCardStateKey, getExerciseStateKey } from "./exerciseKeys";
 import { resolveCourseLanguage, resolveCourseFileSeed, resolveRuntimeDefaultDataset } from "./courseProfiles";
 import {tag} from "@/lib/practice/generator/shared/i18n";
 
 export type ReviewTargetKind = "sketch" | "exercise" | "quiz" | "card" | "project" | "text" | "video";
+export type LooseManifestRecord = UnknownRecord & {
+  id?: string;
+  language?: string;
+  lang?: string;
+  workspace?: unknown;
+  codeWorkspace?: unknown;
+  ideWorkspace?: unknown;
+  stdin?: string;
+  codeStdin?: string;
+  initialStdin?: string;
+  userEdited?: boolean;
+  workspaceOrigin?: string;
+  exerciseId?: string;
+  stableExerciseId?: string;
+  runner?: unknown;
+  answer?: unknown;
+  recipe?: UnknownRecord | null;
+  solutionCode?: string;
+  solutionFiles?: unknown;
+  sketch?: unknown;
+  starterSketch?: unknown;
+  status?: string;
+  updatedAt?: number;
+  code?: string;
+  starterCode?: string;
+  starterFiles?: unknown;
+};
 
 export type ReviewTargetEntry = {
   targetKey: string;
@@ -22,19 +50,19 @@ export type ReviewTargetEntry = {
   exerciseId?: string;
   exerciseStateKey?: string;
   language?: string;
-  starterFiles?: any;
-  solutionFiles?: any;
+  starterFiles?: unknown;
+  solutionFiles?: unknown;
   starterCode?: string;
   solutionCode?: string;
-  starterWorkspace?: any;
-  runtimeDefaults?: any;
-  topicRuntimeDefaults?: any;
-  moduleRuntimeDefaults?: any;
+  starterWorkspace?: unknown;
+  runtimeDefaults?: UnknownRecord | null;
+  topicRuntimeDefaults?: UnknownRecord | null;
+  moduleRuntimeDefaults?: UnknownRecord | null;
   sqlDatasetId?: string;
   sqlDatasetResolutionSource?: string;
   sqlDatasetResolutionError?: string;
-  toolManifest?: any;
-  item: any;
+  toolManifest?: LooseManifestRecord | null;
+  item: LooseManifestRecord | null;
 };
 
 export type ReviewTargetRegistry = {
@@ -67,10 +95,17 @@ function lastIdSegment(value: unknown) {
 function getTopicRouteSlug(topicId: string) {
   return cleanSegment(topicId, "topic");
 }
-function pickStarterCodeFromMessageBase(item: any) {
+function asRecord(value: unknown): LooseManifestRecord | null {
+  return typeof value === "object" && value !== null
+    ? (value as LooseManifestRecord)
+    : null;
+}
+
+function pickStarterCodeFromMessageBase(item: unknown) {
+  const itemRecord = asRecord(item);
   const messageBase =
-      typeof item?.messageBase === "string" && item.messageBase.trim()
-          ? item.messageBase.trim()
+      typeof itemRecord?.messageBase === "string" && itemRecord.messageBase.trim()
+          ? itemRecord.messageBase.trim()
           : "";
 
   if (!messageBase) return undefined;
@@ -104,42 +139,55 @@ function getCardTargetSlug(card: ReviewCard) {
 
 
 
-function mergeManifestParts<T extends Record<string, any>>(primary: T | null | undefined, secondary: T | null | undefined): T | any {
+function mergeManifestParts(
+  primary: UnknownRecord | null | undefined,
+  secondary: UnknownRecord | null | undefined,
+): LooseManifestRecord | null {
   if (!primary && !secondary) return null;
-  if (!primary) return secondary;
-  if (!secondary) return primary;
+  if (!primary) return asRecord(secondary);
+  if (!secondary) return asRecord(primary);
 
   return {
     ...secondary,
     ...primary,
     runtime: {
-      ...(secondary as any).runtime,
-      ...(primary as any).runtime,
+      ...(asRecord(secondary.runtime) ?? {}),
+      ...(asRecord(primary.runtime) ?? {}),
     },
     workspace: {
-      ...(secondary as any).workspace,
-      ...(primary as any).workspace,
+      ...(asRecord(secondary.workspace) ?? {}),
+      ...(asRecord(primary.workspace) ?? {}),
     },
     recipe: {
-      ...(secondary as any).recipe,
-      ...(primary as any).recipe,
+      ...(asRecord(secondary.recipe) ?? {}),
+      ...(asRecord(primary.recipe) ?? {}),
     },
-    starterFiles: (primary as any).starterFiles ?? (secondary as any).starterFiles,
-    solutionFiles: (primary as any).solutionFiles ?? (secondary as any).solutionFiles,
-    starterCode: (primary as any).starterCode ?? (secondary as any).starterCode,
-    solutionCode: (primary as any).solutionCode ?? (secondary as any).solutionCode,
+    starterFiles: primary.starterFiles ?? secondary.starterFiles,
+    solutionFiles: primary.solutionFiles ?? secondary.solutionFiles,
+    starterCode:
+      typeof primary.starterCode === "string"
+        ? primary.starterCode
+        : typeof secondary.starterCode === "string"
+          ? secondary.starterCode
+          : undefined,
+    solutionCode:
+      typeof primary.solutionCode === "string"
+        ? primary.solutionCode
+        : typeof secondary.solutionCode === "string"
+          ? secondary.solutionCode
+          : undefined,
   };
 }
 
-function pickStarterFiles(item: any, subjectSlug: string, language?: string) {
+function pickStarterFiles(item: unknown, subjectSlug: string, language?: string) {
   return resolveCourseFileSeed({ subjectSlug, language, target: item }).starterFiles;
 }
 
-function pickSolutionFiles(item: any, subjectSlug: string, language?: string) {
+function pickSolutionFiles(item: unknown, subjectSlug: string, language?: string) {
   return resolveCourseFileSeed({ subjectSlug, language, target: item }).solutionFiles;
 }
 
-function pickStarterCode(item: any, subjectSlug: string, language?: string) {
+function pickStarterCode(item: unknown, subjectSlug: string, language?: string) {
   /**
    * Only explicit starter sources may seed the editor.
    *
@@ -169,7 +217,7 @@ function pickStarterCode(item: any, subjectSlug: string, language?: string) {
   return undefined;
 }
 
-function pickSolutionCode(item: any, subjectSlug: string, language?: string) {
+function pickSolutionCode(item: unknown, subjectSlug: string, language?: string) {
   return resolveCourseFileSeed({ subjectSlug, language, target: item }).solutionCode;
 }
 
@@ -192,7 +240,10 @@ function defaultLanguageForSubject(subjectSlug: string) {
   }
 }
 
-function inferRuntimeDefaultLanguage(runtimeDefaults: any, subjectSlug: string) {
+function inferRuntimeDefaultLanguage(
+  runtimeDefaults: UnknownRecord | null | undefined,
+  subjectSlug: string,
+) {
   const explicit = String(runtimeDefaults?.language ?? runtimeDefaults?.lang ?? "").trim();
   if (explicit) return explicit;
 
@@ -203,7 +254,12 @@ function inferRuntimeDefaultLanguage(runtimeDefaults: any, subjectSlug: string) 
   return defaultLanguageForSubject(subjectSlug);
 }
 
-function pickLanguage(item: any, fallbackLanguage: string, subjectSlug: string, runtimeDefaults: any) {
+function pickLanguage(
+  item: unknown,
+  fallbackLanguage: string,
+  subjectSlug: string,
+  runtimeDefaults: UnknownRecord | null | undefined,
+) {
   return resolveCourseLanguage({
     subjectSlug,
     language: fallbackLanguage,
@@ -214,9 +270,9 @@ function pickLanguage(item: any, fallbackLanguage: string, subjectSlug: string, 
 
 function buildRuntimeEntryContext(args: {
   subjectSlug: string;
-  item: any;
-  topicRuntimeDefaults: any;
-  moduleRuntimeDefaults: any;
+  item: unknown;
+  topicRuntimeDefaults: UnknownRecord | null;
+  moduleRuntimeDefaults: UnknownRecord | null;
   fallbackLanguage: string;
 }) {
   const language = pickLanguage(
@@ -250,29 +306,30 @@ function buildToolManifest(card: ReviewCard) {
   if (card.type === "sketch") {
     return {
       ...(card.spec ?? {}),
-      runtime: (card.spec as any)?.runtime ?? null,
-      workspace: (card.spec as any)?.workspace ?? null,
-    };
+      runtime: asRecord(card.spec)?.runtime ?? null,
+      workspace: asRecord(card.spec)?.workspace ?? null,
+    } as LooseManifestRecord;
   }
 
   if (card.type === "project" || card.type === "quiz") {
     return {
       ...(card.spec ?? {}),
-      runtime: (card.spec as any)?.runtime ?? null,
-      workspace: (card.spec as any)?.workspace ?? null,
-    };
+      runtime: asRecord(card.spec)?.runtime ?? null,
+      workspace: asRecord(card.spec)?.workspace ?? null,
+    } as LooseManifestRecord;
   }
 
+  const cardSpec = asRecord("spec" in card ? card.spec : null);
   return {
-    ...(card as any)?.spec,
-    workspace: (card as any)?.spec?.workspace ?? null,
-  };
+    ...(cardSpec ?? {}),
+    workspace: cardSpec?.workspace ?? null,
+  } as LooseManifestRecord;
 }
 
 function getProjectExerciseEntries(card: Extract<ReviewCard, { type: "project" }>) {
   const steps = Array.isArray(card.spec?.steps) ? card.spec.steps : [];
   return steps
-    .map((step: any) => {
+    .map((step) => {
       const exerciseId =
         typeof step?.exerciseKey === "string" && step.exerciseKey.trim()
           ? step.exerciseKey.trim()
@@ -311,13 +368,14 @@ export function buildReviewTargetRegistry(args: {
     for (const topic of topics) {
       const topicId = topic.id;
       const topicSlug = getTopicRouteSlug(topicId);
-      const rawManifest = (topic.meta as any)?.rawManifest ?? null;
+      const topicMeta = asRecord(topic.meta);
+      const rawManifest = asRecord(topicMeta?.rawManifest);
       const moduleRuntimeDefaults =
-        (mod as any)?.runtimeDefaults ??
-        (mod as any)?.meta?.runtimeDefaults ??
+        mod.runtimeDefaults ??
+        asRecord(asRecord((mod as ReviewModule & { meta?: UnknownRecord | null }).meta)?.runtimeDefaults) ??
         null;
       const topicRuntimeDefaults =
-        (topic as any)?.meta?.runtimeDefaults ??
+        asRecord(asRecord(topic.meta)?.runtimeDefaults) ??
         moduleRuntimeDefaults ??
         null;
       const topicFallbackLanguage = inferRuntimeDefaultLanguage(
@@ -329,9 +387,10 @@ export function buildReviewTargetRegistry(args: {
       const cards = Array.isArray(topic.cards) ? topic.cards : [];
 
       for (const card of cards) {
+        const cardRecord = card as ReviewCard & { spec?: unknown };
         const rawSketch =
           card.type === "sketch"
-            ? rawSketches.find((sketch: any) => sketch?.id === lastIdSegment((card as any).sketchId))
+            ? rawSketches.find((sketch) => asRecord(sketch)?.id === lastIdSegment(card.sketchId))
             : null;
         const cardKey = getCardStateKey({
           subjectSlug,
@@ -348,7 +407,7 @@ export function buildReviewTargetRegistry(args: {
           targetKind: cardTargetKind,
           targetSlug: cardTargetSlug,
         });
-        const mergedCardManifest = mergeManifestParts(rawSketch, card as any);
+        const mergedCardManifest = mergeManifestParts(asRecord(rawSketch), asRecord(cardRecord.spec));
         const cardRuntimeContext = buildRuntimeEntryContext({
           subjectSlug,
           item: mergedCardManifest,
@@ -381,7 +440,7 @@ export function buildReviewTargetRegistry(args: {
           sqlDatasetId: cardRuntimeContext.datasetResolution.datasetId,
           sqlDatasetResolutionSource: cardRuntimeContext.datasetResolution.source,
           sqlDatasetResolutionError: cardRuntimeContext.datasetResolution.error,
-          starterWorkspace: mergedCardManifest?.workspace ?? (card.spec as any)?.workspace ?? null,
+          starterWorkspace: asRecord(mergedCardManifest?.workspace) ?? asRecord(cardRecord.spec)?.workspace ?? null,
           toolManifest: mergedCardManifest ?? buildToolManifest(card),
           item: mergedCardManifest,
         };
@@ -394,8 +453,8 @@ export function buildReviewTargetRegistry(args: {
 
         for (const exercise of getProjectExerciseEntries(card)) {
           const rawExercise =
-            rawExercises.find((item: any) => item?.id === exercise.exerciseId) ??
-            rawExercises.find((item: any) => item?.id === exercise.step?.id) ??
+            rawExercises.find((item) => asRecord(item)?.id === exercise.exerciseId) ??
+            rawExercises.find((item) => asRecord(item)?.id === exercise.step?.id) ??
             null;
           const exerciseStateKey = getExerciseStateKey(
             {
@@ -413,7 +472,10 @@ export function buildReviewTargetRegistry(args: {
             targetKind: "exercise",
             targetSlug: exercise.routeSlug,
           });
-          const mergedExerciseManifest = mergeManifestParts(rawExercise, exercise.step as any);
+          const mergedExerciseManifest = mergeManifestParts(
+            asRecord(rawExercise),
+            asRecord(exercise.step),
+          );
           const exerciseRuntimeContext = buildRuntimeEntryContext({
             subjectSlug,
             item: mergedExerciseManifest,
@@ -448,7 +510,7 @@ export function buildReviewTargetRegistry(args: {
             sqlDatasetId: exerciseRuntimeContext.datasetResolution.datasetId,
             sqlDatasetResolutionSource: exerciseRuntimeContext.datasetResolution.source,
             sqlDatasetResolutionError: exerciseRuntimeContext.datasetResolution.error,
-            starterWorkspace: mergedExerciseManifest?.workspace ?? null,
+            starterWorkspace: asRecord(mergedExerciseManifest?.workspace) ?? null,
             toolManifest: mergedExerciseManifest,
             item: mergedExerciseManifest,
           };

@@ -1,4 +1,9 @@
-export function reviewSaveDebug(label: string, data: Record<string, any> = {}) {
+import type { FileNode, WorkspaceStateV2 } from "@/components/ide/types";
+
+export function reviewSaveDebug(
+  label: string,
+  data: Record<string, unknown> = {},
+) {
   try {
     if (typeof window !== "undefined") {
       const enabled =
@@ -19,24 +24,29 @@ export function reviewSaveDebug(label: string, data: Record<string, any> = {}) {
   });
 }
 
-export function summarizeWorkspaceForSave(workspace: any) {
-  const nodes = Array.isArray(workspace?.nodes) ? workspace.nodes : [];
-  const files = nodes.filter((node: any) => node?.kind === "file");
+export function summarizeWorkspaceForSave(workspace: unknown) {
+  const workspaceLike =
+    typeof workspace === "object" && workspace !== null
+      ? (workspace as Partial<WorkspaceStateV2>)
+      : null;
+  const safeWorkspace = workspaceLike as Partial<WorkspaceStateV2> | null;
+  const nodes = Array.isArray(safeWorkspace?.nodes) ? safeWorkspace.nodes : [];
+  const files = nodes.filter((node): node is FileNode => node.kind === "file");
 
   return {
-    version: workspace?.version,
-    language: workspace?.language,
-    stdinLength: String(workspace?.stdin ?? "").length,
+    version: safeWorkspace?.version,
+    language: safeWorkspace?.language,
+    stdinLength: String(safeWorkspace?.stdin ?? "").length,
     fileCount: files.length,
-    activeFileId: workspace?.activeFileId,
-    entryFileId: workspace?.entryFileId,
-    openTabs: Array.isArray(workspace?.openTabs) ? workspace.openTabs : [],
-    files: files.map((file: any) => ({
-      id: file?.id,
-      name: file?.name,
-      parentId: file?.parentId,
-      contentLength: String(file?.content ?? "").length,
-      contentPreview: String(file?.content ?? "").slice(0, 120),
+    activeFileId: safeWorkspace?.activeFileId,
+    entryFileId: safeWorkspace?.entryFileId,
+    openTabs: Array.isArray(safeWorkspace?.openTabs) ? safeWorkspace.openTabs : [],
+    files: files.map((file) => ({
+      id: file.id,
+      name: file.name,
+      parentId: file.parentId,
+      contentLength: String(file.content ?? "").length,
+      contentPreview: String(file.content ?? "").slice(0, 120),
     })),
   };
 }

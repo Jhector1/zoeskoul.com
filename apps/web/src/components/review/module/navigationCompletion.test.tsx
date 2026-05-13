@@ -3,6 +3,10 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
 import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
+import type {
+    ReviewProgressState,
+    ReviewTopicProgress,
+} from "@/lib/subjects/progressTypes";
 
 import {
     buildMarkCardDoneProgress,
@@ -22,53 +26,94 @@ import {
 
 import ReviewTopicCompletion from "./components/content/ReviewTopicCompletion";
 
-type CardOverrides = Partial<ReviewCard> & { id: string };
+type CardOverrides =
+    | (Partial<Extract<ReviewCard, { type: "text" }>> & {
+        id: string;
+        type?: "text";
+    })
+    | (Partial<Extract<ReviewCard, { type: "sketch" }>> & {
+        id: string;
+        type: "sketch";
+    })
+    | (Partial<Extract<ReviewCard, { type: "quiz" }>> & {
+        id: string;
+        type: "quiz";
+    })
+    | (Partial<Extract<ReviewCard, { type: "project" }>> & {
+        id: string;
+        type: "project";
+    })
+    | (Partial<Extract<ReviewCard, { type: "video" }>> & {
+        id: string;
+        type: "video";
+    });
 
 function card(overrides: CardOverrides): ReviewCard {
-    const type = overrides.type ?? "text";
-
-    if (type === "text") {
-        return {
-            type: "text",
-            title: overrides.title ?? overrides.id,
-            markdown: "",
+    if (overrides.type === "sketch") {
+        const next: Extract<ReviewCard, { type: "sketch" }> = {
             ...overrides,
-        } as unknown as ReviewCard;
-    }
-
-    if (type === "sketch") {
-        return {
             type: "sketch",
+            id: overrides.id,
             title: overrides.title ?? overrides.id,
-            sketchId: overrides.id,
-            ...overrides,
-        } as unknown as ReviewCard;
+            sketchId: overrides.sketchId ?? overrides.id,
+        };
+
+        return next;
     }
 
-    if (type === "quiz") {
-        return {
+    if (overrides.type === "quiz") {
+        const next: Extract<ReviewCard, { type: "quiz" }> = {
+            ...overrides,
             type: "quiz",
+            id: overrides.id,
             title: overrides.title ?? overrides.id,
-            spec: {},
-            ...overrides,
-        } as unknown as ReviewCard;
+            spec: overrides.spec ?? {
+                subject: "python-v2",
+                moduleSlug: "module-1",
+            },
+        };
+
+        return next;
     }
 
-    if (type === "project") {
-        return {
+    if (overrides.type === "project") {
+        const next: Extract<ReviewCard, { type: "project" }> = {
+            ...overrides,
             type: "project",
+            id: overrides.id,
             title: overrides.title ?? overrides.id,
-            spec: {},
-            ...overrides,
-        } as unknown as ReviewCard;
+            spec: overrides.spec ?? {
+                mode: "project",
+                subject: "python-v2",
+                moduleSlug: "module-1",
+                steps: [],
+            },
+        };
+
+        return next;
     }
 
-    return {
-        type: "video",
-        title: overrides.title ?? overrides.id,
-        url: "",
+    if (overrides.type === "video") {
+        const next: Extract<ReviewCard, { type: "video" }> = {
+            ...overrides,
+            type: "video",
+            id: overrides.id,
+            title: overrides.title ?? overrides.id,
+            url: overrides.url ?? "",
+        };
+
+        return next;
+    }
+
+    const next: Extract<ReviewCard, { type: "text" }> = {
         ...overrides,
-    } as unknown as ReviewCard;
+        type: "text",
+        id: overrides.id,
+        title: overrides.title ?? overrides.id,
+        markdown: overrides.markdown ?? "",
+    };
+
+    return next;
 }
 
 function topic(
@@ -82,10 +127,13 @@ function topic(
         summary: "",
         cards,
         ...overrides,
-    } as unknown as ReviewModule["topics"][number];
+    };
 }
 
-function progressTopic(progress: any, topicId: string) {
+function progressTopic(
+    progress: ReviewProgressState,
+    topicId: string,
+): ReviewTopicProgress {
     return progress?.topics?.[topicId] ?? {};
 }
 
@@ -99,7 +147,7 @@ describe("review module completion/navigation source of truth", () => {
             card({ id: "profile-line", type: "quiz" }),
         ];
 
-        let progress: any = {
+        let progress: ReviewProgressState = {
             topics: {},
         };
 
@@ -147,7 +195,7 @@ describe("review module completion/navigation source of truth", () => {
             card({ id: "profile-line", type: "quiz" }),
         ];
 
-        let progress: any = {
+        let progress: ReviewProgressState = {
             topics: {},
         };
 
@@ -155,12 +203,12 @@ describe("review module completion/navigation source of truth", () => {
 
         progress = buildQuizPassProgress(progress, topicId, "profile-line", cards);
 
-        expect(progress.topics[topicId].readingDone).toMatchObject({
+        expect(progress.topics?.[topicId]?.readingDone).toMatchObject({
             "read-intro": true,
             "practice-note": true,
         });
 
-        expect(progress.topics[topicId].quizzesDone).toMatchObject({
+        expect(progress.topics?.[topicId]?.quizzesDone).toMatchObject({
             "profile-line": true,
         });
 
@@ -191,7 +239,7 @@ describe("review module completion/navigation source of truth", () => {
             topic(topicBId, topicBCards),
         ];
 
-        let progress: any = {
+        let progress: ReviewProgressState = {
             topics: {},
         };
 
@@ -238,7 +286,7 @@ describe("review module completion/navigation source of truth", () => {
 
         const topics = [topic(topicId, cards)];
 
-        let progress: any = {
+        let progress: ReviewProgressState = {
             topics: {},
         };
 

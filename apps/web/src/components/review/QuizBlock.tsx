@@ -10,6 +10,10 @@ import React, {
 } from "react";
 import type { ReviewQuestion, ReviewQuizSpec } from "@/lib/subjects/types";
 import type { SavedQuizState } from "@/lib/subjects/progressTypes";
+import type {
+  ExerciseRuntimeState,
+  UnknownRecord,
+} from "@/components/review/module/runtime/reviewRuntimeTypes";
 import { buildReviewQuizKey } from "@/lib/subjects/quizClient";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
@@ -39,6 +43,70 @@ import {
 } from "@/components/review/quiz/reviewQuizCompletion";
 
 const LS_AUTO_ADV = "learnoir.quiz.autoAdvance";
+type PracticeRuntimeQuestion = Extract<ReviewQuestion, { kind: "practice" }> &
+  UnknownRecord & {
+    fetch?: UnknownRecord & {
+      exerciseKey?: string;
+      stepId?: string;
+    };
+    exerciseKey?: string;
+    stepId?: string;
+    sourceStepId?: string;
+    key?: string;
+    item?: UnknownRecord & {
+      id?: string;
+      exerciseKey?: string;
+      result?: { ok?: boolean };
+    };
+    exercise?: UnknownRecord & {
+      id?: string;
+      exerciseKey?: string;
+    };
+    explain?: string;
+  };
+
+type PracticeItemRecord = UnknownRecord & {
+  key?: string;
+  kind?: string;
+  ui?: UnknownRecord & {
+    reorderTouched?: boolean;
+  };
+  result?: {
+    ok?: boolean;
+  } | null;
+};
+
+type RuntimePracticePatch = UnknownRecord & {
+  exerciseKey?: string;
+  exerciseId?: string;
+  subjectSlug?: string;
+  moduleSlug?: string;
+  sectionSlug?: string;
+  topicId?: string;
+  cardId?: string;
+  code?: string;
+  source?: string;
+  codeLang?: string;
+  lang?: string;
+  language?: string;
+  stdin?: string;
+  codeStdin?: string;
+  userEdited?: boolean;
+  workspaceOrigin?: string;
+  starterHash?: string;
+  updatedAt?: number;
+  workspace?: unknown;
+  codeWorkspace?: unknown;
+  ideWorkspace?: unknown;
+};
+
+type RuntimeExerciseCandidate = {
+  key: string;
+  value: ExerciseRuntimeState;
+  score: number;
+  hasIdentityMatch: boolean;
+  updatedAt: number;
+};
 
 function readAutoAdvance(defaultVal = true) {
   try {
@@ -52,7 +120,7 @@ function readAutoAdvance(defaultVal = true) {
 
 function computeLocalOkNow(
     q: Exclude<ReviewQuestion, { kind: "practice" }>,
-    val: any,
+    val: unknown,
 ) {
   if (q.kind === "mcq") return val === q.answerId;
 
@@ -61,8 +129,11 @@ function computeLocalOkNow(
   const tol = q.tolerance ?? 0;
   return Math.abs(v - q.answer) <= tol;
 }
-function serializePracticeItemForSave(item: any, exercise: any) {
-  const { key, kind, ui, ...rest } = item ?? {};
+function serializePracticeItemForSave(
+  item: PracticeItemRecord | null | undefined,
+  exercise: UnknownRecord | null | undefined,
+) {
+  const { ui, ...rest } = item ?? {};
 
   if (exercise?.kind === "drag_reorder" && !ui?.reorderTouched) {
     delete rest.reorder;
@@ -75,18 +146,18 @@ function serializePracticeItemForSave(item: any, exercise: any) {
 function getStablePracticeQuestionKey(q: ReviewQuestion) {
   if (q.kind !== "practice") return q.id;
 
-  const anyQ = q as any;
+  const practiceQuestion = q as PracticeRuntimeQuestion;
   return (
-      anyQ.fetch?.exerciseKey ??
-      anyQ.exerciseKey ??
-      anyQ.item?.exerciseKey ??
-      anyQ.exercise?.exerciseKey ??
-      anyQ.exercise?.id ??
-      anyQ.fetch?.stepId ??
-      anyQ.item?.id ??
-      anyQ.stepId ??
-      anyQ.sourceStepId ??
-      anyQ.key ??
+      practiceQuestion.fetch?.exerciseKey ??
+      practiceQuestion.exerciseKey ??
+      practiceQuestion.item?.exerciseKey ??
+      practiceQuestion.exercise?.exerciseKey ??
+      practiceQuestion.exercise?.id ??
+      practiceQuestion.fetch?.stepId ??
+      practiceQuestion.item?.id ??
+      practiceQuestion.stepId ??
+      practiceQuestion.sourceStepId ??
+      practiceQuestion.key ??
       q.id
   );
 }
@@ -99,7 +170,7 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
   const runtime = useReviewRuntimeStore.getState();
   const exercises = runtime.exercises ?? {};
 
-  const qAny = q as any;
+  const qAny = q as PracticeRuntimeQuestion;
 
   const wantedIds = new Set(
       [
@@ -122,7 +193,7 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
   const boundExerciseKey = String(runtime.tool?.boundExerciseKey ?? "").trim();
 
   const candidates = Object.entries(exercises)
-      .map(([key, value]: any) => {
+      .map(([key, value]): RuntimeExerciseCandidate | null => {
         if (!value) return null;
 
         const valueExerciseKey = String(value.exerciseKey ?? "").trim();
@@ -163,11 +234,11 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
           updatedAt: Number.isFinite(updatedAt) ? updatedAt : 0,
         };
       })
-      .filter(Boolean);
+      .filter((candidate): candidate is RuntimeExerciseCandidate => Boolean(candidate));
 
-  const identityCandidates = candidates.filter((candidate: any) => candidate.hasIdentityMatch);
+  const identityCandidates = candidates.filter((candidate) => candidate.hasIdentityMatch);
   const rankedCandidates = (identityCandidates.length ? identityCandidates : candidates)
-      .sort((a: any, b: any) => {
+      .sort((a, b) => {
         if (b.score !== a.score) return b.score - a.score;
         return b.updatedAt - a.updatedAt;
       });
@@ -175,55 +246,55 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
   const found = rankedCandidates[0];
   if (!found) return null;
 
-  const estate = found.value;
+  const estate = found.value as ExerciseRuntimeState;
 
   const workspace =
-      isWorkspace((estate as any).workspace)
-          ? (estate as any).workspace
-          : isWorkspace((estate as any).codeWorkspace)
-              ? (estate as any).codeWorkspace
-              : isWorkspace((estate as any).ideWorkspace)
-                  ? (estate as any).ideWorkspace
+      isWorkspace(estate.workspace)
+          ? estate.workspace
+          : isWorkspace(estate.codeWorkspace)
+              ? estate.codeWorkspace
+              : isWorkspace(estate.ideWorkspace)
+                  ? estate.ideWorkspace
                   : null;
 
   const workspaceCode = deriveEntryCode(workspace);
 
   const code =
       workspaceCode ||
-      (typeof (estate as any).code === "string"
-          ? (estate as any).code
-          : typeof (estate as any).source === "string"
-              ? (estate as any).source
+      (typeof estate.code === "string"
+          ? estate.code
+          : typeof estate.source === "string"
+              ? estate.source
               : "");
 
   const stdin =
       typeof workspace?.stdin === "string"
           ? workspace.stdin
-          : typeof (estate as any).codeStdin === "string"
-              ? (estate as any).codeStdin
-              : typeof (estate as any).stdin === "string"
-                  ? (estate as any).stdin
+          : typeof estate.codeStdin === "string"
+              ? estate.codeStdin
+              : typeof estate.stdin === "string"
+                  ? estate.stdin
                   : "";
 
   const lang =
       typeof workspace?.language === "string"
           ? workspace.language
-          : typeof (estate as any).codeLang === "string"
-              ? (estate as any).codeLang
-              : typeof (estate as any).lang === "string"
-                  ? (estate as any).lang
-                  : typeof (estate as any).language === "string"
-                      ? (estate as any).language
+          : typeof estate.codeLang === "string"
+              ? estate.codeLang
+              : typeof estate.lang === "string"
+                  ? estate.lang
+                  : typeof estate.language === "string"
+                      ? estate.language
                       : "python";
 
   return {
-    exerciseKey: (estate as any).exerciseKey,
-    exerciseId: (estate as any).exerciseId,
-    subjectSlug: (estate as any).subjectSlug,
-    moduleSlug: (estate as any).moduleSlug,
-    sectionSlug: (estate as any).sectionSlug,
-    topicId: (estate as any).topicId,
-    cardId: (estate as any).cardId,
+    exerciseKey: estate.exerciseKey,
+    exerciseId: estate.exerciseId,
+    subjectSlug: estate.subjectSlug,
+    moduleSlug: estate.moduleSlug,
+    sectionSlug: estate.sectionSlug,
+    topicId: estate.topicId,
+    cardId: estate.cardId,
     code,
     source: code,
     codeLang: lang,
@@ -232,14 +303,14 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
     stdin,
     codeStdin: stdin,
     userEdited:
-        (estate as any).userEdited === true ||
-        (estate as any).workspaceOrigin === "user" ||
-        (estate as any).workspaceOrigin === "saved",
+        estate.userEdited === true ||
+        estate.workspaceOrigin === "user" ||
+        estate.workspaceOrigin === "saved",
     workspaceOrigin:
-        (estate as any).workspaceOrigin ??
-        ((estate as any).userEdited === true ? "user" : "saved"),
-    starterHash: (estate as any).starterHash,
-    updatedAt: (estate as any).updatedAt ?? Date.now(),
+        estate.workspaceOrigin ??
+        (estate.userEdited === true ? "user" : "saved"),
+    starterHash: estate.starterHash,
+    updatedAt: estate.updatedAt ?? Date.now(),
     ...(workspace
         ? {
           workspace,
@@ -247,7 +318,7 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
           ideWorkspace: workspace,
         }
         : {}),
-  };
+  } satisfies RuntimePracticePatch;
 }
 
 
@@ -397,7 +468,7 @@ export default function QuizBlock({
         if (q.kind === "practice") {
             const ps = getPracticeStateForQuestion(q);
 
-            const itemResult = (ps?.item as any)?.result;
+            const itemResult = (ps?.item as PracticeItemRecord | undefined)?.result;
             const resultOk = itemResult?.ok === true;
 
             /**
@@ -443,7 +514,7 @@ export default function QuizBlock({
             const ps = getPracticeStateForQuestion(q);
             if (!ps) return null;
 
-            const itemResult = (ps.item as any)?.result;
+            const itemResult = (ps.item as PracticeItemRecord | undefined)?.result;
 
             if (typeof itemResult?.ok === "boolean") {
                 return itemResult.ok;
@@ -542,7 +613,7 @@ export default function QuizBlock({
         practiceBank.practice,
         passScore,
         excusedById,
-    ]); // eslint-disable-line react-hooks/exhaustive-deps
+    ]);  
     useEffect(() => {
         if (
             !shouldAutoCompleteReviewCard({
@@ -564,10 +635,12 @@ export default function QuizBlock({
   const nextState = useMemo<SavedQuizState>(() => {
     const base = initState;
 
-    const practiceItemPatch: Record<string, any> = {
+    const practiceItemPatch: Record<string, UnknownRecord> = {
       ...(base?.practiceItemPatch ?? {}),
     };
-    const practiceMeta: Record<string, any> = { ...(base?.practiceMeta ?? {}) };
+    const practiceMeta: Record<string, { attempts: number; ok: boolean | null }> = {
+      ...(base?.practiceMeta ?? {}),
+    };
 
     for (const q of questions) {
       if (q.kind !== "practice") continue;
@@ -577,8 +650,8 @@ export default function QuizBlock({
 
       if (ps) {
           const itemResultOk =
-              typeof (ps.item as any)?.result?.ok === "boolean"
-                  ? Boolean((ps.item as any).result.ok)
+              typeof (ps.item as PracticeItemRecord | undefined)?.result?.ok === "boolean"
+                  ? Boolean((ps.item as PracticeItemRecord).result?.ok)
                   : null;
 
           const nextMeta = {
@@ -729,11 +802,11 @@ export default function QuizBlock({
     apply();
 
     if (mq.addEventListener) mq.addEventListener("change", apply);
-    else (mq as any).addListener?.(apply);
+    else mq.addListener?.(apply);
 
     return () => {
       if (mq.removeEventListener) mq.removeEventListener("change", apply);
-      else (mq as any).removeListener?.(apply);
+      else mq.removeListener?.(apply);
     };
   }, []);
 
@@ -814,7 +887,7 @@ export default function QuizBlock({
                 "button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled])",
             );
 
-        target?.focus({ preventScroll: true } as any);
+        target?.focus({ preventScroll: true });
       });
     });
   }
@@ -847,6 +920,17 @@ export default function QuizBlock({
       setPendingScrollQid(null);
     });
   }, [pendingScrollQid, pendingScrollMode, reduceMotion]);
+
+  const scrollToFooter = useCallback(() => {
+    const el = footerElRef.current;
+    if (!el) return;
+    scrollIntoViewSmart(el, {
+      reduceMotion,
+      block: "start",
+      force: true,
+      offsetPx: 12,
+    });
+  }, [reduceMotion]);
 
   useEffect(() => {
     if (quizLoading) return;
@@ -921,23 +1005,13 @@ export default function QuizBlock({
     findCurrentActivityQuestionIndex,
     reduceMotion,
     navigationMode,
+    scrollToFooter,
   ]);
 
   useEffect(() => {
     if (routeExerciseIndex < 0) return;
     setActiveIndex((prev) => (prev === routeExerciseIndex ? prev : routeExerciseIndex));
   }, [routeExerciseIndex]);
-
-  function scrollToFooter() {
-    const el = footerElRef.current;
-    if (!el) return;
-    scrollIntoViewSmart(el, {
-      reduceMotion,
-      block: "start",
-      force: true,
-      offsetPx: 12,
-    });
-  }
 
   function findNextUnlockedIndex(fromIdx: number) {
     for (let i = fromIdx + 1; i < questions.length; i++) {
@@ -979,7 +1053,7 @@ export default function QuizBlock({
 
 
   function hasExplain(q: ReviewQuestion) {
-    const ex = (q as any).explain;
+    const ex = "explain" in q ? q.explain : undefined;
     return typeof ex === "string" && ex.trim().length > 0;
   }
 
@@ -1020,7 +1094,7 @@ export default function QuizBlock({
     strictSequential,
     unlimitedAttempts,
     autoAdvance,
-  ]); // eslint-disable-line react-hooks/exhaustive-deps
+  ]);  
 
   const emitState = useCallback(
       (s: SavedQuizState) => onStateChange?.(s),
@@ -1157,7 +1231,7 @@ export default function QuizBlock({
                   unlimitedAttempts={unlimitedAttempts}
                   strictSequential={strictSequential}
                   seqOrder={orderBase + idx}
-                  padRef={practiceBank.getPadRef(stablePracticeKey) as any}
+                  padRef={practiceBank.getPadRef(stablePracticeKey)}
                   excused={isExcused(q.id)}
                   onRetryExercise={() => practiceBank.retryPracticeQuestion(stablePracticeKey)}
                   onExcused={() => {

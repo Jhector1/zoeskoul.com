@@ -2,30 +2,24 @@
 
 import React from "react";
 import type { ReviewCard } from "@/lib/subjects/types";
-import type { SavedQuizState } from "@/lib/subjects/progressTypes";
+import type {
+    ReviewTopicProgress,
+    SavedQuizState,
+} from "@/lib/subjects/progressTypes";
 
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import QuizBlock from "@/components/review/QuizBlock";
 import { buildReviewQuizKey } from "@/lib/subjects/quizClient";
-import { cn } from "@/lib/cn";
 
 import SketchBlock from "@/components/sketches/subjects/SketchBlock";
+import type { SavedSketchState } from "@/components/sketches/subjects/types";
 import { useTaggedT } from "@/i18n/tagged";
 import {FlowNavMode} from "@/components/review/navigation/FlowNavigator";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
-
-type SavedSketchState = any;
+type ReviewCardSpecRecord = Record<string, unknown> | null | undefined;
 
 function GateBanner({ text }: { text: string }) {
     return <div className="mt-2 ui-surface-warn p-2 text-xs font-medium">{text}</div>;
-}
-
-function CompletedBadge({ text }: { text: string }) {
-    return (
-        <div className="mt-2">
-            <span className="ui-pill-good">{text}</span>
-        </div>
-    );
 }
 
 function CardTitle({ title }: { title?: string | null }) {
@@ -62,7 +56,7 @@ export default function CardRenderer(props: {
 
     cardKey: string;
     topicId: string;
-    tp: any;
+    tp: ReviewTopicProgress;
     defaultToolLanguage?: string;
 }) {
     const ui = useTaggedT("cardUi");
@@ -85,9 +79,6 @@ export default function CardRenderer(props: {
         savedSketch,
         quizNavMode = "scroll",
         onSketchStateChange,
-        onRun,
-        onReveal,
-        onSubmit,
         cardKey,
         topicId,
         tp,
@@ -97,6 +88,14 @@ export default function CardRenderer(props: {
     const ensureCard = useReviewRuntimeStore((s) => s.ensureCard);
 
     React.useEffect(() => {
+        const cardSpec = ("spec" in card ? card.spec : null) as ReviewCardSpecRecord;
+        const specRuntime = cardSpec && typeof cardSpec === "object"
+            ? (cardSpec.runtime as Record<string, unknown> | undefined)
+            : undefined;
+        const specWorkspace = cardSpec && typeof cardSpec === "object"
+            ? cardSpec.workspace
+            : null;
+
         if (progressHydrated) {
             ensureCard({
                 cardKey,
@@ -106,9 +105,9 @@ export default function CardRenderer(props: {
                     sketch: tp?.sketchState?.[card.id] || null,
                 },
                 toolLanguage:
-                    (card as any)?.spec?.runtime?.kind === "sql" ? "sql" : defaultToolLanguage,
+                    specRuntime?.kind === "sql" ? "sql" : defaultToolLanguage,
                 toolManifest: {
-                    workspace: (card as any)?.spec?.workspace ?? null,
+                    workspace: specWorkspace ?? null,
                 },
                 toolKey: `${cardKey}:general`,
             });
@@ -122,11 +121,12 @@ export default function CardRenderer(props: {
     const orderBase = cardIndex * 10000;
     const cardTitle = tt.resolve(card.title ?? null, {}, card.title ?? "");
 
-    const kindLabel = (kind: "quiz" | "project") =>
+        const kindLabel = (kind: "quiz" | "project") =>
         kind === "quiz" ? ui.t("kinds.quiz", {}, "quiz") : ui.t("kinds.project", {}, "project");
 
     function renderQuizLike(kind: "quiz" | "project") {
-        const key = buildReviewQuizKey(card.spec as any, card.id, versionStr);
+        const quizCard = card as Extract<ReviewCard, { type: "quiz" | "project" }>;
+        const key = buildReviewQuizKey(card.spec, card.id, versionStr);
 
         const showGate = !done && !prereqsMet;
         const canMountQuizBlock = progressHydrated && (prereqsMet || done);
@@ -145,12 +145,10 @@ export default function CardRenderer(props: {
             `Loading saved ${kp} state…`,
         );
 
-        const completedText = ui.t("completed", {}, "✓ Completed");
-
         const quizBlockProps =
             kind === "quiz"
                 ? {
-                    passScore: (card as any).passScore ?? 1.0,
+                    passScore: quizCard.passScore ?? 1.0,
                     sequential: undefined as boolean | undefined,
                     strictSequential: undefined as boolean | undefined,
                     unlimitedAttempts: true,
@@ -177,7 +175,7 @@ export default function CardRenderer(props: {
                             quizId={card.id}
                             quizCardId={card.id}
                             toolsActive={active}
-                            spec={card.spec as any}
+                            spec={quizCard.spec}
                             quizKey={key}
                             passScore={quizBlockProps.passScore}
                             prereqsMet={prereqsMet}
@@ -187,8 +185,8 @@ export default function CardRenderer(props: {
                             onPass={() => onQuizPass(card.id)}
                             onStateChange={(s: SavedQuizState) => onQuizStateChange(card.id, s)}
                             onReset={() => onQuizReset(card.id)}
-                            sequential={quizBlockProps.sequential as any}
-                            strictSequential={quizBlockProps.strictSequential as any}
+                            sequential={quizBlockProps.sequential}
+                            strictSequential={quizBlockProps.strictSequential}
                             unlimitedAttempts={quizBlockProps.unlimitedAttempts}
                             orderBase={orderBase}
                             navigationMode={quizNavMode}

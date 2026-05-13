@@ -1,10 +1,31 @@
 import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
-import type { ReviewProgressState } from "@/lib/subjects/progressTypes";
+import type {
+    ReviewProgressState,
+    ReviewTopicProgress,
+    SavedQuizState,
+} from "@/lib/subjects/progressTypes";
 import {
     isQuizLikeCard,
     markCardDoneInTopicState,
     normalizeTopicProgressForCards,
 } from "./progressKeys";
+
+type RuntimeStateRecord = {
+    exercises?: Record<string, { cardId?: string }>;
+    cards?: Record<string, { cardId?: string }>;
+};
+type ExtendedTopicProgress = ReviewTopicProgress & {
+    runtimeStateV2?: RuntimeStateRecord;
+    toolState?: Record<string, unknown>;
+    sketchState?: Record<string, unknown>;
+};
+
+function getTopicProgress(
+    progress: ReviewProgressState | null | undefined,
+    topicId: string,
+): ExtendedTopicProgress {
+    return (progress?.topics?.[topicId] ?? {}) as ExtendedTopicProgress;
+}
 
 export function buildNormalizedTopicsProgress(
     topics: ReviewModule["topics"] | undefined,
@@ -12,7 +33,7 @@ export function buildNormalizedTopicsProgress(
 ) {
     const safeTopics = Array.isArray(topics) ? topics : [];
     const currentTopics = progress?.topics ?? {};
-    const nextTopics: Record<string, any> = { ...currentTopics };
+    const nextTopics: Record<string, ReviewTopicProgress> = { ...currentTopics };
     let changed = false;
 
     for (const topic of safeTopics) {
@@ -29,22 +50,22 @@ export function buildNormalizedTopicsProgress(
 }
 
 export function buildModuleCompletedProgress(
-    progress: any,
+    progress: ReviewProgressState,
     nowIso: string,
 ): ReviewProgressState {
     return {
-        ...(progress as any),
+        ...progress,
         moduleCompleted: true,
         moduleCompletedAt: nowIso,
     };
 }
 
 export function buildTopicCompletedProgress(
-    progress: any,
+    progress: ReviewProgressState,
     viewTid: string,
     nowIso: string,
 ) {
-    const cur = progress?.topics?.[viewTid] ?? {};
+    const cur = getTopicProgress(progress, viewTid);
     if (cur.completed) return progress;
 
     return {
@@ -61,32 +82,36 @@ export function buildTopicCompletedProgress(
 }
 
 export function buildResetModuleProgress(
-    progress: any,
+    progress: ReviewProgressState,
     firstTopicId: string,
 ): ReviewProgressState {
-    const nextModuleV = ((progress as any)?.quizVersion ?? 0) + 1;
+    const nextModuleV = (progress?.quizVersion ?? 0) + 1;
 
     return {
         quizVersion: nextModuleV,
         topics: {},
-        activeTopicId: firstTopicId as any,
+        activeTopicId: firstTopicId,
         moduleCompleted: false,
         moduleCompletedAt: undefined,
-    } as any;
+    };
 }
-function dropRuntimeForQuizCard(topicState: any, quizCardId: string) {
+function dropRuntimeForQuizCard(
+    topicState: ExtendedTopicProgress,
+    quizCardId: string,
+) {
     const runtime = topicState?.runtimeStateV2;
     if (!runtime) return topicState;
+    const runtimeRecord = runtime as RuntimeStateRecord;
 
     const nextExercises = Object.fromEntries(
-        Object.entries(runtime.exercises ?? {}).filter(([, value]) => {
-            return String((value as any)?.cardId ?? "") !== quizCardId;
+        Object.entries(runtimeRecord.exercises ?? {}).filter(([, value]) => {
+            return String(value?.cardId ?? "") !== quizCardId;
         }),
     );
 
     const nextCards = Object.fromEntries(
-        Object.entries(runtime.cards ?? {}).filter(([, value]) => {
-            return String((value as any)?.cardId ?? "") !== quizCardId;
+        Object.entries(runtimeRecord.cards ?? {}).filter(([, value]) => {
+            return String(value?.cardId ?? "") !== quizCardId;
         }),
     );
 
@@ -100,7 +125,7 @@ function dropRuntimeForQuizCard(topicState: any, quizCardId: string) {
     };
 }
 
-export function buildResetTopicProgress(progress: any, tid: string) {
+export function buildResetTopicProgress(progress: ReviewProgressState, tid: string) {
     const nextTopics = { ...(progress?.topics ?? {}) };
     const cur = nextTopics[tid] ?? {};
     const nextTopicV = (cur.quizVersion ?? 0) + 1;
@@ -119,7 +144,7 @@ export function buildResetTopicProgress(progress: any, tid: string) {
         },
         completed: false,
         completedAt: undefined,
-    };
+    } as ExtendedTopicProgress;
 
     return {
         ...progress,
@@ -129,11 +154,11 @@ export function buildResetTopicProgress(progress: any, tid: string) {
     };
 }
 export function buildMarkCardDoneProgress(
-    progress: any,
+    progress: ReviewProgressState,
     viewTid: string,
     card: ReviewCard,
 ) {
-    const tp0: any = progress?.topics?.[viewTid] ?? {};
+    const tp0 = getTopicProgress(progress, viewTid);
     const nextTopic = markCardDoneInTopicState(tp0, card);
 
     return {
@@ -146,12 +171,12 @@ export function buildMarkCardDoneProgress(
 }
 
 export function buildQuizPassProgress(
-    progress: any,
+    progress: ReviewProgressState,
     viewTid: string,
     quizId: string,
     topicCards: readonly ReviewCard[] = [],
 ) {
-    let nextTopic: any = progress?.topics?.[viewTid] ?? {};
+    let nextTopic = getTopicProgress(progress, viewTid);
 
     /**
      * Passing a quiz means the learner has completed the active assessment
@@ -185,12 +210,12 @@ export function buildQuizPassProgress(
 }
 
 export function buildQuizStateProgress(
-    progress: any,
+    progress: ReviewProgressState,
     viewTid: string,
     quizCardId: string,
-    state: any,
+    state: SavedQuizState,
 ) {
-    const tp0: any = progress?.topics?.[viewTid] ?? {};
+    const tp0 = getTopicProgress(progress, viewTid);
     const quizState = { ...(tp0.quizState ?? {}), [quizCardId]: state };
 
     return {
@@ -203,11 +228,11 @@ export function buildQuizStateProgress(
 }
 
 export function buildQuizResetProgress(
-    progress: any,
+    progress: ReviewProgressState,
     viewTid: string,
     quizCardId: string,
 ) {
-    const tp0: any = progress?.topics?.[viewTid] ?? {};
+    const tp0 = getTopicProgress(progress, viewTid);
     const nextQuizState = { ...(tp0.quizState ?? {}) };
     delete nextQuizState[quizCardId];
 

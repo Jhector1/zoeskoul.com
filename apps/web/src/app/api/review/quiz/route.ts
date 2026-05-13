@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import type { NextResponse } from "next/server";
 import {
   getActor,
   ensureGuestId,
@@ -37,6 +38,37 @@ import { SECTIONS, TOPICS } from "@/lib/subjects";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+type ReviewQuizQuestion = {
+  kind: "practice";
+  id: string;
+  title?: string;
+  carryFromPrev?: boolean;
+  fetch: {
+    subject: string;
+    module?: string;
+    section?: string;
+    topic?: string;
+    difficulty?: "easy" | "medium" | "hard";
+    allowReveal?: boolean;
+    preferPurpose?: "quiz" | "project";
+    preferKind?: ReviewQuizRequestSpec["preferKind"];
+    exerciseKey?: string;
+    seedPolicy?: "actor" | "global";
+    salt?: string;
+  };
+  maxAttempts?: number | null;
+};
+
+function asReviewQuizQuestions(value: unknown): ReviewQuizQuestion[] | null {
+  return Array.isArray(value) ? (value as ReviewQuizQuestion[]) : null;
+}
+
+function isPrismaCodeError(
+    error: unknown,
+): error is { code?: string } {
+  return typeof error === "object" && error !== null && "code" in error;
+}
 
 function defaultPurposeForMode(mode: "quiz" | "project") {
   return mode === "project" ? "project" : "quiz";
@@ -216,7 +248,7 @@ export async function POST(req: Request) {
   });
 
   if (!gate.ok) {
-    return attachGuestCookie(gate.res as any, setGuestId);
+    return attachGuestCookie(gate.res as NextResponse, setGuestId);
   }
 
   if (!hasReviewModule(gate.scope.subjectSlug, gate.scope.moduleSlug)) {
@@ -308,7 +340,7 @@ export async function POST(req: Request) {
     allowedTopicSlugs = [dbSlug];
   }
 
-  let questions: any[] = [];
+  let questions: ReviewQuizQuestion[] = [];
 
   if (mode === "project") {
     const steps = spec.steps ?? [];
@@ -440,7 +472,7 @@ export async function POST(req: Request) {
     }
 
     const usedByTopic = new Map<string, Set<string>>();
-    const out: any[] = [];
+    const out: ReviewQuizQuestion[] = [];
 
     for (let i = 0; i < n; i++) {
       const pickedTopic = pickedTopics[i];
@@ -489,8 +521,8 @@ export async function POST(req: Request) {
         questions,
       },
     });
-  } catch (e: any) {
-    if (e?.code !== "P2002") throw e;
+  } catch (error: unknown) {
+    if (!isPrismaCodeError(error) || error.code !== "P2002") throw error;
   }
 
   const saved = await prisma.reviewQuizInstance.findUnique({
@@ -502,7 +534,7 @@ export async function POST(req: Request) {
     },
   });
 
-  const outQuestions = (saved?.questions ?? questions) as any[];
+  const outQuestions = asReviewQuizQuestions(saved?.questions) ?? questions;
 
   return bodyJsonWithGuestCookie(
       {
@@ -570,7 +602,7 @@ export async function DELETE(req: Request) {
   });
 
   if (!gate.ok) {
-    return attachGuestCookie(gate.res as any, setGuestId);
+    return attachGuestCookie(gate.res as NextResponse, setGuestId);
   }
 
   if (!hasReviewModule(gate.scope.subjectSlug, gate.scope.moduleSlug)) {

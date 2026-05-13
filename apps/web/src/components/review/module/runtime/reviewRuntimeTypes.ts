@@ -1,13 +1,11 @@
 import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { SavedSketchState } from "@/components/sketches/subjects/types";
 
 export type CardStateKey = string;
 export type ExerciseStateKey = string;
+export type UnknownRecord = Record<string, unknown>;
 
-export type SketchState = {
-  version: number;
-  elements: unknown[];
-  [key: string]: unknown;
-};
+export type SketchState = SavedSketchState;
 
 export type ExerciseRuntimeStatus =
   | "not_started"
@@ -19,7 +17,8 @@ export type WorkspaceOrigin =
   | "empty"
   | "user"
   | "saved"
-  | "restored";
+  | "restored"
+  | "sync";
 
 export type ExerciseRuntimeState = {
   exerciseKey: ExerciseStateKey;
@@ -31,7 +30,7 @@ export type ExerciseRuntimeState = {
   cardId: string;
   exerciseId: string;
 
-  language: string;
+  language: WorkspaceStateV2["language"];
 
   /**
    * Canonical source of truth for code exercises.
@@ -68,10 +67,18 @@ export type ExerciseRuntimeState = {
    */
   code?: string;
   source?: string;
-  lang?: string;
+  lang?: WorkspaceStateV2["language"];
+  codeLang?: WorkspaceStateV2["language"];
   codeWorkspace?: WorkspaceStateV2;
   ideWorkspace?: WorkspaceStateV2;
   codeStdin?: string;
+  submitted?: boolean;
+  result?: unknown;
+  stableExerciseId?: string;
+  exerciseStateId?: string;
+  slotId?: string;
+  key?: string;
+  id?: string;
 
   /** SQL-only runtime metadata. Non-SQL courses must leave these unset. */
   fixedSqlDialect?: string;
@@ -106,7 +113,7 @@ export type CardRuntimeState = {
   toolWorkspace?: WorkspaceStateV2 | null;
   toolCode?: string;
   toolStdin?: string;
-  toolLang?: string;
+  toolLang?: WorkspaceStateV2["language"];
 
   updatedAt: number;
 };
@@ -116,7 +123,7 @@ export type EditorRuntimeState = {
   ownerKind: "card" | "exercise";
   targetKey: string;
   toolScopeKey: string;
-  language: string;
+  language: WorkspaceStateV2["language"];
   workspaceStatus: "pending" | "ready" | "error";
   workspaceSeedMode: "starter" | "empty" | "restored";
   workspaceOrigin?: WorkspaceOrigin;
@@ -185,13 +192,13 @@ export type ReviewRuntimeActions = {
     sectionSlug?: string;
     topicId: string;
     cardId: string;
-    manifest?: any;
-    saved?: any;
+    manifest?: unknown;
+    saved?: unknown;
   }) => void;
 
   patchExercise: (
     key: ExerciseStateKey,
-    patch: Partial<ExerciseRuntimeState> & Record<string, any>,
+    patch: Partial<ExerciseRuntimeState> & UnknownRecord,
   ) => void;
 
   ensureCard: (args: {
@@ -201,7 +208,7 @@ export type ReviewRuntimeActions = {
     initial?: Partial<CardRuntimeState>;
     starterSketch?: SketchState | null;
     toolLanguage?: string;
-    toolManifest?: any;
+    toolManifest?: unknown;
     toolKey?: string;
   }) => void;
 

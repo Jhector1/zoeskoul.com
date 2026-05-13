@@ -8,19 +8,21 @@ import type {
 import type { WorkspaceLanguage } from "@/lib/practice/types";
 import { defaultMainFile } from "@/components/ide/languageDefaults";
 
-type AnyRecord = Record<string, any>;
+type UnknownRecord = Record<string, unknown>;
 
 
 
 
-function explicitStarterCodeFromManifest(manifest: any) {
+function explicitStarterCodeFromManifest(manifest: UnknownRecord) {
   // Only explicit starter fields are allowed to seed the code input pane.
   // Do not fall back to generic code/content/source fields or loose prompt scans,
   // because those fields may contain solution text, examples, or explanations.
+  const workspace = isRecord(manifest.workspace) ? manifest.workspace : {};
+  const recipe = isRecord(manifest.recipe) ? manifest.recipe : {};
   const explicit =
-      manifest?.workspace?.starterCode ??
+      workspace.starterCode ??
       manifest?.starterCode ??
-      manifest?.recipe?.starterCode ??
+      recipe.starterCode ??
       "";
 
   return String(explicit ?? "").trim();
@@ -45,11 +47,11 @@ type StarterFile =
   main?: boolean;
 };
 
-function isRecord(value: unknown): value is AnyRecord {
+function isRecord(value: unknown): value is UnknownRecord {
   return !!value && typeof value === "object" && !Array.isArray(value);
 }
 
-function normalizeManifestShape(input: unknown): AnyRecord {
+function normalizeManifestShape(input: unknown): UnknownRecord {
   const manifest = isRecord(input) ? input : {};
   const spec = isRecord(manifest.spec) ? manifest.spec : {};
   const workspace = isRecord(manifest.workspace)
@@ -75,8 +77,8 @@ export function isWorkspace(value: unknown): value is WorkspaceStateV2 {
   return (
       !!value &&
       typeof value === "object" &&
-      (value as any).version === 2 &&
-      Array.isArray((value as any).nodes)
+      (value as WorkspaceStateV2).version === 2 &&
+      Array.isArray((value as WorkspaceStateV2).nodes)
   );
 }
 
@@ -199,30 +201,34 @@ function normalizeStarterFiles(
 }
 
 function getEntryFile(args: {
-  manifest: AnyRecord;
+  manifest: UnknownRecord;
   language: WorkspaceLanguage;
 }) {
   const { manifest, language } = args;
+  const workspace = isRecord(manifest.workspace) ? manifest.workspace : {};
+  const recipe = isRecord(manifest.recipe) ? manifest.recipe : {};
 
   return normalizePath(
-      manifest.workspace?.entryFile ??
+      workspace.entryFile ??
       manifest.entryFile ??
       manifest.entryFilePath ??
       manifest.mainFile ??
       manifest.mainFilePath ??
-      manifest.recipe?.entryFile ??
-      manifest.recipe?.entryFilePath,
+      recipe.entryFile ??
+      recipe.entryFilePath,
       defaultMainFile(language),
   );
 }
 
-function getInitialStdin(manifest: AnyRecord) {
+function getInitialStdin(manifest: UnknownRecord) {
+  const workspace = isRecord(manifest.workspace) ? manifest.workspace : {};
+  const recipe = isRecord(manifest.recipe) ? manifest.recipe : {};
   return (
-      manifest.workspace?.initialStdin ??
+      workspace.initialStdin ??
       manifest.initialStdin ??
       manifest.stdin ??
-      manifest.recipe?.initialStdin ??
-      manifest.recipe?.stdin ??
+      recipe.initialStdin ??
+      recipe.stdin ??
       ""
   );
 }
@@ -266,25 +272,27 @@ function firstUsableStarterFilesSource(...values: Array<unknown>) {
   return null;
 }
 
-export function getStarterFilesSource(manifest: AnyRecord) {
+export function getStarterFilesSource(manifest: UnknownRecord) {
   const normalized = normalizeManifestShape(manifest);
+  const workspace = isRecord(normalized.workspace) ? normalized.workspace : {};
+  const recipe = isRecord(normalized.recipe) ? normalized.recipe : {};
 
   return firstUsableStarterFilesSource(
-      normalized.workspace?.starterFiles,
-      normalized.workspace?.files,
-      normalized.workspace?.initialFiles,
-      normalized.workspace?.workspaceFiles,
+      workspace.starterFiles,
+      workspace.files,
+      workspace.initialFiles,
+      workspace.workspaceFiles,
       normalized.starterFiles,
       normalized.files,
       normalized.initialFiles,
       normalized.workspaceFiles,
-      normalized.recipe?.starterFiles,
-      normalized.recipe?.files,
-      normalized.recipe?.initialFiles,
+      recipe.starterFiles,
+      recipe.files,
+      recipe.initialFiles,
   );
 }
 
-export function getStarterCode(manifest: AnyRecord) {
+export function getStarterCode(manifest: UnknownRecord) {
   return explicitStarterCodeFromManifest(manifest);
 }
 
@@ -461,8 +469,8 @@ function isWorkspaceStateV2(value: unknown): value is WorkspaceStateV2 {
   return (
       !!value &&
       typeof value === "object" &&
-      (value as any).version === 2 &&
-      Array.isArray((value as any).nodes)
+      (value as WorkspaceStateV2).version === 2 &&
+      Array.isArray((value as WorkspaceStateV2).nodes)
   );
 }
 
@@ -509,7 +517,7 @@ function getEntryFileFromStarterFiles(raw: unknown): string {
 
 export function resolveExerciseWorkspace(args: {
   language: WorkspaceLanguage | string;
-  manifest: any;
+  manifest: unknown;
   saved?: WorkspaceStateV2 | null;
   entry?: import("./reviewTargetRegistry").ReviewTargetEntry | null;
 }): WorkspaceStateV2 {
@@ -518,6 +526,8 @@ export function resolveExerciseWorkspace(args: {
       "python") as WorkspaceLanguage;
 
   const manifest = normalizeManifestShape(args.manifest ?? args.entry?.item ?? {});
+  const manifestWorkspace = isRecord(manifest.workspace) ? manifest.workspace : {};
+  const manifestRecipe = isRecord(manifest.recipe) ? manifest.recipe : {};
 
   // Preserve real saved user work when the runtime intentionally passes it in.
   // This prevents user edits from being overwritten on refresh/re-render.
@@ -532,7 +542,7 @@ export function resolveExerciseWorkspace(args: {
   }
 
   const savedFromManifest =
-      manifest.workspace && isWorkspace(manifest.workspace)
+      isWorkspace(manifest.workspace)
           ? manifest.workspace
           : manifest.initialWorkspace && isWorkspace(manifest.initialWorkspace)
               ? manifest.initialWorkspace
@@ -557,9 +567,9 @@ export function resolveExerciseWorkspace(args: {
   const starterCode = pickNonBlankString(
       getStarterCode(manifest),
       args.entry?.starterCode,
-      manifest.workspace?.starterCode,
+      manifestWorkspace.starterCode,
       manifest.starterCode,
-      manifest.recipe?.starterCode,
+      manifestRecipe.starterCode,
   );
 
   let starterFiles = normalizeStarterFiles(starterFilesSource, entryFile);

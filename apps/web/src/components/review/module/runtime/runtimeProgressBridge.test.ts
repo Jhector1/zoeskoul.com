@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { mergeRuntimeIntoProgress } from "@/components/review/module/runtime/runtimeProgressBridge";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { ReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeTypes";
+
+type RuntimeLike = Pick<ReviewRuntimeStore, "exercises" | "cards">;
 
 function buildWorkspace(language: WorkspaceStateV2["language"] = "python"): WorkspaceStateV2 {
     return {
@@ -78,15 +81,15 @@ describe("mergeRuntimeIntoProgress", () => {
                     },
                 },
                 cards: {},
-            } as any,
+            } as unknown as RuntimeLike,
         );
 
-        const topic = next.topics?.["topic-a"] as any;
-        expect(topic.runtimeStateV2.exercises[exerciseKey].workspace).toEqual(workspace);
-        expect(topic.runtimeStateV2.exercises[exerciseKey].codeWorkspace).toEqual(workspace);
-        expect(topic.runtimeStateV2.exercises[exerciseKey].ideWorkspace).toEqual(workspace);
+        const topic = next.topics?.["topic-a"]!;
+        expect(topic.runtimeStateV2!.exercises![exerciseKey].workspace).toEqual(workspace);
+        expect(topic.runtimeStateV2!.exercises![exerciseKey].codeWorkspace).toEqual(workspace);
+        expect(topic.runtimeStateV2!.exercises![exerciseKey].ideWorkspace).toEqual(workspace);
 
-        const practicePatch = topic.quizState.q1.practiceItemPatch[exerciseKey];
+        const practicePatch = topic.quizState!.q1.practiceItemPatch![exerciseKey];
         expect(practicePatch.workspace).toEqual(workspace);
         expect(practicePatch.codeWorkspace).toEqual(workspace);
         expect(practicePatch.ideWorkspace).toEqual(workspace);
@@ -121,13 +124,13 @@ describe("mergeRuntimeIntoProgress", () => {
                         sketch: { kind: "sql-sketch" },
                     },
                 },
-            } as any,
+            } as unknown as RuntimeLike,
         );
 
-        const topic = next.topics?.["what-update-does"] as any;
-        expect(topic.runtimeStateV2.cards.sk1.toolWorkspace).toEqual(workspace);
-        expect(topic.toolState["sql:sql_module_12:section_12_1:what-update-does:sk1:general"].workspace).toEqual(workspace);
-        expect(topic.toolState["card:sk1"].workspace).toEqual(workspace);
-        expect(topic.sketchState.sk1).toEqual({ kind: "sql-sketch" });
+        const topic = next.topics?.["what-update-does"]!;
+        expect(topic.runtimeStateV2!.cards!.sk1.toolWorkspace).toEqual(workspace);
+        expect(topic.toolState!["sql:sql_module_12:section_12_1:what-update-does:sk1:general"].workspace).toEqual(workspace);
+        expect(topic.toolState!["card:sk1"].workspace).toEqual(workspace);
+        expect(topic.sketchState!.sk1).toEqual({ kind: "sql-sketch" });
     });
 });

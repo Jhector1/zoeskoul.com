@@ -58,15 +58,15 @@ export default function SummaryView(props: PracticeShellProps) {
       !Array.isArray(stack) ||
       (reviewStack != null && !Array.isArray(reviewStack));
 
-  if (loading) {
-    return <SummaryViewSkeleton />;
-  }
-
   const list = useMemo(() => {
     const rs = Array.isArray(reviewStack) ? reviewStack : [];
     const st = Array.isArray(stack) ? stack : [];
     return rs.length ? rs : st;
   }, [reviewStack, stack]);
+
+  if (loading) {
+    return <SummaryViewSkeleton />;
+  }
 
   const missedCount = Math.max(0, answeredCount - correctCount);
   const showOnboardingCta = Boolean(isOnboardingTrial);
