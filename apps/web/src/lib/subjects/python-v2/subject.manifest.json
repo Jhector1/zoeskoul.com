@@ -13,7 +13,7 @@
     "meta": {
       "curriculum": {
         "plannedModuleCount": 4,
-        "isTerminalRelease": false,
+        "isTerminalRelease": true,
         "moreComingMessageKey": "subjects.python-v2.moreComingSoon",
         "finalCapstone": {
           "titleKey": "subjects.python-v2.finalCapstone.title",

@@ -81,8 +81,7 @@ export default function E2ESketchSavePage() {
                 }
 
                 const data = await res.json();
-                const restoredWorkspace = getRestoredWorkspace(data?.state);
-
+                const restoredWorkspace = getRestoredWorkspace(data?.progress ?? data?.state);
                 if (!restoredWorkspace) {
                     if (!cancelled) setRestoreStatus("empty");
                     return;
@@ -219,7 +218,32 @@ export default function E2ESketchSavePage() {
                         showStdinEditor
                     />
                 </div>
+                {process.env.NODE_ENV !== "production" ? (
+                    <button
+                        type="button"
+                        data-testid="e2e-force-save-workspace"
+                        className="mt-4 rounded border px-3 py-2 text-sm"
+                        onClick={() => {
+                            const now = Date.now();
 
+                            saveWorkspace({
+                                ...workspace,
+                                nodes: workspace.nodes.map((node) =>
+                                    node.kind === "file"
+                                        ? {
+                                            ...node,
+                                            content: "print('browser save')\n",
+                                            updatedAt: now,
+                                        }
+                                        : node,
+                                ),
+                                stdin: "browser stdin\n",
+                            });
+                        }}
+                    >
+                        Force save workspace
+                    </button>
+                ) : null}
                 {process.env.NODE_ENV !== "production" ? (
                     <pre
                         data-testid="e2e-workspace-debug"

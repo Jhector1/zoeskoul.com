@@ -17,6 +17,7 @@ import ReviewTopicStage from "./components/content/ReviewTopicStage";
 import CelebrationLayer from "./components/celebration/CelebrationLayer";
 
 import ReviewResetDialog from "./components/overlays/ReviewResetDialog";
+import ReviewModuleNavBar from "@/components/review/ReviewModuleNavBar";
 
 export default function ReviewModulePage(props: ReviewModulePageProps) {
     const vm = useReviewModuleController(props);
@@ -47,6 +48,8 @@ export default function ReviewModulePage(props: ReviewModulePageProps) {
                 body={<ReviewTopicStage {...vm.topicStage} />}
 
             />
+            <ReviewModuleNavBar {...vm.moduleNav} />
+
             {/*<div className="ui-surface-muted mt-2 h-[440rem] flex-1 min-h-0 overflow-auto  rounded-none"/>*/}
         </>
     );

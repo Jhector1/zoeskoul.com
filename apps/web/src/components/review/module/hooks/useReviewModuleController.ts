@@ -1169,7 +1169,25 @@ export function useReviewModuleController({
             onOpenCertificate: handleOpenCertificate,
             onActiveCardIndexChange: handleNavigateCardIndex,
         },
+        moduleNav: {
+            locale,
+            subjectSlug,
+            prevModuleId: nav?.prevModuleId ?? null,
+            nextModuleId: nav?.nextModuleId ?? null,
+            nextLocked,
+            nextBillingHref,
+            canGoNext: Boolean(nav?.nextModuleId) && canGoNextModule && !nextLocked,
 
+            showCertificateCta:
+                !navLoading &&
+                !navError &&
+                !nav?.nextModuleId &&
+                Boolean(subjectFinish?.isLastModule),
+
+            canGetCertificate: Boolean(subjectFinish?.canGetCertificate),
+            certificateLabel: "Get certificate",
+            certificateHint: subjectFinish?.certificateHint ?? null,
+        },
         celebrations: {
             reduceMotion,
             courseCelebrateOpen: celebrations.courseCelebrateOpen,
