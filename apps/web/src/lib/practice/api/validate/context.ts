@@ -16,6 +16,22 @@ import {
 import { loadValidateInstance } from "./repositories/instance.repo";
 import { jsonApiResponse, safeSameOriginUrl } from "../shared/http";
 
+
+function validateDebugEnabled() {
+    return (
+        process.env.NODE_ENV !== "production" &&
+        process.env.ZOE_DEBUG_PRACTICE_VALIDATE === "1"
+    );
+}
+
+function logValidate401(reason: string, extra: Record<string, any>) {
+    if (!validateDebugEnabled()) return;
+
+    console.warn("[practice-validate-401]", {
+        reason,
+        ...extra,
+    });
+}
 export async function buildPracticeValidateContext(args: {
     prisma: PrismaClient;
     req: Request;
@@ -38,6 +54,12 @@ export async function buildPracticeValidateContext(args: {
 
     const payload = verifyPracticeKey(key);
     if (!payload) {
+        logValidate401("invalid_or_expired_key", {
+            requestId,
+            hasKey: Boolean(key),
+            keyParts: typeof key === "string" ? key.split(".").length : 0,
+            keyLength: typeof key === "string" ? key.length : 0,
+        });
         return {
             kind: "res",
             res: jsonApiResponse({
@@ -51,6 +73,13 @@ export async function buildPracticeValidateContext(args: {
     const { actor, setGuestId } = await resolveActorForPayload(payload);
 
     if (isActorMismatch(payload, actor)) {
+        logValidate401("actor_mismatch", {
+            requestId,
+            payloadUserId: payload.userId ? "present" : null,
+            payloadGuestId: payload.guestId ? "present" : null,
+            actorUserId: actor.userId ? "present" : null,
+            actorGuestId: actor.guestId ? "present" : null,
+        });
         return {
             kind: "res",
             res: attachGuestCookie(

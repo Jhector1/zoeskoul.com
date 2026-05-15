@@ -49,6 +49,16 @@ function withTimeout<T>(promise: Promise<T>, ms: number, message: string) {
   });
 }
 
+function isExpiredPracticeKeyError(error: unknown) {
+    const message = String((error as any)?.message ?? "").toLowerCase();
+
+    return (
+        message.includes("invalid or expired key") ||
+        message.includes("practice validate failed (401)") ||
+        message.includes("practice help failed (401)")
+    );
+}
+
 export function getStablePracticeQuestionKey(q: ReviewQuestion) {
   if (q.kind !== "practice") return q.id;
 
@@ -400,16 +410,23 @@ function getRuntimePracticePatchForQuestion(
   };
 }
 function sanitizeSavedPracticePatch(savedPatch: any, exerciseKind?: string) {
-  if (!savedPatch) return null;
+    if (!savedPatch) return null;
 
-  const next = { ...savedPatch };
+    const next = { ...savedPatch };
 
-  if (exerciseKind === "drag_reorder" && !next.ui?.reorderTouched) {
-    delete next.reorder;
-    delete next.reorderIds;
-  }
+    /**
+     * Practice keys are short-lived signed transport tokens, not learner state.
+     * A saved patch must never overwrite the fresh key returned by /api/practice.
+     */
+    delete next.key;
+    delete next.sessionId;
 
-  return next;
+    if (exerciseKind === "drag_reorder" && !next.ui?.reorderTouched) {
+        delete next.reorder;
+        delete next.reorderIds;
+    }
+
+    return next;
 }
 
 function getSavedPracticePatch(
@@ -516,7 +533,12 @@ function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
       savedPatch.workspaceOrigin === "saved";
 
   const patch = { ...savedPatch };
-
+    /**
+     * Do not merge ephemeral signed transport tokens from saved progress.
+     * The live item.key from /api/practice is always the source of truth.
+     */
+    delete patch.key;
+    delete patch.sessionId;
   /**
    * Do not let a blank non-user saved/sync patch erase starterCode.
    * This preserves:
@@ -1129,22 +1151,43 @@ export function useQuizPracticeBank(args: {
             return setPracticeForQuestion(prev, q, nextState);
           });
         } catch (e: any) {
-          setPractice((prev) => {
-            const current = prev[key] ?? prev[q.id];
-            if (!current) return prev;
+            if (isExpiredPracticeKeyError(e)) {
+                /**
+                 * Keep the card disabled/loading while the replacement practice item is
+                 * fetched. Do not briefly unlock the stale item, or the learner can submit
+                 * the same expired key again before React installs the refreshed item.
+                 */
+                setPractice((prev) => {
+                    const current = prev[key] ?? prev[q.id];
+                    if (!current) return prev;
 
-            const nextState: PracticeState = {
-              ...current,
-              busy: false,
-              error: e?.message ?? "Submit failed.",
-            };
+                    return setPracticeForQuestion(prev, q, {
+                        ...current,
+                        loading: true,
+                        busy: false,
+                        error: null,
+                    });
+                });
 
-            return setPracticeForQuestion(prev, q, nextState);
-          });
+                await loadPracticeQuestion(q, { force: true });
+                return;
+            }
+
+            setPractice((prev) => {
+                const current = prev[key] ?? prev[q.id];
+                if (!current) return prev;
+
+                const nextState: PracticeState = {
+                    ...current,
+                    busy: false,
+                    error: e?.message ?? "Submit failed.",
+                };
+
+                return setPracticeForQuestion(prev, q, nextState);
+            });
         }
       },
-      [practice, unlimitedAttempts, isCompleted, locked],
-  );
+      [practice, unlimitedAttempts, isCompleted, locked, loadPracticeQuestion],  );
 
   const openPracticeHelp = useCallback(
       async (
@@ -1267,32 +1310,62 @@ export function useQuizPracticeBank(args: {
             return setPracticeForQuestion(prev, q, nextState);
           });
         } catch (e: any) {
-          setPractice((prev) => {
-            const current = prev[key] ?? prev[q.id];
-            if (!current) return prev;
+            if (isExpiredPracticeKeyError(e)) {
+                /**
+                 * Same stale-key protection as submitPractice:
+                 * do not re-enable the old item while the refreshed key is still loading.
+                 */
+                setPractice((prev) => {
+                    const current = prev[key] ?? prev[q.id];
+                    if (!current) return prev;
 
-            const nextState: PracticeState = {
-              ...current,
-              busy: false,
-              error: e?.message ?? "Help failed.",
-              item: current.item
-                  ? {
-                    ...current.item,
-                    help: {
-                      ...current.item.help,
-                      busyStepKey: null,
-                      error: e?.message ?? "Help failed.",
-                    },
-                  }
-                  : current.item,
-            };
+                    return setPracticeForQuestion(prev, q, {
+                        ...current,
+                        loading: true,
+                        busy: false,
+                        error: null,
+                        item: current.item
+                            ? {
+                                ...current.item,
+                                help: {
+                                    ...current.item.help,
+                                    busyStepKey: null,
+                                    error: null,
+                                },
+                            }
+                            : current.item,
+                    });
+                });
 
-            return setPracticeForQuestion(prev, q, nextState);
-          });
+                await loadPracticeQuestion(q, { force: true });
+                return;
+            }
+
+            setPractice((prev) => {
+                const current = prev[key] ?? prev[q.id];
+                if (!current) return prev;
+
+                const nextState: PracticeState = {
+                    ...current,
+                    busy: false,
+                    error: e?.message ?? "Help failed.",
+                    item: current.item
+                        ? {
+                            ...current.item,
+                            help: {
+                                ...current.item.help,
+                                busyStepKey: null,
+                                error: e?.message ?? "Help failed.",
+                            },
+                        }
+                        : current.item,
+                };
+
+                return setPracticeForQuestion(prev, q, nextState);
+            });
         }
       },
-      [practice, isCompleted, locked],
-  );
+      [practice, isCompleted, locked, loadPracticeQuestion],  );
 
   function isPracticeChecked(q: Extract<ReviewQuestion, { kind: "practice" }>) {
     const key = getStablePracticeQuestionKey(q);

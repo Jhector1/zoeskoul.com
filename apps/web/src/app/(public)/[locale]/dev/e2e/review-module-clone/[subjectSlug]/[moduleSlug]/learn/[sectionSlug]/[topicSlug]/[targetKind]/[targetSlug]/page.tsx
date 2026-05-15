@@ -145,7 +145,25 @@ function makeProjectCard({
         },
     };
 }
-
+const reviewClonePracticeQuizCard = {
+    type: "quiz",
+    id: "review-clone-practice-quiz",
+    title: "Review Clone Practice Key Refresh",
+    passScore: 1,
+    spec: {
+        subject: "python",
+        module: "e2e-review-clone",
+        moduleSlug: "e2e-review-clone",
+        section: "e2e-section",
+        topic: "e2e-review-topic",
+        difficulty: "easy",
+        n: 1,
+        allowReveal: true,
+        preferKind: "code_input",
+        maxAttempts: 3,
+        runtime: runtimeDefaults,
+    },
+} satisfies ReviewCard;
 const reviewCloneTopic = {
     id: "e2e-review-topic",
     label: "E2E Review Topic",
@@ -171,6 +189,7 @@ const reviewCloneTopic = {
             markdown:
                 "This is a real review-module clone. It uses the real review shell, topic flow, progress hook, runtime store, tools rail, and editor hydration path.",
         },
+        reviewClonePracticeQuizCard,
         makeProjectCard({
             id: "review-clone-project",
             title: "Review Clone Project A",

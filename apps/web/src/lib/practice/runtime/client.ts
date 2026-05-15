@@ -200,20 +200,28 @@ export async function fetchResolvedPracticeItem(args: {
     );
 
     if (resolvedPatch) {
+        const safePatch = { ...(resolvedPatch as any) };
+
+        /**
+         * Practice keys are ephemeral signed tokens from the current /api/practice
+         * response. Saved/runtime patches must never replace them.
+         */
+        delete safePatch.key;
+        delete safePatch.sessionId;
+
         item = {
             ...item,
-            ...resolvedPatch,
+            ...safePatch,
             help: {
                 ...item.help,
-                ...(resolvedPatch.help ?? {}),
+                ...(safePatch.help ?? {}),
                 entries: {
                     ...item.help.entries,
-                    ...(resolvedPatch.help?.entries ?? {}),
+                    ...(safePatch.help?.entries ?? {}),
                 },
             },
         };
     }
-
     return {
         response,
         exercise: resolvedExercise,

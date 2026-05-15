@@ -15,6 +15,8 @@
     "test:e2e:web": "pnpm --filter @zoeskoul/web test:e2e",
     "test:e2e:web:harness": "pnpm --filter @zoeskoul/web test:e2e:harness",
     "test:e2e:web:headed": "pnpm --filter @zoeskoul/web test:e2e:headed",
+    "test:e2e:web:review-practice": "pnpm --filter @zoeskoul/web test:e2e:review-practice",
+
     "test:e2e:web:sql-review": "pnpm --filter @zoeskoul/web test:e2e:sql-review",
     "test:e2e:web:review-module-clone": "pnpm --filter @zoeskoul/web test:e2e:review-module-clone",
     "validate": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
