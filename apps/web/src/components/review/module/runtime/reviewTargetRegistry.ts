@@ -3,6 +3,7 @@ import type { UnknownRecord } from "./reviewRuntimeTypes";
 import { getCardStateKey, getExerciseStateKey } from "./exerciseKeys";
 import { resolveCourseLanguage, resolveCourseFileSeed, resolveRuntimeDefaultDataset } from "./courseProfiles";
 import {tag} from "@/lib/practice/generator/shared/i18n";
+import {isUsableStarterCode} from "@/components/review/module/runtime/starterContent";
 
 export type ReviewTargetKind = "sketch" | "exercise" | "quiz" | "card" | "project" | "text" | "video";
 export type LooseManifestRecord = UnknownRecord & {
@@ -100,22 +101,35 @@ function asRecord(value: unknown): LooseManifestRecord | null {
     ? (value as LooseManifestRecord)
     : null;
 }
-
-function pickStarterCodeFromMessageBase(item: unknown) {
+function pickStarterCodeFromMessageBase(
+    item: unknown,
+    resolveMessage?: (key: string) => string | undefined,
+) {
+  /**
+   * Starter code may come from i18n/messageBase ONLY after it has been
+   * resolved into real code text for the active locale.
+   *
+   * Valid:
+   *   "-- Affiche tous les produits.\nSELECT * FROM products;"
+   *
+   * Invalid:
+   *   "@:quiz.some_id.starterCode"
+   *
+   * The runtime registry does not currently have a locale-aware resolver, so
+   * callers normally pass no resolver and this returns undefined. The
+   * curriculum/compiler layer should resolve localized starter code before it
+   * reaches this runtime layer.
+   */
   const itemRecord = asRecord(item);
   const messageBase =
       typeof itemRecord?.messageBase === "string" && itemRecord.messageBase.trim()
           ? itemRecord.messageBase.trim()
           : "";
 
-  if (!messageBase) return undefined;
+  if (!messageBase || !resolveMessage) return undefined;
 
-  const key = `${messageBase}.starterCode`;
-  const value = tag(key);
-
-  if (!value || value === key) return undefined;
-
-  return value;
+  const resolved = resolveMessage(`${messageBase}.starterCode`);
+  return isUsableStarterCode(resolved) ? resolved : undefined;
 }
 function getCardTargetKind(card: ReviewCard): ReviewTargetKind {
   switch (card.type) {
@@ -164,12 +178,11 @@ function mergeManifestParts(
     },
     starterFiles: primary.starterFiles ?? secondary.starterFiles,
     solutionFiles: primary.solutionFiles ?? secondary.solutionFiles,
-    starterCode:
-      typeof primary.starterCode === "string"
+    starterCode: isUsableStarterCode(primary.starterCode)
         ? primary.starterCode
-        : typeof secondary.starterCode === "string"
-          ? secondary.starterCode
-          : undefined,
+        : isUsableStarterCode(secondary.starterCode)
+            ? secondary.starterCode
+            : undefined,
     solutionCode:
       typeof primary.solutionCode === "string"
         ? primary.solutionCode
@@ -204,13 +217,13 @@ function pickStarterCode(item: unknown, subjectSlug: string, language?: string) 
     target: item,
   }).starterCode;
 
-  if (explicit && explicit.trim()) {
+  if (isUsableStarterCode(explicit)) {
     return explicit;
   }
 
   const fromMessageBase = pickStarterCodeFromMessageBase(item);
 
-  if (fromMessageBase && fromMessageBase.trim()) {
+  if (isUsableStarterCode(fromMessageBase)) {
     return fromMessageBase;
   }
 

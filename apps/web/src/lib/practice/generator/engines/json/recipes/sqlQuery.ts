@@ -1,4 +1,8 @@
-import { makeCodeInputOut } from "@/lib/practice/generator/engines/utils";
+import {
+    cleanRuntimeCode,
+    makeCodeInputOut,
+    starterCodeForGeneratedExercise
+} from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
 import { resolveSqlRunnerConfig } from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
 import { buildSqlExpectedExample } from "./expectedExample";
@@ -66,7 +70,10 @@ export const buildSqlQueryRecipe: RecipeHandler<any> = (def, args, resolved) => 
         title: resolved.title,
         prompt: resolved.prompt,
         language: def.language ?? "sql",
-      starterCode: String(def.starterCode ?? resolved.starterCode ?? ""),
+      starterCode: starterCodeForGeneratedExercise(
+    def.starterCode,
+    resolved.starterCode,
+),
 
         workspace: def.workspace,
         starterFiles: def.starterFiles,

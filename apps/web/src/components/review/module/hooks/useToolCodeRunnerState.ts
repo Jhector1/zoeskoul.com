@@ -15,6 +15,11 @@ import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
 import { deriveEntryCode } from "../runtime/exerciseWorkspaceResolver";
 import { reviewSaveDebug, summarizeWorkspaceForSave } from "../runtime/reviewSaveDebug";
 import { getTopicProgressState, normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
+import {
+    getStateLanguage,
+    normalizeCodeWorkspacePair,
+    stateLanguageMatches,
+} from "@/components/review/module/runtime/workspaceCodeSource";
 
 type BoundTarget = { id: string; exerciseKey?: string; onPatch: (patch: any) => void };
 
@@ -129,7 +134,9 @@ function firstNonBlank(...values: Array<string | null | undefined>) {
         if (typeof value === "string" && value.trim()) return value;
     }
     return undefined;
-}function isSavedUserWork(value: any) {
+}
+
+function isSavedUserWork(value: any) {
     if (!value) return false;
 
     if (
@@ -144,6 +151,13 @@ function firstNonBlank(...values: Array<string | null | undefined>) {
         value.workspaceOrigin === "user" ||
         value.workspaceOrigin === "saved"
     );
+}
+
+function getStateWorkspace(value: any): WorkspaceStateV2 | null {
+    if (value?.workspace?.version === 2) return value.workspace as WorkspaceStateV2;
+    if (value?.codeWorkspace?.version === 2) return value.codeWorkspace as WorkspaceStateV2;
+    if (value?.ideWorkspace?.version === 2) return value.ideWorkspace as WorkspaceStateV2;
+    return null;
 }
 
 function workspaceWithEntryCode(
@@ -548,32 +562,43 @@ export function useToolCodeRunnerState(args: {
         return progressSaved;
     }, [progress, viewTid, effectiveToolKey, effectiveBoundId, exercises, scopeKey]);
 
-    const initialLang = (saved?.lang as WorkspaceLanguage) ?? defaultLang;
+    const compatibleSaved = useMemo(() => {
+        if (!saved) return null;
+
+        const savedWorkspace = getStateWorkspace(saved);
+        return stateLanguageMatches(saved, defaultLang, savedWorkspace) ? saved : null;
+    }, [saved, defaultLang]);
+
+    const initialLang =
+        getStateLanguage(compatibleSaved, getStateWorkspace(compatibleSaved)) ??
+        defaultLang;
     const initialWorkspace =
-        saved?.workspace && typeof saved.workspace === "object"
-            ? (saved.workspace as WorkspaceStateV2)
+        compatibleSaved?.workspace && typeof compatibleSaved.workspace === "object"
+            ? (compatibleSaved.workspace as WorkspaceStateV2)
             : null;
-    const initialCode = deriveEntryCode(initialWorkspace) || (typeof saved?.code === "string" ? saved.code : defaultCode);
+    const initialCode =
+        deriveEntryCode(initialWorkspace) ||
+        (typeof compatibleSaved?.code === "string" ? compatibleSaved.code : defaultCode);
     const initialStdin =
         typeof initialWorkspace?.stdin === "string"
             ? initialWorkspace.stdin
-            : typeof saved?.stdin === "string"
-                ? saved.stdin
+            : typeof compatibleSaved?.stdin === "string"
+                ? compatibleSaved.stdin
                 : defaultStdin;
     const initialWorkspaceKey = workspaceKeyOf(initialWorkspace);
 
     const initialResolvedSql = resolveSqlRunnerConfig({
         language: initialLang,
-        sqlDialect: (saved?.sqlDialect as SqlDialect) ?? defaultSqlDialect,
+        sqlDialect: (compatibleSaved?.sqlDialect as SqlDialect) ?? defaultSqlDialect,
         sqlDatasetId:
-            typeof saved?.sqlDatasetId === "string" ? saved.sqlDatasetId : undefined,
+            typeof compatibleSaved?.sqlDatasetId === "string" ? compatibleSaved.sqlDatasetId : undefined,
         sqlSchemaSql:
-            typeof saved?.sqlSchemaSql === "string" ? saved.sqlSchemaSql : undefined,
+            typeof compatibleSaved?.sqlSchemaSql === "string" ? compatibleSaved.sqlSchemaSql : undefined,
         sqlSeedSql:
-            typeof saved?.sqlSeedSql === "string" ? saved.sqlSeedSql : undefined,
+            typeof compatibleSaved?.sqlSeedSql === "string" ? compatibleSaved.sqlSeedSql : undefined,
         sqlInitialTableSnapshots:
-            saved?.sqlInitialTableSnapshots && typeof saved.sqlInitialTableSnapshots === "object"
-                ? (saved.sqlInitialTableSnapshots as SqlTableSnapshots)
+            compatibleSaved?.sqlInitialTableSnapshots && typeof compatibleSaved.sqlInitialTableSnapshots === "object"
+                ? (compatibleSaved.sqlInitialTableSnapshots as SqlTableSnapshots)
                 : undefined,
         defaultSqlDialect,
     });
@@ -625,7 +650,7 @@ export function useToolCodeRunnerState(args: {
         workspace: initialWorkspace,
         workspaceKey: initialWorkspaceKey,
         starterHash:
-            typeof saved?.starterHash === "string" ? saved.starterHash : "",
+            typeof compatibleSaved?.starterHash === "string" ? compatibleSaved.starterHash : "",
         sqlDialect: initialResolvedSql.sqlDialect,
         sqlDatasetId: initialResolvedSql.sqlDatasetId,
         sqlSchemaSql: initialResolvedSql.sqlSchemaSql,
@@ -1051,10 +1076,16 @@ export function useToolCodeRunnerState(args: {
                 args2.exerciseKey ?? null,
             ) ?? inputId;
 
-            const nextWorkspace = hydrateWorkspaceShellWithCode(
-                args2.workspace ?? null,
-                args2.code,
-            );
+            const incomingPair = normalizeCodeWorkspacePair({
+                workspace: args2.workspace ?? null,
+                code: args2.code,
+                language: args2.lang,
+                stdin: args2.stdin,
+                state: args2,
+            });
+
+            const nextWorkspace = incomingPair.workspace;
+            const nextCode = incomingPair.code;
 
             const currentStarterHash = workspaceKeyOf(nextWorkspace);
 
@@ -1096,8 +1127,17 @@ export function useToolCodeRunnerState(args: {
                 return isSavedUserWork(value);
             }
 
+            function languageMatches(value: any) {
+                return stateLanguageMatches(
+                    value,
+                    args2.lang,
+                    getStateWorkspace(value),
+                );
+            }
+
             function starterMatches(value: any) {
                 if (!value) return false;
+                if (!languageMatches(value)) return false;
 
                 const savedStarterHash =
                     typeof value?.starterHash === "string" ? value.starterHash : "";
@@ -1134,7 +1174,7 @@ export function useToolCodeRunnerState(args: {
             const progressSavedCandidates = [
                 progressToolStateSaved,
                 progressRuntimeExerciseSaved,
-            ].filter(Boolean);
+            ].filter((candidate) => Boolean(candidate) && languageMatches(candidate));
 
             const progressSavedUserMatch =
                 progressSavedCandidates.find(
@@ -1143,11 +1183,13 @@ export function useToolCodeRunnerState(args: {
 
             const progressSaved =
                 progressSavedUserMatch ??
-                progressToolStateSaved ??
-                progressRuntimeExerciseSaved ??
+                (languageMatches(progressToolStateSaved) ? progressToolStateSaved : null) ??
+                (languageMatches(progressRuntimeExerciseSaved) ? progressRuntimeExerciseSaved : null) ??
                 null;
 
-            const runtimeSavedIsUserWork = isUserWork(runtimeSaved);
+            const compatibleRuntimeSaved =
+                languageMatches(runtimeSaved) ? runtimeSaved : null;
+            const runtimeSavedIsUserWork = isUserWork(compatibleRuntimeSaved);
             const progressSavedIsUserWork = isUserWork(progressSaved);
 
             const savedForBind =
@@ -1158,7 +1200,7 @@ export function useToolCodeRunnerState(args: {
                     starterMatches(progressSaved) &&
                     !runtimeSavedIsUserWork
                         ? progressSaved
-                        : runtimeSaved ?? progressSaved ?? null;
+                        : compatibleRuntimeSaved ?? progressSaved ?? null;
 
             const savedWorkspace = hydrateWorkspaceShellWithCode(
                 savedForBind?.workspace && typeof savedForBind.workspace === "object"
@@ -1195,7 +1237,7 @@ export function useToolCodeRunnerState(args: {
                 (typeof savedForBind?.code === "string" && savedForBind.code.trim() !== ""
                     ? savedForBind.code
                     : "") ||
-                (typeof args2.code === "string" ? args2.code : "");
+                (typeof nextCode === "string" ? nextCode : "");
             const hydratedWorkspaceForBind = hydrateWorkspaceShellWithCode(
                 workspaceForBind,
                 nextSnapCode,
@@ -1205,7 +1247,7 @@ export function useToolCodeRunnerState(args: {
             const nextSnap: ToolSnap = {
                 topicId: viewTid,
                 toolKey: nextToolKey,
-                lang: (savedForBind?.language as WorkspaceLanguage) ?? args2.lang,
+                lang: args2.lang,
                 code: nextSnapCode,
                 stdin:
                     typeof hydratedWorkspaceForBind?.stdin === "string"
@@ -1254,8 +1296,12 @@ export function useToolCodeRunnerState(args: {
             ) {
                 args2.onPatch({
                     codeLang: nextSnap.lang,
+                    language: nextSnap.lang,
+                    lang: nextSnap.lang,
                     code: nextSnap.code,
+                    source: nextSnap.code,
                     codeStdin: nextSnap.stdin,
+                    stdin: nextSnap.stdin,
                     updateOrigin: "sync",
                 });
             }

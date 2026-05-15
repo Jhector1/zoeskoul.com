@@ -26,6 +26,10 @@ import { emitGamificationUpdate } from "@/lib/gamification/browserEvents";
 import { reviewDebug, summarizePracticePatch } from "@/components/review/module/runtime/reviewDebug";
 import { exerciseDebug, summarizeExercisePatch } from "@/components/review/module/runtime/exerciseDebug";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import {
+  normalizeWorkspaceLanguage,
+  stateLanguageMatches,
+} from "@/components/review/module/runtime/workspaceCodeSource";
 
 export { isEmptyPracticeAnswer } from "@/lib/practice/runtime";
 export type PracticeState = PracticeItemState;
@@ -428,51 +432,67 @@ function sanitizeSavedPracticePatch(savedPatch: any, exerciseKind?: string) {
 
     return next;
 }
-
+function mayRestoreQuestionIdPatch(
+    q: Extract<ReviewQuestion, { kind: "practice" }>,
+    stableKey: string,
+) {
+    /**
+     * q.id is often just the review-card slot id, while stableKey is the real
+     * fetched/generated exercise identity. Falling back from stableKey to q.id
+     * lets an old practice exercise patch override a new exercise starter.
+     *
+     * Only use q.id as a restore key when it is the stable identity.
+     */
+    return q.id === stableKey;
+}
 function getSavedPracticePatch(
     initialState: SavedQuizState | null,
     q: Extract<ReviewQuestion, { kind: "practice" }>,
 ) {
-  const stableKey = getStablePracticeQuestionKey(q);
-  const byStableKey = initialState?.practiceItemPatch?.[stableKey] ?? null;
-  const byQuestionId = initialState?.practiceItemPatch?.[q.id] ?? null;
-  const selected = byStableKey ?? byQuestionId ?? null;
+    const stableKey = getStablePracticeQuestionKey(q);
+    const allowQuestionIdPatch = mayRestoreQuestionIdPatch(q, stableKey);
 
-  exerciseDebug("B_useQuizPracticeBank_getSavedPracticePatch", {
-    qid: q.id,
-    stableKey,
-    selectedFrom: byStableKey ? "stableKey" : byQuestionId ? "questionId" : "none",
-    availablePatchKeys: Object.keys(initialState?.practiceItemPatch ?? {}),
-    selected: summarizeExercisePatch(selected),
-    byStableKey: summarizeExercisePatch(byStableKey),
-    byQuestionId: summarizeExercisePatch(byQuestionId),
-  });
+    const byStableKey = initialState?.practiceItemPatch?.[stableKey] ?? null;
+    const byQuestionId = allowQuestionIdPatch
+        ? initialState?.practiceItemPatch?.[q.id] ?? null
+        : null;
 
-  reviewDebug("6_RESTORE_READ useQuizPracticeBank.getSavedPracticePatch", {
-    qid: q.id,
-    stableKey,
-    availablePatchKeys: Object.keys(initialState?.practiceItemPatch ?? {}),
-    selectedFrom:
-      byStableKey ? "stableKey" : byQuestionId ? "questionId" : "none",
-    selectedSummary: summarizePracticePatch(selected),
-    stableSummary: summarizePracticePatch(byStableKey),
-    idSummary: summarizePracticePatch(byQuestionId),
-  });
+    const selected = byStableKey ?? byQuestionId ?? null;
 
-  return selected;
+    exerciseDebug("B_useQuizPracticeBank_getSavedPracticePatch", {
+        qid: q.id,
+        stableKey,
+        allowQuestionIdPatch,
+        selectedFrom: byStableKey ? "stableKey" : byQuestionId ? "questionId" : "none",
+        availablePatchKeys: Object.keys(initialState?.practiceItemPatch ?? {}),
+        selected: summarizeExercisePatch(selected),
+    });
+
+    reviewDebug("6_RESTORE_READ useQuizPracticeBank.getSavedPracticePatch", {
+        qid: q.id,
+        stableKey,
+        allowQuestionIdPatch,
+        availablePatchKeys: Object.keys(initialState?.practiceItemPatch ?? {}),
+        selectedFrom:
+            byStableKey ? "stableKey" : byQuestionId ? "questionId" : "none",
+        selected: summarizeExercisePatch(selected),
+    });
+
+    return selected;
 }
 
 function getSavedPracticeMeta(
     initialState: SavedQuizState | null,
     q: Extract<ReviewQuestion, { kind: "practice" }>,
 ) {
-  const stableKey = getStablePracticeQuestionKey(q);
+    const stableKey = getStablePracticeQuestionKey(q);
+    const allowQuestionIdPatch = mayRestoreQuestionIdPatch(q, stableKey);
 
-  return (
-      initialState?.practiceMeta?.[stableKey] ??
-      initialState?.practiceMeta?.[q.id] ??
-      null
-  );
+    return (
+        initialState?.practiceMeta?.[stableKey] ??
+        (allowQuestionIdPatch ? initialState?.practiceMeta?.[q.id] : null) ??
+        null
+    );
 }
 
 function resolveQuestionByAnyId(
@@ -521,11 +541,27 @@ function stablePracticeJson(value: any) {
   }
 }
 
+function getPracticeExerciseLanguage(exercise: any) {
+  if (!exercise || exercise.kind !== "code_input") return null;
+
+  const isSql =
+      exercise.language === "sql" ||
+      Boolean(exercise?.fixedSqlDialect) ||
+      Boolean(exercise?.runtime?.datasetId) ||
+      typeof exercise?.sqlSchemaSql === "string" ||
+      typeof exercise?.sqlSeedSql === "string";
+
+  return isSql
+      ? "sql"
+      : normalizeWorkspaceLanguage(exercise.language ?? "python");
+}
+
 function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
   if (!item || !savedPatch) return item;
 
   const isCodeInput = item?.exercise?.kind === "code_input";
   const starterCode = String(item?.exercise?.starterCode ?? "").trim();
+  const expectedLanguage = getPracticeExerciseLanguage(item?.exercise);
 
   const userEdited =
       savedPatch.userEdited === true ||
@@ -539,36 +575,49 @@ function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
      */
     delete patch.key;
     delete patch.sessionId;
+  if (isCodeInput && expectedLanguage && !stateLanguageMatches(patch, expectedLanguage, patch.workspace)) {
+      delete patch.code;
+      delete patch.source;
+      delete patch.workspace;
+      delete patch.codeWorkspace;
+      delete patch.ideWorkspace;
+      delete patch.codeStdin;
+      delete patch.stdin;
+      delete patch.language;
+      delete patch.lang;
+      delete patch.codeLang;
+  }
   /**
    * Do not let a blank non-user saved/sync patch erase starterCode.
    * This preserves:
    *   - starterCode on first load
    *   - real user edits when userEdited/workspaceOrigin says it is user data
    */
-  if (isCodeInput && starterCode && !userEdited) {
-    if (typeof patch.code === "string" && !patch.code.trim()) {
-      delete patch.code;
+    /**
+     * Do not let a non-user saved/sync patch override authored starterCode.
+     *
+     * Important:
+     * A passive runtime/tool sync can contain nonblank code, for example "1" or
+     * an old query.sql snapshot. That is still not learner work unless it is
+     * explicitly marked user/saved.
+     *
+     * For starter-backed code_input exercises:
+     * - non-user patch may keep metadata/result/help/attempts
+     * - non-user patch must not replace code/source/workspace
+     * - real learner edits are preserved through userEdited/workspaceOrigin=user/saved
+     */
+    if (isCodeInput && starterCode && !userEdited) {
+        delete patch.code;
+        delete patch.source;
+        delete patch.workspace;
+        delete patch.codeWorkspace;
+        delete patch.ideWorkspace;
+        delete patch.codeStdin;
+        delete patch.stdin;
+        delete patch.language;
+        delete patch.lang;
+        delete patch.codeLang;
     }
-
-    if (typeof patch.source === "string" && !patch.source.trim()) {
-      delete patch.source;
-    }
-
-    const workspace =
-        patch.workspace ??
-        patch.codeWorkspace ??
-        patch.ideWorkspace ??
-        null;
-
-    const workspaceCode = getWorkspaceEntryCodeForPracticeBank(workspace);
-
-    if (!workspaceCode.trim()) {
-      delete patch.workspace;
-      delete patch.codeWorkspace;
-      delete patch.ideWorkspace;
-    }
-  }
-
   const workspace =
       patch.workspace ??
       patch.codeWorkspace ??
@@ -684,11 +733,12 @@ export function useQuizPracticeBank(args: {
       for (const q of questions) {
         if (q.kind !== "practice") continue;
 
-        const stableKey = getStablePracticeQuestionKey(q);
-        const savedPatch =
-          initialState.practiceItemPatch?.[stableKey] ??
-          initialState.practiceItemPatch?.[q.id] ??
-          null;
+          const stableKey = getStablePracticeQuestionKey(q);
+          const savedPatch =
+              initialState.practiceItemPatch?.[stableKey] ??
+              (mayRestoreQuestionIdPatch(q, stableKey)
+                  ? initialState.practiceItemPatch?.[q.id] ?? null
+                  : null);
 
         if (!savedPatch) continue;
 

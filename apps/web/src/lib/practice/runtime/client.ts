@@ -22,6 +22,10 @@ import {
     DEFAULT_PRACTICE_HELP_POLICY,
     normalizePracticeHelpPolicy,
 } from "@/lib/practice/help/steps";
+import {
+    normalizeWorkspaceLanguage,
+    stateLanguageMatches,
+} from "@/components/review/module/runtime/workspaceCodeSource";
 
 function isWorkspaceStateForPatch(value: unknown) {
     return (
@@ -83,6 +87,23 @@ function getExerciseStarterCode(exercise: Exercise) {
     return String((exercise as any)?.starterCode ?? "").trim();
 }
 
+function resolvedExerciseLanguage(exercise: Exercise) {
+    if (exercise.kind !== "code_input") return null;
+
+    const exerciseAny = exercise as any;
+    const codeExercise = exercise as Extract<Exercise, { kind: "code_input" }>;
+    const isSql =
+        codeExercise.language === "sql" ||
+        Boolean(exerciseAny?.fixedSqlDialect) ||
+        Boolean(exerciseAny?.runtime?.datasetId) ||
+        typeof exerciseAny?.sqlSchemaSql === "string" ||
+        typeof exerciseAny?.sqlSeedSql === "string";
+
+    return isSql
+        ? "sql"
+        : normalizeWorkspaceLanguage(codeExercise.language ?? "python");
+}
+
 function isBlankWorkspacePatch(value: unknown) {
     if (
         !value ||
@@ -113,7 +134,7 @@ function sanitizeSavedPatchForResolvedExercise<T extends Partial<QItem> | null>(
     if (exercise.kind !== "code_input") return patch;
 
     const starterCode = getExerciseStarterCode(exercise);
-    if (!starterCode) return patch;
+    const expectedLanguage = resolvedExerciseLanguage(exercise);
 
     const patchAny = patch as any;
 
@@ -124,35 +145,47 @@ function sanitizeSavedPatchForResolvedExercise<T extends Partial<QItem> | null>(
 
     /**
      * Important:
-     * If this code exercise has starterCode, a blank auto/sync patch must not
-     * overwrite the starter. This happens when an old saved/runtime patch contains
-     * code: "" or an empty workspace before starterCode was added.
+     * If this code exercise has starterCode, a passive auto/sync patch must not
+     * overwrite the starter, even when the patch contains nonblank code.
      *
-     * Real user edits are still preserved.
+     * The failing SQL review tests hit this exact case: an old/sync query.sql
+     * snapshot such as "1" can arrive as savedPatch and replace the freshly
+     * resolved SQL starter before the editor renders.
+     *
+     * Real learner edits are still preserved.
      */
+    if (expectedLanguage && !stateLanguageMatches(patchAny, expectedLanguage, patchAny.workspace)) {
+        const next = { ...patchAny };
+
+        delete next.code;
+        delete next.source;
+        delete next.workspace;
+        delete next.codeWorkspace;
+        delete next.ideWorkspace;
+        delete next.codeStdin;
+        delete next.stdin;
+        delete next.language;
+        delete next.lang;
+        delete next.codeLang;
+
+        return next as T;
+    }
+
     if (userEdited) return patch;
+    if (!starterCode) return patch;
 
     const next = { ...patchAny };
 
-    if (typeof next.code === "string" && !next.code.trim()) {
-        delete next.code;
-    }
-
-    if (typeof next.source === "string" && !next.source.trim()) {
-        delete next.source;
-    }
-
-    if (isBlankWorkspacePatch(next.workspace)) {
-        delete next.workspace;
-    }
-
-    if (isBlankWorkspacePatch(next.codeWorkspace)) {
-        delete next.codeWorkspace;
-    }
-
-    if (isBlankWorkspacePatch(next.ideWorkspace)) {
-        delete next.ideWorkspace;
-    }
+    delete next.code;
+    delete next.source;
+    delete next.workspace;
+    delete next.codeWorkspace;
+    delete next.ideWorkspace;
+    delete next.codeStdin;
+    delete next.stdin;
+    delete next.language;
+    delete next.lang;
+    delete next.codeLang;
 
     return next as T;
 }

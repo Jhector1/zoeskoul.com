@@ -46,7 +46,29 @@ export type Handler<K extends ExerciseKind = ExerciseKind> = (
 ) => GenOut<K>;
 
 export type AnyHandler = (args: HandlerArgs) => AnyGenOut;
+export function cleanRuntimeCode(value: unknown): string {
+    const text = typeof value === "string" ? value : "";
+    return text.trim().startsWith("@:") ? "" : text;
+}
 
+/**
+ * For generated practice exercises, starterCode may intentionally be an i18n
+ * tag such as "@:quiz.some_id.starterCode". The client practice runtime later
+ * resolves that tag with useTaggedT()/resolveDeepTagged before initializing the
+ * editor item.
+ *
+ * Explicit manifest starter code must be real code. But localized messageBase
+ * starter code should be allowed to travel as a tag until the client resolves it.
+ */
+export function starterCodeForGeneratedExercise(
+    explicitStarterCode: unknown,
+    localizedStarterCode: unknown,
+): string {
+    const explicit = cleanRuntimeCode(explicitStarterCode);
+    if (explicit) return explicit;
+
+    return typeof localizedStarterCode === "string" ? localizedStarterCode : "";
+}
 export type SubjectModuleGenerator = (
     rng: RNG,
     diff: Difficulty,

@@ -1,20 +1,21 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/lib/cn";
+import {cn} from "@/lib/cn";
 import type {
     ReviewModule,
     ReviewModuleSection,
     ReviewTopicShape,
 } from "@/lib/subjects/types";
 import RingButton from "@/components/review/module/RingButton";
-import { useTaggedT } from "@/i18n/tagged";
+import {useTaggedT} from "@/i18n/tagged";
 
 export type SidebarTopicItemVm = {
     id: string;
     slug?: string;
     label: string;
     summary: string | null;
+    firstCardTitle?: string | null;
     disabled: boolean;
     done: boolean;
     isViewing: boolean;
@@ -179,7 +180,8 @@ function SidebarTopicRow({
                             ) : null}
 
                             {item.done ? (
-                                <span className="shrink-0 text-[11px] font-medium text-emerald-700 dark:text-emerald-300/80">
+                                <span
+                                    className="shrink-0 text-[11px] font-medium text-emerald-700 dark:text-emerald-300/80">
                                     ✓
                                 </span>
                             ) : null}
@@ -190,6 +192,15 @@ function SidebarTopicRow({
                         <div className="ui-review-topic-summary line-clamp-2 max-w-full overflow-hidden">
                             {item.summary}
                         </div>
+                    ) : null}
+
+                    {item.firstCardTitle ? (
+                        <span
+                            className="mt-1 block truncate text-[11px] font-medium text-[rgb(var(--ui-muted-foreground))]"
+                            data-testid={`review-sidebar-topic-first-card-${item.id}`}
+                        >
+        {item.firstCardTitle}
+    </span>
                     ) : null}
                 </div>
             </div>
@@ -204,6 +215,7 @@ const MemoSidebarTopicRow = React.memo(
         prev.item.slug === next.item.slug &&
         prev.item.label === next.item.label &&
         prev.item.summary === next.item.summary &&
+        prev.item.firstCardTitle === next.item.firstCardTitle &&
         prev.item.disabled === next.item.disabled &&
         prev.item.done === next.item.done &&
         prev.item.isViewing === next.item.isViewing &&
@@ -463,7 +475,8 @@ function ModuleSidebar({
 
     return (
         <div className="ui-page-surface flex h-full min-h-0 flex-col overflow-hidden rounded-none">
-            <div className="shrink-0 border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] px-4 py-3">
+            <div
+                className="shrink-0 border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] px-4 py-3">
                 <div className="min-w-0">
                     <div className="ui-title-md">{modTitle}</div>
 
@@ -545,7 +558,8 @@ function ModuleSidebar({
                 </div>
             </div>
 
-            <div className="shrink-0 border-t border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] p-2.5 sm:p-3">
+            <div
+                className="shrink-0 border-t border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] p-2.5 sm:p-3">
                 <RingButton
                     pct={assignmentPct}
                     missedPct={assignmentMissedPct}

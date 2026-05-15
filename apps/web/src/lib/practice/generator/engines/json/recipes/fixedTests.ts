@@ -1,4 +1,8 @@
-import { makeCodeInputOut } from "@/lib/practice/generator/engines/utils";
+import {
+    cleanRuntimeCode,
+    makeCodeInputOut,
+    starterCodeForGeneratedExercise
+} from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
 import type { ManifestCodeInput } from "@/lib/subjects/_core/manifestTypes";
 import { buildTerminalExpectedExample } from "./expectedExample";
@@ -26,7 +30,10 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
         title: resolved.title,
         prompt: resolved.prompt,
         language: def.language ?? "python",
-      starterCode: String(def.starterCode ?? resolved.starterCode ?? ""),
+      starterCode: starterCodeForGeneratedExercise(
+    def.starterCode,
+    resolved.starterCode,
+),
 
         workspace: def.workspace,
         starterFiles: def.starterFiles,

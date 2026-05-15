@@ -81,11 +81,17 @@ export function getSidebarTopicItems({
         const done = progressHydrated
             ? isTopicComplete((t.cards ?? []) as ReviewCard[], progress?.topics?.[t.id], t.id)
             : false;
+        const firstCard = Array.isArray(t.cards) ? t.cards[0] : null;
+        const firstCardTitle =
+            typeof firstCard?.title === "string" && firstCard.title.trim()
+                ? firstCard.title
+                : null;
 
         return {
             id: t.id,
             label: t.label ?? "",
             summary: t.summary ?? null,
+            firstCardTitle,
             disabled,
             done,
             isViewing: viewTopicId === t.id,

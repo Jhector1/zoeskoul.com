@@ -39,8 +39,28 @@ export function useReviewPanels({ footerInsetPx = 0 }: Args) {
     );
 
     const handleToggleLeftPanel = useCallback(() => {
-        if (showDesktopLeft) panels.setLeftCollapsed((v) => !v);
-        else setMobileTopicsOpen(true);
+        /**
+         * This button is labeled "Topics", so it should behave like "show topics".
+         *
+         * Root cause:
+         * Review-practice E2E calls:
+         *
+         *   page.getByRole("button", { name: /Topics/i }).click()
+         *   page.getByText(/Read before coding/i).click()
+         *
+         * On desktop the sidebar is already open. If this button toggles closed,
+         * "Read before coding" becomes hidden and Playwright waits until the test
+         * timeout before the optional .catch() runs.
+         *
+         * Keep this action idempotent/open-only. The sidebar still has its own
+         * dedicated collapse button, wired through handleCollapseLeft.
+         */
+        if (showDesktopLeft) {
+            panels.setLeftCollapsed(false);
+            return;
+        }
+
+        setMobileTopicsOpen(true);
     }, [showDesktopLeft, panels]);
 
     const handleToggleRightPanel = useCallback(() => {

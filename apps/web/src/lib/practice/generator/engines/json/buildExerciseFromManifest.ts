@@ -3,7 +3,7 @@ import {
     makeSingleChoiceOut,
     makeMultiChoiceOut,
     makeDragReorderOut,
-    makeFillBlankChoiceOut,
+    makeFillBlankChoiceOut, cleanRuntimeCode,
 } from "@/lib/practice/generator/engines/utils";
 import type { HandlerArgs } from "@/lib/practice/generator/engines/utils";
 import type {
@@ -35,8 +35,7 @@ function resolveBase(messageBase: string) {
         prompt: t(`${messageBase}.prompt`),
         hint: maybeT(`${messageBase}.hint`),
         help: resolveHelp(messageBase),
-        starterCode: maybeT(`${messageBase}.starterCode`) ?? "",
-        template: maybeT(`${messageBase}.template`) ?? "",
+        starterCode: cleanRuntimeCode(maybeT(`${messageBase}.starterCode`)),        template: maybeT(`${messageBase}.template`) ?? "",
         expectedExampleMeta: maybeT(`${messageBase}.expectedExampleMeta`),
         maybeT,
     };

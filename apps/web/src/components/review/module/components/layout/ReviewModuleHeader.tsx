@@ -67,7 +67,7 @@ export default function ReviewModuleHeader({
                             {showDesktopLeft
                                 ? leftCollapsed
                                     ? "Topics ▶"
-                                    : "Topics ◀"
+                                    : "Topics"
                                 : "Topics"}
                         </button>
 

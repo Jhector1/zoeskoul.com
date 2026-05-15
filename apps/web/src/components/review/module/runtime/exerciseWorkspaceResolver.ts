@@ -7,6 +7,11 @@ import type {
 } from "@/components/ide/types";
 import type { WorkspaceLanguage } from "@/lib/practice/types";
 import { defaultMainFile } from "@/components/ide/languageDefaults";
+import {
+  cleanStarterCode,
+  hasUsableStarterFilesValue,
+  isUsableStarterCode
+} from "@/components/review/module/runtime/starterContent";
 
 type UnknownRecord = Record<string, unknown>;
 
@@ -14,18 +19,19 @@ type UnknownRecord = Record<string, unknown>;
 
 
 function explicitStarterCodeFromManifest(manifest: UnknownRecord) {
-  // Only explicit starter fields are allowed to seed the code input pane.
-  // Do not fall back to generic code/content/source fields or loose prompt scans,
-  // because those fields may contain solution text, examples, or explanations.
+  // Only explicit runtime starter fields are allowed to seed the code input pane.
+  // Do not fall back to generic code/content/source fields or i18n aliases,
+  // because those fields may contain solution text, examples, explanations, or
+  // unresolved translation keys such as `@:quiz.some_id.starterCode`.
   const workspace = isRecord(manifest.workspace) ? manifest.workspace : {};
   const recipe = isRecord(manifest.recipe) ? manifest.recipe : {};
-  const explicit =
-      workspace.starterCode ??
-      manifest?.starterCode ??
-      recipe.starterCode ??
-      "";
 
-  return String(explicit ?? "").trim();
+  return (
+      cleanStarterCode(workspace.starterCode) ??
+      cleanStarterCode(manifest?.starterCode) ??
+      cleanStarterCode(recipe.starterCode) ??
+      ""
+  );
 }
 
 type StarterFile =
@@ -129,8 +135,9 @@ function starterFileContent(file: StarterFile): string {
     "body",
     "value",
   ] as const) {
-    if (typeof file[key] === "string") return file[key];
-  }
+    if (typeof file[key] === "string") {
+      return isUsableStarterCode(file[key]) ? file[key] : "";
+    }  }
 
   return "";
 }
@@ -189,7 +196,9 @@ function normalizeStarterFiles(
         path: normalizePath(path, fallbackEntryFile),
         content:
             typeof value === "string"
-                ? value
+                ? isUsableStarterCode(value)
+                    ? value
+                    : ""
                 : isRecord(value)
                     ? starterFileContent(value as StarterFile)
                     : "",
@@ -234,36 +243,8 @@ function getInitialStdin(manifest: UnknownRecord) {
 }
 
 function hasUsableStarterFilesSource(value: unknown): boolean {
-  const source = unwrapStarterFiles(value);
-
-  if (Array.isArray(source)) {
-    return source.length > 0;
-  }
-
-  if (isRecord(source)) {
-    return Object.entries(source).some(([path, value]) => {
-      if (
-        [
-          "entryFile",
-          "entryFilePath",
-          "mainFile",
-          "mainFilePath",
-          "language",
-          "lang",
-        ].includes(path)
-      ) {
-        return false;
-      }
-
-      if (typeof value === "string") return true;
-      if (isRecord(value)) return true;
-      return false;
-    });
-  }
-
-  return false;
+  return hasUsableStarterFilesValue(unwrapStarterFiles(value));
 }
-
 function firstUsableStarterFilesSource(...values: Array<unknown>) {
   for (const value of values) {
     if (hasUsableStarterFilesSource(value)) return value;
@@ -298,9 +279,7 @@ export function getStarterCode(manifest: UnknownRecord) {
 
 function pickNonBlankString(...values: Array<unknown>) {
   for (const value of values) {
-    if (typeof value !== "string") continue;
-    if (!value.trim()) continue;
-    return value;
+    if (isUsableStarterCode(value)) return value;
   }
   return "";
 }

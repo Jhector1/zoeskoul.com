@@ -276,3 +276,128 @@ describe("review exercise workspace manifest/db binding", () => {
     expect(deriveEntryCode(workspace)).toBe("print('manifest workspace only')\n");
   });
 });
+
+
+describe("review runtime starter content contract", () => {
+  it.each([
+    { language: "python" as const, fileName: "main.py" },
+    { language: "sql" as const, fileName: "query.sql" },
+  ])(
+      "treats i18n alias starterCode as missing for $language",
+      ({ language, fileName }) => {
+        const workspace = resolveExerciseWorkspace({
+          language,
+          manifest: {
+            workspace: {
+              starterCode: "@:quiz.m1_s01_show_all_products.starterCode",
+            },
+          },
+          entry: entry({
+            language,
+            starterCode: "@:quiz.m1_s01_show_all_products.starterCode",
+          }),
+        });
+
+        expect(fileContent(workspace, fileName)).toBe("");
+        expect(deriveEntryCode(workspace)).toBe("");
+        expect(JSON.stringify(workspace)).not.toContain("@:");
+        expect(JSON.stringify(workspace)).not.toContain("starterCode");
+      },
+  );
+  it.each([
+    {
+      language: "python" as const,
+      fileName: "main.py",
+      code: "# Affiche un message\nprint('Bonjour')\n",
+    },
+    {
+      language: "sql" as const,
+      fileName: "query.sql",
+      code: "-- Affiche tous les produits\nSELECT * FROM products;\n",
+    },
+  ])(
+      "allows resolved localized starter comments for $language",
+      ({ language, fileName, code }) => {
+        const workspace = resolveExerciseWorkspace({
+          language,
+          manifest: {
+            workspace: {
+              starterCode: code,
+            },
+          },
+          entry: entry({
+            language,
+            starterCode: code,
+          }),
+        });
+
+        expect(fileContent(workspace, fileName)).toBe(code);
+        expect(deriveEntryCode(workspace)).toBe(code);
+        expect(JSON.stringify(workspace)).not.toContain("@:");
+      },
+  );
+  it.each([
+    { language: "python" as const, fileName: "main.py" },
+    { language: "sql" as const, fileName: "query.sql" },
+  ])(
+      "uses a blank default workspace for $language when no saved work and no starter exist",
+      ({ language, fileName }) => {
+        const workspace = resolveExerciseWorkspace({
+          language,
+          manifest: {},
+          entry: entry({
+            language,
+            starterCode: undefined,
+            starterFiles: undefined,
+          }),
+        });
+
+        expect(fileContent(workspace, fileName)).toBe("");
+        expect(deriveEntryCode(workspace)).toBe("");
+        expect(workspace.language).toBe(language);
+      },
+  );
+
+  it.each([
+    { language: "python" as const },
+    { language: "sql" as const },
+  ])(
+      "does not mark i18n alias starterCode as starter-backed for $language",
+      ({ language }) => {
+        const source = resolveDeterministicEditorSource(
+            entry({
+              language,
+              toolManifest: {
+                workspace: {
+                  starterCode: "@:quiz.some_runtime_key.starterCode",
+                },
+              },
+              starterCode: "@:quiz.some_runtime_key.starterCode",
+            }),
+        );
+
+        expect(source?.workspaceSeedMode).toBe("empty");
+      },
+  );
+
+  it("still lets SQL keep dataset metadata separate from blank starter code", () => {
+    const workspace = resolveExerciseWorkspace({
+      language: "sql",
+      manifest: {
+        runtime: { datasetId: "sql_module_1" },
+        workspace: {
+          entryFile: "query.sql",
+          starterCode: "@:quiz.m1_s01_show_all_products.starterCode",
+        },
+      },
+      entry: entry({
+        language: "sql",
+        sqlDatasetId: "sql_module_1",
+        starterCode: "@:quiz.m1_s01_show_all_products.starterCode",
+      }),
+    });
+
+    expect(fileContent(workspace, "query.sql")).toBe("");
+    expect(workspace.language).toBe("sql");
+  });
+});

@@ -4,6 +4,7 @@ import {
   resolveSqlRunnerConfig,
   type ResolvedSqlRunnerConfig,
 } from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
+import {isUsableStarterCode} from "@/components/review/module/runtime/starterContent";
 
 type UnknownRecord = Record<string, unknown>;
 
@@ -147,12 +148,10 @@ function firstFiles(...values: unknown[]) {
 
 function firstCode(...values: unknown[]) {
   for (const value of values) {
-    const code = cleanString(value);
-    if (code) return code;
+    if (isUsableStarterCode(value)) return value;
   }
   return undefined;
 }
-
 /**
  * Shared, non-dataset file seed resolver.
  *

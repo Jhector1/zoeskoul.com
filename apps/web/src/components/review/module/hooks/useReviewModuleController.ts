@@ -940,7 +940,9 @@ export function useReviewModuleController({
      * shows blank/stale state.
      */
     const rightRailExerciseKey =
-        activeExerciseTarget?.exerciseId ?? null;
+        activeExerciseTarget?.exerciseId ??
+        tool.boundId ??
+        null;
 
     return {
         toolsProvider,
@@ -1052,11 +1054,19 @@ export function useReviewModuleController({
                 onCollapse: panels.handleCollapseRight,
                 onUnbind: handleUnbindFromToolsPanel,
                 boundId: rightRailExerciseKey,
-                editorOwnerKey: routeEditorOwnerKey,
-                toolScopeKey: routeEditorToolScopeKey
-                    ? routeEditorToolScopeKey
-                    : rightRailExerciseKey
-                        ? rightRailExerciseKey
+
+                /**
+                 * Prefer the dynamically bound exercise owner when present.
+                 *
+                 * routeEditorOwnerKey/routeEditorToolScopeKey describe the static route target.
+                 * On review-practice quiz routes, that static target is the quiz/card, not the
+                 * generated SQL practice exercise currently bound in Tools.
+                 */
+                editorOwnerKey: rightRailExerciseKey ?? routeEditorOwnerKey,
+                toolScopeKey: rightRailExerciseKey
+                    ? rightRailExerciseKey
+                    : routeEditorToolScopeKey
+                        ? routeEditorToolScopeKey
                         : activeToolScopeKey,
                 rightBodyRef: tool.rightBodyRef,
                 codeRunnerRegionH: tool.codeRunnerRegionH,

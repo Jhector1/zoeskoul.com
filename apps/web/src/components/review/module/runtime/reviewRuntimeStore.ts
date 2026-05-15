@@ -19,6 +19,11 @@ import {reviewDebug, summarizeWorkspace} from "./reviewDebug";
 import {exerciseDebug, summarizeExercisePatch, summarizeExerciseWorkspace} from "./exerciseDebug";
 import {reviewSaveDebug, summarizeWorkspaceForSave} from "./reviewSaveDebug";
 import {languagesCompatible} from "@/components/review/module/utils";
+import {
+    hasUsableStarterFilesValue,
+    isUsableStarterCode,
+    workspaceHasUsableStarterContent
+} from "@/components/review/module/runtime/starterContent";
 
 type InternalStore = ReviewRuntimeStore & {
     _flushToolSnapshotCb: (() => void) | null;
@@ -477,7 +482,10 @@ function findTargetRegistryEntry(
     return best?.entry ?? null;
 }
 
-function targetHasStarter(entryOrManifest: any, maybeEntry?: import("./reviewTargetRegistry").ReviewTargetEntry | null) {
+function targetHasStarter(
+    entryOrManifest: any,
+    maybeEntry?: import("./reviewTargetRegistry").ReviewTargetEntry | null,
+) {
     const entry =
         maybeEntry ??
         (entryOrManifest &&
@@ -485,36 +493,38 @@ function targetHasStarter(entryOrManifest: any, maybeEntry?: import("./reviewTar
         "targetKey" in entryOrManifest
             ? (entryOrManifest as import("./reviewTargetRegistry").ReviewTargetEntry)
             : null);
+
     const item = maybeEntry ? entryOrManifest : entry?.item ?? entryOrManifest;
     const source = item?.spec ?? item ?? {};
     const workspace = source?.workspace ?? {};
-    const hasFiles = (value: unknown) =>
-        Array.isArray(value)
-            ? value.length > 0
-            : !!value && typeof value === "object" && Object.keys(value as Record<string, unknown>).length > 0;
+    const recipe = source?.recipe ?? {};
+
     const isWorkspaceValue = (value: unknown) =>
         !!value &&
         typeof value === "object" &&
         (value as any).version === 2 &&
-        Array.isArray((value as any).nodes);
+        Array.isArray((value as any).nodes) &&
+        workspaceHasUsableStarterContent(value as WorkspaceStateV2);
 
     return Boolean(
         isWorkspaceValue(source?.initialWorkspace) ||
         isWorkspaceValue(source?.starterWorkspace) ||
-        hasFiles(workspace?.starterFiles) ||
-        hasFiles(workspace?.initialFiles) ||
-        hasFiles(workspace?.workspaceFiles) ||
-        String(workspace?.starterCode ?? "").trim() ||
-        hasFiles(source?.starterFiles) ||
-        hasFiles(source?.initialFiles) ||
-        hasFiles(source?.workspaceFiles) ||
-        String(source?.starterCode ?? "").trim() ||
-        hasFiles(source?.recipe?.starterFiles) ||
-        hasFiles(source?.recipe?.initialFiles) ||
-        String(source?.recipe?.starterCode ?? "").trim(),
+        isWorkspaceValue(entry?.starterWorkspace) ||
+        hasUsableStarterFilesValue(entry?.starterFiles) ||
+        isUsableStarterCode(entry?.starterCode) ||
+        hasUsableStarterFilesValue(workspace?.starterFiles) ||
+        hasUsableStarterFilesValue(workspace?.initialFiles) ||
+        hasUsableStarterFilesValue(workspace?.workspaceFiles) ||
+        isUsableStarterCode(workspace?.starterCode) ||
+        hasUsableStarterFilesValue(source?.starterFiles) ||
+        hasUsableStarterFilesValue(source?.initialFiles) ||
+        hasUsableStarterFilesValue(source?.workspaceFiles) ||
+        isUsableStarterCode(source?.starterCode) ||
+        hasUsableStarterFilesValue(recipe?.starterFiles) ||
+        hasUsableStarterFilesValue(recipe?.initialFiles) ||
+        isUsableStarterCode(recipe?.starterCode)
     );
 }
-
 function workspaceHasUsableFile(workspace: WorkspaceStateV2 | null | undefined) {
     if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
         return false;
@@ -2427,6 +2437,37 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                         null,
                 }
                 : baseManifest;
+            const existingExercise = get().exercises[target.exerciseStateKey] ?? null;
+            const routeLanguage = resolveCourseLanguage({
+                subjectSlug: subjectSlug ?? "",
+                language:
+                    routeExerciseManifest?.language ??
+                    routeExerciseManifest?.lang ??
+                    registryEntry?.language,
+                runtimeDefaults:
+                    registryEntry?.runtimeDefaults ??
+                    registryEntry?.topicRuntimeDefaults ??
+                    registryEntry?.moduleRuntimeDefaults ??
+                    null,
+                target: routeExerciseManifest ?? registryEntry?.item ?? null,
+            });
+            const existingLanguage = String(
+                existingExercise?.language ??
+                existingExercise?.lang ??
+                workspaceLanguage(existingExercise?.workspace) ??
+                "",
+            ).trim();
+            const shouldPreserveExistingExercise =
+                Boolean(existingExercise) &&
+                Boolean(existingLanguage) &&
+                Boolean(routeLanguage) &&
+                !languagesCompatible(existingLanguage, routeLanguage);
+
+            if (shouldPreserveExistingExercise) {
+                get().bindExerciseTool(target.exerciseStateKey);
+                return;
+            }
+
             get().ensureExercise({
                 exerciseKey: target.exerciseStateKey,
                 subjectSlug: subjectSlug ?? "",

@@ -18,6 +18,8 @@ import {
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 import { reviewSaveDebug, summarizeWorkspaceForSave } from "@/components/review/module/runtime/reviewSaveDebug";
 import {languagesCompatible} from "@/components/review/module/utils";
+import {defaultMainFile} from "@/components/ide/languageDefaults";
+import { normalizeCodeWorkspacePair } from "@/components/review/module/runtime/workspaceCodeSource";
 
 const FullIDE = dynamic(() => import("@/components/ide/fullide/FullIDE"), {
     ssr: false,
@@ -163,6 +165,24 @@ function writeReviewWorkspaceDraft(ownerKey: string | null | undefined, workspac
 function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
     if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) return 0;
     return workspace.nodes.filter((node: any) => node?.kind === "file").length;
+}
+
+
+
+function workspaceLanguageOf(workspace: WorkspaceStateV2 | null | undefined) {
+    return typeof workspace?.language === "string" ? workspace.language : "";
+}
+
+function workspaceMatchesLanguage(
+    workspace: WorkspaceStateV2 | null | undefined,
+    language: string | null | undefined,
+) {
+    const workspaceLanguage = workspaceLanguageOf(workspace);
+    const targetLanguage = String(language ?? "");
+
+    if (!workspaceLanguage || !targetLanguage) return true;
+
+    return languagesCompatible(workspaceLanguage, targetLanguage);
 }
 
 function shouldUseLocalReviewDraft(args: {
@@ -640,20 +660,62 @@ export default function CodeToolPane(props: {
         editorRuntime?.workspace,
     ]);
 
+    const normalizedToolPair = useMemo(
+        () =>
+            normalizeCodeWorkspacePair({
+                workspace: toolWorkspace,
+                code: toolCode,
+                state: {
+                    workspaceOrigin: "sync",
+                },
+                language: toolLang,
+                stdin: toolStdin,
+            }),
+        [toolWorkspace, toolCode, toolLang, toolStdin],
+    );
+
+    const normalizedToolWorkspace = normalizedToolPair.workspace;
+
     const reviewDirectWorkspaceReady = !!reviewDirectWorkspace;
     const hasEditorTarget = Boolean(
         hasBindableEditorTarget ||
         forceWorkspaceHasContent(editorRuntime?.workspace) ||
         forceWorkspaceHasContent(exerciseRuntime?.workspace) ||
-        forceWorkspaceHasContent(toolWorkspace),
+        forceWorkspaceHasContent(normalizedToolWorkspace),
     );
 
     const isReviewRouteMode = Boolean(resolvedEditorOwnerKey && hasBindableEditorTarget);
 
 
     const reviewDirectWorkspaceError = editorRuntime?.workspaceStatus === "error";
-    const effectiveLanguage = (isReviewRouteMode ? editorRuntime?.language : null) ?? toolLang;
-    const isSql = effectiveLanguage === "sql";
+    const runtimeLanguage =
+        isReviewRouteMode && typeof editorRuntime?.language === "string"
+            ? editorRuntime.language
+            : null;
+
+    const normalizedToolWorkspaceLanguage =
+        typeof normalizedToolWorkspace?.language === "string"
+            ? normalizedToolWorkspace.language
+            : null;
+
+    /**
+     * Shared language-source rule:
+     *
+     * If the bound tool workspace says "sql" but the route runtime says "python",
+     * trust the bound workspace/tool language. This happens on clone/dynamic
+     * practice routes where the route owner is Python-shaped but the active
+     * practice exercise is SQL.
+     */
+    const shouldPreferBoundToolLanguage = Boolean(
+        isReviewRouteMode &&
+        normalizedToolWorkspaceLanguage &&
+        runtimeLanguage &&
+        !languagesCompatible(normalizedToolWorkspaceLanguage, runtimeLanguage),
+    );
+
+    const effectiveLanguage = shouldPreferBoundToolLanguage
+        ? (normalizedToolWorkspaceLanguage as RunnerLanguage)
+        : runtimeLanguage ?? toolLang;    const isSql = effectiveLanguage === "sql";
     const ideShell = useMemo(
         () => resolveFullIDEConfigFromLearningIde({ ideConfig }),
         [ideConfig],
@@ -718,6 +780,8 @@ export default function CodeToolPane(props: {
         )
     );
 
+
+
     const cardWorkspaceReady = Boolean(
         cardRuntimeKey &&
         forceWorkspaceHasContent(editorRuntime?.workspace)
@@ -726,45 +790,71 @@ export default function CodeToolPane(props: {
     function createDefaultToolWorkspace(language: string | null | undefined): WorkspaceStateV2 {
         const now = Date.now();
         const normalizedLanguage = asWorkspaceLanguage(language);
+        const fileName = defaultMainFile(normalizedLanguage);
+        const fileId = `file:${fileName}`;
 
         return {
             version: 2,
             language: normalizedLanguage,
             nodes: [
                 {
-                    id: "file:main.py",
+                    id: fileId,
                     kind: "file",
-                    name: "main.py",
+                    name: fileName,
                     parentId: null,
                     content: "",
                     createdAt: now,
                     updatedAt: now,
                 },
             ],
-            openTabs: ["file:main.py"],
-            activeFileId: "file:main.py",
-            entryFileId: "file:main.py",
+            openTabs: [fileId],
+            activeFileId: fileId,
+            entryFileId: fileId,
             stdin: "",
             expanded: [],
             leftPct: 40,
         };
     }
+
+
     const runtimeWorkspaceError = Boolean(isReviewRouteMode && editorRuntime?.workspaceStatus === "error");
     const directRuntimeWorkspace = useMemo(() => {
         if (isReviewRouteMode) {
-            // Review/exercise route: blank runtime workspace should NOT hide starter code.
+            /**
+             * Route-owned review targets prefer deterministic runtime state.
+             */
             if (
                 editorRuntime?.workspaceStatus === "ready" &&
-                forceWorkspaceHasContent(editorRuntime.workspace)
+                forceWorkspaceHasContent(editorRuntime.workspace) &&
+                workspaceMatchesLanguage(editorRuntime.workspace, effectiveLanguage)
             ) {
                 return editorRuntime.workspace;
             }
 
             if (
                 exerciseRuntime?.workspaceStatus === "ready" &&
-                forceWorkspaceHasContent(exerciseRuntime.workspace)
+                forceWorkspaceHasContent(exerciseRuntime.workspace) &&
+                workspaceMatchesLanguage(exerciseRuntime.workspace, effectiveLanguage)
             ) {
                 return exerciseRuntime.workspace;
+            }
+
+            /**
+             * Dynamic practice exercises, especially clone-page mocked practice items,
+             * may not exist in the static review target registry. In that case the
+             * bound Tools snapshot is the only immediate source of the editor
+             * workspace.
+             *
+             * This is still safe because deterministic runtime wins above whenever it
+             * exists. This fallback only prevents valid SQL/Python practice starters
+             * from getting stuck behind "Loading editor..." when the route runtime
+             * has no registry-backed workspace yet.
+             */
+            if (
+                forceWorkspaceHasContent(normalizedToolWorkspace) &&
+                workspaceMatchesLanguage(normalizedToolWorkspace, effectiveLanguage)
+            ) {
+                return normalizedToolWorkspace ?? null;
             }
 
             return null;
@@ -773,10 +863,12 @@ export default function CodeToolPane(props: {
         // Normal tool/sketch route: blank file workspace is still valid.
         // This preserves the old behavior where an unbound sketch/editor can show
         // an empty editor and still save through onChangeWorkspace.
-        if (forceWorkspaceHasContent(toolWorkspace)) {
-            return toolWorkspace ?? null;
+        if (
+            forceWorkspaceHasContent(normalizedToolWorkspace) &&
+            workspaceMatchesLanguage(normalizedToolWorkspace, effectiveLanguage)
+        ) {
+            return normalizedToolWorkspace ?? null;
         }
-
         return createDefaultToolWorkspace(effectiveLanguage);
     }, [
         isReviewRouteMode,
@@ -784,7 +876,7 @@ export default function CodeToolPane(props: {
         editorRuntime?.workspace,
         exerciseRuntime?.workspaceStatus,
         exerciseRuntime?.workspace,
-        toolWorkspace,
+        normalizedToolWorkspace,
         effectiveLanguage,
     ]);
     const finalReviewWorkspace = useMemo(() => {
@@ -849,8 +941,7 @@ export default function CodeToolPane(props: {
             (
                 !isReviewRouteMode &&
                 usesWorkspaceShell &&
-                reviewWorkspaceHasNonEmptyFile(toolWorkspace)
-            )
+                reviewWorkspaceHasNonEmptyFile(normalizedToolWorkspace)            )
         ),
     );
 
@@ -985,7 +1076,12 @@ export default function CodeToolPane(props: {
                 prevIncoming?.code === next.code && prevIncoming?.stdin === next.stdin;
 
             const shouldEmitCodeFields =
-                forceUserEdit || (!codeMatchesPreviousEmission && !codeMatchesIncomingProps);
+                forceUserEdit ||
+                (
+                    !isReviewRouteMode &&
+                    !codeMatchesPreviousEmission &&
+                    !codeMatchesIncomingProps
+                );
 
             lastEmittedRef.current = next;
 

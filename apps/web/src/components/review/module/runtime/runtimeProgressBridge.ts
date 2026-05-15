@@ -172,30 +172,42 @@ function getExercisePatchForQuizState(
     estate.workspaceOrigin === "user" ||
     estate.workspaceOrigin === "saved";
 
-  return {
-    code,
-    source: code,
-    codeLang: lang,
-    language: lang,
-    lang,
-    stdin,
-    codeStdin: stdin,
+  const patch: ExercisePatchRecord = {
     userEdited,
     workspaceOrigin: estate.workspaceOrigin ?? (userEdited ? "saved" : undefined),
     starterHash: estate.starterHash,
-    ...(workspace
-      ? {
-          workspace,
-          codeWorkspace: workspace,
-          ideWorkspace: workspace,
-        }
-      : {}),
     ...(estate.submitted !== undefined ? { submitted: estate.submitted } : {}),
     ...(estate.result !== undefined ? { result: estate.result } : {}),
     ...(estate.answer !== undefined ? { answer: estate.answer } : {}),
     ...(estate.runner !== undefined ? { runner: estate.runner } : {}),
     updatedAt: estate.updatedAt ?? Date.now(),
   };
+
+  /**
+   * Only persist code/workspace into quiz practiceItemPatch when it is real
+   * learner-owned state.
+   *
+   * Passive starter/sync snapshots are useful in the runtime store, but if they
+   * are copied into quizState.practiceItemPatch they can later override freshly
+   * resolved starterCode before the editor renders.
+   */
+  if (userEdited) {
+    patch.code = code;
+    patch.source = code;
+    patch.codeLang = lang;
+    patch.language = lang;
+    patch.lang = lang;
+    patch.stdin = stdin;
+    patch.codeStdin = stdin;
+
+    if (workspace) {
+      patch.workspace = workspace;
+      patch.codeWorkspace = workspace;
+      patch.ideWorkspace = workspace;
+    }
+  }
+
+  return patch;
 }
 
 /**

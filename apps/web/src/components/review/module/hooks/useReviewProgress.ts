@@ -15,6 +15,7 @@ import { mergeRuntimeIntoProgress } from "../runtime/runtimeProgressBridge";
 import { reviewSaveDebug, summarizeWorkspaceForSave } from "../runtime/reviewSaveDebug";
 import { getExerciseStateKey } from "../runtime/exerciseKeys";
 import { deriveEntryCode } from "../runtime/exerciseWorkspaceResolver";
+import { stateLanguageMatches } from "../runtime/workspaceCodeSource";
 
 function isPersistedCardToolKey(toolKey: string) {
     if (typeof toolKey !== "string" || !toolKey.trim()) return false;
@@ -1036,8 +1037,18 @@ export function useReviewProgress(args: {
                 const shouldDropSavedWorkspace =
                     !savedMatchesCurrentStarter && Boolean(existingExercise?.starterHash);
 
+                const savedMatchesExistingLanguage =
+                    !existingExercise?.language ||
+                    stateLanguageMatches(
+                        saved,
+                        existingExercise.language,
+                        savedWorkspace,
+                    );
+
                 const shouldHydrateEditorState =
-                    savedHasEditorContent && !shouldDropSavedWorkspace;
+                    savedHasEditorContent &&
+                    !shouldDropSavedWorkspace &&
+                    savedMatchesExistingLanguage;
 
                 const workspace =
                     !shouldHydrateEditorState

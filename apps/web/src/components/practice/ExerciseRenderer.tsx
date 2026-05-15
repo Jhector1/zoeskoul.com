@@ -26,13 +26,14 @@ import type {LearningIdeConfig} from "@/lib/ide/learningIdeConfig";
 import type {WorkspaceStateV2} from "@/components/ide/types";
 import {useReviewRuntimeStore} from "@/components/review/module/runtime/reviewRuntimeStore";
 import {getExerciseStateKey} from "@/components/review/module/runtime/exerciseKeys";
-import {
-    exerciseDebug,
-    summarizeExercisePatch,
-    summarizeExerciseWorkspace
-} from "@/components/review/module/runtime/exerciseDebug";
-import {resolveExerciseWorkspace, deriveEntryCode} from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 
+import {resolveExerciseWorkspace, deriveEntryCode} from "@/components/review/module/runtime/exerciseWorkspaceResolver";
+import {
+    getStateLanguage,
+    normalizeCodeWorkspacePair,
+    normalizeWorkspaceLanguage,
+    stateLanguageMatches,
+} from "@/components/review/module/runtime/workspaceCodeSource";
 
 type SqlTableSnapshot = {
     name: string;
@@ -163,6 +164,29 @@ function getWorkspaceFromAnyState(value: any): WorkspaceStateV2 | null {
     return null;
 }
 
+function isSqlExerciseManifest(exercise: CodeInputExerciseWithSqlExtras | null | undefined) {
+    if (!exercise) return false;
+
+    return (
+        exercise.language === "sql" ||
+        Boolean((exercise as any)?.fixedSqlDialect) ||
+        Boolean((exercise as any)?.runtime?.datasetId) ||
+        typeof exercise.sqlSchemaSql === "string" ||
+        typeof exercise.sqlSeedSql === "string" ||
+        Boolean(exercise.sqlDatasetId)
+    );
+}
+
+function getManifestExerciseLanguage(
+    exercise: CodeInputExerciseWithSqlExtras | null | undefined,
+): RunnerLanguage {
+    if (isSqlExerciseManifest(exercise)) return "sql";
+
+    return normalizeWorkspaceLanguage(
+        exercise?.language ?? "python",
+    ) as RunnerLanguage;
+}
+
 function workspaceHasNonBlankFile(workspace: WorkspaceStateV2 | null | undefined) {
     if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
         return false;
@@ -218,7 +242,95 @@ function resolvePreferredExerciseWorkspace(args: {
 
     return savedWorkspace;
 }
+function firstNonBlankCode(...values: Array<unknown>) {
+    for (const value of values) {
+        if (typeof value !== "string") continue;
+        if (!value.trim()) continue;
+        return value;
+    }
 
+    return "";
+}
+
+function workspaceWithEntryCode(
+    workspace: WorkspaceStateV2 | null | undefined,
+    code: string,
+): WorkspaceStateV2 | null {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return workspace ?? null;
+    }
+
+    const entryId = workspace.entryFileId || workspace.activeFileId;
+    const fallbackFile = workspace.nodes.find((node) => node.kind === "file");
+    const targetId = workspace.nodes.some(
+        (node) => node.kind === "file" && node.id === entryId,
+    )
+        ? entryId
+        : fallbackFile?.id;
+
+    if (!targetId) return workspace;
+
+    let changed = false;
+
+    const nodes = workspace.nodes.map((node) => {
+        if (node.kind !== "file" || node.id !== targetId) return node;
+
+        if (String(node.content ?? "") === code) return node;
+
+        changed = true;
+
+        return {
+            ...node,
+            content: code,
+            updatedAt: Date.now(),
+        };
+    });
+
+    return changed ? { ...workspace, nodes } : workspace;
+}
+
+function hydrateBlankWorkspaceFromStarter(args: {
+    workspace: WorkspaceStateV2 | null | undefined;
+    fallbackCode: string;
+    state: any;
+}) {
+    const { workspace, fallbackCode, state } = args;
+
+    if (!workspace || workspace.version !== 2) return workspace ?? null;
+
+    /**
+     * If the learner intentionally cleared the editor, do not repopulate starter.
+     */
+    if (isUserOwnedWorkspaceState(state)) return workspace;
+
+    const workspaceCode = deriveEntryCode(workspace) ?? "";
+
+    if (workspaceCode.trim()) return workspace;
+    if (!fallbackCode.trim()) return workspace;
+
+    return workspaceWithEntryCode(workspace, fallbackCode);
+}
+
+function deriveCodeOrStarterFallback(args: {
+    workspace: WorkspaceStateV2 | null | undefined;
+    fallbackCode: string;
+    state: any;
+}) {
+    const workspaceCode = deriveEntryCode(args.workspace);
+
+    if (typeof workspaceCode === "string" && workspaceCode.trim()) {
+        return workspaceCode;
+    }
+
+    /**
+     * Preserve intentional user blank.
+     */
+    if (isUserOwnedWorkspaceState(args.state)) {
+        return workspaceCode ?? "";
+    }
+
+    return args.fallbackCode;
+}
 function CodeInputWithTools(props: {
     exercise: CodeInputExerciseWithSqlExtras;
     current: any;
@@ -282,11 +394,8 @@ function CodeInputWithTools(props: {
         sketch,
     } = codeTools;
 
-    const curLang = ((current as any).codeLang ??
-        exercise?.language ??
-        ((exercise as any)?.fixedSqlDialect || (exercise as any)?.runtime?.datasetId
-            ? "sql"
-            : "python")) as RunnerLanguage;
+    const manifestLanguage = getManifestExerciseLanguage(exercise);
+    const curLang = manifestLanguage;
 
     const curCode = (current as any).code ?? exercise.starterCode ?? "";
     const curStdin = (current as any).codeStdin ?? "";
@@ -295,7 +404,14 @@ function CodeInputWithTools(props: {
         language: curLang as any,
         manifest: exercise,
     });
-    const currentWorkspace = getWorkspaceFromAnyState(current);
+    const currentWorkspaceRaw = getWorkspaceFromAnyState(current);
+    const currentWorkspace = stateLanguageMatches(
+        current,
+        manifestLanguage,
+        currentWorkspaceRaw,
+    )
+        ? currentWorkspaceRaw
+        : null;
     const curWorkspace = resolvePreferredExerciseWorkspace({
         savedState: current,
         savedWorkspace: currentWorkspace,
@@ -395,56 +511,100 @@ function CodeInputWithTools(props: {
         [patchExercise, exerciseKey, updateCurrent],
     );
 
-    const activeWorkspace = resolvePreferredExerciseWorkspace({
-        savedState: storeExercise ?? current,
-        savedWorkspace: storeExercise?.workspace ?? curWorkspace,
+    const compatibleStoreExercise = stateLanguageMatches(
+        storeExercise,
+        manifestLanguage,
+        getWorkspaceFromAnyState(storeExercise),
+    )
+        ? storeExercise
+        : null;
+    const compatibleCurrentState = stateLanguageMatches(
+        current,
+        manifestLanguage,
+        currentWorkspace,
+    )
+        ? current
+        : null;
+    const activeState = compatibleStoreExercise ?? compatibleCurrentState ?? current;
+
+    const fallbackCode = firstNonBlankCode(
+        compatibleStoreExercise?.code,
+        compatibleCurrentState?.code,
+        exercise.starterCode,
+    );
+
+    const preferredWorkspace = resolvePreferredExerciseWorkspace({
+        savedState: activeState,
+        savedWorkspace:
+            compatibleStoreExercise?.workspace ??
+            compatibleStoreExercise?.codeWorkspace ??
+            compatibleStoreExercise?.ideWorkspace ??
+            curWorkspace,
         starterWorkspace: manifestStarterWorkspace,
     });
-    const activeCode =
-        deriveEntryCode(activeWorkspace) ??
-        storeExercise?.code ??
-        (current as any).code ??
-        exercise.starterCode ??
+
+    const activeWorkspace = hydrateBlankWorkspaceFromStarter({
+        workspace: preferredWorkspace,
+        fallbackCode,
+        state: activeState,
+    });
+
+    const activeCode = deriveCodeOrStarterFallback({
+        workspace: activeWorkspace,
+        fallbackCode,
+        state: activeState,
+    });
+    const activeStdin =
+        activeWorkspace?.stdin ??
+        compatibleStoreExercise?.stdin ??
+        compatibleCurrentState?.codeStdin ??
         "";
-    const activeStdin = activeWorkspace?.stdin ?? storeExercise?.stdin ?? (current as any).codeStdin ?? "";
-    const activeLanguage = (storeExercise?.language || activeWorkspace?.language || (exercise as any).language || "python") as RunnerLanguage;
-    const activeSketch = storeExercise?.sketch || null;
+    const activeLanguage = manifestLanguage;
+    const activeSketch = compatibleStoreExercise?.sketch || null;
+
+    const normalizedActive = normalizeCodeWorkspacePair({
+        workspace: activeWorkspace,
+        code: activeCode,
+        state: activeState,
+        language: activeLanguage,
+        stdin: activeStdin,
+    });
 
 
     const registerArgs = useMemo(
         () => ({
             exerciseKey,
             lang: activeLanguage,
-            code: activeCode,
+            code: normalizedActive.code,
+            workspace: normalizedActive.workspace,
             stdin: activeStdin,
             ideConfig: exercise.ideConfig ?? null,
-            workspace: activeWorkspace,
             ownerCardId,
             preferSnapshot: false,
-            sqlDialect: activeLanguage === "sql" ? ((storeExercise as any)?.sqlDialect ?? exerciseSqlDialect) : undefined,
+            sqlDialect: activeLanguage === "sql" ? ((compatibleStoreExercise as any)?.sqlDialect ?? exerciseSqlDialect) : undefined,
             sqlDatasetId:
                 activeLanguage === "sql"
-                    ? firstNonBlank((storeExercise as any)?.sqlDatasetId, exerciseSqlDatasetId)
+                    ? firstNonBlank((compatibleStoreExercise as any)?.sqlDatasetId, exerciseSqlDatasetId)
                     : undefined,
             sqlSchemaSql:
                 activeLanguage === "sql"
-                    ? firstNonBlank((storeExercise as any)?.sqlSchemaSql, exerciseSqlSchemaSql)
+                    ? firstNonBlank((compatibleStoreExercise as any)?.sqlSchemaSql, exerciseSqlSchemaSql)
                     : undefined,
             sqlSeedSql:
                 activeLanguage === "sql"
-                    ? firstNonBlank((storeExercise as any)?.sqlSeedSql, exerciseSqlSeedSql)
+                    ? firstNonBlank((compatibleStoreExercise as any)?.sqlSeedSql, exerciseSqlSeedSql)
                     : undefined,
             sqlInitialTableSnapshots:
-                activeLanguage === "sql" ? ((storeExercise as any)?.sqlInitialTableSnapshots ?? exerciseSqlInitialTableSnapshots) : undefined,
+                activeLanguage === "sql" ? ((compatibleStoreExercise as any)?.sqlInitialTableSnapshots ?? exerciseSqlInitialTableSnapshots) : undefined,
             onPatch,
         }),
         [
             exerciseKey,
             activeLanguage,
-            activeCode,
             activeStdin,
             exercise.ideConfig,
-            activeWorkspace,
+            normalizedActive.code,
+            normalizedActive.workspace,
             ownerCardId,
             exerciseSqlDialect,
             exerciseSqlDatasetId,
@@ -509,7 +669,7 @@ function CodeInputWithTools(props: {
     return (
         <CodeInputExerciseUI
             exercise={exercise}
-            code={activeCode}
+            code={normalizedActive.code}
             stdin={activeStdin}
             exerciseKey={exerciseKey}
             subjectSlug={subjectSlug}
@@ -517,7 +677,7 @@ function CodeInputWithTools(props: {
             sectionSlug={sectionSlug}
             topicId={topicId}
             cardId={cardId}
-            workspace={activeWorkspace}
+            workspace={normalizedActive.workspace}
             language={activeLanguage}
             sketch={activeSketch}
             savedSketch={savedSketch}
@@ -755,6 +915,7 @@ export default function ExerciseRenderer({
         if (ex.kind !== "code_input") return;
 
         const store = useReviewRuntimeStore.getState().exercises[exerciseKey];
+        const manifestLanguage = getManifestExerciseLanguage(ex as CodeInputExerciseWithSqlExtras);
 
         const workspace =
             store?.workspace ??
@@ -767,6 +928,7 @@ export default function ExerciseRenderer({
                         : null);
 
         if (!workspace || workspace.version !== 2) return;
+        if (!stateLanguageMatches(store, manifestLanguage, workspace)) return;
 
         const workspaceCode = deriveEntryCode(workspace) ?? "";
         const workspaceStdin = workspace.stdin ?? "";
@@ -1075,41 +1237,78 @@ export default function ExerciseRenderer({
             (exCode as any).topicRuntimeDefaults ??
             (exCode as any).moduleRuntimeDefaults ??
             null;
+        const manifestLanguage = getManifestExerciseLanguage(exCode);
+        const compatibleStoreExercise = stateLanguageMatches(
+            storeExercise,
+            manifestLanguage,
+            getWorkspaceFromAnyState(storeExercise),
+        )
+            ? storeExercise
+            : null;
+        const compatibleCurrentState = stateLanguageMatches(
+            current,
+            manifestLanguage,
+            getWorkspaceFromAnyState(current),
+        )
+            ? current
+            : null;
+
         const effectiveSqlDatasetId = firstNonBlank(
-            (storeExercise as any)?.sqlDatasetId,
+            (compatibleStoreExercise as any)?.sqlDatasetId,
             (exCode as any)?.runtime?.datasetId,
             (exCode as any)?.sqlDatasetId,
             effectiveSqlRuntime?.datasetId,
         );
         const effectiveSqlSchemaSql = firstNonBlank(
-            (storeExercise as any)?.sqlSchemaSql,
+            (compatibleStoreExercise as any)?.sqlSchemaSql,
             (exCode as any)?.sqlSchemaSql,
         );
         const effectiveSqlSeedSql = firstNonBlank(
-            (storeExercise as any)?.sqlSeedSql,
+            (compatibleStoreExercise as any)?.sqlSeedSql,
             (exCode as any)?.sqlSeedSql,
         );
 
         const starterWorkspace = resolveExerciseWorkspace({
-            language: ((exCode as any).language || "python") as any,
+            language: manifestLanguage,
             manifest: exCode,
         });
 
-        const activeWorkspace = resolvePreferredExerciseWorkspace({
-            savedState: storeExercise ?? current,
-            savedWorkspace: storeExercise?.workspace ?? getWorkspaceFromAnyState(current),
+        const activeState = compatibleStoreExercise ?? compatibleCurrentState ?? current;
+
+        const fallbackCode = firstNonBlankCode(
+            compatibleStoreExercise?.code,
+            compatibleCurrentState?.code,
+            (exCode as any).starterCode,
+        );
+
+        const preferredWorkspace = resolvePreferredExerciseWorkspace({
+            savedState: activeState,
+            savedWorkspace:
+                compatibleStoreExercise?.workspace ??
+                compatibleStoreExercise?.codeWorkspace ??
+                compatibleStoreExercise?.ideWorkspace ??
+                getWorkspaceFromAnyState(compatibleCurrentState),
             starterWorkspace,
         });
 
-        const activeCode =
-            deriveEntryCode(activeWorkspace) ??
-            storeExercise?.code ??
-            (current as any).code ??
-            (exCode as any).starterCode ??
-            "";
-        const activeStdin = activeWorkspace?.stdin ?? storeExercise?.stdin ?? (current as any).codeStdin ?? "";
-        const activeLanguage = (storeExercise?.language || activeWorkspace?.language || (exCode as any).language || "python") as RunnerLanguage;
+        const activeWorkspace = hydrateBlankWorkspaceFromStarter({
+            workspace: preferredWorkspace,
+            fallbackCode,
+            state: activeState,
+        });
 
+        const activeCode = deriveCodeOrStarterFallback({
+            workspace: activeWorkspace,
+            fallbackCode,
+            state: activeState,
+        });
+
+        const activeStdin =
+            activeWorkspace?.stdin ??
+            compatibleStoreExercise?.stdin ??
+            compatibleCurrentState?.codeStdin ??
+            "";
+        const activeLanguage = manifestLanguage;
 
         return (
             <CodeInputExerciseUI
@@ -1171,17 +1370,17 @@ export default function ExerciseRenderer({
                 feedback={codeFeedback}
                 explanation={codeExplanation}
                 feedbackDismissed={feedbackDismissed}
-                sqlDialect={(storeExercise as any)?.sqlDialect ?? exCode.fixedSqlDialect ?? effectiveSqlRuntime?.fixedSqlDialect}
+                sqlDialect={(compatibleStoreExercise as any)?.sqlDialect ?? exCode.fixedSqlDialect ?? effectiveSqlRuntime?.fixedSqlDialect}
                 sqlDatasetId={effectiveSqlDatasetId}
                 sqlResultShape={
-                    (storeExercise as any)?.runtime?.resultShape ??
+                    (compatibleStoreExercise as any)?.runtime?.resultShape ??
                     (exCode as any)?.runtime?.resultShape ??
                     effectiveSqlRuntime?.resultShape
                 }
                 sqlSchemaSql={effectiveSqlSchemaSql}
                 sqlSeedSql={effectiveSqlSeedSql}
                 sqlSetupSql={(exCode as any).sqlSetupSql}
-                sqlInitialTableSnapshots={(storeExercise as any)?.sqlInitialTableSnapshots ?? (exCode as any).sqlInitialTableSnapshots}
+                sqlInitialTableSnapshots={(compatibleStoreExercise as any)?.sqlInitialTableSnapshots ?? (exCode as any).sqlInitialTableSnapshots}
             />
         );
     }
