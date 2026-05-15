@@ -110,7 +110,10 @@ export type FullIDEProps = {
     services?: FullIDEServicesInput;
     initialWorkspace?: WorkspaceStateV2 | null;
     externalWorkspace?: WorkspaceStateV2 | null;
-    onWorkspaceChange?: (workspace: WorkspaceStateV2 | null) => void;
+    onWorkspaceChange?: (
+        workspace: WorkspaceStateV2 | null,
+        meta?: { origin?: "user" | "sync" | "programmatic" },
+    ) => void;
     onBeforeRun?: () => void | Promise<void>;
     onRunResult?: (args: { result: RunResult; runArgs: any }) => void;
     initialSqlDialect?: SqlDialect;

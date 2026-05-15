@@ -165,24 +165,49 @@ function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
     return workspace.nodes.filter((node: any) => node?.kind === "file").length;
 }
 
-function shouldUseLocalReviewDraft(_args: {
+function shouldUseLocalReviewDraft(args: {
     draft: ReviewWorkspaceDraft | null;
     runtimeWorkspace: WorkspaceStateV2 | null | undefined;
     runtimeUpdatedAt?: number | null;
     runtimeUserEdited?: boolean | null;
     runtimeOrigin?: string | null;
 }) {
+    const draft = args.draft;
+    if (!draft || !isWorkspaceState(draft.workspace)) return false;
+
     /**
-     * DB-canonical contract: never use localStorage to choose what appears in a
-     * logged-in/review editor. Local drafts caused two computers opening the
-     * same sketch to show different content because each browser could restore
-     * its own stale copy before the DB copy won.
+     * Short-lived same-tab safety net only.
      *
-     * The review progress row is the only source of truth. If it is empty, the
-     * runtime resolver should seed from the lesson starter, not from a browser
-     * draft.
+     * Runtime/DB still wins whenever it has real learner work. This only protects
+     * fast sidebar/direct navigation where the editor runtime is temporarily
+     * reseeded from starter before the saved user workspace wins.
      */
-    return false;
+    const maxDraftAgeMs = 10 * 60 * 1000;
+    if (Date.now() - draft.savedAt > maxDraftAgeMs) return false;
+
+    if (
+        args.runtimeUserEdited === true ||
+        args.runtimeOrigin === "user" ||
+        args.runtimeOrigin === "saved"
+    ) {
+        return false;
+    }
+
+    if (!args.runtimeWorkspace || !isWorkspaceState(args.runtimeWorkspace)) {
+        return true;
+    }
+
+    const runtimeKey = JSON.stringify(args.runtimeWorkspace);
+    const draftKey = JSON.stringify(draft.workspace);
+
+    if (runtimeKey === draftKey) return false;
+
+    if (args.runtimeOrigin === "starter" || args.runtimeOrigin === "empty") {
+        return true;
+    }
+
+    const runtimeUpdatedAt = Number(args.runtimeUpdatedAt ?? 0);
+    return !Number.isFinite(runtimeUpdatedAt) || draft.savedAt >= runtimeUpdatedAt;
 }
 
 function asWorkspaceLanguage(language: string | null | undefined): WorkspaceLanguage {
@@ -563,14 +588,36 @@ export default function CodeToolPane(props: {
      * targets. If the current exercise/card runtime has a ready workspace,
      * that workspace is the only source for FullIDE.
      */
-    const reviewDirectWorkspace =
+    const editorRuntimeHasUserWorkspace = Boolean(
         editorRuntime?.workspaceStatus === "ready" &&
-        forceWorkspaceHasContent(editorRuntime.workspace)
-            ? editorRuntime.workspace
-            : exerciseRuntime?.workspaceStatus === "ready" &&
-            forceWorkspaceHasContent(exerciseRuntime.workspace)
-                ? exerciseRuntime.workspace
-                : null;
+        forceWorkspaceHasContent(editorRuntime.workspace) &&
+        (
+            editorRuntime.userEdited === true ||
+            editorRuntime.workspaceOrigin === "user" ||
+            editorRuntime.workspaceOrigin === "saved"
+        ),
+    );
+
+    const exerciseRuntimeHasUserWorkspace = Boolean(
+        exerciseRuntime?.workspaceStatus === "ready" &&
+        forceWorkspaceHasContent(exerciseRuntime.workspace) &&
+        (
+            exerciseRuntime.userEdited === true ||
+            exerciseRuntime.workspaceOrigin === "user" ||
+            exerciseRuntime.workspaceOrigin === "saved"
+        ),
+    );
+
+    const reviewDirectWorkspace =
+        exerciseRuntimeHasUserWorkspace && !editorRuntimeHasUserWorkspace
+            ? exerciseRuntime?.workspace ?? null
+            : editorRuntime?.workspaceStatus === "ready" &&
+            forceWorkspaceHasContent(editorRuntime.workspace)
+                ? editorRuntime.workspace
+                : exerciseRuntime?.workspaceStatus === "ready" &&
+                forceWorkspaceHasContent(exerciseRuntime.workspace)
+                    ? exerciseRuntime.workspace
+                    : null;
     useEffect(() => {
         if (!reviewToolPaneDebugEnabled()) return;
 
@@ -912,93 +959,99 @@ export default function CodeToolPane(props: {
         });
     }
 
-    const emitWorkspaceUpstream = useCallback((workspace: WorkspaceStateV2 | null) => {
-        // Do not write review editor workspaces to localStorage. The DB/runtime
-        // state is canonical so the same logged-in sketch resolves identically
-        // on every computer.
-        const workspaceKey = workspaceKeyOf(workspace ?? null);
-        if (lastUpstreamWorkspaceKeyRef.current === workspaceKey) return;
-        lastUpstreamWorkspaceKeyRef.current = workspaceKey;
+    const emitWorkspaceUpstream = useCallback(
+        (workspace: WorkspaceStateV2 | null, forceUserEdit = false) => {
+            const workspaceKey = workspaceKeyOf(workspace ?? null);
+            if (lastUpstreamWorkspaceKeyRef.current === workspaceKey) return;
+            lastUpstreamWorkspaceKeyRef.current = workspaceKey;
 
-        const next = extractWorkspaceSnapshot(workspace);
-        const prevEmitted = lastEmittedRef.current;
-        const prevIncoming = lastIncomingRef.current;
-        const workspacePatch =
-            workspace && typeof workspace === "object"
-                ? {
-                    workspace,
-                    codeWorkspace: workspace,
-                    ideWorkspace: workspace,
-                }
-                : {};
+            const next = extractWorkspaceSnapshot(workspace);
+            const prevEmitted = lastEmittedRef.current;
+            const prevIncoming = lastIncomingRef.current;
 
-
-
-        const codeMatchesPreviousEmission =
-            prevEmitted?.code === next.code && prevEmitted?.stdin === next.stdin;
-        const codeMatchesIncomingProps =
-            prevIncoming?.code === next.code && prevIncoming?.stdin === next.stdin;
-        const shouldEmitCodeFields = !codeMatchesPreviousEmission && !codeMatchesIncomingProps;
-
-        lastEmittedRef.current = next;
-        if (boundId) {
-            syncCodeInputSnapshot?.(boundId, {
-                ...workspacePatch,
-                code: next.code,
-                source: next.code,
-                stdin: next.stdin,
-                codeStdin: next.stdin,
-                language: effectiveLanguage,
-                lang: effectiveLanguage,
-
-                updateOrigin: shouldEmitCodeFields ? "user" : "sync",
-                workspaceOrigin: shouldEmitCodeFields ? "user" : "sync",
-
-                ...(shouldEmitCodeFields
+            const workspacePatch =
+                workspace && typeof workspace === "object"
                     ? {
-                        submitted: false,
-                        feedbackDismissed: true,
-                        dismissFeedbackOnEdit: true,
-                        userEdited: true,
+                        workspace,
+                        codeWorkspace: workspace,
+                        ideWorkspace: workspace,
                     }
-                    : {}),
+                    : {};
 
-                updatedAt: Date.now(),
-            });
-        }        if (shouldEmitCodeFields) {
-            setRunFeedback(null);
+            const codeMatchesPreviousEmission =
+                prevEmitted?.code === next.code && prevEmitted?.stdin === next.stdin;
+
+            const codeMatchesIncomingProps =
+                prevIncoming?.code === next.code && prevIncoming?.stdin === next.stdin;
+
+            const shouldEmitCodeFields =
+                forceUserEdit || (!codeMatchesPreviousEmission && !codeMatchesIncomingProps);
+
+            lastEmittedRef.current = next;
 
             if (boundId) {
-                clearRunFeedback?.(boundId);
+                syncCodeInputSnapshot?.(boundId, {
+                    ...workspacePatch,
+                    code: next.code,
+                    source: next.code,
+                    stdin: next.stdin,
+                    codeStdin: next.stdin,
+                    language: effectiveLanguage,
+                    lang: effectiveLanguage,
+
+                    updateOrigin: shouldEmitCodeFields ? "user" : "sync",
+                    workspaceOrigin: shouldEmitCodeFields ? "user" : "sync",
+                    preferSnapshot: shouldEmitCodeFields,
+
+                    ...(shouldEmitCodeFields
+                        ? {
+                            submitted: false,
+                            feedbackDismissed: true,
+                            dismissFeedbackOnEdit: true,
+                            userEdited: true,
+                        }
+                        : {}),
+
+                    updatedAt: Date.now(),
+                });
             }
-        }
 
-        if (isReviewRouteMode && resolvedEditorOwnerKey) {
-            patchEditorWorkspace(resolvedEditorOwnerKey, workspace);
-            return;
-        }
+            if (shouldEmitCodeFields && resolvedEditorOwnerKey && workspace) {
+                patchEditorWorkspace(resolvedEditorOwnerKey, workspace);
+                writeReviewWorkspaceDraft(resolvedEditorOwnerKey, workspace);
+                setLocalWorkspaceDraft({ savedAt: Date.now(), workspace });
 
-        onChangeWorkspace?.(workspace);
+                onChangeWorkspace?.(workspace);
+                onChangeCode(next.code);
+                onChangeStdin(next.stdin);
+                return;
+            }
 
-        if (!shouldEmitCodeFields) {
-            return;
-        }
+            if (isReviewRouteMode) {
+                return;
+            }
 
-        onChangeCode(next.code);
-        onChangeStdin(next.stdin);
+            onChangeWorkspace?.(workspace);
 
-    }, [
-        boundId,
-        clearRunFeedback,
-        effectiveLanguage,
-        resolvedEditorOwnerKey,
-        isReviewRouteMode,
-        onChangeCode,
-        onChangeStdin,
-        onChangeWorkspace,
-        patchEditorWorkspace,
-        syncCodeInputSnapshot,
-    ]);
+            if (!shouldEmitCodeFields) {
+                return;
+            }
+
+            onChangeCode(next.code);
+            onChangeStdin(next.stdin);
+        },
+        [
+            boundId,
+            effectiveLanguage,
+            resolvedEditorOwnerKey,
+            isReviewRouteMode,
+            onChangeCode,
+            onChangeStdin,
+            onChangeWorkspace,
+            patchEditorWorkspace,
+            syncCodeInputSnapshot,
+        ],
+    );
     const emitWorkspaceUpstreamRef = useRef(emitWorkspaceUpstream);
 
     useEffect(() => {
@@ -1020,15 +1073,14 @@ export default function CodeToolPane(props: {
         emitWorkspaceUpstreamRef.current(pending);
     }, []);
 
-    const handleWorkspaceChange = useCallback((workspace: WorkspaceStateV2 | null) => {
-        /**
+    const handleWorkspaceChange = useCallback((
+        workspace: WorkspaceStateV2 | null,
+        meta?: { origin?: "user" | "sync" | "programmatic" },
+    ) => {        /**
          * FullIDE can briefly emit a null/blank workspace while its internal
          * workspace bridge is booting. In route-owned review mode the runtime
          * store is the source of truth, so that transient emission must not be
-         * persisted back into the store. Otherwise a ready sketch/card workspace
-         * is overwritten with null, workspaceStatus becomes "pending", FullIDE
-         * unmounts, and the right rail sits on "Loading sketch workspace..."
-         * forever.
+         * persisted back into the store.
          */
         if (
             isReviewRouteMode &&
@@ -1037,6 +1089,56 @@ export default function CodeToolPane(props: {
         ) {
             return;
         }
+
+        const workspaceKey = workspaceKeyOf(workspace ?? null);
+
+        /**
+         * Critical:
+         * Do this before syncCodeInputSnapshot.
+         * Programmatic FullIDE hydration can emit the same workspace back upward.
+         * If we write it before dedupe, SQL starter hydration can overwrite the
+         * previously saved user query with a newer updatedAt.
+         */
+        if (lastHandledWorkspaceKeyRef.current === workspaceKey) {
+            return;
+        }
+
+        const previousStructureKey = lastHandledStructureKeyRef.current;
+        const nextStructureKey = workspaceStructureKeyOf(workspace ?? null);
+        const structureChanged =
+            previousStructureKey !== "" && previousStructureKey !== nextStructureKey;
+
+        lastHandledWorkspaceKeyRef.current = workspaceKey;
+        lastHandledStructureKeyRef.current = nextStructureKey;
+
+        const isDirectUserWorkspaceEdit = meta?.origin === "user";
+
+        if (
+            isDirectUserWorkspaceEdit &&
+            isReviewRouteMode &&
+            resolvedEditorOwnerKey &&
+            workspace &&
+            forceWorkspaceHasContent(workspace)
+        ) {
+            const ownerKey = resolvedEditorOwnerKey;
+            const nextWorkspace = workspace;
+            const next = extractWorkspaceSnapshot(nextWorkspace);
+
+            /**
+             * Critical:
+             * Write real FullIDE edits directly into the deterministic route runtime.
+             * This prevents the side editor from falling back to starter when the
+             * registry re-registers during sidebar/direct navigation.
+             */
+            patchEditorWorkspace(ownerKey, nextWorkspace);
+            writeReviewWorkspaceDraft(ownerKey, nextWorkspace);
+            setLocalWorkspaceDraft({ savedAt: Date.now(), workspace: nextWorkspace });
+
+            onChangeWorkspace?.(nextWorkspace);
+            onChangeCode(next.code);
+            onChangeStdin(next.stdin);
+        }
+
         if (boundId && workspace && forceWorkspaceHasContent(workspace)) {
             const next = extractWorkspaceSnapshot(workspace);
 
@@ -1054,38 +1156,54 @@ export default function CodeToolPane(props: {
                 language: effectiveLanguage,
                 lang: effectiveLanguage,
 
-                updateOrigin: "user",
-                workspaceOrigin: "user",
-                userEdited: true,
+                /**
+                 * FullIDE marks editor/terminal edits as origin=user. Passive
+                 * hydration emissions stay sync so they cannot overwrite an
+                 * already user-edited SQL workspace with a starter snapshot.
+                 */
+                updateOrigin: isDirectUserWorkspaceEdit ? "user" : "sync",
+                workspaceOrigin: isDirectUserWorkspaceEdit ? "user" : "sync",
 
-                submitted: false,
-                feedbackDismissed: true,
-                dismissFeedbackOnEdit: true,
+                /**
+                 * Critical:
+                 * This protects the live Tools registry from being overwritten by
+                 * stale starter registerArgs when the exercise component rerenders
+                 * during sidebar navigation.
+                 */
+                preferSnapshot: isDirectUserWorkspaceEdit,
 
-                updatedAt: Date.now(),
+                ...(isDirectUserWorkspaceEdit
+                    ? {
+                        submitted: false,
+                        feedbackDismissed: true,
+                        dismissFeedbackOnEdit: true,
+                        userEdited: true,
+                    }
+                    : {}),
             });
-        }
-        const workspaceKey = workspaceKeyOf(workspace ?? null);
 
-        if (lastHandledWorkspaceKeyRef.current === workspaceKey) {
+
+        }
+
+        if (isReviewRouteMode) {
+            if (persistTimerRef.current != null) {
+                window.clearTimeout(persistTimerRef.current);
+                persistTimerRef.current = null;
+            }
+
+            pendingWorkspaceRef.current = undefined;
+            emitWorkspaceUpstream(workspace, isDirectUserWorkspaceEdit);
             return;
         }
-
-        const previousStructureKey = lastHandledStructureKeyRef.current;
-        const nextStructureKey = workspaceStructureKeyOf(workspace ?? null);
-        const structureChanged =
-            previousStructureKey !== "" && previousStructureKey !== nextStructureKey;
-
-        lastHandledWorkspaceKeyRef.current = workspaceKey;
-        lastHandledStructureKeyRef.current = nextStructureKey;
 
         if (!usesWorkspaceShell || structureChanged) {
             if (persistTimerRef.current != null) {
                 window.clearTimeout(persistTimerRef.current);
                 persistTimerRef.current = null;
             }
+
             pendingWorkspaceRef.current = undefined;
-            emitWorkspaceUpstream(workspace);
+            emitWorkspaceUpstream(workspace, isDirectUserWorkspaceEdit);
             return;
         }
 
@@ -1099,19 +1217,22 @@ export default function CodeToolPane(props: {
             persistTimerRef.current = null;
             const pending = pendingWorkspaceRef.current;
             pendingWorkspaceRef.current = undefined;
-            emitWorkspaceUpstreamRef.current(pending ?? null);
+            emitWorkspaceUpstreamRef.current(pending ?? null, isDirectUserWorkspaceEdit);
         }, 220);
     }, [
-            boundId,
-            effectiveLanguage,
-            emitWorkspaceUpstream,
-            finalReviewWorkspace,
-            isReviewRouteMode,
-            syncCodeInputSnapshot,
-            usesWorkspaceShell,
-        ]
-
-    );
+        boundId,
+        effectiveLanguage,
+        emitWorkspaceUpstream,
+        finalReviewWorkspace,
+        isReviewRouteMode,
+        onChangeCode,
+        onChangeStdin,
+        onChangeWorkspace,
+        patchEditorWorkspace,
+        resolvedEditorOwnerKey,
+        syncCodeInputSnapshot,
+        usesWorkspaceShell,
+    ]);
 
     useEffect(() => {
         return () => {

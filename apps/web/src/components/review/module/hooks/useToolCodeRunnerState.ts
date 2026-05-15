@@ -27,6 +27,7 @@ type ToolSnap = {
     stdin: string;
     workspace?: WorkspaceStateV2 | null;
     workspaceKey: string;
+    starterHash?: string;
 
     sqlDialect: SqlDialect;
     sqlDatasetId?: string;
@@ -35,7 +36,6 @@ type ToolSnap = {
     sqlSeedSql?: string;
     sqlInitialTableSnapshots?: SqlTableSnapshots;
 };
-
 function snapKey(s: ToolSnap) {
     return [
         s.topicId,
@@ -46,6 +46,7 @@ function snapKey(s: ToolSnap) {
         s.stdin,
         s.code,
         s.workspaceKey,
+        s.starterHash ?? "",
         s.sqlSchemaSql ?? "",
         s.sqlSeedSql ?? "",
         JSON.stringify(s.sqlInitialTableSnapshots ?? {}),
@@ -128,6 +129,21 @@ function firstNonBlank(...values: Array<string | null | undefined>) {
         if (typeof value === "string" && value.trim()) return value;
     }
     return undefined;
+}function isSavedUserWork(value: any) {
+    if (!value) return false;
+
+    if (
+        value.workspaceOrigin === "starter" ||
+        value.workspaceOrigin === "empty"
+    ) {
+        return false;
+    }
+
+    return (
+        value.userEdited === true ||
+        value.workspaceOrigin === "user" ||
+        value.workspaceOrigin === "saved"
+    );
 }
 
 function workspaceWithEntryCode(
@@ -472,6 +488,49 @@ export function useToolCodeRunnerState(args: {
          * exercise over topic.toolState so a stale blank saved snapshot does not
          * win against the manifest-backed starter workspace.
          */
+        // const pendingExerciseStoreKey = resolveExerciseStoreKey(
+        //     exercises,
+        //     effectiveToolKey,
+        //     scopeKey,
+        // );
+        // const pendingExercise =
+        //     pendingExerciseStoreKey ? exercises[pendingExerciseStoreKey] ?? null : null;
+        // if (pendingExercise) return pendingExercise;
+
+        const resolved = getTopicProgressState((progress as any)?.topics ?? {}, viewTid);
+        const progressSaved =
+            (resolved.topic as any)?.toolState?.[effectiveToolKey] ?? null;
+
+        function isUserWork(value: any) {
+            if (!value) return false;
+
+            if (
+                value.workspaceOrigin === "starter" ||
+                value.workspaceOrigin === "empty"
+            ) {
+                return false;
+            }
+
+            return (
+                value.userEdited === true ||
+                value.workspaceOrigin === "user" ||
+                value.workspaceOrigin === "saved"
+            );
+        }
+
+        if (effectiveBoundId) {
+            const storeKey = resolveExerciseStoreKey(exercises, effectiveBoundId);
+            const found = storeKey ? exercises[storeKey] ?? null : null;
+
+            if (isUserWork(progressSaved) && !isUserWork(found)) {
+                return progressSaved;
+            }
+
+            if (found) return found;
+
+            if (effectiveBoundId.includes(":")) return null;
+        }
+
         const pendingExerciseStoreKey = resolveExerciseStoreKey(
             exercises,
             effectiveToolKey,
@@ -479,10 +538,14 @@ export function useToolCodeRunnerState(args: {
         );
         const pendingExercise =
             pendingExerciseStoreKey ? exercises[pendingExerciseStoreKey] ?? null : null;
+
+        if (isUserWork(progressSaved) && !isUserWork(pendingExercise)) {
+            return progressSaved;
+        }
+
         if (pendingExercise) return pendingExercise;
 
-        const resolved = getTopicProgressState((progress as any)?.topics ?? {}, viewTid);
-        return (resolved.topic as any)?.toolState?.[effectiveToolKey] ?? null;
+        return progressSaved;
     }, [progress, viewTid, effectiveToolKey, effectiveBoundId, exercises, scopeKey]);
 
     const initialLang = (saved?.lang as WorkspaceLanguage) ?? defaultLang;
@@ -561,13 +624,14 @@ export function useToolCodeRunnerState(args: {
         stdin: initialStdin,
         workspace: initialWorkspace,
         workspaceKey: initialWorkspaceKey,
+        starterHash:
+            typeof saved?.starterHash === "string" ? saved.starterHash : "",
         sqlDialect: initialResolvedSql.sqlDialect,
         sqlDatasetId: initialResolvedSql.sqlDatasetId,
         sqlSchemaSql: initialResolvedSql.sqlSchemaSql,
         sqlSeedSql: initialResolvedSql.sqlSeedSql,
         sqlInitialTableSnapshots: initialResolvedSql.sqlInitialTableSnapshots,
     });
-
     const toolSnap = useMemo<ToolSnap>(
         () => ({
             topicId: viewTid,
@@ -577,6 +641,7 @@ export function useToolCodeRunnerState(args: {
             stdin: toolStdin,
             workspace: toolWorkspace,
             workspaceKey: toolWorkspaceKey,
+            starterHash: latestSnapRef.current.starterHash ?? "",
             sqlDialect: toolSqlDialect,
             sqlDatasetId: toolSqlDatasetId,
             sqlSchemaSql: toolSqlSchemaSql,
@@ -606,16 +671,90 @@ export function useToolCodeRunnerState(args: {
             if (!topicId || !toolKey) return;
             if (isCardToolKey(toolKey)) return;
             const topicKey = normalizeTopicProgressKey(topicId);
+            const exerciseKey = isExerciseToolKey(toolKey)
+                ? toolKey.replace(/^exercise:/, "")
+                : null;
+            const starterHash = latest.starterHash ?? latestSnapRef.current.starterHash ?? "";
 
+            const latestWorkspaceIsStarter =
+                Boolean(starterHash) && latest.workspaceKey === starterHash;
+
+            const latestWorkspaceIsUserWork =
+                Boolean(latest.workspace) && !latestWorkspaceIsStarter;
+
+            const nextWorkspaceOrigin = latestWorkspaceIsUserWork ? "user" : "starter";
+
+            if (exerciseKey && latest.workspace) {
+                const runtimeApi = useReviewRuntimeStore.getState();
+                const existingExercise = runtimeApi.exercises?.[exerciseKey] ?? null;
+                const workspaceCode = deriveEntryCode(latest.workspace);
+
+                const existingExerciseIsUserWork = isSavedUserWork(existingExercise);
+                const existingExerciseWorkspaceKey = workspaceKeyOf(
+                    existingExercise?.workspace ?? null,
+                );
+
+                const shouldPreserveExistingExerciseWorkspace =
+                    latestWorkspaceIsStarter &&
+                    existingExerciseIsUserWork &&
+                    existingExerciseWorkspaceKey !== latest.workspaceKey;
+
+                if (!shouldPreserveExistingExerciseWorkspace) {
+                    runtimeApi.patchExercise(exerciseKey, {
+                        language: latest.lang,
+                        lang: latest.lang,
+                        workspace: latest.workspace,
+                        codeWorkspace: latest.workspace,
+                        ideWorkspace: latest.workspace,
+                        stdin: latest.stdin,
+                        codeStdin: latest.stdin,
+                        code: workspaceCode || latest.code,
+                        source: workspaceCode || latest.code,
+
+                        userEdited: latestWorkspaceIsUserWork,
+                        workspaceOrigin: nextWorkspaceOrigin,
+
+                        workspaceStatus: "ready",
+                        starterHash: starterHash || existingExercise?.starterHash,
+                        updatedAt: Date.now(),
+
+                        subjectSlug: existingExercise?.subjectSlug,
+                        moduleSlug: existingExercise?.moduleSlug,
+                        sectionSlug: existingExercise?.sectionSlug,
+                        topicId: existingExercise?.topicId ?? topicId,
+                        cardId: existingExercise?.cardId,
+                        exerciseId: existingExercise?.exerciseId,
+                        exerciseKey,
+                    });
+                }
+            }
             setProgress((p: any) => {
                 const tp0: any = p?.topics?.[topicKey] ?? {};
                 const prevToolState = tp0?.toolState?.[toolKey] ?? null;
+                const prevToolStateIsUserWork = isSavedUserWork(prevToolState);
+                const prevToolStateWorkspaceKey = workspaceKeyOf(
+                    prevToolState?.workspace ?? null,
+                );
 
+                const shouldPreservePreviousToolState =
+                    latestWorkspaceIsStarter &&
+                    prevToolStateIsUserWork &&
+                    prevToolStateWorkspaceKey !== latest.workspaceKey;
+
+                if (shouldPreservePreviousToolState) {
+                    return p;
+                }
                 if (
                     prevToolState?.lang === latest.lang &&
                     prevToolState?.code === latest.code &&
                     prevToolState?.stdin === latest.stdin &&
                     workspaceKeyOf(prevToolState?.workspace ?? null) === latest.workspaceKey &&
+                    prevToolState?.starterHash === starterHash &&
+                    prevToolState?.userEdited === true &&
+                    (
+                        prevToolState?.workspaceOrigin === "user" ||
+                        prevToolState?.workspaceOrigin === "saved"
+                    ) &&
                     prevToolState?.sqlDialect === latest.sqlDialect &&
                     prevToolState?.sqlDatasetId === latest.sqlDatasetId &&
                     prevToolState?.sqlSchemaSql === latest.sqlSchemaSql &&
@@ -637,12 +776,20 @@ export function useToolCodeRunnerState(args: {
                     code: workspaceCode || latest.code,
                     stdin: latest.stdin,
                     workspace: latest.workspace ?? null,
+
+                    userEdited: latestWorkspaceIsUserWork,
+                    workspaceOrigin: nextWorkspaceOrigin as "user" | "starter",
+                    updatedAt: Date.now(),
+
+                    starterHash,
                     sqlDialect: latest.sqlDialect,
                     sqlDatasetId: latest.sqlDatasetId,
                     sqlSchemaSql: latest.sqlSchemaSql,
                     sqlSeedSql: latest.sqlSeedSql,
                     sqlInitialTableSnapshots: latest.sqlInitialTableSnapshots,
                 };
+
+
 
                 toolState[toolKey] = nextToolEntry;
                 return {
@@ -759,6 +906,11 @@ export function useToolCodeRunnerState(args: {
                 ? (s.workspace as WorkspaceStateV2)
                 : null;
 
+        const currentStarterHash =
+            typeof s?.starterHash === "string" && s.starterHash
+                ? s.starterHash
+                : "";
+
         const nextCode = deriveEntryCode(nextWorkspace) || (typeof s?.code === "string" ? s.code : defaultCode);
         const nextStdin =
             typeof nextWorkspace?.stdin === "string"
@@ -791,6 +943,7 @@ export function useToolCodeRunnerState(args: {
             stdin: nextStdin,
             workspace: nextWorkspace,
             workspaceKey: workspaceKeyOf(nextWorkspace),
+            starterHash: currentStarterHash,
             sqlDialect: resolvedSql.sqlDialect,
             sqlDatasetId: resolvedSql.sqlDatasetId,
             sqlSchemaSql: resolvedSql.sqlSchemaSql,
@@ -902,15 +1055,111 @@ export function useToolCodeRunnerState(args: {
                 args2.workspace ?? null,
                 args2.code,
             );
+
+            const currentStarterHash = workspaceKeyOf(nextWorkspace);
+
             const nextToolKey = `exercise:${targetKey}`;
             const nextIdentity = `${viewTid}::${nextToolKey}::${versionStr}`;
             const snapshotOverridesSaved = args2.preferSnapshot === true;
+
+
+
+            const runtimeSaved = exercises[targetKey] ?? null;
+
+            const topicProgressForBind =
+                getTopicProgressState((progress as any)?.topics ?? {}, viewTid).topic as any;
+
+            const progressToolStateSaved =
+                topicProgressForBind?.toolState?.[nextToolKey] ?? null;
+
+            const progressRuntimeExercises =
+                topicProgressForBind?.runtimeStateV2?.exercises ?? {};
+
+            const progressRuntimeExerciseKey =
+                resolveExerciseStoreKey(
+                    progressRuntimeExercises,
+                    inputId,
+                    targetKey,
+                ) ??
+                resolveExerciseStoreKey(
+                    progressRuntimeExercises,
+                    targetKey,
+                    args2.exerciseKey ?? null,
+                );
+
+            const progressRuntimeExerciseSaved =
+                progressRuntimeExerciseKey
+                    ? progressRuntimeExercises[progressRuntimeExerciseKey] ?? null
+                    : null;
+
+            function isUserWork(value: any) {
+                return isSavedUserWork(value);
+            }
+
+            function starterMatches(value: any) {
+                if (!value) return false;
+
+                const savedStarterHash =
+                    typeof value?.starterHash === "string" ? value.starterHash : "";
+
+                if (savedStarterHash) {
+                    return savedStarterHash === workspaceKeyOf(nextWorkspace);
+                }
+
+                /**
+                 * Legacy compatibility:
+                 * older saved SQL/progress payloads may not have starterHash.
+                 * If the saved item is clearly user work for this same exercise target,
+                 * do not throw it away just because starterHash is missing.
+                 */
+                const sameExercise =
+                    value?.exerciseKey === targetKey ||
+                    value?.exerciseId === inputId ||
+                    value?.id === inputId ||
+                    String(targetKey).endsWith(`:${inputId}`);
+
+                const userWork = isUserWork(value);
+
+                const hasWorkspace =
+                    value?.workspace &&
+                    value.workspace.version === 2 &&
+                    Array.isArray(value.workspace.nodes);
+
+                const hasCode =
+                    typeof value?.code === "string" && value.code.trim() !== "";
+
+                return Boolean(sameExercise && userWork && (hasWorkspace || hasCode));
+            }
+
+            const progressSavedCandidates = [
+                progressToolStateSaved,
+                progressRuntimeExerciseSaved,
+            ].filter(Boolean);
+
+            const progressSavedUserMatch =
+                progressSavedCandidates.find(
+                    (candidate) => isUserWork(candidate) && starterMatches(candidate),
+                ) ?? null;
+
+            const progressSaved =
+                progressSavedUserMatch ??
+                progressToolStateSaved ??
+                progressRuntimeExerciseSaved ??
+                null;
+
+            const runtimeSavedIsUserWork = isUserWork(runtimeSaved);
+            const progressSavedIsUserWork = isUserWork(progressSaved);
+
             const savedForBind =
                 snapshotOverridesSaved
                     ? null
-                    : exercises[targetKey] ??
-                      ((getTopicProgressState((progress as any)?.topics ?? {}, viewTid).topic as any)?.toolState?.[nextToolKey] ??
-                      null);
+                    : progressSaved &&
+                    progressSavedIsUserWork &&
+                    starterMatches(progressSaved) &&
+                    !runtimeSavedIsUserWork
+                        ? progressSaved
+                        : runtimeSaved ?? progressSaved ?? null;
+
             const savedWorkspace = hydrateWorkspaceShellWithCode(
                 savedForBind?.workspace && typeof savedForBind.workspace === "object"
                     ? (savedForBind.workspace as WorkspaceStateV2)
@@ -921,10 +1170,7 @@ export function useToolCodeRunnerState(args: {
             const savedWorkspaceCode = deriveEntryCode(savedWorkspace);
             const incomingWorkspaceCode = deriveEntryCode(nextWorkspace);
 
-            const savedStarterMatchesCurrent = savedStarterStillMatches({
-                saved: savedForBind,
-                currentStarterWorkspace: nextWorkspace,
-            });
+            const savedStarterMatchesCurrent = starterMatches(savedForBind);
 
             /**
              * Important:
@@ -990,6 +1236,10 @@ export function useToolCodeRunnerState(args: {
                     (savedForBind?.workspace as any)?.sqlSeedSql,
                     resolvedSql.sqlSeedSql,
                 ),
+                starterHash:
+                    typeof savedForBind?.starterHash === "string"
+                        ? savedForBind.starterHash
+                        : currentStarterHash,
                 sqlInitialTableSnapshots:
                     (savedForBind as any)?.sqlInitialTableSnapshots ??
                     (savedForBind?.workspace as any)?.sqlInitialTableSnapshots ??

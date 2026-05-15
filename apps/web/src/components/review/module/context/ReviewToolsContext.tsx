@@ -62,7 +62,9 @@ export type RegisterArgs = {
   workspace?: WorkspaceStateV2 | null;
   ownerCardId?: string | null;
   exerciseKey?: string;
-  preferSnapshot?: boolean;
+    preferSnapshot?: boolean;
+    userEdited?: boolean;
+    workspaceOrigin?: WorkspaceOrigin;
 
   sqlDialect?: SqlDialect;
   sqlDatasetId?: string;
@@ -320,8 +322,11 @@ export function ReviewToolsProvider({
             if (!entry) return;
 
             const { snap, targetKey } = entry;
-            const userEdited = snap.preferSnapshot === true;
-
+            const userEdited =
+                snap.preferSnapshot === true ||
+                snap.userEdited === true ||
+                snap.workspaceOrigin === "user" ||
+                snap.workspaceOrigin === "saved";
             patchExercise(targetKey, {
                 language: snap.lang,
                 lang: snap.lang,
@@ -377,96 +382,139 @@ export function ReviewToolsProvider({
     [ensureVisible, onBindToToolsPanel, bindExerciseTool, flushByToolKey],
   );
 
-  const syncCodeInputSnapshot = useCallback(
-    (id: string, patch: CodeInputPatch) => {
-      if (!id) return;
+    const syncCodeInputSnapshot = useCallback(
+        (id: string, patch: CodeInputPatch) => {
+            if (!id) return;
 
-      const cur = registryRef.current.get(id);
-      if (!cur) return;
+            const cur = registryRef.current.get(id);
+            if (!cur) return;
 
-      const workspace =
-        patch?.workspace && typeof patch.workspace === "object"
-          ? (patch.workspace as WorkspaceStateV2)
-          : patch?.codeWorkspace && typeof patch.codeWorkspace === "object"
-            ? (patch.codeWorkspace as WorkspaceStateV2)
-            : patch?.ideWorkspace && typeof patch.ideWorkspace === "object"
-              ? (patch.ideWorkspace as WorkspaceStateV2)
-              : cur.workspace;
+            const targetKey = patch?.exerciseKey ?? cur.exerciseKey ?? id;
+            const userEdited = isRealUserWorkspaceEdit(patch);
 
-      const next: RegisterArgs = {
-        ...cur,
-        exerciseKey: patch?.exerciseKey ?? cur.exerciseKey,
-        lang: patch?.codeLang ?? patch?.language ?? cur.lang,
-        code:
-          getWorkspaceEntryCode(workspace) ??
-          (typeof patch?.code === "string" ? patch.code : cur.code),
-        stdin:
-          typeof patch?.codeStdin === "string"
-            ? patch.codeStdin
-            : typeof patch?.stdin === "string"
-              ? patch.stdin
-              : cur.stdin,
-        ideConfig: patch?.ideConfig ?? cur.ideConfig,
-        workspace,
-        preferSnapshot: patch?.preferSnapshot === true,
-        sqlDialect: patch?.codeSqlDialect ?? patch?.sqlDialect ?? cur.sqlDialect,
-        sqlDatasetId: firstNonBlank(
-          typeof patch?.sqlDatasetId === "string" ? patch.sqlDatasetId : undefined,
-          cur.sqlDatasetId,
-        ),
-        sqlSchemaSql: firstNonBlank(
-          typeof patch?.sqlSchemaSql === "string" ? patch.sqlSchemaSql : undefined,
-          cur.sqlSchemaSql,
-        ),
-        sqlSeedSql: firstNonBlank(
-          typeof patch?.sqlSeedSql === "string" ? patch.sqlSeedSql : undefined,
-          cur.sqlSeedSql,
-        ),
-        sqlInitialTableSnapshots:
-          patch?.sqlInitialTableSnapshots && typeof patch.sqlInitialTableSnapshots === "object"
-            ? patch.sqlInitialTableSnapshots
-            : cur.sqlInitialTableSnapshots,
-      };
+            const incomingWorkspace =
+                patch?.workspace && typeof patch.workspace === "object"
+                    ? (patch.workspace as WorkspaceStateV2)
+                    : patch?.codeWorkspace && typeof patch.codeWorkspace === "object"
+                        ? (patch.codeWorkspace as WorkspaceStateV2)
+                        : patch?.ideWorkspace && typeof patch.ideWorkspace === "object"
+                            ? (patch.ideWorkspace as WorkspaceStateV2)
+                            : cur.workspace;
 
-      registryRef.current.set(id, next);
-      cur.onPatch?.(patch);
+            const existingExercise =
+                useReviewRuntimeStore.getState().exercises[targetKey];
 
-        const targetKey = next.exerciseKey ?? id;
-        const userEdited = isRealUserWorkspaceEdit(patch);
+            const existingWorkspace = existingExercise?.workspace ?? null;
 
-        const feedbackDismissPatch =
-            patch?.dismissFeedbackOnEdit === true && patch?.feedbackDismissed === true
-                ? {
-                    submitted: false,
-                    feedbackDismissed: true,
-                    dismissFeedbackOnEdit: true,
-                    userEdited: true,
-                    updateOrigin: "user",
-                    workspaceOrigin: "user" as const,
-                }
-                : {};
+            const protectsExistingUserWorkspace =
+                !userEdited &&
+                existingExercise?.userEdited === true &&
+                existingWorkspace &&
+                workspaceKeyOf(existingWorkspace) !== workspaceKeyOf(incomingWorkspace);
 
-        patchExercise(targetKey, {
-            language: next.lang,
-            lang: next.lang,
-            workspace: next.workspace ?? undefined,
-            codeWorkspace: next.workspace ?? undefined,
-            ideWorkspace: next.workspace ?? undefined,
-            stdin: next.stdin ?? "",
-            codeStdin: next.stdin ?? "",
-            code: getWorkspaceEntryCode(next.workspace) ?? next.code,
-            ...(userEdited
-                ? {
-                    userEdited: true,
-                    workspaceOrigin: "user" as const,
-                }
-                : {}),
-            ...feedbackDismissPatch,
-        });
-    },
-    [patchExercise],
-  );
+            /**
+             * Critical:
+             * A sync/programmatic hydration snapshot must not replace a previously
+             * user-edited SQL workspace. SQL route/topic navigation can emit starter
+             * workspace snapshots after the real query was already saved.
+             */
+            const workspace = protectsExistingUserWorkspace
+                ? existingWorkspace
+                : incomingWorkspace;
 
+            const nextCode =
+                getWorkspaceEntryCode(workspace) ??
+                (typeof patch?.code === "string" ? patch.code : cur.code);
+
+            const nextStdin =
+                typeof patch?.codeStdin === "string"
+                    ? patch.codeStdin
+                    : typeof patch?.stdin === "string"
+                        ? patch.stdin
+                        : protectsExistingUserWorkspace
+                            ? existingExercise?.stdin ?? cur.stdin
+                            : cur.stdin;
+
+            const next: RegisterArgs = {
+                ...cur,
+                exerciseKey: targetKey,
+                lang: patch?.codeLang ?? patch?.language ?? cur.lang,
+                code: nextCode,
+                stdin: nextStdin,
+                ideConfig: patch?.ideConfig ?? cur.ideConfig,
+                workspace,
+                preferSnapshot:
+                    userEdited ||
+                    cur.preferSnapshot === true ||
+                    patch?.preferSnapshot === true,
+                userEdited: userEdited || cur.userEdited === true,
+                workspaceOrigin: userEdited ? "user" : cur.workspaceOrigin,
+                sqlDialect: patch?.codeSqlDialect ?? patch?.sqlDialect ?? cur.sqlDialect,
+                sqlDatasetId: firstNonBlank(
+                    typeof patch?.sqlDatasetId === "string"
+                        ? patch.sqlDatasetId
+                        : undefined,
+                    cur.sqlDatasetId,
+                ),
+                sqlSchemaSql: firstNonBlank(
+                    typeof patch?.sqlSchemaSql === "string"
+                        ? patch.sqlSchemaSql
+                        : undefined,
+                    cur.sqlSchemaSql,
+                ),
+                sqlSeedSql: firstNonBlank(
+                    typeof patch?.sqlSeedSql === "string"
+                        ? patch.sqlSeedSql
+                        : undefined,
+                    cur.sqlSeedSql,
+                ),
+                sqlInitialTableSnapshots:
+                    patch?.sqlInitialTableSnapshots &&
+                    typeof patch.sqlInitialTableSnapshots === "object"
+                        ? patch.sqlInitialTableSnapshots
+                        : cur.sqlInitialTableSnapshots,
+            };
+
+            registryRef.current.set(id, next);
+            cur.onPatch?.(patch);
+
+            const feedbackDismissPatch =
+                patch?.dismissFeedbackOnEdit === true &&
+                patch?.feedbackDismissed === true
+                    ? {
+                        submitted: false,
+                        feedbackDismissed: true,
+                        dismissFeedbackOnEdit: true,
+                        userEdited: true,
+                        updateOrigin: "user",
+                        workspaceOrigin: "user" as const,
+                    }
+                    : {};
+
+            patchExercise(targetKey, {
+                language: next.lang,
+                lang: next.lang,
+
+                workspace: next.workspace ?? undefined,
+                codeWorkspace: next.workspace ?? undefined,
+                ideWorkspace: next.workspace ?? undefined,
+
+                stdin: next.stdin ?? "",
+                codeStdin: next.stdin ?? "",
+                code: getWorkspaceEntryCode(next.workspace) ?? next.code,
+
+                ...(userEdited
+                    ? {
+                        userEdited: true,
+                        workspaceOrigin: "user" as const,
+                    }
+                    : {}),
+
+                ...feedbackDismissPatch,
+            });
+        },
+        [patchExercise],
+    );
     const patchCodeInput = useCallback(
         (id: string, patch: CodeInputPatch) => {
             if (!id) return;
@@ -532,24 +580,55 @@ export function ReviewToolsProvider({
 
       let nextArgs: RegisterArgs = args;
 
-      if (prev?.preferSnapshot) {
-        const incomingMatchesPatchedSnapshot =
-          prev.lang === args.lang &&
-          prev.code === args.code &&
-          (prev.stdin ?? "") === (args.stdin ?? "") &&
-          workspaceKeyOf(prev.workspace ?? null) === workspaceKeyOf(args.workspace ?? null);
+        const prevIsProtectedUserSnapshot = Boolean(
+            prev &&
+            (
+                prev.preferSnapshot === true ||
+                prev.userEdited === true ||
+                prev.workspaceOrigin === "user" ||
+                prev.workspaceOrigin === "saved"
+            ),
+        );
 
-        nextArgs = incomingMatchesPatchedSnapshot
-          ? { ...args, preferSnapshot: false }
-          : {
-              ...args,
-              lang: prev.lang,
-              code: prev.code,
-              stdin: prev.stdin,
-              workspace: prev.workspace,
-              preferSnapshot: true,
-            };
-      }
+        if (prevIsProtectedUserSnapshot && prev) {
+            const incomingMatchesPatchedSnapshot =
+                prev.lang === args.lang &&
+                prev.code === args.code &&
+                (prev.stdin ?? "") === (args.stdin ?? "") &&
+                workspaceKeyOf(prev.workspace ?? null) === workspaceKeyOf(args.workspace ?? null);
+
+            nextArgs = incomingMatchesPatchedSnapshot
+                ? {
+                    ...args,
+                    preferSnapshot: true,
+                    userEdited: true,
+                    workspaceOrigin: prev.workspaceOrigin ?? "user",
+                }
+                : {
+                    ...args,
+
+                    /**
+                     * Keep the current component's onPatch from args, but preserve the
+                     * previously user-edited workspace/code. Otherwise a remount can
+                     * re-register starter args and overwrite the learner query.
+                     */
+                    lang: prev.lang,
+                    code: prev.code,
+                    stdin: prev.stdin,
+                    workspace: prev.workspace,
+
+                    preferSnapshot: true,
+                    userEdited: true,
+                    workspaceOrigin: prev.workspaceOrigin ?? "user",
+
+                    sqlDialect: prev.sqlDialect ?? args.sqlDialect,
+                    sqlDatasetId: prev.sqlDatasetId ?? args.sqlDatasetId,
+                    sqlSchemaSql: prev.sqlSchemaSql ?? args.sqlSchemaSql,
+                    sqlSeedSql: prev.sqlSeedSql ?? args.sqlSeedSql,
+                    sqlInitialTableSnapshots:
+                        prev.sqlInitialTableSnapshots ?? args.sqlInitialTableSnapshots,
+                };
+        }
 
       const prevKey = registerArgsKey(prev);
       const nextKey = registerArgsKey(nextArgs);

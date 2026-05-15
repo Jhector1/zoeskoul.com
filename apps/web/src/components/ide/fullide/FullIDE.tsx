@@ -23,7 +23,7 @@ import { useIdeViewport } from "@/components/ide/fullide/hooks/useIdeViewport";
 import IdeProjectModals from "@/components/ide/fullide/modals/IdeProjectModals";
 import IdeEditorPane from "@/components/ide/fullide/panes/IdeEditorPane";
 import IdeExplorerPane from "@/components/ide/fullide/panes/IdeExplorerPane";
-import type { FullIDEProps } from "../types";
+import type {FullIDEProps, WorkspaceStateV2} from "../types";
 import { CodeRunnerRuntime, ExecutionBackend } from "@/components/code/runner/runtime";
 import { mergeTerminalSnapshotIntoWorkspace } from "@/lib/projects/mergeTerminalSnapshotIntoWorkspace";
 import {
@@ -62,6 +62,7 @@ type FullIDEInnerProps = {
     sqlSchemaSql?: FullIDEProps["sqlSchemaSql"];
     sqlSeedSql?: FullIDEProps["sqlSeedSql"];
     sqlSetupSql?: FullIDEProps["sqlSetupSql"];
+    onWorkspaceChange?: FullIDEProps["onWorkspaceChange"];
     sqlInitialTableSnapshots?: FullIDEProps["sqlInitialTableSnapshots"];
     sqlDialect: any;
     setSqlDialect: React.Dispatch<React.SetStateAction<any>>;
@@ -165,6 +166,7 @@ function FullIDEInner({
                           derived,
                           history,
                           actions,
+                          onWorkspaceChange,
                       }: FullIDEInnerProps) {
     const {
         language,
@@ -183,7 +185,60 @@ function FullIDEInner({
     const { activeFile, entryFile, tabFiles, currentWorkspace } = derived;
     const [explorerCollapsed, setExplorerCollapsed] = useState(false);
     const currentWorkspaceRef = useRef(currentWorkspace);
+    const emitImmediateWorkspaceChange = useCallback(
+        (workspace: WorkspaceStateV2 | null) => {
+            onWorkspaceChange?.(workspace, { origin: "user" });
+        },
+        [onWorkspaceChange],
+    );
 
+    const handleChangeCode = useCallback(
+        (nextCode: string) => {
+            actions.onChangeCode(nextCode);
+
+            const current = currentWorkspaceRef.current;
+
+            if (!current || current.version !== 2 || !Array.isArray(current.nodes)) {
+                return;
+            }
+
+            const targetFileId = current.activeFileId || current.entryFileId;
+
+            const nextWorkspace: WorkspaceStateV2 = {
+                ...current,
+                nodes: current.nodes.map((node) =>
+                    node.kind === "file" && node.id === targetFileId
+                        ? {
+                            ...node,
+                            content: nextCode,
+                            updatedAt: Date.now(),
+                        }
+                        : node,
+                ),
+            };
+
+            emitImmediateWorkspaceChange(nextWorkspace);
+        },
+        [actions, emitImmediateWorkspaceChange],
+    );
+
+    const handleChangeStdin = useCallback(
+        (nextStdin: string) => {
+            actions.setStdin(nextStdin);
+
+            const current = currentWorkspaceRef.current;
+
+            if (!current || current.version !== 2) {
+                return;
+            }
+
+            emitImmediateWorkspaceChange({
+                ...current,
+                stdin: nextStdin,
+            });
+        },
+        [actions, emitImmediateWorkspaceChange],
+    );
     useEffect(() => {
         currentWorkspaceRef.current = currentWorkspace;
     }, [currentWorkspace]);
@@ -339,7 +394,7 @@ function FullIDEInner({
             policy={state.policy}
             onUpgrade={() => router.push(access.hasUser ? billingHref : loginHref)}
             onChangeFilter={actions.setFilter}
-            onChangeStdin={actions.setStdin}
+            onChangeStdin={handleChangeStdin}
             canUndo={history.canUndo}
             canRedo={history.canRedo}
             onUndo={actions.undo}
@@ -399,7 +454,7 @@ function FullIDEInner({
             services={services}
             onChangeLanguage={setLangUI}
             isAuthenticated={access.hasUser}
-            onChangeCode={actions.onChangeCode}
+            onChangeCode={handleChangeCode}
             onChangeSqlDialect={setSqlDialect}
             onBeforeRun={onBeforeRun}
             onRunResult={onRunResult}
@@ -591,6 +646,43 @@ function FullIDEInner({
     );
 }
 
+
+
+
+function workspaceNotifyKey(workspace: WorkspaceStateV2 | null | undefined) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return "null";
+    }
+
+    return JSON.stringify({
+        version: 2,
+        language: workspace.language,
+        activeFileId: workspace.activeFileId,
+        entryFileId: workspace.entryFileId,
+        openTabs: workspace.openTabs ?? [],
+        stdin: workspace.stdin ?? "",
+        expanded: workspace.expanded ?? [],
+        leftPct: workspace.leftPct ?? 26,
+        nodes: workspace.nodes.map((node: any) => {
+            if (node?.kind === "file") {
+                return {
+                    id: node.id,
+                    kind: node.kind,
+                    name: node.name,
+                    parentId: node.parentId ?? null,
+                    content: node.content ?? "",
+                };
+            }
+
+            return {
+                id: node?.id,
+                kind: node?.kind,
+                name: node?.name,
+                parentId: node?.parentId ?? null,
+            };
+        }),
+    });
+}
 export default function FullIDE(props: FullIDEProps) {
     const {
         title = "IDE",
@@ -721,7 +813,8 @@ export default function FullIDE(props: FullIDEProps) {
         [initialWorkspace],
     );
     const lastAppliedExternalWorkspaceJsonRef = useRef<string | null>(null);
-
+    const suppressWorkspaceEchoKeyRef = useRef<string | null>(null);
+    const lastNotifiedWorkspaceKeyRef = useRef<string | null>(null);
 
     const replaceWorkspaceActionRef = useRef(workspace.actions.replaceWorkspace);
     const resetWorkspaceForLanguageActionRef = useRef(workspace.actions.resetWorkspaceForLanguage);
@@ -760,19 +853,28 @@ export default function FullIDE(props: FullIDEProps) {
         const applyKey = `${externalWorkspaceJson}::initial:${initialWorkspaceJson}`;
         if (lastAppliedExternalWorkspaceJsonRef.current === applyKey) return;
 
-        const nextWorkspace = externalWorkspaceRef.current ?? initialWorkspaceRef.current ?? null;
-        const nextWorkspaceJson = JSON.stringify(nextWorkspace ?? null);
+        const nextWorkspace =
+            externalWorkspaceRef.current ?? initialWorkspaceRef.current ?? null;
 
-        // Mark as applied before calling into workspace actions.
-        // Those actions synchronously schedule React state updates, so the guard must
-        // already be set before the next render/effect pass.
+        const nextWorkspaceJson = JSON.stringify(nextWorkspace ?? null);
+        const nextNotifyKey = workspaceNotifyKey(nextWorkspace);
+
         lastAppliedExternalWorkspaceJsonRef.current = applyKey;
 
         if (nextWorkspace) {
             if (nextWorkspaceJson !== currentWorkspaceJsonRef.current) {
+                /**
+                 * This hydration is parent-controlled/programmatic.
+                 * The next internal workspace emission should not be sent back upward,
+                 * otherwise FullIDE and CodeToolPane can echo the same SQL workspace
+                 * until React hits maximum update depth.
+                 */
+                suppressWorkspaceEchoKeyRef.current = nextNotifyKey;
                 replaceWorkspaceActionRef.current(nextWorkspace);
             }
         } else {
+            suppressWorkspaceEchoKeyRef.current = null;
+
             resetWorkspaceForLanguageActionRef.current(
                 forcedLanguage ?? workspaceLanguageRef.current,
             );
@@ -784,10 +886,28 @@ export default function FullIDE(props: FullIDEProps) {
         forcedLanguage,
     ]);
 
-    useEffect(() => {
-        onWorkspaceChange?.(workspace.derived.currentWorkspace);
-    }, [onWorkspaceChange, workspace.derived.currentWorkspace]);
+    const currentWorkspaceNotifyKey = useMemo(
+        () => workspaceNotifyKey(workspace.derived.currentWorkspace),
+        [workspace.derived.currentWorkspace],
+    );
 
+    useEffect(() => {
+        const current = workspace.derived.currentWorkspace;
+        const currentKey = currentWorkspaceNotifyKey;
+
+        if (suppressWorkspaceEchoKeyRef.current === currentKey) {
+            suppressWorkspaceEchoKeyRef.current = null;
+            lastNotifiedWorkspaceKeyRef.current = currentKey;
+            return;
+        }
+
+        if (lastNotifiedWorkspaceKeyRef.current === currentKey) {
+            return;
+        }
+
+        lastNotifiedWorkspaceKeyRef.current = currentKey;
+        onWorkspaceChange?.(current, { origin: "sync" });
+    }, [onWorkspaceChange, workspace.derived.currentWorkspace, currentWorkspaceNotifyKey]);
     const sessionRemountKey = useMemo(
         () =>
             [
@@ -878,6 +998,7 @@ export default function FullIDE(props: FullIDEProps) {
                 state={workspace.state}
                 derived={workspace.derived}
                 actions={workspace.actions}
+                onWorkspaceChange={onWorkspaceChange}
             />
         </div>
     );

@@ -21,8 +21,11 @@ export default defineConfig({
         : {
             command: "pnpm dev",
             url: "http://localhost:3000",
-            reuseExistingServer: !process.env.CI,
+            reuseExistingServer: process.env.PLAYWRIGHT_REUSE_SERVER === "1",
             timeout: 120_000,
+            env: {
+                E2E_ALLOW_DEV_ROUTES: "1",
+            }
         },
     projects: [
         {

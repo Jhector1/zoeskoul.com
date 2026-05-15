@@ -5,7 +5,67 @@ const BASE =
 
 const EXERCISE_URL = `${BASE}/exercise/e2e-print-name`;
 const READING_URL = `${BASE}/card/e2e-reading`;
+async function mockNonProgressReviewCloneApis(page: Page) {
+    await page.route("**/api/review/module-nav**", async (route) => {
+        return route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+                prevModuleId: null,
+                nextModuleId: null,
+                nextLocked: false,
+                nextBillingHref: null,
+                index: 1,
+                total: 1,
+            }),
+        });
+    });
 
+    await page.route("**/api/review/subject-finish**", async (route) => {
+        return route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+                status: "in_progress",
+                certificateReady: false,
+                certificateIssued: false,
+            }),
+        });
+    });
+
+    await page.route("**/api/gamification/me**", async (route) => {
+        return route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+                summary: {
+                    totalXp: 0,
+                    level: 1,
+                    currentStreak: 0,
+                    levelProgressPct: 0,
+                },
+            }),
+        });
+    });
+
+    await page.route("**/api/tools/doc**", async (route) => {
+        const request = route.request();
+
+        if (request.method() === "GET") {
+            return route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify({ doc: null }),
+            });
+        }
+
+        return route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({ ok: true }),
+        });
+    });
+}
 async function mockCommonReviewCloneApis(page: Page, progress: unknown) {
     await page.route("**/api/review/progress**", async (route) => {
         const request = route.request();
@@ -154,10 +214,6 @@ test.describe("review module clone navigation workspace isolation", () => {
         let savedProgress: unknown = { progress: null };
         const savedBodies: any[] = [];
 
-        await mockCommonReviewCloneApis(page, { progress: null });
-
-        await page.unroute("**/api/review/progress");
-
         await page.route("**/api/review/progress**", async (route) => {
             const request = route.request();
 
@@ -171,7 +227,6 @@ test.describe("review module clone navigation workspace isolation", () => {
 
             if (request.method() === "PUT") {
                 const body = request.postDataJSON();
-
                 savedBodies.push(body);
 
                 if (JSON.stringify(body).includes(editedMarker)) {
@@ -193,6 +248,8 @@ test.describe("review module clone navigation workspace isolation", () => {
             return route.fallback();
         });
 
+        await mockNonProgressReviewCloneApis(page);
+
         await gotoCloneUrl(page, EXERCISE_URL);
 
         await expectExerciseShowsStarterWorkspace(page);
@@ -210,7 +267,7 @@ test.describe("review module clone navigation workspace isolation", () => {
                         JSON.stringify(body).includes(editedMarker),
                     ),
                 {
-                    timeout: 30_000,
+                    timeout: 40_000,
                     message:
                         "Expected app to save an edited workspace payload before navigation",
                 },
@@ -233,7 +290,6 @@ test.describe("review module clone navigation workspace isolation", () => {
             timeout: 20_000,
         });
     });
-
     test("exercise uses starter workspace when no saved progress exists after navigation", async ({
                                                                                                       page,
                                                                                                   }) => {

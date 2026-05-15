@@ -24,6 +24,7 @@ type Props = {
     navModes: { cards: "scroll" | "slideshow"; quiz: "scroll" | "slideshow" };
     reduceMotion: boolean;
     tp: ReviewTopicProgress;
+    onBeforeCardNavigate?: () => Promise<void> | void;
     progressHydrated: boolean;
     versionStr: string;
     prereqsForAllQuizzes: boolean;
@@ -82,6 +83,9 @@ export default function ReviewTopicStage({
     subjectFinish,
     onOpenCertificate,
     onActiveCardIndexChange,
+
+
+                                             onBeforeCardNavigate,
 }: Props) {
     return (
         <main
@@ -127,8 +131,8 @@ export default function ReviewTopicStage({
                         sectionSlug={sectionSlug}
                         defaultToolLanguage={defaultToolLanguage}
                         onActiveCardIndexChange={onActiveCardIndexChange}
+                        onBeforeCardNavigate={onBeforeCardNavigate}
                     />
-
                     <ReviewTopicCompletion
                         viewIsComplete={viewIsComplete}
                         viewTopic={viewTopic}

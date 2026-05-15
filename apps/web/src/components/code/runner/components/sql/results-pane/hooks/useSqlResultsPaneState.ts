@@ -138,6 +138,9 @@ export function useSqlResultsPaneState(args: {
         }
     }, [availableTabs, defaultTab, tab]);
 
+
+
+
     React.useEffect(() => {
         if (busy) {
             setTab(availableTabs.includes("results") ? "results" : defaultTab);
@@ -145,22 +148,47 @@ export function useSqlResultsPaneState(args: {
         }
 
         if (!result) {
-            setAcceptedResult(null);
-            setPersistedSnapshots(fallbackSnapshots);
+            setAcceptedResult((prev) => (prev === null ? prev : null));
+
+            setPersistedSnapshots((prev) =>
+                buildSnapshotsKey(prev) === fallbackSnapshotsKey
+                    ? prev
+                    : fallbackSnapshots,
+            );
+
             return;
         }
 
         if (result === blockedResultRef.current) return;
 
-        setAcceptedResult(result);
+        setAcceptedResult((prev) => (prev === result ? prev : result));
 
         if (result.ok) {
             const nextSnapshots = getTableSnapshots(result);
-            setPersistedSnapshots(
-                Object.keys(nextSnapshots).length > 0 ? nextSnapshots : fallbackSnapshots,
+            const nextPersistedSnapshots =
+                Object.keys(nextSnapshots).length > 0
+                    ? nextSnapshots
+                    : fallbackSnapshots;
+
+            const nextKey = buildSnapshotsKey(nextPersistedSnapshots);
+
+            setPersistedSnapshots((prev) =>
+                buildSnapshotsKey(prev) === nextKey
+                    ? prev
+                    : nextPersistedSnapshots,
             );
         }
-    }, [busy, result, fallbackSnapshots, availableTabs, defaultTab, setTab]);
+    }, [
+        busy,
+        result,
+        fallbackSnapshots,
+        fallbackSnapshotsKey,
+        availableTabs,
+        defaultTab,
+        setTab,
+    ]);
+
+
 
     const tableSnapshots = React.useMemo(() => {
         return Object.keys(persistedSnapshots).length > 0

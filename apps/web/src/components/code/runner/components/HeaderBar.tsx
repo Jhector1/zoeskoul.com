@@ -254,6 +254,7 @@ export default function HeaderBar(props: {
                     <Tooltip tip={runLabel}>
                         <button
                             type="button"
+                            data-testid="code-runner-run-button"
                             disabled={disabled || showSpinner}
                             onClick={showStop ? onCancel : onRun}
                             className={cx(showStop || showSpinner ? "ui-btn-ide-danger" : "ui-btn-ide-success")}

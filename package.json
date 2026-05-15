@@ -15,6 +15,7 @@
     "test:e2e:web": "pnpm --filter @zoeskoul/web test:e2e",
     "test:e2e:web:harness": "pnpm --filter @zoeskoul/web test:e2e:harness",
     "test:e2e:web:headed": "pnpm --filter @zoeskoul/web test:e2e:headed",
+    "test:e2e:web:sql-review": "pnpm --filter @zoeskoul/web test:e2e:sql-review",
     "test:e2e:web:review-module-clone": "pnpm --filter @zoeskoul/web test:e2e:review-module-clone",
     "validate": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "validate:web": "pnpm --filter @zoeskoul/web validate",
@@ -37,6 +38,7 @@
     "curr:test:golden": "vitest run packages/curriculum-compiler/src/**/*.golden.test.ts",
     "test:curriculum": "vitest run packages/curriculum-compiler",
     "test:curriculum:watch": "vitest packages/curriculum-compiler"
+
   },
   "packageManager": "pnpm@10.33.0",
   "devDependencies": {

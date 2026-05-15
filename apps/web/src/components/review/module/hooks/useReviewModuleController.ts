@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState, useTransition} from "react";
 import { useParams } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 
@@ -135,12 +135,13 @@ export function useReviewModuleController({
         viewTopicId,
         setViewTopicId,
         flushNow,
+        flush,
         saveStatus,
         lastSaveError,
     } = useReviewProgress({ subjectSlug, moduleSlug, locale, firstTopicId });
 
     const store = useReviewRuntimeStore();
-
+    const flushToolLatestRef = useRef<null | (() => Promise<void>)>(null);
     const targetRegistry = useMemo(() => {
         if (!mod) return null;
         return buildReviewTargetRegistry({
@@ -157,12 +158,14 @@ export function useReviewModuleController({
     }, [targetRegistry]); // Removed 'store' from dependencies to avoid loop if it changes (though it shouldn't)
 
     const flushAll = useCallback(async () => {
-        store.flushBeforeNavigation({
-            flushProgress: () => {
-                void flushNow(progress);
-            }
-        });
-    }, [store, flushNow, progress]);
+        store.flushToolSnapshot();
+
+        await flushToolLatestRef.current?.();
+
+        store.flushToolSnapshot();
+
+        await flush();
+    }, [store, flush]);
 
     const initialRouteTarget = useMemo<ReviewResolvedRouteTarget | null>(() => {
         if (targetRegistry && params?.sectionSlug && params?.topicSlug && params?.targetKind && params?.targetSlug) {
@@ -588,7 +591,15 @@ export function useReviewModuleController({
         rightCollapsed: panels.rightCollapsed,
         rightW: panels.rightW,
     });
+    useEffect(() => {
+        flushToolLatestRef.current = tool.flushLatest;
 
+        return () => {
+            if (flushToolLatestRef.current === tool.flushLatest) {
+                flushToolLatestRef.current = null;
+            }
+        };
+    }, [tool.flushLatest]);
     const prereqsForAllQuizzes = unlockAll
         ? true
         : prereqsMetForAnyQuizOrProject(viewCards, viewProg, viewTid);
@@ -1166,6 +1177,7 @@ export function useReviewModuleController({
             sectionSlug,
             defaultToolLanguage: runtime.toolDefaults.defaultLang,
             subjectFinish,
+            onBeforeCardNavigate: flushAll,
             onOpenCertificate: handleOpenCertificate,
             onActiveCardIndexChange: handleNavigateCardIndex,
         },
@@ -1182,11 +1194,15 @@ export function useReviewModuleController({
                 !navLoading &&
                 !navError &&
                 !nav?.nextModuleId &&
-                Boolean(subjectFinish?.isLastModule),
+                Boolean(subjectFinish?.atEndOfPublishedTrack),
 
-            canGetCertificate: Boolean(subjectFinish?.canGetCertificate),
-            certificateLabel: "Get certificate",
-            certificateHint: subjectFinish?.certificateHint ?? null,
+            canGetCertificate: Boolean(
+                subjectFinish?.certificateEligible || subjectFinish?.certificateIssued,
+            ),
+            certificateLabel: subjectFinish?.certificateIssued
+                ? "View certificate"
+                : "Get certificate",
+            certificateHint: subjectFinish?.message ?? null,
         },
         celebrations: {
             reduceMotion,

@@ -831,6 +831,9 @@ export function useReviewProgress(args: {
         },
         [subjectSlug, moduleSlug, buildPayloadFromState, meaningfulBodyForPayload],
     );
+    const sleep = (ms: number) =>
+        new Promise<void>((resolve) => window.setTimeout(resolve, ms));
+
 
     const flush = useCallback(async () => {
         if (pendingSaveTimerRef.current != null) {
@@ -838,16 +841,46 @@ export function useReviewProgress(args: {
             pendingSaveTimerRef.current = null;
         }
 
+        if (runtimeSaveTimerRef.current != null) {
+            window.clearTimeout(runtimeSaveTimerRef.current);
+            runtimeSaveTimerRef.current = null;
+        }
+
         if (hydrationCompleteRef.current) {
             const latestProgress = mergeRuntimeIntoProgress(
                 progressRef.current,
                 useReviewRuntimeStore.getState(),
             );
-            queueProgressSave(latestProgress, { immediate: true, reason: "flush" });
+
+            progressRef.current = latestProgress;
+
+            queueProgressSave(latestProgress, {
+                immediate: true,
+                reason: "flush",
+            });
+        }
+
+        /**
+         * Drain the current save and any payload queued while a save was in flight.
+         * This makes internal navigation wait for the final edited workspace save,
+         * instead of racing against debounce/in-flight saves.
+         */
+        const startedAt = Date.now();
+        const timeoutMs = 15_000;
+
+        while (Date.now() - startedAt < timeoutMs) {
+            await drainSaveQueueRef.current();
+
+            if (!saveInFlightRef.current && !pendingSavePayloadRef.current) {
+                return;
+            }
+
+            await sleep(50);
         }
 
         await drainSaveQueueRef.current();
     }, [queueProgressSave]);
+
 
     const putProgressNow = useCallback(
         async (

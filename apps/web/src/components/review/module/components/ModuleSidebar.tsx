@@ -140,6 +140,9 @@ function SidebarTopicRow({
     return (
         <button
             type="button"
+            data-testid={`review-sidebar-topic-${item.id}`}
+            data-topic-id={item.id}
+            data-topic-slug={item.slug ?? item.id}
             disabled={item.disabled}
             onClick={() => onGoToTopic(item.id)}
             className={cn(

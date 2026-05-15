@@ -62,7 +62,7 @@ type Props = {
   moduleSlug: string;
   sectionSlug?: string;
   defaultToolLanguage?: string;
-
+  onBeforeCardNavigate?: () => Promise<void> | void;
   onActiveCardIndexChange?: (index: number) => void;
 };
 
@@ -90,21 +90,27 @@ export default function ReviewTopicCards({
   sectionSlug,
   defaultToolLanguage = "python",
   onActiveCardIndexChange,
+                                           onBeforeCardNavigate,
 }: Props) {
   const storeCards = useReviewRuntimeStore((s) => s.cards);
 
   const handleNavigate = React.useCallback(
-      (index: number) => {
+      async (index: number) => {
         const clampedIndex = Math.max(0, Math.min(viewCards.length - 1, index));
         if (clampedIndex === activeCardIndex) return;
 
-        /**
-         * Slideshow navigation is the source of truth for reading/sketch card
-         * completion. If a learner leaves a non-quiz card, that card is done.
-         *
-         * Quiz/project cards are completed only by their own pass handlers.
-         */
         const fromCard = viewCards[activeCardIndex] ?? null;
+
+        /**
+         * Production safety:
+         * Before changing slideshow/card target, flush the active editor/tool
+         * snapshot into runtime/progress and persist it.
+         *
+         * Without this, a learner can edit code and immediately click Previous/Next;
+         * the card navigator then merges stale runtime state and the edit can be
+         * lost or saved under the wrong target.
+         */
+        await onBeforeCardNavigate?.();
 
         sketch?.flushAll?.();
 
@@ -144,6 +150,7 @@ export default function ReviewTopicCards({
         activeCardIndex,
         flushNow,
         onActiveCardIndexChange,
+        onBeforeCardNavigate,
         setProgress,
         sketch,
         viewCards,
