@@ -54,6 +54,11 @@ function makePracticeResponse(args: PracticeFixtureArgs) {
     };
 }
 
+
+
+
+
+
 async function mockClonePracticeQuiz(page: Page, exerciseKey: string) {
     await page.route(
         (url) => url.pathname === "/api/review/quiz",
@@ -95,6 +100,18 @@ async function waitForClonePracticeCard(page: Page) {
     await expect(page.getByRole("button", { name: /Check this answer/i })).toBeVisible({
         timeout: 30_000,
     });
+}
+async function mockPracticeResponse(page: Page, args: PracticeFixtureArgs) {
+    await page.route(
+        (url) => url.pathname === "/api/practice",
+        async (route) => {
+            await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify(makePracticeResponse(args)),
+            });
+        },
+    );
 }
 
 async function waitForToolsEditor(page: Page) {
@@ -199,7 +216,136 @@ test.describe("review practice localized starter code hardening", () => {
             "@:quiz.m1_s04_query_one_column_name.starterCode",
         );
     });
+    test("SQL starter does not inherit stale Python practice workspace", async ({ page }) => {
+        const pythonExerciseKey = "e2e-explicit-python-before-sql";
+        const sqlExerciseKey = "e2e-sql-after-python-workspace-isolation";
 
+        await mockClonePracticeQuiz(page, pythonExerciseKey);
+        await mockPracticeResponse(page, {
+            id: pythonExerciseKey,
+            language: "python",
+            starterCode: '# Python starter before SQL\nprint("Hello Python!")\n',
+        });
+
+        await page.goto(REVIEW_CLONE_PRACTICE_URL);
+        await waitForClonePracticeCard(page);
+
+        await expect(page.locator("body")).toContainText("# Python starter before SQL", {
+            timeout: 30_000,
+        });
+
+        await expect(page.locator("body")).toContainText('print("Hello Python!")', {
+            timeout: 30_000,
+        });
+
+        await page.unrouteAll({ behavior: "ignoreErrors" });
+
+        await mockClonePracticeQuiz(page, sqlExerciseKey);
+        await mockPracticeResponse(page, {
+            id: sqlExerciseKey,
+            language: "sql",
+            starterCode: "@:quiz.m1_s04_query_one_column_name.starterCode",
+        });
+
+        await page.goto(REVIEW_CLONE_PRACTICE_URL);
+        await waitForClonePracticeCard(page);
+
+        await expect(page.locator("body")).toContainText("Language: sql", {
+            timeout: 30_000,
+        });
+
+        await expect(page.locator("body")).toContainText("query.sql", {
+            timeout: 30_000,
+        });
+
+        await expect(page.locator("body")).toContainText("-- Return only product names", {
+            timeout: 30_000,
+        });
+
+        await expect(page.locator("body")).not.toContainText("# Python starter before SQL");
+        await expect(page.locator("body")).not.toContainText("main.py");
+    });
+    // test("non-user saved SQL workspace does not override starterCode", async ({ page }) => {
+    //     await seedReviewProgress(page, {
+    //         practiceItemPatch: {
+    //             "e2e-sql-localized-starter": {
+    //                 code: "1",
+    //                 source: "1",
+    //                 language: "sql",
+    //                 userEdited: false,
+    //                 workspaceOrigin: "runtime",
+    //                 workspace: {
+    //                     language: "sql",
+    //                     files: {
+    //                         "query.sql": {
+    //                             path: "query.sql",
+    //                             content: "1",
+    //                         },
+    //                     },
+    //                     activeFile: "query.sql",
+    //                 },
+    //             },
+    //         },
+    //     });
+    //
+    //     await page.goto(SQL_LOCALIZED_STARTER_URL);
+    //     await waitForClonePracticeCard(page);
+    //
+    //     await expect(page.locator("body")).toContainText("-- Return only product names");
+    //     await expect(page.locator("body")).not.toContainText("SQL · query.sqlDarkSQLSQLiteResetRun1");
+    // });
+    // test("user-edited SQL workspace still restores over starterCode", async ({ page }) => {
+    //     await seedReviewProgress(page, {
+    //         practiceItemPatch: {
+    //             "e2e-sql-localized-starter": {
+    //                 code: "-- my saved query\nSELECT name FROM products;",
+    //                 source: "-- my saved query\nSELECT name FROM products;",
+    //                 language: "sql",
+    //                 userEdited: true,
+    //                 workspaceOrigin: "saved",
+    //                 workspace: {
+    //                     language: "sql",
+    //                     files: {
+    //                         "query.sql": {
+    //                             path: "query.sql",
+    //                             content: "-- my saved query\nSELECT name FROM products;",
+    //                         },
+    //                     },
+    //                     activeFile: "query.sql",
+    //                 },
+    //             },
+    //         },
+    //     });
+    //
+    //     await page.goto(SQL_LOCALIZED_STARTER_URL);
+    //     await waitForClonePracticeCard(page);
+    //
+    //     await expect(page.locator("body")).toContainText("-- my saved query");
+    //     await expect(page.locator("body")).toContainText("SELECT name FROM products");
+    // });
+    test("desktop Topics button does not hide sidebar when already open", async ({ page }) => {
+        const exerciseKey = "e2e-topics-button-sidebar-idempotent";
+
+        await mockClonePracticeQuiz(page, exerciseKey);
+        await mockPracticeResponse(page, {
+            id: exerciseKey,
+            language: "sql",
+            starterCode: "@:quiz.m1_s04_query_one_column_name.starterCode",
+        });
+
+        await page.goto(REVIEW_CLONE_PRACTICE_URL);
+        await waitForClonePracticeCard(page);
+
+        await page.getByRole("button", { name: /Topics/i }).click();
+
+        await expect(page.getByText(/Read before coding/i)).toBeVisible({
+            timeout: 10_000,
+        });
+
+        await expect(page.locator("body")).toContainText("-- Return only product names", {
+            timeout: 30_000,
+        });
+    });
     test("unknown unresolved starterCode tag does not render as executable editor text", async ({ page }) => {
         const exerciseKey = "e2e-unknown-tag-starter";
 

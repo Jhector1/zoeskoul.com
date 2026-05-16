@@ -166,12 +166,12 @@ export default function ReviewTopicCards({
     <div className="flex min-h-0 shrink-0 flex-col">
       <AnimatePresence initial={false} mode="wait">
         <motion.div
-          key={motionKey}
-          initial={reduceMotion ? false : TOPIC_PANE_ANIM.initial}
-          animate={TOPIC_PANE_ANIM.animate}
-          exit={reduceMotion ? undefined : TOPIC_PANE_ANIM.exit}
-          transition={reduceMotion ? { duration: 0 } : TOPIC_PANE_TRANSITION}
-          className="flex min-h-0 shrink-0 flex-col"
+            key={motionKey}
+            initial={reduceMotion ? false : TOPIC_PANE_ANIM.initial}
+            animate={TOPIC_PANE_ANIM.animate}
+            exit={reduceMotion ? undefined : TOPIC_PANE_ANIM.exit}
+            transition={reduceMotion ? { duration: 0 } : TOPIC_PANE_TRANSITION}
+            className="flex min-h-0 shrink-0 flex-col will-change-transform"
         >
           <FlowNavigator
             items={viewCards}

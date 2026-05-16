@@ -3,6 +3,7 @@
 import React from "react";
 import HeaderSlick from "@/components/HeaderSlick";
 import type { HeaderGamificationVm } from "../../types";
+import NavButton from "@/components/ui/NavButton";
 
 type Props = {
     locale: string;
@@ -10,7 +11,7 @@ type Props = {
     showDesktopLeft: boolean;
     leftCollapsed: boolean;
     rightCollapsed: boolean;
-    onBack: () => void;
+    modulesHref: string;
     onToggleLeftPanel: () => void;
     onToggleRightPanel: () => void;
     onResetCurrentTopic: () => void;
@@ -30,8 +31,7 @@ export default function ReviewModuleHeader({
                                                showDesktopLeft,
                                                leftCollapsed,
                                                rightCollapsed,
-                                               onBack,
-                                               onToggleLeftPanel,
+                                               modulesHref,                                               onToggleLeftPanel,
                                                onToggleRightPanel,
                                                onResetCurrentTopic,
                                                onPrevTopic,
@@ -49,14 +49,14 @@ export default function ReviewModuleHeader({
             slot={
                 <div className="flex w-full items-center justify-between gap-3">
                     <div className="inline-flex min-w-0 flex-wrap items-center gap-2 [&>button]:shrink-0">
-                        <button
-                            type="button"
-                            onClick={onBack}
+                        <NavButton
+                            href={modulesHref}
                             className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                            title="Go back"
+                            title="Go to modules"
+                            loadingText="Opening modules..."
                         >
-                            ← Back
-                        </button>
+                            ← Modules
+                        </NavButton>
 
                         <button
                             type="button"

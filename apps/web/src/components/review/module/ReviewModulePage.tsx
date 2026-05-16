@@ -31,6 +31,8 @@ export default function ReviewModulePage(props: ReviewModulePageProps) {
                 reduceMotion={vm.layout.reduceMotion}
                 showMask={vm.layout.showMask}
                 showSkeleton={vm.layout.showSkeleton}
+                isNavigating={vm.layout.isNavigating}
+                navigationLabel={vm.layout.navigationLabel}
                 leftCollapsed={vm.layout.leftCollapsed}
                 rightCollapsed={vm.layout.rightCollapsed}
                 leftW={vm.layout.leftW}

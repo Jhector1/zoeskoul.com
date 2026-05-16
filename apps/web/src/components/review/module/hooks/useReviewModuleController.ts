@@ -142,7 +142,45 @@ export function useReviewModuleController({
 
     const store = useReviewRuntimeStore();
     const flushToolLatestRef = useRef<null | (() => Promise<void>)>(null);
-    const targetRegistry = useMemo(() => {
+
+    const [isRouteTransitioning, setIsRouteTransitioning] = useState(false);
+    const routeTransitionTimerRef = useRef<number | null>(null);
+
+    const beginRouteTransition = useCallback(() => {
+        if (typeof window !== "undefined" && routeTransitionTimerRef.current !== null) {
+            window.clearTimeout(routeTransitionTimerRef.current);
+            routeTransitionTimerRef.current = null;
+        }
+
+        setIsRouteTransitioning(true);
+    }, []);
+
+    const finishRouteTransition = useCallback(() => {
+        if (typeof window === "undefined") {
+            setIsRouteTransitioning(false);
+            return;
+        }
+
+        if (routeTransitionTimerRef.current !== null) {
+            window.clearTimeout(routeTransitionTimerRef.current);
+        }
+
+        routeTransitionTimerRef.current = window.setTimeout(() => {
+            setIsRouteTransitioning(false);
+            routeTransitionTimerRef.current = null;
+        }, 180);
+    }, []);
+
+    useEffect(() => {
+        return () => {
+            if (typeof window !== "undefined" && routeTransitionTimerRef.current !== null) {
+                window.clearTimeout(routeTransitionTimerRef.current);
+            }
+        };
+    }, []);
+
+
+      const targetRegistry = useMemo(() => {
         if (!mod) return null;
         return buildReviewTargetRegistry({
             mod,
@@ -459,19 +497,33 @@ export function useReviewModuleController({
                 target,
             });
 
-            await flushAll();
+            beginRouteTransition();
 
-            if (typeof window !== "undefined") {
-                if (mode === "replace") {
-                    window.history.replaceState(window.history.state, "", href);
-                } else {
-                    window.history.pushState(window.history.state, "", href);
+            try {
+                await flushAll();
+
+                if (typeof window !== "undefined") {
+                    if (mode === "replace") {
+                        window.history.replaceState(window.history.state, "", href);
+                    } else {
+                        window.history.pushState(window.history.state, "", href);
+                    }
                 }
-            }
 
-            setRouteTarget(target);
+                setRouteTarget(target);
+            } finally {
+                finishRouteTransition();
+            }
         },
-        [catalogSlug, flushAll, locale, moduleSlug, subjectSlug],
+        [
+            beginRouteTransition,
+            catalogSlug,
+            finishRouteTransition,
+            flushAll,
+            locale,
+            moduleSlug,
+            subjectSlug,
+        ],
     );
 
     const showSkeleton = useSkeletonGate({
@@ -649,6 +701,7 @@ export function useReviewModuleController({
         )}`;
 
         if (assignmentSessionId && assignmentStatus.phase !== "idle") {
+            beginRouteTransition();
             router.push(
                 `/${ROUTES.practicePath(
                     encodeURIComponent(subjectSlug),
@@ -681,7 +734,7 @@ export function useReviewModuleController({
         };
         setProgress(next);
         flushNow(next);
-
+        beginRouteTransition();
         router.push(
             `/${ROUTES.practicePath(
                 encodeURIComponent(subjectSlug),
@@ -701,21 +754,31 @@ export function useReviewModuleController({
         progress,
         setProgress,
         flushNow,
+        beginRouteTransition,
     ]);
 
-    const handleBack = useCallback(() => {
-        if (typeof window !== "undefined" && window.history.length > 1) {
-            router.back();
-            return;
-        }
-        router.push(`/${locale}`);
-    }, [router, locale]);
+    // const handleBack = useCallback(() => {
+    //     /**
+    //      * In the review module, Back should leave the lesson/review page and return
+    //      * to the module chooser. Do not use router.back(), because browser history
+    //      * may point to another in-module route and keep the review controller mounted.
+    //      */
+    //     beginRouteTransition();
+    //
+    //     router.push(
+    //         ROUTES.subjectModules(
+    //             encodeURIComponent(subjectSlug),
+    //         ),
+    //     );
+    // }, [beginRouteTransition, router, subjectSlug]);
 
     const nextLocked = Boolean(nav?.nextLocked);
     const nextBillingHref = nav?.nextBillingHref ?? null;
 
     const goModule = useCallback(
         (mid: string) => {
+            beginRouteTransition();
+
             router.push(
                 ROUTES.learningPath(
                     encodeURIComponent(subjectSlug),
@@ -724,13 +787,15 @@ export function useReviewModuleController({
             );
             router.refresh();
         },
-        [router, subjectSlug],
+        [beginRouteTransition, router, subjectSlug],
     );
 
     const goUnlockNext = useCallback(() => {
+        beginRouteTransition();
+
         router.push(nextBillingHref || "/billing");
         router.refresh();
-    }, [router, nextBillingHref]);
+    }, [beginRouteTransition, router, nextBillingHref]);
 
     const handleOutroContinue = useCallback(() => {
         if (topicFlow.nextTopic?.id) {
@@ -948,10 +1013,12 @@ export function useReviewModuleController({
         toolsProvider,
 
         layout: {
-            ariaBusy: showSkeleton,
+            ariaBusy: showSkeleton || isRouteTransitioning || isModuleContinuePending,
             reduceMotion,
             showMask,
             showSkeleton,
+            isNavigating: isRouteTransitioning || isModuleContinuePending,
+            navigationLabel: saveStatus === "saving" ? "Saving progress..." : "Loading...",
             leftCollapsed: panels.leftCollapsedEff,
             rightCollapsed: panels.rightCollapsedEff,
             leftW: panels.leftW,
@@ -964,7 +1031,7 @@ export function useReviewModuleController({
             showDesktopLeft: panels.showDesktopLeft,
             leftCollapsed: panels.leftCollapsed,
             rightCollapsed: panels.rightCollapsed,
-            onBack: handleBack,
+            modulesHref: `/${locale}/subjects/${encodeURIComponent(subjectSlug)}/modules`,
             onToggleLeftPanel: panels.handleToggleLeftPanel,
             onToggleRightPanel: panels.handleToggleRightPanel,
             onResetCurrentTopic: handleResetCurrentTopic,

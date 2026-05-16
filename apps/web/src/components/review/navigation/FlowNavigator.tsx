@@ -3,6 +3,7 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/cn";
+import NavButton from "@/components/ui/NavButton";
 
 export type FlowNavMode = "scroll" | "slideshow";
 
@@ -106,14 +107,14 @@ export default function FlowNavigator<T>({
         <div className={cn("grid gap-3", className)}>
             {showUi ? (
                 <div className="ui-surface-muted flex items-center justify-between gap-3  px-3 py-2 rounded-none">
-                    <button
-                        type="button"
+                    <NavButton
                         className="ui-btn ui-btn-secondary text-xs font-extrabold"
                         onClick={handlePrev}
                         disabled={prevDisabled}
+                        loadingText="Loading..."
                     >
                         {prevLabel}
-                    </button>
+                    </NavButton>
 
                     <div className="ui-meta text-center">
                         {getProgressLabel
@@ -121,14 +122,14 @@ export default function FlowNavigator<T>({
                             : `Item ${safeIndex + 1} of ${total}`}
                     </div>
 
-                    <button
-                        type="button"
+                    <NavButton
                         className="ui-btn ui-btn-secondary text-xs font-extrabold"
                         onClick={handleNext}
                         disabled={nextDisabled}
+                        loadingText="Loading..."
                     >
                         {nextLabel}
-                    </button>
+                    </NavButton>
                 </div>
             ) : null}
 
