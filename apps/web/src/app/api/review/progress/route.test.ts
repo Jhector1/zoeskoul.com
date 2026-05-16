@@ -192,4 +192,265 @@ describe("/api/review/progress route", () => {
         expect(restoredExercise.workspace.entryFileId).toBe("src/main.py");
         expect(restoredExercise.workspace.openTabs).toEqual(["src/main.py", "src/helper.py"]);
     });
+
+
+    it("reset module save clears previous completed topics instead of merging them back", async () => {
+        const route = await import("./route");
+
+        mockDb.row = {
+            id: "review-progress-1",
+            updatedAt: new Date("2026-05-07T12:00:00.000Z"),
+            state: {
+                quizVersion: 1,
+                moduleCompleted: true,
+                moduleCompletedAt: "2026-05-07T12:00:00.000Z",
+                activeTopicId: "topic-a",
+                topics: {
+                    "topic-a": {
+                        completed: true,
+                        completedAt: "2026-05-07T12:00:00.000Z",
+                        readingDone: { "read-a": true },
+                        cardsDone: { "read-a": true },
+                        quizzesDone: { "quiz-a": true },
+                        quizState: {
+                            "quiz-a": {
+                                answers: {},
+                                checkedById: {},
+                            },
+                        },
+                    },
+                },
+                __saveRevision: 10,
+            },
+        };
+
+        const putReq = new Request("http://localhost:3000/api/review/progress", {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({
+                subjectSlug: "sql",
+                moduleSlug: "sql_module_12",
+                locale: "en",
+                state: {
+                    quizVersion: 2,
+                    moduleCompleted: false,
+                    moduleCompletedAt: undefined,
+                    activeTopicId: "topic-a",
+                    topics: {},
+                    __saveRevision: 11,
+                },
+            }),
+        });
+
+        const putRes = await route.PUT(putReq);
+
+        expect(putRes.status).toBe(200);
+
+        const json = await putRes.json();
+
+        expect(json.state.moduleCompleted).toBe(false);
+        expect(json.state.moduleCompletedAt).toBeUndefined();
+        expect(json.state.topics).toEqual({});
+        expect(json.state.quizVersion).toBe(2);
+    });
+
+    it("reset topic save clears only that topic and preserves other completed topics", async () => {
+        const route = await import("./route");
+
+        mockDb.row = {
+            id: "review-progress-1",
+            updatedAt: new Date("2026-05-07T12:00:00.000Z"),
+            state: {
+                quizVersion: 1,
+                moduleCompleted: true,
+                moduleCompletedAt: "2026-05-07T12:00:00.000Z",
+                activeTopicId: "topic-a",
+                topics: {
+                    "topic-a": {
+                        quizVersion: 1,
+                        completed: true,
+                        completedAt: "2026-05-07T12:00:00.000Z",
+                        readingDone: { "read-a": true },
+                        cardsDone: { "read-a": true },
+                        quizzesDone: { "quiz-a": true },
+                        quizState: {
+                            "quiz-a": {
+                                answers: {},
+                                checkedById: {},
+                            },
+                        },
+                    },
+                    "topic-b": {
+                        quizVersion: 1,
+                        completed: true,
+                        completedAt: "2026-05-07T12:01:00.000Z",
+                        readingDone: { "read-b": true },
+                        cardsDone: { "read-b": true },
+                        quizzesDone: { "quiz-b": true },
+                        quizState: {
+                            "quiz-b": {
+                                answers: {},
+                                checkedById: {},
+                            },
+                        },
+                    },
+                },
+                __saveRevision: 10,
+            },
+        };
+
+        const putReq = new Request("http://localhost:3000/api/review/progress", {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({
+                subjectSlug: "sql",
+                moduleSlug: "sql_module_12",
+                locale: "en",
+                state: {
+                    quizVersion: 1,
+                    moduleCompleted: false,
+                    moduleCompletedAt: undefined,
+                    activeTopicId: "topic-a",
+                    topics: {
+                        "topic-a": {
+                            quizVersion: 2,
+                            completed: false,
+                            completedAt: undefined,
+                            readingDone: {},
+                            cardsDone: {},
+                            quizzesDone: {},
+                            quizState: {},
+                            sketchState: {},
+                            toolState: {},
+                            runtimeStateV2: {
+                                cards: {},
+                                exercises: {},
+                            },
+                        },
+                    },
+                    __saveRevision: 11,
+                },
+            }),
+        });
+
+        const putRes = await route.PUT(putReq);
+
+        expect(putRes.status).toBe(200);
+
+        const json = await putRes.json();
+
+        expect(json.state.moduleCompleted).toBe(false);
+        expect(json.state.moduleCompletedAt).toBeUndefined();
+
+        expect(json.state.topics["topic-a"].completed).toBe(false);
+        expect(json.state.topics["topic-a"].completedAt).toBeUndefined();
+        expect(json.state.topics["topic-a"].readingDone).toEqual({});
+        expect(json.state.topics["topic-a"].cardsDone).toEqual({});
+        expect(json.state.topics["topic-a"].quizzesDone).toEqual({});
+        expect(json.state.topics["topic-a"].quizState).toEqual({});
+
+        expect(json.state.topics["topic-b"].completed).toBe(true);
+        expect(json.state.topics["topic-b"].readingDone).toEqual({
+            "read-b": true,
+        });
+        expect(json.state.topics["topic-b"].quizzesDone).toEqual({
+            "quiz-b": true,
+        });
+    });
+
+    it("reset quiz save removes only that quiz without resurrecting old quiz completion", async () => {
+        const route = await import("./route");
+
+        mockDb.row = {
+            id: "review-progress-1",
+            updatedAt: new Date("2026-05-07T12:00:00.000Z"),
+            state: {
+                quizVersion: 1,
+                moduleCompleted: true,
+                moduleCompletedAt: "2026-05-07T12:00:00.000Z",
+                activeTopicId: "topic-a",
+                topics: {
+                    "topic-a": {
+                        quizVersion: 1,
+                        completed: true,
+                        completedAt: "2026-05-07T12:00:00.000Z",
+                        readingDone: { "read-a": true },
+                        cardsDone: { "read-a": true },
+                        quizzesDone: {
+                            "quiz-a": true,
+                            "quiz-b": true,
+                        },
+                        quizState: {
+                            "quiz-a": {
+                                answers: { q1: "remove" },
+                                checkedById: {},
+                            },
+                            "quiz-b": {
+                                answers: { q2: "keep" },
+                                checkedById: {},
+                            },
+                        },
+                    },
+                },
+                __saveRevision: 10,
+            },
+        };
+
+        const putReq = new Request("http://localhost:3000/api/review/progress", {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({
+                subjectSlug: "sql",
+                moduleSlug: "sql_module_12",
+                locale: "en",
+                state: {
+                    quizVersion: 1,
+                    moduleCompleted: false,
+                    moduleCompletedAt: undefined,
+                    activeTopicId: "topic-a",
+                    topics: {
+                        "topic-a": {
+                            quizVersion: 2,
+                            completed: false,
+                            completedAt: undefined,
+                            readingDone: { "read-a": true },
+                            cardsDone: { "read-a": true },
+                            quizzesDone: {
+                                "quiz-b": true,
+                            },
+                            quizState: {
+                                "quiz-b": {
+                                    answers: { q2: "keep" },
+                                    checkedById: {},
+                                },
+                            },
+                        },
+                    },
+                    __saveRevision: 11,
+                },
+            }),
+        });
+
+        const putRes = await route.PUT(putReq);
+
+        expect(putRes.status).toBe(200);
+
+        const json = await putRes.json();
+        const topic = json.state.topics["topic-a"];
+
+        expect(topic.completed).toBe(false);
+        expect(topic.quizzesDone["quiz-a"]).toBeUndefined();
+        expect(topic.quizState["quiz-a"]).toBeUndefined();
+
+        expect(topic.quizzesDone["quiz-b"]).toBe(true);
+        expect(topic.quizState["quiz-b"].answers).toEqual({
+            q2: "keep",
+        });
+    });
 });

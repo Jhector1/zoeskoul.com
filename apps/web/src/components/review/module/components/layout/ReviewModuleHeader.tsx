@@ -84,6 +84,7 @@ export default function ReviewModuleHeader({
 
                         <button
                             type="button"
+                            data-testid="review-reset-topic-button"
                             onClick={onResetCurrentTopic}
                             className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap hidden sm:inline-flex"
                         >

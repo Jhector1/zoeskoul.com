@@ -181,9 +181,11 @@ function SidebarTopicRow({
 
                             {item.done ? (
                                 <span
-                                    className="shrink-0 text-[11px] font-medium text-emerald-700 dark:text-emerald-300/80">
-                                    ✓
-                                </span>
+                                    data-testid={`review-sidebar-topic-done-${item.id}`}
+                                    className="shrink-0 text-[11px] font-medium text-emerald-700 dark:text-emerald-300/80"
+                                >
+        ✓
+    </span>
                             ) : null}
                         </div>
                     </div>
@@ -487,14 +489,17 @@ function ModuleSidebar({
 
                 <div className="mt-3 flex items-start justify-between gap-3">
                     <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2">
-                            <span className="ui-review-progress-text">
-                                {ui.t("topicsLabel", {}, "Topics")}
-                            </span>
+                        <div
+                            className="flex items-center gap-2"
+                            data-testid="review-module-progress-label"
+                        >
+    <span className="ui-review-progress-text">
+        {ui.t("topicsLabel", {}, "Topics")}
+    </span>
 
                             <span className="ui-review-progress-value">
-                                {moduleProgress.done}/{moduleProgress.total}
-                            </span>
+        {moduleProgress.done}/{moduleProgress.total}
+    </span>
                         </div>
 
                         <div className="ui-progress-track mt-2">
@@ -526,6 +531,7 @@ function ModuleSidebar({
                         <button
                             type="button"
                             onClick={onResetModule}
+                            data-testid="review-reset-module-button"
                             className={cn(
                                 "ui-btn-secondary px-3",
                                 "text-rose-700 dark:text-rose-200",

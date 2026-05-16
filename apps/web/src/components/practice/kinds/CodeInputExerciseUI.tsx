@@ -576,12 +576,11 @@ export default function CodeInputExerciseUI({
                                     ? ui.t("tools.bound", {}, "Bound to Tools")
                                     : ui.t("tools.notBound", {}, "Not bound yet")}
                             </div>
-
                             <div className="mt-2 ui-meta">
                                 {ui.t(
                                     "tools.desc",
                                     {},
-                                    "Write code, run it, and use Fill answer directly in the Tools pane."
+                                    "Write code and run it here. Fill answer appears after the reveal steps."
                                 )}
                             </div>
                         </div>

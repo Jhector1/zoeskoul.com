@@ -36,6 +36,68 @@ function matrixToText(values: number[][]) {
     return values.map((r) => r.join(" ")).join("\n");
 }
 
+
+
+type RevealFillPatch = Partial<QItem> & Record<string, unknown>;
+
+export function buildRevealFillPatches(args: {
+    fillPatch: RevealFillPatch;
+    isCodeInput: boolean;
+}) {
+    const itemPatch: RevealFillPatch = {
+        ...args.fillPatch,
+        ...(args.isCodeInput ? { codeTouched: true } : {}),
+        submitted: false,
+        feedbackDismissed: true,
+        dismissFeedbackOnEdit: true,
+        updateOrigin: "user",
+    };
+
+    const toolsPatch: RevealFillPatch = args.isCodeInput
+        ? {
+            ...itemPatch,
+            userEdited: true,
+            preferSnapshot: true,
+            workspaceOrigin: "user",
+        }
+        : itemPatch;
+
+    return {
+        itemPatch,
+        toolsPatch,
+    };
+}
+
+export function applyRevealFillAnswer(args: {
+    fillPatch: RevealFillPatch;
+    isCodeInput: boolean;
+    codeInputId?: string;
+    updateCurrent: (patch: Partial<QItem>) => void;
+    patchCodeInput?: (id: string, patch: any) => void;
+}) {
+    const { itemPatch, toolsPatch } = buildRevealFillPatches({
+        fillPatch: args.fillPatch,
+        isCodeInput: args.isCodeInput,
+    });
+
+    args.updateCurrent(itemPatch as Partial<QItem>);
+
+    if (args.isCodeInput && args.codeInputId) {
+        args.patchCodeInput?.(args.codeInputId, toolsPatch);
+    }
+
+    return {
+        itemPatch,
+        toolsPatch,
+    };
+}
+
+
+
+
+
+
+
 function matrixToGridStrings(values: number[][]) {
     return values.map((row) => row.map((v) => String(v)));
 }
@@ -127,8 +189,12 @@ export default function RevealAnswerCard({
                 fillPatch: copyText || workspace
                     ? ({
                         code: copyText,
+                        source: copyText,
                         codeLang: lang as any,
+                        language: lang as any,
+                        lang: lang as any,
                         codeStdin: stdin,
+                        stdin,
                         ...(workspace
                             ? {
                                 workspace,
@@ -429,32 +495,20 @@ export default function RevealAnswerCard({
     function onFill() {
         if (!m.fillPatch) return;
 
-        const patch = {
-            ...m.fillPatch,
-            ...(String(reveal?.kind ?? exercise?.kind ?? "") === "code_input"
-                ? { codeTouched: true }
-                : {}),
-            submitted: false,
-            feedbackDismissed: true,
-dismissFeedbackOnEdit: true,
-            updateOrigin: "user",
-        };
+        const isCodeInput =
+            String(reveal?.kind ?? exercise?.kind ?? "") === "code_input";
 
-        // Always update the real exercise item first.
-        // Do not depend only on the tools registry because it may be stale,
-        // not mounted yet, or bound to another card.
-        updateCurrent(patch);
-
-        // Also patch the right tools pane when this is a code exercise.
-        // This makes Fill Answer update both the saved card state and the open editor.
-        if (String(reveal?.kind ?? exercise?.kind ?? "") === "code_input" && codeInputId) {
-            tools?.patchCodeInput?.(codeInputId, patch);
-        }
+        applyRevealFillAnswer({
+            fillPatch: m.fillPatch,
+            isCodeInput,
+            codeInputId,
+            updateCurrent,
+            patchCodeInput: tools?.patchCodeInput,
+        });
 
         setFilled(true);
         window.setTimeout(() => setFilled(false), 1200);
     }
-
     return (
         <div ref={rootRef} className="mt-3 min-w-0">
             <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">

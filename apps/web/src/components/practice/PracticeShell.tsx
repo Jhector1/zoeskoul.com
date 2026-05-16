@@ -88,7 +88,7 @@ export type PracticeShellProps = {
 
   padRef: React.MutableRefObject<VectorPadState>;
   zHeldRef: React.MutableRefObject<boolean>;
-
+  codeInputId?: string;
   updateCurrent: (patch: Partial<QItem>) => void;
 
   excuseAndNext?: (reason?: string | null) => Promise<void> | void;

@@ -23,7 +23,7 @@ import { useDebouncedSketchState } from "../hooks/useDebouncedSketchState";
 import {
     hasNonBlankText,
     normalizeCodeWorkspacePair,
-    stateLanguageMatches,
+    stateLanguageMatches, workspaceWithEntryCode,
 } from "@/components/review/module/runtime/workspaceCodeSource";
 
 type SqlTableSnapshot = {
@@ -397,7 +397,7 @@ export function ReviewToolsProvider({
             const targetKey = patch?.exerciseKey ?? cur.exerciseKey ?? id;
             const userEdited = isRealUserWorkspaceEdit(patch);
 
-            const incomingWorkspace =
+            const incomingWorkspaceRaw =
                 patch?.workspace && typeof patch.workspace === "object"
                     ? (patch.workspace as WorkspaceStateV2)
                     : patch?.codeWorkspace && typeof patch.codeWorkspace === "object"
@@ -406,14 +406,28 @@ export function ReviewToolsProvider({
                             ? (patch.ideWorkspace as WorkspaceStateV2)
                             : cur.workspace;
 
-
-
             const rawPatchCode =
                 typeof patch?.code === "string"
                     ? patch.code
                     : typeof patch?.source === "string"
                         ? patch.source
                         : undefined;
+
+            /**
+             * Critical for ReviewModule Fill answer:
+             *
+             * The bound Tools editor usually already has a non-blank starter workspace
+             * such as "# Write your code below". normalizeCodeWorkspacePair normally
+             * preserves non-blank workspace content, which is correct for hydration.
+             *
+             * But Fill answer is a real user/action patch. If it provides code, it must
+             * overwrite the bound workspace entry; otherwise the right CodeToolPane stays
+             * on the old starter text even though hidden item state changed.
+             */
+            const incomingWorkspace =
+                userEdited && typeof rawPatchCode === "string"
+                    ? workspaceWithEntryCode(incomingWorkspaceRaw, rawPatchCode)
+                    : incomingWorkspaceRaw;
 
             const patchCode =
                 typeof rawPatchCode === "string" &&

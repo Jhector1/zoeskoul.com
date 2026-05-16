@@ -88,35 +88,119 @@ function mergeSavedQuizState(base: SavedQuizState | undefined, incoming: SavedQu
   };
 }
 
-export function mergeTopicProgressStates(base: ReviewTopicProgress | undefined, incoming: ReviewTopicProgress | undefined): ReviewTopicProgress {
+export function mergeTopicProgressStates(
+    base: ReviewTopicProgress | undefined,
+    incoming: ReviewTopicProgress | undefined,
+): ReviewTopicProgress {
   const safeBase = base ?? {};
   const safeIncoming = incoming ?? {};
 
-  const nextQuizState: Record<string, SavedQuizState> = { ...(safeBase.quizState ?? {}) };
+  const baseVersion = Number(safeBase.quizVersion ?? 0);
+  const incomingVersion = Number(safeIncoming.quizVersion ?? 0);
+
+  const incomingIsAuthoritativeReset =
+      incomingVersion > baseVersion &&
+      safeIncoming.completed === false &&
+      !safeIncoming.completedAt;
+
+  /**
+   * Reset Topic / Reset Quiz is authoritative.
+   *
+   * Do not merge old cardsDone / readingDone / quizzesDone / quizState
+   * back into the incoming reset payload, because that resurrects green checks.
+   *
+   * Runtime/tool/sketch state may exist again later, but completion maps must
+   * stay exactly as the reset payload says.
+   */
+  if (incomingIsAuthoritativeReset) {
+    return {
+      ...safeBase,
+      ...safeIncoming,
+
+      quizVersion: incomingVersion,
+
+      cardsDone: { ...(safeIncoming.cardsDone ?? {}) },
+      readingDone: { ...((safeIncoming as any).readingDone ?? {}) },
+      quizzesDone: { ...(safeIncoming.quizzesDone ?? {}) },
+      quizState: { ...(safeIncoming.quizState ?? {}) },
+
+      sketchState: { ...(safeIncoming.sketchState ?? {}) },
+      toolState: { ...((safeIncoming as any).toolState ?? {}) },
+
+      runtimeStateV2: {
+        cards: { ...(safeIncoming.runtimeStateV2?.cards ?? {}) },
+        exercises: { ...(safeIncoming.runtimeStateV2?.exercises ?? {}) },
+      },
+
+      completed: false,
+      completedAt: undefined,
+    } as ReviewTopicProgress;
+  }
+
+  const nextQuizState: Record<string, SavedQuizState> = {
+    ...(safeBase.quizState ?? {}),
+  };
+
   for (const [cardId, quizState] of Object.entries(safeIncoming.quizState ?? {})) {
-    nextQuizState[cardId] = mergeSavedQuizState(nextQuizState[cardId], quizState) as SavedQuizState;
+    nextQuizState[cardId] = mergeSavedQuizState(
+        nextQuizState[cardId],
+        quizState,
+    ) as SavedQuizState;
   }
 
   return {
     ...safeBase,
     ...safeIncoming,
-    cardsDone: { ...(safeBase.cardsDone ?? {}), ...(safeIncoming.cardsDone ?? {}) },
-    quizzesDone: { ...(safeBase.quizzesDone ?? {}), ...(safeIncoming.quizzesDone ?? {}) },
-    sketchState: { ...(safeBase.sketchState ?? {}), ...(safeIncoming.sketchState ?? {}) },
-    quizState: nextQuizState,
-    runtimeStateV2: {
-      cards: mergeRecordMap(safeBase.runtimeStateV2?.cards, safeIncoming.runtimeStateV2?.cards),
-      exercises: mergeRecordMap(safeBase.runtimeStateV2?.exercises, safeIncoming.runtimeStateV2?.exercises),
+
+    quizVersion: Math.max(baseVersion, incomingVersion) || undefined,
+
+    cardsDone: {
+      ...(safeBase.cardsDone ?? {}),
+      ...(safeIncoming.cardsDone ?? {}),
     },
-    toolState: mergeRecordMap((safeBase as any).toolState, (safeIncoming as any).toolState),
+
+    readingDone: {
+      ...((safeBase as any).readingDone ?? {}),
+      ...((safeIncoming as any).readingDone ?? {}),
+    },
+
+    quizzesDone: {
+      ...(safeBase.quizzesDone ?? {}),
+      ...(safeIncoming.quizzesDone ?? {}),
+    },
+
+    sketchState: {
+      ...(safeBase.sketchState ?? {}),
+      ...(safeIncoming.sketchState ?? {}),
+    },
+
+    quizState: nextQuizState,
+
+    runtimeStateV2: {
+      cards: mergeRecordMap(
+          safeBase.runtimeStateV2?.cards,
+          safeIncoming.runtimeStateV2?.cards,
+      ),
+      exercises: mergeRecordMap(
+          safeBase.runtimeStateV2?.exercises,
+          safeIncoming.runtimeStateV2?.exercises,
+      ),
+    },
+
+    toolState: mergeRecordMap(
+        (safeBase as any).toolState,
+        (safeIncoming as any).toolState,
+    ),
+
     completed: safeIncoming.completed ?? safeBase.completed,
+
     completedAt:
-      Number(new Date(safeIncoming.completedAt ?? 0)) >= Number(new Date(safeBase.completedAt ?? 0))
-        ? safeIncoming.completedAt ?? safeBase.completedAt
-        : safeBase.completedAt,
+        Number(new Date(safeIncoming.completedAt ?? 0)) >=
+        Number(new Date(safeBase.completedAt ?? 0))
+            ? safeIncoming.completedAt ?? safeBase.completedAt
+            : safeBase.completedAt,
   } as ReviewTopicProgress;
 }
-
 export function getTopicProgressState(
   topics: Record<string, ReviewTopicProgress> | null | undefined,
   activeTopicId: string | null | undefined,

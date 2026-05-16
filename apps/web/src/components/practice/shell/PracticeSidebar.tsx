@@ -226,6 +226,7 @@ export default function PracticeSidebar(
                 resultBoxClass={resultBoxClass}
                 concept={concept}
                 excuseAndNext={props.excuseAndNext}
+                codeInputId={props.codeInputId}
             />
         </div>
     );

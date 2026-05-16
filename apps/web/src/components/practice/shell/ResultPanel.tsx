@@ -23,6 +23,8 @@ export default function ResultPanel({
                                         resultBoxClass,
                                         concept,
                                         excuseAndNext,
+                                        codeInputId,
+
                                     }: {
     t: any;
     busy: boolean;
@@ -33,6 +35,7 @@ export default function ResultPanel({
     actionErr: string | null;
     current: QItem | null;
     exercise: Exercise | null;
+    codeInputId?: string;
     updateCurrent: (patch: Partial<QItem>) => void;
     resultBoxClass: string;
     concept: UseConceptExplainResult;
@@ -88,6 +91,7 @@ export default function ResultPanel({
                                 current={current}
                                 reveal={activeHelpEntry.reveal}
                                 updateCurrent={updateCurrent}
+                                codeInputId={codeInputId}
                             />
                         ) : null}
 

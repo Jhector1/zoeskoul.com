@@ -103,6 +103,46 @@ function numericUpdatedAt(value: any) {
     return Number.isFinite(n) ? n : 0;
 }
 
+function numericVersion(value: unknown) {
+    const n = Number(value ?? 0);
+    return Number.isFinite(n) ? n : 0;
+}
+
+function isEmptyRecord(value: unknown) {
+    return (
+        !value ||
+        (typeof value === "object" &&
+            !Array.isArray(value) &&
+            Object.keys(value as Record<string, unknown>).length === 0)
+    );
+}
+
+function isAuthoritativeModuleReset(args: {
+    remote: ReviewProgressState;
+    local: ReviewProgressState;
+}) {
+    return (
+        numericVersion((args.local as any).quizVersion) >
+        numericVersion((args.remote as any).quizVersion) &&
+        (args.local as any).moduleCompleted === false &&
+        !(args.local as any).moduleCompletedAt &&
+        isEmptyRecord((args.local as any).topics)
+    );
+}
+
+function isAuthoritativeTopicReset(args: {
+    remoteTopic: ReviewTopicProgress | undefined;
+    localTopic: ReviewTopicProgress;
+}) {
+    const localVersion = numericVersion((args.localTopic as any).quizVersion);
+    const remoteVersion = numericVersion((args.remoteTopic as any)?.quizVersion);
+
+    return (
+        localVersion > remoteVersion &&
+        (args.localTopic as any).completed === false &&
+        !(args.localTopic as any).completedAt
+    );
+}
 
 function savedWorkspaceSummary(value: any) {
     const workspace =
@@ -177,6 +217,42 @@ function mergeTopicProgressStates(
     const a: any = existing ?? {};
     const b: any = incoming ?? {};
 
+    const existingVersion = numericVersion(a.quizVersion);
+    const incomingVersion = numericVersion(b.quizVersion);
+
+    const incomingIsAuthoritativeReset =
+        incomingVersion > existingVersion &&
+        b.completed === false &&
+        !b.completedAt;
+
+    if (incomingIsAuthoritativeReset) {
+        const runtimeB = b.runtimeStateV2 ?? {};
+
+        return {
+            ...a,
+            ...b,
+
+            quizVersion: incomingVersion,
+
+            cardsDone: { ...(b.cardsDone ?? {}) },
+            readingDone: { ...(b.readingDone ?? {}) },
+            quizzesDone: { ...(b.quizzesDone ?? {}) },
+            quizState: { ...(b.quizState ?? {}) },
+
+            sketchState: { ...(b.sketchState ?? {}) },
+            toolState: { ...(b.toolState ?? {}) },
+
+            runtimeStateV2: {
+                ...runtimeB,
+                cards: { ...(runtimeB.cards ?? {}) },
+                exercises: { ...(runtimeB.exercises ?? {}) },
+            },
+
+            completed: false,
+            completedAt: undefined,
+        } as ReviewTopicProgress;
+    }
+
     const runtimeA = a.runtimeStateV2 ?? {};
     const runtimeB = b.runtimeStateV2 ?? {};
 
@@ -184,9 +260,16 @@ function mergeTopicProgressStates(
         ...a,
         ...b,
 
+        quizVersion: Math.max(existingVersion, incomingVersion) || undefined,
+
         cardsDone: {
             ...(a.cardsDone ?? {}),
             ...(b.cardsDone ?? {}),
+        },
+
+        readingDone: {
+            ...(a.readingDone ?? {}),
+            ...(b.readingDone ?? {}),
         },
 
         quizzesDone: {
@@ -243,30 +326,102 @@ function mergeProgressStatesForSave(
 ): ReviewProgressState {
     const remote = normalizeProgressTopics(remoteState ?? emptyReviewProgress());
     const local = normalizeProgressTopics(localState ?? emptyReviewProgress());
+
+    /**
+     * Reset Module is authoritative.
+     * Do not merge remote completed topics back into local topics: {}.
+     */
+    if (isAuthoritativeModuleReset({ remote, local })) {
+        return {
+            ...local,
+            quizVersion: Math.max(
+                numericVersion((remote as any).quizVersion),
+                numericVersion((local as any).quizVersion),
+            ),
+            moduleCompleted: false,
+            moduleCompletedAt: undefined,
+            topics: {},
+            activeTopicId: normalizeTopicProgressKey(
+                (local as any).activeTopicId ?? (remote as any).activeTopicId,
+            ),
+            __saveRevision: Math.max(
+                getSaveRevision(remote),
+                getSaveRevision(local),
+                Date.now(),
+            ),
+        } as ReviewProgressState;
+    }
+
     const nextTopics: Record<string, ReviewTopicProgress> = {
         ...(remote.topics ?? {}),
     };
 
-    for (const [topicKey, localTopic] of Object.entries(local.topics ?? {})) {
+    let hasAuthoritativeTopicReset = false;
+
+    const localTopicEntries = Object.entries(
+        local.topics ?? {},
+    ) as Array<[string, ReviewTopicProgress]>;
+
+    for (const [topicKey, localTopic] of localTopicEntries) {
         const canonicalTopicKey = normalizeTopicProgressKey(topicKey);
+        const remoteTopic = nextTopics[canonicalTopicKey];
+
+        if (
+            isAuthoritativeTopicReset({
+                remoteTopic,
+                localTopic,
+            })
+        ) {
+            hasAuthoritativeTopicReset = true;
+            nextTopics[canonicalTopicKey] = localTopic;
+            continue;
+        }
+
         nextTopics[canonicalTopicKey] = mergeTopicProgressStates(
-            nextTopics[canonicalTopicKey],
-            localTopic as ReviewTopicProgress,
+            remoteTopic,
+            localTopic,
         );
     }
+
+    const localExplicitlyClearsModule =
+        (local as any).moduleCompleted === false &&
+        !(local as any).moduleCompletedAt;
+
+    const moduleCompleted =
+        hasAuthoritativeTopicReset || localExplicitlyClearsModule
+            ? false
+            : Boolean(
+                (remote as any).moduleCompleted || (local as any).moduleCompleted,
+            );
+
+    const moduleCompletedAt =
+        hasAuthoritativeTopicReset || localExplicitlyClearsModule
+            ? undefined
+            : pickLatestIsoLike(
+                (remote as any).moduleCompletedAt,
+                (local as any).moduleCompletedAt,
+            );
 
     return {
         ...remote,
         ...local,
-        quizVersion: Math.max(Number((remote as any).quizVersion ?? 0), Number((local as any).quizVersion ?? 0)),
-        moduleCompleted: Boolean((remote as any).moduleCompleted || (local as any).moduleCompleted),
-        moduleCompletedAt: pickLatestIsoLike((remote as any).moduleCompletedAt, (local as any).moduleCompletedAt),
-        activeTopicId: normalizeTopicProgressKey((local as any).activeTopicId ?? (remote as any).activeTopicId),
+        quizVersion: Math.max(
+            numericVersion((remote as any).quizVersion),
+            numericVersion((local as any).quizVersion),
+        ),
+        moduleCompleted,
+        moduleCompletedAt,
+        activeTopicId: normalizeTopicProgressKey(
+            (local as any).activeTopicId ?? (remote as any).activeTopicId,
+        ),
         topics: nextTopics,
-        __saveRevision: Math.max(getSaveRevision(remote), getSaveRevision(local), Date.now()),
+        __saveRevision: Math.max(
+            getSaveRevision(remote),
+            getSaveRevision(local),
+            Date.now(),
+        ),
     } as ReviewProgressState;
 }
-
 function timeMsLike(value: unknown) {
     const n = Number(new Date(String(value ?? "")));
     return Number.isFinite(n) ? n : 0;
