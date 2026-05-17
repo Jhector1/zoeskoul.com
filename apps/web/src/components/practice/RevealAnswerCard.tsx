@@ -105,7 +105,7 @@ function matrixToGridStrings(values: number[][]) {
 type RevealModel = {
     title: string;
     copyText: string;
-    fillPatch: Partial<QItem> | null;
+    fillPatch: RevealFillPatch | null;
     node: React.ReactNode;
 };
 
@@ -168,17 +168,27 @@ export default function RevealAnswerCard({
         }
 
         if (kind === "code_input") {
-            const lang = String(reveal.language ?? current.codeLang ?? "python");
-            const code = String(reveal.solutionCode ?? reveal.code ?? "");
-            const stdin = String(reveal.stdin ?? "");
+            const lang = String(
+                reveal.codeLang ??
+                    reveal.language ??
+                    reveal.lang ??
+                    current.codeLang ??
+                    "python",
+            );
+            const code = String(
+                reveal.solutionCode ?? reveal.code ?? reveal.source ?? "",
+            );
+            const stdin = String(reveal.codeStdin ?? reveal.stdin ?? "");
 
             const workspace =
                 reveal.workspace && typeof reveal.workspace === "object"
                     ? reveal.workspace
                     : reveal.solutionWorkspace && typeof reveal.solutionWorkspace === "object"
                         ? reveal.solutionWorkspace
-                        : reveal.codeWorkspace && typeof reveal.codeWorkspace === "object"
+                    : reveal.codeWorkspace && typeof reveal.codeWorkspace === "object"
                             ? reveal.codeWorkspace
+                        : reveal.ideWorkspace && typeof reveal.ideWorkspace === "object"
+                            ? reveal.ideWorkspace
                             : null;
 
             const copyText = code.trim() ? code : "";
@@ -190,9 +200,9 @@ export default function RevealAnswerCard({
                     ? ({
                         code: copyText,
                         source: copyText,
-                        codeLang: lang as any,
-                        language: lang as any,
-                        lang: lang as any,
+                        codeLang: lang,
+                        language: lang,
+                        lang,
                         codeStdin: stdin,
                         stdin,
                         ...(workspace

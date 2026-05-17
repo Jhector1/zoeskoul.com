@@ -818,25 +818,77 @@ export default function CodeToolPane(props: {
 
 
     const runtimeWorkspaceError = Boolean(isReviewRouteMode && editorRuntime?.workspaceStatus === "error");
+
     const directRuntimeWorkspace = useMemo(() => {
         if (isReviewRouteMode) {
-            /**
-             * Route-owned review targets prefer deterministic runtime state.
-             */
-            if (
+            const editorReadyWorkspace =
                 editorRuntime?.workspaceStatus === "ready" &&
                 forceWorkspaceHasContent(editorRuntime.workspace) &&
                 workspaceMatchesLanguage(editorRuntime.workspace, effectiveLanguage)
-            ) {
-                return editorRuntime.workspace;
-            }
+                    ? editorRuntime.workspace
+                    : null;
 
-            if (
+            const exerciseReadyWorkspace =
                 exerciseRuntime?.workspaceStatus === "ready" &&
                 forceWorkspaceHasContent(exerciseRuntime.workspace) &&
                 workspaceMatchesLanguage(exerciseRuntime.workspace, effectiveLanguage)
-            ) {
-                return exerciseRuntime.workspace;
+                    ? exerciseRuntime.workspace
+                    : null;
+
+            const editorHasUserWorkspace = Boolean(
+                editorReadyWorkspace &&
+                (
+                    editorRuntime?.userEdited === true ||
+                    editorRuntime?.workspaceOrigin === "user" ||
+                    editorRuntime?.workspaceOrigin === "saved"
+                ),
+            );
+
+            const exerciseHasUserWorkspace = Boolean(
+                exerciseReadyWorkspace &&
+                (
+                    exerciseRuntime?.userEdited === true ||
+                    exerciseRuntime?.workspaceOrigin === "user" ||
+                    exerciseRuntime?.workspaceOrigin === "saved"
+                ),
+            );
+
+            /**
+             * Route-owned review targets have two deterministic stores:
+             * editorRuntimes and exercises. The mounted FullIDE reads the editor
+             * runtime first, but actions like Fill answer patch the exercise runtime
+             * first. If the editor runtime still contains stale user code, blindly
+             * preferring it keeps the visible Tools editor stale even though the
+             * exercise snapshot has the revealed solution.
+             *
+             * Prefer the newest user-authored deterministic workspace across both
+             * stores. Then fall back to editor runtime, exercise runtime, and finally
+             * the bound tool snapshot for dynamic practice items not present in the
+             * static route registry.
+             */
+            if (editorHasUserWorkspace && exerciseHasUserWorkspace) {
+                const editorUpdatedAt = Number(editorRuntime?.updatedAt ?? 0);
+                const exerciseUpdatedAt = Number(exerciseRuntime?.updatedAt ?? 0);
+
+                return exerciseUpdatedAt >= editorUpdatedAt
+                    ? exerciseReadyWorkspace
+                    : editorReadyWorkspace;
+            }
+
+            if (exerciseHasUserWorkspace) {
+                return exerciseReadyWorkspace;
+            }
+
+            if (editorHasUserWorkspace) {
+                return editorReadyWorkspace;
+            }
+
+            if (editorReadyWorkspace) {
+                return editorReadyWorkspace;
+            }
+
+            if (exerciseReadyWorkspace) {
+                return exerciseReadyWorkspace;
             }
 
             /**
@@ -869,25 +921,55 @@ export default function CodeToolPane(props: {
         ) {
             return normalizedToolWorkspace ?? null;
         }
+
         return createDefaultToolWorkspace(effectiveLanguage);
     }, [
         isReviewRouteMode,
         editorRuntime?.workspaceStatus,
         editorRuntime?.workspace,
+        editorRuntime?.userEdited,
+        editorRuntime?.workspaceOrigin,
+        editorRuntime?.updatedAt,
         exerciseRuntime?.workspaceStatus,
         exerciseRuntime?.workspace,
+        exerciseRuntime?.userEdited,
+        exerciseRuntime?.workspaceOrigin,
+        exerciseRuntime?.updatedAt,
         normalizedToolWorkspace,
         effectiveLanguage,
     ]);
+    const finalReviewRuntimeUserEdited = Boolean(
+        editorRuntime?.userEdited === true ||
+        editorRuntime?.workspaceOrigin === "user" ||
+        editorRuntime?.workspaceOrigin === "saved" ||
+        exerciseRuntime?.userEdited === true ||
+        exerciseRuntime?.workspaceOrigin === "user" ||
+        exerciseRuntime?.workspaceOrigin === "saved",
+    );
+
+    const finalReviewRuntimeOrigin =
+        editorRuntime?.workspaceOrigin === "user" ||
+        editorRuntime?.workspaceOrigin === "saved"
+            ? editorRuntime.workspaceOrigin
+            : exerciseRuntime?.workspaceOrigin === "user" ||
+            exerciseRuntime?.workspaceOrigin === "saved"
+                ? exerciseRuntime.workspaceOrigin
+                : editorRuntime?.workspaceOrigin ?? exerciseRuntime?.workspaceOrigin;
+
+    const finalReviewRuntimeUpdatedAt = Math.max(
+        Number(editorRuntime?.updatedAt ?? 0),
+        Number(exerciseRuntime?.updatedAt ?? 0),
+    );
+
     const finalReviewWorkspace = useMemo(() => {
         if (
             isReviewRouteMode &&
             shouldUseLocalReviewDraft({
                 draft: localWorkspaceDraft,
                 runtimeWorkspace: directRuntimeWorkspace,
-                runtimeUpdatedAt: editorRuntime?.updatedAt,
-                runtimeUserEdited: editorRuntime?.userEdited,
-                runtimeOrigin: editorRuntime?.workspaceOrigin,
+                runtimeUpdatedAt: finalReviewRuntimeUpdatedAt,
+                runtimeUserEdited: finalReviewRuntimeUserEdited,
+                runtimeOrigin: finalReviewRuntimeOrigin,
             })
         ) {
             return localWorkspaceDraft?.workspace ?? directRuntimeWorkspace;
@@ -896,13 +978,12 @@ export default function CodeToolPane(props: {
         return directRuntimeWorkspace;
     }, [
         directRuntimeWorkspace,
-        editorRuntime?.updatedAt,
-        editorRuntime?.userEdited,
-        editorRuntime?.workspaceOrigin,
+        finalReviewRuntimeOrigin,
+        finalReviewRuntimeUpdatedAt,
+        finalReviewRuntimeUserEdited,
         isReviewRouteMode,
         localWorkspaceDraft,
     ]);
-
     const finalReviewWorkspaceLanguage = String(
         (finalReviewWorkspace as any)?.language ?? "",
     ).toLowerCase();

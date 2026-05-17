@@ -145,6 +145,7 @@ function makeProjectCard({
         },
     };
 }
+
 const reviewClonePracticeQuizCard = {
     type: "quiz",
     id: "review-clone-practice-quiz",
@@ -164,6 +165,7 @@ const reviewClonePracticeQuizCard = {
         runtime: runtimeDefaults,
     },
 } satisfies ReviewCard;
+
 const reviewCloneTopic = {
     id: "e2e-review-topic",
     label: "E2E Review Topic",

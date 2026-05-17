@@ -312,7 +312,15 @@ export function ReviewToolsProvider({
       };
     });
   }, []);
-
+    function isRealUserWorkspaceEdit(patch: CodeInputPatch) {
+        return (
+            patch?.userEdited === true ||
+            patch?.workspaceOrigin === "user" ||
+            patch?.updateOrigin === "user" ||
+            patch?.dismissFeedbackOnEdit === true ||
+            patch?.preferSnapshot === true
+        );
+    }
   const getRunFeedbackEntry = useCallback(
     (id: string) => {
       if (!id) return null;
@@ -413,22 +421,6 @@ export function ReviewToolsProvider({
                         ? patch.source
                         : undefined;
 
-            /**
-             * Critical for ReviewModule Fill answer:
-             *
-             * The bound Tools editor usually already has a non-blank starter workspace
-             * such as "# Write your code below". normalizeCodeWorkspacePair normally
-             * preserves non-blank workspace content, which is correct for hydration.
-             *
-             * But Fill answer is a real user/action patch. If it provides code, it must
-             * overwrite the bound workspace entry; otherwise the right CodeToolPane stays
-             * on the old starter text even though hidden item state changed.
-             */
-            const incomingWorkspace =
-                userEdited && typeof rawPatchCode === "string"
-                    ? workspaceWithEntryCode(incomingWorkspaceRaw, rawPatchCode)
-                    : incomingWorkspaceRaw;
-
             const patchCode =
                 typeof rawPatchCode === "string" &&
                 (
@@ -439,6 +431,21 @@ export function ReviewToolsProvider({
                     ? rawPatchCode
                     : cur.code;
 
+            /**
+             * Fill answer is an explicit user/action patch.
+             *
+             * The bound Tools workspace usually already has starter text like
+             * "# Write your code below". normalizeCodeWorkspacePair normally preserves
+             * non-blank workspace content, which is correct for hydration.
+             *
+             * For Fill answer, that would keep the old starter text and ignore the
+             * revealed solution. So when this is a real user patch with code, force the
+             * patch code into the workspace entry before normalization.
+             */
+            const incomingWorkspace =
+                userEdited && typeof rawPatchCode === "string"
+                    ? workspaceWithEntryCode(incomingWorkspaceRaw, rawPatchCode)
+                    : incomingWorkspaceRaw;
 
             const existingExercise =
                 useReviewRuntimeStore.getState().exercises[targetKey];
@@ -458,7 +465,9 @@ export function ReviewToolsProvider({
              * workspace snapshots after the real query was already saved.
              */
             const normalizedPair = normalizeCodeWorkspacePair({
-                workspace: protectsExistingUserWorkspace ? existingWorkspace : incomingWorkspace,
+                workspace: protectsExistingUserWorkspace
+                    ? existingWorkspace
+                    : incomingWorkspace,
                 code: patchCode,
                 state: userEdited
                     ? { userEdited: true, workspaceOrigin: "user" }
@@ -540,7 +549,7 @@ export function ReviewToolsProvider({
                     }
                     : {};
 
-            patchExercise(targetKey, {
+            const runtimePatch = {
                 language: next.lang,
                 lang: next.lang,
 
@@ -561,10 +570,32 @@ export function ReviewToolsProvider({
                     : {}),
 
                 ...feedbackDismissPatch,
-            });
+            };
+
+            patchExercise(targetKey, runtimePatch);
+
+            /**
+             * Route-owned review editors read from editorRuntimes before they fall
+             * back to the exercise runtime. Fill answer can therefore update the
+             * exercise snapshot correctly while the visible right-side Tools editor
+             * keeps showing an older editorRuntime workspace. For explicit user
+             * patches, mirror the normalized workspace into the deterministic editor
+             * runtime too so the mounted FullIDE receives the revealed solution.
+             */
+            if (userEdited && next.workspace) {
+                useReviewRuntimeStore
+                    .getState()
+                    .patchEditorWorkspace(targetKey, next.workspace);
+            }
+
+            const currentBound = useReviewRuntimeStore.getState().tool.boundExerciseKey;
+            if (currentBound === targetKey) {
+                defer(() => bindNow(id));
+            }
         },
-        [patchExercise],
+        [bindNow, patchExercise],
     );
+
     const patchCodeInput = useCallback(
         (id: string, patch: CodeInputPatch) => {
             if (!id) return;
@@ -577,8 +608,10 @@ export function ReviewToolsProvider({
                 updateOrigin: "user",
                 workspaceOrigin: "user",
             });
+
+            defer(() => bindNow(id));
         },
-        [clearRunFeedback, syncCodeInputSnapshot],
+        [bindNow, clearRunFeedback, syncCodeInputSnapshot],
     );
 
   const requestBind = useCallback(

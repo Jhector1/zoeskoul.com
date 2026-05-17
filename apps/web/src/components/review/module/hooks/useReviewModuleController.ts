@@ -907,11 +907,11 @@ export function useReviewModuleController({
     }, [flushAll]);
 
     const handleBindToToolsPanel = useCallback(
-        (args: Parameters<typeof tool.bindCodeInput>[0]) => {
+        async (args: Parameters<typeof tool.bindCodeInput>[0]) => {
             const ownerCardId = args.ownerCardId?.trim() || activeCard?.id || "general";
             const targetExerciseKey = (args as any).exerciseKey ?? args.id;
 
-            void tool.flushLatest();
+            await tool.flushLatest();
 
             const routeExerciseId =
                 typeof args.id === "string" && args.id.trim()
@@ -936,9 +936,7 @@ export function useReviewModuleController({
                 void navigateToResolvedTarget(nextTarget, "push");
             }
 
-            // if (tool.boundId !== targetExerciseKey) {
-                tool.bindCodeInput(args as any);
-            // }
+            await tool.bindCodeInput(args as any);
         },
         [
             tool.bindCodeInput,
