@@ -43,10 +43,12 @@ type Props = {
     subjectSlug: string;
     moduleSlug: string;
     sectionSlug?: string;
+    routeExerciseId?: string | null;
     defaultToolLanguage?: string;
     subjectFinish: SubjectFinishState | null;
     onOpenCertificate: () => void;
     onActiveCardIndexChange?: (index: number) => void;
+    onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
 };
 
 export default function ReviewTopicStage({
@@ -79,10 +81,12 @@ export default function ReviewTopicStage({
     subjectSlug,
     moduleSlug,
     sectionSlug,
+    routeExerciseId,
     defaultToolLanguage,
     subjectFinish,
     onOpenCertificate,
     onActiveCardIndexChange,
+    onNavigateToExerciseRoute,
 
 
                                              onBeforeCardNavigate,
@@ -129,8 +133,10 @@ export default function ReviewTopicStage({
                         subjectSlug={subjectSlug}
                         moduleSlug={moduleSlug}
                         sectionSlug={sectionSlug}
+                        routeExerciseId={routeExerciseId}
                         defaultToolLanguage={defaultToolLanguage}
                         onActiveCardIndexChange={onActiveCardIndexChange}
+                        onNavigateToExerciseRoute={onNavigateToExerciseRoute}
                         onBeforeCardNavigate={onBeforeCardNavigate}
                     />
                     <ReviewTopicCompletion

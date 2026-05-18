@@ -800,16 +800,13 @@ export default function FullIDE(props: FullIDEProps) {
         localWorkspaceId,
     });
 
-    const externalWorkspaceJson = useMemo(
-        () => JSON.stringify(externalWorkspace ?? null),
+    const externalWorkspaceControlKey = useMemo(
+        () => workspaceNotifyKey(externalWorkspace),
         [externalWorkspace],
     );
-    const hasExternalWorkspaceProp = Object.prototype.hasOwnProperty.call(
-        props as Record<string, unknown>,
-        "externalWorkspace",
-    );
-    const initialWorkspaceJson = useMemo(
-        () => JSON.stringify(initialWorkspace ?? null),
+    const hasExternalWorkspaceProp = typeof externalWorkspace !== "undefined";
+    const initialWorkspaceControlKey = useMemo(
+        () => workspaceNotifyKey(initialWorkspace),
         [initialWorkspace],
     );
     const lastAppliedExternalWorkspaceJsonRef = useRef<string | null>(null);
@@ -834,9 +831,14 @@ export default function FullIDE(props: FullIDEProps) {
         () => JSON.stringify(workspace.derived.currentWorkspace ?? null),
         [workspace.derived.currentWorkspace],
     );
+    const currentWorkspaceNotifyKey = useMemo(
+        () => workspaceNotifyKey(workspace.derived.currentWorkspace),
+        [workspace.derived.currentWorkspace],
+    );
     const externalWorkspaceRef = useRef(externalWorkspace);
     const initialWorkspaceRef = useRef(initialWorkspace);
     const currentWorkspaceJsonRef = useRef(currentWorkspaceJson);
+    const currentWorkspaceNotifyKeyRef = useRef(currentWorkspaceNotifyKey);
 
     useEffect(() => {
         externalWorkspaceRef.current = externalWorkspace;
@@ -845,24 +847,24 @@ export default function FullIDE(props: FullIDEProps) {
 
     useEffect(() => {
         currentWorkspaceJsonRef.current = currentWorkspaceJson;
-    }, [currentWorkspaceJson]);
+        currentWorkspaceNotifyKeyRef.current = currentWorkspaceNotifyKey;
+    }, [currentWorkspaceJson, currentWorkspaceNotifyKey]);
 
     useEffect(() => {
         if (!hasExternalWorkspaceProp) return;
 
-        const applyKey = `${externalWorkspaceJson}::initial:${initialWorkspaceJson}`;
+        const applyKey = `${externalWorkspaceControlKey}::initial:${initialWorkspaceControlKey}`;
         if (lastAppliedExternalWorkspaceJsonRef.current === applyKey) return;
 
         const nextWorkspace =
             externalWorkspaceRef.current ?? initialWorkspaceRef.current ?? null;
 
-        const nextWorkspaceJson = JSON.stringify(nextWorkspace ?? null);
         const nextNotifyKey = workspaceNotifyKey(nextWorkspace);
 
         lastAppliedExternalWorkspaceJsonRef.current = applyKey;
 
         if (nextWorkspace) {
-            if (nextWorkspaceJson !== currentWorkspaceJsonRef.current) {
+            if (nextNotifyKey !== currentWorkspaceNotifyKeyRef.current) {
                 /**
                  * This hydration is parent-controlled/programmatic.
                  * The next internal workspace emission should not be sent back upward,
@@ -881,15 +883,10 @@ export default function FullIDE(props: FullIDEProps) {
         }
     }, [
         hasExternalWorkspaceProp,
-        externalWorkspaceJson,
-        initialWorkspaceJson,
+        externalWorkspaceControlKey,
+        initialWorkspaceControlKey,
         forcedLanguage,
     ]);
-
-    const currentWorkspaceNotifyKey = useMemo(
-        () => workspaceNotifyKey(workspace.derived.currentWorkspace),
-        [workspace.derived.currentWorkspace],
-    );
 
     useEffect(() => {
         const current = workspace.derived.currentWorkspace;

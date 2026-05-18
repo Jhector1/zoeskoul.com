@@ -478,23 +478,60 @@ function CodeInputWithTools(props: {
             ? exercise.sqlInitialTableSnapshots
             : undefined;
 
+    const lastEmbeddedEnsureExerciseKeyRef = useRef<string | null>(null);
+
     useEffect(() => {
         if (exercise.kind !== "code_input") return;
+
+        const manifestLanguage = getManifestExerciseLanguage(
+            exercise as CodeInputExerciseWithSqlExtras,
+        );
+
+        const ensureKey = [
+            exerciseKey,
+            subjectSlug || "",
+            moduleSlug || "",
+            sectionSlug || "",
+            topicId || "",
+            cardId || "",
+            String((exercise as any).id ?? ""),
+            String((exercise as any).exerciseKey ?? ""),
+            String((exercise as any).language ?? ""),
+        ].join("|");
+
+        if (lastEmbeddedEnsureExerciseKeyRef.current === ensureKey) return;
+
+        const existing = useReviewRuntimeStore.getState().exercises[exerciseKey];
+
+        if (
+            existing &&
+            stateLanguageMatches(
+                existing,
+                manifestLanguage,
+                getWorkspaceFromAnyState(existing),
+            )
+        ) {
+            lastEmbeddedEnsureExerciseKeyRef.current = ensureKey;
+            return;
+        }
+
+        lastEmbeddedEnsureExerciseKeyRef.current = ensureKey;
 
         ensureExercise({
             exerciseKey,
             subjectSlug: subjectSlug || "",
             moduleSlug: moduleSlug || "",
-            sectionSlug: sectionSlug,
+            sectionSlug,
             topicId: topicId || "",
             cardId: cardId || "",
             manifest: exercise,
             saved: current,
         });
+
+        // Intentionally do not depend on full `exercise` or `current`.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         exerciseKey,
-        exercise,
-        current,
         ensureExercise,
         subjectSlug,
         moduleSlug,
@@ -502,7 +539,6 @@ function CodeInputWithTools(props: {
         topicId,
         cardId,
     ]);
-
     const onPatch = useCallback(
         (patch: any) => {
             patchExercise(exerciseKey, patch);
@@ -815,10 +851,49 @@ export default function ExerciseRenderer({
 
     const storeExercise = useReviewRuntimeStore((s) => s.exercises[exerciseKey]);
     const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
+    const lastEmbeddedEnsureExerciseKeyRef = useRef<string | null>(null);
 
     useEffect(() => {
         if (ex.kind !== "code_input") return;
 
+        const manifestLanguage = getManifestExerciseLanguage(
+            ex as CodeInputExerciseWithSqlExtras,
+        );
+
+        const ensureKey = [
+            exerciseKey,
+            subjectSlug || "",
+            moduleSlug || "",
+            sectionSlug || "",
+            topicId || "",
+            cardId || "",
+            String((ex as any).id ?? ""),
+            String((ex as any).exerciseKey ?? ""),
+            String((ex as any).language ?? ""),
+        ].join("|");
+
+        if (lastEmbeddedEnsureExerciseKeyRef.current === ensureKey) return;
+
+        const existing = useReviewRuntimeStore.getState().exercises[exerciseKey];
+
+        if (
+            existing &&
+            stateLanguageMatches(
+                existing,
+                manifestLanguage,
+                getWorkspaceFromAnyState(existing),
+            )
+        ) {
+            lastEmbeddedEnsureExerciseKeyRef.current = ensureKey;
+            return;
+        }
+
+        lastEmbeddedEnsureExerciseKeyRef.current = ensureKey;
+
+        /**
+         * Avoid ensureExercise -> Zustand set -> rerender -> ensureExercise
+         * loops when embedded code exercises are mounted during route changes.
+         */
         ensureExercise({
             exerciseKey,
             subjectSlug: subjectSlug || "",
@@ -829,8 +904,10 @@ export default function ExerciseRenderer({
             manifest: ex,
             saved: current,
         });
+
+        // Intentionally do not depend on full `ex` or `current`.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
-        ex,
         exerciseKey,
         ensureExercise,
         subjectSlug,
@@ -838,7 +915,6 @@ export default function ExerciseRenderer({
         sectionSlug,
         topicId,
         cardId,
-        current,
     ]);
 
     const onPatch = useCallback(

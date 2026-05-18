@@ -249,8 +249,10 @@ export type ReviewRuntimeActions = {
     },
   ) => void;
 
-  syncActiveTarget: (target: import("./reviewRoute").ReviewResolvedRouteTarget | null) => void;
-
+  syncActiveTarget: (
+      target: import("./reviewRoute").ReviewResolvedRouteTarget | null,
+      registryOverride?: import("./reviewTargetRegistry").ReviewTargetRegistry | null,
+  ) => void;
   queueAutosave: () => void;
 
 

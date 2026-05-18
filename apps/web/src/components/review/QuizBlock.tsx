@@ -162,6 +162,45 @@ function getStablePracticeQuestionKey(q: ReviewQuestion) {
   );
 }
 
+function normalizePracticeRouteToken(value: string | null | undefined) {
+  return String(value ?? "")
+    .trim()
+    .replace(/^.*:/, "")
+    .replace(/_/g, "-")
+    .toLowerCase();
+}
+
+function questionMatchesRouteExerciseId(
+  q: ReviewQuestion,
+  routeExerciseId: string | null | undefined,
+) {
+  if (q.kind !== "practice") return false;
+
+  const routeToken = normalizePracticeRouteToken(routeExerciseId);
+  if (!routeToken) return false;
+
+  const practiceQuestion = q as PracticeRuntimeQuestion;
+  const candidates = [
+    getStablePracticeQuestionKey(q),
+    q.id,
+    practiceQuestion.fetch?.exerciseKey,
+    practiceQuestion.fetch?.stepId,
+    practiceQuestion.exerciseKey,
+    practiceQuestion.stepId,
+    practiceQuestion.sourceStepId,
+    practiceQuestion.item?.id,
+    practiceQuestion.item?.exerciseKey,
+    practiceQuestion.exercise?.id,
+    practiceQuestion.exercise?.exerciseKey,
+    practiceQuestion.key,
+  ];
+
+  return candidates.some((candidate) => {
+    const candidateToken = normalizePracticeRouteToken(candidate);
+    return Boolean(candidateToken) && candidateToken === routeToken;
+  });
+}
+
 
 function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
   if (q.kind !== "practice") return null;
@@ -343,6 +382,8 @@ export default function QuizBlock({
                                     onReset,
                                     orderBase = 0,
                                     toolsActive = true,
+                                    routeExerciseId = null,
+                                    onNavigateToExerciseRoute,
                                   }: {
   prereqsMet?: boolean;
   quizId: string;
@@ -365,6 +406,8 @@ export default function QuizBlock({
   onReset?: () => void;
   orderBase?: number;
   toolsActive?: boolean;
+  routeExerciseId?: string | null;
+  onNavigateToExerciseRoute?: (exerciseId: string) => Promise<void> | void;
 }) {
   const initState = initialState ?? null;
 
@@ -397,7 +440,6 @@ export default function QuizBlock({
   const [pendingScrollMode, setPendingScrollMode] = useState<"explain" | "end">(
       "end",
   );
-  const activeRuntimeExerciseKey = useReviewRuntimeStore((s) => s.activeExerciseKey);
 
   const onPassRef = useRef(onPass);
   const autoKeyRef = useRef<string>("");
@@ -411,21 +453,21 @@ export default function QuizBlock({
   const explainRef = useRef(new Map<string, HTMLDivElement | null>());
 
   const routeExerciseIndex = useMemo(() => {
-    if (!activeRuntimeExerciseKey) return -1;
-
-    return questions.findIndex((q) => {
-      if (q.kind !== "practice") return false;
-      const stablePracticeKey = getStablePracticeQuestionKey(q);
-      return (
-          activeRuntimeExerciseKey === stablePracticeKey ||
-          activeRuntimeExerciseKey.endsWith(`:${stablePracticeKey}`)
-      );
-    });
-  }, [activeRuntimeExerciseKey, questions]);
+    if (!routeExerciseId) return -1;
+    return questions.findIndex((q) => questionMatchesRouteExerciseId(q, routeExerciseId));
+  }, [questions, routeExerciseId]);
   const routeExerciseQuestionId = useMemo(() => {
     if (routeExerciseIndex < 0) return null;
     return questions[routeExerciseIndex]?.id ?? null;
   }, [questions, routeExerciseIndex]);
+  const isProjectQuestionFlow = useMemo(
+    () => Array.isArray((spec as { steps?: unknown[] } | null | undefined)?.steps),
+    [spec],
+  );
+  const routeOwnedProjectPracticeNavigation =
+    navigationMode === "slideshow" &&
+    isProjectQuestionFlow &&
+    typeof onNavigateToExerciseRoute === "function";
 
   useEffect(() => {
     onPassRef.current = onPass;
@@ -543,6 +585,9 @@ export default function QuizBlock({
          * a previously checked but incorrect exercise.
          */
         if (isCompleted) return true;
+
+        const current = questions[index];
+        if (current?.kind === "practice") return true;
 
         if (!sequential) return true;
         if (index === 0) return true;
@@ -1020,6 +1065,26 @@ export default function QuizBlock({
     return -1;
   }
 
+  function navigateToQuestionIndex(index: number) {
+    const nextQuestion = questions[index];
+    if (!nextQuestion) return false;
+
+    if (
+      routeOwnedProjectPracticeNavigation &&
+      nextQuestion.kind === "practice" &&
+      onNavigateToExerciseRoute
+    ) {
+      const nextExerciseId = getStablePracticeQuestionKey(nextQuestion);
+      if (nextExerciseId) {
+        onNavigateToExerciseRoute(nextExerciseId);
+        return true;
+      }
+    }
+
+    setActiveIndex(index);
+    return false;
+  }
+
   function advanceFrom(qid: string) {
     const idx = questions.findIndex((qq) => qq.id === qid);
     if (idx < 0) return;
@@ -1033,8 +1098,10 @@ export default function QuizBlock({
     const nextQ = questions[nextIdx];
 
     if (navigationMode === "slideshow") {
-      setActiveIndex(nextIdx);
-      focusPrimaryActionForQuestion(nextQ.id);
+      const navigatedByRoute = navigateToQuestionIndex(nextIdx);
+      if (!navigatedByRoute) {
+        focusPrimaryActionForQuestion(nextQ.id);
+      }
       return;
     }
 
@@ -1179,8 +1246,18 @@ export default function QuizBlock({
 
     const hasNextQuestion = activeIndex < Math.max(0, questions.length - 1);
 
+    const routeOwnedPracticeNextIndex =
+        routeOwnedProjectPracticeNavigation &&
+        hasNextQuestion &&
+        activeQuestion?.kind === "practice" &&
+        questions[activeIndex + 1]?.kind === "practice"
+            ? activeIndex + 1
+            : -1;
+
     const nextSlideIndex =
-        navigationMode === "slideshow" && hasNextQuestion && activeQuestionDone
+        routeOwnedPracticeNextIndex >= 0
+            ? routeOwnedPracticeNextIndex
+            : navigationMode === "slideshow" && hasNextQuestion && activeQuestionDone
             ? activeIndex + 1
             : -1;
   function renderQuestionItem(q: ReviewQuestion, idx: number) {
@@ -1327,14 +1404,16 @@ export default function QuizBlock({
             canGoNext={nextSlideIndex >= 0}
             onPrev={() => {
               setAwaitNextQid(null);
-              setActiveIndex((i) => Math.max(0, i - 1));
+              navigateToQuestionIndex(Math.max(0, activeIndex - 1));
             }}
             onNext={() => {
               if (nextSlideIndex < 0) return;
               setAwaitNextQid(null);
-              setActiveIndex(nextSlideIndex);
-              const nextQ = questions[nextSlideIndex];
-              if (nextQ) focusPrimaryActionForQuestion(nextQ.id);
+              const navigatedByRoute = navigateToQuestionIndex(nextSlideIndex);
+              if (!navigatedByRoute) {
+                const nextQ = questions[nextSlideIndex];
+                if (nextQ) focusPrimaryActionForQuestion(nextQ.id);
+              }
             }}
             renderItem={renderQuestionItem}
         />

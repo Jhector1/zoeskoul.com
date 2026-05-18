@@ -57,7 +57,9 @@ export default function CardRenderer(props: {
     cardKey: string;
     topicId: string;
     tp: ReviewTopicProgress;
+    routeExerciseId?: string | null;
     defaultToolLanguage?: string;
+    onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
 }) {
     const ui = useTaggedT("cardUi");
     const tt = useTaggedT();
@@ -82,7 +84,9 @@ export default function CardRenderer(props: {
         cardKey,
         topicId,
         tp,
+        routeExerciseId,
         defaultToolLanguage = "python",
+        onNavigateToExerciseRoute,
     } = props;
 
     const ensureCard = useReviewRuntimeStore((s) => s.ensureCard);
@@ -190,6 +194,16 @@ export default function CardRenderer(props: {
                             unlimitedAttempts={quizBlockProps.unlimitedAttempts}
                             orderBase={orderBase}
                             navigationMode={quizNavMode}
+                            routeExerciseId={routeExerciseId}
+                            onNavigateToExerciseRoute={
+                                onNavigateToExerciseRoute
+                                    ? (exerciseId: string) =>
+                                          onNavigateToExerciseRoute({
+                                              cardId: card.id,
+                                              exerciseId,
+                                          })
+                                    : undefined
+                            }
                         />
                     )
                 ) : null}

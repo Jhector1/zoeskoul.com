@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState, useTransition} from "react";
-import { useParams } from "next/navigation";
+import {useParams, usePathname} from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 
 import type { ReviewProgressState } from "@/lib/subjects/progressTypes";
@@ -52,11 +52,12 @@ import {
     parseReviewRouteFromPath,
     buildReviewRoutePath,
     resolveReviewRouteTarget,
-    type ReviewResolvedRouteTarget,
+    type ReviewResolvedRouteTarget, buildDefaultReviewRouteTarget,
 } from "../runtime/reviewRoute";
 
 import { buildReviewTargetRegistry } from "../runtime/reviewTargetRegistry";
 import { resolveFlowNavigationConfig } from "@/components/review/navigation/FlowNavigator";
+import {useTaggedT} from "@/i18n/tagged";
 
 function registryEntryToRouteTarget(entry: any): ReviewResolvedRouteTarget | null {
     if (!entry) return null;
@@ -113,14 +114,45 @@ export function useReviewModuleController({
         targetSlug?: string;
     }>();
     const router = useRouter();
-
+    const pathname = usePathname();
     const locale = params?.locale ?? "en";
     const catalogSlug = params?.catalogSlug ?? null;
     const subjectSlug = params?.subjectSlug ?? "";
     const moduleSlug = params?.moduleSlug ?? "";
     const sectionSlug = (params as any)?.sectionSlug;
     const unlockAll = Boolean(canUnlockAll);
+    const routeFamilyRef = useRef<"devReviewClone" | "standard">(
+        pathname?.includes("/dev/e2e/review-module-clone/")
+            ? "devReviewClone"
+            : "standard",
+    );
 
+    const buildRoutePathForCurrentSurface = useCallback(
+        (target: ReviewResolvedRouteTarget) => {
+            if (routeFamilyRef.current === "devReviewClone") {
+                return (
+                    `/${encodeURIComponent(locale)}` +
+                    `/dev/e2e/review-module-clone` +
+                    `/${encodeURIComponent(subjectSlug)}` +
+                    `/${encodeURIComponent(moduleSlug)}` +
+                    `/learn` +
+                    `/${encodeURIComponent(target.sectionSlug)}` +
+                    `/${encodeURIComponent(target.topicSlug)}` +
+                    `/${encodeURIComponent(target.targetKind)}` +
+                    `/${encodeURIComponent(target.targetSlug)}`
+                );
+            }
+
+            return buildReviewRoutePath({
+                locale,
+                catalogSlug,
+                subjectSlug,
+                moduleSlug,
+                target,
+            });
+        },
+        [catalogSlug, locale, moduleSlug, subjectSlug],
+    );
     const resolvedNavModes = useMemo(() => resolveFlowNavigationConfig(navigationMode), [navigationMode]);
 
     const topics = Array.isArray(mod?.topics) ? mod.topics : [];
@@ -179,22 +211,62 @@ export function useReviewModuleController({
         };
     }, []);
 
+    const taggedMessages = useTaggedT();
+    const resolveReviewMessageRef = useRef(taggedMessages.resolve);
 
-      const targetRegistry = useMemo(() => {
+    useEffect(() => {
+        resolveReviewMessageRef.current = taggedMessages.resolve;
+    }, [taggedMessages.resolve]);
+
+    const resolveReviewMessage = useCallback((key: string) => {
+        const taggedKey = key.startsWith("@:") ? key : `@:${key}`;
+        const resolved = resolveReviewMessageRef.current(taggedKey);
+
+        if (!resolved) return undefined;
+
+        const trimmed = String(resolved).trim();
+
+        /**
+         * In dev/missing-message cases useTaggedT can return the unresolved key.
+         * Never treat that as executable starter code.
+         */
+        if (
+            trimmed === key ||
+            trimmed === taggedKey ||
+            trimmed.endsWith(".starterCode")
+        ) {
+            return undefined;
+        }
+
+        return resolved;
+    }, []);
+
+    const targetRegistry = useMemo(() => {
         if (!mod) return null;
         return buildReviewTargetRegistry({
             mod,
             subjectSlug,
             moduleSlug,
+            resolveMessage: resolveReviewMessage,
         });
-    }, [mod, moduleSlug, subjectSlug]);
+    }, [mod, moduleSlug, subjectSlug, resolveReviewMessage]);
 
     useEffect(() => {
-        if (targetRegistry) {
-            store.setTargetRegistry(targetRegistry);
-        }
-    }, [targetRegistry]); // Removed 'store' from dependencies to avoid loop if it changes (though it shouldn't)
+        if (!targetRegistry) return;
 
+        const runtimeStore = useReviewRuntimeStore.getState();
+        runtimeStore.setTargetRegistry(targetRegistry);
+
+        /**
+         * Keep route-owned exercise editor seeding deterministic in the same
+         * commit that publishes the registry to the runtime store. When full
+         * suites run, the Tools rail can mount before a later effect observes
+         * the store registry, which leaves CodeToolPane waiting forever with no
+         * Monaco editor. Passing the registry directly removes that race while
+         * preserving the store copy for later navigation.
+         */
+        runtimeStore.syncActiveTarget(routeTargetRef.current, targetRegistry);
+    }, [targetRegistry]);
     const flushAll = useCallback(async () => {
         store.flushToolSnapshot();
 
@@ -242,10 +314,15 @@ export function useReviewModuleController({
         targetRegistry,
     ]);
     const [routeTarget, setRouteTarget] = useState<ReviewResolvedRouteTarget | null>(initialRouteTarget);
+    const routeTargetRef = useRef<ReviewResolvedRouteTarget | null>(initialRouteTarget);
 
     useEffect(() => {
         setRouteTarget(initialRouteTarget);
     }, [initialRouteTarget]);
+
+    useEffect(() => {
+        routeTargetRef.current = routeTarget;
+    }, [routeTarget]);
 
     const routeEditorEntry = useMemo(() => {
         if (!routeTarget || !targetRegistry) return null;
@@ -260,20 +337,13 @@ export function useReviewModuleController({
     useEffect(() => {
         if (!routeTarget) return;
 
-        const normalizedPath = buildReviewRoutePath({
-            locale,
-            catalogSlug,
-            subjectSlug,
-            moduleSlug,
-            target: routeTarget,
-        });
+        const normalizedPath = buildRoutePathForCurrentSurface(routeTarget);
         const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
 
         if (currentPath !== normalizedPath && typeof window !== "undefined") {
             window.history.replaceState(window.history.state, "", normalizedPath);
         }
-    }, [catalogSlug, locale, moduleSlug, routeTarget, subjectSlug]);
-
+    }, [buildRoutePathForCurrentSurface, routeTarget]);
     useEffect(() => {
         if (typeof window === "undefined") return;
 
@@ -349,7 +419,7 @@ export function useReviewModuleController({
     const syncActiveTarget = useReviewRuntimeStore((s) => s.syncActiveTarget);
     useEffect(() => {
         if (!targetRegistry) return;
-        syncActiveTarget(routeTarget);
+        syncActiveTarget(routeTarget, targetRegistry);
     }, [routeTarget, progressHydrated, syncActiveTarget, targetRegistry]);
 
     const panels = useReviewPanels({ footerInsetPx });
@@ -489,15 +559,11 @@ export function useReviewModuleController({
         async (target: ReviewResolvedRouteTarget | null, mode: "push" | "replace" = "push") => {
             if (!target) return;
 
-            const href = buildReviewRoutePath({
-                locale,
-                catalogSlug,
-                subjectSlug,
-                moduleSlug,
-                target,
-            });
+            const href = buildRoutePathForCurrentSurface(target);
 
             beginRouteTransition();
+            routeTargetRef.current = target;
+            setRouteTarget(target);
 
             try {
                 await flushAll();
@@ -509,20 +575,15 @@ export function useReviewModuleController({
                         window.history.pushState(window.history.state, "", href);
                     }
                 }
-
-                setRouteTarget(target);
             } finally {
                 finishRouteTransition();
             }
         },
         [
             beginRouteTransition,
-            catalogSlug,
+            buildRoutePathForCurrentSurface,
             finishRouteTransition,
             flushAll,
-            locale,
-            moduleSlug,
-            subjectSlug,
         ],
     );
 
@@ -605,15 +666,15 @@ export function useReviewModuleController({
             return {
                 topicId: routeTarget.topicId,
                 cardId: routeTarget.cardId,
-                exerciseId: routeTarget.exerciseStateKey,
-                inputId: routeTarget.exerciseId,
+                exerciseStateKey: routeTarget.exerciseStateKey,
+                exerciseId: routeTarget.exerciseId,
             };
         }
         return null;
     }, [routeTarget]);
 
     const activeToolScopeKey =
-        activeExerciseTarget?.exerciseId ??
+        activeExerciseTarget?.exerciseStateKey ??
         (activeCard?.id
             ? `${getCardStateKey({
                 subjectSlug,
@@ -677,11 +738,38 @@ export function useReviewModuleController({
     const celebrations = useReviewCelebrations({
         progressHydrated,
         progress,
+
         topics,
         gamificationSummary,
         subjectFinish,
         mod,
     });
+
+    const findFirstRouteTargetForTopic = useCallback(
+        (topicId: string): ReviewResolvedRouteTarget | null => {
+            const topic = (topics ?? []).find((item) => item.id === topicId);
+            const firstCard = Array.isArray(topic?.cards) ? topic.cards[0] : null;
+
+            if (!topic || !firstCard) return null;
+
+            return buildReviewCardRouteTarget({
+                mod,
+                topicId: topic.id,
+                card: firstCard,
+            });
+        },
+        [mod, topics],
+    );
+
+    const findFirstRouteTargetForModule = useCallback((): ReviewResolvedRouteTarget | null => {
+        const firstTopic = (topics ?? []).find(
+            (topic) => Array.isArray(topic.cards) && topic.cards.length > 0,
+        );
+
+        if (!firstTopic) return null;
+
+        return findFirstRouteTargetForTopic(firstTopic.id);
+    }, [findFirstRouteTargetForTopic, topics]);
 
     const resetFlow = useReviewReset({
         topics,
@@ -692,8 +780,23 @@ export function useReviewModuleController({
         setViewTopicId,
         flushNow,
         toolUnbindCodeInput: tool.unbindCodeInput,
-    });
 
+        onAfterResetModule: () => {
+            const firstTarget = findFirstRouteTargetForModule();
+
+            if (!firstTarget) return;
+
+            void navigateToResolvedTarget(firstTarget, "replace");
+        },
+
+        onAfterResetTopic: (topicId) => {
+            const firstTarget = findFirstRouteTargetForTopic(topicId);
+
+            if (!firstTarget) return;
+
+            void navigateToResolvedTarget(firstTarget, "replace");
+        },
+    });
     const handleAssignmentClick = useCallback(async () => {
         const returnToCurrentModule = `/${locale}/${ROUTES.learningPath(
             encodeURIComponent(subjectSlug),
@@ -906,13 +1009,40 @@ export function useReviewModuleController({
         void flushAll();
     }, [flushAll]);
 
+    const handleNavigateToExerciseRoute = useCallback(
+        async ({ cardId, exerciseId }: { cardId: string; exerciseId: string }) => {
+            const normalizedCardId = cardId.trim();
+            const normalizedExerciseId = exerciseId.trim();
+            if (!normalizedCardId || !normalizedExerciseId) return;
+
+            const nextTarget = buildReviewExerciseRouteTarget({
+                mod,
+                topicId: viewTid,
+                cardId: normalizedCardId,
+                exerciseId: normalizedExerciseId,
+                subjectSlug,
+                moduleSlug,
+                sectionSlug: routeTarget?.sectionSlug ?? sectionSlug,
+            });
+
+            await navigateToResolvedTarget(nextTarget, "push");
+        },
+        [
+            mod,
+            moduleSlug,
+            navigateToResolvedTarget,
+            routeTarget?.sectionSlug,
+            sectionSlug,
+            subjectSlug,
+            viewTid,
+        ],
+    );
+
     const handleBindToToolsPanel = useCallback(
         async (args: Parameters<typeof tool.bindCodeInput>[0]) => {
             const ownerCardId = args.ownerCardId?.trim() || activeCard?.id || "general";
             const targetExerciseKey = (args as any).exerciseKey ?? args.id;
-
-            await tool.flushLatest();
-
+            const activeRouteTarget = routeTargetRef.current;
             const routeExerciseId =
                 typeof args.id === "string" && args.id.trim()
                     ? args.id
@@ -926,17 +1056,49 @@ export function useReviewModuleController({
                 moduleSlug,
                 sectionSlug: routeTarget?.sectionSlug ?? sectionSlug,
             });
+
+            /**
+             * Route is the source of truth.
+             *
+             * During top-level card navigation, the previous exercise editor can
+             * briefly re-register before unmounting. If we honor that stale bind,
+             * it will repush the old exercise route and snap the UI back to the
+             * previous project question.
+             *
+             * Only let tool binds influence routing when they belong to the card
+             * and exercise that currently own the route target.
+             */
+            if (
+                activeRouteTarget?.cardId &&
+                ownerCardId &&
+                activeRouteTarget.cardId !== ownerCardId
+            ) {
+                return;
+            }
+
             const currentExerciseStateKey =
-                routeTarget?.kind === "exercise" ? routeTarget.exerciseStateKey : null;
+                activeRouteTarget?.kind === "exercise"
+                    ? activeRouteTarget.exerciseStateKey
+                    : null;
 
             const routeAlreadyActive =
                 currentExerciseStateKey === nextTarget.exerciseStateKey;
 
+            if (
+                activeRouteTarget?.kind === "exercise" &&
+                activeRouteTarget.cardId === ownerCardId &&
+                !routeAlreadyActive
+            ) {
+                return;
+            }
+
+            void tool.flushLatest();
+
+            await tool.bindCodeInput(args as any);
+
             if (!routeAlreadyActive) {
                 void navigateToResolvedTarget(nextTarget, "push");
             }
-
-            await tool.bindCodeInput(args as any);
         },
         [
             tool.bindCodeInput,
@@ -945,9 +1107,6 @@ export function useReviewModuleController({
             navigateToResolvedTarget,
             mod,
             moduleSlug,
-            routeTarget?.sectionSlug,
-            routeTarget?.kind,
-            routeTarget?.kind === "exercise" ? routeTarget.exerciseStateKey : null,
             sectionSlug,
             subjectSlug,
             viewTid,
@@ -992,20 +1151,13 @@ export function useReviewModuleController({
         viewTid,
     );
 
-    /**
-     * Exercise navigation happens inside the Exercises card, not through the
-     * outer card navigator. During exercise switching, activeExerciseTarget can
-     * briefly be null even though useToolCodeRunnerState already has the
-     * current bound exercise.
-     *
-     * The right rail must prefer the real exercise binding when available,
-     * otherwise ToolsPanel falls back to `${topic}:general` and the editor
-     * shows blank/stale state.
-     */
-    const rightRailExerciseKey =
-        activeExerciseTarget?.exerciseId ??
-        tool.boundId ??
-        null;
+    const routeOwnsExercise = routeTarget?.kind === "exercise";
+    const routeCanUseBoundExercise =
+        routeOwnsExercise || activeCard?.type === "quiz" || activeCard?.type === "project";
+
+    const rightRailExerciseKey = routeCanUseBoundExercise
+        ? activeExerciseTarget?.exerciseStateKey ?? tool.boundId ?? null
+        : null;
 
     return {
         toolsProvider,
@@ -1127,12 +1279,16 @@ export function useReviewModuleController({
                  * On review-practice quiz routes, that static target is the quiz/card, not the
                  * generated SQL practice exercise currently bound in Tools.
                  */
-                editorOwnerKey: rightRailExerciseKey ?? routeEditorOwnerKey,
-                toolScopeKey: rightRailExerciseKey
+                editorOwnerKey: routeCanUseBoundExercise
+                    ? rightRailExerciseKey ?? routeEditorOwnerKey
+                    : null,
+                toolScopeKey: routeCanUseBoundExercise
                     ? rightRailExerciseKey
-                    : routeEditorToolScopeKey
-                        ? routeEditorToolScopeKey
-                        : activeToolScopeKey,
+                        ? rightRailExerciseKey
+                        : routeEditorToolScopeKey
+                            ? routeEditorToolScopeKey
+                            : activeToolScopeKey
+                    : activeToolScopeKey,
                 rightBodyRef: tool.rightBodyRef,
                 codeRunnerRegionH: tool.codeRunnerRegionH,
                 toolHydrated: tool.toolHydrated,
@@ -1140,7 +1296,7 @@ export function useReviewModuleController({
                 toolCode: tool.toolCode,
                 toolStdin: tool.toolStdin,
                 toolWorkspace: tool.toolWorkspace,
-                toolSqlDialect: tool.toolSqlDatasetId
+                toolSqlDialect: routeCanUseBoundExercise && tool.toolSqlDatasetId
                     ? tool.toolSqlDialect
                     : (runtime.topicSqlFallback?.sqlDialect ?? tool.toolSqlDialect),
                 ideConfig: tool.toolIdeConfig ?? runtime.effectiveIdeConfig,
@@ -1155,30 +1311,41 @@ export function useReviewModuleController({
                 showLanguagePicker: false,
                 showSqlDialectPicker: false,
                 sqlResultShape:
-                    tool.toolLang === "sql" ||
-                    Boolean(tool.toolSqlDatasetId) ||
-                    Boolean(runtime.topicSqlFallback?.sqlDatasetId)
+                    routeCanUseBoundExercise &&
+                    (
+                        tool.toolLang === "sql" ||
+                        Boolean(tool.toolSqlDatasetId) ||
+                        Boolean(runtime.topicSqlFallback?.sqlDatasetId)
+                    )
                         ? ("table" as const)
                         : undefined,
                 sqlPaneOptions: runtime.effectiveIdeConfig?.sqlPane,
-                sqlDatasetId: firstNonBlank(
-                    tool.toolSqlDatasetId,
-                    runtime.topicSqlFallback?.sqlDatasetId,
-                ),
-                sqlSchemaSql: firstNonBlank(
-                    tool.toolSqlSchemaSql,
-                    runtime.topicSqlFallback?.sqlSchemaSql,
-                    tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SCHEMA,
-                ),
-                sqlSeedSql: firstNonBlank(
-                    tool.toolSqlSeedSql,
-                    runtime.topicSqlFallback?.sqlSeedSql,
-                    tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SEED,
-                ),
+                sqlDatasetId: routeCanUseBoundExercise
+                    ? firstNonBlank(
+                        tool.toolSqlDatasetId,
+                        runtime.topicSqlFallback?.sqlDatasetId,
+                    )
+                    : undefined,
+                sqlSchemaSql: routeCanUseBoundExercise
+                    ? firstNonBlank(
+                        tool.toolSqlSchemaSql,
+                        runtime.topicSqlFallback?.sqlSchemaSql,
+                        tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SCHEMA,
+                    )
+                    : undefined,
+                sqlSeedSql: routeCanUseBoundExercise
+                    ? firstNonBlank(
+                        tool.toolSqlSeedSql,
+                        runtime.topicSqlFallback?.sqlSeedSql,
+                        tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SEED,
+                    )
+                    : undefined,
                 sqlInitialTableSnapshots:
-                    tool.toolSqlInitialTableSnapshots ??
-                    runtime.topicSqlFallback?.sqlInitialTableSnapshots ??
-                    (tool.toolLang === "sql" ? undefined : STUDENTS_INITIAL_TABLE_SNAPSHOTS),
+                    routeCanUseBoundExercise
+                        ? tool.toolSqlInitialTableSnapshots ??
+                        runtime.topicSqlFallback?.sqlInitialTableSnapshots ??
+                        (tool.toolLang === "sql" ? undefined : STUDENTS_INITIAL_TABLE_SNAPSHOTS)
+                        : undefined,
             },
         },
 
@@ -1250,11 +1417,13 @@ export function useReviewModuleController({
             subjectSlug,
             moduleSlug,
             sectionSlug,
+            routeExerciseId: activeExerciseTarget?.exerciseId ?? null,
             defaultToolLanguage: runtime.toolDefaults.defaultLang,
             subjectFinish,
             onBeforeCardNavigate: flushAll,
             onOpenCertificate: handleOpenCertificate,
             onActiveCardIndexChange: handleNavigateCardIndex,
+            onNavigateToExerciseRoute: handleNavigateToExerciseRoute,
         },
         moduleNav: {
             locale,

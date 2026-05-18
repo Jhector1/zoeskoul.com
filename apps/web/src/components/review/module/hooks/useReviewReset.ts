@@ -2,7 +2,8 @@ import { useCallback, useMemo, useState } from "react";
 import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
 import { countAnswered } from "../utils";
 import { buildResetModuleProgress, buildResetTopicProgress } from "../actions";
-import {useReviewRuntimeStore} from "@/components/review/module/runtime/reviewRuntimeStore";
+import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
 
 type PendingChange =
     | { kind: "module" }
@@ -24,6 +25,8 @@ type UseReviewResetArgs = {
     setViewTopicId: (tid: string) => void;
     flushNow: (next: any) => void;
     toolUnbindCodeInput: () => void;
+    onAfterResetModule?: () => void;
+    onAfterResetTopic?: (topicId: string) => void;
 };
 
 export function useReviewReset({
@@ -35,6 +38,8 @@ export function useReviewReset({
                                    setViewTopicId,
                                    flushNow,
                                    toolUnbindCodeInput,
+                                   onAfterResetModule,
+                                   onAfterResetTopic,
                                }: UseReviewResetArgs) {
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [pending, setPending] = useState<PendingChange | null>(null);
@@ -43,32 +48,38 @@ export function useReviewReset({
 
     const pendingStats = useMemo<PendingStats>(() => {
         if (!pending) {
-            return { answeredCount: 0, sessionSize: 0, title: "", description: "" };
+            return {
+                answeredCount: 0,
+                sessionSize: 0,
+                title: "",
+                description: "",
+            };
         }
 
         if (pending.kind === "topic") {
-            const tid = pending.tid ?? "";
-            const cards = (safeTopics.find((t) => t.id === tid)?.cards ?? []) as ReviewCard[];
-            const tp0 = progress?.topics?.[tid] ?? {};
-            const { answeredCount, sessionSize } = countAnswered(cards, tp0, tid);
+            const topic = safeTopics.find((t) => t.id === pending.tid);
+            const cards = (topic?.cards ?? []) as ReviewCard[];
+            const topicProgress = progress?.topics?.[pending.tid] ?? {};
+            const stats = countAnswered(cards, topicProgress, pending.tid);
 
             return {
-                answeredCount,
-                sessionSize,
+                answeredCount: stats.answeredCount,
+                sessionSize: stats.sessionSize,
                 title: "Reset this topic?",
-                description: `You’ve completed ${answeredCount}/${sessionSize} items in this topic. This will clear them and cannot be undone.`,
+                description: `You’ve completed ${stats.answeredCount}/${stats.sessionSize} items in this topic. This will clear this topic and cannot be undone.`,
             };
         }
 
         let answeredCount = 0;
         let sessionSize = 0;
 
-        for (const t of safeTopics) {
-            const cards = (t.cards ?? []) as ReviewCard[];
-            const tp0 = progress?.topics?.[t.id] ?? {};
-            const r = countAnswered(cards, tp0, t.id);
-            answeredCount += r.answeredCount;
-            sessionSize += r.sessionSize;
+        for (const topic of safeTopics) {
+            const cards = (topic.cards ?? []) as ReviewCard[];
+            const topicProgress = progress?.topics?.[topic.id] ?? {};
+            const stats = countAnswered(cards, topicProgress, topic.id);
+
+            answeredCount += stats.answeredCount;
+            sessionSize += stats.sessionSize;
         }
 
         return {
@@ -91,6 +102,7 @@ export function useReviewReset({
 
     const requestResetTopic = useCallback((tid: string) => {
         if (!tid) return;
+
         setPending({ kind: "topic", tid });
         setConfirmOpen(true);
     }, []);
@@ -102,6 +114,7 @@ export function useReviewReset({
 
         if (pending.kind === "module") {
             useReviewRuntimeStore.getState().clearRuntimeForModule();
+            clearReviewWorkspaceDrafts();
 
             const next = buildResetModuleProgress(progress, firstTopicId || "");
 
@@ -111,25 +124,31 @@ export function useReviewReset({
             flushNow(next);
             cancelPendingChange();
 
+            queueMicrotask(() => {
+                onAfterResetModule?.();
+            });
+
             return;
         }
 
-        const tid = pending.tid ?? "";
-
-        if (!tid) {
-            cancelPendingChange();
-            return;
-        }
+        const tid = pending.tid;
 
         useReviewRuntimeStore.getState().clearRuntimeForTopic(tid);
+        clearReviewWorkspaceDrafts();
 
-        setProgress((p: any) => {
-            const next = buildResetTopicProgress(p, tid);
+        setProgress((currentProgress: any) => {
+            const next = buildResetTopicProgress(currentProgress, tid);
             flushNow(next);
             return next;
         });
 
+        setActiveTopicId(tid);
+        setViewTopicId(tid);
         cancelPendingChange();
+
+        queueMicrotask(() => {
+            onAfterResetTopic?.(tid);
+        });
     }, [
         pending,
         toolUnbindCodeInput,
@@ -140,6 +159,8 @@ export function useReviewReset({
         setViewTopicId,
         flushNow,
         cancelPendingChange,
+        onAfterResetModule,
+        onAfterResetTopic,
     ]);
 
     return {

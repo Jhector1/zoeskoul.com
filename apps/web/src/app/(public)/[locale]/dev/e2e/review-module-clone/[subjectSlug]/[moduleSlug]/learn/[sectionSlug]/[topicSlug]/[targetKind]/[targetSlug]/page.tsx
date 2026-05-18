@@ -90,21 +90,69 @@ const blankFallbackExerciseDefinition = {
     solutionCode: "",
 };
 
+const projectStep2StarterFiles = {
+    "main.py": "total = int(input())\n# TODO: print shipping cost\n",
+};
+
+const projectStep2SolutionFiles = {
+    "main.py":
+        "def shipping_cost(total):\n    return 0 if total >= 50 else 7\n\n" +
+        "total = int(input())\nprint(f'Shipping = {shipping_cost(total)}')\n",
+};
+
+const projectStep3StarterFiles = {
+    "main.py": "def sum_list(xs):\n    # TODO\n    pass\n\nvalues = [1, 2, 3]\n# TODO\n",
+};
+
+const projectStep3SolutionFiles = {
+    "main.py":
+        "def sum_list(xs):\n    total = 0\n    for value in xs:\n        total += value\n    return total\n\n" +
+        "values = [1, 2, 3]\nprint(sum_list(values))\n",
+};
+
+const projectStep2Definition = {
+    id: "e2e-project-step-2",
+    title: "Shipping cost helper",
+    runtime: runtimeDefaults,
+    workspace: {
+        language: "python",
+        entryFile: "main.py",
+        starterFiles: projectStep2StarterFiles,
+        solutionFiles: projectStep2SolutionFiles,
+    },
+    starterCode: projectStep2StarterFiles["main.py"],
+    solutionCode: projectStep2SolutionFiles["main.py"],
+};
+
+const projectStep3Definition = {
+    id: "e2e-project-step-3",
+    title: "Sum a list helper",
+    runtime: runtimeDefaults,
+    workspace: {
+        language: "python",
+        entryFile: "main.py",
+        starterFiles: projectStep3StarterFiles,
+        solutionFiles: projectStep3SolutionFiles,
+    },
+    starterCode: projectStep3StarterFiles["main.py"],
+    solutionCode: projectStep3SolutionFiles["main.py"],
+};
+
 function makeProjectCard({
                              id,
                              title,
-                             step,
+                             steps,
                          }: {
     id: string;
     title: string;
-    step: {
+    steps: Array<{
         id: string;
         title: string;
         starterFiles: Record<string, string>;
         solutionFiles: Record<string, string>;
         starterCode: string;
         solutionCode: string;
-    };
+    }>;
 }): ReviewCard {
     return {
         type: "project",
@@ -122,8 +170,7 @@ function makeProjectCard({
             allowReveal: true,
             maxAttempts: 3,
             runtime: runtimeDefaults,
-            steps: [
-                {
+            steps: steps.map((step) => ({
                     id: step.id,
                     title: step.title,
                     exerciseKey: step.id,
@@ -140,8 +187,7 @@ function makeProjectCard({
                     },
                     starterCode: step.starterCode,
                     solutionCode: step.solutionCode,
-                } as any,
-            ],
+                } as any)),
         },
     };
 }
@@ -180,6 +226,8 @@ const reviewCloneTopic = {
                 exerciseADefinition,
                 exerciseBDefinition,
                 blankFallbackExerciseDefinition,
+                projectStep2Definition,
+                projectStep3Definition,
             ],
         },
     },
@@ -195,38 +243,60 @@ const reviewCloneTopic = {
         makeProjectCard({
             id: "review-clone-project",
             title: "Review Clone Project A",
-            step: {
-                id: "e2e-print-name",
-                title: "Edit and run starter code",
-                starterFiles: exerciseAStarterFiles,
-                solutionFiles: exerciseASolutionFiles,
-                starterCode: exerciseAStarterFiles["main.py"],
-                solutionCode: exerciseASolutionFiles["main.py"],
-            },
+            steps: [
+                {
+                    id: "e2e-print-name",
+                    title: "Edit and run starter code",
+                    starterFiles: exerciseAStarterFiles,
+                    solutionFiles: exerciseASolutionFiles,
+                    starterCode: exerciseAStarterFiles["main.py"],
+                    solutionCode: exerciseASolutionFiles["main.py"],
+                },
+                {
+                    id: "e2e-project-step-2",
+                    title: "Build a shipping helper",
+                    starterFiles: projectStep2StarterFiles,
+                    solutionFiles: projectStep2SolutionFiles,
+                    starterCode: projectStep2StarterFiles["main.py"],
+                    solutionCode: projectStep2SolutionFiles["main.py"],
+                },
+                {
+                    id: "e2e-project-step-3",
+                    title: "Build a sum helper",
+                    starterFiles: projectStep3StarterFiles,
+                    solutionFiles: projectStep3SolutionFiles,
+                    starterCode: projectStep3StarterFiles["main.py"],
+                    solutionCode: projectStep3SolutionFiles["main.py"],
+                },
+            ],
         }),
         makeProjectCard({
             id: "review-clone-project-b",
             title: "Review Clone Project B",
-            step: {
-                id: "e2e-helper-name",
-                title: "Second exercise isolation check",
-                starterFiles: exerciseBStarterFiles,
-                solutionFiles: exerciseBSolutionFiles,
-                starterCode: exerciseBStarterFiles["main.py"],
-                solutionCode: exerciseBSolutionFiles["main.py"],
-            },
+            steps: [
+                {
+                    id: "e2e-helper-name",
+                    title: "Second exercise isolation check",
+                    starterFiles: exerciseBStarterFiles,
+                    solutionFiles: exerciseBSolutionFiles,
+                    starterCode: exerciseBStarterFiles["main.py"],
+                    solutionCode: exerciseBSolutionFiles["main.py"],
+                },
+            ],
         }),
         makeProjectCard({
             id: "review-clone-project-blank",
             title: "Review Clone Blank Fallback",
-            step: {
-                id: "e2e-blank-fallback",
-                title: "Blank fallback exercise",
-                starterFiles: blankFallbackStarterFiles,
-                solutionFiles: blankFallbackSolutionFiles,
-                starterCode: "",
-                solutionCode: "",
-            },
+            steps: [
+                {
+                    id: "e2e-blank-fallback",
+                    title: "Blank fallback exercise",
+                    starterFiles: blankFallbackStarterFiles,
+                    solutionFiles: blankFallbackSolutionFiles,
+                    starterCode: "",
+                    solutionCode: "",
+                },
+            ],
         }),
     ],
 } satisfies ReviewModule["topics"][number];

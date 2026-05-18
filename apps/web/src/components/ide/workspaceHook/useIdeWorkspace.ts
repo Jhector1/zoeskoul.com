@@ -158,8 +158,39 @@ function setShallowEqual<T>(a: ReadonlySet<T>, b: ReadonlySet<T>) {
     return true;
 }
 
+function nodeHydrationSnapshots(nodes: readonly FSNode[]) {
+    return nodes
+        .map((node) => {
+            const nodePath = pathOf(nodes as FSNode[], (node as any).id);
+            if ((node as any).kind === "file") {
+                return {
+                    path: nodePath,
+                    kind: (node as any).kind,
+                    content: (node as any).content ?? "",
+                };
+            }
+
+            return {
+                path: nodePath,
+                kind: (node as any).kind,
+            };
+        })
+        .sort((a, b) => String(a.path).localeCompare(String(b.path)));
+}
+
+function nodePathById(nodes: readonly FSNode[], id: NodeId | null | undefined) {
+    if (!id) return null;
+    return pathOf(nodes as FSNode[], id);
+}
+
+function nodePathsById(nodes: readonly FSNode[], ids: readonly NodeId[] | undefined) {
+    return (ids ?? [])
+        .map((id) => nodePathById(nodes, id))
+        .filter((path): path is string => typeof path === "string" && path.length > 0);
+}
+
 function nodesHydrationKey(nodes: readonly FSNode[]) {
-    return JSON.stringify(nodes);
+    return JSON.stringify(nodeHydrationSnapshots(nodes));
 }
 
 function workspaceStateHydrationKey(ws: Pick<
@@ -168,12 +199,12 @@ function workspaceStateHydrationKey(ws: Pick<
 >) {
     return JSON.stringify({
         language: ws.language,
-        nodes: ws.nodes,
-        openTabs: ws.openTabs?.length ? ws.openTabs : [ws.activeFileId],
-        activeFileId: ws.activeFileId,
-        entryFileId: ws.entryFileId,
+        nodes: nodeHydrationSnapshots(ws.nodes),
+        openTabs: nodePathsById(ws.nodes, ws.openTabs?.length ? ws.openTabs : [ws.activeFileId]),
+        activePath: nodePathById(ws.nodes, ws.activeFileId),
+        entryPath: nodePathById(ws.nodes, ws.entryFileId),
         stdin: ws.stdin ?? "",
-        expanded: ws.expanded ?? [],
+        expanded: nodePathsById(ws.nodes, ws.expanded ?? []),
         leftPct: ws.leftPct ?? 26,
     });
 }
@@ -285,7 +316,6 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
 
     const lastHydratedWorkspaceKeyRef = useRef<string>("");
-
     const hydrateWorkspace = useCallback(
         (ws: WorkspaceStateV2) => {
             const normalized = normalizeWorkspaceForAccess(ws, access);
@@ -300,6 +330,21 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                 expanded: Array.from(nextExpanded),
                 leftPct: nextLeftPct,
             });
+            const currentKey = workspaceStateHydrationKey({
+                language,
+                nodes,
+                openTabs: openTabs.length ? openTabs : [activeFileId],
+                activeFileId,
+                entryFileId,
+                stdin,
+                expanded: Array.from(expanded),
+                leftPct,
+            });
+
+            if (currentKey === nextKey) {
+                lastHydratedWorkspaceKeyRef.current = nextKey;
+                return;
+            }
 
             // Critical loop guard:
             // FullIDE and tool bindings may ask us to hydrate the same workspace many times.
@@ -310,35 +355,39 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
             lastHydratedWorkspaceKeyRef.current = nextKey;
 
-            setLanguageState((prev) => (prev === normalized.language ? prev : normalized.language));
+            if (language !== normalized.language) {
+                setLanguageState(normalized.language);
+            }
 
-            setNodes((prev) =>
-                nodesHydrationKey(prev) === nodesHydrationKey(normalized.nodes)
-                    ? prev
-                    : normalized.nodes,
-            );
+            if (nodesHydrationKey(nodes) !== nodesHydrationKey(normalized.nodes)) {
+                setNodes(normalized.nodes);
+            }
 
-            setOpenTabs((prev) =>
-                arrayShallowEqual(prev, nextOpenTabs) ? prev : nextOpenTabs,
-            );
+            if (!arrayShallowEqual(openTabs, nextOpenTabs)) {
+                setOpenTabs(nextOpenTabs);
+            }
 
-            setActiveFileId((prev) =>
-                prev === normalized.activeFileId ? prev : normalized.activeFileId,
-            );
+            if (activeFileId !== normalized.activeFileId) {
+                setActiveFileId(normalized.activeFileId);
+            }
 
-            setEntryFileId((prev) =>
-                prev === normalized.entryFileId ? prev : normalized.entryFileId,
-            );
+            if (entryFileId !== normalized.entryFileId) {
+                setEntryFileId(normalized.entryFileId);
+            }
 
-            setStdin((prev) => (prev === (normalized.stdin ?? "") ? prev : normalized.stdin ?? ""));
+            if (stdin !== (normalized.stdin ?? "")) {
+                setStdin(normalized.stdin ?? "");
+            }
 
-            setExpanded((prev) =>
-                setShallowEqual(prev, nextExpanded) ? prev : nextExpanded,
-            );
+            if (!setShallowEqual(expanded, nextExpanded)) {
+                setExpanded(nextExpanded);
+            }
 
-            setLeftPct((prev) => (prev === nextLeftPct ? prev : nextLeftPct));
+            if (leftPct !== nextLeftPct) {
+                setLeftPct(nextLeftPct);
+            }
         },
-        [access],
+        [access, activeFileId, entryFileId, expanded, language, leftPct, nodes, openTabs, stdin],
     );
 
     const historyRef = useRef<{

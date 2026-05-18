@@ -200,7 +200,12 @@ function pickSolutionFiles(item: unknown, subjectSlug: string, language?: string
   return resolveCourseFileSeed({ subjectSlug, language, target: item }).solutionFiles;
 }
 
-function pickStarterCode(item: unknown, subjectSlug: string, language?: string) {
+function pickStarterCode(
+    item: unknown,
+    subjectSlug: string,
+    language?: string,
+    resolveMessage?: (key: string) => string | undefined,
+) {
   /**
    * Only explicit starter sources may seed the editor.
    *
@@ -221,7 +226,7 @@ function pickStarterCode(item: unknown, subjectSlug: string, language?: string) 
     return explicit;
   }
 
-  const fromMessageBase = pickStarterCodeFromMessageBase(item);
+  const fromMessageBase = pickStarterCodeFromMessageBase(item, resolveMessage);
 
   if (isUsableStarterCode(fromMessageBase)) {
     return fromMessageBase;
@@ -229,7 +234,6 @@ function pickStarterCode(item: unknown, subjectSlug: string, language?: string) 
 
   return undefined;
 }
-
 function pickSolutionCode(item: unknown, subjectSlug: string, language?: string) {
   return resolveCourseFileSeed({ subjectSlug, language, target: item }).solutionCode;
 }
@@ -366,8 +370,9 @@ export function buildReviewTargetRegistry(args: {
   mod: ReviewModule;
   subjectSlug: string;
   moduleSlug: string;
+  resolveMessage?: (key: string) => string | undefined;
 }): ReviewTargetRegistry {
-  const { mod, subjectSlug, moduleSlug } = args;
+  const { mod, subjectSlug, moduleSlug, resolveMessage } = args;
   const byKey: Record<string, ReviewTargetEntry> = {};
   const orderedKeys: string[] = [];
   const byRoute: Record<string, string> = {};
@@ -445,7 +450,12 @@ export function buildReviewTargetRegistry(args: {
           language: cardRuntimeContext.language,
           starterFiles: pickStarterFiles(mergedCardManifest, subjectSlug, cardRuntimeContext.language),
           solutionFiles: pickSolutionFiles(mergedCardManifest, subjectSlug, cardRuntimeContext.language),
-          starterCode: pickStarterCode(mergedCardManifest, subjectSlug, cardRuntimeContext.language),
+          starterCode: pickStarterCode(
+              mergedCardManifest,
+              subjectSlug,
+              cardRuntimeContext.language,
+              resolveMessage,
+          ),
           solutionCode: pickSolutionCode(mergedCardManifest, subjectSlug, cardRuntimeContext.language),
           runtimeDefaults: topicRuntimeDefaults,
           topicRuntimeDefaults,
@@ -515,7 +525,12 @@ export function buildReviewTargetRegistry(args: {
             language: exerciseRuntimeContext.language,
             starterFiles: pickStarterFiles(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language),
             solutionFiles: pickSolutionFiles(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language),
-            starterCode: pickStarterCode(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language),
+            starterCode: pickStarterCode(
+                mergedExerciseManifest,
+                subjectSlug,
+                exerciseRuntimeContext.language,
+                resolveMessage,
+            ),
             solutionCode: pickSolutionCode(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language),
             runtimeDefaults: topicRuntimeDefaults,
             topicRuntimeDefaults,

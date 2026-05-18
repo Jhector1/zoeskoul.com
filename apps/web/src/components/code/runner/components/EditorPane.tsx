@@ -186,7 +186,22 @@ function writeCachedEditorValue(scope: string, path: string, value: string) {
 function looksLikePythonHelloStarter(value: string) {
     return /^\s*print\((["'])Hello Python!\1\)\s*;?\s*$/.test(value);
 }
+function isBenignMonacoCanceledError(reason: unknown) {
+    const message = String((reason as any)?.message ?? reason ?? "");
+    const name = String((reason as any)?.name ?? "");
+    const stack = String((reason as any)?.stack ?? "");
 
+    if (message !== "Canceled" && name !== "Canceled") {
+        return false;
+    }
+
+    return (
+        stack.includes("monaco-editor") ||
+        stack.includes("editor.api") ||
+        stack.includes("vs/editor") ||
+        message === "Canceled"
+    );
+}
 export default function EditorPane(props: {
     lang: string;
     code: string;
@@ -244,6 +259,13 @@ export default function EditorPane(props: {
     const [isNarrowScreen, setIsNarrowScreen] = useState(false);
     const [mobileEditing, setMobileEditing] = useState(false);
     const [needsMobileEditToggle, setNeedsMobileEditToggle] = useState(false);
+    const needsMobileEditToggleRef = useRef(false);
+
+    const setNeedsMobileEditToggleIfChanged = useCallback((next: boolean) => {
+        if (needsMobileEditToggleRef.current === next) return;
+        needsMobileEditToggleRef.current = next;
+        setNeedsMobileEditToggle(next);
+    }, []);
 
     const normalizedLang = useMemo(() => normalizeEditorLanguage(lang), [lang]);
 
@@ -273,7 +295,17 @@ export default function EditorPane(props: {
     useEffect(() => {
         mountedRef.current = true;
 
+        const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+            if (isBenignMonacoCanceledError(event.reason)) {
+                event.preventDefault();
+            }
+        };
+
+        window.addEventListener("unhandledrejection", handleUnhandledRejection);
+
         return () => {
+            window.removeEventListener("unhandledrejection", handleUnhandledRejection);
+
             mountedRef.current = false;
             disposeEditorListeners();
             editorRef.current = null;
@@ -331,12 +363,12 @@ export default function EditorPane(props: {
     const refreshMobileEditNeed = useCallback(() => {
         const ed = editorRef.current;
         if (!mountedRef.current || !ed || ed.isDisposed?.() === true) {
-            setNeedsMobileEditToggle(false);
+            setNeedsMobileEditToggleIfChanged(false);
             return;
         }
 
         if (!isNarrowScreen || frame !== "card" || mobileEditMode !== "auto") {
-            setNeedsMobileEditToggle(false);
+            setNeedsMobileEditToggleIfChanged(false);
             return;
         }
 
@@ -345,11 +377,11 @@ export default function EditorPane(props: {
             const layoutInfo = ed.getLayoutInfo?.();
             const viewportHeight = layoutInfo?.height ?? height ?? 0;
 
-            setNeedsMobileEditToggle(scrollHeight > viewportHeight + 12);
+            setNeedsMobileEditToggleIfChanged(scrollHeight > viewportHeight + 12);
         } catch {
-            setNeedsMobileEditToggle(false);
+            setNeedsMobileEditToggleIfChanged(false);
         }
-    }, [frame, height, isNarrowScreen, mobileEditMode]);
+    }, [frame, height, isNarrowScreen, mobileEditMode, setNeedsMobileEditToggleIfChanged]);
 
     const applyExternalValue = useCallback(
         (next: string) => {
@@ -555,6 +587,7 @@ export default function EditorPane(props: {
                     key={path}
                     height={height}
                     path={path}
+                    keepCurrentModel
                     language={normalizedLang}
                     defaultValue={(() => {
                         if (!cacheScope) return String(code ?? "");

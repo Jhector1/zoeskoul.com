@@ -574,21 +574,44 @@ export function ReviewToolsProvider({
 
             patchExercise(targetKey, runtimePatch);
 
+            const currentBound = useReviewRuntimeStore.getState().tool.boundExerciseKey;
+
             /**
-             * Route-owned review editors read from editorRuntimes before they fall
-             * back to the exercise runtime. Fill answer can therefore update the
-             * exercise snapshot correctly while the visible right-side Tools editor
-             * keeps showing an older editorRuntime workspace. For explicit user
-             * patches, mirror the normalized workspace into the deterministic editor
-             * runtime too so the mounted FullIDE receives the revealed solution.
+             * Route/dynamic review editors can be keyed by more than one stable owner:
+             *
+             * - targetKey: the normalized exercise key selected by this sync call
+             * - cur.exerciseKey: the key the input registered with originally
+             * - id: the CodeInput registry id
+             * - currentBound: the right-side Tools editor's current bound owner
+             *
+             * Fill answer is an explicit user action. The visible Tools editor must receive
+             * the revealed solution even when the route-owned editor runtime is keyed by
+             * currentBound instead of targetKey. Mirror the same runtime workspace into the
+             * possible owner keys for this one explicit patch.
              */
             if (userEdited && next.workspace) {
-                useReviewRuntimeStore
-                    .getState()
-                    .patchEditorWorkspace(targetKey, next.workspace);
+                const runtimeStore = useReviewRuntimeStore.getState();
+
+                const mirrorOwnerKeys = Array.from(
+                    new Set(
+                        [
+                            targetKey,
+                            typeof cur.exerciseKey === "string" ? cur.exerciseKey : null,
+                            id,
+                            typeof currentBound === "string" ? currentBound : null,
+                        ].filter((key): key is string => Boolean(key && key.trim())),
+                    ),
+                );
+
+                for (const ownerKey of mirrorOwnerKeys) {
+                    runtimeStore.patchEditorWorkspace(ownerKey, next.workspace);
+
+                    if (ownerKey !== targetKey) {
+                        runtimeStore.patchExercise(ownerKey, runtimePatch);
+                    }
+                }
             }
 
-            const currentBound = useReviewRuntimeStore.getState().tool.boundExerciseKey;
             if (currentBound === targetKey) {
                 defer(() => bindNow(id));
             }
@@ -630,6 +653,7 @@ export function ReviewToolsProvider({
 
       if (current === targetKey) {
         setRequestedId(null);
+        bindNow(id);
         return;
       }
 

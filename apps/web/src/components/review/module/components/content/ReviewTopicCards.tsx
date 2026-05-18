@@ -61,9 +61,11 @@ type Props = {
   subjectSlug: string;
   moduleSlug: string;
   sectionSlug?: string;
+  routeExerciseId?: string | null;
   defaultToolLanguage?: string;
   onBeforeCardNavigate?: () => Promise<void> | void;
   onActiveCardIndexChange?: (index: number) => void;
+  onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
 };
 
 export default function ReviewTopicCards({
@@ -88,9 +90,11 @@ export default function ReviewTopicCards({
   subjectSlug,
   moduleSlug,
   sectionSlug,
+  routeExerciseId,
   defaultToolLanguage = "python",
   onActiveCardIndexChange,
-                                           onBeforeCardNavigate,
+  onNavigateToExerciseRoute,
+  onBeforeCardNavigate,
 }: Props) {
   const storeCards = useReviewRuntimeStore((s) => s.cards);
 
@@ -226,7 +230,9 @@ export default function ReviewTopicCards({
                     onRun={onRun}
                     onReveal={onReveal}
                     onSubmit={onSubmit}
+                    routeExerciseId={routeExerciseId}
                     defaultToolLanguage={defaultToolLanguage}
+                    onNavigateToExerciseRoute={onNavigateToExerciseRoute}
                     onSketchStateChange={(_sketchCardId, state) => {
                       sketch?.saveSketchDebounced?.(cardKey, state, false);
                     }}

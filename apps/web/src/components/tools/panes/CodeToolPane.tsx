@@ -20,6 +20,12 @@ import { reviewSaveDebug, summarizeWorkspaceForSave } from "@/components/review/
 import {languagesCompatible} from "@/components/review/module/utils";
 import {defaultMainFile} from "@/components/ide/languageDefaults";
 import { normalizeCodeWorkspacePair } from "@/components/review/module/runtime/workspaceCodeSource";
+import {
+    isWorkspaceState,
+    readReviewWorkspaceDraft,
+    ReviewWorkspaceDraft,
+    writeReviewWorkspaceDraft
+} from "@/components/tools/panes/reviewWorkspaceDrafts";
 
 const FullIDE = dynamic(() => import("@/components/ide/fullide/FullIDE"), {
     ssr: false,
@@ -105,67 +111,6 @@ function starterPaneTrace(label: string, payload: Record<string, any>) {
     }
 }
 
-
-
-type ReviewWorkspaceDraft = {
-    savedAt: number;
-    workspace: WorkspaceStateV2;
-};
-
-function reviewWorkspaceDraftKey(ownerKey: string) {
-    return `zoe:review-workspace-draft:${ownerKey}`;
-}
-
-function isWorkspaceState(value: unknown): value is WorkspaceStateV2 {
-    return Boolean(
-        value &&
-        typeof value === "object" &&
-        (value as any).version === 2 &&
-        Array.isArray((value as any).nodes),
-    );
-}
-
-function readReviewWorkspaceDraft(ownerKey: string | null | undefined): ReviewWorkspaceDraft | null {
-    if (typeof window === "undefined") return null;
-    const key = String(ownerKey ?? "").trim();
-    if (!key) return null;
-
-    try {
-        const raw = window.localStorage.getItem(reviewWorkspaceDraftKey(key));
-        if (!raw) return null;
-
-        const parsed = JSON.parse(raw) as Partial<ReviewWorkspaceDraft>;
-        if (!isWorkspaceState(parsed.workspace)) return null;
-
-        const savedAt = Number(parsed.savedAt ?? 0);
-        return {
-            savedAt: Number.isFinite(savedAt) ? savedAt : 0,
-            workspace: parsed.workspace,
-        };
-    } catch {
-        return null;
-    }
-}
-
-function writeReviewWorkspaceDraft(ownerKey: string | null | undefined, workspace: WorkspaceStateV2 | null) {
-    if (typeof window === "undefined") return;
-    const key = String(ownerKey ?? "").trim();
-    if (!key || !workspace || !isWorkspaceState(workspace)) return;
-
-    try {
-        window.localStorage.setItem(
-            reviewWorkspaceDraftKey(key),
-            JSON.stringify({ savedAt: Date.now(), workspace } satisfies ReviewWorkspaceDraft),
-        );
-    } catch {
-        // localStorage can be full/disabled. DB/runtime saving remains canonical.
-    }
-}
-
-function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
-    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) return 0;
-    return workspace.nodes.filter((node: any) => node?.kind === "file").length;
-}
 
 
 
@@ -440,7 +385,7 @@ function isExerciseEditorScope(value: string | null | undefined) {
     if (value.endsWith(":general")) return false;
     if (value.includes(":card:general")) return false;
     if (value.startsWith("code-runner:")) return false;
-    return value.split(":").length >= 5;
+    return value.split(":").length >= 6;
 }
 
 function isCardEditorScope(value: string | null | undefined) {
@@ -521,6 +466,9 @@ export default function CodeToolPane(props: {
     const clearRunFeedback = tools?.clearRunFeedback;
     const setRunFeedbackForCard = tools?.setRunFeedback;
     const syncCodeInputSnapshot = tools?.syncCodeInputSnapshot;
+    const runtimeBoundExerciseKey = useReviewRuntimeStore(
+        (s) => s.tool.boundExerciseKey,
+    );
 
     const { ref, size } = useElementSize<HTMLDivElement>();
 
@@ -539,6 +487,16 @@ export default function CodeToolPane(props: {
             boundId && isExerciseEditorScope(boundId)
                 ? boundId
                 : null;
+        const scopedRuntimeBoundKey =
+            boundId &&
+            runtimeBoundExerciseKey &&
+            isExerciseEditorScope(runtimeBoundExerciseKey) &&
+            (
+                runtimeBoundExerciseKey === boundId ||
+                runtimeBoundExerciseKey.endsWith(`:${boundId}`)
+            )
+                ? runtimeBoundExerciseKey
+                : null;
 
         /**
          * Valid modes:
@@ -554,11 +512,12 @@ export default function CodeToolPane(props: {
          * review-quiz/input id, which makes CodeRunner bind to the wrong model.
          */
         if (scopedToolKey) return scopedToolKey;
+        if (scopedRuntimeBoundKey) return scopedRuntimeBoundKey;
         if (scopedBoundId) return scopedBoundId;
         if (rawToolScope) return rawToolScope;
 
         return "general";
-    }, [toolScopeKey, boundId]);
+    }, [toolScopeKey, boundId, runtimeBoundExerciseKey]);
 
     const exerciseKey = isExerciseEditorScope(editorExerciseStateKey)
         ? editorExerciseStateKey
@@ -596,9 +555,16 @@ export default function CodeToolPane(props: {
         resolvedEditorOwnerKey ? s.editorRuntimes[resolvedEditorOwnerKey] ?? null : null,
     );
 
-    const exerciseRuntime = useReviewRuntimeStore((s) =>
+    const subscribedExerciseRuntime = useReviewRuntimeStore((s) =>
         exerciseKey ? s.exercises[exerciseKey] ?? null : null,
     );
+    const exerciseRuntime =
+        subscribedExerciseRuntime ??
+        (
+            exerciseKey
+                ? useReviewRuntimeStore.getState().exercises[exerciseKey] ?? null
+                : null
+        );
 
     const patchEditorWorkspace = useReviewRuntimeStore((s) => s.patchEditorWorkspace);
     /**
@@ -687,27 +653,38 @@ export default function CodeToolPane(props: {
     const isReviewRouteMode = Boolean(resolvedEditorOwnerKey && hasBindableEditorTarget);
 
 
-    const reviewDirectWorkspaceError = editorRuntime?.workspaceStatus === "error";
-    const runtimeLanguage =
+    const exerciseRuntimeLanguage =
+        isReviewRouteMode && typeof exerciseRuntime?.language === "string"
+            ? exerciseRuntime.language
+            : null;
+
+    const editorRuntimeLanguage =
         isReviewRouteMode && typeof editorRuntime?.language === "string"
             ? editorRuntime.language
             : null;
+
+    const runtimeLanguage = exerciseRuntimeLanguage ?? editorRuntimeLanguage;
 
     const normalizedToolWorkspaceLanguage =
         typeof normalizedToolWorkspace?.language === "string"
             ? normalizedToolWorkspace.language
             : null;
 
+    const hasReadyDeterministicExerciseWorkspace = Boolean(
+        exerciseRuntime?.workspaceStatus === "ready" &&
+        forceWorkspaceHasContent(exerciseRuntime.workspace),
+    );
+
     /**
      * Shared language-source rule:
      *
-     * If the bound tool workspace says "sql" but the route runtime says "python",
-     * trust the bound workspace/tool language. This happens on clone/dynamic
-     * practice routes where the route owner is Python-shaped but the active
-     * practice exercise is SQL.
+     * The route/exercise runtime is canonical once it has a ready workspace.
+     * The bound tool workspace is only an early fallback for dynamic practice
+     * items while their deterministic runtime seed has not arrived yet.
      */
     const shouldPreferBoundToolLanguage = Boolean(
         isReviewRouteMode &&
+        !hasReadyDeterministicExerciseWorkspace &&
         normalizedToolWorkspaceLanguage &&
         runtimeLanguage &&
         !languagesCompatible(normalizedToolWorkspaceLanguage, runtimeLanguage),
@@ -1003,7 +980,15 @@ export default function CodeToolPane(props: {
         ),
     );
 
+    const shouldMountFullIde = Boolean(
+        hasBindableEditorTarget ||
+        sqlDatasetId ||
+        sqlResultShape === "table" ||
+        !isReviewRouteMode
+    );
+
     const canRenderEditor = Boolean(
+        shouldMountFullIde &&
         finalReviewWorkspace &&
         !runtimeWorkspaceError &&
         finalWorkspaceMatchesLanguage &&
@@ -1035,6 +1020,7 @@ export default function CodeToolPane(props: {
         !runtimeWorkspaceError &&
         !canRenderEditor &&
         !showLoadingMask &&
+        isReviewRouteMode &&
         hasBindableEditorTarget;
 
     const [loadingTimedOut, setLoadingTimedOut] = useState(false);
@@ -1166,7 +1152,7 @@ export default function CodeToolPane(props: {
 
             lastEmittedRef.current = next;
 
-            if (boundId) {
+            if ((!isReviewRouteMode || shouldEmitCodeFields) && boundId) {
                 syncCodeInputSnapshot?.(boundId, {
                     ...workspacePatch,
                     code: next.code,
@@ -1316,7 +1302,12 @@ export default function CodeToolPane(props: {
             onChangeStdin(next.stdin);
         }
 
-        if (boundId && workspace && forceWorkspaceHasContent(workspace)) {
+        if (
+            (!isReviewRouteMode || isDirectUserWorkspaceEdit) &&
+            boundId &&
+            workspace &&
+            forceWorkspaceHasContent(workspace)
+        ) {
             const next = extractWorkspaceSnapshot(workspace);
 
             syncCodeInputSnapshot?.(boundId, {

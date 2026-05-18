@@ -95,4 +95,18 @@ git status
 
 
 
+On macOS/Linux:
+lsof -ti tcp:3000
+
+Then kill it:
+kill -9 $(lsof -ti tcp:3000)
+
+Or one-liner with a safer fallback:
+lsof -ti tcp:3000 | xargs kill -9
+
+
+
+
+
+
 

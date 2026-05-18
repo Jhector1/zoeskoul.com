@@ -12,6 +12,11 @@ import PracticeHelpPanel from "@/components/practice/PracticeHelpPanel";
 import { useOptionalReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 import { getExerciseStateKey } from "@/components/review/module/runtime/exerciseKeys";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import type { WorkspaceStateV2 } from "@/components/ide/types";
+import {
+  normalizeWorkspaceLanguage,
+  stateLanguageMatches,
+} from "@/components/review/module/runtime/workspaceCodeSource";
 import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
 
 import { useTaggedT } from "@/i18n/tagged";
@@ -61,6 +66,31 @@ function getWorkspaceEntryCodeForPracticeCard(workspace: any) {
       workspace.nodes.find((node: any) => node?.kind === "file");
 
   return file?.kind === "file" ? String(file.content ?? "") : "";
+}
+
+function getWorkspaceFromAnyState(value: any): WorkspaceStateV2 | null {
+  if (value?.workspace?.version === 2) return value.workspace as WorkspaceStateV2;
+  if (value?.codeWorkspace?.version === 2) return value.codeWorkspace as WorkspaceStateV2;
+  if (value?.ideWorkspace?.version === 2) return value.ideWorkspace as WorkspaceStateV2;
+  return null;
+}
+
+function getManifestExerciseLanguage(exercise: Exercise | null | undefined) {
+  const exAny = exercise as any;
+  const isSqlExercise =
+      exercise?.kind === "code_input" &&
+      (
+          exAny?.language === "sql" ||
+          Boolean(exAny?.fixedSqlDialect) ||
+          Boolean(exAny?.runtime?.datasetId) ||
+          typeof exAny?.sqlSchemaSql === "string" ||
+          typeof exAny?.sqlSeedSql === "string" ||
+          Boolean(exAny?.sqlDatasetId)
+      );
+
+  if (isSqlExercise) return "sql";
+
+  return normalizeWorkspaceLanguage(exAny?.language ?? "python");
 }
 
 export default function QuizPracticeCard(props: {
@@ -114,6 +144,7 @@ export default function QuizPracticeCard(props: {
   const [loadTimedOut, setLoadTimedOut] = useState(false);
   const autoRetriedRef = useRef<string | null>(null);
   const lastToolsBindKeyRef = useRef<string | null>(null);
+  const lastEnsureRuntimeExerciseKeyRef = useRef<string | null>(null);
 
   const ex: Exercise | null = useMemo(() => {
     if (!ps?.exercise) return null;
@@ -149,6 +180,23 @@ export default function QuizPracticeCard(props: {
       (s) => s.exercises[exerciseKeyForTools] ?? null,
   );
   const ensureRuntimeExercise = useReviewRuntimeStore((s) => s.ensureExercise);
+  const fetchSubjectSlug = (q as any).fetch?.subject ?? "";
+  const fetchModuleSlug = (q as any).fetch?.module ?? "";
+  const fetchSectionSlug = (q as any).fetch?.section;
+  const fetchTopicId = normalizeTopicProgressKey((q as any).fetch?.topic ?? "");
+  const fetchOwnerCardId = ownerCardId ?? "";
+  const practiceExerciseKind = ex?.kind ?? "";
+  const practiceExerciseId = String((ex as any)?.id ?? "");
+  const practiceExerciseKey = String((ex as any)?.exerciseKey ?? "");
+  const practiceExerciseLanguage = String((ex as any)?.language ?? "");
+  const practiceExerciseRuntimeDatasetId = String(
+      (ex as any)?.runtime?.datasetId ?? "",
+  );
+  const practiceExerciseSqlDatasetId = String((ex as any)?.sqlDatasetId ?? "");
+  const practiceExerciseHasSqlSchema =
+      typeof (ex as any)?.sqlSchemaSql === "string";
+  const practiceExerciseHasSqlSeed = typeof (ex as any)?.sqlSeedSql === "string";
+  const practiceItemReady = Boolean(ps?.item);
 
   const runtimeExerciseCode = useMemo(() => {
     return (
@@ -162,23 +210,72 @@ export default function QuizPracticeCard(props: {
     if (ex.kind !== "code_input") return;
     if (!ps?.item) return;
 
+    const manifestLanguage = getManifestExerciseLanguage(ex);
+    const ensureKey = [
+      exerciseKeyForTools,
+      fetchSubjectSlug,
+      fetchModuleSlug,
+      fetchSectionSlug || "",
+      fetchTopicId,
+      fetchOwnerCardId,
+      practiceExerciseKind,
+      practiceExerciseId,
+      practiceExerciseKey,
+      practiceExerciseLanguage,
+      practiceExerciseRuntimeDatasetId,
+      practiceExerciseSqlDatasetId,
+      practiceExerciseHasSqlSchema ? "sql-schema" : "",
+      practiceExerciseHasSqlSeed ? "sql-seed" : "",
+    ].join("|");
+
+    if (lastEnsureRuntimeExerciseKeyRef.current === ensureKey) return;
+
+    const existing = useReviewRuntimeStore.getState().exercises[exerciseKeyForTools];
+
+    if (
+        existing &&
+        stateLanguageMatches(
+            existing,
+            manifestLanguage,
+            getWorkspaceFromAnyState(existing),
+        )
+    ) {
+      lastEnsureRuntimeExerciseKeyRef.current = ensureKey;
+      return;
+    }
+
+    lastEnsureRuntimeExerciseKeyRef.current = ensureKey;
+
     ensureRuntimeExercise({
       exerciseKey: exerciseKeyForTools,
-      subjectSlug: (q as any).fetch?.subject ?? "",
-      moduleSlug: (q as any).fetch?.module ?? "",
-      sectionSlug: (q as any).fetch?.section,
-      topicId: normalizeTopicProgressKey((q as any).fetch?.topic ?? ""),
-      cardId: ownerCardId ?? "",
+      subjectSlug: fetchSubjectSlug,
+      moduleSlug: fetchModuleSlug,
+      sectionSlug: fetchSectionSlug,
+      topicId: fetchTopicId,
+      cardId: fetchOwnerCardId,
       manifest: ex,
       saved: ps.item,
     });
+
+    // Intentionally do not depend on full `ex`, `ps.item`, or `q`.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     ensureRuntimeExercise,
-    ex,
     exerciseKeyForTools,
-    ownerCardId,
-    ps?.item,
-    q,
+    fetchSubjectSlug,
+    fetchModuleSlug,
+    fetchSectionSlug,
+    fetchTopicId,
+    fetchOwnerCardId,
+    practiceExerciseKind,
+    practiceExerciseId,
+    practiceExerciseKey,
+    practiceExerciseLanguage,
+    practiceExerciseRuntimeDatasetId,
+    practiceExerciseSqlDatasetId,
+    practiceExerciseHasSqlSchema,
+    practiceExerciseHasSqlSeed,
+    practiceItemReady,
   ]);
 
   const attemptsCapped = useMemo(() => {

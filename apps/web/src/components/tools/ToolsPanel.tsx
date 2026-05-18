@@ -397,6 +397,7 @@ function areToolsPanelPropsEqual(prev: ToolsPanelProps, next: ToolsPanelProps) {
         prev.onCollapse === next.onCollapse &&
         prev.onUnbind === next.onUnbind &&
         prev.boundId === next.boundId &&
+        prev.editorOwnerKey === next.editorOwnerKey &&
         prev.toolScopeKey === next.toolScopeKey &&
         prev.rightBodyRef === next.rightBodyRef &&
         prev.codeRunnerRegionH === next.codeRunnerRegionH &&

@@ -60,6 +60,38 @@ async function clickStartAssignmentOrNext(page: Page) {
     await page.getByRole("button", { name: /^Next$/i }).click();
 }
 
+
+async function visibleCodeEditorValues(page: Page): Promise<string[]> {
+    const editors = page.getByTestId("code-editor-e2e-input");
+
+    return editors.evaluateAll((nodes) =>
+        nodes
+            .filter((node) => {
+                const el = node as HTMLTextAreaElement;
+                const rect = el.getBoundingClientRect();
+                const style = window.getComputedStyle(el);
+
+                return (
+                    rect.width > 0 &&
+                    rect.height > 0 &&
+                    style.display !== "none" &&
+                    style.visibility !== "hidden"
+                );
+            })
+            .map((node) => (node as HTMLTextAreaElement).value),
+    );
+}
+
+function isFillAnswerSolution(value: string): boolean {
+    return (
+        value.trim().length > 0 &&
+        !value.includes("# wrong code") &&
+        /from helper import shout|print\(shout\('Hello, '\s*\+\s*name\)\)|ZoeSkoul learner|hello/i.test(
+            value,
+        )
+    );
+}
+
 async function openFillAnswerExerciseFromCloneStart(page: Page) {
     await page.goto(REAL_CLONE_FILL_ROUTE);
 
@@ -550,19 +582,28 @@ test("ReviewModule Fill answer patches the bound right-side Tools editor", async
     await expect
         .poll(
             async () => {
-                const value = await editor.inputValue();
+                const values = await visibleCodeEditorValues(page);
 
-                return (
-                    value.trim().length > 0 &&
-                    !value.includes("# wrong code") &&
-                    /from helper import shout|print\(shout\('Hello, '\s*\+\s*name\)\)|ZoeSkoul learner|hello/i.test(
-                        value,
-                    )
-                );
+                return values.some(isFillAnswerSolution);
             },
             {
                 timeout: 15_000,
-                message: "Fill answer should replace stale code in the bound Tools editor",
+                message:
+                    "Fill answer should replace stale code in the visible bound Tools editor",
+            },
+        )
+        .toBe(true);
+
+    await expect
+        .poll(
+            async () => {
+                const values = await visibleCodeEditorValues(page);
+
+                return values.every((value: string) => !value.includes("# wrong code"));            },
+            {
+                timeout: 15_000,
+                message:
+                    "No visible Tools editor should still show stale code after Fill answer",
             },
         )
         .toBe(true);
