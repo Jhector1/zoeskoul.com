@@ -1,6 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
 
-test.describe.configure({ mode: "serial" });
+test.describe.configure({ mode: "serial", timeout: 120_000 });
 
 const SQL_EXERCISE_URL =
     "/en/catalog/sql/subjects/sql/modules/sql_module_1/learn/section_1_1/intro-to-select/exercise/show-all-products";

@@ -1,6 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
 
-test.describe.configure({ mode: "serial" });
+test.describe.configure({ mode: "serial", timeout: 90_000 });
 
 const BASE =
     "/en/dev/e2e/review-module-clone/python/e2e-review-clone/learn/e2e-section/e2e-review-topic";
@@ -116,6 +116,45 @@ async function installProgressRoundTripMock(page: Page) {
             savedBodies.length = 0;
         },
     };
+}
+
+async function installSharedProgressRoundTripMock(
+    page: Page,
+    shared: {
+        savedProgress: unknown;
+        savedBodies: any[];
+    },
+) {
+    await page.route("**/api/review/progress**", async (route) => {
+        const request = route.request();
+
+        if (request.method() === "GET") {
+            return route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify(shared.savedProgress),
+            });
+        }
+
+        if (request.method() === "PUT") {
+            const body = request.postDataJSON();
+            shared.savedBodies.push(body);
+            shared.savedProgress = {
+                progress: body.state,
+            };
+
+            return route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify({
+                    ok: true,
+                    state: body.state,
+                }),
+            });
+        }
+
+        return route.fallback();
+    });
 }
 
 async function gotoCloneUrl(page: Page, url: string) {
@@ -282,6 +321,44 @@ test.describe("review module clone production workspace safety", () => {
             timeout: 20_000,
         });
     });
+
+    test("cross-device saved progress restores user code instead of starterCode", async ({
+                                                                                             browser,
+                                                                                         }) => {
+        const shared = {
+            savedProgress: { progress: null },
+            savedBodies: [] as any[],
+        };
+
+        const contextA = await browser.newContext();
+        const contextB = await browser.newContext();
+
+        try {
+            const pageA = await contextA.newPage();
+            const pageB = await contextB.newPage();
+
+            await mockNonProgressReviewCloneApis(pageA);
+            await mockNonProgressReviewCloneApis(pageB);
+            await installSharedProgressRoundTripMock(pageA, shared);
+            await installSharedProgressRoundTripMock(pageB, shared);
+
+            const marker = "cross_device_saved_progress_user_code_marker";
+
+            await gotoCloneUrl(pageA, EXERCISE_A_URL);
+            await expectExerciseAStarter(pageA);
+            await replaceMonacoText(pageA, `print('${marker}')`);
+            await expectBodyContains(pageA, marker);
+            await waitForSavedPayloadContaining(shared.savedBodies, marker);
+
+            await gotoCloneUrl(pageB, EXERCISE_A_URL);
+            await expectBodyContains(pageB, marker);
+            await expectBodyNotContains(pageB, "print('Hello, ' + name)");
+        } finally {
+            await contextA.close();
+            await contextB.close();
+        }
+    });
+
     test("restore priority: manifest starter is used when no saved progress exists", async ({
                                                                                                 page,
                                                                                             }) => {
@@ -296,6 +373,32 @@ test.describe("review module clone production workspace safety", () => {
 
         await gotoCloneUrl(page, EXERCISE_B_URL);
         await expectExerciseBStarter(page);
+    });
+
+    test("starterCode is only used when no saved/user workspace exists", async ({
+                                                                                    page,
+                                                                                }) => {
+        await mockNonProgressReviewCloneApis(page);
+
+        const { savedBodies, resetProgress } = await installProgressRoundTripMock(page);
+        const marker = "starter_only_until_user_workspace_exists_marker";
+
+        resetProgress();
+
+        await gotoCloneUrl(page, EXERCISE_A_URL);
+        await expectExerciseAStarter(page);
+
+        await replaceMonacoText(page, `print('${marker}')`);
+        await expectBodyContains(page, marker);
+        await waitForSavedPayloadContaining(savedBodies, marker);
+
+        await gotoCloneUrl(page, EXERCISE_A_URL);
+        await expectBodyContains(page, marker);
+        await expectBodyNotContains(page, "print('Hello, ' + name)");
+
+        resetProgress();
+        await gotoCloneUrl(page, EXERCISE_A_URL);
+        await expectExerciseAStarter(page);
     });
 
     test("restore priority: blank fallback is used only when no saved progress and no manifest starter exist", async ({

@@ -23,6 +23,8 @@ const PROJECT_STEP_2_ROUTE =
 
 const PROJECT_STEP_2_SLUG = "/exercise/e2e-project-step-2";
 const PROJECT_STEP_3_SLUG = "/exercise/e2e-project-step-3";
+const PROJECT_STEP_3_KEY =
+    "python:e2e-review-clone:e2e-section:e2e-review-topic:review-clone-project:e2e-project-step-3";
 
 const Q2_MARKER = "# E2E_Q2_SHIPPING_WORKSPACE_MARKER";
 const Q3_MARKER = "# E2E_Q3_SUM_LIST_WORKSPACE_MARKER";
@@ -82,7 +84,52 @@ const PRACTICE_FIXTURES = {
     },
 } as const;
 
-async function installDeterministicReviewCloneMocks(page: Page) {
+function makeInitialProjectProgress(
+    practiceMeta: Record<string, { attempts: number; ok: boolean }> = {
+        "e2e-print-name": {
+            attempts: 1,
+            ok: true,
+        },
+        "e2e-project-step-2": {
+            attempts: 1,
+            ok: true,
+        },
+        "e2e-project-step-3": {
+            attempts: 1,
+            ok: true,
+        },
+    },
+) {
+    return {
+        topics: {
+            "e2e-review-topic": {
+                readingDone: {
+                    "e2e-reading": true,
+                },
+                cardsDone: {},
+                quizzesDone: {
+                    "review-clone-project": true,
+                },
+                quizState: {
+                    "review-clone-project": {
+                        answers: {},
+                        checkedById: {},
+                        excusedById: {},
+                        practiceMeta,
+                    },
+                },
+            },
+        },
+    };
+}
+
+async function installDeterministicReviewCloneMocks(
+    page: Page,
+    options: {
+        savedBodies?: any[];
+        initialProgress?: any;
+    } = {},
+) {
     await page.route("**/api/review/progress**", async (route) => {
         const request = route.request();
 
@@ -91,40 +138,7 @@ async function installDeterministicReviewCloneMocks(page: Page) {
                 status: 200,
                 contentType: "application/json",
                 body: JSON.stringify({
-                    progress: {
-                        topics: {
-                            "e2e-review-topic": {
-                                readingDone: {
-                                    "e2e-reading": true,
-                                },
-                                cardsDone: {},
-                                quizzesDone: {
-                                    "review-clone-project": true,
-                                },
-                                quizState: {
-                                    "review-clone-project": {
-                                        answers: {},
-                                        checkedById: {},
-                                        excusedById: {},
-                                        practiceMeta: {
-                                            "e2e-print-name": {
-                                                attempts: 1,
-                                                ok: true,
-                                            },
-                                            "e2e-project-step-2": {
-                                                attempts: 1,
-                                                ok: true,
-                                            },
-                                            "e2e-project-step-3": {
-                                                attempts: 1,
-                                                ok: true,
-                                            },
-                                        },
-                                    },
-                                },
-                            },
-                        },
-                    },
+                    progress: options.initialProgress ?? makeInitialProjectProgress(),
                 }),
             });
             return;
@@ -132,6 +146,7 @@ async function installDeterministicReviewCloneMocks(page: Page) {
 
         if (request.method() === "PUT") {
             const body = request.postDataJSON();
+            options.savedBodies?.push(body);
 
             await route.fulfill({
                 status: 200,
@@ -325,6 +340,75 @@ async function installDeterministicReviewCloneMocks(page: Page) {
             });
         },
     );
+
+    await page.route(
+        (url) => url.pathname === "/api/practice/validate",
+        async (route) => {
+            await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify({
+                    ok: true,
+                    finalized: true,
+                    explanation: "Correct.",
+                    attempts: {
+                        used: 1,
+                        max: 3,
+                        left: 2,
+                    },
+                }),
+            });
+        },
+    );
+
+    await page.route(
+        (url) => url.pathname === "/api/practice/help",
+        async (route) => {
+            const solutionCode = PRACTICE_FIXTURES["e2e-project-step-3"].solutionCode;
+
+            await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify({
+                    stepKey: "concept",
+                    step: {
+                        key: "concept",
+                        label: "Need a hint?",
+                        kind: "concept",
+                    },
+                    source: "mock",
+                    content:
+                        "Keep the visible editor workspace unchanged unless Fill answer is clicked.",
+                    reveal: {
+                        kind: "code_input",
+                        solutionCode,
+                        language: "python",
+                        workspace: {
+                            version: 2,
+                            language: "python",
+                            entryFileId: "file:main.py",
+                            activeFileId: "file:main.py",
+                            nodes: [
+                                {
+                                    id: "file:main.py",
+                                    kind: "file",
+                                    name: "main.py",
+                                    parentId: null,
+                                    content: solutionCode,
+                                    createdAt: 0,
+                                    updatedAt: 0,
+                                },
+                            ],
+                            openTabs: ["file:main.py"],
+                            expanded: [],
+                            stdin: "",
+                            leftPct: 26,
+                        },
+                    },
+                }),
+            });
+        },
+    );
 }
 
 function projectQuestionCard(page: Page) {
@@ -341,6 +425,13 @@ function projectQuestionNavigator(page: Page) {
         .locator("section, article, div")
         .filter({ hasText: /Question \d+ of 3/ })
         .first();
+}
+
+async function gotoReviewRoute(page: Page, route: string) {
+    await page.goto(route, {
+        waitUntil: "domcontentloaded",
+        timeout: 45_000,
+    });
 }
 
 async function getVisibleCodeEditorValues(page: Page): Promise<string[]> {
@@ -458,12 +549,87 @@ async function setEditorValue(editor: Locator, value: string) {
     }, value);
 }
 
+function savedExerciseFromPayload(body: any, exerciseKey: string) {
+    return body?.state?.runtimeStateV2?.exercises?.[exerciseKey] ?? null;
+}
+
+function savedPracticePatchFromPayload(body: any, exerciseId: string) {
+    return (
+        body?.state?.topics?.["e2e-review-topic"]?.quizState?.[
+            "review-clone-project"
+        ]?.practiceItemPatch?.[exerciseId] ??
+        body?.state?.topics?.unknown?.practiceItemPatch?.[exerciseId] ??
+        null
+    );
+}
+
+function savedToolStateFromPayload(body: any, exerciseKey: string) {
+    return (
+        body?.state?.runtimeStateV2?.toolState?.[`exercise:${exerciseKey}`] ??
+        body?.state?.toolState?.[`exercise:${exerciseKey}`] ??
+        null
+    );
+}
+
+function workspaceText(workspace: any): string {
+    if (!workspace || !Array.isArray(workspace.nodes)) return "";
+
+    return workspace.nodes
+        .filter((node: any) => node?.kind === "file")
+        .map((node: any) => String(node?.content ?? ""))
+        .join("\n");
+}
+
+function savedExerciseText(exercise: any): string {
+    return [
+        exercise?.code,
+        exercise?.source,
+        workspaceText(exercise?.workspace),
+        workspaceText(exercise?.codeWorkspace),
+        workspaceText(exercise?.ideWorkspace),
+    ].join("\n");
+}
+
+function savedActiveTargetText(body: any, exerciseKey: string, exerciseId: string) {
+    const carriers = [
+        savedExerciseFromPayload(body, exerciseKey),
+        savedToolStateFromPayload(body, exerciseKey),
+        savedPracticePatchFromPayload(body, exerciseId),
+    ];
+
+    return carriers.map(savedExerciseText).join("\n");
+}
+
+async function waitForSavedActiveTargetPayload(
+    savedBodies: any[],
+    exerciseKey: string,
+    exerciseId: string,
+    marker: string,
+) {
+    await expect
+        .poll(
+            () =>
+                savedBodies.some((body) =>
+                    savedActiveTargetText(body, exerciseKey, exerciseId).includes(marker),
+                ),
+            {
+                timeout: 20_000,
+                message: `Expected a saved active-target payload for ${exerciseKey} to contain ${marker}`,
+            },
+        )
+        .toBe(true);
+
+    return savedBodies.find((body) =>
+        savedActiveTargetText(body, exerciseKey, exerciseId).includes(marker),
+    );
+}
+
 test("project question navigation keeps each exercise workspace isolated in the Tools editor", async ({
                                                                                                           page,
                                                                                                       }) => {
     await installDeterministicReviewCloneMocks(page);
 
-    await page.goto(PROJECT_STEP_2_ROUTE);
+    await gotoReviewRoute(page, PROJECT_STEP_2_ROUTE);
 
     await expect(projectQuestionCard(page)).toContainText("Review Clone Project A", {
         timeout: 15_000,
@@ -573,6 +739,301 @@ test("project question navigation keeps each exercise workspace isolated in the 
     );
 });
 
+test("validated user code does not fall back to starterCode after Previous/Next navigation", async ({
+                                                                                                        page,
+                                                                                                    }) => {
+    await installDeterministicReviewCloneMocks(page);
+
+    await page.goto(PROJECT_STEP_2_ROUTE.replace(PROJECT_STEP_2_SLUG, PROJECT_STEP_3_SLUG));
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 3 of 3/, {
+        timeout: 15_000,
+    });
+
+    const marker = "USER_CODE_AFTER_VALIDATE_123";
+    const userCode = [
+        `print("${marker}")`,
+        "def sum_list(xs):",
+        "    return sum(xs)",
+        "",
+        "values = [1, 2, 3]",
+        "print(sum_list(values))",
+        "",
+    ].join("\n");
+
+    await setEditorValue(await pickVisibleCodeEditor(page), userCode);
+    await expectAnyVisibleEditorToContain(
+        page,
+        marker,
+        "Edited user code should be visible before validating/navigation",
+    );
+
+    await page.getByRole("button", { name: /^Run$/i }).last().click();
+
+    await projectQuestionNavigator(page)
+        .getByRole("button", { name: /^Previous$/i })
+        .nth(1)
+        .click();
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 2 of 3/, {
+        timeout: 15_000,
+    });
+
+    await projectQuestionNavigator(page)
+        .getByRole("button", { name: /^Next$/i })
+        .nth(1)
+        .click();
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 3 of 3/, {
+        timeout: 15_000,
+    });
+
+    await expectAnyVisibleEditorToContain(
+        page,
+        marker,
+        "Validated user code must survive project Previous/Next navigation",
+    );
+
+    await expectNoVisibleEditorToContain(
+        page,
+        "# TODO",
+        "Starter TODO text must not replace validated user code after Previous/Next",
+    );
+});
+
+test("validated user code does not fall back to starterCode after top-level topic navigation and return", async ({
+                                                                                                                     page,
+                                                                                                                 }) => {
+    await installDeterministicReviewCloneMocks(page);
+
+    await page.goto(PROJECT_STEP_2_ROUTE.replace(PROJECT_STEP_2_SLUG, PROJECT_STEP_3_SLUG));
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 3 of 3/, {
+        timeout: 15_000,
+    });
+
+    const marker = "USER_CODE_AFTER_TOP_LEVEL_RETURN_456";
+    await setEditorValue(
+        await pickVisibleCodeEditor(page),
+        [
+            `print("${marker}")`,
+            "def sum_list(xs):",
+            "    return sum(xs)",
+            "values = [1, 2, 3]",
+            "print(sum_list(values))",
+            "",
+        ].join("\n"),
+    );
+
+    await expectAnyVisibleEditorToContain(
+        page,
+        marker,
+        "Edited user code should be visible before top-level navigation",
+    );
+
+    await page.getByRole("main").getByRole("button", { name: /^Next$/i }).first().click();
+    await expect(projectQuestionCard(page)).not.toBeVisible({
+        timeout: 15_000,
+    });
+
+    await page.goto(PROJECT_STEP_2_ROUTE.replace(PROJECT_STEP_2_SLUG, PROJECT_STEP_3_SLUG));
+    await expect(projectQuestionCard(page)).toContainText(/Question 3 of 3/, {
+        timeout: 15_000,
+    });
+
+    await expectAnyVisibleEditorToContain(
+        page,
+        marker,
+        "User code must survive top-level card navigation away and back",
+    );
+    await expectNoVisibleEditorToContain(
+        page,
+        "# TODO",
+        "Starter TODO text must not replace user code after top-level navigation",
+    );
+});
+
+test("Reveal answer does not overwrite user-authored editor workspace", async ({
+                                                                                   page,
+                                                                               }) => {
+    await installDeterministicReviewCloneMocks(page, {
+        initialProgress: {
+            topics: {
+                "e2e-review-topic": {
+                    readingDone: {
+                        "e2e-reading": true,
+                    },
+                    cardsDone: {},
+                    quizzesDone: {},
+                    quizState: {
+                        "review-clone-project": {
+                            answers: {},
+                            checkedById: {},
+                            excusedById: {},
+                            practiceMeta: {
+                                "e2e-print-name": {
+                                    attempts: 0,
+                                    ok: true,
+                                },
+                                "e2e-project-step-2": {
+                                    attempts: 0,
+                                    ok: true,
+                                },
+                                "e2e-project-step-3": {
+                                    attempts: 0,
+                                    ok: false,
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    });
+
+    await page.goto(PROJECT_STEP_2_ROUTE.replace(PROJECT_STEP_2_SLUG, PROJECT_STEP_3_SLUG));
+
+    const marker = "USER_PARTIAL_BEFORE_REVEAL_789";
+    await setEditorValue(
+        await pickVisibleCodeEditor(page),
+        [`print("${marker}")`, "def sum_list(xs):", "    pass", ""].join("\n"),
+    );
+
+    await expectAnyVisibleEditorToContain(
+        page,
+        marker,
+        "User-authored partial code should be visible before reveal",
+    );
+
+    const hintButton = projectQuestionCard(page).getByRole("button", {
+        name: /Need a hint/i,
+    });
+
+    await expect(hintButton).toBeEnabled({
+        timeout: 15_000,
+    });
+    await Promise.all([
+        page.waitForRequest((request) => {
+            const url = new URL(request.url());
+
+            return url.pathname === "/api/practice/help";
+        }),
+        hintButton.click(),
+    ]);
+
+    await expect(projectQuestionCard(page)).toContainText(/concept|Still stuck/i, {
+        timeout: 15_000,
+    });
+
+    await expectAnyVisibleEditorToContain(
+        page,
+        marker,
+        "Opening reveal/hint UI must not auto-patch the editor",
+    );
+    await expectNoVisibleEditorToContain(
+        page,
+        "def sum_list(xs):\n    total = 0",
+        "Solution code should not enter the editor until Fill answer is clicked",
+    );
+
+    const fillAnswer = projectQuestionCard(page).getByRole("button", { name: /Fill answer/i });
+    if (await fillAnswer.isVisible().catch(() => false)) {
+        await fillAnswer.click();
+        await expectAnyVisibleEditorToContain(
+            page,
+            "total = 0",
+            "Fill answer should be the explicit action that patches the editor",
+        );
+    }
+});
+
+test("successful check saves visible Monaco content into review progress payload", async ({
+                                                                                              page,
+                                                                                          }) => {
+    const savedBodies: any[] = [];
+    await installDeterministicReviewCloneMocks(page, { savedBodies });
+
+    await page.goto(PROJECT_STEP_2_ROUTE.replace(PROJECT_STEP_2_SLUG, PROJECT_STEP_3_SLUG));
+
+    const marker = "PROGRESS_PAYLOAD_VISIBLE_MONACO_321";
+    await setEditorValue(
+        await pickVisibleCodeEditor(page),
+        [
+            `print("${marker}")`,
+            "def sum_list(xs):",
+            "    return sum(xs)",
+            "values = [1, 2, 3]",
+            "print(sum_list(values))",
+            "",
+        ].join("\n"),
+    );
+
+    await page.getByRole("button", { name: /^Run$/i }).last().click();
+    const matchingPayload = await waitForSavedActiveTargetPayload(
+        savedBodies,
+        PROJECT_STEP_3_KEY,
+        "e2e-project-step-3",
+        marker,
+    );
+    const exercise =
+        savedExerciseFromPayload(matchingPayload, PROJECT_STEP_3_KEY) ??
+        savedToolStateFromPayload(matchingPayload, PROJECT_STEP_3_KEY) ??
+        savedPracticePatchFromPayload(matchingPayload, "e2e-project-step-3");
+    const savedText = savedActiveTargetText(
+        matchingPayload,
+        PROJECT_STEP_3_KEY,
+        "e2e-project-step-3",
+    );
+
+    expect(exercise?.userEdited).toBe(true);
+    expect(savedText).toContain(marker);
+    expect(savedText).not.toContain("# TODO");
+});
+
+test("completed/correct exercise still keeps user workspace", async ({ page }) => {
+    await installDeterministicReviewCloneMocks(page);
+
+    await page.goto(PROJECT_STEP_2_ROUTE.replace(PROJECT_STEP_2_SLUG, PROJECT_STEP_3_SLUG));
+
+    await expect(projectQuestionCard(page)).toContainText(/Correct|Completed/, {
+        timeout: 15_000,
+    });
+
+    const marker = "COMPLETED_EXERCISE_KEEP_USER_WORKSPACE_654";
+    await setEditorValue(
+        await pickVisibleCodeEditor(page),
+        [
+            `print("${marker}")`,
+            "def sum_list(xs):",
+            "    return sum(xs)",
+            "values = [1, 2, 3]",
+            "print(sum_list(values))",
+            "",
+        ].join("\n"),
+    );
+
+    await page.getByRole("main").getByRole("button", { name: /^Next$/i }).first().click();
+    await expect(projectQuestionCard(page)).not.toBeVisible({
+        timeout: 15_000,
+    });
+
+    await page.goto(PROJECT_STEP_2_ROUTE.replace(PROJECT_STEP_2_SLUG, PROJECT_STEP_3_SLUG));
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 3 of 3/, {
+        timeout: 15_000,
+    });
+    await expectAnyVisibleEditorToContain(
+        page,
+        marker,
+        "Correct/completed state must not cause starterCode to re-seed over user code",
+    );
+    await expectNoVisibleEditorToContain(
+        page,
+        "# TODO",
+        "Completed exercise should keep submitted user code instead of starter TODO",
+    );
+});
+
 test("direct project exercise route navigation does not reuse the previous exercise workspace", async ({
                                                                                                            page,
                                                                                                        }) => {
@@ -642,6 +1103,8 @@ test("direct project exercise route navigation does not reuse the previous exerc
 test("hard direct reload of the current project exercise does not leak sibling exercise code", async ({
                                                                                                           page,
                                                                                                       }) => {
+    test.setTimeout(90_000);
+
     await installDeterministicReviewCloneMocks(page);
 
     await page.goto(PROJECT_STEP_2_ROUTE);

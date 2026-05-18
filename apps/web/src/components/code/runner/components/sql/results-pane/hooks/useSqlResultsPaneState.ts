@@ -84,7 +84,9 @@ export function useSqlResultsPaneState(args: {
 
     const [tab, rawSetTab] = React.useState<TabKey>(defaultTab);
     const setTab = React.useCallback((next: TabKey) => {
-        rawSetTab(availableTabs.includes(next) ? next : defaultTab);
+        const resolved = availableTabs.includes(next) ? next : defaultTab;
+
+        rawSetTab((prev) => (prev === resolved ? prev : resolved));
     }, [availableTabs, defaultTab]);
     const [positions, setPositions] = React.useState<DiagramPositions>({});
 
