@@ -903,9 +903,15 @@ export default function QuizBlock({
     return idx < 0 ? 0 : idx;
   }, [findCurrentActivityQuestionId, questions]);
 
-  useEffect(() => {
-    setAwaitNextQid(null);
-  }, [resetKey]);
+    useEffect(() => {
+        setAwaitNextQid(null);
+        lastActionQidRef.current = null;
+
+        if (advanceTimerRef.current) {
+            window.clearTimeout(advanceTimerRef.current);
+            advanceTimerRef.current = null;
+        }
+    }, [resetKey]);
 
   useEffect(() => {
     return () => {
@@ -1135,13 +1141,15 @@ export default function QuizBlock({
 
     if (!isFlowDone(q)) return;
 
-    if (hasExplain(q) || !autoAdvance) {
-      setAwaitNextQid(qid);
-      lastActionQidRef.current = null;
-      return;
-    }
+      if (!autoAdvance) {
+          setAwaitNextQid(qid);
+          lastActionQidRef.current = null;
+          return;
+      }
 
-    const delay = 150;
+      setAwaitNextQid(null);
+
+      const delay = 220;
 
     if (advanceTimerRef.current) window.clearTimeout(advanceTimerRef.current);
     advanceTimerRef.current = window.setTimeout(() => {
@@ -1249,6 +1257,7 @@ export default function QuizBlock({
     const routeOwnedPracticeNextIndex =
         routeOwnedProjectPracticeNavigation &&
         hasNextQuestion &&
+        activeQuestionDone &&
         activeQuestion?.kind === "practice" &&
         questions[activeIndex + 1]?.kind === "practice"
             ? activeIndex + 1

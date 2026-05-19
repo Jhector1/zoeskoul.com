@@ -10,6 +10,8 @@ test.use({
 const REAL_SUM_LIST_ROUTE =
     "/en/catalog/python/subjects/python/modules/python-2/learn/python-2-control-flow-collections/functions-basics/exercise/sum-list";
 
+const REAL_SUM_LIST_E2E_UNLOCK_ROUTE = `${REAL_SUM_LIST_ROUTE}?e2eUnlockAll=1`;
+
 const SUM_LIST_SLUG = "/exercise/sum-list";
 const NEXT_QUIZ_SLUG = "/quiz/functions-basics-q5";
 
@@ -260,7 +262,7 @@ async function installRealSumListMocks(page: Page) {
             const fixture =
                 PRACTICE_FIXTURES[
                     exerciseKey as keyof typeof PRACTICE_FIXTURES
-                ] ?? PRACTICE_FIXTURES.m2_func_total_with_tip_code;
+                    ] ?? PRACTICE_FIXTURES.m2_func_total_with_tip_code;
 
             await route.fulfill({
                 status: 200,
@@ -306,10 +308,10 @@ async function installRealSumListMocks(page: Page) {
 }
 
 test("real sum-list catalog route top-level Next does not snap back to the project exercise", async ({
-    page,
-}) => {
+                                                                                                         page,
+                                                                                                     }) => {
     await installRealSumListMocks(page);
-    await page.goto(REAL_SUM_LIST_ROUTE);
+    await page.goto(REAL_SUM_LIST_E2E_UNLOCK_ROUTE);
 
     const main = page.getByRole("main");
     const projectCard = main
@@ -322,7 +324,7 @@ test("real sum-list catalog route top-level Next does not snap back to the proje
         .filter({ hasText: "Item 5 of 6" })
         .first();
 
-    await expect(page).toHaveURL(new RegExp(`${SUM_LIST_SLUG}$`));
+    await expect(page).toHaveURL(new RegExp(`${SUM_LIST_SLUG}(?:\\?.*)?$`));
     await expect(projectCard).toContainText("Project: Reusable helpers", {
         timeout: 15_000,
     });
@@ -335,10 +337,10 @@ test("real sum-list catalog route top-level Next does not snap back to the proje
 
     await topicNavigator.getByRole("button", { name: /^Next$/i }).click();
 
-    await expect(page).not.toHaveURL(new RegExp(`${SUM_LIST_SLUG}$`), {
+    await expect(page).not.toHaveURL(new RegExp(`${SUM_LIST_SLUG}(?:\\?.*)?$`), {
         timeout: 15_000,
     });
-    await expect(page).toHaveURL(new RegExp(`${NEXT_QUIZ_SLUG}$`), {
+    await expect(page).toHaveURL(new RegExp(`${NEXT_QUIZ_SLUG}(?:\\?.*)?$`), {
         timeout: 15_000,
     });
     await expect(main).toContainText("Item 6 of 6", {
@@ -346,5 +348,5 @@ test("real sum-list catalog route top-level Next does not snap back to the proje
     });
 
     await page.waitForTimeout(3_000);
-    await expect(page).not.toHaveURL(new RegExp(`${SUM_LIST_SLUG}$`));
+    await expect(page).not.toHaveURL(new RegExp(`${SUM_LIST_SLUG}(?:\\?.*)?$`));
 });

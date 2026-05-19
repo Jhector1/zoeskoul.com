@@ -1,4 +1,5 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
+import {replaceMonacoText} from "../../utils";
 
 test.use({
     viewport: {
@@ -33,7 +34,10 @@ const Q2_STARTER = "total = int(input())";
 const Q2_STARTER_TODO = "# TODO: print shipping cost";
 const Q3_STARTER = "def sum_list(xs):";
 const Q3_STARTER_VALUES = "values = [1, 2, 3]";
+const FIRST_READING_CARD_ROUTE =
+    "/en/dev/e2e/review-module-clone/python/e2e-review-clone/learn/e2e-section/e2e-review-topic/text/e2e-reading";
 
+const FIRST_READING_CARD_SLUG = "/text/e2e-reading";
 const PRACTICE_FIXTURES = {
     "e2e-print-name": {
         title: "Edit and run starter code",
@@ -83,7 +87,7 @@ const PRACTICE_FIXTURES = {
         },
     },
 } as const;
-
+const Q2_SOLUTION = PRACTICE_FIXTURES["e2e-project-step-2"].solutionCode;
 function makeInitialProjectProgress(
     practiceMeta: Record<string, { attempts: number; ok: boolean }> = {
         "e2e-print-name": {
@@ -344,13 +348,28 @@ async function installDeterministicReviewCloneMocks(
     await page.route(
         (url) => url.pathname === "/api/practice/validate",
         async (route) => {
+            let body: any = null;
+
+            try {
+                body = route.request().postDataJSON();
+            } catch {
+                body = route.request().postData();
+            }
+
+            const serialized = JSON.stringify(body ?? {});
+            const isWrongAnswer =
+                serialized.includes('print("wrong")') ||
+                serialized.includes('print(\\"wrong\\")') ||
+                serialized.includes("print('wrong')") ||
+                serialized.includes("print(\\'wrong\\')");
+
             await route.fulfill({
                 status: 200,
                 contentType: "application/json",
                 body: JSON.stringify({
-                    ok: true,
-                    finalized: true,
-                    explanation: "Correct.",
+                    ok: !isWrongAnswer,
+                    finalized: !isWrongAnswer,
+                    explanation: isWrongAnswer ? "Not quite." : "Correct.",
                     attempts: {
                         used: 1,
                         max: 3,
@@ -639,8 +658,7 @@ test("project question navigation keeps each exercise workspace isolated in the 
         timeout: 15_000,
     });
 
-    await expect(page).toHaveURL(new RegExp(`${PROJECT_STEP_2_SLUG}$`));
-
+    await expect(page).toHaveURL(new RegExp(`${PROJECT_STEP_2_SLUG}(?:\\?.*)?$`));
     await expectAnyVisibleEditorToContain(
         page,
         Q2_STARTER,
@@ -1491,4 +1509,307 @@ test("reset topic navigates to the first card of the same topic instead of stayi
     });
 
     await expect(page.getByRole("main")).not.toContainText(/Question 2 of 3/);
+});
+
+
+
+
+function withProgressiveLock(url: string) {
+    return `${url}?progressive=1`;
+}
+
+function freshModuleProgress() {
+    return {
+        topics: {
+            "e2e-review-topic": {
+                readingDone: {},
+                cardsDone: {},
+                quizzesDone: {},
+                quizState: {},
+            },
+        },
+    };
+}
+
+function projectProgressWithStep2Incomplete() {
+    return {
+        topics: {
+            "e2e-review-topic": {
+                readingDone: {
+                    "e2e-reading": true,
+                },
+                cardsDone: {},
+                quizzesDone: {
+                    "review-clone-practice-quiz": true,
+                },
+                quizState: {
+                    "review-clone-project": {
+                        answers: {},
+                        checkedById: {},
+                        excusedById: {},
+                        practiceMeta: {
+                            "e2e-print-name": {
+                                attempts: 1,
+                                ok: true,
+                            },
+                            "e2e-project-step-2": {
+                                attempts: 0,
+                                ok: false,
+                            },
+                            "e2e-project-step-3": {
+                                attempts: 0,
+                                ok: false,
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    };
+}
+
+test("direct URL to locked project exercise redirects to earliest unlocked target", async ({
+                                                                                               page,
+                                                                                           }) => {
+    await installDeterministicReviewCloneMocks(page, {
+        initialProgress: freshModuleProgress(),
+    });
+
+    await page.goto(withProgressiveLock(PROJECT_STEP_2_ROUTE));
+
+    await expect(page.getByRole("main")).toBeVisible({
+        timeout: 30_000,
+    });
+
+    await expect
+        .poll(async () => page.url(), {
+            timeout: 15_000,
+            message:
+                "Locked direct exercise URL should redirect to the first unlocked reading card",
+        })
+        .toContain("/text/e2e-reading");
+
+    await expect(page).not.toHaveURL(new RegExp(`${PROJECT_STEP_2_SLUG}$`));
+    await expect(page.locator(".monaco-editor")).toHaveCount(0);
+});
+
+test("direct URL to locked project exercise does not create or overwrite workspace progress", async ({
+                                                                                                         page,
+                                                                                                     }) => {
+    const savedBodies: any[] = [];
+
+    await installDeterministicReviewCloneMocks(page, {
+        initialProgress: freshModuleProgress(),
+        savedBodies,
+    });
+
+    await page.goto(withProgressiveLock(PROJECT_STEP_2_ROUTE));
+
+    await expect(page.getByRole("main")).toBeVisible({
+        timeout: 30_000,
+    });
+
+    await expect
+        .poll(async () => page.url(), {
+            timeout: 15_000,
+            message:
+                "Locked direct exercise URL should redirect before hydrating the locked exercise workspace",
+        })
+        .toContain("/text/e2e-reading");
+
+    await page.waitForTimeout(1_000);
+
+    const serialized = JSON.stringify(savedBodies);
+
+    expect(serialized).not.toContain("e2e-project-step-2");
+    expect(serialized).not.toContain(Q2_STARTER);
+    expect(serialized).not.toContain(Q2_STARTER_TODO);
+});
+test("project question Next is disabled before current exercise is complete", async ({
+                                                                                         page,
+                                                                                     }) => {
+    await installDeterministicReviewCloneMocks(page, {
+        initialProgress: projectProgressWithStep2Incomplete(),
+    });
+
+    await page.goto(withProgressiveLock(PROJECT_STEP_2_ROUTE));
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 2 of 3/, {
+        timeout: 15_000,
+    });
+
+    await expect(page).toHaveURL(new RegExp(`${PROJECT_STEP_2_SLUG}(?:\\?.*)?$`));
+
+    const nextButton = projectQuestionNavigator(page)
+        .getByRole("button", { name: /^Next$/i })
+        .nth(1);
+
+    await expect(nextButton).toBeDisabled({
+        timeout: 15_000,
+    });
+
+    await expect(projectQuestionCard(page)).not.toContainText(/Question 3 of 3/);
+    await expect(page.getByText(/complete this step to continue/i)).toHaveCount(0);
+});
+test("project question Previous can return to completed previous exercise while future exercise stays locked", async ({
+                                                                                                                          page,
+                                                                                                                      }) => {
+    await installDeterministicReviewCloneMocks(page, {
+        initialProgress: projectProgressWithStep2Incomplete(),
+    });
+
+    await page.goto(withProgressiveLock(PROJECT_STEP_2_ROUTE));
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 2 of 3/, {
+        timeout: 15_000,
+    });
+
+    await projectQuestionNavigator(page)
+        .getByRole("button", { name: /^Previous$/i })
+        .nth(1)
+        .click();
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 1 of 3/, {
+        timeout: 15_000,
+    });
+
+    await projectQuestionNavigator(page)
+        .getByRole("button", { name: /^Next$/i })
+        .nth(1)
+        .click();
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 2 of 3/, {
+        timeout: 15_000,
+    });
+
+    const step2Url = page.url();
+
+    const nextButton = projectQuestionNavigator(page)
+        .getByRole("button", { name: /^Next$/i })
+        .nth(1);
+
+    await expect(nextButton).toBeDisabled({
+        timeout: 15_000,
+    });
+
+    await expect(page).toHaveURL(step2Url);
+    await expect(projectQuestionCard(page)).toContainText(/Question 2 of 3/, {
+        timeout: 15_000,
+    });
+    await expect(projectQuestionCard(page)).not.toContainText(/Question 3 of 3/);
+    await expect(page.getByText(/complete this step to continue/i)).toHaveCount(0);
+});
+test("sidebar topic click cannot bypass progressive unlock when module is fresh", async ({
+                                                                                             page,
+                                                                                         }) => {
+    await installDeterministicReviewCloneMocks(page, {
+        initialProgress: freshModuleProgress(),
+    });
+
+    await page.goto(withProgressiveLock(PROJECT_STEP_2_ROUTE));
+
+    await expect(page.getByRole("main")).toBeVisible({
+        timeout: 30_000,
+    });
+
+    await expect
+        .poll(async () => page.url(), {
+            timeout: 15_000,
+            message:
+                "Fresh module should redirect locked exercise route to first reading card",
+        })
+        .toContain("/text/e2e-reading");
+
+    const beforeUrl = page.url();
+
+    const sidebarButtons = page
+        .getByRole("button")
+        .filter({ hasText: /E2E Review Topic|Review Clone Project A|Build/i });
+
+    if ((await sidebarButtons.count()) > 0) {
+        await sidebarButtons.last().click({ force: true });
+    }
+
+    await expect(page).toHaveURL(beforeUrl);
+    await expect(page.locator(".monaco-editor")).toHaveCount(0);
+});
+
+test("correct project check auto-advances to next exercise under progressive lock", async ({ page }) => {
+    await installDeterministicReviewCloneMocks(page, {
+        initialProgress: projectProgressWithStep2Incomplete(),
+    });
+
+    await page.goto(withProgressiveLock(PROJECT_STEP_2_ROUTE));
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 2 of 3/, {
+        timeout: 15_000,
+    });
+
+    await replaceMonacoText(page, Q2_SOLUTION);
+
+    await projectQuestionCard(page)
+        .getByRole("button", { name: /check this answer/i })
+        .click();
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 3 of 3/, {
+        timeout: 15_000,
+    });
+
+    await expect(page).toHaveURL(new RegExp(`${PROJECT_STEP_3_SLUG}(?:\\?.*)?$`));
+});
+
+test("wrong project check stays on current exercise under progressive lock", async ({ page }) => {
+    await installDeterministicReviewCloneMocks(page, {
+        initialProgress: projectProgressWithStep2Incomplete(),
+    });
+
+    await page.goto(withProgressiveLock(PROJECT_STEP_2_ROUTE));
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 2 of 3/, {
+        timeout: 15_000,
+    });
+
+    await replaceMonacoText(page, `print("wrong")`);
+
+    await projectQuestionCard(page)
+        .getByRole("button", { name: /check this answer/i })
+        .click();
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 2 of 3/, {
+        timeout: 5_000,
+    });
+
+    await expect(projectQuestionCard(page)).not.toContainText(/Question 3 of 3/);
+
+    await expect(page).toHaveURL(new RegExp(`${PROJECT_STEP_2_SLUG}(?:\\?.*)?$`));
+});
+
+test("Mark as read advances to next card without showing the progressive lock banner", async ({ page }) => {
+    await installDeterministicReviewCloneMocks(page, {
+        initialProgress: freshModuleProgress(),
+    });
+
+    await page.goto(withProgressiveLock(FIRST_READING_CARD_ROUTE));
+
+    await expect(page).toHaveURL(new RegExp(`${FIRST_READING_CARD_SLUG}(?:\\?.*)?$`), {
+        timeout: 15_000,
+    });
+
+    const main = page.getByRole("main");
+
+    const markAsReadButton = main
+        .getByRole("button", { name: /mark as read|complete|continue/i })
+        .first();
+
+    await expect(markAsReadButton).toBeEnabled({
+        timeout: 15_000,
+    });
+
+    await markAsReadButton.click();
+
+    await expect(page).not.toHaveURL(new RegExp(`${FIRST_READING_CARD_SLUG}(?:\\?.*)?$`), {
+        timeout: 15_000,
+    });
+
+    await expect(page.getByText(/complete this step to continue/i)).toHaveCount(0);
 });

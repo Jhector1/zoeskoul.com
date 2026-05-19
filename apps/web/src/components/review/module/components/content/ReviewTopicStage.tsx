@@ -21,6 +21,9 @@ type Props = {
     viewCards: ReviewCard[];
     viewTid: string;
     activeCardIndex: number;
+    maxUnlockedCardIndex?: number;
+    progressiveLockMessage?: string | null;
+    onLockedNavigate?: () => void;
     navModes: { cards: "scroll" | "slideshow"; quiz: "scroll" | "slideshow" };
     reduceMotion: boolean;
     tp: ReviewTopicProgress;
@@ -60,6 +63,9 @@ export default function ReviewTopicStage({
     viewCards,
     viewTid,
     activeCardIndex,
+                                             maxUnlockedCardIndex,
+                                             progressiveLockMessage,
+                                             onLockedNavigate,
     navModes,
     reduceMotion,
     tp,
@@ -138,6 +144,10 @@ export default function ReviewTopicStage({
                         onActiveCardIndexChange={onActiveCardIndexChange}
                         onNavigateToExerciseRoute={onNavigateToExerciseRoute}
                         onBeforeCardNavigate={onBeforeCardNavigate}
+
+                        maxUnlockedCardIndex={maxUnlockedCardIndex}
+                        progressiveLockMessage={progressiveLockMessage}
+                        onLockedNavigate={onLockedNavigate}
                     />
                     <ReviewTopicCompletion
                         viewIsComplete={viewIsComplete}

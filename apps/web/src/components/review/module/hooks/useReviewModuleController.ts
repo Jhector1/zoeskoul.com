@@ -58,6 +58,10 @@ import {
 import { buildReviewTargetRegistry } from "../runtime/reviewTargetRegistry";
 import { resolveFlowNavigationConfig } from "@/components/review/navigation/FlowNavigator";
 import {useTaggedT} from "@/i18n/tagged";
+import {
+    computeProgressiveUnlock, firstRouteTargetForUnlockedTopic,
+    getTargetKeyForRouteTarget, maxUnlockedCardIndexForTopic
+} from "@/components/review/module/runtime/progressiveUnlock";
 
 function registryEntryToRouteTarget(entry: any): ReviewResolvedRouteTarget | null {
     if (!entry) return null;
@@ -88,7 +92,9 @@ function registryEntryToRouteTarget(entry: any): ReviewResolvedRouteTarget | nul
         targetSlug: entry.targetSlug,
     };
 }
-
+type NavigateToResolvedTargetOptions = {
+    bypassProgressiveLock?: boolean;
+};
 function firstNonBlank(...values: Array<string | null | undefined>) {
     for (const value of values) {
         if (typeof value === "string" && value.trim()) return value;
@@ -256,16 +262,6 @@ export function useReviewModuleController({
 
         const runtimeStore = useReviewRuntimeStore.getState();
         runtimeStore.setTargetRegistry(targetRegistry);
-
-        /**
-         * Keep route-owned exercise editor seeding deterministic in the same
-         * commit that publishes the registry to the runtime store. When full
-         * suites run, the Tools rail can mount before a later effect observes
-         * the store registry, which leaves CodeToolPane waiting forever with no
-         * Monaco editor. Passing the registry directly removes that race while
-         * preserving the store copy for later navigation.
-         */
-        runtimeStore.syncActiveTarget(routeTargetRef.current, targetRegistry);
     }, [targetRegistry]);
     const flushAll = useCallback(async () => {
         store.flushToolSnapshot();
@@ -333,9 +329,62 @@ export function useReviewModuleController({
 
     const routeEditorOwnerKey = routeEditorEntry?.ownerKey ?? null;
     const routeEditorToolScopeKey = routeEditorEntry?.toolScopeKey ?? routeEditorOwnerKey ?? null;
+    const [progressiveLockMessage] = useState<string | null>(null);
+    const progressiveUnlock = useMemo(
+        () =>
+            computeProgressiveUnlock({
+                registry: targetRegistry,
+                progress,
+                progressHydrated,
+                unlockAll,
+            }),
+        [targetRegistry, progress, progressHydrated, unlockAll],
+    );
 
+    const trustedProgressiveBypassTargetKeyRef = useRef<string | null>(null);
+
+    const routeTargetKey = useMemo(
+        () => getTargetKeyForRouteTarget(targetRegistry, routeTarget),
+        [targetRegistry, routeTarget],
+    );
+
+    const routeTargetTrustedBypass =
+        Boolean(routeTargetKey) &&
+        trustedProgressiveBypassTargetKeyRef.current === routeTargetKey;
+
+    const routeTargetUnlocked =
+        routeTargetTrustedBypass ||
+        unlockAll ||
+        !progressHydrated ||
+        !routeTargetKey ||
+        progressiveUnlock.unlockedTargetKeys.has(routeTargetKey);
+    useEffect(() => {
+        const trustedKey = trustedProgressiveBypassTargetKeyRef.current;
+
+        if (!trustedKey) return;
+
+        if (progressiveUnlock.unlockedTargetKeys.has(trustedKey)) {
+            trustedProgressiveBypassTargetKeyRef.current = null;
+        }
+    }, [progressiveUnlock.unlockedTargetKeys]);
+    const firstUnlockedRouteTarget = useMemo(() => {
+        if (!targetRegistry) return null;
+
+        const key = progressiveUnlock.earliestUnlockedTargetKey;
+        const entry = key ? targetRegistry.byKey[key] ?? null : null;
+
+        return registryEntryToRouteTarget(entry);
+    }, [progressiveUnlock.earliestUnlockedTargetKey, targetRegistry]);
+
+    const showProgressiveLockMessage = useCallback(() => {
+        /**
+         * Progressive locking is enforced by disabled navigation and route guards.
+         * Do not show a large warning during normal learning flow.
+         */
+    }, []);
     useEffect(() => {
         if (!routeTarget) return;
+        if (!routeTargetUnlocked) return;
 
         const normalizedPath = buildRoutePathForCurrentSurface(routeTarget);
         const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
@@ -343,7 +392,7 @@ export function useReviewModuleController({
         if (currentPath !== normalizedPath && typeof window !== "undefined") {
             window.history.replaceState(window.history.state, "", normalizedPath);
         }
-    }, [buildRoutePathForCurrentSurface, routeTarget]);
+    }, [buildRoutePathForCurrentSurface, routeTarget, routeTargetUnlocked]);
     useEffect(() => {
         if (typeof window === "undefined") return;
 
@@ -372,7 +421,29 @@ export function useReviewModuleController({
                         ],
                     )
                     : null;
-            const nextResolved = registryResolved ?? resolved;
+            let nextResolved = registryResolved ?? resolved;
+
+            const nextTargetKey = getTargetKeyForRouteTarget(targetRegistry, nextResolved);
+            const nextTargetTrustedBypass =
+                Boolean(nextTargetKey) &&
+                trustedProgressiveBypassTargetKeyRef.current === nextTargetKey;
+
+            const nextIsUnlocked =
+                nextTargetTrustedBypass ||
+                unlockAll ||
+                !progressHydrated ||
+                !nextTargetKey ||
+                progressiveUnlock.unlockedTargetKeys.has(nextTargetKey);
+
+            if (!nextIsUnlocked && firstUnlockedRouteTarget) {
+                nextResolved = firstUnlockedRouteTarget;
+                window.history.replaceState(
+                    window.history.state,
+                    "",
+                    buildRoutePathForCurrentSurface(firstUnlockedRouteTarget),
+                );
+                showProgressiveLockMessage();
+            }
 
             setRouteTarget((prev): ReviewResolvedRouteTarget | null => {
                 if (
@@ -394,7 +465,20 @@ export function useReviewModuleController({
 
         window.addEventListener("popstate", syncFromLocation);
         return () => window.removeEventListener("popstate", syncFromLocation);
-    }, [catalogSlug, locale, mod, moduleSlug, subjectSlug, targetRegistry]);
+    }, [
+        buildRoutePathForCurrentSurface,
+        catalogSlug,
+        firstUnlockedRouteTarget,
+        locale,
+        mod,
+        moduleSlug,
+        progressHydrated,
+        progressiveUnlock.unlockedTargetKeys,
+        showProgressiveLockMessage,
+        subjectSlug,
+        targetRegistry,
+        unlockAll,
+    ]);
 
     const effectiveViewTopicId = routeTarget?.topicId ?? viewTopicId;
 
@@ -419,8 +503,17 @@ export function useReviewModuleController({
     const syncActiveTarget = useReviewRuntimeStore((s) => s.syncActiveTarget);
     useEffect(() => {
         if (!targetRegistry) return;
+        if (!progressHydrated) return;
+        if (!routeTargetUnlocked) return;
+
         syncActiveTarget(routeTarget, targetRegistry);
-    }, [routeTarget, progressHydrated, syncActiveTarget, targetRegistry]);
+    }, [
+        routeTarget,
+        progressHydrated,
+        routeTargetUnlocked,
+        syncActiveTarget,
+        targetRegistry,
+    ]);
 
     const panels = useReviewPanels({ footerInsetPx });
 
@@ -441,6 +534,9 @@ export function useReviewModuleController({
         setViewTopicId,
         viewTopicId,
     ]);
+
+
+
 
     useEffect(() => {
         if (!progressHydrated) return;
@@ -556,8 +652,39 @@ export function useReviewModuleController({
     });
 
     const navigateToResolvedTarget = useCallback(
-        async (target: ReviewResolvedRouteTarget | null, mode: "push" | "replace" = "push") => {
+        async (
+            target: ReviewResolvedRouteTarget | null,
+            mode: "push" | "replace" = "push",
+            options: NavigateToResolvedTargetOptions = {},
+        ) => {
             if (!target) return;
+
+            const bypassProgressiveLock = Boolean(options.bypassProgressiveLock);
+
+            const nextTargetKey = getTargetKeyForRouteTarget(targetRegistry, target);
+
+            if (bypassProgressiveLock && nextTargetKey) {
+                trustedProgressiveBypassTargetKeyRef.current = nextTargetKey;
+            } else if (!bypassProgressiveLock) {
+                trustedProgressiveBypassTargetKeyRef.current = null;
+            }
+
+            const nextIsUnlocked =
+                bypassProgressiveLock ||
+                unlockAll ||
+                !progressHydrated ||
+                !nextTargetKey ||
+                progressiveUnlock.unlockedTargetKeys.has(nextTargetKey);
+
+            if (!nextIsUnlocked) {
+                showProgressiveLockMessage();
+
+                if (firstUnlockedRouteTarget && mode === "replace") {
+                    target = firstUnlockedRouteTarget;
+                } else {
+                    return;
+                }
+            }
 
             const href = buildRoutePathForCurrentSurface(target);
 
@@ -583,9 +710,33 @@ export function useReviewModuleController({
             beginRouteTransition,
             buildRoutePathForCurrentSurface,
             finishRouteTransition,
+            firstUnlockedRouteTarget,
             flushAll,
+            progressHydrated,
+            progressiveUnlock.unlockedTargetKeys,
+            showProgressiveLockMessage,
+            targetRegistry,
+            unlockAll,
         ],
     );
+    useEffect(() => {
+        if (!progressHydrated) return;
+        if (!targetRegistry) return;
+        if (!routeTarget) return;
+        if (routeTargetUnlocked) return;
+        if (!firstUnlockedRouteTarget) return;
+
+        void navigateToResolvedTarget(firstUnlockedRouteTarget, "replace");
+        showProgressiveLockMessage();
+    }, [
+        firstUnlockedRouteTarget,
+        navigateToResolvedTarget,
+        progressHydrated,
+        routeTarget,
+        routeTargetUnlocked,
+        showProgressiveLockMessage,
+        targetRegistry,
+    ]);
 
     const showSkeleton = useSkeletonGate({
         ready: progressHydrated,
@@ -598,17 +749,50 @@ export function useReviewModuleController({
     const reduceMotion = useReduceMotion();
     const [showMask, setShowMask] = useState(false);
 
-    const handleNavigateCardIndex = useCallback((index: number) => {
-        const nextCard = viewCards[Math.max(0, Math.min(viewCards.length - 1, index))] ?? null;
+    const maxUnlockedCardIndex = useMemo(
+        () =>
+            maxUnlockedCardIndexForTopic({
+                registry: targetRegistry,
+                topicId: viewTid,
+                viewCards,
+                unlockedTargetKeys: progressiveUnlock.unlockedTargetKeys,
+            }),
+        [progressiveUnlock.unlockedTargetKeys, targetRegistry, viewCards, viewTid],
+    );
+
+    const handleNavigateCardIndex = useCallback((
+        index: number,
+        options: NavigateToResolvedTargetOptions = {},
+    ) => {
+        const clamped = Math.max(0, Math.min(viewCards.length - 1, index));
+        const bypassProgressiveLock = Boolean(options.bypassProgressiveLock);
+
+        if (!bypassProgressiveLock && !unlockAll && clamped > maxUnlockedCardIndex) {
+            showProgressiveLockMessage();
+            return;
+        }
+
+        const nextCard = viewCards[clamped] ?? null;
         if (!nextCard) return;
+
         void navigateToResolvedTarget(
             buildReviewCardRouteTarget({
                 mod,
                 topicId: viewTid,
                 card: nextCard,
             }),
+            "push",
+            { bypassProgressiveLock },
         );
-    }, [mod, navigateToResolvedTarget, viewCards, viewTid]);
+    }, [
+        maxUnlockedCardIndex,
+        mod,
+        navigateToResolvedTarget,
+        showProgressiveLockMessage,
+        unlockAll,
+        viewCards,
+        viewTid,
+    ]);
 
     useEffect(() => {
         if (reduceMotion) return;
@@ -978,6 +1162,21 @@ export function useReviewModuleController({
                 unlockAll,
                 progressHydrated,
                 progress,
+            }).map((item) => {
+                if (unlockAll) return item;
+
+                const hasUnlockedTarget = Boolean(
+                    firstRouteTargetForUnlockedTopic({
+                        registry: targetRegistry,
+                        topicId: item.id,
+                        unlockedTargetKeys: progressiveUnlock.unlockedTargetKeys,
+                    }),
+                );
+
+                return {
+                    ...item,
+                    disabled: item.disabled || !hasUnlockedTarget,
+                };
             }),
         [
             topics,
@@ -988,6 +1187,8 @@ export function useReviewModuleController({
             unlockAll,
             progressHydrated,
             progress,
+            progressiveUnlock.unlockedTargetKeys,
+            targetRegistry,
         ],
     );
 
@@ -1025,8 +1226,9 @@ export function useReviewModuleController({
                 sectionSlug: routeTarget?.sectionSlug ?? sectionSlug,
             });
 
-            await navigateToResolvedTarget(nextTarget, "push");
-        },
+            await navigateToResolvedTarget(nextTarget, "push", {
+                bypassProgressiveLock: true,
+            });        },
         [
             mod,
             moduleSlug,
@@ -1097,7 +1299,9 @@ export function useReviewModuleController({
             await tool.bindCodeInput(args as any);
 
             if (!routeAlreadyActive) {
-                void navigateToResolvedTarget(nextTarget, "push");
+                void navigateToResolvedTarget(nextTarget, "push", {
+                    bypassProgressiveLock: true,
+                });
             }
         },
         [
@@ -1236,8 +1440,27 @@ export function useReviewModuleController({
                 unlockAll,
                 moduleProgress,
                 onGoToTopic: (tid: string) => {
+                    const unlockedEntry = firstRouteTargetForUnlockedTopic({
+                        registry: targetRegistry,
+                        topicId: tid,
+                        unlockedTargetKeys: progressiveUnlock.unlockedTargetKeys,
+                    });
+
+                    const unlockedTarget = registryEntryToRouteTarget(unlockedEntry);
+
+                    if (!unlockedTarget && !unlockAll) {
+                        showProgressiveLockMessage();
+                        return;
+                    }
+
+                    if (unlockedTarget) {
+                        void navigateToResolvedTarget(unlockedTarget);
+                        return;
+                    }
+
                     const topic = topics.find((item) => item.id === tid) ?? null;
                     const card = topic?.cards?.[0] ?? null;
+
                     if (topic && card) {
                         void navigateToResolvedTarget(
                             buildReviewCardRouteTarget({
@@ -1360,8 +1583,27 @@ export function useReviewModuleController({
                 unlockAll,
                 moduleProgress,
                 onGoToTopic: (tid: string) => {
+                    const unlockedEntry = firstRouteTargetForUnlockedTopic({
+                        registry: targetRegistry,
+                        topicId: tid,
+                        unlockedTargetKeys: progressiveUnlock.unlockedTargetKeys,
+                    });
+
+                    const unlockedTarget = registryEntryToRouteTarget(unlockedEntry);
+
+                    if (!unlockedTarget && !unlockAll) {
+                        showProgressiveLockMessage();
+                        return;
+                    }
+
+                    if (unlockedTarget) {
+                        void navigateToResolvedTarget(unlockedTarget);
+                        return;
+                    }
+
                     const topic = topics.find((item) => item.id === tid) ?? null;
                     const card = topic?.cards?.[0] ?? null;
+
                     if (topic && card) {
                         void navigateToResolvedTarget(
                             buildReviewCardRouteTarget({
@@ -1371,7 +1613,6 @@ export function useReviewModuleController({
                             }),
                         );
                     }
-                    panels.setMobileTopicsOpen(false);
                 },
                 onResetModule: resetFlow.requestResetModule,
                 onCollapse: () => panels.setMobileTopicsOpen(false),
@@ -1397,6 +1638,9 @@ export function useReviewModuleController({
             viewTid,
             activeCardIndex,
             navModes: resolvedNavModes,
+            maxUnlockedCardIndex,
+            progressiveLockMessage,
+            onLockedNavigate: showProgressiveLockMessage,
             reduceMotion,
             tp: viewProg,
             progressHydrated,

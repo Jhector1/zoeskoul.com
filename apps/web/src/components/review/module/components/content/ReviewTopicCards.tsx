@@ -42,6 +42,9 @@ type Props = {
   motionKey: string;
   viewCards: ReviewCard[];
   activeCardIndex: number;
+  maxUnlockedCardIndex?: number;
+  progressiveLockMessage?: string | null;
+  onLockedNavigate?: () => void;
   navModes: { cards: "scroll" | "slideshow"; quiz: "scroll" | "slideshow" };
   reduceMotion: boolean;
   tp: ReviewTopicProgress;
@@ -72,6 +75,9 @@ export default function ReviewTopicCards({
   motionKey,
   viewCards,
   activeCardIndex,
+                                           maxUnlockedCardIndex,
+                                           progressiveLockMessage,
+                                           onLockedNavigate,
   navModes,
   reduceMotion,
   tp,
@@ -97,12 +103,17 @@ export default function ReviewTopicCards({
   onBeforeCardNavigate,
 }: Props) {
   const storeCards = useReviewRuntimeStore((s) => s.cards);
-
+  const safeMaxUnlockedCardIndex = Math.max(
+      0,
+      Math.min(viewCards.length - 1, maxUnlockedCardIndex ?? activeCardIndex),
+  );
   const handleNavigate = React.useCallback(
       async (index: number) => {
         const clampedIndex = Math.max(0, Math.min(viewCards.length - 1, index));
         if (clampedIndex === activeCardIndex) return;
-
+        if (clampedIndex > safeMaxUnlockedCardIndex) {
+          return;
+        }
         const fromCard = viewCards[activeCardIndex] ?? null;
 
         /**
@@ -159,6 +170,8 @@ export default function ReviewTopicCards({
         sketch,
         viewCards,
         viewTid,
+        onLockedNavigate,
+        safeMaxUnlockedCardIndex,
       ],
   );
   const activeCard = viewCards[activeCardIndex] ?? null;
@@ -166,6 +179,7 @@ export default function ReviewTopicCards({
   const activeCardCanAdvance =
       activeCardDone || (activeCard ? !isQuizLikeCard(activeCard) : false);
   const hasNextCard = activeCardIndex < Math.max(0, viewCards.length - 1);
+  const nextCardUnlocked = activeCardIndex + 1 <= safeMaxUnlockedCardIndex;
   return (
     <div className="flex min-h-0 shrink-0 flex-col">
       <AnimatePresence initial={false} mode="wait">
@@ -177,6 +191,15 @@ export default function ReviewTopicCards({
             transition={reduceMotion ? { duration: 0 } : TOPIC_PANE_TRANSITION}
             className="flex min-h-0 shrink-0 flex-col will-change-transform"
         >
+          {/*{progressiveLockMessage ? (*/}
+          {/*    <div*/}
+          {/*        role="status"*/}
+          {/*        data-testid="review-progressive-lock-message"*/}
+          {/*        className="mb-3 rounded-md border border-amber-300/70 bg-amber-50 px-3 py-2 text-sm font-medium text-amber-900 dark:border-amber-400/30 dark:bg-amber-950/30 dark:text-amber-100"*/}
+          {/*    >*/}
+          {/*      {progressiveLockMessage}*/}
+          {/*    </div>*/}
+          {/*) : null}*/}
           <FlowNavigator
             items={viewCards}
             mode={navModes.cards}
@@ -186,7 +209,7 @@ export default function ReviewTopicCards({
             getKey={(card) => card.id}
             getProgressLabel={(index, total) => `Item ${index + 1} of ${total}`}
             canGoPrev={activeCardIndex > 0}
-            canGoNext={hasNextCard && activeCardCanAdvance}
+            canGoNext={hasNextCard && activeCardCanAdvance && nextCardUnlocked}
             onPrev={() => handleNavigate(activeCardIndex - 1)}
             onNext={() => handleNavigate(activeCardIndex + 1)}
             renderItem={(card, cardIndex: number) => {

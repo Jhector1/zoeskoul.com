@@ -5,9 +5,37 @@ import { notFound } from "next/navigation";
 
 export const runtime = "nodejs";
 
+type PageSearchParams = Record<string, string | string[] | undefined>;
+
+function searchParamIsTrue(
+    searchParams: PageSearchParams,
+    key: string,
+) {
+    const value = searchParams[key];
+
+    if (Array.isArray(value)) {
+        return value.includes("1") || value.includes("true");
+    }
+
+    return value === "1" || value === "true";
+}
+
+function allowE2eUnlockAll(searchParams: PageSearchParams) {
+    /**
+     * E2E-only escape hatch for tests that are not testing progressive locking.
+     * The progressive-lock behavior has its own dedicated tests.
+     */
+    if (process.env.E2E_ALLOW_DEV_ROUTES !== "1") {
+        return false;
+    }
+
+    return searchParamIsTrue(searchParams, "e2eUnlockAll");
+}
+
 export default async function Page({
-    params,
-}: {
+                                       params,
+                                       searchParams,
+                                   }: {
     params: Promise<{
         locale: string;
         catalogSlug: string;
@@ -18,10 +46,9 @@ export default async function Page({
         targetKind: string;
         targetSlug: string;
     }>;
+    searchParams?: Promise<PageSearchParams>;
 }) {
     const {
-        locale,
-        catalogSlug,
         subjectSlug,
         moduleSlug,
         sectionSlug,
@@ -29,6 +56,8 @@ export default async function Page({
         targetKind,
         targetSlug,
     } = await params;
+
+    const resolvedSearchParams = (await searchParams) ?? {};
 
     const { mod, canUnlockAll } = await loadReviewModulePageData({
         subjectSlug,
@@ -51,8 +80,6 @@ export default async function Page({
         },
     });
 
-    // If the route doesn't resolve to a valid target, we might want to redirect
-    // to the default target for this module.
     if (
         !target ||
         target.sectionSlug !== sectionSlug ||
@@ -60,10 +87,13 @@ export default async function Page({
         target.targetKind !== targetKind ||
         target.targetSlug !== targetSlug
     ) {
-        // Validation failed or canonicalized.
-        // For now, let's just let the client shell handle it if target exists,
-        // but it's better to ensure we are on a valid canonical path.
+        // Keep current behavior: let the client shell handle canonicalization.
     }
 
-    return <ReviewModulePageClient canUnlockAll={canUnlockAll} mod={mod} />;
+    return (
+        <ReviewModulePageClient
+            canUnlockAll={canUnlockAll || allowE2eUnlockAll(resolvedSearchParams)}
+            mod={mod}
+        />
+    );
 }

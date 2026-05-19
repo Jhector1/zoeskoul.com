@@ -325,7 +325,26 @@ const reviewCloneModule: ReviewModule = {
     contentVersion: null,
 };
 
-export default async function Page() {
+type DevCloneSearchParams = Record<string, string | string[] | undefined>;
+
+function searchParamIsTrue(
+    searchParams: DevCloneSearchParams,
+    key: string,
+) {
+    const value = searchParams[key];
+
+    if (Array.isArray(value)) {
+        return value.includes("1") || value.includes("true");
+    }
+
+    return value === "1" || value === "true";
+}
+
+export default async function Page({
+                                       searchParams,
+                                   }: {
+    searchParams?: Promise<DevCloneSearchParams>;
+}) {
     if (
         process.env.NODE_ENV === "production" &&
         process.env.E2E_ALLOW_DEV_ROUTES !== "1"
@@ -333,5 +352,16 @@ export default async function Page() {
         notFound();
     }
 
-    return <ReviewModulePageClient canUnlockAll mod={reviewCloneModule} />;
+    const resolvedSearchParams = (await searchParams) ?? {};
+    const progressiveLockMode = searchParamIsTrue(
+        resolvedSearchParams,
+        "progressive",
+    );
+
+    return (
+        <ReviewModulePageClient
+            canUnlockAll={!progressiveLockMode}
+            mod={reviewCloneModule}
+        />
+    );
 }

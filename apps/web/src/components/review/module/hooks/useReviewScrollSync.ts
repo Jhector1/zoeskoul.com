@@ -17,8 +17,10 @@ type Args = {
     unlockAll: boolean;
     showSkeleton: boolean;
     routeOwned?: boolean;
-    onNavigateToCardIndex?: (index: number) => void;
-};
+    onNavigateToCardIndex?: (
+        index: number,
+        options?: { bypassProgressiveLock?: boolean },
+    ) => void;};
 
 export function useReviewScrollSync({
                                         subjectSlug,
@@ -188,7 +190,9 @@ export function useReviewScrollSync({
 
             if (navModes.cards === "slideshow") {
                 if (routeOwned && onNavigateToCardIndex) {
-                    onNavigateToCardIndex(nextIndex);
+                    onNavigateToCardIndex(nextIndex, {
+                        bypassProgressiveLock: true,
+                    });
                     return;
                 }
                 setActiveCardIndex(nextIndex);
