@@ -48,6 +48,61 @@ const blankFallbackSolutionFiles = {
     "main.py": "",
 };
 
+
+const sqlRuntimeDefaults = {
+    kind: "sql",
+    datasetId: "products_catalog",
+    fixedSqlDialect: "sqlite",
+    resultShape: "table",
+} as const;
+
+const sqlReviewCloneTopic = {
+    id: "e2e-sql-topic",
+    label: "E2E SQL Topic",
+    minutes: 5,
+    summary:
+        "A deterministic SQL topic used to verify module runtimeDefaults hydrate the Tools panel outside exercise scope.",
+    meta: {},
+    cards: [
+        {
+            type: "text",
+            id: "e2e-sql-reading",
+            title: "SQL module runtimeDefaults",
+            markdown:
+                "This card is intentionally not an exercise. The right Tools rail should still receive the module-level SQL dataset.",
+        },
+        {
+            type: "text",
+            id: "e2e-sql-second-reading",
+            title: "Second SQL reading card",
+            markdown:
+                "This second non-exercise SQL card verifies runtimeDefaults survive card navigation.",
+        },
+    ],
+} satisfies ReviewModule["topics"][number];
+
+const sqlReviewCloneSection = {
+    id: "e2e-sql-section",
+    slug: "e2e-sql-section",
+    title: "E2E SQL Section",
+    summary: "A dev-only SQL section for runtime default tests.",
+    description:
+        "This clone intentionally tests SQL module runtimeDefaults outside exercise scope.",
+    order: 1,
+    topics: [sqlReviewCloneTopic],
+} satisfies NonNullable<ReviewModule["sections"]>[number];
+
+const sqlReviewCloneModule: ReviewModule = {
+    id: "e2e-sql-review-clone",
+    title: "E2E SQL Review Module Clone",
+    subtitle:
+        "Dev-only SQL clone that verifies module runtimeDefaults reach the real Tools rail.",
+    startPracticeSectionSlug: "e2e-sql-section",
+    runtimeDefaults: sqlRuntimeDefaults,
+    topics: [sqlReviewCloneTopic],
+    sections: [sqlReviewCloneSection],
+    contentVersion: null,
+};
 const exerciseADefinition = {
     id: "e2e-print-name",
     title: "Print a name",
@@ -341,8 +396,18 @@ function searchParamIsTrue(
 }
 
 export default async function Page({
+                                       params,
                                        searchParams,
                                    }: {
+    params?: Promise<{
+        locale?: string;
+        subjectSlug?: string;
+        moduleSlug?: string;
+        sectionSlug?: string;
+        topicSlug?: string;
+        targetKind?: string;
+        targetSlug?: string;
+    }>;
     searchParams?: Promise<DevCloneSearchParams>;
 }) {
     if (
@@ -352,16 +417,22 @@ export default async function Page({
         notFound();
     }
 
+    const resolvedParams = (await params) ?? {};
     const resolvedSearchParams = (await searchParams) ?? {};
+
     const progressiveLockMode = searchParamIsTrue(
         resolvedSearchParams,
         "progressive",
     );
 
+    const isSqlClone =
+        resolvedParams.subjectSlug === "sql" ||
+        resolvedParams.moduleSlug === "e2e-sql-review-clone";
+
     return (
         <ReviewModulePageClient
             canUnlockAll={!progressiveLockMode}
-            mod={reviewCloneModule}
+            mod={isSqlClone ? sqlReviewCloneModule : reviewCloneModule}
         />
     );
 }

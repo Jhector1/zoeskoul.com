@@ -1,29 +1,29 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState, useTransition} from "react";
 import {useParams, usePathname} from "next/navigation";
-import { useRouter } from "@/i18n/navigation";
+import {useRouter} from "@/i18n/navigation";
 
-import type { ReviewProgressState } from "@/lib/subjects/progressTypes";
+import type {ReviewProgressState} from "@/lib/subjects/progressTypes";
 
-import { ROUTES } from "@/utils";
+import {ROUTES} from "@/utils";
 
-import { useReviewProgress } from "@/components/review/module/hooks/useReviewProgress";
-import { useAssignmentStatus } from "@/components/review/module/hooks/useAssignmentStatus";
-import { useModuleNav } from "@/components/review/module/hooks/useModuleNav";
-import { useDebouncedSketchState } from "../hooks/useDebouncedSketchState";
-import { useToolCodeRunnerState } from "../hooks/useToolCodeRunnerState";
-import { useSkeletonGate } from "@/components/review/module/hooks/useSkeletonGate";
-import { useReduceMotion } from "../hooks/useReduceMotion";
-import { useSubjectFinish } from "../hooks/useSubjectFinish";
-import { useGamificationSummary } from "@/components/review/module/hooks/useGamificationSummary";
+import {useReviewProgress} from "@/components/review/module/hooks/useReviewProgress";
+import {useAssignmentStatus} from "@/components/review/module/hooks/useAssignmentStatus";
+import {useModuleNav} from "@/components/review/module/hooks/useModuleNav";
+import {useDebouncedSketchState} from "../hooks/useDebouncedSketchState";
+import {useToolCodeRunnerState} from "../hooks/useToolCodeRunnerState";
+import {useSkeletonGate} from "@/components/review/module/hooks/useSkeletonGate";
+import {useReduceMotion} from "../hooks/useReduceMotion";
+import {useSubjectFinish} from "../hooks/useSubjectFinish";
+import {useGamificationSummary} from "@/components/review/module/hooks/useGamificationSummary";
 
-import { useReviewModuleRuntime } from "./useReviewModuleRuntime";
-import { useReviewTopicFlow } from "./useReviewTopicFlow";
-import { useReviewCelebrations } from "./useReviewCelebrations";
-import { useReviewReset } from "./useReviewReset";
-import { useReviewScrollSync } from "./useReviewScrollSync";
-import { useReviewPanels } from "./useReviewPanels";
+import {useReviewModuleRuntime} from "./useReviewModuleRuntime";
+import {useReviewTopicFlow} from "./useReviewTopicFlow";
+import {useReviewCelebrations} from "./useReviewCelebrations";
+import {useReviewReset} from "./useReviewReset";
+import {useReviewScrollSync} from "./useReviewScrollSync";
+import {useReviewPanels} from "./useReviewPanels";
 
-import { prereqsMetForAnyQuizOrProject, isTopicComplete } from "../utils";
+import {prereqsMetForAnyQuizOrProject, isTopicComplete} from "../utils";
 import {
     getModuleProgress,
     getSidebarTopicItems,
@@ -37,31 +37,28 @@ import {
     buildTopicCompletedProgress,
 } from "../actions";
 
-import {
-    STUDENTS_INITIAL_TABLE_SNAPSHOTS,
-    STUDENTS_SQL_SCHEMA,
-    STUDENTS_SQL_SEED,
-} from "../data/studentsSqlFallback";
 
-import type { ReviewModulePageProps, HeaderGamificationVm } from "../types";
-import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
-import { getCardStateKey } from "../runtime/exerciseKeys";
+
+import type {ReviewModulePageProps, HeaderGamificationVm} from "../types";
+import {useReviewRuntimeStore} from "../runtime/reviewRuntimeStore";
+import {getCardStateKey} from "../runtime/exerciseKeys";
 import {
     buildReviewCardRouteTarget,
     buildReviewExerciseRouteTarget,
     parseReviewRouteFromPath,
     buildReviewRoutePath,
     resolveReviewRouteTarget,
-    type ReviewResolvedRouteTarget, buildDefaultReviewRouteTarget,
+    type ReviewResolvedRouteTarget,
 } from "../runtime/reviewRoute";
 
-import { buildReviewTargetRegistry } from "../runtime/reviewTargetRegistry";
-import { resolveFlowNavigationConfig } from "@/components/review/navigation/FlowNavigator";
+import {buildReviewTargetRegistry} from "../runtime/reviewTargetRegistry";
+import {resolveFlowNavigationConfig} from "@/components/review/navigation/FlowNavigator";
 import {useTaggedT} from "@/i18n/tagged";
 import {
     computeProgressiveUnlock, firstRouteTargetForUnlockedTopic,
     getTargetKeyForRouteTarget, maxUnlockedCardIndexForTopic
 } from "@/components/review/module/runtime/progressiveUnlock";
+import {resolveRightRailSqlProps} from "../runtime/resolveRightRailSqlProps";
 
 function registryEntryToRouteTarget(entry: any): ReviewResolvedRouteTarget | null {
     if (!entry) return null;
@@ -92,15 +89,12 @@ function registryEntryToRouteTarget(entry: any): ReviewResolvedRouteTarget | nul
         targetSlug: entry.targetSlug,
     };
 }
+
 type NavigateToResolvedTargetOptions = {
     bypassProgressiveLock?: boolean;
 };
-function firstNonBlank(...values: Array<string | null | undefined>) {
-    for (const value of values) {
-        if (typeof value === "string" && value.trim()) return value;
-    }
-    return undefined;
-}
+
+
 
 export function useReviewModuleController({
                                               mod,
@@ -176,7 +170,7 @@ export function useReviewModuleController({
         flush,
         saveStatus,
         lastSaveError,
-    } = useReviewProgress({ subjectSlug, moduleSlug, locale, firstTopicId });
+    } = useReviewProgress({subjectSlug, moduleSlug, locale, firstTopicId});
 
     const store = useReviewRuntimeStore();
     const flushToolLatestRef = useRef<null | (() => Promise<void>)>(null);
@@ -415,10 +409,10 @@ export function useReviewModuleController({
                 nextRoute && targetRegistry
                     ? registryEntryToRouteTarget(
                         targetRegistry.byKey[
-                            targetRegistry.byRoute[
-                                `${nextRoute.sectionSlug}/${nextRoute.topicSlug}/${nextRoute.targetKind}/${nextRoute.targetSlug}`
+                        targetRegistry.byRoute[
+                            `${nextRoute.sectionSlug}/${nextRoute.topicSlug}/${nextRoute.targetKind}/${nextRoute.targetSlug}`
                             ] ?? ""
-                        ],
+                            ],
                     )
                     : null;
             let nextResolved = registryResolved ?? resolved;
@@ -515,7 +509,7 @@ export function useReviewModuleController({
         targetRegistry,
     ]);
 
-    const panels = useReviewPanels({ footerInsetPx });
+    const panels = useReviewPanels({footerInsetPx});
 
     const sketch = useDebouncedSketchState({});
 
@@ -536,13 +530,11 @@ export function useReviewModuleController({
     ]);
 
 
-
-
     useEffect(() => {
         if (!progressHydrated) return;
         if (!topics.length) return;
 
-        const { changed, nextTopics } = buildNormalizedTopicsProgress(topics, progress ?? null);
+        const {changed, nextTopics} = buildNormalizedTopicsProgress(topics, progress ?? null);
         if (!changed) return;
 
         const next: ReviewProgressState = {
@@ -569,7 +561,6 @@ export function useReviewModuleController({
                 (progress as any)?.moduleCompleted,
             )}`,
     });
-
 
 
     useEffect(() => {
@@ -631,7 +622,7 @@ export function useReviewModuleController({
                 ? `${assignmentStatus.answeredCount}/${assignmentStatus.targetCount} questions`
                 : undefined;
 
-    const nav = useModuleNav({ subjectSlug, moduleSlug });
+    const nav = useModuleNav({subjectSlug, moduleSlug});
 
     const canGoNextModule =
         unlockAll ||
@@ -782,7 +773,7 @@ export function useReviewModuleController({
                 card: nextCard,
             }),
             "push",
-            { bypassProgressiveLock },
+            {bypassProgressiveLock},
         );
     }, [
         maxUnlockedCardIndex,
@@ -906,7 +897,7 @@ export function useReviewModuleController({
         [topics, progress],
     );
 
-    const { summary: gamificationSummary } = useGamificationSummary();
+    const {summary: gamificationSummary} = useGamificationSummary();
 
     const headerGamification = useMemo<HeaderGamificationVm | null>(() => {
         if (!gamificationSummary) return null;
@@ -1003,8 +994,8 @@ export function useReviewModuleController({
         const practiceModuleSlug = (mod as any).practiceSectionSlug ?? moduleSlug;
         const r = await fetch(`/api/modules/${encodeURIComponent(practiceModuleSlug)}/practice/start`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ returnUrl: returnToCurrentModule }),
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({returnUrl: returnToCurrentModule}),
         });
 
         const data = await r.json().catch(() => null);
@@ -1211,7 +1202,7 @@ export function useReviewModuleController({
     }, [flushAll]);
 
     const handleNavigateToExerciseRoute = useCallback(
-        async ({ cardId, exerciseId }: { cardId: string; exerciseId: string }) => {
+        async ({cardId, exerciseId}: { cardId: string; exerciseId: string }) => {
             const normalizedCardId = cardId.trim();
             const normalizedExerciseId = exerciseId.trim();
             if (!normalizedCardId || !normalizedExerciseId) return;
@@ -1228,7 +1219,8 @@ export function useReviewModuleController({
 
             await navigateToResolvedTarget(nextTarget, "push", {
                 bypassProgressiveLock: true,
-            });        },
+            });
+        },
         [
             mod,
             moduleSlug,
@@ -1362,7 +1354,11 @@ export function useReviewModuleController({
     const rightRailExerciseKey = routeCanUseBoundExercise
         ? activeExerciseTarget?.exerciseStateKey ?? tool.boundId ?? null
         : null;
-
+    const rightRailSqlProps = resolveRightRailSqlProps({
+        routeCanUseBoundExercise,
+        tool,
+        topicSqlFallback: runtime.topicSqlFallback,
+    });
     return {
         toolsProvider,
 
@@ -1519,9 +1515,7 @@ export function useReviewModuleController({
                 toolCode: tool.toolCode,
                 toolStdin: tool.toolStdin,
                 toolWorkspace: tool.toolWorkspace,
-                toolSqlDialect: routeCanUseBoundExercise && tool.toolSqlDatasetId
-                    ? tool.toolSqlDialect
-                    : (runtime.topicSqlFallback?.sqlDialect ?? tool.toolSqlDialect),
+
                 ideConfig: tool.toolIdeConfig ?? runtime.effectiveIdeConfig,
                 onChangeCode: tool.setToolCode,
                 onChangeStdin: tool.setToolStdin,
@@ -1533,42 +1527,12 @@ export function useReviewModuleController({
                 codeEnabled: runtime.codeEnabled,
                 showLanguagePicker: false,
                 showSqlDialectPicker: false,
-                sqlResultShape:
-                    routeCanUseBoundExercise &&
-                    (
-                        tool.toolLang === "sql" ||
-                        Boolean(tool.toolSqlDatasetId) ||
-                        Boolean(runtime.topicSqlFallback?.sqlDatasetId)
-                    )
-                        ? ("table" as const)
-                        : undefined,
-                sqlPaneOptions: runtime.effectiveIdeConfig?.sqlPane,
-                sqlDatasetId: routeCanUseBoundExercise
-                    ? firstNonBlank(
-                        tool.toolSqlDatasetId,
-                        runtime.topicSqlFallback?.sqlDatasetId,
-                    )
-                    : undefined,
-                sqlSchemaSql: routeCanUseBoundExercise
-                    ? firstNonBlank(
-                        tool.toolSqlSchemaSql,
-                        runtime.topicSqlFallback?.sqlSchemaSql,
-                        tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SCHEMA,
-                    )
-                    : undefined,
-                sqlSeedSql: routeCanUseBoundExercise
-                    ? firstNonBlank(
-                        tool.toolSqlSeedSql,
-                        runtime.topicSqlFallback?.sqlSeedSql,
-                        tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SEED,
-                    )
-                    : undefined,
-                sqlInitialTableSnapshots:
-                    routeCanUseBoundExercise
-                        ? tool.toolSqlInitialTableSnapshots ??
-                        runtime.topicSqlFallback?.sqlInitialTableSnapshots ??
-                        (tool.toolLang === "sql" ? undefined : STUDENTS_INITIAL_TABLE_SNAPSHOTS)
-                        : undefined,
+                toolSqlDialect: rightRailSqlProps.toolSqlDialect,
+                sqlResultShape: rightRailSqlProps.sqlResultShape,
+                sqlDatasetId: rightRailSqlProps.sqlDatasetId,
+                sqlSchemaSql: rightRailSqlProps.sqlSchemaSql,
+                sqlSeedSql: rightRailSqlProps.sqlSeedSql,
+                sqlInitialTableSnapshots: rightRailSqlProps.sqlInitialTableSnapshots,
             },
         },
 
