@@ -6,20 +6,34 @@
           "label": "Intro to SELECT",
           "summary": "Learn how `SELECT` returns data, how to show all columns or only the ones you need, and how to read simple result tables.",
           "cards": {
-            "sketch0": {
+            "what_select_does": {
               "title": "What does SELECT do?"
             },
-            "sketch1": {
+            "selecting_all_columns_with_star": {
               "title": "How do you show all columns with `*`?"
             },
-            "sketch2": {
+            "selecting_specific_columns": {
               "title": "How do you select only specific columns?"
             },
-            "sketch3": {
+            "query_structure_basics": {
               "title": "What is the basic `SELECT ... FROM ...` structure?"
+            },
+            "project": {
+              "title": "Project: Select Useful Columns"
             },
             "quiz": {
               "title": "Quiz: Intro to SELECT"
+            }
+          },
+          "projectSteps": {
+            "show_all_products": {
+              "title": "Show all products"
+            },
+            "show_product_names": {
+              "title": "Show product names"
+            },
+            "show_name_and_price": {
+              "title": "Show names and prices"
             }
           }
         }
@@ -64,7 +78,6 @@
       "fixedLanguage": "sql",
       "fixedSqlDialect": "sqlite",
       "expectedExampleMeta": "Accepted | Example",
-
       "runtime": {
         "kind": "sql",
         "datasetId": "products_catalog",
@@ -84,7 +97,6 @@
       "fixedLanguage": "sql",
       "fixedSqlDialect": "sqlite",
       "expectedExampleMeta": "Accepted | Example",
-
       "runtime": {
         "kind": "sql",
         "datasetId": "products_catalog",
@@ -94,7 +106,6 @@
     "m1_s01_show_name_and_price": {
       "title": "Show two columns",
       "prompt": "The `products` table already exists.\n\nWrite a query that shows only the `name` and `price` columns from `products`.\n\nRun it and compare the result with the full table.",
-
       "help": {
         "concept": "You can return more than one column by separating column names with commas.",
         "hint_1": "Use both `name` and `price` after `SELECT`.",
@@ -105,7 +116,6 @@
       "fixedLanguage": "sql",
       "fixedSqlDialect": "sqlite",
       "expectedExampleMeta": "Accepted | Example",
-
       "runtime": {
         "kind": "sql",
         "datasetId": "products_catalog",
@@ -125,7 +135,6 @@
       "fixedLanguage": "sql",
       "fixedSqlDialect": "sqlite",
       "expectedExampleMeta": "Accepted | Example",
-
       "runtime": {
         "kind": "sql",
         "datasetId": "products_catalog",
@@ -145,7 +154,6 @@
       "fixedLanguage": "sql",
       "fixedSqlDialect": "sqlite",
       "expectedExampleMeta": "Accepted | Example",
-
       "runtime": {
         "kind": "sql",
         "datasetId": "products_catalog",
@@ -165,7 +173,6 @@
       "fixedLanguage": "sql",
       "fixedSqlDialect": "sqlite",
       "expectedExampleMeta": "Accepted | Example",
-
       "runtime": {
         "kind": "sql",
         "datasetId": "products_catalog",
@@ -438,7 +445,12 @@
       },
       "hint": "Think about what comes back.",
       "template": "`SELECT` asks SQL to return ____.",
-      "choices": ["data", "buttons", "folders", "colors"],
+      "choices": [
+        "data",
+        "buttons",
+        "folders",
+        "colors"
+      ],
       "correct": "data"
     },
     "m1_s01_fill_star_means": {
@@ -451,7 +463,12 @@
       },
       "hint": "Think everything.",
       "template": "In `SELECT * FROM products;`, `*` means ____.",
-      "choices": ["all columns", "one row", "the table name", "only prices"],
+      "choices": [
+        "all columns",
+        "one row",
+        "the table name",
+        "only prices"
+      ],
       "correct": "all columns"
     },
     "m1_s01_fill_from_source": {
@@ -464,7 +481,12 @@
       },
       "hint": "Think source location.",
       "template": "`FROM` tells SQL which ____ to read from.",
-      "choices": ["table", "button", "query", "row order"],
+      "choices": [
+        "table",
+        "button",
+        "query",
+        "row order"
+      ],
       "correct": "table"
     },
     "m1_s01_fill_specific_columns_benefit": {
@@ -477,7 +499,12 @@
       },
       "hint": "Think less output.",
       "template": "Choosing specific columns can return a ____ result.",
-      "choices": ["smaller", "louder", "slower", "darker"],
+      "choices": [
+        "smaller",
+        "louder",
+        "slower",
+        "darker"
+      ],
       "correct": "smaller"
     },
     "m1_s01_fill_name_price_columns": {
@@ -490,7 +517,12 @@
       },
       "hint": "Look at the second selected column.",
       "template": "In `SELECT name, price FROM products;`, the second selected column is ____.",
-      "choices": ["price", "products", "FROM", "SELECT"],
+      "choices": [
+        "price",
+        "products",
+        "FROM",
+        "SELECT"
+      ],
       "correct": "price"
     }
   }

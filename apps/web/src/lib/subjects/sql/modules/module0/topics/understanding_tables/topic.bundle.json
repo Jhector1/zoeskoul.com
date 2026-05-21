@@ -5,38 +5,36 @@
   "sectionSlug": "sql_introduction",
   "prefix": "sql0",
   "minutes": 8,
-
   "topic": {
     "labelKey": "topics.sql.sql_module_0.understanding_tables.label",
     "summaryKey": "topics.sql.sql_module_0.understanding_tables.summary"
   },
-
   "cards": [
     {
-      "id": "sketch0",
+      "id": "rows_and_columns",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_0.understanding_tables.cards.sketch0.title",
+      "titleKey": "topics.sql.sql_module_0.understanding_tables.cards.rows_and_columns.title",
       "sketchId": "rows_and_columns",
       "height": 520
     },
     {
-      "id": "sketch1",
+      "id": "records_and_fields",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_0.understanding_tables.cards.sketch1.title",
+      "titleKey": "topics.sql.sql_module_0.understanding_tables.cards.records_and_fields.title",
       "sketchId": "records_and_fields",
       "height": 520
     },
     {
-      "id": "sketch2",
+      "id": "table_names_and_column_names",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_0.understanding_tables.cards.sketch2.title",
+      "titleKey": "topics.sql.sql_module_0.understanding_tables.cards.table_names_and_column_names.title",
       "sketchId": "table_names_and_column_names",
       "height": 520
     },
     {
-      "id": "sketch3",
+      "id": "reading_data_like_a_spreadsheet",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_0.understanding_tables.cards.sketch3.title",
+      "titleKey": "topics.sql.sql_module_0.understanding_tables.cards.reading_data_like_a_spreadsheet.title",
       "sketchId": "reading_data_like_a_spreadsheet",
       "height": 520
     },
@@ -53,7 +51,6 @@
       }
     }
   ],
-
   "sketches": [
     {
       "id": "rows_and_columns",
@@ -102,7 +99,6 @@
       ]
     }
   ],
-
   "exercises": [
     {
       "id": "m0_s02_rows_go_across",
@@ -110,7 +106,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s02_rows_go_across",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -122,7 +123,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s02_columns_meaning",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -134,7 +140,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s02_record_definition",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -146,7 +157,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s02_field_definition",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -158,7 +174,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s02_names_matter",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -170,7 +191,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s02_reading_order",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -182,23 +208,41 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s02_select_all_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "d"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
       }
     },
-
     {
       "id": "m0_s02_reorder_table_reading_flow",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s02_reorder_table_reading_flow",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -207,10 +251,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s02_reorder_row_column_meaning",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -219,10 +271,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s02_reorder_record_field_relationship",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -231,10 +291,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s02_reorder_good_naming_logic",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -243,13 +311,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s02_reorder_read_table_steps",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
-
     {
       "id": "m0_s02_fill_row_direction",
       "kind": "fill_blank_choice",

@@ -6,20 +6,34 @@
           "label": "Intro to Filtering",
           "summary": "Learn why filtering matters, how `WHERE` works, how exact matching works, and how to write beginner filters for both text and number values.",
           "cards": {
-            "sketch0": {
+            "why_filtering_matters": {
               "title": "Why does filtering matter?"
             },
-            "sketch1": {
+            "the_where_clause": {
               "title": "What does the `WHERE` clause do?"
             },
-            "sketch2": {
+            "matching_exact_values": {
               "title": "How do you match exact values?"
             },
-            "sketch3": {
+            "filtering_numbers_and_text": {
               "title": "How do you filter numbers and text?"
+            },
+            "project": {
+              "title": "Project: Filter Rows"
             },
             "quiz": {
               "title": "Quiz: Intro to Filtering"
+            }
+          },
+          "projectSteps": {
+            "filter_art_products": {
+              "title": "Filter art products"
+            },
+            "filter_stock_10": {
+              "title": "Filter stock value 10"
+            },
+            "filter_id_4_name_price": {
+              "title": "Filter id 4 with name and price"
             }
           }
         }
@@ -409,7 +423,12 @@
       },
       "hint": "Think row condition keyword.",
       "template": "The SQL keyword that filters rows is ____.",
-      "choices": ["WHERE", "TABLE", "SHOW", "VALUE"],
+      "choices": [
+        "WHERE",
+        "TABLE",
+        "SHOW",
+        "VALUE"
+      ],
       "correct": "WHERE"
     },
     "m2_s01_fill_exact_operator": {
@@ -422,7 +441,12 @@
       },
       "hint": "Think exact equality.",
       "template": "An exact match in beginner SQL usually uses ____.",
-      "choices": ["=", "*", ";", ","],
+      "choices": [
+        "=",
+        "*",
+        ";",
+        ","
+      ],
       "correct": "="
     },
     "m2_s01_fill_text_quotes": {
@@ -435,7 +459,12 @@
       },
       "hint": "Think text formatting.",
       "template": "Text values in beginner SQL filters usually go in ____.",
-      "choices": ["quotes", "brackets", "headers", "comments"],
+      "choices": [
+        "quotes",
+        "brackets",
+        "headers",
+        "comments"
+      ],
       "correct": "quotes"
     },
     "m2_s01_fill_number_quotes": {
@@ -448,7 +477,12 @@
       },
       "hint": "Think numbers as numbers.",
       "template": "Number values in beginner SQL filters usually need ____.",
-      "choices": ["no quotes", "double quotes", "extra commas", "table aliases"],
+      "choices": [
+        "no quotes",
+        "double quotes",
+        "extra commas",
+        "table aliases"
+      ],
       "correct": "no quotes"
     },
     "m2_s01_fill_filter_goal": {
@@ -461,7 +495,12 @@
       },
       "hint": "Think kept entries.",
       "template": "Filtering helps you keep only the ____ you actually need.",
-      "choices": ["rows", "buttons", "themes", "queries"],
+      "choices": [
+        "rows",
+        "buttons",
+        "themes",
+        "queries"
+      ],
       "correct": "rows"
     }
   }

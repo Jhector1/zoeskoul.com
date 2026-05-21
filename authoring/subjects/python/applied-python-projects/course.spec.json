@@ -1,0 +1,410 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "applied-python-projects-v2",
+  "profileId": "python",
+  "title": "Applied Python Projects",
+  "subtitle": "Build cleaner Python projects with classes, testing, debugging, and capstone structure",
+  "intendedFor": "Learners who know Python fundamentals and want to build more complete beginner projects using classes, testing, debugging, and readable project structure.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "courseOverview": {
+    "recommendedSequence": "Complete modules in order. This course moves from object-oriented programming to testing and then to a complete capstone project.",
+    "summary": "This course helps learners build polished beginner Python projects using classes, objects, tests, debugging techniques, style habits, and capstone planning.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "Object-Oriented Programming",
+        "coreSkill": "Introduce classes and objects as a way to model related state and behavior.",
+        "outputFocus": "Build a simple class-based gradebook, game character, or bank account model."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Testing, Debugging, and Style",
+        "coreSkill": "Help learners verify code behavior, debug systematically, and write readable Python.",
+        "outputFocus": "Take a buggy utility program, add tests, fix the bugs, and improve readability."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Capstone Automation Project",
+        "coreSkill": "Guide learners through a complete beginner Python project that combines core skills.",
+        "outputFocus": "Complete a capstone such as a task tracker, expense summarizer, text analyzer, or quiz game."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "applied-python-projects-v2",
+      "startModuleNumber": 1,
+      "endModuleNumber": 3
+    },
+    "releases": [
+      {
+        "name": "applied-python-projects-v2",
+        "startModuleNumber": 1,
+        "endModuleNumber": 3
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.12,
+        "multi_choice": 0.1,
+        "drag_reorder": 0.1,
+        "fill_blank_choice": 0.18,
+        "code_input": 0.5
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "topicExerciseMin": 4
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 2,
+      "capstoneRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "requireModuleProject": true,
+      "maxModuleProjectLength": 320
+    }
+  },
+  "authoringGuidance": [
+    "This course must always use profileId python and subjectSlug applied-python-projects-v2.",
+    "Do not use SQL datasets, SQL tables, sql_query recipes, datasetId, fixedSqlDialect, resultShape, or checkSql in Python lessons.",
+    "Python code_input exercises should prefer recipeType fixed_tests and include explicit stdin/stdout tests or function/class behavior checks.",
+    "Use semanticChecks only when validating classes, methods, attributes, or return values.",
+    "For method_returns semantic checks, always include expected.",
+    "Keep examples focused on classes, objects, testing, debugging, style, refactoring, and capstone projects."
+  ],
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "Two or three short lessons per week, with one applied project after each module.",
+    "recommendedCourseDeliverables": [
+      "Short concept sketches",
+      "Class modeling exercises",
+      "Debugging tasks",
+      "Testing exercises",
+      "Refactoring practice",
+      "Portfolio-style capstone project"
+    ],
+    "toolingSuggestions": [
+      "Python 3.11+",
+      "Browser runner or local VS Code",
+      "Simple test runner for function-based and class-based exercises"
+    ],
+    "closingNote": "Learners finish with a polished beginner Python project and a stronger foundation for automation, data science, web backends, scripting, or algorithms."
+  },
+  "modules": [
+    {
+      "moduleNumber": 8,
+      "moduleSlug": "python-8-object-oriented-programming",
+      "prefix": "py8",
+      "title": "Object-Oriented Programming",
+      "purpose": "Introduce classes and objects as a way to model related state and behavior.",
+      "learningObjectives": [
+        "Define simple classes",
+        "Create instances",
+        "Use methods and attributes"
+      ],
+      "guidedExercises": [
+        "Create classes",
+        "Add methods",
+        "Model real objects"
+      ],
+      "quizFocus": [
+        "instances",
+        "attributes",
+        "methods"
+      ],
+      "moduleProject": "Build a simple class-based gradebook, game character, or bank account model.",
+      "sections": [
+        {
+          "sectionSlug": "python-8-class-basics",
+          "title": "Class Basics",
+          "topics": [
+            {
+              "topicId": "classes-and-instances",
+              "title": "Classes and Instances",
+              "summary": "Define classes and create individual objects.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Define a class",
+                "Instantiate objects"
+              ]
+            },
+            {
+              "topicId": "attributes-and-init",
+              "title": "Attributes and __init__",
+              "summary": "Initialize object state with constructor parameters.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Use __init__",
+                "Set attributes"
+              ]
+            },
+            {
+              "topicId": "methods-and-self",
+              "title": "Methods and self",
+              "summary": "Add behavior to classes with instance methods.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Write methods",
+                "Use self correctly"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-8-design-with-objects",
+          "title": "Design With Objects",
+          "topics": [
+            {
+              "topicId": "encapsulation-and-responsibility",
+              "title": "Encapsulation and Responsibility",
+              "summary": "Keep related data and behavior together in a class.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Describe class responsibility",
+                "Avoid scattered state"
+              ]
+            },
+            {
+              "topicId": "lists-of-objects",
+              "title": "Lists of Objects",
+              "summary": "Manage multiple instances and summarize their data.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Store objects in lists",
+                "Loop over objects"
+              ]
+            },
+            {
+              "topicId": "class-debugging-patterns",
+              "title": "Class Debugging Patterns",
+              "summary": "Fix common attribute, method, and constructor mistakes.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Debug AttributeError",
+                "Trace method calls"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 9,
+      "moduleSlug": "python-9-testing-debugging-and-style",
+      "prefix": "py9",
+      "title": "Testing, Debugging, and Style",
+      "purpose": "Help learners verify code behavior, debug systematically, and write readable Python.",
+      "learningObjectives": [
+        "Write simple tests",
+        "Use debugging techniques",
+        "Apply Python style conventions"
+      ],
+      "guidedExercises": [
+        "Test functions",
+        "Debug failing cases",
+        "Improve readability"
+      ],
+      "quizFocus": [
+        "test cases",
+        "edge cases",
+        "style"
+      ],
+      "moduleProject": "Take a buggy utility program, add tests, fix the bugs, and improve readability.",
+      "sections": [
+        {
+          "sectionSlug": "python-9-testing-basics",
+          "title": "Testing Basics",
+          "topics": [
+            {
+              "topicId": "writing-test-cases",
+              "title": "Writing Test Cases",
+              "summary": "Design examples that prove a function works.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Write test cases",
+                "Pick edge cases"
+              ]
+            },
+            {
+              "topicId": "assertions-and-expected-results",
+              "title": "Assertions and Expected Results",
+              "summary": "Use assertions to compare actual and expected outputs.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Use assert",
+                "Explain expected results"
+              ]
+            },
+            {
+              "topicId": "testing-edge-cases",
+              "title": "Testing Edge Cases",
+              "summary": "Check empty inputs, boundaries, and unusual values.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Identify edge cases",
+                "Improve confidence with tests"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-9-debugging-and-style",
+          "title": "Debugging and Style",
+          "topics": [
+            {
+              "topicId": "debugging-with-print-and-trace",
+              "title": "Debugging With Print and Trace",
+              "summary": "Use temporary output and tracing to find bugs.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Trace variable values",
+                "Narrow down bugs"
+              ]
+            },
+            {
+              "topicId": "readable-python-style",
+              "title": "Readable Python Style",
+              "summary": "Use naming, spacing, and small functions to make code easier to understand.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Use clear names",
+                "Apply basic PEP 8 style"
+              ]
+            },
+            {
+              "topicId": "refactoring-safely",
+              "title": "Refactoring Safely",
+              "summary": "Improve code structure while keeping behavior the same.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Refactor small steps",
+                "Use tests to protect behavior"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 10,
+      "moduleSlug": "python-10-capstone-automation-project",
+      "prefix": "py10",
+      "title": "Capstone Automation Project",
+      "purpose": "Guide learners through a complete beginner Python project that combines core skills.",
+      "learningObjectives": [
+        "Plan a small program",
+        "Build and test multiple functions",
+        "Present a finished Python project"
+      ],
+      "guidedExercises": [
+        "Plan features",
+        "Build modules",
+        "Test and polish"
+      ],
+      "quizFocus": [
+        "project planning",
+        "integration",
+        "debugging"
+      ],
+      "moduleProject": "Complete a capstone such as a task tracker, expense summarizer, text analyzer, or quiz game.",
+      "sections": [
+        {
+          "sectionSlug": "python-10-project-planning",
+          "title": "Project Planning",
+          "topics": [
+            {
+              "topicId": "choosing-a-capstone-scope",
+              "title": "Choosing a Capstone Scope",
+              "summary": "Pick a project that is useful, small enough, and testable.",
+              "minutes": 20,
+              "technical": false,
+              "learningGoals": [
+                "Define project scope",
+                "Choose core features"
+              ]
+            },
+            {
+              "topicId": "breaking-projects-into-functions",
+              "title": "Breaking Projects Into Functions",
+              "summary": "Plan functions, inputs, outputs, and data flow before coding.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Design function boundaries",
+                "Plan data flow"
+              ]
+            },
+            {
+              "topicId": "data-model-for-a-small-app",
+              "title": "Data Model for a Small App",
+              "summary": "Choose lists, dictionaries, files, or classes to represent project data.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Choose data structures",
+                "Explain tradeoffs"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-10-building-and-polishing",
+          "title": "Building and Polishing",
+          "topics": [
+            {
+              "topicId": "implementing-the-core-loop",
+              "title": "Implementing the Core Loop",
+              "summary": "Build the main interaction loop or workflow for the project.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Write a main workflow",
+                "Handle user choices"
+              ]
+            },
+            {
+              "topicId": "testing-the-capstone",
+              "title": "Testing the Capstone",
+              "summary": "Test the most important functions and realistic user paths.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Test project features",
+                "Fix integration bugs"
+              ]
+            },
+            {
+              "topicId": "presenting-and-documenting-the-project",
+              "title": "Presenting and Documenting the Project",
+              "summary": "Write a short README-style explanation and show how to run the project.",
+              "minutes": 20,
+              "technical": false,
+              "learningGoals": [
+                "Document usage",
+                "Explain project decisions"
+              ]
+            }
+          ]
+        }
+      ]
+    }  ]
+}

@@ -6,20 +6,34 @@
           "label": "Text Matching",
           "summary": "Learn how `LIKE` works, how `%` and `_` wildcards behave, and how to search for partial text inside customer data.",
           "cards": {
-            "sketch0": {
+            "intro_to_like": {
               "title": "What is LIKE?"
             },
-            "sketch1": {
+            "percent_wildcard": {
               "title": "How does the % wildcard work?"
             },
-            "sketch2": {
+            "underscore_wildcard": {
               "title": "How does the _ wildcard work?"
             },
-            "sketch3": {
+            "searching_partial_text": {
               "title": "How do you search partial text?"
+            },
+            "project": {
+              "title": "Practice text matching"
             },
             "quiz": {
               "title": "Quiz: Text Matching"
+            }
+          },
+          "projectSteps": {
+            "like_city_chi": {
+              "title": "Match cities that start with Chi"
+            },
+            "email_example_domain": {
+              "title": "Match emails ending in example.com"
+            },
+            "city_miami_single_char": {
+              "title": "Match the pattern Miam_"
             }
           }
         }
@@ -409,7 +423,12 @@
       },
       "hint": "Think pattern-matching keyword.",
       "template": "The SQL keyword used for text pattern matching is ____.",
-      "choices": ["LIKE", "LIMIT", "ORDER BY", "GROUP"],
+      "choices": [
+        "LIKE",
+        "LIMIT",
+        "ORDER BY",
+        "GROUP"
+      ],
       "correct": "LIKE"
     },
     "m4_s01_fill_percent_meaning": {
@@ -422,7 +441,12 @@
       },
       "hint": "Think flexible length.",
       "template": "In a LIKE pattern, `%` means ____ of characters.",
-      "choices": ["any number", "exactly one", "zero only", "digits only"],
+      "choices": [
+        "any number",
+        "exactly one",
+        "zero only",
+        "digits only"
+      ],
       "correct": "any number"
     },
     "m4_s01_fill_underscore_meaning": {
@@ -435,7 +459,12 @@
       },
       "hint": "Think fixed single character.",
       "template": "In a LIKE pattern, `_` means exactly ____.",
-      "choices": ["one character", "many characters", "zero characters", "one word"],
+      "choices": [
+        "one character",
+        "many characters",
+        "zero characters",
+        "one word"
+      ],
       "correct": "one character"
     },
     "m4_s01_fill_partial_search_need": {
@@ -448,7 +477,12 @@
       },
       "hint": "Think only some of the text.",
       "template": "Partial text search is useful when you know only ____ of the value.",
-      "choices": ["part", "all", "none", "zero"],
+      "choices": [
+        "part",
+        "all",
+        "none",
+        "zero"
+      ],
       "correct": "part"
     },
     "m4_s01_fill_pattern_check": {
@@ -461,7 +495,12 @@
       },
       "hint": "Think intended text shape.",
       "template": "After running a LIKE query, verify that the returned text fits the intended ____.",
-      "choices": ["pattern", "row count", "toolbar", "comment"],
+      "choices": [
+        "pattern",
+        "row count",
+        "toolbar",
+        "comment"
+      ],
       "correct": "pattern"
     }
   }

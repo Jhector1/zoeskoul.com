@@ -5,45 +5,43 @@
   "sectionSlug": "section_4_1",
   "prefix": "sql4",
   "minutes": 8,
-
   "topic": {
     "labelKey": "topics.sql.sql_module_4.lists_and_ranges.label",
     "summaryKey": "topics.sql.sql_module_4.lists_and_ranges.summary"
   },
-
   "cards": [
     {
-      "id": "sketch0",
+      "id": "in_operator",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_4.lists_and_ranges.cards.sketch0.title",
+      "titleKey": "topics.sql.sql_module_4.lists_and_ranges.cards.in_operator.title",
       "sketchId": "in_operator",
       "height": 520
     },
     {
-      "id": "sketch1",
+      "id": "not_in_operator",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_4.lists_and_ranges.cards.sketch1.title",
+      "titleKey": "topics.sql.sql_module_4.lists_and_ranges.cards.not_in_operator.title",
       "sketchId": "not_in_operator",
       "height": 520
     },
     {
-      "id": "sketch2",
+      "id": "between_operator",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_4.lists_and_ranges.cards.sketch2.title",
+      "titleKey": "topics.sql.sql_module_4.lists_and_ranges.cards.between_operator.title",
       "sketchId": "between_operator",
       "height": 520
     },
     {
-      "id": "sketch3",
+      "id": "range_filtering_practice",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_4.lists_and_ranges.cards.sketch3.title",
+      "titleKey": "topics.sql.sql_module_4.lists_and_ranges.cards.range_filtering_practice.title",
       "sketchId": "range_filtering_practice",
       "height": 520
     },
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.sql.sql_module_4.lists_and_ranges.cards.quiz.title",
+      "titleKey": "topics.sql.sql_module_4.lists_and_ranges.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -93,7 +91,6 @@
       }
     }
   ],
-
   "sketches": [
     {
       "id": "in_operator",
@@ -120,7 +117,6 @@
       "bodyKey": "sketches.sql.sql_module_4.lists_and_ranges.range_filtering_practice.bodyMarkdown"
     }
   ],
-
   "exercises": [
     {
       "id": "m4_s02_status_in_active_draft",
@@ -134,7 +130,48 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT full_name, status FROM customers WHERE status IN ('active', 'draft');"
+        "solutionCode": "SELECT full_name, status FROM customers WHERE status IN ('active', 'draft');",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "full_name",
+                "status"
+              ],
+              "rows": [
+                [
+                  "Mia Lopez",
+                  "active"
+                ],
+                [
+                  " Ava Patel ",
+                  "active"
+                ],
+                [
+                  "Noah Kim",
+                  "draft"
+                ],
+                [
+                  "Emma Reed",
+                  "active"
+                ],
+                [
+                  "Olivia Chen",
+                  "active"
+                ],
+                [
+                  "Test Account",
+                  "draft"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -149,7 +186,36 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT full_name, city FROM customers WHERE city NOT IN ('Chicago', 'Miami');"
+        "solutionCode": "SELECT full_name, city FROM customers WHERE city NOT IN ('Chicago', 'Miami');",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "full_name",
+                "city"
+              ],
+              "rows": [
+                [
+                  "Leo Grant",
+                  "Houston"
+                ],
+                [
+                  "Liam Scott",
+                  "Seattle"
+                ],
+                [
+                  "Test Account",
+                  "Lab"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -164,17 +230,58 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT full_name, signup_date FROM customers WHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';"
+        "solutionCode": "SELECT full_name, signup_date FROM customers WHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "full_name",
+                "signup_date"
+              ],
+              "rows": [
+                [
+                  "Leo Grant",
+                  "2026-01-12"
+                ],
+                [
+                  " Ava Patel ",
+                  "2026-01-15"
+                ],
+                [
+                  "Noah Kim",
+                  "2026-01-18"
+                ],
+                [
+                  "Emma Reed",
+                  "2026-01-22"
+                ],
+                [
+                  "Liam Scott",
+                  "2026-01-25"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
-
     {
       "id": "m4_s02_in_meaning",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_in_meaning",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -186,7 +293,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_not_in_meaning",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -198,7 +310,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_between_meaning",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -210,7 +327,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_range_practice_goal",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -222,23 +344,38 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_list_range_result_check",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
       }
     },
-
     {
       "id": "m4_s02_in_true",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_in_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -247,10 +384,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_not_in_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -259,10 +407,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_between_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -271,10 +430,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_range_filtering_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -283,23 +453,41 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_lists_ranges_workflow_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "d"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
       }
     },
-
     {
       "id": "m4_s02_reorder_in_logic",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_reorder_in_logic",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -308,10 +496,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_reorder_not_in_logic",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -320,10 +516,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_reorder_between_logic",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -332,10 +536,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_reorder_range_boundaries",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -344,13 +556,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m4_s02_reorder_lists_ranges_workflow",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
-
     {
       "id": "m4_s02_fill_in_keyword",
       "kind": "fill_blank_choice",

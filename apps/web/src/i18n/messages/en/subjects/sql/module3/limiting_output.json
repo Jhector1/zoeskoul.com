@@ -6,20 +6,40 @@
           "label": "Limiting Output",
           "summary": "Learn why limiting results matters, how `LIMIT` works, how top rows depend on order, and why `ORDER BY` and `LIMIT` work well together.",
           "cards": {
-            "sketch0": {
+            "why_limit_results": {
               "title": "Why limit results?"
             },
-            "sketch1": {
+            "limit_keyword": {
               "title": "What does `LIMIT` do?"
             },
-            "sketch2": {
+            "top_rows_only": {
               "title": "What does top rows only mean?"
             },
-            "sketch3": {
+            "combining_order_by_with_limit": {
               "title": "Why combine `ORDER BY` with `LIMIT`?"
+            },
+            "project": {
+              "title": "Practice limiting output"
             },
             "quiz": {
               "title": "Quiz: Limiting Output"
+            }
+          },
+          "projectSteps": {
+            "show_first_3_names": {
+              "title": "Show the first 3 names"
+            },
+            "top_2_highest_prices": {
+              "title": "Show the 2 highest prices"
+            },
+            "lowest_4_stock": {
+              "title": "Show the 4 lowest stock values"
+            },
+            "newest_3_products": {
+              "title": "Show the 3 newest products"
+            },
+            "oldest_2_products": {
+              "title": "Show the 2 oldest products"
             }
           }
         }
@@ -409,7 +429,12 @@
       },
       "hint": "Think row-count keyword.",
       "template": "The SQL keyword that controls how many rows are returned is ____.",
-      "choices": ["LIMIT", "WHERE", "ORDER BY", "FROM"],
+      "choices": [
+        "LIMIT",
+        "WHERE",
+        "ORDER BY",
+        "FROM"
+      ],
       "correct": "LIMIT"
     },
     "m3_s03_fill_limit_job_word": {
@@ -422,7 +447,12 @@
       },
       "hint": "Think result entries.",
       "template": "`LIMIT` controls how many ____ are returned.",
-      "choices": ["rows", "tables", "keywords", "filters"],
+      "choices": [
+        "rows",
+        "tables",
+        "keywords",
+        "filters"
+      ],
       "correct": "rows"
     },
     "m3_s03_fill_top_rows_basis": {
@@ -435,7 +465,12 @@
       },
       "hint": "Think arrangement.",
       "template": "Top rows depend on the current result ____.",
-      "choices": ["order", "theme", "toolbar", "comment"],
+      "choices": [
+        "order",
+        "theme",
+        "toolbar",
+        "comment"
+      ],
       "correct": "order"
     },
     "m3_s03_fill_order_by_role": {
@@ -448,7 +483,12 @@
       },
       "hint": "Think first rows.",
       "template": "`ORDER BY` helps decide which rows rise to the ____.",
-      "choices": ["top", "bottom border", "comment line", "alias"],
+      "choices": [
+        "top",
+        "bottom border",
+        "comment line",
+        "alias"
+      ],
       "correct": "top"
     },
     "m3_s03_fill_limit_check": {
@@ -461,7 +501,12 @@
       },
       "hint": "Think how many.",
       "template": "After using `LIMIT`, always verify the row ____.",
-      "choices": ["count", "color", "toolbar", "font"],
+      "choices": [
+        "count",
+        "color",
+        "toolbar",
+        "font"
+      ],
       "correct": "count"
     }
   }

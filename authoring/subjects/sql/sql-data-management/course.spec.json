@@ -1,0 +1,190 @@
+{
+  "authoringFormatVersion": "2.0",
+  "courseSlug": "sql-database-design-capstone",
+  "catalogSlug": "sql",
+  "subjectSlug": "sql",
+  "profileId": "sql",
+  "title": "SQL Database Design and Capstone",
+  "subtitle": "Model relational databases and complete beginner portfolio-style SQL projects.",
+  "level": "beginner",
+  "courseNumber": 5,
+  "trackSlug": "sql",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "prerequisites": [
+    "sql-foundations",
+    "sql-analysis-reporting",
+    "multi-table-sql"
+  ],
+  "recommendedPrerequisites": [
+    "sql-data-management"
+  ],
+  "learningGoals": [
+    "Recognize one-to-one, one-to-many, and many-to-many relationships.",
+    "Explain primary keys and foreign keys in design context.",
+    "Reduce duplicate data by separating repeated information.",
+    "Sketch beginner ERDs.",
+    "Use bridge tables for many-to-many relationships.",
+    "Turn a real-world scenario into related tables.",
+    "Create a beginner schema and seed data.",
+    "Write simple, filtered, grouped, and joined queries for a project.",
+    "Explain query logic in plain English.",
+    "Complete a portfolio-ready SQL capstone."
+  ],
+  "moduleCount": 2,
+  "modules": [
+    {
+      "moduleNumber": 14,
+      "moduleSlug": "sql_module_14",
+      "title": "Relational Database Design for Beginners",
+      "purpose": "Strengthen the modeling side of SQL so learners understand why tables are shaped the way they are.",
+      "datasetId": "design_sandbox",
+      "coreSkill": "Relational design",
+      "sections": [
+        {
+          "sectionSlug": "section_14_1",
+          "title": "Why Relationships Matter",
+          "topics": [
+            "related_data",
+            "one_to_one_relationships",
+            "one_to_many_relationships",
+            "many_to_many_relationships"
+          ]
+        },
+        {
+          "sectionSlug": "section_14_2",
+          "title": "Keys and Relationships",
+          "topics": [
+            "primary_key_review",
+            "foreign_key_review",
+            "linking_tables_properly",
+            "avoiding_duplicate_data"
+          ]
+        },
+        {
+          "sectionSlug": "section_14_3",
+          "title": "Good Beginner Design Habits",
+          "topics": [
+            "keep_tables_focused",
+            "separate_repeated_information",
+            "use_ids_consistently",
+            "design_for_future_queries"
+          ]
+        },
+        {
+          "sectionSlug": "section_14_4",
+          "title": "Relational Design Practice",
+          "topics": [
+            "store_and_product_model",
+            "student_and_enrollment_model",
+            "customer_and_order_model",
+            "turn_design_into_sql_tables"
+          ]
+        }
+      ],
+      "moduleProject": "Create a beginner ERD and matching CREATE TABLE script for a chosen domain such as school, bookstore, clinic, or art store."
+    },
+    {
+      "moduleNumber": 15,
+      "moduleSlug": "sql_module_15",
+      "title": "Real Beginner SQL Projects and Course Capstone",
+      "purpose": "Consolidate everything into realistic beginner projects that require reading, filtering, grouping, joining, and basic data design.",
+      "datasetId": "capstone_sandbox",
+      "coreSkill": "Projects and capstone",
+      "sections": [
+        {
+          "sectionSlug": "section_15_1",
+          "title": "Mini Project: Student Database",
+          "topics": [
+            "design_the_tables",
+            "insert_sample_data",
+            "write_simple_queries",
+            "build_summary_reports"
+          ]
+        },
+        {
+          "sectionSlug": "section_15_2",
+          "title": "Mini Project: Store Database",
+          "topics": [
+            "products_table",
+            "customers_table",
+            "orders_table",
+            "query_sales_information"
+          ]
+        },
+        {
+          "sectionSlug": "section_15_3",
+          "title": "Mini Project: Employee Database",
+          "topics": [
+            "employees_and_departments",
+            "salary_analysis",
+            "department_summaries",
+            "joined_reports"
+          ]
+        },
+        {
+          "sectionSlug": "section_15_4",
+          "title": "Capstone Practice",
+          "topics": [
+            "ask_business_questions",
+            "write_full_sql_solutions",
+            "explain_query_logic",
+            "build_beginner_confidence"
+          ]
+        }
+      ],
+      "moduleProject": "Complete a capstone database project with schema, seed data, 10–15 queries, one grouped report, one multi-table join report, and a written explanation."
+    }
+  ],
+  "assessmentPolicy": {
+    "topicExerciseMin": 4,
+    "technicalTopicCodeInputMin": 1,
+    "requireModuleProject": true,
+    "capstoneRequired": true,
+    "minProjectsBeforeCapstone": 3,
+    "defaultExerciseMix": {
+      "single_choice": 0.08,
+      "multi_choice": 0.12,
+      "drag_reorder": 0.1,
+      "fill_blank_choice": 0.15,
+      "code_input": 0.55
+    }
+  },
+  "validationPolicy": {
+    "allowedSqlConcepts": [
+      "SELECT",
+      "WHERE",
+      "ORDER BY",
+      "LIMIT",
+      "LIKE",
+      "IN",
+      "BETWEEN",
+      "NULL",
+      "expressions",
+      "aggregates",
+      "GROUP BY",
+      "HAVING",
+      "JOIN",
+      "subqueries",
+      "INSERT",
+      "UPDATE",
+      "DELETE",
+      "CREATE TABLE",
+      "PRIMARY KEY",
+      "FOREIGN KEY",
+      "relational_design"
+    ],
+    "datasets": [
+      "design_sandbox",
+      "capstone_sandbox"
+    ],
+    "goldenTestsRequired": true,
+    "requireErdVisuals": true,
+    "requireCrowFootOrRelationshipDiagrams": true,
+    "requireBridgeTableCoverage": true,
+    "requireProjectRubric": true,
+    "requireCapstoneChecklist": true,
+    "requireSchemaValidation": true,
+    "requireQueryPortfolioOutput": true
+  }
+}

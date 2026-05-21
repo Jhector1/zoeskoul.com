@@ -6,26 +6,34 @@
           "label": "Comparison Operators",
           "summary": "Learn how to compare values with `=`, `!=`, `<>`, `>`, `<`, `>=`, and `<=`, and how to choose the right comparison for the question you want to ask.",
           "cards": {
-            "sketch0": {
+            "equals_operator": {
               "title": "How does `=` work?"
             },
-            "sketch1": {
+            "not_equal_operator": {
               "title": "How do `!=` and `<>` work?"
             },
-            "sketch2": {
+            "greater_than_operator": {
               "title": "How does `>` work?"
             },
-            "sketch3": {
+            "less_than_operator": {
               "title": "How does `<` work?"
             },
-            "sketch4": {
-              "title": "How do `>=` and `<=` work?"
-            },
-            "sketch5": {
-              "title": "How do you choose the right comparison?"
+            "project": {
+              "title": "Project: Compare Values"
             },
             "quiz": {
               "title": "Quiz: Comparison Operators"
+            }
+          },
+          "projectSteps": {
+            "filter_category_art": {
+              "title": "Filter category art"
+            },
+            "filter_not_home": {
+              "title": "Filter not home"
+            },
+            "filter_price_gt_20": {
+              "title": "Filter prices above 20"
             }
           }
         }
@@ -457,7 +465,12 @@
       },
       "hint": "Think exact equality.",
       "template": "The operator for an exact match is ____.",
-      "choices": ["=", ">", "!=", "<"],
+      "choices": [
+        "=",
+        ">",
+        "!=",
+        "<"
+      ],
       "correct": "="
     },
     "m2_s02_fill_not_equal_symbol": {
@@ -470,7 +483,12 @@
       },
       "hint": "Think not equal.",
       "template": "A common SQL operator for not equal is ____.",
-      "choices": ["!=", "=", "<=", ">="],
+      "choices": [
+        "!=",
+        "=",
+        "<=",
+        ">="
+      ],
       "correct": "!="
     },
     "m2_s02_fill_greater_than_phrase": {
@@ -483,7 +501,12 @@
       },
       "hint": "Think bigger.",
       "template": "The `>` operator means ____.",
-      "choices": ["greater than", "less than", "not equal to", "equal to"],
+      "choices": [
+        "greater than",
+        "less than",
+        "not equal to",
+        "equal to"
+      ],
       "correct": "greater than"
     },
     "m2_s02_fill_boundary_word": {
@@ -496,7 +519,12 @@
       },
       "hint": "Think edge.",
       "template": "`>=` and `<=` include the ____ value too.",
-      "choices": ["boundary", "table", "header", "theme"],
+      "choices": [
+        "boundary",
+        "table",
+        "header",
+        "theme"
+      ],
       "correct": "boundary"
     },
     "m2_s02_fill_operator_choice_goal": {
@@ -509,7 +537,12 @@
       },
       "hint": "Think plain English.",
       "template": "A good habit is to match the operator to the ____ of the condition.",
-      "choices": ["meaning", "font", "layout", "theme"],
+      "choices": [
+        "meaning",
+        "font",
+        "layout",
+        "theme"
+      ],
       "correct": "meaning"
     }
   }

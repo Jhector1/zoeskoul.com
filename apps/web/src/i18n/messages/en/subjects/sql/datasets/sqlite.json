@@ -43,11 +43,10 @@
             "id": "ID",
             "full_name": "Full Name",
             "email": "Email",
-            "phone": "Phone",
             "city": "City",
-            "segment": "Segment",
+            "status": "Status",
             "signup_date": "Signup Date",
-            "referral_code": "Referral Code"
+            "is_test": "Test Row"
           }
         }
       }
@@ -80,7 +79,14 @@
           "columns": {
             "id": "ID",
             "name": "Name",
-            "cohort": "Cohort"
+            "grade_level": "Grade Level"
+          }
+        },
+        "departments": {
+          "label": "Departments",
+          "columns": {
+            "id": "ID",
+            "name": "Name"
           }
         },
         "courses": {
@@ -88,7 +94,7 @@
           "columns": {
             "id": "ID",
             "title": "Title",
-            "department": "Department"
+            "department_id": "Department ID"
           }
         },
         "enrollments": {
@@ -97,8 +103,7 @@
             "id": "ID",
             "student_id": "Student ID",
             "course_id": "Course ID",
-            "term": "Term",
-            "grade": "Grade"
+            "term": "Term"
           }
         }
       }

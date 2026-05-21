@@ -6,20 +6,34 @@
           "label": "Missing Data",
           "summary": "Learn what `NULL` means, how to use `IS NULL` and `IS NOT NULL`, and how to avoid common mistakes when checking missing values.",
           "cards": {
-            "sketch0": {
+            "what_null_means": {
               "title": "What does NULL mean?"
             },
-            "sketch1": {
+            "is_null": {
               "title": "How does IS NULL work?"
             },
-            "sketch2": {
+            "is_not_null": {
               "title": "How does IS NOT NULL work?"
             },
-            "sketch3": {
+            "common_null_mistakes": {
               "title": "What are common NULL mistakes?"
+            },
+            "project": {
+              "title": "Project: Find Missing Data"
             },
             "quiz": {
               "title": "Quiz: Missing Data"
+            }
+          },
+          "projectSteps": {
+            "find_missing_emails": {
+              "title": "Find missing emails"
+            },
+            "find_missing_cities": {
+              "title": "Find missing cities"
+            },
+            "find_present_emails": {
+              "title": "Find present emails"
             }
           }
         }
@@ -409,7 +423,12 @@
       },
       "hint": "Think no stored value.",
       "template": "`NULL` often means the value is ____.",
-      "choices": ["missing", "sorted", "duplicated", "grouped"],
+      "choices": [
+        "missing",
+        "sorted",
+        "duplicated",
+        "grouped"
+      ],
       "correct": "missing"
     },
     "m4_s03_fill_is_null_keyword": {
@@ -422,7 +441,12 @@
       },
       "hint": "Think missing-data phrase.",
       "template": "The SQL phrase used to find missing values is ____.",
-      "choices": ["IS NULL", "ORDER BY", "BETWEEN", "LIKE"],
+      "choices": [
+        "IS NULL",
+        "ORDER BY",
+        "BETWEEN",
+        "LIKE"
+      ],
       "correct": "IS NULL"
     },
     "m4_s03_fill_is_not_null_keyword": {
@@ -435,7 +459,12 @@
       },
       "hint": "Think value exists.",
       "template": "The SQL phrase used to find present values is ____.",
-      "choices": ["IS NOT NULL", "IS NULL", "IN", "LIMIT"],
+      "choices": [
+        "IS NOT NULL",
+        "IS NULL",
+        "IN",
+        "LIMIT"
+      ],
       "correct": "IS NOT NULL"
     },
     "m4_s03_fill_null_comparison_warning": {
@@ -448,7 +477,12 @@
       },
       "hint": "Think wrong comparison style.",
       "template": "A common NULL mistake is using normal ____ style with NULL.",
-      "choices": ["equality", "sorting", "grouping", "alias"],
+      "choices": [
+        "equality",
+        "sorting",
+        "grouping",
+        "alias"
+      ],
       "correct": "equality"
     },
     "m4_s03_fill_missing_data_check": {
@@ -461,7 +495,12 @@
       },
       "hint": "Think value exists.",
       "template": "Use `IS NOT NULL` when the field should be ____.",
-      "choices": ["present", "quoted", "sorted", "patterned"],
+      "choices": [
+        "present",
+        "quoted",
+        "sorted",
+        "patterned"
+      ],
       "correct": "present"
     }
   }

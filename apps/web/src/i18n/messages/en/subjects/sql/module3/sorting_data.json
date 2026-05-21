@@ -6,20 +6,34 @@
           "label": "Sorting Data",
           "summary": "Learn why sorting matters, how `ORDER BY` works, and how ascending and descending order change the way results are read.",
           "cards": {
-            "sketch0": {
+            "why_sorting_matters": {
               "title": "Why does sorting matter?"
             },
-            "sketch1": {
+            "order_by": {
               "title": "What does `ORDER BY` do?"
             },
-            "sketch2": {
+            "ascending_order": {
               "title": "What is ascending order?"
             },
-            "sketch3": {
+            "descending_order": {
               "title": "What is descending order?"
+            },
+            "project": {
+              "title": "Project: Sort Results"
             },
             "quiz": {
               "title": "Quiz: Sorting Data"
+            }
+          },
+          "projectSteps": {
+            "sort_names_asc": {
+              "title": "Sort names A to Z"
+            },
+            "sort_price_asc": {
+              "title": "Sort prices low to high"
+            },
+            "sort_stock_desc": {
+              "title": "Sort stock high to low"
             }
           }
         }
@@ -409,7 +423,12 @@
       },
       "hint": "Think sorting keyword.",
       "template": "The SQL keyword used to sort result rows is ____.",
-      "choices": ["ORDER BY", "LIMIT", "WHERE", "GROUP"],
+      "choices": [
+        "ORDER BY",
+        "LIMIT",
+        "WHERE",
+        "GROUP"
+      ],
       "correct": "ORDER BY"
     },
     "m3_s01_fill_ascending_text": {
@@ -422,7 +441,12 @@
       },
       "hint": "Think alphabetical forward order.",
       "template": "Ascending text order is often ____.",
-      "choices": ["A to Z", "Z to A", "largest to smallest", "newest to oldest"],
+      "choices": [
+        "A to Z",
+        "Z to A",
+        "largest to smallest",
+        "newest to oldest"
+      ],
       "correct": "A to Z"
     },
     "m3_s01_fill_descending_numbers": {
@@ -435,7 +459,12 @@
       },
       "hint": "Think biggest first.",
       "template": "Descending number order is often ____.",
-      "choices": ["largest to smallest", "smallest to largest", "A to Z", "oldest to newest"],
+      "choices": [
+        "largest to smallest",
+        "smallest to largest",
+        "A to Z",
+        "oldest to newest"
+      ],
       "correct": "largest to smallest"
     },
     "m3_s01_fill_sorting_goal": {
@@ -448,7 +477,12 @@
       },
       "hint": "Think arrangement.",
       "template": "Sorting changes the ____ of the result rows.",
-      "choices": ["order", "table name", "dataset", "column count"],
+      "choices": [
+        "order",
+        "table name",
+        "dataset",
+        "column count"
+      ],
       "correct": "order"
     },
     "m3_s01_fill_sorting_check": {
@@ -461,7 +495,12 @@
       },
       "hint": "Think expected direction.",
       "template": "After running a sorted query, verify that the rows follow the ____.",
-      "choices": ["requested order", "table border", "query comments", "toolbar layout"],
+      "choices": [
+        "requested order",
+        "table border",
+        "query comments",
+        "toolbar layout"
+      ],
       "correct": "requested order"
     }
   }

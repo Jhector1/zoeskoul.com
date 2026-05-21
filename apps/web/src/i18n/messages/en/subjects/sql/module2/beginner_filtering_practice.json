@@ -6,20 +6,34 @@
           "label": "Beginner Filtering Practice",
           "summary": "Practice filtering by number, filtering by text, combining more than one rule, and checking your logic to avoid common beginner mistakes.",
           "cards": {
-            "sketch0": {
+            "filter_by_number": {
               "title": "How do you filter by number?"
             },
-            "sketch1": {
+            "filter_by_text": {
               "title": "How do you filter by text?"
             },
-            "sketch2": {
+            "filter_by_more_than_one_rule": {
               "title": "How do you filter by more than one rule?"
             },
-            "sketch3": {
+            "avoiding_filtering_mistakes": {
               "title": "How do you avoid filtering mistakes?"
+            },
+            "project": {
+              "title": "Project: Practice Filtering"
             },
             "quiz": {
               "title": "Quiz: Filtering Practice"
+            }
+          },
+          "projectSteps": {
+            "filter_by_number_stock_gt_10": {
+              "title": "Filter stock above 10"
+            },
+            "filter_by_text_stationery": {
+              "title": "Filter stationery products"
+            },
+            "filter_more_than_one_rule": {
+              "title": "Filter with more than one rule"
             }
           }
         }
@@ -374,7 +388,12 @@
       },
       "hint": "Think numeric inventory value.",
       "template": "An example of a numeric column in `products` is ____.",
-      "choices": ["stock", "category", "name", "title"],
+      "choices": [
+        "stock",
+        "category",
+        "name",
+        "title"
+      ],
       "correct": "stock"
     },
     "m2_s04_fill_text_column_example": {
@@ -387,7 +406,12 @@
       },
       "hint": "Think text label.",
       "template": "An example of a text column in `products` is ____.",
-      "choices": ["category", "price", "id", "stock"],
+      "choices": [
+        "category",
+        "price",
+        "id",
+        "stock"
+      ],
       "correct": "category"
     },
     "m2_s04_fill_text_value_style": {
@@ -400,7 +424,12 @@
       },
       "hint": "Think text formatting.",
       "template": "In beginner SQL filters, text values usually go in ____.",
-      "choices": ["quotes", "tables", "headers", "comments"],
+      "choices": [
+        "quotes",
+        "tables",
+        "headers",
+        "comments"
+      ],
       "correct": "quotes"
     },
     "m2_s04_fill_logic_keyword": {
@@ -413,7 +442,12 @@
       },
       "hint": "Think condition meaning.",
       "template": "When filtering with more than one rule, you should check the ____ carefully.",
-      "choices": ["logic", "font", "theme", "cursor"],
+      "choices": [
+        "logic",
+        "font",
+        "theme",
+        "cursor"
+      ],
       "correct": "logic"
     },
     "m2_s04_fill_result_check": {
@@ -426,7 +460,12 @@
       },
       "hint": "Think check after running.",
       "template": "After running a filter query, always ____ that the rows match the rule.",
-      "choices": ["verify", "rename", "drop", "sort"],
+      "choices": [
+        "verify",
+        "rename",
+        "drop",
+        "sort"
+      ],
       "correct": "verify"
     }
   }

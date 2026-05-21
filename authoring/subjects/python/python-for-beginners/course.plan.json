@@ -1,0 +1,143 @@
+{
+  "subjectSlug": "python-for-beginners",
+  "profileId": "python",
+  "modules": [
+    {
+      "moduleSlug": "introduction-to-python",
+      "prefix": "M1",
+      "order": 1,
+      "title": "Introduction to Python",
+      "description": "Get started with Python programming and set up your environment.",
+      "weekStart": 1,
+      "weekEnd": 1,
+      "sections": [
+        {
+          "sectionSlug": "setting-up-environment",
+          "order": 1,
+          "title": "Setting Up Your Environment",
+          "description": "Learn how to install Python and set up your coding environment.",
+          "topics": [
+            {
+              "topicId": "installing-python",
+              "order": 1,
+              "title": "Installing Python",
+              "summary": "Step-by-step guide to installing Python on your machine.",
+              "minutes": 30,
+              "learningGoals": [
+                "Install Python",
+                "Set up an IDE"
+              ]
+            },
+            {
+              "topicId": "first-program",
+              "order": 2,
+              "title": "Your First Python Program",
+              "summary": "Write and run your first Python program: Hello, World!",
+              "minutes": 30,
+              "learningGoals": [
+                "Write a simple program",
+                "Run a Python script"
+              ]
+            },
+            {
+              "topicId": "python-syntax",
+              "order": 3,
+              "title": "Understanding Python Syntax",
+              "summary": "Learn the basic syntax and structure of Python code.",
+              "minutes": 30,
+              "learningGoals": [
+                "Understand Python syntax",
+                "Identify code structure"
+              ]
+            },
+            {
+              "topicId": "variables-and-data-types",
+              "order": 4,
+              "title": "Variables and Data Types",
+              "summary": "Explore variables and different data types in Python.",
+              "minutes": 30,
+              "learningGoals": [
+                "Define variables",
+                "Identify data types"
+              ]
+            },
+            {
+              "topicId": "basic-operations",
+              "order": 5,
+              "title": "Basic Operations",
+              "summary": "Learn how to perform basic operations with Python.",
+              "minutes": 30,
+              "learningGoals": [
+                "Perform arithmetic operations",
+                "Use Python as a calculator"
+              ]
+            },
+            {
+              "topicId": "comments-and-docstrings",
+              "order": 6,
+              "title": "Comments and Docstrings",
+              "summary": "Understand the importance of comments and documentation in code.",
+              "minutes": 30,
+              "learningGoals": [
+                "Write comments",
+                "Use docstrings for functions"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "control-structures",
+      "prefix": "M2",
+      "order": 2,
+      "title": "Control Structures",
+      "description": "Learn how to control the flow of your Python programs using conditionals and loops.",
+      "weekStart": 2,
+      "weekEnd": 2,
+      "sections": [
+        {
+          "sectionSlug": "conditionals",
+          "order": 1,
+          "title": "Conditionals",
+          "description": "Understand how to use if, elif, and else statements.",
+          "topics": [
+            {
+              "topicId": "if-statements",
+              "order": 1,
+              "title": "If Statements",
+              "summary": "Learn how to use if statements to control program flow.",
+              "minutes": 30,
+              "learningGoals": [
+                "Write if statements",
+                "Understand boolean expressions"
+              ]
+            },
+            {
+              "topicId": "elif-and-else",
+              "order": 2,
+              "title": "Elif and Else",
+              "summary": "Explore how to use elif and else for multiple conditions.",
+              "minutes": 30,
+              "learningGoals": [
+                "Use elif and else",
+                "Chain multiple conditions"
+              ]
+            },
+            {
+              "topicId": "nested-conditionals",
+              "order": 3,
+              "title": "Nested Conditionals",
+              "summary": "Learn about nested if statements and their applications.",
+              "minutes": 30,
+              "learningGoals": [
+                "Write nested if statements",
+                "Understand their use cases"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

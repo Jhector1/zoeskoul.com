@@ -6,20 +6,34 @@
           "label": "Reading Data from a Table",
           "summary": "Learn how `FROM` points to the table, how to choose useful columns, and how to write clean beginner queries that are easy to read.",
           "cards": {
-            "sketch0": {
+            "from_and_table_names": {
               "title": "What does `FROM` do in a query?"
             },
-            "sketch1": {
+            "choosing_the_right_columns": {
               "title": "How do you choose the right columns?"
             },
-            "sketch2": {
+            "viewing_clean_results": {
               "title": "What makes results feel clean and easy to read?"
             },
-            "sketch3": {
+            "writing_simple_readable_queries": {
               "title": "How do you write simple readable queries?"
+            },
+            "project": {
+              "title": "Project: Read Table Data"
             },
             "quiz": {
               "title": "Quiz: Reading Data from a Table"
+            }
+          },
+          "projectSteps": {
+            "show_names_from_products": {
+              "title": "Show product names"
+            },
+            "show_names_and_categories": {
+              "title": "Show names and categories"
+            },
+            "write_readable_product_query": {
+              "title": "Write a readable product query"
             }
           }
         }
@@ -424,7 +438,12 @@
       },
       "hint": "Think source.",
       "template": "`FROM` tells SQL which ____ to read from.",
-      "choices": ["table", "button", "row order", "theme"],
+      "choices": [
+        "table",
+        "button",
+        "row order",
+        "theme"
+      ],
       "correct": "table"
     },
     "m1_s02_fill_column_choice_reason": {
@@ -437,7 +456,12 @@
       },
       "hint": "Think what you want to know.",
       "template": "Good column choices depend on the ____ you are asking.",
-      "choices": ["question", "color", "keyboard", "browser"],
+      "choices": [
+        "question",
+        "color",
+        "keyboard",
+        "browser"
+      ],
       "correct": "question"
     },
     "m1_s02_fill_clean_result_goal": {
@@ -450,7 +474,12 @@
       },
       "hint": "Think not extra.",
       "template": "A clean result often shows only the ____ columns.",
-      "choices": ["useful", "random", "hidden", "duplicate"],
+      "choices": [
+        "useful",
+        "random",
+        "hidden",
+        "duplicate"
+      ],
       "correct": "useful"
     },
     "m1_s02_fill_read_headers_first": {
@@ -463,7 +492,12 @@
       },
       "hint": "Labels first.",
       "template": "A good beginner reading habit is to look at the ____ first.",
-      "choices": ["column names", "bottom row", "table border", "mouse cursor"],
+      "choices": [
+        "column names",
+        "bottom row",
+        "table border",
+        "mouse cursor"
+      ],
       "correct": "column names"
     },
     "m1_s02_fill_readable_query_focus": {
@@ -476,7 +510,12 @@
       },
       "hint": "Think person.",
       "template": "The goal of readable SQL is to make the query easy for a ____ to understand.",
-      "choices": ["human", "printer", "speaker", "monitor"],
+      "choices": [
+        "human",
+        "printer",
+        "speaker",
+        "monitor"
+      ],
       "correct": "human"
     }
   }

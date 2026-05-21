@@ -6,16 +6,16 @@
           "label": "What SQL Is",
           "summary": "SQL is a language for working with organized data in databases.",
           "cards": {
-            "sketch0": {
+            "what_sql_means": {
               "title": "What does SQL mean?"
             },
-            "sketch1": {
+            "what_a_database_is": {
               "title": "What is a database?"
             },
-            "sketch2": {
+            "why_sql_is_useful": {
               "title": "Why is SQL useful?"
             },
-            "sketch3": {
+            "real_world_examples_of_databases": {
               "title": "Where do databases appear in real life?"
             },
             "quiz": {
@@ -285,7 +285,12 @@
       },
       "hint": "Think about the Q in SQL.",
       "template": "SQL stands for Structured ____ Language.",
-      "choices": ["Query", "Quick", "Question", "Queue"],
+      "choices": [
+        "Query",
+        "Quick",
+        "Question",
+        "Queue"
+      ],
       "correct": "Query"
     },
     "m0_s01_fill_database_contains": {
@@ -298,7 +303,12 @@
       },
       "hint": "Think about the bigger container.",
       "template": "A database can contain multiple ____.",
-      "choices": ["tables", "batteries", "monitors", "rulers"],
+      "choices": [
+        "tables",
+        "batteries",
+        "monitors",
+        "rulers"
+      ],
       "correct": "tables"
     },
     "m0_s01_fill_row_meaning": {
@@ -311,7 +321,12 @@
       },
       "hint": "One horizontal entry = one ____.",
       "template": "In a table, one row usually represents one ____.",
-      "choices": ["record", "database", "keyboard", "loop"],
+      "choices": [
+        "record",
+        "database",
+        "keyboard",
+        "loop"
+      ],
       "correct": "record"
     },
     "m0_s01_fill_select_meaning": {
@@ -324,7 +339,12 @@
       },
       "hint": "Think about reading data.",
       "template": "In SQL, SELECT usually means ____ data.",
-      "choices": ["show", "delete", "rename", "close"],
+      "choices": [
+        "show",
+        "delete",
+        "rename",
+        "close"
+      ],
       "correct": "show"
     },
     "m0_s01_fill_sql_action": {
@@ -337,7 +357,12 @@
       },
       "hint": "Think about narrowing data down.",
       "template": "SQL can help you ____ data to find only what you need.",
-      "choices": ["filter", "paint", "charge", "repair"],
+      "choices": [
+        "filter",
+        "paint",
+        "charge",
+        "repair"
+      ],
       "correct": "filter"
     },
     "m0_s01_fill_store_example": {
@@ -350,7 +375,12 @@
       },
       "hint": "Think about shopping data.",
       "template": "An online store database may track products and ____.",
-      "choices": ["orders", "pillows", "flashlights", "rulers"],
+      "choices": [
+        "orders",
+        "pillows",
+        "flashlights",
+        "rulers"
+      ],
       "correct": "orders"
     }
   }

@@ -5,45 +5,43 @@
   "sectionSlug": "section_1_1",
   "prefix": "sql1",
   "minutes": 8,
-
   "topic": {
     "labelKey": "topics.sql.sql_module_1.sql_syntax_basics.label",
     "summaryKey": "topics.sql.sql_module_1.sql_syntax_basics.summary"
   },
-
   "cards": [
     {
-      "id": "sketch0",
+      "id": "keywords",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_1.sql_syntax_basics.cards.sketch0.title",
+      "titleKey": "topics.sql.sql_module_1.sql_syntax_basics.cards.keywords.title",
       "sketchId": "keywords",
       "height": 520
     },
     {
-      "id": "sketch1",
+      "id": "semicolons",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_1.sql_syntax_basics.cards.sketch1.title",
+      "titleKey": "topics.sql.sql_module_1.sql_syntax_basics.cards.semicolons.title",
       "sketchId": "semicolons",
       "height": 520
     },
     {
-      "id": "sketch2",
+      "id": "uppercase_vs_lowercase",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_1.sql_syntax_basics.cards.sketch2.title",
+      "titleKey": "topics.sql.sql_module_1.sql_syntax_basics.cards.uppercase_vs_lowercase.title",
       "sketchId": "uppercase_vs_lowercase",
       "height": 520
     },
     {
-      "id": "sketch3",
+      "id": "common_beginner_syntax_mistakes",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_1.sql_syntax_basics.cards.sketch3.title",
+      "titleKey": "topics.sql.sql_module_1.sql_syntax_basics.cards.common_beginner_syntax_mistakes.title",
       "sketchId": "common_beginner_syntax_mistakes",
       "height": 520
     },
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.sql.sql_module_1.sql_syntax_basics.cards.quiz.title",
+      "titleKey": "topics.sql.sql_module_1.sql_syntax_basics.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -93,7 +91,6 @@
       }
     }
   ],
-
   "sketches": [
     {
       "id": "keywords",
@@ -120,7 +117,6 @@
       "bodyKey": "sketches.sql.sql_module_1.sql_syntax_basics.common_beginner_syntax_mistakes.bodyMarkdown"
     }
   ],
-
   "exercises": [
     {
       "id": "m1_s03_show_name_with_semicolon",
@@ -134,7 +130,41 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name FROM products;"
+        "solutionCode": "SELECT name FROM products;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name"
+              ],
+              "rows": [
+                [
+                  "Sketchbook"
+                ],
+                [
+                  "Acrylic Paint Set"
+                ],
+                [
+                  "Desk Lamp"
+                ],
+                [
+                  "Notebook"
+                ],
+                [
+                  "Fountain Pen"
+                ],
+                [
+                  "Office Chair"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -149,7 +179,48 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price FROM products;"
+        "solutionCode": "SELECT name, price FROM products;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name",
+                "price"
+              ],
+              "rows": [
+                [
+                  "Sketchbook",
+                  12.99
+                ],
+                [
+                  "Acrylic Paint Set",
+                  24.5
+                ],
+                [
+                  "Desk Lamp",
+                  39.99
+                ],
+                [
+                  "Notebook",
+                  6.75
+                ],
+                [
+                  "Fountain Pen",
+                  18
+                ],
+                [
+                  "Office Chair",
+                  129
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -164,17 +235,55 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "select category from products;"
+        "solutionCode": "select category from products;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "category"
+              ],
+              "rows": [
+                [
+                  "Art"
+                ],
+                [
+                  "Art"
+                ],
+                [
+                  "Home"
+                ],
+                [
+                  "Stationery"
+                ],
+                [
+                  "Stationery"
+                ],
+                [
+                  "Home"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
-
     {
       "id": "m1_s03_keywords_meaning",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_keywords_meaning",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -186,7 +295,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_semicolon_purpose",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -198,7 +312,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_uppercase_lowercase_meaning",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -210,7 +329,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_beginner_mistake_example",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -222,23 +346,38 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_readable_syntax_goal",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
       }
     },
-
     {
       "id": "m1_s03_keywords_true",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_keywords_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -247,10 +386,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_semicolons_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -259,10 +409,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_case_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -271,10 +432,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_beginner_mistakes_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -283,23 +455,41 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_syntax_workflow_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "d"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
       }
     },
-
     {
       "id": "m1_s03_reorder_keywords_meaning",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_reorder_keywords_meaning",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -308,10 +498,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_reorder_semicolon_purpose",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -320,10 +518,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_reorder_case_readability",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -332,10 +538,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_reorder_common_mistake_check",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -344,13 +558,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s03_reorder_two_column_syntax",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
-
     {
       "id": "m1_s03_fill_keyword_example",
       "kind": "fill_blank_choice",

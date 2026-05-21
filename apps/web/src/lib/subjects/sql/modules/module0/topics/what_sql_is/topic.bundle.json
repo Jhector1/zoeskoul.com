@@ -11,30 +11,30 @@
   },
   "cards": [
     {
-      "id": "sketch0",
+      "id": "what_sql_means",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_0.what_sql_is.cards.sketch0.title",
+      "titleKey": "topics.sql.sql_module_0.what_sql_is.cards.what_sql_means.title",
       "sketchId": "what_sql_means",
       "height": 520
     },
     {
-      "id": "sketch1",
+      "id": "what_a_database_is",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_0.what_sql_is.cards.sketch1.title",
+      "titleKey": "topics.sql.sql_module_0.what_sql_is.cards.what_a_database_is.title",
       "sketchId": "what_a_database_is",
       "height": 520
     },
     {
-      "id": "sketch2",
+      "id": "why_sql_is_useful",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_0.what_sql_is.cards.sketch2.title",
+      "titleKey": "topics.sql.sql_module_0.what_sql_is.cards.why_sql_is_useful.title",
       "sketchId": "why_sql_is_useful",
       "height": 520
     },
     {
-      "id": "sketch3",
+      "id": "real_world_examples_of_databases",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_0.what_sql_is.cards.sketch3.title",
+      "titleKey": "topics.sql.sql_module_0.what_sql_is.cards.real_world_examples_of_databases.title",
       "sketchId": "real_world_examples_of_databases",
       "height": 520
     },
@@ -115,6 +115,16 @@
           "id": "row_vs_column_highlight",
           "publicId": "row_vs_column_highlight_m2ofu8",
           "alt": ""
+        },
+        {
+          "alt": "",
+          "id": "table_row_column_labels",
+          "publicId": "Screenshot_2026-04-04_at_12.48.41_AM_iixkie"
+        },
+        {
+          "alt": "",
+          "id": "database_container_model",
+          "publicId": "database_container_model_eqjc9x"
         }
       ]
     },
@@ -125,16 +135,24 @@
       "bodyKey": "sketches.sql.sql_module_0.what_sql_is.why_sql_is_useful.bodyMarkdown",
       "images": [
         {
-          "publicId": "data_everywhere"
+          "publicId": "data_everywhere",
+          "id": "data_everywhere",
+          "alt": ""
         },
         {
-          "publicId": "sql_actions_overview"
+          "publicId": "sql_actions_overview",
+          "id": "sql_actions_overview",
+          "alt": ""
         },
         {
-          "publicId": "sql_questions_and_answers"
+          "publicId": "sql_questions_and_answers",
+          "id": "sql_questions_and_answers",
+          "alt": ""
         },
         {
-          "publicId": "ask_run_result_cycle"
+          "publicId": "ask_run_result_cycle",
+          "id": "ask_run_result_cycle",
+          "alt": ""
         }
       ]
     },
@@ -145,22 +163,34 @@
       "bodyKey": "sketches.sql.sql_module_0.what_sql_is.real_world_examples_of_databases.bodyMarkdown",
       "images": [
         {
-          "publicId": "databases_in_daily_life"
+          "publicId": "databases_in_daily_life",
+          "id": "databases_in_daily_life",
+          "alt": ""
         },
         {
-          "publicId": "school_database_example"
+          "publicId": "school_database_example",
+          "id": "school_database_example",
+          "alt": ""
         },
         {
-          "publicId": "store_database_example"
+          "publicId": "store_database_example",
+          "id": "store_database_example",
+          "alt": ""
         },
         {
-          "publicId": "media_database_example"
+          "publicId": "media_database_example",
+          "id": "media_database_example",
+          "alt": ""
         },
         {
-          "publicId": "hospital_database_example"
+          "publicId": "hospital_database_example",
+          "id": "hospital_database_example",
+          "alt": ""
         },
         {
-          "publicId": "shared_database_pattern"
+          "publicId": "shared_database_pattern",
+          "id": "shared_database_pattern",
+          "alt": ""
         }
       ]
     }

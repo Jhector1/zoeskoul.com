@@ -5,38 +5,36 @@
   "sectionSlug": "section_3_1",
   "prefix": "sql3",
   "minutes": 8,
-
   "topic": {
     "labelKey": "topics.sql.sql_module_3.limiting_output.label",
     "summaryKey": "topics.sql.sql_module_3.limiting_output.summary"
   },
-
   "cards": [
     {
-      "id": "sketch0",
+      "id": "why_limit_results",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.sketch0.title",
+      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.why_limit_results.title",
       "sketchId": "why_limit_results",
       "height": 520
     },
     {
-      "id": "sketch1",
+      "id": "limit_keyword",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.sketch1.title",
+      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.limit_keyword.title",
       "sketchId": "limit_keyword",
       "height": 520
     },
     {
-      "id": "sketch2",
+      "id": "top_rows_only",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.sketch2.title",
+      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.top_rows_only.title",
       "sketchId": "top_rows_only",
       "height": 520
     },
     {
-      "id": "sketch3",
+      "id": "combining_order_by_with_limit",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.sketch3.title",
+      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.combining_order_by_with_limit.title",
       "sketchId": "combining_order_by_with_limit",
       "height": 520
     },
@@ -111,7 +109,6 @@
       }
     }
   ],
-
   "sketches": [
     {
       "id": "why_limit_results",
@@ -138,7 +135,6 @@
       "bodyKey": "sketches.sql.sql_module_3.limiting_output.combining_order_by_with_limit.bodyMarkdown"
     }
   ],
-
   "exercises": [
     {
       "id": "m3_s03_show_first_3_names",
@@ -152,7 +148,32 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name FROM products LIMIT 3;"
+        "solutionCode": "SELECT name FROM products LIMIT 3;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name"
+              ],
+              "rows": [
+                [
+                  "Sketchbook"
+                ],
+                [
+                  "Acrylic Paint Set"
+                ],
+                [
+                  "Desk Lamp"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -167,7 +188,32 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price FROM products ORDER BY price DESC LIMIT 2;"
+        "solutionCode": "SELECT name, price FROM products ORDER BY price DESC LIMIT 2;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name",
+                "price"
+              ],
+              "rows": [
+                [
+                  "Office Chair",
+                  129
+                ],
+                [
+                  "Desk Lamp",
+                  39.99
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -182,7 +228,40 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, stock FROM products ORDER BY stock LIMIT 4;"
+        "solutionCode": "SELECT name, stock FROM products ORDER BY stock LIMIT 4;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name",
+                "stock"
+              ],
+              "rows": [
+                [
+                  "Office Chair",
+                  3
+                ],
+                [
+                  "Desk Lamp",
+                  8
+                ],
+                [
+                  "Acrylic Paint Set",
+                  10
+                ],
+                [
+                  "Fountain Pen",
+                  15
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -197,7 +276,36 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, created_at FROM products ORDER BY created_at DESC LIMIT 3;"
+        "solutionCode": "SELECT name, created_at FROM products ORDER BY created_at DESC LIMIT 3;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name",
+                "created_at"
+              ],
+              "rows": [
+                [
+                  "Notebook",
+                  "2026-02-14"
+                ],
+                [
+                  "Acrylic Paint Set",
+                  "2026-02-02"
+                ],
+                [
+                  "Fountain Pen",
+                  "2026-01-25"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -212,17 +320,46 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, created_at FROM products ORDER BY created_at ASC LIMIT 2;"
+        "solutionCode": "SELECT name, created_at FROM products ORDER BY created_at ASC LIMIT 2;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name",
+                "created_at"
+              ],
+              "rows": [
+                [
+                  "Office Chair",
+                  "2025-11-05"
+                ],
+                [
+                  "Desk Lamp",
+                  "2025-12-20"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
-
     {
       "id": "m3_s03_why_limit",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_why_limit",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -234,7 +371,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_limit_job",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -246,7 +388,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_top_rows_meaning",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -258,7 +405,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_order_by_limit_combo",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -270,23 +422,38 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_check_limited_result",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
       }
     },
-
     {
       "id": "m3_s03_limit_true",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_limit_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -295,10 +462,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_top_rows_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -307,10 +485,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_order_by_limit_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -319,10 +508,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_limit_benefits_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -331,23 +531,41 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_limit_workflow_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "d"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
       }
     },
-
     {
       "id": "m3_s03_reorder_limit_purpose",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_reorder_limit_purpose",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -356,10 +574,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_reorder_limit_flow",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -368,10 +594,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_reorder_top_rows_logic",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -380,10 +614,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_reorder_order_limit_combo",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -392,13 +634,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m3_s03_reorder_limit_workflow",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
-
     {
       "id": "m3_s03_fill_limit_keyword",
       "kind": "fill_blank_choice",

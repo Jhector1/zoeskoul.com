@@ -6,16 +6,16 @@
           "label": "Understanding Tables",
           "summary": "Tables organize data into rows and columns so it is easy to read.",
           "cards": {
-            "sketch0": {
+            "rows_and_columns": {
               "title": "What do rows and columns do?"
             },
-            "sketch1": {
+            "records_and_fields": {
               "title": "What is a record and what is a field?"
             },
-            "sketch2": {
+            "table_names_and_column_names": {
               "title": "Why do table names and column names matter?"
             },
-            "sketch3": {
+            "reading_data_like_a_spreadsheet": {
               "title": "How do you read a table like a spreadsheet?"
             },
             "quiz": {
@@ -264,7 +264,12 @@
       },
       "hint": "Think horizontal.",
       "template": "In a table, a row goes ____.",
-      "choices": ["across", "down", "outside", "backward"],
+      "choices": [
+        "across",
+        "down",
+        "outside",
+        "backward"
+      ],
       "correct": "across"
     },
     "m0_s02_fill_column_purpose": {
@@ -277,7 +282,12 @@
       },
       "hint": "Think data category.",
       "template": "Each column describes one type of ____.",
-      "choices": ["information", "database", "password", "button"],
+      "choices": [
+        "information",
+        "database",
+        "password",
+        "button"
+      ],
       "correct": "information"
     },
     "m0_s02_fill_record_meaning": {
@@ -290,7 +300,12 @@
       },
       "hint": "Think full entry.",
       "template": "A record is one full ____ in a table.",
-      "choices": ["row", "column", "database", "server"],
+      "choices": [
+        "row",
+        "column",
+        "database",
+        "server"
+      ],
       "correct": "row"
     },
     "m0_s02_fill_field_meaning": {
@@ -303,7 +318,12 @@
       },
       "hint": "Think one box in a row.",
       "template": "A field is one ____ inside a record.",
-      "choices": ["value", "table", "query", "diagram"],
+      "choices": [
+        "value",
+        "table",
+        "query",
+        "diagram"
+      ],
       "correct": "value"
     },
     "m0_s02_fill_reading_first_step": {
@@ -316,7 +336,12 @@
       },
       "hint": "Start broad.",
       "template": "A smart way to read a table starts with the ____.",
-      "choices": ["table name", "last row", "table border", "keyboard"],
+      "choices": [
+        "table name",
+        "last row",
+        "table border",
+        "keyboard"
+      ],
       "correct": "table name"
     }
   }

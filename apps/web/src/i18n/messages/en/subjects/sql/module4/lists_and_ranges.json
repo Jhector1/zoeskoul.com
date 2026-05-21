@@ -6,20 +6,34 @@
           "label": "Lists and Ranges",
           "summary": "Learn how to filter from a list of values with `IN`, exclude a list with `NOT IN`, filter ranges with `BETWEEN`, and practice clear range logic.",
           "cards": {
-            "sketch0": {
+            "in_operator": {
               "title": "What does IN do?"
             },
-            "sketch1": {
+            "not_in_operator": {
               "title": "What does NOT IN do?"
             },
-            "sketch2": {
+            "between_operator": {
               "title": "What does BETWEEN do?"
             },
-            "sketch3": {
+            "range_filtering_practice": {
               "title": "How do you practice range filtering safely?"
+            },
+            "project": {
+              "title": "Project: Use Lists and Ranges"
             },
             "quiz": {
               "title": "Quiz: Lists and Ranges"
+            }
+          },
+          "projectSteps": {
+            "status_in_active_draft": {
+              "title": "Keep active and draft statuses"
+            },
+            "city_not_in_chicago_miami": {
+              "title": "Skip Chicago and Miami"
+            },
+            "signup_between_jan12_jan25": {
+              "title": "Keep signups from Jan 12 to Jan 25"
             }
           }
         }
@@ -409,7 +423,12 @@
       },
       "hint": "Think list membership.",
       "template": "The SQL keyword used for list membership is ____.",
-      "choices": ["IN", "LIKE", "LIMIT", "GROUP"],
+      "choices": [
+        "IN",
+        "LIKE",
+        "LIMIT",
+        "GROUP"
+      ],
       "correct": "IN"
     },
     "m4_s02_fill_not_in_keyword": {
@@ -422,7 +441,12 @@
       },
       "hint": "Think exclusion from a list.",
       "template": "The SQL phrase used to exclude listed values is ____.",
-      "choices": ["NOT IN", "BETWEEN", "ORDER BY", "AS"],
+      "choices": [
+        "NOT IN",
+        "BETWEEN",
+        "ORDER BY",
+        "AS"
+      ],
       "correct": "NOT IN"
     },
     "m4_s02_fill_between_keyword": {
@@ -435,7 +459,12 @@
       },
       "hint": "Think range keyword.",
       "template": "The SQL keyword used for a start-to-end range is ____.",
-      "choices": ["BETWEEN", "IN", "LIKE", "NULL"],
+      "choices": [
+        "BETWEEN",
+        "IN",
+        "LIKE",
+        "NULL"
+      ],
       "correct": "BETWEEN"
     },
     "m4_s02_fill_range_start_end": {
@@ -448,7 +477,12 @@
       },
       "hint": "Think range edges.",
       "template": "A range filter checks a value against two ____.",
-      "choices": ["boundaries", "columns", "aliases", "joins"],
+      "choices": [
+        "boundaries",
+        "columns",
+        "aliases",
+        "joins"
+      ],
       "correct": "boundaries"
     },
     "m4_s02_fill_list_meaning": {
@@ -461,7 +495,12 @@
       },
       "hint": "Think set of values.",
       "template": "`IN` checks whether a value belongs to a ____.",
-      "choices": ["list", "date", "join", "table alias"],
+      "choices": [
+        "list",
+        "date",
+        "join",
+        "table alias"
+      ],
       "correct": "list"
     }
   }

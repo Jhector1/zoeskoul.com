@@ -5,46 +5,43 @@
   "sectionSlug": "sql_introduction",
   "prefix": "sql0",
   "minutes": 8,
-
   "topic": {
     "labelKey": "topics.sql.sql_module_0.first_sql_environment.label",
     "summaryKey": "topics.sql.sql_module_0.first_sql_environment.summary"
   },
-
   "cards": [
     {
-      "id": "sketch0",
+      "id": "where_sql_runs",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_0.first_sql_environment.cards.sketch0.title",
+      "titleKey": "topics.sql.sql_module_0.first_sql_environment.cards.where_sql_runs.title",
       "sketchId": "where_sql_runs",
       "height": 520
     },
     {
-      "id": "sketch1",
+      "id": "sql_editor_basics",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_0.first_sql_environment.cards.sketch1.title",
+      "titleKey": "topics.sql.sql_module_0.first_sql_environment.cards.sql_editor_basics.title",
       "sketchId": "sql_editor_basics",
       "height": 520
     },
     {
-      "id": "sketch2",
+      "id": "running_your_first_query",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_0.first_sql_environment.cards.sketch2.title",
+      "titleKey": "topics.sql.sql_module_0.first_sql_environment.cards.running_your_first_query.title",
       "sketchId": "running_your_first_query",
       "height": 520
     },
     {
-      "id": "sketch3",
+      "id": "reading_query_results",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_0.first_sql_environment.cards.sketch3.title",
+      "titleKey": "topics.sql.sql_module_0.first_sql_environment.cards.reading_query_results.title",
       "sketchId": "reading_query_results",
       "height": 520
     },
-
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.sql.sql_module_0.first_sql_environment.cards.quiz.title",
+      "titleKey": "topics.sql.sql_module_0.first_sql_environment.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -100,14 +97,19 @@
       }
     }
   ],
-
   "sketches": [
     {
       "id": "where_sql_runs",
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_0.first_sql_environment.where_sql_runs.title",
-      "bodyKey": "sketches.sql.sql_module_0.first_sql_environment.where_sql_runs.bodyMarkdown"
-
+      "bodyKey": "sketches.sql.sql_module_0.first_sql_environment.where_sql_runs.bodyMarkdown",
+      "images": [
+        {
+          "alt": "",
+          "id": "sql_workspace_overview",
+          "publicId": "sql_workspace_overview"
+        }
+      ]
     },
     {
       "id": "sql_editor_basics",
@@ -123,7 +125,8 @@
       "images": [
         {
           "id": "first_query_in_workspace",
-          "publicId": "Screenshot_2026-04-11_at_12.51.34_AM_y9mgqf"
+          "publicId": "Screenshot_2026-04-11_at_12.51.34_AM_y9mgqf",
+          "alt": ""
         }
       ]
     },
@@ -134,7 +137,6 @@
       "bodyKey": "sketches.sql.sql_module_0.first_sql_environment.reading_query_results.bodyMarkdown"
     }
   ],
-
   "exercises": [
     {
       "id": "m0_s04_run_hello_query",
@@ -148,7 +150,26 @@
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT 'Hello SQL' AS message;"
+        "solutionCode": "SELECT 'Hello SQL' AS message;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "message"
+              ],
+              "rows": [
+                [
+                  "Hello SQL"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -163,7 +184,62 @@
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM students;"
+        "solutionCode": "SELECT * FROM students;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "id",
+                "name",
+                "grade",
+                "age",
+                "city"
+              ],
+              "rows": [
+                [
+                  1,
+                  "Noor",
+                  "A",
+                  15,
+                  "Chicago"
+                ],
+                [
+                  2,
+                  "Mia",
+                  "A",
+                  14,
+                  "Evanston"
+                ],
+                [
+                  3,
+                  "Leo",
+                  "B",
+                  15,
+                  "Chicago"
+                ],
+                [
+                  4,
+                  "Ava",
+                  "C",
+                  14,
+                  "Oak Park"
+                ],
+                [
+                  5,
+                  "Zane",
+                  "B",
+                  16,
+                  "Naperville"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -178,7 +254,38 @@
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT name FROM students;"
+        "solutionCode": "SELECT name FROM students;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name"
+              ],
+              "rows": [
+                [
+                  "Noor"
+                ],
+                [
+                  "Mia"
+                ],
+                [
+                  "Leo"
+                ],
+                [
+                  "Ava"
+                ],
+                [
+                  "Zane"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -193,7 +300,62 @@
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM students ORDER BY name;"
+        "solutionCode": "SELECT * FROM students ORDER BY name;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "id",
+                "name",
+                "grade",
+                "age",
+                "city"
+              ],
+              "rows": [
+                [
+                  4,
+                  "Ava",
+                  "C",
+                  14,
+                  "Oak Park"
+                ],
+                [
+                  3,
+                  "Leo",
+                  "B",
+                  15,
+                  "Chicago"
+                ],
+                [
+                  2,
+                  "Mia",
+                  "A",
+                  14,
+                  "Evanston"
+                ],
+                [
+                  1,
+                  "Noor",
+                  "A",
+                  15,
+                  "Chicago"
+                ],
+                [
+                  5,
+                  "Zane",
+                  "B",
+                  16,
+                  "Naperville"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -208,17 +370,55 @@
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM students WHERE grade = 'A';"
+        "solutionCode": "SELECT * FROM students WHERE grade = 'A';",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "id",
+                "name",
+                "grade",
+                "age",
+                "city"
+              ],
+              "rows": [
+                [
+                  1,
+                  "Noor",
+                  "A",
+                  15,
+                  "Chicago"
+                ],
+                [
+                  2,
+                  "Mia",
+                  "A",
+                  14,
+                  "Evanston"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
-
     {
       "id": "m0_s04_where_sql_runs",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_where_sql_runs",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -230,7 +430,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_editor_purpose",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -242,7 +447,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_run_button",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -254,7 +464,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_results_tab",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -266,23 +481,38 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_read_results_order",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
       }
     },
-
     {
       "id": "m0_s04_workspace_parts_true",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_workspace_parts_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "d"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
       }
     },
     {
@@ -291,10 +521,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_hello_query_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -303,10 +544,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_select_star_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -315,10 +567,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_results_headers_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -327,23 +590,41 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_interaction_flow_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "d"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
       }
     },
-
     {
       "id": "m0_s04_reorder_workspace_loop",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_reorder_workspace_loop",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -352,10 +633,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_reorder_editor_focus",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
@@ -364,10 +655,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_reorder_first_query_flow",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
@@ -376,10 +677,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_reorder_hello_query_meaning",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -388,10 +697,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_reorder_results_reading",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -400,13 +717,22 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s04_reorder_workspace_parts",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
-
     {
       "id": "m0_s04_fill_workspace_name",
       "kind": "fill_blank_choice",

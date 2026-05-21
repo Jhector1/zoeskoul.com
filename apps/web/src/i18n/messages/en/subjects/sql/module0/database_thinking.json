@@ -6,16 +6,16 @@
           "label": "Database Thinking",
           "summary": "Database thinking means organizing data clearly so you can ask useful questions and identify records correctly.",
           "cards": {
-            "sketch0": {
+            "why_database_thinking_matters": {
               "title": "Why does database thinking matter?"
             },
-            "sketch1": {
+            "questions_turn_into_answers": {
               "title": "How do questions turn into answers?"
             },
-            "sketch2": {
+            "why_structure_matters": {
               "title": "Why does structure matter?"
             },
-            "sketch3": {
+            "what_a_key_is": {
               "title": "What is a key?"
             },
             "quiz": {
@@ -223,7 +223,12 @@
       },
       "hint": "Databases help you get ____.",
       "template": "A good database helps turn stored data into useful ____.",
-      "choices": ["answers", "colors", "stickers", "batteries"],
+      "choices": [
+        "answers",
+        "colors",
+        "stickers",
+        "batteries"
+      ],
       "correct": "answers"
     },
     "m0_s03_fill_structure_value": {
@@ -236,7 +241,12 @@
       },
       "hint": "Good structure adds clarity.",
       "template": "Good database structure makes data easier to ____.",
-      "choices": ["understand", "erase", "hide", "ignore"],
+      "choices": [
+        "understand",
+        "erase",
+        "hide",
+        "ignore"
+      ],
       "correct": "understand"
     },
     "m0_s03_fill_key_meaning": {
@@ -249,7 +259,12 @@
       },
       "hint": "A key helps you identify one ____.",
       "template": "A key is used to identify one specific ____ in a table.",
-      "choices": ["row", "screen", "query", "keyboard"],
+      "choices": [
+        "row",
+        "screen",
+        "query",
+        "keyboard"
+      ],
       "correct": "row"
     },
     "m0_s03_fill_name_problem": {
@@ -262,7 +277,12 @@
       },
       "hint": "People can share the same ____.",
       "template": "A name alone may not be enough because names can ____.",
-      "choices": ["repeat", "sort", "delete", "connect"],
+      "choices": [
+        "repeat",
+        "sort",
+        "delete",
+        "connect"
+      ],
       "correct": "repeat"
     },
     "m0_s03_fill_future_keys": {
@@ -275,7 +295,12 @@
       },
       "hint": "Keys later help tables ____.",
       "template": "Later, keys can also help ____ one table to another.",
-      "choices": ["connect", "paint", "freeze", "rotate"],
+      "choices": [
+        "connect",
+        "paint",
+        "freeze",
+        "rotate"
+      ],
       "correct": "connect"
     }
   }

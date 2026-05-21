@@ -291,6 +291,11 @@ export function buildSqlQueryExpected(args: {
         );
     }
 
+    const authoredTests =
+        Array.isArray(args.recipe.tests) && args.recipe.tests.length > 0
+            ? args.recipe.tests
+            : null;
+
     return makeSqlExpected({
         language: "sql",
         fixedSqlDialect,
@@ -299,8 +304,25 @@ export function buildSqlQueryExpected(args: {
             datasetId: args.recipe.datasetId,
             resultShape,
         },
-        tests: [
-            {
+        tests: authoredTests
+            ? authoredTests.map((test) => ({
+                kind: "sql" as const,
+                sqlDialect: test.sqlDialect ?? fixedSqlDialect,
+                runtime: {
+                    kind: "sql" as const,
+                    datasetId: args.recipe.datasetId,
+                    resultShape,
+                },
+                compareTo: test.compareTo ?? "solution",
+                expectedTable: test.expectedTable,
+                match: "table_exact" as const,
+                ignoreRowOrder:
+                    test.ignoreRowOrder ?? args.recipe.ignoreRowOrder ?? false,
+                ...(normalizeSql(test.checkSql) || checkSql
+                    ? { checkSql: normalizeSql(test.checkSql) || checkSql }
+                    : {}),
+            }))
+            : [{
                 kind: "sql",
                 sqlDialect: fixedSqlDialect,
                 runtime: {
@@ -312,8 +334,7 @@ export function buildSqlQueryExpected(args: {
                 match: "table_exact",
                 ignoreRowOrder: args.recipe.ignoreRowOrder ?? false,
                 ...(checkSql ? { checkSql } : {}),
-            } satisfies SqlExpectedTest,
-        ],
+            } satisfies SqlExpectedTest],
         solutionCode,
     });
 }

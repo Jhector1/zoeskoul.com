@@ -6,20 +6,34 @@
           "label": "Sorting by Multiple Columns",
           "summary": "Learn how primary and secondary sorting work, and how to sort text, numbers, and dates using more than one column.",
           "cards": {
-            "sketch0": {
+            "primary_sort": {
               "title": "What is a primary sort?"
             },
-            "sketch1": {
+            "secondary_sort": {
               "title": "What is a secondary sort?"
             },
-            "sketch2": {
+            "sorting_text": {
               "title": "How do you sort text with multiple columns?"
             },
-            "sketch3": {
+            "sorting_numbers_and_dates": {
               "title": "How do you sort numbers and dates with multiple columns?"
+            },
+            "project": {
+              "title": "Project: Sort by Multiple Columns"
             },
             "quiz": {
               "title": "Quiz: Sorting by Multiple Columns"
+            }
+          },
+          "projectSteps": {
+            "sort_category_then_name": {
+              "title": "Sort by category, then name"
+            },
+            "sort_category_then_price_desc": {
+              "title": "Sort by category, then price descending"
+            },
+            "sort_stock_then_price": {
+              "title": "Sort by stock, then price"
             }
           }
         }
@@ -391,7 +405,12 @@
       },
       "hint": "Think first.",
       "template": "The primary sort is the ____ sort column listed.",
-      "choices": ["first", "last", "random", "hidden"],
+      "choices": [
+        "first",
+        "last",
+        "random",
+        "hidden"
+      ],
       "correct": "first"
     },
     "m3_s02_fill_secondary_keyword": {
@@ -404,7 +423,12 @@
       },
       "hint": "Think tie-breaker.",
       "template": "The secondary sort is mainly used to break ____.",
-      "choices": ["ties", "limits", "filters", "headers"],
+      "choices": [
+        "ties",
+        "limits",
+        "filters",
+        "headers"
+      ],
       "correct": "ties"
     },
     "m3_s02_fill_text_example": {
@@ -417,7 +441,12 @@
       },
       "hint": "Think grouping text column.",
       "template": "A common first text sort column is ____.",
-      "choices": ["category", "price", "stock", "created_at"],
+      "choices": [
+        "category",
+        "price",
+        "stock",
+        "created_at"
+      ],
       "correct": "category"
     },
     "m3_s02_fill_layered_sort_word": {
@@ -430,7 +459,12 @@
       },
       "hint": "Think layers.",
       "template": "Multi-column sorting works in ____.",
-      "choices": ["levels", "randomness", "filters", "tables"],
+      "choices": [
+        "levels",
+        "randomness",
+        "filters",
+        "tables"
+      ],
       "correct": "levels"
     },
     "m3_s02_fill_sort_strength": {
@@ -443,7 +477,12 @@
       },
       "hint": "Think biggest influence.",
       "template": "The primary sort has the ____ control over the result order.",
-      "choices": ["strongest", "weakest", "latest", "shortest"],
+      "choices": [
+        "strongest",
+        "weakest",
+        "latest",
+        "shortest"
+      ],
       "correct": "strongest"
     }
   }

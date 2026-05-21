@@ -6,20 +6,34 @@
           "label": "Filtering with Multiple Conditions",
           "summary": "Learn how to combine filters with `AND`, `OR`, and `NOT`, and how to build multi-part conditions safely and clearly.",
           "cards": {
-            "sketch0": {
+            "and_operator": {
               "title": "How does `AND` work?"
             },
-            "sketch1": {
+            "or_operator": {
               "title": "How does `OR` work?"
             },
-            "sketch2": {
+            "not_operator": {
               "title": "How does `NOT` work?"
             },
-            "sketch3": {
+            "combining_conditions_safely": {
               "title": "How do you combine conditions safely?"
+            },
+            "project": {
+              "title": "Project: Combine Conditions"
             },
             "quiz": {
               "title": "Quiz: Filtering with Multiple Conditions"
+            }
+          },
+          "projectSteps": {
+            "filter_art_and_stock_gte_10": {
+              "title": "Filter art with stock 10 or more"
+            },
+            "filter_art_or_home": {
+              "title": "Filter art or home"
+            },
+            "filter_not_stationery": {
+              "title": "Filter not stationery"
             }
           }
         }
@@ -391,7 +405,12 @@
       },
       "hint": "Think all required conditions.",
       "template": "Use ____ when both linked conditions must be true.",
-      "choices": ["AND", "OR", "NOT", "FROM"],
+      "choices": [
+        "AND",
+        "OR",
+        "NOT",
+        "FROM"
+      ],
       "correct": "AND"
     },
     "m2_s03_fill_or_keyword": {
@@ -404,7 +423,12 @@
       },
       "hint": "Think either side.",
       "template": "Use ____ when at least one linked condition can match.",
-      "choices": ["OR", "AND", "NOT", "AS"],
+      "choices": [
+        "OR",
+        "AND",
+        "NOT",
+        "AS"
+      ],
       "correct": "OR"
     },
     "m2_s03_fill_not_keyword": {
@@ -417,7 +441,12 @@
       },
       "hint": "Think reverse.",
       "template": "Use ____ when you want to reverse a condition.",
-      "choices": ["NOT", "OR", "AND", "IN"],
+      "choices": [
+        "NOT",
+        "OR",
+        "AND",
+        "IN"
+      ],
       "correct": "NOT"
     },
     "m2_s03_fill_and_requirement": {
@@ -430,7 +459,12 @@
       },
       "hint": "Think both sides.",
       "template": "With `AND`, ____ conditions usually need to be true.",
-      "choices": ["both", "either", "zero", "random"],
+      "choices": [
+        "both",
+        "either",
+        "zero",
+        "random"
+      ],
       "correct": "both"
     },
     "m2_s03_fill_or_requirement": {
@@ -443,7 +477,12 @@
       },
       "hint": "Think one side can work.",
       "template": "With `OR`, ____ condition can be enough to keep the row.",
-      "choices": ["either", "both", "every", "final"],
+      "choices": [
+        "either",
+        "both",
+        "every",
+        "final"
+      ],
       "correct": "either"
     }
   }

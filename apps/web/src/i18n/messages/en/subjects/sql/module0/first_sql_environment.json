@@ -6,20 +6,40 @@
           "label": "First SQL Environment",
           "summary": "This SQL workspace lets you type queries, run them, and inspect the answers.",
           "cards": {
-            "sketch0": {
+            "where_sql_runs": {
               "title": "Where will you run SQL in this course?"
             },
-            "sketch1": {
+            "sql_editor_basics": {
               "title": "What parts of the SQL workspace matter most?"
             },
-            "sketch2": {
+            "running_your_first_query": {
               "title": "How do you run your first query here?"
             },
-            "sketch3": {
+            "reading_query_results": {
               "title": "How do you read the results and tables?"
+            },
+            "project": {
+              "title": "Project: Run Your First SQL Query"
             },
             "quiz": {
               "title": "Quiz: First SQL Environment"
+            }
+          },
+          "projectSteps": {
+            "run_hello_query": {
+              "title": "Run a hello query"
+            },
+            "run_first_select": {
+              "title": "Show all students"
+            },
+            "show_one_column": {
+              "title": "Show one column"
+            },
+            "sort_results": {
+              "title": "Sort results by name"
+            },
+            "filter_rows": {
+              "title": "Filter rows by grade"
             }
           }
         }
@@ -426,7 +446,12 @@
       },
       "hint": "Think about the language you are practicing.",
       "template": "This course gives you a real ____ workspace.",
-      "choices": ["SQL", "HTML", "CSS", "Music"],
+      "choices": [
+        "SQL",
+        "HTML",
+        "CSS",
+        "Music"
+      ],
       "correct": "SQL"
     },
     "m0_s04_fill_run_action": {
@@ -439,7 +464,12 @@
       },
       "hint": "Think about the execution button.",
       "template": "After typing a query, click ____.",
-      "choices": ["Run", "Paint", "Sleep", "Erase"],
+      "choices": [
+        "Run",
+        "Paint",
+        "Sleep",
+        "Erase"
+      ],
       "correct": "Run"
     },
     "m0_s04_fill_results_tab_name": {
@@ -452,7 +482,12 @@
       },
       "hint": "Think about the answer tab.",
       "template": "After running a query, the answer usually appears in the ____ tab.",
-      "choices": ["Results", "Profile", "Themes", "Audio"],
+      "choices": [
+        "Results",
+        "Profile",
+        "Themes",
+        "Audio"
+      ],
       "correct": "Results"
     },
     "m0_s04_fill_hello_column_name": {
@@ -465,7 +500,12 @@
       },
       "hint": "Look at the alias after `AS`.",
       "template": "In `SELECT 'Hello SQL' AS message;`, the column name is ____.",
-      "choices": ["message", "students", "grade", "Results"],
+      "choices": [
+        "message",
+        "students",
+        "grade",
+        "Results"
+      ],
       "correct": "message"
     },
     "m0_s04_fill_tables_tab_name": {
@@ -478,7 +518,12 @@
       },
       "hint": "Think about the tab that lists tables.",
       "template": "You can click ____ to see what tables exist.",
-      "choices": ["Tables", "Volume", "Search", "Brush"],
+      "choices": [
+        "Tables",
+        "Volume",
+        "Search",
+        "Brush"
+      ],
       "correct": "Tables"
     }
   }

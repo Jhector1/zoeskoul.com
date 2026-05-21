@@ -5,45 +5,43 @@
   "sectionSlug": "section_1_1",
   "prefix": "sql1",
   "minutes": 8,
-
   "topic": {
     "labelKey": "topics.sql.sql_module_1.intro_to_select.label",
     "summaryKey": "topics.sql.sql_module_1.intro_to_select.summary"
   },
-
   "cards": [
     {
-      "id": "sketch0",
+      "id": "what_select_does",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_1.intro_to_select.cards.sketch0.title",
+      "titleKey": "topics.sql.sql_module_1.intro_to_select.cards.what_select_does.title",
       "sketchId": "what_select_does",
       "height": 520
     },
     {
-      "id": "sketch1",
+      "id": "selecting_all_columns_with_star",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_1.intro_to_select.cards.sketch1.title",
+      "titleKey": "topics.sql.sql_module_1.intro_to_select.cards.selecting_all_columns_with_star.title",
       "sketchId": "selecting_all_columns_with_star",
       "height": 520
     },
     {
-      "id": "sketch2",
+      "id": "selecting_specific_columns",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_1.intro_to_select.cards.sketch2.title",
+      "titleKey": "topics.sql.sql_module_1.intro_to_select.cards.selecting_specific_columns.title",
       "sketchId": "selecting_specific_columns",
       "height": 520
     },
     {
-      "id": "sketch3",
+      "id": "query_structure_basics",
       "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_1.intro_to_select.cards.sketch3.title",
+      "titleKey": "topics.sql.sql_module_1.intro_to_select.cards.query_structure_basics.title",
       "sketchId": "query_structure_basics",
       "height": 520
     },
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.sql.sql_module_1.intro_to_select.cards.quiz.title",
+      "titleKey": "topics.sql.sql_module_1.intro_to_select.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -93,7 +91,6 @@
       }
     }
   ],
-
   "sketches": [
     {
       "id": "what_select_does",
@@ -120,7 +117,6 @@
       "bodyKey": "sketches.sql.sql_module_1.intro_to_select.query_structure_basics.bodyMarkdown"
     }
   ],
-
   "exercises": [
     {
       "id": "m1_s01_show_all_products",
@@ -135,7 +131,76 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM products;"
+        "solutionCode": "SELECT * FROM products;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "id",
+                "name",
+                "category",
+                "price",
+                "stock",
+                "created_at"
+              ],
+              "rows": [
+                [
+                  1,
+                  "Sketchbook",
+                  "Art",
+                  12.99,
+                  25,
+                  "2026-01-10"
+                ],
+                [
+                  2,
+                  "Acrylic Paint Set",
+                  "Art",
+                  24.5,
+                  10,
+                  "2026-02-02"
+                ],
+                [
+                  3,
+                  "Desk Lamp",
+                  "Home",
+                  39.99,
+                  8,
+                  "2025-12-20"
+                ],
+                [
+                  4,
+                  "Notebook",
+                  "Stationery",
+                  6.75,
+                  50,
+                  "2026-02-14"
+                ],
+                [
+                  5,
+                  "Fountain Pen",
+                  "Stationery",
+                  18,
+                  15,
+                  "2026-01-25"
+                ],
+                [
+                  6,
+                  "Office Chair",
+                  "Home",
+                  129,
+                  3,
+                  "2025-11-05"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -151,7 +216,41 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name FROM products;"
+        "solutionCode": "SELECT name FROM products;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name"
+              ],
+              "rows": [
+                [
+                  "Sketchbook"
+                ],
+                [
+                  "Acrylic Paint Set"
+                ],
+                [
+                  "Desk Lamp"
+                ],
+                [
+                  "Notebook"
+                ],
+                [
+                  "Fountain Pen"
+                ],
+                [
+                  "Office Chair"
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
     {
@@ -167,17 +266,62 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price FROM products;"
+        "solutionCode": "SELECT name, price FROM products;",
+        "tests": [
+          {
+            "kind": "sql",
+            "sqlDialect": "sqlite",
+            "compareTo": "expected_table",
+            "expectedTable": {
+              "columns": [
+                "name",
+                "price"
+              ],
+              "rows": [
+                [
+                  "Sketchbook",
+                  12.99
+                ],
+                [
+                  "Acrylic Paint Set",
+                  24.5
+                ],
+                [
+                  "Desk Lamp",
+                  39.99
+                ],
+                [
+                  "Notebook",
+                  6.75
+                ],
+                [
+                  "Fountain Pen",
+                  18
+                ],
+                [
+                  "Office Chair",
+                  129
+                ]
+              ]
+            },
+            "match": "table_exact",
+            "ignoreRowOrder": false
+          }
+        ]
       }
     },
-
     {
       "id": "m1_s01_what_select_does",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_what_select_does",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -189,7 +333,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_star_meaning",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -201,7 +350,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_specific_columns_why",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -213,7 +367,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_query_structure_order",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -225,23 +384,38 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_reading_results",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
       }
     },
-
     {
       "id": "m1_s01_select_true",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_select_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -250,10 +424,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_star_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -262,10 +447,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_specific_columns_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -274,10 +470,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_from_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
     {
@@ -286,23 +493,41 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_result_reading_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
       }
     },
-
     {
       "id": "m1_s01_reorder_select_purpose",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_reorder_select_purpose",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -311,10 +536,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_reorder_select_from_structure",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
@@ -323,10 +558,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_reorder_star_meaning",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -335,10 +578,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_reorder_specific_columns",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -347,13 +598,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_s01_reorder_name_price_query",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
-
     {
       "id": "m1_s01_fill_select_keyword_job",
       "kind": "fill_blank_choice",

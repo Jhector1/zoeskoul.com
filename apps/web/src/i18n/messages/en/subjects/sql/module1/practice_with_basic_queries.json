@@ -6,20 +6,34 @@
           "label": "Practice with Basic Queries",
           "summary": "Practice asking for one column, several related columns, and full tables, and start predicting what the result should look like before you run the query.",
           "cards": {
-            "sketch0": {
+            "query_one_column": {
               "title": "How do you query one column?"
             },
-            "sketch1": {
+            "query_multiple_columns": {
               "title": "How do you query multiple columns?"
             },
-            "sketch2": {
+            "query_full_tables": {
               "title": "How do you query a full table?"
             },
-            "sketch3": {
+            "predicting_result_output": {
               "title": "How can you predict a result before running the query?"
+            },
+            "project": {
+              "title": "Project: Build Basic Queries"
             },
             "quiz": {
               "title": "Quiz: Practice with Basic Queries"
+            }
+          },
+          "projectSteps": {
+            "query_one_column_name": {
+              "title": "Query one column"
+            },
+            "query_two_columns_name_price": {
+              "title": "Query two columns"
+            },
+            "query_full_products_table": {
+              "title": "Query the full products table"
             }
           }
         }
@@ -424,7 +438,12 @@
       },
       "hint": "Think one selected, one shown.",
       "template": "A one-column query usually returns ____.",
-      "choices": ["one result column", "all columns", "no headers", "four columns"],
+      "choices": [
+        "one result column",
+        "all columns",
+        "no headers",
+        "four columns"
+      ],
       "correct": "one result column"
     },
     "m1_s04_fill_full_table_symbol": {
@@ -437,7 +456,12 @@
       },
       "hint": "Think all columns.",
       "template": "In a full-table query, SQL often uses ____ to mean all columns.",
-      "choices": ["*", ",", ";", "="],
+      "choices": [
+        "*",
+        ",",
+        ";",
+        "="
+      ],
       "correct": "*"
     },
     "m1_s04_fill_related_columns_goal": {
@@ -450,7 +474,12 @@
       },
       "hint": "Think side by side.",
       "template": "Choosing related columns together helps you ____ values in the same row.",
-      "choices": ["compare", "delete", "rename", "freeze"],
+      "choices": [
+        "compare",
+        "delete",
+        "rename",
+        "freeze"
+      ],
       "correct": "compare"
     },
     "m1_s04_fill_predict_headers": {
@@ -463,7 +492,12 @@
       },
       "hint": "Think labels at the top.",
       "template": "Before clicking Run, a strong habit is to predict the result ____.",
-      "choices": ["headers", "borders", "passwords", "themes"],
+      "choices": [
+        "headers",
+        "borders",
+        "passwords",
+        "themes"
+      ],
       "correct": "headers"
     },
     "m1_s04_fill_full_table_overview": {
@@ -476,7 +510,12 @@
       },
       "hint": "Think first look.",
       "template": "A full-table query is useful when you want a first ____ of the table.",
-      "choices": ["overview", "mistake", "filter", "sort"],
+      "choices": [
+        "overview",
+        "mistake",
+        "filter",
+        "sort"
+      ],
       "correct": "overview"
     }
   }

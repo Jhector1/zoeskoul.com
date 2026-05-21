@@ -6,20 +6,34 @@
           "label": "Practice with Output Control",
           "summary": "Practice using sorting and limiting together to find highest and lowest values, show top records, and build clear, focused result sets.",
           "cards": {
-            "sketch0": {
+            "find_highest_values": {
               "title": "How do you find highest values?"
             },
-            "sketch1": {
+            "find_lowest_values": {
               "title": "How do you find lowest values?"
             },
-            "sketch2": {
+            "show_top_five_records": {
               "title": "How do you show top 5 records?"
             },
-            "sketch3": {
+            "build_clear_result_sets": {
               "title": "How do you build clear result sets?"
+            },
+            "project": {
+              "title": "Project: Control Query Results"
             },
             "quiz": {
               "title": "Quiz: Practice with Output Control"
+            }
+          },
+          "projectSteps": {
+            "find_3_highest_prices": {
+              "title": "Find the 3 highest prices"
+            },
+            "find_2_lowest_stock": {
+              "title": "Find the 2 lowest stock values"
+            },
+            "show_top_5_newest": {
+              "title": "Show the top 5 newest rows"
             }
           }
         }
@@ -409,7 +423,12 @@
       },
       "hint": "Think biggest first.",
       "template": "To find highest values, you usually sort in ____ order.",
-      "choices": ["descending", "ascending", "random", "text"],
+      "choices": [
+        "descending",
+        "ascending",
+        "random",
+        "text"
+      ],
       "correct": "descending"
     },
     "m3_s04_fill_lowest_direction": {
@@ -422,7 +441,12 @@
       },
       "hint": "Think smallest first.",
       "template": "To find lowest values, you usually sort in ____ order.",
-      "choices": ["ascending", "descending", "reverse text", "random"],
+      "choices": [
+        "ascending",
+        "descending",
+        "reverse text",
+        "random"
+      ],
       "correct": "ascending"
     },
     "m3_s04_fill_top_five_needs": {
@@ -435,7 +459,12 @@
       },
       "hint": "Think ranking rule.",
       "template": "A top-5 query usually needs a meaningful ____ before `LIMIT 5`.",
-      "choices": ["sort", "filter comment", "alias", "rename"],
+      "choices": [
+        "sort",
+        "filter comment",
+        "alias",
+        "rename"
+      ],
       "correct": "sort"
     },
     "m3_s04_fill_clear_result_columns": {
@@ -448,7 +477,12 @@
       },
       "hint": "Think useful.",
       "template": "A clear result set uses only ____ columns.",
-      "choices": ["helpful", "hidden", "random", "every possible"],
+      "choices": [
+        "helpful",
+        "hidden",
+        "random",
+        "every possible"
+      ],
       "correct": "helpful"
     },
     "m3_s04_fill_output_control_check": {
@@ -461,7 +495,12 @@
       },
       "hint": "Think how many rows.",
       "template": "After using sorting and limiting together, always verify the ____.",
-      "choices": ["row count", "toolbar style", "comment spacing", "screen color"],
+      "choices": [
+        "row count",
+        "toolbar style",
+        "comment spacing",
+        "screen color"
+      ],
       "correct": "row count"
     }
   }

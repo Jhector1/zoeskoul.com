@@ -180,6 +180,21 @@ export type ManifestComputedSpec =
   | { op: "c_to_f_int"; left: string }
   | { op: "mul_div_floor"; left: string; right: string; divisor: number };
 
+export type ManifestSqlExpectedTable = {
+  columns: string[];
+  rows: Array<Array<string | number | boolean | null>>;
+};
+
+export type ManifestSqlQueryTest = {
+  kind?: "sql";
+  sqlDialect?: SqlDialect;
+  compareTo?: "solution" | "expected_table";
+  expectedTable?: ManifestSqlExpectedTable;
+  match?: "table_exact";
+  ignoreRowOrder?: boolean;
+  checkSql?: string;
+};
+
 export type ManifestRecipe =
   | {
       type: "fixed_tests";
@@ -193,6 +208,7 @@ export type ManifestRecipe =
       checkSql?: string;
       resultShape?: "table";
       ignoreRowOrder?: boolean;
+      tests?: ManifestSqlQueryTest[];
     }
   | {
       type: "template_io";
