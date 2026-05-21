@@ -381,6 +381,7 @@ function getRuntimePracticePatchForQuestion(
   }
 
   return {
+    __runtimeStoreKey: found.key,
     exerciseKey: estate.exerciseKey,
     exerciseId: estate.exerciseId,
     subjectSlug: estate.subjectSlug,
@@ -1137,11 +1138,27 @@ export function useQuizPracticeBank(args: {
             requestAnimationFrame(() => resolve());
           });
 
-          const runtimePatch = getRuntimePracticePatchForQuestion(q);
-          const itemForSubmit = runtimePatch
+          const runtimePatch = getRuntimePracticePatchForQuestion(q) as (Record<string, any> | null);
+          const runtimeStoreKey = String(runtimePatch?.__runtimeStoreKey ?? "").trim();
+          const runtimePatchForSubmit = runtimePatch
+              ? Object.fromEntries(
+                Object.entries(runtimePatch).filter(([patchKey]) => patchKey !== "__runtimeStoreKey"),
+              )
+              : null;
+
+          if (runtimeStoreKey && runtimePatchForSubmit) {
+            useReviewRuntimeStore.getState().patchExercise(runtimeStoreKey, {
+              ...runtimePatchForSubmit,
+              userEdited: true,
+              workspaceOrigin: "user",
+              updatedAt: Date.now(),
+            } as any);
+          }
+
+          const itemForSubmit = runtimePatchForSubmit
               ? {
                 ...ps.item,
-                ...runtimePatch,
+                ...runtimePatchForSubmit,
               }
               : ps.item;
 
@@ -1181,7 +1198,7 @@ export function useQuizPracticeBank(args: {
               maxAttempts: submitted.serverMaxAttempts ?? current.maxAttempts ?? null,
               item: {
                 ...current.item,
-                ...(runtimePatch ?? {}),
+                ...(runtimePatchForSubmit ?? {}),
                 ...(submitted.statePatch ?? {}),
                 result: {
                   ...(submitted.data as any),

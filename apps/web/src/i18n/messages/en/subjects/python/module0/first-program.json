@@ -58,8 +58,8 @@
               ]
             },
             "q3": {
-              "title": "What does the print function do?",
-              "prompt": "What is the purpose of the print function in Python?",
+              "title": "What does print() do?",
+              "prompt": "What is the purpose of `print()` in Python?",
               "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
               "help": {
                 "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
@@ -69,7 +69,7 @@
               "options": {
                 "a": "It stores data in a variable.",
                 "b": "It displays output to the screen.",
-                "c": "It creates a new function.",
+                "c": "It creates a new command-like tool.",
                 "d": "It ends the program."
               }
             },
@@ -111,7 +111,7 @@
         "first-program": {
           "1": {
             "title": "Introduction to Python",
-            "bodyMarkdown": "In this lesson, you'll learn how to write and run your first Python program. Python is a versatile programming language that's great for beginners. Let's start with a simple program that prints a message to the screen.\n\n### Example\nHere's a basic example of a Python program:\n```python\nprint('Hello, World!')\n```\nThis program uses the `print` function to display the text 'Hello, World!' on the screen.\n\n### Your turn\nTry it yourself! Write a Python program that prints your name."
+            "bodyMarkdown": "In this lesson, you'll learn how to write and run your first Python program. Python is a versatile programming language that's great for beginners. Let's start with a simple program that prints a message to the screen.\n\n### Example\nHere's a basic example of a Python program:\n```python\nprint('Hello, World!')\n```\nThis program uses `print()` to display the text 'Hello, World!' on the screen.\n\n### Your turn\nTry it yourself! Write a Python program that prints your name."
           },
           "2": {
             "title": "Running Your Python Script",

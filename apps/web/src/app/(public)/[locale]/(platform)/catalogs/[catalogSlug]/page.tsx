@@ -1,13 +1,9 @@
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import CatalogSubjectGridClient from "./CatalogSubjectGridClient";
-import {
-    getResolvedCatalogBySlug,
-    getResolvedSubjectCardMap,
-} from "@/lib/subjects/server/resolveSubjectPresentation";
 
-import {selectVisibleSubjectsForActor, withSubjectEnrollment} from "@/lib/subjects/server/subjectVisibility";
 import {ROUTES} from "@/utils";
+import {getAvailableVisibleCatalogForActor} from "@/lib/subjects/server/catalogVisibility";
 
 export const runtime = "nodejs";
 
@@ -23,33 +19,13 @@ export default async function CatalogDetailPage({
     params: Promise<Params>;
 }) {
     const { catalogSlug } = await params;
-    const catalog = await getResolvedCatalogBySlug(catalogSlug);
+    const catalog = await getAvailableVisibleCatalogForActor(catalogSlug);
 
-    if (!catalog || catalog.status === "disabled") {
+    if (!catalog) {
         notFound();
     }
 
-
-    const subjectMap = await getResolvedSubjectCardMap();
-
-    const mappedSubjects = catalog.subjects.map((subject) => {
-        const view = subjectMap[subject.slug] ?? subject;
-
-        return {
-            slug: subject.slug,
-            title: view.title,
-            description: view.description,
-            defaultModuleSlug: view.defaultModuleSlug,
-            imagePublicId: view.imagePublicId,
-            imageAlt: view.imageAlt,
-            status: subject.status,
-            versioning: subject.versioning,
-        };
-    });
-
-    const subjects = selectVisibleSubjectsForActor(
-        await withSubjectEnrollment(mappedSubjects),
-    ).filter((subject) => subject.subjectId);
+    const subjects = catalog.subjects;
     return (
         <div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white/90">
             <div className="ui-container py-6 sm:py-8 lg:py-10">

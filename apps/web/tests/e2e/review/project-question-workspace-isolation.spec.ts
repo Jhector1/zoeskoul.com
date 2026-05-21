@@ -1758,6 +1758,62 @@ test("correct project check auto-advances to next exercise under progressive loc
     await expect(page).toHaveURL(new RegExp(`${PROJECT_STEP_3_SLUG}(?:\\?.*)?$`));
 });
 
+test("correct project check keeps solved workspace and next editor never mounts blank", async ({ page }) => {
+    await installDeterministicReviewCloneMocks(page, {
+        initialProgress: projectProgressWithStep2Incomplete(),
+    });
+
+    await page.goto(withProgressiveLock(PROJECT_STEP_2_ROUTE));
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 2 of 3/, {
+        timeout: 15_000,
+    });
+
+    const solvedMarker = "# SOLVED_WORKSPACE_SHOULD_STICK";
+    const solvedCode =
+        `${Q2_SOLUTION.trimEnd()}\n` +
+        `${solvedMarker}\n`;
+
+    await replaceMonacoText(page, solvedCode);
+
+    await projectQuestionCard(page)
+        .getByRole("button", { name: /check this answer/i })
+        .click();
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 3 of 3/, {
+        timeout: 15_000,
+    });
+
+    await expect(page).toHaveURL(new RegExp(`${PROJECT_STEP_3_SLUG}(?:\\?.*)?$`));
+    await expectAnyVisibleEditorToContain(
+        page,
+        Q3_STARTER,
+        "Auto-advanced Question 3 should hydrate its own starter workspace instead of mounting blank",
+    );
+    await expectAnyVisibleEditorToContain(
+        page,
+        Q3_STARTER_VALUES,
+        "Auto-advanced Question 3 should show its starter body immediately",
+    );
+
+    await page.goto(PROJECT_STEP_2_ROUTE);
+
+    await expect(projectQuestionCard(page)).toContainText(/Question 2 of 3/, {
+        timeout: 15_000,
+    });
+
+    await expectAnyVisibleEditorToContain(
+        page,
+        solvedMarker,
+        "Returning to the solved exercise should keep the learner workspace, not starter code",
+    );
+    await expectNoVisibleEditorToContain(
+        page,
+        Q2_STARTER_TODO,
+        "Solved exercise should not visually fall back to starter TODO text after navigating back",
+    );
+});
+
 test("wrong project check stays on current exercise under progressive lock", async ({ page }) => {
     await installDeterministicReviewCloneMocks(page, {
         initialProgress: projectProgressWithStep2Incomplete(),

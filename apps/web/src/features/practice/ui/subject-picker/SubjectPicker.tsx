@@ -17,7 +17,13 @@ export type SubjectCard = {
     imagePublicId: string | null;
     imageAlt: string | null;
     enrolled: boolean;
-    status: "active" | "coming_soon" | "disabled";
+    status: "active" | "coming_soon" | "disabled" | "draft" | "legacy";
+    availabilityStatus?: "seeded" | "unseeded";
+    versioning?: {
+        family?: string;
+        status?: "draft" | "active" | "legacy" | "disabled";
+        defaultForNewEnrollments?: boolean;
+    } | null;
 };
 
 function Surface({

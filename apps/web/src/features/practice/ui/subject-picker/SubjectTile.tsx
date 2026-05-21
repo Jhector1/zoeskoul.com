@@ -18,9 +18,10 @@ export default function SubjectTile({
   enrolling: boolean;
 }) {
   const { t } = useTaggedT("subjectsUi");
-    const isMissingFromDb = !s.subjectId;
-  const isComingSoon = s.status === "coming_soon";
-    const disabled = isMissingFromDb || !s.defaultModuleSlug || enrolling || isComingSoon;
+    const isEnterable = Boolean(s.subjectId);
+    const isMissingFromDb = !isEnterable;
+    const isComingSoon = s.status === "coming_soon";
+    const disabled = !isEnterable || !s.defaultModuleSlug || enrolling || isComingSoon;
     const imageUrl = s.imagePublicId
       ? cloudinaryImageUrl(s.imagePublicId, {
           w: 1400,
@@ -34,12 +35,12 @@ export default function SubjectTile({
       : null;
 
     const cta = useMemo(() => {
-        if (!s.subjectId) return "Unavailable";
+        if (!isEnterable) return "Not seeded";
         if (isComingSoon) return t("comingSoon");
         if (enrolling) return t("enrolling");
         if (s.enrolled) return t("continue");
         return t("openModules");
-    }, [enrolling, isComingSoon, s.enrolled, s.subjectId, t]);
+    }, [enrolling, isComingSoon, isEnterable, s.enrolled, t]);
 
   return (
       <button
@@ -85,11 +86,20 @@ export default function SubjectTile({
             </div>
 
               <div className="flex flex-wrap items-center justify-end gap-2">
-                  {!s.subjectId ? <Pill tone="warn">Unavailable</Pill> : null}
+                  {s.availabilityStatus === "unseeded" || !s.subjectId ? (
+                      <Pill tone="warn">Not seeded</Pill>
+                  ) : null}
+
+                  {s.versioning?.status ? (
+                      <Pill tone="neutral">{s.versioning.status}</Pill>
+                  ) : null}
+
                   {isComingSoon ? <Pill tone="warn">{t("comingSoon")}</Pill> : null}
+
                   {s.enrolled && !enrolling && !isComingSoon ? (
                       <Pill tone="good">{t("enrolled")}</Pill>
                   ) : null}
+
                   {enrolling ? <Pill tone="neutral">{t("enrolling")}</Pill> : null}
               </div>
           </div>
@@ -111,21 +121,25 @@ export default function SubjectTile({
 
           <div className="mt-4 flex items-center justify-between gap-3">
             <div className="min-w-0">
-              {!s.defaultModuleSlug ? (
-                  <div className="text-[11px] font-medium text-amber-700 dark:text-amber-300">
-                    {t("noModulesYet")}
-                  </div>
-              ) : (
-                  <div className="inline-flex items-center gap-2 text-[11px] font-medium text-neutral-900 dark:text-white/85">
-                    {!isComingSoon ? (
-                        <span className="h-2 w-2 rounded-full bg-emerald-500 dark:bg-emerald-300" />
-                    ) : (
-                        <span className="h-2 w-2 rounded-full bg-amber-500 dark:bg-amber-300" />
-                    )}
+                {!isEnterable ? (
+                    <div className="text-[11px] font-medium text-red-700 dark:text-red-300">
+                        Not seeded in Prisma
+                    </div>
+                ) : !s.defaultModuleSlug ? (
+                    <div className="text-[11px] font-medium text-amber-700 dark:text-amber-300">
+                        {t("noModulesYet")}
+                    </div>
+                ) : (
+                    <div className="inline-flex items-center gap-2 text-[11px] font-medium text-neutral-900 dark:text-white/85">
+                        {!isComingSoon ? (
+                            <span className="h-2 w-2 rounded-full bg-emerald-500 dark:bg-emerald-300" />
+                        ) : (
+                            <span className="h-2 w-2 rounded-full bg-amber-500 dark:bg-amber-300" />
+                        )}
 
-                    <span>{cta}</span>
-                  </div>
-              )}
+                        <span>{cta}</span>
+                    </div>
+                )}
             </div>
 
             <div

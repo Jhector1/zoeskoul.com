@@ -143,15 +143,15 @@ function firstNonBlank(...values: Array<string | null | undefined>) {
   }
   return undefined;
 }
-function isRealUserWorkspaceEdit(patch: CodeInputPatch) {
-    return (
-        patch?.userEdited === true ||
-        patch?.workspaceOrigin === "user" ||
-        patch?.updateOrigin === "user" ||
-        patch?.dismissFeedbackOnEdit === true ||
-        patch?.preferSnapshot === true
-    );
-}
+// function isRealUserWorkspaceEdit(patch: CodeInputPatch) {
+//     return (
+//         patch?.userEdited === true ||
+//         patch?.workspaceOrigin === "user" ||
+//         patch?.updateOrigin === "user" ||
+//         patch?.dismissFeedbackOnEdit === true ||
+//         patch?.preferSnapshot === true
+//     );
+// }
 function registerArgsKey(args: RegisterArgs | undefined) {
   if (!args) return "";
 
@@ -710,6 +710,12 @@ export function ReviewToolsProvider({
             !prev ||
             stateLanguageMatches(prev, normalizedArgs.lang, prev.workspace ?? null);
 
+        const incomingIsExplicitUserSnapshot = Boolean(
+            normalizedArgs.userEdited === true ||
+            normalizedArgs.workspaceOrigin === "user" ||
+            normalizedArgs.preferSnapshot === true,
+        );
+
         const prevIsProtectedUserSnapshot = Boolean(
             prev &&
             sameExerciseTarget &&
@@ -719,10 +725,7 @@ export function ReviewToolsProvider({
                 prev.workspaceOrigin === "user" ||
                 prev.workspaceOrigin === "saved"
             ) &&
-            (
-                hasNonBlankText(prevCode) ||
-                !hasNonBlankText(incomingCode)
-            ),
+            hasNonBlankText(prevCode),
         );
 
         if (prevIsProtectedUserSnapshot && prev) {
@@ -730,11 +733,55 @@ export function ReviewToolsProvider({
                 prev.lang === normalizedArgs.lang &&
                 prev.code === normalizedArgs.code &&
                 (prev.stdin ?? "") === (normalizedArgs.stdin ?? "") &&
-                workspaceKeyOf(prev.workspace ?? null) === workspaceKeyOf(normalizedArgs.workspace ?? null);
+                workspaceKeyOf(prev.workspace ?? null) ===
+                workspaceKeyOf(normalizedArgs.workspace ?? null);
 
-            if (incomingMatchesPatchedSnapshot || !hasNonBlankText(incomingCode)) {
+            const incomingIsBlankNonUser =
+                !incomingIsExplicitUserSnapshot && !hasNonBlankText(incomingCode);
+
+            const incomingWouldDowngradeProtectedSnapshot =
+                !incomingIsExplicitUserSnapshot &&
+                hasNonBlankText(incomingCode) &&
+                incomingCode !== prevCode;
+
+            /**
+             * Critical:
+             * When navigating real review routes, the same code_input can re-register
+             * with nonblank starter code after the learner already solved it.
+             *
+             * That incoming starter is nonblank, so the old guard allowed it to replace
+             * the protected learner snapshot. Then CodeToolPane correctly rendered the
+             * registry's new value: starter code.
+             *
+             * Preserve the previous learner/saved snapshot unless the incoming
+             * registration is an explicit user edit.
+             */
+            if (
+                incomingMatchesPatchedSnapshot ||
+                incomingIsBlankNonUser ||
+                incomingWouldDowngradeProtectedSnapshot
+            ) {
                 nextArgs = {
-                    ...normalizedArgs,
+                    ...prev,
+
+                    exerciseKey: nextTargetKey,
+                    ownerCardId: normalizedArgs.ownerCardId ?? prev.ownerCardId,
+                    ideConfig: normalizedArgs.ideConfig ?? prev.ideConfig,
+
+                    sqlDialect: normalizedArgs.sqlDialect ?? prev.sqlDialect,
+                    sqlDatasetId: normalizedArgs.sqlDatasetId ?? prev.sqlDatasetId,
+                    sqlSchemaSql: normalizedArgs.sqlSchemaSql ?? prev.sqlSchemaSql,
+                    sqlSeedSql: normalizedArgs.sqlSeedSql ?? prev.sqlSeedSql,
+                    sqlInitialTableSnapshots:
+                        normalizedArgs.sqlInitialTableSnapshots ??
+                        prev.sqlInitialTableSnapshots,
+
+                    /**
+                     * Important: keep the latest onPatch closure from the current
+                     * rendered component, even while preserving the old workspace/code.
+                     */
+                    onPatch: normalizedArgs.onPatch,
+
                     preferSnapshot: true,
                     userEdited: true,
                     workspaceOrigin: prev.workspaceOrigin ?? "user",

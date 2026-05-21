@@ -5,9 +5,9 @@
       "description": "A beginner-friendly Python foundations course that helps learners start from zero and build small interactive programs using values, variables, input, strings, conditions, and loops.",
       "moreComingSoon": "More Python for Beginners lessons are coming soon.",
       "finalCapstone": {
-        "title": "Final Capstone: Beginner Python Assistant",
-        "description": "Build one complete interactive program that asks for input, stores values, uses strings, makes decisions with if/elif/else, repeats work with a loop, and prints a clear final result.",
-        "requirements": "Use the code editor, click Run, and check the output panel. Your program should include input(), variables, at least one f-string or string method, one conditional section, one loop, and a final summary output."
+        "title": "Final Capstone: Mini Gradebook",
+        "description": "Build one complete gradebook program that asks for input, uses strings, makes decisions with if/elif/else, repeats work with a loop, tracks a total and highest score, and prints a clear final report.",
+        "requirements": "Use the code editor, click Run, and check the output panel. Your program should include input(), variables, strings, one conditional section, a for loop with range(), an accumulator, comparisons, formatted output, and exact final report output."
       }
     }
   },
@@ -155,12 +155,13 @@
         },
         "python-v2-3-while-loops": {
           "title": "While Loops",
-          "description": "Learn while loop basics, break and continue, loop debugging through focused examples and practice.",
+          "description": "Learn while loop basics, break and continue, loop debugging, and a final mini gradebook capstone through focused examples and practice.",
           "weeks": "Week 4",
           "bullets": [
             "While Loop Basics",
             "Break and Continue",
-            "Loop Debugging"
+            "Loop Debugging",
+            "Mini Gradebook Capstone"
           ]
         }
       }

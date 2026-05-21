@@ -149,7 +149,9 @@ function isSavedUserWork(value: any) {
     return (
         value.userEdited === true ||
         value.workspaceOrigin === "user" ||
-        value.workspaceOrigin === "saved"
+        value.workspaceOrigin === "saved" ||
+        value?.result?.ok === true ||
+        value?.correct === true
     );
 }
 
@@ -528,7 +530,9 @@ export function useToolCodeRunnerState(args: {
             return (
                 value.userEdited === true ||
                 value.workspaceOrigin === "user" ||
-                value.workspaceOrigin === "saved"
+                value.workspaceOrigin === "saved" ||
+                value?.result?.ok === true ||
+                value?.correct === true
             );
         }
 

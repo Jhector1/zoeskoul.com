@@ -1,132 +1,207 @@
 import Image from "next/image";
-import {Link} from "@/i18n/navigation";
-import {getResolvedCatalogMap} from "@/lib/subjects/server/resolveSubjectPresentation";
-import {cloudinaryImageUrl} from "@/lib/cloudinary/url";
+import { Link } from "@/i18n/navigation";
+import { cloudinaryImageUrl } from "@/lib/cloudinary/url";
 import { ROUTES } from "@/utils";
-import {
-    selectVisibleSubjectsForActor,
-    withSubjectEnrollment,
-} from "@/lib/subjects/server/subjectVisibility";
+import { getAvailableVisibleCatalogsForActor } from "@/lib/subjects/server/catalogVisibility";
+
 export const runtime = "nodejs";
 
+function statusLabel(status?: string | null) {
+    if (!status) return "Track";
+    return `${status.charAt(0).toUpperCase()}${status.slice(1)}`;
+}
+
 export default async function CatalogsPage() {
-    const rawCatalogs = Object.values(await getResolvedCatalogMap()).filter(
-        (catalog) => catalog.status !== "disabled",
+    const catalogs = await getAvailableVisibleCatalogsForActor();
+
+    const totalSubjects = catalogs.reduce(
+        (total, catalog) => total + catalog.subjects.length,
+        0,
     );
 
-    const catalogs = (
-        await Promise.all(
-            rawCatalogs.map(async (catalog) => {
-                const subjectsWithEnrollment = await withSubjectEnrollment(
-                    catalog.subjects,
-                );
+    const isAdminView = catalogs.some(
+        (catalog) => catalog.actorAccess.canSeeAllCatalogSubjects,
+    );
 
-                return {
-                    ...catalog,
-                    subjects: selectVisibleSubjectsForActor(subjectsWithEnrollment),
-                };
-            }),
-        )
-    ).filter((catalog) => catalog.subjects.length > 0);
     return (
-        <div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white/90">
-            <div className="ui-container py-6 sm:py-8 lg:py-10">
-                <div className="grid gap-4">
-                    <section className="ui-page-surface p-5 sm:p-6">
-                        <div className="ui-kicker">Catalogs</div>
-                        <h1 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
-                            Browse learning catalogs
-                        </h1>
-                        <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-600 dark:text-white/70">
-                            Catalogs group related courses together, so Python can hold beginner,
-                            intermediate, and advanced tracks without changing how courses,
-                            modules, and topics work underneath.
-                        </p>
-                    </section>
+        <div className="min-h-screen bg-neutral-50 text-neutral-950 dark:bg-[#0b0d12] dark:text-white">
+            <main className="ui-container py-8 sm:py-10">
+                <section className="mb-8 max-w-4xl">
+                    <div className="flex flex-wrap items-center gap-2">
+                        <div className="ui-kicker">Catalog library</div>
 
-                    <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-                        {catalogs.map((catalog) => {
+                        {isAdminView ? (
+                            <span className="rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-700 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-200">
+                                Admin: all versions visible
+                            </span>
+                        ) : null}
+                    </div>
 
-                            const courseCount = catalog.subjects.length;
-                            return (
+                    <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+                        Browse course catalogs
+                    </h1>
 
-                                <Link
-                                    key={catalog.slug}
-                                    href={ROUTES.catalogDetail(encodeURIComponent(catalog.slug))}
-                                    className="ui-page-surface block overflow-hidden p-0 transition-colors hover:border-neutral-300 dark:hover:border-white/15"
-                                >
-                                    <div
-                                        className="relative h-40 border-b border-neutral-200 dark:border-white/10 sm:h-44">
-                                        {catalog.imagePublicId ? (
-                                            <>
+                    <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-600 dark:text-white/65 sm:text-base">
+                        Catalogs group related course tracks together. A catalog can
+                        contain beginner, advanced, legacy, draft, and future versions
+                        without mixing up learner progress.
+                    </p>
+
+                    <div className="mt-5 flex flex-wrap gap-2 text-sm text-neutral-600 dark:text-white/55">
+                        <span className="rounded-full border border-neutral-200 bg-white px-3 py-1 dark:border-white/10 dark:bg-white/[0.04]">
+                            {catalogs.length} catalog{catalogs.length === 1 ? "" : "s"}
+                        </span>
+                        <span className="rounded-full border border-neutral-200 bg-white px-3 py-1 dark:border-white/10 dark:bg-white/[0.04]">
+                            {totalSubjects} course{totalSubjects === 1 ? "" : "s"}
+                        </span>
+                        <span className="rounded-full border border-neutral-200 bg-white px-3 py-1 dark:border-white/10 dark:bg-white/[0.04]">
+                            Versioned tracks
+                        </span>
+                    </div>
+                </section>
+
+                <section className="grid gap-3">
+                    {catalogs.map((catalog) => {
+                        const courseCount = catalog.subjects.length;
+                        const previewSubjects = catalog.subjects.slice(0, 3);
+                        const defaultSubject =
+                            catalog.subjects.find(
+                                (subject) => subject.slug === catalog.defaultSubjectSlug,
+                            ) ?? catalog.subjects[0];
+
+                        return (
+                            <Link
+                                key={catalog.slug}
+                                href={ROUTES.catalogDetail(
+                                    encodeURIComponent(catalog.slug),
+                                )}
+                                data-testid={`catalog-card-${catalog.slug}`}
+
+                                className="group block rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm transition hover:border-neutral-300 hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.035] dark:hover:border-white/20 dark:hover:bg-white/[0.055]"
+                            >
+                                <article className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-center">
+                                    <div className="flex min-w-0 gap-4">
+                                        <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 dark:border-white/10 dark:bg-white/[0.06]">
+                                            {catalog.imagePublicId ? (
                                                 <Image
-                                                    src={cloudinaryImageUrl(catalog.imagePublicId, {
-                                                        w: 1400,
-                                                        h: 760,
-                                                        crop: "fill",
-                                                        gravity: "auto",
-                                                        quality: "auto",
-                                                        format: "auto",
-                                                        dpr: "auto",
-                                                    }) ?? "/subjects/_default.png"}
+                                                    src={
+                                                        cloudinaryImageUrl(catalog.imagePublicId, {
+                                                            w: 240,
+                                                            h: 240,
+                                                            crop: "fill",
+                                                            gravity: "auto",
+                                                            quality: "auto",
+                                                            format: "auto",
+                                                            dpr: "auto",
+                                                        }) ?? "/subjects/_default.png"
+                                                    }
                                                     alt={catalog.imageAlt ?? catalog.title}
                                                     fill
-                                                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                                                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                                                    sizes="64px"
+                                                    className="object-cover"
                                                 />
-                                                <div
-                                                    className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/12 to-transparent"/>
-                                            </>
-                                        ) : (
-                                            <div
-                                                className="absolute inset-0 bg-gradient-to-br from-slate-200 via-slate-100 to-white dark:from-slate-800 dark:via-slate-900 dark:to-slate-800">
-                                                <div
-                                                    className="absolute inset-0 opacity-[0.22] [background-image:radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.9),transparent_32%),radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.7),transparent_28%),radial-gradient(circle_at_60%_70%,rgba(255,255,255,0.55),transparent_34%)]"/>
-                                            </div>
-                                        )}
-
-                                        <div
-                                            className="absolute left-4 right-4 top-4 flex items-start justify-between gap-3">
-                                            <div
-                                                className="inline-flex rounded-full border border-white/20 bg-black/35 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
-                                                Catalog
-                                            </div>
-                                            <div
-                                                className="rounded-full bg-black/35 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
-                                                {courseCount} course
-                                                {courseCount === 1 ? "" : "s"}
-                                            </div>
+                                            ) : (
+                                                <div className="flex h-full w-full items-center justify-center text-xl font-semibold">
+                                                    {catalog.title.charAt(0)}
+                                                </div>
+                                            )}
                                         </div>
 
-                                        <div className="absolute inset-x-4 bottom-4">
-                                            <h2 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
-                                                {catalog.title}
-                                            </h2>
+                                        <div className="min-w-0 flex-1">
+                                            <div className="flex flex-wrap items-center gap-2">
+                                                <h2 className="truncate text-lg font-semibold tracking-tight">
+                                                    {catalog.title}
+                                                </h2>
+
+                                                <span className="rounded-full bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-600 dark:bg-white/[0.07] dark:text-white/60">
+                                                    {courseCount} course{courseCount === 1 ? "" : "s"}
+                                                </span>
+
+                                                {catalog.actorAccess.canSeeAllCatalogSubjects ? (
+                                                    <span className="rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 dark:bg-amber-400/10 dark:text-amber-200">
+                                                        Admin view
+                                                    </span>
+                                                ) : null}
+                                            </div>
+
+                                            <p className="mt-2 max-w-2xl text-sm leading-6 text-neutral-600 dark:text-white/60">
+                                                {catalog.description}
+                                            </p>
+
+                                            <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-neutral-500 dark:text-white/45">
+                                                <span className="rounded-full bg-neutral-100 px-2.5 py-1 dark:bg-white/[0.06]">
+                                                    {catalog.slug}
+                                                </span>
+
+                                                {defaultSubject ? (
+                                                    <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-200">
+                                                        Recommended: {defaultSubject.title}
+                                                    </span>
+                                                ) : null}
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div className="p-5">
-                                        <p className="text-sm leading-6 text-neutral-600 dark:text-white/68">
-                                            {catalog.description}
-                                        </p>
+                                    <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-3 dark:border-white/10 dark:bg-black/20">
+                                        <div className="mb-2 flex items-center justify-between gap-3">
+                                            <div className="text-[11px] font-bold uppercase tracking-[0.14em] text-neutral-500 dark:text-white/40">
+                                                Tracks
+                                            </div>
+                                            <div className="text-xs text-neutral-500 dark:text-white/40">
+                                                View catalog →
+                                            </div>
+                                        </div>
 
-                                        <div className="mt-4 flex flex-wrap gap-2">
-                                            {catalog.subjects.slice(0, 3).map((subject) => (
-                                                <span
+                                        <div className="grid gap-1.5">
+                                            {previewSubjects.map((subject) => (
+                                                <div
                                                     key={subject.slug}
-                                                    className="rounded-full bg-neutral-100 px-2.5 py-1 text-xs text-neutral-700 dark:bg-white/[0.06] dark:text-white/75"
+                                                    className="flex min-w-0 items-center justify-between gap-3 rounded-lg bg-white px-3 py-2 text-sm dark:bg-white/[0.04]"
                                                 >
-                                                {subject.title}
-                                            </span>
+                                                    <div className="min-w-0">
+                                                        <div className="truncate font-medium">
+                                                            {subject.title}
+                                                        </div>
+                                                        <div className="mt-0.5 flex flex-wrap items-center gap-1.5 text-xs text-neutral-500 dark:text-white/40">
+                                                            <span>
+                                                                {statusLabel(subject.versioning?.status)}
+                                                            </span>
+
+                                                            {catalog.actorAccess.canSeeAllCatalogSubjects ? (
+                                                                <>
+                                                                    <span>·</span>
+                                                                    <span>
+                                                                        {subject.availabilityStatus === "seeded"
+                                                                            ? "Seeded"
+                                                                            : "Not seeded"}
+                                                                    </span>
+                                                                </>
+                                                            ) : null}
+                                                        </div>
+                                                    </div>
+
+                                                    {subject.availabilityStatus === "unseeded" ? (
+                                                        <span className="shrink-0 rounded-full bg-red-50 px-2 py-0.5 text-[11px] font-semibold text-red-700 dark:bg-red-400/10 dark:text-red-200">
+                                                            Unseeded
+                                                        </span>
+                                                    ) : null}
+                                                </div>
                                             ))}
+
+                                            {courseCount > previewSubjects.length ? (
+                                                <div className="px-3 pt-1 text-xs text-neutral-500 dark:text-white/40">
+                                                    +{courseCount - previewSubjects.length} more track
+                                                    {courseCount - previewSubjects.length === 1 ? "" : "s"}
+                                                </div>
+                                            ) : null}
                                         </div>
                                     </div>
-                                </Link>
-                            )
-                        })}
-                    </div>
-                </div>
-            </div>
+                                </article>
+                            </Link>
+                        );
+                    })}
+                </section>
+            </main>
         </div>
     );
 }

@@ -312,7 +312,134 @@ function getPatchWorkspace(
     if (isWorkspace(patch.ideWorkspace)) return patch.ideWorkspace;
     return existing?.workspace ?? null;
 }
+function isUserOwnedRuntimePatch(value: any) {
+    return (
+        value?.userEdited === true ||
+        value?.workspaceOrigin === "user" ||
+        value?.workspaceOrigin === "saved"
+    );
+}
 
+function isCorrectRuntimePatch(value: any) {
+    return value?.result?.ok === true || value?.correct === true;
+}
+
+function getPatchCodeForPreserveCheck(
+    patch: UnknownRecord,
+    workspace: WorkspaceStateV2 | null | undefined,
+) {
+    if (typeof patch.code === "string" && patch.code.trim()) {
+        return patch.code;
+    }
+
+    if (typeof patch.source === "string" && patch.source.trim()) {
+        return patch.source;
+    }
+
+    return deriveCodeFromWorkspace(workspace);
+}
+
+function isExplicitIncomingUserEdit(value: any) {
+    /**
+     * For incoming patches, "saved" is not enough to prove learner ownership.
+     *
+     * Real review progress reloads can send workspaceOrigin: "saved" while
+     * carrying a stale/starter workspace. Only an active user edit should be
+     * allowed to replace an existing user workspace when the code differs.
+     */
+    return value?.userEdited === true || value?.workspaceOrigin === "user";
+}
+
+function shouldPreserveExistingUserWorkspace(args: {
+    existing: ExerciseRuntimeState | undefined;
+    incomingPatch: UnknownRecord;
+    incomingWorkspace: WorkspaceStateV2 | null | undefined;
+    patchCarriesWorkspaceOrCode: boolean;
+}) {
+    const { existing, incomingPatch, incomingWorkspace, patchCarriesWorkspaceOrCode } = args;
+
+    if (!existing) return false;
+    if (!patchCarriesWorkspaceOrCode) return false;
+
+    const existingIsUserOwned = isUserOwnedRuntimePatch(existing);
+    const incomingIsExplicitUserEdit = isExplicitIncomingUserEdit(incomingPatch);
+
+    /**
+     * Existing learner/saved work should only be replaceable by a new explicit
+     * learner edit. Do not let progress/restore/saved starter snapshots replace it.
+     */
+    if (!existingIsUserOwned || incomingIsExplicitUserEdit) return false;
+
+    const existingWorkspace =
+        existing.workspace ??
+        existing.codeWorkspace ??
+        existing.ideWorkspace ??
+        null;
+
+    const existingCode = String(
+        existing.code ??
+        existing.source ??
+        deriveCodeFromWorkspace(existingWorkspace) ??
+        "",
+    );
+
+    const incomingCode = String(
+        getPatchCodeForPreserveCheck(incomingPatch, incomingWorkspace) ?? "",
+    );
+
+    if (!existingCode.trim()) return false;
+    if (!incomingCode.trim()) return false;
+
+    /**
+     * If the incoming non-explicit-user patch carries different code, preserve
+     * the existing learner workspace. This catches starter/progress rehydration
+     * after correct answer + next/back navigation.
+     */
+    if (incomingCode === existingCode) return false;
+
+    return true;
+}
+
+function preserveExistingUserWorkspacePatch(args: {
+    existing: ExerciseRuntimeState;
+    incomingPatch: UnknownRecord;
+}) {
+
+    const {existing,incomingPatch }= args;
+    const existingWorkspace =
+        existing.workspace ??
+        existing.codeWorkspace ??
+        existing.ideWorkspace ??
+        null;
+
+    const existingCode = String(
+        existing.code ??
+        existing.source ??
+        deriveCodeFromWorkspace(existingWorkspace) ??
+        "",
+    );
+
+    return {
+        ...incomingPatch,
+
+        workspace: existingWorkspace,
+        codeWorkspace: existing.codeWorkspace ?? existingWorkspace,
+        ideWorkspace: existing.ideWorkspace ?? existingWorkspace,
+
+        code: existingCode,
+        source: existingCode,
+        stdin: existing.stdin ?? existing.codeStdin ?? "",
+        codeStdin: existing.codeStdin ?? existing.stdin ?? "",
+
+        language: existing.language ?? existing.lang ?? incomingPatch.language,
+        lang: existing.lang ?? existing.language ?? incomingPatch.lang,
+
+        userEdited: true,
+        workspaceOrigin: existing.workspaceOrigin === "saved" ? "saved" : "user",
+
+        result: incomingPatch.result ?? existing.result,
+    } as UnknownRecord;
+}
 function getFinalExerciseIdFromKey(key: string) {
     const parts = String(key ?? "").split(":").filter(Boolean);
     return parts[parts.length - 1] || key;
@@ -1457,7 +1584,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                         : existingLanguageForPatch.toLowerCase() === "sql"
                 );
 
-            const effectivePatch = patchHasIncompatibleWorkspaceOrCode
+            let effectivePatch = patchHasIncompatibleWorkspaceOrCode
                 ? Object.fromEntries(
                     Object.entries(patch).filter(
                         ([patchKey]) =>
@@ -1477,14 +1604,42 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 ) as UnknownRecord
                 : patch;
 
-            if (patchHasIncompatibleWorkspaceOrCode && Object.keys(effectivePatch).length === 0) {
-                starterLoopTrace("runtime.patchExercise.skipIncompatibleWorkspace", {
+            const incomingWorkspaceForPreserveCheck = getPatchWorkspace(effectivePatch, existing);
+
+            if (
+                shouldPreserveExistingUserWorkspace({
+                    existing,
+                    incomingPatch: effectivePatch,
+                    incomingWorkspace: incomingWorkspaceForPreserveCheck,
+                    patchCarriesWorkspaceOrCode,
+                })
+            ) {
+                starterLoopTrace("runtime.patchExercise.preserveExistingUserWorkspace", {
                     key,
-                    existingLanguage: existingLanguageForPatch,
-                    incomingLanguage: incomingLanguageForPatch,
-                    patchKeys: Object.keys(patch ?? {}),
+                    existingWorkspaceKey: workspaceContentKey(existing?.workspace ?? null),
+                    incomingWorkspaceKey: workspaceContentKey(incomingWorkspaceForPreserveCheck),
+                    existingCodeLength: String(
+                        existing?.code ??
+                        existing?.source ??
+                        deriveCodeFromWorkspace(existing?.workspace ?? null) ??
+                        "",
+                    ).length,
+                    incomingCodeLength: String(
+                        getPatchCodeForPreserveCheck(
+                            effectivePatch,
+                            incomingWorkspaceForPreserveCheck,
+                        ) ?? "",
+                    ).length,
+                    incomingPatchKeys: Object.keys(effectivePatch ?? {}),
+                    incomingWorkspaceOrigin: effectivePatch.workspaceOrigin,
+                    incomingUserEdited: effectivePatch.userEdited,
+                    incomingCorrect: isCorrectRuntimePatch(effectivePatch),
                 });
-                return state;
+
+                effectivePatch = preserveExistingUserWorkspacePatch({
+                    existing: existing!,
+                    incomingPatch: effectivePatch,
+                });
             }
 
             const patchHasWorkspace =

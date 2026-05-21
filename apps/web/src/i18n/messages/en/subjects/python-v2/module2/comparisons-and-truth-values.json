@@ -88,8 +88,8 @@
               }
             },
             "mc-falsey-values": {
-              "title": "Falsey values",
-              "prompt": "Which values are falsey in Python? Choose all that apply.",
+              "title": "Falsy values",
+              "prompt": "Which values are falsy in Python? Choose all that apply.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -150,11 +150,11 @@
               ]
             },
             "fb-empty-string": {
-              "title": "Fill the falsey value",
+              "title": "Fill the falsy value",
               "prompt": "Choose the value that makes this condition false.",
-              "hint": "An empty string is falsey.",
+              "hint": "An empty string is falsy.",
               "help": {
-                "concept": "In Python, an empty string is falsey, so an `if` condition using it directly will not run the `if` block.",
+                "concept": "In Python, an empty string is falsy, so an `if` condition using it directly will not run the `if` block.",
                 "hint_1": "You need the string with no characters inside it.",
                 "hint_2": "Pick the option that shows quotation marks with nothing between them."
               },
@@ -240,7 +240,7 @@
           },
           "truthiness-basics": {
             "title": "Truthiness of numbers, strings, and None",
-            "bodyMarkdown": "In Python, some values can be used directly in conditions. This is called truthiness.\n\nBeginner-friendly rules:\n\n- `0` is falsey\n- non-zero numbers are truthy\n- `\"\"` (empty string) is falsey\n- non-empty strings are truthy\n- `None` is falsey\n\nExample:\n\n```python\nname = \"\"\n\nif name:\n    print(\"You entered a name\")\nelse:\n    print(\"Name is empty\")\n```\n\nWalk through it:\n\n- `name` stores an empty string.\n- In `if name:`, Python checks whether the string is truthy.\n- An empty string is falsey, so the `else` block runs.\n\nAnother quick example:\n\n```python\ncount = 2\nprint(bool(count))\n```\n\nThis prints `True` because `2` is a non-zero number.\n\nPractice this: replace `\"\"` with `\"Zoe\"`, click Run, and compare the output."
+            "bodyMarkdown": "In Python, some values can be used directly in conditions. This is called truthiness.\n\nBeginner-friendly rules:\n\n- `0` is falsy\n- non-zero numbers are truthy\n- `\"\"` (empty string) is falsy\n- non-empty strings are truthy\n- `None` is falsy\n\nExample:\n\n```python\nname = \"\"\n\nif name:\n    print(\"You entered a name\")\nelse:\n    print(\"Name is empty\")\n```\n\nWalk through it:\n\n- `name` stores an empty string.\n- In `if name:`, Python checks whether the string is truthy.\n- An empty string is falsy, so the `else` block runs.\n\nAnother quick example:\n\n```python\ncount = 2\nprint(bool(count))\n```\n\nThis prints `True` because `2` is a non-zero number.\n\nPractice this: replace `\"\"` with `\"Zoe\"`, click Run, and compare the output."
           }
         }
       }

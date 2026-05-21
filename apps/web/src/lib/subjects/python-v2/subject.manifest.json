@@ -25,6 +25,10 @@
             "strings",
             "conditionals",
             "loops",
+            "for loops",
+            "range",
+            "accumulators",
+            "comparisons",
             "output"
           ],
           "placement": "afterModule3",
@@ -364,7 +368,8 @@
           "topics": [
             "while-loop-basics",
             "break-and-continue",
-            "loop-debugging"
+            "loop-debugging",
+            "mini-gradebook-capstone"
           ]
         }
       ]

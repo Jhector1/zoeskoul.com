@@ -21,7 +21,7 @@
           },
           "projectSteps": {
             "5": {
-              "title": "Read and display data from a CSV file"
+              "title": "Read and print a learning message"
             }
           },
           "quiz": {
@@ -30,7 +30,7 @@
               "prompt": "Fill in the blank to complete the print statement in Python.",
               "hint": "What do you want to display?",
               "help": {
-                "concept": "The print function in Python outputs text to the console.",
+                "concept": "The `print()` tool in Python displays text in the console.",
                 "hint_1": "Think about what you want to show on the screen.",
                 "hint_2": "Remember to use quotes around your text."
               },
@@ -115,7 +115,7 @@
           },
           "2": {
             "title": "Applications of Python",
-            "bodyMarkdown": "Python is used in various fields such as:\n- Web Development\n- Data Science\n- Machine Learning\n- Automation\n\nFor instance, in data science, Python can be used with libraries like Pandas and NumPy to analyze data efficiently. Here's a simple example of using Pandas to read a CSV file:\n\n```python\nimport pandas as pd\n\ndata = pd.read_csv('data.csv')\nprint(data.head())\n```\n\nThis code imports the Pandas library, reads a CSV file named 'data.csv', and prints the first few rows of the data. \n\n**Try this:** Change 'data.csv' to a different file name and see what happens!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+            "bodyMarkdown": "Python is used in many fields, including:\n\n- Web development\n- Data science\n- Machine learning\n- Automation\n\nAt the beginner level, you do not need extra packages or files to start. You can begin with small programs that print clear messages:\n\n```python\nprint('Python can help automate repeated work')\nprint('Python can help analyze data later')\n```\n\nThese lines ask Python to display two messages. Later courses can add files, packages, and larger projects. For now, focus on reading each line and predicting exactly what appears in the output."
           }
         }
       }

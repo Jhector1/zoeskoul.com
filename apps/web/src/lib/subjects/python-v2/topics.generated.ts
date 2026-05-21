@@ -29,6 +29,7 @@ import accumulatorsAndCountersJson from "./modules/module3/topics/accumulators-a
 import breakAndContinueJson from "./modules/module3/topics/break-and-continue/topic.bundle.json";
 import forLoopsOverTextJson from "./modules/module3/topics/for-loops-over-text/topic.bundle.json";
 import loopDebuggingJson from "./modules/module3/topics/loop-debugging/topic.bundle.json";
+import miniGradebookCapstoneJson from "./modules/module3/topics/mini-gradebook-capstone/topic.bundle.json";
 import rangeAndCountingJson from "./modules/module3/topics/range-and-counting/topic.bundle.json";
 import whileLoopBasicsJson from "./modules/module3/topics/while-loop-basics/topic.bundle.json";
 
@@ -55,6 +56,7 @@ const accumulatorsAndCounters = accumulatorsAndCountersJson as SlimTopicManifest
 const breakAndContinue = breakAndContinueJson as SlimTopicManifest;
 const forLoopsOverText = forLoopsOverTextJson as SlimTopicManifest;
 const loopDebugging = loopDebuggingJson as SlimTopicManifest;
+const miniGradebookCapstone = miniGradebookCapstoneJson as SlimTopicManifest;
 const rangeAndCounting = rangeAndCountingJson as SlimTopicManifest;
 const whileLoopBasics = whileLoopBasicsJson as SlimTopicManifest;
 
@@ -81,6 +83,7 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "break-and-continue": breakAndContinue,
   "for-loops-over-text": forLoopsOverText,
   "loop-debugging": loopDebugging,
+  "mini-gradebook-capstone": miniGradebookCapstone,
   "range-and-counting": rangeAndCounting,
   "while-loop-basics": whileLoopBasics,
 };

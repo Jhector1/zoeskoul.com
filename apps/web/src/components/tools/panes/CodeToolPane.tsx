@@ -130,12 +130,13 @@ function workspaceMatchesLanguage(
     return languagesCompatible(workspaceLanguage, targetLanguage);
 }
 
-function shouldUseLocalReviewDraft(args: {
+export function shouldUseLocalReviewDraft(args: {
     draft: ReviewWorkspaceDraft | null;
     runtimeWorkspace: WorkspaceStateV2 | null | undefined;
     runtimeUpdatedAt?: number | null;
     runtimeUserEdited?: boolean | null;
     runtimeOrigin?: string | null;
+    runtimeProtected?: boolean | null;
 }) {
     const draft = args.draft;
     if (!draft || !isWorkspaceState(draft.workspace)) return false;
@@ -151,6 +152,7 @@ function shouldUseLocalReviewDraft(args: {
     if (Date.now() - draft.savedAt > maxDraftAgeMs) return false;
 
     if (
+        args.runtimeProtected === true ||
         args.runtimeUserEdited === true ||
         args.runtimeOrigin === "user" ||
         args.runtimeOrigin === "saved"
@@ -213,10 +215,228 @@ function reviewWorkspaceHasNonEmptyFile(workspace: WorkspaceStateV2 | null | und
     );
 }
 
-function forceWorkspaceHasContent(workspace: WorkspaceStateV2 | null | undefined) {
-    // Starter/review workspaces are authoritative. Any workspace with at least
-    // one file node counts as content.
+function getRuntimeCode(runtime: any) {
+    const code =
+        typeof runtime?.code === "string" && runtime.code.trim()
+            ? runtime.code
+            : typeof runtime?.source === "string" && runtime.source.trim()
+                ? runtime.source
+                : "";
+
+    return code;
+}
+
+function getWorkspaceEntryFileId(workspace: WorkspaceStateV2 | null | undefined) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return null;
+    }
+
+    const preferredId = workspace.entryFileId || workspace.activeFileId;
+
+    const preferredFile = workspace.nodes.find(
+        (node: any) => node?.kind === "file" && node.id === preferredId,
+    );
+
+    if (preferredFile?.kind === "file") return preferredFile.id;
+
+    const firstFile = workspace.nodes.find((node: any) => node?.kind === "file");
+
+    return firstFile?.kind === "file" ? firstFile.id : null;
+}
+
+function workspaceWithRuntimeEntryCode(
+    workspace: WorkspaceStateV2 | null | undefined,
+    runtime: any,
+): WorkspaceStateV2 | null {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return workspace ?? null;
+    }
+
+    const runtimeCode = getRuntimeCode(runtime);
+
+    if (!runtimeCode.trim()) return workspace;
+
+    /**
+     * If runtime carries user/saved/correct code but the workspace still carries
+     * starter code, render the runtime code in the entry file. This prevents
+     * progress reloads from visually restoring starter after a correct check.
+     */
+    if (
+        !isUserOwnedReviewRuntimeState(runtime) &&
+        !isCorrectReviewRuntimeState(runtime)
+    ) {
+        return workspace;
+    }
+
+    const targetId = getWorkspaceEntryFileId(workspace);
+
+    if (!targetId) return workspace;
+
+    let changed = false;
+
+    const nodes = workspace.nodes.map((node: any) => {
+        if (node?.kind !== "file" || node.id !== targetId) return node;
+
+        if (String(node.content ?? "") === runtimeCode) return node;
+
+        changed = true;
+
+        return {
+            ...node,
+            content: runtimeCode,
+            updatedAt: Number(runtime?.updatedAt ?? Date.now()),
+        };
+    });
+
+    return changed ? { ...workspace, nodes } : workspace;
+}
+
+function reviewRuntimeProtectionRank(runtime: any) {
+    /**
+     * Rank 2: real learner/saved workspace. Always beats starter/correct.
+     * Rank 1: correct result, but only fallback if no user/saved candidate exists.
+     * Rank 0: normal starter/sync workspace.
+     */
+    if (isUserOwnedReviewRuntimeState(runtime)) return 2;
+    if (isCorrectReviewRuntimeState(runtime)) return 1;
+    return 0;
+}
+
+function workspaceHasAnyFile(workspace: WorkspaceStateV2 | null | undefined) {
     return Boolean(workspace?.nodes?.some((node: any) => node?.kind === "file"));
+}
+
+function forceWorkspaceHasContent(workspace: WorkspaceStateV2 | null | undefined) {
+    // Non-review tool routes may intentionally open an empty file workspace.
+    return workspaceHasAnyFile(workspace);
+}
+
+function reviewRuntimeWorkspaceIsUsable(runtime: any, workspace: WorkspaceStateV2 | null | undefined) {
+    if (!workspace || !workspaceHasAnyFile(workspace)) return false;
+
+    if (isProtectedReviewRuntimeState(runtime)) {
+        return true;
+    }
+
+    /**
+     * In review mode, starter/empty runtime workspaces are not useful unless they
+     * actually contain starter text. Otherwise the right-rail editor mounts blank
+     * and suppresses later starter hydration.
+     */
+    if (
+        runtime?.workspaceOrigin === "starter" ||
+        runtime?.workspaceOrigin === "empty" ||
+        runtime?.userEdited === false
+    ) {
+        return reviewWorkspaceHasNonEmptyFile(workspace);
+    }
+
+    return reviewWorkspaceHasNonEmptyFile(workspace);
+}
+
+export function isUserOwnedReviewRuntimeState(value: any) {
+    return (
+        value?.userEdited === true ||
+        value?.workspaceOrigin === "user" ||
+        value?.workspaceOrigin === "saved"
+    );
+}
+
+export function isCorrectReviewRuntimeState(value: any) {
+    return value?.result?.ok === true || value?.correct === true;
+}
+
+export function isProtectedReviewRuntimeState(value: any) {
+    /**
+     * Only real learner/saved work is strongly protected.
+     *
+     * A correct result alone is NOT enough, because the result patch can arrive
+     * with a starter workspace after validation/progress reload. If we treat
+     * correct+starter as protected, CodeToolPane can render starter after
+     * navigating next/back even though the exercise is correct.
+     */
+    return isUserOwnedReviewRuntimeState(value);
+}
+
+function selectReadyRuntimeWorkspace(
+    runtime: any,
+    effectiveLanguage: string | null | undefined,
+) {
+    const workspace = workspaceWithRuntimeEntryCode(runtime?.workspace, runtime);
+
+    const readyWorkspace =
+        runtime?.workspaceStatus === "ready" &&
+        reviewRuntimeWorkspaceIsUsable(runtime, workspace) &&
+        workspaceMatchesLanguage(workspace, effectiveLanguage)
+            ? workspace
+            : null;
+
+    return readyWorkspace
+        ? {
+            workspace: readyWorkspace,
+            updatedAt: Number(runtime?.updatedAt ?? 0),
+            protectionRank: reviewRuntimeProtectionRank(runtime),
+        }
+        : null;
+}
+export function pickDirectReviewRuntimeWorkspace(args: {
+    editorRuntime: any;
+    exerciseRuntime: any;
+    normalizedToolWorkspace: WorkspaceStateV2 | null | undefined;
+    effectiveLanguage: string | null | undefined;
+}) {
+    const editorCandidate = selectReadyRuntimeWorkspace(
+        args.editorRuntime,
+        args.effectiveLanguage,
+    );
+    const exerciseCandidate = selectReadyRuntimeWorkspace(
+        args.exerciseRuntime,
+        args.effectiveLanguage,
+    );
+
+    const userOwnedCandidates = [editorCandidate, exerciseCandidate]
+        .filter(
+            (candidate): candidate is NonNullable<typeof candidate> =>
+                Boolean(candidate && candidate.protectionRank >= 2),
+        )
+        .sort((a, b) => b.updatedAt - a.updatedAt);
+
+    if (userOwnedCandidates.length > 0) {
+        return userOwnedCandidates[0]?.workspace ?? null;
+    }
+
+    const correctCandidates = [editorCandidate, exerciseCandidate]
+        .filter(
+            (candidate): candidate is NonNullable<typeof candidate> =>
+                Boolean(candidate && candidate.protectionRank === 1),
+        )
+        .sort((a, b) => b.updatedAt - a.updatedAt);
+
+    if (correctCandidates.length > 0) {
+        return correctCandidates[0]?.workspace ?? null;
+    }
+
+    if (editorCandidate) {
+        return editorCandidate.workspace;
+    }
+
+    if (exerciseCandidate) {
+        return exerciseCandidate.workspace;
+    }
+
+    /**
+     * Review-mode fallback must not use a blank right-rail tool workspace.
+     * A blank fallback is the exact bug: the editor mounts empty and starter
+     * hydration never becomes visible.
+     */
+    if (
+        reviewWorkspaceHasNonEmptyFile(args.normalizedToolWorkspace) &&
+        workspaceMatchesLanguage(args.normalizedToolWorkspace, args.effectiveLanguage)
+    ) {
+        return args.normalizedToolWorkspace ?? null;
+    }
+
+    return null;
 }
 
 function fastTextHash(value: string) {
@@ -798,95 +1018,12 @@ export default function CodeToolPane(props: {
 
     const directRuntimeWorkspace = useMemo(() => {
         if (isReviewRouteMode) {
-            const editorReadyWorkspace =
-                editorRuntime?.workspaceStatus === "ready" &&
-                forceWorkspaceHasContent(editorRuntime.workspace) &&
-                workspaceMatchesLanguage(editorRuntime.workspace, effectiveLanguage)
-                    ? editorRuntime.workspace
-                    : null;
-
-            const exerciseReadyWorkspace =
-                exerciseRuntime?.workspaceStatus === "ready" &&
-                forceWorkspaceHasContent(exerciseRuntime.workspace) &&
-                workspaceMatchesLanguage(exerciseRuntime.workspace, effectiveLanguage)
-                    ? exerciseRuntime.workspace
-                    : null;
-
-            const editorHasUserWorkspace = Boolean(
-                editorReadyWorkspace &&
-                (
-                    editorRuntime?.userEdited === true ||
-                    editorRuntime?.workspaceOrigin === "user" ||
-                    editorRuntime?.workspaceOrigin === "saved"
-                ),
-            );
-
-            const exerciseHasUserWorkspace = Boolean(
-                exerciseReadyWorkspace &&
-                (
-                    exerciseRuntime?.userEdited === true ||
-                    exerciseRuntime?.workspaceOrigin === "user" ||
-                    exerciseRuntime?.workspaceOrigin === "saved"
-                ),
-            );
-
-            /**
-             * Route-owned review targets have two deterministic stores:
-             * editorRuntimes and exercises. The mounted FullIDE reads the editor
-             * runtime first, but actions like Fill answer patch the exercise runtime
-             * first. If the editor runtime still contains stale user code, blindly
-             * preferring it keeps the visible Tools editor stale even though the
-             * exercise snapshot has the revealed solution.
-             *
-             * Prefer the newest user-authored deterministic workspace across both
-             * stores. Then fall back to editor runtime, exercise runtime, and finally
-             * the bound tool snapshot for dynamic practice items not present in the
-             * static route registry.
-             */
-            if (editorHasUserWorkspace && exerciseHasUserWorkspace) {
-                const editorUpdatedAt = Number(editorRuntime?.updatedAt ?? 0);
-                const exerciseUpdatedAt = Number(exerciseRuntime?.updatedAt ?? 0);
-
-                return exerciseUpdatedAt >= editorUpdatedAt
-                    ? exerciseReadyWorkspace
-                    : editorReadyWorkspace;
-            }
-
-            if (exerciseHasUserWorkspace) {
-                return exerciseReadyWorkspace;
-            }
-
-            if (editorHasUserWorkspace) {
-                return editorReadyWorkspace;
-            }
-
-            if (editorReadyWorkspace) {
-                return editorReadyWorkspace;
-            }
-
-            if (exerciseReadyWorkspace) {
-                return exerciseReadyWorkspace;
-            }
-
-            /**
-             * Dynamic practice exercises, especially clone-page mocked practice items,
-             * may not exist in the static review target registry. In that case the
-             * bound Tools snapshot is the only immediate source of the editor
-             * workspace.
-             *
-             * This is still safe because deterministic runtime wins above whenever it
-             * exists. This fallback only prevents valid SQL/Python practice starters
-             * from getting stuck behind "Loading editor..." when the route runtime
-             * has no registry-backed workspace yet.
-             */
-            if (
-                forceWorkspaceHasContent(normalizedToolWorkspace) &&
-                workspaceMatchesLanguage(normalizedToolWorkspace, effectiveLanguage)
-            ) {
-                return normalizedToolWorkspace ?? null;
-            }
-
-            return null;
+            return pickDirectReviewRuntimeWorkspace({
+                editorRuntime,
+                exerciseRuntime,
+                normalizedToolWorkspace,
+                effectiveLanguage,
+            });
         }
 
         // Normal tool/sketch route: blank file workspace is still valid.
@@ -923,6 +1060,10 @@ export default function CodeToolPane(props: {
         exerciseRuntime?.workspaceOrigin === "user" ||
         exerciseRuntime?.workspaceOrigin === "saved",
     );
+    const finalReviewRuntimeProtected = Boolean(
+        isUserOwnedReviewRuntimeState(editorRuntime) ||
+        isUserOwnedReviewRuntimeState(exerciseRuntime),
+    );
 
     const finalReviewRuntimeOrigin =
         editorRuntime?.workspaceOrigin === "user" ||
@@ -947,6 +1088,7 @@ export default function CodeToolPane(props: {
                 runtimeUpdatedAt: finalReviewRuntimeUpdatedAt,
                 runtimeUserEdited: finalReviewRuntimeUserEdited,
                 runtimeOrigin: finalReviewRuntimeOrigin,
+                runtimeProtected: finalReviewRuntimeProtected,
             })
         ) {
             return localWorkspaceDraft?.workspace ?? directRuntimeWorkspace;
@@ -956,6 +1098,7 @@ export default function CodeToolPane(props: {
     }, [
         directRuntimeWorkspace,
         finalReviewRuntimeOrigin,
+        finalReviewRuntimeProtected,
         finalReviewRuntimeUpdatedAt,
         finalReviewRuntimeUserEdited,
         isReviewRouteMode,

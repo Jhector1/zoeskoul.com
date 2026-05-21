@@ -1,0 +1,170 @@
+{
+  "topicId": "mini-gradebook-capstone",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-3",
+  "sectionSlug": "python-v2-3-while-loops",
+  "prefix": "pyv2_3",
+  "minutes": 35,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-3.mini-gradebook-capstone.label",
+    "summaryKey": "topics.python-v2.python-v2-3.mini-gradebook-capstone.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.mini-gradebook-capstone.cards.sketch0.title",
+      "sketchId": "sketch_gradebook_plan",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-3.mini-gradebook-capstone.cards.quiz.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-3.mini-gradebook-capstone.cards.project.title",
+      "project": {
+        "difficulty": "medium",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "capstone-mini-gradebook",
+            "titleKey": "topics.python-v2.python-v2-3.mini-gradebook-capstone.projectSteps.capstone-mini-gradebook.title",
+            "exerciseKey": "capstone-mini-gradebook",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_gradebook_plan",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.mini-gradebook-capstone.sketch_gradebook_plan.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.mini-gradebook-capstone.sketch_gradebook_plan.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-capstone-input-count",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.mini-gradebook-capstone.quiz.sc-capstone-input-count",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-capstone-tools",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.mini-gradebook-capstone.quiz.mc-capstone-tools",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr-capstone-report-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.mini-gradebook-capstone.quiz.dr-capstone-report-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
+      }
+    },
+    {
+      "id": "fb-capstone-average-format",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.mini-gradebook-capstone.quiz.fb-capstone-average-format",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": ".1f"
+      }
+    },
+    {
+      "id": "capstone-mini-gradebook",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 3,
+      "messageBase": "topics.python-v2.python-v2-3.mini-gradebook-capstone.quiz.capstone-mini-gradebook",
+      "language": "python",
+      "starterCode": "student = input()\ncount = int(input())\n\ntotal = 0\nhighest = 0\n\nfor i in range(count):\n    score = int(input())\n    # TODO: add score to total\n    # TODO: update highest when this score is bigger\n\n# TODO: calculate the average\n# TODO: print the report",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Maya\n3\n90\n80\n100\n",
+            "stdout": "Student: Maya\nScores entered: 3\nHighest score: 100\nAverage: 90.0\nStatus: excellent\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Leo\n2\n70\n72\n",
+            "stdout": "Student: Leo\nScores entered: 2\nHighest score: 72\nAverage: 71.0\nStatus: passing\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Nia\n4\n60\n65\n70\n75\n",
+            "stdout": "Student: Nia\nScores entered: 4\nHighest score: 75\nAverage: 67.5\nStatus: needs practice\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "student = input()\ncount = int(input())\n\ntotal = 0\nhighest = 0\n\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")"
+      }
+    }
+  ]
+}

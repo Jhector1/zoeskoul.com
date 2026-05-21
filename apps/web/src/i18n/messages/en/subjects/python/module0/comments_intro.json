@@ -127,7 +127,7 @@
         "c": "Docstrings are strings used for documentation; `#` is the real comment symbol",
         "d": "Python does not support docstrings"
       },
-      "hint": "Docstrings are strings used for documentation (e.g., function docs). `#` is the comment syntax.",
+      "hint": "Docstrings are strings used for documentation. `#` is the comment syntax.",
       "help": {
         "concept": "Triple-quoted docstrings and `#` comments are related to explanation, but they are not the same thing. Docstrings are string literals used for documentation.",
         "hint_1": "One of the choices distinguishes documentation strings from true comment syntax.",
@@ -353,9 +353,9 @@
         "2": "looping",
         "3": "sorting"
       },
-      "hint": "Docstrings help document functions, classes, and code.",
+      "hint": "Docstrings help document larger pieces of code.",
       "help": {
-        "concept": "A docstring is a documentation string. Its purpose is to describe code such as modules, functions, and classes.",
+        "concept": "A docstring is a documentation string. Its purpose is to describe a larger piece of code.",
         "hint_1": "Choose the word connected to explaining code.",
         "hint_2": "It is not an action like looping or sorting."
       }

@@ -4,7 +4,7 @@
       "python-0": {
         "setting-up-environment": {
           "label": "Setting Up the Environment",
-          "summary": "Guide to installing Python and setting up the IDE.",
+          "summary": "Optional local setup for learners who want Python on their own computer.",
           "cards": {
             "sketch0": {
               "title": "Installing Python"
@@ -113,11 +113,11 @@
         "setting-up-environment": {
           "intro-to-python-installation": {
             "title": "Installing Python",
-            "bodyMarkdown": "To start coding in Python, you first need to install it on your computer. Visit the official [Python website](https://www.python.org/downloads/) and download the latest version suitable for your operating system. Follow the installation instructions provided on the website. \n\n**Example:** After downloading, run the installer and ensure to check the box that says 'Add Python to PATH'. This will make it easier to run Python from the command line.\n\n**Your turn:** Try installing Python on your machine!"
+            "bodyMarkdown": "ZoeSkoul lets you practice Python in the browser, so local setup is optional unless your teacher asks for it. If you want Python on your own computer, visit the official [Python website](https://www.python.org/downloads/) and download the version for your operating system. Follow the installation instructions provided on the website.\n\n**Example:** After downloading, run the installer and, if you are on Windows, check the box that says 'Add Python to PATH'. This makes it easier to run Python from the command line.\n\n**Your turn:** If you want a local setup, install Python on your machine. If not, continue using the ZoeSkoul workspace."
           },
           "setting-up-ide": {
             "title": "Setting Up Your IDE",
-            "bodyMarkdown": "An Integrated Development Environment (IDE) helps you write and manage your code efficiently. A popular choice for Python is [PyCharm](https://www.jetbrains.com/pycharm/). Download and install it, then create a new project. \n\n**Example:** In PyCharm, you can create a new project by selecting 'New Project' from the welcome screen. Choose a location and ensure the interpreter is set to the Python version you installed.\n\n**Try this:** Open PyCharm and create a new project!"
+            "bodyMarkdown": "An Integrated Development Environment (IDE) helps you write and manage code on your own computer. This is optional for ZoeSkoul because the course includes a browser workspace.\n\nA common local choice for Python is [PyCharm](https://www.jetbrains.com/pycharm/). If you install it, create a new project and choose the Python version you installed.\n\n**Try this:** Only if you want local practice, open your IDE and create a small project."
           }
         }
       }

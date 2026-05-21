@@ -198,6 +198,14 @@ function workspaceHasNonBlankFile(workspace: WorkspaceStateV2 | null | undefined
     });
 }
 
+function workspaceHasAnyFile(workspace: WorkspaceStateV2 | null | undefined) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return false;
+    }
+
+    return workspace.nodes.some((node: any) => node?.kind === "file");
+}
+
 function isUserOwnedWorkspaceState(value: any) {
     return (
         value?.userEdited === true ||
@@ -206,7 +214,7 @@ function isUserOwnedWorkspaceState(value: any) {
     );
 }
 
-function resolvePreferredExerciseWorkspace(args: {
+export function resolvePreferredExerciseWorkspace(args: {
     savedState: any;
     savedWorkspace: WorkspaceStateV2 | null | undefined;
     starterWorkspace: WorkspaceStateV2 | null | undefined;
@@ -219,6 +227,7 @@ function resolvePreferredExerciseWorkspace(args: {
 
     const starterHasContent = workspaceHasNonBlankFile(starterWorkspace);
     const savedHasContent = workspaceHasNonBlankFile(savedWorkspace);
+    const savedHasFileShell = workspaceHasAnyFile(savedWorkspace);
 
     /**
      * Important:
@@ -226,7 +235,7 @@ function resolvePreferredExerciseWorkspace(args: {
      * That is not meaningful learner work, so it must not override starter code.
      */
     if (isUserOwnedWorkspaceState(savedState)) {
-        if (starterHasContent && !savedHasContent) {
+        if (!savedHasFileShell && starterHasContent && !savedHasContent) {
             return starterWorkspace ?? savedWorkspace;
         }
         return savedWorkspace;
@@ -241,6 +250,41 @@ function resolvePreferredExerciseWorkspace(args: {
     }
 
     return savedWorkspace;
+}
+
+export function shouldSkipEmbeddedEnsureExercise(args: {
+    existing: any;
+    manifestLanguage: string;
+    manifestStarterWorkspace: WorkspaceStateV2 | null | undefined;
+    manifestStarterCode?: string | null | undefined;
+}) {
+    const { existing, manifestLanguage, manifestStarterWorkspace, manifestStarterCode } = args;
+    if (!existing) return false;
+
+    const existingWorkspace = getWorkspaceFromAnyState(existing);
+
+    if (!stateLanguageMatches(existing, manifestLanguage, existingWorkspace)) {
+        return false;
+    }
+
+    const manifestHasStarter =
+        workspaceHasAnyFile(manifestStarterWorkspace) ||
+        Boolean(String(manifestStarterCode ?? "").trim());
+
+    if (isUserOwnedWorkspaceState(existing)) {
+        return true;
+    }
+
+    const existingHasContent =
+        workspaceHasNonBlankFile(existingWorkspace) ||
+        Boolean(String(existing?.code ?? "").trim()) ||
+        Boolean(String(existing?.source ?? "").trim());
+
+    if (existingHasContent) {
+        return true;
+    }
+
+    return !manifestHasStarter;
 }
 function firstNonBlankCode(...values: Array<unknown>) {
     for (const value of values) {
@@ -289,7 +333,7 @@ function workspaceWithEntryCode(
     return changed ? { ...workspace, nodes } : workspace;
 }
 
-function hydrateBlankWorkspaceFromStarter(args: {
+export function hydrateBlankWorkspaceFromStarter(args: {
     workspace: WorkspaceStateV2 | null | undefined;
     fallbackCode: string;
     state: any;
@@ -483,9 +527,14 @@ function CodeInputWithTools(props: {
     useEffect(() => {
         if (exercise.kind !== "code_input") return;
 
-        const manifestLanguage = getManifestExerciseLanguage(
-            exercise as CodeInputExerciseWithSqlExtras,
-        );
+        const exCode = exercise as CodeInputExerciseWithSqlExtras;
+
+        const manifestLanguage = getManifestExerciseLanguage(exCode);
+
+        const manifestStarterWorkspace = resolveExerciseWorkspace({
+            language: manifestLanguage,
+            manifest: exCode,
+        });
 
         const ensureKey = [
             exerciseKey,
@@ -497,6 +546,9 @@ function CodeInputWithTools(props: {
             String((exercise as any).id ?? ""),
             String((exercise as any).exerciseKey ?? ""),
             String((exercise as any).language ?? ""),
+            workspaceHasNonBlankFile(manifestStarterWorkspace)
+                ? "starter:nonblank"
+                : "starter:blank",
         ].join("|");
 
         if (lastEmbeddedEnsureExerciseKeyRef.current === ensureKey) return;
@@ -504,12 +556,12 @@ function CodeInputWithTools(props: {
         const existing = useReviewRuntimeStore.getState().exercises[exerciseKey];
 
         if (
-            existing &&
-            stateLanguageMatches(
+            shouldSkipEmbeddedEnsureExercise({
                 existing,
                 manifestLanguage,
-                getWorkspaceFromAnyState(existing),
-            )
+                manifestStarterWorkspace,
+                manifestStarterCode: (exercise as any).starterCode,
+            })
         ) {
             lastEmbeddedEnsureExerciseKeyRef.current = ensureKey;
             return;
@@ -852,13 +904,17 @@ export default function ExerciseRenderer({
     const storeExercise = useReviewRuntimeStore((s) => s.exercises[exerciseKey]);
     const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
     const lastEmbeddedEnsureExerciseKeyRef = useRef<string | null>(null);
-
     useEffect(() => {
         if (ex.kind !== "code_input") return;
 
-        const manifestLanguage = getManifestExerciseLanguage(
-            ex as CodeInputExerciseWithSqlExtras,
-        );
+        const exCode = ex as CodeInputExerciseWithSqlExtras;
+
+        const manifestLanguage = getManifestExerciseLanguage(exCode);
+
+        const manifestStarterWorkspace = resolveExerciseWorkspace({
+            language: manifestLanguage,
+            manifest: exCode,
+        });
 
         const ensureKey = [
             exerciseKey,
@@ -870,6 +926,9 @@ export default function ExerciseRenderer({
             String((ex as any).id ?? ""),
             String((ex as any).exerciseKey ?? ""),
             String((ex as any).language ?? ""),
+            workspaceHasNonBlankFile(manifestStarterWorkspace)
+                ? "starter:nonblank"
+                : "starter:blank",
         ].join("|");
 
         if (lastEmbeddedEnsureExerciseKeyRef.current === ensureKey) return;
@@ -877,12 +936,12 @@ export default function ExerciseRenderer({
         const existing = useReviewRuntimeStore.getState().exercises[exerciseKey];
 
         if (
-            existing &&
-            stateLanguageMatches(
+            shouldSkipEmbeddedEnsureExercise({
                 existing,
                 manifestLanguage,
-                getWorkspaceFromAnyState(existing),
-            )
+                manifestStarterWorkspace,
+                manifestStarterCode: (ex as any).starterCode,
+            })
         ) {
             lastEmbeddedEnsureExerciseKeyRef.current = ensureKey;
             return;
@@ -890,10 +949,6 @@ export default function ExerciseRenderer({
 
         lastEmbeddedEnsureExerciseKeyRef.current = ensureKey;
 
-        /**
-         * Avoid ensureExercise -> Zustand set -> rerender -> ensureExercise
-         * loops when embedded code exercises are mounted during route changes.
-         */
         ensureExercise({
             exerciseKey,
             subjectSlug: subjectSlug || "",
@@ -916,7 +971,6 @@ export default function ExerciseRenderer({
         topicId,
         cardId,
     ]);
-
     const onPatch = useCallback(
         (patch: any) => {
             patchExercise(exerciseKey, patch);
