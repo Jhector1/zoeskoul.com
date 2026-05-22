@@ -1,0 +1,209 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "what_a_database_is": {
+          "label": "what a database is",
+          "summary": "Understanding the basics of what a database is and how it organizes information.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Databases"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "SQL Query Practice"
+            }
+          },
+          "projectSteps": {
+            "code_input_1": {
+              "title": "Basic SQL Query"
+            },
+            "code_input_2": {
+              "title": "Retrieve Student Names"
+            },
+            "code_input_3": {
+              "title": "List Student Cities"
+            }
+          },
+          "quiz": {
+            "single_choice_1": {
+              "title": "Purpose of a Database",
+              "prompt": "What is the primary purpose of a database?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "To store and organize data",
+                "b": "To create websites",
+                "c": "To design graphics",
+                "d": "To write code"
+              }
+            },
+            "single_choice_2": {
+              "title": "Database Table Structure",
+              "prompt": "In a database table, what does a row represent?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "A single record",
+                "b": "A column header",
+                "c": "A database schema",
+                "d": "A data type"
+              }
+            },
+            "multi_choice_1": {
+              "title": "Components of a Database",
+              "prompt": "Which of the following are components of a database? (Select all that apply)",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "Tables",
+                "b": "Graphs",
+                "c": "Queries",
+                "d": "Images"
+              }
+            },
+            "multi_choice_2": {
+              "title": "Database Operations",
+              "prompt": "Which operations can be performed on a database? (Select all that apply)",
+              "hint": "Focus on data manipulation tasks.",
+              "help": {
+                "concept": "Databases allow data insertion and deletion.",
+                "hint_1": "Consider operations related to data management.",
+                "hint_2": "Compiling code and running marathons are unrelated to databases."
+              },
+              "options": {
+                "a": "Insert data",
+                "b": "Delete data",
+                "c": "Compile code",
+                "d": "Run a marathon"
+              }
+            },
+            "drag_reorder_1": {
+              "title": "Database Query Sequence",
+              "prompt": "Arrange the steps to perform a basic SQL query in the correct order.",
+              "hint": "Think about the logical sequence of actions when querying a database.",
+              "help": {
+                "concept": "The sequence involves writing, executing, and reviewing the query.",
+                "hint_1": "Start with writing the query.",
+                "hint_2": "Finish by checking the results."
+              },
+              "tokens": {
+                "t1": "Write the SQL query",
+                "t2": "Run the query",
+                "t3": "Check the results"
+              }
+            },
+            "drag_reorder_2": {
+              "title": "Database Table Creation",
+              "prompt": "Arrange the steps to create a new table in a database.",
+              "hint": "Consider the logical order of creating a new table.",
+              "help": {
+                "concept": "Creating a table involves defining, executing, and verifying.",
+                "hint_1": "Start by defining the structure.",
+                "hint_2": "End with verification."
+              },
+              "tokens": {
+                "t1": "Define the table structure",
+                "t2": "Execute the CREATE TABLE command",
+                "t3": "Verify the table creation"
+              }
+            },
+            "fill_blank_choice_1": {
+              "title": "SQL Command",
+              "prompt": "Fill in the blank to complete the SQL command: `SELECT * FROM [blank1]`",
+              "hint": "Think about the table name used in the example.",
+              "help": {
+                "concept": "The command selects all records from the specified table.",
+                "hint_1": "Refer to the table name in the example.",
+                "hint_2": "The correct table is 'the missing term'."
+              },
+              "template": "SELECT * FROM [blank1]",
+              "choices": [
+                "students",
+                "images",
+                "graphs",
+                "code"
+              ]
+            },
+            "fill_blank_choice_2": {
+              "title": "Database Concept",
+              "prompt": "A database is primarily used to [blank1] data.",
+              "hint": "Consider the main function of a database.",
+              "help": {
+                "concept": "Databases are used to the missing term data.",
+                "hint_1": "Think about the primary purpose of a database.",
+                "hint_2": "The correct action is 'the missing term'."
+              },
+              "template": "A database is primarily used to [blank1] data.",
+              "choices": [
+                "store",
+                "delete",
+                "compile",
+                "run"
+              ]
+            },
+            "code_input_1": {
+              "title": "Basic SQL Query",
+              "prompt": "Write a SQL query to select all columns from the `students` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query below"
+            },
+            "code_input_2": {
+              "title": "Retrieve Student Names",
+              "prompt": "Write a SQL query to select only the `name` column from the `students` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query below"
+            },
+            "code_input_3": {
+              "title": "List Student Cities",
+              "prompt": "Write a SQL query to select the `city` column from the `students` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "what_a_database_is": {
+          "sketch1": {
+            "title": "Introduction to Databases",
+            "bodyMarkdown": "A database is an organized collection of data, generally stored and accessed electronically from a computer system. Databases are structured to facilitate the storage, retrieval, modification, and deletion of data in conjunction with various data-processing operations. \n\nFor example, consider a simple database table named `students`:\n\n```\n| id | name | grade | age | city     |\n|----|------|-------|-----|----------|\n| 1  | Noor | A     | 15  | Chicago  |\n| 2  | Mia  | A     | 14  | Evanston |\n| 3  | Leo  | B     | 15  | Chicago  |\n| 4  | Ava  | C     | 14  | Oak Park |\n| 5  | Zane | B     | 16  | Naperville |\n```\n\nThis table stores information about students, including their ID, name, grade, age, and city. \n\n**Try it yourself**: Imagine adding a new student to this table. What information would you need?"
+          }
+        }
+      }
+    }
+  }
+}

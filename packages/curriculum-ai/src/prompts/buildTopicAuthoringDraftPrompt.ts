@@ -81,6 +81,40 @@ function renderWorkspacePolicy(seed: TopicSeed) {
         ...policy.notes.map((x) => `- ${x}`),
     ].join("\n");
 }
+
+function renderAuthoringPolicy(seed: TopicSeed) {
+    const policy = seed.authoringPolicy;
+    if (!policy) return "";
+    const logicalModuleNumber = Math.max(0, (seed.moduleOrder ?? 1) - 1);
+
+    const lines: string[] = ["Authoring policy rules:"];
+
+    if ((policy.allowedConcepts ?? []).length > 0) {
+        lines.push("- Allowed course concepts:");
+        lines.push(...(policy.allowedConcepts ?? []).map((concept) => `  - ${concept}`));
+    }
+
+    if ((policy.disallowedConcepts ?? []).length > 0) {
+        lines.push("- Disallowed future course concepts:");
+        lines.push(...(policy.disallowedConcepts ?? []).map((concept) => `  - ${concept}`));
+    }
+
+    const moduleRule = policy.moduleRules?.[String(logicalModuleNumber)];
+    if (moduleRule) {
+        lines.push(`- Module ${logicalModuleNumber} concept-stage rules:`);
+        if ((moduleRule.allowedConcepts ?? []).length > 0) {
+            lines.push(...(moduleRule.allowedConcepts ?? []).map((concept) => `  - allowed: ${concept}`));
+        }
+        if ((moduleRule.disallowedConcepts ?? []).length > 0) {
+            lines.push(...(moduleRule.disallowedConcepts ?? []).map((concept) => `  - disallowed: ${concept}`));
+        }
+        if ((moduleRule.notes ?? []).length > 0) {
+            lines.push(...(moduleRule.notes ?? []).map((note) => `  - note: ${note}`));
+        }
+    }
+
+    return lines.join("\n");
+}
 export function buildTopicAuthoringDraftPrompt(args: {
     seed: TopicSeed;
     locale: string;
@@ -227,6 +261,8 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "- You may include projectDraft, but the compiler will also create a project card automatically for code_input exercises.",
             "",
             ...sqlDatasetRules,
+            "",
+            renderAuthoringPolicy(args.seed),
             "",
             exercisePolicyRules,
             "",

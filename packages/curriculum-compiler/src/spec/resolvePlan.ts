@@ -9,7 +9,7 @@ import { loadSavedPlan } from "../planning/loadSavedPlan.js";
 import { savePlan } from "../planning/savePlan.js";
 import { validatePlan } from "../validate/validatePlan.js";
 import { buildPlanFromSpec } from "./buildPlanFromSpec.js";
-import { loadCourseSpec } from "./loadCourseSpec.js";
+import { loadCourseSpec, loadSubjectPlan } from "./loadCourseSpec.js";
 
 export type ResolvedPlanSource = "spec" | "saved_plan" | "generated_plan";
 
@@ -21,7 +21,11 @@ export async function resolvePlan(args: {
     source: ResolvedPlanSource;
     spec: CourseSpec | null;
 }> {
-    const spec = await loadCourseSpec(args.blueprint.subjectSlug);
+    const subjectPlan = await loadSubjectPlan(args.blueprint.subjectSlug);
+    const courseSlug = subjectPlan?.publishTarget?.courseSlug ?? null;
+    const spec = courseSlug
+        ? await loadCourseSpec(args.blueprint.subjectSlug, courseSlug)
+        : null;
 
     if (spec) {
         const plan = buildPlanFromSpec({
@@ -38,7 +42,9 @@ export async function resolvePlan(args: {
         };
     }
 
-    let plan = await loadSavedPlan(args.blueprint.subjectSlug);
+    let plan = courseSlug
+        ? await loadSavedPlan(args.blueprint.subjectSlug, courseSlug)
+        : null;
 
     if (plan) {
         validatePlan(plan);
@@ -52,7 +58,9 @@ export async function resolvePlan(args: {
 
     plan = await generateCoursePlan(args.provider, args.blueprint);
     validatePlan(plan);
-    await savePlan(args.blueprint.subjectSlug, plan);
+    if (courseSlug) {
+        await savePlan(args.blueprint.subjectSlug, courseSlug, plan);
+    }
 
     return {
         plan,

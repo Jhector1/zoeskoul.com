@@ -1,0 +1,156 @@
+{
+  "title": "Predicting Result Output",
+  "summary": "Learn how to predict the output of basic SQL queries using SELECT statements.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding SELECT Statements",
+      "bodyMarkdown": "The SELECT statement is used to retrieve data from a database. It specifies the columns you want to retrieve and the table from which to retrieve them. For example:\n\n```\nSELECT name, price FROM products;\n```\n\nThis query retrieves the 'name' and 'price' columns from the 'products' table. Try it yourself by modifying the columns or adding more columns to see different outputs."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using WHERE Clauses",
+      "bodyMarkdown": "A WHERE clause is used to filter records. It specifies a condition that must be met for a record to be included in the results. For example:\n\n```\nSELECT name, price FROM products WHERE category = 'Art';\n```\n\nThis query retrieves the 'name' and 'price' of products in the 'Art' category. Try changing the category to see how the results change."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Basic SELECT Query",
+      "prompt": "What does the following SQL query do?\n\n```\nSELECT name FROM products;\n```",
+      "options": [
+        "Retrieves all columns from the products table.",
+        "Retrieves the 'name' column from the products table.",
+        "Retrieves the 'price' column from the products table.",
+        "Retrieves the 'category' column from the products table."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Focus on the column specified in the SELECT statement.",
+      "help": {
+        "concept": "The SELECT statement specifies which columns to retrieve from a table.",
+        "hint_1": "Look at the column name after SELECT.",
+        "hint_2": "The query retrieves only the 'name' column."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Understanding WHERE Clauses",
+      "prompt": "Which of the following queries will retrieve products in the 'Stationery' category?",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Stationery';",
+        "SELECT name, price FROM products WHERE category = 'Art';",
+        "SELECT * FROM products WHERE category = 'Stationery' AND price > 10;",
+        "SELECT category FROM products WHERE category = 'Stationery';"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Focus on the WHERE clause and the condition it specifies.",
+      "help": {
+        "concept": "The WHERE clause filters records based on a specified condition.",
+        "hint_1": "Check the condition in the WHERE clause.",
+        "hint_2": "Look for queries that specify 'Stationery' in the WHERE clause."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Ordering SQL Query Steps",
+      "prompt": "Arrange the steps to write a basic SQL SELECT query.",
+      "tokens": [
+        "Identify the table to query.",
+        "Specify the columns to retrieve.",
+        "Write the SELECT statement.",
+        "Execute the query."
+      ],
+      "correctOrder": [
+        "Write the SELECT statement.",
+        "Specify the columns to retrieve.",
+        "Identify the table to query.",
+        "Execute the query."
+      ],
+      "hint": "Consider the logical order of writing and executing a query.",
+      "help": {
+        "concept": "Writing a SQL query involves specifying the action, columns, and table.",
+        "hint_1": "Start with the action you want to perform.",
+        "hint_2": "Finish with executing the query."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Completing a SELECT Query",
+      "prompt": "Complete the SQL query to retrieve the 'price' and 'stock' columns from the 'products' table.\n\n```\nSELECT [blank1] FROM products;\n```",
+      "template": "SELECT [blank1] FROM products;",
+      "choices": [
+        "price, stock",
+        "name, category",
+        "id, created_at",
+        "category, price"
+      ],
+      "correctValue": "price, stock",
+      "hint": "Think about which columns you want to retrieve.",
+      "help": {
+        "concept": "The SELECT statement specifies which columns to retrieve.",
+        "hint_1": "Focus on the columns mentioned in the prompt.",
+        "hint_2": "The correct columns are 'price' and 'stock'."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Retrieve Art Products",
+      "prompt": "Write a SQL query to retrieve the 'name' and 'price' of products in the 'Art' category.",
+      "starterCode": "-- Write your SQL query here\nSELECT name, price FROM products WHERE category = 'Art';",
+      "solutionCode": "SELECT name, price FROM products WHERE category = 'Art';",
+      "hint": "Use a WHERE clause to filter by category.",
+      "help": {
+        "concept": "The WHERE clause filters records based on a specified condition.",
+        "hint_1": "Ensure the WHERE clause specifies 'Art' as the category.",
+        "hint_2": "The query should retrieve 'name' and 'price' columns."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "code_input",
+      "title": "List Expensive Products",
+      "prompt": "Write a SQL query to list all products with a price greater than 20.",
+      "starterCode": "-- Write your SQL query here\nSELECT * FROM products WHERE price > 20;",
+      "solutionCode": "SELECT * FROM products WHERE price > 20;",
+      "hint": "Use a comparison operator to filter by price.",
+      "help": {
+        "concept": "Comparison operators are used in WHERE clauses to filter records.",
+        "hint_1": "The condition should check if the price is greater than 20.",
+        "hint_2": "The query should retrieve all columns for products with price > 20."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Find Recent Products",
+      "prompt": "Write a SQL query to find products added after '2026-01-01'.",
+      "starterCode": "-- Write your SQL query here\nSELECT * FROM products WHERE created_at > '2026-01-01';",
+      "solutionCode": "SELECT * FROM products WHERE created_at > '2026-01-01';",
+      "hint": "Use a comparison operator to filter by date.",
+      "help": {
+        "concept": "Comparison operators can be used to filter records by date.",
+        "hint_1": "The condition should check if 'created_at' is after '2026-01-01'.",
+        "hint_2": "The query should retrieve all columns for products added after the specified date."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice Project",
+    "stepIds": [
+      "quiz5",
+      "quiz6",
+      "quiz7"
+    ]
+  }
+}

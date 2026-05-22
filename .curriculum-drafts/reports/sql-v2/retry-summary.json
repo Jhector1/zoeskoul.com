@@ -1,0 +1,435 @@
+{
+  "subjectSlug": "sql-v2",
+  "generatedAt": "2026-05-22T20:23:35.482Z",
+  "topics": [
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-1",
+      "topicId": "what_sql_means",
+      "status": "success",
+      "attempts": 3,
+      "retryCodes": [
+        "SEMANTIC_VALIDATION_FAILED",
+        "SEMANTIC_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-1",
+      "topicId": "what_a_database_is",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "CRITIQUE_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-1",
+      "topicId": "why_sql_is_useful",
+      "status": "success",
+      "attempts": 3,
+      "retryCodes": [
+        "SEMANTIC_VALIDATION_FAILED",
+        "SEMANTIC_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-1",
+      "topicId": "real_world_examples_of_databases",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-2",
+      "topicId": "rows_and_columns",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "CRITIQUE_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-2",
+      "topicId": "records_and_fields",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-2",
+      "topicId": "table_names_and_column_names",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "CRITIQUE_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-2",
+      "topicId": "reading_data_like_a_spreadsheet",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "CRITIQUE_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-3",
+      "topicId": "how_data_is_organized",
+      "status": "success",
+      "attempts": 3,
+      "retryCodes": [
+        "CRITIQUE_VALIDATION_FAILED",
+        "SEMANTIC_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-3",
+      "topicId": "one_table_vs_multiple_tables",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-3",
+      "topicId": "intro_to_keys",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "SEMANTIC_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-3",
+      "topicId": "thinking_in_questions_and_answers",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-4",
+      "topicId": "where_sql_runs",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "WORKSPACE_LANGUAGE_POLICY_VIOLATION"
+      ]
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-4",
+      "topicId": "sql_editor_basics",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "WORKSPACE_LANGUAGE_POLICY_VIOLATION"
+      ]
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-4",
+      "topicId": "running_your_first_query",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-0",
+      "sectionSlug": "sql-v2-0-4",
+      "topicId": "reading_query_results",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "CRITIQUE_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-1",
+      "topicId": "what_select_does",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-1",
+      "topicId": "selecting_all_columns_with_star",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-1",
+      "topicId": "selecting_specific_columns",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-1",
+      "topicId": "query_structure_basics",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-2",
+      "topicId": "from_and_table_names",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-2",
+      "topicId": "choosing_the_right_columns",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-2",
+      "topicId": "viewing_clean_results",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-2",
+      "topicId": "writing_simple_readable_queries",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-3",
+      "topicId": "keywords",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-3",
+      "topicId": "semicolons",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-3",
+      "topicId": "uppercase_vs_lowercase",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-3",
+      "topicId": "common_beginner_syntax_mistakes",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-4",
+      "topicId": "query_one_column",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-4",
+      "topicId": "query_multiple_columns",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-4",
+      "topicId": "query_full_tables",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "sectionSlug": "sql-v2-1-4",
+      "topicId": "predicting_result_output",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "CRITIQUE_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-1",
+      "topicId": "why_filtering_matters",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-1",
+      "topicId": "the_where_clause",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-1",
+      "topicId": "matching_exact_values",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-1",
+      "topicId": "filtering_numbers_and_text",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-2",
+      "topicId": "equals_comparison",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-2",
+      "topicId": "not_equal_comparison",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-2",
+      "topicId": "greater_than_comparison",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-2",
+      "topicId": "less_than_comparison",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "CRITIQUE_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-2",
+      "topicId": "greater_than_or_equal_and_less_than_or_equal",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-2",
+      "topicId": "choosing_the_right_comparison",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-3",
+      "topicId": "and_conditions",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-3",
+      "topicId": "or_conditions",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-3",
+      "topicId": "not_conditions",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-3",
+      "topicId": "combining_conditions_safely",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-4",
+      "topicId": "filter_by_number",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-4",
+      "topicId": "filter_by_text",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-4",
+      "topicId": "filter_by_more_than_one_rule",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "sectionSlug": "sql-v2-2-4",
+      "topicId": "avoiding_filtering_mistakes",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    }
+  ]
+}

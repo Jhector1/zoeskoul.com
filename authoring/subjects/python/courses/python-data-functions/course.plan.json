@@ -1,0 +1,29 @@
+{
+  "subjectSlug": "python",
+  "courseSlug": "python-data-functions",
+  "catalogSlug": "python",
+  "profileId": "python",
+  "title": "Python Data and Functions",
+  "moduleOrder": [
+    "python-5-lists-tuples-and-dictionaries",
+    "python-6-functions-and-modularity",
+    "python-7-files-exceptions-and-data-cleaning"
+  ],
+  "modules": [
+    {
+      "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+      "moduleNumber": 5,
+      "title": "Lists, Tuples, and Dictionaries"
+    },
+    {
+      "moduleSlug": "python-6-functions-and-modularity",
+      "moduleNumber": 6,
+      "title": "Functions and Modularity"
+    },
+    {
+      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
+      "moduleNumber": 7,
+      "title": "Files, Exceptions, and Data Cleaning"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import type {
     SqlDatasetArtifact,
 } from "@zoeskoul/curriculum-contracts";
 import type { SemanticValidationIssue } from "../../shared/profileServices.js";
-import { getSqlRunner } from "@zoeskoul/curriculum-runtime";
+import { resolveSqlRunner } from "@zoeskoul/curriculum-runtime";
 import { getSqlDatasetById } from "../datasets/index.js";
 
 const DEFAULT_SQL_LIMITS = {
@@ -43,7 +43,7 @@ export async function validateSqlSolutionExecutes(args: {
 }> {
     const issues: SemanticValidationIssue[] = [];
     const runsByExerciseId: Record<string, unknown> = {};
-    const runSql = getSqlRunner();
+    const runSql = resolveSqlRunner();
 
     for (const exercise of args.draft.quizDraft) {
         if (exercise.kind !== "code_input") continue;
@@ -66,7 +66,7 @@ export async function validateSqlSolutionExecutes(args: {
                 category: "execution",
                 severity: "warn",
                 exerciseId: exercise.id,
-                message: "No shared SQL runner is configured for compiler-side semantic validation.",
+                message: `No SQL runner is available for compiler-side semantic validation in ${args.seed.subjectSlug}/${args.seed.courseSlug ?? "unknown-course"} topic "${args.seed.topicId}".`,
             });
             continue;
         }

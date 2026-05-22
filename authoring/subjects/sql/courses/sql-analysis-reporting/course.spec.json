@@ -1,0 +1,233 @@
+{
+  "authoringFormatVersion": "2.0",
+  "courseSlug": "sql-analysis-reporting",
+  "catalogSlug": "sql",
+  "subjectSlug": "sql",
+  "profileId": "sql",
+  "title": "SQL Analysis and Reporting",
+  "subtitle": "Use SQL to calculate values, summarize rows, and build beginner reports.",
+  "level": "beginner",
+  "courseNumber": 2,
+  "trackSlug": "sql",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "prerequisites": [
+    "sql-foundations"
+  ],
+  "learningGoals": [
+    "Create calculated columns with arithmetic expressions.",
+    "Use aliases to make result columns readable.",
+    "Use beginner string, number, and date functions safely.",
+    "Understand how NULL affects expressions.",
+    "Use COUNT, SUM, AVG, MIN, and MAX.",
+    "Explain the difference between COUNT(*) and COUNT(column).",
+    "Use WHERE before aggregate calculations.",
+    "Group rows with GROUP BY.",
+    "Filter grouped results with HAVING.",
+    "Build small KPI and reporting queries."
+  ],
+  "moduleCount": 3,
+  "modules": [
+    {
+      "moduleNumber": 5,
+      "moduleSlug": "sql_module_5",
+      "title": "Calculated Columns and SQL Expressions",
+      "purpose": "Teach learners to create new values from existing data so raw tables become useful reports.",
+      "datasetId": "sales_kpi",
+      "coreSkill": "Expressions and aliases",
+      "sections": [
+        {
+          "sectionSlug": "section_5_1",
+          "title": "Creating New Values in Queries",
+          "topics": [
+            "what_expressions_are",
+            "math_in_sql",
+            "adding_and_subtracting",
+            "multiplying_and_dividing"
+          ]
+        },
+        {
+          "sectionSlug": "section_5_2",
+          "title": "Column Aliases",
+          "topics": [
+            "what_aliases_are",
+            "alias_with_as",
+            "renaming_result_columns",
+            "writing_readable_output"
+          ]
+        },
+        {
+          "sectionSlug": "section_5_3",
+          "title": "Simple Functions",
+          "topics": [
+            "intro_to_functions",
+            "string_functions",
+            "number_functions",
+            "date_function_awareness"
+          ]
+        },
+        {
+          "sectionSlug": "section_5_4",
+          "title": "Expression Practice",
+          "topics": [
+            "total_price_calculations",
+            "discount_calculations",
+            "renaming_outputs",
+            "simple_report_queries"
+          ]
+        }
+      ],
+      "moduleProject": "Build a simple invoice or sales report with calculated columns and clear output names."
+    },
+    {
+      "moduleNumber": 6,
+      "moduleSlug": "sql_module_6",
+      "title": "Aggregate Functions",
+      "purpose": "Move from row-by-row reading to summarizing many rows into a single business answer.",
+      "datasetId": "sales_kpi",
+      "coreSkill": "Aggregates",
+      "sections": [
+        {
+          "sectionSlug": "section_6_1",
+          "title": "Intro to Aggregation",
+          "topics": [
+            "what_aggregate_functions_do",
+            "one_value_from_many_rows",
+            "aggregates_vs_regular_queries",
+            "reading_summary_results"
+          ]
+        },
+        {
+          "sectionSlug": "section_6_2",
+          "title": "Core Aggregate Functions",
+          "topics": [
+            "count_star",
+            "count_column",
+            "sum_aggregate",
+            "avg_aggregate",
+            "min_aggregate",
+            "max_aggregate"
+          ]
+        },
+        {
+          "sectionSlug": "section_6_3",
+          "title": "Aggregates with Filters",
+          "topics": [
+            "aggregate_with_where",
+            "counting_filtered_rows",
+            "summing_filtered_data",
+            "average_on_selected_records"
+          ]
+        },
+        {
+          "sectionSlug": "section_6_4",
+          "title": "Aggregate Practice",
+          "topics": [
+            "count_customers",
+            "sum_sales",
+            "find_highest_and_lowest_values",
+            "build_mini_summary_reports"
+          ]
+        }
+      ],
+      "moduleProject": "Create a one-page KPI report using aggregate queries."
+    },
+    {
+      "moduleNumber": 7,
+      "moduleSlug": "sql_module_7",
+      "title": "Grouping Data with GROUP BY and HAVING",
+      "purpose": "Teach learners to summarize by category, person, team, or product instead of only summarizing the whole table.",
+      "datasetId": "sales_kpi",
+      "coreSkill": "GROUP BY and HAVING",
+      "sections": [
+        {
+          "sectionSlug": "section_7_1",
+          "title": "Intro to Grouping",
+          "topics": [
+            "what_grouping_means",
+            "group_by",
+            "grouping_by_one_column",
+            "reading_grouped_results"
+          ]
+        },
+        {
+          "sectionSlug": "section_7_2",
+          "title": "Aggregates with Groups",
+          "topics": [
+            "count_per_group",
+            "sum_per_group",
+            "average_per_group",
+            "max_and_min_per_group"
+          ]
+        },
+        {
+          "sectionSlug": "section_7_3",
+          "title": "Filtering Groups",
+          "topics": [
+            "why_having_exists",
+            "where_vs_having",
+            "filtering_grouped_results",
+            "common_grouping_mistakes"
+          ]
+        },
+        {
+          "sectionSlug": "section_7_4",
+          "title": "Grouping Practice",
+          "topics": [
+            "sales_by_category",
+            "orders_by_customer",
+            "departments_with_high_averages",
+            "summary_dashboards_in_sql"
+          ]
+        }
+      ],
+      "moduleProject": "Create a management summary report with grouped counts, sums, and averages."
+    }
+  ],
+  "assessmentPolicy": {
+    "topicExerciseMin": 4,
+    "technicalTopicCodeInputMin": 1,
+    "requireModuleProject": true,
+    "capstoneRequired": false,
+    "defaultExerciseMix": {
+      "single_choice": 0.08,
+      "multi_choice": 0.08,
+      "drag_reorder": 0.07,
+      "fill_blank_choice": 0.17,
+      "code_input": 0.6
+    }
+  },
+  "validationPolicy": {
+    "allowedSqlConcepts": [
+      "SELECT",
+      "FROM",
+      "WHERE",
+      "ORDER BY",
+      "LIMIT",
+      "expressions",
+      "aliases",
+      "simple_functions",
+      "COUNT",
+      "SUM",
+      "AVG",
+      "MIN",
+      "MAX",
+      "GROUP BY",
+      "HAVING"
+    ],
+    "disallowedSqlConcepts": [
+      "JOIN",
+      "INSERT",
+      "UPDATE",
+      "DELETE",
+      "CREATE TABLE",
+      "subquery"
+    ],
+    "datasets": [
+      "sales_kpi"
+    ],
+    "goldenTestsRequired": true,
+    "requireOrderStableExpectedRows": true,
+    "requireAggregateExpectedResults": true
+  }
+}

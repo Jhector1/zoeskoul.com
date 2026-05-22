@@ -1,0 +1,199 @@
+{
+  "title": "What a Database Is",
+  "summary": "Learn the basics of what a database is and how it organizes information.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Databases",
+      "bodyMarkdown": "A database is a structured collection of data that can be easily accessed, managed, and updated. Databases are used in various applications to store information in an organized manner. For example, a school's database might store information about students, including their names, grades, ages, and cities.\n\n**Example:**\n\nConsider a table named `students` with the following columns:\n\n- **id**: A unique identifier for each student.\n- **name**: The student's name.\n- **grade**: The student's grade.\n- **age**: The student's age.\n- **city**: The city where the student lives.\n\nTry it yourself: Imagine you are managing a library. What kind of information would you store in a database table for books?"
+    },
+    {
+      "id": "sketch2",
+      "title": "Understanding Tables",
+      "bodyMarkdown": "In a database, data is organized into tables. Each table consists of rows and columns, similar to a spreadsheet. Each row represents a single record, and each column represents a field within the record.\n\n**Example:**\n\nThe `students` table might look like this:\n\n```\n| id | name | grade | age | city     |\n|----|------|-------|-----|----------|\n| 1  | Noor | A     | 15  | Chicago  |\n| 2  | Mia  | A     | 14  | Evanston |\n| 3  | Leo  | B     | 15  | Chicago  |\n| 4  | Ava  | C     | 14  | Oak Park |\n| 5  | Zane | B     | 16  | Naperville |\n```\n\nEach row is a record of a student, and each column is a specific piece of information about the student.\n\nYour turn: Think about how you would organize a table for a simple contact list."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "What is a database?",
+      "prompt": "Which of the following best describes a database?",
+      "options": [
+        "A collection of web pages.",
+        "A structured collection of data.",
+        "A type of programming language.",
+        "A hardware device for storing files."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Components of a Table",
+      "prompt": "Which of the following are components of a database table? Select all that apply.",
+      "options": [
+        "Rows",
+        "Columns",
+        "Cells",
+        "Headers"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Organize the Table Structure",
+      "prompt": "Arrange the following components in the order they appear in a database table.",
+      "tokens": [
+        "Column headers",
+        "Rows",
+        "Cells"
+      ],
+      "correctOrder": [
+        "Column headers",
+        "Rows",
+        "Cells"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Identify the Table Component",
+      "prompt": "In a database table, each individual piece of data is stored in a [blank1].",
+      "template": "In a database table, each individual piece of data is stored in a [blank1].",
+      "choices": [
+        "row",
+        "column",
+        "cell",
+        "header"
+      ],
+      "correctValue": "cell",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "single_choice",
+      "title": "Purpose of a Primary Key",
+      "prompt": "What is the purpose of a primary key in a database table?",
+      "options": [
+        "To store large amounts of text.",
+        "To uniquely identify each record.",
+        "To perform calculations.",
+        "To format the table."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how records are uniquely identified.",
+      "help": {
+        "concept": "A primary key uniquely identifies each record in a table.",
+        "hint_1": "Primary keys ensure each record is unique.",
+        "hint_2": "They are not used for calculations or formatting."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "multi_choice",
+      "title": "Database Table Characteristics",
+      "prompt": "Which of the following are true about database tables? Select all that apply.",
+      "options": [
+        "They can have multiple columns.",
+        "They can store different types of data.",
+        "They are used to create web pages.",
+        "They can have multiple rows."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Consider the structure and purpose of tables.",
+      "help": {
+        "concept": "Tables can have multiple rows and columns and store various data types.",
+        "hint_1": "Tables are not used for web pages.",
+        "hint_2": "They organize data in rows and columns."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "drag_reorder",
+      "title": "Steps to Query a Database",
+      "prompt": "Arrange the steps to query a database in the correct order.",
+      "tokens": [
+        "Write the query in the SQL editor.",
+        "Click Run query.",
+        "Check the results table."
+      ],
+      "correctOrder": [
+        "Write the query in the SQL editor.",
+        "Click Run query.",
+        "Check the results table."
+      ],
+      "hint": "Think about the logical sequence of querying a database.",
+      "help": {
+        "concept": "Querying involves writing, executing, and reviewing results.",
+        "hint_1": "Start by writing the query.",
+        "hint_2": "Run the query before checking results."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Database Table Example",
+      "prompt": "In the `students` table, the column that stores the city of each student is [blank1].",
+      "template": "In the `students` table, the column that stores the city of each student is [blank1].",
+      "choices": [
+        "id",
+        "name",
+        "grade",
+        "city"
+      ],
+      "correctValue": "city",
+      "hint": "Look for the column that contains location information.",
+      "help": {
+        "concept": "The `the missing term` column stores the the missing term information for each student.",
+        "hint_1": "The column name matches the type of data it stores.",
+        "hint_2": "the missing term information is stored in the `the missing term` column."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Simple SQL Queries",
+    "stepIds": [
+      "project1",
+      "project2",
+      "project3"
+    ]
+  }
+}

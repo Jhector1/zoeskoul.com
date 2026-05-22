@@ -1,0 +1,229 @@
+{
+  "title": "or conditions",
+  "summary": "Learn how to use OR conditions in SQL to filter data with multiple criteria.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch_1",
+      "title": "Understanding OR Conditions",
+      "bodyMarkdown": "In SQL, the `OR` operator is used to filter records based on multiple conditions. When using `OR`, if any of the conditions are true, the row will be included in the results.\n\nFor example, consider the `products` table. If you want to select products that are either in the 'Art' category or have a price greater than 20, you can use the following query:\n\n```sql\nSELECT * FROM products\nWHERE category = 'Art' OR price > 20;\n```\n\nThis query will return all products that are in the 'Art' category or have a price greater than 20.\n\n**Try it yourself:** Modify the query to select products that are either in the 'Home' category or have a stock less than 10."
+    },
+    {
+      "id": "sketch_2",
+      "title": "Combining OR with AND",
+      "bodyMarkdown": "You can combine `OR` with `AND` to create more complex conditions. The `AND` operator requires both conditions to be true, while `OR` requires at least one condition to be true.\n\nFor example, to find products that are in the 'Stationery' category and either have a price less than 10 or a stock greater than 20, you can write:\n\n```sql\nSELECT * FROM products\nWHERE category = 'Stationery' AND (price < 10 OR stock > 20);\n```\n\nThis query uses parentheses to ensure the correct order of operations.\n\n**Your turn:** Adjust the query to find products in the 'Home' category with a price greater than 50 or a stock less than 5."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Basic OR Condition",
+      "prompt": "Which SQL query will select products that are either in the 'Art' category or have a price greater than 30?",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Art' AND price > 30;",
+        "SELECT * FROM products WHERE category = 'Art' OR price > 30;",
+        "SELECT * FROM products WHERE category = 'Art' OR price < 30;",
+        "SELECT * FROM products WHERE category = 'Art' AND price < 30;"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Remember, OR requires only one condition to be true.",
+      "help": {
+        "concept": "The OR operator allows you to filter results based on multiple conditions where at least one must be true.",
+        "hint_1": "Focus on the use of OR to include products with either condition.",
+        "hint_2": "The correct query should use OR to check if the category is 'Art' or the price is greater than 30."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Combining AND and OR",
+      "prompt": "Which query correctly selects products in the 'Home' category with a price less than 50 or a stock greater than 10?",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Home' AND price < 50 OR stock > 10;",
+        "SELECT * FROM products WHERE category = 'Home' OR price < 50 AND stock > 10;",
+        "SELECT * FROM products WHERE category = 'Home' AND (price < 50 OR stock > 10);",
+        "SELECT * FROM products WHERE (category = 'Home' AND price < 50) OR stock > 10;"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Use parentheses to group conditions correctly.",
+      "help": {
+        "concept": "Combining AND and OR requires careful use of parentheses to ensure the correct logic.",
+        "hint_1": "Consider how parentheses affect the order of operations.",
+        "hint_2": "The correct query should ensure that the AND condition is evaluated before the OR condition."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Multiple OR Conditions",
+      "prompt": "Select all queries that will return products in the 'Art' category or with a stock less than 15.",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Art' OR stock < 15;",
+        "SELECT * FROM products WHERE category = 'Art' AND stock < 15;",
+        "SELECT * FROM products WHERE category = 'Art' OR stock > 15;",
+        "SELECT * FROM products WHERE category = 'Art' OR stock <= 15;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Focus on queries that use OR to include either condition.",
+      "help": {
+        "concept": "OR allows you to filter results based on multiple conditions where at least one must be true.",
+        "hint_1": "Look for queries using OR to check both conditions.",
+        "hint_2": "The correct queries should use OR to include products with either condition being true."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Understanding OR Logic",
+      "prompt": "Which of the following statements about the OR operator are true?",
+      "options": [
+        "OR requires all conditions to be true.",
+        "OR requires at least one condition to be true.",
+        "OR can be combined with AND for complex queries.",
+        "OR is used to exclude rows from the results."
+      ],
+      "correctOptionIds": [
+        "b",
+        "c"
+      ],
+      "hint": "Think about how OR affects the inclusion of rows.",
+      "help": {
+        "concept": "The OR operator is used to include rows where at least one condition is true.",
+        "hint_1": "OR does not require all conditions to be true.",
+        "hint_2": "OR can be used with AND for more complex filtering."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order of Operations",
+      "prompt": "Arrange the steps to correctly filter products in the 'Stationery' category with a price less than 20 or stock greater than 30.",
+      "tokens": [
+        "SELECT * FROM products",
+        "WHERE category = 'Stationery'",
+        "AND (price < 20",
+        "OR stock > 30);"
+      ],
+      "correctOrder": [
+        "SELECT * FROM products",
+        "WHERE category = 'Stationery'",
+        "AND (price < 20",
+        "OR stock > 30);"
+      ],
+      "hint": "Remember to use parentheses to group OR conditions.",
+      "help": {
+        "concept": "The order of operations in SQL affects how conditions are evaluated.",
+        "hint_1": "Start with the SELECT statement.",
+        "hint_2": "Ensure the AND condition is evaluated before the OR condition using parentheses."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "Building a Query",
+      "prompt": "Reorder the parts to create a query that selects products with a price greater than 50 or in the 'Home' category.",
+      "tokens": [
+        "SELECT * FROM products",
+        "WHERE price > 50",
+        "OR category = 'Home';"
+      ],
+      "correctOrder": [
+        "SELECT * FROM products",
+        "WHERE price > 50",
+        "OR category = 'Home';"
+      ],
+      "hint": "Start with the SELECT statement and ensure conditions are correctly ordered.",
+      "help": {
+        "concept": "Building a query requires understanding the logical flow of SQL statements.",
+        "hint_1": "Begin with the SELECT statement.",
+        "hint_2": "Ensure the conditions follow the WHERE clause correctly."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Using OR in Queries",
+      "prompt": "Complete the query to select products that are either in the 'Art' category or have a stock greater than 20.",
+      "template": "SELECT * FROM products WHERE category = 'Art' OR [blank1] > 20;",
+      "choices": [
+        "price",
+        "stock",
+        "name",
+        "id"
+      ],
+      "correctValue": "stock",
+      "hint": "Focus on the condition related to quantity.",
+      "help": {
+        "concept": "The OR operator allows filtering based on multiple conditions.",
+        "hint_1": "Look for the condition that checks quantity.",
+        "hint_2": "The correct choice should relate to the stock quantity."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Logical Operators",
+      "prompt": "Fill in the blank to select products with a price less than 10 or in the 'Stationery' category.",
+      "template": "SELECT * FROM products WHERE [blank1] < 10 OR category = 'Stationery';",
+      "choices": [
+        "price",
+        "stock",
+        "name",
+        "id"
+      ],
+      "correctValue": "price",
+      "hint": "Consider the condition related to cost.",
+      "help": {
+        "concept": "Logical operators like OR help filter data based on multiple criteria.",
+        "hint_1": "Focus on the condition that checks cost.",
+        "hint_2": "The correct choice should relate to the price."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Filter Products by Category or Price",
+      "prompt": "Write a query to select products that are either in the 'Home' category or have a price greater than 100.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Home' OR price > 100;",
+      "recipeType": "sql_query",
+      "datasetId": "products_catalog"
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Complex Filtering with OR",
+      "prompt": "Write a query to select products that are in the 'Art' category and either have a stock less than 15 or a price greater than 20.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Art' AND (stock < 15 OR price > 20);",
+      "recipeType": "sql_query",
+      "datasetId": "products_catalog"
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Using OR with Date Conditions",
+      "prompt": "Write a query to select products that were created after '2026-01-01' or have a stock greater than 20.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE created_at > '2026-01-01' OR stock > 20;",
+      "recipeType": "sql_query",
+      "datasetId": "products_catalog"
+    }
+  ],
+  "projectDraft": {
+    "title": "Filtering Data with OR Conditions",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

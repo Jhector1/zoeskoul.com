@@ -1,0 +1,57 @@
+{
+  "subjectSlug": "sql",
+  "catalogSlug": "sql",
+  "profileId": "sql",
+  "courseOrder": [
+    "sql-foundations",
+    "sql-analysis-reporting",
+    "multi-table-sql",
+    "sql-data-management",
+    "sql-database-design-capstone"
+  ],
+  "publishTarget": {
+    "liveSubjectSlug": "sql-v2",
+    "courseSlug": "sql-foundations",
+    "channel": "current"
+  },
+  "versioning": {
+    "family": "sql",
+    "version": 2,
+    "status": "active",
+    "defaultForNewEnrollments": true,
+    "supersedes": "sql",
+    "supersededBy": null
+  },
+  "courses": [
+    {
+      "courseSlug": "sql-foundations",
+      "title": "SQL Foundations",
+      "order": 1,
+      "path": "courses/sql-foundations/course.spec.json"
+    },
+    {
+      "courseSlug": "sql-analysis-reporting",
+      "title": "SQL Analysis and Reporting",
+      "order": 2,
+      "path": "courses/sql-analysis-reporting/course.spec.json"
+    },
+    {
+      "courseSlug": "multi-table-sql",
+      "title": "Multi-Table SQL",
+      "order": 3,
+      "path": "courses/multi-table-sql/course.spec.json"
+    },
+    {
+      "courseSlug": "sql-data-management",
+      "title": "SQL Data Management",
+      "order": 4,
+      "path": "courses/sql-data-management/course.spec.json"
+    },
+    {
+      "courseSlug": "sql-database-design-capstone",
+      "title": "SQL Database Design and Capstone",
+      "order": 5,
+      "path": "courses/sql-database-design-capstone/course.spec.json"
+    }
+  ]
+}

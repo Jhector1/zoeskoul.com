@@ -128,16 +128,16 @@ export async function critiqueTopicDraft(args: {
     });
 
     let preparedDraft = normalizeTopicAuthoringDraft(repairedDraft);
-    preparedDraft = repairTopicAuthoringDraft(preparedDraft);
-    preparedDraft = sanitizeHintLeaksInDraft(preparedDraft);
+    preparedDraft = repairTopicAuthoringDraft(preparedDraft, seed);
+    preparedDraft = sanitizeHintLeaksInDraft(preparedDraft, seed);
 
     const refreshedRepair = await profileServices.repairDraft({
         seed,
         draft: preparedDraft,
     });
 
-    preparedDraft = repairTopicAuthoringDraft(refreshedRepair.draft);
-    preparedDraft = sanitizeHintLeaksInDraft(preparedDraft);
+    preparedDraft = repairTopicAuthoringDraft(refreshedRepair.draft, seed);
+    preparedDraft = sanitizeHintLeaksInDraft(preparedDraft, seed);
 
     const mergedRepairReport = {
         topicId: seed.topicId,

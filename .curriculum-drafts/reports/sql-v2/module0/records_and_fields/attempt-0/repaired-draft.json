@@ -1,0 +1,249 @@
+{
+  "title": "Records and Fields",
+  "summary": "Learn about records and fields in SQL databases, focusing on understanding tables and how to query them using SELECT and FROM.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Records and Fields",
+      "bodyMarkdown": "In SQL, a **record** is a single row in a table, representing a unique entry. Each record consists of **fields**, which are the columns in the table. For example, in a `students` table, each student is a record, and their attributes like `name`, `grade`, and `age` are fields.\n\n```sql\nSELECT name, grade FROM students;\n```\nThis query selects the `name` and `grade` fields from all records in the `students` table. Try it yourself by running this query in the SQL editor."
+    },
+    {
+      "id": "sketch2",
+      "title": "Example: Querying a Table",
+      "bodyMarkdown": "Let's look at an example using the `students` table:\n\n```sql\nSELECT * FROM students;\n```\nThis query retrieves all fields from every record in the `students` table. Each row in the results represents a student, and each column corresponds to a field like `id`, `name`, `grade`, `age`, or `city`.\n\nYour turn: Modify the query to select only the `name` and `city` fields."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Identifying Records and Fields",
+      "prompt": "In the context of a SQL table, what is a 'record'?",
+      "options": [
+        "A single row in a table",
+        "A column in a table",
+        "A database",
+        "A SQL query"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Understanding Fields",
+      "prompt": "What is a 'field' in a SQL table?",
+      "options": [
+        "A single row in a table",
+        "A column in a table",
+        "A SQL command",
+        "A database"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Components of a SQL Table",
+      "prompt": "Which of the following are components of a SQL table? (Select all that apply)",
+      "options": [
+        "Records",
+        "Fields",
+        "Databases",
+        "Queries"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "SQL Query Basics",
+      "prompt": "Which SQL keywords are used to retrieve data from a table? (Select all that apply)",
+      "options": [
+        "SELECT",
+        "FROM",
+        "INSERT",
+        "DELETE"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Ordering SQL Query Components",
+      "prompt": "Arrange the components of a basic SQL query in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "table_name",
+        "column_name"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "column_name",
+        "FROM",
+        "table_name"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Table Structure",
+      "prompt": "Arrange the following to describe the structure of a SQL table.",
+      "tokens": [
+        "Table",
+        "Fields",
+        "Records",
+        "Columns"
+      ],
+      "correctOrder": [
+        "Table",
+        "Fields",
+        "Columns",
+        "Records"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Query Keywords",
+      "prompt": "In a SQL query, the keyword used to specify the table is [blank1].",
+      "template": "In a SQL query, the keyword used to specify the table is [blank1].",
+      "choices": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "INSERT"
+      ],
+      "correctValue": "FROM",
+      "hint": "This keyword follows SELECT in a query.",
+      "help": {
+        "concept": "the missing term is used to specify the table in a SQL query.",
+        "hint_1": "the missing term comes after SELECT.",
+        "hint_2": "It indicates the table to retrieve data the missing term."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Identifying SQL Components",
+      "prompt": "A single row in a SQL table is called a [blank1].",
+      "template": "A single row in a SQL table is called a [blank1].",
+      "choices": [
+        "field",
+        "record",
+        "database",
+        "query"
+      ],
+      "correctValue": "record",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Basic SELECT Query",
+      "prompt": "Write a SQL query to select all fields from the `students` table.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Selecting Specific Fields",
+      "prompt": "Write a SQL query to select only the `name` and `age` fields from the `students` table.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT name, age FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Querying with SELECT and FROM",
+      "prompt": "Write a SQL query to select the `grade` field from the `students` table.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT grade FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

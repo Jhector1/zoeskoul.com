@@ -1,0 +1,29 @@
+{
+  "policyId": "sql-shared-validation",
+  "extendsValidation": [
+    "course-structure",
+    "versioning",
+    "workspace-language"
+  ],
+  "runtime": {
+    "language": "sql",
+    "dialect": "sqlite",
+    "resultShape": "table"
+  },
+  "validationRequirements": {
+    "datasetsMustExist": true,
+    "datasetSchemaMustMatchSeeds": true,
+    "expectedRowsMustMatchExecutedRows": true,
+    "mutationSandboxRequired": true,
+    "joinDesignLessonsNeedRelationshipVisuals": true
+  },
+  "rules": {
+    "conceptStageValidation": [
+      "sql-foundations must not use joins, aggregates, mutation SQL, CREATE TABLE, or subqueries",
+      "sql-analysis-reporting may use expressions, aliases, functions, aggregates, GROUP BY, and HAVING",
+      "multi-table-sql may use joins, aliases, formatting, and beginner subqueries",
+      "sql-data-management may use INSERT, UPDATE, DELETE, and CREATE TABLE in sandboxed exercises",
+      "sql-database-design-capstone may use all previously taught beginner concepts"
+    ]
+  }
+}

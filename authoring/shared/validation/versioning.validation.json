@@ -1,0 +1,11 @@
+{
+  "policyId": "versioning-validation",
+  "validationRequirements": {
+    "currentRequiresVersioning": true,
+    "currentRequiresActiveStatus": true,
+    "currentRequiresDefaultForNewEnrollments": true,
+    "currentCannotHaveSupersededBy": true,
+    "legacyCannotBeCurrent": true,
+    "legacyCannotBeDefaultForNewEnrollments": true
+  }
+}

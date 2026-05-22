@@ -1,0 +1,30 @@
+{
+  "topicId": "reading_data_like_a_spreadsheet",
+  "ok": false,
+  "issues": [
+    {
+      "code": "PROJECT_CODE_INPUT_TOO_SMALL",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Expected at least 3 code_input project exercise(s), but the draft has 0."
+    },
+    {
+      "code": "EXERCISE_POLICY_CODE_INPUT_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Exercise policy expects 3 \"code_input\" exercise(s), but the draft has 0."
+    },
+    {
+      "code": "EXERCISE_POLICY_DOMINANT_KIND_MISMATCH",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy expects \"code_input\" to be dominant, but the draft is dominated by \"single_choice / multi_choice / drag_reorder / fill_blank_choice\"."
+    },
+    {
+      "code": "EXERCISE_POLICY_TOTAL_MISMATCH",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Exercise policy expects 11 total exercise(s), but the draft has 8."
+    }
+  ]
+}

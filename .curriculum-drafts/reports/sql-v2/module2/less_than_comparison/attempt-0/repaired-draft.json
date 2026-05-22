@@ -1,0 +1,160 @@
+{
+  "title": "Less Than Comparison",
+  "summary": "Learn how to use the less than comparison operator in SQL to filter data effectively.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Less Than Comparison",
+      "bodyMarkdown": "The less than comparison operator (`<`) is used in SQL to filter rows based on a condition where a column's value must be less than a specified value. This is particularly useful for filtering numerical data.\n\n**Example:**\n\nSuppose you want to find all products in the `products` table with a price less than $20. You can use the following query:\n\n```\nSELECT * FROM products WHERE price < 20;\n```\n\nThis query will return all rows where the `price` column has a value less than 20.\n\n**Try it yourself:**\nModify the query to find products with a `stock` less than 10."
+    },
+    {
+      "id": "sketch2",
+      "title": "Step-by-Step Query Explanation",
+      "bodyMarkdown": "Let's break down the query:\n\n1. **SELECT * FROM products**: This part selects all columns from the `products` table.\n2. **WHERE price < 20**: This condition filters the rows to include only those where the `price` is less than 20.\n\n**Your turn:**\nTry changing the condition to filter products with a `price` less than 15."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Basic Less Than Comparison",
+      "prompt": "Which SQL query will return products with a price less than $10?",
+      "options": [
+        "SELECT * FROM products WHERE price < 10;",
+        "SELECT * FROM products WHERE price > 10;",
+        "SELECT * FROM products WHERE price = 10;",
+        "SELECT * FROM products WHERE price <= 10;"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Focus on the less than operator.",
+      "help": {
+        "concept": "The less than operator (`<`) is used to filter rows where the column value is less than a specified value.",
+        "hint_1": "Look for the query that uses `<` with the price.",
+        "hint_2": "The correct query should filter prices strictly less than 10."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Filtering with Less Than",
+      "prompt": "Which of the following queries will correctly filter products with a stock less than 20? Choose all that apply.",
+      "options": [
+        "SELECT * FROM products WHERE stock < 20;",
+        "SELECT * FROM products WHERE stock <= 20;",
+        "SELECT * FROM products WHERE stock > 20;",
+        "SELECT * FROM products WHERE stock < 15;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Focus on queries that use the less than operator.",
+      "help": {
+        "concept": "The less than operator (`<`) filters rows where the column value is less than a specified value.",
+        "hint_1": "Look for queries that use `<` with the stock column.",
+        "hint_2": "Both queries should filter stocks strictly less than the given number."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Order SQL Query Steps",
+      "prompt": "Arrange the steps to create a query that selects products with a price less than $50.",
+      "tokens": [
+        "SELECT * FROM products",
+        "WHERE price < 50",
+        "Run the query"
+      ],
+      "correctOrder": [
+        "SELECT * FROM products",
+        "WHERE price < 50",
+        "Run the query"
+      ],
+      "hint": "Start with the SELECT statement.",
+      "help": {
+        "concept": "SQL queries typically start with SELECT, followed by WHERE for filtering.",
+        "hint_1": "The SELECT statement comes first.",
+        "hint_2": "The WHERE clause follows the SELECT statement."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Complete the SQL Query",
+      "prompt": "Fill in the blank to complete the query that selects products with a stock less than 5.",
+      "template": "SELECT * FROM products WHERE stock < [blank1];",
+      "choices": [
+        "5",
+        "10",
+        "15",
+        "20"
+      ],
+      "correctValue": "5",
+      "hint": "The condition should filter stocks less than the missing term.",
+      "help": {
+        "concept": "The less than operator (`<`) is used to filter rows where the column value is less than a specified value.",
+        "hint_1": "The blank should be filled with a number less than which you want to filter.",
+        "hint_2": "The correct value is the number the missing term."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Filter Products by Price",
+      "prompt": "Write a SQL query to select all products with a price less than $30.",
+      "starterCode": "SELECT * FROM products WHERE price < ;",
+      "solutionCode": "SELECT * FROM products WHERE price < 30;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "code_input",
+      "title": "Filter Products by Stock",
+      "prompt": "Write a SQL query to select all products with a stock less than 12.",
+      "starterCode": "SELECT * FROM products WHERE stock < ;",
+      "solutionCode": "SELECT * FROM products WHERE stock < 12;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Filter Products by Creation Date",
+      "prompt": "Write a SQL query to select all products created before '2026-01-01'.",
+      "starterCode": "SELECT * FROM products WHERE created_at < '';",
+      "solutionCode": "SELECT * FROM products WHERE created_at < '2026-01-01';",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Filtering Project",
+    "stepIds": [
+      "quiz5",
+      "quiz6",
+      "quiz7"
+    ]
+  }
+}

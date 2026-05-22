@@ -1,0 +1,31 @@
+{
+  "policyId": "python-browser-workspace",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "python-browser-workspace",
+  "uiTerms": {
+    "editor": "code editor",
+    "runButton": "Run",
+    "output": "output panel"
+  },
+  "preferredTerms": {
+    "terminal": "code editor",
+    "command line": "code editor",
+    "console": "output panel",
+    "run file": "click Run"
+  },
+  "learnerInstructions": [
+    "Write code in the code editor.",
+    "Click Run.",
+    "Read the output panel."
+  ],
+  "forbiddenActions": [
+    ".py",
+    "Python file",
+    "save this as main.py",
+    "terminal",
+    "command line",
+    "pip install",
+    "VS Code",
+    "local IDE"
+  ]
+}

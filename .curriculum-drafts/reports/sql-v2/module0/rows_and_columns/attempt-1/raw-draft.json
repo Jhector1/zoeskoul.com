@@ -1,0 +1,244 @@
+{
+  "title": "rows and columns",
+  "summary": "rows and columns in Getting Started with SQL and Databases",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Tables",
+      "bodyMarkdown": "In SQL, data is organized into tables, which consist of rows and columns. Each row represents a unique record, and each column represents a specific attribute of the data. For example, in a `students` table, columns might include `id`, `name`, `grade`, `age`, and `city`. Here's an example of a simple SQL query to retrieve all data from the `students` table:\n\n```sql\nSELECT * FROM students;\n```\n\nThis query selects all columns from the `students` table. Try it yourself by writing a query in the SQL editor and clicking 'Run query'."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Identify the Table Structure",
+      "prompt": "Which of the following best describes the structure of a SQL table?",
+      "options": [
+        "A collection of rows and columns.",
+        "A single row of data.",
+        "A single column of data.",
+        "A single cell of data."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how data is organized in a spreadsheet.",
+      "help": {
+        "concept": "A SQL table is structured with rows and columns, similar to a spreadsheet.",
+        "hint_1": "Consider how multiple records and attributes are stored.",
+        "hint_2": "A table contains multiple rows and columns, not just one."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Purpose of SELECT *",
+      "prompt": "What does the SQL command `SELECT * FROM students;` do?",
+      "options": [
+        "Selects all columns from the `students` table.",
+        "Selects a specific column from the `students` table.",
+        "Deletes all data from the `students` table.",
+        "Updates all data in the `students` table."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "The asterisk (*) is a wildcard character in SQL.",
+      "help": {
+        "concept": "The `SELECT *` command is used to retrieve all columns from a table.",
+        "hint_1": "The asterisk (*) represents all columns.",
+        "hint_2": "This command does not modify or delete data."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Components of a SQL Table",
+      "prompt": "Which of the following are components of a SQL table? Select all that apply.",
+      "options": [
+        "Rows",
+        "Columns",
+        "Cells",
+        "Headers"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about how data is organized in a table format.",
+      "help": {
+        "concept": "A SQL table consists of rows, columns, and cells.",
+        "hint_1": "Consider the basic elements that make up a table.",
+        "hint_2": "Headers are not a component of the table itself but are often used for display purposes."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "SQL Query Functions",
+      "prompt": "Which of the following functions can a SQL query perform? Select all that apply.",
+      "options": [
+        "Retrieve data",
+        "Update data",
+        "Delete data",
+        "Create a new table"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "hint": "Consider the various operations you can perform on a database.",
+      "help": {
+        "concept": "SQL queries can retrieve, update, delete data, and create new tables.",
+        "hint_1": "SQL is a versatile language for interacting with databases.",
+        "hint_2": "Think about the CRUD operations: Create, Read, Update, Delete."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Query Clauses",
+      "prompt": "Arrange the SQL query clauses in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "hint": "Consider the logical flow of a SQL query.",
+      "help": {
+        "concept": "SQL queries follow a specific order of clauses.",
+        "hint_1": "Start with selecting data, then specify the source.",
+        "hint_2": "Filtering and ordering come after specifying the source."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Table Elements",
+      "prompt": "Arrange the elements of a SQL table from smallest to largest.",
+      "tokens": [
+        "Cell",
+        "Column",
+        "Row",
+        "Table"
+      ],
+      "correctOrder": [
+        "Cell",
+        "Column",
+        "Row",
+        "Table"
+      ],
+      "hint": "Think about how these elements build upon each other.",
+      "help": {
+        "concept": "A table is made up of rows, which are made up of columns, which contain cells.",
+        "hint_1": "Start with the smallest unit of data.",
+        "hint_2": "Consider how data is structured in a table."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Wildcard Character",
+      "prompt": "In SQL, the wildcard character used to select all columns is [blank1].",
+      "template": "In SQL, the wildcard character used to select all columns is [blank1].",
+      "choices": [
+        "*",
+        "%",
+        "?",
+        "#"
+      ],
+      "correctValue": "*",
+      "hint": "This character is often used to represent 'all'.",
+      "help": {
+        "concept": "The asterisk (*) is used as a wildcard to select all columns.",
+        "hint_1": "It's a common symbol for 'everything'.",
+        "hint_2": "Think about the symbol used in `SELECT *`."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Basic SQL Command",
+      "prompt": "The SQL command to retrieve data from a table is [blank1].",
+      "template": "The SQL command to retrieve data from a table is [blank1].",
+      "choices": [
+        "SELECT",
+        "INSERT",
+        "UPDATE",
+        "DELETE"
+      ],
+      "correctValue": "SELECT",
+      "hint": "This command is used to fetch data.",
+      "help": {
+        "concept": "The `SELECT` command is used to retrieve data from a table.",
+        "hint_1": "It's the most basic command for data retrieval.",
+        "hint_2": "Think about the command that starts a query."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Retrieve All Students",
+      "prompt": "Write a SQL query to select all columns from the `students` table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT * FROM students;",
+      "recipeType": "sql_query",
+      "hint": "Use the `SELECT` statement with a wildcard to retrieve all columns.",
+      "help": {
+        "concept": "The `SELECT *` statement retrieves all columns from a table.",
+        "hint_1": "Remember to specify the table name after `FROM`.",
+        "hint_2": "Use `SELECT *` to get all columns."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Select Specific Columns",
+      "prompt": "Write a SQL query to select only the `name` and `grade` columns from the `students` table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT name, grade FROM students;",
+      "recipeType": "sql_query",
+      "hint": "List the columns you want to select after the `SELECT` keyword.",
+      "help": {
+        "concept": "You can specify which columns to retrieve by listing them after `SELECT`.",
+        "hint_1": "Separate column names with a comma.",
+        "hint_2": "Ensure you specify the correct table name after `FROM`."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Count Rows in Table",
+      "prompt": "Write a SQL query to count the number of rows in the `students` table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT COUNT(*) FROM students;",
+      "recipeType": "sql_query",
+      "hint": "Use the `COUNT` function to count rows.",
+      "help": {
+        "concept": "The `COUNT` function is used to count the number of rows in a table.",
+        "hint_1": "Use `COUNT(*)` to count all rows.",
+        "hint_2": "Remember to specify the table name after `FROM`."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Table Exploration",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

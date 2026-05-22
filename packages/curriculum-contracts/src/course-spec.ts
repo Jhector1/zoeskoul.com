@@ -1,6 +1,12 @@
-import type { BlueprintRuntimePolicy } from "./blueprint.js";
+import type { BlueprintRuntimePolicy, CourseVersionStatus } from "./blueprint.js";
 import type { ExerciseKindMix } from "./exercise-policy.js";
-import type {CourseGenerationPolicy, ModulePedagogyPolicy, TopicPedagogyPolicy, WorkspaceProfile} from "./workspace.js";
+import type {
+    CourseGenerationPolicy,
+    ModulePedagogyPolicy,
+    ResolvedAuthoringPolicy,
+    TopicPedagogyPolicy,
+    WorkspaceProfile,
+} from "./workspace.js";
 
 export type CourseSpecDifficulty = "beginner" | "intermediate" | "advanced";
 
@@ -126,12 +132,33 @@ export type CourseSpecAssessmentAndDelivery = {
 export type CourseSpec = {
     authoringFormatVersion: string;
     subjectSlug: string;
+    courseSlug: string;
+    catalogSlug: string;
     profileId: string;
     title: string;
+    sourceLocale: string;
+    targetLocales: string[];
+    trackSlug?: string;
+    courseNumber?: number;
+    status?: CourseVersionStatus;
     subtitle?: string;
-    intendedFor?: string;
-    sourceLocale?: string;
-    targetLocales?: string[];
+    prerequisites?: string[];
+    recommendedPrerequisites?: string[];
+    moduleRange?: {
+        start?: number;
+        end?: number;
+        label?: string;
+    };
+    versioning?: {
+        family: string;
+        version: number;
+        status: CourseVersionStatus;
+        defaultForNewEnrollments?: boolean;
+        supersedes?: string | null;
+        supersededBy?: string | null;
+    };
+    validationPolicy?: unknown;
+    intendedFor?: string | string[];
     courseOverview?: {
         recommendedSequence?: string;
         summary?: string;
@@ -148,8 +175,10 @@ export type CourseSpec = {
     modules: CourseSpecModule[];
     assessmentAndDelivery?: CourseSpecAssessmentAndDelivery;
     workspaceProfileId?: string;
+    workspacePolicyId?: string;
     workspaceOverrides?: Partial<WorkspaceProfile>;
     courseGenerationPolicy?: CourseGenerationPolicy;
     modulePolicies?: ModulePedagogyPolicy[];
     topicPolicies?: Record<string, TopicPedagogyPolicy>;
+    resolvedAuthoringPolicy?: ResolvedAuthoringPolicy;
 };

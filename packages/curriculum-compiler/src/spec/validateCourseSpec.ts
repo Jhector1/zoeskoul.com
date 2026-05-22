@@ -194,12 +194,28 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
         issues.push("subjectSlug is required");
     }
 
+    if (!isNonEmptyString(spec.courseSlug)) {
+        issues.push("courseSlug is required");
+    }
+
+    if (!isNonEmptyString(spec.catalogSlug)) {
+        issues.push("catalogSlug is required");
+    }
+
     if (!isNonEmptyString(spec.profileId)) {
         issues.push("profileId is required");
     }
 
     if (!isNonEmptyString(spec.title)) {
         issues.push("title is required");
+    }
+
+    if (!isNonEmptyString(spec.sourceLocale)) {
+        issues.push("sourceLocale is required");
+    }
+
+    if (!Array.isArray(spec.targetLocales)) {
+        issues.push("targetLocales must be an array");
     }
 
     if (!Array.isArray(spec.modules) || !spec.modules.length) {

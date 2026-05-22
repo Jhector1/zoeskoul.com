@@ -1,0 +1,9 @@
+{
+  "policyId": "workspace-language-validation",
+  "validationRequirements": {
+    "validateLearnerFacingTextOnly": true,
+    "enforceResolvedWorkspacePolicies": true,
+    "warnOnDuplicatedWorkspaceTermsInCoursePolicies": true,
+    "warnOnProfileWorkspaceLanguageDuplication": true
+  }
+}

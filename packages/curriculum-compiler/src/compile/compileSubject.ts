@@ -7,13 +7,33 @@ import {
   type CompileProgressCallback,
 } from "./compileProgress.js";
 import { resolvePlan } from "../spec/resolvePlan.js";
+import { compileCourse } from "./compileCourse.js";
+import { resolveSubjectPublishTarget } from "./resolveAuthoringCompileTarget.js";
 
 export async function compileSubject(args: {
-  blueprint: CourseBlueprint;
+  blueprint?: CourseBlueprint;
+  subjectSlug?: string;
   provider: AiProvider;
   onProgress?: CompileProgressCallback;
   resume?: boolean;
+  publish?: boolean;
 }){
+  if (args.subjectSlug) {
+    const target = await resolveSubjectPublishTarget(args.subjectSlug);
+    return compileCourse({
+      subjectSlug: args.subjectSlug,
+      courseSlug: target.courseSlug,
+      provider: args.provider,
+      onProgress: args.onProgress,
+      resume: args.resume,
+      publish: args.publish,
+    });
+  }
+
+  if (!args.blueprint) {
+    throw new Error("compileSubject requires subjectSlug or blueprint");
+  }
+
   validateBlueprint(args.blueprint);
 
   args.onProgress?.({

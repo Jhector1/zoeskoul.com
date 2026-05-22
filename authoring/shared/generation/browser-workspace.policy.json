@@ -1,0 +1,17 @@
+{
+  "policyId": "browser-workspace-core",
+  "notes": [
+    "Learners work inside a browser workspace with an editor, run/check controls, and feedback.",
+    "Do not make file upload or file download the primary learner workflow."
+  ],
+  "uiTerms": {
+    "workspace": "browser workspace",
+    "feedbackPanel": "feedback panel"
+  },
+  "forbiddenActions": [
+    "local IDE",
+    "open VS Code",
+    "upload a file",
+    "download a file"
+  ]
+}

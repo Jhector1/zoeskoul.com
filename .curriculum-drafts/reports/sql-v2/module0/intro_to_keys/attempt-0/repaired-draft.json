@@ -1,0 +1,246 @@
+{
+  "title": "Introduction to Keys",
+  "summary": "Learn about the concept of keys in databases and how they help in uniquely identifying records.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Primary Keys",
+      "bodyMarkdown": "In a database, a primary key is a field (or combination of fields) that uniquely identifies each record in a table. For example, in the `students` table, the `id` column is the primary key because each student has a unique ID.\n\n```sql\nSELECT id, name FROM students;\n```\n\nThis query selects the `id` and `name` columns from the `students` table. Try it yourself by writing the query in the SQL editor and clicking Run query."
+    },
+    {
+      "id": "sketch2",
+      "title": "Why Use Primary Keys?",
+      "bodyMarkdown": "Primary keys ensure that each record in a table is unique, which helps maintain data integrity. Without a primary key, it would be difficult to distinguish between records that have similar or identical data in other fields.\n\nYour turn: Consider the `students` table. How would you ensure that each student is uniquely identifiable without using the `id` column?"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Identifying Primary Keys",
+      "prompt": "Which column in the `students` table is most suitable as a primary key?",
+      "options": [
+        "name",
+        "grade",
+        "id",
+        "city"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Characteristics of Primary Keys",
+      "prompt": "Select all characteristics that apply to primary keys.",
+      "options": [
+        "Unique",
+        "Nullable",
+        "Can have duplicates",
+        "Immutable"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Ordering SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for a basic query.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Primary Key Definition",
+      "prompt": "A primary key is a field that [blank1] identifies each record in a table.",
+      "template": "A primary key is a field that [blank1] identifies each record in a table.",
+      "choices": [
+        "uniquely",
+        "partially",
+        "sometimes",
+        "never"
+      ],
+      "correctValue": "uniquely",
+      "hint": "Consider how a primary key should identify records.",
+      "help": {
+        "concept": "Primary keys must the missing term identify each record.",
+        "hint_1": "Primary keys should not allow duplicates.",
+        "hint_2": "The correct choice ensures each record is distinct."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Simple SELECT Query",
+      "prompt": "Write a SQL query to select all columns from the `students` table.",
+      "starterCode": "-- Write your query here",
+      "solutionCode": "SELECT * FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Primary Key Constraints",
+      "prompt": "What happens if you try to insert a duplicate value into a primary key column?",
+      "options": [
+        "The insert succeeds",
+        "An error occurs",
+        "The duplicate is ignored",
+        "The table is updated"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider the rules for primary keys regarding uniqueness.",
+      "help": {
+        "concept": "Primary keys must have unique values.",
+        "hint_1": "Duplicates in primary key columns are not allowed.",
+        "hint_2": "Inserting a duplicate value violates the primary key constraint."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Benefits of Primary Keys",
+      "prompt": "What are the benefits of having a primary key in a table? Select all that apply.",
+      "options": [
+        "Ensures uniqueness",
+        "Allows duplicates",
+        "Improves data integrity",
+        "Facilitates relationships"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Think about how primary keys help maintain data quality.",
+      "help": {
+        "concept": "Primary keys ensure each record is unique and help in establishing relationships.",
+        "hint_1": "Primary keys prevent duplicate records.",
+        "hint_2": "They are crucial for maintaining data integrity and establishing relationships."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Put the parts of a SQL query in the correct order.",
+      "tokens": [
+        "FROM",
+        "SELECT",
+        "WHERE"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Unique Identification",
+      "prompt": "The primary key in a table must be [blank1].",
+      "template": "The primary key in a table must be [blank1].",
+      "choices": [
+        "unique",
+        "common",
+        "optional",
+        "shared"
+      ],
+      "correctValue": "unique",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Selecting Specific Columns",
+      "prompt": "Write a SQL query to select the `name` and `grade` columns from the `students` table.",
+      "starterCode": "-- Write your query here",
+      "solutionCode": "SELECT name, grade FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Using Primary Key in Queries",
+      "prompt": "Write a SQL query to select the student with `id` 3 from the `students` table.",
+      "starterCode": "-- Write your query here",
+      "solutionCode": "SELECT * FROM students WHERE id = 3;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Keys Project",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

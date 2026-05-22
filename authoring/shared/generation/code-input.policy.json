@@ -1,0 +1,14 @@
+{
+  "policyId": "code-input-core",
+  "validationRequirements": {
+    "requireSolutionMetadata": true,
+    "requireCheckMetadata": true,
+    "requireGoldenTests": true,
+    "requireVisibleExpectedBehavior": true,
+    "requireActionableFeedback": true
+  },
+  "notes": [
+    "Code-input exercises should describe expected behavior clearly.",
+    "Use subject workspace vocabulary consistently in learner-facing instructions."
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "title": "Running Your First Query",
+  "summary": "Learn how to execute your first SQL query using the students_intro dataset.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to SQL Queries",
+      "bodyMarkdown": "SQL (Structured Query Language) is used to communicate with databases. The most basic SQL command is the `SELECT` statement, which retrieves data from a database. For example, to get all the data from a table named `students`, you would write:\n\n```\nSELECT * FROM students;\n```\n\nThis command tells the database to select all columns (`*`) from the `students` table. Try it yourself by writing this query in the SQL editor and clicking 'Run query'."
+    },
+    {
+      "id": "sketch2",
+      "title": "Understanding the SELECT Statement",
+      "bodyMarkdown": "The `SELECT` statement is the foundation of SQL queries. It allows you to specify which columns you want to retrieve. For instance, if you only want to see the names and grades of students, you would write:\n\n```\nSELECT name, grade FROM students;\n```\n\nThis query selects only the `name` and `grade` columns from the `students` table. Try modifying the query to include the `age` column as well."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Basic SQL Query Structure",
+      "prompt": "What is the purpose of the `SELECT` statement in SQL?",
+      "options": [
+        "To delete data from a table",
+        "To retrieve data from a table",
+        "To update data in a table",
+        "To insert data into a table"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what you want to achieve when you use `SELECT`.",
+      "help": {
+        "concept": "The `SELECT` statement is used to retrieve data from a database.",
+        "hint_1": "The `SELECT` statement is not used for modifying data.",
+        "hint_2": "The `SELECT` statement is used to get data from a table."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Components of a SQL Query",
+      "prompt": "Which of the following are components of a basic SQL query?",
+      "options": [
+        "`SELECT`",
+        "`FROM`",
+        "`WHERE`",
+        "`INSERT`"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Ordering a Simple SQL Query",
+      "prompt": "Arrange the components of a SQL query in the correct order.",
+      "tokens": [
+        "`SELECT`",
+        "`FROM`",
+        "`students`",
+        "`*`"
+      ],
+      "correctOrder": [
+        "`SELECT`",
+        "`*`",
+        "`FROM`",
+        "`students`"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Completing a SQL Query",
+      "prompt": "Fill in the blank to complete the SQL query: `SELECT * [blank1] students;`",
+      "template": "SELECT * [blank1] students;",
+      "choices": [
+        "FROM",
+        "WHERE",
+        "INSERT",
+        "UPDATE"
+      ],
+      "correctValue": "FROM",
+      "hint": "Think about how you specify the source table in a query.",
+      "help": {
+        "concept": "The `the missing term` clause specifies the table the missing term which to retrieve data.",
+        "hint_1": "The `the missing term` clause follows `SELECT` to indicate the table.",
+        "hint_2": "Use `the missing term` to specify the table in a query."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Writing Your First SQL Query",
+      "prompt": "Write a SQL query to select all columns from the `students` table.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT * FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "code_input",
+      "title": "Selecting Specific Columns",
+      "prompt": "Write a SQL query to select the `name` and `grade` columns from the `students` table.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT name, grade FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Exploring the Students Table",
+      "prompt": "Write a SQL query to select the `age` and `city` columns from the `students` table.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT age, city FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "single_choice",
+      "title": "Understanding SQL Syntax",
+      "prompt": "Which keyword is used to specify the table in a SQL query?",
+      "options": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "INSERT"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "multi_choice",
+      "title": "SQL Query Keywords",
+      "prompt": "Which of the following are valid SQL keywords?",
+      "options": [
+        "SELECT",
+        "FROM",
+        "UPDATE",
+        "DELETE"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "drag_reorder",
+      "title": "Constructing a SQL Query",
+      "prompt": "Arrange the components to form a valid SQL query.",
+      "tokens": [
+        "`FROM`",
+        "`students`",
+        "`SELECT`",
+        "`name`"
+      ],
+      "correctOrder": [
+        "`SELECT`",
+        "`name`",
+        "`FROM`",
+        "`students`"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "fill_blank_choice",
+      "title": "SQL Query Completion",
+      "prompt": "Complete the SQL query: `SELECT name [blank1] students;`",
+      "template": "SELECT name [blank1] students;",
+      "choices": [
+        "FROM",
+        "WHERE",
+        "INSERT",
+        "UPDATE"
+      ],
+      "correctValue": "FROM",
+      "hint": "Think about how you specify the source table in a query.",
+      "help": {
+        "concept": "The `the missing term` clause specifies the table the missing term which to retrieve data.",
+        "hint_1": "The `the missing term` clause follows `SELECT` to indicate the table.",
+        "hint_2": "Use `the missing term` to specify the table in a query."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Running Your First SQL Queries",
+    "stepIds": [
+      "quiz5",
+      "quiz6",
+      "quiz7"
+    ]
+  }
+}

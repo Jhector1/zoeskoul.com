@@ -1,0 +1,224 @@
+{
+  "title": "Matching Exact Values",
+  "summary": "Learn how to filter data using exact value matches with the WHERE clause in SQL.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding the WHERE Clause",
+      "bodyMarkdown": "The WHERE clause in SQL is used to filter records that meet a certain condition. For example, if you want to find all products in the 'Art' category, you can use:\n\n```sql\nSELECT * FROM products WHERE category = 'Art';\n```\n\nThis query selects all columns from the `products` table where the `category` is exactly 'Art'. Try it yourself by changing the category to 'Home' or 'Stationery' to see different results."
+    },
+    {
+      "id": "sketch2",
+      "title": "Filtering by Price",
+      "bodyMarkdown": "You can also filter records based on numeric values. For instance, to find products with a price of exactly 18.00, use:\n\n```sql\nSELECT * FROM products WHERE price = 18.00;\n```\n\nThis query will return products that have a price of 18.00. Try modifying the price to see how the results change."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Basic WHERE Clause",
+      "prompt": "Which SQL statement will return all products in the 'Stationery' category?",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Stationery';",
+        "SELECT * FROM products WHERE category = 'Art';",
+        "SELECT * FROM products WHERE name = 'Stationery';",
+        "SELECT * FROM products WHERE price = 6.75;"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Focus on filtering by category.",
+      "help": {
+        "concept": "The WHERE clause filters records based on a specified condition.",
+        "hint_1": "Look for the statement that filters by category.",
+        "hint_2": "The correct statement should use WHERE category = 'Stationery'."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Filtering by Price",
+      "prompt": "How would you select products with a price of 24.50?",
+      "options": [
+        "SELECT * FROM products WHERE price = 24.50;",
+        "SELECT * FROM products WHERE price = 12.99;",
+        "SELECT * FROM products WHERE category = 'Art';",
+        "SELECT * FROM products WHERE name = 'Acrylic Paint Set';"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Focus on filtering by price.",
+      "help": {
+        "concept": "The WHERE clause can filter records by numeric values.",
+        "hint_1": "Look for the statement that filters by price.",
+        "hint_2": "The correct statement should use WHERE price = 24.50."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Multiple Conditions",
+      "prompt": "Which SQL statements will return products in the 'Art' category?",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Art';",
+        "SELECT * FROM products WHERE category = 'Home';",
+        "SELECT * FROM products WHERE category = 'Stationery';",
+        "SELECT * FROM products WHERE category = 'Art' OR category = 'Stationery';"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Consider both single and combined conditions.",
+      "help": {
+        "concept": "The WHERE clause can filter records using multiple conditions with OR.",
+        "hint_1": "Look for statements that include 'Art' as a category.",
+        "hint_2": "Both single and combined conditions can be correct."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Exact Value Matching",
+      "prompt": "Which SQL statements will select products with a stock of 10?",
+      "options": [
+        "SELECT * FROM products WHERE stock = 10;",
+        "SELECT * FROM products WHERE stock = 25;",
+        "SELECT * FROM products WHERE stock = 15;",
+        "SELECT * FROM products WHERE stock = 10 OR stock = 15;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Focus on the stock value.",
+      "help": {
+        "concept": "The WHERE clause can filter records by exact numeric values.",
+        "hint_1": "Look for statements that include stock = 10.",
+        "hint_2": "Consider both single and combined conditions."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for a basic query.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "hint": "Think about the typical order of SQL clauses.",
+      "help": {
+        "concept": "SQL queries follow a specific order: SELECT, FROM, WHERE.",
+        "hint_1": "SELECT comes first, followed by FROM.",
+        "hint_2": "WHERE is used last to filter results."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Query Construction",
+      "prompt": "Arrange the following to form a complete SQL query to find products in the 'Home' category.",
+      "tokens": [
+        "SELECT *",
+        "FROM products",
+        "WHERE category = 'Home'"
+      ],
+      "correctOrder": [
+        "SELECT *",
+        "FROM products",
+        "WHERE category = 'Home'"
+      ],
+      "hint": "Consider the logical flow of a SQL query.",
+      "help": {
+        "concept": "A SQL query starts with SELECT, followed by FROM, and then WHERE for filtering.",
+        "hint_1": "Start with SELECT and end with WHERE.",
+        "hint_2": "Ensure the query filters by category 'Home'."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the SQL Clause",
+      "prompt": "Complete the SQL statement to select products priced at 39.99.",
+      "template": "SELECT * FROM products WHERE price = [blank1];",
+      "choices": [
+        "39.99",
+        "12.99",
+        "24.50",
+        "18.00"
+      ],
+      "correctValue": "39.99",
+      "hint": "Focus on the price value.",
+      "help": {
+        "concept": "The WHERE clause filters records by exact values.",
+        "hint_1": "Look for the price that matches 39.99.",
+        "hint_2": "Ensure the correct value fills the blank."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "SQL Category Filter",
+      "prompt": "Complete the SQL statement to find products in the 'Art' category.",
+      "template": "SELECT * FROM products WHERE category = [blank1];",
+      "choices": [
+        "'Art'",
+        "'Home'",
+        "'Stationery'",
+        "'Office'"
+      ],
+      "correctValue": "'Art'",
+      "hint": "Focus on the category value.",
+      "help": {
+        "concept": "The WHERE clause filters records by exact text values.",
+        "hint_1": "Look for the category that matches 'Art'.",
+        "hint_2": "Ensure the correct category fills the blank."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Filter Products by Category",
+      "prompt": "Write a SQL query to select all products in the 'Home' category.",
+      "starterCode": "-- Write your SQL query here\nSELECT * FROM products WHERE category = 'Home';",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Home';",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Find Products by Price",
+      "prompt": "Write a SQL query to find all products with a price of 12.99.",
+      "starterCode": "-- Write your SQL query here\nSELECT * FROM products WHERE price = 12.99;",
+      "solutionCode": "SELECT * FROM products WHERE price = 12.99;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Select Products by Stock",
+      "prompt": "Write a SQL query to select products with a stock of 15.",
+      "starterCode": "-- Write your SQL query here\nSELECT * FROM products WHERE stock = 15;",
+      "solutionCode": "SELECT * FROM products WHERE stock = 15;",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Filtering Project",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

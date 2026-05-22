@@ -1,0 +1,12 @@
+{
+  "profileId": "python",
+  "language": "python",
+  "runtime": {
+    "kind": "python"
+  },
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "python-browser-workspace",
+  "checker": {
+    "defaultRecipe": "stdout_match"
+  }
+}

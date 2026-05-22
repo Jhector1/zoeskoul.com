@@ -1,0 +1,79 @@
+{
+  "policyId": "sql-foundations-validation",
+  "allowedConcepts": [
+    "SELECT",
+    "FROM",
+    "WHERE",
+    "comparison_operators",
+    "AND",
+    "OR",
+    "NOT",
+    "ORDER BY",
+    "ASC",
+    "DESC",
+    "LIMIT",
+    "LIKE",
+    "IN",
+    "NOT IN",
+    "BETWEEN",
+    "IS NULL",
+    "IS NOT NULL"
+  ],
+  "disallowedConcepts": [
+    "JOIN",
+    "GROUP BY",
+    "HAVING",
+    "INSERT",
+    "UPDATE",
+    "DELETE",
+    "CREATE TABLE",
+    "subquery"
+  ],
+  "datasets": [
+    "students_intro",
+    "products_catalog",
+    "customers_cleanup"
+  ],
+  "moduleRules": {
+    "0": {
+      "allowedConcepts": [
+        "SELECT",
+        "FROM"
+      ],
+      "disallowedConcepts": [
+        "WHERE",
+        "comparison_operators",
+        "AND",
+        "OR",
+        "NOT",
+        "ORDER BY",
+        "ASC",
+        "DESC",
+        "LIMIT",
+        "LIKE",
+        "IN",
+        "NOT IN",
+        "BETWEEN",
+        "IS NULL",
+        "IS NOT NULL",
+        "JOIN",
+        "GROUP BY",
+        "HAVING",
+        "INSERT",
+        "UPDATE",
+        "DELETE",
+        "CREATE TABLE",
+        "subquery"
+      ],
+      "notes": [
+        "Module 0 should stay mostly conceptual and table-reading focused.",
+        "If a code_input appears in Module 0, it must be a safe starter SELECT against the module dataset."
+      ]
+    }
+  },
+  "validationRequirements": {
+    "goldenTestsRequired": true,
+    "requireMappedImages": true,
+    "requireResolvedI18n": true
+  }
+}

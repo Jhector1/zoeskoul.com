@@ -1,0 +1,211 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "table_names_and_column_names": {
+          "label": "table names and column names",
+          "summary": "Learn about table names and column names in SQL using the students_intro dataset.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Table and Column Names"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "SQL Table and Column Practice"
+            }
+          },
+          "projectSteps": {
+            "code_input_1": {
+              "title": "Basic SELECT Query"
+            },
+            "code_input_2": {
+              "title": "Select All Columns"
+            },
+            "code_input_3": {
+              "title": "Select Specific Columns"
+            }
+          },
+          "quiz": {
+            "single_choice_1": {
+              "title": "Identify the Table Name",
+              "prompt": "Which of the following is the name of the table in the given schema?\n\n```\nCREATE TABLE students (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  grade TEXT NOT NULL,\n  age INTEGER NOT NULL,\n  city TEXT NOT NULL\n);\n```",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "students",
+                "b": "id",
+                "c": "name",
+                "d": "grade"
+              }
+            },
+            "single_choice_2": {
+              "title": "Identify a Column Name",
+              "prompt": "Which of the following is a column name in the `students` table?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "students",
+                "b": "age",
+                "c": "CREATE",
+                "d": "TABLE"
+              }
+            },
+            "multi_choice_1": {
+              "title": "Select All Column Names",
+              "prompt": "Which of the following are column names in the `students` table? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "id",
+                "b": "name",
+                "c": "grade",
+                "d": "students"
+              }
+            },
+            "multi_choice_2": {
+              "title": "Understanding SQL Keywords",
+              "prompt": "Which of the following are SQL keywords used in table creation? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "CREATE",
+                "b": "TABLE",
+                "c": "PRIMARY KEY",
+                "d": "NOT NULL"
+              }
+            },
+            "drag_reorder_1": {
+              "title": "Order of SQL Table Creation",
+              "prompt": "Arrange the steps to create a table in SQL in the correct order.",
+              "hint": "Think about the logical order of defining a table structure.",
+              "help": {
+                "concept": "SQL table creation follows a specific order: defining the table, columns, constraints, and ending the statement.",
+                "hint_1": "Start with the action of creating a table.",
+                "hint_2": "Finish with ending the statement."
+              },
+              "tokens": {
+                "t1": "CREATE TABLE",
+                "t2": "Define columns",
+                "t3": "Specify constraints",
+                "t4": "End statement with semicolon"
+              }
+            },
+            "drag_reorder_2": {
+              "title": "SQL Query Structure",
+              "prompt": "Arrange the components of a basic SQL SELECT query in the correct order.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "FROM",
+                "t3": "Table name",
+                "t4": "Column names"
+              }
+            },
+            "fill_blank_choice_1": {
+              "title": "Fill in the SQL Keyword",
+              "prompt": "Complete the SQL statement to select all columns from the `students` table: `SELECT * [blank1] students;`",
+              "hint": "This keyword specifies the table to select data the missing term.",
+              "help": {
+                "concept": "The the missing term keyword specifies the table in a SELECT statement.",
+                "hint_1": "This keyword follows SELECT * to indicate the table.",
+                "hint_2": "Use the missing term to specify the table."
+              },
+              "template": "SELECT * [blank1] students;",
+              "choices": [
+                "FROM",
+                "WHERE",
+                "ORDER BY",
+                "GROUP BY"
+              ]
+            },
+            "fill_blank_choice_2": {
+              "title": "Identify the Missing Column Name",
+              "prompt": "Fill in the missing column name in the SQL statement: `SELECT [blank1] FROM students;`",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "SELECT [blank1] FROM students;",
+              "choices": [
+                "name",
+                "students",
+                "CREATE",
+                "TABLE"
+              ]
+            },
+            "code_input_1": {
+              "title": "Basic SELECT Query",
+              "prompt": "Write a SQL query to select the `name` and `age` columns from the `students` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your query below"
+            },
+            "code_input_2": {
+              "title": "Select All Columns",
+              "prompt": "Write a SQL query to select all columns from the `students` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your query below"
+            },
+            "code_input_3": {
+              "title": "Select Specific Columns",
+              "prompt": "Write a SQL query to select the `grade` and `city` columns from the `students` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "table_names_and_column_names": {
+          "sketch1": {
+            "title": "Understanding Table and Column Names",
+            "bodyMarkdown": "In SQL, tables and columns are fundamental components of a database. Each table has a unique name, and each column within a table also has a unique name. For example, in the `students` table, we have columns like `id`, `name`, `grade`, `age`, and `city`. These names help us identify and manipulate data efficiently. \n\nHere's a simple SQL query to retrieve all data from the `students` table:\n\n```sql\nSELECT * FROM students;\n```\n\nTry it yourself: Write a query to select only the `name` and `grade` columns from the `students` table."
+          }
+        }
+      }
+    }
+  }
+}

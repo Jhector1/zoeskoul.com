@@ -1,0 +1,243 @@
+{
+  "title": "Records and Fields",
+  "summary": "Learn about records and fields in SQL databases, focusing on understanding tables and how to query them using SELECT and FROM.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Records and Fields",
+      "bodyMarkdown": "In SQL, a **record** is a single row in a table, representing a unique entry. Each record consists of **fields**, which are the columns in the table. For example, in a `students` table, each student is a record, and their attributes like `name`, `grade`, and `age` are fields.\n\n```sql\nSELECT name, grade FROM students;\n```\nThis query selects the `name` and `grade` fields from all records in the `students` table. Try it yourself by running this query in the SQL editor."
+    },
+    {
+      "id": "sketch2",
+      "title": "Example: Querying a Table",
+      "bodyMarkdown": "Let's look at an example using the `students` table:\n\n```sql\nSELECT * FROM students;\n```\nThis query retrieves all fields from every record in the `students` table. Each row in the results represents a student, and each column corresponds to a field like `id`, `name`, `grade`, `age`, or `city`.\n\nYour turn: Modify the query to select only the `name` and `city` fields."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Identifying Records and Fields",
+      "prompt": "In the context of a SQL table, what is a 'record'?",
+      "options": [
+        "A single row in a table",
+        "A column in a table",
+        "A database",
+        "A SQL query"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what each row in a table represents.",
+      "help": {
+        "concept": "A record is a single row in a table, representing a unique entry.",
+        "hint_1": "Each row in a table is a record.",
+        "hint_2": "Records are the horizontal entries in a table."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Understanding Fields",
+      "prompt": "What is a 'field' in a SQL table?",
+      "options": [
+        "A single row in a table",
+        "A column in a table",
+        "A SQL command",
+        "A database"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Fields are the vertical components of a table.",
+      "help": {
+        "concept": "A field is a column in a table, representing a specific attribute of the data.",
+        "hint_1": "Fields are the columns in a table.",
+        "hint_2": "Each column in a table is a field."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Components of a SQL Table",
+      "prompt": "Which of the following are components of a SQL table? (Select all that apply)",
+      "options": [
+        "Records",
+        "Fields",
+        "Databases",
+        "Queries"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Think about the structure of a table.",
+      "help": {
+        "concept": "A SQL table is composed of records (rows) and fields (columns).",
+        "hint_1": "Tables consist of rows and columns.",
+        "hint_2": "Records and fields are the basic components of a table."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "SQL Query Basics",
+      "prompt": "Which SQL keywords are used to retrieve data from a table? (Select all that apply)",
+      "options": [
+        "SELECT",
+        "FROM",
+        "INSERT",
+        "DELETE"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Focus on keywords that are used to fetch data.",
+      "help": {
+        "concept": "SELECT and FROM are used to retrieve data from a table.",
+        "hint_1": "SELECT is used to specify the columns.",
+        "hint_2": "FROM specifies the table to retrieve data from."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Ordering SQL Query Components",
+      "prompt": "Arrange the components of a basic SQL query in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "table_name",
+        "column_name"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "column_name",
+        "FROM",
+        "table_name"
+      ],
+      "hint": "Start with the keyword that specifies what to retrieve.",
+      "help": {
+        "concept": "A basic SQL query starts with SELECT, followed by the columns, then FROM, and finally the table name.",
+        "hint_1": "SELECT comes first, followed by the columns.",
+        "hint_2": "FROM comes after SELECT and columns."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Table Structure",
+      "prompt": "Arrange the following to describe the structure of a SQL table.",
+      "tokens": [
+        "Table",
+        "Fields",
+        "Records",
+        "Columns"
+      ],
+      "correctOrder": [
+        "Table",
+        "Fields",
+        "Columns",
+        "Records"
+      ],
+      "hint": "Start with the overall structure and then detail its components.",
+      "help": {
+        "concept": "A table consists of fields (columns) and records (rows).",
+        "hint_1": "Begin with the table as the main structure.",
+        "hint_2": "Fields are columns, and records are rows."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Query Keywords",
+      "prompt": "In a SQL query, the keyword used to specify the table is [blank1].",
+      "template": "In a SQL query, the keyword used to specify the table is [blank1].",
+      "choices": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "INSERT"
+      ],
+      "correctValue": "FROM",
+      "hint": "This keyword follows SELECT in a query.",
+      "help": {
+        "concept": "FROM is used to specify the table in a SQL query.",
+        "hint_1": "FROM comes after SELECT.",
+        "hint_2": "It indicates the table to retrieve data from."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Identifying SQL Components",
+      "prompt": "A single row in a SQL table is called a [blank1].",
+      "template": "A single row in a SQL table is called a [blank1].",
+      "choices": [
+        "field",
+        "record",
+        "database",
+        "query"
+      ],
+      "correctValue": "record",
+      "hint": "Each row represents a unique entry.",
+      "help": {
+        "concept": "A record is a single row in a table.",
+        "hint_1": "Records are horizontal entries.",
+        "hint_2": "Each row is a record."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Basic SELECT Query",
+      "prompt": "Write a SQL query to select all fields from the `students` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM students;",
+      "hint": "Use SELECT to retrieve all fields.",
+      "help": {
+        "concept": "SELECT * retrieves all columns from the specified table.",
+        "hint_1": "Use * to select all columns.",
+        "hint_2": "FROM specifies the table name."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Selecting Specific Fields",
+      "prompt": "Write a SQL query to select only the `name` and `age` fields from the `students` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name, age FROM students;",
+      "hint": "List the fields you want to select after SELECT.",
+      "help": {
+        "concept": "Specify the fields you want to retrieve after SELECT.",
+        "hint_1": "Separate field names with a comma.",
+        "hint_2": "FROM specifies the table."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Querying with SELECT and FROM",
+      "prompt": "Write a SQL query to select the `grade` field from the `students` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT grade FROM students;",
+      "hint": "Use SELECT to specify the field.",
+      "help": {
+        "concept": "SELECT retrieves specific fields from a table.",
+        "hint_1": "Specify the field name after SELECT.",
+        "hint_2": "Use FROM to indicate the table."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

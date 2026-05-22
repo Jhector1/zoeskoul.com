@@ -1,0 +1,251 @@
+{
+  "title": "Selecting All Columns with Star",
+  "summary": "Learn how to use the SELECT * statement to retrieve all columns from a table in SQL.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to SELECT *",
+      "bodyMarkdown": "The `SELECT *` statement in SQL is used to select all columns from a table. This is useful when you need to view all the data without specifying each column name. For example, to select all columns from the `products` table, you would write:\n\n```\nSELECT * FROM products;\n```\n\nThis query retrieves every column for each row in the `products` table. Try it yourself by writing this query in the SQL editor and clicking 'Run query'."
+    },
+    {
+      "id": "sketch2",
+      "title": "Worked Example",
+      "bodyMarkdown": "Let's say you want to see all the details of the products in your catalog. Using `SELECT *` makes this easy:\n\n```\nSELECT * FROM products;\n```\n\nThis command will return all columns: `id`, `name`, `category`, `price`, `stock`, and `created_at` for each product. Line by line, this query:\n- Uses `SELECT *` to indicate all columns.\n- Specifies `FROM products` to indicate the table.\n\nYour turn: Modify the query to see how it behaves with different tables or conditions."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Understanding SELECT *",
+      "prompt": "What does the `SELECT *` statement do in SQL?",
+      "options": [
+        "Selects all columns from a table",
+        "Selects a specific column from a table",
+        "Deletes all columns from a table",
+        "Updates all columns in a table"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what the asterisk (*) represents in SQL.",
+      "help": {
+        "concept": "The `SELECT *` statement is used to retrieve all columns from a specified table.",
+        "hint_1": "The asterisk (*) is a wildcard character that represents all columns.",
+        "hint_2": "This statement does not modify the table; it only retrieves data."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Benefits of Using SELECT *",
+      "prompt": "Which of the following are benefits of using `SELECT *` in SQL? (Choose all that apply)",
+      "options": [
+        "Quickly retrieves all data without specifying columns",
+        "Reduces the need to know column names",
+        "Can lead to performance issues with large tables",
+        "Ensures data integrity by updating all columns"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Consider both the advantages and potential drawbacks of using `SELECT *`.",
+      "help": {
+        "concept": "Using `SELECT *` is convenient but can have performance implications.",
+        "hint_1": "It allows you to retrieve all data quickly without listing column names.",
+        "hint_2": "However, it can be inefficient for large tables."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Query Components",
+      "prompt": "Arrange the components of a basic SQL query in the correct order.",
+      "tokens": [
+        "FROM",
+        "SELECT",
+        "*",
+        "products"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "*",
+        "FROM",
+        "products"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Completing the SQL Query",
+      "prompt": "Fill in the blank to complete the SQL query that selects all columns from the `products` table: `SELECT [blank1] FROM products;`",
+      "template": "SELECT [blank1] FROM products;",
+      "choices": [
+        "*",
+        "id",
+        "name",
+        "category"
+      ],
+      "correctValue": "*",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Basic SELECT * Query",
+      "prompt": "Write a SQL query to select all columns from the `products` table.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "code_input",
+      "title": "Exploring Data with SELECT *",
+      "prompt": "Write a SQL query to view all data in the `products` table.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "single_choice",
+      "title": "SQL Query Result",
+      "prompt": "What will be the result of the query `SELECT * FROM products;`?",
+      "options": [
+        "All columns and rows from the `products` table",
+        "Only the `id` column from the `products` table",
+        "No data will be returned",
+        "An error message"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider what `SELECT *` retrieves from a table.",
+      "help": {
+        "concept": "The `SELECT *` statement retrieves all columns and rows from a table.",
+        "hint_1": "The asterisk (*) indicates all columns.",
+        "hint_2": "This query will return the entire table data."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "multi_choice",
+      "title": "Drawbacks of SELECT *",
+      "prompt": "What are some potential drawbacks of using `SELECT *`? (Choose all that apply)",
+      "options": [
+        "Retrieves unnecessary data",
+        "Can be inefficient for large tables",
+        "Always returns data in the desired format",
+        "May expose sensitive data unintentionally"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about performance and data exposure issues.",
+      "help": {
+        "concept": "Using `SELECT *` can lead to performance issues and data exposure.",
+        "hint_1": "It retrieves all data, which might be more than needed.",
+        "hint_2": "Consider the impact on performance and data privacy."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "drag_reorder",
+      "title": "SQL Query Syntax",
+      "prompt": "Arrange the SQL query components in the correct order to select all columns from the `products` table.",
+      "tokens": [
+        "products",
+        "SELECT",
+        "*",
+        "FROM"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "*",
+        "FROM",
+        "products"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "fill_blank_choice",
+      "title": "SQL Wildcard Character",
+      "prompt": "In the query `SELECT [blank1] FROM products;`, what should replace [blank1] to select all columns?",
+      "template": "SELECT [blank1] FROM products;",
+      "choices": [
+        "*",
+        "id",
+        "name",
+        "category"
+      ],
+      "correctValue": "*",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Retrieving All Product Data",
+      "prompt": "Write a SQL query to retrieve all data from the `products` table.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Exploring the Products Catalog",
+    "stepIds": [
+      "quiz5",
+      "quiz6",
+      "quiz11"
+    ]
+  }
+}

@@ -6,6 +6,10 @@ import {
 } from "../utils/renderProgressBar.js";
 import {selectModelFromConsole} from "../utils/selectModel.js";
 
+function looksLikeBlueprintPath(value: string) {
+  return value.endsWith(".json") || value.includes("/") || value.includes("\\");
+}
+
 function makeProgressLabel(info: {
   stage: string;
   moduleSlug?: string;
@@ -23,20 +27,21 @@ function makeProgressLabel(info: {
   return location ? `${info.stage} - ${location}` : info.stage;
 }
 
-export async function runCompileSubject(blueprintPath: string, args: string[] = []) {
+export async function runCompileSubject(input: string, args: string[] = []) {
   await selectModelFromConsole();
-  const blueprint = await loadBlueprint(blueprintPath);
+  const blueprint = looksLikeBlueprintPath(input) ? await loadBlueprint(input) : null;
+  const subjectSlug = blueprint?.subjectSlug ?? input;
   let sawProgress = false;
   const resume = args.includes("--resume");
 
   console.log(
       resume
-          ? `Compiling subject ${blueprint.subjectSlug} with resume...`
-          : `Compiling subject ${blueprint.subjectSlug}...`,
+          ? `Compiling subject ${subjectSlug} with resume...`
+          : `Compiling subject ${subjectSlug}...`,
   );
   try {
     const out = await compileSubject({
-      blueprint,
+      ...(blueprint ? { blueprint } : { subjectSlug }),
       provider: openAiProvider,
       resume,
       onProgress: (info) => {

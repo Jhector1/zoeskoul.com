@@ -1,0 +1,243 @@
+{
+  "title": "Query Structure Basics",
+  "summary": "Learn the basics of SQL query structure using SELECT and FROM clauses.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to SELECT and FROM",
+      "bodyMarkdown": "The SELECT statement is used to retrieve data from a database. The basic syntax is:\n\n```\nSELECT column1, column2\nFROM table_name;\n```\n\nFor example, to select the name and price of all products from the `products` table, you would write:\n\n```\nSELECT name, price\nFROM products;\n```\n\nThis query will return a list of product names and their prices. Try it yourself by selecting different columns from the `products` table."
+    },
+    {
+      "id": "sketch2",
+      "title": "Understanding the FROM Clause",
+      "bodyMarkdown": "The FROM clause specifies the table from which to retrieve the data. It is essential to correctly identify the table name to avoid errors.\n\nFor instance, if you want to retrieve all columns from the `products` table, you can use:\n\n```\nSELECT *\nFROM products;\n```\n\nThis will return all columns for each row in the `products` table. Your turn: try selecting specific columns instead of using `*`."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Basic SELECT Syntax",
+      "prompt": "Which of the following is the correct syntax to select all columns from a table named `products`?",
+      "options": [
+        "SELECT * FROM products;",
+        "SELECT products FROM *;",
+        "SELECT FROM products *;",
+        "SELECT * products FROM;"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Remember the order of SELECT and FROM.",
+      "help": {
+        "concept": "The SELECT statement is used to specify the columns to retrieve, and FROM specifies the table.",
+        "hint_1": "The asterisk (*) is used to select all columns.",
+        "hint_2": "The correct order is SELECT * FROM table_name."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Identifying the FROM Clause",
+      "prompt": "What is the purpose of the FROM clause in a SQL query?",
+      "options": [
+        "To specify the columns to retrieve",
+        "To specify the table to retrieve data from",
+        "To filter the results",
+        "To sort the results"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "The FROM clause is related to the table.",
+      "help": {
+        "concept": "The FROM clause identifies the table from which to retrieve data.",
+        "hint_1": "Think about where the data is coming from.",
+        "hint_2": "The FROM clause specifies the table name."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Selecting Specific Columns",
+      "prompt": "Which of the following queries correctly select the `name` and `price` columns from the `products` table? Choose all that apply.",
+      "options": [
+        "SELECT name, price FROM products;",
+        "SELECT price, name FROM products;",
+        "SELECT name price FROM products;",
+        "SELECT name, price products;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Check the syntax for selecting multiple columns.",
+      "help": {
+        "concept": "When selecting multiple columns, separate them with commas.",
+        "hint_1": "Ensure each column name is separated by a comma.",
+        "hint_2": "The FROM clause should follow the column list."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Understanding SELECT and FROM",
+      "prompt": "Which statements about the SELECT and FROM clauses are true? Choose all that apply.",
+      "options": [
+        "SELECT specifies the columns to retrieve.",
+        "FROM specifies the table to retrieve data from.",
+        "SELECT can be used without FROM.",
+        "FROM can be used without SELECT."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Consider the roles of SELECT and FROM in a query.",
+      "help": {
+        "concept": "SELECT and FROM work together to retrieve data from a database.",
+        "hint_1": "SELECT and FROM are both necessary for a complete query.",
+        "hint_2": "SELECT specifies columns, FROM specifies the table."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Ordering SQL Query Components",
+      "prompt": "Arrange the components of a basic SQL query in the correct order.",
+      "tokens": [
+        "SELECT",
+        "column1, column2",
+        "FROM",
+        "table_name"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "column1, column2",
+        "FROM",
+        "table_name"
+      ],
+      "hint": "Start with SELECT, then specify columns, followed by FROM and the table name.",
+      "help": {
+        "concept": "The basic structure of a SQL query starts with SELECT, followed by columns, then FROM and the table.",
+        "hint_1": "SELECT comes first, followed by the columns.",
+        "hint_2": "FROM and the table name come after the columns."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Put the following SQL query components in the correct order to select all columns from the `products` table.",
+      "tokens": [
+        "FROM",
+        "products",
+        "SELECT",
+        "*"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "*",
+        "FROM",
+        "products"
+      ],
+      "hint": "Remember the order: SELECT, columns, FROM, table.",
+      "help": {
+        "concept": "The SELECT statement retrieves data, and the FROM clause specifies the table.",
+        "hint_1": "SELECT comes before FROM.",
+        "hint_2": "The asterisk (*) is used to select all columns."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Completing a Basic Query",
+      "prompt": "Fill in the blank to complete the query: `SELECT name, price [blank1] products;`",
+      "template": "SELECT name, price [blank1] products;",
+      "choices": [
+        "FROM",
+        "WHERE",
+        "ORDER BY",
+        "LIMIT"
+      ],
+      "correctValue": "FROM",
+      "hint": "The blank should specify the table to retrieve data from.",
+      "help": {
+        "concept": "The FROM clause specifies the table in a SQL query.",
+        "hint_1": "Think about which clause specifies the table.",
+        "hint_2": "The correct word is used to indicate the table source."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "SQL Query Syntax",
+      "prompt": "Complete the query: `SELECT * [blank1] products;`",
+      "template": "SELECT * [blank1] products;",
+      "choices": [
+        "FROM",
+        "WHERE",
+        "ORDER BY",
+        "LIMIT"
+      ],
+      "correctValue": "FROM",
+      "hint": "The blank should specify the table to retrieve data from.",
+      "help": {
+        "concept": "The FROM clause specifies the table in a SQL query.",
+        "hint_1": "Think about which clause specifies the table.",
+        "hint_2": "The correct word is used to indicate the table source."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Selecting All Products",
+      "prompt": "Write a query to select all columns from the `products` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products;",
+      "hint": "Use SELECT * to retrieve all columns.",
+      "help": {
+        "concept": "The SELECT statement is used to retrieve data from a database.",
+        "hint_1": "Use SELECT * to select all columns.",
+        "hint_2": "Don't forget to specify the table with FROM."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Selecting Specific Columns",
+      "prompt": "Write a query to select the `name` and `price` columns from the `products` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name, price FROM products;",
+      "hint": "List the columns you want to select after SELECT.",
+      "help": {
+        "concept": "The SELECT statement retrieves specified columns from a table.",
+        "hint_1": "Separate column names with a comma.",
+        "hint_2": "Use FROM to specify the table."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Querying Product Names",
+      "prompt": "Write a query to select only the `name` column from the `products` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name FROM products;",
+      "hint": "Specify the column name after SELECT.",
+      "help": {
+        "concept": "The SELECT statement can retrieve specific columns from a table.",
+        "hint_1": "Use SELECT followed by the column name.",
+        "hint_2": "Don't forget to specify the table with FROM."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Basic SQL Query Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "sql-v2-0/sql_editor_basics: contains forbidden learner-facing term \"Terminal\". Prefer \"SQL editor\" instead.",
+  "stack": "RetryableTopicValidationError: sql-v2-0/sql_editor_basics: contains forbidden learner-facing term \"Terminal\". Prefer \"SQL editor\" instead.\n    at throwWorkspacePolicyError (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/validate/validateWorkspacePolicy.js:16:15)\n    at validateWorkspacePolicy (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/validate/validateWorkspacePolicy.js:46:9)\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:255:17)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:24:17)\n    at async runCompileSubject (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-subject.js:28:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:31:13)",
+  "code": "WORKSPACE_LANGUAGE_POLICY_VIOLATION",
+  "retryable": true,
+  "details": {
+    "term": "terminal",
+    "match": "Terminal",
+    "workspacePolicyId": "sql-browser-workspace"
+  }
+}

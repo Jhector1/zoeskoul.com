@@ -1,0 +1,241 @@
+{
+  "title": "how data is organized",
+  "summary": "how data is organized in Getting Started with SQL and Databases",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Tables",
+      "bodyMarkdown": "In SQL, data is organized into tables. Each table consists of rows and columns. For example, consider the `students` table:\n\n```\n| id | name | grade | age | city     |\n|----|------|-------|-----|----------|\n| 1  | Noor | A     | 15  | Chicago  |\n| 2  | Mia  | A     | 14  | Evanston |\n| 3  | Leo  | B     | 15  | Chicago  |\n| 4  | Ava  | C     | 14  | Oak Park |\n| 5  | Zane | B     | 16  | Naperville |\n```\n\nEach column represents a different attribute of the data, such as `name` or `age`. Each row represents a single record in the table. Try it yourself: imagine a new student and think about how you would add them to this table."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Identify the Table Component",
+      "prompt": "In a SQL table, what does a column represent?",
+      "options": [
+        "A single record",
+        "An attribute of the data",
+        "A database",
+        "A SQL query"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what each column in a table describes.",
+      "help": {
+        "concept": "Columns in a SQL table represent attributes of the data.",
+        "hint_1": "Each column describes a specific property of the data.",
+        "hint_2": "For example, a column named 'age' would represent the age attribute of each record."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Understanding Rows",
+      "prompt": "What does a row in a SQL table represent?",
+      "options": [
+        "A single record",
+        "A database",
+        "An attribute of the data",
+        "A SQL query"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider what each row in a table contains.",
+      "help": {
+        "concept": "Rows in a SQL table represent individual records.",
+        "hint_1": "Each row contains data for a single entry.",
+        "hint_2": "For example, a row might contain all the information about one student."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Components of a SQL Table",
+      "prompt": "Select all components that make up a SQL table.",
+      "options": [
+        "Columns",
+        "Rows",
+        "Queries",
+        "Databases"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Attributes of a Student",
+      "prompt": "Which of the following can be considered attributes of a student in a SQL table?",
+      "options": [
+        "Name",
+        "Age",
+        "City",
+        "SQL Query"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Attributes are the properties that describe a student.",
+      "help": {
+        "concept": "Attributes are the columns in a table that describe properties of the data.",
+        "hint_1": "Consider what properties you would record for a student.",
+        "hint_2": "A SQL query is not an attribute of a student."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Table Components",
+      "prompt": "Arrange the components of a SQL table in the order they appear.",
+      "tokens": [
+        "Table",
+        "Columns",
+        "Rows"
+      ],
+      "correctOrder": [
+        "Table",
+        "Columns",
+        "Rows"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Table Hierarchy",
+      "prompt": "Arrange the following in the order of hierarchy in a SQL database.",
+      "tokens": [
+        "Database",
+        "Table",
+        "Row"
+      ],
+      "correctOrder": [
+        "Database",
+        "Table",
+        "Row"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Table Structure",
+      "prompt": "In a SQL table, a [blank1] represents an attribute of the data.",
+      "template": "In a SQL table, a [blank1] represents an attribute of the data.",
+      "choices": [
+        "column",
+        "row",
+        "database",
+        "query"
+      ],
+      "correctValue": "column",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "SQL Row Definition",
+      "prompt": "A [blank1] in a SQL table represents a single record.",
+      "template": "A [blank1] in a SQL table represents a single record.",
+      "choices": [
+        "row",
+        "column",
+        "database",
+        "query"
+      ],
+      "correctValue": "row",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Select All Students",
+      "prompt": "Write a SQL query to select all columns from the `students` table.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT * FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Select Student Names",
+      "prompt": "Write a SQL query to select only the `name` column from the `students` table.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT name FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Select Students by City",
+      "prompt": "Write a SQL query to select all columns for students from 'Chicago'.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT * FROM students WHERE city = 'Chicago';",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Table Exploration",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

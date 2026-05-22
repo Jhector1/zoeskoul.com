@@ -1,0 +1,211 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "intro_to_keys": {
+          "label": "intro to keys",
+          "summary": "Introduction to keys in SQL databases, focusing on primary keys and their importance in uniquely identifying records.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Primary Keys"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "SQL Basics Project"
+            }
+          },
+          "projectSteps": {
+            "code_input_1": {
+              "title": "Select All Students"
+            },
+            "code_input_2": {
+              "title": "Select Student Names"
+            },
+            "code_input_3": {
+              "title": "Select Student IDs"
+            }
+          },
+          "quiz": {
+            "single_choice_1": {
+              "title": "Purpose of Primary Key",
+              "prompt": "What is the main purpose of a primary key in a database table?",
+              "hint": "Think about how a primary key helps in identifying records.",
+              "help": {
+                "concept": "A primary key uniquely identifies each row in a table.",
+                "hint_1": "Consider the role of a primary key in ensuring uniqueness.",
+                "hint_2": "A primary key is essential for identifying records without ambiguity."
+              },
+              "options": {
+                "a": "To uniquely identify each row in the table.",
+                "b": "To store the largest value in the table.",
+                "c": "To act as a foreign key in another table.",
+                "d": "To ensure all values in the column are unique."
+              }
+            },
+            "single_choice_2": {
+              "title": "Characteristics of a Primary Key",
+              "prompt": "Which of the following is a characteristic of a primary key?",
+              "hint": "Focus on the uniqueness requirement of primary keys.",
+              "help": {
+                "concept": "Primary keys must contain unique values and cannot be NULL.",
+                "hint_1": "Primary keys ensure that each record can be uniquely identified.",
+                "hint_2": "A primary key cannot have duplicate or NULL values."
+              },
+              "options": {
+                "a": "It can contain duplicate values.",
+                "b": "It can be NULL.",
+                "c": "It must contain unique values.",
+                "d": "It is always a foreign key."
+              }
+            },
+            "multi_choice_1": {
+              "title": "Primary Key Constraints",
+              "prompt": "Select all true statements about primary keys.",
+              "hint": "Think about the rules that apply to primary keys.",
+              "help": {
+                "concept": "Primary keys enforce uniqueness and can consist of multiple columns.",
+                "hint_1": "A primary key can be a composite key, consisting of multiple columns.",
+                "hint_2": "Primary keys ensure uniqueness and cannot be NULL."
+              },
+              "options": {
+                "a": "A table can have multiple primary keys.",
+                "b": "A primary key can consist of multiple columns.",
+                "c": "Primary keys ensure that no duplicate rows exist.",
+                "d": "Primary keys can be NULL."
+              }
+            },
+            "multi_choice_2": {
+              "title": "Primary Key Usage",
+              "prompt": "Which of the following are true about primary keys? Select all that apply.",
+              "hint": "Consider how primary keys are used in database operations.",
+              "help": {
+                "concept": "Primary keys are used for joining tables and ensuring data integrity.",
+                "hint_1": "Primary keys are crucial for maintaining data integrity.",
+                "hint_2": "Primary keys are often used in joins and ensure uniqueness."
+              },
+              "options": {
+                "a": "They can be used to join tables.",
+                "b": "They can be used to enforce data integrity.",
+                "c": "They can be NULL.",
+                "d": "They ensure each row is unique."
+              }
+            },
+            "drag_reorder_1": {
+              "title": "Order of SQL Clauses",
+              "prompt": "Arrange the SQL clauses in the correct order for a basic query.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "FROM",
+                "t3": "WHERE",
+                "t4": "ORDER BY"
+              }
+            },
+            "drag_reorder_2": {
+              "title": "Steps to Create a Primary Key",
+              "prompt": "Arrange the steps to create a primary key in a table.",
+              "hint": "Consider the logical steps to ensure a column can be a primary key.",
+              "help": {
+                "concept": "Creating a primary key involves ensuring uniqueness and defining constraints.",
+                "hint_1": "Start by identifying and ensuring the column(s) can be unique.",
+                "hint_2": "Define the column(s) and add the PRIMARY KEY constraint."
+              },
+              "tokens": {
+                "t1": "Identify the column(s) for uniqueness.",
+                "t2": "Define the column(s) in the CREATE TABLE statement.",
+                "t3": "Add PRIMARY KEY constraint.",
+                "t4": "Ensure no NULL values."
+              }
+            },
+            "fill_blank_choice_1": {
+              "title": "Primary Key Definition",
+              "prompt": "Fill in the blank: A primary key is a column or a set of columns that [blank1] identifies each row in a table.",
+              "hint": "Think about the role of a primary key in a table.",
+              "help": {
+                "concept": "A primary key the missing term identifies each row in a table.",
+                "hint_1": "A primary key ensures that each row can be identified without ambiguity.",
+                "hint_2": "The key word here is 'the missing term'."
+              },
+              "template": "A primary key is a column or a set of columns that [blank1] identifies each row in a table.",
+              "choices": [
+                "uniquely",
+                "partially",
+                "conditionally",
+                "randomly"
+              ]
+            },
+            "fill_blank_choice_2": {
+              "title": "Primary Key Constraint",
+              "prompt": "Fill in the blank: A primary key cannot contain [blank1] values.",
+              "hint": "Consider what values are not allowed in a primary key.",
+              "help": {
+                "concept": "Primary keys cannot contain the missing term values.",
+                "hint_1": "Primary keys must have a value for every row.",
+                "hint_2": "the missing term values are not allowed in primary keys."
+              },
+              "template": "A primary key cannot contain [blank1] values.",
+              "choices": [
+                "NULL",
+                "duplicate",
+                "negative",
+                "text"
+              ]
+            },
+            "code_input_1": {
+              "title": "Select All Students",
+              "prompt": "Write a SQL query to select all columns from the `students` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query below"
+            },
+            "code_input_2": {
+              "title": "Select Student Names",
+              "prompt": "Write a SQL query to select only the `name` column from the `students` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query below"
+            },
+            "code_input_3": {
+              "title": "Select Student IDs",
+              "prompt": "Write a SQL query to select only the `id` column from the `students` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "intro_to_keys": {
+          "sketch_1": {
+            "title": "Understanding Primary Keys",
+            "bodyMarkdown": "In SQL databases, a primary key is a column or a set of columns that uniquely identifies each row in a table. For example, in the `students` table, the `id` column is the primary key because it uniquely identifies each student. \n\n```sql\nSELECT id, name FROM students;\n```\n\nTry it yourself: Write a query to select the `id` and `name` columns from the `students` table. Notice how each `id` is unique."
+          }
+        }
+      }
+    }
+  }
+}

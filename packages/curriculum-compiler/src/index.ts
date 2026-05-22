@@ -45,6 +45,8 @@ export * from "./gate/assertPublishGate.js";
 
 
 export { compileSubject } from "./compile/compileSubject.js";
+export { compileCourse } from "./compile/compileCourse.js";
+export * from "./compile/resolveAuthoringCompileTarget.js";
 export { compileTopic } from "./compile/compileTopic.js";
 export { critiqueTopic } from "./compile/critiqueTopic.js";
 export { critiqueTopicDraft } from "./compile/critiqueTopicDraft.js";
@@ -62,3 +64,5 @@ export * from "./spec/resolvePlan.js";
 export * from "./spec/moduleOrder.js";
 export * from "./seeds/buildTopicSeedFromPlanNode.js";
 export * from "./spec/validateCourseSpecForSubject.js";
+export * from "./spec/validateSubjectAuthoring.js";
+export * from "./policy/resolveAuthoringPolicyChain.js";

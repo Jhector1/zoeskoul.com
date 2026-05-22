@@ -54,8 +54,8 @@ export async function evaluateTopicDraft(args: {
         draft,
     });
 
-    draft = repairTopicAuthoringDraft(draft);
-    draft = sanitizeHintLeaksInDraft(draft);
+    draft = repairTopicAuthoringDraft(draft, args.seed);
+    draft = sanitizeHintLeaksInDraft(draft, args.seed);
 
     const profileRepairResult = await args.profileServices.repairDraft({
         seed: args.seed,
@@ -68,8 +68,8 @@ export async function evaluateTopicDraft(args: {
         draft: profileRepairResult.draft,
     });
 
-    draft = repairTopicAuthoringDraft(draft);
-    draft = sanitizeHintLeaksInDraft(draft);
+    draft = repairTopicAuthoringDraft(draft, args.seed);
+    draft = sanitizeHintLeaksInDraft(draft, args.seed);
 
     const hintWarnings = validateExerciseHints(draft);
     const hintCritiqueIssues = buildHintCritiqueIssues(hintWarnings);

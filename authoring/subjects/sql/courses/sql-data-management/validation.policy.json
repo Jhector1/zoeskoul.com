@@ -1,0 +1,30 @@
+{
+  "policyId": "sql-data-management-validation",
+  "allowedConcepts": [
+    "SELECT",
+    "WHERE",
+    "INSERT",
+    "UPDATE",
+    "DELETE",
+    "CREATE TABLE",
+    "PRIMARY KEY",
+    "NOT NULL",
+    "UNIQUE",
+    "FOREIGN KEY",
+    "DEFAULT",
+    "NULL"
+  ],
+  "datasets": [
+    "inventory_ops",
+    "ddl_blank"
+  ],
+  "validationRequirements": {
+    "goldenTestsRequired": true,
+    "mutationSandboxRequired": true,
+    "requireSelectPreviewBeforeMutation": true,
+    "requireWhereForUpdateDelete": true,
+    "allowUnsafeMutationOnlyIfMarkedUnsafeDemo": true,
+    "requireInsertColumnList": true,
+    "requireSchemaIntrospectionTests": true
+  }
+}

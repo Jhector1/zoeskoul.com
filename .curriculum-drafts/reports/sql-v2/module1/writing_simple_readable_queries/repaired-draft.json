@@ -1,0 +1,243 @@
+{
+  "title": "Writing Simple Readable Queries",
+  "summary": "Learn to write simple and readable SQL queries using SELECT and FROM.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to SELECT and FROM",
+      "bodyMarkdown": "The SELECT statement is used to retrieve data from a database. The FROM clause specifies the table from which to retrieve the data. For example, to select all columns from the 'products' table, you would write:\n\n```\nSELECT * FROM products;\n```\nThis query retrieves all columns and rows from the 'products' table. Try it yourself by writing a query to select specific columns, such as 'name' and 'price'."
+    },
+    {
+      "id": "sketch2",
+      "title": "Selecting Specific Columns",
+      "bodyMarkdown": "Instead of selecting all columns, you can specify which columns to retrieve. For example, to select only the 'name' and 'price' columns from the 'products' table, use:\n\n```\nSELECT name, price FROM products;\n```\nThis query will return a table with only the 'name' and 'price' columns. Your turn: try selecting 'category' and 'stock' columns."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Understanding SELECT",
+      "prompt": "What does the SELECT statement do in SQL?",
+      "options": [
+        "It modifies data in a table.",
+        "It retrieves data from a table.",
+        "It deletes data from a table.",
+        "It creates a new table."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about the purpose of retrieving data.",
+      "help": {
+        "concept": "The SELECT statement is used to retrieve data from a database.",
+        "hint_1": "SELECT is used to get data, not modify it.",
+        "hint_2": "SELECT retrieves data, unlike DELETE or INSERT."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Using FROM Clause",
+      "prompt": "What is the purpose of the FROM clause in a SQL query?",
+      "options": [
+        "To specify the columns to retrieve.",
+        "To specify the table to retrieve data from.",
+        "To specify the conditions for data retrieval.",
+        "To specify the order of the results."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider what the FROM clause is pointing to in a query.",
+      "help": {
+        "concept": "The FROM clause specifies the table from which to retrieve data.",
+        "hint_1": "FROM is about the table, not columns or conditions.",
+        "hint_2": "FROM identifies the source table for the data."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Selecting Multiple Columns",
+      "prompt": "Which of the following queries correctly selects the 'name' and 'price' columns from the 'products' table? (Choose all that apply)",
+      "options": [
+        "SELECT name, price FROM products;",
+        "SELECT name, price products;",
+        "SELECT name, price FROM products WHERE category = 'Art';"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Look for the correct syntax for selecting multiple columns.",
+      "help": {
+        "concept": "To select multiple columns, separate them with commas and use the FROM clause.",
+        "hint_1": "Ensure the columns are separated by commas.",
+        "hint_2": "Check for the correct use of the FROM clause."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Understanding SQL Clauses",
+      "prompt": "Which clauses are used to retrieve data from a table? (Choose all that apply)",
+      "options": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "INSERT"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Ordering SQL Query Components",
+      "prompt": "Arrange the components of a SQL query in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Put the following SQL query parts in the correct order: SELECT, FROM, WHERE.",
+      "tokens": [
+        "WHERE",
+        "SELECT",
+        "FROM"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Basic SQL Query",
+      "prompt": "Complete the SQL query to select all columns from the 'products' table: SELECT * [blank1] products;",
+      "template": "SELECT * [blank1] products;",
+      "choices": [
+        "FROM",
+        "WHERE",
+        "ORDER BY",
+        "GROUP BY"
+      ],
+      "correctValue": "FROM",
+      "hint": "Think about which clause specifies the table.",
+      "help": {
+        "concept": "The the missing term clause specifies the table to retrieve data the missing term.",
+        "hint_1": "the missing term is used to indicate the source table.",
+        "hint_2": "The query needs the missing term to specify the table."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Selecting Specific Columns",
+      "prompt": "Complete the query to select the 'name' and 'price' columns: SELECT name, price [blank1] products;",
+      "template": "SELECT name, price [blank1] products;",
+      "choices": [
+        "FROM",
+        "WHERE",
+        "ORDER BY",
+        "GROUP BY"
+      ],
+      "correctValue": "FROM",
+      "hint": "Identify the clause that indicates the table.",
+      "help": {
+        "concept": "the missing term specifies the table the missing term which to retrieve data.",
+        "hint_1": "the missing term is necessary to specify the table.",
+        "hint_2": "The query needs the missing term to indicate the source table."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Select All Products",
+      "prompt": "Write a SQL query to select all columns from the 'products' table.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Select Specific Columns",
+      "prompt": "Write a SQL query to select the 'name' and 'price' columns from the 'products' table.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT name, price FROM products;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Select Products by Category",
+      "prompt": "Write a SQL query to select all columns from the 'products' table where the category is 'Art'.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Art';",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "title": "Common Beginner Syntax Mistakes",
+  "summary": "Identify and correct common syntax errors in SQL queries using SELECT and FROM.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding SELECT and FROM",
+      "bodyMarkdown": "The SELECT statement is used to retrieve data from a database. The basic syntax is `SELECT column1, column2 FROM table_name;`. \n\nFor example, to select the `name` and `price` of products from the `products` table, you would write:\n\n```\nSELECT name, price FROM products;\n```\n\nTry it yourself: Write a query to select the `category` and `stock` columns from the `products` table."
+    },
+    {
+      "id": "sketch2",
+      "title": "Common Syntax Errors",
+      "bodyMarkdown": "Beginners often make syntax errors such as missing commas between column names, misspelling keywords, or forgetting the semicolon at the end of a query.\n\nFor example, this query will cause an error:\n\n```\nSELECT name price FROM products\n```\n\nThe correct query should be:\n\n```\nSELECT name, price FROM products;\n```\n\nYour turn: Try writing a query to select `id` and `created_at` from the `products` table, ensuring you include all necessary commas and semicolons."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Identify the Error",
+      "prompt": "What is wrong with the following SQL query?\n\n`SELECT name price FROM products;`",
+      "options": [
+        "Missing comma between column names.",
+        "Incorrect table name.",
+        "Misspelled keyword.",
+        "Missing semicolon."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Check the syntax for separating column names.",
+      "help": {
+        "concept": "Column names in a SELECT statement must be separated by commas.",
+        "hint_1": "Look for missing punctuation between column names.",
+        "hint_2": "Ensure each column name is separated by a comma."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Correct SQL Syntax",
+      "prompt": "Which of the following queries correctly selects the `name` and `category` from the `products` table?",
+      "options": [
+        "SELECT name category FROM products;",
+        "SELECT name, category FROM products;",
+        "SELECT name; category FROM products;",
+        "SELECT name category, FROM products;"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Check the punctuation between column names.",
+      "help": {
+        "concept": "Column names should be separated by commas in a SELECT statement.",
+        "hint_1": "Ensure there is a comma between `name` and `category`.",
+        "hint_2": "The correct syntax uses a comma to separate column names."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Common Mistakes",
+      "prompt": "Which of the following are common beginner mistakes in SQL syntax? (Choose all that apply)",
+      "options": [
+        "Forgetting the semicolon at the end of a query.",
+        "Misspelling SQL keywords.",
+        "Using commas instead of periods between table and column names.",
+        "Using SELECT without specifying a table."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about punctuation and keyword usage.",
+      "help": {
+        "concept": "Common mistakes include punctuation errors and incorrect keyword usage.",
+        "hint_1": "Consider what punctuation is necessary at the end of a query.",
+        "hint_2": "Think about the importance of correct keyword spelling and table specification."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "SQL Query Components",
+      "prompt": "Which components are essential in a basic SQL SELECT query? (Choose all that apply)",
+      "options": [
+        "SELECT keyword",
+        "FROM keyword",
+        "WHERE clause",
+        "Table name"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Focus on the basic structure of a SELECT query.",
+      "help": {
+        "concept": "A basic SELECT query requires specific keywords and a table name.",
+        "hint_1": "Consider the keywords that are always present in a SELECT query.",
+        "hint_2": "Remember that specifying a table is necessary for retrieving data."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order the SQL Query",
+      "prompt": "Arrange the components of a SQL SELECT query in the correct order.",
+      "tokens": [
+        "SELECT",
+        "column1, column2",
+        "FROM",
+        "table_name",
+        ";"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "column1, column2",
+        "FROM",
+        "table_name",
+        ";"
+      ],
+      "hint": "Start with the SELECT keyword.",
+      "help": {
+        "concept": "The order of components in a SQL query is crucial for correct syntax.",
+        "hint_1": "Begin with the SELECT keyword followed by columns.",
+        "hint_2": "Ensure the FROM keyword precedes the table name."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Reorder the following to form a correct SQL query to select `name` and `price` from `products`.",
+      "tokens": [
+        "SELECT",
+        "name, price",
+        "FROM",
+        "products",
+        ";"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "name, price",
+        "FROM",
+        "products",
+        ";"
+      ],
+      "hint": "The query should start with SELECT.",
+      "help": {
+        "concept": "A SQL query follows a specific structure starting with SELECT.",
+        "hint_1": "Ensure SELECT is followed by the columns you want to retrieve.",
+        "hint_2": "FROM should be followed by the table name."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank",
+      "prompt": "Complete the SQL query to select all columns from the `products` table: `SELECT [blank1] FROM products;`",
+      "template": "SELECT [blank1] FROM products;",
+      "choices": [
+        "*",
+        "ALL",
+        "EVERYTHING",
+        "COLUMNS"
+      ],
+      "correctValue": "*",
+      "hint": "Use the wildcard character to select all columns.",
+      "help": {
+        "concept": "The wildcard character `*` is used to select all columns in a table.",
+        "hint_1": "Think about the symbol that represents all columns.",
+        "hint_2": "The wildcard character is often used in SELECT queries to retrieve all data."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Correct the Query",
+      "prompt": "Fix the SQL query: `SELECT name price FROM products;` by adding the missing [blank1].",
+      "template": "SELECT name [blank1] price FROM products;",
+      "choices": [
+        ",",
+        ";",
+        "AND",
+        "OR"
+      ],
+      "correctValue": ",",
+      "hint": "What punctuation is needed between column names?",
+      "help": {
+        "concept": "Column names in a SELECT statement must be separated by commas.",
+        "hint_1": "Consider the punctuation used to separate items in a list.",
+        "hint_2": "A comma is needed between column names."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Basic SELECT Query",
+      "prompt": "Write a SQL query to select the `name` and `price` of all products from the `products` table.",
+      "starterCode": "SELECT name, price FROM products;",
+      "solutionCode": "SELECT name, price FROM products;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Select All Columns",
+      "prompt": "Write a SQL query to select all columns from the `products` table.",
+      "starterCode": "SELECT * FROM products;",
+      "solutionCode": "SELECT * FROM products;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Select Specific Columns",
+      "prompt": "Write a SQL query to select the `category` and `stock` columns from the `products` table.",
+      "starterCode": "SELECT category, stock FROM products;",
+      "solutionCode": "SELECT category, stock FROM products;",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

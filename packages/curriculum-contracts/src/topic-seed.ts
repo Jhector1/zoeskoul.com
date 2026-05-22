@@ -1,7 +1,12 @@
 import type { CourseProfileId } from "./blueprint.js";
 import type { SqlDatasetArtifact } from "./sql-dataset.js";
 import { ExerciseKindKey, ResolvedExercisePolicy } from "./exercise-policy.js";
-import {ModulePedagogyPolicy, TopicPedagogyPolicy, WorkspaceProfile} from "./workspace.js";
+import {
+    ModulePedagogyPolicy,
+    ResolvedAuthoringPolicy,
+    TopicPedagogyPolicy,
+    WorkspaceProfile,
+} from "./workspace.js";
 import {ManifestRuntimeDefaults} from "./manifest";
 
 export type TopicSeedRuntimeDefaults = ManifestRuntimeDefaults;
@@ -38,6 +43,7 @@ export type TopicSeed = {
     };
 
     subjectSlug: string;
+    courseSlug?: string;
     profileId: CourseProfileId;
     moduleSlug: string;
     sectionSlug: string;
@@ -57,6 +63,7 @@ export type TopicSeed = {
     targetLocales: string[];
     exercisePolicy?: ResolvedExercisePolicy;
     workspacePolicy?: TopicSeedWorkspacePolicy;
+    authoringPolicy?: ResolvedAuthoringPolicy;
     modulePrefix: string;
     moduleOrder: number;
     sectionOrder: number;

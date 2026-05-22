@@ -1,0 +1,233 @@
+{
+  "title": "Combining Conditions Safely",
+  "summary": "Learn how to combine multiple conditions in SQL queries using logical operators like AND, OR, and NOT to filter data effectively.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Logical Operators",
+      "bodyMarkdown": "Logical operators such as AND, OR, and NOT allow you to combine multiple conditions in a SQL query. For example, if you want to find products that are both in the 'Art' category and priced below $20, you can use the AND operator:\n\n```sql\nSELECT * FROM products WHERE category = 'Art' AND price < 20;\n```\n\nThis query retrieves all rows where both conditions are true. Try it yourself by modifying the conditions to see different results."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using OR for Multiple Conditions",
+      "bodyMarkdown": "The OR operator is used when you want to retrieve rows that meet at least one of several conditions. For example, to find products that are either in the 'Stationery' category or have a stock greater than 20, use:\n\n```sql\nSELECT * FROM products WHERE category = 'Stationery' OR stock > 20;\n```\n\nThis query returns rows where either condition is true. Try changing the conditions to explore different combinations."
+    },
+    {
+      "id": "sketch3",
+      "title": "Excluding Conditions with NOT",
+      "bodyMarkdown": "The NOT operator is used to exclude rows that meet a certain condition. For example, to find products that are not in the 'Home' category, you can write:\n\n```sql\nSELECT * FROM products WHERE NOT category = 'Home';\n```\n\nThis query returns all products except those in the 'Home' category. Try using NOT with different conditions to see how it affects the results."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Understanding AND Operator",
+      "prompt": "Which of the following queries will return products that are both in the 'Art' category and priced below $15?",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Art' AND price < 15;",
+        "SELECT * FROM products WHERE category = 'Art' OR price < 15;",
+        "SELECT * FROM products WHERE category = 'Art' AND price > 15;",
+        "SELECT * FROM products WHERE category = 'Stationery' AND price < 15;"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Look for the query that uses AND to combine both conditions.",
+      "help": {
+        "concept": "The AND operator is used to combine multiple conditions that must all be true.",
+        "hint_1": "The query should filter products that meet both conditions: category 'Art' and price below $15.",
+        "hint_2": "Check the use of AND in the query to ensure both conditions are applied."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Combining Conditions with OR",
+      "prompt": "Select all queries that will return products either in the 'Stationery' category or with a stock greater than 20.",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Stationery' OR stock > 20;",
+        "SELECT * FROM products WHERE category = 'Stationery' AND stock > 20;",
+        "SELECT * FROM products WHERE category = 'Art' OR stock > 20;",
+        "SELECT * FROM products WHERE category = 'Stationery' OR price < 10;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Look for queries using OR to include products meeting either condition.",
+      "help": {
+        "concept": "The OR operator allows for multiple conditions where at least one must be true.",
+        "hint_1": "Focus on queries that use OR to combine the conditions.",
+        "hint_2": "Ensure the query includes products from 'Stationery' or with stock greater than 20."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Ordering SQL Query Execution",
+      "prompt": "Arrange the steps of executing a SQL query with multiple conditions in the correct order.",
+      "tokens": [
+        "Identify the table to query.",
+        "Specify the conditions using WHERE.",
+        "Combine conditions using AND, OR, NOT.",
+        "Execute the query to retrieve results."
+      ],
+      "correctOrder": [
+        "Identify the table to query.",
+        "Specify the conditions using WHERE.",
+        "Combine conditions using AND, OR, NOT.",
+        "Execute the query to retrieve results."
+      ],
+      "hint": "Think about the logical flow of writing and executing a SQL query.",
+      "help": {
+        "concept": "Executing a SQL query involves identifying the table, specifying conditions, and executing the query.",
+        "hint_1": "Start with identifying the table and end with executing the query.",
+        "hint_2": "Combine conditions after specifying them in the WHERE clause."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Using NOT Operator",
+      "prompt": "Complete the query to find products that are not in the 'Art' category: `SELECT * FROM products WHERE [blank1] category = 'Art';`",
+      "template": "SELECT * FROM products WHERE [blank1] category = 'Art';",
+      "choices": [
+        "NOT",
+        "AND",
+        "OR",
+        "LIKE"
+      ],
+      "correctValue": "NOT",
+      "hint": "The NOT operator is used to exclude conditions.",
+      "help": {
+        "concept": "The NOT operator is used to negate a condition in SQL.",
+        "hint_1": "Use NOT to exclude products in the 'Art' category.",
+        "hint_2": "The correct operator negates the condition specified."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "title": "Combining Conditions",
+      "prompt": "Complete the query to find products in the 'Home' category and priced above $50: `SELECT * FROM products WHERE category = 'Home' [blank1] price > 50;`",
+      "template": "SELECT * FROM products WHERE category = 'Home' [blank1] price > 50;",
+      "choices": [
+        "AND",
+        "OR",
+        "NOT",
+        "LIKE"
+      ],
+      "correctValue": "AND",
+      "hint": "Use AND to combine conditions that must both be true.",
+      "help": {
+        "concept": "The AND operator is used to combine multiple conditions that must all be true.",
+        "hint_1": "Both conditions must be true for the query to return results.",
+        "hint_2": "The correct operator ensures both conditions are applied."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "multi_choice",
+      "title": "Using NOT with Conditions",
+      "prompt": "Which queries will return products not in the 'Home' category?",
+      "options": [
+        "SELECT * FROM products WHERE NOT category = 'Home';",
+        "SELECT * FROM products WHERE category != 'Home';",
+        "SELECT * FROM products WHERE category = 'Home';",
+        "SELECT * FROM products WHERE NOT category = 'Art';"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Look for queries that exclude the 'Home' category.",
+      "help": {
+        "concept": "NOT and != can be used to exclude specific conditions.",
+        "hint_1": "Focus on queries that exclude 'Home' using NOT or !=.",
+        "hint_2": "Ensure the query logic excludes the 'Home' category."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Arrange the components of a SQL query in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "hint": "Consider the logical sequence of a SQL query.",
+      "help": {
+        "concept": "SQL queries follow a specific structure: SELECT, FROM, WHERE, ORDER BY.",
+        "hint_1": "Start with SELECT and end with ORDER BY.",
+        "hint_2": "WHERE comes after FROM and before ORDER BY."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "single_choice",
+      "title": "Understanding OR Operator",
+      "prompt": "Which query will return products that are either in the 'Art' category or priced below $10?",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Art' AND price < 10;",
+        "SELECT * FROM products WHERE category = 'Art' OR price < 10;",
+        "SELECT * FROM products WHERE category = 'Stationery' OR price < 10;",
+        "SELECT * FROM products WHERE category = 'Art' AND price > 10;"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Look for the query that uses OR to include either condition.",
+      "help": {
+        "concept": "The OR operator allows for multiple conditions where at least one must be true.",
+        "hint_1": "The query should include products from 'Art' or priced below $10.",
+        "hint_2": "Ensure the query logic includes either condition using OR."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Filter Products by Category and Price",
+      "prompt": "Write a SQL query to find all products in the 'Art' category that are priced below $25.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Art' AND price < 25;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Exclude Products by Category",
+      "prompt": "Write a SQL query to find all products that are not in the 'Stationery' category.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE NOT category = 'Stationery';",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Find Products with Multiple Conditions",
+      "prompt": "Write a SQL query to find products that are either in the 'Home' category or have a stock greater than 10.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Home' OR stock > 10;",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Filtering Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

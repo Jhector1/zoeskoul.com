@@ -1,0 +1,69 @@
+{
+  "title": "Reading Query Results",
+  "summary": "Learn how to interpret and understand the results of SQL queries.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding SQL Query Results",
+      "bodyMarkdown": "When you run a SQL query, the results are displayed in a table format. Each column in the result corresponds to a column in the database table, and each row represents a record that matches the query criteria. \n\nFor example, if you run the query `SELECT name, grade FROM students;`, you will see a table with two columns: `name` and `grade`. Each row will show the name and grade of a student from the `students` table.\n\n```sql\nSELECT name, grade FROM students;\n```\n\nTry it yourself: Write a query to select the `name` and `city` columns from the `students` table and run it to see the results."
+    },
+    {
+      "id": "sketch2",
+      "title": "Interpreting Query Results",
+      "bodyMarkdown": "The results of a SQL query can tell you a lot about the data in your database. For instance, if you see multiple rows with the same `name` but different `grades`, it might indicate that there are multiple students with the same name but different performance levels.\n\nConsider the query:\n\n```sql\nSELECT name, grade, city FROM students;\n```\n\nThis query will return all students' names, grades, and cities. By examining the results, you can identify patterns or anomalies in the data.\n\nYour turn: Modify the query to include the `age` column and observe how the additional data changes your understanding of the students' information."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code1",
+      "kind": "code_input",
+      "title": "Select All Students",
+      "prompt": "Write a SQL query to select all columns from the students table.",
+      "starterCode": "SELECT * FROM students;",
+      "solutionCode": "SELECT * FROM students;",
+      "hint": "Use the asterisk (*) to select all columns.",
+      "help": {
+        "concept": "The asterisk (*) is used to select all columns in a SQL query.",
+        "hint_1": "The asterisk (*) is a wildcard for all columns.",
+        "hint_2": "Use * to select all columns without listing them individually."
+      }
+    },
+    {
+      "id": "code2",
+      "kind": "code_input",
+      "title": "Select Specific Columns",
+      "prompt": "Write a SQL query to select the `name` and `age` columns from the students table.",
+      "starterCode": "SELECT name, age FROM students;",
+      "solutionCode": "SELECT name, age FROM students;",
+      "hint": "List the columns you want to select after the SELECT keyword.",
+      "help": {
+        "concept": "Specify the columns you want to retrieve in the SELECT statement.",
+        "hint_1": "Separate column names with a comma.",
+        "hint_2": "Ensure you use the correct column names."
+      }
+    },
+    {
+      "id": "code3",
+      "kind": "code_input",
+      "title": "Select Students by City",
+      "prompt": "Write a SQL query to select the `name` and `city` columns from the students table.",
+      "starterCode": "SELECT name, city FROM students;",
+      "solutionCode": "SELECT name, city FROM students;",
+      "hint": "Use the SELECT statement to specify the columns.",
+      "help": {
+        "concept": "The SELECT statement retrieves specified columns from a table.",
+        "hint_1": "Ensure you list the correct columns after SELECT.",
+        "hint_2": "Separate column names with a comma."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "code1",
+      "code2",
+      "code3"
+    ]
+  }
+}

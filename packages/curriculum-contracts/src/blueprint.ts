@@ -11,6 +11,8 @@ export type CourseProfileId =
     | "web"
     | "data_science";
 
+export type CourseVersionStatus = "draft" | "active" | "legacy" | "disabled";
+
 export type BlueprintRuntimePolicy = {
   datasetStrategy?: "module_based" | "topic_based" | "manual";
   datasetId?: string;
@@ -25,6 +27,7 @@ export type BlueprintModuleScheduleEntry = {
 };
 export type CourseBlueprint = {
   subjectSlug: string;
+  courseSlug?: string;
   catalogSlug?: string;
   moduleSchedule?: BlueprintModuleScheduleEntry[];
   profileId: CourseProfileId;
@@ -55,13 +58,14 @@ export type CourseBlueprint = {
   versioning?: {
     family: string;
     version: number;
-    status: "draft" | "active" | "legacy" | "disabled";
+    status: CourseVersionStatus;
     defaultForNewEnrollments?: boolean;
     supersedes?: string | null;
     supersededBy?: string | null;
   };
 
   workspaceProfileId?: string;
+  workspacePolicyId?: string;
   workspaceOverrides?: Partial<WorkspaceProfile>;
 
   courseGenerationPolicy?: CourseGenerationPolicy;

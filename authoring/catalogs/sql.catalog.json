@@ -6,10 +6,11 @@
     "description": "SQL courses focused on querying, reporting, data modeling, and practical database thinking.",
     "imagePublicId": null,
     "imageAlt": "SQL catalog cover",
-    "defaultSubjectSlug": "sql",
+    "defaultSubjectSlug": "sql-v2",
     "status": "active",
     "subjectSlugs": [
-      "sql"
+      "sql",
+      "sql-v2"
     ],
     "meta": {
       "family": "data"

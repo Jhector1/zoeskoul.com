@@ -1,0 +1,249 @@
+{
+  "title": "uppercase vs lowercase",
+  "summary": "Explore the impact of uppercase and lowercase in SQL queries, focusing on SELECT statements.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Case Sensitivity in SQL",
+      "bodyMarkdown": "In SQL, keywords like SELECT, FROM, and WHERE are case-insensitive. This means you can write them in uppercase, lowercase, or a mix of both, and they will function the same way. However, table names and column names can be case-sensitive depending on the database system. \n\nFor example, the following queries are equivalent:\n\n```sql\nSELECT name FROM products;\nselect name from products;\n```\n\nTry it yourself: Write a query to select the `category` from the `products` table using different cases for the SQL keywords."
+    },
+    {
+      "id": "sketch2",
+      "title": "Worked Example: Selecting Data",
+      "bodyMarkdown": "Let's look at a practical example. Suppose you want to retrieve the names of all products from the `products` table. You can write:\n\n```sql\nSELECT name FROM products;\n```\n\nThis query will return all product names. \n\nLine by line explanation:\n- `SELECT name` specifies that we want to retrieve the `name` column.\n- `FROM products` indicates the table from which to retrieve the data.\n\nYour turn: Modify the query to select the `price` column instead."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Case Sensitivity in SQL Keywords",
+      "prompt": "Which of the following statements about SQL keywords is true?",
+      "options": [
+        "SQL keywords are always case-sensitive.",
+        "SQL keywords are always case-insensitive.",
+        "SQL keywords can be case-sensitive or case-insensitive depending on the database.",
+        "SQL keywords must be written in uppercase."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider how SQL treats keywords like SELECT and FROM.",
+      "help": {
+        "concept": "SQL keywords are generally case-insensitive, meaning they can be written in any case.",
+        "hint_1": "Think about whether you have seen SQL keywords written in different cases.",
+        "hint_2": "SQL keywords like SELECT and FROM are not case-sensitive."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Case Sensitivity in Table Names",
+      "prompt": "How does case sensitivity affect table names in SQL?",
+      "options": [
+        "Table names are always case-sensitive.",
+        "Table names are always case-insensitive.",
+        "Case sensitivity of table names depends on the database system.",
+        "Table names must be written in lowercase."
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Consider how different database systems might handle table names.",
+      "help": {
+        "concept": "The case sensitivity of table names can vary depending on the database system being used.",
+        "hint_1": "Think about whether table names behave the same way across all databases.",
+        "hint_2": "Some databases are case-sensitive with table names, while others are not."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "SQL Query Equivalence",
+      "prompt": "Which of the following SQL queries will retrieve the `name` column from the `products` table? Choose all that apply.",
+      "options": [
+        "SELECT name FROM products;",
+        "select name from products;",
+        "SeLeCt name FrOm products;",
+        "SELECT NAME FROM PRODUCTS;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "hint": "Remember that SQL keywords are case-insensitive.",
+      "help": {
+        "concept": "SQL keywords can be written in any case, and the query will still function correctly.",
+        "hint_1": "Consider whether changing the case of SQL keywords affects the query's functionality.",
+        "hint_2": "All variations of case in SQL keywords should work the same way."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Impact of Case Sensitivity",
+      "prompt": "In which scenarios might case sensitivity impact your SQL queries? Choose all that apply.",
+      "options": [
+        "When using SQL keywords.",
+        "When referencing table names.",
+        "When referencing column names.",
+        "When using string literals in conditions."
+      ],
+      "correctOptionIds": [
+        "b",
+        "c",
+        "d"
+      ],
+      "hint": "Consider how case sensitivity might affect different parts of a query.",
+      "help": {
+        "concept": "Case sensitivity can affect table names, column names, and string literals, but not SQL keywords.",
+        "hint_1": "Think about whether case sensitivity affects the names of tables and columns.",
+        "hint_2": "String literals are case-sensitive, unlike SQL keywords."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Ordering SQL Query Components",
+      "prompt": "Arrange the components of a basic SQL query in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "hint": "Think about the typical structure of a SQL query.",
+      "help": {
+        "concept": "A basic SQL query starts with SELECT, followed by FROM, and optionally WHERE and ORDER BY.",
+        "hint_1": "SELECT is usually the first keyword in a query.",
+        "hint_2": "ORDER BY is used to sort the results and comes after WHERE if present."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "SQL Query Execution Order",
+      "prompt": "Arrange the SQL clauses in the order they are executed.",
+      "tokens": [
+        "FROM",
+        "SELECT",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "FROM",
+        "WHERE",
+        "SELECT",
+        "ORDER BY"
+      ],
+      "hint": "Execution order is different from the written order.",
+      "help": {
+        "concept": "SQL execution order starts with FROM, followed by WHERE, then SELECT, and finally ORDER BY.",
+        "hint_1": "FROM is executed before SELECT.",
+        "hint_2": "WHERE filters data before it is selected."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "SQL Keyword Case",
+      "prompt": "In SQL, the keyword `[blank1]` is used to specify the table from which to retrieve data.",
+      "template": "In SQL, the keyword `[blank1]` is used to specify the table from which to retrieve data.",
+      "choices": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctValue": "FROM",
+      "hint": "This keyword comes after SELECT in a query.",
+      "help": {
+        "concept": "The FROM keyword specifies the table in a SQL query.",
+        "hint_1": "Think about which keyword indicates the source table.",
+        "hint_2": "FROM is used to specify the table name."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "SQL Clause Order",
+      "prompt": "The `[blank1]` clause is used to filter records in a SQL query.",
+      "template": "The `[blank1]` clause is used to filter records in a SQL query.",
+      "choices": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctValue": "WHERE",
+      "hint": "This clause is used to specify conditions.",
+      "help": {
+        "concept": "The WHERE clause is used to filter records based on conditions.",
+        "hint_1": "Consider which clause is used for filtering.",
+        "hint_2": "WHERE specifies conditions for filtering results."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Basic SELECT Query",
+      "prompt": "Write a SQL query to select all columns from the `products` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products;",
+      "recipeType": "sql_query",
+      "hint": "Use SELECT with * to retrieve all columns.",
+      "help": {
+        "concept": "SELECT * retrieves all columns from the specified table.",
+        "hint_1": "Use * to select all columns.",
+        "hint_2": "Combine SELECT with FROM to specify the table."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Selecting Specific Columns",
+      "prompt": "Write a SQL query to select the `name` and `price` columns from the `products` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name, price FROM products;",
+      "recipeType": "sql_query",
+      "hint": "List the column names after SELECT.",
+      "help": {
+        "concept": "Specify column names after SELECT to retrieve specific columns.",
+        "hint_1": "Separate column names with a comma.",
+        "hint_2": "Ensure you specify the table with FROM."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Using WHERE Clause",
+      "prompt": "Write a SQL query to select all products with a `price` greater than 20.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE price > 20;",
+      "recipeType": "sql_query",
+      "hint": "Use WHERE to filter based on conditions.",
+      "help": {
+        "concept": "The WHERE clause filters records based on specified conditions.",
+        "hint_1": "Use a comparison operator to filter prices.",
+        "hint_2": "Combine WHERE with a condition to filter results."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "predicting_result_output": {
+          "label": "predicting result output",
+          "summary": "predicting result output in Your First Queries with SELECT",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding SELECT Queries"
+            },
+            "sketch1": {
+              "title": "Filtering Results with WHERE"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_input_1": {
+              "title": "Basic SELECT Query"
+            },
+            "code_input_2": {
+              "title": "Sorting Results"
+            },
+            "code_input_3": {
+              "title": "Filtering and Sorting"
+            }
+          },
+          "quiz": {
+            "single_choice_1": {
+              "title": "Basic SELECT Query",
+              "prompt": "What does the following SQL query do?\n\n```sql\nSELECT name FROM products;\n```",
+              "hint": "Focus on the columns being selected.",
+              "help": {
+                "concept": "The SELECT statement retrieves specified columns from a table.",
+                "hint_1": "Look at the column specified after SELECT.",
+                "hint_2": "The query selects only the 'name' column."
+              },
+              "options": {
+                "a": "Selects all columns from the products table.",
+                "b": "Selects only the name column from the products table.",
+                "c": "Selects the name and price columns from the products table.",
+                "d": "Deletes the name column from the products table."
+              }
+            },
+            "single_choice_2": {
+              "title": "Understanding WHERE Clause",
+              "prompt": "What is the purpose of the WHERE clause in a SQL query?",
+              "hint": "Consider how WHERE affects the result set.",
+              "help": {
+                "concept": "The WHERE clause filters records based on specified conditions.",
+                "hint_1": "WHERE is used to limit the rows returned.",
+                "hint_2": "It filters records that meet a certain condition."
+              },
+              "options": {
+                "a": "To specify the columns to be selected.",
+                "b": "To filter records based on a condition.",
+                "c": "To sort the results in ascending order.",
+                "d": "To group records by a specific column."
+              }
+            },
+            "multi_choice_1": {
+              "title": "SELECT with Multiple Conditions",
+              "prompt": "Which of the following queries will select products that are in the 'Art' category and have a price less than 20?",
+              "hint": "Focus on the logical operator used between conditions.",
+              "help": {
+                "concept": "The AND operator is used to combine multiple conditions.",
+                "hint_1": "AND requires both conditions to be true.",
+                "hint_2": "Check the comparison operator for the price condition."
+              },
+              "options": {
+                "a": "SELECT * FROM products WHERE category = 'Art' AND price < 20;",
+                "b": "SELECT * FROM products WHERE category = 'Art' OR price < 20;",
+                "c": "SELECT * FROM products WHERE category = 'Art' AND price > 20;",
+                "d": "SELECT * FROM products WHERE category = 'Art' AND price <= 20;"
+              }
+            },
+            "multi_choice_2": {
+              "title": "Using ORDER BY",
+              "prompt": "Which queries will sort the products by price in descending order?",
+              "hint": "Look for the keyword that specifies descending order.",
+              "help": {
+                "concept": "ORDER BY is used to sort the result set.",
+                "hint_1": "DESC specifies descending order.",
+                "hint_2": "Check if DESC is used with the price column."
+              },
+              "options": {
+                "a": "SELECT * FROM products ORDER BY price DESC;",
+                "b": "SELECT * FROM products ORDER BY price ASC;",
+                "c": "SELECT * FROM products ORDER BY price;",
+                "d": "SELECT * FROM products ORDER BY price DESC, name ASC;"
+              }
+            },
+            "drag_reorder_1": {
+              "title": "SQL Query Structure",
+              "prompt": "Arrange the parts of a SQL SELECT query in the correct order.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "FROM",
+                "t3": "WHERE",
+                "t4": "ORDER BY"
+              }
+            },
+            "drag_reorder_2": {
+              "title": "Logical Operators Order",
+              "prompt": "Arrange the logical operators in the order of precedence.",
+              "hint": "Focus on the logical order of the parts.",
+              "help": {
+                "concept": "Arrange the pieces according to the structure of the statement.",
+                "hint_1": "Think about which part must come first.",
+                "hint_2": "Put the pieces in the order that makes the statement valid."
+              },
+              "tokens": {
+                "t1": "AND",
+                "t2": "OR",
+                "t3": "NOT"
+              }
+            },
+            "fill_blank_choice_1": {
+              "title": "SELECT Syntax",
+              "prompt": "Complete the SQL query to select all columns from the products table.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "SELECT [blank1] FROM products;",
+              "choices": [
+                "*",
+                "name",
+                "price",
+                "category"
+              ]
+            },
+            "fill_blank_choice_2": {
+              "title": "Filtering with WHERE",
+              "prompt": "Complete the SQL query to filter products by category 'Stationery'.",
+              "hint": "Match the category exactly as it appears in the table.",
+              "help": {
+                "concept": "The WHERE clause filters rows based on the condition.",
+                "hint_1": "Ensure the category matches exactly.",
+                "hint_2": "The correct category is 'the missing term'."
+              },
+              "template": "SELECT * FROM products WHERE category = '[blank1]';",
+              "choices": [
+                "Art",
+                "Home",
+                "Stationery",
+                "Office"
+              ]
+            },
+            "code_input_1": {
+              "title": "Basic SELECT Query",
+              "prompt": "Write a SQL query to select the name and price of all products in the 'Art' category.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query below"
+            },
+            "code_input_2": {
+              "title": "Sorting Results",
+              "prompt": "Write a SQL query to select all products and sort them by price in ascending order.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply sorting results in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "-- Write your SQL query below"
+            },
+            "code_input_3": {
+              "title": "Filtering and Sorting",
+              "prompt": "Write a SQL query to select the name and stock of products in the 'Home' category, sorted by stock in descending order.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply filtering and sorting in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "-- Write your SQL query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "predicting_result_output": {
+          "sketch1": {
+            "title": "Understanding SELECT Queries",
+            "bodyMarkdown": "The `SELECT` statement is used to query the database and retrieve data. For example, to get all products from the `products` table, you can use:\n\n```\nSELECT * FROM products;\n```\n\nThis query selects all columns from the `products` table. Try it yourself by modifying the query to select specific columns like `name` and `price`:\n\n```\nSELECT name, price FROM products;\n```\n\nThis will return only the `name` and `price` columns for each product."
+          },
+          "sketch2": {
+            "title": "Filtering Results with WHERE",
+            "bodyMarkdown": "To filter results, use the `WHERE` clause. For example, to find products in the 'Art' category:\n\n```\nSELECT * FROM products WHERE category = 'Art';\n```\n\nThis query returns only the rows where the `category` is 'Art'. Try modifying the query to filter by `price` or `stock`."
+          }
+        }
+      }
+    }
+  }
+}

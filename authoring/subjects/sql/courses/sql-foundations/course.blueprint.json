@@ -1,0 +1,25 @@
+{
+  "subjectSlug": "sql",
+  "courseSlug": "sql-foundations",
+  "catalogSlug": "sql",
+  "profileId": "sql",
+  "title": "SQL Foundations",
+  "subtitle": "Learn to read tables, write SELECT queries, filter rows, sort results, and handle real-world beginner data.",
+  "level": "beginner",
+  "learningGoals": [
+    "Explain what SQL does in plain language.",
+    "Identify tables, rows, columns, records, fields, and simple keys.",
+    "Write basic SELECT queries against one table.",
+    "Choose specific columns instead of always using SELECT *.",
+    "Filter rows with WHERE.",
+    "Compare text and numeric values.",
+    "Combine conditions with AND, OR, and NOT.",
+    "Sort results with ORDER BY.",
+    "Limit output with LIMIT.",
+    "Search text using LIKE and wildcards.",
+    "Filter lists and ranges using IN, NOT IN, and BETWEEN.",
+    "Find missing values using IS NULL and IS NOT NULL.",
+    "Read query results and explain them in plain English."
+  ],
+  "moduleCount": 5
+}

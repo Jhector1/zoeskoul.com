@@ -1,0 +1,43 @@
+{
+  "subjectSlug": "python",
+  "catalogSlug": "python",
+  "profileId": "python",
+  "courseOrder": [
+    "python-for-beginners",
+    "python-data-functions",
+    "applied-python-projects"
+  ],
+  "publishTarget": {
+    "liveSubjectSlug": "python-v2",
+    "courseSlug": "python-for-beginners",
+    "channel": "current"
+  },
+  "versioning": {
+    "family": "python",
+    "version": 2,
+    "status": "active",
+    "defaultForNewEnrollments": true,
+    "supersedes": "python",
+    "supersededBy": null
+  },
+  "courses": [
+    {
+      "courseSlug": "python-for-beginners",
+      "title": "Python for Beginners",
+      "order": 1,
+      "path": "courses/python-for-beginners/course.spec.json"
+    },
+    {
+      "courseSlug": "python-data-functions",
+      "title": "Python Data and Functions",
+      "order": 2,
+      "path": "courses/python-data-functions/course.spec.json"
+    },
+    {
+      "courseSlug": "applied-python-projects",
+      "title": "Applied Python Projects",
+      "order": 3,
+      "path": "courses/applied-python-projects/course.spec.json"
+    }
+  ]
+}

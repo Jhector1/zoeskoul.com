@@ -1,0 +1,233 @@
+{
+  "title": "Selecting Specific Columns",
+  "summary": "Learn how to retrieve specific columns from a table using the SELECT statement.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to SELECT",
+      "bodyMarkdown": "The SELECT statement is used to query data from a database. You can specify which columns you want to retrieve from a table. For example, to get the `name` and `price` of products from the `products` table, you would write:\n\n```\nSELECT name, price FROM products;\n```\n\nThis query will return a table with only the `name` and `price` columns for each product. Try it yourself by selecting different columns from the `products` table."
+    },
+    {
+      "id": "sketch2",
+      "title": "Worked Example: Selecting Multiple Columns",
+      "bodyMarkdown": "Let's say you want to see the `name`, `category`, and `price` of all products. You can do this by listing the columns you want after the SELECT keyword:\n\n```\nSELECT name, category, price FROM products;\n```\n\nThis query will return a table with three columns: `name`, `category`, and `price`. Each row corresponds to a product in the `products` table. Your turn: try selecting the `id` and `stock` columns."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Basic SELECT Syntax",
+      "prompt": "Which SQL statement correctly selects the `name` and `price` columns from the `products` table?",
+      "options": [
+        "SELECT name, price FROM products;",
+        "SELECT name price FROM products;",
+        "SELECT (name, price) FROM products;",
+        "SELECT name AND price FROM products;"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Remember to separate column names with a comma.",
+      "help": {
+        "concept": "The correct syntax for selecting multiple columns involves listing them separated by commas.",
+        "hint_1": "Check the use of commas between column names.",
+        "hint_2": "The correct syntax is `SELECT column1, column2 FROM table_name;`."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Selecting Columns",
+      "prompt": "Which of the following SQL statements correctly select columns from the `products` table? Choose all that apply.",
+      "options": [
+        "SELECT id, name FROM products;",
+        "SELECT category price FROM products;",
+        "SELECT * FROM products;",
+        "SELECT name, stock FROM products;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Look for statements that correctly use commas to separate column names.",
+      "help": {
+        "concept": "Correct SQL syntax requires commas between column names, or an asterisk to select all columns.",
+        "hint_1": "Statements with commas between column names are likely correct.",
+        "hint_2": "The asterisk (*) selects all columns."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Order the SQL Keywords",
+      "prompt": "Arrange the SQL keywords to form a correct query that selects the `name` and `price` from the `products` table.",
+      "tokens": [
+        "SELECT",
+        "name,",
+        "price",
+        "FROM",
+        "products;"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "name,",
+        "price",
+        "FROM",
+        "products;"
+      ],
+      "hint": "Start with SELECT and end with the table name.",
+      "help": {
+        "concept": "The order of SQL keywords is important for forming a valid query.",
+        "hint_1": "The query starts with SELECT and ends with the table name.",
+        "hint_2": "The correct order is SELECT, column names, FROM, table name."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: SELECT Statement",
+      "prompt": "Complete the SQL statement to select the `category` and `stock` columns from the `products` table: `SELECT [blank1] FROM products;`",
+      "template": "SELECT [blank1] FROM products;",
+      "choices": [
+        "category, stock",
+        "category stock",
+        "category; stock",
+        "category: stock"
+      ],
+      "correctValue": "category, stock",
+      "hint": "Remember to separate column names with a comma.",
+      "help": {
+        "concept": "Column names in a SELECT statement should be separated by commas.",
+        "hint_1": "The correct syntax uses a comma between column names.",
+        "hint_2": "The correct choice is `category, stock`."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "single_choice",
+      "title": "Understanding SELECT",
+      "prompt": "What does the following SQL statement do? `SELECT name, price FROM products;`",
+      "options": [
+        "It selects all columns from the products table.",
+        "It selects the name and price columns from the products table.",
+        "It selects the name column from the products table.",
+        "It selects the price column from the products table."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Focus on the columns listed after SELECT.",
+      "help": {
+        "concept": "The SELECT statement retrieves specified columns from a table.",
+        "hint_1": "The statement lists two columns: name and price.",
+        "hint_2": "The correct answer involves selecting both name and price columns."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "multi_choice",
+      "title": "Selecting All Columns",
+      "prompt": "Which SQL statements will select all columns from the `products` table? Choose all that apply.",
+      "options": [
+        "SELECT * FROM products;",
+        "SELECT id, name, category, price, stock, created_at FROM products;",
+        "SELECT all FROM products;",
+        "SELECT everything FROM products;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "An asterisk (*) selects all columns.",
+      "help": {
+        "concept": "Using an asterisk (*) or listing all columns selects all columns from a table.",
+        "hint_1": "The asterisk (*) is a shorthand for selecting all columns.",
+        "hint_2": "Listing all column names also selects all columns."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "drag_reorder",
+      "title": "Forming a Query",
+      "prompt": "Arrange the SQL keywords to form a correct query that selects the `category` and `created_at` from the `products` table.",
+      "tokens": [
+        "SELECT",
+        "category,",
+        "created_at",
+        "FROM",
+        "products;"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "category,",
+        "created_at",
+        "FROM",
+        "products;"
+      ],
+      "hint": "Start with SELECT and end with the table name.",
+      "help": {
+        "concept": "The order of SQL keywords is important for forming a valid query.",
+        "hint_1": "The query starts with SELECT and ends with the table name.",
+        "hint_2": "The correct order is SELECT, column names, FROM, table name."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: Column Selection",
+      "prompt": "Complete the SQL statement to select the `id` and `name` columns from the `products` table: `SELECT [blank1] FROM products;`",
+      "template": "SELECT [blank1] FROM products;",
+      "choices": [
+        "id, name",
+        "id name",
+        "id; name",
+        "id: name"
+      ],
+      "correctValue": "id, name",
+      "hint": "Remember to separate column names with a comma.",
+      "help": {
+        "concept": "Column names in a SELECT statement should be separated by commas.",
+        "hint_1": "The correct syntax uses a comma between column names.",
+        "hint_2": "The correct choice is `id, name`."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Select Specific Columns",
+      "prompt": "Write a query to select the `name` and `category` columns from the `products` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name, category FROM products;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Retrieve Product Prices",
+      "prompt": "Write a query to select the `name` and `price` columns from the `products` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name, price FROM products;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Fetch Product Stock",
+      "prompt": "Write a query to select the `name` and `stock` columns from the `products` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name, stock FROM products;",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a Starter Query Sheet",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

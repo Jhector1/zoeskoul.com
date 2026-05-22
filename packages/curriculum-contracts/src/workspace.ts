@@ -55,6 +55,48 @@ export type CourseGenerationPolicy = {
     notes?: string[];
 };
 
+export type AuthoringPolicyOverride = {
+    path: string;
+    reason: string;
+};
+
+export type AuthoringModuleRule = {
+    allowedConcepts?: string[];
+    disallowedConcepts?: string[];
+    preferredTerms?: Record<string, string>;
+    forbiddenActions?: string[];
+    learnerInstructions?: string[];
+    notes?: string[];
+    validationRequirements?: Record<string, unknown>;
+};
+
+export type AuthoringPolicyLayer = {
+    policyId?: string;
+    workspaceProfileId?: string;
+    workspacePolicyId?: string;
+    uiTerms?: Record<string, string>;
+    forbiddenActions?: string[];
+    preferredTerms?: Record<string, string>;
+    learnerInstructions?: string[];
+    avoidTerms?: string[];
+    notes?: string[];
+    validationRequirements?: Record<string, unknown>;
+    projectRequirements?: Record<string, unknown>;
+    allowedConcepts?: string[];
+    disallowedConcepts?: string[];
+    datasets?: string[];
+    moduleRules?: Record<string, AuthoringModuleRule>;
+    overrides?: AuthoringPolicyOverride[];
+    rules?: Record<string, unknown>;
+    runtime?: Record<string, unknown>;
+    checker?: Record<string, unknown>;
+};
+
+export type ResolvedAuthoringPolicy = AuthoringPolicyLayer & {
+    sources: string[];
+    warnings: string[];
+};
+
 export type ModulePedagogyPolicy = {
     moduleNumber: number;
     allowedConcepts?: string[];

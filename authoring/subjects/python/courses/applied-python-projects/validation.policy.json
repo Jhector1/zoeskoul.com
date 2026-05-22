@@ -1,0 +1,9 @@
+{
+  "policyId": "applied-python-projects-validation",
+  "validationRequirements": {
+    "goldenTestsRequired": true,
+    "requireProjectRubric": true,
+    "requireCapstoneRubric": true,
+    "requireDeliverableChecklist": true
+  }
+}

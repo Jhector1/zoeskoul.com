@@ -1,0 +1,246 @@
+{
+  "title": "Filter by More Than One Rule",
+  "summary": "Learn how to filter data using multiple conditions in SQL.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Multiple Conditions",
+      "bodyMarkdown": "In SQL, you can filter data by more than one condition using logical operators like `AND`, `OR`, and `NOT`. These operators allow you to combine multiple conditions in a `WHERE` clause to refine your query results.\n\nFor example, if you want to find products that are in the 'Art' category and have a price less than 20, you can use:\n\n```sql\nSELECT * FROM products\nWHERE category = 'Art' AND price < 20;\n```\n\nThis query will return all products that meet both conditions. Try it yourself by modifying the conditions to explore different subsets of data."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using OR for Flexible Filtering",
+      "bodyMarkdown": "The `OR` operator allows you to filter data that meets at least one of several conditions. For instance, to find products that are either in the 'Art' category or have a stock greater than 20, use:\n\n```sql\nSELECT * FROM products\nWHERE category = 'Art' OR stock > 20;\n```\n\nThis query will return products that satisfy either condition. Your turn: try changing the conditions to see how the results change."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Logical Operators in SQL",
+      "prompt": "Which logical operator is used to combine conditions that must all be true?",
+      "options": [
+        "AND",
+        "OR",
+        "NOT",
+        "LIKE"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Read the question and connect it to the specific lesson example.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Filtering with OR",
+      "prompt": "What does the `OR` operator do in a SQL query?",
+      "options": [
+        "Combines conditions that must all be true",
+        "Combines conditions where at least one must be true",
+        "Negates a condition",
+        "Filters based on pattern matching"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider what happens when only one condition needs to be true.",
+      "help": {
+        "concept": "The `OR` operator allows for flexibility by requiring at least one condition to be true.",
+        "hint_1": "The `OR` operator is about flexibility in conditions.",
+        "hint_2": "It's not about negation or pattern matching."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Combining Conditions",
+      "prompt": "Which of the following are valid ways to combine conditions in a SQL `WHERE` clause? (Choose all that apply)",
+      "options": [
+        "AND",
+        "OR",
+        "NOT",
+        "BETWEEN"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Read the question and connect it to the specific lesson example.",
+      "help": {
+        "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Remove options from unrelated Python areas, then choose the one that fits the question."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Understanding NOT",
+      "prompt": "What does the `NOT` operator do in SQL? (Choose all that apply)",
+      "options": [
+        "Negates a condition",
+        "Combines conditions",
+        "Filters out rows that meet a condition",
+        "Is used for pattern matching"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider how `NOT` changes the truth value of a condition.",
+      "help": {
+        "concept": "The `NOT` operator negates conditions, filtering out rows that meet the condition.",
+        "hint_1": "`NOT` is about negation, not combination.",
+        "hint_2": "It's not used for pattern matching."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order of Conditions",
+      "prompt": "Arrange the following SQL query components in the correct order to filter products that are in the 'Home' category and have a price greater than 50.",
+      "tokens": [
+        "SELECT * FROM products",
+        "WHERE category = 'Home'",
+        "AND price > 50;"
+      ],
+      "correctOrder": [
+        "SELECT * FROM products",
+        "WHERE category = 'Home'",
+        "AND price > 50;"
+      ],
+      "hint": "Start with the SELECT statement and follow with the WHERE clause.",
+      "help": {
+        "concept": "SQL queries follow a specific order: SELECT, FROM, WHERE, and conditions.",
+        "hint_1": "The WHERE clause follows the SELECT statement.",
+        "hint_2": "Conditions are combined after the WHERE clause."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "Logical Flow",
+      "prompt": "Arrange the following components to form a valid SQL query that selects products with stock less than 10 or price more than 100.",
+      "tokens": [
+        "SELECT * FROM products",
+        "WHERE stock < 10",
+        "OR price > 100;"
+      ],
+      "correctOrder": [
+        "SELECT * FROM products",
+        "WHERE stock < 10",
+        "OR price > 100;"
+      ],
+      "hint": "Begin with the SELECT statement and follow with the WHERE clause.",
+      "help": {
+        "concept": "The logical flow of SQL queries starts with SELECT and follows with WHERE and conditions.",
+        "hint_1": "The WHERE clause comes after SELECT.",
+        "hint_2": "Conditions are specified after WHERE."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Using AND",
+      "prompt": "Complete the SQL query to select products in the 'Stationery' category with a price less than 20.\n\n`SELECT * FROM products WHERE category = 'Stationery' [blank1] price < 20;`",
+      "template": "SELECT * FROM products WHERE category = 'Stationery' [blank1] price < 20;",
+      "choices": [
+        "AND",
+        "OR",
+        "NOT",
+        "LIKE"
+      ],
+      "correctValue": "AND",
+      "hint": "Consider the operator that combines conditions that must both be true.",
+      "help": {
+        "concept": "The `the missing term` operator is used to combine conditions that must both be true.",
+        "hint_1": "The `the missing term` operator is needed here.",
+        "hint_2": "It's not `OR` or `NOT`."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Using OR",
+      "prompt": "Complete the SQL query to select products that are either in the 'Art' category or have a stock greater than 30.\n\n`SELECT * FROM products WHERE category = 'Art' [blank1] stock > 30;`",
+      "template": "SELECT * FROM products WHERE category = 'Art' [blank1] stock > 30;",
+      "choices": [
+        "AND",
+        "OR",
+        "NOT",
+        "LIKE"
+      ],
+      "correctValue": "OR",
+      "hint": "Focus on the missing concept rather than the exact missing term.",
+      "help": {
+        "concept": "The blank should be completed with the term that fits the job being described.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the term that best completes the meaning of the statement."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Filter by Category and Price",
+      "prompt": "Write a SQL query to select all products in the 'Art' category with a price less than 25.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Art' AND price < 25;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Filter by Stock and Category",
+      "prompt": "Write a SQL query to select all products with stock greater than 10 and in the 'Home' category.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT * FROM products WHERE stock > 10 AND category = 'Home';",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Filter by Price or Stock",
+      "prompt": "Write a SQL query to select all products with a price greater than 50 or stock less than 5.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT * FROM products WHERE price > 50 OR stock < 5;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Filtering Project",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

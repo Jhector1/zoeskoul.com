@@ -19,7 +19,8 @@
         "family": "sql",
         "version": 1,
         "status": "legacy",
-        "supersededBy": "sql-v1"
+        "defaultForNewEnrollments": false,
+        "supersededBy": "sql-v2"
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,
@@ -91,6 +92,9 @@
       "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
         "datasetId": "products_catalog",
         "fixedSqlDialect": "sqlite",
         "resultShape": "table"

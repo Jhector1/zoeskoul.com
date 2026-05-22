@@ -1,0 +1,354 @@
+{
+  "authoringFormatVersion": "2.0",
+  "courseSlug": "sql-foundations",
+  "catalogSlug": "sql",
+  "subjectSlug": "sql",
+  "profileId": "sql",
+  "title": "SQL Foundations",
+  "subtitle": "Learn to read tables, write SELECT queries, filter rows, sort results, and handle real-world beginner data.",
+  "level": "beginner",
+  "courseNumber": 1,
+  "trackSlug": "sql",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "intendedFor": [
+    "absolute beginners",
+    "first-time SQL learners",
+    "students starting database classes",
+    "self-learners preparing for data analysis",
+    "web developers who need SQL basics"
+  ],
+  "prerequisites": [],
+  "learningGoals": [
+    "Explain what SQL does in plain language.",
+    "Identify tables, rows, columns, records, fields, and simple keys.",
+    "Write basic SELECT queries against one table.",
+    "Choose specific columns instead of always using SELECT *.",
+    "Filter rows with WHERE.",
+    "Compare text and numeric values.",
+    "Combine conditions with AND, OR, and NOT.",
+    "Sort results with ORDER BY.",
+    "Limit output with LIMIT.",
+    "Search text using LIKE and wildcards.",
+    "Filter lists and ranges using IN, NOT IN, and BETWEEN.",
+    "Find missing values using IS NULL and IS NOT NULL.",
+    "Read query results and explain them in plain English."
+  ],
+  "moduleCount": 5,
+  "modules": [
+    {
+      "moduleNumber": 0,
+      "moduleSlug": "sql-v2-0",
+      "title": "Getting Started with SQL and Databases",
+      "purpose": "Build the learner's mental model before syntax: what SQL is, how databases organize information, and how questions become queries.",
+      "datasetId": "students_intro",
+      "coreSkill": "Database mental model",
+      "sections": [
+        {
+          "sectionSlug": "sql-v2-0-1",
+          "title": "What SQL Is",
+          "topics": [
+            "what_sql_means",
+            "what_a_database_is",
+            "why_sql_is_useful",
+            "real_world_examples_of_databases"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-0-2",
+          "title": "Understanding Tables",
+          "topics": [
+            "rows_and_columns",
+            "records_and_fields",
+            "table_names_and_column_names",
+            "reading_data_like_a_spreadsheet"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-0-3",
+          "title": "Database Thinking",
+          "topics": [
+            "how_data_is_organized",
+            "one_table_vs_multiple_tables",
+            "intro_to_keys",
+            "thinking_in_questions_and_answers"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-0-4",
+          "title": "First SQL Environment",
+          "topics": [
+            "where_sql_runs",
+            "sql_editor_basics",
+            "running_your_first_query",
+            "reading_query_results"
+          ]
+        }
+      ],
+      "moduleProject": "Create a simple data map for a tiny school or store database showing tables, columns, and example rows.",
+      "prefix": "sqlv2_0"
+    },
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "sql-v2-1",
+      "title": "Your First Queries with SELECT",
+      "purpose": "Teach learners to retrieve data confidently with SELECT and FROM before filtering or joining tables.",
+      "datasetId": "products_catalog",
+      "coreSkill": "SELECT",
+      "sections": [
+        {
+          "sectionSlug": "sql-v2-1-1",
+          "title": "Intro to SELECT",
+          "topics": [
+            "what_select_does",
+            "selecting_all_columns_with_star",
+            "selecting_specific_columns",
+            "query_structure_basics"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-1-2",
+          "title": "Reading Data from a Table",
+          "topics": [
+            "from_and_table_names",
+            "choosing_the_right_columns",
+            "viewing_clean_results",
+            "writing_simple_readable_queries"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-1-3",
+          "title": "SQL Syntax Basics",
+          "topics": [
+            "keywords",
+            "semicolons",
+            "uppercase_vs_lowercase",
+            "common_beginner_syntax_mistakes"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-1-4",
+          "title": "Practice with Basic Queries",
+          "topics": [
+            "query_one_column",
+            "query_multiple_columns",
+            "query_full_tables",
+            "predicting_result_output"
+          ]
+        }
+      ],
+      "moduleProject": "Build a starter query sheet with beginner SELECT queries against a products table.",
+      "prefix": "sqlv2_1"
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "sql-v2-2",
+      "title": "Filtering Data with WHERE",
+      "purpose": "Introduce decision-making in queries by teaching learners to keep only the rows they actually need.",
+      "datasetId": "products_catalog",
+      "coreSkill": "WHERE",
+      "sections": [
+        {
+          "sectionSlug": "sql-v2-2-1",
+          "title": "Intro to Filtering",
+          "topics": [
+            "why_filtering_matters",
+            "the_where_clause",
+            "matching_exact_values",
+            "filtering_numbers_and_text"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-2-2",
+          "title": "Comparison Operators",
+          "topics": [
+            "equals_comparison",
+            "not_equal_comparison",
+            "greater_than_comparison",
+            "less_than_comparison",
+            "greater_than_or_equal_and_less_than_or_equal",
+            "choosing_the_right_comparison"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-2-3",
+          "title": "Filtering with Multiple Conditions",
+          "topics": [
+            "and_conditions",
+            "or_conditions",
+            "not_conditions",
+            "combining_conditions_safely"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-2-4",
+          "title": "Beginner Filtering Practice",
+          "topics": [
+            "filter_by_number",
+            "filter_by_text",
+            "filter_by_more_than_one_rule",
+            "avoiding_filtering_mistakes"
+          ]
+        }
+      ],
+      "moduleProject": "Create a data-detective worksheet with filtering prompts and SQL answers.",
+      "prefix": "sqlv2_2"
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "sql-v2-3",
+      "title": "Sorting and Limiting Results",
+      "purpose": "Help beginners control output so answers are easier to read, rank, and compare.",
+      "datasetId": "products_catalog",
+      "coreSkill": "ORDER BY and LIMIT",
+      "sections": [
+        {
+          "sectionSlug": "sql-v2-3-1",
+          "title": "Sorting Data",
+          "topics": [
+            "why_sorting_matters",
+            "order_by",
+            "ascending_order",
+            "descending_order"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-3-2",
+          "title": "Sorting by Multiple Columns",
+          "topics": [
+            "primary_sort",
+            "secondary_sort",
+            "sorting_text",
+            "sorting_numbers_and_dates"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-3-3",
+          "title": "Limiting Output",
+          "topics": [
+            "why_limit_results",
+            "limit_clause",
+            "top_rows_only",
+            "combining_order_by_with_limit"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-3-4",
+          "title": "Practice with Output Control",
+          "topics": [
+            "find_highest_values",
+            "find_lowest_values",
+            "show_top_5_records",
+            "build_clear_result_sets"
+          ]
+        }
+      ],
+      "moduleProject": "Build a ranked product report using sorting and limiting.",
+      "prefix": "sqlv2_3"
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "sql-v2-4",
+      "title": "Working with Text, Lists, Ranges, and NULL",
+      "purpose": "Expand filtering to real-world cases like partial text, multiple choices, ranges, and missing values.",
+      "datasetId": "customers_cleanup",
+      "coreSkill": "LIKE, IN, BETWEEN, NULL",
+      "sections": [
+        {
+          "sectionSlug": "sql-v2-4-1",
+          "title": "Text Matching",
+          "topics": [
+            "intro_to_like",
+            "percent_wildcard",
+            "underscore_wildcard",
+            "searching_partial_text"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-4-2",
+          "title": "Lists and Ranges",
+          "topics": [
+            "in_list_filter",
+            "not_in_list_filter",
+            "between_range_filter",
+            "range_filtering_practice"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-4-3",
+          "title": "Missing Data",
+          "topics": [
+            "what_null_means",
+            "is_null",
+            "is_not_null",
+            "common_null_mistakes"
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-4-4",
+          "title": "Search and Cleanup Practice",
+          "topics": [
+            "search_names",
+            "filter_statuses",
+            "find_missing_data",
+            "combine_text_and_null_filters"
+          ]
+        }
+      ],
+      "moduleProject": "Create a search-and-cleanup worksheet for a customer table with missing or inconsistent information.",
+      "prefix": "sqlv2_4"
+    }
+  ],
+  "assessmentPolicy": {
+    "topicExerciseMin": 4,
+    "technicalTopicCodeInputMin": 1,
+    "requireModuleProject": true,
+    "capstoneRequired": false,
+    "defaultExerciseMix": {
+      "single_choice": 0.12,
+      "multi_choice": 0.12,
+      "drag_reorder": 0.08,
+      "fill_blank_choice": 0.18,
+      "code_input": 0.5
+    }
+  },
+  "validationPolicy": {
+    "allowedSqlConcepts": [
+      "SELECT",
+      "FROM",
+      "WHERE",
+      "comparison_operators",
+      "AND",
+      "OR",
+      "NOT",
+      "ORDER BY",
+      "ASC",
+      "DESC",
+      "LIMIT",
+      "LIKE",
+      "IN",
+      "NOT IN",
+      "BETWEEN",
+      "IS NULL",
+      "IS NOT NULL"
+    ],
+    "disallowedSqlConcepts": [
+      "JOIN",
+      "GROUP BY",
+      "HAVING",
+      "INSERT",
+      "UPDATE",
+      "DELETE",
+      "CREATE TABLE",
+      "subquery"
+    ],
+    "datasets": [
+      "students_intro",
+      "products_catalog",
+      "customers_cleanup"
+    ],
+    "goldenTestsRequired": true,
+    "requireMappedImages": true,
+    "requireResolvedI18n": true
+  }
+}

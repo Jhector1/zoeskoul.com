@@ -88,4 +88,58 @@ describe("repairTopicAuthoringDraft", () => {
         expect(exercise.hint).not.toMatch(/where/i);
         expect(exercise.help.concept).not.toMatch(/where/i);
     });
+
+    it("uses SQL workspace language for default code_input help", () => {
+        const repaired = repairTopicAuthoringDraft(
+            {
+                title: "Topic",
+                summary: "Summary",
+                minutes: 15,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        title: "Query",
+                        prompt: "Write a query to list student names.",
+                        hint: "",
+                        help: {
+                            concept: "",
+                            hint_1: "",
+                            hint_2: "",
+                        },
+                        starterCode: "SELECT * FROM students;",
+                        solutionCode: "SELECT name FROM students;",
+                        recipeType: "sql_query",
+                        datasetId: "students_intro",
+                    },
+                ],
+            } as any,
+            {
+                profileId: "sql",
+                workspacePolicy: {
+                    workspace: {
+                        ui: {
+                            editorLabel: "SQL editor",
+                            runButtonLabel: "Run query",
+                            resultsTableLabel: "results table",
+                        },
+                    },
+                },
+            } as any,
+        );
+
+        const exercise = repaired.quizDraft[0] as any;
+        const combined = [
+            exercise.hint,
+            exercise.help.concept,
+            exercise.help.hint_1,
+            exercise.help.hint_2,
+        ].join(" ");
+
+        expect(combined).toContain("SQL editor");
+        expect(combined).toContain("Run query");
+        expect(combined).toContain("results table");
+        expect(combined).not.toMatch(/Python|program output|script|terminal|\.py/i);
+    });
 });

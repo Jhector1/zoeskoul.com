@@ -1,0 +1,233 @@
+{
+  "title": "reading data like a spreadsheet",
+  "summary": "Learn how to read data using SQL queries, similar to viewing data in a spreadsheet.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to SQL SELECT",
+      "bodyMarkdown": "The SQL `SELECT` statement is used to query data from a database. It is similar to viewing data in a spreadsheet where you can select specific columns to view. For example, to view all columns from the `students` table, you can use the query:\n\n```\nSELECT * FROM students;\n```\n\nThis will display all the rows and columns in the `students` table. Try it yourself by writing this query in the SQL editor and clicking 'Run query'."
+    },
+    {
+      "id": "sketch2",
+      "title": "Selecting Specific Columns",
+      "bodyMarkdown": "You can also select specific columns from a table. For instance, if you only want to see the `name` and `grade` of each student, you can use:\n\n```\nSELECT name, grade FROM students;\n```\n\nThis query will display only the `name` and `grade` columns for all rows in the `students` table. Try modifying the query to include different columns and see the results."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Understanding SELECT *",
+      "prompt": "What does the SQL query `SELECT * FROM students;` do?",
+      "options": [
+        "Selects all columns and rows from the students table.",
+        "Selects only the first column from the students table.",
+        "Selects all rows but only the first column from the students table.",
+        "Selects all columns but only the first row from the students table."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what the asterisk (*) represents in SQL.",
+      "help": {
+        "concept": "The asterisk (*) in SQL is used to select all columns.",
+        "hint_1": "The query retrieves all data from the table.",
+        "hint_2": "The asterisk (*) is a wildcard that means 'all columns'."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Selecting Specific Columns",
+      "prompt": "Which SQL query would you use to select only the `name` and `age` columns from the `students` table?",
+      "options": [
+        "SELECT name, age FROM students;",
+        "SELECT * FROM students;",
+        "SELECT age FROM students;",
+        "SELECT name FROM students;"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider the columns you want to retrieve.",
+      "help": {
+        "concept": "To select specific columns, list them after the SELECT keyword.",
+        "hint_1": "You need to specify both `name` and `age` in the query.",
+        "hint_2": "The correct query lists both columns separated by a comma."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "SQL Query Components",
+      "prompt": "Which of the following are components of a basic SQL SELECT query? (Choose all that apply)",
+      "options": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "INSERT"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Focus on the basic structure of a SELECT query.",
+      "help": {
+        "concept": "A basic SELECT query requires the SELECT and FROM clauses.",
+        "hint_1": "The SELECT clause specifies the columns to retrieve.",
+        "hint_2": "The FROM clause specifies the table to query."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Understanding SQL Keywords",
+      "prompt": "Which of the following SQL keywords are used to retrieve data from a database? (Choose all that apply)",
+      "options": [
+        "SELECT",
+        "FROM",
+        "UPDATE",
+        "DELETE"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Consider the keywords involved in reading data.",
+      "help": {
+        "concept": "SELECT and FROM are used to retrieve data.",
+        "hint_1": "SELECT specifies the columns, FROM specifies the table.",
+        "hint_2": "UPDATE and DELETE are used for modifying data, not retrieving."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Query Clauses",
+      "prompt": "Arrange the SQL query clauses in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM"
+      ],
+      "hint": "Think about the basic structure of a SQL query.",
+      "help": {
+        "concept": "The SELECT clause comes before the FROM clause.",
+        "hint_1": "SELECT specifies what to retrieve.",
+        "hint_2": "FROM specifies where to retrieve it from."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Put the parts of a SQL query in the correct order.",
+      "tokens": [
+        "FROM students",
+        "SELECT name, age"
+      ],
+      "correctOrder": [
+        "SELECT name, age",
+        "FROM students"
+      ],
+      "hint": "Consider the sequence of clauses in a SQL query.",
+      "help": {
+        "concept": "The SELECT clause is followed by the FROM clause.",
+        "hint_1": "SELECT specifies the columns.",
+        "hint_2": "FROM specifies the table."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Query Syntax",
+      "prompt": "Complete the SQL query to select all columns from the `students` table.",
+      "template": "SELECT [blank1] FROM students;",
+      "choices": [
+        "*",
+        "name",
+        "age"
+      ],
+      "correctValue": "*",
+      "hint": "Use the wildcard character to select all columns.",
+      "help": {
+        "concept": "The asterisk (*) is used to select all columns in SQL.",
+        "hint_1": "The asterisk (*) is a wildcard for all columns.",
+        "hint_2": "Use * to select every column in the table."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Selecting Specific Columns",
+      "prompt": "Fill in the blank to select the `name` and `city` columns from the `students` table.",
+      "template": "SELECT name, city FROM [blank1];",
+      "choices": [
+        "students",
+        "teachers",
+        "classes"
+      ],
+      "correctValue": "students",
+      "hint": "Identify the correct table name.",
+      "help": {
+        "concept": "The FROM clause specifies the table to query.",
+        "hint_1": "The table name is `students`.",
+        "hint_2": "Ensure the table name matches the dataset."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Basic SELECT Query",
+      "prompt": "Write a SQL query to select all columns from the `students` table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT * FROM students;",
+      "hint": "Use the SELECT statement with a wildcard to retrieve all columns.",
+      "help": {
+        "concept": "The SELECT statement retrieves data from a table.",
+        "hint_1": "Use * to select all columns.",
+        "hint_2": "Ensure you specify the correct table name after FROM."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Selecting Specific Columns",
+      "prompt": "Write a SQL query to select the `name` and `age` columns from the `students` table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT name, age FROM students;",
+      "hint": "List the columns you want to retrieve after SELECT.",
+      "help": {
+        "concept": "Specify columns in the SELECT clause.",
+        "hint_1": "Separate column names with a comma.",
+        "hint_2": "Ensure the table name follows the FROM clause."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Selecting with Conditions",
+      "prompt": "Write a SQL query to select the `name` and `city` columns from the `students` table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT name, city FROM students;",
+      "hint": "Use the SELECT statement to specify columns.",
+      "help": {
+        "concept": "The SELECT clause specifies which columns to retrieve.",
+        "hint_1": "List the columns you want to select.",
+        "hint_2": "Ensure the table name is correct in the FROM clause."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Data Retrieval Project",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

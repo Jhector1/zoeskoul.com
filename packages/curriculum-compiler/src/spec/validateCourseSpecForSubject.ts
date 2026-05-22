@@ -1,19 +1,7 @@
-import path from "node:path";
 import type { CourseSpec } from "@zoeskoul/curriculum-contracts";
-import { normalizeLegacyCourseSpec } from "./normalizeLegacyCourseSpec.js";
-import { resolveSpecRelease } from "./resolveSpecRelease.js";
-import { validateCourseSpec } from "./validateCourseSpec.js";
-import fs from "node:fs/promises";
+import { getAuthoringCourseSpecPath } from "@zoeskoul/curriculum-core";
+import { loadCourseSpec, loadSubjectPlan } from "./loadCourseSpec.js";
 import {validateCourseSpecWorkspaceLanguage} from "../validate/validateCourseSpecWorkspaceLanguage.js";
-
-async function pathExists(filePath: string) {
-    try {
-        await fs.access(filePath);
-        return true;
-    } catch {
-        return false;
-    }
-}
 
 function countSections(spec: CourseSpec) {
     return spec.modules.reduce((sum, module) => sum + module.sections.length, 0);
@@ -44,53 +32,36 @@ export async function validateCourseSpecForSubject(subjectSlug: string): Promise
     activeReleaseName: string | null;
     spec: CourseSpec;
 }> {
-    const specPath = path.join("authoring", subjectSlug, "course.spec.json");
+    const subjectPlan = await loadSubjectPlan(subjectSlug);
+    if (!subjectPlan) {
+        throw new Error(`No subject plan found for ${subjectSlug}`);
+    }
 
-    if (!(await pathExists(specPath))) {
+    const courseSlug = subjectPlan.publishTarget?.courseSlug;
+    if (!courseSlug) {
+        throw new Error(`Subject plan for ${subjectSlug} is missing publishTarget.courseSlug`);
+    }
+
+    const specPath = getAuthoringCourseSpecPath(subjectSlug, courseSlug);
+    const releasedSpec = await loadCourseSpec(subjectSlug, courseSlug);
+
+    if (!releasedSpec) {
         throw new Error(`No course spec found at ${specPath}`);
     }
 
-    const rawText = await fs.readFile(specPath, "utf8");
-    const rawJson = JSON.parse(rawText);
-
-    const fullSpec = normalizeLegacyCourseSpec(rawJson);
-    const fullIssues = validateCourseSpec(fullSpec);
-    if (fullIssues.length) {
-        throw new Error(`Course spec validation failed:\n- ${fullIssues.join("\n- ")}`);
-    }
-
-    const releasedSpec = resolveSpecRelease(fullSpec);
-    const releasedIssues = validateCourseSpec(releasedSpec);
-
-    if (releasedIssues.length) {
-        throw new Error(
-            `Released course spec validation failed:\n- ${releasedIssues.join("\n- ")}`,
-        );
-    }
-
-    if (fullSpec.subjectSlug !== subjectSlug) {
-        throw new Error(
-            `Spec subjectSlug mismatch: expected "${subjectSlug}" but found "${fullSpec.subjectSlug}" in ${specPath}`,
-        );
-    }
-    if (releasedSpec.subjectSlug !== subjectSlug) {
-        throw new Error(
-            `Released spec subjectSlug mismatch: expected "${subjectSlug}" but found "${releasedSpec.subjectSlug}" in ${specPath}`,
-        );
-    }
     validateCourseSpecWorkspaceLanguage({ spec:releasedSpec });
 
     return {
-        subjectSlug: fullSpec.subjectSlug,
-        profileId: fullSpec.profileId,
+        subjectSlug: releasedSpec.subjectSlug,
+        profileId: releasedSpec.profileId,
         specPath,
-        fullModuleCount: fullSpec.modules.length,
-        fullSectionCount: countSections(fullSpec),
-        fullTopicCount: countTopics(fullSpec),
+        fullModuleCount: releasedSpec.modules.length,
+        fullSectionCount: countSections(releasedSpec),
+        fullTopicCount: countTopics(releasedSpec),
         activeModuleCount: releasedSpec.modules.length,
         activeSectionCount: countSections(releasedSpec),
         activeTopicCount: countTopics(releasedSpec),
-        activeReleaseName: fullSpec.releasePlan?.currentRelease?.name ?? null,
+        activeReleaseName: releasedSpec.releasePlan?.currentRelease?.name ?? null,
         spec: releasedSpec,
     };
 }

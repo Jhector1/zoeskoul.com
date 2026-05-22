@@ -1,0 +1,52 @@
+{
+  "topicId": "how_data_is_organized",
+  "ok": false,
+  "issues": [
+    {
+      "code": "SQL_SOLUTION_EXECUTION_FAILED",
+      "category": "execution",
+      "severity": "error",
+      "exerciseId": "quiz10",
+      "message": "Generated SQL solution failed to execute."
+    },
+    {
+      "code": "SQL_FUTURE_CONCEPT",
+      "category": "pedagogy",
+      "severity": "error",
+      "exerciseId": "quiz9",
+      "message": "Exercise \"quiz9\" uses future SQL concept(s) not allowed in module 0: NOT, CREATE TABLE."
+    },
+    {
+      "code": "SQL_FUTURE_CONCEPT",
+      "category": "pedagogy",
+      "severity": "error",
+      "exerciseId": "quiz10",
+      "message": "Exercise \"quiz10\" uses future SQL concept(s) not allowed in module 0: INSERT."
+    },
+    {
+      "code": "SQL_RESULT_SHAPE_MISMATCH",
+      "category": "result_shape",
+      "severity": "error",
+      "exerciseId": "quiz10",
+      "message": "SQL solution ran but did not produce a readable table result."
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise quiz10 references column \"course_id\" that does not belong to effective dataset \"students_intro\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise quiz10 references column \"course_name\" that does not belong to effective dataset \"students_intro\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise quiz10 references column \"credits\" that does not belong to effective dataset \"students_intro\""
+    }
+  ]
+}

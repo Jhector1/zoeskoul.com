@@ -1,0 +1,23 @@
+{
+  "subjectSlug": "sql",
+  "courseSlug": "sql-database-design-capstone",
+  "catalogSlug": "sql",
+  "profileId": "sql",
+  "title": "SQL Database Design and Capstone",
+  "moduleOrder": [
+    "sql_module_14",
+    "sql_module_15"
+  ],
+  "modules": [
+    {
+      "moduleSlug": "sql_module_14",
+      "moduleNumber": 14,
+      "title": "Relational Database Design for Beginners"
+    },
+    {
+      "moduleSlug": "sql_module_15",
+      "moduleNumber": 15,
+      "title": "Real Beginner SQL Projects and Course Capstone"
+    }
+  ]
+}

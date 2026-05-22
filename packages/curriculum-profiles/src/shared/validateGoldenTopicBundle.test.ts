@@ -52,4 +52,45 @@ describe("validateGoldenTopicBundle", () => {
 
         expect(report.ok).toBe(true);
     });
+
+    it("routes sql_query exercises through the local SQL checker when no shared runner is configured", async () => {
+        const report = await validateGoldenTopicBundle({
+            seed: {
+                topicId: "sql-topic",
+                subjectSlug: "sql-v2",
+                courseSlug: "sql-foundations",
+            } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "sql-topic",
+                subjectSlug: "sql-v2",
+                moduleSlug: "sql-v2-0",
+                sectionSlug: "sql-v2-0-1",
+                prefix: "topics.sql.sql-v2-0.sql-topic",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        messageBase: "quiz.code-1",
+                        language: "sql",
+                        fixedSqlDialect: "sqlite",
+                        recipe: {
+                            type: "sql_query",
+                            datasetId: "students_intro",
+                            solutionCode: "SELECT id, name FROM students;",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(report.ok).toBe(true);
+    });
 });

@@ -1,0 +1,237 @@
+{
+  "title": "keywords",
+  "summary": "keywords in Your First Queries with SELECT",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to SQL Keywords",
+      "bodyMarkdown": "SQL keywords are reserved words used to perform operations in a database. They are the building blocks of SQL queries. Some of the most common keywords include SELECT, FROM, WHERE, and ORDER BY. These keywords help you retrieve and manipulate data stored in a database. \n\nFor example, to retrieve all columns from a table named `products`, you can use the following query:\n\n```sql\nSELECT * FROM products;\n```\n\nThis query selects all columns from the `products` table. Try it yourself by writing a query to select specific columns like `name` and `price` from the `products` table."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using SELECT and FROM",
+      "bodyMarkdown": "The `SELECT` keyword is used to specify the columns you want to retrieve, while the `FROM` keyword specifies the table from which to retrieve the data. \n\nHere's a step-by-step example:\n\n1. **SELECT**: Choose the columns you want to see. For instance, `SELECT name, price`.\n2. **FROM**: Specify the table. For example, `FROM products`.\n\nPutting it together, the query becomes:\n\n```sql\nSELECT name, price FROM products;\n```\n\nThis query retrieves the `name` and `price` columns from the `products` table. Your turn: Modify the query to include the `category` column as well."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Understanding SELECT",
+      "prompt": "What does the SELECT keyword do in SQL?",
+      "options": [
+        "It deletes data from a table.",
+        "It retrieves data from a table.",
+        "It updates data in a table.",
+        "It creates a new table."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about the purpose of retrieving data.",
+      "help": {
+        "concept": "The SELECT keyword is used to retrieve data from a database table.",
+        "hint_1": "SELECT is used to specify which columns you want to retrieve.",
+        "hint_2": "SELECT is not used for modifying or deleting data."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Purpose of FROM",
+      "prompt": "What is the purpose of the FROM keyword in an SQL query?",
+      "options": [
+        "To specify the table to retrieve data from.",
+        "To specify the columns to retrieve.",
+        "To filter the data based on conditions.",
+        "To sort the data in a specific order."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider what follows the FROM keyword in a query.",
+      "help": {
+        "concept": "The FROM keyword specifies the table from which to retrieve data.",
+        "hint_1": "FROM is followed by the table name.",
+        "hint_2": "FROM does not specify columns or conditions."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Keywords in SQL",
+      "prompt": "Which of the following are SQL keywords? Choose all that apply.",
+      "options": [
+        "SELECT",
+        "INSERT",
+        "UPDATE",
+        "DELETE",
+        "FROM",
+        "WHERE"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      ],
+      "hint": "Think about the common operations performed in SQL.",
+      "help": {
+        "concept": "SQL keywords are reserved words used for various operations in SQL.",
+        "hint_1": "Consider keywords used for data retrieval and manipulation.",
+        "hint_2": "All options listed are common SQL keywords."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Using SELECT and FROM",
+      "prompt": "Which of the following statements about SELECT and FROM are true? Choose all that apply.",
+      "options": [
+        "SELECT specifies the columns to retrieve.",
+        "FROM specifies the table to retrieve data from.",
+        "SELECT is used to delete data.",
+        "FROM is used to update data."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Think about the roles of SELECT and FROM in a query.",
+      "help": {
+        "concept": "SELECT and FROM are used to retrieve data from a database.",
+        "hint_1": "SELECT is about columns, FROM is about tables.",
+        "hint_2": "Neither SELECT nor FROM is used for data modification."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Ordering SQL Query Components",
+      "prompt": "Arrange the components of a basic SQL query in the correct order.",
+      "tokens": [
+        "SELECT",
+        "columns",
+        "FROM",
+        "table"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "columns",
+        "FROM",
+        "table"
+      ],
+      "hint": "Start with the keyword that specifies the columns.",
+      "help": {
+        "concept": "A basic SQL query starts with SELECT followed by columns, then FROM and the table.",
+        "hint_1": "SELECT comes first, followed by the columns.",
+        "hint_2": "FROM comes after SELECT and columns."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Put the following SQL query components in the correct order.",
+      "tokens": [
+        "FROM",
+        "SELECT",
+        "table",
+        "columns"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "columns",
+        "FROM",
+        "table"
+      ],
+      "hint": "Remember the order of SELECT and FROM.",
+      "help": {
+        "concept": "The structure of a basic SQL query starts with SELECT.",
+        "hint_1": "SELECT comes before FROM.",
+        "hint_2": "Columns are specified right after SELECT."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Filling in SQL Keywords",
+      "prompt": "Complete the SQL query to select all columns from the products table: `SELECT * [blank1] products;`",
+      "template": "SELECT * [blank1] products;",
+      "choices": [
+        "FROM",
+        "WHERE",
+        "ORDER BY",
+        "GROUP BY"
+      ],
+      "correctValue": "FROM",
+      "hint": "Think about which keyword specifies the table.",
+      "help": {
+        "concept": "The FROM keyword specifies the table to retrieve data from.",
+        "hint_1": "FROM is used to indicate the table name.",
+        "hint_2": "The correct keyword follows SELECT *."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "SQL Query Completion",
+      "prompt": "Fill in the blank to complete the query: `SELECT name, price [blank1] products;`",
+      "template": "SELECT name, price [blank1] products;",
+      "choices": [
+        "FROM",
+        "WHERE",
+        "ORDER BY",
+        "LIMIT"
+      ],
+      "correctValue": "FROM",
+      "hint": "Consider which keyword specifies the table.",
+      "help": {
+        "concept": "The FROM keyword is used to specify the table in a query.",
+        "hint_1": "FROM is necessary to indicate the source table.",
+        "hint_2": "The correct keyword follows the column list."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Basic SELECT Query",
+      "prompt": "Write a query to select the `name` and `price` columns from the `products` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name, price FROM products;",
+      "recipeType": "sql_query",
+      "datasetId": "products_catalog"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Selecting All Columns",
+      "prompt": "Write a query to select all columns from the `products` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products;",
+      "recipeType": "sql_query",
+      "datasetId": "products_catalog"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Selecting Specific Columns",
+      "prompt": "Write a query to select the `category` and `stock` columns from the `products` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT category, stock FROM products;",
+      "recipeType": "sql_query",
+      "datasetId": "products_catalog"
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a starter query sheet",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

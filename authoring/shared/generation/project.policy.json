@@ -1,0 +1,12 @@
+{
+  "policyId": "project-core",
+  "validationRequirements": {
+    "projectDistinctFromQuiz": true,
+    "projectStepsRequireTitles": true,
+    "projectStepsRequirePrompts": true,
+    "projectConsolidatesTaughtSkills": true
+  },
+  "notes": [
+    "Projects and capstones should reference the relevant rubric when a rubric exists."
+  ]
+}

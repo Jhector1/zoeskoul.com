@@ -1,0 +1,13 @@
+{
+  "topicId": "uppercase_vs_lowercase",
+  "ok": true,
+  "issues": [
+    {
+      "code": "SQL_WEAK_DISTRACTORS",
+      "category": "pedagogy",
+      "severity": "warn",
+      "exerciseId": "quiz3",
+      "message": "Multi-choice exercise has too few options for strong distractors."
+    }
+  ]
+}

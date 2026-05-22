@@ -1,0 +1,234 @@
+{
+  "title": "what a database is",
+  "summary": "Understanding the basics of what a database is and how it organizes information.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Databases",
+      "bodyMarkdown": "A database is an organized collection of data, generally stored and accessed electronically from a computer system. Databases are structured to facilitate the storage, retrieval, modification, and deletion of data in conjunction with various data-processing operations. \n\nFor example, consider a simple database table named `students`:\n\n```\n| id | name | grade | age | city     |\n|----|------|-------|-----|----------|\n| 1  | Noor | A     | 15  | Chicago  |\n| 2  | Mia  | A     | 14  | Evanston |\n| 3  | Leo  | B     | 15  | Chicago  |\n| 4  | Ava  | C     | 14  | Oak Park |\n| 5  | Zane | B     | 16  | Naperville |\n```\n\nThis table stores information about students, including their ID, name, grade, age, and city. \n\n**Try it yourself**: Imagine adding a new student to this table. What information would you need?"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Purpose of a Database",
+      "prompt": "What is the primary purpose of a database?",
+      "options": [
+        "To store and organize data",
+        "To create websites",
+        "To design graphics",
+        "To write code"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what databases are mainly used for.",
+      "help": {
+        "concept": "Databases are primarily used to store and organize data.",
+        "hint_1": "Consider the main function of a database.",
+        "hint_2": "Databases are not used for creating websites or designing graphics."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Database Table Structure",
+      "prompt": "In a database table, what does a row represent?",
+      "options": [
+        "A single record",
+        "A column header",
+        "A database schema",
+        "A data type"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what each line of data in a table represents.",
+      "help": {
+        "concept": "Each row in a database table represents a single record.",
+        "hint_1": "Rows contain data entries.",
+        "hint_2": "Rows are not headers or schemas."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Components of a Database",
+      "prompt": "Which of the following are components of a database? (Select all that apply)",
+      "options": [
+        "Tables",
+        "Graphs",
+        "Queries",
+        "Images"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider the elements that store and retrieve data.",
+      "help": {
+        "concept": "Tables and queries are fundamental components of a database.",
+        "hint_1": "Think about how data is stored and accessed.",
+        "hint_2": "Graphs and images are not standard database components."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Database Operations",
+      "prompt": "Which operations can be performed on a database? (Select all that apply)",
+      "options": [
+        "Insert data",
+        "Delete data",
+        "Compile code",
+        "Run a marathon"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Focus on data manipulation tasks.",
+      "help": {
+        "concept": "Databases allow data insertion and deletion.",
+        "hint_1": "Consider operations related to data management.",
+        "hint_2": "Compiling code and running marathons are unrelated to databases."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Database Query Sequence",
+      "prompt": "Arrange the steps to perform a basic SQL query in the correct order.",
+      "tokens": [
+        "Write the SQL query",
+        "Run the query",
+        "Check the results"
+      ],
+      "correctOrder": [
+        "Write the SQL query",
+        "Run the query",
+        "Check the results"
+      ],
+      "hint": "Think about the logical sequence of actions when querying a database.",
+      "help": {
+        "concept": "The sequence involves writing, executing, and reviewing the query.",
+        "hint_1": "Start with writing the query.",
+        "hint_2": "Finish by checking the results."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "Database Table Creation",
+      "prompt": "Arrange the steps to create a new table in a database.",
+      "tokens": [
+        "Define the table structure",
+        "Execute the CREATE TABLE command",
+        "Verify the table creation"
+      ],
+      "correctOrder": [
+        "Define the table structure",
+        "Execute the CREATE TABLE command",
+        "Verify the table creation"
+      ],
+      "hint": "Consider the logical order of creating a new table.",
+      "help": {
+        "concept": "Creating a table involves defining, executing, and verifying.",
+        "hint_1": "Start by defining the structure.",
+        "hint_2": "End with verification."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Command",
+      "prompt": "Fill in the blank to complete the SQL command: `SELECT * FROM [blank1]`",
+      "template": "SELECT * FROM [blank1]",
+      "choices": [
+        "students",
+        "images",
+        "graphs",
+        "code"
+      ],
+      "correctValue": "students",
+      "hint": "Think about the table name used in the example.",
+      "help": {
+        "concept": "The command selects all records from the specified table.",
+        "hint_1": "Refer to the table name in the example.",
+        "hint_2": "The correct table is 'students'."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Database Concept",
+      "prompt": "A database is primarily used to [blank1] data.",
+      "template": "A database is primarily used to [blank1] data.",
+      "choices": [
+        "store",
+        "delete",
+        "compile",
+        "run"
+      ],
+      "correctValue": "store",
+      "hint": "Consider the main function of a database.",
+      "help": {
+        "concept": "Databases are used to store data.",
+        "hint_1": "Think about the primary purpose of a database.",
+        "hint_2": "The correct action is 'store'."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Basic SQL Query",
+      "prompt": "Write a SQL query to select all columns from the `students` table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT * FROM students;",
+      "hint": "Use the SELECT statement to retrieve all columns.",
+      "help": {
+        "concept": "The SELECT statement is used to retrieve data from a database.",
+        "hint_1": "Use `SELECT *` to get all columns.",
+        "hint_2": "Ensure you specify the correct table name."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Retrieve Student Names",
+      "prompt": "Write a SQL query to select only the `name` column from the `students` table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT name FROM students;",
+      "hint": "Use the SELECT statement to specify the column you want.",
+      "help": {
+        "concept": "The SELECT statement can retrieve specific columns.",
+        "hint_1": "Specify the column name in the SELECT statement.",
+        "hint_2": "Ensure you use the correct table name."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "List Student Cities",
+      "prompt": "Write a SQL query to select the `city` column from the `students` table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT city FROM students;",
+      "hint": "Use the SELECT statement to retrieve the `city` column.",
+      "help": {
+        "concept": "The SELECT statement is used to retrieve specific columns from a table.",
+        "hint_1": "Specify the column you want to retrieve.",
+        "hint_2": "Ensure you use the correct table name."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

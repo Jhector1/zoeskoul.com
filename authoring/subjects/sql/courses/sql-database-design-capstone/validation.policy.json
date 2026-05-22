@@ -1,0 +1,40 @@
+{
+  "policyId": "sql-database-design-capstone-validation",
+  "allowedConcepts": [
+    "SELECT",
+    "WHERE",
+    "ORDER BY",
+    "LIMIT",
+    "LIKE",
+    "IN",
+    "BETWEEN",
+    "NULL",
+    "expressions",
+    "aggregates",
+    "GROUP BY",
+    "HAVING",
+    "JOIN",
+    "subqueries",
+    "INSERT",
+    "UPDATE",
+    "DELETE",
+    "CREATE TABLE",
+    "PRIMARY KEY",
+    "FOREIGN KEY",
+    "relational_design"
+  ],
+  "datasets": [
+    "design_sandbox",
+    "capstone_sandbox"
+  ],
+  "validationRequirements": {
+    "goldenTestsRequired": true,
+    "requireErdVisuals": true,
+    "requireCrowFootOrRelationshipDiagrams": true,
+    "requireBridgeTableCoverage": true,
+    "requireProjectRubric": true,
+    "requireCapstoneChecklist": true,
+    "requireSchemaValidation": true,
+    "requireQueryPortfolioOutput": true
+  }
+}

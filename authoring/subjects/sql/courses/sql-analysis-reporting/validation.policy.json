@@ -1,0 +1,36 @@
+{
+  "policyId": "sql-analysis-reporting-validation",
+  "allowedConcepts": [
+    "SELECT",
+    "FROM",
+    "WHERE",
+    "ORDER BY",
+    "LIMIT",
+    "expressions",
+    "aliases",
+    "simple_functions",
+    "COUNT",
+    "SUM",
+    "AVG",
+    "MIN",
+    "MAX",
+    "GROUP BY",
+    "HAVING"
+  ],
+  "disallowedConcepts": [
+    "JOIN",
+    "INSERT",
+    "UPDATE",
+    "DELETE",
+    "CREATE TABLE",
+    "subquery"
+  ],
+  "datasets": [
+    "sales_kpi"
+  ],
+  "validationRequirements": {
+    "goldenTestsRequired": true,
+    "requireOrderStableExpectedRows": true,
+    "requireAggregateExpectedResults": true
+  }
+}

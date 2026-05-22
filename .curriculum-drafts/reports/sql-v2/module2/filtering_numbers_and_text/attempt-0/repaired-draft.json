@@ -1,0 +1,244 @@
+{
+  "title": "Filtering Numbers and Text",
+  "summary": "Learn how to filter data using SQL with the WHERE clause, focusing on numbers and text.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to WHERE Clause",
+      "bodyMarkdown": "The WHERE clause in SQL is used to filter records that meet certain criteria. This allows you to focus on the data that is relevant to your query. For example, if you want to find all products in the 'Art' category, you would use:\n\n```sql\nSELECT * FROM products WHERE category = 'Art';\n```\n\nTry it yourself: Modify the query to find products with a price greater than 20."
+    },
+    {
+      "id": "sketch2",
+      "title": "Filtering with Comparison Operators",
+      "bodyMarkdown": "Comparison operators such as `=`, `>`, `<`, `>=`, `<=`, and `<>` (not equal) are used in the WHERE clause to filter data based on specific conditions. For instance, to find products with a stock greater than 10, you can write:\n\n```sql\nSELECT * FROM products WHERE stock > 10;\n```\n\nLine by line:\n- `SELECT * FROM products`: Selects all columns from the products table.\n- `WHERE stock > 10`: Filters the results to only include products with more than 10 in stock.\n\nYour turn: Change the query to find products priced below 15."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Understanding WHERE Clause",
+      "prompt": "Which SQL clause is used to filter records in a query?",
+      "options": [
+        "SELECT",
+        "WHERE",
+        "ORDER BY",
+        "GROUP BY"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Comparison Operators",
+      "prompt": "Which of the following is a valid SQL comparison operator?",
+      "options": [
+        "==",
+        "===",
+        "<>"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "It's used to check inequality in SQL.",
+      "help": {
+        "concept": "SQL uses specific operators for comparison, including inequality.",
+        "hint_1": "Look for the operator that checks if values are not equal.",
+        "hint_2": "It's not the same as JavaScript or other programming languages."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Filtering with WHERE",
+      "prompt": "Which of the following queries will return products in the 'Stationery' category?",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Stationery';",
+        "SELECT * FROM products WHERE category = 'Art';",
+        "SELECT * FROM products WHERE category = 'Home';",
+        "SELECT * FROM products WHERE category = 'Stationery' OR category = 'Art';"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Look for queries that include 'Stationery' in the condition.",
+      "help": {
+        "concept": "The WHERE clause filters results based on the specified condition.",
+        "hint_1": "Focus on the condition that includes 'Stationery'.",
+        "hint_2": "Consider queries that might include multiple categories."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Using AND and OR",
+      "prompt": "Which queries will return products that are either in the 'Art' category or have a price greater than 20?",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Art' OR price > 20;",
+        "SELECT * FROM products WHERE category = 'Art' AND price > 20;",
+        "SELECT * FROM products WHERE category = 'Home' OR price > 20;",
+        "SELECT * FROM products WHERE category = 'Art' OR category = 'Stationery';"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider the use of OR to include multiple conditions.",
+      "help": {
+        "concept": "The OR operator allows for multiple conditions to be true.",
+        "hint_1": "Look for queries that use OR to broaden the condition.",
+        "hint_2": "AND requires both conditions to be true, while OR requires at least one."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Ordering SQL Query",
+      "prompt": "Arrange the SQL query to find products with a price less than 20.",
+      "tokens": [
+        "SELECT *",
+        "FROM products",
+        "WHERE price < 20;"
+      ],
+      "correctOrder": [
+        "SELECT *",
+        "FROM products",
+        "WHERE price < 20;"
+      ],
+      "hint": "Start with the SELECT statement.",
+      "help": {
+        "concept": "SQL queries follow a specific order: SELECT, FROM, WHERE.",
+        "hint_1": "The SELECT statement comes first.",
+        "hint_2": "The WHERE clause is used to filter the results."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Reorder the parts to form a valid SQL query that selects all products in the 'Home' category.",
+      "tokens": [
+        "SELECT *",
+        "FROM products",
+        "WHERE category = 'Home';"
+      ],
+      "correctOrder": [
+        "SELECT *",
+        "FROM products",
+        "WHERE category = 'Home';"
+      ],
+      "hint": "The SELECT statement should be first.",
+      "help": {
+        "concept": "The basic structure of an SQL query is SELECT, FROM, WHERE.",
+        "hint_1": "Begin with the SELECT clause.",
+        "hint_2": "The WHERE clause specifies the condition."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Using LIKE Operator",
+      "prompt": "Complete the query to find products with names starting with 'A'.\n\n```sql\nSELECT * FROM products WHERE name LIKE '[blank1]';\n```",
+      "template": "SELECT * FROM products WHERE name LIKE '[blank1]';",
+      "choices": [
+        "'A%'",
+        "'%A'",
+        "'A_'",
+        "'%A%'"
+      ],
+      "correctValue": "'A%'",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Filtering with BETWEEN",
+      "prompt": "Complete the query to find products priced between 10 and 30.\n\n```sql\nSELECT * FROM products WHERE price BETWEEN [blank1];\n```",
+      "template": "SELECT * FROM products WHERE price BETWEEN [blank1];",
+      "choices": [
+        "10 AND 30",
+        "10 OR 30",
+        "10, 30",
+        "10 TO 30"
+      ],
+      "correctValue": "10 AND 30",
+      "hint": "Use the correct syntax for the BETWEEN operator.",
+      "help": {
+        "concept": "The BETWEEN operator is used to filter the result set within a certain range.",
+        "hint_1": "BETWEEN requires two values separated by AND.",
+        "hint_2": "The correct syntax is 'BETWEEN the missing term'."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Filter Products by Category",
+      "prompt": "Write a query to select all products in the 'Art' category.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Art';",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Filter Products by Price",
+      "prompt": "Write a query to find all products with a price greater than 50.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products WHERE price > 50;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Filter Products by Stock",
+      "prompt": "Write a query to select products with stock less than 10.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products WHERE stock < 10;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Filtering Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

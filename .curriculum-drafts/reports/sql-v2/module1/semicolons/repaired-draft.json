@@ -1,0 +1,245 @@
+{
+  "title": "semicolons",
+  "summary": "Learn the importance of semicolons in SQL queries and how to use them effectively.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Semicolons in SQL",
+      "bodyMarkdown": "In SQL, a semicolon (`;`) is used to terminate a statement. This is particularly important when executing multiple statements in a single query. For example:\n\n```sql\nSELECT name, price FROM products WHERE category = 'Art';\nSELECT name, stock FROM products WHERE stock < 20;\n```\n\nEach statement ends with a semicolon, allowing the SQL engine to understand where one statement ends and another begins. Try it yourself by writing a query with multiple statements in the SQL editor."
+    },
+    {
+      "id": "sketch2",
+      "title": "Why Use Semicolons?",
+      "bodyMarkdown": "Semicolons are crucial in SQL for separating multiple statements. Without semicolons, the SQL engine might not execute the queries correctly, especially in environments that support batch processing. Consider this example:\n\n```sql\nSELECT * FROM products WHERE price > 20;\nSELECT * FROM products WHERE category = 'Home';\n```\n\nEach query is distinct and needs to be separated by a semicolon. Your turn: Write two separate queries in the SQL editor and ensure they are correctly terminated with semicolons."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Purpose of Semicolons",
+      "prompt": "What is the primary purpose of a semicolon in SQL?",
+      "options": [
+        "To separate columns in a SELECT statement",
+        "To terminate a SQL statement",
+        "To comment out a line of code",
+        "To join two tables"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how SQL statements are separated.",
+      "help": {
+        "concept": "Semicolons are used to terminate SQL statements.",
+        "hint_1": "Consider how multiple SQL statements are executed.",
+        "hint_2": "Semicolons indicate the end of a statement."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Using Semicolons",
+      "prompt": "In which scenarios should you use a semicolon in SQL? Select all that apply.",
+      "options": [
+        "At the end of a single SQL statement",
+        "Between multiple SQL statements",
+        "To separate column names in a SELECT clause",
+        "To start a SQL comment"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Think about when statements need to be clearly separated.",
+      "help": {
+        "concept": "Semicolons are used to separate and terminate SQL statements.",
+        "hint_1": "Consider how SQL engines process multiple statements.",
+        "hint_2": "Semicolons are not used for comments or separating columns."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Statements",
+      "prompt": "Arrange the following SQL statements in the correct order to retrieve data from the products table.",
+      "tokens": [
+        "SELECT name, price FROM products WHERE category = 'Art';",
+        "SELECT * FROM products WHERE stock < 10;",
+        "SELECT category FROM products WHERE price > 50;"
+      ],
+      "correctOrder": [
+        "SELECT name, price FROM products WHERE category = 'Art';",
+        "SELECT * FROM products WHERE stock < 10;",
+        "SELECT category FROM products WHERE price > 50;"
+      ],
+      "hint": "Think about how each statement is structured and terminated.",
+      "help": {
+        "concept": "Each SQL statement should be complete and correctly terminated.",
+        "hint_1": "Ensure each statement ends with a semicolon.",
+        "hint_2": "Statements should be ordered logically based on their content."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Completing SQL Statements",
+      "prompt": "Complete the SQL statement: `SELECT * FROM products WHERE price > 20 [blank1]`",
+      "template": "SELECT * FROM products WHERE price > 20 [blank1]",
+      "choices": [
+        ";",
+        ",",
+        "--",
+        "AND"
+      ],
+      "correctValue": ";",
+      "hint": "Think about how to properly terminate a SQL statement.",
+      "help": {
+        "concept": "A semicolon is used to terminate SQL statements.",
+        "hint_1": "Consider what symbol ends a SQL statement.",
+        "hint_2": "It's not a comma or a comment symbol."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Write a Basic SQL Query",
+      "prompt": "Write a SQL query to select all columns from the products table where the category is 'Stationery'.",
+      "starterCode": "SELECT * FROM products WHERE category = 'Stationery'",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Stationery';",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "code_input",
+      "title": "Query with Multiple Conditions",
+      "prompt": "Write a SQL query to select the name and price of products where the stock is less than 20 and the category is 'Art'.",
+      "starterCode": "SELECT name, price FROM products WHERE stock < 20 AND category = 'Art'",
+      "solutionCode": "SELECT name, price FROM products WHERE stock < 20 AND category = 'Art';",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use AND to combine conditions and end with a semicolon.",
+      "help": {
+        "concept": "Combine conditions with AND and terminate with a semicolon.",
+        "hint_1": "Ensure both conditions are included.",
+        "hint_2": "Don't forget the semicolon at the end."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Select Specific Columns",
+      "prompt": "Write a SQL query to select the name and category of products where the price is greater than 30.",
+      "starterCode": "SELECT name, category FROM products WHERE price > 30",
+      "solutionCode": "SELECT name, category FROM products WHERE price > 30;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "single_choice",
+      "title": "SQL Statement Termination",
+      "prompt": "What happens if you forget to add a semicolon at the end of a SQL statement?",
+      "options": [
+        "The SQL engine will automatically add it.",
+        "The statement will not execute correctly.",
+        "The statement will execute twice.",
+        "The statement will be ignored."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider what happens when the SQL engine cannot determine the end of a statement.",
+      "help": {
+        "concept": "A missing semicolon can cause execution errors.",
+        "hint_1": "Think about how the SQL engine processes statements.",
+        "hint_2": "Without a semicolon, the statement might not run."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "multi_choice",
+      "title": "SQL Syntax Basics",
+      "prompt": "Which of the following are valid SQL statements? Select all that apply.",
+      "options": [
+        "SELECT * FROM products;",
+        "SELECT name, price FROM products WHERE price > 20",
+        "SELECT * FROM products WHERE category = 'Home';",
+        "SELECT id, name FROM products"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Check if the statements are properly terminated.",
+      "help": {
+        "concept": "Valid SQL statements must be correctly terminated.",
+        "hint_1": "Look for statements ending with a semicolon.",
+        "hint_2": "Statements without a semicolon might not be valid."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "drag_reorder",
+      "title": "SQL Query Execution Order",
+      "prompt": "Arrange the following SQL clauses in the correct order of execution.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "fill_blank_choice",
+      "title": "SQL Query Completion",
+      "prompt": "Complete the SQL query: `SELECT name FROM products WHERE stock > 10 [blank1]`",
+      "template": "SELECT name FROM products WHERE stock > 10 [blank1]",
+      "choices": [
+        ";",
+        ",",
+        "AND",
+        "OR"
+      ],
+      "correctValue": "OR",
+      "hint": "Focus on the missing concept rather than the exact missing term.",
+      "help": {
+        "concept": "The blank should be completed with the term that fits the job being described.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the term that best completes the meaning of the statement."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice Project",
+    "stepIds": [
+      "quiz5",
+      "quiz6",
+      "quiz7"
+    ]
+  }
+}

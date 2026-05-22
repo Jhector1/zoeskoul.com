@@ -1,0 +1,227 @@
+{
+  "title": "Why Filtering Matters",
+  "summary": "Learn the importance of filtering data using the WHERE clause in SQL.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch_1",
+      "title": "Understanding the WHERE Clause",
+      "bodyMarkdown": "The WHERE clause in SQL is used to filter records that meet a certain condition. This allows you to focus on the data that is relevant to your query. For example, if you want to find all products in the 'Art' category, you can use:\n\n```sql\nSELECT * FROM products WHERE category = 'Art';\n```\n\nThis query will return only the rows where the category is 'Art'.\n\n**Try it yourself:** Modify the query to find products with a price greater than 20."
+    },
+    {
+      "id": "sketch_2",
+      "title": "Filtering with Multiple Conditions",
+      "bodyMarkdown": "You can use multiple conditions in a WHERE clause by combining them with AND, OR, and NOT. For instance, to find products in the 'Stationery' category with a stock greater than 10, you can write:\n\n```sql\nSELECT * FROM products WHERE category = 'Stationery' AND stock > 10;\n```\n\nThis query filters the products table to show only stationery items with more than 10 in stock.\n\n**Your turn:** Try adding an OR condition to include 'Art' products as well."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Purpose of the WHERE Clause",
+      "prompt": "What is the primary purpose of the WHERE clause in SQL?",
+      "options": [
+        "To sort the results",
+        "To filter records based on a condition",
+        "To join tables",
+        "To aggregate data"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how you can limit the data returned by a query.",
+      "help": {
+        "concept": "The WHERE clause is used to filter records in a SQL query.",
+        "hint_1": "The WHERE clause helps in selecting only those rows that meet a specific condition.",
+        "hint_2": "The WHERE clause does not sort or aggregate data; it filters it."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Using Comparison Operators",
+      "prompt": "Which of the following is a valid use of a comparison operator in a WHERE clause?",
+      "options": [
+        "WHERE price = 20",
+        "WHERE price > 20",
+        "WHERE price < 20",
+        "All of the above"
+      ],
+      "correctOptionIds": [
+        "d"
+      ],
+      "hint": "Consider all the ways you can compare values in SQL.",
+      "help": {
+        "concept": "Comparison operators are used in WHERE clauses to filter data.",
+        "hint_1": "Comparison operators include '=', '>', and '<'.",
+        "hint_2": "All listed options are valid uses of comparison operators."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Combining Conditions",
+      "prompt": "Which of the following can be used to combine multiple conditions in a WHERE clause? Select all that apply.",
+      "options": [
+        "AND",
+        "OR",
+        "NOT",
+        "JOIN"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about logical operators used in SQL.",
+      "help": {
+        "concept": "AND, OR, and NOT are logical operators used to combine conditions.",
+        "hint_1": "JOIN is not used for combining conditions in a WHERE clause.",
+        "hint_2": "AND, OR, and NOT are the correct operators for combining conditions."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Filtering with WHERE",
+      "prompt": "Which of the following queries correctly use the WHERE clause? Select all that apply.",
+      "options": [
+        "SELECT * FROM products WHERE price > 50;",
+        "SELECT * FROM products WHERE category = 'Home';",
+        "SELECT * FROM products WHERE stock < 5;",
+        "SELECT * FROM products WHERE name LIKE '%Pen%';"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "hint": "Consider how the WHERE clause is used to filter data.",
+      "help": {
+        "concept": "The WHERE clause is used to filter data based on conditions.",
+        "hint_1": "All options use the WHERE clause to filter data.",
+        "hint_2": "Each query uses a valid condition in the WHERE clause."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Query Components",
+      "prompt": "Arrange the components of a SQL query in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "hint": "Think about the basic structure of a SQL query.",
+      "help": {
+        "concept": "SQL queries follow a specific order: SELECT, FROM, WHERE.",
+        "hint_1": "The SELECT clause comes first, followed by FROM.",
+        "hint_2": "The WHERE clause is used after FROM to filter results."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "Logical Operator Precedence",
+      "prompt": "Arrange the logical operators by their precedence in SQL.",
+      "tokens": [
+        "AND",
+        "OR",
+        "NOT"
+      ],
+      "correctOrder": [
+        "NOT",
+        "AND",
+        "OR"
+      ],
+      "hint": "Consider which operators are evaluated first.",
+      "help": {
+        "concept": "Logical operators have a specific order of precedence.",
+        "hint_1": "NOT is evaluated before AND and OR.",
+        "hint_2": "AND is evaluated before OR."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Using WHERE with LIKE",
+      "prompt": "Complete the SQL query to find products with names containing 'Pen'.",
+      "template": "SELECT * FROM products WHERE name LIKE [blank1];",
+      "choices": [
+        "'%Pen%'",
+        "'Pen%'",
+        "'%Pen'",
+        "'Pen'"
+      ],
+      "correctValue": "'%Pen%'",
+      "hint": "Use wildcards to match any characters before and after 'Pen'.",
+      "help": {
+        "concept": "The LIKE operator is used with wildcards to match patterns.",
+        "hint_1": "Use '%' as a wildcard for any sequence of characters.",
+        "hint_2": "The correct pattern includes '%' before and after 'Pen'."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Filtering by Category",
+      "prompt": "Complete the SQL query to select all 'Art' category products.",
+      "template": "SELECT * FROM products WHERE category = [blank1];",
+      "choices": [
+        "'Art'",
+        "'Stationery'",
+        "'Home'",
+        "'Office'"
+      ],
+      "correctValue": "'Art'",
+      "hint": "Choose the correct category name.",
+      "help": {
+        "concept": "The WHERE clause filters rows based on the specified condition.",
+        "hint_1": "The category should match the exact string 'Art'.",
+        "hint_2": "Ensure the category name is enclosed in quotes."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Filter Products by Price",
+      "prompt": "Write a SQL query to select all products with a price greater than 20.",
+      "starterCode": "SELECT * FROM products WHERE price > 20;",
+      "solutionCode": "SELECT * FROM products WHERE price > 20;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Select Stationery Products",
+      "prompt": "Write a SQL query to select all products in the 'Stationery' category.",
+      "starterCode": "SELECT * FROM products WHERE category = 'Stationery';",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Stationery';",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Find Low Stock Items",
+      "prompt": "Write a SQL query to find products with stock less than 10.",
+      "starterCode": "SELECT * FROM products WHERE stock < 10;",
+      "solutionCode": "SELECT * FROM products WHERE stock < 10;",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Filtering Project",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

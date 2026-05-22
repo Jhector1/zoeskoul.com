@@ -1,0 +1,223 @@
+{
+  "title": "reading query results",
+  "summary": "Learn how to read and interpret query results in SQL.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Query Results",
+      "bodyMarkdown": "When you run a SQL query, the results are displayed in a table format. Each row in the result set corresponds to a row in the database table that matches the query criteria. For example, if you run the query `SELECT name, grade FROM students;`, you will see a table with two columns: `name` and `grade`, displaying the names and grades of all students. \n\nTry it yourself: Write a query to select the `name` and `city` of all students."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Basic SQL Query",
+      "prompt": "What does the SQL query `SELECT name FROM students;` do?",
+      "options": [
+        "It selects all columns from the students table.",
+        "It selects the name column from the students table.",
+        "It deletes the name column from the students table.",
+        "It updates the name column in the students table."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Focus on the SELECT statement.",
+      "help": {
+        "concept": "The SELECT statement is used to select data from a database.",
+        "hint_1": "The query specifies the name column.",
+        "hint_2": "The query retrieves data, it does not modify it."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Understanding SELECT",
+      "prompt": "Which SQL keyword is used to retrieve data from a database?",
+      "options": [
+        "INSERT",
+        "UPDATE",
+        "SELECT",
+        "DELETE"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Consider the keyword that retrieves data.",
+      "help": {
+        "concept": "The SELECT keyword is used to retrieve data from a database.",
+        "hint_1": "SELECT is used to fetch data.",
+        "hint_2": "SELECT is not used for modifying data."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "SQL Query Results",
+      "prompt": "Which of the following are true about SQL query results? (Select all that apply)",
+      "options": [
+        "Results are displayed in a table format.",
+        "Each row in the result set corresponds to a row in the database.",
+        "Results can only display one column at a time.",
+        "SQL results are always sorted by default."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Think about how SQL results are structured.",
+      "help": {
+        "concept": "SQL query results are displayed in a table format with rows and columns.",
+        "hint_1": "Consider how data is organized in the results.",
+        "hint_2": "SQL results are not necessarily sorted unless specified."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Interpreting SQL Results",
+      "prompt": "When interpreting SQL query results, which statements are correct? (Select all that apply)",
+      "options": [
+        "The number of columns in the result set is determined by the SELECT statement.",
+        "The result set can include rows that do not exist in the database.",
+        "The result set only includes rows that match the query criteria.",
+        "The result set always includes all rows from the table."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider how the SELECT statement affects the result set.",
+      "help": {
+        "concept": "The SELECT statement determines which columns are included, and only matching rows are returned.",
+        "hint_1": "The SELECT statement specifies columns.",
+        "hint_2": "Only rows that match the criteria are included."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Query Execution",
+      "prompt": "Arrange the steps of SQL query execution in the correct order.",
+      "tokens": [
+        "Execute the query",
+        "Parse the query",
+        "Return the results",
+        "Optimize the query"
+      ],
+      "correctOrder": [
+        "Parse the query",
+        "Optimize the query",
+        "Execute the query",
+        "Return the results"
+      ],
+      "hint": "Think about the logical flow of executing a query.",
+      "help": {
+        "concept": "SQL queries are parsed, optimized, executed, and then results are returned.",
+        "hint_1": "Parsing comes before execution.",
+        "hint_2": "Optimization occurs before execution."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Query Result Interpretation",
+      "prompt": "Arrange the steps to interpret SQL query results.",
+      "tokens": [
+        "Identify the columns",
+        "Check the number of rows",
+        "Understand the data types",
+        "Analyze the data"
+      ],
+      "correctOrder": [
+        "Identify the columns",
+        "Understand the data types",
+        "Check the number of rows",
+        "Analyze the data"
+      ],
+      "hint": "Start with identifying columns and understanding data types.",
+      "help": {
+        "concept": "Interpreting results involves identifying columns, understanding data types, checking rows, and analyzing data.",
+        "hint_1": "Begin with columns and data types.",
+        "hint_2": "Finish with analysis."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Query Structure",
+      "prompt": "Complete the SQL query to select all columns from the students table.",
+      "template": "SELECT [blank1] FROM students;",
+      "choices": [
+        "*",
+        "name",
+        "grade",
+        "age"
+      ],
+      "correctValue": "*",
+      "hint": "Use the wildcard character to select all columns.",
+      "help": {
+        "concept": "The wildcard character (*) selects all columns in a table.",
+        "hint_1": "The wildcard character is used to select all columns.",
+        "hint_2": "The wildcard character is *."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "SQL Column Selection",
+      "prompt": "Complete the SQL query to select the name column from the students table.",
+      "template": "SELECT [blank1] FROM students;",
+      "choices": [
+        "*",
+        "name",
+        "grade",
+        "age"
+      ],
+      "correctValue": "name",
+      "hint": "Specify the column you want to select.",
+      "help": {
+        "concept": "To select a specific column, use its name in the SELECT statement.",
+        "hint_1": "Use the column name directly.",
+        "hint_2": "The column name is 'name'."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Select All Students",
+      "prompt": "Write a SQL query to select all columns from the students table.",
+      "starterCode": "SELECT * FROM students;",
+      "solutionCode": "SELECT * FROM students;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Select Specific Columns",
+      "prompt": "Write a SQL query to select the name and grade columns from the students table.",
+      "starterCode": "SELECT name, grade FROM students;",
+      "solutionCode": "SELECT name, grade FROM students;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Select Students by City",
+      "prompt": "Write a SQL query to select the name and city columns from the students table.",
+      "starterCode": "SELECT name, city FROM students;",
+      "solutionCode": "SELECT name, city FROM students;",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

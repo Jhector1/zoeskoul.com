@@ -4,6 +4,7 @@ import type {
   ManifestRuntimeDefaults,
   ManifestSketch,
 } from "./manifest.js";
+import type { CourseVersionStatus } from "./blueprint.js";
 import type { ManifestIdeServiceConfig } from "./ide-services.js";
 
 export type SubjectManifest = {
@@ -28,7 +29,7 @@ export type SubjectManifest = {
       versioning?: {
         family: string;
         version: number;
-        status: "draft" | "active" | "legacy" | "disabled";
+        status: CourseVersionStatus;
         defaultForNewEnrollments?: boolean;
         supersedes?: string | null;
         supersededBy?: string | null;

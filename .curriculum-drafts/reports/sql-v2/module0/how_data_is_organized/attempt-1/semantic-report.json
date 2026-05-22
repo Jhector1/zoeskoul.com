@@ -1,0 +1,13 @@
+{
+  "topicId": "how_data_is_organized",
+  "ok": false,
+  "issues": [
+    {
+      "code": "SQL_FUTURE_CONCEPT",
+      "category": "pedagogy",
+      "severity": "error",
+      "exerciseId": "code_input_3",
+      "message": "Exercise \"code_input_3\" uses future SQL concept(s) not allowed in module 0: WHERE, comparison_operators."
+    }
+  ]
+}

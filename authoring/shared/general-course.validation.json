@@ -1,0 +1,30 @@
+{
+  "validationSuite": "generalCourseValidation",
+  "appliesTo": "all_courses",
+  "rules": {
+    "identity": [
+      "catalogSlug, subjectSlug, courseSlug, profileId, title, sourceLocale, and modules are required",
+      "courseSlug must be unique inside a subject",
+      "courseSlug must be referenced by the subject plan when publishable"
+    ],
+    "ordering": [
+      "Never infer order from folder names or filesystem listing",
+      "Catalogs must use explicit courseOrder",
+      "Subjects must use explicit courseOrder",
+      "Courses must use explicit module order",
+      "Modules/sections must use explicit topic order"
+    ],
+    "contentResolution": [
+      "Every referenced topic, card, sketch, quiz, project, and exercise must resolve",
+      "Every learner-facing i18n key must resolve",
+      "Every image placeholder must be mapped when placeholders are used",
+      "No raw unresolved translation keys should render to learners"
+    ],
+    "assessment": [
+      "Every choice exercise must have explicit answer metadata",
+      "Every reorder exercise must have explicit order metadata",
+      "Every code input must have runtime and checker metadata",
+      "Every code input must be covered by golden validation before release"
+    ]
+  }
+}

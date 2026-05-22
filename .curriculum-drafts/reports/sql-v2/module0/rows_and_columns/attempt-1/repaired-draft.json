@@ -1,0 +1,247 @@
+{
+  "title": "rows and columns",
+  "summary": "rows and columns in Getting Started with SQL and Databases",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Tables",
+      "bodyMarkdown": "In SQL, data is organized into tables, which consist of rows and columns. Each row represents a unique record, and each column represents a specific attribute of the data. For example, in a `students` table, columns might include `id`, `name`, `grade`, `age`, and `city`. Here's an example of a simple SQL query to retrieve all data from the `students` table:\n\n```sql\nSELECT * FROM students;\n```\n\nThis query selects all columns from the `students` table. Try it yourself by writing a query in the SQL editor and clicking 'Run query'."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Identify the Table Structure",
+      "prompt": "Which of the following best describes the structure of a SQL table?",
+      "options": [
+        "A collection of rows and columns.",
+        "A single row of data.",
+        "A single column of data.",
+        "A single cell of data."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how data is organized in a spreadsheet.",
+      "help": {
+        "concept": "A SQL table is structured with rows and columns, similar to a spreadsheet.",
+        "hint_1": "Consider how multiple records and attributes are stored.",
+        "hint_2": "A table contains multiple rows and columns, not just one."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Purpose of SELECT *",
+      "prompt": "What does the SQL command `SELECT * FROM students;` do?",
+      "options": [
+        "Selects all columns from the `students` table.",
+        "Selects a specific column from the `students` table.",
+        "Deletes all data from the `students` table.",
+        "Updates all data in the `students` table."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "The asterisk (*) is a wildcard character in SQL.",
+      "help": {
+        "concept": "The `SELECT *` command is used to retrieve all columns from a table.",
+        "hint_1": "The asterisk (*) represents all columns.",
+        "hint_2": "This command does not modify or delete data."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Components of a SQL Table",
+      "prompt": "Which of the following are components of a SQL table? Select all that apply.",
+      "options": [
+        "Rows",
+        "Columns",
+        "Cells",
+        "Headers"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "SQL Query Functions",
+      "prompt": "Which of the following functions can a SQL query perform? Select all that apply.",
+      "options": [
+        "Retrieve data",
+        "Update data",
+        "Delete data",
+        "Create a new table"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Query Clauses",
+      "prompt": "Arrange the SQL query clauses in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Table Elements",
+      "prompt": "Arrange the elements of a SQL table from smallest to largest.",
+      "tokens": [
+        "Cell",
+        "Column",
+        "Row",
+        "Table"
+      ],
+      "correctOrder": [
+        "Cell",
+        "Column",
+        "Row",
+        "Table"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Wildcard Character",
+      "prompt": "In SQL, the wildcard character used to select all columns is [blank1].",
+      "template": "In SQL, the wildcard character used to select all columns is [blank1].",
+      "choices": [
+        "*",
+        "%",
+        "?",
+        "#"
+      ],
+      "correctValue": "*",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Basic SQL Command",
+      "prompt": "The SQL command to retrieve data from a table is [blank1].",
+      "template": "The SQL command to retrieve data from a table is [blank1].",
+      "choices": [
+        "SELECT",
+        "INSERT",
+        "UPDATE",
+        "DELETE"
+      ],
+      "correctValue": "SELECT",
+      "hint": "This command is used to fetch data.",
+      "help": {
+        "concept": "The `the missing term` command is used to retrieve data from a table.",
+        "hint_1": "It's the most basic command for data retrieval.",
+        "hint_2": "Think about the command that starts a query."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Retrieve All Students",
+      "prompt": "Write a SQL query to select all columns from the `students` table.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT * FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Select Specific Columns",
+      "prompt": "Write a SQL query to select only the `name` and `grade` columns from the `students` table.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT name, grade FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Count Rows in Table",
+      "prompt": "Write a SQL query to count the number of rows in the `students` table.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT COUNT(*) FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Table Exploration",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

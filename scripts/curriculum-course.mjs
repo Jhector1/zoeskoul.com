@@ -2,31 +2,115 @@ import { existsSync, readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 
-const args = process.argv.slice(2).filter((arg) => arg !== "--");
+const rawArgs = process.argv.slice(2).filter((arg) => arg !== "--");
 
-const [action, courseSlug, ...flags] = args;
-const force = flags.includes("--force");
-const resume = flags.includes("--resume");
-if (!action || !courseSlug) {
+const action = rawArgs[0];
+const subjectSlug = rawArgs[1];
+
+function parseArgs(args) {
+  const positional = [];
+  const flags = new Map();
+
+  for (let i = 0; i < args.length; i += 1) {
+    const arg = args[i];
+
+    if (!arg.startsWith("--")) {
+      positional.push(arg);
+      continue;
+    }
+
+    const next = args[i + 1];
+    const flagNeedsValue = arg === "--live-subject";
+
+    if (flagNeedsValue) {
+      if (!next || next.startsWith("--")) {
+        console.error(`${arg} requires a value.`);
+        process.exit(1);
+      }
+
+      flags.set(arg, next);
+      i += 1;
+      continue;
+    }
+
+    flags.set(arg, true);
+  }
+
+  return { positional, flags };
+}
+
+const { positional, flags } = parseArgs(rawArgs.slice(2));
+
+const courseSlug = positional[0];
+
+const force = flags.has("--force");
+const resume = flags.has("--resume");
+const forceLiveOverwrite = flags.has("--force-live-overwrite");
+const liveSubjectSlugFlag = flags.get("--live-subject");
+
+const allowedFlags = new Set([
+  "--force",
+  "--resume",
+  "--force-live-overwrite",
+  "--live-subject",
+]);
+
+for (const flag of flags.keys()) {
+  if (!allowedFlags.has(flag)) {
+    console.error(`Unknown flag: ${flag}`);
+    process.exit(1);
+  }
+}
+
+if (!action || !subjectSlug) {
+  printUsage();
+  process.exit(1);
+}
+
+if (positional.length > 1) {
+  console.error(`Unexpected extra positional argument(s): ${positional.slice(1).join(" ")}`);
+  printUsage();
+  process.exit(1);
+}
+
+const root = process.cwd();
+
+const subjectRoot = path.join(root, "authoring", "subjects", subjectSlug);
+const subjectPlanPath = path.join(subjectRoot, "subject.plan.json");
+const subjectBlueprintPath = path.join(subjectRoot, "subject.blueprint.json");
+const subjectValidationPath = path.join(subjectRoot, "subject.validation.json");
+
+function printUsage() {
   console.error(`
 Usage:
-  pnpm curr:course -- <action> <courseSlug> [flags]
+  pnpm curr:course -- <action> <subjectSlug> [courseSlug] [flags]
 
-Examples:
-  pnpm curr:course -- compile python
-  pnpm curr:course -- compile python --resume
-  pnpm curr:course -- validate python
-  pnpm curr:course -- publish python
-  pnpm curr:course -- check python --resume
-  pnpm curr:course -- publish python-v2
-pnpm curr:course -- publish python-v2 --force
+Common examples:
+  pnpm curr:course -- compile sql
+  pnpm curr:course -- compile sql --resume
+  pnpm curr:course -- validate sql
+  pnpm curr:course -- validate-spec sql
+  pnpm curr:course -- publish sql --force
+  pnpm curr:course -- publish-auto sql --force
+  pnpm curr:course -- check sql --resume
+
+Course-specific examples:
+  pnpm curr:course -- validate-course sql sql-foundations
+  pnpm curr:course -- compile-course sql sql-foundations
+  pnpm curr:course -- compile-course sql multi-table-sql --live-subject sql-preview
+  pnpm curr:course -- compile-course sql multi-table-sql --live-subject sql --force-live-overwrite
 
 Flags:
- --resume    Skip topics that already have completed draft artifacts
-  --force     Allow publish/publish-auto to overwrite an existing subject release
+  --resume                 Skip topics that already have completed draft artifacts
+  --force                  Allow publish/publish-auto to overwrite an existing subject release
+  --live-subject <slug>    Compile a course into an explicit live/preview subject slug
+  --force-live-overwrite   Allow compile-course to overwrite the configured live publish target with a non-target course
+
 Actions:
   compile
+  compile-course
   validate
+  validate-course
   validate-spec
   publish
   publish-auto
@@ -34,19 +118,107 @@ Actions:
   critique-draft
   check
 `);
-  process.exit(1);
 }
 
-const root = process.cwd();
-const courseDir = path.join(root, "authoring", courseSlug);
-const blueprintPath = path.join(courseDir, "course.blueprint.json");
-function readBlueprint() {
-  return JSON.parse(readFileSync(blueprintPath, "utf8"));
+function readJson(filePath) {
+  try {
+    return JSON.parse(readFileSync(filePath, "utf8"));
+  } catch (error) {
+    console.error(`Failed to read JSON: ${filePath}`);
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exit(1);
+  }
+}
+
+function assertFileExists(filePath, label) {
+  if (!existsSync(filePath)) {
+    console.error(`${label} not found: ${filePath}`);
+    process.exit(1);
+  }
+}
+
+function readSubjectPlan() {
+  assertFileExists(subjectPlanPath, "Subject plan");
+  return readJson(subjectPlanPath);
+}
+
+function resolvePublishTargetCourseSlug() {
+  const plan = readSubjectPlan();
+  const targetCourseSlug = plan?.publishTarget?.courseSlug;
+
+  if (!targetCourseSlug || typeof targetCourseSlug !== "string") {
+    console.error(`Missing publishTarget.courseSlug in ${subjectPlanPath}`);
+    process.exit(1);
+  }
+
+  return targetCourseSlug;
+}
+
+function resolveConfiguredLiveSubjectSlug() {
+  const plan = readSubjectPlan();
+  const liveSubjectSlug = plan?.publishTarget?.liveSubjectSlug;
+
+  if (!liveSubjectSlug || typeof liveSubjectSlug !== "string") {
+    console.error(`Missing publishTarget.liveSubjectSlug in ${subjectPlanPath}`);
+    process.exit(1);
+  }
+
+  return liveSubjectSlug;
+}
+
+function resolveCourseSlug({ required }) {
+  if (courseSlug) return courseSlug;
+
+  if (required) {
+    console.error(`Action "${action}" requires a courseSlug.`);
+    printUsage();
+    process.exit(1);
+  }
+
+  return resolvePublishTargetCourseSlug();
+}
+
+function getCourseRoot(resolvedCourseSlug) {
+  return path.join(subjectRoot, "courses", resolvedCourseSlug);
+}
+
+function getCourseSpecPath(resolvedCourseSlug) {
+  return path.join(getCourseRoot(resolvedCourseSlug), "course.spec.json");
+}
+
+function getCourseBlueprintPath(resolvedCourseSlug) {
+  return path.join(getCourseRoot(resolvedCourseSlug), "course.blueprint.json");
+}
+
+function assertSubjectExists() {
+  if (!existsSync(subjectRoot)) {
+    console.error(`Subject folder not found: authoring/subjects/${subjectSlug}`);
+    process.exit(1);
+  }
+
+  assertFileExists(subjectPlanPath, "Subject plan");
+  assertFileExists(subjectBlueprintPath, "Subject blueprint");
+  assertFileExists(subjectValidationPath, "Subject validation");
+}
+
+function assertCourseExists(resolvedCourseSlug) {
+  const courseRoot = getCourseRoot(resolvedCourseSlug);
+  const courseSpecPath = getCourseSpecPath(resolvedCourseSlug);
+
+  if (!existsSync(courseRoot)) {
+    console.error(`Course folder not found: ${courseRoot}`);
+    process.exit(1);
+  }
+
+  assertFileExists(courseSpecPath, "Course spec");
+}
+
+function assertCourseBlueprintExists(resolvedCourseSlug) {
+  assertFileExists(getCourseBlueprintPath(resolvedCourseSlug), "Course blueprint");
 }
 
 function assertPublishSafe() {
-  const blueprint = readBlueprint();
-  const subjectSlug = blueprint.subjectSlug;
+  const configuredLiveSubjectSlug = resolveConfiguredLiveSubjectSlug();
 
   const liveManifestPath = path.join(
       root,
@@ -55,25 +227,26 @@ function assertPublishSafe() {
       "src",
       "lib",
       "subjects",
-      subjectSlug,
+      configuredLiveSubjectSlug,
       "subject.manifest.json"
   );
 
   if (!force && existsSync(liveManifestPath)) {
     console.error(`
-Refusing to publish because this subject release already exists:
+Refusing to publish because this live subject release already exists:
 
   ${liveManifestPath}
 
-This could overwrite an existing course release.
+This could overwrite an existing generated subject release.
 
 Use --force only if you intentionally want to replace this exact release:
 
-  pnpm curr:course -- ${action} ${courseSlug} --force
+  pnpm curr:course -- ${action} ${subjectSlug} --force
 `);
     process.exit(1);
   }
 }
+
 function run(command, args) {
   console.log(`\n> ${command} ${args.join(" ")}\n`);
 
@@ -92,68 +265,111 @@ function cli(args) {
   run("node", ["packages/curriculum-cli/dist/index.js", ...args]);
 }
 
-if (!existsSync(courseDir)) {
-  console.error(`Course folder not found: authoring/${courseSlug}`);
-  process.exit(1);
+function buildCompileCourseArgs(resolvedCourseSlug) {
+  return [
+    "compile-course",
+    subjectSlug,
+    resolvedCourseSlug,
+    ...(liveSubjectSlugFlag ? ["--live-subject", liveSubjectSlugFlag] : []),
+    ...(resume ? ["--resume"] : []),
+    ...(forceLiveOverwrite ? ["--force-live-overwrite"] : []),
+  ];
 }
 
-if (
-  ["compile", "publish", "publish-auto", "critique", "critique-draft", "check"].includes(action) &&
-  !existsSync(blueprintPath)
-) {
-  console.error(`Blueprint not found: authoring/${courseSlug}/course.blueprint.json`);
-  process.exit(1);
-}
+assertSubjectExists();
 
 switch (action) {
-  case "compile":
+  case "compile": {
     cli([
       "compile-subject",
-      blueprintPath,
+      subjectSlug,
       ...(resume ? ["--resume"] : []),
     ]);
     break;
+  }
 
-  case "validate":
-    cli(["validate", courseSlug]);
+  case "compile-course": {
+    const resolvedCourseSlug = resolveCourseSlug({ required: true });
+    assertCourseExists(resolvedCourseSlug);
+    cli(buildCompileCourseArgs(resolvedCourseSlug));
     break;
+  }
 
-  case "validate-spec":
-    cli(["validate-spec", courseSlug]);
+  case "validate": {
+    cli(["validate-subject", subjectSlug]);
     break;
+  }
 
-  case "publish":
+  case "validate-course": {
+    const resolvedCourseSlug = resolveCourseSlug({ required: true });
+    assertCourseExists(resolvedCourseSlug);
+    cli(["validate-course", subjectSlug, resolvedCourseSlug]);
+    break;
+  }
+
+  case "validate-spec": {
+    cli(["validate-spec", subjectSlug]);
+    break;
+  }
+
+  case "publish": {
     assertPublishSafe();
-    cli(["publish", blueprintPath]);
+    cli(["publish-subject", subjectSlug]);
     break;
+  }
 
-  case "publish-auto":
+  case "publish-auto": {
     assertPublishSafe();
-    cli(["publish-auto", blueprintPath]);
+    cli(["publish-auto", subjectSlug]);
     break;
+  }
 
-  case "critique":
-    cli(["critique-subject", blueprintPath]);
+  case "critique": {
+    const resolvedCourseSlug = resolveCourseSlug({ required: false });
+    assertCourseExists(resolvedCourseSlug);
+    assertCourseBlueprintExists(resolvedCourseSlug);
+
+    cli(["critique-subject", getCourseBlueprintPath(resolvedCourseSlug)]);
     break;
+  }
 
-  case "critique-draft":
-    cli(["critique-subject-draft", blueprintPath]);
+  case "critique-draft": {
+    const resolvedCourseSlug = resolveCourseSlug({ required: false });
+    assertCourseExists(resolvedCourseSlug);
+    assertCourseBlueprintExists(resolvedCourseSlug);
+
+    cli(["critique-subject-draft", getCourseBlueprintPath(resolvedCourseSlug)]);
     break;
+  }
 
-  case "check":
+  case "check": {
+    const resolvedCourseSlug = resolveCourseSlug({ required: false });
+    assertCourseExists(resolvedCourseSlug);
+
     run("pnpm", ["curr:build"]);
-    cli(["validate-spec", courseSlug]);
+
+    cli(["validate-subject", subjectSlug]);
+    cli(["validate-course", subjectSlug, resolvedCourseSlug]);
+
     cli([
       "compile-subject",
-      blueprintPath,
+      subjectSlug,
       ...(resume ? ["--resume"] : []),
     ]);
-    cli(["validate", courseSlug]);
-    cli(["critique-subject-draft", blueprintPath]);
+
+    cli(["validate-subject", subjectSlug]);
+
+    const blueprintPath = getCourseBlueprintPath(resolvedCourseSlug);
+    if (existsSync(blueprintPath)) {
+      cli(["critique-subject-draft", blueprintPath]);
+    }
+
     run("pnpm", ["curr:test:golden"]);
     break;
+  }
 
   default:
     console.error(`Unknown action: ${action}`);
+    printUsage();
     process.exit(1);
 }

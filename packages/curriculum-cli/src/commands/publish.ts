@@ -1,13 +1,21 @@
 import {
     loadBlueprint,
     publishDraft,
+    resolveSubjectPublishTarget,
 } from "@zoeskoul/curriculum-compiler";
 
-export async function runPublish(blueprintPath: string) {
-    const blueprint = await loadBlueprint(blueprintPath);
+function looksLikeBlueprintPath(value: string) {
+    return value.endsWith(".json") || value.includes("/") || value.includes("\\");
+}
+
+export async function runPublish(input: string) {
+    const subjectSlug = looksLikeBlueprintPath(input)
+        ? (await loadBlueprint(input)).subjectSlug
+        : input;
+    const target = await resolveSubjectPublishTarget(subjectSlug);
 
     await publishDraft({
-        subjectSlug: blueprint.subjectSlug,
+        subjectSlug: target.liveSubjectSlug,
     });
 
     // await rebuildRegistries();

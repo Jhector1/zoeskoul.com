@@ -1,0 +1,216 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "query_full_tables": {
+          "label": "Query Full Tables",
+          "summary": "Learn to query full tables using SELECT and FROM in SQL.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to SELECT and FROM"
+            },
+            "sketch1": {
+              "title": "Understanding the Products Table"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "SQL Query Practice"
+            }
+          },
+          "projectSteps": {
+            "quiz9": {
+              "title": "Select All Products"
+            },
+            "quiz10": {
+              "title": "Select Specific Columns"
+            },
+            "quiz11": {
+              "title": "Select Products by Category"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Basic SELECT Query",
+              "prompt": "Which SQL statement is used to select all columns from a table?",
+              "hint": "The asterisk (*) is used to select all columns.",
+              "help": {
+                "concept": "The SELECT statement with an asterisk (*) selects all columns.",
+                "hint_1": "Remember the syntax for selecting all columns.",
+                "hint_2": "The correct statement uses SELECT and FROM with an asterisk."
+              },
+              "options": {
+                "a": "SELECT ALL FROM table_name;",
+                "b": "SELECT * FROM table_name;",
+                "c": "GET * FROM table_name;",
+                "d": "FETCH * FROM table_name;"
+              }
+            },
+            "quiz2": {
+              "title": "Components of a SELECT Query",
+              "prompt": "Which components are part of a basic SELECT query? Choose all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare each option to the exact topic named in the question.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "SELECT",
+                "b": "FROM",
+                "c": "WHERE",
+                "d": "JOIN"
+              }
+            },
+            "quiz3": {
+              "title": "Order of SQL Clauses",
+              "prompt": "Arrange the SQL clauses in the correct order for a basic query.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "FROM",
+                "t3": "WHERE"
+              }
+            },
+            "quiz4": {
+              "title": "Fill in the Blank: SELECT Syntax",
+              "prompt": "Complete the SQL statement to select all columns from the `products` table: `SELECT [blank1] FROM products;`",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "SELECT [blank1] FROM products;",
+              "choices": [
+                "*",
+                "ALL",
+                "COLUMNS",
+                "FIELDS"
+              ]
+            },
+            "quiz5": {
+              "title": "Fill in the Blank: FROM Clause",
+              "prompt": "Complete the SQL statement to select all columns from the `products` table: `SELECT * [blank1] products;`",
+              "hint": "This clause specifies the table to retrieve data the missing term.",
+              "help": {
+                "concept": "The the missing term clause specifies the source table in a query.",
+                "hint_1": "It's a common keyword used to indicate the source.",
+                "hint_2": "Think about the word that means 'origin' or 'source'."
+              },
+              "template": "SELECT * [blank1] products;",
+              "choices": [
+                "FROM",
+                "IN",
+                "ON",
+                "WITH"
+              ]
+            },
+            "quiz6": {
+              "title": "Purpose of the FROM Clause",
+              "prompt": "What is the purpose of the FROM clause in a SQL query?",
+              "hint": "The FROM clause identifies the data source.",
+              "help": {
+                "concept": "The FROM clause specifies the table from which to retrieve data.",
+                "hint_1": "Consider what the FROM clause is directly associated with.",
+                "hint_2": "It's about identifying where the data comes from."
+              },
+              "options": {
+                "a": "To specify the columns to retrieve",
+                "b": "To specify the table to retrieve data from",
+                "c": "To filter the results",
+                "d": "To sort the results"
+              }
+            },
+            "quiz7": {
+              "title": "SQL Query Results",
+              "prompt": "When you run `SELECT * FROM products;`, what will you see in the results table? Choose all that apply.",
+              "hint": "The asterisk (*) in the query selects all data.",
+              "help": {
+                "concept": "The query retrieves all data from the specified table.",
+                "hint_1": "Think about what the asterisk (*) represents.",
+                "hint_2": "The query doesn't filter or limit the data."
+              },
+              "options": {
+                "a": "All rows from the products table",
+                "b": "All columns from the products table",
+                "c": "Only the first row from the products table",
+                "d": "Only the 'name' and 'price' columns"
+              }
+            },
+            "quiz8": {
+              "title": "SQL Query Execution Order",
+              "prompt": "Arrange the steps in the order they occur when executing a SQL query.",
+              "hint": "Start by identifying the source, then retrieve, and finally execute.",
+              "help": {
+                "concept": "Understanding the logical flow of a SQL query execution.",
+                "hint_1": "Begin with identifying where the data comes from.",
+                "hint_2": "Retrieving data happens after specifying the source."
+              },
+              "tokens": {
+                "t1": "Retrieve data",
+                "t2": "Specify table",
+                "t3": "Execute query"
+              }
+            },
+            "quiz9": {
+              "title": "Select All Products",
+              "prompt": "Write a SQL query to select all columns from the `products` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            },
+            "quiz10": {
+              "title": "Select Specific Columns",
+              "prompt": "Write a SQL query to select only the `name` and `price` columns from the `products` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            },
+            "quiz11": {
+              "title": "Select Products by Category",
+              "prompt": "Write a SQL query to select all columns from the `products` table where the category is 'Art'.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "query_full_tables": {
+          "sketch1": {
+            "title": "Introduction to SELECT and FROM",
+            "bodyMarkdown": "The `SELECT` statement is used to retrieve data from a database. The `FROM` clause specifies the table from which to retrieve the data. For example, to select all columns from the `products` table, you can use the following query:\n\n```\nSELECT * FROM products;\n```\n\nThis query will return all rows and columns from the `products` table. Try it yourself by writing this query in the SQL editor and clicking 'Run query'."
+          },
+          "sketch2": {
+            "title": "Understanding the Products Table",
+            "bodyMarkdown": "The `products` table contains information about various products. It includes columns like `id`, `name`, `category`, `price`, `stock`, and `created_at`. Each row represents a different product. For example, the row with `id` 1 represents a 'Sketchbook' in the 'Art' category with a price of 12.99. Your turn: Write a query to select all columns from the `products` table and check the results table."
+          }
+        }
+      }
+    }
+  }
+}

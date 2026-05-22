@@ -1,4 +1,4 @@
-import type { TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
+import type { TopicAuthoringDraft, TopicSeed } from "@zoeskoul/curriculum-contracts";
 
 function normalizeComparable(value: string): string {
     return value
@@ -20,6 +20,10 @@ function containsAnswerText(text: string, answers: string[]): boolean {
 
 function sanitizeText(text: string, answers: string[], fallback: string): string {
     return containsAnswerText(text, answers) ? fallback : text;
+}
+
+function containsSqlHelpLeak(text: string): boolean {
+    return /python|program output|script|terminal|\.py/i.test(text);
 }
 
 function safeChoiceHelp() {
@@ -55,13 +59,36 @@ function safeDragHelp() {
     };
 }
 
-function safeCodeHelp() {
+function safeCodeHelp(seed?: TopicSeed) {
+    const editorLabel =
+        seed?.workspacePolicy?.workspace.ui.editorLabel ??
+        (seed?.profileId === "sql" ? "SQL editor" : "code editor");
+    const runButtonLabel =
+        seed?.workspacePolicy?.workspace.ui.runButtonLabel ??
+        (seed?.profileId === "sql" ? "Run query" : "Run");
+    const resultsLabel =
+        seed?.workspacePolicy?.workspace.ui.resultsTableLabel ??
+        seed?.workspacePolicy?.workspace.ui.outputPanelLabel ??
+        (seed?.profileId === "sql" ? "results table" : "output panel");
+
+    if (seed?.profileId === "sql") {
+        return {
+            hint: "Use the query pattern from the lesson.",
+            help: {
+                concept:
+                    "This SQL exercise checks whether your query returns the requested result.",
+                hint_1: "Check the table name and selected columns in the SQL editor.",
+                hint_2: `Click ${runButtonLabel} and compare the ${resultsLabel}.`,
+            },
+        };
+    }
+
     return {
-        hint: "Read the coding task and identify what the program should print.",
+        hint: "Read the coding task and identify the required result.",
         help: {
-            concept: "This coding exercise checks whether the program produces the requested output.",
-            hint_1: "Use the Python statement or expression that matches the required output.",
-            hint_2: "Run the code and compare the output panel with the expected result.",
+            concept: "This coding exercise checks whether your code produces the requested result.",
+            hint_1: `Use the statement or expression that fits the task in the ${editorLabel}.`,
+            hint_2: `Click ${runButtonLabel} and compare the ${resultsLabel} with the expected result.`,
         },
     };
 }
@@ -106,6 +133,7 @@ function canonicalChoiceAnswers(exercise: any): string[] {
 
 export function sanitizeHintLeaksInDraft(
     draft: TopicAuthoringDraft,
+    seed?: TopicSeed,
 ): TopicAuthoringDraft {
     return {
         ...draft,
@@ -120,28 +148,50 @@ export function sanitizeHintLeaksInDraft(
                     : exercise.kind === "drag_reorder"
                         ? safeDragHelp()
                         : exercise.kind === "code_input"
-                            ? safeCodeHelp()
+                            ? safeCodeHelp(seed)
                             : safeChoiceHelp();
+
+            const forceSqlFallback =
+                exercise.kind === "code_input" &&
+                seed?.profileId === "sql" &&
+                [
+                    exercise.hint,
+                    exercise.help.concept,
+                    exercise.help.hint_1,
+                    exercise.help.hint_2,
+                ].some((text) => containsSqlHelpLeak(String(text ?? "")));
 
             return {
                 ...exercise,
-                hint: sanitizeText(exercise.hint, answers, fallback.hint),
+                hint:
+                    forceSqlFallback
+                        ? fallback.hint
+                        : sanitizeText(exercise.hint, answers, fallback.hint),
                 help: {
-                    concept: sanitizeText(
-                        exercise.help.concept,
-                        answers,
-                        fallback.help.concept,
-                    ),
-                    hint_1: sanitizeText(
-                        exercise.help.hint_1,
-                        answers,
-                        fallback.help.hint_1,
-                    ),
-                    hint_2: sanitizeText(
-                        exercise.help.hint_2,
-                        answers,
-                        fallback.help.hint_2,
-                    ),
+                    concept:
+                        forceSqlFallback
+                            ? fallback.help.concept
+                            : sanitizeText(
+                                exercise.help.concept,
+                                answers,
+                                fallback.help.concept,
+                            ),
+                    hint_1:
+                        forceSqlFallback
+                            ? fallback.help.hint_1
+                            : sanitizeText(
+                                exercise.help.hint_1,
+                                answers,
+                                fallback.help.hint_1,
+                            ),
+                    hint_2:
+                        forceSqlFallback
+                            ? fallback.help.hint_2
+                            : sanitizeText(
+                                exercise.help.hint_2,
+                                answers,
+                                fallback.help.hint_2,
+                            ),
                 },
             };
         }),

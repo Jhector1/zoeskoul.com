@@ -1,0 +1,247 @@
+{
+  "title": "why sql is useful",
+  "summary": "why sql is useful in Getting Started with SQL and Databases",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to SQL",
+      "bodyMarkdown": "SQL, or Structured Query Language, is a powerful tool used to communicate with databases. It allows users to retrieve, manipulate, and manage data efficiently. For example, if you want to find all students in a database who are from Chicago, you can use SQL to write a query that selects these students from the database. \n\n```sql\nSELECT name FROM students WHERE city = 'Chicago';\n```\n\nTry it yourself: Write a query to select all students who have a grade of 'A'."
+    },
+    {
+      "id": "sketch2",
+      "title": "Why Use SQL?",
+      "bodyMarkdown": "SQL is essential for managing large datasets because it provides a structured way to query and update data. It is widely used in various industries for data analysis, reporting, and backend development. For instance, a company might use SQL to generate reports on sales data or to update customer information in their database. \n\nTry this: Think about a scenario where you might need to update multiple records at once. How could SQL help you accomplish this efficiently?"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Basic SQL Usage",
+      "prompt": "What is the primary purpose of SQL?",
+      "options": [
+        "To create websites",
+        "To communicate with databases",
+        "To design graphics",
+        "To write operating systems"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what SQL is mainly used for in data management.",
+      "help": {
+        "concept": "SQL is primarily used to interact with databases.",
+        "hint_1": "SQL is not used for creating websites or designing graphics.",
+        "hint_2": "SQL is a language for managing and querying databases."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "SQL Capabilities",
+      "prompt": "Which of the following can SQL do?",
+      "options": [
+        "Create animations",
+        "Manage database records",
+        "Edit videos",
+        "Design user interfaces"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider SQL's role in handling data.",
+      "help": {
+        "concept": "SQL is used for managing and querying data in databases.",
+        "hint_1": "SQL is not related to multimedia or UI design.",
+        "hint_2": "SQL's strength lies in its ability to handle data efficiently."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "SQL Benefits",
+      "prompt": "Select all the benefits of using SQL.",
+      "options": [
+        "Efficient data retrieval",
+        "Complex data manipulation",
+        "Real-time video processing",
+        "Data security management"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about SQL's strengths in data handling and security.",
+      "help": {
+        "concept": "SQL is powerful for data retrieval, manipulation, and security.",
+        "hint_1": "SQL is not used for video processing.",
+        "hint_2": "SQL excels in managing and securing data."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "SQL in Practice",
+      "prompt": "Which of the following tasks can be performed using SQL? Select all that apply.",
+      "options": [
+        "Querying data",
+        "Updating records",
+        "Creating animations",
+        "Deleting data"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "SQL Query Steps",
+      "prompt": "Arrange the steps to perform a basic SQL query.",
+      "tokens": [
+        "Write the SQL query",
+        "Run the query",
+        "Check the results"
+      ],
+      "correctOrder": [
+        "Write the SQL query",
+        "Run the query",
+        "Check the results"
+      ],
+      "hint": "Consider the logical order of executing a query.",
+      "help": {
+        "concept": "Executing a query involves writing, running, and checking results.",
+        "hint_1": "Start with writing the query.",
+        "hint_2": "Finish by checking the results after running the query."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "SQL Data Management",
+      "prompt": "Put the following SQL operations in order of execution for updating a record.",
+      "tokens": [
+        "Identify the record",
+        "Write the update query",
+        "Execute the query"
+      ],
+      "correctOrder": [
+        "Identify the record",
+        "Write the update query",
+        "Execute the query"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "SQL Query Structure",
+      "prompt": "Complete the SQL query: `SELECT name FROM students WHERE city = [blank1]`",
+      "template": "SELECT name FROM students WHERE city = [blank1]",
+      "choices": [
+        "'Chicago'",
+        "'New York'",
+        "'Los Angeles'",
+        "'Miami'"
+      ],
+      "correctValue": "'Chicago'",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "SQL Data Retrieval",
+      "prompt": "Fill in the blank to complete the query: `SELECT [blank1] FROM students`",
+      "template": "SELECT [blank1] FROM students",
+      "choices": [
+        "name",
+        "age",
+        "grade",
+        "city"
+      ],
+      "correctValue": "name",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Basic SELECT Query",
+      "prompt": "Write a SQL query to select all names from the students table.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT name FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Selecting Specific Data",
+      "prompt": "Write a SQL query to select the names of students who are 15 years old.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT name FROM students WHERE age = 15;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Retrieving Data by City",
+      "prompt": "Write a SQL query to select all students from 'Evanston'.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT * FROM students WHERE city = 'Evanston';",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

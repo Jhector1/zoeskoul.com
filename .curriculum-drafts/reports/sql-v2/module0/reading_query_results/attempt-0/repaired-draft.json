@@ -1,0 +1,75 @@
+{
+  "title": "Reading Query Results",
+  "summary": "Learn how to interpret and understand the results of SQL queries.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding SQL Query Results",
+      "bodyMarkdown": "When you run a SQL query, the results are displayed in a table format. Each column in the result corresponds to a column in the database table, and each row represents a record that matches the query criteria. \n\nFor example, if you run the query `SELECT name, grade FROM students;`, you will see a table with two columns: `name` and `grade`. Each row will show the name and grade of a student from the `students` table.\n\n```sql\nSELECT name, grade FROM students;\n```\n\nTry it yourself: Write a query to select the `name` and `city` columns from the `students` table and run it to see the results."
+    },
+    {
+      "id": "sketch2",
+      "title": "Interpreting Query Results",
+      "bodyMarkdown": "The results of a SQL query can tell you a lot about the data in your database. For instance, if you see multiple rows with the same `name` but different `grades`, it might indicate that there are multiple students with the same name but different performance levels.\n\nConsider the query:\n\n```sql\nSELECT name, grade, city FROM students;\n```\n\nThis query will return all students' names, grades, and cities. By examining the results, you can identify patterns or anomalies in the data.\n\nYour turn: Modify the query to include the `age` column and observe how the additional data changes your understanding of the students' information."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code1",
+      "kind": "code_input",
+      "title": "Select All Students",
+      "prompt": "Write a SQL query to select all columns from the students table.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT * FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code2",
+      "kind": "code_input",
+      "title": "Select Specific Columns",
+      "prompt": "Write a SQL query to select the `name` and `age` columns from the students table.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT name, age FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code3",
+      "kind": "code_input",
+      "title": "Select Students by City",
+      "prompt": "Write a SQL query to select the `name` and `city` columns from the students table.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT name, city FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "code1",
+      "code2",
+      "code3"
+    ]
+  }
+}

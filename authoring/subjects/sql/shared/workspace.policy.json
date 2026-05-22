@@ -1,0 +1,42 @@
+{
+  "policyId": "sql-browser-workspace",
+  "workspaceProfileId": "browser-sql-runner",
+  "workspacePolicyId": "sql-browser-workspace",
+  "uiTerms": {
+    "editor": "SQL editor",
+    "runButton": "Run query",
+    "output": "results table",
+    "feedbackPanel": "results panel",
+    "schemaBrowser": "schema browser",
+    "erd": "ERD",
+    "chenDiagram": "Chen diagram"
+  },
+  "preferredTerms": {
+    "terminal": "SQL editor",
+    "command line": "SQL editor",
+    "console": "results panel",
+    "output": "results table",
+    "run file": "click Run query"
+  },
+  "learnerInstructions": [
+    "Write the query in the SQL editor.",
+    "Click Run query.",
+    "Check the results table."
+  ],
+  "forbiddenActions": [
+    "terminal",
+    "command line",
+    ".sql",
+    "SQL file",
+    "save SQL file",
+    "run SQL file",
+    "sqlite3",
+    "psql",
+    "mysql",
+    "install SQLite",
+    "install MySQL",
+    "install PostgreSQL",
+    "open a terminal",
+    "use the command line"
+  ]
+}

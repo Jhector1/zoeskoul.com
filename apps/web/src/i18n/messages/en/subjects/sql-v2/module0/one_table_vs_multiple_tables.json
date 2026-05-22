@@ -1,0 +1,218 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "one_table_vs_multiple_tables": {
+          "label": "One Table vs Multiple Tables",
+          "summary": "Explore the differences between using one table and multiple tables in SQL databases.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Tables in SQL"
+            },
+            "sketch1": {
+              "title": "When to Use Multiple Tables"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "SQL Query Practice Project"
+            }
+          },
+          "projectSteps": {
+            "quiz9": {
+              "title": "Basic SELECT Query"
+            },
+            "quiz10": {
+              "title": "Select Specific Columns"
+            },
+            "quiz11": {
+              "title": "Select with Alias"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Purpose of a Table in SQL",
+              "prompt": "What is the primary purpose of a table in SQL?",
+              "hint": "Think about how data is organized in a database.",
+              "help": {
+                "concept": "A table in SQL is used to organize and store data in a structured format.",
+                "hint_1": "Consider the structure of a table with rows and columns.",
+                "hint_2": "A table is not used for executing queries or displaying data graphically."
+              },
+              "options": {
+                "a": "To store a collection of related data entries.",
+                "b": "To execute SQL queries.",
+                "c": "To display data in a graphical format.",
+                "d": "To connect to external databases."
+              }
+            },
+            "quiz2": {
+              "title": "Benefits of Multiple Tables",
+              "prompt": "Why might you use multiple tables in a database?",
+              "hint": "Consider how multiple tables can help in organizing data.",
+              "help": {
+                "concept": "Multiple tables can help reduce redundancy and organize data efficiently.",
+                "hint_1": "Think about how separating data into different tables can reduce repetition.",
+                "hint_2": "Multiple tables are used to organize related data, not to increase complexity or redundancy."
+              },
+              "options": {
+                "a": "To increase data redundancy.",
+                "b": "To organize data more efficiently.",
+                "c": "To make queries more complex.",
+                "d": "To store unrelated data together."
+              }
+            },
+            "quiz3": {
+              "title": "Characteristics of a Single Table",
+              "prompt": "Which of the following are characteristics of a single table in SQL? Select all that apply.",
+              "hint": "Think about the basic structure and potential issues with a single table.",
+              "help": {
+                "concept": "A single table organizes data in rows and columns and can lead to redundancy if not designed well.",
+                "hint_1": "Consider the basic structure of a table and potential design issues.",
+                "hint_2": "Not all tables require a primary key, and a single table typically stores data for one entity."
+              },
+              "options": {
+                "a": "Contains rows and columns.",
+                "b": "Stores data for multiple entities.",
+                "c": "Can lead to data redundancy if not designed properly.",
+                "d": "Always requires a primary key."
+              }
+            },
+            "quiz4": {
+              "title": "Advantages of Using Multiple Tables",
+              "prompt": "What are the advantages of using multiple tables in a database? Select all that apply.",
+              "hint": "Consider how multiple tables affect data organization and integrity.",
+              "help": {
+                "concept": "Multiple tables help reduce redundancy, simplify management, and improve integrity.",
+                "hint_1": "Think about how separating data can simplify management and improve integrity.",
+                "hint_2": "Multiple tables do not inherently increase complexity; they help organize data better."
+              },
+              "options": {
+                "a": "Reduces data redundancy.",
+                "b": "Simplifies data management.",
+                "c": "Increases data complexity.",
+                "d": "Improves data integrity."
+              }
+            },
+            "quiz5": {
+              "title": "Steps to Create a Table",
+              "prompt": "Arrange the steps to create a table in SQL in the correct order.",
+              "hint": "Think about the logical order of defining and creating a table.",
+              "help": {
+                "concept": "Creating a table involves defining its structure before executing the statement.",
+                "hint_1": "Start with defining the table name and structure.",
+                "hint_2": "Ensure all structural elements are defined before executing the statement."
+              },
+              "tokens": {
+                "t1": "Define the table name.",
+                "t2": "Specify the columns and their data types.",
+                "t3": "Set primary keys if needed.",
+                "t4": "Execute the CREATE TABLE statement."
+              }
+            },
+            "quiz6": {
+              "title": "Organizing Data with Multiple Tables",
+              "prompt": "Arrange the steps to organize data using multiple tables.",
+              "hint": "Consider the process of organizing data logically.",
+              "help": {
+                "concept": "Organizing data with multiple tables involves identifying entities and defining relationships.",
+                "hint_1": "Start by identifying what data needs to be stored.",
+                "hint_2": "Ensure relationships are defined before populating data."
+              },
+              "tokens": {
+                "t1": "Identify different entities.",
+                "t2": "Create separate tables for each entity.",
+                "t3": "Define relationships between tables.",
+                "t4": "Populate tables with data."
+              }
+            },
+            "quiz7": {
+              "title": "Table Structure",
+              "prompt": "In a SQL table, each column represents a specific [blank1].",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "In a SQL table, each column represents a specific [blank1].",
+              "choices": [
+                "attribute",
+                "record",
+                "database",
+                "query"
+              ]
+            },
+            "quiz8": {
+              "title": "Data Redundancy",
+              "prompt": "Using multiple tables can help reduce data [blank1].",
+              "hint": "Consider what multiple tables help minimize in a database.",
+              "help": {
+                "concept": "Multiple tables help minimize the missing term by organizing data efficiently.",
+                "hint_1": "Think about how separating data into tables affects the missing term.",
+                "hint_2": "Multiple tables do not inherently reduce complexity or size."
+              },
+              "template": "Using multiple tables can help reduce data [blank1].",
+              "choices": [
+                "redundancy",
+                "complexity",
+                "integrity",
+                "size"
+              ]
+            },
+            "quiz9": {
+              "title": "Basic SELECT Query",
+              "prompt": "Write a SQL query to select all columns from the `students` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            },
+            "quiz10": {
+              "title": "Select Specific Columns",
+              "prompt": "Write a SQL query to select the `name` and `grade` columns from the `students` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            },
+            "quiz11": {
+              "title": "Select with Alias",
+              "prompt": "Write a SQL query to select the `name` column from the `students` table and alias it as `student_name`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "one_table_vs_multiple_tables": {
+          "sketch1": {
+            "title": "Understanding Tables in SQL",
+            "bodyMarkdown": "In SQL, a table is a collection of related data entries and it consists of columns and rows. Each column in a table represents a specific attribute, and each row corresponds to a single record. For example, consider a `students` table:\n\n```\n| id | name | grade | age | city     |\n|----|------|-------|-----|----------|\n| 1  | Noor | A     | 15  | Chicago  |\n| 2  | Mia  | A     | 14  | Evanston |\n| 3  | Leo  | B     | 15  | Chicago  |\n| 4  | Ava  | C     | 14  | Oak Park |\n| 5  | Zane | B     | 16  | Naperville |\n```\n\nEach row represents a student, and each column represents a piece of information about the student. Try it yourself: Think about how you might organize data for a library system using tables."
+          },
+          "sketch2": {
+            "title": "When to Use Multiple Tables",
+            "bodyMarkdown": "Using multiple tables in a database can help organize data more efficiently and reduce redundancy. For instance, if you have a `students` table and a `courses` table, you can store information about students and courses separately, linking them with a common key like `student_id`.\n\nThis approach is beneficial when:\n- You have different entities with distinct attributes.\n- You want to avoid repeating data across records.\n- You need to maintain data integrity and consistency.\n\nYour turn: Consider a scenario where you need to manage data for a school. What tables might you create, and how would they relate to each other?"
+          }
+        }
+      }
+    }
+  }
+}

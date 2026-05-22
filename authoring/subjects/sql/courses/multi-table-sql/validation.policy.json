@@ -1,0 +1,36 @@
+{
+  "policyId": "multi-table-sql-validation",
+  "allowedConcepts": [
+    "SELECT",
+    "FROM",
+    "WHERE",
+    "ORDER BY",
+    "LIMIT",
+    "GROUP BY",
+    "HAVING",
+    "INNER JOIN",
+    "LEFT JOIN",
+    "ON",
+    "table_aliases",
+    "column_aliases",
+    "subquery_in_where",
+    "subquery_in_from"
+  ],
+  "disallowedConcepts": [
+    "INSERT",
+    "UPDATE",
+    "DELETE",
+    "CREATE TABLE",
+    "ALTER TABLE",
+    "DROP TABLE"
+  ],
+  "datasets": [
+    "school_relations_intro"
+  ],
+  "validationRequirements": {
+    "goldenTestsRequired": true,
+    "requireJoinRelationshipMetadata": true,
+    "requireErdOrTableRelationshipVisuals": true,
+    "requireDuplicateRowTeachingChecks": true
+  }
+}

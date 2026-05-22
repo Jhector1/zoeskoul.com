@@ -1,0 +1,42 @@
+{
+  "topicId": "reading_query_results",
+  "ok": false,
+  "issues": [
+    {
+      "code": "QUIZ_BANK_TOO_SMALL",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Expected at least 6 non-code quiz exercise(s), but the draft has 0."
+    },
+    {
+      "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Exercise policy targets 2 \"single_choice\" exercise(s), but the draft has 0."
+    },
+    {
+      "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Exercise policy targets 2 \"multi_choice\" exercise(s), but the draft has 0."
+    },
+    {
+      "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Exercise policy targets 2 \"drag_reorder\" exercise(s), but the draft has 0."
+    },
+    {
+      "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Exercise policy targets 2 \"fill_blank_choice\" exercise(s), but the draft has 0."
+    },
+    {
+      "code": "EXERCISE_POLICY_TOTAL_MISMATCH",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Exercise policy expects 11 total exercise(s), but the draft has 3."
+    }
+  ]
+}

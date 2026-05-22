@@ -1,0 +1,220 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "keywords": {
+          "label": "keywords",
+          "summary": "keywords in Your First Queries with SELECT",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to SQL Keywords"
+            },
+            "sketch1": {
+              "title": "Using SELECT and FROM"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Build a starter query sheet"
+            }
+          },
+          "projectSteps": {
+            "quiz9": {
+              "title": "Basic SELECT Query"
+            },
+            "quiz10": {
+              "title": "Selecting All Columns"
+            },
+            "quiz11": {
+              "title": "Selecting Specific Columns"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Understanding SELECT",
+              "prompt": "What does the SELECT keyword do in SQL?",
+              "hint": "Think about the purpose of retrieving data.",
+              "help": {
+                "concept": "The SELECT keyword is used to retrieve data from a database table.",
+                "hint_1": "SELECT is used to specify which columns you want to retrieve.",
+                "hint_2": "SELECT is not used for modifying or deleting data."
+              },
+              "options": {
+                "a": "It deletes data from a table.",
+                "b": "It retrieves data from a table.",
+                "c": "It updates data in a table.",
+                "d": "It creates a new table."
+              }
+            },
+            "quiz2": {
+              "title": "Purpose of FROM",
+              "prompt": "What is the purpose of the FROM keyword in an SQL query?",
+              "hint": "Consider what follows the FROM keyword in a query.",
+              "help": {
+                "concept": "The FROM keyword specifies the table from which to retrieve data.",
+                "hint_1": "FROM is followed by the table name.",
+                "hint_2": "FROM does not specify columns or conditions."
+              },
+              "options": {
+                "a": "To specify the table to retrieve data from.",
+                "b": "To specify the columns to retrieve.",
+                "c": "To filter the data based on conditions.",
+                "d": "To sort the data in a specific order."
+              }
+            },
+            "quiz3": {
+              "title": "Keywords in SQL",
+              "prompt": "Which of the following are SQL keywords? Choose all that apply.",
+              "hint": "Think about the common operations performed in SQL.",
+              "help": {
+                "concept": "SQL keywords are reserved words used for various operations in SQL.",
+                "hint_1": "Consider keywords used for data retrieval and manipulation.",
+                "hint_2": "All options listed are common SQL keywords."
+              },
+              "options": {
+                "a": "SELECT",
+                "b": "INSERT",
+                "c": "UPDATE",
+                "d": "DELETE",
+                "e": "FROM",
+                "f": "WHERE"
+              }
+            },
+            "quiz4": {
+              "title": "Using SELECT and FROM",
+              "prompt": "Which of the following statements about SELECT and FROM are true? Choose all that apply.",
+              "hint": "Think about the roles of SELECT and FROM in a query.",
+              "help": {
+                "concept": "SELECT and FROM are used to retrieve data from a database.",
+                "hint_1": "SELECT is about columns, FROM is about tables.",
+                "hint_2": "Neither SELECT nor FROM is used for data modification."
+              },
+              "options": {
+                "a": "SELECT specifies the columns to retrieve.",
+                "b": "FROM specifies the table to retrieve data from.",
+                "c": "SELECT is used to delete data.",
+                "d": "FROM is used to update data."
+              }
+            },
+            "quiz5": {
+              "title": "Ordering SQL Query Components",
+              "prompt": "Arrange the components of a basic SQL query in the correct order.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "columns",
+                "t3": "FROM",
+                "t4": "table"
+              }
+            },
+            "quiz6": {
+              "title": "SQL Query Structure",
+              "prompt": "Put the following SQL query components in the correct order.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "FROM",
+                "t2": "SELECT",
+                "t3": "table",
+                "t4": "columns"
+              }
+            },
+            "quiz7": {
+              "title": "Filling in SQL Keywords",
+              "prompt": "Complete the SQL query to select all columns from the products table: `SELECT * [blank1] products;`",
+              "hint": "Think about which keyword specifies the table.",
+              "help": {
+                "concept": "The the missing term keyword specifies the table to retrieve data the missing term.",
+                "hint_1": "the missing term is used to indicate the table name.",
+                "hint_2": "The correct keyword follows SELECT *."
+              },
+              "template": "SELECT * [blank1] products;",
+              "choices": [
+                "FROM",
+                "WHERE",
+                "ORDER BY",
+                "GROUP BY"
+              ]
+            },
+            "quiz8": {
+              "title": "SQL Query Completion",
+              "prompt": "Fill in the blank to complete the query: `SELECT name, price [blank1] products;`",
+              "hint": "Consider which keyword specifies the table.",
+              "help": {
+                "concept": "The the missing term keyword is used to specify the table in a query.",
+                "hint_1": "the missing term is necessary to indicate the source table.",
+                "hint_2": "The correct keyword follows the column list."
+              },
+              "template": "SELECT name, price [blank1] products;",
+              "choices": [
+                "FROM",
+                "WHERE",
+                "ORDER BY",
+                "LIMIT"
+              ]
+            },
+            "quiz9": {
+              "title": "Basic SELECT Query",
+              "prompt": "Write a query to select the `name` and `price` columns from the `products` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            },
+            "quiz10": {
+              "title": "Selecting All Columns",
+              "prompt": "Write a query to select all columns from the `products` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            },
+            "quiz11": {
+              "title": "Selecting Specific Columns",
+              "prompt": "Write a query to select the `category` and `stock` columns from the `products` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "keywords": {
+          "sketch1": {
+            "title": "Introduction to SQL Keywords",
+            "bodyMarkdown": "SQL keywords are reserved words used to perform operations in a database. They are the building blocks of SQL queries. Some of the most common keywords include SELECT, FROM, WHERE, and ORDER BY. These keywords help you retrieve and manipulate data stored in a database. \n\nFor example, to retrieve all columns from a table named `products`, you can use the following query:\n\n```sql\nSELECT * FROM products;\n```\n\nThis query selects all columns from the `products` table. Try it yourself by writing a query to select specific columns like `name` and `price` from the `products` table."
+          },
+          "sketch2": {
+            "title": "Using SELECT and FROM",
+            "bodyMarkdown": "The `SELECT` keyword is used to specify the columns you want to retrieve, while the `FROM` keyword specifies the table from which to retrieve the data. \n\nHere's a step-by-step example:\n\n1. **SELECT**: Choose the columns you want to see. For instance, `SELECT name, price`.\n2. **FROM**: Specify the table. For example, `FROM products`.\n\nPutting it together, the query becomes:\n\n```sql\nSELECT name, price FROM products;\n```\n\nThis query retrieves the `name` and `price` columns from the `products` table. Your turn: Modify the query to include the `category` column as well."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "rubricSlug": "capstone-default",
+  "criteria": [
+    {
+      "id": "planning",
+      "label": "Planning and design",
+      "weight": 0.2
+    },
+    {
+      "id": "implementation",
+      "label": "Implementation",
+      "weight": 0.35
+    },
+    {
+      "id": "validation",
+      "label": "Testing and validation",
+      "weight": 0.2
+    },
+    {
+      "id": "explanation",
+      "label": "Explanation and presentation",
+      "weight": 0.25
+    }
+  ]
+}

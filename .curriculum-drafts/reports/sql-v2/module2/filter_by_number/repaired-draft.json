@@ -1,0 +1,250 @@
+{
+  "title": "Filter by Number",
+  "summary": "Learn how to filter data using numerical conditions in SQL.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Filtering by Number",
+      "bodyMarkdown": "In SQL, filtering data by number is a common task. You can use the `WHERE` clause to specify conditions that rows must meet to be included in the results. For example, to find products with a price greater than $20, you would write:\n\n```sql\nSELECT * FROM products WHERE price > 20;\n```\n\nThis query selects all columns from the `products` table where the `price` is greater than 20. Try it yourself by changing the number to see different results."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using Comparison Operators",
+      "bodyMarkdown": "Comparison operators such as `=`, `>`, `<`, `>=`, `<=`, and `<>` (not equal) are used in the `WHERE` clause to filter data based on numerical values. For example:\n\n```sql\nSELECT name, price FROM products WHERE stock <= 10;\n```\n\nThis query retrieves the `name` and `price` of products that have 10 or fewer items in stock. Try modifying the stock number to see how the results change."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Understanding WHERE Clause",
+      "prompt": "Which SQL clause is used to filter records?",
+      "options": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Comparison Operators",
+      "prompt": "Which operator is used to check if a value is not equal to another value?",
+      "options": [
+        "=",
+        "<>",
+        ">",
+        "<"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Filtering with Multiple Conditions",
+      "prompt": "Which of the following are valid SQL operators for filtering by number? (Choose all that apply)",
+      "options": [
+        ">",
+        "<=",
+        "LIKE",
+        "BETWEEN"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Using AND and OR",
+      "prompt": "Which of the following statements about AND and OR are true? (Choose all that apply)",
+      "options": [
+        "AND requires all conditions to be true.",
+        "OR requires at least one condition to be true.",
+        "AND and OR can be used interchangeably.",
+        "OR requires all conditions to be false."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Think about how AND and OR combine conditions.",
+      "help": {
+        "concept": "AND and OR are logical operators used to combine conditions.",
+        "hint_1": "AND is stricter than OR.",
+        "hint_2": "OR is more flexible, allowing any condition to be true."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Query Clauses",
+      "prompt": "Arrange the SQL query clauses in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "Steps to Filter Data",
+      "prompt": "Arrange the steps to filter data by number in SQL.",
+      "tokens": [
+        "Write the SELECT statement.",
+        "Specify the table with FROM.",
+        "Add the WHERE clause with conditions.",
+        "Run the query."
+      ],
+      "correctOrder": [
+        "Write the SELECT statement.",
+        "Specify the table with FROM.",
+        "Add the WHERE clause with conditions.",
+        "Run the query."
+      ],
+      "hint": "Consider the logical sequence of writing a query.",
+      "help": {
+        "concept": "Filtering data involves selecting, specifying the table, adding conditions, and executing.",
+        "hint_1": "Start with what you want to select.",
+        "hint_2": "End with executing the query."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Using WHERE Clause",
+      "prompt": "Complete the SQL statement to filter products with a price greater than 20: `SELECT * FROM products WHERE price [blank1] 20;`",
+      "template": "SELECT * FROM products WHERE price [blank1] 20;",
+      "choices": [
+        ">",
+        "<",
+        "=",
+        "<>"
+      ],
+      "correctValue": ">",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Filtering by Stock",
+      "prompt": "Complete the SQL statement to find products with stock less than or equal to 5: `SELECT name FROM products WHERE stock [blank1] 5;`",
+      "template": "SELECT name FROM products WHERE stock [blank1] 5;",
+      "choices": [
+        ">",
+        "<=",
+        "=",
+        "<>"
+      ],
+      "correctValue": "<=",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Filter Products by Price",
+      "prompt": "Write a SQL query to select all products with a price greater than 30.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products WHERE price > 30;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Find Low Stock Items",
+      "prompt": "Write a SQL query to find all products with a stock of 5 or less.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products WHERE stock <= 5;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Filter by Category and Price",
+      "prompt": "Write a SQL query to select products in the 'Art' category with a price less than 20.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Art' AND price < 20;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Filtering Project",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

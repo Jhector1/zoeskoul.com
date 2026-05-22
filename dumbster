@@ -105,6 +105,13 @@ Or one-liner with a safer fallback:
 lsof -ti tcp:3000 | xargs kill -9
 
 
+pnpm --filter @zoeskoul/curriculum-core test
+pnpm --filter @zoeskoul/curriculum-contracts test
+pnpm --filter @zoeskoul/curriculum-compiler test
+pnpm --filter @zoeskoul/curriculum-cli test
+pnpm --filter @zoeskoul/web build
+
+
 
 
 

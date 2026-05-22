@@ -1,0 +1,242 @@
+{
+  "title": "What SQL Means",
+  "summary": "Introduction to SQL and its role in managing databases.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding SQL",
+      "bodyMarkdown": "SQL, or Structured Query Language, is a standard language for interacting with databases. It allows you to retrieve, update, and manage data stored in a database. For example, if you have a table called `students` with columns like `name`, `grade`, and `age`, you can use SQL to select all students who have an 'A' grade.\n\n```sql\nSELECT name, grade FROM students WHERE grade = 'A';\n```\n\nThis query retrieves the names and grades of students who have an 'A' grade. Try it yourself by writing a query to find students from 'Chicago'."
+    },
+    {
+      "id": "sketch2",
+      "title": "Basic SQL Syntax",
+      "bodyMarkdown": "The basic structure of an SQL query involves the `SELECT` and `FROM` clauses. The `SELECT` clause specifies the columns you want to retrieve, and the `FROM` clause specifies the table from which to retrieve the data.\n\nFor example:\n\n```sql\nSELECT name, age FROM students;\n```\n\nThis query selects the `name` and `age` columns from the `students` table. Your turn: Modify this query to also include the `city` column."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Purpose of SQL",
+      "prompt": "What is the primary purpose of SQL?",
+      "options": [
+        "To create web pages",
+        "To interact with databases",
+        "To design graphics",
+        "To write operating systems"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "SQL Query Components",
+      "prompt": "Which SQL clause is used to specify the table to query data from?",
+      "options": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "SQL Capabilities",
+      "prompt": "Which of the following are capabilities of SQL? (Choose all that apply)",
+      "options": [
+        "Retrieve data from a database",
+        "Update data in a database",
+        "Create graphics",
+        "Delete data from a database"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about what operations you can perform on data within a database.",
+      "help": {
+        "concept": "SQL can retrieve, update, and delete data in a database.",
+        "hint_1": "SQL is not used for creating graphics.",
+        "hint_2": "Focus on data manipulation capabilities."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "SQL Clauses",
+      "prompt": "Which of the following are valid SQL clauses? (Choose all that apply)",
+      "options": [
+        "SELECT",
+        "PRINT",
+        "FROM",
+        "DISPLAY"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "SQL Query Order",
+      "prompt": "Arrange the SQL query components in the correct order.",
+      "tokens": [
+        "SELECT name, age",
+        "FROM students"
+      ],
+      "correctOrder": [
+        "SELECT name, age",
+        "FROM students"
+      ],
+      "hint": "Start with the clause that specifies the columns.",
+      "help": {
+        "concept": "The SELECT clause comes before the FROM clause.",
+        "hint_1": "SELECT specifies what to retrieve.",
+        "hint_2": "FROM specifies where to retrieve from."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "Basic SQL Query Structure",
+      "prompt": "Reorder the components to form a valid SQL query.",
+      "tokens": [
+        "FROM students",
+        "SELECT name, grade"
+      ],
+      "correctOrder": [
+        "SELECT name, grade",
+        "FROM students"
+      ],
+      "hint": "The query should start with the clause that specifies the columns.",
+      "help": {
+        "concept": "The SELECT clause should precede the FROM clause.",
+        "hint_1": "SELECT comes before FROM.",
+        "hint_2": "SELECT specifies columns, FROM specifies the table."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Clause Identification",
+      "prompt": "In the query `SELECT name FROM students`, the word `students` is a [blank1].",
+      "template": "In the query `SELECT name FROM students`, the word `students` is a [blank1].",
+      "choices": [
+        "column",
+        "table",
+        "database",
+        "query"
+      ],
+      "correctValue": "table",
+      "hint": "Consider what `students` represents in the context of the query.",
+      "help": {
+        "concept": "In SQL, the FROM clause specifies the the missing term.",
+        "hint_1": "The FROM clause indicates the the missing term.",
+        "hint_2": "Students is the the missing term being queried."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "SQL Query Purpose",
+      "prompt": "The `SELECT` clause in SQL is used to [blank1] data.",
+      "template": "The `SELECT` clause in SQL is used to [blank1] data.",
+      "choices": [
+        "retrieve",
+        "delete",
+        "update",
+        "insert"
+      ],
+      "correctValue": "retrieve",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Basic SQL Query",
+      "prompt": "Write a query to select all columns from the `students` table.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Select Specific Columns",
+      "prompt": "Write a query to select the `name` and `city` columns from the `students` table.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT name, city FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Select with Condition",
+      "prompt": "Write a query to select all students who are 15 years old.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM students WHERE age = 15;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Basics Project",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

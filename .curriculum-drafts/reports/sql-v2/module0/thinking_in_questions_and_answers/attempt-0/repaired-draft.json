@@ -1,0 +1,241 @@
+{
+  "title": "Thinking in Questions and Answers",
+  "summary": "Explore how questions translate into SQL queries using the students_intro dataset.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to SQL Queries",
+      "bodyMarkdown": "SQL is a language used to interact with databases. It allows you to ask questions about the data stored in tables. For example, if you want to know the names of all students in a database, you can use a SQL query to retrieve that information. \n\nHere's a simple SQL query:\n\n```\nSELECT name FROM students;\n```\n\nThis query selects the `name` column from the `students` table. Try it yourself by writing this query in the SQL editor and clicking 'Run query'."
+    },
+    {
+      "id": "sketch2",
+      "title": "Understanding the SELECT Statement",
+      "bodyMarkdown": "The `SELECT` statement is used to specify which columns you want to retrieve from a table. It is the most basic and essential part of any SQL query. \n\nFor example, to get the names and grades of students, you can write:\n\n```\nSELECT name, grade FROM students;\n```\n\nThis query will return a list of names and their corresponding grades. Try modifying the query to include the `age` column as well."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Basic SQL Query Structure",
+      "prompt": "What is the purpose of the `SELECT` statement in SQL?",
+      "options": [
+        "To delete data from a table",
+        "To retrieve data from a table",
+        "To update data in a table",
+        "To insert data into a table"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what you want to do when you want to see data.",
+      "help": {
+        "concept": "The `SELECT` statement is used to retrieve data from one or more columns in a table.",
+        "hint_1": "The `SELECT` statement is used to view data.",
+        "hint_2": "It is the first part of a query that specifies which data you want to see."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Columns in a SQL Query",
+      "prompt": "Which columns can you retrieve using the following query: `SELECT name, grade FROM students;`? Choose all that apply.",
+      "options": [
+        "name",
+        "grade",
+        "age",
+        "city"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Look at the columns listed after `SELECT`.",
+      "help": {
+        "concept": "The columns listed after `SELECT` are the ones that will be retrieved.",
+        "hint_1": "Check the columns specified in the query.",
+        "hint_2": "Only the columns explicitly mentioned will be retrieved."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Query Clauses",
+      "prompt": "Arrange the SQL query clauses in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Completing a SQL Query",
+      "prompt": "Complete the SQL query to retrieve the `age` of students: `SELECT [blank1] FROM students;`",
+      "template": "SELECT [blank1] FROM students;",
+      "choices": [
+        "age",
+        "name",
+        "grade",
+        "city"
+      ],
+      "correctValue": "age",
+      "hint": "Think about which column you want to retrieve.",
+      "help": {
+        "concept": "The column you want to retrieve should be placed after `SELECT`.",
+        "hint_1": "You are interested in the `the missing term` of students.",
+        "hint_2": "The correct column name is `the missing term`."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Retrieve Student Names",
+      "prompt": "Write a SQL query to retrieve the names of all students from the `students` table.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT name FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "single_choice",
+      "title": "SQL Query Result",
+      "prompt": "What will be the result of the query `SELECT city FROM students;`?",
+      "options": [
+        "A list of student names",
+        "A list of student grades",
+        "A list of student cities",
+        "A list of student ages"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Look at the column specified after `SELECT`.",
+      "help": {
+        "concept": "The query retrieves the data from the column specified after `SELECT`.",
+        "hint_1": "The column specified is `city`.",
+        "hint_2": "The result will be a list of cities."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "multi_choice",
+      "title": "Understanding SQL Syntax",
+      "prompt": "Which of the following are valid SQL statements? Choose all that apply.",
+      "options": [
+        "SELECT name FROM students;",
+        "DELETE FROM students;",
+        "SELECT age, grade FROM students;",
+        "INSERT INTO students (name) VALUES ('John');"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Focus on statements that retrieve data.",
+      "help": {
+        "concept": "Valid SQL statements for this module involve selecting data.",
+        "hint_1": "Look for statements that use `SELECT`.",
+        "hint_2": "Statements that modify data are not covered in this module."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "title": "SQL Query Construction",
+      "prompt": "Arrange the parts of a SQL query to form a correct statement.",
+      "tokens": [
+        "FROM students",
+        "SELECT name"
+      ],
+      "correctOrder": [
+        "SELECT name",
+        "FROM students"
+      ],
+      "hint": "Start with the `SELECT` clause.",
+      "help": {
+        "concept": "A SQL query starts with `SELECT` followed by `FROM`.",
+        "hint_1": "The `SELECT` clause comes first.",
+        "hint_2": "The `FROM` clause follows the `SELECT` clause."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "fill_blank_choice",
+      "title": "SQL Query Completion",
+      "prompt": "Complete the SQL query to retrieve the `grade` of students: `SELECT [blank1] FROM students;`",
+      "template": "SELECT [blank1] FROM students;",
+      "choices": [
+        "age",
+        "name",
+        "grade",
+        "city"
+      ],
+      "correctValue": "grade",
+      "hint": "Think about which column you want to retrieve.",
+      "help": {
+        "concept": "The column you want to retrieve should be placed after `SELECT`.",
+        "hint_1": "You are interested in the `the missing term` of students.",
+        "hint_2": "The correct column name is `the missing term`."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Retrieve Student Grades",
+      "prompt": "Write a SQL query to retrieve the grades of all students from the `students` table.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT grade FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Retrieve Student Ages",
+      "prompt": "Write a SQL query to retrieve the ages of all students from the `students` table.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT age FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice Project",
+    "stepIds": [
+      "quiz5",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

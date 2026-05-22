@@ -1,0 +1,234 @@
+{
+  "title": "where sql runs",
+  "summary": "where sql runs in Getting Started with SQL and Databases",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding SQL Execution",
+      "bodyMarkdown": "SQL is a language used to interact with databases. When you write an SQL query, it is executed in a database management system (DBMS). The DBMS processes the query and returns the results. For example, if you want to retrieve all students from a database, you would write a query like this:\n\n```sql\nSELECT * FROM students;\n```\n\nThis query selects all columns from the 'students' table. Try it yourself by writing this query in the SQL editor and clicking 'Run query'. Check the results table to see the output."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Purpose of SQL",
+      "prompt": "What is the primary purpose of SQL?",
+      "options": [
+        "To create web pages",
+        "To manage and query databases",
+        "To design graphics",
+        "To write operating systems"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what SQL is mainly used for.",
+      "help": {
+        "concept": "SQL is primarily used for managing and querying databases.",
+        "hint_1": "SQL is not used for web design or operating systems.",
+        "hint_2": "SQL is a language for interacting with databases."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "SQL Execution Environment",
+      "prompt": "Where do you typically run SQL queries?",
+      "options": [
+        "In a web browser",
+        "In a database management system",
+        "In a text editor",
+        "In a graphic design tool"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider the environment where databases are managed.",
+      "help": {
+        "concept": "SQL queries are executed in a database management system.",
+        "hint_1": "SQL is not typically run in a web browser or text editor.",
+        "hint_2": "Think about where databases are managed and queried."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "SQL Query Components",
+      "prompt": "Which of the following are components of an SQL query? (Select all that apply)",
+      "options": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "PRINT"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about the basic structure of an SQL query.",
+      "help": {
+        "concept": "SQL queries often include SELECT, FROM, and WHERE clauses.",
+        "hint_1": "PRINT is not a standard SQL component.",
+        "hint_2": "SELECT, FROM, and WHERE are common in SQL queries."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "SQL Query Results",
+      "prompt": "What can you do with the results of an SQL query? (Select all that apply)",
+      "options": [
+        "Display them in a table",
+        "Use them in calculations",
+        "Ignore them",
+        "Modify the database schema"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Consider the possible uses of query results.",
+      "help": {
+        "concept": "Query results can be displayed, used in calculations, or ignored.",
+        "hint_1": "Modifying the database schema is not a direct use of query results.",
+        "hint_2": "Results can be displayed, used, or ignored, but not directly modify schema."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "SQL Query Sequence",
+      "prompt": "Arrange the steps to execute an SQL query in the correct order.",
+      "tokens": [
+        "Write the query in the SQL editor.",
+        "Click Run query.",
+        "Check the results table."
+      ],
+      "correctOrder": [
+        "Write the query in the SQL editor.",
+        "Click Run query.",
+        "Check the results table."
+      ],
+      "hint": "Think about the logical sequence of actions when running a query.",
+      "help": {
+        "concept": "Executing an SQL query involves writing, running, and checking results.",
+        "hint_1": "Start with writing the query.",
+        "hint_2": "After writing, run the query and then check the results."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Arrange the components of a basic SQL query in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "hint": "Consider the typical order of clauses in an SQL query.",
+      "help": {
+        "concept": "SQL queries typically start with SELECT, followed by FROM, then WHERE.",
+        "hint_1": "SELECT is usually the first clause.",
+        "hint_2": "FROM follows SELECT, and WHERE is often last."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Clause Identification",
+      "prompt": "Identify the missing SQL clause: SELECT * [blank1] students;",
+      "template": "SELECT * [blank1] students;",
+      "choices": [
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctValue": "FROM",
+      "hint": "Think about which clause specifies the table in an SQL query.",
+      "help": {
+        "concept": "The FROM clause specifies the table to query.",
+        "hint_1": "The FROM clause follows SELECT.",
+        "hint_2": "The correct clause is FROM, which specifies the table."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "SQL Query Purpose",
+      "prompt": "Complete the sentence: SQL is used to [blank1] data from a database.",
+      "template": "SQL is used to [blank1] data from a database.",
+      "choices": [
+        "retrieve",
+        "delete",
+        "design"
+      ],
+      "correctValue": "retrieve",
+      "hint": "Consider the primary function of SQL in data handling.",
+      "help": {
+        "concept": "SQL is primarily used to retrieve data from databases.",
+        "hint_1": "SQL retrieves data rather than deleting or designing.",
+        "hint_2": "The correct action is retrieving data."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Basic SQL Query",
+      "prompt": "Write an SQL query to select all columns from the 'students' table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT * FROM students;",
+      "hint": "Use SELECT and FROM to retrieve all columns.",
+      "help": {
+        "concept": "To select all columns, use SELECT * followed by FROM and the table name.",
+        "hint_1": "Use SELECT * to indicate all columns.",
+        "hint_2": "Follow SELECT * with FROM and the table name."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Retrieve Specific Columns",
+      "prompt": "Write an SQL query to select the 'name' and 'age' columns from the 'students' table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT name, age FROM students;",
+      "hint": "List the column names after SELECT.",
+      "help": {
+        "concept": "To select specific columns, list them after SELECT.",
+        "hint_1": "Include both column names separated by a comma.",
+        "hint_2": "Use SELECT followed by the column names and FROM."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Query with Alias",
+      "prompt": "Write an SQL query to select the 'name' column from the 'students' table and rename it to 'student_name'.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT name AS student_name FROM students;",
+      "hint": "Use AS to rename a column.",
+      "help": {
+        "concept": "The AS keyword allows you to rename columns in the result set.",
+        "hint_1": "Use AS between the original and new column names.",
+        "hint_2": "Place AS after the column name you want to rename."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

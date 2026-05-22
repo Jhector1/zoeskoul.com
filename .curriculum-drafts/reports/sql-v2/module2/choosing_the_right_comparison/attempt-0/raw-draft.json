@@ -1,0 +1,228 @@
+{
+  "title": "Choosing the Right Comparison",
+  "summary": "Learn how to use comparison operators effectively in SQL queries to filter data.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Comparison Operators",
+      "bodyMarkdown": "Comparison operators in SQL are used to filter data based on specific conditions. Common operators include `=`, `!=`, `<`, `>`, `<=`, and `>=`. For example, if you want to find products with a price greater than $20, you would use:\n\n```sql\nSELECT * FROM products WHERE price > 20;\n```\n\nThis query selects all columns from the `products` table where the `price` is greater than 20. Try it yourself by modifying the price value to see different results."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using the WHERE Clause",
+      "bodyMarkdown": "The `WHERE` clause is essential for filtering records in a SQL query. It allows you to specify conditions that the data must meet to be included in the results. For instance, to find all products in the 'Art' category, you can write:\n\n```sql\nSELECT * FROM products WHERE category = 'Art';\n```\n\nThis query will return all rows where the `category` column is 'Art'. Your turn: try changing the category to 'Home' and see what results you get."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Understanding Comparison Operators",
+      "prompt": "Which of the following operators is used to check if two values are not equal in SQL?",
+      "options": [
+        "=",
+        "!=",
+        "<>",
+        "><"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about the operator that signifies inequality.",
+      "help": {
+        "concept": "The `!=` operator is used to check if two values are not equal.",
+        "hint_1": "The operator `!=` is commonly used for inequality.",
+        "hint_2": "In SQL, `!=` and `<>` both mean 'not equal'."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Filtering with WHERE",
+      "prompt": "What does the following SQL query do?\n\n```sql\nSELECT * FROM products WHERE stock < 10;\n```",
+      "options": [
+        "Selects all products with stock greater than 10.",
+        "Selects all products with stock less than 10.",
+        "Selects all products with stock equal to 10.",
+        "Selects all products."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Focus on the condition specified in the WHERE clause.",
+      "help": {
+        "concept": "The query filters products where the stock is less than 10.",
+        "hint_1": "The `<` operator is used to find values less than a specified number.",
+        "hint_2": "The query selects products with stock numbers below 10."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Multiple Conditions with AND",
+      "prompt": "Which of the following queries will select products that are in the 'Art' category and have a price less than $20? Choose all that apply.",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Art' AND price < 20;",
+        "SELECT * FROM products WHERE category = 'Art' OR price < 20;",
+        "SELECT * FROM products WHERE category = 'Art' AND price <= 20;",
+        "SELECT * FROM products WHERE category = 'Art' AND price > 20;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Look for queries that use AND to combine conditions.",
+      "help": {
+        "concept": "Using `AND` combines conditions that must both be true.",
+        "hint_1": "The `AND` operator requires both conditions to be satisfied.",
+        "hint_2": "Only queries with `AND` and a price condition less than or equal to 20 are correct."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Using OR in Queries",
+      "prompt": "Which queries will select products that are either in the 'Stationery' category or have a stock greater than 20? Choose all that apply.",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Stationery' OR stock > 20;",
+        "SELECT * FROM products WHERE category = 'Stationery' AND stock > 20;",
+        "SELECT * FROM products WHERE category = 'Stationery' OR stock <= 20;",
+        "SELECT * FROM products WHERE category = 'Stationery' OR stock > 10;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Focus on the use of the OR operator.",
+      "help": {
+        "concept": "The `OR` operator allows either condition to be true.",
+        "hint_1": "Queries with `OR` allow for either condition to be satisfied.",
+        "hint_2": "Look for queries that use `OR` and have a stock condition greater than 20."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Query Execution",
+      "prompt": "Arrange the following SQL clauses in the correct order of execution.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "FROM",
+        "WHERE",
+        "SELECT",
+        "ORDER BY"
+      ],
+      "hint": "Consider the logical order in which SQL processes a query.",
+      "help": {
+        "concept": "SQL processes queries starting with the FROM clause.",
+        "hint_1": "The FROM clause is processed before WHERE.",
+        "hint_2": "SELECT is processed after WHERE."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Arrange the following parts of a SQL query in the correct order.",
+      "tokens": [
+        "WHERE",
+        "SELECT",
+        "ORDER BY",
+        "FROM"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "hint": "Think about the typical structure of a SQL query.",
+      "help": {
+        "concept": "A SQL query typically starts with SELECT and ends with ORDER BY.",
+        "hint_1": "SELECT is the first clause in a query.",
+        "hint_2": "ORDER BY is usually the last clause."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Using BETWEEN",
+      "prompt": "Complete the SQL query to select products with a price between $10 and $30.\n\n```sql\nSELECT * FROM products WHERE price [blank1] 10 AND 30;\n```",
+      "template": "SELECT * FROM products WHERE price [blank1] 10 AND 30;",
+      "choices": [
+        "BETWEEN",
+        "IN",
+        "LIKE",
+        "IS"
+      ],
+      "correctValue": "BETWEEN",
+      "hint": "BETWEEN is used for range conditions.",
+      "help": {
+        "concept": "BETWEEN is used to specify a range of values.",
+        "hint_1": "BETWEEN is the correct keyword for specifying a range.",
+        "hint_2": "BETWEEN is used with two values to define a range."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Checking for NULL",
+      "prompt": "Complete the SQL query to find products with no category assigned.\n\n```sql\nSELECT * FROM products WHERE category [blank1] NULL;\n```",
+      "template": "SELECT * FROM products WHERE category [blank1] NULL;",
+      "choices": [
+        "IS",
+        "=",
+        "LIKE",
+        "BETWEEN"
+      ],
+      "correctValue": "IS",
+      "hint": "Use IS to check for NULL values.",
+      "help": {
+        "concept": "IS NULL is used to check for NULL values.",
+        "hint_1": "IS is used to check for NULL.",
+        "hint_2": "IS NULL checks for missing values."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Filter Products by Category",
+      "prompt": "Write a SQL query to select all products in the 'Home' category.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Home';",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Find Products with Low Stock",
+      "prompt": "Write a SQL query to select products with stock less than 5.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE stock < 5;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Products Priced Above a Certain Amount",
+      "prompt": "Write a SQL query to select products with a price greater than $50.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE price > 50;",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Filtering Project",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

@@ -6,9 +6,26 @@ import type {
 import {
     buildCodeInputExpected,
 } from "../base/codeInputExpected.js";
+import { getSqlDatasetById } from "../sql/datasets/index.js";
 import type { GoldenValidationReport } from "./profileServices.js";
 import { makeEmptyGoldenValidationReport } from "./noopReports.js";
-import { getSqlRunner, validateSqlAgainstSolution } from "@zoeskoul/curriculum-runtime/sql";
+import { resolveSqlRunner, validateSqlAgainstSolution } from "@zoeskoul/curriculum-runtime/sql";
+
+function formatSqlContext(args: {
+    subjectSlug: string;
+    courseSlug?: string;
+    topicId: string;
+    datasetId?: string;
+}) {
+    const parts = [
+        `subject "${args.subjectSlug}"`,
+        args.courseSlug ? `course "${args.courseSlug}"` : null,
+        `topic "${args.topicId}"`,
+        args.datasetId ? `dataset "${args.datasetId}"` : null,
+    ].filter(Boolean);
+
+    return parts.join(", ");
+}
 
 function validateCodeInputRecipe(
     exercise: TopicBundleManifest["exercises"][number],
@@ -44,7 +61,7 @@ export async function validateGoldenTopicBundle(args: {
         });
     }
 
-    const runSql = getSqlRunner();
+    const runSql = resolveSqlRunner();
 
     for (const exercise of args.topicBundle.exercises) {
         if (exercise.kind !== "code_input") continue;
@@ -58,6 +75,9 @@ export async function validateGoldenTopicBundle(args: {
         }
 
         if (expected.strategy !== "sql") continue;
+        const firstTest = expected.tests[0];
+        const datasetId = firstTest?.runtime?.datasetId ?? expected.runtime?.datasetId;
+        const dataset = datasetId ? getSqlDatasetById(datasetId) : null;
 
         if (!runSql) {
             report.issues.push({
@@ -65,20 +85,24 @@ export async function validateGoldenTopicBundle(args: {
                 category: "tests",
                 severity: "error",
                 exerciseId: exercise.id,
-                message: `Exercise "${exercise.id}" could not validate its SQL solution because no SQL runner is configured.`,
+                message:
+                    `Exercise "${exercise.id}" could not validate its SQL solution because no SQL runner is available for ${formatSqlContext({
+                        subjectSlug: args.seed.subjectSlug,
+                        courseSlug: args.seed.courseSlug,
+                        topicId: args.seed.topicId,
+                        datasetId,
+                    })}. Configure a SQL runner or ensure the local SQLite runner dependencies are available.`,
             });
             continue;
         }
-
-        const firstTest = expected.tests[0];
         const result = await validateSqlAgainstSolution({
             learnerSql: expected.solutionCode ?? "",
             solutionSql: expected.solutionCode ?? "",
             checkSql: firstTest?.checkSql,
             dialect: firstTest?.sqlDialect ?? expected.fixedSqlDialect ?? "sqlite",
-            schemaSql: firstTest?.schemaSql ?? expected.schemaSql,
-            seedSql: firstTest?.seedSql ?? expected.seedSql,
-            datasetId: firstTest?.runtime?.datasetId ?? expected.runtime?.datasetId,
+            schemaSql: firstTest?.schemaSql ?? expected.schemaSql ?? dataset?.schemaSql,
+            seedSql: firstTest?.seedSql ?? expected.seedSql ?? dataset?.seedSql,
+            datasetId,
             ignoreRowOrder: firstTest?.ignoreRowOrder ?? false,
             runSql,
         });

@@ -1,0 +1,225 @@
+{
+  "title": "equals comparison",
+  "summary": "equals comparison in Filtering Data with WHERE",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch_1",
+      "title": "Understanding Equals Comparison",
+      "bodyMarkdown": "In SQL, the equals comparison operator (`=`) is used to filter rows based on exact matches in a column. For example, to find all products in the 'Art' category, you can use:\n\n```sql\nSELECT * FROM products WHERE category = 'Art';\n```\n\nThis query selects all columns from the `products` table where the `category` is exactly 'Art'.\n\nTry it yourself: Modify the query to find products in the 'Home' category."
+    },
+    {
+      "id": "sketch_2",
+      "title": "Using Equals with Numeric Values",
+      "bodyMarkdown": "The equals operator can also be used with numeric values. Suppose you want to find products with a price of exactly 18.00:\n\n```sql\nSELECT * FROM products WHERE price = 18.00;\n```\n\nThis query will return all products priced at 18.00.\n\nYour turn: Change the query to find products with a price of 12.99."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Basic Equals Comparison",
+      "prompt": "Which SQL query will return all products in the 'Stationery' category?",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Stationery';",
+        "SELECT * FROM products WHERE category = 'Art';",
+        "SELECT * FROM products WHERE category = 'Home';",
+        "SELECT * FROM products WHERE category = 'Office';"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Focus on the category name.",
+      "help": {
+        "concept": "The equals operator is used to filter rows by exact matches.",
+        "hint_1": "Check the category name in the WHERE clause.",
+        "hint_2": "Ensure the category name matches 'Stationery'."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Equals with Numeric Values",
+      "prompt": "Which query will find all products with a price of 39.99?",
+      "options": [
+        "SELECT * FROM products WHERE price = 39.99;",
+        "SELECT * FROM products WHERE price = 12.99;",
+        "SELECT * FROM products WHERE price = 24.50;",
+        "SELECT * FROM products WHERE price = 18.00;"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Look for the exact price value.",
+      "help": {
+        "concept": "Use the equals operator to match specific numeric values.",
+        "hint_1": "Focus on the price value in the WHERE clause.",
+        "hint_2": "Ensure the price matches 39.99."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Multiple Equals Comparisons",
+      "prompt": "Which queries will return products in the 'Art' category?",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Art';",
+        "SELECT * FROM products WHERE category = 'Stationery';",
+        "SELECT * FROM products WHERE category = 'Home';",
+        "SELECT * FROM products WHERE category = 'Art' OR category = 'Stationery';"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Consider queries that include 'Art'.",
+      "help": {
+        "concept": "The equals operator can be combined with OR for multiple conditions.",
+        "hint_1": "Look for queries that include 'Art'.",
+        "hint_2": "Check if 'Art' is included in an OR condition."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Equals in Different Contexts",
+      "prompt": "Which queries correctly use the equals operator?",
+      "options": [
+        "SELECT * FROM products WHERE price = 24.50;",
+        "SELECT * FROM products WHERE name = 'Notebook';",
+        "SELECT * FROM products WHERE stock = 10;",
+        "SELECT * FROM products WHERE created_at = '2026-01-10';"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Focus on the correct use of the equals operator.",
+      "help": {
+        "concept": "The equals operator is used for exact matches in various columns.",
+        "hint_1": "Check if the operator is used with valid column values.",
+        "hint_2": "Ensure the operator is used for exact matches."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Query Components",
+      "prompt": "Arrange the components of a SQL query in the correct order.",
+      "tokens": [
+        "SELECT *",
+        "FROM products",
+        "WHERE category = 'Art'"
+      ],
+      "correctOrder": [
+        "SELECT *",
+        "FROM products",
+        "WHERE category = 'Art'"
+      ],
+      "hint": "Start with SELECT and end with WHERE.",
+      "help": {
+        "concept": "SQL queries follow a specific order: SELECT, FROM, WHERE.",
+        "hint_1": "The query starts with SELECT.",
+        "hint_2": "The WHERE clause is used for filtering."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Reorder the parts of this SQL query correctly.",
+      "tokens": [
+        "WHERE price = 18.00",
+        "SELECT *",
+        "FROM products"
+      ],
+      "correctOrder": [
+        "SELECT *",
+        "FROM products",
+        "WHERE price = 18.00"
+      ],
+      "hint": "Remember the typical SQL query structure.",
+      "help": {
+        "concept": "The standard order is SELECT, FROM, WHERE.",
+        "hint_1": "SELECT comes first.",
+        "hint_2": "WHERE is used for conditions."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the SQL Query",
+      "prompt": "Complete the SQL query to find products with a stock of 15.",
+      "template": "SELECT * FROM products WHERE stock = [blank1];",
+      "choices": [
+        "15",
+        "10",
+        "25",
+        "50"
+      ],
+      "correctValue": "15",
+      "hint": "Focus on the stock value.",
+      "help": {
+        "concept": "Use the equals operator to match specific stock values.",
+        "hint_1": "Check the stock value in the WHERE clause.",
+        "hint_2": "Ensure the stock matches 15."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Query",
+      "prompt": "Fill in the blank to find products created on '2026-01-10'.",
+      "template": "SELECT * FROM products WHERE created_at = '[blank1]';",
+      "choices": [
+        "2026-01-10",
+        "2026-02-14",
+        "2025-12-20",
+        "2026-01-25"
+      ],
+      "correctValue": "2026-01-10",
+      "hint": "Look for the correct date.",
+      "help": {
+        "concept": "The equals operator is used for exact date matches.",
+        "hint_1": "Check the date format in the WHERE clause.",
+        "hint_2": "Ensure the date matches '2026-01-10'."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Filter Products by Category",
+      "prompt": "Write a SQL query to select all products in the 'Home' category.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Home';",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Find Products by Price",
+      "prompt": "Write a SQL query to find all products with a price of 24.50.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE price = 24.50;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Select Products by Stock",
+      "prompt": "Write a SQL query to select products with a stock of 8.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE stock = 8;",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Filtering Project",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

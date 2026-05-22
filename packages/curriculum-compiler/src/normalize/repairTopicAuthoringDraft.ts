@@ -1,4 +1,4 @@
-import type { TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
+import type { TopicAuthoringDraft, TopicSeed } from "@zoeskoul/curriculum-contracts";
 import {RetryableTopicValidationError} from "../validate/RetryableTopicValidationError.js";
 
 function normalizeText(value: unknown): string {
@@ -154,15 +154,37 @@ function makeSafeDragReorderHelp() {
 function makeSafeCodeHelp(args: {
     title: string;
     prompt: string;
+    seed?: TopicSeed;
 }) {
     const task = args.title || args.prompt || "this coding task";
+    const editorLabel =
+        args.seed?.workspacePolicy?.workspace.ui.editorLabel ??
+        (args.seed?.profileId === "sql" ? "SQL editor" : "code editor");
+    const runButtonLabel =
+        args.seed?.workspacePolicy?.workspace.ui.runButtonLabel ??
+        (args.seed?.profileId === "sql" ? "Run query" : "Run");
+    const resultsLabel =
+        args.seed?.workspacePolicy?.workspace.ui.resultsTableLabel ??
+        args.seed?.workspacePolicy?.workspace.ui.outputPanelLabel ??
+        (args.seed?.profileId === "sql" ? "results table" : "output panel");
+
+    if (args.seed?.profileId === "sql") {
+        return {
+            hint: `Read the task "${task}" and focus on the query pattern you need.`,
+            help: {
+                concept: `This SQL exercise checks whether your query returns the requested result for: "${task}".`,
+                hint_1: `Check the table name and selected columns in the ${editorLabel}.`,
+                hint_2: `Click ${runButtonLabel} and compare the ${resultsLabel} with the expected result.`,
+            },
+        };
+    }
 
     return {
         hint: `Read the task "${task}" and identify the required result.`,
         help: {
             concept: `This coding exercise checks whether your code produces the requested result for: "${task}".`,
-            hint_1: "Use the statement or expression that matches the required behavior.",
-            hint_2: "Run the code and compare the output panel with the expected result.",
+            hint_1: `Use the statement or expression that matches the required behavior in the ${editorLabel}.`,
+            hint_2: `Click ${runButtonLabel} and compare the ${resultsLabel} with the expected result.`,
         },
     };
 }
@@ -523,6 +545,7 @@ function ensureMinimumChoiceOptions(args: {
 }
 export function repairTopicAuthoringDraft(
     draft: TopicAuthoringDraft,
+    seed?: TopicSeed,
 ): TopicAuthoringDraft {
     return {
         ...draft,
@@ -730,10 +753,16 @@ export function repairTopicAuthoringDraft(
                     hint_2: base.help.hint_2,
                 },
                 bannedAnswers,
-                fallback: makeSafeCodeHelp({
-                    title: base.title,
-                    prompt: base.prompt,
-                }),
+                    fallback: makeSafeCodeHelp({
+                        title: base.title,
+                        prompt: base.prompt,
+                        seed,
+                    }),
+                });
+            const fallback = makeSafeCodeHelp({
+                title: base.title,
+                prompt: base.prompt,
+                seed,
             });
 
             return {
@@ -743,8 +772,12 @@ export function repairTopicAuthoringDraft(
                 solutionCode,
                 datasetId: normalizeText(exercise.datasetId) || undefined,
                 recipeType: exercise.recipeType,
-                hint: sanitized.hint,
-                help: sanitized.help,
+                hint: sanitized.hint || fallback.hint,
+                help: {
+                    concept: sanitized.help.concept || fallback.help.concept,
+                    hint_1: sanitized.help.hint_1 || fallback.help.hint_1,
+                    hint_2: sanitized.help.hint_2 || fallback.help.hint_2,
+                },
             };
         }),
         projectDraft: draft.projectDraft

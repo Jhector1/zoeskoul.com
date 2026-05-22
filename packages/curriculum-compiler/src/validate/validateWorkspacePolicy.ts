@@ -1,31 +1,20 @@
 import type { ResolvedWorkspacePolicy } from "../policy/resolveWorkspacePolicy.js";
 import { RetryableTopicValidationError } from "./RetryableTopicValidationError.js";
 
-const TERMINAL_PATTERNS = [
-    /\bterminal\b/i,
-    /\bcommand line\b/i,
-    /\bshell\b/i,
-    /\bpython\s+[\w.-]+\.py\b/i,
-    /\bpip install\b/i,
-];
+function escapeRegExp(value: string) {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
-const FILE_PATTERNS = [
-    /\bcreate (a )?file\b/i,
-    /\bsave\s+(this|it|the code)\s+(as|to)\b/i,
-    /\bsave\s+(as|to)\b/i,
-    /\bopen (a )?file\b/i,
-    /\b[\w.-]+\.py\b/i,
-    /\bscript file\b/i,
-    /\bpython script\b/i,
-    /\bwrite (a )?script\b/i,
-    /\bterminal\b/i,
-    /\bcommand line\b/i,
-    /\bcommand prompt\b/i,
-    /\bshell\b/i,
-    /\bREPL\b/i,
-    /\bpip install\b/i,
-    /\bpython\s+[\w./-]+\.py\b/i,
-];
+function toPattern(term: string) {
+    const escaped = escapeRegExp(term.trim());
+    if (!escaped) return null;
+
+    if (/^[a-z0-9_. -]+$/i.test(term)) {
+        return new RegExp(`(?<![\\w.-])${escaped}(?![\\w.-])`, "i");
+    }
+
+    return new RegExp(escaped, "i");
+}
 
 function throwWorkspacePolicyError(args: {
     retryable?: boolean;
@@ -44,54 +33,44 @@ function throwWorkspacePolicyError(args: {
     throw new Error(args.message);
 }
 
+function findMatch(text: string, terms: string[]) {
+    for (const term of terms) {
+        const pattern = toPattern(term);
+        if (!pattern) continue;
+        const match = text.match(pattern);
+        if (match) return { term, value: match[0] };
+    }
+
+    return null;
+}
+
 export function validateWorkspacePolicy(args: {
     text: string;
     policy: ResolvedWorkspacePolicy;
     location: string;
     retryable?: boolean;
 }) {
-    const c = args.policy.workspace.capabilities;
+    const forbiddenTerms = [
+        ...args.policy.forbiddenActionLanguage,
+        ...args.policy.avoidTerms,
+    ];
+    const match = findMatch(args.text, forbiddenTerms);
 
-    if (!c.terminal.enabled) {
-        for (const pattern of TERMINAL_PATTERNS) {
-            const match = args.text.match(pattern);
-            if (!match) continue;
-
-            throwWorkspacePolicyError({
-                retryable: args.retryable,
-                code: "WORKSPACE_TERMINAL_POLICY_VIOLATION",
-                message: `${args.location}: mentions ${JSON.stringify(match[0])} but terminal is disabled.`,
-                details: { match: match[0] },
-            });
-        }
-    }
-
-    if (!c.filesystem.enabled) {
-        for (const pattern of FILE_PATTERNS) {
-            const match = args.text.match(pattern);
-            if (!match) continue;
-
-            throwWorkspacePolicyError({
-                retryable: args.retryable,
-                code: "WORKSPACE_FILESYSTEM_POLICY_VIOLATION",
-                message: `${args.location}: mentions ${JSON.stringify(match[0])} but filesystem is disabled.`,
-                details: { match: match[0] },
-            });
-        }
-    }
-
-    for (const term of args.policy.avoidTerms) {
-        const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        const pattern = new RegExp(escaped, "i");
-        const match = args.text.match(pattern);
-
-        if (!match) continue;
+    if (match) {
+        const preferredReplacement = args.policy.preferredTerms[match.term];
+        const suggestion = preferredReplacement
+            ? ` Prefer ${JSON.stringify(preferredReplacement)} instead.`
+            : "";
 
         throwWorkspacePolicyError({
             retryable: args.retryable,
-            code: "WORKSPACE_AVOID_TERM_POLICY_VIOLATION",
-            message: `${args.location}: contains avoided workspace/course term ${JSON.stringify(term)}.`,
-            details: { term, match: match[0] },
+            code: "WORKSPACE_LANGUAGE_POLICY_VIOLATION",
+            message: `${args.location}: contains forbidden learner-facing term ${JSON.stringify(match.value)}.${suggestion}`,
+            details: {
+                term: match.term,
+                match: match.value,
+                workspacePolicyId: args.policy.workspacePolicyId ?? null,
+            },
         });
     }
 }

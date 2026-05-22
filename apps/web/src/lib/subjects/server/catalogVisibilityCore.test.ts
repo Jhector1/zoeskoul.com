@@ -76,6 +76,64 @@ describe("selectSeededVisibleSubjectsForActor", () => {
         expect(visible.map((subject) => subject.slug)).toEqual(["python"]);
     });
 
+    it("selects sql-v2 as the SQL default for an unenrolled learner", () => {
+        const visible = selectSeededVisibleSubjectsForActor([
+            {
+                slug: "sql",
+                subjectId: "sub_sql_legacy",
+                enrolled: false,
+                versioning: {
+                    family: "sql",
+                    status: "legacy",
+                    defaultForNewEnrollments: false,
+                    supersededBy: "sql-v2",
+                },
+            },
+            {
+                slug: "sql-v2",
+                subjectId: "sub_sql_active",
+                enrolled: false,
+                versioning: {
+                    family: "sql",
+                    status: "active",
+                    defaultForNewEnrollments: true,
+                    supersedes: "sql",
+                },
+            },
+        ]);
+
+        expect(visible.map((subject) => subject.slug)).toEqual(["sql-v2"]);
+    });
+
+    it("keeps sql visible for a learner enrolled in legacy SQL v1", () => {
+        const visible = selectSeededVisibleSubjectsForActor([
+            {
+                slug: "sql",
+                subjectId: "sub_sql_legacy",
+                enrolled: true,
+                versioning: {
+                    family: "sql",
+                    status: "legacy",
+                    defaultForNewEnrollments: false,
+                    supersededBy: "sql-v2",
+                },
+            },
+            {
+                slug: "sql-v2",
+                subjectId: "sub_sql_active",
+                enrolled: false,
+                versioning: {
+                    family: "sql",
+                    status: "active",
+                    defaultForNewEnrollments: true,
+                    supersedes: "sql",
+                },
+            },
+        ]);
+
+        expect(visible.map((subject) => subject.slug)).toEqual(["sql"]);
+    });
+
     it("never shows draft or disabled subjects even when seeded", () => {
         const visible = selectSeededVisibleSubjectsForActor([
             {
@@ -157,6 +215,38 @@ describe("selectSeededVisibleSubjectsForActor", () => {
             "python-disabled",
             "python-v2",
         ]);
+    });
+
+    it("admin mode shows both SQL legacy and SQL v2 subjects", () => {
+        const visible = selectCatalogSubjectsForMode(
+            [
+                {
+                    slug: "sql",
+                    subjectId: "sub_sql_legacy",
+                    enrolled: false,
+                    versioning: {
+                        family: "sql",
+                        status: "legacy",
+                        defaultForNewEnrollments: false,
+                        supersededBy: "sql-v2",
+                    },
+                },
+                {
+                    slug: "sql-v2",
+                    subjectId: "sub_sql_active",
+                    enrolled: false,
+                    versioning: {
+                        family: "sql",
+                        status: "active",
+                        defaultForNewEnrollments: true,
+                        supersedes: "sql",
+                    },
+                },
+            ],
+            "admin",
+        );
+
+        expect(visible.map((subject) => subject.slug)).toEqual(["sql", "sql-v2"]);
     });
 
     it("learner mode still hides unseeded draft disabled and duplicate family versions", () => {

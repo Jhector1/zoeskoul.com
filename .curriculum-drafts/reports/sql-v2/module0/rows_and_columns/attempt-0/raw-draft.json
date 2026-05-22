@@ -1,0 +1,159 @@
+{
+  "title": "Understanding Rows and Columns in SQL",
+  "summary": "Learn the basics of rows and columns in SQL tables, focusing on the 'students' table.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Tables",
+      "bodyMarkdown": "In SQL, data is organized into tables, which consist of rows and columns. Each table represents a specific entity, and each column represents a property of that entity. For example, consider the 'students' table:\n\n```\n| id | name | grade | age | city      |\n|----|------|-------|-----|-----------|\n| 1  | Noor | A     | 15  | Chicago   |\n| 2  | Mia  | A     | 14  | Evanston  |\n| 3  | Leo  | B     | 15  | Chicago   |\n| 4  | Ava  | C     | 14  | Oak Park  |\n| 5  | Zane | B     | 16  | Naperville|\n```\n\nEach row in the table represents a student, and each column represents a piece of information about the student, such as their name or grade. Try it yourself: imagine adding a new student to this table. What information would you need?"
+    },
+    {
+      "id": "sketch2",
+      "title": "Understanding Columns",
+      "bodyMarkdown": "Columns in a SQL table define the type of data that can be stored in each cell of that column. For example, in the 'students' table, the 'name' column stores text data, while the 'age' column stores integer data. Here's a breakdown of the columns:\n\n- **id**: INTEGER, a unique identifier for each student.\n- **name**: TEXT, the student's name.\n- **grade**: TEXT, the student's grade.\n- **age**: INTEGER, the student's age.\n- **city**: TEXT, the city where the student lives.\n\nTry this: What type of data would you store in a column named 'email'?"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Identify the Column Type",
+      "prompt": "What type of data is stored in the 'age' column of the 'students' table?",
+      "options": [
+        "TEXT",
+        "INTEGER",
+        "BOOLEAN",
+        "DATE"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider the type of data that represents age.",
+      "help": {
+        "concept": "The 'age' column stores numerical data, which is best represented by the INTEGER type.",
+        "hint_1": "Age is typically represented by numbers.",
+        "hint_2": "The INTEGER type is used for whole numbers."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Columns in the Students Table",
+      "prompt": "Which of the following are columns in the 'students' table? Select all that apply.",
+      "options": [
+        "id",
+        "name",
+        "salary",
+        "grade"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about the attributes of a student.",
+      "help": {
+        "concept": "The 'students' table includes columns that describe student attributes.",
+        "hint_1": "Focus on columns that are related to student information.",
+        "hint_2": "Salary is not a typical attribute of a student in this context."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Order the Columns",
+      "prompt": "Arrange the columns of the 'students' table in the correct order.",
+      "tokens": [
+        "id",
+        "name",
+        "grade",
+        "age",
+        "city"
+      ],
+      "correctOrder": [
+        "id",
+        "name",
+        "grade",
+        "age",
+        "city"
+      ],
+      "hint": "Start with the unique identifier.",
+      "help": {
+        "concept": "The columns are ordered based on their definition in the table schema.",
+        "hint_1": "The 'id' column is typically the first column.",
+        "hint_2": "Follow the order as defined in the table schema."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Column Name",
+      "prompt": "In the 'students' table, the column that stores the student's city is called [blank1].",
+      "template": "In the 'students' table, the column that stores the student's city is called [blank1].",
+      "choices": [
+        "age",
+        "city",
+        "grade",
+        "name"
+      ],
+      "correctValue": "city",
+      "hint": "Think about which column stores location information.",
+      "help": {
+        "concept": "The 'city' column stores the location information of the student.",
+        "hint_1": "The column name is related to the student's location.",
+        "hint_2": "The correct column name is 'city'."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Select All Students",
+      "prompt": "Write a SQL query to select all columns from the 'students' table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM students;",
+      "hint": "Use SELECT to retrieve all columns.",
+      "help": {
+        "concept": "The SELECT statement is used to retrieve data from a database.",
+        "hint_1": "Use '*' to select all columns.",
+        "hint_2": "The FROM clause specifies the table."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "code_input",
+      "title": "Select Student Names",
+      "prompt": "Write a SQL query to select only the 'name' column from the 'students' table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name FROM students;",
+      "hint": "Specify the column name in the SELECT statement.",
+      "help": {
+        "concept": "To select specific columns, list them in the SELECT statement.",
+        "hint_1": "Only include the 'name' column in your query.",
+        "hint_2": "The FROM clause specifies the table."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Select Students by City",
+      "prompt": "Write a SQL query to select all students who live in 'Chicago'.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM students WHERE city = 'Chicago';",
+      "hint": "Use the WHERE clause to filter by city.",
+      "help": {
+        "concept": "The WHERE clause is used to filter records.",
+        "hint_1": "Use '=' to specify the city.",
+        "hint_2": "The condition should match the city 'Chicago'."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Queries on the Students Table",
+    "stepIds": [
+      "quiz5",
+      "quiz6",
+      "quiz7"
+    ]
+  }
+}

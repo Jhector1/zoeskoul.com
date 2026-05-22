@@ -33,10 +33,11 @@ export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
       "description": "SQL courses focused on querying, reporting, data modeling, and practical database thinking.",
       "imagePublicId": null,
       "imageAlt": "SQL catalog cover",
-      "defaultSubjectSlug": "sql",
+      "defaultSubjectSlug": "sql-v2",
       "status": "active",
       "subjectSlugs": [
-        "sql"
+        "sql",
+        "sql-v2"
       ],
       "meta": {
         "family": "data"
@@ -49,4 +50,5 @@ export const SUBJECT_CATALOG_SLUGS: Record<string, string> = {
   "python": "python",
   "python-v2": "python",
   "sql": "sql",
+  "sql-v2": "sql",
 };

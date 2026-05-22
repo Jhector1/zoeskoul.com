@@ -1,0 +1,224 @@
+{
+  "title": "Greater Than Comparison",
+  "summary": "Learn how to use the greater than comparison operator in SQL to filter data effectively.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Greater Than Comparison",
+      "bodyMarkdown": "The greater than operator (`>`) is used in SQL to filter records where a column's value is greater than a specified value. For example, to find products with a price greater than $20, you can use the following query:\n\n```sql\nSELECT * FROM products WHERE price > 20;\n```\n\nThis query will return all products with a price greater than $20. Try it yourself by modifying the price value to see different results."
+    },
+    {
+      "id": "sketch2",
+      "title": "Example: Filtering by Stock",
+      "bodyMarkdown": "Let's say you want to find all products that have more than 10 items in stock. You can use the greater than operator in your query:\n\n```sql\nSELECT * FROM products WHERE stock > 10;\n```\n\nThis query will return all products with a stock count greater than 10. Each line of the query has a specific purpose:\n- `SELECT * FROM products`: Selects all columns from the products table.\n- `WHERE stock > 10`: Filters the results to only include rows where the stock is greater than 10.\n\nYour turn: Try changing the stock number to see how the results change."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Basic Greater Than Comparison",
+      "prompt": "Which SQL query would you use to find products with a price greater than $50?",
+      "options": [
+        "SELECT * FROM products WHERE price < 50;",
+        "SELECT * FROM products WHERE price = 50;",
+        "SELECT * FROM products WHERE price > 50;",
+        "SELECT * FROM products WHERE price <= 50;"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Focus on the operator that checks for values greater than 50.",
+      "help": {
+        "concept": "The greater than operator (`>`) is used to filter records with values greater than a specified number.",
+        "hint_1": "Look for the operator that checks for values greater than 50.",
+        "hint_2": "Remember, `>` means greater than."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Multiple Conditions with Greater Than",
+      "prompt": "Which queries will return products with a price greater than $20 and stock greater than 5? Choose all that apply.",
+      "options": [
+        "SELECT * FROM products WHERE price > 20 AND stock > 5;",
+        "SELECT * FROM products WHERE price > 20 OR stock > 5;",
+        "SELECT * FROM products WHERE price > 20 AND stock < 5;",
+        "SELECT * FROM products WHERE price > 20 AND stock > 10;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Consider both conditions: price and stock.",
+      "help": {
+        "concept": "Use `AND` to combine multiple conditions that must all be true.",
+        "hint_1": "Both conditions must be true for a product to be selected.",
+        "hint_2": "Check which options use `AND` with both conditions correctly."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Order the Steps in a Query",
+      "prompt": "Arrange the steps to create a query that finds products with a price greater than $30.",
+      "tokens": [
+        "SELECT * FROM products",
+        "WHERE price > 30",
+        "ORDER BY price DESC"
+      ],
+      "correctOrder": [
+        "SELECT * FROM products",
+        "WHERE price > 30",
+        "ORDER BY price DESC"
+      ],
+      "hint": "Start with selecting from the table, then filter, and finally order.",
+      "help": {
+        "concept": "SQL queries follow a specific order: SELECT, WHERE, ORDER BY.",
+        "hint_1": "Begin with the SELECT statement.",
+        "hint_2": "Filter with WHERE before ordering."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: Greater Than",
+      "prompt": "Complete the query to find products with a stock greater than 20.",
+      "template": "SELECT * FROM products WHERE stock [blank1] 20;",
+      "choices": [
+        ">",
+        "<",
+        "=",
+        ">="
+      ],
+      "correctValue": ">",
+      "hint": "Use the operator that checks for values greater than 20.",
+      "help": {
+        "concept": "The greater than operator (`>`) is used to filter values greater than a specified number.",
+        "hint_1": "The operator should check for values greater than 20.",
+        "hint_2": "Remember, `>` means greater than."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: Price Comparison",
+      "prompt": "Complete the query to find products with a price greater than $15.",
+      "template": "SELECT * FROM products WHERE price [blank1] 15;",
+      "choices": [
+        ">",
+        "<",
+        "=",
+        "<="
+      ],
+      "correctValue": ">",
+      "hint": "Use the operator that checks for values greater than 15.",
+      "help": {
+        "concept": "The greater than operator (`>`) is used to filter values greater than a specified number.",
+        "hint_1": "The operator should check for values greater than 15.",
+        "hint_2": "Remember, `>` means greater than."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "single_choice",
+      "title": "Understanding SQL Syntax",
+      "prompt": "What does the `>` operator do in SQL?",
+      "options": [
+        "Checks if a value is less than another value.",
+        "Checks if a value is equal to another value.",
+        "Checks if a value is greater than another value.",
+        "Checks if a value is not equal to another value."
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Focus on the operator's role in comparison.",
+      "help": {
+        "concept": "The `>` operator is used to compare values, checking if one is greater than the other.",
+        "hint_1": "The operator checks for greater values.",
+        "hint_2": "Remember, `>` means greater than."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "multi_choice",
+      "title": "Combining Conditions",
+      "prompt": "Which queries will return products with a price greater than $10 and stock greater than 20? Choose all that apply.",
+      "options": [
+        "SELECT * FROM products WHERE price > 10 AND stock > 20;",
+        "SELECT * FROM products WHERE price > 10 OR stock > 20;",
+        "SELECT * FROM products WHERE price > 10 AND stock < 20;",
+        "SELECT * FROM products WHERE price > 10 AND stock > 15;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Consider both conditions: price and stock.",
+      "help": {
+        "concept": "Use `AND` to combine multiple conditions that must all be true.",
+        "hint_1": "Both conditions must be true for a product to be selected.",
+        "hint_2": "Check which options use `AND` with both conditions correctly."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "title": "Sequence of SQL Query",
+      "prompt": "Arrange the steps to create a query that finds products with a stock greater than 5.",
+      "tokens": [
+        "SELECT * FROM products",
+        "WHERE stock > 5",
+        "ORDER BY stock DESC"
+      ],
+      "correctOrder": [
+        "SELECT * FROM products",
+        "WHERE stock > 5",
+        "ORDER BY stock DESC"
+      ],
+      "hint": "Start with selecting from the table, then filter, and finally order.",
+      "help": {
+        "concept": "SQL queries follow a specific order: SELECT, WHERE, ORDER BY.",
+        "hint_1": "Begin with the SELECT statement.",
+        "hint_2": "Filter with WHERE before ordering."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Find Expensive Products",
+      "prompt": "Write a query to find all products with a price greater than $50.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE price > 50;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Filter by Stock",
+      "prompt": "Write a query to find all products with a stock greater than 20.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE stock > 20;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "High-Value Art Supplies",
+      "prompt": "Write a query to find all art category products with a price greater than $15.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Art' AND price > 15;",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "Greater Than Comparison Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

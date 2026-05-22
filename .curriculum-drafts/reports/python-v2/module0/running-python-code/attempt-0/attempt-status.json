@@ -1,6 +1,0 @@
-{
-  "attempt": 0,
-  "status": "failed",
-  "retryable": true,
-  "errorCode": "WORKSPACE_TERMINAL_POLICY_VIOLATION"
-}

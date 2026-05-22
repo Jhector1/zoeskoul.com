@@ -1,0 +1,22 @@
+{
+  "subjectSlug": "sql",
+  "courseSlug": "sql-database-design-capstone",
+  "catalogSlug": "sql",
+  "profileId": "sql",
+  "title": "SQL Database Design and Capstone",
+  "subtitle": "Model relational databases and complete beginner portfolio-style SQL projects.",
+  "level": "beginner",
+  "learningGoals": [
+    "Recognize one-to-one, one-to-many, and many-to-many relationships.",
+    "Explain primary keys and foreign keys in design context.",
+    "Reduce duplicate data by separating repeated information.",
+    "Sketch beginner ERDs.",
+    "Use bridge tables for many-to-many relationships.",
+    "Turn a real-world scenario into related tables.",
+    "Create a beginner schema and seed data.",
+    "Write simple, filtered, grouped, and joined queries for a project.",
+    "Explain query logic in plain English.",
+    "Complete a portfolio-ready SQL capstone."
+  ],
+  "moduleCount": 2
+}

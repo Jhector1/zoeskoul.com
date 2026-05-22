@@ -1,0 +1,26 @@
+{
+  "subjectSlug": "python",
+  "catalogSlug": "python",
+  "profileId": "python",
+  "title": "Python",
+  "summary": "A beginner Python path from first programs to functions, data structures, and applied projects.",
+  "courseOrder": [
+    "python-for-beginners",
+    "python-data-functions",
+    "applied-python-projects"
+  ],
+  "milestones": [
+    {
+      "courseSlug": "python-for-beginners",
+      "outcome": "Write small interactive Python programs with variables, input, conditionals, and loops."
+    },
+    {
+      "courseSlug": "python-data-functions",
+      "outcome": "Use functions and common data structures to organize programs."
+    },
+    {
+      "courseSlug": "applied-python-projects",
+      "outcome": "Build applied beginner projects using Python fundamentals."
+    }
+  ]
+}

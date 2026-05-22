@@ -1,0 +1,507 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-4": {
+        "lists_and_ranges": {
+          "label": "Lists and Ranges",
+          "summary": "Learn how to filter from a list of values with `IN`, exclude a list with `NOT IN`, filter ranges with `BETWEEN`, and practice clear range logic.",
+          "cards": {
+            "in_operator": {
+              "title": "What does IN do?"
+            },
+            "not_in_operator": {
+              "title": "What does NOT IN do?"
+            },
+            "between_operator": {
+              "title": "What does BETWEEN do?"
+            },
+            "range_filtering_practice": {
+              "title": "How do you practice range filtering safely?"
+            },
+            "project": {
+              "title": "Project: Use Lists and Ranges"
+            },
+            "quiz": {
+              "title": "Quiz: Lists and Ranges"
+            }
+          },
+          "projectSteps": {
+            "status_in_active_draft": {
+              "title": "Keep active and draft statuses"
+            },
+            "city_not_in_chicago_miami": {
+              "title": "Skip Chicago and Miami"
+            },
+            "signup_between_jan12_jan25": {
+              "title": "Keep signups from Jan 12 to Jan 25"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-4": {
+        "lists_and_ranges": {
+          "in_operator": {
+            "title": "`IN` checks whether a value belongs to a list.",
+            "bodyMarkdown": "Sometimes rows should match one value from a small list.\n\nThat is where `IN` helps.\n\nExamples of list-style thinking are:\n\n- status is `active` or `draft`\n- city is `Chicago` or `Miami`\n\nCode example:\n\n~~~sql\nSELECT full_name, status\nFROM customers\nWHERE status IN ('active', 'draft');\n~~~\n\nThis keeps rows whose status belongs to that list.\n\nSo the key idea is:\n\n> `IN` means the value can match any item in the list\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT full_name, city\nFROM customers\nWHERE city IN ('Chicago', 'Miami');\n~~~\n\nAsk yourself:\n\n- how many city values are allowed?\n- does a row need to match all of them or just one?\n- why is this shorter than repeating several exact matches?"
+          },
+          "not_in_operator": {
+            "title": "`NOT IN` excludes rows whose value appears in a list.",
+            "bodyMarkdown": "Sometimes a known group of values should be removed.\n\nThat is where `NOT IN` helps.\n\nExamples of list-style exclusion are:\n\n- city is not `Chicago` or `Miami`\n- status is not `draft`\n\nCode example:\n\n~~~sql\nSELECT full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami');\n~~~\n\nThis keeps rows whose city is outside that list.\n\nSo the idea is:\n\n> `NOT IN` keeps rows whose value is outside the list\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT full_name, status\nFROM customers\nWHERE status NOT IN ('draft');\n~~~\n\nAsk yourself:\n\n- which rows are excluded?\n- which rows stay?\n- how is this different from an allowed-values list with `IN`?"
+          },
+          "between_operator": {
+            "title": "`BETWEEN` checks whether a value falls inside a range.",
+            "bodyMarkdown": "A range filter is useful when values should fall between two boundaries.\n\nThat is where `BETWEEN` helps.\n\nExamples are:\n\n- dates between two signup dates\n- ids between 2 and 6\n\nCode example:\n\n~~~sql\nSELECT id, full_name\nFROM customers\nWHERE id BETWEEN 2 AND 6;\n~~~\n\nThis keeps rows whose id falls inside that range.\n\nA strong idea here is:\n\n> `BETWEEN` checks the value against a start and an end\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';\n~~~\n\nAsk yourself:\n\n- what is the lower boundary?\n- what is the upper boundary?\n- what kind of values should stay?"
+          },
+          "range_filtering_practice": {
+            "title": "Range practice means checking both boundaries and the meaning of the range.",
+            "bodyMarkdown": "When a range filter is written, it helps to ask:\n\n- what is the lower boundary?\n- what is the upper boundary?\n- should both boundaries count?\n\nThat helps avoid off-by-one style mistakes.\n\nCode example:\n\n~~~sql\nSELECT id, full_name\nFROM customers\nWHERE id BETWEEN 2 AND 6;\n~~~\n\nAfter running it, the returned ids should be checked against the intended boundaries.\n\nSo the big idea is:\n\n> good range filtering starts with clear boundary meaning\n\n### Try it yourself\n\nRead this condition:\n\n~~~sql\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'\n~~~\n\nAsk yourself:\n\n- what counts as the start of the range?\n- what counts as the end?\n- what should be checked in the result after running it?"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m4_s02_status_in_active_draft": {
+      "title": "Filter with IN",
+      "prompt": "The SQLite workspace already has a table named `customers`.\n\nWrite a query that shows the `full_name` and `status` columns for customers whose `status` is either `active` or `draft`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "`IN` is useful when a value can match any one of several listed options.",
+        "hint_1": "Select `full_name` and `status`, then filter the status against a short list.",
+        "hint_2": "Build a two-column query on `customers`, then keep only rows whose status belongs to the list containing `active` and `draft`."
+      },
+      "hint": "Use `IN` with the two allowed status values.",
+      "starterCode": "-- Show customers with active or draft status\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s02_city_not_in_chicago_miami": {
+      "title": "Filter with NOT IN",
+      "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name` and `city` columns for customers whose `city` is not `Chicago` and not `Miami`.\n\nThen run it.",
+      "help": {
+        "concept": "`NOT IN` excludes rows whose value appears in a listed group.",
+        "hint_1": "Select `full_name` and `city`, then exclude a short list of city values.",
+        "hint_2": "Write a two-column query on `customers`, then keep rows whose city value is outside the list containing `Chicago` and `Miami`."
+      },
+      "hint": "Use `NOT IN` with the excluded cities.",
+      "starterCode": "-- Show customers outside Chicago and Miami\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s02_signup_between_jan12_jan25": {
+      "title": "Filter a date range with BETWEEN",
+      "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name` and `signup_date` columns for customers whose `signup_date` is between `2026-01-12` and `2026-01-25`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "`BETWEEN` is useful when values inside a lower and upper boundary are needed.",
+        "hint_1": "Select `full_name` and `signup_date`, then use the start and end dates as a range.",
+        "hint_2": "Build a two-column query on `customers`, then keep rows whose signup date falls inside the range from `2026-01-12` to `2026-01-25`."
+      },
+      "hint": "Use `BETWEEN` with the two boundary dates.",
+      "starterCode": "-- Show customers who signed up in the date range\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s02_id_between_2_6": {
+      "title": "Filter an id range",
+      "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `id` and `full_name` columns for customers whose `id` is between `2` and `6`.\n\nThen run it.",
+      "help": {
+        "concept": "`BETWEEN` can be used with numeric columns too.",
+        "hint_1": "Select `id` and `full_name`, then use the id boundaries 2 and 6.",
+        "hint_2": "Write a two-column query on `customers`, then keep rows whose id value falls inside the range from `2` to `6`."
+      },
+      "hint": "Use `BETWEEN` on the id column.",
+      "starterCode": "-- Show customers with ids between 2 and 6\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s02_status_in_inactive_draft": {
+      "title": "Use another IN filter",
+      "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name` and `status` columns for customers whose `status` is either `inactive` or `draft`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "`IN` works well when the allowed values come from a small known set.",
+        "hint_1": "Select `full_name` and `status`, then filter the status using two allowed values.",
+        "hint_2": "Build a two-column query on `customers`, then keep rows whose status belongs to the list containing `inactive` and `draft`."
+      },
+      "hint": "Use `IN` with the two status values.",
+      "starterCode": "-- Show customers with inactive or draft status\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s02_lists_ranges_project": {
+      "title": "Practice lists and ranges",
+      "prompt": "Use the SQL workspace on the right to practice list and range filtering on the `customers` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the **Results** tab\n4. check that the returned rows match the list or range logic\n\nTasks:\n\n1. Show `full_name` and `status` for customers whose `status` is `active` or `draft`\n2. Show `full_name` and `city` for customers whose `city` is not `Chicago` and not `Miami`\n3. Show `full_name` and `signup_date` for customers whose `signup_date` is between `2026-01-12` and `2026-01-25`\n4. Show `id` and `full_name` for customers whose `id` is between `2` and `6`\n5. Show `full_name` and `status` for customers whose `status` is `inactive` or `draft`\n\nRun one query at a time.\nThis project is about using `IN`, `NOT IN`, and `BETWEEN` clearly.",
+      "help": {
+        "concept": "This project builds the core habit of matching list-based questions to `IN` or `NOT IN`, and range-based questions to `BETWEEN`.",
+        "hint_1": "Some tasks are about allowed values, some are about excluded values, and some are about boundaries. Match the SQL tool to the question type.",
+        "hint_2": "Before writing each query, say whether the question is about a list or a range. Then choose the operator that fits that meaning."
+      },
+      "hint": "Decide whether the question is about a list or a range first.",
+      "starterCode": "-- Task 1\n-- Show customers with active or draft status\n\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s02_in_meaning": {
+      "title": "What does IN do?",
+      "prompt": "What is the main idea behind `IN` in SQL?",
+      "help": {
+        "concept": "`IN` checks whether a value matches one item from a list.",
+        "hint_1": "Think allowed list.",
+        "hint_2": "It is useful when one of several listed values is acceptable."
+      },
+      "hint": "Think value belongs to a list.",
+      "options": {
+        "a": "It checks whether a value matches one item in a list",
+        "b": "It sorts the result",
+        "c": "It means partial text search",
+        "d": "It always finds NULL values"
+      }
+    },
+    "m4_s02_not_in_meaning": {
+      "title": "What does NOT IN do?",
+      "prompt": "What is the main idea behind `NOT IN` in SQL?",
+      "help": {
+        "concept": "`NOT IN` excludes rows whose value appears in the given list.",
+        "hint_1": "Think outside the list.",
+        "hint_2": "It is useful when several listed values should all be excluded."
+      },
+      "hint": "Think value should stay outside the list.",
+      "options": {
+        "a": "It excludes rows whose value appears in a list",
+        "b": "It means exact text matching",
+        "c": "It renames the column",
+        "d": "It creates a range"
+      }
+    },
+    "m4_s02_between_meaning": {
+      "title": "What does BETWEEN do?",
+      "prompt": "What is the main job of `BETWEEN` in SQL?",
+      "help": {
+        "concept": "`BETWEEN` is used to check whether a value falls inside a lower and upper boundary.",
+        "hint_1": "Think start and end.",
+        "hint_2": "It is useful when values should stay inside a continuous range."
+      },
+      "hint": "Think inside a range.",
+      "options": {
+        "a": "It checks whether a value falls inside a range",
+        "b": "It checks partial text",
+        "c": "It means not equal to",
+        "d": "It removes duplicates"
+      }
+    },
+    "m4_s02_range_practice_goal": {
+      "title": "What helps with range filtering practice?",
+      "prompt": "What is a good habit when writing a range filter?",
+      "help": {
+        "concept": "A clear range starts with understanding both boundaries and what they mean.",
+        "hint_1": "Think lower boundary and upper boundary.",
+        "hint_2": "A strong habit is to say the start and end values clearly before writing the filter."
+      },
+      "hint": "Think both boundaries clearly.",
+      "options": {
+        "a": "Identify the lower and upper boundaries clearly",
+        "b": "Always sort the result first",
+        "c": "Always use text patterns",
+        "d": "Ignore the end of the range"
+      }
+    },
+    "m4_s02_list_range_result_check": {
+      "title": "How should you check a list or range result?",
+      "prompt": "After running a query with `IN`, `NOT IN`, or `BETWEEN`, what is a strong habit?",
+      "help": {
+        "concept": "You should verify that the returned rows actually fit the list or range rule.",
+        "hint_1": "Think compare rows to the condition.",
+        "hint_2": "Check whether the values belong to the list or fall inside the intended boundaries."
+      },
+      "hint": "Check the values against the list or range.",
+      "options": {
+        "a": "Verify that the returned values really match the list or range rule",
+        "b": "Ignore the condition after running",
+        "c": "Only count the rows",
+        "d": "Assume the range logic worked without checking"
+      }
+    },
+    "m4_s02_in_true": {
+      "title": "What is true about IN?",
+      "prompt": "Select all true statements about `IN` in SQL.",
+      "help": {
+        "concept": "`IN` is used for list-based matching.",
+        "hint_1": "Think one allowed value from a list.",
+        "hint_2": "Choose the statements about matching against a set of known options."
+      },
+      "hint": "Think list membership.",
+      "options": {
+        "a": "`IN` is useful for list-based matching",
+        "b": "`IN` can be used with text values",
+        "c": "`IN` can be used when several values are acceptable",
+        "d": "`IN` means range checking",
+        "e": "`IN` can make some filters shorter and clearer"
+      }
+    },
+    "m4_s02_not_in_true": {
+      "title": "What is true about NOT IN?",
+      "prompt": "Select all true statements about `NOT IN` in SQL.",
+      "help": {
+        "concept": "`NOT IN` is used to exclude listed values.",
+        "hint_1": "Think keep rows outside the list.",
+        "hint_2": "Choose the statements about exclusion from a known set of values."
+      },
+      "hint": "Think exclude listed values.",
+      "options": {
+        "a": "`NOT IN` excludes rows whose value appears in the list",
+        "b": "`NOT IN` can be useful for removing several values at once",
+        "c": "`NOT IN` is a list-based filter",
+        "d": "`NOT IN` means partial text search",
+        "e": "`NOT IN` can help simplify repeated not-equal checks"
+      }
+    },
+    "m4_s02_between_true": {
+      "title": "What is true about BETWEEN?",
+      "prompt": "Select all true statements about `BETWEEN` in SQL.",
+      "help": {
+        "concept": "`BETWEEN` is used for range-based filtering.",
+        "hint_1": "Think inside start and end boundaries.",
+        "hint_2": "Choose the statements about continuous ranges rather than lists."
+      },
+      "hint": "Think start and end boundaries.",
+      "options": {
+        "a": "`BETWEEN` is used for ranges",
+        "b": "`BETWEEN` can be used with numeric values",
+        "c": "`BETWEEN` can be used with date-style values",
+        "d": "`BETWEEN` means match one item from a list",
+        "e": "`BETWEEN` uses a lower and upper boundary"
+      }
+    },
+    "m4_s02_range_filtering_true": {
+      "title": "What helps with range filtering?",
+      "prompt": "Select all true statements about good range filtering habits.",
+      "help": {
+        "concept": "Good range filtering starts with clear boundary meaning and careful result checking.",
+        "hint_1": "Think clear start, clear end, and result verification.",
+        "hint_2": "Choose the statements about understanding the range before and after running the query."
+      },
+      "hint": "Think clear boundaries and checking.",
+      "options": {
+        "a": "You should know the lower boundary",
+        "b": "You should know the upper boundary",
+        "c": "You should check that returned values really fall in the range",
+        "d": "You should ignore the meaning of the endpoints",
+        "e": "Range logic is easier when you say it in plain English first"
+      }
+    },
+    "m4_s02_lists_ranges_workflow_true": {
+      "title": "What matches the right workflow?",
+      "prompt": "Select all statements that match a good workflow for lists and ranges.",
+      "help": {
+        "concept": "A good workflow is to identify whether the question is about a list or a range, choose the right tool, run the query, and verify the result.",
+        "hint_1": "Think list question versus range question.",
+        "hint_2": "Choose the steps that help match the English meaning to `IN`, `NOT IN`, or `BETWEEN`."
+      },
+      "hint": "Decide list or range first, then verify it.",
+      "options": {
+        "a": "Decide whether the question is about a list or a range",
+        "b": "Use `IN` or `NOT IN` for list-style logic",
+        "c": "Use `BETWEEN` for range-style logic",
+        "d": "Run the query and check that the values fit the rule",
+        "e": "Ignore the actual returned values after running"
+      }
+    },
+    "m4_s02_reorder_in_logic": {
+      "title": "What IN does",
+      "prompt": "Reorder the ideas to explain IN.",
+      "help": {
+        "concept": "IN checks whether a value matches one item from a list.",
+        "hint_1": "Think list of allowed values.",
+        "hint_2": "A match with any listed item is enough."
+      },
+      "hint": "Think membership in a list.",
+      "tokens": {
+        "t1": "sometimes several values are acceptable",
+        "t2": "those values can be written as a list",
+        "t3": "`IN` checks whether the row value belongs to that list"
+      }
+    },
+    "m4_s02_reorder_not_in_logic": {
+      "title": "What NOT IN does",
+      "prompt": "Put the exclusion idea in order.",
+      "help": {
+        "concept": "NOT IN keeps rows whose value stays outside the list.",
+        "hint_1": "Think excluded values first.",
+        "hint_2": "Rows in the list are removed."
+      },
+      "hint": "Think outside the list.",
+      "tokens": {
+        "t1": "sometimes a known set of values should be excluded",
+        "t2": "those excluded values can be written as a list",
+        "t3": "`NOT IN` keeps rows outside that list"
+      }
+    },
+    "m4_s02_reorder_between_logic": {
+      "title": "What BETWEEN does",
+      "prompt": "Reorder the ideas to explain BETWEEN.",
+      "help": {
+        "concept": "BETWEEN checks whether a value falls inside a start and end boundary.",
+        "hint_1": "Think start and end.",
+        "hint_2": "Values inside that range stay."
+      },
+      "hint": "Think inside the boundaries.",
+      "tokens": {
+        "t1": "sometimes you want values inside a continuous range",
+        "t2": "that range has a lower boundary and an upper boundary",
+        "t3": "`BETWEEN` checks whether the value falls inside them"
+      }
+    },
+    "m4_s02_reorder_range_boundaries": {
+      "title": "Range boundaries",
+      "prompt": "Put the boundary-checking habit in order.",
+      "help": {
+        "concept": "Good range filtering starts with clear lower and upper boundaries.",
+        "hint_1": "Think lower boundary first.",
+        "hint_2": "Then upper boundary, then meaning."
+      },
+      "hint": "Think clear start and end.",
+      "tokens": {
+        "t1": "identify the lower boundary clearly",
+        "t2": "identify the upper boundary clearly",
+        "t3": "check that the returned values really fit the range"
+      }
+    },
+    "m4_s02_reorder_lists_ranges_workflow": {
+      "title": "Good lists-and-ranges workflow",
+      "prompt": "Reorder the workflow.",
+      "help": {
+        "concept": "A good workflow is decide list or range, choose the operator, run, verify.",
+        "hint_1": "Meaning first.",
+        "hint_2": "Verification comes last."
+      },
+      "hint": "Decide list or range first.",
+      "tokens": {
+        "t1": "decide whether the question is about a list or a range",
+        "t2": "choose IN, NOT IN, or BETWEEN to match that meaning",
+        "t3": "run the query and verify the returned values"
+      }
+    },
+    "m4_s02_fill_in_keyword": {
+      "title": "Keyword for allowed list",
+      "prompt": "Fill in the blank with the correct keyword.",
+      "help": {
+        "concept": "IN is used when a value can match one item from a list.",
+        "hint_1": "Think allowed list.",
+        "hint_2": "The answer is IN."
+      },
+      "hint": "Think list membership.",
+      "template": "The SQL keyword used for list membership is ____.",
+      "choices": [
+        "IN",
+        "LIKE",
+        "LIMIT",
+        "GROUP"
+      ],
+      "correct": "IN"
+    },
+    "m4_s02_fill_not_in_keyword": {
+      "title": "Keyword for excluded list",
+      "prompt": "Choose the best phrase to complete the sentence.",
+      "help": {
+        "concept": "NOT IN is used when listed values should be excluded.",
+        "hint_1": "Think outside the list.",
+        "hint_2": "The answer is NOT IN."
+      },
+      "hint": "Think exclusion from a list.",
+      "template": "The SQL phrase used to exclude listed values is ____.",
+      "choices": [
+        "NOT IN",
+        "BETWEEN",
+        "ORDER BY",
+        "AS"
+      ],
+      "correct": "NOT IN"
+    },
+    "m4_s02_fill_between_keyword": {
+      "title": "Keyword for ranges",
+      "prompt": "Fill in the blank with the correct keyword.",
+      "help": {
+        "concept": "BETWEEN is used for range checking.",
+        "hint_1": "Think inside start and end.",
+        "hint_2": "The answer is BETWEEN."
+      },
+      "hint": "Think range keyword.",
+      "template": "The SQL keyword used for a start-to-end range is ____.",
+      "choices": [
+        "BETWEEN",
+        "IN",
+        "LIKE",
+        "NULL"
+      ],
+      "correct": "BETWEEN"
+    },
+    "m4_s02_fill_range_start_end": {
+      "title": "What ranges use",
+      "prompt": "Choose the best word to complete the sentence.",
+      "help": {
+        "concept": "Ranges use lower and upper boundaries.",
+        "hint_1": "Think start and end edges.",
+        "hint_2": "The word is boundaries."
+      },
+      "hint": "Think range edges.",
+      "template": "A range filter checks a value against two ____.",
+      "choices": [
+        "boundaries",
+        "columns",
+        "aliases",
+        "joins"
+      ],
+      "correct": "boundaries"
+    },
+    "m4_s02_fill_list_meaning": {
+      "title": "Meaning of IN",
+      "prompt": "Fill in the blank with the best word.",
+      "help": {
+        "concept": "IN checks membership in a list.",
+        "hint_1": "Think allowed set of values.",
+        "hint_2": "The answer is list."
+      },
+      "hint": "Think set of values.",
+      "template": "`IN` checks whether a value belongs to a ____.",
+      "choices": [
+        "list",
+        "date",
+        "join",
+        "table alias"
+      ],
+      "correct": "list"
+    }
+  }
+}

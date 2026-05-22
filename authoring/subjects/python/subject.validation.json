@@ -1,0 +1,18 @@
+{
+  "validationSuite": "pythonSubjectValidation",
+  "appliesTo": "python_courses",
+  "runtime": {
+    "language": "python"
+  },
+  "rules": {
+    "executionValidation": [
+      "Every Python code input must have starter code, expected behavior, and golden test coverage",
+      "Input/output exercises must specify stdin and expected stdout where appropriate",
+      "Do not introduce future syntax before the course concept stage unless marked preview"
+    ],
+    "pedagogy": [
+      "Beginner courses should use small programs, clear prompts, and debugging-focused exercises",
+      "Project courses should include explicit rubrics and final deliverables"
+    ]
+  }
+}

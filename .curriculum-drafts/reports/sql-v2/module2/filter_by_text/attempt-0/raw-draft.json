@@ -1,0 +1,228 @@
+{
+  "title": "Filter by Text",
+  "summary": "Learn how to filter data using text-based criteria in SQL.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Text Filtering",
+      "bodyMarkdown": "In SQL, filtering data by text is a common task. You can use the `LIKE` operator to find patterns in text columns. For example, to find all products with names starting with 'A', you can use:\n\n```sql\nSELECT * FROM products WHERE name LIKE 'A%';\n```\n\nThis query selects all rows from the `products` table where the `name` column starts with 'A'.\n\nTry it yourself: Modify the query to find products with names ending in 'k'."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using Wildcards in LIKE",
+      "bodyMarkdown": "The `LIKE` operator supports wildcards:\n- `%` matches any sequence of characters (including none).\n- `_` matches any single character.\n\nFor example, to find products with 'book' anywhere in their name:\n\n```sql\nSELECT * FROM products WHERE name LIKE '%book%';\n```\n\nThis query will return products like 'Sketchbook' and 'Notebook'.\n\nYour turn: Try using `_` to find products with exactly 5 characters in their name."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Understanding LIKE Operator",
+      "prompt": "Which SQL operator is used to filter data based on text patterns?",
+      "options": [
+        "IN",
+        "LIKE",
+        "BETWEEN",
+        "IS NULL"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "It allows pattern matching in text.",
+      "help": {
+        "concept": "The LIKE operator is used for pattern matching in text columns.",
+        "hint_1": "LIKE is used with wildcards to match text patterns.",
+        "hint_2": "It's commonly used with '%' and '_' wildcards."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Wildcard Usage",
+      "prompt": "What does the '%' wildcard represent in a LIKE pattern?",
+      "options": [
+        "Any single character",
+        "Any sequence of characters",
+        "No characters",
+        "A specific character"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "It can match multiple characters.",
+      "help": {
+        "concept": "The '%' wildcard matches any sequence of characters.",
+        "hint_1": "It can match zero or more characters.",
+        "hint_2": "Use it to find patterns anywhere in the text."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Combining Conditions",
+      "prompt": "Which of the following queries will return products in the 'Art' category with a price less than 20? Choose all that apply.",
+      "options": [
+        "SELECT * FROM products WHERE category = 'Art' AND price < 20;",
+        "SELECT * FROM products WHERE category LIKE 'Art%' AND price < 20;",
+        "SELECT * FROM products WHERE category = 'Art' OR price < 20;",
+        "SELECT * FROM products WHERE category = 'Art' AND price <= 20;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Look for queries using AND with correct conditions.",
+      "help": {
+        "concept": "Use AND to combine multiple conditions in a WHERE clause.",
+        "hint_1": "Check the conditions for category and price.",
+        "hint_2": "Ensure both conditions are met for the correct query."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Pattern Matching with LIKE",
+      "prompt": "Which queries will find products with 'Pen' in their name? Choose all that apply.",
+      "options": [
+        "SELECT * FROM products WHERE name LIKE '%Pen%';",
+        "SELECT * FROM products WHERE name LIKE 'Pen%';",
+        "SELECT * FROM products WHERE name LIKE '%Pen';",
+        "SELECT * FROM products WHERE name LIKE '_Pen_';"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Look for patterns that include 'Pen' anywhere in the name.",
+      "help": {
+        "concept": "The '%' wildcard matches any sequence of characters.",
+        "hint_1": "Use '%' to match 'Pen' anywhere in the name.",
+        "hint_2": "Ensure 'Pen' is not restricted to the start or end only."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for a SELECT query.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "hint": "Start with selecting columns, then specify the table.",
+      "help": {
+        "concept": "The correct order of SQL clauses is crucial for query execution.",
+        "hint_1": "SELECT comes first, followed by FROM.",
+        "hint_2": "WHERE filters data before ORDER BY sorts it."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "SQL Query Construction",
+      "prompt": "Arrange the parts of this SQL query to find all 'Stationery' products ordered by price descending.",
+      "tokens": [
+        "SELECT *",
+        "FROM products",
+        "WHERE category = 'Stationery'",
+        "ORDER BY price DESC"
+      ],
+      "correctOrder": [
+        "SELECT *",
+        "FROM products",
+        "WHERE category = 'Stationery'",
+        "ORDER BY price DESC"
+      ],
+      "hint": "Start with selecting all columns.",
+      "help": {
+        "concept": "The order of SQL query clauses affects the result.",
+        "hint_1": "Begin with SELECT and FROM.",
+        "hint_2": "Filter with WHERE before sorting with ORDER BY."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Using LIKE for Pattern Matching",
+      "prompt": "Complete the query to find products with names starting with 'N'.\n\n`SELECT * FROM products WHERE name LIKE [blank1];`",
+      "template": "SELECT * FROM products WHERE name LIKE [blank1];",
+      "choices": [
+        "'N%'",
+        "'%N'",
+        "'_N%'",
+        "'N_'"
+      ],
+      "correctValue": "'N%'",
+      "hint": "Use a wildcard to match any characters after 'N'.",
+      "help": {
+        "concept": "The '%' wildcard matches any sequence of characters.",
+        "hint_1": "Use '%' after 'N' to match any following characters.",
+        "hint_2": "Ensure the pattern starts with 'N'."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Filtering by Category",
+      "prompt": "Complete the query to find all products in the 'Home' category.\n\n`SELECT * FROM products WHERE category = [blank1];`",
+      "template": "SELECT * FROM products WHERE category = [blank1];",
+      "choices": [
+        "'Home'",
+        "'Art'",
+        "'Stationery'",
+        "'Office'"
+      ],
+      "correctValue": "'Home'",
+      "hint": "Match the exact category name.",
+      "help": {
+        "concept": "Use '=' to filter by exact text values.",
+        "hint_1": "The category should match 'Home'.",
+        "hint_2": "Ensure the category name is correct and complete."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Find Products by Category",
+      "prompt": "Write a query to find all products in the 'Art' category.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Art';",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Filter Products by Price",
+      "prompt": "Write a query to find all products with a price greater than 20.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE price > 20;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Find Recent Products",
+      "prompt": "Write a query to find all products added after '2026-01-01'.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE created_at > '2026-01-01';",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Filtering Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "subjectSlug": "sql",
+  "courseSlug": "sql-data-management",
+  "catalogSlug": "sql",
+  "profileId": "sql",
+  "title": "SQL Data Management",
+  "subtitle": "Learn to insert, update, delete, and create tables safely in SQL.",
+  "level": "beginner",
+  "learningGoals": [
+    "Insert rows using explicit column lists.",
+    "Insert multiple rows safely.",
+    "Understand defaults, NULL values, and required columns.",
+    "Preview rows before changing data.",
+    "Update selected rows using WHERE.",
+    "Delete selected rows using WHERE.",
+    "Explain why unsafe UPDATE and DELETE statements are dangerous.",
+    "Create beginner tables with clear columns.",
+    "Choose simple SQLite-friendly data types.",
+    "Use beginner constraints such as PRIMARY KEY, NOT NULL, UNIQUE, and FOREIGN KEY.",
+    "Validate schema changes with follow-up queries."
+  ],
+  "moduleCount": 3
+}

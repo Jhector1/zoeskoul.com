@@ -1,0 +1,23 @@
+{
+  "subjectSlug": "sql",
+  "courseSlug": "multi-table-sql",
+  "catalogSlug": "sql",
+  "profileId": "sql",
+  "title": "Multi-Table SQL",
+  "subtitle": "Learn joins, relationships, cleaner query writing, and beginner subqueries.",
+  "level": "beginner",
+  "learningGoals": [
+    "Explain why relational databases split data across tables.",
+    "Identify primary keys and foreign keys in beginner schemas.",
+    "Write INNER JOIN queries.",
+    "Write LEFT JOIN queries.",
+    "Interpret unmatched rows and NULLs after LEFT JOIN.",
+    "Recognize duplicate rows caused by joins.",
+    "Use table aliases to make joins readable.",
+    "Format longer SQL across multiple lines.",
+    "Use beginner subqueries in WHERE.",
+    "Use beginner subqueries in FROM.",
+    "Compare join-based and subquery-based solutions."
+  ],
+  "moduleCount": 3
+}

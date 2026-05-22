@@ -176,9 +176,11 @@ function cleanModuleProject(value: unknown): string | undefined {
     return text.slice(0, cut).trim() || undefined;
 }
 
-function normalizeReleasePlan(raw: any) {
+function normalizeReleasePlan(raw: any, moduleNumbers: number[]) {
     const current = raw?.currentRelease;
     const releases = Array.isArray(raw?.releases) ? raw.releases : [];
+    const startModuleNumber = moduleNumbers.length ? Math.min(...moduleNumbers) : 0;
+    const endModuleNumber = moduleNumbers.length ? Math.max(...moduleNumbers) : 0;
 
     const normalizedCurrent =
         current &&
@@ -194,8 +196,8 @@ function normalizeReleasePlan(raw: any) {
             }
             : {
                 name: "current",
-                startModuleNumber: 0,
-                endModuleNumber: 8,
+                startModuleNumber,
+                endModuleNumber,
             };
 
     const normalizedReleases =
@@ -229,7 +231,10 @@ function normalizeTopicId(args: {
     topicIndex: number;
     used: Set<string>;
 }) {
-    let base = String(args.topic?.topicId ?? "").trim();
+    let base =
+        typeof args.topic === "string"
+            ? args.topic.trim()
+            : String(args.topic?.topicId ?? "").trim();
 
     if (!base) {
         const titleSlug = slugify(args.topic?.title ?? "");
@@ -259,6 +264,9 @@ function normalizeTopic(
     topicIndex: number,
     used: Set<string>,
 ): CourseSpecTopic {
+    const topicTitle =
+        typeof topic === "string" ? topic.replace(/[_-]+/g, " ") : topic?.title;
+
     return {
         topicNumber: cleanString(topic?.topicNumber),
         topicId: normalizeTopicId({
@@ -268,7 +276,7 @@ function normalizeTopic(
             topicIndex,
             used,
         }),
-        title: String(topic?.title ?? "").trim(),
+        title: String(topicTitle ?? "").trim(),
         summary: cleanString(topic?.summary),
         minutes:
             typeof topic?.minutes === "number" && Number.isFinite(topic.minutes)
@@ -398,7 +406,7 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
             ? input.policy.runtimePolicy
             : undefined;
 
-    const normalizedModules = modules.map((module: any) =>
+    const normalizedModules: CourseSpecModule[] = modules.map((module: any) =>
         normalizeModule(module, usedTopicIds, profileId, globalRuntimePolicy),
     );
 
@@ -408,14 +416,38 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
                 ? input.authoringFormatVersion
                 : "2.0",
         subjectSlug: String(input.subjectSlug ?? "").trim(),
+        courseSlug: String(input.courseSlug ?? "").trim(),
+        catalogSlug: String(input.catalogSlug ?? "").trim(),
         profileId,
         sourceLocale: cleanString(input.sourceLocale) ?? "en",
         targetLocales: Array.isArray(input.targetLocales)
             ? input.targetLocales.filter((x: unknown): x is string => typeof x === "string")
             : [],
         title: String(input.title ?? "").trim(),
+        trackSlug: cleanString(input.trackSlug),
+        courseNumber:
+            typeof input.courseNumber === "number" && Number.isFinite(input.courseNumber)
+                ? input.courseNumber
+                : undefined,
+        status: cleanString(input.status) as any,
         subtitle: cleanString(input.subtitle),
-        intendedFor: cleanString(input.intendedFor),
+        prerequisites: cleanStringArray(input.prerequisites),
+        recommendedPrerequisites: cleanStringArray(input.recommendedPrerequisites),
+        moduleRange:
+            input.moduleRange && typeof input.moduleRange === "object"
+                ? input.moduleRange
+                : undefined,
+        versioning:
+            input.versioning && typeof input.versioning === "object"
+                ? input.versioning
+                : undefined,
+        validationPolicy:
+            input.validationPolicy && typeof input.validationPolicy === "object"
+                ? input.validationPolicy
+                : undefined,
+        intendedFor: Array.isArray(input.intendedFor)
+            ? cleanStringArray(input.intendedFor)
+            : cleanString(input.intendedFor),
         courseOverview: {
             recommendedSequence: cleanString(input.courseOverview?.recommendedSequence),
             summary: cleanString(input.courseOverview?.summary),
@@ -423,7 +455,10 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
                 ? input.courseOverview.moduleSummary
                 : [],
         },
-        releasePlan: normalizeReleasePlan(input.releasePlan),
+        releasePlan: normalizeReleasePlan(
+            input.releasePlan,
+            normalizedModules.map((module) => module.moduleNumber),
+        ),
         policy:
             input.policy && typeof input.policy === "object"
                 ? input.policy
@@ -483,6 +518,7 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
                 }
                 : undefined,
         workspaceProfileId: cleanString(input.workspaceProfileId),
+        workspacePolicyId: cleanString(input.workspacePolicyId),
         workspaceOverrides:
             input.workspaceOverrides && typeof input.workspaceOverrides === "object"
                 ? input.workspaceOverrides

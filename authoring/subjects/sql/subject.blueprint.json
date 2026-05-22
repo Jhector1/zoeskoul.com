@@ -1,0 +1,36 @@
+{
+  "subjectSlug": "sql",
+  "catalogSlug": "sql",
+  "profileId": "sql",
+  "title": "SQL for Beginners",
+  "summary": "A complete beginner SQL path from database foundations through reporting, joins, data management, database design, and portfolio projects.",
+  "courseOrder": [
+    "sql-foundations",
+    "sql-analysis-reporting",
+    "multi-table-sql",
+    "sql-data-management",
+    "sql-database-design-capstone"
+  ],
+  "milestones": [
+    {
+      "courseSlug": "sql-foundations",
+      "outcome": "Read and filter data from single tables."
+    },
+    {
+      "courseSlug": "sql-analysis-reporting",
+      "outcome": "Build calculated, aggregate, and grouped reports."
+    },
+    {
+      "courseSlug": "multi-table-sql",
+      "outcome": "Query across related tables and read longer SQL."
+    },
+    {
+      "courseSlug": "sql-data-management",
+      "outcome": "Insert, update, delete, and create tables safely."
+    },
+    {
+      "courseSlug": "sql-database-design-capstone",
+      "outcome": "Design relational systems and complete portfolio SQL projects."
+    }
+  ]
+}

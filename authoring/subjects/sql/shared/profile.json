@@ -1,0 +1,14 @@
+{
+  "profileId": "sql",
+  "language": "sql",
+  "runtime": {
+    "kind": "sqlite",
+    "resultShape": "table"
+  },
+  "workspaceProfileId": "browser-sql-runner",
+  "workspacePolicyId": "sql-browser-workspace",
+  "checker": {
+    "defaultRecipe": "sql_query",
+    "validationMode": "result_table"
+  }
+}

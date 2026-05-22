@@ -1,0 +1,218 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "query_one_column": {
+          "label": "Query One Column",
+          "summary": "Learn how to retrieve a single column from a table using the SELECT statement in SQL.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to SELECT"
+            },
+            "sketch1": {
+              "title": "Worked Example"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "SQL Query Practice Project"
+            }
+          },
+          "projectSteps": {
+            "quiz5": {
+              "title": "Select Product Names"
+            },
+            "quiz6": {
+              "title": "Select Product Prices"
+            },
+            "quiz7": {
+              "title": "Select Product Categories"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Basic SELECT Syntax",
+              "prompt": "Which SQL statement is used to retrieve data from a database?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "INSERT",
+                "b": "SELECT",
+                "c": "UPDATE",
+                "d": "DELETE"
+              }
+            },
+            "quiz2": {
+              "title": "Selecting Columns",
+              "prompt": "Which of the following are valid ways to select columns from a table?",
+              "hint": "Consider the correct syntax for selecting columns.",
+              "help": {
+                "concept": "The SELECT statement specifies columns to retrieve.",
+                "hint_1": "Look for statements that correctly specify columns.",
+                "hint_2": "The wildcard '*' selects all columns."
+              },
+              "options": {
+                "a": "SELECT name FROM products;",
+                "b": "SELECT * FROM products;",
+                "c": "SELECT price, stock FROM products;",
+                "d": "SELECT WHERE name FROM products;"
+              }
+            },
+            "quiz3": {
+              "title": "Order of SQL Keywords",
+              "prompt": "Arrange the SQL keywords in the correct order to form a basic query.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "FROM",
+                "t3": "products",
+                "t4": "name"
+              }
+            },
+            "quiz4": {
+              "title": "Fill in the Blank",
+              "prompt": "Complete the SQL statement to select the 'category' column from the 'products' table: `SELECT [blank1] FROM products;`",
+              "hint": "Think about which column you want to retrieve.",
+              "help": {
+                "concept": "The SELECT statement specifies which column to retrieve.",
+                "hint_1": "Focus on the column name you need.",
+                "hint_2": "The column is related to product types."
+              },
+              "template": "SELECT [blank1] FROM products;",
+              "choices": [
+                "category",
+                "price",
+                "name",
+                "stock"
+              ]
+            },
+            "quiz5": {
+              "title": "Select Product Names",
+              "prompt": "Write a SQL query to select the 'name' column from the 'products' table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            },
+            "quiz6": {
+              "title": "Select Product Prices",
+              "prompt": "Write a SQL query to select the 'price' column from the 'products' table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            },
+            "quiz7": {
+              "title": "Select Product Categories",
+              "prompt": "Write a SQL query to select the 'category' column from the 'products' table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            },
+            "quiz8": {
+              "title": "Understanding SELECT",
+              "prompt": "What does the SELECT statement do in SQL?",
+              "hint": "Think about the purpose of SELECT in data retrieval.",
+              "help": {
+                "concept": "The SELECT statement is used to retrieve data from a database.",
+                "hint_1": "SELECT is about fetching, not modifying.",
+                "hint_2": "It's the opposite of DELETE."
+              },
+              "options": {
+                "a": "It modifies data in a table.",
+                "b": "It retrieves data from a table.",
+                "c": "It deletes data from a table.",
+                "d": "It creates a new table."
+              }
+            },
+            "quiz9": {
+              "title": "Valid SQL Queries",
+              "prompt": "Which of the following are valid SQL queries to select data?",
+              "hint": "Consider the correct syntax for selecting data.",
+              "help": {
+                "concept": "The SELECT statement specifies columns to retrieve.",
+                "hint_1": "Look for statements that correctly specify columns.",
+                "hint_2": "The wildcard '*' selects all columns."
+              },
+              "options": {
+                "a": "SELECT * FROM products;",
+                "b": "SELECT name, price FROM products;",
+                "c": "SELECT WHERE name FROM products;",
+                "d": "SELECT id FROM products;"
+              }
+            },
+            "quiz10": {
+              "title": "SQL Query Structure",
+              "prompt": "Arrange the SQL keywords in the correct order to form a basic query.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "FROM",
+                "t2": "SELECT",
+                "t3": "products",
+                "t4": "category"
+              }
+            },
+            "quiz11": {
+              "title": "Fill in the SQL Statement",
+              "prompt": "Complete the SQL statement to select the 'stock' column from the 'products' table: `SELECT [blank1] FROM products;`",
+              "hint": "Think about which column you want to retrieve.",
+              "help": {
+                "concept": "The SELECT statement specifies which column to retrieve.",
+                "hint_1": "Focus on the column name you need.",
+                "hint_2": "The column is related to product inventory."
+              },
+              "template": "SELECT [blank1] FROM products;",
+              "choices": [
+                "stock",
+                "price",
+                "name",
+                "category"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "query_one_column": {
+          "sketch1": {
+            "title": "Introduction to SELECT",
+            "bodyMarkdown": "The SELECT statement is used to retrieve data from a database. To query a single column, you specify the column name after the SELECT keyword. For example, to retrieve the 'name' column from the 'products' table, you would write:\n\n```\nSELECT name FROM products;\n```\n\nThis query will return all the values in the 'name' column. Try it yourself by writing a query to select the 'category' column from the 'products' table."
+          },
+          "sketch2": {
+            "title": "Worked Example",
+            "bodyMarkdown": "Let's say you want to find out all the product names in your catalog. You can use the following SQL query:\n\n```\nSELECT name FROM products;\n```\n\nThis query will return a list of all product names stored in the 'products' table. Each row in the result corresponds to a product. Your turn: modify the query to select the 'price' column instead."
+          }
+        }
+      }
+    }
+  }
+}

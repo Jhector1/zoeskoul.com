@@ -1,0 +1,216 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "why_sql_is_useful": {
+          "label": "why sql is useful",
+          "summary": "why sql is useful in Getting Started with SQL and Databases",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to SQL"
+            },
+            "sketch1": {
+              "title": "Why Use SQL?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "SQL Query Practice"
+            }
+          },
+          "projectSteps": {
+            "quiz9": {
+              "title": "Basic SQL Query"
+            },
+            "quiz10": {
+              "title": "Select Specific Columns"
+            },
+            "quiz11": {
+              "title": "Select All Students"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Purpose of SQL",
+              "prompt": "What is the primary purpose of SQL?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "To create web pages",
+                "b": "To manage and query databases",
+                "c": "To design graphics",
+                "d": "To write operating systems"
+              }
+            },
+            "quiz2": {
+              "title": "SQL Query Example",
+              "prompt": "Which SQL query retrieves all columns from the students table?",
+              "hint": "Consider the standard SQL syntax for selecting all columns.",
+              "help": {
+                "concept": "The SELECT statement is used to query data from a database.",
+                "hint_1": "The asterisk (*) is used to select all columns.",
+                "hint_2": "The correct SQL syntax starts with SELECT."
+              },
+              "options": {
+                "a": "SELECT * FROM students;",
+                "b": "GET ALL FROM students;",
+                "c": "FETCH * FROM students;",
+                "d": "RETRIEVE ALL FROM students;"
+              }
+            },
+            "quiz3": {
+              "title": "SQL Capabilities",
+              "prompt": "Which of the following operations can SQL perform? (Choose all that apply)",
+              "hint": "Think about the core functions of SQL in database management.",
+              "help": {
+                "concept": "SQL is used for querying, updating, and managing databases.",
+                "hint_1": "SQL is not used for web design.",
+                "hint_2": "SQL can manage data and database structures."
+              },
+              "options": {
+                "a": "Querying data",
+                "b": "Updating records",
+                "c": "Designing web pages",
+                "d": "Managing database structures"
+              }
+            },
+            "quiz4": {
+              "title": "Benefits of SQL",
+              "prompt": "What are some benefits of using SQL? (Choose all that apply)",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "Standardized language",
+                "b": "Platform independence",
+                "c": "Limited to small datasets",
+                "d": "Complex data manipulation"
+              }
+            },
+            "quiz5": {
+              "title": "SQL Query Structure",
+              "prompt": "Arrange the parts of a basic SQL query in the correct order.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "FROM",
+                "t3": "students"
+              }
+            },
+            "quiz6": {
+              "title": "SQL Keywords Order",
+              "prompt": "Reorder the SQL keywords to form a valid query structure.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "FROM",
+                "t2": "SELECT",
+                "t3": "students"
+              }
+            },
+            "quiz7": {
+              "title": "SQL Query Completion",
+              "prompt": "Complete the SQL query to select all columns from the students table.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "SELECT [blank1] FROM students;",
+              "choices": [
+                "*",
+                "name",
+                "age",
+                "grade"
+              ]
+            },
+            "quiz8": {
+              "title": "SQL Table Reference",
+              "prompt": "Fill in the blank to complete the SQL query for selecting all data from the students table.",
+              "hint": "Think about the table name you want to query.",
+              "help": {
+                "concept": "The FROM clause specifies the table to query.",
+                "hint_1": "The table name is 'the missing term'.",
+                "hint_2": "The correct table name is the one containing student data."
+              },
+              "template": "SELECT * FROM [blank1];",
+              "choices": [
+                "students",
+                "teachers",
+                "courses",
+                "grades"
+              ]
+            },
+            "quiz9": {
+              "title": "Basic SQL Query",
+              "prompt": "Write a SQL query to select all columns from the students table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query below"
+            },
+            "quiz10": {
+              "title": "Select Specific Columns",
+              "prompt": "Write a SQL query to select the name and age columns from the students table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query below"
+            },
+            "quiz11": {
+              "title": "Select All Students",
+              "prompt": "Write a SQL query to select all students from the students table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "why_sql_is_useful": {
+          "sketch1": {
+            "title": "Introduction to SQL",
+            "bodyMarkdown": "SQL, or Structured Query Language, is a powerful tool for managing and manipulating databases. It allows users to perform a variety of operations such as querying data, updating records, and managing database structures. For example, to retrieve all student names from a database, you can use the following SQL query:\n\n```sql\nSELECT name FROM students;\n```\n\nTry it yourself: Write a query to select all columns from the students table."
+          },
+          "sketch2": {
+            "title": "Why Use SQL?",
+            "bodyMarkdown": "SQL is essential for interacting with databases because it provides a standardized way to perform operations on data. Whether you're working with small datasets or large enterprise databases, SQL enables you to efficiently retrieve and manipulate data. For instance, if you want to find out which students are from Chicago, you can use a SQL query to filter the data accordingly.\n\nTry this: Consider how you might extend the query to include more specific criteria."
+          }
+        }
+      }
+    }
+  }
+}

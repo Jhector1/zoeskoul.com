@@ -1,0 +1,228 @@
+{
+  "title": "Understanding SELECT in SQL",
+  "summary": "Learn how to use the SELECT statement to retrieve data from a database.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch_1",
+      "title": "Introduction to SELECT",
+      "bodyMarkdown": "The SELECT statement is used to query the database and retrieve data. It specifies the columns to display and the table to retrieve the data from. For example, to retrieve all columns from the 'products' table, you can use the following query:\n\n```sql\nSELECT * FROM products;\n```\n\nThis query will return all rows and columns from the 'products' table. Try it yourself by writing this query in the SQL editor and clicking 'Run query'."
+    },
+    {
+      "id": "sketch_2",
+      "title": "Selecting Specific Columns",
+      "bodyMarkdown": "You can specify which columns you want to retrieve by listing them after the SELECT keyword. For example, to retrieve only the 'name' and 'price' columns from the 'products' table, use:\n\n```sql\nSELECT name, price FROM products;\n```\n\nThis query will return only the 'name' and 'price' columns for all rows in the 'products' table. Try modifying the query to include other columns like 'category' or 'stock'."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Understanding SELECT",
+      "prompt": "What does the SELECT statement do in SQL?",
+      "options": [
+        "It modifies data in the database.",
+        "It retrieves data from the database.",
+        "It deletes data from the database.",
+        "It creates a new table in the database."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about the primary purpose of the SELECT statement.",
+      "help": {
+        "concept": "The SELECT statement is used to retrieve data from a database.",
+        "hint_1": "SELECT is used to query data.",
+        "hint_2": "SELECT does not modify or delete data."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Columns in SELECT",
+      "prompt": "What does the following SQL query do?\n\n```sql\nSELECT name, price FROM products;\n```",
+      "options": [
+        "It retrieves all columns from the 'products' table.",
+        "It retrieves only the 'name' and 'price' columns from the 'products' table.",
+        "It retrieves only the 'name' column from the 'products' table.",
+        "It retrieves only the 'price' column from the 'products' table."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Look at the columns specified after the SELECT keyword.",
+      "help": {
+        "concept": "The query specifies which columns to retrieve from the table.",
+        "hint_1": "The query lists 'name' and 'price' after SELECT.",
+        "hint_2": "Only the specified columns are retrieved."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "SELECT Statement Features",
+      "prompt": "Which of the following are true about the SELECT statement in SQL? Choose all that apply.",
+      "options": [
+        "It can retrieve data from multiple tables.",
+        "It can specify which columns to retrieve.",
+        "It can be used to update data in the database.",
+        "It can retrieve all columns using '*'."
+      ],
+      "correctOptionIds": [
+        "b",
+        "d"
+      ],
+      "hint": "Consider what SELECT can do with columns and tables.",
+      "help": {
+        "concept": "SELECT is used to retrieve data and can specify columns.",
+        "hint_1": "SELECT can specify columns or use '*' for all columns.",
+        "hint_2": "SELECT does not update data."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Using SELECT with Conditions",
+      "prompt": "Which statements are true about using SELECT with conditions? Choose all that apply.",
+      "options": [
+        "SELECT can be combined with WHERE to filter results.",
+        "SELECT can use ORDER BY to sort results.",
+        "SELECT can use GROUP BY to aggregate results.",
+        "SELECT can use JOIN to combine tables."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Think about how SELECT can be used to filter and sort data.",
+      "help": {
+        "concept": "SELECT can be used with WHERE and ORDER BY for filtering and sorting.",
+        "hint_1": "WHERE filters results, ORDER BY sorts them.",
+        "hint_2": "GROUP BY and JOIN are not part of basic SELECT usage."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for a basic SELECT query.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "hint": "Consider the logical flow of retrieving and filtering data.",
+      "help": {
+        "concept": "The order of SQL clauses affects how the query is processed.",
+        "hint_1": "SELECT specifies columns, FROM specifies tables.",
+        "hint_2": "WHERE filters data, ORDER BY sorts it."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Arrange the parts of a SQL query to form a valid statement.",
+      "tokens": [
+        "FROM products",
+        "SELECT name, price",
+        "WHERE price > 10",
+        "ORDER BY name"
+      ],
+      "correctOrder": [
+        "SELECT name, price",
+        "FROM products",
+        "WHERE price > 10",
+        "ORDER BY name"
+      ],
+      "hint": "Start with SELECT and follow the logical sequence.",
+      "help": {
+        "concept": "A SQL query follows a specific structure starting with SELECT.",
+        "hint_1": "SELECT comes first, followed by FROM.",
+        "hint_2": "WHERE filters, ORDER BY sorts."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Basic SELECT Syntax",
+      "prompt": "Complete the SQL query to select all columns from the 'products' table.\n\n`SELECT [blank1] FROM products;`",
+      "template": "SELECT [blank1] FROM products;",
+      "choices": [
+        "*",
+        "name",
+        "price",
+        "category"
+      ],
+      "correctValue": "*",
+      "hint": "Use the wildcard character to select all columns.",
+      "help": {
+        "concept": "The '*' character is used to select all columns in a table.",
+        "hint_1": "The wildcard '*' selects all columns.",
+        "hint_2": "Use '*' to avoid listing each column individually."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Specifying Columns",
+      "prompt": "Complete the SQL query to select the 'name' and 'price' columns from the 'products' table.\n\n`SELECT [blank1] FROM products;`",
+      "template": "SELECT [blank1] FROM products;",
+      "choices": [
+        "name, price",
+        "name",
+        "price",
+        "*"
+      ],
+      "correctValue": "name, price",
+      "hint": "List the columns separated by a comma.",
+      "help": {
+        "concept": "Specify multiple columns by separating them with commas.",
+        "hint_1": "Use a comma to separate column names.",
+        "hint_2": "Both 'name' and 'price' should be included."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Retrieve All Products",
+      "prompt": "Write a SQL query to retrieve all columns from the 'products' table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Select Specific Columns",
+      "prompt": "Write a SQL query to retrieve the 'name' and 'category' columns from the 'products' table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name, category FROM products;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Filter Products by Price",
+      "prompt": "Write a SQL query to retrieve the 'name' and 'price' of products where the price is greater than 20.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name, price FROM products WHERE price > 20;",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

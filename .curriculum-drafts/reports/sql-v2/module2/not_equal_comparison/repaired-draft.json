@@ -1,0 +1,253 @@
+{
+  "title": "Not Equal Comparison in SQL",
+  "summary": "Learn how to use the not equal comparison operator in SQL to filter data effectively.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch_1",
+      "title": "Understanding Not Equal Comparison",
+      "bodyMarkdown": "In SQL, the not equal comparison operator is used to filter out rows that do not match a specific value. The syntax for not equal can vary between SQL dialects, but in SQLite, you can use either `<>` or `!=`. \n\nFor example, if you want to find all products that are not in the 'Art' category, you can write:\n\n```sql\nSELECT * FROM products WHERE category <> 'Art';\n```\n\nThis query will return all rows where the category is not 'Art'.\n\n**Try it yourself**: Modify the query to find products that are not in the 'Home' category."
+    },
+    {
+      "id": "sketch_2",
+      "title": "Worked Example: Filtering by Price",
+      "bodyMarkdown": "Let's say you want to find products that do not cost $12.99. You can use the not equal operator to achieve this:\n\n```sql\nSELECT * FROM products WHERE price != 12.99;\n```\n\nThis query will return all products except those priced at $12.99.\n\n**Step-by-step explanation**:\n1. `SELECT * FROM products`: This selects all columns from the products table.\n2. `WHERE price != 12.99`: This filters out rows where the price is exactly $12.99.\n\n**Your turn**: Try changing the price to filter out products that do not cost $39.99."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Identifying the Not Equal Operator",
+      "prompt": "Which of the following is a valid not equal operator in SQLite?",
+      "options": [
+        "<>",
+        "==",
+        "===",
+        "=>"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Filtering with Not Equal",
+      "prompt": "What will the following query return?\n\n```sql\nSELECT * FROM products WHERE category != 'Stationery';\n```",
+      "options": [
+        "All products in the 'Stationery' category",
+        "All products not in the 'Stationery' category",
+        "All products",
+        "No products"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider what the `!=` operator does.",
+      "help": {
+        "concept": "The `!=` operator filters out rows that match the specified value.",
+        "hint_1": "The query excludes products in the 'Stationery' category.",
+        "hint_2": "The result includes products from all other categories."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Using Not Equal in Queries",
+      "prompt": "Which of the following queries will return products that are not in the 'Home' category? Choose all that apply.",
+      "options": [
+        "SELECT * FROM products WHERE category <> 'Home';",
+        "SELECT * FROM products WHERE category != 'Home';",
+        "SELECT * FROM products WHERE category IS NOT 'Home';"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Look for queries that exclude the 'Home' category.",
+      "help": {
+        "concept": "The `<>` and `!=` operators are used to exclude specific values.",
+        "hint_1": "Both `<>` and `!=` can be used for not equal comparisons.",
+        "hint_2": "Queries using `=` or `IS NOT` are not correct for this task."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "Understanding Not Equal Logic",
+      "prompt": "Which statements about the not equal operator are true? Choose all that apply.",
+      "options": [
+        "It can be represented as `<>`.",
+        "It can be represented as `!=`.",
+        "It is used to filter out rows that match a specific value.",
+        "It is used to select rows that match a specific value."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Consider the purpose and representations of the not equal operator.",
+      "help": {
+        "concept": "The not equal operator is used to exclude specific values from the results.",
+        "hint_1": "Both `<>` and `!=` are valid representations.",
+        "hint_2": "The operator is used to filter out, not select, matching values."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Ordering SQL Query Components",
+      "prompt": "Arrange the components of a SQL query to find products not in the 'Art' category.",
+      "tokens": [
+        "SELECT *",
+        "FROM products",
+        "WHERE category",
+        "<>",
+        "'Art';"
+      ],
+      "correctOrder": [
+        "SELECT *",
+        "FROM products",
+        "WHERE category",
+        "<>",
+        "'Art';"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "Constructing a Not Equal Query",
+      "prompt": "Reorder the components to create a query that finds products not priced at $18.00.",
+      "tokens": [
+        "SELECT *",
+        "FROM products",
+        "WHERE price",
+        "!=",
+        "18.00;"
+      ],
+      "correctOrder": [
+        "SELECT *",
+        "FROM products",
+        "WHERE price",
+        "!=",
+        "18.00;"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Completing a Not Equal Query",
+      "prompt": "Fill in the blank to complete the query that finds products not in the 'Stationery' category.\n\n```sql\nSELECT * FROM products WHERE category [blank1] 'Stationery';\n```",
+      "template": "SELECT * FROM products WHERE category [blank1] 'Stationery';",
+      "choices": [
+        "=",
+        "!=",
+        "<>",
+        "IS NOT"
+      ],
+      "correctValue": "<>",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "Using Not Equal with Price",
+      "prompt": "Fill in the blank to complete the query that finds products not priced at $24.50.\n\n```sql\nSELECT * FROM products WHERE price [blank1] 24.50;\n```",
+      "template": "SELECT * FROM products WHERE price [blank1] 24.50;",
+      "choices": [
+        "=",
+        "!=",
+        "<>",
+        "IS NOT"
+      ],
+      "correctValue": "=",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Querying Non-Stationery Products",
+      "prompt": "Write a SQL query to find all products that are not in the 'Stationery' category.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products WHERE category != 'Stationery';",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Excluding a Specific Price",
+      "prompt": "Write a SQL query to find all products that do not have a price of $39.99.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products WHERE price != 39.99;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Filtering by Stock",
+      "prompt": "Write a SQL query to find all products that do not have a stock of 10.",
+      "starterCode": "-- Write your SQL query here",
+      "solutionCode": "SELECT * FROM products WHERE stock != 10;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Filtering Project",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

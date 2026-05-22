@@ -1,0 +1,13 @@
+{
+  "topicId": "why_sql_is_useful",
+  "ok": false,
+  "issues": [
+    {
+      "code": "SQL_FUTURE_CONCEPT",
+      "category": "pedagogy",
+      "severity": "error",
+      "exerciseId": "quiz7",
+      "message": "Exercise \"quiz7\" uses future SQL concept(s) not allowed in module 0: WHERE, comparison_operators."
+    }
+  ]
+}

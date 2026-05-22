@@ -3,21 +3,27 @@ import {
     buildPublishGateResult,
     loadBlueprint,
     publishDraft,
+    resolveSubjectPublishTarget,
 } from "@zoeskoul/curriculum-compiler";
 
-export async function runPublishAuto(blueprintPath: string) {
-    const blueprint = await loadBlueprint(blueprintPath);
+function looksLikeBlueprintPath(value: string) {
+    return value.endsWith(".json") || value.includes("/") || value.includes("\\");
+}
+
+export async function runPublishAuto(input: string) {
+    const blueprint = looksLikeBlueprintPath(input) ? await loadBlueprint(input) : null;
+    const target = await resolveSubjectPublishTarget(blueprint?.subjectSlug ?? input);
 
     const gate = await buildPublishGateResult({
-        subjectSlug: blueprint.subjectSlug,
-        profileId: blueprint.profileId,
+        subjectSlug: target.liveSubjectSlug,
+        profileId: target.blueprint.profileId,
     });
 
     assertPublishGate(gate);
 
     await publishDraft({
-        subjectSlug: blueprint.subjectSlug,
+        subjectSlug: target.liveSubjectSlug,
     });
 
-    console.log(`Auto-published subject ${blueprint.subjectSlug}`);
+    console.log(`Auto-published subject ${target.liveSubjectSlug}`);
 }

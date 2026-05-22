@@ -1,0 +1,19 @@
+{
+  "policyId": "python-data-functions-validation",
+  "allowedConcepts": [
+    "functions",
+    "parameters",
+    "return values",
+    "lists",
+    "dictionaries"
+  ],
+  "disallowedConcepts": [
+    "classes",
+    "external packages",
+    "multi-file projects"
+  ],
+  "validationRequirements": {
+    "goldenTestsRequired": true,
+    "requireFunctionFocusedChecks": true
+  }
+}

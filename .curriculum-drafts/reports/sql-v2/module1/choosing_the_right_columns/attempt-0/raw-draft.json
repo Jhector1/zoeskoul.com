@@ -1,0 +1,229 @@
+{
+  "title": "Choosing the Right Columns",
+  "summary": "Learn how to select specific columns in SQL queries using the SELECT statement.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding SELECT",
+      "bodyMarkdown": "The SELECT statement in SQL is used to retrieve data from a database. You can specify which columns you want to retrieve by listing them after the SELECT keyword. For example, to get the 'name' and 'price' of products from the 'products' table, you would write:\n\n```\nSELECT name, price FROM products;\n```\n\nThis query will return a table with only the 'name' and 'price' columns for each product. Try it yourself by selecting different columns from the 'products' table."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using SELECT with All Columns",
+      "bodyMarkdown": "If you want to retrieve all columns from a table, you can use the asterisk (*) wildcard. For example:\n\n```\nSELECT * FROM products;\n```\n\nThis query will return all columns for each product in the 'products' table. It's a quick way to view all data, but be cautious with large tables as it can return a lot of data. Your turn: try selecting all columns from the 'products' table and see the results."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Basic SELECT Syntax",
+      "prompt": "Which SQL statement is used to select all columns from the 'products' table?",
+      "options": [
+        "SELECT all FROM products;",
+        "SELECT * FROM products;",
+        "SELECT columns FROM products;",
+        "SELECT everything FROM products;"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the wildcard character to select all columns.",
+      "help": {
+        "concept": "The asterisk (*) is used in SQL to select all columns from a table.",
+        "hint_1": "Remember the wildcard character used in SQL.",
+        "hint_2": "The correct statement uses the asterisk (*) to select all columns."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Selecting Specific Columns",
+      "prompt": "How would you select only the 'name' and 'price' columns from the 'products' table?",
+      "options": [
+        "SELECT name, price FROM products;",
+        "SELECT name price FROM products;",
+        "SELECT (name, price) FROM products;",
+        "SELECT name AND price FROM products;"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "List the columns separated by commas.",
+      "help": {
+        "concept": "To select specific columns, list them separated by commas after the SELECT keyword.",
+        "hint_1": "Check the syntax for listing multiple columns.",
+        "hint_2": "Ensure columns are separated by commas."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Understanding Column Selection",
+      "prompt": "Which of the following statements correctly select columns from the 'products' table? Choose all that apply.",
+      "options": [
+        "SELECT name, category FROM products;",
+        "SELECT price, stock FROM products;",
+        "SELECT * FROM products WHERE price > 20;",
+        "SELECT id, name, price FROM products;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Focus on the syntax for selecting columns.",
+      "help": {
+        "concept": "Correct column selection involves listing columns after SELECT.",
+        "hint_1": "Look for statements that correctly list columns after SELECT.",
+        "hint_2": "Statements with WHERE are not just about column selection."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Using SELECT with Conditions",
+      "prompt": "Which statements correctly use SELECT with conditions? Choose all that apply.",
+      "options": [
+        "SELECT * FROM products WHERE price > 20;",
+        "SELECT name FROM products WHERE stock < 10;",
+        "SELECT category FROM products;",
+        "SELECT * FROM products WHERE category = 'Art';"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Consider both column selection and condition application.",
+      "help": {
+        "concept": "SELECT can be combined with WHERE to filter results based on conditions.",
+        "hint_1": "Look for statements that include both SELECT and WHERE.",
+        "hint_2": "Ensure the conditions are correctly applied after WHERE."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Ordering SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for a basic query.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "hint": "Consider the logical flow of a SQL query.",
+      "help": {
+        "concept": "SQL queries typically start with SELECT, followed by FROM, and then WHERE if conditions are applied.",
+        "hint_1": "SELECT comes first to specify columns.",
+        "hint_2": "FROM specifies the table, and WHERE applies conditions."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Put the SQL query components in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "ORDER BY"
+      ],
+      "hint": "Think about how you build a SQL query.",
+      "help": {
+        "concept": "The ORDER BY clause is used after SELECT and FROM to sort the results.",
+        "hint_1": "SELECT specifies columns, FROM specifies the table.",
+        "hint_2": "ORDER BY is used to sort the results."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Using Wildcards",
+      "prompt": "To select all columns from a table, use the [blank1] wildcard.",
+      "template": "SELECT [blank1] FROM products;",
+      "choices": [
+        "*",
+        "all",
+        "columns",
+        "everything"
+      ],
+      "correctValue": "*",
+      "hint": "The wildcard character is a single symbol.",
+      "help": {
+        "concept": "The asterisk (*) is the wildcard used to select all columns.",
+        "hint_1": "It's a single character used in SQL.",
+        "hint_2": "The asterisk (*) is commonly used for selecting all columns."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Column Selection Syntax",
+      "prompt": "To select the 'name' and 'category' columns, the correct syntax is SELECT [blank1] FROM products;",
+      "template": "SELECT [blank1] FROM products;",
+      "choices": [
+        "name, category",
+        "name category",
+        "(name, category)",
+        "name AND category"
+      ],
+      "correctValue": "name, category",
+      "hint": "Columns should be separated by a specific character.",
+      "help": {
+        "concept": "Columns are separated by commas in SQL.",
+        "hint_1": "Use a comma to separate column names.",
+        "hint_2": "The correct syntax uses commas between column names."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Basic SELECT Query",
+      "prompt": "Write a SQL query to select the 'name' and 'price' columns from the 'products' table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name, price FROM products;",
+      "recipeType": "sql_query",
+      "datasetId": "products_catalog"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Selecting All Columns",
+      "prompt": "Write a SQL query to select all columns from the 'products' table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products;",
+      "recipeType": "sql_query",
+      "datasetId": "products_catalog"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Using WHERE Clause",
+      "prompt": "Write a SQL query to select the 'name' and 'stock' columns from the 'products' table where the 'price' is greater than 20.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name, stock FROM products WHERE price > 20;",
+      "recipeType": "sql_query",
+      "datasetId": "products_catalog"
+    }
+  ],
+  "projectDraft": {
+    "title": "Starter Query Sheet",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

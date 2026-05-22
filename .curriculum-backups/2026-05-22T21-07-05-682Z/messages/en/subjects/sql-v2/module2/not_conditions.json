@@ -1,0 +1,215 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-2": {
+        "not_conditions": {
+          "label": "not conditions",
+          "summary": "Learn how to use NOT conditions in SQL to filter data effectively.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding NOT Conditions"
+            },
+            "sketch1": {
+              "title": "Combining NOT with Other Conditions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "SQL Filtering Project"
+            }
+          },
+          "projectSteps": {
+            "code_input_1": {
+              "title": "Filter Products by Category"
+            },
+            "code_input_2": {
+              "title": "Exclude Low Stock Items"
+            },
+            "code_input_3": {
+              "title": "Filter by Price and Category"
+            }
+          },
+          "quiz": {
+            "single_choice_1": {
+              "title": "Purpose of NOT Condition",
+              "prompt": "What is the primary purpose of using the NOT condition in SQL?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "To select rows that match a specific condition.",
+                "b": "To exclude rows that match a specific condition.",
+                "c": "To sort the results in descending order.",
+                "d": "To combine multiple conditions."
+              }
+            },
+            "single_choice_2": {
+              "title": "Using NOT with AND",
+              "prompt": "Which query will return products that are not in the 'Stationery' category and have a stock greater than 20?",
+              "hint": "Consider how NOT affects the category condition.",
+              "help": {
+                "concept": "Combining NOT with AND allows you to exclude specific categories while applying additional conditions.",
+                "hint_1": "NOT should be used before the category condition.",
+                "hint_2": "Ensure the stock condition is also met."
+              },
+              "options": {
+                "a": "SELECT * FROM products WHERE category = 'Stationery' AND stock > 20;",
+                "b": "SELECT * FROM products WHERE NOT category = 'Stationery' AND stock > 20;",
+                "c": "SELECT * FROM products WHERE category = 'Stationery' OR stock > 20;",
+                "d": "SELECT * FROM products WHERE NOT (category = 'Stationery' OR stock > 20);"
+              }
+            },
+            "multi_choice_1": {
+              "title": "NOT Condition Usage",
+              "prompt": "In which scenarios would you use the NOT condition? Select all that apply.",
+              "hint": "NOT is used to exclude specific conditions.",
+              "help": {
+                "concept": "The NOT condition is used to exclude rows that match certain criteria.",
+                "hint_1": "NOT helps in excluding specific categories or prices.",
+                "hint_2": "It is not used for sorting or finding specific values."
+              },
+              "options": {
+                "a": "To find products not in a specific category.",
+                "b": "To exclude products with a certain price.",
+                "c": "To sort products by name.",
+                "d": "To find products with a specific stock level."
+              }
+            },
+            "multi_choice_2": {
+              "title": "Combining NOT with OR",
+              "prompt": "Which queries correctly use NOT with OR? Select all that apply.",
+              "hint": "Consider how NOT affects grouped conditions.",
+              "help": {
+                "concept": "Using NOT with OR requires careful grouping to ensure correct logic.",
+                "hint_1": "NOT affects the entire condition within parentheses.",
+                "hint_2": "Ensure logical operators are correctly combined."
+              },
+              "options": {
+                "a": "SELECT * FROM products WHERE NOT (category = 'Home' OR price < 50);",
+                "b": "SELECT * FROM products WHERE NOT (category = 'Home') AND NOT (price < 50);",
+                "c": "SELECT * FROM products WHERE category = 'Home' AND NOT price < 50;"
+              }
+            },
+            "drag_reorder_1": {
+              "title": "Order of Operations with NOT",
+              "prompt": "Arrange the steps to correctly filter products that are not in the 'Art' category and have a stock less than 20.",
+              "hint": "Start with the SELECT statement.",
+              "help": {
+                "concept": "The WHERE clause follows the SELECT statement and includes conditions.",
+                "hint_1": "Begin with the SELECT statement.",
+                "hint_2": "Follow with the WHERE clause and conditions."
+              },
+              "tokens": {
+                "t1": "SELECT * FROM products",
+                "t2": "WHERE NOT category = 'Art'",
+                "t3": "AND stock < 20;"
+              }
+            },
+            "drag_reorder_2": {
+              "title": "Combining NOT with AND",
+              "prompt": "Arrange the steps to filter products that are not in the 'Stationery' category and have a price greater than $10.",
+              "hint": "Start with the SELECT statement.",
+              "help": {
+                "concept": "The WHERE clause follows the SELECT statement and includes conditions.",
+                "hint_1": "Begin with the SELECT statement.",
+                "hint_2": "Follow with the WHERE clause and conditions."
+              },
+              "tokens": {
+                "t1": "SELECT * FROM products",
+                "t2": "WHERE NOT category = 'Stationery'",
+                "t3": "AND price > 10;"
+              }
+            },
+            "fill_blank_choice_1": {
+              "title": "Using NOT in a Query",
+              "prompt": "Complete the query to find products that are not in the 'Home' category.",
+              "hint": "Which keyword negates a condition?",
+              "help": {
+                "concept": "The the missing term keyword is used to negate conditions in SQL.",
+                "hint_1": "the missing term is used to exclude specific conditions.",
+                "hint_2": "It negates the condition it precedes."
+              },
+              "template": "SELECT * FROM products WHERE [blank1] category = 'Home';",
+              "choices": [
+                "NOT",
+                "AND",
+                "OR",
+                "LIKE"
+              ]
+            },
+            "fill_blank_choice_2": {
+              "title": "Excluding Specific Prices",
+              "prompt": "Complete the query to exclude products with a price less than $20.",
+              "hint": "Which keyword negates a condition?",
+              "help": {
+                "concept": "The the missing term keyword is used to negate conditions in SQL.",
+                "hint_1": "the missing term is used to exclude specific conditions.",
+                "hint_2": "It negates the condition it precedes."
+              },
+              "template": "SELECT * FROM products WHERE [blank1] price < 20;",
+              "choices": [
+                "NOT",
+                "AND",
+                "OR",
+                "LIKE"
+              ]
+            },
+            "code_input_1": {
+              "title": "Filter Products by Category",
+              "prompt": "Write a query to find all products that are not in the 'Art' category.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            },
+            "code_input_2": {
+              "title": "Exclude Low Stock Items",
+              "prompt": "Write a query to find products that are not in the 'Stationery' category and have a stock greater than 10.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            },
+            "code_input_3": {
+              "title": "Filter by Price and Category",
+              "prompt": "Write a query to find products that are not in the 'Home' category and have a price less than $50.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-2": {
+        "not_conditions": {
+          "sketch1": {
+            "title": "Understanding NOT Conditions",
+            "bodyMarkdown": "The NOT condition in SQL is used to negate a condition in a WHERE clause. This means that it will return rows where the condition is not true. For example, if you want to find all products that are not in the 'Art' category, you can use the NOT condition.\n\n```sql\nSELECT * FROM products WHERE NOT category = 'Art';\n```\n\nThis query will return all products except those in the 'Art' category. Try it yourself by modifying the category to see how the results change."
+          },
+          "sketch2": {
+            "title": "Combining NOT with Other Conditions",
+            "bodyMarkdown": "You can combine the NOT condition with other logical operators like AND and OR to create more complex queries. For instance, if you want to find products that are not in the 'Art' category and have a price greater than $20, you can write:\n\n```sql\nSELECT * FROM products WHERE NOT category = 'Art' AND price > 20;\n```\n\nThis query will return products that are not in the 'Art' category and are priced above $20. Try this query and adjust the price to see different results."
+          }
+        }
+      }
+    }
+  }
+}

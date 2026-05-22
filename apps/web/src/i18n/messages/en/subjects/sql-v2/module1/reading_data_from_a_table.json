@@ -1,0 +1,522 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "reading_data_from_a_table": {
+          "label": "Reading Data from a Table",
+          "summary": "Learn how `FROM` points to the table, how to choose useful columns, and how to write clean beginner queries that are easy to read.",
+          "cards": {
+            "from_and_table_names": {
+              "title": "What does `FROM` do in a query?"
+            },
+            "choosing_the_right_columns": {
+              "title": "How do you choose the right columns?"
+            },
+            "viewing_clean_results": {
+              "title": "What makes results feel clean and easy to read?"
+            },
+            "writing_simple_readable_queries": {
+              "title": "How do you write simple readable queries?"
+            },
+            "project": {
+              "title": "Project: Read Table Data"
+            },
+            "quiz": {
+              "title": "Quiz: Reading Data from a Table"
+            }
+          },
+          "projectSteps": {
+            "show_names_from_products": {
+              "title": "Show product names"
+            },
+            "show_names_and_categories": {
+              "title": "Show names and categories"
+            },
+            "write_readable_product_query": {
+              "title": "Write a readable product query"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "reading_data_from_a_table": {
+          "from_and_table_names": {
+            "title": "`FROM` tells SQL which table to read.",
+            "bodyMarkdown": "In a beginner query, `FROM` tells SQL where the data should come from.\n\nExample:\n\n~~~sql\nSELECT name FROM products;\n~~~\n\nHere:\n\n- `SELECT name` tells SQL what to return\n- `FROM products` tells SQL which table to read\n\nSo `products` is the source table.\n\nThat means `FROM` answers this question:\n\n> which table should SQL use?\n\nIf the table name is wrong, SQL cannot return the data you expected.\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT category FROM products;\n~~~\n\nAsk yourself:\n\n- what is the source table?\n- what is the returned column?\n- which part of the query tells SQL where to read from?"
+          },
+          "choosing_the_right_columns": {
+            "title": "Choose columns based on the question you are asking.",
+            "bodyMarkdown": "A useful query starts with a purpose.\n\nBefore writing SQL, ask:\n\n> what do I want to know?\n\nThen choose columns that help answer that question.\n\nExamples:\n\nIf you want a quick price view, useful columns might be:\n\n- `name`\n- `price`\n\nIf you want inventory information, useful columns might be:\n\n- `name`\n- `stock`\n\nIf you want product types, useful columns might be:\n\n- `name`\n- `category`\n\nSo the key idea is:\n\n> pick columns that match the question\n\n### Try it yourself\n\nSuppose you want to answer this question:\n\n> Which products do I have, and how much do they cost?\n\nBefore writing SQL, decide:\n\n- which columns do you need?\n- which columns can you ignore?\n- would `SELECT *` be more than necessary?"
+          },
+          "viewing_clean_results": {
+            "title": "Clean results usually come from focused columns and a good reading habit.",
+            "bodyMarkdown": "A result table feels easier to read when it only shows the information you actually need.\n\nFor example, this is usually easier to scan than a full table view:\n\n~~~sql\nSELECT name, price FROM products;\n~~~\n\nWhy?\n\n- fewer columns\n- less visual noise\n- easier comparisons\n\nBut clean results are not only about fewer columns.\nThey are also about how you read them.\n\nA good beginner reading order is:\n\n1. read the column names first\n2. read the values under each column\n3. check whether the result matches the question you had in mind\n\n### Try it yourself\n\nImagine you run this query:\n\n~~~sql\nSELECT name, category, price FROM products;\n~~~\n\nAsk yourself:\n\n- how many columns should the result have?\n- what should the headers be?\n- is this narrower or wider than `SELECT * FROM products;`?"
+          },
+          "writing_simple_readable_queries": {
+            "title": "Readable queries are small, clear, and easy to scan.",
+            "bodyMarkdown": "A beginner query should make it easy for a person to notice two things quickly:\n\n- what data is being returned\n- which table it is coming from\n\nA clean readable pattern is:\n\n~~~sql\nSELECT name, price\nFROM products;\n~~~\n\nThis is readable because:\n\n- the selected columns are easy to spot\n- the source table is easy to spot\n- the query has one simple purpose\n\nYou can also write short queries on one line, but a clear layout helps you build good habits.\n\n### Try it yourself\n\nTake this query:\n\n~~~sql\nSELECT id, name, price FROM products;\n~~~\n\nRewrite it like this:\n\n~~~sql\nSELECT id, name, price\nFROM products;\n~~~\n\nThen ask:\n\n- which version is easier to scan?\n- where do you see the selected columns?\n- where do you see the source table?"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m1_s02_show_names_from_products": {
+      "title": "Show product names",
+      "prompt": "The SQLite workspace already has a table named `products`.\n\nWrite a query that returns only the `name` column from `products`.\n\nClick **Run** and read the **Results** tab.",
+      "help": {
+        "concept": "A basic reading query uses `SELECT` for the column and `FROM` for the table name.",
+        "hint_1": "Use `name` after `SELECT`, and use `products` after `FROM`.",
+        "hint_2": "This query has two key parts: the column you want to return and the table that contains it. Put `name` in the select part and `products` in the from part."
+      },
+      "hint": "Select `name` from `products`.",
+      "starterCode": "-- Show only product names\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s02_show_names_and_categories": {
+      "title": "Show names and categories",
+      "prompt": "The `products` table already exists.\n\nWrite a query that returns the `name` and `category` columns from `products`.\n\nRun it and compare the result with the full table.",
+      "help": {
+        "concept": "You can choose the columns that best match your question by listing them after `SELECT`.",
+        "hint_1": "Use both `name` and `category` after `SELECT`.",
+        "hint_2": "List the two column names separated by a comma, then point SQL to the `products` table with `FROM`."
+      },
+      "hint": "Choose `name` and `category`.",
+      "starterCode": "-- Show product names and categories\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s02_show_name_price_stock": {
+      "title": "Show names, prices, and stock",
+      "prompt": "The `products` table already exists.\n\nWrite a query that returns the `name`, `price`, and `stock` columns from `products`.\n\nRun it and notice how the result stays focused even with three columns.",
+      "help": {
+        "concept": "A clean result often comes from choosing a small set of useful columns instead of returning the full table.",
+        "hint_1": "Use the three columns `name`, `price`, and `stock`.",
+        "hint_2": "Write a `SELECT ... FROM ...` query. After `SELECT`, list the three column names in the order you want to read them, then use `FROM products`."
+      },
+      "hint": "List the three columns after `SELECT`.",
+      "starterCode": "-- Show names, prices, and stock\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s02_show_categories_only": {
+      "title": "Show only categories",
+      "prompt": "The `products` table already exists.\n\nWrite a query that returns only the `category` column from `products`.\n\nRun it and read the single-column result carefully.",
+      "help": {
+        "concept": "Single-column queries are useful when you only want one type of information from the table.",
+        "hint_1": "Use `category` after `SELECT`.",
+        "hint_2": "Keep the query simple: choose only the `category` column, then read from the `products` table."
+      },
+      "hint": "Select just `category`.",
+      "starterCode": "-- Show only categories\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s02_write_readable_product_query": {
+      "title": "Write a readable query",
+      "prompt": "The `products` table already exists.\n\nWrite a simple readable query that returns the `id`, `name`, and `price` columns from `products`.\n\nYou may write it on one line or multiple lines, but keep it easy to read.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Readable SQL is clear about what columns are being returned and which table the data comes from.",
+        "hint_1": "Use the columns `id`, `name`, and `price` with `FROM products`.",
+        "hint_2": "Think in two parts: first the selected columns, then the source table. Put the three columns in a clear order, then add `FROM products`."
+      },
+      "hint": "Use `id`, `name`, and `price`.",
+      "starterCode": "-- Write a clean readable query here\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s02_products_reader_project": {
+      "title": "Read data from the products table",
+      "prompt": "Use the SQL workspace on the right to practice reading data from the `products` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the **Results** tab\n4. compare how the output changes when you choose different columns\n\nTasks:\n\n1. Show only the `name` column\n2. Show the `name` and `category` columns\n3. Show the `name`, `price`, and `stock` columns\n4. Show only the `category` column\n5. Show the `id`, `name`, and `price` columns\n\nRun one query at a time.\nThis project is about choosing useful columns and reading the returned table clearly.",
+      "help": {
+        "concept": "This project trains the habit of matching the query to the question: choose the right columns, run the query, and read the result carefully.",
+        "hint_1": "Each task uses the same beginner shape: `SELECT` chosen columns `FROM products`.",
+        "hint_2": "Solve the tasks one by one. Keep using the same table, and only change the selected columns depending on what information the task asks for."
+      },
+      "hint": "Use the same table each time and vary the columns.",
+      "starterCode": "-- Task 1\n-- Show only the product names\n\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s02_from_points_to": {
+      "title": "What does FROM point to?",
+      "prompt": "In a beginner SQL query, what does `FROM` mainly tell SQL?",
+      "help": {
+        "concept": "This checks the core meaning of `FROM`: it tells SQL which table to read.",
+        "hint_1": "Think about the source of the data.",
+        "hint_2": "It names the table SQL should read from."
+      },
+      "hint": "Think source table.",
+      "options": {
+        "a": "Which table to read from",
+        "b": "Which row to delete first",
+        "c": "How to sort the results",
+        "d": "How to rename a column"
+      }
+    },
+    "m1_s02_choose_columns_for_question": {
+      "title": "How do you choose the right columns?",
+      "prompt": "What is the best beginner reason for selecting specific columns?",
+      "help": {
+        "concept": "You choose columns based on the question you want the result to answer.",
+        "hint_1": "Think about returning only useful information.",
+        "hint_2": "The best choice is the one that matches what you actually want to know."
+      },
+      "hint": "Match the query to the question.",
+      "options": {
+        "a": "Choose the columns that fit the question you are asking",
+        "b": "Always choose every column",
+        "c": "Never use the table name",
+        "d": "Only choose columns alphabetically"
+      }
+    },
+    "m1_s02_clean_results_meaning": {
+      "title": "What usually makes results feel clean?",
+      "prompt": "What usually makes a result table easier to read?",
+      "help": {
+        "concept": "Results often feel cleaner when they show only the useful columns.",
+        "hint_1": "Too much extra information can make a result noisy.",
+        "hint_2": "A smaller focused result is often easier to scan than a wide table."
+      },
+      "hint": "Think focused columns.",
+      "options": {
+        "a": "Showing only the useful columns",
+        "b": "Adding random extra columns",
+        "c": "Ignoring the headers",
+        "d": "Typing the query without a table name"
+      }
+    },
+    "m1_s02_readable_query_goal": {
+      "title": "What is the goal of a readable query?",
+      "prompt": "What is the main goal when writing a simple readable SQL query?",
+      "help": {
+        "concept": "Readable SQL helps a human quickly understand what the query returns and where it reads from.",
+        "hint_1": "Think clarity, not fancy tricks.",
+        "hint_2": "A readable query is easy for a person to scan and understand."
+      },
+      "hint": "Think clarity.",
+      "options": {
+        "a": "Make the query easy for a human to understand",
+        "b": "Hide the table name",
+        "c": "Make it as long as possible",
+        "d": "Remove all column names"
+      }
+    },
+    "m1_s02_read_result_headers_first": {
+      "title": "How should you read the result?",
+      "prompt": "What is a good beginner way to read a result table?",
+      "help": {
+        "concept": "A strong reading habit is to check the headers first, then read the values below them.",
+        "hint_1": "Start with the labels.",
+        "hint_2": "The column names tell you what the values mean."
+      },
+      "hint": "Headers first.",
+      "options": {
+        "a": "Read the column names first, then the rows",
+        "b": "Ignore the headers",
+        "c": "Only read the last row",
+        "d": "Only read the first number you see"
+      }
+    },
+    "m1_s02_from_true": {
+      "title": "What is true about FROM?",
+      "prompt": "Select all true statements about `FROM` in a beginner query.",
+      "help": {
+        "concept": "`FROM` tells SQL which table is the source of the data.",
+        "hint_1": "Think source table and query structure.",
+        "hint_2": "Choose the statements about where the data comes from."
+      },
+      "hint": "Think source table.",
+      "options": {
+        "a": "It tells SQL which table to read from",
+        "b": "It is part of the basic `SELECT ... FROM ...` shape",
+        "c": "It helps connect the selected columns to a table",
+        "d": "It always means sort the rows",
+        "e": "The table name often comes after it"
+      }
+    },
+    "m1_s02_right_columns_true": {
+      "title": "What is true about choosing columns?",
+      "prompt": "Select all true statements about choosing the right columns in a query.",
+      "help": {
+        "concept": "Good column choices make both the query and the result easier to understand.",
+        "hint_1": "Think focus and usefulness.",
+        "hint_2": "Choose the ideas about selecting what is actually needed."
+      },
+      "hint": "Think useful and focused.",
+      "options": {
+        "a": "Good column choices depend on the question you want answered",
+        "b": "Returning fewer columns can make the result easier to read",
+        "c": "You can list specific columns after `SELECT`",
+        "d": "You must always use `*`",
+        "e": "Useful columns help reduce noise in the result"
+      }
+    },
+    "m1_s02_clean_results_true": {
+      "title": "What helps make results feel clean?",
+      "prompt": "Select all true statements about clean and readable result tables.",
+      "help": {
+        "concept": "A clean result is usually focused and easy to interpret.",
+        "hint_1": "Think useful columns and reading habits.",
+        "hint_2": "Choose the statements that help make results easier to scan."
+      },
+      "hint": "Think focus and clarity.",
+      "options": {
+        "a": "Fewer useful columns can make results easier to scan",
+        "b": "Reading headers first helps you understand the values",
+        "c": "Focused results reduce visual noise",
+        "d": "Random extra columns always help",
+        "e": "Clean results often match the purpose of the query"
+      }
+    },
+    "m1_s02_readable_queries_true": {
+      "title": "What is true about readable queries?",
+      "prompt": "Select all true statements about writing simple readable queries.",
+      "help": {
+        "concept": "Readable SQL is clear, focused, and easy for a person to follow.",
+        "hint_1": "Think clarity, simple structure, and one purpose.",
+        "hint_2": "Choose the ideas that help a human understand the query quickly."
+      },
+      "hint": "Think clear and focused.",
+      "options": {
+        "a": "A readable query clearly shows the selected columns",
+        "b": "A readable query clearly shows the source table",
+        "c": "Keeping a query focused can improve readability",
+        "d": "A readable query should hide what it is doing",
+        "e": "Simple structure helps humans scan the query"
+      }
+    },
+    "m1_s02_reading_data_flow_true": {
+      "title": "What matches the right beginner workflow?",
+      "prompt": "Select all statements that match a good beginner workflow for reading data from a table.",
+      "help": {
+        "concept": "The learner should match the question to the columns, run the query, and read the result carefully.",
+        "hint_1": "Think choose, run, inspect.",
+        "hint_2": "Choose the steps that help you read data clearly instead of guessing."
+      },
+      "hint": "Choose columns, run, read.",
+      "options": {
+        "a": "Pick columns that match the question",
+        "b": "Use the correct table name after `FROM`",
+        "c": "Run the query and read the headers first",
+        "d": "Compare how the result changes when you choose different columns",
+        "e": "Ignore the result and guess what happened"
+      }
+    },
+    "m1_s02_reorder_from_meaning": {
+      "title": "What FROM does",
+      "prompt": "Reorder the ideas to explain what `FROM` does in a query.",
+      "help": {
+        "concept": "`FROM` tells SQL which table is the source of the data.",
+        "hint_1": "Start with the column part, then the table part.",
+        "hint_2": "The table named after `FROM` is the source."
+      },
+      "hint": "Think what to return, then where to get it.",
+      "tokens": {
+        "t1": "`SELECT` says what to return",
+        "t2": "`FROM` says which table to read",
+        "t3": "the table after `FROM` is the source"
+      }
+    },
+    "m1_s02_reorder_choose_columns_by_question": {
+      "title": "Choose columns by question",
+      "prompt": "Put these ideas in the best order.",
+      "help": {
+        "concept": "Good column choices depend on the question you are asking.",
+        "hint_1": "Start with the question.",
+        "hint_2": "Then choose the matching columns."
+      },
+      "hint": "Question first, columns second.",
+      "tokens": {
+        "t1": "decide what you want to know",
+        "t2": "choose the columns that match that question",
+        "t3": "the result becomes easier to understand"
+      }
+    },
+    "m1_s02_reorder_clean_results": {
+      "title": "What makes results feel clean",
+      "prompt": "Reorder the ideas to explain why focused results are easier to read.",
+      "help": {
+        "concept": "Clean results usually come from selecting only useful columns.",
+        "hint_1": "Start with fewer useful columns.",
+        "hint_2": "Then explain the easier reading."
+      },
+      "hint": "Less noise, more clarity.",
+      "tokens": {
+        "t1": "return only the useful columns",
+        "t2": "reduce visual noise in the result",
+        "t3": "make values easier to compare"
+      }
+    },
+    "m1_s02_reorder_read_results_habit": {
+      "title": "Read result tables well",
+      "prompt": "Put the beginner reading steps in order.",
+      "help": {
+        "concept": "A strong habit is to read headers first and then the values below them.",
+        "hint_1": "Start with the labels.",
+        "hint_2": "Then inspect the values under each label."
+      },
+      "hint": "Headers first.",
+      "tokens": {
+        "t1": "read the column names first",
+        "t2": "read the values under each column",
+        "t3": "check whether the result shows useful data"
+      }
+    },
+    "m1_s02_reorder_readable_query_goal": {
+      "title": "Goal of a readable query",
+      "prompt": "Reorder the ideas to explain what makes a query readable.",
+      "help": {
+        "concept": "Readable queries are small, clear, and easy for a human to scan.",
+        "hint_1": "Start with clear selected columns.",
+        "hint_2": "Then show the source table and purpose."
+      },
+      "hint": "Clear columns, clear table, clear purpose.",
+      "tokens": {
+        "t1": "show the selected columns clearly",
+        "t2": "show the source table clearly",
+        "t3": "keep the query focused on one simple purpose"
+      }
+    },
+    "m1_s02_reorder_name_price_from_products": {
+      "title": "Read a simple readable query",
+      "prompt": "Reorder the ideas to explain this query.\n\n~~~sql\nSELECT name, price\nFROM products;\n~~~",
+      "help": {
+        "concept": "This query clearly shows which columns are returned and which table is being read.",
+        "hint_1": "Start with the selected columns.",
+        "hint_2": "Then mention the table and result."
+      },
+      "hint": "Columns first, table second.",
+      "tokens": {
+        "t1": "`name` and `price` are the selected columns",
+        "t2": "`products` is the source table",
+        "t3": "the result is focused and easy to read"
+      }
+    },
+    "m1_s02_fill_from_points": {
+      "title": "What FROM points to",
+      "prompt": "Fill in the blank with the best word.",
+      "help": {
+        "concept": "`FROM` tells SQL which table holds the data.",
+        "hint_1": "Think source location.",
+        "hint_2": "FROM points to the table."
+      },
+      "hint": "Think source.",
+      "template": "`FROM` tells SQL which ____ to read from.",
+      "choices": [
+        "table",
+        "button",
+        "row order",
+        "theme"
+      ],
+      "correct": "table"
+    },
+    "m1_s02_fill_column_choice_reason": {
+      "title": "Why choose specific columns?",
+      "prompt": "Choose the best word to complete the sentence.",
+      "help": {
+        "concept": "You choose columns based on the question you want the query to answer.",
+        "hint_1": "Match the query to what you want to know.",
+        "hint_2": "The missing word is question."
+      },
+      "hint": "Think what you want to know.",
+      "template": "Good column choices depend on the ____ you are asking.",
+      "choices": [
+        "question",
+        "color",
+        "keyboard",
+        "browser"
+      ],
+      "correct": "question"
+    },
+    "m1_s02_fill_clean_result_goal": {
+      "title": "Clean results",
+      "prompt": "Fill in the blank with the best word.",
+      "help": {
+        "concept": "Clean results usually show only the useful columns.",
+        "hint_1": "It is the opposite of extra or noisy.",
+        "hint_2": "The result should show useful columns."
+      },
+      "hint": "Think not extra.",
+      "template": "A clean result often shows only the ____ columns.",
+      "choices": [
+        "useful",
+        "random",
+        "hidden",
+        "duplicate"
+      ],
+      "correct": "useful"
+    },
+    "m1_s02_fill_read_headers_first": {
+      "title": "Read the result",
+      "prompt": "Choose the best phrase to complete the sentence.",
+      "help": {
+        "concept": "A strong reading habit is to read the column names first.",
+        "hint_1": "Start with the labels at the top.",
+        "hint_2": "Those labels are the column names."
+      },
+      "hint": "Labels first.",
+      "template": "A good beginner reading habit is to look at the ____ first.",
+      "choices": [
+        "column names",
+        "bottom row",
+        "table border",
+        "mouse cursor"
+      ],
+      "correct": "column names"
+    },
+    "m1_s02_fill_readable_query_focus": {
+      "title": "Readable query goal",
+      "prompt": "Fill in the blank with the best word.",
+      "help": {
+        "concept": "Readable SQL is written to be easy for a human to understand.",
+        "hint_1": "Think person, not machine tricks.",
+        "hint_2": "The missing word is human."
+      },
+      "hint": "Think person.",
+      "template": "The goal of readable SQL is to make the query easy for a ____ to understand.",
+      "choices": [
+        "human",
+        "printer",
+        "speaker",
+        "monitor"
+      ],
+      "correct": "human"
+    }
+  }
+}

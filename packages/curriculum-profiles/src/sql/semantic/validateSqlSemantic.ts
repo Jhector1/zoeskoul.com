@@ -9,6 +9,7 @@ import type {
 import { validateSqlPromptIntent } from "./validateSqlPromptIntent.js";
 import { validateSqlResultShape } from "./validateSqlResultShape.js";
 import { validateSqlSolutionExecutes } from "./validateSqlSolutionExecutes.js";
+import { validateSqlConceptStage } from "./validateSqlConceptStage.js";
 import { validateSqlDatasetConsistency } from "../validate/validateSqlDatasetConsistency.js";
 
 function readEnvFlag(name: string): boolean {
@@ -26,6 +27,7 @@ export async function validateSqlSemantic(args: {
     draft: TopicAuthoringDraft;
 }): Promise<SemanticValidationReport> {
     const execution = await validateSqlSolutionExecutes(args);
+    const conceptStageIssues = validateSqlConceptStage(args);
 
     const shape = validateSqlResultShape({
         runsByExerciseId: execution.runsByExerciseId,
@@ -47,6 +49,7 @@ export async function validateSqlSemantic(args: {
 
     const issues: SemanticValidationIssue[] = [
         ...execution.issues,
+        ...conceptStageIssues,
         ...shape.issues,
         ...promptIntent.issues,
         ...datasetConsistencyIssues,

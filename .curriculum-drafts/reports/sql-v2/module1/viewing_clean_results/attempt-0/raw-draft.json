@@ -1,0 +1,234 @@
+{
+  "title": "Viewing Clean Results",
+  "summary": "Learn how to retrieve and view clean data results using basic SQL queries.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to SELECT",
+      "bodyMarkdown": "The SELECT statement is used to retrieve data from a database. It allows you to specify the columns you want to see. For example, to view all columns from the 'products' table, you can use:\n\n```\nSELECT * FROM products;\n```\n\nThis will display all rows and columns in the 'products' table. Try it yourself by writing this query in the SQL editor and clicking 'Run query'."
+    },
+    {
+      "id": "sketch2",
+      "title": "Selecting Specific Columns",
+      "bodyMarkdown": "You can specify which columns to retrieve by listing them after the SELECT keyword. For example, to view only the 'name' and 'price' columns from the 'products' table, use:\n\n```\nSELECT name, price FROM products;\n```\n\nThis query will return only the 'name' and 'price' columns for each product. Try modifying the query to include the 'category' column as well."
+    },
+    {
+      "id": "sketch3",
+      "title": "Using WHERE to Filter Results",
+      "bodyMarkdown": "The WHERE clause allows you to filter records based on specific conditions. For example, to find products in the 'Art' category, you can use:\n\n```\nSELECT * FROM products WHERE category = 'Art';\n```\n\nThis will return only the products where the category is 'Art'. Try changing the condition to filter by a different category or price."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Understanding SELECT",
+      "prompt": "What does the SELECT statement do in SQL?",
+      "options": [
+        "It modifies data in the database.",
+        "It retrieves data from the database.",
+        "It deletes data from the database.",
+        "It creates a new table in the database."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about the primary purpose of the SELECT statement.",
+      "help": {
+        "concept": "The SELECT statement is used to retrieve data from a database.",
+        "hint_1": "SELECT is used to view data, not modify it.",
+        "hint_2": "SELECT retrieves data, unlike DELETE or INSERT which modify data."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Filtering with WHERE",
+      "prompt": "Which clause would you use to filter results in a SQL query?",
+      "options": [
+        "ORDER BY",
+        "GROUP BY",
+        "WHERE",
+        "LIMIT"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Consider which clause is used to specify conditions for filtering.",
+      "help": {
+        "concept": "The WHERE clause is used to filter records based on specific conditions.",
+        "hint_1": "WHERE is used to specify conditions for the rows you want to retrieve.",
+        "hint_2": "WHERE filters results, unlike ORDER BY which sorts them."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Choosing Columns",
+      "prompt": "Which of the following are valid ways to specify columns in a SELECT statement? Choose all that apply.",
+      "options": [
+        "SELECT * FROM products;",
+        "SELECT name, price FROM products;",
+        "SELECT price, stock FROM products;",
+        "SELECT FROM products WHERE name;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about how you list columns in a SELECT statement.",
+      "help": {
+        "concept": "You can specify columns by listing them after SELECT, separated by commas.",
+        "hint_1": "SELECT * retrieves all columns, while SELECT name, price retrieves specific ones.",
+        "hint_2": "The correct syntax involves listing column names after SELECT."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Understanding SQL Clauses",
+      "prompt": "Which of the following clauses can be used in a SQL query? Choose all that apply.",
+      "options": [
+        "SELECT",
+        "WHERE",
+        "JOIN",
+        "INSERT"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Focus on clauses that retrieve or filter data.",
+      "help": {
+        "concept": "SELECT and WHERE are used for retrieving and filtering data.",
+        "hint_1": "SELECT retrieves data, WHERE filters it.",
+        "hint_2": "JOIN and INSERT are not used in basic data retrieval."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Ordering SQL Query Steps",
+      "prompt": "Arrange the steps in the correct order to execute a basic SQL query.",
+      "tokens": [
+        "Write the SELECT statement.",
+        "Specify the table with FROM.",
+        "Run the query.",
+        "Check the results."
+      ],
+      "correctOrder": [
+        "Write the SELECT statement.",
+        "Specify the table with FROM.",
+        "Run the query.",
+        "Check the results."
+      ],
+      "hint": "Think about the logical sequence of writing and executing a query.",
+      "help": {
+        "concept": "The correct order involves writing the query, executing it, and then checking results.",
+        "hint_1": "Start with writing the query, then specify the table.",
+        "hint_2": "After writing, you run the query and check the results."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Reorder the components to form a valid SQL SELECT query.",
+      "tokens": [
+        "FROM products",
+        "SELECT name, price",
+        "WHERE category = 'Art'",
+        "Run query"
+      ],
+      "correctOrder": [
+        "SELECT name, price",
+        "FROM products",
+        "WHERE category = 'Art'",
+        "Run query"
+      ],
+      "hint": "Consider the typical order of clauses in a SELECT query.",
+      "help": {
+        "concept": "A SELECT query typically starts with SELECT, followed by FROM, and then WHERE if needed.",
+        "hint_1": "Start with SELECT, then specify the table with FROM.",
+        "hint_2": "WHERE comes after FROM to filter results."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Completing a SELECT Query",
+      "prompt": "Fill in the blank to complete the SQL query: SELECT * [blank1] products;",
+      "template": "SELECT * [blank1] products;",
+      "choices": [
+        "FROM",
+        "WHERE",
+        "ORDER BY",
+        "LIMIT"
+      ],
+      "correctValue": "FROM",
+      "hint": "Think about which clause specifies the table.",
+      "help": {
+        "concept": "The FROM clause specifies the table to retrieve data from.",
+        "hint_1": "FROM is used to indicate the table in a SELECT query.",
+        "hint_2": "The correct clause follows SELECT to specify the table."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Using WHERE Clause",
+      "prompt": "Fill in the blank to filter results: SELECT * FROM products [blank1] category = 'Home';",
+      "template": "SELECT * FROM products [blank1] category = 'Home';",
+      "choices": [
+        "WHERE",
+        "ORDER BY",
+        "LIMIT",
+        "FROM"
+      ],
+      "correctValue": "WHERE",
+      "hint": "Consider which clause is used for filtering.",
+      "help": {
+        "concept": "The WHERE clause is used to filter records based on conditions.",
+        "hint_1": "WHERE is used to specify conditions for filtering results.",
+        "hint_2": "The clause follows FROM to filter the data."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Basic SELECT Query",
+      "prompt": "Write a SQL query to select all columns from the 'products' table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Selecting Specific Columns",
+      "prompt": "Write a SQL query to select the 'name' and 'price' columns from the 'products' table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name, price FROM products;",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Filtering with WHERE",
+      "prompt": "Write a SQL query to select all columns from the 'products' table where the category is 'Stationery'.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM products WHERE category = 'Stationery';",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

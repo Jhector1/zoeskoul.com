@@ -1,0 +1,248 @@
+{
+  "title": "Real World Examples of Databases",
+  "summary": "Explore how databases are used in real-world scenarios and understand the basics of SQL queries.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch_1",
+      "title": "Introduction to Databases",
+      "bodyMarkdown": "Databases are used to store and manage data efficiently. They are essential in various fields such as education, healthcare, finance, and more. For example, a school database might store information about students, including their names, grades, and cities.\n\nTry it yourself: Think of a database you interact with daily, like a library system or an online store. What kind of data do you think it stores?"
+    },
+    {
+      "id": "sketch_2",
+      "title": "Basic SQL Query Example",
+      "bodyMarkdown": "SQL (Structured Query Language) is used to interact with databases. Here's a simple example using the `students` table:\n\n```sql\nSELECT name, grade FROM students;\n```\n\nThis query retrieves the names and grades of all students from the table. \n\nLine by line explanation:\n- `SELECT name, grade`: Specifies the columns to retrieve.\n- `FROM students`: Specifies the table to query.\n\nYour turn: Modify the query to also retrieve the `city` column."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Purpose of SQL",
+      "prompt": "What is the primary purpose of SQL?",
+      "options": [
+        "To create web pages",
+        "To manage and query databases",
+        "To design graphics",
+        "To write operating systems"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "SQL Query Components",
+      "prompt": "Which SQL keyword is used to specify the table to query?",
+      "options": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Common Database Uses",
+      "prompt": "Which of the following are common uses for databases? (Choose all that apply)",
+      "options": [
+        "Storing student records",
+        "Managing inventory",
+        "Creating animations",
+        "Tracking financial transactions"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about areas where data needs to be organized and retrieved efficiently.",
+      "help": {
+        "concept": "Databases are used in areas where data needs to be stored and retrieved efficiently.",
+        "hint_1": "Consider areas that involve large amounts of data.",
+        "hint_2": "Databases are not typically used for creating animations."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "SQL Keywords",
+      "prompt": "Which of the following are SQL keywords? (Choose all that apply)",
+      "options": [
+        "SELECT",
+        "PRINT",
+        "FROM",
+        "DISPLAY"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "SQL Query Order",
+      "prompt": "Arrange the SQL keywords in the correct order for a basic query.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "Database Operations",
+      "prompt": "Arrange these operations in the order they would typically occur in a database system.",
+      "tokens": [
+        "Data Entry",
+        "Data Retrieval",
+        "Data Update",
+        "Data Deletion"
+      ],
+      "correctOrder": [
+        "Data Entry",
+        "Data Retrieval",
+        "Data Update",
+        "Data Deletion"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Table Name",
+      "prompt": "In the query `SELECT * FROM [blank1];`, what should replace `[blank1]` to query the students table?",
+      "template": "SELECT * FROM [blank1];",
+      "choices": [
+        "students",
+        "grades",
+        "cities",
+        "names"
+      ],
+      "correctValue": "students",
+      "hint": "Think about the table name you want to query.",
+      "help": {
+        "concept": "The FROM clause specifies the table to query.",
+        "hint_1": "The table name is 'the missing term'.",
+        "hint_2": "Ensure the table name matches exactly."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "SQL Column Selection",
+      "prompt": "In the query `SELECT [blank1] FROM students;`, what should replace `[blank1]` to select all columns?",
+      "template": "SELECT [blank1] FROM students;",
+      "choices": [
+        "*",
+        "name",
+        "grade",
+        "age"
+      ],
+      "correctValue": "*",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Retrieve Student Names",
+      "prompt": "Write a SQL query to retrieve the names of all students from the students table.",
+      "starterCode": "SELECT [column] FROM students;",
+      "solutionCode": "SELECT name FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Retrieve All Student Data",
+      "prompt": "Write a SQL query to retrieve all data from the students table.",
+      "starterCode": "SELECT * FROM [table];",
+      "solutionCode": "SELECT * FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply retrieve all student data in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Retrieve Student Grades",
+      "prompt": "Write a SQL query to retrieve the grades of all students.",
+      "starterCode": "SELECT [column] FROM students;",
+      "solutionCode": "SELECT grade FROM students;",
+      "datasetId": "students_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

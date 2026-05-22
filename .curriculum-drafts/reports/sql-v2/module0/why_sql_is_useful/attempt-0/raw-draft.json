@@ -1,0 +1,240 @@
+{
+  "title": "Why SQL is Useful",
+  "summary": "Explore the importance of SQL in managing and querying databases.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to SQL",
+      "bodyMarkdown": "SQL, or Structured Query Language, is a powerful tool used to communicate with databases. It allows users to perform various operations such as querying data, updating records, and managing database structures. SQL is essential for anyone working with data stored in relational databases. \n\n### Example\nConsider a table named `students` with columns `id`, `name`, `grade`, `age`, and `city`. To retrieve all records from this table, you would use the following SQL query:\n\n```\nSELECT * FROM students;\n```\nThis query selects all columns from the `students` table. \n\n**Try it yourself:** Write a query to select only the `name` and `grade` columns from the `students` table."
+    },
+    {
+      "id": "sketch2",
+      "title": "SQL in Action",
+      "bodyMarkdown": "SQL is not just about retrieving data; it also helps in organizing and analyzing it. For instance, if you want to find all students from 'Chicago', you can use a SQL query to filter the data accordingly. \n\n### Example\nTo find students from 'Chicago', you would use:\n\n```\nSELECT * FROM students WHERE city = 'Chicago';\n```\nThis query filters the `students` table to show only those rows where the `city` column is 'Chicago'. \n\n**Your turn:** Modify the query to find students who are 15 years old."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Purpose of SQL",
+      "prompt": "What is the primary purpose of SQL?",
+      "options": [
+        "To create web pages",
+        "To query and manage databases",
+        "To design graphics",
+        "To write operating systems"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what SQL is mainly used for in relation to databases.",
+      "help": {
+        "concept": "SQL is primarily used for querying and managing databases.",
+        "hint_1": "SQL is not related to web design or operating systems.",
+        "hint_2": "SQL's main function is to interact with databases."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "SQL Capabilities",
+      "prompt": "Which of the following are capabilities of SQL? Select all that apply.",
+      "options": [
+        "Querying data",
+        "Updating records",
+        "Creating graphics",
+        "Managing database structures"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Consider what operations SQL can perform on databases.",
+      "help": {
+        "concept": "SQL can query data, update records, and manage database structures.",
+        "hint_1": "SQL is not used for creating graphics.",
+        "hint_2": "Focus on database-related operations."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "SQL Query Structure",
+      "prompt": "Arrange the parts of a basic SQL query in the correct order.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "hint": "Think about the logical flow of a SQL query.",
+      "help": {
+        "concept": "A basic SQL query starts with SELECT, followed by FROM, and optionally WHERE.",
+        "hint_1": "SELECT is used to specify columns.",
+        "hint_2": "FROM specifies the table, and WHERE is for conditions."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "SQL Keyword",
+      "prompt": "Fill in the blank: The SQL keyword used to retrieve data from a database is [blank1].",
+      "template": "The SQL keyword used to retrieve data from a database is [blank1].",
+      "choices": [
+        "SELECT",
+        "INSERT",
+        "UPDATE",
+        "DELETE"
+      ],
+      "correctValue": "SELECT",
+      "hint": "Consider the keyword that starts a query to fetch data.",
+      "help": {
+        "concept": "SELECT is the keyword used to retrieve data.",
+        "hint_1": "SELECT is used to specify which columns to fetch.",
+        "hint_2": "It's the first keyword in a data retrieval query."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Basic SQL Query",
+      "prompt": "Write a SQL query to select all columns from the `students` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM students;",
+      "hint": "Use SELECT to specify columns and FROM to specify the table.",
+      "help": {
+        "concept": "Use SELECT to choose columns and FROM to choose the table.",
+        "hint_1": "Use * to select all columns.",
+        "hint_2": "The table name follows the FROM keyword."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "code_input",
+      "title": "Select Specific Columns",
+      "prompt": "Write a SQL query to select the `name` and `grade` columns from the `students` table.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT name, grade FROM students;",
+      "hint": "List the column names after SELECT, separated by commas.",
+      "help": {
+        "concept": "Specify multiple columns by separating them with commas.",
+        "hint_1": "The column names go after SELECT.",
+        "hint_2": "Ensure the table name follows the FROM keyword."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Filter by City",
+      "prompt": "Write a SQL query to select all students from 'Chicago'.",
+      "starterCode": "-- Write your SQL query here\n",
+      "solutionCode": "SELECT * FROM students WHERE city = 'Chicago';",
+      "hint": "Use WHERE to filter rows based on a condition.",
+      "help": {
+        "concept": "WHERE is used to filter results based on a condition.",
+        "hint_1": "The condition follows the WHERE keyword.",
+        "hint_2": "Use '=' to specify the city condition."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "single_choice",
+      "title": "SQL Table",
+      "prompt": "What does the FROM keyword specify in a SQL query?",
+      "options": [
+        "The columns to retrieve",
+        "The table to query",
+        "The conditions for filtering",
+        "The order of results"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what follows the FROM keyword in a query.",
+      "help": {
+        "concept": "FROM specifies the table to query.",
+        "hint_1": "FROM is followed by the table name.",
+        "hint_2": "It tells SQL where to get the data from."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "multi_choice",
+      "title": "SQL Data Retrieval",
+      "prompt": "Which SQL keywords are used to retrieve data from a database? Select all that apply.",
+      "options": [
+        "SELECT",
+        "FROM",
+        "INSERT",
+        "DELETE"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Consider the keywords that form the basic structure of a data retrieval query.",
+      "help": {
+        "concept": "SELECT and FROM are used to retrieve data.",
+        "hint_1": "SELECT specifies columns, FROM specifies the table.",
+        "hint_2": "INSERT and DELETE are not used for retrieval."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "drag_reorder",
+      "title": "SQL Query Execution Order",
+      "prompt": "Arrange the SQL query execution order correctly.",
+      "tokens": [
+        "FROM",
+        "SELECT",
+        "WHERE"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE"
+      ],
+      "hint": "Think about the logical order of writing a SQL query.",
+      "help": {
+        "concept": "SELECT specifies columns, FROM specifies the table, WHERE filters results.",
+        "hint_1": "SELECT comes first to specify what to retrieve.",
+        "hint_2": "FROM follows SELECT, and WHERE is optional."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "fill_blank_choice",
+      "title": "SQL Column Selection",
+      "prompt": "Fill in the blank: To select specific columns, use the [blank1] keyword.",
+      "template": "To select specific columns, use the [blank1] keyword.",
+      "choices": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctValue": "SELECT",
+      "hint": "Consider the keyword that specifies which columns to retrieve.",
+      "help": {
+        "concept": "SELECT is used to specify columns.",
+        "hint_1": "It's the first keyword in a query.",
+        "hint_2": "It tells SQL what data to fetch."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "quiz5",
+      "quiz6",
+      "quiz7"
+    ]
+  }
+}

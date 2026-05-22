@@ -1,0 +1,233 @@
+{
+  "authoringFormatVersion": "2.0",
+  "courseSlug": "multi-table-sql",
+  "catalogSlug": "sql",
+  "subjectSlug": "sql",
+  "profileId": "sql",
+  "title": "Multi-Table SQL",
+  "subtitle": "Learn joins, relationships, cleaner query writing, and beginner subqueries.",
+  "level": "beginner",
+  "courseNumber": 3,
+  "trackSlug": "sql",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "prerequisites": [
+    "sql-foundations",
+    "sql-analysis-reporting"
+  ],
+  "learningGoals": [
+    "Explain why relational databases split data across tables.",
+    "Identify primary keys and foreign keys in beginner schemas.",
+    "Write INNER JOIN queries.",
+    "Write LEFT JOIN queries.",
+    "Interpret unmatched rows and NULLs after LEFT JOIN.",
+    "Recognize duplicate rows caused by joins.",
+    "Use table aliases to make joins readable.",
+    "Format longer SQL across multiple lines.",
+    "Use beginner subqueries in WHERE.",
+    "Use beginner subqueries in FROM.",
+    "Compare join-based and subquery-based solutions."
+  ],
+  "moduleCount": 3,
+  "modules": [
+    {
+      "moduleNumber": 8,
+      "moduleSlug": "sql_module_8",
+      "title": "Introduction to Joins",
+      "purpose": "Show how relational databases connect information stored in different tables.",
+      "datasetId": "school_relations_intro",
+      "coreSkill": "JOINs",
+      "sections": [
+        {
+          "sectionSlug": "section_8_1",
+          "title": "Why Multiple Tables Exist",
+          "topics": [
+            "splitting_data_into_tables",
+            "connecting_data_with_ids",
+            "primary_keys",
+            "foreign_keys"
+          ]
+        },
+        {
+          "sectionSlug": "section_8_2",
+          "title": "INNER JOIN",
+          "topics": [
+            "what_an_inner_join_does",
+            "matching_rows_from_two_tables",
+            "join_syntax",
+            "reading_join_results"
+          ]
+        },
+        {
+          "sectionSlug": "section_8_3",
+          "title": "LEFT JOIN",
+          "topics": [
+            "what_a_left_join_does",
+            "keeping_unmatched_left_side_rows",
+            "when_to_use_left_join",
+            "nulls_in_joined_results"
+          ]
+        },
+        {
+          "sectionSlug": "section_8_4",
+          "title": "Join Practice",
+          "topics": [
+            "customers_and_orders",
+            "students_and_courses",
+            "products_and_categories",
+            "choosing_the_right_join"
+          ]
+        }
+      ],
+      "moduleProject": "Build a multi-table report that combines at least three tables."
+    },
+    {
+      "moduleNumber": 9,
+      "moduleSlug": "sql_module_9",
+      "title": "Writing Cleaner Queries",
+      "purpose": "Improve readability so beginners write SQL they can revisit, debug, and explain.",
+      "datasetId": "school_relations_intro",
+      "coreSkill": "Readability and maintainability",
+      "sections": [
+        {
+          "sectionSlug": "section_9_1",
+          "title": "Aliases for Tables and Columns",
+          "topics": [
+            "column_aliases_review",
+            "table_aliases",
+            "shortening_long_queries",
+            "making_joins_readable"
+          ]
+        },
+        {
+          "sectionSlug": "section_9_2",
+          "title": "Query Formatting",
+          "topics": [
+            "indenting_queries",
+            "breaking_queries_across_lines",
+            "organizing_long_statements",
+            "writing_beginner_friendly_sql"
+          ]
+        },
+        {
+          "sectionSlug": "section_9_3",
+          "title": "Comments and Readability",
+          "topics": [
+            "sql_comments",
+            "explaining_logic",
+            "naming_output_clearly",
+            "avoiding_messy_sql"
+          ]
+        },
+        {
+          "sectionSlug": "section_9_4",
+          "title": "Clean Query Practice",
+          "topics": [
+            "refactor_ugly_queries",
+            "format_join_queries",
+            "use_aliases_correctly",
+            "write_readable_reports"
+          ]
+        }
+      ],
+      "moduleProject": "Refactor a messy starter script into a clean reporting query pack."
+    },
+    {
+      "moduleNumber": 10,
+      "moduleSlug": "sql_module_10",
+      "title": "Subqueries for Beginners",
+      "purpose": "Introduce query-inside-query thinking without overwhelming learners with advanced database theory.",
+      "datasetId": "school_relations_intro",
+      "coreSkill": "Subqueries",
+      "sections": [
+        {
+          "sectionSlug": "section_10_1",
+          "title": "What a Subquery Is",
+          "topics": [
+            "query_inside_another_query",
+            "why_subqueries_are_useful",
+            "simple_mental_model",
+            "when_beginners_should_use_them"
+          ]
+        },
+        {
+          "sectionSlug": "section_10_2",
+          "title": "Subqueries in WHERE",
+          "topics": [
+            "compare_against_a_calculated_value",
+            "find_values_above_average",
+            "use_in_with_subqueries",
+            "read_inside_out_logic"
+          ]
+        },
+        {
+          "sectionSlug": "section_10_3",
+          "title": "Subqueries in FROM",
+          "topics": [
+            "temporary_result_sets",
+            "build_on_top_of_another_query",
+            "aliasing_subqueries",
+            "beginner_safe_examples"
+          ]
+        },
+        {
+          "sectionSlug": "section_10_4",
+          "title": "Subquery Practice",
+          "topics": [
+            "above_average_salary",
+            "customers_with_orders",
+            "filter_from_a_summary_query",
+            "compare_join_vs_subquery_thinking"
+          ]
+        }
+      ],
+      "moduleProject": "Build a comparison worksheet showing join and subquery solutions to the same problems."
+    }
+  ],
+  "assessmentPolicy": {
+    "topicExerciseMin": 4,
+    "technicalTopicCodeInputMin": 1,
+    "requireModuleProject": true,
+    "capstoneRequired": false,
+    "defaultExerciseMix": {
+      "single_choice": 0.08,
+      "multi_choice": 0.08,
+      "drag_reorder": 0.07,
+      "fill_blank_choice": 0.17,
+      "code_input": 0.6
+    }
+  },
+  "validationPolicy": {
+    "allowedSqlConcepts": [
+      "SELECT",
+      "FROM",
+      "WHERE",
+      "ORDER BY",
+      "LIMIT",
+      "GROUP BY",
+      "HAVING",
+      "INNER JOIN",
+      "LEFT JOIN",
+      "ON",
+      "table_aliases",
+      "column_aliases",
+      "subquery_in_where",
+      "subquery_in_from"
+    ],
+    "disallowedSqlConcepts": [
+      "INSERT",
+      "UPDATE",
+      "DELETE",
+      "CREATE TABLE",
+      "ALTER TABLE",
+      "DROP TABLE"
+    ],
+    "datasets": [
+      "school_relations_intro"
+    ],
+    "goldenTestsRequired": true,
+    "requireJoinRelationshipMetadata": true,
+    "requireErdOrTableRelationshipVisuals": true,
+    "requireDuplicateRowTeachingChecks": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "rubricSlug": "module-project-default",
+  "criteria": [
+    {
+      "id": "correctness",
+      "label": "Correctness",
+      "weight": 0.45
+    },
+    {
+      "id": "clarity",
+      "label": "Clarity",
+      "weight": 0.25
+    },
+    {
+      "id": "scope",
+      "label": "Meets project scope",
+      "weight": 0.2
+    },
+    {
+      "id": "explanation",
+      "label": "Can explain the solution",
+      "weight": 0.1
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "validationSuite": "sqlSubjectValidation",
+  "appliesTo": "sql_courses",
+  "runtime": {
+    "language": "sql",
+    "dialect": "sqlite",
+    "resultShape": "table"
+  },
+  "rules": {
+    "datasetValidation": [
+      "Every datasetId must exist in shared/datasets.json or the runtime dataset registry",
+      "Dataset metadata must match actual SQLite seed schema",
+      "Every referenced table and column must exist",
+      "Expected result rows must match executed solution rows"
+    ],
+    "conceptStageValidation": [
+      "sql-foundations must not use joins, aggregates, mutation SQL, CREATE TABLE, or subqueries",
+      "sql-analysis-reporting may use expressions, aliases, functions, aggregates, GROUP BY, and HAVING",
+      "multi-table-sql may use joins, aliases, formatting, and beginner subqueries",
+      "sql-data-management may use INSERT, UPDATE, DELETE, and CREATE TABLE in sandboxed exercises",
+      "sql-database-design-capstone may use all previously taught beginner concepts"
+    ],
+    "mutationSafety": [
+      "UPDATE and DELETE exercises must require WHERE unless explicitly marked unsafe demo",
+      "Mutation exercises must run in isolated sandbox state",
+      "Mutation projects should include SELECT preview steps",
+      "INSERT exercises should prefer explicit column lists"
+    ],
+    "visuals": [
+      "Image placeholders must stay as placeholders when mapped",
+      "Join/design courses should include table relationship or ERD-style visuals"
+    ]
+  }
+}

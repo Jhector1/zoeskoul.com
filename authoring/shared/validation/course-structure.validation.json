@@ -1,0 +1,11 @@
+{
+  "policyId": "course-structure-validation",
+  "validationRequirements": {
+    "requireSubjectPlan": true,
+    "requireCourseOrder": true,
+    "requireCourseSpecsForCourseOrder": true,
+    "requireMatchingCourseIdentity": true,
+    "requireUniqueModuleSlugs": true,
+    "requireUniqueTopicIds": true
+  }
+}

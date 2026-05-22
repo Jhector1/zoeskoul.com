@@ -8,10 +8,12 @@ import type {
 
 export type ResolvedWorkspacePolicy = {
     workspace: WorkspaceProfile;
+    workspacePolicyId?: string;
     modulePolicy?: ModulePedagogyPolicy;
     topicPolicy?: TopicPedagogyPolicy;
     preferredActionLanguage: string[];
     forbiddenActionLanguage: string[];
+    preferredTerms: Record<string, string>;
     avoidTerms: string[];
     notes: string[];
 };
@@ -62,6 +64,7 @@ export function resolveWorkspacePolicy(args: {
 
     return {
         workspace: topicWorkspace,
+        workspacePolicyId: args.blueprint.workspacePolicyId,
         modulePolicy,
         topicPolicy,
         preferredActionLanguage: topicWorkspace.preferredActionLanguage,
@@ -69,7 +72,7 @@ export function resolveWorkspacePolicy(args: {
             ...topicWorkspace.forbiddenActionLanguage,
             ...(modulePolicy?.forbiddenActions ?? []),
         ],
-
+        preferredTerms: args.blueprint.courseGenerationPolicy?.preferredTerms ?? {},
         avoidTerms: args.blueprint.courseGenerationPolicy?.avoidTerms ?? [],
         notes: [
             ...(args.blueprint.courseGenerationPolicy?.notes ?? []),

@@ -1,0 +1,522 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "practice_with_basic_queries": {
+          "label": "Practice with Basic Queries",
+          "summary": "Practice asking for one column, several related columns, and full tables, and start predicting what the result should look like before you run the query.",
+          "cards": {
+            "query_one_column": {
+              "title": "How do you query one column?"
+            },
+            "query_multiple_columns": {
+              "title": "How do you query multiple columns?"
+            },
+            "query_full_tables": {
+              "title": "How do you query a full table?"
+            },
+            "predicting_result_output": {
+              "title": "How can you predict a result before running the query?"
+            },
+            "project": {
+              "title": "Project: Build Basic Queries"
+            },
+            "quiz": {
+              "title": "Quiz: Practice with Basic Queries"
+            }
+          },
+          "projectSteps": {
+            "query_one_column_name": {
+              "title": "Query one column"
+            },
+            "query_two_columns_name_price": {
+              "title": "Query two columns"
+            },
+            "query_full_products_table": {
+              "title": "Query the full products table"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "practice_with_basic_queries": {
+          "query_one_column": {
+            "title": "A one-column query asks for one specific kind of data.",
+            "bodyMarkdown": "Sometimes the clearest query is the smallest one.\n\nIf you only want one kind of information, you can ask SQL for just one column.\n\nFor example, if you only care about product names, the result does not need prices, categories, or stock.\n\nA one-column query is useful when you want:\n\n- one clear type of value\n- a narrow result\n- a simple table that is easy to inspect\n\nSo the beginner idea is:\n\n> one-column queries are useful when one kind of information is enough\n\nWhen you run one, notice that the result usually has:\n\n- one header\n- one value type under that header\n\n### Try it yourself\n\nImagine a query that asks only for `name` from `products`.\n\nBefore running it, ask yourself:\n\n- how many headers should appear?\n- what should that header be called?\n- what kind of values should appear underneath it?"
+          },
+          "query_multiple_columns": {
+            "title": "A multiple-column query returns a few related pieces of information together.",
+            "bodyMarkdown": "Sometimes one column is too narrow.\n\nYou may want to see a product name together with its price, or its category, or its stock.\n\nThat is when multiple-column queries become useful.\n\nThey help when you want to read related values side by side in the same row.\n\nUseful examples include:\n\n- name and price\n- name and category\n- id, name, and stock\n\nThe important beginner idea is:\n\n> choose a small group of columns that makes sense together\n\nThis is different from a one-column query because the goal is not maximum simplicity.\nThe goal is to see a few related facts together.\n\n### Try it yourself\n\nSuppose you want to answer this question:\n\n> What is each product called, and how much does it cost?\n\nAsk yourself:\n\n- which two columns belong together?\n- would one column be enough?\n- would a full table show more than you need?"
+          },
+          "query_full_tables": {
+            "title": "A full-table query is useful when you want a complete first look.",
+            "bodyMarkdown": "A full-table query asks for **all columns** from a table.\n\nThis is useful when you:\n\n- want a first overview\n- want to inspect everything available\n- are still learning the table structure\n\nA full-table query is often a good first step, especially when you do not yet know which columns matter most.\n\nThen later, you can switch to smaller and more focused queries.\n\nSo a helpful beginner workflow is:\n\n1. inspect the full table\n2. notice which columns exist\n3. switch later to only the columns you need\n\nThe key beginner idea is:\n\n> full-table queries help you explore before you narrow the result\n\n### Try it yourself\n\nImagine you run a full-table query on `products`.\n\nBefore seeing the result, ask:\n\n- should the result be narrow or wide?\n- would it show more headers than a one-column query?\n- why might this be useful before writing a smaller query?"
+          },
+          "predicting_result_output": {
+            "title": "Before you run a query, try predicting the shape of the result.",
+            "bodyMarkdown": "A powerful beginner habit is to pause and predict the result before clicking **Run**.\n\nAsk yourself:\n\n- how many columns should appear?\n- what should the headers be?\n- will the result look wide or narrow?\n\nFor example:\n\n- one selected column → one result column\n- three selected columns → three result columns\n- `*` → all columns in the table\n\nYou do not need to guess every row exactly.\nJust predict the **shape** of the answer.\n\nThat habit helps you read SQL more confidently because you stop treating the output like a surprise.\n\n### Try it yourself\n\nLook at these three ideas:\n\n- one selected column\n- three selected columns\n- `*`\n\nAsk yourself:\n\n- which one should produce the narrowest result?\n- which one should produce the widest result?\n- how can the selected part of the query help you predict the output before running it?"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m1_s04_query_one_column_name": {
+      "title": "Query one column",
+      "prompt": "The SQLite workspace already has a table named `products`.\n\nWrite a query that returns only the `name` column from `products`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "A one-column query uses the normal `SELECT ... FROM ...` shape, but asks for only one column.",
+        "hint_1": "Use only `name` in the select part.",
+        "hint_2": "Build a basic reading query with one selected column and the `products` table as the source."
+      },
+      "hint": "Ask for only one column.",
+      "starterCode": "-- Return only product names\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s04_query_two_columns_name_price": {
+      "title": "Query multiple columns",
+      "prompt": "The `products` table already exists.\n\nWrite a query that returns the `name` and `price` columns from `products`.\n\nThen run it and compare the result to a one-column query.",
+      "help": {
+        "concept": "A multiple-column query returns a small set of related columns together.",
+        "hint_1": "Use `name` and `price` after `SELECT`.",
+        "hint_2": "List the two columns in the select part with the correct separator, then read from `products`."
+      },
+      "hint": "Use two related columns.",
+      "starterCode": "-- Return names and prices\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s04_query_three_columns": {
+      "title": "Query three columns",
+      "prompt": "The `products` table already exists.\n\nWrite a query that returns the `id`, `name`, and `category` columns from `products`.\n\nRun it and read the headers carefully.",
+      "help": {
+        "concept": "You can return a small group of columns together when they match the purpose of the query.",
+        "hint_1": "Use `id`, `name`, and `category`.",
+        "hint_2": "Put the three chosen columns in the select part in the order you want to read them, then use the `products` table."
+      },
+      "hint": "Use the three requested columns.",
+      "starterCode": "-- Return ids, names, and categories\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s04_query_full_products_table": {
+      "title": "Query a full table",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows all columns and all rows from `products`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "A full-table query asks for every column in the table.",
+        "hint_1": "Use the symbol that means all columns.",
+        "hint_2": "This query needs the main reading keyword, the all-columns symbol, and `FROM products`."
+      },
+      "hint": "Use the full-table version.",
+      "starterCode": "-- Show the full products table\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s04_query_stock_and_price": {
+      "title": "Query two useful columns",
+      "prompt": "The `products` table already exists.\n\nWrite a query that returns the `stock` and `price` columns from `products`.\n\nRun it and notice how the result stays narrow and focused.",
+      "help": {
+        "concept": "A focused query often chooses only the columns needed for one small question.",
+        "hint_1": "Use `stock` and `price` after `SELECT`.",
+        "hint_2": "Write a two-column query that uses those two column names in the select part, then points to `products`."
+      },
+      "hint": "Use the two requested columns.",
+      "starterCode": "-- Return stock and price\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s04_basic_queries_project": {
+      "title": "Practice with basic queries",
+      "prompt": "Use the SQL workspace on the right to practice basic queries on the `products` table.\n\nFor each task:\n\n1. type the query in the editor\n2. predict the shape of the result\n3. click **Run**\n4. compare the real result with your prediction\n\nTasks:\n\n1. Return only the `name` column\n2. Return the `name` and `price` columns\n3. Return the `id`, `name`, and `category` columns\n4. Return the full `products` table\n5. Return the `stock` and `price` columns\n\nRun one query at a time.\nThis project is about building fluency with simple queries and result prediction.",
+      "help": {
+        "concept": "This project builds repetition with the main beginner query shapes and teaches the habit of predicting result structure before running.",
+        "hint_1": "Use the same table each time, but change the selected columns depending on the task.",
+        "hint_2": "Before running each query, predict how many columns the result should have. Then write the query using one column, multiple columns, or the all-columns version depending on the task."
+      },
+      "hint": "Predict first, then run.",
+      "starterCode": "-- Task 1\n-- Return only the product names\n\n",
+      "fixedLanguage": "sql-v2",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql-v2",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s04_one_column_result_shape": {
+      "title": "What should a one-column query return?",
+      "prompt": "If a query selects only one column, what should the result usually have?",
+      "help": {
+        "concept": "The result shape usually matches the number of selected columns.",
+        "hint_1": "Think about the header count.",
+        "hint_2": "If one column is selected, the result should usually have one result column."
+      },
+      "hint": "Think one selected column, one result column.",
+      "options": {
+        "a": "One result column",
+        "b": "Every column in the table",
+        "c": "No headers at all",
+        "d": "Exactly four columns"
+      }
+    },
+    "m1_s04_multiple_columns_result_shape": {
+      "title": "What should a three-column query return?",
+      "prompt": "If a query selects three columns, what should you expect in the result?",
+      "help": {
+        "concept": "The result width usually follows the number of selected columns.",
+        "hint_1": "Think about how many headers should appear.",
+        "hint_2": "The selected columns usually become the result columns."
+      },
+      "hint": "Think selected columns become result columns.",
+      "options": {
+        "a": "Three result columns",
+        "b": "Only one result column",
+        "c": "Always the full table",
+        "d": "No rows at all"
+      }
+    },
+    "m1_s04_full_table_query_meaning": {
+      "title": "What does a full-table query do?",
+      "prompt": "What is the main effect of a full-table query like `SELECT * FROM products;`?",
+      "help": {
+        "concept": "A full-table query asks for all columns from the table.",
+        "hint_1": "Think complete overview.",
+        "hint_2": "It returns all columns, which makes it useful for inspecting the whole table."
+      },
+      "hint": "Think all columns.",
+      "options": {
+        "a": "It returns all columns from the table",
+        "b": "It deletes the table",
+        "c": "It renames every column",
+        "d": "It always returns one row"
+      }
+    },
+    "m1_s04_predict_before_run": {
+      "title": "Why predict before running?",
+      "prompt": "Why is it helpful to predict a query result before clicking **Run**?",
+      "help": {
+        "concept": "Prediction builds understanding of query structure and makes results easier to check.",
+        "hint_1": "Think confidence and checking your understanding.",
+        "hint_2": "Predicting helps you connect the query text to the shape of the result."
+      },
+      "hint": "Think understanding the result shape.",
+      "options": {
+        "a": "It helps you understand what the query should return",
+        "b": "It makes SQL ignore syntax mistakes",
+        "c": "It removes the need to read results",
+        "d": "It changes the table data automatically"
+      }
+    },
+    "m1_s04_compare_results_habit": {
+      "title": "What is a good practice habit?",
+      "prompt": "What is a good beginner habit after running a basic query?",
+      "help": {
+        "concept": "Running the query is only part of the learning loop. You should also inspect the returned result.",
+        "hint_1": "Think predict, run, compare.",
+        "hint_2": "A strong habit is to compare what you expected with what the result actually showed."
+      },
+      "hint": "Think compare expectation and result.",
+      "options": {
+        "a": "Compare the real result with what you expected",
+        "b": "Ignore the result after running",
+        "c": "Only look at the Run button",
+        "d": "Memorize random rows without reading headers"
+      }
+    },
+    "m1_s04_basic_queries_true": {
+      "title": "What is true about basic queries?",
+      "prompt": "Select all true statements about one-column, multiple-column, and full-table queries.",
+      "help": {
+        "concept": "Basic queries differ mainly in how many columns they ask for and how focused the result becomes.",
+        "hint_1": "Think focus, width, and result shape.",
+        "hint_2": "Choose the ideas about how selected columns affect the result."
+      },
+      "hint": "Think selected columns shape the result.",
+      "options": {
+        "a": "A one-column query usually returns one result column",
+        "b": "A multiple-column query can return related information together",
+        "c": "A full-table query is useful for getting a first overview",
+        "d": "A one-column query always returns every column",
+        "e": "The result shape depends on what the query selects"
+      }
+    },
+    "m1_s04_prediction_true": {
+      "title": "What is true about predicting results?",
+      "prompt": "Select all true statements about predicting query output before running it.",
+      "help": {
+        "concept": "Prediction is a learning habit that strengthens SQL reading and result interpretation.",
+        "hint_1": "Think headers, column count, and confidence.",
+        "hint_2": "Choose the statements about using the query text to anticipate the result shape."
+      },
+      "hint": "Think predict the shape first.",
+      "options": {
+        "a": "You can often predict how many result columns will appear",
+        "b": "You can often predict the result headers from the selected columns",
+        "c": "Prediction helps connect query text to output shape",
+        "d": "Prediction means you never need to run the query",
+        "e": "Prediction is a useful beginner habit"
+      }
+    },
+    "m1_s04_result_output_true": {
+      "title": "What is true about reading result output?",
+      "prompt": "Select all true statements about reading the output of a basic query.",
+      "help": {
+        "concept": "Good result reading starts with headers and connects them to the selected columns.",
+        "hint_1": "Think headers first, then values.",
+        "hint_2": "Choose the statements about how the result should be read and interpreted."
+      },
+      "hint": "Think headers and selected columns.",
+      "options": {
+        "a": "Column headers help explain what the result values mean",
+        "b": "The selected columns usually match the result headers",
+        "c": "Reading headers first is a strong beginner habit",
+        "d": "Result output should always be guessed without checking",
+        "e": "Comparing result shape across queries helps learning"
+      }
+    },
+    "m1_s04_query_types_true": {
+      "title": "What is true about different basic query types?",
+      "prompt": "Select all true statements about one-column, multi-column, and full-table query types.",
+      "help": {
+        "concept": "Each basic query type has a different purpose depending on how much information you need.",
+        "hint_1": "Think narrow, medium, full overview.",
+        "hint_2": "Choose the statements about why different query widths are useful."
+      },
+      "hint": "Think different widths, different purposes.",
+      "options": {
+        "a": "One-column queries are often the most focused",
+        "b": "Multi-column queries can group related values together",
+        "c": "Full-table queries are useful for inspection and overview",
+        "d": "Every query type always returns the same shape",
+        "e": "Choosing the query type depends on what you want to learn from the table"
+      }
+    },
+    "m1_s04_basic_workflow_true": {
+      "title": "What matches the right beginner workflow?",
+      "prompt": "Select all statements that match a good beginner workflow for practicing basic queries.",
+      "help": {
+        "concept": "The best beginner workflow is active: choose, predict, run, inspect, compare.",
+        "hint_1": "Think query purpose and result checking.",
+        "hint_2": "Choose the steps that help build understanding instead of guessing."
+      },
+      "hint": "Choose, predict, run, inspect.",
+      "options": {
+        "a": "Choose columns based on the purpose of the query",
+        "b": "Predict the result shape before running",
+        "c": "Run the query and inspect the headers",
+        "d": "Compare the result with your prediction",
+        "e": "Skip the result and assume it worked"
+      }
+    },
+    "m1_s04_reorder_full_table_workflow": {
+      "title": "How full-table queries help",
+      "prompt": "Reorder the beginner workflow for using a full-table query.",
+      "help": {
+        "concept": "A full-table query is useful for a first overview before moving to smaller queries.",
+        "hint_1": "Start with inspecting everything.",
+        "hint_2": "Then narrow the result later."
+      },
+      "hint": "Overview first, focus later.",
+      "tokens": {
+        "t1": "inspect the full table first",
+        "t2": "learn what columns and data exist",
+        "t3": "switch later to smaller focused queries"
+      }
+    },
+    "m1_s04_reorder_predict_shape": {
+      "title": "Predict the result shape",
+      "prompt": "Put the prediction habit in order.",
+      "help": {
+        "concept": "Before running a query, it helps to predict the shape of the result.",
+        "hint_1": "Start before clicking Run.",
+        "hint_2": "Think headers and column count."
+      },
+      "hint": "Pause before running.",
+      "tokens": {
+        "t1": "look at the selected columns first",
+        "t2": "predict how many result columns should appear",
+        "t3": "predict what the headers should be"
+      }
+    },
+    "m1_s04_reorder_predict_run_compare": {
+      "title": "Good practice loop",
+      "prompt": "Reorder the best beginner workflow for basic queries.",
+      "help": {
+        "concept": "A strong habit is to predict, run, and compare.",
+        "hint_1": "Prediction comes before running.",
+        "hint_2": "Comparison comes after results appear."
+      },
+      "hint": "Predict first.",
+      "tokens": {
+        "t1": "predict the result shape",
+        "t2": "run the query",
+        "t3": "compare the real result with your prediction"
+      }
+    },
+    "m1_s04_reorder_query_widths": {
+      "title": "Understand query widths",
+      "prompt": "Reorder the ideas from narrowest result to widest result.",
+      "help": {
+        "concept": "Different query types return different result widths.",
+        "hint_1": "Start with one column.",
+        "hint_2": "End with all columns."
+      },
+      "hint": "Narrow to wide.",
+      "tokens": {
+        "t1": "one-column query",
+        "t2": "multiple-column query",
+        "t3": "full-table query"
+      }
+    },
+    "m1_s04_reorder_one_column_focus": {
+      "title": "What a one-column query does",
+      "prompt": "Reorder the ideas to explain a one-column query.",
+      "help": {
+        "concept": "A one-column query asks for one specific kind of data.",
+        "hint_1": "Start with one type of information.",
+        "hint_2": "Then explain the focused result."
+      },
+      "hint": "One kind of data, one focused result.",
+      "tokens": {
+        "t1": "select one specific column",
+        "t2": "return one kind of value",
+        "t3": "get a simple focused result"
+      }
+    },
+    "m1_s04_reorder_multi_column_use": {
+      "title": "Why use multiple columns",
+      "prompt": "Put the ideas in the best order.",
+      "help": {
+        "concept": "Multiple-column queries let you compare related values together.",
+        "hint_1": "Start with needing more than one value.",
+        "hint_2": "Then explain comparing related data."
+      },
+      "hint": "Related values belong together.",
+      "tokens": {
+        "t1": "sometimes one column is not enough",
+        "t2": "choose a few related columns together",
+        "t3": "compare those values in the same row"
+      }
+    },
+    "m1_s04_fill_one_column_shape": {
+      "title": "One selected column",
+      "prompt": "Fill in the blank with the best phrase.",
+      "help": {
+        "concept": "A one-column query usually returns one column in the result.",
+        "hint_1": "Think about the number of headers.",
+        "hint_2": "One selected column usually means one result column."
+      },
+      "hint": "Think one selected, one shown.",
+      "template": "A one-column query usually returns ____.",
+      "choices": [
+        "one result column",
+        "all columns",
+        "no headers",
+        "four columns"
+      ],
+      "correct": "one result column"
+    },
+    "m1_s04_fill_full_table_symbol": {
+      "title": "Full-table symbol",
+      "prompt": "Choose the symbol that completes the sentence.",
+      "help": {
+        "concept": "The star symbol is used when you want all columns.",
+        "hint_1": "It means everything in the column list.",
+        "hint_2": "The symbol is `*`."
+      },
+      "hint": "Think all columns.",
+      "template": "In a full-table query, SQL often uses ____ to mean all columns.",
+      "choices": [
+        "*",
+        ",",
+        ";",
+        "="
+      ],
+      "correct": "*"
+    },
+    "m1_s04_fill_related_columns_goal": {
+      "title": "Why choose related columns?",
+      "prompt": "Fill in the blank with the best word.",
+      "help": {
+        "concept": "Multiple-column queries help you compare related values together.",
+        "hint_1": "Think about seeing values side by side.",
+        "hint_2": "The goal is to compare."
+      },
+      "hint": "Think side by side.",
+      "template": "Choosing related columns together helps you ____ values in the same row.",
+      "choices": [
+        "compare",
+        "delete",
+        "rename",
+        "freeze"
+      ],
+      "correct": "compare"
+    },
+    "m1_s04_fill_predict_headers": {
+      "title": "Predict before running",
+      "prompt": "Choose the best word to complete the sentence.",
+      "help": {
+        "concept": "Before running, you can often predict the column headers.",
+        "hint_1": "They are the labels at the top of the result.",
+        "hint_2": "The missing word is headers."
+      },
+      "hint": "Think labels at the top.",
+      "template": "Before clicking Run, a strong habit is to predict the result ____.",
+      "choices": [
+        "headers",
+        "borders",
+        "passwords",
+        "themes"
+      ],
+      "correct": "headers"
+    },
+    "m1_s04_fill_full_table_overview": {
+      "title": "Why query the full table?",
+      "prompt": "Fill in the blank with the best word.",
+      "help": {
+        "concept": "A full-table query is useful when you want a first overview.",
+        "hint_1": "Think first look.",
+        "hint_2": "The lesson calls it a first overview."
+      },
+      "hint": "Think first look.",
+      "template": "A full-table query is useful when you want a first ____ of the table.",
+      "choices": [
+        "overview",
+        "mistake",
+        "filter",
+        "sort"
+      ],
+      "correct": "overview"
+    }
+  }
+}

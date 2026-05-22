@@ -1,0 +1,49 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Critique failed for topic \"reading_query_results\"\nModule: sql-v2-0\nSection: sql-v2-0-4\nReport dir: .curriculum-drafts/reports/sql-v2/module0/reading_query_results\n- Expected at least 6 non-code quiz exercise(s), but the draft has 0.\n- Exercise policy targets 2 \"single_choice\" exercise(s), but the draft has 0.\n- Exercise policy targets 2 \"multi_choice\" exercise(s), but the draft has 0.\n- Exercise policy targets 2 \"drag_reorder\" exercise(s), but the draft has 0.\n- Exercise policy targets 2 \"fill_blank_choice\" exercise(s), but the draft has 0.\n- Exercise policy expects 11 total exercise(s), but the draft has 3.",
+  "stack": "RetryableTopicValidationError: Critique failed for topic \"reading_query_results\"\nModule: sql-v2-0\nSection: sql-v2-0-4\nReport dir: .curriculum-drafts/reports/sql-v2/module0/reading_query_results\n- Expected at least 6 non-code quiz exercise(s), but the draft has 0.\n- Exercise policy targets 2 \"single_choice\" exercise(s), but the draft has 0.\n- Exercise policy targets 2 \"multi_choice\" exercise(s), but the draft has 0.\n- Exercise policy targets 2 \"drag_reorder\" exercise(s), but the draft has 0.\n- Exercise policy targets 2 \"fill_blank_choice\" exercise(s), but the draft has 0.\n- Exercise policy expects 11 total exercise(s), but the draft has 3.\n    at throwRetryableReportFailure (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:79:11)\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:294:25)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:24:17)\n    at async runCompileSubject (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-subject.js:28:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:31:13)",
+  "code": "CRITIQUE_VALIDATION_FAILED",
+  "retryable": true,
+  "details": {
+    "topicId": "reading_query_results",
+    "ok": false,
+    "issues": [
+      {
+        "code": "QUIZ_BANK_TOO_SMALL",
+        "category": "clarity",
+        "severity": "error",
+        "message": "Expected at least 6 non-code quiz exercise(s), but the draft has 0."
+      },
+      {
+        "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+        "category": "clarity",
+        "severity": "error",
+        "message": "Exercise policy targets 2 \"single_choice\" exercise(s), but the draft has 0."
+      },
+      {
+        "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+        "category": "clarity",
+        "severity": "error",
+        "message": "Exercise policy targets 2 \"multi_choice\" exercise(s), but the draft has 0."
+      },
+      {
+        "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+        "category": "clarity",
+        "severity": "error",
+        "message": "Exercise policy targets 2 \"drag_reorder\" exercise(s), but the draft has 0."
+      },
+      {
+        "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+        "category": "clarity",
+        "severity": "error",
+        "message": "Exercise policy targets 2 \"fill_blank_choice\" exercise(s), but the draft has 0."
+      },
+      {
+        "code": "EXERCISE_POLICY_TOTAL_MISMATCH",
+        "category": "clarity",
+        "severity": "error",
+        "message": "Exercise policy expects 11 total exercise(s), but the draft has 3."
+      }
+    ]
+  }
+}

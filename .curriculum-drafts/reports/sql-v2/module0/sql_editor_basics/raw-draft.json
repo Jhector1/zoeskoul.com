@@ -1,0 +1,239 @@
+{
+  "title": "SQL Editor Basics",
+  "summary": "Learn the basics of using the SQL editor to write and execute queries.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to the SQL Editor",
+      "bodyMarkdown": "The SQL editor is where you write your SQL queries. It provides a space to type commands and execute them to interact with your database. For example, you can retrieve data from the `students` table using a simple query:\n\n```\nSELECT * FROM students;\n```\n\nThis query selects all columns from the `students` table. Try it yourself by typing the query in the SQL editor and clicking 'Run query'."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "title": "Understanding the SQL Editor",
+      "prompt": "What is the primary purpose of the SQL editor?",
+      "options": [
+        "To write and execute SQL queries",
+        "To design database schemas",
+        "To visualize data relationships",
+        "To manage database users"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what you primarily do in the SQL editor.",
+      "help": {
+        "concept": "The SQL editor is used for writing and executing queries.",
+        "hint_1": "Consider the main function of the SQL editor.",
+        "hint_2": "The SQL editor is where you type and run SQL commands."
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "title": "Executing Queries",
+      "prompt": "What button do you click to execute a query in the SQL editor?",
+      "options": [
+        "Run query",
+        "Execute",
+        "Submit",
+        "Start"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Look for the button that starts the query execution.",
+      "help": {
+        "concept": "Executing a query requires clicking the correct button in the SQL editor.",
+        "hint_1": "The button is labeled with an action word.",
+        "hint_2": "The button you click is labeled 'Run query'."
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "SQL Editor Features",
+      "prompt": "Which of the following are features of the SQL editor? (Select all that apply)",
+      "options": [
+        "Writing SQL queries",
+        "Executing SQL queries",
+        "Visualizing data relationships",
+        "Managing database users"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Focus on the core functionalities of the SQL editor.",
+      "help": {
+        "concept": "The SQL editor is primarily for writing and executing queries.",
+        "hint_1": "Consider what actions you perform directly in the SQL editor.",
+        "hint_2": "The SQL editor is used for writing and executing queries, not for visualization or user management."
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "title": "SQL Query Basics",
+      "prompt": "Which of the following SQL commands can be used in the SQL editor? (Select all that apply)",
+      "options": [
+        "SELECT",
+        "INSERT",
+        "UPDATE",
+        "DELETE"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider the commands introduced in this module.",
+      "help": {
+        "concept": "This module focuses on basic SQL commands.",
+        "hint_1": "Think about the commands that retrieve data.",
+        "hint_2": "The 'SELECT' command is used to retrieve data."
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Steps to Execute a Query",
+      "prompt": "Arrange the steps to execute a query in the SQL editor.",
+      "tokens": [
+        "Write the query in the SQL editor.",
+        "Click 'Run query'.",
+        "Check the results table."
+      ],
+      "correctOrder": [
+        "Write the query in the SQL editor.",
+        "Click 'Run query'.",
+        "Check the results table."
+      ],
+      "hint": "Think about the logical order of actions when executing a query.",
+      "help": {
+        "concept": "Executing a query involves writing, running, and checking results.",
+        "hint_1": "Start with writing the query.",
+        "hint_2": "After writing, you run the query and then check the results."
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "title": "SQL Query Execution",
+      "prompt": "Order the actions for executing a SQL query.",
+      "tokens": [
+        "Write the SQL command.",
+        "Execute the command.",
+        "Review the output."
+      ],
+      "correctOrder": [
+        "Write the SQL command.",
+        "Execute the command.",
+        "Review the output."
+      ],
+      "hint": "Consider the sequence of actions from writing to reviewing.",
+      "help": {
+        "concept": "Executing a SQL query involves writing, executing, and reviewing.",
+        "hint_1": "Begin with writing the command.",
+        "hint_2": "Execution follows writing, and reviewing comes last."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Editor Action",
+      "prompt": "In the SQL editor, you click [blank1] to run a query.",
+      "template": "In the SQL editor, you click [blank1] to run a query.",
+      "choices": [
+        "Run query",
+        "Execute",
+        "Submit",
+        "Start"
+      ],
+      "correctValue": "Run query",
+      "hint": "Look for the button that initiates the query execution.",
+      "help": {
+        "concept": "The button to execute a query is labeled 'Run query'.",
+        "hint_1": "The button is labeled with an action word.",
+        "hint_2": "The correct button is labeled 'Run query'."
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "title": "SQL Command",
+      "prompt": "To retrieve all data from a table, use the [blank1] command.",
+      "template": "To retrieve all data from a table, use the [blank1] command.",
+      "choices": [
+        "SELECT",
+        "INSERT",
+        "UPDATE",
+        "DELETE"
+      ],
+      "correctValue": "SELECT",
+      "hint": "Think about the command that retrieves data.",
+      "help": {
+        "concept": "The 'SELECT' command is used to retrieve data.",
+        "hint_1": "Consider the command that fetches data.",
+        "hint_2": "The 'SELECT' command is the correct choice."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Basic SQL Query",
+      "prompt": "Write a SQL query to select all columns from the `students` table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT * FROM students;",
+      "recipeType": "sql_query",
+      "datasetId": "students_intro",
+      "hint": "Use the 'SELECT' statement to retrieve all columns.",
+      "help": {
+        "concept": "The 'SELECT' statement is used to retrieve data from a table.",
+        "hint_1": "Use 'SELECT *' to get all columns.",
+        "hint_2": "The table name follows the 'FROM' keyword."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Retrieve Student Names",
+      "prompt": "Write a SQL query to select the `name` column from the `students` table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT name FROM students;",
+      "recipeType": "sql_query",
+      "datasetId": "students_intro",
+      "hint": "Use 'SELECT' to specify the column you want.",
+      "help": {
+        "concept": "The 'SELECT' statement specifies which columns to retrieve.",
+        "hint_1": "Specify the column name after 'SELECT'.",
+        "hint_2": "Use 'FROM' to indicate the table."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "List All Students",
+      "prompt": "Write a SQL query to list all students from the `students` table.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT * FROM students;",
+      "recipeType": "sql_query",
+      "datasetId": "students_intro",
+      "hint": "Use 'SELECT *' to retrieve all student data.",
+      "help": {
+        "concept": "The 'SELECT' statement retrieves data from a table.",
+        "hint_1": "Use 'SELECT *' for all columns.",
+        "hint_2": "The table name follows the 'FROM' keyword."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Editor Basics Project",
+    "stepIds": [
+      "code_input_1",
+      "code_input_2",
+      "code_input_3"
+    ]
+  }
+}

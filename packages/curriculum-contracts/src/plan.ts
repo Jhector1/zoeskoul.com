@@ -1,4 +1,8 @@
-import type { BlueprintRuntimePolicy, CourseProfileId } from "./blueprint.js";
+import type {
+  BlueprintRuntimePolicy,
+  CourseProfileId,
+  CourseVersionStatus,
+} from "./blueprint.js";
 
 export type PlannedTopic = {
   topicId: string;
@@ -50,3 +54,29 @@ export type CoursePlan = {
 };
 
 export type NormalizedCoursePlan = CoursePlan;
+
+export type SubjectPlan = {
+  subjectSlug: string;
+  catalogSlug?: string;
+  profileId: string;
+  courseOrder: string[];
+  courses?: Array<{
+    courseSlug: string;
+    title?: string;
+    order?: number;
+    path?: string;
+  }>;
+  publishTarget: {
+    liveSubjectSlug: string;
+    courseSlug: string;
+    channel: "current" | "draft" | "preview";
+  };
+  versioning?: {
+    family: string;
+    version: number;
+    status: CourseVersionStatus;
+    defaultForNewEnrollments?: boolean;
+    supersedes?: string | null;
+    supersededBy?: string | null;
+  };
+};

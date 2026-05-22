@@ -1,0 +1,240 @@
+{
+  "title": "SQL Editor Basics",
+  "summary": "Learn the basics of using the SQL editor to run simple queries and view results.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to SQL Editor",
+      "bodyMarkdown": "The SQL editor is a tool where you write and execute SQL queries. It allows you to interact with databases by sending queries and receiving results. In this lesson, we'll focus on using the SQL editor to perform basic operations.\n\n### Example\n\nTo retrieve all records from the `students` table, you can use the following query:\n\n```\nSELECT * FROM students;\n```\n\nThis query selects all columns from the `students` table. Try it yourself by writing the query in the SQL editor and clicking 'Run query'. Check the results table to see the output."
+    },
+    {
+      "id": "sketch2",
+      "title": "Understanding the Results Table",
+      "bodyMarkdown": "After running a query, the results are displayed in the results table. This table shows the data retrieved by your query.\n\n### Example\n\nIf you run the query `SELECT name, grade FROM students;`, the results table will display two columns: `name` and `grade` for each student.\n\nTry this query in the SQL editor and observe how the results table changes. Your turn!"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Purpose of the SQL Editor",
+      "prompt": "What is the primary purpose of the SQL editor?",
+      "options": [
+        "To write and execute SQL queries",
+        "To create new databases",
+        "To design user interfaces",
+        "To manage network connections"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what actions you perform in the SQL editor.",
+      "help": {
+        "concept": "The SQL editor is used to interact with databases by writing and executing queries.",
+        "hint_1": "Consider what you do when you write a SQL query.",
+        "hint_2": "The SQL editor is not used for database creation or network management."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Components of the SQL Editor",
+      "prompt": "Which of the following are components of the SQL editor environment? (Choose all that apply)",
+      "options": [
+        "SQL editor",
+        "Run query button",
+        "Results table",
+        "Terminal window"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about the elements you interact with when running a query.",
+      "help": {
+        "concept": "The SQL editor environment includes tools for writing, executing, and viewing query results.",
+        "hint_1": "Consider the tools you use to write and execute queries.",
+        "hint_2": "The terminal window is not part of the SQL editor environment."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Steps to Execute a Query",
+      "prompt": "Arrange the steps to execute a query in the correct order.",
+      "tokens": [
+        "Write the query in the SQL editor.",
+        "Click Run query.",
+        "Check the results table."
+      ],
+      "correctOrder": [
+        "Write the query in the SQL editor.",
+        "Click Run query.",
+        "Check the results table."
+      ],
+      "hint": "Think about the sequence of actions from writing to viewing results.",
+      "help": {
+        "concept": "Executing a query involves writing it, running it, and then checking the output.",
+        "hint_1": "Start with writing the query.",
+        "hint_2": "After writing, you need to run the query before checking results."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "SQL Query Syntax",
+      "prompt": "Complete the SQL query to select all columns from the `students` table: `SELECT * [blank1] students;`",
+      "template": "SELECT * [blank1] students;",
+      "choices": [
+        "FROM",
+        "WHERE",
+        "ORDER BY",
+        "JOIN"
+      ],
+      "correctValue": "FROM",
+      "hint": "Think about the keyword that specifies the table in a SQL query.",
+      "help": {
+        "concept": "The `FROM` keyword is used to specify the table from which to select data.",
+        "hint_1": "The keyword follows `SELECT *` to indicate the table.",
+        "hint_2": "`FROM` is the correct keyword to use here."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Basic SELECT Query",
+      "prompt": "Write a SQL query to select the `name` and `age` columns from the `students` table.",
+      "starterCode": "-- Write your query here\n",
+      "solutionCode": "SELECT name, age FROM students;",
+      "hint": "Use the `SELECT` statement to specify columns and the `FROM` clause to specify the table.",
+      "help": {
+        "concept": "A basic SELECT query retrieves specific columns from a table.",
+        "hint_1": "List the columns you want to select after `SELECT`.",
+        "hint_2": "Use `FROM students` to specify the table."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "multi_choice",
+      "title": "SQL Query Results",
+      "prompt": "Which of the following statements about SQL query results is true? (Choose all that apply)",
+      "options": [
+        "The results table displays data retrieved by the query.",
+        "The results table shows the SQL syntax errors.",
+        "The results table can display multiple rows and columns.",
+        "The results table is used to write SQL queries."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider the purpose of the results table after executing a query.",
+      "help": {
+        "concept": "The results table shows the data output of a query, not errors or query writing.",
+        "hint_1": "The results table is for viewing data, not writing queries.",
+        "hint_2": "It displays the data retrieved by the query."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "drag_reorder",
+      "title": "SQL Query Execution Flow",
+      "prompt": "Order the following steps to describe the flow of executing a SQL query.",
+      "tokens": [
+        "Write the SQL query.",
+        "Execute the query.",
+        "View the results."
+      ],
+      "correctOrder": [
+        "Write the SQL query.",
+        "Execute the query.",
+        "View the results."
+      ],
+      "hint": "Think about the logical sequence from writing to viewing results.",
+      "help": {
+        "concept": "Executing a query involves writing it, running it, and then viewing the results.",
+        "hint_1": "Start with writing the query.",
+        "hint_2": "After writing, execute the query before viewing results."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "SQL Keywords",
+      "prompt": "Fill in the blank to complete the SQL query: `SELECT name, grade [blank1] students;`",
+      "template": "SELECT name, grade [blank1] students;",
+      "choices": [
+        "FROM",
+        "WHERE",
+        "ORDER BY",
+        "JOIN"
+      ],
+      "correctValue": "FROM",
+      "hint": "Identify the keyword that specifies the table in a SQL query.",
+      "help": {
+        "concept": "The `FROM` keyword is used to specify the table from which to select data.",
+        "hint_1": "The keyword follows `SELECT` to indicate the table.",
+        "hint_2": "`FROM` is the correct keyword to use here."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "single_choice",
+      "title": "SQL Query Structure",
+      "prompt": "What is the correct structure of a basic SQL query?",
+      "options": [
+        "SELECT columns FROM table",
+        "FROM table SELECT columns",
+        "SELECT table FROM columns",
+        "COLUMNS SELECT table FROM"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about the order of keywords in a SQL query.",
+      "help": {
+        "concept": "A basic SQL query starts with `SELECT`, followed by columns, then `FROM` and the table name.",
+        "hint_1": "The query begins with `SELECT`.",
+        "hint_2": "After `SELECT`, specify columns, then use `FROM` to indicate the table."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Selecting All Columns",
+      "prompt": "Write a SQL query to select all columns from the `students` table.",
+      "starterCode": "-- Write your query here\n",
+      "solutionCode": "SELECT * FROM students;",
+      "hint": "Use `SELECT *` to select all columns.",
+      "help": {
+        "concept": "Using `SELECT *` retrieves all columns from a specified table.",
+        "hint_1": "The asterisk (*) selects all columns.",
+        "hint_2": "Use `FROM students` to specify the table."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Selecting Specific Columns",
+      "prompt": "Write a SQL query to select the `grade` and `city` columns from the `students` table.",
+      "starterCode": "-- Write your query here\n",
+      "solutionCode": "SELECT grade, city FROM students;",
+      "hint": "List the columns you want to select after `SELECT`.",
+      "help": {
+        "concept": "A basic SELECT query retrieves specific columns from a table.",
+        "hint_1": "Specify the columns after `SELECT`.",
+        "hint_2": "Use `FROM students` to specify the table."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "SQL Query Practice",
+    "stepIds": [
+      "quiz5",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

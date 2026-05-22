@@ -1,0 +1,207 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "where_sql_runs": {
+          "label": "where sql runs",
+          "summary": "where sql runs in Getting Started with SQL and Databases",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding SQL Execution"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "SQL Query Practice"
+            }
+          },
+          "projectSteps": {
+            "code_input_1": {
+              "title": "Basic SQL Query"
+            },
+            "code_input_2": {
+              "title": "Retrieve Specific Columns"
+            },
+            "code_input_3": {
+              "title": "Query with Alias"
+            }
+          },
+          "quiz": {
+            "single_choice_1": {
+              "title": "Purpose of SQL",
+              "prompt": "What is the primary purpose of SQL?",
+              "hint": "Think about what SQL is mainly used for.",
+              "help": {
+                "concept": "SQL is primarily used for managing and querying databases.",
+                "hint_1": "SQL is not used for web design or operating systems.",
+                "hint_2": "SQL is a language for interacting with databases."
+              },
+              "options": {
+                "a": "To create web pages",
+                "b": "To manage and query databases",
+                "c": "To design graphics",
+                "d": "To write operating systems"
+              }
+            },
+            "single_choice_2": {
+              "title": "SQL Execution Environment",
+              "prompt": "Where do you typically run SQL queries?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "In a web browser",
+                "b": "In a database management system",
+                "c": "In a text editor",
+                "d": "In a graphic design tool"
+              }
+            },
+            "multi_choice_1": {
+              "title": "SQL Query Components",
+              "prompt": "Which of the following are components of an SQL query? (Select all that apply)",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare each option to the exact topic named in the question.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "SELECT",
+                "b": "FROM",
+                "c": "WHERE",
+                "d": "PRINT"
+              }
+            },
+            "multi_choice_2": {
+              "title": "SQL Query Results",
+              "prompt": "What can you do with the results of an SQL query? (Select all that apply)",
+              "hint": "Consider the possible uses of query results.",
+              "help": {
+                "concept": "Query results can be displayed, used in calculations, or ignored.",
+                "hint_1": "Modifying the database schema is not a direct use of query results.",
+                "hint_2": "Results can be displayed, used, or ignored, but not directly modify schema."
+              },
+              "options": {
+                "a": "Display them in a table",
+                "b": "Use them in calculations",
+                "c": "Ignore them",
+                "d": "Modify the database schema"
+              }
+            },
+            "drag_reorder_1": {
+              "title": "SQL Query Sequence",
+              "prompt": "Arrange the steps to execute an SQL query in the correct order.",
+              "hint": "Think about the logical sequence of actions when running a query.",
+              "help": {
+                "concept": "Executing an SQL query involves writing, running, and checking results.",
+                "hint_1": "Start with writing the query.",
+                "hint_2": "After writing, run the query and then check the results."
+              },
+              "tokens": {
+                "t1": "Write the query in the SQL editor.",
+                "t2": "Click Run query.",
+                "t3": "Check the results table."
+              }
+            },
+            "drag_reorder_2": {
+              "title": "SQL Query Structure",
+              "prompt": "Arrange the components of a basic SQL query in the correct order.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "FROM",
+                "t3": "WHERE"
+              }
+            },
+            "fill_blank_choice_1": {
+              "title": "SQL Clause Identification",
+              "prompt": "Identify the missing SQL clause: SELECT * [blank1] students;",
+              "hint": "Think about which clause specifies the table in an SQL query.",
+              "help": {
+                "concept": "The the missing term clause specifies the table to query.",
+                "hint_1": "The the missing term clause follows SELECT.",
+                "hint_2": "The correct clause is the missing term, which specifies the table."
+              },
+              "template": "SELECT * [blank1] students;",
+              "choices": [
+                "FROM",
+                "WHERE",
+                "ORDER BY"
+              ]
+            },
+            "fill_blank_choice_2": {
+              "title": "SQL Query Purpose",
+              "prompt": "Complete the sentence: SQL is used to [blank1] data from a database.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "SQL is used to [blank1] data from a database.",
+              "choices": [
+                "retrieve",
+                "delete",
+                "design"
+              ]
+            },
+            "code_input_1": {
+              "title": "Basic SQL Query",
+              "prompt": "Write an SQL query to select all columns from the 'students' table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query below"
+            },
+            "code_input_2": {
+              "title": "Retrieve Specific Columns",
+              "prompt": "Write an SQL query to select the 'name' and 'age' columns from the 'students' table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query below"
+            },
+            "code_input_3": {
+              "title": "Query with Alias",
+              "prompt": "Write an SQL query to select the 'name' column from the 'students' table and rename it to 'student_name'.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "where_sql_runs": {
+          "sketch1": {
+            "title": "Understanding SQL Execution",
+            "bodyMarkdown": "SQL is a language used to interact with databases. When you write an SQL query, it is executed in a database management system (DBMS). The DBMS processes the query and returns the results. For example, if you want to retrieve all students from a database, you would write a query like this:\n\n```sql\nSELECT * FROM students;\n```\n\nThis query selects all columns from the 'students' table. Try it yourself by writing this query in the SQL editor and clicking 'Run query'. Check the results table to see the output."
+          }
+        }
+      }
+    }
+  }
+}

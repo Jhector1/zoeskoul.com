@@ -1,0 +1,19 @@
+{
+  "policyId": "platform-browser-only",
+  "notes": [
+    "All learner actions happen inside the ZoeSkoul browser workspace.",
+    "Use beginner-friendly action wording that references only visible workspace controls."
+  ],
+  "forbiddenActions": [
+    "local setup",
+    "local machine",
+    "install software",
+    "download software",
+    "open a terminal",
+    "use the terminal",
+    "use the command line",
+    "local IDE",
+    "local file",
+    "create a local file"
+  ]
+}

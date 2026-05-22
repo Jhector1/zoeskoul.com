@@ -142,6 +142,7 @@ export function buildTopicSeedFromPlanNode(args: {
 
         // Resolved course-plan identity. These fields are the source of truth.
         subjectSlug: args.blueprint.subjectSlug,
+        courseSlug: args.spec?.courseSlug ?? args.blueprint.courseSlug,
         profileId: args.blueprint.profileId,
         moduleSlug: args.module.moduleSlug,
         modulePrefix: args.module.prefix,
@@ -156,6 +157,7 @@ export function buildTopicSeedFromPlanNode(args: {
 
         exercisePolicy,
         workspacePolicy,
+        authoringPolicy: args.spec?.resolvedAuthoringPolicy,
         generationTargets,
         plannedExerciseCounts,
         moduleRuntimeDefaults: mergedRuntimeDefaults,
