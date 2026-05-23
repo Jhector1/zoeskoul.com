@@ -151,7 +151,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT name FROM products WHERE category = [blank1];",
               "choices": [
@@ -164,33 +164,33 @@
             "ci_filter_expensive_products": {
               "title": "Query products above a price threshold",
               "prompt": "Write a query that shows the `name` and `price` of products with a `price` greater than 20. Sort the results by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \n  name,\n  price\nFROM products\n-- TODO: keep only rows with price greater than 20\n-- TODO: sort by price from highest to lowest\n;"
             },
             "ci_filter_category_and_stock": {
               "title": "Find well-stocked stationery items",
               "prompt": "Write a query that shows `name`, `category`, and `stock` for products in the `Stationery` category with `stock` greater than or equal to 15. Sort the results by `stock` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \n  name,\n  category,\n  stock\nFROM products\n-- TODO: add a WHERE clause for Stationery items with enough stock\n-- TODO: sort by stock from highest to lowest\n;"
             },
             "ci_filter_recent_products": {
               "title": "Show recently created products",
               "prompt": "Write a query that shows `name` and `created_at` for products created on or after `2026-01-25`. Sort the results by `created_at` from earliest to latest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \n  name,\n  created_at\nFROM products\n-- TODO: keep products created on or after 2026-01-25\n-- TODO: sort from earliest date to latest date\n;"
             }

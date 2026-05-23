@@ -8,6 +8,10 @@ export type PublishGateStats = {
     hintWarnings: number;
     semanticFailures: number;
     goldenFailures: number;
+    qualityBlockers: number;
+    qualityErrors: number;
+    qualityWarnings: number;
+    qualityInfos: number;
 };
 
 export type PublishGateResult = {

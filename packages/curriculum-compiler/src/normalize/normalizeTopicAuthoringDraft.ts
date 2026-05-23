@@ -1,5 +1,9 @@
 import type { TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
-import {SemanticCheck, SemanticCheckSchema} from "@zoeskoul/practice-checks";
+import {
+    assertProfileSupportsCodeInput,
+    getCurriculumProfile,
+} from "@zoeskoul/curriculum-profiles";
+import { SemanticCheckSchema } from "@zoeskoul/practice-checks";
 
 type DraftQuizItem = TopicAuthoringDraft["quizDraft"][number];
 type DraftHelp = DraftQuizItem["help"];
@@ -470,38 +474,44 @@ function inferCodeInputLanguage(item: Record<string, unknown>): string | undefin
     return undefined;
 }
 
-function defaultStarterCodeForCodeInput(item: Record<string, unknown>): string {
-    const language = inferCodeInputLanguage(item);
+function defaultStarterCodeForCodeInput(args: {
+    item: Record<string, unknown>;
+    profileId?: string;
+}): string {
     const recipeType =
-        typeof item.recipeType === "string"
-            ? item.recipeType.trim()
-            : typeof item.type === "string"
-                ? item.type.trim()
+        typeof args.item.recipeType === "string"
+            ? args.item.recipeType.trim()
+            : typeof args.item.type === "string"
+                ? args.item.type.trim()
                 : "";
-
     const hasDatasetId =
-        typeof item.datasetId === "string" && item.datasetId.trim().length > 0;
+        typeof args.item.datasetId === "string" && args.item.datasetId.trim().length > 0;
 
-    if (language === "sql" || recipeType === "sql_query" || hasDatasetId) {
-        return "-- Write your SQL answer below\n";
+    if (!args.profileId) {
+        throw new Error(
+            "Cannot create default starterCode for code_input without a curriculum profile. Pass profileId so starter defaults stay profile-owned.",
+        );
     }
 
-    if (language === "python") {
-        return "# Write your answer below\n";
-    }
+    const codeInput = assertProfileSupportsCodeInput(
+        getCurriculumProfile(args.profileId),
+    );
 
-    if (language === "bash") {
-        return "# Write your command below\n";
-    }
-
-    if (language === "javascript" || language === "java" || language === "c" || language === "cpp") {
-        return "// Write your answer below\n";
-    }
-
-    return "// Write your answer below\n";
+    return codeInput.defaultStarter({
+        language: inferCodeInputLanguage(args.item),
+        recipeType,
+        hasDatasetId,
+    });
 }
 
-function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
+function normalizeCodeInput(
+    item: Record<string, unknown>,
+    context?: { profileId?: string },
+): DraftQuizItem {
+    if (context?.profileId) {
+        assertProfileSupportsCodeInput(getCurriculumProfile(context.profileId));
+    }
+
     const title =
         asOptionalString(item.title) ??
         asOptionalString(item.messageBase) ??
@@ -523,7 +533,10 @@ function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
     const starterCode =
         typeof item.starterCode === "string" && item.starterCode.trim().length > 0
             ? item.starterCode
-            : defaultStarterCodeForCodeInput(item);
+            : defaultStarterCodeForCodeInput({
+                item,
+                profileId: context?.profileId,
+            });
 
     const tests = Array.isArray(item.tests)
         ? item.tests
@@ -589,14 +602,19 @@ function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
         hint: asOptionalString(item.hint) ?? fallbackHint(title, "code_input"),
         help: normalizeHelp(item, title, "code_input"),
     };
-}function normalizeQuizItem(item: Record<string, unknown>): DraftQuizItem {
+}
+
+function normalizeQuizItem(
+    item: Record<string, unknown>,
+    context?: { profileId?: string },
+): DraftQuizItem {
     const rawKind = typeof item.kind === "string" ? item.kind : "";
 
     if (rawKind === "single_choice") return normalizeSingleChoice(item);
     if (rawKind === "multi_choice") return normalizeMultiChoice(item);
     if (rawKind === "drag_reorder") return normalizeDragReorder(item);
     if (rawKind === "fill_blank_choice") return normalizeFillBlankChoice(item);
-    if (rawKind === "code_input") return normalizeCodeInput(item);
+    if (rawKind === "code_input") return normalizeCodeInput(item, context);
 
     const title =
         asOptionalString(item.title) ??
@@ -621,7 +639,10 @@ function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
     };
 }
 
-export function normalizeTopicAuthoringDraft(raw: unknown): TopicAuthoringDraft {
+export function normalizeTopicAuthoringDraft(
+    raw: unknown,
+    context?: { profileId?: string },
+): TopicAuthoringDraft {
     const draft = (raw && typeof raw === "object" ? raw : {}) as Record<
         string,
         unknown
@@ -646,7 +667,7 @@ export function normalizeTopicAuthoringDraft(raw: unknown): TopicAuthoringDraft 
         quizDraft: Array.isArray(draft.quizDraft)
             ? draft.quizDraft
                 .filter((x): x is Record<string, unknown> => !!x && typeof x === "object")
-                .map(normalizeQuizItem)
+                .map((item) => normalizeQuizItem(item, context))
             : [],
         projectDraft:
             draft.projectDraft && typeof draft.projectDraft === "object"

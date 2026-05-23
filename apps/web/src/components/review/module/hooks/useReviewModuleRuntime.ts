@@ -19,20 +19,40 @@ type ReviewModuleWithMeta = ReviewModule & {
     meta?: UnknownRecord | null;
 };
 
+export function resolveReviewModuleToolDefaults(args: {
+    subjectSlug: string;
+    mod: ReviewModule;
+    viewTopic: ReviewModule["topics"][number] | null;
+}){
+    const moduleRuntime =
+        args.mod.runtimeDefaults ??
+        ((args.mod as ReviewModuleWithMeta).meta?.runtimeDefaults as UnknownRecord | null | undefined) ??
+        null;
+    const effectiveRuntime =
+        ((args.viewTopic?.meta?.runtimeDefaults as UnknownRecord | null | undefined) ??
+            moduleRuntime ??
+            null);
+    const effectiveRuntimeRecord = effectiveRuntime as UnknownRecord | null;
+    const effectiveRuntimeLanguage =
+        typeof effectiveRuntimeRecord?.language === "string"
+            ? effectiveRuntimeRecord.language
+            : undefined;
+
+    return resolveToolDefaults({
+        subjectSlug: args.subjectSlug,
+        moduleMeta: (args.mod as ReviewModuleWithMeta).meta,
+        profileId: args.mod.profileId,
+        versionFamily: args.mod.versionFamily,
+        runtimeDefaults: effectiveRuntime ?? moduleRuntime,
+        language: effectiveRuntimeLanguage,
+    });
+}
+
 export function useReviewModuleRuntime({ subjectSlug, mod, viewTopic }: Args) {
     const { codeEnabled } = useMemo(() => {
         const meta = (mod as ReviewModuleWithMeta).meta;
         return toolsPolicyForSubject(subjectSlug, meta);
     }, [subjectSlug, mod]);
-
-    const toolDefaults = useMemo(
-        () =>
-            resolveToolDefaults({
-                subjectSlug,
-                moduleMeta: (mod as ReviewModuleWithMeta).meta,
-            }),
-        [subjectSlug, mod],
-    );
 
     const moduleRuntime =
         mod.runtimeDefaults ??
@@ -55,6 +75,20 @@ export function useReviewModuleRuntime({ subjectSlug, mod, viewTopic }: Args) {
     const effectiveIdeConfig = mergeLearningIdeConfigs(
         moduleIdeConfig,
         (viewTopic?.meta?.serviceDefaults as LearningIdeConfig | null | undefined) ?? null,
+    );
+
+    const toolDefaults = useMemo(
+        () =>
+            resolveReviewModuleToolDefaults({
+                subjectSlug,
+                mod,
+                viewTopic,
+            }),
+        [
+            subjectSlug,
+            mod,
+            viewTopic,
+        ],
     );
 
     const topicSqlFallback = useMemo(() => {

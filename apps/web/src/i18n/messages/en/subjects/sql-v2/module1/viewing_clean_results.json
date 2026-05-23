@@ -167,33 +167,33 @@
             "ci_clean_1": {
               "title": "Show only names and prices",
               "prompt": "Write a query that returns only the `name` and `price` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM products;"
             },
             "ci_clean_2": {
               "title": "Put category first",
               "prompt": "Write a query that returns the `category`, `name`, and `stock` columns from `products`, in that order. Write the query in the SQL editor, click Run query, and check that `category` appears as the first column in the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM products;"
             },
             "ci_clean_3": {
               "title": "Show names and dates only",
               "prompt": "Write a query that returns only the `name` and `created_at` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM products;"
             }

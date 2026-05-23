@@ -13,7 +13,8 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "test:ai:smoke": "vitest run --root ../.. packages/curriculum-ai/src/providers/openai.structured-output.smoke.test.ts"
   },
   "dependencies": {
 

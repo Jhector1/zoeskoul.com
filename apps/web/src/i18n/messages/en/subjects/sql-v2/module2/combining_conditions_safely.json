@@ -85,7 +85,7 @@
             "mc_parentheses_same_meaning": {
               "title": "Spot equivalent grouped logic",
               "prompt": "Which filters mean the same as `WHERE (category = 'Art' OR category = 'Stationery') AND stock > 20`? Choose all that apply.",
-              "hint": "The correct answers must keep the category group together and still require stock above 20.",
+              "hint": "The matching answers must keep the category group together and still require stock above 20.",
               "help": {
                 "concept": "Equivalent logic can be written in different ways, but it must keep the same grouping and requirements.",
                 "hint_1": "A correct option must require `stock > 20` for both allowed categories.",
@@ -170,33 +170,33 @@
             "ci_art_or_stationery_stock": {
               "title": "Filter grouped categories with stock",
               "prompt": "Write a query that shows `name`, `category`, and `stock` for products that are in `Art` or `Stationery` and have `stock > 20`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, category, stock\nFROM products\nWHERE ;"
             },
             "ci_not_home_under_20": {
               "title": "Use NOT with a grouped condition",
               "prompt": "Write a query that shows `name`, `category`, and `price` for products that are not in the `Home` category and have `price < 20`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, category, price\nFROM products\nWHERE ;"
             },
             "ci_stationery_or_low_stock": {
               "title": "Combine OR with a numeric condition",
               "prompt": "Write a query that shows `name`, `category`, and `stock` for products that are in `Stationery` or have `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, category, stock\nFROM products\nWHERE ;"
             }

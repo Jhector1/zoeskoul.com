@@ -43,6 +43,12 @@
       "purpose": "Build the learner's mental model before syntax: what SQL is, how databases organize information, and how questions become queries.",
       "datasetId": "students_intro",
       "coreSkill": "Database mental model",
+      "learningObjectives": [
+        "Explain what SQL is used for in real applications.",
+        "Identify tables, rows, columns, records, and fields.",
+        "Read simple table data and describe what it means.",
+        "Use the browser SQL workspace to run a beginner query."
+      ],
       "sections": [
         {
           "sectionSlug": "sql-v2-0-1",
@@ -95,6 +101,12 @@
       "purpose": "Teach learners to retrieve data confidently with SELECT and FROM before filtering or joining tables.",
       "datasetId": "products_catalog",
       "coreSkill": "SELECT",
+      "learningObjectives": [
+        "Write SELECT queries that retrieve data from one table.",
+        "Choose specific columns instead of always selecting every column.",
+        "Use FROM to identify the table being queried.",
+        "Read a query result table and explain what was returned."
+      ],
       "sections": [
         {
           "sectionSlug": "sql-v2-1-1",
@@ -147,6 +159,12 @@
       "purpose": "Introduce decision-making in queries by teaching learners to keep only the rows they actually need.",
       "datasetId": "products_catalog",
       "coreSkill": "WHERE",
+      "learningObjectives": [
+        "Use WHERE to return only rows that match a condition.",
+        "Compare text and numbers with beginner SQL operators.",
+        "Combine conditions with AND, OR, and NOT.",
+        "Debug common filtering mistakes in simple SQL queries."
+      ],
       "sections": [
         {
           "sectionSlug": "sql-v2-2-1",
@@ -201,6 +219,12 @@
       "purpose": "Help beginners control output so answers are easier to read, rank, and compare.",
       "datasetId": "products_catalog",
       "coreSkill": "ORDER BY and LIMIT",
+      "learningObjectives": [
+        "Sort query results with ORDER BY.",
+        "Use ASC and DESC to control sort direction.",
+        "Use LIMIT to show a smaller result set.",
+        "Combine filtering, sorting, and limiting in one query."
+      ],
       "sections": [
         {
           "sectionSlug": "sql-v2-3-1",
@@ -253,6 +277,12 @@
       "purpose": "Expand filtering to real-world cases like partial text, multiple choices, ranges, and missing values.",
       "datasetId": "customers_cleanup",
       "coreSkill": "LIKE, IN, BETWEEN, NULL",
+      "learningObjectives": [
+        "Search partial text with LIKE and wildcards.",
+        "Filter multiple values with IN and NOT IN.",
+        "Filter ranges with BETWEEN.",
+        "Find missing and present values with IS NULL and IS NOT NULL."
+      ],
       "sections": [
         {
           "sectionSlug": "sql-v2-4-1",
@@ -299,6 +329,200 @@
       "prefix": "sqlv2_4"
     }
   ],
+  "topicPolicies": {
+    "what_sql_means": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 5,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 5,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 0,
+        "projectCodeInputMax": 1
+      }
+    },
+    "what_a_database_is": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 5,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 5,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 0,
+        "projectCodeInputMax": 1
+      }
+    },
+    "why_sql_is_useful": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 5,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 5,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 0,
+        "projectCodeInputMax": 1
+      }
+    },
+    "real_world_examples_of_databases": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 5,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 5,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 0,
+        "projectCodeInputMax": 1
+      }
+    },
+    "rows_and_columns": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "records_and_fields": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "table_names_and_column_names": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "reading_data_like_a_spreadsheet": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "how_data_is_organized": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "one_table_vs_multiple_tables": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "intro_to_keys": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "thinking_in_questions_and_answers": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "where_sql_runs": {
+      "teachingMode": "ui-guided",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 1,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 2
+      }
+    },
+    "sql_editor_basics": {
+      "teachingMode": "ui-guided",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 1,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 2
+      }
+    },
+    "running_your_first_query": {
+      "teachingMode": "ui-guided",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 7,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 1,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "reading_query_results": {
+      "teachingMode": "ui-guided",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 1,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 2
+      }
+    }
+  },
   "assessmentPolicy": {
     "topicExerciseMin": 4,
     "technicalTopicCodeInputMin": 1,

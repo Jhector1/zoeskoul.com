@@ -67,10 +67,28 @@ function mentionsSumIntent(prompt: string): boolean {
     return (
         has(prompt, /\bsum\b/i) ||
         has(prompt, /\bsums\b/i) ||
-        has(prompt, /\btotal\b/i) ||
-        has(prompt, /\btotals\b/i) ||
+        has(
+            prompt,
+            /\b(?:total|totals)\s+(?:amount|amounts|price|prices|cost|costs|sale|sales|revenue|revenues|stock|stocks|quantity|quantities|value|values|score|scores|number|numbers|count|counts)\b/i,
+        ) ||
+        has(
+            prompt,
+            /\b(?:amount|amounts|price|prices|cost|costs|sale|sales|revenue|revenues|stock|stocks|quantity|quantities|value|values|score|scores|number|numbers|count|counts)\s+(?:total|totals)\b/i,
+        ) ||
         has(prompt, /\badd up\b/i) ||
         has(prompt, /\bcombined\b/i)
+    );
+}
+
+function hasAggregateLikeIntent(prompt: string): boolean {
+    return (
+        explicitlyRequiresFunction(prompt, "count") ||
+        explicitlyRequiresFunction(prompt, "sum") ||
+        explicitlyRequiresFunction(prompt, "avg") ||
+        explicitlyRequiresFunction(prompt, "average") ||
+        mentionsCountIntent(prompt) ||
+        mentionsAvgIntent(prompt) ||
+        mentionsSumIntent(prompt)
     );
 }
 
@@ -78,9 +96,12 @@ function mentionsGroupByIntent(prompt: string): boolean {
     return (
         has(prompt, /\bgroup\s+by\b/i) ||
         has(prompt, /\bgrouped\s+by\b/i) ||
-        has(prompt, /\bper\s+\w+/i) ||
-        has(prompt, /\bfor\s+each\b/i) ||
-        has(prompt, /\beach\s+\w+/i)
+        has(prompt, /\bgroup\s+(?:rows|records)\s+by\b/i) ||
+        ((has(prompt, /\bper\s+\w+/i) ||
+            has(prompt, /\bfor\s+each\b/i) ||
+            has(prompt, /\bone\s+row\s+for\s+each\b/i) ||
+            has(prompt, /\binside\s+each\b/i)) &&
+            hasAggregateLikeIntent(prompt))
     );
 }
 

@@ -167,33 +167,33 @@
             "ci-add-semicolon-name": {
               "title": "Write a query with a semicolon",
               "prompt": "Write a query that selects the `name` column from the `products` table. End the statement with a semicolon. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM products"
             },
             "ci-add-semicolon-two-columns": {
               "title": "Select two columns and end correctly",
               "prompt": "Write a query that returns the `id` and `category` columns from `products`. End the statement with a semicolon. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id\nFROM products"
             },
             "ci-created-at-semicolon": {
               "title": "Complete another statement",
               "prompt": "Write a query that selects the `created_at` and `name` columns from `products`. End the query with a semicolon. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT created_at\nFROM"
             }

@@ -69,10 +69,10 @@
             "mc_1": {
               "title": "Queries that can match Miami",
               "prompt": "Choose all `LIKE` patterns that could match the city `Miami`.",
-              "hint": "Check the exact length of `Miami` and its starting letter.",
+              "hint": "Compare the condition with the column named in the question, then check which rows would remain.",
               "help": {
                 "concept": "To test whether a `LIKE` pattern can match a value, compare each literal character and count how many characters each underscore requires.",
-                "hint_1": "`Miami` has 5 letters and starts with `M`.",
+                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
                 "hint_2": "Patterns with exactly five total character slots can work, and patterns with `%` can also work if the fixed part matches."
               },
               "options": {
@@ -89,7 +89,7 @@
               "help": {
                 "concept": "A pattern like `___ %` checks the exact length of the first word before the space, then allows any remaining characters after the space.",
                 "hint_1": "Look for first names with exactly 3 letters.",
-                "hint_2": "Compare `Mia`, `Leo`, `Emma`, and `Liam` by counting only the letters before the space."
+                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
               },
               "options": {
                 "a": "Mia Lopez",
@@ -154,7 +154,7 @@
               "help": {
                 "concept": "Multiple underscores in a `LIKE` pattern enforce an exact number of characters in that position.",
                 "hint_1": "You need one underscore for each character before the `@` sign.",
-                "hint_2": "The correct choice has four underscores and no percent sign."
+                "hint_2": "The matching choice has four underscores and no percent sign."
               },
               "template": "WHERE email LIKE '[blank1]@example.com';",
               "choices": [
@@ -167,33 +167,33 @@
             "code_1": {
               "title": "Find 3-letter first names",
               "prompt": "Write a query that returns the `full_name` column from `customers` for rows where the first name has exactly 3 letters, followed by a space and the rest of the name. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT full_name\nFROM customers\nWHERE ;"
             },
             "code_2": {
               "title": "Find 5-letter cities starting with M",
               "prompt": "Write a query that returns the `city` column from `customers` for cities that start with `M` and have exactly 5 total characters. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT city\nFROM customers\nWHERE city LIKE '';"
             },
             "code_3": {
               "title": "Match example.com emails with 4-character usernames",
               "prompt": "Write a query that returns `email` from `customers` where the email ends with `@example.com` and has exactly 4 characters before the `@`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT email\nFROM customers\nWHERE email LIKE ;"
             }

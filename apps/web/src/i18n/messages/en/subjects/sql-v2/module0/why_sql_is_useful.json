@@ -4,7 +4,7 @@
       "sql-v2-0": {
         "why_sql_is_useful": {
           "label": "Why SQL Is Useful",
-          "summary": "Learn why SQL matters, how it helps you ask questions about stored data, and how simple SELECT queries turn a table into useful answers.",
+          "summary": "See why SQL is useful for answering questions about stored data without changing the original table.",
           "cards": {
             "sketch0": {
               "title": "SQL helps you ask questions about data"
@@ -19,18 +19,18 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Practice asking useful questions with SELECT"
+              "title": "Use SQL to answer a simple data question"
             }
           },
           "projectSteps": {
             "ci_1": {
-              "title": "Show all student data"
+              "title": "Guided check: show all student data"
             },
             "ci_2": {
-              "title": "Show names only"
+              "title": "Guided check: show names only"
             },
             "ci_3": {
-              "title": "Show names and grades"
+              "title": "Guided check: show names and grades"
             }
           },
           "quiz": {
@@ -73,7 +73,7 @@
               "help": {
                 "concept": "SQL is useful because it lets you retrieve data efficiently and choose what information to display.",
                 "hint_1": "Look for choices about asking questions of stored data and selecting needed columns.",
-                "hint_2": "The correct choices describe getting information from the `students` table, not installing tools or editing the stored rows."
+                "hint_2": "The matching choices describe getting information from the `students` table, not installing tools or editing the stored rows."
               },
               "options": {
                 "a": "a. It lets you ask a database for information",
@@ -95,13 +95,13 @@
                 "a": "a. SELECT",
                 "b": "b. FROM",
                 "c": "c. students",
-                "d": "d. WHERE"
+                "d": "d. city"
               }
             },
             "dr_1": {
               "title": "Build a basic query",
               "prompt": "Put these tokens in order to make a valid query that shows all columns from the `students` table.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
                 "hint_1": "Start with the piece that introduces the idea or action.",
@@ -118,7 +118,7 @@
             "dr_2": {
               "title": "Order the workflow",
               "prompt": "Arrange these steps in the order a learner follows in the browser workspace to run a SQL query.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
                 "hint_1": "Start with the piece that introduces the idea or action.",
@@ -165,35 +165,35 @@
               ]
             },
             "ci_1": {
-              "title": "Show all student data",
-              "prompt": "Write a query that returns all columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show all student data",
+              "prompt": "Complete a simple SELECT query that returns all columns from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "-- Return every column from the students table\nSELECT \nFROM students;"
             },
             "ci_2": {
-              "title": "Show names only",
-              "prompt": "Write a query that returns only the `name` column from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show names only",
+              "prompt": "Complete a simple SELECT query that returns only the `name` column from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "-- Return only student names\nSELECT \nFROM students;"
             },
             "ci_3": {
-              "title": "Show names and grades",
-              "prompt": "Write a query that returns the `name` and `grade` columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show names and grades",
+              "prompt": "Complete a simple SELECT query that returns the `name` and `grade` columns from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "-- Return student names and grades\nSELECT \nFROM students;"
             }

@@ -4,7 +4,7 @@
       "sql-v2-0": {
         "one_table_vs_multiple_tables": {
           "label": "One Table vs Multiple Tables",
-          "summary": "Learn when a single table is enough, when multiple tables are useful, and how to read simple data structure ideas before learning joins.",
+          "summary": "Learn why some data fits in one table and why larger systems often use several related tables.",
           "cards": {
             "sketch0": {
               "title": "A single table can answer simple questions"
@@ -19,18 +19,18 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Explore what one table can already answer"
+              "title": "Compare one-table and multi-table thinking"
             }
           },
           "projectSteps": {
             "ci_show_all_students": {
-              "title": "Show every column from the students table"
+              "title": "Guided check: show every column from the students table"
             },
             "ci_show_names_only": {
-              "title": "Show only student names"
+              "title": "Guided check: show only student names"
             },
             "ci_show_name_and_city": {
-              "title": "Show two student details"
+              "title": "Guided check: show two student details"
             }
           },
           "quiz": {
@@ -101,7 +101,7 @@
             "dr-read-simple-query": {
               "title": "Read a basic query in order",
               "prompt": "Put these parts in the order you read the query `SELECT name FROM students;` from top to bottom.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
                 "hint_1": "Start with the piece that introduces the idea or action.",
@@ -117,7 +117,7 @@
             "dr-think-about-structure": {
               "title": "Questions to ask about table structure",
               "prompt": "Arrange these questions in a useful order for deciding whether one table makes sense.",
-              "hint": "Start by deciding what one row means before checking the columns.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
               "help": {
                 "concept": "A good table-design thought process starts with the row meaning, then checks whether columns match that meaning, then looks for repeated information that may belong elsewhere.",
                 "hint_1": "First define the row, then inspect the columns, then think about repetition.",
@@ -149,10 +149,10 @@
             "fb-column-choice": {
               "title": "Choose the right column",
               "prompt": "Fill in the missing column to show where each student lives.",
-              "hint": "Look for the column that stores place names like Chicago and Evanston.",
+              "hint": "Read the words around the blank and choose the term that fits the role.",
               "help": {
                 "concept": "In a `SELECT` query, the chosen column should match the kind of information you want to display. The place each student lives is stored in the the missing term column.",
-                "hint_1": "This column contains values such as Chicago, Evanston, Oak Park, and Naperville.",
+                "hint_1": "Read the words around the blank and choose the term that fits the role.",
                 "hint_2": "It is not `grade` or `age`; it stores location names."
               },
               "template": "SELECT [blank1] FROM students;",
@@ -164,35 +164,35 @@
               ]
             },
             "ci-show-all-students": {
-              "title": "Show every column from the students table",
-              "prompt": "Write a query that returns all columns and all rows from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show every column from the students table",
+              "prompt": "Complete a simple SELECT query that returns all columns and all rows from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "SELECT \nFROM students;"
             },
             "ci-show-names-only": {
-              "title": "Show only student names",
-              "prompt": "Write a query that returns just the `name` column from the `students` table. Use the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show only student names",
+              "prompt": "Complete a simple SELECT query that returns just the `name` column from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "SELECT \nFROM students;"
             },
             "ci-show-name-and-city": {
-              "title": "Show two student details",
-              "prompt": "Write a query that returns the `name` and `city` columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show two student details",
+              "prompt": "Complete a simple SELECT query that returns the `name` and `city` columns from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "SELECT name\nFROM students;"
             }
@@ -207,15 +207,15 @@
         "one_table_vs_multiple_tables": {
           "single-table-start": {
             "title": "A single table can answer simple questions",
-            "bodyMarkdown": "A **table** stores rows of similar things. In this lesson's dataset, the `students` table stores one row per student.\n\n```sql\nSELECT *\nFROM students;\n```\n\nThis query means:\n- `SELECT *` = show all columns\n- `FROM students` = get the data from the `students` table\n\nIf you run it in the SQL editor and click **Run query**, the results table shows rows like Noor, Mia, and Leo.\n\nA single table works well when all the information you need belongs to the same kind of thing. Here, each student already has a name, grade, age, and city in one place.\n\n**Worked example:** If you want to see all student names and grades, one table is enough because both columns are already in `students`.\n\n```sql\nSELECT name, grade\nFROM students;\n```\n\nLine by line:\n- `SELECT name, grade` asks for only those two columns\n- `FROM students` tells SQL which table to read\n\n**Try it yourself:** Run the query, then change `grade` to `city` and check how the results table changes."
+            "bodyMarkdown": "A **table** stores rows of similar things. In this lesson's dataset, the `students` table stores one row per student.\n\n```sql\nSELECT *\nFROM students;\n```\n\nThis query means:\n- `SELECT *` = show all columns\n- `FROM students` = get the data from the `students` table\n\nIf you run it in the SQL editor and click **Run query**, the results table shows rows like Noor, Mia, and Leo.\n\nA single table works well when all the information you need belongs to the same kind of thing. Here, each student already has a name, grade, age, and city in one place.\n\n**Worked example:** If you want to see all student names and grades, one table is enough because both columns are already in `students`.\n\n```sql\nSELECT name, grade\nFROM students;\n```\n\nLine by line:\n- `SELECT name, grade` asks for only those two columns\n- `FROM students` tells SQL which table to read\n\n**Guided check:** Run the query, then change `grade` to `city` and check how the results table changes."
           },
           "why-multiple-tables": {
             "title": "Why databases sometimes use multiple tables",
-            "bodyMarkdown": "A database often uses **multiple tables** when one big table would repeat the same information again and again.\n\nImagine a school database that stores students and classes. If every student row also repeated the full class details, the same class information could appear many times.\n\nThat is why databases often split information into separate tables:\n- one table for students\n- another table for classes\n- sometimes another table for enrollments or relationships\n\nIn this module, our dataset has only one real table: `students`. So we can still talk about the idea of multiple tables without writing join queries yet.\n\n**Worked example:** In the current `students` table, the city `Chicago` appears for more than one student. Repeated values are normal, but if a table had many columns about each city, repeating all of them in every student row would be wasteful.\n\n```sql\nSELECT city\nFROM students;\n```\n\nThis query shows that some values repeat across rows.\n\nLine by line:\n- `SELECT city` asks for one column\n- `FROM students` reads from the student table\n\nMultiple tables help organize data when different kinds of things need their own home.\n\n**Your turn:** Look at the schema browser for `students`. Which columns describe the student directly, and which values might be repeated across many rows?"
+            "bodyMarkdown": "A database often uses **multiple tables** when one big table would repeat the same information again and again.\n\nImagine a school database that stores students and classes. If every student row also repeated the full class details, the same class information could appear many times.\n\nThat is why databases often split information into separate tables:\n- one table for students\n- another table for classes\n- sometimes another table for enrollments or relationships\n\nIn this module, our dataset has only one real table: `students`. So we can still talk about the idea of multiple tables without writing join queries yet.\n\n**Worked example:** In the current `students` table, the city `Chicago` appears for more than one student. Repeated values are normal, but if a table had many columns about each city, repeating all of them in every student row would be wasteful.\n\n```sql\nSELECT city\nFROM students;\n```\n\nThis query shows that some values repeat across rows.\n\nLine by line:\n- `SELECT city` asks for one column\n- `FROM students` reads from the student table\n\nMultiple tables help organize data when different kinds of things need their own home.\n\n**Guided check:** Look at the schema browser for `students`. Which columns describe the student directly, and which values might be repeated across many rows?"
           },
           "choosing-structure": {
             "title": "How to think about one table vs many",
-            "bodyMarkdown": "A good beginner rule is:\n- use **one table** when all columns describe the same kind of thing\n- use **multiple tables** when the data mixes different kinds of things or repeats large chunks of information\n\nWith our dataset, `id`, `name`, `grade`, `age`, and `city` all describe a student, so one table makes sense for this small example.\n\n**Worked example:** This query asks for student names only.\n\n```sql\nSELECT name\nFROM students;\n```\n\nThat works because the table is focused on one kind of thing: students.\n\nIf you later wanted to store teachers, classrooms, and courses, putting everything into one giant table would become confusing. Separate tables would usually be clearer.\n\nWhen you are deciding on structure, ask:\n1. What is one row supposed to represent?\n2. Do all columns describe that same thing?\n3. Am I repeating lots of details that might belong somewhere else?\n\n**Try this:** In the SQL editor, run `SELECT id, name, city FROM students;` and ask yourself: does each row still clearly represent one student? If yes, that is a sign the table design is still focused."
+            "bodyMarkdown": "A good beginner rule is:\n- use **one table** when all columns describe the same kind of thing\n- use **multiple tables** when the data mixes different kinds of things or repeats large chunks of information\n\nWith our dataset, `id`, `name`, `grade`, `age`, and `city` all describe a student, so one table makes sense for this small example.\n\n**Worked example:** This query asks for student names only.\n\n```sql\nSELECT name\nFROM students;\n```\n\nThat works because the table is focused on one kind of thing: students.\n\nIf you later wanted to store teachers, classrooms, and courses, putting everything into one giant table would become confusing. Separate tables would usually be clearer.\n\nWhen you are deciding on structure, ask:\n1. What is one row supposed to represent?\n2. Do all columns describe that same thing?\n3. Am I repeating lots of details that might belong somewhere else?\n\n**Guided check:** In the SQL editor, run `SELECT id, name, city FROM students;` and ask yourself: does each row still clearly represent one student? If yes, that is a sign the table design is still focused."
           }
         }
       }

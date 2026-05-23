@@ -152,7 +152,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT name, price FROM products ORDER BY price [blank1] LIMIT 3;",
               "choices": [
@@ -165,33 +165,33 @@
             "ci_top_three_expensive": {
               "title": "Top 3 most expensive products",
               "prompt": "Write a query that returns the `name` and `price` of the 3 most expensive products from `products`. Sort so the highest price appears first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM products\nORDER BY \nLIMIT ;"
             },
             "ci_two_cheapest_stationery": {
               "title": "Two cheapest stationery items",
               "prompt": "Write a query that returns the `name`, `category`, and `price` of the 2 cheapest products in the `Stationery` category. Sort by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, category, price\nFROM products\nWHERE \nORDER BY \nLIMIT ;"
             },
             "ci_newest_home_item": {
               "title": "Newest home product",
               "prompt": "Write a query that returns the `name` and `created_at` of the newest product in the `Home` category. Sort by `created_at` so the newest date comes first, then return only one row. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, created_at\nFROM products\nWHERE \nORDER BY \nLIMIT ;"
             }

@@ -135,7 +135,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT name FROM products WHERE category [blank1] 'Art';",
               "choices": [
@@ -152,7 +152,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT name FROM products WHERE category != [blank1];",
               "choices": [
@@ -165,33 +165,33 @@
             "ci_exclude_art_products": {
               "title": "Query products that are not Art items",
               "prompt": "Write a query that returns the `name` and `category` columns from `products` for rows where the category is not `Art`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, category\nFROM products\nWHERE ;"
             },
             "ci_exclude_stock_10": {
               "title": "Filter out one stock value",
               "prompt": "Write a query that returns `name` and `stock` from `products` for every row whose stock is not 10. Use the SQL editor and Run query to verify the results.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, stock\nFROM products\n-- add a WHERE clause here"
             },
             "ci_not_home_under_20": {
               "title": "Combine not equal with AND",
               "prompt": "Write a query that returns `name`, `category`, and `price` from `products` where the category is not `Home` and the price is less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, category, price\nFROM products\nWHERE category != 'Home'\n  AND ;"
             }

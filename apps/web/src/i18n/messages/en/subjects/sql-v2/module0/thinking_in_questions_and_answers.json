@@ -4,7 +4,7 @@
       "sql-v2-0": {
         "thinking_in_questions_and_answers": {
           "label": "Thinking in Questions and Answers",
-          "summary": "Learn to turn a plain-English question into a simple SQL answer using SELECT and FROM on the students table.",
+          "summary": "Practice turning plain-English data questions into simple read-only SQL thinking.",
           "cards": {
             "sketch0": {
               "title": "A SQL query is a question you ask a table"
@@ -19,18 +19,18 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Ask and answer simple questions with SQL"
+              "title": "Turn a question into a read-only SQL request"
             }
           },
           "projectSteps": {
             "ci_select_all_students": {
-              "title": "Show the whole students table"
+              "title": "Guided check: show the whole students table"
             },
             "ci_select_names_only": {
-              "title": "Show only student names"
+              "title": "Guided check: show only student names"
             },
             "ci_select_name_and_city": {
-              "title": "Answer a two-part question"
+              "title": "Guided check: answer a two-part question"
             }
           },
           "quiz": {
@@ -57,7 +57,7 @@
               "help": {
                 "concept": "In a basic `SELECT` statement, `*` is shorthand for all columns in the chosen table.",
                 "hint_1": "If the table has `id`, `name`, `grade`, `age`, and `city`, `*` includes all of them.",
-                "hint_2": "The correct choice is the one that means the full row structure, not a single special column."
+                "hint_2": "The matching choice is the one that means the full row structure, not a single special column."
               },
               "options": {
                 "a": "Only the first column",
@@ -101,7 +101,7 @@
             "dr_build_simple_query": {
               "title": "Build a basic query",
               "prompt": "Arrange the tokens to make a query that shows the `name` column from the `students` table.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
                 "hint_1": "Start with the piece that introduces the idea or action.",
@@ -118,7 +118,7 @@
             "dr_build_two_column_query": {
               "title": "Order the query parts",
               "prompt": "Arrange the tokens to make a query that shows `name` and `grade` from `students`.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
                 "hint_1": "Start with the piece that introduces the idea or action.",
@@ -156,7 +156,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT [blank1] FROM students;",
               "choices": [
@@ -167,35 +167,35 @@
               ]
             },
             "ci_select_all_students": {
-              "title": "Show the whole students table",
-              "prompt": "Write a query that returns every column and every row from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show the whole students table",
+              "prompt": "Complete a simple SELECT query that returns every column and every row from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "-- Return every column from the students table\nSELECT\n  -- TODO\nFROM students;"
             },
             "ci_select_names_only": {
-              "title": "Show only student names",
-              "prompt": "Write a query that returns only the `name` column from the `students` table. Use the SQL editor, click Run query, and check that the results table has one column named `name`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show only student names",
+              "prompt": "Complete a simple SELECT query that returns only the `name` column from the `students` table. Use the SQL editor, click Run query, and check that the results table has one column named `name`.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "-- Return only the name column\nSELECT\n  -- TODO\nFROM students;"
             },
             "ci_select_name_and_city": {
-              "title": "Answer a two-part question",
-              "prompt": "Write a query that answers this question: \"What are each student's name and city?\" Return the `name` and `city` columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: answer a two-part question",
+              "prompt": "Complete a simple SELECT query that answers this question: \"What are each student's name and city?\" Return the `name` and `city` columns from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "-- Return each student's name and city\nSELECT\n  -- TODO\nFROM students;"
             }

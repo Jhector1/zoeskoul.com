@@ -41,7 +41,7 @@
               "help": {
                 "concept": "In this beginner SQLite environment, SQL keywords such as `SELECT` and `FROM` are not case-sensitive, so changing their letter case does not change the query meaning.",
                 "hint_1": "Compare the behavior of `SELECT name FROM products;` and the same query written with lowercase keywords.",
-                "hint_2": "The correct choice says the keyword case can change while the query still returns the same result."
+                "hint_2": "The matching choice says the keyword case can change while the query still returns the same result."
               },
               "options": {
                 "a": "Changing `SELECT` to `select` changes which rows are returned.",
@@ -164,33 +164,33 @@
             "ci_select_name_uppercase": {
               "title": "Write an uppercase-keyword query",
               "prompt": "Write a query that returns only the `name` column from the `products` table. Use uppercase SQL keywords. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT\n  -- choose one column here\nFROM\n  products;"
             },
             "ci_select_name_lowercase": {
               "title": "Write the lowercase version",
               "prompt": "Write a query that returns only the `name` column from the `products` table, but this time use lowercase SQL keywords. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "select\n  -- choose one column here\nfrom\n  products;"
             },
             "ci_select_two_columns_readable": {
               "title": "Use readable uppercase style with two columns",
               "prompt": "Write a query that returns the `name` and `category` columns from the `products` table using common readable style with uppercase SQL keywords. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT\n  -- add two columns here\nFROM products;"
             }

@@ -2,32 +2,18 @@ import type {
     ManifestCard,
     ManifestExercise,
     ManifestSketch,
-    ProgrammingCodeInputTestDraft,
     TopicAuthoringDraft,
     TopicBundleManifest,
     TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
-import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
+import {
+    assertProfileSupportsCodeInput,
+    getCurriculumProfile,
+    type SubjectShapePack,
+} from "@zoeskoul/curriculum-profiles";
 import { buildExerciseMessageKeys } from "../messages/buildMessageKeys.js";
 import { validateTopicMessageBases } from "../messages/validateTopicMessageBases.js";
 import { resolveLogicalSectionSlug } from "./resolveLogicalSectionSlug.js";
-import {SemanticCheck, SemanticCheckSchema} from "@zoeskoul/practice-checks";
-
-
-function requireSemanticChecks(value: unknown, exerciseId: string): SemanticCheck[] {
-    const parsed = SemanticCheckSchema.array().safeParse(value);
-
-    if (!parsed.success || parsed.data.length < 1) {
-        throw new Error(
-            [
-                `Semantic code_input exercise "${exerciseId}" needs at least one valid semantic check.`,
-                `Received: ${JSON.stringify(value, null, 2)}`,
-            ].join("\n"),
-        );
-    }
-
-    return parsed.data;
-}
 type DraftExercise = TopicAuthoringDraft["quizDraft"][number];
 
 function optionIdsFromCount(count: number) {
@@ -40,158 +26,6 @@ function normalizeText(value: unknown): string {
 
 function uniqueNonEmpty(values: string[]) {
     return Array.from(new Set(values.map((x) => x.trim()).filter(Boolean)));
-}
-
-function stripSqlComments(sql: string): string {
-    return String(sql ?? "")
-        .replace(/--.*$/gm, " ")
-        .replace(/\/\*[\s\S]*?\*\//g, " ");
-}
-
-function isSqlMutation(sql: string): boolean {
-    const cleaned = stripSqlComments(sql).trim().toLowerCase();
-
-    return /^(insert|update|delete|replace|create|drop|alter)\b/.test(cleaned);
-}
-
-function normalizeIdentifier(identifier: string): string {
-    return String(identifier ?? "")
-        .trim()
-        .replace(/^["'`\[]+/, "")
-        .replace(/["'`\]]+$/, "");
-}
-
-function quoteSqliteIdentifier(identifier: string): string {
-    const clean = normalizeIdentifier(identifier);
-
-    if (!/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(clean)) {
-        throw new Error(`Unsafe SQL identifier for generated checkSql: ${identifier}`);
-    }
-
-    return `"${clean.replace(/"/g, '""')}"`;
-}
-
-function sqlStringLiteral(value: string): string {
-    return `'${String(value).replace(/'/g, "''")}'`;
-}
-
-function extractMutationTableName(sql: string): {
-    tableName: string | null;
-    action:
-        | "insert"
-        | "replace"
-        | "update"
-        | "delete"
-        | "create_table"
-        | "alter_table"
-        | "drop_table"
-        | "other";
-} {
-    const cleaned = stripSqlComments(sql).trim();
-
-    const insertMatch = cleaned.match(
-        /^\s*insert\s+(?:or\s+\w+\s+)?into\s+["'`[]?([a-zA-Z_][a-zA-Z0-9_]*)["'`\]]?/i,
-    );
-    if (insertMatch?.[1]) {
-        return {
-            tableName: normalizeIdentifier(insertMatch[1]),
-            action: "insert",
-        };
-    }
-
-    const replaceMatch = cleaned.match(
-        /^\s*replace\s+(?:or\s+\w+\s+)?into\s+["'`[]?([a-zA-Z_][a-zA-Z0-9_]*)["'`\]]?/i,
-    );
-    if (replaceMatch?.[1]) {
-        return {
-            tableName: normalizeIdentifier(replaceMatch[1]),
-            action: "replace",
-        };
-    }
-
-    const updateMatch = cleaned.match(
-        /^\s*update\s+["'`[]?([a-zA-Z_][a-zA-Z0-9_]*)["'`\]]?/i,
-    );
-    if (updateMatch?.[1]) {
-        return {
-            tableName: normalizeIdentifier(updateMatch[1]),
-            action: "update",
-        };
-    }
-
-    const deleteMatch = cleaned.match(
-        /^\s*delete\s+from\s+["'`[]?([a-zA-Z_][a-zA-Z0-9_]*)["'`\]]?/i,
-    );
-    if (deleteMatch?.[1]) {
-        return {
-            tableName: normalizeIdentifier(deleteMatch[1]),
-            action: "delete",
-        };
-    }
-
-    const createTableMatch = cleaned.match(
-        /^\s*create\s+table\s+(?:if\s+not\s+exists\s+)?["'`[]?([a-zA-Z_][a-zA-Z0-9_]*)["'`\]]?/i,
-    );
-    if (createTableMatch?.[1]) {
-        return {
-            tableName: normalizeIdentifier(createTableMatch[1]),
-            action: "create_table",
-        };
-    }
-
-    const alterTableMatch = cleaned.match(
-        /^\s*alter\s+table\s+["'`[]?([a-zA-Z_][a-zA-Z0-9_]*)["'`\]]?/i,
-    );
-    if (alterTableMatch?.[1]) {
-        return {
-            tableName: normalizeIdentifier(alterTableMatch[1]),
-            action: "alter_table",
-        };
-    }
-
-    const dropTableMatch = cleaned.match(
-        /^\s*drop\s+table\s+(?:if\s+exists\s+)?["'`[]?([a-zA-Z_][a-zA-Z0-9_]*)["'`\]]?/i,
-    );
-    if (dropTableMatch?.[1]) {
-        return {
-            tableName: normalizeIdentifier(dropTableMatch[1]),
-            action: "drop_table",
-        };
-    }
-
-    return {
-        tableName: null,
-        action: "other",
-    };
-}
-
-function inferSqlCheckSql(solutionCode: string): string | undefined {
-    if (!isSqlMutation(solutionCode)) return undefined;
-
-    const { tableName, action } = extractMutationTableName(solutionCode);
-    if (!tableName) return undefined;
-
-    const quoted = quoteSqliteIdentifier(tableName);
-    const tableLiteral = sqlStringLiteral(tableName);
-
-    if (
-        action === "insert" ||
-        action === "replace" ||
-        action === "update" ||
-        action === "delete"
-    ) {
-        return `SELECT * FROM ${quoted} ORDER BY 1;`;
-    }
-
-    if (action === "create_table" || action === "alter_table") {
-        return `SELECT name, sql FROM sqlite_master WHERE type = 'table' AND name = ${tableLiteral};`;
-    }
-
-    if (action === "drop_table") {
-        return `SELECT COUNT(*) AS table_count FROM sqlite_master WHERE type = 'table' AND name = ${tableLiteral};`;
-    }
-
-    return undefined;
 }
 
 function codeInputIds(draft: TopicAuthoringDraft) {
@@ -232,6 +66,11 @@ export function buildTopicBundleFromDraft(args: {
     draft: TopicAuthoringDraft;
 }): TopicBundleManifest {
     const { shape, seed, draft } = args;
+    const profile = getCurriculumProfile(seed.profileId);
+    const codeInputProfile =
+        draft.quizDraft.some((exercise) => exercise.kind === "code_input")
+            ? assertProfileSupportsCodeInput(profile)
+            : null;
     const kp = shape.subjectManifest.keyPatterns;
 
     const logicalModuleSlug = seed.moduleSlug;
@@ -513,160 +352,12 @@ export function buildTopicBundleFromDraft(args: {
         }
 
         if (exercise.kind === "code_input") {
-            if (shape.profileId === "sql") {
-                const moduleDatasetId =
-                    seed.moduleRuntimeDefaults?.kind === "sql"
-                        ? seed.moduleRuntimeDefaults.datasetId
-                        : undefined;
-
-                const effectiveDatasetId =
-                    normalizeText(exercise.datasetId) || normalizeText(moduleDatasetId);
-
-                if (!effectiveDatasetId) {
-                    throw new Error(
-                        `SQL code_input exercise "${exercise.id}" is missing an effective datasetId`,
-                    );
-                }
-
-                const moduleDialect =
-                    seed.moduleRuntimeDefaults?.kind === "sql"
-                        ? seed.moduleRuntimeDefaults.fixedSqlDialect
-                        : undefined;
-
-                const moduleResultShape =
-                    seed.moduleRuntimeDefaults?.kind === "sql"
-                        ? seed.moduleRuntimeDefaults.resultShape
-                        : undefined;
-
-                const solutionCode = normalizeText(exercise.solutionCode);
-                const explicitCheckSql = normalizeText(exercise.checkSql);
-                const inferredCheckSql = inferSqlCheckSql(solutionCode);
-                const checkSql = explicitCheckSql || inferredCheckSql;
-
-                if (isSqlMutation(solutionCode) && !checkSql) {
-                    throw new Error(
-                        [
-                            `SQL mutation code_input exercise "${exercise.id}" needs checkSql.`,
-                            `Topic: ${seed.topicId}`,
-                            `Solution starts with a mutation statement, but the compiler could not infer a safe post-check query.`,
-                            `Add "checkSql" to the TopicAuthoringDraft code_input item.`,
-                        ].join("\n"),
-                    );
-                }
-
-                return {
-                    id: exercise.id,
-                    kind: "code_input" as const,
-                    purpose: "project" as const,
-                    weight: 1,
-                    messageBase,
-                    language: "sql" as const,
-                    starterCode: normalizeText(exercise.starterCode),
-                    fixedSqlDialect: moduleDialect === "sqlite" ? "sqlite" : "sqlite",
-                    runtime: {
-                        kind: "sql" as const,
-                        datasetId: effectiveDatasetId,
-                        fixedSqlDialect: moduleDialect === "sqlite" ? "sqlite" : "sqlite",
-                        resultShape: moduleResultShape === "table" ? "table" : "table",
-                        showSchema:
-                            seed.moduleRuntimeDefaults?.kind === "sql"
-                                ? seed.moduleRuntimeDefaults.showSchema ?? true
-                                : true,
-                        showErd:
-                            seed.moduleRuntimeDefaults?.kind === "sql"
-                                ? seed.moduleRuntimeDefaults.showErd
-                                : undefined,
-                        showChen:
-                            seed.moduleRuntimeDefaults?.kind === "sql"
-                                ? seed.moduleRuntimeDefaults.showChen
-                                : undefined,
-                        supportsTerminal: false,
-                        supportsMultiFile: false,
-                        supportsFileSystem: false,
-                    },
-                    recipe: {
-                        type: "sql_query" as const,
-                        datasetId: effectiveDatasetId,
-                        resultShape: moduleResultShape === "table" ? "table" : "table",
-                        solutionCode,
-                        ...(checkSql ? { checkSql } : {}),
-                    },
-                };
-            }
-            const useSemantic =
-                exercise.recipeType === "semantic" ||
-                (Array.isArray(exercise.semanticChecks) &&
-                    exercise.semanticChecks.length > 0);
-
-            const useFixedTests =
-                exercise.recipeType === "fixed_tests" ||
-                (Array.isArray(exercise.tests) && exercise.tests.length > 0);
-            return {
-                id: exercise.id,
-                kind: "code_input" as const,
-                purpose: "project" as const,
-                weight: 1,
+            return (codeInputProfile ?? assertProfileSupportsCodeInput(profile)).buildManifest({
+                exercise,
+                seed,
                 messageBase,
-                language: "python" as const,
-                starterCode: normalizeText(exercise.starterCode),
-                showExpectedExample: useSemantic ? false : true,                recipe: (() => {
-                    if (useSemantic) {
-                        return {
-                            type: "semantic" as const,
-                            language: "python" as const,
-                            solutionCode: normalizeText(exercise.solutionCode),
-                            semanticChecks: requireSemanticChecks(
-                                exercise.semanticChecks,
-                                exercise.id,
-                            ),
-                        };
-                    }
-                    if (!useFixedTests) {
-                        throw new Error(
-                            [
-                                `Programming code_input exercise "${exercise.id}" needs either tests or semanticChecks.`,
-                                `Topic: ${seed.topicId}`,
-                                `Use "tests" for fixed_tests or "semanticChecks" for semantic recipes.`,
-                            ].join("\n"),
-                        );
-                    }
-                    const tests = Array.isArray(exercise.tests)
-                        ? exercise.tests
-                            .map((test: ProgrammingCodeInputTestDraft) => {
-                                const match: "exact" | "includes" =
-                                    test.match === "includes" ? "includes" : "exact";
-
-                                return {
-                                    ...(typeof test.stdin === "string"
-                                        ? { stdin: test.stdin }
-                                        : {}),
-                                    stdout: String(test.stdout ?? ""),
-                                    match,
-                                };
-                            })
-                            .filter(
-                                (test: { stdout: string }) =>
-                                    test.stdout.trim().length > 0,
-                            )
-                        : [];
-
-                    if (tests.length < 1) {
-                        throw new Error(
-                            [
-                                `Programming code_input exercise "${exercise.id}" needs at least one stdin/stdout test case.`,
-                                `Topic: ${seed.topicId}`,
-                                `Use the authoring draft "tests" field so the compiler can publish a valid fixed_tests recipe.`,
-                            ].join("\n"),
-                        );
-                    }
-
-                    return {
-                        type: "fixed_tests" as const,
-                        tests,
-                        solutionCode: normalizeText(exercise.solutionCode),
-                    };
-                })(),
-            };        }
+            });
+        }
 
         throw new Error(
             `Unsupported exercise kind: ${(exercise as { kind: string }).kind}`,

@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { assertTopicAuthoringDraft } from "./assertTopicAuthoringDraft.js";
+import {
+    assertTopicAuthoringDraft,
+    validateTopicAuthoringDraft,
+} from "./assertTopicAuthoringDraft.js";
 
 function makeValidDraft() {
     return {
@@ -81,5 +84,86 @@ describe("assertTopicAuthoringDraft", () => {
         expect(() => assertTopicAuthoringDraft(draft as any)).toThrow(
             /multi_choice needs at least 1 correctOptionIds entry/,
         );
+    });
+
+    it("rejects unknown extra top-level fields", () => {
+        const draft = {
+            ...makeValidDraft(),
+            extraField: "nope",
+        };
+
+        expect(() => assertTopicAuthoringDraft(draft as any)).toThrow(
+            /unknown field\(s\): extraField/,
+        );
+    });
+
+    it("rejects unknown nested exercise fields", () => {
+        const draft = {
+            ...makeValidDraft(),
+            quizDraft: [
+                {
+                    ...makeValidDraft().quizDraft[0],
+                    unexpectedNestedField: true,
+                },
+            ],
+        };
+
+        expect(() => assertTopicAuthoringDraft(draft as any)).toThrow(
+            /unknown field\(s\): unexpectedNestedField/,
+        );
+    });
+
+    it("rejects code_input with an invalid shape before compilation", () => {
+        const draft = {
+            ...makeValidDraft(),
+            quizDraft: [
+                {
+                    id: "code-1",
+                    kind: "code_input" as const,
+                    title: "Code",
+                    prompt: "Prompt",
+                    hint: "Hint",
+                    help: {
+                        concept: "Concept",
+                        hint_1: "Hint 1",
+                        hint_2: "Hint 2",
+                    },
+                    starterCode: "# start\n",
+                    solutionCode: "print(1)\n",
+                    recipeType: "fixed_tests" as const,
+                    tests: "not-an-array",
+                },
+            ],
+        };
+
+        expect(() => assertTopicAuthoringDraft(draft as any)).toThrow(
+            /code_input tests must be an array/,
+        );
+    });
+
+    it("rejects exercises with an unknown kind", () => {
+        const result = validateTopicAuthoringDraft({
+            title: "Topic",
+            summary: "Summary",
+            minutes: 15,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "oops",
+                    kind: "wrong_kind",
+                    title: "Wrong",
+                    prompt: "Prompt",
+                    hint: "Hint",
+                    help: {
+                        concept: "Concept",
+                        hint_1: "Hint 1",
+                        hint_2: "Hint 2",
+                    },
+                },
+            ],
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.errors[0]).toMatch(/unknown kind/);
     });
 });

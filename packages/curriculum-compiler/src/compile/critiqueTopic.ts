@@ -85,7 +85,7 @@ export async function critiqueTopic(args: {
         throw new Error(`Topic not found in resolved course structure: ${args.topicId}`);
     }
 
-    const shape = getSubjectShape(args.blueprint.profileId as "sql" | "python");
+    const shape = getSubjectShape(args.blueprint.profileId);
     const profileServices = getProfileServices(args.blueprint.profileId);
 
     const seed = buildTopicSeedFromPlanNode({

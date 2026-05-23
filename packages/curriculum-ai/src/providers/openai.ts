@@ -1,7 +1,25 @@
 import OpenAI from "openai";
-import type { AiProvider, GenerateJsonArgs } from "../types.js";
+import {
+  TOPIC_AUTHORING_DRAFT_JSON_SCHEMA,
+  validateTopicAuthoringDraft,
+} from "@zoeskoul/curriculum-contracts";
+import type { AiProvider, GenerateJsonArgs, GeneratedJsonResult } from "../types.js";
+import { GeneratedJsonError } from "../types.js";
 
 type JsonSchema = Record<string, unknown>;
+const OPENAI_DEFAULT_TEMPERATURE = 0;
+const OPENAI_DETERMINISTIC_SEED = 0;
+const OPENAI_STRUCTURED_OUTPUT_UNSUPPORTED_KEYWORDS = [
+  "anyOf",
+  "allOf",
+  "not",
+  "if",
+  "then",
+  "else",
+  "$ref",
+  "patternProperties",
+  "unevaluatedProperties",
+] as const;
 
 function getEnv(name: "OPENAI_API_KEY" | "OPENAI_MODEL"): string {
   const value = process.env[name];
@@ -11,12 +29,40 @@ function getEnv(name: "OPENAI_API_KEY" | "OPENAI_MODEL"): string {
   return value;
 }
 
-function createClient() {
+function defaultClientFactory() {
   return new OpenAI({ apiKey: getEnv("OPENAI_API_KEY") });
 }
 
+let clientFactory = defaultClientFactory;
+
+function createClient() {
+  return clientFactory();
+}
+
+export function setOpenAiClientFactoryForTests(
+  factory: typeof clientFactory,
+): void {
+  clientFactory = factory;
+}
+
+export function resetOpenAiClientFactoryForTests(): void {
+  clientFactory = defaultClientFactory;
+}
+
+let modelResolver = () => getEnv("OPENAI_MODEL");
+
+export function setOpenAiModelResolverForTests(
+  resolver: typeof modelResolver,
+): void {
+  modelResolver = resolver;
+}
+
+export function resetOpenAiModelResolverForTests(): void {
+  modelResolver = () => getEnv("OPENAI_MODEL");
+}
+
 function getModel(): string {
-  return getEnv("OPENAI_MODEL");
+  return modelResolver();
 }
 
 function stripCodeFences(text: string): string {
@@ -41,6 +87,67 @@ function parseJsonText<T>(text: string): T {
         }\n\nRaw output:\n${cleaned}`,
     );
   }
+}
+
+function getRuntimeValidationErrors(
+  schemaName: GenerateJsonArgs["schemaName"],
+  value: unknown,
+): string[] {
+  if (schemaName === "TopicAuthoringDraft") {
+    const result = validateTopicAuthoringDraft(value);
+    return result.ok ? [] : result.errors;
+  }
+
+  return [];
+}
+
+export function assertOpenAiStructuredOutputSchemaCompatible(
+  schema: JsonSchema,
+  path = "$",
+): void {
+  for (const keyword of OPENAI_STRUCTURED_OUTPUT_UNSUPPORTED_KEYWORDS) {
+    if (keyword in schema) {
+      throw new Error(
+        `OpenAI structured output schema is not compatible: unsupported keyword "${keyword}" at ${path}.`,
+      );
+    }
+  }
+
+  for (const [key, value] of Object.entries(schema)) {
+    if (Array.isArray(value)) {
+      value.forEach((entry, index) => {
+        if (entry && typeof entry === "object") {
+          assertOpenAiStructuredOutputSchemaCompatible(
+            entry as JsonSchema,
+            `${path}.${key}[${index}]`,
+          );
+        }
+      });
+      continue;
+    }
+
+    if (value && typeof value === "object") {
+      assertOpenAiStructuredOutputSchemaCompatible(
+        value as JsonSchema,
+        `${path}.${key}`,
+      );
+    }
+  }
+}
+
+export function getOpenAiStructuredOutputSchema(
+  schemaName: GenerateJsonArgs["schemaName"],
+): JsonSchema {
+  const schema = getSchema(schemaName);
+
+  /**
+   * Provider-compatibility decision:
+   * we currently keep the canonical TopicAuthoringDraft schema, including `oneOf`,
+   * for OpenAI structured outputs. Runtime validation still re-checks the parsed
+   * result with the canonical TopicAuthoringDraft validator after parsing.
+   */
+  assertOpenAiStructuredOutputSchemaCompatible(schema);
+  return schema;
 }
 
 function getSchema(schemaName: GenerateJsonArgs["schemaName"]): JsonSchema {
@@ -130,103 +237,8 @@ function getSchema(schemaName: GenerateJsonArgs["schemaName"]): JsonSchema {
           }
         }
       };
-    // case "TopicAuthoringDraft":
-    //   return {
-    //     type: "object",
-    //     additionalProperties: false,
-    //     required: ["title", "summary", "minutes", "sketchBlocks", "quizDraft"],
-    //     properties: {
-    //       title: { type: "string" },
-    //       summary: { type: "string" },
-    //       minutes: { type: "number" },
-    //       sketchBlocks: {
-    //         type: "array",
-    //         items: {
-    //           type: "object",
-    //           additionalProperties: false,
-    //           required: ["id", "title", "bodyMarkdown"],
-    //           properties: {
-    //             id: { type: "string" },
-    //             title: { type: "string" },
-    //             bodyMarkdown: { type: "string" },
-    //           },
-    //         },
-    //       },
-    //       quizDraft: {
-    //         type: "array",
-    //         items: {
-    //           type: "object",
-    //           additionalProperties: false,
-    //           required: ["id", "kind", "title", "prompt"],
-    //           properties: {
-    //             id: { type: "string" },
-    //             kind: {
-    //               type: "string",
-    //               enum: [
-    //                 "single_choice",
-    //                 "multi_choice",
-    //                 "drag_reorder",
-    //                 "fill_blank_choice",
-    //                 "code_input",
-    //               ],
-    //             },
-    //             title: { type: "string" },
-    //             prompt: { type: "string" },
-    //
-    //             options: {
-    //               type: "array",
-    //               items: { type: "string" },
-    //             },
-    //             correctOptionIds: {
-    //               type: "array",
-    //               items: { type: "string" },
-    //             },
-    //
-    //             tokens: {
-    //               type: "array",
-    //               items: { type: "string" },
-    //             },
-    //             correctOrder: {
-    //               type: "array",
-    //               items: { type: "string" },
-    //             },
-    //
-    //             template: { type: "string" },
-    //             choices: {
-    //               type: "array",
-    //               items: { type: "string" },
-    //             },
-    //             correctValue: { type: "string" },
-    //
-    //             starterCode: { type: "string" },
-    //             solutionCode: { type: "string" },
-    //             datasetId: { type: "string" },
-    //             recipeType: {
-    //               type: "string",
-    //               enum: ["sql_query", "template_io", "fixed_tests"],
-    //             },
-    //
-    //             hint: { type: "string" },
-    //             concept: { type: "string" },
-    //             hint1: { type: "string" },
-    //             hint2: { type: "string" },
-    //           },
-    //         },
-    //       },
-    //       projectDraft: {
-    //         type: "object",
-    //         additionalProperties: false,
-    //         required: ["title", "stepIds"],
-    //         properties: {
-    //           title: { type: "string" },
-    //           stepIds: {
-    //             type: "array",
-    //             items: { type: "string" },
-    //           },
-    //         },
-    //       },
-    //     },
-    //   };
+    case "TopicAuthoringDraft":
+      return TOPIC_AUTHORING_DRAFT_JSON_SCHEMA;
 
     case "NormalizedPlanRepair":
       return {
@@ -274,7 +286,7 @@ function useStrictSchema(schemaName: GenerateJsonArgs["schemaName"]) {
   return (
       schemaName === "CoursePlan" ||
       schemaName === "NormalizedPlanRepair" ||
-      // schemaName === "TopicAuthoringDraft" ||
+      schemaName === "TopicAuthoringDraft" ||
       schemaName === "TranslatedEntries"
   );
 }
@@ -308,9 +320,20 @@ function getTextFromCompletion(response: any): string {
 }
 
 export const openAiProvider: AiProvider = {
-  async generateJson<T>(args: GenerateJsonArgs): Promise<T> {
+  async generateJsonDetailed<T>(
+    args: GenerateJsonArgs,
+  ): Promise<GeneratedJsonResult<T>> {
     const client = createClient();
     const model = getModel();
+    const strictSchema = useStrictSchema(args.schemaName);
+    const metadata = {
+      provider: "openai",
+      model,
+      temperature: OPENAI_DEFAULT_TEMPERATURE,
+      seed: OPENAI_DETERMINISTIC_SEED,
+      schemaName: args.schemaName,
+      strictSchema,
+    } as const;
 
     const response = await client.chat.completions.create({
       model,
@@ -318,22 +341,59 @@ export const openAiProvider: AiProvider = {
         { role: "developer", content: args.system },
         { role: "user", content: args.user },
       ],
-      response_format: useStrictSchema(args.schemaName)
+      response_format: strictSchema
           ? {
             type: "json_schema",
             json_schema: {
               name: args.schemaName,
               strict: true,
-              schema: getSchema(args.schemaName),
+              schema: getOpenAiStructuredOutputSchema(args.schemaName),
             },
           }
           : {
             type: "json_object",
           },
-      temperature: 0.2,
+      temperature: OPENAI_DEFAULT_TEMPERATURE,
+      seed: OPENAI_DETERMINISTIC_SEED,
     });
 
     const text = getTextFromCompletion(response);
-    return parseJsonText<T>(text);
+    let parsedJson: unknown;
+
+    try {
+      parsedJson = parseJsonText<unknown>(text);
+    } catch (error) {
+      throw new GeneratedJsonError({
+        code: "INVALID_JSON_OUTPUT",
+        message: error instanceof Error ? error.message : String(error),
+        metadata,
+        rawText: text,
+        cause: error,
+      });
+    }
+
+    const validationErrors = getRuntimeValidationErrors(args.schemaName, parsedJson);
+    if (validationErrors.length > 0) {
+      throw new GeneratedJsonError({
+        code: "SCHEMA_VALIDATION_FAILED",
+        message: validationErrors.join("\n"),
+        metadata,
+        rawText: text,
+        parsedJson,
+        validationErrors,
+      });
+    }
+
+    return {
+      ...metadata,
+      rawText: text,
+      parsedJson,
+      value: parsedJson as T,
+    };
+  },
+
+  async generateJson<T>(args: GenerateJsonArgs): Promise<T> {
+    const result = await openAiProvider.generateJsonDetailed!<T>(args);
+    return result.value;
   },
 };

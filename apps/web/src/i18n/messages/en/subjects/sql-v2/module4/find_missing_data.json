@@ -40,7 +40,7 @@
               "hint": "Use the SQL operator made for missing values, not `=`.",
               "help": {
                 "concept": "In SQL, `NULL` represents missing data, and it must be checked with `IS NULL` rather than equality operators.",
-                "hint_1": "Think about the difference between comparing text like `'Chicago'` and checking for a missing value.",
+                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
                 "hint_2": "Look for the option that uses `IS` with `NULL` on the `email` column."
               },
               "options": {
@@ -57,7 +57,7 @@
               "help": {
                 "concept": "`IS NOT NULL` filters for rows where a column is present instead of missing.",
                 "hint_1": "Ask whether the query is keeping missing cities or keeping filled-in cities.",
-                "hint_2": "The correct choice describes rows where `city` contains data such as `Chicago` or `Miami`."
+                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
               },
               "options": {
                 "a": "It keeps only rows where city is missing.",
@@ -72,8 +72,8 @@
               "hint": "Check the sample rows for blank-looking missing entries.",
               "help": {
                 "concept": "A column contains missing data if at least one row stores `NULL` in that column.",
-                "hint_1": "Look through the sample rows and notice which columns are missing for Leo Grant, Liam Scott, or Noah Kim.",
-                "hint_2": "One correct column is missing for two customers, and another correct column is missing for Noah Kim."
+                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
+                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
               },
               "options": {
                 "a": "email",
@@ -165,33 +165,33 @@
             "ci_find_missing_emails": {
               "title": "Query customers with missing emails",
               "prompt": "Write a query that returns `id`, `full_name`, and `email` for customers whose `email` is missing. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \n  id,\n  full_name,\n  email\nFROM customers\nWHERE ;"
             },
             "ci_find_missing_city_draft": {
               "title": "Find draft customers with no city",
               "prompt": "Write a query that returns `id`, `full_name`, `city`, and `status` for customers whose `city` is missing and whose `status` is `draft`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \n  id,\n  full_name,\n  city,\n  status\nFROM customers\nWHERE ;"
             },
             "ci_find_present_email_real_customers": {
               "title": "Show real customers with an email",
               "prompt": "Write a query that returns `id`, `full_name`, and `email` for customers who have an email and are not test accounts. Use `is_test = 0` to mean a real customer. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \n  id,\n  full_name,\n  email\nFROM customers\nWHERE ;"
             }

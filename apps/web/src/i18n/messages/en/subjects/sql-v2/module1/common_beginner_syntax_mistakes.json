@@ -171,33 +171,33 @@
             "ci_fix_missing_comma": {
               "title": "Fix a missing comma",
               "prompt": "Write a query that returns the `name` and `price` columns from the `products` table. A common beginner mistake here is forgetting the comma between column names. Write the correct query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name price\nFROM products;"
             },
             "ci_fix_clause_order": {
               "title": "Fix the clause order",
               "prompt": "Write a correct query that returns the `id` and `name` columns from `products`. This exercise targets the common mistake of putting `FROM` before `SELECT`. Write the corrected query in the SQL editor and run it.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "FROM products\nSELECT id, name;"
             },
             "ci_fix_wrong_column_name": {
               "title": "Fix the wrong column name",
               "prompt": "Write a query that returns the `name` and `stock` columns from `products`. A common beginner mistake is using a made-up column like `product_name` instead of the real schema name. Write the correct query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT product_name, stock\nFROM products;"
             }

@@ -17,7 +17,8 @@ export type WorkspaceLanguage =
   | "c"
   | "cpp"
   | "bash"
-  | "web";
+  | "web"
+  | (string & {});
 
 export type ManifestSqlRuntimeDefaults = {
   kind: "sql";

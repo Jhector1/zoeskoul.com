@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { validateSqlPromptIntent } from "./validateSqlPromptIntent.js";
 
 describe("validateSqlPromptIntent", () => {
-    it("raises an error when strong count wording is present but SQL uses no COUNT", () => {
+    it("raises a warning when count-like wording is present but SQL uses no COUNT", () => {
         const result = validateSqlPromptIntent({
             seed: {} as any,
             draft: {
@@ -32,7 +32,9 @@ describe("validateSqlPromptIntent", () => {
             } as any,
         });
 
-        expect(result.issues.some((x) => x.code === "SQL_PROMPT_INTENT_COUNT_MISSING")).toBe(true);
+        expect(
+            result.issues.some((x) => x.code === "SQL_PROMPT_INTENT_COUNT_WEAK_MISMATCH"),
+        ).toBe(true);
     });
 
     it("does not false-positive on words like discount", () => {

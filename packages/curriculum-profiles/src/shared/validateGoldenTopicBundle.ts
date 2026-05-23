@@ -1,4 +1,5 @@
 import type {
+    ManifestCodeInput,
     TopicAuthoringDraft,
     TopicBundleManifest,
     TopicSeed,
@@ -29,15 +30,40 @@ function formatSqlContext(args: {
 }
 
 function validateCodeInputRecipe(
-    exercise: TopicBundleManifest["exercises"][number],
+    exercise: ManifestCodeInput,
 ): string | null {
     try {
-        if (exercise.kind !== "code_input") return null;
         buildCodeInputExpected(exercise);
         return null;
     } catch (error) {
         return error instanceof Error ? error.message : "Unknown golden validation failure.";
     }
+}
+
+function withResolvedSqlDatasetId(args: {
+    exercise: ManifestCodeInput;
+    topicBundle: TopicBundleManifest;
+    seed: TopicSeed;
+}) {
+    if (args.exercise.recipe.type !== "sql_query") return args.exercise;
+    if (args.exercise.recipe.datasetId?.trim()) return args.exercise;
+
+    const effectiveRuntime = resolveEffectiveExerciseRuntime({
+        language: "sql",
+        recipe: args.exercise.recipe,
+        topicRuntimeDefaults: args.topicBundle.runtimeDefaults ?? null,
+        moduleRuntimeDefaults: args.seed.moduleRuntimeDefaults ?? null,
+    });
+
+    if (!effectiveRuntime.datasetId) return args.exercise;
+
+    return {
+        ...args.exercise,
+        recipe: {
+            ...args.exercise.recipe,
+            datasetId: effectiveRuntime.datasetId,
+        },
+    };
 }
 
 export async function validateGoldenTopicBundle(args: {
@@ -50,7 +76,12 @@ export async function validateGoldenTopicBundle(args: {
     for (const exercise of args.topicBundle.exercises) {
         if (exercise.kind !== "code_input") continue;
 
-        const recipeError = validateCodeInputRecipe(exercise);
+        const resolvedExercise = withResolvedSqlDatasetId({
+            exercise,
+            topicBundle: args.topicBundle,
+            seed: args.seed,
+        });
+        const recipeError = validateCodeInputRecipe(resolvedExercise);
         if (!recipeError) continue;
 
         report.issues.push({
@@ -68,9 +99,14 @@ export async function validateGoldenTopicBundle(args: {
         if (exercise.kind !== "code_input") continue;
         if (exercise.recipe.type !== "sql_query") continue;
 
+        const resolvedExercise = withResolvedSqlDatasetId({
+            exercise,
+            topicBundle: args.topicBundle,
+            seed: args.seed,
+        });
         let expected;
         try {
-            expected = buildCodeInputExpected(exercise);
+            expected = buildCodeInputExpected(resolvedExercise);
         } catch {
             continue;
         }

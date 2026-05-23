@@ -165,33 +165,33 @@
             "ci_art_under_20": {
               "title": "Query Art products under 20",
               "prompt": "Write a query that shows the `name` and `price` of products in the `Art` category with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM products\nWHERE ;"
             },
             "ci_stationery_stock_15": {
               "title": "Filter Stationery with enough stock",
               "prompt": "Write a query that returns `name`, `category`, and `stock` for products where the category is `Stationery` and the stock is at least 15. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, category, stock\nFROM products\nWHERE category = '' ;"
             },
             "ci_home_price_under_100": {
               "title": "Find affordable Home products",
               "prompt": "Write a query that shows `name` and `price` for products in the `Home` category with a price below 100. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, price\nFROM products\nWHERE category = 'Home'\n-- add one more condition here"
             }

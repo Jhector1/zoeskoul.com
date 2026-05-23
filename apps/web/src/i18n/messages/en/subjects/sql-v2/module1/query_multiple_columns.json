@@ -139,7 +139,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT name, [blank1] FROM products;",
               "choices": [
@@ -169,33 +169,33 @@
             "ci_select_name_category": {
               "title": "Show names and categories",
               "prompt": "Write a query that returns the `name` and `category` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "-- Return the name and category columns from products\nSELECT\n  -- add columns here\nFROM products;"
             },
             "ci_select_three_columns": {
               "title": "Show three useful columns",
               "prompt": "Write a query that returns the `id`, `name`, and `price` columns from the `products` table, in that order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "-- Return id, name, and price from products\nSELECT\n  -- add three columns here\nFROM products;"
             },
             "ci_select_category_stock_created": {
               "title": "Choose a different set of columns",
               "prompt": "Write a query that returns the `category`, `stock`, and `created_at` columns from the `products` table. Keep the columns in that exact order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "-- Return category, stock, and created_at from products\nSELECT\n  -- add the three columns here\nFROM products;"
             }

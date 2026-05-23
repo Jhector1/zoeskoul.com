@@ -132,7 +132,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT name FROM products ORDER BY name [blank1];",
               "choices": [
@@ -162,33 +162,33 @@
             "ci-1": {
               "title": "Sort product names alphabetically",
               "prompt": "Write a query that shows the `name` and `category` columns from `products`, sorted by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT\n  name,\n  category\nFROM products\n-- TODO: sort by product name from A to Z\n;"
             },
             "ci-2": {
               "title": "Sort by category then name",
               "prompt": "Write a query that shows `name` and `category` from `products`. Sort first by `category` from A to Z, then by `name` from A to Z inside each category. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT\n  name,\n  category\nFROM products\n-- TODO: sort by category, then by name\n;"
             },
             "ci-3": {
               "title": "Reverse names inside each category",
               "prompt": "Write a query that shows `name` and `category` from `products`. Sort by `category` from A to Z, but sort `name` from Z to A inside each category. Write the query in the SQL editor, click Run query, and compare the grouped results in the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT\n  name,\n  category\nFROM products\n-- TODO: category A to Z, then name Z to A\n;"
             }

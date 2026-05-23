@@ -42,7 +42,7 @@ describe("validateSqlPromptIntent edge cases", () => {
         expect(result.issues.some((x) => x.code === "SQL_PROMPT_INTENT_COUNT_MISSING")).toBe(false);
     });
 
-    it("flags GROUP BY intent when prompt mentions grouping but SQL omits GROUP BY", () => {
+    it("flags GROUP BY warning when prompt mentions grouping but SQL omits GROUP BY", () => {
         const result = validateSqlPromptIntent({
             seed: {} as any,
             draft: {
@@ -59,10 +59,76 @@ describe("validateSqlPromptIntent edge cases", () => {
             } as any,
         });
 
-        expect(result.issues.some((x) => x.code === "SQL_PROMPT_INTENT_GROUP_BY_MISSING")).toBe(true);
+        expect(
+            result.issues.some((x) => x.code === "SQL_PROMPT_INTENT_GROUP_BY_WEAK_MISMATCH"),
+        ).toBe(true);
     });
 
-    it("flags JOIN intent when prompt mentions combining tables but SQL omits JOIN", () => {
+    it("does not false-positive SUM intent on total characters wording", () => {
+        const result = validateSqlPromptIntent({
+            seed: {} as any,
+            draft: {
+                title: "Topic",
+                summary: "Summary",
+                minutes: 15,
+                sketchBlocks: [],
+                quizDraft: [
+                    makeCodeExercise(
+                        "List each book title with its total characters.",
+                        "SELECT title, character_total_label FROM books;",
+                    ),
+                ],
+            } as any,
+        });
+
+        expect(result.issues.some((x) => x.code === "SQL_PROMPT_INTENT_SUM_MISSING")).toBe(false);
+    });
+
+    it("does not false-positive GROUP BY intent on inside each category wording alone", () => {
+        const result = validateSqlPromptIntent({
+            seed: {} as any,
+            draft: {
+                title: "Topic",
+                summary: "Summary",
+                minutes: 15,
+                sketchBlocks: [],
+                quizDraft: [
+                    makeCodeExercise(
+                        "Show the products inside each category.",
+                        "SELECT name, category FROM products;",
+                    ),
+                ],
+            } as any,
+        });
+
+        expect(
+            result.issues.some((x) => x.code === "SQL_PROMPT_INTENT_GROUP_BY_WEAK_MISMATCH"),
+        ).toBe(false);
+    });
+
+    it("does not false-positive GROUP BY intent on one row for each student wording", () => {
+        const result = validateSqlPromptIntent({
+            seed: {} as any,
+            draft: {
+                title: "Topic",
+                summary: "Summary",
+                minutes: 15,
+                sketchBlocks: [],
+                quizDraft: [
+                    makeCodeExercise(
+                        "Return one row for each student with name and city.",
+                        "SELECT name, city FROM students;",
+                    ),
+                ],
+            } as any,
+        });
+
+        expect(
+            result.issues.some((x) => x.code === "SQL_PROMPT_INTENT_GROUP_BY_WEAK_MISMATCH"),
+        ).toBe(false);
+    });
+
+    it("flags JOIN warning when prompt mentions combining tables but SQL omits JOIN", () => {
         const result = validateSqlPromptIntent({
             seed: {} as any,
             draft: {
@@ -79,7 +145,9 @@ describe("validateSqlPromptIntent edge cases", () => {
             } as any,
         });
 
-        expect(result.issues.some((x) => x.code === "SQL_PROMPT_INTENT_JOIN_MISSING")).toBe(true);
+        expect(
+            result.issues.some((x) => x.code === "SQL_PROMPT_INTENT_JOIN_WEAK_MISMATCH"),
+        ).toBe(true);
     });
 
 
@@ -116,7 +184,7 @@ describe("validateSqlPromptIntent edge cases", () => {
         expect(result.issues.some((x) => x.code === "SQL_PROMPT_INTENT_COUNT_MISSING")).toBe(false);
     });
 
-    it("flags real COUNT intent when prompt asks how many", () => {
+    it("flags real COUNT wording when prompt asks how many", () => {
         const result = validateSqlPromptIntent({
             seed: {} as any,
             draft: {
@@ -145,6 +213,8 @@ describe("validateSqlPromptIntent edge cases", () => {
             } as any,
         });
 
-        expect(result.issues.some((x) => x.code === "SQL_PROMPT_INTENT_COUNT_MISSING")).toBe(true);
+        expect(
+            result.issues.some((x) => x.code === "SQL_PROMPT_INTENT_COUNT_WEAK_MISMATCH"),
+        ).toBe(true);
     });
 });

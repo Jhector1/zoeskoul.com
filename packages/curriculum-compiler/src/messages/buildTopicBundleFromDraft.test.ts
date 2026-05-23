@@ -473,5 +473,5 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
                 }),
             }),
         )
-            .toThrow(/needs either tests or semanticChecks/i);    });
+            .toThrow(/needs at least one stdin\/stdout test case/i);    });
 });

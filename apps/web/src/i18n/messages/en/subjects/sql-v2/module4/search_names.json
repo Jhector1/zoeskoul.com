@@ -56,7 +56,7 @@
               "hint": "For a starts-with search, the wildcard goes after the letter.",
               "help": {
                 "concept": "A prefix search with `LIKE` keeps the known starting text first, then uses `%` for any remaining characters.",
-                "hint_1": "The pattern should begin with `O`, not end with it.",
+                "hint_1": "Check which side of the pattern should stay fixed and where the wildcard should allow extra characters.",
                 "hint_2": "Find the query using `LIKE 'O%'` in the `WHERE` clause."
               },
               "options": {
@@ -85,7 +85,7 @@
             "mc_like_and_filters": {
               "title": "Combine pattern search with filters",
               "prompt": "Which queries correctly search `full_name` with `LIKE` and also filter to active customers? Choose all that apply.",
-              "hint": "A correct answer needs both a `LIKE` condition on `full_name` and `status = 'active'`.",
+              "hint": "A matching answer should include both a `LIKE` condition on `full_name` and `status = 'active'`.",
               "help": {
                 "concept": "You can combine a text pattern condition and another filter with `AND` so both conditions must be true.",
                 "hint_1": "Look for queries that use `WHERE full_name LIKE ... AND status = 'active'`.",
@@ -165,33 +165,33 @@
             "ci_search_contains_a": {
               "title": "Query names containing a letter",
               "prompt": "Write a query that returns `id` and `full_name` from `customers` for rows where `full_name` contains the letter `a`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM customers\nWHERE ;"
             },
             "ci_search_starts_o": {
               "title": "Query names starting with O",
               "prompt": "Write a query that returns `full_name` and `status` for customers whose `full_name` starts with `O`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT full_name, status\nFROM customers\nWHERE full_name LIKE ;"
             },
             "ci_search_active_e": {
               "title": "Search names and keep only active rows",
               "prompt": "Write a query that returns `full_name`, `city`, and `status` for customers whose `full_name` contains the letter `e` and whose `status` is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT full_name, city, status\nFROM customers\nWHERE full_name LIKE \n  AND ;"
             }

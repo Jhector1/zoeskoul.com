@@ -3,13 +3,15 @@ import type { ManifestIdeServiceConfig } from "./ide-services.js";
 import {CourseGenerationPolicy, ModulePedagogyPolicy, TopicPedagogyPolicy, WorkspaceProfile} from "./workspace";
 import {SqlDialect} from "./manifest";
 
-export type CourseProfileId =
+export type BuiltinCourseProfileId =
     | "sql"
     | "python"
     | "math"
     | "language"
     | "web"
     | "data_science";
+
+export type CourseProfileId = BuiltinCourseProfileId | (string & {});
 
 export type CourseVersionStatus = "draft" | "active" | "legacy" | "disabled";
 

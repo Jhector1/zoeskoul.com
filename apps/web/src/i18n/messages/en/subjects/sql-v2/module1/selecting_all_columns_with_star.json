@@ -166,33 +166,33 @@
             "ci_select_all_products": {
               "title": "Write your first SELECT * query",
               "prompt": "Write a query that returns all columns and all rows from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "-- Return every column from the products table"
             },
             "ci_select_all_verify_columns": {
               "title": "Show the full products table",
               "prompt": "Write a query that displays the complete `products` table so the results table includes columns such as `id`, `name`, `category`, `price`, `stock`, and `created_at`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "-- Show the complete products table here\nSELECT \nFROM products;"
             },
             "ci_select_all_one_line": {
               "title": "Return every product field",
               "prompt": "Write a valid SQL query that returns every field for every product from the `products` table. You may write it on one line or multiple lines, then click Run query and inspect the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "-- Write your query below"
             }

@@ -6,9 +6,11 @@ import type {
 } from "@zoeskoul/curriculum-contracts";
 import { buildBaseSubjectManifest } from "../shared/buildBaseSubjectManifest.js";
 import type { CourseProfile, CourseProfileAdapter } from "../types.js";
+import { mathShape } from "../shapes/mathShape.js";
 
 export const mathProfile: CourseProfile = {
   id: "math",
+  shape: mathShape,
   allowedExerciseKinds: [
     "single_choice",
     "multi_choice",
@@ -16,6 +18,10 @@ export const mathProfile: CourseProfile = {
     "fill_blank_choice",
   ],
   allowedRecipeTypes: ["fixed_tests", "template_io"],
+  qualityPolicy: {
+    conceptOnly: true,
+    repeatedExerciseTextThreshold: 2,
+  },
   buildModuleRuntimeDefaults() {
     return null;
   },

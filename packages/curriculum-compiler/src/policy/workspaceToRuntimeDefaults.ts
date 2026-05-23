@@ -1,32 +1,17 @@
 import type {
     ManifestRuntimeDefaults,
-    WorkspaceLanguage,
 } from "@zoeskoul/curriculum-contracts";
+import { getCurriculumProfile } from "@zoeskoul/curriculum-profiles";
 import type { ResolvedWorkspacePolicy } from "./resolveWorkspacePolicy.js";
-
-function toCodeLanguage(profileId: string): Exclude<WorkspaceLanguage, "sql"> | undefined {
-    if (
-        profileId === "python" ||
-        profileId === "java" ||
-        profileId === "javascript" ||
-        profileId === "c" ||
-        profileId === "cpp" ||
-        profileId === "bash" ||
-        profileId === "web"
-    ) {
-        return profileId;
-    }
-
-    return undefined;
-}
 
 export function workspaceToRuntimeDefaults(args: {
     policy: ResolvedWorkspacePolicy;
     profileId: string;
 }): ManifestRuntimeDefaults {
     const c = args.policy.workspace.capabilities;
+    const profile = getCurriculumProfile(args.profileId);
 
-    if (c.sql?.queryRunner.enabled || args.profileId === "sql") {
+    if (profile.runtimeKind === "sql") {
         return {
             kind: "sql",
             showSchema: c.sql?.schemaBrowser.enabled ?? false,
@@ -40,7 +25,7 @@ export function workspaceToRuntimeDefaults(args: {
 
     return {
         kind: "code",
-        language: toCodeLanguage(args.profileId),
+        language: profile.defaultLanguage,
         supportsTerminal: c.terminal.enabled,
         supportsMultiFile: c.multiFileProjects.enabled,
         supportsFileSystem: c.filesystem.enabled,

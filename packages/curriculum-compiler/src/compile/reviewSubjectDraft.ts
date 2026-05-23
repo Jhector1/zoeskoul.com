@@ -126,7 +126,7 @@ export async function reviewSubjectDraft(args: {
     }
 
     const totalTopics = topicNodes.length;
-    const shape = getSubjectShape(args.blueprint.profileId as "sql" | "python");
+    const shape = getSubjectShape(args.blueprint.profileId);
 
     // `review-draft --fix` is intentionally patch-only: never delete or rebuild
     // the subject manifest/messages here. Those files preserve the existing draft

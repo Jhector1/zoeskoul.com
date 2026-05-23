@@ -136,7 +136,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT name, price FROM products ORDER BY price [blank1];",
               "choices": [
@@ -166,33 +166,33 @@
             "ci_sort_prices_asc": {
               "title": "Sort all products by price ascending",
               "prompt": "Write a query that shows `name` and `price` from the `products` table, sorted by `price` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by price in ascending order\n;"
             },
             "ci_oldest_products": {
               "title": "Show oldest products first",
               "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the earliest `created_at` date appears first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, created_at\nFROM products\n-- TODO: sort by the date column so the oldest row is first\n;"
             },
             "ci_cheapest_three": {
               "title": "Find the 3 cheapest products",
               "prompt": "Write a query that shows `name` and `price` for the 3 cheapest products in `products`. Sort by `price` in ascending order, then keep only 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort from lowest price to highest\n-- TODO: keep only 3 rows\n;"
             }

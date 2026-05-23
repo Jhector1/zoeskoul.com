@@ -3,7 +3,7 @@
 import path from "node:path";
 import type { CourseBlueprint, TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider, TopicRetryContext } from "@zoeskoul/curriculum-ai";
-import { generateTopicAuthoringDraft } from "@zoeskoul/curriculum-ai";
+import { generateTopicAuthoringDraftAttempt } from "@zoeskoul/curriculum-ai";
 import {
     getProfileServices,
     getSubjectShape,
@@ -23,6 +23,11 @@ import { writeTopicArtifacts } from "../write/writeTopicArtifacts.js";
 import { writeTopicReports } from "../reports/writeTopicReports.js";
 import { writeTopicAttemptReport } from "../reports/writeTopicAttemptReport.js";
 import { writeTopicCompileStatus } from "../reports/writeTopicCompileStatus.js";
+import {
+    buildTopicAttemptHashes,
+    buildTopicAttemptMetadata,
+    extractGenerationDiagnostics,
+} from "../reports/topicGenerationAudit.js";
 import { evaluateTopicDraft } from "../quality/evaluateTopicDraft.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
 import { resolvePlan } from "../spec/resolvePlan.js";
@@ -166,7 +171,7 @@ export async function compileTopic(args: {
         throw new Error(`Topic not found in resolved course structure: ${args.topicId}`);
     }
 
-    const shape = getSubjectShape(args.blueprint.profileId as "sql" | "python");
+    const shape = getSubjectShape(args.blueprint.profileId);
     const profileServices = getProfileServices(args.blueprint.profileId);
 
     advanceProgress({ stage: "building subject manifest", topicId: args.topicId });
@@ -242,12 +247,23 @@ export async function compileTopic(args: {
                 : undefined;
 
         const attemptArtifacts: {
+            prompt?: {
+                system: string;
+                user: string;
+            };
+            rawModelOutput?: string;
+            parsedOutput?: unknown;
             rawDraft?: TopicAuthoringDraft;
+            normalizedDraft?: TopicAuthoringDraft;
             repairedDraft?: TopicAuthoringDraft;
+            validationResult?: unknown;
+            attemptMetadata?: unknown;
+            hashes?: unknown;
             repairReport?: unknown;
             critiqueReport?: unknown;
             semanticReport?: unknown;
             goldenReport?: unknown;
+            topicBundle?: unknown;
         } = {};
 
         try {
@@ -258,13 +274,76 @@ export async function compileTopic(args: {
                 sectionSlug: node.section.sectionSlug,
             });
 
-            const rawDraft = await generateTopicAuthoringDraft(args.provider, {
-                seed,
-                locale: sourceLocale,
-                shape,
-                retry: retryContext,
-            });
+            let generationAttempt;
+            try {
+                generationAttempt = await generateTopicAuthoringDraftAttempt(args.provider, {
+                    seed,
+                    locale: sourceLocale,
+                    shape,
+                    retry: retryContext,
+                });
+            } catch (error) {
+                const diagnostics = extractGenerationDiagnostics(error);
+                const prompt =
+                    error && typeof error === "object" && "prompt" in error
+                        ? ((error as { prompt?: { system: string; user: string } }).prompt ?? {
+                            system: "",
+                            user: "",
+                        })
+                        : { system: "", user: "" };
+
+                attemptArtifacts.prompt = prompt;
+                attemptArtifacts.rawModelOutput = diagnostics.rawModelOutput;
+                attemptArtifacts.parsedOutput = diagnostics.parsedOutput;
+                attemptArtifacts.validationResult =
+                    diagnostics.validationResult ??
+                    (diagnostics.rawModelOutput || diagnostics.parsedOutput
+                        ? {
+                            ok: false,
+                            errors: [error instanceof Error ? error.message : String(error)],
+                        }
+                        : undefined);
+                attemptArtifacts.attemptMetadata = buildTopicAttemptMetadata({
+                    seed,
+                    generation: diagnostics.generation,
+                    retryAttempt: attempt,
+                    maxRetries: MAX_TOPIC_RETRIES,
+                });
+                attemptArtifacts.hashes = buildTopicAttemptHashes({
+                    seed,
+                    prompt,
+                    rawModelOutput: diagnostics.rawModelOutput,
+                    parsedOutput: diagnostics.parsedOutput,
+                });
+
+                throw new RetryableTopicValidationError({
+                    code: "TOPIC_GENERATION_OUTPUT_INVALID",
+                    message: error instanceof Error ? error.message : String(error),
+                    details: { topicId: node.topic.topicId },
+                });
+            }
+
+            const rawDraft = generationAttempt.generation.value;
+            attemptArtifacts.prompt = generationAttempt.prompt;
+            attemptArtifacts.rawModelOutput = generationAttempt.generation.rawText;
+            attemptArtifacts.parsedOutput = generationAttempt.generation.parsedJson;
             attemptArtifacts.rawDraft = rawDraft;
+            attemptArtifacts.validationResult = {
+                ok: true,
+                errors: [],
+            };
+            attemptArtifacts.attemptMetadata = buildTopicAttemptMetadata({
+                seed,
+                generation: generationAttempt.generation,
+                retryAttempt: attempt,
+                maxRetries: MAX_TOPIC_RETRIES,
+            });
+            attemptArtifacts.hashes = buildTopicAttemptHashes({
+                seed,
+                prompt: generationAttempt.prompt,
+                rawModelOutput: generationAttempt.generation.rawText,
+                parsedOutput: generationAttempt.generation.parsedJson,
+            });
 
             advanceProgress({
                 stage: "evaluating topic draft",
@@ -281,10 +360,19 @@ export async function compileTopic(args: {
             });
 
             const draft = evaluation.draft;
+            attemptArtifacts.normalizedDraft = evaluation.normalizedDraft;
             attemptArtifacts.repairedDraft = draft;
             attemptArtifacts.repairReport = evaluation.repairReport;
             attemptArtifacts.critiqueReport = evaluation.critiqueReport;
             attemptArtifacts.semanticReport = evaluation.semanticReport;
+            attemptArtifacts.hashes = buildTopicAttemptHashes({
+                seed,
+                prompt: generationAttempt.prompt,
+                rawModelOutput: generationAttempt.generation.rawText,
+                parsedOutput: generationAttempt.generation.parsedJson,
+                normalizedDraft: evaluation.normalizedDraft,
+                repairedDraft: draft,
+            });
 
             const workspacePolicy = resolveWorkspacePolicy({
                 blueprint: args.blueprint,
@@ -379,6 +467,16 @@ export async function compileTopic(args: {
                 seed,
                 draft,
             });
+            attemptArtifacts.topicBundle = topicBundle;
+            attemptArtifacts.hashes = buildTopicAttemptHashes({
+                seed,
+                prompt: generationAttempt.prompt,
+                rawModelOutput: generationAttempt.generation.rawText,
+                parsedOutput: generationAttempt.generation.parsedJson,
+                normalizedDraft: evaluation.normalizedDraft,
+                repairedDraft: draft,
+                topicBundle,
+            });
             validateTopicBundleIdentity({
                 seed,
                 topicBundle,
@@ -470,7 +568,9 @@ export async function compileTopic(args: {
                 moduleOrder: node.moduleIndex,
                 topicId: node.topic.topicId,
                 rawDraft,
+                normalizedDraft: evaluation.normalizedDraft,
                 repairedDraft: draft,
+                hashes: attemptArtifacts.hashes,
                 repairReport: evaluation.repairReport,
                 critiqueReport: evaluation.critiqueReport,
                 semanticReport: evaluation.semanticReport,

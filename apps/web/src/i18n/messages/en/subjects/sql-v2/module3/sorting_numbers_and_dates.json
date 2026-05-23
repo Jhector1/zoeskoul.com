@@ -136,7 +136,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT name, price FROM products ORDER BY price [blank1];",
               "choices": [
@@ -166,33 +166,33 @@
             "code_top_3_prices": {
               "title": "Show the three most expensive products",
               "prompt": "Write a query that returns `name` and `price` from `products`, sorted by highest `price` first, and shows only 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by highest price first\n-- TODO: keep only 3 rows\n;"
             },
             "code_oldest_products": {
               "title": "List products from oldest to newest",
               "prompt": "Write a query that returns `name` and `created_at` from `products`, sorted from the oldest date to the newest date. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, created_at\nFROM products\n-- TODO: sort by date from oldest to newest\n;"
             },
             "code_latest_two_in_stock": {
               "title": "Find the two newest products with stock",
               "prompt": "Write a query that returns `name`, `stock`, and `created_at` from `products` for rows where `stock > 5`. Sort the results by newest `created_at` first and show only 2 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, stock, created_at\nFROM products\n-- TODO: keep only rows with stock greater than 5\n-- TODO: sort by newest date first\n-- TODO: show only 2 rows\n;"
             }

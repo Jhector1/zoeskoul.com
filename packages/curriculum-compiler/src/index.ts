@@ -33,6 +33,7 @@ export * from "./reports/writeTopicReports.js";
 
 
 export * from "./reports/readTopicReports.js";
+export * from "./reports/replayTopicAttempt.js";
 export * from "./gate/buildPublishGateResult.js";
 
 import "./bootstrap/registerRuntimeRecipeRegistry.js";

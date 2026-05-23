@@ -44,6 +44,11 @@ export type CourseSpecQualityPolicy = {
     requireUniqueSectionSlugs?: boolean;
     requireModuleProject?: boolean;
     maxModuleProjectLength?: number;
+    maxAdjacentDifficultyJump?: number;
+    reservedConceptsByModule?: Array<{
+        concept: string;
+        earliestModuleNumber: number;
+    }>;
 };
 
 export type CourseSpecReleaseWindow = {

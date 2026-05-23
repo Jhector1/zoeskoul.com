@@ -4,7 +4,7 @@
       "sql-v2-0": {
         "table_names_and_column_names": {
           "label": "Table Names and Column Names",
-          "summary": "Learn how to identify a table name, recognize column names, and write simple SELECT queries using the students table.",
+          "summary": "Learn how to recognize table names and column names before writing longer SQL queries.",
           "cards": {
             "sketch0": {
               "title": "Tables hold rows, and columns label each kind of data"
@@ -16,18 +16,18 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Read the students table with correct names"
+              "title": "Recognize table and column names"
             }
           },
           "projectSteps": {
             "ci_select_all_columns": {
-              "title": "Show every column"
+              "title": "Guided check: show every column"
             },
             "ci_select_name_column": {
-              "title": "Show just the names"
+              "title": "Guided check: show just the names"
             },
             "ci_select_id_and_city": {
-              "title": "Show two columns"
+              "title": "Guided check: show two columns"
             }
           },
           "quiz": {
@@ -98,7 +98,7 @@
             "dr_query_order_one_column": {
               "title": "Build a one-column query",
               "prompt": "Arrange the tokens to make a query that shows the `name` column from the `students` table.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
                 "hint_1": "Start with the piece that introduces the idea or action.",
@@ -115,7 +115,7 @@
             "dr_query_order_two_columns": {
               "title": "Build a two-column query",
               "prompt": "Arrange the tokens to make a query that shows `id` and `city` from the `students` table.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
                 "hint_1": "Start with the piece that introduces the idea or action.",
@@ -164,35 +164,35 @@
               ]
             },
             "ci_select_all_columns": {
-              "title": "Show every column",
-              "prompt": "Write a query that returns all columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show every column",
+              "prompt": "Complete a simple SELECT query that returns all columns from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "SELECT \nFROM students;"
             },
             "ci_select_name_column": {
-              "title": "Show just the names",
-              "prompt": "Write a query that returns only the `name` column from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show just the names",
+              "prompt": "Complete a simple SELECT query that returns only the `name` column from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "SELECT \nFROM students;"
             },
             "ci_select_id_and_city": {
-              "title": "Show two columns",
-              "prompt": "Write a query that returns the `id` and `city` columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show two columns",
+              "prompt": "Complete a simple SELECT query that returns the `id` and `city` columns from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "SELECT \nFROM students;"
             }
@@ -207,11 +207,11 @@
         "table_names_and_column_names": {
           "sketch_1": {
             "title": "Tables hold rows, and columns label each kind of data",
-            "bodyMarkdown": "A **table** is like a grid of information. In this lesson, the table name is `students`.\n\nInside that table, each **column name** tells you what kind of data appears in that column. The `students` table has these columns:\n\n- `id`\n- `name`\n- `grade`\n- `age`\n- `city`\n\nA row is one student's record. For example, one row is:\n\n- `id` = 1\n- `name` = Noor\n- `grade` = A\n- `age` = 15\n- `city` = Chicago\n\nSo if you want student names, you use the column name `name`. If you want cities, you use the column name `city`.\n\n**Worked example:**\n\n```sql\nSELECT name\nFROM students;\n```\n\nStep by step:\n\n- `SELECT name` means \"show the values from the `name` column\"\n- `FROM students` means \"get them from the `students` table\"\n\nThis query would return the student names from the table.\n\n**Try it yourself:** Write the query in the SQL editor, click **Run query**, and then change `name` to `city` to see a different column in the results table."
+            "bodyMarkdown": "A **table** is like a grid of information. In this lesson, the table name is `students`.\n\nInside that table, each **column name** tells you what kind of data appears in that column. The `students` table has these columns:\n\n- `id`\n- `name`\n- `grade`\n- `age`\n- `city`\n\nA row is one student's record. For example, one row is:\n\n- `id` = 1\n- `name` = Noor\n- `grade` = A\n- `age` = 15\n- `city` = Chicago\n\nSo if you want student names, you use the column name `name`. If you want cities, you use the column name `city`.\n\n**Worked example:**\n\n```sql\nSELECT name\nFROM students;\n```\n\nStep by step:\n\n- `SELECT name` means \"show the values from the `name` column\"\n- `FROM students` means \"get them from the `students` table\"\n\nThis query would return the student names from the table.\n\n**Guided check:** Write the query in the SQL editor, click **Run query**, and then change `name` to `city` to see a different column in the results table."
           },
           "sketch_2": {
             "title": "Use the exact table and column names",
-            "bodyMarkdown": "SQL needs the correct names from the schema. If the table is called `students`, then `FROM students` works. If you write a different table name, the query will fail.\n\nThe same idea is true for columns. In this dataset, `name` is a valid column, but `student_name` is not.\n\n**Worked example:**\n\n```sql\nSELECT id, name, city\nFROM students;\n```\n\nLine by line:\n\n- `SELECT id, name, city` asks for three columns\n- `FROM students` tells SQL which table to read\n\nThe results table would show each student's id, name, and city.\n\nYou can also read the schema browser to check the exact spellings before you run a query.\n\n**Your turn:** In the SQL editor, run the example above. Then remove `city` so the query shows only `id` and `name`."
+            "bodyMarkdown": "SQL needs the correct names from the schema. If the table is called `students`, then `FROM students` works. If you write a different table name, the query will fail.\n\nThe same idea is true for columns. In this dataset, `name` is a valid column, but `student_name` is not.\n\n**Worked example:**\n\n```sql\nSELECT id, name, city\nFROM students;\n```\n\nLine by line:\n\n- `SELECT id, name, city` asks for three columns\n- `FROM students` tells SQL which table to read\n\nThe results table would show each student's id, name, and city.\n\nYou can also read the schema browser to check the exact spellings before you run a query.\n\n**Guided check:** In the SQL editor, run the example above. Then remove `city` so the query shows only `id` and `name`."
           }
         }
       }

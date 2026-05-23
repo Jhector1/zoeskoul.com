@@ -3,6 +3,15 @@ import type {
     TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
+import {
+    assertProfileSupportsCodeInput,
+    getCurriculumProfile,
+} from "@zoeskoul/curriculum-profiles";
+
+function resolveProfile(profileId: string | undefined) {
+    if (!profileId) return null;
+    return getCurriculumProfile(profileId);
+}
 
 function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
@@ -33,10 +42,16 @@ function starterRevealsSolution(starterCode: unknown, solutionCode: unknown): bo
     return !!starter && !!solution && starter === solution;
 }
 
-function defaultStarterCodeForProfile(profileId: unknown): string {
-    return String(profileId ?? "").trim() === "sql"
-        ? "-- Write your SQL query below\n"
-        : "# Write your code below\n";
+function defaultStarterCodeForProfile(profileId?: string): string {
+    if (!profileId) {
+        throw new Error(
+            "Cannot create default starterCode for code_input without a curriculum profile. Pass profileId so starter defaults stay profile-owned.",
+        );
+    }
+
+    return assertProfileSupportsCodeInput(
+        getCurriculumProfile(profileId),
+    ).defaultStarter({});
 }
 
 function isChoiceFillBlankValid(exercise: any): boolean {
@@ -104,10 +119,15 @@ function needsRepair(exercise: any): boolean {
 }
 
 function applySeedDefaults(seed: TopicSeed, draft: TopicAuthoringDraft): TopicAuthoringDraft {
+    const profile = resolveProfile(seed.profileId);
+
     return {
         ...draft,
         quizDraft: (draft.quizDraft ?? []).map((exercise) => {
             if (exercise.kind !== "code_input") return exercise;
+            const codeInput = profile
+                ? assertProfileSupportsCodeInput(profile)
+                : null;
 
             const datasetId =
                 normalizeText(exercise.datasetId) ||
@@ -123,13 +143,10 @@ function applySeedDefaults(seed: TopicSeed, draft: TopicAuthoringDraft): TopicAu
 
             const recipeType =
                 exercise.recipeType ||
-                (seed.profileId === "sql"
-                    ? "sql_query"
-                    : hasSemanticChecks
-                        ? "semantic"
-                        : hasTests
-                            ? "fixed_tests"
-                            : undefined);
+                codeInput?.defaultRecipeType({
+                    exercise,
+                    seed,
+                });
 
             return {
                 ...exercise,
@@ -146,6 +163,7 @@ export async function repairIncompleteExercises(args: {
     draft: TopicAuthoringDraft;
 }): Promise<TopicAuthoringDraft> {
     void args.provider;
+    const profile = resolveProfile(args.seed.profileId);
 
     let draft = applySeedDefaults(args.seed, args.draft);
 
@@ -197,80 +215,26 @@ export async function repairIncompleteExercises(args: {
         }
 
         if (exercise.kind === "code_input") {
-            const profileIsSql = String(args.seed.profileId ?? "").trim() === "sql";
-
-            const moduleSqlDefaults =
-                args.seed.moduleRuntimeDefaults?.kind === "sql"
-                    ? args.seed.moduleRuntimeDefaults
-                    : null;
-
-            const rawRecipeType = normalizeText(exercise.recipeType);
-
-            const hasSemanticChecks =
-                Array.isArray(exercise.semanticChecks) && exercise.semanticChecks.length > 0;
-
-            const hasTests =
-                Array.isArray(exercise.tests) && exercise.tests.length > 0;
-
-            const recipeType:
-                | "sql_query"
-                | "template_io"
-                | "fixed_tests"
-                | "semantic"
-                | undefined =
-                rawRecipeType === "sql_query" ||
-                rawRecipeType === "template_io" ||
-                rawRecipeType === "fixed_tests" ||
-                rawRecipeType === "semantic"
-                    ? rawRecipeType
-                    : profileIsSql
-                        ? "sql_query"
-                        : hasSemanticChecks
-                            ? "semantic"
-                            : hasTests
-                                ? "fixed_tests"
-                                : undefined;
-
-            const datasetId =
-                normalizeText(exercise.datasetId) ||
-                normalizeText(moduleSqlDefaults?.datasetId);
-
-            const repairedTests =
-                hasTests
-                    ? exercise.tests
-                    : !hasSemanticChecks && !profileIsSql
-                        ? [
-                            {
-                                stdin: "12\n",
-                                stdout: "13",
-                                match: "includes" as const,
-                            },
-                            {
-                                stdin: "20\n",
-                                stdout: "21",
-                                match: "includes" as const,
-                            },
-                        ]
-                        : undefined;
-
-            const repairedRecipeType =
-                recipeType ??
-                (profileIsSql
-                    ? "sql_query"
-                    : hasSemanticChecks
-                        ? "semantic"
-                        : "fixed_tests");
+            const codeInput = profile
+                ? assertProfileSupportsCodeInput(profile)
+                : null;
+            const repairedByProfile = codeInput?.repairDraft?.({
+                exercise,
+                seed: args.seed,
+            });
+            const repairedExercise = repairedByProfile ?? exercise;
 
             return {
                 ...exercise,
+                ...repairedExercise,
                 kind: "code_input" as const,
-                starterCode: starterRevealsSolution(exercise.starterCode, exercise.solutionCode)
+                starterCode: starterRevealsSolution(
+                    repairedExercise.starterCode,
+                    repairedExercise.solutionCode,
+                )
                     ? defaultStarterCodeForProfile(args.seed.profileId)
-                    : normalizeText(exercise.starterCode),
-                solutionCode: normalizeText(exercise.solutionCode),
-                recipeType: repairedRecipeType,
-                datasetId: datasetId || undefined,
-                ...(repairedTests?.length ? { tests: repairedTests } : {}),
+                    : normalizeText(repairedExercise.starterCode),
+                solutionCode: normalizeText(repairedExercise.solutionCode),
             };
         }
         return exercise;

@@ -4,7 +4,7 @@
       "sql-v2-0": {
         "where_sql_runs": {
           "label": "where sql runs",
-          "summary": "Learn where you write and run SQL in the browser workspace, and how the SQL editor, Run query button, schema browser, and results table work together.",
+          "summary": "Learn where you write and run SQL in the browser workspace and how the SQL editor, Run query button, schema browser, and results table work together.",
           "cards": {
             "sketch0": {
               "title": "SQL runs in the browser workspace"
@@ -152,7 +152,7 @@
               "help": {
                 "concept": "A FROM clause names the table the query reads from. In this topic, the dataset table is `the missing term`.",
                 "hint_1": "The schema browser shows a table with columns id, name, grade, age, and city.",
-                "hint_2": "Use the table that contains rows for Noor, Mia, Leo, Ava, and Zane."
+                "hint_2": "Use the table headers first, then compare each row with the question."
               },
               "template": "SELECT name, city FROM [blank1];",
               "choices": [
@@ -165,33 +165,33 @@
             "wsr_ci_select_all_students": {
               "title": "Run your first full-table query",
               "prompt": "Write a query that returns all columns from the `students` table. Write the query in the SQL editor, click Run query, and check that the results table shows every student row.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM students;"
             },
             "wsr_ci_select_two_columns": {
               "title": "Show only names and grades",
               "prompt": "Write a query that returns only the `name` and `grade` columns from the `students` table. Then click Run query and confirm the results table has exactly those two columns.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM students;"
             },
             "wsr_ci_select_city_column": {
               "title": "Show one column from the table",
               "prompt": "Write a query that returns only the `city` column from the `students` table. Run it and check that the results table shows one column with city values.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM students;"
             }

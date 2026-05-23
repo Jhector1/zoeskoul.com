@@ -2,7 +2,11 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import { getDraftSubjectRoot, getRepoRoot } from "@zoeskoul/curriculum-core";
-import type { AiProvider } from "@zoeskoul/curriculum-ai";
+import type {
+    AiProvider,
+    GenerateJsonArgs,
+    GeneratedJsonResult,
+} from "@zoeskoul/curriculum-ai";
 import { buildPlanFromSpec } from "../spec/buildPlanFromSpec.js";
 import { compileSubjectPipeline } from "./compileSubjectPipeline.js";
 import { resolveAuthoringCompileTarget } from "./resolveAuthoringCompileTarget.js";
@@ -24,7 +28,21 @@ const SQL_V2_MESSAGE_ROOT = path.join(
 );
 
 const provider: AiProvider = {
-    async generateJson() {
+    async generateJsonDetailed<T>(_args: GenerateJsonArgs) {
+        const value = await this.generateJson<T>(_args);
+        return {
+            provider: "test",
+            model: "test-model",
+            temperature: 0,
+            seed: 0,
+            schemaName: "TopicAuthoringDraft",
+            strictSchema: true,
+            rawText: JSON.stringify(value),
+            parsedJson: value,
+            value,
+        } as GeneratedJsonResult<T>;
+    },
+    async generateJson<T>() {
         return {
             title: "What SQL Means",
             summary: "Learners practice reading a simple SQL query.",
@@ -93,20 +111,6 @@ const provider: AiProvider = {
                     correctOptionIds: ["a", "b"],
                 },
                 {
-                    id: "multi-2",
-                    kind: "multi_choice",
-                    title: "Table parts",
-                    prompt: "Which items are column names in the students table example?",
-                    hint: "Look for field labels, not full records.",
-                    help: {
-                        concept: "Column names label the type of data stored in each field.",
-                        hint_1: "Name and city are fields on every student record.",
-                        hint_2: "Noor is a row value, not a column name.",
-                    },
-                    options: ["name", "city", "Noor"],
-                    correctOptionIds: ["a", "b"],
-                },
-                {
                     id: "drag-1",
                     kind: "drag_reorder",
                     title: "Question to query flow",
@@ -119,20 +123,6 @@ const provider: AiProvider = {
                     },
                     tokens: ["Ask a question", "Write a query", "Read the results table"],
                     correctOrder: ["Ask a question", "Write a query", "Read the results table"],
-                },
-                {
-                    id: "drag-2",
-                    kind: "drag_reorder",
-                    title: "SELECT starter order",
-                    prompt: "Arrange the starter query pieces in the order shown in the lesson.",
-                    hint: "SELECT comes before the column name and table name.",
-                    help: {
-                        concept: "A basic query starts with SELECT, then the column, then FROM and the table.",
-                        hint_1: "The table name comes after FROM.",
-                        hint_2: "The column name is chosen right after SELECT.",
-                    },
-                    tokens: ["SELECT", "name", "FROM students"],
-                    correctOrder: ["SELECT", "name", "FROM students"],
                 },
                 {
                     id: "fill-1",
@@ -149,72 +139,8 @@ const provider: AiProvider = {
                     choices: ["column", "row", "database"],
                     correctValue: "column",
                 },
-                {
-                    id: "fill-2",
-                    kind: "fill_blank_choice",
-                    title: "Run button",
-                    prompt: "Complete the lesson sentence about trying a query.",
-                    hint: "Use the label shown on the SQL workspace button.",
-                    help: {
-                        concept: "The learner runs a query from the SQL editor using the Run query button.",
-                        hint_1: "The button does not say Save file or Refresh page.",
-                        hint_2: "Pick the workspace action that executes the query.",
-                    },
-                    template: "After writing the query, click [blank1] to see the results table.",
-                    choices: ["Run query", "Save file", "Refresh page"],
-                    correctValue: "Run query",
-                },
-                {
-                    id: "sql-check-1",
-                    kind: "code_input",
-                    title: "List student names",
-                    prompt: "Write a query that lists the name column from students.",
-                    hint: "Use the query pattern from the lesson.",
-                    help: {
-                        concept:
-                            "This SQL exercise checks whether your query returns the requested result.",
-                        hint_1: "Check the table name and selected columns in the SQL editor.",
-                        hint_2: "Click Run query and compare the results table.",
-                    },
-                    starterCode: "SELECT * FROM students;",
-                    solutionCode: "SELECT name FROM students;",
-                    recipeType: "sql_query",
-                    datasetId: "students_intro",
-                },
-                {
-                    id: "sql-check-2",
-                    kind: "code_input",
-                    title: "List student cities",
-                    prompt: "Write a query that lists the city column from students.",
-                    hint: "Select the city field from the students table.",
-                    help: {
-                        concept: "This SQL exercise checks whether your query selects one requested column.",
-                        hint_1: "Use SELECT with the city column name.",
-                        hint_2: "Run the query and compare the results table.",
-                    },
-                    starterCode: "SELECT * FROM students;",
-                    solutionCode: "SELECT city FROM students;",
-                    recipeType: "sql_query",
-                    datasetId: "students_intro",
-                },
-                {
-                    id: "sql-check-3",
-                    kind: "code_input",
-                    title: "List names and grades",
-                    prompt: "Write a query that lists the name and grade columns from students.",
-                    hint: "Select the two requested columns from the students table.",
-                    help: {
-                        concept: "This SQL exercise checks whether your query selects multiple requested columns.",
-                        hint_1: "Put both column names after SELECT.",
-                        hint_2: "Run the query and compare the results table.",
-                    },
-                    starterCode: "SELECT * FROM students;",
-                    solutionCode: "SELECT name, grade FROM students;",
-                    recipeType: "sql_query",
-                    datasetId: "students_intro",
-                },
             ],
-        } as any;
+        } as T;
     },
 };
 
@@ -297,5 +223,35 @@ describe("compileSubjectPipeline SQL Foundations regression", () => {
                 }),
             ]);
         }
+
+        const attemptDir = path.join(
+            SQL_V2_REPORT_ROOT,
+            "module0",
+            "what_sql_means",
+            "attempt-0",
+        );
+        const prompt = JSON.parse(
+            await fs.readFile(path.join(attemptDir, "prompt.json"), "utf8"),
+        );
+        const hashes = JSON.parse(
+            await fs.readFile(path.join(attemptDir, "hashes.json"), "utf8"),
+        );
+
+        await expect(fs.readFile(path.join(attemptDir, "raw-model-output.txt"), "utf8")).resolves
+            .toContain('"title":"What SQL Means"');
+        await expect(fs.readFile(path.join(attemptDir, "parsed-output.json"), "utf8")).resolves
+            .toContain('"quizDraft"');
+        await expect(fs.readFile(path.join(attemptDir, "raw-draft.json"), "utf8")).resolves
+            .toContain('"What SQL Means"');
+        await expect(fs.readFile(path.join(attemptDir, "normalized-draft.json"), "utf8")).resolves
+            .toContain('"quizDraft"');
+        await expect(fs.readFile(path.join(attemptDir, "attempt-metadata.json"), "utf8")).resolves
+            .toContain('"strictSchema": true');
+        await expect(fs.readFile(path.join(attemptDir, "emitted-topic-bundle.json"), "utf8")).resolves
+            .toContain('"subjectSlug": "sql-v2"');
+        expect(prompt.system).toContain("TopicAuthoringDraft");
+        expect(prompt.user).toContain('"profileId": "sql"');
+        expect(hashes.promptHash).toBeTypeOf("string");
+        expect(hashes.compiledTopicBundleHash).toBeTypeOf("string");
     });
 });

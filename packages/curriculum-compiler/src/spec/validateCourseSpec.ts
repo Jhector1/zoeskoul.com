@@ -5,6 +5,10 @@ import type {
     CourseSpecReleaseWindow,
     ExerciseKindMix,
 } from "@zoeskoul/curriculum-contracts";
+import {
+    getCurriculumProfile,
+    validateProfileShapeConsistency,
+} from "@zoeskoul/curriculum-profiles";
 
 function isNonEmptyString(value: unknown) {
     return typeof value === "string" && value.trim().length > 0;
@@ -185,6 +189,8 @@ function validateSection(
 
 export function validateCourseSpec(spec: CourseSpec): string[] {
     const issues: string[] = [];
+    const profile = getCurriculumProfile(spec.profileId);
+    issues.push(...validateProfileShapeConsistency(profile));
 
     if (!isNonEmptyString(spec.authoringFormatVersion)) {
         issues.push("authoringFormatVersion is required");
@@ -324,12 +330,12 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
         }
 
         if (
-            spec.profileId === "sql" &&
+            profile.runtimeKind === "sql" &&
             effectiveDatasetStrategy(spec, module) === "module_based" &&
             !isNonEmptyString(module.runtimePolicy?.datasetId)
         ) {
             issues.push(
-                `${modulePath}.runtimePolicy.datasetId is required for SQL when datasetStrategy="module_based"`,
+                `${modulePath}.runtimePolicy.datasetId is required when datasetStrategy="module_based" for profile "${spec.profileId}"`,
             );
         }
 

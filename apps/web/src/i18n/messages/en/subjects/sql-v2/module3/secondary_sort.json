@@ -152,7 +152,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "ORDER BY stock DESC, name [blank1]",
               "choices": [
@@ -165,33 +165,33 @@
             "ci-sort-category-then-price": {
               "title": "Sort by category, then price",
               "prompt": "Write a query that shows `name`, `category`, and `price` from `products`. Sort first by `category` in ascending order, then by `price` in descending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, category, price\nFROM products\n-- TODO: add a two-column ORDER BY clause"
             },
             "ci-sort-stock-then-name": {
               "title": "Sort by stock, then name",
               "prompt": "Write a query that shows `name` and `stock` from `products`. Sort by `stock` from highest to lowest, and for any tie, sort by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, stock\nFROM products\n-- TODO: sort by stock, then by name"
             },
             "ci-sort-category-then-created": {
               "title": "Sort by category, then date",
               "prompt": "Write a query that shows `name`, `category`, and `created_at` from `products`. Sort by `category` in ascending order, then by `created_at` in ascending order so earlier dates come first within each category. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, category, created_at\nFROM products\n-- TODO: sort by category, then by created_at"
             }

@@ -87,7 +87,7 @@
               "help": {
                 "concept": "Choosing specific columns helps you focus on the needed data and keeps the results table simpler.",
                 "hint_1": "Look for benefits related to clarity and relevance, not changes to the stored table.",
-                "hint_2": "The correct choices describe cleaner output and returning only needed fields."
+                "hint_2": "The matching choices describe cleaner output and returning only needed fields."
               },
               "options": {
                 "a": "It makes the results table show only the data you need.",
@@ -165,33 +165,33 @@
             "ci_select_name_price": {
               "title": "Show product names and prices",
               "prompt": "Write a query that returns only the `name` and `price` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT\n  -- choose two columns here\nFROM products;"
             },
             "ci_select_category_name": {
               "title": "Show category first, then name",
               "prompt": "Write a query that returns the `category` column first and the `name` column second from the `products` table. Write the query in the SQL editor, click Run query, and check that the results table shows the columns in that order.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT\n  -- put the first column here,\n  -- then the second column here\nFROM products;"
             },
             "ci_select_all_columns": {
               "title": "Show every column",
               "prompt": "Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the full results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT\n  -- return every column\nFROM products;"
             }

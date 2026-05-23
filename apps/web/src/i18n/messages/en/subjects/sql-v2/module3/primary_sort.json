@@ -105,7 +105,7 @@
               "help": {
                 "concept": "A basic sorted SELECT query follows the clause order SELECT, FROM, then ORDER BY. The sort direction comes after the sort column.",
                 "hint_1": "The query begins by choosing columns and then naming the table.",
-                "hint_2": "The sorting part should end with the direction keyword that puts larger prices first."
+                "hint_2": "Check which side of the pattern should stay fixed and where the wildcard should allow extra characters."
               },
               "tokens": {
                 "t1": "SELECT name",
@@ -135,7 +135,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT name, price FROM products ORDER BY price [blank1];",
               "choices": [
@@ -152,7 +152,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT name, category FROM products ORDER BY [blank1] ASC;",
               "choices": [
@@ -165,33 +165,33 @@
             "ci_primary_sort_price_desc": {
               "title": "Sort by price descending",
               "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, price\nFROM products\n-- TODO: add sorting so the highest price appears first\n;"
             },
             "ci_primary_sort_name_asc": {
               "title": "Sort names alphabetically",
               "prompt": "Write a query that shows `name` and `category` from `products`, sorted alphabetically by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, category\nFROM products\n-- TODO: sort the rows alphabetically by product name\n;"
             },
             "ci_primary_sort_newest_first": {
               "title": "Sort by newest date first",
               "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest date appears first\n;"
             }

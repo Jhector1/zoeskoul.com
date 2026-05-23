@@ -136,7 +136,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT name, stock FROM products ORDER BY stock [blank1];",
               "choices": [
@@ -166,33 +166,33 @@
             "ci_price_desc": {
               "title": "Sort products by highest price",
               "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` in descending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by price from highest to lowest\n;"
             },
             "ci_newest_products": {
               "title": "Show newest products first",
               "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, then click Run query and inspect the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest date is first\n;"
             },
             "ci_top2_stock": {
               "title": "Top 2 products by stock",
               "prompt": "Write a query that shows `name` and `stock` from `products`, sorted by `stock` from highest to lowest, and returns only the first 2 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, stock\nFROM products\n-- TODO: sort by highest stock first\n-- TODO: keep only 2 rows\n;"
             }

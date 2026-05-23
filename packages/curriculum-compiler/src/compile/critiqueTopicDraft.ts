@@ -87,7 +87,7 @@ export async function critiqueTopicDraft(args: {
         throw new Error(`Topic not found in resolved course structure: ${args.topicId}`);
     }
 
-    const shape = getSubjectShape(args.blueprint.profileId as "sql" | "python");
+    const shape = getSubjectShape(args.blueprint.profileId);
     const profileServices = getProfileServices(args.blueprint.profileId);
 
     const seed = buildTopicSeedFromPlanNode({
@@ -127,7 +127,9 @@ export async function critiqueTopicDraft(args: {
         sectionSlug: node.section.sectionSlug,
     });
 
-    let preparedDraft = normalizeTopicAuthoringDraft(repairedDraft);
+    let preparedDraft = normalizeTopicAuthoringDraft(repairedDraft, {
+        profileId: seed.profileId,
+    });
     preparedDraft = repairTopicAuthoringDraft(preparedDraft, seed);
     preparedDraft = sanitizeHintLeaksInDraft(preparedDraft, seed);
 

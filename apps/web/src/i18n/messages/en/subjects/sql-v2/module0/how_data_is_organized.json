@@ -4,7 +4,7 @@
       "sql-v2-0": {
         "how_data_is_organized": {
           "label": "How Data Is Organized",
-          "summary": "Build a beginner-friendly mental model of how a database table stores rows and columns, and how simple SELECT queries read data from the students table.",
+          "summary": "Build a mental model for how databases organize data into tables that can answer questions.",
           "cards": {
             "sketch0": {
               "title": "Tables, rows, and columns"
@@ -19,18 +19,18 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Explore the Students Table"
+              "title": "Explain how the students table is organized"
             }
           },
           "projectSteps": {
             "ci_select_names": {
-              "title": "Show all student names"
+              "title": "Guided check: show all student names"
             },
             "ci_select_all_students": {
-              "title": "Show every column"
+              "title": "Guided check: show every column"
             },
             "ci_select_id_name_city": {
-              "title": "Show three specific columns"
+              "title": "Guided check: show three specific columns"
             }
           },
           "quiz": {
@@ -40,7 +40,7 @@
               "hint": "Think about what all the values across one line describe together.",
               "help": {
                 "concept": "A row in a database table usually stores one complete record. In this table, each row groups the id, name, grade, age, and city for one student.",
-                "hint_1": "Look at the row with Noor. All five values belong to one person.",
+                "hint_1": "Use the table headers first, then compare each row with the question.",
                 "hint_2": "A row is not a single column value or the whole table. It is one record made of several column values."
               },
               "options": {
@@ -101,7 +101,7 @@
             "dr_read_query_order": {
               "title": "Read a simple query in order",
               "prompt": "Arrange these parts to form a correct basic query that shows the `name` column from the `students` table.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
                 "hint_1": "Start with the piece that introduces the idea or action.",
@@ -118,7 +118,7 @@
             "dr_table_reading_order": {
               "title": "From table to value",
               "prompt": "Put these ideas in a sensible order for reading a value from a database table, from biggest structure to most specific piece of data.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
                 "hint_1": "Start with the piece that introduces the idea or action.",
@@ -138,7 +138,7 @@
               "help": {
                 "concept": "The FROM clause names the table that SQL should read. In this dataset, the table is called `the missing term`.",
                 "hint_1": "The dataset has one table, and its name is plural.",
-                "hint_2": "It is the same word used in the schema definition: `CREATE TABLE ...`."
+                "hint_2": "It is the same plural table name shown in the schema browser."
               },
               "template": "SELECT name FROM [blank1];",
               "choices": [
@@ -166,35 +166,35 @@
               ]
             },
             "ci_select_names": {
-              "title": "Show all student names",
-              "prompt": "Write a query that shows only the `name` column from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show all student names",
+              "prompt": "Complete a simple SELECT query that shows only the `name` column from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "-- Show only the name column from the students table\nSELECT\n  -- column here\nFROM\n  -- table here\n;"
             },
             "ci_select_all_students": {
-              "title": "Show every column",
-              "prompt": "Write a query that shows all columns from the `students` table. Use the SQL editor, click Run query, and inspect the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show every column",
+              "prompt": "Complete a simple SELECT query that shows all columns from the `students` table. Click Run query and inspect the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "-- Show every column from the students table\nSELECT\n  -- all columns symbol here\nFROM students;"
             },
             "ci_select_id_name_city": {
-              "title": "Show three specific columns",
-              "prompt": "Write a query that shows the `id`, `name`, and `city` columns from the `students` table, in that order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show three specific columns",
+              "prompt": "Complete a simple SELECT query that shows the `id`, `name`, and `city` columns from the `students` table, in that order. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "-- Show id, name, and city from the students table\nSELECT\n  -- add three columns here\nFROM students;"
             }

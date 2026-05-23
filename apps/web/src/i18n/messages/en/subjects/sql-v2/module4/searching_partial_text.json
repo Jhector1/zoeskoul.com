@@ -85,11 +85,11 @@
             "mc_like_pattern_meanings": {
               "title": "Match the pattern meanings",
               "prompt": "Which patterns could match values in this dataset? Choose all that apply.",
-              "hint": "Test each pattern against real values like `Lab`, `Mia Lopez`, and `noah@test.com`.",
+              "hint": "Compare the condition with the column named in the question, then check which rows would remain.",
               "help": {
                 "concept": "A `LIKE` pattern is valid when its wildcard placement matches the shape of an existing text value in the table.",
                 "hint_1": "Check whether there is a city with exactly 3 letters, a name starting with `O`, and an email ending in `test.com`.",
-                "hint_2": "Use the sample rows: `Lab`, `Olivia Chen`, and `noah@test.com` are especially useful here."
+                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
               },
               "options": {
                 "a": "`city LIKE '_ab'`",
@@ -120,7 +120,7 @@
               "help": {
                 "concept": "When combining `LIKE` with another filter, keep the standard SQL clause order and join conditions with `AND` inside the `WHERE` clause.",
                 "hint_1": "You need one `WHERE` clause, not two separate ones.",
-                "hint_2": "The pattern should end with `@example.com`, and the second condition should check `is_test = 0`."
+                "hint_2": "Check which side of the pattern should stay fixed and where the wildcard should allow extra characters."
               },
               "tokens": {
                 "t1": "SELECT full_name, email",
@@ -134,7 +134,7 @@
               "hint": "For 'starts with M', the wildcard goes after the letter.",
               "help": {
                 "concept": "A starts-with `LIKE` pattern places `%` after the starting text so any remaining characters are allowed after it.",
-                "hint_1": "The pattern should begin with `M`, not end with it.",
+                "hint_1": "Check which side of the pattern should stay fixed and where the wildcard should allow extra characters.",
                 "hint_2": "You want `M` followed by any number of characters."
               },
               "template": "WHERE full_name LIKE '[blank1]'",
@@ -165,33 +165,33 @@
             "ci_find_example_emails": {
               "title": "Find example.com emails",
               "prompt": "Write a query that returns the `id`, `full_name`, and `email` columns for customers whose email ends with `@example.com`. Use the `customers` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \n  id,\n  full_name,\n  email\nFROM customers\nWHERE ;"
             },
             "ci_find_test_names": {
               "title": "Find names containing Test",
               "prompt": "Write a query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use `LIKE` with the correct wildcard pattern. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \n  id,\n  full_name\nFROM customers\nWHERE ;"
             },
             "ci_real_example_customers": {
               "title": "Filter real customers with example.com emails",
               "prompt": "Write a query that returns `full_name`, `email`, and `is_test` for rows where the email ends with `@example.com` and `is_test` is `0`. This should keep real customers only. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \n  full_name,\n  email,\n  is_test\nFROM customers\nWHERE ;"
             }

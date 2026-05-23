@@ -167,33 +167,33 @@
             "ci_cheapest_three": {
               "title": "Query the 3 cheapest products",
               "prompt": "Write a query that shows `name` and `price` from `products` for the 3 cheapest products. Sort by `price` from lowest to highest, then keep only 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT\n  name,\n  price\nFROM products\n-- TODO: sort by the lowest price first\n-- TODO: keep only 3 rows\n;"
             },
             "ci_most_expensive_two": {
               "title": "Query the 2 most expensive products",
               "prompt": "Write a query that shows `name`, `category`, and `price` for the 2 most expensive products in `products`. Sort by `price` from highest to lowest, then keep only 2 rows.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT\n  name,\n  category,\n  price\nFROM products\n-- TODO: sort so the highest price comes first\n-- TODO: keep only 2 rows\n;"
             },
             "ci_newest_two": {
               "title": "Query the 2 newest products",
               "prompt": "Write a query that shows `name` and `created_at` for the 2 newest products. Sort by `created_at` so the newest dates come first, then keep only 2 rows.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT\n  name,\n  created_at\nFROM products\n-- TODO: sort by newest date first\n-- TODO: keep only 2 rows\n;"
             }

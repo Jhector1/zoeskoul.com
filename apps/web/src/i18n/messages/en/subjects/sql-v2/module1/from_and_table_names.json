@@ -167,33 +167,33 @@
             "ci_select_all_products": {
               "title": "Show every column from products",
               "prompt": "Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "-- Return all columns from the products table\nSELECT \nFROM ;"
             },
             "ci_select_names_from_products": {
               "title": "Show product names",
               "prompt": "Write a query that returns only the `name` column from the `products` table. Use the SQL editor and check that the results table shows one column named `name`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "-- Return only the name column\nSELECT \nFROM products;"
             },
             "ci_select_price_and_stock": {
               "title": "Show two columns from products",
               "prompt": "Write a query that returns the `price` and `stock` columns from the `products` table. Write the query in the SQL editor, click Run query, and confirm the results table has those two columns.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "-- Return the price and stock columns\nSELECT price\nFROM products;"
             }

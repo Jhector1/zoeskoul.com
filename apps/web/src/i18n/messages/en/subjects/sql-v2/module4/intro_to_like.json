@@ -134,7 +134,7 @@
               "hint": "To match values that end with `@example.com`, allow any text before it.",
               "help": {
                 "concept": "A suffix match uses `%` before the fixed ending text so any earlier characters are allowed.",
-                "hint_1": "The missing value should begin with a wildcard, not end with one.",
+                "hint_1": "Check which side of the pattern should stay fixed and where the wildcard should allow extra characters.",
                 "hint_2": "Choose the option that keeps `@example.com` fixed at the end of the pattern."
               },
               "template": "WHERE email LIKE [blank1]",
@@ -152,7 +152,7 @@
               "help": {
                 "concept": "To match text anywhere inside a value, place `%` before and after the target text.",
                 "hint_1": "The letter `a` should stay in the middle of the pattern.",
-                "hint_2": "Pick the choice that allows characters both before and after `a`."
+                "hint_2": "Choose the option that allows characters both before and after `a`."
               },
               "template": "WHERE full_name LIKE [blank1]",
               "choices": [
@@ -165,33 +165,33 @@
             "ci_like_city_prefix": {
               "title": "Find cities starting with Chi",
               "prompt": "Write a query that shows `full_name` and `city` for customers whose `city` starts with `Chi`. Use the `customers` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM customers\nWHERE ;"
             },
             "ci_like_email_domain": {
               "title": "Find example.com emails",
               "prompt": "Write a query that shows `full_name` and `email` for customers whose email ends with `@example.com`. Exclude rows where `email` is NULL by relying on the pattern match. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM customers\nWHERE ;"
             },
             "ci_like_active_name_contains": {
               "title": "Find active customers with a in the name",
               "prompt": "Write a query that shows `full_name` and `status` for customers whose `full_name` contains the letter `a` anywhere and whose `status` is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM customers\nWHERE ;"
             }

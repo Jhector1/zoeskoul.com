@@ -23,6 +23,16 @@ import {
 
 type BoundTarget = { id: string; exerciseKey?: string; onPatch: (patch: any) => void };
 
+export type ToolStateSeed = {
+    compatibleSaved: any;
+    initialLang: WorkspaceLanguage;
+    initialCode: string;
+    initialStdin: string;
+    initialWorkspace: WorkspaceStateV2 | null;
+    initialWorkspaceKey: string;
+    initialResolvedSql: ReturnType<typeof resolveSqlRunnerConfig>;
+};
+
 type ToolSnap = {
     topicId: string;
     toolKey: string;
@@ -160,6 +170,74 @@ function getStateWorkspace(value: any): WorkspaceStateV2 | null {
     if (value?.codeWorkspace?.version === 2) return value.codeWorkspace as WorkspaceStateV2;
     if (value?.ideWorkspace?.version === 2) return value.ideWorkspace as WorkspaceStateV2;
     return null;
+}
+
+export function resolveToolStateSeed(args: {
+    saved: any;
+    defaultLang: WorkspaceLanguage;
+    defaultCode: string;
+    defaultStdin: string;
+    defaultSqlDialect: SqlDialect;
+}): ToolStateSeed {
+    const compatibleSaved = (() => {
+        if (!args.saved) return null;
+        const savedWorkspace = getStateWorkspace(args.saved);
+        return stateLanguageMatches(args.saved, args.defaultLang, savedWorkspace)
+            ? args.saved
+            : null;
+    })();
+
+    const initialLang =
+        getStateLanguage(compatibleSaved, getStateWorkspace(compatibleSaved)) ??
+        args.defaultLang;
+    const initialWorkspace =
+        compatibleSaved?.workspace && typeof compatibleSaved.workspace === "object"
+            ? (compatibleSaved.workspace as WorkspaceStateV2)
+            : null;
+    const initialCode =
+        deriveEntryCode(initialWorkspace) ||
+        (typeof compatibleSaved?.code === "string"
+            ? compatibleSaved.code
+            : args.defaultCode);
+    const initialStdin =
+        typeof initialWorkspace?.stdin === "string"
+            ? initialWorkspace.stdin
+            : typeof compatibleSaved?.stdin === "string"
+                ? compatibleSaved.stdin
+                : args.defaultStdin;
+    const initialWorkspaceKey = workspaceKeyOf(initialWorkspace);
+    const initialResolvedSql = resolveSqlRunnerConfig({
+        language: initialLang,
+        sqlDialect: (compatibleSaved?.sqlDialect as SqlDialect) ?? args.defaultSqlDialect,
+        sqlDatasetId:
+            typeof compatibleSaved?.sqlDatasetId === "string"
+                ? compatibleSaved.sqlDatasetId
+                : undefined,
+        sqlSchemaSql:
+            typeof compatibleSaved?.sqlSchemaSql === "string"
+                ? compatibleSaved.sqlSchemaSql
+                : undefined,
+        sqlSeedSql:
+            typeof compatibleSaved?.sqlSeedSql === "string"
+                ? compatibleSaved.sqlSeedSql
+                : undefined,
+        sqlInitialTableSnapshots:
+            compatibleSaved?.sqlInitialTableSnapshots &&
+            typeof compatibleSaved.sqlInitialTableSnapshots === "object"
+                ? (compatibleSaved.sqlInitialTableSnapshots as SqlTableSnapshots)
+                : undefined,
+        defaultSqlDialect: args.defaultSqlDialect,
+    });
+
+    return {
+        compatibleSaved,
+        initialLang,
+        initialCode,
+        initialStdin,
+        initialWorkspace,
+        initialWorkspaceKey,
+        initialResolvedSql,
+    };
 }
 
 function workspaceWithEntryCode(
@@ -566,46 +644,25 @@ export function useToolCodeRunnerState(args: {
         return progressSaved;
     }, [progress, viewTid, effectiveToolKey, effectiveBoundId, exercises, scopeKey]);
 
-    const compatibleSaved = useMemo(() => {
-        if (!saved) return null;
-
-        const savedWorkspace = getStateWorkspace(saved);
-        return stateLanguageMatches(saved, defaultLang, savedWorkspace) ? saved : null;
-    }, [saved, defaultLang]);
-
-    const initialLang =
-        getStateLanguage(compatibleSaved, getStateWorkspace(compatibleSaved)) ??
-        defaultLang;
-    const initialWorkspace =
-        compatibleSaved?.workspace && typeof compatibleSaved.workspace === "object"
-            ? (compatibleSaved.workspace as WorkspaceStateV2)
-            : null;
-    const initialCode =
-        deriveEntryCode(initialWorkspace) ||
-        (typeof compatibleSaved?.code === "string" ? compatibleSaved.code : defaultCode);
-    const initialStdin =
-        typeof initialWorkspace?.stdin === "string"
-            ? initialWorkspace.stdin
-            : typeof compatibleSaved?.stdin === "string"
-                ? compatibleSaved.stdin
-                : defaultStdin;
-    const initialWorkspaceKey = workspaceKeyOf(initialWorkspace);
-
-    const initialResolvedSql = resolveSqlRunnerConfig({
-        language: initialLang,
-        sqlDialect: (compatibleSaved?.sqlDialect as SqlDialect) ?? defaultSqlDialect,
-        sqlDatasetId:
-            typeof compatibleSaved?.sqlDatasetId === "string" ? compatibleSaved.sqlDatasetId : undefined,
-        sqlSchemaSql:
-            typeof compatibleSaved?.sqlSchemaSql === "string" ? compatibleSaved.sqlSchemaSql : undefined,
-        sqlSeedSql:
-            typeof compatibleSaved?.sqlSeedSql === "string" ? compatibleSaved.sqlSeedSql : undefined,
-        sqlInitialTableSnapshots:
-            compatibleSaved?.sqlInitialTableSnapshots && typeof compatibleSaved.sqlInitialTableSnapshots === "object"
-                ? (compatibleSaved.sqlInitialTableSnapshots as SqlTableSnapshots)
-                : undefined,
-        defaultSqlDialect,
-    });
+    const {
+        compatibleSaved,
+        initialLang,
+        initialCode,
+        initialStdin,
+        initialWorkspace,
+        initialWorkspaceKey,
+        initialResolvedSql,
+    } = useMemo(
+        () =>
+            resolveToolStateSeed({
+                saved,
+                defaultLang,
+                defaultCode,
+                defaultStdin,
+                defaultSqlDialect,
+            }),
+        [saved, defaultLang, defaultCode, defaultStdin, defaultSqlDialect],
+    );
 
     const [toolLang, setToolLang0] = useState<WorkspaceLanguage>(initialLang);
     const [toolCode, setToolCode0] = useState<string>(initialCode);

@@ -57,7 +57,7 @@
               "help": {
                 "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
                 "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Remove options from unrelated Python areas, then choose the one that fits the question."
+                "hint_2": "Remove options from unrelated SQL clauses, then choose the one that fits the question."
               },
               "options": {
                 "a": "AND",
@@ -166,33 +166,33 @@
             "ci_missing_or_test_accounts": {
               "title": "Find missing emails or test-like names",
               "prompt": "Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where the email is missing or the full name contains `Test`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM customers\nWHERE ;"
             },
             "ci_active_example_emails": {
               "title": "Find active example.com customers",
               "prompt": "Write a query that returns `id`, `full_name`, `email`, and `status` for customers whose email ends with `@example.com` and whose status is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, email, status\nFROM customers\nWHERE ;"
             },
             "ci_grouped_test_email_filter": {
               "title": "Use grouped conditions for test records",
               "prompt": "Write a query that returns `id`, `full_name`, `email`, and `is_test` for rows where the email is missing or contains `test`, but only when `is_test = 1`. Use parentheses so the email conditions are grouped together. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, email, is_test\nFROM customers\nWHERE ( )\n  AND ;"
             }

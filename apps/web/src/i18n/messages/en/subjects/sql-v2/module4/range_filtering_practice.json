@@ -34,33 +34,33 @@
             "ci_city_list_filter": {
               "title": "Filter customers by a city list",
               "prompt": "Write a query that shows `full_name`, `city`, and `status` for customers whose city is either `Chicago` or `Miami`. Sort the results by `full_name` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \n  full_name,\n  city,\n  status\nFROM customers\nWHERE city IN (/* add cities here */)\nORDER BY /* add column here */;"
             },
             "ci_signup_date_range": {
               "title": "Find customers in a signup date range",
               "prompt": "Write a query that shows `id`, `full_name`, and `signup_date` for customers who signed up between `2026-01-12` and `2026-01-25`, inclusive. Sort by `signup_date` in ascending order.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN /* start date */ AND /* end date */\nORDER BY signup_date;"
             },
             "ci_missing_email_non_test": {
               "title": "Find real customers with missing email",
               "prompt": "Write a query that shows `full_name`, `email`, and `is_test` for customers whose email is missing and who are not test accounts. Sort by `full_name` in ascending order.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT full_name, email, is_test\nFROM customers\nWHERE /* missing email condition */\n  AND /* real customer condition */\nORDER BY full_name;"
             },
@@ -103,7 +103,7 @@
               "help": {
                 "concept": "A list filter can be written with `IN (...)` or with separate equality checks joined by `OR`.",
                 "hint_1": "Check whether each option keeps exactly the two cities named in the prompt.",
-                "hint_2": "One correct answer uses `IN`, and another uses two `city = ...` conditions joined with `OR`."
+                "hint_2": "One matching answer uses `IN`, and another uses two `city = ...` conditions joined with `OR`."
               },
               "options": {
                 "a": "city IN ('Chicago', 'Miami')",

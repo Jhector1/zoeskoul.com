@@ -135,7 +135,7 @@
               "help": {
                 "concept": "Text comparisons with `=` use the exact text value from the table.",
                 "hint_1": "Look at the category names in the products data: Art, Home, and the missing term.",
-                "hint_2": "The correct choice is the category used by Notebook and Fountain Pen."
+                "hint_2": "The matching choice is the category used by Notebook and Fountain Pen."
               },
               "template": "SELECT name FROM products WHERE category = '[blank1]';",
               "choices": [
@@ -152,7 +152,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT * FROM products WHERE [blank1] = 'Notebook';",
               "choices": [
@@ -165,33 +165,33 @@
             "eq-code-1": {
               "title": "Find all Art products",
               "prompt": "Write a query that shows the `id`, `name`, and `category` columns for products whose category is exactly `Art`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM products\nWHERE ;"
             },
             "eq-code-2": {
               "title": "Find the product with stock 3",
               "prompt": "Write a query that returns the `name` and `stock` columns for the product whose stock is exactly 3. Use the SQL editor and check the results table after you click Run query.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name\nFROM products\nWHERE stock = ;"
             },
             "eq-code-3": {
               "title": "Match one exact product name",
               "prompt": "Write a query that shows all columns for the product whose name is exactly `Desk Lamp`. Write the query in the SQL editor, click Run query, and confirm that the results table shows one matching row.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT *\nFROM products\nWHERE ;"
             }

@@ -10,9 +10,52 @@ export type GenerateJsonArgs = {
       | "CoursePlan"
       | "NormalizedPlanRepair"
       | "TopicAuthoringDraft"
-      | "TranslatedEntries"
-      | "ExerciseRepair";
+      | "TranslatedEntries";
 };
+
+export type GeneratedJsonMetadata = {
+  provider: string;
+  model: string;
+  temperature: number;
+  seed?: number;
+  schemaName: GenerateJsonArgs["schemaName"];
+  strictSchema: boolean;
+};
+
+export type GeneratedJsonResult<T> = GeneratedJsonMetadata & {
+  rawText: string;
+  parsedJson: unknown;
+  value: T;
+};
+
+export class GeneratedJsonError extends Error {
+  readonly code: string;
+  readonly metadata: GeneratedJsonMetadata;
+  readonly rawText?: string;
+  readonly parsedJson?: unknown;
+  readonly validationErrors?: string[];
+
+  constructor(args: {
+    code: string;
+    message: string;
+    metadata: GeneratedJsonMetadata;
+    rawText?: string;
+    parsedJson?: unknown;
+    validationErrors?: string[];
+    cause?: unknown;
+  }) {
+    super(args.message);
+    this.name = "GeneratedJsonError";
+    this.code = args.code;
+    this.metadata = args.metadata;
+    this.rawText = args.rawText;
+    this.parsedJson = args.parsedJson;
+    this.validationErrors = args.validationErrors;
+    if (args.cause !== undefined) {
+      (this as Error & { cause?: unknown }).cause = args.cause;
+    }
+  }
+}
 
 export type PlanRepairDraft = {
   repairedPlan: NormalizedCoursePlan;
@@ -28,6 +71,7 @@ export type TranslatedEntries = {
 
 export type AiProvider = {
   generateJson<T>(args: GenerateJsonArgs): Promise<T>;
+  generateJsonDetailed?<T>(args: GenerateJsonArgs): Promise<GeneratedJsonResult<T>>;
 };
 
 export type TopicRetryContext = {

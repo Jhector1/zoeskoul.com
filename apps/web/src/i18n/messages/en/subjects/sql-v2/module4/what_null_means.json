@@ -87,7 +87,7 @@
               "hint": "Check the sample rows for missing entries.",
               "help": {
                 "concept": "A column contains NULL when at least one row has a missing value in that column.",
-                "hint_1": "Look at rows like Leo Grant, Liam Scott, and Noah Kim to see which fields are missing.",
+                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
                 "hint_2": "Pick the columns where the sample data shows blank missing entries, not columns filled in for every row."
               },
               "options": {
@@ -164,33 +164,33 @@
             "code_missing_emails": {
               "title": "Find customers with missing emails",
               "prompt": "Write a query that shows `id`, `full_name`, and `email` for customers whose `email` is missing. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, email\nFROM customers\nWHERE ;"
             },
             "code_present_cities_real_customers": {
               "title": "Show real customers with a city",
               "prompt": "Write a query that shows `full_name`, `city`, and `status` for customers whose `city` is present and whose `is_test` value is `0`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT full_name, city, status\nFROM customers\nWHERE ;"
             },
             "code_inactive_missing_email": {
               "title": "Find inactive customers missing email",
               "prompt": "Write a query that shows `id`, `full_name`, and `status` for customers who are `inactive` and have no email value. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'inactive' AND ;"
             }

@@ -4,7 +4,7 @@
       "sql-v2-0": {
         "running_your_first_query": {
           "label": "Running Your First Query",
-          "summary": "Learn how to write and run a simple SELECT query in the browser workspace to view data from the students table.",
+          "summary": "Write and run your first safe SELECT queries in the browser SQL workspace.",
           "cards": {
             "sketch0": {
               "title": "What a first SQL query does"
@@ -79,7 +79,7 @@
                 "a": "SELECT * FROM students;",
                 "b": "SELECT name, city FROM students;",
                 "c": "SELECT * FROM student;",
-                "d": "DELETE FROM students;"
+                "d": "SELECT FROM students;"
               }
             },
             "mc_2": {
@@ -137,7 +137,7 @@
               "help": {
                 "concept": "The FROM clause must name the exact table that exists in the dataset. In this topic, the table is called `the missing term`.",
                 "hint_1": "Look at the schema browser or the examples in the lesson for the table name.",
-                "hint_2": "The correct choice is the plural table name used throughout the topic."
+                "hint_2": "The matching choice is the plural table name used throughout the topic."
               },
               "template": "SELECT * FROM [blank1];",
               "choices": [
@@ -167,33 +167,33 @@
             "ci_1": {
               "title": "Show every column and row",
               "prompt": "Write a query that shows all columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "-- Show all columns from the students table\nSELECT \nFROM students;"
             },
             "ci_2": {
               "title": "Show only student names",
               "prompt": "Write a query that returns only the `name` column from the `students` table. Use the SQL editor, click Run query, and check that the results table has one column.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "-- Return one column from students\nSELECT \nFROM students;"
             },
             "ci_3": {
               "title": "Show names and cities",
               "prompt": "Write a query that returns the `name` and `city` columns from the `students` table. Write the query in the SQL editor, click Run query, and check the two-column results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "-- Return two columns from students\nSELECT \nFROM students;"
             }

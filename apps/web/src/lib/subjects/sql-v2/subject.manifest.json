@@ -57,7 +57,12 @@
       "meta": {
         "estimatedMinutes": 240,
         "prereqKeys": [],
-        "outcomeKeys": [],
+        "outcomeKeys": [
+          "modules.sql-v2.sql-v2-0.outcomes.0",
+          "modules.sql-v2.sql-v2-0.outcomes.1",
+          "modules.sql-v2.sql-v2-0.outcomes.2",
+          "modules.sql-v2.sql-v2-0.outcomes.3"
+        ],
         "whyKeys": [
           "modules.sql-v2.sql-v2-0.why.0",
           "modules.sql-v2.sql-v2-0.why.1"
@@ -180,7 +185,12 @@
         "prereqKeys": [
           "modules.sql-v2.sql-v2-0.title"
         ],
-        "outcomeKeys": [],
+        "outcomeKeys": [
+          "modules.sql-v2.sql-v2-1.outcomes.0",
+          "modules.sql-v2.sql-v2-1.outcomes.1",
+          "modules.sql-v2.sql-v2-1.outcomes.2",
+          "modules.sql-v2.sql-v2-1.outcomes.3"
+        ],
         "whyKeys": [
           "modules.sql-v2.sql-v2-1.why.0",
           "modules.sql-v2.sql-v2-1.why.1"
@@ -303,7 +313,12 @@
         "prereqKeys": [
           "modules.sql-v2.sql-v2-1.title"
         ],
-        "outcomeKeys": [],
+        "outcomeKeys": [
+          "modules.sql-v2.sql-v2-2.outcomes.0",
+          "modules.sql-v2.sql-v2-2.outcomes.1",
+          "modules.sql-v2.sql-v2-2.outcomes.2",
+          "modules.sql-v2.sql-v2-2.outcomes.3"
+        ],
         "whyKeys": [
           "modules.sql-v2.sql-v2-2.why.0",
           "modules.sql-v2.sql-v2-2.why.1"
@@ -428,7 +443,12 @@
         "prereqKeys": [
           "modules.sql-v2.sql-v2-2.title"
         ],
-        "outcomeKeys": [],
+        "outcomeKeys": [
+          "modules.sql-v2.sql-v2-3.outcomes.0",
+          "modules.sql-v2.sql-v2-3.outcomes.1",
+          "modules.sql-v2.sql-v2-3.outcomes.2",
+          "modules.sql-v2.sql-v2-3.outcomes.3"
+        ],
         "whyKeys": [
           "modules.sql-v2.sql-v2-3.why.0",
           "modules.sql-v2.sql-v2-3.why.1"
@@ -551,7 +571,12 @@
         "prereqKeys": [
           "modules.sql-v2.sql-v2-3.title"
         ],
-        "outcomeKeys": [],
+        "outcomeKeys": [
+          "modules.sql-v2.sql-v2-4.outcomes.0",
+          "modules.sql-v2.sql-v2-4.outcomes.1",
+          "modules.sql-v2.sql-v2-4.outcomes.2",
+          "modules.sql-v2.sql-v2-4.outcomes.3"
+        ],
         "whyKeys": [
           "modules.sql-v2.sql-v2-4.why.0",
           "modules.sql-v2.sql-v2-4.why.1"

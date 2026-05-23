@@ -56,8 +56,8 @@
               "hint": "For 'starts with', the wildcard goes after the text.",
               "help": {
                 "concept": "A starts-with search uses `LIKE` with the known beginning text first, followed by `%` to allow any remaining characters.",
-                "hint_1": "The pattern should begin with `Olivia`, not end with it.",
-                "hint_2": "Choose the condition where `%` appears after `Olivia`, so extra characters are allowed only to the right."
+                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
+                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
               },
               "options": {
                 "a": "full_name LIKE '%Olivia%'",
@@ -151,8 +151,8 @@
               "hint": "For starts with, keep the known text first and put `%` after it.",
               "help": {
                 "concept": "A starts-with `LIKE` pattern begins with the exact starting text and ends with `%` so later characters can vary.",
-                "hint_1": "The pattern should begin with `Mia`, not with `%`.",
-                "hint_2": "Pick the choice that keeps `Mia` fixed on the left and allows any remaining characters to the right."
+                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
+                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
               },
               "template": "WHERE full_name LIKE '[blank1]'",
               "choices": [
@@ -165,33 +165,33 @@
             "ci_find_example_domain": {
               "title": "Find customers with example.com emails",
               "prompt": "Write a query that returns `id`, `full_name`, and `email` for customers whose email ends with `example.com`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE ;"
             },
             "ci_find_test_names": {
               "title": "Find names containing Test",
               "prompt": "Write a query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use the SQL editor and check the results table after you click Run query.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE ;"
             },
             "ci_find_internal_or_test_email": {
               "title": "Find internal or test-style emails",
               "prompt": "Write a query that returns `full_name` and `email` for customers whose email contains `internal` or contains `test`. Use `LIKE` with `%` and combine the conditions so either match is included.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT full_name, email\nFROM customers\nWHERE ;"
             }

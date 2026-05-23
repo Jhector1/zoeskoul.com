@@ -1,4 +1,8 @@
 import type { TopicAuthoringDraft, TopicSeed } from "@zoeskoul/curriculum-contracts";
+import {
+    assertProfileSupportsCodeInput,
+    getCurriculumProfile,
+} from "@zoeskoul/curriculum-profiles";
 import {RetryableTopicValidationError} from "../validate/RetryableTopicValidationError.js";
 
 function normalizeText(value: unknown): string {
@@ -98,9 +102,12 @@ function stripAnswerLeakFromTexts(args: {
     return {
         hint: "Use the lesson explanation and the wording of this question to narrow the answer.",
         help: {
-            concept: "This support text was repaired because the original wording revealed the answer too directly.",
-            hint_1: "Compare the question to the lesson example and remove choices from unrelated topics.",
-            hint_2: "Choose the option that directly matches the question without relying on answer wording.",
+            concept:
+                "This support text was repaired because the original wording revealed the answer too directly.",
+            hint_1:
+                "Compare the question to the lesson example and remove details that do not match the requested concept.",
+            hint_2:
+                "Use the role or evidence named in the prompt instead of relying on answer wording.",
         },
     };
 }
@@ -120,7 +127,7 @@ function makeSafeChoiceHelp(args: {
         help: {
             concept: `This question checks the specific idea in: "${question}". Compare each choice to that idea.`,
             hint_1: "Look for the choice that fits the exact topic named in the question.",
-            hint_2: "Ignore choices that belong to a different Python use case or concept.",
+            hint_2: "Remove choices that do not match the concept or evidence named in the question.",
         },
     };
 }
@@ -156,35 +163,18 @@ function makeSafeCodeHelp(args: {
     prompt: string;
     seed?: TopicSeed;
 }) {
-    const task = args.title || args.prompt || "this coding task";
-    const editorLabel =
-        args.seed?.workspacePolicy?.workspace.ui.editorLabel ??
-        (args.seed?.profileId === "sql" ? "SQL editor" : "code editor");
-    const runButtonLabel =
-        args.seed?.workspacePolicy?.workspace.ui.runButtonLabel ??
-        (args.seed?.profileId === "sql" ? "Run query" : "Run");
-    const resultsLabel =
-        args.seed?.workspacePolicy?.workspace.ui.resultsTableLabel ??
-        args.seed?.workspacePolicy?.workspace.ui.outputPanelLabel ??
-        (args.seed?.profileId === "sql" ? "results table" : "output panel");
-
-    if (args.seed?.profileId === "sql") {
-        return {
-            hint: `Read the task "${task}" and focus on the query pattern you need.`,
-            help: {
-                concept: `This SQL exercise checks whether your query returns the requested result for: "${task}".`,
-                hint_1: `Check the table name and selected columns in the ${editorLabel}.`,
-                hint_2: `Click ${runButtonLabel} and compare the ${resultsLabel} with the expected result.`,
-            },
-        };
+    if (args.seed?.profileId) {
+        const profile = getCurriculumProfile(args.seed.profileId);
+        const fallback = assertProfileSupportsCodeInput(profile).getHelpFallback?.(args);
+        if (fallback) return fallback;
     }
 
     return {
-        hint: `Read the task "${task}" and identify the required result.`,
+        hint: `Read the task "${args.title || args.prompt || "this coding task"}" and identify the required result.`,
         help: {
-            concept: `This coding exercise checks whether your code produces the requested result for: "${task}".`,
-            hint_1: `Use the statement or expression that matches the required behavior in the ${editorLabel}.`,
-            hint_2: `Click ${runButtonLabel} and compare the ${resultsLabel} with the expected result.`,
+            concept: `This coding exercise checks whether your code produces the requested result for: "${args.title || args.prompt || "this coding task"}".`,
+            hint_1: "Use the statement or expression that matches the required behavior in the code editor.",
+            hint_2: "Click Run and compare the output panel with the expected result.",
         },
     };
 }

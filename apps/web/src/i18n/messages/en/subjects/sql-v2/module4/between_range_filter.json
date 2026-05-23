@@ -166,33 +166,33 @@
             "ci_between_january_window": {
               "title": "Query customers in a signup date range",
               "prompt": "Write a query that returns `id`, `full_name`, and `signup_date` from `customers` for rows where `signup_date` is between `2026-01-12` and `2026-01-25`, inclusive. Sort the results by `signup_date` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT\n  id,\n  full_name,\n  signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'\n-- add sorting here\n;"
             },
             "ci_between_ids_non_test": {
               "title": "Filter a numeric range and exclude test rows",
               "prompt": "Write a query that returns `id`, `full_name`, and `is_test` from `customers` for rows where `id` is between 2 and 7, inclusive, and `is_test` is 0. Sort by `id` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, is_test\nFROM customers\nWHERE id BETWEEN 2 AND 7\n  AND \nORDER BY id ASC;"
             },
             "ci_between_active_signups": {
               "title": "Combine BETWEEN with another filter",
               "prompt": "Write a query that returns `full_name`, `status`, and `signup_date` from `customers` for rows where `signup_date` is between `2026-01-10` and `2026-02-01`, inclusive, and `status` is `active`. Sort by `signup_date` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT full_name, status, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-10' AND '2026-02-01'\n  -- add one more condition here\nORDER BY signup_date ASC;"
             }

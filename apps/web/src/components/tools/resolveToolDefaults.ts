@@ -1,5 +1,6 @@
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
+import { getCourseProfile, resolveCourseLanguage } from "@/components/review/module/runtime/courseProfiles";
 
 export type ToolDefaults = {
     defaultLang: WorkspaceLanguage;
@@ -11,8 +12,12 @@ export type ToolDefaults = {
 export function resolveToolDefaults(args: {
     subjectSlug: string;
     moduleMeta?: unknown;
+    profileId?: string | null;
+    versionFamily?: string | null;
+    runtimeDefaults?: unknown;
+    language?: string | null;
 }): ToolDefaults {
-    const { subjectSlug, moduleMeta } = args;
+    const { subjectSlug, moduleMeta, profileId, versionFamily, runtimeDefaults, language } = args;
 
     const meta = (moduleMeta ?? {}) as {
         toolDefaults?: Partial<ToolDefaults>;
@@ -30,14 +35,32 @@ export function resolveToolDefaults(args: {
         };
     }
 
+    const resolvedLanguage = resolveCourseLanguage({
+        subjectSlug,
+        language,
+        profileId,
+        versionFamily,
+        runtimeDefaults: isRecord(runtimeDefaults) ? runtimeDefaults : null,
+    });
+
+    if (resolvedLanguage === "sql") {
+        return sqlDefaults();
+    }
+
+    const profile = getCourseProfile({
+        subjectSlug,
+        language,
+        profileId,
+        versionFamily,
+    });
+
+    if (profile.id === "python") {
+        return pythonDefaults();
+    }
+
     switch (subjectSlug) {
         case "sql":
-            return {
-                defaultLang: "sql",
-                defaultCode: `SELECT 'Hello SQL' AS message;`,
-                defaultStdin: "",
-                defaultSqlDialect: DEFAULT_SQL_DIALECT,
-            };
+            return sqlDefaults();
 
         case "java":
             return {
@@ -94,13 +117,30 @@ export function resolveToolDefaults(args: {
 
         case "python":
         default:
-            return {
-                defaultLang: "python",
-                defaultCode: `print("Hello Python!")`,
-                defaultStdin: "",
-                defaultSqlDialect: DEFAULT_SQL_DIALECT,
-            };
+            return pythonDefaults();
     }
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+    return !!value && typeof value === "object" && !Array.isArray(value);
+}
+
+function sqlDefaults(): ToolDefaults {
+    return {
+        defaultLang: "sql",
+        defaultCode: `SELECT 'Hello SQL' AS message;`,
+        defaultStdin: "",
+        defaultSqlDialect: DEFAULT_SQL_DIALECT,
+    };
+}
+
+function pythonDefaults(): ToolDefaults {
+    return {
+        defaultLang: "python",
+        defaultCode: `print("Hello Python!")`,
+        defaultStdin: "",
+        defaultSqlDialect: DEFAULT_SQL_DIALECT,
+    };
 }
 
 function starterFor(lang: WorkspaceLanguage): string {

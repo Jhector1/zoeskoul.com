@@ -37,33 +37,33 @@
             "ci_not_in_status_exclude": {
               "title": "Exclude inactive and draft statuses",
               "prompt": "Write a query that shows `id`, `full_name`, and `status` from `customers` for customers whose `status` is not `inactive` and not `draft`. Order the results by `id` ascending. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, status\nFROM customers\nWHERE ;"
             },
             "ci_not_in_city_exclude": {
               "title": "Exclude a list of cities",
               "prompt": "Write a query that shows `full_name` and `city` from `customers` for rows where `city` is not `Chicago` and not `Miami`. Order the results by `full_name` ascending.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT full_name, city\nFROM customers\n-- add your filter here\nORDER BY full_name ASC;"
             },
             "ci_not_in_with_null_include": {
               "title": "Exclude listed cities but keep missing cities",
               "prompt": "Write a query that shows `id`, `full_name`, and `city` from `customers` where the city is not `Chicago` and not `Miami`, but rows with a missing city should still be included. Order by `id` ascending.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n-- add one more condition so missing cities are included\n;"
             },
@@ -89,7 +89,7 @@
               "hint": "You want to exclude both listed city values.",
               "help": {
                 "concept": "Use `NOT IN` when you want values that are not any item in a list.",
-                "hint_1": "A plain `IN` would keep Chicago and Miami instead of excluding them.",
+                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
                 "hint_2": "Look for the option that applies `NOT IN` directly to the `city` column with both city names."
               },
               "options": {
@@ -121,7 +121,7 @@
               "hint": "Think about whether missing values behave like normal text values in comparisons.",
               "help": {
                 "concept": "`NULL` is a missing value marker, so it needs `IS NULL` or `IS NOT NULL` rather than normal equality-style list matching.",
-                "hint_1": "A row with `city` as `NULL` is not handled the same way as a row with `city = 'Chicago'`.",
+                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
                 "hint_2": "Choose the statements that say `IS NULL` may be needed alongside `NOT IN` when you want missing values included."
               },
               "options": {
@@ -186,7 +186,7 @@
               "hint": "Those values belong to the location field in this table.",
               "help": {
                 "concept": "The column in a `NOT IN` filter must match the type of values in the list.",
-                "hint_1": "Chicago and Miami are the missing term names, not statuses or dates.",
+                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
                 "hint_2": "Use the column that stores customer locations."
               },
               "template": "WHERE [blank1] NOT IN ('Chicago', 'Miami')",

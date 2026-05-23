@@ -192,7 +192,7 @@ export function buildSemanticExpected(
     }
 
     return makeProgrammingExpected({
-        language: recipe.language,
+        language: recipe.language as Parameters<typeof makeProgrammingExpected>[0]["language"],
         checkMode: "semantic",
         semanticChecks: semanticChecks as SemanticCheck[],
         solutionCode: recipe.solutionCode,

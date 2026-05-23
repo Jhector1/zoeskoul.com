@@ -41,7 +41,7 @@
               "help": {
                 "concept": "To match one exact text value in SQL, use `=` with the column name and the text in quotes.",
                 "hint_1": "Look for a condition that compares `status` directly to one quoted value.",
-                "hint_2": "The correct choice does not use `IN`, `NOT`, or a different column."
+                "hint_2": "The matching choice does not use `IN`, `NOT`, or a different column."
               },
               "options": {
                 "a": "status = 'active'",
@@ -56,7 +56,7 @@
               "help": {
                 "concept": "`NOT IN` removes rows whose column value appears in the listed set.",
                 "hint_1": "Ask yourself what happens to rows where `status` is exactly `draft`.",
-                "hint_2": "The correct choice keeps every status except the listed one."
+                "hint_2": "The matching choice keeps every status except the listed one."
               },
               "options": {
                 "a": "It keeps only draft rows.",
@@ -164,33 +164,33 @@
             "ci_show_active_customers": {
               "title": "Query active customers",
               "prompt": "Write a query that returns `id`, `full_name`, and `status` from `customers` for rows where the status is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM customers\nWHERE ;"
             },
             "ci_show_active_or_draft": {
               "title": "Query multiple statuses",
               "prompt": "Write a query that returns `full_name`, `status`, and `city` from `customers` for rows where the status is either `active` or `draft`. Use `IN` for the filter. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT full_name, status, city\nFROM customers\nWHERE status IN ();"
             },
             "ci_exclude_draft_status": {
               "title": "Exclude a status",
               "prompt": "Write a query that returns `id`, `full_name`, `status`, and `is_test` from `customers` for rows whose status is not `draft`. Use `NOT IN` in the filter. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, status, is_test\nFROM customers\nWHERE status NOT IN ();"
             }

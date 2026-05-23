@@ -4,7 +4,7 @@
       "sql-v2-0": {
         "records_and_fields": {
           "label": "Records and Fields",
-          "summary": "Learn how a table stores records as rows and fields as columns, using a simple students table.",
+          "summary": "Learn how records are stored as rows and fields are represented by columns in a simple table.",
           "cards": {
             "sketch0": {
               "title": "Rows are records, columns are fields"
@@ -19,18 +19,18 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Read records and fields from the students table"
+              "title": "Connect records and fields to rows and columns"
             }
           },
           "projectSteps": {
             "ci_show_all_student_records": {
-              "title": "Show all student records"
+              "title": "Guided check: show all student records"
             },
             "ci_show_names_and_grades": {
-              "title": "Show two fields only"
+              "title": "Guided check: show two fields only"
             },
             "ci_show_id_name_city": {
-              "title": "Show three chosen fields"
+              "title": "Guided check: show three chosen fields"
             }
           },
           "quiz": {
@@ -40,7 +40,7 @@
               "hint": "Think about whether a record is a whole row or a single column.",
               "help": {
                 "concept": "A record in a database table is one complete row of related values about one item, such as one student.",
-                "hint_1": "Look at a row like `1, Noor, A, 15, Chicago`. Ask what whole piece of information it represents.",
+                "hint_1": "Use the table headers first, then compare each row with the question.",
                 "hint_2": "A record includes values from several fields together, not just one field name."
               },
               "options": {
@@ -101,7 +101,7 @@
             "dr-query-order-all-fields": {
               "title": "Build a basic query",
               "prompt": "Put the tokens in order to make a query that shows all fields from the `students` table.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
                 "hint_1": "Start with the piece that introduces the idea or action.",
@@ -117,7 +117,7 @@
             "dr-query-order-specific-fields": {
               "title": "Order the query parts",
               "prompt": "Arrange the tokens to make a query that shows the `name` and `city` fields from `students`.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
                 "hint_1": "Start with the piece that introduces the idea or action.",
@@ -165,35 +165,35 @@
               ]
             },
             "ci-show-all-student-records": {
-              "title": "Show all student records",
-              "prompt": "Write a query that shows every field and every record from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show all student records",
+              "prompt": "Complete a simple SELECT query that shows every field and every record from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "-- Show all fields from the students table\nSELECT\n  -- TODO: ask for all columns\nFROM students;"
             },
             "ci-show-names-and-grades": {
-              "title": "Show two fields only",
-              "prompt": "Write a query that shows only the `name` and `grade` fields from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show two fields only",
+              "prompt": "Complete a simple SELECT query that shows only the `name` and `grade` fields from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "-- Show only the name and grade fields\nSELECT\n  -- TODO: add the two field names\nFROM students;"
             },
             "ci-show-id-name-city": {
-              "title": "Show three chosen fields",
-              "prompt": "Write a query that shows the `id`, `name`, and `city` fields from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Guided check: show three chosen fields",
+              "prompt": "Complete a simple SELECT query that shows the `id`, `name`, and `city` fields from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
               },
               "starterCode": "-- Show id, name, and city\nSELECT\n  -- TODO: add the three requested fields\nFROM students;"
             }
@@ -208,15 +208,15 @@
         "records_and_fields": {
           "records-vs-fields": {
             "title": "Rows are records, columns are fields",
-            "bodyMarkdown": "A database table organizes information in a grid. In SQL, a **record** is one full row, and a **field** is one column.\n\nIn this topic, the `students` table has these fields:\n- `id`\n- `name`\n- `grade`\n- `age`\n- `city`\n\nA single record might look like this:\n- `1, Noor, A, 15, Chicago`\n\nThat one row is a complete record about one student. Each value in the row belongs to a field. For example, `Noor` is the value in the `name` field, and `Chicago` is the value in the `city` field.\n\nHere is a simple SQL query that shows all fields from the table:\n\n```sql\nSELECT *\nFROM students;\n```\n\nStep by step:\n- `SELECT *` means \"show all columns\"\n- `FROM students` means \"get them from the `students` table\"\n\nWhen you run this in the SQL editor and click **Run query**, the results table shows every record and every field in `students`.\n\n**Try it yourself:** Run the query, then look across one row and name the field for each value you see."
+            "bodyMarkdown": "A database table organizes information in a grid. In SQL, a **record** is one full row, and a **field** is one column.\n\nIn this topic, the `students` table has these fields:\n- `id`\n- `name`\n- `grade`\n- `age`\n- `city`\n\nA single record might look like this:\n- `1, Noor, A, 15, Chicago`\n\nThat one row is a complete record about one student. Each value in the row belongs to a field. For example, `Noor` is the value in the `name` field, and `Chicago` is the value in the `city` field.\n\nHere is a simple SQL query that shows all fields from the table:\n\n```sql\nSELECT *\nFROM students;\n```\n\nStep by step:\n- `SELECT *` means \"show all columns\"\n- `FROM students` means \"get them from the `students` table\"\n\nWhen you run this in the SQL editor and click **Run query**, the results table shows every record and every field in `students`.\n\n**Guided check:** Run the query, then look across one row and name the field for each value you see."
           },
           "reading-specific-fields": {
             "title": "Selecting specific fields",
-            "bodyMarkdown": "You do not always need every field. Sometimes you only want a few columns.\n\nFor example, if you only want student names and grades, you can ask for just those fields:\n\n```sql\nSELECT name, grade\nFROM students;\n```\n\nLine by line:\n- `SELECT name, grade` asks for only the `name` and `grade` fields\n- `FROM students` tells SQL which table to read\n\nThis query still uses the same records, but it shows only part of each record in the results table.\n\nWorked example:\n- The full record for Noor is `1, Noor, A, 15, Chicago`\n- If you select only `name, grade`, that record appears as `Noor, A`\n\nSo the record is still the same student, but you are viewing only some fields from it.\n\n**Your turn:** Change the query to `SELECT name, city FROM students;` and check how the results table changes."
+            "bodyMarkdown": "You do not always need every field. Sometimes you only want a few columns.\n\nFor example, if you only want student names and grades, you can ask for just those fields:\n\n```sql\nSELECT name, grade\nFROM students;\n```\n\nLine by line:\n- `SELECT name, grade` asks for only the `name` and `grade` fields\n- `FROM students` tells SQL which table to read\n\nThis query still uses the same records, but it shows only part of each record in the results table.\n\nWorked example:\n- The full record for Noor is `1, Noor, A, 15, Chicago`\n- If you select only `name, grade`, that record appears as `Noor, A`\n\nSo the record is still the same student, but you are viewing only some fields from it.\n\n**Guided check:** Change the query to `SELECT name, city FROM students;` and check how the results table changes."
           },
           "table-reading-mental-model": {
             "title": "Think of a table as many records with the same fields",
-            "bodyMarkdown": "A table works because every record follows the same field structure. In the `students` table, each row has an `id`, `name`, `grade`, `age`, and `city`.\n\nThat means SQL can read the table consistently.\n\nFor example, these are two records from the table:\n- `2, Mia, A, 14, Evanston`\n- `5, Zane, B, 16, Naperville`\n\nEven though the values are different, the fields are in the same order and mean the same thing in each record.\n\nA useful beginner idea is:\n- **table** = collection of records\n- **record** = one row\n- **field** = one column\n\nYou can inspect the table with a basic query:\n\n```sql\nSELECT id, name, city\nFROM students;\n```\n\nThis shows three fields for every record in the table.\n\n**Try this:** In the browser workspace, run the query and pick one row. Say which part is the record and which labels are the fields."
+            "bodyMarkdown": "A table works because every record follows the same field structure. In the `students` table, each row has an `id`, `name`, `grade`, `age`, and `city`.\n\nThat means SQL can read the table consistently.\n\nFor example, these are two records from the table:\n- `2, Mia, A, 14, Evanston`\n- `5, Zane, B, 16, Naperville`\n\nEven though the values are different, the fields are in the same order and mean the same thing in each record.\n\nA useful beginner idea is:\n- **table** = collection of records\n- **record** = one row\n- **field** = one column\n\nYou can inspect the table with a basic query:\n\n```sql\nSELECT id, name, city\nFROM students;\n```\n\nThis shows three fields for every record in the table.\n\n**Guided check:** In the browser workspace, run the query and pick one row. Say which part is the record and which labels are the fields."
           }
         }
       }

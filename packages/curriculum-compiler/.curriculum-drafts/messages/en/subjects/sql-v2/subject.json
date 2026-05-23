@@ -1,0 +1,41 @@
+{
+  "subjects": {
+    "sql-v2": {
+      "title": "SQL Foundations",
+      "description": "",
+      "moreComingSoon": "More SQL Foundations lessons are coming soon."
+    }
+  },
+  "modules": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "title": "Getting Started with SQL and Databases",
+        "description": "Build the learner's mental model before syntax: what SQL is, how databases organize information, and how questions become queries.",
+        "outcomes": [
+          "Explain what SQL is used for in real applications.",
+          "Identify tables, rows, columns, records, and fields.",
+          "Read simple table data and describe what it means.",
+          "Use the browser SQL workspace to run a beginner query."
+        ],
+        "why": [
+          "Builds confidence with getting started with sql and databases.",
+          "Prepares learners for the next skills in the course."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "sql-v2-0-1": {
+          "title": "What SQL Is",
+          "description": "Learn what sql means through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "what sql means"
+          ]
+        }
+      }
+    }
+  }
+}

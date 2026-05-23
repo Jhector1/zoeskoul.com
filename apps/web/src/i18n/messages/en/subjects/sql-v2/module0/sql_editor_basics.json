@@ -4,7 +4,7 @@
       "sql-v2-0": {
         "sql_editor_basics": {
           "label": "sql editor basics",
-          "summary": "Get comfortable with the SQL editor, Run query button, and results table by reading and running simple SELECT queries on the students table.",
+          "summary": "Get comfortable with the SQL editor, Run query button, and results table by reading and running simple SELECT queries.",
           "cards": {
             "sketch0": {
               "title": "What you use in the SQL editor"
@@ -154,7 +154,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT [blank1] FROM students;",
               "choices": [
@@ -167,33 +167,33 @@
             "ci_select_all_students": {
               "title": "Show the whole students table",
               "prompt": "Write a query that returns every column from the `students` table. Write the query in the SQL editor, click Run query, and check that the results table shows all five columns.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM students;"
             },
             "ci_select_names_only": {
               "title": "Return just student names",
               "prompt": "Write a query that returns only the `name` column from the `students` table. After you click Run query, the results table should show one column named `name` and one row for each student.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM students;"
             },
             "ci_select_two_columns": {
               "title": "Return names and cities",
               "prompt": "Write a query that returns the `name` and `city` columns from the `students` table. Run it and check that the results table has exactly those two column headers.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM students;"
             }

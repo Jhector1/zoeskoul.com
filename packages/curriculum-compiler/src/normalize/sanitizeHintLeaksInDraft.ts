@@ -1,4 +1,8 @@
 import type { TopicAuthoringDraft, TopicSeed } from "@zoeskoul/curriculum-contracts";
+import {
+    assertProfileSupportsCodeInput,
+    getCurriculumProfile,
+} from "@zoeskoul/curriculum-profiles";
 
 function normalizeComparable(value: string): string {
     return value
@@ -28,11 +32,11 @@ function containsSqlHelpLeak(text: string): boolean {
 
 function safeChoiceHelp() {
     return {
-        hint: "Read the question and connect it to the specific lesson example.",
+        hint: "Use the question wording and the lesson example to narrow the choices.",
         help: {
             concept: "This question checks a specific idea from the lesson, not general test-taking strategy.",
             hint_1: "Compare each option to the exact topic named in the question.",
-            hint_2: "Remove options from unrelated Python areas, then choose the one that fits the question.",
+            hint_2: "Remove options that do not match the concept or evidence named in the question.",
         },
     };
 }
@@ -59,36 +63,27 @@ function safeDragHelp() {
     };
 }
 
-function safeCodeHelp(seed?: TopicSeed) {
-    const editorLabel =
-        seed?.workspacePolicy?.workspace.ui.editorLabel ??
-        (seed?.profileId === "sql" ? "SQL editor" : "code editor");
-    const runButtonLabel =
-        seed?.workspacePolicy?.workspace.ui.runButtonLabel ??
-        (seed?.profileId === "sql" ? "Run query" : "Run");
-    const resultsLabel =
-        seed?.workspacePolicy?.workspace.ui.resultsTableLabel ??
-        seed?.workspacePolicy?.workspace.ui.outputPanelLabel ??
-        (seed?.profileId === "sql" ? "results table" : "output panel");
-
-    if (seed?.profileId === "sql") {
-        return {
-            hint: "Use the query pattern from the lesson.",
-            help: {
-                concept:
-                    "This SQL exercise checks whether your query returns the requested result.",
-                hint_1: "Check the table name and selected columns in the SQL editor.",
-                hint_2: `Click ${runButtonLabel} and compare the ${resultsLabel}.`,
-            },
-        };
+function safeCodeHelp(args: {
+    seed?: TopicSeed;
+    title: string;
+    prompt: string;
+}) {
+    if (args.seed?.profileId) {
+        const profile = getCurriculumProfile(args.seed.profileId);
+        const fallback = assertProfileSupportsCodeInput(profile).getHelpFallback?.({
+            title: args.title,
+            prompt: args.prompt,
+            seed: args.seed,
+        });
+        if (fallback) return fallback;
     }
 
     return {
         hint: "Read the coding task and identify the required result.",
         help: {
             concept: "This coding exercise checks whether your code produces the requested result.",
-            hint_1: `Use the statement or expression that fits the task in the ${editorLabel}.`,
-            hint_2: `Click ${runButtonLabel} and compare the ${resultsLabel} with the expected result.`,
+            hint_1: "Use the statement or expression that fits the task in the code editor.",
+            hint_2: "Click Run and compare the output panel with the expected result.",
         },
     };
 }
@@ -148,12 +143,15 @@ export function sanitizeHintLeaksInDraft(
                     : exercise.kind === "drag_reorder"
                         ? safeDragHelp()
                         : exercise.kind === "code_input"
-                            ? safeCodeHelp(seed)
+                            ? safeCodeHelp({
+                                seed,
+                                title: exercise.title,
+                                prompt: exercise.prompt,
+                            })
                             : safeChoiceHelp();
 
             const forceSqlFallback =
                 exercise.kind === "code_input" &&
-                seed?.profileId === "sql" &&
                 [
                     exercise.hint,
                     exercise.help.concept,

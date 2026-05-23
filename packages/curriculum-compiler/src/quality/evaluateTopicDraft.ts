@@ -40,13 +40,17 @@ export async function evaluateTopicDraft(args: {
     rawDraft: TopicAuthoringDraft;
     profileServices: ProfileServices;
 }): Promise<{
+    normalizedDraft: TopicAuthoringDraft;
     draft: TopicAuthoringDraft;
     repairReport: RepairReport;
     critiqueReport: CritiqueReport;
     semanticReport: SemanticValidationReport;
     hintWarnings: string[];
 }> {
-    let draft = normalizeTopicAuthoringDraft(args.rawDraft);
+    let draft = normalizeTopicAuthoringDraft(args.rawDraft, {
+        profileId: args.seed.profileId,
+    });
+    const normalizedDraft = draft;
 
     draft = await repairIncompleteExercises({
         provider: args.provider,
@@ -117,6 +121,7 @@ export async function evaluateTopicDraft(args: {
     ]);
 
     return {
+        normalizedDraft,
         draft,
         repairReport,
         critiqueReport,

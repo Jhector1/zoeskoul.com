@@ -122,13 +122,13 @@ export type TopicBundleShape = {
     topicFields: readonly ["labelKey", "summaryKey"];
     allowedCardKinds: readonly ["sketch", "project", "quiz"];
     allowedSketchArchetypes: readonly ["paragraph"];
-    allowedExerciseKinds: readonly [
-        "single_choice",
-        "multi_choice",
-        "drag_reorder",
-        "fill_blank_choice",
-        "code_input",
-    ];
+    allowedExerciseKinds: readonly (
+        | "single_choice"
+        | "multi_choice"
+        | "drag_reorder"
+        | "fill_blank_choice"
+        | "code_input"
+    )[];
 };
 
 export type MessageShape = {
@@ -182,7 +182,7 @@ export type ProjectShape = {
 };
 
 export type SubjectShapePack = {
-    profileId: "sql" | "python" | "math" | "language" | "web" | "data_science";
+    profileId: string;
     subjectManifest: SubjectManifestShape;
     topicBundle: TopicBundleShape;
     messages: MessageShape;

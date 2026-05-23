@@ -40,7 +40,7 @@
               "hint": "Look for ascending order on the `price` column.",
               "help": {
                 "concept": "To show the smallest numeric values first, SQL uses `ORDER BY` with ascending order on that column.",
-                "hint_1": "The correct choice must sort by `price`, not filter rows or limit rows.",
+                "hint_1": "The matching choice must sort by `price`, not filter rows or limit rows.",
                 "hint_2": "Find the option that uses `ORDER BY price` with ascending order."
               },
               "options": {
@@ -137,7 +137,7 @@
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
               },
               "template": "SELECT name, price FROM products ORDER BY price [blank1];",
               "choices": [
@@ -167,33 +167,33 @@
             "ci_cheapest_product": {
               "title": "Query the cheapest product",
               "prompt": "Write a query that shows the `name` and `price` of the single cheapest product in the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, price\nFROM products\n-- add sorting and a row limit here\n;"
             },
             "ci_lowest_stock_two": {
               "title": "Find the two lowest stock products",
               "prompt": "Write a query that returns the `name` and `stock` columns for the two products with the lowest stock. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, stock\nFROM products\n-- sort by stock and keep the first two rows\n;"
             },
             "ci_cheapest_home_product": {
               "title": "Find the cheapest home product",
               "prompt": "Write a query that shows the `name` and `price` of the cheapest product in the `Home` category. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, price\nFROM products\nWHERE category = 'Home'\n-- add sorting and a row limit here\n;"
             }

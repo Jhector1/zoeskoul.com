@@ -56,7 +56,7 @@
               "help": {
                 "concept": "`IS NOT NULL` keeps rows where a column has an actual stored value instead of a missing value.",
                 "hint_1": "This condition removes rows where `city` is missing.",
-                "hint_2": "It returns customers whose city field contains text such as Chicago, Houston, or Miami."
+                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
               },
               "options": {
                 "a": "It returns rows where city is missing.",
@@ -88,7 +88,7 @@
               "help": {
                 "concept": "SQL uses `IS NULL` and `IS NOT NULL` for missing-value checks. Equality operators do not correctly test NULL.",
                 "hint_1": "Any option using `= NULL` is not the right syntax.",
-                "hint_2": "The correct answers are the options that use `IS` with NULL, one for missing values and one for present values."
+                "hint_2": "The matching answers are the options that use `IS` with NULL, one for missing values and one for present values."
               },
               "options": {
                 "a": "email IS NULL",
@@ -164,33 +164,33 @@
             "code_missing_emails": {
               "title": "Query customers with missing email",
               "prompt": "Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where `email` is missing. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \n  id,\n  full_name,\n  email\nFROM customers\nWHERE ;"
             },
             "code_missing_city": {
               "title": "Find the customer with no city",
               "prompt": "Write a query that returns `full_name`, `city`, and `status` for customers whose `city` is missing.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \n  full_name,\n  city,\n  status\nFROM customers\nWHERE ;"
             },
             "code_inactive_missing_email": {
               "title": "Combine status with a NULL check",
               "prompt": "Write a query that returns `full_name`, `status`, and `email` for customers who are `inactive` and also have a missing email address. Use one WHERE clause with both conditions.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \n  full_name,\n  status,\n  email\nFROM customers\nWHERE status = 'inactive' AND ;"
             }

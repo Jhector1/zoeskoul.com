@@ -1,5 +1,5 @@
 import type {TopicSeed} from "@zoeskoul/curriculum-contracts";
-import type {SubjectShapePack} from "@zoeskoul/curriculum-profiles";
+import { getCurriculumProfile, type SubjectShapePack } from "@zoeskoul/curriculum-profiles";
 import {renderExercisePolicyPrompt} from "./renderExercisePolicyPrompt.js";
 import { renderExerciseKindPromptRules } from "./exerciseKindPromptRules.js";
 import type { TopicRetryContext } from "../types.js";
@@ -121,6 +121,7 @@ export function buildTopicAuthoringDraftPrompt(args: {
     shape: SubjectShapePack;
     retry?: TopicRetryContext;
 }) {
+    const profile = getCurriculumProfile(args.seed.profileId);
     const exercisePolicyRules = renderExercisePolicyPrompt({
         policy: args.seed.exercisePolicy,
         plannedCounts: args.seed.plannedExerciseCounts,
@@ -130,37 +131,11 @@ export function buildTopicAuthoringDraftPrompt(args: {
         mode: "authoring",
         seed: args.seed,
     });
-
-    const sqlDatasetRules =
-        args.seed.profileId === "sql"
-            ? [
-                "If profileId is sql:",
-                "- use the moduleRuntimeDefaults.datasetId from the seed as the default dataset for the whole topic",
-                "- all SQL examples in sketch bodyMarkdown must use tables and columns from the module dataset",
-                "- sketches must never switch to an exercise dataset override",
-                "- only code_input exercises may declare a datasetId override",
-                "- if a code_input exercise overrides datasetId, that override applies only to that exercise runtime, not to sketches or other cards",
-                "- do not invent table names or columns",
-                "- do not use generic textbook placeholders like sales, products, product_name, or price unless they exist in the grounded schema",
-                '- code_input recipeType must be "sql_query"',
-                "- use only approved SQL datasetIds from the shape pack",
-                "",
-                "The seed also includes moduleDataset when available.",
-                "Use its schema, table names, columns, and sample rows to design examples and exercises that fit the real dataset.",
-                "",
-                "For SQL relationship/join topics:",
-                "- If the module dataset does not contain two related tables, do not generate SELECT JOIN code_input exercises.",
-                "- If teaching relationships with a single-table dataset, use conceptual quiz questions or CREATE TABLE schema-design exercises with checkSql.",
-                "- Never invent tables like orders, customers, enrollments, or order_items unless they exist in moduleDataset.schemaSql or the exercise itself creates them.",
-                "- SQL code_input exercises that use SELECT do not need checkSql.",
-                "- SQL code_input exercises that use INSERT, UPDATE, DELETE, REPLACE, CREATE, ALTER, or DROP should include checkSql.",
-                "- checkSql must be a SELECT-style query that verifies the final database state after the statement runs.",
-                "- For INSERT, checkSql should select the inserted row or final table state.",
-                "- For UPDATE, checkSql should select the updated rows or final table state.",
-                "- For DELETE, checkSql should select the final table state.",
-                "- For CREATE TABLE or ALTER TABLE, checkSql can query sqlite_master to verify the table definition.",
-            ]
-            : [];
+    const profileAuthoringRules =
+        profile.renderAuthoringPromptRules?.({
+            seed: args.seed,
+            shape: args.shape,
+        }) ?? [];
 
     return {
         system: [
@@ -260,7 +235,7 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "- single_choice, multi_choice, drag_reorder, and fill_blank_choice are published as quiz practice.",
             "- You may include projectDraft, but the compiler will also create a project card automatically for code_input exercises.",
             "",
-            ...sqlDatasetRules,
+            ...profileAuthoringRules,
             "",
             renderAuthoringPolicy(args.seed),
             "",
@@ -275,14 +250,6 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "- Every multi_choice includes ALL correct options, not only one.",
             "- Every fill_blank_choice has exactly one blank and exactly one correctValue.",
             "- Every code_input follows the profile-specific runtime and recipe rules.",
-            "Python code_input recipe rules:",
-            '- For normal beginner output exercises, set recipeType to "fixed_tests" and include tests[].',
-            '- For class, object, method, attribute, return-value, or structure-checking exercises, set recipeType to "semantic" and include semanticChecks[].',
-            '- If recipeType is "semantic", do not rely on stdout tests.',
-            '- If recipeType is "fixed_tests", include at least one stdin/stdout test.',
-            '- Never leave recipeType ambiguous for Python code_input exercises.',
-            "- Hints explain the concept but do not reveal the final answer wording.",
-            "- Sketch SQL examples must use the module dataset, not an exercise dataset.",
             renderWorkspacePolicy(args.seed),
         ].join("\n"),
         user: JSON.stringify(

@@ -1,0 +1,141 @@
+{
+  "topicId": "what_sql_means",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-0",
+  "sectionSlug": "sql-v2-0-1",
+  "prefix": "sqlv2_0",
+  "minutes": 15,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "students_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-0.what_sql_means.label",
+    "summaryKey": "topics.sql-v2.sql-v2-0.what_sql_means.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.what_sql_means.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-0.what_sql_means.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 5,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.what_sql_means.sketch-1.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.what_sql_means.sketch-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "single-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.what_sql_means.quiz.single-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "single-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.what_sql_means.quiz.single-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.what_sql_means.quiz.multi-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "drag-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.what_sql_means.quiz.drag-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.what_sql_means.quiz.fill-1",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "column"
+      }
+    }
+  ]
+}

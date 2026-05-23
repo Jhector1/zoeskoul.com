@@ -2,9 +2,67 @@ import type {
     TopicAuthoringDraft,
     TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
+import { validateTopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
-import type { AiProvider, TopicRetryContext } from "../types.js";
+import { GeneratedJsonError, type AiProvider, type GeneratedJsonResult, type TopicRetryContext } from "../types.js";
 import { buildTopicAuthoringDraftPrompt } from "../prompts/buildTopicAuthoringDraftPrompt.js";
+
+export const TOPIC_AUTHORING_DRAFT_GENERATOR_VERSION =
+    "2026-05-23-topic-authoring-draft-generator-v1";
+
+export async function generateTopicAuthoringDraftAttempt(
+    provider: AiProvider,
+    args: {
+        seed: TopicSeed;
+        locale: string;
+        shape: SubjectShapePack;
+        retry?: TopicRetryContext;
+    },
+): Promise<{
+    prompt: {
+        system: string;
+        user: string;
+    };
+    generation: GeneratedJsonResult<TopicAuthoringDraft>;
+}> {
+    const prompt = buildTopicAuthoringDraftPrompt(args);
+
+    try {
+        if (!provider.generateJsonDetailed) {
+            throw new Error(
+                "TopicAuthoringDraft generation requires an auditable provider with generateJsonDetailed().",
+            );
+        }
+
+        const generation = await provider.generateJsonDetailed<TopicAuthoringDraft>({
+            system: prompt.system,
+            user: prompt.user,
+            schemaName: "TopicAuthoringDraft",
+        });
+
+        const validationResult = validateTopicAuthoringDraft(generation.value);
+        if (!validationResult.ok) {
+            throw new GeneratedJsonError({
+                code: "SCHEMA_VALIDATION_FAILED",
+                message: validationResult.errors.join("\n"),
+                metadata: generation,
+                rawText: generation.rawText,
+                parsedJson: generation.parsedJson,
+                validationErrors: validationResult.errors,
+            });
+        }
+
+        return {
+            prompt,
+            generation,
+        };
+    } catch (error) {
+        if (error && typeof error === "object") {
+            (error as { prompt?: typeof prompt }).prompt = prompt;
+        }
+        throw error;
+    }
+}
 
 export async function generateTopicAuthoringDraft(
     provider: AiProvider,
@@ -15,11 +73,6 @@ export async function generateTopicAuthoringDraft(
         retry?: TopicRetryContext;
     },
 ): Promise<TopicAuthoringDraft> {
-    const prompt = buildTopicAuthoringDraftPrompt(args);
-
-    return provider.generateJson<TopicAuthoringDraft>({
-        system: prompt.system,
-        user: prompt.user,
-        schemaName: "TopicAuthoringDraft",
-    });
+    const result = await generateTopicAuthoringDraftAttempt(provider, args);
+    return result.generation.value;
 }

@@ -108,6 +108,16 @@ export type ModulePedagogyPolicy = {
 
 export type TopicPedagogyPolicy = {
     teachingMode?: "normal" | "ui-guided" | "conceptual-only" | "simulated-files";
+    generationTargets?: {
+        quizBankMin?: number;
+        quizBankTarget?: number;
+        quizVisibleDefault?: number;
+        quizVisibleMax?: number;
+        projectCodeInputMin?: number;
+        projectCodeInputTarget?: number;
+        projectCodeInputMax?: number;
+        maxAttempts?: number | null;
+    };
     workspaceOverrides?: Partial<WorkspaceProfile>;
     allowedConcepts?: string[];
     forbiddenConcepts?: string[];

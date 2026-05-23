@@ -6,6 +6,7 @@ import type {
     RepairReport,
     SemanticValidationReport,
 } from "@zoeskoul/curriculum-profiles";
+import type { TopicQualityReport } from "@zoeskoul/curriculum-contracts";
 
 async function ensureDir(filePath: string) {
     await fs.mkdir(path.dirname(filePath), { recursive: true });
@@ -22,12 +23,15 @@ export async function writeTopicReports(args: {
     subjectSlug: string;
     moduleOrder: number;
     topicId: string;
+    hashes?: unknown;
     rawDraft?: unknown;
+    normalizedDraft?: unknown;
     repairedDraft?: unknown;
     repairReport?: RepairReport;
     critiqueReport?: CritiqueReport;
     semanticReport?: SemanticValidationReport;
     goldenReport?: GoldenValidationReport;
+    topicQualityReport?: TopicQualityReport;
     topicBundle?: unknown;
 }) {
     const baseDir = path.join(
@@ -42,8 +46,16 @@ export async function writeTopicReports(args: {
         await writeJsonAtomic(path.join(baseDir, "raw-draft.json"), args.rawDraft);
     }
 
+    if (args.normalizedDraft !== undefined) {
+        await writeJsonAtomic(path.join(baseDir, "normalized-draft.json"), args.normalizedDraft);
+    }
+
     if (args.repairedDraft !== undefined) {
         await writeJsonAtomic(path.join(baseDir, "repaired-draft.json"), args.repairedDraft);
+    }
+
+    if (args.hashes !== undefined) {
+        await writeJsonAtomic(path.join(baseDir, "hashes.json"), args.hashes);
     }
 
     if (args.repairReport) {
@@ -60,6 +72,10 @@ export async function writeTopicReports(args: {
 
     if (args.goldenReport) {
         await writeJsonAtomic(path.join(baseDir, "golden-report.json"), args.goldenReport);
+    }
+
+    if (args.topicQualityReport) {
+        await writeJsonAtomic(path.join(baseDir, "topic-quality-report.json"), args.topicQualityReport);
     }
 
     if (args.topicBundle !== undefined) {

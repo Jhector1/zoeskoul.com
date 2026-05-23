@@ -1,0 +1,116 @@
+{
+  "title": "What SQL Means",
+  "summary": "Learners practice reading a simple SQL query.",
+  "minutes": 10,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Start with a query",
+      "bodyMarkdown": "Write a query in the SQL editor, click Run query, and inspect the results table.\n\n```sql\nSELECT name FROM students;\n```"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-1",
+      "kind": "single_choice",
+      "title": "SQL meaning",
+      "prompt": "Which description best matches SQL in this lesson?",
+      "hint": "Look for the choice about asking a database for information.",
+      "help": {
+        "concept": "SQL is the language used to ask a database for data.",
+        "hint_1": "Choose the option about querying stored information.",
+        "hint_2": "Do not pick the option about editing videos or designing slides."
+      },
+      "options": [
+        "A language for asking a database for information",
+        "A tool for drawing charts by hand",
+        "A format for saving browser bookmarks"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "single-2",
+      "kind": "single_choice",
+      "title": "Rows and columns",
+      "prompt": "In the students table, what does one row represent?",
+      "hint": "Think about one complete record in the table.",
+      "help": {
+        "concept": "A row stores one record, such as one student.",
+        "hint_1": "Columns describe fields like name or city.",
+        "hint_2": "A row groups all of those fields for one person."
+      },
+      "options": [
+        "One student record",
+        "One column heading",
+        "One database file"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "title": "Database examples",
+      "prompt": "Which situations from the lesson are good examples of database use?",
+      "hint": "Pick the choices that store many records people search or update.",
+      "help": {
+        "concept": "Databases are useful when many records must be stored and retrieved.",
+        "hint_1": "Think about school rosters and store inventory.",
+        "hint_2": "Skip the choice that is just a single sticky note."
+      },
+      "options": [
+        "A school storing student records",
+        "A store tracking products",
+        "A single sticky note on a monitor"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "drag-1",
+      "kind": "drag_reorder",
+      "title": "Question to query flow",
+      "prompt": "Put these steps in the lesson order for answering a data question.",
+      "hint": "Start with the question before the query and the results.",
+      "help": {
+        "concept": "A data question becomes a query, and the query returns results.",
+        "hint_1": "First decide what you want to know.",
+        "hint_2": "Then write the query and read the results table."
+      },
+      "tokens": [
+        "Ask a question",
+        "Write a query",
+        "Read the results table"
+      ],
+      "correctOrder": [
+        "Ask a question",
+        "Write a query",
+        "Read the results table"
+      ]
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Column label",
+      "prompt": "Complete the lesson sentence about table structure.",
+      "hint": "The blank names the vertical field labels in a table.",
+      "help": {
+        "concept": "Columns describe the type of value stored in each field.",
+        "hint_1": "Rows hold records, while columns hold field labels.",
+        "hint_2": "Choose the word used for name, city, and grade headings."
+      },
+      "template": "In a table, a [blank1] names a field like name or city.",
+      "choices": [
+        "column",
+        "row",
+        "database"
+      ],
+      "correctValue": "column"
+    }
+  ]
+}

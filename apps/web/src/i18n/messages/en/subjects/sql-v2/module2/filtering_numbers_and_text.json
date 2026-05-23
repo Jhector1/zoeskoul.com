@@ -83,7 +83,7 @@
             },
             "mc_rows_matching_conditions": {
               "title": "Find matching products",
-              "prompt": "Based on the dataset, which products match `WHERE price < 20`? Choose all correct answers.",
+              "prompt": "Based on the dataset, which products match `WHERE price < 20`? Choose all matching answers.",
               "hint": "Compare each listed product's price to 20.",
               "help": {
                 "concept": "A numeric WHERE filter keeps rows whose values satisfy the comparison for that column.",
@@ -164,33 +164,33 @@
             "ci_price_over_20": {
               "title": "Query products with higher prices",
               "prompt": "Write a query that shows the `name` and `price` columns for products where `price` is greater than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM products\nWHERE ;"
             },
             "ci_stationery_under_10": {
               "title": "Filter by text and number together",
               "prompt": "Write a query that shows `name`, `category`, and `price` for products where the category is `Stationery` and the price is less than 10. Use the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name, category, price\nFROM products\nWHERE ;"
             },
             "ci_name_like_book": {
               "title": "Find names with matching text",
               "prompt": "Write a query that shows the `name` column for products whose name contains the text `book`. Use `LIKE` with wildcards, then click Run query and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT name\nFROM products\nWHERE name LIKE ;"
             }

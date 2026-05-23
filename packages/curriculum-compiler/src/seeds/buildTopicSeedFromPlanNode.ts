@@ -23,6 +23,7 @@ export function buildTopicSeedFromPlanNode(args: {
     topic: PlannedTopic;
 }) {
     const adapter = getProfileAdapter(args.blueprint.profileId);
+    const topicPolicy = args.spec?.topicPolicies?.[args.topic.topicId];
 
     const exercisePolicy = resolveExercisePolicy({
         blueprint: args.blueprint,
@@ -107,20 +108,26 @@ export function buildTopicSeedFromPlanNode(args: {
             }
             : workspaceRuntimeDefaults;
 
-    const policyTargets =
-        args.spec?.policy?.exercisePolicy?.generationTargets ?? {};
+    const policyTargets = args.spec?.policy?.exercisePolicy?.generationTargets ?? {};
+    const topicTargets = topicPolicy?.generationTargets ?? {};
 
     const generationTargets = {
-        quizBankMin: policyTargets.quizBankMin ?? 6,
-        quizBankTarget: policyTargets.quizBankTarget ?? 8,
-        quizVisibleDefault: policyTargets.quizVisibleDefault ?? 4,
-        quizVisibleMax: policyTargets.quizVisibleMax ?? 6,
+        quizBankMin: topicTargets.quizBankMin ?? policyTargets.quizBankMin ?? 6,
+        quizBankTarget: topicTargets.quizBankTarget ?? policyTargets.quizBankTarget ?? 8,
+        quizVisibleDefault:
+            topicTargets.quizVisibleDefault ?? policyTargets.quizVisibleDefault ?? 4,
+        quizVisibleMax: topicTargets.quizVisibleMax ?? policyTargets.quizVisibleMax ?? 6,
 
-        projectCodeInputMin: policyTargets.projectCodeInputMin ?? 3,
-        projectCodeInputTarget: policyTargets.projectCodeInputTarget ?? 3,
-        projectCodeInputMax: policyTargets.projectCodeInputMax ?? 5,
+        projectCodeInputMin:
+            topicTargets.projectCodeInputMin ?? policyTargets.projectCodeInputMin ?? 3,
+        projectCodeInputTarget:
+            topicTargets.projectCodeInputTarget ??
+            policyTargets.projectCodeInputTarget ??
+            3,
+        projectCodeInputMax:
+            topicTargets.projectCodeInputMax ?? policyTargets.projectCodeInputMax ?? 5,
 
-        maxAttempts: policyTargets.maxAttempts ?? null,
+        maxAttempts: topicTargets.maxAttempts ?? policyTargets.maxAttempts ?? null,
     };
 
     const totalGeneratedExercises =

@@ -1,15 +1,12 @@
+import { getCurriculumProfile } from "../registry.js";
+import { mathShape } from "./mathShape.js";
 import { pythonShape } from "./pythonShape.js";
 import { sqlShape } from "./sqlShape.js";
 import type { SubjectShapePack } from "./types.js";
 
-const SHAPES = {
-    sql: sqlShape,
-    python: pythonShape,
-} as const satisfies Record<string, SubjectShapePack>;
-
-export function getSubjectShape(profileId: keyof typeof SHAPES): SubjectShapePack {
-    return SHAPES[profileId];
+export function getSubjectShape(profileId: string): SubjectShapePack {
+    return getCurriculumProfile(profileId).shape;
 }
 
-export { sqlShape, pythonShape };
+export { sqlShape, pythonShape, mathShape };
 export type * from "./types.js";

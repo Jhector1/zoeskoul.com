@@ -40,8 +40,8 @@
               "hint": "Think about whether the row can match one value or must match both values.",
               "help": {
                 "concept": "`IN` checks whether one column value matches any one item in a list of exact values.",
-                "hint_1": "A row with `city = 'Chicago'` should pass this filter even though it is not also Miami.",
-                "hint_2": "Compare it to using `city = 'Chicago' OR city = 'Miami'`."
+                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
+                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
               },
               "options": {
                 "a": "The city must be both Chicago and Miami at the same time",
@@ -69,11 +69,11 @@
             "mc_in_equivalents": {
               "title": "Equivalent filters",
               "prompt": "Choose all filters that mean the same as `WHERE city IN ('Chicago', 'Miami')`.",
-              "hint": "Look for conditions that keep rows from either Chicago or Miami, but not other cities.",
+              "hint": "Compare the condition with the column named in the question, then check which rows would remain.",
               "help": {
                 "concept": "`IN` with two values is equivalent to joining two equality checks with `OR`, not `AND`.",
-                "hint_1": "A row from Chicago should pass, and a row from Miami should also pass.",
-                "hint_2": "Any option using `AND` between `city = 'Chicago'` and `city = 'Miami'` cannot work for one row."
+                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
+                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
               },
               "options": {
                 "a": "city = 'Chicago' OR city = 'Miami'",
@@ -165,33 +165,33 @@
             "ci_active_or_draft_names": {
               "title": "Query active or draft customers",
               "prompt": "Write a query that returns `full_name` and `status` from `customers` for rows where `status` is either `active` or `draft`. Keep the results in the table's default order.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM customers\nWHERE ;"
             },
             "ci_not_in_cities": {
               "title": "Exclude two cities",
               "prompt": "Write a query that returns `id`, `full_name`, and `city` for customers whose `city` is not `Chicago` and not `Miami`. Use `NOT IN`. Keep rows in the table's default order.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, city\nFROM customers\nWHERE city ;"
             },
             "ci_in_with_and": {
               "title": "Combine IN with another filter",
               "prompt": "Write a query that returns `full_name`, `city`, and `status` for customers who are in `Chicago` or `Seattle` and also have `status = 'active'`. Keep rows in the table's default order.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT full_name, city, status\nFROM customers\nWHERE city IN () ;"
             }

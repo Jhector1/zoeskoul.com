@@ -56,7 +56,7 @@
               "help": {
                 "concept": "To test whether a column contains a real value instead of missing data, SQL uses `IS NOT NULL`.",
                 "hint_1": "You are checking for rows where the city exists, not where it equals a text value.",
-                "hint_2": "Choose the condition that uses both `IS` and `NOT` with `NULL`."
+                "hint_2": "Choose the condition pattern that uses both `IS` and `NOT` with `NULL`."
               },
               "options": {
                 "a": "city <> NULL",
@@ -133,7 +133,7 @@
               "hint": "The condition uses `IS` followed by one special word.",
               "help": {
                 "concept": "The correct SQL pattern for checking missing data is `column IS the missing term`.",
-                "hint_1": "You are not checking for text like `'Chicago'`; you are checking for missing data.",
+                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
                 "hint_2": "The missing word is the special marker SQL uses for unknown or absent values."
               },
               "template": "WHERE city IS [blank1]",
@@ -164,33 +164,33 @@
             "ci_find_missing_emails": {
               "title": "Query customers with missing emails",
               "prompt": "Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where `email` is missing. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, email\nFROM customers\nWHERE ;"
             },
             "ci_find_missing_city_real_customers": {
               "title": "Find real customers missing a city",
               "prompt": "Write a query that returns `id`, `full_name`, `city`, and `is_test` for customers whose `city` is missing and who are not test accounts. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND ;"
             },
             "ci_find_present_email_and_city": {
               "title": "Find customers with both email and city present",
               "prompt": "Write a query that returns `id`, `full_name`, `email`, and `city` for customers where both `email` and `city` are present. Order the results by `id` ascending. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT id, full_name, email, city\nFROM customers\nWHERE email IS NOT NULL\nORDER BY ;"
             }

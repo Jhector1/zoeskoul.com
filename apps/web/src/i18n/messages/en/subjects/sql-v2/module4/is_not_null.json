@@ -41,7 +41,7 @@
               "help": {
                 "concept": "In SQL, NULL means missing data. To keep rows where a column has a real value, use IS NOT NULL instead of = NULL or != NULL.",
                 "hint_1": "The correct condition uses the words `IS` and `NOT` with `NULL`.",
-                "hint_2": "Look for the option that would keep Mia Lopez but exclude Leo Grant."
+                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
               },
               "options": {
                 "a": "email = NULL",
@@ -88,7 +88,7 @@
               "help": {
                 "concept": "When AND connects conditions, both must be true. IS NOT NULL checks that the city exists, and the status test checks for active rows only.",
                 "hint_1": "Remove anyone with `city` as NULL, then remove anyone whose status is not `active`.",
-                "hint_2": "Chicago and Miami active customers fit; draft or inactive rows do not."
+                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
               },
               "options": {
                 "a": "Mia Lopez",
@@ -147,10 +147,10 @@
             "fb_city_column_check": {
               "title": "Choose the right column",
               "prompt": "Fill in the missing column name to keep rows where the city is present.",
-              "hint": "Use the column that stores location names like Chicago and Miami.",
+              "hint": "Compare the condition with the column named in the question, then check which rows would remain.",
               "help": {
                 "concept": "IS NOT NULL can be used with any column. To check whether a the missing term value exists, place the the missing term column before IS NOT NULL.",
-                "hint_1": "The correct column contains values such as Chicago, Houston, and Seattle.",
+                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
                 "hint_2": "It is not `status` or `email`; it is the location field."
               },
               "template": "WHERE [blank1] IS NOT NULL",
@@ -164,33 +164,33 @@
             "ci_show_customers_with_email": {
               "title": "List customers with email addresses",
               "prompt": "Write a query that shows `id`, `full_name`, and `email` from `customers` for rows where `email` is not NULL. Order the results by `id` ascending. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT \nFROM customers\nWHERE \nORDER BY ;"
             },
             "ci_active_with_city": {
               "title": "Find active customers with a city",
               "prompt": "Write a query that shows `full_name`, `city`, and `status` for customers whose `city` is not NULL and whose `status` is `active`. Order the results by `full_name` ascending. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT full_name, city, status\nFROM customers\nWHERE \nORDER BY ;"
             },
             "ci_real_non_test_emails": {
               "title": "Show non-test customers with email",
               "prompt": "Write a query that shows `full_name` and `email` for customers where `email` is not NULL and `is_test` equals 0. Order the results by `signup_date` ascending. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Use the query pattern from the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "hint_2": "Run the query and compare the results table."
               },
               "starterCode": "SELECT full_name, email\nFROM customers\nWHERE \nORDER BY ;"
             }

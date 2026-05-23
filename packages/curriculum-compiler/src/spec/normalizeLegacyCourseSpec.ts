@@ -4,7 +4,7 @@ import type {
     CourseSpecTopic,
     ExerciseKindMix,
 } from "@zoeskoul/curriculum-contracts";
-import { getSqlModuleDatasetPolicy } from "@zoeskoul/curriculum-profiles";
+import { getCurriculumProfile } from "@zoeskoul/curriculum-profiles";
 
 function cleanString(value: unknown): string | undefined {
     return typeof value === "string" && value.trim() ? value.trim() : undefined;
@@ -31,6 +31,11 @@ function normalizeModuleRuntimePolicy(args: {
     rawModuleRuntimePolicy: any;
     rawGlobalRuntimePolicy: any;
 }) {
+    const profile = getCurriculumProfile(args.profileId);
+    const profileRuntimeDefaults = profile.buildModuleRuntimeDefaults(args.moduleNumber + 1);
+    const profileSqlDefaults =
+        profileRuntimeDefaults?.kind === "sql" ? profileRuntimeDefaults : null;
+
     const moduleRuntime =
         args.rawModuleRuntimePolicy && typeof args.rawModuleRuntimePolicy === "object"
             ? args.rawModuleRuntimePolicy
@@ -46,14 +51,12 @@ function normalizeModuleRuntimePolicy(args: {
             ? moduleRuntime.sqlDialect.trim()
             : typeof globalRuntime?.sqlDialect === "string"
                 ? globalRuntime.sqlDialect.trim()
-                : args.profileId === "sql"
-                    ? "sqlite"
-                    : undefined;
+                : profileSqlDefaults?.fixedSqlDialect;
 
     const datasetStrategy =
         moduleRuntime?.datasetStrategy ??
         globalRuntime?.datasetStrategy ??
-        (args.profileId === "sql" ? "module_based" : undefined);
+        (profile.runtimeKind === "sql" ? "module_based" : undefined);
 
     const preferredDatasetId =
         typeof moduleRuntime?.preferredDatasetId === "string"
@@ -67,8 +70,8 @@ function normalizeModuleRuntimePolicy(args: {
             ? moduleRuntime.datasetId.trim()
             : typeof globalRuntime?.datasetId === "string" && globalRuntime.datasetId.trim()
                 ? globalRuntime.datasetId.trim()
-                : args.profileId === "sql" && datasetStrategy === "module_based"
-                    ? getSqlModuleDatasetPolicy(args.moduleNumber).datasetId
+                : profile.runtimeKind === "sql" && datasetStrategy === "module_based"
+                    ? profileSqlDefaults?.datasetId
                     : preferredDatasetId;
 
     const resultShape =
@@ -76,9 +79,7 @@ function normalizeModuleRuntimePolicy(args: {
             ? moduleRuntime.resultShape.trim()
             : typeof globalRuntime?.resultShape === "string"
                 ? globalRuntime.resultShape.trim()
-                : args.profileId === "sql"
-                    ? "table"
-                    : undefined;
+                : profileSqlDefaults?.resultShape;
 
     if (!sqlDialect && !datasetStrategy && !datasetId && !preferredDatasetId && !resultShape) {
         return undefined;
