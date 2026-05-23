@@ -26,6 +26,8 @@ import type {LearningIdeConfig} from "@/lib/ide/learningIdeConfig";
 import type {WorkspaceStateV2} from "@/components/ide/types";
 import {useReviewRuntimeStore} from "@/components/review/module/runtime/reviewRuntimeStore";
 import {getExerciseStateKey} from "@/components/review/module/runtime/exerciseKeys";
+import {resolveSqlRunnerConfig} from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
+import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 
 import {resolveExerciseWorkspace, deriveEntryCode} from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 import {
@@ -46,6 +48,15 @@ type SqlTableSnapshot = {
 };
 
 type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
+type RuntimeDefaultsLike = {
+    fixedSqlDialect?: SqlDialect;
+    datasetId?: string;
+    resultShape?: "table";
+    showSchema?: boolean;
+    showErd?: boolean;
+    showChen?: boolean;
+    showTables?: boolean;
+} | null;
 
 type CodeInputExerciseWithSqlExtras = Extract<Exercise, { kind: "code_input" }> & {
     sqlSchemaSql?: string;
@@ -61,6 +72,9 @@ type CodeInputExerciseWithSqlExtras = Extract<Exercise, { kind: "code_input" }> 
         fixedSqlDialect?: SqlDialect;
         datasetId?: string;
     } | null;
+    sectionRuntimeDefaults?: RuntimeDefaultsLike;
+    courseRuntimeDefaults?: RuntimeDefaultsLike;
+    subjectRuntimeDefaults?: RuntimeDefaultsLike;
 };
 
 type CodeToolsApi = {
@@ -81,6 +95,7 @@ type CodeToolsApi = {
             sqlSchemaSql?: string;
             sqlSeedSql?: string;
             sqlInitialTableSnapshots?: SqlTableSnapshots;
+            sqlPaneOptions?: SqlPaneOptions;
 
             onPatch: (patch: any) => void;
         },
@@ -375,6 +390,29 @@ function deriveCodeOrStarterFallback(args: {
 
     return args.fallbackCode;
 }
+
+export function resolveExerciseRuntimeDefaultsLayers(args: {
+    exercise: CodeInputExerciseWithSqlExtras;
+    subjectRuntimeDefaults?: unknown;
+    courseRuntimeDefaults?: unknown;
+    moduleRuntimeDefaults?: unknown;
+    sectionRuntimeDefaults?: unknown;
+    topicRuntimeDefaults?: unknown;
+}) {
+    return {
+        subjectRuntimeDefaults:
+            (args.exercise as any)?.subjectRuntimeDefaults ?? args.subjectRuntimeDefaults ?? null,
+        courseRuntimeDefaults:
+            (args.exercise as any)?.courseRuntimeDefaults ?? args.courseRuntimeDefaults ?? null,
+        moduleRuntimeDefaults:
+            (args.exercise as any)?.moduleRuntimeDefaults ?? args.moduleRuntimeDefaults ?? null,
+        sectionRuntimeDefaults:
+            (args.exercise as any)?.sectionRuntimeDefaults ?? args.sectionRuntimeDefaults ?? null,
+        topicRuntimeDefaults:
+            (args.exercise as any)?.topicRuntimeDefaults ?? args.topicRuntimeDefaults ?? null,
+    };
+}
+
 function CodeInputWithTools(props: {
     exercise: CodeInputExerciseWithSqlExtras;
     current: any;
@@ -401,6 +439,11 @@ function CodeInputWithTools(props: {
     sectionSlug?: string;
     exerciseStateId?: string;
     explanation?: string | null;
+    subjectRuntimeDefaults?: unknown;
+    courseRuntimeDefaults?: unknown;
+    moduleRuntimeDefaults?: unknown;
+    sectionRuntimeDefaults?: unknown;
+    topicRuntimeDefaults?: unknown;
 }) {
     const {
         exercise,
@@ -425,6 +468,11 @@ function CodeInputWithTools(props: {
         topicId,
         cardId,
         exerciseStateId,
+        subjectRuntimeDefaults,
+        courseRuntimeDefaults,
+        moduleRuntimeDefaults,
+        sectionRuntimeDefaults,
+        topicRuntimeDefaults,
     } = props;
 
     const {
@@ -494,16 +542,6 @@ function CodeInputWithTools(props: {
         typeof exercise?.sqlSeedSql === "string";
 
     const exerciseSqlDialect = isSqlExercise ? exercise?.fixedSqlDialect : undefined;
-
-    const exerciseSqlDatasetId =
-        isSqlExercise
-            ? firstNonBlank(
-                (exercise as any)?.runtime?.datasetId,
-                exercise?.sqlDatasetId,
-                (exercise as any)?.topicRuntimeDefaults?.datasetId,
-                (exercise as any)?.moduleRuntimeDefaults?.datasetId,
-            )
-            : undefined;
 
     const exerciseSqlSchemaSql =
         isSqlExercise && typeof exercise?.sqlSchemaSql === "string"
@@ -649,6 +687,43 @@ function CodeInputWithTools(props: {
         "";
     const activeLanguage = manifestLanguage;
     const activeSketch = compatibleStoreExercise?.sketch || null;
+    const runtimeLayers = resolveExerciseRuntimeDefaultsLayers({
+        exercise,
+        subjectRuntimeDefaults,
+        courseRuntimeDefaults,
+        moduleRuntimeDefaults,
+        sectionRuntimeDefaults,
+        topicRuntimeDefaults,
+    });
+
+    const resolvedExerciseSql = resolveSqlRunnerConfig({
+        language: manifestLanguage,
+        sqlDialect:
+            activeLanguage === "sql"
+                ? ((compatibleStoreExercise as any)?.sqlDialect ?? exerciseSqlDialect)
+                : undefined,
+        sqlSchemaSql:
+            activeLanguage === "sql"
+                ? firstNonBlank((compatibleStoreExercise as any)?.sqlSchemaSql, exerciseSqlSchemaSql)
+                : undefined,
+        sqlSeedSql:
+            activeLanguage === "sql"
+                ? firstNonBlank((compatibleStoreExercise as any)?.sqlSeedSql, exerciseSqlSeedSql)
+                : undefined,
+        sqlInitialTableSnapshots:
+            activeLanguage === "sql"
+                ? ((compatibleStoreExercise as any)?.sqlInitialTableSnapshots ??
+                    exerciseSqlInitialTableSnapshots)
+                : undefined,
+        exerciseRuntime: (exercise as any)?.runtime,
+        exerciseSqlDatasetId: (exercise as any)?.sqlDatasetId,
+        recipe: (exercise as any)?.recipe,
+        subjectRuntimeDefaults: runtimeLayers.subjectRuntimeDefaults,
+        courseRuntimeDefaults: runtimeLayers.courseRuntimeDefaults,
+        moduleRuntimeDefaults: runtimeLayers.moduleRuntimeDefaults,
+        sectionRuntimeDefaults: runtimeLayers.sectionRuntimeDefaults,
+        topicRuntimeDefaults: runtimeLayers.topicRuntimeDefaults,
+    });
 
     const normalizedActive = normalizeCodeWorkspacePair({
         workspace: activeWorkspace,
@@ -669,21 +744,13 @@ function CodeInputWithTools(props: {
             ideConfig: exercise.ideConfig ?? null,
             ownerCardId,
             preferSnapshot: false,
-            sqlDialect: activeLanguage === "sql" ? ((compatibleStoreExercise as any)?.sqlDialect ?? exerciseSqlDialect) : undefined,
-            sqlDatasetId:
-                activeLanguage === "sql"
-                    ? firstNonBlank((compatibleStoreExercise as any)?.sqlDatasetId, exerciseSqlDatasetId)
-                    : undefined,
-            sqlSchemaSql:
-                activeLanguage === "sql"
-                    ? firstNonBlank((compatibleStoreExercise as any)?.sqlSchemaSql, exerciseSqlSchemaSql)
-                    : undefined,
-            sqlSeedSql:
-                activeLanguage === "sql"
-                    ? firstNonBlank((compatibleStoreExercise as any)?.sqlSeedSql, exerciseSqlSeedSql)
-                    : undefined,
+            sqlDialect: activeLanguage === "sql" ? resolvedExerciseSql.sqlDialect : undefined,
+            sqlDatasetId: activeLanguage === "sql" ? resolvedExerciseSql.sqlDatasetId : undefined,
+            sqlSchemaSql: activeLanguage === "sql" ? resolvedExerciseSql.sqlSchemaSql : undefined,
+            sqlSeedSql: activeLanguage === "sql" ? resolvedExerciseSql.sqlSeedSql : undefined,
             sqlInitialTableSnapshots:
-                activeLanguage === "sql" ? ((compatibleStoreExercise as any)?.sqlInitialTableSnapshots ?? exerciseSqlInitialTableSnapshots) : undefined,
+                activeLanguage === "sql" ? resolvedExerciseSql.sqlInitialTableSnapshots : undefined,
+            sqlPaneOptions: activeLanguage === "sql" ? resolvedExerciseSql.sqlPaneOptions : undefined,
             onPatch,
         }),
         [
@@ -695,11 +762,11 @@ function CodeInputWithTools(props: {
             normalizedActive.workspace,
             ownerCardId,
             exerciseSqlDialect,
-            exerciseSqlDatasetId,
             exerciseSqlSchemaSql,
             exerciseSqlSeedSql,
             exerciseSqlInitialTableSnapshots,
             onPatch,
+            resolvedExerciseSql,
         ],
     );
 
@@ -820,6 +887,11 @@ function CodeInputWithTools(props: {
             feedbackDismissed={feedbackDismissed}
             runFeedback={toolRunFeedback}
             runFeedbackTick={toolRunTick}
+            subjectRuntimeDefaults={runtimeLayers.subjectRuntimeDefaults}
+            courseRuntimeDefaults={runtimeLayers.courseRuntimeDefaults}
+            moduleRuntimeDefaults={runtimeLayers.moduleRuntimeDefaults}
+            sectionRuntimeDefaults={runtimeLayers.sectionRuntimeDefaults}
+            topicRuntimeDefaults={runtimeLayers.topicRuntimeDefaults}
             onUseTools={() => {
                 ensureVisible?.();
                 requestBind(codeInputId);
@@ -852,6 +924,11 @@ export default function ExerciseRenderer({
                                              topicId,
                                              cardId,
                                              exerciseStateId,
+                                             subjectRuntimeDefaults,
+                                             courseRuntimeDefaults,
+                                             moduleRuntimeDefaults,
+                                             sectionRuntimeDefaults,
+                                             topicRuntimeDefaults,
                                          }: {
     exercise: Exercise;
     current: QItem;
@@ -877,6 +954,11 @@ export default function ExerciseRenderer({
     topicId?: string;
     cardId?: string;
     exerciseStateId?: string;
+    subjectRuntimeDefaults?: unknown;
+    courseRuntimeDefaults?: unknown;
+    moduleRuntimeDefaults?: unknown;
+    sectionRuntimeDefaults?: unknown;
+    topicRuntimeDefaults?: unknown;
 }) {
     const {raw} = useTaggedT();
 
@@ -1334,7 +1416,7 @@ export default function ExerciseRenderer({
 
         if (useTools) {
             return (
-                <CodeInputWithTools
+            <CodeInputWithTools
                     exercise={ex}
                     current={current}
                     lockInputs={lockInputs}
@@ -1357,16 +1439,16 @@ export default function ExerciseRenderer({
                     topicId={topicId}
                     cardId={cardId}
                     exerciseStateId={stableExerciseId}
+                    subjectRuntimeDefaults={subjectRuntimeDefaults}
+                    courseRuntimeDefaults={courseRuntimeDefaults}
+                    moduleRuntimeDefaults={moduleRuntimeDefaults}
+                    sectionRuntimeDefaults={sectionRuntimeDefaults}
+                    topicRuntimeDefaults={topicRuntimeDefaults}
                 />
             );
         }
 
         const exCode = ex as CodeInputExerciseWithSqlExtras;
-        const effectiveSqlRuntime =
-            (exCode as any).runtime ??
-            (exCode as any).topicRuntimeDefaults ??
-            (exCode as any).moduleRuntimeDefaults ??
-            null;
         const manifestLanguage = getManifestExerciseLanguage(exCode);
         const compatibleStoreExercise = stateLanguageMatches(
             storeExercise,
@@ -1382,21 +1464,6 @@ export default function ExerciseRenderer({
         )
             ? current
             : null;
-
-        const effectiveSqlDatasetId = firstNonBlank(
-            (compatibleStoreExercise as any)?.sqlDatasetId,
-            (exCode as any)?.runtime?.datasetId,
-            (exCode as any)?.sqlDatasetId,
-            effectiveSqlRuntime?.datasetId,
-        );
-        const effectiveSqlSchemaSql = firstNonBlank(
-            (compatibleStoreExercise as any)?.sqlSchemaSql,
-            (exCode as any)?.sqlSchemaSql,
-        );
-        const effectiveSqlSeedSql = firstNonBlank(
-            (compatibleStoreExercise as any)?.sqlSeedSql,
-            (exCode as any)?.sqlSeedSql,
-        );
 
         const starterWorkspace = resolveExerciseWorkspace({
             language: manifestLanguage,
@@ -1439,6 +1506,37 @@ export default function ExerciseRenderer({
             compatibleCurrentState?.codeStdin ??
             "";
         const activeLanguage = manifestLanguage;
+        const runtimeLayers = resolveExerciseRuntimeDefaultsLayers({
+            exercise: exCode,
+            subjectRuntimeDefaults,
+            courseRuntimeDefaults,
+            moduleRuntimeDefaults,
+            sectionRuntimeDefaults,
+            topicRuntimeDefaults,
+        });
+        const resolvedEmbeddedSql = resolveSqlRunnerConfig({
+            language: activeLanguage,
+            sqlDialect: (compatibleStoreExercise as any)?.sqlDialect ?? exCode.fixedSqlDialect,
+            sqlSchemaSql: firstNonBlank(
+                (compatibleStoreExercise as any)?.sqlSchemaSql,
+                (exCode as any)?.sqlSchemaSql,
+            ),
+            sqlSeedSql: firstNonBlank(
+                (compatibleStoreExercise as any)?.sqlSeedSql,
+                (exCode as any)?.sqlSeedSql,
+            ),
+            sqlInitialTableSnapshots:
+                (compatibleStoreExercise as any)?.sqlInitialTableSnapshots ??
+                (exCode as any)?.sqlInitialTableSnapshots,
+            exerciseRuntime: (exCode as any)?.runtime,
+            exerciseSqlDatasetId: (exCode as any)?.sqlDatasetId,
+            recipe: (exCode as any)?.recipe,
+            subjectRuntimeDefaults: runtimeLayers.subjectRuntimeDefaults,
+            courseRuntimeDefaults: runtimeLayers.courseRuntimeDefaults,
+            moduleRuntimeDefaults: runtimeLayers.moduleRuntimeDefaults,
+            sectionRuntimeDefaults: runtimeLayers.sectionRuntimeDefaults,
+            topicRuntimeDefaults: runtimeLayers.topicRuntimeDefaults,
+        });
 
         return (
             <CodeInputExerciseUI
@@ -1500,17 +1598,21 @@ export default function ExerciseRenderer({
                 feedback={codeFeedback}
                 explanation={codeExplanation}
                 feedbackDismissed={feedbackDismissed}
-                sqlDialect={(compatibleStoreExercise as any)?.sqlDialect ?? exCode.fixedSqlDialect ?? effectiveSqlRuntime?.fixedSqlDialect}
-                sqlDatasetId={effectiveSqlDatasetId}
-                sqlResultShape={
-                    (compatibleStoreExercise as any)?.runtime?.resultShape ??
-                    (exCode as any)?.runtime?.resultShape ??
-                    effectiveSqlRuntime?.resultShape
-                }
-                sqlSchemaSql={effectiveSqlSchemaSql}
-                sqlSeedSql={effectiveSqlSeedSql}
+                sqlDialect={resolvedEmbeddedSql.sqlDialect}
+                sqlDatasetId={resolvedEmbeddedSql.sqlDatasetId}
+                sqlResultShape={resolvedEmbeddedSql.sqlResultShape}
+                sqlSchemaSql={resolvedEmbeddedSql.sqlSchemaSql}
+                sqlSeedSql={resolvedEmbeddedSql.sqlSeedSql}
                 sqlSetupSql={(exCode as any).sqlSetupSql}
-                sqlInitialTableSnapshots={(compatibleStoreExercise as any)?.sqlInitialTableSnapshots ?? (exCode as any).sqlInitialTableSnapshots}
+                sqlInitialTableSnapshots={resolvedEmbeddedSql.sqlInitialTableSnapshots}
+                exerciseRuntime={(exCode as any)?.runtime}
+                exerciseSqlDatasetId={(exCode as any)?.sqlDatasetId}
+                recipe={(exCode as any)?.recipe}
+                subjectRuntimeDefaults={runtimeLayers.subjectRuntimeDefaults}
+                courseRuntimeDefaults={runtimeLayers.courseRuntimeDefaults}
+                topicRuntimeDefaults={runtimeLayers.topicRuntimeDefaults}
+                sectionRuntimeDefaults={runtimeLayers.sectionRuntimeDefaults}
+                moduleRuntimeDefaults={runtimeLayers.moduleRuntimeDefaults}
             />
         );
     }

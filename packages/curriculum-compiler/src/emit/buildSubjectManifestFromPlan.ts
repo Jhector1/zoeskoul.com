@@ -19,6 +19,7 @@ import {
 import { resolveLogicalSectionSlug } from "./resolveLogicalSectionSlug.js";
 import {resolveWorkspacePolicy} from "../policy/resolveWorkspacePolicy.js";
 import {workspaceToRuntimeDefaults} from "../policy/workspaceToRuntimeDefaults.js";
+import { resolveModuleOutcomes } from "./resolveModuleOutcomes.js";
 
 // const SQL_DIALECTS = ["sqlite", "postgres", "mysql", "mssql"] as const;
 //
@@ -164,6 +165,7 @@ export function buildSubjectManifestFromPlan(args: {
                 };
             },
         );
+        const moduleOutcomes = resolveModuleOutcomes(module);
 
         return {
             slug: logicalModuleSlug,
@@ -195,7 +197,7 @@ export function buildSubjectManifestFromPlan(args: {
                             ),
                         ]
                         : [],
-                outcomeKeys: [0, 1, 2, 3].map((i) =>
+                outcomeKeys: moduleOutcomes.map((_, i) =>
                     kp.moduleOutcomeKey(
                         blueprint.subjectSlug,
                         logicalModuleSlug,
@@ -217,6 +219,7 @@ export function buildSubjectManifestFromPlan(args: {
     return {
         subject: {
             slug: blueprint.subjectSlug,
+            profileId: blueprint.profileId,
             catalogSlug: blueprint.catalogSlug ?? blueprint.subjectSlug,
             genKey: shape.subjectManifest.genKey,
             order: blueprint.subjectSlug === "sql" ? 20 : 30,

@@ -1,6 +1,7 @@
 {
   "subject": {
     "slug": "sql",
+    "profileId": "sql",
     "genKey": "sql_for_beginners",
     "order": 20,
     "accessPolicy": "free",

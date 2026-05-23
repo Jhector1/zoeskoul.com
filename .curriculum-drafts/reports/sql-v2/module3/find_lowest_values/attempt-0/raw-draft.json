@@ -1,0 +1,260 @@
+{
+  "title": "find lowest values",
+  "summary": "Learn how to show the smallest values first by sorting with ORDER BY ASC and combining it with LIMIT in the products dataset.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch_lowest_values_intro",
+      "title": "Sort from smallest to largest",
+      "bodyMarkdown": "When you want the **lowest values**, sort a column in **ascending** order. In SQL, ascending order means small to large for numbers.\n\nUse `ORDER BY column_name ASC`.\n\nHere is a worked example with the `products` table:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` tells SQL which table to read.\n- `ORDER BY price ASC` sorts the rows from the lowest price to the highest price.\n\nWith this dataset, the first few rows would start with the cheaper items, such as `Notebook` before `Office Chair`.\n\nIf you leave out `ASC`, SQLite still sorts ascending by default, but writing `ASC` makes your goal clear.\n\nTry it yourself: write the query in the SQL editor, click **Run query**, and check which product appears first in the results table."
+    },
+    {
+      "id": "sketch_lowest_values_limit",
+      "title": "Find only the smallest few rows",
+      "bodyMarkdown": "Often you do not want every row. You may want just the **lowest 1**, **lowest 2**, or **lowest 3** values. Combine sorting with `LIMIT`.\n\n```sql\nSELECT name, stock\nFROM products\nORDER BY stock ASC\nLIMIT 2;\n```\n\nLine by line:\n- `SELECT name, stock` shows each product name and its stock count.\n- `FROM products` reads from the products table.\n- `ORDER BY stock ASC` puts the smallest stock numbers first.\n- `LIMIT 2` keeps only the first two rows after sorting.\n\nIn this dataset, this helps you quickly spot products with the lowest stock.\n\nA useful idea: **sort first, then limit**. If you want the lowest values, the ascending sort must happen before SQL picks the top few rows.\n\nYour turn: change `stock` to `price` and see which two products have the lowest prices."
+    },
+    {
+      "id": "sketch_lowest_values_where",
+      "title": "Find the lowest values inside a category",
+      "bodyMarkdown": "You can also find the lowest values inside a smaller group by adding `WHERE` before `ORDER BY`.\n\nExample: find the cheapest stationery product.\n\n```sql\nSELECT name, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 1;\n```\n\nHow it works:\n- `WHERE category = 'Stationery'` keeps only stationery rows.\n- `ORDER BY price ASC` sorts those stationery products from cheapest to most expensive.\n- `LIMIT 1` returns just the cheapest one.\n\nIn the sample data, `Notebook` is cheaper than `Fountain Pen`, so it would appear first.\n\nThis pattern is very common:\n1. filter rows with `WHERE`\n2. sort with `ORDER BY`\n3. keep only a few with `LIMIT`\n\nTry this: change `'Stationery'` to `'Art'`, run the query, and compare the lowest price in each category."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "sc_lowest_asc_price",
+      "kind": "single_choice",
+      "title": "Choose the clause for lowest prices",
+      "prompt": "Which clause sorts product prices from the lowest value to the highest value?",
+      "hint": "Look for ascending order on the `price` column.",
+      "help": {
+        "concept": "To show the smallest numeric values first, SQL uses `ORDER BY` with ascending order on that column.",
+        "hint_1": "The correct choice must sort by `price`, not filter rows or limit rows.",
+        "hint_2": "Find the option that uses `ORDER BY price` with ascending order."
+      },
+      "options": [
+        "ORDER BY price ASC",
+        "WHERE price ASC",
+        "LIMIT price 1",
+        "ORDER BY price DESC"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "sc_limit_after_sort",
+      "kind": "single_choice",
+      "title": "Pick the best query for the cheapest product",
+      "prompt": "Which query returns the single cheapest product from the `products` table?",
+      "hint": "You need the rows sorted from low to high before keeping just one row.",
+      "help": {
+        "concept": "To get the cheapest row, sort by `price` ascending and then limit the result to one row.",
+        "hint_1": "A query with only `LIMIT 1` is not enough because it does not guarantee the lowest price.",
+        "hint_2": "Look for `ORDER BY price ASC` together with `LIMIT 1`."
+      },
+      "options": [
+        "SELECT name, price FROM products LIMIT 1;",
+        "SELECT name, price FROM products ORDER BY price ASC LIMIT 1;",
+        "SELECT name, price FROM products ORDER BY price DESC LIMIT 1;",
+        "SELECT name, price FROM products WHERE price = 1;"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "mc_lowest_query_parts",
+      "kind": "multi_choice",
+      "title": "Select all parts that help find lowest values",
+      "prompt": "Which parts are useful when you want to show the lowest-priced products? Choose all that apply.",
+      "hint": "Think about sorting small-to-large and optionally keeping only a few rows.",
+      "help": {
+        "concept": "Finding lowest values usually uses ascending sorting, and `LIMIT` is often added when you only want the first few lowest rows.",
+        "hint_1": "One correct choice controls order, and another can reduce the result to just the first few rows.",
+        "hint_2": "Choose the options that sort by `price` from low to high and that keep only a small number of sorted rows."
+      },
+      "options": [
+        "ORDER BY price ASC",
+        "LIMIT 3",
+        "ORDER BY price DESC",
+        "WHERE price"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "mc_true_lowest_statements",
+      "kind": "multi_choice",
+      "title": "Identify true statements about lowest values",
+      "prompt": "Which statements are true? Choose all that apply.",
+      "hint": "Check what ascending order does and what `LIMIT` does after sorting.",
+      "help": {
+        "concept": "Ascending order places smaller numbers first, and `LIMIT` keeps only the first rows from the sorted result.",
+        "hint_1": "One true statement is about `ASC`, and another is about using `LIMIT` with sorted rows.",
+        "hint_2": "Do not choose statements that claim descending order finds the lowest values first."
+      },
+      "options": [
+        "`ORDER BY stock ASC` puts smaller stock numbers before larger ones.",
+        "`LIMIT 2` can be used after sorting to keep only the first two rows.",
+        "`ORDER BY price DESC` shows the cheapest product first.",
+        "`LIMIT` changes the order of rows by itself."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "dr_query_order_lowest",
+      "kind": "drag_reorder",
+      "title": "Order the clauses to find the cheapest stationery item",
+      "prompt": "Arrange these SQL parts into a correct query that returns the cheapest stationery product.",
+      "hint": "Start with selecting columns, then table, then filter, then sort, then limit.",
+      "help": {
+        "concept": "A basic SQL query follows a clause order: `SELECT`, `FROM`, `WHERE`, `ORDER BY`, then `LIMIT`.",
+        "hint_1": "The category filter must come before sorting, and `LIMIT 1` should be last.",
+        "hint_2": "Place the ascending price sort after the `WHERE` clause and before the limit."
+      },
+      "tokens": [
+        "SELECT name, price",
+        "FROM products",
+        "WHERE category = 'Stationery'",
+        "ORDER BY price ASC",
+        "LIMIT 1"
+      ],
+      "correctOrder": [
+        "SELECT name, price",
+        "FROM products",
+        "WHERE category = 'Stationery'",
+        "ORDER BY price ASC",
+        "LIMIT 1"
+      ]
+    },
+    {
+      "id": "dr_logic_lowest_steps",
+      "kind": "drag_reorder",
+      "title": "Sequence the logic for finding the lowest stock",
+      "prompt": "Put these steps in the correct logical order for finding the two products with the lowest stock.",
+      "hint": "First choose the data source, then sort, then keep only the first rows.",
+      "help": {
+        "concept": "To find lowest values, SQL reads rows, sorts them ascending on the target column, and then limits the result if needed.",
+        "hint_1": "Sorting must happen before taking the first two rows.",
+        "hint_2": "The final step is the one that keeps only two rows after the ascending stock order is applied."
+      },
+      "tokens": [
+        "Read rows from products",
+        "Sort by stock from smallest to largest",
+        "Keep only the first 2 rows"
+      ],
+      "correctOrder": [
+        "Read rows from products",
+        "Sort by stock from smallest to largest",
+        "Keep only the first 2 rows"
+      ]
+    },
+    {
+      "id": "fb_lowest_keyword",
+      "kind": "fill_blank_choice",
+      "title": "Complete the sort direction",
+      "prompt": "Fill in the missing keyword to sort prices from lowest to highest.",
+      "hint": "Use the direction keyword for small-to-large order.",
+      "help": {
+        "concept": "In SQL, ascending order is used for lowest-to-highest sorting.",
+        "hint_1": "The blank comes after `ORDER BY price`.",
+        "hint_2": "Choose the keyword that means increasing order, not decreasing order."
+      },
+      "template": "SELECT name, price FROM products ORDER BY price [blank1];",
+      "choices": [
+        "ASC",
+        "DESC",
+        "WHERE",
+        "LIMIT"
+      ],
+      "correctValue": "ASC"
+    },
+    {
+      "id": "fb_limit_lowest_two",
+      "kind": "fill_blank_choice",
+      "title": "Complete the row limit",
+      "prompt": "Fill in the missing value to return the two lowest stock rows after sorting.",
+      "hint": "The blank is the number of rows to keep.",
+      "help": {
+        "concept": "After sorting ascending, `LIMIT` controls how many of the first rows are returned.",
+        "hint_1": "You want exactly two rows in the final results table.",
+        "hint_2": "Choose the numeric value that matches 'two lowest stock rows'."
+      },
+      "template": "SELECT name, stock FROM products ORDER BY stock ASC LIMIT [blank1];",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "stock"
+      ],
+      "correctValue": "2"
+    },
+    {
+      "id": "ci_cheapest_product",
+      "kind": "code_input",
+      "title": "Query the cheapest product",
+      "prompt": "Write a query that shows the `name` and `price` of the single cheapest product in the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+      "hint": "Sort by `price` from low to high, then keep one row.",
+      "help": {
+        "concept": "To return the cheapest product, sort the `price` column in ascending order and use `LIMIT 1`.",
+        "hint_1": "Select only `name` and `price` from `products`.",
+        "hint_2": "After sorting by the lowest price first, keep just the first row."
+      },
+      "starterCode": "SELECT name, price\nFROM products\n-- add sorting and a row limit here\n;",
+      "solutionCode": "SELECT name, price\nFROM products\nORDER BY price ASC\nLIMIT 1;",
+      "recipeType": "sql_query",
+      "type": "sql_query",
+      "datasetId": "products_catalog",
+      "resultShape": "table"
+    },
+    {
+      "id": "ci_lowest_stock_two",
+      "kind": "code_input",
+      "title": "Find the two lowest stock products",
+      "prompt": "Write a query that returns the `name` and `stock` columns for the two products with the lowest stock. Write the query in the SQL editor, click Run query, and check the results table.",
+      "hint": "Use ascending order on `stock` and keep two rows.",
+      "help": {
+        "concept": "Lowest stock means sorting the `stock` column from smallest to largest, then limiting the result.",
+        "hint_1": "Read from `products` and show `name` and `stock`.",
+        "hint_2": "Use `ORDER BY stock ASC` before `LIMIT 2`."
+      },
+      "starterCode": "SELECT name, stock\nFROM products\n-- sort by stock and keep the first two rows\n;",
+      "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock ASC\nLIMIT 2;",
+      "recipeType": "sql_query",
+      "type": "sql_query",
+      "datasetId": "products_catalog",
+      "resultShape": "table"
+    },
+    {
+      "id": "ci_cheapest_home_product",
+      "kind": "code_input",
+      "title": "Find the cheapest home product",
+      "prompt": "Write a query that shows the `name` and `price` of the cheapest product in the `Home` category. Write the query in the SQL editor, click Run query, and check the results table.",
+      "hint": "Filter to `Home` first, then sort by `price` ascending, then keep one row.",
+      "help": {
+        "concept": "When finding the lowest value inside one category, first filter with `WHERE`, then sort ascending, then limit the result.",
+        "hint_1": "Use `WHERE category = 'Home'` before the sort.",
+        "hint_2": "After filtering to Home products, sort by `price` from low to high and keep only the first row."
+      },
+      "starterCode": "SELECT name, price\nFROM products\nWHERE category = 'Home'\n-- add sorting and a row limit here\n;",
+      "solutionCode": "SELECT name, price\nFROM products\nWHERE category = 'Home'\nORDER BY price ASC\nLIMIT 1;",
+      "recipeType": "sql_query",
+      "type": "sql_query",
+      "datasetId": "products_catalog",
+      "resultShape": "table"
+    }
+  ],
+  "projectDraft": {
+    "title": "Lowest values mini project",
+    "stepIds": [
+      "ci_cheapest_product",
+      "ci_lowest_stock_two",
+      "ci_cheapest_home_product"
+    ]
+  }
+}

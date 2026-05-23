@@ -5,6 +5,18 @@
   "sectionSlug": "sql-v2-0-2",
   "prefix": "sqlv2_0",
   "minutes": 15,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "students_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
   "topic": {
     "labelKey": "topics.sql-v2.sql-v2-0.records_and_fields.label",
     "summaryKey": "topics.sql-v2.sql-v2-0.records_and_fields.summary"
@@ -14,14 +26,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-0.records_and_fields.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "records-vs-fields",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-0.records_and_fields.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "reading-specific-fields",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.records_and_fields.cards.sketch2.title",
+      "sketchId": "table-reading-mental-model",
       "height": 420
     },
     {
@@ -50,27 +69,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "code_input_1",
-            "titleKey": "topics.sql-v2.sql-v2-0.records_and_fields.projectSteps.code_input_1.title",
-            "exerciseKey": "code_input_1",
+            "id": "ci_show_all_student_records",
+            "titleKey": "topics.sql-v2.sql-v2-0.records_and_fields.projectSteps.ci_show_all_student_records.title",
+            "exerciseKey": "ci-show-all-student-records",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "code_input_2",
-            "titleKey": "topics.sql-v2.sql-v2-0.records_and_fields.projectSteps.code_input_2.title",
-            "exerciseKey": "code_input_2",
+            "id": "ci_show_names_and_grades",
+            "titleKey": "topics.sql-v2.sql-v2-0.records_and_fields.projectSteps.ci_show_names_and_grades.title",
+            "exerciseKey": "ci-show-names-and-grades",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "code_input_3",
-            "titleKey": "topics.sql-v2.sql-v2-0.records_and_fields.projectSteps.code_input_3.title",
-            "exerciseKey": "code_input_3",
+            "id": "ci_show_id_name_city",
+            "titleKey": "topics.sql-v2.sql-v2-0.records_and_fields.projectSteps.ci_show_id_name_city.title",
+            "exerciseKey": "ci-show-id-name-city",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -82,25 +101,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "records-vs-fields",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-0.records_and_fields.sketch1.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-0.records_and_fields.sketch1.bodyMarkdown"
+      "titleKey": "sketches.sql-v2.sql-v2-0.records_and_fields.records-vs-fields.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.records_and_fields.records-vs-fields.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "reading-specific-fields",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-0.records_and_fields.sketch2.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-0.records_and_fields.sketch2.bodyMarkdown"
+      "titleKey": "sketches.sql-v2.sql-v2-0.records_and_fields.reading-specific-fields.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.records_and_fields.reading-specific-fields.bodyMarkdown"
+    },
+    {
+      "id": "table-reading-mental-model",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.records_and_fields.table-reading-mental-model.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.records_and_fields.table-reading-mental-model.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "single_choice_1",
+      "id": "sc-record-definition",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.single_choice_1",
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.sc-record-definition",
       "optionIds": [
         "a",
         "b",
@@ -113,11 +138,11 @@
       }
     },
     {
-      "id": "single_choice_2",
+      "id": "sc-field-definition",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.single_choice_2",
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.sc-field-definition",
       "optionIds": [
         "a",
         "b",
@@ -130,11 +155,11 @@
       }
     },
     {
-      "id": "multi_choice_1",
+      "id": "mc-identify-fields",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.multi_choice_1",
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.mc-identify-fields",
       "optionIds": [
         "a",
         "b",
@@ -150,11 +175,11 @@
       }
     },
     {
-      "id": "multi_choice_2",
+      "id": "mc-identify-record-values",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.multi_choice_2",
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.mc-identify-record-values",
       "optionIds": [
         "a",
         "b",
@@ -170,11 +195,11 @@
       }
     },
     {
-      "id": "drag_reorder_1",
+      "id": "dr-query-order-all-fields",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.drag_reorder_1",
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.dr-query-order-all-fields",
       "tokenIds": [
         "t1",
         "t2",
@@ -184,19 +209,19 @@
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
-          "t1",
-          "t4",
           "t2",
-          "t3"
+          "t3",
+          "t4",
+          "t1"
         ]
       }
     },
     {
-      "id": "drag_reorder_2",
+      "id": "dr-query-order-specific-fields",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.drag_reorder_2",
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.dr-query-order-specific-fields",
       "tokenIds": [
         "t1",
         "t2",
@@ -206,83 +231,119 @@
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
-          "t1",
-          "t2",
+          "t3",
           "t4",
-          "t3"
+          "t1",
+          "t2"
         ]
       }
     },
     {
-      "id": "fill_blank_choice_1",
+      "id": "fb-select-keyword",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.fill_blank_choice_1",
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.fb-select-keyword",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "FROM"
+        "value": "SELECT"
       }
     },
     {
-      "id": "fill_blank_choice_2",
+      "id": "fb-table-name",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.fill_blank_choice_2",
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.fb-table-name",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "record"
+        "value": "students"
       }
     },
     {
-      "id": "code_input_1",
+      "id": "ci-show-all-student-records",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.code_input_1",
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.ci-show-all-student-records",
       "language": "sql",
-      "starterCode": "-- Write your SQL query here",
+      "starterCode": "-- Show all fields from the students table\nSELECT\n  -- TODO: ask for all columns\nFROM students;",
       "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
       "recipe": {
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM students;"
+        "solutionCode": "SELECT *\nFROM students;"
       }
     },
     {
-      "id": "code_input_2",
+      "id": "ci-show-names-and-grades",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.code_input_2",
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.ci-show-names-and-grades",
       "language": "sql",
-      "starterCode": "-- Write your SQL query here",
+      "starterCode": "-- Show only the name and grade fields\nSELECT\n  -- TODO: add the two field names\nFROM students;",
       "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
       "recipe": {
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT name, age FROM students;"
+        "solutionCode": "SELECT name, grade\nFROM students;"
       }
     },
     {
-      "id": "code_input_3",
+      "id": "ci-show-id-name-city",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.code_input_3",
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.ci-show-id-name-city",
       "language": "sql",
-      "starterCode": "-- Write your SQL query here",
+      "starterCode": "-- Show id, name, and city\nSELECT\n  -- TODO: add the three requested fields\nFROM students;",
       "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
       "recipe": {
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT grade FROM students;"
+        "solutionCode": "SELECT id, name, city\nFROM students;"
       }
     }
   ]

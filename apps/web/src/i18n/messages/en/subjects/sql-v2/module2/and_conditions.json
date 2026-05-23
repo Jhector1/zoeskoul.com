@@ -3,195 +3,197 @@
     "sql-v2": {
       "sql-v2-2": {
         "and_conditions": {
-          "label": "AND Conditions in SQL",
-          "summary": "Learn how to use AND conditions in SQL to filter data with multiple criteria.",
+          "label": "AND conditions",
+          "summary": "Learn how to combine multiple WHERE rules with AND so a query keeps only rows that match every condition.",
           "cards": {
             "sketch0": {
-              "title": "Understanding AND Conditions"
+              "title": "Using AND to narrow results"
             },
             "sketch1": {
-              "title": "Combining Multiple AND Conditions"
+              "title": "Read AND conditions one rule at a time"
+            },
+            "sketch2": {
+              "title": "Common mistakes with AND"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Filtering Project"
+              "title": "AND filter practice set"
             }
           },
           "projectSteps": {
-            "code_input_1": {
-              "title": "Filtering Products by Category and Price"
+            "ci_art_under_20": {
+              "title": "Query Art products under 20"
             },
-            "code_input_2": {
-              "title": "Selecting Products with Multiple Conditions"
+            "ci_stationery_stock_15": {
+              "title": "Filter Stationery with enough stock"
             },
-            "code_input_3": {
-              "title": "Advanced Filtering with AND"
+            "ci_home_price_under_100": {
+              "title": "Find affordable Home products"
             }
           },
           "quiz": {
-            "single_choice_1": {
-              "title": "Basic AND Condition",
-              "prompt": "Which SQL query will return products in the 'Home' category with a price greater than $50?",
-              "hint": "Focus on the condition that combines both category and price.",
+            "sc_and_all_conditions": {
+              "title": "What AND means",
+              "prompt": "In a `WHERE` clause, what does `AND` do?",
+              "hint": "A row must pass more than one test when `AND` is used.",
               "help": {
-                "concept": "The AND operator is used to ensure both conditions are met.",
-                "hint_1": "Check the condition that uses AND to combine category and price.",
-                "hint_2": "Ensure the price condition is greater than 50."
+                "concept": "`AND` combines conditions so only rows that make every combined condition true are returned.",
+                "hint_1": "Think about whether one true condition is enough, or whether all listed conditions must be true.",
+                "hint_2": "Compare `AND` with a checklist: if one item fails, the row is filtered out."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE category = 'Home' AND price > 50;",
-                "b": "SELECT * FROM products WHERE category = 'Home' OR price > 50;",
-                "c": "SELECT * FROM products WHERE category = 'Home' AND price < 50;",
-                "d": "SELECT * FROM products WHERE category = 'Home' AND price = 50;"
+                "a": "It returns rows if at least one condition is true.",
+                "b": "It returns rows only if all conditions are true.",
+                "c": "It sorts rows from smallest to largest.",
+                "d": "It selects every column in the table."
               }
             },
-            "single_choice_2": {
-              "title": "Understanding Multiple Conditions",
-              "prompt": "Which query will select products in the 'Art' category with a stock of more than 15?",
-              "hint": "Look for the query that combines category and stock conditions.",
+            "sc_and_result_example": {
+              "title": "Find the matching row",
+              "prompt": "Which product matches `WHERE category = 'Home' AND stock > 5`?",
+              "hint": "Check both the category and the stock value.",
               "help": {
-                "concept": "AND is used to ensure both conditions are true.",
-                "hint_1": "The correct query should use AND to combine the conditions.",
-                "hint_2": "Ensure the stock condition specifies more than 15."
+                "concept": "To satisfy an `AND` filter, a row must match the text condition and the numeric condition together.",
+                "hint_1": "Look at the `Home` products first, then compare their stock values to 5.",
+                "hint_2": "There are two `Home` products in the dataset, but only one has stock greater than 5."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE category = 'Art' AND stock > 15;",
-                "b": "SELECT * FROM products WHERE category = 'Art' OR stock > 15;",
-                "c": "SELECT * FROM products WHERE category = 'Art' AND stock < 15;",
-                "d": "SELECT * FROM products WHERE category = 'Art' AND stock = 15;"
+                "a": "Sketchbook",
+                "b": "Desk Lamp",
+                "c": "Fountain Pen",
+                "d": "Office Chair"
               }
             },
-            "multi_choice_1": {
-              "title": "Combining AND with Other Operators",
-              "prompt": "Which queries will select products in the 'Stationery' category with a price less than $10 and more than 20 items in stock? Choose all that apply.",
-              "hint": "Focus on the conditions that combine category, price, and stock.",
+            "mc_rows_match_art_and_price": {
+              "title": "Choose all matching Art products",
+              "prompt": "Which products match `WHERE category = 'Art' AND price < 30`? Choose all that apply.",
+              "hint": "Start with the `Art` category, then check which of those prices are below 30.",
               "help": {
-                "concept": "AND is used to combine multiple conditions that must all be true.",
-                "hint_1": "Check for queries that use AND to combine all conditions correctly.",
-                "hint_2": "Ensure both price and stock conditions are met."
+                "concept": "With `AND`, you first narrow to rows that match one condition, then keep only the rows that also satisfy the second condition.",
+                "hint_1": "The dataset has two `Art` products. Compare each of their prices to 30.",
+                "hint_2": "Both `Art` rows have prices under 30, so each one passes the second test too."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE category = 'Stationery' AND price < 10 AND stock > 20;",
-                "b": "SELECT * FROM products WHERE category = 'Stationery' AND price > 10 AND stock > 20;",
-                "c": "SELECT * FROM products WHERE category = 'Stationery' AND price < 10 AND stock < 20;"
+                "a": "Sketchbook",
+                "b": "Acrylic Paint Set",
+                "c": "Desk Lamp",
+                "d": "Office Chair"
               }
             },
-            "multi_choice_2": {
-              "title": "Advanced AND Conditions",
-              "prompt": "Which queries will return products in the 'Home' category with a price greater than $30 and less than 10 items in stock? Choose all that apply.",
-              "hint": "Look for queries that correctly combine all conditions using AND.",
+            "mc_conditions_true_for_notebook": {
+              "title": "Identify true conditions",
+              "prompt": "For the `Notebook` row, which conditions are true? Choose all that apply.",
+              "hint": "Use the Notebook values: category `Stationery`, price `6.75`, stock `50`.",
               "help": {
-                "concept": "AND ensures all specified conditions are true.",
-                "hint_1": "Focus on queries that use AND to combine price and stock conditions.",
-                "hint_2": "Ensure the price is greater than 30 and stock is less than 10."
+                "concept": "A multi-condition check is easier when you compare one row's actual values against each condition one by one.",
+                "hint_1": "Test each statement against Notebook's category, price, and stock separately.",
+                "hint_2": "Notebook is in `Stationery`, costs less than 10, and has stock greater than 20."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE category = 'Home' AND price > 30 AND stock < 10;",
-                "b": "SELECT * FROM products WHERE category = 'Home' AND price < 30 AND stock < 10;",
-                "c": "SELECT * FROM products WHERE category = 'Home' AND price > 30 AND stock > 10;"
+                "a": "category = 'Stationery'",
+                "b": "price < 10",
+                "c": "stock > 20",
+                "d": "category = 'Home'"
               }
             },
-            "drag_reorder_1": {
-              "title": "Ordering SQL Clauses",
-              "prompt": "Arrange the SQL clauses in the correct order to form a valid query that selects products in the 'Art' category with a price greater than $15.",
-              "hint": "Remember the typical order of SQL clauses in a query.",
+            "dr_build_and_query": {
+              "title": "Build a query with AND",
+              "prompt": "Arrange the SQL parts to query product names where the category is `Stationery` and stock is at least 15.",
+              "hint": "Start with `SELECT`, then `FROM`, then the `WHERE` clause with both conditions.",
               "help": {
-                "concept": "SQL queries follow a specific order: SELECT, FROM, WHERE.",
-                "hint_1": "Start with SELECT, then FROM, followed by WHERE.",
-                "hint_2": "Ensure conditions follow the WHERE clause."
+                "concept": "A basic filtered SQL query follows the order `SELECT ... FROM ... WHERE ...`, and combined conditions stay together in the `WHERE` clause.",
+                "hint_1": "The column to show is `name`, the table is `products`, and the filter comes last.",
+                "hint_2": "Inside `WHERE`, place the category check and the stock check with `AND` between them."
               },
               "tokens": {
-                "t1": "SELECT *",
+                "t1": "SELECT name",
                 "t2": "FROM products",
-                "t3": "WHERE category = 'Art'",
-                "t4": "AND price > 15;"
+                "t3": "WHERE category = 'Stationery' AND stock >= 15;"
               }
             },
-            "drag_reorder_2": {
-              "title": "Building a Complex Query",
-              "prompt": "Reorder the SQL clauses to create a query that selects products in the 'Stationery' category with a stock greater than 30 and priced below $20.",
-              "hint": "Consider the logical flow of SQL clauses.",
+            "dr_read_filter_steps": {
+              "title": "Order the filtering steps",
+              "prompt": "Put these steps in the order you would use to understand `WHERE category = 'Art' AND price < 20`.",
+              "hint": "First find the relevant rows, then test the second condition, then keep only rows that pass both.",
               "help": {
-                "concept": "The order of SQL clauses is crucial for query execution.",
-                "hint_1": "Begin with SELECT, then FROM, and follow with WHERE.",
-                "hint_2": "Ensure all conditions are correctly placed after WHERE."
+                "concept": "Reading an `AND` filter step by step helps you avoid mistakes: inspect one condition, inspect the next, then combine the results.",
+                "hint_1": "Begin by checking which rows are in the `Art` category.",
+                "hint_2": "After that, compare the prices of those rows to 20, then keep only the rows that satisfy both checks."
               },
               "tokens": {
-                "t1": "SELECT *",
-                "t2": "FROM products",
-                "t3": "WHERE category = 'Stationery'",
-                "t4": "AND stock > 30",
-                "t5": "AND price < 20;"
+                "t1": "Find the rows where category is 'Art'",
+                "t2": "Check which of those rows have price less than 20",
+                "t3": "Keep only the rows that pass both conditions"
               }
             },
-            "fill_blank_choice_1": {
-              "title": "Completing a WHERE Clause",
-              "prompt": "Complete the SQL query to select products in the 'Art' category with a price greater than $20. SELECT * FROM products WHERE category = 'Art' [blank1] price > 20;",
-              "hint": "Choose the operator that combines both conditions.",
+            "fb_and_keyword": {
+              "title": "Complete the filter keyword",
+              "prompt": "Fill in the missing SQL keyword.",
+              "hint": "Use the keyword that requires both conditions to be true.",
               "help": {
-                "concept": "the missing term is used to combine multiple conditions in a WHERE clause.",
-                "hint_1": "The operator should ensure both conditions are true.",
-                "hint_2": "the missing term is the correct operator to combine conditions."
+                "concept": "SQL uses `the missing term` to combine conditions when every condition must be true for a row to remain.",
+                "hint_1": "This is not the keyword for either/or logic.",
+                "hint_2": "The missing word joins two conditions into one stricter filter."
               },
-              "template": "SELECT * FROM products WHERE category = 'Art' [blank1] price > 20;",
+              "template": "SELECT name FROM products WHERE category = 'Art' [blank1] price < 20;",
               "choices": [
                 "AND",
                 "OR",
-                "NOT",
-                "LIKE"
+                "FROM",
+                "ORDER BY"
               ]
             },
-            "fill_blank_choice_2": {
-              "title": "Using AND in Queries",
-              "prompt": "Fill in the blank to select products in the 'Home' category with a stock less than 5. SELECT * FROM products WHERE category = 'Home' [blank1] stock < 5;",
-              "hint": "Select the operator that ensures both conditions are met.",
+            "fb_missing_column": {
+              "title": "Choose the right column",
+              "prompt": "Fill in the missing column name to filter by inventory amount.",
+              "hint": "Use the column that stores how many items are available.",
               "help": {
-                "concept": "the missing term is used to ensure both conditions in a WHERE clause are true.",
-                "hint_1": "The correct operator combines both conditions.",
-                "hint_2": "the missing term is used to ensure both conditions are true."
+                "concept": "To write a correct condition, you must use the real column name from the table schema that matches the value you want to test.",
+                "hint_1": "In the `products` table, the inventory count column is an integer field.",
+                "hint_2": "The schema includes `price` for cost and another column for quantity on hand."
               },
-              "template": "SELECT * FROM products WHERE category = 'Home' [blank1] stock < 5;",
+              "template": "SELECT name FROM products WHERE [blank1] >= 10 AND category = 'Stationery';",
               "choices": [
-                "AND",
-                "OR",
-                "NOT",
-                "LIKE"
+                "stock",
+                "name",
+                "created_at",
+                "id"
               ]
             },
-            "code_input_1": {
-              "title": "Filtering Products by Category and Price",
-              "prompt": "Write a SQL query to select all products in the 'Art' category with a price less than $25.",
+            "ci_art_under_20": {
+              "title": "Query Art products under 20",
+              "prompt": "Write a query that shows the `name` and `price` of products in the `Art` category with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT \nFROM products\nWHERE ;"
             },
-            "code_input_2": {
-              "title": "Selecting Products with Multiple Conditions",
-              "prompt": "Create a SQL query to find all products in the 'Stationery' category with a stock greater than 10 and priced below $20.",
+            "ci_stationery_stock_15": {
+              "title": "Filter Stationery with enough stock",
+              "prompt": "Write a query that returns `name`, `category`, and `stock` for products where the category is `Stationery` and the stock is at least 15. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT name, category, stock\nFROM products\nWHERE category = '' ;"
             },
-            "code_input_3": {
-              "title": "Advanced Filtering with AND",
-              "prompt": "Write a SQL query to select products in the 'Home' category with a price greater than $30 and less than 5 items in stock.",
-              "hint": "Break the task into the main code steps first.",
+            "ci_home_price_under_100": {
+              "title": "Find affordable Home products",
+              "prompt": "Write a query that shows `name` and `price` for products in the `Home` category with a price below 100. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This task checks whether you can apply advanced filtering with and in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT name, price\nFROM products\nWHERE category = 'Home'\n-- add one more condition here"
             }
           }
         }
@@ -202,13 +204,17 @@
     "sql-v2": {
       "sql-v2-2": {
         "and_conditions": {
-          "sketch1": {
-            "title": "Understanding AND Conditions",
-            "bodyMarkdown": "In SQL, the AND operator is used to combine multiple conditions in a WHERE clause. This allows you to filter records based on more than one condition. For example, if you want to find products in the 'Art' category that cost more than $20, you can use the following query:\n\n```sql\nSELECT * FROM products\nWHERE category = 'Art' AND price > 20;\n```\n\nThis query will return all products that are in the 'Art' category and have a price greater than $20. Try it yourself by modifying the conditions to see different results."
+          "and_intro": {
+            "title": "Using AND to narrow results",
+            "bodyMarkdown": "When you use `AND` in a `WHERE` clause, a row must satisfy **every condition** to appear in the results.\n\nA simple pattern looks like this:\n\n```sql\nSELECT name, category, price\nFROM products\nWHERE category = 'Art' AND price < 20;\n```\n\nThis query checks the `products` table and keeps only rows where:\n\n1. `category = 'Art'`\n2. `price < 20`\n\nBoth must be true at the same time.\n\nIn this dataset, `Sketchbook` matches because it is in the `Art` category and its price is `12.99`. `Acrylic Paint Set` does **not** match because even though it is `Art`, its price is `24.50`.\n\nSo the result is just the `Sketchbook` row.\n\n**Try it yourself:** Write the query in the SQL editor, click **Run query**, and then change `20` to `30`. Check how the results table changes."
           },
-          "sketch2": {
-            "title": "Combining Multiple AND Conditions",
-            "bodyMarkdown": "You can combine multiple AND conditions to refine your data selection further. For instance, to find products in the 'Stationery' category that are priced below $20 and have more than 10 items in stock, you can write:\n\n```sql\nSELECT * FROM products\nWHERE category = 'Stationery' AND price < 20 AND stock > 10;\n```\n\nThis query filters products that meet all three conditions. Try adjusting the conditions to explore different subsets of data."
+          "and_step_by_step": {
+            "title": "Read AND conditions one rule at a time",
+            "bodyMarkdown": "A good beginner strategy is to read an `AND` filter as a checklist.\n\nExample:\n\n```sql\nSELECT name, stock, price\nFROM products\nWHERE stock >= 10 AND price <= 20;\n```\n\nLine by line:\n\n- `SELECT name, stock, price` shows the columns you want to see.\n- `FROM products` says which table to read.\n- `WHERE stock >= 10 AND price <= 20` keeps only products with enough stock **and** a price at or below 20.\n\nLet's test a few rows:\n\n- `Notebook` has stock `50` and price `6.75` → passes both conditions.\n- `Fountain Pen` has stock `15` and price `18.00` → passes both conditions.\n- `Desk Lamp` has stock `8` and price `39.99` → fails both conditions.\n- `Acrylic Paint Set` has stock `10` and price `24.50` → passes stock, fails price.\n\nOnly rows that pass **both** checks stay in the results.\n\n**Your turn:** Run the query, then change `price <= 20` to `price <= 25`. Which extra product appears?"
+          },
+          "and_common_mistakes": {
+            "title": "Common mistakes with AND",
+            "bodyMarkdown": "A common mistake is thinking `AND` means a row can match either rule. That is actually how `OR` works. `AND` is stricter.\n\nCompare these ideas:\n\n```sql\nSELECT name\nFROM products\nWHERE category = 'Home' AND stock > 5;\n```\n\nThis returns only products that are in `Home` **and** have stock greater than 5.\n\nCheck the rows:\n\n- `Desk Lamp` → `Home`, stock `8` → included\n- `Office Chair` → `Home`, stock `3` → not included\n\nSo only `Desk Lamp` appears.\n\nAnother mistake is using a column name that is not in the schema. In this topic, use the real columns from `products`: `id`, `name`, `category`, `price`, `stock`, and `created_at`.\n\n**Try this:** In the SQL editor, run the example. Then change `stock > 5` to `stock > 2` and check the results table to see why more rows now match."
           }
         }
       }

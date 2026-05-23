@@ -99,6 +99,11 @@ export default function QuizPracticeCard(props: {
   ps?: PracticeState;
   toolScopedId?: string;
   toolsActive?: boolean;
+  subjectRuntimeDefaults?: unknown;
+  courseRuntimeDefaults?: unknown;
+  moduleRuntimeDefaults?: unknown;
+  sectionRuntimeDefaults?: unknown;
+  topicRuntimeDefaults?: unknown;
 
   unlocked: boolean;
   isCompleted: boolean;
@@ -122,6 +127,11 @@ export default function QuizPracticeCard(props: {
     ps,
     toolScopedId,
     toolsActive = true,
+    subjectRuntimeDefaults,
+    courseRuntimeDefaults,
+    moduleRuntimeDefaults,
+    sectionRuntimeDefaults,
+    topicRuntimeDefaults,
     unlocked,
     isCompleted,
     locked,
@@ -660,6 +670,11 @@ export default function QuizPracticeCard(props: {
                     sectionSlug={(q as any).fetch?.section}
                     topicId={normalizeTopicProgressKey((q as any).fetch?.topic)}
                     cardId={ownerCardId}
+                    subjectRuntimeDefaults={subjectRuntimeDefaults}
+                    courseRuntimeDefaults={courseRuntimeDefaults}
+                    moduleRuntimeDefaults={moduleRuntimeDefaults}
+                    sectionRuntimeDefaults={sectionRuntimeDefaults}
+                    topicRuntimeDefaults={topicRuntimeDefaults}
                     // showPrompt={true}
 
                 />

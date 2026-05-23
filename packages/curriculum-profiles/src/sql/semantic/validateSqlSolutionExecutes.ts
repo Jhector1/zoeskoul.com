@@ -4,7 +4,10 @@ import type {
     SqlDatasetArtifact,
 } from "@zoeskoul/curriculum-contracts";
 import type { SemanticValidationIssue } from "../../shared/profileServices.js";
-import { resolveSqlRunner } from "@zoeskoul/curriculum-runtime";
+import {
+    resolveSqlRunner,
+} from "@zoeskoul/curriculum-runtime";
+import { resolveEffectiveExerciseRuntime } from "@zoeskoul/curriculum-runtime/runtime";
 import { getSqlDatasetById } from "../datasets/index.js";
 
 const DEFAULT_SQL_LIMITS = {
@@ -15,23 +18,36 @@ const DEFAULT_SQL_LIMITS = {
 
 function resolveExerciseDataset(args: {
     seed: TopicSeed;
+    exercise: TopicAuthoringDraft["quizDraft"][number];
+}): {
     datasetId?: string;
-}): { datasetId?: string; dataset: SqlDatasetArtifact | null } {
-    const moduleDatasetId =
-        args.seed.moduleRuntimeDefaults?.kind === "sql"
-            ? args.seed.moduleRuntimeDefaults.datasetId
-            : undefined;
+    dataset: SqlDatasetArtifact | null;
+    dialect: "sqlite" | "postgres" | "mysql" | "mssql";
+} {
+    const resolved = resolveEffectiveExerciseRuntime({
+        language: "sql",
+        exerciseSqlDatasetId:
+            args.exercise.kind === "code_input" ? args.exercise.datasetId : undefined,
+        moduleRuntimeDefaults: args.seed.moduleRuntimeDefaults,
+    });
 
-    const datasetId = args.datasetId ?? moduleDatasetId;
-
+    const datasetId = resolved.datasetId;
     const dataset =
-        datasetId && datasetId === moduleDatasetId
+        datasetId &&
+        datasetId ===
+            (args.seed.moduleRuntimeDefaults?.kind === "sql"
+                ? args.seed.moduleRuntimeDefaults.datasetId
+                : undefined)
             ? args.seed.moduleDataset ?? getSqlDatasetById(datasetId)
             : datasetId
                 ? getSqlDatasetById(datasetId)
                 : args.seed.moduleDataset ?? null;
 
-    return { datasetId, dataset };
+    return {
+        datasetId,
+        dataset,
+        dialect: resolved.fixedSqlDialect ?? "sqlite",
+    };
 }
 
 export async function validateSqlSolutionExecutes(args: {
@@ -73,18 +89,13 @@ export async function validateSqlSolutionExecutes(args: {
 
         const resolved = resolveExerciseDataset({
             seed: args.seed,
-            datasetId: exercise.datasetId,
+            exercise,
         });
-
-        const dialect =
-            args.seed.moduleRuntimeDefaults?.kind === "sql"
-                ? args.seed.moduleRuntimeDefaults.fixedSqlDialect ?? "sqlite"
-                : "sqlite";
 
         const run = await runSql({
             code: exercise.solutionCode,
             checkSql: exercise.checkSql,
-            dialect,
+            dialect: resolved.dialect,
             schemaSql: resolved.dataset?.schemaSql ?? "",
             seedSql: resolved.dataset?.seedSql ?? "",
             datasetId: resolved.datasetId,

@@ -18,6 +18,13 @@ function sortByOrderThenSlug<T extends { order: number; slug: string }>(a: T, b:
 
 const moduleBySlug = indexBy(SUBJECT_ARTIFACTS.modules);
 const sectionBySlug = indexBy(SUBJECT_ARTIFACTS.sections);
+const subjectBySlug = indexBy(SUBJECT_ARTIFACTS.subjects);
+
+function readSubjectVersionFamily(subject: (typeof SUBJECT_ARTIFACTS.subjects)[number] | null) {
+    const family = (subject?.meta as { versioning?: { family?: unknown } } | null | undefined)
+        ?.versioning?.family;
+    return typeof family === "string" && family.trim() ? family : null;
+}
 
 function makeSubtitle(moduleSlug: string): string {
     const mod = moduleBySlug[moduleSlug];
@@ -108,6 +115,7 @@ export function getRawReviewModule(
 ): ReviewModule | null {
     const subjectEntry = SUBJECT_ARTIFACTS.catalog[subjectSlug];
     if (!subjectEntry) return null;
+    const subject = subjectBySlug[subjectSlug] ?? null;
 
     const moduleEntry = subjectEntry.modulesBySlug[moduleSlug];
     if (!moduleEntry) return null;
@@ -133,6 +141,11 @@ export function getRawReviewModule(
         title: mod?.title ?? moduleSlug,
         subtitle: makeSubtitle(moduleSlug),
         startPracticeSectionSlug: section?.slug ?? moduleEntry.sectionSlug,
+        profileId:
+            typeof subject?.profileId === "string" && subject.profileId.trim()
+                ? subject.profileId
+                : null,
+        versionFamily: readSubjectVersionFamily(subject),
         runtimeDefaults: mod?.runtimeDefaults ?? moduleEntry.runtimeDefaults ?? null,
         serviceDefaults: mod?.serviceDefaults ?? moduleEntry.serviceDefaults ?? null,
         topics,

@@ -4,193 +4,196 @@
       "sql-v2-2": {
         "equals_comparison": {
           "label": "equals comparison",
-          "summary": "equals comparison in Filtering Data with WHERE",
+          "summary": "Learn how to use = in a WHERE clause to keep only rows whose column value exactly matches what you ask for.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Equals Comparison"
+              "title": "Using = to match an exact value"
             },
             "sketch1": {
-              "title": "Using Equals with Numeric Values"
+              "title": "Text values and number values"
+            },
+            "sketch2": {
+              "title": "Common mistakes with ="
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Filtering Project"
+              "title": "Exact-match product detective"
             }
           },
           "projectSteps": {
-            "code_input_1": {
-              "title": "Filter Products by Category"
+            "eq_code_1": {
+              "title": "Find all Art products"
             },
-            "code_input_2": {
-              "title": "Find Products by Price"
+            "eq_code_2": {
+              "title": "Find the product with stock 3"
             },
-            "code_input_3": {
-              "title": "Select Products by Stock"
+            "eq_code_3": {
+              "title": "Match one exact product name"
             }
           },
           "quiz": {
-            "single_choice_1": {
-              "title": "Basic Equals Comparison",
-              "prompt": "Which SQL query will return all products in the 'Stationery' category?",
-              "hint": "Focus on the category name.",
+            "eq-sc-1": {
+              "title": "What does = do in WHERE?",
+              "prompt": "What does the `=` operator do in a `WHERE` clause?",
+              "hint": "Think about whether `=` keeps exact matches or a range of values.",
               "help": {
-                "concept": "The equals operator is used to filter rows by exact matches.",
-                "hint_1": "Check the category name in the WHERE clause.",
-                "hint_2": "Ensure the category name matches 'Stationery'."
+                "concept": "In SQL filtering, `=` is used to keep rows where a column matches one specific value exactly.",
+                "hint_1": "Compare `category = 'Art'` with the idea of finding only rows whose category is exactly Art.",
+                "hint_2": "It does not mean greater than, less than, or contains part of the text."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE category = 'Stationery';",
-                "b": "SELECT * FROM products WHERE category = 'Art';",
-                "c": "SELECT * FROM products WHERE category = 'Home';",
-                "d": "SELECT * FROM products WHERE category = 'Office';"
+                "a": "It keeps rows where the value exactly matches.",
+                "b": "It sorts rows from smallest to largest.",
+                "c": "It returns every row in the table.",
+                "d": "It checks whether a value is between two numbers."
               }
             },
-            "single_choice_2": {
-              "title": "Equals with Numeric Values",
-              "prompt": "Which query will find all products with a price of 39.99?",
-              "hint": "Look for the exact price value.",
+            "eq-sc-2": {
+              "title": "Which query finds id 4?",
+              "prompt": "Which query returns the row whose `id` is exactly 4?",
+              "hint": "Look for a WHERE clause that compares the `id` column to the number 4.",
               "help": {
-                "concept": "Use the equals operator to match specific numeric values.",
-                "hint_1": "Focus on the price value in the WHERE clause.",
-                "hint_2": "Ensure the price matches 39.99."
+                "concept": "To match one numeric value, use `WHERE column = number`.",
+                "hint_1": "The correct query filters on `id`, not on `name` or `category`.",
+                "hint_2": "Because `id` is numeric here, the comparison should use the number 4 directly."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE price = 39.99;",
-                "b": "SELECT * FROM products WHERE price = 12.99;",
-                "c": "SELECT * FROM products WHERE price = 24.50;",
-                "d": "SELECT * FROM products WHERE price = 18.00;"
+                "a": "SELECT * FROM products WHERE id = 4;",
+                "b": "SELECT * FROM products WHERE id > 4;",
+                "c": "SELECT * FROM products WHERE name = 4;",
+                "d": "SELECT * FROM products ORDER BY id = 4;"
               }
             },
-            "multi_choice_1": {
-              "title": "Multiple Equals Comparisons",
-              "prompt": "Which queries will return products in the 'Art' category?",
-              "hint": "Consider queries that include 'Art'.",
+            "eq-mc-1": {
+              "title": "Exact-match queries",
+              "prompt": "Which queries use `=` to check for an exact match? Choose all that apply.",
+              "hint": "Look for queries where a column is compared to one specific value with `=`.",
               "help": {
-                "concept": "The equals operator can be combined with OR for multiple conditions.",
-                "hint_1": "Look for queries that include 'Art'.",
-                "hint_2": "Check if 'Art' is included in an OR condition."
+                "concept": "An exact-match filter uses `WHERE` with `=` and one target value.",
+                "hint_1": "Queries using `>` are not exact matches, and queries without `WHERE` are not filtering.",
+                "hint_2": "Check whether each query keeps rows equal to one text or numeric value."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE category = 'Art';",
-                "b": "SELECT * FROM products WHERE category = 'Stationery';",
-                "c": "SELECT * FROM products WHERE category = 'Home';",
-                "d": "SELECT * FROM products WHERE category = 'Art' OR category = 'Stationery';"
+                "a": "SELECT * FROM products WHERE category = 'Home';",
+                "b": "SELECT * FROM products WHERE stock = 15;",
+                "c": "SELECT * FROM products WHERE price > 20;",
+                "d": "SELECT * FROM products;"
               }
             },
-            "multi_choice_2": {
-              "title": "Equals in Different Contexts",
-              "prompt": "Which queries correctly use the equals operator?",
-              "hint": "Focus on the correct use of the equals operator.",
+            "eq-mc-2": {
+              "title": "Queries that return one known row",
+              "prompt": "Based on the table data in this lesson, which queries return exactly one row? Choose all that apply.",
+              "hint": "Use the sample rows: only some values appear once in the products table.",
               "help": {
-                "concept": "The equals operator is used for exact matches in various columns.",
-                "hint_1": "Check if the operator is used with valid column values.",
-                "hint_2": "Ensure the operator is used for exact matches."
+                "concept": "A query returns exactly one row when only one record in the table has the matching value.",
+                "hint_1": "Check how many rows match each value: `id = 6`, `stock = 50`, `category = 'Art'`, and `category = 'Stationery'`.",
+                "hint_2": "Two of these values are unique in the sample data, while two category values appear more than once."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE price = 24.50;",
-                "b": "SELECT * FROM products WHERE name = 'Notebook';",
-                "c": "SELECT * FROM products WHERE stock = 10;",
-                "d": "SELECT * FROM products WHERE created_at = '2026-01-10';"
+                "a": "SELECT * FROM products WHERE id = 6;",
+                "b": "SELECT * FROM products WHERE stock = 50;",
+                "c": "SELECT * FROM products WHERE category = 'Art';",
+                "d": "SELECT * FROM products WHERE category = 'Stationery';"
               }
             },
-            "drag_reorder_1": {
-              "title": "Order of SQL Query Components",
-              "prompt": "Arrange the components of a SQL query in the correct order.",
-              "hint": "Start with SELECT and end with WHERE.",
+            "eq-dr-1": {
+              "title": "Build a basic exact-match query",
+              "prompt": "Put the SQL parts in order to query the name of products whose category is exactly 'Art'.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
-                "concept": "SQL queries follow a specific order: SELECT, FROM, WHERE.",
-                "hint_1": "The query starts with SELECT.",
-                "hint_2": "The WHERE clause is used for filtering."
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "SELECT *",
+                "t1": "SELECT name",
                 "t2": "FROM products",
-                "t3": "WHERE category = 'Art'"
+                "t3": "WHERE category = 'Art';"
               }
             },
-            "drag_reorder_2": {
-              "title": "SQL Query Structure",
-              "prompt": "Reorder the parts of this SQL query correctly.",
-              "hint": "Remember the typical SQL query structure.",
+            "eq-dr-2": {
+              "title": "Order the filter for a price match",
+              "prompt": "Arrange the parts to create a query that shows `name` and `price` for the product priced exactly 39.99.",
+              "hint": "Keep the same SQL clause order as other SELECT queries with WHERE.",
               "help": {
-                "concept": "The standard order is SELECT, FROM, WHERE.",
-                "hint_1": "SELECT comes first.",
-                "hint_2": "WHERE is used for conditions."
+                "concept": "When filtering by an exact numeric value, the query still follows `SELECT`, `FROM`, then `WHERE`.",
+                "hint_1": "The selected columns come first, then the table name, then the price comparison.",
+                "hint_2": "The `price = 39.99` condition should be the last clause in this query."
               },
               "tokens": {
-                "t1": "WHERE price = 18.00",
-                "t2": "SELECT *",
-                "t3": "FROM products"
+                "t1": "SELECT name, price",
+                "t2": "FROM products",
+                "t3": "WHERE price = 39.99;"
               }
             },
-            "fill_blank_choice_1": {
-              "title": "Fill in the SQL Query",
-              "prompt": "Complete the SQL query to find products with a stock of 15.",
-              "hint": "Focus on the stock value.",
+            "eq-fb-1": {
+              "title": "Fill the exact category value",
+              "prompt": "Choose the value that completes the query so it returns only Stationery products.",
+              "hint": "The missing part is the text value for the category column.",
               "help": {
-                "concept": "Use the equals operator to match specific stock values.",
-                "hint_1": "Check the stock value in the WHERE clause.",
-                "hint_2": "Ensure the stock matches the missing term."
+                "concept": "Text comparisons with `=` use the exact text value from the table.",
+                "hint_1": "Look at the category names in the products data: Art, Home, and the missing term.",
+                "hint_2": "The correct choice is the category used by Notebook and Fountain Pen."
               },
-              "template": "SELECT * FROM products WHERE stock = [blank1];",
+              "template": "SELECT name FROM products WHERE category = '[blank1]';",
               "choices": [
-                "15",
-                "10",
-                "25",
-                "50"
+                "Home",
+                "Stationery",
+                "price",
+                "10"
               ]
             },
-            "fill_blank_choice_2": {
-              "title": "Complete the Query",
-              "prompt": "Fill in the blank to find products created on '2026-01-10'.",
-              "hint": "Look for the correct date.",
+            "eq-fb-2": {
+              "title": "Choose the matching column",
+              "prompt": "Fill in the column name so the query finds the product with the exact name 'Notebook'.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
               "help": {
-                "concept": "The equals operator is used for exact date matches.",
-                "hint_1": "Check the date format in the WHERE clause.",
-                "hint_2": "Ensure the date matches 'the missing term'."
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
               },
-              "template": "SELECT * FROM products WHERE created_at = '[blank1]';",
+              "template": "SELECT * FROM products WHERE [blank1] = 'Notebook';",
               "choices": [
-                "2026-01-10",
-                "2026-02-14",
-                "2025-12-20",
-                "2026-01-25"
+                "price",
+                "stock",
+                "name",
+                "created_at"
               ]
             },
-            "code_input_1": {
-              "title": "Filter Products by Category",
-              "prompt": "Write a SQL query to select all products in the 'Home' category.",
+            "eq-code-1": {
+              "title": "Find all Art products",
+              "prompt": "Write a query that shows the `id`, `name`, and `category` columns for products whose category is exactly `Art`. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT \nFROM products\nWHERE ;"
             },
-            "code_input_2": {
-              "title": "Find Products by Price",
-              "prompt": "Write a SQL query to find all products with a price of 24.50.",
+            "eq-code-2": {
+              "title": "Find the product with stock 3",
+              "prompt": "Write a query that returns the `name` and `stock` columns for the product whose stock is exactly 3. Use the SQL editor and check the results table after you click Run query.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT name\nFROM products\nWHERE stock = ;"
             },
-            "code_input_3": {
-              "title": "Select Products by Stock",
-              "prompt": "Write a SQL query to select products with a stock of 8.",
+            "eq-code-3": {
+              "title": "Match one exact product name",
+              "prompt": "Write a query that shows all columns for the product whose name is exactly `Desk Lamp`. Write the query in the SQL editor, click Run query, and confirm that the results table shows one matching row.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT *\nFROM products\nWHERE ;"
             }
           }
         }
@@ -201,13 +204,17 @@
     "sql-v2": {
       "sql-v2-2": {
         "equals_comparison": {
-          "sketch_1": {
-            "title": "Understanding Equals Comparison",
-            "bodyMarkdown": "In SQL, the equals comparison operator (`=`) is used to filter rows based on exact matches in a column. For example, to find all products in the 'Art' category, you can use:\n\n```sql\nSELECT * FROM products WHERE category = 'Art';\n```\n\nThis query selects all columns from the `products` table where the `category` is exactly 'Art'.\n\nTry it yourself: Modify the query to find products in the 'Home' category."
+          "equals-idea": {
+            "title": "Using = to match an exact value",
+            "bodyMarkdown": "The `=` operator in SQL checks for an exact match inside a `WHERE` clause. It keeps only the rows where the column value is exactly the same as the value you write.\n\nFor example, in the `products` table, this query returns only products in the `Art` category:\n\n```sql\nSELECT name, category\nFROM products\nWHERE category = 'Art';\n```\n\nStep by step:\n- `SELECT name, category` chooses the columns to show.\n- `FROM products` says which table to read.\n- `WHERE category = 'Art'` keeps only rows whose `category` is exactly `Art`.\n\nWith the dataset in this lesson, the matching rows are `Sketchbook` and `Acrylic Paint Set`.\n\nA number works the same way. This query looks for the product whose `id` is exactly 4:\n\n```sql\nSELECT id, name\nFROM products\nWHERE id = 4;\n```\n\nThat returns the row for `Notebook`.\n\nTry it yourself: write the first query in the SQL editor, click Run query, then change `'Art'` to `'Home'` and compare the results table."
           },
-          "sketch_2": {
-            "title": "Using Equals with Numeric Values",
-            "bodyMarkdown": "The equals operator can also be used with numeric values. Suppose you want to find products with a price of exactly 18.00:\n\n```sql\nSELECT * FROM products WHERE price = 18.00;\n```\n\nThis query will return all products priced at 18.00.\n\nYour turn: Change the query to find products with a price of 12.99."
+          "equals-text-vs-number": {
+            "title": "Text values and number values",
+            "bodyMarkdown": "When you use `=`, the value you compare must fit the column type.\n\n- Text values use quotes, like `'Stationery'`\n- Numbers do not use quotes, like `50`\n\nExample with text:\n\n```sql\nSELECT name, category\nFROM products\nWHERE category = 'Stationery';\n```\n\nThis returns `Notebook` and `Fountain Pen`.\n\nExample with a number:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock = 10;\n```\n\nThis returns `Acrylic Paint Set` because its `stock` value is exactly 10.\n\nIf you accidentally compare the wrong value, the query may return no rows. That does not always mean the query is broken. It may just mean nothing matches.\n\nYour turn: in the SQL editor, run the stock example, then change `10` to `3` and check which product appears in the results table."
+          },
+          "equals-common-mistakes": {
+            "title": "Common mistakes with =",
+            "bodyMarkdown": "A common beginner mistake is forgetting that `=` checks one exact value.\n\nFor example:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price = 18.00;\n```\n\nThis returns `Fountain Pen` because its `price` is exactly `18.00`.\n\nHere are a few things to watch for:\n- Use `=` in `WHERE` when you want an exact match.\n- Put quotes around text such as `'Home'` or `'Notebook'`.\n- Do not put quotes around numbers such as `4` or `129.00`.\n- Make sure the value really exists in the table.\n\nLine by line:\n- `SELECT name, price` shows the product name and price.\n- `FROM products` reads from the products table.\n- `WHERE price = 18.00` keeps only rows with that exact price.\n\nTry this: change `18.00` to `39.99` and run the query again. Which product now appears?"
           }
         }
       }

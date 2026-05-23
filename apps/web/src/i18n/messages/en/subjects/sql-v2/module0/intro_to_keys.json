@@ -3,98 +3,104 @@
     "sql-v2": {
       "sql-v2-0": {
         "intro_to_keys": {
-          "label": "intro to keys",
-          "summary": "Introduction to keys in SQL databases, focusing on primary keys and their importance in uniquely identifying records.",
+          "label": "Intro to Keys",
+          "summary": "Learn what keys do in a table, why an id column matters, and how keys help you identify rows clearly in a database.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Primary Keys"
+              "title": "What a key does"
+            },
+            "sketch1": {
+              "title": "A key is different from an ordinary column"
+            },
+            "sketch2": {
+              "title": "Primary key as the main row identifier"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Basics Project"
+              "title": "Explore the students key column"
             }
           },
           "projectSteps": {
-            "code_input_1": {
-              "title": "Select All Students"
+            "ci_show_all_students": {
+              "title": "Show every student row"
             },
-            "code_input_2": {
-              "title": "Select Student Names"
+            "ci_show_id_and_name": {
+              "title": "Show the key with names"
             },
-            "code_input_3": {
-              "title": "Select Student IDs"
+            "ci_show_id_name_city": {
+              "title": "Read key plus details"
             }
           },
           "quiz": {
-            "single_choice_1": {
-              "title": "Purpose of Primary Key",
-              "prompt": "What is the main purpose of a primary key in a database table?",
-              "hint": "Think about how a primary key helps in identifying records.",
+            "sc-key-purpose": {
+              "title": "What is a key for?",
+              "prompt": "In a database table, what is the main purpose of a key such as `id`?",
+              "hint": "Think about how the database tells one row apart from another.",
               "help": {
-                "concept": "A primary key uniquely identifies each row in a table.",
-                "hint_1": "Consider the role of a primary key in ensuring uniqueness.",
-                "hint_2": "A primary key is essential for identifying records without ambiguity."
+                "concept": "A key is used to identify rows clearly. In this topic, `id` works as the row identifier in the `students` table.",
+                "hint_1": "Compare `id` with columns like `grade` or `city`, which can repeat across multiple rows.",
+                "hint_2": "Look for the choice about uniquely pointing to one row, not just describing the row."
               },
               "options": {
-                "a": "To uniquely identify each row in the table.",
-                "b": "To store the largest value in the table.",
-                "c": "To act as a foreign key in another table.",
-                "d": "To ensure all values in the column are unique."
+                "a": "To uniquely identify a row",
+                "b": "To sort rows automatically",
+                "c": "To make every text value uppercase",
+                "d": "To hide columns from a query"
               }
             },
-            "single_choice_2": {
-              "title": "Characteristics of a Primary Key",
-              "prompt": "Which of the following is a characteristic of a primary key?",
-              "hint": "Focus on the uniqueness requirement of primary keys.",
+            "sc-best-key-column": {
+              "title": "Best key candidate",
+              "prompt": "In the `students` table with columns `id`, `name`, `grade`, `age`, and `city`, which column is the best choice for identifying each row?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Primary keys must contain unique values and cannot be NULL.",
-                "hint_1": "Primary keys ensure that each record can be uniquely identified.",
-                "hint_2": "A primary key cannot have duplicate or NULL values."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "It can contain duplicate values.",
-                "b": "It can be NULL.",
-                "c": "It must contain unique values.",
-                "d": "It is always a foreign key."
+                "a": "grade",
+                "b": "city",
+                "c": "id",
+                "d": "age"
               }
             },
-            "multi_choice_1": {
-              "title": "Primary Key Constraints",
-              "prompt": "Select all true statements about primary keys.",
-              "hint": "Think about the rules that apply to primary keys.",
+            "mc-columns-can-repeat": {
+              "title": "Columns that can repeat",
+              "prompt": "Choose all columns from the `students` table that clearly repeat in the sample data.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Primary keys enforce uniqueness and can consist of multiple columns.",
-                "hint_1": "A primary key can be a composite key, consisting of multiple columns.",
-                "hint_2": "Primary keys ensure uniqueness and cannot be NULL."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "A table can have multiple primary keys.",
-                "b": "A primary key can consist of multiple columns.",
-                "c": "Primary keys ensure that no duplicate rows exist.",
-                "d": "Primary keys can be NULL."
+                "a": "grade",
+                "b": "age",
+                "c": "city",
+                "d": "id"
               }
             },
-            "multi_choice_2": {
-              "title": "Primary Key Usage",
-              "prompt": "Which of the following are true about primary keys? Select all that apply.",
-              "hint": "Consider how primary keys are used in database operations.",
+            "mc-key-characteristics": {
+              "title": "Signs of a good key",
+              "prompt": "Choose all statements that describe why `id` is a strong key column in the `students` table.",
+              "hint": "Think about what makes a row identifier reliable.",
               "help": {
-                "concept": "Primary keys are used for joining tables and ensuring data integrity.",
-                "hint_1": "Primary keys are crucial for maintaining data integrity.",
-                "hint_2": "Primary keys are often used in joins and ensure uniqueness."
+                "concept": "A strong key should identify one row clearly and avoid repeated values. It should be more stable than descriptive columns like city or grade.",
+                "hint_1": "Good key ideas include uniqueness and clear row identification.",
+                "hint_2": "Select the statements about identifying one row and avoiding repeated values, not statements about sorting or display style."
               },
               "options": {
-                "a": "They can be used to join tables.",
-                "b": "They can be used to enforce data integrity.",
-                "c": "They can be NULL.",
-                "d": "They ensure each row is unique."
+                "a": "It is meant to point to one specific row.",
+                "b": "Its values should not repeat across rows.",
+                "c": "It automatically sorts the table alphabetically.",
+                "d": "It is more reliable than using grade or city as the row identifier."
               }
             },
-            "drag_reorder_1": {
-              "title": "Order of SQL Clauses",
-              "prompt": "Arrange the SQL clauses in the correct order for a basic query.",
+            "dr-read-query-order": {
+              "title": "Read a simple query in order",
+              "prompt": "Arrange these parts in the correct order to form a valid query that shows `id` and `name` from the `students` table.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -103,93 +109,93 @@
               },
               "tokens": {
                 "t1": "SELECT",
-                "t2": "FROM",
-                "t3": "WHERE",
-                "t4": "ORDER BY"
+                "t2": "id, name",
+                "t3": "FROM",
+                "t4": "students"
               }
             },
-            "drag_reorder_2": {
-              "title": "Steps to Create a Primary Key",
-              "prompt": "Arrange the steps to create a primary key in a table.",
-              "hint": "Consider the logical steps to ensure a column can be a primary key.",
+            "dr-key-thinking-order": {
+              "title": "Reason about a key",
+              "prompt": "Put these ideas in a sensible order for deciding whether a column is a good key.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
-                "concept": "Creating a primary key involves ensuring uniqueness and defining constraints.",
-                "hint_1": "Start by identifying and ensuring the column(s) can be unique.",
-                "hint_2": "Define the column(s) and add the PRIMARY KEY constraint."
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "Identify the column(s) for uniqueness.",
-                "t2": "Define the column(s) in the CREATE TABLE statement.",
-                "t3": "Add PRIMARY KEY constraint.",
-                "t4": "Ensure no NULL values."
+                "t1": "Pick a column to inspect",
+                "t2": "Check whether values repeat",
+                "t3": "Decide whether one value points to one row",
+                "t4": "Choose it as a strong key candidate"
               }
             },
-            "fill_blank_choice_1": {
-              "title": "Primary Key Definition",
-              "prompt": "Fill in the blank: A primary key is a column or a set of columns that [blank1] identifies each row in a table.",
-              "hint": "Think about the role of a primary key in a table.",
+            "fb-primary-key-schema": {
+              "title": "Complete the schema phrase",
+              "prompt": "Fill in the missing word to complete the schema idea for the `students` table.",
+              "hint": "The schema says `id INTEGER PRIMARY the missing term`.",
               "help": {
-                "concept": "A primary key the missing term identifies each row in a table.",
-                "hint_1": "A primary key ensures that each row can be identified without ambiguity.",
-                "hint_2": "The key word here is 'the missing term'."
+                "concept": "A primary the missing term is the main identifier for rows in a table. In this schema, `id` has that role.",
+                "hint_1": "The missing word is the database term for the main row identifier.",
+                "hint_2": "It is the same word used after `PRIMARY` in the schema definition."
               },
-              "template": "A primary key is a column or a set of columns that [blank1] identifies each row in a table.",
+              "template": "`id INTEGER PRIMARY [blank1]`",
               "choices": [
-                "uniquely",
-                "partially",
-                "conditionally",
-                "randomly"
+                "FROM",
+                "KEY",
+                "TABLE",
+                "ROW"
               ]
             },
-            "fill_blank_choice_2": {
-              "title": "Primary Key Constraint",
-              "prompt": "Fill in the blank: A primary key cannot contain [blank1] values.",
-              "hint": "Consider what values are not allowed in a primary key.",
+            "fb-select-key-column": {
+              "title": "Complete the query",
+              "prompt": "Fill in the missing column name so the query asks for the key column from `students`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Primary keys cannot contain the missing term values.",
-                "hint_1": "Primary keys must have a value for every row.",
-                "hint_2": "the missing term values are not allowed in primary keys."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "template": "A primary key cannot contain [blank1] values.",
+              "template": "SELECT [blank1]\nFROM students;",
               "choices": [
-                "NULL",
-                "duplicate",
-                "negative",
-                "text"
+                "grade",
+                "city",
+                "id",
+                "name"
               ]
             },
-            "code_input_1": {
-              "title": "Select All Students",
-              "prompt": "Write a SQL query to select all columns from the `students` table.",
+            "ci-show-all-students": {
+              "title": "Show every student row",
+              "prompt": "Write a query that shows all columns and all rows from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "-- Show all rows and columns from students\nSELECT \nFROM students;"
             },
-            "code_input_2": {
-              "title": "Select Student Names",
-              "prompt": "Write a SQL query to select only the `name` column from the `students` table.",
+            "ci-show-id-and-name": {
+              "title": "Show the key with names",
+              "prompt": "Write a query that shows only the `id` and `name` columns from the `students` table. Use the SQL editor, click Run query, and check that the results table has exactly those two columns.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "-- Show only the key column and the student name\nSELECT \nFROM students;"
             },
-            "code_input_3": {
-              "title": "Select Student IDs",
-              "prompt": "Write a SQL query to select only the `id` column from the `students` table.",
+            "ci-show-id-name-city": {
+              "title": "Read key plus details",
+              "prompt": "Write a query that shows the `id`, `name`, and `city` columns from the `students` table. Write the query in the SQL editor, click Run query, and use the results table to compare the key column with a repeating detail column like city.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "-- Show the key, student name, and city\nSELECT \nFROM students;"
             }
           }
         }
@@ -200,9 +206,17 @@
     "sql-v2": {
       "sql-v2-0": {
         "intro_to_keys": {
-          "sketch_1": {
-            "title": "Understanding Primary Keys",
-            "bodyMarkdown": "In SQL databases, a primary key is a column or a set of columns that uniquely identifies each row in a table. For example, in the `students` table, the `id` column is the primary key because it uniquely identifies each student. \n\n```sql\nSELECT id, name FROM students;\n```\n\nTry it yourself: Write a query to select the `id` and `name` columns from the `students` table. Notice how each `id` is unique."
+          "keys-idea": {
+            "title": "What a key does",
+            "bodyMarkdown": "A **key** helps a database identify a row. In this lesson, the `students` table has a column named `id`. Each student has a different `id`, so that column can act like a row label.\n\nThink of it this way:\n- `name` can repeat in real life\n- `city` can repeat\n- `grade` can repeat\n- but an `id` is meant to point to one specific row\n\nHere is the table idea in SQL:\n\n```sql\nSELECT id, name, grade, age, city\nFROM students;\n```\n\nIf you write this query in the SQL editor and click **Run query**, the results table shows all five rows.\n\nA worked example from this dataset:\n- Noor has `id` 1\n- Mia has `id` 2\n- Leo has `id` 3\n\nEven though Noor and Leo are both from Chicago, their `id` values are different. That is why a key is useful: it helps the database tell rows apart.\n\n**Try it yourself:** Write the query above in the SQL editor, click **Run query**, and look at which column seems best for uniquely identifying each student."
+          },
+          "keys-vs-regular-columns": {
+            "title": "A key is different from an ordinary column",
+            "bodyMarkdown": "Not every column is a good key. A good key should identify one row clearly.\n\nLook at the `students` data:\n- `grade` repeats: two students have `A`, two have `B`\n- `city` repeats: two students are from Chicago\n- `age` repeats: two students are 14 and two are 15\n- `name` might be unique in this tiny table, but names can repeat in larger real databases\n\nThat makes `id` the safest choice for identifying rows.\n\nExample query:\n\n```sql\nSELECT id, name\nFROM students;\n```\n\nLine by line:\n- `SELECT id, name` asks for two columns\n- `FROM students` says which table to read\n\nWhen you run it, each row still has a unique `id`, even if another column could repeat in a bigger dataset.\n\n**Your turn:** Run the query, then compare the `id` column with `grade` or `city`. Which one looks more reliable for identifying exactly one row?"
+          },
+          "reading-primary-key-idea": {
+            "title": "Primary key as the main row identifier",
+            "bodyMarkdown": "A **primary key** is the main key for a table. In beginner database thinking, you can think of it as the column chosen to uniquely identify each row.\n\nIn the `students` table, `id INTEGER PRIMARY KEY` appears in the schema. That tells us `id` is the main identifier for student rows.\n\nSchema idea:\n\n```sql\nSELECT id, name, city\nFROM students;\n```\n\nWorked example:\n- Row with `id = 4` is Ava from Oak Park\n- Row with `id = 5` is Zane from Naperville\n\nIf someone asks for the row with `id = 4`, there should be one clear match. That is the job of a primary key.\n\n**Try this:** In the browser workspace, inspect the schema browser for `students` and notice that `id` is marked as the primary key. Then run the query above and match each `id` to a student name."
           }
         }
       }

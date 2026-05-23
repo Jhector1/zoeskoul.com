@@ -5,6 +5,7 @@ import type {
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
 import { moduleOrderToIndex } from "../spec/moduleOrder.js";
 import { resolveLogicalSectionSlug } from "./resolveLogicalSectionSlug.js";
+import { resolveModuleOutcomes } from "./resolveModuleOutcomes.js";
 
 
 
@@ -116,9 +117,7 @@ export function buildSubjectMessagesFromPlan(args: {
         moduleMessages[logicalModuleSlug] = {
             title: module.title,
             description: module.description ?? module.purpose ?? "",
-            outcomes: (module.learningObjectives ?? [])
-                .filter((value, index, array) => Boolean(value) && array.indexOf(value) === index)
-                .slice(0, 5),
+            outcomes: resolveModuleOutcomes(module),
             why: [
                 `Builds confidence with ${module.title.toLowerCase()}.`,
                 `Prepares learners for the next skills in the course.`,

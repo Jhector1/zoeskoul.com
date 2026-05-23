@@ -1,6 +1,7 @@
 {
   "subject": {
     "slug": "sql-v2",
+    "profileId": "sql",
     "catalogSlug": "sql",
     "genKey": "sql_for_beginners",
     "order": 30,
@@ -56,12 +57,7 @@
       "meta": {
         "estimatedMinutes": 240,
         "prereqKeys": [],
-        "outcomeKeys": [
-          "modules.sql-v2.sql-v2-0.outcomes.0",
-          "modules.sql-v2.sql-v2-0.outcomes.1",
-          "modules.sql-v2.sql-v2-0.outcomes.2",
-          "modules.sql-v2.sql-v2-0.outcomes.3"
-        ],
+        "outcomeKeys": [],
         "whyKeys": [
           "modules.sql-v2.sql-v2-0.why.0",
           "modules.sql-v2.sql-v2-0.why.1"
@@ -184,12 +180,7 @@
         "prereqKeys": [
           "modules.sql-v2.sql-v2-0.title"
         ],
-        "outcomeKeys": [
-          "modules.sql-v2.sql-v2-1.outcomes.0",
-          "modules.sql-v2.sql-v2-1.outcomes.1",
-          "modules.sql-v2.sql-v2-1.outcomes.2",
-          "modules.sql-v2.sql-v2-1.outcomes.3"
-        ],
+        "outcomeKeys": [],
         "whyKeys": [
           "modules.sql-v2.sql-v2-1.why.0",
           "modules.sql-v2.sql-v2-1.why.1"
@@ -312,12 +303,7 @@
         "prereqKeys": [
           "modules.sql-v2.sql-v2-1.title"
         ],
-        "outcomeKeys": [
-          "modules.sql-v2.sql-v2-2.outcomes.0",
-          "modules.sql-v2.sql-v2-2.outcomes.1",
-          "modules.sql-v2.sql-v2-2.outcomes.2",
-          "modules.sql-v2.sql-v2-2.outcomes.3"
-        ],
+        "outcomeKeys": [],
         "whyKeys": [
           "modules.sql-v2.sql-v2-2.why.0",
           "modules.sql-v2.sql-v2-2.why.1"
@@ -412,6 +398,252 @@
             "filter_by_text",
             "filter_by_more_than_one_rule",
             "avoiding_filtering_mistakes"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sql-v2-3",
+      "prefix": "sqlv2_3",
+      "order": 3,
+      "titleKey": "modules.sql-v2.sql-v2-3.title",
+      "descriptionKey": "modules.sql-v2.sql-v2-3.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 240,
+        "prereqKeys": [
+          "modules.sql-v2.sql-v2-2.title"
+        ],
+        "outcomeKeys": [],
+        "whyKeys": [
+          "modules.sql-v2.sql-v2-3.why.0",
+          "modules.sql-v2.sql-v2-3.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "sql-v2-3-1",
+          "order": 1,
+          "titleKey": "sections.sql-v2.sql-v2-3.sql-v2-3-1.title",
+          "descriptionKey": "sections.sql-v2.sql-v2-3.sql-v2-3-1.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.sql-v2.sql-v2-3.sql-v2-3-1.weeks",
+            "bulletKeys": [
+              "sections.sql-v2.sql-v2-3.sql-v2-3-1.bullets.0",
+              "sections.sql-v2.sql-v2-3.sql-v2-3-1.bullets.1",
+              "sections.sql-v2.sql-v2-3.sql-v2-3-1.bullets.2",
+              "sections.sql-v2.sql-v2-3.sql-v2-3-1.bullets.3"
+            ]
+          },
+          "topics": [
+            "why_sorting_matters",
+            "order_by",
+            "ascending_order",
+            "descending_order"
+          ]
+        },
+        {
+          "slug": "sql-v2-3-2",
+          "order": 2,
+          "titleKey": "sections.sql-v2.sql-v2-3.sql-v2-3-2.title",
+          "descriptionKey": "sections.sql-v2.sql-v2-3.sql-v2-3-2.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.sql-v2.sql-v2-3.sql-v2-3-2.weeks",
+            "bulletKeys": [
+              "sections.sql-v2.sql-v2-3.sql-v2-3-2.bullets.0",
+              "sections.sql-v2.sql-v2-3.sql-v2-3-2.bullets.1",
+              "sections.sql-v2.sql-v2-3.sql-v2-3-2.bullets.2",
+              "sections.sql-v2.sql-v2-3.sql-v2-3-2.bullets.3"
+            ]
+          },
+          "topics": [
+            "primary_sort",
+            "secondary_sort",
+            "sorting_text",
+            "sorting_numbers_and_dates"
+          ]
+        },
+        {
+          "slug": "sql-v2-3-3",
+          "order": 3,
+          "titleKey": "sections.sql-v2.sql-v2-3.sql-v2-3-3.title",
+          "descriptionKey": "sections.sql-v2.sql-v2-3.sql-v2-3-3.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.sql-v2.sql-v2-3.sql-v2-3-3.weeks",
+            "bulletKeys": [
+              "sections.sql-v2.sql-v2-3.sql-v2-3-3.bullets.0",
+              "sections.sql-v2.sql-v2-3.sql-v2-3-3.bullets.1",
+              "sections.sql-v2.sql-v2-3.sql-v2-3-3.bullets.2",
+              "sections.sql-v2.sql-v2-3.sql-v2-3-3.bullets.3"
+            ]
+          },
+          "topics": [
+            "why_limit_results",
+            "limit_clause",
+            "top_rows_only",
+            "combining_order_by_with_limit"
+          ]
+        },
+        {
+          "slug": "sql-v2-3-4",
+          "order": 4,
+          "titleKey": "sections.sql-v2.sql-v2-3.sql-v2-3-4.title",
+          "descriptionKey": "sections.sql-v2.sql-v2-3.sql-v2-3-4.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.sql-v2.sql-v2-3.sql-v2-3-4.weeks",
+            "bulletKeys": [
+              "sections.sql-v2.sql-v2-3.sql-v2-3-4.bullets.0",
+              "sections.sql-v2.sql-v2-3.sql-v2-3-4.bullets.1",
+              "sections.sql-v2.sql-v2-3.sql-v2-3-4.bullets.2",
+              "sections.sql-v2.sql-v2-3.sql-v2-3-4.bullets.3"
+            ]
+          },
+          "topics": [
+            "find_highest_values",
+            "find_lowest_values",
+            "show_top_5_records",
+            "build_clear_result_sets"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sql-v2-4",
+      "prefix": "sqlv2_4",
+      "order": 4,
+      "titleKey": "modules.sql-v2.sql-v2-4.title",
+      "descriptionKey": "modules.sql-v2.sql-v2-4.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 240,
+        "prereqKeys": [
+          "modules.sql-v2.sql-v2-3.title"
+        ],
+        "outcomeKeys": [],
+        "whyKeys": [
+          "modules.sql-v2.sql-v2-4.why.0",
+          "modules.sql-v2.sql-v2-4.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "sql-v2-4-1",
+          "order": 1,
+          "titleKey": "sections.sql-v2.sql-v2-4.sql-v2-4-1.title",
+          "descriptionKey": "sections.sql-v2.sql-v2-4.sql-v2-4-1.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.sql-v2.sql-v2-4.sql-v2-4-1.weeks",
+            "bulletKeys": [
+              "sections.sql-v2.sql-v2-4.sql-v2-4-1.bullets.0",
+              "sections.sql-v2.sql-v2-4.sql-v2-4-1.bullets.1",
+              "sections.sql-v2.sql-v2-4.sql-v2-4-1.bullets.2",
+              "sections.sql-v2.sql-v2-4.sql-v2-4-1.bullets.3"
+            ]
+          },
+          "topics": [
+            "intro_to_like",
+            "percent_wildcard",
+            "underscore_wildcard",
+            "searching_partial_text"
+          ]
+        },
+        {
+          "slug": "sql-v2-4-2",
+          "order": 2,
+          "titleKey": "sections.sql-v2.sql-v2-4.sql-v2-4-2.title",
+          "descriptionKey": "sections.sql-v2.sql-v2-4.sql-v2-4-2.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.sql-v2.sql-v2-4.sql-v2-4-2.weeks",
+            "bulletKeys": [
+              "sections.sql-v2.sql-v2-4.sql-v2-4-2.bullets.0",
+              "sections.sql-v2.sql-v2-4.sql-v2-4-2.bullets.1",
+              "sections.sql-v2.sql-v2-4.sql-v2-4-2.bullets.2",
+              "sections.sql-v2.sql-v2-4.sql-v2-4-2.bullets.3"
+            ]
+          },
+          "topics": [
+            "in_list_filter",
+            "not_in_list_filter",
+            "between_range_filter",
+            "range_filtering_practice"
+          ]
+        },
+        {
+          "slug": "sql-v2-4-3",
+          "order": 3,
+          "titleKey": "sections.sql-v2.sql-v2-4.sql-v2-4-3.title",
+          "descriptionKey": "sections.sql-v2.sql-v2-4.sql-v2-4-3.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.sql-v2.sql-v2-4.sql-v2-4-3.weeks",
+            "bulletKeys": [
+              "sections.sql-v2.sql-v2-4.sql-v2-4-3.bullets.0",
+              "sections.sql-v2.sql-v2-4.sql-v2-4-3.bullets.1",
+              "sections.sql-v2.sql-v2-4.sql-v2-4-3.bullets.2",
+              "sections.sql-v2.sql-v2-4.sql-v2-4-3.bullets.3"
+            ]
+          },
+          "topics": [
+            "what_null_means",
+            "is_null",
+            "is_not_null",
+            "common_null_mistakes"
+          ]
+        },
+        {
+          "slug": "sql-v2-4-4",
+          "order": 4,
+          "titleKey": "sections.sql-v2.sql-v2-4.sql-v2-4-4.title",
+          "descriptionKey": "sections.sql-v2.sql-v2-4.sql-v2-4-4.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.sql-v2.sql-v2-4.sql-v2-4-4.weeks",
+            "bulletKeys": [
+              "sections.sql-v2.sql-v2-4.sql-v2-4-4.bullets.0",
+              "sections.sql-v2.sql-v2-4.sql-v2-4-4.bullets.1",
+              "sections.sql-v2.sql-v2-4.sql-v2-4-4.bullets.2",
+              "sections.sql-v2.sql-v2-4.sql-v2-4-4.bullets.3"
+            ]
+          },
+          "topics": [
+            "search_names",
+            "filter_statuses",
+            "find_missing_data",
+            "combine_text_and_null_filters"
           ]
         }
       ]

@@ -157,11 +157,19 @@ export default function CodeInputExerciseUI({
                                                 savedSketch,
                                                 sqlDialect,
                                                 sqlDatasetId,
+                                                exerciseSqlDatasetId,
                                                 sqlResultShape,
                                                 sqlSchemaSql,
                                                 sqlSeedSql,
                                                 sqlSetupSql,
                                                 sqlInitialTableSnapshots,
+                                                exerciseRuntime,
+                                                recipe,
+                                                subjectRuntimeDefaults,
+                                                courseRuntimeDefaults,
+                                                moduleRuntimeDefaults,
+                                                sectionRuntimeDefaults,
+                                                topicRuntimeDefaults,
                                                 exerciseKey,
                                                 subjectSlug,
                                                 moduleSlug,
@@ -215,11 +223,19 @@ export default function CodeInputExerciseUI({
 
     sqlDialect?: SqlDialect;
     sqlDatasetId?: string;
+    exerciseSqlDatasetId?: string;
     sqlResultShape?: "table";
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
     sqlInitialTableSnapshots?: SqlTableSnapshots;
+    exerciseRuntime?: unknown;
+    recipe?: unknown;
+    subjectRuntimeDefaults?: unknown;
+    courseRuntimeDefaults?: unknown;
+    moduleRuntimeDefaults?: unknown;
+    sectionRuntimeDefaults?: unknown;
+    topicRuntimeDefaults?: unknown;
 
     exerciseKey?: string | null;
     subjectSlug?: string | null;
@@ -420,11 +436,19 @@ export default function CodeInputExerciseUI({
         language,
         sqlDialect,
         sqlDatasetId,
+        exerciseSqlDatasetId,
         sqlResultShape,
         sqlSchemaSql,
         sqlSeedSql,
         sqlSetupSql,
         sqlInitialTableSnapshots,
+        exerciseRuntime,
+        recipe,
+        subjectRuntimeDefaults,
+        courseRuntimeDefaults,
+        moduleRuntimeDefaults,
+        sectionRuntimeDefaults,
+        topicRuntimeDefaults,
     });
 
     const executeEmbeddedRun = useCallback(
@@ -445,11 +469,19 @@ export default function CodeInputExerciseUI({
                 language: args.language,
                 sqlDialect: args.sqlDialect ?? sqlDialect,
                 sqlDatasetId: args.sqlDatasetId ?? sqlDatasetId,
+                exerciseSqlDatasetId: exerciseSqlDatasetId ?? args.sqlDatasetId ?? sqlDatasetId,
                 sqlResultShape: args.sqlResultShape ?? sqlResultShape,
                 sqlSchemaSql: args.sqlSchemaSql ?? sqlSchemaSql,
                 sqlSeedSql: args.sqlSeedSql ?? sqlSeedSql,
                 sqlSetupSql: args.sqlSetupSql ?? sqlSetupSql,
                 sqlInitialTableSnapshots,
+                exerciseRuntime,
+                recipe,
+                subjectRuntimeDefaults,
+                courseRuntimeDefaults,
+                moduleRuntimeDefaults,
+                sectionRuntimeDefaults,
+                topicRuntimeDefaults,
             });
 
             const result = onRun
@@ -512,11 +544,19 @@ export default function CodeInputExerciseUI({
             onRun,
             sqlDialect,
             sqlDatasetId,
+            exerciseSqlDatasetId,
             sqlResultShape,
             sqlSchemaSql,
             sqlSeedSql,
             sqlSetupSql,
             sqlInitialTableSnapshots,
+            exerciseRuntime,
+            recipe,
+            subjectRuntimeDefaults,
+            courseRuntimeDefaults,
+            moduleRuntimeDefaults,
+            sectionRuntimeDefaults,
+            topicRuntimeDefaults,
         ],
     );
 
@@ -709,6 +749,7 @@ export default function CodeInputExerciseUI({
                 sqlInitialTableSnapshots={
                     resolvedSql.isSql ? resolvedSql.sqlInitialTableSnapshots : undefined
                 }
+                sqlPaneOptions={resolvedSql.isSql ? resolvedSql.sqlPaneOptions : undefined}
                 onChangeCode={handleCodeChange}
                 onChangeStdin={handleStdinChange}
                 onRun={(args) =>

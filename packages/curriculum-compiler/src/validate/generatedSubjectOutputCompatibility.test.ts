@@ -1,8 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
 import { describe, expect, it } from "vitest";
 import { getRepoRoot } from "@zoeskoul/curriculum-core";
+import { validateGoldenTopicBundle } from "@zoeskoul/curriculum-profiles";
+import { resolveEffectiveExerciseRuntime } from "@zoeskoul/curriculum-runtime/runtime";
 import { loadSubjectPlan } from "../spec/loadCourseSpec.js";
 
 type JsonObject = Record<string, any>;
@@ -83,53 +84,104 @@ function topicRefs(liveSubjectSlug: string): TopicRef[] {
     });
 }
 
-function datasetPath(datasetId: string) {
-    const datasetRoot = path.join(subjectsRoot, "sql", "datasets");
-    const files = fs
-        .readdirSync(datasetRoot)
-        .filter((file) => file.endsWith(".ts") && file !== "index.ts");
+function isSqlCodeInput(exercise: JsonObject): boolean {
+    if (exercise.kind !== "code_input") return false;
 
-    for (const file of files) {
-        const filePath = path.join(datasetRoot, file);
-        if (fs.readFileSync(filePath, "utf8").includes(`id: "${datasetId}"`)) {
-            return filePath;
+    return (
+        exercise.language === "sql" ||
+        exercise.runtime?.kind === "sql" ||
+        exercise.recipe?.type === "sql_query"
+    );
+}
+
+async function collectCodeInputCompatibilityIssues(args: {
+    topicId: string;
+    bundle: JsonObject;
+    moduleRuntimeDefaults?: JsonObject | null;
+    courseSlug?: string | null;
+}): Promise<{ issues: string[]; codeInputCount: number }> {
+    const issues: string[] = [];
+    let count = 0;
+    let hasEligibleSqlCodeInput = false;
+
+    for (const exercise of args.bundle.exercises ?? []) {
+        if (exercise.kind !== "code_input") continue;
+        count += 1;
+
+        const refId = `${args.topicId}/${exercise.id}`;
+        const recipe = exercise.recipe ?? {};
+
+        if (isSqlCodeInput(exercise)) {
+            const effectiveRuntime = resolveEffectiveExerciseRuntime({
+                language: exercise.language ?? "sql",
+                recipe,
+                exerciseRuntime: exercise.runtime ?? null,
+                exerciseSqlDatasetId: exercise.sqlDatasetId ?? null,
+                topicRuntimeDefaults: args.bundle.runtimeDefaults ?? null,
+                moduleRuntimeDefaults: args.moduleRuntimeDefaults ?? null,
+            });
+            const datasetId =
+                effectiveRuntime.datasetId ??
+                exercise.runtime?.datasetId ??
+                recipe.datasetId;
+            const solutionCode =
+                typeof recipe.solutionCode === "string" ? recipe.solutionCode.trim() : "";
+            const resultShape =
+                recipe.resultShape ??
+                exercise.runtime?.resultShape ??
+                effectiveRuntime.resultShape ??
+                "table";
+
+            if (recipe.type !== "sql_query") {
+                issues.push(`${refId}: missing sql_query recipe`);
+                continue;
+            }
+            if (!datasetId) {
+                issues.push(`${refId}: missing SQL datasetId`);
+                continue;
+            }
+            if (!solutionCode) {
+                issues.push(`${refId}: missing SQL solutionCode`);
+                continue;
+            }
+            if (resultShape !== "table") {
+                issues.push(`${refId}: SQL resultShape must be table`);
+                continue;
+            }
+            hasEligibleSqlCodeInput = true;
+            continue;
+        }
+
+        const tests = recipe.tests ?? [];
+        if (tests.length < 1) {
+            issues.push(`${refId}: missing tests`);
         }
     }
 
-    return null;
-}
+    if (hasEligibleSqlCodeInput) {
+        const report = await validateGoldenTopicBundle({
+            seed: {
+                topicId: args.bundle.topicId,
+                subjectSlug: args.bundle.subjectSlug,
+                courseSlug: args.courseSlug ?? undefined,
+                moduleRuntimeDefaults: args.moduleRuntimeDefaults ?? null,
+            } as any,
+            draft: {} as any,
+            topicBundle: args.bundle as any,
+        });
 
-function readDataset(datasetId: string) {
-    const filePath = datasetPath(datasetId);
-    expect(filePath, `Missing SQL dataset ${datasetId}`).toBeTruthy();
+        for (const issue of report.issues) {
+            if (!issue.exerciseId) {
+                issues.push(`${args.topicId}: SQL golden validation failed: ${issue.message}`);
+                continue;
+            }
+            issues.push(
+                `${args.topicId}/${issue.exerciseId}: SQL golden validation failed: ${issue.message}`,
+            );
+        }
+    }
 
-    const source = fs.readFileSync(filePath!, "utf8");
-    return {
-        schemaSql: source.match(/schemaSql:\s*`([\s\S]*?)`\.trim\(\)/)?.[1] ?? "",
-        seedSql: source.match(/seedSql:\s*`([\s\S]*?)`\.trim\(\)/)?.[1] ?? "",
-    };
-}
-
-function executeSql(args: { schemaSql: string; seedSql: string; sql: string }) {
-    const result = spawnSync("sqlite3", [":memory:", "-json"], {
-        input: [
-            args.schemaSql,
-            args.seedSql,
-            `${args.sql.trim().replace(/;+$/, "")};`,
-        ].join("\n"),
-        encoding: "utf8",
-        maxBuffer: 10_000_000,
-    });
-
-    expect(result.status, result.stderr).toBe(0);
-
-    const rows = JSON.parse(result.stdout.trim() || "[]") as Array<Record<string, unknown>>;
-    const columns = rows[0] ? Object.keys(rows[0]) : [];
-
-    return {
-        columns,
-        rows: rows.map((row) => columns.map((column) => row[column] ?? null)),
-    };
+    return { issues, codeInputCount: count };
 }
 
 describe("generated subject output compatibility", () => {
@@ -303,44 +355,214 @@ describe("generated subject output compatibility", () => {
     });
 
     it("runs SQL code-input golden checks against generated production output", () => {
-        const issues: string[] = [];
-        let codeInputCount = 0;
+        const planPromise = loadSubjectPlan("sql");
+        return planPromise.then(async (plan) => {
+            const issues: string[] = [];
+            let codeInputCount = 0;
 
-        for (const ref of topicRefs("sql-v2")) {
-            const bundle = readJson(ref.bundlePath);
-
-            for (const exercise of bundle.exercises ?? []) {
-                if (exercise.kind !== "code_input") continue;
-                codeInputCount += 1;
-
-                const refId = `${ref.topicId}/${exercise.id}`;
-                const recipe = exercise.recipe ?? {};
-                const datasetId = recipe.datasetId ?? exercise.runtime?.datasetId;
-                const tests = recipe.tests ?? [];
-
-                if (exercise.language !== "sql" && recipe.type !== "sql_query") {
-                    issues.push(`${refId}: missing canonical SQL runtime marker`);
-                }
-                if (!datasetId) issues.push(`${refId}: missing datasetId`);
-                if (!recipe.solutionCode?.trim()) issues.push(`${refId}: missing solutionCode`);
-                if (tests.length < 1) issues.push(`${refId}: missing tests`);
-                if (!datasetId || !recipe.solutionCode?.trim() || tests.length < 1) continue;
-
-                const dataset = readDataset(datasetId);
-                const executed = executeSql({
-                    schemaSql: dataset.schemaSql,
-                    seedSql: dataset.seedSql,
-                    sql: recipe.solutionCode,
+            for (const ref of topicRefs("sql-v2")) {
+                const bundle = readJson(ref.bundlePath);
+                const result = await collectCodeInputCompatibilityIssues({
+                    topicId: ref.topicId,
+                    bundle,
+                    moduleRuntimeDefaults: ref.module.runtimeDefaults ?? null,
+                    courseSlug: plan?.publishTarget.courseSlug ?? null,
                 });
-                const expectedTable = tests[0]?.expectedTable;
 
-                expect(tests[0]?.compareTo, `${refId} compare mode`).toBe("expected_table");
-                expect(expectedTable?.columns, `${refId} expected columns`).toEqual(executed.columns);
-                expect(expectedTable?.rows, `${refId} expected rows`).toEqual(executed.rows);
+                codeInputCount += result.codeInputCount;
+                issues.push(...result.issues);
             }
-        }
 
-        expect(codeInputCount).toBeGreaterThan(0);
-        expect(issues).toEqual([]);
+            expect(codeInputCount).toBeGreaterThan(0);
+            expect(issues).toEqual([]);
+        });
+    }, 60_000);
+
+    it("accepts SQL code_input metadata without generic tests[] while keeping Python strict", async () => {
+        const sqlBundle = {
+            topicId: "sql-topic",
+            subjectSlug: "sql-v2",
+            moduleSlug: "sql-v2-0",
+            sectionSlug: "sql-v2-0-1",
+            prefix: "topics.sql.sql-v2-0.sql-topic",
+            minutes: 10,
+            runtimeDefaults: {
+                kind: "sql",
+                datasetId: "students_intro",
+                fixedSqlDialect: "sqlite",
+                resultShape: "table",
+            },
+            topic: {
+                labelKey: "label",
+                summaryKey: "summary",
+            },
+            cards: [],
+            sketches: [],
+            exercises: [
+                {
+                    id: "sql-ok",
+                    kind: "code_input",
+                    language: "sql",
+                    runtime: {
+                        kind: "sql",
+                        datasetId: "students_intro",
+                        resultShape: "table",
+                    },
+                    recipe: {
+                        type: "sql_query",
+                        datasetId: "students_intro",
+                        solutionCode: "SELECT id, name FROM students;",
+                    },
+                },
+            ],
+        };
+        const sqlResult = await collectCodeInputCompatibilityIssues({
+            topicId: "sql-topic",
+            bundle: sqlBundle,
+            moduleRuntimeDefaults: sqlBundle.runtimeDefaults,
+            courseSlug: "sql-foundations",
+        });
+        expect(sqlResult.issues).toEqual([]);
+
+        const missingRecipe = await collectCodeInputCompatibilityIssues({
+            topicId: "sql-topic",
+            bundle: {
+                ...sqlBundle,
+                exercises: [
+                    {
+                        id: "sql-missing-recipe",
+                        kind: "code_input",
+                        language: "sql",
+                        runtime: {
+                            kind: "sql",
+                            datasetId: "students_intro",
+                        },
+                        recipe: {},
+                    },
+                ],
+            },
+            moduleRuntimeDefaults: sqlBundle.runtimeDefaults,
+            courseSlug: "sql-foundations",
+        });
+        expect(missingRecipe.issues).toEqual([
+            "sql-topic/sql-missing-recipe: missing sql_query recipe",
+        ]);
+
+        const missingDataset = await collectCodeInputCompatibilityIssues({
+            topicId: "sql-topic",
+            bundle: {
+                ...sqlBundle,
+                runtimeDefaults: null,
+                exercises: [
+                    {
+                        id: "sql-missing-dataset",
+                        kind: "code_input",
+                        language: "sql",
+                        runtime: {
+                            kind: "sql",
+                        },
+                        recipe: {
+                            type: "sql_query",
+                            solutionCode: "SELECT 1;",
+                        },
+                    },
+                ],
+            },
+            moduleRuntimeDefaults: null,
+            courseSlug: "sql-foundations",
+        });
+        expect(missingDataset.issues).toEqual([
+            "sql-topic/sql-missing-dataset: missing SQL datasetId",
+        ]);
+
+        const missingSolution = await collectCodeInputCompatibilityIssues({
+            topicId: "sql-topic",
+            bundle: {
+                ...sqlBundle,
+                exercises: [
+                    {
+                        id: "sql-missing-solution",
+                        kind: "code_input",
+                        language: "sql",
+                        runtime: {
+                            kind: "sql",
+                            datasetId: "students_intro",
+                        },
+                        recipe: {
+                            type: "sql_query",
+                            datasetId: "students_intro",
+                        },
+                    },
+                ],
+            },
+            moduleRuntimeDefaults: sqlBundle.runtimeDefaults,
+            courseSlug: "sql-foundations",
+        });
+        expect(missingSolution.issues).toEqual([
+            "sql-topic/sql-missing-solution: missing SQL solutionCode",
+        ]);
+
+        const pythonMissingTests = await collectCodeInputCompatibilityIssues({
+            topicId: "python-topic",
+            bundle: {
+                topicId: "python-topic",
+                subjectSlug: "python-v2",
+                moduleSlug: "python-v2-0",
+                sectionSlug: "python-v2-0-1",
+                prefix: "topics.python.python-v2-0.python-topic",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "python-missing-tests",
+                        kind: "code_input",
+                        language: "python",
+                        recipe: {
+                            type: "fixed_tests",
+                            solutionCode: "print(1)",
+                        },
+                    },
+                ],
+            },
+        });
+        expect(pythonMissingTests.issues).toEqual([
+            "python-topic/python-missing-tests: missing tests",
+        ]);
+
+        const pythonWithTests = await collectCodeInputCompatibilityIssues({
+            topicId: "python-topic",
+            bundle: {
+                topicId: "python-topic",
+                subjectSlug: "python-v2",
+                moduleSlug: "python-v2-0",
+                sectionSlug: "python-v2-0-1",
+                prefix: "topics.python.python-v2-0.python-topic",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "python-with-tests",
+                        kind: "code_input",
+                        language: "python",
+                        recipe: {
+                            type: "fixed_tests",
+                            solutionCode: "print(1)",
+                            tests: [{ stdout: "1", match: "exact" }],
+                        },
+                    },
+                ],
+            },
+        });
+        expect(pythonWithTests.issues).toEqual([]);
     });
 });

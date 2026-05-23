@@ -4,195 +4,197 @@
       "sql-v2-0": {
         "one_table_vs_multiple_tables": {
           "label": "One Table vs Multiple Tables",
-          "summary": "Explore the differences between using one table and multiple tables in SQL databases.",
+          "summary": "Learn when a single table is enough, when multiple tables are useful, and how to read simple data structure ideas before learning joins.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Tables in SQL"
+              "title": "A single table can answer simple questions"
             },
             "sketch1": {
-              "title": "When to Use Multiple Tables"
+              "title": "Why databases sometimes use multiple tables"
+            },
+            "sketch2": {
+              "title": "How to think about one table vs many"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Query Practice Project"
+              "title": "Explore what one table can already answer"
             }
           },
           "projectSteps": {
-            "quiz9": {
-              "title": "Basic SELECT Query"
+            "ci_show_all_students": {
+              "title": "Show every column from the students table"
             },
-            "quiz10": {
-              "title": "Select Specific Columns"
+            "ci_show_names_only": {
+              "title": "Show only student names"
             },
-            "quiz11": {
-              "title": "Select with Alias"
+            "ci_show_name_and_city": {
+              "title": "Show two student details"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "Purpose of a Table in SQL",
-              "prompt": "What is the primary purpose of a table in SQL?",
-              "hint": "Think about how data is organized in a database.",
+            "sc-one-row-represents": {
+              "title": "What does one row represent?",
+              "prompt": "In the `students` table, what does one row represent?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "A table in SQL is used to organize and store data in a structured format.",
-                "hint_1": "Consider the structure of a table with rows and columns.",
-                "hint_2": "A table is not used for executing queries or displaying data graphically."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "To store a collection of related data entries.",
-                "b": "To execute SQL queries.",
-                "c": "To display data in a graphical format.",
-                "d": "To connect to external databases."
+                "a": "One student",
+                "b": "One city",
+                "c": "One grade level",
+                "d": "The entire database"
               }
             },
-            "quiz2": {
-              "title": "Benefits of Multiple Tables",
-              "prompt": "Why might you use multiple tables in a database?",
-              "hint": "Consider how multiple tables can help in organizing data.",
+            "sc-when-multiple-tables": {
+              "title": "When multiple tables help",
+              "prompt": "When is using multiple tables usually more helpful than one big table?",
+              "hint": "Think about cases where one big table would repeat lots of information.",
               "help": {
-                "concept": "Multiple tables can help reduce redundancy and organize data efficiently.",
-                "hint_1": "Think about how separating data into different tables can reduce repetition.",
-                "hint_2": "Multiple tables are used to organize related data, not to increase complexity or redundancy."
+                "concept": "Multiple tables are useful when data includes different kinds of things or when one large table would duplicate the same details many times.",
+                "hint_1": "Imagine storing students and full class details in every student row.",
+                "hint_2": "Choose the option about reducing repeated information and separating different kinds of data."
               },
               "options": {
-                "a": "To increase data redundancy.",
-                "b": "To organize data more efficiently.",
-                "c": "To make queries more complex.",
-                "d": "To store unrelated data together."
+                "a": "When all columns describe the same single kind of thing",
+                "b": "When you want fewer column names",
+                "c": "When different kinds of information would be repeated in one big table",
+                "d": "When SQL cannot read one table"
               }
             },
-            "quiz3": {
-              "title": "Characteristics of a Single Table",
-              "prompt": "Which of the following are characteristics of a single table in SQL? Select all that apply.",
-              "hint": "Think about the basic structure and potential issues with a single table.",
+            "mc-single-table-signs": {
+              "title": "Signs one table is enough",
+              "prompt": "Choose all statements that suggest one table may be enough for a small dataset.",
+              "hint": "Look for ideas about one row representing one kind of thing.",
               "help": {
-                "concept": "A single table organizes data in rows and columns and can lead to redundancy if not designed well.",
-                "hint_1": "Consider the basic structure of a table and potential design issues.",
-                "hint_2": "Not all tables require a primary key, and a single table typically stores data for one entity."
+                "concept": "One table works well when each row represents one clear entity and the columns all describe that same entity directly.",
+                "hint_1": "Pick statements about a focused row meaning and columns that belong together.",
+                "hint_2": "Avoid choices that mention mixing unrelated things into one row."
               },
               "options": {
-                "a": "Contains rows and columns.",
-                "b": "Stores data for multiple entities.",
-                "c": "Can lead to data redundancy if not designed properly.",
-                "d": "Always requires a primary key."
+                "a": "Each row represents one student",
+                "b": "The columns all describe that student",
+                "c": "The table mixes students, classes, and teachers in the same row",
+                "d": "You only need details already stored in the student records"
               }
             },
-            "quiz4": {
-              "title": "Advantages of Using Multiple Tables",
-              "prompt": "What are the advantages of using multiple tables in a database? Select all that apply.",
-              "hint": "Consider how multiple tables affect data organization and integrity.",
+            "mc-reasons-split-tables": {
+              "title": "Reasons to split data into multiple tables",
+              "prompt": "Choose all good reasons a database might use multiple tables.",
+              "hint": "Think about organization and repeated information.",
               "help": {
-                "concept": "Multiple tables help reduce redundancy, simplify management, and improve integrity.",
-                "hint_1": "Think about how separating data can simplify management and improve integrity.",
-                "hint_2": "Multiple tables do not inherently increase complexity; they help organize data better."
+                "concept": "Databases use multiple tables to separate different kinds of entities and reduce repeated blocks of information.",
+                "hint_1": "Look for options about students versus other kinds of things, and about avoiding duplication.",
+                "hint_2": "Do not choose answers that claim multiple tables are required just because SQL exists."
               },
               "options": {
-                "a": "Reduces data redundancy.",
-                "b": "Simplifies data management.",
-                "c": "Increases data complexity.",
-                "d": "Improves data integrity."
+                "a": "Students and classes are different kinds of things",
+                "b": "A big table would repeat the same class details many times",
+                "c": "SQL can only run if there are at least two tables",
+                "d": "Separate tables can make the structure clearer"
               }
             },
-            "quiz5": {
-              "title": "Steps to Create a Table",
-              "prompt": "Arrange the steps to create a table in SQL in the correct order.",
-              "hint": "Think about the logical order of defining and creating a table.",
+            "dr-read-simple-query": {
+              "title": "Read a basic query in order",
+              "prompt": "Put these parts in the order you read the query `SELECT name FROM students;` from top to bottom.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
-                "concept": "Creating a table involves defining its structure before executing the statement.",
-                "hint_1": "Start with defining the table name and structure.",
-                "hint_2": "Ensure all structural elements are defined before executing the statement."
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "Define the table name.",
-                "t2": "Specify the columns and their data types.",
-                "t3": "Set primary keys if needed.",
-                "t4": "Execute the CREATE TABLE statement."
+                "t1": "SELECT",
+                "t2": "name",
+                "t3": "FROM",
+                "t4": "students"
               }
             },
-            "quiz6": {
-              "title": "Organizing Data with Multiple Tables",
-              "prompt": "Arrange the steps to organize data using multiple tables.",
-              "hint": "Consider the process of organizing data logically.",
+            "dr-think-about-structure": {
+              "title": "Questions to ask about table structure",
+              "prompt": "Arrange these questions in a useful order for deciding whether one table makes sense.",
+              "hint": "Start by deciding what one row means before checking the columns.",
               "help": {
-                "concept": "Organizing data with multiple tables involves identifying entities and defining relationships.",
-                "hint_1": "Start by identifying what data needs to be stored.",
-                "hint_2": "Ensure relationships are defined before populating data."
+                "concept": "A good table-design thought process starts with the row meaning, then checks whether columns match that meaning, then looks for repeated information that may belong elsewhere.",
+                "hint_1": "First define the row, then inspect the columns, then think about repetition.",
+                "hint_2": "The question about repeated details should come after you know what the row and columns are supposed to represent."
               },
               "tokens": {
-                "t1": "Identify different entities.",
-                "t2": "Create separate tables for each entity.",
-                "t3": "Define relationships between tables.",
-                "t4": "Populate tables with data."
+                "t1": "What does one row represent?",
+                "t2": "Do all columns describe that same thing?",
+                "t3": "Am I repeating lots of details that might belong elsewhere?"
               }
             },
-            "quiz7": {
-              "title": "Table Structure",
-              "prompt": "In a SQL table, each column represents a specific [blank1].",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+            "fb-table-name": {
+              "title": "Complete the table source",
+              "prompt": "Fill in the missing table name to read student names from the dataset.",
+              "hint": "Use the only table shown in the schema browser for this topic.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "The `FROM` clause tells SQL which table to read. In this lesson, the dataset table is named `the missing term`.",
+                "hint_1": "The table contains columns like `id`, `name`, `grade`, `age`, and `city`.",
+                "hint_2": "Choose the table name that matches the student records in the schema."
               },
-              "template": "In a SQL table, each column represents a specific [blank1].",
+              "template": "SELECT name FROM [blank1];",
               "choices": [
-                "attribute",
-                "record",
-                "database",
-                "query"
+                "students",
+                "student_names",
+                "classes",
+                "cities"
               ]
             },
-            "quiz8": {
-              "title": "Data Redundancy",
-              "prompt": "Using multiple tables can help reduce data [blank1].",
-              "hint": "Consider what multiple tables help minimize in a database.",
+            "fb-column-choice": {
+              "title": "Choose the right column",
+              "prompt": "Fill in the missing column to show where each student lives.",
+              "hint": "Look for the column that stores place names like Chicago and Evanston.",
               "help": {
-                "concept": "Multiple tables help minimize the missing term by organizing data efficiently.",
-                "hint_1": "Think about how separating data into tables affects the missing term.",
-                "hint_2": "Multiple tables do not inherently reduce complexity or size."
+                "concept": "In a `SELECT` query, the chosen column should match the kind of information you want to display. The place each student lives is stored in the the missing term column.",
+                "hint_1": "This column contains values such as Chicago, Evanston, Oak Park, and Naperville.",
+                "hint_2": "It is not `grade` or `age`; it stores location names."
               },
-              "template": "Using multiple tables can help reduce data [blank1].",
+              "template": "SELECT [blank1] FROM students;",
               "choices": [
-                "redundancy",
-                "complexity",
-                "integrity",
-                "size"
+                "grade",
+                "city",
+                "age",
+                "id"
               ]
             },
-            "quiz9": {
-              "title": "Basic SELECT Query",
-              "prompt": "Write a SQL query to select all columns from the `students` table.",
+            "ci-show-all-students": {
+              "title": "Show every column from the students table",
+              "prompt": "Write a query that returns all columns and all rows from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT \nFROM students;"
             },
-            "quiz10": {
-              "title": "Select Specific Columns",
-              "prompt": "Write a SQL query to select the `name` and `grade` columns from the `students` table.",
+            "ci-show-names-only": {
+              "title": "Show only student names",
+              "prompt": "Write a query that returns just the `name` column from the `students` table. Use the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT \nFROM students;"
             },
-            "quiz11": {
-              "title": "Select with Alias",
-              "prompt": "Write a SQL query to select the `name` column from the `students` table and alias it as `student_name`.",
+            "ci-show-name-and-city": {
+              "title": "Show two student details",
+              "prompt": "Write a query that returns the `name` and `city` columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT name\nFROM students;"
             }
           }
         }
@@ -203,13 +205,17 @@
     "sql-v2": {
       "sql-v2-0": {
         "one_table_vs_multiple_tables": {
-          "sketch1": {
-            "title": "Understanding Tables in SQL",
-            "bodyMarkdown": "In SQL, a table is a collection of related data entries and it consists of columns and rows. Each column in a table represents a specific attribute, and each row corresponds to a single record. For example, consider a `students` table:\n\n```\n| id | name | grade | age | city     |\n|----|------|-------|-----|----------|\n| 1  | Noor | A     | 15  | Chicago  |\n| 2  | Mia  | A     | 14  | Evanston |\n| 3  | Leo  | B     | 15  | Chicago  |\n| 4  | Ava  | C     | 14  | Oak Park |\n| 5  | Zane | B     | 16  | Naperville |\n```\n\nEach row represents a student, and each column represents a piece of information about the student. Try it yourself: Think about how you might organize data for a library system using tables."
+          "single-table-start": {
+            "title": "A single table can answer simple questions",
+            "bodyMarkdown": "A **table** stores rows of similar things. In this lesson's dataset, the `students` table stores one row per student.\n\n```sql\nSELECT *\nFROM students;\n```\n\nThis query means:\n- `SELECT *` = show all columns\n- `FROM students` = get the data from the `students` table\n\nIf you run it in the SQL editor and click **Run query**, the results table shows rows like Noor, Mia, and Leo.\n\nA single table works well when all the information you need belongs to the same kind of thing. Here, each student already has a name, grade, age, and city in one place.\n\n**Worked example:** If you want to see all student names and grades, one table is enough because both columns are already in `students`.\n\n```sql\nSELECT name, grade\nFROM students;\n```\n\nLine by line:\n- `SELECT name, grade` asks for only those two columns\n- `FROM students` tells SQL which table to read\n\n**Try it yourself:** Run the query, then change `grade` to `city` and check how the results table changes."
           },
-          "sketch2": {
-            "title": "When to Use Multiple Tables",
-            "bodyMarkdown": "Using multiple tables in a database can help organize data more efficiently and reduce redundancy. For instance, if you have a `students` table and a `courses` table, you can store information about students and courses separately, linking them with a common key like `student_id`.\n\nThis approach is beneficial when:\n- You have different entities with distinct attributes.\n- You want to avoid repeating data across records.\n- You need to maintain data integrity and consistency.\n\nYour turn: Consider a scenario where you need to manage data for a school. What tables might you create, and how would they relate to each other?"
+          "why-multiple-tables": {
+            "title": "Why databases sometimes use multiple tables",
+            "bodyMarkdown": "A database often uses **multiple tables** when one big table would repeat the same information again and again.\n\nImagine a school database that stores students and classes. If every student row also repeated the full class details, the same class information could appear many times.\n\nThat is why databases often split information into separate tables:\n- one table for students\n- another table for classes\n- sometimes another table for enrollments or relationships\n\nIn this module, our dataset has only one real table: `students`. So we can still talk about the idea of multiple tables without writing join queries yet.\n\n**Worked example:** In the current `students` table, the city `Chicago` appears for more than one student. Repeated values are normal, but if a table had many columns about each city, repeating all of them in every student row would be wasteful.\n\n```sql\nSELECT city\nFROM students;\n```\n\nThis query shows that some values repeat across rows.\n\nLine by line:\n- `SELECT city` asks for one column\n- `FROM students` reads from the student table\n\nMultiple tables help organize data when different kinds of things need their own home.\n\n**Your turn:** Look at the schema browser for `students`. Which columns describe the student directly, and which values might be repeated across many rows?"
+          },
+          "choosing-structure": {
+            "title": "How to think about one table vs many",
+            "bodyMarkdown": "A good beginner rule is:\n- use **one table** when all columns describe the same kind of thing\n- use **multiple tables** when the data mixes different kinds of things or repeats large chunks of information\n\nWith our dataset, `id`, `name`, `grade`, `age`, and `city` all describe a student, so one table makes sense for this small example.\n\n**Worked example:** This query asks for student names only.\n\n```sql\nSELECT name\nFROM students;\n```\n\nThat works because the table is focused on one kind of thing: students.\n\nIf you later wanted to store teachers, classrooms, and courses, putting everything into one giant table would become confusing. Separate tables would usually be clearer.\n\nWhen you are deciding on structure, ask:\n1. What is one row supposed to represent?\n2. Do all columns describe that same thing?\n3. Am I repeating lots of details that might belong somewhere else?\n\n**Try this:** In the SQL editor, run `SELECT id, name, city FROM students;` and ask yourself: does each row still clearly represent one student? If yes, that is a sign the table design is still focused."
           }
         }
       }

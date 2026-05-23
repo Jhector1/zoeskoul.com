@@ -4,6 +4,7 @@ import {
     STUDENTS_SQL_SEED,
 } from "../data/studentsSqlFallback";
 import {SqlDialect} from "@zoeskoul/practice-checks";
+import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 
 
 export type SqlInitialTableSnapshots = Record<
@@ -25,6 +26,7 @@ export type RightRailSqlToolState = {
     toolSqlSchemaSql?: string | null;
     toolSqlSeedSql?: string | null;
     toolSqlInitialTableSnapshots?: SqlInitialTableSnapshots;
+    toolSqlPaneOptions?: SqlPaneOptions | null;
 };
 
 export type RightRailSqlFallback = {
@@ -33,6 +35,7 @@ export type RightRailSqlFallback = {
     sqlSchemaSql?: string | null;
     sqlSeedSql?: string | null;
     sqlInitialTableSnapshots?: SqlInitialTableSnapshots;
+    sqlPaneOptions?: SqlPaneOptions | null;
 };
 
 export type ResolveRightRailSqlPropsArgs = {
@@ -48,6 +51,7 @@ export type ResolvedRightRailSqlProps = {
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlInitialTableSnapshots?: SqlInitialTableSnapshots;
+    sqlPaneOptions?: SqlPaneOptions;
 };
 
 function firstNonBlank(...values: Array<string | null | undefined>) {
@@ -126,5 +130,11 @@ export function resolveRightRailSqlProps({
             (tool.toolLang === "sql"
                 ? undefined
                 : STUDENTS_INITIAL_TABLE_SNAPSHOTS),
+        sqlPaneOptions:
+            (routeCanUseBoundExercise
+                ? tool.toolSqlPaneOptions ?? undefined
+                : undefined) ??
+            topicSqlFallback?.sqlPaneOptions ??
+            undefined,
     };
 }

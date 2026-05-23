@@ -3,139 +3,141 @@
     "sql-v2": {
       "sql-v2-2": {
         "greater_than_or_equal_and_less_than_or_equal": {
-          "label": "greater than or equal and less than or equal",
-          "summary": "Learn how to use greater than or equal (>=) and less than or equal (<=) operators in SQL to filter data effectively.",
+          "label": "Greater Than or Equal and Less Than or Equal",
+          "summary": "Learn how to filter rows with >= and <= in a WHERE clause so you can include boundary values like exact prices or stock counts.",
           "cards": {
             "sketch0": {
-              "title": "Understanding >= and <= Operators"
+              "title": "Using >= and <= to include the edge"
             },
             "sketch1": {
-              "title": "Combining >= and <= with AND"
+              "title": "Reading boundary values correctly"
+            },
+            "sketch2": {
+              "title": "Combining both sides of a range"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Filtering Project"
+              "title": "Inclusive filter practice"
             }
           },
           "projectSteps": {
-            "quiz9": {
-              "title": "Filter Products by Price"
+            "code_1": {
+              "title": "Find products priced at least 18.00"
             },
-            "quiz10": {
-              "title": "Find Products by Stock"
+            "code_2": {
+              "title": "Find products with stock at most 10"
             },
-            "quiz11": {
-              "title": "Filter by Category and Price"
+            "code_3": {
+              "title": "Filter a price range with inclusive boundaries"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "Understanding >= Operator",
-              "prompt": "What does the `>=` operator do in SQL?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "sc-1": {
+              "title": "Meaning of greater than or equal to",
+              "prompt": "Which condition keeps rows where `price` is 18 or more, including exactly 18?",
+              "hint": "Look for the operator that includes the boundary value 18.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "The `>=` operator matches values that are larger than a number and also values exactly equal to that number.",
+                "hint_1": "A plain `>` would exclude rows where `price` is exactly 18.",
+                "hint_2": "Choose the condition that reads as 'price is greater than or equal to 18'."
               },
               "options": {
-                "a": "Selects values greater than a specified value",
-                "b": "Selects values less than a specified value",
-                "c": "Selects values greater than or equal to a specified value",
-                "d": "Selects values less than or equal to a specified value"
+                "a": "price > 18",
+                "b": "price >= 18",
+                "c": "price < 18",
+                "d": "price <= 18"
               }
             },
-            "quiz2": {
-              "title": "Using <= Operator",
-              "prompt": "Which SQL query correctly uses the `<=` operator to find products with a price of $15 or less?",
-              "hint": "Look for the query that includes $15 in the results.",
+            "sc-2": {
+              "title": "Meaning of less than or equal to",
+              "prompt": "Which condition keeps rows where `stock` is 10 or less, including exactly 10?",
+              "hint": "You need the operator that includes the edge value 10.",
               "help": {
-                "concept": "The `<=` operator selects values less than or equal to a specified value.",
-                "hint_1": "It includes the boundary value in the selection.",
-                "hint_2": "Consider how it differs from the `<` operator."
+                "concept": "The `<=` operator matches values below a number and also the value exactly equal to that number.",
+                "hint_1": "If the row has `stock = 10`, the correct condition must still keep it.",
+                "hint_2": "Choose the condition that reads as 'stock is less than or equal to 10'."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE price < 15;",
-                "b": "SELECT * FROM products WHERE price <= 15;",
-                "c": "SELECT * FROM products WHERE price = 15;",
-                "d": "SELECT * FROM products WHERE price > 15;"
+                "a": "stock < 10",
+                "b": "stock > 10",
+                "c": "stock <= 10",
+                "d": "stock >= 10"
               }
             },
-            "quiz3": {
-              "title": "Combining Conditions",
-              "prompt": "Which of the following queries will select products with a price between $10 and $20, inclusive? (Choose all that apply)",
-              "hint": "Consider how the operators include or exclude boundary values.",
+            "mc-1": {
+              "title": "Queries that include the boundary",
+              "prompt": "Choose all queries that include products priced exactly `18.00`.",
+              "hint": "Check which conditions allow a row where `price` equals 18.00.",
               "help": {
-                "concept": "Combining `>=` and `<=` with `AND` allows you to specify a range that includes boundary values.",
-                "hint_1": "Check which queries include both $10 and $20.",
-                "hint_2": "Remember that `>=` and `<=` include the boundary values."
+                "concept": "Boundary-aware comparisons include exact matches when you use `>=` or `<=`, and a range with both sides can also include the boundary if 18 fits both conditions.",
+                "hint_1": "Test the value `18.00` against each condition one by one.",
+                "hint_2": "Any option using strict `>` or strict `<` at 18 will reject the exact value 18.00."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE price >= 10 AND price <= 20;",
-                "b": "SELECT * FROM products WHERE price > 10 AND price < 20;",
-                "c": "SELECT * FROM products WHERE price >= 10 AND price < 20;",
-                "d": "SELECT * FROM products WHERE price > 10 AND price <= 20;"
+                "a": "SELECT name FROM products WHERE price >= 18.00;",
+                "b": "SELECT name FROM products WHERE price > 18.00;",
+                "c": "SELECT name FROM products WHERE price <= 18.00;",
+                "d": "SELECT name FROM products WHERE price < 18.00;"
               }
             },
-            "quiz4": {
-              "title": "Filtering with AND",
-              "prompt": "Which queries will correctly find products with a price greater than $15 and less than or equal to $30? (Choose all that apply)",
-              "hint": "Focus on the operators that include or exclude $15 and $30.",
+            "mc-2": {
+              "title": "Rows kept by an inclusive range",
+              "prompt": "Choose all products that match `WHERE price >= 10 AND price <= 25` in the `products` table.",
+              "hint": "Check each product price against both ends of the range.",
               "help": {
-                "concept": "Using `AND` with `>` and `<=` allows filtering within a specific range.",
-                "hint_1": "Ensure the query excludes $15 but includes $30.",
-                "hint_2": "Check which queries correctly apply the range."
+                "concept": "An inclusive range with `>=` and `<=` keeps values inside the range and also values exactly equal to either boundary.",
+                "hint_1": "A matching product must be at least 10 and at most 25 at the same time.",
+                "hint_2": "Compare these prices carefully: 12.99, 24.50, 39.99, 6.75, 18.00, and 129.00."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE price > 15 AND price <= 30;",
-                "b": "SELECT * FROM products WHERE price >= 15 AND price <= 30;",
-                "c": "SELECT * FROM products WHERE price > 15 AND price < 30;",
-                "d": "SELECT * FROM products WHERE price >= 15 AND price < 30;"
+                "a": "Sketchbook",
+                "b": "Acrylic Paint Set",
+                "c": "Desk Lamp",
+                "d": "Fountain Pen"
               }
             },
-            "quiz5": {
-              "title": "Ordering SQL Clauses",
-              "prompt": "Arrange the SQL clauses in the correct order to form a valid query that selects products with a price less than or equal to $50.",
-              "hint": "Start with the selection clause.",
+            "dr-1": {
+              "title": "Build a query with >=",
+              "prompt": "Arrange the tokens to make a query that shows product names and prices for products costing 18.00 or more.",
+              "hint": "Start with SELECT, then FROM, then the WHERE condition.",
               "help": {
-                "concept": "SQL queries follow a specific order: SELECT, FROM, WHERE.",
-                "hint_1": "The SELECT clause comes first.",
-                "hint_2": "The WHERE clause specifies the condition."
+                "concept": "A basic filtered SQL query follows the order `SELECT ... FROM ... WHERE ...`.",
+                "hint_1": "The columns come right after `SELECT`, and the table name comes after `FROM`.",
+                "hint_2": "The comparison `price >= 18.00` belongs at the end in the `WHERE` clause."
               },
               "tokens": {
-                "t1": "SELECT *",
+                "t1": "SELECT name, price",
                 "t2": "FROM products",
-                "t3": "WHERE price <= 50"
+                "t3": "WHERE price >= 18.00"
               }
             },
-            "quiz6": {
-              "title": "Building a Query",
-              "prompt": "Reorder the parts to form a query that finds products in the 'Art' category with a price greater than or equal to $10.",
-              "hint": "Begin with the SELECT clause.",
+            "dr-2": {
+              "title": "Build a query with <=",
+              "prompt": "Arrange the tokens to make a query that shows product names and stock values for products with stock 10 or less.",
+              "hint": "Put the SELECT clause first and the filter last.",
               "help": {
-                "concept": "The correct order of SQL clauses is crucial for query execution.",
-                "hint_1": "Start with the SELECT statement.",
-                "hint_2": "The WHERE clause follows the FROM clause."
+                "concept": "SQL statements are read in clause order, and the `WHERE` filter comes after the table source.",
+                "hint_1": "The query needs the `products` table and a condition on `stock`.",
+                "hint_2": "Use the token with `stock <= 10` as the final clause."
               },
               "tokens": {
-                "t1": "SELECT *",
+                "t1": "WHERE stock <= 10",
                 "t2": "FROM products",
-                "t3": "WHERE category = 'Art'",
-                "t4": "AND price >= 10"
+                "t3": "SELECT name, stock"
               }
             },
-            "quiz7": {
-              "title": "Using Comparison Operators",
-              "prompt": "Complete the query to find products with a stock of 10 or more: `SELECT * FROM products WHERE stock [blank1] 10;`",
+            "fb-1": {
+              "title": "Choose the inclusive operator",
+              "prompt": "Complete the condition so it keeps rows where `price` is 24.50 or more, including exactly 24.50.",
               "hint": "Read the sentence around the blank and decide what role the missing word plays.",
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
                 "hint_2": "Pick the choice that completes the statement with the clearest meaning."
               },
-              "template": "SELECT * FROM products WHERE stock [blank1] 10;",
+              "template": "WHERE price [blank1] 24.50",
               "choices": [
                 ">",
                 ">=",
@@ -143,55 +145,55 @@
                 "<="
               ]
             },
-            "quiz8": {
-              "title": "Filtering by Date",
-              "prompt": "Complete the query to find products added on or after January 1, 2026: `SELECT * FROM products WHERE created_at [blank1] '2026-01-01';`",
+            "fb-2": {
+              "title": "Complete a less-than-or-equal filter",
+              "prompt": "Complete the condition so it keeps rows where `stock` is 15 or less, including exactly 15.",
               "hint": "Read the sentence around the blank and decide what role the missing word plays.",
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
                 "hint_2": "Pick the choice that completes the statement with the clearest meaning."
               },
-              "template": "SELECT * FROM products WHERE created_at [blank1] '2026-01-01';",
+              "template": "WHERE stock [blank1] 15",
               "choices": [
-                ">",
-                ">=",
                 "<",
-                "<="
+                "<=",
+                ">",
+                ">="
               ]
             },
-            "quiz9": {
-              "title": "Filter Products by Price",
-              "prompt": "Write a query to find all products with a price greater than or equal to $25.",
+            "code-1": {
+              "title": "Find products priced at least 18.00",
+              "prompt": "Write a query that returns the `name` and `price` columns from `products` for products with `price` greater than or equal to `18.00`. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "SELECT name, price\nFROM products\nWHERE ;"
             },
-            "quiz10": {
-              "title": "Find Products by Stock",
-              "prompt": "Write a query to find products with a stock less than or equal to 20.",
+            "code-2": {
+              "title": "Find products with stock at most 10",
+              "prompt": "Write a query that returns the `name` and `stock` columns from `products` for products with `stock` less than or equal to `10`. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "SELECT name, stock\nFROM products\nWHERE ;"
             },
-            "quiz11": {
-              "title": "Filter by Category and Price",
-              "prompt": "Write a query to find all 'Stationery' products with a price less than $10.",
+            "code-3": {
+              "title": "Filter a price range with inclusive boundaries",
+              "prompt": "Write a query that returns the `name` and `price` columns from `products` for products with `price` greater than or equal to `10` and less than or equal to `25`. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "SELECT name, price\nFROM products\nWHERE ;"
             }
           }
         }
@@ -202,13 +204,17 @@
     "sql-v2": {
       "sql-v2-2": {
         "greater_than_or_equal_and_less_than_or_equal": {
-          "sketch1": {
-            "title": "Understanding >= and <= Operators",
-            "bodyMarkdown": "In SQL, the `>=` (greater than or equal) and `<=` (less than or equal) operators are used to filter data based on numerical values. These operators allow you to include boundary values in your results.\n\n### Example\nSuppose you want to find all products with a price greater than or equal to $20. You can use the following query:\n\n```sql\nSELECT * FROM products WHERE price >= 20;\n```\n\nThis query will return all products with a price of $20 or more.\n\n### Try it yourself\nModify the query to find products with a price less than or equal to $20."
+          "sketch-1": {
+            "title": "Using >= and <= to include the edge",
+            "bodyMarkdown": "In SQL, `>=` means **greater than or equal to** and `<=` means **less than or equal to**. These operators are useful when you want to keep rows that are above, below, or exactly on a boundary.\n\nFor example, in the `products` table, this query finds products that cost **18.00 or more**:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price >= 18.00;\n```\n\nThis includes products priced exactly `18.00`, not just prices above it.\n\nWith the sample data, `Fountain Pen` is included because its price is exactly `18.00`.\n\nLine by line:\n- `SELECT name, price` shows only the product name and price columns.\n- `FROM products` reads from the `products` table.\n- `WHERE price >= 18.00` keeps rows where the price is 18.00 or higher.\n\nYou can do the same in the other direction:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock <= 10;\n```\n\nThis keeps products with stock 10 or less, including stock exactly `10`.\n\nTry it yourself: write one query with `price >= 24.50` and another with `stock <= 15`. Click Run query and compare which rows appear in the results table."
           },
-          "sketch2": {
-            "title": "Combining >= and <= with AND",
-            "bodyMarkdown": "You can combine the `>=` and `<=` operators with the `AND` keyword to filter data within a specific range.\n\n### Example\nTo find products priced between $10 and $30, inclusive, use:\n\n```sql\nSELECT * FROM products WHERE price >= 10 AND price <= 30;\n```\n\nThis query returns products with prices from $10 to $30.\n\n### Your turn\nTry adjusting the price range to find products between $15 and $25."
+          "sketch-2": {
+            "title": "Reading boundary values correctly",
+            "bodyMarkdown": "A common beginner mistake is mixing up `>` with `>=`, or `<` with `<=`.\n\n- `>` means strictly greater than.\n- `>=` means greater than **or exactly equal to**.\n- `<` means strictly less than.\n- `<=` means less than **or exactly equal to**.\n\nWorked example:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price <= 12.99;\n```\n\nThis query includes any product priced below `12.99` and also any product priced exactly `12.99`.\n\nFrom the sample rows:\n- `Sketchbook` at `12.99` is included.\n- `Notebook` at `6.75` is included.\n- `Fountain Pen` at `18.00` is not included.\n\nIf you changed the operator to `< 12.99`, `Sketchbook` would no longer appear because `12.99` is not less than `12.99`.\n\nYour turn: change the query to use `< 12.99` in the SQL editor, click Run query, and check how the results table changes."
+          },
+          "sketch-3": {
+            "title": "Combining both sides of a range",
+            "bodyMarkdown": "You can use `>=` and `<=` together with `AND` to keep rows inside a range.\n\nFor example, this query finds products priced from `10` to `25`, including both ends:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price >= 10 AND price <= 25;\n```\n\nStep by step:\n- `price >= 10` removes products cheaper than 10.\n- `price <= 25` removes products more expensive than 25.\n- `AND` means both conditions must be true for the row to stay.\n\nWith the sample data, this range includes:\n- `Sketchbook` at `12.99`\n- `Acrylic Paint Set` at `24.50`\n- `Fountain Pen` at `18.00`\n\nIt does not include:\n- `Notebook` at `6.75`\n- `Desk Lamp` at `39.99`\n- `Office Chair` at `129.00`\n\nTry this: write a similar query for stock values from `8` to `25`, inclusive. Run it and check which product names appear."
           }
         }
       }

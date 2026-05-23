@@ -93,4 +93,49 @@ describe("validateGoldenTopicBundle", () => {
 
         expect(report.ok).toBe(true);
     });
+
+    it("inherits SQL datasetId from module runtime defaults during golden validation", async () => {
+        const report = await validateGoldenTopicBundle({
+            seed: {
+                topicId: "sql-topic",
+                subjectSlug: "sql-v2",
+                courseSlug: "sql-foundations",
+                moduleRuntimeDefaults: {
+                    kind: "sql",
+                    datasetId: "students_intro",
+                    fixedSqlDialect: "sqlite",
+                },
+            } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "sql-topic",
+                subjectSlug: "sql-v2",
+                moduleSlug: "sql-v2-0",
+                sectionSlug: "sql-v2-0-1",
+                prefix: "topics.sql.sql-v2-0.sql-topic",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        messageBase: "quiz.code-1",
+                        language: "sql",
+                        fixedSqlDialect: "sqlite",
+                        recipe: {
+                            type: "sql_query",
+                            solutionCode: "SELECT id, name FROM students;",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(report.ok).toBe(true);
+    });
 });

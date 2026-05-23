@@ -1,0 +1,255 @@
+{
+  "title": "Find Highest Values",
+  "summary": "Learn how to sort rows from highest to lowest and use LIMIT to show the top results.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-highest-values-basics",
+      "title": "Sort from highest to lowest",
+      "bodyMarkdown": "When you want the **highest values** in SQL, you usually sort a column in **descending** order with `ORDER BY ... DESC`.\n\nIn this lesson, the dataset has a `products` table with columns such as `name`, `category`, `price`, and `stock`.\n\nHere is a query that shows products from the highest price to the lowest price:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price DESC;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to display.\n- `FROM products` says which table to read.\n- `ORDER BY price DESC` sorts rows so the largest `price` appears first.\n\nWith this dataset, the first row would be **Office Chair** because its price is `129.00`, which is higher than the other products.\n\nIf you used `ASC` instead, the lowest price would come first.\n\nTry it yourself: write this query in the SQL editor, click **Run query**, and check which product appears at the top of the results table."
+    },
+    {
+      "id": "sketch-limit-top-results",
+      "title": "Show only the top few rows",
+      "bodyMarkdown": "Sorting helps you rank rows, and `LIMIT` helps you show only the first few results.\n\nFor example, this query returns the **three most expensive** products:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;\n```\n\nLine by line:\n- `SELECT name, price` shows the product name and price.\n- `FROM products` reads from the products table.\n- `ORDER BY price DESC` puts the highest prices first.\n- `LIMIT 3` keeps only the first 3 rows after sorting.\n\nUsing the sample data, the result starts with:\n1. Office Chair — 129.00\n2. Desk Lamp — 39.99\n3. Acrylic Paint Set — 24.50\n\nThis works because SQL sorts first, then limits the output.\n\nYour turn: change `LIMIT 3` to `LIMIT 2`, run the query again, and compare the results table."
+    },
+    {
+      "id": "sketch-choose-right-column",
+      "title": "Highest depends on the column you sort",
+      "bodyMarkdown": "The word **highest** can mean different things depending on the column.\n\n- Highest `price` means the most expensive product.\n- Highest `stock` means the product with the largest inventory count.\n- Most recent `created_at` means the newest date, which is often found with `DESC` too.\n\nHere is a worked example that finds the products with the highest stock:\n\n```sql\nSELECT name, stock\nFROM products\nORDER BY stock DESC\nLIMIT 2;\n```\n\nWhat this does:\n- It displays `name` and `stock`.\n- It sorts by `stock` from largest to smallest.\n- It returns only the top 2 rows.\n\nIn the sample data, **Notebook** has stock `50`, so it appears before products with smaller stock values.\n\nA common mistake is sorting the wrong column. If you sort by `name DESC`, you are sorting alphabetically, not by a numeric highest value.\n\nTry this: write one query that finds the highest `price`, then another that finds the highest `stock`. Click **Run query** after each one and compare the results table."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "sc-highest-price-desc",
+      "kind": "single_choice",
+      "title": "Pick the clause for highest prices",
+      "prompt": "Which clause correctly sorts products so the highest price appears first?",
+      "options": [
+        "ORDER BY price DESC",
+        "ORDER BY price ASC",
+        "ORDER BY name DESC",
+        "LIMIT price"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Use descending order when you want the largest values first.",
+      "help": {
+        "concept": "To place the largest numeric values at the top of a result, SQL uses ORDER BY with DESC on that column.",
+        "hint_1": "Look for the option that sorts by the `price` column, not by `name` or `category`.",
+        "hint_2": "The correct clause uses `ORDER BY` and the keyword that means highest-to-lowest."
+      }
+    },
+    {
+      "id": "sc-limit-after-sorting",
+      "kind": "single_choice",
+      "title": "Understand what LIMIT does",
+      "prompt": "After a query sorts rows by `price DESC`, what does `LIMIT 1` do?",
+      "options": [
+        "It keeps only the first row of the sorted results",
+        "It sorts prices from low to high",
+        "It removes the `price` column from the results",
+        "It filters rows where price equals 1"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how many rows remain after LIMIT is applied.",
+      "help": {
+        "concept": "LIMIT keeps only a specific number of rows from the already sorted result set.",
+        "hint_1": "The rows are sorted first, then SQL keeps only the first part of that ordered list.",
+        "hint_2": "If only one row is kept after sorting highest-to-lowest, it will be the top row in that order."
+      }
+    },
+    {
+      "id": "mc-highest-value-patterns",
+      "kind": "multi_choice",
+      "title": "Recognize valid highest-value patterns",
+      "prompt": "Which queries could be used to find highest values from the `products` table? Choose all that apply.",
+      "options": [
+        "SELECT name, price FROM products ORDER BY price DESC LIMIT 1;",
+        "SELECT name, stock FROM products ORDER BY stock DESC LIMIT 3;",
+        "SELECT name FROM products ORDER BY price ASC LIMIT 1;",
+        "SELECT name, created_at FROM products ORDER BY created_at DESC LIMIT 2;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Look for queries that sort a relevant column in descending order.",
+      "help": {
+        "concept": "Finding highest values usually means ordering a numeric or date-like column with DESC, often combined with LIMIT.",
+        "hint_1": "A valid answer should sort by a meaningful column such as `price`, `stock`, or `created_at` in descending order.",
+        "hint_2": "Reject options that sort ascending or alphabetically when the goal is highest numeric or newest values."
+      }
+    },
+    {
+      "id": "mc-true-about-desc-limit",
+      "kind": "multi_choice",
+      "title": "Choose true statements about DESC and LIMIT",
+      "prompt": "Which statements are true when working with `ORDER BY ... DESC` and `LIMIT`? Choose all that apply.",
+      "options": [
+        "`DESC` sorts values from highest to lowest",
+        "`LIMIT 3` can be used to keep only the first 3 rows after sorting",
+        "`DESC` means SQL shows only one row",
+        "`LIMIT` changes a low-to-high sort into a high-to-low sort"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Think about what DESC changes and what LIMIT changes.",
+      "help": {
+        "concept": "DESC controls sort direction, while LIMIT controls how many rows are shown after sorting.",
+        "hint_1": "One part decides order; another part decides count. They do different jobs.",
+        "hint_2": "Look for statements that describe highest-to-lowest sorting and keeping only the first few rows."
+      }
+    },
+    {
+      "id": "dr-top-price-query-order",
+      "kind": "drag_reorder",
+      "title": "Build a top-price query",
+      "prompt": "Arrange these SQL parts to make a query that shows the single most expensive product.",
+      "tokens": [
+        "SELECT name, price",
+        "FROM products",
+        "ORDER BY price DESC",
+        "LIMIT 1;"
+      ],
+      "correctOrder": [
+        "SELECT name, price",
+        "FROM products",
+        "ORDER BY price DESC",
+        "LIMIT 1;"
+      ],
+      "hint": "Start by selecting columns, then name the table, then sort, then limit.",
+      "help": {
+        "concept": "A basic SQL query follows a clause order: SELECT, FROM, ORDER BY, then LIMIT.",
+        "hint_1": "The sorting clause must come after the table name.",
+        "hint_2": "The row-count restriction belongs at the end of this query."
+      }
+    },
+    {
+      "id": "dr-top-stock-query-order",
+      "kind": "drag_reorder",
+      "title": "Order the clauses for highest stock",
+      "prompt": "Arrange the tokens to create a query that shows the top 2 products by stock.",
+      "tokens": [
+        "SELECT name, stock",
+        "FROM products",
+        "ORDER BY stock DESC",
+        "LIMIT 2;"
+      ],
+      "correctOrder": [
+        "SELECT name, stock",
+        "FROM products",
+        "ORDER BY stock DESC",
+        "LIMIT 2;"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fb-desc-keyword",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the sort direction",
+      "prompt": "Complete the query so the highest prices appear first.",
+      "template": "SELECT name, price FROM products ORDER BY price [blank1];",
+      "choices": [
+        "DESC",
+        "ASC",
+        "LIMIT",
+        "WHERE"
+      ],
+      "correctValue": "DESC",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "fb-limit-count",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the row count",
+      "prompt": "Complete the query so it returns only the top 3 most expensive products.",
+      "template": "SELECT name, price FROM products ORDER BY price DESC LIMIT [blank1];",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "6"
+      ],
+      "correctValue": "3",
+      "hint": "The blank should be the number of rows to keep.",
+      "help": {
+        "concept": "LIMIT sets the maximum number of rows returned after sorting.",
+        "hint_1": "The query already sorts by highest price first, so the missing value is just the row count.",
+        "hint_2": "To keep the top three rows, use the number that matches that count."
+      }
+    },
+    {
+      "id": "ci-most-expensive-product",
+      "kind": "code_input",
+      "title": "Find the most expensive product",
+      "prompt": "Write a query that shows the `name` and `price` of the single most expensive product in the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+      "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by the highest price and keep only one row\n;",
+      "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 1;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "ci-top-three-prices",
+      "kind": "code_input",
+      "title": "Show the top 3 prices",
+      "prompt": "Write a query that returns the `name` and `price` of the three most expensive products from `products`, ordered from highest price to lowest price. Use the SQL editor, then click Run query.",
+      "starterCode": "SELECT name, price\nFROM products\n-- TODO: order the rows and return only the top 3\n;",
+      "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "ci-highest-stock-two",
+      "kind": "code_input",
+      "title": "Find the top 2 products by stock",
+      "prompt": "Write a query that shows the `name` and `stock` columns for the two products with the highest stock values. Sort from highest stock to lowest stock. Write the query in the SQL editor and click Run query.",
+      "starterCode": "SELECT name, stock\nFROM products\n-- TODO: show the 2 highest stock values\n;",
+      "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock DESC\nLIMIT 2;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Check the table name and selected columns in the SQL editor.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Rank Products by Highest Values",
+    "stepIds": [
+      "ci-most-expensive-product",
+      "ci-top-three-prices",
+      "ci-highest-stock-two"
+    ]
+  }
+}

@@ -157,6 +157,7 @@ export type ReviewModuleSection = {
     summary?: string | null;
     description?: string | null;
     order: number;
+    runtimeDefaults?: ManifestRuntimeDefaults | null;
     topics: ReviewTopicShape[];
 };
 
@@ -165,6 +166,8 @@ export type ReviewModule = {
     title: string;
     subtitle?: string | null;
     startPracticeSectionSlug: string;
+    profileId?: string | null;
+    versionFamily?: string | null;
     runtimeDefaults?: ManifestRuntimeDefaults | null;
     serviceDefaults?: LearningIdeConfig | null;
 

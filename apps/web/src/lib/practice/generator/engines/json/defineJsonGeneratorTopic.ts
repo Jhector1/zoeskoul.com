@@ -18,6 +18,7 @@ export function defineJsonGeneratorTopic(manifest: TopicBundleManifest): TopicBu
             (args) =>
                 buildExerciseFromManifest(ex, args, {
                     serviceDefaults: manifest.serviceDefaults ?? null,
+                    runtimeDefaults: manifest.runtimeDefaults ?? null,
                 }),
         ]),
     );

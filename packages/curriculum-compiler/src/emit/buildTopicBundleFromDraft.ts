@@ -563,6 +563,27 @@ export function buildTopicBundleFromDraft(args: {
                     language: "sql" as const,
                     starterCode: normalizeText(exercise.starterCode),
                     fixedSqlDialect: moduleDialect === "sqlite" ? "sqlite" : "sqlite",
+                    runtime: {
+                        kind: "sql" as const,
+                        datasetId: effectiveDatasetId,
+                        fixedSqlDialect: moduleDialect === "sqlite" ? "sqlite" : "sqlite",
+                        resultShape: moduleResultShape === "table" ? "table" : "table",
+                        showSchema:
+                            seed.moduleRuntimeDefaults?.kind === "sql"
+                                ? seed.moduleRuntimeDefaults.showSchema ?? true
+                                : true,
+                        showErd:
+                            seed.moduleRuntimeDefaults?.kind === "sql"
+                                ? seed.moduleRuntimeDefaults.showErd
+                                : undefined,
+                        showChen:
+                            seed.moduleRuntimeDefaults?.kind === "sql"
+                                ? seed.moduleRuntimeDefaults.showChen
+                                : undefined,
+                        supportsTerminal: false,
+                        supportsMultiFile: false,
+                        supportsFileSystem: false,
+                    },
                     recipe: {
                         type: "sql_query" as const,
                         datasetId: effectiveDatasetId,
@@ -659,6 +680,7 @@ export function buildTopicBundleFromDraft(args: {
         sectionSlug: logicalSectionSlug,
         prefix,
         minutes: seed.minutes,
+        runtimeDefaults: seed.moduleRuntimeDefaults ?? null,
         topic: {
             labelKey: kp.topicLabelKey(
                 seed.subjectSlug,

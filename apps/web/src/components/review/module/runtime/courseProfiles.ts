@@ -5,6 +5,7 @@ import {
   type ResolvedSqlRunnerConfig,
 } from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
 import {isUsableStarterCode} from "@/components/review/module/runtime/starterContent";
+import { resolveEffectiveExerciseRuntime } from "@zoeskoul/curriculum-runtime/runtime";
 
 type UnknownRecord = Record<string, unknown>;
 
@@ -19,7 +20,7 @@ export type CourseProfile = {
 
 export type RuntimeDatasetResolution = {
   datasetId?: string;
-  source: "exercise" | "sketch" | "target" | "topic" | "module" | "runtime-default" | "none";
+  source: string;
   error?: string;
 };
 
@@ -50,9 +51,40 @@ function cleanLanguage(value: unknown): WorkspaceLanguage | undefined {
 export function getCourseProfile(args: {
   subjectSlug?: string | null;
   language?: string | null;
+  profileId?: string | null;
+  versionFamily?: string | null;
 }): CourseProfile {
   const subjectSlug = cleanString(args.subjectSlug)?.toLowerCase() ?? "";
   const explicitLanguage = cleanLanguage(args.language);
+  const profileId = cleanString(args.profileId)?.toLowerCase();
+  const versionFamily = cleanString(args.versionFamily)?.toLowerCase();
+
+  const canonicalProfile =
+    explicitLanguage === "sql" || profileId === "sql" || versionFamily === "sql"
+      ? "sql"
+      : explicitLanguage === "python" ||
+          profileId === "python" ||
+          versionFamily === "python"
+        ? "python"
+        : null;
+
+  if (canonicalProfile === "sql") {
+    return {
+      id: "sql",
+      subjectSlug,
+      defaultLanguage: "sql" as WorkspaceLanguage,
+      supportsRuntimeDefaultDataset: true,
+    };
+  }
+
+  if (canonicalProfile === "python") {
+    return {
+      id: "python",
+      subjectSlug,
+      defaultLanguage: "python" as WorkspaceLanguage,
+      supportsRuntimeDefaultDataset: false,
+    };
+  }
 
   switch (subjectSlug) {
     case "sql":
@@ -111,12 +143,16 @@ export function getCourseProfile(args: {
 export function resolveCourseLanguage(args: {
   subjectSlug?: string | null;
   language?: string | null;
+  profileId?: string | null;
+  versionFamily?: string | null;
   runtimeDefaults?: UnknownRecord | null;
   target?: unknown;
 }): WorkspaceLanguage {
   const profile = getCourseProfile({
     subjectSlug: args.subjectSlug,
     language: args.language,
+    profileId: args.profileId,
+    versionFamily: args.versionFamily,
   });
   const targetRecord = isRecord(args.target) ? args.target : null;
   const target = isRecord(targetRecord?.spec)
@@ -134,6 +170,9 @@ export function resolveCourseLanguage(args: {
     cleanLanguage(runtime.language) ??
     cleanLanguage(args.runtimeDefaults?.language) ??
     cleanLanguage(args.runtimeDefaults?.lang) ??
+    (cleanString(args.runtimeDefaults?.kind)?.toLowerCase() === "sql"
+      ? ("sql" as WorkspaceLanguage)
+      : undefined) ??
     profile.defaultLanguage
   );
 }
@@ -214,9 +253,16 @@ export function resolveGenericFileSeed(target: unknown): FileSeed {
 export function resolveCourseFileSeed(args: {
   subjectSlug?: string | null;
   language?: string | null;
+  profileId?: string | null;
+  versionFamily?: string | null;
   target: unknown;
 }): FileSeed {
-  const profile = getCourseProfile({ subjectSlug: args.subjectSlug, language: args.language });
+  const profile = getCourseProfile({
+    subjectSlug: args.subjectSlug,
+    language: args.language,
+    profileId: args.profileId,
+    versionFamily: args.versionFamily,
+  });
 
   switch (profile.id) {
     case "python":
@@ -230,33 +276,6 @@ export function resolveCourseFileSeed(args: {
     default:
       return resolveGenericFileSeed(args.target);
   }
-}
-
-function getDatasetFromRuntime(runtime: unknown) {
-  if (!isRecord(runtime)) return undefined;
-  if (cleanString(runtime.datasetId)) return cleanString(runtime.datasetId);
-  if (cleanString(runtime.runtimeDefaultDatasetId)) return cleanString(runtime.runtimeDefaultDatasetId);
-  return undefined;
-}
-
-function getDatasetFromTarget(target: unknown): string | undefined {
-  const targetRecord = isRecord(target) ? target : null;
-  const source = isRecord(targetRecord?.spec) ? targetRecord.spec : target;
-  if (!isRecord(source)) return undefined;
-  const recipe = isRecord(source.recipe) ? source.recipe : {};
-  const expected = isRecord(source.expected) ? source.expected : {};
-  const expectedRuntime = isRecord(expected.runtime) ? expected.runtime : {};
-  const workspace = isRecord(source.workspace) ? source.workspace : {};
-
-  return (
-    getDatasetFromRuntime(source.runtime) ??
-    cleanString(source.datasetId) ??
-    cleanString(source.runtimeDefaultDatasetId) ??
-    cleanString(recipe.datasetId) ??
-    getDatasetFromRuntime(expectedRuntime) ??
-    cleanString(workspace.datasetId) ??
-    cleanString(workspace.runtimeDefaultDatasetId)
-  );
 }
 
 /**
@@ -273,38 +292,52 @@ function getDatasetFromTarget(target: unknown): string | undefined {
 export function resolveRuntimeDefaultDataset(args: {
   subjectSlug?: string | null;
   language?: string | null;
+  profileId?: string | null;
+  versionFamily?: string | null;
   target?: unknown;
+  subjectRuntimeDefaults?: UnknownRecord | null;
+  courseRuntimeDefaults?: UnknownRecord | null;
+  sectionRuntimeDefaults?: UnknownRecord | null;
   topicRuntimeDefaults?: UnknownRecord | null;
   moduleRuntimeDefaults?: UnknownRecord | null;
   runtimeDefaults?: UnknownRecord | null;
 }): RuntimeDatasetResolution {
-  const profile = getCourseProfile({ subjectSlug: args.subjectSlug, language: args.language });
+  const profile = getCourseProfile({
+    subjectSlug: args.subjectSlug,
+    language: args.language,
+    profileId: args.profileId,
+    versionFamily: args.versionFamily,
+  });
   if (profile.id !== "sql") return { source: "none" };
+  const targetRecord = isRecord(args.target) ? args.target : null;
+  const target = isRecord(targetRecord?.spec)
+    ? targetRecord.spec
+    : targetRecord ?? {};
+  const resolved = resolveEffectiveExerciseRuntime({
+    language: "sql",
+    exerciseRuntime: isRecord(target.runtime) ? target.runtime : null,
+    exerciseSqlDatasetId:
+      cleanString(target.datasetId) ??
+      cleanString(target.runtimeDefaultDatasetId),
+    recipe: isRecord(target.recipe) ? target.recipe : null,
+    topicRuntimeDefaults: args.topicRuntimeDefaults,
+    sectionRuntimeDefaults: args.sectionRuntimeDefaults,
+    moduleRuntimeDefaults: args.moduleRuntimeDefaults ?? args.runtimeDefaults,
+    courseRuntimeDefaults: args.courseRuntimeDefaults,
+    subjectRuntimeDefaults: args.subjectRuntimeDefaults,
+  });
 
-  const targetDatasetId = getDatasetFromTarget(args.target);
-  if (targetDatasetId) {
-    const targetRecord = isRecord(args.target) ? args.target : null;
-    const target = isRecord(targetRecord?.spec) ? targetRecord.spec : args.target;
-    const targetKind =
-      isRecord(target) && cleanString(target.archetype)?.includes("sketch")
-        ? "sketch"
-        : "exercise";
-    return { datasetId: targetDatasetId, source: targetKind as "exercise" | "sketch" };
+  if (resolved.datasetId) {
+    return {
+      datasetId: resolved.datasetId,
+      source: resolved.sourceMap?.datasetId ?? "none",
+    };
   }
-
-  const topicDatasetId = getDatasetFromRuntime(args.topicRuntimeDefaults);
-  if (topicDatasetId) return { datasetId: topicDatasetId, source: "topic" };
-
-  const moduleDatasetId = getDatasetFromRuntime(args.moduleRuntimeDefaults);
-  if (moduleDatasetId) return { datasetId: moduleDatasetId, source: "module" };
-
-  const runtimeDatasetId = getDatasetFromRuntime(args.runtimeDefaults);
-  if (runtimeDatasetId) return { datasetId: runtimeDatasetId, source: "runtime-default" };
 
   return {
     source: "none",
     error:
-      "SQL runtime could not resolve a dataset. Define runtime.datasetId on the exercise/sketch, topic runtimeDefaults.datasetId, or module runtimeDefaults.datasetId.",
+      "SQL runtime could not resolve a dataset. Define runtime.datasetId on the exercise/sketch, recipe.datasetId, or a topic/module/course/subject runtimeDefaults.datasetId.",
   };
 }
 
@@ -335,10 +368,22 @@ function resolveSqlDialect(args: {
   ) as SqlDialect;
 }
 
+function getTargetSource(target: unknown): UnknownRecord | null {
+  const targetRecord = isRecord(target) ? target : null;
+  return isRecord(targetRecord?.spec)
+    ? (targetRecord.spec as UnknownRecord)
+    : targetRecord;
+}
+
 export function resolveCourseSqlRunnerConfig(args: {
   subjectSlug?: string | null;
   language?: string | null;
+  profileId?: string | null;
+  versionFamily?: string | null;
   target?: unknown;
+  subjectRuntimeDefaults?: UnknownRecord | null;
+  courseRuntimeDefaults?: UnknownRecord | null;
+  sectionRuntimeDefaults?: UnknownRecord | null;
   topicRuntimeDefaults?: UnknownRecord | null;
   moduleRuntimeDefaults?: UnknownRecord | null;
   runtimeDefaults?: UnknownRecord | null;
@@ -348,17 +393,28 @@ export function resolveCourseSqlRunnerConfig(args: {
   const language = resolveCourseLanguage({
     subjectSlug: args.subjectSlug,
     language: args.language,
+    profileId: args.profileId,
+    versionFamily: args.versionFamily,
     runtimeDefaults: args.runtimeDefaults,
     target: isRecord(args.target) ? args.target : null,
   });
 
-  if (getCourseProfile({ subjectSlug: args.subjectSlug, language }).id !== "sql") {
+  if (
+    getCourseProfile({
+      subjectSlug: args.subjectSlug,
+      language,
+      profileId: args.profileId,
+      versionFamily: args.versionFamily,
+    }).id !== "sql"
+  ) {
     return {
       isSql: false,
       sqlDialect: args.defaultSqlDialect ?? DEFAULT_SQL_DIALECT,
       datasetResolution,
     };
   }
+
+  const targetSource = getTargetSource(args.target);
 
   return {
     ...resolveSqlRunnerConfig({
@@ -370,6 +426,15 @@ export function resolveCourseSqlRunnerConfig(args: {
         runtimeDefaults: args.runtimeDefaults,
         fallback: args.defaultSqlDialect,
       }),
+      exerciseRuntime: isRecord(targetSource?.runtime) ? targetSource.runtime : null,
+      exerciseSqlDatasetId: cleanString(targetSource?.datasetId),
+      recipe: isRecord(targetSource?.recipe) ? targetSource.recipe : null,
+      subjectRuntimeDefaults: args.subjectRuntimeDefaults,
+      courseRuntimeDefaults: args.courseRuntimeDefaults,
+      sectionRuntimeDefaults: args.sectionRuntimeDefaults,
+      topicRuntimeDefaults: args.topicRuntimeDefaults,
+      moduleRuntimeDefaults: args.moduleRuntimeDefaults,
+      runtimeDefaults: args.runtimeDefaults,
       sqlDatasetId: datasetResolution.datasetId,
       defaultSqlDialect: args.defaultSqlDialect,
     }),

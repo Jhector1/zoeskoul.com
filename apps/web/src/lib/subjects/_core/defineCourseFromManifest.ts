@@ -85,6 +85,8 @@ export function defineCourseFromManifest(args: {
             module: {
                 slug: moduleManifest.slug,
                 subjectSlug: manifest.subject.slug,
+                profileId: manifest.subject.profileId ?? null,
+                versionFamily: manifest.subject.meta?.versioning?.family ?? null,
                 order: moduleManifest.order,
 
                 // legacy display fields: tagged so existing UI still resolves
@@ -145,6 +147,7 @@ export function defineCourseFromManifest(args: {
     return defineCourse({
         subject: {
             slug: manifest.subject.slug,
+            profileId: manifest.subject.profileId ?? undefined,
             order: manifest.subject.order,
 
             // legacy display fields: tagged so existing UI still resolves

@@ -1,0 +1,13 @@
+{
+  "topicId": "underscore_wildcard",
+  "ok": true,
+  "issues": [
+    {
+      "code": "SQL_PROMPT_INTENT_SUM_WEAK_MISMATCH",
+      "category": "prompt_intent",
+      "severity": "warn",
+      "exerciseId": "code_2",
+      "message": "Prompt mentions total/sum-like wording, but the solution query does not use SUM(...)."
+    }
+  ]
+}

@@ -61,6 +61,8 @@ export function useReviewModuleRuntime({ subjectSlug, mod, viewTopic }: Args) {
         const resolved = resolveCourseSqlRunnerConfig({
             subjectSlug,
             language: effectiveRuntimeLanguage,
+            profileId: mod.profileId,
+            versionFamily: mod.versionFamily,
             topicRuntimeDefaults: (viewTopic?.meta?.runtimeDefaults as UnknownRecord | null | undefined) ?? null,
             moduleRuntimeDefaults: moduleRuntime,
             runtimeDefaults: effectiveRuntime,
@@ -69,7 +71,7 @@ export function useReviewModuleRuntime({ subjectSlug, mod, viewTopic }: Args) {
 
         if (!resolved.isSql || !resolved.sqlDatasetId) return null;
         return resolved;
-    }, [subjectSlug, effectiveRuntimeLanguage, effectiveRuntime, viewTopic, moduleRuntime, toolDefaults.defaultSqlDialect]);
+    }, [subjectSlug, effectiveRuntimeLanguage, effectiveRuntime, viewTopic, moduleRuntime, toolDefaults.defaultSqlDialect, mod.profileId, mod.versionFamily]);
 
     return {
         codeEnabled,

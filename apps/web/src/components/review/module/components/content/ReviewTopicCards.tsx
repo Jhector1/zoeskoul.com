@@ -64,6 +64,11 @@ type Props = {
   subjectSlug: string;
   moduleSlug: string;
   sectionSlug?: string;
+  subjectRuntimeDefaults?: unknown;
+  courseRuntimeDefaults?: unknown;
+  moduleRuntimeDefaults?: unknown;
+  sectionRuntimeDefaults?: unknown;
+  topicRuntimeDefaults?: unknown;
   routeExerciseId?: string | null;
   defaultToolLanguage?: string;
   onBeforeCardNavigate?: () => Promise<void> | void;
@@ -96,6 +101,11 @@ export default function ReviewTopicCards({
   subjectSlug,
   moduleSlug,
   sectionSlug,
+  subjectRuntimeDefaults,
+  courseRuntimeDefaults,
+  moduleRuntimeDefaults,
+  sectionRuntimeDefaults,
+  topicRuntimeDefaults,
   routeExerciseId,
   defaultToolLanguage = "python",
   onActiveCardIndexChange,
@@ -310,6 +320,11 @@ export default function ReviewTopicCards({
                         return next;
                       });
                     }}
+                    subjectRuntimeDefaults={subjectRuntimeDefaults}
+                    courseRuntimeDefaults={courseRuntimeDefaults}
+                    moduleRuntimeDefaults={moduleRuntimeDefaults}
+                    sectionRuntimeDefaults={sectionRuntimeDefaults}
+                    topicRuntimeDefaults={topicRuntimeDefaults}
                   />
                 </div>
               );

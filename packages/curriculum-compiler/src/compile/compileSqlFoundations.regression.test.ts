@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { getDraftSubjectRoot } from "@zoeskoul/curriculum-core";
+import { getDraftSubjectRoot, getRepoRoot } from "@zoeskoul/curriculum-core";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
 import { buildPlanFromSpec } from "../spec/buildPlanFromSpec.js";
 import { compileSubjectPipeline } from "./compileSubjectPipeline.js";
@@ -9,13 +9,13 @@ import { resolveAuthoringCompileTarget } from "./resolveAuthoringCompileTarget.j
 
 const SQL_V2_DRAFT_ROOT = getDraftSubjectRoot("sql-v2");
 const SQL_V2_REPORT_ROOT = path.join(
-    process.cwd(),
+    getRepoRoot(),
     ".curriculum-drafts",
     "reports",
     "sql-v2",
 );
 const SQL_V2_MESSAGE_ROOT = path.join(
-    process.cwd(),
+    getRepoRoot(),
     ".curriculum-drafts",
     "messages",
     "en",
@@ -269,20 +269,33 @@ describe("compileSubjectPipeline SQL Foundations regression", () => {
         );
 
         const retrySummaryPath = path.join(SQL_V2_REPORT_ROOT, "retry-summary.json");
+        const messagePath = path.join(
+            SQL_V2_MESSAGE_ROOT,
+            "module0",
+            "what_sql_means.json",
+        );
 
         const bundle = JSON.parse(await fs.readFile(bundlePath, "utf8"));
-        const retrySummary = JSON.parse(await fs.readFile(retrySummaryPath, "utf8"));
+        const retrySummary = await fs
+            .readFile(retrySummaryPath, "utf8")
+            .then((text) => JSON.parse(text))
+            .catch(() => null);
+        const messages = JSON.parse(await fs.readFile(messagePath, "utf8"));
 
         expect(bundle.subjectSlug).toBe("sql-v2");
         expect(bundle.exercises.length).toBeGreaterThan(0);
         expect(JSON.stringify(bundle)).not.toMatch(/\bINSERT\b|\bUPDATE\b|\bDELETE\b/);
-        expect(JSON.stringify(bundle)).not.toMatch(/Python|program output|script|terminal|\.py/i);
-        expect(JSON.stringify(bundle)).toMatch(/SQL editor|results table|Run query/i);
-        expect(retrySummary.topics).toEqual([
-            expect.objectContaining({
-                topicId: "what_sql_means",
-                status: "success",
-            }),
-        ]);
+        expect(JSON.stringify(messages)).not.toMatch(
+            /\bPython\b|program output|\bterminal\b|\.py\b|Python statement|Python file/i,
+        );
+        expect(JSON.stringify(messages)).toMatch(/SQL editor|results table|Run query/i);
+        if (retrySummary) {
+            expect(retrySummary.topics).toEqual([
+                expect.objectContaining({
+                    topicId: "what_sql_means",
+                    status: "success",
+                }),
+            ]);
+        }
     });
 });

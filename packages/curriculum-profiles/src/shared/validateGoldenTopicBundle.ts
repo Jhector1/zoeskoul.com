@@ -9,6 +9,7 @@ import {
 import { getSqlDatasetById } from "../sql/datasets/index.js";
 import type { GoldenValidationReport } from "./profileServices.js";
 import { makeEmptyGoldenValidationReport } from "./noopReports.js";
+import { resolveEffectiveExerciseRuntime } from "@zoeskoul/curriculum-runtime/runtime";
 import { resolveSqlRunner, validateSqlAgainstSolution } from "@zoeskoul/curriculum-runtime/sql";
 
 function formatSqlContext(args: {
@@ -76,7 +77,16 @@ export async function validateGoldenTopicBundle(args: {
 
         if (expected.strategy !== "sql") continue;
         const firstTest = expected.tests[0];
-        const datasetId = firstTest?.runtime?.datasetId ?? expected.runtime?.datasetId;
+        const effectiveRuntime = resolveEffectiveExerciseRuntime({
+            language: "sql",
+            recipe: exercise.recipe,
+            topicRuntimeDefaults: args.topicBundle.runtimeDefaults ?? null,
+            moduleRuntimeDefaults: args.seed.moduleRuntimeDefaults ?? null,
+        });
+        const datasetId =
+            firstTest?.runtime?.datasetId ??
+            expected.runtime?.datasetId ??
+            effectiveRuntime.datasetId;
         const dataset = datasetId ? getSqlDatasetById(datasetId) : null;
 
         if (!runSql) {
@@ -99,7 +109,11 @@ export async function validateGoldenTopicBundle(args: {
             learnerSql: expected.solutionCode ?? "",
             solutionSql: expected.solutionCode ?? "",
             checkSql: firstTest?.checkSql,
-            dialect: firstTest?.sqlDialect ?? expected.fixedSqlDialect ?? "sqlite",
+            dialect:
+                firstTest?.sqlDialect ??
+                expected.fixedSqlDialect ??
+                effectiveRuntime.fixedSqlDialect ??
+                "sqlite",
             schemaSql: firstTest?.schemaSql ?? expected.schemaSql ?? dataset?.schemaSql,
             seedSql: firstTest?.seedSql ?? expected.seedSql ?? dataset?.seedSql,
             datasetId,

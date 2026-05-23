@@ -1,6 +1,7 @@
 {
   "subject": {
     "slug": "python-v2",
+    "profileId": "python",
     "catalogSlug": "python",
     "genKey": "python_part1",
     "order": 30,

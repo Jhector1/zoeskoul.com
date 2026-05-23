@@ -4,36 +4,87 @@
       "sql-v2-0": {
         "real_world_examples_of_databases": {
           "label": "Real World Examples of Databases",
-          "summary": "Explore how databases are used in real-world scenarios and understand the basics of SQL queries.",
+          "summary": "See how a simple table represents real information and how SQL helps you ask questions about it.",
           "cards": {
             "sketch0": {
-              "title": "Introduction to Databases"
+              "title": "Databases model real information"
             },
             "sketch1": {
-              "title": "Basic SQL Query Example"
+              "title": "Real-world database examples"
+            },
+            "sketch2": {
+              "title": "SQL turns questions into queries"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Query Practice"
+              "title": "Read a real table with simple SELECT queries"
             }
           },
           "projectSteps": {
-            "code_input_1": {
-              "title": "Retrieve Student Names"
+            "ci_show_all_students": {
+              "title": "Show every student record"
             },
-            "code_input_2": {
-              "title": "Retrieve All Student Data"
+            "ci_show_names_only": {
+              "title": "Show only student names"
             },
-            "code_input_3": {
-              "title": "Retrieve Student Grades"
+            "ci_show_name_and_grade": {
+              "title": "Show names and grades"
             }
           },
           "quiz": {
-            "single_choice_1": {
-              "title": "Purpose of SQL",
-              "prompt": "What is the primary purpose of SQL?",
+            "sc_database_purpose": {
+              "title": "Why use a database?",
+              "prompt": "What is the best reason to use a database in an app or organization?",
+              "hint": "Think about storing related information in an organized way so it can be looked up later.",
+              "help": {
+                "concept": "A database is designed to store structured information so people and software can retrieve and use it efficiently.",
+                "hint_1": "Look for the choice about organizing and retrieving information, not just displaying it once.",
+                "hint_2": "A database helps keep many records consistent and searchable, such as student or product data."
+              },
+              "options": {
+                "a": "To organize and store information so it can be queried later",
+                "b": "To replace every part of an app's user interface",
+                "c": "To make internet speed faster",
+                "d": "To turn every value into an image"
+              }
+            },
+            "sc_row_meaning": {
+              "title": "What does one row represent?",
+              "prompt": "In the `students` table, what does one row usually represent?",
+              "hint": "Look at the sample rows with Noor, Mia, and Leo.",
+              "help": {
+                "concept": "In a table, each row is one record, while columns describe attributes of that record.",
+                "hint_1": "The row with Noor includes id, name, grade, age, and city together.",
+                "hint_2": "Ask yourself what single real-world thing those values describe when grouped in one row."
+              },
+              "options": {
+                "a": "One column definition",
+                "b": "One student record",
+                "c": "One SQL keyword",
+                "d": "One database program"
+              }
+            },
+            "mc_database_examples": {
+              "title": "Examples of database use",
+              "prompt": "Which situations are good examples of using a database? Choose all that apply.",
+              "hint": "Think about systems that store many related records, such as people, items, or events.",
+              "help": {
+                "concept": "Databases are useful when information needs to be stored in structured records and accessed repeatedly.",
+                "hint_1": "Look for choices involving collections of related data, not one-time visual tasks.",
+                "hint_2": "Schools, stores, and apps often need databases because they track many records with the same kinds of fields."
+              },
+              "options": {
+                "a": "A school storing student records",
+                "b": "A store tracking products and prices",
+                "c": "A music app storing playlists and songs",
+                "d": "A calculator showing one quick answer with no saved records"
+              }
+            },
+            "mc_column_examples": {
+              "title": "Columns in the students table",
+              "prompt": "Which of these are actual columns in the `students` table? Choose all that apply.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -41,63 +92,15 @@
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "To create web pages",
-                "b": "To manage and query databases",
-                "c": "To design graphics",
-                "d": "To write operating systems"
+                "a": "name",
+                "b": "city",
+                "c": "grade",
+                "d": "teacher"
               }
             },
-            "single_choice_2": {
-              "title": "SQL Query Components",
-              "prompt": "Which SQL keyword is used to specify the table to query?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare each option to the exact topic named in the question.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "options": {
-                "a": "SELECT",
-                "b": "FROM",
-                "c": "WHERE",
-                "d": "ORDER BY"
-              }
-            },
-            "multi_choice_1": {
-              "title": "Common Database Uses",
-              "prompt": "Which of the following are common uses for databases? (Choose all that apply)",
-              "hint": "Think about areas where data needs to be organized and retrieved efficiently.",
-              "help": {
-                "concept": "Databases are used in areas where data needs to be stored and retrieved efficiently.",
-                "hint_1": "Consider areas that involve large amounts of data.",
-                "hint_2": "Databases are not typically used for creating animations."
-              },
-              "options": {
-                "a": "Storing student records",
-                "b": "Managing inventory",
-                "c": "Creating animations",
-                "d": "Tracking financial transactions"
-              }
-            },
-            "multi_choice_2": {
-              "title": "SQL Keywords",
-              "prompt": "Which of the following are SQL keywords? (Choose all that apply)",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare each option to the exact topic named in the question.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "options": {
-                "a": "SELECT",
-                "b": "PRINT",
-                "c": "FROM",
-                "d": "DISPLAY"
-              }
-            },
-            "drag_reorder_1": {
-              "title": "SQL Query Order",
-              "prompt": "Arrange the SQL keywords in the correct order for a basic query.",
+            "dr_select_all_query": {
+              "title": "Build a basic query",
+              "prompt": "Put the SQL tokens in order to show all columns from the `students` table.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -105,14 +108,15 @@
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "SELECT",
+                "t1": "students",
                 "t2": "FROM",
-                "t3": "WHERE"
+                "t3": "SELECT",
+                "t4": "*"
               }
             },
-            "drag_reorder_2": {
-              "title": "Database Operations",
-              "prompt": "Arrange these operations in the order they would typically occur in a database system.",
+            "dr_name_city_query": {
+              "title": "Order the query parts",
+              "prompt": "Arrange the tokens to create a query that shows the `name` and `city` columns from `students`.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -120,78 +124,78 @@
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "Data Entry",
-                "t2": "Data Retrieval",
-                "t3": "Data Update",
-                "t4": "Data Deletion"
+                "t1": "students",
+                "t2": "SELECT",
+                "t3": "name, city",
+                "t4": "FROM"
               }
             },
-            "fill_blank_choice_1": {
-              "title": "SQL Table Name",
-              "prompt": "In the query `SELECT * FROM [blank1];`, what should replace `[blank1]` to query the students table?",
-              "hint": "Think about the table name you want to query.",
+            "fb_from_table": {
+              "title": "Complete the table name",
+              "prompt": "Fill in the missing table name to show all columns from the student data.",
+              "hint": "Use the only table in this lesson's dataset.",
               "help": {
-                "concept": "The FROM clause specifies the table to query.",
-                "hint_1": "The table name is 'the missing term'.",
-                "hint_2": "Ensure the table name matches exactly."
+                "concept": "The `FROM` clause names the table SQL should read from.",
+                "hint_1": "The sample dataset uses a table whose rows are student records.",
+                "hint_2": "It is the plural table name shown in the schema browser."
               },
               "template": "SELECT * FROM [blank1];",
               "choices": [
                 "students",
-                "grades",
-                "cities",
-                "names"
-              ]
-            },
-            "fill_blank_choice_2": {
-              "title": "SQL Column Selection",
-              "prompt": "In the query `SELECT [blank1] FROM students;`, what should replace `[blank1]` to select all columns?",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
-              },
-              "template": "SELECT [blank1] FROM students;",
-              "choices": [
-                "*",
-                "name",
                 "grade",
-                "age"
+                "city",
+                "name"
               ]
             },
-            "code_input_1": {
-              "title": "Retrieve Student Names",
-              "prompt": "Write a SQL query to retrieve the names of all students from the students table.",
+            "fb_select_keyword": {
+              "title": "Complete the keyword",
+              "prompt": "Fill in the missing SQL keyword to start a query that shows the `name` column.",
+              "hint": "Use the keyword that tells SQL what columns to return.",
+              "help": {
+                "concept": "The `the missing term` keyword begins a query and specifies which columns to display.",
+                "hint_1": "This keyword comes before the column name in a basic query.",
+                "hint_2": "It is the first major word in `the missing term name FROM students;`."
+              },
+              "template": "[blank1] name FROM students;",
+              "choices": [
+                "FROM",
+                "TABLE",
+                "SELECT",
+                "SHOW"
+              ]
+            },
+            "ci_show_all_students": {
+              "title": "Show every student record",
+              "prompt": "Write a query that shows all columns and all rows from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "SELECT [column] FROM students;"
+              "starterCode": "-- Show all columns from the students table\nSELECT\nFROM students;"
             },
-            "code_input_2": {
-              "title": "Retrieve All Student Data",
-              "prompt": "Write a SQL query to retrieve all data from the students table.",
-              "hint": "Break the task into the main code steps first.",
-              "help": {
-                "concept": "This task checks whether you can apply retrieve all student data in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-              },
-              "starterCode": "SELECT * FROM [table];"
-            },
-            "code_input_3": {
-              "title": "Retrieve Student Grades",
-              "prompt": "Write a SQL query to retrieve the grades of all students.",
+            "ci_show_names_only": {
+              "title": "Show only student names",
+              "prompt": "Write a query that returns only the `name` column from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "SELECT [column] FROM students;"
+              "starterCode": "-- Return just one column\nSELECT *\nFROM students;"
+            },
+            "ci_show_name_and_grade": {
+              "title": "Show names and grades",
+              "prompt": "Write a query that returns the `name` and `grade` columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Return two specific columns\nSELECT name\nFROM students;"
             }
           }
         }
@@ -202,13 +206,17 @@
     "sql-v2": {
       "sql-v2-0": {
         "real_world_examples_of_databases": {
-          "sketch_1": {
-            "title": "Introduction to Databases",
-            "bodyMarkdown": "Databases are used to store and manage data efficiently. They are essential in various fields such as education, healthcare, finance, and more. For example, a school database might store information about students, including their names, grades, and cities.\n\nTry it yourself: Think of a database you interact with daily, like a library system or an online store. What kind of data do you think it stores?"
+          "sketch_real_world_tables": {
+            "title": "Databases model real information",
+            "bodyMarkdown": "A database stores information in a structured way so you can look it up, organize it, and ask questions about it.\n\nIn this lesson, the `students` table is a small real-world example. Each row represents one student, and each column stores one kind of fact about that student:\n\n- `id` = unique number\n- `name` = student name\n- `grade` = letter grade\n- `age` = age in years\n- `city` = home city\n\nHere is a simple SQL query that asks to see all the data in the table:\n\n```sql\nSELECT *\nFROM students;\n```\n\nStep by step:\n\n- `SELECT *` means \"show all columns\"\n- `FROM students` means \"get that data from the `students` table\"\n\nIf you run it, the results table shows rows like Noor, Mia, Leo, Ava, and Zane.\n\nWorked example: if you want to answer the question \"What student records are stored here?\" this query works because it displays every column and every row in `students`.\n\nTry it yourself: write the query in the SQL editor, click Run query, and check how each row matches one real student record."
           },
-          "sketch_2": {
-            "title": "Basic SQL Query Example",
-            "bodyMarkdown": "SQL (Structured Query Language) is used to interact with databases. Here's a simple example using the `students` table:\n\n```sql\nSELECT name, grade FROM students;\n```\n\nThis query retrieves the names and grades of all students from the table. \n\nLine by line explanation:\n- `SELECT name, grade`: Specifies the columns to retrieve.\n- `FROM students`: Specifies the table to query.\n\nYour turn: Modify the query to also retrieve the `city` column."
+          "sketch_database_examples": {
+            "title": "Real-world database examples",
+            "bodyMarkdown": "Many everyday systems use databases.\n\nA school might store:\n\n- students\n- teachers\n- classes\n- attendance\n\nA store might store:\n\n- products\n- prices\n- customers\n- orders\n\nA music app might store:\n\n- songs\n- artists\n- playlists\n\nThe main idea is the same: a database keeps related facts organized in tables so software can find and display them.\n\nWorked example: our `students` table is like a tiny school database. Instead of keeping names and grades in random notes, the database keeps them in consistent columns. That makes it easier to ask questions later with SQL.\n\nFor example, this query still uses the same table structure, but only asks for two columns:\n\n```sql\nSELECT name, city\nFROM students;\n```\n\nThis returns a simpler view of the same real-world data: each student's name and city.\n\nYour turn: imagine one app you use every week. What table might it need? What columns would belong in that table?"
+          },
+          "sketch_sql_questions": {
+            "title": "SQL turns questions into queries",
+            "bodyMarkdown": "SQL is the language you use to ask a database for information.\n\nA person might ask:\n\n- \"Show me all students.\"\n- \"Show me student names and grades.\"\n\nSQL turns those questions into queries.\n\nWorked example:\n\n```sql\nSELECT name, grade\nFROM students;\n```\n\nLine by line:\n\n- `SELECT name, grade` asks for only the `name` and `grade` columns\n- `FROM students` says which table to read\n\nThis is useful because you often do **not** need every column. If you only care about names and grades, you can ask for just those.\n\nTry this: change the query to `SELECT name, age FROM students;`, click Run query, and compare the results table. Notice that the table stays the same, but the columns you request can change."
           }
         }
       }

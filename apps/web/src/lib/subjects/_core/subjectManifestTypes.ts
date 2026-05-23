@@ -29,6 +29,7 @@ export type SubjectCompletionPolicyManifestMeta = {
 export type SubjectManifest = {
     subject: {
         slug: string;
+        profileId?: string | null;
         catalogSlug?: string | null;
         genKey: string;
         order: number;

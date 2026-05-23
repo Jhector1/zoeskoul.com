@@ -46,6 +46,11 @@ type Props = {
     subjectSlug: string;
     moduleSlug: string;
     sectionSlug?: string;
+    subjectRuntimeDefaults?: unknown;
+    courseRuntimeDefaults?: unknown;
+    moduleRuntimeDefaults?: unknown;
+    sectionRuntimeDefaults?: unknown;
+    topicRuntimeDefaults?: unknown;
     routeExerciseId?: string | null;
     defaultToolLanguage?: string;
     subjectFinish: SubjectFinishState | null;
@@ -87,6 +92,11 @@ export default function ReviewTopicStage({
     subjectSlug,
     moduleSlug,
     sectionSlug,
+    subjectRuntimeDefaults,
+    courseRuntimeDefaults,
+    moduleRuntimeDefaults,
+    sectionRuntimeDefaults,
+    topicRuntimeDefaults,
     routeExerciseId,
     defaultToolLanguage,
     subjectFinish,
@@ -139,6 +149,11 @@ export default function ReviewTopicStage({
                         subjectSlug={subjectSlug}
                         moduleSlug={moduleSlug}
                         sectionSlug={sectionSlug}
+                        subjectRuntimeDefaults={subjectRuntimeDefaults}
+                        courseRuntimeDefaults={courseRuntimeDefaults}
+                        moduleRuntimeDefaults={moduleRuntimeDefaults}
+                        sectionRuntimeDefaults={sectionRuntimeDefaults}
+                        topicRuntimeDefaults={topicRuntimeDefaults}
                         routeExerciseId={routeExerciseId}
                         defaultToolLanguage={defaultToolLanguage}
                         onActiveCardIndexChange={onActiveCardIndexChange}

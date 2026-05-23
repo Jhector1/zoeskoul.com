@@ -3,50 +3,69 @@
     "sql-v2": {
       "sql-v2-0": {
         "table_names_and_column_names": {
-          "label": "table names and column names",
-          "summary": "Learn about table names and column names in SQL using the students_intro dataset.",
+          "label": "Table Names and Column Names",
+          "summary": "Learn how to identify a table name, recognize column names, and write simple SELECT queries using the students table.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Table and Column Names"
+              "title": "Tables hold rows, and columns label each kind of data"
+            },
+            "sketch1": {
+              "title": "Use the exact table and column names"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Table and Column Practice"
+              "title": "Read the students table with correct names"
             }
           },
           "projectSteps": {
-            "code_input_1": {
-              "title": "Basic SELECT Query"
+            "ci_select_all_columns": {
+              "title": "Show every column"
             },
-            "code_input_2": {
-              "title": "Select All Columns"
+            "ci_select_name_column": {
+              "title": "Show just the names"
             },
-            "code_input_3": {
-              "title": "Select Specific Columns"
+            "ci_select_id_and_city": {
+              "title": "Show two columns"
             }
           },
           "quiz": {
-            "single_choice_1": {
-              "title": "Identify the Table Name",
-              "prompt": "Which of the following is the name of the table in the given schema?\n\n```\nCREATE TABLE students (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  grade TEXT NOT NULL,\n  age INTEGER NOT NULL,\n  city TEXT NOT NULL\n);\n```",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "sc_table_name_students": {
+              "title": "Pick the table name",
+              "prompt": "In this lesson's dataset, what is the table name that stores the student records?",
+              "hint": "Look for the name that appears after FROM in the example queries.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "A table name identifies the whole collection of rows. In this topic, the student records are stored in one table, and queries read from that table with FROM.",
+                "hint_1": "Check the schema or the worked example that starts with SELECT and then names the source table.",
+                "hint_2": "It is the plural word used in `FROM ...` in the lesson examples."
               },
               "options": {
-                "a": "students",
-                "b": "id",
+                "a": "student",
+                "b": "students",
                 "c": "name",
                 "d": "grade"
               }
             },
-            "single_choice_2": {
-              "title": "Identify a Column Name",
-              "prompt": "Which of the following is a column name in the `students` table?",
+            "sc_column_name_city": {
+              "title": "Pick a real column name",
+              "prompt": "Which of these is a real column name in the `students` table?",
+              "hint": "Compare the choices to the schema columns shown in the lesson.",
+              "help": {
+                "concept": "Column names label the fields inside a table. A valid answer must match one of the exact column names in the `students` schema.",
+                "hint_1": "The table columns are `id`, `name`, `grade`, `age`, and one more location-related column.",
+                "hint_2": "Choose the option that names where a student lives, not a made-up variation."
+              },
+              "options": {
+                "a": "student_name",
+                "b": "classroom",
+                "c": "city",
+                "d": "years_old"
+              }
+            },
+            "mc_valid_students_columns": {
+              "title": "Choose all valid columns",
+              "prompt": "Which of these are valid column names in the `students` table? Choose all that apply.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -54,63 +73,31 @@
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "students",
-                "b": "age",
-                "c": "CREATE",
-                "d": "TABLE"
+                "a": "name",
+                "b": "student_id",
+                "c": "age",
+                "d": "student_city"
               }
             },
-            "multi_choice_1": {
-              "title": "Select All Column Names",
-              "prompt": "Which of the following are column names in the `students` table? Select all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "mc_queries_with_real_names": {
+              "title": "Find queries that use real names",
+              "prompt": "Which queries use a real table name and real column names from this dataset? Choose all that apply.",
+              "hint": "Check whether both the SELECT part and the FROM part use names from the schema.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "A basic SELECT query needs valid column names after SELECT and a valid table name after FROM. Both parts must match the schema exactly.",
+                "hint_1": "The only table in this topic is `students`, and valid columns include `id`, `name`, `grade`, `age`, and `city`.",
+                "hint_2": "Look for queries that use `students` as the table and avoid made-up names like `student_name` or `student`."
               },
               "options": {
-                "a": "id",
-                "b": "name",
-                "c": "grade",
-                "d": "students"
+                "a": "SELECT name FROM students;",
+                "b": "SELECT student_name FROM students;",
+                "c": "SELECT city, age FROM students;",
+                "d": "SELECT name FROM student;"
               }
             },
-            "multi_choice_2": {
-              "title": "Understanding SQL Keywords",
-              "prompt": "Which of the following are SQL keywords used in table creation? Select all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "options": {
-                "a": "CREATE",
-                "b": "TABLE",
-                "c": "PRIMARY KEY",
-                "d": "NOT NULL"
-              }
-            },
-            "drag_reorder_1": {
-              "title": "Order of SQL Table Creation",
-              "prompt": "Arrange the steps to create a table in SQL in the correct order.",
-              "hint": "Think about the logical order of defining a table structure.",
-              "help": {
-                "concept": "SQL table creation follows a specific order: defining the table, columns, constraints, and ending the statement.",
-                "hint_1": "Start with the action of creating a table.",
-                "hint_2": "Finish with ending the statement."
-              },
-              "tokens": {
-                "t1": "CREATE TABLE",
-                "t2": "Define columns",
-                "t3": "Specify constraints",
-                "t4": "End statement with semicolon"
-              }
-            },
-            "drag_reorder_2": {
-              "title": "SQL Query Structure",
-              "prompt": "Arrange the components of a basic SQL SELECT query in the correct order.",
+            "dr_query_order_one_column": {
+              "title": "Build a one-column query",
+              "prompt": "Arrange the tokens to make a query that shows the `name` column from the `students` table.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -118,78 +105,96 @@
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "SELECT",
+                "t1": "students",
                 "t2": "FROM",
-                "t3": "Table name",
-                "t4": "Column names"
+                "t3": "name",
+                "t4": "SELECT",
+                "t5": ";"
               }
             },
-            "fill_blank_choice_1": {
-              "title": "Fill in the SQL Keyword",
-              "prompt": "Complete the SQL statement to select all columns from the `students` table: `SELECT * [blank1] students;`",
-              "hint": "This keyword specifies the table to select data the missing term.",
+            "dr_query_order_two_columns": {
+              "title": "Build a two-column query",
+              "prompt": "Arrange the tokens to make a query that shows `id` and `city` from the `students` table.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
-                "concept": "The the missing term keyword specifies the table in a SELECT statement.",
-                "hint_1": "This keyword follows SELECT * to indicate the table.",
-                "hint_2": "Use the missing term to specify the table."
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
               },
-              "template": "SELECT * [blank1] students;",
+              "tokens": {
+                "t1": "FROM",
+                "t2": "students",
+                "t3": "SELECT",
+                "t4": "id, city",
+                "t5": ";"
+              }
+            },
+            "fb_from_table_name": {
+              "title": "Complete the FROM clause",
+              "prompt": "Fill in the missing table name.",
+              "hint": "Use the table that contains all the student rows in this topic.",
+              "help": {
+                "concept": "The FROM clause names the table SQL should read. In this lesson, all starter queries read from the same student table.",
+                "hint_1": "The correct value is the plural table name shown in the schema browser.",
+                "hint_2": "It is the same word used in `FROM the missing term` in the examples."
+              },
+              "template": "SELECT name FROM [blank1];",
               "choices": [
-                "FROM",
-                "WHERE",
-                "ORDER BY",
-                "GROUP BY"
+                "students",
+                "student",
+                "name",
+                "city"
               ]
             },
-            "fill_blank_choice_2": {
-              "title": "Identify the Missing Column Name",
-              "prompt": "Fill in the missing column name in the SQL statement: `SELECT [blank1] FROM students;`",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+            "fb_select_column_name": {
+              "title": "Complete the SELECT column",
+              "prompt": "Fill in the missing column name so the query shows student cities.",
+              "hint": "Choose the column that stores where each student lives.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "The SELECT part names which column to display. To show locations, you need the location column from the schema.",
+                "hint_1": "The correct column is one of the five schema fields and is not `name` or `grade`.",
+                "hint_2": "It is the column used in the lesson when switching the query from names to locations."
               },
               "template": "SELECT [blank1] FROM students;",
               "choices": [
-                "name",
+                "grade",
+                "city",
                 "students",
-                "CREATE",
-                "TABLE"
+                "id"
               ]
             },
-            "code_input_1": {
-              "title": "Basic SELECT Query",
-              "prompt": "Write a SQL query to select the `name` and `age` columns from the `students` table.",
+            "ci_select_all_columns": {
+              "title": "Show every column",
+              "prompt": "Write a query that returns all columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your query below"
+              "starterCode": "SELECT \nFROM students;"
             },
-            "code_input_2": {
-              "title": "Select All Columns",
-              "prompt": "Write a SQL query to select all columns from the `students` table.",
+            "ci_select_name_column": {
+              "title": "Show just the names",
+              "prompt": "Write a query that returns only the `name` column from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your query below"
+              "starterCode": "SELECT \nFROM students;"
             },
-            "code_input_3": {
-              "title": "Select Specific Columns",
-              "prompt": "Write a SQL query to select the `grade` and `city` columns from the `students` table.",
+            "ci_select_id_and_city": {
+              "title": "Show two columns",
+              "prompt": "Write a query that returns the `id` and `city` columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your query below"
+              "starterCode": "SELECT \nFROM students;"
             }
           }
         }
@@ -200,9 +205,13 @@
     "sql-v2": {
       "sql-v2-0": {
         "table_names_and_column_names": {
-          "sketch1": {
-            "title": "Understanding Table and Column Names",
-            "bodyMarkdown": "In SQL, tables and columns are fundamental components of a database. Each table has a unique name, and each column within a table also has a unique name. For example, in the `students` table, we have columns like `id`, `name`, `grade`, `age`, and `city`. These names help us identify and manipulate data efficiently. \n\nHere's a simple SQL query to retrieve all data from the `students` table:\n\n```sql\nSELECT * FROM students;\n```\n\nTry it yourself: Write a query to select only the `name` and `grade` columns from the `students` table."
+          "sketch_1": {
+            "title": "Tables hold rows, and columns label each kind of data",
+            "bodyMarkdown": "A **table** is like a grid of information. In this lesson, the table name is `students`.\n\nInside that table, each **column name** tells you what kind of data appears in that column. The `students` table has these columns:\n\n- `id`\n- `name`\n- `grade`\n- `age`\n- `city`\n\nA row is one student's record. For example, one row is:\n\n- `id` = 1\n- `name` = Noor\n- `grade` = A\n- `age` = 15\n- `city` = Chicago\n\nSo if you want student names, you use the column name `name`. If you want cities, you use the column name `city`.\n\n**Worked example:**\n\n```sql\nSELECT name\nFROM students;\n```\n\nStep by step:\n\n- `SELECT name` means \"show the values from the `name` column\"\n- `FROM students` means \"get them from the `students` table\"\n\nThis query would return the student names from the table.\n\n**Try it yourself:** Write the query in the SQL editor, click **Run query**, and then change `name` to `city` to see a different column in the results table."
+          },
+          "sketch_2": {
+            "title": "Use the exact table and column names",
+            "bodyMarkdown": "SQL needs the correct names from the schema. If the table is called `students`, then `FROM students` works. If you write a different table name, the query will fail.\n\nThe same idea is true for columns. In this dataset, `name` is a valid column, but `student_name` is not.\n\n**Worked example:**\n\n```sql\nSELECT id, name, city\nFROM students;\n```\n\nLine by line:\n\n- `SELECT id, name, city` asks for three columns\n- `FROM students` tells SQL which table to read\n\nThe results table would show each student's id, name, and city.\n\nYou can also read the schema browser to check the exact spellings before you run a query.\n\n**Your turn:** In the SQL editor, run the example above. Then remove `city` so the query shows only `id` and `name`."
           }
         }
       }

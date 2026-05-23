@@ -285,6 +285,7 @@ export type ManifestCodeInput = ManifestBaseExercise & {
   kind: "code_input";
   language?: WorkspaceLanguage;
   fixedSqlDialect?: SqlDialect;
+  runtime?: ManifestRuntimeDefaults | null;
   recipe: ManifestRecipe;
   showExpectedExample?: ManifestCodeInputExpectedExample;
 

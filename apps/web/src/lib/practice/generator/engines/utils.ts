@@ -13,6 +13,7 @@ import type {
     SingleChoiceExercise, SqlDialect, SqlRuntimeSpec,
 } from "@/lib/practice/types";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
+import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 
 import { tag } from "@/lib/practice/generator/shared/i18n";
 import {ExerciseHelpSpec} from "@/lib/practice/types";
@@ -696,6 +697,7 @@ export function makeCodeInputOut(args: {
 
     fixedSqlDialect?: SqlDialect;
     runtime?: SqlRuntimeSpec;
+    topicRuntimeDefaults?: ManifestRuntimeDefaults | null;
 
     expectedExample?: CodeExpectedExample | null;
     ideConfig?: LearningIdeConfig | null;
@@ -726,6 +728,7 @@ export function makeCodeInputOut(args: {
         ...(args.examples ? { examples: args.examples } : {}),
         ...(args.fixedSqlDialect ? { fixedSqlDialect: args.fixedSqlDialect } : {}),
         ...(args.runtime ? { runtime: args.runtime } : {}),
+        ...(args.topicRuntimeDefaults ? { topicRuntimeDefaults: args.topicRuntimeDefaults } : {}),
         ...(args.expectedExample ? { expectedExample: args.expectedExample } : {}),
         ...(args.ideConfig ? { ideConfig: args.ideConfig } : {}),
     };

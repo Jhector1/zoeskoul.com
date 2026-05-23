@@ -5,6 +5,18 @@
   "sectionSlug": "sql-v2-0-2",
   "prefix": "sqlv2_0",
   "minutes": 15,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "students_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
   "topic": {
     "labelKey": "topics.sql-v2.sql-v2-0.rows_and_columns.label",
     "summaryKey": "topics.sql-v2.sql-v2-0.rows_and_columns.summary"
@@ -14,7 +26,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-0.rows_and_columns.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "rows-vs-columns",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.rows_and_columns.cards.sketch1.title",
+      "sketchId": "reading-a-simple-select",
       "height": 420
     },
     {
@@ -43,27 +62,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "code_input_1",
-            "titleKey": "topics.sql-v2.sql-v2-0.rows_and_columns.projectSteps.code_input_1.title",
-            "exerciseKey": "code_input_1",
+            "id": "ci_select_all_students",
+            "titleKey": "topics.sql-v2.sql-v2-0.rows_and_columns.projectSteps.ci_select_all_students.title",
+            "exerciseKey": "ci-select-all-students",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "code_input_2",
-            "titleKey": "topics.sql-v2.sql-v2-0.rows_and_columns.projectSteps.code_input_2.title",
-            "exerciseKey": "code_input_2",
+            "id": "ci_select_name_city",
+            "titleKey": "topics.sql-v2.sql-v2-0.rows_and_columns.projectSteps.ci_select_name_city.title",
+            "exerciseKey": "ci-select-name-city",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "code_input_3",
-            "titleKey": "topics.sql-v2.sql-v2-0.rows_and_columns.projectSteps.code_input_3.title",
-            "exerciseKey": "code_input_3",
+            "id": "ci_select_single_column",
+            "titleKey": "topics.sql-v2.sql-v2-0.rows_and_columns.projectSteps.ci_select_single_column.title",
+            "exerciseKey": "ci-select-single-column",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -75,19 +94,25 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "rows-vs-columns",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-0.rows_and_columns.sketch1.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-0.rows_and_columns.sketch1.bodyMarkdown"
+      "titleKey": "sketches.sql-v2.sql-v2-0.rows_and_columns.rows-vs-columns.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.rows_and_columns.rows-vs-columns.bodyMarkdown"
+    },
+    {
+      "id": "reading-a-simple-select",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.rows_and_columns.reading-a-simple-select.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.rows_and_columns.reading-a-simple-select.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "single_choice_1",
+      "id": "sc-row-definition",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.single_choice_1",
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.sc-row-definition",
       "optionIds": [
         "a",
         "b",
@@ -100,11 +125,11 @@
       }
     },
     {
-      "id": "single_choice_2",
+      "id": "sc-column-definition",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.single_choice_2",
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.sc-column-definition",
       "optionIds": [
         "a",
         "b",
@@ -113,15 +138,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "c"
       }
     },
     {
-      "id": "multi_choice_1",
+      "id": "mc-select-star",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.multi_choice_1",
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.mc-select-star",
       "optionIds": [
         "a",
         "b",
@@ -133,146 +158,177 @@
         "optionIds": [
           "a",
           "b",
-          "c"
-        ]
-      }
-    },
-    {
-      "id": "multi_choice_2",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.multi_choice_2",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c",
           "d"
         ]
       }
     },
     {
-      "id": "drag_reorder_1",
-      "kind": "drag_reorder",
+      "id": "mc-column-examples",
+      "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.drag_reorder_1",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.mc-column-examples",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
         ]
       }
     },
     {
-      "id": "drag_reorder_2",
+      "id": "dr-query-order-all-columns",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.drag_reorder_2",
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.dr-query-order-all-columns",
       "tokenIds": [
         "t1",
         "t2",
-        "t3",
-        "t4"
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
-          "t1",
-          "t2",
           "t3",
-          "t4"
+          "t2",
+          "t1"
         ]
       }
     },
     {
-      "id": "fill_blank_choice_1",
+      "id": "dr-query-order-two-columns",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.dr-query-order-two-columns",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t3",
+          "t1",
+          "t2"
+        ]
+      }
+    },
+    {
+      "id": "fb-from-table",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.fill_blank_choice_1",
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.fb-from-table",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "*"
+        "value": "students"
       }
     },
     {
-      "id": "fill_blank_choice_2",
+      "id": "fb-select-column",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.fill_blank_choice_2",
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.fb-select-column",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "SELECT"
+        "value": "name"
       }
     },
     {
-      "id": "code_input_1",
+      "id": "ci-select-all-students",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.code_input_1",
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.ci-select-all-students",
       "language": "sql",
-      "starterCode": "-- Write your SQL query below",
+      "starterCode": "-- Return all columns from the students table\nSELECT \nFROM students;",
       "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
       "recipe": {
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM students;"
+        "solutionCode": "SELECT *\nFROM students;"
       }
     },
     {
-      "id": "code_input_2",
+      "id": "ci-select-name-city",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.code_input_2",
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.ci-select-name-city",
       "language": "sql",
-      "starterCode": "-- Write your SQL query below",
+      "starterCode": "-- Return only the requested columns\nSELECT \nFROM students;",
       "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
       "recipe": {
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT name, grade FROM students;"
+        "solutionCode": "SELECT name, city\nFROM students;"
       }
     },
     {
-      "id": "code_input_3",
+      "id": "ci-select-single-column",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.code_input_3",
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.ci-select-single-column",
       "language": "sql",
-      "starterCode": "-- Write your SQL query below",
+      "starterCode": "-- Return one column from the students table\nSELECT \nFROM students;",
       "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
       "recipe": {
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT COUNT(*) FROM students;"
+        "solutionCode": "SELECT grade\nFROM students;"
       }
     }
   ]

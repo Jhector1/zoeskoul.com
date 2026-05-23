@@ -3,66 +3,53 @@
     "sql-v2": {
       "sql-v2-0": {
         "rows_and_columns": {
-          "label": "rows and columns",
-          "summary": "rows and columns in Getting Started with SQL and Databases",
+          "label": "Rows and Columns",
+          "summary": "Learn how a table stores data in rows and columns, and how a simple SELECT query can show all columns or just a few from the students table.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Tables"
+              "title": "What rows and columns mean"
+            },
+            "sketch1": {
+              "title": "Using SELECT to read columns from a table"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Table Exploration"
+              "title": "Read the students table with simple SELECT queries"
             }
           },
           "projectSteps": {
-            "code_input_1": {
-              "title": "Retrieve All Students"
+            "ci_select_all_students": {
+              "title": "Show every column"
             },
-            "code_input_2": {
-              "title": "Select Specific Columns"
+            "ci_select_name_city": {
+              "title": "Show two columns"
             },
-            "code_input_3": {
-              "title": "Count Rows in Table"
+            "ci_select_single_column": {
+              "title": "Show one column"
             }
           },
           "quiz": {
-            "single_choice_1": {
-              "title": "Identify the Table Structure",
-              "prompt": "Which of the following best describes the structure of a SQL table?",
-              "hint": "Think about how data is organized in a spreadsheet.",
+            "sc-row-definition": {
+              "title": "Identify a row",
+              "prompt": "In the `students` table, what does one row represent?",
+              "hint": "Think about whether a row is one full record or one field repeated across many records.",
               "help": {
-                "concept": "A SQL table is structured with rows and columns, similar to a spreadsheet.",
-                "hint_1": "Consider how multiple records and attributes are stored.",
-                "hint_2": "A table contains multiple rows and columns, not just one."
+                "concept": "A row in a table stores all the column values for one record, such as one student.",
+                "hint_1": "Look at a sample line like `1, Noor, A, 15, Chicago` and ask what whole thing it describes.",
+                "hint_2": "A row combines `id`, `name`, `grade`, `age`, and `city` for one person."
               },
               "options": {
-                "a": "A collection of rows and columns.",
-                "b": "A single row of data.",
-                "c": "A single column of data.",
-                "d": "A single cell of data."
+                "a": "One complete student record",
+                "b": "One type of information, like all names",
+                "c": "The table name itself",
+                "d": "A command that changes the table"
               }
             },
-            "single_choice_2": {
-              "title": "Purpose of SELECT *",
-              "prompt": "What does the SQL command `SELECT * FROM students;` do?",
-              "hint": "The asterisk (*) is a wildcard character in SQL.",
-              "help": {
-                "concept": "The `SELECT *` command is used to retrieve all columns from a table.",
-                "hint_1": "The asterisk (*) represents all columns.",
-                "hint_2": "This command does not modify or delete data."
-              },
-              "options": {
-                "a": "Selects all columns from the `students` table.",
-                "b": "Selects a specific column from the `students` table.",
-                "c": "Deletes all data from the `students` table.",
-                "d": "Updates all data in the `students` table."
-              }
-            },
-            "multi_choice_1": {
-              "title": "Components of a SQL Table",
-              "prompt": "Which of the following are components of a SQL table? Select all that apply.",
+            "sc-column-definition": {
+              "title": "Identify a column",
+              "prompt": "Which choice is a column in the `students` table?",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -70,15 +57,31 @@
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "Rows",
-                "b": "Columns",
-                "c": "Cells",
-                "d": "Headers"
+                "a": "Noor",
+                "b": "Chicago",
+                "c": "name",
+                "d": "A"
               }
             },
-            "multi_choice_2": {
-              "title": "SQL Query Functions",
-              "prompt": "Which of the following functions can a SQL query perform? Select all that apply.",
+            "mc-select-star": {
+              "title": "What SELECT * does",
+              "prompt": "Choose all true statements about `SELECT * FROM students;`.",
+              "hint": "Focus on what `*` means in a SELECT query.",
+              "help": {
+                "concept": "In a basic SELECT query, `*` means all columns from the chosen table.",
+                "hint_1": "This query reads from `students` and returns every column, not just one named column.",
+                "hint_2": "Think about whether the query changes data or only displays data, and whether it shows all columns or a subset."
+              },
+              "options": {
+                "a": "It reads data from the `students` table.",
+                "b": "It returns all columns in the table.",
+                "c": "It changes student ages.",
+                "d": "It can show rows from the table in the results."
+              }
+            },
+            "mc-column-examples": {
+              "title": "Pick the column names",
+              "prompt": "Choose all items that are actual column names in the `students` table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -86,15 +89,15 @@
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "Retrieve data",
-                "b": "Update data",
-                "c": "Delete data",
-                "d": "Create a new table"
+                "a": "name",
+                "b": "age",
+                "c": "Noor",
+                "d": "city"
               }
             },
-            "drag_reorder_1": {
-              "title": "Order of SQL Query Clauses",
-              "prompt": "Arrange the SQL query clauses in the correct order.",
+            "dr-query-order-all-columns": {
+              "title": "Build a basic query",
+              "prompt": "Put the tokens in order to make a query that shows all columns from the `students` table.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -102,15 +105,14 @@
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "SELECT",
-                "t2": "FROM",
-                "t3": "WHERE",
-                "t4": "ORDER BY"
+                "t1": "FROM students;",
+                "t2": "*",
+                "t3": "SELECT"
               }
             },
-            "drag_reorder_2": {
-              "title": "SQL Table Elements",
-              "prompt": "Arrange the elements of a SQL table from smallest to largest.",
+            "dr-query-order-two-columns": {
+              "title": "Order a two-column query",
+              "prompt": "Arrange the tokens to make a query that shows the `name` and `city` columns from `students`.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -118,78 +120,77 @@
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "Cell",
-                "t2": "Column",
-                "t3": "Row",
-                "t4": "Table"
+                "t1": "name, city",
+                "t2": "FROM students;",
+                "t3": "SELECT"
               }
             },
-            "fill_blank_choice_1": {
-              "title": "SQL Wildcard Character",
-              "prompt": "In SQL, the wildcard character used to select all columns is [blank1].",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+            "fb-from-table": {
+              "title": "Complete the table name",
+              "prompt": "Fill in the missing table name.",
+              "hint": "Use the only table in this lesson's dataset.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "The `FROM` clause tells SQL which table to read.",
+                "hint_1": "This topic uses a table of student records with columns like `name` and `city`.",
+                "hint_2": "The table name is the plural noun shown in the schema browser."
               },
-              "template": "In SQL, the wildcard character used to select all columns is [blank1].",
+              "template": "SELECT * FROM [blank1];",
               "choices": [
-                "*",
-                "%",
-                "?",
-                "#"
+                "students",
+                "student",
+                "cities",
+                "grades"
               ]
             },
-            "fill_blank_choice_2": {
-              "title": "Basic SQL Command",
-              "prompt": "The SQL command to retrieve data from a table is [blank1].",
-              "hint": "This command is used to fetch data.",
+            "fb-select-column": {
+              "title": "Choose the missing column",
+              "prompt": "Fill in the missing column so the query shows student names.",
+              "hint": "Pick the column that stores each student's the missing term.",
               "help": {
-                "concept": "The `the missing term` command is used to retrieve data from a table.",
-                "hint_1": "It's the most basic command for data retrieval.",
-                "hint_2": "Think about the command that starts a query."
+                "concept": "The column list after `SELECT` decides which field appears in the results.",
+                "hint_1": "You want the field that would contain values like Noor, Mia, and Leo.",
+                "hint_2": "This is the text column used as the main label for each student."
               },
-              "template": "The SQL command to retrieve data from a table is [blank1].",
+              "template": "SELECT [blank1] FROM students;",
               "choices": [
-                "SELECT",
-                "INSERT",
-                "UPDATE",
-                "DELETE"
+                "name",
+                "age",
+                "grade",
+                "city"
               ]
             },
-            "code_input_1": {
-              "title": "Retrieve All Students",
-              "prompt": "Write a SQL query to select all columns from the `students` table.",
+            "ci-select-all-students": {
+              "title": "Show every column",
+              "prompt": "Write a query that returns all columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "-- Return all columns from the students table\nSELECT \nFROM students;"
             },
-            "code_input_2": {
-              "title": "Select Specific Columns",
-              "prompt": "Write a SQL query to select only the `name` and `grade` columns from the `students` table.",
+            "ci-select-name-city": {
+              "title": "Show two columns",
+              "prompt": "Write a query that returns only the `name` and `city` columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "-- Return only the requested columns\nSELECT \nFROM students;"
             },
-            "code_input_3": {
-              "title": "Count Rows in Table",
-              "prompt": "Write a SQL query to count the number of rows in the `students` table.",
+            "ci-select-single-column": {
+              "title": "Show one column",
+              "prompt": "Write a query that returns only the `grade` column from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "-- Return one column from the students table\nSELECT \nFROM students;"
             }
           }
         }
@@ -200,9 +201,13 @@
     "sql-v2": {
       "sql-v2-0": {
         "rows_and_columns": {
-          "sketch1": {
-            "title": "Understanding Tables",
-            "bodyMarkdown": "In SQL, data is organized into tables, which consist of rows and columns. Each row represents a unique record, and each column represents a specific attribute of the data. For example, in a `students` table, columns might include `id`, `name`, `grade`, `age`, and `city`. Here's an example of a simple SQL query to retrieve all data from the `students` table:\n\n```sql\nSELECT * FROM students;\n```\n\nThis query selects all columns from the `students` table. Try it yourself by writing a query in the SQL editor and clicking 'Run query'."
+          "rows-vs-columns": {
+            "title": "What rows and columns mean",
+            "bodyMarkdown": "A database table is organized like a grid.\n\n- A **row** is one complete record.\n- A **column** is one type of detail about every record.\n\nIn this topic, the table is called `students`. Its columns are:\n\n- `id`\n- `name`\n- `grade`\n- `age`\n- `city`\n\nA single row might look like this:\n\n| id | name | grade | age | city |\n|---|---|---|---|---|\n| 1 | Noor | A | 15 | Chicago |\n\nThat row is one student record. The `name` column stores student names for every row, and the `city` column stores cities for every row.\n\nA helpful way to think about it:\n\n- **columns answer**: \"What kinds of information do we store?\"\n- **rows answer**: \"What individual items do we store?\"\n\n**Try it yourself:** Look at the sample row for Noor and say which value belongs to the `age` column and which value belongs to the `grade` column."
+          },
+          "reading-a-simple-select": {
+            "title": "Using SELECT to read columns from a table",
+            "bodyMarkdown": "SQL lets you ask the table to show data.\n\nHere is the simplest pattern:\n\n```sql\nSELECT name, city\nFROM students;\n```\n\nStep by step:\n\n1. `SELECT name, city` says which columns you want to see.\n2. `FROM students` says which table to read.\n3. The semicolon ends the query.\n\nThis query does **not** show every column. It only shows `name` and `city`.\n\nIf you want all columns, you can write:\n\n```sql\nSELECT *\nFROM students;\n```\n\nHere, `*` means \"all columns.\"\n\nWorked example:\n\nIf the table includes Noor from Chicago and Mia from Evanston, then `SELECT name, city FROM students;` would return rows with just those two columns, such as:\n\n| name | city |\n|---|---|\n| Noor | Chicago |\n| Mia | Evanston |\n\n**Try it yourself:** Write `SELECT age FROM students;` in the SQL editor, click Run query, and check the results table. Then change it to `SELECT name, age FROM students;` and compare the columns you get."
           }
         }
       }

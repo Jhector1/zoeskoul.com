@@ -4,100 +4,102 @@
       "sql-v2-1": {
         "query_multiple_columns": {
           "label": "Query Multiple Columns",
-          "summary": "Learn how to query multiple columns using SELECT in SQL.",
+          "summary": "Learn how to select more than one column from the products table so your results show exactly the fields you need.",
           "cards": {
             "sketch0": {
-              "title": "Introduction to Querying Multiple Columns"
+              "title": "Selecting more than one column"
             },
             "sketch1": {
-              "title": "Worked Example: Retrieving Product Information"
+              "title": "The order of selected columns affects the results"
+            },
+            "sketch2": {
+              "title": "Using commas correctly"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Query Practice Project"
+              "title": "Starter query sheet for multiple columns"
             }
           },
           "projectSteps": {
-            "quiz9": {
-              "title": "Query Product Names and Prices"
+            "ci_select_name_category": {
+              "title": "Show names and categories"
             },
-            "quiz10": {
-              "title": "Retrieve Product Categories"
+            "ci_select_three_columns": {
+              "title": "Show three useful columns"
             },
-            "quiz11": {
-              "title": "Select All Product Information"
+            "ci_select_category_stock_created": {
+              "title": "Choose a different set of columns"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "Basic SELECT Query",
-              "prompt": "Which SQL statement retrieves the 'name' and 'price' columns from the 'products' table?",
-              "hint": "Focus on the correct syntax for selecting specific columns.",
+            "sc_columns_comma": {
+              "title": "How to list multiple columns",
+              "prompt": "Which query correctly selects the `name` and `price` columns from the `products` table?",
+              "hint": "Look for the query that separates the two column names with a comma.",
               "help": {
-                "concept": "The SELECT statement is used to specify which columns to retrieve from a table.",
-                "hint_1": "Ensure the columns are listed after SELECT and before FROM.",
-                "hint_2": "The correct syntax is `SELECT column1, column2 FROM table_name;`."
+                "concept": "In SQL, multiple selected columns are written in the `SELECT` clause as a comma-separated list before the `FROM` clause.",
+                "hint_1": "Check whether `name` and `price` are both in the `SELECT` part and whether `products` appears after `FROM`.",
+                "hint_2": "A correct pattern looks like `SELECT first_column, second_column FROM table_name`."
               },
               "options": {
                 "a": "SELECT name, price FROM products;",
-                "b": "SELECT name, price;",
-                "c": "SELECT * FROM products;",
-                "d": "SELECT products FROM name, price;"
+                "b": "FROM products SELECT name, price;",
+                "c": "SELECT products FROM name, price;"
               }
             },
-            "quiz2": {
-              "title": "Understanding SQL Syntax",
-              "prompt": "What does the following SQL query do? `SELECT category, stock FROM products;`",
-              "hint": "Look at which columns are specified in the SELECT statement.",
+            "sc_result_order": {
+              "title": "Column order in results",
+              "prompt": "If you run `SELECT category, name FROM products;`, which column appears first in the results table?",
+              "hint": "The results table follows the same order as the columns listed after `SELECT`.",
               "help": {
-                "concept": "The SELECT statement specifies which columns to retrieve.",
-                "hint_1": "Check the columns listed after SELECT.",
-                "hint_2": "The query retrieves only the columns specified after SELECT."
+                "concept": "The order of columns in a `SELECT` statement controls the left-to-right order of columns in the query result.",
+                "hint_1": "Read the query from left to right after the word `SELECT`.",
+                "hint_2": "The first listed column becomes the first column shown in the results table."
               },
               "options": {
-                "a": "It retrieves all columns from the 'products' table.",
-                "b": "It retrieves the 'category' and 'stock' columns from the 'products' table.",
-                "c": "It retrieves the 'category' column only.",
-                "d": "It retrieves the 'stock' column only."
+                "a": "name",
+                "b": "products",
+                "c": "category",
+                "d": "price"
               }
             },
-            "quiz3": {
-              "title": "Selecting Multiple Columns",
-              "prompt": "Which of the following queries correctly select multiple columns from the 'products' table? (Choose all that apply)",
-              "hint": "Consider queries that specify multiple columns in the SELECT statement.",
+            "mc_valid_multiple_column_queries": {
+              "title": "Find the valid queries",
+              "prompt": "Which queries correctly select more than one column from `products`? Choose all that apply.",
+              "hint": "Valid queries need `SELECT`, a comma-separated column list, and `FROM products`.",
               "help": {
-                "concept": "Multiple columns can be selected by listing them after SELECT.",
-                "hint_1": "Look for queries that list more than one column after SELECT.",
-                "hint_2": "Queries that use `SELECT *` retrieve all columns, not specific ones."
+                "concept": "A valid multi-column `SELECT` query needs correctly named columns, commas between them, and the table name after `FROM`.",
+                "hint_1": "Check each option for missing commas or a misplaced `FROM` clause.",
+                "hint_2": "More than one option uses the right structure: `SELECT column1, column2 FROM products;`."
               },
               "options": {
-                "a": "SELECT name, price FROM products;",
+                "a": "SELECT id, name FROM products;",
                 "b": "SELECT category, stock FROM products;",
-                "c": "SELECT * FROM products;",
-                "d": "SELECT name, category, price FROM products;"
+                "c": "SELECT price stock FROM products;",
+                "d": "FROM products SELECT name, created_at;"
               }
             },
-            "quiz4": {
-              "title": "Identifying Correct SQL Queries",
-              "prompt": "Which queries will retrieve the 'name' and 'category' columns from the 'products' table? (Choose all that apply)",
-              "hint": "Focus on queries that include both 'name' and 'category' in the SELECT statement.",
+            "mc_columns_in_products": {
+              "title": "Columns you can select",
+              "prompt": "Which of these are real column names in the `products` table? Choose all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "The SELECT statement specifies which columns to retrieve.",
-                "hint_1": "Ensure both 'name' and 'category' are listed after SELECT.",
-                "hint_2": "Queries that list only one of the columns are not correct."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "SELECT name, category FROM products;",
-                "b": "SELECT name FROM products;",
-                "c": "SELECT category FROM products;",
-                "d": "SELECT name, category, price FROM products;"
+                "a": "name",
+                "b": "category",
+                "c": "brand",
+                "d": "created_at"
               }
             },
-            "quiz5": {
-              "title": "Order SQL Query Components",
-              "prompt": "Arrange the components of a SQL query to select the 'name' and 'price' columns from the 'products' table.",
+            "dr_query_structure_two_columns": {
+              "title": "Build a two-column query",
+              "prompt": "Arrange the tokens to form a correct query that selects `name` and `category` from `products`.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -106,93 +108,96 @@
               },
               "tokens": {
                 "t1": "SELECT",
-                "t2": "name, price",
-                "t3": "FROM",
-                "t4": "products;"
+                "t2": "name,",
+                "t3": "category",
+                "t4": "FROM",
+                "t5": "products;"
               }
             },
-            "quiz6": {
-              "title": "SQL Query Structure",
-              "prompt": "Reorder the SQL query components to retrieve 'category' and 'stock' from the 'products' table.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+            "dr_query_structure_three_columns": {
+              "title": "Order a three-column query",
+              "prompt": "Arrange the tokens to form a correct query that selects `id`, `name`, and `price` from `products`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Think about which part must come first.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "tokens": {
-                "t1": "SELECT",
-                "t2": "category, stock",
-                "t3": "FROM",
-                "t4": "products;"
+                "t1": "FROM",
+                "t2": "products;",
+                "t3": "id,",
+                "t4": "SELECT",
+                "t5": "name,",
+                "t6": "price"
               }
             },
-            "quiz7": {
-              "title": "Fill in the SQL Query",
-              "prompt": "Complete the SQL query to select 'name' and 'stock' from the 'products' table: `SELECT [blank1] FROM products;`",
-              "hint": "List both columns separated by a comma.",
-              "help": {
-                "concept": "Multiple columns are separated by commas in the SELECT statement.",
-                "hint_1": "Ensure both 'name' and 'stock' are included.",
-                "hint_2": "Use a comma to separate the column names."
-              },
-              "template": "SELECT [blank1] FROM products;",
-              "choices": [
-                "name, stock",
-                "name",
-                "stock",
-                "*"
-              ]
-            },
-            "quiz8": {
-              "title": "SQL Query Completion",
-              "prompt": "Fill in the blank to complete the query: `SELECT [blank1] FROM products;` to retrieve all columns.",
+            "fb_missing_column_name": {
+              "title": "Complete the SELECT list",
+              "prompt": "Choose the missing column name to complete the query.",
               "hint": "Read the sentence around the blank and decide what role the missing word plays.",
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
                 "hint_2": "Pick the choice that completes the statement with the clearest meaning."
               },
-              "template": "SELECT [blank1] FROM products;",
+              "template": "SELECT name, [blank1] FROM products;",
               "choices": [
-                "*",
-                "name, category",
-                "price, stock",
-                "id, name"
+                "price",
+                "products",
+                "SELECT",
+                "brand"
               ]
             },
-            "quiz9": {
-              "title": "Query Product Names and Prices",
-              "prompt": "Write a SQL query to retrieve the 'name' and 'price' columns from the 'products' table.",
+            "fb_missing_table_name": {
+              "title": "Complete the FROM clause",
+              "prompt": "Choose the missing table name to complete the query.",
+              "hint": "This lesson uses one table named `the missing term`.",
+              "help": {
+                "concept": "The `FROM` clause tells SQL which table contains the columns named in the `SELECT` clause.",
+                "hint_1": "The columns `id` and `name` both come from the same table used throughout this topic.",
+                "hint_2": "Use the table name shown in the schema for this lesson, not a column name."
+              },
+              "template": "SELECT id, name FROM [blank1];",
+              "choices": [
+                "price",
+                "products",
+                "category",
+                "created_at"
+              ]
+            },
+            "ci_select_name_category": {
+              "title": "Show names and categories",
+              "prompt": "Write a query that returns the `name` and `category` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "-- Return the name and category columns from products\nSELECT\n  -- add columns here\nFROM products;"
             },
-            "quiz10": {
-              "title": "Retrieve Product Categories",
-              "prompt": "Write a SQL query to select the 'category' and 'stock' columns from the 'products' table.",
-              "hint": "Break the task into the main code steps first.",
-              "help": {
-                "concept": "This task checks whether you can apply retrieve product categories in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-              },
-              "starterCode": "-- Write your SQL query here"
-            },
-            "quiz11": {
-              "title": "Select All Product Information",
-              "prompt": "Write a SQL query to retrieve all columns from the 'products' table.",
+            "ci_select_three_columns": {
+              "title": "Show three useful columns",
+              "prompt": "Write a query that returns the `id`, `name`, and `price` columns from the `products` table, in that order. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "-- Return id, name, and price from products\nSELECT\n  -- add three columns here\nFROM products;"
+            },
+            "ci_select_category_stock_created": {
+              "title": "Choose a different set of columns",
+              "prompt": "Write a query that returns the `category`, `stock`, and `created_at` columns from the `products` table. Keep the columns in that exact order. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Return category, stock, and created_at from products\nSELECT\n  -- add the three columns here\nFROM products;"
             }
           }
         }
@@ -203,13 +208,17 @@
     "sql-v2": {
       "sql-v2-1": {
         "query_multiple_columns": {
-          "sketch1": {
-            "title": "Introduction to Querying Multiple Columns",
-            "bodyMarkdown": "In SQL, you can retrieve data from multiple columns using the SELECT statement. This allows you to view specific data from a table. For example, if you want to see the name and price of products, you can use:\n\n```sql\nSELECT name, price FROM products;\n```\n\nThis query will return the 'name' and 'price' columns from the 'products' table. Try it yourself by modifying the columns you want to retrieve."
+          "sketch_select_multiple_columns": {
+            "title": "Selecting more than one column",
+            "bodyMarkdown": "When you use `SELECT`, you are choosing which columns should appear in the results table. To show more than one column, list the column names separated by commas.\n\n```sql\nSELECT name, price\nFROM products;\n```\n\nThis query reads as:\n- `SELECT name, price` → show the `name` and `price` columns\n- `FROM products` → get those columns from the `products` table\n\nWith the `products` table in this lesson, the results table would include rows like:\n- `Sketchbook | 12.99`\n- `Acrylic Paint Set | 24.50`\n- `Desk Lamp | 39.99`\n\nThis is useful when you do not need every column. For example, if you only want product names and prices, selecting just those columns keeps the results table simpler.\n\nTry it yourself: write the query in the SQL editor, click Run query, and then change `price` to `category` to see how the results table changes."
           },
-          "sketch2": {
-            "title": "Worked Example: Retrieving Product Information",
-            "bodyMarkdown": "Let's say you want to retrieve the 'name', 'category', and 'stock' of products. You can write the query as follows:\n\n```sql\nSELECT name, category, stock FROM products;\n```\n\nThis query will display the product name, category, and stock quantity for each product in the 'products' table. Line by line, the query specifies:\n- `SELECT name, category, stock`: The columns you want to retrieve.\n- `FROM products`: The table to query.\n\nYour turn: Try adding the 'price' column to this query and run it in the SQL editor."
+          "sketch_column_order_matters": {
+            "title": "The order of selected columns affects the results",
+            "bodyMarkdown": "The order of column names in `SELECT` becomes the order of columns in the results table.\n\n```sql\nSELECT category, name, stock\nFROM products;\n```\n\nStep by step:\n- `category` appears first in the results table\n- `name` appears second\n- `stock` appears third\n\nSo a row might look like:\n- `Art | Sketchbook | 25`\n\nIf you switch the query to this:\n\n```sql\nSELECT name, stock, category\nFROM products;\n```\n\nthen the same product would appear as:\n- `Sketchbook | 25 | Art`\n\nThe data comes from the same table, but the display order changes because the `SELECT` list changed.\n\nYour turn: run one query with `name, category` and another with `category, name`. Compare the column order in the results table."
+          },
+          "sketch_commas_and_column_names": {
+            "title": "Using commas correctly",
+            "bodyMarkdown": "When selecting multiple columns, each column name must be separated by a comma.\n\nCorrect example:\n\n```sql\nSELECT id, name, category\nFROM products;\n```\n\nIncorrect idea:\n\n```sql\nSELECT id name category\nFROM products;\n```\n\nWhy the first one works:\n- `id`, `name`, and `category` are three separate column names\n- commas tell SQL where one column name ends and the next begins\n\nA concrete example from this table:\n- product `1` would show as `1 | Sketchbook | Art`\n- product `4` would show as `4 | Notebook | Stationery`\n\nIf a query fails, one common reason is a missing comma between column names.\n\nTry this: write a query that shows `name`, `price`, and `stock`. Run it, then remove one comma and notice that the query no longer works."
           }
         }
       }

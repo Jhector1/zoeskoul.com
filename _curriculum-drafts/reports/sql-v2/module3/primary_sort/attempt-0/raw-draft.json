@@ -1,0 +1,257 @@
+{
+  "title": "Primary sort",
+  "summary": "Learn how to choose the main column for ORDER BY so rows appear in a clear, useful order.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch_primary_sort_intro",
+      "title": "What a primary sort does",
+      "bodyMarkdown": "A **primary sort** is the first rule SQL uses to arrange your rows. You write it with `ORDER BY`.\n\nIf you sort by one column, that column is the primary sort. For example, this query sorts products by price from lowest to highest:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` reads rows from the `products` table.\n- `ORDER BY price ASC` puts the smallest `price` first.\n\nWith the `products` data, the first few rows would start with lower-priced items like `Notebook` before higher-priced items like `Office Chair`.\n\nWhy this matters: if your question is about **cheapest**, **most expensive**, **newest**, or **alphabetical order**, the primary sort should match that goal.\n\n**Try it yourself:** Write the query in the SQL editor, click Run query, and then change `ASC` to `DESC`. Check how the results table changes."
+    },
+    {
+      "id": "sketch_primary_sort_examples",
+      "title": "Choosing the right first column",
+      "bodyMarkdown": "The main idea is simple: **pick the column that answers the question first**.\n\nExample 1: If you want the most expensive products first, sort by `price`.\n\n```sql\nSELECT name, category, price\nFROM products\nORDER BY price DESC;\n```\n\nLine by line:\n- `SELECT name, category, price` shows useful product details.\n- `FROM products` gets all product rows.\n- `ORDER BY price DESC` puts the highest price at the top.\n\nExample 2: If you want products in alphabetical order, sort by `name`.\n\n```sql\nSELECT name, category\nFROM products\nORDER BY name ASC;\n```\n\nNow the primary sort is `name`, so rows are arranged alphabetically.\n\nA common beginner mistake is sorting by a column that does not match the goal. If you want the newest products, sorting by `name` will not help. You should sort by `created_at` instead.\n\n**Your turn:** In the SQL editor, run a query that shows `name` and `created_at`, then sort by `created_at DESC`. Check which product appears first in the results table."
+    },
+    {
+      "id": "sketch_primary_sort_ties",
+      "title": "Primary sort before secondary sort",
+      "bodyMarkdown": "When you sort by more than one column, the **first** column is still the primary sort. SQL uses the second column only when rows tie on the first one.\n\nExample:\n\n```sql\nSELECT name, category, price\nFROM products\nORDER BY category ASC, price DESC;\n```\n\nHow this works:\n- First, SQL groups the order by `category` alphabetically.\n- Inside each category, SQL uses `price DESC`.\n- So `category` is the **primary sort**, and `price` is the next rule.\n\nThis means the first sort column has the biggest effect on the overall order.\n\nFor this topic, focus on recognizing that the first column after `ORDER BY` controls the main arrangement of the results.\n\n**Try this:** Run the example in the SQL editor. Then swap the columns to `ORDER BY price DESC, category ASC` and compare the results table. Notice how changing the first column changes the whole ordering."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "sc_primary_sort_goal_price",
+      "kind": "single_choice",
+      "title": "Pick the best primary sort",
+      "prompt": "You want to see the most expensive products first. Which column should be the primary sort?",
+      "hint": "Choose the column that directly measures cost.",
+      "help": {
+        "concept": "The primary sort should match the main question you are asking. For ranking by cost, the first ORDER BY column should be the price column.",
+        "hint_1": "Look for the column that stores numbers like 12.99 and 129.00.",
+        "hint_2": "If the goal is 'most expensive first,' the first sort should use the money value, not the product name or category."
+      },
+      "options": [
+        "name",
+        "category",
+        "price",
+        "stock"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "sc_primary_sort_first_column",
+      "kind": "single_choice",
+      "title": "Identify the primary sort column",
+      "prompt": "In `ORDER BY category ASC, price DESC`, which column is the primary sort?",
+      "hint": "The primary sort is the first column listed after ORDER BY.",
+      "help": {
+        "concept": "When ORDER BY has multiple columns, SQL applies the first column as the main ordering rule and later columns only break ties.",
+        "hint_1": "Read the ORDER BY clause from left to right.",
+        "hint_2": "The column before the comma controls the overall grouping and order first."
+      },
+      "options": [
+        "category",
+        "price",
+        "name",
+        "created_at"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "mc_primary_sort_good_matches",
+      "kind": "multi_choice",
+      "title": "Match goals to primary sorts",
+      "prompt": "Which choices use a sensible primary sort for the goal? Choose all that apply.",
+      "hint": "Check whether the first sort column matches the main question.",
+      "help": {
+        "concept": "A sensible primary sort uses the first ORDER BY column to answer the main need, such as price for cost, name for alphabetical order, or created_at for newest items.",
+        "hint_1": "Look for choices where the sort column directly represents the thing being compared.",
+        "hint_2": "Alphabetical lists should start with a text label like name, while newest or oldest lists should start with a date column."
+      },
+      "options": [
+        "To list products alphabetically, use name as the primary sort.",
+        "To show newest products first, use created_at as the primary sort.",
+        "To show the most expensive products first, use price as the primary sort.",
+        "To show the most expensive products first, use category as the primary sort."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "mc_primary_sort_true_statements",
+      "kind": "multi_choice",
+      "title": "True statements about primary sort",
+      "prompt": "Which statements are true about primary sort? Choose all that apply.",
+      "hint": "Think about what the first ORDER BY column does.",
+      "help": {
+        "concept": "The primary sort is the first ordering rule. It controls the main arrangement of rows, and later sort columns only refine rows that are equal on the first one.",
+        "hint_1": "One true idea is about the first column after ORDER BY. Another true idea is about what happens when rows tie.",
+        "hint_2": "Reject statements that say every listed sort column has equal priority or that the second column is applied first."
+      },
+      "options": [
+        "The first column in ORDER BY is the main sorting rule.",
+        "A second sort column can break ties after the first sort column is applied.",
+        "The second sort column always matters more than the first one.",
+        "All ORDER BY columns are applied with equal priority at the same time."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "dr_primary_sort_query_order",
+      "kind": "drag_reorder",
+      "title": "Build a sorted query",
+      "prompt": "Put these SQL parts in the correct order to make a query that shows product names sorted by price from highest to lowest.",
+      "hint": "Start with SELECT, then FROM, then ORDER BY.",
+      "help": {
+        "concept": "A basic sorted SELECT query follows the clause order SELECT, FROM, then ORDER BY. The sort direction comes after the sort column.",
+        "hint_1": "The query begins by choosing columns and then naming the table.",
+        "hint_2": "The sorting part should end with the direction keyword that puts larger prices first."
+      },
+      "tokens": [
+        "SELECT name",
+        "FROM products",
+        "ORDER BY price DESC"
+      ],
+      "correctOrder": [
+        "SELECT name",
+        "FROM products",
+        "ORDER BY price DESC"
+      ]
+    },
+    {
+      "id": "dr_primary_sort_reasoning_steps",
+      "kind": "drag_reorder",
+      "title": "Order the sorting decisions",
+      "prompt": "Arrange these steps in a sensible order for choosing a primary sort.",
+      "hint": "First decide the goal, then pick the matching column, then write ORDER BY.",
+      "help": {
+        "concept": "Choosing a primary sort is a reasoning process: identify the question, match it to the right column, and then write the ORDER BY clause using that column first.",
+        "hint_1": "You should not write the SQL before deciding what the result needs to show first.",
+        "hint_2": "The matching column comes after the goal, and the final step is writing the clause."
+      },
+      "tokens": [
+        "Decide what should appear first in the results",
+        "Choose the column that represents that idea",
+        "Write that column first in ORDER BY"
+      ],
+      "correctOrder": [
+        "Decide what should appear first in the results",
+        "Choose the column that represents that idea",
+        "Write that column first in ORDER BY"
+      ]
+    },
+    {
+      "id": "fb_primary_sort_desc",
+      "kind": "fill_blank_choice",
+      "title": "Complete a descending sort",
+      "prompt": "Fill in the missing keyword to sort prices from highest to lowest.",
+      "hint": "Use the direction keyword for larger values first.",
+      "help": {
+        "concept": "In ORDER BY, DESC means descending order, which places larger values before smaller ones.",
+        "hint_1": "ASC is for low-to-high or A-to-Z. This question wants the opposite direction.",
+        "hint_2": "Choose the keyword that puts 129.00 before 6.75."
+      },
+      "template": "SELECT name, price FROM products ORDER BY price [blank1];",
+      "choices": [
+        "ASC",
+        "DESC",
+        "FROM",
+        "WHERE"
+      ],
+      "correctValue": "DESC"
+    },
+    {
+      "id": "fb_primary_sort_column",
+      "kind": "fill_blank_choice",
+      "title": "Complete the primary sort column",
+      "prompt": "Fill in the missing column so the query sorts products alphabetically by name.",
+      "hint": "Use the text column that stores product labels.",
+      "help": {
+        "concept": "To sort alphabetically, ORDER BY should use the column that contains the product names.",
+        "hint_1": "The correct column contains values like Sketchbook and Notebook.",
+        "hint_2": "Do not choose category or price if the goal is A-to-Z product names."
+      },
+      "template": "SELECT name, category FROM products ORDER BY [blank1] ASC;",
+      "choices": [
+        "price",
+        "stock",
+        "name",
+        "created_at"
+      ],
+      "correctValue": "name"
+    },
+    {
+      "id": "ci_primary_sort_price_desc",
+      "kind": "code_input",
+      "title": "Sort by price descending",
+      "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
+      "hint": "Use ORDER BY with the price column and the descending direction.",
+      "help": {
+        "concept": "A primary sort uses ORDER BY to control the main order of rows. For highest price first, sort by price in descending order.",
+        "hint_1": "Select only the two requested columns before adding the sort.",
+        "hint_2": "The ORDER BY clause should name the numeric price column and use the direction for largest-to-smallest."
+      },
+      "starterCode": "SELECT name, price\nFROM products\n-- TODO: add sorting so the highest price appears first\n;",
+      "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC;",
+      "type": "sql_query",
+      "recipeType": "sql_query",
+      "datasetId": "products_catalog",
+      "resultShape": "table"
+    },
+    {
+      "id": "ci_primary_sort_name_asc",
+      "kind": "code_input",
+      "title": "Sort names alphabetically",
+      "prompt": "Write a query that shows `name` and `category` from `products`, sorted alphabetically by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table.",
+      "hint": "Use the name column as the primary sort with ascending order.",
+      "help": {
+        "concept": "Alphabetical ordering uses the text column you want to arrange, usually with ASC for A-to-Z order.",
+        "hint_1": "The query should return product names and their categories, not every column.",
+        "hint_2": "Put the product label column first in ORDER BY and use the direction for A-to-Z."
+      },
+      "starterCode": "SELECT name, category\nFROM products\n-- TODO: sort the rows alphabetically by product name\n;",
+      "solutionCode": "SELECT name, category\nFROM products\nORDER BY name ASC;",
+      "type": "sql_query",
+      "recipeType": "sql_query",
+      "datasetId": "products_catalog",
+      "resultShape": "table"
+    },
+    {
+      "id": "ci_primary_sort_newest_first",
+      "kind": "code_input",
+      "title": "Sort by newest date first",
+      "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table.",
+      "hint": "Use the date column as the primary sort and place later dates first.",
+      "help": {
+        "concept": "When the goal is newest first, the primary sort should use the date column in descending order so later dates appear above earlier ones.",
+        "hint_1": "The needed column stores values like 2026-02-14 and 2025-11-05.",
+        "hint_2": "Select the product name and date, then sort by the date column using the direction for latest-to-earliest."
+      },
+      "starterCode": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest date appears first\n;",
+      "solutionCode": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+      "type": "sql_query",
+      "recipeType": "sql_query",
+      "datasetId": "products_catalog",
+      "resultShape": "table"
+    }
+  ],
+  "projectDraft": {
+    "title": "Practice primary sorting with product reports",
+    "stepIds": [
+      "ci_primary_sort_price_desc",
+      "ci_primary_sort_name_asc",
+      "ci_primary_sort_newest_first"
+    ]
+  }
+}

@@ -5,6 +5,18 @@
   "sectionSlug": "sql-v2-2-3",
   "prefix": "sqlv2_2",
   "minutes": 15,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "products_catalog",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
   "topic": {
     "labelKey": "topics.sql-v2.sql-v2-2.and_conditions.label",
     "summaryKey": "topics.sql-v2.sql-v2-2.and_conditions.summary"
@@ -14,14 +26,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-2.and_conditions.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "and_intro",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-2.and_conditions.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "and_step_by_step",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-2.and_conditions.cards.sketch2.title",
+      "sketchId": "and_common_mistakes",
       "height": 420
     },
     {
@@ -50,27 +69,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "code_input_1",
-            "titleKey": "topics.sql-v2.sql-v2-2.and_conditions.projectSteps.code_input_1.title",
-            "exerciseKey": "code_input_1",
+            "id": "ci_art_under_20",
+            "titleKey": "topics.sql-v2.sql-v2-2.and_conditions.projectSteps.ci_art_under_20.title",
+            "exerciseKey": "ci_art_under_20",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "code_input_2",
-            "titleKey": "topics.sql-v2.sql-v2-2.and_conditions.projectSteps.code_input_2.title",
-            "exerciseKey": "code_input_2",
+            "id": "ci_stationery_stock_15",
+            "titleKey": "topics.sql-v2.sql-v2-2.and_conditions.projectSteps.ci_stationery_stock_15.title",
+            "exerciseKey": "ci_stationery_stock_15",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "code_input_3",
-            "titleKey": "topics.sql-v2.sql-v2-2.and_conditions.projectSteps.code_input_3.title",
-            "exerciseKey": "code_input_3",
+            "id": "ci_home_price_under_100",
+            "titleKey": "topics.sql-v2.sql-v2-2.and_conditions.projectSteps.ci_home_price_under_100.title",
+            "exerciseKey": "ci_home_price_under_100",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -82,25 +101,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "and_intro",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.and_conditions.sketch1.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.and_conditions.sketch1.bodyMarkdown"
+      "titleKey": "sketches.sql-v2.sql-v2-2.and_conditions.and_intro.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-2.and_conditions.and_intro.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "and_step_by_step",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.and_conditions.sketch2.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.and_conditions.sketch2.bodyMarkdown"
+      "titleKey": "sketches.sql-v2.sql-v2-2.and_conditions.and_step_by_step.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-2.and_conditions.and_step_by_step.bodyMarkdown"
+    },
+    {
+      "id": "and_common_mistakes",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-2.and_conditions.and_common_mistakes.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-2.and_conditions.and_common_mistakes.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "single_choice_1",
+      "id": "sc_and_all_conditions",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.single_choice_1",
+      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.sc_and_all_conditions",
       "optionIds": [
         "a",
         "b",
@@ -109,15 +134,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "single_choice_2",
+      "id": "sc_and_result_example",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.single_choice_2",
+      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.sc_and_result_example",
       "optionIds": [
         "a",
         "b",
@@ -126,97 +151,96 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "multi_choice_1",
+      "id": "mc_rows_match_art_and_price",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.multi_choice_1",
+      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.mc_rows_match_art_and_price",
       "optionIds": [
         "a",
         "b",
-        "c"
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a"
+          "a",
+          "b"
         ]
       }
     },
     {
-      "id": "multi_choice_2",
+      "id": "mc_conditions_true_for_notebook",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.multi_choice_2",
+      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.mc_conditions_true_for_notebook",
       "optionIds": [
         "a",
         "b",
-        "c"
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a"
+          "a",
+          "b",
+          "c"
         ]
       }
     },
     {
-      "id": "drag_reorder_1",
+      "id": "dr_build_and_query",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.drag_reorder_1",
+      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.dr_build_and_query",
       "tokenIds": [
         "t1",
         "t2",
-        "t3",
-        "t4"
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3",
-          "t4"
+          "t3"
         ]
       }
     },
     {
-      "id": "drag_reorder_2",
+      "id": "dr_read_filter_steps",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.drag_reorder_2",
+      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.dr_read_filter_steps",
       "tokenIds": [
         "t1",
         "t2",
-        "t3",
-        "t4",
-        "t5"
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3",
-          "t4",
-          "t5"
+          "t3"
         ]
       }
     },
     {
-      "id": "fill_blank_choice_1",
+      "id": "fb_and_keyword",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.fill_blank_choice_1",
+      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.fb_and_keyword",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -224,63 +248,99 @@
       }
     },
     {
-      "id": "fill_blank_choice_2",
+      "id": "fb_missing_column",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.fill_blank_choice_2",
+      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.fb_missing_column",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "AND"
+        "value": "stock"
       }
     },
     {
-      "id": "code_input_1",
+      "id": "ci_art_under_20",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.code_input_1",
+      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.ci_art_under_20",
       "language": "sql",
-      "starterCode": "-- Write your SQL query here",
+      "starterCode": "SELECT \nFROM products\nWHERE ;",
       "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
       "recipe": {
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM products WHERE category = 'Art' AND price < 25;"
+        "solutionCode": "SELECT name, price\nFROM products\nWHERE category = 'Art' AND price < 20;"
       }
     },
     {
-      "id": "code_input_2",
+      "id": "ci_stationery_stock_15",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.code_input_2",
+      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.ci_stationery_stock_15",
       "language": "sql",
-      "starterCode": "-- Write your SQL query here",
+      "starterCode": "SELECT name, category, stock\nFROM products\nWHERE category = '' ;",
       "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
       "recipe": {
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM products WHERE category = 'Stationery' AND stock > 10 AND price < 20;"
+        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' AND stock >= 15;"
       }
     },
     {
-      "id": "code_input_3",
+      "id": "ci_home_price_under_100",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.code_input_3",
+      "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.ci_home_price_under_100",
       "language": "sql",
-      "starterCode": "-- Write your SQL query here",
+      "starterCode": "SELECT name, price\nFROM products\nWHERE category = 'Home'\n-- add one more condition here",
       "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
       "recipe": {
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM products WHERE category = 'Home' AND price > 30 AND stock < 5;"
+        "solutionCode": "SELECT name, price\nFROM products\nWHERE category = 'Home' AND price < 100;"
       }
     }
   ]

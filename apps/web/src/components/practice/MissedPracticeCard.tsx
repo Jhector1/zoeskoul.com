@@ -197,6 +197,13 @@ function ReadOnlyPracticeCard({
                   ok={ok}
                   readOnly={true}
                   reviewCorrect={reviewCodeCorrect}
+                  exerciseRuntime={(exercise as any)?.runtime}
+                  exerciseSqlDatasetId={(exercise as any)?.sqlDatasetId}
+                  topicRuntimeDefaults={(exercise as any)?.topicRuntimeDefaults ?? null}
+                  sectionRuntimeDefaults={(exercise as any)?.sectionRuntimeDefaults ?? null}
+                  moduleRuntimeDefaults={(exercise as any)?.moduleRuntimeDefaults ?? null}
+                  courseRuntimeDefaults={(exercise as any)?.courseRuntimeDefaults ?? null}
+                  subjectRuntimeDefaults={(exercise as any)?.subjectRuntimeDefaults ?? null}
               />
           ) : (
               <ExerciseRenderer

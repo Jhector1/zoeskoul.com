@@ -537,6 +537,14 @@ export async function getResolvedReviewModule(
         title: resolved.title,
         subtitle: resolved.subtitle ?? null,
         startPracticeSectionSlug: resolved.startPracticeSectionSlug,
+        profileId:
+            typeof resolved.profileId === "string" && resolved.profileId.trim()
+                ? resolved.profileId
+                : null,
+        versionFamily:
+            typeof resolved.versionFamily === "string" && resolved.versionFamily.trim()
+                ? resolved.versionFamily
+                : null,
         runtimeDefaults: normalizeRuntimeDefaults(resolved.runtimeDefaults) ?? null,
         contentVersion,
         topics,

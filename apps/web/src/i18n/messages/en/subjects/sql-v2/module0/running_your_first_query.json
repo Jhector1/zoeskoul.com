@@ -4,52 +4,55 @@
       "sql-v2-0": {
         "running_your_first_query": {
           "label": "Running Your First Query",
-          "summary": "Learn how to execute your first SQL query using the students_intro dataset.",
+          "summary": "Learn how to write and run a simple SELECT query in the browser workspace to view data from the students table.",
           "cards": {
             "sketch0": {
-              "title": "Introduction to SQL Queries"
+              "title": "What a first SQL query does"
             },
             "sketch1": {
-              "title": "Understanding the SELECT Statement"
+              "title": "Reading SELECT and FROM together"
+            },
+            "sketch2": {
+              "title": "Using the browser SQL runner"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Running Your First SQL Queries"
+              "title": "Run three starter SELECT queries"
             }
           },
           "projectSteps": {
-            "quiz5": {
-              "title": "Writing Your First SQL Query"
+            "ci_1": {
+              "title": "Show every column and row"
             },
-            "quiz6": {
-              "title": "Selecting Specific Columns"
+            "ci_2": {
+              "title": "Show only student names"
             },
-            "quiz7": {
-              "title": "Exploring the Students Table"
+            "ci_3": {
+              "title": "Show names and cities"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "Basic SQL Query Structure",
-              "prompt": "What is the purpose of the `SELECT` statement in SQL?",
-              "hint": "Think about what you want to achieve when you use `SELECT`.",
+            "sc_1": {
+              "title": "What SELECT * means",
+              "prompt": "In the query `SELECT * FROM students;`, what does the `*` mean?",
+              "hint": "It affects which columns appear in the results table.",
               "help": {
-                "concept": "The `SELECT` statement is used to retrieve data from a database.",
-                "hint_1": "The `SELECT` statement is not used for modifying data.",
-                "hint_2": "The `SELECT` statement is used to get data from a table."
+                "concept": "In a basic SELECT query, the part after SELECT chooses which columns to show. The `*` symbol is shorthand for every column in the table.",
+                "hint_1": "Compare `SELECT name FROM students;` with `SELECT * FROM students;` and think about how many columns each returns.",
+                "hint_2": "The star does not mean one row or one table. It means the full set of columns from `students`."
               },
               "options": {
-                "a": "To delete data from a table",
-                "b": "To retrieve data from a table",
-                "c": "To update data in a table",
-                "d": "To insert data into a table"
+                "a": "Show all columns from the students table",
+                "b": "Show only the first row from the students table",
+                "c": "Delete all rows from the students table",
+                "d": "Sort the students table automatically"
               }
             },
-            "quiz2": {
-              "title": "Components of a SQL Query",
-              "prompt": "Which of the following are components of a basic SQL query?",
+            "sc_2": {
+              "title": "Which part names the table",
+              "prompt": "In `SELECT name FROM students;`, which part tells SQL which table to read?",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -57,15 +60,47 @@
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "`SELECT`",
-                "b": "`FROM`",
-                "c": "`WHERE`",
-                "d": "`INSERT`"
+                "a": "SELECT",
+                "b": "name",
+                "c": "FROM",
+                "d": ";"
               }
             },
-            "quiz3": {
-              "title": "Ordering a Simple SQL Query",
-              "prompt": "Arrange the components of a SQL query in the correct order.",
+            "mc_1": {
+              "title": "Valid first-query examples",
+              "prompt": "Which queries are valid beginner queries for this topic? Choose all that apply.",
+              "hint": "Use only SELECT and FROM with the real `students` table.",
+              "help": {
+                "concept": "In this module stage, valid starter queries read data with SELECT and FROM from the existing `students` table. They should use real column names from the dataset.",
+                "hint_1": "Check whether each option uses the actual table name `students` and real columns like `name`, `grade`, `age`, `city`, or `id`.",
+                "hint_2": "Reject options that use a missing table name or a keyword from later topics instead of a simple read query."
+              },
+              "options": {
+                "a": "SELECT * FROM students;",
+                "b": "SELECT name, city FROM students;",
+                "c": "SELECT * FROM student;",
+                "d": "DELETE FROM students;"
+              }
+            },
+            "mc_2": {
+              "title": "What changes the results table",
+              "prompt": "You run `SELECT name FROM students;` and then `SELECT name, city FROM students;`. Which statements are true? Choose all that apply.",
+              "hint": "Think about columns versus rows in the same table.",
+              "help": {
+                "concept": "Changing the column list after SELECT changes which columns appear in the results. Without filtering, the query still reads all rows from the same table.",
+                "hint_1": "The second query asks for one extra column, but it still uses `FROM students`.",
+                "hint_2": "Ask yourself whether adding `city` changes the table source or mainly changes the visible columns."
+              },
+              "options": {
+                "a": "The second query shows more columns than the first query",
+                "b": "Both queries read from the students table",
+                "c": "The first query changes student data in the table",
+                "d": "The second query must return only one row"
+              }
+            },
+            "dr_1": {
+              "title": "Build a basic query",
+              "prompt": "Put these tokens in order to make a valid query that shows all columns from the students table.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -73,126 +108,94 @@
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "`SELECT`",
-                "t2": "`FROM`",
-                "t3": "`students`",
-                "t4": "`*`"
+                "t1": "students",
+                "t2": ";",
+                "t3": "FROM",
+                "t4": "SELECT",
+                "t5": "*"
               }
             },
-            "quiz4": {
-              "title": "Completing a SQL Query",
-              "prompt": "Fill in the blank to complete the SQL query: `SELECT * [blank1] students;`",
-              "hint": "Think about how you specify the source table in a query.",
+            "dr_2": {
+              "title": "Order the workspace steps",
+              "prompt": "Arrange the steps for running your first query in the browser workspace.",
+              "hint": "Start in the SQL editor and finish by checking what appeared.",
               "help": {
-                "concept": "The `the missing term` clause specifies the table the missing term which to retrieve data.",
-                "hint_1": "The `the missing term` clause follows `SELECT` to indicate the table.",
-                "hint_2": "Use `the missing term` to specify the table in a query."
+                "concept": "Running a query in the ZoeSkoul browser workspace follows a visible sequence: write the query, run it, then inspect the returned data.",
+                "hint_1": "You cannot check results before clicking the button that executes the query.",
+                "hint_2": "The first action happens in the SQL editor, and the last action happens in the results table."
               },
-              "template": "SELECT * [blank1] students;",
+              "tokens": {
+                "t1": "Check the results table",
+                "t2": "Write the query in the SQL editor",
+                "t3": "Click Run query"
+              }
+            },
+            "fb_1": {
+              "title": "Complete the table name",
+              "prompt": "Fill in the missing table name to show all columns from the students table.",
+              "hint": "Use the real table name from the schema.",
+              "help": {
+                "concept": "The FROM clause must name the exact table that exists in the dataset. In this topic, the table is called `the missing term`.",
+                "hint_1": "Look at the schema browser or the examples in the lesson for the table name.",
+                "hint_2": "The correct choice is the plural table name used throughout the topic."
+              },
+              "template": "SELECT * FROM [blank1];",
               "choices": [
-                "FROM",
-                "WHERE",
-                "INSERT",
-                "UPDATE"
+                "students",
+                "student",
+                "names",
+                "grades"
               ]
             },
-            "quiz5": {
-              "title": "Writing Your First SQL Query",
-              "prompt": "Write a SQL query to select all columns from the `students` table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "fb_2": {
+              "title": "Complete the keyword",
+              "prompt": "Fill in the missing keyword to make a valid query.",
+              "hint": "This keyword comes before the table name.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "-- Write your SQL query below"
-            },
-            "quiz6": {
-              "title": "Selecting Specific Columns",
-              "prompt": "Write a SQL query to select the `name` and `grade` columns from the `students` table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "-- Write your SQL query below"
-            },
-            "quiz7": {
-              "title": "Exploring the Students Table",
-              "prompt": "Write a SQL query to select the `age` and `city` columns from the `students` table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "-- Write your SQL query below"
-            },
-            "quiz8": {
-              "title": "Understanding SQL Syntax",
-              "prompt": "Which keyword is used to specify the table in a SQL query?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare each option to the exact topic named in the question.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "options": {
-                "a": "SELECT",
-                "b": "FROM",
-                "c": "WHERE",
-                "d": "INSERT"
-              }
-            },
-            "quiz9": {
-              "title": "SQL Query Keywords",
-              "prompt": "Which of the following are valid SQL keywords?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare each option to the exact topic named in the question.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "options": {
-                "a": "SELECT",
-                "b": "FROM",
-                "c": "UPDATE",
-                "d": "DELETE"
-              }
-            },
-            "quiz10": {
-              "title": "Constructing a SQL Query",
-              "prompt": "Arrange the components to form a valid SQL query.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "`FROM`",
-                "t2": "`students`",
-                "t3": "`SELECT`",
-                "t4": "`name`"
-              }
-            },
-            "quiz11": {
-              "title": "SQL Query Completion",
-              "prompt": "Complete the SQL query: `SELECT name [blank1] students;`",
-              "hint": "Think about how you specify the source table in a query.",
-              "help": {
-                "concept": "The `the missing term` clause specifies the table the missing term which to retrieve data.",
-                "hint_1": "The `the missing term` clause follows `SELECT` to indicate the table.",
-                "hint_2": "Use `the missing term` to specify the table in a query."
+                "concept": "A basic SQL query uses `SELECT` to choose columns and `the missing term` to name the table that the data comes the missing term.",
+                "hint_1": "The missing word is not a column name like `name` or `city`.",
+                "hint_2": "It is the keyword that introduces `students` in a simple read query."
               },
               "template": "SELECT name [blank1] students;",
               "choices": [
                 "FROM",
-                "WHERE",
-                "INSERT",
-                "UPDATE"
+                "SELECT",
+                "TABLE",
+                "SHOW"
               ]
+            },
+            "ci_1": {
+              "title": "Show every column and row",
+              "prompt": "Write a query that shows all columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Show all columns from the students table\nSELECT \nFROM students;"
+            },
+            "ci_2": {
+              "title": "Show only student names",
+              "prompt": "Write a query that returns only the `name` column from the `students` table. Use the SQL editor, click Run query, and check that the results table has one column.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Return one column from students\nSELECT \nFROM students;"
+            },
+            "ci_3": {
+              "title": "Show names and cities",
+              "prompt": "Write a query that returns the `name` and `city` columns from the `students` table. Write the query in the SQL editor, click Run query, and check the two-column results table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Return two columns from students\nSELECT \nFROM students;"
             }
           }
         }
@@ -203,13 +206,17 @@
     "sql-v2": {
       "sql-v2-0": {
         "running_your_first_query": {
-          "sketch1": {
-            "title": "Introduction to SQL Queries",
-            "bodyMarkdown": "SQL (Structured Query Language) is used to communicate with databases. The most basic SQL command is the `SELECT` statement, which retrieves data from a database. For example, to get all the data from a table named `students`, you would write:\n\n```\nSELECT * FROM students;\n```\n\nThis command tells the database to select all columns (`*`) from the `students` table. Try it yourself by writing this query in the SQL editor and clicking 'Run query'."
+          "sketch_1": {
+            "title": "What a first SQL query does",
+            "bodyMarkdown": "Your first SQL query usually answers a simple question: **show me data from a table**.\n\nIn this topic, the table is `students`. A table is like a grid with columns and rows:\n\n- columns: `id`, `name`, `grade`, `age`, `city`\n- rows: one student per row\n\nA beginner query often starts with two parts:\n\n```sql\nSELECT *\nFROM students;\n```\n\nWhat each line means:\n\n- `SELECT *` means \"show all columns\"\n- `FROM students` means \"get the data from the `students` table\"\n- `;` marks the end of the query\n\nIf you run this query, the results table will show every row in `students`, including Noor, Mia, Leo, Ava, and Zane.\n\nWorked example:\n\n```sql\nSELECT name\nFROM students;\n```\n\nThis query asks for just one column: `name`.\n\nSo instead of seeing all five columns, you would only see a single-column results table with the student names.\n\nTry it yourself: write `SELECT * FROM students;` in the SQL editor, click **Run query**, and compare it with `SELECT name FROM students;`."
           },
-          "sketch2": {
-            "title": "Understanding the SELECT Statement",
-            "bodyMarkdown": "The `SELECT` statement is the foundation of SQL queries. It allows you to specify which columns you want to retrieve. For instance, if you only want to see the names and grades of students, you would write:\n\n```\nSELECT name, grade FROM students;\n```\n\nThis query selects only the `name` and `grade` columns from the `students` table. Try modifying the query to include the `age` column as well."
+          "sketch_2": {
+            "title": "Reading SELECT and FROM together",
+            "bodyMarkdown": "A good way to read a SQL query is from top to bottom in plain language.\n\nExample:\n\n```sql\nSELECT grade, city\nFROM students;\n```\n\nRead it like this:\n\n- `SELECT grade, city` → show the `grade` and `city` columns\n- `FROM students` → use the `students` table\n\nThat means the results table will have **two columns**:\n\n- `grade`\n- `city`\n\nAnd it will still include one row for each student in the table.\n\nWorked example with the real dataset:\n\nFrom the `students` table, one row is:\n\n- `Mia`, grade `A`, age `14`, city `Evanston`\n\nIf you run:\n\n```sql\nSELECT name, city\nFROM students;\n```\n\none result row for Mia would look like:\n\n- `Mia | Evanston`\n\nYour turn: change the column list in the SQL editor. Try `name, grade` and then `id, name, city`. Click **Run query** each time and notice how the results table changes."
+          },
+          "sketch_3": {
+            "title": "Using the browser SQL runner",
+            "bodyMarkdown": "In ZoeSkoul, all of your work for this topic happens in the browser workspace.\n\nThe basic workflow is:\n\n1. Write the query in the **SQL editor**.\n2. Click **Run query**.\n3. Check the **results table** in the results panel.\n\nExample query:\n\n```sql\nSELECT id, name\nFROM students;\n```\n\nStep by step:\n\n- `SELECT id, name` asks for two columns\n- `FROM students` tells SQL which table to read\n- after you click **Run query**, the results table should show student ids next to student names\n\nIf the query is valid, you will see data. If something is misspelled, the workspace feedback will help you fix it.\n\nTry this: run the query above, then change `id, name` to `name, city`. Click **Run query** again and check how the results table updates."
           }
         }
       }

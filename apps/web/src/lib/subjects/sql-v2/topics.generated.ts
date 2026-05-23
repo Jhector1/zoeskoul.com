@@ -57,6 +57,38 @@ import notEqualComparisonJson from "./modules/module2/topics/not_equal_compariso
 import orConditionsJson from "./modules/module2/topics/or_conditions/topic.bundle.json";
 import theWhereClauseJson from "./modules/module2/topics/the_where_clause/topic.bundle.json";
 import whyFilteringMattersJson from "./modules/module2/topics/why_filtering_matters/topic.bundle.json";
+import ascendingOrderJson from "./modules/module3/topics/ascending_order/topic.bundle.json";
+import buildClearResultSetsJson from "./modules/module3/topics/build_clear_result_sets/topic.bundle.json";
+import combiningOrderByWithLimitJson from "./modules/module3/topics/combining_order_by_with_limit/topic.bundle.json";
+import descendingOrderJson from "./modules/module3/topics/descending_order/topic.bundle.json";
+import findHighestValuesJson from "./modules/module3/topics/find_highest_values/topic.bundle.json";
+import findLowestValuesJson from "./modules/module3/topics/find_lowest_values/topic.bundle.json";
+import limitClauseJson from "./modules/module3/topics/limit_clause/topic.bundle.json";
+import orderByJson from "./modules/module3/topics/order_by/topic.bundle.json";
+import primarySortJson from "./modules/module3/topics/primary_sort/topic.bundle.json";
+import secondarySortJson from "./modules/module3/topics/secondary_sort/topic.bundle.json";
+import showTop5RecordsJson from "./modules/module3/topics/show_top_5_records/topic.bundle.json";
+import sortingNumbersAndDatesJson from "./modules/module3/topics/sorting_numbers_and_dates/topic.bundle.json";
+import sortingTextJson from "./modules/module3/topics/sorting_text/topic.bundle.json";
+import topRowsOnlyJson from "./modules/module3/topics/top_rows_only/topic.bundle.json";
+import whyLimitResultsJson from "./modules/module3/topics/why_limit_results/topic.bundle.json";
+import whySortingMattersJson from "./modules/module3/topics/why_sorting_matters/topic.bundle.json";
+import betweenRangeFilterJson from "./modules/module4/topics/between_range_filter/topic.bundle.json";
+import combineTextAndNullFiltersJson from "./modules/module4/topics/combine_text_and_null_filters/topic.bundle.json";
+import commonNullMistakesJson from "./modules/module4/topics/common_null_mistakes/topic.bundle.json";
+import filterStatusesJson from "./modules/module4/topics/filter_statuses/topic.bundle.json";
+import findMissingDataJson from "./modules/module4/topics/find_missing_data/topic.bundle.json";
+import inListFilterJson from "./modules/module4/topics/in_list_filter/topic.bundle.json";
+import introToLikeJson from "./modules/module4/topics/intro_to_like/topic.bundle.json";
+import isNotNullJson from "./modules/module4/topics/is_not_null/topic.bundle.json";
+import isNullJson from "./modules/module4/topics/is_null/topic.bundle.json";
+import notInListFilterJson from "./modules/module4/topics/not_in_list_filter/topic.bundle.json";
+import percentWildcardJson from "./modules/module4/topics/percent_wildcard/topic.bundle.json";
+import rangeFilteringPracticeJson from "./modules/module4/topics/range_filtering_practice/topic.bundle.json";
+import searchNamesJson from "./modules/module4/topics/search_names/topic.bundle.json";
+import searchingPartialTextJson from "./modules/module4/topics/searching_partial_text/topic.bundle.json";
+import underscoreWildcardJson from "./modules/module4/topics/underscore_wildcard/topic.bundle.json";
+import whatNullMeansJson from "./modules/module4/topics/what_null_means/topic.bundle.json";
 
 
 const howDataIsOrganized = howDataIsOrganizedJson as SlimTopicManifest;
@@ -109,6 +141,38 @@ const notEqualComparison = notEqualComparisonJson as SlimTopicManifest;
 const orConditions = orConditionsJson as SlimTopicManifest;
 const theWhereClause = theWhereClauseJson as SlimTopicManifest;
 const whyFilteringMatters = whyFilteringMattersJson as SlimTopicManifest;
+const ascendingOrder = ascendingOrderJson as SlimTopicManifest;
+const buildClearResultSets = buildClearResultSetsJson as SlimTopicManifest;
+const combiningOrderByWithLimit = combiningOrderByWithLimitJson as SlimTopicManifest;
+const descendingOrder = descendingOrderJson as SlimTopicManifest;
+const findHighestValues = findHighestValuesJson as SlimTopicManifest;
+const findLowestValues = findLowestValuesJson as SlimTopicManifest;
+const limitClause = limitClauseJson as SlimTopicManifest;
+const orderBy = orderByJson as SlimTopicManifest;
+const primarySort = primarySortJson as SlimTopicManifest;
+const secondarySort = secondarySortJson as SlimTopicManifest;
+const showTop5Records = showTop5RecordsJson as SlimTopicManifest;
+const sortingNumbersAndDates = sortingNumbersAndDatesJson as SlimTopicManifest;
+const sortingText = sortingTextJson as SlimTopicManifest;
+const topRowsOnly = topRowsOnlyJson as SlimTopicManifest;
+const whyLimitResults = whyLimitResultsJson as SlimTopicManifest;
+const whySortingMatters = whySortingMattersJson as SlimTopicManifest;
+const betweenRangeFilter = betweenRangeFilterJson as SlimTopicManifest;
+const combineTextAndNullFilters = combineTextAndNullFiltersJson as SlimTopicManifest;
+const commonNullMistakes = commonNullMistakesJson as SlimTopicManifest;
+const filterStatuses = filterStatusesJson as SlimTopicManifest;
+const findMissingData = findMissingDataJson as SlimTopicManifest;
+const inListFilter = inListFilterJson as SlimTopicManifest;
+const introToLike = introToLikeJson as SlimTopicManifest;
+const isNotNull = isNotNullJson as SlimTopicManifest;
+const isNull = isNullJson as SlimTopicManifest;
+const notInListFilter = notInListFilterJson as SlimTopicManifest;
+const percentWildcard = percentWildcardJson as SlimTopicManifest;
+const rangeFilteringPractice = rangeFilteringPracticeJson as SlimTopicManifest;
+const searchNames = searchNamesJson as SlimTopicManifest;
+const searchingPartialText = searchingPartialTextJson as SlimTopicManifest;
+const underscoreWildcard = underscoreWildcardJson as SlimTopicManifest;
+const whatNullMeans = whatNullMeansJson as SlimTopicManifest;
 
 export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "how_data_is_organized": howDataIsOrganized,
@@ -161,4 +225,36 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "or_conditions": orConditions,
   "the_where_clause": theWhereClause,
   "why_filtering_matters": whyFilteringMatters,
+  "ascending_order": ascendingOrder,
+  "build_clear_result_sets": buildClearResultSets,
+  "combining_order_by_with_limit": combiningOrderByWithLimit,
+  "descending_order": descendingOrder,
+  "find_highest_values": findHighestValues,
+  "find_lowest_values": findLowestValues,
+  "limit_clause": limitClause,
+  "order_by": orderBy,
+  "primary_sort": primarySort,
+  "secondary_sort": secondarySort,
+  "show_top_5_records": showTop5Records,
+  "sorting_numbers_and_dates": sortingNumbersAndDates,
+  "sorting_text": sortingText,
+  "top_rows_only": topRowsOnly,
+  "why_limit_results": whyLimitResults,
+  "why_sorting_matters": whySortingMatters,
+  "between_range_filter": betweenRangeFilter,
+  "combine_text_and_null_filters": combineTextAndNullFilters,
+  "common_null_mistakes": commonNullMistakes,
+  "filter_statuses": filterStatuses,
+  "find_missing_data": findMissingData,
+  "in_list_filter": inListFilter,
+  "intro_to_like": introToLike,
+  "is_not_null": isNotNull,
+  "is_null": isNull,
+  "not_in_list_filter": notInListFilter,
+  "percent_wildcard": percentWildcard,
+  "range_filtering_practice": rangeFilteringPractice,
+  "search_names": searchNames,
+  "searching_partial_text": searchingPartialText,
+  "underscore_wildcard": underscoreWildcard,
+  "what_null_means": whatNullMeans,
 };

@@ -1,0 +1,350 @@
+{
+  "topicId": "find_lowest_values",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-3",
+  "sectionSlug": "sql-v2-3-4",
+  "prefix": "sqlv2_3",
+  "minutes": 15,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "products_catalog",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-3.find_lowest_values.label",
+    "summaryKey": "topics.sql-v2.sql-v2-3.find_lowest_values.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-3.find_lowest_values.cards.sketch0.title",
+      "sketchId": "sketch_lowest_values_intro",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-3.find_lowest_values.cards.sketch1.title",
+      "sketchId": "sketch_lowest_values_limit",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-3.find_lowest_values.cards.sketch2.title",
+      "sketchId": "sketch_lowest_values_where",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-3.find_lowest_values.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql-v2.sql-v2-3.find_lowest_values.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_cheapest_product",
+            "titleKey": "topics.sql-v2.sql-v2-3.find_lowest_values.projectSteps.ci_cheapest_product.title",
+            "exerciseKey": "ci_cheapest_product",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_lowest_stock_two",
+            "titleKey": "topics.sql-v2.sql-v2-3.find_lowest_values.projectSteps.ci_lowest_stock_two.title",
+            "exerciseKey": "ci_lowest_stock_two",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_cheapest_home_product",
+            "titleKey": "topics.sql-v2.sql-v2-3.find_lowest_values.projectSteps.ci_cheapest_home_product.title",
+            "exerciseKey": "ci_cheapest_home_product",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_lowest_values_intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-3.find_lowest_values.sketch_lowest_values_intro.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-3.find_lowest_values.sketch_lowest_values_intro.bodyMarkdown"
+    },
+    {
+      "id": "sketch_lowest_values_limit",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-3.find_lowest_values.sketch_lowest_values_limit.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-3.find_lowest_values.sketch_lowest_values_limit.bodyMarkdown"
+    },
+    {
+      "id": "sketch_lowest_values_where",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-3.find_lowest_values.sketch_lowest_values_where.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-3.find_lowest_values.sketch_lowest_values_where.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc_lowest_asc_price",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.find_lowest_values.quiz.sc_lowest_asc_price",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc_limit_after_sort",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.find_lowest_values.quiz.sc_limit_after_sort",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc_lowest_query_parts",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.find_lowest_values.quiz.mc_lowest_query_parts",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "mc_true_lowest_statements",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.find_lowest_values.quiz.mc_true_lowest_statements",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr_query_order_lowest",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.find_lowest_values.quiz.dr_query_order_lowest",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
+      }
+    },
+    {
+      "id": "dr_logic_lowest_steps",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.find_lowest_values.quiz.dr_logic_lowest_steps",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fb_lowest_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.find_lowest_values.quiz.fb_lowest_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "ASC"
+      }
+    },
+    {
+      "id": "fb_limit_lowest_two",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.find_lowest_values.quiz.fb_limit_lowest_two",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "2"
+      }
+    },
+    {
+      "id": "ci_cheapest_product",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.find_lowest_values.quiz.ci_cheapest_product",
+      "language": "sql",
+      "starterCode": "SELECT name, price\nFROM products\n-- add sorting and a row limit here\n;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price ASC\nLIMIT 1;"
+      }
+    },
+    {
+      "id": "ci_lowest_stock_two",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.find_lowest_values.quiz.ci_lowest_stock_two",
+      "language": "sql",
+      "starterCode": "SELECT name, stock\nFROM products\n-- sort by stock and keep the first two rows\n;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock ASC\nLIMIT 2;"
+      }
+    },
+    {
+      "id": "ci_cheapest_home_product",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.find_lowest_values.quiz.ci_cheapest_home_product",
+      "language": "sql",
+      "starterCode": "SELECT name, price\nFROM products\nWHERE category = 'Home'\n-- add sorting and a row limit here\n;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price\nFROM products\nWHERE category = 'Home'\nORDER BY price ASC\nLIMIT 1;"
+      }
+    }
+  ]
+}

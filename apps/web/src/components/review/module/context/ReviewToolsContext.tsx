@@ -14,6 +14,7 @@ import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
+import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import type {
   UnknownRecord,
   WorkspaceOrigin,
@@ -57,6 +58,7 @@ type CodeInputPatch = UnknownRecord & {
   sqlSchemaSql?: string;
   sqlSeedSql?: string;
   sqlInitialTableSnapshots?: SqlTableSnapshots;
+  sqlPaneOptions?: SqlPaneOptions;
 };
 
 export type RegisterArgs = {
@@ -76,6 +78,7 @@ export type RegisterArgs = {
   sqlSchemaSql?: string;
   sqlSeedSql?: string;
   sqlInitialTableSnapshots?: SqlTableSnapshots;
+  sqlPaneOptions?: SqlPaneOptions;
 
   onPatch: (patch: CodeInputPatch) => void;
 };
@@ -169,6 +172,7 @@ function registerArgsKey(args: RegisterArgs | undefined) {
     sqlSchemaSql: args.sqlSchemaSql ?? null,
     sqlSeedSql: args.sqlSeedSql ?? null,
     sqlInitialTableSnapshots: args.sqlInitialTableSnapshots ?? null,
+    sqlPaneOptions: args.sqlPaneOptions ?? null,
   });
 }
 
@@ -531,6 +535,10 @@ export function ReviewToolsProvider({
                     typeof patch.sqlInitialTableSnapshots === "object"
                         ? patch.sqlInitialTableSnapshots
                         : cur.sqlInitialTableSnapshots,
+                sqlPaneOptions:
+                    patch?.sqlPaneOptions && typeof patch.sqlPaneOptions === "object"
+                        ? patch.sqlPaneOptions
+                        : cur.sqlPaneOptions,
             };
 
             registryRef.current.set(id, next);
@@ -775,6 +783,9 @@ export function ReviewToolsProvider({
                     sqlInitialTableSnapshots:
                         normalizedArgs.sqlInitialTableSnapshots ??
                         prev.sqlInitialTableSnapshots,
+                    sqlPaneOptions:
+                        normalizedArgs.sqlPaneOptions ??
+                        prev.sqlPaneOptions,
 
                     /**
                      * Important: keep the latest onPatch closure from the current

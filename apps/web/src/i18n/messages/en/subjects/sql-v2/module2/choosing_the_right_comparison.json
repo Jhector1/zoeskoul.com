@@ -4,99 +4,116 @@
       "sql-v2-2": {
         "choosing_the_right_comparison": {
           "label": "Choosing the Right Comparison",
-          "summary": "Learn how to use comparison operators effectively in SQL queries to filter data.",
+          "summary": "Learn how to pick the right comparison operator in a WHERE clause so your query keeps exactly the rows you want.",
           "cards": {
             "sketch0": {
-              "title": "Introduction to Comparison Operators"
+              "title": "Match the operator to the question"
             },
             "sketch1": {
-              "title": "Using the WHERE Clause"
+              "title": "Use exact matches for text values"
+            },
+            "sketch2": {
+              "title": "Watch out for boundary values"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Filtering Project"
+              "title": "Comparison Operator Practice Queries"
             }
           },
           "projectSteps": {
-            "code_input_1": {
-              "title": "Filter Products by Category"
+            "ci_price_greater_than": {
+              "title": "Query products priced above 20"
             },
-            "code_input_2": {
-              "title": "Find Products with Low Stock"
+            "ci_stock_at_most_10": {
+              "title": "Query products with low stock"
             },
-            "code_input_3": {
-              "title": "Products Priced Above a Certain Amount"
+            "ci_not_home_category": {
+              "title": "Query products outside one category"
             }
           },
           "quiz": {
-            "single_choice_1": {
-              "title": "Understanding Comparison Operators",
-              "prompt": "Which of the following operators is used to check if two values are not equal in SQL?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "sc_equal_text_category": {
+              "title": "Pick the exact-match operator",
+              "prompt": "Which operator should you use in `WHERE category ___ 'Art'` to keep only rows whose category is exactly `Art`?",
+              "hint": "Use the operator for an exact text match.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "In SQL, text equality uses the same equality operator used for exact numeric matches.",
+                "hint_1": "You want rows where the category value matches `Art` exactly, not rows greater than or less than it.",
+                "hint_2": "Look for the operator that means 'is exactly the same as'."
               },
               "options": {
                 "a": "=",
-                "b": "<>",
-                "c": "><"
+                "b": ">",
+                "c": "<="
               }
             },
-            "single_choice_2": {
-              "title": "Filtering with WHERE",
-              "prompt": "What does the following SQL query do?\n\n```sql\nSELECT * FROM products WHERE stock < 10;\n```",
-              "hint": "Focus on the condition specified in the WHERE clause.",
+            "sc_boundary_inclusive_stock": {
+              "title": "Choose an inclusive comparison",
+              "prompt": "You want products with stock of 10 or more. Which condition is correct?",
+              "hint": "The phrase 'or more' includes the boundary value 10.",
               "help": {
-                "concept": "The query filters products where the stock is less than 10.",
-                "hint_1": "The `<` operator is used to find values less than a specified number.",
-                "hint_2": "The query selects products with stock numbers below 10."
+                "concept": "Inclusive comparisons keep the boundary number itself, while strict comparisons exclude it.",
+                "hint_1": "A product with stock exactly 10 should stay in the results.",
+                "hint_2": "Choose the operator that means 'greater than or equal to'."
               },
               "options": {
-                "a": "Selects all products with stock greater than 10.",
-                "b": "Selects all products with stock less than 10.",
-                "c": "Selects all products with stock equal to 10.",
-                "d": "Selects all products."
+                "a": "stock > 10",
+                "b": "stock >= 10",
+                "c": "stock < 10",
+                "d": "stock != 10"
               }
             },
-            "multi_choice_1": {
-              "title": "Multiple Conditions with AND",
-              "prompt": "Which of the following queries will select products that are in the 'Art' category and have a price less than $20? Choose all that apply.",
-              "hint": "Look for queries that use AND to combine conditions.",
+            "mc_conditions_price_over_20": {
+              "title": "Find all conditions that work",
+              "prompt": "Choose all conditions that would keep products priced above 20.",
+              "hint": "Check which conditions include values like 24.50 and 39.99 but not 18.00.",
               "help": {
-                "concept": "Using `AND` combines conditions that must both be true.",
-                "hint_1": "The `AND` operator requires both conditions to be satisfied.",
-                "hint_2": "Only queries with `AND` and a price condition less than or equal to 20 are correct."
+                "concept": "Different comparison expressions can describe the same set of rows, but only if they filter the same values.",
+                "hint_1": "Test each option against a price like 24.50 and another like 18.00.",
+                "hint_2": "More than one option works here, but any option that includes 20 exactly or excludes 24.50 is not correct."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE category = 'Art' AND price < 20;",
-                "b": "SELECT * FROM products WHERE category = 'Art' OR price < 20;",
-                "c": "SELECT * FROM products WHERE category = 'Art' AND price <= 20;",
-                "d": "SELECT * FROM products WHERE category = 'Art' AND price > 20;"
+                "a": "price > 20",
+                "b": "NOT price <= 20",
+                "c": "price >= 20",
+                "d": "price < 20"
               }
             },
-            "multi_choice_2": {
-              "title": "Using OR in Queries",
-              "prompt": "Which queries will select products that are either in the 'Stationery' category or have a stock greater than 20? Choose all that apply.",
-              "hint": "Focus on the use of the OR operator.",
+            "mc_not_art_category": {
+              "title": "Spot equivalent not-equal filters",
+              "prompt": "Choose all conditions that keep rows where the category is not `Art`.",
+              "hint": "You want every row except the ones whose category is exactly `Art`.",
               "help": {
-                "concept": "The `OR` operator allows either condition to be true.",
-                "hint_1": "Queries with `OR` allow for either condition to be satisfied.",
-                "hint_2": "Look for queries that use `OR` and have a stock condition greater than 20."
+                "concept": "A not-equal comparison and a NOT-wrapped equality comparison can describe the same filter.",
+                "hint_1": "Compare `!=` with using `NOT` around an equality check.",
+                "hint_2": "Any option that keeps only `Art` is wrong, and any option that excludes only non-Art rows is also wrong."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE category = 'Stationery' OR stock > 20;",
-                "b": "SELECT * FROM products WHERE category = 'Stationery' AND stock > 20;",
-                "c": "SELECT * FROM products WHERE category = 'Stationery' OR stock <= 20;",
-                "d": "SELECT * FROM products WHERE category = 'Stationery' OR stock > 10;"
+                "a": "category != 'Art'",
+                "b": "NOT category = 'Art'",
+                "c": "category >= 'Art'"
               }
             },
-            "drag_reorder_1": {
-              "title": "Order of SQL Query Execution",
-              "prompt": "Arrange the following SQL clauses in the correct order of execution.",
+            "dr_build_price_filter_query": {
+              "title": "Order a price filter query",
+              "prompt": "Arrange the tokens to build a query that shows product names for items cheaper than 15.",
+              "hint": "Start with SELECT, then name the table, then add the WHERE condition.",
+              "help": {
+                "concept": "A basic filtered query follows the order SELECT, FROM, and then WHERE with a comparison.",
+                "hint_1": "The column list comes right after SELECT, and the table name comes right after FROM.",
+                "hint_2": "The comparison should place the column before the operator and the number after it."
+              },
+              "tokens": {
+                "t1": "SELECT name",
+                "t2": "FROM products",
+                "t3": "WHERE price < 15"
+              }
+            },
+            "dr_build_exact_category_query": {
+              "title": "Order an exact text match query",
+              "prompt": "Arrange the tokens to build a query that shows names and stock for Stationery products.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -104,94 +121,77 @@
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "SELECT",
-                "t2": "FROM",
-                "t3": "WHERE",
-                "t4": "ORDER BY"
+                "t1": "SELECT name, stock",
+                "t2": "FROM products",
+                "t3": "WHERE category = 'Stationery'"
               }
             },
-            "drag_reorder_2": {
-              "title": "SQL Query Structure",
-              "prompt": "Arrange the following parts of a SQL query in the correct order.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+            "fb_less_than_operator": {
+              "title": "Fill the operator for lower prices",
+              "prompt": "Complete the condition so it keeps products priced below 20.",
+              "hint": "You need the operator for values smaller than 20.",
               "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "concept": "A strict lower-bound comparison keeps only values under the target number, not equal to it.",
+                "hint_1": "If a product costs 18.00, it should stay. If it costs 20.00, it should not.",
+                "hint_2": "Choose the symbol that means 'less than'."
               },
-              "tokens": {
-                "t1": "WHERE",
-                "t2": "SELECT",
-                "t3": "ORDER BY",
-                "t4": "FROM"
-              }
-            },
-            "fill_blank_choice_1": {
-              "title": "Using BETWEEN",
-              "prompt": "Complete the SQL query to select products with a price between $10 and $30.\n\n```sql\nSELECT * FROM products WHERE price [blank1] 10 AND 30;\n```",
-              "hint": "the missing term is used for range conditions.",
-              "help": {
-                "concept": "the missing term is used to specify a range of values.",
-                "hint_1": "the missing term is the correct keyword for specifying a range.",
-                "hint_2": "the missing term is used with two values to define a range."
-              },
-              "template": "SELECT * FROM products WHERE price [blank1] 10 AND 30;",
+              "template": "WHERE price [blank1] 20",
               "choices": [
-                "BETWEEN",
-                "IN",
-                "LIKE",
-                "IS"
-              ]
-            },
-            "fill_blank_choice_2": {
-              "title": "Checking for NULL",
-              "prompt": "Complete the SQL query to find products with no category assigned.\n\n```sql\nSELECT * FROM products WHERE category [blank1] NULL;\n```",
-              "hint": "Focus on the missing concept rather than the exact missing term.",
-              "help": {
-                "concept": "The blank should be completed with the term that fits the job being described.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "template": "SELECT * FROM products WHERE category [blank1] NULL;",
-              "choices": [
-                "IS",
+                "<",
+                ">",
                 "=",
-                "LIKE",
-                "BETWEEN"
+                ">="
               ]
             },
-            "code_input_1": {
-              "title": "Filter Products by Category",
-              "prompt": "Write a SQL query to select all products in the 'Home' category.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "fb_not_equal_operator": {
+              "title": "Fill the operator for not equal",
+              "prompt": "Complete the condition so it excludes products in the Home category.",
+              "hint": "You want rows whose category is anything except `Home`.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "The not-equal operator removes rows that match a specific value and keeps the rest.",
+                "hint_1": "Rows with category `Home` should be filtered out, while `Art` and `Stationery` should remain.",
+                "hint_2": "Choose the operator that means 'is not the same as'."
               },
-              "starterCode": "-- Write your SQL query here"
+              "template": "WHERE category [blank1] 'Home'",
+              "choices": [
+                "=",
+                "!=",
+                "<",
+                ">="
+              ]
             },
-            "code_input_2": {
-              "title": "Find Products with Low Stock",
-              "prompt": "Write a SQL query to select products with stock less than 5.",
+            "ci_price_greater_than": {
+              "title": "Query products priced above 20",
+              "prompt": "Write a query that shows the `name` and `price` columns for products with a price greater than 20. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT \n  name,\n  price\nFROM products\nWHERE ;"
             },
-            "code_input_3": {
-              "title": "Products Priced Above a Certain Amount",
-              "prompt": "Write a SQL query to select products with a price greater than $50.",
+            "ci_stock_at_most_10": {
+              "title": "Query products with low stock",
+              "prompt": "Write a query that shows the `name` and `stock` columns for products with stock less than or equal to 10. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT \n  name,\n  stock\nFROM products\nWHERE ;"
+            },
+            "ci_not_home_category": {
+              "title": "Query products outside one category",
+              "prompt": "Write a query that shows the `name` and `category` columns for products whose category is not `Home`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "SELECT \n  name,\n  category\nFROM products\nWHERE ;"
             }
           }
         }
@@ -202,13 +202,17 @@
     "sql-v2": {
       "sql-v2-2": {
         "choosing_the_right_comparison": {
-          "sketch1": {
-            "title": "Introduction to Comparison Operators",
-            "bodyMarkdown": "Comparison operators in SQL are used to filter data based on specific conditions. Common operators include `=`, `!=`, `<`, `>`, `<=`, and `>=`. For example, if you want to find products with a price greater than $20, you would use:\n\n```sql\nSELECT * FROM products WHERE price > 20;\n```\n\nThis query selects all columns from the `products` table where the `price` is greater than 20. Try it yourself by modifying the price value to see different results."
+          "sketch_compare_numbers": {
+            "title": "Match the operator to the question",
+            "bodyMarkdown": "A `WHERE` clause filters rows, and the comparison operator decides **how** the filtering works.\n\nCommon comparison operators:\n\n- `=` means exactly equal to\n- `>` means greater than\n- `<` means less than\n- `>=` means greater than or equal to\n- `<=` means less than or equal to\n- `!=` means not equal to\n\nHere is a worked example using the `products` table:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price > 20;\n```\n\nStep by step:\n\n1. `SELECT name, price` chooses the columns to show.\n2. `FROM products` says which table to read.\n3. `WHERE price > 20` keeps only rows where the price is more than 20.\n\nWith this dataset, that includes products like `Acrylic Paint Set`, `Desk Lamp`, and `Office Chair`.\n\nIf you changed the operator to `price >= 20`, it would also include any product priced exactly 20.00.\n\n**Try it yourself:** Write the query in the SQL editor, click **Run query**, and then change `>` to `>=` to see how the results table could change."
           },
-          "sketch2": {
-            "title": "Using the WHERE Clause",
-            "bodyMarkdown": "The `WHERE` clause is essential for filtering records in a SQL query. It allows you to specify conditions that the data must meet to be included in the results. For instance, to find all products in the 'Art' category, you can write:\n\n```sql\nSELECT * FROM products WHERE category = 'Art';\n```\n\nThis query will return all rows where the `category` column is 'Art'. Your turn: try changing the category to 'Home' and see what results you get."
+          "sketch_text_and_exact_match": {
+            "title": "Use exact matches for text values",
+            "bodyMarkdown": "When you compare text, `=` checks for an exact match.\n\nExample:\n\n```sql\nSELECT name, category\nFROM products\nWHERE category = 'Art';\n```\n\nLine by line:\n\n1. `SELECT name, category` shows each product name and its category.\n2. `FROM products` reads from the products table.\n3. `WHERE category = 'Art'` keeps only rows whose category text is exactly `Art`.\n\nThat returns `Sketchbook` and `Acrylic Paint Set` in this dataset.\n\nA different operator changes the meaning. For example, `category != 'Art'` would return every product that is **not** in the Art category.\n\n**Your turn:** Run the example, then replace `'Art'` with `'Home'` and check the results table."
+          },
+          "sketch_boundary_thinking": {
+            "title": "Watch out for boundary values",
+            "bodyMarkdown": "A common mistake is choosing `>` when you really need `>=`, or `<` when you really need `<=`.\n\nSuppose you want products with stock of **10 or more**.\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock >= 10;\n```\n\nWhy `>=`?\n\n- `>` would exclude products with stock exactly 10.\n- `>=` includes 10 and anything larger.\n\nIn this dataset, `Acrylic Paint Set` has stock `10`, so it should be included only when you use `>=`.\n\nAnother example:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock < 10;\n```\n\nThis keeps only products with stock below 10, such as `Desk Lamp` and `Office Chair`.\n\n**Try this:** In the SQL editor, run both queries and compare the results table. Notice how the boundary number changes which rows stay."
           }
         }
       }

@@ -227,6 +227,99 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         );
     });
 
+    it("emits topic bundle runtimeDefaults from SQL module runtime defaults", () => {
+        const bundle = buildTopicBundleFromDraft({
+            shape: makeShapePack(),
+            seed: makeSeed(),
+            draft: makeDraftWithExercise({
+                id: "single-1",
+                kind: "single_choice",
+                title: "What is a table?",
+                prompt: "Prompt",
+                hint: "Hint",
+                help: {
+                    concept: "Concept",
+                    hint_1: "Hint 1",
+                    hint_2: "Hint 2",
+                },
+                options: ["A", "B"],
+                correctOptionIds: ["a"],
+            }),
+        });
+
+        expect(bundle.runtimeDefaults).toMatchObject({
+            kind: "sql",
+            datasetId: "students_intro",
+            fixedSqlDialect: "sqlite",
+            resultShape: "table",
+        });
+    });
+
+    it("emits SQL code_input runtime metadata alongside recipe dataset", () => {
+        const bundle = buildTopicBundleFromDraft({
+            shape: makeShapePack(),
+            seed: {
+                ...makeSeed(),
+                moduleRuntimeDefaults: {
+                    kind: "sql",
+                    datasetId: "students_intro",
+                    fixedSqlDialect: "sqlite",
+                    resultShape: "table",
+                    showSchema: true,
+                    showErd: true,
+                    showChen: false,
+                },
+            },
+            draft: makeDraftWithExercise({
+                id: "sql-ex-1",
+                kind: "code_input",
+                title: "Write a query",
+                prompt: "Prompt",
+                starterCode: "SELECT * FROM students;",
+                solutionCode: "SELECT * FROM students;",
+                datasetId: "students_intro",
+            }),
+        });
+
+        const exercise = bundle.exercises[0];
+        expect(exercise?.kind).toBe("code_input");
+        expect((exercise as any)?.recipe?.datasetId).toBe("students_intro");
+        expect((exercise as any)?.runtime).toMatchObject({
+            kind: "sql",
+            datasetId: "students_intro",
+            fixedSqlDialect: "sqlite",
+            resultShape: "table",
+            showSchema: true,
+            showErd: true,
+            showChen: false,
+            supportsTerminal: false,
+            supportsMultiFile: false,
+            supportsFileSystem: false,
+        });
+    });
+
+    it("does not emit SQL runtime metadata for Python code_input", () => {
+        const bundle = buildTopicBundleFromDraft({
+            shape: makePythonShapePack(),
+            seed: makePythonSeed(),
+            draft: makeDraftWithExercise({
+                id: "py-ex-1",
+                kind: "code_input",
+                title: "Read and add",
+                prompt: "Prompt",
+                starterCode: "a = int(input())",
+                solutionCode: "a = int(input())\nprint(a + 1)",
+                recipeType: "fixed_tests",
+                tests: [{ stdin: "1\n", stdout: "2\n", match: "exact" }],
+            }),
+        });
+
+        const exercise = bundle.exercises[0];
+        expect(exercise?.kind).toBe("code_input");
+        expect((exercise as any)?.runtime).toBeUndefined();
+        expect((exercise as any)?.recipe?.type).toBe("fixed_tests");
+    });
+
     it("throws if two exercises in the same topic reuse the same local messageBase", () => {
         const draft = {
             title: "What SQL Means",

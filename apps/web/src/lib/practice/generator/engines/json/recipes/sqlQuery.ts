@@ -93,6 +93,7 @@ export const buildSqlQueryRecipe: RecipeHandler<any> = (def, args, resolved) => 
             datasetId: recipe.datasetId,
             resultShape,
         },
+        topicRuntimeDefaults: (def as any).topicRuntimeDefaults ?? null,
         expected: expected as any,
         expectedExample,
         ideConfig: def.serviceOverrides ?? null,

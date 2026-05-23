@@ -3,34 +3,56 @@
     "sql-v2": {
       "sql-v2-0": {
         "what_a_database_is": {
-          "label": "what a database is",
-          "summary": "Understanding the basics of what a database is and how it organizes information.",
+          "label": "What a Database Is",
+          "summary": "Build a beginner-friendly mental model of a database, a table, and a simple SQL query using the students dataset.",
           "cards": {
             "sketch0": {
-              "title": "Introduction to Databases"
+              "title": "A database stores organized information"
+            },
+            "sketch1": {
+              "title": "SQL asks questions about tables"
+            },
+            "sketch2": {
+              "title": "Read the result like a smaller table"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Query Practice"
+              "title": "Read from the students table"
             }
           },
           "projectSteps": {
-            "code_input_1": {
-              "title": "Basic SQL Query"
+            "ci_show_all_students": {
+              "title": "Show the full students table"
             },
-            "code_input_2": {
-              "title": "Retrieve Student Names"
+            "ci_show_names_only": {
+              "title": "Show one column"
             },
-            "code_input_3": {
-              "title": "List Student Cities"
+            "ci_show_name_and_city": {
+              "title": "Show two columns"
             }
           },
           "quiz": {
-            "single_choice_1": {
-              "title": "Purpose of a Database",
-              "prompt": "What is the primary purpose of a database?",
+            "sc_database_definition": {
+              "title": "What is a database?",
+              "prompt": "Which description best matches a database in this lesson?",
+              "hint": "Think about how the students information is kept in one organized place.",
+              "help": {
+                "concept": "A database is an organized collection of information that can be stored and queried. In this topic, the students table is one organized part of that database.",
+                "hint_1": "Look for the choice that describes storing structured information, not just displaying it.",
+                "hint_2": "The best answer should fit a table with rows like Noor and Mia and columns like name and city."
+              },
+              "options": {
+                "a": "A place that stores organized information in tables",
+                "b": "A button that runs SQL code",
+                "c": "A single column inside a table",
+                "d": "A list of only student names"
+              }
+            },
+            "sc_select_star_meaning": {
+              "title": "Meaning of SELECT *",
+              "prompt": "In the query `SELECT * FROM students;`, what does `*` mean?",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -38,156 +60,142 @@
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "To store and organize data",
-                "b": "To create websites",
-                "c": "To design graphics",
-                "d": "To write code"
+                "a": "Only the first column",
+                "b": "All columns",
+                "c": "Only the name column",
+                "d": "All tables in the database"
               }
             },
-            "single_choice_2": {
-              "title": "Database Table Structure",
-              "prompt": "In a database table, what does a row represent?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "mc_table_parts": {
+              "title": "Parts of a table",
+              "prompt": "Choose all statements that are true about a table like `students`.",
+              "hint": "Think about what columns and rows represent in the sample table.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "A table organizes data with columns for categories of information and rows for individual records.",
+                "hint_1": "A column is like `city` or `grade`, while a row is one student's full record.",
+                "hint_2": "Pick the choices that match the structure of the sample table, not the SQL editor or Run query button."
               },
               "options": {
-                "a": "A single record",
-                "b": "A column header",
-                "c": "A database schema",
-                "d": "A data type"
+                "a": "Columns describe types of information such as name or city",
+                "b": "Rows represent individual records such as one student",
+                "c": "Every table is the same as a SQL query",
+                "d": "The students table can contain multiple rows"
               }
             },
-            "multi_choice_1": {
-              "title": "Components of a Database",
-              "prompt": "Which of the following are components of a database? (Select all that apply)",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "mc_query_vs_result": {
+              "title": "Query and result",
+              "prompt": "Choose all true statements about running a basic SELECT query in this lesson.",
+              "hint": "Separate the SQL you write from the table of results you see after running it.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "A query is the instruction you write, and the result set is the answer shown after the database reads the table.",
+                "hint_1": "One part is written in the SQL editor, and another part appears in the results table.",
+                "hint_2": "Look for statements about asking for data and displaying returned rows, not changing the stored data."
               },
               "options": {
-                "a": "Tables",
-                "b": "Graphs",
-                "c": "Queries",
-                "d": "Images"
+                "a": "A query is a question you ask the database",
+                "b": "The results table shows the answer returned by the query",
+                "c": "Running `SELECT` deletes rows from the table",
+                "d": "A result can show only some columns from a table"
               }
             },
-            "multi_choice_2": {
-              "title": "Database Operations",
-              "prompt": "Which operations can be performed on a database? (Select all that apply)",
-              "hint": "Focus on data manipulation tasks.",
+            "dr_basic_query_order": {
+              "title": "Build a basic query",
+              "prompt": "Arrange the tokens to form a valid query that shows all columns from the students table.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
-                "concept": "Databases allow data insertion and deletion.",
-                "hint_1": "Consider operations related to data management.",
-                "hint_2": "Compiling code and running marathons are unrelated to databases."
-              },
-              "options": {
-                "a": "Insert data",
-                "b": "Delete data",
-                "c": "Compile code",
-                "d": "Run a marathon"
-              }
-            },
-            "drag_reorder_1": {
-              "title": "Database Query Sequence",
-              "prompt": "Arrange the steps to perform a basic SQL query in the correct order.",
-              "hint": "Think about the logical sequence of actions when querying a database.",
-              "help": {
-                "concept": "The sequence involves writing, executing, and reviewing the query.",
-                "hint_1": "Start with writing the query.",
-                "hint_2": "Finish by checking the results."
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "Write the SQL query",
-                "t2": "Run the query",
-                "t3": "Check the results"
+                "t1": "students",
+                "t2": "FROM",
+                "t3": ";",
+                "t4": "*",
+                "t5": "SELECT"
               }
             },
-            "drag_reorder_2": {
-              "title": "Database Table Creation",
-              "prompt": "Arrange the steps to create a new table in a database.",
-              "hint": "Consider the logical order of creating a new table.",
+            "dr_workspace_flow": {
+              "title": "Use the browser workspace",
+              "prompt": "Put these learner actions in a sensible order for checking a SQL query in this lesson.",
+              "hint": "You write first, run second, and inspect the answer last.",
               "help": {
-                "concept": "Creating a table involves defining, executing, and verifying.",
-                "hint_1": "Start by defining the structure.",
-                "hint_2": "End with verification."
+                "concept": "In the ZoeSkoul browser workspace, the normal flow is to write a query, run it, and then inspect the returned results.",
+                "hint_1": "The SQL editor comes before the Run query button.",
+                "hint_2": "The results table is where you check the answer after the query runs."
               },
               "tokens": {
-                "t1": "Define the table structure",
-                "t2": "Execute the CREATE TABLE command",
-                "t3": "Verify the table creation"
+                "t1": "Check the results table",
+                "t2": "Write the query in the SQL editor",
+                "t3": "Click Run query"
               }
             },
-            "fill_blank_choice_1": {
-              "title": "SQL Command",
-              "prompt": "Fill in the blank to complete the SQL command: `SELECT * FROM [blank1]`",
-              "hint": "Think about the table name used in the example.",
+            "fb_from_table_name": {
+              "title": "Choose the table name",
+              "prompt": "Complete the query so it reads from the students table.",
+              "hint": "The dataset in this topic has one table named `the missing term`.",
               "help": {
-                "concept": "The command selects all records from the specified table.",
-                "hint_1": "Refer to the table name in the example.",
-                "hint_2": "The correct table is 'the missing term'."
+                "concept": "The FROM clause names the table the database should read.",
+                "hint_1": "You are not choosing a column like `name` or `city` here.",
+                "hint_2": "The blank should be the table that contains rows for Noor, Mia, Leo, Ava, and Zane."
               },
-              "template": "SELECT * FROM [blank1]",
+              "template": "SELECT * FROM [blank1];",
               "choices": [
                 "students",
-                "images",
-                "graphs",
-                "code"
+                "name",
+                "city",
+                "grade"
               ]
             },
-            "fill_blank_choice_2": {
-              "title": "Database Concept",
-              "prompt": "A database is primarily used to [blank1] data.",
-              "hint": "Consider the main function of a database.",
+            "fb_select_column_pair": {
+              "title": "Choose the missing column",
+              "prompt": "Complete the query so it shows `name` and `city`.",
+              "hint": "One column is already written. The missing one is the location column.",
               "help": {
-                "concept": "Databases are used to the missing term data.",
-                "hint_1": "Think about the primary purpose of a database.",
-                "hint_2": "The correct action is 'the missing term'."
+                "concept": "After SELECT, you list the columns you want to appear in the result.",
+                "hint_1": "The query already includes `name`, so the blank should be another column from the students table.",
+                "hint_2": "Pick the column that stores values like Chicago, Evanston, and Oak Park."
               },
-              "template": "A database is primarily used to [blank1] data.",
+              "template": "SELECT name, [blank1] FROM students;",
               "choices": [
-                "store",
-                "delete",
-                "compile",
-                "run"
+                "id",
+                "city",
+                "students",
+                "age"
               ]
             },
-            "code_input_1": {
-              "title": "Basic SQL Query",
-              "prompt": "Write a SQL query to select all columns from the `students` table.",
+            "ci_show_all_students": {
+              "title": "Show the full students table",
+              "prompt": "Write a query that returns all columns and all rows from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "-- Return every column from the students table\nSELECT \nFROM students;"
             },
-            "code_input_2": {
-              "title": "Retrieve Student Names",
-              "prompt": "Write a SQL query to select only the `name` column from the `students` table.",
+            "ci_show_names_only": {
+              "title": "Show one column",
+              "prompt": "Write a query that returns only the `name` column from the `students` table. Use the SQL editor, click Run query, and check that the results table has one column.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "-- Return only one column from students\nSELECT \nFROM students;"
             },
-            "code_input_3": {
-              "title": "List Student Cities",
-              "prompt": "Write a SQL query to select the `city` column from the `students` table.",
+            "ci_show_name_and_city": {
+              "title": "Show two columns",
+              "prompt": "Write a query that returns the `name` and `city` columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "-- Return two specific columns from students\nSELECT name\nFROM students;"
             }
           }
         }
@@ -198,9 +206,17 @@
     "sql-v2": {
       "sql-v2-0": {
         "what_a_database_is": {
-          "sketch1": {
-            "title": "Introduction to Databases",
-            "bodyMarkdown": "A database is an organized collection of data, generally stored and accessed electronically from a computer system. Databases are structured to facilitate the storage, retrieval, modification, and deletion of data in conjunction with various data-processing operations. \n\nFor example, consider a simple database table named `students`:\n\n```\n| id | name | grade | age | city     |\n|----|------|-------|-----|----------|\n| 1  | Noor | A     | 15  | Chicago  |\n| 2  | Mia  | A     | 14  | Evanston |\n| 3  | Leo  | B     | 15  | Chicago  |\n| 4  | Ava  | C     | 14  | Oak Park |\n| 5  | Zane | B     | 16  | Naperville |\n```\n\nThis table stores information about students, including their ID, name, grade, age, and city. \n\n**Try it yourself**: Imagine adding a new student to this table. What information would you need?"
+          "sketch_database_big_picture": {
+            "title": "A database stores organized information",
+            "bodyMarkdown": "A **database** is a place where information is stored in an organized way so you can look it up later.\n\nIn SQL, data is often organized into **tables**. A table has:\n- **columns** for the kinds of information\n- **rows** for individual records\n\nIn this lesson, the dataset has one table called `students` with these columns:\n- `id`\n- `name`\n- `grade`\n- `age`\n- `city`\n\nA few example rows look like this:\n\n| id | name | grade | age | city |\n|---|---|---|---|---|\n| 1 | Noor | A | 15 | Chicago |\n| 2 | Mia | A | 14 | Evanston |\n| 3 | Leo | B | 15 | Chicago |\n\nSo if you want to know a student's city, grade, or age, the database keeps that information in a structured table instead of scattered notes.\n\n**Try it yourself:** Look at the `students` table in the schema browser or results table and point to one column and one row. What does each one represent?"
+          },
+          "sketch_table_and_query": {
+            "title": "SQL asks questions about tables",
+            "bodyMarkdown": "SQL is the language you use to ask a database for information.\n\nA very common starting pattern is:\n\n```sql\nSELECT *\nFROM students;\n```\n\nStep by step:\n- `SELECT` says you want to retrieve data.\n- `*` means \"all columns.\"\n- `FROM students` says which table to read.\n\nWhen you run this query, the results table shows every row from the `students` table.\n\nYou can also ask for only certain columns:\n\n```sql\nSELECT name, city\nFROM students;\n```\n\nThis returns just the `name` and `city` columns for each student.\n\nThat is useful when you only need part of the table.\n\n**Try this:** Write the second query in the SQL editor, click **Run query**, and compare the results table with `SELECT * FROM students;`. What changed?"
+          },
+          "sketch_reading_results": {
+            "title": "Read the result like a smaller table",
+            "bodyMarkdown": "A SQL query returns a **result set**, which you can read like a new table in the results panel.\n\nFor example:\n\n```sql\nSELECT name, grade\nFROM students;\n```\n\nThis does **not** change the database. It only shows a result with two columns.\n\nUsing the sample data, part of the result would look like:\n\n| name | grade |\n|---|---|\n| Noor | A |\n| Mia | A |\n| Leo | B |\n\nSo the database stores the full table, and your query chooses what to display.\n\nA helpful beginner idea is:\n- the **database** stores data\n- the **table** organizes data\n- the **query** asks for data\n- the **results table** shows the answer\n\n**Your turn:** If you only wanted to see `id` and `name`, which two column names would you place after `SELECT`?"
           }
         }
       }

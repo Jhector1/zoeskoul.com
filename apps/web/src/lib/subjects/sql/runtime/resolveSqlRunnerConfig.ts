@@ -1,6 +1,8 @@
 import type { SqlDialect } from "@/lib/practice/types";
 import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
+import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import { getSqlDataset } from "@/lib/subjects/sql/datasets";
+import { resolveEffectiveExerciseRuntime } from "@zoeskoul/curriculum-runtime/runtime";
 
 export type SqlTableSnapshot = {
     name: string;
@@ -31,6 +33,7 @@ export type ResolveSqlRunnerConfigArgs = {
     language?: string | null;
     sqlDialect?: string | null;
     sqlDatasetId?: string | null;
+    exerciseSqlDatasetId?: string | null;
     sqlResultShape?: "table" | null;
     sqlSchemaSql?: string | null;
     sqlSeedSql?: string | null;
@@ -39,9 +42,14 @@ export type ResolveSqlRunnerConfigArgs = {
     fixedSqlDialect?: SqlDialect | null;
     defaultSqlDialect?: SqlDialect;
     runtime?: unknown;
+    exerciseRuntime?: unknown;
     runtimeDefaults?: unknown;
+    subjectRuntimeDefaults?: unknown;
+    courseRuntimeDefaults?: unknown;
+    sectionRuntimeDefaults?: unknown;
     topicRuntimeDefaults?: unknown;
     moduleRuntimeDefaults?: unknown;
+    recipe?: unknown;
 };
 
 export type ResolvedSqlRunnerConfig = {
@@ -53,6 +61,7 @@ export type ResolvedSqlRunnerConfig = {
     sqlSeedSql?: string;
     sqlSetupSql?: string;
     sqlInitialTableSnapshots?: SqlTableSnapshots;
+    sqlPaneOptions?: SqlPaneOptions;
 };
 
 export function resolveSqlRunnerConfig(
@@ -62,6 +71,7 @@ export function resolveSqlRunnerConfig(
         language,
         sqlDialect,
         sqlDatasetId,
+        exerciseSqlDatasetId,
         sqlResultShape,
         sqlSchemaSql,
         sqlSeedSql,
@@ -70,12 +80,27 @@ export function resolveSqlRunnerConfig(
         fixedSqlDialect,
         defaultSqlDialect = DEFAULT_SQL_DIALECT,
     } = args;
-    const isSql = String(language ?? "").toLowerCase() === "sql";
-    const dataset = sqlDatasetId && isSql ? getSqlDataset(sqlDatasetId) : null;
+    const effectiveRuntime = resolveEffectiveExerciseRuntime({
+        language,
+        exerciseRuntime: args.exerciseRuntime ?? args.runtime,
+        exerciseSqlDatasetId: exerciseSqlDatasetId ?? sqlDatasetId,
+        recipe: args.recipe,
+        topicRuntimeDefaults: args.topicRuntimeDefaults,
+        sectionRuntimeDefaults: args.sectionRuntimeDefaults,
+        moduleRuntimeDefaults: args.moduleRuntimeDefaults ?? args.runtimeDefaults,
+        courseRuntimeDefaults: args.courseRuntimeDefaults,
+        subjectRuntimeDefaults: args.subjectRuntimeDefaults,
+    });
+    const isSql = effectiveRuntime.kind === "sql";
+    const resolvedDatasetId = isSql
+        ? (effectiveRuntime.datasetId ?? cleanString(sqlDatasetId))
+        : undefined;
+    const dataset = resolvedDatasetId && isSql ? getSqlDataset(resolvedDatasetId) : null;
 
     const resolvedDialect: SqlDialect =
         asSqlDialect(sqlDialect) ??
         asSqlDialect(fixedSqlDialect) ??
+        effectiveRuntime.fixedSqlDialect ??
         asSqlDialect(dataset?.dialect) ??
         defaultSqlDialect;
 
@@ -95,17 +120,29 @@ export function resolveSqlRunnerConfig(
         dataset?.tableSnapshots ??
         undefined;
 
-    const resolvedResultShape = sqlResultShape ?? "table";
+    const resolvedResultShape = sqlResultShape ?? effectiveRuntime.resultShape ?? "table";
 
     return {
         isSql,
         sqlDialect: resolvedDialect,
-        sqlDatasetId: sqlDatasetId ?? undefined,
+        sqlDatasetId: resolvedDatasetId,
         sqlResultShape: resolvedResultShape,
         sqlSchemaSql: resolvedSchemaSql,
         sqlSeedSql: resolvedSeedSql,
         sqlSetupSql: sqlSetupSql ?? undefined,
         sqlInitialTableSnapshots: resolvedSnapshots,
+        sqlPaneOptions: isSql
+            ? {
+                showTables: effectiveRuntime.showTables,
+                showErd: effectiveRuntime.showErd,
+                showChen: effectiveRuntime.showChen,
+                defaultTab: "tables",
+            }
+            : undefined,
     };
 
+}
+
+function cleanString(value: unknown): string | undefined {
+    return typeof value === "string" && value.trim() ? value.trim() : undefined;
 }

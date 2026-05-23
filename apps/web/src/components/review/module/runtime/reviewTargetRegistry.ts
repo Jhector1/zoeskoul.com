@@ -64,6 +64,8 @@ export type ReviewTargetEntry = {
   sqlDatasetResolutionError?: string;
   toolManifest?: LooseManifestRecord | null;
   item: LooseManifestRecord | null;
+  profileId?: string | null;
+  versionFamily?: string | null;
 };
 
 export type ReviewTargetRegistry = {
@@ -192,18 +194,44 @@ function mergeManifestParts(
   };
 }
 
-function pickStarterFiles(item: unknown, subjectSlug: string, language?: string) {
-  return resolveCourseFileSeed({ subjectSlug, language, target: item }).starterFiles;
+function pickStarterFiles(
+  item: unknown,
+  subjectSlug: string,
+  language?: string,
+  profileId?: string | null,
+  versionFamily?: string | null,
+) {
+  return resolveCourseFileSeed({
+    subjectSlug,
+    language,
+    profileId,
+    versionFamily,
+    target: item,
+  }).starterFiles;
 }
 
-function pickSolutionFiles(item: unknown, subjectSlug: string, language?: string) {
-  return resolveCourseFileSeed({ subjectSlug, language, target: item }).solutionFiles;
+function pickSolutionFiles(
+  item: unknown,
+  subjectSlug: string,
+  language?: string,
+  profileId?: string | null,
+  versionFamily?: string | null,
+) {
+  return resolveCourseFileSeed({
+    subjectSlug,
+    language,
+    profileId,
+    versionFamily,
+    target: item,
+  }).solutionFiles;
 }
 
 function pickStarterCode(
     item: unknown,
     subjectSlug: string,
     language?: string,
+    profileId?: string | null,
+    versionFamily?: string | null,
     resolveMessage?: (key: string) => string | undefined,
 ) {
   /**
@@ -219,6 +247,8 @@ function pickStarterCode(
   const explicit = resolveCourseFileSeed({
     subjectSlug,
     language,
+    profileId,
+    versionFamily,
     target: item,
   }).starterCode;
 
@@ -234,8 +264,20 @@ function pickStarterCode(
 
   return undefined;
 }
-function pickSolutionCode(item: unknown, subjectSlug: string, language?: string) {
-  return resolveCourseFileSeed({ subjectSlug, language, target: item }).solutionCode;
+function pickSolutionCode(
+  item: unknown,
+  subjectSlug: string,
+  language?: string,
+  profileId?: string | null,
+  versionFamily?: string | null,
+) {
+  return resolveCourseFileSeed({
+    subjectSlug,
+    language,
+    profileId,
+    versionFamily,
+    target: item,
+  }).solutionCode;
 }
 
 function defaultLanguageForSubject(subjectSlug: string) {
@@ -276,10 +318,14 @@ function pickLanguage(
   fallbackLanguage: string,
   subjectSlug: string,
   runtimeDefaults: UnknownRecord | null | undefined,
+  profileId?: string | null,
+  versionFamily?: string | null,
 ) {
   return resolveCourseLanguage({
     subjectSlug,
     language: fallbackLanguage,
+    profileId,
+    versionFamily,
     runtimeDefaults,
     target: item,
   });
@@ -291,16 +337,22 @@ function buildRuntimeEntryContext(args: {
   topicRuntimeDefaults: UnknownRecord | null;
   moduleRuntimeDefaults: UnknownRecord | null;
   fallbackLanguage: string;
+  profileId?: string | null;
+  versionFamily?: string | null;
 }) {
   const language = pickLanguage(
     args.item,
     args.fallbackLanguage,
     args.subjectSlug,
     args.topicRuntimeDefaults ?? args.moduleRuntimeDefaults,
+    args.profileId,
+    args.versionFamily,
   );
   const datasetResolution = resolveRuntimeDefaultDataset({
     subjectSlug: args.subjectSlug,
     language,
+    profileId: args.profileId,
+    versionFamily: args.versionFamily,
     target: args.item,
     topicRuntimeDefaults: args.topicRuntimeDefaults,
     moduleRuntimeDefaults: args.moduleRuntimeDefaults,
@@ -373,6 +425,14 @@ export function buildReviewTargetRegistry(args: {
   resolveMessage?: (key: string) => string | undefined;
 }): ReviewTargetRegistry {
   const { mod, subjectSlug, moduleSlug, resolveMessage } = args;
+  const profileId =
+    typeof mod.profileId === "string" && mod.profileId.trim()
+      ? mod.profileId
+      : null;
+  const versionFamily =
+    typeof mod.versionFamily === "string" && mod.versionFamily.trim()
+      ? mod.versionFamily
+      : null;
   const byKey: Record<string, ReviewTargetEntry> = {};
   const orderedKeys: string[] = [];
   const byRoute: Record<string, string> = {};
@@ -432,6 +492,8 @@ export function buildReviewTargetRegistry(args: {
           topicRuntimeDefaults,
           moduleRuntimeDefaults,
           fallbackLanguage: topicFallbackLanguage,
+          profileId,
+          versionFamily,
         });
         const cardEntry: ReviewTargetEntry = {
           targetKey: `card:${cardKey}`,
@@ -448,15 +510,17 @@ export function buildReviewTargetRegistry(args: {
           cardKey,
           toolScopeKey: `${cardKey}:general`,
           language: cardRuntimeContext.language,
-          starterFiles: pickStarterFiles(mergedCardManifest, subjectSlug, cardRuntimeContext.language),
-          solutionFiles: pickSolutionFiles(mergedCardManifest, subjectSlug, cardRuntimeContext.language),
+          starterFiles: pickStarterFiles(mergedCardManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
+          solutionFiles: pickSolutionFiles(mergedCardManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
           starterCode: pickStarterCode(
               mergedCardManifest,
               subjectSlug,
               cardRuntimeContext.language,
+              profileId,
+              versionFamily,
               resolveMessage,
           ),
-          solutionCode: pickSolutionCode(mergedCardManifest, subjectSlug, cardRuntimeContext.language),
+          solutionCode: pickSolutionCode(mergedCardManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
           runtimeDefaults: topicRuntimeDefaults,
           topicRuntimeDefaults,
           moduleRuntimeDefaults,
@@ -466,6 +530,8 @@ export function buildReviewTargetRegistry(args: {
           starterWorkspace: asRecord(mergedCardManifest?.workspace) ?? asRecord(cardRecord.spec)?.workspace ?? null,
           toolManifest: mergedCardManifest ?? buildToolManifest(card),
           item: mergedCardManifest,
+          profileId,
+          versionFamily,
         };
 
         byKey[cardEntry.targetKey] = cardEntry;
@@ -505,6 +571,8 @@ export function buildReviewTargetRegistry(args: {
             topicRuntimeDefaults,
             moduleRuntimeDefaults,
             fallbackLanguage: topicFallbackLanguage,
+            profileId,
+            versionFamily,
           });
           const exerciseEntry: ReviewTargetEntry = {
             targetKey: `exercise:${exerciseStateKey}`,
@@ -523,15 +591,17 @@ export function buildReviewTargetRegistry(args: {
             exerciseId: exercise.exerciseId,
             exerciseStateKey,
             language: exerciseRuntimeContext.language,
-            starterFiles: pickStarterFiles(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language),
-            solutionFiles: pickSolutionFiles(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language),
+            starterFiles: pickStarterFiles(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language, profileId, versionFamily),
+            solutionFiles: pickSolutionFiles(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language, profileId, versionFamily),
             starterCode: pickStarterCode(
                 mergedExerciseManifest,
                 subjectSlug,
                 exerciseRuntimeContext.language,
+                profileId,
+                versionFamily,
                 resolveMessage,
             ),
-            solutionCode: pickSolutionCode(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language),
+            solutionCode: pickSolutionCode(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language, profileId, versionFamily),
             runtimeDefaults: topicRuntimeDefaults,
             topicRuntimeDefaults,
             moduleRuntimeDefaults,
@@ -541,6 +611,8 @@ export function buildReviewTargetRegistry(args: {
             starterWorkspace: asRecord(mergedExerciseManifest?.workspace) ?? null,
             toolManifest: mergedExerciseManifest,
             item: mergedExerciseManifest,
+            profileId,
+            versionFamily,
           };
 
           byKey[exerciseEntry.targetKey] = exerciseEntry;

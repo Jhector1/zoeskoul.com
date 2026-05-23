@@ -4,36 +4,71 @@
       "sql-v2-0": {
         "records_and_fields": {
           "label": "Records and Fields",
-          "summary": "Learn about records and fields in SQL databases, focusing on understanding tables and how to query them using SELECT and FROM.",
+          "summary": "Learn how a table stores records as rows and fields as columns, using a simple students table.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Records and Fields"
+              "title": "Rows are records, columns are fields"
             },
             "sketch1": {
-              "title": "Example: Querying a Table"
+              "title": "Selecting specific fields"
+            },
+            "sketch2": {
+              "title": "Think of a table as many records with the same fields"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Query Practice"
+              "title": "Read records and fields from the students table"
             }
           },
           "projectSteps": {
-            "code_input_1": {
-              "title": "Basic SELECT Query"
+            "ci_show_all_student_records": {
+              "title": "Show all student records"
             },
-            "code_input_2": {
-              "title": "Selecting Specific Fields"
+            "ci_show_names_and_grades": {
+              "title": "Show two fields only"
             },
-            "code_input_3": {
-              "title": "Querying with SELECT and FROM"
+            "ci_show_id_name_city": {
+              "title": "Show three chosen fields"
             }
           },
           "quiz": {
-            "single_choice_1": {
-              "title": "Identifying Records and Fields",
-              "prompt": "In the context of a SQL table, what is a 'record'?",
+            "sc-record-definition": {
+              "title": "What is a record?",
+              "prompt": "In the `students` table, what does the word **record** mean?",
+              "hint": "Think about whether a record is a whole row or a single column.",
+              "help": {
+                "concept": "A record in a database table is one complete row of related values about one item, such as one student.",
+                "hint_1": "Look at a row like `1, Noor, A, 15, Chicago`. Ask what whole piece of information it represents.",
+                "hint_2": "A record includes values from several fields together, not just one field name."
+              },
+              "options": {
+                "a": "One complete row about one student",
+                "b": "One column such as `name`",
+                "c": "The table name `students`",
+                "d": "Only the `id` value in a row"
+              }
+            },
+            "sc-field-definition": {
+              "title": "What is a field?",
+              "prompt": "Which choice best describes a **field** in the `students` table?",
+              "hint": "Think about the labels at the top of the table.",
+              "help": {
+                "concept": "A field is a column in a table, such as `name` or `city`, and it describes one type of data stored for every record.",
+                "hint_1": "Examples of fields in this table include `id`, `name`, `grade`, `age`, and `city`.",
+                "hint_2": "A field is the column heading, not the full row and not one student's value."
+              },
+              "options": {
+                "a": "A full row of student information",
+                "b": "A column such as `city`",
+                "c": "The number of rows in the table",
+                "d": "A SQL keyword like `FROM`"
+              }
+            },
+            "mc-identify-fields": {
+              "title": "Pick the fields",
+              "prompt": "Which of these are fields in the `students` table? Choose all that apply.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -41,63 +76,31 @@
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "A single row in a table",
-                "b": "A column in a table",
-                "c": "A database",
-                "d": "A SQL query"
+                "a": "name",
+                "b": "city",
+                "c": "Chicago",
+                "d": "students"
               }
             },
-            "single_choice_2": {
-              "title": "Understanding Fields",
-              "prompt": "What is a 'field' in a SQL table?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "mc-identify-record-values": {
+              "title": "Values from one record",
+              "prompt": "Which sets of values could be one complete record from the `students` table? Choose all that apply.",
+              "hint": "A complete record needs values for all five fields in the table.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "A complete record must contain one value for each field in the table: `id`, `name`, `grade`, `age`, and `city`.",
+                "hint_1": "Check whether each choice has five values that match the table's field order and data types.",
+                "hint_2": "A valid record should look like an id, then a name, then a grade, then an age, then a city."
               },
               "options": {
-                "a": "A single row in a table",
-                "b": "A column in a table",
-                "c": "A SQL command",
-                "d": "A database"
+                "a": "1, Noor, A, 15, Chicago",
+                "b": "3, Leo, B, 15, Chicago",
+                "c": "name, grade",
+                "d": "Ava, Oak Park"
               }
             },
-            "multi_choice_1": {
-              "title": "Components of a SQL Table",
-              "prompt": "Which of the following are components of a SQL table? (Select all that apply)",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "options": {
-                "a": "Records",
-                "b": "Fields",
-                "c": "Databases",
-                "d": "Queries"
-              }
-            },
-            "multi_choice_2": {
-              "title": "SQL Query Basics",
-              "prompt": "Which SQL keywords are used to retrieve data from a table? (Select all that apply)",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare each option to the exact topic named in the question.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "options": {
-                "a": "SELECT",
-                "b": "FROM",
-                "c": "INSERT",
-                "d": "DELETE"
-              }
-            },
-            "drag_reorder_1": {
-              "title": "Ordering SQL Query Components",
-              "prompt": "Arrange the components of a basic SQL query in the correct order.",
+            "dr-query-order-all-fields": {
+              "title": "Build a basic query",
+              "prompt": "Put the tokens in order to make a query that shows all fields from the `students` table.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -105,15 +108,15 @@
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "SELECT",
-                "t2": "FROM",
-                "t3": "table_name",
-                "t4": "column_name"
+                "t1": "students",
+                "t2": "SELECT",
+                "t3": "*",
+                "t4": "FROM"
               }
             },
-            "drag_reorder_2": {
-              "title": "SQL Table Structure",
-              "prompt": "Arrange the following to describe the structure of a SQL table.",
+            "dr-query-order-specific-fields": {
+              "title": "Order the query parts",
+              "prompt": "Arrange the tokens to make a query that shows the `name` and `city` fields from `students`.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -121,78 +124,78 @@
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "Table",
-                "t2": "Fields",
-                "t3": "Records",
-                "t4": "Columns"
+                "t1": "FROM",
+                "t2": "students",
+                "t3": "SELECT",
+                "t4": "name, city"
               }
             },
-            "fill_blank_choice_1": {
-              "title": "SQL Query Keywords",
-              "prompt": "In a SQL query, the keyword used to specify the table is [blank1].",
-              "hint": "This keyword follows SELECT in a query.",
+            "fb-select-keyword": {
+              "title": "Complete the query keyword",
+              "prompt": "Choose the missing word to start a query that reads data from a table.",
+              "hint": "The first keyword in beginner SQL queries asks SQL to show data.",
               "help": {
-                "concept": "the missing term is used to specify the table in a SQL query.",
-                "hint_1": "the missing term comes after SELECT.",
-                "hint_2": "It indicates the table to retrieve data the missing term."
+                "concept": "SQL uses `the missing term` to choose which fields to display in the results table.",
+                "hint_1": "In this module, the basic pattern is `the missing term ... FROM ...`.",
+                "hint_2": "The missing word comes before the column list."
               },
-              "template": "In a SQL query, the keyword used to specify the table is [blank1].",
+              "template": "[blank1] name, grade FROM students;",
               "choices": [
                 "SELECT",
-                "FROM",
-                "WHERE",
-                "INSERT"
+                "TABLE",
+                "SHOW",
+                "READ"
               ]
             },
-            "fill_blank_choice_2": {
-              "title": "Identifying SQL Components",
-              "prompt": "A single row in a SQL table is called a [blank1].",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+            "fb-table-name": {
+              "title": "Complete the table name",
+              "prompt": "Choose the table name that correctly finishes this query.",
+              "hint": "Use the only table in this lesson's dataset.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "The `FROM` clause names the table that SQL should read from.",
+                "hint_1": "This topic uses the `the missing term` table with fields like `id`, `name`, and `city`.",
+                "hint_2": "The missing value is the table name, not a field name."
               },
-              "template": "A single row in a SQL table is called a [blank1].",
+              "template": "SELECT * FROM [blank1];",
               "choices": [
-                "field",
-                "record",
-                "database",
-                "query"
+                "name",
+                "students",
+                "city",
+                "grade"
               ]
             },
-            "code_input_1": {
-              "title": "Basic SELECT Query",
-              "prompt": "Write a SQL query to select all fields from the `students` table.",
+            "ci-show-all-student-records": {
+              "title": "Show all student records",
+              "prompt": "Write a query that shows every field and every record from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "-- Show all fields from the students table\nSELECT\n  -- TODO: ask for all columns\nFROM students;"
             },
-            "code_input_2": {
-              "title": "Selecting Specific Fields",
-              "prompt": "Write a SQL query to select only the `name` and `age` fields from the `students` table.",
+            "ci-show-names-and-grades": {
+              "title": "Show two fields only",
+              "prompt": "Write a query that shows only the `name` and `grade` fields from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "-- Show only the name and grade fields\nSELECT\n  -- TODO: add the two field names\nFROM students;"
             },
-            "code_input_3": {
-              "title": "Querying with SELECT and FROM",
-              "prompt": "Write a SQL query to select the `grade` field from the `students` table.",
+            "ci-show-id-name-city": {
+              "title": "Show three chosen fields",
+              "prompt": "Write a query that shows the `id`, `name`, and `city` fields from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "-- Show id, name, and city\nSELECT\n  -- TODO: add the three requested fields\nFROM students;"
             }
           }
         }
@@ -203,13 +206,17 @@
     "sql-v2": {
       "sql-v2-0": {
         "records_and_fields": {
-          "sketch1": {
-            "title": "Understanding Records and Fields",
-            "bodyMarkdown": "In SQL, a **record** is a single row in a table, representing a unique entry. Each record consists of **fields**, which are the columns in the table. For example, in a `students` table, each student is a record, and their attributes like `name`, `grade`, and `age` are fields.\n\n```sql\nSELECT name, grade FROM students;\n```\nThis query selects the `name` and `grade` fields from all records in the `students` table. Try it yourself by running this query in the SQL editor."
+          "records-vs-fields": {
+            "title": "Rows are records, columns are fields",
+            "bodyMarkdown": "A database table organizes information in a grid. In SQL, a **record** is one full row, and a **field** is one column.\n\nIn this topic, the `students` table has these fields:\n- `id`\n- `name`\n- `grade`\n- `age`\n- `city`\n\nA single record might look like this:\n- `1, Noor, A, 15, Chicago`\n\nThat one row is a complete record about one student. Each value in the row belongs to a field. For example, `Noor` is the value in the `name` field, and `Chicago` is the value in the `city` field.\n\nHere is a simple SQL query that shows all fields from the table:\n\n```sql\nSELECT *\nFROM students;\n```\n\nStep by step:\n- `SELECT *` means \"show all columns\"\n- `FROM students` means \"get them from the `students` table\"\n\nWhen you run this in the SQL editor and click **Run query**, the results table shows every record and every field in `students`.\n\n**Try it yourself:** Run the query, then look across one row and name the field for each value you see."
           },
-          "sketch2": {
-            "title": "Example: Querying a Table",
-            "bodyMarkdown": "Let's look at an example using the `students` table:\n\n```sql\nSELECT * FROM students;\n```\nThis query retrieves all fields from every record in the `students` table. Each row in the results represents a student, and each column corresponds to a field like `id`, `name`, `grade`, `age`, or `city`.\n\nYour turn: Modify the query to select only the `name` and `city` fields."
+          "reading-specific-fields": {
+            "title": "Selecting specific fields",
+            "bodyMarkdown": "You do not always need every field. Sometimes you only want a few columns.\n\nFor example, if you only want student names and grades, you can ask for just those fields:\n\n```sql\nSELECT name, grade\nFROM students;\n```\n\nLine by line:\n- `SELECT name, grade` asks for only the `name` and `grade` fields\n- `FROM students` tells SQL which table to read\n\nThis query still uses the same records, but it shows only part of each record in the results table.\n\nWorked example:\n- The full record for Noor is `1, Noor, A, 15, Chicago`\n- If you select only `name, grade`, that record appears as `Noor, A`\n\nSo the record is still the same student, but you are viewing only some fields from it.\n\n**Your turn:** Change the query to `SELECT name, city FROM students;` and check how the results table changes."
+          },
+          "table-reading-mental-model": {
+            "title": "Think of a table as many records with the same fields",
+            "bodyMarkdown": "A table works because every record follows the same field structure. In the `students` table, each row has an `id`, `name`, `grade`, `age`, and `city`.\n\nThat means SQL can read the table consistently.\n\nFor example, these are two records from the table:\n- `2, Mia, A, 14, Evanston`\n- `5, Zane, B, 16, Naperville`\n\nEven though the values are different, the fields are in the same order and mean the same thing in each record.\n\nA useful beginner idea is:\n- **table** = collection of records\n- **record** = one row\n- **field** = one column\n\nYou can inspect the table with a basic query:\n\n```sql\nSELECT id, name, city\nFROM students;\n```\n\nThis shows three fields for every record in the table.\n\n**Try this:** In the browser workspace, run the query and pick one row. Say which part is the record and which labels are the fields."
           }
         }
       }

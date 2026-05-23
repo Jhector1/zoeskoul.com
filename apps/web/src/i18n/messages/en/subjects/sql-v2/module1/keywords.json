@@ -3,103 +3,104 @@
     "sql-v2": {
       "sql-v2-1": {
         "keywords": {
-          "label": "keywords",
-          "summary": "keywords in Your First Queries with SELECT",
+          "label": "SQL keywords: SELECT and FROM",
+          "summary": "Learn what the SELECT and FROM keywords do, how they work together, and how to write simple beginner queries against the products table.",
           "cards": {
             "sketch0": {
-              "title": "Introduction to SQL Keywords"
+              "title": "SELECT chooses what you want to see"
             },
             "sketch1": {
-              "title": "Using SELECT and FROM"
+              "title": "FROM names the table"
+            },
+            "sketch2": {
+              "title": "A basic query needs SELECT and FROM together"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Build a starter query sheet"
+              "title": "Starter query sheet"
             }
           },
           "projectSteps": {
-            "quiz9": {
-              "title": "Basic SELECT Query"
+            "ci_select_one_column": {
+              "title": "Show all product names"
             },
-            "quiz10": {
-              "title": "Selecting All Columns"
+            "ci_select_two_columns": {
+              "title": "Show names and prices"
             },
-            "quiz11": {
-              "title": "Selecting Specific Columns"
+            "ci_select_three_columns": {
+              "title": "Build a wider starter query"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "Understanding SELECT",
-              "prompt": "What does the SELECT keyword do in SQL?",
-              "hint": "Think about the purpose of retrieving data.",
+            "sc-select-purpose": {
+              "title": "What SELECT does",
+              "prompt": "What is the main job of the `SELECT` keyword in a basic SQL query?",
+              "hint": "Think about whether `SELECT` chooses columns, names a table, or sorts results.",
               "help": {
-                "concept": "The SELECT keyword is used to retrieve data from a database table.",
-                "hint_1": "SELECT is used to specify which columns you want to retrieve.",
-                "hint_2": "SELECT is not used for modifying or deleting data."
+                "concept": "`SELECT` tells SQL which columns to return in the results table.",
+                "hint_1": "In `SELECT name, price FROM products;`, focus on the part before `FROM`.",
+                "hint_2": "The words after `SELECT` are column names that appear in the results."
               },
               "options": {
-                "a": "It deletes data from a table.",
-                "b": "It retrieves data from a table.",
-                "c": "It updates data in a table.",
-                "d": "It creates a new table."
+                "a": "It chooses which columns to show",
+                "b": "It chooses which table to read",
+                "c": "It deletes rows from a table",
+                "d": "It changes the order of the results"
               }
             },
-            "quiz2": {
-              "title": "Purpose of FROM",
-              "prompt": "What is the purpose of the FROM keyword in an SQL query?",
-              "hint": "Consider what follows the FROM keyword in a query.",
+            "sc-from-purpose": {
+              "title": "What FROM does",
+              "prompt": "In the query `SELECT name FROM products;`, what does `FROM products` tell SQL?",
+              "hint": "Look for the part that names where the data comes from.",
               "help": {
-                "concept": "The FROM keyword specifies the table from which to retrieve data.",
-                "hint_1": "FROM is followed by the table name.",
-                "hint_2": "FROM does not specify columns or conditions."
+                "concept": "`FROM` identifies the table that SQL should read.",
+                "hint_1": "The word after `FROM` is not a column here; it is the table name.",
+                "hint_2": "SQL needs to know which table contains the `name` column."
               },
               "options": {
-                "a": "To specify the table to retrieve data from.",
-                "b": "To specify the columns to retrieve.",
-                "c": "To filter the data based on conditions.",
-                "d": "To sort the data in a specific order."
+                "a": "Which rows to hide",
+                "b": "Which table to read",
+                "c": "Which column to sort",
+                "d": "Which value to calculate"
               }
             },
-            "quiz3": {
-              "title": "Keywords in SQL",
-              "prompt": "Which of the following are SQL keywords? Choose all that apply.",
-              "hint": "Think about the common operations performed in SQL.",
+            "mc-valid-basic-queries": {
+              "title": "Pick the valid beginner queries",
+              "prompt": "Which queries correctly use `SELECT` and `FROM` with the `products` table? Choose all that apply.",
+              "hint": "A valid query needs selected columns and a real table name from this dataset.",
               "help": {
-                "concept": "SQL keywords are reserved words used for various operations in SQL.",
-                "hint_1": "Consider keywords used for data retrieval and manipulation.",
-                "hint_2": "All options listed are common SQL keywords."
+                "concept": "A basic query uses `SELECT` for columns and `FROM` for the table, using real names from the schema.",
+                "hint_1": "Check whether each option uses existing columns like `name`, `price`, or `category` and the table `products`.",
+                "hint_2": "Reject options that put the table name where columns should go or use a table name that does not exist in this dataset."
               },
               "options": {
-                "a": "SELECT",
-                "b": "INSERT",
-                "c": "UPDATE",
-                "d": "DELETE",
-                "e": "FROM",
-                "f": "WHERE"
+                "a": "SELECT name FROM products;",
+                "b": "SELECT price, stock FROM products;",
+                "c": "SELECT products FROM name;",
+                "d": "SELECT category FROM product;"
               }
             },
-            "quiz4": {
-              "title": "Using SELECT and FROM",
-              "prompt": "Which of the following statements about SELECT and FROM are true? Choose all that apply.",
-              "hint": "Think about the roles of SELECT and FROM in a query.",
+            "mc-columns-in-products": {
+              "title": "Real columns in the table",
+              "prompt": "Which of these are actual column names in the `products` table? Choose all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "SELECT and FROM are used to retrieve data from a database.",
-                "hint_1": "SELECT is about columns, FROM is about tables.",
-                "hint_2": "Neither SELECT nor FROM is used for data modification."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "SELECT specifies the columns to retrieve.",
-                "b": "FROM specifies the table to retrieve data from.",
-                "c": "SELECT is used to delete data.",
-                "d": "FROM is used to update data."
+                "a": "name",
+                "b": "price",
+                "c": "product_name",
+                "d": "stock"
               }
             },
-            "quiz5": {
-              "title": "Ordering SQL Query Components",
-              "prompt": "Arrange the components of a basic SQL query in the correct order.",
+            "dr-basic-query-order": {
+              "title": "Order a simple query",
+              "prompt": "Arrange these tokens to form a correct query that shows the `name` column from the `products` table.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -107,15 +108,16 @@
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "SELECT",
-                "t2": "columns",
-                "t3": "FROM",
-                "t4": "table"
+                "t1": "products",
+                "t2": "name",
+                "t3": ";",
+                "t4": "FROM",
+                "t5": "SELECT"
               }
             },
-            "quiz6": {
-              "title": "SQL Query Structure",
-              "prompt": "Put the following SQL query components in the correct order.",
+            "dr-two-column-query-order": {
+              "title": "Order a two-column query",
+              "prompt": "Arrange these tokens to form a correct query that shows `category` and `price` from `products`.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -123,78 +125,81 @@
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "FROM",
-                "t2": "SELECT",
-                "t3": "table",
-                "t4": "columns"
+                "t1": "products",
+                "t2": "category",
+                "t3": "price",
+                "t4": ",",
+                "t5": "FROM",
+                "t6": "SELECT",
+                "t7": ";"
               }
             },
-            "quiz7": {
-              "title": "Filling in SQL Keywords",
-              "prompt": "Complete the SQL query to select all columns from the products table: `SELECT * [blank1] products;`",
-              "hint": "Think about which keyword specifies the table.",
+            "fb-table-name": {
+              "title": "Fill in the table name",
+              "prompt": "Complete the query so it reads from the correct table in this lesson.",
+              "hint": "The dataset has one table named `the missing term`.",
               "help": {
-                "concept": "The the missing term keyword specifies the table to retrieve data the missing term.",
-                "hint_1": "the missing term is used to indicate the table name.",
-                "hint_2": "The correct keyword follows SELECT *."
+                "concept": "The `FROM` clause must use the exact table name from the schema.",
+                "hint_1": "You are not filling a column here; you are filling the table after `FROM`.",
+                "hint_2": "Use the table that contains columns like `name`, `category`, and `price`."
               },
-              "template": "SELECT * [blank1] products;",
+              "template": "SELECT name FROM [blank1];",
               "choices": [
-                "FROM",
-                "WHERE",
-                "ORDER BY",
-                "GROUP BY"
+                "products",
+                "product",
+                "price",
+                "category"
               ]
             },
-            "quiz8": {
-              "title": "SQL Query Completion",
-              "prompt": "Fill in the blank to complete the query: `SELECT name, price [blank1] products;`",
-              "hint": "Consider which keyword specifies the table.",
+            "fb-column-name": {
+              "title": "Fill in the column name",
+              "prompt": "Complete the query so it shows product prices.",
+              "hint": "Choose the column that stores numeric cost values.",
               "help": {
-                "concept": "The the missing term keyword is used to specify the table in a query.",
-                "hint_1": "the missing term is necessary to indicate the source table.",
-                "hint_2": "The correct keyword follows the column list."
+                "concept": "The column after `SELECT` is the one that will appear in the results table.",
+                "hint_1": "In this schema, the money-like values are stored in a column with a short name.",
+                "hint_2": "It is the same column that contains values like `12.99` and `129.00`."
               },
-              "template": "SELECT name, price [blank1] products;",
+              "template": "SELECT [blank1] FROM products;",
               "choices": [
-                "FROM",
-                "WHERE",
-                "ORDER BY",
-                "LIMIT"
+                "category",
+                "price",
+                "created_at",
+                "products"
               ]
             },
-            "quiz9": {
-              "title": "Basic SELECT Query",
-              "prompt": "Write a query to select the `name` and `price` columns from the `products` table.",
+            "ci-select-one-column": {
+              "title": "Show all product names",
+              "prompt": "Write a query that returns only the `name` column from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "-- Return only the product names\nSELECT\nFROM products;"
             },
-            "quiz10": {
-              "title": "Selecting All Columns",
-              "prompt": "Write a query to select all columns from the `products` table.",
+            "ci-select-two-columns": {
+              "title": "Show names and prices",
+              "prompt": "Write a query that returns the `name` and `price` columns from the `products` table. Use the SQL editor and check that the results table has exactly those two columns.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "-- Return product names and prices\nSELECT name\nFROM products;"
             },
-            "quiz11": {
-              "title": "Selecting Specific Columns",
-              "prompt": "Write a query to select the `category` and `stock` columns from the `products` table.",
+            "ci-select-three-columns": {
+              "title": "Build a wider starter query",
+              "prompt": "Write a query that returns the `id`, `name`, and `stock` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table for three columns in that order.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "-- Return three columns in order\nSELECT id, name\nFROM products;"
             }
           }
         }
@@ -205,13 +210,17 @@
     "sql-v2": {
       "sql-v2-1": {
         "keywords": {
-          "sketch1": {
-            "title": "Introduction to SQL Keywords",
-            "bodyMarkdown": "SQL keywords are reserved words used to perform operations in a database. They are the building blocks of SQL queries. Some of the most common keywords include SELECT, FROM, WHERE, and ORDER BY. These keywords help you retrieve and manipulate data stored in a database. \n\nFor example, to retrieve all columns from a table named `products`, you can use the following query:\n\n```sql\nSELECT * FROM products;\n```\n\nThis query selects all columns from the `products` table. Try it yourself by writing a query to select specific columns like `name` and `price` from the `products` table."
+          "select-means-choose-columns": {
+            "title": "SELECT chooses what you want to see",
+            "bodyMarkdown": "In SQL, the `SELECT` keyword tells the database which columns you want in the results.\n\nA **column** is a vertical field in a table, such as `name` or `price`.\n\nHere is a simple example using the `products` table:\n\n```sql\nSELECT name, price\nFROM products;\n```\n\nWhat this does:\n- `SELECT name, price` says: show the `name` and `price` columns\n- `FROM products` says: get them from the `products` table\n\nIf you run this query, the results table will show product names like `Sketchbook` and `Desk Lamp`, along with their prices.\n\nWorked example:\n- For `Sketchbook`, the row includes `name = Sketchbook` and `price = 12.99`\n- For `Office Chair`, the row includes `name = Office Chair` and `price = 129.00`\n\nSo the query returns just those two pieces of information for every row.\n\nTry it yourself: write the query in the SQL editor, click Run query, and then change `price` to `category` to see how the results table changes."
           },
-          "sketch2": {
-            "title": "Using SELECT and FROM",
-            "bodyMarkdown": "The `SELECT` keyword is used to specify the columns you want to retrieve, while the `FROM` keyword specifies the table from which to retrieve the data. \n\nHere's a step-by-step example:\n\n1. **SELECT**: Choose the columns you want to see. For instance, `SELECT name, price`.\n2. **FROM**: Specify the table. For example, `FROM products`.\n\nPutting it together, the query becomes:\n\n```sql\nSELECT name, price FROM products;\n```\n\nThis query retrieves the `name` and `price` columns from the `products` table. Your turn: Modify the query to include the `category` column as well."
+          "from-means-choose-table": {
+            "title": "FROM names the table",
+            "bodyMarkdown": "The `FROM` keyword tells SQL which table to read.\n\nIn this lesson, the table is `products`. It has columns such as:\n- `id`\n- `name`\n- `category`\n- `price`\n- `stock`\n- `created_at`\n\nExample:\n\n```sql\nSELECT category\nFROM products;\n```\n\nStep by step:\n- `SELECT category` asks for one column: `category`\n- `FROM products` tells SQL to read that column from the `products` table\n\nBecause there are 6 rows in `products`, this query returns 6 category values, one from each row.\n\nFor example, some rows in the results table will include:\n- `Art`\n- `Home`\n- `Stationery`\n\nYour turn: run the query, then replace `category` with `stock` and compare the new results."
+          },
+          "select-and-from-work-together": {
+            "title": "A basic query needs SELECT and FROM together",
+            "bodyMarkdown": "A beginner SQL query usually starts with these two keywords together:\n\n```sql\nSELECT column_name\nFROM table_name;\n```\n\nUsing the real dataset:\n\n```sql\nSELECT id, name, stock\nFROM products;\n```\n\nLine by line:\n- `SELECT id, name, stock` chooses three columns to display\n- `FROM products` tells SQL which table contains those columns\n\nThis means the results table will show each product's id, name, and stock.\n\nWorked example from the dataset:\n- The `Notebook` row would show `4`, `Notebook`, and `50`\n- The `Acrylic Paint Set` row would show `2`, `Acrylic Paint Set`, and `10`\n\nIf you leave out `FROM`, SQL does not know which table to read. If you leave out `SELECT`, SQL does not know which columns to return.\n\nTry this: run the example, then remove one selected column, such as `stock`, and notice how the results table becomes narrower."
           }
         }
       }

@@ -21,6 +21,8 @@ export type ModuleMeta = {
 export type ModuleInput = {
     slug: string;
     subjectSlug: string;
+    profileId?: string | null;
+    versionFamily?: string | null;
     order: number;
 
     // legacy display fields

@@ -24,6 +24,7 @@ export type SubjectMeta = {
 
 export type SubjectInput = {
     slug: string;
+    profileId?: string | null;
     order: number;
 
     // legacy display fields

@@ -3,193 +3,197 @@
     "sql-v2": {
       "sql-v2-2": {
         "not_conditions": {
-          "label": "not conditions",
-          "summary": "Learn how to use NOT conditions in SQL to filter data effectively.",
+          "label": "NOT conditions",
+          "summary": "Learn how to exclude rows by using NOT in WHERE clauses.",
           "cards": {
             "sketch0": {
-              "title": "Understanding NOT Conditions"
+              "title": "What NOT does in a WHERE clause"
             },
             "sketch1": {
-              "title": "Combining NOT with Other Conditions"
+              "title": "Using NOT with comparisons and grouped logic"
+            },
+            "sketch2": {
+              "title": "Common patterns: NOT IN, NOT LIKE, and NOT BETWEEN"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Filtering Project"
+              "title": "NOT filter practice set"
             }
           },
           "projectSteps": {
-            "code_input_1": {
-              "title": "Filter Products by Category"
+            "ci_not_category_filter": {
+              "title": "Exclude one category"
             },
-            "code_input_2": {
-              "title": "Exclude Low Stock Items"
+            "ci_not_price_filter": {
+              "title": "Keep products not above a price"
             },
-            "code_input_3": {
-              "title": "Filter by Price and Category"
+            "ci_not_in_categories": {
+              "title": "Exclude multiple categories"
             }
           },
           "quiz": {
-            "single_choice_1": {
-              "title": "Purpose of NOT Condition",
-              "prompt": "What is the primary purpose of using the NOT condition in SQL?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "sc_not_meaning": {
+              "title": "Meaning of NOT",
+              "prompt": "What does `NOT` do in a SQL `WHERE` clause?",
+              "hint": "It reverses whether a condition matches.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "`NOT` changes true to false and false to true for the condition it applies to.",
+                "hint_1": "Think about what happens to rows that would normally match a condition.",
+                "hint_2": "If a row satisfies the original condition, `NOT` makes that row fail the filter."
               },
               "options": {
-                "a": "To select rows that match a specific condition.",
-                "b": "To exclude rows that match a specific condition.",
-                "c": "To sort the results in descending order.",
-                "d": "To combine multiple conditions."
+                "a": "It reverses a condition so matching rows are excluded",
+                "b": "It sorts rows from highest to lowest",
+                "c": "It selects every column in the table",
+                "d": "It limits the number of rows returned"
               }
             },
-            "single_choice_2": {
-              "title": "Using NOT with AND",
-              "prompt": "Which query will return products that are not in the 'Stationery' category and have a stock greater than 20?",
-              "hint": "Consider how NOT affects the category condition.",
+            "sc_not_parentheses": {
+              "title": "Why parentheses matter",
+              "prompt": "Why are parentheses useful in a condition like `WHERE NOT (category = 'Home' OR stock < 10)`?",
+              "hint": "They show exactly which part `NOT` should flip.",
               "help": {
-                "concept": "Combining NOT with AND allows you to exclude specific categories while applying additional conditions.",
-                "hint_1": "NOT should be used before the category condition.",
-                "hint_2": "Ensure the stock condition is also met."
+                "concept": "Parentheses group conditions so `NOT` applies to the intended combined logic instead of only part of it.",
+                "hint_1": "Look at whether `NOT` is reversing one comparison or the whole `OR` expression.",
+                "hint_2": "Without parentheses, SQL may apply `NOT` to a smaller piece than you meant."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE category = 'Stationery' AND stock > 20;",
-                "b": "SELECT * FROM products WHERE NOT category = 'Stationery' AND stock > 20;",
-                "c": "SELECT * FROM products WHERE category = 'Stationery' OR stock > 20;",
-                "d": "SELECT * FROM products WHERE NOT (category = 'Stationery' OR stock > 20);"
+                "a": "They rename columns before filtering",
+                "b": "They make `NOT` apply to the grouped condition",
+                "c": "They automatically sort the results",
+                "d": "They change text values into numbers"
               }
             },
-            "multi_choice_1": {
-              "title": "NOT Condition Usage",
-              "prompt": "In which scenarios would you use the NOT condition? Select all that apply.",
-              "hint": "NOT is used to exclude specific conditions.",
+            "mc_not_patterns": {
+              "title": "Recognizing valid NOT patterns",
+              "prompt": "Which WHERE conditions correctly use `NOT` to exclude matching rows? Choose all that apply.",
+              "hint": "Look for conditions that flip a comparison or a common filter pattern.",
               "help": {
-                "concept": "The NOT condition is used to exclude rows that match certain criteria.",
-                "hint_1": "NOT helps in excluding specific categories or prices.",
-                "hint_2": "It is not used for sorting or finding specific values."
+                "concept": "`NOT` can be used before a comparison or in forms like `NOT IN`, `NOT LIKE`, and `NOT BETWEEN`.",
+                "hint_1": "Check which options are valid SQL filters that exclude rows instead of including them.",
+                "hint_2": "Some options use standard SQL patterns with `NOT`, while others are not valid filtering forms."
               },
               "options": {
-                "a": "To find products not in a specific category.",
-                "b": "To exclude products with a certain price.",
-                "c": "To sort products by name.",
-                "d": "To find products with a specific stock level."
+                "a": "NOT category = 'Art'",
+                "b": "category NOT IN ('Art', 'Home')",
+                "c": "price NOT BETWEEN 10 AND 30",
+                "d": "NOT ORDER BY price"
               }
             },
-            "multi_choice_2": {
-              "title": "Combining NOT with OR",
-              "prompt": "Which queries correctly use NOT with OR? Select all that apply.",
-              "hint": "Consider how NOT affects grouped conditions.",
+            "mc_products_excluded": {
+              "title": "Rows kept by a NOT filter",
+              "prompt": "The query `SELECT name FROM products WHERE NOT category = 'Art';` is run on this lesson's dataset. Which product names appear in the results? Choose all that apply.",
+              "hint": "Exclude the rows where category is `Art`.",
               "help": {
-                "concept": "Using NOT with OR requires careful grouping to ensure correct logic.",
-                "hint_1": "NOT affects the entire condition within parentheses.",
-                "hint_2": "Ensure logical operators are correctly combined."
+                "concept": "A `NOT` equality filter keeps rows whose column value is different from the given value.",
+                "hint_1": "In the dataset, only two products are in the `Art` category.",
+                "hint_2": "Keep every product that is in `Home` or `Stationery`, and leave out the Art items."
               },
               "options": {
-                "a": "SELECT * FROM products WHERE NOT (category = 'Home' OR price < 50);",
-                "b": "SELECT * FROM products WHERE NOT (category = 'Home') AND NOT (price < 50);",
-                "c": "SELECT * FROM products WHERE category = 'Home' AND NOT price < 50;"
+                "a": "Desk Lamp",
+                "b": "Notebook",
+                "c": "Sketchbook",
+                "d": "Office Chair"
               }
             },
-            "drag_reorder_1": {
-              "title": "Order of Operations with NOT",
-              "prompt": "Arrange the steps to correctly filter products that are not in the 'Art' category and have a stock less than 20.",
-              "hint": "Start with the SELECT statement.",
+            "dr_not_query_order": {
+              "title": "Build a NOT filter query",
+              "prompt": "Arrange the SQL parts to create a query that shows product names for items that are not in the `Home` category.",
+              "hint": "Start with SELECT, then FROM, then the WHERE condition.",
               "help": {
-                "concept": "The WHERE clause follows the SELECT statement and includes conditions.",
-                "hint_1": "Begin with the SELECT statement.",
-                "hint_2": "Follow with the WHERE clause and conditions."
+                "concept": "A basic filtered query follows the order `SELECT ... FROM ... WHERE ...`.",
+                "hint_1": "The column list comes first, then the table name, then the filter.",
+                "hint_2": "The last part should be the condition that excludes `Home` rows."
               },
               "tokens": {
-                "t1": "SELECT * FROM products",
-                "t2": "WHERE NOT category = 'Art'",
-                "t3": "AND stock < 20;"
+                "t1": "SELECT name",
+                "t2": "FROM products",
+                "t3": "WHERE NOT category = 'Home';"
               }
             },
-            "drag_reorder_2": {
-              "title": "Combining NOT with AND",
-              "prompt": "Arrange the steps to filter products that are not in the 'Stationery' category and have a price greater than $10.",
-              "hint": "Start with the SELECT statement.",
+            "dr_not_grouped_logic": {
+              "title": "Order a grouped NOT condition",
+              "prompt": "Arrange the tokens to form a query that returns product names where the price is not greater than 20.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
-                "concept": "The WHERE clause follows the SELECT statement and includes conditions.",
-                "hint_1": "Begin with the SELECT statement.",
-                "hint_2": "Follow with the WHERE clause and conditions."
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "SELECT * FROM products",
-                "t2": "WHERE NOT category = 'Stationery'",
-                "t3": "AND price > 10;"
+                "t1": "SELECT name",
+                "t2": "FROM products",
+                "t3": "WHERE NOT price > 20;"
               }
             },
-            "fill_blank_choice_1": {
-              "title": "Using NOT in a Query",
-              "prompt": "Complete the query to find products that are not in the 'Home' category.",
-              "hint": "Which keyword negates a condition?",
+            "fb_not_in_keyword": {
+              "title": "Complete a NOT IN filter",
+              "prompt": "Fill in the missing SQL keyword.",
+              "hint": "This pattern excludes values from a list.",
               "help": {
-                "concept": "The the missing term keyword is used to negate conditions in SQL.",
-                "hint_1": "the missing term is used to exclude specific conditions.",
-                "hint_2": "It negates the condition it precedes."
+                "concept": "`the missing term IN` is used to exclude rows whose value appears in a given list.",
+                "hint_1": "The missing word comes before `IN` to make the filter exclude categories.",
+                "hint_2": "You need the keyword that flips membership in the list."
               },
-              "template": "SELECT * FROM products WHERE [blank1] category = 'Home';",
+              "template": "SELECT name FROM products WHERE category [blank1] IN ('Art', 'Home');",
               "choices": [
                 "NOT",
-                "AND",
-                "OR",
-                "LIKE"
+                "ORDER",
+                "FROM",
+                "LIMIT"
               ]
             },
-            "fill_blank_choice_2": {
-              "title": "Excluding Specific Prices",
-              "prompt": "Complete the query to exclude products with a price less than $20.",
-              "hint": "Which keyword negates a condition?",
+            "fb_not_like_keyword": {
+              "title": "Complete a NOT LIKE filter",
+              "prompt": "Fill in the missing SQL keyword.",
+              "hint": "This query should exclude names that match a text pattern.",
               "help": {
-                "concept": "The the missing term keyword is used to negate conditions in SQL.",
-                "hint_1": "the missing term is used to exclude specific conditions.",
-                "hint_2": "It negates the condition it precedes."
+                "concept": "`the missing term LIKE` excludes rows whose text matches a pattern such as `%Pen%`.",
+                "hint_1": "The missing word should reverse the normal `LIKE` match.",
+                "hint_2": "Use the keyword that turns a matching pattern into an excluded one."
               },
-              "template": "SELECT * FROM products WHERE [blank1] price < 20;",
+              "template": "SELECT name FROM products WHERE name [blank1] LIKE '%Pen%';",
               "choices": [
                 "NOT",
-                "AND",
+                "ASC",
                 "OR",
-                "LIKE"
+                "BETWEEN"
               ]
             },
-            "code_input_1": {
-              "title": "Filter Products by Category",
-              "prompt": "Write a query to find all products that are not in the 'Art' category.",
+            "ci_not_category_filter": {
+              "title": "Exclude one category",
+              "prompt": "Write a query that returns the `name` and `category` columns for all products that are not in the `Art` category. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT name, category\nFROM products\nWHERE ;"
             },
-            "code_input_2": {
-              "title": "Exclude Low Stock Items",
-              "prompt": "Write a query to find products that are not in the 'Stationery' category and have a stock greater than 10.",
+            "ci_not_price_filter": {
+              "title": "Keep products not above a price",
+              "prompt": "Write a query that returns `name` and `price` for products where the price is not greater than 20. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT name, price\nFROM products\nWHERE ;"
             },
-            "code_input_3": {
-              "title": "Filter by Price and Category",
-              "prompt": "Write a query to find products that are not in the 'Home' category and have a price less than $50.",
+            "ci_not_in_categories": {
+              "title": "Exclude multiple categories",
+              "prompt": "Write a query that returns `name` and `category` for products whose category is not `Art` and not `Home`. Use a single WHERE condition with `NOT IN`. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "SELECT name, category\nFROM products\nWHERE category ;"
             }
           }
         }
@@ -200,13 +204,17 @@
     "sql-v2": {
       "sql-v2-2": {
         "not_conditions": {
-          "sketch1": {
-            "title": "Understanding NOT Conditions",
-            "bodyMarkdown": "The NOT condition in SQL is used to negate a condition in a WHERE clause. This means that it will return rows where the condition is not true. For example, if you want to find all products that are not in the 'Art' category, you can use the NOT condition.\n\n```sql\nSELECT * FROM products WHERE NOT category = 'Art';\n```\n\nThis query will return all products except those in the 'Art' category. Try it yourself by modifying the category to see how the results change."
+          "sketch_not_basics": {
+            "title": "What NOT does in a WHERE clause",
+            "bodyMarkdown": "The `NOT` keyword flips a condition. If a condition would normally keep some rows, `NOT` keeps the rows that do **not** match it.\n\nFor example, this query finds products that are **not** in the `Art` category:\n\n```sql\nSELECT name, category\nFROM products\nWHERE NOT category = 'Art';\n```\n\nStep by step:\n- `FROM products` reads rows from the `products` table.\n- `category = 'Art'` is true for Art products.\n- `NOT category = 'Art'` flips that result.\n- So the query keeps rows where the category is something other than `Art`.\n\nWith the dataset in this lesson, the results include items like `Desk Lamp`, `Notebook`, `Fountain Pen`, and `Office Chair`.\n\nYou can think of `NOT` as meaning **exclude rows that match this condition**.\n\nTry it yourself: write the query in the SQL editor, click Run query, and then change `'Art'` to `'Home'` to see how the results change."
           },
-          "sketch2": {
-            "title": "Combining NOT with Other Conditions",
-            "bodyMarkdown": "You can combine the NOT condition with other logical operators like AND and OR to create more complex queries. For instance, if you want to find products that are not in the 'Art' category and have a price greater than $20, you can write:\n\n```sql\nSELECT * FROM products WHERE NOT category = 'Art' AND price > 20;\n```\n\nThis query will return products that are not in the 'Art' category and are priced above $20. Try this query and adjust the price to see different results."
+          "sketch_not_with_other_conditions": {
+            "title": "Using NOT with comparisons and grouped logic",
+            "bodyMarkdown": "You can use `NOT` with comparison conditions too.\n\nExample:\n\n```sql\nSELECT name, price\nFROM products\nWHERE NOT price > 20;\n```\n\nLine by line:\n- `SELECT name, price` shows the product name and price.\n- `FROM products` uses the products table.\n- `price > 20` would match products more expensive than 20.\n- `NOT price > 20` instead keeps products whose price is **not greater than 20**.\n\nIn this dataset, that includes products such as `Sketchbook`, `Notebook`, and `Fountain Pen`.\n\nYou can also combine `NOT` with grouped conditions:\n\n```sql\nSELECT name, category, stock\nFROM products\nWHERE NOT (category = 'Home' OR stock < 10);\n```\n\nHere is the idea:\n- First, the part inside parentheses is checked: `category = 'Home' OR stock < 10`.\n- Then `NOT` flips the whole grouped result.\n- That means the query excludes Home products and also excludes products with stock below 10.\n\nParentheses are helpful because they make it clear what `NOT` is reversing.\n\nYour turn: run the grouped example, then remove the parentheses and compare the results. Notice how grouping changes the meaning."
+          },
+          "sketch_not_in_like_between": {
+            "title": "Common patterns: NOT IN, NOT LIKE, and NOT BETWEEN",
+            "bodyMarkdown": "SQL often uses `NOT` in common patterns.\n\nExample with `NOT IN`:\n\n```sql\nSELECT name, category\nFROM products\nWHERE category NOT IN ('Art', 'Home');\n```\n\nThis keeps only products whose category is neither `Art` nor `Home`.\n\nExample with `NOT BETWEEN`:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price NOT BETWEEN 10 AND 30;\n```\n\nThis keeps products priced outside the range from 10 to 30.\n\nExample with `NOT LIKE`:\n\n```sql\nSELECT name\nFROM products\nWHERE name NOT LIKE '%Pen%';\n```\n\nThis excludes names containing the text `Pen`.\n\nWorked example from this dataset:\n- `Fountain Pen` contains `Pen`, so `name LIKE '%Pen%'` is true.\n- `NOT LIKE '%Pen%'` flips that to false.\n- So `Fountain Pen` is excluded.\n\nThese forms are often easier to read than writing a longer opposite condition by hand.\n\nTry this: in the SQL editor, run the `NOT BETWEEN` example, click Run query, and then change the range to `15 AND 40` to see which products stay in the results table."
           }
         }
       }

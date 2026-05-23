@@ -55,6 +55,12 @@ describe("resolveRightRailSqlProps", () => {
                     "CREATE TABLE products (id INTEGER, name TEXT, category TEXT);",
                 sqlSeedSql: "INSERT INTO products VALUES (1, 'Sketchbook', 'Art');",
                 sqlInitialTableSnapshots: snapshots,
+                sqlPaneOptions: {
+                    showTables: true,
+                    showErd: true,
+                    showChen: false,
+                    defaultTab: "tables",
+                },
             },
         });
 
@@ -66,6 +72,12 @@ describe("resolveRightRailSqlProps", () => {
                 "CREATE TABLE products (id INTEGER, name TEXT, category TEXT);",
             sqlSeedSql: "INSERT INTO products VALUES (1, 'Sketchbook', 'Art');",
             sqlInitialTableSnapshots: snapshots,
+            sqlPaneOptions: {
+                showTables: true,
+                showErd: true,
+                showChen: false,
+                defaultTab: "tables",
+            },
         });
     });
 

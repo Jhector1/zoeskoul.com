@@ -4,68 +4,103 @@
       "sql-v2-0": {
         "thinking_in_questions_and_answers": {
           "label": "Thinking in Questions and Answers",
-          "summary": "Explore how questions translate into SQL queries using the students_intro dataset.",
+          "summary": "Learn to turn a plain-English question into a simple SQL answer using SELECT and FROM on the students table.",
           "cards": {
             "sketch0": {
-              "title": "Introduction to SQL Queries"
+              "title": "A SQL query is a question you ask a table"
             },
             "sketch1": {
-              "title": "Understanding the SELECT Statement"
+              "title": "Sometimes you want the whole table, and sometimes only part of it"
+            },
+            "sketch2": {
+              "title": "Read the answer by matching columns to the question"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Query Practice Project"
+              "title": "Ask and answer simple questions with SQL"
             }
           },
           "projectSteps": {
-            "quiz5": {
-              "title": "Retrieve Student Names"
+            "ci_select_all_students": {
+              "title": "Show the whole students table"
             },
-            "quiz10": {
-              "title": "Retrieve Student Grades"
+            "ci_select_names_only": {
+              "title": "Show only student names"
             },
-            "quiz11": {
-              "title": "Retrieve Student Ages"
+            "ci_select_name_and_city": {
+              "title": "Answer a two-part question"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "Basic SQL Query Structure",
-              "prompt": "What is the purpose of the `SELECT` statement in SQL?",
-              "hint": "Think about what you want to do when you want to see data.",
+            "sc_question_select_name": {
+              "title": "Pick the best question",
+              "prompt": "Which plain-English question matches this query?\n\nSELECT name\nFROM students;",
+              "hint": "The query asks for one column only: `name`.",
               "help": {
-                "concept": "The `SELECT` statement is used to retrieve data from one or more columns in a table.",
-                "hint_1": "The `SELECT` statement is used to view data.",
-                "hint_2": "It is the first part of a query that specifies which data you want to see."
+                "concept": "A `SELECT` query answers the question described by the columns you request and the table you read from.",
+                "hint_1": "Look at the selected column. The query does not ask for age, grade, or city.",
+                "hint_2": "The matching question should ask only for student names from the `students` table."
               },
               "options": {
-                "a": "To delete data from a table",
-                "b": "To retrieve data from a table",
-                "c": "To update data in a table",
-                "d": "To insert data into a table"
+                "a": "Show me all student names.",
+                "b": "Show me all student ages.",
+                "c": "Show me all student grades and cities.",
+                "d": "Show me the whole students table."
               }
             },
-            "quiz2": {
-              "title": "Columns in a SQL Query",
-              "prompt": "Which columns can you retrieve using the following query: `SELECT name, grade FROM students;`? Choose all that apply.",
-              "hint": "Look at the columns listed after `SELECT`.",
+            "sc_meaning_of_star": {
+              "title": "Understand the star",
+              "prompt": "In the query `SELECT * FROM students;`, what does `*` mean?",
+              "hint": "Think about whether SQL is asking for one column or every column.",
               "help": {
-                "concept": "The columns listed after `SELECT` are the ones that will be retrieved.",
-                "hint_1": "Check the columns specified in the query.",
-                "hint_2": "Only the columns explicitly mentioned will be retrieved."
+                "concept": "In a basic `SELECT` statement, `*` is shorthand for all columns in the chosen table.",
+                "hint_1": "If the table has `id`, `name`, `grade`, `age`, and `city`, `*` includes all of them.",
+                "hint_2": "The correct choice is the one that means the full row structure, not a single special column."
               },
               "options": {
-                "a": "name",
-                "b": "grade",
-                "c": "age",
-                "d": "city"
+                "a": "Only the first column",
+                "b": "All columns in the table",
+                "c": "Only text columns",
+                "d": "The table name"
               }
             },
-            "quiz3": {
-              "title": "Order of SQL Query Clauses",
-              "prompt": "Arrange the SQL query clauses in the correct order.",
+            "mc_parts_of_simple_query": {
+              "title": "Identify what the query says",
+              "prompt": "Choose all true statements about this query:\n\nSELECT name, city\nFROM students;",
+              "hint": "Check both the selected columns and the table name.",
+              "help": {
+                "concept": "A simple SQL query has one part that names the columns to return and another part that names the table to read.",
+                "hint_1": "This query returns two columns, not one and not the whole table.",
+                "hint_2": "The true statements should mention `name` and `city` as outputs and `students` as the source table."
+              },
+              "options": {
+                "a": "It returns the `name` column.",
+                "b": "It returns the `city` column.",
+                "c": "It reads from the `students` table.",
+                "d": "It returns only the `grade` column."
+              }
+            },
+            "mc_good_beginner_questions": {
+              "title": "Questions this module can answer",
+              "prompt": "Choose all questions that can be answered with only `SELECT` and `FROM` in this module.",
+              "hint": "This module stays at the level of choosing columns and a table.",
+              "help": {
+                "concept": "With only `SELECT` and `FROM`, you can ask for columns from a table, but not filter rows yet.",
+                "hint_1": "Questions like \"show me names\" or \"show me names and grades\" fit. Questions that need conditions do not.",
+                "hint_2": "Pick the options that ask for all rows from `students`, not only rows matching a condition."
+              },
+              "options": {
+                "a": "Show me all student names.",
+                "b": "Show me all student names and grades.",
+                "c": "Show me only students from Chicago.",
+                "d": "Show me all cities in the students table."
+              }
+            },
+            "dr_build_simple_query": {
+              "title": "Build a basic query",
+              "prompt": "Arrange the tokens to make a query that shows the `name` column from the `students` table.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -73,122 +108,96 @@
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "SELECT",
-                "t2": "FROM"
+                "t1": "students",
+                "t2": ";",
+                "t3": "SELECT",
+                "t4": "name",
+                "t5": "FROM"
               }
             },
-            "quiz4": {
-              "title": "Completing a SQL Query",
-              "prompt": "Complete the SQL query to retrieve the `age` of students: `SELECT [blank1] FROM students;`",
-              "hint": "Think about which column you want to retrieve.",
+            "dr_build_two_column_query": {
+              "title": "Order the query parts",
+              "prompt": "Arrange the tokens to make a query that shows `name` and `grade` from `students`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
-                "concept": "The column you want to retrieve should be placed after `SELECT`.",
-                "hint_1": "You are interested in the `the missing term` of students.",
-                "hint_2": "The correct column name is `the missing term`."
-              },
-              "template": "SELECT [blank1] FROM students;",
-              "choices": [
-                "age",
-                "name",
-                "grade",
-                "city"
-              ]
-            },
-            "quiz5": {
-              "title": "Retrieve Student Names",
-              "prompt": "Write a SQL query to retrieve the names of all students from the `students` table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "-- Write your SQL query here"
-            },
-            "quiz6": {
-              "title": "SQL Query Result",
-              "prompt": "What will be the result of the query `SELECT city FROM students;`?",
-              "hint": "Look at the column specified after `SELECT`.",
-              "help": {
-                "concept": "The query retrieves the data from the column specified after `SELECT`.",
-                "hint_1": "The column specified is `city`.",
-                "hint_2": "The result will be a list of cities."
-              },
-              "options": {
-                "a": "A list of student names",
-                "b": "A list of student grades",
-                "c": "A list of student cities",
-                "d": "A list of student ages"
-              }
-            },
-            "quiz7": {
-              "title": "Understanding SQL Syntax",
-              "prompt": "Which of the following are valid SQL statements? Choose all that apply.",
-              "hint": "Focus on statements that retrieve data.",
-              "help": {
-                "concept": "Valid SQL statements for this module involve selecting data.",
-                "hint_1": "Look for statements that use `SELECT`.",
-                "hint_2": "Statements that modify data are not covered in this module."
-              },
-              "options": {
-                "a": "SELECT name FROM students;",
-                "b": "DELETE FROM students;",
-                "c": "SELECT age, grade FROM students;",
-                "d": "INSERT INTO students (name) VALUES ('John');"
-              }
-            },
-            "quiz8": {
-              "title": "SQL Query Construction",
-              "prompt": "Arrange the parts of a SQL query to form a correct statement.",
-              "hint": "Start with the `SELECT` clause.",
-              "help": {
-                "concept": "A SQL query starts with `SELECT` followed by `FROM`.",
-                "hint_1": "The `SELECT` clause comes first.",
-                "hint_2": "The `FROM` clause follows the `SELECT` clause."
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "FROM students",
-                "t2": "SELECT name"
+                "t1": "students",
+                "t2": "SELECT",
+                "t3": ";",
+                "t4": "name, grade",
+                "t5": "FROM"
               }
             },
-            "quiz9": {
-              "title": "SQL Query Completion",
-              "prompt": "Complete the SQL query to retrieve the `grade` of students: `SELECT [blank1] FROM students;`",
-              "hint": "Think about which column you want to retrieve.",
+            "fb_from_table_name": {
+              "title": "Complete the table name",
+              "prompt": "Fill in the missing part of the query.",
+              "hint": "Use the actual table name from the schema browser.",
               "help": {
-                "concept": "The column you want to retrieve should be placed after `SELECT`.",
-                "hint_1": "You are interested in the `the missing term` of students.",
-                "hint_2": "The correct column name is `the missing term`."
+                "concept": "The `FROM` clause names the table that SQL should read.",
+                "hint_1": "This dataset has one table called `the missing term`.",
+                "hint_2": "Choose the table name, not a column like `name` or `grade`."
               },
-              "template": "SELECT [blank1] FROM students;",
+              "template": "SELECT name FROM [blank1];",
               "choices": [
-                "age",
+                "students",
                 "name",
                 "grade",
                 "city"
               ]
             },
-            "quiz10": {
-              "title": "Retrieve Student Grades",
-              "prompt": "Write a SQL query to retrieve the grades of all students from the `students` table.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "fb_select_star": {
+              "title": "Complete the whole-table query",
+              "prompt": "Fill in the missing part so the query returns every column from `students`.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
               },
-              "starterCode": "-- Write your SQL query here"
+              "template": "SELECT [blank1] FROM students;",
+              "choices": [
+                "*",
+                "students",
+                "name",
+                "FROM"
+              ]
             },
-            "quiz11": {
-              "title": "Retrieve Student Ages",
-              "prompt": "Write a SQL query to retrieve the ages of all students from the `students` table.",
+            "ci_select_all_students": {
+              "title": "Show the whole students table",
+              "prompt": "Write a query that returns every column and every row from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query here"
+              "starterCode": "-- Return every column from the students table\nSELECT\n  -- TODO\nFROM students;"
+            },
+            "ci_select_names_only": {
+              "title": "Show only student names",
+              "prompt": "Write a query that returns only the `name` column from the `students` table. Use the SQL editor, click Run query, and check that the results table has one column named `name`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Return only the name column\nSELECT\n  -- TODO\nFROM students;"
+            },
+            "ci_select_name_and_city": {
+              "title": "Answer a two-part question",
+              "prompt": "Write a query that answers this question: \"What are each student's name and city?\" Return the `name` and `city` columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "-- Return each student's name and city\nSELECT\n  -- TODO\nFROM students;"
             }
           }
         }
@@ -199,13 +208,17 @@
     "sql-v2": {
       "sql-v2-0": {
         "thinking_in_questions_and_answers": {
-          "sketch1": {
-            "title": "Introduction to SQL Queries",
-            "bodyMarkdown": "SQL is a language used to interact with databases. It allows you to ask questions about the data stored in tables. For example, if you want to know the names of all students in a database, you can use a SQL query to retrieve that information. \n\nHere's a simple SQL query:\n\n```\nSELECT name FROM students;\n```\n\nThis query selects the `name` column from the `students` table. Try it yourself by writing this query in the SQL editor and clicking 'Run query'."
+          "sketch_question_to_query": {
+            "title": "A SQL query is a question you ask a table",
+            "bodyMarkdown": "When you use SQL, you are usually asking a table a question and getting an answer back in the results table.\n\nIn this lesson, the table is `students`. It has these columns:\n- `id`\n- `name`\n- `grade`\n- `age`\n- `city`\n\nA very simple question is: **\"Show me all the student names.\"**\n\nYou can write that as:\n\n```sql\nSELECT name\nFROM students;\n```\n\nStep by step:\n- `SELECT name` means \"I want the `name` column.\"\n- `FROM students` means \"get it from the `students` table.\"\n\nIf you run this query, the results table will show one column named `name` and one row for each student.\n\nWorked example:\n- Noor\n- Mia\n- Leo\n- Ava\n- Zane\n\nSo the big idea is:\n- your **question** becomes a **query**\n- your **answer** appears in the **results table**\n\nTry it yourself: write the query in the SQL editor, click **Run query**, and check that only the `name` column appears."
           },
-          "sketch2": {
-            "title": "Understanding the SELECT Statement",
-            "bodyMarkdown": "The `SELECT` statement is used to specify which columns you want to retrieve from a table. It is the most basic and essential part of any SQL query. \n\nFor example, to get the names and grades of students, you can write:\n\n```\nSELECT name, grade FROM students;\n```\n\nThis query will return a list of names and their corresponding grades. Try modifying the query to include the `age` column as well."
+          "sketch_whole_table_vs_part": {
+            "title": "Sometimes you want the whole table, and sometimes only part of it",
+            "bodyMarkdown": "Not every question asks for the same amount of information.\n\nIf your question is **\"Show me everything in the students table\"**, you can write:\n\n```sql\nSELECT *\nFROM students;\n```\n\nHere, `*` means \"all columns.\"\n\nIf your question is **\"Show me each student's name and city\"**, you can write:\n\n```sql\nSELECT name, city\nFROM students;\n```\n\nLine by line:\n- `SELECT name, city` asks for two specific columns.\n- `FROM students` tells SQL which table to read.\n\nWorked example from this dataset:\n- Noor, Chicago\n- Mia, Evanston\n- Leo, Chicago\n- Ava, Oak Park\n- Zane, Naperville\n\nSo you can think like this:\n- use `SELECT *` when you want the whole row\n- list column names when you want only certain parts\n\nTry this: change `SELECT *` to `SELECT grade` or `SELECT name, age`, then click **Run query** and compare the results table."
+          },
+          "sketch_reading_answers": {
+            "title": "Read the answer by matching columns to the question",
+            "bodyMarkdown": "A good beginner habit is to check whether the results table really answers your question.\n\nSuppose your question is: **\"What are the names and grades of all students?\"**\n\nThat query is:\n\n```sql\nSELECT name, grade\nFROM students;\n```\n\nNow read the answer carefully:\n- the `name` column answers **who**\n- the `grade` column answers **what grade**\n\nFor example, one row in the answer would pair:\n- Noor with A\n\nAnother would pair:\n- Ava with C\n\nIf your question asks for names and grades, but your query shows `age` instead of `grade`, then the query does not match the question yet.\n\nYour turn: before clicking **Run query**, say out loud what each selected column is supposed to answer. Then run the query and check whether the results table matches your words."
           }
         }
       }

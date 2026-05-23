@@ -16,3 +16,4 @@ export * from "./code/validateSemantic.js";
 export * from "./code/validateSemanticPython.js";
 export * from "./sql/index.js";
 export * from "./review/buildReviewFromManifestCore.js";
+export * from "./runtime/resolveEffectiveExerciseRuntime.js";

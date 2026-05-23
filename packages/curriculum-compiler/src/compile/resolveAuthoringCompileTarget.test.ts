@@ -138,10 +138,15 @@ describe("authoring compile target resolution", () => {
         });
 
         expect(manifest.subject.slug).toBe("sql-v2");
+        expect(manifest.subject.profileId).toBe("sql");
         expect(manifest.subject.meta?.versioning?.family).toBe("sql");
         expect(manifest.subject.meta?.versioning?.version).toBe(2);
         expect(manifest.subject.meta?.versioning?.status).toBe("active");
         expect(manifest.subject.meta?.versioning?.defaultForNewEnrollments).toBe(true);
         expect(manifest.subject.meta?.versioning?.supersedes).toBe("sql");
+        expect(manifest.modules[0]?.runtimeDefaults).toMatchObject({
+            kind: "sql",
+            datasetId: expect.any(String),
+        });
     });
 });

@@ -1,0 +1,13 @@
+{
+  "topicId": "secondary_sort",
+  "ok": true,
+  "issues": [
+    {
+      "code": "SQL_PROMPT_INTENT_GROUP_BY_WEAK_MISMATCH",
+      "category": "prompt_intent",
+      "severity": "warn",
+      "exerciseId": "ci-sort-category-then-created",
+      "message": "Prompt mentions grouping-like wording, but the solution query does not contain GROUP BY."
+    }
+  ]
+}

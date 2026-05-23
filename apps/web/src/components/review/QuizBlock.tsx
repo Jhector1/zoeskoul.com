@@ -31,6 +31,9 @@ import { useReviewRuntimeStore } from "@/components/review/module/runtime/review
 import { reviewDebug, summarizePracticePatch } from "@/components/review/module/runtime/reviewDebug";
 import { exerciseDebug, summarizeExercisePatch } from "@/components/review/module/runtime/exerciseDebug";
 import { deriveEntryCode, isWorkspace } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
+import {
+  resolveQuizPracticeRuntimeDefaults,
+} from "./quiz/runtimeDefaults";
 
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 import { useTaggedT } from "@/i18n/tagged";
@@ -383,6 +386,11 @@ export default function QuizBlock({
                                     orderBase = 0,
                                     toolsActive = true,
                                     routeExerciseId = null,
+                                    subjectRuntimeDefaults = null,
+                                    courseRuntimeDefaults = null,
+                                    moduleRuntimeDefaults = null,
+                                    sectionRuntimeDefaults = null,
+                                    topicRuntimeDefaults = null,
                                     onNavigateToExerciseRoute,
                                   }: {
   prereqsMet?: boolean;
@@ -407,6 +415,11 @@ export default function QuizBlock({
   orderBase?: number;
   toolsActive?: boolean;
   routeExerciseId?: string | null;
+  subjectRuntimeDefaults?: unknown;
+  courseRuntimeDefaults?: unknown;
+  moduleRuntimeDefaults?: unknown;
+  sectionRuntimeDefaults?: unknown;
+  topicRuntimeDefaults?: unknown;
   onNavigateToExerciseRoute?: (exerciseId: string) => Promise<void> | void;
 }) {
   const initState = initialState ?? null;
@@ -1296,6 +1309,14 @@ export default function QuizBlock({
 
     const nextIdx = findNextUnlockedIndex(idx);
     const isLast = nextIdx < 0;
+    const practiceRuntimeDefaults = resolveQuizPracticeRuntimeDefaults({
+      spec,
+      subjectRuntimeDefaults,
+      courseRuntimeDefaults,
+      moduleRuntimeDefaults,
+      sectionRuntimeDefaults,
+      topicRuntimeDefaults,
+    });
 
     return (
         <div
@@ -1311,6 +1332,11 @@ export default function QuizBlock({
                   ps={practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id]}
                   toolScopedId={stablePracticeKey}
                   toolsActive={canAutoBindToolsForExercise}
+                  subjectRuntimeDefaults={practiceRuntimeDefaults.subjectRuntimeDefaults}
+                  courseRuntimeDefaults={practiceRuntimeDefaults.courseRuntimeDefaults}
+                  moduleRuntimeDefaults={practiceRuntimeDefaults.moduleRuntimeDefaults}
+                  sectionRuntimeDefaults={practiceRuntimeDefaults.sectionRuntimeDefaults}
+                  topicRuntimeDefaults={practiceRuntimeDefaults.topicRuntimeDefaults}
                   unlocked={unlocked}
                   isCompleted={isCompleted}
                   locked={locked}

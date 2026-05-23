@@ -41,7 +41,11 @@ function resolveBase(messageBase: string) {
     };
 }
 
-function buildCodeInput(def: ManifestCodeInput, args: HandlerArgs) {
+function buildCodeInput(
+    def: ManifestCodeInput,
+    args: HandlerArgs,
+    manifest?: Pick<TopicBundleManifest, "runtimeDefaults">,
+) {
     const resolved = resolveBase(def.messageBase);
     const recipeHandler = RECIPE_REGISTRY[def.recipe.type];
 
@@ -49,13 +53,20 @@ function buildCodeInput(def: ManifestCodeInput, args: HandlerArgs) {
         throw new Error(`Unknown recipe type "${def.recipe.type}" for "${def.id}"`);
     }
 
-    return recipeHandler(def as any, args, resolved);
+    return recipeHandler(
+        {
+            ...(def as any),
+            topicRuntimeDefaults: manifest?.runtimeDefaults ?? null,
+        },
+        args,
+        resolved,
+    );
 }
 
 export function buildExerciseFromManifest(
     def: ManifestExercise,
     args: HandlerArgs,
-    manifest?: Pick<TopicBundleManifest, "serviceDefaults">,
+    manifest?: Pick<TopicBundleManifest, "serviceDefaults" | "runtimeDefaults">,
 ) {
     const resolved = resolveBase(def.messageBase);
     const ideConfig = mergeLearningIdeConfigs(
@@ -128,6 +139,7 @@ export function buildExerciseFromManifest(
                     serviceOverrides: ideConfig,
                 },
                 args,
+                manifest,
             );
 
         default:

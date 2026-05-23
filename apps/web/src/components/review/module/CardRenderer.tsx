@@ -16,6 +16,7 @@ import type { SavedSketchState } from "@/components/sketches/subjects/types";
 import { useTaggedT } from "@/i18n/tagged";
 import {FlowNavMode} from "@/components/review/navigation/FlowNavigator";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { buildQuizBlockRuntimeDefaultsProps } from "@/components/review/module/runtime/cardRuntimeDefaults";
 type ReviewCardSpecRecord = Record<string, unknown> | null | undefined;
 
 function GateBanner({ text }: { text: string }) {
@@ -57,6 +58,11 @@ export default function CardRenderer(props: {
     cardKey: string;
     topicId: string;
     tp: ReviewTopicProgress;
+    subjectRuntimeDefaults?: unknown;
+    courseRuntimeDefaults?: unknown;
+    moduleRuntimeDefaults?: unknown;
+    sectionRuntimeDefaults?: unknown;
+    topicRuntimeDefaults?: unknown;
     routeExerciseId?: string | null;
     defaultToolLanguage?: string;
     onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
@@ -84,6 +90,11 @@ export default function CardRenderer(props: {
         cardKey,
         topicId,
         tp,
+        subjectRuntimeDefaults,
+        courseRuntimeDefaults,
+        moduleRuntimeDefaults,
+        sectionRuntimeDefaults,
+        topicRuntimeDefaults,
         routeExerciseId,
         defaultToolLanguage = "python",
         onNavigateToExerciseRoute,
@@ -163,6 +174,13 @@ export default function CardRenderer(props: {
                     strictSequential: true,
                     unlimitedAttempts: false,
                 };
+        const runtimeDefaultsProps = buildQuizBlockRuntimeDefaultsProps({
+            subjectRuntimeDefaults,
+            courseRuntimeDefaults,
+            moduleRuntimeDefaults,
+            sectionRuntimeDefaults,
+            topicRuntimeDefaults,
+        });
 
         return (
             <div className={wrapCls}>
@@ -194,6 +212,7 @@ export default function CardRenderer(props: {
                             unlimitedAttempts={quizBlockProps.unlimitedAttempts}
                             orderBase={orderBase}
                             navigationMode={quizNavMode}
+                            {...runtimeDefaultsProps}
                             routeExerciseId={routeExerciseId}
                             onNavigateToExerciseRoute={
                                 onNavigateToExerciseRoute

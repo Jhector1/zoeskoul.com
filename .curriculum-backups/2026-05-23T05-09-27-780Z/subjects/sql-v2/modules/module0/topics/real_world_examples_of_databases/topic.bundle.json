@@ -1,0 +1,288 @@
+{
+  "topicId": "real_world_examples_of_databases",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-0",
+  "sectionSlug": "sql-v2-0-1",
+  "prefix": "sqlv2_0",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.label",
+    "summaryKey": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.cards.sketch0.title",
+      "sketchId": "sketch_1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.cards.sketch1.title",
+      "sketchId": "sketch_2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "code_input_1",
+            "titleKey": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.projectSteps.code_input_1.title",
+            "exerciseKey": "code_input_1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_input_2",
+            "titleKey": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.projectSteps.code_input_2.title",
+            "exerciseKey": "code_input_2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_input_3",
+            "titleKey": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.projectSteps.code_input_3.title",
+            "exerciseKey": "code_input_3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.real_world_examples_of_databases.sketch_1.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.real_world_examples_of_databases.sketch_1.bodyMarkdown"
+    },
+    {
+      "id": "sketch_2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.real_world_examples_of_databases.sketch_2.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.real_world_examples_of_databases.sketch_2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "single_choice_1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.quiz.single_choice_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "single_choice_2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.quiz.single_choice_2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.quiz.multi_choice_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "multi_choice_2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.quiz.multi_choice_2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "drag_reorder_1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.quiz.drag_reorder_1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "drag_reorder_2",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.quiz.drag_reorder_2",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.quiz.fill_blank_choice_1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "students"
+      }
+    },
+    {
+      "id": "fill_blank_choice_2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.quiz.fill_blank_choice_2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "*"
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.quiz.code_input_1",
+      "language": "sql",
+      "starterCode": "SELECT [column] FROM students;",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT name FROM students;"
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.quiz.code_input_2",
+      "language": "sql",
+      "starterCode": "SELECT * FROM [table];",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM students;"
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.real_world_examples_of_databases.quiz.code_input_3",
+      "language": "sql",
+      "starterCode": "SELECT [column] FROM students;",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT grade FROM students;"
+      }
+    }
+  ]
+}

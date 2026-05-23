@@ -3,101 +3,104 @@
     "sql-v2": {
       "sql-v2-0": {
         "what_sql_means": {
-          "label": "what sql means",
-          "summary": "what sql means in Getting Started with SQL and Databases",
+          "label": "What SQL Means",
+          "summary": "Learn what SQL is, how a table stores rows and columns, and how a simple SELECT query asks a database to show data from the students table.",
           "cards": {
             "sketch0": {
-              "title": "Introduction to SQL"
+              "title": "SQL is a way to ask a database questions"
             },
             "sketch1": {
-              "title": "Understanding Tables and Columns"
+              "title": "Tables are made of rows and columns"
+            },
+            "sketch2": {
+              "title": "A query is a request, not a change"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "SQL Query Practice"
+              "title": "Read the students table with simple SELECT queries"
             }
           },
           "projectSteps": {
-            "code_input_1": {
-              "title": "Basic SQL Query"
+            "ci_select_all_columns": {
+              "title": "Show every column from students"
             },
-            "code_input_2": {
-              "title": "Selecting Specific Columns"
+            "ci_select_name_column": {
+              "title": "Show just the name column"
             },
-            "code_input_3": {
-              "title": "Querying with SELECT"
+            "ci_select_two_columns": {
+              "title": "Show names and cities"
             }
           },
           "quiz": {
-            "single_choice_1": {
-              "title": "Purpose of SQL",
-              "prompt": "What is the primary purpose of SQL?",
-              "hint": "Think about what SQL is mainly used for in the context of databases.",
+            "sc_sql_stands_for": {
+              "title": "What SQL is for",
+              "prompt": "What is SQL mainly used for in this lesson?",
+              "hint": "Think about how the SQL editor and results table are used with the students table.",
               "help": {
-                "concept": "SQL is used to interact with databases, allowing you to query, update, and manage data.",
-                "hint_1": "SQL is not used for creating web pages or designing graphics.",
-                "hint_2": "Focus on the role of SQL in database management."
+                "concept": "SQL is a language for asking a database to show information from tables.",
+                "hint_1": "In this topic, you write a query, click Run query, and inspect returned rows.",
+                "hint_2": "Look for the choice about requesting or retrieving data from a database table."
               },
               "options": {
-                "a": "To create web pages",
-                "b": "To manage and manipulate databases",
-                "c": "To design graphics",
-                "d": "To write operating systems"
+                "a": "A way to ask a database for data",
+                "b": "A tool for drawing charts by hand",
+                "c": "A method for installing software",
+                "d": "A file format for images"
               }
             },
-            "single_choice_2": {
-              "title": "SQL Command for Data Retrieval",
-              "prompt": "Which SQL command is used to retrieve data from a database?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "sc_from_clause_role": {
+              "title": "What FROM does",
+              "prompt": "In the query `SELECT name FROM students;`, what does `FROM students` tell SQL?",
+              "hint": "It identifies where SQL should read the column from.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "The FROM clause names the table that the query reads.",
+                "hint_1": "The column `name` could exist in many tables, so SQL needs the table name too.",
+                "hint_2": "Choose the option about selecting the source table, not the output order or number of rows."
               },
               "options": {
-                "a": "INSERT",
-                "b": "SELECT",
-                "c": "UPDATE",
-                "d": "DELETE"
+                "a": "Which table to read data from",
+                "b": "Which row to delete",
+                "c": "How to sort the results",
+                "d": "How many columns to create"
               }
             },
-            "multi_choice_1": {
-              "title": "Components of a SQL Table",
-              "prompt": "Which of the following are components of a SQL table? Select all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "mc_table_parts": {
+              "title": "Parts of a table",
+              "prompt": "Which statements about the `students` table are correct? Choose all that apply.",
+              "hint": "Think about the difference between a column name and one full student record.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "A table is organized into columns that describe fields and rows that store complete records.",
+                "hint_1": "Items like `name` and `city` are labels for kinds of data, while one student entry is a row.",
+                "hint_2": "Pick the choices that describe columns as categories and rows as full records."
               },
               "options": {
-                "a": "Rows",
-                "b": "Columns",
-                "c": "Files",
-                "d": "Scripts"
+                "a": "`name` is a column",
+                "b": "One student entry like Noor's record is a row",
+                "c": "`students` is the value inside the `name` column",
+                "d": "`age` is the name of a database button"
               }
             },
-            "multi_choice_2": {
-              "title": "SQL Data Types",
-              "prompt": "Which of the following are common SQL data types? Select all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "mc_select_behavior": {
+              "title": "What SELECT can show",
+              "prompt": "Which queries are valid examples of using `SELECT` and `FROM` with the `students` table in this topic? Choose all that apply.",
+              "hint": "Stay with simple read-only queries that name columns and the students table.",
               "help": {
-                "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "A beginner SELECT query lists one or more columns, then names the table with FROM.",
+                "hint_1": "Look for choices that follow the pattern `SELECT ... FROM students;`.",
+                "hint_2": "More than one answer is correct, but avoid choices that are missing SELECT or use the clauses in the wrong order."
               },
               "options": {
-                "a": "INTEGER",
-                "b": "TEXT",
-                "c": "HTML",
-                "d": "JSON"
+                "a": "SELECT name FROM students;",
+                "b": "SELECT age, city FROM students;",
+                "c": "FROM students SELECT name;",
+                "d": "students FROM SELECT grade;"
               }
             },
-            "drag_reorder_1": {
-              "title": "SQL Query Structure",
-              "prompt": "Arrange the parts of a basic SQL query in the correct order.",
+            "dr_query_order_basic": {
+              "title": "Build a simple query",
+              "prompt": "Arrange the tokens to make a valid query that shows the `name` column from the `students` table.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -106,13 +109,15 @@
               },
               "tokens": {
                 "t1": "SELECT",
-                "t2": "FROM",
-                "t3": "table_name"
+                "t2": "name",
+                "t3": "FROM",
+                "t4": "students",
+                "t5": ";"
               }
             },
-            "drag_reorder_2": {
-              "title": "SQL Table Components",
-              "prompt": "Arrange the components of a SQL table in the order they appear.",
+            "dr_query_order_two_columns": {
+              "title": "Order a two-column query",
+              "prompt": "Arrange the tokens to make a valid query that shows `name` and `city` from `students`.",
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
@@ -120,74 +125,81 @@
                 "hint_2": "Place dependent pieces after the part they describe or complete."
               },
               "tokens": {
-                "t1": "Columns",
-                "t2": "Rows"
+                "t1": "SELECT",
+                "t2": "name",
+                "t3": ",",
+                "t4": "city",
+                "t5": "FROM",
+                "t6": "students",
+                "t7": ";"
               }
             },
-            "fill_blank_choice_1": {
-              "title": "SQL Command for Querying",
-              "prompt": "Fill in the blank to complete the SQL command for retrieving all data from a table: `SELECT * [blank1] students;`",
-              "hint": "Consider the keyword that specifies the table to select data the missing term.",
+            "fb_table_name_students": {
+              "title": "Fill in the table name",
+              "prompt": "Complete the query so it reads from the correct table.",
+              "hint": "Use the table that contains columns like `id`, `name`, `grade`, `age`, and `city`.",
               "help": {
-                "concept": "The the missing term keyword is used to specify the table in a SELECT query.",
-                "hint_1": "WHERE is used for conditions, INSERT is for adding data.",
-                "hint_2": "the missing term is the correct keyword to specify the table."
+                "concept": "The FROM clause must name the table that stores the data you want to read.",
+                "hint_1": "This lesson uses one table, and its name is shown in the schema browser.",
+                "hint_2": "Choose the table name used in examples like `SELECT name FROM ...`."
               },
-              "template": "SELECT * [blank1] students;",
+              "template": "SELECT name FROM [blank1];",
               "choices": [
-                "FROM",
-                "WHERE",
-                "INSERT"
+                "students",
+                "name",
+                "grade",
+                "city"
               ]
             },
-            "fill_blank_choice_2": {
-              "title": "SQL Table Structure",
-              "prompt": "Fill in the blank to complete the SQL table structure: `A table consists of columns and [blank1].`",
-              "hint": "Think about what holds the actual data in a table.",
+            "fb_column_name_choice": {
+              "title": "Fill in the column",
+              "prompt": "Complete the query so it shows student names.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
               "help": {
-                "concept": "the missing term hold the actual data entries in a table.",
-                "hint_1": "Files and scripts are not part of the table structure.",
-                "hint_2": "the missing term are the correct component that holds data."
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
               },
-              "template": "A table consists of columns and [blank1].",
+              "template": "SELECT [blank1] FROM students;",
               "choices": [
-                "rows",
-                "files",
-                "scripts"
+                "name",
+                "age",
+                "id",
+                "city"
               ]
             },
-            "code_input_1": {
-              "title": "Basic SQL Query",
-              "prompt": "Write a SQL query to select all columns from the `students` table.",
+            "ci_select_all_columns": {
+              "title": "Show every column from students",
+              "prompt": "Write a query that returns all columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "-- Return every column from the students table\nSELECT \nFROM students;"
             },
-            "code_input_2": {
-              "title": "Selecting Specific Columns",
-              "prompt": "Write a SQL query to select only the `name` and `grade` columns from the `students` table.",
+            "ci_select_name_column": {
+              "title": "Show just the name column",
+              "prompt": "Write a query that returns only the `name` column from the `students` table. Use the SQL editor, click Run query, and inspect the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "-- Return only student names\nSELECT \nFROM students;"
             },
-            "code_input_3": {
-              "title": "Querying with SELECT",
-              "prompt": "Write a SQL query to select the `city` column from the `students` table.",
+            "ci_select_two_columns": {
+              "title": "Show names and cities",
+              "prompt": "Write a query that returns the `name` and `city` columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "-- Write your SQL query below"
+              "starterCode": "-- Return student names and cities\nSELECT \nFROM students;"
             }
           }
         }
@@ -198,13 +210,17 @@
     "sql-v2": {
       "sql-v2-0": {
         "what_sql_means": {
-          "sketch_1": {
-            "title": "Introduction to SQL",
-            "bodyMarkdown": "SQL, or Structured Query Language, is a standard programming language specifically designed for managing and manipulating databases. It allows you to perform various operations such as querying data, updating records, and managing database structures. \n\nFor example, to retrieve all data from a table named `students`, you would use the following SQL command:\n\n```sql\nSELECT * FROM students;\n```\n\nThis command selects all columns from the `students` table. Try it yourself by writing a similar query in the SQL editor and clicking 'Run query'."
+          "sketch_sql_is_a_question_language": {
+            "title": "SQL is a way to ask a database questions",
+            "bodyMarkdown": "SQL stands for **Structured Query Language**. A database stores information in tables, and SQL is the language we use to ask for that information.\n\nThink of a table like a spreadsheet with named columns. In this lesson, the table is called `students`, and it has columns such as `id`, `name`, `grade`, `age`, and `city`.\n\nA very simple SQL query looks like this:\n\n```sql\nSELECT name\nFROM students;\n```\n\nWhat this means:\n\n- `SELECT name` says, “show me the `name` column”\n- `FROM students` says, “get it from the `students` table”\n\nIf you run that query in the SQL editor and click **Run query**, the results table will list student names such as Noor, Mia, Leo, Ava, and Zane.\n\nWorked example:\n\nIf the `students` table includes a row like `(1, 'Noor', 'A', 15, 'Chicago')`, the query above returns just Noor from that row because you asked for only the `name` column.\n\n**Try it yourself:** Write the query above in the SQL editor, click **Run query**, and check the results table. Then change `name` to `city` and run it again."
           },
-          "sketch_2": {
-            "title": "Understanding Tables and Columns",
-            "bodyMarkdown": "In SQL, data is organized into tables, which consist of rows and columns. Each column represents a specific attribute of the data, while each row represents a single record.\n\nConsider the `students` table:\n\n| id | name | grade | age | city     |\n|----|------|-------|-----|----------|\n| 1  | Noor | A     | 15  | Chicago  |\n| 2  | Mia  | A     | 14  | Evanston |\n| 3  | Leo  | B     | 15  | Chicago  |\n| 4  | Ava  | C     | 14  | Oak Park |\n| 5  | Zane | B     | 16  | Naperville |\n\nEach column (e.g., `name`, `grade`) holds a specific type of data, and each row is a complete set of data for one student. Try writing a query to select only the `name` and `grade` columns from the `students` table."
+          "sketch_rows_columns_and_tables": {
+            "title": "Tables are made of rows and columns",
+            "bodyMarkdown": "A database table organizes data into **columns** and **rows**.\n\n- A **column** describes a type of information, like `name` or `age`\n- A **row** is one complete record, like one student\n\nIn the `students` table:\n\n- `name` is a column\n- `city` is a column\n- the row for Leo is one record: `3, Leo, B, 15, Chicago`\n\nHere is a query that asks for two columns:\n\n```sql\nSELECT name, city\nFROM students;\n```\n\nLine by line:\n\n- `SELECT name, city` asks for two columns instead of one\n- `FROM students` tells SQL which table to read\n\nWorked example:\n\nFor the row `(2, 'Mia', 'A', 14, 'Evanston')`, this query returns `Mia` and `Evanston`.\n\nThat means SQL does not have to show every column. You choose which columns you want to see.\n\n**Your turn:** Run the query, then replace `city` with `grade` and compare the new results table."
+          },
+          "sketch_select_from_mental_model": {
+            "title": "A query is a request, not a change",
+            "bodyMarkdown": "In this first module, you are using SQL to **read** data, not change it. A `SELECT` query asks the database to show information.\n\nExample:\n\n```sql\nSELECT id, name, grade\nFROM students;\n```\n\nStep by step:\n\n- `SELECT` starts a read-only question\n- `id, name, grade` are the columns to display\n- `FROM students` names the table to read\n\nWorked example:\n\nFrom the row `(5, 'Zane', 'B', 16, 'Naperville')`, this query would show `5`, `Zane`, and `B`.\n\nSo the main mental model is:\n\n1. pick the columns with `SELECT`\n2. name the table with `FROM`\n3. run the query and inspect the results table\n\n**Try this:** Write a query that shows `name` and `age` from `students`. Click **Run query** and check whether each row now shows only those two pieces of information."
           }
         }
       }

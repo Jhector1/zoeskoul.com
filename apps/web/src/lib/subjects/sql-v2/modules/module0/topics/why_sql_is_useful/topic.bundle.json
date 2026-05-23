@@ -5,6 +5,18 @@
   "sectionSlug": "sql-v2-0-1",
   "prefix": "sqlv2_0",
   "minutes": 15,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "students_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
   "topic": {
     "labelKey": "topics.sql-v2.sql-v2-0.why_sql_is_useful.label",
     "summaryKey": "topics.sql-v2.sql-v2-0.why_sql_is_useful.summary"
@@ -14,14 +26,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-0.why_sql_is_useful.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "sketch_1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-0.why_sql_is_useful.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "sketch_2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.why_sql_is_useful.cards.sketch2.title",
+      "sketchId": "sketch_3",
       "height": 420
     },
     {
@@ -50,27 +69,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz9",
-            "titleKey": "topics.sql-v2.sql-v2-0.why_sql_is_useful.projectSteps.quiz9.title",
-            "exerciseKey": "quiz9",
+            "id": "ci_1",
+            "titleKey": "topics.sql-v2.sql-v2-0.why_sql_is_useful.projectSteps.ci_1.title",
+            "exerciseKey": "ci_1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz10",
-            "titleKey": "topics.sql-v2.sql-v2-0.why_sql_is_useful.projectSteps.quiz10.title",
-            "exerciseKey": "quiz10",
+            "id": "ci_2",
+            "titleKey": "topics.sql-v2.sql-v2-0.why_sql_is_useful.projectSteps.ci_2.title",
+            "exerciseKey": "ci_2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz11",
-            "titleKey": "topics.sql-v2.sql-v2-0.why_sql_is_useful.projectSteps.quiz11.title",
-            "exerciseKey": "quiz11",
+            "id": "ci_3",
+            "titleKey": "topics.sql-v2.sql-v2-0.why_sql_is_useful.projectSteps.ci_3.title",
+            "exerciseKey": "ci_3",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -82,42 +101,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "sketch_1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-0.why_sql_is_useful.sketch1.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-0.why_sql_is_useful.sketch1.bodyMarkdown"
+      "titleKey": "sketches.sql-v2.sql-v2-0.why_sql_is_useful.sketch_1.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.why_sql_is_useful.sketch_1.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sketch_2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-0.why_sql_is_useful.sketch2.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-0.why_sql_is_useful.sketch2.bodyMarkdown"
+      "titleKey": "sketches.sql-v2.sql-v2-0.why_sql_is_useful.sketch_2.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.why_sql_is_useful.sketch_2.bodyMarkdown"
+    },
+    {
+      "id": "sketch_3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.why_sql_is_useful.sketch_3.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.why_sql_is_useful.sketch_3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc_1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.quiz1",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
-      }
-    },
-    {
-      "id": "quiz2",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.quiz2",
+      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.sc_1",
       "optionIds": [
         "a",
         "b",
@@ -130,11 +138,28 @@
       }
     },
     {
-      "id": "quiz3",
+      "id": "sc_2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.sc_2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc_1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.quiz3",
+      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.mc_1",
       "optionIds": [
         "a",
         "b",
@@ -151,11 +176,11 @@
       }
     },
     {
-      "id": "quiz4",
+      "id": "mc_2",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.quiz4",
+      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.mc_2",
       "optionIds": [
         "a",
         "b",
@@ -167,16 +192,40 @@
         "optionIds": [
           "a",
           "b",
-          "d"
+          "c"
         ]
       }
     },
     {
-      "id": "quiz5",
+      "id": "dr_1",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.quiz5",
+      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.dr_1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
+      }
+    },
+    {
+      "id": "dr_2",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.dr_2",
       "tokenIds": [
         "t1",
         "t2",
@@ -192,43 +241,23 @@
       }
     },
     {
-      "id": "quiz6",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.quiz6",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t2",
-          "t1",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "quiz7",
+      "id": "fb_1",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.quiz7",
+      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.fb_1",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "*"
+        "value": "FROM"
       }
     },
     {
-      "id": "quiz8",
+      "id": "fb_2",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.quiz8",
+      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.fb_2",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -236,51 +265,87 @@
       }
     },
     {
-      "id": "quiz9",
+      "id": "ci_1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.quiz9",
+      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.ci_1",
       "language": "sql",
-      "starterCode": "-- Write your SQL query below",
+      "starterCode": "-- Return every column from the students table\nSELECT \nFROM students;",
       "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
       "recipe": {
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM students;"
+        "solutionCode": "SELECT *\nFROM students;"
       }
     },
     {
-      "id": "quiz10",
+      "id": "ci_2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.quiz10",
+      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.ci_2",
       "language": "sql",
-      "starterCode": "-- Write your SQL query below",
+      "starterCode": "-- Return only student names\nSELECT \nFROM students;",
       "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
       "recipe": {
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT name, age FROM students;"
+        "solutionCode": "SELECT name\nFROM students;"
       }
     },
     {
-      "id": "quiz11",
+      "id": "ci_3",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.quiz11",
+      "messageBase": "topics.sql-v2.sql-v2-0.why_sql_is_useful.quiz.ci_3",
       "language": "sql",
-      "starterCode": "-- Write your SQL query below",
+      "starterCode": "-- Return student names and grades\nSELECT \nFROM students;",
       "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
       "recipe": {
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM students;"
+        "solutionCode": "SELECT name, grade\nFROM students;"
       }
     }
   ]

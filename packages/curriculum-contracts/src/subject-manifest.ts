@@ -10,6 +10,7 @@ import type { ManifestIdeServiceConfig } from "./ide-services.js";
 export type SubjectManifest = {
   subject: {
     slug: string;
+    profileId?: string | null;
     catalogSlug?: string | null;
     genKey: string;
     order: number;

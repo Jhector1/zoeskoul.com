@@ -59,6 +59,7 @@ import {
     getTargetKeyForRouteTarget, maxUnlockedCardIndexForTopic
 } from "@/components/review/module/runtime/progressiveUnlock";
 import {resolveRightRailSqlProps} from "../runtime/resolveRightRailSqlProps";
+import { resolveTopicStageRuntimeDefaults } from "../runtime/topicStageRuntimeDefaults";
 
 function registryEntryToRouteTarget(entry: any): ReviewResolvedRouteTarget | null {
     if (!entry) return null;
@@ -484,6 +485,15 @@ export function useReviewModuleController({
     const viewCards = useMemo(
         () => getViewCards(viewTopic),
         [viewTopic],
+    );
+    const topicStageRuntimeDefaults = useMemo(
+        () =>
+            resolveTopicStageRuntimeDefaults({
+                mod,
+                viewTopic,
+                routeSectionSlug: routeTarget?.sectionSlug ?? sectionSlug ?? null,
+            }),
+        [mod, routeTarget?.sectionSlug, sectionSlug, viewTopic],
     );
 
     const viewTid = viewTopic?.id ?? effectiveViewTopicId ?? firstTopicId ?? "";
@@ -1533,6 +1543,7 @@ export function useReviewModuleController({
                 sqlSchemaSql: rightRailSqlProps.sqlSchemaSql,
                 sqlSeedSql: rightRailSqlProps.sqlSeedSql,
                 sqlInitialTableSnapshots: rightRailSqlProps.sqlInitialTableSnapshots,
+                sqlPaneOptions: rightRailSqlProps.sqlPaneOptions,
             },
         },
 
@@ -1632,6 +1643,11 @@ export function useReviewModuleController({
             onOpenCertificate: handleOpenCertificate,
             onActiveCardIndexChange: handleNavigateCardIndex,
             onNavigateToExerciseRoute: handleNavigateToExerciseRoute,
+            subjectRuntimeDefaults: topicStageRuntimeDefaults.subjectRuntimeDefaults,
+            courseRuntimeDefaults: topicStageRuntimeDefaults.courseRuntimeDefaults,
+            moduleRuntimeDefaults: topicStageRuntimeDefaults.moduleRuntimeDefaults,
+            sectionRuntimeDefaults: topicStageRuntimeDefaults.sectionRuntimeDefaults,
+            topicRuntimeDefaults: topicStageRuntimeDefaults.topicRuntimeDefaults,
         },
         moduleNav: {
             locale,
