@@ -4,7 +4,23 @@ import { cloudinaryImageUrl } from "@/lib/cloudinary/url";
 
 const optimizer = (imagePublicId: string) =>
     cloudinaryImageUrl(imagePublicId, {});
+function buildImageEntry(img: { id: string; publicId: string; alt?: string; width?: number; height?: number }) {
+    const src = optimizer(img.publicId).trim();
 
+    if (!src) {
+        return null;
+    }
+
+    return [
+        img.id,
+        {
+            src,
+            alt: img.alt ?? "",
+            ...(img.width != null ? { width: img.width } : {}),
+            ...(img.height != null ? { height: img.height } : {}),
+        },
+    ] as const;
+}
 export function buildSketchesFromManifest(
     manifest: TopicBundleManifest,
 ): Record<string, SketchEntry> {
@@ -63,15 +79,9 @@ export function buildSketchesFromManifest(
                 ...(sketch.images?.length
                     ? {
                         images: Object.fromEntries(
-                            sketch.images.map((img) => [
-                                img.id,
-                                {
-                                    src: optimizer(img.publicId),
-                                    alt: img.alt ?? "",
-                                    ...(img.width != null ? { width: img.width } : {}),
-                                    ...(img.height != null ? { height: img.height } : {}),
-                                },
-                            ]),
+                            sketch.images
+                                .map(buildImageEntry)
+                                .filter((entry): entry is NonNullable<typeof entry> => entry !== null),
                         ),
                     }
                     : {}),

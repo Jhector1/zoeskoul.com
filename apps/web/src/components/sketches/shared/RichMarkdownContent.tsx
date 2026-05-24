@@ -77,6 +77,14 @@ export function RichContentImageBlock({
                                       }: {
     image: RichContentImage;
 }) {
+    const [failed, setFailed] = React.useState(false);
+
+    const src = String(image.src ?? "").trim();
+
+    if (!src || failed) {
+        return null;
+    }
+
     const width = image.width ?? 1600;
     const height = image.height ?? 900;
 
@@ -85,17 +93,19 @@ export function RichContentImageBlock({
             className={join(
                 "my-4 w-full overflow-hidden rounded-2xl border ui-border ui-bg-surface-2",
                 "mx-auto max-w-2xl",
-                image.maxWidthClassName??"  max-w-sm",
+                image.maxWidthClassName ?? "max-w-sm",
                 image.figureClassName,
             )}
         >
             <Image
-                src={image.src}
-                alt={image.alt}
+                src={src}
+                alt={image.alt || ""}
                 width={width}
                 height={height}
+                onError={() => setFailed(true)}
                 className={image.className ?? "block h-auto w-full object-cover"}
             />
+
             {image.caption ? (
                 <figcaption className="px-4 py-3 text-xs ui-text-muted">
                     {image.caption}

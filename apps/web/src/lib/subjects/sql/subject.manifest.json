@@ -40,7 +40,15 @@
       "weekStart": 1,
       "weekEnd": 1,
       "accessOverride": "free",
-
+      "runtimeDefaults": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
 
       "meta": {
         "estimatedMinutes": 45,
@@ -94,8 +102,8 @@
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "datasetId": "products_catalog",
         "fixedSqlDialect": "sqlite",
         "resultShape": "table"
