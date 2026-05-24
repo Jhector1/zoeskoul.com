@@ -1,0 +1,7 @@
+{
+  "name": "Error",
+  "message": "EPERM: operation not permitted, mkdir '/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/subjects/sql-v2'",
+  "stack": "Error: EPERM: operation not permitted, mkdir '/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/subjects/sql-v2'\n    at Object.mkdir (node:internal/fs/promises:857:10)\n    at ensureDir (/Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/src/write/writeTopicArtifacts.ts:9:5)\n    at writeJsonAtomic (/Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/src/write/writeTopicArtifacts.ts:14:5)\n    at writeTopicArtifacts (/Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/src/write/writeTopicArtifacts.ts:28:5)\n    at compileSubjectPipeline (/Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/src/compile/compileSubjectPipeline.ts:712:17)\n    at /Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/src/compile/compileSqlFoundations.regression.test.ts:181:9\n    at file:///Users/admin/Documents/NextJSProject/zoeskoul.com/node_modules/.pnpm/@vitest+runner@4.1.5/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20",
+  "code": "EPERM",
+  "retryable": false
+}

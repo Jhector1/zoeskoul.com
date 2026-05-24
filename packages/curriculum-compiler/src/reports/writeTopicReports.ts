@@ -6,7 +6,7 @@ import type {
     RepairReport,
     SemanticValidationReport,
 } from "@zoeskoul/curriculum-profiles";
-import type { TopicQualityReport } from "@zoeskoul/curriculum-contracts";
+import type { CurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 
 async function ensureDir(filePath: string) {
     await fs.mkdir(path.dirname(filePath), { recursive: true });
@@ -31,8 +31,8 @@ export async function writeTopicReports(args: {
     critiqueReport?: CritiqueReport;
     semanticReport?: SemanticValidationReport;
     goldenReport?: GoldenValidationReport;
-    topicQualityReport?: TopicQualityReport;
     topicBundle?: unknown;
+    qualityReport?: CurriculumQualityReport;
 }) {
     const baseDir = path.join(
         ".curriculum-drafts",
@@ -74,11 +74,11 @@ export async function writeTopicReports(args: {
         await writeJsonAtomic(path.join(baseDir, "golden-report.json"), args.goldenReport);
     }
 
-    if (args.topicQualityReport) {
-        await writeJsonAtomic(path.join(baseDir, "topic-quality-report.json"), args.topicQualityReport);
-    }
-
     if (args.topicBundle !== undefined) {
         await writeJsonAtomic(path.join(baseDir, "emitted-topic-bundle.json"), args.topicBundle);
+    }
+
+    if (args.qualityReport !== undefined) {
+        await writeJsonAtomic(path.join(baseDir, "quality-report.json"), args.qualityReport);
     }
 }

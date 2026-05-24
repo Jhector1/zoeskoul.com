@@ -1,0 +1,534 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "python-v2",
+  "profileId": "python",
+  "title": "Python for Beginners",
+  "subtitle": "Start from zero and build small interactive Python programs",
+  "intendedFor": "Absolute beginners, students, tutors, and self-learners who want to learn Python fundamentals from the ground up.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "courseOverview": {
+    "recommendedSequence": "Complete modules in order. Each module adds one core beginner programming skill and ends with a small project-style outcome.",
+    "summary": "This course teaches the core foundations of Python: running code, values, variables, input, strings, conditions, and loops.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 0,
+        "title": "Getting Started with Python",
+        "coreSkill": "Help learners run Python, read simple programs, and build confidence with the basic syntax.",
+        "outputFocus": "Build a small personal introduction program that prints formatted information about the learner."
+      },
+      {
+        "moduleNumber": 1,
+        "title": "Variables, Input, and Strings",
+        "coreSkill": "Teach learners how programs remember values, accept user input, and produce readable text.",
+        "outputFocus": "Build a simple profile card generator that asks for user details and prints a formatted result."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Conditions and Logic",
+        "coreSkill": "Help learners make programs choose different paths using comparisons and conditionals.",
+        "outputFocus": "Build a grade or eligibility checker that explains why a result was selected."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Loops and Iteration",
+        "coreSkill": "Teach learners to repeat actions, process sequences, and control loop behavior.",
+        "outputFocus": "Build a mini number game or text analyzer that repeats until a condition is met."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "python-v2",
+      "startModuleNumber": 0,
+      "endModuleNumber": 3
+    },
+    "releases": [
+      {
+        "name": "python-v2",
+        "startModuleNumber": 0,
+        "endModuleNumber": 3
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.12,
+        "multi_choice": 0.1,
+        "drag_reorder": 0.1,
+        "fill_blank_choice": 0.18,
+        "code_input": 0.5
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "topicExerciseMin": 4
+      },
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 8,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 3,
+        "projectCodeInputTarget": 5,
+        "projectCodeInputMax": 7,
+        "maxAttempts": null
+      }
+    },    "projectPolicy": {
+      "minProjectsBeforeCapstone": 2,
+      "capstoneRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "requireModuleProject": true,
+      "maxModuleProjectLength": 320
+    }
+  },
+  "authoringGuidance": [
+    "This course must always use profileId python and subjectSlug python-v2.",
+    "Learners use the ZoeSkoul browser code editor, a Run button, and an output panel.",
+    "Do not ask learners to use unavailable local-development workflows such as creating files, installing packages, or running local commands.",    "Use beginner-safe instructions such as: type code in the editor, click Run, and check the output panel.",
+    "Use 'write Python code' instead of 'write a Python script'.",
+    "Do not use SQL datasets, SQL tables, sql_query recipes, datasetId, fixedSqlDialect, resultShape, or checkSql in Python lessons.",
+    "Python code_input exercises must use recipeType fixed_tests unless the topic explicitly requires semantic checks.",
+    "Python fixed_tests exercises must include explicit stdin/stdout tests.",
+    "Write code_input solutions as complete runnable programs that read input and print output so the grader can validate them deterministically.",
+    "Keep examples beginner friendly: print, values, variables, strings, input, conditions, loops, and simple string operations."
+  ],
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "Two or three short lessons per week, with one small module project after each module.",
+    "recommendedCourseDeliverables": [
+      "Short concept sketches",
+      "Prediction quizzes",
+      "Fill-in syntax checks",
+      "Small Python code-input exercises",
+      "Module projects",
+      "Beginner final project"
+    ],
+    "toolingSuggestions": [
+      "ZoeSkoul browser code editor",
+      "Run button and output panel"
+    ],
+    "closingNote": "Learners finish able to write small interactive Python programs using variables, input, conditions, and loops."
+  },
+  "modules": [
+    {
+      "moduleNumber": 0,
+      "moduleSlug": "python-v2-0",
+      "prefix": "pyv2_0",
+      "title": "Getting Started with Python",
+      "purpose": "Help learners run Python, read simple programs, and build confidence with the basic syntax.",
+      "learningObjectives": [
+        "Run Python code in a beginner-friendly environment",
+        "Explain how statements, expressions, and comments work",
+        "Use print output to observe program behavior"
+      ],
+      "guidedExercises": [
+        "Print messages",
+        "Fix syntax errors",
+        "Trace simple statements"
+      ],
+      "quizFocus": [
+        "program flow",
+        "syntax basics",
+        "output prediction"
+      ],
+      "moduleProject": "Build a small personal introduction program that prints formatted information about the learner.",
+      "sections": [
+        {
+          "sectionSlug": "python-v2-0-setup-and-first-programs",
+          "title": "Setup and First Programs",
+          "topics": [
+            {
+              "topicId": "what-python-is",
+              "title": "What Python Is Used For",
+              "summary": "Understand Python's role in automation, web apps, data, beginner programming, and AI.",              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe common Python use cases",
+                "Identify when Python is a good tool"
+              ]
+            },
+            {
+              "topicId": "running-python-code",
+              "title": "Running Python Code",
+              "summary": "Use the ZoeSkoul browser code editor, Run button, and output panel to execute Python code.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Type Python code in the browser editor",
+                "Click Run and read the output panel",
+                "Recognize simple execution errors"
+              ]
+            },
+            {
+              "topicId": "print-comments-and-errors",
+              "title": "Print, Comments, and First Errors",
+              "summary": "Use print statements and comments while learning how syntax errors appear.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Write comments",
+                "Use print",
+                "Fix basic syntax mistakes"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-v2-0-values-and-expressions",
+          "title": "Values and Expressions",
+          "topics": [
+            {
+              "topicId": "values-types-and-literals",
+              "title": "Values, Types, and Literals",
+              "summary": "Recognize strings, integers, floats, booleans, and None.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Identify common value types",
+                "Use literals correctly"
+              ]
+            },
+            {
+              "topicId": "operators-and-expressions",
+              "title": "Operators and Expressions",
+              "summary": "Combine values with arithmetic, comparison, and boolean operators.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Evaluate expressions",
+                "Predict operator results"
+              ]
+            },
+            {
+              "topicId": "reading-error-messages",
+              "title": "Reading Error Messages",
+              "summary": "Learn how to read tracebacks and locate the line that needs attention.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Locate an error line",
+                "Explain a simple traceback"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "python-v2-1",
+      "prefix": "pyv2_1",
+      "title": "Variables, Input, and Strings",
+      "purpose": "Teach learners how programs remember values, accept user input, and produce readable text.",
+      "learningObjectives": [
+        "Create and update variables",
+        "Convert input values safely",
+        "Build strings with common methods and f-strings"
+      ],
+      "guidedExercises": [
+        "Store values",
+        "Convert input",
+        "Format output"
+      ],
+      "quizFocus": [
+        "assignment",
+        "type conversion",
+        "string operations"
+      ],
+      "moduleProject": "Build a simple profile card generator that asks for user details and prints a formatted result.",
+      "sections": [
+        {
+          "sectionSlug": "python-v2-1-variables-and-assignment",
+          "title": "Variables and Assignment",
+          "topics": [
+            {
+              "topicId": "naming-and-assigning-variables",
+              "title": "Naming and Assigning Variables",
+              "summary": "Use clear variable names and understand reassignment.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Create variables",
+                "Explain reassignment"
+              ]
+            },
+            {
+              "topicId": "input-and-type-conversion",
+              "title": "Input and Type Conversion",
+              "summary": "Use input, int, float, and str to handle user-entered values.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Collect input",
+                "Convert input to useful types"
+              ]
+            },
+            {
+              "topicId": "common-variable-mistakes",
+              "title": "Common Variable Mistakes",
+              "summary": "Avoid undefined names, accidental strings, and confusing names.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Recognize NameError",
+                "Fix type conversion mistakes"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-v2-1-string-foundations",
+          "title": "String Foundations",
+          "topics": [
+            {
+              "topicId": "string-indexing-and-slicing",
+              "title": "String Indexing and Slicing",
+              "summary": "Access characters and substrings using indexes and slices.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Use positive and negative indexes",
+                "Slice strings"
+              ]
+            },
+            {
+              "topicId": "string-methods",
+              "title": "Useful String Methods",
+              "summary": "Use methods like lower, strip, replace, split, and join.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Clean text",
+                "Transform strings"
+              ]
+            },
+            {
+              "topicId": "f-strings-and-formatting",
+              "title": "F-Strings and Formatting",
+              "summary": "Create readable output with f-strings and formatted values.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Write f-strings",
+                "Format numeric output"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "python-v2-2",
+      "prefix": "pyv2_2",
+      "title": "Conditions and Logic",
+      "purpose": "Help learners make programs choose different paths using comparisons and conditionals.",
+      "learningObjectives": [
+        "Write if, elif, and else blocks",
+        "Use comparison and boolean logic",
+        "Design clear branching rules"
+      ],
+      "guidedExercises": [
+        "Classify values",
+        "Validate inputs",
+        "Predict branches"
+      ],
+      "quizFocus": [
+        "branching",
+        "truthiness",
+        "boolean logic"
+      ],
+      "moduleProject": "Build a grade or eligibility checker that explains why a result was selected.",
+      "sections": [
+        {
+          "sectionSlug": "python-v2-2-conditional-basics",
+          "title": "Conditional Basics",
+          "topics": [
+            {
+              "topicId": "if-elif-else",
+              "title": "If, Elif, and Else",
+              "summary": "Control which code runs based on conditions.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Write conditional blocks",
+                "Trace branch selection"
+              ]
+            },
+            {
+              "topicId": "comparisons-and-truth-values",
+              "title": "Comparisons and Truth Values",
+              "summary": "Use comparison operators and understand True and False results.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Use comparison operators",
+                "Predict boolean results"
+              ]
+            },
+            {
+              "topicId": "indentation-and-blocks",
+              "title": "Indentation and Blocks",
+              "summary": "Understand why indentation controls structure in Python.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Identify code blocks",
+                "Fix indentation errors"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-v2-2-combining-conditions",
+          "title": "Combining Conditions",
+          "topics": [
+            {
+              "topicId": "and-or-not",
+              "title": "And, Or, and Not",
+              "summary": "Combine conditions with boolean operators.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Use and/or/not",
+                "Avoid confusing compound conditions"
+              ]
+            },
+            {
+              "topicId": "truthiness-and-empty-values",
+              "title": "Truthiness and Empty Values",
+              "summary": "Understand how empty strings, zero, and None behave in conditions.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Explain truthy and falsy values",
+                "Use truthiness intentionally"
+              ]
+            },
+            {
+              "topicId": "checking-special-cases-first",
+              "title": "Checking Special Cases First",
+              "summary": "Use clear early checks to make conditional logic easier to read.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Check simple cases before complex cases",
+                "Reduce deeply nested if statements",
+                "Design clear validation checks"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "python-v2-3",
+      "prefix": "pyv2_3",
+      "title": "Loops and Iteration",
+      "purpose": "Teach learners to repeat actions, process sequences, and control loop behavior.",
+      "learningObjectives": [
+        "Use for loops and while loops",
+        "Trace loop state",
+        "Apply break, continue, and range"
+      ],
+      "guidedExercises": [
+        "Loop over strings",
+        "Count with range",
+        "Stop loops safely"
+      ],
+      "quizFocus": [
+        "iteration",
+        "loop variables",
+        "off-by-one errors"
+      ],
+      "moduleProject": "Build a mini number game or text analyzer that repeats until a condition is met.",
+      "sections": [
+        {
+          "sectionSlug": "python-v2-3-for-loops",
+          "title": "For Loops",
+          "topics": [
+            {
+              "topicId": "for-loops-over-text",
+              "title": "For Loops Over Text",
+              "summary": "Loop through a string one character at a time.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Write for loops over strings",
+                "Trace loop variables",
+                "Predict repeated output"
+              ]
+            },
+            {
+              "topicId": "range-and-counting",
+              "title": "Range and Counting Patterns",
+              "summary": "Use range to repeat code a controlled number of times.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Use range",
+                "Avoid off-by-one errors"
+              ]
+            },
+            {
+              "topicId": "accumulators-and-counters",
+              "title": "Accumulators and Counters",
+              "summary": "Build totals, counts, and running summaries in loops.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Use accumulator variables",
+                "Update state correctly"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-v2-3-while-loops",
+          "title": "While Loops",
+          "topics": [
+            {
+              "topicId": "while-loop-basics",
+              "title": "While Loop Basics",
+              "summary": "Repeat code until a condition becomes false.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Write while loops",
+                "Prevent infinite loops"
+              ]
+            },
+            {
+              "topicId": "break-and-continue",
+              "title": "Break and Continue",
+              "summary": "Control loop flow using break and continue.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Use break",
+                "Use continue safely"
+              ]
+            },
+            {
+              "topicId": "loop-debugging",
+              "title": "Loop Debugging",
+              "summary": "Trace loop values to find repeated or skipped work.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Debug loop state",
+                "Find loop boundary issues"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

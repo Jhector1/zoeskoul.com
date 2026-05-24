@@ -1,6 +1,9 @@
 import type { PublishGateResult } from "@zoeskoul/curriculum-contracts";
 import { getProfileServices } from "@zoeskoul/curriculum-profiles";
-import { readSubjectTopicReports } from "../reports/readTopicReports.js";
+import {
+    readCourseQualityReport,
+    readSubjectTopicReports,
+} from "../reports/readTopicReports.js";
 
 export async function buildPublishGateResult(args: {
     subjectSlug: string;
@@ -21,6 +24,10 @@ export async function buildPublishGateResult(args: {
     let goldenFailures = 0;
     let hintWarnings = 0;
     let sqlRunnerMissing = 0;
+    let qualityBlockers = 0;
+    let qualityErrors = 0;
+    let qualityWarnings = 0;
+    let qualityInfos = 0;
 
     for (const report of reports) {
         for (const repair of report.repairReport?.repairs ?? []) {
@@ -43,6 +50,34 @@ export async function buildPublishGateResult(args: {
         for (const issue of report.goldenReport?.issues ?? []) {
             if (issue.severity === "error") goldenFailures += 1;
         }
+
+        qualityBlockers += report.qualityReport?.severityCounts?.blocker ?? 0;
+        qualityErrors += report.qualityReport?.severityCounts?.error ?? 0;
+        qualityWarnings += report.qualityReport?.severityCounts?.warning ?? 0;
+        qualityInfos += report.qualityReport?.severityCounts?.info ?? 0;
+    }
+
+    const courseQualityReport = await readCourseQualityReport({
+        subjectSlug: args.subjectSlug,
+    });
+
+    if (courseQualityReport) {
+        qualityBlockers = Math.max(
+            qualityBlockers,
+            courseQualityReport.severityCounts.blocker,
+        );
+        qualityErrors = Math.max(
+            qualityErrors,
+            courseQualityReport.severityCounts.error,
+        );
+        qualityWarnings = Math.max(
+            qualityWarnings,
+            courseQualityReport.severityCounts.warning,
+        );
+        qualityInfos = Math.max(
+            qualityInfos,
+            courseQualityReport.severityCounts.info,
+        );
     }
 
     const reasons: string[] = [];
@@ -69,6 +104,14 @@ export async function buildPublishGateResult(args: {
 
     if (goldenFailures > 0) {
         reasons.push(`Golden validation found ${goldenFailures} error(s).`);
+    }
+
+    if (qualityBlockers > 0) {
+        reasons.push(`Curriculum quality report found ${qualityBlockers} blocker(s).`);
+    }
+
+    if (qualityErrors > 0) {
+        reasons.push(`Curriculum quality report found ${qualityErrors} error(s).`);
     }
 
     if (repairsHigh > 0 && !policy.allowHighSeverityRepairs) {
@@ -102,6 +145,10 @@ export async function buildPublishGateResult(args: {
             hintWarnings,
             semanticFailures,
             goldenFailures,
+            qualityBlockers,
+            qualityErrors,
+            qualityWarnings,
+            qualityInfos,
         },
     };
 }

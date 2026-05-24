@@ -45,40 +45,200 @@
           "sectionSlug": "section_14_1",
           "title": "Why Relationships Matter",
           "topics": [
-            "related_data",
-            "one_to_one_relationships",
-            "one_to_many_relationships",
-            "many_to_many_relationships"
+            {
+              "topicId": "related_data",
+              "title": "Related Data",
+              "summary": "Understand related data so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe related data in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding related data."
+              ]
+            },
+            {
+              "topicId": "one_to_one_relationships",
+              "title": "One-to-One Relationships",
+              "summary": "Understand one-to-one relationships so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe one-to-one relationships in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding one-to-one relationships."
+              ]
+            },
+            {
+              "topicId": "one_to_many_relationships",
+              "title": "One-to-Many Relationships",
+              "summary": "Understand one-to-many relationships so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe one-to-many relationships in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding one-to-many relationships."
+              ]
+            },
+            {
+              "topicId": "many_to_many_relationships",
+              "title": "Many-to-Many Relationships",
+              "summary": "Understand many-to-many relationships so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe many-to-many relationships in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding many-to-many relationships."
+              ]
+            }
           ]
         },
         {
           "sectionSlug": "section_14_2",
           "title": "Keys and Relationships",
           "topics": [
-            "primary_key_review",
-            "foreign_key_review",
-            "linking_tables_properly",
-            "avoiding_duplicate_data"
+            {
+              "topicId": "primary_key_review",
+              "title": "Primary Key Review",
+              "summary": "Understand primary key review so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe primary key review in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding primary key review."
+              ]
+            },
+            {
+              "topicId": "foreign_key_review",
+              "title": "Foreign Key Review",
+              "summary": "Understand foreign key review so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe foreign key review in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding foreign key review."
+              ]
+            },
+            {
+              "topicId": "linking_tables_properly",
+              "title": "Linking Tables Properly",
+              "summary": "Practice linking tables properly so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Linking Tables Properly in a simple SQL query or workflow.",
+                "Explain what result or output linking tables properly should produce."
+              ]
+            },
+            {
+              "topicId": "avoiding_duplicate_data",
+              "title": "Avoiding Duplicate Data",
+              "summary": "Understand avoiding duplicate data so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe avoiding duplicate data in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding avoiding duplicate data."
+              ]
+            }
           ]
         },
         {
           "sectionSlug": "section_14_3",
           "title": "Good Beginner Design Habits",
           "topics": [
-            "keep_tables_focused",
-            "separate_repeated_information",
-            "use_ids_consistently",
-            "design_for_future_queries"
+            {
+              "topicId": "keep_tables_focused",
+              "title": "Keeping Tables Focused",
+              "summary": "Understand keeping tables focused so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe keeping tables focused in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding keeping tables focused."
+              ]
+            },
+            {
+              "topicId": "separate_repeated_information",
+              "title": "Separating Repeated Information",
+              "summary": "Understand separating repeated information so you can explain the idea in beginner-friendly language.",
+              "minutes": 16,
+              "technical": false,
+              "learningGoals": [
+                "Describe separating repeated information in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding separating repeated information."
+              ]
+            },
+            {
+              "topicId": "use_ids_consistently",
+              "title": "Using IDs Consistently",
+              "summary": "Understand using IDs consistently so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe using IDs consistently in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding using IDs consistently."
+              ]
+            },
+            {
+              "topicId": "design_for_future_queries",
+              "title": "Designing for Future Queries",
+              "summary": "Understand designing for future queries so you can explain the idea in beginner-friendly language.",
+              "minutes": 16,
+              "technical": false,
+              "learningGoals": [
+                "Describe designing for future queries in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding designing for future queries."
+              ]
+            }
           ]
         },
         {
           "sectionSlug": "section_14_4",
           "title": "Relational Design Practice",
           "topics": [
-            "store_and_product_model",
-            "student_and_enrollment_model",
-            "customer_and_order_model",
-            "turn_design_into_sql_tables"
+            {
+              "topicId": "store_and_product_model",
+              "title": "Store and Product Model",
+              "summary": "Practice store and product model so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Store and Product Model in a simple SQL query or workflow.",
+                "Explain what result or output store and product model should produce."
+              ]
+            },
+            {
+              "topicId": "student_and_enrollment_model",
+              "title": "Student and Enrollment Model",
+              "summary": "Practice student and enrollment model so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Student and Enrollment Model in a simple SQL query or workflow.",
+                "Explain what result or output student and enrollment model should produce."
+              ]
+            },
+            {
+              "topicId": "customer_and_order_model",
+              "title": "Customer and Order Model",
+              "summary": "Practice customer and order model so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Customer and Order Model in a simple SQL query or workflow.",
+                "Explain what result or output customer and order model should produce."
+              ]
+            },
+            {
+              "topicId": "turn_design_into_sql_tables",
+              "title": "Turn Design into SQL Tables",
+              "summary": "Practice turn design into SQL tables so you can use it in a simple SQL query or workflow.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Use Turn Design into SQL Tables in a simple SQL query or workflow.",
+                "Explain what result or output turn design into SQL tables should produce."
+              ]
+            }
           ]
         }
       ],
@@ -96,40 +256,252 @@
           "sectionSlug": "section_15_1",
           "title": "Mini Project: Student Database",
           "topics": [
-            "design_the_tables",
-            "insert_sample_data",
-            "write_simple_queries",
-            "build_summary_reports"
+            {
+              "topicId": "design_the_tables",
+              "title": "Design the Tables",
+              "summary": "Apply earlier SQL skills through design the tables in a small beginner project.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine earlier SQL skills to complete a beginner task about design the tables.",
+                "Explain why the chosen tables, queries, or summaries fit the project goal."
+              ],
+              "tags": [
+                "project"
+              ]
+            },
+            {
+              "topicId": "insert_sample_data",
+              "title": "Insert Sample Data",
+              "summary": "Apply earlier SQL skills through insert sample data in a small beginner project.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine earlier SQL skills to complete a beginner task about insert sample data.",
+                "Explain why the chosen tables, queries, or summaries fit the project goal."
+              ],
+              "tags": [
+                "project"
+              ]
+            },
+            {
+              "topicId": "write_simple_queries",
+              "title": "Write Simple Queries",
+              "summary": "Apply earlier SQL skills through write simple queries in a small beginner project.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine earlier SQL skills to complete a beginner task about write simple queries.",
+                "Explain why the chosen tables, queries, or summaries fit the project goal."
+              ],
+              "tags": [
+                "project"
+              ]
+            },
+            {
+              "topicId": "build_summary_reports",
+              "title": "Build Summary Reports",
+              "summary": "Apply earlier SQL skills through build summary reports in a small beginner project.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine earlier SQL skills to complete a beginner task about build summary reports.",
+                "Explain why the chosen tables, queries, or summaries fit the project goal."
+              ],
+              "tags": [
+                "project"
+              ]
+            }
           ]
         },
         {
           "sectionSlug": "section_15_2",
           "title": "Mini Project: Store Database",
           "topics": [
-            "products_table",
-            "customers_table",
-            "orders_table",
-            "query_sales_information"
+            {
+              "topicId": "products_table",
+              "title": "Products Table",
+              "summary": "Apply earlier SQL skills through products table in a small beginner project.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine earlier SQL skills to complete a beginner task about products table.",
+                "Explain why the chosen tables, queries, or summaries fit the project goal."
+              ],
+              "tags": [
+                "project"
+              ]
+            },
+            {
+              "topicId": "customers_table",
+              "title": "Customers Table",
+              "summary": "Apply earlier SQL skills through customers table in a small beginner project.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine earlier SQL skills to complete a beginner task about customers table.",
+                "Explain why the chosen tables, queries, or summaries fit the project goal."
+              ],
+              "tags": [
+                "project"
+              ]
+            },
+            {
+              "topicId": "orders_table",
+              "title": "Orders Table",
+              "summary": "Apply earlier SQL skills through orders table in a small beginner project.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine earlier SQL skills to complete a beginner task about orders table.",
+                "Explain why the chosen tables, queries, or summaries fit the project goal."
+              ],
+              "tags": [
+                "project"
+              ]
+            },
+            {
+              "topicId": "query_sales_information",
+              "title": "Query Sales Information",
+              "summary": "Apply earlier SQL skills through query sales information in a small beginner project.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine earlier SQL skills to complete a beginner task about query sales information.",
+                "Explain why the chosen tables, queries, or summaries fit the project goal."
+              ],
+              "tags": [
+                "project"
+              ]
+            }
           ]
         },
         {
           "sectionSlug": "section_15_3",
           "title": "Mini Project: Employee Database",
           "topics": [
-            "employees_and_departments",
-            "salary_analysis",
-            "department_summaries",
-            "joined_reports"
+            {
+              "topicId": "employees_and_departments",
+              "title": "Employees and Departments",
+              "summary": "Apply earlier SQL skills through employees and departments in a small beginner project.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine earlier SQL skills to complete a beginner task about employees and departments.",
+                "Explain why the chosen tables, queries, or summaries fit the project goal."
+              ],
+              "tags": [
+                "project"
+              ]
+            },
+            {
+              "topicId": "salary_analysis",
+              "title": "Salary Analysis",
+              "summary": "Apply earlier SQL skills through salary analysis in a small beginner project.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine earlier SQL skills to complete a beginner task about salary analysis.",
+                "Explain why the chosen tables, queries, or summaries fit the project goal."
+              ],
+              "tags": [
+                "project"
+              ]
+            },
+            {
+              "topicId": "department_summaries",
+              "title": "Department Summaries",
+              "summary": "Apply earlier SQL skills through department summaries in a small beginner project.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine earlier SQL skills to complete a beginner task about department summaries.",
+                "Explain why the chosen tables, queries, or summaries fit the project goal."
+              ],
+              "tags": [
+                "project"
+              ]
+            },
+            {
+              "topicId": "joined_reports",
+              "title": "Joined Reports",
+              "summary": "Apply earlier SQL skills through joined reports in a small beginner project.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine earlier SQL skills to complete a beginner task about joined reports.",
+                "Explain why the chosen tables, queries, or summaries fit the project goal."
+              ],
+              "tags": [
+                "project"
+              ]
+            }
           ]
         },
         {
           "sectionSlug": "section_15_4",
           "title": "Capstone Practice",
           "topics": [
-            "ask_business_questions",
-            "write_full_sql_solutions",
-            "explain_query_logic",
-            "build_beginner_confidence"
+            {
+              "topicId": "ask_business_questions",
+              "title": "Ask Business Questions",
+              "summary": "Pull together earlier SQL skills through ask business questions in a cumulative beginner SQL task.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine core SQL skills to solve a beginner business question about ask business questions.",
+                "Explain the logic behind a complete SQL solution using concepts from earlier modules."
+              ],
+              "tags": [
+                "project",
+                "capstone"
+              ]
+            },
+            {
+              "topicId": "write_full_sql_solutions",
+              "title": "Write Full SQL Solutions",
+              "summary": "Pull together earlier SQL skills through write full SQL solutions in a cumulative beginner SQL task.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine core SQL skills to solve a beginner business question about write full SQL solutions.",
+                "Explain the logic behind a complete SQL solution using concepts from earlier modules."
+              ],
+              "tags": [
+                "project",
+                "capstone"
+              ]
+            },
+            {
+              "topicId": "explain_query_logic",
+              "title": "Explain Query Logic",
+              "summary": "Pull together earlier SQL skills through explain query logic in a cumulative beginner SQL task.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine core SQL skills to solve a beginner business question about explain query logic.",
+                "Explain the logic behind a complete SQL solution using concepts from earlier modules."
+              ],
+              "tags": [
+                "project",
+                "capstone"
+              ]
+            },
+            {
+              "topicId": "build_beginner_confidence",
+              "title": "Build Beginner Confidence",
+              "summary": "Pull together earlier SQL skills through build beginner confidence in a cumulative beginner SQL task.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine core SQL skills to solve a beginner business question about build beginner confidence.",
+                "Explain the logic behind a complete SQL solution using concepts from earlier modules."
+              ],
+              "tags": [
+                "project",
+                "capstone"
+              ]
+            }
           ]
         }
       ],

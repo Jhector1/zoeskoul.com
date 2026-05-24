@@ -1,6 +1,6 @@
 import type { FSNode, WorkspaceStateV2 } from "@/components/ide/types";
 import type { IdeWorkspaceAccess } from "@/components/ide/workspaceHook/workspace.types";
-import { WorkspaceLanguage } from "@zoeskoul/code-contracts";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 
 export type IdeWorkspacePolicy = {
     canCreateFiles: boolean;

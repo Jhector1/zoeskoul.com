@@ -15,6 +15,8 @@ async function makeAuthoringFixture(overrides: {
     catalog?: Record<string, unknown>;
     workspacePolicy?: Record<string, unknown>;
     courseSpec?: Record<string, unknown>;
+    coursePlan?: Record<string, unknown>;
+    authoringIndex?: Record<string, unknown>;
     omitCourseSpec?: boolean;
 } = {}) {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), "curriculum-authoring-"));
@@ -61,6 +63,29 @@ async function makeAuthoringFixture(overrides: {
             ...overrides.catalog,
         },
     });
+    await writeJson(path.join(authoringRoot, "authoring.index.json"), {
+        version: 2,
+        layout: "subject-course",
+        roots: {
+            catalogs: "catalogs",
+            subjects: "subjects",
+            shared: "shared",
+        },
+        subjects: [
+            {
+                subjectSlug: "sql",
+                path: "subjects/sql",
+                courseOrder: ["sql-foundations"],
+                courses: [
+                    {
+                        courseSlug: "sql-foundations",
+                        path: "subjects/sql/courses/sql-foundations/course.spec.json",
+                    },
+                ],
+            },
+        ],
+        ...overrides.authoringIndex,
+    });
     await writeJson(path.join(subjectRoot, "subject.plan.json"), {
         subjectSlug: "sql",
         catalogSlug: "sql",
@@ -80,6 +105,22 @@ async function makeAuthoringFixture(overrides: {
             supersededBy: null,
         },
         ...overrides.subjectPlan,
+    });
+    await writeJson(path.join(courseRoot, "course.plan.json"), {
+        subjectSlug: "sql",
+        courseSlug: "sql-foundations",
+        catalogSlug: "sql",
+        profileId: "sql",
+        title: "SQL Foundations",
+        moduleOrder: ["intro"],
+        modules: [
+            {
+                moduleSlug: "intro",
+                moduleNumber: 1,
+                title: "Intro",
+            },
+        ],
+        ...overrides.coursePlan,
     });
 
     if (!overrides.omitCourseSpec) {
@@ -556,5 +597,133 @@ describe("validateSubjectAuthoring", () => {
         const authoringRoot = await makeAuthoringFixture();
 
         await expect(validateSubjectAuthoring("sql", { authoringRoot })).resolves.toEqual([]);
+    });
+
+    it("fails when course.plan moduleOrder does not match course.spec modules", async () => {
+        const authoringRoot = await makeAuthoringFixture({
+            coursePlan: {
+                moduleOrder: ["old-intro"],
+                modules: [
+                    {
+                        moduleSlug: "old-intro",
+                        moduleNumber: 1,
+                        title: "Intro",
+                    },
+                ],
+            },
+        });
+
+        await expect(validateSubjectAuthoring("sql", { authoringRoot })).resolves.toEqual(
+            expect.arrayContaining([
+                expect.stringContaining(
+                    "course.plan.json: moduleOrder must exactly match course.spec.json modules[].moduleSlug",
+                ),
+                expect.stringContaining(
+                    "course.plan.json: modules[].moduleSlug must exactly match course.spec.json modules[].moduleSlug",
+                ),
+            ]),
+        );
+    });
+
+    it("fails when authoring.index references an inactive course", async () => {
+        const authoringRoot = await makeAuthoringFixture({
+            authoringIndex: {
+                subjects: [
+                    {
+                        subjectSlug: "sql",
+                        path: "subjects/sql",
+                        courseOrder: ["sql-foundations"],
+                        courses: [
+                            {
+                                courseSlug: "sql-foundations",
+                                path: "subjects/sql/courses/sql-foundations/course.spec.json",
+                            },
+                            {
+                                courseSlug: "legacy-sql",
+                                path: "subjects/sql/courses/legacy-sql/course.spec.json",
+                            },
+                        ],
+                    },
+                ],
+            },
+        });
+
+        await expect(validateSubjectAuthoring("sql", { authoringRoot })).resolves.toEqual(
+            expect.arrayContaining([
+                expect.stringContaining(
+                    'authoring.index.json: subject "sql" references inactive course "legacy-sql"',
+                ),
+            ]),
+        );
+    });
+
+    it("fails when an unexpected active course folder remains under subjects/<subject>/courses", async () => {
+        const authoringRoot = await makeAuthoringFixture();
+        await writeJson(
+            path.join(
+                authoringRoot,
+                "subjects",
+                "sql",
+                "courses",
+                "legacy-sql",
+                "course.spec.json",
+            ),
+            {
+                authoringFormatVersion: "2.0",
+                subjectSlug: "sql",
+                courseSlug: "legacy-sql",
+                catalogSlug: "sql",
+                profileId: "sql",
+                title: "Legacy SQL",
+                sourceLocale: "en",
+                targetLocales: [],
+                releasePlan: {
+                    currentRelease: {
+                        name: "fixture",
+                        startModuleNumber: 1,
+                        endModuleNumber: 1,
+                    },
+                    releases: [
+                        {
+                            name: "fixture",
+                            startModuleNumber: 1,
+                            endModuleNumber: 1,
+                        },
+                    ],
+                },
+                policy: {
+                    qualityPolicy: {
+                        requireModuleProject: false,
+                    },
+                },
+                modules: [
+                    {
+                        moduleNumber: 1,
+                        moduleSlug: "legacy-intro",
+                        title: "Legacy Intro",
+                        sections: [
+                            {
+                                sectionSlug: "legacy-basics",
+                                title: "Legacy Basics",
+                                topics: [
+                                    {
+                                        topicId: "legacy_topic",
+                                        title: "Legacy Topic",
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        );
+
+        await expect(validateSubjectAuthoring("sql", { authoringRoot })).resolves.toEqual(
+            expect.arrayContaining([
+                expect.stringContaining(
+                    'unexpected active course folder "legacy-sql" is not listed in subject.plan.json or authoring.index.json',
+                ),
+            ]),
+        );
     });
 });

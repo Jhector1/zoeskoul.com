@@ -5,10 +5,8 @@ import path from "node:path";
 import type {
     CourseBlueprint,
     CoursePlan,
-    CourseQualityReport,
     CourseSpec,
     TopicAuthoringDraft,
-    TopicQualityReport,
 } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider, TopicRetryContext } from "@zoeskoul/curriculum-ai";
 import { generateTopicAuthoringDraftAttempt } from "@zoeskoul/curriculum-ai";
@@ -29,19 +27,20 @@ import {
     translateNonEmptyMessages,
 } from "../emit/translateNonEmptyMessages.js";
 import { assertTopicAuthoringDraft } from "../validate/assertTopicAuthoringDraft.js";
+import type { CurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 import { writeSubjectArtifacts } from "../write/writeSubjectArtifacts.js";
 import { writeTopicArtifacts } from "../write/writeTopicArtifacts.js";
 import { writeTopicReports } from "../reports/writeTopicReports.js";
 import { writeTopicAttemptReport } from "../reports/writeTopicAttemptReport.js";
 import { writeTopicCompileStatus } from "../reports/writeTopicCompileStatus.js";
+import { writeCourseQualityReport } from "../reports/writeCourseQualityReport.js";
 import {
     buildTopicAttemptHashes,
     buildTopicAttemptMetadata,
     extractGenerationDiagnostics,
 } from "../reports/topicGenerationAudit.js";
 import { evaluateTopicDraft } from "../quality/evaluateTopicDraft.js";
-import { buildTopicQualityReport } from "../quality/buildTopicQualityReport.js";
-import { buildCourseQualityReport } from "../quality/buildCourseQualityReport.js";
+import { buildCurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
 import { listTopicPlanNodes } from "../plan/listTopicPlanNodes.js";
 import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.js";
@@ -56,7 +55,6 @@ import {
     isRetryableTopicValidationError,
     RetryableTopicValidationError,
 } from "../validate/RetryableTopicValidationError.js";
-import { writeCourseQualityReport } from "../reports/writeCourseQualityReport.js";
 
 const MAX_TOPIC_RETRIES = 2;
 
@@ -232,7 +230,11 @@ export async function compileSubjectPipeline(args: {
         attempts: number;
         retryCodes: string[];
     }> = [];
-    const topicQualityReports: TopicQualityReport[] = [];
+    const qualityTopics: Array<{
+        seed: any;
+        draft?: TopicAuthoringDraft;
+        topicBundle?: any;
+    }> = [];
 
     args.onProgress?.({
         current: completedTopics,
@@ -372,6 +374,7 @@ export async function compileSubjectPipeline(args: {
                 critiqueReport?: unknown;
                 semanticReport?: unknown;
                 goldenReport?: unknown;
+                qualityReport?: CurriculumQualityReport;
                 topicBundle?: unknown;
             } = {};
 
@@ -603,6 +606,33 @@ export async function compileSubjectPipeline(args: {
                     location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
                 });
 
+                const qualityReport = buildCurriculumQualityReport({
+                    profileId: args.blueprint.profileId,
+                    subjectSlug: args.blueprint.subjectSlug,
+                    courseSlug: args.blueprint.courseSlug,
+                    topics: [{ seed, draft, topicBundle }],
+                });
+                attemptArtifacts.qualityReport = qualityReport;
+
+                const qualityFailures = qualityReport.issues.filter(
+                    (issue) =>
+                        issue.severity === "blocker" ||
+                        issue.severity === "error",
+                );
+
+                if (qualityFailures.length > 0) {
+                    throwRetryableReportFailure({
+                        code: "CURRICULUM_QUALITY_GATE_FAILED",
+                        title: "Curriculum quality gate failed",
+                        topicId: node.topic.topicId,
+                        moduleSlug: node.module.moduleSlug,
+                        sectionSlug: node.section.sectionSlug,
+                        reportDir,
+                        messages: qualityFailures.map((issue) => issue.message),
+                        details: qualityReport,
+                    });
+                }
+
                 const goldenReport = await profileServices.validateGolden({
                     seed,
                     draft,
@@ -700,6 +730,7 @@ export async function compileSubjectPipeline(args: {
                     critiqueReport: evaluation.critiqueReport,
                     semanticReport: evaluation.semanticReport,
                     goldenReport,
+                    qualityReport: attemptArtifacts.qualityReport,
                     topicBundle,
                 });
 
@@ -724,6 +755,11 @@ export async function compileSubjectPipeline(args: {
                     status: "success",
                     attempts: attempt + 1,
                     retryCodes,
+                });
+                qualityTopics.push({
+                    seed,
+                    draft,
+                    topicBundle,
                 });
 
                 completedTopics += 1;
@@ -821,6 +857,20 @@ export async function compileSubjectPipeline(args: {
     await writeRetrySummary({
         subjectSlug: args.blueprint.subjectSlug,
         topics: retrySummary,
+    });
+
+    await writeCourseQualityReport({
+        subjectSlug: args.blueprint.subjectSlug,
+        report: buildCurriculumQualityReport({
+            profileId: args.blueprint.profileId,
+            subjectSlug: args.blueprint.subjectSlug,
+            courseSlug: args.blueprint.courseSlug,
+            topics: qualityTopics,
+            requireFinalCapstone:
+                args.spec?.policy?.projectPolicy?.capstoneRequired ??
+                args.blueprint.level === "beginner",
+            spec: args.spec ?? null,
+        }),
     });
 
     return {

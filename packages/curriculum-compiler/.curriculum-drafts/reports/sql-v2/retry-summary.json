@@ -1,14 +1,16 @@
 {
   "subjectSlug": "sql-v2",
-  "generatedAt": "2026-05-23T17:03:00.107Z",
+  "generatedAt": "2026-05-23T20:28:22.446Z",
   "topics": [
     {
       "moduleSlug": "sql-v2-0",
       "sectionSlug": "sql-v2-0-1",
       "topicId": "what_sql_means",
-      "status": "success",
+      "status": "failed",
       "attempts": 1,
-      "retryCodes": []
+      "retryCodes": [
+        "EPERM"
+      ]
     }
   ]
 }

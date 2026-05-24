@@ -6,10 +6,7 @@ import type {
     RepairReport,
     SemanticValidationReport,
 } from "@zoeskoul/curriculum-profiles";
-import type {
-    CourseQualityReport,
-    TopicQualityReport,
-} from "@zoeskoul/curriculum-contracts";
+import type { CurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 
 export type TopicReportBundle = {
     subjectSlug: string;
@@ -31,8 +28,8 @@ export type TopicReportBundle = {
     critiqueReport?: CritiqueReport;
     semanticReport?: SemanticValidationReport;
     goldenReport?: GoldenValidationReport;
-    topicQualityReport?: TopicQualityReport;
     topicBundle?: unknown;
+    qualityReport?: CurriculumQualityReport;
 };
 
 async function pathExists(filePath: string) {
@@ -85,8 +82,8 @@ export async function readTopicReports(args: {
         critiqueReport: await readJsonIfExists(path.join(baseDir, "critique-report.json")),
         semanticReport: await readJsonIfExists(path.join(baseDir, "semantic-report.json")),
         goldenReport: await readJsonIfExists(path.join(baseDir, "golden-report.json")),
-        topicQualityReport: await readJsonIfExists(path.join(baseDir, "topic-quality-report.json")),
         topicBundle: await readJsonIfExists(path.join(baseDir, "emitted-topic-bundle.json")),
+        qualityReport: await readJsonIfExists(path.join(baseDir, "quality-report.json")),
     };
 }
 
@@ -128,7 +125,7 @@ export async function readSubjectTopicReports(args: {
 
 export async function readCourseQualityReport(args: {
     subjectSlug: string;
-}): Promise<CourseQualityReport | undefined> {
+}): Promise<CurriculumQualityReport | undefined> {
     return readJsonIfExists(
         path.join(
             ".curriculum-drafts",

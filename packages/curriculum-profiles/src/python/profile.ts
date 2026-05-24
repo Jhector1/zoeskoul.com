@@ -130,7 +130,6 @@ function makePythonCodeHelpFallback(args: {
 }
 
 const pythonCodeInputCapability: CodeInputProfileCapability = {
-    minimumFixedTests: 2,
     defaultStarter() {
         return "# Write your answer below\n";
     },
@@ -252,9 +251,6 @@ export const pythonProfile: CourseProfile = {
         "code_input",
     ],
     allowedRecipeTypes: ["fixed_tests", "template_io", "semantic"],
-    qualityPolicy: {
-        repeatedExerciseTextThreshold: 2,
-    },
     buildModuleRuntimeDefaults() {
         return { kind: "code", language: "python" };
     },

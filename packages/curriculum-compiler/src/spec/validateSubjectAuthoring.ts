@@ -1,16 +1,20 @@
 import fs from "node:fs/promises";
+import path from "node:path";
 import type { CourseSpec, SubjectPlan } from "@zoeskoul/curriculum-contracts";
 import {
     getAuthoringCatalogPath,
     getAuthoringCourseSpecPath,
     getAuthoringRoot,
     getAuthoringSubjectBlueprintPath,
-    getAuthoringSubjectDatasetsPath,
     getAuthoringSubjectPlanPath,
     getAuthoringSubjectProfilePath,
     getAuthoringSubjectWorkspacePolicyPath,
     getAuthoringSubjectValidationPath,
 } from "@zoeskoul/curriculum-core";
+import {
+    getSqlDatasetById,
+    listSqlDatasetIds,
+} from "../../../curriculum-profiles/src/sql/datasets/index.js";
 import { resolveAuthoringPolicyChain } from "../policy/resolveAuthoringPolicyChain.js";
 import { normalizeLegacyCourseSpec } from "./normalizeLegacyCourseSpec.js";
 import { validateCourseSpec } from "./validateCourseSpec.js";
@@ -20,6 +24,20 @@ type ValidateSubjectAuthoringOptions = {
 };
 
 type ValidateCourseAuthoringOptions = ValidateSubjectAuthoringOptions;
+type CoursePlanShape = {
+    moduleOrder?: unknown;
+    modules?: unknown;
+};
+type SqlSchemaTable = {
+    columns: Set<string>;
+    foreignKeys: DerivedSqlRelationship[];
+};
+type DerivedSqlRelationship = {
+    fromTable: string;
+    fromColumns: string[];
+    toTable: string;
+    toColumns: string[];
+};
 
 async function pathExists(filePath: string) {
     try {
@@ -33,6 +51,10 @@ async function pathExists(filePath: string) {
 async function readJson(filePath: string): Promise<unknown> {
     const raw = await fs.readFile(filePath, "utf8");
     return JSON.parse(raw);
+}
+
+function authoringIndexPath(authoringRoot: string) {
+    return path.join(authoringRoot, "authoring.index.json");
 }
 
 function isNonEmptyString(value: unknown): value is string {
@@ -77,13 +99,6 @@ function sharedProfilePath(authoringRoot: string, subjectSlug: string) {
     );
 }
 
-function sharedDatasetsPath(authoringRoot: string, subjectSlug: string) {
-    return maybeFromAuthoringRoot(
-        authoringRoot,
-        getAuthoringSubjectDatasetsPath(subjectSlug),
-    );
-}
-
 function sharedWorkspacePolicyPath(authoringRoot: string, subjectSlug: string) {
     return maybeFromAuthoringRoot(
         authoringRoot,
@@ -118,6 +133,230 @@ function collectDuplicateValues(values: string[]) {
     }
 
     return [...duplicates];
+}
+
+function arraysEqual(left: string[], right: string[]) {
+    return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function readModuleOrderFromCoursePlan(value: unknown): string[] {
+    if (!value || typeof value !== "object" || Array.isArray(value)) return [];
+
+    const plan = value as CoursePlanShape;
+    return Array.isArray(plan.moduleOrder)
+        ? plan.moduleOrder.filter(isNonEmptyString)
+        : [];
+}
+
+function readModuleSlugsFromCoursePlanModules(value: unknown): string[] {
+    if (!value || typeof value !== "object" || Array.isArray(value)) return [];
+
+    const plan = value as CoursePlanShape;
+    if (!Array.isArray(plan.modules)) return [];
+
+    return plan.modules
+        .map((module) =>
+            module && typeof module === "object" && !Array.isArray(module)
+                ? (module as { moduleSlug?: unknown }).moduleSlug
+                : null,
+        )
+        .filter(isNonEmptyString);
+}
+
+async function validateCoursePlanModuleAlignment(args: {
+    authoringRoot: string;
+    subjectSlug: string;
+    courseSlug: string;
+    spec: CourseSpec;
+    issues: string[];
+}) {
+    const planPath = path.join(
+        args.authoringRoot,
+        "subjects",
+        args.subjectSlug,
+        "courses",
+        args.courseSlug,
+        "course.plan.json",
+    );
+
+    if (!(await pathExists(planPath))) {
+        return;
+    }
+
+    try {
+        const rawPlan = await readJson(planPath);
+        const planModuleOrder = readModuleOrderFromCoursePlan(rawPlan);
+        const planModuleSlugs = readModuleSlugsFromCoursePlanModules(rawPlan);
+        const specModuleSlugs = args.spec.modules
+            .map((module) => module.moduleSlug)
+            .filter(isNonEmptyString);
+
+        if (!arraysEqual(planModuleOrder, specModuleSlugs)) {
+            args.issues.push(
+                `${planPath}: moduleOrder must exactly match course.spec.json modules[].moduleSlug`,
+            );
+        }
+
+        if (planModuleSlugs.length && !arraysEqual(planModuleSlugs, specModuleSlugs)) {
+            args.issues.push(
+                `${planPath}: modules[].moduleSlug must exactly match course.spec.json modules[].moduleSlug`,
+            );
+        }
+    } catch (error) {
+        args.issues.push(
+            `${planPath}: ${
+                error instanceof Error ? error.message : "failed to read course plan"
+            }`,
+        );
+    }
+}
+
+async function validateAuthoringIndex(args: {
+    authoringRoot: string;
+    subjectSlug: string;
+    subjectPlan: SubjectPlan;
+    issues: string[];
+}) {
+    const indexPath = authoringIndexPath(args.authoringRoot);
+    if (!(await pathExists(indexPath))) {
+        return;
+    }
+
+    try {
+        const rawIndex = await readJson(indexPath);
+        if (!rawIndex || typeof rawIndex !== "object" || Array.isArray(rawIndex)) {
+            args.issues.push(`${indexPath}: authoring index must be an object`);
+            return;
+        }
+
+        const subjects = (rawIndex as { subjects?: unknown }).subjects;
+        if (!Array.isArray(subjects)) {
+            args.issues.push(`${indexPath}: subjects must be an array`);
+            return;
+        }
+
+        const subjectEntry = subjects.find(
+            (entry) =>
+                entry &&
+                typeof entry === "object" &&
+                !Array.isArray(entry) &&
+                (entry as { subjectSlug?: unknown }).subjectSlug === args.subjectSlug,
+        ) as
+            | {
+                  courseOrder?: unknown;
+                  courses?: unknown;
+                  path?: unknown;
+                  subjectSlug?: unknown;
+              }
+            | undefined;
+
+        if (!subjectEntry) {
+            args.issues.push(`${indexPath}: missing subject entry for "${args.subjectSlug}"`);
+            return;
+        }
+
+        const planCourseOrder = Array.isArray(args.subjectPlan.courseOrder)
+            ? args.subjectPlan.courseOrder.filter(isNonEmptyString)
+            : [];
+        const indexCourseOrder = Array.isArray(subjectEntry.courseOrder)
+            ? subjectEntry.courseOrder.filter(isNonEmptyString)
+            : [];
+
+        if (!arraysEqual(indexCourseOrder, planCourseOrder)) {
+            args.issues.push(
+                `${indexPath}: subject "${args.subjectSlug}" courseOrder must match subject.plan.json`,
+            );
+        }
+
+        if (!Array.isArray(subjectEntry.courses)) {
+            args.issues.push(`${indexPath}: subject "${args.subjectSlug}" courses must be an array`);
+            return;
+        }
+
+        const expectedCoursePaths = new Map(
+            planCourseOrder.map((courseSlug) => [
+                courseSlug,
+                path.join(
+                    "subjects",
+                    args.subjectSlug,
+                    "courses",
+                    courseSlug,
+                    "course.spec.json",
+                ),
+            ]),
+        );
+
+        for (const courseEntry of subjectEntry.courses) {
+            if (!courseEntry || typeof courseEntry !== "object" || Array.isArray(courseEntry)) {
+                args.issues.push(
+                    `${indexPath}: subject "${args.subjectSlug}" courses entries must be objects`,
+                );
+                continue;
+            }
+
+            const courseSlug = (courseEntry as { courseSlug?: unknown }).courseSlug;
+            const coursePath = (courseEntry as { path?: unknown }).path;
+
+            if (!isNonEmptyString(courseSlug) || !isNonEmptyString(coursePath)) {
+                args.issues.push(
+                    `${indexPath}: subject "${args.subjectSlug}" course entries require courseSlug and path`,
+                );
+                continue;
+            }
+
+            const expectedPath = expectedCoursePaths.get(courseSlug);
+            if (!expectedPath) {
+                args.issues.push(
+                    `${indexPath}: subject "${args.subjectSlug}" references inactive course "${courseSlug}"`,
+                );
+                continue;
+            }
+
+            if (coursePath !== expectedPath) {
+                args.issues.push(
+                    `${indexPath}: subject "${args.subjectSlug}" course "${courseSlug}" path must be "${expectedPath}"`,
+                );
+            }
+
+            const absoluteCoursePath = path.join(args.authoringRoot, coursePath);
+            if (!(await pathExists(absoluteCoursePath))) {
+                args.issues.push(`${indexPath}: missing referenced course spec "${coursePath}"`);
+            }
+        }
+    } catch (error) {
+        args.issues.push(
+            `${indexPath}: ${
+                error instanceof Error ? error.message : "failed to parse authoring index"
+            }`,
+        );
+    }
+}
+
+async function validateUnexpectedActiveCourseFolders(args: {
+    authoringRoot: string;
+    subjectSlug: string;
+    activeCourseSlugs: string[];
+    issues: string[];
+}) {
+    const coursesRoot = path.join(args.authoringRoot, "subjects", args.subjectSlug, "courses");
+    if (!(await pathExists(coursesRoot))) {
+        return;
+    }
+
+    const activeSet = new Set(args.activeCourseSlugs);
+    const entries = await fs.readdir(coursesRoot, { withFileTypes: true });
+    for (const entry of entries) {
+        if (!entry.isDirectory()) continue;
+        if (activeSet.has(entry.name)) continue;
+
+        const straySpecPath = path.join(coursesRoot, entry.name, "course.spec.json");
+        const strayBlueprintPath = path.join(coursesRoot, entry.name, "course.blueprint.json");
+        if ((await pathExists(straySpecPath)) || (await pathExists(strayBlueprintPath))) {
+            args.issues.push(
+                `${coursesRoot}: unexpected active course folder "${entry.name}" is not listed in subject.plan.json or authoring.index.json`,
+            );
+        }
+    }
 }
 
 function validateCourseIdentity(
@@ -181,12 +420,223 @@ function collectDatasetIds(value: unknown, datasetIds = new Set<string>()) {
     for (const [key, child] of Object.entries(value)) {
         if (key === "datasetId" && isNonEmptyString(child)) {
             datasetIds.add(child);
+        } else if (key === "datasets" && isStringArray(child)) {
+            child.forEach((datasetId) => datasetIds.add(datasetId));
         } else {
             collectDatasetIds(child, datasetIds);
         }
     }
 
     return datasetIds;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+    return !!value && typeof value === "object" && !Array.isArray(value);
+}
+
+function isStringArray(value: unknown): value is string[] {
+    return Array.isArray(value) && value.every(isNonEmptyString);
+}
+
+function normalizeSqlIdentifier(value: string) {
+    return value.replace(/["'`]/g, "").trim();
+}
+
+function parseSqlIdentifierList(value: string) {
+    return value
+        .split(",")
+        .map((entry) => normalizeSqlIdentifier(entry))
+        .filter(isNonEmptyString);
+}
+
+function parseSqlSchemaTables(schemaSql: string): Map<string, SqlSchemaTable> {
+    const tables = new Map<string, SqlSchemaTable>();
+    const createTablePattern = /CREATE TABLE\s+([A-Za-z_][\w]*)\s*\(([\s\S]*?)\);/gi;
+
+    for (const match of schemaSql.matchAll(createTablePattern)) {
+        const tableName = normalizeSqlIdentifier(match[1] ?? "");
+        const body = match[2] ?? "";
+        const table: SqlSchemaTable = {
+            columns: new Set<string>(),
+            foreignKeys: [],
+        };
+
+        for (const rawLine of body.split("\n")) {
+            const line = rawLine.trim().replace(/,$/, "");
+            if (!line) continue;
+
+            const foreignKeyMatch = line.match(
+                /^FOREIGN KEY\s*\(([^)]+)\)\s+REFERENCES\s+([A-Za-z_][\w]*)\s*\(([^)]+)\)/i,
+            );
+            if (foreignKeyMatch) {
+                table.foreignKeys.push({
+                    fromTable: tableName,
+                    fromColumns: parseSqlIdentifierList(foreignKeyMatch[1] ?? ""),
+                    toTable: normalizeSqlIdentifier(foreignKeyMatch[2] ?? ""),
+                    toColumns: parseSqlIdentifierList(foreignKeyMatch[3] ?? ""),
+                });
+                continue;
+            }
+
+            if (/^PRIMARY KEY\s*\(/i.test(line)) {
+                continue;
+            }
+
+            const columnMatch = line.match(/^([A-Za-z_][\w]*)\s+/);
+            if (columnMatch) {
+                table.columns.add(normalizeSqlIdentifier(columnMatch[1] ?? ""));
+            }
+        }
+
+        tables.set(tableName, table);
+    }
+
+    return tables;
+}
+
+export function deriveSqlRelationshipsFromSchemaSql(schemaSql: string): DerivedSqlRelationship[] {
+    return [...parseSqlSchemaTables(schemaSql).values()].flatMap((table) => table.foreignKeys);
+}
+
+function readBooleanFlag(value: unknown, key: string) {
+    return isRecord(value) && value[key] === true;
+}
+
+function validateCanonicalSqlDatasetRegistry() {
+    const issues: string[] = [];
+
+    for (const datasetId of listSqlDatasetIds()) {
+        const dataset = getSqlDatasetById(datasetId);
+        if (!dataset) {
+            issues.push(`canonical SQL dataset registry: "${datasetId}" could not be loaded`);
+            continue;
+        }
+
+        if (!isNonEmptyString(dataset.id)) {
+            issues.push(`canonical SQL dataset registry: "${datasetId}" is missing id`);
+        }
+        if (dataset.id !== datasetId) {
+            issues.push(
+                `canonical SQL dataset registry: dataset "${datasetId}" returned id "${dataset.id}"`,
+            );
+        }
+        if (dataset.dialect !== "sqlite") {
+            issues.push(
+                `canonical SQL dataset registry: "${datasetId}" must declare dialect "sqlite"`,
+            );
+        }
+        if (typeof dataset.schemaSql !== "string") {
+            issues.push(`canonical SQL dataset registry: "${datasetId}" is missing schemaSql`);
+        }
+        if (typeof dataset.seedSql !== "string") {
+            issues.push(`canonical SQL dataset registry: "${datasetId}" is missing seedSql`);
+        }
+        if (!isRecord(dataset.tableSnapshots)) {
+            issues.push(
+                `canonical SQL dataset registry: "${datasetId}" is missing tableSnapshots`,
+            );
+            continue;
+        }
+
+        const schemaTables = parseSqlSchemaTables(dataset.schemaSql ?? "");
+        for (const [tableName, snapshot] of Object.entries(dataset.tableSnapshots)) {
+            const schemaTable = schemaTables.get(tableName);
+            if (!schemaTable) {
+                issues.push(
+                    `canonical SQL dataset registry: "${datasetId}" tableSnapshot "${tableName}" is missing from schemaSql`,
+                );
+                continue;
+            }
+
+            const snapshotColumns = Array.isArray(snapshot?.columns) ? snapshot.columns : [];
+            for (const column of snapshotColumns) {
+                const columnName =
+                    isRecord(column) && isNonEmptyString(column.name) ? column.name : null;
+                if (!columnName) {
+                    issues.push(
+                        `canonical SQL dataset registry: "${datasetId}" tableSnapshot "${tableName}" has a column without a valid name`,
+                    );
+                    continue;
+                }
+
+                if (!schemaTable.columns.has(columnName)) {
+                    issues.push(
+                        `canonical SQL dataset registry: "${datasetId}" tableSnapshot "${tableName}" column "${columnName}" is missing from schemaSql`,
+                    );
+                }
+            }
+        }
+    }
+
+    return issues;
+}
+
+async function validateSqlAuthoringDatasetReferences(args: {
+    authoringRoot: string;
+    subjectSlug: string;
+    courseSlug: string;
+}) {
+    const courseRoot = path.join(
+        args.authoringRoot,
+        "subjects",
+        args.subjectSlug,
+        "courses",
+        args.courseSlug,
+    );
+    const candidateFiles = [
+        path.join(courseRoot, "course.spec.json"),
+        path.join(courseRoot, "course.plan.json"),
+        path.join(courseRoot, "validation.policy.json"),
+        path.join(courseRoot, "generation.policy.json"),
+    ];
+    const issues: string[] = [];
+    const canonicalDatasetIds = new Set(listSqlDatasetIds());
+
+    for (const filePath of candidateFiles) {
+        if (!(await pathExists(filePath))) continue;
+
+        const raw = await readJson(filePath);
+        const datasetIds = collectDatasetIds(raw);
+        for (const datasetId of datasetIds) {
+            if (!canonicalDatasetIds.has(datasetId)) {
+                issues.push(
+                    `${filePath}: datasetId "${datasetId}" is not declared in the canonical SQL dataset registry`,
+                );
+                continue;
+            }
+
+            if (!getSqlDatasetById(datasetId)) {
+                issues.push(
+                    `${filePath}: datasetId "${datasetId}" could not be loaded from the canonical SQL dataset registry`,
+                );
+            }
+        }
+
+        const validationPolicy = isRecord(raw)
+            ? (raw.validationPolicy ?? raw.validationRequirements ?? null)
+            : null;
+        const relationshipHeavy =
+            readBooleanFlag(validationPolicy, "requireJoinRelationshipMetadata") ||
+            readBooleanFlag(validationPolicy, "requireErdOrTableRelationshipVisuals") ||
+            readBooleanFlag(validationPolicy, "requireErdVisuals") ||
+            readBooleanFlag(validationPolicy, "requireCrowFootOrRelationshipDiagrams");
+        if (!relationshipHeavy) {
+            continue;
+        }
+
+        for (const datasetId of datasetIds) {
+            const dataset = getSqlDatasetById(datasetId);
+            if (!dataset) continue;
+
+            if (deriveSqlRelationshipsFromSchemaSql(dataset.schemaSql).length === 0) {
+                issues.push(
+                    `${filePath}: relationship-focused dataset "${datasetId}" does not expose any FOREIGN KEY relationships in schemaSql`,
+                );
+            }
+        }
+    }
+
+    return issues;
 }
 
 function hasCompatibleVersioning(value: unknown) {
@@ -432,6 +882,13 @@ async function validateCourseSpecFile(args: {
             issues,
         );
         validateCourseDuplicates(spec, specPath, issues);
+        await validateCoursePlanModuleAlignment({
+            authoringRoot: args.authoringRoot,
+            subjectSlug: args.subjectSlug,
+            courseSlug: args.courseSlug,
+            spec,
+            issues,
+        });
 
         if (
             args.requireVersioning &&
@@ -521,39 +978,27 @@ export async function validateSubjectAuthoring(
         );
     }
 
-    let sqlDatasetIds: Set<string> | null = null;
     if (subjectSlug === "sql") {
-        const datasetsPath = sharedDatasetsPath(authoringRoot, subjectSlug);
-        if (!(await pathExists(datasetsPath))) {
-            issues.push(`${datasetsPath}: SQL datasets are required`);
-        } else {
-            try {
-                const datasetsJson = await readJson(datasetsPath);
-                const datasets =
-                    datasetsJson &&
-                    typeof datasetsJson === "object" &&
-                    !Array.isArray(datasetsJson)
-                        ? (datasetsJson as { datasets?: unknown }).datasets
-                        : null;
-                if (!datasets || typeof datasets !== "object" || Array.isArray(datasets)) {
-                    issues.push(`${datasetsPath}: datasets must be an object`);
-                } else {
-                    sqlDatasetIds = new Set(Object.keys(datasets));
-                }
-            } catch (error) {
-                issues.push(
-                    `${datasetsPath}: ${
-                        error instanceof Error ? error.message : "failed to parse datasets"
-                    }`,
-                );
-            }
-        }
+        issues.push(...validateCanonicalSqlDatasetRegistry());
     }
 
     const courseSlugsToValidate = new Set(courseOrder);
     if (isNonEmptyString(publishCourseSlug)) {
         courseSlugsToValidate.add(publishCourseSlug);
     }
+
+    await validateAuthoringIndex({
+        authoringRoot,
+        subjectSlug,
+        subjectPlan: plan,
+        issues,
+    });
+    await validateUnexpectedActiveCourseFolders({
+        authoringRoot,
+        subjectSlug,
+        activeCourseSlugs: [...courseSlugsToValidate],
+        issues,
+    });
 
     for (const courseSlug of courseSlugsToValidate) {
         issues.push(
@@ -576,18 +1021,14 @@ export async function validateSubjectAuthoring(
             issues.push(`policy warning for ${subjectSlug}/${courseSlug}: ${warning}`);
         }
 
-        if (sqlDatasetIds) {
-            const specPath = courseSpecPath(authoringRoot, subjectSlug, courseSlug);
-            if (await pathExists(specPath)) {
-                const rawSpec = await readJson(specPath);
-                for (const datasetId of collectDatasetIds(rawSpec)) {
-                    if (!sqlDatasetIds.has(datasetId)) {
-                        issues.push(
-                            `${specPath}: datasetId "${datasetId}" is not declared in shared/datasets.json`,
-                        );
-                    }
-                }
-            }
+        if (subjectSlug === "sql") {
+            issues.push(
+                ...(await validateSqlAuthoringDatasetReferences({
+                    authoringRoot,
+                    subjectSlug,
+                    courseSlug,
+                })),
+            );
         }
     }
 
@@ -616,13 +1057,6 @@ export async function validateCourseAuthoring(
         );
     }
 
-    if (
-        subjectSlug === "sql" &&
-        !(await pathExists(sharedDatasetsPath(authoringRoot, subjectSlug)))
-    ) {
-        issues.push(`${sharedDatasetsPath(authoringRoot, subjectSlug)}: SQL datasets are required`);
-    }
-
     issues.push(
         ...(await validateCourseSpecFile({
             authoringRoot,
@@ -641,6 +1075,17 @@ export async function validateCourseAuthoring(
     });
     for (const warning of resolvedPolicy.warnings) {
         issues.push(`policy warning for ${subjectSlug}/${courseSlug}: ${warning}`);
+    }
+
+    if (subjectSlug === "sql") {
+        issues.push(...validateCanonicalSqlDatasetRegistry());
+        issues.push(
+            ...(await validateSqlAuthoringDatasetReferences({
+                authoringRoot,
+                subjectSlug,
+                courseSlug,
+            })),
+        );
     }
 
     return issues;

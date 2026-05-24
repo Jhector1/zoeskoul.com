@@ -18,10 +18,6 @@ export const mathProfile: CourseProfile = {
     "fill_blank_choice",
   ],
   allowedRecipeTypes: ["fixed_tests", "template_io"],
-  qualityPolicy: {
-    conceptOnly: true,
-    repeatedExerciseTextThreshold: 2,
-  },
   buildModuleRuntimeDefaults() {
     return null;
   },

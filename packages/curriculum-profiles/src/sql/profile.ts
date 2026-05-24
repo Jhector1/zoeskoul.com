@@ -270,9 +270,6 @@ export const sqlProfile: CourseProfile = {
         "code_input",
     ],
     allowedRecipeTypes: ["fixed_tests", "template_io", "sql_query"],
-    qualityPolicy: {
-        repeatedExerciseTextThreshold: 2,
-    },
 
     buildModuleRuntimeDefaults(moduleOrder?: number, module?: PlannedModule) {
         return resolveSqlRuntimeDefaults({

@@ -9,7 +9,6 @@ export * from "./base/codeInputExpected.js";
 
 export * from "./families/code/index.js";
 export * from "./families/query/index.js";
-export * from "./families/concept/index.js";
 
 export * from "./sql/index.js";
 export * from "./python/index.js";

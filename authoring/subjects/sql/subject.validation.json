@@ -8,8 +8,8 @@
   },
   "rules": {
     "datasetValidation": [
-      "Every datasetId must exist in shared/datasets.json or the runtime dataset registry",
-      "Dataset metadata must match actual SQLite seed schema",
+      "Every datasetId must exist in the canonical SQL dataset registry",
+      "Canonical dataset metadata must match actual SQLite seed schema",
       "Every referenced table and column must exist",
       "Expected result rows must match executed solution rows"
     ],

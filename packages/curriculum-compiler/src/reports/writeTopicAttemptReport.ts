@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import type { CurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 
 function errorToJson(error: unknown) {
     if (error instanceof Error) {
@@ -41,6 +42,7 @@ export async function writeTopicAttemptReport(args: {
     semanticReport?: unknown;
     goldenReport?: unknown;
     topicBundle?: unknown;
+    qualityReport?: CurriculumQualityReport;
     error?: unknown;
 }) {
     const dir = path.join(args.reportDir, `attempt-${args.attempt}`);
@@ -82,6 +84,7 @@ export async function writeTopicAttemptReport(args: {
         ["semantic-report.json", args.semanticReport],
         ["golden-report.json", args.goldenReport],
         ["emitted-topic-bundle.json", args.topicBundle],
+        ["quality-report.json", args.qualityReport],
         ["error.json", args.error ? errorToJson(args.error) : undefined],
     ];
 

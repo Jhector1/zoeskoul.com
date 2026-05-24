@@ -1,0 +1,18 @@
+{
+  "profileId": "sql",
+  "subjectSlug": "sql-v2",
+  "courseSlug": "sql-foundations",
+  "moduleSlug": "sql-v2-0",
+  "sectionSlug": "sql-v2-0-1",
+  "topicId": "what_sql_means",
+  "provider": "test",
+  "model": "test-model",
+  "temperature": 0,
+  "modelSeed": 0,
+  "generatorVersion": "2026-05-23-topic-authoring-draft-generator-v1",
+  "schemaName": "TopicAuthoringDraft",
+  "schemaVersion": "2026-05-23-topic-authoring-draft-v1",
+  "strictSchema": true,
+  "retryAttempt": 0,
+  "maxRetries": 2
+}

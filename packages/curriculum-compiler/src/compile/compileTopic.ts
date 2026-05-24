@@ -29,6 +29,8 @@ import {
     extractGenerationDiagnostics,
 } from "../reports/topicGenerationAudit.js";
 import { evaluateTopicDraft } from "../quality/evaluateTopicDraft.js";
+import { buildCurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
+import type { CurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
 import { resolvePlan } from "../spec/resolvePlan.js";
 import { findTopicPlanNode } from "../plan/findTopicPlanNode.js";
@@ -263,6 +265,7 @@ export async function compileTopic(args: {
             critiqueReport?: unknown;
             semanticReport?: unknown;
             goldenReport?: unknown;
+            qualityReport?: CurriculumQualityReport;
             topicBundle?: unknown;
         } = {};
 
@@ -483,6 +486,32 @@ export async function compileTopic(args: {
                 location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
             });
 
+            const qualityReport = buildCurriculumQualityReport({
+                profileId: args.blueprint.profileId,
+                subjectSlug: args.blueprint.subjectSlug,
+                courseSlug: args.blueprint.courseSlug,
+                topics: [{ seed, draft, topicBundle }],
+            });
+            attemptArtifacts.qualityReport = qualityReport;
+
+            const qualityFailures = qualityReport.issues.filter(
+                (issue) =>
+                    issue.severity === "blocker" || issue.severity === "error",
+            );
+
+            if (qualityFailures.length > 0) {
+                throwRetryableReportFailure({
+                    code: "CURRICULUM_QUALITY_GATE_FAILED",
+                    title: "Curriculum quality gate failed",
+                    topicId: node.topic.topicId,
+                    moduleSlug: node.module.moduleSlug,
+                    sectionSlug: node.section.sectionSlug,
+                    reportDir,
+                    messages: qualityFailures.map((issue) => issue.message),
+                    details: qualityReport,
+                });
+            }
+
             const goldenReport = await profileServices.validateGolden({
                 seed,
                 draft,
@@ -575,6 +604,7 @@ export async function compileTopic(args: {
                 critiqueReport: evaluation.critiqueReport,
                 semanticReport: evaluation.semanticReport,
                 goldenReport,
+                qualityReport: attemptArtifacts.qualityReport,
                 topicBundle,
             });
 

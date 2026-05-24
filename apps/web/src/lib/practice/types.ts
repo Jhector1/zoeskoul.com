@@ -8,8 +8,8 @@ import type {
     SqlDialect,
     SqlRuntimeSpec,
     Vec3,
-    WorkspaceLanguage,
 } from "@zoeskoul/practice-contracts";
+import type { WorkspaceLanguage } from "@zoeskoul/curriculum-contracts";
 import type { GeneratedSubjectGenKey } from "@/lib/subjects/subjects.generated";
 
 // src/lib/practice/types.ts

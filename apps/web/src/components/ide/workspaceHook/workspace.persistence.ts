@@ -11,15 +11,7 @@ import {
 } from "../storage";
 
 export function isWorkspaceLanguage(v: unknown): v is WorkspaceLanguage {
-  return (
-      v === "python" ||
-      v === "java" ||
-      v === "javascript" ||
-      v === "web" ||
-      v === "c" ||
-      v === "cpp" ||
-      v === "sql"
-  );
+  return typeof v === "string" && v.trim().length > 0;
 }
 
 export function metaKeyFor(baseKey: string) {

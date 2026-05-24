@@ -5,35 +5,35 @@
   "profileId": "sql",
   "title": "SQL Foundations",
   "moduleOrder": [
-    "sql_module_0",
-    "sql_module_1",
-    "sql_module_2",
-    "sql_module_3",
-    "sql_module_4"
+    "sql-v2-0",
+    "sql-v2-1",
+    "sql-v2-2",
+    "sql-v2-3",
+    "sql-v2-4"
   ],
   "modules": [
     {
-      "moduleSlug": "sql_module_0",
+      "moduleSlug": "sql-v2-0",
       "moduleNumber": 0,
       "title": "Getting Started with SQL and Databases"
     },
     {
-      "moduleSlug": "sql_module_1",
+      "moduleSlug": "sql-v2-1",
       "moduleNumber": 1,
       "title": "Your First Queries with SELECT"
     },
     {
-      "moduleSlug": "sql_module_2",
+      "moduleSlug": "sql-v2-2",
       "moduleNumber": 2,
       "title": "Filtering Data with WHERE"
     },
     {
-      "moduleSlug": "sql_module_3",
+      "moduleSlug": "sql-v2-3",
       "moduleNumber": 3,
       "title": "Sorting and Limiting Results"
     },
     {
-      "moduleSlug": "sql_module_4",
+      "moduleSlug": "sql-v2-4",
       "moduleNumber": 4,
       "title": "Working with Text, Lists, Ranges, and NULL"
     }

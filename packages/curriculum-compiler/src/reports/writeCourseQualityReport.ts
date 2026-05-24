@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import type { CourseQualityReport } from "@zoeskoul/curriculum-contracts";
+import type { CurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 
 async function ensureDir(filePath: string) {
     await fs.mkdir(path.dirname(filePath), { recursive: true });
@@ -13,15 +13,15 @@ async function writeFileAtomic(filePath: string, value: string) {
     await fs.rename(tempPath, filePath);
 }
 
-function formatTextReport(report: CourseQualityReport): string {
+function formatTextReport(report: CurriculumQualityReport): string {
     const lines = [
         `subject: ${report.subjectSlug}`,
         `profile: ${report.profileId}`,
         `course: ${report.courseSlug ?? ""}`.trim(),
-        `modules: ${report.modulesTotal}`,
-        `topics: ${report.topicsTotal}`,
-        `exercise counts: ${JSON.stringify(report.exerciseCounts)}`,
-        `code_input summary: ${JSON.stringify(report.codeInputSummary)}`,
+        `modules: ${report.summary.modules}`,
+        `topics: ${report.summary.topicsTotal}`,
+        `exercise counts: ${JSON.stringify(report.summary.exerciseKinds)}`,
+        `code_input count: ${report.summary.codeInputs}`,
         `severity counts: ${JSON.stringify(report.severityCounts)}`,
         "",
     ].filter(Boolean);
@@ -37,7 +37,7 @@ function formatTextReport(report: CourseQualityReport): string {
 
 export async function writeCourseQualityReport(args: {
     subjectSlug: string;
-    report: CourseQualityReport;
+    report: CurriculumQualityReport;
 }) {
     const baseDir = path.join(
         ".curriculum-drafts",

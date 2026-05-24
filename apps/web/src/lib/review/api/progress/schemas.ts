@@ -26,19 +26,7 @@ function asKeys(value: Record<string, unknown>) {
 
 function normalizeWorkspaceLanguage(value: unknown): WorkspaceLanguage {
     const language = String(value ?? "").trim();
-    switch (language) {
-        case "python":
-        case "java":
-        case "javascript":
-        case "c":
-        case "cpp":
-        case "sql":
-        case "bash":
-        case "web":
-            return language;
-        default:
-            return "python";
-    }
+    return language || "python";
 }
 
 function reviewWorkspacePolicy(language: unknown): IdeWorkspacePolicy {

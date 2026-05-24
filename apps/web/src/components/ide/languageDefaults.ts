@@ -18,6 +18,8 @@ export function defaultExt(lang: WorkspaceLanguage): string {
             return ".sql";
         case "web":
             return ".html";
+        default:
+            return ".txt";
     }
 }
 
@@ -39,6 +41,8 @@ export function defaultMainFile(lang: WorkspaceLanguage): string {
             return "query.sql";
         case "web":
             return "index.html";
+        default:
+            return "main.txt";
     }
 }
 
@@ -78,6 +82,8 @@ export function defaultMainCode(lang: WorkspaceLanguage): string {
   </body>
 </html>
 `;
+        default:
+            return "";
     }
 }
 
