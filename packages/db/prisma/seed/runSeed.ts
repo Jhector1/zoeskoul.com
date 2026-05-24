@@ -228,6 +228,9 @@ export async function runSeed() {
         sections: SECTIONS.length,
         ms: Date.now() - started,
       };
+    }, {
+      timeout: 120_000,
+      maxWait: 30_000,
     });
   } finally {
     await prisma.$disconnect();
