@@ -8,7 +8,7 @@ import type {
   SectionSeed,
   SubjectSeed,
   TopicSeed,
-} from "./subjects/_types";
+} from "./subjects/_types.js";
 
 type SubjectManifest = {
   subject: {

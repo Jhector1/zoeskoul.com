@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { isSeedableSubjectSlug } from "../prisma/seed/data/index";
+import { isSeedableSubjectSlug } from "../prisma/seed/data/index.js";
 
 describe("db seed subject filtering", () => {
     it("ignores generated draft subject folders", () => {
