@@ -57,8 +57,8 @@ describe("authoring compile target resolution", () => {
     it("compileCourse refuses to publish non-target course without explicit liveSubjectSlug", async () => {
         await expect(
             resolveAuthoringCompileTarget({
-                subjectSlug: "sql",
-                courseSlug: "multi-table-sql",
+                subjectSlug: "python",
+                courseSlug: "python-data-functions",
             }),
         ).rejects.toThrow(/not the publishTarget/);
     });
@@ -66,10 +66,10 @@ describe("authoring compile target resolution", () => {
     it("compileCourse refuses non-target course into production liveSubjectSlug without force", async () => {
         await expect(
             resolveAuthoringCompileTarget({
-                subjectSlug: "sql",
-                courseSlug: "multi-table-sql",
+                subjectSlug: "python",
+                courseSlug: "python-data-functions",
                 options: {
-                    liveSubjectSlug: "sql-v2",
+                    liveSubjectSlug: "python-v2",
                 },
             }),
         ).rejects.toThrow(/--force-live-overwrite/);
@@ -77,15 +77,15 @@ describe("authoring compile target resolution", () => {
 
     it("compileCourse allows a non-target course with a different preview liveSubjectSlug", async () => {
         const target = await resolveAuthoringCompileTarget({
-            subjectSlug: "sql",
-            courseSlug: "multi-table-sql",
+            subjectSlug: "python",
+            courseSlug: "python-data-functions",
             options: {
-                liveSubjectSlug: "sql-preview",
+                liveSubjectSlug: "python-preview",
             },
         });
 
-        expect(target.liveSubjectSlug).toBe("sql-preview");
-        expect(target.blueprint.subjectSlug).toBe("sql-preview");
+        expect(target.liveSubjectSlug).toBe("python-preview");
+        expect(target.blueprint.subjectSlug).toBe("python-preview");
     });
 
     it("compileCourse allows a non-target course in draft-only mode without a live subject slug", async () => {
@@ -148,16 +148,16 @@ describe("authoring compile target resolution", () => {
 
     it("compileCourse allows forced overwrite only when forceLiveOverwrite is explicitly passed", async () => {
         const target = await resolveAuthoringCompileTarget({
-            subjectSlug: "sql",
-                courseSlug: "multi-table-sql",
-                options: {
-                    liveSubjectSlug: "sql-v2",
-                    forceLiveOverwrite: true,
-                },
-            });
+            subjectSlug: "python",
+            courseSlug: "python-data-functions",
+            options: {
+                liveSubjectSlug: "python-v2",
+                forceLiveOverwrite: true,
+            },
+        });
 
-        expect(target.liveSubjectSlug).toBe("sql-v2");
-        expect(target.blueprint.subjectSlug).toBe("sql-v2");
+        expect(target.liveSubjectSlug).toBe("python-v2");
+        expect(target.blueprint.subjectSlug).toBe("python-v2");
     });
 
     it("preserves subject.plan versioning in the generated manifest shape", async () => {

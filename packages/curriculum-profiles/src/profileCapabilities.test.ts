@@ -9,7 +9,29 @@ import {
 } from "./registry.js";
 import { mathShape, pythonShape, sqlShape } from "./shapes/index.js";
 import type { CourseProfile } from "./types.js";
+import { WORKSPACE_PROFILES } from "./workspaceProfiles.js";
 
+describe("workspace profile file and folder creation capabilities", () => {
+    it("makes browser Python files runner explicitly folder/file creation aware", () => {
+        const profile = WORKSPACE_PROFILES["browser-python-files-runner"];
+
+        expect(profile.capabilities.filesystem.enabled).toBe(true);
+        expect(profile.capabilities.multiFileProjects.enabled).toBe(true);
+        expect(profile.capabilities.createFiles?.enabled).toBe(true);
+        expect(profile.capabilities.createFolders?.enabled).toBe(true);
+
+        expect(profile.preferredActionLanguage.join("\n")).toMatch(/create files or folders/i);
+        expect(profile.preferredActionLanguage.join("\n")).toMatch(/data\/input\.txt|src\/main\.py/i);
+    });
+
+    it("keeps simple browser code runner single-file only", () => {
+        const profile = WORKSPACE_PROFILES["browser-code-runner"];
+
+        expect(profile.capabilities.filesystem.enabled).toBe(false);
+        expect(profile.capabilities.createFiles?.enabled).toBe(false);
+        expect(profile.capabilities.createFolders?.enabled).toBe(false);
+    });
+});
 describe("profile code_input capabilities", () => {
     it("marks math as concept-only and keeps python/sql code-capable", () => {
         const mathProfile = getCurriculumProfile("math");

@@ -21,6 +21,8 @@ export const WORKSPACE_PROFILES: Record<string, WorkspaceProfile> = {
             packageInstall: { enabled: false },
             externalNetwork: { enabled: false },
             uploads: { enabled: false },
+            createFiles: { enabled: false },
+            createFolders: { enabled: false },
         },
         preferredActionLanguage: [
             "Type code in the code editor.",
@@ -60,9 +62,21 @@ export const WORKSPACE_PROFILES: Record<string, WorkspaceProfile> = {
             packageInstall: { enabled: false },
             externalNetwork: { enabled: false },
             uploads: { enabled: false },
+            createFiles: {
+                enabled: true,
+                label: "Create file",
+                notes: "Learners can create files in the online editor file explorer when the lesson asks for it.",
+            },
+            createFolders: {
+                enabled: true,
+                label: "Create folder",
+                notes: "Learners can create folders in the online editor file explorer when the lesson asks for it.",
+            },
         },
         preferredActionLanguage: [
             "Open the provided file in the files panel.",
+            "Create files or folders in the files panel only when the lesson explicitly asks for it.",
+            "Use nested file paths such as data/input.txt or src/main.py when the lesson provides folders.",
             "Edit Python code in the code editor.",
             "Click Run.",
             "Check the output panel.",
@@ -97,6 +111,8 @@ export const WORKSPACE_PROFILES: Record<string, WorkspaceProfile> = {
             packageInstall: { enabled: false },
             externalNetwork: { enabled: false },
             uploads: { enabled: false },
+            createFiles: { enabled: false },
+            createFolders: { enabled: false },
             sql: {
                 queryRunner: { enabled: true },
                 resultsTable: { enabled: true },
@@ -139,12 +155,22 @@ export const WORKSPACE_PROFILES: Record<string, WorkspaceProfile> = {
             packageInstall: { enabled: true },
             externalNetwork: { enabled: false },
             uploads: { enabled: true },
+            createFiles: {
+                enabled: true,
+                label: "Create file",
+            },
+            createFolders: {
+                enabled: true,
+                label: "Create folder",
+            },
         },
         preferredActionLanguage: [
-            "Open the file in the file explorer.",
+            "Open files in the file explorer.",
+            "Create files or folders in the file explorer when the lesson asks for it.",
+            "Use nested paths such as src/main.py, data/input.txt, or tests/test_main.py when helpful.",
             "Edit the code in the editor.",
             "Click Run or use the terminal if the lesson asks for it.",
-            "Check the output panel or terminal output."
+            "Check the output panel or terminal output.",
         ],
         forbiddenActionLanguage: [],
     },

@@ -459,7 +459,116 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
             },
         });
     });
+    it("preserves nested starter files and fixture files for online editor folders", () => {
+        const bundle = buildTopicBundleFromDraft({
+            shape: makePythonShapePack(),
+            seed: {
+                ...makePythonSeed(),
+                workspacePolicy: {
+                    workspace: {
+                        capabilities: {
+                            filesystem: { enabled: true },
+                            createFiles: { enabled: true },
+                            createFolders: { enabled: true },
+                        },
+                    },
+                },
+            } as any,
+            draft: makeDraftWithExercise({
+                id: "read-nested-file",
+                kind: "code_input",
+                title: "Read nested input",
+                prompt: "Read data/input.txt and print its contents.",
+                hint: "Use open('data/input.txt').",
+                help: {
+                    concept: "Relative paths can point into folders.",
+                    hint_1: "Look in the data folder.",
+                    hint_2: "Pass the relative path to open().",
+                },
+                starterCode: "# Write your answer below\n",
+                entryFilePath: "src/main.py",
+                starterFiles: [
+                    {
+                        path: "src/main.py",
+                        content: "# Write your answer below\n",
+                        language: "python",
+                        isEntry: true,
+                    },
+                    {
+                        path: "helpers/formatting.py",
+                        content: "def clean(text):\n    return text.strip()\n",
+                        language: "python",
+                    },
+                ],
+                files: [
+                    {
+                        path: "data/input.txt",
+                        content: "hello from a folder\n",
+                        readOnly: true,
+                    },
+                ],
+                solutionCode:
+                    "from helpers.formatting import clean\nprint(clean(open('data/input.txt').read()))\n",
+                recipeType: "fixed_tests",
+                tests: [
+                    {
+                        stdout: "hello from a folder\n",
+                        match: "exact",
+                        files: [
+                            {
+                                path: "data/input.txt",
+                                content: "hello from a folder\n",
+                                readOnly: true,
+                            },
+                        ],
+                    },
+                    {
+                        stdout: "hello from a folder\n",
+                        match: "exact",
+                        files: [
+                            {
+                                path: "data/input.txt",
+                                content: "hello from a folder\n",
+                                readOnly: true,
+                            },
+                        ],
+                    },
+                ],
+            }),
+        });
 
+        const exercise = bundle.exercises.find(
+            (item) => item.id === "read-nested-file",
+        ) as any;
+
+        expect(exercise.kind).toBe("code_input");
+        expect(exercise.workspace.entryFilePath).toBe("src/main.py");
+
+        expect(exercise.workspace.starterFiles).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    path: "src/main.py",
+                    content: expect.stringContaining("# Write your answer below"),
+                    isEntry: true,
+                }),
+                expect.objectContaining({
+                    path: "helpers/formatting.py",
+                    content: expect.stringContaining("def clean"),
+                }),
+            ]),
+        );
+
+        expect(exercise.workspace.files).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    path: "data/input.txt",
+                    content: "hello from a folder\n",
+                }),
+            ]),
+        );
+
+        expect(JSON.stringify(exercise.recipe)).toContain("data/input.txt");
+    });
     it("throws when programming code_input exercises omit explicit tests", () => {
         expect(() =>
             buildTopicBundleFromDraft({

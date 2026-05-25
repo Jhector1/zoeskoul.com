@@ -1,53 +1,20 @@
-// import type { CourseProfile } from "../types.js";
-//
-// export const pythonProfile: CourseProfile = {
-//     id: "python",
-//     allowedExerciseKinds: [
-//         "single_choice",
-//         "multi_choice",
-//         "drag_reorder",
-//         "fill_blank_choice",
-//         "code_input",
-//     ],
-//     allowedRecipeTypes: ["fixed_tests", "template_io"],
-//
-//     buildModuleRuntimeDefaults() {
-//         return {
-//             kind: "code",
-//             language: "python",
-//         };
-//     },
-//
-//     getRecipeRegistry() {
-//         return {};
-//     },
-//
-//     validateTopicBundle() {
-//         return [];
-//     },
-// };
 
 
 
 
-
-import type {
+import {
     ManifestCodeInput,
     ManifestFileFixture,
     ManifestStarterFile,
     ProgrammingCodeInputTestDraft,
-    TopicRecipe,
-    BuildSubjectManifestArgs,
-    BuildTopicSeedArgs,
-    CompileTopicRecipeArgs,
+    ProgrammingCodeInputStarterFileDraft,
+    normalizeWorkspacePath,
 } from "@zoeskoul/curriculum-contracts";
 import { SemanticCheckSchema } from "@zoeskoul/practice-checks";
-import { buildBaseSubjectManifest } from "../shared/buildBaseSubjectManifest.js";
 import type {
     CodeInputHelpFallback,
     CodeInputProfileCapability,
     CourseProfile,
-    CourseProfileAdapter,
 } from "../types.js";
 import { pythonShape } from "../shapes/pythonShape.js";
 
@@ -57,6 +24,47 @@ function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
 }
 
+
+function safeNormalizeWorkspacePath(path: string, label: string): string {
+    try {
+        return normalizeWorkspacePath(path);
+    } catch (error) {
+        throw new Error(`${label}: ${(error as Error).message}`);
+    }
+}
+
+function normalizePythonStarterFiles(
+    files: ProgrammingCodeInputStarterFileDraft[] | undefined,
+): ManifestStarterFile[] {
+    if (!Array.isArray(files)) return [];
+
+    const seen = new Set<string>();
+    const normalized: ManifestStarterFile[] = [];
+
+    for (const file of files) {
+        const path = safeNormalizeWorkspacePath(file.path, "Invalid Python starter file path");
+
+        if (seen.has(path)) continue;
+        seen.add(path);
+
+        normalized.push({
+            path,
+            content: String(file.content ?? ""),
+            language: file.language ?? "python",
+            ...(typeof file.isEntry === "boolean"
+                ? { isEntry: file.isEntry }
+                : {}),
+            ...(typeof file.entry === "boolean"
+                ? { entry: file.entry }
+                : {}),
+            ...(typeof file.readOnly === "boolean"
+                ? { readOnly: file.readOnly }
+                : {}),
+        });
+    }
+
+    return normalized;
+}
 function requireProgrammingTests(
     exercise: {
         id: string;
@@ -117,7 +125,10 @@ function normalizePythonTestFiles(
     return files
         .filter((file) => normalizeText(file.path))
         .map((file) => ({
-            path: file.path.trim(),
+            path: safeNormalizeWorkspacePath(
+                file.path,
+                "Invalid Python test fixture path",
+            ),
             content: String(file.content ?? ""),
             ...(typeof file.readOnly === "boolean"
                 ? { readOnly: file.readOnly }
@@ -176,8 +187,14 @@ function normalizePythonFixtureFiles(
     return files
         .filter((file) => normalizeText(file.path))
         .map((file) => ({
-            path: file.path.trim(),
+            path: safeNormalizeWorkspacePath(
+                file.path,
+                "Invalid Python fixture file path",
+            ),
             content: String(file.content ?? ""),
+            ...(typeof file.readOnly === "boolean"
+                ? { readOnly: file.readOnly }
+                : {}),
         }));
 }
 
@@ -245,19 +262,79 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             (Array.isArray(args.exercise.semanticChecks) &&
                 args.exercise.semanticChecks.length > 0);
 
-        const starterCode = normalizeText(args.exercise.starterCode);
+        const fallbackStarterCode = normalizeText(args.exercise.starterCode);
         const solutionCode = normalizeText(args.exercise.solutionCode);
-        const fixtureFiles = normalizePythonFixtureFiles(args.exercise.files);
-        const starterFiles: ManifestStarterFile[] = [
-            {
-                path: "main.py",
-                content: starterCode,
-                language: "python",
-                isEntry: true,
-                entry: true,
-            },
-            ...fixtureFiles,
-        ];
+
+        const authoredEntryFilePath = safeNormalizeWorkspacePath(
+            (args.exercise as { entryFilePath?: string }).entryFilePath ?? "main.py",
+            "Invalid Python entryFilePath",
+        );
+
+        const authoredStarterFiles = normalizePythonStarterFiles(
+            (args.exercise as { starterFiles?: ProgrammingCodeInputStarterFileDraft[] })
+                .starterFiles,
+        );
+
+        const hasAuthoredStarterFiles = authoredStarterFiles.length > 0;
+
+        let starterFiles: ManifestStarterFile[] = hasAuthoredStarterFiles
+            ? authoredStarterFiles
+            : [
+                {
+                    path: authoredEntryFilePath,
+                    content: fallbackStarterCode,
+                    language: "python",
+                    isEntry: true,
+                    entry: true,
+                },
+            ];
+
+        const hasEntryFile = starterFiles.some(
+            (file) => file.path === authoredEntryFilePath,
+        );
+
+        if (!hasEntryFile) {
+            starterFiles = [
+                {
+                    path: authoredEntryFilePath,
+                    content: fallbackStarterCode,
+                    language: "python",
+                    isEntry: true,
+                    entry: true,
+                },
+                ...starterFiles,
+            ];
+        }
+
+        starterFiles = starterFiles.map((file) =>
+            file.path === authoredEntryFilePath
+                ? {
+                    ...file,
+                    language: file.language ?? "python",
+                    isEntry: true,
+                    entry: true,
+                }
+                : {
+                    ...file,
+                    language: file.language ?? "python",
+                    isEntry: file.isEntry === true ? false : file.isEntry,
+                    entry: file.entry === true ? false : file.entry,
+                },
+        );
+
+        const starterPathSet = new Set(starterFiles.map((file) => file.path));
+        const fixtureFiles = normalizePythonFixtureFiles(args.exercise.files).filter(
+            (file) => !starterPathSet.has(file.path ?? ""),
+        );
+
+        const entryStarterFile =
+            starterFiles.find((file) => file.path === authoredEntryFilePath) ??
+            starterFiles[0];
+
+        const starterCode =
+            typeof entryStarterFile?.content === "string"
+                ? entryStarterFile.content
+                : fallbackStarterCode;
 
         return {
             id: args.exercise.id,
@@ -270,9 +347,9 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             starterFiles,
             workspace: {
                 language: "python",
-                entryFilePath: "main.py",
+                entryFilePath: authoredEntryFilePath,
                 starterCode,
-                starterFiles: starterFiles.filter((file) => file.path === "main.py"),
+                starterFiles,
                 ...(fixtureFiles.length > 0
                     ? {
                         files: fixtureFiles,
@@ -296,8 +373,7 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                     solutionCode,
                 },
         };
-    },
-};
+    },};
 
 export const pythonProfile: CourseProfile = {
     id: "python",
@@ -348,10 +424,15 @@ export const pythonProfile: CourseProfile = {
                 "- Every file I/O exercise must include the exact fixture files the code reads or updates.",
                 "- Keep exercise-level files[] as the learner-visible default fixture set for file lessons.",
                 "- If different fixed tests expect different file contents, put the matching files under each tests[].files entry instead of using stdin to vary file contents.",
-                "- Use simple provided filenames such as data.txt, names.txt, or scores.csv.",
                 "- Do not reference files that are not provided by the exercise fixtures.",
                 "- Keep fixture contents short and deterministic.",
-                "- Do not tell learners to create files manually unless the files panel is available for that lesson.",
+                "- Online editor files support nested folders through workspace-relative POSIX paths.",
+                "- Use paths such as data/input.txt, src/main.py, helpers/utils.py, and tests/test_main.py.",
+                "- Do not use absolute paths, backslashes, drive letters, ../, or empty path segments.",
+                "- starterFiles may include learner-editable files such as src/main.py or helpers/utils.py.",
+                "- files and tests[].files may include fixture files such as data/input.txt or data/students.csv.",
+                "- Set entryFilePath when the learner entry file is not main.py, for example entryFilePath: \"src/main.py\".",
+                "- If asking the learner to create files/folders, explicitly state the path they should create and only do this when createFiles/createFolders or filesystem capabilities are enabled.",
             );
         } else {
             lines.push(

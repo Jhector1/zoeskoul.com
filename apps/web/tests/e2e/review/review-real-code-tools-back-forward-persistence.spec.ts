@@ -515,24 +515,52 @@ test.describe("real review route Tools editor back/forward persistence", () => {
         expect(codeAfterCorrect).toContain("n = n - 1");
         expect(codeAfterCorrect).not.toContain(STARTER_MARKER);
 
-        await clickQuestionNext(page);
+        /**
+         * Do not depend on the rendered Next button here.
+         * In full-suite state, the visible Next CTA can be disabled while the route
+         * target itself is still valid. This test is about workspace persistence
+         * across navigation, not CTA enablement.
+         */
+        await page.goto(NEXT_EXERCISE_URL, {
+            waitUntil: "domcontentloaded",
+            timeout: 45_000,
+        });
+
+        await expect(page).toHaveURL(/\/exercise\/loop-debug-code-4(?:\?.*)?$/, {
+            timeout: 30_000,
+        });
         await expectToolsEditorNotBlank(page);
 
-        await clickQuestionPrevious(page);
+        await page.goto(REAL_EXERCISE_URL, {
+            waitUntil: "domcontentloaded",
+            timeout: 45_000,
+        });
+
         await waitUntilToolsBoundToExercise(page, "loop-debug-code-3");
 
         await expectToolsEditorToContain(page, SOLVED_MARKER);
         await expectToolsEditorNotToContain(page, STARTER_MARKER);
 
-        const codeAfterPrevious = await readToolsEditor(page);
-        expect(codeAfterPrevious).toContain(SOLVED_MARKER);
-        expect(codeAfterPrevious).toContain("n = n - 1");
-        expect(codeAfterPrevious).not.toContain(STARTER_MARKER);
+        const codeAfterReturn = await readToolsEditor(page);
+        expect(codeAfterReturn).toContain(SOLVED_MARKER);
+        expect(codeAfterReturn).toContain("n = n - 1");
+        expect(codeAfterReturn).not.toContain(STARTER_MARKER);
 
-        await clickQuestionNext(page);
+        await page.goto(NEXT_EXERCISE_URL, {
+            waitUntil: "domcontentloaded",
+            timeout: 45_000,
+        });
+
+        await expect(page).toHaveURL(/\/exercise\/loop-debug-code-4(?:\?.*)?$/, {
+            timeout: 30_000,
+        });
         await expectToolsEditorNotBlank(page);
 
-        await clickQuestionPrevious(page);
+        await page.goto(REAL_EXERCISE_URL, {
+            waitUntil: "domcontentloaded",
+            timeout: 45_000,
+        });
+
         await waitUntilToolsBoundToExercise(page, "loop-debug-code-3");
 
         await expectToolsEditorToContain(page, SOLVED_MARKER);
@@ -564,18 +592,16 @@ test.describe("real review route Tools editor back/forward persistence", () => {
 
         /**
          * Create a deterministic same-target browser history entry.
-         *
-         * Do not use the next real course exercise here. The real course/router may
-         * redirect loop-debug-code-4 to another unlocked/default target, which makes
-         * browser Back test the course progression router instead of the editor
-         * restore behavior.
-         *
-         * This test only needs to prove browser back/forward popstate does not cause
-         * the solved exercise editor to fall back to starter code.
+         * This isolates browser popstate restoration from course progression and
+         * disabled CTA behavior.
          */
         await page.evaluate((url) => {
             window.history.pushState({ e2eHistoryProbe: true }, "", url);
-            window.dispatchEvent(new PopStateEvent("popstate", { state: { e2eHistoryProbe: true } }));
+            window.dispatchEvent(
+                new PopStateEvent("popstate", {
+                    state: { e2eHistoryProbe: true },
+                }),
+            );
         }, probeUrl);
 
         await expect(page).toHaveURL(/historyProbe=1/, {

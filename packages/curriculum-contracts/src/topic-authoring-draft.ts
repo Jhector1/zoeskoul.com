@@ -2,8 +2,8 @@ import {
     SemanticCheckSchema,
     type SemanticCheck,
 } from "@zoeskoul/practice-checks";
-import type { ExerciseKind, ManifestFileFixture } from "./manifest.js";
-
+import type { ExerciseKind, ManifestFileFixture, WorkspaceLanguage } from "./manifest.js";
+import { normalizeWorkspacePath } from "./workspace-path.js";
 export type ExerciseHelpDraft = {
     concept: string;
     hint_1: string;
@@ -27,7 +27,21 @@ type DraftCommon = {
     help: ExerciseHelpDraft;
 };
 
-export type TopicAuthoringDraft = {
+export type ProgrammingCodeInputStarterFileDraft = {
+    /**
+     * Workspace-relative file path. Supports folders:
+     * - "main.py"
+     * - "src/main.py"
+     * - "helpers/math_utils.py"
+     */
+    path: string;
+
+    content: string;
+    language?: WorkspaceLanguage;
+    isEntry?: boolean;
+    entry?: boolean;
+    readOnly?: boolean;
+};export type TopicAuthoringDraft = {
     title: string;
     summary: string;
     minutes: number;
@@ -70,24 +84,27 @@ export type TopicAuthoringDraft = {
         | (DraftCommon & {
         kind: "code_input";
         starterCode: string;
+
+        /**
+         * Optional explicit entry file. Use this when starterFiles contains
+         * multiple files or nested folders, for example "src/main.py".
+         */
+        entryFilePath?: string;
+
+        /**
+         * Optional learner-editable starter files. Use slash paths to create folders.
+         * If omitted, starterCode is emitted as the default entry file.
+         */
+        starterFiles?: ProgrammingCodeInputStarterFileDraft[];
+
         solutionCode: string;
         tests?: ProgrammingCodeInputTestDraft[];
         files?: ProgrammingCodeInputFileDraft[];
         semanticChecks?: SemanticCheck[];
         datasetId?: string;
         recipeType?: "sql_query" | "template_io" | "fixed_tests" | "semantic";
-
-        /**
-         * SQL mutation post-check.
-         *
-         * Required for SQL mutation statements when the compiler cannot infer it.
-         * Examples:
-         * - INSERT => SELECT inserted row or final table state
-         * - UPDATE => SELECT changed rows
-         * - DELETE => SELECT final table state
-         * - CREATE TABLE => SELECT name, sql FROM sqlite_master
-         */
         checkSql?: string;
+
     })
     >;
 
@@ -326,6 +343,23 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                                     additionalProperties: true,
                                 },
                             },
+                            entryFilePath: { type: "string" },
+                            starterFiles: {
+                                type: "array",
+                                items: {
+                                    type: "object",
+                                    additionalProperties: false,
+                                    required: ["path", "content"],
+                                    properties: {
+                                        path: { type: "string" },
+                                        content: { type: "string" },
+                                        language: { type: "string" },
+                                        isEntry: { type: "boolean" },
+                                        entry: { type: "boolean" },
+                                        readOnly: { type: "boolean" },
+                                    },
+                                },
+                            },
                             datasetId: { type: "string" },
                             recipeType: {
                                 type: "string",
@@ -368,7 +402,41 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function isNonEmptyString(value: unknown): value is string {
     return typeof value === "string" && value.trim().length > 0;
 }
+function assertWorkspacePath(value: unknown, label: string): string {
+    if (!isNonEmptyString(value)) {
+        fail(`${label} must be a non-empty workspace-relative path`);
+    }
 
+    try {
+        return normalizeWorkspacePath(value);
+    } catch (error) {
+        fail(`${label} is invalid: ${(error as Error).message}`);
+    }
+}
+
+function assertFileDraft(
+    file: unknown,
+    label: string,
+    allowedKeys = ["path", "content", "readOnly"],
+) {
+    if (!isRecord(file)) {
+        fail(`${label} must be an object`);
+    }
+
+    assertOnlyKeys(file, allowedKeys, label);
+    assertWorkspacePath(file.path, `${label}.path`);
+
+    if (typeof file.content !== "string") {
+        fail(`${label}.content must be a string`);
+    }
+
+    if (
+        typeof file.readOnly !== "undefined" &&
+        typeof file.readOnly !== "boolean"
+    ) {
+        fail(`${label}.readOnly must be a boolean when provided`);
+    }
+}
 function assertOnlyKeys(
     value: Record<string, unknown>,
     allowedKeys: string[],
@@ -615,20 +683,23 @@ export function assertTopicAuthoringDraft(
             assertOnlyKeys(
                 exercise,
                 [
-                    "id",
-                    "kind",
-                    "title",
-                    "prompt",
-                    "hint",
-                    "help",
-                    "starterCode",
-                    "solutionCode",
-                    "tests",
-                    "files",
-                    "semanticChecks",
-                    "datasetId",
-                    "recipeType",
-                    "checkSql",
+
+                        "id",
+                        "kind",
+                        "title",
+                        "prompt",
+                        "hint",
+                        "help",
+                        "starterCode",
+                        "entryFilePath",
+                        "starterFiles",
+                        "solutionCode",
+                        "tests",
+                        "files",
+                        "semanticChecks",
+                        "datasetId",
+                        "recipeType",
+                        "checkSql",
                 ],
                 label,
             );
@@ -661,6 +732,51 @@ export function assertTopicAuthoringDraft(
             ) {
                 fail(`${label} code_input recipeType is invalid`);
             }
+
+
+
+            if (typeof exercise.entryFilePath !== "undefined") {
+                assertWorkspacePath(exercise.entryFilePath, `${label}.entryFilePath`);
+            }
+
+            if (typeof exercise.starterFiles !== "undefined") {
+                if (!Array.isArray(exercise.starterFiles)) {
+                    fail(`${label} code_input starterFiles must be an array when provided`);
+                }
+
+                exercise.starterFiles.forEach((file, fileIndex) => {
+                    assertFileDraft(
+                        file,
+                        `${label} starterFiles[${fileIndex}]`,
+                        ["path", "content", "language", "isEntry", "entry", "readOnly"],
+                    );
+
+                    const record = file as Record<string, unknown>;
+
+                    if (
+                        typeof record.language !== "undefined" &&
+                        typeof record.language !== "string"
+                    ) {
+                        fail(`${label} starterFiles[${fileIndex}].language must be a string when provided`);
+                    }
+
+                    if (
+                        typeof record.isEntry !== "undefined" &&
+                        typeof record.isEntry !== "boolean"
+                    ) {
+                        fail(`${label} starterFiles[${fileIndex}].isEntry must be a boolean when provided`);
+                    }
+
+                    if (
+                        typeof record.entry !== "undefined" &&
+                        typeof record.entry !== "boolean"
+                    ) {
+                        fail(`${label} starterFiles[${fileIndex}].entry must be a boolean when provided`);
+                    }
+                });
+            }
+
+
 
             if (typeof exercise.tests !== "undefined") {
                 if (!Array.isArray(exercise.tests)) {
@@ -703,30 +819,10 @@ export function assertTopicAuthoringDraft(
                         }
 
                         test.files.forEach((file, fileIndex) => {
-                            if (!isRecord(file)) {
-                                fail(`${label} tests[${testIndex}].files[${fileIndex}] must be an object`);
-                            }
-
-                            assertOnlyKeys(
+                            assertFileDraft(
                                 file,
-                                ["path", "content", "readOnly"],
                                 `${label} tests[${testIndex}].files[${fileIndex}]`,
                             );
-
-                            if (!isNonEmptyString(file.path)) {
-                                fail(`${label} tests[${testIndex}].files[${fileIndex}].path must be a non-empty string`);
-                            }
-
-                            if (typeof file.content !== "string") {
-                                fail(`${label} tests[${testIndex}].files[${fileIndex}].content must be a string`);
-                            }
-
-                            if (
-                                typeof file.readOnly !== "undefined" &&
-                                typeof file.readOnly !== "boolean"
-                            ) {
-                                fail(`${label} tests[${testIndex}].files[${fileIndex}].readOnly must be a boolean when provided`);
-                            }
                         });
                     }
                 });

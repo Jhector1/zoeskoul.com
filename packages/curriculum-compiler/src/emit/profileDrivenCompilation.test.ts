@@ -187,12 +187,12 @@ describe("profile-driven curriculum compilation", () => {
                 content: "Ada\nGrace\nLinus\n",
             }),
         ]);
-        expect(exercise.starterFiles).toEqual(
-            expect.arrayContaining([
-                expect.objectContaining({ path: "main.py" }),
-                expect.objectContaining({ path: "names.txt" }),
-            ]),
-        );
+        expect(exercise.starterFiles).toEqual([
+            expect.objectContaining({ path: "main.py" }),
+        ]);
+        expect(exercise.workspace?.starterFiles).toEqual([
+            expect.objectContaining({ path: "main.py" }),
+        ]);
     });
 
     it("compiles the same draft and seed into the same topic bundle every time", () => {

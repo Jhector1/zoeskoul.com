@@ -19,6 +19,19 @@ export type WorkspaceCapabilities = {
     multiFileProjects: WorkspaceCapability;
     terminal: WorkspaceCapability;
     filesystem: WorkspaceCapability;
+
+    /**
+     * The learner can create new files in the online editor/file explorer.
+     */
+    createFiles?: WorkspaceCapability;
+
+    /**
+     * The learner can create folders/directories in the online editor/file explorer.
+     * Authored curriculum folders are represented by slash-delimited file paths,
+     * for example "src/main.py" or "data/input.txt".
+     */
+    createFolders?: WorkspaceCapability;
+
     stdinStdout: WorkspaceCapability;
     packageInstall: WorkspaceCapability;
     externalNetwork: WorkspaceCapability;

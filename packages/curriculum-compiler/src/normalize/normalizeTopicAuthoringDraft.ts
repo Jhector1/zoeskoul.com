@@ -1,4 +1,9 @@
-import type { TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
+import {
+    normalizeWorkspacePath,
+    ProgrammingCodeInputFileDraft,
+    ProgrammingCodeInputStarterFileDraft,
+    TopicAuthoringDraft
+} from "@zoeskoul/curriculum-contracts";
 import {
     assertProfileSupportsCodeInput,
     getCurriculumProfile,
@@ -11,7 +16,84 @@ type DraftHelp = DraftQuizItem["help"];
 function asOptionalString(value: unknown): string | undefined {
     return typeof value === "string" && value.trim() ? value.trim() : undefined;
 }
+function normalizeOptionalWorkspacePath(value: unknown, label = "workspace path"): string | undefined {
+    if (typeof value !== "string" || !value.trim()) return undefined;
 
+    try {
+        return normalizeWorkspacePath(value);
+    } catch (error) {
+        throw new Error(`${label} is invalid: ${(error as Error).message}`);
+    }
+}
+
+function normalizeFileDrafts(
+    value: unknown,
+): ProgrammingCodeInputFileDraft[] | undefined {
+    if (!Array.isArray(value)) return undefined;
+
+    const files = value
+        .filter((item): item is Record<string, unknown> =>
+            Boolean(item) && typeof item === "object" && !Array.isArray(item),
+        )
+        .map((item) => {
+            const path = normalizeOptionalWorkspacePath(item.path, "file.path");
+            if (!path) return null;
+
+            return {
+                path,
+                content:
+                    typeof item.content === "string"
+                        ? item.content
+                        : "",
+                ...(typeof item.readOnly === "boolean"
+                    ? { readOnly: item.readOnly }
+                    : {}),
+            };
+        })
+        .filter((file): file is ProgrammingCodeInputFileDraft => Boolean(file));
+
+    return files.length > 0 ? files : undefined;
+}
+
+function normalizeStarterFileDrafts(
+    value: unknown,
+): ProgrammingCodeInputStarterFileDraft[] | undefined {
+    if (!Array.isArray(value)) return undefined;
+
+    const files = value
+        .filter((item): item is Record<string, unknown> =>
+            Boolean(item) && typeof item === "object" && !Array.isArray(item),
+        )
+        .map((item) => {
+            const path = normalizeOptionalWorkspacePath(item.path, "starterFiles[].path");
+            if (!path) return null;
+
+            return {
+                path,
+                content:
+                    typeof item.content === "string"
+                        ? item.content
+                        : "",
+                ...(typeof item.language === "string" && item.language.trim()
+                    ? { language: item.language.trim() as any }
+                    : {}),
+                ...(typeof item.isEntry === "boolean"
+                    ? { isEntry: item.isEntry }
+                    : {}),
+                ...(typeof item.entry === "boolean"
+                    ? { entry: item.entry }
+                    : {}),
+                ...(typeof item.readOnly === "boolean"
+                    ? { readOnly: item.readOnly }
+                    : {}),
+            };
+        })
+        .filter((file): file is ProgrammingCodeInputStarterFileDraft =>
+            Boolean(file),
+        );
+
+    return files.length > 0 ? files : undefined;
+}
 function normalizeOptionText(value: unknown): string {
     if (typeof value === "string") return value.trim();
 
@@ -547,20 +629,23 @@ function normalizeCodeInput(
                         ? x.match
                         : undefined;
 
+                const files = normalizeFileDrafts(x.files);
+
                 return {
                     stdin:
                         typeof x.stdin === "string"
                             ? x.stdin
                             : typeof x.input === "string"
                                 ? x.input
-                            : undefined,
+                                : undefined,
                     stdout:
                         typeof x.stdout === "string"
                             ? x.stdout
                             : typeof x.output === "string"
                                 ? x.output
-                            : "",
+                                : "",
                     match,
+                    ...(files?.length ? { files } : {}),
                 };
             })
             .filter((x) => x.stdout.trim().length > 0)
@@ -573,16 +658,21 @@ function normalizeCodeInput(
         semanticChecksResult.success && semanticChecksResult.data.length
             ? semanticChecksResult.data
             : undefined;
-
+    const starterFiles = normalizeStarterFileDrafts(item.starterFiles);
+    const files = normalizeFileDrafts(item.files);
+    const entryFilePath = normalizeOptionalWorkspacePath(item.entryFilePath, "entryFilePath");
     return {
         id: String(item.id ?? "").trim(),
         kind: "code_input",
         title,
         prompt,
         starterCode,
+        ...(entryFilePath ? { entryFilePath } : {}),
+        ...(starterFiles?.length ? { starterFiles } : {}),
         solutionCode:
             typeof item.solutionCode === "string" ? item.solutionCode : "",
         ...(tests?.length ? { tests } : {}),
+        ...(files?.length ? { files } : {}),
         datasetId:
             typeof item.datasetId === "string"
                 ? item.datasetId.trim() || undefined

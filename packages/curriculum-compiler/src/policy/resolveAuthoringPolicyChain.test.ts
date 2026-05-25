@@ -10,7 +10,7 @@ async function writeJson(filePath: string, value: unknown) {
 }
 
 describe("resolveAuthoringPolicyChain", () => {
-    it("resolves generic platform, browser, code-input, SQL workspace, and SQL course policy in order", async () => {
+    it("resolves subject shared profile/workspace/validation and SQL course validation policy in order", async () => {
         const policy = await resolveAuthoringPolicyChain({
             subjectSlug: "sql",
             courseSlug: "sql-foundations",
@@ -19,10 +19,9 @@ describe("resolveAuthoringPolicyChain", () => {
 
         expect(policy.sources).toEqual(
             expect.arrayContaining([
-                expect.stringContaining("authoring/shared/generation/platform.policy.json"),
-                expect.stringContaining("authoring/shared/generation/browser-workspace.policy.json"),
-                expect.stringContaining("authoring/shared/generation/code-input.policy.json"),
+                expect.stringContaining("authoring/subjects/sql/shared/profile.json"),
                 expect.stringContaining("authoring/subjects/sql/shared/workspace.policy.json"),
+                expect.stringContaining("authoring/subjects/sql/shared/validation.policy.json"),
                 expect.stringContaining("authoring/subjects/sql/courses/sql-foundations/validation.policy.json"),
             ]),
         );
@@ -38,7 +37,7 @@ describe("resolveAuthoringPolicyChain", () => {
         );
     });
 
-    it("resolves generic platform, browser, code-input, Python workspace, and Python course policy in order", async () => {
+    it("resolves subject shared profile/workspace/validation and Python course validation policy in order", async () => {
         const policy = await resolveAuthoringPolicyChain({
             subjectSlug: "python",
             courseSlug: "python-for-beginners",
@@ -47,10 +46,9 @@ describe("resolveAuthoringPolicyChain", () => {
 
         expect(policy.sources).toEqual(
             expect.arrayContaining([
-                expect.stringContaining("authoring/shared/generation/platform.policy.json"),
-                expect.stringContaining("authoring/shared/generation/browser-workspace.policy.json"),
-                expect.stringContaining("authoring/shared/generation/code-input.policy.json"),
+                expect.stringContaining("authoring/subjects/python/shared/profile.json"),
                 expect.stringContaining("authoring/subjects/python/shared/workspace.policy.json"),
+                expect.stringContaining("authoring/subjects/python/shared/validation.policy.json"),
                 expect.stringContaining("authoring/subjects/python/courses/python-for-beginners/validation.policy.json"),
             ]),
         );

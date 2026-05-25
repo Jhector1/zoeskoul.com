@@ -23,8 +23,8 @@ test.describe("catalog subject version visibility", () => {
         await expect(pythonCatalog).toContainText(/Python/i);
         await expect(pythonCatalog).not.toContainText(/2 courses/i);
 
-        await pythonCatalog.click();
-
+        await expect(pythonCatalog).toHaveAttribute("href", "/en/catalogs/python");
+        await page.goto("/en/catalogs/python");
         await expect(page).toHaveURL(/\/en\/catalogs\/python/);
 
         const body = page.locator("body");

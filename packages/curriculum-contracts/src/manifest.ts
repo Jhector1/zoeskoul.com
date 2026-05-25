@@ -197,7 +197,19 @@ export type ManifestSqlQueryTest = {
 };
 
 export type ManifestFileFixture = {
+  /**
+   * Workspace-relative POSIX file path.
+   *
+   * Supports nested folders:
+   * - "data/input.txt"
+   * - "fixtures/students.csv"
+   * - "tests/cases/case1.txt"
+   *
+   * The online editor creates folders implied by the path.
+   * Do not use absolute paths, backslashes, drive letters, "..", or empty segments.
+   */
   path: string;
+
   content: string;
   readOnly?: boolean;
 };
@@ -244,8 +256,26 @@ export type ManifestCodeInputExpectedExample =
   | boolean
   | { metaKey?: string };
 export type ManifestStarterFile = {
+  /**
+   * Workspace-relative POSIX path.
+   *
+   * Supports nested folders by using "/" separators:
+   * - "main.py"
+   * - "src/main.py"
+   * - "data/input.txt"
+   * - "tests/test_main.py"
+   *
+   * Do not use absolute paths, drive letters, backslashes, "..", or empty segments.
+   * The online editor will create folders implied by the path.
+   */
   path?: string;
+
+  /**
+   * Backward-compatible single-file name.
+   * Prefer `path` for all new authored content, especially nested folders.
+   */
   name?: string;
+
   content?: string;
   language?: WorkspaceLanguage;
   isEntry?: boolean;
@@ -254,10 +284,28 @@ export type ManifestStarterFile = {
    * Backward-compatible alias used by older app-side starter file shapes.
    */
   entry?: boolean;
+  /**
+   * Marks support/fixture files as read-only in editor-capable runtimes.
+   * Starter files may omit this or set false when learner-editable.
+   */
+  readOnly?: boolean;
 };
 
 export type ManifestStarterFiles =
+/**
+ * Preferred form. Use `path` for both root files and nested files.
+ */
     | ManifestStarterFile[]
+
+    /**
+     * Compact form. Object keys are workspace-relative paths and may include folders.
+     *
+     * Example:
+     * {
+     *   "src/main.py": { content: "...", isEntry: true },
+     *   "data/input.txt": "42\n"
+     * }
+     */
     | Record<
     string,
     | string
@@ -266,6 +314,8 @@ export type ManifestStarterFiles =
   language?: WorkspaceLanguage;
   isEntry?: boolean;
   entry?: boolean;
+  readOnly?: boolean;
+
 }
 >;
 
@@ -275,6 +325,10 @@ export type ManifestWorkspaceSeed = {
   activeFileId?: string;
   entryFileId?: string;
 
+  /**
+   * Preferred entry file path when multiple files exist.
+   * Supports nested paths such as "src/main.py".
+   */
   entryFile?: string;
   entryPath?: string;
   entryFilePath?: string;
@@ -282,17 +336,33 @@ export type ManifestWorkspaceSeed = {
   mainFile?: string;
   mainFilePath?: string;
 
+  /**
+   * Open tabs are workspace-relative file paths.
+   * Supports nested paths such as "src/main.py" and "data/input.txt".
+   */
   openTabs?: string[];
+
   stdin?: string;
 
+  /**
+   * Optional single-entry starter code. For multi-file or nested-folder
+   * exercises, prefer starterFiles and set entryFilePath explicitly.
+   */
   starterCode?: string;
+
+  /**
+   * Learner-editable starter files. Paths may include folders.
+   */
   starterFiles?: ManifestStarterFiles;
 
+  /**
+   * Runtime/support fixture files. Paths may include folders.
+   * Use for provided data files, CSVs, helper text files, etc.
+   */
   files?: ManifestStarterFiles;
   initialFiles?: ManifestStarterFiles;
   workspaceFiles?: ManifestStarterFiles;
 };
-
 export type ManifestCodeInput = ManifestBaseExercise & {
   kind: "code_input";
   language?: WorkspaceLanguage;

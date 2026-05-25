@@ -3,7 +3,7 @@ import {
     assertTopicAuthoringDraft,
     validateTopicAuthoringDraft,
 } from "./topic-authoring-draft.js";
-
+import type { TopicAuthoringDraft } from "./topic-authoring-draft.js";
 function makeValidMinimalDraft() {
     return {
         title: "Topic",
@@ -30,6 +30,103 @@ function makeValidMinimalDraft() {
     };
 }
 
+
+
+
+
+
+function validDraftWithPath(path: string): TopicAuthoringDraft {
+    return {
+        title: "Files",
+        summary: "Use files.",
+        minutes: 10,
+        sketchBlocks: [
+            {
+                id: "s1",
+                title: "Sketch",
+                bodyMarkdown: "Read files.",
+            },
+        ],
+        quizDraft: [
+            {
+                id: "q1",
+                kind: "code_input",
+                title: "Read file",
+                prompt: "Read a file.",
+                hint: "Use open().",
+                help: {
+                    concept: "Relative paths identify files.",
+                    hint_1: "Use the provided path.",
+                    hint_2: "Print the file contents.",
+                },
+                starterCode: "# Write your answer below\n",
+                entryFilePath: "src/main.py",
+                starterFiles: [
+                    {
+                        path: "src/main.py",
+                        content: "# Write your answer below\n",
+                        isEntry: true,
+                    },
+                ],
+                solutionCode: `print(open("${path}").read())`,
+                recipeType: "fixed_tests",
+                files: [
+                    {
+                        path,
+                        content: "hello\n",
+                        readOnly: true,
+                    },
+                ],
+                tests: [
+                    {
+                        stdout: "hello\n",
+                        files: [
+                            {
+                                path,
+                                content: "hello\n",
+                            },
+                        ],
+                    },
+                    {
+                        stdout: "hello\n",
+                        files: [
+                            {
+                                path,
+                                content: "hello\n",
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    };
+}
+
+describe("TopicAuthoringDraft workspace file paths", () => {
+    it("allows nested workspace-relative file paths", () => {
+        expect(() =>
+            assertTopicAuthoringDraft(validDraftWithPath("data/input.txt")),
+        ).not.toThrow();
+
+        expect(() =>
+            assertTopicAuthoringDraft(validDraftWithPath("fixtures/case-1/input.txt")),
+        ).not.toThrow();
+    });
+
+    it("rejects unsafe workspace paths", () => {
+        for (const badPath of [
+            "../secret.txt",
+            "/absolute/path.txt",
+            "C:\\Users\\admin\\secret.txt",
+            "data//input.txt",
+            "./input.txt",
+        ]) {
+            expect(() =>
+                assertTopicAuthoringDraft(validDraftWithPath(badPath)),
+            ).toThrow(/workspace|path|unsafe|invalid/i);
+        }
+    });
+});
 describe("TopicAuthoringDraft canonical validation", () => {
     it("accepts a valid minimal draft", () => {
         const draft = makeValidMinimalDraft();
