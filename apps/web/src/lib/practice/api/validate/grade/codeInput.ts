@@ -27,8 +27,22 @@ export async function gradeCodeInput(args: {
   const expected = parsed.data;
   const ans: any = answer ?? {};
   const code = String(ans.code ?? ans.source ?? "").trimEnd();
+  const submissionFiles = Array.isArray(ans.files)
+      ? ans.files
+          .filter((file: any) => file && typeof file.path === "string" && typeof file.content === "string")
+          .map((file: any) => ({
+              path: file.path,
+              content: file.content,
+          }))
+      : undefined;
+  const submissionEntry =
+      typeof ans.entry === "string" && ans.entry.trim().length > 0
+          ? ans.entry.trim()
+          : undefined;
+  const hasWorkspaceSubmission =
+      Boolean(submissionEntry) && Boolean(submissionFiles?.length);
 
-  if (!code.trim()) {
+  if (!code.trim() && !hasWorkspaceSubmission) {
     return {
       ok: false,
       explanation: "You have not written any code yet.",
@@ -57,6 +71,8 @@ export async function gradeCodeInput(args: {
     expected,
     code,
     language,
+    entry: submissionEntry,
+    files: submissionFiles,
     showDebug,
   });
 }

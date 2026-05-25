@@ -165,6 +165,24 @@ const projectStep3SolutionFiles = {
         "values = [1, 2, 3]\nprint(sum_list(values))\n",
 };
 
+const fileIoStarterFiles = {
+    "main.py": "# Write your answer below\n",
+};
+
+const fileIoSolutionFiles = {
+    "main.py":
+        "with open('data.txt', 'r') as file:\n    content = file.read()\n    print(content)\n",
+    "data.txt": "Hello, World!\nThis is a test file.",
+};
+
+const fileIoWorkspaceFiles = [
+    {
+        path: "data.txt",
+        content: "Hello, World!\nThis is a test file.",
+        readOnly: true,
+    },
+];
+
 const projectStep2Definition = {
     id: "e2e-project-step-2",
     title: "Shipping cost helper",
@@ -193,6 +211,21 @@ const projectStep3Definition = {
     solutionCode: projectStep3SolutionFiles["main.py"],
 };
 
+const fileIoDefinition = {
+    id: "e2e-file-io",
+    title: "Read a fixture file",
+    runtime: runtimeDefaults,
+    workspace: {
+        language: "python",
+        entryFile: "main.py",
+        starterFiles: fileIoStarterFiles,
+        solutionFiles: fileIoSolutionFiles,
+        files: fileIoWorkspaceFiles,
+    } as any,
+    starterCode: fileIoStarterFiles["main.py"],
+    solutionCode: fileIoSolutionFiles["main.py"],
+};
+
 function makeProjectCard({
                              id,
                              title,
@@ -207,6 +240,7 @@ function makeProjectCard({
         solutionFiles: Record<string, string>;
         starterCode: string;
         solutionCode: string;
+        files?: Array<{ path: string; content: string; readOnly?: boolean }>;
     }>;
 }): ReviewCard {
     return {
@@ -239,6 +273,7 @@ function makeProjectCard({
                         entryFile: "main.py",
                         starterFiles: step.starterFiles,
                         solutionFiles: step.solutionFiles,
+                        ...(step.files?.length ? { files: step.files } : {}),
                     },
                     starterCode: step.starterCode,
                     solutionCode: step.solutionCode,
@@ -283,6 +318,7 @@ const reviewCloneTopic = {
                 blankFallbackExerciseDefinition,
                 projectStep2Definition,
                 projectStep3Definition,
+                fileIoDefinition,
             ],
         },
     },
@@ -322,6 +358,15 @@ const reviewCloneTopic = {
                     solutionFiles: projectStep3SolutionFiles,
                     starterCode: projectStep3StarterFiles["main.py"],
                     solutionCode: projectStep3SolutionFiles["main.py"],
+                },
+                {
+                    id: "e2e-file-io",
+                    title: "Read a fixture file",
+                    starterFiles: fileIoStarterFiles,
+                    solutionFiles: fileIoSolutionFiles,
+                    starterCode: fileIoStarterFiles["main.py"],
+                    solutionCode: fileIoSolutionFiles["main.py"],
+                    files: fileIoWorkspaceFiles,
                 },
             ],
         }),

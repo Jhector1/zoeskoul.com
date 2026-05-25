@@ -6,6 +6,15 @@ import type {
     Vec3,
 } from "@/lib/practice/types";
 import type { QItem } from "@/lib/practice/uiTypes";
+import { serializeWorkspaceForCodeRun } from "@/lib/code/workspaceSubmission";
+
+function getWorkspaceEntryContent(args: {
+    entry: string;
+    files: Array<{ path: string; content: string }>;
+}) {
+    const match = args.files.find((file) => file.path === args.entry);
+    return match ? String(match.content ?? "") : "";
+}
 
 export function resizeGrid(prev: string[][], rows: number, cols: number) {
     const r = Math.max(1, Math.floor(rows));
@@ -171,9 +180,6 @@ export function buildSubmitAnswerFromItem(item: QItem): SubmitAnswer | undefined
     }
 
     if (ex.kind === "code_input") {
-        const code = String((item as any).code ?? (item as any).source ?? "").trimEnd();
-        if (!code.trim()) return undefined;
-
         const language = String(
             (item as any).codeLang ?? (ex as any).language ?? "python",
         ) as WorkspaceLanguage;
@@ -181,12 +187,39 @@ export function buildSubmitAnswerFromItem(item: QItem): SubmitAnswer | undefined
         const stdin = String(
             (item as any).codeStdin ?? (item as any).stdin ?? "",
         ).trimEnd();
+        const workspace =
+            (item as any).workspace ??
+            (item as any).codeWorkspace ??
+            (item as any).ideWorkspace ??
+            null;
+        const workspaceSubmission = serializeWorkspaceForCodeRun(workspace);
+        const workspaceCode =
+            workspaceSubmission &&
+            workspaceSubmission.files.length > 0 &&
+            workspaceSubmission.entry
+                ? getWorkspaceEntryContent({
+                    entry: workspaceSubmission.entry,
+                    files: workspaceSubmission.files,
+                  }).trimEnd()
+                : "";
+        const code = (
+            workspaceCode ||
+            String((item as any).code ?? (item as any).source ?? "")
+        ).trimEnd();
+
+        if (!code.trim() && !workspaceSubmission) return undefined;
 
         return {
             kind: "code_input",
             language,
             code,
             stdin,
+            ...(workspaceSubmission && workspaceSubmission.files.length > 1
+                ? {
+                    entry: workspaceSubmission.entry,
+                    files: workspaceSubmission.files,
+                  }
+                : {}),
         };
     }
 

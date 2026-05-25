@@ -3,7 +3,9 @@ import { toolsPolicyForSubject } from "@/lib/tools/policy";
 import { resolveToolDefaults } from "@/components/tools/resolveToolDefaults";
 import { resolveCourseSqlRunnerConfig } from "@/components/review/module/runtime/courseProfiles";
 import type { ReviewModule } from "@/lib/subjects/types";
+import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 import {
+    learningIdeFromRuntimeDefaults,
     type LearningIdeConfig,
     mergeLearningIdeConfigs,
 } from "@/lib/ide/learningIdeConfig";
@@ -73,7 +75,9 @@ export function useReviewModuleRuntime({ subjectSlug, mod, viewTopic }: Args) {
             ? effectiveRuntimeRecord.language
             : undefined;
     const effectiveIdeConfig = mergeLearningIdeConfigs(
+        learningIdeFromRuntimeDefaults(moduleRuntime as ManifestRuntimeDefaults | null),
         moduleIdeConfig,
+        learningIdeFromRuntimeDefaults(effectiveRuntime as ManifestRuntimeDefaults | null),
         (viewTopic?.meta?.serviceDefaults as LearningIdeConfig | null | undefined) ?? null,
     );
 

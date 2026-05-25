@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
     getCourseProfile,
     resolveCourseLanguage,
+    resolveCourseFileSeed,
     resolveCourseSqlRunnerConfig,
     resolveRuntimeDefaultDataset,
 } from "./courseProfiles";
@@ -126,5 +127,99 @@ describe("resolveCourseSqlRunnerConfig", () => {
 
         expect(resolved.isSql).toBe(true);
         expect(resolved.sqlDatasetId).toBe("students_intro");
+    });
+});
+
+describe("resolveCourseFileSeed", () => {
+    it("merges starter files with workspace fixture files for python exercises", () => {
+        const resolved = resolveCourseFileSeed({
+            subjectSlug: "python-data-functions",
+            language: "python",
+            profileId: "python",
+            versionFamily: "python",
+            target: {
+                kind: "code_input",
+                language: "python",
+                starterFiles: [
+                    {
+                        path: "main.py",
+                        content: "# Write your answer below",
+                        isEntry: true,
+                    },
+                    {
+                        path: "data.txt",
+                        content: "Hello from starterFiles",
+                    },
+                ],
+                workspace: {
+                    starterFiles: [
+                        {
+                            path: "main.py",
+                            content: "# Write your answer below",
+                            isEntry: true,
+                        },
+                    ],
+                    files: [
+                        {
+                            path: "data.txt",
+                            content: "Hello from workspace.files",
+                        },
+                    ],
+                },
+            },
+        });
+
+        expect(resolved.starterFiles).toEqual([
+            {
+                path: "main.py",
+                content: "# Write your answer below",
+            },
+            {
+                path: "data.txt",
+                content: "Hello from workspace.files",
+            },
+        ]);
+    });
+
+    it("preserves the first main file instead of letting later sources overwrite it", () => {
+        const resolved = resolveCourseFileSeed({
+            subjectSlug: "python-data-functions",
+            language: "python",
+            profileId: "python",
+            versionFamily: "python",
+            target: {
+                workspace: {
+                    starterFiles: [
+                        {
+                            path: "main.py",
+                            content: "# starter main",
+                            isEntry: true,
+                        },
+                    ],
+                },
+                starterFiles: [
+                    {
+                        path: "main.py",
+                        content: "# later main",
+                        isEntry: true,
+                    },
+                    {
+                        path: "data.txt",
+                        content: "fixture",
+                    },
+                ],
+            },
+        });
+
+        expect(resolved.starterFiles).toEqual([
+            {
+                path: "main.py",
+                content: "# starter main",
+            },
+            {
+                path: "data.txt",
+                content: "fixture",
+            },
+        ]);
     });
 });

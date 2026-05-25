@@ -99,6 +99,145 @@ function cloneWorkspace(workspace: WorkspaceStateV2): WorkspaceStateV2 {
   };
 }
 
+
+
+
+
+
+function workspacePathForNode(nodes: FSNode[], nodeId: NodeId): string {
+  const node = nodes.find((candidate) => candidate.id === nodeId);
+  if (!node) return "";
+
+  const names: string[] = [node.name];
+  let parentId = node.parentId ?? null;
+
+  while (parentId) {
+    const parent = nodes.find((candidate) => candidate.id === parentId);
+    if (!parent) break;
+
+    names.unshift(parent.name);
+    parentId = parent.parentId ?? null;
+  }
+
+  return names.join("/");
+}
+
+function workspaceFilePaths(workspace: WorkspaceStateV2): Set<string> {
+  const paths = new Set<string>();
+
+  for (const node of workspace.nodes) {
+    if (node.kind !== "file") continue;
+    const path = workspacePathForNode(workspace.nodes, node.id);
+    if (path) paths.add(normalizePath(path, node.name));
+  }
+
+  return paths;
+}
+
+function ensureWorkspaceFolder(args: {
+  workspace: WorkspaceStateV2;
+  folderPath: string;
+}): NodeId | null {
+  const folderPath = normalizePath(args.folderPath, "");
+  if (!folderPath) return null;
+
+  const parts = folderPath.split("/").filter(Boolean);
+  let parentId: NodeId | null = null;
+  let currentPath = "";
+
+  for (const part of parts) {
+    currentPath = currentPath ? `${currentPath}/${part}` : part;
+
+    const existing = args.workspace.nodes.find((node) => {
+      return (
+          node.kind === "folder" &&
+          node.name === part &&
+          node.parentId === parentId
+      );
+    });
+
+    if (existing) {
+      parentId = existing.id;
+      continue;
+    }
+
+    const folderId = stableStarterNodeId("folder", currentPath);
+
+    args.workspace.nodes.push({
+      id: folderId,
+      kind: "folder",
+      name: part,
+      parentId,
+      createdAt: 0,
+      updatedAt: 0,
+    });
+
+    if (!args.workspace.expanded.includes(folderId)) {
+      args.workspace.expanded.push(folderId);
+    }
+
+    parentId = folderId;
+  }
+
+  return parentId;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function mergeMissingFixtureFilesIntoSavedWorkspace(args: {
+  saved: WorkspaceStateV2;
+  language: WorkspaceLanguage;
+  fixtureFiles: Array<{ path: string; content: string }>;
+}): WorkspaceStateV2 {
+  if (args.fixtureFiles.length === 0) {
+    return cloneWorkspace(args.saved);
+  }
+
+  const workspace = cloneWorkspace(args.saved);
+  const existingPaths = workspaceFilePaths(workspace);
+
+  for (const file of args.fixtureFiles) {
+    const path = normalizePath(file.path, defaultMainFile(args.language));
+    if (!path || existingPaths.has(path)) continue;
+
+    const parts = path.split("/");
+    const name = parts.pop() || defaultMainFile(args.language);
+    const folderPath = parts.join("/");
+    const parentId = ensureWorkspaceFolder({ workspace, folderPath });
+
+    const fileId = stableStarterNodeId("file", path);
+
+    workspace.nodes.push({
+      id: fileId,
+      kind: "file",
+      name,
+      parentId,
+      content: file.content ?? "",
+      createdAt: 0,
+      updatedAt: 0,
+    });
+
+    existingPaths.add(path);
+  }
+
+  return workspace;
+}
+
+
+
+
+
+
 function normalizePath(input: unknown, fallback: string) {
   const raw = typeof input === "string" && input.trim() ? input : fallback;
 
@@ -274,6 +413,26 @@ function collectStarterFilesSources(manifest: UnknownRecord) {
   ];
 }
 
+
+
+
+
+function collectWorkspaceFixtureFileSources(manifest: UnknownRecord) {
+  const normalized = normalizeManifestShape(manifest);
+  const workspace = isRecord(normalized.workspace) ? normalized.workspace : {};
+  const recipe = isRecord(normalized.recipe) ? normalized.recipe : {};
+
+  return [
+    workspace.files,
+    workspace.initialFiles,
+    workspace.workspaceFiles,
+    normalized.files,
+    normalized.initialFiles,
+    normalized.workspaceFiles,
+    recipe.files,
+    recipe.initialFiles,
+  ];
+}
 export function getStarterFilesSource(manifest: UnknownRecord) {
   return firstUsableStarterFilesSource(...collectStarterFilesSources(manifest));
 }
@@ -299,6 +458,23 @@ function mergeNormalizedStarterFiles(
   }
 
   return Array.from(byPath.values());
+}
+
+function collectEntryFileSources(args: {
+  manifest: UnknownRecord;
+  entry?: import("./reviewTargetRegistry").ReviewTargetEntry | null;
+}) {
+  const manifestWorkspace = isRecord(args.manifest.workspace)
+      ? args.manifest.workspace
+      : {};
+  const manifestRecipe = isRecord(args.manifest.recipe) ? args.manifest.recipe : {};
+
+  return [
+    manifestWorkspace.starterFiles,
+    args.manifest.starterFiles,
+    args.entry?.starterFiles,
+    manifestRecipe.starterFiles,
+  ];
 }
 
 export function getStarterCode(manifest: UnknownRecord) {
@@ -536,14 +712,79 @@ export function resolveExerciseWorkspace(args: {
   const manifestWorkspace = isRecord(manifest.workspace) ? manifest.workspace : {};
   const manifestRecipe = isRecord(manifest.recipe) ? manifest.recipe : {};
 
-  // Preserve real saved user work when the runtime intentionally passes it in.
-  // This prevents user edits from being overwritten on refresh/re-render.
-  // But ignore blank saved workspaces so empty DB state does not hide starter code.
-  if (isWorkspace(args.saved) && hasUsableWorkspaceContent(args.saved)) {
-    return cloneWorkspace(args.saved);
+  const starterFileSources = [
+    ...collectStarterFilesSources(manifest),
+    args.entry?.starterFiles,
+  ];
+
+
+
+
+  const entryFileSources = collectEntryFileSources({
+    manifest,
+    entry: args.entry,
+  });
+
+  const explicitEntryFile = getEntryFile({ manifest, language });
+  const entryFromStarterFiles = firstUsableStarterFilesSource(...entryFileSources)
+      ? entryFileSources
+      .map((source) => getEntryFileFromStarterFiles(source))
+      .find((path) => path.trim().length > 0) ?? ""
+      : "";
+
+
+
+
+  const entryFile = entryFromStarterFiles || explicitEntryFile;
+  const stdin = String(getInitialStdin(manifest) ?? "");
+
+  const fixtureFiles = mergeNormalizedStarterFiles(
+      collectWorkspaceFixtureFileSources(manifest),
+      entryFile,
+  );
+
+  const starterCode = pickNonBlankString(
+      getStarterCode(manifest),
+      args.entry?.starterCode,
+      manifestWorkspace.starterCode,
+      manifest.starterCode,
+      manifestRecipe.starterCode,
+  );
+
+  let starterFiles = mergeNormalizedStarterFiles(starterFileSources, entryFile);
+  const hasEntryFile = starterFiles.some(
+      (file) => normalizePath(file.path, entryFile) === entryFile,
+  );
+
+  if (!hasEntryFile) {
+    starterFiles = [
+      {
+        path: entryFile,
+        content: starterCode.trim() ? starterCode : "",
+      },
+      ...starterFiles,
+    ];
   }
 
-  // If the registry already has a complete starter workspace, use it.
+  /**
+   * Preserve saved user work, but never let an old saved workspace hide required
+   * manifest fixture files such as data.txt.
+   *
+   * This fixes multi-file exercises where a saved workspace only contains
+   * main.py, while the current manifest requires additional read-only/input
+   * files for Run/Check.
+   */
+  if (isWorkspace(args.saved) && hasUsableWorkspaceContent(args.saved)) {
+    return mergeMissingFixtureFilesIntoSavedWorkspace({
+      saved: args.saved,
+      language,
+      fixtureFiles,
+    });
+  }
+
+  /**
+   * If the registry already has a complete starter workspace, use it.
+   */
   if (args.entry?.starterWorkspace && isWorkspace(args.entry.starterWorkspace)) {
     return cloneWorkspace(args.entry.starterWorkspace);
   }
@@ -559,40 +800,6 @@ export function resolveExerciseWorkspace(args: {
 
   if (savedFromManifest) {
     return cloneWorkspace(savedFromManifest);
-  }
-
-  const starterFileSources = [
-    ...collectStarterFilesSources(manifest),
-    args.entry?.starterFiles,
-  ];
-  const starterFilesSource = firstUsableStarterFilesSource(...starterFileSources);
-
-  const explicitEntryFile = getEntryFile({ manifest, language });
-  const entryFromStarterFiles = getEntryFileFromStarterFiles(starterFilesSource);
-  const entryFile = entryFromStarterFiles || explicitEntryFile;
-  const stdin = String(getInitialStdin(manifest) ?? "");
-
-  const starterCode = pickNonBlankString(
-      getStarterCode(manifest),
-      args.entry?.starterCode,
-      manifestWorkspace.starterCode,
-      manifest.starterCode,
-      manifestRecipe.starterCode,
-  );
-
-  let starterFiles = mergeNormalizedStarterFiles(starterFileSources, entryFile);
-
-  // Critical single-file fix:
-  // If this exercise only has explicit starterCode, convert it into a normal
-  // one-file starterFiles workspace.
-  // That makes single-file and multi-file starters use the same builder.
-  if (starterFiles.length === 0 && starterCode.trim()) {
-    starterFiles = [
-      {
-        path: entryFile,
-        content: starterCode,
-      },
-    ];
   }
 
   if (starterFiles.length > 0) {

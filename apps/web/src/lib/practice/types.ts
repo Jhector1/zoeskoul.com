@@ -1,5 +1,6 @@
 import { PracticeKind } from "@zoeskoul/db";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
+import type { FileEntry } from "@/lib/code/types";
 import type {
     CodeExpectedExample,
     Difficulty,
@@ -205,6 +206,8 @@ export type SubmitAnswer =
     language?: WorkspaceLanguage;
     code: string;
     stdin?: string;
+    entry?: string;
+    files?: FileEntry[];
 }
     | TextInputSubmitAnswer
     | DragReorderSubmitAnswer

@@ -4,6 +4,7 @@ import * as React from "react";
 import type { RunResult } from "@/lib/code/types";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { TermLine, OnRun, RunnerState } from "../types";
+import { serializeWorkspaceForCodeRun } from "@/lib/code/workspaceSubmission";
 import { cleanTermText, toLines } from "../utils/text";
 import { inferInputPlan } from "../utils/input";
 import { expandPrompts, prettyPrompt, splitStdoutByPrompts } from "../utils/prompts";
@@ -227,6 +228,7 @@ export function useTerminalRunner(args: {
         sqlSetupSql,
         sqlDatasetId,
         sqlResultShape,
+        workspace,
         exerciseStateKey,
         disabled,
         allowRun,
@@ -441,6 +443,8 @@ export function useTerminalRunner(args: {
             }
 
             try {
+                const workspaceSubmission = serializeWorkspaceForCodeRun(workspace);
+
                 if (mountedRef.current) {
                     setRunState((prev) => (prev === "canceling" ? "canceling" : "running"));
                 }
@@ -490,6 +494,10 @@ export function useTerminalRunner(args: {
                         language: lang,
                         code,
                         stdin: stdinToUse,
+                        ...(workspaceSubmission ? {
+                            entry: workspaceSubmission.entry,
+                            files: workspaceSubmission.files,
+                        } : {}),
                         signal: ctrl.signal,
                     });
 
@@ -563,6 +571,7 @@ export function useTerminalRunner(args: {
             sqlDatasetId,
             resolvedSqlResultShape,
             exerciseStateKey,
+            workspace,
         ],
     );
 

@@ -119,6 +119,26 @@ function workspaceWithEntryCode(
     return changed ? {...workspace, nodes} : workspace;
 }
 
+
+
+
+function mergeManifestFixturesIntoSavedWorkspace(args: {
+    savedWorkspace: WorkspaceStateV2;
+    language: string;
+    manifest: RuntimeManifestRecord | null;
+    entry?: import("./reviewTargetRegistry").ReviewTargetEntry | null;
+}): WorkspaceStateV2 {
+    if (!args.manifest && !args.entry) {
+        return args.savedWorkspace;
+    }
+
+    return resolveExerciseWorkspace({
+        language: args.language,
+        manifest: args.manifest ?? args.entry?.item ?? {},
+        entry: args.entry,
+        saved: args.savedWorkspace,
+    });
+}
 function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
     if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
         return 0;
@@ -1000,6 +1020,13 @@ function resolveCardToolSeed(args: {
         args.existing?.toolWorkspace &&
         (!hasStarter || useExistingUserWorkspace)
     ) {
+        const restoredWorkspace = mergeManifestFixturesIntoSavedWorkspace({
+            savedWorkspace: args.existing.toolWorkspace,
+            language: args.entry?.language ?? resolvedLanguage,
+            manifest,
+            entry: args.entry,
+        });
+
         reviewDebug("review-runtime source-selected", {
             key: args.entry?.cardKey ?? args.existing?.cardKey ?? null,
             entryFound: !!args.entry,
@@ -1007,22 +1034,23 @@ function resolveCardToolSeed(args: {
             starterFilesCount: Array.isArray(args.entry?.starterFiles) ? args.entry.starterFiles.length : 0,
             starterCodeLength: typeof args.entry?.starterCode === "string" ? args.entry.starterCode.length : 0,
             hasStarter,
-            workspaceFileCount: workspaceFileCount(args.existing.toolWorkspace),
-            workspaceNonEmpty: workspaceHasUsableFile(args.existing.toolWorkspace),
+            workspaceFileCount: workspaceFileCount(restoredWorkspace),
+            workspaceNonEmpty: workspaceHasUsableFile(restoredWorkspace),
             sourceType: "existing",
         });
+
         return {
             workspaceStatus: args.existing.workspaceStatus ?? "ready",
             workspaceSeedMode: args.existing.workspaceSeedMode ?? "restored",
             workspaceOrigin: args.existing.workspaceOrigin ?? "saved",
             userEdited: Boolean(args.existing.userEdited ?? isUserWorkspaceState(args.existing)),
             starterHash: args.existing.starterHash ?? starterWorkspaceHash,
-            workspace: args.existing.toolWorkspace,
-            code: args.existing.toolCode ?? deriveCodeFromWorkspace(args.existing.toolWorkspace),
+            workspace: restoredWorkspace,
+            code: deriveCodeFromWorkspace(restoredWorkspace) || args.existing.toolCode || "",
             stdin:
                 args.existing.toolStdin ??
-                (typeof args.existing.toolWorkspace?.stdin === "string"
-                    ? args.existing.toolWorkspace.stdin
+                (typeof restoredWorkspace.stdin === "string"
+                    ? restoredWorkspace.stdin
                     : ""),
             lang: args.existing.toolLang ?? resolvedLanguage,
             sourceType: "existing",
@@ -1145,6 +1173,13 @@ function resolveEditorRuntimeSeed(args: {
             useExistingRuntimeWorkspace
         )
     ) {
+        const restoredWorkspace = mergeManifestFixturesIntoSavedWorkspace({
+            savedWorkspace: args.existing.workspace,
+            language: resolvedLanguage,
+            manifest,
+            entry: args.source.entry,
+        });
+
         reviewDebug("review-runtime source-selected", {
             key: args.source.ownerKey,
             entryFound: !!args.source.entry,
@@ -1152,21 +1187,22 @@ function resolveEditorRuntimeSeed(args: {
             starterFilesCount: Array.isArray(args.source.entry?.starterFiles) ? args.source.entry.starterFiles.length : 0,
             starterCodeLength: typeof args.source.entry?.starterCode === "string" ? args.source.entry.starterCode.length : 0,
             hasStarter: args.source.workspaceSeedMode === "starter",
-            workspaceFileCount: workspaceFileCount(args.existing.workspace),
-            workspaceNonEmpty: workspaceHasUsableFile(args.existing.workspace),
+            workspaceFileCount: workspaceFileCount(restoredWorkspace),
+            workspaceNonEmpty: workspaceHasUsableFile(restoredWorkspace),
             sourceType: "existing-runtime",
         });
+
         return {
             workspaceStatus: args.existing.workspaceStatus ?? "ready",
             workspaceSeedMode: args.existing.workspaceSeedMode ?? "restored",
             workspaceOrigin: args.existing.workspaceOrigin ?? "saved",
             userEdited: Boolean(args.existing.userEdited ?? isUserWorkspaceState(args.existing)),
             starterHash: args.existing.starterHash ?? starterWorkspaceHash,
-            workspace: args.existing.workspace,
-            code: args.existing.code ?? deriveCodeFromWorkspace(args.existing.workspace),
+            workspace: restoredWorkspace,
+            code: deriveCodeFromWorkspace(restoredWorkspace) || args.existing.code || "",
             stdin:
                 args.existing.stdin ??
-                (typeof args.existing.workspace?.stdin === "string" ? args.existing.workspace.stdin : ""),
+                (typeof restoredWorkspace.stdin === "string" ? restoredWorkspace.stdin : ""),
             language: args.existing.language ?? resolvedLanguage,
         };
     }
@@ -1193,6 +1229,21 @@ function resolveEditorRuntimeSeed(args: {
             useLegacyWorkspace
         )
     ) {
+        const legacyLanguage = resolveCourseLanguage({
+            language:
+                (args.source.ownerKind === "exercise"
+                    ? args.existingExercise?.language ?? args.existingExercise?.lang
+                    : args.existingCard?.toolLang) ?? resolvedLanguage,
+            target: manifest ?? args.source.entry?.item ?? null,
+        });
+
+        const restoredLegacyWorkspace = mergeManifestFixturesIntoSavedWorkspace({
+            savedWorkspace: legacyWorkspace,
+            language: legacyLanguage,
+            manifest,
+            entry: args.source.entry,
+        });
+
         reviewDebug("review-runtime source-selected", {
             key: args.source.ownerKey,
             entryFound: !!args.source.entry,
@@ -1200,35 +1251,32 @@ function resolveEditorRuntimeSeed(args: {
             starterFilesCount: Array.isArray(args.source.entry?.starterFiles) ? args.source.entry.starterFiles.length : 0,
             starterCodeLength: typeof args.source.entry?.starterCode === "string" ? args.source.entry.starterCode.length : 0,
             hasStarter: args.source.workspaceSeedMode === "starter",
-            workspaceFileCount: workspaceFileCount(legacyWorkspace),
-            workspaceNonEmpty: workspaceHasUsableFile(legacyWorkspace),
+            workspaceFileCount: workspaceFileCount(restoredLegacyWorkspace),
+            workspaceNonEmpty: workspaceHasUsableFile(restoredLegacyWorkspace),
             sourceType: "legacy-runtime",
         });
+
         return {
             workspaceStatus: "ready" as const,
             workspaceSeedMode: "restored" as const,
             workspaceOrigin: legacyState?.workspaceOrigin ?? "saved",
             userEdited: Boolean(legacyState?.userEdited ?? isUserWorkspaceState(legacyState)),
             starterHash: legacyState?.starterHash ?? starterWorkspaceHash,
-            workspace: legacyWorkspace,
+            workspace: restoredLegacyWorkspace,
             code:
+                deriveCodeFromWorkspace(restoredLegacyWorkspace) ||
                 (args.source.ownerKind === "exercise"
                     ? args.existingExercise?.code
-                    : args.existingCard?.toolCode) ??
-                deriveCodeFromWorkspace(legacyWorkspace),
+                    : args.existingCard?.toolCode) ||
+                "",
             stdin:
                 (args.source.ownerKind === "exercise"
                     ? args.existingExercise?.stdin
                     : args.existingCard?.toolStdin) ??
-                (typeof legacyWorkspace.stdin === "string" ? legacyWorkspace.stdin : ""),
-            language:
-                resolveCourseLanguage({
-                    language:
-                        (args.source.ownerKind === "exercise"
-                            ? args.existingExercise?.language ?? args.existingExercise?.lang
-                            : args.existingCard?.toolLang) ?? resolvedLanguage,
-                    target: manifest ?? args.source.entry?.item ?? null,
-                }),
+                (typeof restoredLegacyWorkspace.stdin === "string"
+                    ? restoredLegacyWorkspace.stdin
+                    : ""),
+            language: legacyLanguage,
         };
     }
 
@@ -1398,12 +1446,28 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 language: resolvedLanguage,
             });
 
-            const selectedWorkspace =
+            const selectedWorkspaceBeforeFixtureMerge =
                 useExistingWorkspace
                     ? existing?.workspace ?? null
                     : useSavedWorkspace
                         ? savedWorkspace
                         : starterWorkspace;
+
+            /**
+             * Critical:
+             * Existing/saved exercise workspaces may be old one-file snapshots.
+             * They should preserve learner-authored main.py, but they must not hide
+             * required runtime fixture files from the current manifest, such as data.txt.
+             */
+            const selectedWorkspace =
+                selectedWorkspaceBeforeFixtureMerge && manifest
+                    ? mergeManifestFixturesIntoSavedWorkspace({
+                        savedWorkspace: selectedWorkspaceBeforeFixtureMerge,
+                        language: resolvedLanguage,
+                        manifest,
+                        entry: null,
+                    })
+                    : selectedWorkspaceBeforeFixtureMerge;
 
             const selectedCode =
                 deriveCodeFromWorkspace(selectedWorkspace) ||

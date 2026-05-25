@@ -42,6 +42,53 @@ describe("gradeProgrammingCodeInput", () => {
         expect(result.ok).toBe(true);
     });
 
+    it("submits workspace files for file-enabled stdout checks", async () => {
+        mockedRunCode.mockResolvedValue({
+            ok: true,
+            stdout: "hello from file\n",
+            stderr: "",
+        } as any);
+
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "hello from file\n", match: "exact" }],
+            semanticChecks: [],
+            language: "python",
+        };
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: 'with open("data.txt") as file:\n    print(file.read())\n',
+            language: "python",
+            entry: "main.py",
+            files: [
+                {
+                    path: "main.py",
+                    content: 'with open("data.txt") as file:\n    print(file.read())\n',
+                },
+                {
+                    path: "data.txt",
+                    content: "hello from file\n",
+                },
+            ],
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedRunCode).toHaveBeenCalledWith(
+            expect.objectContaining({
+                language: "python",
+                entry: "main.py",
+                files: [
+                    expect.objectContaining({ path: "main.py" }),
+                    expect.objectContaining({ path: "data.txt", content: "hello from file\n" }),
+                ],
+            }),
+        );
+    });
+
     it("fails stdout exercises when output is wrong", async () => {
         mockedRunCode.mockResolvedValue({
             ok: true,
@@ -137,6 +184,46 @@ print(book2.description())
 
         expect(result.ok).toBe(false);
         expect(result.explanation).toContain("Define a class named Book");
+    });
+
+    it("preserves fixture files when semantic python checks replace the entry file", async () => {
+        mockedRunCode.mockResolvedValue({
+            ok: true,
+            stdout: '__ZOE_SEMANTIC_RESULT__{"ok":true,"errors":[],"userStdout":""}',
+        } as any);
+
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "semantic",
+            tests: [],
+            semanticChecks: [{ type: "printed_line_count", min: 0 }],
+        };
+
+        const result = await gradeSemanticCodeInput({
+            expected,
+            code: 'print("ignored in harness")\n',
+            language: "python",
+            entry: "main.py",
+            files: [
+                { path: "main.py", content: 'print("user code")\n' },
+                { path: "data.txt", content: "fixture contents\n" },
+            ],
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedRunCode).toHaveBeenCalledWith(
+            expect.objectContaining({
+                language: "python",
+                entry: "main.py",
+                files: expect.arrayContaining([
+                    expect.objectContaining({ path: "main.py" }),
+                    expect.objectContaining({ path: "data.txt", content: "fixture contents\n" }),
+                ]),
+            }),
+        );
     });
 
     it("fails semantic exercises when method_returns is wrong", async () => {

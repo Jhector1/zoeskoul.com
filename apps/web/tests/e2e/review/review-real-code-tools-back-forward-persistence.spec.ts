@@ -1,7 +1,7 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
 const REAL_EXERCISE_URL =
-    "/en/catalog/python/subjects/python-v2/modules/python-v2-3/learn/python-v2-3-while-loops/loop-debugging/exercise/loop-debug-code-3";
+    "/en/catalog/python/subjects/python-v2/modules/python-v2-3/learn/python-v2-3-while-loops/loop-debugging/exercise/loop-debug-code-3?e2eUnlockAll=1";
 
 const STARTER_MARKER = "# TODO: print 3, 2, 1 using a while loop";
 
@@ -61,7 +61,7 @@ async function gotoRealExercise(page: Page) {
     await page.goto(REAL_EXERCISE_URL);
     await page.waitForLoadState("domcontentloaded");
 
-    await expect(page.getByText(/write python code/i).first()).toBeVisible({
+    await expect(page).toHaveURL(/\/exercise\/loop-debug-code-3(?:\?.*)?$/, {
         timeout: 30_000,
     });
 
@@ -72,6 +72,10 @@ async function gotoRealExercise(page: Page) {
         .toBeGreaterThan(0);
 
     await expectToolsEditorNotBlank(page);
+    await expectToolsEditorToContain(page, STARTER_MARKER);
+    await expect(page.getByTestId("review-practice-submit-button")).toBeVisible({
+        timeout: 30_000,
+    });
 }
 
 async function fillToolsEditor(page: Page, code: string) {
@@ -86,30 +90,14 @@ async function fillToolsEditor(page: Page, code: string) {
 }
 
 async function clickCheckThisAnswer(page: Page) {
-    const candidates = [
-        page.getByRole("button", { name: /check this answer/i }),
-        page.getByRole("button", { name: /^check$/i }),
-        page.getByRole("button", { name: /^submit$/i }),
-    ];
-
-    for (const locator of candidates) {
-        const count = await locator.count();
-
-        for (let index = count - 1; index >= 0; index -= 1) {
-            const button = locator.nth(index);
-
-            if ((await button.isVisible()) && (await button.isEnabled())) {
-                await button.click();
-                return;
-            }
-        }
-    }
-
-    throw new Error("No enabled Check this answer button found.");
+    const button = page.getByTestId("review-practice-submit-button");
+    await expect(button).toBeVisible({ timeout: 30_000 });
+    await expect(button).toBeEnabled({ timeout: 30_000 });
+    await button.click();
 }
 
 async function waitForCorrect(page: Page) {
-    await expect(page.getByText(/\bcorrect\b/i).last()).toBeVisible({
+    await expect(page.getByTestId("review-practice-result-correct")).toBeVisible({
         timeout: 45_000,
     });
 }
@@ -164,15 +152,48 @@ async function clickQuestionPrevious(page: Page) {
 }
 
 async function waitUntilToolsBoundToExercise(page: Page, exerciseKeyPart: string) {
-    await expect
-        .poll(
-            async () => {
-                const body = await page.locator("body").innerText();
-                return body.includes(exerciseKeyPart);
-            },
-            { timeout: 30_000 },
-        )
-        .toBe(true);
+    await expect(page).toHaveURL(
+        new RegExp(`/exercise/${exerciseKeyPart}(?:\\?.*)?$`),
+        { timeout: 30_000 },
+    );
+    await expect(getToolsEditorInput(page)).toBeAttached({ timeout: 30_000 });
+    await expectToolsEditorNotBlank(page);
+}
+
+async function installIsolatedReviewProgress(page: Page) {
+    let savedProgress: unknown = { progress: null };
+
+    await page.route("**/api/review/progress**", async (route) => {
+        const request = route.request();
+
+        if (request.method() === "GET") {
+            await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify(savedProgress),
+            });
+            return;
+        }
+
+        if (request.method() === "PUT") {
+            const body = request.postDataJSON();
+            savedProgress = {
+                progress: body.state,
+            };
+
+            await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify({
+                    ok: true,
+                    state: body.state,
+                }),
+            });
+            return;
+        }
+
+        await route.fallback();
+    });
 }
 
 test.describe("real review route Tools editor back/forward persistence", () => {
@@ -181,8 +202,9 @@ test.describe("real review route Tools editor back/forward persistence", () => {
     });
 
     test("correct code_input keeps learner code after next, previous, and repeated back/forward navigation", async ({
-                                                                                                                        page,
-                                                                                                                    }) => {
+                                                                                                                    page,
+                                                                                                                }) => {
+        await installIsolatedReviewProgress(page);
         await gotoRealExercise(page);
 
         await fillToolsEditor(page, SOLVED_CODE);
@@ -231,8 +253,9 @@ test.describe("real review route Tools editor back/forward persistence", () => {
     });
 
     test("browser history back and forward do not restore starter over solved learner code", async ({
-                                                                                                        page,
-                                                                                                    }) => {
+                                                                                                    page,
+                                                                                                }) => {
+        await installIsolatedReviewProgress(page);
         await gotoRealExercise(page);
 
         await fillToolsEditor(page, SOLVED_CODE);

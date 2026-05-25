@@ -19,7 +19,10 @@ import {
     t,
 } from "./i18nResolve";
 import { RECIPE_REGISTRY } from "./recipes/registry";
-import { mergeLearningIdeConfigs } from "@/lib/ide/learningIdeConfig";
+import {
+    learningIdeFromRuntimeDefaults,
+    mergeLearningIdeConfigs,
+} from "@/lib/ide/learningIdeConfig";
 
 function maybeT(key: string): string | undefined {
     try {
@@ -70,6 +73,7 @@ export function buildExerciseFromManifest(
 ) {
     const resolved = resolveBase(def.messageBase);
     const ideConfig = mergeLearningIdeConfigs(
+        learningIdeFromRuntimeDefaults(manifest?.runtimeDefaults ?? null),
         manifest?.serviceDefaults ?? null,
         def.serviceOverrides ?? null,
     );

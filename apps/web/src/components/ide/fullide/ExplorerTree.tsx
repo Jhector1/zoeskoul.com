@@ -42,6 +42,12 @@ function setInlineValuePreserveCaret(
     });
 }
 
+function explorerTestIdForNode(name: string) {
+    return `tools-file-node-${String(name ?? "")
+        .trim()
+        .replace(/[^a-zA-Z0-9._-]+/g, "-")}`;
+}
+
 function IndentGuides({ depth }: { depth: number }) {
     if (depth <= 0) return null;
     return (
@@ -570,6 +576,10 @@ function Tree(props: TreeProps) {
                             <button
                                 type="button"
                                 className="min-w-0 flex-1 text-left"
+                                data-testid={explorerTestIdForNode(n.name)}
+                                data-node-kind={n.kind}
+                                data-node-active={isActive ? "true" : "false"}
+                                data-node-entry={isEntry ? "true" : "false"}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();

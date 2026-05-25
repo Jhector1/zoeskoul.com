@@ -8,6 +8,7 @@ import {
 import { gradeSemanticCodeInput } from "./codeInput.semantic";
 import { GradeResult } from "@/lib/practice/api/validate/grade/index";
 import { stdoutMatches } from "@zoeskoul/practice-checks";
+import type { FileEntry } from "@/lib/code/types";
 
 
 const DEFAULT_LIMITS = {
@@ -20,15 +21,19 @@ export async function gradeProgrammingCodeInput(args: {
     expected: ProgrammingExpected;
     code: string;
     language: string;
+    entry?: string;
+    files?: FileEntry[];
     showDebug: boolean;
 }): Promise<GradeResult> {
-    const { expected, code, language, showDebug } = args;
+    const { expected, code, language, entry, files, showDebug } = args;
 
     if (expected.checkMode === "semantic") {
         return gradeSemanticCodeInput({
             expected,
             code,
             language,
+            entry,
+            files,
             showDebug,
         });
     }
@@ -39,7 +44,14 @@ export async function gradeProgrammingCodeInput(args: {
     for (const tc of trimmed) {
         const run = await runCode({
             language: language as any,
-            code,
+            ...(entry && files?.length
+                ? {
+                    entry,
+                    files,
+                  }
+                : {
+                    code,
+                  }),
             stdin: tc.stdin ?? "",
             limits: DEFAULT_LIMITS,
         } as any);

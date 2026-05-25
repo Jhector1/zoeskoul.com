@@ -5,10 +5,11 @@ import type { SqlDialect, WorkspaceLanguage } from "@/lib/practice/types";
 import type { RunResult } from "@/lib/code/types";
 import type { ExecutionBackend } from "@/components/code/runner/runtime";
 import { runViaApi } from "@/lib/code/runClient";
-import { exportProjectFiles, relativeProjectPathOf } from "../../fsTree";
+import { exportProjectFiles } from "../../fsTree";
 import { runBatchClient } from "@/components/code/runner/hooks/useBatchRun";
 import { startInteractiveProjectRun } from "@/components/ide/fullide/runtime/startInteractiveProjectRun";
 import {InteractiveLanguage, StartSessionResult} from "@zoeskoul/code-contracts";
+import { serializeWorkspaceForCodeRun } from "@/lib/code/workspaceSubmission";
 
 type Args = {
     nodes: any[];
@@ -84,7 +85,7 @@ type ProjectCodeReq =
     files: ProjectFile[];
 };
 
-function buildProjectRunRequest(args: {
+export function buildProjectRunRequest(args: {
     language: IdeRunArgs["language"];
     nodes: any[];
     activeFile: any | null;
@@ -171,9 +172,19 @@ function buildProjectRunRequest(args: {
         };
     }
 
-    const entryId = entryFileId ?? activeFileId;
+    const workspaceSubmission = serializeWorkspaceForCodeRun({
+        version: 2,
+        language: language as WorkspaceLanguage,
+        nodes,
+        openTabs: [],
+        activeFileId: (activeFileId ?? "") as string,
+        entryFileId: (entryFileId ?? activeFileId ?? "") as string,
+        stdin: "",
+        expanded: [],
+        leftPct: 26,
+    });
 
-    if (!entryId) {
+    if (!workspaceSubmission) {
         return {
             kind: "code",
             language,
@@ -181,13 +192,11 @@ function buildProjectRunRequest(args: {
         };
     }
 
-    const entry = relativeProjectPathOf(nodes, entryId);
-
     return {
         kind: "code",
         language,
-        entry,
-        files,
+        entry: workspaceSubmission.entry,
+        files: workspaceSubmission.files,
     };
 }
 

@@ -1,4 +1,4 @@
-import type { RunResult } from "@/lib/code/types";
+import type { FileEntry, RunResult } from "@/lib/code/types";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import { CodeRunnerRuntime } from "@/components/code/runner/runtime";
 import { InteractiveLanguage } from "@zoeskoul/code-contracts";
@@ -18,6 +18,8 @@ export type OnRunArgs =
     language: InteractiveLanguage;
     code: string;
     stdin: string;
+    entry?: string;
+    files?: FileEntry[];
     signal?: AbortSignal;
 }
     | {

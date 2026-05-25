@@ -185,6 +185,139 @@ function firstFiles(...values: unknown[]) {
   return undefined;
 }
 
+type NormalizedSeedFile = {
+  path: string;
+  content: string;
+};
+
+function normalizeSeedPath(input: unknown, fallback: string) {
+  const raw = typeof input === "string" && input.trim() ? input : fallback;
+
+  const parts = raw
+    .replace(/\\/g, "/")
+    .replace(/^\/+/, "")
+    .split("/")
+    .map((part) => part.trim())
+    .filter((part) => part && part !== "." && part !== "..");
+
+  return parts.join("/") || fallback;
+}
+
+function unwrapSeedFiles(raw: unknown): unknown {
+  if (!isRecord(raw)) return raw;
+
+  return (
+    raw.starterFiles ??
+    raw.files ??
+    raw.initialFiles ??
+    raw.workspaceFiles ??
+    raw.entries ??
+    raw.items ??
+    raw
+  );
+}
+
+function seedFilePath(file: unknown, fallback: string) {
+  if (typeof file === "string") return normalizeSeedPath(file, fallback);
+  if (!isRecord(file)) return fallback;
+
+  return normalizeSeedPath(
+    file.path ?? file.filePath ?? file.filename ?? file.name,
+    fallback,
+  );
+}
+
+function seedFileContent(file: unknown): string {
+  if (typeof file === "string") return "";
+  if (!isRecord(file)) return "";
+
+  for (const key of [
+    "content",
+    "contents",
+    "text",
+    "code",
+    "source",
+    "body",
+    "value",
+  ] as const) {
+    if (typeof file[key] === "string") {
+      return isUsableStarterCode(file[key]) ? file[key] : "";
+    }
+  }
+
+  return "";
+}
+
+function normalizeSeedFiles(
+  raw: unknown,
+  fallbackEntryFile: string,
+): NormalizedSeedFile[] {
+  const source = unwrapSeedFiles(raw);
+
+  if (Array.isArray(source)) {
+    return source
+      .map((file, index) => {
+        const fallback =
+          index === 0 ? fallbackEntryFile : `file-${String(index + 1)}.txt`;
+
+        return {
+          path: normalizeSeedPath(seedFilePath(file, fallback), fallback),
+          content: seedFileContent(file),
+        };
+      })
+      .filter((file) => Boolean(file.path));
+  }
+
+  if (isRecord(source)) {
+    return Object.entries(source)
+      .filter(([path]) => {
+        return ![
+          "entryFile",
+          "entryFilePath",
+          "mainFile",
+          "mainFilePath",
+          "language",
+          "lang",
+        ].includes(path);
+      })
+      .map(([path, value]) => ({
+        path: normalizeSeedPath(path, fallbackEntryFile),
+        content:
+          typeof value === "string"
+            ? isUsableStarterCode(value)
+              ? value
+              : ""
+            : seedFileContent(value),
+      }))
+      .filter((file) => Boolean(file.path));
+  }
+
+  return [];
+}
+
+function mergeFiles(
+  values: unknown[],
+  fallbackEntryFile = "main.txt",
+): unknown {
+  const byPath = new Map<string, NormalizedSeedFile>();
+
+  for (const value of values) {
+    const normalized = normalizeSeedFiles(value, fallbackEntryFile);
+
+    for (const file of normalized) {
+      const path = normalizeSeedPath(file.path, fallbackEntryFile);
+      if (!path || byPath.has(path)) continue;
+
+      byPath.set(path, {
+        path,
+        content: file.content ?? "",
+      });
+    }
+  }
+
+  return byPath.size > 0 ? Array.from(byPath.values()) : firstFiles(...values);
+}
+
 function firstCode(...values: unknown[]) {
   for (const value of values) {
     if (isUsableStarterCode(value)) return value;
@@ -206,7 +339,7 @@ export function resolveFileSeed(target: unknown): FileSeed {
   const recipe = isRecord(source.recipe) ? source.recipe : {};
 
   return {
-    starterFiles: firstFiles(
+    starterFiles: mergeFiles([
       workspace.starterFiles,
       workspace.files,
       workspace.initialFiles,
@@ -218,12 +351,12 @@ export function resolveFileSeed(target: unknown): FileSeed {
       recipe.starterFiles,
       recipe.files,
       recipe.initialFiles,
-    ),
-    solutionFiles: firstFiles(
+    ]),
+    solutionFiles: mergeFiles([
       workspace.solutionFiles,
       source.solutionFiles,
       recipe.solutionFiles,
-    ),
+    ]),
     starterCode: firstCode(
         workspace.starterCode,
         source.starterCode,

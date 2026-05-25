@@ -155,44 +155,125 @@ function getCardTargetSlug(card: ReviewCard) {
 
 
 
-function mergeManifestParts(
-  primary: UnknownRecord | null | undefined,
-  secondary: UnknownRecord | null | undefined,
+
+
+
+
+function normalizeWorkspaceFixtureAliases(
+    manifest: LooseManifestRecord | null,
 ): LooseManifestRecord | null {
-  if (!primary && !secondary) return null;
-  if (!primary) return asRecord(secondary);
-  if (!secondary) return asRecord(primary);
+  if (!manifest) return null;
+
+  const workspace = asRecord(manifest.workspace) ?? {};
+
+  const normalizedWorkspace = {
+    ...workspace,
+
+    /**
+     * Runtime fixture files may appear either inside workspace.files or at the
+     * manifest/step top level as files.
+     *
+     * Keep these separate from starterFiles:
+     * - starterFiles are starter code and saved learner work should win over them.
+     * - files / initialFiles / workspaceFiles are runtime fixtures and must stay
+     *   mounted even when restoring saved learner work.
+     */
+    files:
+        workspace.files ??
+        manifest.files,
+
+    initialFiles:
+        workspace.initialFiles ??
+        manifest.initialFiles,
+
+    workspaceFiles:
+        workspace.workspaceFiles ??
+        manifest.workspaceFiles,
+  };
 
   return {
-    ...secondary,
-    ...primary,
-    runtime: {
-      ...(asRecord(secondary.runtime) ?? {}),
-      ...(asRecord(primary.runtime) ?? {}),
-    },
-    workspace: {
-      ...(asRecord(secondary.workspace) ?? {}),
-      ...(asRecord(primary.workspace) ?? {}),
-    },
-    recipe: {
-      ...(asRecord(secondary.recipe) ?? {}),
-      ...(asRecord(primary.recipe) ?? {}),
-    },
-    starterFiles: primary.starterFiles ?? secondary.starterFiles,
-    solutionFiles: primary.solutionFiles ?? secondary.solutionFiles,
-    starterCode: isUsableStarterCode(primary.starterCode)
-        ? primary.starterCode
-        : isUsableStarterCode(secondary.starterCode)
-            ? secondary.starterCode
-            : undefined,
-    solutionCode:
-      typeof primary.solutionCode === "string"
-        ? primary.solutionCode
-        : typeof secondary.solutionCode === "string"
-          ? secondary.solutionCode
-          : undefined,
+    ...manifest,
+    workspace: normalizedWorkspace,
   };
 }
+
+function mergeManifestParts(
+    primary: UnknownRecord | null | undefined,
+    secondary: UnknownRecord | null | undefined,
+): LooseManifestRecord | null {
+  const primaryRecord = asRecord(primary);
+  const secondaryRecord = asRecord(secondary);
+
+  if (!primaryRecord && !secondaryRecord) return null;
+
+  /**
+   * Important:
+   * Project steps often have no rawExercise match, so one side is null.
+   * We still must normalize top-level files -> workspace.files in that case.
+   */
+  if (!primaryRecord) {
+    return normalizeWorkspaceFixtureAliases(secondaryRecord);
+  }
+
+  if (!secondaryRecord) {
+    return normalizeWorkspaceFixtureAliases(primaryRecord);
+  }
+
+  const primaryWorkspace = asRecord(primaryRecord.workspace) ?? {};
+  const secondaryWorkspace = asRecord(secondaryRecord.workspace) ?? {};
+
+  const mergedWorkspace = {
+    ...secondaryWorkspace,
+    ...primaryWorkspace,
+
+    files:
+        primaryWorkspace.files ??
+        primaryRecord.files ??
+        secondaryWorkspace.files ??
+        secondaryRecord.files,
+
+    initialFiles:
+        primaryWorkspace.initialFiles ??
+        primaryRecord.initialFiles ??
+        secondaryWorkspace.initialFiles ??
+        secondaryRecord.initialFiles,
+
+    workspaceFiles:
+        primaryWorkspace.workspaceFiles ??
+        primaryRecord.workspaceFiles ??
+        secondaryWorkspace.workspaceFiles ??
+        secondaryRecord.workspaceFiles,
+  };
+
+  return {
+    ...secondaryRecord,
+    ...primaryRecord,
+    runtime: {
+      ...(asRecord(secondaryRecord.runtime) ?? {}),
+      ...(asRecord(primaryRecord.runtime) ?? {}),
+    },
+    workspace: mergedWorkspace,
+    recipe: {
+      ...(asRecord(secondaryRecord.recipe) ?? {}),
+      ...(asRecord(primaryRecord.recipe) ?? {}),
+    },
+    starterFiles: primaryRecord.starterFiles ?? secondaryRecord.starterFiles,
+    solutionFiles: primaryRecord.solutionFiles ?? secondaryRecord.solutionFiles,
+    starterCode: isUsableStarterCode(primaryRecord.starterCode)
+        ? primaryRecord.starterCode
+        : isUsableStarterCode(secondaryRecord.starterCode)
+            ? secondaryRecord.starterCode
+            : undefined,
+    solutionCode:
+        typeof primaryRecord.solutionCode === "string"
+            ? primaryRecord.solutionCode
+            : typeof secondaryRecord.solutionCode === "string"
+                ? secondaryRecord.solutionCode
+                : undefined,
+  };
+}
+
+
 
 function pickStarterFiles(
   item: unknown,

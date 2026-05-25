@@ -1,5 +1,6 @@
 // src/lib/practice/api/validate/grade/codeInput.semantic.ts
 import type { ProgrammingExpected } from "@/lib/practice/api/validate/schemas";
+import type { FileEntry } from "@/lib/code/types";
 
 import { gradePythonSemanticCodeInput } from "./codeInput.semantic.python";
 import { GradeResult } from "@/lib/practice/api/validate/grade/index";
@@ -12,6 +13,8 @@ export async function gradeSemanticCodeInput(args: {
     expected: ProgrammingExpected;
     code: string;
     language: string;
+    entry?: string;
+    files?: FileEntry[];
     showDebug: boolean;
 }): Promise<GradeResult> {
     const normalizedLanguage = String(args.language || "").toLowerCase();
@@ -23,6 +26,8 @@ export async function gradeSemanticCodeInput(args: {
                 expected: args.expected,
                 code: args.code,
                 language: "python",
+                entry: args.entry,
+                files: args.files,
                 showDebug: args.showDebug,
             });
 

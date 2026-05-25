@@ -686,6 +686,7 @@ export default function QuizPracticeCard(props: {
                       type="button"
                       onClick={onSubmit}
                       disabled={disableCheck}
+                      data-testid="review-practice-submit-button"
                       data-flow-focus="1"
                       className={[
                         "ui-quiz-action",
@@ -724,11 +725,17 @@ export default function QuizPracticeCard(props: {
               </span>
 
                   {isCorrect ? (
-                      <span className="ml-2 whitespace-nowrap ui-quiz-status-good">
+                      <span
+                          className="ml-2 whitespace-nowrap ui-quiz-status-good"
+                          data-testid="review-practice-result-correct"
+                      >
       ✓ Correct
     </span>
                   ) : !feedbackDismissed && resultOk === false && ps.item?.result ? (
-                      <span className="ml-2 whitespace-nowrap ui-quiz-status-danger">
+                      <span
+                          className="ml-2 whitespace-nowrap ui-quiz-status-danger"
+                          data-testid="review-practice-result-incorrect"
+                      >
       ✕ Not correct
     </span>
                   ) : null}

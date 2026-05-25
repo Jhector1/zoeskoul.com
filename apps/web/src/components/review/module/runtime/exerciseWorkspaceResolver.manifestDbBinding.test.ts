@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
-import type { ReviewTargetEntry } from "./reviewTargetRegistry";
+import {buildReviewTargetRegistry, ReviewTargetEntry} from "./reviewTargetRegistry";
 import {
   deriveEntryCode,
   resolveExerciseWorkspace,
@@ -264,6 +264,45 @@ describe("review exercise workspace manifest/db binding", () => {
     expect(deriveEntryCode(workspace)).toBe("print('manifest starter')\n");
   });
 
+  it("keeps starterCode as main.py when workspace.files only provides fixtures", () => {
+    const workspace = resolveExerciseWorkspace({
+      language: "python",
+      manifest: {
+        workspace: {
+          starterCode: "print('from starter code')\n",
+          files: [
+            { path: "data.txt", content: "alpha\nbeta\n" },
+          ],
+        },
+      },
+      entry: entry(),
+    });
+
+    expect(fileContent(workspace, "main.py")).toBe("print('from starter code')\n");
+    expect(fileContent(workspace, "data.txt")).toBe("alpha\nbeta\n");
+    expect(activeFileName(workspace)).toBe("main.py");
+    expect(deriveEntryCode(workspace)).toBe("print('from starter code')\n");
+  });
+
+  it("does not let workspace.files alone make a fixture file the active entry", () => {
+    const workspace = resolveExerciseWorkspace({
+      language: "python",
+      manifest: {
+        workspace: {
+          files: [
+            { path: "data.txt", content: "fixture only\n" },
+          ],
+        },
+      },
+      entry: entry(),
+    });
+
+    expect(fileContent(workspace, "data.txt")).toBe("fixture only\n");
+    expect(fileContent(workspace, "main.py")).toBe("");
+    expect(activeFileName(workspace)).toBe("main.py");
+    expect(deriveEntryCode(workspace)).toBe("");
+  });
+
   it("keeps the first main.py when duplicate paths appear in later file sources", () => {
     const workspace = resolveExerciseWorkspace({
       language: "python",
@@ -314,6 +353,32 @@ describe("review exercise workspace manifest/db binding", () => {
 
     expect(activeFileName(workspace)).toBe("main.py");
     expect(deriveEntryCode(workspace)).toBe("print('run me')\n");
+  });
+
+  it("does not let manifest recipe fixture files influence the entry file", () => {
+    const workspace = resolveExerciseWorkspace({
+      language: "python",
+      manifest: {
+        workspace: {
+          starterCode: "print('recipe fixtures should not become entry')\n",
+        },
+        recipe: {
+          files: [
+            { path: "names.txt", content: "Ada\nGrace\n" },
+          ],
+        },
+      },
+      entry: entry(),
+    });
+
+    expect(fileContent(workspace, "main.py")).toBe(
+      "print('recipe fixtures should not become entry')\n",
+    );
+    expect(fileContent(workspace, "names.txt")).toBe("Ada\nGrace\n");
+    expect(activeFileName(workspace)).toBe("main.py");
+    expect(deriveEntryCode(workspace)).toBe(
+      "print('recipe fixtures should not become entry')\n",
+    );
   });
 
   it("keeps single-file python exercises as a one-file workspace", () => {
@@ -501,4 +566,161 @@ describe("review runtime starter content contract", () => {
     expect(fileContent(workspace, "query.sql")).toBe("");
     expect(workspace.language).toBe("sql");
   });
+
+
+  it("merges missing manifest fixture files into an existing saved user workspace", () => {
+    const saved = resolveExerciseWorkspace({
+      language: "python",
+      manifest: {
+        starterFiles: [
+          {
+            path: "main.py",
+            content: "# starter",
+            isEntry: true,
+          },
+        ],
+      },
+    });
+
+    const savedMain = saved.nodes.find(
+        (node) => node.kind === "file" && node.name === "main.py",
+    );
+
+    expect(savedMain).toBeTruthy();
+
+    if (savedMain?.kind === "file") {
+      savedMain.content =
+          "with open('data.txt', 'r') as file:\n    content = file.read()\n    print(content)\n";
+    }
+
+    const resolved = resolveExerciseWorkspace({
+      language: "python",
+      saved,
+      manifest: {
+        workspace: {
+          language: "python",
+          entryFile: "main.py",
+          starterFiles: [
+            {
+              path: "main.py",
+              content: "# starter",
+              isEntry: true,
+            },
+          ],
+          files: [
+            {
+              path: "data.txt",
+              content: "Hello, World!\nThis is a test file.",
+            },
+          ],
+        },
+      },
+    });
+
+    const mainFile = resolved.nodes.find(
+        (node) => node.kind === "file" && node.name === "main.py",
+    );
+
+    const dataFile = resolved.nodes.find(
+        (node) => node.kind === "file" && node.name === "data.txt",
+    );
+
+    expect(mainFile).toBeTruthy();
+    expect(dataFile).toBeTruthy();
+
+    if (mainFile?.kind === "file") {
+      expect(mainFile.content).toContain("with open('data.txt'");
+    }
+
+    if (dataFile?.kind === "file") {
+      expect(dataFile.content).toBe("Hello, World!\nThis is a test file.");
+    }
+  });
+
+
+
+  it("keeps project step top-level fixture files available through the registry workspace manifest", () => {
+    const registry = buildReviewTargetRegistry({
+      subjectSlug: "python",
+      moduleSlug: "e2e-review-clone",
+      mod: {
+        id: "e2e-review-clone",
+        title: "E2E",
+        sections: [
+          {
+            id: "section",
+            slug: "section",
+            title: "Section",
+            topics: [
+              {
+                id: "topic",
+                label: "Topic",
+                cards: [
+                  {
+                    type: "project",
+                    id: "project-a",
+                    title: "Project A",
+                    passScore: 1,
+                    spec: {
+                      mode: "project",
+                      subject: "python",
+                      steps: [
+                        {
+                          id: "file-io",
+                          title: "File IO",
+                          exerciseKey: "file-io",
+                          starterFiles: {
+                            "main.py": "# Write your answer below\n",
+                          },
+                          files: [
+                            {
+                              path: "data.txt",
+                              content: "Hello, World!\nThis is a test file.",
+                              readOnly: true,
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  },
+                ],
+                meta: {},
+              },
+            ],
+          },
+        ],
+        topics: [],
+      } as any,
+    });
+
+    const entry = Object.values(registry.byKey).find(
+        (candidate) => candidate.targetKind === "exercise",
+    );
+
+    expect(entry).toBeTruthy();
+    expect((entry?.item?.workspace as any)?.files).toEqual([
+      {
+        path: "data.txt",
+        content: "Hello, World!\nThis is a test file.",
+        readOnly: true,
+      },
+    ]);
+
+    const workspace = resolveExerciseWorkspace({
+      language: "python",
+      manifest: entry?.item,
+      entry,
+    });
+
+    const dataFile = workspace.nodes.find(
+        (node) => node.kind === "file" && node.name === "data.txt",
+    );
+
+    expect(dataFile).toBeTruthy();
+
+    if (dataFile?.kind === "file") {
+      expect(dataFile.content).toBe("Hello, World!\nThis is a test file.");
+    }
+  });
+
 });

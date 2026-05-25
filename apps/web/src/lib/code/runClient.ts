@@ -132,7 +132,7 @@ export async function runViaApi(req: RunReq, signal?: AbortSignal): Promise<RunR
 
         for (let i = 0; i < MAX_POLLS; i++) {
             const pollRes = await fetchWithTimeout(
-                `/api/review/${encodeURIComponent(submitData.token)}`,
+                `/api/run/judge0/${encodeURIComponent(submitData.token)}`,
                 {
                     method: "GET",
                 },

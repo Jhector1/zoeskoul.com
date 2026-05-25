@@ -6,6 +6,8 @@ import {
     buildPythonSemanticHarness,
     parseSemanticHarnessResult,
 } from "@zoeskoul/practice-checks";
+import type { FileEntry } from "@/lib/code/types";
+import { replaceEntryFileContent } from "@/lib/code/workspaceSubmission";
 
 const DEFAULT_LIMITS = {
     cpu_time_limit: 2,
@@ -27,6 +29,8 @@ export async function gradePythonSemanticCodeInput(args: {
     expected: ProgrammingExpected;
     code: string;
     language: string;
+    entry?: string;
+    files?: FileEntry[];
     showDebug: boolean;
 }): Promise<GradeResult> {
     const semanticChecks = args.expected.checkMode === "semantic"
@@ -40,7 +44,18 @@ export async function gradePythonSemanticCodeInput(args: {
 
     const run = await runCode({
         language: "python",
-        code: harness,
+        ...(args.entry && args.files?.length
+            ? {
+                entry: args.entry,
+                files: replaceEntryFileContent({
+                    entry: args.entry,
+                    files: args.files,
+                    content: harness,
+                }),
+              }
+            : {
+                code: harness,
+              }),
         stdin: "",
         limits: DEFAULT_LIMITS,
     } as any);

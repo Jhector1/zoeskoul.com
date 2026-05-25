@@ -239,7 +239,10 @@ export default function IdeExplorerPane({
     };
 
     return (
-        <div className="flex h-full min-h-0 flex-col bg-neutral-50/70 dark:bg-black/20">
+        <div
+            className="flex h-full min-h-0 flex-col bg-neutral-50/70 dark:bg-black/20"
+            data-testid="tools-file-tree"
+        >
             <div className="flex items-center justify-between gap-2 border-b border-neutral-200 px-3 py-3 dark:border-white/10">
                 <div className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-neutral-600 dark:text-white/60">
                     {isSql ? "SQL Workspace" : "Explorer"}

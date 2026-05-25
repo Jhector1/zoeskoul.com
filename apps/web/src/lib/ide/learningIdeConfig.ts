@@ -3,6 +3,7 @@ import type {
     FullIDEServicePreset,
     FullIDEServicesInput,
 } from "@/components/ide/fullide/services";
+import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 
 export type LearningIdeServicePreset = FullIDEServicePreset;
 
@@ -23,6 +24,29 @@ export type LearningIdeConfig = {
     /** SQL result pane controls. Results/Tables are visible by default; ERD/Chen are opt-in. */
     sqlPane?: SqlPaneOptions;
 };
+
+export function learningIdeFromRuntimeDefaults(
+    runtimeDefaults?: ManifestRuntimeDefaults | null,
+): LearningIdeConfig | null {
+    if (!runtimeDefaults) return null;
+
+    const supportsFiles =
+        runtimeDefaults.supportsFileSystem === true ||
+        runtimeDefaults.supportsMultiFile === true;
+    const supportsTerminal = runtimeDefaults.supportsTerminal === true;
+
+    if (!supportsFiles && !supportsTerminal) {
+        return null;
+    }
+
+    return {
+        requires: {
+            files: supportsFiles,
+            multiFile: runtimeDefaults.supportsMultiFile === true,
+            terminal: supportsTerminal,
+        },
+    };
+}
 
 export function mergeLearningIdeConfigs(
     ...configs: Array<LearningIdeConfig | null | undefined>

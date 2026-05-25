@@ -102,14 +102,29 @@ const CodeInputAnswerSchema = z
         code: z.string().optional(),
         source: z.string().optional(),
         stdin: z.string().optional(), // optional UI field; programming grader uses tests' stdin, SQL ignores it
+        entry: z.string().optional(),
+        files: z
+            .array(
+                z.object({
+                    path: z.string().min(1),
+                    content: z.string(),
+                }),
+            )
+            .optional(),
     })
     .superRefine((v, ctx) => {
         const code = (v.code ?? v.source ?? "").trim();
-        if (!code) {
+        const hasWorkspaceFiles =
+            typeof v.entry === "string" &&
+            v.entry.trim().length > 0 &&
+            Array.isArray(v.files) &&
+            v.files.length > 0;
+
+        if (!code && !hasWorkspaceFiles) {
             ctx.addIssue({
                 code: "custom",
                 path: ["code"],
-                message: "Missing code.",
+                message: "Missing code or workspace files.",
             });
         }
     });

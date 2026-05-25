@@ -10,7 +10,7 @@ import type {
     Exercise,
     SqlDialect, WorkspaceLanguage,
 } from "@/lib/practice/types";
-import type { RunResult } from "@/lib/code/types";
+import type { FileEntry, RunResult } from "@/lib/code/types";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
 import { pickRunFeedbackFromResult } from "@/lib/code/feedback";
 import { runViaApi } from "@/lib/code/runClient";
@@ -191,6 +191,8 @@ export default function CodeInputExerciseUI({
         language: RunnerLanguage;
         code: string;
         stdin: string;
+        entry?: string;
+        files?: FileEntry[];
         sqlDialect?: SqlDialect;
         sqlDatasetId?: string;
         sqlResultShape?: "table";
@@ -456,6 +458,8 @@ export default function CodeInputExerciseUI({
             language: RunnerLanguage;
             code: string;
             stdin: string;
+            entry?: string;
+            files?: FileEntry[];
             sqlDialect?: SqlDialect;
             sqlDatasetId?: string;
             sqlResultShape?: "table";
@@ -489,6 +493,8 @@ export default function CodeInputExerciseUI({
                     language: args.language,
                     code: args.code,
                     stdin: args.stdin,
+                    entry: args.entry,
+                    files: args.files,
                     sqlDialect: nextResolvedSql.isSql ? nextResolvedSql.sqlDialect : undefined,
                     sqlDatasetId: nextResolvedSql.isSql ? nextResolvedSql.sqlDatasetId : undefined,
                     sqlResultShape: nextResolvedSql.isSql ? nextResolvedSql.sqlResultShape : undefined,
@@ -521,12 +527,20 @@ export default function CodeInputExerciseUI({
                     }
 
                     return runViaApi(
-                        {
-                            kind: "code",
-                            language: args.language,
-                            code: args.code,
-                            stdin: args.stdin,
-                        },
+                        args.entry && args.files?.length
+                            ? {
+                                kind: "code",
+                                language: args.language,
+                                entry: args.entry,
+                                files: args.files,
+                                stdin: args.stdin,
+                              }
+                            : {
+                                kind: "code",
+                                language: args.language,
+                                code: args.code,
+                                stdin: args.stdin,
+                              },
                         undefined,
                     );
                 })();

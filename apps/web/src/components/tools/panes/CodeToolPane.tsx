@@ -305,7 +305,162 @@ function reviewRuntimeProtectionRank(runtime: any) {
 function workspaceHasAnyFile(workspace: WorkspaceStateV2 | null | undefined) {
     return Boolean(workspace?.nodes?.some((node: any) => node?.kind === "file"));
 }
+function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return 0;
+    }
 
+    return workspace.nodes.filter((node: any) => node?.kind === "file").length;
+}
+
+function workspaceNeedsMultiFile(workspace: WorkspaceStateV2 | null | undefined) {
+    return workspaceFileCount(workspace) > 1;
+}
+
+
+
+function workspaceNodePathForPane(nodes: any[], node: any): string {
+    if (!node) return "";
+
+    const names: string[] = [String(node.name ?? "")].filter(Boolean);
+    let parentId = node.parentId ?? null;
+
+    while (parentId) {
+        const parent = nodes.find((candidate) => candidate?.id === parentId);
+        if (!parent) break;
+
+        names.unshift(String(parent.name ?? ""));
+        parentId = parent.parentId ?? null;
+    }
+
+    return names.filter(Boolean).join("/");
+}
+
+function uniquePaneNodeId(nodes: any[], kind: "file" | "folder", path: string) {
+    const ids = new Set(nodes.map((node) => String(node?.id ?? "")));
+    const base = `${kind}:${path}`;
+
+    if (!ids.has(base)) return base;
+
+    let index = 2;
+    while (ids.has(`${base}:${index}`)) {
+        index += 1;
+    }
+
+    return `${base}:${index}`;
+}
+
+function ensurePaneWorkspaceFolder(args: {
+    workspace: WorkspaceStateV2;
+    folderPath: string;
+}): string | null {
+    const parts = args.folderPath.split("/").filter(Boolean);
+    let parentId: string | null = null;
+    let currentPath = "";
+
+    for (const part of parts) {
+        currentPath = currentPath ? `${currentPath}/${part}` : part;
+
+        const existing = args.workspace.nodes.find(
+            (node: any) =>
+                node?.kind === "folder" &&
+                node?.name === part &&
+                (node?.parentId ?? null) === parentId,
+        );
+
+        if (existing) {
+            parentId = String(existing.id);
+            continue;
+        }
+
+        const folderId = uniquePaneNodeId(args.workspace.nodes, "folder", currentPath);
+
+        args.workspace.nodes.push({
+            id: folderId,
+            kind: "folder",
+            name: part,
+            parentId,
+            createdAt: 0,
+            updatedAt: 0,
+        } as any);
+
+        if (!args.workspace.expanded.includes(folderId as any)) {
+            args.workspace.expanded.push(folderId as any);
+        }
+
+        parentId = folderId;
+    }
+
+    return parentId;
+}
+
+function mergeMissingFilesFromRuntimeWorkspace(
+    baseWorkspace: WorkspaceStateV2 | null | undefined,
+    runtimeWorkspace: WorkspaceStateV2 | null | undefined,
+): WorkspaceStateV2 | null {
+    if (!baseWorkspace || baseWorkspace.version !== 2) {
+        return baseWorkspace ?? runtimeWorkspace ?? null;
+    }
+
+    if (!runtimeWorkspace || runtimeWorkspace.version !== 2) {
+        return baseWorkspace;
+    }
+
+    const baseNodes = Array.isArray(baseWorkspace.nodes) ? baseWorkspace.nodes : [];
+    const runtimeNodes = Array.isArray(runtimeWorkspace.nodes) ? runtimeWorkspace.nodes : [];
+
+    const existingPaths = new Set(
+        baseNodes
+            .filter((node: any) => node?.kind === "file")
+            .map((node: any) => workspaceNodePathForPane(baseNodes, node))
+            .filter(Boolean),
+    );
+
+    const runtimeFiles = runtimeNodes.filter((node: any) => node?.kind === "file");
+
+    const missingFiles = runtimeFiles.filter((node: any) => {
+        const path = workspaceNodePathForPane(runtimeNodes, node);
+        return path && !existingPaths.has(path);
+    });
+
+    if (missingFiles.length === 0) {
+        return baseWorkspace;
+    }
+
+    const merged: WorkspaceStateV2 = {
+        ...baseWorkspace,
+        nodes: baseNodes.map((node: any) => ({ ...node })),
+        openTabs: [...(baseWorkspace.openTabs ?? [])],
+        expanded: [...(baseWorkspace.expanded ?? [])],
+    };
+
+    for (const sourceFile of missingFiles) {
+        const path = workspaceNodePathForPane(runtimeNodes, sourceFile);
+        if (!path || existingPaths.has(path)) continue;
+
+        const parts = path.split("/");
+        const name = parts.pop() || String(sourceFile.name ?? "file.txt");
+        const parentId = ensurePaneWorkspaceFolder({
+            workspace: merged,
+            folderPath: parts.join("/"),
+        });
+
+        const fileId = uniquePaneNodeId(merged.nodes, "file", path);
+
+        merged.nodes.push({
+            ...sourceFile,
+            id: fileId,
+            name,
+            parentId,
+            createdAt: sourceFile.createdAt ?? 0,
+            updatedAt: sourceFile.updatedAt ?? 0,
+        } as any);
+
+        existingPaths.add(path);
+    }
+
+    return merged;
+}
 function forceWorkspaceHasContent(workspace: WorkspaceStateV2 | null | undefined) {
     // Non-review tool routes may intentionally open an empty file workspace.
     return workspaceHasAnyFile(workspace);
@@ -1091,7 +1246,14 @@ export default function CodeToolPane(props: {
                 runtimeProtected: finalReviewRuntimeProtected,
             })
         ) {
-            return localWorkspaceDraft?.workspace ?? directRuntimeWorkspace;
+            /**
+             * Local drafts are same-tab safety snapshots. They may be older one-file
+             * snapshots, so never let them hide deterministic runtime fixture files.
+             */
+            return mergeMissingFilesFromRuntimeWorkspace(
+                localWorkspaceDraft?.workspace ?? null,
+                directRuntimeWorkspace,
+            );
         }
 
         return directRuntimeWorkspace;
@@ -1104,6 +1266,9 @@ export default function CodeToolPane(props: {
         isReviewRouteMode,
         localWorkspaceDraft,
     ]);
+
+
+
     const finalReviewWorkspaceLanguage = String(
         (finalReviewWorkspace as any)?.language ?? "",
     ).toLowerCase();
@@ -1112,7 +1277,9 @@ export default function CodeToolPane(props: {
         !finalReviewWorkspaceLanguage ||
         !effectiveLanguage ||
         languagesCompatible(finalReviewWorkspaceLanguage, effectiveLanguage);
-
+    const reviewWorkspaceNeedsMultiFile = Boolean(
+        isReviewRouteMode && workspaceNeedsMultiFile(finalReviewWorkspace),
+    );
     const runtimeWorkspacePending = Boolean(
         isReviewRouteMode &&
         !runtimeWorkspaceError &&
@@ -1618,7 +1785,19 @@ export default function CodeToolPane(props: {
                         language={fullIdeLanguage}
                         access={{
                             hasUser: true,
-                            canUseMultiFile: isSql || reviewDirectWorkspaceReady || ideShell.access.canUseMultiFile,
+                            /**
+                             * Review exercises may include runtime fixture files for any language:
+                             * Python data.txt, JS package fixtures, C/C++ header/input files, Java
+                             * helper files, etc.
+                             *
+                             * Do not gate these deterministic course workspaces behind the normal
+                             * user multi-file entitlement. If this stays false, FullIDE normalizes the
+                             * workspace down to one file and silently drops required fixtures.
+                             */
+                            canUseMultiFile:
+                                isSql ||
+                                ideShell.access.canUseMultiFile ||
+                                reviewWorkspaceNeedsMultiFile,
                             canSaveCloud: ideShell.access.canSaveCloud,
                             canCreateProjects: ideShell.access.canCreateProjects,
                         }}
