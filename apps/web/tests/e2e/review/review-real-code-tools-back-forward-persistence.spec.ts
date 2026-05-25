@@ -14,6 +14,49 @@ const SOLVED_CODE = [
 
 const SOLVED_MARKER = "while n >= 1:";
 
+const LOOP_DEBUG_FIXTURES = {
+    "loop-debug-code-3": {
+        title: "Print 3, 2, 1",
+        starterCode: `${STARTER_MARKER}\nn = 3\n`,
+        solutionCode: `${SOLVED_CODE}\n`,
+        expectedOutput: "3\n2\n1\n",
+        workspace: {
+            language: "python",
+            entryFilePath: "main.py",
+            starterCode: `${STARTER_MARKER}\nn = 3\n`,
+            starterFiles: [
+                {
+                    path: "main.py",
+                    content: `${STARTER_MARKER}\nn = 3\n`,
+                    language: "python",
+                    isEntry: true,
+                    entry: true,
+                },
+            ],
+        },
+    },
+    "loop-debug-code-4": {
+        title: "Print word three times",
+        starterCode: "word = input()\n# TODO: print word exactly 3 times using a while loop\n",
+        solutionCode: "word = input()\nn = 0\nwhile n < 3:\n    print(word)\n    n = n + 1\n",
+        expectedOutput: "hi\nhi\nhi\n",
+        workspace: {
+            language: "python",
+            entryFilePath: "main.py",
+            starterCode: "word = input()\n# TODO: print word exactly 3 times using a while loop\n",
+            starterFiles: [
+                {
+                    path: "main.py",
+                    content: "word = input()\n# TODO: print word exactly 3 times using a while loop\n",
+                    language: "python",
+                    isEntry: true,
+                    entry: true,
+                },
+            ],
+        },
+    },
+} as const;
+
 function getEditorInputs(page: Page): Locator {
     return page.getByTestId("code-editor-e2e-input");
 }
@@ -57,9 +100,284 @@ async function expectToolsEditorNotBlank(page: Page, timeout = 30_000) {
         .not.toBe("");
 }
 
+function collectSubmittedSource(value: unknown): string {
+    const seen = new Set<unknown>();
+    const parts: string[] = [];
+
+    function visit(node: unknown) {
+        if (!node || typeof node !== "object") return;
+        if (seen.has(node)) return;
+        seen.add(node);
+
+        if (Array.isArray(node)) {
+            for (const item of node) visit(item);
+            return;
+        }
+
+        const record = node as Record<string, unknown>;
+
+        for (const key of ["code", "source", "content"]) {
+            if (typeof record[key] === "string") {
+                parts.push(record[key] as string);
+            }
+        }
+
+        if (Array.isArray(record.files)) {
+            for (const file of record.files) {
+                if (
+                    file &&
+                    typeof file === "object" &&
+                    typeof (file as Record<string, unknown>).content === "string"
+                ) {
+                    parts.push(String((file as Record<string, unknown>).content));
+                }
+            }
+        }
+
+        for (const item of Object.values(record)) {
+            visit(item);
+        }
+    }
+
+    visit(value);
+    return parts.join("\n");
+}
+
+async function installStableChromeMocks(page: Page) {
+    await page.route("**/api/gamification/me**", async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+                summary: {
+                    totalXp: 0,
+                    level: 1,
+                    currentStreak: 0,
+                    levelProgressPct: 0,
+                },
+            }),
+        });
+    });
+
+    await page.route("**/api/review/module-nav**", async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+                prevModuleId: null,
+                nextModuleId: null,
+                nextLocked: false,
+                nextBillingHref: null,
+                index: 1,
+                total: 1,
+            }),
+        });
+    });
+
+    await page.route("**/api/review/subject-finish**", async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+                status: "in_progress",
+                certificateReady: false,
+                certificateIssued: false,
+            }),
+        });
+    });
+
+    await page.route("**/api/tools/doc**", async (route) => {
+        const request = route.request();
+
+        if (request.method() === "GET") {
+            await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify({ doc: null }),
+            });
+            return;
+        }
+
+        await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({ ok: true }),
+        });
+    });
+}
+
+async function installIsolatedReviewProgress(page: Page) {
+    let savedProgress: unknown = { progress: null };
+
+    await page.route("**/api/review/progress**", async (route) => {
+        const request = route.request();
+
+        if (request.method() === "GET") {
+            await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify(savedProgress),
+            });
+            return;
+        }
+
+        if (request.method() === "PUT") {
+            const body = request.postDataJSON();
+            savedProgress = {
+                progress: body.state,
+            };
+
+            await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify({
+                    ok: true,
+                    state: body.state,
+                }),
+            });
+            return;
+        }
+
+        await route.fallback();
+    });
+}
+
+async function installPracticeMocks(page: Page) {
+    await page.route(
+        (url) => url.pathname === "/api/review/quiz",
+        async (route) => {
+            await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify({
+                    quizKey: "loop-debugging-project-e2e",
+                    questions: [
+                        {
+                            kind: "practice",
+                            id: "proj:loop-debug-code-3:e2e",
+                            title: LOOP_DEBUG_FIXTURES["loop-debug-code-3"].title,
+                            fetch: {
+                                subject: "python",
+                                module: "python-v2-3",
+                                section: "python-v2-3-while-loops",
+                                topic: "loop-debugging",
+                                difficulty: "easy",
+                                allowReveal: true,
+                                preferPurpose: "project",
+                                preferKind: "code_input",
+                                exerciseKey: "loop-debug-code-3",
+                                seedPolicy: "global",
+                            },
+                            maxAttempts: 10,
+                        },
+                        {
+                            kind: "practice",
+                            id: "proj:loop-debug-code-4:e2e",
+                            title: LOOP_DEBUG_FIXTURES["loop-debug-code-4"].title,
+                            fetch: {
+                                subject: "python",
+                                module: "python-v2-3",
+                                section: "python-v2-3-while-loops",
+                                topic: "loop-debugging",
+                                difficulty: "easy",
+                                allowReveal: true,
+                                preferPurpose: "project",
+                                preferKind: "code_input",
+                                exerciseKey: "loop-debug-code-4",
+                                seedPolicy: "global",
+                            },
+                            maxAttempts: 10,
+                        },
+                    ],
+                }),
+            });
+        },
+    );
+
+    await page.route(
+        (url) => url.pathname === "/api/practice",
+        async (route) => {
+            const request = route.request();
+            const url = new URL(request.url());
+            const exerciseKey =
+                url.searchParams.get("exerciseKey") ??
+                url.searchParams.get("key") ??
+                "loop-debug-code-3";
+
+            const fixture =
+                LOOP_DEBUG_FIXTURES[
+                    exerciseKey as keyof typeof LOOP_DEBUG_FIXTURES
+                    ] ?? LOOP_DEBUG_FIXTURES["loop-debug-code-3"];
+
+            await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify({
+                    key: `practice-${exerciseKey}`,
+                    sessionId: `practice-session-${exerciseKey}`,
+                    exercise: {
+                        id: exerciseKey,
+                        exerciseKey,
+                        kind: "code_input",
+                        title: fixture.title,
+                        prompt: fixture.title,
+                        language: "python",
+                        runtime: {
+                            kind: "code",
+                            language: "python",
+                        },
+                        workspace: fixture.workspace,
+                        starterCode: fixture.starterCode,
+                        solutionCode: fixture.solutionCode,
+                    },
+                    run: {
+                        maxAttempts: 10,
+                        allowReveal: true,
+                        help: {
+                            stepKeys: ["concept", "hint_1", "hint_2", "reveal"],
+                        },
+                    },
+                }),
+            });
+        },
+    );
+
+    await page.route("**/api/practice/validate", async (route) => {
+        const request = route.request();
+
+        if (request.method() !== "POST") {
+            await route.fallback();
+            return;
+        }
+
+        const body = request.postDataJSON();
+        const submittedSource = collectSubmittedSource(body);
+        const ok =
+            submittedSource.includes("while n >= 1") &&
+            submittedSource.includes("n = n - 1");
+
+        await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+                ok,
+                finalized: ok,
+                explanation: ok ? "Correct." : "Expected a countdown loop.",
+                attempts: {
+                    used: 1,
+                    max: 10,
+                    left: ok ? 9 : 9,
+                },
+            }),
+        });
+    });
+}
+
 async function gotoRealExercise(page: Page) {
-    await page.goto(REAL_EXERCISE_URL);
-    await page.waitForLoadState("domcontentloaded");
+    await page.goto(REAL_EXERCISE_URL, {
+        waitUntil: "domcontentloaded",
+        timeout: 45_000,
+    });
 
     await expect(page).toHaveURL(/\/exercise\/loop-debug-code-3(?:\?.*)?$/, {
         timeout: 30_000,
@@ -73,9 +391,10 @@ async function gotoRealExercise(page: Page) {
 
     await expectToolsEditorNotBlank(page);
     await expectToolsEditorToContain(page, STARTER_MARKER);
-    await expect(page.getByTestId("review-practice-submit-button")).toBeVisible({
-        timeout: 30_000,
-    });
+
+    const submitButton = page.getByTestId("review-practice-submit-button");
+    await expect(submitButton).toBeVisible({ timeout: 30_000 });
+    await expect(submitButton).toBeEnabled({ timeout: 30_000 });
 }
 
 async function fillToolsEditor(page: Page, code: string) {
@@ -120,7 +439,8 @@ async function visibleEnabledButtonTexts(page: Page): Promise<string[]> {
             .filter(Boolean),
     );
 }
-
+const NEXT_EXERCISE_URL =
+    "/en/catalog/python/subjects/python-v2/modules/python-v2-3/learn/python-v2-3-while-loops/loop-debugging/exercise/loop-debug-code-4?e2eUnlockAll=1";
 async function clickEnabledButton(page: Page, name: RegExp) {
     const buttons = page.getByRole("button", { name });
     const count = await buttons.count();
@@ -156,55 +476,27 @@ async function waitUntilToolsBoundToExercise(page: Page, exerciseKeyPart: string
         new RegExp(`/exercise/${exerciseKeyPart}(?:\\?.*)?$`),
         { timeout: 30_000 },
     );
+
     await expect(getToolsEditorInput(page)).toBeAttached({ timeout: 30_000 });
     await expectToolsEditorNotBlank(page);
 }
 
-async function installIsolatedReviewProgress(page: Page) {
-    let savedProgress: unknown = { progress: null };
-
-    await page.route("**/api/review/progress**", async (route) => {
-        const request = route.request();
-
-        if (request.method() === "GET") {
-            await route.fulfill({
-                status: 200,
-                contentType: "application/json",
-                body: JSON.stringify(savedProgress),
-            });
-            return;
-        }
-
-        if (request.method() === "PUT") {
-            const body = request.postDataJSON();
-            savedProgress = {
-                progress: body.state,
-            };
-
-            await route.fulfill({
-                status: 200,
-                contentType: "application/json",
-                body: JSON.stringify({
-                    ok: true,
-                    state: body.state,
-                }),
-            });
-            return;
-        }
-
-        await route.fallback();
-    });
-}
-
 test.describe("real review route Tools editor back/forward persistence", () => {
-    test.beforeEach(async ({ context }) => {
+    test.beforeEach(async ({ context, page }) => {
         await context.clearCookies();
+
+        await page.addInitScript(() => {
+            window.localStorage.setItem("learnoir.quiz.autoAdvance", "0");
+        });
+
+        await installStableChromeMocks(page);
+        await installIsolatedReviewProgress(page);
+        await installPracticeMocks(page);
     });
 
     test("correct code_input keeps learner code after next, previous, and repeated back/forward navigation", async ({
-                                                                                                                    page,
-                                                                                                                }) => {
-        await installIsolatedReviewProgress(page);
+                                                                                                                        page,
+                                                                                                                    }) => {
         await gotoRealExercise(page);
 
         await fillToolsEditor(page, SOLVED_CODE);
@@ -212,6 +504,9 @@ test.describe("real review route Tools editor back/forward persistence", () => {
         await clickCheckThisAnswer(page);
         await waitForCorrect(page);
 
+        await expect(page).toHaveURL(/\/exercise\/loop-debug-code-3(?:\?.*)?$/, {
+            timeout: 10_000,
+        });
         await expectToolsEditorToContain(page, SOLVED_MARKER);
         await expectToolsEditorNotToContain(page, STARTER_MARKER);
 
@@ -221,11 +516,9 @@ test.describe("real review route Tools editor back/forward persistence", () => {
         expect(codeAfterCorrect).not.toContain(STARTER_MARKER);
 
         await clickQuestionNext(page);
-
         await expectToolsEditorNotBlank(page);
 
         await clickQuestionPrevious(page);
-
         await waitUntilToolsBoundToExercise(page, "loop-debug-code-3");
 
         await expectToolsEditorToContain(page, SOLVED_MARKER);
@@ -240,7 +533,6 @@ test.describe("real review route Tools editor back/forward persistence", () => {
         await expectToolsEditorNotBlank(page);
 
         await clickQuestionPrevious(page);
-
         await waitUntilToolsBoundToExercise(page, "loop-debug-code-3");
 
         await expectToolsEditorToContain(page, SOLVED_MARKER);
@@ -251,11 +543,9 @@ test.describe("real review route Tools editor back/forward persistence", () => {
         expect(codeAfterSecondReturn).toContain("n = n - 1");
         expect(codeAfterSecondReturn).not.toContain(STARTER_MARKER);
     });
-
     test("browser history back and forward do not restore starter over solved learner code", async ({
-                                                                                                    page,
-                                                                                                }) => {
-        await installIsolatedReviewProgress(page);
+                                                                                                        page,
+                                                                                                    }) => {
         await gotoRealExercise(page);
 
         await fillToolsEditor(page, SOLVED_CODE);
@@ -263,28 +553,64 @@ test.describe("real review route Tools editor back/forward persistence", () => {
         await clickCheckThisAnswer(page);
         await waitForCorrect(page);
 
+        await expect(page).toHaveURL(/\/exercise\/loop-debug-code-3(?:\?.*)?$/, {
+            timeout: 10_000,
+        });
         await expectToolsEditorToContain(page, SOLVED_MARKER);
         await expectToolsEditorNotToContain(page, STARTER_MARKER);
 
-        await clickQuestionNext(page);
-        await expectToolsEditorNotBlank(page);
+        const solvedExerciseUrl = page.url();
+        const probeUrl = `${solvedExerciseUrl}&historyProbe=1`;
+
+        /**
+         * Create a deterministic same-target browser history entry.
+         *
+         * Do not use the next real course exercise here. The real course/router may
+         * redirect loop-debug-code-4 to another unlocked/default target, which makes
+         * browser Back test the course progression router instead of the editor
+         * restore behavior.
+         *
+         * This test only needs to prove browser back/forward popstate does not cause
+         * the solved exercise editor to fall back to starter code.
+         */
+        await page.evaluate((url) => {
+            window.history.pushState({ e2eHistoryProbe: true }, "", url);
+            window.dispatchEvent(new PopStateEvent("popstate", { state: { e2eHistoryProbe: true } }));
+        }, probeUrl);
+
+        await expect(page).toHaveURL(/historyProbe=1/, {
+            timeout: 10_000,
+        });
+
+        await expectToolsEditorToContain(page, SOLVED_MARKER);
+        await expectToolsEditorNotToContain(page, STARTER_MARKER);
 
         await page.goBack();
         await page.waitForLoadState("domcontentloaded");
 
-        await waitUntilToolsBoundToExercise(page, "loop-debug-code-3");
+        await expect(page).toHaveURL(/\/exercise\/loop-debug-code-3(?:\?.*)?$/, {
+            timeout: 30_000,
+        });
 
         await expectToolsEditorToContain(page, SOLVED_MARKER);
         await expectToolsEditorNotToContain(page, STARTER_MARKER);
 
         await page.goForward();
         await page.waitForLoadState("domcontentloaded");
-        await expectToolsEditorNotBlank(page);
+
+        await expect(page).toHaveURL(/historyProbe=1/, {
+            timeout: 30_000,
+        });
+
+        await expectToolsEditorToContain(page, SOLVED_MARKER);
+        await expectToolsEditorNotToContain(page, STARTER_MARKER);
 
         await page.goBack();
         await page.waitForLoadState("domcontentloaded");
 
-        await waitUntilToolsBoundToExercise(page, "loop-debug-code-3");
+        await expect(page).toHaveURL(/\/exercise\/loop-debug-code-3(?:\?.*)?$/, {
+            timeout: 30_000,
+        });
 
         await expectToolsEditorToContain(page, SOLVED_MARKER);
         await expectToolsEditorNotToContain(page, STARTER_MARKER);

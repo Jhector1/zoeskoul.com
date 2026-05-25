@@ -811,6 +811,16 @@ export default function FullIDE(props: FullIDEProps) {
     );
     const lastAppliedExternalWorkspaceJsonRef = useRef<string | null>(null);
     const suppressWorkspaceEchoKeyRef = useRef<string | null>(null);
+
+    /**
+     * Programmatic parent-controlled hydration can normalize/remap the workspace
+     * before FullIDE emits it back through onWorkspaceChange. For SQL workspaces,
+     * the emitted key may differ from the incoming key even though it is still the
+     * same hydration pass. Suppress the first emission after replace/reset by
+     * intent, not only by exact key, to avoid parent <-> FullIDE echo loops.
+     */
+    const suppressNextWorkspaceEchoRef = useRef(false);
+
     const lastNotifiedWorkspaceKeyRef = useRef<string | null>(null);
 
     const replaceWorkspaceActionRef = useRef(workspace.actions.replaceWorkspace);
@@ -872,10 +882,12 @@ export default function FullIDE(props: FullIDEProps) {
                  * until React hits maximum update depth.
                  */
                 suppressWorkspaceEchoKeyRef.current = nextNotifyKey;
+                suppressNextWorkspaceEchoRef.current = true;
                 replaceWorkspaceActionRef.current(nextWorkspace);
             }
         } else {
             suppressWorkspaceEchoKeyRef.current = null;
+            suppressNextWorkspaceEchoRef.current = true;
 
             resetWorkspaceForLanguageActionRef.current(
                 forcedLanguage ?? workspaceLanguageRef.current,
@@ -892,7 +904,11 @@ export default function FullIDE(props: FullIDEProps) {
         const current = workspace.derived.currentWorkspace;
         const currentKey = currentWorkspaceNotifyKey;
 
-        if (suppressWorkspaceEchoKeyRef.current === currentKey) {
+        if (
+            suppressNextWorkspaceEchoRef.current ||
+            suppressWorkspaceEchoKeyRef.current === currentKey
+        ) {
+            suppressNextWorkspaceEchoRef.current = false;
             suppressWorkspaceEchoKeyRef.current = null;
             lastNotifiedWorkspaceKeyRef.current = currentKey;
             return;

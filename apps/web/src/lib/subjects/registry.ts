@@ -5,7 +5,10 @@ import type {
 } from "@/lib/subjects/types";
 import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
 import { TOPIC_MANIFESTS as PYTHON_TOPIC_MANIFESTS } from "@/lib/subjects/python/topics.generated";
+import { TOPIC_MANIFESTS as PYTHON_V2_TOPIC_MANIFESTS } from "@/lib/subjects/python-v2/topics.generated";
+import { TOPIC_MANIFESTS as PYTHON_DATA_FUNCTIONS_TOPIC_MANIFESTS } from "@/lib/subjects/python-data-functions/topics.generated";
 import { TOPIC_MANIFESTS as SQL_TOPIC_MANIFESTS } from "@/lib/subjects/sql/topics.generated";
+import { TOPIC_MANIFESTS as SQL_V2_TOPIC_MANIFESTS } from "@/lib/subjects/sql-v2/topics.generated";
 import type { SlimTopicManifest } from "@/lib/subjects/_core/subjectManifestTypes";
 
 function indexBy<T extends { slug: string }>(items: readonly T[]) {
@@ -58,8 +61,15 @@ function getTopicManifestForSubject(
     switch (subjectSlug) {
         case "python":
             return PYTHON_TOPIC_MANIFESTS[topicId] ?? null;
+        case "python-v2":
+            return PYTHON_V2_TOPIC_MANIFESTS[topicId] ?? null;
+        case "python-data-functions":
+        case "python--python-data-functions--draft":
+            return PYTHON_DATA_FUNCTIONS_TOPIC_MANIFESTS[topicId] ?? null;
         case "sql":
             return SQL_TOPIC_MANIFESTS[topicId] ?? null;
+        case "sql-v2":
+            return SQL_V2_TOPIC_MANIFESTS[topicId] ?? null;
         default:
             return null;
     }

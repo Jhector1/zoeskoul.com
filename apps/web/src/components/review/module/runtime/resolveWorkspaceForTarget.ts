@@ -50,8 +50,14 @@ export type EntryWorkspaceFallback = {
   item?: unknown;
   starterCode?: unknown;
   starterFiles?: unknown;
-  starterWorkspace?: WorkspaceStateV2 | null;
-  workspace?: WorkspaceStateV2 | null;
+
+  /**
+   * Keep these unknown because ReviewTargetEntry stores manifest-derived
+   * workspace fields as unknown. The resolver already narrows them with
+   * isWorkspace(...) before use.
+   */
+  starterWorkspace?: unknown;
+  workspace?: unknown;
 };
 export type LocalDraftWorkspaceState = {
   targetKey: string;
@@ -981,11 +987,33 @@ export function createManifestWorkspaceDefinition(args: {
       entryFile,
   );
 
-  const hasEntryFile = starterFiles.some(
-    (file) => normalizePath(file.path, entryFile) === entryFile,
+  const hasFullManifestWorkspace = Boolean(
+      isWorkspace(manifest.workspace) ||
+      isWorkspace((manifest as any).initialWorkspace) ||
+      isWorkspace((manifest as any).starterWorkspace) ||
+      isWorkspace(args.entry?.starterWorkspace) ||
+      isWorkspace(args.entry?.workspace),
   );
 
-  if (!hasEntryFile) {
+  const hasStarterAssets = Boolean(
+      starterCode.trim() ||
+      hasUsableStarterFilesValue(starterFiles) ||
+      hasUsableStarterFilesValue(fixtureFiles) ||
+      hasFullManifestWorkspace,
+  );
+
+  const requested = Boolean(args.workspaceRequested === true || hasStarterAssets);
+
+  const hasEntryFile = starterFiles.some(
+      (file) => normalizePath(file.path, entryFile) === entryFile,
+  );
+
+  /**
+   * Do not manufacture an empty main.py for non-tool cards.
+   * A normal reading card with workspaceRequested=false and no manifest assets
+   * must resolve to null, not an empty workspace.
+   */
+  if (!hasEntryFile && requested) {
     starterFiles = [
       {
         path: entryFile,
@@ -995,21 +1023,9 @@ export function createManifestWorkspaceDefinition(args: {
     ];
   }
 
-  const combinedFiles = mergeNormalizedStarterFiles(
-    [starterFiles, fixtureFiles],
-    entryFile,
-  );
-
-  const requested =
-    args.workspaceRequested === true ||
-    Boolean(
-      starterCode.trim() ||
-        hasUsableStarterFilesValue(starterFiles) ||
-        hasUsableStarterFilesValue(fixtureFiles) ||
-        isWorkspace(manifest.workspace) ||
-        isWorkspace((manifest as any).initialWorkspace) ||
-        isWorkspace((manifest as any).starterWorkspace),
-    );
+  const combinedFiles = requested
+      ? mergeNormalizedStarterFiles([starterFiles, fixtureFiles], entryFile)
+      : [];
 
   const fullManifestWorkspace = firstWorkspace(
       manifest.workspace,

@@ -515,8 +515,17 @@ async function gotoFileIoExercise(page: Page) {
 }
 
 test("python file I/O exercise check uses the visible editor workspace and fixture files without requiring Run first", async ({
-    page,
-}) => {
+                                                                                                                                  page,
+                                                                                                                              }) => {
+    /**
+     * This test needs to verify Check first, then Run on the SAME exercise.
+     * If auto-advance is enabled, a correct Check moves from quiz9 to quiz10
+     * before Run, and the test starts running the next exercise's workspace.
+     */
+    await page.addInitScript(() => {
+        window.localStorage.setItem("learnoir.quiz.autoAdvance", "0");
+    });
+
     await installReviewChromeMocks(page);
     const { runPayloads, validatePayloads } = await installWorkspacePayloadMocks(page);
 
@@ -533,6 +542,22 @@ test("python file I/O exercise check uses the visible editor workspace and fixtu
     await expect(mainNode).toHaveAttribute("data-node-entry", "true");
     await expect(dataNode).toHaveAttribute("data-node-kind", "file");
 
+    /**
+     * Defensive UI-level disable too, in case another test/user state caused
+     * the mounted toggle to ignore the init-script value.
+     */
+    const autoAdvanceToggle = page.getByLabel(/auto-advance/i).first();
+    if (await autoAdvanceToggle.count()) {
+        try {
+            if (await autoAdvanceToggle.isChecked()) {
+                await autoAdvanceToggle.uncheck();
+            }
+        } catch {
+            // Some implementations expose the label text but not a native checkbox.
+            // The init-script above is the source of truth for this test.
+        }
+    }
+
     await editor.fill(SOLUTION_CODE);
 
     await expect
@@ -545,11 +570,17 @@ test("python file I/O exercise check uses the visible editor workspace and fixtu
     const checkButton = page.getByTestId("review-practice-submit-button");
     await expect(checkButton).toBeVisible({ timeout: 20_000 });
     await expect(checkButton).toBeEnabled({ timeout: 20_000 });
+
+    /**
+     * Check must use the visible editor workspace directly, without requiring
+     * Run first.
+     */
     await checkButton.click();
 
     await expect(page.getByTestId("review-practice-result-correct")).toBeVisible({
         timeout: 20_000,
     });
+
     await expect(page.locator("body")).not.toContainText("FileNotFoundError", {
         timeout: 10_000,
     });
@@ -577,6 +608,23 @@ test("python file I/O exercise check uses the visible editor workspace and fixtu
         ]),
     );
     expect(JSON.stringify(lastValidatePayload)).not.toContain("stale code");
+
+    /**
+     * Critical regression assertion:
+     * after a correct Check, this test must still be on quiz9.
+     * Otherwise Run would execute quiz10 and the expected data.txt output
+     * would be invalid.
+     */
+    await expect(page).toHaveURL(/\/exercise\/quiz9(?:\?.*)?$/, {
+        timeout: 10_000,
+    });
+    await expect(page.getByTestId("tools-file-node-data.txt")).toBeVisible({
+        timeout: 10_000,
+    });
+    await expect(page.getByTestId("tools-file-node-main.py")).toHaveAttribute(
+        "data-node-active",
+        "true",
+    );
 
     await expect(runButton).toBeVisible({ timeout: 20_000 });
     await expect(runButton).toBeEnabled({ timeout: 20_000 });

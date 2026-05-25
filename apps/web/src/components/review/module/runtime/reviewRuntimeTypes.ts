@@ -1,6 +1,7 @@
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SavedSketchState } from "@/components/sketches/subjects/types";
 
+import type { ReviewTargetEntry } from "./reviewTargetRegistry";
 export type CardStateKey = string;
 export type ExerciseStateKey = string;
 export type UnknownRecord = Record<string, unknown>;
@@ -194,6 +195,7 @@ export type ReviewRuntimeActions = {
     cardId: string;
     manifest?: unknown;
     saved?: unknown;
+    entry?: ReviewTargetEntry | null;
   }) => void;
 
   patchExercise: (

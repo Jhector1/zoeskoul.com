@@ -7,6 +7,9 @@ import { isEmptyPracticeAnswer } from "@/components/review/quiz/hooks/useQuizPra
 import type { VectorPadState } from "@/components/vectorpad/types";
 
 import ExerciseRenderer from "@/components/practice/ExerciseRenderer";
+import {
+  shouldSkipEmbeddedEnsureExercise,
+} from "@/components/practice/ExerciseRenderer";
 import { exerciseDebug, summarizeExercisePatch } from "@/components/review/module/runtime/exerciseDebug";
 import PracticeHelpPanel from "@/components/practice/PracticeHelpPanel";
 import { useOptionalReviewTools } from "@/components/review/module/context/ReviewToolsContext";
@@ -17,6 +20,7 @@ import {
   normalizeWorkspaceLanguage,
   stateLanguageMatches,
 } from "@/components/review/module/runtime/workspaceCodeSource";
+import { resolveExerciseWorkspace } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
 
 import { useTaggedT } from "@/i18n/tagged";
@@ -241,14 +245,26 @@ export default function QuizPracticeCard(props: {
     if (lastEnsureRuntimeExerciseKeyRef.current === ensureKey) return;
 
     const existing = useReviewRuntimeStore.getState().exercises[exerciseKeyForTools];
+    const manifestStarterWorkspace = resolveExerciseWorkspace({
+      language: manifestLanguage,
+      manifest: ex,
+    });
 
     if (
-        existing &&
-        stateLanguageMatches(
-            existing,
-            manifestLanguage,
-            getWorkspaceFromAnyState(existing),
-        )
+        shouldSkipEmbeddedEnsureExercise({
+          existing:
+            existing &&
+            stateLanguageMatches(
+              existing,
+              manifestLanguage,
+              getWorkspaceFromAnyState(existing),
+            )
+              ? existing
+              : null,
+          manifestLanguage,
+          manifestStarterWorkspace,
+          manifestStarterCode: (ex as any).starterCode,
+        })
     ) {
       lastEnsureRuntimeExerciseKeyRef.current = ensureKey;
       return;

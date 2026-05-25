@@ -531,14 +531,67 @@ function selectReadyRuntimeWorkspace(
             workspace: readyWorkspace,
             updatedAt: Number(runtime?.updatedAt ?? 0),
             protectionRank: reviewRuntimeProtectionRank(runtime),
+            runtime,
         }
         : null;
 }
+
+function runtimeWorkspaceTargetKeyOf(runtime: any) {
+    const value =
+        runtime?.targetKey ??
+        runtime?.ownerKey ??
+        runtime?.exerciseKey ??
+        runtime?.cardRuntimeKey ??
+        null;
+
+    return value == null ? null : String(value);
+}
+
+function runtimeCandidateMatchesTarget(
+    candidate: {
+        runtime?: any;
+    } | null,
+    targetKey: string | null | undefined,
+) {
+    if (!candidate) return false;
+
+    const normalizedTargetKey = targetKey == null ? null : String(targetKey);
+    if (!normalizedTargetKey) return true;
+
+    const candidateTargetKey = runtimeWorkspaceTargetKeyOf(candidate.runtime);
+    if (!candidateTargetKey) return true;
+
+    return candidateTargetKey === normalizedTargetKey;
+}
+
+function mergeMissingFilesFromRuntimeCandidates(
+    selectedWorkspace: WorkspaceStateV2 | null | undefined,
+    candidates: Array<{
+        workspace: WorkspaceStateV2;
+        runtime?: any;
+    } | null>,
+    targetKey: string | null | undefined,
+) {
+    let mergedWorkspace = selectedWorkspace ?? null;
+
+    for (const candidate of candidates) {
+        if (!candidate?.workspace) continue;
+        if (!runtimeCandidateMatchesTarget(candidate, targetKey)) continue;
+        mergedWorkspace = mergeMissingFilesFromRuntimeWorkspace(
+            mergedWorkspace,
+            candidate.workspace,
+        );
+    }
+
+    return mergedWorkspace;
+}
+
 export function pickDirectReviewRuntimeWorkspace(args: {
     editorRuntime: any;
     exerciseRuntime: any;
     normalizedToolWorkspace: WorkspaceStateV2 | null | undefined;
     effectiveLanguage: string | null | undefined;
+    targetKey?: string | null;
 }) {
     const editorCandidate = selectReadyRuntimeWorkspace(
         args.editorRuntime,
@@ -548,8 +601,12 @@ export function pickDirectReviewRuntimeWorkspace(args: {
         args.exerciseRuntime,
         args.effectiveLanguage,
     );
+    const readyCandidates = [editorCandidate, exerciseCandidate].filter(
+        (candidate): candidate is NonNullable<typeof candidate> =>
+            runtimeCandidateMatchesTarget(candidate, args.targetKey),
+    );
 
-    const userOwnedCandidates = [editorCandidate, exerciseCandidate]
+    const userOwnedCandidates = readyCandidates
         .filter(
             (candidate): candidate is NonNullable<typeof candidate> =>
                 Boolean(candidate && candidate.protectionRank >= 2),
@@ -557,10 +614,15 @@ export function pickDirectReviewRuntimeWorkspace(args: {
         .sort((a, b) => b.updatedAt - a.updatedAt);
 
     if (userOwnedCandidates.length > 0) {
-        return userOwnedCandidates[0]?.workspace ?? null;
+        const selectedCandidate = userOwnedCandidates[0] ?? null;
+        return mergeMissingFilesFromRuntimeCandidates(
+            selectedCandidate?.workspace ?? null,
+            readyCandidates.filter((candidate) => candidate !== selectedCandidate),
+            args.targetKey,
+        );
     }
 
-    const correctCandidates = [editorCandidate, exerciseCandidate]
+    const correctCandidates = readyCandidates
         .filter(
             (candidate): candidate is NonNullable<typeof candidate> =>
                 Boolean(candidate && candidate.protectionRank === 1),
@@ -568,15 +630,28 @@ export function pickDirectReviewRuntimeWorkspace(args: {
         .sort((a, b) => b.updatedAt - a.updatedAt);
 
     if (correctCandidates.length > 0) {
-        return correctCandidates[0]?.workspace ?? null;
+        const selectedCandidate = correctCandidates[0] ?? null;
+        return mergeMissingFilesFromRuntimeCandidates(
+            selectedCandidate?.workspace ?? null,
+            readyCandidates.filter((candidate) => candidate !== selectedCandidate),
+            args.targetKey,
+        );
     }
 
     if (editorCandidate) {
-        return editorCandidate.workspace;
+        return mergeMissingFilesFromRuntimeCandidates(
+            editorCandidate.workspace,
+            readyCandidates.filter((candidate) => candidate !== editorCandidate),
+            args.targetKey,
+        );
     }
 
     if (exerciseCandidate) {
-        return exerciseCandidate.workspace;
+        return mergeMissingFilesFromRuntimeCandidates(
+            exerciseCandidate.workspace,
+            readyCandidates.filter((candidate) => candidate !== exerciseCandidate),
+            args.targetKey,
+        );
     }
 
     /**
@@ -727,6 +802,44 @@ function workspaceStructureKeyOf(workspace: WorkspaceStateV2 | null | undefined)
         files,
         folders,
     });
+}
+
+function workspaceFilePathsForDebug(workspace: WorkspaceStateV2 | null | undefined) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return [];
+    }
+
+    const folderPathById = new Map<string, string>();
+
+    let changed = true;
+    while (changed) {
+        changed = false;
+
+        for (const node of workspace.nodes as any[]) {
+            if (!node || node.kind !== "folder") continue;
+
+            const id = String(node.id ?? "");
+            if (!id || folderPathById.has(id)) continue;
+
+            const name = String(node.name ?? "");
+            const parentId = node.parentId == null ? null : String(node.parentId);
+            if (parentId && !folderPathById.has(parentId)) continue;
+
+            const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+            folderPathById.set(id, parentPath ? `${parentPath}/${name}` : name);
+            changed = true;
+        }
+    }
+
+    return (workspace.nodes as any[])
+        .filter((node) => node?.kind === "file")
+        .map((node) => {
+            const name = String(node?.name ?? "");
+            const parentId = node?.parentId == null ? null : String(node.parentId);
+            const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+            return parentPath ? `${parentPath}/${name}` : name;
+        })
+        .sort((a, b) => a.localeCompare(b));
 }
 
 function extractWorkspaceSnapshot(workspace: WorkspaceStateV2 | null) {
@@ -933,11 +1046,21 @@ export default function CodeToolPane(props: {
     const subscribedExerciseRuntime = useReviewRuntimeStore((s) =>
         exerciseKey ? s.exercises[exerciseKey] ?? null : null,
     );
+    const subscribedCardRuntime = useReviewRuntimeStore((s) =>
+        cardRuntimeKey ? s.cards[cardRuntimeKey] ?? null : null,
+    );
     const exerciseRuntime =
         subscribedExerciseRuntime ??
         (
             exerciseKey
                 ? useReviewRuntimeStore.getState().exercises[exerciseKey] ?? null
+                : null
+        );
+    const cardRuntime =
+        subscribedCardRuntime ??
+        (
+            cardRuntimeKey
+                ? useReviewRuntimeStore.getState().cards[cardRuntimeKey] ?? null
                 : null
         );
 
@@ -949,36 +1072,22 @@ export default function CodeToolPane(props: {
      * targets. If the current exercise/card runtime has a ready workspace,
      * that workspace is the only source for FullIDE.
      */
-    const editorRuntimeHasUserWorkspace = Boolean(
-        editorRuntime?.workspaceStatus === "ready" &&
-        forceWorkspaceHasContent(editorRuntime.workspace) &&
-        (
-            editorRuntime.userEdited === true ||
-            editorRuntime.workspaceOrigin === "user" ||
-            editorRuntime.workspaceOrigin === "saved"
-        ),
-    );
-
-    const exerciseRuntimeHasUserWorkspace = Boolean(
-        exerciseRuntime?.workspaceStatus === "ready" &&
-        forceWorkspaceHasContent(exerciseRuntime.workspace) &&
-        (
-            exerciseRuntime.userEdited === true ||
-            exerciseRuntime.workspaceOrigin === "user" ||
-            exerciseRuntime.workspaceOrigin === "saved"
-        ),
-    );
-
-    const reviewDirectWorkspace =
-        exerciseRuntimeHasUserWorkspace && !editorRuntimeHasUserWorkspace
-            ? exerciseRuntime?.workspace ?? null
-            : editorRuntime?.workspaceStatus === "ready" &&
-            forceWorkspaceHasContent(editorRuntime.workspace)
-                ? editorRuntime.workspace
-                : exerciseRuntime?.workspaceStatus === "ready" &&
-                forceWorkspaceHasContent(exerciseRuntime.workspace)
-                    ? exerciseRuntime.workspace
-                    : null;
+    const canonicalReviewRuntime = isExerciseEditorMode
+        ? exerciseRuntime
+        : isSketchEditorMode
+            ? (
+                cardRuntime
+                    ? {
+                        targetKey: cardRuntimeKey,
+                        workspaceStatus: cardRuntime.workspaceStatus,
+                        workspaceOrigin: cardRuntime.workspaceOrigin,
+                        userEdited: cardRuntime.userEdited,
+                        updatedAt: cardRuntime.updatedAt,
+                        workspace: cardRuntime.toolWorkspace ?? null,
+                    }
+                    : null
+            )
+            : null;
     useEffect(() => {
         if (!reviewToolPaneDebugEnabled()) return;
 
@@ -1016,29 +1125,23 @@ export default function CodeToolPane(props: {
     );
 
     const normalizedToolWorkspace = normalizedToolPair.workspace;
-
-    const reviewDirectWorkspaceReady = !!reviewDirectWorkspace;
     const hasEditorTarget = Boolean(
         hasBindableEditorTarget ||
-        forceWorkspaceHasContent(editorRuntime?.workspace) ||
-        forceWorkspaceHasContent(exerciseRuntime?.workspace) ||
+        forceWorkspaceHasContent(canonicalReviewRuntime?.workspace) ||
         forceWorkspaceHasContent(normalizedToolWorkspace),
     );
 
     const isReviewRouteMode = Boolean(resolvedEditorOwnerKey && hasBindableEditorTarget);
 
 
-    const exerciseRuntimeLanguage =
+    const runtimeLanguage =
         isReviewRouteMode && typeof exerciseRuntime?.language === "string"
             ? exerciseRuntime.language
-            : null;
-
-    const editorRuntimeLanguage =
-        isReviewRouteMode && typeof editorRuntime?.language === "string"
-            ? editorRuntime.language
-            : null;
-
-    const runtimeLanguage = exerciseRuntimeLanguage ?? editorRuntimeLanguage;
+            : isReviewRouteMode && typeof cardRuntime?.toolLang === "string"
+                ? cardRuntime.toolLang
+                : isReviewRouteMode && typeof editorRuntime?.language === "string"
+                    ? editorRuntime.language
+                    : null;
 
     const normalizedToolWorkspaceLanguage =
         typeof normalizedToolWorkspace?.language === "string"
@@ -1068,6 +1171,28 @@ export default function CodeToolPane(props: {
     const effectiveLanguage = shouldPreferBoundToolLanguage
         ? (normalizedToolWorkspaceLanguage as RunnerLanguage)
         : runtimeLanguage ?? toolLang;    const isSql = effectiveLanguage === "sql";
+    const reviewTargetKey = resolvedEditorOwnerKey ?? exerciseKey ?? cardRuntimeKey ?? null;
+    const reviewDirectWorkspace = useMemo(
+        () =>
+            isReviewRouteMode
+                ? pickDirectReviewRuntimeWorkspace({
+                    targetKey: reviewTargetKey,
+                    editorRuntime,
+                    exerciseRuntime: canonicalReviewRuntime,
+                    normalizedToolWorkspace,
+                    effectiveLanguage,
+                })
+                : null,
+        [
+            canonicalReviewRuntime,
+            editorRuntime,
+            effectiveLanguage,
+            isReviewRouteMode,
+            normalizedToolWorkspace,
+            reviewTargetKey,
+        ],
+    );
+    const reviewDirectWorkspaceReady = !!reviewDirectWorkspace;
     const ideShell = useMemo(
         () => resolveFullIDEConfigFromLearningIde({ ideConfig }),
         [ideConfig],
@@ -1125,18 +1250,11 @@ export default function CodeToolPane(props: {
     }, [isReviewRouteMode, resolvedEditorOwnerKey, workspaceContextKey]);
 
     const exerciseWorkspaceReady = Boolean(
-        exerciseKey &&
-        (
-            forceWorkspaceHasContent(editorRuntime?.workspace) ||
-            forceWorkspaceHasContent(exerciseRuntime?.workspace)
-        )
+        exerciseKey && forceWorkspaceHasContent(exerciseRuntime?.workspace),
     );
 
-
-
     const cardWorkspaceReady = Boolean(
-        cardRuntimeKey &&
-        forceWorkspaceHasContent(editorRuntime?.workspace)
+        cardRuntimeKey && forceWorkspaceHasContent(cardRuntime?.toolWorkspace),
     );
 
     function createDefaultToolWorkspace(language: string | null | undefined): WorkspaceStateV2 {
@@ -1168,17 +1286,13 @@ export default function CodeToolPane(props: {
         };
     }
 
-
-    const runtimeWorkspaceError = Boolean(isReviewRouteMode && editorRuntime?.workspaceStatus === "error");
+    const runtimeWorkspaceError = Boolean(
+        isReviewRouteMode && canonicalReviewRuntime?.workspaceStatus === "error",
+    );
 
     const directRuntimeWorkspace = useMemo(() => {
         if (isReviewRouteMode) {
-            return pickDirectReviewRuntimeWorkspace({
-                editorRuntime,
-                exerciseRuntime,
-                normalizedToolWorkspace,
-                effectiveLanguage,
-            });
+            return reviewDirectWorkspace;
         }
 
         // Normal tool/sketch route: blank file workspace is still valid.
@@ -1194,45 +1308,22 @@ export default function CodeToolPane(props: {
         return createDefaultToolWorkspace(effectiveLanguage);
     }, [
         isReviewRouteMode,
-        editorRuntime?.workspaceStatus,
-        editorRuntime?.workspace,
-        editorRuntime?.userEdited,
-        editorRuntime?.workspaceOrigin,
-        editorRuntime?.updatedAt,
-        exerciseRuntime?.workspaceStatus,
-        exerciseRuntime?.workspace,
-        exerciseRuntime?.userEdited,
-        exerciseRuntime?.workspaceOrigin,
-        exerciseRuntime?.updatedAt,
+        reviewDirectWorkspace,
         normalizedToolWorkspace,
         effectiveLanguage,
     ]);
     const finalReviewRuntimeUserEdited = Boolean(
-        editorRuntime?.userEdited === true ||
-        editorRuntime?.workspaceOrigin === "user" ||
-        editorRuntime?.workspaceOrigin === "saved" ||
-        exerciseRuntime?.userEdited === true ||
-        exerciseRuntime?.workspaceOrigin === "user" ||
-        exerciseRuntime?.workspaceOrigin === "saved",
+        canonicalReviewRuntime?.userEdited === true ||
+        canonicalReviewRuntime?.workspaceOrigin === "user" ||
+        canonicalReviewRuntime?.workspaceOrigin === "saved",
     );
     const finalReviewRuntimeProtected = Boolean(
-        isUserOwnedReviewRuntimeState(editorRuntime) ||
-        isUserOwnedReviewRuntimeState(exerciseRuntime),
+        isUserOwnedReviewRuntimeState(canonicalReviewRuntime),
     );
 
-    const finalReviewRuntimeOrigin =
-        editorRuntime?.workspaceOrigin === "user" ||
-        editorRuntime?.workspaceOrigin === "saved"
-            ? editorRuntime.workspaceOrigin
-            : exerciseRuntime?.workspaceOrigin === "user" ||
-            exerciseRuntime?.workspaceOrigin === "saved"
-                ? exerciseRuntime.workspaceOrigin
-                : editorRuntime?.workspaceOrigin ?? exerciseRuntime?.workspaceOrigin;
+    const finalReviewRuntimeOrigin = canonicalReviewRuntime?.workspaceOrigin;
 
-    const finalReviewRuntimeUpdatedAt = Math.max(
-        Number(editorRuntime?.updatedAt ?? 0),
-        Number(exerciseRuntime?.updatedAt ?? 0),
-    );
+    const finalReviewRuntimeUpdatedAt = Number(canonicalReviewRuntime?.updatedAt ?? 0);
 
     const finalReviewWorkspace = useMemo(() => {
         if (
@@ -1285,8 +1376,8 @@ export default function CodeToolPane(props: {
         !runtimeWorkspaceError &&
         (
             exerciseKey
-                ? !editorRuntime || editorRuntime.workspaceStatus === "pending"
-                : editorRuntime?.workspaceStatus === "pending"
+                ? canonicalReviewRuntime?.workspaceStatus === "pending"
+                : canonicalReviewRuntime?.workspaceStatus === "pending"
         ),
     );
 
@@ -1585,7 +1676,15 @@ export default function CodeToolPane(props: {
         lastHandledStructureKeyRef.current = nextStructureKey;
 
         const isDirectUserWorkspaceEdit = meta?.origin === "user";
-
+        /**
+         * In review route mode, the runtime store owns the resolved workspace.
+         * FullIDE may emit a sync/programmatic workspace immediately after hydration.
+         * Do not write that echo back into runtime/progress; only real user edits
+         * should update the review workspace from the editor.
+         */
+        if (isReviewRouteMode && !isDirectUserWorkspaceEdit) {
+            return;
+        }
         if (
             isDirectUserWorkspaceEdit &&
             isReviewRouteMode &&
@@ -1772,6 +1871,33 @@ export default function CodeToolPane(props: {
      */
     const fullIdeKey = `${workspaceOwnerKey}:${effectiveLanguage}:${usesWorkspaceShell ? "workspace" : "single"}`;
     const fullIdeLanguage = asWorkspaceLanguage(effectiveLanguage);
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        (window as any).__ZOE_REVIEW_WORKSPACE_DEBUG__ = {
+            editorPaths: workspaceFilePathsForDebug(editorRuntime?.workspace),
+            exercisePaths: workspaceFilePathsForDebug(canonicalReviewRuntime?.workspace),
+            directPaths: workspaceFilePathsForDebug(directRuntimeWorkspace),
+            finalPaths: workspaceFilePathsForDebug(finalReviewWorkspace),
+            editorStatus: String(editorRuntime?.workspaceStatus ?? ""),
+            exerciseStatus: String(canonicalReviewRuntime?.workspaceStatus ?? ""),
+            reviewTargetKey,
+            resolvedEditorOwnerKey,
+            exerciseKey,
+            cardRuntimeKey,
+        };
+    }, [
+        canonicalReviewRuntime?.workspace,
+        canonicalReviewRuntime?.workspaceStatus,
+        cardRuntimeKey,
+        directRuntimeWorkspace,
+        editorRuntime?.workspace,
+        editorRuntime?.workspaceStatus,
+        exerciseKey,
+        finalReviewWorkspace,
+        resolvedEditorOwnerKey,
+        reviewTargetKey,
+    ]);
 
     return (
         <div ref={ref} className="flex h-full min-h-0 w-full flex-col overflow-hidden">

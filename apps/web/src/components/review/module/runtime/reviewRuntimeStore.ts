@@ -12,6 +12,8 @@ import type {
 } from "./reviewRuntimeTypes";
 import {getCardStateKey} from "./exerciseKeys";
 import {resolveExerciseWorkspace} from "./exerciseWorkspaceResolver";
+import type { ReviewTargetEntry } from "./reviewTargetRegistry";
+import { resolveWorkspaceForTarget } from "./resolveWorkspaceForTarget";
 import {resolveCourseLanguage, resolveCourseSqlRunnerConfig} from "./courseProfiles";
 import {resolveDeterministicEditorSource, type ReviewDeterministicEditorSource} from "./deterministicEditorSource";
 import {resolveSketchState} from "./sketchResolver";
@@ -294,6 +296,126 @@ function workspaceContentKey(workspace: WorkspaceStateV2 | null | undefined) {
         entryPath: entryNode ? filePath(entryNode) : null,
         files,
     });
+}
+
+function workspacePathForNode(
+    nodes: WorkspaceStateV2["nodes"],
+    nodeId: string | null | undefined,
+): string {
+    if (!nodeId) return "";
+
+    const byId = new Map(nodes.map((node) => [String(node.id ?? ""), node] as const));
+    const parts: string[] = [];
+    let currentId: string | null = String(nodeId);
+
+    while (currentId) {
+        const node = byId.get(currentId);
+        if (!node) break;
+        const name = String((node as any).name ?? "");
+        if (name) parts.unshift(name);
+        currentId = (node as any).parentId == null ? null : String((node as any).parentId);
+    }
+
+    return parts.join("/");
+}
+
+function ensureWorkspaceFolderForRuntime(args: {
+    workspace: WorkspaceStateV2;
+    folderPath: string;
+}): string | null {
+    const parts = String(args.folderPath ?? "").split("/").filter(Boolean);
+    let parentId: string | null = null;
+    let currentPath = "";
+
+    for (const part of parts) {
+        currentPath = currentPath ? `${currentPath}/${part}` : part;
+
+        const existing = args.workspace.nodes.find(
+            (node: any) =>
+                node?.kind === "folder" &&
+                node?.name === part &&
+                (node?.parentId ?? null) === parentId,
+        );
+
+        if (existing) {
+            parentId = String(existing.id);
+            continue;
+        }
+
+        const folderId = `folder:${currentPath}`;
+        args.workspace.nodes.push({
+            id: folderId,
+            kind: "folder",
+            name: part,
+            parentId,
+            createdAt: 0,
+            updatedAt: 0,
+        } as any);
+
+        if (!args.workspace.expanded.includes(folderId as any)) {
+            args.workspace.expanded.push(folderId as any);
+        }
+
+        parentId = folderId;
+    }
+
+    return parentId;
+}
+
+function mergeMissingFilesFromWorkspace(
+    baseWorkspace: WorkspaceStateV2 | null | undefined,
+    sourceWorkspace: WorkspaceStateV2 | null | undefined,
+): WorkspaceStateV2 | null {
+    if (!baseWorkspace || baseWorkspace.version !== 2) {
+        return baseWorkspace ?? sourceWorkspace ?? null;
+    }
+
+    if (!sourceWorkspace || sourceWorkspace.version !== 2) {
+        return baseWorkspace;
+    }
+
+    const merged: WorkspaceStateV2 = {
+        ...baseWorkspace,
+        nodes: Array.isArray(baseWorkspace.nodes)
+            ? baseWorkspace.nodes.map((node: any) => ({ ...node }))
+            : [],
+        openTabs: [...(baseWorkspace.openTabs ?? [])],
+        expanded: [...(baseWorkspace.expanded ?? [])],
+    };
+
+    const existingPaths = new Set(
+        merged.nodes
+            .filter((node: any) => node?.kind === "file")
+            .map((node: any) => workspacePathForNode(merged.nodes, String(node.id ?? "")))
+            .filter(Boolean),
+    );
+
+    for (const node of sourceWorkspace.nodes as any[]) {
+        if (node?.kind !== "file") continue;
+
+        const path = workspacePathForNode(sourceWorkspace.nodes, String(node.id ?? ""));
+        if (!path || existingPaths.has(path)) continue;
+
+        const segments = path.split("/");
+        const name = segments.pop() || String(node.name ?? "file.txt");
+        const parentId = ensureWorkspaceFolderForRuntime({
+            workspace: merged,
+            folderPath: segments.join("/"),
+        });
+
+        merged.nodes.push({
+            ...node,
+            id: `file:${path}`,
+            name,
+            parentId,
+            createdAt: node.createdAt ?? 0,
+            updatedAt: node.updatedAt ?? 0,
+        } as any);
+
+        existingPaths.add(path);
+    }
+
+    return merged;
 }
 
 
@@ -629,6 +751,207 @@ function findTargetRegistryEntry(
 
     return best?.entry ?? null;
 }
+
+function buildRouteExerciseManifestFromEntry(
+    registryEntry: ReviewTargetEntry | null | undefined,
+): RuntimeManifestRecord | null {
+    const baseManifest = asManifestRecord(
+        registryEntry?.toolManifest ?? registryEntry?.item ?? null,
+    );
+
+    if (!baseManifest) return null;
+
+    const baseWorkspace = asRecord(baseManifest.workspace);
+    const baseRecipe = asRecord(baseManifest.recipe);
+
+    return {
+        ...baseManifest,
+
+        starterCode:
+            registryEntry?.starterCode ??
+            baseManifest.starterCode ??
+            (typeof baseWorkspace?.starterCode === "string"
+                ? baseWorkspace.starterCode
+                : undefined) ??
+            (typeof baseRecipe?.starterCode === "string"
+                ? baseRecipe.starterCode
+                : undefined),
+
+        starterFiles:
+            registryEntry?.starterFiles ??
+            baseManifest.starterFiles ??
+            baseWorkspace?.starterFiles ??
+            baseRecipe?.starterFiles,
+
+        files:
+            baseManifest.files ??
+            baseWorkspace?.files,
+
+        initialFiles:
+            baseManifest.initialFiles ??
+            baseWorkspace?.initialFiles,
+
+        workspaceFiles:
+            baseManifest.workspaceFiles ??
+            baseWorkspace?.workspaceFiles,
+
+        workspace: baseManifest.workspace ?? null,
+        recipe: baseManifest.recipe,
+        runtime: baseManifest.runtime,
+    } as RuntimeManifestRecord;
+}
+
+function runtimePathForNode(nodes: any[], node: any): string {
+    if (!node || node.kind !== "file") return "";
+
+    const names: string[] = [String(node.name ?? "")].filter(Boolean);
+    let parentId = node.parentId ?? null;
+
+    while (parentId) {
+        const parent = nodes.find((candidate) => candidate?.id === parentId);
+        if (!parent) break;
+
+        names.unshift(String(parent.name ?? ""));
+        parentId = parent.parentId ?? null;
+    }
+
+    return names.join("/");
+}
+
+function ensureRuntimeFolder(args: {
+    workspace: WorkspaceStateV2;
+    folderPath: string;
+}): string | null {
+    const parts = args.folderPath.split("/").filter(Boolean);
+    let parentId: string | null = null;
+    let currentPath = "";
+
+    for (const part of parts) {
+        currentPath = currentPath ? `${currentPath}/${part}` : part;
+
+        const existing = args.workspace.nodes.find(
+            (node: any) =>
+                node?.kind === "folder" &&
+                node?.name === part &&
+                (node?.parentId ?? null) === parentId,
+        );
+
+        if (existing) {
+            parentId = String(existing.id);
+            continue;
+        }
+
+        const folderId = `folder:${currentPath.replace(/\//g, "__")}`;
+        const existingIds = new Set(args.workspace.nodes.map((node: any) => String(node?.id ?? "")));
+
+        let uniqueFolderId = folderId;
+        let index = 2;
+
+        while (existingIds.has(uniqueFolderId)) {
+            uniqueFolderId = `${folderId}:${index}`;
+            index += 1;
+        }
+
+        args.workspace.nodes.push({
+            id: uniqueFolderId,
+            kind: "folder",
+            name: part,
+            parentId,
+            createdAt: 0,
+            updatedAt: 0,
+        } as any);
+
+        if (!args.workspace.expanded.includes(uniqueFolderId as any)) {
+            args.workspace.expanded.push(uniqueFolderId as any);
+        }
+
+        parentId = uniqueFolderId;
+    }
+
+    return parentId;
+}
+
+function mergeMissingFilesFromResolvedWorkspace(args: {
+    baseWorkspace: WorkspaceStateV2 | null | undefined;
+    resolvedWorkspace: WorkspaceStateV2 | null | undefined;
+}): WorkspaceStateV2 | null {
+    const base = args.baseWorkspace;
+    const resolved = args.resolvedWorkspace;
+
+    if (!base || base.version !== 2 || !Array.isArray(base.nodes)) {
+        return base ?? resolved ?? null;
+    }
+
+    if (!resolved || resolved.version !== 2 || !Array.isArray(resolved.nodes)) {
+        return base;
+    }
+
+    const baseNodes = base.nodes as any[];
+    const resolvedNodes = resolved.nodes as any[];
+
+    const existingPaths = new Set(
+        baseNodes
+            .filter((node) => node?.kind === "file")
+            .map((node) => runtimePathForNode(baseNodes, node))
+            .filter(Boolean),
+    );
+
+    const missingFiles = resolvedNodes
+        .filter((node) => node?.kind === "file")
+        .map((node) => ({
+            node,
+            path: runtimePathForNode(resolvedNodes, node),
+        }))
+        .filter(({ path }) => path && !existingPaths.has(path));
+
+    if (missingFiles.length === 0) {
+        return base;
+    }
+
+    const merged: WorkspaceStateV2 = {
+        ...base,
+        nodes: baseNodes.map((node) => ({ ...node })),
+        openTabs: [...(base.openTabs ?? [])],
+        expanded: [...(base.expanded ?? [])],
+    };
+
+    for (const { node, path } of missingFiles) {
+        const parts = path.split("/");
+        const name = parts.pop() || String(node.name ?? "file.txt");
+        const folderPath = parts.join("/");
+        const parentId = ensureRuntimeFolder({
+            workspace: merged,
+            folderPath,
+        });
+
+        const baseId = `file:${path.replace(/\//g, "__")}`;
+        const existingIds = new Set(merged.nodes.map((candidate: any) => String(candidate?.id ?? "")));
+
+        let fileId = baseId;
+        let index = 2;
+
+        while (existingIds.has(fileId)) {
+            fileId = `${baseId}:${index}`;
+            index += 1;
+        }
+
+        merged.nodes.push({
+            ...node,
+            id: fileId,
+            name,
+            parentId,
+            createdAt: node.createdAt ?? 0,
+            updatedAt: node.updatedAt ?? 0,
+        } as any);
+
+        existingPaths.add(path);
+    }
+
+    return merged;
+}
+
+
+
 function filenameForLanguage(language: WorkspaceStateV2["language"]) {
     const lang = String(language ?? "").trim().toLowerCase();
 
@@ -1173,13 +1496,16 @@ function resolveEditorRuntimeSeed(args: {
             useExistingRuntimeWorkspace
         )
     ) {
-        const restoredWorkspace = mergeManifestFixturesIntoSavedWorkspace({
-            savedWorkspace: args.existing.workspace,
-            language: resolvedLanguage,
-            manifest,
-            entry: args.source.entry,
+        // const restoredWorkspace = mergeManifestFixturesIntoSavedWorkspace({
+        //     savedWorkspace: args.existing.workspace,
+        //     language: resolvedLanguage,
+        //     manifest,
+        //     entry: args.source.entry,
+        // });
+        const restoredWorkspace = mergeMissingFilesFromResolvedWorkspace({
+            baseWorkspace: args.existing.workspace,
+            resolvedWorkspace: starterWorkspace,
         });
-
         reviewDebug("review-runtime source-selected", {
             key: args.source.ownerKey,
             entryFound: !!args.source.entry,
@@ -1192,6 +1518,8 @@ function resolveEditorRuntimeSeed(args: {
             sourceType: "existing-runtime",
         });
 
+
+
         return {
             workspaceStatus: args.existing.workspaceStatus ?? "ready",
             workspaceSeedMode: args.existing.workspaceSeedMode ?? "restored",
@@ -1199,10 +1527,12 @@ function resolveEditorRuntimeSeed(args: {
             userEdited: Boolean(args.existing.userEdited ?? isUserWorkspaceState(args.existing)),
             starterHash: args.existing.starterHash ?? starterWorkspaceHash,
             workspace: restoredWorkspace,
-            code: deriveCodeFromWorkspace(restoredWorkspace) || args.existing.code || "",
+            code:
+                args.existing.code ??
+                deriveCodeFromWorkspace(restoredWorkspace),
             stdin:
                 args.existing.stdin ??
-                (typeof restoredWorkspace.stdin === "string" ? restoredWorkspace.stdin : ""),
+                (typeof restoredWorkspace?.stdin === "string" ? restoredWorkspace.stdin : ""),
             language: args.existing.language ?? resolvedLanguage,
         };
     }
@@ -1414,102 +1744,76 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 target: manifest,
             });
 
-            const starterWorkspace = manifest
-                ? resolveExerciseWorkspace({
-                    language: resolvedLanguage,
-                    manifest,
-                })
-                : null;
-
-            const starterHash = workspaceHash(starterWorkspace);
-
-            const savedWorkspace =
-                isWorkspace(saved?.workspace)
-                    ? saved.workspace
-                    : isWorkspace(saved?.codeWorkspace)
-                        ? saved.codeWorkspace
-                        : isWorkspace(saved?.ideWorkspace)
-                            ? saved.ideWorkspace
-                            : null;
-
-            const useExistingWorkspace = shouldUseSavedUserWorkspace({
-                savedState: existing,
-                savedWorkspace: existing?.workspace ?? null,
-                starterWorkspace,
+            const resolvedWorkspace = resolveWorkspaceForTarget({
+                targetKey: exerciseKey,
+                targetKind: "exercise",
                 language: resolvedLanguage,
+                manifest,
+                entry: args.entry ?? null,
+                workspaceRequested: true,
+                savedCandidates: [
+                    existing
+                        ? {
+                            workspace: existing.workspace ?? existing.codeWorkspace ?? existing.ideWorkspace ?? null,
+                            code: existing.code ?? existing.source ?? null,
+                            stdin: existing.stdin ?? existing.codeStdin ?? null,
+                            language: existing.language ?? existing.lang ?? null,
+                            lang: existing.lang ?? existing.language ?? null,
+                            userEdited: existing.userEdited,
+                            workspaceOrigin: existing.workspaceOrigin ?? null,
+                            starterHash: existing.starterHash ?? null,
+                            updatedAt: existing.updatedAt ?? null,
+                        }
+                        : null,
+                    saved
+                        ? {
+                            workspace: isWorkspace(saved?.workspace)
+                                ? saved.workspace
+                                : isWorkspace(saved?.codeWorkspace)
+                                    ? saved.codeWorkspace
+                                    : isWorkspace(saved?.ideWorkspace)
+                                        ? saved.ideWorkspace
+                                        : null,
+                            code: saved?.code ?? saved?.source ?? null,
+                            stdin: saved?.stdin ?? saved?.codeStdin ?? null,
+                            language: saved?.language ?? saved?.lang ?? null,
+                            lang: saved?.lang ?? saved?.language ?? null,
+                            userEdited: saved?.userEdited,
+                            workspaceOrigin: saved?.workspaceOrigin ?? null,
+                            starterHash: saved?.starterHash ?? null,
+                            updatedAt: saved?.updatedAt ?? null,
+                        }
+                        : null,
+                ].filter(Boolean) as any,
             });
 
-            const useSavedWorkspace = shouldUseSavedUserWorkspace({
-                savedState: saved,
-                savedWorkspace,
-                starterWorkspace,
-                language: resolvedLanguage,
-            });
-
-            const selectedWorkspaceBeforeFixtureMerge =
-                useExistingWorkspace
-                    ? existing?.workspace ?? null
-                    : useSavedWorkspace
-                        ? savedWorkspace
-                        : starterWorkspace;
-
-            /**
-             * Critical:
-             * Existing/saved exercise workspaces may be old one-file snapshots.
-             * They should preserve learner-authored main.py, but they must not hide
-             * required runtime fixture files from the current manifest, such as data.txt.
-             */
-            const selectedWorkspace =
-                selectedWorkspaceBeforeFixtureMerge && manifest
-                    ? mergeManifestFixturesIntoSavedWorkspace({
-                        savedWorkspace: selectedWorkspaceBeforeFixtureMerge,
-                        language: resolvedLanguage,
-                        manifest,
-                        entry: null,
-                    })
-                    : selectedWorkspaceBeforeFixtureMerge;
-
-            const selectedCode =
-                deriveCodeFromWorkspace(selectedWorkspace) ||
-                (useExistingWorkspace
-                    ? String(existing?.code ?? "")
-                    : useSavedWorkspace
-                        ? String(saved?.code ?? saved?.source ?? "")
-                        : "");
-
-            const selectedStdin =
-                typeof selectedWorkspace?.stdin === "string"
-                    ? selectedWorkspace.stdin
-                    : useExistingWorkspace
-                        ? String(existing?.stdin ?? existing?.codeStdin ?? "")
-                        : useSavedWorkspace
-                            ? String(saved?.stdin ?? saved?.codeStdin ?? "")
-                            : "";
+            const starterHash = resolvedWorkspace.starterHash;
+            const selectedWorkspace = resolvedWorkspace.workspace;
+            const selectedCode = resolvedWorkspace.code;
+            const selectedStdin = resolvedWorkspace.stdin;
 
             const workspaceStatus: ExerciseRuntimeState["workspaceStatus"] =
-                manifest && targetHasStarter(manifest) && !workspaceHasUsableFile(selectedWorkspace)
-                    ? "error"
-                    : selectedWorkspace
-                        ? "ready"
-                        : manifest
-                            ? "ready"
-                            : "pending";
+                selectedWorkspace
+                    ? "ready"
+                    : manifest
+                        ? resolvedWorkspace.source === "none" ? "error" : "ready"
+                        : "pending";
 
             const workspaceOrigin: WorkspaceOrigin =
-                useExistingWorkspace
-                    ? existing?.workspaceOrigin ?? "saved"
-                    : useSavedWorkspace
-                        ? (saved?.workspaceOrigin as WorkspaceOrigin) ?? "saved"
-                        : starterWorkspace
-                            ? "starter"
-                            : "empty";
+                resolvedWorkspace.source === "saved"
+                    ? (
+                        existing?.workspaceOrigin === "user" ||
+                        existing?.workspaceOrigin === "saved"
+                            ? existing.workspaceOrigin
+                            : (saved?.workspaceOrigin as WorkspaceOrigin) ?? "saved"
+                    )
+                    : resolvedWorkspace.source === "manifest"
+                        ? "starter"
+                        : resolvedWorkspace.source === "empty"
+                            ? "empty"
+                            : existing?.workspaceOrigin ?? "saved";
 
-            const userEdited =
-                useExistingWorkspace
-                    ? Boolean(existing?.userEdited ?? isUserWorkspaceState(existing))
-                    : useSavedWorkspace
-                        ? Boolean(saved?.userEdited ?? isUserWorkspaceState(saved))
-                        : false;
+            const userEdited = resolvedWorkspace.source === "saved";
 
             const workspaceForState =
                 selectedWorkspace ??
@@ -1717,20 +2021,24 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 (effectivePatch.userEdited === true || effectivePatch.workspaceOrigin === "user")
                     ? workspaceWithEntryCode(rawIncomingWorkspace, effectivePatch.code)
                     : rawIncomingWorkspace;
+            const mergedIncomingWorkspace =
+                incomingWorkspace && existing?.workspace
+                    ? mergeMissingFilesFromWorkspace(incomingWorkspace, existing.workspace)
+                    : incomingWorkspace;
 
-            if (!existing && !incomingWorkspace) return state;
+            if (!existing && !mergedIncomingWorkspace) return state;
 
             const stdin =
                 typeof effectivePatch.stdin === "string"
                     ? effectivePatch.stdin
                     : typeof effectivePatch.codeStdin === "string"
                         ? effectivePatch.codeStdin
-                        : typeof incomingWorkspace?.stdin === "string"
-                            ? incomingWorkspace.stdin
+                        : typeof mergedIncomingWorkspace?.stdin === "string"
+                            ? mergedIncomingWorkspace.stdin
                             : existing?.stdin ?? "";
 
-            const normalized = incomingWorkspace
-                ? normalizeWorkspacePatch({workspace: incomingWorkspace, stdin})
+            const normalized = mergedIncomingWorkspace
+                ? normalizeWorkspacePatch({workspace: mergedIncomingWorkspace, stdin})
                 : null;
 
             const workspace = normalized?.workspace ?? existing!.workspace;
@@ -2412,6 +2720,22 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 userEdited: workspace ? true : existing.userEdited,
                 updatedAt: Date.now(),
             };
+            const exerciseWorkspaceWithFixtures =
+                existing.ownerKind === "exercise"
+                    ? mergeMissingFilesFromWorkspace(
+                        workspace ?? null,
+                        state.exercises[ownerKey]?.workspace ?? null,
+                    )
+                    : workspace ?? null;
+            const cardWorkspaceWithFixtures =
+                existing.ownerKind === "card"
+                    ? mergeMissingFilesFromWorkspace(
+                        workspace ?? null,
+                        state.cards[ownerKey]?.toolWorkspace ?? null,
+                    )
+                    : workspace ?? null;
+            const nextExerciseWorkspace = exerciseWorkspaceWithFixtures ?? workspace ?? null;
+            const nextCardWorkspace = cardWorkspaceWithFixtures ?? workspace ?? null;
 
             const nextPendingExerciseKeys = new Set(state.persistence.pendingExerciseKeys);
             const nextPendingCardKeys = new Set(state.persistence.pendingCardKeys);
@@ -2449,8 +2773,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                     updatedAt: now,
                     code: nextCode,
                     lang: existing.language,
-                    codeWorkspace: workspace ?? undefined,
-                    ideWorkspace: workspace ?? undefined,
+                    codeWorkspace: nextExerciseWorkspace ?? undefined,
+                    ideWorkspace: nextExerciseWorkspace ?? undefined,
                     codeStdin: nextStdin,
                 } as ExerciseRuntimeState;
 
@@ -2458,17 +2782,17 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                     ...state.exercises,
                     [ownerKey]: {
                         ...baseExercise,
-                        workspace: workspace ?? baseExercise.workspace,
+                        workspace: nextExerciseWorkspace ?? baseExercise.workspace,
                         stdin: nextStdin,
                         code: nextCode,
                         language: existing.language,
                         lang: existing.language,
-                        codeWorkspace: workspace ?? baseExercise.workspace,
-                        ideWorkspace: workspace ?? baseExercise.workspace,
+                        codeWorkspace: nextExerciseWorkspace ?? baseExercise.workspace,
+                        ideWorkspace: nextExerciseWorkspace ?? baseExercise.workspace,
                         codeStdin: nextStdin,
-                        workspaceStatus: workspace ? "ready" : baseExercise.workspaceStatus,
-                        workspaceOrigin: workspace ? "user" : baseExercise.workspaceOrigin,
-                        userEdited: workspace ? true : baseExercise.userEdited,
+                        workspaceStatus: nextExerciseWorkspace ? "ready" : baseExercise.workspaceStatus,
+                        workspaceOrigin: nextExerciseWorkspace ? "user" : baseExercise.workspaceOrigin,
+                        userEdited: nextExerciseWorkspace ? true : baseExercise.userEdited,
                         starterHash: baseExercise.starterHash ?? existing.starterHash,
                         status: baseExercise.status === "not_started" ? "in_progress" : baseExercise.status,
                         updatedAt: now,
@@ -2492,7 +2816,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                     userEdited: workspace ? true : existing.userEdited,
                     starterHash: existing.starterHash,
                     toolKey: existing.toolScopeKey || `${ownerKey}:general`,
-                    toolWorkspace: workspace,
+                    toolWorkspace: nextCardWorkspace,
                     toolCode: nextCode,
                     toolStdin: nextStdin,
                     toolLang: existing.language,
@@ -2504,14 +2828,14 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                     [ownerKey]: {
                         ...baseCard,
                         toolKey: baseCard.toolKey ?? existing.toolScopeKey ?? `${ownerKey}:general`,
-                        toolWorkspace: workspace,
+                        toolWorkspace: nextCardWorkspace,
                         toolCode: nextCode,
                         toolStdin: nextStdin,
                         toolLang: existing.language,
-                        workspaceStatus: workspace ? "ready" : baseCard.workspaceStatus,
-                        workspaceSeedMode: workspace ? "restored" : baseCard.workspaceSeedMode,
-                        workspaceOrigin: workspace ? "user" : baseCard.workspaceOrigin,
-                        userEdited: workspace ? true : baseCard.userEdited,
+                        workspaceStatus: nextCardWorkspace ? "ready" : baseCard.workspaceStatus,
+                        workspaceSeedMode: nextCardWorkspace ? "restored" : baseCard.workspaceSeedMode,
+                        workspaceOrigin: nextCardWorkspace ? "user" : baseCard.workspaceOrigin,
+                        userEdited: nextCardWorkspace ? true : baseCard.userEdited,
                         starterHash: baseCard.starterHash ?? existing.starterHash,
                         visited: true,
                         updatedAt: now,
@@ -2653,28 +2977,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         }
 
         if (target.kind === "exercise") {
-            const baseManifest = asManifestRecord(registryEntry?.toolManifest ?? registryEntry?.item ?? null);
-            const baseWorkspace = asRecord(baseManifest?.workspace);
-            const baseRecipe = asRecord(baseManifest?.recipe);
-            const routeExerciseManifest = baseManifest
-                ? {
-                    ...baseManifest,
-                    starterCode:
-                        registryEntry?.starterCode ??
-                        baseManifest?.starterCode ??
-                        (typeof baseWorkspace?.starterCode === "string" ? baseWorkspace.starterCode : undefined) ??
-                        (typeof baseRecipe?.starterCode === "string" ? baseRecipe.starterCode : undefined),
-                    starterFiles:
-                        registryEntry?.starterFiles ??
-                        baseManifest?.starterFiles ??
-                        baseWorkspace?.starterFiles ??
-                        baseRecipe?.starterFiles,
-                    workspace:
-                        registryEntry?.starterWorkspace ??
-                        baseManifest.workspace ??
-                        null,
-                }
-                : baseManifest;
+            const routeExerciseManifest = buildRouteExerciseManifestFromEntry(registryEntry);
             const existingExercise = get().exercises[target.exerciseStateKey] ?? null;
             const routeLanguage = resolveCourseLanguage({
                 subjectSlug: subjectSlug ?? "",
@@ -2714,6 +3017,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 topicId: target.topicId,
                 cardId: target.cardId,
                 manifest: routeExerciseManifest,
+                entry: registryEntry,
             });
             // Automatically bind if it's an exercise target
             get().bindExerciseTool(target.exerciseStateKey);

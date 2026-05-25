@@ -12,6 +12,7 @@ import {
   hasUsableStarterFilesValue,
   isUsableStarterCode
 } from "@/components/review/module/runtime/starterContent";
+import { resolveWorkspaceForTarget } from "@/components/review/module/runtime/resolveWorkspaceForTarget";
 
 type UnknownRecord = Record<string, unknown>;
 
@@ -704,117 +705,31 @@ export function resolveExerciseWorkspace(args: {
   saved?: WorkspaceStateV2 | null;
   entry?: import("./reviewTargetRegistry").ReviewTargetEntry | null;
 }): WorkspaceStateV2 {
-  const language = (args.language ||
-      args.entry?.language ||
-      "python") as WorkspaceLanguage;
-
-  const manifest = normalizeManifestShape(args.manifest ?? args.entry?.item ?? {});
-  const manifestWorkspace = isRecord(manifest.workspace) ? manifest.workspace : {};
-  const manifestRecipe = isRecord(manifest.recipe) ? manifest.recipe : {};
-
-  const starterFileSources = [
-    ...collectStarterFilesSources(manifest),
-    args.entry?.starterFiles,
-  ];
-
-
-
-
-  const entryFileSources = collectEntryFileSources({
-    manifest,
+  const language = (args.language || args.entry?.language || "python") as WorkspaceLanguage;
+  const resolved = resolveWorkspaceForTarget({
+    targetKey: args.entry?.targetKey ?? "exercise",
+    targetKind: "exercise",
+    language,
+    manifest: args.manifest ?? args.entry?.item ?? {},
     entry: args.entry,
+    workspaceRequested: true,
+    savedCandidates: args.saved
+      ? [
+          {
+            workspace: args.saved,
+            language,
+            lang: language,
+            userEdited: true,
+            workspaceOrigin: "saved",
+          },
+        ]
+      : [],
   });
 
-  const explicitEntryFile = getEntryFile({ manifest, language });
-  const entryFromStarterFiles = firstUsableStarterFilesSource(...entryFileSources)
-      ? entryFileSources
-      .map((source) => getEntryFileFromStarterFiles(source))
-      .find((path) => path.trim().length > 0) ?? ""
-      : "";
-
-
-
-
-  const entryFile = entryFromStarterFiles || explicitEntryFile;
-  const stdin = String(getInitialStdin(manifest) ?? "");
-
-  const fixtureFiles = mergeNormalizedStarterFiles(
-      collectWorkspaceFixtureFileSources(manifest),
-      entryFile,
-  );
-
-  const starterCode = pickNonBlankString(
-      getStarterCode(manifest),
-      args.entry?.starterCode,
-      manifestWorkspace.starterCode,
-      manifest.starterCode,
-      manifestRecipe.starterCode,
-  );
-
-  let starterFiles = mergeNormalizedStarterFiles(starterFileSources, entryFile);
-  const hasEntryFile = starterFiles.some(
-      (file) => normalizePath(file.path, entryFile) === entryFile,
-  );
-
-  if (!hasEntryFile) {
-    starterFiles = [
-      {
-        path: entryFile,
-        content: starterCode.trim() ? starterCode : "",
-      },
-      ...starterFiles,
-    ];
-  }
-
-  /**
-   * Preserve saved user work, but never let an old saved workspace hide required
-   * manifest fixture files such as data.txt.
-   *
-   * This fixes multi-file exercises where a saved workspace only contains
-   * main.py, while the current manifest requires additional read-only/input
-   * files for Run/Check.
-   */
-  if (isWorkspace(args.saved) && hasUsableWorkspaceContent(args.saved)) {
-    return mergeMissingFixtureFilesIntoSavedWorkspace({
-      saved: args.saved,
-      language,
-      fixtureFiles,
-    });
-  }
-
-  /**
-   * If the registry already has a complete starter workspace, use it.
-   */
-  if (args.entry?.starterWorkspace && isWorkspace(args.entry.starterWorkspace)) {
-    return cloneWorkspace(args.entry.starterWorkspace);
-  }
-
-  const savedFromManifest =
-      isWorkspace(manifest.workspace)
-          ? manifest.workspace
-          : manifest.initialWorkspace && isWorkspace(manifest.initialWorkspace)
-              ? manifest.initialWorkspace
-              : manifest.starterWorkspace && isWorkspace(manifest.starterWorkspace)
-                  ? manifest.starterWorkspace
-                  : null;
-
-  if (savedFromManifest) {
-    return cloneWorkspace(savedFromManifest);
-  }
-
-  if (starterFiles.length > 0) {
-    return buildWorkspaceFromStarterFiles({
-      language,
-      entryFile,
-      starterFiles,
-      stdin,
-    });
-  }
-
-  return buildDefaultWorkspace({
+  return resolved.workspace ?? buildDefaultWorkspace({
     language,
-    entryFile,
+    entryFile: defaultMainFile(language),
     code: "",
-    stdin,
+    stdin: "",
   });
 }

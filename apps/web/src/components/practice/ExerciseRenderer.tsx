@@ -36,6 +36,7 @@ import {
     normalizeWorkspaceLanguage,
     stateLanguageMatches,
 } from "@/components/review/module/runtime/workspaceCodeSource";
+import { resolveWorkspaceForTarget } from "@/components/review/module/runtime/resolveWorkspaceForTarget";
 
 type SqlTableSnapshot = {
     name: string;
@@ -221,6 +222,40 @@ function workspaceHasAnyFile(workspace: WorkspaceStateV2 | null | undefined) {
     return workspace.nodes.some((node: any) => node?.kind === "file");
 }
 
+function workspaceFilePaths(workspace: WorkspaceStateV2 | null | undefined) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return new Set<string>();
+    }
+
+    const nodes = workspace.nodes as any[];
+    const byId = new Map(nodes.map((node) => [String(node.id ?? ""), node] as const));
+
+    const pathForId = (nodeId: string | null | undefined) => {
+        if (!nodeId) return "";
+
+        const parts: string[] = [];
+        let currentId: string | null = String(nodeId);
+
+        while (currentId) {
+            const node = byId.get(currentId);
+            if (!node) break;
+
+            const name = String(node.name ?? "");
+            if (name) parts.unshift(name);
+            currentId = node.parentId == null ? null : String(node.parentId);
+        }
+
+        return parts.join("/");
+    };
+
+    return new Set(
+        nodes
+            .filter((node) => node?.kind === "file")
+            .map((node) => pathForId(String(node.id ?? "")))
+            .filter(Boolean),
+    );
+}
+
 function isUserOwnedWorkspaceState(value: any) {
     return (
         value?.userEdited === true ||
@@ -294,6 +329,16 @@ export function shouldSkipEmbeddedEnsureExercise(args: {
         workspaceHasNonBlankFile(existingWorkspace) ||
         Boolean(String(existing?.code ?? "").trim()) ||
         Boolean(String(existing?.source ?? "").trim());
+
+    const manifestPaths = workspaceFilePaths(manifestStarterWorkspace);
+    const existingPaths = workspaceFilePaths(existingWorkspace);
+    const existingCoversManifestFiles =
+        manifestPaths.size === 0 ||
+        Array.from(manifestPaths).every((path) => existingPaths.has(path));
+
+    if (!existingCoversManifestFiles) {
+        return false;
+    }
 
     if (existingHasContent) {
         return true;
@@ -668,16 +713,55 @@ function CodeInputWithTools(props: {
             curWorkspace,
         starterWorkspace: manifestStarterWorkspace,
     });
+    const resolvedTargetWorkspace = resolveWorkspaceForTarget({
+        targetKey: exerciseKey,
+        targetKind: "exercise",
+        language: manifestLanguage,
+        manifest: exercise,
+        workspaceRequested: true,
+        savedCandidates: [
+            compatibleStoreExercise
+                ? {
+                    targetKey: exerciseKey,
+                    workspace:
+                        compatibleStoreExercise.workspace ??
+                        compatibleStoreExercise.codeWorkspace ??
+                        compatibleStoreExercise.ideWorkspace ??
+                        null,
+                    code: compatibleStoreExercise.code ?? null,
+                    stdin: compatibleStoreExercise.stdin ?? compatibleStoreExercise.codeStdin ?? null,
+                    language: manifestLanguage,
+                    userEdited: compatibleStoreExercise.userEdited,
+                    workspaceOrigin: compatibleStoreExercise.workspaceOrigin,
+                    starterHash: compatibleStoreExercise.starterHash,
+                    updatedAt: compatibleStoreExercise.updatedAt,
+                  }
+                : null,
+            compatibleCurrentState
+                ? {
+                    targetKey: exerciseKey,
+                    workspace: curWorkspace,
+                    code: compatibleCurrentState.code ?? null,
+                    stdin: compatibleCurrentState.codeStdin ?? null,
+                    language: manifestLanguage,
+                    userEdited: compatibleCurrentState.userEdited,
+                    workspaceOrigin: compatibleCurrentState.workspaceOrigin,
+                    starterHash: compatibleCurrentState.starterHash,
+                    updatedAt: compatibleCurrentState.updatedAt,
+                  }
+                : null,
+        ].filter(Boolean) as any,
+    });
 
     const activeWorkspace = hydrateBlankWorkspaceFromStarter({
-        workspace: preferredWorkspace,
-        fallbackCode,
+        workspace: resolvedTargetWorkspace.workspace ?? preferredWorkspace,
+        fallbackCode: resolvedTargetWorkspace.code || fallbackCode,
         state: activeState,
     });
 
     const activeCode = deriveCodeOrStarterFallback({
         workspace: activeWorkspace,
-        fallbackCode,
+        fallbackCode: resolvedTargetWorkspace.code || fallbackCode,
         state: activeState,
     });
     const activeStdin =
