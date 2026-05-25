@@ -5,15 +5,6 @@
   "sectionSlug": "python-v2-0-setup-and-first-programs",
   "prefix": "pyv2_0",
   "minutes": 18,
-  "runtimeDefaults": {
-    "kind": "code",
-    "language": "python",
-    "supportsTerminal": false,
-    "supportsMultiFile": false,
-    "supportsFileSystem": false,
-    "supportsStdInStdOut": true,
-    "supportsPackageInstall": false
-  },
   "topic": {
     "labelKey": "topics.python-v2.python-v2-0.running-python-code.label",
     "summaryKey": "topics.python-v2.python-v2-0.running-python-code.summary"
@@ -23,14 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.running-python-code.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "sketch_run_cycle",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.running-python-code.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "sketch_print_and_strings",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-0.running-python-code.cards.sketch2.title",
+      "sketchId": "sketch_comments_and_errors",
       "height": 420
     },
     {
@@ -59,9 +57,45 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz9",
-            "titleKey": "topics.python-v2.python-v2-0.running-python-code.projectSteps.quiz9.title",
-            "exerciseKey": "quiz9",
+            "id": "ci_print_greeting",
+            "titleKey": "topics.python-v2.python-v2-0.running-python-code.projectSteps.ci_print_greeting.title",
+            "exerciseKey": "ci_print_greeting",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_two_lines",
+            "titleKey": "topics.python-v2.python-v2-0.running-python-code.projectSteps.ci_two_lines.title",
+            "exerciseKey": "ci_two_lines",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_comment_and_output",
+            "titleKey": "topics.python-v2.python-v2-0.running-python-code.projectSteps.ci_comment_and_output.title",
+            "exerciseKey": "ci_comment_and_output",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_fix_quotes",
+            "titleKey": "topics.python-v2.python-v2-0.running-python-code.projectSteps.ci_fix_quotes.title",
+            "exerciseKey": "ci_fix_quotes",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_print_expression",
+            "titleKey": "topics.python-v2.python-v2-0.running-python-code.projectSteps.ci_print_expression.title",
+            "exerciseKey": "ci_print_expression",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -73,25 +107,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "sketch_run_cycle",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.running-python-code.sketch1.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.running-python-code.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.running-python-code.sketch_run_cycle.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.running-python-code.sketch_run_cycle.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sketch_print_and_strings",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.running-python-code.sketch2.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.running-python-code.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.running-python-code.sketch_print_and_strings.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.running-python-code.sketch_print_and_strings.bodyMarkdown"
+    },
+    {
+      "id": "sketch_comments_and_errors",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-0.running-python-code.sketch_comments_and_errors.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.running-python-code.sketch_comments_and_errors.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc_runner_parts",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz1",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.sc_runner_parts",
       "optionIds": [
         "a",
         "b",
@@ -100,15 +140,51 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "quiz2",
+      "id": "sc_print_purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.sc_print_purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc_valid_print_lines",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz2",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.mc_valid_print_lines",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "mc_comments_behavior",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.mc_comments_behavior",
       "optionIds": [
         "a",
         "b",
@@ -119,17 +195,16 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       }
     },
     {
-      "id": "quiz3",
+      "id": "dr_run_steps",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz3",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.dr_run_steps",
       "tokenIds": [
         "t1",
         "t2",
@@ -145,125 +220,175 @@
       }
     },
     {
-      "id": "quiz4",
+      "id": "dr_program_flow",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz4",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.dr_program_flow",
       "tokenIds": [
         "t1",
-        "t2",
-        "t3"
+        "t2"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
-          "t2",
-          "t3"
+          "t2"
         ]
       }
     },
     {
-      "id": "quiz5",
+      "id": "fb_comment_symbol",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz5",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.fb_comment_symbol",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "print"
+        "value": "#"
       }
     },
     {
-      "id": "quiz6",
+      "id": "fb_print_output_word",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz6",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.fb_print_output_word",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "view"
+        "value": "Start"
       }
     },
     {
-      "id": "quiz7",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz7",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "d"
-        ]
-      }
-    },
-    {
-      "id": "quiz8",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz8",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
-      }
-    },
-    {
-      "id": "quiz9",
+      "id": "ci_print_greeting",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz9",
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_greeting",
       "language": "python",
-      "starterCode": "# Read a name from input\nname = input()\n\n# Print a greeting message",
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "# Read a name from input\nname = input()\n\n# Print a greeting message",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "# Read a name from input\nname = input()\n\n# Print a greeting message",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
+      "starterCode": "# Write your code below",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "Alice\n",
-            "stdout": "Hello, Alice!\n",
+            "stdin": "",
+            "stdout": "Hello, ZoeSkoul!\n",
             "match": "exact"
           },
           {
-            "stdin": "Bob\n",
-            "stdout": "Hello, Bob!\n",
+            "stdin": "",
+            "stdout": "Hello, ZoeSkoul!\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "# Read a name from input\nname = input()\n\n# Print a greeting message\nprint(\"Hello, \" + name + \"!\")"
+        "solutionCode": "print(\"Hello, ZoeSkoul!\")"
+      }
+    },
+    {
+      "id": "ci_two_lines",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_two_lines",
+      "language": "python",
+      "starterCode": "# Print two lines below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "First\nSecond\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "First\nSecond\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"First\")\nprint(\"Second\")"
+      }
+    },
+    {
+      "id": "ci_comment_and_output",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_comment_and_output",
+      "language": "python",
+      "starterCode": "# Add a comment here\n# Then write a print statement below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ready\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "Ready\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "# This is a comment\nprint(\"Ready\")"
+      }
+    },
+    {
+      "id": "ci_fix_quotes",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_fix_quotes",
+      "language": "python",
+      "starterCode": "print(",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Learning Python\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "Learning Python\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"Learning Python\")"
+      }
+    },
+    {
+      "id": "ci_print_expression",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_expression",
+      "language": "python",
+      "starterCode": "# Print the result of an addition",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "7\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "7\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(3 + 4)"
       }
     }
   ]

@@ -124,7 +124,81 @@ export type ReviewToolsValue = {
 const Ctx = createContext<ReviewToolsValue | null>(null);
 
 function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
-  return JSON.stringify(workspace ?? null);
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+    return JSON.stringify(workspace ?? null);
+  }
+
+  const folderPathById = new Map<string, string>();
+
+  let changed = true;
+  while (changed) {
+    changed = false;
+
+    for (const node of workspace.nodes as any[]) {
+      if (!node || node.kind !== "folder") continue;
+
+      const id = String(node.id ?? "");
+      if (!id || folderPathById.has(id)) continue;
+
+      const name = String(node.name ?? "");
+      const parentId = node.parentId == null ? null : String(node.parentId);
+      if (parentId && !folderPathById.has(parentId)) continue;
+
+      const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+      folderPathById.set(id, parentPath ? `${parentPath}/${name}` : name);
+      changed = true;
+    }
+  }
+
+  const nodePath = (node: any) => {
+    const name = String(node?.name ?? "");
+    const parentId = node?.parentId == null ? null : String(node.parentId);
+    const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+    return parentPath ? `${parentPath}/${name}` : name;
+  };
+
+  const files = (workspace.nodes as any[])
+    .filter((node) => node?.kind === "file")
+    .map((node) => ({
+      path: nodePath(node),
+      content: String(node.content ?? ""),
+    }))
+    .sort((a, b) => a.path.localeCompare(b.path));
+
+  const folders = (workspace.nodes as any[])
+    .filter((node) => node?.kind === "folder")
+    .map((node) => nodePath(node))
+    .sort((a, b) => a.localeCompare(b));
+
+  const activeNode = (workspace.nodes as any[]).find(
+    (node) => node?.kind === "file" && node.id === workspace.activeFileId,
+  );
+  const entryNode = (workspace.nodes as any[]).find(
+    (node) => node?.kind === "file" && node.id === workspace.entryFileId,
+  );
+  const openTabPaths = (workspace.openTabs ?? [])
+    .map((id) => (workspace.nodes as any[]).find((node) => node?.kind === "file" && node.id === id))
+    .filter(Boolean)
+    .map((node) => nodePath(node))
+    .sort((a, b) => a.localeCompare(b));
+  const expandedPaths = (workspace.expanded ?? [])
+    .map((id) => (workspace.nodes as any[]).find((node) => node?.kind === "folder" && node.id === id))
+    .filter(Boolean)
+    .map((node) => nodePath(node))
+    .sort((a, b) => a.localeCompare(b));
+
+  return JSON.stringify({
+    version: workspace.version,
+    language: workspace.language ?? null,
+    activePath: activeNode ? nodePath(activeNode) : null,
+    entryPath: entryNode ? nodePath(entryNode) : null,
+    openTabs: openTabPaths,
+    expanded: expandedPaths,
+    stdin: workspace.stdin ?? "",
+    leftPct: workspace.leftPct ?? null,
+    folders,
+    files,
+  });
 }
 
 function getWorkspaceEntryCode(workspace: WorkspaceStateV2 | null | undefined) {
@@ -164,9 +238,11 @@ function registerArgsKey(args: RegisterArgs | undefined) {
     code: args.code,
     stdin: args.stdin ?? "",
     ideConfig: args.ideConfig ?? null,
-    workspace: args.workspace ?? null,
+    workspaceKey: workspaceKeyOf(args.workspace ?? null),
     ownerCardId: args.ownerCardId ?? null,
     preferSnapshot: Boolean(args.preferSnapshot),
+    userEdited: Boolean(args.userEdited),
+    workspaceOrigin: args.workspaceOrigin ?? null,
     sqlDialect: args.sqlDialect ?? null,
     sqlDatasetId: args.sqlDatasetId ?? null,
     sqlSchemaSql: args.sqlSchemaSql ?? null,
@@ -540,6 +616,10 @@ export function ReviewToolsProvider({
                         ? patch.sqlPaneOptions
                         : cur.sqlPaneOptions,
             };
+
+            if (registerArgsKey(cur) === registerArgsKey(next)) {
+                return;
+            }
 
             registryRef.current.set(id, next);
             cur.onPatch?.(patch);

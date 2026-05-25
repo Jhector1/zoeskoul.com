@@ -5,7 +5,7 @@
     "catalogSlug": "python",
     "genKey": "python_part1",
     "order": 30,
-    "accessPolicy": "paid",
+    "accessPolicy": "free",
     "status": "active",
     "imagePublicId": null,
     "imageAlt": null,
@@ -14,8 +14,27 @@
     "meta": {
       "curriculum": {
         "plannedModuleCount": 4,
-        "isTerminalRelease": false,
-        "moreComingMessageKey": "subjects.python-v2.moreComingSoon"
+        "isTerminalRelease": true,
+        "moreComingMessageKey": "subjects.python-v2.moreComingSoon",
+        "finalCapstone": {
+          "titleKey": "subjects.python-v2.finalCapstone.title",
+          "descriptionKey": "subjects.python-v2.finalCapstone.description",
+          "requirementsKey": "subjects.python-v2.finalCapstone.requirements",
+          "skills": [
+            "input",
+            "variables",
+            "strings",
+            "conditionals",
+            "loops",
+            "for loops",
+            "range",
+            "accumulators",
+            "comparisons",
+            "output"
+          ],
+          "placement": "afterModule3",
+          "required": true
+        }
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,
@@ -39,9 +58,9 @@
       "order": 0,
       "titleKey": "modules.python-v2.python-v2-0.title",
       "descriptionKey": "modules.python-v2.python-v2-0.description",
-      "weekStart": null,
-      "weekEnd": null,
-      "accessOverride": null,
+      "weekStart": 1,
+      "weekEnd": 1,
+      "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "code",
         "language": "python",
@@ -57,12 +76,14 @@
         "outcomeKeys": [
           "modules.python-v2.python-v2-0.outcomes.0",
           "modules.python-v2.python-v2-0.outcomes.1",
-          "modules.python-v2.python-v2-0.outcomes.2"
+          "modules.python-v2.python-v2-0.outcomes.2",
+          "modules.python-v2.python-v2-0.outcomes.3"
         ],
         "whyKeys": [
           "modules.python-v2.python-v2-0.why.0",
           "modules.python-v2.python-v2-0.why.1"
-        ]
+        ],
+        "moduleReviewKey": "modules.python-v2.python-v2-0.moduleReview"
       },
       "sections": [
         {
@@ -115,9 +136,9 @@
       "order": 1,
       "titleKey": "modules.python-v2.python-v2-1.title",
       "descriptionKey": "modules.python-v2.python-v2-1.description",
-      "weekStart": null,
-      "weekEnd": null,
-      "accessOverride": null,
+      "weekStart": 2,
+      "weekEnd": 2,
+      "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "code",
         "language": "python",
@@ -135,12 +156,15 @@
         "outcomeKeys": [
           "modules.python-v2.python-v2-1.outcomes.0",
           "modules.python-v2.python-v2-1.outcomes.1",
-          "modules.python-v2.python-v2-1.outcomes.2"
+          "modules.python-v2.python-v2-1.outcomes.2",
+          "modules.python-v2.python-v2-1.outcomes.3"
         ],
         "whyKeys": [
           "modules.python-v2.python-v2-1.why.0",
           "modules.python-v2.python-v2-1.why.1"
-        ]
+        ],
+        "prerequisiteReminderKey": "modules.python-v2.python-v2-1.prerequisiteReminder",
+        "moduleReviewKey": "modules.python-v2.python-v2-1.moduleReview"
       },
       "sections": [
         {
@@ -193,8 +217,8 @@
       "order": 2,
       "titleKey": "modules.python-v2.python-v2-2.title",
       "descriptionKey": "modules.python-v2.python-v2-2.description",
-      "weekStart": null,
-      "weekEnd": null,
+      "weekStart": 3,
+      "weekEnd": 3,
       "accessOverride": null,
       "runtimeDefaults": {
         "kind": "code",
@@ -213,12 +237,15 @@
         "outcomeKeys": [
           "modules.python-v2.python-v2-2.outcomes.0",
           "modules.python-v2.python-v2-2.outcomes.1",
-          "modules.python-v2.python-v2-2.outcomes.2"
+          "modules.python-v2.python-v2-2.outcomes.2",
+          "modules.python-v2.python-v2-2.outcomes.3"
         ],
         "whyKeys": [
           "modules.python-v2.python-v2-2.why.0",
           "modules.python-v2.python-v2-2.why.1"
-        ]
+        ],
+        "prerequisiteReminderKey": "modules.python-v2.python-v2-2.prerequisiteReminder",
+        "moduleReviewKey": "modules.python-v2.python-v2-2.moduleReview"
       },
       "sections": [
         {
@@ -271,8 +298,8 @@
       "order": 3,
       "titleKey": "modules.python-v2.python-v2-3.title",
       "descriptionKey": "modules.python-v2.python-v2-3.description",
-      "weekStart": null,
-      "weekEnd": null,
+      "weekStart": 4,
+      "weekEnd": 4,
       "accessOverride": null,
       "runtimeDefaults": {
         "kind": "code",
@@ -291,12 +318,16 @@
         "outcomeKeys": [
           "modules.python-v2.python-v2-3.outcomes.0",
           "modules.python-v2.python-v2-3.outcomes.1",
-          "modules.python-v2.python-v2-3.outcomes.2"
+          "modules.python-v2.python-v2-3.outcomes.2",
+          "modules.python-v2.python-v2-3.outcomes.3"
         ],
         "whyKeys": [
           "modules.python-v2.python-v2-3.why.0",
           "modules.python-v2.python-v2-3.why.1"
-        ]
+        ],
+        "finalCapstoneKey": "subjects.python-v2.finalCapstone.title",
+        "prerequisiteReminderKey": "modules.python-v2.python-v2-3.prerequisiteReminder",
+        "moduleReviewKey": "modules.python-v2.python-v2-3.moduleReview"
       },
       "sections": [
         {
@@ -338,7 +369,8 @@
           "topics": [
             "while-loop-basics",
             "break-and-continue",
-            "loop-debugging"
+            "loop-debugging",
+            "mini-gradebook-capstone"
           ]
         }
       ]

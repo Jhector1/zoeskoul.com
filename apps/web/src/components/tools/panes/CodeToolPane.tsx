@@ -1640,7 +1640,8 @@ export default function CodeToolPane(props: {
     const handleWorkspaceChange = useCallback((
         workspace: WorkspaceStateV2 | null,
         meta?: { origin?: "user" | "sync" | "programmatic" },
-    ) => {        /**
+    ) => {
+        /**
          * FullIDE can briefly emit a null/blank workspace while its internal
          * workspace bridge is booting. In route-owned review mode the runtime
          * store is the source of truth, so that transient emission must not be
@@ -1651,6 +1652,25 @@ export default function CodeToolPane(props: {
             forceWorkspaceHasContent(finalReviewWorkspace) &&
             !forceWorkspaceHasContent(workspace)
         ) {
+            return;
+        }
+
+        const isDirectUserWorkspaceEdit = meta?.origin === "user";
+
+        /**
+         * Critical SQL/review-route guard:
+         *
+         * In review route mode, FullIDE is controlled by the runtime store.
+         * Programmatic/sync emissions from FullIDE are hydration echoes.
+         * Writing those echoes back into runtime/progress causes:
+         *
+         * runtime -> FullIDE hydrate -> sync emit -> runtime patch -> FullIDE hydrate -> ...
+         *
+         * That is the SQL maximum update depth loop.
+         *
+         * Only true user edits should flow from FullIDE back into review runtime.
+         */
+        if (isReviewRouteMode && !isDirectUserWorkspaceEdit) {
             return;
         }
 
@@ -1675,16 +1695,6 @@ export default function CodeToolPane(props: {
         lastHandledWorkspaceKeyRef.current = workspaceKey;
         lastHandledStructureKeyRef.current = nextStructureKey;
 
-        const isDirectUserWorkspaceEdit = meta?.origin === "user";
-        /**
-         * In review route mode, the runtime store owns the resolved workspace.
-         * FullIDE may emit a sync/programmatic workspace immediately after hydration.
-         * Do not write that echo back into runtime/progress; only real user edits
-         * should update the review workspace from the editor.
-         */
-        if (isReviewRouteMode && !isDirectUserWorkspaceEdit) {
-            return;
-        }
         if (
             isDirectUserWorkspaceEdit &&
             isReviewRouteMode &&
@@ -1733,11 +1743,6 @@ export default function CodeToolPane(props: {
                 language: effectiveLanguage,
                 lang: effectiveLanguage,
 
-                /**
-                 * FullIDE marks editor/terminal edits as origin=user. Passive
-                 * hydration emissions stay sync so they cannot overwrite an
-                 * already user-edited SQL workspace with a starter snapshot.
-                 */
                 updateOrigin: isDirectUserWorkspaceEdit ? "user" : "sync",
                 workspaceOrigin: isDirectUserWorkspaceEdit ? "user" : "sync",
 
@@ -1758,8 +1763,6 @@ export default function CodeToolPane(props: {
                     }
                     : {}),
             });
-
-
         }
 
         if (isReviewRouteMode) {

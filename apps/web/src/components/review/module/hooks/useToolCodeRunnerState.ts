@@ -786,34 +786,68 @@ export function useToolCodeRunnerState(args: {
                     existingExerciseWorkspaceKey !== latest.workspaceKey;
 
                 if (!shouldPreserveExistingExerciseWorkspace) {
-                    runtimeApi.patchExercise(exerciseKey, {
-                        language: latest.lang,
-                        lang: latest.lang,
-                        workspace: latest.workspace,
-                        codeWorkspace: latest.workspace,
-                        ideWorkspace: latest.workspace,
-                        stdin: latest.stdin,
-                        codeStdin: latest.stdin,
-                        code: workspaceCode || latest.code,
-                        source: workspaceCode || latest.code,
+                    const nextCode = workspaceCode || latest.code;
+                    const nextStarterHash = starterHash || existingExercise?.starterHash;
 
-                        userEdited: latestWorkspaceIsUserWork,
-                        workspaceOrigin: nextWorkspaceOrigin,
+                    /**
+                     * Critical SQL/navigation guard:
+                     *
+                     * During sidebar navigation, CodeToolPane/FullIDE cleanup can flush the same
+                     * workspace more than once. If we always patch the runtime store with a fresh
+                     * updatedAt timestamp, subscribers see a new runtime object, rehydrate FullIDE,
+                     * then flush again. SQL review tests catch this as a React maximum update
+                     * depth loop.
+                     *
+                     * Only patch the exercise runtime when something meaningful changed.
+                     */
+                    const existingRuntimeWorkspaceKey = workspaceKeyOf(
+                        existingExercise?.workspace ?? null,
+                    );
 
-                        workspaceStatus: "ready",
-                        starterHash: starterHash || existingExercise?.starterHash,
-                        updatedAt: Date.now(),
+                    const runtimeAlreadyMatches =
+                        existingExercise?.language === latest.lang &&
+                        existingExercise?.lang === latest.lang &&
+                        existingRuntimeWorkspaceKey === latest.workspaceKey &&
+                        existingExercise?.stdin === latest.stdin &&
+                        existingExercise?.codeStdin === latest.stdin &&
+                        existingExercise?.code === nextCode &&
+                        existingExercise?.source === nextCode &&
+                        existingExercise?.userEdited === latestWorkspaceIsUserWork &&
+                        existingExercise?.workspaceOrigin === nextWorkspaceOrigin &&
+                        existingExercise?.workspaceStatus === "ready" &&
+                        (existingExercise?.starterHash ?? "") === (nextStarterHash ?? "") &&
+                        existingExercise?.topicId === (existingExercise?.topicId ?? topicId) &&
+                        existingExercise?.exerciseKey === exerciseKey;
 
-                        subjectSlug: existingExercise?.subjectSlug,
-                        moduleSlug: existingExercise?.moduleSlug,
-                        sectionSlug: existingExercise?.sectionSlug,
-                        topicId: existingExercise?.topicId ?? topicId,
-                        cardId: existingExercise?.cardId,
-                        exerciseId: existingExercise?.exerciseId,
-                        exerciseKey,
-                    });
-                }
-            }
+                    if (!runtimeAlreadyMatches) {
+                        runtimeApi.patchExercise(exerciseKey, {
+                            language: latest.lang,
+                            lang: latest.lang,
+                            workspace: latest.workspace,
+                            codeWorkspace: latest.workspace,
+                            ideWorkspace: latest.workspace,
+                            stdin: latest.stdin,
+                            codeStdin: latest.stdin,
+                            code: nextCode,
+                            source: nextCode,
+
+                            userEdited: latestWorkspaceIsUserWork,
+                            workspaceOrigin: nextWorkspaceOrigin,
+
+                            workspaceStatus: "ready",
+                            starterHash: nextStarterHash,
+                            updatedAt: Date.now(),
+
+                            subjectSlug: existingExercise?.subjectSlug,
+                            moduleSlug: existingExercise?.moduleSlug,
+                            sectionSlug: existingExercise?.sectionSlug,
+                            topicId: existingExercise?.topicId ?? topicId,
+                            cardId: existingExercise?.cardId,
+                            exerciseId: existingExercise?.exerciseId,
+                            exerciseKey,
+                        });
+                    }
+                }            }
             setProgress((p: any) => {
                 const tp0: any = p?.topics?.[topicKey] ?? {};
                 const prevToolState = tp0?.toolState?.[toolKey] ?? null;
@@ -830,17 +864,17 @@ export function useToolCodeRunnerState(args: {
                 if (shouldPreservePreviousToolState) {
                     return p;
                 }
+                const workspaceCode = deriveEntryCode(latest.workspace);
+                const nextToolCode = workspaceCode || latest.code;
+
                 if (
                     prevToolState?.lang === latest.lang &&
-                    prevToolState?.code === latest.code &&
+                    prevToolState?.code === nextToolCode &&
                     prevToolState?.stdin === latest.stdin &&
                     workspaceKeyOf(prevToolState?.workspace ?? null) === latest.workspaceKey &&
-                    prevToolState?.starterHash === starterHash &&
-                    prevToolState?.userEdited === true &&
-                    (
-                        prevToolState?.workspaceOrigin === "user" ||
-                        prevToolState?.workspaceOrigin === "saved"
-                    ) &&
+                    (prevToolState?.starterHash ?? "") === (starterHash ?? "") &&
+                    prevToolState?.userEdited === latestWorkspaceIsUserWork &&
+                    prevToolState?.workspaceOrigin === nextWorkspaceOrigin &&
                     prevToolState?.sqlDialect === latest.sqlDialect &&
                     prevToolState?.sqlDatasetId === latest.sqlDatasetId &&
                     prevToolState?.sqlSchemaSql === latest.sqlSchemaSql &&
@@ -851,7 +885,7 @@ export function useToolCodeRunnerState(args: {
                     return p;
                 }
 
-                const workspaceCode = deriveEntryCode(latest.workspace);
+                // const workspaceCode = deriveEntryCode(latest.workspace);
 
 
 

@@ -4,222 +4,227 @@
       "python-v2-0": {
         "values-types-and-literals": {
           "label": "Values, Types, and Literals",
-          "summary": "Recognize strings, integers, floats, booleans, and None.",
+          "summary": "Recognize strings, integers, and floats as beginner value types.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Data Types"
+              "title": "What a value is"
             },
             "sketch1": {
-              "title": "Working with Strings"
+              "title": "Literals are values you type directly"
+            },
+            "sketch2": {
+              "title": "Expressions produce values"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Python Basics Project"
+              "title": "Practice printing and reading simple values"
             }
           },
           "projectSteps": {
-            "quiz6": {
-              "title": "Calculate the Sum"
+            "ci_print_literals": {
+              "title": "Print five literal values"
             },
-            "quiz7": {
-              "title": "Boolean Check"
+            "ci_print_expression": {
+              "title": "Print expression results"
             },
-            "quiz8": {
-              "title": "String Concatenation"
+            "ci_read_and_print": {
+              "title": "Read text and print it"
             },
-            "quiz9": {
-              "title": "Simple Calculator"
+            "ci_read_number_text": {
+              "title": "Read a number-looking input"
             },
-            "policy_code_input_1": {
-              "title": "Print whether a number is positive"
+            "ci_three_lines": {
+              "title": "Print mixed values"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "Identify the Data Type",
-              "prompt": "What is the data type of the value `42` in Python?",
+            "sc-string-literal": {
+              "title": "Pick the string literal",
+              "prompt": "Which option is a Python string literal?",
+              "hint": "Look for the value written with quotes.",
+              "help": {
+                "concept": "A string literal is text written directly in code and surrounded by quotes.",
+                "hint_1": "Numbers like `7` and `3.5` are not strings unless they are inside quotes.",
+                "hint_2": "Find the option that Python would treat as text because quote marks are part of the code."
+              },
+              "options": {
+                "a": "7",
+                "b": "\"cat\"",
+                "c": "3.5",
+                "d": "cat"
+              }
+            },
+            "sc-float-value": {
+              "title": "Identify the float",
+              "prompt": "Which value is a float literal in Python?",
+              "hint": "A float usually has a decimal point.",
+              "help": {
+                "concept": "A float is a number with a decimal point, such as `2.5` or `0.0`.",
+                "hint_1": "Do not choose a quoted value, because quotes make it a string.",
+                "hint_2": "Find the numeric option written with a decimal point and no quotes."
+              },
+              "options": {
+                "a": "\"3.0\"",
+                "b": "3",
+                "c": "3.5",
+                "d": "\"cat\""
+              }
+            },
+            "mc-boolean-values": {
+              "title": "Choose number literals",
+              "prompt": "Which options are number literals in Python? Choose all correct answers.",
+              "hint": "Numbers are written without quotes.",
+              "help": {
+                "concept": "Integer and float literals are values written directly in code, such as `7` and `2.5`.",
+                "hint_1": "Quoted text is a string, not a number.",
+                "hint_2": "Choose the values Python can treat as numbers right away."
+              },
+              "options": {
+                "a": "7",
+                "b": "\"7\"",
+                "c": "2.5",
+                "d": "\"two\""
+              }
+            },
+            "mc-valid-literals": {
+              "title": "Choose valid beginner literals",
+              "prompt": "Which options are valid Python literals from this topic? Choose all correct answers.",
+              "hint": "This topic focuses on strings, integers, and floats.",
+              "help": {
+                "concept": "Strings, integers, and floats can all be written directly as literals.",
+                "hint_1": "Choose quoted text, whole numbers, and decimal numbers.",
+                "hint_2": "Do not choose an unfinished or unquoted word."
+              },
+              "options": {
+                "a": "\"hello\"",
+                "b": "42",
+                "c": "4.2",
+                "d": "hello"
+              }
+            },
+            "dr-type-order": {
+              "title": "Order beginner value examples",
+              "prompt": "Arrange these examples from string to integer to float to arithmetic expression to printed output idea.",
+              "hint": "Start with quoted text, then whole number, then decimal number.",
+              "help": {
+                "concept": "Beginner Python values include strings, integers, and floats. Expressions can produce those values.",
+                "hint_1": "A string uses quotes.",
+                "hint_2": "A float has a decimal point."
+              },
+              "tokens": {
+                "t1": "\"cat\"",
+                "t2": "42",
+                "t3": "3.14",
+                "t4": "2 + 3",
+                "t5": "print the result"
+              }
+            },
+            "dr-expression-steps": {
+              "title": "Order the reading steps",
+              "prompt": "Put these steps in a sensible order for understanding `print(2 + 3)`.",
+              "hint": "First notice the outer command, then the expression inside it, then the result.",
+              "help": {
+                "concept": "To read a simple print statement, identify the print call, evaluate the expression inside, and then determine what appears in the output panel.",
+                "hint_1": "The arithmetic happens inside the parentheses before the final output appears.",
+                "hint_2": "Begin with recognizing `print`, then compute the inside value, and end with the displayed result."
+              },
+              "tokens": {
+                "t1": "Notice that `print(...)` will display a value",
+                "t2": "Evaluate `2 + 3`",
+                "t3": "Get the value `5`",
+                "t4": "Show `5` in the output panel"
+              }
+            },
+            "fb-none-literal": {
+              "title": "Complete a string literal",
+              "prompt": "Choose the text that completes the string literal.",
+              "hint": "A string literal uses quotes around text.",
+              "help": {
+                "concept": "A string is text inside quotes.",
+                "hint_1": "Choose the word that belongs inside the quotes.",
+                "hint_2": "The completed code should print one word."
+              },
+              "template": "print(\"[blank1]\")",
+              "choices": [
+                "hello",
+                "42",
+                "2.5",
+                "print"
+              ]
+            },
+            "fb-quoted-text": {
+              "title": "Complete the string",
+              "prompt": "Fill in the blank so the code prints a string literal.",
+              "hint": "A string literal needs quotes around the text.",
+              "help": {
+                "concept": "Strings are text values written inside quotes, while unquoted words are not string literals.",
+                "hint_1": "Choose the option where the letters are surrounded by quote marks.",
+                "hint_2": "The correct choice is text written directly in code, not a number and not an unquoted word."
+              },
+              "template": "print([blank1])",
+              "choices": [
+                "hello",
+                "\"hello\"",
+                "5",
+                "3.5"
+              ]
+            },
+            "ci-print-literals": {
+              "title": "Print five literal values",
+              "prompt": "Write Python code that prints these three values on separate lines in this order: the string `\"Zoe\"`, the integer `7`, and the float `2.5`.",
+              "hint": "Use one `print()` line for each value.",
+              "help": {
+                "concept": "This exercise checks whether you can print strings, integers, and floats.",
+                "hint_1": "The string needs quotes. The integer and float do not need quotes.",
+                "hint_2": "Print each value on its own line."
+              },
+              "starterCode": "# TODO: print the five values in order"
+            },
+            "ci-print-expression": {
+              "title": "Print expression results",
+              "prompt": "Write Python code that prints the result of `2 + 3` on the first line and the result of `1.5 + 2.5` on the second line.",
+              "hint": "Put each expression inside its own `print(...)` call.",
+              "help": {
+                "concept": "An expression produces a value, and `print(...)` shows that value in the output panel.",
+                "hint_1": "The first expression uses integers, and the second uses decimal numbers.",
+                "hint_2": "You need two print lines, each containing one addition expression."
+              },
+              "starterCode": "# TODO: print the two expression results"
+            },
+            "ci-read-and-print": {
+              "title": "Read text and print it",
+              "prompt": "Write Python code that reads one line of input and prints it exactly as it was entered.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "# TODO: read one line and print it"
+            },
+            "ci-read-number-text": {
+              "title": "Read a number-looking input",
+              "prompt": "Write Python code that reads one line of input and prints `You typed:` followed by the exact input on the same line. Treat the input as text.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "options": {
-                "a": "String",
-                "b": "Integer",
-                "c": "Float",
-                "d": "Boolean"
-              }
+              "starterCode": "# TODO: read input and print it after the label"
             },
-            "quiz2": {
-              "title": "Select All String Literals",
-              "prompt": "Which of the following are string literals in Python?",
-              "hint": "String literals are enclosed in quotes.",
+            "ci-three-lines": {
+              "title": "Print mixed values",
+              "prompt": "Write Python code that prints three lines: the string `\"start\"`, then the result of `4 + 1`, then the string `\"done\"`.",
+              "hint": "Use three `print()` lines.",
               "help": {
-                "concept": "Strings are sequences of characters enclosed in quotes.",
-                "hint_1": "Look for values enclosed in single or double quotes.",
-                "hint_2": "String literals can be enclosed in either single or double quotes."
+                "concept": "A program can print different kinds of values one after another, including strings and expression results.",
+                "hint_1": "Use one `print()` statement per line of output.",
+                "hint_2": "Print the text first, then the computed number, then the final text."
               },
-              "options": {
-                "a": "'Hello'",
-                "b": "42",
-                "c": "3.14",
-                "d": "\"World\""
-              }
-            },
-            "quiz3": {
-              "title": "Order of Operations",
-              "prompt": "Arrange the following operations in the order they are evaluated in Python.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "Addition",
-                "t2": "Multiplication",
-                "t3": "Parentheses",
-                "t4": "Division"
-              }
-            },
-            "quiz4": {
-              "title": "Assigning a Float",
-              "prompt": "Complete the assignment to store a float value in the variable `pi`.",
-              "hint": "Use a decimal number for a float.",
-              "help": {
-                "concept": "Floats are numbers with a decimal point.",
-                "hint_1": "A float has a decimal point, unlike an integer.",
-                "hint_2": "Use a number like `the missing term` to represent a float."
-              },
-              "template": "pi = [blank1]",
-              "choices": [
-                "3.14",
-                "42",
-                "Lesson notes panel",
-                "True"
-              ]
-            },
-            "quiz5": {
-              "title": "Print a Greeting",
-              "prompt": "What is the output of this Python code?\n\n```python\nprint('Hello, Python!')\n```",
-              "hint": "Trace what print sends to the output panel.",
-              "help": {
-                "concept": "A print statement shows the final value or text that the code produces.",
-                "hint_1": "Read the expression inside print and decide what value it becomes.",
-                "hint_2": "Choose the option that exactly matches the printed output, including punctuation."
-              },
-              "options": {
-                "a": "Hello, Python!",
-                "b": "Lesson notes panel",
-                "c": "No output",
-                "d": "SyntaxError"
-              }
-            },
-            "quiz6": {
-              "title": "Calculate the Sum",
-              "prompt": "Write a Python program that reads two numbers from input and prints their sum.",
-              "hint": "Use `input()` to read values and `print()` to display the result.",
-              "help": {
-                "concept": "Use `input()` to get user input and `print()` to display the sum.",
-                "hint_1": "Convert input strings to integers using `int()`.",
-                "hint_2": "Add the two numbers and print the result."
-              },
-              "starterCode": "# Read two numbers from input"
-            },
-            "quiz7": {
-              "title": "Boolean Check",
-              "prompt": "Write a Python program that checks if a number is positive and prints 'Positive' or 'Not Positive'.",
-              "hint": "Read the task \"Boolean Check\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Boolean Check\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
-              },
-              "starterCode": "# Check if the number is positive"
-            },
-            "quiz8": {
-              "title": "String Concatenation",
-              "prompt": "Write a Python program that reads two strings and prints them concatenated with a space in between.",
-              "hint": "Read the task \"String Concatenation\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"String Concatenation\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
-              },
-              "starterCode": "# Concatenate two strings"
-            },
-            "quiz9": {
-              "title": "Simple Calculator",
-              "prompt": "Write a Python program that reads two numbers and an operator (+, -, *, /) and performs the operation.",
-              "hint": "Read the task \"Simple Calculator\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Simple Calculator\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
-              },
-              "starterCode": "# Simple calculator"
-            },
-            "policy_multi_choice_1": {
-              "title": "Choose good run-and-check habits",
-              "prompt": "Which habits help when practicing \"Values, Types, and Literals\"?",
-              "hint": "Good practice means running code and checking what happened.",
-              "help": {
-                "concept": "Running small pieces of code and reading the output helps you understand Python behavior.",
-                "hint_1": "Output and errors both give useful feedback.",
-                "hint_2": "Testing small changes is easier than debugging many changes at once."
-              },
-              "options": {
-                "a": "Run the code after writing it",
-                "b": "Read the output carefully",
-                "c": "Ignore error messages",
-                "d": "Change many lines at once without testing"
-              }
-            },
-            "policy_drag_reorder_1": {
-              "title": "Order the run-and-check workflow",
-              "prompt": "Put the steps in order for practicing \"Values, Types, and Literals\".",
-              "hint": "You need code before you can run it.",
-              "help": {
-                "concept": "A basic Python workflow is write code, run it, then inspect the result.",
-                "hint_1": "The output appears after running.",
-                "hint_2": "Errors are also useful feedback."
-              },
-              "tokens": {
-                "t1": "Write a small piece of Python code",
-                "t2": "Run the code",
-                "t3": "Read the output or error message"
-              }
-            },
-            "policy_fill_blank_choice_1": {
-              "title": "Choose the missing Python keyword",
-              "prompt": "Fill in the missing Python keyword so the statement is valid.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
-              },
-              "template": "___ value > 0:\n    print('positive')",
-              "choices": [
-                "if",
-                "for",
-                "def",
-                "class"
-              ]
-            },
-            "policy_code_input_1": {
-              "title": "Print whether a number is positive",
-              "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
-              "hint": "Use a conditional check and return a boolean result.",
-              "help": {
-                "concept": "A conditional can decide which boolean value to print based on a comparison.",
-                "hint_1": "Compare the number with zero inside an if statement.",
-                "hint_2": "Print True when the condition passes; otherwise print False."
-              },
-              "starterCode": "n = int(input())\n# Your code here"
+              "starterCode": "# TODO: print the required three lines"
             }
           }
         }
@@ -230,13 +235,17 @@
     "python-v2": {
       "python-v2-0": {
         "values-types-and-literals": {
-          "sketch1": {
-            "title": "Understanding Data Types",
-            "bodyMarkdown": "In Python, data types are categories of data that tell the interpreter how to handle the data. The most common data types include:\n\n- **Integers**: Whole numbers, e.g., `42`\n- **Floats**: Decimal numbers, e.g., `3.14`\n- **Strings**: Text, e.g., `'Hello, World!'`\n- **Booleans**: True or False values, e.g., `True`\n- **None**: Represents the absence of a value, e.g., `None`\n\n### Example\n```python\nage = 25\npi = 3.14159\nname = \"Alice\"\nis_student = True\nnothing = None\n```\n\nEach variable is assigned a value of a specific type. Try it yourself by changing the values and observing the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "values-basics": {
+            "title": "Values have types",
+            "bodyMarkdown": "A **value** is a piece of data that Python can work with. When you write code like `print(5)` or `print(\"hello\")`, the number `5` and the text `\"hello\"` are both values.\n\nIn this topic, focus on three beginner-friendly value types:\n\n- `\"hello\"` → a **string**\n- `5` → an **integer**\n- `3.14` → a **float**\n\nExample:\n\n```python\nprint(\"Maya\")\nprint(12)\nprint(4.5)\n```\n\nOutput:\n\n```text\nMaya\n12\n4.5\n```\n\nWalk through it:\n- `print(\"Maya\")` shows text.\n- `print(12)` shows a whole number.\n- `print(4.5)` shows a decimal number.\n\n**Predict before running:** What will change if you replace `12` with `20`? Type the example in the editor, click **Run**, and check the output panel."
           },
-          "sketch2": {
-            "title": "Working with Strings",
-            "bodyMarkdown": "Strings in Python are sequences of characters enclosed in quotes. You can use single (`'`) or double (`\"`) quotes.\n\n### Example\n```python\ngreeting = \"Hello, World!\"\nprint(greeting)\n```\n\nThis code assigns a string to the variable `greeting` and prints it. Try changing the string and see what happens when you run the code.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "literals-and-spelling": {
+            "title": "Literals are values written directly",
+            "bodyMarkdown": "A **literal** is a value written directly in code.\n\nExamples of literals:\n\n- `\"cat\"`\n- `42`\n- `2.0`\n\nThese are all written exactly in the code editor, so they are literals.\n\nWorked example:\n\n```python\nprint(\"cat\")\nprint(42)\nprint(2.0)\n```\n\nA few spelling details matter:\n\n- Strings need quotes, like `\"cat\"`.\n- Integers do **not** use quotes, like `42`.\n- Floats usually include a decimal point, like `2.0`.\n\nIf you write `\"42\"`, that is text, not a number.\n\n**Predict before running:** Will `print(\"42\")` and `print(42)` look the same in the output panel? Try both and notice why the code still treats them differently."
+          },
+          "expressions-intro": {
+            "title": "Expressions produce values",
+            "bodyMarkdown": "An **expression** is code that Python can evaluate to get a value.\n\nFor example:\n\n```python\nprint(2 + 3)\nprint(\"hi\" + \"!\")\nprint(10 / 2)\n```\n\nOutput:\n\n```text\n5\nhi!\n5.0\n```\n\nWalk through it:\n- `2 + 3` produces the integer `5`.\n- `\"hi\" + \"!\"` produces the string `\"hi!\"`.\n- `10 / 2` produces the float `5.0`.\n\nYour turn: Type one new `print(...)` line that uses an expression with numbers, click **Run**, and check the output panel."
           }
         }
       }
