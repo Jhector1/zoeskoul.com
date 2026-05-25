@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { getRepoRoot } from "@zoeskoul/curriculum-core";
 import type { CurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 
 async function ensureDir(filePath: string) {
@@ -40,6 +41,7 @@ export async function writeCourseQualityReport(args: {
     report: CurriculumQualityReport;
 }) {
     const baseDir = path.join(
+        getRepoRoot(),
         ".curriculum-drafts",
         "reports",
         args.subjectSlug,

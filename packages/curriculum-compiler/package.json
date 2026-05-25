@@ -12,6 +12,7 @@
     }
   },
   "scripts": {
+    "prebuild": "pnpm --filter @zoeskoul/curriculum-core build && pnpm --filter @zoeskoul/curriculum-contracts build && pnpm --filter @zoeskoul/curriculum-runtime build && pnpm --filter @zoeskoul/curriculum-profiles build && pnpm --filter @zoeskoul/curriculum-ai build",
     "build": "tsc -p tsconfig.json",
     "clean": "rimraf dist",
     "pretest": "pnpm --filter @zoeskoul/curriculum-core build && pnpm --filter @zoeskoul/curriculum-contracts build && pnpm --filter @zoeskoul/curriculum-runtime build && pnpm --filter @zoeskoul/curriculum-profiles build",

@@ -1,0 +1,49 @@
+{
+  "ok": false,
+  "profileId": "sql",
+  "subjectSlug": "sql-v2",
+  "courseSlug": "sql-foundations",
+  "topicId": "what_sql_means",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 5,
+    "exerciseKinds": {
+      "single_choice": 2,
+      "multi_choice": 1,
+      "drag_reorder": 1,
+      "fill_blank_choice": 1
+    },
+    "codeInputs": 0,
+    "projects": 0,
+    "capstones": 0,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 1,
+    "warnings": 1,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 1,
+    "warning": 1,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-1/what_sql_means",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "what_sql_means",
+      "message": "Topic \"what_sql_means\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_FINAL_CAPSTONE",
+      "severity": "error",
+      "profileId": "sql",
+      "message": "Course is configured to require a final capstone, but none was detected."
+    }
+  ]
+}

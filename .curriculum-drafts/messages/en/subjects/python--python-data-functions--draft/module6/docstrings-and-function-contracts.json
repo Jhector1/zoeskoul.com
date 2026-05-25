@@ -1,0 +1,216 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "docstrings-and-function-contracts": {
+          "label": "Docstrings and Function Contracts",
+          "summary": "Document what a function expects and returns.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Docstrings"
+            },
+            "sketch1": {
+              "title": "Function Contracts"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Function Documentation and Contracts"
+            }
+          },
+          "projectSteps": {
+            "quiz9": {
+              "title": "Function with Docstring"
+            },
+            "quiz10": {
+              "title": "Function Contract Example"
+            },
+            "quiz11": {
+              "title": "Docstring Practice"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Purpose of Docstrings",
+              "prompt": "What is the primary purpose of a docstring in a Python function?",
+              "hint": "Think about how docstrings help other developers.",
+              "help": {
+                "concept": "Docstrings provide documentation for functions, explaining their purpose, parameters, and return values.",
+                "hint_1": "Docstrings are used to describe what a function does.",
+                "hint_2": "They help other developers understand the function's purpose and usage."
+              },
+              "options": {
+                "a": "To execute the function",
+                "b": "To document the function's purpose and usage",
+                "c": "To optimize the function's performance",
+                "d": "To test the function"
+              }
+            },
+            "quiz2": {
+              "title": "Function Contract",
+              "prompt": "What does a function contract specify?",
+              "hint": "Consider what a function needs and what it provides.",
+              "help": {
+                "concept": "A function contract specifies the inputs a function expects and the outputs it guarantees.",
+                "hint_1": "Think about the inputs and outputs of a function.",
+                "hint_2": "A function contract defines what the function expects and what it returns."
+              },
+              "options": {
+                "a": "The function's execution time",
+                "b": "The function's input and output requirements",
+                "c": "The function's memory usage",
+                "d": "The function's error handling"
+              }
+            },
+            "quiz3": {
+              "title": "Components of a Docstring",
+              "prompt": "Which of the following are typically included in a function's docstring?",
+              "hint": "Think about what information is useful for understanding a function.",
+              "help": {
+                "concept": "Docstrings typically include a description of the function, its parameters, and its return value.",
+                "hint_1": "Consider what details help describe a function's behavior.",
+                "hint_2": "Docstrings often include parameter descriptions and return value information."
+              },
+              "options": {
+                "a": "Function's purpose",
+                "b": "Function's parameters",
+                "c": "Function's return value",
+                "d": "Function's execution time"
+              }
+            },
+            "quiz4": {
+              "title": "Benefits of Function Contracts",
+              "prompt": "What are the benefits of using function contracts?",
+              "hint": "Consider how function contracts improve code reliability and understanding.",
+              "help": {
+                "concept": "Function contracts improve code reliability by clearly defining expected inputs and outputs.",
+                "hint_1": "Function contracts help prevent misuse of functions.",
+                "hint_2": "They make it easier to understand what a function does and how to use it correctly."
+              },
+              "options": {
+                "a": "Improves code readability",
+                "b": "Ensures correct function usage",
+                "c": "Increases execution speed",
+                "d": "Facilitates debugging"
+              }
+            },
+            "quiz5": {
+              "title": "Order of Docstring Sections",
+              "prompt": "Arrange the sections of a typical function docstring in the correct order.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Description",
+                "t2": "Parameters",
+                "t3": "Return Value"
+              }
+            },
+            "quiz6": {
+              "title": "Steps in Writing a Function Contract",
+              "prompt": "Arrange the steps in writing a function contract in the correct order.",
+              "hint": "Start by defining the function's purpose, then inputs, and finally outputs.",
+              "help": {
+                "concept": "Writing a function contract involves defining the function's purpose, inputs, and outputs.",
+                "hint_1": "Begin with the function's purpose.",
+                "hint_2": "Define inputs before outputs."
+              },
+              "tokens": {
+                "t1": "Define purpose",
+                "t2": "Specify inputs",
+                "t3": "Specify outputs"
+              }
+            },
+            "quiz7": {
+              "title": "Docstring Parameter Description",
+              "prompt": "Complete the docstring parameter description: `\"\"\"Calculate the area of a rectangle.\\n\\nParameters:\\nwidth (float): [blank1] of the rectangle.\\nheight (float): The height of the rectangle.\\n\\nReturns:\\nfloat: The area of the rectangle.\\n\"\"\"`",
+              "hint": "Think about what 'width' represents in a rectangle.",
+              "help": {
+                "concept": "The parameter description should clearly state what the parameter represents.",
+                "hint_1": "the missing term is a dimension of the rectangle.",
+                "hint_2": "It is one of the two dimensions needed to calculate area."
+              },
+              "template": "\"\"\"Calculate the area of a rectangle.\\n\\nParameters:\\nwidth (float): [blank1] of the rectangle.\\nheight (float): The height of the rectangle.\\n\\nReturns:\\nfloat: The area of the rectangle.\\n\"\"\"",
+              "choices": [
+                "The width",
+                "The length",
+                "The perimeter",
+                "The diagonal"
+              ]
+            },
+            "quiz8": {
+              "title": "Return Value Description",
+              "prompt": "Complete the return value description: `\"\"\"Calculate the area of a rectangle.\\n\\nParameters:\\nwidth (float): The width of the rectangle.\\nheight (float): The height of the rectangle.\\n\\nReturns:\\nfloat: [blank1] of the rectangle.\\n\"\"\"`",
+              "hint": "Consider what the function returns.",
+              "help": {
+                "concept": "The return value description should specify what the function outputs.",
+                "hint_1": "The function calculates an area.",
+                "hint_2": "The return value is the result of the missing term calculation."
+              },
+              "template": "\"\"\"Calculate the area of a rectangle.\\n\\nParameters:\\nwidth (float): The width of the rectangle.\\nheight (float): The height of the rectangle.\\n\\nReturns:\\nfloat: [blank1] of the rectangle.\\n\"\"\"",
+              "choices": [
+                "The area",
+                "The perimeter",
+                "The volume",
+                "The diagonal"
+              ]
+            },
+            "quiz9": {
+              "title": "Function with Docstring",
+              "prompt": "Write a function `multiply` that takes two numbers and returns their product. Include a docstring that describes the function, its parameters, and its return value. Then read the input values, call the function, and print the returned result.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "def multiply(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))"
+            },
+            "quiz10": {
+              "title": "Function Contract Example",
+              "prompt": "Create a function `divide` that takes two numbers and returns their quotient. Ensure the function includes a docstring that specifies the function contract, including handling division by zero. Then read the input values, call the function, and print the returned result.",
+              "hint": "Read the task \"Function Contract Example\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Function Contract Example\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def divide(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))"
+            },
+            "quiz11": {
+              "title": "Docstring Practice",
+              "prompt": "Write a function `subtract` that takes two numbers and returns their difference. Include a docstring that describes the function, its parameters, and its return value. Then read the input values, call the function, and print the returned result.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "def subtract(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(subtract(a, b))"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "docstrings-and-function-contracts": {
+          "sketch1": {
+            "title": "Understanding Docstrings",
+            "bodyMarkdown": "Docstrings are a way to document your functions in Python. They describe what the function does, its parameters, and its return value. This helps other developers understand your code quickly.\n\nHere's an example:\n\n```python\ndef add(a, b):\n    \"\"\"Add two numbers and return the result.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The sum of a and b.\n    \"\"\"\n    return a + b\n```\n\nTry it yourself: Write a function `subtract` that takes two numbers and returns their difference. Add a docstring to describe its behavior.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch2": {
+            "title": "Function Contracts",
+            "bodyMarkdown": "A function contract specifies what a function expects as input and what it guarantees as output. This is crucial for ensuring that functions are used correctly.\n\nFor example, consider a function that calculates the area of a rectangle:\n\n```python\ndef rectangle_area(width, height):\n    \"\"\"Calculate the area of a rectangle.\n\n    Parameters:\n    width (float): The width of the rectangle.\n    height (float): The height of the rectangle.\n\n    Returns:\n    float: The area of the rectangle.\n    \"\"\"\n    return width * height\n```\n\nThe contract here is that both `width` and `height` should be non-negative numbers, and the function will return a non-negative number representing the area.\n\nYour turn: Write a function `circle_area` that calculates the area of a circle given its radius. Include a docstring that specifies the function contract.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

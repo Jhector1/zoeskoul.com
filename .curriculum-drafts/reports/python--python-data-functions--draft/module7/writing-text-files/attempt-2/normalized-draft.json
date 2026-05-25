@@ -1,0 +1,263 @@
+{
+  "title": "Writing Text Files",
+  "summary": "Write output to files using safe file modes.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Writing Files",
+      "bodyMarkdown": "Writing to files in Python is a common task that allows you to store data persistently. You can open a file in write mode using the `open()` function and specify the mode as `'w'` for writing. This will create a new file if it doesn't exist or overwrite the existing file. Here's a simple example:\n\n```python\nwith open('example.txt', 'w') as file:\n    file.write('Hello, World!')\n```\n\nThis code snippet opens a file named `example.txt` and writes the string 'Hello, World!' to it. Try modifying the string and running the code to see the changes in the file."
+    },
+    {
+      "id": "sketch2",
+      "title": "File Modes Explained",
+      "bodyMarkdown": "When working with files, it's important to understand the different modes available:\n\n- `'w'`: Write mode. Creates a new file or overwrites an existing file.\n- `'a'`: Append mode. Opens a file for writing and appends to the end of the file.\n- `'r'`: Read mode. Opens a file for reading.\n\nEach mode serves a different purpose, and choosing the right one depends on your task. For example, use `'a'` if you want to add data to an existing file without losing the current content."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "exercise1",
+      "kind": "single_choice",
+      "title": "Understanding File Modes",
+      "prompt": "Which file mode should you use to add new content to the end of an existing file without deleting its current content?",
+      "options": [
+        "'w'",
+        "'a'",
+        "'r'",
+        "'x'"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider the mode that allows appending data.",
+      "help": {
+        "concept": "File modes determine how a file is opened and modified.",
+        "hint_1": "Appending means adding to the end of a file.",
+        "hint_2": "The mode that appends data is not the same as the one that overwrites."
+      }
+    },
+    {
+      "id": "exercise2",
+      "kind": "multi_choice",
+      "title": "File Mode Characteristics",
+      "prompt": "Select all characteristics of the 'w' file mode.",
+      "options": [
+        "Overwrites existing content",
+        "Creates a new file if it doesn't exist",
+        "Appends to the end of the file",
+        "Opens the file for reading"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Think about what happens to the file when opened in 'w' mode.",
+      "help": {
+        "concept": "The 'w' mode is used for writing to files.",
+        "hint_1": "Consider what happens to existing content in the file.",
+        "hint_2": "The 'w' mode can create a new file if it doesn't exist."
+      }
+    },
+    {
+      "id": "exercise3",
+      "kind": "drag_reorder",
+      "title": "Steps to Write to a File",
+      "prompt": "Arrange the steps to write 'Hello, World!' to a file named 'greeting.txt'.",
+      "tokens": [
+        "Open 'greeting.txt' in write mode",
+        "Write 'Hello, World!' to the file",
+        "Close the file"
+      ],
+      "correctOrder": [
+        "Open 'greeting.txt' in write mode",
+        "Write 'Hello, World!' to the file",
+        "Close the file"
+      ],
+      "hint": "Start with opening the file and end with closing it.",
+      "help": {
+        "concept": "Writing to a file involves opening, writing, and closing the file.",
+        "hint_1": "Opening the file is the first step.",
+        "hint_2": "Closing the file is the last step."
+      }
+    },
+    {
+      "id": "exercise4",
+      "kind": "fill_blank_choice",
+      "title": "File Writing Syntax",
+      "prompt": "Complete the code to write 'Data' to a file named 'output.txt'.",
+      "template": "with open('output.txt', [blank1]) as file:\n    file.write('Data')",
+      "choices": [
+        "'r'",
+        "'w'",
+        "'a'",
+        "'x'"
+      ],
+      "correctValue": "'w'",
+      "hint": "Use the correct file mode for writing.",
+      "help": {
+        "concept": "The 'w' mode is used to write data to a file.",
+        "hint_1": "The 'w' mode will overwrite the file if it exists.",
+        "hint_2": "The 'w' mode creates a new file if it doesn't exist."
+      }
+    },
+    {
+      "id": "exercise5",
+      "kind": "code_input",
+      "title": "Write Multiple Lines to a File",
+      "prompt": "Write a Python program that writes the following lines to a file named 'lines.txt':\n- Line 1\n- Line 2\n- Line 3",
+      "starterCode": "# Open the file in write mode\nwith open('lines.txt', 'w') as file:\n    # Write each line\n    for line in ['Line 1', 'Line 2', 'Line 3']:\n        file.write(line + '\\n')",
+      "solutionCode": "# Open the file in write mode\nwith open('lines.txt', 'w') as file:\n    # Write each line\n    for line in ['Line 1', 'Line 2', 'Line 3']:\n        file.write(line + '\\n')",
+      "tests": [
+        {
+          "stdout": "Line 1\nLine 2\nLine 3\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use a loop to write each line to the file.",
+      "help": {
+        "concept": "You can write multiple lines to a file using a loop.",
+        "hint_1": "Open the file in write mode before writing.",
+        "hint_2": "Use a loop to iterate over the lines and write them."
+      }
+    },
+    {
+      "id": "exercise6",
+      "kind": "single_choice",
+      "title": "File Overwriting",
+      "prompt": "What happens if you open an existing file in 'w' mode and write to it?",
+      "options": [
+        "The file is appended",
+        "The file is overwritten",
+        "The file is read-only",
+        "The file is deleted"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider what 'w' mode does to existing content.",
+      "help": {
+        "concept": "The 'w' mode overwrites existing content in a file.",
+        "hint_1": "The 'w' mode does not append to the file.",
+        "hint_2": "The 'w' mode starts writing from the beginning of the file."
+      }
+    },
+    {
+      "id": "exercise7",
+      "kind": "multi_choice",
+      "title": "Safe File Writing Practices",
+      "prompt": "Which of the following are safe practices when writing to files?",
+      "options": [
+        "Always use 'w' mode to ensure a clean file",
+        "Check if the file exists before writing",
+        "Use 'a' mode to append data",
+        "Handle exceptions during file operations"
+      ],
+      "correctOptionIds": [
+        "b",
+        "c",
+        "d"
+      ],
+      "hint": "Consider practices that prevent data loss and ensure file integrity.",
+      "help": {
+        "concept": "Safe file writing practices help prevent data loss and ensure file integrity.",
+        "hint_1": "Consider using modes that do not overwrite important data.",
+        "hint_2": "Think about how to handle files that might not exist."
+      }
+    },
+    {
+      "id": "exercise8",
+      "kind": "drag_reorder",
+      "title": "File Writing Process",
+      "prompt": "Arrange the steps in the correct order for writing data to a file safely.",
+      "tokens": [
+        "Open the file in the correct mode",
+        "Write data to the file",
+        "Handle any exceptions",
+        "Close the file"
+      ],
+      "correctOrder": [
+        "Open the file in the correct mode",
+        "Write data to the file",
+        "Handle any exceptions",
+        "Close the file"
+      ],
+      "hint": "Start with opening the file and end with closing it.",
+      "help": {
+        "concept": "Writing data to a file safely involves opening, writing, and closing the file.",
+        "hint_1": "Opening the file is the first step.",
+        "hint_2": "Closing the file is the last step."
+      }
+    },
+    {
+      "id": "exercise9",
+      "kind": "fill_blank_choice",
+      "title": "Appending to a File",
+      "prompt": "Complete the code to append 'New Data' to a file named 'data.txt'.",
+      "template": "with open('data.txt', [blank1]) as file:\n    file.write('New Data')",
+      "choices": [
+        "'r'",
+        "'w'",
+        "'a'",
+        "'x'"
+      ],
+      "correctValue": "'a'",
+      "hint": "Use the correct file mode for appending.",
+      "help": {
+        "concept": "The 'a' mode is used to append data to a file.",
+        "hint_1": "The 'a' mode adds data to the end of the file.",
+        "hint_2": "The 'a' mode does not overwrite existing content."
+      }
+    },
+    {
+      "id": "exercise10",
+      "kind": "code_input",
+      "title": "Append Multiple Lines to a File",
+      "prompt": "Write a Python program that appends the following lines to a file named 'append.txt':\n- Append Line 1\n- Append Line 2\n- Append Line 3",
+      "starterCode": "# Open the file in append mode\nwith open('append.txt', 'a') as file:\n    # Append each line\n    for line in ['Append Line 1', 'Append Line 2', 'Append Line 3']:\n        file.write(line + '\\n')",
+      "solutionCode": "# Open the file in append mode\nwith open('append.txt', 'a') as file:\n    # Append each line\n    for line in ['Append Line 1', 'Append Line 2', 'Append Line 3']:\n        file.write(line + '\\n')",
+      "tests": [
+        {
+          "stdout": "Append Line 1\nAppend Line 2\nAppend Line 3\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use a loop to append each line to the file.",
+      "help": {
+        "concept": "You can append multiple lines to a file using a loop.",
+        "hint_1": "Open the file in append mode before writing.",
+        "hint_2": "Use a loop to iterate over the lines and append them."
+      }
+    },
+    {
+      "id": "exercise11",
+      "kind": "code_input",
+      "title": "Write and Read Back",
+      "prompt": "Write a Python program that writes 'Hello, ZoeSkoul!' to a file named 'zoeskoul.txt' and then reads it back to print the content.",
+      "starterCode": "# Write to the file\nwith open('zoeskoul.txt', 'w') as file:\n    file.write('Hello, ZoeSkoul!')\n\n# Read from the file\nwith open('zoeskoul.txt', 'r') as file:\n    content = file.read()\n    print(content)",
+      "solutionCode": "# Write to the file\nwith open('zoeskoul.txt', 'w') as file:\n    file.write('Hello, ZoeSkoul!')\n\n# Read from the file\nwith open('zoeskoul.txt', 'r') as file:\n    content = file.read()\n    print(content)",
+      "tests": [
+        {
+          "stdout": "Hello, ZoeSkoul!\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "First write to the file, then open it again to read.",
+      "help": {
+        "concept": "You can write to a file and then read from it using separate operations.",
+        "hint_1": "Use 'w' mode to write and 'r' mode to read.",
+        "hint_2": "Ensure you close the file after writing before reading."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "File Writing and Reading Project",
+    "stepIds": [
+      "exercise5",
+      "exercise10",
+      "exercise11"
+    ]
+  }
+}

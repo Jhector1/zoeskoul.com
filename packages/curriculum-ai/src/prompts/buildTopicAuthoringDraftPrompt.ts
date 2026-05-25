@@ -5,8 +5,42 @@ import { renderExerciseKindPromptRules } from "./exerciseKindPromptRules.js";
 import type { TopicRetryContext } from "../types.js";
 
 
-function renderRetryGuidance(retry?: TopicRetryContext) {
+function renderRetryGuidance(seed: TopicSeed, retry?: TopicRetryContext) {
     if (!retry) return "";
+
+    const qualityIssueLines =
+        retry.qualityIssues?.length
+            ? [
+                "",
+                "Specific issues from the previous attempt:",
+                ...retry.qualityIssues.map((issue) =>
+                    `- ${issue.exerciseId ? `${issue.exerciseId}: ` : ""}${issue.message}`,
+                ),
+            ]
+            : [];
+
+    const thinFixedTestIssues =
+        retry.qualityIssues?.filter(
+            (issue) => issue.code === "THIN_FIXED_TEST_COVERAGE",
+        ) ?? [];
+    const unsafeFixedTestIssues =
+        retry.qualityIssues?.filter(
+            (issue) => issue.code === "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+        ) ?? [];
+
+    const terminalAvailable =
+        seed.workspacePolicy?.workspace.capabilities?.terminal.enabled === true;
+    const workspaceRetryLines =
+        !terminalAvailable
+            ? [
+                "",
+                "Workspace-language retry rules for this topic:",
+                "- Forbidden learner-facing workspace terms: Terminal, command line, shell, console.",
+                '- Use "code editor", "Run", and "output panel" instead.',
+                '- Do not use "Terminal" even as a distractor option.',
+                "- If you need an unavailable-tool distractor, use a safe non-workspace distractor such as a notes panel or theme picker.",
+            ]
+            : [];
 
     return [
         "",
@@ -15,6 +49,7 @@ function renderRetryGuidance(retry?: TopicRetryContext) {
         `Previous failure code: ${retry.previousErrorCode}`,
         "Previous failure message:",
         retry.previousErrorMessage,
+        ...qualityIssueLines,
         "",
         "You must fix the issue above without changing the topic identity.",
         "Do not repeat the same validation mistake.",
@@ -36,12 +71,35 @@ function renderRetryGuidance(retry?: TopicRetryContext) {
         "",
         "If the failure mentions workspace policy:",
         "- Do not mention files, .py filenames, terminals, command lines, package installation, or local workflows.",
+        '- Do not use "Terminal" even as a distractor option.',
+        "- Replace unavailable-tool distractors with safe non-workspace distractors.",
+        ...workspaceRetryLines,
         "",
         "If the failure mentions exercise policy targets or over target:",
         "- The previous draft used the wrong exercise-kind counts.",
         "- Regenerate quizDraft so each kind exactly matches the Required exercise counts.",
         "- Do not preserve the same total by replacing missing non-code exercises with extra code_input exercises.",
         "- If code_input is over target, remove extra code_input exercises and add the missing non-code exercise kinds.",
+        "",
+        "If the failure mentions THIN_FIXED_TEST_COVERAGE:",
+        "- Every fixed_tests Python code_input needs at least 2 meaningful and distinct tests.",
+        "- If the exercise reads stdin, use at least two different stdin values.",
+        "- Do not duplicate the same test just to increase the count.",
+        "- If a code_input exercise cannot support two meaningful fixed tests, replace it with a non-code exercise or rewrite it into a stdin-based task.",
+        ...(thinFixedTestIssues.length > 0
+            ? [
+                "- Failing exercise ids from the previous attempt:",
+                ...thinFixedTestIssues.map((issue) => `  - ${issue.exerciseId ?? "unknown"}`),
+            ]
+            : []),
+        ...(unsafeFixedTestIssues.length > 0
+            ? [
+                "- These exercise ids were invalid as fixed_tests code_input:",
+                ...unsafeFixedTestIssues.map((issue) => `  - ${issue.exerciseId ?? "unknown"}`),
+                "- Replace them with non-code exercises or regenerate them as stdin-based code_input with at least 2 tests.",
+                "- Do not produce static print-only code_input tasks with one test.",
+            ]
+            : []),
         "",
         "If the failure mentions INVALID_FILL_BLANK_STRUCTURE or multiple_blanks:",
         "- Regenerate the fill_blank_choice with exactly ONE blank.",
@@ -153,7 +211,7 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "Every exercise must include a real solution.",
             "Do not leave any solution field empty.",
             "",
-            renderRetryGuidance(args.retry),
+            renderRetryGuidance(args.seed, args.retry),
 
             "The top-level object must contain exactly:",
             '- "title"',

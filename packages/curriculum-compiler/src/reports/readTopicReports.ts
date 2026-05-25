@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { getRepoRoot } from "@zoeskoul/curriculum-core";
 import type {
     CritiqueReport,
     GoldenValidationReport,
@@ -58,6 +59,7 @@ export async function readTopicReports(args: {
     topicId: string;
 }): Promise<TopicReportBundle> {
     const baseDir = path.join(
+        getRepoRoot(),
         ".curriculum-drafts",
         "reports",
         args.subjectSlug,
@@ -90,7 +92,7 @@ export async function readTopicReports(args: {
 export async function readSubjectTopicReports(args: {
     subjectSlug: string;
 }): Promise<TopicReportBundle[]> {
-    const root = path.join(".curriculum-drafts", "reports", args.subjectSlug);
+    const root = path.join(getRepoRoot(), ".curriculum-drafts", "reports", args.subjectSlug);
 
     if (!(await pathExists(root))) return [];
 
@@ -128,6 +130,7 @@ export async function readCourseQualityReport(args: {
 }): Promise<CurriculumQualityReport | undefined> {
     return readJsonIfExists(
         path.join(
+            getRepoRoot(),
             ".curriculum-drafts",
             "reports",
             args.subjectSlug,

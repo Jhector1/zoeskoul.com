@@ -2,6 +2,7 @@
   "subjectSlug": "python",
   "catalogSlug": "python",
   "profileId": "python",
+  "accessPolicy": "paid",
   "courseOrder": [
     "python-for-beginners",
     "python-data-functions",

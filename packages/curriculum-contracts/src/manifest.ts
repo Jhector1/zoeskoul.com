@@ -196,10 +196,21 @@ export type ManifestSqlQueryTest = {
   checkSql?: string;
 };
 
+export type ManifestFileFixture = {
+  path: string;
+  content: string;
+  readOnly?: boolean;
+};
+
 export type ManifestRecipe =
   | {
       type: "fixed_tests";
-      tests: Array<{ stdin?: string; stdout: string; match?: "exact" | "includes" }>;
+      tests: Array<{
+        stdin?: string;
+        stdout: string;
+        match?: "exact" | "includes";
+        files?: ManifestFileFixture[];
+      }>;
       solutionCode?: string;
     }
   | {

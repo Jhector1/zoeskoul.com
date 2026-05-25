@@ -111,6 +111,401 @@ describe("validatePythonGolden", () => {
         expect(result.ok).toBe(true);
     });
 
+    it("passes golden validation for Python file I/O when fixture files are provided", async () => {
+        setCodeRunner(async ({ files }) => ({
+            ok: true,
+            stdout:
+                Array.isArray(files) &&
+                files.some((file) => file.path === "names.txt" && file.content.includes("Ada"))
+                    ? "Ada\n"
+                    : "",
+            stderr: "",
+            exitCode: 0,
+        }));
+
+        const result = await validatePythonGolden({
+            seed: { topicId: "reading-text-files" } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "reading-text-files",
+                subjectSlug: "python",
+                moduleSlug: "python-7-files-exceptions-and-data-cleaning",
+                sectionSlug: "python-7-file-io",
+                prefix: "topics.python.python-7.reading-text-files",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                runtimeDefaults: {
+                    kind: "code",
+                    language: "python",
+                    supportsFileSystem: true,
+                    supportsMultiFile: true,
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        messageBase: "quiz.code-1",
+                        language: "python",
+                        starterFiles: [
+                            {
+                                path: "main.py",
+                                content: "# start\n",
+                                language: "python",
+                                isEntry: true,
+                            },
+                        ],
+                        workspace: {
+                            entryFilePath: "main.py",
+                            files: [
+                                {
+                                    path: "names.txt",
+                                    content: "Ada\nGrace\n",
+                                },
+                            ],
+                        },
+                        recipe: {
+                            type: "fixed_tests",
+                            tests: [{ stdout: "Ada\n", match: "exact" }],
+                            solutionCode:
+                                "with open('names.txt') as f:\n    print(f.readline().strip())\n",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(result.ok).toBe(true);
+    });
+
+    it("passes golden validation when file-based fixed tests provide per-test file fixtures", async () => {
+        const result = await validatePythonGolden({
+            seed: { topicId: "reading-text-files" } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "reading-text-files",
+                subjectSlug: "python",
+                moduleSlug: "python-7-files-exceptions-and-data-cleaning",
+                sectionSlug: "python-7-file-io",
+                prefix: "topics.python.python-7.reading-text-files",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                runtimeDefaults: {
+                    kind: "code",
+                    language: "python",
+                    supportsFileSystem: true,
+                    supportsMultiFile: true,
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        messageBase: "quiz.code-1",
+                        language: "python",
+                        workspace: {
+                            entryFilePath: "main.py",
+                            files: [
+                                {
+                                    path: "message.txt",
+                                    content: "default\n",
+                                },
+                            ],
+                        },
+                        recipe: {
+                            type: "fixed_tests",
+                            tests: [
+                                {
+                                    stdout: "Hello\n",
+                                    match: "exact",
+                                    files: [
+                                        {
+                                            path: "message.txt",
+                                            content: "Hello\n",
+                                            readOnly: true,
+                                        },
+                                    ],
+                                },
+                                {
+                                    stdout: "Bye\n",
+                                    match: "exact",
+                                    files: [
+                                        {
+                                            path: "message.txt",
+                                            content: "Bye\n",
+                                            readOnly: true,
+                                        },
+                                    ],
+                                },
+                            ],
+                            solutionCode:
+                                "with open('message.txt') as f:\n    print(f.read(), end='')\n",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(result.ok).toBe(true);
+    });
+
+    it("fails before execution when file-based fixed tests need per-test fixtures", async () => {
+        let calls = 0;
+        setCodeRunner(async () => {
+            calls += 1;
+            return {
+                ok: true,
+                stdout: "unused",
+                stderr: "",
+                exitCode: 0,
+            };
+        });
+
+        const result = await validatePythonGolden({
+            seed: { topicId: "reading-text-files" } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "reading-text-files",
+                subjectSlug: "python",
+                moduleSlug: "python-7-files-exceptions-and-data-cleaning",
+                sectionSlug: "python-7-file-io",
+                prefix: "topics.python.python-7.reading-text-files",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                runtimeDefaults: {
+                    kind: "code",
+                    language: "python",
+                    supportsFileSystem: true,
+                    supportsMultiFile: true,
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        messageBase: "quiz.code-1",
+                        language: "python",
+                        workspace: {
+                            entryFilePath: "main.py",
+                            files: [
+                                {
+                                    path: "message.txt",
+                                    content: "default\n",
+                                },
+                            ],
+                        },
+                        recipe: {
+                            type: "fixed_tests",
+                            tests: [
+                                { stdout: "Hello\n", match: "exact" },
+                                { stdout: "Bye\n", match: "exact" },
+                            ],
+                            solutionCode:
+                                "with open('message.txt') as f:\n    print(f.read(), end='')\n",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(result.issues.map((issue) => issue.code)).toContain(
+            "PYTHON_FILE_TESTS_NEED_PER_TEST_FIXTURES",
+        );
+        expect(calls).toBe(0);
+    });
+
+    it("rejects invalid file fixtures before execution", async () => {
+        let calls = 0;
+        setCodeRunner(async () => {
+            calls += 1;
+            return {
+                ok: true,
+                stdout: "Ada\n",
+                stderr: "",
+                exitCode: 0,
+            };
+        });
+
+        const result = await validatePythonGolden({
+            seed: { topicId: "reading-text-files" } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "reading-text-files",
+                subjectSlug: "python",
+                moduleSlug: "python-7-files-exceptions-and-data-cleaning",
+                sectionSlug: "python-7-file-io",
+                prefix: "topics.python.python-7.reading-text-files",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                runtimeDefaults: {
+                    kind: "code",
+                    language: "python",
+                    supportsFileSystem: true,
+                    supportsMultiFile: true,
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        messageBase: "quiz.code-1",
+                        language: "python",
+                        workspace: {
+                            entryFilePath: "main.py",
+                            files: [
+                                {
+                                    path: "../names.txt",
+                                    content: "Ada\n\n\n\nGrace\n",
+                                },
+                            ],
+                        },
+                        recipe: {
+                            type: "fixed_tests",
+                            tests: [{ stdout: "Ada\n", match: "exact" }],
+                            solutionCode:
+                                "with open('names.txt') as f:\n    print(f.readline().strip())\n",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(result.issues.map((issue) => issue.code)).toContain(
+            "PYTHON_FILE_FIXTURE_INVALID",
+        );
+        expect(calls).toBe(0);
+    });
+
+    it("fails clearly before execution when Python file fixtures are missing", async () => {
+        let calls = 0;
+        setCodeRunner(async () => {
+            calls += 1;
+            return {
+                ok: true,
+                stdout: "Ada\n",
+                stderr: "",
+                exitCode: 0,
+            };
+        });
+
+        const result = await validatePythonGolden({
+            seed: { topicId: "reading-text-files" } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "reading-text-files",
+                subjectSlug: "python",
+                moduleSlug: "python-7-files-exceptions-and-data-cleaning",
+                sectionSlug: "python-7-file-io",
+                prefix: "topics.python.python-7.reading-text-files",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                runtimeDefaults: {
+                    kind: "code",
+                    language: "python",
+                    supportsFileSystem: true,
+                    supportsMultiFile: true,
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        messageBase: "quiz.code-1",
+                        language: "python",
+                        recipe: {
+                            type: "fixed_tests",
+                            tests: [{ stdout: "Ada\n", match: "exact" }],
+                            solutionCode:
+                                "with open('names.txt') as f:\n    print(f.readline().strip())\n",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(result.issues.map((issue) => issue.code)).toContain(
+            "PYTHON_FILE_FIXTURE_MISSING",
+        );
+        expect(calls).toBe(0);
+    });
+
+    it("rejects filesystem code when the Python runtime does not support files", async () => {
+        let calls = 0;
+        setCodeRunner(async () => {
+            calls += 1;
+            return {
+                ok: true,
+                stdout: "Ada\n",
+                stderr: "",
+                exitCode: 0,
+            };
+        });
+
+        const result = await validatePythonGolden({
+            seed: { topicId: "reading-text-files" } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "reading-text-files",
+                subjectSlug: "python",
+                moduleSlug: "python-6-functions-and-modularity",
+                sectionSlug: "python-6-function-design",
+                prefix: "topics.python.python-6.reading-text-files",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                runtimeDefaults: {
+                    kind: "code",
+                    language: "python",
+                    supportsFileSystem: false,
+                    supportsMultiFile: false,
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        messageBase: "quiz.code-1",
+                        language: "python",
+                        recipe: {
+                            type: "fixed_tests",
+                            tests: [{ stdout: "Ada\n", match: "exact" }],
+                            solutionCode:
+                                "with open('names.txt') as f:\n    print(f.readline().strip())\n",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(result.issues.map((issue) => issue.code)).toContain(
+            "PYTHON_FILESYSTEM_RUNTIME_REQUIRED",
+        );
+        expect(calls).toBe(0);
+    });
+
     it("fails golden validation when solutionCode does not satisfy published tests", async () => {
         setCodeRunner(async () => ({
             ok: true,

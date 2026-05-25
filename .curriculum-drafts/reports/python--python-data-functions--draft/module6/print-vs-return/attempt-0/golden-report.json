@@ -1,0 +1,13 @@
+{
+  "topicId": "print-vs-return",
+  "ok": false,
+  "issues": [
+    {
+      "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "quiz10",
+      "message": "Exercise \"quiz10\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+    }
+  ]
+}

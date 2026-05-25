@@ -44,13 +44,18 @@ export function resolveWorkspacePolicy(args: {
     moduleNumber?: number;
     topicId?: string;
 }): ResolvedWorkspacePolicy {
-    const base =
-        WORKSPACE_PROFILES[args.blueprint.workspaceProfileId ?? "browser-code-runner"];
-
-    const workspace = deepMergeWorkspace(base, args.blueprint.workspaceOverrides);
-
     const modulePolicy = args.blueprint.modulePolicies?.find(
         (policy) => policy.moduleNumber === args.moduleNumber,
+    );
+    const baseProfileId =
+        modulePolicy?.workspaceProfileId ??
+        args.blueprint.workspaceProfileId ??
+        "browser-code-runner";
+    const base = WORKSPACE_PROFILES[baseProfileId];
+    const blueprintWorkspace = deepMergeWorkspace(base, args.blueprint.workspaceOverrides);
+    const workspace = deepMergeWorkspace(
+        blueprintWorkspace,
+        modulePolicy?.workspaceOverrides,
     );
 
     const topicPolicy =

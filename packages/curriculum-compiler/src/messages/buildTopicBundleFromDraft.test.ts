@@ -310,7 +310,10 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
                 starterCode: "a = int(input())",
                 solutionCode: "a = int(input())\nprint(a + 1)",
                 recipeType: "fixed_tests",
-                tests: [{ stdin: "1\n", stdout: "2\n", match: "exact" }],
+                tests: [
+                    { stdin: "1\n", stdout: "2\n", match: "exact" },
+                    { stdin: "4\n", stdout: "5\n", match: "exact" },
+                ],
             }),
         });
 
@@ -430,7 +433,10 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
                 prompt: "Read a number and print the number plus one.",
                 starterCode: "n = int(input())\n# your code\n",
                 solutionCode: "n = int(input())\nprint(n + 1)",
-                tests: [{ stdin: "3\n", stdout: "4\n", match: "exact" }],
+                tests: [
+                    { stdin: "3\n", stdout: "4\n", match: "exact" },
+                    { stdin: "8\n", stdout: "9\n", match: "exact" },
+                ],
                 hint: "Convert the input before adding.",
                 help: {
                     concept: "Use int(input()) for numeric input.",
@@ -445,7 +451,10 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
             language: "python",
             recipe: {
                 type: "fixed_tests",
-                tests: [{ stdin: "3\n", stdout: "4\n", match: "exact" }],
+                tests: [
+                    { stdin: "3\n", stdout: "4\n", match: "exact" },
+                    { stdin: "8\n", stdout: "9\n", match: "exact" },
+                ],
                 solutionCode: "n = int(input())\nprint(n + 1)",
             },
         });

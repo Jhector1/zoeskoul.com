@@ -1,0 +1,18 @@
+{
+  "profileId": "python",
+  "subjectSlug": "python--python-data-functions--draft",
+  "courseSlug": "python-data-functions",
+  "moduleSlug": "python-6-functions-and-modularity",
+  "sectionSlug": "python-6-function-basics",
+  "topicId": "print-vs-return",
+  "provider": "openai",
+  "model": "gpt-4o",
+  "temperature": 0,
+  "modelSeed": 0,
+  "generatorVersion": "2026-05-23-topic-authoring-draft-generator-v1",
+  "schemaName": "TopicAuthoringDraft",
+  "schemaVersion": "2026-05-23-topic-authoring-draft-v1",
+  "strictSchema": true,
+  "retryAttempt": 2,
+  "maxRetries": 2
+}

@@ -1,0 +1,280 @@
+{
+  "title": "Parameters and Return Values",
+  "summary": "Pass data into functions and return results.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Parameters",
+      "bodyMarkdown": "Parameters are variables that allow you to pass information into functions. When you define a function, you can specify parameters in the parentheses. For example:\n\n```python\ndef greet(name):\n    print(f\"Hello, {name}!\")\n```\n\nIn this function, `name` is a parameter. When you call `greet('Alice')`, it prints `Hello, Alice!`. Try it yourself by changing the parameter value.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using Return Values",
+      "bodyMarkdown": "Functions can return values using the `return` statement. This allows you to send a result back to the caller. For example:\n\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(3, 4)\nprint(result)  # Outputs: 7\n```\n\nHere, `add` returns the sum of `a` and `b`. Try modifying the function to subtract instead.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Function Parameters",
+      "prompt": "What is the purpose of parameters in a function?",
+      "options": [
+        "To define the function's name",
+        "To pass data into the function",
+        "To return data from the function",
+        "To print data inside the function"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Parameters allow functions to receive input values.",
+      "help": {
+        "concept": "Parameters are used to pass data into functions.",
+        "hint_1": "Parameters act as placeholders for the values you pass into the function.",
+        "hint_2": "Parameters enable functions to operate on different data inputs."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Return Statement",
+      "prompt": "What does the `return` statement do in a function?",
+      "options": [
+        "It prints a value to the output panel",
+        "It stops the function execution and sends a value back",
+        "It defines a new function",
+        "It loops through a list"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "The `return` statement sends a value back to the caller.",
+      "help": {
+        "concept": "The `return` statement is used to output a value from a function.",
+        "hint_1": "`return` allows a function to send a result back to where it was called.",
+        "hint_2": "Think about how `return` differs from `print`."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Function Call",
+      "prompt": "Which of the following are true about calling a function with parameters?",
+      "options": [
+        "You must provide values for all parameters",
+        "Parameters can be left empty",
+        "The order of arguments must match the parameters",
+        "You can pass fewer arguments than parameters"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider how parameters are used when calling a function.",
+      "help": {
+        "concept": "When calling a function, you provide arguments that match the parameters.",
+        "hint_1": "Arguments are the actual values you pass to the function's parameters.",
+        "hint_2": "Think about how you use parameters to customize function behavior."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Return Values",
+      "prompt": "Select all correct statements about return values in functions.",
+      "options": [
+        "A function can return multiple values",
+        "Return values can be stored in variables",
+        "A function must always return a value",
+        "Return values are printed automatically"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Consider what happens when a function uses `return`.",
+      "help": {
+        "concept": "Return values allow functions to send data back to the caller.",
+        "hint_1": "A function can return a value to be used elsewhere in the program.",
+        "hint_2": "Return values are different from printed output."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Function Definition Order",
+      "prompt": "Arrange the steps to define a function with parameters and a return value.",
+      "tokens": [
+        "Start with `def` keyword",
+        "Add function name",
+        "Include parameters in parentheses",
+        "Write the function body",
+        "Use `return` to send back a value"
+      ],
+      "correctOrder": [
+        "Start with `def` keyword",
+        "Add function name",
+        "Include parameters in parentheses",
+        "Write the function body",
+        "Use `return` to send back a value"
+      ],
+      "hint": "Consider the order of defining a function, adding parameters, and using return.",
+      "help": {
+        "concept": "Defining a function involves specifying its name, parameters, and return value.",
+        "hint_1": "Start with the `def` keyword, then add parameters, and finally the return statement.",
+        "hint_2": "Think about the structure of a function definition."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Function Call Order",
+      "prompt": "Arrange the steps to call a function with parameters and use its return value.",
+      "tokens": [
+        "Call the function with arguments",
+        "Store the return value in a variable",
+        "Use the return value in your program"
+      ],
+      "correctOrder": [
+        "Call the function with arguments",
+        "Store the return value in a variable",
+        "Use the return value in your program"
+      ],
+      "hint": "Consider the order of calling a function and handling its return value.",
+      "help": {
+        "concept": "Calling a function involves providing arguments and handling the return value.",
+        "hint_1": "Start by calling the function with arguments, then handle the return value.",
+        "hint_2": "Think about how you use the return value after calling the function."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Function Parameter Syntax",
+      "prompt": "Complete the function definition with the correct parameter syntax.",
+      "template": "def greet([blank1]):",
+      "choices": [
+        "name",
+        "return",
+        "print"
+      ],
+      "correctValue": "name",
+      "hint": "Parameters are defined inside the parentheses.",
+      "help": {
+        "concept": "Parameters are specified in the function definition to accept input values.",
+        "hint_1": "Parameters go inside the parentheses after the function the missing term.",
+        "hint_2": "Think about how you define a function with parameters."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Return Statement Syntax",
+      "prompt": "Complete the function to return the sum of two numbers.",
+      "template": "def add(a, b):\n    [blank1] a + b",
+      "choices": [
+        "return",
+        "print",
+        "sum"
+      ],
+      "correctValue": "return",
+      "hint": "Use the `the missing term` keyword to send back a value.",
+      "help": {
+        "concept": "The `the missing term` statement is used to output a value from a function.",
+        "hint_1": "Use `the missing term` followed by the expression you want to send back.",
+        "hint_2": "Think about how you the missing term the result of an addition."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Calculate Area of Rectangle",
+      "prompt": "Write a function `calculate_area` that takes `width` and `height` as parameters and returns the area of a rectangle. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "def calculate_area(width, height):\n    # Calculate the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+      "solutionCode": "def calculate_area(width, height):\n    return width * height\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+      "tests": [
+        {
+          "stdin": "5 10\n1\n",
+          "stdout": "5 10",
+          "match": "exact"
+        },
+        {
+          "stdin": "3 7\n1\n",
+          "stdout": "3 7",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Calculate Area of Rectangle\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Calculate Area of Rectangle\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Convert Celsius to Fahrenheit",
+      "prompt": "Write a function `celsius_to_fahrenheit` that converts a temperature from Celsius to Fahrenheit. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "def celsius_to_fahrenheit(celsius):\n    # Convert to Fahrenheit\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ncelsius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(celsius_to_fahrenheit(celsius))",
+      "solutionCode": "def celsius_to_fahrenheit(celsius):\n    return (celsius * 9/5) + 32\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ncelsius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(celsius_to_fahrenheit(celsius))",
+      "tests": [
+        {
+          "stdin": "0\n",
+          "stdout": "32.0",
+          "match": "exact"
+        },
+        {
+          "stdin": "100\n",
+          "stdout": "212.0",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Calculate Circle Circumference",
+      "prompt": "Write a function `calculate_circumference` that takes `radius` as a parameter and returns the circumference of a circle. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "import math\n\ndef calculate_circumference(radius):\n    # Calculate the circumference\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nradius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(calculate_circumference(radius))",
+      "solutionCode": "import math\n\ndef calculate_circumference(radius):\n    return 2 * math.pi * radius\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nradius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(calculate_circumference(radius))",
+      "tests": [
+        {
+          "stdin": "1\n",
+          "stdout": "6.283185307179586\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "2\n",
+          "stdout": "12.566370614359172\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Calculate Circle Circumference\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Calculate Circle Circumference\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Function Practice Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

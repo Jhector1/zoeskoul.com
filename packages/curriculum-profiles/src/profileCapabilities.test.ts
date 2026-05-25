@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { listSqlDatasetIds } from "./sql/datasets/index.js";
 import {
     assertProfileSupportsCodeInput,
     getCurriculumProfile,
@@ -48,6 +49,15 @@ describe("profile code_input capabilities", () => {
     it("accepts built-in Python and SQL code-capable profiles", () => {
         expect(validateProfileShapeConsistency(getCurriculumProfile("python"))).toEqual([]);
         expect(validateProfileShapeConsistency(getCurriculumProfile("sql"))).toEqual([]);
+    });
+
+    it("keeps sqlShape allowedDatasetIds aligned with the canonical SQL dataset registry", () => {
+        const canonicalDatasetIds = listSqlDatasetIds().slice().sort();
+        const shapeDatasetIds = [...(sqlShape.sqlCodeRecipe?.allowedDatasetIds ?? [])].sort();
+
+        expect(shapeDatasetIds).toEqual(canonicalDatasetIds);
+        expect(shapeDatasetIds).toContain("design_sandbox");
+        expect(shapeDatasetIds).toContain("capstone_sandbox");
     });
 
     it("flags shapes that allow code_input when the profile does not", () => {

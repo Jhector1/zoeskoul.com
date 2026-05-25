@@ -130,7 +130,10 @@ describe("profile-driven curriculum compilation", () => {
                 starterCode: "n = int(input())\n",
                 solutionCode: "n = int(input())\nprint(n + 1)",
                 recipeType: "fixed_tests",
-                tests: [{ stdin: "1\n", stdout: "2\n", match: "exact" }],
+                tests: [
+                    { stdin: "1\n", stdout: "2\n", match: "exact" },
+                    { stdin: "4\n", stdout: "5\n", match: "exact" },
+                ],
             }),
         });
 
@@ -151,6 +154,47 @@ describe("profile-driven curriculum compilation", () => {
         expect(serialized).not.toContain("main.sql");
     });
 
+    it("carries Python file fixtures into the emitted workspace manifest", () => {
+        const bundle = buildTopicBundleFromDraft({
+            shape: pythonShape,
+            seed: makePythonSeed(),
+            draft: makeDraft({
+                id: "py-file-1",
+                kind: "code_input",
+                title: "Read names",
+                prompt: "Read names.txt and print the first name.",
+                starterCode: "with open('names.txt') as f:\n    # Your code here\n",
+                solutionCode: "with open('names.txt') as f:\n    print(f.readline().strip())\n",
+                recipeType: "fixed_tests",
+                tests: [
+                    { stdout: "Ada\n", match: "exact" },
+                    { stdout: "Ada\n", match: "exact" },
+                ],
+                files: [
+                    {
+                        path: "names.txt",
+                        content: "Ada\nGrace\nLinus\n",
+                        readOnly: true,
+                    },
+                ],
+            }),
+        });
+
+        const exercise = bundle.exercises[0] as ManifestCodeInput;
+        expect(exercise.workspace?.files).toEqual([
+            expect.objectContaining({
+                path: "names.txt",
+                content: "Ada\nGrace\nLinus\n",
+            }),
+        ]);
+        expect(exercise.starterFiles).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ path: "main.py" }),
+                expect.objectContaining({ path: "names.txt" }),
+            ]),
+        );
+    });
+
     it("compiles the same draft and seed into the same topic bundle every time", () => {
         const args = {
             shape: pythonShape,
@@ -163,7 +207,10 @@ describe("profile-driven curriculum compilation", () => {
                 starterCode: "n = int(input())\n",
                 solutionCode: "n = int(input())\nprint(n + 1)",
                 recipeType: "fixed_tests",
-                tests: [{ stdin: "1\n", stdout: "2\n", match: "exact" }],
+                tests: [
+                    { stdin: "1\n", stdout: "2\n", match: "exact" },
+                    { stdin: "4\n", stdout: "5\n", match: "exact" },
+                ],
             }),
         } as const;
 

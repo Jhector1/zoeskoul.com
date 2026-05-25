@@ -1,0 +1,363 @@
+{
+  "topicId": "list-methods-and-mutation",
+  "subjectSlug": "python--python-data-functions--draft",
+  "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+  "sectionSlug": "python--python-data-functions--draft-python-5-list-basics",
+  "prefix": "py5",
+  "minutes": 26,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.label",
+    "summaryKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch1.title",
+      "sketchId": "sketch2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "quiz9",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.projectSteps.quiz9.title",
+            "exerciseKey": "quiz9",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz10",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.projectSteps.quiz10.title",
+            "exerciseKey": "quiz10",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz11",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.projectSteps.quiz11.title",
+            "exerciseKey": "quiz11",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch1.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch2.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.sketch2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz6",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz7",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "append"
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz8",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "remove"
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz9",
+      "language": "python",
+      "starterCode": "fruits = ['apple', 'banana']\n# Add 'grape' to the list\n# Remove 'apple' from the list\nprint(fruits)",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "fruits = ['apple', 'banana']\n# Add 'grape' to the list\n# Remove 'apple' from the list\nprint(fruits)",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "fruits = ['apple', 'banana']\n# Add 'grape' to the list\n# Remove 'apple' from the list\nprint(fruits)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "['banana', 'grape']\n",
+            "match": "exact"
+          },
+          {
+            "stdout": "['banana', 'grape']\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "fruits = ['apple', 'banana']\nfruits.append('grape')\nfruits.remove('apple')\nprint(fruits)"
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz10",
+      "language": "python",
+      "starterCode": "numbers = [4, 2, 3, 1]\n# Sort the list\nprint(numbers)",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "numbers = [4, 2, 3, 1]\n# Sort the list\nprint(numbers)",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [4, 2, 3, 1]\n# Sort the list\nprint(numbers)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "[1, 2, 3, 4]\n",
+            "match": "exact"
+          },
+          {
+            "stdout": "[1, 2, 3, 4]\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "numbers = [4, 2, 3, 1]\nnumbers.sort()\nprint(numbers)"
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz11",
+      "language": "python",
+      "starterCode": "numbers = [10, 20, 30, 40]\n# Pop the last element and print it",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "numbers = [10, 20, 30, 40]\n# Pop the last element and print it",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [10, 20, 30, 40]\n# Pop the last element and print it",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "40\n",
+            "match": "exact"
+          },
+          {
+            "stdout": "40\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "numbers = [10, 20, 30, 40]\nlast_number = numbers.pop()\nprint(last_number)"
+      }
+    }
+  ]
+}

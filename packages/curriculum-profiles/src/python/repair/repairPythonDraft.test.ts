@@ -34,7 +34,7 @@ describe("repairPythonDraft", () => {
         expect(exercise.help.concept).toContain("Build the program");
         expect(exercise.help.hint_1).toContain("Python statements");
         expect(exercise.help.hint_2).toContain("Construct the code");
-        expect(result.report.repairs.length).toBe(5);
+        expect(result.report.repairs.length).toBe(6);
     });
 
     it("adds a fallback fill_blank_choice when the planned mix requires one", async () => {
@@ -230,6 +230,488 @@ describe("repairPythonDraft", () => {
                     exercise.solutionCode.includes("print("),
             ),
         ).toBe(true);
+    });
+
+    it("adds a second distinct fixed test for stdin-based code_input exercises", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "greet-user",
+                profileId: "python",
+                technical: true,
+            } as any,
+            draft: {
+                title: "Greet the user",
+                summary: "Read a name and greet the learner.",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "quiz1",
+                        kind: "code_input",
+                        title: "Greet the user",
+                        prompt: "Read a name and print Hello, [name]!",
+                        hint: "Use input and print.",
+                        help: {
+                            concept: "Programs can combine input text with output text.",
+                            hint_1: "Read the name first.",
+                            hint_2: "Print the greeting with the entered name.",
+                        },
+                        starterCode: "name = input()\n# Your code here\n",
+                        solutionCode: "name = input()\nprint(f\"Hello, {name}!\")\n",
+                        recipeType: "fixed_tests",
+                        tests: [
+                            {
+                                stdin: "Alice\n",
+                                stdout: "Hello, Alice!\n",
+                                match: "exact",
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.tests).toHaveLength(2);
+        expect(exercise.tests[0].stdin).not.toBe(exercise.tests[1].stdin);
+        expect(exercise.tests[0].stdout).not.toBe(exercise.tests[1].stdout);
+        expect(
+            result.report.repairs.some((repair) => repair.code === "PYTHON_FIXED_TEST_ADDED"),
+        ).toBe(true);
+    });
+
+    it("does not duplicate identical tests to satisfy fixed test coverage", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "sum-one",
+                profileId: "python",
+                technical: true,
+            } as any,
+            draft: {
+                title: "Add one",
+                summary: "Read a number and add one.",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "quiz1",
+                        kind: "code_input",
+                        title: "Add one",
+                        prompt: "Read an integer and print the next integer.",
+                        hint: "Use int(input()).",
+                        help: {
+                            concept: "Programs can read a number, transform it, and print the result.",
+                            hint_1: "Convert the input to an integer.",
+                            hint_2: "Add one before printing.",
+                        },
+                        starterCode: "n = int(input())\n# Your code here\n",
+                        solutionCode: "n = int(input())\nprint(n + 1)\n",
+                        recipeType: "fixed_tests",
+                        tests: [
+                            {
+                                stdin: "1\n",
+                                stdout: "2\n",
+                                match: "exact",
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        const uniqueTests = new Set(
+            exercise.tests.map((test: any) => JSON.stringify(test)),
+        );
+
+        expect(uniqueTests.size).toBe(exercise.tests.length);
+    });
+
+    it("converts literal no-stdin fixed_tests into a concept exercise instead of padding fake duplicates", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "what-python-is",
+                profileId: "python",
+                technical: false,
+            } as any,
+            draft: {
+                title: "What Python Is",
+                summary: "Intro concept topic.",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "quiz5",
+                        kind: "code_input",
+                        title: "Print a welcome message",
+                        prompt: "Print Welcome to Python programming!",
+                        hint: "Use print.",
+                        help: {
+                            concept: "print sends text to output.",
+                            hint_1: "Wrap the text in quotes.",
+                            hint_2: "Print the exact message once.",
+                        },
+                        starterCode: "# Write your code below\n",
+                        solutionCode: "print(\"Welcome to Python programming!\")\n",
+                        recipeType: "fixed_tests",
+                        tests: [
+                            {
+                                stdin: null,
+                                stdout: "Welcome to Python programming!\n",
+                                match: "exact",
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.kind).toBe("single_choice");
+        expect(exercise.options[0]).toBe("Welcome to Python programming!");
+        expect(
+            result.report.repairs.some(
+                (repair) =>
+                    repair.code === "PYTHON_STATIC_OUTPUT_CODE_INPUT_CONVERTED_TO_CONCEPT_EXERCISE" &&
+                    repair.field === "quiz5",
+            ),
+        ).toBe(true);
+    });
+
+    it("does not leave unresolved one-test static fixed_tests code_input in the repaired draft", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "running-python-code",
+                profileId: "python",
+                technical: true,
+            } as any,
+            draft: {
+                title: "Running Python Code",
+                summary: "Use the browser code runner.",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "quiz5",
+                        kind: "code_input",
+                        title: "Simple Print Program",
+                        prompt: "Print Welcome to Python programming!",
+                        starterCode: "# Write your code below\n",
+                        solutionCode: "print(\"Welcome to Python programming!\")\n",
+                        recipeType: "fixed_tests",
+                        tests: [
+                            {
+                                stdout: "Welcome to Python programming!\n",
+                                match: "exact",
+                            },
+                        ],
+                        hint: "Use print.",
+                        help: {
+                            concept: "print displays text.",
+                            hint_1: "Put the text in quotes.",
+                            hint_2: "Print the exact message once.",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(
+            result.draft.quizDraft.some(
+                (exercise: any) =>
+                    exercise.kind === "code_input" &&
+                    exercise.recipeType === "fixed_tests" &&
+                    (!Array.isArray(exercise.tests) || exercise.tests.length < 2),
+            ),
+        ).toBe(false);
+    });
+
+    it("converts every unsafe static-output fixed_tests code_input in the draft, not just the first", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "naming-and-assigning-variables",
+                profileId: "python",
+                technical: true,
+            } as any,
+            draft: {
+                title: "Naming and Assigning Variables",
+                summary: "Use variables to store values.",
+                minutes: 15,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "exercise5",
+                        kind: "code_input",
+                        title: "Print a variable",
+                        prompt: "Print the value stored in the variable.",
+                        starterCode: "# Write your code below\n",
+                        solutionCode: "message = \"Hello\"\nprint(message)\n",
+                        recipeType: "fixed_tests",
+                        tests: [{ stdout: "Hello\n", match: "exact" }],
+                        hint: "Use print.",
+                        help: {
+                            concept: "Variables store values.",
+                            hint_1: "Print the variable name.",
+                            hint_2: "The output is the stored text.",
+                        },
+                    },
+                    {
+                        id: "exercise6",
+                        kind: "code_input",
+                        title: "Print a name",
+                        prompt: "Print the name Zoe.",
+                        starterCode: "# Write your code below\n",
+                        solutionCode: "print(\"Zoe\")\n",
+                        recipeType: "fixed_tests",
+                        tests: [{ stdout: "Zoe\n", match: "exact" }],
+                        hint: "Use print.",
+                        help: {
+                            concept: "print displays text.",
+                            hint_1: "Wrap the text in quotes.",
+                            hint_2: "Print the exact name once.",
+                        },
+                    },
+                    {
+                        id: "exercise7",
+                        kind: "code_input",
+                        title: "Compute a result",
+                        prompt: "Calculate 4 + 1 and print the result.",
+                        starterCode: "# Write your code below\n",
+                        solutionCode: "print(4 + 1)\n",
+                        recipeType: "fixed_tests",
+                        tests: [{ stdout: "5\n", match: "exact" }],
+                        hint: "Use print.",
+                        help: {
+                            concept: "print can display arithmetic results.",
+                            hint_1: "Put the expression inside print.",
+                            hint_2: "The output is the sum of 4 and 1.",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(
+            result.draft.quizDraft.filter((exercise: any) => exercise.kind === "code_input"),
+        ).toHaveLength(0);
+        expect(
+            result.report.repairs.filter(
+                (repair) =>
+                    repair.code === "PYTHON_STATIC_OUTPUT_CODE_INPUT_CONVERTED_TO_CONCEPT_EXERCISE",
+            ),
+        ).toHaveLength(3);
+    });
+
+    it("adds learner-visible and per-test file fixtures for simple Python file I/O fixed tests", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "reading-text-files",
+                profileId: "python",
+                technical: true,
+            } as any,
+            draft: {
+                title: "Reading Text Files",
+                summary: "Read text from files.",
+                minutes: 15,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "q9",
+                        kind: "code_input",
+                        title: "Print file contents",
+                        prompt: "Read message.txt and print its contents.",
+                        starterCode: "# start\n",
+                        solutionCode:
+                            "with open(\"message.txt\", \"r\") as file:\n    text = file.read()\n    print(text, end=\"\")\n",
+                        recipeType: "fixed_tests",
+                        tests: [
+                            { stdout: "Hello\n", match: "exact" },
+                            { stdout: "Bye\n", match: "exact" },
+                        ],
+                        hint: "Use read().",
+                        help: {
+                            concept: "read() gets the file text.",
+                            hint_1: "Open the provided file.",
+                            hint_2: "Print the exact text you read.",
+                        },
+                    },
+                    {
+                        id: "q10",
+                        kind: "code_input",
+                        title: "Read first line",
+                        prompt: "Read info.txt and print the first line.",
+                        starterCode: "# start\n",
+                        solutionCode:
+                            "with open(\"info.txt\", \"r\") as file:\n    first_line = file.readline()\n    print(first_line)\n",
+                        recipeType: "fixed_tests",
+                        tests: [
+                            { stdout: "First line of text.\n", match: "exact" },
+                            { stdout: "Welcome to Python.\n", match: "exact" },
+                        ],
+                        hint: "Loop through the file.",
+                        help: {
+                            concept: "Read one line from the file.",
+                            hint_1: "Use readline().",
+                            hint_2: "Print the first line value.",
+                        },
+                    },
+                    {
+                        id: "q11",
+                        kind: "code_input",
+                        title: "Count lines",
+                        prompt: "Count lines in lines.txt.",
+                        starterCode: "# start\n",
+                        solutionCode:
+                            "with open(\"lines.txt\", \"r\") as file:\n    lines = file.readlines()\n    line_count = len(lines)\n    print(line_count)\n",
+                        recipeType: "fixed_tests",
+                        tests: [
+                            { stdout: "3\n", match: "exact" },
+                            { stdout: "5\n", match: "exact" },
+                        ],
+                        hint: "Count each line.",
+                        help: {
+                            concept: "len(readlines()) gives the line count.",
+                            hint_1: "Read all lines into a list.",
+                            hint_2: "Print only the final count.",
+                        },
+                    },
+                    {
+                        id: "q12",
+                        kind: "code_input",
+                        title: "Filter matching lines",
+                        prompt: "Print lines containing Python from data.txt.",
+                        starterCode: "# start\n",
+                        solutionCode:
+                            "with open(\"data.txt\", \"r\") as file:\n    for line in file:\n        if \"Python\" in line:\n            print(line.strip())\n",
+                        recipeType: "fixed_tests",
+                        tests: [
+                            { stdout: "Python is fun!\n", match: "exact" },
+                            {
+                                stdout: "I love Python!\nPython is versatile.\n",
+                                match: "exact",
+                            },
+                        ],
+                        hint: "Filter the matching lines.",
+                        help: {
+                            concept: "Only lines containing the target word should print.",
+                            hint_1: "Check each line before printing it.",
+                            hint_2: "Strip the line before printing.",
+                        },
+                    },
+                    {
+                        id: "q13",
+                        kind: "code_input",
+                        title: "Print each cleaned line",
+                        prompt: "Read lines.txt and print each line after stripping.",
+                        starterCode: "# start\n",
+                        solutionCode:
+                            "with open(\"lines.txt\", \"r\") as file:\n    for line in file:\n        print(line.strip())\n",
+                        recipeType: "fixed_tests",
+                        tests: [
+                            {
+                                stdout: "First line\nSecond line\nThird line\n",
+                                match: "exact",
+                            },
+                            {
+                                stdout: "Line one\nLine two\nLine three\n",
+                                match: "exact",
+                            },
+                        ],
+                        hint: "Print each stripped line.",
+                        help: {
+                            concept: "Iterate through the file and clean each line before printing.",
+                            hint_1: "Loop over the file object.",
+                            hint_2: "Use strip() before print().",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        const q9 = result.draft.quizDraft.find((exercise: any) => exercise.id === "q9") as any;
+        const q10 = result.draft.quizDraft.find((exercise: any) => exercise.id === "q10") as any;
+        const q11 = result.draft.quizDraft.find((exercise: any) => exercise.id === "q11") as any;
+        const q12 = result.draft.quizDraft.find((exercise: any) => exercise.id === "q12") as any;
+        const q13 = result.draft.quizDraft.find((exercise: any) => exercise.id === "q13") as any;
+
+        expect(q9.files?.[0]).toEqual({
+            path: "message.txt",
+            content: "Hello\n",
+            readOnly: true,
+        });
+        expect(q9.tests?.[1]?.files?.[0]?.content).toBe("Bye\n");
+        expect(q10.files?.[0]).toEqual({
+            path: "info.txt",
+            content: "First line of text.",
+            readOnly: true,
+        });
+        expect(q10.tests?.[1]?.files?.[0]?.content).toBe("Welcome to Python.");
+        expect(q11.files?.[0]?.path).toBe("lines.txt");
+        expect(q11.tests?.[0]?.files?.[0]?.content).toContain("line 1");
+        expect(q11.tests?.[1]?.files?.[0]?.content.split("\n").filter(Boolean)).toHaveLength(5);
+        expect(q12.files?.[0]?.path).toBe("data.txt");
+        expect(q12.tests?.[0]?.files?.[0]?.content).toContain("Python is fun!");
+        expect(q12.tests?.[1]?.files?.[0]?.content).toContain("I love Python!");
+        expect(q13.files?.[0]?.path).toBe("lines.txt");
+        expect(q13.tests?.[0]?.files?.[0]?.content).toBe("First line\nSecond line\nThird line\n");
+        expect(
+            result.report.repairs.map((repair) => repair.code),
+        ).toEqual(
+            expect.arrayContaining([
+                "PYTHON_TEST_FILE_FIXTURE_ADDED",
+                "PYTHON_EXERCISE_FILE_FIXTURE_ADDED",
+                "PYTHON_FILE_FIXTURE_TESTS_ALIGNED",
+            ]),
+        );
+    });
+
+    it("synthesizes distinct policy code_input exercises", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "truthiness-and-empty-values",
+                title: "Truthiness and Empty Values",
+                summary: "Understand falsy values.",
+                plannedExerciseCounts: {
+                    total: 3,
+                    dominantKind: "code_input",
+                    counts: {
+                        single_choice: 0,
+                        multi_choice: 0,
+                        drag_reorder: 0,
+                        fill_blank_choice: 0,
+                        code_input: 2,
+                    },
+                },
+            } as any,
+            draft: {
+                title: "Truthiness",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [],
+            } as any,
+        });
+
+        const codeInputs = result.draft.quizDraft.filter(
+            (exercise: any) => exercise.kind === "code_input",
+        );
+        const signatures = new Set(
+            codeInputs.map((exercise: any) =>
+                JSON.stringify({
+                    prompt: exercise.prompt,
+                    recipeType: exercise.recipeType,
+                    tests: exercise.tests,
+                }),
+            ),
+        );
+
+        expect(signatures.size).toBe(codeInputs.length);
+        expect(codeInputs).toHaveLength(2);
+        expect(
+            result.report.repairs.some(
+                (repair) => repair.code === "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+            ),
+        ).toBe(false);
     });
 
     it("rewrites function-return tasks into runnable stdin/stdout programs", async () => {
@@ -1352,4 +1834,275 @@ describe("repairPythonDraft", () => {
         expect(
             result.draft.quizDraft.filter((exercise: any) => exercise.kind === "multi_choice"),
         ).toHaveLength(2);
-    });});
+    });
+
+    it("replaces forbidden Python workspace terms in prompts, hints, and help text", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "running-python-code",
+                profileId: "python",
+                workspacePolicy: {
+                    workspace: {
+                        capabilities: {
+                            terminal: { enabled: false },
+                        },
+                    },
+                },
+            } as any,
+            draft: {
+                title: "Terminal basics",
+                summary: "Use the console to see terminal output.",
+                minutes: 10,
+                sketchBlocks: [
+                    {
+                        id: "sketch1",
+                        title: "Terminal overview",
+                        bodyMarkdown: "Read the console or output area after you run the code.",
+                    },
+                ],
+                quizDraft: [
+                    {
+                        id: "q1",
+                        kind: "single_choice",
+                        title: "Terminal question",
+                        prompt: "Which panel replaces the console in this lesson?",
+                        hint: "Look at the terminal output after you click Run.",
+                        help: {
+                            concept: "The terminal is not part of this lesson workspace.",
+                            hint_1: "The console output appears below the editor.",
+                            hint_2: "Do not open a shell for this activity.",
+                        },
+                        options: ["Code editor", "Output panel", "Terminal", "File manager"],
+                        correctOptionIds: ["b"],
+                    },
+                ],
+            } as any,
+        });
+
+        expect(result.draft.title).toBe("code editor basics");
+        expect(result.draft.summary).toBe("Use the output panel to see output panel.");
+        expect(result.draft.sketchBlocks[0]?.bodyMarkdown).toContain("output panel");
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.prompt).not.toContain("console");
+        expect(exercise.hint).not.toContain("terminal");
+        expect(exercise.help.concept).not.toContain("terminal");
+        expect(exercise.help.hint_1).not.toContain("console");
+        expect(exercise.help.hint_2).not.toContain("shell");
+        expect(result.report.repairs.some((repair) => repair.code === "PYTHON_FORBIDDEN_WORKSPACE_TERM_REPLACED")).toBe(true);
+    });
+
+    it("replaces an exact Terminal option with a safe distinct distractor without creating duplicates", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "running-python-code",
+                profileId: "python",
+                workspacePolicy: {
+                    workspace: {
+                        capabilities: {
+                            terminal: { enabled: false },
+                        },
+                    },
+                },
+            } as any,
+            draft: {
+                title: "Topic",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "q1",
+                        kind: "multi_choice",
+                        title: "Workspace parts",
+                        prompt: "Which workspace parts are available in this lesson?",
+                        hint: "Pick the visible browser tools.",
+                        help: {
+                            concept: "The lesson uses browser workspace controls.",
+                            hint_1: "Look for tools you can see on screen.",
+                            hint_2: "Ignore tools that are not available in this lesson.",
+                        },
+                        options: ["Code editor", "Output panel", "Terminal", "Lesson notes panel"],
+                        correctOptionIds: ["a", "b"],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.options).not.toContain("Terminal");
+        expect(new Set(exercise.options).size).toBe(exercise.options.length);
+        expect(result.report.repairs.some((repair) => repair.code === "PYTHON_FORBIDDEN_WORKSPACE_OPTION_REPLACED")).toBe(true);
+    });
+
+    it("removes Terminal from correct answers and restores allowed workspace answers", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "running-python-code",
+                profileId: "python",
+                workspacePolicy: {
+                    workspace: {
+                        capabilities: {
+                            terminal: { enabled: false },
+                        },
+                    },
+                },
+            } as any,
+            draft: {
+                title: "Topic",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "q1",
+                        kind: "multi_choice",
+                        title: "Available tools",
+                        prompt: "Which tools are available in this lesson? Select all that apply.",
+                        hint: "Choose the tools visible in the browser workspace.",
+                        help: {
+                            concept: "Only the in-browser tools count here.",
+                            hint_1: "The correct answers are tools learners can actually use.",
+                            hint_2: "Terminal-based tools are not available in this lesson.",
+                        },
+                        options: ["Code editor", "Output panel", "Terminal", "Color theme picker"],
+                        correctOptionIds: ["a", "c"],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.options).not.toContain("Terminal");
+        expect(exercise.correctOptionIds).toEqual(["a"]);
+        expect(result.report.repairs.some((repair) => repair.code === "PYTHON_FORBIDDEN_WORKSPACE_CORRECT_ANSWER_REPAIRED")).toBe(true);
+    });
+
+    it("removes forbidden Python workspace terms from repaired learner-facing text", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "running-python-code",
+                profileId: "python",
+                workspacePolicy: {
+                    workspace: {
+                        capabilities: {
+                            terminal: { enabled: false },
+                        },
+                    },
+                },
+            } as any,
+            draft: {
+                title: "Topic",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "q1",
+                        kind: "multi_choice",
+                        title: "Workspace parts",
+                        prompt: "Which of these are visible in the Terminal?",
+                        hint: "Read the console carefully.",
+                        help: {
+                            concept: "The terminal shows output.",
+                            hint_1: "The console is visible below the editor.",
+                            hint_2: "The shell is not needed here.",
+                        },
+                        options: ["Code editor", "Output panel", "Terminal", "File manager"],
+                        correctOptionIds: ["a", "b"],
+                    },
+                ],
+            } as any,
+        });
+
+        expect(JSON.stringify(result.draft)).not.toMatch(/\bterminal\b/i);
+        expect(JSON.stringify(result.draft)).not.toMatch(/\bcommand line\b/i);
+        expect(JSON.stringify(result.draft)).not.toMatch(/\bshell\b/i);
+        expect(JSON.stringify(result.draft)).not.toMatch(/\bconsole\b/i);
+    });
+
+    it("does not rewrite unrelated SQL workspace wording in Python repair", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "python-topic",
+                profileId: "python",
+                workspacePolicy: {
+                    workspace: {
+                        capabilities: {
+                            terminal: { enabled: false },
+                        },
+                    },
+                },
+            } as any,
+            draft: {
+                title: "Topic",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "q1",
+                        kind: "single_choice",
+                        title: "Workspace wording",
+                        prompt: "Which label refers to the SQL editor in another subject?",
+                        hint: "Look for the exact workspace label.",
+                        help: {
+                            concept: "This question compares workspace labels across subjects.",
+                            hint_1: "Only forbidden Python terminal terms should be repaired here.",
+                            hint_2: "Unrelated SQL wording should stay unchanged.",
+                        },
+                        options: ["SQL editor", "results table", "Code editor", "Output panel"],
+                        correctOptionIds: ["a"],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.options[0]).toBe("SQL editor");
+        expect(exercise.options[1]).toBe("results table");
+    });
+
+    it("skips Python terminal-term repair when the workspace actually supports a terminal", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "terminal-friendly-python",
+                profileId: "python",
+                workspacePolicy: {
+                    workspace: {
+                        capabilities: {
+                            terminal: { enabled: true },
+                        },
+                    },
+                },
+            } as any,
+            draft: {
+                title: "Terminal basics",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "q1",
+                        kind: "single_choice",
+                        title: "Terminal question",
+                        prompt: "Which tool is the terminal?",
+                        hint: "Pick the terminal.",
+                        help: {
+                            concept: "The terminal is available in this workspace.",
+                            hint_1: "It accepts commands directly.",
+                            hint_2: "Choose the terminal option.",
+                        },
+                        options: ["Terminal", "Output panel", "Code editor", "File manager"],
+                        correctOptionIds: ["a"],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.options).toContain("Terminal");
+        expect(exercise.prompt).toContain("terminal");
+        expect(result.report.repairs.some((repair) => repair.code === "PYTHON_FORBIDDEN_WORKSPACE_OPTION_REPLACED")).toBe(false);
+    });
+});

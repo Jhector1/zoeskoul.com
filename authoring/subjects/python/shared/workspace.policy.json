@@ -10,6 +10,7 @@
   "preferredTerms": {
     "terminal": "code editor",
     "command line": "code editor",
+    "shell": "code editor",
     "console": "output panel",
     "run file": "click Run"
   },
@@ -24,8 +25,14 @@
     "save this as main.py",
     "terminal",
     "command line",
+    "shell",
+    "console",
     "pip install",
+    "package installation",
     "VS Code",
-    "local IDE"
+    "local IDE",
+    "file manager",
+    "file creation",
+    "multi-file project"
   ]
 }

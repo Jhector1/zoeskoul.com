@@ -1,0 +1,274 @@
+{
+  "title": "Decomposition and Refactoring",
+  "summary": "Break a larger task into clear helper functions.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Decomposition",
+      "bodyMarkdown": "Decomposition in programming involves breaking down a complex problem into smaller, more manageable parts. This approach helps in organizing code, making it more readable and maintainable. For example, if you're building a calculator, you might decompose it into functions like `add`, `subtract`, `multiply`, and `divide`. Each function handles a specific operation, making the overall program easier to understand and modify.\n\nTry it yourself: Think of a simple task, like making a sandwich, and break it down into smaller steps. How would you write a function for each step?"
+    },
+    {
+      "id": "sketch2",
+      "title": "Refactoring for Clarity",
+      "bodyMarkdown": "Refactoring is the process of restructuring existing code without changing its external behavior. The goal is to improve the code's structure and readability. For instance, if you have a function that does too many things, you might refactor it by extracting some of its logic into separate helper functions.\n\nExample:\n\n```python\ndef process_data(data):\n    cleaned_data = clean(data)\n    analyzed_data = analyze(cleaned_data)\n    return summarize(analyzed_data)\n```\n\nIn this example, `process_data` is broken down into three distinct steps, each handled by its own function. This makes the code easier to follow and maintain.\n\nYour turn: Look at a piece of your own code and see if there's a way to refactor it for better clarity."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Purpose of Decomposition",
+      "prompt": "What is the primary purpose of decomposition in programming?",
+      "options": [
+        "To make code run faster",
+        "To break down complex problems into smaller parts",
+        "To increase the number of lines of code",
+        "To make code harder to understand"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how decomposition affects code structure.",
+      "help": {
+        "concept": "Decomposition helps in breaking down complex problems into smaller, manageable parts.",
+        "hint_1": "Decomposition makes code easier to manage.",
+        "hint_2": "Decomposition improves code readability and maintainability."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Refactoring Benefits",
+      "prompt": "Which of the following is a benefit of refactoring code?",
+      "options": [
+        "Increases code execution speed",
+        "Makes code harder to read",
+        "Improves code readability and maintainability",
+        "Adds more features to the code"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Consider how refactoring affects code quality.",
+      "help": {
+        "concept": "Refactoring improves the internal structure of code without changing its behavior.",
+        "hint_1": "Refactoring makes code easier to read and maintain.",
+        "hint_2": "Refactoring can help reduce code complexity."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Decomposition Examples",
+      "prompt": "Which of the following are examples of decomposition in programming? Select all that apply.",
+      "options": [
+        "Creating a function to handle user input",
+        "Writing a single function to perform all tasks",
+        "Dividing a program into multiple functions",
+        "Using a loop to iterate over data"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Think about breaking down tasks into smaller functions.",
+      "help": {
+        "concept": "Decomposition involves dividing a task into smaller, manageable functions.",
+        "hint_1": "Consider tasks that can be split into smaller functions.",
+        "hint_2": "Decomposition often involves creating helper functions."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Refactoring Techniques",
+      "prompt": "Which of the following are common refactoring techniques? Select all that apply.",
+      "options": [
+        "Renaming variables for clarity",
+        "Adding more comments",
+        "Extracting functions",
+        "Increasing code complexity"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Think about methods to improve code structure.",
+      "help": {
+        "concept": "Refactoring techniques include methods to improve code structure and readability.",
+        "hint_1": "Consider techniques that simplify code.",
+        "hint_2": "Refactoring often involves renaming and extracting functions."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Steps in Decomposition",
+      "prompt": "Arrange the steps of decomposition in the correct order.",
+      "tokens": [
+        "Identify the problem",
+        "Break down into smaller tasks",
+        "Implement solutions",
+        "Test the solution"
+      ],
+      "correctOrder": [
+        "Identify the problem",
+        "Break down into smaller tasks",
+        "Implement solutions",
+        "Test the solution"
+      ],
+      "hint": "Start with identifying the problem and end with testing the solution.",
+      "help": {
+        "concept": "Decomposition involves breaking down a problem, implementing solutions, and testing them.",
+        "hint_1": "Begin with understanding the problem.",
+        "hint_2": "End with testing the implemented solution."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Refactoring Process",
+      "prompt": "Arrange the steps of the refactoring process in the correct order.",
+      "tokens": [
+        "Identify code to refactor",
+        "Make changes",
+        "Test the refactored code"
+      ],
+      "correctOrder": [
+        "Identify code to refactor",
+        "Make changes",
+        "Test the refactored code"
+      ],
+      "hint": "Start with identifying code to refactor and end with testing the refactored code.",
+      "help": {
+        "concept": "Refactoring involves identifying code to improve, making changes, and testing.",
+        "hint_1": "Begin with identifying the code that needs improvement.",
+        "hint_2": "End with testing the refactored code."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Function Definition",
+      "prompt": "Complete the function definition: `def [blank1](x, y):`",
+      "template": "def [blank1](x, y):",
+      "choices": [
+        "add",
+        "subtract",
+        "multiply",
+        "divide"
+      ],
+      "correctValue": "add",
+      "hint": "Think about a common function name for adding two numbers.",
+      "help": {
+        "concept": "Function names should be descriptive of their purpose.",
+        "hint_1": "The function name should indicate it adds two numbers.",
+        "hint_2": "A common name for this function is 'the missing term'."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Variable Assignment",
+      "prompt": "Complete the variable assignment: `total = [blank1]`",
+      "template": "total = [blank1]",
+      "choices": [
+        "sum",
+        "10",
+        "result",
+        "average"
+      ],
+      "correctValue": "10",
+      "hint": "Think about what value might be assigned to 'total'.",
+      "help": {
+        "concept": "Variable assignments store values in variables.",
+        "hint_1": "The value assigned to 'total' should be a number or result of a calculation.",
+        "hint_2": "Consider assigning a sum to 'total'."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Sum Function",
+      "prompt": "Write a function `sum_numbers` that takes a list of numbers and returns their sum.",
+      "starterCode": "def sum_numbers(numbers):\n    # Initialize total sum\n    total = 0\n    # Iterate over numbers\n    for number in numbers:\n        # Add each number to total\n        \n    return total",
+      "solutionCode": "def sum_numbers(numbers):\n    total = 0\n    for number in numbers:\n        total += number\n    return total",
+      "tests": [
+        {
+          "stdout": "6\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "10\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use a loop to iterate over the list and accumulate the sum.",
+      "help": {
+        "concept": "The function should iterate over the list and add each number to a total sum.",
+        "hint_1": "Initialize a variable to store the sum.",
+        "hint_2": "Use a loop to add each number in the list to the sum."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Product Function",
+      "prompt": "Write a function `product_numbers` that takes a list of numbers and returns their product.",
+      "starterCode": "def product_numbers(numbers):\n    # Initialize total product\n    product = 1\n    # Iterate over numbers\n    for number in numbers:\n        # Multiply each number to product\n        \n    return product",
+      "solutionCode": "def product_numbers(numbers):\n    product = 1\n    for number in numbers:\n        product *= number\n    return product",
+      "tests": [
+        {
+          "stdout": "24\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "120\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use a loop to iterate over the list and multiply the numbers.",
+      "help": {
+        "concept": "The function should iterate over the list and multiply each number to get the product.",
+        "hint_1": "Initialize a variable to store the product.",
+        "hint_2": "Use a loop to multiply each number in the list to the product."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Average Function",
+      "prompt": "Write a function `average_numbers` that takes a list of numbers and returns their average.",
+      "starterCode": "def average_numbers(numbers):\n    # Calculate total sum\n    total = sum(numbers)\n    # Calculate average\n    \n    return average",
+      "solutionCode": "def average_numbers(numbers):\n    total = sum(numbers)\n    average = total / len(numbers)\n    return average",
+      "tests": [
+        {
+          "stdout": "3.0\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "5.0\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Calculate the sum of the numbers and divide by the count.",
+      "help": {
+        "concept": "The function should calculate the sum and divide by the number of elements to find the average.",
+        "hint_1": "Use the sum function to get the total.",
+        "hint_2": "Divide the total by the length of the list."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Refactor a Calculator",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

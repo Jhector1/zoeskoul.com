@@ -1,3 +1,6 @@
+import fs from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
 import { spawn } from "node:child_process";
 import type { RunCodeFn } from "./runner.js";
 
@@ -25,6 +28,22 @@ export const runLocalCode: RunCodeFn = async (args) => {
     }
 
     const timeoutMs = Math.max(250, Number(args.limits?.timeoutMs ?? 4000));
+    const tempDir = args.files ? await fs.mkdtemp(path.join(os.tmpdir(), "curr-code-")) : null;
+
+    if (tempDir && args.files) {
+        const entries = Array.isArray(args.files)
+            ? args.files
+            : Object.entries(args.files).map(([filePath, content]) => ({
+                path: filePath,
+                content,
+            }));
+
+        for (const entry of entries) {
+            const filePath = path.join(tempDir, entry.path);
+            await fs.mkdir(path.dirname(filePath), { recursive: true });
+            await fs.writeFile(filePath, entry.content, "utf8");
+        }
+    }
 
     return new Promise((resolve) => {
         let stdout = "";
@@ -34,6 +53,7 @@ export const runLocalCode: RunCodeFn = async (args) => {
 
         const child = spawn(resolved.command, [...resolved.args, args.code], {
             stdio: "pipe",
+            cwd: tempDir ?? undefined,
         });
 
         const timer = setTimeout(() => {
@@ -53,28 +73,40 @@ export const runLocalCode: RunCodeFn = async (args) => {
             if (settled) return;
             settled = true;
             clearTimeout(timer);
-            resolve({
+            const finalize = {
                 ok: false,
                 stdout,
                 stderr,
                 exitCode: null,
                 error: error.message,
                 timedOut,
-            });
+            };
+            void (async () => {
+                if (tempDir) {
+                    await fs.rm(tempDir, { recursive: true, force: true });
+                }
+                resolve(finalize);
+            })();
         });
 
         child.on("close", (code: number | null) => {
             if (settled) return;
             settled = true;
             clearTimeout(timer);
-            resolve({
+            const finalize = {
                 ok: !timedOut && code === 0,
                 stdout,
                 stderr,
                 exitCode: code,
                 timedOut,
                 ...(timedOut ? { error: "Execution timed out." } : {}),
-            });
+            };
+            void (async () => {
+                if (tempDir) {
+                    await fs.rm(tempDir, { recursive: true, force: true });
+                }
+                resolve(finalize);
+            })();
         });
 
         child.stdin.write(String(args.stdin ?? ""));

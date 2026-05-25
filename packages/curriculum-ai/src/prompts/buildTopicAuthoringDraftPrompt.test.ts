@@ -65,6 +65,25 @@ describe("buildTopicAuthoringDraftPrompt", () => {
             locale: "en",
             seed: {
                 profileId: "python",
+                workspacePolicy: {
+                    workspace: {
+                        name: "Browser code runner",
+                        ui: {
+                            editorLabel: "code editor",
+                            runButtonLabel: "Run",
+                            outputPanelLabel: "output panel",
+                        },
+                        capabilities: {
+                            terminal: { enabled: false },
+                            filesystem: { enabled: false },
+                            multiFileProjects: { enabled: false },
+                            packageInstall: { enabled: false },
+                        },
+                    },
+                    preferredActionLanguage: [],
+                    forbiddenActionLanguage: [],
+                    notes: [],
+                },
                 exercisePolicy: undefined,
             } as any,
             shape: {} as any,
@@ -74,8 +93,109 @@ describe("buildTopicAuthoringDraftPrompt", () => {
             'For Python code_input, prefer recipeType "fixed_tests" when the exercise is a normal runnable program.',
         );
         expect(prompt.system).toContain(
-            "include a tests array with one or more real stdin/stdout cases when using fixed_tests.",
+            "include at least 2 meaningful and distinct stdin/stdout tests.",
         );
+        expect(prompt.system).toContain(
+            "Do not create fixed_tests code_input exercises that only print one fixed literal and do not read stdin.",
+        );
+    });
+
+    it("includes thin fixed test retry feedback with exact failing exercise ids", () => {
+        const prompt = buildTopicAuthoringDraftPrompt({
+            locale: "en",
+            seed: {
+                profileId: "python",
+                workspacePolicy: {
+                    workspace: {
+                        name: "Browser code runner",
+                        ui: {
+                            editorLabel: "code editor",
+                            runButtonLabel: "Run",
+                            outputPanelLabel: "output panel",
+                        },
+                        capabilities: {
+                            terminal: { enabled: false },
+                            filesystem: { enabled: false },
+                            multiFileProjects: { enabled: false },
+                            packageInstall: { enabled: false },
+                        },
+                    },
+                    preferredActionLanguage: [],
+                    forbiddenActionLanguage: [],
+                    notes: [],
+                },
+                exercisePolicy: undefined,
+            } as any,
+            shape: {} as any,
+            retry: {
+                attempt: 1,
+                maxRetries: 2,
+                previousErrorCode: "CURRICULUM_QUALITY_GATE_FAILED",
+                previousErrorMessage: 'Exercise "quiz5" has fewer than 2 fixed test cases.',
+                qualityIssues: [
+                    {
+                        code: "THIN_FIXED_TEST_COVERAGE",
+                        exerciseId: "quiz5",
+                        message: 'Exercise "quiz5" has fewer than 2 fixed test cases.',
+                    },
+                ],
+            },
+        });
+
+        expect(prompt.system).toContain("Specific issues from the previous attempt:");
+        expect(prompt.system).toContain('quiz5: Exercise "quiz5" has fewer than 2 fixed test cases.');
+        expect(prompt.system).toContain("Every fixed_tests Python code_input needs at least 2 meaningful and distinct tests.");
+        expect(prompt.system).toContain("Failing exercise ids from the previous attempt:");
+        expect(prompt.system).toContain("quiz5");
+        expect(prompt.system).toContain("Forbidden learner-facing workspace terms: Terminal, command line, shell, console.");
+        expect(prompt.system).toContain('Do not use "Terminal" even as a distractor option.');
+    });
+
+    it("includes unsafe fixed-tests retry guidance from prior repair issues", () => {
+        const prompt = buildTopicAuthoringDraftPrompt({
+            locale: "en",
+            seed: {
+                profileId: "python",
+                workspacePolicy: {
+                    workspace: {
+                        name: "Browser code runner",
+                        ui: {
+                            editorLabel: "code editor",
+                            runButtonLabel: "Run",
+                            outputPanelLabel: "output panel",
+                        },
+                        capabilities: {
+                            terminal: { enabled: false },
+                            filesystem: { enabled: false },
+                            multiFileProjects: { enabled: false },
+                            packageInstall: { enabled: false },
+                        },
+                    },
+                    preferredActionLanguage: [],
+                    forbiddenActionLanguage: [],
+                    notes: [],
+                },
+                exercisePolicy: undefined,
+            } as any,
+            shape: {} as any,
+            retry: {
+                attempt: 1,
+                maxRetries: 2,
+                previousErrorCode: "CRITIQUE_VALIDATION_FAILED",
+                previousErrorMessage: 'Exercise "quiz5" is invalid as fixed_tests code_input because it does not read stdin.',
+                qualityIssues: [
+                    {
+                        code: "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+                        exerciseId: "quiz5",
+                        message: 'Exercise "quiz5" is invalid as fixed_tests code_input because it does not read stdin.',
+                    },
+                ],
+            },
+        });
+
+        expect(prompt.system).toContain("These exercise ids were invalid as fixed_tests code_input:");
+        expect(prompt.system).toContain("Replace them with non-code exercises or regenerate them as stdin-based code_input with at least 2 tests.");
+        expect(prompt.system).toContain("Do not produce static print-only code_input tasks with one test.");
     });
 
     it("does not inject SQL or Python code_input rules into a profile that does not opt in", () => {

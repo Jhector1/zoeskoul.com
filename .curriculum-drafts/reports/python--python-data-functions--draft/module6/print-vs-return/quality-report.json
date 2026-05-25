@@ -1,0 +1,74 @@
+{
+  "ok": true,
+  "profileId": "python",
+  "subjectSlug": "python--python-data-functions--draft",
+  "courseSlug": "python-data-functions",
+  "topicId": "print-vs-return",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 11,
+    "exerciseKinds": {
+      "single_choice": 2,
+      "multi_choice": 2,
+      "drag_reorder": 2,
+      "fill_blank_choice": 2,
+      "code_input": 3
+    },
+    "codeInputs": 3,
+    "projects": 3,
+    "capstones": 3,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 4,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 4,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-6-functions-and-modularity/python-6-function-basics/print-vs-return",
+      "profileId": "python",
+      "moduleId": "python-6-functions-and-modularity",
+      "topicId": "print-vs-return",
+      "message": "Topic \"print-vs-return\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-6-functions-and-modularity/python-6-function-basics/print-vs-return",
+      "profileId": "python",
+      "moduleId": "python-6-functions-and-modularity",
+      "topicId": "print-vs-return",
+      "exerciseId": "code1",
+      "message": "Exercise \"code1\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-6-functions-and-modularity/python-6-function-basics/print-vs-return",
+      "profileId": "python",
+      "moduleId": "python-6-functions-and-modularity",
+      "topicId": "print-vs-return",
+      "exerciseId": "code2",
+      "message": "Exercise \"code2\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-6-functions-and-modularity/python-6-function-basics/print-vs-return",
+      "profileId": "python",
+      "moduleId": "python-6-functions-and-modularity",
+      "topicId": "print-vs-return",
+      "exerciseId": "code3",
+      "message": "Exercise \"code3\" starterCode appears to contain most of the final solution structure."
+    }
+  ]
+}

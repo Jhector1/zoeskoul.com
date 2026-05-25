@@ -123,6 +123,113 @@ describe("buildTopicSeedFromPlanNode", () => {
         expect(seed.plannedExerciseCounts?.counts.code_input).toBe(1);
     });
 
+    it("caps conceptual Python topics to at most one code_input by default", () => {
+        const seed = buildTopicSeedFromPlanNode({
+            blueprint: {
+                profileId: "python",
+                teachingStyle: {
+                    quizWeight: 0.5,
+                    codeInputWeight: 0.5,
+                },
+            } as any,
+            spec: {
+                modules: [],
+                policy: {
+                    exercisePolicy: {
+                        generationTargets: {
+                            quizBankTarget: 8,
+                            projectCodeInputMin: 3,
+                            projectCodeInputTarget: 5,
+                            projectCodeInputMax: 5,
+                        },
+                    },
+                },
+            } as any,
+            module: {
+                moduleSlug: "m0",
+                title: "Module 0",
+                order: 1,
+                purpose: "Intro",
+                learningObjectives: ["Obj 1"],
+                guidedExercises: ["Ex 1"],
+                quizFocus: ["Focus 1"],
+                moduleProject: "Proj",
+            } as any,
+            section: {
+                sectionSlug: "s0",
+                title: "Section 0",
+                order: 1,
+            } as any,
+            topic: {
+                topicId: "what-python-is",
+                order: 1,
+                title: "What Python Is",
+                summary: "Conceptual introduction.",
+                minutes: 12,
+                technical: false,
+                learningGoals: ["Explain what Python is used for"],
+            } as any,
+        });
+
+        expect(seed.technical).toBe(false);
+        expect(seed.generationTargets.projectCodeInputTarget).toBe(1);
+        expect(seed.generationTargets.projectCodeInputMax).toBe(1);
+        expect(seed.plannedExerciseCounts?.counts.code_input).toBeLessThanOrEqual(1);
+    });
+
+    it("honors explicit Python intro-topic overrides that keep code_input to one", () => {
+        const seed = buildTopicSeedFromPlanNode({
+            blueprint: {
+                profileId: "python",
+                teachingStyle: {
+                    quizWeight: 0.5,
+                    codeInputWeight: 0.5,
+                },
+            } as any,
+            spec: {
+                modules: [],
+                topicPolicies: {
+                    "running-python-code": {
+                        generationTargets: {
+                            quizBankMin: 6,
+                            quizBankTarget: 8,
+                            projectCodeInputMin: 1,
+                            projectCodeInputTarget: 1,
+                            projectCodeInputMax: 1,
+                        },
+                    },
+                },
+            } as any,
+            module: {
+                moduleSlug: "python-v2-0",
+                title: "Getting Started with Python",
+                order: 1,
+                purpose: "Intro",
+                learningObjectives: ["Obj 1"],
+                guidedExercises: ["Ex 1"],
+                quizFocus: ["Focus 1"],
+                moduleProject: "Proj",
+            } as any,
+            section: {
+                sectionSlug: "setup-and-first-programs",
+                title: "Setup and First Programs",
+                order: 1,
+            } as any,
+            topic: {
+                topicId: "running-python-code",
+                order: 1,
+                title: "Running Python Code",
+                summary: "Use the browser code editor and output panel.",
+                minutes: 18,
+                technical: true,
+                learningGoals: ["Run code", "Read output"],
+            } as any,
+        });
+
+        expect(seed.generationTargets.projectCodeInputTarget).toBe(1);
+        expect(seed.plannedExerciseCounts?.counts.code_input).toBe(1);
+    });
+
     it("builds stable topic seeds for the same inputs", () => {
         const args = {
             blueprint: {

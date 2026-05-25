@@ -1,5 +1,7 @@
 import type {
     ManifestCodeInput,
+    ManifestFileFixture,
+    ManifestStarterFiles,
     TopicBundleManifest,
     WorkspaceLanguage,
 } from "@zoeskoul/curriculum-contracts";
@@ -11,6 +13,79 @@ import {
     buildCodeInputExpected,
 } from "../base/codeInputExpected.js";
 import type { GoldenValidationIssue } from "./profileServices.js";
+
+function normalizeWorkspaceFiles(
+    files: ManifestStarterFiles | undefined,
+): Array<{ path: string; content: string }> {
+    if (!files) return [];
+
+    if (Array.isArray(files)) {
+        return files
+            .map((file) => {
+                if (typeof file === "string") {
+                    return null;
+                }
+
+                const filePath = typeof file.path === "string" ? file.path.trim() : "";
+                if (!filePath) return null;
+
+                return {
+                    path: filePath,
+                    content: String(file.content ?? ""),
+                };
+            })
+            .filter((file): file is { path: string; content: string } => Boolean(file));
+    }
+
+    return Object.entries(files)
+        .map(([filePath, value]) => ({
+            path: filePath,
+            content: typeof value === "string" ? value : String(value?.content ?? ""),
+        }))
+        .filter((file) => file.path.trim().length > 0);
+}
+
+function collectExerciseWorkspaceFiles(
+    exercise: ManifestCodeInput,
+): Array<{ path: string; content: string }> {
+    const merged = new Map<string, string>();
+    const sources = [
+        exercise.workspace?.files,
+        exercise.workspace?.initialFiles,
+        exercise.workspace?.workspaceFiles,
+        exercise.workspace?.starterFiles,
+        exercise.starterFiles,
+    ];
+
+    for (const source of sources) {
+        for (const file of normalizeWorkspaceFiles(source)) {
+            if (!merged.has(file.path)) {
+                merged.set(file.path, file.content);
+            }
+        }
+    }
+
+    return [...merged.entries()].map(([path, content]) => ({ path, content }));
+}
+
+function normalizeTestFiles(
+    files: ManifestFileFixture[] | undefined,
+): Array<{ path: string; content: string }> | undefined {
+    if (!Array.isArray(files) || files.length < 1) return undefined;
+
+    const normalized = files
+        .map((file) => {
+            const path = typeof file.path === "string" ? file.path.trim() : "";
+            if (!path) return null;
+            return {
+                path,
+                content: String(file.content ?? ""),
+            };
+        })
+        .filter((file): file is { path: string; content: string } => Boolean(file));
+
+    return normalized.length > 0 ? normalized : undefined;
+}
 
 export async function validateCodeProfileGolden(args: {
     profileId: string;
@@ -137,11 +212,20 @@ export async function validateCodeProfileGolden(args: {
         const run = await validateCodeAgainstTests({
             language: exercise.language,
             solutionCode,
-            tests: expected.tests.map((test) => ({
-                stdin: test.stdin,
-                stdout: test.stdout ?? "",
-                match: test.match ?? "exact",
-            })),
+            tests:
+                exercise.recipe.type === "fixed_tests"
+                    ? exercise.recipe.tests.map((test) => ({
+                        stdin: test.stdin,
+                        stdout: test.stdout ?? "",
+                        match: test.match ?? "exact",
+                        files: normalizeTestFiles(test.files),
+                    }))
+                    : expected.tests.map((test) => ({
+                        stdin: test.stdin,
+                        stdout: test.stdout ?? "",
+                        match: test.match ?? "exact",
+                    })),
+            files: collectExerciseWorkspaceFiles(exercise),
             limits: { timeoutMs: 4000 },
         });
 

@@ -153,6 +153,26 @@ describe("buildCurriculumQualityReport", () => {
         expect(report.issues.some((issue) => issue.code === "THIN_FIXED_TEST_COVERAGE" && issue.severity === "error")).toBe(true);
     });
 
+    it("accepts Python fixed_tests once two distinct tests are present", () => {
+        const pySeed = seed();
+        const draft = pythonDraft({
+            tests: [
+                { stdin: "1\n", stdout: "2\n", match: "exact" },
+                { stdin: "4\n", stdout: "5\n", match: "exact" },
+            ],
+        });
+        const report = buildCurriculumQualityReport({
+            profileId: "python",
+            subjectSlug: "python-for-beginners",
+            topics: [{ seed: pySeed, draft }],
+        });
+
+        expect(
+            report.issues.some((issue) => issue.code === "THIN_FIXED_TEST_COVERAGE"),
+        ).toBe(false);
+        expect(report.ok).toBe(true);
+    });
+
     it("blocks starter code that reveals the solution", () => {
         const pySeed = seed();
         const draft = pythonDraft({ starterCode: "print(2)", solutionCode: "print(2)" });
@@ -177,6 +197,20 @@ describe("buildCurriculumQualityReport", () => {
         expect(report.ok).toBe(false);
         expect(report.issues.some((issue) => issue.code === "WORKSPACE_LANGUAGE_LEAK")).toBe(true);
         expect(report.issues.some((issue) => issue.code === "WORKSPACE_ENTRY_FILE_LEAK")).toBe(true);
+    });
+
+    it("does not apply Python thin fixed-tests checks to sql_query exercises", () => {
+        const sqlTopicSeed = sqlSeed();
+        const draft = sqlDraft();
+        const report = buildCurriculumQualityReport({
+            profileId: "sql",
+            subjectSlug: "sql-foundations",
+            topics: [{ seed: sqlTopicSeed, draft }],
+        });
+
+        expect(
+            report.issues.some((issue) => issue.code === "THIN_FIXED_TEST_COVERAGE"),
+        ).toBe(false);
     });
 
     it("blocks math code_input exercises", () => {

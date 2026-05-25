@@ -353,6 +353,10 @@ function normalizeModule(
         moduleNumber,
         moduleSlug: String(module?.moduleSlug ?? "").trim(),
         prefix: cleanString(module?.prefix),
+        accessOverride:
+            module?.accessOverride === "free" || module?.accessOverride === "paid"
+                ? module.accessOverride
+                : null,
 
         order:
             typeof module?.order === "number" && Number.isFinite(module.order)
@@ -419,6 +423,15 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
         subjectSlug: String(input.subjectSlug ?? "").trim(),
         courseSlug: String(input.courseSlug ?? "").trim(),
         catalogSlug: String(input.catalogSlug ?? "").trim(),
+        accessPolicy:
+            input.accessPolicy === "free" || input.accessPolicy === "paid"
+                ? input.accessPolicy
+                : undefined,
+        moduleAccessOverrideDefault:
+            input.moduleAccessOverrideDefault === "free" ||
+            input.moduleAccessOverrideDefault === "paid"
+                ? input.moduleAccessOverrideDefault
+                : null,
         profileId,
         sourceLocale: cleanString(input.sourceLocale) ?? "en",
         targetLocales: Array.isArray(input.targetLocales)

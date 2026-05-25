@@ -1,0 +1,362 @@
+{
+  "topicId": "looping-through-lists",
+  "subjectSlug": "python--python-data-functions--draft",
+  "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+  "sectionSlug": "python--python-data-functions--draft-python-5-list-basics",
+  "prefix": "py5",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.label",
+    "summaryKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.cards.sketch1.title",
+      "sketchId": "sketch2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "quiz6",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.projectSteps.quiz6.title",
+            "exerciseKey": "quiz6",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz7",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.projectSteps.quiz7.title",
+            "exerciseKey": "quiz7",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz8",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.projectSteps.quiz8.title",
+            "exerciseKey": "quiz8",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.sketch1.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.sketch2.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.sketch2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz3",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz4",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "loop variable"
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz5",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "before"
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz6",
+      "language": "python",
+      "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Initialize sum variable\nsum_of_numbers = 0\n# Write your loop here",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Initialize sum variable\nsum_of_numbers = 0\n# Write your loop here",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [1, 2, 3, 4, 5]\n# Initialize sum variable\nsum_of_numbers = 0\n# Write your loop here",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "15\n",
+            "match": "exact"
+          },
+          {
+            "stdout": "15\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "numbers = [1, 2, 3, 4, 5]\nsum_of_numbers = 0\nfor number in numbers:\n    sum_of_numbers += number\nprint(sum_of_numbers)"
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz7",
+      "language": "python",
+      "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Write your loop here",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Write your loop here",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [1, 2, 3, 4, 5]\n# Write your loop here",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "2\n4\n",
+            "match": "exact"
+          },
+          {
+            "stdout": "2\n4\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "numbers = [1, 2, 3, 4, 5]\nfor number in numbers:\n    if number % 2 == 0:\n        print(number)"
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz8",
+      "language": "python",
+      "starterCode": "numbers = [1, 2, 3, 4, 5]\nsquares = []\nfor number in numbers:\n    squares.append(number**2)\nprint(squares)",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "numbers = [1, 2, 3, 4, 5]\nsquares = []\nfor number in numbers:\n    squares.append(number**2)\nprint(squares)",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [1, 2, 3, 4, 5]\nsquares = []\nfor number in numbers:\n    squares.append(number**2)\nprint(squares)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "[1, 4, 9, 16, 25]\n",
+            "match": "exact"
+          },
+          {
+            "stdout": "[1, 4, 9, 16, 25]\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "numbers = [1, 2, 3, 4, 5]\nsquares = [number**2 for number in numbers]\nprint(squares)"
+      }
+    },
+    {
+      "id": "policy_single_choice_1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.policy_single_choice_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "policy_multi_choice_1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.policy_multi_choice_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "policy_drag_reorder_1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.policy_drag_reorder_1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    }
+  ]
+}

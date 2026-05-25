@@ -1,0 +1,331 @@
+{
+  "title": "What Python Is Used For",
+  "summary": "Understand Python's role in automation, web apps, data, beginner programming, and AI.",
+  "minutes": 12,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Python",
+      "bodyMarkdown": "Python is a versatile programming language used in various fields such as web development, data analysis, artificial intelligence, and more. Its simple syntax makes it a great choice for beginners. \n\n### Example: Hello World\n```python\nprint(\"Hello, World!\")\n```\nThis simple program prints `Hello, World!` to the output panel. \n\n**Try it yourself:** Modify the message to print your name instead."
+    },
+    {
+      "id": "sketch2",
+      "title": "Python in Data Analysis",
+      "bodyMarkdown": "Python is widely used in data analysis due to its powerful libraries like Pandas and NumPy. These libraries help in handling large datasets efficiently.\n\n**Your turn:** Explore how Python can be used to read and process data files."
+    },
+    {
+      "id": "sketch3",
+      "title": "Python for Web Development",
+      "bodyMarkdown": "Python can be used to build web applications using frameworks like Django and Flask. These frameworks simplify the process of creating robust web applications.\n\n**Try this:** Research how Django helps in rapid web development."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Python Use Cases",
+      "prompt": "Which of the following is NOT a common use case for Python?",
+      "hint": "Think about areas where Python is less commonly applied.",
+      "help": {
+        "concept": "Python is versatile but not used for everything.",
+        "hint_1": "Consider areas dominated by other languages.",
+        "hint_2": "Python is not typically used for low-level system programming."
+      },
+      "options": [
+        "Web development",
+        "Data analysis",
+        "Mobile app development",
+        "Artificial intelligence"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Python's Popularity",
+      "prompt": "Why is Python popular among beginners?",
+      "hint": "Consider Python's syntax and learning curve.",
+      "help": {
+        "concept": "Python's syntax is simple and readable.",
+        "hint_1": "Think about how easy it is to write and read Python code.",
+        "hint_2": "Python's syntax is often described as clear and straightforward."
+      },
+      "options": [
+        "Complex syntax",
+        "Simple syntax",
+        "Limited libraries",
+        "High execution speed"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Python Libraries",
+      "prompt": "Which of the following are popular Python libraries for data analysis? (Choose all that apply)",
+      "hint": "Think about libraries that handle data efficiently.",
+      "help": {
+        "concept": "Python has several libraries for data manipulation and analysis.",
+        "hint_1": "Consider libraries known for data handling.",
+        "hint_2": "Pandas and NumPy are key libraries in data analysis."
+      },
+      "options": [
+        "Pandas",
+        "NumPy",
+        "Flask",
+        "Django"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Python Frameworks",
+      "prompt": "Which frameworks are used for web development in Python? (Choose all that apply)",
+      "hint": "Think about frameworks that simplify web app creation.",
+      "help": {
+        "concept": "Python has frameworks that aid in web development.",
+        "hint_1": "Django and Flask are popular for web apps.",
+        "hint_2": "These frameworks help in building web applications quickly."
+      },
+      "options": [
+        "Django",
+        "Flask",
+        "NumPy",
+        "Pandas"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Python Program Flow",
+      "prompt": "Arrange the steps to print a message in Python.",
+      "hint": "Start with defining the message and end with printing it.",
+      "help": {
+        "concept": "Understand the sequence of steps in a Python program.",
+        "hint_1": "Begin with setting up the message.",
+        "hint_2": "End with the print statement."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": [
+        "Define a message",
+        "Use the print function",
+        "Run the program"
+      ],
+      "correctOrder": [
+        "Define a message",
+        "Use the print function",
+        "Run the program"
+      ],
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Python Syntax Order",
+      "prompt": "Arrange the following Python syntax elements in the correct order for a simple program.",
+      "hint": "Think about the logical flow of a Python script.",
+      "help": {
+        "concept": "Python scripts follow a logical order from start to finish.",
+        "hint_1": "Start with defining variables or functions.",
+        "hint_2": "End with executing the main logic."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": [
+        "Define variables",
+        "Write logic",
+        "Print output"
+      ],
+      "correctOrder": [
+        "Define variables",
+        "Write logic",
+        "Print output"
+      ],
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Python Syntax",
+      "prompt": "Complete the following Python statement to print a message: `print([blank1])`",
+      "hint": "Think about what goes inside the print function.",
+      "help": {
+        "concept": "The print function outputs text to the console.",
+        "hint_1": "The print function needs a string to display.",
+        "hint_2": "Strings are enclosed in quotes."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "print([blank1])",
+      "choices": [
+        "\"Hello, World!\"",
+        "Hello, World!",
+        "print",
+        "\"print\""
+      ],
+      "correctValue": "\"Hello, World!\"",
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Variable Assignment",
+      "prompt": "Fill in the blank to assign a value to a variable: `age = [blank1]`",
+      "hint": "Think about what values can be assigned to variables.",
+      "help": {
+        "concept": "Variables store data values.",
+        "hint_1": "The value should be a number or string.",
+        "hint_2": "In this case, age is typically a number."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "age = [blank1]",
+      "choices": [
+        "25",
+        "\"twenty-five\"",
+        "age",
+        "\"age\""
+      ],
+      "correctValue": "25",
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Simple Python Program",
+      "prompt": "Write a Python program that asks for your name and prints a greeting.",
+      "hint": "Use the input function to get user input and print to display the message.",
+      "help": {
+        "concept": "Combine input and print to interact with the user.",
+        "hint_1": "Use `input()` to capture the user's name.",
+        "hint_2": "Use `print()` to display the greeting."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "# Ask for the user's name\nname = input(\"Enter your name: \")\n# Print a greeting\n",
+      "solutionCode": "# Ask for the user's name\nname = input(\"Enter your name: \")\n# Print a greeting\nprint(\"Hello, \" + name + \"!\")",
+      "tests": [
+        {
+          "stdin": "Alice\n",
+          "stdout": "Hello, Alice!\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "Bob\n",
+          "stdout": "Hello, Bob!\n",
+          "match": "exact"
+        }
+      ],
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "fixed_tests",
+      "checkSql": null
+    }
+  ],
+  "projectDraft": {
+    "title": "Simple Python Program",
+    "stepIds": [
+      "quiz9"
+    ]
+  }
+}

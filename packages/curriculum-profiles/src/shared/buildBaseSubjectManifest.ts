@@ -24,7 +24,7 @@ export function buildBaseSubjectManifest(
       catalogSlug: blueprint.catalogSlug ?? blueprint.subjectSlug,
       genKey: blueprint.subjectSlug,
       order: 10,
-      accessPolicy: "free",
+      accessPolicy: blueprint.accessPolicy ?? "free",
       status: "active",
       titleKey: buildSubjectTitleKey(blueprint.subjectSlug),
       descriptionKey: buildSubjectDescriptionKey(blueprint.subjectSlug),
@@ -49,7 +49,7 @@ export function buildBaseSubjectManifest(
       descriptionKey: buildModuleDescriptionKey(blueprint.subjectSlug, m.moduleSlug),
       weekStart: m.weekStart ?? null,
       weekEnd: m.weekEnd ?? null,
-      accessOverride: "free",
+      accessOverride: m.accessOverride ?? blueprint.moduleAccessOverrideDefault ?? null,
       runtimeDefaults: buildRuntimeDefaults(m),
       meta: {
         estimatedMinutes: m.sections.flatMap((s) => s.topics).reduce((sum, t) => sum + (t.minutes ?? 0), 0),

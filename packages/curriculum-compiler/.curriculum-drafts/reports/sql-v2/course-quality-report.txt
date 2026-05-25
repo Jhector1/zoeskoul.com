@@ -1,0 +1,10 @@
+subject: sql-v2
+profile: sql
+course: sql-foundations
+modules: 1
+topics: 1
+exercise counts: {"single_choice":2,"multi_choice":1,"drag_reorder":1,"fill_blank_choice":1}
+code_input count: 0
+severity counts: {"blocker":0,"error":1,"warning":1,"info":0}
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "what_sql_means" has no learning goals on its seed metadata.
+[error] MISSING_FINAL_CAPSTONE: Course is configured to require a final capstone, but none was detected.

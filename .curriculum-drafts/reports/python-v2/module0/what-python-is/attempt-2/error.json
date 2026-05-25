@@ -1,0 +1,91 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Curriculum quality gate failed for topic \"what-python-is\"\nModule: python-v2-0\nSection: python-v2-0-setup-and-first-programs\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python-v2/module0/what-python-is\n- Exercise \"quiz5\" has fewer than 2 fixed test cases.\n- Exercise \"quiz6\" has fewer than 2 fixed test cases.\n- Exercise \"quiz8\" has fewer than 2 fixed test cases.\n- Exercise \"quiz11\" has fewer than 2 fixed test cases.",
+  "stack": "RetryableTopicValidationError: Curriculum quality gate failed for topic \"what-python-is\"\nModule: python-v2-0\nSection: python-v2-0-setup-and-first-programs\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python-v2/module0/what-python-is\n- Exercise \"quiz5\" has fewer than 2 fixed test cases.\n- Exercise \"quiz6\" has fewer than 2 fixed test cases.\n- Exercise \"quiz8\" has fewer than 2 fixed test cases.\n- Exercise \"quiz11\" has fewer than 2 fixed test cases.\n    at throwRetryableReportFailure (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:82:11)\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:432:21)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:24:17)\n    at async runCompileSubject (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-subject.js:28:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:31:13)",
+  "code": "CURRICULUM_QUALITY_GATE_FAILED",
+  "retryable": true,
+  "details": {
+    "ok": false,
+    "profileId": "python",
+    "subjectSlug": "python-v2",
+    "courseSlug": "python-for-beginners",
+    "topicId": "what-python-is",
+    "summary": {
+      "modules": 1,
+      "topicsTotal": 1,
+      "exercises": 13,
+      "exerciseKinds": {
+        "single_choice": 2,
+        "multi_choice": 2,
+        "drag_reorder": 2,
+        "fill_blank_choice": 2,
+        "code_input": 5
+      },
+      "codeInputs": 5,
+      "projects": 5,
+      "capstones": 5,
+      "thinFixedTestCount": 4,
+      "blockers": 0,
+      "errors": 4,
+      "warnings": 1,
+      "infos": 0
+    },
+    "severityCounts": {
+      "blocker": 0,
+      "error": 4,
+      "warning": 1,
+      "info": 0
+    },
+    "issues": [
+      {
+        "code": "MISSING_TOPIC_LEARNING_GOALS",
+        "severity": "warning",
+        "path": "python-v2-0/python-v2-0-setup-and-first-programs/what-python-is",
+        "profileId": "python",
+        "moduleId": "python-v2-0",
+        "topicId": "what-python-is",
+        "message": "Topic \"what-python-is\" has no learning goals on its seed metadata."
+      },
+      {
+        "code": "THIN_FIXED_TEST_COVERAGE",
+        "severity": "error",
+        "path": "python-v2-0/python-v2-0-setup-and-first-programs/what-python-is",
+        "profileId": "python",
+        "moduleId": "python-v2-0",
+        "topicId": "what-python-is",
+        "exerciseId": "quiz5",
+        "message": "Exercise \"quiz5\" has fewer than 2 fixed test cases."
+      },
+      {
+        "code": "THIN_FIXED_TEST_COVERAGE",
+        "severity": "error",
+        "path": "python-v2-0/python-v2-0-setup-and-first-programs/what-python-is",
+        "profileId": "python",
+        "moduleId": "python-v2-0",
+        "topicId": "what-python-is",
+        "exerciseId": "quiz6",
+        "message": "Exercise \"quiz6\" has fewer than 2 fixed test cases."
+      },
+      {
+        "code": "THIN_FIXED_TEST_COVERAGE",
+        "severity": "error",
+        "path": "python-v2-0/python-v2-0-setup-and-first-programs/what-python-is",
+        "profileId": "python",
+        "moduleId": "python-v2-0",
+        "topicId": "what-python-is",
+        "exerciseId": "quiz8",
+        "message": "Exercise \"quiz8\" has fewer than 2 fixed test cases."
+      },
+      {
+        "code": "THIN_FIXED_TEST_COVERAGE",
+        "severity": "error",
+        "path": "python-v2-0/python-v2-0-setup-and-first-programs/what-python-is",
+        "profileId": "python",
+        "moduleId": "python-v2-0",
+        "topicId": "what-python-is",
+        "exerciseId": "quiz11",
+        "message": "Exercise \"quiz11\" has fewer than 2 fixed test cases."
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "topicId": "what-python-is",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_INPUT_PROMPT_REMOVED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "quiz7",
+      "message": "Removed interactive input prompts from Python code_input starter and solution code so fixed tests only validate program output."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_single_choice_1",
+      "message": "Added a fallback single_choice exercise to satisfy the planned exercise mix for \"what-python-is\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_multi_choice_1",
+      "message": "Added a fallback multi_choice exercise to satisfy the planned exercise mix for \"what-python-is\"."
+    }
+  ]
+}

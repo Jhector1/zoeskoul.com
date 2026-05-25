@@ -245,6 +245,7 @@ function getInitialStdin(manifest: UnknownRecord) {
 function hasUsableStarterFilesSource(value: unknown): boolean {
   return hasUsableStarterFilesValue(unwrapStarterFiles(value));
 }
+
 function firstUsableStarterFilesSource(...values: Array<unknown>) {
   for (const value of values) {
     if (hasUsableStarterFilesSource(value)) return value;
@@ -253,12 +254,12 @@ function firstUsableStarterFilesSource(...values: Array<unknown>) {
   return null;
 }
 
-export function getStarterFilesSource(manifest: UnknownRecord) {
+function collectStarterFilesSources(manifest: UnknownRecord) {
   const normalized = normalizeManifestShape(manifest);
   const workspace = isRecord(normalized.workspace) ? normalized.workspace : {};
   const recipe = isRecord(normalized.recipe) ? normalized.recipe : {};
 
-  return firstUsableStarterFilesSource(
+  return [
       workspace.starterFiles,
       workspace.files,
       workspace.initialFiles,
@@ -270,7 +271,34 @@ export function getStarterFilesSource(manifest: UnknownRecord) {
       recipe.starterFiles,
       recipe.files,
       recipe.initialFiles,
-  );
+  ];
+}
+
+export function getStarterFilesSource(manifest: UnknownRecord) {
+  return firstUsableStarterFilesSource(...collectStarterFilesSources(manifest));
+}
+
+function mergeNormalizedStarterFiles(
+    sources: Array<unknown>,
+    fallbackEntryFile: string,
+): Array<{ path: string; content: string }> {
+  const byPath = new Map<string, { path: string; content: string }>();
+
+  for (const source of sources) {
+    const normalized = normalizeStarterFiles(source, fallbackEntryFile);
+
+    for (const file of normalized) {
+      const path = normalizePath(file.path, fallbackEntryFile);
+      if (!path || byPath.has(path)) continue;
+
+      byPath.set(path, {
+        path,
+        content: file.content ?? "",
+      });
+    }
+  }
+
+  return Array.from(byPath.values());
 }
 
 export function getStarterCode(manifest: UnknownRecord) {
@@ -533,10 +561,11 @@ export function resolveExerciseWorkspace(args: {
     return cloneWorkspace(savedFromManifest);
   }
 
-  const starterFilesSource = firstUsableStarterFilesSource(
-      getStarterFilesSource(manifest),
-      args.entry?.starterFiles,
-  );
+  const starterFileSources = [
+    ...collectStarterFilesSources(manifest),
+    args.entry?.starterFiles,
+  ];
+  const starterFilesSource = firstUsableStarterFilesSource(...starterFileSources);
 
   const explicitEntryFile = getEntryFile({ manifest, language });
   const entryFromStarterFiles = getEntryFileFromStarterFiles(starterFilesSource);
@@ -551,7 +580,7 @@ export function resolveExerciseWorkspace(args: {
       manifestRecipe.starterCode,
   );
 
-  let starterFiles = normalizeStarterFiles(starterFilesSource, entryFile);
+  let starterFiles = mergeNormalizedStarterFiles(starterFileSources, entryFile);
 
   // Critical single-file fix:
   // If this exercise only has explicit starterCode, convert it into a normal

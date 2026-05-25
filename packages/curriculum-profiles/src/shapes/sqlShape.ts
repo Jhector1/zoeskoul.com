@@ -1,6 +1,7 @@
 import type { SubjectShapePack } from "./types.js";
 import { makeKeyPatterns } from "./sharedKeyPatterns.js";
 import { sharedFilesystem } from "./sharedFilesystem.js";
+import { listSqlDatasetIds } from "../sql/datasets/index.js";
 
 export const sqlShape: SubjectShapePack = {
     profileId: "sql",
@@ -86,15 +87,7 @@ export const sqlShape: SubjectShapePack = {
         fixedSqlDialect: "sqlite",
         recipeType: "sql_query",
         requiredRecipeFields: ["type", "datasetId", "resultShape", "solutionCode"],
-        allowedDatasetIds: [
-            "customers_cleanup",
-            "ddl_blank",
-            "inventory_ops",
-            "products_catalog",
-            "sales_kpi",
-            "school_relations_intro",
-            "students_intro"
-        ],
+        allowedDatasetIds: listSqlDatasetIds(),
     },
 
     aiContract: {

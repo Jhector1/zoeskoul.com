@@ -1,0 +1,10 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Invalid TopicAuthoringDraft: quizDraft[3] fill_blank_choice supports only 1 blank, but found 2",
+  "stack": "RetryableTopicValidationError: Invalid TopicAuthoringDraft: quizDraft[3] fill_blank_choice supports only 1 blank, but found 2\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:268:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:25:17)\n    at async runCompileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-course.js:24:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:38:13)",
+  "code": "TOPIC_GENERATION_OUTPUT_INVALID",
+  "retryable": true,
+  "details": {
+    "topicId": "scope-and-local-variables"
+  }
+}

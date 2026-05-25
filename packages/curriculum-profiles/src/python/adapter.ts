@@ -22,6 +22,7 @@ export const pythonProfileAdapter: CourseProfileAdapter = {
             title: args.topic.title,
             summary: args.topic.summary,
             minutes: args.topic.minutes,
+            technical: args.topic.technical,
             moduleTitle: args.module.title,
             modulePurpose: args.module.purpose,
             moduleObjectives: args.module.learningObjectives ?? [],

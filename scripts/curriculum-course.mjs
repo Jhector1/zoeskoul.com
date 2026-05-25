@@ -1,6 +1,11 @@
 import { existsSync, readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
+import {
+  buildCheckCliPlan,
+  buildPublishCliPlan,
+  assertCourseScopedPublishPlan,
+} from "./curriculum-course-lib.mjs";
 
 const rawArgs = process.argv.slice(2).filter((arg) => arg !== "--");
 
@@ -68,7 +73,9 @@ if (!action || !subjectSlug) {
 }
 
 if (positional.length > 1) {
-  console.error(`Unexpected extra positional argument(s): ${positional.slice(1).join(" ")}`);
+  console.error(
+      `Unexpected extra positional argument(s): ${positional.slice(1).join(" ")}`,
+  );
   printUsage();
   process.exit(1);
 }
@@ -90,7 +97,7 @@ Common examples:
   pnpm curr:course -- compile sql --resume
   pnpm curr:course -- validate sql
   pnpm curr:course -- validate-spec sql
-  pnpm curr:course -- publish sql --force
+  pnpm curr:course -- publish-subject sql --force
   pnpm curr:course -- publish-auto sql --force
   pnpm curr:course -- check sql --resume
 
@@ -99,11 +106,13 @@ Course-specific examples:
   pnpm curr:course -- compile-course sql sql-foundations
   pnpm curr:course -- compile-course sql multi-table-sql --live-subject sql-preview
   pnpm curr:course -- compile-course sql multi-table-sql --live-subject sql --force-live-overwrite
+  pnpm curr:course -- publish python python-data-functions --force
+  pnpm curr:course -- publish python python-data-functions --live-subject python-v2 --force
 
 Flags:
   --resume                 Skip topics that already have completed draft artifacts
   --force                  Allow publish/publish-auto to overwrite an existing subject release
-  --live-subject <slug>    Compile a course into an explicit live/preview subject slug
+  --live-subject <slug>    Compile/publish a course into an explicit live subject slug override
   --force-live-overwrite   Allow compile-course to overwrite the configured live publish target with a non-target course
 
 Actions:
@@ -113,6 +122,7 @@ Actions:
   validate-course
   validate-spec
   publish
+  publish-subject
   publish-auto
   critique
   critique-draft
@@ -217,7 +227,7 @@ function assertCourseBlueprintExists(resolvedCourseSlug) {
   assertFileExists(getCourseBlueprintPath(resolvedCourseSlug), "Course blueprint");
 }
 
-function assertPublishSafe() {
+function assertSubjectPublishSafe() {
   const configuredLiveSubjectSlug = resolveConfiguredLiveSubjectSlug();
 
   const liveManifestPath = path.join(
@@ -228,7 +238,7 @@ function assertPublishSafe() {
       "lib",
       "subjects",
       configuredLiveSubjectSlug,
-      "subject.manifest.json"
+      "subject.manifest.json",
   );
 
   if (!force && existsSync(liveManifestPath)) {
@@ -242,6 +252,60 @@ This could overwrite an existing generated subject release.
 Use --force only if you intentionally want to replace this exact release:
 
   pnpm curr:course -- ${action} ${subjectSlug} --force
+`);
+    process.exit(1);
+  }
+}
+
+function assertCoursePublishSafe(resolvedCourseSlug, resolvedLiveSubjectSlug) {
+  const configuredTargetCourseSlug = resolvePublishTargetCourseSlug();
+  const configuredLiveSubjectSlug = resolveConfiguredLiveSubjectSlug();
+
+  const publishingConfiguredLiveSubject =
+      resolvedLiveSubjectSlug === configuredLiveSubjectSlug;
+
+  const selectedCourseIsConfiguredTarget =
+      resolvedCourseSlug === configuredTargetCourseSlug;
+
+  if (publishingConfiguredLiveSubject && !selectedCourseIsConfiguredTarget) {
+    console.error(`
+Refusing to publish course ${subjectSlug}/${resolvedCourseSlug} to configured live subject ${configuredLiveSubjectSlug}.
+
+That live subject is configured for:
+  ${subjectSlug}/${configuredTargetCourseSlug}
+
+Pass --live-subject <liveSubjectSlug> only if you intentionally want a real live override,
+or pass --force-live-overwrite only if you intentionally want to overwrite the configured live subject with this non-target course.
+`);
+    process.exit(1);
+  }
+
+  const liveManifestPath = path.join(
+      root,
+      "apps",
+      "web",
+      "src",
+      "lib",
+      "subjects",
+      resolvedLiveSubjectSlug,
+      "subject.manifest.json",
+  );
+
+  if (!force && existsSync(liveManifestPath)) {
+    console.error(`
+Refusing to publish because this course release already exists:
+
+  ${liveManifestPath}
+
+Requested course:
+  ${subjectSlug}/${resolvedCourseSlug}
+
+Resolved live subject:
+  ${resolvedLiveSubjectSlug}
+
+Use --force only if you intentionally want to replace this exact release:
+
+  pnpm curr:course -- publish ${subjectSlug} ${resolvedCourseSlug} --live-subject ${resolvedLiveSubjectSlug} --force
 `);
     process.exit(1);
   }
@@ -313,13 +377,41 @@ switch (action) {
   }
 
   case "publish": {
-    assertPublishSafe();
+    const resolvedCourseSlug = resolveCourseSlug({ required: true });
+    assertCourseExists(resolvedCourseSlug);
+
+    const resolvedLiveSubjectSlug =
+        liveSubjectSlugFlag ?? resolveConfiguredLiveSubjectSlug();
+
+    assertCoursePublishSafe(resolvedCourseSlug, resolvedLiveSubjectSlug);
+
+    const cliPlan = buildPublishCliPlan({
+      subjectSlug,
+      courseSlug: resolvedCourseSlug,
+      liveSubjectSlug: liveSubjectSlugFlag,
+      force,
+      forceLiveOverwrite,
+    });
+
+    assertCourseScopedPublishPlan(cliPlan, {
+      subjectSlug,
+      courseSlug: resolvedCourseSlug,
+    });
+
+    for (const args of cliPlan) {
+      cli(args);
+    }
+
+    break;
+  }
+  case "publish-subject": {
+    assertSubjectPublishSafe();
     cli(["publish-subject", subjectSlug]);
     break;
   }
 
   case "publish-auto": {
-    assertPublishSafe();
+    assertSubjectPublishSafe();
     cli(["publish-auto", subjectSlug]);
     break;
   }
@@ -348,20 +440,19 @@ switch (action) {
 
     run("pnpm", ["curr:build"]);
 
-    cli(["validate-subject", subjectSlug]);
-    cli(["validate-course", subjectSlug, resolvedCourseSlug]);
-
-    cli([
-      "compile-subject",
-      subjectSlug,
-      ...(resume ? ["--resume"] : []),
-    ]);
-
-    cli(["validate-subject", subjectSlug]);
-
     const blueprintPath = getCourseBlueprintPath(resolvedCourseSlug);
-    if (existsSync(blueprintPath)) {
-      cli(["critique-subject-draft", blueprintPath]);
+    const cliPlan = buildCheckCliPlan({
+      subjectSlug,
+      courseSlug: resolvedCourseSlug,
+      resume,
+      liveSubjectSlug: liveSubjectSlugFlag,
+      forceLiveOverwrite,
+      hasCourseBlueprint: existsSync(blueprintPath),
+      courseBlueprintPath: blueprintPath,
+    });
+
+    for (const args of cliPlan) {
+      cli(args);
     }
 
     run("pnpm", ["curr:test:golden"]);

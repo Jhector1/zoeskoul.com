@@ -4,6 +4,7 @@ import path from "node:path";
 import type { CourseBlueprint, TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider, TopicRetryContext } from "@zoeskoul/curriculum-ai";
 import { generateTopicAuthoringDraftAttempt } from "@zoeskoul/curriculum-ai";
+import { getRepoRoot } from "@zoeskoul/curriculum-core";
 import {
     getProfileServices,
     getSubjectShape,
@@ -55,6 +56,7 @@ function getTopicReportDir(args: {
     topicId: string;
 }) {
     return path.join(
+        getRepoRoot(),
         ".curriculum-drafts",
         "reports",
         args.subjectSlug,
@@ -73,6 +75,53 @@ function errorCode(error: unknown) {
 
 function errorMessage(error: unknown) {
     return error instanceof Error ? error.message : String(error);
+}
+
+function extractRetryIssues(error: unknown): TopicRetryContext["qualityIssues"] {
+    if (!isRetryableTopicValidationError(error)) return undefined;
+
+    const details = error.details as
+        | {
+            issues?: unknown;
+            repairs?: unknown;
+        }
+        | undefined;
+    const rawIssues = Array.isArray(details?.issues) ? details.issues : [];
+    const rawRepairs = Array.isArray(details?.repairs)
+        ? details.repairs.map((repair) =>
+            repair && typeof repair === "object"
+                ? {
+                    code: (repair as { code?: unknown }).code,
+                    exerciseId: (repair as { field?: unknown }).field,
+                    message: (repair as { message?: unknown }).message,
+                    severity: (repair as { severity?: unknown }).severity,
+                }
+                : repair,
+        )
+        : [];
+    const issues = [...rawIssues, ...rawRepairs];
+    if (issues.length < 1) return undefined;
+
+    return issues
+        .filter((issue): issue is {
+            code?: unknown;
+            exerciseId?: unknown;
+            message?: unknown;
+            severity?: unknown;
+        } =>
+            Boolean(issue) &&
+            typeof issue === "object" &&
+            (issue as { severity?: unknown }).severity !== "warning" &&
+            (issue as { severity?: unknown }).severity !== "info" &&
+            typeof (issue as { message?: unknown }).message === "string",
+        )
+        .map((issue) => ({
+            code: String(issue.code ?? "UNKNOWN"),
+            ...(typeof issue.exerciseId === "string"
+                ? { exerciseId: issue.exerciseId }
+                : {}),
+            message: String(issue.message),
+        }));
 }
 
 function formatReportErrors(args: {
@@ -245,6 +294,7 @@ export async function compileTopic(args: {
                       maxRetries: MAX_TOPIC_RETRIES,
                       previousErrorCode: errorCode(previousError),
                       previousErrorMessage: previousError.message,
+                      qualityIssues: extractRetryIssues(previousError),
                   }
                 : undefined;
 
@@ -434,7 +484,10 @@ export async function compileTopic(args: {
                         sectionSlug: node.section.sectionSlug,
                         reportDir,
                         messages: critiqueErrors.map((x) => x.message),
-                        details: evaluation.critiqueReport,
+                        details: {
+                            ...evaluation.critiqueReport,
+                            repairs: evaluation.repairReport.repairs,
+                        },
                     });
                 }
             }

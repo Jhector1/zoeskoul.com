@@ -23,7 +23,7 @@
     "validate:web": "pnpm --filter @zoeskoul/web validate",
     "validate:web:e2e": "pnpm --filter @zoeskoul/web validate:e2e",
     "validate:web:full": "pnpm --filter @zoeskoul/web validate:full",
-    "curr:build": "pnpm --filter @zoeskoul/practice-checks build && pnpm --filter @zoeskoul/curriculum-contracts build && pnpm --filter @zoeskoul/curriculum-runtime build && pnpm --filter @zoeskoul/curriculum-profiles build && pnpm --filter @zoeskoul/curriculum-compiler build && pnpm --filter @zoeskoul/curriculum-cli build",
+    "curr:build": "pnpm --filter @zoeskoul/practice-checks build && pnpm --filter @zoeskoul/curriculum-contracts build && pnpm --filter @zoeskoul/curriculum-runtime build && pnpm --filter @zoeskoul/curriculum-profiles build && pnpm --filter @zoeskoul/curriculum-ai build && pnpm --filter @zoeskoul/curriculum-compiler build && pnpm --filter @zoeskoul/curriculum-cli build",
     "curr:plan": "node packages/curriculum-cli/dist/index.js plan",
     "curr:compile": "node packages/curriculum-cli/dist/index.js compile-subject",
     "curr:compile-topic": "node packages/curriculum-cli/dist/index.js compile-topic",

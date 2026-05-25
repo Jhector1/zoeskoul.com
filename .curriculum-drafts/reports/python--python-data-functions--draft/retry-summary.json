@@ -1,0 +1,122 @@
+{
+  "subjectSlug": "python--python-data-functions--draft",
+  "generatedAt": "2026-05-24T18:59:43.649Z",
+  "topics": [
+    {
+      "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+      "sectionSlug": "python-5-list-basics",
+      "topicId": "creating-and-indexing-lists",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+      "sectionSlug": "python-5-list-basics",
+      "topicId": "list-methods-and-mutation",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+      "sectionSlug": "python-5-list-basics",
+      "topicId": "looping-through-lists",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+      "sectionSlug": "python-5-dictionaries",
+      "topicId": "dictionary-basics",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+      "sectionSlug": "python-5-dictionaries",
+      "topicId": "updating-and-looping-dictionaries",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+      "sectionSlug": "python-5-dictionaries",
+      "topicId": "nested-data-structures",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-6-functions-and-modularity",
+      "sectionSlug": "python-6-function-basics",
+      "topicId": "defining-and-calling-functions",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-6-functions-and-modularity",
+      "sectionSlug": "python-6-function-basics",
+      "topicId": "parameters-and-return-values",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-6-functions-and-modularity",
+      "sectionSlug": "python-6-function-basics",
+      "topicId": "print-vs-return",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-6-functions-and-modularity",
+      "sectionSlug": "python-6-function-design",
+      "topicId": "scope-and-local-variables",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-6-functions-and-modularity",
+      "sectionSlug": "python-6-function-design",
+      "topicId": "decomposition-and-refactoring",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-6-functions-and-modularity",
+      "sectionSlug": "python-6-function-design",
+      "topicId": "docstrings-and-function-contracts",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
+      "sectionSlug": "python-7-file-io",
+      "topicId": "reading-text-files",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
+      "sectionSlug": "python-7-file-io",
+      "topicId": "writing-text-files",
+      "status": "failed",
+      "attempts": 3,
+      "retryCodes": [
+        "TOPIC_GENERATION_OUTPUT_INVALID",
+        "INVALID_TOPIC_AUTHORING_DRAFT",
+        "INVALID_TOPIC_AUTHORING_DRAFT"
+      ]
+    }
+  ]
+}

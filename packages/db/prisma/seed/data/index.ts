@@ -130,11 +130,22 @@ function loadTopicBundle(args: {
   );
 }
 
-function listSubjectSlugs() {
+export function isSeedableSubjectSlug(subjectSlug: string) {
+  return !subjectSlug.endsWith("--draft");
+}
+
+export function listSubjectSlugs() {
   return fs
     .readdirSync(subjectsRoot, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name)
+    .filter((subjectSlug) => {
+      if (isSeedableSubjectSlug(subjectSlug)) return true;
+      console.warn(
+        `[db:seed] Skipping generated draft subject folder: ${subjectSlug}`,
+      );
+      return false;
+    })
     .filter((subjectSlug) =>
       fs.existsSync(path.join(subjectsRoot, subjectSlug, "subject.manifest.json")),
     )

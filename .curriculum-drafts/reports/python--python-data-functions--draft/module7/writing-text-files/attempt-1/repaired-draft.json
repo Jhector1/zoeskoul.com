@@ -1,0 +1,271 @@
+{
+  "title": "Writing Text Files",
+  "summary": "Write output to files using safe file modes.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Introduction to Writing Files",
+      "bodyMarkdown": "Writing to files in Python is a common task when you need to save data for later use. The `open()` function is used to open a file, and you can specify the mode in which you want to open it. For writing, you typically use `'w'` for writing (which overwrites the file) or `'a'` for appending (which adds to the end of the file). \n\n```python\nwith open('example.txt', 'w') as file:\n    file.write('Hello, World!')\n```\n\nIn this example, `example.txt` is opened in write mode, and the string 'Hello, World!' is written to it. If the file does not exist, it will be created. If it does exist, it will be overwritten.\n\n**Try it yourself:** Modify the code to append a new line instead of overwriting the file.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "2",
+      "title": "Safe File Writing Practices",
+      "bodyMarkdown": "When writing to files, it's important to handle exceptions to avoid data loss or corruption. Using a `try...except` block can help manage errors gracefully.\n\n```python\ntry:\n    with open('data.txt', 'w') as file:\n        file.write('Data entry')\nexcept IOError:\n    print('An error occurred while writing to the file.')\n```\n\nThis code attempts to write 'Data entry' to `data.txt`. If an IOError occurs, it prints an error message instead of crashing.\n\n**Your turn:** Add another `except` block to handle a different type of exception.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "1",
+      "kind": "single_choice",
+      "title": "File Modes for Writing",
+      "prompt": "Which file mode should you use to append data to an existing file without overwriting it?",
+      "options": [
+        "r",
+        "w",
+        "a",
+        "x"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Use the question wording and the lesson example to narrow the choices.",
+      "help": {
+        "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Remove options that do not match the concept or evidence named in the question."
+      }
+    },
+    {
+      "id": "2",
+      "kind": "single_choice",
+      "title": "Handling File Writing Errors",
+      "prompt": "What is the best way to handle errors when writing to a file in Python?",
+      "options": [
+        "Use a try-except block",
+        "Ignore errors",
+        "Use a while loop",
+        "Use a for loop"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider using a structure that allows you to catch and handle exceptions.",
+      "help": {
+        "concept": "Using try-except blocks helps manage errors gracefully.",
+        "hint_1": "Think about how you can catch exceptions in Python.",
+        "hint_2": "A try-except block is commonly used for error handling."
+      }
+    },
+    {
+      "id": "3",
+      "kind": "multi_choice",
+      "title": "File Writing Modes",
+      "prompt": "Select all the file modes that allow writing to a file.",
+      "options": [
+        "r",
+        "w",
+        "a",
+        "x"
+      ],
+      "correctOptionIds": [
+        "b",
+        "c",
+        "d"
+      ],
+      "hint": "Use the question wording and the lesson example to narrow the choices.",
+      "help": {
+        "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Remove options that do not match the concept or evidence named in the question."
+      }
+    },
+    {
+      "id": "4",
+      "kind": "multi_choice",
+      "title": "Safe File Writing Practices",
+      "prompt": "Which of the following are good practices when writing to files?",
+      "options": [
+        "Always use 'w' mode",
+        "Use try-except blocks",
+        "Close files manually",
+        "Use 'with' statement"
+      ],
+      "correctOptionIds": [
+        "b",
+        "d"
+      ],
+      "hint": "Consider practices that prevent data loss and handle errors.",
+      "help": {
+        "concept": "Good practices include handling exceptions and ensuring data integrity.",
+        "hint_1": "Think about how to handle errors gracefully.",
+        "hint_2": "Consider how to ensure data is not lost or corrupted."
+      }
+    },
+    {
+      "id": "5",
+      "kind": "drag_reorder",
+      "title": "Steps to Write to a File",
+      "prompt": "Arrange the steps to write 'Hello, World!' to a file named 'greeting.txt'.",
+      "tokens": [
+        "Open 'greeting.txt' in write mode",
+        "Write 'Hello, World!' to the file",
+        "Close the file"
+      ],
+      "correctOrder": [
+        "Open 'greeting.txt' in write mode",
+        "Write 'Hello, World!' to the file",
+        "Close the file"
+      ],
+      "hint": "Start with opening the file and end with closing it.",
+      "help": {
+        "concept": "Writing to a file involves opening, writing, and closing the file.",
+        "hint_1": "Begin with opening the file in the correct mode.",
+        "hint_2": "Remember to write the content before closing the file."
+      }
+    },
+    {
+      "id": "6",
+      "kind": "drag_reorder",
+      "title": "Using 'with' Statement",
+      "prompt": "Arrange the steps to write 'Data saved' to 'output.txt' using a 'with' statement.",
+      "tokens": [
+        "Use 'with' to open 'output.txt' in write mode",
+        "Write 'Data saved' to the file"
+      ],
+      "correctOrder": [
+        "Use 'with' to open 'output.txt' in write mode",
+        "Write 'Data saved' to the file"
+      ],
+      "hint": "The 'with' statement simplifies file handling.",
+      "help": {
+        "concept": "The 'with' statement automatically handles file closing.",
+        "hint_1": "Start with the 'with' statement to open the file.",
+        "hint_2": "Write the data inside the 'with' block."
+      }
+    },
+    {
+      "id": "7",
+      "kind": "fill_blank_choice",
+      "title": "File Mode for Overwriting",
+      "prompt": "Fill in the blank to open a file for writing, overwriting any existing content: `open('file.txt', '[blank1]')`",
+      "template": "open('file.txt', '[blank1]')",
+      "choices": [
+        "r",
+        "w",
+        "a",
+        "x"
+      ],
+      "correctValue": "w",
+      "hint": "Focus on the missing concept rather than the exact missing term.",
+      "help": {
+        "concept": "The blank should be completed with the term that fits the job being described.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Choose the term that best completes the meaning of the statement."
+      }
+    },
+    {
+      "id": "8",
+      "kind": "fill_blank_choice",
+      "title": "Appending to a File",
+      "prompt": "Fill in the blank to open a file for appending: `open('log.txt', '[blank1]')`",
+      "template": "open('log.txt', '[blank1]')",
+      "choices": [
+        "r",
+        "w",
+        "a",
+        "x"
+      ],
+      "correctValue": "a",
+      "hint": "Focus on the missing concept rather than the exact missing term.",
+      "help": {
+        "concept": "The blank should be completed with the term that fits the job being described.",
+        "hint_1": "Think about what the missing part needs to do in the statement.",
+        "hint_2": "Choose the term that best completes the meaning of the statement."
+      }
+    },
+    {
+      "id": "9",
+      "kind": "code_input",
+      "title": "Write to a File",
+      "prompt": "Write a Python program that writes 'Hello, ZoeSkoul!' to a file named 'welcome.txt'.",
+      "starterCode": "# Write your code below",
+      "solutionCode": "with open('welcome.txt', 'w') as file:\n    file.write('Hello, ZoeSkoul!')",
+      "tests": [
+        {
+          "stdout": "",
+          "match": "exact"
+        },
+        {
+          "stdout": "",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Write to a File\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Write to a File\".",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "10",
+      "kind": "code_input",
+      "title": "Append to a File",
+      "prompt": "Write a Python program that appends 'New entry' to a file named 'log.txt'.",
+      "starterCode": "# Write your code below",
+      "solutionCode": "with open('log.txt', 'a') as file:\n    file.write('New entry')",
+      "tests": [
+        {
+          "stdout": "",
+          "match": "exact"
+        },
+        {
+          "stdout": "",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Append to a File\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Append to a File\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "11",
+      "kind": "code_input",
+      "title": "Error Handling in File Writing",
+      "prompt": "Write a Python program that writes 'Data saved' to 'output.txt' and handles any IOError that might occur.",
+      "starterCode": "# Write your code below",
+      "solutionCode": "try:\n    with open('output.txt', 'w') as file:\n        file.write('Data saved')\nexcept IOError:\n    print('An error occurred while writing to the file.')",
+      "tests": [
+        {
+          "stdout": "",
+          "match": "exact"
+        },
+        {
+          "stdout": "",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Error Handling in File Writing\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Error Handling in File Writing\".",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "File Writing Project",
+    "stepIds": [
+      "9",
+      "10",
+      "11"
+    ]
+  }
+}

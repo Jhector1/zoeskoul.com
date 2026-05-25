@@ -10,6 +10,7 @@ export type PlannedTopic = {
   title: string;
   summary: string;
   minutes: number;
+  technical?: boolean;
   learningGoals: string[];
 };
 
@@ -34,6 +35,7 @@ export type PlannedModule = {
   moduleSlug: string;
   prefix: string;
   order: number;
+  accessOverride?: "free" | "paid" | null;
   title: string;
   description?: string;
   purpose?: string;
@@ -59,6 +61,7 @@ export type SubjectPlan = {
   subjectSlug: string;
   catalogSlug?: string;
   profileId: string;
+  accessPolicy?: "free" | "paid";
   courseOrder: string[];
   courses?: Array<{
     courseSlug: string;

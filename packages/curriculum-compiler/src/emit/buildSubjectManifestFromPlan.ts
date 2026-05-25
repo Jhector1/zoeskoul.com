@@ -181,7 +181,10 @@ export function buildSubjectManifestFromPlan(args: {
             ),
             weekStart: module.weekStart ?? null,
             weekEnd: module.weekEnd ?? null,
-            accessOverride: module.order <= 2 ? "free" : null,
+            accessOverride:
+                module.accessOverride ??
+                blueprint.moduleAccessOverrideDefault ??
+                null,
             runtimeDefaults,
             meta: {
                 estimatedMinutes: module.sections
@@ -223,7 +226,9 @@ export function buildSubjectManifestFromPlan(args: {
             catalogSlug: blueprint.catalogSlug ?? blueprint.subjectSlug,
             genKey: shape.subjectManifest.genKey,
             order: blueprint.subjectSlug === "sql" ? 20 : 30,
-            accessPolicy: shape.subjectManifest.accessPolicyDefault,
+            accessPolicy:
+                blueprint.accessPolicy ??
+                shape.subjectManifest.accessPolicyDefault,
             status: shape.subjectManifest.statusDefault,
             imagePublicId: null,
             imageAlt: null,

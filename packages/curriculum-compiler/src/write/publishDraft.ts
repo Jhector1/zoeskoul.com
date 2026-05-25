@@ -67,13 +67,23 @@ function getBackupSubjectMessagesPath(
 }
 
 export async function publishDraft(args: { subjectSlug: string }) {
+  return publishDraftToLive({
+    draftSubjectSlug: args.subjectSlug,
+    liveSubjectSlug: args.subjectSlug,
+  });
+}
+
+export async function publishDraftToLive(args: {
+  draftSubjectSlug: string;
+  liveSubjectSlug: string;
+}) {
   const timestamp = makeTimestamp();
-  const draftSubjectRoot = getDraftSubjectRoot(args.subjectSlug);
+  const draftSubjectRoot = getDraftSubjectRoot(args.draftSubjectSlug);
   const draftMessagesRoot = getDraftMessagesRoot();
   const liveMessagesRoot = path.join("apps/web/src/i18n/messages");
 
-  const draftManifestPath = getDraftSubjectManifestPath(args.subjectSlug);
-  const liveManifestPath = getSubjectManifestPath(args.subjectSlug);
+  const draftManifestPath = getDraftSubjectManifestPath(args.draftSubjectSlug);
+  const liveManifestPath = getSubjectManifestPath(args.liveSubjectSlug);
 
   if (!(await pathExists(draftManifestPath))) {
     throw new Error(`Draft subject manifest not found: ${draftManifestPath}`);
@@ -81,7 +91,7 @@ export async function publishDraft(args: { subjectSlug: string }) {
 
   await backupIfExists(
       liveManifestPath,
-      getBackupSubjectManifestPath(timestamp, args.subjectSlug),
+      getBackupSubjectManifestPath(timestamp, args.liveSubjectSlug),
   );
 
   const manifestRaw = await readJsonValidated(draftManifestPath);
@@ -105,12 +115,12 @@ export async function publishDraft(args: { subjectSlug: string }) {
         const topicId = topicDir.name;
 
         const draftBundlePath = getDraftTopicBundlePath(
-            args.subjectSlug,
+            args.draftSubjectSlug,
             moduleDir.name,
             topicId,
         );
         const liveBundlePath = getTopicBundlePath(
-            args.subjectSlug,
+            args.liveSubjectSlug,
             moduleDir.name,
             topicId,
         );
@@ -119,7 +129,7 @@ export async function publishDraft(args: { subjectSlug: string }) {
             liveBundlePath,
             getBackupTopicBundlePath(
                 timestamp,
-                args.subjectSlug,
+                args.liveSubjectSlug,
                 moduleDir.name,
                 topicId,
             ),
@@ -142,7 +152,7 @@ export async function publishDraft(args: { subjectSlug: string }) {
           draftMessagesRoot,
           locale,
           "subjects",
-          args.subjectSlug,
+          args.draftSubjectSlug,
       );
 
       if (!(await pathExists(draftSubjectMessagesDir))) continue;
@@ -151,7 +161,7 @@ export async function publishDraft(args: { subjectSlug: string }) {
           draftMessagesRoot,
           locale,
           "subjects",
-          args.subjectSlug,
+          args.draftSubjectSlug,
           "subject.json",
       );
 
@@ -159,14 +169,14 @@ export async function publishDraft(args: { subjectSlug: string }) {
           liveMessagesRoot,
           locale,
           "subjects",
-          args.subjectSlug,
+          args.liveSubjectSlug,
           "subject.json",
       );
 
       if (await pathExists(draftSubjectJsonPath)) {
         await backupIfExists(
             liveSubjectJsonPath,
-            getBackupSubjectMessagesPath(timestamp, locale, args.subjectSlug),
+            getBackupSubjectMessagesPath(timestamp, locale, args.liveSubjectSlug),
         );
 
         const subjectMessageRaw = await readJsonValidated(draftSubjectJsonPath);
@@ -188,13 +198,13 @@ export async function publishDraft(args: { subjectSlug: string }) {
 
           const draftMessagePath = getDraftTopicMessagesPath(
               locale,
-              args.subjectSlug,
+              args.draftSubjectSlug,
               moduleDir.name,
               topicId,
           );
           const liveMessagePath = getTopicMessagesPath(
               locale,
-              args.subjectSlug,
+              args.liveSubjectSlug,
               moduleDir.name,
               topicId,
           );
@@ -204,7 +214,7 @@ export async function publishDraft(args: { subjectSlug: string }) {
               getBackupTopicMessagesPath(
                   timestamp,
                   locale,
-                  args.subjectSlug,
+                  args.liveSubjectSlug,
                   moduleDir.name,
                   topicId,
               ),

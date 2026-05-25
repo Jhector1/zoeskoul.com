@@ -2,7 +2,7 @@ import {
     SemanticCheckSchema,
     type SemanticCheck,
 } from "@zoeskoul/practice-checks";
-import type { ExerciseKind } from "./manifest.js";
+import type { ExerciseKind, ManifestFileFixture } from "./manifest.js";
 
 export type ExerciseHelpDraft = {
     concept: string;
@@ -14,7 +14,10 @@ export type ProgrammingCodeInputTestDraft = {
     stdin?: string;
     stdout: string;
     match?: "exact" | "includes";
+    files?: ProgrammingCodeInputFileDraft[];
 };
+
+export type ProgrammingCodeInputFileDraft = ManifestFileFixture;
 
 type DraftCommon = {
     id: string;
@@ -69,6 +72,7 @@ export type TopicAuthoringDraft = {
         starterCode: string;
         solutionCode: string;
         tests?: ProgrammingCodeInputTestDraft[];
+        files?: ProgrammingCodeInputFileDraft[];
         semanticChecks?: SemanticCheck[];
         datasetId?: string;
         recipeType?: "sql_query" | "template_io" | "fixed_tests" | "semantic";
@@ -286,6 +290,32 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                                             type: "string",
                                             enum: ["exact", "includes"],
                                         },
+                                        files: {
+                                            type: "array",
+                                            items: {
+                                                type: "object",
+                                                additionalProperties: false,
+                                                required: ["path", "content"],
+                                                properties: {
+                                                    path: { type: "string" },
+                                                    content: { type: "string" },
+                                                    readOnly: { type: "boolean" },
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                            files: {
+                                type: "array",
+                                items: {
+                                    type: "object",
+                                    additionalProperties: false,
+                                    required: ["path", "content"],
+                                    properties: {
+                                        path: { type: "string" },
+                                        content: { type: "string" },
+                                        readOnly: { type: "boolean" },
                                     },
                                 },
                             },
@@ -594,6 +624,7 @@ export function assertTopicAuthoringDraft(
                     "starterCode",
                     "solutionCode",
                     "tests",
+                    "files",
                     "semanticChecks",
                     "datasetId",
                     "recipeType",
@@ -641,7 +672,11 @@ export function assertTopicAuthoringDraft(
                         fail(`${label} tests[${testIndex}] must be an object`);
                     }
 
-                    assertOnlyKeys(test, ["stdin", "stdout", "match"], `${label} tests[${testIndex}]`);
+                    assertOnlyKeys(
+                        test,
+                        ["stdin", "stdout", "match", "files"],
+                        `${label} tests[${testIndex}]`,
+                    );
 
                     if (
                         typeof test.stdin !== "undefined" &&
@@ -661,6 +696,39 @@ export function assertTopicAuthoringDraft(
                     ) {
                         fail(`${label} tests[${testIndex}].match must be "exact" or "includes"`);
                     }
+
+                    if (typeof test.files !== "undefined") {
+                        if (!Array.isArray(test.files)) {
+                            fail(`${label} tests[${testIndex}].files must be an array when provided`);
+                        }
+
+                        test.files.forEach((file, fileIndex) => {
+                            if (!isRecord(file)) {
+                                fail(`${label} tests[${testIndex}].files[${fileIndex}] must be an object`);
+                            }
+
+                            assertOnlyKeys(
+                                file,
+                                ["path", "content", "readOnly"],
+                                `${label} tests[${testIndex}].files[${fileIndex}]`,
+                            );
+
+                            if (!isNonEmptyString(file.path)) {
+                                fail(`${label} tests[${testIndex}].files[${fileIndex}].path must be a non-empty string`);
+                            }
+
+                            if (typeof file.content !== "string") {
+                                fail(`${label} tests[${testIndex}].files[${fileIndex}].content must be a string`);
+                            }
+
+                            if (
+                                typeof file.readOnly !== "undefined" &&
+                                typeof file.readOnly !== "boolean"
+                            ) {
+                                fail(`${label} tests[${testIndex}].files[${fileIndex}].readOnly must be a boolean when provided`);
+                            }
+                        });
+                    }
                 });
             }
 
@@ -670,6 +738,35 @@ export function assertTopicAuthoringDraft(
                 if (!parsed.success) {
                     fail(`${label} semanticChecks must match the canonical semantic check schema`);
                 }
+            }
+
+            if (typeof exercise.files !== "undefined") {
+                if (!Array.isArray(exercise.files)) {
+                    fail(`${label} code_input files must be an array when provided`);
+                }
+
+                exercise.files.forEach((file, fileIndex) => {
+                    if (!isRecord(file)) {
+                        fail(`${label} files[${fileIndex}] must be an object`);
+                    }
+
+                    assertOnlyKeys(file, ["path", "content", "readOnly"], `${label} files[${fileIndex}]`);
+
+                    if (!isNonEmptyString(file.path)) {
+                        fail(`${label} files[${fileIndex}].path must be a non-empty string`);
+                    }
+
+                    if (typeof file.content !== "string") {
+                        fail(`${label} files[${fileIndex}].content must be a string`);
+                    }
+
+                    if (
+                        typeof file.readOnly !== "undefined" &&
+                        typeof file.readOnly !== "boolean"
+                    ) {
+                        fail(`${label} files[${fileIndex}].readOnly must be a boolean when provided`);
+                    }
+                });
             }
 
             const hasTests = Array.isArray(exercise.tests) && exercise.tests.length > 0;

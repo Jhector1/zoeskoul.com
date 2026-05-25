@@ -1,6 +1,7 @@
 import type { CourseBlueprint } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
 import path from "node:path";
+import { getRepoRoot } from "@zoeskoul/curriculum-core";
 import { validateBlueprint } from "../validate/validateBlueprint.js";
 import { critiqueTopicDraft } from "./critiqueTopicDraft.js";
 import { critiqueTopic } from "./critiqueTopic.js";
@@ -190,6 +191,7 @@ export async function reviewSubjectDraft(args: {
                 sectionSlug: node.section.sectionSlug,
                 moduleOrder: node.moduleIndex,
                 reportDir: path.join(
+                    getRepoRoot(),
                     ".curriculum-drafts",
                     "reports",
                     args.blueprint.subjectSlug,
@@ -246,6 +248,7 @@ export async function reviewSubjectDraft(args: {
                     sectionSlug: node.section.sectionSlug,
                     moduleOrder: node.moduleIndex,
                     reportDir: path.join(
+                        getRepoRoot(),
                         ".curriculum-drafts",
                         "reports",
                         args.blueprint.subjectSlug,

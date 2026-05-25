@@ -1,0 +1,440 @@
+{
+  "title": "Reading Text Files",
+  "summary": "Open files, read text, and close resources safely.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to File Reading",
+      "bodyMarkdown": "Reading files in Python is a fundamental skill. It allows you to access and process data stored in text files. The basic steps include opening the file, reading its contents, and then closing the file to free up resources. \n\nHere's a simple example:\n\n```python\nwith open('example.txt', 'r') as file:\n    content = file.read()\n    print(content)\n```\n\nIn this example, `open()` is used to open the file in read mode (`'r'`). The `with` statement ensures the file is properly closed after its suite finishes. `file.read()` reads the entire content of the file.\n\n**Try it yourself:** Modify the code to read a different file or print only the first 100 characters."
+    },
+    {
+      "id": "sketch2",
+      "title": "Reading Files Line by Line",
+      "bodyMarkdown": "Sometimes, you may want to read a file line by line, especially if it's large. This can be done using a loop:\n\n```python\nwith open('example.txt', 'r') as file:\n    for line in file:\n        print(line.strip())\n```\n\nHere, `file` is an iterable object, and each iteration of the loop reads a new line from the file. The `strip()` method is used to remove any trailing newline characters.\n\n**Your turn:** Try modifying the loop to count the number of lines in the file."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "File Modes",
+      "prompt": "Which mode should you use to open a file for reading?",
+      "hint": "Consider the mode that allows you to read data without modifying the file.",
+      "help": {
+        "concept": "File modes determine how a file is opened and what operations can be performed.",
+        "hint_1": "The mode for reading is different from writing or appending.",
+        "hint_2": "The mode for reading is represented by a single letter."
+      },
+      "options": [
+        "w",
+        "r",
+        "a",
+        "x"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "File Handling Best Practices",
+      "prompt": "Select all best practices for handling files in Python.",
+      "hint": "Think about resource management and error handling.",
+      "help": {
+        "concept": "Best practices ensure that files are handled efficiently and safely.",
+        "hint_1": "Consider how to ensure files are always closed properly.",
+        "hint_2": "Think about how to handle potential errors when opening files."
+      },
+      "options": [
+        "Always close files after opening",
+        "Use try-except for error handling",
+        "Use 'with' statement for automatic closing",
+        "Open files in write mode by default"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Steps to Read a File",
+      "prompt": "Arrange the steps to read a file in the correct order.",
+      "hint": "Start with opening the file and end with closing it.",
+      "help": {
+        "concept": "Reading a file involves a sequence of steps from opening to closing.",
+        "hint_1": "The first step involves accessing the file.",
+        "hint_2": "The last step ensures resources are freed."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": [
+        "Open the file",
+        "Read the file content",
+        "Close the file"
+      ],
+      "correctOrder": [
+        "Open the file",
+        "Read the file content",
+        "Close the file"
+      ],
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "File Reading Method",
+      "prompt": "Complete the code to read all lines from a file into a list: `lines = [blank1]`",
+      "hint": "Use a method that reads all lines at once.",
+      "help": {
+        "concept": "The method to read all lines returns a list of strings.",
+        "hint_1": "This method is similar to `read()` but returns a list.",
+        "hint_2": "The method name starts with 'read' and ends with 'lines'."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "lines = [blank1]",
+      "choices": [
+        "file.readlines()",
+        "file.read()",
+        "file.readline()",
+        "file.write()"
+      ],
+      "correctValue": "file.readlines()",
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Read and Print File Content",
+      "prompt": "Write a Python program that reads a file named `data.txt` and prints its content.",
+      "hint": "Use the `open()` function and a loop to read the file.",
+      "help": {
+        "concept": "Reading a file involves opening it, reading its content, and closing it.",
+        "hint_1": "Use a loop to iterate over each line in the file.",
+        "hint_2": "Remember to close the file after reading."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "with open('data.txt', 'r') as file:\n    # Your code here\n",
+      "solutionCode": "with open('data.txt', 'r') as file:\n    for line in file:\n        print(line.strip())\n",
+      "tests": [
+        {
+          "stdin": null,
+          "stdout": "Hello, World!\nThis is a test file.\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data.txt",
+              "content": "Hello, World!\nThis is a test file.\nAnother line.\nEnd of file.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "data.txt",
+          "content": "Hello, World!\nThis is a test file.\nAnother line.\nEnd of file.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+          "readOnly": false
+        }
+      ],
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "fixed_tests",
+      "checkSql": null
+    },
+    {
+      "id": "quiz6",
+      "kind": "single_choice",
+      "title": "File Closing",
+      "prompt": "What is the main advantage of using the `with` statement when working with files?",
+      "hint": "Think about resource management and error prevention.",
+      "help": {
+        "concept": "The `with` statement ensures that resources are managed properly.",
+        "hint_1": "It helps in automatically closing the file.",
+        "hint_2": "It prevents resource leaks by ensuring files are closed."
+      },
+      "options": [
+        "It automatically closes the file",
+        "It opens the file in write mode",
+        "It reads the file faster",
+        "It allows multiple files to be opened"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz7",
+      "kind": "multi_choice",
+      "title": "Common File Reading Errors",
+      "prompt": "Which of the following are common errors when reading files?",
+      "hint": "Consider errors related to file access and data handling.",
+      "help": {
+        "concept": "Common errors include file access issues and data handling problems.",
+        "hint_1": "Think about what happens if the file doesn't exist.",
+        "hint_2": "Consider what might go wrong with data conversion."
+      },
+      "options": [
+        "FileNotFoundError",
+        "ValueError",
+        "SyntaxError",
+        "TypeError"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "title": "File Reading Process",
+      "prompt": "Arrange the following steps in the correct order for reading a file line by line.",
+      "hint": "Start with opening the file and end with closing it.",
+      "help": {
+        "concept": "Reading a file line by line involves a sequence of steps.",
+        "hint_1": "The first step involves accessing the file.",
+        "hint_2": "The last step ensures resources are freed."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": [
+        "Open the file",
+        "Iterate over each line",
+        "Process the line",
+        "Close the file"
+      ],
+      "correctOrder": [
+        "Open the file",
+        "Iterate over each line",
+        "Process the line",
+        "Close the file"
+      ],
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz9",
+      "kind": "fill_blank_choice",
+      "title": "Reading File Content",
+      "prompt": "Fill in the blank to read the entire content of a file: `content = [blank1]`",
+      "hint": "Use a method that reads the whole file at once.",
+      "help": {
+        "concept": "The method to read the entire file returns a single string.",
+        "hint_1": "This method is different from reading lines individually.",
+        "hint_2": "The method name is a single word starting with 'read'."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "content = [blank1]",
+      "choices": [
+        "file.read()",
+        "file.readlines()",
+        "file.readline()",
+        "file.write()"
+      ],
+      "correctValue": "file.read()",
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Count Lines in a File",
+      "prompt": "Write a Python program that counts the number of lines in a file named `data.txt`.",
+      "hint": "Use a loop to iterate over each line and count them.",
+      "help": {
+        "concept": "Counting lines involves iterating over each line in the file.",
+        "hint_1": "Use a counter variable to keep track of the number of lines.",
+        "hint_2": "Remember to close the file after counting."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "with open('data.txt', 'r') as file:\n    # Your code here\n",
+      "solutionCode": "with open('data.txt', 'r') as file:\n    line_count = 0\n    for line in file:\n        line_count += 1\n    print(line_count)\n",
+      "tests": [
+        {
+          "stdin": null,
+          "stdout": "4\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data.txt",
+              "content": "Hello, World!\nThis is a test file.\nAnother line.\nEnd of file.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "data.txt",
+          "content": "Hello, World!\nThis is a test file.\nAnother line.\nEnd of file.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+          "readOnly": false
+        }
+      ],
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "fixed_tests",
+      "checkSql": null
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Read Specific Lines",
+      "prompt": "Write a Python program that reads and prints only the first two lines of a file named `data.txt`.",
+      "hint": "Use a loop to control the number of lines read.",
+      "help": {
+        "concept": "Reading specific lines involves controlling the loop iteration.",
+        "hint_1": "Use a counter to stop after reading two lines.",
+        "hint_2": "Remember to close the file after reading."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "with open('data.txt', 'r') as file:\n    # Your code here\n",
+      "solutionCode": "with open('data.txt', 'r') as file:\n    for i, line in enumerate(file):\n        if i < 2:\n            print(line.strip())\n        else:\n            break\n",
+      "tests": [
+        {
+          "stdin": null,
+          "stdout": "Hello, World!\nThis is a test file.\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data.txt",
+              "content": "Hello, World!\nThis is a test file.\nAnother line.\nEnd of file.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "data.txt",
+          "content": "Hello, World!\nThis is a test file.\nAnother line.\nEnd of file.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+          "readOnly": false
+        }
+      ],
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "fixed_tests",
+      "checkSql": null
+    }
+  ],
+  "projectDraft": {
+    "title": "File Reading Project",
+    "stepIds": [
+      "quiz5",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

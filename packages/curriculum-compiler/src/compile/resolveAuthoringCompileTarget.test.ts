@@ -88,6 +88,64 @@ describe("authoring compile target resolution", () => {
         expect(target.blueprint.subjectSlug).toBe("sql-preview");
     });
 
+    it("compileCourse allows a non-target course in draft-only mode without a live subject slug", async () => {
+        const target = await resolveAuthoringCompileTarget({
+            subjectSlug: "python",
+            courseSlug: "python-data-functions",
+            options: {
+                draftOnly: true,
+            },
+        });
+
+        expect(target.liveSubjectSlug).toBe("python--python-data-functions--draft");
+        expect(target.blueprint.subjectSlug).toBe("python--python-data-functions--draft");
+        expect(target.publishToLive).toBe(false);
+    });
+
+    it("emits file-enabled runtime defaults only for python-data-functions module 7", async () => {
+        const target = await resolveAuthoringCompileTarget({
+            subjectSlug: "python",
+            courseSlug: "python-data-functions",
+            options: {
+                draftOnly: true,
+            },
+        });
+        const plan = buildPlanFromSpec({
+            blueprint: target.blueprint,
+            spec: target.spec,
+        });
+        const manifest = buildSubjectManifestFromPlan({
+            blueprint: target.blueprint,
+            plan,
+            shape: getSubjectShape("python"),
+        });
+
+        const module5 = manifest.modules.find(
+            (module) => module.slug === "python-5-lists-tuples-and-dictionaries",
+        );
+        const module6 = manifest.modules.find(
+            (module) => module.slug === "python-6-functions-and-modularity",
+        );
+        const module7 = manifest.modules.find(
+            (module) => module.slug === "python-7-files-exceptions-and-data-cleaning",
+        );
+
+        expect(module5?.runtimeDefaults).toMatchObject({
+            supportsMultiFile: false,
+            supportsFileSystem: false,
+        });
+        expect(module6?.runtimeDefaults).toMatchObject({
+            supportsMultiFile: false,
+            supportsFileSystem: false,
+        });
+        expect(module7?.runtimeDefaults).toMatchObject({
+            supportsMultiFile: true,
+            supportsFileSystem: true,
+            supportsTerminal: false,
+            supportsPackageInstall: false,
+        });
+    });
+
     it("compileCourse allows forced overwrite only when forceLiveOverwrite is explicitly passed", async () => {
         const target = await resolveAuthoringCompileTarget({
             subjectSlug: "sql",

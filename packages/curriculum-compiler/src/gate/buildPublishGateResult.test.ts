@@ -1,10 +1,12 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
+import { getRepoRoot } from "@zoeskoul/curriculum-core";
 import { buildPublishGateResult } from "./buildPublishGateResult.js";
 
 const subjectSlug = "publish-gate-quality-test";
 const reportRoot = path.join(
+    getRepoRoot(),
     ".curriculum-drafts",
     "reports",
     subjectSlug,

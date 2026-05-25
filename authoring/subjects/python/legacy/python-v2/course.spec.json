@@ -530,5 +530,26 @@
         }
       ]
     }
-  ]
+  ],
+  "topicPolicies": {
+    "what-python-is": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 8,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "running-python-code": {
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 8,
+        "projectCodeInputMin": 1,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    }
+  }
 }

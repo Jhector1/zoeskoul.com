@@ -5,7 +5,7 @@
     "catalogSlug": "sql",
     "genKey": "sql_for_beginners",
     "order": 30,
-    "accessPolicy": "free",
+    "accessPolicy": "paid",
     "status": "active",
     "imagePublicId": null,
     "imageAlt": null,
@@ -41,7 +41,7 @@
       "descriptionKey": "modules.sql-v2.sql-v2-0.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": "free",
+      "accessOverride": null,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -55,7 +55,7 @@
         "resultShape": "table"
       },
       "meta": {
-        "estimatedMinutes": 15,
+        "estimatedMinutes": 12,
         "prereqKeys": [],
         "outcomeKeys": [
           "modules.sql-v2.sql-v2-0.outcomes.0",

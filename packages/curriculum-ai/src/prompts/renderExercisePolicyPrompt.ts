@@ -65,6 +65,7 @@ ${deliveryRules}
 Policy rules:
 - Required exercise counts are hard constraints.
 - The final quizDraft must match each required count exactly.
+- Do not approximate the mix when exact counts are provided.
 - Do not generate more than the required count for any exercise kind.
 - Do not replace missing non-code exercises with extra code_input exercises.
 - If required counts say code_input: 3, generate exactly 3 code_input exercises.

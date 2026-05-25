@@ -5,6 +5,7 @@ import type {
 import { getCodeRunner, runLocalCode } from "@zoeskoul/curriculum-runtime";
 import type { RepairReport } from "../../shared/profileServices.js";
 import { makeEmptyRepairReport } from "../../shared/noopReports.js";
+import { PYTHON_MINIMUM_FIXED_TESTS } from "../profile.js";
 
 const PYTHON_TEXT_REPAIRS: Array<{
     from: RegExp;
@@ -78,6 +79,454 @@ function rewritePythonLeakText(value: string): {
 
 type PythonDraftExercise = TopicAuthoringDraft["quizDraft"][number];
 type PythonCodeInputExercise = Extract<PythonDraftExercise, { kind: "code_input" }>;
+type PythonChoiceExercise = Extract<
+    PythonDraftExercise,
+    { kind: "single_choice" | "multi_choice" }
+>;
+type PythonFillBlankExercise = Extract<PythonDraftExercise, { kind: "fill_blank_choice" }>;
+
+type ThinFixedTestRepairResult =
+    | {
+        status: "repaired";
+        exercise: PythonCodeInputExercise;
+        addedCount: number;
+    }
+    | {
+        status: "unsafe";
+        reason: string;
+    }
+    | {
+        status: "unchanged";
+    };
+
+type FileFixtureRepairResult =
+    | {
+        changed: false;
+      }
+    | {
+        changed: true;
+        exercise: PythonCodeInputExercise;
+        addedExerciseFixture: boolean;
+        addedTestFixtures: number;
+        alignedTests: boolean;
+      };
+
+const PYTHON_WORKSPACE_DISTRACTORS = [
+    "Lesson notes panel",
+    "Color theme picker",
+    "Progress tracker",
+    "Keyboard shortcut guide",
+];
+
+function normalizeComparableText(value: string): string {
+    return value
+        .trim()
+        .toLowerCase()
+        .replace(/[`"'.,;:!?()[\]{}]/g, "")
+        .replace(/\s+/g, " ");
+}
+
+function canonicalOptionIds(count: number): string[] {
+    return Array.from({ length: count }, (_, index) => String.fromCharCode(97 + index));
+}
+
+function isForbiddenWorkspaceChoice(value: string): boolean {
+    const normalized = normalizeComparableText(value);
+    return (
+        normalized === "terminal" ||
+        normalized === "the terminal" ||
+        normalized === "command line" ||
+        normalized === "shell" ||
+        normalized === "console"
+    );
+}
+
+function isAllowedPythonWorkspaceChoice(value: string): boolean {
+    const normalized = normalizeComparableText(value);
+    return (
+        normalized === "code editor" ||
+        normalized === "run" ||
+        normalized === "run button" ||
+        normalized === "output panel"
+    );
+}
+
+function pickSafeWorkspaceDistractor(existing: string[]): string {
+    const used = new Set(existing.map((value) => normalizeComparableText(value)));
+
+    for (const candidate of PYTHON_WORKSPACE_DISTRACTORS) {
+        const normalized = normalizeComparableText(candidate);
+        if (used.has(normalized)) continue;
+        if (isForbiddenWorkspaceChoice(candidate)) continue;
+        return candidate;
+    }
+
+    return "Lesson checklist";
+}
+
+function replacePythonForbiddenWorkspaceTerms(value: string): {
+    next: string;
+    changed: boolean;
+} {
+    let next = String(value ?? "");
+    const replacements: Array<[RegExp, string]> = [
+        [/\bconsole or output area\b/gi, "output panel"],
+        [/\bterminal output\b/gi, "output panel"],
+        [/\bconsole output\b/gi, "output panel"],
+        [/\boutput area\b/gi, "output panel"],
+        [/\bterminal commands?\b/gi, "code editor"],
+        [/\bshell commands?\b/gi, "code editor"],
+        [/\bcommand line\b/gi, "code editor"],
+        [/\bshell\b/gi, "code editor"],
+        [/\bconsole\b/gi, "output panel"],
+        [/\bterminal\b/gi, "code editor"],
+    ];
+
+    for (const [pattern, replacement] of replacements) {
+        next = next.replace(pattern, replacement);
+    }
+
+    return {
+        next,
+        changed: next !== value,
+    };
+}
+
+function repairPythonWorkspaceTextField(args: {
+    value: string;
+    field: string;
+    report: RepairReport;
+}) {
+    const repair = replacePythonForbiddenWorkspaceTerms(args.value);
+
+    if (repair.changed) {
+        args.report.repairs.push({
+            code: "PYTHON_FORBIDDEN_WORKSPACE_TERM_REPLACED",
+            category: "text",
+            severity: "medium",
+            field: args.field,
+            message:
+                "Replaced forbidden Python browser-workspace wording with allowed learner-facing workspace language.",
+        });
+    }
+
+    return repair.next;
+}
+
+function repairPythonChoiceExerciseWorkspaceTerms(args: {
+    exercise: PythonChoiceExercise;
+    report: RepairReport;
+}): PythonChoiceExercise {
+    const options = [...(args.exercise.options ?? [])];
+    const optionIds = canonicalOptionIds(options.length);
+    const correctSet = new Set(
+        Array.isArray(args.exercise.correctOptionIds) ? args.exercise.correctOptionIds : [],
+    );
+    let removedForbiddenCorrect = false;
+    let changed = false;
+
+    for (let index = 0; index < options.length; index += 1) {
+        const option = String(options[index] ?? "");
+        if (!isForbiddenWorkspaceChoice(option)) {
+            const textRepair = replacePythonForbiddenWorkspaceTerms(option);
+            if (textRepair.changed) {
+                options[index] = textRepair.next;
+                changed = true;
+                args.report.repairs.push({
+                    code: "PYTHON_FORBIDDEN_WORKSPACE_TERM_REPLACED",
+                    category: "text",
+                    severity: "medium",
+                    field: `${args.exercise.id}.options.${index}`,
+                    message:
+                        "Replaced forbidden Python browser-workspace wording inside a learner-facing option.",
+                });
+            }
+            continue;
+        }
+
+        if (correctSet.has(optionIds[index]!)) {
+            correctSet.delete(optionIds[index]!);
+            removedForbiddenCorrect = true;
+        }
+
+        options[index] = pickSafeWorkspaceDistractor(options);
+        changed = true;
+
+        args.report.repairs.push({
+            code: "PYTHON_FORBIDDEN_WORKSPACE_OPTION_REPLACED",
+            category: "text",
+            severity: "medium",
+            field: `${args.exercise.id}.options.${index}`,
+            message:
+                "Replaced a forbidden Python browser-workspace distractor with a safe non-workspace option.",
+        });
+    }
+
+    const seenOptions = new Set<string>();
+    for (let index = 0; index < options.length; index += 1) {
+        const normalized = normalizeComparableText(String(options[index] ?? ""));
+        if (!normalized || !seenOptions.has(normalized)) {
+            seenOptions.add(normalized);
+            continue;
+        }
+
+        options[index] = pickSafeWorkspaceDistractor(options);
+        changed = true;
+        args.report.repairs.push({
+            code: "PYTHON_FORBIDDEN_WORKSPACE_OPTION_REPLACED",
+            category: "text",
+            severity: "medium",
+            field: `${args.exercise.id}.options.${index}`,
+            message:
+                "Replaced a duplicate learner-facing option created during Python workspace-term repair.",
+        });
+    }
+
+    let correctOptionIds = optionIds.filter((id) => correctSet.has(id));
+    if (removedForbiddenCorrect) {
+        const allowedWorkspaceIds = optionIds.filter((id, index) =>
+            isAllowedPythonWorkspaceChoice(options[index] ?? ""),
+        );
+
+        if (args.exercise.kind === "single_choice") {
+            if (correctOptionIds.length < 1) {
+                correctOptionIds =
+                    allowedWorkspaceIds.length > 0
+                        ? [allowedWorkspaceIds[0]!]
+                        : optionIds.length > 0
+                            ? [optionIds[0]!]
+                            : [];
+            } else {
+                correctOptionIds = [correctOptionIds[0]!];
+            }
+        } else if (correctOptionIds.length < 1 && allowedWorkspaceIds.length > 0) {
+            correctOptionIds = allowedWorkspaceIds;
+        }
+
+        args.report.repairs.push({
+            code: "PYTHON_FORBIDDEN_WORKSPACE_CORRECT_ANSWER_REPAIRED",
+            category: "text",
+            severity: "high",
+            field: `${args.exercise.id}.correctOptionIds`,
+            message:
+                "Removed a forbidden Python browser-workspace option from the correct answers and restored allowed answer ids.",
+        });
+    }
+
+    if (!changed && !removedForbiddenCorrect) {
+        return args.exercise;
+    }
+
+    return {
+        ...args.exercise,
+        options,
+        correctOptionIds,
+    };
+}
+
+function repairPythonFillBlankWorkspaceTerms(args: {
+    exercise: PythonFillBlankExercise;
+    report: RepairReport;
+}): PythonFillBlankExercise {
+    const choices = [...(args.exercise.choices ?? [])];
+    let correctValue = String(args.exercise.correctValue ?? "");
+    let removedForbiddenCorrect = false;
+    let changed = false;
+
+    for (let index = 0; index < choices.length; index += 1) {
+        const choice = String(choices[index] ?? "");
+        if (!isForbiddenWorkspaceChoice(choice)) continue;
+
+        if (normalizeComparableText(correctValue) === normalizeComparableText(choice)) {
+            removedForbiddenCorrect = true;
+        }
+
+        choices[index] = pickSafeWorkspaceDistractor(choices);
+        changed = true;
+
+        args.report.repairs.push({
+            code: "PYTHON_FORBIDDEN_WORKSPACE_OPTION_REPLACED",
+            category: "text",
+            severity: "medium",
+            field: `${args.exercise.id}.choices.${index}`,
+            message:
+                "Replaced a forbidden Python browser-workspace choice with a safe non-workspace option.",
+        });
+    }
+
+    const seenChoices = new Set<string>();
+    for (let index = 0; index < choices.length; index += 1) {
+        const normalized = normalizeComparableText(String(choices[index] ?? ""));
+        if (!normalized || !seenChoices.has(normalized)) {
+            seenChoices.add(normalized);
+            continue;
+        }
+
+        choices[index] = pickSafeWorkspaceDistractor(choices);
+        changed = true;
+        args.report.repairs.push({
+            code: "PYTHON_FORBIDDEN_WORKSPACE_OPTION_REPLACED",
+            category: "text",
+            severity: "medium",
+            field: `${args.exercise.id}.choices.${index}`,
+            message:
+                "Replaced a duplicate learner-facing choice created during Python workspace-term repair.",
+        });
+    }
+
+    if (removedForbiddenCorrect) {
+        const allowedChoice = choices.find((choice) => isAllowedPythonWorkspaceChoice(choice));
+        correctValue = allowedChoice ?? choices[0] ?? correctValue;
+        args.report.repairs.push({
+            code: "PYTHON_FORBIDDEN_WORKSPACE_CORRECT_ANSWER_REPAIRED",
+            category: "text",
+            severity: "high",
+            field: `${args.exercise.id}.correctValue`,
+            message:
+                "Removed a forbidden Python browser-workspace choice from the correct answer and restored an allowed fill-blank value.",
+        });
+    }
+
+    if (!changed && !removedForbiddenCorrect) {
+        return args.exercise;
+    }
+
+    return {
+        ...args.exercise,
+        choices,
+        correctValue,
+    };
+}
+
+function repairPythonBrowserWorkspaceTerms(args: {
+    draft: TopicAuthoringDraft;
+    seed: TopicSeed;
+    report: RepairReport;
+}): TopicAuthoringDraft {
+    if (args.seed.workspacePolicy?.workspace.capabilities?.terminal.enabled === true) {
+        return args.draft;
+    }
+
+    return {
+        ...args.draft,
+        title: repairPythonWorkspaceTextField({
+            value: String(args.draft.title ?? ""),
+            field: "title",
+            report: args.report,
+        }),
+        summary: repairPythonWorkspaceTextField({
+            value: String(args.draft.summary ?? ""),
+            field: "summary",
+            report: args.report,
+        }),
+        sketchBlocks: args.draft.sketchBlocks.map((block) => ({
+            ...block,
+            title: repairPythonWorkspaceTextField({
+                value: String(block.title ?? ""),
+                field: `sketchBlocks.${block.id}.title`,
+                report: args.report,
+            }),
+            bodyMarkdown: repairPythonWorkspaceTextField({
+                value: String(block.bodyMarkdown ?? ""),
+                field: `sketchBlocks.${block.id}.bodyMarkdown`,
+                report: args.report,
+            }),
+        })),
+        projectDraft: args.draft.projectDraft
+            ? {
+                ...args.draft.projectDraft,
+                title: repairPythonWorkspaceTextField({
+                    value: String(args.draft.projectDraft.title ?? ""),
+                    field: "projectDraft.title",
+                    report: args.report,
+                }),
+            }
+            : args.draft.projectDraft,
+        quizDraft: args.draft.quizDraft.map((exercise) => {
+            const repairedBase = {
+                ...exercise,
+                title: repairPythonWorkspaceTextField({
+                    value: String(exercise.title ?? ""),
+                    field: `${exercise.id}.title`,
+                    report: args.report,
+                }),
+                prompt: repairPythonWorkspaceTextField({
+                    value: String(exercise.prompt ?? ""),
+                    field: `${exercise.id}.prompt`,
+                    report: args.report,
+                }),
+                hint: repairPythonWorkspaceTextField({
+                    value: String(exercise.hint ?? ""),
+                    field: `${exercise.id}.hint`,
+                    report: args.report,
+                }),
+                help: {
+                    ...exercise.help,
+                    concept: repairPythonWorkspaceTextField({
+                        value: String(exercise.help?.concept ?? ""),
+                        field: `${exercise.id}.help.concept`,
+                        report: args.report,
+                    }),
+                    hint_1: repairPythonWorkspaceTextField({
+                        value: String(exercise.help?.hint_1 ?? ""),
+                        field: `${exercise.id}.help.hint_1`,
+                        report: args.report,
+                    }),
+                    hint_2: repairPythonWorkspaceTextField({
+                        value: String(exercise.help?.hint_2 ?? ""),
+                        field: `${exercise.id}.help.hint_2`,
+                        report: args.report,
+                    }),
+                },
+            };
+
+            if (repairedBase.kind === "single_choice" || repairedBase.kind === "multi_choice") {
+                return repairPythonChoiceExerciseWorkspaceTerms({
+                    exercise: repairedBase,
+                    report: args.report,
+                });
+            }
+
+            if (repairedBase.kind === "fill_blank_choice") {
+                return repairPythonFillBlankWorkspaceTerms({
+                    exercise: {
+                        ...repairedBase,
+                        choices: (repairedBase.choices ?? []).map((choice, index) =>
+                            repairPythonWorkspaceTextField({
+                                value: String(choice ?? ""),
+                                field: `${repairedBase.id}.choices.${index}`,
+                                report: args.report,
+                            }),
+                        ),
+                    },
+                    report: args.report,
+                });
+            }
+
+            if (repairedBase.kind === "drag_reorder") {
+                return {
+                    ...repairedBase,
+                    tokens: (repairedBase.tokens ?? []).map((token, index) =>
+                        repairPythonWorkspaceTextField({
+                            value: String(token ?? ""),
+                            field: `${repairedBase.id}.tokens.${index}`,
+                            report: args.report,
+                        }),
+                    ),
+                    correctOrder: (repairedBase.correctOrder ?? []).map((token, index) =>
+                        repairPythonWorkspaceTextField({
+                            value: String(token ?? ""),
+                            field: `${repairedBase.id}.correctOrder.${index}`,
+                            report: args.report,
+                        }),
+                    ),
+                };
+            }
+
+            return repairedBase;
+        }),
+    };
+}
 
 function countKinds(draft: TopicAuthoringDraft) {
     return draft.quizDraft.reduce(
@@ -146,54 +595,125 @@ function buildGenericFillBlankExercise(id: string): PythonDraftExercise {
     };
 }
 
-function buildTruthinessCodeInputExercise(id: string): PythonDraftExercise {
+function buildTruthinessCodeInputExercise(
+    id: string,
+    index = 1,
+): PythonDraftExercise {
+    const prompts = [
+        {
+            title: "Check whether text is empty",
+            prompt:
+                "Read a line of text. Print `True` when the line is not empty and `False` when it is empty.",
+            starterCode: "text = input()\n# Your code here\n",
+            solutionCode:
+                "text = input()\nif text:\n    print(True)\nelse:\n    print(False)\n",
+            tests: [
+                { stdin: "hello\n", stdout: "True\n", match: "exact" as const },
+                { stdin: "\n", stdout: "False\n", match: "exact" as const },
+            ],
+            hint: "Use Python truthiness to decide whether the text is empty or non-empty.",
+            help: {
+                concept:
+                    "In Python, an empty string is falsy and a non-empty string is truthy.",
+                hint_1: "You can test the text directly in an if statement.",
+                hint_2: "Print True for non-empty input and False for empty input.",
+            },
+        },
+        {
+            title: "Check whether a number is zero",
+            prompt:
+                "Read one integer. Print `True` when the number is 0 and `False` when it is not 0.",
+            starterCode: "n = int(input())\n# Your code here\n",
+            solutionCode:
+                "n = int(input())\nif n == 0:\n    print(True)\nelse:\n    print(False)\n",
+            tests: [
+                { stdin: "0\n", stdout: "True\n", match: "exact" as const },
+                { stdin: "7\n", stdout: "False\n", match: "exact" as const },
+            ],
+            hint: "Compare the input with zero before printing the boolean result.",
+            help: {
+                concept: "A comparison expression can check whether a value equals zero.",
+                hint_1: "Use == to compare the number with 0.",
+                hint_2: "Print True only in the matching case.",
+            },
+        },
+    ];
+    const config = prompts[(index - 1) % prompts.length];
+
     return {
         id,
         kind: "code_input",
-        title: "Check whether text is empty",
-        prompt:
-            "Read a line of text. Print `True` when the line is not empty and `False` when it is empty.",
-        starterCode: "text = input()\n# Your code here\n",
-        solutionCode:
-            "text = input()\nif text:\n    print(True)\nelse:\n    print(False)\n",
-        tests: [
-            { stdin: "hello\n", stdout: "True\n", match: "exact" },
-            { stdin: "\n", stdout: "False\n", match: "exact" },
-        ],
-        hint: "Use Python truthiness to decide whether the text is empty or non-empty.",        help: {
-            concept:
-                "In Python, an empty string is falsy and a non-empty string is truthy.",
-            hint_1:
-                "You can test the text directly in an if statement.",
-            hint_2:
-                "Print True for non-empty input and False for empty input.",
-        },
+        ...config,
     };
 }
 
-function buildGenericCodeInputExercise(id: string): PythonDraftExercise {
+function buildGenericCodeInputExercise(
+    id: string,
+    index = 1,
+): PythonDraftExercise {
+    const prompts = [
+        {
+            title: "Print whether a number is positive",
+            prompt:
+                "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+            starterCode: "n = int(input())\n# Your code here\n",
+            solutionCode:
+                "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)\n",
+            tests: [
+                { stdin: "5\n", stdout: "True\n", match: "exact" as const },
+                { stdin: "0\n", stdout: "False\n", match: "exact" as const },
+            ],
+            hint: "Use a conditional check and return a boolean result.",
+            help: {
+                concept:
+                    "A conditional can decide which boolean value to print based on a comparison.",
+                hint_1: "Compare the number with zero inside an if statement.",
+                hint_2: "Print True when the condition passes; otherwise print False.",
+            },
+        },
+        {
+            title: "Print whether a number is even",
+            prompt:
+                "Read one integer. Print `True` when the number is even and `False` when it is odd.",
+            starterCode: "n = int(input())\n# Your code here\n",
+            solutionCode:
+                "n = int(input())\nif n % 2 == 0:\n    print(True)\nelse:\n    print(False)\n",
+            tests: [
+                { stdin: "8\n", stdout: "True\n", match: "exact" as const },
+                { stdin: "5\n", stdout: "False\n", match: "exact" as const },
+            ],
+            hint: "Use the remainder after dividing by 2.",
+            help: {
+                concept: "Even numbers have remainder 0 when divided by 2.",
+                hint_1: "Use % 2 to check the remainder.",
+                hint_2: "Print True only for the even case.",
+            },
+        },
+        {
+            title: "Print whether a number is negative",
+            prompt:
+                "Read one integer. Print `True` when the number is less than 0 and `False` otherwise.",
+            starterCode: "n = int(input())\n# Your code here\n",
+            solutionCode:
+                "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)\n",
+            tests: [
+                { stdin: "-2\n", stdout: "True\n", match: "exact" as const },
+                { stdin: "3\n", stdout: "False\n", match: "exact" as const },
+            ],
+            hint: "Compare the value with zero.",
+            help: {
+                concept: "A less-than comparison can detect negative numbers.",
+                hint_1: "Use < 0 inside an if statement.",
+                hint_2: "Print False for zero or positive values.",
+            },
+        },
+    ];
+    const config = prompts[(index - 1) % prompts.length];
+
     return {
         id,
         kind: "code_input",
-        title: "Print whether a number is positive",
-        prompt:
-            "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
-        starterCode: "n = int(input())\n# Your code here\n",
-        solutionCode:
-            "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)\n",
-        tests: [
-            { stdin: "5\n", stdout: "True\n", match: "exact" },
-            { stdin: "0\n", stdout: "False\n", match: "exact" },
-        ],
-        hint: "Use a conditional check and return a boolean result.",
-        help: {
-            concept:
-                "A conditional can decide which boolean value to print based on a comparison.",
-            hint_1:
-                "Compare the number with zero inside an if statement.",
-            hint_2:
-                "Print True when the condition passes; otherwise print False.",
-        },
+        ...config,
     };
 }
 
@@ -213,10 +733,10 @@ function buildFallbackExercise(args: {
     }
 
     if (looksLikeTruthinessTopic(args.seed)) {
-        return buildTruthinessCodeInputExercise(id);
+        return buildTruthinessCodeInputExercise(id, args.index);
     }
 
-    return buildGenericCodeInputExercise(id);
+    return buildGenericCodeInputExercise(id, args.index);
 }
 
 function hasClassDefinition(exercise: PythonCodeInputExercise): boolean {
@@ -291,7 +811,7 @@ function synthesizeMissingTestsForExercise(
         return null;
     }
 
-    const haystack = `${exercise.title} ${exercise.prompt} ${exercise.solutionCode}`.toLowerCase();
+    const haystack = `${exercise.title} ${exercise.prompt}`.toLowerCase();
 
     if (
         /\bpositive\b/.test(haystack) &&
@@ -1716,6 +2236,550 @@ function countNonEmptyStdinLines(stdin: unknown): number {
         .filter(Boolean).length;
 }
 
+function normalizeFixedTestKey(test: {
+    stdin?: unknown;
+    stdout?: unknown;
+    match?: unknown;
+}) {
+    return JSON.stringify({
+        stdin: String(test.stdin ?? ""),
+        stdout: String(test.stdout ?? ""),
+        match: test.match === "includes" ? "includes" : "exact",
+    });
+}
+
+function hasMinimumDistinctFixedTests(
+    exercise: PythonCodeInputExercise,
+    minimum = PYTHON_MINIMUM_FIXED_TESTS,
+) {
+    const tests = Array.isArray(exercise.tests) ? exercise.tests : [];
+    return new Set(tests.map((test) => normalizeFixedTestKey(test))).size >= minimum;
+}
+
+function mutateStdinLine(line: string, variantIndex: number): string {
+    const trimmed = line.trim();
+
+    if (/^-?\d+$/.test(trimmed)) {
+        return String(Number(trimmed) + variantIndex + 1);
+    }
+
+    if (/^-?\d+\.\d+$/.test(trimmed)) {
+        return String(Number(trimmed) + (variantIndex + 1) * 0.5);
+    }
+
+    if (/^(true|false)$/i.test(trimmed)) {
+        return /^true$/i.test(trimmed) ? "false" : "true";
+    }
+
+    if (/^[A-Za-z][A-Za-z0-9_ -]*$/.test(trimmed)) {
+        const textAlternates = ["Bob", "Zoe", "Python"];
+        const candidate = textAlternates[variantIndex % textAlternates.length] ?? "Bob";
+        return candidate === trimmed ? `${candidate}${variantIndex + 2}` : candidate;
+    }
+
+    if (!trimmed) {
+        return variantIndex % 2 === 0 ? "1" : "hello";
+    }
+
+    return `${trimmed}_${variantIndex + 2}`;
+}
+
+function buildAlternateStdinCandidates(
+    exercise: PythonCodeInputExercise,
+): string[] {
+    const tests = Array.isArray(exercise.tests) ? exercise.tests : [];
+    const inputs = tests
+        .map((test) => String(test.stdin ?? ""))
+        .filter((stdin) => stdin.trim().length > 0);
+
+    if (inputs.length < 1) return [];
+
+    const candidates = new Set<string>();
+
+    for (const stdin of inputs) {
+        const lines = stdin
+            .split("\n")
+            .slice(0, -1)
+            .map((line) => line.trim());
+        const normalizedLines = lines.length > 0 ? lines : [stdin.trim()];
+
+        for (let variantIndex = 0; variantIndex < 3; variantIndex += 1) {
+            const nextLines = normalizedLines.map((line) =>
+                mutateStdinLine(line, variantIndex),
+            );
+            const candidate = `${nextLines.join("\n")}\n`;
+            if (candidate !== stdin) {
+                candidates.add(candidate);
+            }
+        }
+    }
+
+    return [...candidates];
+}
+
+function referencedReadFiles(source: string): string[] {
+    const paths = new Set<string>();
+    const openPattern =
+        /open\s*\(\s*["'`]([^"'`]+)["'`]\s*(?:,\s*["'`]([^"'`]*)["'`])?/g;
+    const readTextPattern = /Path\s*\(\s*["'`]([^"'`]+)["'`]\s*\)\.read_text\s*\(/g;
+
+    for (const match of source.matchAll(openPattern)) {
+        const filePath = match[1]?.trim();
+        const mode = (match[2] ?? "r").trim();
+        if (!filePath) continue;
+        if (mode.includes("w") || mode.includes("a") || mode.includes("x")) continue;
+        paths.add(filePath);
+    }
+
+    for (const match of source.matchAll(readTextPattern)) {
+        const filePath = match[1]?.trim();
+        if (filePath) {
+            paths.add(filePath);
+        }
+    }
+
+    return [...paths];
+}
+
+function normalizeDraftFixtureFiles(
+    files: PythonCodeInputExercise["files"],
+): Array<{ path: string; content: string; readOnly?: boolean }> {
+    if (!Array.isArray(files)) return [];
+
+    return files
+        .map((file) => {
+            const path = typeof file.path === "string" ? file.path.trim() : "";
+            if (!path) return null;
+            return {
+                path,
+                content: String(file.content ?? ""),
+                ...(typeof file.readOnly === "boolean" ? { readOnly: file.readOnly } : {}),
+            };
+        })
+        .filter((file): file is { path: string; content: string; readOnly?: boolean } => Boolean(file));
+}
+
+function normalizeTestFixtureKey(test: { files?: PythonCodeInputExercise["files"] }): string {
+    const files = normalizeDraftFixtureFiles(test.files)
+        .map((file) => `${file.path}\u0000${file.content}`)
+        .sort();
+    return files.join("\u0001");
+}
+
+function inferFixtureContentFromTest(args: {
+    exercise: PythonCodeInputExercise;
+    filePath: string;
+    test: { stdout?: string };
+}): string | null {
+    const source = String(args.exercise.solutionCode ?? "");
+    const stdout = String(args.test.stdout ?? "");
+    const trimmedStdout = stdout.trimEnd();
+    const readAssignmentMatch = source.match(
+        /\b([A-Za-z_]\w*)\s*=\s*[A-Za-z_]\w*\.read\s*\(\s*\)/,
+    );
+    const readlineAssignmentMatch = source.match(
+        /\b([A-Za-z_]\w*)\s*=\s*[A-Za-z_]\w*\.readline\s*\(\s*\)/,
+    );
+    const readlinesAssignmentMatch = source.match(
+        /\b([A-Za-z_]\w*)\s*=\s*[A-Za-z_]\w*\.readlines\s*\(\s*\)/,
+    );
+
+    if (/print\s*\(\s*\w+\.read\s*\(\s*\)\s*,\s*end\s*=\s*["'`]["'`]\s*\)/.test(source)) {
+        return stdout;
+    }
+
+    if (
+        readAssignmentMatch?.[1] &&
+        new RegExp(
+            `print\\s*\\(\\s*${readAssignmentMatch[1]}\\s*,\\s*end\\s*=\\s*["'\`]["'\`]\\s*\\)`,
+        ).test(source)
+    ) {
+        return stdout;
+    }
+
+    if (/print\s*\(\s*\w+\.read\s*\(\s*\)\s*\)/.test(source)) {
+        return stdout.endsWith("\n") ? stdout.slice(0, -1) : stdout;
+    }
+
+    if (
+        readAssignmentMatch?.[1] &&
+        new RegExp(`print\\s*\\(\\s*${readAssignmentMatch[1]}\\s*\\)`).test(source)
+    ) {
+        return stdout.endsWith("\n") ? stdout.slice(0, -1) : stdout;
+    }
+
+    if (/readline\s*\(\s*\)\.strip\s*\(\s*\)/.test(source)) {
+        const firstLine = trimmedStdout;
+        if (!firstLine) return null;
+        return `${firstLine}\nSecond line\n`;
+    }
+
+    if (
+        readlineAssignmentMatch?.[1] &&
+        new RegExp(`print\\s*\\(\\s*${readlineAssignmentMatch[1]}\\s*\\)`).test(source)
+    ) {
+        return trimmedStdout;
+    }
+
+    if (
+        /\bfor\s+\w+\s+in\s+\w+\s*:\s*\n[\s\S]*?\b[A-Za-z_]\w*\s*\+=\s*1/m.test(source) ||
+        /\blen\s*\(\s*\w+\.readlines\s*\(\s*\)\s*\)/.test(source) ||
+        (
+            Boolean(readlinesAssignmentMatch?.[1]) &&
+            new RegExp(`len\\s*\\(\\s*${readlinesAssignmentMatch?.[1]}\\s*\\)`).test(source)
+        )
+    ) {
+        const count = Number(trimmedStdout);
+        if (!Number.isInteger(count) || count < 0 || count > 12) return null;
+        return Array.from({ length: count }, (_, index) => `line ${index + 1}`).join("\n") + (count > 0 ? "\n" : "");
+    }
+
+    const containsMatch = source.match(
+        /\bif\s+["'`]([^"'`]+)["'`]\s+in\s+line\s*:\s*\n[\s\S]*?\bprint\s*\(\s*line\.strip\s*\(\s*\)\s*\)/m,
+    );
+
+    if (containsMatch?.[1]) {
+        const requiredText = containsMatch[1];
+        const lines = trimmedStdout
+            .split("\n")
+            .map((line) => line.trim())
+            .filter(Boolean);
+
+        if (lines.length < 1 || lines.some((line) => !line.includes(requiredText))) {
+            return null;
+        }
+
+        return ["Other line", ...lines].join("\n") + "\n";
+    }
+
+    if (
+        /\bfor\s+line\s+in\s+\w+\s*:\s*\n[\s\S]*?\bprint\s*\(\s*line\.strip\s*\(\s*\)\s*\)/m.test(source)
+    ) {
+        const lines = trimmedStdout
+            .split("\n")
+            .map((line) => line.trim())
+            .filter(Boolean);
+        if (lines.length < 1) return null;
+        return `${lines.join("\n")}\n`;
+    }
+
+    if (
+        /\bfor\s+\w+\s+in\s+\w+/.test(source) &&
+        /\.strip\s*\(\s*\)/.test(source) &&
+        /\bif\s+\w+\s*!=\s*["'`]["'`]\s*:/.test(source) &&
+        /\bprint\s*\(\s*\w+\s*\)/.test(source)
+    ) {
+        const lines = trimmedStdout
+            .split("\n")
+            .map((line) => line.trim())
+            .filter(Boolean);
+        if (lines.length < 1) return null;
+
+        return lines
+            .map((line, index) => (index % 2 === 0 ? `  ${line}  ` : line))
+            .join("\n\n") + "\n";
+    }
+
+    return null;
+}
+
+function repairPythonFileFixtures(
+    exercise: PythonCodeInputExercise,
+): FileFixtureRepairResult {
+    if ((exercise.recipeType ?? "fixed_tests") !== "fixed_tests") {
+        return { changed: false };
+    }
+
+    const tests = Array.isArray(exercise.tests) ? exercise.tests.map((test) => ({ ...test })) : [];
+    if (tests.length < 1) return { changed: false };
+
+    const filePaths = referencedReadFiles(String(exercise.solutionCode ?? ""));
+    if (filePaths.length !== 1) return { changed: false };
+
+    const filePath = filePaths[0]!;
+    const distinctStdout = new Set(tests.map((test) => String(test.stdout ?? "")));
+    const needsPerTestFixtures = distinctStdout.size > 1;
+    let changed = false;
+    let addedTestFixtures = 0;
+    let alignedTests = false;
+
+    for (let index = 0; index < tests.length; index += 1) {
+        const test = tests[index]!;
+        const existingFiles = normalizeDraftFixtureFiles(test.files);
+        const hasTargetFile = existingFiles.some((file) => file.path === filePath);
+
+        if (hasTargetFile) continue;
+        if (!needsPerTestFixtures && index > 0) continue;
+
+        const inferredContent = inferFixtureContentFromTest({
+            exercise,
+            filePath,
+            test,
+        });
+        if (inferredContent === null) {
+            return { changed: false };
+        }
+
+        test.files = [
+            ...existingFiles,
+            {
+                path: filePath,
+                content: inferredContent,
+                readOnly: true,
+            },
+        ];
+        addedTestFixtures += 1;
+        changed = true;
+    }
+
+    let files = normalizeDraftFixtureFiles(exercise.files);
+    const hasExerciseFixture = files.some((file) => file.path === filePath);
+    let addedExerciseFixture = false;
+
+    if (!hasExerciseFixture) {
+        const fallbackTest = tests.find((test) =>
+            normalizeDraftFixtureFiles(test.files).some((file) => file.path === filePath),
+        );
+        const fallbackFixture = normalizeDraftFixtureFiles(fallbackTest?.files).find(
+            (file) => file.path === filePath,
+        );
+
+        if (!fallbackFixture) {
+            return { changed: false };
+        }
+
+        files = [...files, fallbackFixture];
+        addedExerciseFixture = true;
+        changed = true;
+    }
+
+    if (needsPerTestFixtures) {
+        const fixtureKeys = new Set(tests.map((test) => normalizeTestFixtureKey(test)));
+        alignedTests = fixtureKeys.size > 1;
+    } else {
+        alignedTests = true;
+    }
+
+    if (!changed) {
+        return { changed: false };
+    }
+
+    return {
+        changed: true,
+        exercise: {
+            ...exercise,
+            files,
+            tests,
+        },
+        addedExerciseFixture,
+        addedTestFixtures,
+        alignedTests,
+    };
+}
+
+async function repairThinFixedTests(
+    exercise: PythonCodeInputExercise,
+): Promise<ThinFixedTestRepairResult> {
+    if ((exercise.recipeType ?? "fixed_tests") !== "fixed_tests") {
+        return { status: "unchanged" };
+    }
+
+    const tests = Array.isArray(exercise.tests) ? [...exercise.tests] : [];
+    if (new Set(tests.map((test) => normalizeFixedTestKey(test))).size >= PYTHON_MINIMUM_FIXED_TESTS) {
+        return { status: "unchanged" };
+    }
+
+    if (!hasInputCalls(exercise)) {
+        return {
+            status: "unsafe",
+            reason:
+                "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage.",
+        };
+    }
+
+    const solutionCode = String(exercise.solutionCode ?? "").trim();
+    if (!solutionCode) {
+        return {
+            status: "unsafe",
+            reason: "This fixed_tests exercise has no runnable solutionCode for deriving an additional test.",
+        };
+    }
+
+    const runner = getCodeRunner() ?? runLocalCode;
+    const seenKeys = new Set(tests.map((test) => normalizeFixedTestKey(test)));
+    const seenStdout = new Set(tests.map((test) => String(test.stdout ?? "").trimEnd()));
+    const candidates = buildAlternateStdinCandidates(exercise);
+
+    for (const stdin of candidates) {
+        const run = await runner({
+            language: "python",
+            code: solutionCode,
+            stdin,
+            limits: { timeoutMs: 4000 },
+        });
+
+        if (!run.ok) continue;
+
+        const stdout = String(run.stdout ?? "");
+        if (!stdout.trim()) continue;
+        if (seenStdout.has(stdout.trimEnd())) continue;
+
+        const nextTest = {
+            stdin,
+            stdout,
+            match: "exact" as const,
+        };
+        const nextKey = normalizeFixedTestKey(nextTest);
+
+        if (seenKeys.has(nextKey)) continue;
+
+        tests.push(nextTest);
+        seenKeys.add(nextKey);
+        seenStdout.add(stdout.trimEnd());
+
+        if (new Set(tests.map((test) => normalizeFixedTestKey(test))).size >= PYTHON_MINIMUM_FIXED_TESTS) {
+            return {
+                status: "repaired",
+                exercise: {
+                    ...exercise,
+                    recipeType: "fixed_tests",
+                    tests,
+                },
+                addedCount: tests.length - (exercise.tests?.length ?? 0),
+            };
+        }
+    }
+
+    return {
+        status: "unsafe",
+        reason:
+            "The repair step could not derive a second distinct stdin/stdout case from the current Python prompt and solution. Replace this with a non-code exercise or rewrite it as a stdin-based task with variable behavior.",
+    };
+}
+
+function buildStaticOutputDistractors(correctOutput: string): string[] {
+    const trimmed = correctOutput.trimEnd();
+
+    if (/^-?\d+$/.test(trimmed)) {
+        const value = Number(trimmed);
+        return [String(value + 1), String(value - 1), `${trimmed}${trimmed}`];
+    }
+
+    if (/^[A-Za-z ,!?.'-]+$/.test(trimmed) && trimmed.length > 0) {
+        return [
+            trimmed.replace(/[!?.]+$/, ""),
+            "No output",
+            "SyntaxError",
+        ];
+    }
+
+    return ["No output", "SyntaxError", "A different value"];
+}
+
+function dedupeOptions(options: string[]) {
+    const seen = new Set<string>();
+    const out: string[] = [];
+
+    for (const option of options) {
+        const key = option.trim();
+        if (!key || seen.has(key)) continue;
+        seen.add(key);
+        out.push(option);
+    }
+
+    return out;
+}
+
+function convertStaticCommentExercise(
+    exercise: PythonCodeInputExercise,
+): PythonDraftExercise {
+    const commentLine =
+        String(exercise.solutionCode ?? "")
+            .split("\n")
+            .map((line) => line.trim())
+            .find((line) => line.startsWith("#")) ?? "# This is a comment";
+
+    return {
+        id: exercise.id,
+        kind: "single_choice",
+        title: "Identify the Python comment",
+        prompt:
+            "Which line is a Python comment and is ignored when the program runs?\n\n```python\n# This prints a message\nprint(\"Learning Python is fun!\")\n```",
+        options: [
+            commentLine,
+            "print(\"Learning Python is fun!\")",
+            "Learning Python is fun!",
+            "Click Run",
+        ],
+        correctOptionIds: ["a"],
+        hint: "Comments start with # and help explain code to readers.",
+        help: {
+            concept:
+                "A Python comment starts with # and is ignored during execution.",
+            hint_1:
+                "Look for the line that explains the code instead of running it.",
+            hint_2:
+                "The correct answer begins with the comment marker used in Python.",
+        },
+    };
+}
+
+function convertStaticOutputExercise(
+    exercise: PythonCodeInputExercise,
+): PythonDraftExercise | null {
+    const tests = Array.isArray(exercise.tests) ? exercise.tests : [];
+    if (tests.length < 1) return null;
+    if (hasInputCalls(exercise)) return null;
+
+    const stdout = String(tests[0]?.stdout ?? "");
+    if (!stdout.trim()) return null;
+
+    const haystack = `${exercise.title} ${exercise.prompt} ${exercise.solutionCode}`.toLowerCase();
+    const code = String(exercise.solutionCode ?? "");
+    const simpleCodeLines = code
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((line) => line.length > 0 && !line.startsWith("#"));
+    const looksLikeSimpleStaticOutput =
+        !/\bclass\s+[A-Za-z_]\w*|^def\s+[A-Za-z_]\w*\s*\(/m.test(code) &&
+        simpleCodeLines.length <= 2 &&
+        /\b(print|output|comment|calculate|message|name)\b/.test(haystack);
+
+    if (!looksLikeSimpleStaticOutput) return null;
+
+    if (/\bcomment\b/.test(haystack)) {
+        return convertStaticCommentExercise(exercise);
+    }
+
+    const trimmedOutput = stdout.trimEnd();
+    const options = dedupeOptions([
+        trimmedOutput,
+        ...buildStaticOutputDistractors(trimmedOutput),
+    ]).slice(0, 4);
+
+    while (options.length < 4) {
+        options.push(`Different output ${options.length + 1}`);
+    }
+
+    return {
+        id: exercise.id,
+        kind: "single_choice",
+        title: exercise.title,
+        prompt: `What is the output of this Python code?\n\n\`\`\`python\n${String(exercise.solutionCode ?? "").trim()}\n\`\`\``,
+        options,
+        correctOptionIds: ["a"],
+        hint: "Trace what print sends to the output panel.",
+        help: {
+            concept:
+                "A print statement shows the final value or text that the code produces.",
+            hint_1:
+                "Read the expression inside print and decide what value it becomes.",
+            hint_2:
+                "Choose the option that exactly matches the printed output, including punctuation.",
+        },
+    };
+}
+
 function hasFunctionWrapper(source: unknown): boolean {
     return /\b_inputs\s*=\s*\[\]/.test(String(source ?? "")) &&
         /\b_parse_arg\b/.test(String(source ?? ""));
@@ -1831,9 +2895,9 @@ function buildPolicyFallbackExercise(args: {
 
         case "code_input":
             if (looksLikeTruthinessTopic(args.seed)) {
-                return buildTruthinessCodeInputExercise(id);
+                return buildTruthinessCodeInputExercise(id, args.index);
             }
-            return buildGenericCodeInputExercise(id);
+            return buildGenericCodeInputExercise(id, args.index);
     }
 }
 function appendPolicyFallbackExercisesForAllKinds(args: {
@@ -1846,10 +2910,14 @@ function appendPolicyFallbackExercisesForAllKinds(args: {
 
     const counts = countKinds(args.draft);
     const quizDraft = [...args.draft.quizDraft];
+    const signatures = new Set(
+        quizDraft.map((exercise) => normalizePolicyExerciseSignature(exercise)),
+    );
 
     for (const kind of PYTHON_POLICY_EXERCISE_KINDS) {
         const target = planned.counts[kind] ?? 0;
         let index = 1;
+        let guard = 0;
 
         while (counts[kind] < target) {
             const exercise = buildPolicyFallbackExercise({
@@ -1857,10 +2925,28 @@ function appendPolicyFallbackExercisesForAllKinds(args: {
                 kind,
                 index,
             });
+            const signature = normalizePolicyExerciseSignature(exercise);
+            index += 1;
+            guard += 1;
+
+            if (signatures.has(signature)) {
+                args.report.repairs.push({
+                    code: "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+                    category: "other",
+                    severity: "low",
+                    field: exercise.id,
+                    message: `Skipped a duplicate synthesized ${kind} exercise while satisfying the planned exercise mix for "${args.seed.topicId}".`,
+                });
+
+                if (guard > target + 10) {
+                    break;
+                }
+                continue;
+            }
 
             quizDraft.push(exercise);
+            signatures.add(signature);
             counts[kind] += 1;
-            index += 1;
 
             args.report.repairs.push({
                 code: "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
@@ -1886,6 +2972,45 @@ const PYTHON_POLICY_EXERCISE_KINDS = [
 ] as const;
 
 type PythonPolicyExerciseKind = (typeof PYTHON_POLICY_EXERCISE_KINDS)[number];
+
+function normalizePolicyExerciseSignature(exercise: PythonDraftExercise): string {
+    switch (exercise.kind) {
+        case "code_input":
+            return JSON.stringify({
+                kind: exercise.kind,
+                prompt: String(exercise.prompt ?? "").trim().toLowerCase(),
+                recipeType: exercise.recipeType ?? null,
+                tests: (exercise.tests ?? []).map((test) => ({
+                    stdin: String(test.stdin ?? ""),
+                    stdout: String(test.stdout ?? ""),
+                    match: test.match ?? "exact",
+                })),
+            });
+        case "single_choice":
+        case "multi_choice":
+            return JSON.stringify({
+                kind: exercise.kind,
+                prompt: String(exercise.prompt ?? "").trim().toLowerCase(),
+                options: exercise.options ?? [],
+                correctOptionIds: exercise.correctOptionIds ?? [],
+            });
+        case "drag_reorder":
+            return JSON.stringify({
+                kind: exercise.kind,
+                prompt: String(exercise.prompt ?? "").trim().toLowerCase(),
+                tokens: exercise.tokens ?? [],
+                correctOrder: exercise.correctOrder ?? [],
+            });
+        case "fill_blank_choice":
+            return JSON.stringify({
+                kind: exercise.kind,
+                prompt: String(exercise.prompt ?? "").trim().toLowerCase(),
+                template: exercise.template ?? "",
+                choices: exercise.choices ?? [],
+                correctValue: exercise.correctValue ?? "",
+            });
+    }
+}
 
 function normalizePolicyExerciseCounts(args: {
     seed: TopicSeed;
@@ -2306,10 +3431,92 @@ export async function repairPythonDraft(args: {
                 });
             }
 
-            const hintLeakRepair = rewritePythonLeakText(repairedExercise.hint);
-            const conceptLeakRepair = rewritePythonLeakText(repairedExercise.help.concept);
-            const hint1LeakRepair = rewritePythonLeakText(repairedExercise.help.hint_1);
-            const hint2LeakRepair = rewritePythonLeakText(repairedExercise.help.hint_2);
+            const fileFixtureRepair = repairPythonFileFixtures(repairedExercise);
+            const afterFileFixtureRepair =
+                fileFixtureRepair.changed ? fileFixtureRepair.exercise : repairedExercise;
+
+            if (fileFixtureRepair.changed && fileFixtureRepair.addedTestFixtures > 0) {
+                report.repairs.push({
+                    code: "PYTHON_TEST_FILE_FIXTURE_ADDED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        `Added ${fileFixtureRepair.addedTestFixtures} test-level Python file fixture set(s) so fixed_tests file I/O coverage matches each expected output.`,
+                });
+            }
+
+            if (fileFixtureRepair.changed && fileFixtureRepair.addedExerciseFixture) {
+                report.repairs.push({
+                    code: "PYTHON_EXERCISE_FILE_FIXTURE_ADDED",
+                    category: "recipe",
+                    severity: "medium",
+                    field: exercise.id,
+                    message:
+                        "Added a learner-visible default file fixture for a Python file I/O code_input exercise.",
+                });
+            }
+
+            if (fileFixtureRepair.changed && fileFixtureRepair.alignedTests) {
+                report.repairs.push({
+                    code: "PYTHON_FILE_FIXTURE_TESTS_ALIGNED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Aligned Python fixed_tests file fixtures with their expected outputs so golden validation can run each case safely.",
+                });
+            }
+
+            const thinFixedTestRepair = await repairThinFixedTests(afterFileFixtureRepair);
+            const convertedStaticOutputExercise =
+                thinFixedTestRepair.status === "unsafe" &&
+                (
+                    afterFileFixtureRepair.recipeType === "fixed_tests" ||
+                    (Array.isArray(exercise.tests) && exercise.tests.length > 0)
+                )
+                    ? convertStaticOutputExercise(afterFileFixtureRepair)
+                    : null;
+            const afterThinFixedTestRepair =
+                thinFixedTestRepair.status === "repaired"
+                    ? thinFixedTestRepair.exercise
+                    : convertedStaticOutputExercise ?? afterFileFixtureRepair;
+
+            if (thinFixedTestRepair.status === "repaired") {
+                report.repairs.push({
+                    code: "PYTHON_FIXED_TEST_ADDED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message: `Added ${thinFixedTestRepair.addedCount} distinct fixed test case(s) so this Python code_input meets the minimum fixed_tests coverage.`,
+                });
+            }
+
+            if (thinFixedTestRepair.status === "unsafe") {
+                report.repairs.push({
+                    code: "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+                    category: "recipe",
+                    severity: "low",
+                    field: exercise.id,
+                    message: thinFixedTestRepair.reason,
+                });
+            }
+
+            if (convertedStaticOutputExercise) {
+                report.repairs.push({
+                    code: "PYTHON_STATIC_OUTPUT_CODE_INPUT_CONVERTED_TO_CONCEPT_EXERCISE",
+                    category: "recipe",
+                    severity: "medium",
+                    field: exercise.id,
+                    message:
+                        "Converted a static-output Python code_input into a concept exercise because it could not support two meaningful fixed tests.",
+                });
+            }
+
+            const hintLeakRepair = rewritePythonLeakText(afterThinFixedTestRepair.hint);
+            const conceptLeakRepair = rewritePythonLeakText(afterThinFixedTestRepair.help.concept);
+            const hint1LeakRepair = rewritePythonLeakText(afterThinFixedTestRepair.help.hint_1);
+            const hint2LeakRepair = rewritePythonLeakText(afterThinFixedTestRepair.help.hint_2);
 
             const hintRepair = rewriteBrowserSafeTracebackText(hintLeakRepair.next);
             const conceptRepair = rewriteBrowserSafeTracebackText(conceptLeakRepair.next);
@@ -2326,7 +3533,7 @@ export async function repairPythonDraft(args: {
                 hint1Repair.changed ||
                 hint2Repair.changed;
 
-            if (!changed) return repairedExercise;
+            if (!changed) return afterThinFixedTestRepair;
 
             if (hintLeakRepair.changed) {
                 report.repairs.push({
@@ -2393,10 +3600,10 @@ export async function repairPythonDraft(args: {
             }
 
             return {
-                ...repairedExercise,
+                ...afterThinFixedTestRepair,
                 hint: hintRepair.next,
                 help: {
-                    ...repairedExercise.help,
+                    ...afterThinFixedTestRepair.help,
                     concept: conceptRepair.next,
                     hint_1: hint1Repair.next,
                     hint_2: hint2Repair.next,
@@ -2413,6 +3620,11 @@ export async function repairPythonDraft(args: {
     nextDraft = normalizePolicyExerciseCounts({
         seed: args.seed,
         draft: nextDraft,
+        report,
+    });
+    nextDraft = repairPythonBrowserWorkspaceTerms({
+        draft: nextDraft,
+        seed: args.seed,
         report,
     });
 

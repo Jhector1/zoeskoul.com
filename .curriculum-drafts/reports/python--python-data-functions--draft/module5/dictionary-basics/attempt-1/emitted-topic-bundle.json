@@ -1,0 +1,368 @@
+{
+  "topicId": "dictionary-basics",
+  "subjectSlug": "python--python-data-functions--draft",
+  "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+  "sectionSlug": "python--python-data-functions--draft-python-5-dictionaries",
+  "prefix": "py5",
+  "minutes": 25,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.label",
+    "summaryKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch1.title",
+      "sketchId": "sketch2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "quiz5",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.projectSteps.quiz5.title",
+            "exerciseKey": "quiz5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz10",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.projectSteps.quiz10.title",
+            "exerciseKey": "quiz10",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz11",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.projectSteps.quiz11.title",
+            "exerciseKey": "quiz11",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.sketch1.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.sketch2.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.sketch2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz3",
+      "tokenIds": [
+        "t1",
+        "t2"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2"
+        ]
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz4",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'age'"
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz5",
+      "language": "python",
+      "starterCode": "def get_value(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(get_value(d, key))",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def get_value(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(get_value(d, key))",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_value(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(get_value(d, key))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "{'name': 'Alice', 'age': 23}\nname\n",
+            "stdout": "Alice\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "{'name': 'Alice', 'age': 23}\nheight\n",
+            "stdout": "Key not found\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def get_value(d, key):\n    return d.get(key, 'Key not found')\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(get_value(d, key))"
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz6",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz7",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d",
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz8",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz9",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "{}"
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz10",
+      "language": "python",
+      "starterCode": "def has_key(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(has_key(d, key))",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def has_key(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(has_key(d, key))",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def has_key(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(has_key(d, key))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "{'name': 'Alice', 'age': 23}\nage\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "{'name': 'Alice', 'age': 23}\nheight\n",
+            "stdout": "False\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def has_key(d, key):\n    return key in d\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(has_key(d, key))"
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz11",
+      "language": "python",
+      "starterCode": "def merge_dicts(d1, d2):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd1 = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nd2 = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(merge_dicts(d1, d2))",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def merge_dicts(d1, d2):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd1 = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nd2 = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(merge_dicts(d1, d2))",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def merge_dicts(d1, d2):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd1 = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nd2 = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(merge_dicts(d1, d2))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "{'a': 1, 'b': 2}\n{'b': 3, 'c': 4}\n",
+            "stdout": "{'a': 1, 'b': 3, 'c': 4}\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "{'x': 10}\n{'y': 20, 'x': 30}\n",
+            "stdout": "{'x': 30, 'y': 20}\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def merge_dicts(d1, d2):\n    d1.update(d2)\n    return d1\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd1 = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nd2 = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(merge_dicts(d1, d2))"
+      }
+    }
+  ]
+}

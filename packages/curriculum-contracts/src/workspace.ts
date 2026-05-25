@@ -99,6 +99,8 @@ export type ResolvedAuthoringPolicy = AuthoringPolicyLayer & {
 
 export type ModulePedagogyPolicy = {
     moduleNumber: number;
+    workspaceProfileId?: string;
+    workspaceOverrides?: Partial<WorkspaceProfile>;
     allowedConcepts?: string[];
     forbiddenConcepts?: string[];
     allowedActions?: string[];

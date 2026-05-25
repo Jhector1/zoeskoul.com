@@ -40,6 +40,42 @@ export const WORKSPACE_PROFILES: Record<string, WorkspaceProfile> = {
         ],
     },
 
+    "browser-python-files-runner": {
+        id: "browser-python-files-runner",
+        name: "Browser Python files runner",
+        ui: {
+            editorLabel: "code editor",
+            runButtonLabel: "Run",
+            outputPanelLabel: "output panel",
+            feedbackPanelLabel: "feedback area",
+            terminalPanelLabel: null,
+            filesPanelLabel: "files panel",
+        },
+        capabilities: {
+            singleFileCodeInput: { enabled: true },
+            multiFileProjects: { enabled: true },
+            terminal: { enabled: false },
+            filesystem: { enabled: true },
+            stdinStdout: { enabled: true },
+            packageInstall: { enabled: false },
+            externalNetwork: { enabled: false },
+            uploads: { enabled: false },
+        },
+        preferredActionLanguage: [
+            "Open the provided file in the files panel.",
+            "Edit Python code in the code editor.",
+            "Click Run.",
+            "Check the output panel.",
+        ],
+        forbiddenActionLanguage: [
+            "Open a terminal",
+            "Use the command line",
+            "Install a package",
+            "Use pip",
+            "Use external files not provided by the lesson",
+        ],
+    },
+
     "browser-sql-runner": {
         id: "browser-sql-runner",
         name: "Browser SQL runner",

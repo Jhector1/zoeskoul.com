@@ -1,0 +1,274 @@
+{
+  "title": "Creating and Indexing Lists",
+  "summary": "Create lists and access items by position.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Lists",
+      "bodyMarkdown": "Lists in Python are used to store multiple items in a single variable. They are ordered, changeable, and allow duplicate values. Lists are created using square brackets.\n\n```python\nfruits = ['apple', 'banana', 'cherry']\n```\n\nTry it yourself: Create a list of your favorite colors."
+    },
+    {
+      "id": "sketch2",
+      "title": "Accessing List Items",
+      "bodyMarkdown": "You can access list items by referring to the index number, starting from 0.\n\n```python\nfruits = ['apple', 'banana', 'cherry']\nprint(fruits[0])  # Output: apple\n```\n\nTry this: Access the second item in the list `['red', 'green', 'blue']`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "List Creation Syntax",
+      "prompt": "Which of the following is the correct way to create a list in Python?",
+      "options": [
+        "list = (1, 2, 3)",
+        "list = <1, 2, 3>"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Lists are defined using square brackets.",
+      "help": {
+        "concept": "Lists in Python are created using square brackets.",
+        "hint_1": "Look for the option that uses square brackets.",
+        "hint_2": "The correct syntax uses square brackets to enclose the list items."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Accessing List Elements",
+      "prompt": "What will be the output of the following code?\n\n```python\ncolors = ['red', 'green', 'blue']\nprint(colors[1])\n```",
+      "options": [
+        "red",
+        "green",
+        "blue",
+        "IndexError"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "List Characteristics",
+      "prompt": "Which of the following are true about lists in Python?",
+      "options": [
+        "Lists are immutable",
+        "Lists maintain order",
+        "Lists can contain duplicates",
+        "Lists are created using parentheses"
+      ],
+      "correctOptionIds": [
+        "b",
+        "c"
+      ],
+      "hint": "Consider the properties of lists such as mutability and order.",
+      "help": {
+        "concept": "Lists in Python are ordered, mutable, and can contain duplicate elements.",
+        "hint_1": "Lists can be changed after creation.",
+        "hint_2": "Lists maintain the order of elements and can have duplicates."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "List Indexing",
+      "prompt": "Select all correct statements about list indexing in Python.",
+      "options": [
+        "Indices start at 1",
+        "Negative indices access elements from the end",
+        "The first element is at index 0",
+        "Indices can be floats"
+      ],
+      "correctOptionIds": [
+        "b",
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Reorder List Operations",
+      "prompt": "Arrange the steps to access the third element of a list named `items`.",
+      "tokens": [
+        "Identify the list `items`",
+        "Use square brackets",
+        "Use index 2"
+      ],
+      "correctOrder": [
+        "Identify the list `items`",
+        "Use square brackets",
+        "Use index 2"
+      ],
+      "hint": "Think about the order of operations needed to access an element by index.",
+      "help": {
+        "concept": "To access an element, you need to know the list name and the index.",
+        "hint_1": "Identify the list and then use the index.",
+        "hint_2": "Use the list name followed by the index in square brackets."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Steps to Create a List",
+      "prompt": "Reorder the steps to create a list of numbers from 1 to 3.",
+      "tokens": [
+        "Open square brackets",
+        "Add numbers separated by commas",
+        "Close square brackets"
+      ],
+      "correctOrder": [
+        "Open square brackets",
+        "Add numbers separated by commas",
+        "Close square brackets"
+      ],
+      "hint": "Consider the syntax for creating a list in Python.",
+      "help": {
+        "concept": "Lists are created using square brackets with elements separated by commas.",
+        "hint_1": "Start with square brackets.",
+        "hint_2": "Place numbers inside the brackets separated by commas."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "List Indexing Example",
+      "prompt": "Fill in the blank to access the first element of the list `fruits`.",
+      "template": "fruits[[blank1]]",
+      "choices": [
+        "0",
+        "1",
+        "-1",
+        "first"
+      ],
+      "correctValue": "0",
+      "hint": "Remember that list indices start at the missing term.",
+      "help": {
+        "concept": "The first element of a list is accessed using index the missing term.",
+        "hint_1": "Use the list name followed by index the missing term in square brackets.",
+        "hint_2": "The correct syntax is `fruits[the missing term]`."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Creating a List",
+      "prompt": "Fill in the blank to create a list of three numbers: 4, 5, and 6.",
+      "template": "numbers = [[blank1]]",
+      "choices": [
+        "[4, 5, 6]",
+        "Lesson notes panel",
+        "Color theme picker",
+        "<4, 5, 6>"
+      ],
+      "correctValue": "[4, 5, 6]",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Modify a List",
+      "prompt": "Write a Python program that changes the first element of a list to 'orange' and prints the list.",
+      "starterCode": "# Modify the first element of the list\nfruits = ['apple', 'banana', 'cherry']\n# Change the first element to 'orange'",
+      "solutionCode": "# Modify the first element of the list\nfruits = ['apple', 'banana', 'cherry']\n# Change the first element to 'orange'\nfruits[0] = 'orange'\n# Print the modified list\nprint(fruits)",
+      "tests": [
+        {
+          "stdout": "['orange', 'banana', 'cherry']\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "['orange', 'banana', 'cherry']\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "policy_code_input_1",
+      "kind": "code_input",
+      "title": "Print whether a number is positive",
+      "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+      "starterCode": "n = int(input())\n# Your code here",
+      "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
+      "tests": [
+        {
+          "stdin": "5\n",
+          "stdout": "True\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "0\n",
+          "stdout": "False\n",
+          "match": "exact"
+        }
+      ],
+      "hint": "Use a conditional check and return a boolean result.",
+      "help": {
+        "concept": "A conditional can decide which boolean value to print based on a comparison.",
+        "hint_1": "Compare the number with zero inside an if statement.",
+        "hint_2": "Print True when the condition passes; otherwise print False."
+      },
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "policy_code_input_2",
+      "kind": "code_input",
+      "title": "Print whether a number is even",
+      "prompt": "Read one integer. Print `True` when the number is even and `False` when it is odd.",
+      "starterCode": "n = int(input())\n# Your code here",
+      "solutionCode": "n = int(input())\nif n % 2 == 0:\n    print(True)\nelse:\n    print(False)",
+      "tests": [
+        {
+          "stdin": "8\n",
+          "stdout": "True\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "5\n",
+          "stdout": "False\n",
+          "match": "exact"
+        }
+      ],
+      "hint": "Use the remainder after dividing by 2.",
+      "help": {
+        "concept": "Even numbers have remainder 0 when divided by 2.",
+        "hint_1": "Use % 2 to check the remainder.",
+        "hint_2": "Print True only for the even case."
+      },
+      "recipeType": "fixed_tests"
+    }
+  ],
+  "projectDraft": {
+    "title": "List Operations Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

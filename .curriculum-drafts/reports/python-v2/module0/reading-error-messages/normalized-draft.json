@@ -1,0 +1,240 @@
+{
+  "title": "Reading Error Messages",
+  "summary": "Learn how to read tracebacks and locate the line that needs attention.",
+  "minutes": 18,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Python Error Messages",
+      "bodyMarkdown": "When you run a Python program and something goes wrong, Python provides an error message called a traceback. This traceback helps you identify what went wrong and where in your code the error occurred.\n\n### Example\nConsider the following code:\n\n```python\nprint(\"Hello, World!\"\n```\n\nWhen you run this code, you'll see an error message like:\n\n```\n  File \"<stdin>\", line 1\n    print(\"Hello, World!\"\n                        ^\nSyntaxError: unexpected EOF while parsing\n```\n\nThis message tells you that there's a `SyntaxError` on line 1, and it points to the location where Python expected more code.\n\n### Try it yourself\nTry removing the closing parenthesis from a `print` statement in your code editor and observe the error message. Can you identify the issue?"
+    },
+    {
+      "id": "sketch2",
+      "title": "Common Python Errors",
+      "bodyMarkdown": "Here are some common Python errors you might encounter:\n\n- **SyntaxError**: Occurs when the code is not written in proper Python syntax.\n- **NameError**: Happens when you try to use a variable that hasn't been defined.\n- **TypeError**: Raised when an operation is applied to an object of inappropriate type.\n\n### Example\n```python\nx = 10\nprint(y)\n```\n\nThis will result in a `NameError` because `y` is not defined.\n\n### Your turn\nTry running the above code in your editor and see the error message. Can you fix it by defining `y`?"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Identifying Syntax Errors",
+      "prompt": "What type of error is raised when Python encounters incorrect syntax?",
+      "options": [
+        "NameError",
+        "TypeError",
+        "SyntaxError",
+        "ValueError"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "This error is related to the structure of the code.",
+      "help": {
+        "concept": "Syntax errors occur when the code structure is incorrect.",
+        "hint_1": "Look for the error type that deals with code structure.",
+        "hint_2": "It's the error that occurs when parentheses or colons are missing."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Common Error Types",
+      "prompt": "Which of the following are common Python error types?",
+      "options": [
+        "SyntaxError",
+        "NameError",
+        "FileNotFoundError",
+        "TypeError"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about errors related to syntax, names, and types.",
+      "help": {
+        "concept": "Common errors include those related to syntax, undefined names, and incorrect types.",
+        "hint_1": "Consider errors that occur when variables are not defined or used incorrectly.",
+        "hint_2": "Think about errors that occur when the code structure is incorrect or when operations are applied to the wrong types."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Order of Error Message Components",
+      "prompt": "Arrange the components of a Python error message in the correct order.",
+      "tokens": [
+        "File and line number",
+        "Error type",
+        "Error message"
+      ],
+      "correctOrder": [
+        "File and line number",
+        "Error type",
+        "Error message"
+      ],
+      "hint": "Start with the file and line number, then the error type and message.",
+      "help": {
+        "concept": "A Python error message typically starts with the file and line number, followed by the error type and message.",
+        "hint_1": "The file and line number come first.",
+        "hint_2": "The error type and message follow the location information."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Fixing a NameError",
+      "prompt": "To fix a `NameError`, you need to ensure that the variable is [blank1] before use.",
+      "template": "To fix a `NameError`, you need to ensure that the variable is [blank1] before use.",
+      "choices": [
+        "defined",
+        "deleted",
+        "printed",
+        "ignored"
+      ],
+      "correctValue": "defined",
+      "hint": "Think about what needs to happen to a variable before it can be used.",
+      "help": {
+        "concept": "A `NameError` occurs when a variable is used before it is the missing term.",
+        "hint_1": "The variable must be created before it is used.",
+        "hint_2": "Consider what action makes a variable available for use."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Correcting a Syntax Error",
+      "prompt": "Fix the syntax error in the following code so that it prints 'Hello, World!'.",
+      "starterCode": "print(\"Hello, World!\"\n",
+      "solutionCode": "print(\"Hello, World!\")\n",
+      "tests": [
+        {
+          "stdout": "Hello, World!\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Check for missing punctuation in the print statement.",
+      "help": {
+        "concept": "Syntax errors often involve missing or misplaced punctuation.",
+        "hint_1": "Look for missing parentheses or quotes.",
+        "hint_2": "Ensure the print statement is complete with all necessary punctuation."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "code_input",
+      "title": "Handling a NameError",
+      "prompt": "Modify the code to define the variable `name` before it is used.",
+      "starterCode": "print(name)\n",
+      "solutionCode": "name = \"Alice\"\nprint(name)\n",
+      "tests": [
+        {
+          "stdout": "Alice\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Define the variable before using it in the print statement.",
+      "help": {
+        "concept": "A `NameError` occurs when a variable is used before it is defined.",
+        "hint_1": "Ensure the variable is assigned a value before it is used.",
+        "hint_2": "Add a line to define the variable before the print statement."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Resolving a TypeError",
+      "prompt": "Fix the TypeError in the code by ensuring the correct types are used in the operation.",
+      "starterCode": "result = \"5\" + 3\nprint(result)\n",
+      "solutionCode": "result = int(\"5\") + 3\nprint(result)\n",
+      "tests": [
+        {
+          "stdout": "8\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Check the types of the variables involved in the operation.",
+      "help": {
+        "concept": "A `TypeError` occurs when an operation is applied to an inappropriate type.",
+        "hint_1": "Ensure that the operation is valid for the types involved.",
+        "hint_2": "Convert types if necessary to make the operation valid."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "code_input",
+      "title": "Debugging a Simple Program",
+      "prompt": "Identify and fix the errors in the following code to print 'Hello, Zoe!'.",
+      "starterCode": "print(Hello, name)\n",
+      "solutionCode": "name = \"Zoe\"\nprint(\"Hello, \" + name)\n",
+      "tests": [
+        {
+          "stdout": "Hello, Zoe!\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Check for syntax and name errors.",
+      "help": {
+        "concept": "Look for missing punctuation and undefined variables.",
+        "hint_1": "Ensure all variables are defined before use.",
+        "hint_2": "Check for missing or incorrect punctuation in the print statement."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "drag_reorder",
+      "title": "Steps to Fix a Syntax Error",
+      "prompt": "Arrange the steps to fix a syntax error in the correct order.",
+      "tokens": [
+        "Identify the error type",
+        "Locate the error in the code",
+        "Correct the error"
+      ],
+      "correctOrder": [
+        "Identify the error type",
+        "Locate the error in the code",
+        "Correct the error"
+      ],
+      "hint": "Start by identifying the error, then locate and correct it.",
+      "help": {
+        "concept": "Fixing a syntax error involves identifying, locating, and correcting the error.",
+        "hint_1": "First, identify the error type from the message.",
+        "hint_2": "Locate the error in the code and correct it."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "fill_blank_choice",
+      "title": "Understanding Tracebacks",
+      "prompt": "A traceback helps you locate the [blank1] of an error in your code.",
+      "template": "A traceback helps you locate the [blank1] of an error in your code.",
+      "choices": [
+        "location",
+        "type",
+        "cause",
+        "solution"
+      ],
+      "correctValue": "location",
+      "hint": "Think about what a traceback points to in your code.",
+      "help": {
+        "concept": "A traceback shows where an error occurred in the code.",
+        "hint_1": "It points to the specific the missing term in the code.",
+        "hint_2": "Consider what part of the code the traceback highlights."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Error Handling in Python",
+    "stepIds": [
+      "quiz5",
+      "quiz6",
+      "quiz7",
+      "quiz8"
+    ]
+  }
+}

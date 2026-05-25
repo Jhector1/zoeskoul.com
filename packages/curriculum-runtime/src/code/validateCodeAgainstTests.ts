@@ -2,16 +2,72 @@ import { runLocalCode } from "./localRunner.js";
 import { getCodeRunner } from "./runner.js";
 import { stdoutMatches } from "@zoeskoul/practice-checks";
 
+export type RuntimeCodeFileFixture = {
+    path: string;
+    content: string;
+    readOnly?: boolean;
+};
+
 export type RuntimeCodeTest = {
     stdin?: string;
     stdout: string;
     match?: "exact" | "includes";
+    files?: RuntimeCodeWorkspaceFiles;
 };
+
+export type RuntimeCodeWorkspaceFiles =
+    | RuntimeCodeFileFixture[]
+    | Record<string, string>;
+
+function normalizeWorkspaceFiles(
+    files: RuntimeCodeWorkspaceFiles | undefined,
+): RuntimeCodeFileFixture[] {
+    if (!files) return [];
+
+    if (Array.isArray(files)) {
+        return files
+            .map((file) => {
+                const path = typeof file.path === "string" ? file.path.trim() : "";
+                if (!path) return null;
+                return {
+                    path,
+                    content: String(file.content ?? ""),
+                    ...(typeof file.readOnly === "boolean"
+                        ? { readOnly: file.readOnly }
+                        : {}),
+                };
+            })
+            .filter((file): file is RuntimeCodeFileFixture => Boolean(file));
+    }
+
+    return Object.entries(files).map(([path, content]) => ({
+        path,
+        content,
+    }));
+}
+
+function mergeWorkspaceFiles(
+    baseFiles: RuntimeCodeWorkspaceFiles | undefined,
+    overrideFiles: RuntimeCodeWorkspaceFiles | undefined,
+): RuntimeCodeFileFixture[] | undefined {
+    const merged = new Map<string, RuntimeCodeFileFixture>();
+
+    for (const file of normalizeWorkspaceFiles(baseFiles)) {
+        merged.set(file.path, file);
+    }
+
+    for (const file of normalizeWorkspaceFiles(overrideFiles)) {
+        merged.set(file.path, file);
+    }
+
+    return merged.size > 0 ? [...merged.values()] : undefined;
+}
 
 export async function validateCodeAgainstTests(args: {
     language: string;
     solutionCode: string;
     tests: RuntimeCodeTest[];
+    files?: RuntimeCodeWorkspaceFiles;
     limits?: {
         timeoutMs?: number;
     };
@@ -40,6 +96,7 @@ export async function validateCodeAgainstTests(args: {
             language: args.language,
             code: args.solutionCode,
             stdin: test.stdin ?? "",
+            files: mergeWorkspaceFiles(args.files, test.files),
             limits: args.limits,
         });
 

@@ -14,7 +14,7 @@ import {
 import {
     getSqlDatasetById,
     listSqlDatasetIds,
-} from "../../../curriculum-profiles/src/sql/datasets/index.js";
+} from "@zoeskoul/curriculum-profiles/sql-datasets";
 import { resolveAuthoringPolicyChain } from "../policy/resolveAuthoringPolicyChain.js";
 import { normalizeLegacyCourseSpec } from "./normalizeLegacyCourseSpec.js";
 import { validateCourseSpec } from "./validateCourseSpec.js";

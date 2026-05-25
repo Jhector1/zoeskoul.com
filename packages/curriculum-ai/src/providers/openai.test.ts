@@ -12,6 +12,73 @@ import {
     setOpenAiModelResolverForTests,
 } from "./openai.js";
 
+function findKeywordPath(value: unknown, keyword: string, path = "$"): string | null {
+    if (!value || typeof value !== "object") {
+        return null;
+    }
+
+    if (keyword in (value as Record<string, unknown>)) {
+        return `${path}.${keyword}`;
+    }
+
+    for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
+        if (Array.isArray(child)) {
+            for (const [index, item] of child.entries()) {
+                const nested = findKeywordPath(item, keyword, `${path}.${key}[${index}]`);
+                if (nested) return nested;
+            }
+            continue;
+        }
+
+        const nested = findKeywordPath(child, keyword, `${path}.${key}`);
+        if (nested) return nested;
+    }
+
+    return null;
+}
+
+function findObjectPropertyCoverageIssue(value: unknown, path = "$"): string | null {
+    if (!value || typeof value !== "object") {
+        return null;
+    }
+
+    const record = value as Record<string, unknown>;
+    const properties =
+        record.properties && typeof record.properties === "object"
+            ? (record.properties as Record<string, unknown>)
+            : null;
+    const required = Array.isArray(record.required) ? record.required : null;
+
+    if (properties) {
+        const propertyKeys = Object.keys(properties).sort();
+        const requiredKeys = [...(required ?? [])]
+            .filter((key): key is string => typeof key === "string")
+            .sort();
+
+        if (
+            propertyKeys.length !== requiredKeys.length ||
+            propertyKeys.some((key, index) => key !== requiredKeys[index])
+        ) {
+            return path;
+        }
+    }
+
+    for (const [key, child] of Object.entries(record)) {
+        if (Array.isArray(child)) {
+            for (const [index, item] of child.entries()) {
+                const nested = findObjectPropertyCoverageIssue(item, `${path}.${key}[${index}]`);
+                if (nested) return nested;
+            }
+            continue;
+        }
+
+        const nested = findObjectPropertyCoverageIssue(child, `${path}.${key}`);
+        if (nested) return nested;
+    }
+
+    return null;
+}
+
 describe("openAiProvider", () => {
     afterEach(() => {
         resetOpenAiClientFactoryForTests();
@@ -64,7 +131,7 @@ describe("openAiProvider", () => {
                     json_schema: {
                         name: "TopicAuthoringDraft",
                         strict: true,
-                        schema: TOPIC_AUTHORING_DRAFT_JSON_SCHEMA,
+                        schema: getOpenAiStructuredOutputSchema("TopicAuthoringDraft"),
                     },
                 },
             }),
@@ -76,15 +143,157 @@ describe("openAiProvider", () => {
                 }),
             }),
         );
+        expect(
+            JSON.stringify(
+                (create.mock.calls[0][0] as {
+                    response_format?: {
+                        json_schema?: {
+                            schema?: unknown;
+                        };
+                    };
+                }).response_format?.json_schema?.schema,
+            ),
+        ).not.toContain("\"oneOf\"");
     });
 
-    it("documents that TopicAuthoringDraft provider schema currently permits oneOf", () => {
-        expect(getOpenAiStructuredOutputSchema("TopicAuthoringDraft")).toEqual(
-            TOPIC_AUTHORING_DRAFT_JSON_SCHEMA,
+    it("strips provider-only null compatibility fields before canonical TopicAuthoringDraft validation", async () => {
+        const create = vi.fn(async () => ({
+            choices: [
+                {
+                    message: {
+                        content: JSON.stringify({
+                            title: "Topic",
+                            summary: "Summary",
+                            minutes: 15,
+                            sketchBlocks: [],
+                            projectDraft: null,
+                            quizDraft: [
+                                {
+                                    id: "quiz1",
+                                    kind: "single_choice",
+                                    title: "Question",
+                                    prompt: "Pick one.",
+                                    hint: "Hint",
+                                    help: {
+                                        concept: "Concept",
+                                        hint_1: "Hint 1",
+                                        hint_2: "Hint 2",
+                                    },
+                                    options: ["A", "B"],
+                                    correctOptionIds: ["a"],
+                                    tokens: null,
+                                    correctOrder: null,
+                                    template: null,
+                                    choices: null,
+                                    correctValue: null,
+                                    starterCode: null,
+                                    solutionCode: null,
+                                    tests: null,
+                                    semanticChecks: null,
+                                    datasetId: null,
+                                    recipeType: null,
+                                    checkSql: null,
+                                },
+                            ],
+                        }),
+                    },
+                },
+            ],
+        }));
+
+        setOpenAiClientFactoryForTests(
+            () =>
+                ({
+                    chat: {
+                        completions: {
+                            create,
+                        },
+                    },
+                }) as any,
         );
-        expect(() => assertOpenAiStructuredOutputSchemaCompatible(
-            getOpenAiStructuredOutputSchema("TopicAuthoringDraft"),
-        )).not.toThrow();
+        setOpenAiModelResolverForTests(() => "gpt-test");
+
+        const result = await openAiProvider.generateJsonDetailed!({
+            system: "system prompt",
+            user: "user prompt",
+            schemaName: "TopicAuthoringDraft",
+        });
+
+        expect(result.value).toEqual({
+            title: "Topic",
+            summary: "Summary",
+            minutes: 15,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "quiz1",
+                    kind: "single_choice",
+                    title: "Question",
+                    prompt: "Pick one.",
+                    hint: "Hint",
+                    help: {
+                        concept: "Concept",
+                        hint_1: "Hint 1",
+                        hint_2: "Hint 2",
+                    },
+                    options: ["A", "B"],
+                    correctOptionIds: ["a"],
+                },
+            ],
+        });
+    });
+
+    it("uses a lowered provider schema for TopicAuthoringDraft structured outputs", () => {
+        const providerSchema = getOpenAiStructuredOutputSchema("TopicAuthoringDraft");
+
+        expect(providerSchema).not.toEqual(TOPIC_AUTHORING_DRAFT_JSON_SCHEMA);
+        expect(findKeywordPath(providerSchema, "oneOf")).toBeNull();
+        expect(findKeywordPath(TOPIC_AUTHORING_DRAFT_JSON_SCHEMA, "oneOf")).toBe(
+            "$.properties.quizDraft.items.oneOf",
+        );
+        expect(() =>
+            assertOpenAiStructuredOutputSchemaCompatible(providerSchema),
+        ).not.toThrow();
+    });
+
+    it("does not include oneOf under quizDraft.items in the OpenAI TopicAuthoringDraft schema", () => {
+        const providerSchema = getOpenAiStructuredOutputSchema("TopicAuthoringDraft") as {
+            properties?: {
+                quizDraft?: {
+                    items?: {
+                        properties?: {
+                            tests?: {
+                                items?: {
+                                    properties?: Record<string, unknown>;
+                                };
+                            };
+                        };
+                    };
+                };
+            };
+        };
+
+        expect(providerSchema.properties?.quizDraft?.items).toBeTruthy();
+        expect(providerSchema.properties?.quizDraft?.items).not.toHaveProperty("oneOf");
+        expect(
+            providerSchema.properties?.quizDraft?.items?.properties?.tests?.items?.properties,
+        ).toHaveProperty("files");
+    });
+
+    it("contains none of the unsupported structured-output keywords anywhere in the lowered TopicAuthoringDraft schema", () => {
+        const providerSchema = getOpenAiStructuredOutputSchema("TopicAuthoringDraft");
+
+        for (const keyword of ["oneOf", "anyOf", "allOf", "not", "if", "then", "else", "$ref"]) {
+            expect(findKeywordPath(providerSchema, keyword)).toBeNull();
+        }
+    });
+
+    it("uses OpenAI-strict object schemas where every declared property is also required", () => {
+        expect(
+            findObjectPropertyCoverageIssue(
+                getOpenAiStructuredOutputSchema("TopicAuthoringDraft"),
+            ),
+        ).toBeNull();
     });
 
     it("rejects unsupported structured-output schema keywords", () => {

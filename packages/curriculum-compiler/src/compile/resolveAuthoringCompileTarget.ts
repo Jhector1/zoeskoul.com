@@ -26,7 +26,15 @@ export type AuthoringCompileTarget = {
 type ResolveCourseTargetOptions = {
     liveSubjectSlug?: string;
     forceLiveOverwrite?: boolean;
+    draftOnly?: boolean;
 };
+
+function buildDraftOnlySubjectSlug(args: {
+    subjectSlug: string;
+    courseSlug: string;
+}) {
+    return `${args.subjectSlug}--${args.courseSlug}--draft`;
+}
 
 function assertVersioning(args: {
     subjectPlan: SubjectPlan;
@@ -59,12 +67,25 @@ function withLiveSubjectIdentity(args: {
             args.blueprint.catalogSlug ??
             args.subjectPlan.catalogSlug ??
             args.subjectPlan.subjectSlug,
+        accessPolicy:
+            args.subjectPlan.accessPolicy ??
+            args.spec.accessPolicy ??
+            args.blueprint.accessPolicy,
+        moduleAccessOverrideDefault:
+            args.spec.moduleAccessOverrideDefault ??
+            args.blueprint.moduleAccessOverrideDefault ??
+            null,
         profileId: args.spec.profileId as CourseBlueprint["profileId"],
         sourceLocale: args.spec.sourceLocale as CourseBlueprint["sourceLocale"],
         targetLocales: args.spec.targetLocales as CourseBlueprint["targetLocales"],
         title: args.spec.title || args.blueprint.title,
         workspaceProfileId: args.spec.workspaceProfileId ?? args.blueprint.workspaceProfileId,
         workspacePolicyId: args.spec.workspacePolicyId ?? args.blueprint.workspacePolicyId,
+        workspaceOverrides: args.spec.workspaceOverrides ?? args.blueprint.workspaceOverrides,
+        courseGenerationPolicy:
+            args.spec.courseGenerationPolicy ?? args.blueprint.courseGenerationPolicy,
+        modulePolicies: args.spec.modulePolicies ?? args.blueprint.modulePolicies,
+        topicPolicies: args.spec.topicPolicies ?? args.blueprint.topicPolicies,
         versioning: versioning as CourseBlueprint["versioning"],
     };
 }
@@ -82,9 +103,20 @@ export async function resolveAuthoringCompileTarget(args: {
 
     const isPublishTarget = subjectPlan.publishTarget?.courseSlug === args.courseSlug;
     const publishTargetLiveSubjectSlug = subjectPlan.publishTarget?.liveSubjectSlug;
-    const liveSubjectSlug = args.options?.liveSubjectSlug ?? publishTargetLiveSubjectSlug;
+    const liveSubjectSlug =
+        args.options?.liveSubjectSlug ??
+        (args.options?.draftOnly
+            ? buildDraftOnlySubjectSlug({
+                subjectSlug: args.subjectSlug,
+                courseSlug: args.courseSlug,
+            })
+            : publishTargetLiveSubjectSlug);
 
-    if (!isPublishTarget && !args.options?.liveSubjectSlug) {
+    if (
+        !args.options?.draftOnly &&
+        !isPublishTarget &&
+        !args.options?.liveSubjectSlug
+    ) {
         throw new Error(
             `Course "${args.courseSlug}" is not the publishTarget for subject "${args.subjectSlug}". Pass --live-subject <liveSubjectSlug> to compile it into a live subject slot.`,
         );
@@ -145,7 +177,9 @@ export async function resolveAuthoringCompileTarget(args: {
             spec,
             liveSubjectSlug,
         }),
-        publishToLive: isPublishTarget || Boolean(args.options?.liveSubjectSlug),
+        publishToLive:
+            !args.options?.draftOnly &&
+            (isPublishTarget || Boolean(args.options?.liveSubjectSlug)),
     };
 }
 

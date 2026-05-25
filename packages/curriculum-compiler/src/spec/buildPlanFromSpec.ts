@@ -32,6 +32,7 @@ export function buildPlanFromSpec(args: {
                     title: topic.title,
                     summary: topic.summary ?? fallbackSummary(module.title, topic.title),
                     minutes: topic.minutes ?? 15,
+                    technical: topic.technical,
                     learningGoals:
                         topic.learningGoals ??
                         module.learningObjectives ??
@@ -68,6 +69,7 @@ export function buildPlanFromSpec(args: {
                 moduleSlug: module.moduleSlug,
                 prefix: module.prefix ?? buildModulePrefix(args.blueprint.subjectSlug, logicalIndex),
                 order: normalizedOrder,
+                accessOverride: module.accessOverride ?? null,
                 title: module.title,
                 description: module.description ?? module.purpose ?? "",
                 purpose: module.purpose,

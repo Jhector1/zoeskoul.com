@@ -85,6 +85,7 @@ export function buildTopicSeedFromPlanNode(args: {
             title: args.topic.title,
             summary: args.topic.summary,
             minutes: args.topic.minutes,
+            technical: args.topic.technical,
         },
     });
     const workspacePolicy = resolveWorkspacePolicy({
@@ -129,6 +130,30 @@ export function buildTopicSeedFromPlanNode(args: {
 
         maxAttempts: topicTargets.maxAttempts ?? policyTargets.maxAttempts ?? null,
     };
+
+    const hasExplicitTopicCodeInputTargets =
+        typeof topicTargets.projectCodeInputMin === "number" ||
+        typeof topicTargets.projectCodeInputTarget === "number" ||
+        typeof topicTargets.projectCodeInputMax === "number";
+
+    if (
+        args.blueprint.profileId === "python" &&
+        args.topic.technical === false &&
+        !hasExplicitTopicCodeInputTargets
+    ) {
+        generationTargets.projectCodeInputTarget = Math.min(
+            generationTargets.projectCodeInputTarget,
+            1,
+        );
+        generationTargets.projectCodeInputMax = Math.min(
+            generationTargets.projectCodeInputMax,
+            1,
+        );
+        generationTargets.projectCodeInputMin = Math.min(
+            generationTargets.projectCodeInputMin,
+            generationTargets.projectCodeInputTarget,
+        );
+    }
 
     const totalGeneratedExercises =
         generationTargets.quizBankTarget +

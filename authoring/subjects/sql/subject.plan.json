@@ -2,6 +2,7 @@
   "subjectSlug": "sql",
   "catalogSlug": "sql",
   "profileId": "sql",
+  "accessPolicy": "paid",
   "courseOrder": [
     "sql-foundations",
     "sql-analysis-reporting",

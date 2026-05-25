@@ -1,0 +1,217 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "looping-through-lists": {
+          "label": "Looping Through Lists",
+          "summary": "Process each list item and build derived results.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Looping Through Lists"
+            },
+            "sketch1": {
+              "title": "Using Loop with Conditions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Looping Through Lists Project"
+            }
+          },
+          "projectSteps": {
+            "quiz6": {
+              "title": "Sum of List Elements"
+            },
+            "quiz7": {
+              "title": "Filter Even Numbers"
+            },
+            "quiz8": {
+              "title": "List Comprehension for Squares"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Basic Looping",
+              "prompt": "What does the following code do?\n\n```python\nnumbers = [1, 2, 3]\nfor number in numbers:\n    print(number)\n```",
+              "hint": "Consider what the `print` function does inside the loop.",
+              "help": {
+                "concept": "The code iterates over each element in the list and prints it.",
+                "hint_1": "The loop goes through each item in the list.",
+                "hint_2": "The `print` function outputs each number to the output panel."
+              },
+              "options": {
+                "a": "Prints each number in the list",
+                "b": "Adds each number to a new list",
+                "c": "Multiplies each number by 2",
+                "d": "Reverses the list"
+              }
+            },
+            "quiz2": {
+              "title": "Loop with Conditions",
+              "prompt": "Which of the following code snippets will print only the even numbers from the list `numbers = [1, 2, 3, 4, 5]`? Choose all that apply.",
+              "hint": "Use the modulus operator to check for even numbers.",
+              "help": {
+                "concept": "Even numbers are divisible by 2 without a remainder.",
+                "hint_1": "Use `number % 2 == 0` to check if a number is even.",
+                "hint_2": "Ensure the condition is inside the loop to filter numbers."
+              },
+              "options": {
+                "a": "for number in numbers:\n    if number % 2 == 0:\n        print(number)",
+                "b": "for number in numbers:\n    if number % 2 != 0:\n        print(number)",
+                "c": "for number in numbers:\n    print(number) if number % 2 == 0 else None",
+                "d": "for number in numbers:\n    if number % 2 == 1:\n        print(number)"
+              }
+            },
+            "quiz3": {
+              "title": "Order of Loop Execution",
+              "prompt": "Arrange the steps of a `for` loop execution in the correct order.",
+              "hint": "Think about how a loop initializes, checks conditions, and executes.",
+              "help": {
+                "concept": "A `for` loop initializes, checks conditions, executes, and then iterates.",
+                "hint_1": "The loop starts by initializing the loop variable.",
+                "hint_2": "After initialization, it checks the condition and executes the block."
+              },
+              "tokens": {
+                "t1": "Initialize loop variable",
+                "t2": "Check condition",
+                "t3": "Execute block",
+                "t4": "Iterate to next item"
+              }
+            },
+            "quiz4": {
+              "title": "Loop Variable",
+              "prompt": "In the loop `for number in numbers:`, what is `number`?",
+              "hint": "Consider the role of `number` in the loop.",
+              "help": {
+                "concept": "The the missing term represents each element in the list during iteration.",
+                "hint_1": "`number` is assigned each element of the list in turn.",
+                "hint_2": "It acts as a placeholder for each item in the list."
+              },
+              "template": "`number` is the [blank1] in the loop.",
+              "choices": [
+                "loop variable",
+                "list",
+                "function",
+                "condition"
+              ]
+            },
+            "quiz5": {
+              "title": "Loop Condition",
+              "prompt": "In a `for` loop, the condition is checked [blank1] each iteration.",
+              "hint": "Think about when the loop decides to continue or stop.",
+              "help": {
+                "concept": "The condition is checked the missing term each iteration to decide if the loop should continue.",
+                "hint_1": "The loop checks the condition the missing term executing the block.",
+                "hint_2": "This happens at the start of each iteration."
+              },
+              "template": "The condition is checked [blank1] each iteration.",
+              "choices": [
+                "before",
+                "after",
+                "during",
+                "never"
+              ]
+            },
+            "quiz6": {
+              "title": "Sum of List Elements",
+              "prompt": "Write a Python program that calculates the sum of all elements in a list of numbers.",
+              "hint": "Read the task \"Sum of List Elements\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Sum of List Elements\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Initialize sum variable\nsum_of_numbers = 0\n# Write your loop here"
+            },
+            "quiz7": {
+              "title": "Filter Even Numbers",
+              "prompt": "Write a Python program that prints only the even numbers from a list.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Write your loop here"
+            },
+            "quiz8": {
+              "title": "List Comprehension for Squares",
+              "prompt": "Convert the following loop into a list comprehension that creates a list of squares of numbers.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "numbers = [1, 2, 3, 4, 5]\nsquares = []\nfor number in numbers:\n    squares.append(number**2)\nprint(squares)"
+            },
+            "policy_single_choice_1": {
+              "title": "Identify the result of running code",
+              "prompt": "In \"Looping Through Lists\", what should you check after running a Python program?",
+              "hint": "Running code lets you inspect what the program displays.",
+              "help": {
+                "concept": "When you run Python code, the most important feedback is usually the output or error message.",
+                "hint_1": "Look at the output panel.",
+                "hint_2": "Printed values appear after the program runs."
+              },
+              "options": {
+                "a": "The output shown by the program",
+                "b": "Only the file name",
+                "c": "Whether Python deletes the code",
+                "d": "Whether comments are printed automatically"
+              }
+            },
+            "policy_multi_choice_1": {
+              "title": "Choose good run-and-check habits",
+              "prompt": "Which habits help when practicing \"Looping Through Lists\"?",
+              "hint": "Good practice means running code and checking what happened.",
+              "help": {
+                "concept": "Running small pieces of code and reading the output helps you understand Python behavior.",
+                "hint_1": "Output and errors both give useful feedback.",
+                "hint_2": "Testing small changes is easier than debugging many changes at once."
+              },
+              "options": {
+                "a": "Run the code after writing it",
+                "b": "Read the output carefully",
+                "c": "Ignore error messages",
+                "d": "Change many lines at once without testing"
+              }
+            },
+            "policy_drag_reorder_1": {
+              "title": "Order the run-and-check workflow",
+              "prompt": "Put the steps in order for practicing \"Looping Through Lists\".",
+              "hint": "You need code before you can run it.",
+              "help": {
+                "concept": "A basic Python workflow is write code, run it, then inspect the result.",
+                "hint_1": "The output appears after running.",
+                "hint_2": "Errors are also useful feedback."
+              },
+              "tokens": {
+                "t1": "Write a small piece of Python code",
+                "t2": "Run the code",
+                "t3": "Read the output or error message"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "looping-through-lists": {
+          "sketch1": {
+            "title": "Introduction to Looping Through Lists",
+            "bodyMarkdown": "Looping through lists is a fundamental concept in Python that allows you to process each item in a list. This is useful for tasks like summing numbers, filtering items, or transforming data.\n\n### Example\nConsider a list of numbers:\n\n```python\nnumbers = [1, 2, 3, 4, 5]\nfor number in numbers:\n    print(number)\n```\n\nThis code will print each number in the list. The `for` loop iterates over each element, assigning it to the variable `number`, and then executes the block of code within the loop.\n\n### Try it yourself\nModify the code to print the square of each number instead.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch2": {
+            "title": "Using Loop with Conditions",
+            "bodyMarkdown": "You can combine loops with conditions to perform more complex operations. For example, you might want to print only the even numbers from a list.\n\n### Example\n```python\nnumbers = [1, 2, 3, 4, 5]\nfor number in numbers:\n    if number % 2 == 0:\n        print(number)\n```\n\nThis code checks if each number is even using the modulus operator `%`. If the condition is true, it prints the number.\n\n### Your turn\nTry modifying the code to print numbers greater than 2.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

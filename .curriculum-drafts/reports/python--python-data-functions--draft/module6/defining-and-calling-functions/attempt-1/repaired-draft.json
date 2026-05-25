@@ -1,0 +1,282 @@
+{
+  "title": "Defining and Calling Functions",
+  "summary": "Create functions and call them with arguments.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Functions",
+      "bodyMarkdown": "Functions in Python are blocks of reusable code that perform a specific task. They help in organizing code and avoiding repetition. A function is defined using the `def` keyword, followed by the function name and parentheses `()`. Inside the parentheses, you can specify parameters that the function can accept.\n\n```python\ndef greet(name):\n    print(f\"Hello, {name}!\")\n```\n\nIn this example, `greet` is a function that takes one parameter `name` and prints a greeting message. \n\nTry it yourself: Define a function `add` that takes two parameters and returns their sum.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "sketch2",
+      "title": "Calling Functions",
+      "bodyMarkdown": "Once a function is defined, you can call it by using its name followed by parentheses. If the function requires parameters, you must provide them within the parentheses.\n\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(3, 5)\nprint(result)  # Output: 8\n```\n\nHere, the `add` function is called with arguments `3` and `5`, and it returns their sum.\n\nYour turn: Call the `greet` function with your name as the argument.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Function Definition",
+      "prompt": "What keyword is used to define a function in Python?",
+      "options": [
+        "func",
+        "define",
+        "def",
+        "function"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Function Call",
+      "prompt": "What is the correct way to call a function named `calculate` with arguments `5` and `10`?",
+      "options": [
+        "calculate 5, 10",
+        "calculate(5, 10)"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Function Characteristics",
+      "prompt": "Which of the following are characteristics of a function in Python? Select all that apply.",
+      "options": [
+        "Functions can take parameters.",
+        "Functions cannot return values.",
+        "Functions help avoid code repetition.",
+        "Functions are defined using the `def` keyword."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Function Parameters",
+      "prompt": "Which statements about function parameters are true? Select all that apply.",
+      "options": [
+        "Parameters are defined inside the parentheses of a function definition.",
+        "Parameters are optional in every function.",
+        "Parameters can be used to pass data into a function.",
+        "Parameters must always be integers."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Parameters are part of the function definition.",
+      "help": {
+        "concept": "Parameters allow functions to accept inputs and perform operations based on them.",
+        "hint_1": "Parameters are specified in the function definition.",
+        "hint_2": "Parameters can be used within the function to perform operations."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Function Execution Order",
+      "prompt": "Arrange the steps in the correct order to define and call a function in Python.",
+      "tokens": [
+        "Define the function using `def`.",
+        "Specify parameters inside parentheses.",
+        "Write the function body.",
+        "Call the function with arguments."
+      ],
+      "correctOrder": [
+        "Define the function using `def`.",
+        "Specify parameters inside parentheses.",
+        "Write the function body.",
+        "Call the function with arguments."
+      ],
+      "hint": "Start with defining the function, then call it.",
+      "help": {
+        "concept": "Understanding the sequence of defining and calling a function is crucial.",
+        "hint_1": "First, define the function using the `def` keyword.",
+        "hint_2": "After defining, call the function with the necessary arguments."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Function Return Process",
+      "prompt": "Arrange the steps in the correct order for a function to return a value.",
+      "tokens": [
+        "Process the input.",
+        "Use the `return` statement.",
+        "Define the function.",
+        "Call the function."
+      ],
+      "correctOrder": [
+        "Define the function.",
+        "Process the input.",
+        "Use the `return` statement.",
+        "Call the function."
+      ],
+      "hint": "Think about how a function processes and returns a value.",
+      "help": {
+        "concept": "Functions process inputs and can return a value using the `return` statement.",
+        "hint_1": "The function processes the input first.",
+        "hint_2": "The `return` statement is used to send back the result."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Function Keyword",
+      "prompt": "Complete the function definition with the correct keyword: `[blank1] greet(name):`",
+      "template": "[blank1] greet(name):",
+      "choices": [
+        "def",
+        "function",
+        "define",
+        "fn"
+      ],
+      "correctValue": "def",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Function Call Syntax",
+      "prompt": "Fill in the blank to correctly call the function: `result = add([blank1], 5)`",
+      "template": "result = add([blank1], 5)",
+      "choices": [
+        "3",
+        "\"three\"",
+        "add",
+        "result"
+      ],
+      "correctValue": "3",
+      "hint": "Use a number as the first argument.",
+      "help": {
+        "concept": "Function calls require the correct number and type of arguments.",
+        "hint_1": "The first argument should be a number.",
+        "hint_2": "The function `add` takes two numbers as arguments."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Define a Simple Function",
+      "prompt": "Define a function named `square` that takes one parameter and returns its square. Then read the input value, call the function, and print the returned result.",
+      "starterCode": "# Define your function below\ndef square(x):\n    # Return the square of x\n    return\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nx = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(square(x))",
+      "solutionCode": "def square(x):\n    return x * x\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nx = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(square(x))",
+      "tests": [
+        {
+          "stdout": "4\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "9\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Define a Simple Function\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Define a Simple Function\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Function with Multiple Parameters",
+      "prompt": "Create a function `multiply` that takes two parameters and returns their product. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "# Define your function below\ndef multiply(a, b):\n    # Return the product of a and b\n    return\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "solutionCode": "def multiply(a, b):\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "tests": [
+        {
+          "stdin": "1\n1\n",
+          "stdout": "1",
+          "match": "exact"
+        },
+        {
+          "stdin": "1\n1\n",
+          "stdout": "1",
+          "match": "exact"
+        },
+        {
+          "stdin": "2\n2\n",
+          "stdout": "4\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Function with Multiple Parameters\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Function with Multiple Parameters\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Function with Return and Print",
+      "prompt": "Write a function `greet_user` that takes a name and returns a greeting message. Then print the message.",
+      "starterCode": "# Define your function below\ndef greet_user(name):\n    # Return a greeting message\n    return \n\n# Call the function and print the result\nmessage = greet_user(\"Alice\")\nprint(message)",
+      "solutionCode": "def greet_user(name):\n    return f\"Hello, {name}!\"\n\nmessage = greet_user(\"Alice\")\nprint(message)",
+      "tests": [
+        {
+          "stdout": "Hello, Alice!",
+          "match": "exact"
+        },
+        {
+          "stdout": "Hello, Alice!",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Function Practice Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

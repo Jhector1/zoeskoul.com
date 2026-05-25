@@ -10,7 +10,8 @@
     "status": "active",
     "subjectSlugs": [
       "python",
-      "python-v2"
+      "python-v2",
+      "python-data-functions"
     ],
     "meta": {
       "family": "programming",

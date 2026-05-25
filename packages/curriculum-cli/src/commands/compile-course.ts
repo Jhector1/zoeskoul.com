@@ -16,6 +16,7 @@ export function parseCompileCourseArgs(args: string[]) {
     }
 
     return {
+        draftOnly: args.includes("--draft-only"),
         liveSubjectSlug,
         resume: args.includes("--resume"),
         forceLiveOverwrite: args.includes("--force-live-overwrite"),
@@ -41,6 +42,7 @@ export async function runCompileCourse(
             liveSubjectSlug: options.liveSubjectSlug,
             forceLiveOverwrite: options.forceLiveOverwrite,
             resume: options.resume,
+            draftOnly: options.draftOnly,
             onProgress: (info) => {
                 sawProgress = true;
                 renderProgressBar({
@@ -55,11 +57,11 @@ export async function runCompileCourse(
 
         if (sawProgress) {
             finishProgressBar(
-                `✔ Compiled ${out.authoringSubjectSlug}/${out.sourceCourseSlug} into ${out.liveSubjectSlug}`,
+                `✔ Compiled ${out.authoringSubjectSlug}/${out.sourceCourseSlug} into ${out.liveSubjectSlug}${options.draftOnly ? " (draft-only)" : ""}`,
             );
         } else {
             console.log(
-                `Compiled ${out.authoringSubjectSlug}/${out.sourceCourseSlug} into ${out.liveSubjectSlug}`,
+                `Compiled ${out.authoringSubjectSlug}/${out.sourceCourseSlug} into ${out.liveSubjectSlug}${options.draftOnly ? " (draft-only)" : ""}`,
             );
         }
     } catch (error) {

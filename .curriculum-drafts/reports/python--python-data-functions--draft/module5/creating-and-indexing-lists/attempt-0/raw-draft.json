@@ -1,0 +1,270 @@
+{
+  "title": "Creating and Indexing Lists",
+  "summary": "Create lists and access items by position.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Lists",
+      "bodyMarkdown": "Lists in Python are used to store multiple items in a single variable. They are ordered, changeable, and allow duplicate values. Lists are created using square brackets.\n\n```python\nfruits = ['apple', 'banana', 'cherry']\n```\n\nIn this example, `fruits` is a list containing three string elements. Lists can hold items of any data type, including other lists.\n\nTry it yourself: Create a list of your favorite movies."
+    },
+    {
+      "id": "sketch2",
+      "title": "Accessing List Items",
+      "bodyMarkdown": "You can access list items by referring to their index number. Python uses zero-based indexing, so the first item has an index of 0.\n\n```python\nfruits = ['apple', 'banana', 'cherry']\nprint(fruits[0])  # Output: apple\n```\n\nIn this example, `fruits[0]` accesses the first item in the list.\n\nYour turn: Try accessing the second item in the list."
+    },
+    {
+      "id": "sketch3",
+      "title": "Modifying List Items",
+      "bodyMarkdown": "Lists are mutable, meaning you can change their content. You can modify an item by accessing it via its index and assigning a new value.\n\n```python\nfruits = ['apple', 'banana', 'cherry']\nfruits[1] = 'blueberry'\nprint(fruits)  # Output: ['apple', 'blueberry', 'cherry']\n```\n\nHere, the second item 'banana' is replaced with 'blueberry'.\n\nTry this: Change the last item in the list to 'orange'."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "List Creation Syntax",
+      "prompt": "Which of the following is the correct way to create a list in Python?",
+      "hint": "Lists are created using square brackets.",
+      "help": {
+        "concept": "Lists in Python are created using square brackets.",
+        "hint_1": "Look for the option that uses square brackets.",
+        "hint_2": "The correct syntax uses square brackets to enclose the list items."
+      },
+      "options": [
+        "list = (1, 2, 3)",
+        "list = {1, 2, 3}",
+        "list = [1, 2, 3]",
+        "list = <1, 2, 3>"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Accessing List Elements",
+      "prompt": "What is the output of the following code?\n\n```python\nfruits = ['apple', 'banana', 'cherry']\nprint(fruits[2])\n```",
+      "hint": "Remember that list indexing starts at 0.",
+      "help": {
+        "concept": "List indexing starts at 0, so the first element is at index 0.",
+        "hint_1": "The index 2 refers to the third element in the list.",
+        "hint_2": "The element at index 2 is 'cherry'."
+      },
+      "options": [
+        "apple",
+        "banana",
+        "cherry",
+        "IndexError"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "List Characteristics",
+      "prompt": "Which of the following are true about lists in Python? Select all that apply.",
+      "hint": "Consider the properties of lists such as mutability and order.",
+      "help": {
+        "concept": "Lists are ordered, mutable, and can contain duplicate elements.",
+        "hint_1": "Lists can be changed after creation.",
+        "hint_2": "Lists maintain the order of elements."
+      },
+      "options": [
+        "Lists are immutable.",
+        "Lists maintain order.",
+        "Lists can contain duplicate elements.",
+        "Lists are created using parentheses."
+      ],
+      "correctOptionIds": [
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Modifying Lists",
+      "prompt": "Which of the following operations can modify a list in Python? Select all that apply.",
+      "hint": "Think about how you can change the contents of a list.",
+      "help": {
+        "concept": "Lists can be modified by changing elements, adding new elements, or removing elements.",
+        "hint_1": "You can change an element by assigning a new value to an index.",
+        "hint_2": "You can add elements using methods like append or insert."
+      },
+      "options": [
+        "Assigning a new value to an index",
+        "Using the append method",
+        "Using the remove method",
+        "Using the len function"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "List Indexing Order",
+      "prompt": "Arrange the following list indices in the order they would appear in a list with 5 elements.",
+      "hint": "Remember that list indices start at 0.",
+      "help": {
+        "concept": "List indices start at 0 and increase by 1 for each subsequent element.",
+        "hint_1": "The first index is 0, not 1.",
+        "hint_2": "The last index for a list with 5 elements is 4."
+      },
+      "tokens": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correctOrder": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Steps to Modify a List",
+      "prompt": "Arrange the steps to change the second element of a list to 'orange'.",
+      "hint": "Consider the steps needed to access and modify a list element.",
+      "help": {
+        "concept": "To modify a list element, access it by index and assign a new value.",
+        "hint_1": "Access the element using its index.",
+        "hint_2": "Assign the new value to the accessed index."
+      },
+      "tokens": [
+        "Access the list by index",
+        "Assign 'orange' to the index",
+        "Identify the index of the element"
+      ],
+      "correctOrder": [
+        "Identify the index of the element",
+        "Access the list by index",
+        "Assign 'orange' to the index"
+      ]
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "List Element Access",
+      "prompt": "Complete the code to access the first element of the list `colors`.",
+      "hint": "Remember that the first element is at index 0.",
+      "help": {
+        "concept": "List indexing starts at 0, so the first element is accessed with index 0.",
+        "hint_1": "Use index 0 to access the first element.",
+        "hint_2": "The correct syntax is `colors[0]`."
+      },
+      "template": "first_color = colors[[blank1]]",
+      "choices": [
+        "0",
+        "1",
+        "-1",
+        "len(colors)"
+      ],
+      "correctValue": "0"
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "List Creation",
+      "prompt": "Fill in the blank to create a list of numbers from 1 to 3.",
+      "hint": "Use square brackets to create a list.",
+      "help": {
+        "concept": "Lists are created using square brackets with elements separated by commas.",
+        "hint_1": "The syntax for a list is `[element1, element2, ...]`.",
+        "hint_2": "Include all numbers from 1 to 3 inside the brackets."
+      },
+      "template": "numbers = [[blank1]]",
+      "choices": [
+        "1, 2, 3",
+        "(1, 2, 3)",
+        "{1, 2, 3}",
+        "<1, 2, 3>"
+      ],
+      "correctValue": "1, 2, 3"
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Create a List of Fruits",
+      "prompt": "Write a Python program that creates a list of fruits and prints the list.",
+      "hint": "Use square brackets to create the list and the print function to display it.",
+      "help": {
+        "concept": "Lists are created using square brackets and can be printed using the print function.",
+        "hint_1": "Create a list with at least three fruit names.",
+        "hint_2": "Use the print function to display the list."
+      },
+      "starterCode": "# Create a list of fruits\nfruits = []\n# Print the list\nprint(fruits)",
+      "solutionCode": "# Create a list of fruits\nfruits = ['apple', 'banana', 'cherry']\n# Print the list\nprint(fruits)",
+      "tests": [
+        {
+          "stdout": "['apple', 'banana', 'cherry']\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Access and Modify List Elements",
+      "prompt": "Write a Python program that changes the second element of a list to 'orange' and prints the updated list.",
+      "hint": "Access the element by index and assign a new value.",
+      "help": {
+        "concept": "List elements can be accessed by index and modified by assignment.",
+        "hint_1": "Use index 1 to access the second element.",
+        "hint_2": "Assign 'orange' to the second element and print the list."
+      },
+      "starterCode": "# Create a list of fruits\nfruits = ['apple', 'banana', 'cherry']\n# Change the second element\n\n# Print the updated list\nprint(fruits)",
+      "solutionCode": "# Create a list of fruits\nfruits = ['apple', 'banana', 'cherry']\n# Change the second element\nfruits[1] = 'orange'\n# Print the updated list\nprint(fruits)",
+      "tests": [
+        {
+          "stdout": "['apple', 'orange', 'cherry']\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "List Indexing and Printing",
+      "prompt": "Write a Python program that prints the first and last elements of a list.",
+      "hint": "Use index 0 for the first element and -1 for the last element.",
+      "help": {
+        "concept": "The first element of a list is accessed with index 0, and the last element with index -1.",
+        "hint_1": "Use index 0 to access the first element.",
+        "hint_2": "Use index -1 to access the last element."
+      },
+      "starterCode": "# Create a list of fruits\nfruits = ['apple', 'banana', 'cherry']\n# Print the first and last elements\n",
+      "solutionCode": "# Create a list of fruits\nfruits = ['apple', 'banana', 'cherry']\n# Print the first and last elements\nprint(fruits[0])\nprint(fruits[-1])",
+      "tests": [
+        {
+          "stdout": "apple\ncherry\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    }
+  ],
+  "projectDraft": {
+    "title": "List Operations Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

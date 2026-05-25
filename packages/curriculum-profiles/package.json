@@ -17,7 +17,8 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "test": "vitest run --root ../.. packages/curriculum-profiles/src"
   },
   "dependencies": {
     "@zoeskoul/curriculum-contracts": "workspace:*",

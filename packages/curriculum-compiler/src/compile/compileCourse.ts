@@ -17,6 +17,7 @@ export async function compileCourse(args: {
     onProgress?: CompileProgressCallback;
     resume?: boolean;
     publish?: boolean;
+    draftOnly?: boolean;
 }) {
     const target = await resolveAuthoringCompileTarget({
         subjectSlug: args.subjectSlug,
@@ -24,6 +25,7 @@ export async function compileCourse(args: {
         options: {
             liveSubjectSlug: args.liveSubjectSlug,
             forceLiveOverwrite: args.forceLiveOverwrite,
+            draftOnly: args.draftOnly,
         },
     });
 

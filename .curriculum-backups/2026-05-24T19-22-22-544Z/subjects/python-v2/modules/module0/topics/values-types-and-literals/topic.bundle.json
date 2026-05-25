@@ -1,0 +1,401 @@
+{
+  "topicId": "values-types-and-literals",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-0",
+  "sectionSlug": "python-v2-0-values-and-expressions",
+  "prefix": "pyv2_0",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-0.values-types-and-literals.label",
+    "summaryKey": "topics.python-v2.python-v2-0.values-types-and-literals.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.cards.sketch0.title",
+      "sketchId": "values-basics",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.cards.sketch1.title",
+      "sketchId": "literals-and-spelling",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.cards.sketch2.title",
+      "sketchId": "expressions-intro",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_print_literals",
+            "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.projectSteps.ci_print_literals.title",
+            "exerciseKey": "ci-print-literals",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_print_expression",
+            "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.projectSteps.ci_print_expression.title",
+            "exerciseKey": "ci-print-expression",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_read_and_print",
+            "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.projectSteps.ci_read_and_print.title",
+            "exerciseKey": "ci-read-and-print",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_read_number_text",
+            "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.projectSteps.ci_read_number_text.title",
+            "exerciseKey": "ci-read-number-text",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_three_lines",
+            "titleKey": "topics.python-v2.python-v2-0.values-types-and-literals.projectSteps.ci_three_lines.title",
+            "exerciseKey": "ci-three-lines",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "values-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-0.values-types-and-literals.values-basics.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.values-types-and-literals.values-basics.bodyMarkdown"
+    },
+    {
+      "id": "literals-and-spelling",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-0.values-types-and-literals.literals-and-spelling.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.values-types-and-literals.literals-and-spelling.bodyMarkdown"
+    },
+    {
+      "id": "expressions-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-0.values-types-and-literals.expressions-intro.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.values-types-and-literals.expressions-intro.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-string-literal",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.sc-string-literal",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc-float-value",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.sc-float-value",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-boolean-values",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.mc-boolean-values",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "mc-valid-literals",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.mc-valid-literals",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr-type-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.dr-type-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
+      }
+    },
+    {
+      "id": "dr-expression-steps",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.dr-expression-steps",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb-none-literal",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.fb-none-literal",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "hello"
+      }
+    },
+    {
+      "id": "fb-quoted-text",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.fb-quoted-text",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "hello"
+      }
+    },
+    {
+      "id": "ci-print-literals",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals",
+      "language": "python",
+      "starterCode": "# TODO: print the five values in order",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Zoe\n7\n2.5\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "Zoe\n7\n2.5\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"Zoe\")\nprint(7)\nprint(2.5)"
+      }
+    },
+    {
+      "id": "ci-print-expression",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression",
+      "language": "python",
+      "starterCode": "# TODO: print the two expression results",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "5\n4.0\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "5\n4.0\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(2 + 3)\nprint(1.5 + 2.5)"
+      }
+    },
+    {
+      "id": "ci-read-and-print",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-and-print",
+      "language": "python",
+      "starterCode": "# TODO: read one line and print it",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "hello\n",
+            "stdout": "hello\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Python is fun\n",
+            "stdout": "Python is fun\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = input()\nprint(text)"
+      }
+    },
+    {
+      "id": "ci-read-number-text",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-number-text",
+      "language": "python",
+      "starterCode": "# TODO: read input and print it after the label",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "42\n",
+            "stdout": "You typed: 42\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "3.14\n",
+            "stdout": "You typed: 3.14\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "value = input()\nprint(\"You typed:\", value)"
+      }
+    },
+    {
+      "id": "ci-three-lines",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-three-lines",
+      "language": "python",
+      "starterCode": "# TODO: print the required three lines",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "start\n5\ndone\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "start\n5\ndone\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"start\")\nprint(4 + 1)\nprint(\"done\")"
+      }
+    }
+  ]
+}

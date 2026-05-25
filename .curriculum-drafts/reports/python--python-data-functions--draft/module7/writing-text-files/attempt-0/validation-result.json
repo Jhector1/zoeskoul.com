@@ -1,0 +1,6 @@
+{
+  "ok": false,
+  "errors": [
+    "Invalid TopicAuthoringDraft: quizDraft[9] tests[0].stdout must be a non-empty string"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "subjectSlug": "python-v2",
+  "generatedAt": "2026-05-24T15:40:46.851Z",
+  "topics": [
+    {
+      "moduleSlug": "python-v2-0",
+      "sectionSlug": "python-v2-0-setup-and-first-programs",
+      "topicId": "what-python-is",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-v2-0",
+      "sectionSlug": "python-v2-0-setup-and-first-programs",
+      "topicId": "running-python-code",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-v2-0",
+      "sectionSlug": "python-v2-0-setup-and-first-programs",
+      "topicId": "print-comments-and-errors",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-v2-0",
+      "sectionSlug": "python-v2-0-values-and-expressions",
+      "topicId": "values-types-and-literals",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-v2-0",
+      "sectionSlug": "python-v2-0-values-and-expressions",
+      "topicId": "operators-and-expressions",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "GOLDEN_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "python-v2-0",
+      "sectionSlug": "python-v2-0-values-and-expressions",
+      "topicId": "reading-error-messages",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-v2-1",
+      "sectionSlug": "python-v2-1-variables-and-assignment",
+      "topicId": "naming-and-assigning-variables",
+      "status": "failed",
+      "attempts": 3,
+      "retryCodes": [
+        "CRITIQUE_VALIDATION_FAILED",
+        "SEMANTIC_VALIDATION_FAILED",
+        "CRITIQUE_VALIDATION_FAILED"
+      ]
+    }
+  ]
+}

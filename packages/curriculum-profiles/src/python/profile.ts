@@ -33,6 +33,8 @@
 
 import type {
     ManifestCodeInput,
+    ManifestFileFixture,
+    ManifestStarterFile,
     ProgrammingCodeInputTestDraft,
     TopicRecipe,
     BuildSubjectManifestArgs,
@@ -48,6 +50,8 @@ import type {
     CourseProfileAdapter,
 } from "../types.js";
 import { pythonShape } from "../shapes/pythonShape.js";
+
+export const PYTHON_MINIMUM_FIXED_TESTS = 2;
 
 function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
@@ -72,6 +76,11 @@ function requireProgrammingTests(
                         : {}),
                     stdout: String(test.stdout ?? ""),
                     match,
+                    ...(Array.isArray(test.files) && test.files.length > 0
+                        ? {
+                            files: normalizePythonTestFiles(test.files),
+                        }
+                        : {}),
                 };
             })
             .filter((test: { stdout: string }) => test.stdout.trim().length > 0)
@@ -87,7 +96,33 @@ function requireProgrammingTests(
         );
     }
 
+    if (tests.length < PYTHON_MINIMUM_FIXED_TESTS) {
+        throw new Error(
+            [
+                `Programming code_input exercise "${exercise.id}" needs at least ${PYTHON_MINIMUM_FIXED_TESTS} meaningful stdin/stdout test cases.`,
+                `Topic: ${topicId}`,
+                "Use distinct fixed_tests coverage, or switch the exercise to semantic checks when stdout-based validation is not the right fit.",
+            ].join("\n"),
+        );
+    }
+
     return tests;
+}
+
+function normalizePythonTestFiles(
+    files: ManifestFileFixture[] | undefined,
+): ManifestFileFixture[] {
+    if (!Array.isArray(files)) return [];
+
+    return files
+        .filter((file) => normalizeText(file.path))
+        .map((file) => ({
+            path: file.path.trim(),
+            content: String(file.content ?? ""),
+            ...(typeof file.readOnly === "boolean"
+                ? { readOnly: file.readOnly }
+                : {}),
+        }));
 }
 
 function requireSemanticChecks(value: unknown, exerciseId: string) {
@@ -129,7 +164,25 @@ function makePythonCodeHelpFallback(args: {
     };
 }
 
+function normalizePythonFixtureFiles(
+    files: Array<{
+        path: string;
+        content: string;
+        readOnly?: boolean;
+    }> | undefined,
+): ManifestStarterFile[] {
+    if (!Array.isArray(files)) return [];
+
+    return files
+        .filter((file) => normalizeText(file.path))
+        .map((file) => ({
+            path: file.path.trim(),
+            content: String(file.content ?? ""),
+        }));
+}
+
 const pythonCodeInputCapability: CodeInputProfileCapability = {
+    minimumFixedTests: PYTHON_MINIMUM_FIXED_TESTS,
     defaultStarter() {
         return "# Write your answer below\n";
     },
@@ -194,6 +247,17 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
 
         const starterCode = normalizeText(args.exercise.starterCode);
         const solutionCode = normalizeText(args.exercise.solutionCode);
+        const fixtureFiles = normalizePythonFixtureFiles(args.exercise.files);
+        const starterFiles: ManifestStarterFile[] = [
+            {
+                path: "main.py",
+                content: starterCode,
+                language: "python",
+                isEntry: true,
+                entry: true,
+            },
+            ...fixtureFiles,
+        ];
 
         return {
             id: args.exercise.id,
@@ -203,19 +267,17 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             messageBase: args.messageBase,
             language: "python",
             starterCode,
+            starterFiles,
             workspace: {
                 language: "python",
                 entryFilePath: "main.py",
                 starterCode,
-                starterFiles: [
-                    {
-                        path: "main.py",
-                        content: starterCode,
-                        language: "python",
-                        isEntry: true,
-                        entry: true,
-                    },
-                ],
+                starterFiles: starterFiles.filter((file) => file.path === "main.py"),
+                ...(fixtureFiles.length > 0
+                    ? {
+                        files: fixtureFiles,
+                    }
+                    : {}),
             },
             showExpectedExample: useSemantic ? false : true,
             recipe: useSemantic
@@ -255,31 +317,107 @@ export const pythonProfile: CourseProfile = {
         return { kind: "code", language: "python" };
     },
     renderExerciseKindPromptRules(args) {
+        const introTopicHaystack = `${args.seed.title} ${args.seed.summary}`.toLowerCase();
+        const looksLikeIntroTopic =
+            args.seed.moduleOrder === 1 &&
+            (
+                args.seed.technical === false ||
+                /\b(intro|introduction|setup|first program|running|output panel|get started)\b/.test(
+                    introTopicHaystack,
+                )
+            );
         const lines = [
             '- For Python code_input, prefer recipeType "fixed_tests" when the exercise is a normal runnable program.',
-            "- For Python code_input, include a tests array with one or more real stdin/stdout cases when using fixed_tests.",
+            `- For Python code_input using fixed_tests, include at least ${PYTHON_MINIMUM_FIXED_TESTS} meaningful and distinct stdin/stdout tests.`,
+            "- Distinct means the tests must check different behavior or different input values, not duplicate the same case twice.",
+            "- For stdin-based Python code_input, use at least two different stdin values.",
+            "- Do not create fixed_tests code_input exercises that only print one fixed literal and do not read stdin.",
+            "- For static output concepts, use single_choice, fill_blank_choice, or drag_reorder instead of code_input.",
+            "- If you cannot write at least two meaningful fixed tests, replace the exercise with a non-code exercise or use semantic checks only when structure/behavior truly requires it.",
             '- For Python code_input, use recipeType "semantic" only when semanticChecks are truly needed.',
             "- For Python code_input, solutionCode must be a complete runnable program that reads stdin when needed and prints the final answer.",
             "- For Python code_input, starterCode must stay as scaffolding and must not reveal the full solution.",
         ];
 
+        const supportsFilesystem =
+            args.seed.workspacePolicy?.workspace.capabilities?.filesystem.enabled === true;
+
+        if (supportsFilesystem) {
+            lines.push(
+                "- When the workspace supports files, Python code_input may use open(...), pathlib, and simple relative file paths.",
+                "- Every file I/O exercise must include the exact fixture files the code reads or updates.",
+                "- Keep exercise-level files[] as the learner-visible default fixture set for file lessons.",
+                "- If different fixed tests expect different file contents, put the matching files under each tests[].files entry instead of using stdin to vary file contents.",
+                "- Use simple provided filenames such as data.txt, names.txt, or scores.csv.",
+                "- Do not reference files that are not provided by the exercise fixtures.",
+                "- Keep fixture contents short and deterministic.",
+                "- Do not tell learners to create files manually unless the files panel is available for that lesson.",
+            );
+        } else {
+            lines.push(
+                "- When the workspace does not support files, do not generate open(...), pathlib file access, or filesystem path exercises.",
+            );
+        }
+
+        if (args.seed.technical === false || looksLikeIntroTopic) {
+            lines.push(
+                "- For conceptual Python topics, prefer single_choice, multi_choice, drag_reorder, and fill_blank_choice over code_input.",
+                "- For conceptual Python topics, keep code_input to at most one exercise unless the topic explicitly teaches runnable code.",
+                "- Do not turn intro/concept lessons into mostly code_input practice.",
+            );
+        }
+
         if (args.mode === "authoring") {
             lines.push(
                 '- Never leave recipeType ambiguous for Python code_input exercises.',
+                "- For beginner print/output prompts, avoid code_input unless you can write two meaningful validations.",
             );
         }
 
         return lines;
     },
-    renderAuthoringPromptRules() {
-        return [
+    renderAuthoringPromptRules(args) {
+        const lines = [
             "Python code_input self-check:",
             '- For normal beginner output exercises, set recipeType to "fixed_tests" and include tests[].',
             '- For class, object, method, attribute, return-value, or structure-checking exercises, set recipeType to "semantic" and include semanticChecks[].',
             '- If recipeType is "semantic", do not rely on stdout tests.',
-            '- If recipeType is "fixed_tests", include at least one stdin/stdout test.',
+            `- If recipeType is "fixed_tests", include at least ${PYTHON_MINIMUM_FIXED_TESTS} meaningful stdin/stdout tests.`,
+            '- Do not keep a fixed_tests code_input that only prints one fixed output without stdin variation.',
+            "- If a conceptual topic does not support two meaningful fixed tests, use a non-code exercise instead of forcing extra code_input.",
             "- Hints explain the concept but do not reveal the final answer wording.",
         ];
+
+        const terminalAvailable =
+            args.seed.workspacePolicy?.workspace.capabilities?.terminal.enabled === true;
+        const supportsFilesystem =
+            args.seed.workspacePolicy?.workspace.capabilities?.filesystem.enabled === true;
+
+        if (supportsFilesystem) {
+            lines.push(
+                "- File I/O lessons may use open(...), read(), write(), or pathlib only when the exercise provides explicit fixture files.",
+                "- Every file path used by the official solution must be present in the exercise files list unless the code creates that file during the exercise.",
+                "- When different fixed tests need different file contents, store those fixtures under tests[].files and keep exercise-level files[] as the default learner-visible example.",
+                "- Do not use stdin to vary file contents for file-reading exercises.",
+                "- Prefer simple relative file names like data.txt, names.txt, and scores.csv.",
+                "- Keep fixture contents short and deterministic, and avoid giant repeated blank lines.",
+            );
+        } else {
+            lines.push(
+                "- Do not use open(...), pathlib file access, or filesystem paths in lessons that do not support files.",
+            );
+        }
+
+        if (!terminalAvailable) {
+            lines.push(
+                "- For Python browser-runner lessons, never mention Terminal, command line, shell, or console in learner-facing prompts, hints, options, explanations, or answer choices.",
+                '- Use "code editor", "Run", and "output panel" for learner-facing workspace wording.',
+                '- If a tool is unavailable in this lesson, say it is "not available in this lesson" without naming terminal-based workflows.',
+                '- Do not use "Terminal" even as a multiple-choice distractor. Use a safe non-workspace distractor instead.',
+            );
+        }
+
+        return lines;
     },
     codeInput: pythonCodeInputCapability,
     getRecipeRegistry() {

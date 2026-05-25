@@ -1,0 +1,279 @@
+{
+  "title": "Dictionary Basics",
+  "summary": "Store and retrieve values using keys.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Dictionaries",
+      "bodyMarkdown": "Dictionaries in Python are collections of key-value pairs. Each key is unique and is used to access its corresponding value. This makes dictionaries ideal for storing data that can be quickly retrieved using a unique identifier.\n\n### Example\n```python\n# Creating a dictionary\nstudent = {\n    'name': 'Alice',\n    'age': 23,\n    'major': 'Computer Science'\n}\n\n# Accessing a value\nprint(student['name'])  # Output: Alice\n```\n\nTry it yourself: Create a dictionary to store information about a book, including its title, author, and year of publication.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "sketch2",
+      "title": "Modifying Dictionaries",
+      "bodyMarkdown": "You can add, update, or remove key-value pairs in a dictionary.\n\n### Adding or Updating\n```python\n# Adding a new key-value pair\nstudent['GPA'] = 3.8\n\n# Updating an existing key-value pair\nstudent['age'] = 24\n```\n\n### Removing\n```python\n# Removing a key-value pair\nstudent.pop('major')\n```\n\nYour turn: Update the dictionary you created earlier by adding a new key-value pair for the book's genre.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Dictionary Key Access",
+      "prompt": "What will be the output of the following code?\n```python\nfruit = {'apple': 1, 'banana': 2}\nprint(fruit['banana'])\n```",
+      "options": [
+        "1",
+        "2",
+        "'banana'",
+        "KeyError"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Dictionary Operations",
+      "prompt": "Which of the following operations can be performed on a dictionary? Select all that apply.",
+      "options": [
+        "Add a new key-value pair",
+        "Update an existing key-value pair",
+        "Remove a key-value pair",
+        "Sort the dictionary by keys"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Consider operations related to adding, updating, and removing elements.",
+      "help": {
+        "concept": "Dictionaries support various operations such as adding, updating, and removing key-value pairs.",
+        "hint_1": "Think about how you can modify the contents of a dictionary.",
+        "hint_2": "Dictionaries allow adding new pairs, updating existing ones, and removing pairs."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Dictionary Creation Steps",
+      "prompt": "Arrange the steps to create a dictionary and add a key-value pair.",
+      "tokens": [
+        "Initialize an empty dictionary",
+        "Add a key-value pair"
+      ],
+      "correctOrder": [
+        "Initialize an empty dictionary",
+        "Add a key-value pair"
+      ],
+      "hint": "Start with initializing the dictionary and end with adding a key-value pair.",
+      "help": {
+        "concept": "Creating a dictionary involves initializing it and then adding key-value pairs.",
+        "hint_1": "Begin by initializing an empty dictionary.",
+        "hint_2": "Finish by adding a key-value pair to the dictionary."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Accessing Dictionary Values",
+      "prompt": "Fill in the blank to access the value associated with the key 'age' in the dictionary `person`.",
+      "template": "person[[blank1]]",
+      "choices": [
+        "'age'",
+        "'name'",
+        "'person'"
+      ],
+      "correctValue": "'age'",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Dictionary Value Retrieval",
+      "prompt": "Write a function `get_value(d, key)` that returns the value associated with `key` in the dictionary `d`. If the key does not exist, return 'Key not found'. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "def get_value(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(get_value(d, key))",
+      "solutionCode": "def get_value(d, key):\n    return d.get(key, 'Key not found')\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(get_value(d, key))",
+      "tests": [
+        {
+          "stdin": "{'name': 'Alice', 'age': 23}\nname\n",
+          "stdout": "Alice\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "{'name': 'Alice', 'age': 23}\nheight\n",
+          "stdout": "Key not found\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Dictionary Value Retrieval\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Dictionary Value Retrieval\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "single_choice",
+      "title": "Dictionary Key Uniqueness",
+      "prompt": "What happens if you try to add a duplicate key to a dictionary?",
+      "options": [
+        "The dictionary will throw an error",
+        "The new value will overwrite the existing value",
+        "The dictionary will ignore the new value",
+        "The dictionary will store both values"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider how dictionaries handle keys.",
+      "help": {
+        "concept": "Dictionaries do not allow duplicate keys. Adding a duplicate key will overwrite the existing value.",
+        "hint_1": "A dictionary key must be unique.",
+        "hint_2": "Adding a duplicate key will replace the existing value."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "multi_choice",
+      "title": "Dictionary Methods",
+      "prompt": "Which of the following are methods available for dictionaries in Python? Select all that apply.",
+      "options": [
+        "get",
+        "append",
+        "keys",
+        "values",
+        "pop"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d",
+        "e"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "title": "Dictionary Update Sequence",
+      "prompt": "Arrange the steps to update a dictionary with a new key-value pair.",
+      "tokens": [
+        "Identify the key",
+        "Identify the value",
+        "Assign the value to the dictionary using the key"
+      ],
+      "correctOrder": [
+        "Identify the key",
+        "Identify the value",
+        "Assign the value to the dictionary using the key"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "fill_blank_choice",
+      "title": "Dictionary Initialization",
+      "prompt": "Fill in the blank to initialize an empty dictionary.",
+      "template": "my_dict = [blank1]",
+      "choices": [
+        "{}",
+        "[]",
+        "()",
+        "dict()"
+      ],
+      "correctValue": "{}",
+      "hint": "Use the correct syntax for an empty dictionary.",
+      "help": {
+        "concept": "An empty dictionary is initialized using curly braces or the `dict` function.",
+        "hint_1": "The syntax is `{}` or `dict()`.",
+        "hint_2": "Use `{}` to initialize an empty dictionary."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Dictionary Key Check",
+      "prompt": "Write a function `has_key(d, key)` that returns `True` if the dictionary `d` contains the `key`, otherwise `False`. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "def has_key(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(has_key(d, key))",
+      "solutionCode": "def has_key(d, key):\n    return key in d\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(has_key(d, key))",
+      "tests": [
+        {
+          "stdin": "{'name': 'Alice', 'age': 23}\nage\n",
+          "stdout": "True\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "{'name': 'Alice', 'age': 23}\nheight\n",
+          "stdout": "False\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Dictionary Merge",
+      "prompt": "Write a function `merge_dicts(d1, d2)` that merges two dictionaries `d1` and `d2`. If there are duplicate keys, the values from `d2` should overwrite those from `d1`. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "def merge_dicts(d1, d2):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd1 = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nd2 = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(merge_dicts(d1, d2))",
+      "solutionCode": "def merge_dicts(d1, d2):\n    d1.update(d2)\n    return d1\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd1 = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nd2 = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(merge_dicts(d1, d2))",
+      "tests": [
+        {
+          "stdin": "{'a': 1, 'b': 2}\n{'b': 3, 'c': 4}\n",
+          "stdout": "{'a': 1, 'b': 3, 'c': 4}\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "{'x': 10}\n{'y': 20, 'x': 30}\n",
+          "stdout": "{'x': 30, 'y': 20}\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Dictionary Merge\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Dictionary Merge\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Dictionary Basics Project",
+    "stepIds": [
+      "quiz5",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

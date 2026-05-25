@@ -1,0 +1,10 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Invalid TopicAuthoringDraft: quizDraft[8] tests[0].stdout must be a non-empty string",
+  "stack": "RetryableTopicValidationError: Invalid TopicAuthoringDraft: quizDraft[8] tests[0].stdout must be a non-empty string\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:346:27)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:25:17)\n    at async runCompileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-course.js:24:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:38:13)",
+  "code": "INVALID_TOPIC_AUTHORING_DRAFT",
+  "retryable": true,
+  "details": {
+    "topicId": "writing-text-files"
+  }
+}

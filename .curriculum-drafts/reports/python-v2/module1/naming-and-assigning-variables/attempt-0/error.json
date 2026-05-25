@@ -1,0 +1,41 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Critique failed for topic \"naming-and-assigning-variables\"\nModule: python-v2-1\nSection: python-v2-1-variables-and-assignment\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python-v2/module1/naming-and-assigning-variables\n- Exercise \"quiz6\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input.\n- Exercise \"quiz7\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input.\n- Exercise \"quiz12\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input.\n- Exercise \"quiz13\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input.",
+  "stack": "RetryableTopicValidationError: Critique failed for topic \"naming-and-assigning-variables\"\nModule: python-v2-1\nSection: python-v2-1-variables-and-assignment\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python-v2/module1/naming-and-assigning-variables\n- Exercise \"quiz6\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input.\n- Exercise \"quiz7\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input.\n- Exercise \"quiz12\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input.\n- Exercise \"quiz13\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input.\n    at throwRetryableReportFailure (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:82:11)\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:367:25)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:24:17)\n    at async runCompileSubject (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-subject.js:28:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:31:13)",
+  "code": "CRITIQUE_VALIDATION_FAILED",
+  "retryable": true,
+  "details": {
+    "topicId": "naming-and-assigning-variables",
+    "ok": false,
+    "issues": [
+      {
+        "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+        "category": "pedagogy",
+        "severity": "error",
+        "exerciseId": "quiz6",
+        "message": "Exercise \"quiz6\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
+      },
+      {
+        "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+        "category": "pedagogy",
+        "severity": "error",
+        "exerciseId": "quiz7",
+        "message": "Exercise \"quiz7\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
+      },
+      {
+        "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+        "category": "pedagogy",
+        "severity": "error",
+        "exerciseId": "quiz12",
+        "message": "Exercise \"quiz12\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
+      },
+      {
+        "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+        "category": "pedagogy",
+        "severity": "error",
+        "exerciseId": "quiz13",
+        "message": "Exercise \"quiz13\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
+      }
+    ]
+  }
+}

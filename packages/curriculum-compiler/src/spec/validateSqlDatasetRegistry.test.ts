@@ -5,7 +5,7 @@ import { getAuthoringRoot } from "@zoeskoul/curriculum-core";
 import {
     getSqlDatasetById,
     listSqlDatasetIds,
-} from "../../../curriculum-profiles/src/sql/datasets/index.js";
+} from "@zoeskoul/curriculum-profiles/sql-datasets";
 import { deriveSqlRelationshipsFromSchemaSql } from "./validateSubjectAuthoring.js";
 
 function normalizeSqlIdentifier(value: string) {

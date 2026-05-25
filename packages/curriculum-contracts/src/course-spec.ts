@@ -101,6 +101,7 @@ export type CourseSpecModule = {
     moduleSlug: string;
     order?: number;
     prefix?: string;
+    accessOverride?: "free" | "paid" | null;
     title: string;
     description?: string;
     purpose?: string;
@@ -139,6 +140,8 @@ export type CourseSpec = {
     subjectSlug: string;
     courseSlug: string;
     catalogSlug: string;
+    accessPolicy?: "free" | "paid";
+    moduleAccessOverrideDefault?: "free" | "paid" | null;
     profileId: string;
     title: string;
     sourceLocale: string;

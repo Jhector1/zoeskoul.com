@@ -96,6 +96,15 @@
     ],
     "closingNote": "Learners finish able to organize data, write reusable functions, and build small file-processing utilities."
   },
+  "modulePolicies": [
+    {
+      "moduleNumber": 7,
+      "workspaceProfileId": "browser-python-files-runner",
+      "notes": [
+        "This module uses a browser files panel with provided fixture files for file I/O lessons."
+      ]
+    }
+  ],
   "modules": [
     {
       "moduleNumber": 5,

@@ -1,0 +1,6 @@
+{
+  "attempt": 2,
+  "status": "failed",
+  "retryable": true,
+  "errorCode": "CURRICULUM_QUALITY_GATE_FAILED"
+}

@@ -94,6 +94,90 @@ describe("TopicAuthoringDraft canonical validation", () => {
         expect(result.errors[0]).toMatch(/unknown field\(s\): unexpectedField/);
     });
 
+    it("accepts code_input fixture files", () => {
+        const result = validateTopicAuthoringDraft({
+            ...makeValidMinimalDraft(),
+            quizDraft: [
+                {
+                    id: "code-1",
+                    kind: "code_input" as const,
+                    title: "Read a file",
+                    prompt: "Read names.txt and print the first line.",
+                    hint: "Use the provided file.",
+                    help: {
+                        concept: "File I/O exercises can include provided fixture files.",
+                        hint_1: "Open the provided file path exactly as written.",
+                        hint_2: "Print the requested value.",
+                    },
+                    starterCode: "# start\n",
+                    solutionCode: "with open('names.txt') as f:\n    print(f.readline().strip())\n",
+                    recipeType: "fixed_tests" as const,
+                    tests: [
+                        {
+                            stdout: "Ada\n",
+                        },
+                    ],
+                    files: [
+                        {
+                            path: "names.txt",
+                            content: "Ada\nGrace\n",
+                            readOnly: true,
+                        },
+                    ],
+                },
+            ],
+        });
+
+        expect(result.ok).toBe(true);
+    });
+
+    it("accepts per-test file fixtures for code_input", () => {
+        const result = validateTopicAuthoringDraft({
+            ...makeValidMinimalDraft(),
+            quizDraft: [
+                {
+                    id: "code-1",
+                    kind: "code_input" as const,
+                    title: "Read different files",
+                    prompt: "Read message.txt and print its contents.",
+                    hint: "Use the provided file fixture for each test.",
+                    help: {
+                        concept: "File I/O fixed tests can vary file contents per test.",
+                        hint_1: "Use the same file path each time.",
+                        hint_2: "Match the expected output to the matching test fixture.",
+                    },
+                    starterCode: "# start\n",
+                    solutionCode: "with open('message.txt') as f:\n    print(f.read(), end='')\n",
+                    recipeType: "fixed_tests" as const,
+                    tests: [
+                        {
+                            stdout: "Hello\n",
+                            files: [
+                                {
+                                    path: "message.txt",
+                                    content: "Hello\n",
+                                    readOnly: true,
+                                },
+                            ],
+                        },
+                        {
+                            stdout: "Bye\n",
+                            files: [
+                                {
+                                    path: "message.txt",
+                                    content: "Bye\n",
+                                    readOnly: true,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        });
+
+        expect(result.ok).toBe(true);
+    });
+
     it("rejects missing required fields", () => {
         const result = validateTopicAuthoringDraft({
             summary: "Summary",
@@ -131,5 +215,22 @@ describe("TopicAuthoringDraft canonical validation", () => {
 
         expect(result.ok).toBe(false);
         expect(result.errors[0]).toMatch(/code_input tests must be an array/);
+    });
+
+    it("rejects variant-specific fields that do not match the declared kind", () => {
+        const result = validateTopicAuthoringDraft({
+            ...makeValidMinimalDraft(),
+            quizDraft: [
+                {
+                    ...makeValidMinimalDraft().quizDraft[0],
+                    kind: "single_choice" as const,
+                },
+            ],
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.errors.join("\n")).toMatch(
+            /unknown field\(s\): template, choices, correctValue/,
+        );
     });
 });

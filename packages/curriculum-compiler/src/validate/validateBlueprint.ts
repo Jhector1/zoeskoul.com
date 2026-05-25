@@ -25,6 +25,14 @@ export function validateBlueprint(blueprint: any) {
       if (typeof policy.moduleNumber !== "number") {
         throw new Error("modulePolicies[].moduleNumber must be a number");
       }
+      if (
+        policy.workspaceProfileId &&
+        !WORKSPACE_PROFILES[policy.workspaceProfileId]
+      ) {
+        throw new Error(
+          `Unknown modulePolicies[].workspaceProfileId: ${policy.workspaceProfileId}`,
+        );
+      }
     }
   }
 }

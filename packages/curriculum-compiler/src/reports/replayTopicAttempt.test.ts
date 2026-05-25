@@ -28,7 +28,10 @@ describe("replayTopicAttemptFromSavedOutput", () => {
                     starterCode: "# Write your answer below\n",
                     solutionCode: "n = int(input())\nprint(n + 1)",
                     recipeType: "fixed_tests",
-                    tests: [{ stdin: "1\n", stdout: "2\n", match: "exact" }],
+                    tests: [
+                        { stdin: "1\n", stdout: "2\n", match: "exact" },
+                        { stdin: "4\n", stdout: "5\n", match: "exact" },
+                    ],
                     hint: "Use input.",
                     help: {
                         concept: "Read a value and print a result.",

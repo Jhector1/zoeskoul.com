@@ -14,7 +14,7 @@ import {runValidateSpec} from "./commands/validate-spec.js";
 import { runValidateSubject } from "./commands/validate-subject.js";
 import { runValidateCourse } from "./commands/validate-course.js";
 import { runPublishSubject } from "./commands/publish-subject.js";
-
+import { runPublishCourse } from "./commands/publish-course.js";
 async function main() {
   const [, , command, arg1, arg2, ...rest] = process.argv;
 
@@ -26,7 +26,15 @@ async function main() {
       await runPlan(arg1);
       return;
     }
-
+    case "publish-course": {
+      if (!arg1 || !arg2) {
+        throw new Error(
+            "Usage: curriculum-cli publish-course <subjectSlug> <courseSlug> [--live-subject <liveSubjectSlug>] [--force]",
+        );
+      }
+      await runPublishCourse(arg1, arg2, rest);
+      return;
+    }
     case "compile-subject": {
       if (!arg1) {
         throw new Error("Usage: curriculum-cli compile-subject <subjectSlug>");
@@ -35,9 +43,9 @@ async function main() {
     }
 
     case "compile-course": {
-      if (!arg1 || !arg2) {
+        if (!arg1 || !arg2) {
         throw new Error(
-            "Usage: curriculum-cli compile-course <subjectSlug> <courseSlug> [--live-subject <liveSubjectSlug>]",
+            "Usage: curriculum-cli compile-course <subjectSlug> <courseSlug> [--draft-only] [--live-subject <liveSubjectSlug>]",
         );
       }
       await runCompileCourse(arg1, arg2, rest);

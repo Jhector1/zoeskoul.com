@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { getRepoRoot } from "@zoeskoul/curriculum-core";
 import type {
     CritiqueReport,
     GoldenValidationReport,
@@ -35,6 +36,7 @@ export async function writeTopicReports(args: {
     qualityReport?: CurriculumQualityReport;
 }) {
     const baseDir = path.join(
+        getRepoRoot(),
         ".curriculum-drafts",
         "reports",
         args.subjectSlug,

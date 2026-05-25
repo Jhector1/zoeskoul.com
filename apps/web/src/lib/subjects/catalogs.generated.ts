@@ -17,7 +17,8 @@ export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
       "status": "active",
       "subjectSlugs": [
         "python",
-        "python-v2"
+        "python-v2",
+        "python-data-functions"
       ],
       "meta": {
         "family": "programming",
@@ -48,6 +49,7 @@ export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
 
 export const SUBJECT_CATALOG_SLUGS: Record<string, string> = {
   "python": "python",
+  "python-data-functions": "python",
   "python-v2": "python",
   "sql": "sql",
   "sql-v2": "sql",

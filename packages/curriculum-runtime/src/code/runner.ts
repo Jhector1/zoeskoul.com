@@ -2,6 +2,13 @@ export type RunCodeFn = (args: {
     language: string;
     code: string;
     stdin?: string;
+    files?:
+        | Array<{
+            path: string;
+            content: string;
+            readOnly?: boolean;
+        }>
+        | Record<string, string>;
     limits?: {
         timeoutMs?: number;
     };

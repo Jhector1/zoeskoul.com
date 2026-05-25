@@ -1,0 +1,209 @@
+{
+  "title": "Looping Through Lists",
+  "summary": "Process each list item and build derived results.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Looping Through Lists",
+      "bodyMarkdown": "Looping through lists is a fundamental concept in Python that allows you to process each item in a list. This is useful for tasks like summing numbers, filtering items, or transforming data.\n\n### Example\nConsider a list of numbers:\n\n```python\nnumbers = [1, 2, 3, 4, 5]\nfor number in numbers:\n    print(number)\n```\n\nThis code will print each number in the list. The `for` loop iterates over each element, assigning it to the variable `number`, and then executes the block of code within the loop.\n\n### Try it yourself\nModify the code to print the square of each number instead."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using Loop with Conditions",
+      "bodyMarkdown": "You can combine loops with conditions to perform more complex operations. For example, you might want to print only the even numbers from a list.\n\n### Example\n```python\nnumbers = [1, 2, 3, 4, 5]\nfor number in numbers:\n    if number % 2 == 0:\n        print(number)\n```\n\nThis code checks if each number is even using the modulus operator `%`. If the condition is true, it prints the number.\n\n### Your turn\nTry modifying the code to print numbers greater than 2."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Basic Looping",
+      "prompt": "What does the following code do?\n\n```python\nnumbers = [1, 2, 3]\nfor number in numbers:\n    print(number)\n```",
+      "options": [
+        "Prints each number in the list",
+        "Adds each number to a new list",
+        "Multiplies each number by 2",
+        "Reverses the list"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider what the `print` function does inside the loop.",
+      "help": {
+        "concept": "The code iterates over each element in the list and prints it.",
+        "hint_1": "The loop goes through each item in the list.",
+        "hint_2": "The `print` function outputs each number to the output panel."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Loop with Conditions",
+      "prompt": "Which of the following code snippets will print only the even numbers from the list `numbers = [1, 2, 3, 4, 5]`? Choose all that apply.",
+      "options": [
+        "for number in numbers:\n    if number % 2 == 0:\n        print(number)",
+        "for number in numbers:\n    if number % 2 != 0:\n        print(number)",
+        "for number in numbers:\n    print(number) if number % 2 == 0 else None",
+        "for number in numbers:\n    if number % 2 == 1:\n        print(number)"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Use the modulus operator to check for even numbers.",
+      "help": {
+        "concept": "Even numbers are divisible by 2 without a remainder.",
+        "hint_1": "Use `number % 2 == 0` to check if a number is even.",
+        "hint_2": "Ensure the condition is inside the loop to filter numbers."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Order of Loop Execution",
+      "prompt": "Arrange the steps of a `for` loop execution in the correct order.",
+      "tokens": [
+        "Initialize loop variable",
+        "Check condition",
+        "Execute block",
+        "Iterate to next item"
+      ],
+      "correctOrder": [
+        "Initialize loop variable",
+        "Check condition",
+        "Execute block",
+        "Iterate to next item"
+      ],
+      "hint": "Think about how a loop initializes, checks conditions, and executes.",
+      "help": {
+        "concept": "A `for` loop initializes, checks conditions, executes, and then iterates.",
+        "hint_1": "The loop starts by initializing the loop variable.",
+        "hint_2": "After initialization, it checks the condition and executes the block."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Loop Variable",
+      "prompt": "In the loop `for number in numbers:`, what is `number`?",
+      "template": "`number` is the [blank1] in the loop.",
+      "choices": [
+        "loop variable",
+        "list",
+        "function",
+        "condition"
+      ],
+      "correctValue": "loop variable",
+      "hint": "Consider the role of `number` in the loop.",
+      "help": {
+        "concept": "The the missing term represents each element in the list during iteration.",
+        "hint_1": "`number` is assigned each element of the list in turn.",
+        "hint_2": "It acts as a placeholder for each item in the list."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "title": "Loop Condition",
+      "prompt": "In a `for` loop, the condition is checked [blank1] each iteration.",
+      "template": "The condition is checked [blank1] each iteration.",
+      "choices": [
+        "before",
+        "after",
+        "during",
+        "never"
+      ],
+      "correctValue": "before",
+      "hint": "Think about when the loop decides to continue or stop.",
+      "help": {
+        "concept": "The condition is checked the missing term each iteration to decide if the loop should continue.",
+        "hint_1": "The loop checks the condition the missing term executing the block.",
+        "hint_2": "This happens at the start of each iteration."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "code_input",
+      "title": "Sum of List Elements",
+      "prompt": "Write a Python program that calculates the sum of all elements in a list of numbers.",
+      "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Initialize sum variable\nsum_of_numbers = 0\n# Write your loop here",
+      "solutionCode": "numbers = [1, 2, 3, 4, 5]\nsum_of_numbers = 0\nfor number in numbers:\n    sum_of_numbers += number\nprint(sum_of_numbers)",
+      "tests": [
+        {
+          "stdout": "15\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "15\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use a loop to iterate through the list and accumulate the sum.",
+      "help": {
+        "concept": "Iterate through the list and add each element to a total sum variable.",
+        "hint_1": "Initialize a sum variable to 0 before the loop.",
+        "hint_2": "Add each number to the sum variable inside the loop."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Filter Even Numbers",
+      "prompt": "Write a Python program that prints only the even numbers from a list.",
+      "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Write your loop here",
+      "solutionCode": "numbers = [1, 2, 3, 4, 5]\nfor number in numbers:\n    if number % 2 == 0:\n        print(number)",
+      "tests": [
+        {
+          "stdout": "2\n4\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "2\n4\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use a loop and an if condition to filter even numbers.",
+      "help": {
+        "concept": "Use the modulus operator to check if a number is even.",
+        "hint_1": "Inside the loop, use `if number % 2 == 0` to check for even numbers.",
+        "hint_2": "Print the number if the condition is true."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "code_input",
+      "title": "List Comprehension for Squares",
+      "prompt": "Convert the following loop into a list comprehension that creates a list of squares of numbers.",
+      "starterCode": "numbers = [1, 2, 3, 4, 5]\nsquares = []\nfor number in numbers:\n    squares.append(number**2)\nprint(squares)",
+      "solutionCode": "numbers = [1, 2, 3, 4, 5]\nsquares = [number**2 for number in numbers]\nprint(squares)",
+      "tests": [
+        {
+          "stdout": "[1, 4, 9, 16, 25]\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "[1, 4, 9, 16, 25]\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the list comprehension syntax `[expression for item in iterable]`.",
+      "help": {
+        "concept": "List comprehensions provide a concise way to create lists.",
+        "hint_1": "The expression should calculate the square of each number.",
+        "hint_2": "Use `number**2` for squaring."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Looping Through Lists Project",
+    "stepIds": [
+      "quiz6",
+      "quiz7",
+      "quiz8"
+    ]
+  }
+}

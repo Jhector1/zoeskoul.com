@@ -1,0 +1,285 @@
+{
+  "title": "Scope and Local Variables",
+  "summary": "Understand where variables exist and why local scope matters.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Scope",
+      "bodyMarkdown": "In Python, scope refers to the region of the program where a variable is accessible. Variables defined inside a function are in the local scope of that function and cannot be accessed outside of it. Conversely, variables defined outside of any function are in the global scope and can be accessed anywhere in the program.\n\n```python\ndef my_function():\n    local_var = 10\n    print(local_var)\n\nmy_function()\n# print(local_var)  # This would cause an error because local_var is not defined outside the function\n```\n\nTry it yourself: Define a function with a local variable and attempt to print it outside the function. Observe the error message.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "sketch2",
+      "title": "Global vs Local Variables",
+      "bodyMarkdown": "Global variables are accessible throughout the program, whereas local variables are confined to the function they are defined in. It's important to understand this distinction to avoid errors and unexpected behavior in your code.\n\n```python\nglobal_var = 5\n\ndef my_function():\n    local_var = 10\n    print('Inside function:', local_var)\n    print('Inside function:', global_var)\n\nmy_function()\nprint('Outside function:', global_var)\n# print('Outside function:', local_var)  # This would cause an error\n```\n\nYour turn: Modify the code to add another function that changes the value of `global_var` and observe the changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Local Variable Access",
+      "prompt": "What happens if you try to access a local variable outside its function?",
+      "options": [
+        "The program runs without errors.",
+        "The variable is accessible and prints its value.",
+        "An error occurs because the variable is not defined outside the function.",
+        "The variable becomes a global variable."
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Consider the scope of local variables.",
+      "help": {
+        "concept": "Local variables are only accessible within the function they are defined in.",
+        "hint_1": "Local variables cannot be accessed outside their function.",
+        "hint_2": "Accessing a local variable outside its function will result in an error."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Global Variable Access",
+      "prompt": "Which of the following statements about global variables is true?",
+      "options": [
+        "Global variables can only be accessed inside the function they are defined in.",
+        "Global variables can be accessed anywhere in the program.",
+        "Global variables are only accessible outside of functions.",
+        "Global variables are automatically converted to local variables when used inside a function."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about where global variables can be accessed.",
+      "help": {
+        "concept": "Global variables are accessible throughout the entire program.",
+        "hint_1": "Global variables can be accessed inside and outside functions.",
+        "hint_2": "Global variables are not restricted to a single function."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Scope Characteristics",
+      "prompt": "Select all true statements about variable scope in Python.",
+      "options": [
+        "Local variables can be accessed outside their function.",
+        "Global variables can be accessed inside functions.",
+        "Local variables are defined within a function.",
+        "Global variables are defined outside of any function."
+      ],
+      "correctOptionIds": [
+        "b",
+        "c",
+        "d"
+      ],
+      "hint": "Consider the differences between local and global variables.",
+      "help": {
+        "concept": "Scope determines where a variable can be accessed in the program.",
+        "hint_1": "Local variables are confined to their function.",
+        "hint_2": "Global variables are accessible throughout the program."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Variable Scope Effects",
+      "prompt": "Which of the following effects can occur due to variable scope? Select all that apply.",
+      "options": [
+        "Variables can be accessed from anywhere in the program.",
+        "Variables can be restricted to a specific function.",
+        "Variables can be accidentally modified from different parts of the program.",
+        "Variables can be protected from being accessed outside their intended scope."
+      ],
+      "correctOptionIds": [
+        "b",
+        "c",
+        "d"
+      ],
+      "hint": "Think about how scope affects variable accessibility.",
+      "help": {
+        "concept": "Variable scope affects where variables can be accessed and modified.",
+        "hint_1": "Scope can limit variable access to certain parts of the program.",
+        "hint_2": "Scope can prevent variables from being accessed where they are not defined."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Function Execution Order",
+      "prompt": "Arrange the steps in the correct order for executing a function with local variables.",
+      "tokens": [
+        "Define the function",
+        "Call the function",
+        "Execute the function body",
+        "Return from the function"
+      ],
+      "correctOrder": [
+        "Define the function",
+        "Call the function",
+        "Execute the function body",
+        "Return from the function"
+      ],
+      "hint": "Consider the typical flow of function execution.",
+      "help": {
+        "concept": "Function execution follows a specific order from definition to execution.",
+        "hint_1": "Functions must be defined before they can be called.",
+        "hint_2": "Local variables are created when the function is called."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Variable Scope Identification",
+      "prompt": "Arrange the following variables based on their scope from local to global.",
+      "tokens": [
+        "local_var in function A",
+        "global_var",
+        "local_var in function B",
+        "another_global_var"
+      ],
+      "correctOrder": [
+        "local_var in function A",
+        "local_var in function B",
+        "global_var",
+        "another_global_var"
+      ],
+      "hint": "Identify which variables are local and which are global.",
+      "help": {
+        "concept": "Variables have different scopes depending on where they are defined.",
+        "hint_1": "Local variables are defined within functions.",
+        "hint_2": "Global variables are defined outside of functions."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Local Variable Definition",
+      "prompt": "Complete the statement to define a local variable inside a function.",
+      "template": "def my_function():\n    [blank1] = 10",
+      "choices": [
+        "local_var",
+        "global_var",
+        "function_var"
+      ],
+      "correctValue": "local_var",
+      "hint": "Local variables are defined within a function body.",
+      "help": {
+        "concept": "Local variables are created inside functions and are not accessible outside.",
+        "hint_1": "Local variables are defined using the assignment operator inside a function.",
+        "hint_2": "The variable name is followed by an assignment and a value."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Global Variable Usage",
+      "prompt": "Complete the statement to use a global variable inside a function.",
+      "template": "def my_function():\n    print([blank1])",
+      "choices": [
+        "global_var",
+        "local_var",
+        "function_var"
+      ],
+      "correctValue": "global_var",
+      "hint": "Global variables can be accessed inside functions without being redefined.",
+      "help": {
+        "concept": "Global variables are accessible inside functions without needing to be redefined.",
+        "hint_1": "Use the global variable directly inside the function.",
+        "hint_2": "No need to declare it again inside the function."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Function with Local Variables",
+      "prompt": "Write a function `calculate_sum` that takes two parameters and returns their sum. Ensure the variables used inside the function are local. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "def calculate_sum(a, b):\n    # Calculate the sum of a and b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_sum(a, b))",
+      "solutionCode": "def calculate_sum(a, b):\n    result = a + b\n    return result\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_sum(a, b))",
+      "tests": [
+        {
+          "stdin": "1\n1\n",
+          "stdout": "2",
+          "match": "exact"
+        },
+        {
+          "stdin": "1\n1\n",
+          "stdout": "2",
+          "match": "exact"
+        },
+        {
+          "stdin": "2\n2\n",
+          "stdout": "4\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Using Global Variables",
+      "prompt": "Write a function `increment_global` that increments a global variable `counter` by 1 each time it is called. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "counter = 0\n\ndef increment_global():\n    # Increment the global counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())",
+      "solutionCode": "counter = 0\n\ndef increment_global():\n    global counter\n    counter += 1\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())",
+      "tests": [
+        {
+          "stdout": "None",
+          "match": "exact"
+        },
+        {
+          "stdout": "None",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Local vs Global Variable",
+      "prompt": "Write a function `compare_scope` that takes a parameter and compares it with a global variable `threshold`. Return 'Above' if the parameter is greater, 'Below' if less, and 'Equal' if the same. Then read the input value, call the function, and print the returned result.",
+      "starterCode": "threshold = 10\n\ndef compare_scope(value):\n    # Compare value with threshold\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(compare_scope(value))",
+      "solutionCode": "threshold = 10\n\ndef compare_scope(value):\n    if value > threshold:\n        return 'Above'\n    elif value < threshold:\n        return 'Below'\n    else:\n        return 'Equal'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(compare_scope(value))",
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "Above\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "8\n",
+          "stdout": "Below\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the global variable inside the function to compare with the parameter.",
+      "help": {
+        "concept": "Global variables can be accessed inside functions for comparison or other operations.",
+        "hint_1": "Access the global variable inside the function without redefining it.",
+        "hint_2": "Use conditional statements to compare the parameter with the global variable."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Scope and Local Variables Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

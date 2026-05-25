@@ -79,4 +79,9 @@ export type TopicRetryContext = {
   maxRetries: number;
   previousErrorCode: string;
   previousErrorMessage: string;
+  qualityIssues?: Array<{
+    code: string;
+    exerciseId?: string;
+    message: string;
+  }>;
 };

@@ -14,6 +14,14 @@ function fileContent(workspace: WorkspaceStateV2, fileName: string) {
   return node && node.kind === "file" ? node.content : null;
 }
 
+function activeFileName(workspace: WorkspaceStateV2) {
+  const node = workspace.nodes.find(
+    (candidate) =>
+      candidate.kind === "file" && candidate.id === workspace.activeFileId,
+  );
+  return node && node.kind === "file" ? node.name : null;
+}
+
 function savedWorkspace(content = "print('db saved user work')\n"): WorkspaceStateV2 {
   return {
     version: 2,
@@ -234,6 +242,99 @@ describe("review exercise workspace manifest/db binding", () => {
 
     expect(deriveEntryCode(workspace)).toBe("print('manifest starter')\n");
   });
+
+  it("merges manifest starterFiles with fixture files from workspace.files", () => {
+    const workspace = resolveExerciseWorkspace({
+      language: "python",
+      manifest: {
+        workspace: {
+          starterFiles: [
+            { path: "main.py", content: "print('manifest starter')\n", entry: true },
+          ],
+          files: [
+            { path: "data.txt", content: "alpha\nbeta\n" },
+          ],
+        },
+      },
+      entry: entry(),
+    });
+
+    expect(fileContent(workspace, "main.py")).toBe("print('manifest starter')\n");
+    expect(fileContent(workspace, "data.txt")).toBe("alpha\nbeta\n");
+    expect(deriveEntryCode(workspace)).toBe("print('manifest starter')\n");
+  });
+
+  it("keeps the first main.py when duplicate paths appear in later file sources", () => {
+    const workspace = resolveExerciseWorkspace({
+      language: "python",
+      manifest: {
+        workspace: {
+          starterFiles: [
+            { path: "main.py", content: "print('starter wins')\n", entry: true },
+          ],
+          files: [
+            { path: "main.py", content: "print('fixture should lose')\n" },
+            { path: "data.txt", content: "fixture data\n" },
+          ],
+        },
+      },
+      entry: entry({
+        starterFiles: [
+          { path: "main.py", content: "print('entry should also lose')\n", entry: true },
+          { path: "notes.txt", content: "from entry source\n" },
+        ],
+      }),
+    });
+
+    expect(fileContent(workspace, "main.py")).toBe("print('starter wins')\n");
+    expect(
+      workspace.nodes.filter(
+        (node) => node.kind === "file" && node.name === "main.py",
+      ),
+    ).toHaveLength(1);
+    expect(fileContent(workspace, "data.txt")).toBe("fixture data\n");
+    expect(fileContent(workspace, "notes.txt")).toBe("from entry source\n");
+  });
+
+  it("keeps the code file active when non-code fixture files are present", () => {
+    const workspace = resolveExerciseWorkspace({
+      language: "python",
+      manifest: {
+        workspace: {
+          starterFiles: [
+            { path: "main.py", content: "print('run me')\n", entry: true },
+          ],
+          files: [
+            { path: "data.txt", content: "42\n" },
+          ],
+        },
+      },
+      entry: entry(),
+    });
+
+    expect(activeFileName(workspace)).toBe("main.py");
+    expect(deriveEntryCode(workspace)).toBe("print('run me')\n");
+  });
+
+  it("keeps single-file python exercises as a one-file workspace", () => {
+    const workspace = resolveExerciseWorkspace({
+      language: "python",
+      manifest: {
+        workspace: {
+          starterFiles: [
+            { path: "main.py", content: "print('single file')\n", entry: true },
+          ],
+        },
+      },
+      entry: entry(),
+    });
+
+    expect(
+      workspace.nodes.filter((node) => node.kind === "file").map((node) => node.name),
+    ).toEqual(["main.py"]);
+    expect(deriveEntryCode(workspace)).toBe("print('single file')\n");
+  });
+
   it("does not let a blank saved DB workspace hide the Reading Error Messages second-line starter", () => {
     const blankSaved = savedWorkspace("");
 

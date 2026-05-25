@@ -1,6 +1,5 @@
 import OpenAI from "openai";
 import {
-  TOPIC_AUTHORING_DRAFT_JSON_SCHEMA,
   validateTopicAuthoringDraft,
 } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider, GenerateJsonArgs, GeneratedJsonResult } from "../types.js";
@@ -10,6 +9,7 @@ type JsonSchema = Record<string, unknown>;
 const OPENAI_DEFAULT_TEMPERATURE = 0;
 const OPENAI_DETERMINISTIC_SEED = 0;
 const OPENAI_STRUCTURED_OUTPUT_UNSUPPORTED_KEYWORDS = [
+  "oneOf",
   "anyOf",
   "allOf",
   "not",
@@ -20,6 +20,209 @@ const OPENAI_STRUCTURED_OUTPUT_UNSUPPORTED_KEYWORDS = [
   "patternProperties",
   "unevaluatedProperties",
 ] as const;
+
+const OPENAI_TOPIC_AUTHORING_EXERCISE_ITEM_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  required: [
+    "id",
+    "kind",
+    "title",
+    "prompt",
+    "hint",
+    "help",
+    "options",
+    "correctOptionIds",
+    "tokens",
+    "correctOrder",
+    "template",
+    "choices",
+    "correctValue",
+    "starterCode",
+    "solutionCode",
+    "tests",
+    "files",
+    "semanticChecks",
+    "datasetId",
+    "recipeType",
+    "checkSql",
+  ],
+  properties: {
+    id: { type: "string" },
+    kind: {
+      type: "string",
+      enum: [
+        "single_choice",
+        "multi_choice",
+        "drag_reorder",
+        "fill_blank_choice",
+        "code_input",
+      ],
+    },
+    title: { type: "string" },
+    prompt: { type: "string" },
+    hint: { type: "string" },
+    help: {
+      type: "object",
+      additionalProperties: false,
+      required: ["concept", "hint_1", "hint_2"],
+      properties: {
+        concept: { type: "string" },
+        hint_1: { type: "string" },
+        hint_2: { type: "string" },
+      },
+    },
+    options: { type: ["array", "null"], items: { type: "string" } },
+    correctOptionIds: { type: ["array", "null"], items: { type: "string" } },
+    tokens: { type: ["array", "null"], items: { type: "string" } },
+    correctOrder: { type: ["array", "null"], items: { type: "string" } },
+    template: { type: ["string", "null"] },
+    choices: { type: ["array", "null"], items: { type: "string" } },
+    correctValue: { type: ["string", "null"] },
+    starterCode: { type: ["string", "null"] },
+    solutionCode: { type: ["string", "null"] },
+    tests: {
+      type: ["array", "null"],
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["stdin", "stdout", "match", "files"],
+        properties: {
+          stdin: { type: ["string", "null"] },
+          stdout: { type: "string" },
+          match: {
+            type: ["string", "null"],
+            enum: ["exact", "includes", null],
+          },
+          files: {
+            type: ["array", "null"],
+            items: {
+              type: "object",
+              additionalProperties: false,
+              required: ["path", "content", "readOnly"],
+              properties: {
+                path: { type: "string", maxLength: 120 },
+                content: { type: "string", maxLength: 600 },
+                readOnly: { type: ["boolean", "null"] },
+              },
+            },
+          },
+        },
+      },
+    },
+    files: {
+      type: ["array", "null"],
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["path", "content", "readOnly"],
+        properties: {
+          path: { type: "string", maxLength: 120 },
+          content: { type: "string", maxLength: 600 },
+          readOnly: { type: ["boolean", "null"] },
+        },
+      },
+    },
+    semanticChecks: {
+      type: ["array", "null"],
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: [
+          "type",
+          "className",
+          "constructorArgs",
+          "attributes",
+          "methodName",
+          "methodArgs",
+          "expected",
+          "min",
+          "message",
+        ],
+        properties: {
+          type: {
+            type: "string",
+            enum: [
+              "defines_class",
+              "constructible",
+              "instance_attributes",
+              "method_returns",
+              "created_instances",
+              "printed_line_count",
+            ],
+          },
+          className: { type: ["string", "null"] },
+          constructorArgs: {
+            type: ["array", "null"],
+            items: {
+              type: ["string", "number", "boolean", "null"],
+            },
+          },
+          attributes: {
+            type: ["array", "null"],
+            items: { type: "string" },
+          },
+          methodName: { type: ["string", "null"] },
+          methodArgs: {
+            type: ["array", "null"],
+            items: {
+              type: ["string", "number", "boolean", "null"],
+            },
+          },
+          expected: { type: ["string", "number", "boolean", "null"] },
+          min: { type: ["number", "null"] },
+          message: { type: ["string", "null"] },
+        },
+      },
+    },
+    datasetId: { type: ["string", "null"] },
+    recipeType: {
+      type: ["string", "null"],
+      enum: ["sql_query", "template_io", "fixed_tests", "semantic", null],
+    },
+    checkSql: { type: ["string", "null"] },
+  },
+} satisfies JsonSchema;
+
+const OPENAI_TOPIC_AUTHORING_DRAFT_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  required: ["title", "summary", "minutes", "sketchBlocks", "quizDraft", "projectDraft"],
+  properties: {
+    title: { type: "string" },
+    summary: { type: "string" },
+    minutes: { type: "number" },
+    sketchBlocks: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["id", "title", "bodyMarkdown"],
+        properties: {
+          id: { type: "string" },
+          title: { type: "string" },
+          bodyMarkdown: { type: "string" },
+        },
+      },
+    },
+    quizDraft: {
+      type: "array",
+      items: OPENAI_TOPIC_AUTHORING_EXERCISE_ITEM_SCHEMA,
+    },
+    projectDraft: {
+      type: ["object", "null"],
+      additionalProperties: false,
+      required: ["title", "stepIds"],
+      properties: {
+        title: { type: "string" },
+        stepIds: {
+          type: "array",
+          items: { type: "string" },
+        },
+      },
+    },
+  },
+} satisfies JsonSchema;
 
 function getEnv(name: "OPENAI_API_KEY" | "OPENAI_MODEL"): string {
   const value = process.env[name];
@@ -89,6 +292,44 @@ function parseJsonText<T>(text: string): T {
   }
 }
 
+function stripNullCompatibilityFields(value: unknown): unknown {
+  if (value === null) {
+    return undefined;
+  }
+
+  if (Array.isArray(value)) {
+    return value
+      .map((entry) => stripNullCompatibilityFields(entry))
+      .filter((entry) => typeof entry !== "undefined");
+  }
+
+  if (value && typeof value === "object") {
+    const next: Record<string, unknown> = {};
+
+    for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
+      const normalized = stripNullCompatibilityFields(child);
+      if (typeof normalized !== "undefined") {
+        next[key] = normalized;
+      }
+    }
+
+    return next;
+  }
+
+  return value;
+}
+
+function normalizeProviderJsonValue(
+  schemaName: GenerateJsonArgs["schemaName"],
+  value: unknown,
+): unknown {
+  if (schemaName === "TopicAuthoringDraft") {
+    return stripNullCompatibilityFields(value);
+  }
+
+  return value;
+}
+
 function getRuntimeValidationErrors(
   schemaName: GenerateJsonArgs["schemaName"],
   value: unknown,
@@ -140,12 +381,6 @@ export function getOpenAiStructuredOutputSchema(
 ): JsonSchema {
   const schema = getSchema(schemaName);
 
-  /**
-   * Provider-compatibility decision:
-   * we currently keep the canonical TopicAuthoringDraft schema, including `oneOf`,
-   * for OpenAI structured outputs. Runtime validation still re-checks the parsed
-   * result with the canonical TopicAuthoringDraft validator after parsing.
-   */
   assertOpenAiStructuredOutputSchemaCompatible(schema);
   return schema;
 }
@@ -238,7 +473,7 @@ function getSchema(schemaName: GenerateJsonArgs["schemaName"]): JsonSchema {
         }
       };
     case "TopicAuthoringDraft":
-      return TOPIC_AUTHORING_DRAFT_JSON_SCHEMA;
+      return OPENAI_TOPIC_AUTHORING_DRAFT_SCHEMA;
 
     case "NormalizedPlanRepair":
       return {
@@ -372,14 +607,15 @@ export const openAiProvider: AiProvider = {
       });
     }
 
-    const validationErrors = getRuntimeValidationErrors(args.schemaName, parsedJson);
+    const normalizedValue = normalizeProviderJsonValue(args.schemaName, parsedJson);
+    const validationErrors = getRuntimeValidationErrors(args.schemaName, normalizedValue);
     if (validationErrors.length > 0) {
       throw new GeneratedJsonError({
         code: "SCHEMA_VALIDATION_FAILED",
         message: validationErrors.join("\n"),
         metadata,
         rawText: text,
-        parsedJson,
+        parsedJson: normalizedValue,
         validationErrors,
       });
     }
@@ -388,7 +624,7 @@ export const openAiProvider: AiProvider = {
       ...metadata,
       rawText: text,
       parsedJson,
-      value: parsedJson as T,
+      value: normalizedValue as T,
     };
   },
 

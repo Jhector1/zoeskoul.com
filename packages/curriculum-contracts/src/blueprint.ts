@@ -31,6 +31,8 @@ export type CourseBlueprint = {
   subjectSlug: string;
   courseSlug?: string;
   catalogSlug?: string;
+  accessPolicy?: "free" | "paid";
+  moduleAccessOverrideDefault?: "free" | "paid" | null;
   moduleSchedule?: BlueprintModuleScheduleEntry[];
   profileId: CourseProfileId;
   sourceLocale: "en";

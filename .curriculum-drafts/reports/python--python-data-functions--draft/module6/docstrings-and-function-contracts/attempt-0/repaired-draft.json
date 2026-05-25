@@ -1,0 +1,278 @@
+{
+  "title": "Docstrings and Function Contracts",
+  "summary": "Document what a function expects and returns.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Docstrings",
+      "bodyMarkdown": "Docstrings are a way to document your functions in Python. They describe what the function does, its parameters, and its return value. This helps other developers understand how to use your function without reading the entire code.\n\nHere's a simple example:\n\n```python\ndef add(a, b):\n    \"\"\"Add two numbers and return the result.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The sum of a and b.\n    \"\"\"\n    return a + b\n```\n\nIn this example, the docstring explains that the function `add` takes two parameters, `a` and `b`, and returns their sum. \n\n**Try it yourself:** Write a function with a docstring that describes its purpose, parameters, and return value.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "sketch2",
+      "title": "Function Contracts",
+      "bodyMarkdown": "A function contract specifies what a function expects as input and what it guarantees as output. This is crucial for ensuring that functions are used correctly and consistently.\n\nFor example, consider a function that calculates the area of a rectangle:\n\n```python\ndef rectangle_area(width, height):\n    \"\"\"Calculate the area of a rectangle.\n\n    Parameters:\n    width (float): The width of the rectangle.\n    height (float): The height of the rectangle.\n\n    Returns:\n    float: The area of the rectangle.\n    \"\"\"\n    return width * height\n```\n\nThe contract here is that `rectangle_area` expects two floats as input and returns a float representing the area.\n\n**Your turn:** Define a function contract for a function that calculates the perimeter of a rectangle.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Purpose of Docstrings",
+      "prompt": "What is the primary purpose of a docstring in a Python function?",
+      "options": [
+        "To execute the function",
+        "To document the function's purpose and usage",
+        "To optimize the function's performance",
+        "To store function variables"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how docstrings help other developers.",
+      "help": {
+        "concept": "Docstrings provide documentation for functions, explaining their purpose, parameters, and return values.",
+        "hint_1": "Docstrings are not for executing code.",
+        "hint_2": "Docstrings help in understanding the function's usage."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Components of a Function Contract",
+      "prompt": "Which of the following are components of a function contract? Select all that apply.",
+      "options": [
+        "Input parameters",
+        "Return type",
+        "Function name",
+        "Execution time"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Consider what a function contract specifies about inputs and outputs.",
+      "help": {
+        "concept": "A function contract specifies the inputs, outputs, and behavior of a function.",
+        "hint_1": "Think about what the function needs and what it provides.",
+        "hint_2": "Consider both input requirements and output guarantees."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Order of Docstring Sections",
+      "prompt": "Arrange the sections of a docstring in the correct order.",
+      "tokens": [
+        "Description of the function",
+        "Parameters",
+        "Return value"
+      ],
+      "correctOrder": [
+        "Description of the function",
+        "Parameters",
+        "Return value"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Docstring Return Section",
+      "prompt": "Complete the docstring return section: `Returns: [blank1]`",
+      "template": "Returns: [blank1]",
+      "choices": [
+        "int",
+        "float",
+        "str",
+        "list"
+      ],
+      "correctValue": "int",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Write a Function with a Docstring",
+      "prompt": "Write a function `multiply` that takes two integers and returns their product. Include a docstring that describes the function, its parameters, and its return value. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "def multiply(a, b):\n    \"\"\"\n    \n    \"\"\"\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "solutionCode": "def multiply(a, b):\n    \"\"\"Multiply two integers and return the product.\n\n    Parameters:\n    a (int): The first integer.\n    b (int): The second integer.\n\n    Returns:\n    int: The product of a and b.\n    \"\"\"\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "tests": [
+        {
+          "stdin": "3 4\n1\n",
+          "stdout": "3 4",
+          "match": "exact"
+        },
+        {
+          "stdin": "5 6\n1\n",
+          "stdout": "5 6",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Write a Function with a Docstring\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Write a Function with a Docstring\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "code_input",
+      "title": "Function Contract for a Sum Function",
+      "prompt": "Create a function `sum_numbers` that takes a list of integers and returns their sum. Include a docstring that describes the function, its parameters, and its return value. Then read the input value, call the function, and print the returned result.",
+      "starterCode": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef sum_numbers(numbers):\n    \"\"\"\n    \n    \"\"\"\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(sum_numbers(numbers))",
+      "solutionCode": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef sum_numbers(numbers):\n    \"\"\"Sum a list of integers and return the total.\n\n    Parameters:\n    numbers (list of int): The list of integers to sum.\n\n    Returns:\n    int: The sum of the integers in the list.\n    \"\"\"\n    return sum(numbers)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(sum_numbers(numbers))",
+      "tests": [
+        {
+          "stdin": "1 2 3 4\n",
+          "stdout": "10\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "10 20 30\n",
+          "stdout": "60\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Docstring for a Division Function",
+      "prompt": "Write a function `divide` that takes two numbers and returns their division. Include a docstring that describes the function, its parameters, and its return value. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "_inputs = []\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef divide(a, b):\n    \"\"\"\n    \n    \"\"\"\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+      "solutionCode": "_inputs = []\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef divide(a, b):\n    \"\"\"Divide two numbers and return the result.\n\n    Parameters:\n    a (float): The numerator.\n    b (float): The denominator.\n\n    Returns:\n    float: The result of the division.\n    \"\"\"\n    return a / b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+      "tests": [
+        {
+          "stdin": "8 2\n1\n",
+          "stdout": "4.0\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "9 3\n1\n",
+          "stdout": "3.0\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "policy_single_choice_1",
+      "kind": "single_choice",
+      "title": "Identify the result of running code",
+      "prompt": "In \"Docstrings and Function Contracts\", what should you check after running a Python program?",
+      "options": [
+        "The output shown by the program",
+        "Only the file name",
+        "Whether Python deletes the code",
+        "Whether comments are printed automatically"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Running code lets you inspect what the program displays.",
+      "help": {
+        "concept": "When you run Python code, the most important feedback is usually the output or error message.",
+        "hint_1": "Look at the output panel.",
+        "hint_2": "Printed values appear after the program runs."
+      }
+    },
+    {
+      "id": "policy_multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Choose good run-and-check habits",
+      "prompt": "Which habits help when practicing \"Docstrings and Function Contracts\"?",
+      "options": [
+        "Run the code after writing it",
+        "Read the output carefully",
+        "Ignore error messages",
+        "Change many lines at once without testing"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Good practice means running code and checking what happened.",
+      "help": {
+        "concept": "Running small pieces of code and reading the output helps you understand Python behavior.",
+        "hint_1": "Output and errors both give useful feedback.",
+        "hint_2": "Testing small changes is easier than debugging many changes at once."
+      }
+    },
+    {
+      "id": "policy_drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order the run-and-check workflow",
+      "prompt": "Put the steps in order for practicing \"Docstrings and Function Contracts\".",
+      "tokens": [
+        "Write a small piece of Python code",
+        "Run the code",
+        "Read the output or error message"
+      ],
+      "correctOrder": [
+        "Write a small piece of Python code",
+        "Run the code",
+        "Read the output or error message"
+      ],
+      "hint": "You need code before you can run it.",
+      "help": {
+        "concept": "A basic Python workflow is write code, run it, then inspect the result.",
+        "hint_1": "The output appears after running.",
+        "hint_2": "Errors are also useful feedback."
+      }
+    },
+    {
+      "id": "policy_fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Choose the missing Python keyword",
+      "prompt": "Fill in the missing Python keyword so the statement is valid.",
+      "template": "___ value > 0:\n    print('positive')",
+      "choices": [
+        "if",
+        "for",
+        "def",
+        "class"
+      ],
+      "correctValue": "if",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Docstrings and Function Contracts Project",
+    "stepIds": [
+      "quiz5",
+      "quiz6",
+      "quiz7"
+    ]
+  }
+}

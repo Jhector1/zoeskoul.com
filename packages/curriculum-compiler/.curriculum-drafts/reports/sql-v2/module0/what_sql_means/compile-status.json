@@ -1,8 +1,6 @@
 {
   "reportDir": ".curriculum-drafts/reports/sql-v2/module0/what_sql_means",
-  "status": "failed",
+  "status": "success",
   "attempts": 1,
-  "finalAttempt": 0,
-  "errorCode": "EPERM",
-  "errorMessage": "EPERM: operation not permitted, mkdir '/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/subjects/sql-v2'"
+  "finalAttempt": 0
 }

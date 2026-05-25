@@ -1,0 +1,208 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "print-vs-return": {
+          "label": "Print vs Return",
+          "summary": "Understand when to display output and when to return data.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Print and Return"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Function Practice Project"
+            }
+          },
+          "projectSteps": {
+            "code1": {
+              "title": "Return vs Print"
+            },
+            "code2": {
+              "title": "Sum Function"
+            },
+            "code3": {
+              "title": "Difference Function"
+            }
+          },
+          "quiz": {
+            "single1": {
+              "title": "Purpose of print()",
+              "prompt": "What is the primary purpose of the `print()` function in Python?",
+              "hint": "Think about what `print()` does with the output.",
+              "help": {
+                "concept": "The `print()` function is used to display information to the user.",
+                "hint_1": "`print()` sends output to the output panel.",
+                "hint_2": "`print()` is not used to return values from functions."
+              },
+              "options": {
+                "a": "To return a value from a function",
+                "b": "To display output to the user",
+                "c": "To store data in a variable",
+                "d": "To terminate a program"
+              }
+            },
+            "single2": {
+              "title": "Purpose of return",
+              "prompt": "What is the primary purpose of the `return` statement in a function?",
+              "hint": "Consider what happens when a function uses `return`.",
+              "help": {
+                "concept": "The `return` statement sends a value back to the caller of the function.",
+                "hint_1": "`return` is used to output a value from a function.",
+                "hint_2": "`return` allows the function to send data back to where it was called."
+              },
+              "options": {
+                "a": "To print a value to the output panel",
+                "b": "To send a value back to the caller",
+                "c": "To pause the function execution",
+                "d": "To define a function"
+              }
+            },
+            "multi1": {
+              "title": "Differences between print and return",
+              "prompt": "Select all the correct statements about the differences between `print()` and `return`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "`print()` displays output to the user",
+                "b": "`return` sends a value back to the caller",
+                "c": "`print()` can be used to terminate a function",
+                "d": "`return` is used to display output"
+              }
+            },
+            "multi2": {
+              "title": "Using return in functions",
+              "prompt": "Which of the following are true about using `return` in functions?",
+              "hint": "Think about what `return` does in a function.",
+              "help": {
+                "concept": "`return` is used to send a value back to the caller of the function.",
+                "hint_1": "`return` allows a function to output a value.",
+                "hint_2": "`return` can be used to end a function's execution."
+              },
+              "options": {
+                "a": "`return` can end a function's execution",
+                "b": "`return` can send multiple values back",
+                "c": "`return` is used to display output",
+                "d": "`return` can be used without a value"
+              }
+            },
+            "drag1": {
+              "title": "Order of function execution",
+              "prompt": "Arrange the steps in the correct order for executing a function that uses `return`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Define the function",
+                "t2": "Call the function",
+                "t3": "Return a value",
+                "t4": "Use the returned value"
+              }
+            },
+            "drag2": {
+              "title": "Steps in using print()",
+              "prompt": "Arrange the steps in the correct order for using `print()` in a program.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Write the `print()` statement",
+                "t2": "Run the program",
+                "t3": "See the output in the output panel"
+              }
+            },
+            "fill1": {
+              "title": "Function return value",
+              "prompt": "Complete the statement to correctly use `return` in a function.",
+              "hint": "Think about what `the missing term` does in a function.",
+              "help": {
+                "concept": "`the missing term` sends a value back to the caller of the function.",
+                "hint_1": "`the missing term` is followed by the value to send back.",
+                "hint_2": "The value after `the missing term` is what the function outputs."
+              },
+              "template": "def example():\n    [blank1] 42",
+              "choices": [
+                "return",
+                "print",
+                "output"
+              ]
+            },
+            "fill2": {
+              "title": "Using print()",
+              "prompt": "Complete the statement to correctly use `print()` in a program.",
+              "hint": "Think about how `the missing term()` is used to display information.",
+              "help": {
+                "concept": "`the missing term()` is used to display information to the user.",
+                "hint_1": "`the missing term()` is followed by the information to display.",
+                "hint_2": "The information inside `the missing term()` is what gets displayed."
+              },
+              "template": "[blank1](\"Hello, World!\")",
+              "choices": [
+                "print",
+                "return",
+                "output"
+              ]
+            },
+            "code1": {
+              "title": "Return vs Print",
+              "prompt": "Write a function `greet` that takes a name as input and returns a greeting message. Then, print the returned message.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def greet(name):\n    # Return a greeting message\n\n# Call the function and print the result"
+            },
+            "code2": {
+              "title": "Sum Function",
+              "prompt": "Create a function `sum_numbers` that takes two numbers and returns their sum. Print the result of calling this function with the numbers 5 and 7.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "def sum_numbers(a, b):\n    # Return the sum of a and b\n\n# Call the function and print the result"
+            },
+            "code3": {
+              "title": "Difference Function",
+              "prompt": "Write a function `difference` that takes two numbers and returns their difference. Print the result of calling this function with the numbers 10 and 3.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "def difference(a, b):\n    # Return the difference of a and b\n\n# Call the function and print the result"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "print-vs-return": {
+          "sketch1": {
+            "title": "Understanding Print and Return",
+            "bodyMarkdown": "In Python, `print()` and `return` serve different purposes. The `print()` function is used to display output to the user, typically for debugging or providing information. It sends the output to the output panel. On the other hand, `return` is used in functions to send a value back to the caller. This value can then be used elsewhere in the program.\n\n### Example\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(5, 3)\nprint(result)  # This will print 8\n```\nIn this example, the `add` function returns the sum of `a` and `b`, which is then printed.\n\nTry it yourself: Modify the function to subtract the numbers instead of adding them.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

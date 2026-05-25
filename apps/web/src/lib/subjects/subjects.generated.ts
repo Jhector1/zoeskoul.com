@@ -9,6 +9,8 @@ import type {
 
 import python from "./python/subject.manifest.json";
 import { TOPIC_MANIFESTS as pythonTopicManifests } from "./python/topics.generated";
+import pythonDataFunctions from "./python-data-functions/subject.manifest.json";
+import { TOPIC_MANIFESTS as pythonDataFunctionsTopicManifests } from "./python-data-functions/topics.generated";
 import pythonV2 from "./python-v2/subject.manifest.json";
 import { TOPIC_MANIFESTS as pythonV2TopicManifests } from "./python-v2/topics.generated";
 import sql from "./sql/subject.manifest.json";
@@ -21,6 +23,7 @@ export type GeneratedSubjectGenKey = "python_part1" | "sql_for_beginners";
 
 export const SUBJECT_MANIFESTS: Record<string, SubjectManifest> = {
   "python": python as SubjectManifest,
+  "python-data-functions": pythonDataFunctions as SubjectManifest,
   "python-v2": pythonV2 as SubjectManifest,
   "sql": sql as SubjectManifest,
   "sql-v2": sqlV2 as SubjectManifest,
@@ -40,6 +43,12 @@ export const SUBJECT_GENERATOR_SOURCES: Record<
     genKey: "python_part1",
     manifest: python as SubjectManifest,
     topicManifests: pythonTopicManifests as TopicManifestRefMap,
+  },
+  "python-data-functions": {
+    subjectSlug: "python-data-functions",
+    genKey: "python_part1",
+    manifest: pythonDataFunctions as SubjectManifest,
+    topicManifests: pythonDataFunctionsTopicManifests as TopicManifestRefMap,
   },
   "python-v2": {
     subjectSlug: "python-v2",
@@ -65,6 +74,6 @@ export const SUBJECT_GENERATOR_SOURCES_BY_GENKEY: Record<
   GeneratedSubjectGenKey,
   Array<(typeof SUBJECT_GENERATOR_SOURCES)[keyof typeof SUBJECT_GENERATOR_SOURCES]>
 > = {
-  "python_part1": [SUBJECT_GENERATOR_SOURCES["python"], SUBJECT_GENERATOR_SOURCES["python-v2"]],
+  "python_part1": [SUBJECT_GENERATOR_SOURCES["python"], SUBJECT_GENERATOR_SOURCES["python-data-functions"], SUBJECT_GENERATOR_SOURCES["python-v2"]],
   "sql_for_beginners": [SUBJECT_GENERATOR_SOURCES["sql"], SUBJECT_GENERATOR_SOURCES["sql-v2"]],
 };

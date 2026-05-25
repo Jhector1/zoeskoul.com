@@ -31,6 +31,7 @@ export type TopicSeedWorkspacePolicy = {
 export type TopicSeed = {
     messageBase?: string;
     learningGoals?: string[];
+    technical?: boolean;
 
     moduleRuntimeDefaults?: TopicSeedRuntimeDefaults | null;
     moduleDataset?: SqlDatasetArtifact | null;

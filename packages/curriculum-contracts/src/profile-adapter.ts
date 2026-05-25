@@ -31,6 +31,7 @@ export type BuildTopicSeedArgs = {
     title: string;
     summary: string;
     minutes: number;
+    technical?: boolean;
   };
 };
 

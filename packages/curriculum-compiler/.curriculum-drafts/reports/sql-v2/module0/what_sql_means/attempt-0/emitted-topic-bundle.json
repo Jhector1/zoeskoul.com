@@ -4,7 +4,7 @@
   "moduleSlug": "sql-v2-0",
   "sectionSlug": "sql-v2-0-1",
   "prefix": "sqlv2_0",
-  "minutes": 15,
+  "minutes": 12,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,

@@ -1,0 +1,411 @@
+{
+  "title": "Print vs Return",
+  "summary": "Understand when to display output and when to return data.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Print vs Return",
+      "bodyMarkdown": "In Python, `print` and `return` serve different purposes. `print` is used to display information to the user, while `return` is used to send a result back from a function. \n\n### Example\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(3, 4)\nprint(result)  # This will print 7\n```\nIn this example, the `add` function returns the sum of `a` and `b`. The `print` function then displays this result.\n\nTry it yourself: Modify the function to subtract the numbers instead of adding them."
+    },
+    {
+      "id": "sketch2",
+      "title": "When to Use Print",
+      "bodyMarkdown": "Use `print` when you want to display information to the user or for debugging purposes. It does not affect the flow of the program or the values returned by functions.\n\n### Example\n```python\ndef greet(name):\n    print(f\"Hello, {name}!\")\n\ngreet(\"Alice\")  # This will print 'Hello, Alice!'\n```\nTry it yourself: Change the greeting message to include the current time."
+    },
+    {
+      "id": "sketch3",
+      "title": "When to Use Return",
+      "bodyMarkdown": "Use `return` when you need to send a result back from a function to the caller. This allows the caller to use the result in further calculations or logic.\n\n### Example\n```python\ndef multiply(a, b):\n    return a * b\n\nproduct = multiply(5, 6)\nprint(product)  # This will print 30\n```\nTry it yourself: Modify the function to return the square of a number instead."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Purpose of Print",
+      "prompt": "What is the primary purpose of the `print` function in Python?",
+      "hint": "Think about what `print` does with the information it receives.",
+      "help": {
+        "concept": "The `print` function is used to display information to the user.",
+        "hint_1": "`print` outputs text to the screen.",
+        "hint_2": "`print` is not used to return values from functions."
+      },
+      "options": [
+        "To return a value from a function",
+        "To display information to the user",
+        "To store data in a variable",
+        "To terminate a program"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Purpose of Return",
+      "prompt": "What is the primary purpose of the `return` statement in a function?",
+      "hint": "Consider what happens to the value after a `return` statement is executed.",
+      "help": {
+        "concept": "The `return` statement sends a value back to the caller of the function.",
+        "hint_1": "`return` provides a value to the caller of the function.",
+        "hint_2": "`return` is not used to display information to the user."
+      },
+      "options": [
+        "To display information to the user",
+        "To send a value back to the caller",
+        "To print a value to the console",
+        "To pause the execution of a function"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Print vs Return Usage",
+      "prompt": "Which of the following statements about `print` and `return` are true? Select all that apply.",
+      "hint": "Consider the roles of `print` and `return` in a function.",
+      "help": {
+        "concept": "`print` is used for displaying information, while `return` sends a value back to the caller.",
+        "hint_1": "`print` outputs to the console, `return` sends data back.",
+        "hint_2": "`return` does not display information directly."
+      },
+      "options": [
+        "`print` can be used to debug code",
+        "`return` can be used to send a value back to the caller",
+        "`print` sends a value back to the caller",
+        "`return` displays information to the user"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Effects of Print and Return",
+      "prompt": "Select all correct statements about the effects of `print` and `return`.",
+      "hint": "Think about what each statement does to the program's flow and output.",
+      "help": {
+        "concept": "`print` affects the output seen by the user, while `return` affects the program's logic flow.",
+        "hint_1": "`print` outputs to the console, `return` affects the function's output.",
+        "hint_2": "`return` does not directly display anything."
+      },
+      "options": [
+        "`print` affects the program's output seen by the user",
+        "`return` affects the program's logic flow",
+        "`print` affects the function's return value",
+        "`return` directly displays output to the user"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Order of Execution",
+      "prompt": "Arrange the steps in the correct order for a function that uses both `print` and `return`.",
+      "hint": "Consider the typical flow of a function with both `print` and `return`.",
+      "help": {
+        "concept": "A function typically executes statements in order, with `return` ending the function.",
+        "hint_1": "`print` statements execute before `return`.",
+        "hint_2": "`return` ends the function execution."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": [
+        "Define the function",
+        "Execute print statements",
+        "Execute return statement",
+        "End function"
+      ],
+      "correctOrder": [
+        "Define the function",
+        "Execute print statements",
+        "Execute return statement",
+        "End function"
+      ],
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Function Execution Flow",
+      "prompt": "Reorder the steps to reflect the correct flow of a function with a `return` statement.",
+      "hint": "Think about how a function executes from start to finish.",
+      "help": {
+        "concept": "A function executes in a linear order, with `return` ending the execution.",
+        "hint_1": "`return` is usually the last step in a function.",
+        "hint_2": "Statements before `return` are executed in order."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": [
+        "Start function execution",
+        "Execute statements",
+        "Return a value",
+        "End function"
+      ],
+      "correctOrder": [
+        "Start function execution",
+        "Execute statements",
+        "Return a value",
+        "End function"
+      ],
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Return Statement",
+      "prompt": "Complete the statement to correctly use a return statement in a function.",
+      "hint": "Think about what a return statement does in a function.",
+      "help": {
+        "concept": "A return statement sends a value back to the caller of the function.",
+        "hint_1": "`return` is followed by the value to be returned.",
+        "hint_2": "The value after `return` is what the function outputs."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "def example_function():\n    [blank1] 42",
+      "choices": [
+        "return",
+        "print",
+        "output",
+        "display"
+      ],
+      "correctValue": "return",
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Print Statement",
+      "prompt": "Complete the statement to correctly use a print statement in a function.",
+      "hint": "Think about what a print statement does in a function.",
+      "help": {
+        "concept": "A print statement displays information to the user.",
+        "hint_1": "`print` is followed by the information to display.",
+        "hint_2": "The value inside `print` is what gets displayed."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "def example_function():\n    [blank1](\"Hello, World!\")",
+      "choices": [
+        "return",
+        "print",
+        "output",
+        "display"
+      ],
+      "correctValue": "print",
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Function with Print",
+      "prompt": "Write a function `greet` that takes a name as input and prints a greeting message.",
+      "hint": "Use the `print` function to display the greeting.",
+      "help": {
+        "concept": "The `print` function is used to display a message to the user.",
+        "hint_1": "Use `print` to display the greeting message.",
+        "hint_2": "The function should not return any value."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "def greet(name):\n    # Write your code below\n",
+      "solutionCode": "def greet(name):\n    print(f\"Hello, {name}!\")\n",
+      "tests": [
+        {
+          "stdin": "Alice\n",
+          "stdout": "Hello, Alice!\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "Bob\n",
+          "stdout": "Hello, Bob!\n",
+          "match": "exact"
+        }
+      ],
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "fixed_tests",
+      "checkSql": null
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Function with Return",
+      "prompt": "Write a function `add` that takes two numbers as input and returns their sum.",
+      "hint": "Use the `return` statement to send the sum back.",
+      "help": {
+        "concept": "The `return` statement sends a value back to the caller of the function.",
+        "hint_1": "Calculate the sum and use `return` to send it back.",
+        "hint_2": "The function should return the sum, not print it."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "def add(a, b):\n    # Write your code below\n",
+      "solutionCode": "def add(a, b):\n    return a + b\n",
+      "tests": [
+        {
+          "stdin": "3 4\n",
+          "stdout": "7\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "10 5\n",
+          "stdout": "15\n",
+          "match": "exact"
+        }
+      ],
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "fixed_tests",
+      "checkSql": null
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Print and Return Together",
+      "prompt": "Write a function `describe_number` that takes a number and prints whether it's even or odd, then returns the number squared.",
+      "hint": "Use `print` to display the even/odd status and `return` to send back the square.",
+      "help": {
+        "concept": "Use `print` for displaying messages and `return` for sending back values.",
+        "hint_1": "Check if the number is even or odd using modulus.",
+        "hint_2": "Return the square of the number."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "def describe_number(num):\n    # Write your code below\n",
+      "solutionCode": "def describe_number(num):\n    if num % 2 == 0:\n        print(\"Even\")\n    else:\n        print(\"Odd\")\n    return num ** 2\n",
+      "tests": [
+        {
+          "stdin": "4\n",
+          "stdout": "Even\n16\n",
+          "match": "includes"
+        },
+        {
+          "stdin": "3\n",
+          "stdout": "Odd\n9\n",
+          "match": "includes"
+        }
+      ],
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "fixed_tests",
+      "checkSql": null
+    }
+  ],
+  "projectDraft": {
+    "title": "Print vs Return Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}
