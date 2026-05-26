@@ -130,12 +130,11 @@
       "optionIds": [
         "a",
         "b",
-        "c",
-        "d"
+        "c"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "c"
       }
     },
     {
@@ -155,7 +154,7 @@
         "optionIds": [
           "a",
           "b",
-          "c"
+          "d"
         ]
       }
     },
@@ -175,7 +174,7 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
+          "c",
           "d"
         ]
       }
@@ -189,14 +188,16 @@
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3"
+          "t3",
+          "t4"
         ]
       }
     },
@@ -209,11 +210,13 @@
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
+          "t4",
           "t1",
           "t2",
           "t3"
@@ -229,7 +232,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "The width"
+        "value": "after"
       }
     },
     {
@@ -241,7 +244,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "The area"
+        "value": "exceptions"
       }
     },
     {
@@ -251,15 +254,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz9",
       "language": "python",
-      "starterCode": "def multiply(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "starterCode": "def multiply(a, b):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def multiply(a, b):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def multiply(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+        "starterCode": "def multiply(a, b):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def multiply(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+            "content": "def multiply(a, b):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -286,7 +298,7 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "def multiply(a, b):\n    \"\"\"Multiply two numbers and return the result.\n\n    Parameters:\n    a (int or float): The first number.\n    b (int or float): The second number.\n\n    Returns:\n    int or float: The product of a and b.\n    \"\"\"\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))"
+        "solutionCode": "def multiply(a, b):\n    \"\"\"\n    Multiplies two numbers and returns the result.\n    \n    Parameters:\n    a (int or float): The first number.\n    b (int or float): The second number.\n    \n    Returns:\n    int or float: The product of a and b.\n    \"\"\"\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))"
       }
     },
     {
@@ -296,15 +308,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz10",
       "language": "python",
-      "starterCode": "def divide(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+      "starterCode": "def safe_divide(numerator, denominator):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumerator = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ndenominator = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(safe_divide(numerator, denominator))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def safe_divide(numerator, denominator):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumerator = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ndenominator = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(safe_divide(numerator, denominator))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def divide(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+        "starterCode": "def safe_divide(numerator, denominator):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumerator = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ndenominator = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(safe_divide(numerator, denominator))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def divide(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+            "content": "def safe_divide(numerator, denominator):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumerator = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ndenominator = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(safe_divide(numerator, denominator))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -326,7 +347,7 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "def divide(a, b):\n    \"\"\"Divide two numbers and return the quotient.\n\n    Parameters:\n    a (int or float): The numerator.\n    b (int or float): The denominator.\n\n    Returns:\n    float: The quotient of a and b, or 'undefined' if b is zero.\n    \"\"\"\n    if b == 0:\n        return 'undefined'\n    return a / b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))"
+        "solutionCode": "def safe_divide(numerator, denominator):\n    \"\"\"\n    Divides the numerator by the denominator, returning None if the denominator is zero.\n    \n    Parameters:\n    numerator (float): The number to be divided.\n    denominator (float): The number to divide by.\n    \n    Returns:\n    float or None: The result of the division, or None if division by zero occurs.\n    \"\"\"\n    if denominator == 0:\n        return None\n    return numerator / denominator\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumerator = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ndenominator = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(safe_divide(numerator, denominator))"
       }
     },
     {
@@ -336,15 +357,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz11",
       "language": "python",
-      "starterCode": "def subtract(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(subtract(a, b))",
+      "starterCode": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef calculate_area(width, height):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef calculate_area(width, height):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def subtract(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(subtract(a, b))",
+        "starterCode": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef calculate_area(width, height):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def subtract(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(subtract(a, b))",
+            "content": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef calculate_area(width, height):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -357,16 +387,21 @@
         "tests": [
           {
             "stdin": "1\n1\n",
-            "stdout": "0",
+            "stdout": "1",
             "match": "exact"
           },
           {
             "stdin": "1\n1\n",
-            "stdout": "0",
+            "stdout": "1",
+            "match": "exact"
+          },
+          {
+            "stdin": "2\n2\n",
+            "stdout": "4\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "def subtract(a, b):\n    \"\"\"Subtract two numbers and return the result.\n\n    Parameters:\n    a (int or float): The first number.\n    b (int or float): The second number.\n\n    Returns:\n    int or float: The difference of a and b.\n    \"\"\"\n    return a - b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(subtract(a, b))"
+        "solutionCode": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef calculate_area(width, height):\n    \"\"\"\n    Calculates the area of a rectangle given its width and height.\n    \n    Parameters:\n    width (float): The width of the rectangle.\n    height (float): The height of the rectangle.\n    \n    Returns:\n    float: The area of the rectangle.\n    \"\"\"\n    return width * height\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))"
       }
     }
   ]

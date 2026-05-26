@@ -61,7 +61,7 @@
       "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
       "category": "recipe",
       "severity": "high",
-      "field": "quiz11",
+      "field": "quiz9",
       "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
     },
     {
@@ -75,7 +75,7 @@
       "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
       "category": "recipe",
       "severity": "high",
-      "field": "quiz9",
+      "field": "quiz11",
       "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
     },
     {
@@ -86,6 +86,13 @@
       "message": "Added 1 distinct fixed test case(s) so this Python code_input meets the minimum fixed_tests coverage."
     },
     {
+      "code": "PYTHON_FIXED_TEST_ADDED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz11",
+      "message": "Added 1 distinct fixed test case(s) so this Python code_input meets the minimum fixed_tests coverage."
+    },
+    {
       "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
       "category": "recipe",
       "severity": "low",
@@ -93,11 +100,11 @@
       "message": "The repair step could not derive a second distinct stdin/stdout case from the current Python prompt and solution. Replace this with a non-code exercise or rewrite it as a stdin-based task with variable behavior."
     },
     {
-      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "code": "PYTHON_CROSS_EXERCISE_CLASS_CONTEXT_REPAIRED",
       "category": "recipe",
-      "severity": "low",
+      "severity": "high",
       "field": "quiz11",
-      "message": "The repair step could not derive a second distinct stdin/stdout case from the current Python prompt and solution. Replace this with a non-code exercise or rewrite it as a stdin-based task with variable behavior."
+      "message": "Prepended shared class/setup context needed by this code_input exercise so it can run independently."
     }
   ]
 }

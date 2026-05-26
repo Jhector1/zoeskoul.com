@@ -1,0 +1,216 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "working-with-paths": {
+          "label": "Working With Paths",
+          "summary": "Understand relative paths and simple file organization.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Relative Paths"
+            },
+            "sketch1": {
+              "title": "Using Pathlib for Path Operations"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Working With Paths Project"
+            }
+          },
+          "projectSteps": {
+            "quiz9": {
+              "title": "Read File Content"
+            },
+            "quiz10": {
+              "title": "Check File Existence"
+            },
+            "quiz11": {
+              "title": "Write to a File"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Understanding Relative Paths",
+              "prompt": "What is a relative path?",
+              "hint": "Think about how a relative path is defined in relation to the current directory.",
+              "help": {
+                "concept": "A relative path specifies the location of a file or directory relative to the current working directory.",
+                "hint_1": "A relative path does not start with a root directory.",
+                "hint_2": "It is defined in relation to the current directory."
+              },
+              "options": {
+                "a": "A path that starts from the root directory",
+                "b": "A path that is defined in relation to the current directory",
+                "c": "A path that includes the full URL",
+                "d": "A path that is only used in web development"
+              }
+            },
+            "quiz2": {
+              "title": "Pathlib Module",
+              "prompt": "What is the primary use of the `pathlib` module in Python?",
+              "hint": "Consider what operations `pathlib` simplifies.",
+              "help": {
+                "concept": "The `pathlib` module provides an object-oriented interface for handling filesystem paths.",
+                "hint_1": "It helps in managing paths more efficiently.",
+                "hint_2": "Think about path operations like checking existence, reading, and writing."
+              },
+              "options": {
+                "a": "To manage database connections",
+                "b": "To handle HTTP requests",
+                "c": "To perform path operations",
+                "d": "To create graphical user interfaces"
+              }
+            },
+            "quiz3": {
+              "title": "Path Operations",
+              "prompt": "Which of the following are valid operations you can perform with the `pathlib` module?",
+              "hint": "Think about common file and directory operations.",
+              "help": {
+                "concept": "The `pathlib` module allows various operations on paths, such as checking existence, reading, and writing.",
+                "hint_1": "Consider operations related to file handling.",
+                "hint_2": "Think about what you can do with paths, like checking if they exist or reading from them."
+              },
+              "options": {
+                "a": "Check if a path exists",
+                "b": "Read from a file",
+                "c": "Write to a file",
+                "d": "Send an email"
+              }
+            },
+            "quiz4": {
+              "title": "File Path Types",
+              "prompt": "Select all the correct statements about file paths in Python.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Absolute paths start from the root directory",
+                "b": "Relative paths are defined in relation to the current directory",
+                "c": "Absolute paths are always shorter than relative paths",
+                "d": "Relative paths can be used to navigate within the current directory"
+              }
+            },
+            "quiz5": {
+              "title": "Pathlib Usage Sequence",
+              "prompt": "Arrange the steps to check if a file exists using `pathlib`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Create a Path object",
+                "t2": "Use the exists() method",
+                "t3": "Print the result"
+              }
+            },
+            "quiz6": {
+              "title": "File Reading Steps",
+              "prompt": "Order the steps to read a file using a relative path in Python.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Open the file",
+                "t2": "Read the content",
+                "t3": "Close the file"
+              }
+            },
+            "quiz7": {
+              "title": "Pathlib Method",
+              "prompt": "Fill in the blank to complete the method that checks if a path exists using `pathlib`.",
+              "hint": "Consider the method used to verify the existence of a path.",
+              "help": {
+                "concept": "The `the missing term()` method in `pathlib` checks if a path the missing term.",
+                "hint_1": "The method is called on a Path object.",
+                "hint_2": "It returns a boolean indicating the existence of the path."
+              },
+              "template": "path.[blank1]()",
+              "choices": [
+                "exists",
+                "check",
+                "validate",
+                "confirm"
+              ]
+            },
+            "quiz8": {
+              "title": "Relative Path Example",
+              "prompt": "Complete the code to open a file using a relative path.",
+              "hint": "Think about how to specify a relative path in the open function.",
+              "help": {
+                "concept": "A relative path specifies the location of a file relative to the current directory.",
+                "hint_1": "Use a string to specify the path.",
+                "hint_2": "The path should not start with a slash."
+              },
+              "template": "open('[blank1]', 'r')",
+              "choices": [
+                "data/input.txt",
+                "/data/input.txt",
+                "C:\\data\\input.txt",
+                "http://data/input.txt"
+              ]
+            },
+            "quiz9": {
+              "title": "Read File Content",
+              "prompt": "Write a Python program to read the content of a file named `data/input.txt` and print it.",
+              "hint": "Read the task \"Read File Content\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Read File Content\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# Write your code below"
+            },
+            "quiz10": {
+              "title": "Check File Existence",
+              "prompt": "Write a Python program using `pathlib` to check if a file named `data/input.txt` exists and print a message accordingly.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your code below"
+            },
+            "quiz11": {
+              "title": "Write to a File",
+              "prompt": "Write a Python program to write 'Hello, Python!' to a file named `data/output.txt`.",
+              "hint": "Read the task \"Write to a File\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Write to a File\".",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# Write your code below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "working-with-paths": {
+          "sketch1": {
+            "title": "Understanding Relative Paths",
+            "bodyMarkdown": "In Python, paths are used to locate files and directories. A relative path is a way to specify the location of a file or directory relative to the current working directory. For example, if your current directory is `/home/user/`, a relative path to a file in a subdirectory might be `documents/report.txt`. This means the file is located in the `documents` folder inside the current directory.\n\n```python\n# Example of using a relative path\ndef read_file():\n    with open('data/input.txt', 'r') as file:\n        content = file.read()\n    return content\n```\n\nTry it yourself: Modify the path to read a different file in the same directory and observe the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch2": {
+            "title": "Using Pathlib for Path Operations",
+            "bodyMarkdown": "The `pathlib` module in Python provides an object-oriented approach to handling paths. It allows you to perform various operations on paths easily.\n\n```python\nfrom pathlib import Path\n\n# Create a Path object\npath = Path('data/input.txt')\n\n# Check if the path exists\nif path.exists():\n    print(f\"The file {path} exists.\")\nelse:\n    print(f\"The file {path} does not exist.\")\n```\n\nTry this: Change the path to a non-existent file and see how the output changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

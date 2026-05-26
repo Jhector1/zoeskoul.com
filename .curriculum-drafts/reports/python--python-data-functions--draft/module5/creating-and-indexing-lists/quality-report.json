@@ -21,13 +21,13 @@
     "thinFixedTestCount": 0,
     "blockers": 0,
     "errors": 0,
-    "warnings": 4,
+    "warnings": 2,
     "infos": 0
   },
   "severityCounts": {
     "blocker": 0,
     "error": 0,
-    "warning": 4,
+    "warning": 2,
     "info": 0
   },
   "issues": [
@@ -47,28 +47,8 @@
       "profileId": "python",
       "moduleId": "python-5-lists-tuples-and-dictionaries",
       "topicId": "creating-and-indexing-lists",
-      "exerciseId": "quiz10",
-      "message": "Exercise \"quiz10\" starterCode appears to contain most of the final solution structure."
-    },
-    {
-      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
-      "severity": "warning",
-      "path": "python-5-lists-tuples-and-dictionaries/python-5-list-basics/creating-and-indexing-lists",
-      "profileId": "python",
-      "moduleId": "python-5-lists-tuples-and-dictionaries",
-      "topicId": "creating-and-indexing-lists",
-      "exerciseId": "policy_code_input_1",
-      "message": "Exercise \"policy_code_input_1\" starterCode appears to contain most of the final solution structure."
-    },
-    {
-      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
-      "severity": "warning",
-      "path": "python-5-lists-tuples-and-dictionaries/python-5-list-basics/creating-and-indexing-lists",
-      "profileId": "python",
-      "moduleId": "python-5-lists-tuples-and-dictionaries",
-      "topicId": "creating-and-indexing-lists",
-      "exerciseId": "policy_code_input_2",
-      "message": "Exercise \"policy_code_input_2\" starterCode appears to contain most of the final solution structure."
+      "exerciseId": "quiz6",
+      "message": "Exercise \"quiz6\" starterCode appears to contain most of the final solution structure."
     }
   ]
 }

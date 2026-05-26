@@ -1,0 +1,27 @@
+{
+  "topicId": "nested-data-structures",
+  "ok": false,
+  "issues": [
+    {
+      "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "q9",
+      "message": "Exercise \"q9\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "q10",
+      "message": "Exercise \"q10\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "q11",
+      "message": "Exercise \"q11\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+    }
+  ]
+}

@@ -5,18 +5,13 @@
   "sketchBlocks": [
     {
       "id": "sketch1",
-      "title": "What is a Function?",
-      "bodyMarkdown": "A function is a reusable block of code that performs a specific task. Functions help organize code, making it easier to read and maintain. In Python, you define a function using the `def` keyword, followed by the function name and parentheses. Here's a simple example:\n\n```python\ndef greet():\n    print(\"Hello, world!\")\n```\n\nThis function, `greet`, prints a greeting message. To use it, you call the function by its name followed by parentheses:\n\n```python\ngreet()\n```\n\nTry it yourself: Define a function that prints your favorite quote and call it."
+      "title": "Introduction to Functions",
+      "bodyMarkdown": "Functions are reusable blocks of code that perform a specific task. They help organize code, make it more readable, and reduce repetition. In Python, you define a function using the `def` keyword, followed by the function name and parentheses. Inside the parentheses, you can specify parameters that the function can accept.\n\n```python\ndef greet(name):\n    print(f\"Hello, {name}!\")\n```\n\nIn this example, `greet` is a function that takes one parameter, `name`, and prints a greeting message. \n\n**Try it yourself:** Define a function that takes two numbers and prints their sum."
     },
     {
       "id": "sketch2",
-      "title": "Functions with Parameters",
-      "bodyMarkdown": "Functions can take inputs, known as parameters, to perform operations. Parameters are specified within the parentheses in the function definition. Here's an example:\n\n```python\ndef greet(name):\n    print(f\"Hello, {name}!\")\n```\n\nThis function, `greet`, takes one parameter, `name`, and prints a personalized greeting. You call it with an argument:\n\n```python\ngreet(\"Alice\")\n```\n\nThis will output: `Hello, Alice!`\n\nYour turn: Modify the function to greet someone with a different message."
-    },
-    {
-      "id": "sketch3",
-      "title": "Returning Values from Functions",
-      "bodyMarkdown": "Functions can return values using the `return` statement. This allows you to capture the result of a function call and use it elsewhere in your code. Here's an example:\n\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(3, 4)\nprint(result)\n```\n\nThis function, `add`, returns the sum of its two parameters. The result is stored in the variable `result` and printed.\n\nTry this: Write a function that multiplies two numbers and returns the result."
+      "title": "Calling Functions",
+      "bodyMarkdown": "Once a function is defined, you can call it by using its name followed by parentheses. If the function requires parameters, you must provide them within the parentheses.\n\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(3, 5)\nprint(result)  # Output: 8\n```\n\nHere, the `add` function is called with the arguments `3` and `5`, and it returns their sum. The result is stored in the variable `result` and printed.\n\n**Your turn:** Call the `greet` function with your name as the argument."
     }
   ],
   "quizDraft": [
@@ -27,92 +22,235 @@
       "prompt": "What keyword is used to define a function in Python?",
       "options": [
         "func",
-        "define",
         "def",
+        "define",
         "function"
       ],
       "correctOptionIds": [
-        "c"
+        "b"
       ],
       "hint": "It's a three-letter keyword.",
       "help": {
         "concept": "Functions in Python are defined using a specific keyword.",
         "hint_1": "Think about the keyword that starts a function definition.",
-        "hint_2": "It's the same keyword used in the example: `def greet():`."
+        "hint_2": "It's the same keyword used to define a function's name and parameters."
       }
     },
     {
       "id": "quiz2",
-      "kind": "multi_choice",
-      "title": "Function Characteristics",
-      "prompt": "Which of the following are characteristics of a function in Python?",
+      "kind": "single_choice",
+      "title": "Function Call",
+      "prompt": "What is the correct way to call a function named `calculate` with arguments `5` and `10`?",
       "options": [
-        "Reusable",
-        "Can take parameters",
-        "Always prints output",
-        "Can return values"
+        "calculate(5, 10)",
+        "calculate 5, 10",
+        "calculate(5 10)",
+        "calculate 5 10"
       ],
       "correctOptionIds": [
-        "a",
-        "b",
-        "d"
+        "a"
       ],
-      "hint": "Think about what makes a function reusable and organized.",
+      "hint": "Use the function name followed by parentheses.",
       "help": {
-        "concept": "Functions are reusable blocks of code that can take inputs and return outputs.",
-        "hint_1": "Consider how functions help in organizing code.",
-        "hint_2": "Functions can take parameters and return values."
+        "concept": "Function calls require the function name and parentheses with arguments.",
+        "hint_1": "Remember to include both arguments inside the parentheses.",
+        "hint_2": "The function name should be followed directly by the parentheses."
       }
     },
     {
       "id": "quiz3",
-      "kind": "drag_reorder",
-      "title": "Function Call Order",
-      "prompt": "Arrange the steps to call a function in the correct order.",
-      "tokens": [
-        "Define the function",
-        "Call the function with arguments",
-        "Execute the function"
+      "kind": "multi_choice",
+      "title": "Function Parameters",
+      "prompt": "Which of the following are valid ways to define a function with parameters in Python?",
+      "options": [
+        "def my_function(a, b):",
+        "def my_function a, b:",
+        "def my_function(a b):",
+        "def my_function(a, b)"
       ],
-      "correctOrder": [
-        "Define the function",
-        "Call the function with arguments",
-        "Execute the function"
+      "correctOptionIds": [
+        "a",
+        "d"
       ],
-      "hint": "Start with defining the function, then call it.",
+      "hint": "Look for the correct use of parentheses and parameter names.",
       "help": {
-        "concept": "Calling a function involves defining it first and then executing it.",
-        "hint_1": "You need to define the function before you can call it.",
-        "hint_2": "After defining, you call the function by its name."
+        "concept": "Function parameters are defined within parentheses after the function name.",
+        "hint_1": "Check if the parameters are correctly placed inside the parentheses.",
+        "hint_2": "Ensure the function definition starts with the correct keyword."
       }
     },
     {
       "id": "quiz4",
-      "kind": "fill_blank_choice",
-      "title": "Function Return Statement",
-      "prompt": "Complete the function to return the sum of two numbers.",
-      "template": "def add(a, b):\n    [blank1] a + b",
-      "choices": [
-        "return",
-        "print",
-        "output",
-        "sum"
+      "kind": "multi_choice",
+      "title": "Return vs Print",
+      "prompt": "Which statements about return and print in functions are true?",
+      "options": [
+        "Return ends the function execution.",
+        "Print can be used to debug.",
+        "Return sends a value back to the caller.",
+        "Print returns a value to the caller."
       ],
-      "correctValue": "return",
-      "hint": "Use the the missing term keyword to send back the result.",
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Consider the difference between returning a value and printing it.",
       "help": {
-        "concept": "The the missing term statement is used to send a result back from a function.",
-        "hint_1": "The the missing term statement should be followed by the value to the missing term.",
-        "hint_2": "In this case, the missing term the sum of the two parameters."
+        "concept": "Return sends a value back to the caller, while print outputs to the console.",
+        "hint_1": "Return is used to pass a value back to where the function was called.",
+        "hint_2": "Print is used to display information to the user."
       }
     },
     {
       "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Function Execution Order",
+      "prompt": "Arrange the steps in the correct order to execute a function in Python.",
+      "tokens": [
+        "Define the function",
+        "Call the function",
+        "Execute the function body",
+        "Return the result"
+      ],
+      "correctOrder": [
+        "Define the function",
+        "Call the function",
+        "Execute the function body",
+        "Return the result"
+      ],
+      "hint": "Start with defining the function, then call it.",
+      "help": {
+        "concept": "Functions must be defined before they can be called.",
+        "hint_1": "The function definition comes before the function call.",
+        "hint_2": "The function call is what executes the function."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Function Components",
+      "prompt": "Arrange the components of a function definition in the correct order.",
+      "tokens": [
+        "def keyword",
+        "Function name",
+        "Parameters",
+        "Function body"
+      ],
+      "correctOrder": [
+        "def keyword",
+        "Function name",
+        "Parameters",
+        "Function body"
+      ],
+      "hint": "Start with the keyword used to define a function.",
+      "help": {
+        "concept": "A function definition includes a keyword, name, parameters, and body.",
+        "hint_1": "The function definition starts with a keyword.",
+        "hint_2": "Parameters are defined within parentheses after the function name."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Function Keyword",
+      "prompt": "Fill in the blank to define a function: `[blank1] my_function():`",
+      "template": "[blank1] my_function():",
+      "choices": [
+        "def",
+        "function",
+        "define",
+        "fn"
+      ],
+      "correctValue": "def",
+      "hint": "It's a three-letter keyword used to define functions.",
+      "help": {
+        "concept": "The keyword used to define functions is short and starts with 'd'.",
+        "hint_1": "It's the same keyword used in all function definitions.",
+        "hint_2": "The keyword is 'the missing term'."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Function Call Syntax",
+      "prompt": "Complete the function call: `result = add([blank1])`",
+      "template": "result = add([blank1])",
+      "choices": [
+        "3, 5",
+        "3 5",
+        "3; 5",
+        "3: 5"
+      ],
+      "correctValue": "3, 5",
+      "hint": "The function `add` takes two arguments.",
+      "help": {
+        "concept": "Function calls require the correct number of arguments inside parentheses.",
+        "hint_1": "Ensure both arguments are included inside the parentheses.",
+        "hint_2": "The arguments should be separated by a comma."
+      }
+    },
+    {
+      "id": "quiz9",
       "kind": "code_input",
-      "title": "Simple Greeting Function",
-      "prompt": "Write a function `greet` that takes a name as input and prints a greeting message.",
-      "starterCode": "def greet(name):\n    # Your code here\n",
-      "solutionCode": "def greet(name):\n    print(f\"Hello, {name}!\")\n",
+      "title": "Define a Simple Function",
+      "prompt": "Define a function `square` that takes a number and returns its square.",
+      "starterCode": "def square(number):\n    # Your code here\n    pass",
+      "solutionCode": "def square(number):\n    return number * number",
+      "tests": [
+        {
+          "stdin": "4\n",
+          "stdout": "16\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "5\n",
+          "stdout": "25\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the `def` keyword and return the square of the number.",
+      "help": {
+        "concept": "Functions are defined with `def` and can return values using `return`.",
+        "hint_1": "The function should take one parameter.",
+        "hint_2": "Use the `return` statement to return the square of the parameter."
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Function with Parameters",
+      "prompt": "Write a function `multiply` that takes two numbers and returns their product.",
+      "starterCode": "def multiply(a, b):\n    # Your code here\n    pass",
+      "solutionCode": "def multiply(a, b):\n    return a * b",
+      "tests": [
+        {
+          "stdin": "3 4\n",
+          "stdout": "12\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "7 8\n",
+          "stdout": "56\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the `def` keyword and return the product of the two numbers.",
+      "help": {
+        "concept": "Functions can take multiple parameters and return a result.",
+        "hint_1": "The function should take two parameters.",
+        "hint_2": "Use the `return` statement to return the product of the parameters."
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Function with Return Value",
+      "prompt": "Create a function `greet_user` that takes a name and returns a greeting message.",
+      "starterCode": "def greet_user(name):\n    # Your code here\n    pass",
+      "solutionCode": "def greet_user(name):\n    return f\"Hello, {name}!\"",
       "tests": [
         {
           "stdin": "Alice\n",
@@ -126,162 +264,20 @@
         }
       ],
       "recipeType": "fixed_tests",
-      "hint": "Use the `def` keyword to define the function and `print` to display the message.",
+      "hint": "Use the `def` keyword and return a formatted string.",
       "help": {
-        "concept": "The function should take a parameter and use it in a print statement.",
-        "hint_1": "Define the function with a parameter for the name.",
-        "hint_2": "Use an f-string to include the name in the greeting message."
-      }
-    },
-    {
-      "id": "quiz6",
-      "kind": "code_input",
-      "title": "Sum Function",
-      "prompt": "Create a function `sum_numbers` that takes two numbers and returns their sum.",
-      "starterCode": "def sum_numbers(a, b):\n    # Your code here\n",
-      "solutionCode": "def sum_numbers(a, b):\n    return a + b\n",
-      "tests": [
-        {
-          "stdin": "3 4\n",
-          "stdout": "7\n",
-          "match": "exact"
-        },
-        {
-          "stdin": "10 5\n",
-          "stdout": "15\n",
-          "match": "exact"
-        }
-      ],
-      "recipeType": "fixed_tests",
-      "hint": "Use the `return` statement to send back the result.",
-      "help": {
-        "concept": "The function should return the sum of the two parameters.",
-        "hint_1": "Define the function with two parameters.",
-        "hint_2": "Use the `return` statement to return the sum."
-      }
-    },
-    {
-      "id": "quiz7",
-      "kind": "code_input",
-      "title": "Multiply Function",
-      "prompt": "Write a function `multiply` that takes two numbers and returns their product.",
-      "starterCode": "def multiply(a, b):\n    # Your code here\n",
-      "solutionCode": "def multiply(a, b):\n    return a * b\n",
-      "tests": [
-        {
-          "stdin": "2 3\n",
-          "stdout": "6\n",
-          "match": "exact"
-        },
-        {
-          "stdin": "5 5\n",
-          "stdout": "25\n",
-          "match": "exact"
-        }
-      ],
-      "recipeType": "fixed_tests",
-      "hint": "Use the `return` statement to send back the result.",
-      "help": {
-        "concept": "The function should return the product of the two parameters.",
-        "hint_1": "Define the function with two parameters.",
-        "hint_2": "Use the `return` statement to return the product."
-      }
-    },
-    {
-      "id": "quiz8",
-      "kind": "single_choice",
-      "title": "Function Call Syntax",
-      "prompt": "How do you call a function named `calculate` with arguments `5` and `10`?",
-      "options": [
-        "calculate 5, 10",
-        "calculate(5, 10)",
-        "calculate[5, 10]",
-        "calculate{5, 10}"
-      ],
-      "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Use the function name followed by parentheses containing the arguments.",
-      "help": {
-        "concept": "Function calls require the function name and arguments in parentheses.",
-        "hint_1": "The function name is followed by parentheses.",
-        "hint_2": "Place the arguments inside the parentheses."
-      }
-    },
-    {
-      "id": "quiz9",
-      "kind": "multi_choice",
-      "title": "Function Benefits",
-      "prompt": "What are the benefits of using functions in programming?",
-      "options": [
-        "Code reuse",
-        "Easier maintenance",
-        "Increased complexity",
-        "Improved readability"
-      ],
-      "correctOptionIds": [
-        "a",
-        "b",
-        "d"
-      ],
-      "hint": "Think about how functions help in code organization and reuse.",
-      "help": {
-        "concept": "Functions help in organizing code, making it reusable and easier to maintain.",
-        "hint_1": "Functions allow code reuse and reduce repetition.",
-        "hint_2": "They make code easier to read and maintain."
-      }
-    },
-    {
-      "id": "quiz10",
-      "kind": "drag_reorder",
-      "title": "Function Definition Steps",
-      "prompt": "Arrange the steps to define a function in the correct order.",
-      "tokens": [
-        "Use `def` keyword",
-        "Specify function name",
-        "Add parameters in parentheses",
-        "Write function body"
-      ],
-      "correctOrder": [
-        "Use `def` keyword",
-        "Specify function name",
-        "Add parameters in parentheses",
-        "Write function body"
-      ],
-      "hint": "Start with the `def` keyword, then add parameters and the function body.",
-      "help": {
-        "concept": "Defining a function involves specifying its name, parameters, and body.",
-        "hint_1": "Begin with the `def` keyword followed by the function name.",
-        "hint_2": "Include parameters in parentheses and write the function body."
-      }
-    },
-    {
-      "id": "quiz11",
-      "kind": "fill_blank_choice",
-      "title": "Function Parameter",
-      "prompt": "Complete the function to take a parameter `x` and print it.",
-      "template": "def show_value([blank1]):\n    print(x)",
-      "choices": [
-        "x",
-        "value",
-        "number",
-        "item"
-      ],
-      "correctValue": "x",
-      "hint": "Use the parameter in the print statement.",
-      "help": {
-        "concept": "Parameters allow functions to take inputs and use them in their operations.",
-        "hint_1": "Define the function with a parameter `the missing term`.",
-        "hint_2": "Use `print(the missing term)` to display the parameter."
+        "concept": "Functions can return formatted strings using `return`.",
+        "hint_1": "The function should take one parameter, the name.",
+        "hint_2": "Use an f-string to format the greeting message."
       }
     }
   ],
   "projectDraft": {
     "title": "Function Practice Project",
     "stepIds": [
-      "quiz5",
-      "quiz6",
-      "quiz7"
+      "quiz9",
+      "quiz10",
+      "quiz11"
     ]
   }
 }

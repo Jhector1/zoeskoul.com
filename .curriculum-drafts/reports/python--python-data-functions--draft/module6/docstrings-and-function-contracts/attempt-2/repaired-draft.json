@@ -6,12 +6,12 @@
     {
       "id": "sketch1",
       "title": "Understanding Docstrings",
-      "bodyMarkdown": "Docstrings are a way to document your functions in Python. They describe what the function does, its parameters, and its return value. This helps other developers understand your code quickly.\n\nHere's an example:\n\n```python\ndef add(a, b):\n    \"\"\"Add two numbers and return the result.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The sum of a and b.\n    \"\"\"\n    return a + b\n```\n\nTry it yourself: Write a function `subtract` that takes two numbers and returns their difference. Add a docstring to describe its behavior.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "Docstrings are a way to document your functions in Python. They describe what the function does, its parameters, and its return value. This helps other developers understand how to use your function without reading the entire code.\n\n```python\ndef add(a, b):\n    \"\"\"\n    Adds two numbers and returns the result.\n    \n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n    \n    Returns:\n    int: The sum of a and b.\n    \"\"\"\n    return a + b\n```\n\nTry it yourself: Add a docstring to a function you wrote recently. Describe its parameters and return value.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     },
     {
       "id": "sketch2",
       "title": "Function Contracts",
-      "bodyMarkdown": "A function contract specifies what a function expects as input and what it guarantees as output. This is crucial for ensuring that functions are used correctly.\n\nFor example, consider a function that calculates the area of a rectangle:\n\n```python\ndef rectangle_area(width, height):\n    \"\"\"Calculate the area of a rectangle.\n\n    Parameters:\n    width (float): The width of the rectangle.\n    height (float): The height of the rectangle.\n\n    Returns:\n    float: The area of the rectangle.\n    \"\"\"\n    return width * height\n```\n\nThe contract here is that both `width` and `height` should be non-negative numbers, and the function will return a non-negative number representing the area.\n\nYour turn: Write a function `circle_area` that calculates the area of a circle given its radius. Include a docstring that specifies the function contract.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "A function contract specifies what a function expects as input and what it guarantees as output. This is crucial for ensuring that functions are used correctly and consistently.\n\nExample:\n\n```python\ndef divide(numerator, denominator):\n    \"\"\"\n    Divides the numerator by the denominator.\n    \n    Parameters:\n    numerator (float): The number to be divided.\n    denominator (float): The number to divide by. Must not be zero.\n    \n    Returns:\n    float: The result of the division.\n    \n    Raises:\n    ValueError: If the denominator is zero.\n    \"\"\"\n    if denominator == 0:\n        raise ValueError(\"Denominator cannot be zero.\")\n    return numerator / denominator\n```\n\nTry this: Write a function contract for a function that calculates the area of a rectangle.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     }
   ],
   "quizDraft": [
@@ -33,90 +33,91 @@
       "help": {
         "concept": "Docstrings provide documentation for functions, explaining their purpose, parameters, and return values.",
         "hint_1": "Docstrings are used to describe what a function does.",
-        "hint_2": "They help other developers understand the function's purpose and usage."
+        "hint_2": "Docstrings help other developers understand how to use the function."
       }
     },
     {
       "id": "quiz2",
       "kind": "single_choice",
-      "title": "Function Contract",
-      "prompt": "What does a function contract specify?",
+      "title": "Docstring Format",
+      "prompt": "Which of the following is the correct format for a Python docstring?",
       "options": [
-        "The function's execution time",
-        "The function's input and output requirements",
-        "The function's memory usage",
-        "The function's error handling"
+        "# This is a docstring",
+        "\"This is a docstring\"",
+        "// This is a docstring"
       ],
       "correctOptionIds": [
-        "b"
+        "c"
       ],
-      "hint": "Consider what a function needs and what it provides.",
+      "hint": "Consider the structure and placement of docstrings.",
       "help": {
-        "concept": "A function contract specifies the inputs a function expects and the outputs it guarantees.",
-        "hint_1": "Think about the inputs and outputs of a function.",
-        "hint_2": "A function contract defines what the function expects and what it returns."
+        "concept": "Docstrings are enclosed in triple quotes and placed at the beginning of a function.",
+        "hint_1": "Docstrings are written using triple quotes.",
+        "hint_2": "Docstrings are placed right after the function definition."
       }
     },
     {
       "id": "quiz3",
       "kind": "multi_choice",
-      "title": "Components of a Docstring",
-      "prompt": "Which of the following are typically included in a function's docstring?",
+      "title": "Components of a Function Contract",
+      "prompt": "Which of the following are components of a function contract? Select all that apply.",
       "options": [
-        "Function's purpose",
-        "Function's parameters",
-        "Function's return value",
-        "Function's execution time"
-      ],
-      "correctOptionIds": [
-        "a",
-        "b",
-        "c"
-      ],
-      "hint": "Think about what information is useful for understanding a function.",
-      "help": {
-        "concept": "Docstrings typically include a description of the function, its parameters, and its return value.",
-        "hint_1": "Consider what details help describe a function's behavior.",
-        "hint_2": "Docstrings often include parameter descriptions and return value information."
-      }
-    },
-    {
-      "id": "quiz4",
-      "kind": "multi_choice",
-      "title": "Benefits of Function Contracts",
-      "prompt": "What are the benefits of using function contracts?",
-      "options": [
-        "Improves code readability",
-        "Ensures correct function usage",
-        "Increases execution speed",
-        "Facilitates debugging"
+        "Input parameters",
+        "Return type",
+        "Function name",
+        "Exceptions raised"
       ],
       "correctOptionIds": [
         "a",
         "b",
         "d"
       ],
-      "hint": "Consider how function contracts improve code reliability and understanding.",
+      "hint": "Think about what a function contract specifies.",
       "help": {
-        "concept": "Function contracts improve code reliability by clearly defining expected inputs and outputs.",
-        "hint_1": "Function contracts help prevent misuse of functions.",
-        "hint_2": "They make it easier to understand what a function does and how to use it correctly."
+        "concept": "A function contract includes the function's input requirements and output guarantees.",
+        "hint_1": "Consider what the function needs and what it provides.",
+        "hint_2": "Function contracts specify inputs, outputs, and any exceptions."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Benefits of Using Docstrings",
+      "prompt": "What are the benefits of using docstrings in your code? Select all that apply.",
+      "options": [
+        "Improves code readability",
+        "Increases execution speed",
+        "Provides documentation",
+        "Helps with code maintenance"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Consider how docstrings improve code readability and maintenance.",
+      "help": {
+        "concept": "Docstrings improve code readability, provide documentation, and help with maintenance.",
+        "hint_1": "Docstrings make it easier for others to understand your code.",
+        "hint_2": "Docstrings serve as a form of documentation for your functions."
       }
     },
     {
       "id": "quiz5",
       "kind": "drag_reorder",
       "title": "Order of Docstring Sections",
-      "prompt": "Arrange the sections of a typical function docstring in the correct order.",
+      "prompt": "Arrange the sections of a docstring in the correct order.",
       "tokens": [
-        "Description",
+        "Summary",
         "Parameters",
-        "Return Value"
+        "Returns",
+        "Exceptions"
       ],
       "correctOrder": [
-        "Description",
+        "Summary",
         "Parameters",
-        "Return Value"
+        "Returns",
+        "Exceptions"
       ],
       "hint": "Read each piece and arrange them in the order the statement should be understood.",
       "help": {
@@ -131,69 +132,71 @@
       "title": "Steps in Writing a Function Contract",
       "prompt": "Arrange the steps in writing a function contract in the correct order.",
       "tokens": [
-        "Define purpose",
-        "Specify inputs",
-        "Specify outputs"
+        "Define inputs",
+        "Specify outputs",
+        "List exceptions",
+        "Write summary"
       ],
       "correctOrder": [
-        "Define purpose",
-        "Specify inputs",
-        "Specify outputs"
+        "Write summary",
+        "Define inputs",
+        "Specify outputs",
+        "List exceptions"
       ],
-      "hint": "Start by defining the function's purpose, then inputs, and finally outputs.",
+      "hint": "Consider the logical sequence of defining a function contract.",
       "help": {
-        "concept": "Writing a function contract involves defining the function's purpose, inputs, and outputs.",
-        "hint_1": "Begin with the function's purpose.",
-        "hint_2": "Define inputs before outputs."
+        "concept": "Writing a function contract involves defining inputs, outputs, and any exceptions.",
+        "hint_1": "Start by defining what the function needs as input.",
+        "hint_2": "Conclude with what the function guarantees as output."
       }
     },
     {
       "id": "quiz7",
       "kind": "fill_blank_choice",
-      "title": "Docstring Parameter Description",
-      "prompt": "Complete the docstring parameter description: `\"\"\"Calculate the area of a rectangle.\\n\\nParameters:\\nwidth (float): [blank1] of the rectangle.\\nheight (float): The height of the rectangle.\\n\\nReturns:\\nfloat: The area of the rectangle.\\n\"\"\"`",
-      "template": "\"\"\"Calculate the area of a rectangle.\\n\\nParameters:\\nwidth (float): [blank1] of the rectangle.\\nheight (float): The height of the rectangle.\\n\\nReturns:\\nfloat: The area of the rectangle.\\n\"\"\"",
+      "title": "Docstring Placement",
+      "prompt": "Where should a docstring be placed in a function?",
+      "template": "A docstring should be placed [blank1] the function definition.",
       "choices": [
-        "The width",
-        "The length",
-        "The perimeter",
-        "The diagonal"
+        "before",
+        "after",
+        "inside",
+        "outside"
       ],
-      "correctValue": "The width",
-      "hint": "Think about what 'width' represents in a rectangle.",
+      "correctValue": "after",
+      "hint": "Think about the location relative to the function definition.",
       "help": {
-        "concept": "The parameter description should clearly state what the parameter represents.",
-        "hint_1": "the missing term is a dimension of the rectangle.",
-        "hint_2": "It is one of the two dimensions needed to calculate area."
+        "concept": "Docstrings are placed immediately the missing term the function definition.",
+        "hint_1": "Docstrings are not placed at the end of the function.",
+        "hint_2": "Docstrings are placed right the missing term the function header."
       }
     },
     {
       "id": "quiz8",
       "kind": "fill_blank_choice",
-      "title": "Return Value Description",
-      "prompt": "Complete the return value description: `\"\"\"Calculate the area of a rectangle.\\n\\nParameters:\\nwidth (float): The width of the rectangle.\\nheight (float): The height of the rectangle.\\n\\nReturns:\\nfloat: [blank1] of the rectangle.\\n\"\"\"`",
-      "template": "\"\"\"Calculate the area of a rectangle.\\n\\nParameters:\\nwidth (float): The width of the rectangle.\\nheight (float): The height of the rectangle.\\n\\nReturns:\\nfloat: [blank1] of the rectangle.\\n\"\"\"",
+      "title": "Docstring Content",
+      "prompt": "What should a docstring include?",
+      "template": "A docstring should include a summary, parameters, return values, and [blank1].",
       "choices": [
-        "The area",
-        "The perimeter",
-        "The volume",
-        "The diagonal"
+        "exceptions",
+        "variables",
+        "loops",
+        "conditions"
       ],
-      "correctValue": "The area",
-      "hint": "Consider what the function returns.",
+      "correctValue": "exceptions",
+      "hint": "Consider the essential components of a docstring.",
       "help": {
-        "concept": "The return value description should specify what the function outputs.",
-        "hint_1": "The function calculates an area.",
-        "hint_2": "The return value is the result of the missing term calculation."
+        "concept": "A docstring should include a summary, parameters, return values, and the missing term.",
+        "hint_1": "A docstring should describe what the function does.",
+        "hint_2": "A docstring should include information about parameters and return values."
       }
     },
     {
       "id": "quiz9",
       "kind": "code_input",
-      "title": "Function with Docstring",
+      "title": "Write a Function with a Docstring",
       "prompt": "Write a function `multiply` that takes two numbers and returns their product. Include a docstring that describes the function, its parameters, and its return value. Then read the input values, call the function, and print the returned result.",
-      "starterCode": "def multiply(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
-      "solutionCode": "def multiply(a, b):\n    \"\"\"Multiply two numbers and return the result.\n\n    Parameters:\n    a (int or float): The first number.\n    b (int or float): The second number.\n\n    Returns:\n    int or float: The product of a and b.\n    \"\"\"\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "starterCode": "def multiply(a, b):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "solutionCode": "def multiply(a, b):\n    \"\"\"\n    Multiplies two numbers and returns the result.\n    \n    Parameters:\n    a (int or float): The first number.\n    b (int or float): The second number.\n    \n    Returns:\n    int or float: The product of a and b.\n    \"\"\"\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
       "tests": [
         {
           "stdin": "1\n1\n",
@@ -222,10 +225,10 @@
     {
       "id": "quiz10",
       "kind": "code_input",
-      "title": "Function Contract Example",
-      "prompt": "Create a function `divide` that takes two numbers and returns their quotient. Ensure the function includes a docstring that specifies the function contract, including handling division by zero. Then read the input values, call the function, and print the returned result.",
-      "starterCode": "def divide(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
-      "solutionCode": "def divide(a, b):\n    \"\"\"Divide two numbers and return the quotient.\n\n    Parameters:\n    a (int or float): The numerator.\n    b (int or float): The denominator.\n\n    Returns:\n    float: The quotient of a and b, or 'undefined' if b is zero.\n    \"\"\"\n    if b == 0:\n        return 'undefined'\n    return a / b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+      "title": "Function Contract for Division",
+      "prompt": "Write a function `safe_divide` that divides two numbers and handles division by zero by returning `None`. Include a docstring that describes the function, its parameters, and its return value. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "def safe_divide(numerator, denominator):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumerator = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ndenominator = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(safe_divide(numerator, denominator))",
+      "solutionCode": "def safe_divide(numerator, denominator):\n    \"\"\"\n    Divides the numerator by the denominator, returning None if the denominator is zero.\n    \n    Parameters:\n    numerator (float): The number to be divided.\n    denominator (float): The number to divide by.\n    \n    Returns:\n    float or None: The result of the division, or None if division by zero occurs.\n    \"\"\"\n    if denominator == 0:\n        return None\n    return numerator / denominator\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumerator = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ndenominator = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(safe_divide(numerator, denominator))",
       "tests": [
         {
           "stdin": "1\n1\n",
@@ -239,29 +242,34 @@
         }
       ],
       "recipeType": "fixed_tests",
-      "hint": "Read the task \"Function Contract Example\" and identify the required result.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
-        "concept": "This coding exercise checks whether your code produces the requested result for: \"Function Contract Example\".",
-        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-        "hint_2": "Click Run and compare the output panel with the expected result."
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
       }
     },
     {
       "id": "quiz11",
       "kind": "code_input",
-      "title": "Docstring Practice",
-      "prompt": "Write a function `subtract` that takes two numbers and returns their difference. Include a docstring that describes the function, its parameters, and its return value. Then read the input values, call the function, and print the returned result.",
-      "starterCode": "def subtract(a, b):\n    \"\"\"\n    # Write your docstring here\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(subtract(a, b))",
-      "solutionCode": "def subtract(a, b):\n    \"\"\"Subtract two numbers and return the result.\n\n    Parameters:\n    a (int or float): The first number.\n    b (int or float): The second number.\n\n    Returns:\n    int or float: The difference of a and b.\n    \"\"\"\n    return a - b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(subtract(a, b))",
+      "title": "Docstring for a Function with Multiple Parameters",
+      "prompt": "Write a function `calculate_area` that calculates the area of a rectangle given its width and height. Include a docstring that describes the function, its parameters, and its return value. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef calculate_area(width, height):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+      "solutionCode": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef calculate_area(width, height):\n    \"\"\"\n    Calculates the area of a rectangle given its width and height.\n    \n    Parameters:\n    width (float): The width of the rectangle.\n    height (float): The height of the rectangle.\n    \n    Returns:\n    float: The area of the rectangle.\n    \"\"\"\n    return width * height\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
       "tests": [
         {
           "stdin": "1\n1\n",
-          "stdout": "0",
+          "stdout": "1",
           "match": "exact"
         },
         {
           "stdin": "1\n1\n",
-          "stdout": "0",
+          "stdout": "1",
+          "match": "exact"
+        },
+        {
+          "stdin": "2\n2\n",
+          "stdout": "4\n",
           "match": "exact"
         }
       ],
@@ -275,7 +283,7 @@
     }
   ],
   "projectDraft": {
-    "title": "Function Documentation and Contracts",
+    "title": "Docstrings and Function Contracts Project",
     "stepIds": [
       "quiz9",
       "quiz10",

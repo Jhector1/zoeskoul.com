@@ -135,7 +135,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
@@ -155,7 +155,7 @@
         "optionIds": [
           "a",
           "b",
-          "c"
+          "d"
         ]
       }
     },
@@ -175,7 +175,7 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "d"
         ]
       }
     },
@@ -188,16 +188,14 @@
       "tokenIds": [
         "t1",
         "t2",
-        "t3",
-        "t4"
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3",
-          "t4"
+          "t3"
         ]
       }
     },
@@ -252,15 +250,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz9",
       "language": "python",
-      "starterCode": "fruits = ['apple', 'banana']\n# Add 'grape' to the list\n# Remove 'apple' from the list\nprint(fruits)",
+      "starterCode": "# Read input list\nnumbers = list(map(int, input().split()))\n# Write your code below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read input list\nnumbers = list(map(int, input().split()))\n# Write your code below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "fruits = ['apple', 'banana']\n# Add 'grape' to the list\n# Remove 'apple' from the list\nprint(fruits)",
+        "starterCode": "# Read input list\nnumbers = list(map(int, input().split()))\n# Write your code below",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "fruits = ['apple', 'banana']\n# Add 'grape' to the list\n# Remove 'apple' from the list\nprint(fruits)",
+            "content": "# Read input list\nnumbers = list(map(int, input().split()))\n# Write your code below",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -272,15 +279,17 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "['banana', 'grape']\n",
+            "stdin": "3 1 4 1 5",
+            "stdout": "[1, 1, 3, 4, 5, 10]\n",
             "match": "exact"
           },
           {
-            "stdout": "['banana', 'grape']\n",
+            "stdin": "10 20 30",
+            "stdout": "[10, 10, 20, 30]\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "fruits = ['apple', 'banana']\nfruits.append('grape')\nfruits.remove('apple')\nprint(fruits)"
+        "solutionCode": "# Read input list\nnumbers = list(map(int, input().split()))\n# Append 10 to the list\nnumbers.append(10)\n# Sort the list\nnumbers.sort()\n# Print the sorted list\nprint(numbers)"
       }
     },
     {
@@ -290,15 +299,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz10",
       "language": "python",
-      "starterCode": "numbers = [4, 2, 3, 1]\n# Sort the list\nprint(numbers)",
+      "starterCode": "# Read input list\nfruits = input().split()\n# Write your code below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read input list\nfruits = input().split()\n# Write your code below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "numbers = [4, 2, 3, 1]\n# Sort the list\nprint(numbers)",
+        "starterCode": "# Read input list\nfruits = input().split()\n# Write your code below",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "numbers = [4, 2, 3, 1]\n# Sort the list\nprint(numbers)",
+            "content": "# Read input list\nfruits = input().split()\n# Write your code below",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -310,15 +328,17 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "[1, 2, 3, 4]\n",
+            "stdin": "banana apple cherry",
+            "stdout": "['banana', 'cherry']\n",
             "match": "exact"
           },
           {
-            "stdout": "[1, 2, 3, 4]\n",
+            "stdin": "apple banana apple",
+            "stdout": "['banana', 'apple']\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "numbers = [4, 2, 3, 1]\nnumbers.sort()\nprint(numbers)"
+        "solutionCode": "# Read input list\nfruits = input().split()\n# Remove 'apple' from the list\nfruits.remove('apple')\n# Print the modified list\nprint(fruits)"
       }
     },
     {
@@ -328,15 +348,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.quiz11",
       "language": "python",
-      "starterCode": "numbers = [10, 20, 30, 40]\n# Pop the last element and print it",
+      "starterCode": "# Read input list\nnumbers = list(map(int, input().split()))\n# Write your code below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read input list\nnumbers = list(map(int, input().split()))\n# Write your code below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "numbers = [10, 20, 30, 40]\n# Pop the last element and print it",
+        "starterCode": "# Read input list\nnumbers = list(map(int, input().split()))\n# Write your code below",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "numbers = [10, 20, 30, 40]\n# Pop the last element and print it",
+            "content": "# Read input list\nnumbers = list(map(int, input().split()))\n# Write your code below",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -348,15 +377,17 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "40\n",
+            "stdin": "1 2 3 4 5",
+            "stdout": "[1, 2, 3, 4]\n",
             "match": "exact"
           },
           {
-            "stdout": "40\n",
+            "stdin": "10 20 30",
+            "stdout": "[10, 20]\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "numbers = [10, 20, 30, 40]\nlast_number = numbers.pop()\nprint(last_number)"
+        "solutionCode": "# Read input list\nnumbers = list(map(int, input().split()))\n# Remove the last element\nnumbers.pop()\n# Print the modified list\nprint(numbers)"
       }
     }
   ]

@@ -1,61 +1,33 @@
 {
   "title": "Writing Text Files",
-  "summary": "Write output to files using safe file modes.",
+  "summary": "Learn how to write data to text files using Python, ensuring safe file handling and understanding file modes.",
   "minutes": 22,
   "sketchBlocks": [
     {
       "id": "sketch1",
       "title": "Introduction to Writing Files",
-      "bodyMarkdown": "Writing to files in Python is a common task when you need to save data for later use. You can open a file in write mode using the `open()` function. Here's a simple example:\n\n```python\nwith open('output.txt', 'w') as file:\n    file.write('Hello, World!')\n```\n\nThis code opens a file named `output.txt` in write mode and writes 'Hello, World!' to it. The `with` statement ensures the file is properly closed after writing. Try it yourself by changing the text and running the code.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "Writing to files in Python is a common task when you need to save data for later use. You can write text to a file using the `open()` function with the appropriate mode. The most common modes are `w` for writing (which overwrites the file) and `a` for appending (which adds to the end of the file). Always remember to close the file after writing to ensure data is saved properly.\n\n```python\n# Example: Writing to a file\nwith open('output.txt', 'w') as file:\n    file.write('Hello, World!')\n```\n\nIn this example, we open `output.txt` in write mode and write 'Hello, World!' to it. The `with` statement ensures the file is properly closed after writing.\n\n**Try it yourself:** Modify the code to append a new line instead of overwriting the file.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     },
     {
       "id": "sketch2",
       "title": "File Modes Explained",
-      "bodyMarkdown": "When opening files, you can specify different modes:\n- `'w'`: Write mode. Creates a new file or truncates an existing file.\n- `'a'`: Append mode. Writes data to the end of the file without truncating it.\n- `'r'`: Read mode. Opens a file for reading.\n\nExample:\n\n```python\nwith open('log.txt', 'a') as log_file:\n    log_file.write('New log entry\\n')\n```\n\nThis appends a new line to `log.txt`. Try changing the mode to `'w'` and observe the difference.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
-    },
-    {
-      "id": "sketch3",
-      "title": "Handling Exceptions",
-      "bodyMarkdown": "When working with files, it's important to handle exceptions to avoid crashes. Use `try` and `except` blocks to manage errors:\n\n```python\ntry:\n    with open('data.txt', 'r') as file:\n        content = file.read()\nexcept FileNotFoundError:\n    print('File not found. Please check the file path.')\n```\n\nThis code attempts to read `data.txt` and prints an error message if the file doesn't exist. Your turn: try modifying the file path to see the exception handling in action.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+      "bodyMarkdown": "File modes determine how a file is opened and what operations can be performed on it. Here are some common modes:\n\n- `r`: Read mode. Opens a file for reading (default mode).\n- `w`: Write mode. Opens a file for writing, truncating the file first.\n- `a`: Append mode. Opens a file for writing, appending to the end of the file.\n- `r+`: Read and write mode. Opens a file for both reading and writing.\n\n**Your turn:** Try opening a file in append mode and add a new line of text."
     }
   ],
   "quizDraft": [
     {
       "id": "quiz1",
       "kind": "single_choice",
-      "title": "File Write Mode",
-      "prompt": "What happens if you open a file in write mode ('w') and the file already exists?",
+      "title": "Understanding File Modes",
+      "prompt": "Which file mode should you use to add new content to the end of an existing file without deleting its current content?",
       "options": [
-        "The file is deleted.",
-        "The file is truncated.",
-        "The file is appended.",
-        "The file is read-only."
-      ],
-      "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Consider what 'write mode' does to existing files.",
-      "help": {
-        "concept": "Opening a file in write mode ('w') will truncate the file if it already exists.",
-        "hint_1": "Write mode ('w') truncates the file.",
-        "hint_2": "The file's contents will be erased if it exists."
-      }
-    },
-    {
-      "id": "quiz2",
-      "kind": "multi_choice",
-      "title": "File Modes",
-      "prompt": "Which of the following are valid file modes in Python?",
-      "options": [
-        "'r'",
-        "'w'",
-        "'x'",
-        "'a'"
-      ],
-      "correctOptionIds": [
+        "r",
+        "w",
         "a",
-        "b",
-        "d"
+        "r+"
+      ],
+      "correctOptionIds": [
+        "c"
       ],
       "hint": "Use the question wording and the lesson example to narrow the choices.",
       "help": {
@@ -65,64 +37,99 @@
       }
     },
     {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "File Handling Best Practices",
+      "prompt": "Select all the best practices when writing to a file in Python.",
+      "options": [
+        "Always close the file after writing",
+        "Use `with` statement for automatic file closure",
+        "Ignore exceptions during file operations",
+        "Overwrite files without checking"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Consider practices that ensure data integrity and resource management.",
+      "help": {
+        "concept": "Best practices help ensure data is written correctly and resources are managed efficiently.",
+        "hint_1": "Think about how to ensure the file is closed properly.",
+        "hint_2": "Consider how to handle errors during file operations."
+      }
+    },
+    {
       "id": "quiz3",
       "kind": "drag_reorder",
       "title": "Steps to Write to a File",
-      "prompt": "Arrange the steps to write 'Hello, World!' to a file in the correct order.",
+      "prompt": "Arrange the steps to write 'Hello, World!' to a file named 'greeting.txt'.",
       "tokens": [
-        "Open the file in write mode",
+        "Open 'greeting.txt' in write mode",
         "Write 'Hello, World!' to the file",
         "Close the file"
       ],
       "correctOrder": [
-        "Open the file in write mode",
+        "Open 'greeting.txt' in write mode",
         "Write 'Hello, World!' to the file",
         "Close the file"
       ],
-      "hint": "Start with opening the file, then writing, and finally closing it.",
+      "hint": "Start with opening the file and end with closing it.",
       "help": {
-        "concept": "Writing to a file involves opening it, writing data, and closing it.",
-        "hint_1": "Begin with opening the file in write mode.",
-        "hint_2": "End with closing the file."
+        "concept": "Writing to a file involves opening, writing, and closing the file.",
+        "hint_1": "Opening the file is the first step.",
+        "hint_2": "Closing the file is the last step."
       }
     },
     {
       "id": "quiz4",
       "kind": "fill_blank_choice",
-      "title": "File Mode for Appending",
-      "prompt": "Fill in the blank to open a file for appending data.",
-      "template": "with open('file.txt', [blank1]) as file:",
+      "title": "File Mode for Overwriting",
+      "prompt": "To overwrite a file's content, use the `[blank1]` mode.",
+      "template": "To overwrite a file's content, use the `[blank1]` mode.",
       "choices": [
-        "'r'",
-        "'w'",
-        "'a'",
-        "'x'"
+        "r",
+        "w",
+        "a",
+        "r+"
       ],
-      "correctValue": "'a'",
+      "correctValue": "w",
       "hint": "Focus on the missing concept rather than the exact missing term.",
       "help": {
         "concept": "The blank should be completed with the term that fits the job being described.",
-        "hint_1": "Think about what the missing part needs to do in the statement.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
         "hint_2": "Choose the term that best completes the meaning of the statement."
       }
     },
     {
       "id": "quiz5",
       "kind": "code_input",
-      "title": "Write to a File",
-      "prompt": "Write a Python program that writes 'Hello, ZoeSkoul!' to a file named 'greeting.txt'.",
-      "starterCode": "# Write 'Hello, ZoeSkoul!' to 'greeting.txt'\nwith open('greeting.txt', 'w') as file:\n    # Your code here",
-      "solutionCode": "with open('greeting.txt', 'w') as file:\n    file.write('Hello, ZoeSkoul!')",
+      "title": "Write a List to a File",
+      "prompt": "Write a Python program that writes each item from a list of strings to a new line in a file named 'items.txt'.",
+      "starterCode": "items = ['apple', 'banana', 'cherry']\n\n# Open the file in write mode\nwith open('items.txt', 'w') as file:\n    # Write each item to the file\n    pass",
+      "solutionCode": "items = ['apple', 'banana', 'cherry']\n\n# Open the file in write mode\nwith open('items.txt', 'w') as file:\n    # Write each item to the file\n    for item in items:\n        file.write(item + '\\n')",
       "tests": [
         {
-          "stdout": "",
-          "match": "exact"
+          "stdout": "13",
+          "stdin": "12\n",
+          "match": "includes"
+        },
+        {
+          "stdout": "21",
+          "stdin": "20\n",
+          "match": "includes"
+        }
+      ],
+      "files": [
+        {
+          "path": "items.txt",
+          "content": "",
+          "readOnly": false
         }
       ],
       "recipeType": "fixed_tests",
-      "hint": "Read the task \"Write to a File\" and identify the required result.",
+      "hint": "Read the task \"Write a List to a File\" and identify the required result.",
       "help": {
-        "concept": "This coding exercise checks whether your code produces the requested result for: \"Write to a File\".",
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Write a List to a File\".",
         "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
         "hint_2": "Click Run and compare the output panel with the expected result."
       }
@@ -131,13 +138,26 @@
       "id": "quiz6",
       "kind": "code_input",
       "title": "Append to a File",
-      "prompt": "Write a Python program that appends 'Welcome to ZoeSkoul!' to a file named 'welcome.txt'.",
-      "starterCode": "# Append 'Welcome to ZoeSkoul!' to 'welcome.txt'\nwith open('welcome.txt', 'a') as file:\n    # Your code here",
-      "solutionCode": "with open('welcome.txt', 'a') as file:\n    file.write('Welcome to ZoeSkoul!')",
+      "prompt": "Modify the program to append a new item to 'items.txt' without overwriting the existing content.",
+      "starterCode": "items = ['apple', 'banana', 'cherry']\n\nnew_item = 'date'\n\n# Open the file in append mode\nwith open('items.txt', 'a') as file:\n    # Append the new item to the file\n    pass",
+      "solutionCode": "items = ['apple', 'banana', 'cherry']\n\nnew_item = 'date'\n\n# Open the file in append mode\nwith open('items.txt', 'a') as file:\n    # Append the new item to the file\n    file.write(new_item + '\\n')",
       "tests": [
         {
-          "stdout": "",
-          "match": "exact"
+          "stdout": "13",
+          "stdin": "12\n",
+          "match": "includes"
+        },
+        {
+          "stdout": "21",
+          "stdin": "20\n",
+          "match": "includes"
+        }
+      ],
+      "files": [
+        {
+          "path": "items.txt",
+          "content": "apple\nbanana\ncherry\n",
+          "readOnly": false
         }
       ],
       "recipeType": "fixed_tests",
@@ -150,44 +170,65 @@
     },
     {
       "id": "quiz7",
-      "kind": "code_input",
-      "title": "Handle File Not Found",
-      "prompt": "Write a Python program that reads 'data.txt' and handles the FileNotFoundError if the file does not exist.",
-      "starterCode": "# Read 'data.txt' and handle FileNotFoundError\ntry:\n    with open('data.txt', 'r') as file:\n        # Your code here\nexcept FileNotFoundError:\n    # Handle the error",
-      "solutionCode": "try:\n    with open('data.txt', 'r') as file:\n        content = file.read()\nexcept FileNotFoundError:\n    print('File not found. Please check the file path.')",
-      "tests": [
-        {
-          "stdout": "File not found. Please check the file path.",
-          "match": "includes"
-        }
-      ],
-      "recipeType": "fixed_tests",
-      "hint": "Read the task \"Handle File Not Found\" and identify the required result.",
-      "help": {
-        "concept": "This coding exercise checks whether your code produces the requested result for: \"Handle File Not Found\".",
-        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-        "hint_2": "Click Run and compare the output panel with the expected result."
-      }
-    },
-    {
-      "id": "policy_single_choice_1",
       "kind": "single_choice",
-      "title": "Identify the result of running code",
-      "prompt": "In \"Writing Text Files\", what should you check after running a Python program?",
+      "title": "Closing Files",
+      "prompt": "What is the main reason for closing a file after writing to it in Python?",
       "options": [
-        "The output shown by the program",
-        "Only the file name",
-        "Whether Python deletes the code",
-        "Whether comments are printed automatically"
+        "To save changes and free resources",
+        "To delete the file",
+        "To lock the file",
+        "To encrypt the file"
       ],
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Running code lets you inspect what the program displays.",
+      "hint": "Consider what happens to the data if the file is not closed.",
       "help": {
-        "concept": "When you run Python code, the most important feedback is usually the output or error message.",
-        "hint_1": "Look at the output panel.",
-        "hint_2": "Printed values appear after the program runs."
+        "concept": "Closing a file ensures that all data is properly saved and resources are freed.",
+        "hint_1": "Think about data integrity and resource management.",
+        "hint_2": "Closing a file ensures data is written and resources are released."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "title": "File Writing Process",
+      "prompt": "Arrange the steps in the correct order for writing data to a file.",
+      "tokens": [
+        "Open the file in the desired mode",
+        "Write data to the file",
+        "Close the file"
+      ],
+      "correctOrder": [
+        "Open the file in the desired mode",
+        "Write data to the file",
+        "Close the file"
+      ],
+      "hint": "Start with opening the file and end with closing it.",
+      "help": {
+        "concept": "The process involves opening, writing, and closing the file.",
+        "hint_1": "Opening the file is the first step.",
+        "hint_2": "Closing the file is the last step."
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "fill_blank_choice",
+      "title": "Appending Mode",
+      "prompt": "To add content to the end of a file without removing existing content, use the `[blank1]` mode.",
+      "template": "To add content to the end of a file without removing existing content, use the `[blank1]` mode.",
+      "choices": [
+        "r",
+        "w",
+        "a",
+        "r+"
+      ],
+      "correctValue": "a",
+      "hint": "Focus on the missing concept rather than the exact missing term.",
+      "help": {
+        "concept": "The blank should be completed with the term that fits the job being described.",
+        "hint_1": "Think about what the missing part needs to do in the statement.",
+        "hint_2": "Choose the term that best completes the meaning of the statement."
       }
     },
     {
@@ -213,54 +254,38 @@
       }
     },
     {
-      "id": "policy_drag_reorder_1",
-      "kind": "drag_reorder",
-      "title": "Order the run-and-check workflow",
-      "prompt": "Put the steps in order for practicing \"Writing Text Files\".",
-      "tokens": [
-        "Write a small piece of Python code",
-        "Run the code",
-        "Read the output or error message"
+      "id": "policy_code_input_1",
+      "kind": "code_input",
+      "title": "Print whether a number is positive",
+      "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+      "starterCode": "n = int(input())\n# Your code here",
+      "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
+      "tests": [
+        {
+          "stdout": "True\n",
+          "stdin": "5\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "False\n",
+          "stdin": "0\n",
+          "match": "exact"
+        }
       ],
-      "correctOrder": [
-        "Write a small piece of Python code",
-        "Run the code",
-        "Read the output or error message"
-      ],
-      "hint": "You need code before you can run it.",
+      "hint": "Use a conditional check and return a boolean result.",
       "help": {
-        "concept": "A basic Python workflow is write code, run it, then inspect the result.",
-        "hint_1": "The output appears after running.",
-        "hint_2": "Errors are also useful feedback."
-      }
-    },
-    {
-      "id": "policy_fill_blank_choice_1",
-      "kind": "fill_blank_choice",
-      "title": "Choose the missing Python keyword",
-      "prompt": "Fill in the missing Python keyword so the statement is valid.",
-      "template": "___ value > 0:\n    print('positive')",
-      "choices": [
-        "if",
-        "for",
-        "def",
-        "class"
-      ],
-      "correctValue": "if",
-      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-      "help": {
-        "concept": "The blank should be filled with the term that makes the statement accurate.",
-        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
-      }
+        "concept": "A conditional can decide which boolean value to print based on a comparison.",
+        "hint_1": "Compare the number with zero inside an if statement.",
+        "hint_2": "Print True when the condition passes; otherwise print False."
+      },
+      "recipeType": "fixed_tests"
     }
   ],
   "projectDraft": {
-    "title": "File Writing and Exception Handling",
+    "title": "Writing Text Files Project",
     "stepIds": [
       "quiz5",
-      "quiz6",
-      "quiz7"
+      "quiz6"
     ]
   }
 }

@@ -125,13 +125,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz1",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
@@ -151,7 +149,7 @@
         "optionIds": [
           "a",
           "b",
-          "c"
+          "d"
         ]
       }
     },
@@ -163,13 +161,15 @@
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz3",
       "tokenIds": [
         "t1",
-        "t2"
+        "t2",
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
-          "t2"
+          "t2",
+          "t3"
         ]
       }
     },
@@ -182,7 +182,7 @@
       "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "'A'"
+        "value": "'grade'"
       }
     },
     {
@@ -192,15 +192,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz5",
       "language": "python",
-      "starterCode": "def update_age(student, new_age):\n    # Update the age in the student dictionary\n    return student\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))",
+      "starterCode": "def update_age(student, new_age):\n    # Update the age here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def update_age(student, new_age):\n    # Update the age here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def update_age(student, new_age):\n    # Update the age in the student dictionary\n    return student\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))",
+        "starterCode": "def update_age(student, new_age):\n    # Update the age here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def update_age(student, new_age):\n    # Update the age in the student dictionary\n    return student\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))",
+            "content": "def update_age(student, new_age):\n    # Update the age here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -212,17 +221,17 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "{'name': 'Alice', 'age': 23}\n25\n",
-            "stdout": "{'name': 'Alice', 'age': 25}\n",
+            "stdin": "{'name': 'Alice', 'age': 25}\n30",
+            "stdout": "None",
             "match": "exact"
           },
           {
-            "stdin": "{'name': 'Bob', 'age': 30}\n35\n",
-            "stdout": "{'name': 'Bob', 'age': 35}\n",
+            "stdin": "{'name': 'Bob', 'age': 22}\n23",
+            "stdout": "None",
             "match": "exact"
           }
         ],
-        "solutionCode": "def update_age(student, new_age):\n    student['age'] = new_age\n    return student\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))"
+        "solutionCode": "def update_age(student, new_age):\n    student['age'] = new_age\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))"
       }
     },
     {
@@ -258,7 +267,8 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "b",
+          "d"
         ]
       }
     },
@@ -270,15 +280,13 @@
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz8",
       "tokenIds": [
         "t1",
-        "t2",
-        "t3"
+        "t2"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
-          "t2",
-          "t3"
+          "t2"
         ]
       }
     },
@@ -291,7 +299,7 @@
       "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "values"
+        "value": "key"
       }
     },
     {
@@ -301,15 +309,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz10",
       "language": "python",
-      "starterCode": "def remove_course(student, course):\n    # Remove the course from the student's course list\n    return student\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))",
+      "starterCode": "def add_course(student, course):\n    # Add the course to the courses list\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def add_course(student, course):\n    # Add the course to the courses list\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def remove_course(student, course):\n    # Remove the course from the student's course list\n    return student\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))",
+        "starterCode": "def add_course(student, course):\n    # Add the course to the courses list\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def remove_course(student, course):\n    # Remove the course from the student's course list\n    return student\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))",
+            "content": "def add_course(student, course):\n    # Add the course to the courses list\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -321,17 +338,17 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "{'name': 'Alice', 'age': 23, 'courses': ['Math', 'Science']}\nMath\n",
-            "stdout": "{'name': 'Alice', 'age': 23, 'courses': ['Science']}\n",
+            "stdin": "{'name': 'Alice', 'age': 25, 'courses': ['Math']}\nScience",
+            "stdout": "None",
             "match": "exact"
           },
           {
-            "stdin": "{'name': 'Bob', 'age': 30, 'courses': ['History', 'Art']}\nArt\n",
-            "stdout": "{'name': 'Bob', 'age': 30, 'courses': ['History']}\n",
+            "stdin": "{'name': 'Bob', 'age': 22, 'courses': ['History']}\nArt",
+            "stdout": "None",
             "match": "exact"
           }
         ],
-        "solutionCode": "def remove_course(student, course):\n    student['courses'].remove(course)\n    return student\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))"
+        "solutionCode": "def add_course(student, course):\n    student['courses'].append(course)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))"
       }
     },
     {
@@ -341,15 +358,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz11",
       "language": "python",
-      "starterCode": "def add_course(student, course):\n    # Add the course to the student's course list\n    return student\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))",
+      "starterCode": "def remove_course(student, course):\n    # Remove the course from the courses list if it exists\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def remove_course(student, course):\n    # Remove the course from the courses list if it exists\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def add_course(student, course):\n    # Add the course to the student's course list\n    return student\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))",
+        "starterCode": "def remove_course(student, course):\n    # Remove the course from the courses list if it exists\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def add_course(student, course):\n    # Add the course to the student's course list\n    return student\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))",
+            "content": "def remove_course(student, course):\n    # Remove the course from the courses list if it exists\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -361,17 +387,17 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "{'name': 'Alice', 'age': 23, 'courses': ['Math']}\nScience\n",
-            "stdout": "{'name': 'Alice', 'age': 23, 'courses': ['Math', 'Science']}\n",
+            "stdin": "{'name': 'Alice', 'age': 25, 'courses': ['Math', 'Science']}\nMath",
+            "stdout": "None",
             "match": "exact"
           },
           {
-            "stdin": "{'name': 'Bob', 'age': 30, 'courses': ['History']}\nArt\n",
-            "stdout": "{'name': 'Bob', 'age': 30, 'courses': ['History', 'Art']}\n",
+            "stdin": "{'name': 'Bob', 'age': 22, 'courses': ['History', 'Art']}\nArt",
+            "stdout": "None",
             "match": "exact"
           }
         ],
-        "solutionCode": "def add_course(student, course):\n    student['courses'].append(course)\n    return student\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))"
+        "solutionCode": "def remove_course(student, course):\n    if course in student['courses']:\n        student['courses'].remove(course)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))"
       }
     }
   ]

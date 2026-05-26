@@ -45,7 +45,22 @@ describe("buildTopicAuthoringDraftPrompt", () => {
         expect(prompt.system).toContain("Required exercise counts");
         expect(prompt.system).toContain("fill_blank_choice: 2");
     });
+    it("does not include SQL-specific hint wording for Python authoring prompts", () => {
+        const prompt = buildTopicAuthoringDraftPrompt({
+            locale: "en",
+            seed: {
+                profileId: "python",
+                exercisePolicy: undefined,
+            } as any,
+            shape: {} as any,
+        });
 
+        expect(prompt.system).not.toMatch(/\bSQL query\b/i);
+        expect(prompt.system).not.toMatch(/\bWHERE clause\b/i);
+        expect(prompt.system).toContain(
+            "Do not give the final answer, final option letter, final exact filled value, or full code solution in hints.",
+        );
+    });
     it("includes sql dataset rules for sql profile seeds", () => {
         const prompt = buildTopicAuthoringDraftPrompt({
             locale: "en",

@@ -73,6 +73,77 @@ describe("normalizeTopicAuthoringDraft", () => {
         ]);
     });
 
+    it("preserves workspaceExpectations for code_input exercises", () => {
+        const normalized = normalizeTopicAuthoringDraft({
+            title: "Topic",
+            summary: "Summary",
+            minutes: 20,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "code-1",
+                    kind: "code_input",
+                    title: "Code",
+                    prompt: "Prompt",
+                    starterCode: "# start\n",
+                    solutionCode: "print('ok')\n",
+                    workspaceExpectations: {
+                        requiredFiles: ["helpers/formatting.py"],
+                        requiredFolders: ["helpers"],
+                    },
+                    tests: [
+                        { stdout: "ok\n", match: "exact" },
+                    ],
+                    hint: "Hint",
+                    help: {
+                        concept: "Concept",
+                        hint_1: "Hint 1",
+                        hint_2: "Hint 2",
+                    },
+                },
+            ],
+        } as any);
+
+        const exercise = normalized.quizDraft[0] as any;
+        expect(exercise.workspaceExpectations).toEqual({
+            requiredFiles: ["helpers/formatting.py"],
+            requiredFolders: ["helpers"],
+        });
+    });
+
+    it("throws on unsafe workspaceExpectations paths", () => {
+        expect(() =>
+            normalizeTopicAuthoringDraft({
+                title: "Topic",
+                summary: "Summary",
+                minutes: 20,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        title: "Code",
+                        prompt: "Prompt",
+                        starterCode: "# start\n",
+                        solutionCode: "print('ok')\n",
+                        workspaceExpectations: {
+                            requiredFiles: ["../secret.txt"],
+                        },
+                        tests: [
+                            { stdout: "ok\n", match: "exact" },
+                        ],
+                        hint: "Hint",
+                        help: {
+                            concept: "Concept",
+                            hint_1: "Hint 1",
+                            hint_2: "Hint 2",
+                        },
+                    },
+                ],
+            } as any),
+        ).toThrow(/workspace|path|unsafe|invalid/i);
+    });
+
     it("uses the Python profile for default starter code", () => {
         const normalized = normalizeTopicAuthoringDraft(
             {

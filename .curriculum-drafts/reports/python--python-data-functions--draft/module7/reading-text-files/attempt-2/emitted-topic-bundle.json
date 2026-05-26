@@ -27,13 +27,6 @@
       "height": 420
     },
     {
-      "id": "sketch1",
-      "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.sketch1.title",
-      "sketchId": "sketch2",
-      "height": 420
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.quiz.title",
@@ -95,12 +88,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch1.title",
       "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch1.bodyMarkdown"
-    },
-    {
-      "id": "sketch2",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch2.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -154,8 +141,8 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "c",
+          "d"
         ]
       }
     },
@@ -175,7 +162,7 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "b"
         ]
       }
     },
@@ -228,7 +215,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "w"
+        "value": "open"
       }
     },
     {
@@ -240,7 +227,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "readline()"
+        "value": "read"
       }
     },
     {
@@ -250,28 +237,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz9",
       "language": "python",
-      "starterCode": "# Write your answer below",
+      "starterCode": "# Open the file in read mode\nfile = open('data.txt', 'r')\n\n# Read the contents\n# Print the contents\n\n# Close the file\nfile.close()",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your answer below",
+          "content": "# Open the file in read mode\nfile = open('data.txt', 'r')\n\n# Read the contents\n# Print the contents\n\n# Close the file\nfile.close()",
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "data.txt",
-          "content": "Hello, World!\nThis is a test file."
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your answer below",
+        "starterCode": "# Open the file in read mode\nfile = open('data.txt', 'r')\n\n# Read the contents\n# Print the contents\n\n# Close the file\nfile.close()",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your answer below",
+            "content": "# Open the file in read mode\nfile = open('data.txt', 'r')\n\n# Read the contents\n# Print the contents\n\n# Close the file\nfile.close()",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -280,7 +263,8 @@
         "files": [
           {
             "path": "data.txt",
-            "content": "Hello, World!\nThis is a test file."
+            "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+            "readOnly": false
           }
         ]
       },
@@ -289,29 +273,29 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "Hello, World!\nThis is a test file.\n",
+            "stdout": "Data Science is fun!",
             "match": "exact",
             "files": [
               {
                 "path": "data.txt",
-                "content": "Hello, World!\nThis is a test file.",
-                "readOnly": true
+                "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+                "readOnly": false
               }
             ]
           },
           {
-            "stdout": "Python is fun!\nLet's learn more.\n",
+            "stdout": "Data Science is fun!",
             "match": "exact",
             "files": [
               {
                 "path": "data.txt",
-                "content": "Python is fun!\nLet's learn more.",
-                "readOnly": true
+                "content": "Python is fun!\nLet's read files.\n\nEnd of file.",
+                "readOnly": false
               }
             ]
           }
         ],
-        "solutionCode": "with open('data.txt', 'r') as file:\n    content = file.read()\n    print(content)"
+        "solutionCode": "# Open the file in read mode\nfile = open('data.txt', 'r')\n\n# Read the contents\ncontent = file.read()\n\n# Print the contents\nprint(content)\n\n# Close the file\nfile.close()"
       }
     },
     {
@@ -321,28 +305,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz10",
       "language": "python",
-      "starterCode": "# Write your answer below",
+      "starterCode": "file = open('data.txt', 'r')\ncontent = file.read()\n\n# Use 'with' to open the file\nwith open('data.txt', 'r') as file:\n    # Read the contents\n    # Print the contents",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your answer below",
+          "content": "file = open('data.txt', 'r')\ncontent = file.read()\n\n# Use 'with' to open the file\nwith open('data.txt', 'r') as file:\n    # Read the contents\n    # Print the contents",
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "lines.txt",
-          "content": "First line\nSecond line\nThird line\n"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your answer below",
+        "starterCode": "file = open('data.txt', 'r')\ncontent = file.read()\n\n# Use 'with' to open the file\nwith open('data.txt', 'r') as file:\n    # Read the contents\n    # Print the contents",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your answer below",
+            "content": "file = open('data.txt', 'r')\ncontent = file.read()\n\n# Use 'with' to open the file\nwith open('data.txt', 'r') as file:\n    # Read the contents\n    # Print the contents",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -350,8 +330,9 @@
         ],
         "files": [
           {
-            "path": "lines.txt",
-            "content": "First line\nSecond line\nThird line\n"
+            "path": "data.txt",
+            "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+            "readOnly": false
           }
         ]
       },
@@ -360,29 +341,29 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "First line\nSecond line\nThird line\n",
+            "stdout": "Data Science is fun!",
             "match": "exact",
             "files": [
               {
-                "path": "lines.txt",
-                "content": "First line\nSecond line\nThird line\n",
-                "readOnly": true
+                "path": "data.txt",
+                "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+                "readOnly": false
               }
             ]
           },
           {
-            "stdout": "Line one\nLine two\nLine three\n",
+            "stdout": "Data Science is fun!",
             "match": "exact",
             "files": [
               {
-                "path": "lines.txt",
-                "content": "Line one\nLine two\nLine three\n",
-                "readOnly": true
+                "path": "data.txt",
+                "content": "Python is fun!\nLet's read files.\n\nEnd of file.",
+                "readOnly": false
               }
             ]
           }
         ],
-        "solutionCode": "with open('lines.txt', 'r') as file:\n    for line in file:\n        print(line.strip())"
+        "solutionCode": "file = open('data.txt', 'r')\ncontent = file.read()\n\n# Use 'with' to open the file\nwith open('data.txt', 'r') as file:\n    # Read the contents\n    content = file.read()\n    \n    # Print the contents\n    print(content)"
       }
     },
     {
@@ -392,28 +373,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz11",
       "language": "python",
-      "starterCode": "# Write your answer below",
+      "starterCode": "# Open the file in read mode\nfile = open('data.txt', 'r')\n\n# Iterate over each line\nfor line in file:\n    # Print the line\n\n# Close the file\nfile.close()",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your answer below",
+          "content": "# Open the file in read mode\nfile = open('data.txt', 'r')\n\n# Iterate over each line\nfor line in file:\n    # Print the line\n\n# Close the file\nfile.close()",
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "count.txt",
-          "content": "line 1\nline 2\nline 3\n"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your answer below",
+        "starterCode": "# Open the file in read mode\nfile = open('data.txt', 'r')\n\n# Iterate over each line\nfor line in file:\n    # Print the line\n\n# Close the file\nfile.close()",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your answer below",
+            "content": "# Open the file in read mode\nfile = open('data.txt', 'r')\n\n# Iterate over each line\nfor line in file:\n    # Print the line\n\n# Close the file\nfile.close()",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -421,8 +398,9 @@
         ],
         "files": [
           {
-            "path": "count.txt",
-            "content": "line 1\nline 2\nline 3\n"
+            "path": "data.txt",
+            "content": "Hello, World!\nThis is a test file.\nAnother line.",
+            "readOnly": false
           }
         ]
       },
@@ -431,29 +409,29 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "3\n",
+            "stdout": "Data Science is fun!",
             "match": "exact",
             "files": [
               {
-                "path": "count.txt",
-                "content": "line 1\nline 2\nline 3\n",
-                "readOnly": true
+                "path": "data.txt",
+                "content": "Hello, World!\nThis is a test file.\nAnother line.",
+                "readOnly": false
               }
             ]
           },
           {
-            "stdout": "5\n",
+            "stdout": "Data Science is fun!",
             "match": "exact",
             "files": [
               {
-                "path": "count.txt",
-                "content": "line 1\nline 2\nline 3\nline 4\nline 5\n",
-                "readOnly": true
+                "path": "data.txt",
+                "content": "Python is fun!\nLet's read files.\nEnd of file.",
+                "readOnly": false
               }
             ]
           }
         ],
-        "solutionCode": "with open('count.txt', 'r') as file:\n    line_count = 0\n    for line in file:\n        line_count += 1\n    print(line_count)"
+        "solutionCode": "# Open the file in read mode\nfile = open('data.txt', 'r')\n\n# Iterate over each line\nfor line in file:\n    # Print the line\n    print(line, end='')\n\n# Close the file\nfile.close()"
       }
     }
   ]

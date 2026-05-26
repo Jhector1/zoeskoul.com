@@ -6,12 +6,12 @@
     {
       "id": "sketch1",
       "title": "Understanding List Mutation",
-      "bodyMarkdown": "Lists in Python are mutable, meaning you can change their content without changing their identity. This is a powerful feature that allows you to modify lists in place using various methods.\n\n### Example: Using `append`\n```python\nfruits = ['apple', 'banana']\nfruits.append('cherry')\nprint(fruits)\n```\nThis code adds 'cherry' to the end of the `fruits` list. Try it yourself by adding another fruit to the list.\n\n### Example: Using `remove`\n```python\nfruits.remove('banana')\nprint(fruits)\n```\nThis code removes 'banana' from the list. What happens if you try to remove an item that isn't there? Try it and see!"
+      "bodyMarkdown": "Lists in Python are mutable, meaning you can change their content without changing their identity. This is different from immutable types like strings or tuples. When you use methods like `append`, `remove`, or `pop`, you modify the list in place.\n\n```python\nfruits = ['apple', 'banana', 'cherry']\nfruits.append('date')\nprint(fruits)  # Output: ['apple', 'banana', 'cherry', 'date']\n```\n\nTry it yourself: Add a new fruit to the list and print the result."
     },
     {
       "id": "sketch2",
-      "title": "List Methods: `pop` and `sort`",
-      "bodyMarkdown": "The `pop` method removes and returns the last item from the list, or the item at a specified index.\n\n### Example: Using `pop`\n```python\nnumbers = [1, 2, 3, 4]\nlast_number = numbers.pop()\nprint(numbers)\nprint(last_number)\n```\nThis code removes the last number from the list and prints it. Try popping a number from a specific index.\n\nThe `sort` method sorts the list in place.\n\n### Example: Using `sort`\n```python\nnumbers = [4, 2, 3, 1]\nnumbers.sort()\nprint(numbers)\n```\nThis code sorts the numbers in ascending order. Try sorting a list of strings!"
+      "title": "Sorting Lists",
+      "bodyMarkdown": "The `sort` method sorts a list in place, meaning the original list is modified. You can also use the `sorted` function to return a new sorted list without changing the original.\n\n```python\nnumbers = [3, 1, 4, 1, 5, 9]\nnumbers.sort()\nprint(numbers)  # Output: [1, 1, 3, 4, 5, 9]\n```\n\nTry it yourself: Sort a list of numbers and print the sorted list."
     }
   ],
   "quizDraft": [
@@ -23,14 +23,14 @@
       "hint": "Think about how `append` modifies the list.",
       "help": {
         "concept": "The `append` method adds an element to the end of the list.",
-        "hint_1": "`append` adds a single element to the list.",
+        "hint_1": "`append` adds an element to the end of the list.",
         "hint_2": "`append` modifies the list in place by adding an element at the end."
       },
       "options": [
         "Adds an element to the end of the list",
         "Removes the last element of the list",
         "Sorts the list",
-        "Clears the list"
+        "Reverses the list"
       ],
       "correctOptionIds": [
         "a"
@@ -39,29 +39,29 @@
     {
       "id": "quiz2",
       "kind": "single_choice",
-      "title": "List Remove Method",
-      "prompt": "What happens if you try to remove an element that is not in the list using `remove`?",
-      "hint": "Consider what `remove` does when the element is missing.",
+      "title": "List Pop Method",
+      "prompt": "What does the `pop` method do when called on a list without any arguments?",
+      "hint": "Consider what happens to the last element of the list.",
       "help": {
-        "concept": "The `remove` method raises an error if the element is not found.",
-        "hint_1": "`remove` will not silently fail if the element is missing.",
-        "hint_2": "An error is raised if the element is not in the list."
+        "concept": "The `pop` method removes and returns the last element of the list when no index is specified.",
+        "hint_1": "`pop` removes the last element of the list by default.",
+        "hint_2": "`pop` returns the last element after removing it from the list."
       },
       "options": [
-        "The list remains unchanged",
-        "An error is raised",
-        "The first element is removed",
-        "The last element is removed"
+        "Removes and returns the last element",
+        "Removes and returns the first element",
+        "Adds a new element to the end",
+        "Sorts the list"
       ],
       "correctOptionIds": [
-        "b"
+        "a"
       ]
     },
     {
       "id": "quiz3",
       "kind": "multi_choice",
       "title": "List Methods",
-      "prompt": "Which of the following methods can modify a list in place?",
+      "prompt": "Which of the following methods can modify a list in place? Select all that apply.",
       "hint": "Consider methods that change the list's content or order.",
       "help": {
         "concept": "Methods like `append`, `remove`, and `sort` modify the list in place.",
@@ -71,93 +71,91 @@
       "options": [
         "append",
         "remove",
-        "sort",
-        "copy"
+        "sorted",
+        "sort"
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "c"
+        "d"
       ]
     },
     {
       "id": "quiz4",
       "kind": "multi_choice",
-      "title": "Understanding List Mutation",
-      "prompt": "Select all statements that are true about list mutation.",
-      "hint": "Think about how lists can be changed in Python.",
+      "title": "Immutable vs Mutable",
+      "prompt": "Which of the following data types are mutable in Python? Select all that apply.",
+      "hint": "Think about data types that can be changed after creation.",
       "help": {
-        "concept": "Lists are mutable, meaning their content can be changed without changing their identity.",
-        "hint_1": "Lists can be modified in place.",
-        "hint_2": "Methods like `append` and `remove` change the list's content."
+        "concept": "Lists and dictionaries are mutable, while strings and tuples are immutable.",
+        "hint_1": "Lists can be changed after they are created.",
+        "hint_2": "Dictionaries can also be modified after creation."
       },
       "options": [
-        "Lists are mutable",
-        "Lists cannot be changed once created",
-        "Methods like `append` modify the list",
-        "Lists are immutable"
+        "list",
+        "tuple",
+        "string",
+        "dictionary"
       ],
       "correctOptionIds": [
         "a",
-        "c"
+        "d"
       ]
     },
     {
       "id": "quiz5",
       "kind": "drag_reorder",
       "title": "Order of List Operations",
-      "prompt": "Arrange the steps to add an element to a list and then remove it.",
-      "hint": "Think about the sequence of operations for adding and removing elements.",
+      "prompt": "Arrange the list operations in the order they would be executed to add an element, remove an element, and then sort the list.",
+      "hint": "Think about the sequence of modifying a list.",
       "help": {
-        "concept": "First, you add an element, then you can remove it.",
-        "hint_1": "`append` is used to add an element.",
-        "hint_2": "`remove` is used to take an element out."
+        "concept": "First, you add an element, then remove an element, and finally sort the list.",
+        "hint_1": "Start with adding an element.",
+        "hint_2": "End with sorting the list."
       },
       "tokens": [
-        "Create a list",
-        "Use append to add an element",
-        "Use remove to delete the element",
-        "Print the list"
+        "append",
+        "remove",
+        "sort"
       ],
       "correctOrder": [
-        "Create a list",
-        "Use append to add an element",
-        "Use remove to delete the element",
-        "Print the list"
+        "append",
+        "remove",
+        "sort"
       ]
     },
     {
       "id": "quiz6",
       "kind": "drag_reorder",
-      "title": "Sorting a List",
-      "prompt": "Arrange the steps to sort a list of numbers in ascending order.",
-      "hint": "Consider the steps needed to sort a list.",
+      "title": "List Mutation Sequence",
+      "prompt": "Arrange the following operations to demonstrate a typical sequence of list mutations: append, pop, and sort.",
+      "hint": "Consider the logical order of operations on a list.",
       "help": {
-        "concept": "Sorting involves creating a list and then using the `sort` method.",
-        "hint_1": "First, create the list.",
-        "hint_2": "Then, apply the `sort` method."
+        "concept": "Appending adds an element, popping removes one, and sorting orders the list.",
+        "hint_1": "Start with appending an element.",
+        "hint_2": "Finish with sorting the list."
       },
       "tokens": [
-        "Create a list of numbers",
-        "Use the sort method",
-        "Print the sorted list"
+        "append",
+        "pop",
+        "sort"
       ],
       "correctOrder": [
-        "Create a list of numbers",
-        "Use the sort method",
-        "Print the sorted list"
+        "append",
+        "pop",
+        "sort"
       ]
     },
     {
       "id": "quiz7",
       "kind": "fill_blank_choice",
-      "title": "Using Append",
-      "prompt": "Complete the code to add 'orange' to the list `fruits`.",
+      "title": "List Method Usage",
+      "prompt": "Complete the code to add an element to the end of the list `fruits`.",
       "hint": "Use the method that adds an element to the end of the list.",
       "help": {
-        "concept": "The `append` method adds an element to the end of the list.",
-        "hint_1": "Use `append` to add 'orange'.",
-        "hint_2": "The syntax is `list.append(element)`."
+        "concept": "The `append` method is used to add an element to the end of a list.",
+        "hint_1": "The method to add an element is `append`.",
+        "hint_2": "Use `append` to add an element to the list."
       },
       "template": "fruits.[blank1]('orange')",
       "choices": [
@@ -171,13 +169,13 @@
     {
       "id": "quiz8",
       "kind": "fill_blank_choice",
-      "title": "Removing an Element",
-      "prompt": "Complete the code to remove 'banana' from the list `fruits`.",
-      "hint": "Use the method that removes a specific element from the list.",
+      "title": "Removing Elements",
+      "prompt": "Complete the code to remove the first occurrence of 'banana' from the list `fruits`.",
+      "hint": "Use the method that removes the first occurrence of an element.",
       "help": {
-        "concept": "The `remove` method deletes a specific element from the list.",
-        "hint_1": "Use `remove` to delete 'banana'.",
-        "hint_2": "The syntax is `list.remove(element)`."
+        "concept": "The `remove` method removes the first occurrence of a specified element from the list.",
+        "hint_1": "The method to remove an element is `remove`.",
+        "hint_2": "Use `remove` to delete an element from the list."
       },
       "template": "fruits.[blank1]('banana')",
       "choices": [
@@ -191,23 +189,25 @@
     {
       "id": "quiz9",
       "kind": "code_input",
-      "title": "Add and Remove Elements",
-      "prompt": "Write a program that adds 'grape' to a list of fruits and then removes 'apple'.",
-      "hint": "Use `append` to add and `remove` to delete.",
+      "title": "Using Append and Sort",
+      "prompt": "Write a program that reads a list of integers from input, appends the number 10 to the list, sorts the list, and prints the result.",
+      "hint": "Remember to append 10 before sorting the list.",
       "help": {
-        "concept": "Use `append` to add an element and `remove` to delete an element from the list.",
-        "hint_1": "Start by appending 'grape' to the list.",
-        "hint_2": "Then, remove 'apple' from the list."
+        "concept": "Use `append` to add an element and `sort` to order the list.",
+        "hint_1": "Append 10 to the list before sorting.",
+        "hint_2": "Sort the list after appending 10."
       },
-      "starterCode": "fruits = ['apple', 'banana']\n# Add 'grape' to the list\n# Remove 'apple' from the list\nprint(fruits)",
-      "solutionCode": "fruits = ['apple', 'banana']\nfruits.append('grape')\nfruits.remove('apple')\nprint(fruits)",
+      "starterCode": "# Read input list\nnumbers = list(map(int, input().split()))\n# Write your code below\n",
+      "solutionCode": "# Read input list\nnumbers = list(map(int, input().split()))\n# Append 10 to the list\nnumbers.append(10)\n# Sort the list\nnumbers.sort()\n# Print the sorted list\nprint(numbers)",
       "tests": [
         {
-          "stdout": "['banana', 'grape']\n",
+          "stdin": "3 1 4 1 5",
+          "stdout": "[1, 1, 3, 4, 5, 10]\n",
           "match": "exact"
         },
         {
-          "stdout": "['banana', 'grape']\n",
+          "stdin": "10 20 30",
+          "stdout": "[10, 10, 20, 30]\n",
           "match": "exact"
         }
       ],
@@ -216,23 +216,25 @@
     {
       "id": "quiz10",
       "kind": "code_input",
-      "title": "Sort a List",
-      "prompt": "Write a program that sorts a list of numbers in ascending order.",
-      "hint": "Use the `sort` method to arrange numbers.",
+      "title": "Removing Elements",
+      "prompt": "Write a program that reads a list of strings from input, removes the first occurrence of 'apple', and prints the result.",
+      "hint": "Use the `remove` method to delete 'apple'.",
       "help": {
-        "concept": "The `sort` method arranges the list in ascending order by default.",
-        "hint_1": "Create a list of numbers first.",
-        "hint_2": "Apply the `sort` method to the list."
+        "concept": "The `remove` method deletes the first occurrence of a specified element.",
+        "hint_1": "Use `remove` to delete 'apple'.",
+        "hint_2": "Print the list after removing 'apple'."
       },
-      "starterCode": "numbers = [4, 2, 3, 1]\n# Sort the list\nprint(numbers)",
-      "solutionCode": "numbers = [4, 2, 3, 1]\nnumbers.sort()\nprint(numbers)",
+      "starterCode": "# Read input list\nfruits = input().split()\n# Write your code below\n",
+      "solutionCode": "# Read input list\nfruits = input().split()\n# Remove 'apple' from the list\nfruits.remove('apple')\n# Print the modified list\nprint(fruits)",
       "tests": [
         {
-          "stdout": "[1, 2, 3, 4]\n",
+          "stdin": "banana apple cherry",
+          "stdout": "['banana', 'cherry']\n",
           "match": "exact"
         },
         {
-          "stdout": "[1, 2, 3, 4]\n",
+          "stdin": "apple banana apple",
+          "stdout": "['banana', 'apple']\n",
           "match": "exact"
         }
       ],
@@ -241,23 +243,25 @@
     {
       "id": "quiz11",
       "kind": "code_input",
-      "title": "Pop and Print",
-      "prompt": "Write a program that pops the last element from a list and prints it.",
-      "hint": "Use `pop` to remove and return the last element.",
+      "title": "Using Pop",
+      "prompt": "Write a program that reads a list of integers from input, removes the last element using `pop`, and prints the result.",
+      "hint": "Use `pop` to remove the last element of the list.",
       "help": {
         "concept": "The `pop` method removes and returns the last element of the list.",
-        "hint_1": "Use `pop` without an index to remove the last element.",
-        "hint_2": "Print the result of the `pop` method."
+        "hint_1": "Use `pop` without arguments to remove the last element.",
+        "hint_2": "Print the list after using `pop`."
       },
-      "starterCode": "numbers = [10, 20, 30, 40]\n# Pop the last element and print it\n",
-      "solutionCode": "numbers = [10, 20, 30, 40]\nlast_number = numbers.pop()\nprint(last_number)",
+      "starterCode": "# Read input list\nnumbers = list(map(int, input().split()))\n# Write your code below\n",
+      "solutionCode": "# Read input list\nnumbers = list(map(int, input().split()))\n# Remove the last element\nnumbers.pop()\n# Print the modified list\nprint(numbers)",
       "tests": [
         {
-          "stdout": "40\n",
+          "stdin": "1 2 3 4 5",
+          "stdout": "[1, 2, 3, 4]\n",
           "match": "exact"
         },
         {
-          "stdout": "40\n",
+          "stdin": "10 20 30",
+          "stdout": "[10, 20]\n",
           "match": "exact"
         }
       ],

@@ -21,13 +21,13 @@
     "thinFixedTestCount": 0,
     "blockers": 0,
     "errors": 0,
-    "warnings": 4,
+    "warnings": 1,
     "infos": 0
   },
   "severityCounts": {
     "blocker": 0,
     "error": 0,
-    "warning": 4,
+    "warning": 1,
     "info": 0
   },
   "issues": [
@@ -39,36 +39,6 @@
       "moduleId": "python-6-functions-and-modularity",
       "topicId": "print-vs-return",
       "message": "Topic \"print-vs-return\" has no learning goals on its seed metadata."
-    },
-    {
-      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
-      "severity": "warning",
-      "path": "python-6-functions-and-modularity/python-6-function-basics/print-vs-return",
-      "profileId": "python",
-      "moduleId": "python-6-functions-and-modularity",
-      "topicId": "print-vs-return",
-      "exerciseId": "code1",
-      "message": "Exercise \"code1\" starterCode appears to contain most of the final solution structure."
-    },
-    {
-      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
-      "severity": "warning",
-      "path": "python-6-functions-and-modularity/python-6-function-basics/print-vs-return",
-      "profileId": "python",
-      "moduleId": "python-6-functions-and-modularity",
-      "topicId": "print-vs-return",
-      "exerciseId": "code2",
-      "message": "Exercise \"code2\" starterCode appears to contain most of the final solution structure."
-    },
-    {
-      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
-      "severity": "warning",
-      "path": "python-6-functions-and-modularity/python-6-function-basics/print-vs-return",
-      "profileId": "python",
-      "moduleId": "python-6-functions-and-modularity",
-      "topicId": "print-vs-return",
-      "exerciseId": "code3",
-      "message": "Exercise \"code3\" starterCode appears to contain most of the final solution structure."
     }
   ]
 }

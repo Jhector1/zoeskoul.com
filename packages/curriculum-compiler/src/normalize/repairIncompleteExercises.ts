@@ -17,7 +17,100 @@ function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
 }
 
+type CodeInputRecipeType =
+    | "sql_query"
+    | "fixed_tests"
+    | "semantic"
+    | "template_io"
+    | undefined;
 
+type NormalizedCodeInputTest = {
+    stdin?: string;
+    stdout: string;
+    match?: "exact" | "includes";
+    files?: Array<{
+        path: string;
+        content: string;
+        readOnly?: boolean;
+    }>;
+};
+
+function normalizeCodeInputTests(tests: unknown): NormalizedCodeInputTest[] | undefined {
+    if (!Array.isArray(tests)) return undefined;
+
+    const normalized = tests
+        .filter((test): test is Record<string, unknown> => {
+            return !!test && typeof test === "object";
+        })
+        .map((test): NormalizedCodeInputTest => {
+            const stdout =
+                typeof test.stdout === "string"
+                    ? test.stdout
+                    : typeof test.output === "string"
+                        ? test.output
+                        : "";
+
+            const match: "exact" | "includes" | undefined =
+                test.match === "includes" || test.match === "exact"
+                    ? test.match
+                    : undefined;
+
+            const files = Array.isArray(test.files)
+                ? test.files
+                    .filter((file): file is Record<string, unknown> => {
+                        return !!file && typeof file === "object";
+                    })
+                    .map((file) => {
+                        const normalizedFile: {
+                            path: string;
+                            content: string;
+                            readOnly?: boolean;
+                        } = {
+                            path: normalizeText(file.path),
+                            content:
+                                typeof file.content === "string"
+                                    ? file.content
+                                    : "",
+                        };
+
+                        if (typeof file.readOnly === "boolean") {
+                            normalizedFile.readOnly = file.readOnly;
+                        }
+
+                        return normalizedFile;
+                    })
+                    .filter((file) => file.path.length > 0)
+                : undefined;
+
+            const normalizedTest: NormalizedCodeInputTest = {
+                stdout,
+            };
+
+            const stdin =
+                typeof test.stdin === "string"
+                    ? test.stdin
+                    : typeof test.input === "string"
+                        ? test.input
+                        : undefined;
+
+            if (stdin !== undefined) {
+                normalizedTest.stdin = stdin;
+            }
+
+            if (match) {
+                normalizedTest.match = match;
+            }
+
+            if (files && files.length > 0) {
+                normalizedTest.files = files;
+            }
+
+            return normalizedTest;
+        })
+        .filter((test) => test.stdout.trim().length > 0);
+
+    return normalized.length > 0 ? normalized : undefined;
+}
 
 
 
@@ -102,11 +195,24 @@ function isCodeInputValid(exercise: any): boolean {
     const solutionCode = normalizeText(exercise.solutionCode);
     if (!starterCode || !solutionCode) return false;
 
+    const hasTests = Array.isArray(exercise.tests) && exercise.tests.length > 0;
+    const hasSemanticChecks =
+        Array.isArray(exercise.semanticChecks) &&
+        exercise.semanticChecks.length > 0;
+
     if (exercise.recipeType === "sql_query") {
         return !!normalizeText(exercise.datasetId);
     }
 
-    return true;
+    if (exercise.recipeType === "fixed_tests") {
+        return hasTests;
+    }
+
+    if (exercise.recipeType === "semantic") {
+        return hasSemanticChecks;
+    }
+
+    return hasTests || hasSemanticChecks;
 }
 
 function needsRepair(exercise: any): boolean {
@@ -140,18 +246,28 @@ function applySeedDefaults(seed: TopicSeed, draft: TopicAuthoringDraft): TopicAu
 
             const hasTests =
                 Array.isArray(exercise.tests) && exercise.tests.length > 0;
+            const defaultRecipeType = codeInput?.defaultRecipeType({
+                exercise,
+                seed,
+            });
 
-            const recipeType =
-                exercise.recipeType ||
-                codeInput?.defaultRecipeType({
-                    exercise,
-                    seed,
-                });
+            const recipeType: CodeInputRecipeType =
+                exercise.recipeType === "sql_query" ||
+                exercise.recipeType === "fixed_tests" ||
+                exercise.recipeType === "semantic" ||
+                exercise.recipeType === "template_io"
+                    ? exercise.recipeType
+                    : defaultRecipeType === "sql_query" ||
+                    defaultRecipeType === "fixed_tests" ||
+                    defaultRecipeType === "semantic" ||
+                    defaultRecipeType === "template_io"
+                        ? defaultRecipeType
+                        : undefined;
 
             return {
                 ...exercise,
                 datasetId: datasetId || undefined,
-                recipeType,
+                ...(recipeType ? { recipeType } : {}),
             };
         }),
     };
@@ -218,15 +334,58 @@ export async function repairIncompleteExercises(args: {
             const codeInput = profile
                 ? assertProfileSupportsCodeInput(profile)
                 : null;
+
+            const initialNormalizedTests = normalizeCodeInputTests(exercise.tests);
+
+            const exerciseForProfileRepair = {
+                ...exercise,
+                ...(initialNormalizedTests
+                    ? { tests: initialNormalizedTests }
+                    : { tests: undefined }),
+            };
+
             const repairedByProfile = codeInput?.repairDraft?.({
-                exercise,
+                exercise: exerciseForProfileRepair,
                 seed: args.seed,
             });
-            const repairedExercise = repairedByProfile ?? exercise;
 
-            return {
+            const repairedExercise = repairedByProfile ?? exerciseForProfileRepair;
+            const normalizedTests = normalizeCodeInputTests(repairedExercise.tests);
+
+            const semanticChecks = Array.isArray(repairedExercise.semanticChecks)
+                ? repairedExercise.semanticChecks
+                : undefined;
+
+            const hasSemanticChecks =
+                Array.isArray(semanticChecks) && semanticChecks.length > 0;
+
+            const authoredRecipeType = repairedExercise.recipeType;
+
+            const recipeType: CodeInputRecipeType =
+                authoredRecipeType === "semantic" && hasSemanticChecks
+                    ? "semantic"
+                    : authoredRecipeType === "fixed_tests" && normalizedTests
+                        ? "fixed_tests"
+                        : authoredRecipeType === "sql_query"
+                            ? "sql_query"
+                            : authoredRecipeType === "template_io"
+                                ? "template_io"
+                                : hasSemanticChecks
+                                    ? "semantic"
+                                    : normalizedTests
+                                        ? "fixed_tests"
+                                        : undefined;
+
+            const {
+                recipeType: _discardUnsafeRecipeType,
+                tests: _discardUnsafeTests,
+                semanticChecks: _discardUnsafeSemanticChecks,
+                ...safeRepairedExercise
+            } = repairedExercise;
+
+            const repairedCodeInput = {
                 ...exercise,
-                ...repairedExercise,
+                ...safeRepairedExercise,
                 kind: "code_input" as const,
                 starterCode: starterRevealsSolution(
                     repairedExercise.starterCode,
@@ -235,7 +394,12 @@ export async function repairIncompleteExercises(args: {
                     ? defaultStarterCodeForProfile(args.seed.profileId)
                     : normalizeText(repairedExercise.starterCode),
                 solutionCode: normalizeText(repairedExercise.solutionCode),
-            };
+                ...(recipeType ? { recipeType } : {}),
+                ...(normalizedTests ? { tests: normalizedTests } : {}),
+                ...(hasSemanticChecks ? { semanticChecks } : {}),
+            } satisfies TopicAuthoringDraft["quizDraft"][number];
+
+            return repairedCodeInput;
         }
         return exercise;
     });

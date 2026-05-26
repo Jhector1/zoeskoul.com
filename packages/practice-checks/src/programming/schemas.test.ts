@@ -11,7 +11,33 @@ describe("ProgrammingExpectedSchema", () => {
         expect(parsed.checkMode).toBe("stdout");
         expect(parsed.tests).toHaveLength(1);
     });
+    it("preserves per-test fixture files", () => {
+        const parsed = ProgrammingExpectedSchema.parse({
+            kind: "code_input",
+            tests: [
+                {
+                    stdin: "",
+                    stdout: "Alice\n",
+                    match: "exact",
+                    files: [
+                        {
+                            path: "people.csv",
+                            content: "name\nAlice\n",
+                            readOnly: true,
+                        },
+                    ],
+                },
+            ],
+        });
 
+        expect(parsed.tests[0]?.files).toEqual([
+            {
+                path: "people.csv",
+                content: "name\nAlice\n",
+                readOnly: true,
+            },
+        ]);
+    });
     it("parses semantic expected", () => {
         const parsed = ProgrammingExpectedSchema.parse({
             kind: "code_input",

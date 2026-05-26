@@ -9,95 +9,32 @@
       "message": "Added a short line-by-line explanation after a multi-line code example."
     },
     {
-      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
-      "category": "text",
-      "severity": "medium",
-      "field": "sketchBlocks.sketch2.bodyMarkdown",
-      "message": "Added a short line-by-line explanation after a multi-line code example."
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "recipe",
+      "severity": "low",
+      "field": "q5",
+      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
     },
     {
-      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
       "category": "recipe",
-      "severity": "high",
-      "field": "quiz5",
-      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
-    },
-    {
-      "code": "PYTHON_HARDCODED_FUNCTION_EXAMPLE_REPAIRED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz6",
-      "message": "Replaced hardcoded example usage in a function exercise with a stdin/stdout wrapper so published tests validate the intended behavior."
-    },
-    {
-      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz7",
-      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+      "severity": "low",
+      "field": "q10",
+      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
     },
     {
       "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
       "category": "recipe",
       "severity": "high",
-      "field": "quiz7",
+      "field": "q11",
       "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
     },
     {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
       "category": "recipe",
-      "severity": "high",
-      "field": "quiz6",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
-    },
-    {
-      "code": "PYTHON_CROSS_EXERCISE_CLASS_CONTEXT_REPAIRED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz5",
-      "message": "Prepended shared class/setup context needed by this code_input exercise so it can run independently."
-    },
-    {
-      "code": "PYTHON_CROSS_EXERCISE_CLASS_CONTEXT_REPAIRED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz7",
-      "message": "Prepended shared class/setup context needed by this code_input exercise so it can run independently."
-    },
-    {
-      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
-      "category": "other",
-      "severity": "medium",
-      "field": "policy_single_choice_1",
-      "message": "Added a fallback single_choice exercise to satisfy the planned exercise mix for \"nested-data-structures\"."
-    },
-    {
-      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
-      "category": "other",
-      "severity": "medium",
-      "field": "policy_multi_choice_1",
-      "message": "Added a fallback multi_choice exercise to satisfy the planned exercise mix for \"nested-data-structures\"."
-    },
-    {
-      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
-      "category": "other",
-      "severity": "medium",
-      "field": "policy_drag_reorder_1",
-      "message": "Added a fallback drag_reorder exercise to satisfy the planned exercise mix for \"nested-data-structures\"."
-    },
-    {
-      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
-      "category": "other",
-      "severity": "medium",
-      "field": "policy_fill_blank_choice_1",
-      "message": "Added a fallback fill_blank_choice exercise to satisfy the planned exercise mix for \"nested-data-structures\"."
-    },
-    {
-      "code": "PYTHON_FORBIDDEN_WORKSPACE_TERM_REPLACED",
-      "category": "text",
-      "severity": "medium",
-      "field": "policy_single_choice_1.help.hint_1",
-      "message": "Replaced forbidden Python browser-workspace wording with allowed learner-facing workspace language."
+      "severity": "low",
+      "field": "q11",
+      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
     }
   ]
 }

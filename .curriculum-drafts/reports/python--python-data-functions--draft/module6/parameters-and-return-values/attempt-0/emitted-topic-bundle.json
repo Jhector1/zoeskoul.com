@@ -135,7 +135,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "c"
       }
     },
     {
@@ -154,8 +154,7 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
-          "d"
+          "c"
         ]
       }
     },
@@ -233,7 +232,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "function_name"
+        "value": "add"
       }
     },
     {
@@ -245,7 +244,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "value"
+        "value": "x + y"
       }
     },
     {
@@ -256,6 +255,15 @@
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz9",
       "language": "python",
       "starterCode": "def sum_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def sum_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
@@ -275,13 +283,18 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "3 5\n1\n",
-            "stdout": "8\n",
+            "stdin": "1\n1\n",
+            "stdout": "2",
             "match": "exact"
           },
           {
-            "stdin": "10 15\n1\n",
-            "stdout": "25\n",
+            "stdin": "1\n1\n",
+            "stdout": "2",
+            "match": "exact"
+          },
+          {
+            "stdin": "2\n2\n",
+            "stdout": "4\n",
             "match": "exact"
           }
         ],
@@ -295,15 +308,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz10",
       "language": "python",
-      "starterCode": "def multiply_numbers(x, y):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nx = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ny = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply_numbers(x, y))",
+      "starterCode": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def multiply_numbers(x, y):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nx = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ny = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply_numbers(x, y))",
+        "starterCode": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def multiply_numbers(x, y):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nx = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ny = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply_numbers(x, y))",
+            "content": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -315,17 +337,22 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "4 5\n1\n",
-            "stdout": "4 5",
+            "stdin": "1\n1\n",
+            "stdout": "1",
             "match": "exact"
           },
           {
-            "stdin": "7 3\n1\n",
-            "stdout": "7 3",
+            "stdin": "1\n1\n",
+            "stdout": "1",
+            "match": "exact"
+          },
+          {
+            "stdin": "2\n2\n",
+            "stdout": "4\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "def multiply_numbers(x, y):\n    return x * y\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nx = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ny = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply_numbers(x, y))"
+        "solutionCode": "def multiply(a, b):\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))"
       }
     },
     {
@@ -335,15 +362,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz11",
       "language": "python",
-      "starterCode": "def divide_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide_numbers(a, b))",
+      "starterCode": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def divide_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide_numbers(a, b))",
+        "starterCode": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def divide_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide_numbers(a, b))",
+            "content": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -355,17 +391,17 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "10 2\n1\n",
-            "stdout": "5.0\n",
+            "stdin": "1\n1\n",
+            "stdout": "1.0",
             "match": "exact"
           },
           {
-            "stdin": "9 3\n1\n",
-            "stdout": "3.0\n",
+            "stdin": "1\n1\n",
+            "stdout": "1.0",
             "match": "exact"
           }
         ],
-        "solutionCode": "def divide_numbers(a, b):\n    return a / b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide_numbers(a, b))"
+        "solutionCode": "def divide(a, b):\n    return a / b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))"
       }
     }
   ]

@@ -126,6 +126,38 @@ describe("TopicAuthoringDraft workspace file paths", () => {
             ).toThrow(/workspace|path|unsafe|invalid/i);
         }
     });
+
+    it("accepts workspaceExpectations with safe required files and folders", () => {
+        expect(() =>
+            assertTopicAuthoringDraft({
+                ...makeValidMinimalDraft(),
+                quizDraft: [
+                    {
+                        id: "code-1",
+                        kind: "code_input" as const,
+                        title: "Workspace contract",
+                        prompt: "Create the helper file.",
+                        hint: "Use the required path.",
+                        help: {
+                            concept: "Project-style exercises can require exact workspace paths.",
+                            hint_1: "Match the required helper file path exactly.",
+                            hint_2: "Place the helper file inside the required folder.",
+                        },
+                        starterCode: "# start\n",
+                        solutionCode: "print('ok')\n",
+                        recipeType: "fixed_tests" as const,
+                        workspaceExpectations: {
+                            requiredFiles: ["helpers/formatting.py"],
+                            requiredFolders: ["helpers"],
+                        },
+                        tests: [
+                            { stdout: "ok\n" },
+                        ],
+                    },
+                ],
+            }),
+        ).not.toThrow();
+    });
 });
 describe("TopicAuthoringDraft canonical validation", () => {
     it("accepts a valid minimal draft", () => {

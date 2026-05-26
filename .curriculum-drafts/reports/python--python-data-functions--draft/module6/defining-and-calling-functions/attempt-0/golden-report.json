@@ -1,13 +1,5 @@
 {
   "topicId": "defining-and-calling-functions",
-  "ok": false,
-  "issues": [
-    {
-      "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
-      "category": "tests",
-      "severity": "error",
-      "exerciseId": "quiz6",
-      "message": "Exercise \"quiz6\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
-    }
-  ]
+  "ok": true,
+  "issues": []
 }

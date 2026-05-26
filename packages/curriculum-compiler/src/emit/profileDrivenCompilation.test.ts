@@ -154,6 +154,49 @@ describe("profile-driven curriculum compilation", () => {
         expect(serialized).not.toContain("main.sql");
     });
 
+    it("preserves workspaceExpectations in emitted Python manifests", () => {
+        const bundle = buildTopicBundleFromDraft({
+            shape: pythonShape,
+            seed: makePythonSeed(),
+            draft: makeDraft({
+                id: "py-workspace-1",
+                kind: "code_input",
+                title: "Use a helper module",
+                prompt: "Prompt",
+                starterCode: "print('start')\n",
+                entryFilePath: "main.py",
+                starterFiles: [
+                    {
+                        path: "main.py",
+                        content: "print('start')\n",
+                        isEntry: true,
+                    },
+                ],
+                workspaceExpectations: {
+                    requiredFiles: ["helpers/formatting.py"],
+                    requiredFolders: ["helpers"],
+                },
+                solutionCode: "print('ok')\n",
+                recipeType: "fixed_tests",
+                tests: [
+                    { stdout: "ok\n", match: "exact" },
+                    { stdout: "ok\n", match: "exact" },
+                ],
+            }),
+        });
+
+        const exercise = bundle.exercises[0] as ManifestCodeInput;
+
+        expect(exercise.workspaceExpectations).toEqual({
+            requiredFiles: ["helpers/formatting.py"],
+            requiredFolders: ["helpers"],
+        });
+        expect(exercise.workspace?.workspaceExpectations).toEqual({
+            requiredFiles: ["helpers/formatting.py"],
+            requiredFolders: ["helpers"],
+        });
+    });
+
     it("carries Python file fixtures into the emitted workspace manifest", () => {
         const bundle = buildTopicBundleFromDraft({
             shape: pythonShape,

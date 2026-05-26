@@ -6,12 +6,12 @@
     {
       "id": "sketch1",
       "title": "Understanding Docstrings",
-      "bodyMarkdown": "Docstrings are a way to document your functions in Python. They describe what the function does, its parameters, and its return value. This helps other developers understand how to use your function without reading the entire code.\n\nHere's a simple example:\n\n```python\ndef add(a, b):\n    \"\"\"Add two numbers and return the result.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The sum of a and b.\n    \"\"\"\n    return a + b\n```\n\nIn this example, the docstring explains that the function `add` takes two parameters, `a` and `b`, and returns their sum. \n\n**Try it yourself:** Write a function with a docstring that describes its purpose, parameters, and return value."
+      "bodyMarkdown": "Docstrings are a way to document your functions in Python. They describe what the function does, its parameters, and its return value. A docstring is a string literal that appears right after the function header. Here's an example:\n\n```python\ndef add(a, b):\n    \"\"\"Return the sum of a and b.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The sum of a and b.\n    \"\"\"\n    return a + b\n```\n\nIn this example, the docstring explains that the function `add` takes two parameters, `a` and `b`, and returns their sum. Try it yourself by writing a function with a docstring!"
     },
     {
       "id": "sketch2",
       "title": "Function Contracts",
-      "bodyMarkdown": "A function contract specifies what a function expects as input and what it guarantees as output. This is crucial for ensuring that functions are used correctly and consistently.\n\nFor example, consider a function that calculates the area of a rectangle:\n\n```python\ndef rectangle_area(width, height):\n    \"\"\"Calculate the area of a rectangle.\n\n    Parameters:\n    width (float): The width of the rectangle.\n    height (float): The height of the rectangle.\n\n    Returns:\n    float: The area of the rectangle.\n    \"\"\"\n    return width * height\n```\n\nThe contract here is that `rectangle_area` expects two floats as input and returns a float representing the area.\n\n**Your turn:** Define a function contract for a function that calculates the perimeter of a rectangle."
+      "bodyMarkdown": "A function contract specifies what a function expects as input and what it guarantees as output. It helps in understanding the function's behavior without looking at its implementation. Here's a simple contract:\n\n- **Function Name**: `multiply`\n- **Parameters**: Two integers\n- **Returns**: An integer which is the product of the two parameters\n\nThis contract tells you that `multiply` will take two integers and return their product. Your turn: Write a function contract for a function that divides two numbers."
     }
   ],
   "quizDraft": [
@@ -20,17 +20,17 @@
       "kind": "single_choice",
       "title": "Purpose of Docstrings",
       "prompt": "What is the primary purpose of a docstring in a Python function?",
-      "hint": "Think about how docstrings help other developers.",
+      "hint": "Think about how docstrings help developers understand code.",
       "help": {
-        "concept": "Docstrings provide documentation for functions, explaining their purpose, parameters, and return values.",
-        "hint_1": "Docstrings are not for executing code.",
-        "hint_2": "Docstrings help in understanding the function's usage."
+        "concept": "Docstrings provide a description of what a function does, its parameters, and its return value.",
+        "hint_1": "Docstrings are used for documentation purposes.",
+        "hint_2": "They help in understanding the function without looking at the code."
       },
       "options": [
         "To execute the function",
-        "To document the function's purpose and usage",
-        "To optimize the function's performance",
-        "To store function variables"
+        "To document the function",
+        "To optimize the function",
+        "To debug the function"
       ],
       "correctOptionIds": [
         "b"
@@ -43,6 +43,7 @@
       "starterCode": null,
       "solutionCode": null,
       "tests": null,
+      "files": null,
       "semanticChecks": null,
       "datasetId": null,
       "recipeType": null,
@@ -50,24 +51,23 @@
     },
     {
       "id": "quiz2",
-      "kind": "multi_choice",
-      "title": "Components of a Function Contract",
-      "prompt": "Which of the following are components of a function contract? Select all that apply.",
-      "hint": "Consider what a function contract specifies about inputs and outputs.",
+      "kind": "single_choice",
+      "title": "Docstring Placement",
+      "prompt": "Where should a docstring be placed in a Python function?",
+      "hint": "Consider the location relative to the function header.",
       "help": {
-        "concept": "A function contract specifies the inputs, outputs, and behavior of a function.",
-        "hint_1": "Think about what the function needs and what it provides.",
-        "hint_2": "Consider both input requirements and output guarantees."
+        "concept": "A docstring should be placed immediately after the function header.",
+        "hint_1": "It should be the first statement in the function body.",
+        "hint_2": "It appears right after the function definition line."
       },
       "options": [
-        "Input parameters",
-        "Return type",
-        "Function name",
-        "Execution time"
+        "Before the function definition",
+        "After the function definition",
+        "Inside the function, as the first statement",
+        "At the end of the function"
       ],
       "correctOptionIds": [
-        "a",
-        "b"
+        "c"
       ],
       "tokens": null,
       "correctOrder": null,
@@ -77,6 +77,7 @@
       "starterCode": null,
       "solutionCode": null,
       "tests": null,
+      "files": null,
       "semanticChecks": null,
       "datasetId": null,
       "recipeType": null,
@@ -84,33 +85,35 @@
     },
     {
       "id": "quiz3",
-      "kind": "drag_reorder",
-      "title": "Order of Docstring Sections",
-      "prompt": "Arrange the sections of a docstring in the correct order.",
-      "hint": "Start with the description, then parameters, and finally the return value.",
+      "kind": "multi_choice",
+      "title": "Components of a Function Contract",
+      "prompt": "Which of the following are components of a function contract? Select all that apply.",
+      "hint": "Think about what a function contract describes.",
       "help": {
-        "concept": "A well-structured docstring starts with a description, followed by parameters, and ends with the return value.",
-        "hint_1": "Begin with what the function does.",
-        "hint_2": "Parameters come before the return value."
+        "concept": "A function contract describes the function's name, parameters, and return value.",
+        "hint_1": "It includes what the function expects and what it returns.",
+        "hint_2": "Consider the inputs and outputs of the function."
       },
-      "options": null,
-      "correctOptionIds": null,
-      "tokens": [
-        "Description of the function",
+      "options": [
+        "Function name",
         "Parameters",
-        "Return value"
+        "Return value",
+        "Function implementation"
       ],
-      "correctOrder": [
-        "Description of the function",
-        "Parameters",
-        "Return value"
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
       ],
+      "tokens": null,
+      "correctOrder": null,
       "template": null,
       "choices": null,
       "correctValue": null,
       "starterCode": null,
       "solutionCode": null,
       "tests": null,
+      "files": null,
       "semanticChecks": null,
       "datasetId": null,
       "recipeType": null,
@@ -118,30 +121,35 @@
     },
     {
       "id": "quiz4",
-      "kind": "fill_blank_choice",
-      "title": "Docstring Return Section",
-      "prompt": "Complete the docstring return section: `Returns: [blank1]`",
-      "hint": "Think about what type of value the function returns.",
+      "kind": "multi_choice",
+      "title": "Benefits of Using Docstrings",
+      "prompt": "What are the benefits of using docstrings in your code? Select all that apply.",
+      "hint": "Consider how docstrings improve code readability and maintenance.",
       "help": {
-        "concept": "The return section of a docstring specifies the type of value the function returns.",
-        "hint_1": "Consider the data type of the return value.",
-        "hint_2": "Is it an integer, float, string, etc.?"
+        "concept": "Docstrings improve code readability, provide documentation, and help with maintenance.",
+        "hint_1": "They make it easier for others to understand your code.",
+        "hint_2": "They serve as a form of documentation for your functions."
       },
-      "options": null,
-      "correctOptionIds": null,
+      "options": [
+        "Improve code readability",
+        "Serve as documentation",
+        "Increase execution speed",
+        "Help with code maintenance"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
       "tokens": null,
       "correctOrder": null,
-      "template": "Returns: [blank1]",
-      "choices": [
-        "int",
-        "float",
-        "str",
-        "list"
-      ],
-      "correctValue": "int",
+      "template": null,
+      "choices": null,
+      "correctValue": null,
       "starterCode": null,
       "solutionCode": null,
       "tests": null,
+      "files": null,
       "semanticChecks": null,
       "datasetId": null,
       "recipeType": null,
@@ -149,51 +157,150 @@
     },
     {
       "id": "quiz5",
-      "kind": "code_input",
-      "title": "Write a Function with a Docstring",
-      "prompt": "Write a function `multiply` that takes two integers and returns their product. Include a docstring that describes the function, its parameters, and its return value.",
-      "hint": "Define the function and include a docstring with parameters and return type.",
+      "kind": "drag_reorder",
+      "title": "Order of Function Definition",
+      "prompt": "Arrange the steps in the correct order to define a function with a docstring.",
+      "hint": "Start with the function definition and end with the return statement.",
       "help": {
-        "concept": "The function should multiply two integers and return the result. The docstring should describe this behavior.",
-        "hint_1": "Start by defining the function with two parameters.",
-        "hint_2": "Include a docstring that explains the parameters and return value."
+        "concept": "The correct order is to define the function, add a docstring, and then implement the function logic.",
+        "hint_1": "Begin with the function header.",
+        "hint_2": "The docstring should be right after the function header."
       },
       "options": null,
       "correctOptionIds": null,
-      "tokens": null,
-      "correctOrder": null,
+      "tokens": [
+        "Define the function header",
+        "Add a docstring",
+        "Implement the function logic",
+        "Return the result"
+      ],
+      "correctOrder": [
+        "Define the function header",
+        "Add a docstring",
+        "Implement the function logic",
+        "Return the result"
+      ],
       "template": null,
       "choices": null,
       "correctValue": null,
-      "starterCode": "def multiply(a, b):\n    \"\"\"\n    \n    \"\"\"\n    ",
-      "solutionCode": "def multiply(a, b):\n    \"\"\"Multiply two integers and return the product.\n\n    Parameters:\n    a (int): The first integer.\n    b (int): The second integer.\n\n    Returns:\n    int: The product of a and b.\n    \"\"\"\n    return a * b",
-      "tests": [
-        {
-          "stdin": "3 4\n",
-          "stdout": "12\n",
-          "match": "exact"
-        },
-        {
-          "stdin": "5 6\n",
-          "stdout": "30\n",
-          "match": "exact"
-        }
-      ],
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "files": null,
       "semanticChecks": null,
       "datasetId": null,
-      "recipeType": "fixed_tests",
+      "recipeType": null,
       "checkSql": null
     },
     {
       "id": "quiz6",
-      "kind": "code_input",
-      "title": "Function Contract for a Sum Function",
-      "prompt": "Create a function `sum_numbers` that takes a list of integers and returns their sum. Include a docstring that describes the function, its parameters, and its return value.",
-      "hint": "Define the function and include a docstring with parameters and return type.",
+      "kind": "drag_reorder",
+      "title": "Steps to Write a Function Contract",
+      "prompt": "Arrange the steps in the correct order to write a function contract.",
+      "hint": "Start with identifying the function name and end with specifying the return value.",
       "help": {
-        "concept": "The function should sum a list of integers and return the result. The docstring should describe this behavior.",
-        "hint_1": "Start by defining the function with a list parameter.",
-        "hint_2": "Include a docstring that explains the parameters and return value."
+        "concept": "A function contract includes the function name, parameters, and return value.",
+        "hint_1": "Identify the function name first.",
+        "hint_2": "Specify the parameters before the return value."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": [
+        "Identify the function name",
+        "Specify the parameters",
+        "Describe the return value"
+      ],
+      "correctOrder": [
+        "Identify the function name",
+        "Specify the parameters",
+        "Describe the return value"
+      ],
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Docstring Syntax",
+      "prompt": "Complete the syntax for a docstring in a Python function: `def my_function(): [blank1]`",
+      "hint": "Think about how a docstring is enclosed.",
+      "help": {
+        "concept": "Docstrings are enclosed in triple quotes.",
+        "hint_1": "They start and end with triple quotes.",
+        "hint_2": "Use triple double quotes for the docstring."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "def my_function(): [blank1]",
+      "choices": [
+        "\"\"\"This is a docstring\"\"\"",
+        "'This is a docstring'",
+        "\"This is a docstring\"",
+        "'''This is a docstring'''"
+      ],
+      "correctValue": "\"\"\"This is a docstring\"\"\"",
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Function Contract Example",
+      "prompt": "Fill in the blank for the function contract: `Function Name: add, Parameters: two numbers, Returns: [blank1]`",
+      "hint": "Consider what the function returns.",
+      "help": {
+        "concept": "The function returns the sum of the two numbers.",
+        "hint_1": "It returns a single value.",
+        "hint_2": "The return value is the sum of the parameters."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "Function Name: add, Parameters: two numbers, Returns: [blank1]",
+      "choices": [
+        "the sum",
+        "a list",
+        "a string",
+        "a tuple"
+      ],
+      "correctValue": "the sum",
+      "starterCode": null,
+      "solutionCode": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Write a Function with a Docstring",
+      "prompt": "Write a function `subtract` that takes two numbers and returns their difference. Include a docstring that describes the function, its parameters, and its return value.",
+      "hint": "Define the function and include a docstring right after the function header.",
+      "help": {
+        "concept": "The function should subtract the second number from the first and return the result. The docstring should describe this behavior.",
+        "hint_1": "Start with the function definition and add a docstring.",
+        "hint_2": "The docstring should explain the parameters and the return value."
       },
       "options": null,
       "correctOptionIds": null,
@@ -202,35 +309,38 @@
       "template": null,
       "choices": null,
       "correctValue": null,
-      "starterCode": "def sum_numbers(numbers):\n    \"\"\"\n    \n    \"\"\"\n    ",
-      "solutionCode": "def sum_numbers(numbers):\n    \"\"\"Sum a list of integers and return the total.\n\n    Parameters:\n    numbers (list of int): The list of integers to sum.\n\n    Returns:\n    int: The sum of the integers in the list.\n    \"\"\"\n    return sum(numbers)",
+      "starterCode": "def subtract(a, b):\n    \"\"\"\n    \n    \"\"\"\n    return ",
+      "solutionCode": "def subtract(a, b):\n    \"\"\"Return the difference of a and b.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The difference of a and b.\n    \"\"\"\n    return a - b",
       "tests": [
         {
-          "stdin": "1 2 3 4\n",
-          "stdout": "10\n",
-          "match": "exact"
+          "stdin": "5 3\n",
+          "stdout": "2\n",
+          "match": "exact",
+          "files": null
         },
         {
-          "stdin": "10 20 30\n",
-          "stdout": "60\n",
-          "match": "exact"
+          "stdin": "10 7\n",
+          "stdout": "3\n",
+          "match": "exact",
+          "files": null
         }
       ],
+      "files": null,
       "semanticChecks": null,
       "datasetId": null,
       "recipeType": "fixed_tests",
       "checkSql": null
     },
     {
-      "id": "quiz7",
+      "id": "quiz10",
       "kind": "code_input",
-      "title": "Docstring for a Division Function",
-      "prompt": "Write a function `divide` that takes two numbers and returns their division. Include a docstring that describes the function, its parameters, and its return value.",
-      "hint": "Define the function and include a docstring with parameters and return type.",
+      "title": "Function Contract Implementation",
+      "prompt": "Implement a function `multiply` that takes two numbers and returns their product. Include a docstring that describes the function, its parameters, and its return value.",
+      "hint": "Define the function and include a docstring right after the function header.",
       "help": {
-        "concept": "The function should divide two numbers and return the result. The docstring should describe this behavior.",
-        "hint_1": "Start by defining the function with two parameters.",
-        "hint_2": "Include a docstring that explains the parameters and return value."
+        "concept": "The function should multiply the two numbers and return the result. The docstring should describe this behavior.",
+        "hint_1": "Start with the function definition and add a docstring.",
+        "hint_2": "The docstring should explain the parameters and the return value."
       },
       "options": null,
       "correctOptionIds": null,
@@ -239,20 +349,63 @@
       "template": null,
       "choices": null,
       "correctValue": null,
-      "starterCode": "def divide(a, b):\n    \"\"\"\n    \n    \"\"\"\n    ",
-      "solutionCode": "def divide(a, b):\n    \"\"\"Divide two numbers and return the result.\n\n    Parameters:\n    a (float): The numerator.\n    b (float): The denominator.\n\n    Returns:\n    float: The result of the division.\n    \"\"\"\n    return a / b",
+      "starterCode": "def multiply(a, b):\n    \"\"\"\n    \n    \"\"\"\n    return ",
+      "solutionCode": "def multiply(a, b):\n    \"\"\"Return the product of a and b.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The product of a and b.\n    \"\"\"\n    return a * b",
+      "tests": [
+        {
+          "stdin": "3 4\n",
+          "stdout": "12\n",
+          "match": "exact",
+          "files": null
+        },
+        {
+          "stdin": "5 5\n",
+          "stdout": "25\n",
+          "match": "exact",
+          "files": null
+        }
+      ],
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "fixed_tests",
+      "checkSql": null
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Docstring and Contract Practice",
+      "prompt": "Create a function `divide` that takes two numbers and returns their quotient. Include a docstring that describes the function, its parameters, and its return value.",
+      "hint": "Define the function and include a docstring right after the function header.",
+      "help": {
+        "concept": "The function should divide the first number by the second and return the result. The docstring should describe this behavior.",
+        "hint_1": "Start with the function definition and add a docstring.",
+        "hint_2": "The docstring should explain the parameters and the return value."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "def divide(a, b):\n    \"\"\"\n    \n    \"\"\"\n    return ",
+      "solutionCode": "def divide(a, b):\n    \"\"\"Return the quotient of a and b.\n\n    Parameters:\n    a (int): The numerator.\n    b (int): The denominator.\n\n    Returns:\n    float: The quotient of a and b.\n    \"\"\"\n    return a / b",
       "tests": [
         {
           "stdin": "8 2\n",
           "stdout": "4.0\n",
-          "match": "exact"
+          "match": "exact",
+          "files": null
         },
         {
           "stdin": "9 3\n",
           "stdout": "3.0\n",
-          "match": "exact"
+          "match": "exact",
+          "files": null
         }
       ],
+      "files": null,
       "semanticChecks": null,
       "datasetId": null,
       "recipeType": "fixed_tests",
@@ -260,11 +413,11 @@
     }
   ],
   "projectDraft": {
-    "title": "Docstrings and Function Contracts Project",
+    "title": "Function Documentation Project",
     "stepIds": [
-      "quiz5",
-      "quiz6",
-      "quiz7"
+      "quiz9",
+      "quiz10",
+      "quiz11"
     ]
   }
 }

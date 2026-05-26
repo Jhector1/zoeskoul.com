@@ -5,12 +5,21 @@
     "parameters",
     "return values",
     "lists",
-    "dictionaries"
+    "tuples",
+    "dictionaries",
+    "nested data structures",
+    "file input",
+    "file output",
+    "relative paths",
+    "exceptions",
+    "try except",
+    "data cleaning",
+    "simple csv processing"
   ],
   "disallowedConcepts": [
     "classes",
     "external packages",
-    "multi-file projects"
+    "advanced multi-file applications"
   ],
   "validationRequirements": {
     "goldenTestsRequired": true,

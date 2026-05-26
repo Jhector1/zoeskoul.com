@@ -1,8 +1,6 @@
 {
   "reportDir": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python--python-data-functions--draft/module7/writing-text-files",
-  "status": "failed",
+  "status": "success",
   "attempts": 3,
-  "finalAttempt": 2,
-  "errorCode": "INVALID_TOPIC_AUTHORING_DRAFT",
-  "errorMessage": "Invalid TopicAuthoringDraft: quizDraft[4] tests[0].stdout must be a non-empty string"
+  "finalAttempt": 2
 }

@@ -9,67 +9,53 @@
       "message": "Added a short line-by-line explanation after a multi-line code example."
     },
     {
-      "code": "PYTHON_TEST_FILE_FIXTURE_ADDED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz10",
-      "message": "Added 2 test-level Python file fixture set(s) so fixed_tests file I/O coverage matches each expected output."
-    },
-    {
-      "code": "PYTHON_EXERCISE_FILE_FIXTURE_ADDED",
-      "category": "recipe",
-      "severity": "medium",
-      "field": "quiz10",
-      "message": "Added a learner-visible default file fixture for a Python file I/O code_input exercise."
-    },
-    {
-      "code": "PYTHON_FILE_FIXTURE_TESTS_ALIGNED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz10",
-      "message": "Aligned Python fixed_tests file fixtures with their expected outputs so golden validation can run each case safely."
-    },
-    {
-      "code": "PYTHON_TEST_FILE_FIXTURE_ADDED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz9",
-      "message": "Added 2 test-level Python file fixture set(s) so fixed_tests file I/O coverage matches each expected output."
-    },
-    {
-      "code": "PYTHON_EXERCISE_FILE_FIXTURE_ADDED",
-      "category": "recipe",
-      "severity": "medium",
-      "field": "quiz9",
-      "message": "Added a learner-visible default file fixture for a Python file I/O code_input exercise."
-    },
-    {
-      "code": "PYTHON_FILE_FIXTURE_TESTS_ALIGNED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "quiz9",
-      "message": "Aligned Python fixed_tests file fixtures with their expected outputs so golden validation can run each case safely."
-    },
-    {
-      "code": "PYTHON_TEST_FILE_FIXTURE_ADDED",
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
       "category": "recipe",
       "severity": "high",
       "field": "quiz11",
-      "message": "Added 2 test-level Python file fixture set(s) so fixed_tests file I/O coverage matches each expected output."
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
     },
     {
-      "code": "PYTHON_EXERCISE_FILE_FIXTURE_ADDED",
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
       "category": "recipe",
-      "severity": "medium",
+      "severity": "low",
       "field": "quiz11",
-      "message": "Added a learner-visible default file fixture for a Python file I/O code_input exercise."
+      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
     },
     {
-      "code": "PYTHON_FILE_FIXTURE_TESTS_ALIGNED",
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
       "category": "recipe",
       "severity": "high",
-      "field": "quiz11",
-      "message": "Aligned Python fixed_tests file fixtures with their expected outputs so golden validation can run each case safely."
+      "field": "quiz10",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "recipe",
+      "severity": "low",
+      "field": "quiz10",
+      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz9",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "recipe",
+      "severity": "low",
+      "field": "quiz9",
+      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
+    },
+    {
+      "code": "PYTHON_CROSS_EXERCISE_CLASS_CONTEXT_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz10",
+      "message": "Prepended shared class/setup context needed by this code_input exercise so it can run independently."
     }
   ]
 }

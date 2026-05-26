@@ -6,12 +6,12 @@
     {
       "id": "sketch1",
       "title": "Understanding Parameters",
-      "bodyMarkdown": "Parameters are variables that allow you to pass information into functions. When you define a function, you can specify parameters in the parentheses. For example:\n\n```python\ndef greet(name):\n    print(f\"Hello, {name}!\")\n```\n\nIn this function, `name` is a parameter. When you call `greet('Alice')`, it prints `Hello, Alice!`. Try it yourself by changing the parameter value."
+      "bodyMarkdown": "Parameters are variables that allow you to pass data into functions. They act as placeholders for the actual values you provide when you call the function. For example:\n\n```python\ndef greet(name):\n    print(f\"Hello, {name}!\")\n\ngreet(\"Alice\")\n```\n\nIn this example, `name` is a parameter. When we call `greet(\"Alice\")`, the string \"Alice\" is passed to the function, and the output is `Hello, Alice!`. Try it yourself by changing the name to see different outputs."
     },
     {
       "id": "sketch2",
-      "title": "Using Return Values",
-      "bodyMarkdown": "Functions can return values using the `return` statement. This allows you to send a result back to the caller. For example:\n\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(3, 4)\nprint(result)  # Outputs: 7\n```\n\nHere, `add` returns the sum of `a` and `b`. Try modifying the function to subtract instead."
+      "title": "Return Values Explained",
+      "bodyMarkdown": "A return value is the result that a function sends back to the part of the program that called it. This allows you to use the result in further calculations or operations. Consider this example:\n\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(3, 4)\nprint(result)\n```\n\nHere, the function `add` takes two parameters, `a` and `b`, and returns their sum. The `result` variable stores the returned value, which is then printed as `7`. Try modifying the numbers to see how the return value changes."
     }
   ],
   "quizDraft": [
@@ -20,17 +20,17 @@
       "kind": "single_choice",
       "title": "Function Parameters",
       "prompt": "What is the purpose of parameters in a function?",
-      "hint": "Parameters allow functions to receive input values.",
+      "hint": "Parameters allow functions to accept input values.",
       "help": {
         "concept": "Parameters are used to pass data into functions.",
-        "hint_1": "Parameters act as placeholders for the values you pass into the function.",
-        "hint_2": "Parameters enable functions to operate on different data inputs."
+        "hint_1": "Parameters act as placeholders for input values.",
+        "hint_2": "Think about how functions use parameters to perform operations on input data."
       },
       "options": [
         "To define the function's name",
         "To pass data into the function",
         "To return data from the function",
-        "To print data inside the function"
+        "To print data to the console"
       ],
       "correctOptionIds": [
         "b"
@@ -39,40 +39,40 @@
     {
       "id": "quiz2",
       "kind": "single_choice",
-      "title": "Return Statement",
-      "prompt": "What does the `return` statement do in a function?",
-      "hint": "The `return` statement sends a value back to the caller.",
+      "title": "Return Values",
+      "prompt": "What does a return statement do in a function?",
+      "hint": "The return statement sends a value back to the caller.",
       "help": {
-        "concept": "The `return` statement is used to output a value from a function.",
-        "hint_1": "`return` allows a function to send a result back to where it was called.",
-        "hint_2": "Think about how `return` differs from `print`."
+        "concept": "Return statements provide output from a function.",
+        "hint_1": "Return statements end the function and send back a value.",
+        "hint_2": "Consider how return values can be used in further calculations."
       },
       "options": [
         "It prints a value to the console",
-        "It stops the function execution and sends a value back",
-        "It defines a new function",
-        "It loops through a list"
+        "It stops the function from executing",
+        "It sends a value back to the caller",
+        "It defines a new function"
       ],
       "correctOptionIds": [
-        "b"
+        "c"
       ]
     },
     {
       "id": "quiz3",
       "kind": "multi_choice",
-      "title": "Function Call",
-      "prompt": "Which of the following are true about calling a function with parameters?",
-      "hint": "Consider how parameters are used when calling a function.",
+      "title": "Using Parameters",
+      "prompt": "Which of the following are true about function parameters? Select all that apply.",
+      "hint": "Parameters are used to pass data into functions.",
       "help": {
-        "concept": "When calling a function, you provide arguments that match the parameters.",
-        "hint_1": "Arguments are the actual values you pass to the function's parameters.",
-        "hint_2": "Think about how you use parameters to customize function behavior."
+        "concept": "Parameters allow functions to accept input values and perform operations.",
+        "hint_1": "Parameters can be used to perform operations on input data.",
+        "hint_2": "Parameters are placeholders for the actual values provided during function calls."
       },
       "options": [
-        "You must provide values for all parameters",
-        "Parameters can be left empty",
-        "The order of arguments must match the parameters",
-        "You can pass fewer arguments than parameters"
+        "Parameters can be used to pass data into functions",
+        "Parameters are optional in all functions",
+        "Parameters can be used to perform operations on input data",
+        "Parameters are always strings"
       ],
       "correctOptionIds": [
         "a",
@@ -82,133 +82,134 @@
     {
       "id": "quiz4",
       "kind": "multi_choice",
-      "title": "Return Values",
-      "prompt": "Select all correct statements about return values in functions.",
-      "hint": "Consider what happens when a function uses `return`.",
+      "title": "Return Statement Characteristics",
+      "prompt": "Select all correct statements about the return statement in Python functions.",
+      "hint": "Return statements provide output from functions.",
       "help": {
-        "concept": "Return values allow functions to send data back to the caller.",
-        "hint_1": "A function can return a value to be used elsewhere in the program.",
-        "hint_2": "Return values are different from printed output."
+        "concept": "Return statements end function execution and provide output.",
+        "hint_1": "Return statements can send back any data type.",
+        "hint_2": "Return statements end the function's execution."
       },
       "options": [
-        "A function can return multiple values",
-        "Return values can be stored in variables",
-        "A function must always return a value",
-        "Return values are printed automatically"
+        "A return statement can return multiple values",
+        "A return statement ends the function's execution",
+        "A return statement can only return integers",
+        "A return statement is optional in functions"
       ],
       "correctOptionIds": [
         "a",
-        "b"
+        "b",
+        "d"
       ]
     },
     {
       "id": "quiz5",
       "kind": "drag_reorder",
-      "title": "Function Definition Order",
-      "prompt": "Arrange the steps to define a function with parameters and a return value.",
-      "hint": "Consider the order of defining a function, adding parameters, and using return.",
+      "title": "Function Call Order",
+      "prompt": "Arrange the steps in the correct order to call a function and use its return value.",
+      "hint": "Consider the sequence from defining a function to using its return value.",
       "help": {
-        "concept": "Defining a function involves specifying its name, parameters, and return value.",
-        "hint_1": "Start with the `def` keyword, then add parameters, and finally the return statement.",
-        "hint_2": "Think about the structure of a function definition."
+        "concept": "Function calls follow a specific sequence from definition to execution.",
+        "hint_1": "Start with defining the function.",
+        "hint_2": "End with using the return value."
       },
       "tokens": [
-        "Start with `def` keyword",
-        "Add function name",
-        "Include parameters in parentheses",
-        "Write the function body",
-        "Use `return` to send back a value"
+        "Define the function",
+        "Call the function",
+        "Store the return value",
+        "Use the return value"
       ],
       "correctOrder": [
-        "Start with `def` keyword",
-        "Add function name",
-        "Include parameters in parentheses",
-        "Write the function body",
-        "Use `return` to send back a value"
+        "Define the function",
+        "Call the function",
+        "Store the return value",
+        "Use the return value"
       ]
     },
     {
       "id": "quiz6",
       "kind": "drag_reorder",
-      "title": "Function Call Order",
-      "prompt": "Arrange the steps to call a function with parameters and use its return value.",
-      "hint": "Consider the order of calling a function and handling its return value.",
+      "title": "Return Statement Execution",
+      "prompt": "Arrange the steps in the correct order for executing a return statement in a function.",
+      "hint": "Think about what happens from entering the function to returning a value.",
       "help": {
-        "concept": "Calling a function involves providing arguments and handling the return value.",
-        "hint_1": "Start by calling the function with arguments, then handle the return value.",
-        "hint_2": "Think about how you use the return value after calling the function."
+        "concept": "Return statements follow a sequence from function entry to returning a value.",
+        "hint_1": "Start with entering the function.",
+        "hint_2": "End with returning the value."
       },
       "tokens": [
-        "Call the function with arguments",
-        "Store the return value in a variable",
-        "Use the return value in your program"
+        "Enter the function",
+        "Execute the function body",
+        "Reach the return statement",
+        "Return the value"
       ],
       "correctOrder": [
-        "Call the function with arguments",
-        "Store the return value in a variable",
-        "Use the return value in your program"
+        "Enter the function",
+        "Execute the function body",
+        "Reach the return statement",
+        "Return the value"
       ]
     },
     {
       "id": "quiz7",
       "kind": "fill_blank_choice",
-      "title": "Function Parameter Syntax",
-      "prompt": "Complete the function definition with the correct parameter syntax.",
-      "hint": "Parameters are defined inside the parentheses.",
+      "title": "Function Definition",
+      "prompt": "Complete the function definition: `def [blank1](x, y): return x + y`",
+      "hint": "The function name should describe its purpose.",
       "help": {
-        "concept": "Parameters are specified in the function definition to accept input values.",
-        "hint_1": "Parameters go inside the parentheses after the function name.",
-        "hint_2": "Think about how you define a function with parameters."
+        "concept": "Function names should be descriptive of their purpose.",
+        "hint_1": "Think about what the function does.",
+        "hint_2": "The function adds two numbers."
       },
-      "template": "def greet([blank1]):",
+      "template": "def [blank1](x, y): return x + y",
       "choices": [
-        "name",
-        "return",
-        "print"
+        "add",
+        "subtract",
+        "multiply",
+        "divide"
       ],
-      "correctValue": "name"
+      "correctValue": "add"
     },
     {
       "id": "quiz8",
       "kind": "fill_blank_choice",
-      "title": "Return Statement Syntax",
-      "prompt": "Complete the function to return the sum of two numbers.",
-      "hint": "Use the `return` keyword to send back a value.",
+      "title": "Return Statement",
+      "prompt": "Complete the return statement: `return [blank1]`",
+      "hint": "The return value should be the result of the function's operation.",
       "help": {
-        "concept": "The `return` statement is used to output a value from a function.",
-        "hint_1": "Use `return` followed by the expression you want to send back.",
-        "hint_2": "Think about how you return the result of an addition."
+        "concept": "Return statements send back the result of a function's operation.",
+        "hint_1": "Consider what the function is supposed to return.",
+        "hint_2": "The function returns the sum of two numbers."
       },
-      "template": "def add(a, b):\n    [blank1] a + b",
+      "template": "return [blank1]",
       "choices": [
-        "return",
-        "print",
-        "sum"
+        "x + y",
+        "x - y",
+        "x * y",
+        "x / y"
       ],
-      "correctValue": "return"
+      "correctValue": "x + y"
     },
     {
       "id": "quiz9",
       "kind": "code_input",
-      "title": "Calculate Area of Rectangle",
-      "prompt": "Write a function `calculate_area` that takes `width` and `height` as parameters and returns the area of a rectangle.",
-      "hint": "Multiply width by height to get the area.",
+      "title": "Sum Function",
+      "prompt": "Write a function `sum_numbers` that takes two parameters and returns their sum.",
+      "hint": "Define the function with two parameters and use a return statement.",
       "help": {
-        "concept": "The area of a rectangle is calculated by multiplying its width by its height.",
-        "hint_1": "Define a function with two parameters: width and height.",
-        "hint_2": "Use the `return` statement to send back the calculated area."
+        "concept": "Functions can return the result of operations on parameters.",
+        "hint_1": "Use a return statement to send back the sum.",
+        "hint_2": "The function should add the two parameters and return the result."
       },
-      "starterCode": "def calculate_area(width, height):\n    # Calculate the area\n    ",
-      "solutionCode": "def calculate_area(width, height):\n    return width * height",
+      "starterCode": "def sum_numbers(a, b):\n    # Your code here\n",
+      "solutionCode": "def sum_numbers(a, b):\n    return a + b\n",
       "tests": [
         {
-          "stdin": "5 10\n",
-          "stdout": "50\n",
+          "stdout": "5\n",
           "match": "exact"
         },
         {
-          "stdin": "3 7\n",
-          "stdout": "21\n",
+          "stdout": "9\n",
           "match": "exact"
         }
       ],
@@ -217,25 +218,23 @@
     {
       "id": "quiz10",
       "kind": "code_input",
-      "title": "Convert Celsius to Fahrenheit",
-      "prompt": "Write a function `celsius_to_fahrenheit` that converts a temperature from Celsius to Fahrenheit.",
-      "hint": "Use the formula (Celsius * 9/5) + 32 to convert to Fahrenheit.",
+      "title": "Multiply Function",
+      "prompt": "Create a function `multiply` that takes two parameters and returns their product.",
+      "hint": "Define the function with two parameters and use a return statement.",
       "help": {
-        "concept": "Temperature conversion involves using a specific formula to change units.",
-        "hint_1": "Define a function that takes Celsius as a parameter.",
-        "hint_2": "Use the conversion formula to calculate Fahrenheit."
+        "concept": "Functions can return the result of operations on parameters.",
+        "hint_1": "Use a return statement to send back the product.",
+        "hint_2": "The function should multiply the two parameters and return the result."
       },
-      "starterCode": "def celsius_to_fahrenheit(celsius):\n    # Convert to Fahrenheit\n    ",
-      "solutionCode": "def celsius_to_fahrenheit(celsius):\n    return (celsius * 9/5) + 32",
+      "starterCode": "def multiply(a, b):\n    # Your code here\n",
+      "solutionCode": "def multiply(a, b):\n    return a * b\n",
       "tests": [
         {
-          "stdin": "0\n",
-          "stdout": "32\n",
+          "stdout": "6\n",
           "match": "exact"
         },
         {
-          "stdin": "100\n",
-          "stdout": "212\n",
+          "stdout": "15\n",
           "match": "exact"
         }
       ],
@@ -244,25 +243,23 @@
     {
       "id": "quiz11",
       "kind": "code_input",
-      "title": "Calculate Circle Circumference",
-      "prompt": "Write a function `calculate_circumference` that takes `radius` as a parameter and returns the circumference of a circle.",
-      "hint": "Use the formula 2 * π * radius for circumference.",
+      "title": "Divide Function",
+      "prompt": "Write a function `divide` that takes two parameters and returns their quotient.",
+      "hint": "Define the function with two parameters and use a return statement.",
       "help": {
-        "concept": "The circumference of a circle is calculated using the radius and π.",
-        "hint_1": "Define a function with one parameter: radius.",
-        "hint_2": "Use the formula 2 * π * radius to calculate the circumference."
+        "concept": "Functions can return the result of operations on parameters.",
+        "hint_1": "Use a return statement to send back the quotient.",
+        "hint_2": "The function should divide the first parameter by the second and return the result."
       },
-      "starterCode": "import math\n\ndef calculate_circumference(radius):\n    # Calculate the circumference\n    ",
-      "solutionCode": "import math\n\ndef calculate_circumference(radius):\n    return 2 * math.pi * radius",
+      "starterCode": "def divide(a, b):\n    # Your code here\n",
+      "solutionCode": "def divide(a, b):\n    return a / b\n",
       "tests": [
         {
-          "stdin": "1\n",
-          "stdout": "6.283185307179586\n",
+          "stdout": "2.0\n",
           "match": "exact"
         },
         {
-          "stdin": "2\n",
-          "stdout": "12.566370614359172\n",
+          "stdout": "5.0\n",
           "match": "exact"
         }
       ],
@@ -270,7 +267,7 @@
     }
   ],
   "projectDraft": {
-    "title": "Function Practice Project",
+    "title": "Function Implementation Project",
     "stepIds": [
       "quiz9",
       "quiz10",

@@ -153,16 +153,50 @@ function usesFilesystem(source: string): boolean {
 
 function referencedReadFiles(source: string): string[] {
     const paths = new Set<string>();
+    const pathVariables = new Map<string, string>();
     const openPattern =
         /open\s*\(\s*["'`]([^"'`]+)["'`]\s*(?:,\s*["'`]([^"'`]*)["'`])?/g;
+    const pathAssignmentPattern =
+        /\b([A-Za-z_]\w*)\s*=\s*Path\s*\(\s*["'`]([^"'`]+)["'`]\s*\)/g;
+    const pathOpenPattern =
+        /\bPath\s*\(\s*["'`]([^"'`]+)["'`]\s*\)\s*\.\s*open\s*\(\s*(?:["'`]([^"'`]*)["'`])?/g;
+    const variableOpenPattern =
+        /\b([A-Za-z_]\w*)\s*\.\s*open\s*\(\s*(?:["'`]([^"'`]*)["'`])?/g;
     const readTextPattern = /Path\s*\(\s*["'`]([^"'`]+)["'`]\s*\)\.read_text\s*\(/g;
 
+    for (const match of source.matchAll(pathAssignmentPattern)) {
+        const variableName = match[1]?.trim();
+        const filePath = match[2]?.trim();
+        if (!variableName || !filePath) continue;
+        pathVariables.set(variableName, filePath);
+    }
+
     for (const match of source.matchAll(openPattern)) {
+        if ((match.index ?? 0) > 0 && source[(match.index ?? 0) - 1] === ".") continue;
         const filePath = match[1]?.trim();
         const mode = (match[2] ?? "r").trim();
         if (!filePath) continue;
         if (mode.includes("w") || mode.includes("a") || mode.includes("x")) continue;
         paths.add(filePath);
+    }
+
+    for (const match of source.matchAll(pathOpenPattern)) {
+        const filePath = match[1]?.trim();
+        const mode = (match[2] ?? "r").trim();
+        if (!filePath) continue;
+        if (mode.includes("w") || mode.includes("a") || mode.includes("x")) continue;
+        paths.add(filePath);
+    }
+
+    for (const match of source.matchAll(variableOpenPattern)) {
+        const variableName = match[1]?.trim();
+        const mode = (match[2] ?? "r").trim();
+        if (!variableName) continue;
+        if (mode.includes("w") || mode.includes("a") || mode.includes("x")) continue;
+        const filePath = pathVariables.get(variableName);
+        if (filePath) {
+            paths.add(filePath);
+        }
     }
 
     for (const match of source.matchAll(readTextPattern)) {

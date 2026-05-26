@@ -13,7 +13,10 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
     args,
     resolved,
 ) => {
-    const expected = buildFixedTestsExpected(def.recipe);
+    const expected = buildFixedTestsExpected(
+        def.recipe,
+        def.workspaceExpectations ?? def.workspace?.workspaceExpectations,
+    );
     const tests = expected.tests;
 
     const expectedExample = buildTerminalExpectedExample({

@@ -1,0 +1,75 @@
+{
+  "topicId": "try-except-basics",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch1.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_INPUT_PROMPT_REMOVED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "quiz5",
+      "message": "Removed interactive input prompts from Python code_input starter and solution code so fixed tests only validate program output."
+    },
+    {
+      "code": "PYTHON_INPUT_PROMPT_REMOVED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "quiz6",
+      "message": "Removed interactive input prompts from Python code_input starter and solution code so fixed tests only validate program output."
+    },
+    {
+      "code": "PYTHON_TEST_FILE_FIXTURE_ADDED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz7",
+      "message": "Added 1 test-level Python file fixture set(s) so fixed_tests file I/O coverage matches each expected output."
+    },
+    {
+      "code": "PYTHON_FILE_FIXTURE_TESTS_ALIGNED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz7",
+      "message": "Aligned Python fixed_tests file fixtures with their expected outputs so golden validation can run each case safely."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_single_choice_1",
+      "message": "Added a fallback single_choice exercise to satisfy the planned exercise mix for \"try-except-basics\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_multi_choice_1",
+      "message": "Added a fallback multi_choice exercise to satisfy the planned exercise mix for \"try-except-basics\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_drag_reorder_1",
+      "message": "Added a fallback drag_reorder exercise to satisfy the planned exercise mix for \"try-except-basics\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_fill_blank_choice_1",
+      "message": "Added a fallback fill_blank_choice exercise to satisfy the planned exercise mix for \"try-except-basics\"."
+    },
+    {
+      "code": "PYTHON_FORBIDDEN_WORKSPACE_TERM_REPLACED",
+      "category": "text",
+      "severity": "medium",
+      "field": "policy_single_choice_1.help.hint_1",
+      "message": "Replaced forbidden Python browser-workspace wording with allowed learner-facing workspace language."
+    }
+  ]
+}

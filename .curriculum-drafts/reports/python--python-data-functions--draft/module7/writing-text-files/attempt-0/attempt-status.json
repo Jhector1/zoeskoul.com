@@ -2,5 +2,5 @@
   "attempt": 0,
   "status": "failed",
   "retryable": true,
-  "errorCode": "TOPIC_GENERATION_OUTPUT_INVALID"
+  "errorCode": "CRITIQUE_VALIDATION_FAILED"
 }

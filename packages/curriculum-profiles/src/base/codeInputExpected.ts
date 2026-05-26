@@ -1,6 +1,7 @@
 import type {
     ManifestComputedSpec,
     ManifestCodeInput,
+    ManifestWorkspaceExpectations,
     ManifestRecipe,
     ManifestSqlRuntimeDefaults,
     ManifestVarSpec,
@@ -27,6 +28,18 @@ type TemplateIoRecipe = Extract<ManifestRecipe, { type: "template_io" }>;
 type FixedTestsRecipe = Extract<ManifestRecipe, { type: "fixed_tests" }>;
 type SqlQueryRecipe = Extract<ManifestRecipe, { type: "sql_query" }>;
 type SemanticRecipe = Extract<ManifestRecipe, { type: "semantic" }>;
+
+function withWorkspaceExpectations<T extends object>(
+    expected: T,
+    workspaceExpectations?: ManifestWorkspaceExpectations,
+): T {
+    return workspaceExpectations
+        ? {
+            ...expected,
+            workspaceExpectations,
+        } as T
+        : expected;
+}
 
 type TemplateIoRng = {
     int(min: number, max: number): number;
@@ -138,27 +151,64 @@ export function resolveTemplateIoVars(args: {
     return vars;
 }
 
+function normalizeRecipeTestFiles(
+    files: FixedTestsRecipe["tests"][number]["files"],
+): ProgrammingCodeTest["files"] {
+    if (!Array.isArray(files) || files.length < 1) return undefined;
+
+    const normalized = files
+        .map((file) => {
+            const path = typeof file.path === "string" ? file.path.trim() : "";
+            if (!path) return null;
+
+            return {
+                path,
+                content: String(file.content ?? ""),
+                ...(typeof file.readOnly === "boolean"
+                    ? { readOnly: file.readOnly }
+                    : {}),
+            };
+        })
+        .filter((file): file is NonNullable<ProgrammingCodeTest["files"]>[number] =>
+            Boolean(file),
+        );
+
+    return normalized.length > 0 ? normalized : undefined;
+}
+
 export function buildFixedTestsExpected(
     recipe: FixedTestsRecipe,
+    workspaceExpectations?: ManifestWorkspaceExpectations,
 ): TerminalCodeInputExpectedPayload {
     if (!Array.isArray(recipe.tests) || recipe.tests.length < 1) {
-        throw new Error("Programming fixed_tests code_input recipes require at least one test.");
+        throw new Error(
+            "Programming fixed_tests code_input recipes require at least one test.",
+        );
     }
 
-    return makeProgrammingExpected({
-        tests: recipe.tests.map((test) => ({
-            stdin: test.stdin,
-            stdout: test.stdout,
-            match: test.match ?? "exact",
-        })),
-        solutionCode: recipe.solutionCode,
-    });
+    return withWorkspaceExpectations(
+        makeProgrammingExpected({
+            tests: recipe.tests.map((test) => {
+                const files = normalizeRecipeTestFiles(test.files);
+
+                return {
+                    stdin: test.stdin,
+                    stdout: test.stdout,
+                    match: test.match ?? "exact",
+                    ...(files ? { files } : {}),
+                };
+            }),
+            solutionCode: recipe.solutionCode,
+        }),
+        workspaceExpectations,
+    );
 }
 
 export function buildTemplateIoExpected(args: {
     recipe: TemplateIoRecipe;
     rng?: TemplateIoRng;
     vars?: Record<string, TemplateIoVarValue>;
+    workspaceExpectations?: ManifestWorkspaceExpectations;
 }): TerminalCodeInputExpectedPayload {
     if (!Array.isArray(args.recipe.tests) || args.recipe.tests.length < 1) {
         throw new Error("Programming template_io code_input recipes require at least one test.");
@@ -166,7 +216,7 @@ export function buildTemplateIoExpected(args: {
 
     const vars = resolveTemplateIoVars(args);
 
-    return makeProgrammingExpected({
+    return withWorkspaceExpectations(makeProgrammingExpected({
         tests: args.recipe.tests.map((test) => ({
             stdin: test.stdinTemplate
                 ? fillTemplate(test.stdinTemplate, vars)
@@ -177,11 +227,12 @@ export function buildTemplateIoExpected(args: {
         ...(args.recipe.solutionTemplate
             ? { solutionCode: fillTemplate(args.recipe.solutionTemplate, vars) }
             : {}),
-    });
+    }), args.workspaceExpectations);
 }
 
 export function buildSemanticExpected(
     recipe: SemanticRecipe,
+    workspaceExpectations?: ManifestWorkspaceExpectations,
 ): TerminalCodeInputExpectedPayload {
     const semanticChecks = Array.isArray(recipe.semanticChecks)
         ? recipe.semanticChecks
@@ -191,12 +242,12 @@ export function buildSemanticExpected(
         throw new Error("Semantic code_input recipes require at least one semantic check.");
     }
 
-    return makeProgrammingExpected({
+    return withWorkspaceExpectations(makeProgrammingExpected({
         language: recipe.language as Parameters<typeof makeProgrammingExpected>[0]["language"],
         checkMode: "semantic",
         semanticChecks: semanticChecks as SemanticCheck[],
         solutionCode: recipe.solutionCode,
-    });
+    }), workspaceExpectations);
 }
 
 function stripSqlComments(sql: string): string {
@@ -340,15 +391,24 @@ export function buildSqlQueryExpected(args: {
 }
 
 export function buildCodeInputExpected(
-    exercise: Pick<ManifestCodeInput, "recipe" | "fixedSqlDialect">,
+    exercise: Pick<
+        ManifestCodeInput,
+        "recipe" | "fixedSqlDialect" | "workspaceExpectations" | "workspace"
+    >,
 ): CodeInputExpectedPayload {
+    const workspaceExpectations =
+        exercise.workspaceExpectations ?? exercise.workspace?.workspaceExpectations;
+
     switch (exercise.recipe.type) {
         case "fixed_tests":
-            return buildFixedTestsExpected(exercise.recipe);
+            return buildFixedTestsExpected(exercise.recipe, workspaceExpectations);
         case "template_io":
-            return buildTemplateIoExpected({ recipe: exercise.recipe });
+            return buildTemplateIoExpected({
+                recipe: exercise.recipe,
+                workspaceExpectations,
+            });
         case "semantic":
-            return buildSemanticExpected(exercise.recipe);
+            return buildSemanticExpected(exercise.recipe, workspaceExpectations);
         case "sql_query":
             return buildSqlQueryExpected({
                 recipe: exercise.recipe,

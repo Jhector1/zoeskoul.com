@@ -27,13 +27,6 @@
       "height": 420
     },
     {
-      "id": "sketch1",
-      "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch1.title",
-      "sketchId": "sketch2",
-      "height": 420
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.quiz.title",
@@ -95,12 +88,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.sketch1.title",
       "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.sketch1.bodyMarkdown"
-    },
-    {
-      "id": "sketch2",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.sketch2.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.sketch2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -137,8 +124,7 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "d"
         ]
       }
     },
@@ -150,13 +136,15 @@
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz3",
       "tokenIds": [
         "t1",
-        "t2"
+        "t2",
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
-          "t2"
+          "t2",
+          "t3"
         ]
       }
     },
@@ -166,10 +154,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz4",
-      "choiceCount": 3,
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "'age'"
+        "value": "25"
       }
     },
     {
@@ -179,15 +167,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz5",
       "language": "python",
-      "starterCode": "def get_value(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(get_value(d, key))",
+      "starterCode": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5}\n\n# Add your code below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5}\n\n# Add your code below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def get_value(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(get_value(d, key))",
+        "starterCode": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5}\n\n# Add your code below",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def get_value(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(get_value(d, key))",
+            "content": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5}\n\n# Add your code below",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -199,17 +196,15 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "{'name': 'Alice', 'age': 23}\nname\n",
-            "stdout": "Alice\n",
+            "stdout": "{'apples': 10, 'bananas': 5, 'oranges': 7}\n",
             "match": "exact"
           },
           {
-            "stdin": "{'name': 'Alice', 'age': 23}\nheight\n",
-            "stdout": "Key not found\n",
+            "stdout": "{'apples': 10, 'bananas': 5, 'oranges': 7}\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "def get_value(d, key):\n    return d.get(key, 'Key not found')\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(get_value(d, key))"
+        "solutionCode": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5}\n\n# Add a new key-value pair\ninventory['oranges'] = 7\n\n# Print the updated dictionary\nprint(inventory)"
       }
     },
     {
@@ -239,16 +234,14 @@
         "a",
         "b",
         "c",
-        "d",
-        "e"
+        "d"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
+          "b",
           "c",
-          "d",
-          "e"
+          "d"
         ]
       }
     },
@@ -291,15 +284,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz10",
       "language": "python",
-      "starterCode": "def has_key(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(has_key(d, key))",
+      "starterCode": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5, 'oranges': 7}\n\n# Add your code below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5, 'oranges': 7}\n\n# Add your code below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def has_key(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(has_key(d, key))",
+        "starterCode": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5, 'oranges': 7}\n\n# Add your code below",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def has_key(d, key):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(has_key(d, key))",
+            "content": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5, 'oranges': 7}\n\n# Add your code below",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -311,17 +313,15 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "{'name': 'Alice', 'age': 23}\nage\n",
-            "stdout": "True\n",
+            "stdout": "{'apples': 10, 'oranges': 7}\n",
             "match": "exact"
           },
           {
-            "stdin": "{'name': 'Alice', 'age': 23}\nheight\n",
-            "stdout": "False\n",
+            "stdout": "{'apples': 10, 'oranges': 7}\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "def has_key(d, key):\n    return key in d\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nkey = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(has_key(d, key))"
+        "solutionCode": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5, 'oranges': 7}\n\n# Remove a key\ndel inventory['bananas']\n\n# Print the updated dictionary\nprint(inventory)"
       }
     },
     {
@@ -331,15 +331,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz11",
       "language": "python",
-      "starterCode": "def merge_dicts(d1, d2):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd1 = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nd2 = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(merge_dicts(d1, d2))",
+      "starterCode": "# Existing dictionary\ninventory = {'apples': 10, 'oranges': 7}\n\n# Add your code below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Existing dictionary\ninventory = {'apples': 10, 'oranges': 7}\n\n# Add your code below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def merge_dicts(d1, d2):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd1 = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nd2 = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(merge_dicts(d1, d2))",
+        "starterCode": "# Existing dictionary\ninventory = {'apples': 10, 'oranges': 7}\n\n# Add your code below",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def merge_dicts(d1, d2):\n    # Write your code below\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd1 = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nd2 = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(merge_dicts(d1, d2))",
+            "content": "# Existing dictionary\ninventory = {'apples': 10, 'oranges': 7}\n\n# Add your code below",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -351,17 +360,15 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "{'a': 1, 'b': 2}\n{'b': 3, 'c': 4}\n",
-            "stdout": "{'a': 1, 'b': 3, 'c': 4}\n",
+            "stdout": "Bananas are not in stock.\n",
             "match": "exact"
           },
           {
-            "stdin": "{'x': 10}\n{'y': 20, 'x': 30}\n",
-            "stdout": "{'x': 30, 'y': 20}\n",
+            "stdout": "Bananas are not in stock.\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "def merge_dicts(d1, d2):\n    d1.update(d2)\n    return d1\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nd1 = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nd2 = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(merge_dicts(d1, d2))"
+        "solutionCode": "# Existing dictionary\ninventory = {'apples': 10, 'oranges': 7}\n\n# Check if 'bananas' is in the dictionary\nif 'bananas' in inventory:\n    print('Bananas are in stock.')\nelse:\n    print('Bananas are not in stock.')"
       }
     }
   ]

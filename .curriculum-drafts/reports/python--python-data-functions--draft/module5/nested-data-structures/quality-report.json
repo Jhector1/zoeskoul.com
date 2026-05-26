@@ -21,13 +21,13 @@
     "thinFixedTestCount": 0,
     "blockers": 0,
     "errors": 0,
-    "warnings": 2,
+    "warnings": 3,
     "infos": 0
   },
   "severityCounts": {
     "blocker": 0,
     "error": 0,
-    "warning": 2,
+    "warning": 3,
     "info": 0
   },
   "issues": [
@@ -47,8 +47,18 @@
       "profileId": "python",
       "moduleId": "python-5-lists-tuples-and-dictionaries",
       "topicId": "nested-data-structures",
-      "exerciseId": "quiz6",
-      "message": "Exercise \"quiz6\" starterCode appears to contain most of the final solution structure."
+      "exerciseId": "q5",
+      "message": "Exercise \"q5\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-dictionaries/nested-data-structures",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "nested-data-structures",
+      "exerciseId": "q10",
+      "message": "Exercise \"q10\" starterCode appears to contain most of the final solution structure."
     }
   ]
 }

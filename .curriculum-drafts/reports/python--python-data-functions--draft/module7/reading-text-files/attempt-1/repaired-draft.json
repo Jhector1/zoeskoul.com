@@ -5,20 +5,15 @@
   "sketchBlocks": [
     {
       "id": "sketch1",
-      "title": "Introduction to File Reading",
-      "bodyMarkdown": "Reading text files in Python is a fundamental skill. It involves opening a file, reading its contents, and then closing the file to free up resources. Here's a simple example:\n\n```python\nwith open('example.txt', 'r') as file:\n    content = file.read()\n    print(content)\n```\n\nIn this example, `open()` is used to open the file in read mode (`'r'`). The `with` statement ensures that the file is properly closed after its suite finishes, even if an exception is raised. `file.read()` reads the entire content of the file into a string.\n\n**Try it yourself:** Modify the code to read only the first 10 characters of the file using `file.read(10)`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
-    },
-    {
-      "id": "sketch2",
-      "title": "Reading Files Line by Line",
-      "bodyMarkdown": "Sometimes, you may want to read a file line by line, especially if it's large. This can be done using a loop:\n\n```python\nwith open('example.txt', 'r') as file:\n    for line in file:\n        print(line.strip())\n```\n\nThis code reads each line of the file one by one. The `strip()` method is used to remove any trailing newline characters from each line.\n\n**Your turn:** Try modifying the code to count the number of lines in the file."
+      "title": "Reading a Text File in Python",
+      "bodyMarkdown": "To read a text file in Python, you can use the `open()` function to open the file, and then use the `read()` method to read its contents. Here's a simple example:\n\n```python\n# Open the file in read mode\nfile = open('data.txt', 'r')\n\n# Read the contents of the file\ncontent = file.read()\n\n# Print the contents\nprint(content)\n\n# Close the file\nfile.close()\n```\n\nThis code opens a file named `data.txt`, reads its contents, prints them, and then closes the file. \n\n**Try it yourself:** Modify the file name to read a different file and observe the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
     }
   ],
   "quizDraft": [
     {
       "id": "quiz1",
       "kind": "single_choice",
-      "title": "File Modes",
+      "title": "File Modes in Python",
       "prompt": "Which file mode should you use to read a file in Python?",
       "options": [
         "w",
@@ -39,22 +34,22 @@
     {
       "id": "quiz2",
       "kind": "single_choice",
-      "title": "Closing Files",
-      "prompt": "What is the advantage of using a `with` statement when opening files?",
+      "title": "Closing a File",
+      "prompt": "Why is it important to close a file after reading it in Python?",
       "options": [
-        "It automatically closes the file.",
-        "It opens the file in write mode.",
-        "It reads the file faster.",
-        "It allows multiple files to be opened."
+        "To free up system resources",
+        "To delete the file",
+        "To encrypt the file",
+        "To rename the file"
       ],
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "hint": "Think about resource management and system performance.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+        "concept": "Closing a file releases system resources and ensures data integrity.",
+        "hint_1": "Leaving files open can lead to resource leaks.",
+        "hint_2": "Closing a file ensures that all resources are freed and data is saved properly."
       }
     },
     {
@@ -83,23 +78,24 @@
     {
       "id": "quiz4",
       "kind": "multi_choice",
-      "title": "File Handling Best Practices",
-      "prompt": "Which of the following are best practices for handling files in Python? Select all that apply.",
+      "title": "Handling Exceptions",
+      "prompt": "Which of the following are good practices when handling file reading exceptions in Python? Select all that apply.",
       "options": [
-        "Always use `with` to open files.",
-        "Manually close files using `close()`.",
-        "Handle exceptions using try-except.",
-        "Open files in binary mode by default."
+        "Using try-except blocks",
+        "Ignoring exceptions",
+        "Using finally to close files",
+        "Printing error messages"
       ],
       "correctOptionIds": [
         "a",
-        "c"
+        "c",
+        "d"
       ],
-      "hint": "Consider practices that ensure safety and efficiency.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
-        "concept": "Best practices include using `with` for automatic closing and handling exceptions.",
-        "hint_1": "Think about resource management and error handling.",
-        "hint_2": "Using `with` and handling exceptions are key practices."
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
       }
     },
     {
@@ -109,12 +105,12 @@
       "prompt": "Arrange the steps to read a file in Python in the correct order.",
       "tokens": [
         "Open the file",
-        "Read the file contents",
+        "Read the contents",
         "Close the file"
       ],
       "correctOrder": [
         "Open the file",
-        "Read the file contents",
+        "Read the contents",
         "Close the file"
       ],
       "hint": "Start with opening the file and end with closing it.",
@@ -130,28 +126,28 @@
       "title": "File Reading with Context Manager",
       "prompt": "Arrange the steps to read a file using a context manager in Python.",
       "tokens": [
-        "Use `with` to open the file",
-        "Read the file contents",
+        "Use 'with' to open the file",
+        "Read the contents",
         "File is automatically closed"
       ],
       "correctOrder": [
-        "Use `with` to open the file",
-        "Read the file contents",
+        "Use 'with' to open the file",
+        "Read the contents",
         "File is automatically closed"
       ],
-      "hint": "The context manager handles opening and closing.",
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
       "help": {
-        "concept": "Using a context manager involves opening a file, reading it, and automatically closing it.",
-        "hint_1": "The `with` statement is used to open the file.",
-        "hint_2": "Reading happens inside the `with` block."
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
       }
     },
     {
       "id": "quiz7",
       "kind": "fill_blank_choice",
-      "title": "File Mode for Reading",
-      "prompt": "Fill in the blank to specify the file mode for reading a file.",
-      "template": "open('file.txt', '[blank1]')",
+      "title": "File Reading Syntax",
+      "prompt": "Complete the syntax to open a file for reading in Python.",
+      "template": "file = open('data.txt', [blank1])",
       "choices": [
         "r",
         "w",
@@ -169,90 +165,111 @@
     {
       "id": "quiz8",
       "kind": "fill_blank_choice",
-      "title": "Reading a File Line by Line",
-      "prompt": "Fill in the blank to complete the code for reading a file line by line.",
-      "template": "for line in [blank1]:",
+      "title": "Reading File Contents",
+      "prompt": "Fill in the blank to read the entire contents of a file in Python.",
+      "template": "content = file.[blank1]()",
       "choices": [
-        "file",
-        "open('file.txt')",
-        "read()",
-        "lines"
+        "read",
+        "write",
+        "readline",
+        "readlines"
       ],
-      "correctValue": "file",
-      "hint": "Use a loop to iterate over lines.",
+      "correctValue": "read",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
-        "concept": "Using a loop to iterate over a the missing term object reads it line by line.",
-        "hint_1": "The loop variable represents each line.",
-        "hint_2": "Use `for` to start the loop."
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
       }
     },
     {
       "id": "quiz9",
       "kind": "code_input",
-      "title": "Read and Print File Content",
-      "prompt": "Write a Python program to read the contents of 'data.txt' and print it to the output panel.",
+      "title": "Read and Print File Contents",
+      "prompt": "Write a Python program to read the contents of 'data/input.txt' and print them.",
       "starterCode": "# Write your code below",
-      "solutionCode": "with open('data.txt', 'r') as file:\n    content = file.read()\n    print(content)",
+      "solutionCode": "file = open('data/input.txt', 'r')\ncontent = file.read()\nprint(content)\nfile.close()",
       "tests": [
         {
-          "stdout": "Hello, World!\nThis is a test file.\n",
+          "stdout": "Hello, World!\nThis is a test file.\n\nAnother line.",
           "match": "exact",
           "files": [
             {
-              "path": "data.txt",
-              "content": "Hello, World!\nThis is a test file.",
-              "readOnly": true
+              "path": "data/input.txt",
+              "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+              "readOnly": false
             }
           ]
         },
         {
-          "stdout": "Python is fun!\nLet's read files.\n",
+          "stdout": "Python is fun!\nLet's learn more.\n\nKeep going!",
           "match": "exact",
           "files": [
             {
-              "path": "data.txt",
-              "content": "Python is fun!\nLet's read files.",
-              "readOnly": true
+              "path": "data/input.txt",
+              "content": "Python is fun!\nLet's learn more.\n\nKeep going!",
+              "readOnly": false
             }
           ]
         }
       ],
-      "recipeType": "fixed_tests",
-      "hint": "Read the task \"Read and Print File Content\" and identify the required result.",
-      "help": {
-        "concept": "This coding exercise checks whether your code produces the requested result for: \"Read and Print File Content\".",
-        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-        "hint_2": "Click Run and compare the output panel with the expected result."
-      },
       "files": [
         {
-          "path": "data.txt",
-          "content": "Hello, World!\nThis is a test file.",
-          "readOnly": true
+          "path": "data/input.txt",
+          "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+          "readOnly": false
         }
-      ]
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Read and Print File Contents\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Read and Print File Contents\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
     },
     {
       "id": "quiz10",
       "kind": "code_input",
-      "title": "Count Lines in a File",
-      "prompt": "Write a Python program to count the number of lines in 'data.txt'.",
-      "starterCode": "# Write your code below",
-      "solutionCode": "with open('data.txt', 'r') as file:\n    line_count = sum(1 for line in file)\nprint(line_count)",
+      "title": "Using Context Manager to Read Files",
+      "prompt": "Modify the program to use a context manager to read 'data/input.txt' and print its contents.",
+      "starterCode": "file = open('data/input.txt', 'r')\ncontent = file.read()\n\n# Modify the code to use a context manager",
+      "solutionCode": "file = open('data/input.txt', 'r')\ncontent = file.read()\n\nwith open('data/input.txt', 'r') as file:\n    content = file.read()\n    print(content)",
       "tests": [
         {
-          "stdout": "3\n",
-          "match": "exact"
+          "stdout": "Hello, World!\nThis is a test file.\n\nAnother line.",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/input.txt",
+              "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+              "readOnly": false
+            }
+          ]
         },
         {
-          "stdout": "5\n",
-          "match": "exact"
+          "stdout": "Python is fun!\nLet's learn more.\n\nKeep going!",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/input.txt",
+              "content": "Python is fun!\nLet's learn more.\n\nKeep going!",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "data/input.txt",
+          "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+          "readOnly": false
         }
       ],
       "recipeType": "fixed_tests",
-      "hint": "Read the task \"Count Lines in a File\" and identify the required result.",
+      "hint": "Read the task \"Using Context Manager to Read Files\" and identify the required result.",
       "help": {
-        "concept": "This coding exercise checks whether your code produces the requested result for: \"Count Lines in a File\".",
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Using Context Manager to Read Files\".",
         "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
         "hint_2": "Click Run and compare the output panel with the expected result."
       }
@@ -260,31 +277,52 @@
     {
       "id": "quiz11",
       "kind": "code_input",
-      "title": "Read First N Characters",
-      "prompt": "Write a Python program to read the first 10 characters of 'data.txt' and print them.",
-      "starterCode": "# Write your code below",
-      "solutionCode": "with open('data.txt', 'r') as file:\n    content = file.read(10)\n    print(content)",
+      "title": "Reading Lines from a File",
+      "prompt": "Write a Python program to read and print each line from 'data/input.txt' separately.",
+      "starterCode": "file = open('data/input.txt', 'r')\n\n# Write your code below",
+      "solutionCode": "file = open('data/input.txt', 'r')\n\nwith open('data/input.txt', 'r') as file:\n    for line in file:\n        print(line.strip())",
       "tests": [
         {
-          "stdout": "Hello, Wor\n",
-          "match": "exact"
+          "stdout": "Hello, World!\nThis is a test file.\n\nAnother line.",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/input.txt",
+              "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+              "readOnly": false
+            }
+          ]
         },
         {
-          "stdout": "Python is \n",
-          "match": "exact"
+          "stdout": "Python is fun!\nLet's learn more.\n\nKeep going!",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/input.txt",
+              "content": "Python is fun!\nLet's learn more.\n\nKeep going!",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "data/input.txt",
+          "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+          "readOnly": false
         }
       ],
       "recipeType": "fixed_tests",
-      "hint": "Read the task \"Read First N Characters\" and identify the required result.",
+      "hint": "Read the task \"Reading Lines from a File\" and identify the required result.",
       "help": {
-        "concept": "This coding exercise checks whether your code produces the requested result for: \"Read First N Characters\".",
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Reading Lines from a File\".",
         "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
         "hint_2": "Click Run and compare the output panel with the expected result."
       }
     }
   ],
   "projectDraft": {
-    "title": "File Reading Project",
+    "title": "Reading Text Files Project",
     "stepIds": [
       "quiz9",
       "quiz10",

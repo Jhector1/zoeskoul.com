@@ -13,6 +13,8 @@ export const buildTemplateIoRecipe = (def: any, args: any, resolved: any) => {
   const expected = buildTemplateIoExpected({
     recipe: def.recipe,
     vars,
+    workspaceExpectations:
+      def.workspaceExpectations ?? def.workspace?.workspaceExpectations,
   });
   const tests = expected.tests;
 

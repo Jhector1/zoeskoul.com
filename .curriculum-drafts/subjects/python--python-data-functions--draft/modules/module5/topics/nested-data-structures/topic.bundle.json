@@ -27,13 +27,6 @@
       "height": 420
     },
     {
-      "id": "sketch1",
-      "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.sketch1.title",
-      "sketchId": "sketch2",
-      "height": 420
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.quiz.title",
@@ -59,27 +52,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz5",
-            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.quiz5.title",
-            "exerciseKey": "quiz5",
+            "id": "q5",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.q5.title",
+            "exerciseKey": "q5",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz6",
-            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.quiz6.title",
-            "exerciseKey": "quiz6",
+            "id": "q10",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.q10.title",
+            "exerciseKey": "q10",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz7",
-            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.quiz7.title",
-            "exerciseKey": "quiz7",
+            "id": "q11",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.q11.title",
+            "exerciseKey": "q11",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -95,24 +88,19 @@
       "archetype": "paragraph",
       "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch1.title",
       "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch1.bodyMarkdown"
-    },
-    {
-      "id": "sketch2",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch2.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch2.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "q1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.quiz1",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q1",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c"
       ],
       "expected": {
         "kind": "single_choice",
@@ -120,11 +108,11 @@
       }
     },
     {
-      "id": "quiz2",
+      "id": "q2",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.quiz2",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q2",
       "optionIds": [
         "a",
         "b",
@@ -135,16 +123,17 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "b",
+          "d"
         ]
       }
     },
     {
-      "id": "quiz3",
+      "id": "q3",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.quiz3",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q3",
       "tokenIds": [
         "t1",
         "t2"
@@ -158,33 +147,42 @@
       }
     },
     {
-      "id": "quiz4",
+      "id": "q4",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.quiz4",
-      "choiceCount": 3,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q4",
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "author"
+        "value": "name"
       }
     },
     {
-      "id": "quiz5",
+      "id": "q5",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.quiz5",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q5",
       "language": "python",
-      "starterCode": "_inputs = []\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\n# Write your answer below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_average(grades, student_name))",
+      "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\n# Print all student names",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\n# Print all student names",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "_inputs = []\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\n# Write your answer below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_average(grades, student_name))",
+        "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\n# Print all student names",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "_inputs = []\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\n# Write your answer below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_average(grades, student_name))",
+            "content": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\n# Print all student names",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -196,110 +194,27 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "{\"Alice\": [85, 92, 88], \"Bob\": [79, 95, 91]}\nAlice\n",
-            "stdout": "88.33333333333333\n",
+            "stdout": "Alice\nBob\nCharlie\nDavid\n",
             "match": "exact"
           },
           {
-            "stdin": "{\"Alice\": [85, 92, 88], \"Bob\": [79, 95, 91]}\nBob\n",
-            "stdout": "88.33333333333333\n",
+            "stdout": "Alice\nBob\nCharlie\nDavid\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "_inputs = []\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\ndef calculate_average(grades, student_name):\n    student_grades = grades[student_name]\n    average = sum(student_grades) / len(student_grades)\n    return average\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_average(grades, student_name))"
+        "solutionCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\nstudents.append({'name': 'David', 'age': 21, 'major': 'Chemistry'})\n\n# Print all student names\nfor student in students:\n    print(student['name'])"
       }
     },
     {
-      "id": "quiz6",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.quiz6",
-      "language": "python",
-      "starterCode": "# Write your answer below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\nprint(add_student(grades, student_name, student_grades))",
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "# Write your answer below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\nprint(add_student(grades, student_name, student_grades))",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "# Write your answer below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\nprint(add_student(grades, student_name, student_grades))",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "{\"Alice\": [85, 92, 88]}\nCharlie\n[90, 85, 87]\n",
-            "stdout": "{'Alice': [85, 92, 88], 'Charlie': [90, 85, 87]}",
-            "match": "exact"
-          },
-          {
-            "stdin": "{\"Bob\": [79, 95, 91]}\nDavid\n[88, 90, 92]\n",
-            "stdout": "{'Bob': [79, 95, 91], 'David': [88, 90, 92]}",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "def add_student(grades, student_name, student_grades):\n    grades[student_name] = student_grades\n    return grades\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\nprint(add_student(grades, student_name, student_grades))"
-      }
-    },
-    {
-      "id": "quiz7",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.quiz7",
-      "language": "python",
-      "starterCode": "_inputs = []\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\n# Write your answer below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(find_highest_average(grades))",
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "_inputs = []\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\n# Write your answer below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(find_highest_average(grades))",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "_inputs = []\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\n# Write your answer below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(find_highest_average(grades))",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "{\"Alice\": [85, 92, 88], \"Bob\": [79, 95, 91]}\n",
-            "stdout": "Alice",
-            "match": "exact"
-          },
-          {
-            "stdin": "{\"Charlie\": [90, 85, 87], \"David\": [88, 90, 92]}\n",
-            "stdout": "David",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "_inputs = []\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\ndef find_highest_average(grades):\n    highest_average = 0\n    top_student = \"\"\n    for student, student_grades in grades.items():\n        average = sum(student_grades) / len(student_grades)\n        if average > highest_average:\n            highest_average = average\n            top_student = student\n    return top_student\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(find_highest_average(grades))"
-      }
-    },
-    {
-      "id": "policy_single_choice_1",
+      "id": "q6",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.policy_single_choice_1",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q6",
       "optionIds": [
         "a",
         "b",
-        "c",
-        "d"
+        "c"
       ],
       "expected": {
         "kind": "single_choice",
@@ -307,11 +222,11 @@
       }
     },
     {
-      "id": "policy_multi_choice_1",
+      "id": "q7",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.policy_multi_choice_1",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q7",
       "optionIds": [
         "a",
         "b",
@@ -322,16 +237,17 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b"
+          "b",
+          "c"
         ]
       }
     },
     {
-      "id": "policy_drag_reorder_1",
+      "id": "q8",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.policy_drag_reorder_1",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q8",
       "tokenIds": [
         "t1",
         "t2",
@@ -347,15 +263,109 @@
       }
     },
     {
-      "id": "policy_fill_blank_choice_1",
+      "id": "q9",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.policy_fill_blank_choice_1",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q9",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "if"
+        "value": "age"
+      }
+    },
+    {
+      "id": "q10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q10",
+      "language": "python",
+      "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "23.0\n",
+            "match": "exact"
+          },
+          {
+            "stdout": "23.0\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age\nage_sum = sum(student['age'] for student in students)\naverage_age = age_sum / len(students)\nprint(average_age)"
+      }
+    },
+    {
+      "id": "q11",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q11",
+      "language": "python",
+      "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    # Implement the function\n    pass\n\n# Example usage\n# print(find_student_by_major('Mathematics'))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    # Implement the function\n    pass\n\n# Example usage\n# print(find_student_by_major('Mathematics'))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    # Implement the function\n    pass\n\n# Example usage\n# print(find_student_by_major('Mathematics'))",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    # Implement the function\n    pass\n\n# Example usage\n# print(find_student_by_major('Mathematics'))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "Bob",
+            "match": "exact"
+          },
+          {
+            "stdout": "Bob",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    for student in students:\n        if student['major'] == major:\n            return student['name']\n\n# Example usage\nprint(find_student_by_major('Mathematics'))"
       }
     }
   ]

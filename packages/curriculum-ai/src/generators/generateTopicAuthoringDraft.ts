@@ -6,7 +6,7 @@ import { validateTopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
 import { GeneratedJsonError, type AiProvider, type GeneratedJsonResult, type TopicRetryContext } from "../types.js";
 import { buildTopicAuthoringDraftPrompt } from "../prompts/buildTopicAuthoringDraftPrompt.js";
-
+import { sanitizeGeneratedTopicAuthoringDraft } from "./sanitizeGeneratedTopicAuthoringDraft.js";
 export const TOPIC_AUTHORING_DRAFT_GENERATOR_VERSION =
     "2026-05-23-topic-authoring-draft-generator-v1";
 
@@ -40,21 +40,29 @@ export async function generateTopicAuthoringDraftAttempt(
             schemaName: "TopicAuthoringDraft",
         });
 
-        const validationResult = validateTopicAuthoringDraft(generation.value);
+        const sanitizedValue = sanitizeGeneratedTopicAuthoringDraft(generation.value);
+
+        const sanitizedGeneration: GeneratedJsonResult<TopicAuthoringDraft> = {
+            ...generation,
+            value: sanitizedValue,
+            parsedJson: sanitizedValue,
+        };
+
+        const validationResult = validateTopicAuthoringDraft(sanitizedGeneration.value);
         if (!validationResult.ok) {
             throw new GeneratedJsonError({
                 code: "SCHEMA_VALIDATION_FAILED",
                 message: validationResult.errors.join("\n"),
-                metadata: generation,
-                rawText: generation.rawText,
-                parsedJson: generation.parsedJson,
+                metadata: sanitizedGeneration,
+                rawText: sanitizedGeneration.rawText,
+                parsedJson: sanitizedGeneration.parsedJson,
                 validationErrors: validationResult.errors,
             });
         }
 
         return {
             prompt,
-            generation,
+            generation: sanitizedGeneration,
         };
     } catch (error) {
         if (error && typeof error === "object") {

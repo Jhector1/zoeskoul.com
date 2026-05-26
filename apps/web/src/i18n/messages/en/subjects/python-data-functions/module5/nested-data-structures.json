@@ -9,9 +9,6 @@
             "sketch0": {
               "title": "Understanding Nested Data Structures"
             },
-            "sketch1": {
-              "title": "Working with Nested Lists and Dictionaries"
-            },
             "quiz": {
               "title": "Quiz"
             },
@@ -20,173 +17,174 @@
             }
           },
           "projectSteps": {
-            "quiz5": {
-              "title": "Calculate Average Grade"
+            "q5": {
+              "title": "Modify Nested Data"
             },
-            "quiz6": {
-              "title": "Add New Student"
+            "q10": {
+              "title": "Calculate Average Age"
             },
-            "quiz7": {
-              "title": "Find Student with Highest Average"
+            "q11": {
+              "title": "Find Student by Major"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "Accessing Nested Dictionary Values",
-              "prompt": "How do you access the 'major' of the first student in the list `students`?",
-              "hint": "Use indexing to access the dictionary, then the key.",
+            "q1": {
+              "title": "Accessing Nested Data",
+              "prompt": "How do you access the 'major' of the second student in the list?",
+              "hint": "Use indexing to access the second dictionary and then the key.",
               "help": {
-                "concept": "Accessing nested dictionary values involves using list indexing followed by dictionary key access.",
-                "hint_1": "First, index into the list to get the dictionary.",
+                "concept": "Accessing nested data involves using indices and keys.",
+                "hint_1": "First, access the second dictionary using an index.",
                 "hint_2": "Then, use the key 'major' to get the value."
               },
               "options": {
-                "a": "students[0]['major']",
-                "b": "students['major'][0]"
+                "a": "students[1]['major']",
+                "b": "students[2]['major']",
+                "c": "students['major'][1]"
               }
             },
-            "quiz2": {
-              "title": "Choosing the Right Data Structure",
-              "prompt": "Which of the following are valid reasons to use a list of dictionaries?",
-              "hint": "Consider the flexibility and organization of data.",
+            "q2": {
+              "title": "Characteristics of Nested Data Structures",
+              "prompt": "Which of the following are true about nested data structures?",
+              "hint": "Consider how data is organized and accessed.",
               "help": {
-                "concept": "Lists of dictionaries are useful for organizing collections of records with similar fields.",
-                "hint_1": "Think about how you can store multiple records with the same structure.",
-                "hint_2": "Consider how easy it is to add or remove records."
+                "concept": "Nested data structures can combine different types of containers.",
+                "hint_1": "Think about how lists and dictionaries can be combined.",
+                "hint_2": "Consider the flexibility of accessing data in nested structures."
               },
               "options": {
-                "a": "To store a collection of records with similar fields",
-                "b": "To perform mathematical operations on all elements",
-                "c": "To easily add or remove records",
-                "d": "To ensure all records have the same data type"
+                "a": "They can contain lists within dictionaries.",
+                "b": "They can contain dictionaries within lists.",
+                "c": "They are limited to two levels of nesting.",
+                "d": "They allow complex data representation."
               }
             },
-            "quiz3": {
-              "title": "Order of Operations in Nested Structures",
-              "prompt": "Arrange the steps to access the 'age' of the second student in the list `students`.",
-              "hint": "Start by accessing the correct list element.",
+            "q3": {
+              "title": "Order of Accessing Nested Data",
+              "prompt": "Arrange the steps to access the 'age' of the first student in the list.",
+              "hint": "Start from the outermost structure and move inward.",
               "help": {
-                "concept": "Accessing nested data involves indexing into the list and then using the dictionary key.",
-                "hint_1": "First, index into the list to get the second student.",
-                "hint_2": "Then, use the key 'age' to get the value."
+                "concept": "Accessing nested data requires moving through each layer of the structure.",
+                "hint_1": "Begin with the list index to access the first dictionary.",
+                "hint_2": "Use the key to access the value within the dictionary."
               },
               "tokens": {
-                "t1": "Index into the list with [1]",
-                "t2": "Access the dictionary with the key 'age'"
+                "t1": "Access the list using index 0",
+                "t2": "Use the key 'age'"
               }
             },
-            "quiz4": {
+            "q4": {
               "title": "Dictionary Key Access",
-              "prompt": "Complete the code to access the 'author' of the first book in the list `books`.",
-              "hint": "Use indexing and key access.",
+              "prompt": "Complete the code to access the 'name' of the third student.",
+              "hint": "Use the correct index and key.",
               "help": {
-                "concept": "Accessing a value in a list of dictionaries requires list indexing followed by key access.",
-                "hint_1": "First, index into the list to get the dictionary.",
-                "hint_2": "Then, use the key 'the missing term' to get the value."
+                "concept": "Accessing a value in a nested dictionary requires the correct index and key.",
+                "hint_1": "Identify the index for the third student.",
+                "hint_2": "Use the key 'the missing term' to access the value."
               },
-              "template": "books[0][[blank1]]",
+              "template": "students[2][[blank1]]",
               "choices": [
-                "author",
-                "title",
-                "year"
+                "name",
+                "age",
+                "major",
+                "students"
               ]
             },
-            "quiz5": {
-              "title": "Calculate Average Grade",
-              "prompt": "Write a function `calculate_average` that takes a dictionary of student names and their list of grades, and returns the average grade for a given student name. Then read the input values, call the function, and print the returned result.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "q5": {
+              "title": "Modify Nested Data",
+              "prompt": "Add a new student to the list and print all student names.",
+              "hint": "Read the task \"Modify Nested Data\" and identify the required result.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
-              },
-              "starterCode": "_inputs = []\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\n# Write your answer below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_average(grades, student_name))"
-            },
-            "quiz6": {
-              "title": "Add New Student",
-              "prompt": "Write a function `add_student` that adds a new student and their grades to the dictionary. Then read the input values, call the function, and print the returned result.",
-              "hint": "Read the task \"Add New Student\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Add New Student\".",
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Modify Nested Data\".",
                 "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "# Write your answer below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\nprint(add_student(grades, student_name, student_grades))"
+              "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\n# Print all student names"
             },
-            "quiz7": {
-              "title": "Find Student with Highest Average",
-              "prompt": "Write a function `find_highest_average` that returns the name of the student with the highest average grade. Then read the input value, call the function, and print the returned result.",
+            "q6": {
+              "title": "Nested List Access",
+              "prompt": "What is the correct way to access the first element of the list stored in the 'courses' key of a dictionary?",
+              "hint": "Use the key to access the list, then index the list.",
+              "help": {
+                "concept": "Accessing a list within a dictionary requires using the key first, then indexing the list.",
+                "hint_1": "First, use the key to get the list.",
+                "hint_2": "Then, use an index to access the first element of the list."
+              },
+              "options": {
+                "a": "dictionary['courses'][0]",
+                "b": "dictionary[0]['courses']",
+                "c": "dictionary['courses'].first()"
+              }
+            },
+            "q7": {
+              "title": "Benefits of Nested Structures",
+              "prompt": "What are the benefits of using nested data structures?",
+              "hint": "Consider how they help organize and access data.",
+              "help": {
+                "concept": "Nested data structures provide a way to organize complex data efficiently.",
+                "hint_1": "Think about how they allow for hierarchical data representation.",
+                "hint_2": "Consider the ease of accessing related data together."
+              },
+              "options": {
+                "a": "They allow hierarchical data representation.",
+                "b": "They simplify data access.",
+                "c": "They reduce data redundancy.",
+                "d": "They limit data flexibility."
+              }
+            },
+            "q8": {
+              "title": "Steps to Update Nested Data",
+              "prompt": "Arrange the steps to update the 'major' of the second student to 'Computer Science'.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Access the list using index 1",
+                "t2": "Use the key 'major'",
+                "t3": "Assign 'Computer Science'"
+              }
+            },
+            "q9": {
+              "title": "Accessing Nested Dictionary",
+              "prompt": "Complete the code to access the 'age' of the first student.",
+              "hint": "Use the correct index and key.",
+              "help": {
+                "concept": "Accessing a value in a nested dictionary requires the correct index and key.",
+                "hint_1": "Identify the index for the first student.",
+                "hint_2": "Use the key 'the missing term' to access the value."
+              },
+              "template": "students[0][[blank1]]",
+              "choices": [
+                "age",
+                "name",
+                "major",
+                "students"
+              ]
+            },
+            "q10": {
+              "title": "Calculate Average Age",
+              "prompt": "Calculate the average age of all students in the list.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "_inputs = []\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstudent_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nstudent_grades = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\n# Write your answer below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ngrades = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(find_highest_average(grades))"
+              "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age"
             },
-            "policy_single_choice_1": {
-              "title": "Identify the result of running code",
-              "prompt": "In \"Nested Data Structures\", what should you check after running a Python program?",
-              "hint": "Running code lets you inspect what the program displays.",
+            "q11": {
+              "title": "Find Student by Major",
+              "prompt": "Write a function to find and return the name of the student studying a given major.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "When you run Python code, the most important feedback is usually the output or error message.",
-                "hint_1": "Look at the output panel.",
-                "hint_2": "Printed values appear after the program runs."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "options": {
-                "a": "The output shown by the program",
-                "b": "Only the file name",
-                "c": "Whether Python deletes the code",
-                "d": "Whether comments are printed automatically"
-              }
-            },
-            "policy_multi_choice_1": {
-              "title": "Choose good run-and-check habits",
-              "prompt": "Which habits help when practicing \"Nested Data Structures\"?",
-              "hint": "Good practice means running code and checking what happened.",
-              "help": {
-                "concept": "Running small pieces of code and reading the output helps you understand Python behavior.",
-                "hint_1": "Output and errors both give useful feedback.",
-                "hint_2": "Testing small changes is easier than debugging many changes at once."
-              },
-              "options": {
-                "a": "Run the code after writing it",
-                "b": "Read the output carefully",
-                "c": "Ignore error messages",
-                "d": "Change many lines at once without testing"
-              }
-            },
-            "policy_drag_reorder_1": {
-              "title": "Order the run-and-check workflow",
-              "prompt": "Put the steps in order for practicing \"Nested Data Structures\".",
-              "hint": "You need code before you can run it.",
-              "help": {
-                "concept": "A basic Python workflow is write code, run it, then inspect the result.",
-                "hint_1": "The output appears after running.",
-                "hint_2": "Errors are also useful feedback."
-              },
-              "tokens": {
-                "t1": "Write a small piece of Python code",
-                "t2": "Run the code",
-                "t3": "Read the output or error message"
-              }
-            },
-            "policy_fill_blank_choice_1": {
-              "title": "Choose the missing Python keyword",
-              "prompt": "Fill in the missing Python keyword so the statement is valid.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
-              },
-              "template": "___ value > 0:\n    print('positive')",
-              "choices": [
-                "if",
-                "for",
-                "def",
-                "class"
-              ]
+              "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    # Implement the function\n    pass\n\n# Example usage\n# print(find_student_by_major('Mathematics'))"
             }
           }
         }
@@ -199,11 +197,7 @@
         "nested-data-structures": {
           "sketch1": {
             "title": "Understanding Nested Data Structures",
-            "bodyMarkdown": "Nested data structures allow us to represent complex data by combining lists, dictionaries, and other containers. For example, a list of dictionaries can represent a collection of records, where each dictionary holds key-value pairs for a single record. This is useful for organizing data like a contact list or an inventory.\n\n### Example\nConsider a list of dictionaries representing students:\n\n```python\nstudents = [\n    {\"name\": \"Alice\", \"age\": 24, \"major\": \"Physics\"},\n    {\"name\": \"Bob\", \"age\": 22, \"major\": \"Mathematics\"}\n]\n```\n\nHere, each dictionary contains information about a student. You can access a student's major by indexing into the list and then using the key:\n\n```python\nprint(students[0][\"major\"])  # Output: Physics\n```\n\nTry it yourself: Create a list of dictionaries to represent a small library catalog, where each dictionary contains a book's title, author, and year.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
-          },
-          "sketch2": {
-            "title": "Working with Nested Lists and Dictionaries",
-            "bodyMarkdown": "Nested lists and dictionaries can be combined to create more complex data structures. For example, a dictionary can contain lists as values, or a list can contain dictionaries.\n\n### Example\nImagine a dictionary where each key is a student's name, and the value is a list of their grades:\n\n```python\ngrades = {\n    \"Alice\": [85, 92, 88],\n    \"Bob\": [79, 95, 91]\n}\n```\n\nTo calculate the average grade for Alice, you can access her list of grades and compute the average:\n\n```python\nalice_grades = grades[\"Alice\"]\naverage = sum(alice_grades) / len(alice_grades)\nprint(average)  # Output: 88.33333333333333\n```\n\nYour turn: Modify the dictionary to add a new student and their grades, then calculate their average.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "Nested data structures allow us to represent complex data by combining lists, dictionaries, and other containers. For example, a list of dictionaries can represent a collection of records, where each dictionary holds key-value pairs for a single record.\n\n```python\n# Example of a list of dictionaries\nstudents = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Accessing data\nfor student in students:\n    print(f\"{student['name']} is studying {student['major']}\")\n```\n\nTry it yourself: Modify the example to add a new student and print their details.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

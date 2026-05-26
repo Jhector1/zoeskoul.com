@@ -9,59 +9,38 @@
       "message": "Added a short line-by-line explanation after a multi-line code example."
     },
     {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "exercise5",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
-    },
-    {
-      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
-      "category": "recipe",
-      "severity": "low",
-      "field": "exercise5",
-      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
-    },
-    {
-      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
-      "category": "recipe",
-      "severity": "high",
-      "field": "exercise10",
-      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
-    },
-    {
-      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
-      "category": "recipe",
-      "severity": "low",
-      "field": "exercise10",
-      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
-    },
-    {
-      "code": "PYTHON_TEST_FILE_FIXTURE_ADDED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "exercise11",
-      "message": "Added 1 test-level Python file fixture set(s) so fixed_tests file I/O coverage matches each expected output."
-    },
-    {
-      "code": "PYTHON_EXERCISE_FILE_FIXTURE_ADDED",
-      "category": "recipe",
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
       "severity": "medium",
-      "field": "exercise11",
-      "message": "Added a learner-visible default file fixture for a Python file I/O code_input exercise."
-    },
-    {
-      "code": "PYTHON_FILE_FIXTURE_TESTS_ALIGNED",
-      "category": "recipe",
-      "severity": "high",
-      "field": "exercise11",
-      "message": "Aligned Python fixed_tests file fixtures with their expected outputs so golden validation can run each case safely."
+      "field": "sketchBlocks.sketch2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
     },
     {
       "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
       "category": "recipe",
       "severity": "low",
-      "field": "exercise11",
+      "field": "quiz5",
+      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
+    },
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "recipe",
+      "severity": "low",
+      "field": "quiz11",
+      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz10",
+      "message": "Regenerated Python code_input expected stdout from solutionCode after applying file fixtures so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "recipe",
+      "severity": "low",
+      "field": "quiz10",
       "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
     }
   ]

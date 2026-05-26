@@ -16,40 +16,72 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Refactor a Calculator"
+              "title": "Refactor and Decompose Functions"
             }
           },
           "projectSteps": {
             "quiz9": {
-              "title": "Calculate Circle Area"
+              "title": "Refactor a Function"
             },
             "quiz10": {
-              "title": "Sum of List"
+              "title": "Create Helper Functions"
             },
             "quiz11": {
-              "title": "Refactor Repeated Code"
+              "title": "Refactor for Reusability"
             }
           },
           "quiz": {
             "quiz1": {
               "title": "Purpose of Decomposition",
-              "prompt": "What is the primary purpose of decomposition in programming?",
-              "hint": "Think about how decomposition affects code structure.",
+              "prompt": "What is the main purpose of decomposing a program into smaller functions?",
+              "hint": "Think about how decomposition affects code readability and maintenance.",
               "help": {
-                "concept": "Decomposition helps in organizing code by breaking down complex tasks into simpler parts.",
-                "hint_1": "Decomposition makes code more manageable.",
-                "hint_2": "Decomposition improves code readability and maintainability."
+                "concept": "Decomposition helps in organizing code into smaller, manageable parts.",
+                "hint_1": "Decomposition improves code readability and maintainability.",
+                "hint_2": "Decomposition allows each function to handle a specific task, making the code easier to understand."
               },
               "options": {
-                "a": "To make code run faster",
-                "b": "To break down complex tasks into simpler parts",
-                "c": "To reduce the number of lines of code",
-                "d": "To increase the complexity of code"
+                "a": "To make the code run faster",
+                "b": "To reduce the number of lines of code",
+                "c": "To improve code readability and maintainability",
+                "d": "To make the code more complex"
               }
             },
             "quiz2": {
               "title": "Refactoring Benefits",
               "prompt": "Which of the following is a benefit of refactoring code?",
+              "hint": "Consider how refactoring affects code quality.",
+              "help": {
+                "concept": "Refactoring improves the internal structure of the code without changing its behavior.",
+                "hint_1": "Refactoring makes the code easier to understand and maintain.",
+                "hint_2": "Refactoring can help remove duplicate code and improve clarity."
+              },
+              "options": {
+                "a": "Increases code execution speed",
+                "b": "Improves code readability and maintainability",
+                "c": "Adds new features to the code",
+                "d": "Reduces the need for testing"
+              }
+            },
+            "quiz3": {
+              "title": "Characteristics of Good Functions",
+              "prompt": "Which of the following are characteristics of well-designed functions? Select all that apply.",
+              "hint": "Think about what makes a function easy to use and understand.",
+              "help": {
+                "concept": "Good functions are clear, focused, and reusable.",
+                "hint_1": "A good function should have a clear purpose and a descriptive name.",
+                "hint_2": "A good function should perform a single task and be reusable in different contexts."
+              },
+              "options": {
+                "a": "Performs multiple tasks",
+                "b": "Has a clear and descriptive name",
+                "c": "Is reusable in different contexts",
+                "d": "Contains many lines of code"
+              }
+            },
+            "quiz4": {
+              "title": "When to Refactor",
+              "prompt": "When should you consider refactoring your code? Select all that apply.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -57,142 +89,110 @@
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
               "options": {
-                "a": "Increases code execution speed",
-                "b": "Reduces code readability",
-                "c": "Improves code structure and readability",
-                "d": "Increases code complexity"
-              }
-            },
-            "quiz3": {
-              "title": "Decomposition Examples",
-              "prompt": "Which of the following are examples of decomposition in programming? Select all that apply.",
-              "hint": "Think about breaking down tasks into smaller functions.",
-              "help": {
-                "concept": "Decomposition involves dividing a complex task into smaller, manageable functions.",
-                "hint_1": "Consider tasks that can be split into smaller functions.",
-                "hint_2": "Look for examples where a large task is divided into parts."
-              },
-              "options": {
-                "a": "Writing a single function to handle all user inputs",
-                "b": "Creating separate functions for different user inputs",
-                "c": "Using a loop to iterate over a list",
-                "d": "Dividing a large function into smaller helper functions"
-              }
-            },
-            "quiz4": {
-              "title": "Refactoring Techniques",
-              "prompt": "Which of the following techniques are commonly used in refactoring? Select all that apply.",
-              "hint": "Consider techniques that improve code structure.",
-              "help": {
-                "concept": "Refactoring techniques include methods that enhance code readability and maintainability.",
-                "hint_1": "Think about methods that simplify code.",
-                "hint_2": "Look for techniques that make code cleaner and more organized."
-              },
-              "options": {
-                "a": "Extracting methods",
-                "b": "Renaming variables for clarity",
-                "c": "Adding more comments",
-                "d": "Increasing code complexity"
+                "a": "When the code is difficult to understand",
+                "b": "When the code is running perfectly",
+                "c": "When there is duplicate code",
+                "d": "When adding new features"
               }
             },
             "quiz5": {
               "title": "Steps in Decomposition",
-              "prompt": "Arrange the steps in the process of decomposition from start to finish.",
-              "hint": "Start with understanding the problem and end with implementing the solution.",
+              "prompt": "Arrange the steps in the process of decomposing a function.",
+              "hint": "Start with identifying the task and end with testing the new functions.",
               "help": {
-                "concept": "Decomposition involves understanding the problem, breaking it down, and implementing solutions.",
-                "hint_1": "Begin with identifying the problem.",
-                "hint_2": "End with implementing the solution."
+                "concept": "Decomposition involves breaking down a task into smaller parts and testing them.",
+                "hint_1": "Begin by identifying the main task.",
+                "hint_2": "End with testing the smaller functions to ensure they work correctly."
               },
               "tokens": {
-                "t1": "Understand the problem",
-                "t2": "Identify sub-tasks",
-                "t3": "Design solutions for sub-tasks",
-                "t4": "Implement solutions"
+                "t1": "Identify the main task",
+                "t2": "Break down into smaller tasks",
+                "t3": "Write functions for each task",
+                "t4": "Test the new functions"
               }
             },
             "quiz6": {
               "title": "Refactoring Process",
-              "prompt": "Arrange the steps in the refactoring process from start to finish.",
-              "hint": "Start with identifying code to refactor and end with testing the refactored code.",
+              "prompt": "Arrange the steps in the process of refactoring code.",
+              "hint": "Start with identifying areas for improvement and end with testing the refactored code.",
               "help": {
-                "concept": "Refactoring involves identifying code to improve, making changes, and testing.",
-                "hint_1": "Begin with identifying the code that needs improvement.",
-                "hint_2": "End with testing the refactored code."
+                "concept": "Refactoring involves improving code structure without changing its behavior.",
+                "hint_1": "Begin by identifying areas that need improvement.",
+                "hint_2": "End with testing to ensure the refactored code works as expected."
               },
               "tokens": {
-                "t1": "Identify code to refactor",
-                "t2": "Make changes",
+                "t1": "Identify areas for improvement",
+                "t2": "Refactor the code",
                 "t3": "Test the refactored code",
-                "t4": "Review the changes"
+                "t4": "Document changes"
               }
             },
             "quiz7": {
-              "title": "Function Definition",
-              "prompt": "Complete the function definition: `def [blank1](x, y):`",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "title": "Function Naming",
+              "prompt": "A good function name should be [blank1].",
+              "hint": "Think about what makes a function name clear and useful.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "A good function name clearly describes what the function does.",
+                "hint_1": "A good function name should be the missing term.",
+                "hint_2": "A good function name should indicate the function's purpose."
               },
-              "template": "def [blank1](x, y):",
+              "template": "A good function name should be [blank1].",
               "choices": [
-                "add",
-                "subtract",
-                "multiply",
-                "divide"
+                "short",
+                "descriptive",
+                "generic",
+                "complex"
               ]
             },
             "quiz8": {
-              "title": "Variable Assignment",
-              "prompt": "Complete the variable assignment: `total = [blank1]`",
-              "hint": "Think about what value might be assigned to 'total'.",
+              "title": "Single Responsibility Principle",
+              "prompt": "A function should have [blank1].",
+              "hint": "Consider what makes a function focused and effective.",
               "help": {
-                "concept": "Variable assignments store values in variables.",
-                "hint_1": "The value assigned is often a result of a calculation.",
-                "hint_2": "The value could be a the missing term of two numbers."
+                "concept": "A function should do one thing and do it well.",
+                "hint_1": "A function should focus on a single task.",
+                "hint_2": "A function should not try to do multiple unrelated tasks."
               },
-              "template": "total = [blank1]",
+              "template": "A function should have [blank1].",
               "choices": [
-                "sum",
-                "difference",
-                "product",
-                "quotient"
+                "multiple responsibilities",
+                "a single responsibility",
+                "complex logic",
+                "many parameters"
               ]
             },
             "quiz9": {
-              "title": "Calculate Circle Area",
-              "prompt": "Write a function `calculate_circle_area(radius)` that returns the area of a circle given its radius. Use the formula `area = π * radius^2`. Assume π = 3.14. Then read the input values, call the function, and print the returned result.",
-              "hint": "Read the task \"Calculate Circle Area\" and identify the required result.",
+              "title": "Refactor a Function",
+              "prompt": "Refactor the following function to improve its clarity and structure.",
+              "hint": "Consider breaking the function into smaller helper functions.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Calculate Circle Area\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "Refactoring involves breaking down a function into smaller, more manageable parts.",
+                "hint_1": "Identify parts of the function that can be extracted into helper functions.",
+                "hint_2": "Ensure each helper function has a clear purpose."
               },
-              "starterCode": "def calculate_circle_area(radius):\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nradius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(calculate_circle_area(radius))"
+              "starterCode": "def process_data(data):\n    total = 0\n    for item in data:\n        total += item['value']\n    average = total / len(data)\n    return average"
             },
             "quiz10": {
-              "title": "Sum of List",
-              "prompt": "Write a function `sum_of_list(numbers)` that returns the sum of all numbers in a list. Then read the input value, call the function, and print the returned result.",
-              "hint": "Read the task \"Sum of List\" and identify the required result.",
+              "title": "Create Helper Functions",
+              "prompt": "Create helper functions to calculate the subtotal and tax for a list of items.",
+              "hint": "Read the task \"Create Helper Functions\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Sum of List\".",
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Create Helper Functions\".",
                 "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "def sum_of_list(numbers):\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(sum_of_list(numbers))"
+              "starterCode": "def calculate_total(items):\n    # Calculate subtotal\n    # Calculate tax\n    pass"
             },
             "quiz11": {
-              "title": "Refactor Repeated Code",
-              "prompt": "Refactor the following code to use a helper function `calculate_area(length, width)` that returns the area of a rectangle. Use this helper function to calculate areas for two rectangles with dimensions (5, 10) and (3, 4). Then read the input values, call the function, and print the returned result.",
-              "hint": "Read the task \"Refactor Repeated Code\" and identify the required result.",
+              "title": "Refactor for Reusability",
+              "prompt": "Refactor the following code to make it more reusable by extracting helper functions.",
+              "hint": "Identify repetitive code that can be extracted into a function.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Refactor Repeated Code\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "Reusability can be improved by extracting common code into functions.",
+                "hint_1": "Look for code that repeats and can be turned into a function.",
+                "hint_2": "Ensure the new function can be reused in different parts of the program."
               },
-              "starterCode": "def calculate_area(length, width):\n    # Write your code below\n    \n\n# Calculate areas\narea1 = calculate_area(5, 10)\narea2 = calculate_area(3, 4)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nlength = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nwidth = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(length, width))"
+              "starterCode": "def print_receipt(items):\n    total = 0\n    for item in items:\n        total += item['price'] * item['quantity']\n        print(f\"{item['name']}: {item['price']} x {item['quantity']}\")\n    print(f\"Total: {total}\")"
             }
           }
         }
@@ -205,11 +205,11 @@
         "decomposition-and-refactoring": {
           "sketch1": {
             "title": "Understanding Decomposition",
-            "bodyMarkdown": "Decomposition in programming involves breaking down a complex problem into smaller, more manageable parts. This approach helps in organizing code, making it more readable and maintainable. For example, consider a program that calculates the area of different shapes. Instead of writing a single function to handle all shapes, you can decompose the task into separate functions for each shape, like `calculate_circle_area(radius)` and `calculate_rectangle_area(length, width)`. Try it yourself: think of a task you perform daily and break it down into smaller steps."
+            "bodyMarkdown": "Decomposition is the process of breaking down a complex problem or system into smaller, more manageable parts. In programming, this often means dividing a large function into several smaller functions, each responsible for a specific task. This makes your code easier to read, test, and maintain.\n\nFor example, consider a program that calculates the total price of items in a shopping cart, including tax and discounts. Instead of writing one large function, you can decompose it into smaller functions like `calculateSubtotal`, `applyDiscount`, and `calculateTax`. Each function handles a specific part of the calculation.\n\nTry it yourself: Think of a task you perform regularly and break it down into smaller steps. How would you write a function for each step?"
           },
           "sketch2": {
             "title": "Refactoring for Clarity",
-            "bodyMarkdown": "Refactoring is the process of restructuring existing code without changing its external behavior. The goal is to improve the code's structure and readability. For instance, if you have a function that performs multiple tasks, you can refactor it by extracting some of those tasks into separate helper functions. This not only makes the code cleaner but also easier to test and debug. Try this: take a piece of code you've written before and see if you can refactor it to use helper functions."
+            "bodyMarkdown": "Refactoring is the process of restructuring existing code without changing its external behavior. The goal is to improve the code's structure and readability. This often involves decomposing functions, renaming variables for clarity, and removing duplicate code.\n\nHere's a simple example:\n\n```python\ndef calculate_total_price(cart_items):\n    total = 0\n    for item in cart_items:\n        total += item['price'] * item['quantity']\n    return total\n```\n\nWe can refactor this by extracting the calculation into a helper function:\n\n```python\ndef calculate_item_total(item):\n    return item['price'] * item['quantity']\n\ndef calculate_total_price(cart_items):\n    total = 0\n    for item in cart_items:\n        total += calculate_item_total(item)\n    return total\n```\n\nYour turn: Try refactoring a piece of your own code by extracting a helper function.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

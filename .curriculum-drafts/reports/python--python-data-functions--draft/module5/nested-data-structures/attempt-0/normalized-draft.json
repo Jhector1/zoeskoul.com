@@ -4,187 +4,210 @@
   "minutes": 28,
   "sketchBlocks": [
     {
-      "id": "sketch1",
+      "id": "1",
       "title": "Understanding Nested Data Structures",
-      "bodyMarkdown": "Nested data structures allow us to represent complex data by combining lists, dictionaries, and other containers. For example, a list of dictionaries can represent a collection of records, where each dictionary holds key-value pairs for a single record. This is useful for organizing data like a contact list or an inventory.\n\n### Example\nConsider a list of dictionaries representing students:\n\n```python\nstudents = [\n    {\"name\": \"Alice\", \"age\": 24, \"major\": \"Physics\"},\n    {\"name\": \"Bob\", \"age\": 22, \"major\": \"Mathematics\"}\n]\n```\n\nHere, each dictionary contains information about a student. You can access a student's major by indexing into the list and then using the key:\n\n```python\nprint(students[0][\"major\"])  # Output: Physics\n```\n\nTry it yourself: Create a list of dictionaries to represent a small library catalog, where each dictionary contains a book's title, author, and year."
+      "bodyMarkdown": "Nested data structures allow us to represent complex data by combining lists, dictionaries, and other containers. For example, a list of dictionaries can represent a collection of records, where each dictionary holds key-value pairs for a single record. This is useful for organizing data like a contact list or an inventory.\n\n### Example\nConsider a list of dictionaries where each dictionary represents a person:\n\n```python\npeople = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"New York\"},\n    {\"name\": \"Bob\", \"age\": 25, \"city\": \"Los Angeles\"}\n]\n```\n\nHere, `people` is a list containing two dictionaries. Each dictionary has keys `name`, `age`, and `city`.\n\n### Try it yourself\nCreate a list of dictionaries to represent a small library, where each dictionary contains a book's title, author, and year of publication."
     },
     {
-      "id": "sketch2",
-      "title": "Working with Nested Lists and Dictionaries",
-      "bodyMarkdown": "Nested lists and dictionaries can be combined to create more complex data structures. For example, a dictionary can contain lists as values, or a list can contain dictionaries.\n\n### Example\nImagine a dictionary where each key is a student's name, and the value is a list of their grades:\n\n```python\ngrades = {\n    \"Alice\": [85, 92, 88],\n    \"Bob\": [79, 95, 91]\n}\n```\n\nTo calculate the average grade for Alice, you can access her list of grades and compute the average:\n\n```python\nalice_grades = grades[\"Alice\"]\naverage = sum(alice_grades) / len(alice_grades)\nprint(average)  # Output: 88.33333333333333\n```\n\nYour turn: Modify the dictionary to add a new student and their grades, then calculate their average."
+      "id": "2",
+      "title": "Accessing Nested Data",
+      "bodyMarkdown": "To access data within nested structures, use indexing and key access. For example, to get the city of the first person in the `people` list:\n\n```python\nfirst_person_city = people[0][\"city\"]\nprint(first_person_city)  # Output: New York\n```\n\n### Step-by-step\n1. `people[0]` accesses the first dictionary in the list.\n2. `people[0][\"city\"]` accesses the value associated with the key `\"city\"` in that dictionary.\n\n### Your turn\nTry accessing the age of the second person in the `people` list."
     }
   ],
   "quizDraft": [
     {
-      "id": "quiz1",
+      "id": "q1",
       "kind": "single_choice",
-      "title": "Accessing Nested Dictionary Values",
-      "prompt": "How do you access the 'major' of the first student in the list `students`?",
+      "title": "Identify the Structure",
+      "prompt": "Which of the following is a nested data structure?",
       "options": [
-        "students[0]['major']",
-        "students['major'][0]",
-        "students[0].major",
-        "students.major[0]"
+        "A single list of integers",
+        "A dictionary with string keys and integer values",
+        "A list of dictionaries",
+        "A tuple of strings"
       ],
       "correctOptionIds": [
-        "a"
+        "c"
       ],
-      "hint": "Use indexing to access the dictionary, then the key.",
+      "hint": "Look for a structure that contains another collection inside it.",
       "help": {
-        "concept": "Accessing nested dictionary values involves using list indexing followed by dictionary key access.",
-        "hint_1": "First, index into the list to get the dictionary.",
-        "hint_2": "Then, use the key 'major' to get the value."
+        "concept": "Nested data structures contain other collections like lists or dictionaries within them.",
+        "hint_1": "Check if any option has a list or dictionary inside another collection.",
+        "hint_2": "Nested structures often use multiple levels of brackets or braces."
       }
     },
     {
-      "id": "quiz2",
+      "id": "q2",
       "kind": "multi_choice",
-      "title": "Choosing the Right Data Structure",
-      "prompt": "Which of the following are valid reasons to use a list of dictionaries?",
+      "title": "Benefits of Nested Structures",
+      "prompt": "What are the benefits of using nested data structures? Select all that apply.",
       "options": [
-        "To store a collection of records with similar fields",
-        "To perform mathematical operations on all elements",
-        "To easily add or remove records",
-        "To ensure all records have the same data type"
+        "They allow for more complex data organization",
+        "They make data access more difficult",
+        "They simplify data manipulation",
+        "They increase data redundancy"
       ],
       "correctOptionIds": [
         "a",
         "c"
       ],
-      "hint": "Consider the flexibility and organization of data.",
+      "hint": "Consider how nested structures help in organizing and accessing data.",
       "help": {
-        "concept": "Lists of dictionaries are useful for organizing collections of records with similar fields.",
-        "hint_1": "Think about how you can store multiple records with the same structure.",
-        "hint_2": "Consider how easy it is to add or remove records."
+        "concept": "Nested data structures help in organizing complex data and making it easier to access related information.",
+        "hint_1": "Think about how nesting can group related data together.",
+        "hint_2": "Consider how nesting can simplify data access and manipulation."
       }
     },
     {
-      "id": "quiz3",
+      "id": "q3",
       "kind": "drag_reorder",
-      "title": "Order of Operations in Nested Structures",
-      "prompt": "Arrange the steps to access the 'age' of the second student in the list `students`.",
+      "title": "Accessing Nested Data",
+      "prompt": "Arrange the steps to access the city of the second person in a list of dictionaries.",
       "tokens": [
-        "Index into the list with [1]",
-        "Access the dictionary with the key 'age'"
+        "Access the second dictionary in the list",
+        "Use the key 'city' to get the value"
       ],
       "correctOrder": [
-        "Index into the list with [1]",
-        "Access the dictionary with the key 'age'"
+        "Access the second dictionary in the list",
+        "Use the key 'city' to get the value"
       ],
-      "hint": "Start by accessing the correct list element.",
+      "hint": "Start by accessing the correct dictionary, then the key.",
       "help": {
-        "concept": "Accessing nested data involves indexing into the list and then using the dictionary key.",
-        "hint_1": "First, index into the list to get the second student.",
-        "hint_2": "Then, use the key 'age' to get the value."
+        "concept": "Accessing nested data involves indexing into the list and then using the key to get the value.",
+        "hint_1": "First, access the correct dictionary in the list.",
+        "hint_2": "Then, use the key to access the desired value."
       }
     },
     {
-      "id": "quiz4",
+      "id": "q4",
+      "kind": "drag_reorder",
+      "title": "Creating a Nested Structure",
+      "prompt": "Arrange the steps to create a list of dictionaries representing books with title, author, and year.",
+      "tokens": [
+        "Create an empty list",
+        "Add a dictionary with keys 'title', 'author', 'year'",
+        "Repeat for each book"
+      ],
+      "correctOrder": [
+        "Create an empty list",
+        "Add a dictionary with keys 'title', 'author', 'year'",
+        "Repeat for each book"
+      ],
+      "hint": "Start by creating an empty list, then add dictionaries.",
+      "help": {
+        "concept": "Creating a nested structure involves initializing the outer structure and then adding inner structures.",
+        "hint_1": "Begin with an empty list.",
+        "hint_2": "Add dictionaries with the required keys and values."
+      }
+    },
+    {
+      "id": "q5",
       "kind": "fill_blank_choice",
-      "title": "Dictionary Key Access",
-      "prompt": "Complete the code to access the 'author' of the first book in the list `books`.",
-      "template": "books[0][[blank1]]",
+      "title": "Accessing Nested Values",
+      "prompt": "Fill in the blank to access the age of the first person in the list `people`.",
+      "template": "age = people[0][[blank1]]",
       "choices": [
-        "author",
-        "title",
-        "year"
+        "name",
+        "age",
+        "city"
       ],
-      "correctValue": "author",
-      "hint": "Use indexing and key access.",
+      "correctValue": "age",
+      "hint": "Use indexing to access the dictionary, then the key to get the value.",
       "help": {
-        "concept": "Accessing a value in a list of dictionaries requires list indexing followed by key access.",
+        "concept": "Accessing nested values requires using both list indexing and dictionary key access.",
         "hint_1": "First, index into the list to get the dictionary.",
-        "hint_2": "Then, use the key 'the missing term' to get the value."
+        "hint_2": "Then, use the key to access the value."
       }
     },
     {
-      "id": "quiz5",
+      "id": "q6",
+      "kind": "fill_blank_choice",
+      "title": "Modifying Nested Data",
+      "prompt": "Fill in the blank to change the city of the second person to 'Chicago'.",
+      "template": "people[1][[blank1]] = 'Chicago'",
+      "choices": [
+        "name",
+        "age",
+        "city"
+      ],
+      "correctValue": "city",
+      "hint": "Access the correct dictionary and key to modify the value.",
+      "help": {
+        "concept": "Modifying nested data involves accessing the correct level and key.",
+        "hint_1": "First, access the second dictionary in the list.",
+        "hint_2": "Then, use the key to change the value."
+      }
+    },
+    {
+      "id": "q7",
       "kind": "code_input",
-      "title": "Calculate Average Grade",
-      "prompt": "Write a function `calculate_average` that takes a dictionary of student names and their list of grades, and returns the average grade for a given student name.",
-      "starterCode": "def calculate_average(grades, student_name):\n    # Access the student's grades\n    student_grades = grades[student_name]\n    # Calculate the average\n    average = sum(student_grades) / len(student_grades)\n    return average",
-      "solutionCode": "def calculate_average(grades, student_name):\n    student_grades = grades[student_name]\n    average = sum(student_grades) / len(student_grades)\n    return average",
+      "title": "Create a Nested Data Structure",
+      "prompt": "Write a Python program to create a list of dictionaries representing students with their names and grades. Each dictionary should have keys 'name' and 'grade'.",
+      "starterCode": "students = []\n# Add dictionaries with 'name' and 'grade' keys\n",
+      "solutionCode": "students = []\nstudents.append({'name': 'Alice', 'grade': 'A'})\nstudents.append({'name': 'Bob', 'grade': 'B'})\nprint(students)",
       "tests": [
         {
-          "stdin": "{\"Alice\": [85, 92, 88], \"Bob\": [79, 95, 91]}\nAlice\n",
-          "stdout": "88.33333333333333\n",
-          "match": "exact"
-        },
-        {
-          "stdin": "{\"Alice\": [85, 92, 88], \"Bob\": [79, 95, 91]}\nBob\n",
-          "stdout": "88.33333333333333\n",
+          "stdout": "[{'name': 'Alice', 'grade': 'A'}, {'name': 'Bob', 'grade': 'B'}]\n",
           "match": "exact"
         }
       ],
       "recipeType": "fixed_tests",
-      "hint": "Use the `sum` and `len` functions to calculate the average.",
+      "hint": "Start by creating an empty list and then append dictionaries with the required keys and values.",
       "help": {
-        "concept": "To calculate an average, sum the list of grades and divide by the number of grades.",
-        "hint_1": "Access the list of grades using the student's name as the key.",
-        "hint_2": "Use `sum(grades) / len(grades)` to calculate the average."
+        "concept": "Creating a nested data structure involves initializing the outer structure and adding inner structures with specific keys and values.",
+        "hint_1": "Begin with an empty list and append dictionaries.",
+        "hint_2": "Each dictionary should have 'name' and 'grade' as keys."
       }
     },
     {
-      "id": "quiz6",
+      "id": "q8",
       "kind": "code_input",
-      "title": "Add New Student",
-      "prompt": "Write a function `add_student` that adds a new student and their grades to the dictionary.",
-      "starterCode": "def add_student(grades, student_name, student_grades):\n    # Add the new student\n    grades[student_name] = student_grades\n    return grades",
-      "solutionCode": "def add_student(grades, student_name, student_grades):\n    grades[student_name] = student_grades\n    return grades",
+      "title": "Access and Modify Nested Data",
+      "prompt": "Write a Python program to access and modify the grade of a student in a list of dictionaries. Change 'Bob's grade to 'A+'.",
+      "starterCode": "students = [\n    {'name': 'Alice', 'grade': 'A'},\n    {'name': 'Bob', 'grade': 'B'}\n]\n# Change Bob's grade to 'A+'\n",
+      "solutionCode": "students = [\n    {'name': 'Alice', 'grade': 'A'},\n    {'name': 'Bob', 'grade': 'B'}\n]\nstudents[1]['grade'] = 'A+'\nprint(students)",
       "tests": [
         {
-          "stdin": "{\"Alice\": [85, 92, 88]}\nCharlie\n[90, 85, 87]\n",
-          "stdout": "{\"Alice\": [85, 92, 88], \"Charlie\": [90, 85, 87]}\n",
-          "match": "exact"
-        },
-        {
-          "stdin": "{\"Bob\": [79, 95, 91]}\nDavid\n[88, 90, 92]\n",
-          "stdout": "{\"Bob\": [79, 95, 91], \"David\": [88, 90, 92]}\n",
+          "stdout": "[{'name': 'Alice', 'grade': 'A'}, {'name': 'Bob', 'grade': 'A+'}]\n",
           "match": "exact"
         }
       ],
       "recipeType": "fixed_tests",
-      "hint": "Use dictionary assignment to add a new key-value pair.",
+      "hint": "Access the correct dictionary and key to modify the value.",
       "help": {
-        "concept": "Adding a new student involves assigning a new key-value pair to the dictionary.",
-        "hint_1": "Use the student's name as the key and their grades as the value.",
-        "hint_2": "Assign the list of grades to the new key in the dictionary."
+        "concept": "Accessing and modifying nested data involves using indexing and key access to change values.",
+        "hint_1": "Find the dictionary for 'Bob' and change the 'grade'.",
+        "hint_2": "Use the key 'grade' to update the value."
       }
     },
     {
-      "id": "quiz7",
+      "id": "q9",
       "kind": "code_input",
-      "title": "Find Student with Highest Average",
-      "prompt": "Write a function `find_highest_average` that returns the name of the student with the highest average grade.",
-      "starterCode": "def find_highest_average(grades):\n    highest_average = 0\n    top_student = \"\"\n    for student, student_grades in grades.items():\n        average = sum(student_grades) / len(student_grades)\n        if average > highest_average:\n            highest_average = average\n            top_student = student\n    return top_student",
-      "solutionCode": "def find_highest_average(grades):\n    highest_average = 0\n    top_student = \"\"\n    for student, student_grades in grades.items():\n        average = sum(student_grades) / len(student_grades)\n        if average > highest_average:\n            highest_average = average\n            top_student = student\n    return top_student",
+      "title": "Nested Data Structure Operations",
+      "prompt": "Write a Python program to calculate the average grade of students in a list of dictionaries. Each dictionary contains 'name' and 'grade' keys.",
+      "starterCode": "students = [\n    {'name': 'Alice', 'grade': 90},\n    {'name': 'Bob', 'grade': 80},\n    {'name': 'Charlie', 'grade': 85}\n]\n# Calculate the average grade\n",
+      "solutionCode": "students = [\n    {'name': 'Alice', 'grade': 90},\n    {'name': 'Bob', 'grade': 80},\n    {'name': 'Charlie', 'grade': 85}\n]\ntotal = sum(student['grade'] for student in students)\naverage = total / len(students)\nprint(average)",
       "tests": [
         {
-          "stdin": "{\"Alice\": [85, 92, 88], \"Bob\": [79, 95, 91]}\n",
-          "stdout": "Bob\n",
-          "match": "exact"
-        },
-        {
-          "stdin": "{\"Charlie\": [90, 85, 87], \"David\": [88, 90, 92]}\n",
-          "stdout": "David\n",
+          "stdout": "85.0\n",
           "match": "exact"
         }
       ],
       "recipeType": "fixed_tests",
-      "hint": "Iterate through the dictionary to calculate each student's average.",
+      "hint": "Iterate over the list and sum the grades, then divide by the number of students.",
       "help": {
-        "concept": "To find the highest average, calculate each student's average and compare them.",
-        "hint_1": "Use a loop to calculate the average for each student.",
-        "hint_2": "Keep track of the highest average and the corresponding student name."
+        "concept": "Calculating an average involves summing values and dividing by the count.",
+        "hint_1": "Convert grades to numerical values for calculation.",
+        "hint_2": "Sum the grades and divide by the number of students."
       }
     }
   ],
   "projectDraft": {
     "title": "Nested Data Structures Project",
     "stepIds": [
-      "quiz5",
-      "quiz6",
-      "quiz7"
+      "q7",
+      "q8",
+      "q9"
     ]
   }
 }

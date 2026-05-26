@@ -13,15 +13,15 @@
       "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
       "category": "pedagogy",
       "severity": "error",
-      "exerciseId": "quiz6",
-      "message": "Exercise \"quiz6\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
+      "exerciseId": "quiz10",
+      "message": "Exercise \"quiz10\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
     },
     {
       "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
       "category": "pedagogy",
       "severity": "error",
-      "exerciseId": "quiz7",
-      "message": "Exercise \"quiz7\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
+      "exerciseId": "quiz11",
+      "message": "Exercise \"quiz11\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
     }
   ]
 }

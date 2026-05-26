@@ -20,6 +20,11 @@ import parametersAndReturnValuesJson from "./modules/module6/topics/parameters-a
 import printVsReturnJson from "./modules/module6/topics/print-vs-return/topic.bundle.json";
 import scopeAndLocalVariablesJson from "./modules/module6/topics/scope-and-local-variables/topic.bundle.json";
 import readingTextFilesJson from "./modules/module7/topics/reading-text-files/topic.bundle.json";
+import simpleCsvProcessingJson from "./modules/module7/topics/simple-csv-processing/topic.bundle.json";
+import tryExceptBasicsJson from "./modules/module7/topics/try-except-basics/topic.bundle.json";
+import validatingAndCleaningInputJson from "./modules/module7/topics/validating-and-cleaning-input/topic.bundle.json";
+import workingWithPathsJson from "./modules/module7/topics/working-with-paths/topic.bundle.json";
+import writingTextFilesJson from "./modules/module7/topics/writing-text-files/topic.bundle.json";
 
 
 const creatingAndIndexingLists = creatingAndIndexingListsJson as SlimTopicManifest;
@@ -35,6 +40,11 @@ const parametersAndReturnValues = parametersAndReturnValuesJson as SlimTopicMani
 const printVsReturn = printVsReturnJson as SlimTopicManifest;
 const scopeAndLocalVariables = scopeAndLocalVariablesJson as SlimTopicManifest;
 const readingTextFiles = readingTextFilesJson as SlimTopicManifest;
+const simpleCsvProcessing = simpleCsvProcessingJson as SlimTopicManifest;
+const tryExceptBasics = tryExceptBasicsJson as SlimTopicManifest;
+const validatingAndCleaningInput = validatingAndCleaningInputJson as SlimTopicManifest;
+const workingWithPaths = workingWithPathsJson as SlimTopicManifest;
+const writingTextFiles = writingTextFilesJson as SlimTopicManifest;
 
 export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "creating-and-indexing-lists": creatingAndIndexingLists,
@@ -50,4 +60,9 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "print-vs-return": printVsReturn,
   "scope-and-local-variables": scopeAndLocalVariables,
   "reading-text-files": readingTextFiles,
+  "simple-csv-processing": simpleCsvProcessing,
+  "try-except-basics": tryExceptBasics,
+  "validating-and-cleaning-input": validatingAndCleaningInput,
+  "working-with-paths": workingWithPaths,
+  "writing-text-files": writingTextFiles,
 };

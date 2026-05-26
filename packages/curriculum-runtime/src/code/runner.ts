@@ -1,17 +1,16 @@
 export type RunCodeFn = (args: {
     language: string;
     code: string;
+    entry?: string;
     stdin?: string;
     files?:
         | Array<{
-            path: string;
-            content: string;
-            readOnly?: boolean;
-        }>
+        path: string;
+        content: string;
+        readOnly?: boolean;
+    }>
         | Record<string, string>;
-    limits?: {
-        timeoutMs?: number;
-    };
+    limits?: { timeoutMs?: number } & Record<string, unknown>;
 }) => Promise<{
     ok: boolean;
     stdout?: string;

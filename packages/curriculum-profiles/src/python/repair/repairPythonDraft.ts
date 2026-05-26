@@ -6,7 +6,30 @@ import { getCodeRunner, runLocalCode } from "@zoeskoul/curriculum-runtime";
 import type { RepairReport } from "../../shared/profileServices.js";
 import { makeEmptyRepairReport } from "../../shared/noopReports.js";
 import { PYTHON_MINIMUM_FIXED_TESTS } from "../profile.js";
+function hasTryItYourselfSketch(draft: TopicAuthoringDraft): boolean {
+    return draft.sketchBlocks.some((block) =>
+        /\btry it yourself\b|\btry this\b|\byour turn\b|\btry on your own\b/i.test(
+            String(block.bodyMarkdown ?? ""),
+        ),
+    );
+}
 
+function ensureTryItYourselfSketch(draft: TopicAuthoringDraft): TopicAuthoringDraft {
+    if (hasTryItYourselfSketch(draft)) return draft;
+
+    return {
+        ...draft,
+        sketchBlocks: [
+            ...draft.sketchBlocks,
+            {
+                id: "try-it-yourself",
+                title: "Try it yourself",
+                bodyMarkdown:
+                    "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction.",
+            },
+        ],
+    };
+}
 const PYTHON_TEXT_REPAIRS: Array<{
     from: RegExp;
     to: string;
@@ -111,12 +134,28 @@ type FileFixtureRepairResult =
         alignedTests: boolean;
       };
 
+type DraftFixtureFile = {
+    path: string;
+    content: string;
+    readOnly?: boolean;
+};
+
+type FixtureSanitizationResult = {
+    files: DraftFixtureFile[];
+    changed: boolean;
+    removedInvalidPaths: number;
+    removedUnreferencedPaths: number;
+    normalizedContents: number;
+    dedupedPaths: number;
+};
+
 const PYTHON_WORKSPACE_DISTRACTORS = [
     "Lesson notes panel",
     "Color theme picker",
     "Progress tracker",
     "Keyboard shortcut guide",
 ];
+const PYTHON_MAX_FIXTURE_CONTENT_LENGTH = 600;
 
 function normalizeComparableText(value: string): string {
     return value
@@ -1035,6 +1074,8 @@ function hasOnlyBooleanishOutputs(exercise: PythonCodeInputExercise): boolean {
         return out === "true" || out === "false";
     });
 }
+
+
 async function rewriteTestsToMatchSolutionExecution(
     exercise: PythonCodeInputExercise,
 ): Promise<PythonCodeInputExercise | null> {
@@ -1050,10 +1091,13 @@ async function rewriteTestsToMatchSolutionExecution(
     let changed = false;
 
     for (const test of tests) {
+        const files = mergePythonFixtureFiles(exercise.files, test.files);
+
         const run = await runner({
             language: "python",
             code: solutionCode,
             stdin: String(test.stdin ?? ""),
+            ...(files ? { files } : {}),
             limits: { timeoutMs: 4000 },
         });
 
@@ -1068,7 +1112,7 @@ async function rewriteTestsToMatchSolutionExecution(
                 ? actualStdout.includes(expectedStdout.trim())
                 : actualStdout === expectedStdout;
 
-        if (!alreadyMatches) {
+        if (!alreadyMatches || test.match !== "exact") {
             changed = true;
         }
 
@@ -1087,6 +1131,8 @@ async function rewriteTestsToMatchSolutionExecution(
         tests: repairedTests,
     };
 }
+
+
 function looksLikePlaceholderStdout(stdout: unknown): boolean {
     const out = String(stdout ?? "").trim();
     if (!out) return false;
@@ -2317,33 +2363,50 @@ function buildAlternateStdinCandidates(
     return [...candidates];
 }
 
-function referencedReadFiles(source: string): string[] {
-    const paths = new Set<string>();
-    const openPattern =
-        /open\s*\(\s*["'`]([^"'`]+)["'`]\s*(?:,\s*["'`]([^"'`]*)["'`])?/g;
-    const readTextPattern = /Path\s*\(\s*["'`]([^"'`]+)["'`]\s*\)\.read_text\s*\(/g;
-
-    for (const match of source.matchAll(openPattern)) {
-        const filePath = match[1]?.trim();
-        const mode = (match[2] ?? "r").trim();
-        if (!filePath) continue;
-        if (mode.includes("w") || mode.includes("a") || mode.includes("x")) continue;
-        paths.add(filePath);
-    }
-
-    for (const match of source.matchAll(readTextPattern)) {
-        const filePath = match[1]?.trim();
-        if (filePath) {
-            paths.add(filePath);
-        }
-    }
-
-    return [...paths];
+function isInvalidDraftFixturePath(path: string): boolean {
+    return (
+        !path ||
+        path.startsWith("/") ||
+        /^[A-Za-z]:[\\/]/.test(path) ||
+        path.includes("\\") ||
+        path.split("/").some((segment) => !segment || segment === "." || segment === "..")
+    );
 }
+
+function sanitizeDraftFixtureContent(content: string): string {
+    const normalized = String(content ?? "")
+        .replace(/\r\n?/g, "\n")
+        .replace(/\n{4,}/g, "\n\n\n");
+    const lines = normalized.split("\n");
+
+    while (lines.length > 0 && lines[lines.length - 1]?.trim() === "") {
+        lines.pop();
+    }
+
+    const trimmed = lines.join("\n");
+    if (trimmed.length <= PYTHON_MAX_FIXTURE_CONTENT_LENGTH) {
+        return trimmed;
+    }
+
+    const limited: string[] = [];
+    let current = "";
+
+    for (const line of lines) {
+        const candidate = current ? `${current}\n${line}` : line;
+        if (candidate.length > PYTHON_MAX_FIXTURE_CONTENT_LENGTH) break;
+        limited.push(line);
+        current = candidate;
+    }
+
+    return limited.length > 0
+        ? limited.join("\n")
+        : trimmed.slice(0, PYTHON_MAX_FIXTURE_CONTENT_LENGTH).trimEnd();
+}
+
 
 function normalizeDraftFixtureFiles(
     files: PythonCodeInputExercise["files"],
-): Array<{ path: string; content: string; readOnly?: boolean }> {
+): DraftFixtureFile[] {
     if (!Array.isArray(files)) return [];
 
     return files
@@ -2356,9 +2419,85 @@ function normalizeDraftFixtureFiles(
                 ...(typeof file.readOnly === "boolean" ? { readOnly: file.readOnly } : {}),
             };
         })
-        .filter((file): file is { path: string; content: string; readOnly?: boolean } => Boolean(file));
+        .filter((file): file is DraftFixtureFile => Boolean(file));
 }
 
+function sanitizeDraftFixtureFiles(args: {
+    files: PythonCodeInputExercise["files"];
+    allowedPaths?: Set<string>;
+}): FixtureSanitizationResult {
+    const normalized = normalizeDraftFixtureFiles(args.files);
+    const allowedPaths = args.allowedPaths;
+    const seen = new Set<string>();
+    const files: DraftFixtureFile[] = [];
+    let removedInvalidPaths = 0;
+    let removedUnreferencedPaths = 0;
+    let normalizedContents = 0;
+    let dedupedPaths = 0;
+
+    for (const file of normalized) {
+        if (isInvalidDraftFixturePath(file.path)) {
+            removedInvalidPaths += 1;
+            continue;
+        }
+
+        if (allowedPaths && allowedPaths.size > 0 && !allowedPaths.has(file.path)) {
+            removedUnreferencedPaths += 1;
+            continue;
+        }
+
+        if (seen.has(file.path)) {
+            dedupedPaths += 1;
+            continue;
+        }
+        seen.add(file.path);
+
+        const sanitizedContent = sanitizeDraftFixtureContent(file.content);
+        if (sanitizedContent !== file.content) {
+            normalizedContents += 1;
+        }
+
+        files.push({
+            ...file,
+            content: sanitizedContent,
+        });
+    }
+
+    return {
+        files,
+        changed:
+            removedInvalidPaths > 0 ||
+            removedUnreferencedPaths > 0 ||
+            normalizedContents > 0 ||
+            dedupedPaths > 0 ||
+            files.length !== normalized.length,
+        removedInvalidPaths,
+        removedUnreferencedPaths,
+        normalizedContents,
+        dedupedPaths,
+    };
+}
+
+
+function mergePythonFixtureFiles(
+    baseFiles: PythonCodeInputExercise["files"],
+    testFiles: PythonCodeInputExercise["files"],
+): Array<{ path: string; content: string; readOnly?: boolean }> | undefined {
+    const merged = new Map<
+        string,
+        { path: string; content: string; readOnly?: boolean }
+    >();
+
+    for (const file of normalizeDraftFixtureFiles(baseFiles)) {
+        merged.set(file.path, file);
+    }
+
+    for (const file of normalizeDraftFixtureFiles(testFiles)) {
+        merged.set(file.path, file);
+    }
+
+    return merged.size > 0 ? [...merged.values()] : undefined;
+}
 function normalizeTestFixtureKey(test: { files?: PythonCodeInputExercise["files"] }): string {
     const files = normalizeDraftFixtureFiles(test.files)
         .map((file) => `${file.path}\u0000${file.content}`)
@@ -2366,14 +2505,95 @@ function normalizeTestFixtureKey(test: { files?: PythonCodeInputExercise["files"
     return files.join("\u0001");
 }
 
+
+function referencedReadFiles(source: string): string[] {
+    const paths = new Set<string>();
+    const pathVariables = new Map<string, string>();
+
+    const openPattern =
+        /\bopen\s*\(\s*["'`]([^"'`]+)["'`]\s*(?:,\s*["'`]([^"'`]*)["'`])?/g;
+
+    const pathAssignmentPattern =
+        /\b([A-Za-z_]\w*)\s*=\s*Path\s*\(\s*["'`]([^"'`]+)["'`]\s*\)/g;
+
+    const pathOpenPattern =
+        /\bPath\s*\(\s*["'`]([^"'`]+)["'`]\s*\)\s*\.\s*open\s*\(\s*(?:["'`]([^"'`]*)["'`])?/g;
+
+    const variableOpenPattern =
+        /\b([A-Za-z_]\w*)\s*\.\s*open\s*\(\s*(?:["'`]([^"'`]*)["'`])?/g;
+
+    const pathReadTextPattern =
+        /\bPath\s*\(\s*["'`]([^"'`]+)["'`]\s*\)\s*\.\s*read_text\s*\(/g;
+
+    for (const match of source.matchAll(pathAssignmentPattern)) {
+        const variableName = match[1]?.trim();
+        const filePath = match[2]?.trim();
+        if (!variableName || !filePath) continue;
+        if (filePath.includes("{") || filePath.includes("$")) continue;
+        pathVariables.set(variableName, filePath);
+    }
+
+    for (const match of source.matchAll(openPattern)) {
+        if ((match.index ?? 0) > 0 && source[(match.index ?? 0) - 1] === ".") continue;
+        const filePath = match[1]?.trim();
+        const mode = (match[2] ?? "r").trim();
+
+        if (!filePath) continue;
+        if (filePath.includes("{") || filePath.includes("$")) continue;
+        if (mode.includes("w") || mode.includes("a") || mode.includes("x")) continue;
+
+        paths.add(filePath);
+    }
+
+    for (const match of source.matchAll(pathOpenPattern)) {
+        const filePath = match[1]?.trim();
+        const mode = (match[2] ?? "r").trim();
+
+        if (!filePath) continue;
+        if (filePath.includes("{") || filePath.includes("$")) continue;
+        if (mode.includes("w") || mode.includes("a") || mode.includes("x")) continue;
+
+        paths.add(filePath);
+    }
+
+    for (const match of source.matchAll(variableOpenPattern)) {
+        const variableName = match[1]?.trim();
+        const mode = (match[2] ?? "r").trim();
+        if (!variableName) continue;
+        if (mode.includes("w") || mode.includes("a") || mode.includes("x")) continue;
+
+        const filePath = pathVariables.get(variableName);
+        if (filePath) {
+            paths.add(filePath);
+        }
+    }
+
+    for (const match of source.matchAll(pathReadTextPattern)) {
+        const filePath = match[1]?.trim();
+
+        if (!filePath) continue;
+        if (filePath.includes("{") || filePath.includes("$")) continue;
+
+        paths.add(filePath);
+    }
+
+    return [...paths];
+}
+
+function ensureTrailingNewline(value: string): string {
+    return value.endsWith("\n") ? value : `${value}\n`;
+}
+
 function inferFixtureContentFromTest(args: {
     exercise: PythonCodeInputExercise;
     filePath: string;
     test: { stdout?: string };
-}): string | null {
+    index: number;
+}): string {
     const source = String(args.exercise.solutionCode ?? "");
     const stdout = String(args.test.stdout ?? "");
     const trimmedStdout = stdout.trimEnd();
+
     const readAssignmentMatch = source.match(
         /\b([A-Za-z_]\w*)\s*=\s*[A-Za-z_]\w*\.read\s*\(\s*\)/,
     );
@@ -2408,9 +2628,14 @@ function inferFixtureContentFromTest(args: {
         return stdout.endsWith("\n") ? stdout.slice(0, -1) : stdout;
     }
 
+    if (/Path\s*\(\s*["'`][^"'`]+["'`]\s*\)\s*\.\s*read_text\s*\(/.test(source)) {
+        if (trimmedStdout.length > 0) {
+            return stdout.endsWith("\n") ? stdout.slice(0, -1) : stdout;
+        }
+    }
+
     if (/readline\s*\(\s*\)\.strip\s*\(\s*\)/.test(source)) {
-        const firstLine = trimmedStdout;
-        if (!firstLine) return null;
+        const firstLine = trimmedStdout || "First line";
         return `${firstLine}\nSecond line\n`;
     }
 
@@ -2418,7 +2643,7 @@ function inferFixtureContentFromTest(args: {
         readlineAssignmentMatch?.[1] &&
         new RegExp(`print\\s*\\(\\s*${readlineAssignmentMatch[1]}\\s*\\)`).test(source)
     ) {
-        return trimmedStdout;
+        return ensureTrailingNewline(trimmedStdout || "First line");
     }
 
     if (
@@ -2430,8 +2655,11 @@ function inferFixtureContentFromTest(args: {
         )
     ) {
         const count = Number(trimmedStdout);
-        if (!Number.isInteger(count) || count < 0 || count > 12) return null;
-        return Array.from({ length: count }, (_, index) => `line ${index + 1}`).join("\n") + (count > 0 ? "\n" : "");
+
+        if (Number.isInteger(count) && count >= 0 && count <= 20) {
+            return Array.from({ length: count }, (_, lineIndex) => `line ${lineIndex + 1}`).join("\n") +
+                (count > 0 ? "\n" : "");
+        }
     }
 
     const containsMatch = source.match(
@@ -2445,11 +2673,9 @@ function inferFixtureContentFromTest(args: {
             .map((line) => line.trim())
             .filter(Boolean);
 
-        if (lines.length < 1 || lines.some((line) => !line.includes(requiredText))) {
-            return null;
+        if (lines.length > 0 && lines.every((line) => line.includes(requiredText))) {
+            return ["Other line", ...lines].join("\n") + "\n";
         }
-
-        return ["Other line", ...lines].join("\n") + "\n";
     }
 
     if (
@@ -2459,8 +2685,10 @@ function inferFixtureContentFromTest(args: {
             .split("\n")
             .map((line) => line.trim())
             .filter(Boolean);
-        if (lines.length < 1) return null;
-        return `${lines.join("\n")}\n`;
+
+        if (lines.length > 0) {
+            return `${lines.join("\n")}\n`;
+        }
     }
 
     if (
@@ -2473,14 +2701,95 @@ function inferFixtureContentFromTest(args: {
             .split("\n")
             .map((line) => line.trim())
             .filter(Boolean);
-        if (lines.length < 1) return null;
 
-        return lines
-            .map((line, index) => (index % 2 === 0 ? `  ${line}  ` : line))
-            .join("\n\n") + "\n";
+        if (lines.length > 0) {
+            return lines
+                .map((line, lineIndex) => (lineIndex % 2 === 0 ? `  ${line}  ` : line))
+                .join("\n\n") + "\n";
+        }
     }
 
-    return null;
+    if (trimmedStdout.length > 0) {
+        return ensureTrailingNewline(trimmedStdout);
+    }
+
+    return args.index % 2 === 0
+        ? "apple\nbanana\ncarrot\n"
+        : "red\nblue\ngreen\n";
+}
+
+function sanitizePythonExerciseFixtures(
+    exercise: PythonCodeInputExercise,
+): {
+    changed: boolean;
+    exercise: PythonCodeInputExercise;
+    removedInvalidPaths: number;
+    removedUnreferencedPaths: number;
+    normalizedContents: number;
+    dedupedPaths: number;
+} {
+    const filePaths = referencedReadFiles(String(exercise.solutionCode ?? ""));
+    const allowedPaths = filePaths.length > 0 ? new Set(filePaths) : undefined;
+    const exerciseFiles = sanitizeDraftFixtureFiles({
+        files: exercise.files,
+        allowedPaths,
+    });
+    const tests = Array.isArray(exercise.tests)
+        ? exercise.tests.map((test) => ({ ...test }))
+        : [];
+
+    let removedInvalidPaths = exerciseFiles.removedInvalidPaths;
+    let removedUnreferencedPaths = exerciseFiles.removedUnreferencedPaths;
+    let normalizedContents = exerciseFiles.normalizedContents;
+    let dedupedPaths = exerciseFiles.dedupedPaths;
+    let changed = exerciseFiles.changed;
+
+    const sanitizedTests = tests.map((test) => {
+        const sanitized = sanitizeDraftFixtureFiles({
+            files: test.files,
+            allowedPaths,
+        });
+        removedInvalidPaths += sanitized.removedInvalidPaths;
+        removedUnreferencedPaths += sanitized.removedUnreferencedPaths;
+        normalizedContents += sanitized.normalizedContents;
+        dedupedPaths += sanitized.dedupedPaths;
+        changed = changed || sanitized.changed;
+
+        if (sanitized.files.length > 0) {
+            return {
+                ...test,
+                files: sanitized.files,
+            };
+        }
+
+        if (typeof test.files === "undefined") {
+            return test;
+        }
+
+        const nextTest = { ...test } as typeof test & { files?: typeof test.files };
+        delete nextTest.files;
+        return nextTest;
+    });
+
+    const nextExercise = {
+        ...exercise,
+        tests: sanitizedTests,
+    } as PythonCodeInputExercise & { files?: PythonCodeInputExercise["files"] };
+
+    if (exerciseFiles.files.length > 0) {
+        nextExercise.files = exerciseFiles.files;
+    } else {
+        delete nextExercise.files;
+    }
+
+    return {
+        changed,
+        exercise: nextExercise,
+        removedInvalidPaths,
+        removedUnreferencedPaths,
+        normalizedContents,
+        dedupedPaths,
+    };
 }
 
 function repairPythonFileFixtures(
@@ -2490,75 +2799,72 @@ function repairPythonFileFixtures(
         return { changed: false };
     }
 
-    const tests = Array.isArray(exercise.tests) ? exercise.tests.map((test) => ({ ...test })) : [];
+    const tests = Array.isArray(exercise.tests)
+        ? exercise.tests.map((test) => ({ ...test }))
+        : [];
+
     if (tests.length < 1) return { changed: false };
 
     const filePaths = referencedReadFiles(String(exercise.solutionCode ?? ""));
-    if (filePaths.length !== 1) return { changed: false };
+    if (filePaths.length < 1) return { changed: false };
 
-    const filePath = filePaths[0]!;
-    const distinctStdout = new Set(tests.map((test) => String(test.stdout ?? "")));
-    const needsPerTestFixtures = distinctStdout.size > 1;
     let changed = false;
     let addedTestFixtures = 0;
     let alignedTests = false;
 
-    for (let index = 0; index < tests.length; index += 1) {
-        const test = tests[index]!;
+    for (let testIndex = 0; testIndex < tests.length; testIndex += 1) {
+        const test = tests[testIndex]!;
         const existingFiles = normalizeDraftFixtureFiles(test.files);
-        const hasTargetFile = existingFiles.some((file) => file.path === filePath);
+        const nextFiles = [...existingFiles];
 
-        if (hasTargetFile) continue;
-        if (!needsPerTestFixtures && index > 0) continue;
+        for (const filePath of filePaths) {
+            const hasTargetFile = nextFiles.some((file) => file.path === filePath);
+            if (hasTargetFile) continue;
 
-        const inferredContent = inferFixtureContentFromTest({
-            exercise,
-            filePath,
-            test,
-        });
-        if (inferredContent === null) {
-            return { changed: false };
+            nextFiles.push({
+                path: filePath,
+                content: inferFixtureContentFromTest({
+                    exercise,
+                    filePath,
+                    test,
+                    index: testIndex,
+                }),
+                readOnly: true,
+            });
+
+            addedTestFixtures += 1;
+            changed = true;
         }
 
-        test.files = [
-            ...existingFiles,
-            {
-                path: filePath,
-                content: inferredContent,
-                readOnly: true,
-            },
-        ];
-        addedTestFixtures += 1;
-        changed = true;
+        if (nextFiles.length !== existingFiles.length) {
+            test.files = nextFiles;
+        }
     }
 
     let files = normalizeDraftFixtureFiles(exercise.files);
-    const hasExerciseFixture = files.some((file) => file.path === filePath);
     let addedExerciseFixture = false;
 
-    if (!hasExerciseFixture) {
+    for (const filePath of filePaths) {
+        const hasExerciseFixture = files.some((file) => file.path === filePath);
+        if (hasExerciseFixture) continue;
+
         const fallbackTest = tests.find((test) =>
             normalizeDraftFixtureFiles(test.files).some((file) => file.path === filePath),
         );
+
         const fallbackFixture = normalizeDraftFixtureFiles(fallbackTest?.files).find(
             (file) => file.path === filePath,
         );
 
-        if (!fallbackFixture) {
-            return { changed: false };
-        }
+        if (!fallbackFixture) continue;
 
         files = [...files, fallbackFixture];
         addedExerciseFixture = true;
         changed = true;
     }
 
-    if (needsPerTestFixtures) {
-        const fixtureKeys = new Set(tests.map((test) => normalizeTestFixtureKey(test)));
-        alignedTests = fixtureKeys.size > 1;
-    } else {
-        alignedTests = true;
-    }
+    const fixtureKeys = new Set(tests.map((test) => normalizeTestFixtureKey(test)));
+    alignedTests = fixtureKeys.size >= 1;
 
     if (!changed) {
         return { changed: false };
@@ -2576,6 +2882,7 @@ function repairPythonFileFixtures(
         alignedTests,
     };
 }
+
 
 async function repairThinFixedTests(
     exercise: PythonCodeInputExercise,
@@ -3414,11 +3721,66 @@ export async function repairPythonDraft(args: {
                 });
             }
 
-            const goldenTestRepair =
-                await rewriteTestsToMatchSolutionExecution(afterNoOutputNoArgFunctionRepair);
+            const fixtureSanitizationRepair = sanitizePythonExerciseFixtures(
+                afterNoOutputNoArgFunctionRepair,
+            );
 
-            const repairedExercise =
-                goldenTestRepair ?? afterNoOutputNoArgFunctionRepair;
+            const afterFixtureSanitizationRepair = fixtureSanitizationRepair.changed
+                ? fixtureSanitizationRepair.exercise
+                : afterNoOutputNoArgFunctionRepair;
+
+            if (fixtureSanitizationRepair.removedInvalidPaths > 0) {
+                report.repairs.push({
+                    code: "PYTHON_FILE_FIXTURE_INVALID_PATH_REMOVED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        `Removed ${fixtureSanitizationRepair.removedInvalidPaths} invalid Python fixture path(s) before golden validation.`,
+                });
+            }
+
+            if (fixtureSanitizationRepair.removedUnreferencedPaths > 0) {
+                report.repairs.push({
+                    code: "PYTHON_FILE_FIXTURE_UNRELATED_PATH_REMOVED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        `Removed ${fixtureSanitizationRepair.removedUnreferencedPaths} unrelated Python fixture path(s) that were not read by the authored solution.`,
+                });
+            }
+
+            if (fixtureSanitizationRepair.normalizedContents > 0 || fixtureSanitizationRepair.dedupedPaths > 0) {
+                report.repairs.push({
+                    code: "PYTHON_FILE_FIXTURE_SANITIZED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Sanitized Python fixture contents to remove oversized blank-line runs and duplicate fixture paths before golden validation.",
+                });
+            }
+
+            const initialFileFixtureRepair = repairPythonFileFixtures(
+                afterFixtureSanitizationRepair,
+            );
+
+            const afterInitialFileFixtureRepair = initialFileFixtureRepair.changed
+                ? initialFileFixtureRepair.exercise
+                : afterFixtureSanitizationRepair;
+
+            const goldenTestRepair = await rewriteTestsToMatchSolutionExecution(
+                afterInitialFileFixtureRepair,
+            );
+
+            const repairedExercise = goldenTestRepair ?? afterInitialFileFixtureRepair;
+
+            const fileFixtureRepair = repairPythonFileFixtures(repairedExercise);
+
+            const afterFileFixtureRepair = fileFixtureRepair.changed
+                ? fileFixtureRepair.exercise
+                : repairedExercise;
 
             if (goldenTestRepair) {
                 report.repairs.push({
@@ -3427,27 +3789,34 @@ export async function repairPythonDraft(args: {
                     severity: "high",
                     field: exercise.id,
                     message:
-                        "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests.",
+                        "Regenerated Python code_input expected stdout from solutionCode after applying file fixtures so golden validation matches the published tests.",
                 });
             }
 
-            const fileFixtureRepair = repairPythonFileFixtures(repairedExercise);
-            const afterFileFixtureRepair =
-                fileFixtureRepair.changed ? fileFixtureRepair.exercise : repairedExercise;
+            const totalAddedTestFixtures =
+                (initialFileFixtureRepair.changed
+                    ? initialFileFixtureRepair.addedTestFixtures
+                    : 0) +
+                (fileFixtureRepair.changed ? fileFixtureRepair.addedTestFixtures : 0);
 
-            if (fileFixtureRepair.changed && fileFixtureRepair.addedTestFixtures > 0) {
-                report.repairs.push({
+            const addedExerciseFixture =
+                (initialFileFixtureRepair.changed &&
+                    initialFileFixtureRepair.addedExerciseFixture) ||
+                (fileFixtureRepair.changed && fileFixtureRepair.addedExerciseFixture);
+
+            const alignedTests =
+                (initialFileFixtureRepair.changed && initialFileFixtureRepair.alignedTests) ||
+                (fileFixtureRepair.changed && fileFixtureRepair.alignedTests);
+            if (totalAddedTestFixtures > 0) {                report.repairs.push({
                     code: "PYTHON_TEST_FILE_FIXTURE_ADDED",
                     category: "recipe",
                     severity: "high",
                     field: exercise.id,
-                    message:
-                        `Added ${fileFixtureRepair.addedTestFixtures} test-level Python file fixture set(s) so fixed_tests file I/O coverage matches each expected output.`,
+                    message:`Added ${totalAddedTestFixtures} test-level Python file fixture set(s) so fixed_tests file I/O coverage matches each expected output.`,
                 });
             }
 
-            if (fileFixtureRepair.changed && fileFixtureRepair.addedExerciseFixture) {
-                report.repairs.push({
+            if (addedExerciseFixture) {                report.repairs.push({
                     code: "PYTHON_EXERCISE_FILE_FIXTURE_ADDED",
                     category: "recipe",
                     severity: "medium",
@@ -3457,7 +3826,7 @@ export async function repairPythonDraft(args: {
                 });
             }
 
-            if (fileFixtureRepair.changed && fileFixtureRepair.alignedTests) {
+            if (alignedTests) {
                 report.repairs.push({
                     code: "PYTHON_FILE_FIXTURE_TESTS_ALIGNED",
                     category: "recipe",
@@ -3627,6 +3996,18 @@ export async function repairPythonDraft(args: {
         seed: args.seed,
         report,
     });
+    const hadTryItYourselfSketch = hasTryItYourselfSketch(nextDraft);
+    nextDraft = ensureTryItYourselfSketch(nextDraft);
+
+    if (!hadTryItYourselfSketch) {report.repairs.push({
+        code: "PYTHON_TRY_IT_YOURSELF_SKETCH_ADDED",
+        category: "other",
+        severity: "medium",
+        field: "sketchBlocks",
+        message:
+            "Added a Try it yourself learner action required by programming teaching validation.",
+    });
+    }
 
     return {
         draft: nextDraft,

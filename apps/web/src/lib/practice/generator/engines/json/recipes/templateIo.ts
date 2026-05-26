@@ -19,6 +19,8 @@ export const buildTemplateIoRecipe: RecipeHandler<any> = (def, args, resolved) =
     const expected = buildTemplateIoExpected({
         recipe: def.recipe,
         vars,
+        workspaceExpectations:
+            def.workspaceExpectations ?? def.workspace?.workspaceExpectations,
     });
 
     const tests = expected.tests;

@@ -1,0 +1,303 @@
+{
+  "title": "Working With Paths",
+  "summary": "Understand relative paths and simple file organization.",
+  "minutes": 18,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Relative Paths",
+      "bodyMarkdown": "Relative paths are used to locate files in relation to the current working directory. For example, if your current directory is `/home/user/docs`, a relative path to a file in the same directory would simply be the file name, like `file.txt`. If the file is in a subdirectory, you would include the subdirectory in the path, like `subdir/file.txt`. Try it yourself: create a simple directory structure and practice writing relative paths to different files."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using Python's `os` and `pathlib` Modules",
+      "bodyMarkdown": "Python provides the `os` and `pathlib` modules to work with file paths. The `os.path` module offers functions like `os.path.join()` to concatenate paths, while `pathlib` provides an object-oriented approach. Here's an example using `pathlib`:\n\n```python\nfrom pathlib import Path\n\n# Create a Path object\npath = Path('data') / 'file.txt'\n\n# Check if the path exists\nprint(path.exists())\n```\n\nTry this: modify the path to point to a different file and check if it exists."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Identifying Relative Paths",
+      "prompt": "Which of the following is a relative path?",
+      "hint": "Look for a path that doesn't start with a root directory or drive letter.",
+      "help": {
+        "concept": "Relative paths are specified in relation to the current directory.",
+        "hint_1": "A relative path does not start with a `/` or a drive letter.",
+        "hint_2": "Paths like `docs/file.txt` are relative."
+      },
+      "options": [
+        "/usr/local/bin",
+        "C:\\Program Files",
+        "docs/file.txt",
+        "http://example.com"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Pathlib Module Usage",
+      "prompt": "What does the `path.exists()` method do in the `pathlib` module?",
+      "hint": "Consider what the method checks about the path.",
+      "help": {
+        "concept": "The `path.exists()` method checks if the path points to an existing file or directory.",
+        "hint_1": "This method returns a boolean value.",
+        "hint_2": "It checks the existence of the path."
+      },
+      "options": [
+        "Creates a new file",
+        "Deletes the file",
+        "Checks if the path exists",
+        "Renames the file"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Functions of `os.path` Module",
+      "prompt": "Which of the following are functions provided by the `os.path` module?",
+      "hint": "Think about functions related to path manipulation.",
+      "help": {
+        "concept": "The `os.path` module provides various functions for path manipulations.",
+        "hint_1": "Consider functions that deal with joining, splitting, and checking paths.",
+        "hint_2": "Functions like `join`, `split`, and `exists` are part of `os.path`."
+      },
+      "options": [
+        "os.path.join()",
+        "os.path.split()",
+        "os.path.exists()",
+        "os.path.create()"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Benefits of Using `pathlib`",
+      "prompt": "What are the benefits of using the `pathlib` module over `os.path`?",
+      "hint": "Consider the advantages of an object-oriented approach.",
+      "help": {
+        "concept": "`pathlib` provides an object-oriented interface for path manipulations.",
+        "hint_1": "Think about readability and ease of use.",
+        "hint_2": "`pathlib` offers a more intuitive and readable syntax."
+      },
+      "options": [
+        "Object-oriented interface",
+        "Better readability",
+        "Cross-platform compatibility",
+        "Requires more code"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Steps to Check File Existence",
+      "prompt": "Arrange the steps to check if a file exists using `pathlib`.",
+      "hint": "Start from importing the module to checking the file existence.",
+      "help": {
+        "concept": "Checking file existence involves creating a Path object and using the `exists()` method.",
+        "hint_1": "Begin with importing the necessary module.",
+        "hint_2": "Create a Path object before checking its existence."
+      },
+      "tokens": [
+        "Import `pathlib`",
+        "Create a Path object",
+        "Use `exists()` method",
+        "Print the result"
+      ],
+      "correctOrder": [
+        "Import `pathlib`",
+        "Create a Path object",
+        "Use `exists()` method",
+        "Print the result"
+      ]
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Using `os.path` Functions",
+      "prompt": "Arrange the steps to join two paths using `os.path`.",
+      "hint": "Think about the sequence of operations needed to join paths.",
+      "help": {
+        "concept": "Joining paths involves using the `os.path.join()` function.",
+        "hint_1": "Start by importing the `os` module.",
+        "hint_2": "Use `os.path.join()` to combine paths."
+      },
+      "tokens": [
+        "Import `os` module",
+        "Define first path",
+        "Define second path",
+        "Join paths using `os.path.join()`"
+      ],
+      "correctOrder": [
+        "Import `os` module",
+        "Define first path",
+        "Define second path",
+        "Join paths using `os.path.join()`"
+      ]
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Pathlib Path Creation",
+      "prompt": "Complete the code to create a Path object for a file named `example.txt` in a folder `docs`.",
+      "hint": "Use the `Path` class from `pathlib`.",
+      "help": {
+        "concept": "Creating a Path object involves using the `Path` class from `pathlib`.",
+        "hint_1": "Remember to import `Path` from `pathlib`.",
+        "hint_2": "Use the `/` operator to join paths in `pathlib`."
+      },
+      "template": "from pathlib import Path\npath = Path('docs') / [blank1]",
+      "choices": [
+        "'example.txt'",
+        "'docs/example.txt'",
+        "'docs'"
+      ],
+      "correctValue": "'example.txt'"
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Checking Path Existence",
+      "prompt": "Fill in the blank to check if a path exists using `pathlib`.",
+      "hint": "Use the `exists()` method on a Path object.",
+      "help": {
+        "concept": "The `exists()` method checks if the path points to an existing file or directory.",
+        "hint_1": "Ensure you have a Path object before calling `exists()`.",
+        "hint_2": "The method returns a boolean value."
+      },
+      "template": "path = Path('docs/example.txt')\nexists = path.[blank1]()",
+      "choices": [
+        "exists",
+        "is_file",
+        "is_dir"
+      ],
+      "correctValue": "exists"
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Reading a File with Pathlib",
+      "prompt": "Write a Python program to read the contents of `data/input.txt` using `pathlib` and print it.",
+      "hint": "Use `Path` to open and read the file.",
+      "help": {
+        "concept": "Use `pathlib.Path` to handle file paths and read files.",
+        "hint_1": "Create a Path object for the file path.",
+        "hint_2": "Use the `read_text()` method to read the file contents."
+      },
+      "starterCode": "from pathlib import Path\n\n# Create a Path object for the file\npath = Path('data/input.txt')\n\n# Read and print the file contents\n",
+      "solutionCode": "from pathlib import Path\n\n# Create a Path object for the file\npath = Path('data/input.txt')\n\n# Read and print the file contents\nprint(path.read_text())",
+      "tests": [
+        {
+          "stdout": "Hello, World!\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/input.txt",
+              "content": "Hello, World!\nThis is a test file.\nAnother line here.",
+              "readOnly": false
+            }
+          ]
+        },
+        {
+          "stdout": "Sample text\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/input.txt",
+              "content": "Sample text\nAnother example line.\nYet another line.",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "data/input.txt",
+          "content": "Hello, World!\nThis is a test file.\nAnother line here.",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Writing to a File with Pathlib",
+      "prompt": "Write a Python program to write 'Hello, Pathlib!' to `output.txt` using `pathlib`.",
+      "hint": "Use `Path` to open and write to the file.",
+      "help": {
+        "concept": "Use `pathlib.Path` to handle file paths and write to files.",
+        "hint_1": "Create a Path object for the file path.",
+        "hint_2": "Use the `write_text()` method to write to the file."
+      },
+      "starterCode": "from pathlib import Path\n\n# Create a Path object for the file\npath = Path('output.txt')\n\n# Write to the file\n",
+      "solutionCode": "from pathlib import Path\n\n# Create a Path object for the file\npath = Path('output.txt')\n\n# Write to the file\npath.write_text('Hello, Pathlib!')\n\n# Confirm the write operation\nprint('File written successfully.')",
+      "tests": [
+        {
+          "stdout": "File written successfully.\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "output.txt",
+              "content": "Hello, Pathlib!",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "output.txt",
+          "content": "",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Combining Paths with Pathlib",
+      "prompt": "Write a Python program to combine the folder `logs` and file `log.txt` into a single path using `pathlib`.",
+      "hint": "Use the `/` operator to join paths in `pathlib`.",
+      "help": {
+        "concept": "`pathlib` allows path joining using the `/` operator.",
+        "hint_1": "Create a Path object for the folder.",
+        "hint_2": "Use the `/` operator to add the file to the path."
+      },
+      "starterCode": "from pathlib import Path\n\n# Create a Path object for the folder\nfolder = Path('logs')\n\n# Combine with the file name\n",
+      "solutionCode": "from pathlib import Path\n\n# Create a Path object for the folder\nfolder = Path('logs')\n\n# Combine with the file name\nfull_path = folder / 'log.txt'\n\n# Print the combined path\nprint(full_path)",
+      "tests": [
+        {
+          "stdout": "logs/log.txt\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    }
+  ],
+  "projectDraft": {
+    "title": "Working With Paths Project",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

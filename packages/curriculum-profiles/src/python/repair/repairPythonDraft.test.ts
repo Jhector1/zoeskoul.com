@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { pythonProfile } from "../profile.js";
+import { validatePythonGolden } from "../validatePythonGolden.js";
 import { repairPythonDraft } from "./repairPythonDraft.js";
 
 describe("repairPythonDraft", () => {
@@ -34,9 +36,407 @@ describe("repairPythonDraft", () => {
         expect(exercise.help.concept).toContain("Build the program");
         expect(exercise.help.hint_1).toContain("Python statements");
         expect(exercise.help.hint_2).toContain("Construct the code");
-        expect(result.report.repairs.length).toBe(6);
+        expect(result.report.repairs.length).toBeGreaterThanOrEqual(6);
+        expect(result.report.repairs).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    code: "PYTHON_TRY_IT_YOURSELF_SKETCH_ADDED",
+                    field: "sketchBlocks",
+                }),
+            ]),
+        );    });
+
+
+    it("adds missing file fixtures for open() file-reading fixed tests", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "reading-text-files",
+                profileId: "python",
+            } as any,
+            draft: {
+                title: "Reading text files",
+                summary: "Practice reading from a text file.",
+                minutes: 10,
+                sketchBlocks: [
+                    {
+                        id: "try-it-yourself",
+                        title: "Try it yourself",
+                        bodyMarkdown:
+                            "Try it yourself: change one line in the file, predict the output, then run the code to check.",
+                    },
+                ],
+                quizDraft: [
+                    {
+                        id: "quiz-file-read",
+                        kind: "code_input",
+                        title: "Read a file",
+                        prompt: "Complete the program so it prints the file contents.",
+                        hint: "Open the file and read its text.",
+                        help: {
+                            concept: "Python can read text files with open().",
+                            hint_1: "Open the file in read mode.",
+                            hint_2: "Print the text that you read.",
+                        },
+                        starterCode:
+                            "with open('notes.txt') as file:\n    text = file.read()\n    # print text\n",
+                        solutionCode:
+                            "with open('notes.txt') as file:\n    text = file.read()\n    print(text)",
+                        recipeType: "fixed_tests",
+                        tests: [
+                            {
+                                stdin: "",
+                                stdout: "apple\nbanana\n",
+                                match: "exact",
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        const testFiles = exercise.tests[0].files;
+
+        expect(testFiles).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    path: "notes.txt",
+                    readOnly: true,
+                }),
+            ]),
+        );
+
+        expect(String(testFiles[0].content)).toContain("apple");
     });
 
+    it("sanitizes long blank-line file fixtures and drops bogus pathlib mode paths before golden validation", async () => {
+        const longBlankRun = "\n".repeat(250);
+        const seed = {
+            profileId: "python",
+            subjectSlug: "python",
+            courseSlug: "python-data-functions",
+            moduleSlug: "python-7-files-exceptions-and-data-cleaning",
+            modulePrefix: "python-7",
+            moduleOrder: 7,
+            sectionSlug: "python-7-file-io",
+            sectionOrder: 1,
+            topicId: "working-with-paths",
+            order: 3,
+            title: "Working With Paths",
+            summary: "Practice reading nested files with pathlib.",
+            minutes: 15,
+            sourceLocale: "en",
+            targetLocales: [],
+            moduleRuntimeDefaults: {
+                kind: "code",
+                language: "python",
+                supportsFileSystem: true,
+            },
+        } as any;
+
+        const result = await repairPythonDraft({
+            seed,
+            draft: {
+                title: "Working With Paths",
+                summary: "Practice reading nested files with pathlib.",
+                minutes: 15,
+                sketchBlocks: [
+                    {
+                        id: "try-it-yourself",
+                        title: "Try it yourself",
+                        bodyMarkdown:
+                            "Try it yourself: change one line in the file, predict the output, then run the code to check.",
+                    },
+                ],
+                quizDraft: [
+                    {
+                        id: "quiz9",
+                        kind: "code_input",
+                        title: "Reading a File with Pathlib",
+                        prompt:
+                            "Write a Python program that reads the contents of data/input.txt using pathlib and prints it.",
+                        hint: "Use Path and open the file in read mode.",
+                        help: {
+                            concept: "Use pathlib to read a file from a relative path.",
+                            hint_1: "Create a Path for data/input.txt.",
+                            hint_2: "Read the file contents and print them.",
+                        },
+                        starterCode:
+                            "from pathlib import Path\n\npath = Path('data/input.txt')\n# Write your code below\n",
+                        solutionCode:
+                            "from pathlib import Path\n\npath = Path('data/input.txt')\nwith path.open('r') as file:\n    content = file.read()\n    print(content)\n",
+                        recipeType: "fixed_tests",
+                        files: [
+                            {
+                                path: "data/input.txt",
+                                content:
+                                    `Hello, World!\nThis is a test file.\nAnother line here.\nEnd of file.${longBlankRun}`,
+                                readOnly: true,
+                            },
+                            {
+                                path: "r",
+                                content: "bogus mode fixture",
+                                readOnly: true,
+                            },
+                        ],
+                        tests: [
+                            {
+                                stdout: "Hello, World!\n",
+                                match: "exact",
+                                files: [
+                                    {
+                                        path: "data/input.txt",
+                                        content:
+                                            `Hello, World!\nThis is a test file.\nAnother line here.\nEnd of file.${longBlankRun}`,
+                                        readOnly: true,
+                                    },
+                                    {
+                                        path: "r",
+                                        content: "bogus mode fixture",
+                                        readOnly: true,
+                                    },
+                                ],
+                            },
+                            {
+                                stdout: "This is a test file.\n",
+                                match: "exact",
+                                files: [
+                                    {
+                                        path: "data/input.txt",
+                                        content: `First line\nSecond line\nThird line${longBlankRun}`,
+                                        readOnly: true,
+                                    },
+                                    {
+                                        path: "r",
+                                        content: "bogus mode fixture",
+                                        readOnly: true,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const repairedExercise = result.draft.quizDraft[0] as any;
+        expect(repairedExercise.files).toEqual([
+            {
+                path: "data/input.txt",
+                content:
+                    "Hello, World!\nThis is a test file.\nAnother line here.\nEnd of file.",
+                readOnly: true,
+            },
+        ]);
+        expect(repairedExercise.tests[0].files).toEqual([
+            {
+                path: "data/input.txt",
+                content:
+                    "Hello, World!\nThis is a test file.\nAnother line here.\nEnd of file.",
+                readOnly: true,
+            },
+        ]);
+        expect(repairedExercise.tests[1].files).toEqual([
+            {
+                path: "data/input.txt",
+                content: "First line\nSecond line\nThird line",
+                readOnly: true,
+            },
+        ]);
+        expect(JSON.stringify(repairedExercise)).not.toContain('"path":"r"');
+        expect(result.report.repairs.map((repair) => repair.code)).toEqual(
+            expect.arrayContaining([
+                "PYTHON_FILE_FIXTURE_UNRELATED_PATH_REMOVED",
+                "PYTHON_FILE_FIXTURE_SANITIZED",
+            ]),
+        );
+
+        const repairedCodeInput = result.draft.quizDraft[0] as any;
+        const topicBundle = {
+            topicId: seed.topicId,
+            subjectSlug: seed.subjectSlug,
+            moduleSlug: seed.moduleSlug,
+            sectionSlug: seed.sectionSlug,
+            prefix: seed.modulePrefix,
+            minutes: seed.minutes,
+            runtimeDefaults: seed.moduleRuntimeDefaults,
+            exercises: [
+                pythonProfile.codeInput!.buildManifest({
+                    exercise: repairedCodeInput,
+                    seed,
+                    messageBase:
+                        "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz9",
+                }),
+            ],
+        } as any;
+        const golden = await validatePythonGolden({
+            seed,
+            draft: result.draft,
+            topicBundle,
+        });
+
+        expect(golden.issues.map((issue) => issue.code)).not.toContain(
+            "PYTHON_FILE_FIXTURE_INVALID",
+        );
+    });
+
+    it("adds missing file fixtures for Path(...).read_text() fixed tests", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "reading-text-files",
+                profileId: "python",
+            } as any,
+            draft: {
+                title: "Reading text files",
+                summary: "Practice reading from a text file.",
+                minutes: 10,
+                sketchBlocks: [
+                    {
+                        id: "try-it-yourself",
+                        title: "Try it yourself",
+                        bodyMarkdown:
+                            "Try it yourself: change one line in the file, predict the output, then run the code to check.",
+                    },
+                ],
+                quizDraft: [
+                    {
+                        id: "quiz-path-read",
+                        kind: "code_input",
+                        title: "Read with Path",
+                        prompt: "Complete the program so it prints the file contents.",
+                        hint: "Use Path.read_text().",
+                        help: {
+                            concept: "Path objects can read text files.",
+                            hint_1: "Create a Path for the file.",
+                            hint_2: "Use read_text() and print the result.",
+                        },
+                        starterCode:
+                            "from pathlib import Path\n\ntext = Path('notes.txt').read_text()\n# print text\n",
+                        solutionCode:
+                            "from pathlib import Path\n\ntext = Path('notes.txt').read_text()\nprint(text)",
+                        recipeType: "fixed_tests",
+                        tests: [
+                            {
+                                stdin: "",
+                                stdout: "red\nblue\n",
+                                match: "exact",
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        const testFiles = exercise.tests[0].files;
+
+        expect(testFiles).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    path: "notes.txt",
+                    readOnly: true,
+                }),
+            ]),
+        );
+
+        expect(String(testFiles[0].content)).toContain("red");
+    });
+    it("aligns file I/O fixed test stdout after adding missing fixtures", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "reading-text-files",
+                profileId: "python",
+            } as any,
+            draft: {
+                title: "Reading text files",
+                summary: "Practice reading text from a file.",
+                minutes: 10,
+                sketchBlocks: [
+                    {
+                        id: "try-it-yourself",
+                        title: "Try it yourself",
+                        bodyMarkdown:
+                            "Try it yourself: change one line in the file, predict the output, then run the code to check.",
+                    },
+                ],
+                quizDraft: [
+                    {
+                        id: "quiz-file-count",
+                        kind: "code_input",
+                        title: "Count file lines",
+                        prompt: "Complete the program so it prints the number of lines.",
+                        hint: "Read the file and count the lines.",
+                        help: {
+                            concept:
+                                "A text file can be read line by line with a loop.",
+                            hint_1: "Open the file.",
+                            hint_2: "Count each line.",
+                        },
+                        starterCode:
+                            "count = 0\nwith open('notes.txt') as file:\n    for line in file:\n        count += 1\n# print count\n",
+                        solutionCode:
+                            "count = 0\nwith open('notes.txt') as file:\n    for line in file:\n        count += 1\nprint(count)",
+                        recipeType: "fixed_tests",
+                        tests: [
+                            {
+                                stdin: "",
+                                stdout: "wrong stale output",
+                                match: "exact",
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+
+        expect(exercise.tests[0].files).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    path: "notes.txt",
+                    readOnly: true,
+                }),
+            ]),
+        );
+
+        expect(exercise.tests[0].stdout.trim()).toMatch(/^\d+$/);
+        expect(exercise.tests[0].match).toBe("exact");
+    });
+    it("adds a Try it yourself sketch when missing", async () => {
+        const result = await repairPythonDraft({
+            seed: { topicId: "python-topic", profileId: "python" } as any,
+            draft: {
+                title: "List methods and mutation",
+                summary: "Practice changing lists with methods.",
+                minutes: 10,
+                sketchBlocks: [
+                    {
+                        id: "worked-example",
+                        title: "Worked example",
+                        bodyMarkdown: [
+                            "Worked example:",
+                            "```python",
+                            "items = []",
+                            "items.append('notebook')",
+                            "print(items)",
+                            "```",
+                            "Line by line: the first line creates an empty list, the second line adds a value, and the third line prints the list.",
+                        ].join("\n"),
+                    },
+                ],
+                quizDraft: [],
+            } as any,
+        });
+
+        const combined = result.draft.sketchBlocks
+            .map((block: any) => `${block.title}\n${block.bodyMarkdown}`)
+            .join("\n\n");
+
+        expect(combined).toMatch(
+            /\btry it yourself\b|\btry this\b|\byour turn\b|\btry on your own\b/i,
+        );
+    });
     it("adds a fallback fill_blank_choice when the planned mix requires one", async () => {
         const result = await repairPythonDraft({
             seed: {
@@ -642,11 +1042,10 @@ describe("repairPythonDraft", () => {
         expect(q9.tests?.[1]?.files?.[0]?.content).toBe("Bye\n");
         expect(q10.files?.[0]).toEqual({
             path: "info.txt",
-            content: "First line of text.",
+            content: "First line of text.\n",
             readOnly: true,
         });
-        expect(q10.tests?.[1]?.files?.[0]?.content).toBe("Welcome to Python.");
-        expect(q11.files?.[0]?.path).toBe("lines.txt");
+        expect(q10.tests?.[1]?.files?.[0]?.content).toBe("Welcome to Python.\n");        expect(q11.files?.[0]?.path).toBe("lines.txt");
         expect(q11.tests?.[0]?.files?.[0]?.content).toContain("line 1");
         expect(q11.tests?.[1]?.files?.[0]?.content.split("\n").filter(Boolean)).toHaveLength(5);
         expect(q12.files?.[0]?.path).toBe("data.txt");

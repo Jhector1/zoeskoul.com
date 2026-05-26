@@ -27,13 +27,6 @@
       "height": 420
     },
     {
-      "id": "sketch1",
-      "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.sketch1.title",
-      "sketchId": "sketch2",
-      "height": 420
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.quiz.title",
@@ -95,12 +88,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch1.title",
       "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch1.bodyMarkdown"
-    },
-    {
-      "id": "sketch2",
-      "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch2.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -175,7 +162,8 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "c",
+          "d"
         ]
       }
     },
@@ -240,7 +228,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "file"
+        "value": "read"
       }
     },
     {
@@ -258,10 +246,6 @@
           "language": "python",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": "data.txt",
-          "content": "Hello, World!\nThis is a test file."
         }
       ],
       "workspace": {
@@ -279,8 +263,9 @@
         ],
         "files": [
           {
-            "path": "data.txt",
-            "content": "Hello, World!\nThis is a test file."
+            "path": "data/input.txt",
+            "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+            "readOnly": false
           }
         ]
       },
@@ -289,29 +274,29 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "Hello, World!\nThis is a test file.\n",
+            "stdout": "Hello, World!\nThis is a test file.\n\nAnother line.",
             "match": "exact",
             "files": [
               {
-                "path": "data.txt",
-                "content": "Hello, World!\nThis is a test file.",
-                "readOnly": true
+                "path": "data/input.txt",
+                "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+                "readOnly": false
               }
             ]
           },
           {
-            "stdout": "Python is fun!\nLet's read files.\n",
+            "stdout": "Python is fun!\nLet's learn more.\n\nKeep going!",
             "match": "exact",
             "files": [
               {
-                "path": "data.txt",
-                "content": "Python is fun!\nLet's read files.",
-                "readOnly": true
+                "path": "data/input.txt",
+                "content": "Python is fun!\nLet's learn more.\n\nKeep going!",
+                "readOnly": false
               }
             ]
           }
         ],
-        "solutionCode": "with open('data.txt', 'r') as file:\n    content = file.read()\n    print(content)"
+        "solutionCode": "file = open('data/input.txt', 'r')\ncontent = file.read()\nprint(content)\nfile.close()"
       }
     },
     {
@@ -321,11 +306,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz10",
       "language": "python",
-      "starterCode": "# Write your code below",
+      "starterCode": "file = open('data/input.txt', 'r')\ncontent = file.read()\n\n# Modify the code to use a context manager",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your code below",
+          "content": "file = open('data/input.txt', 'r')\ncontent = file.read()\n\n# Modify the code to use a context manager",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -334,14 +319,21 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your code below",
+        "starterCode": "file = open('data/input.txt', 'r')\ncontent = file.read()\n\n# Modify the code to use a context manager",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your code below",
+            "content": "file = open('data/input.txt', 'r')\ncontent = file.read()\n\n# Modify the code to use a context manager",
             "language": "python",
             "isEntry": true,
             "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "data/input.txt",
+            "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+            "readOnly": false
           }
         ]
       },
@@ -350,15 +342,29 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "3\n",
-            "match": "exact"
+            "stdout": "Hello, World!\nThis is a test file.\n\nAnother line.",
+            "match": "exact",
+            "files": [
+              {
+                "path": "data/input.txt",
+                "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+                "readOnly": false
+              }
+            ]
           },
           {
-            "stdout": "5\n",
-            "match": "exact"
+            "stdout": "Python is fun!\nLet's learn more.\n\nKeep going!",
+            "match": "exact",
+            "files": [
+              {
+                "path": "data/input.txt",
+                "content": "Python is fun!\nLet's learn more.\n\nKeep going!",
+                "readOnly": false
+              }
+            ]
           }
         ],
-        "solutionCode": "with open('data.txt', 'r') as file:\n    line_count = sum(1 for line in file)\nprint(line_count)"
+        "solutionCode": "file = open('data/input.txt', 'r')\ncontent = file.read()\n\nwith open('data/input.txt', 'r') as file:\n    content = file.read()\n    print(content)"
       }
     },
     {
@@ -368,11 +374,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz11",
       "language": "python",
-      "starterCode": "# Write your code below",
+      "starterCode": "file = open('data/input.txt', 'r')\n\n# Write your code below",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your code below",
+          "content": "file = open('data/input.txt', 'r')\n\n# Write your code below",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -381,14 +387,21 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your code below",
+        "starterCode": "file = open('data/input.txt', 'r')\n\n# Write your code below",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your code below",
+            "content": "file = open('data/input.txt', 'r')\n\n# Write your code below",
             "language": "python",
             "isEntry": true,
             "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "data/input.txt",
+            "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+            "readOnly": false
           }
         ]
       },
@@ -397,15 +410,29 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "Hello, Wor\n",
-            "match": "exact"
+            "stdout": "Hello, World!\nThis is a test file.\n\nAnother line.",
+            "match": "exact",
+            "files": [
+              {
+                "path": "data/input.txt",
+                "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
+                "readOnly": false
+              }
+            ]
           },
           {
-            "stdout": "Python is \n",
-            "match": "exact"
+            "stdout": "Python is fun!\nLet's learn more.\n\nKeep going!",
+            "match": "exact",
+            "files": [
+              {
+                "path": "data/input.txt",
+                "content": "Python is fun!\nLet's learn more.\n\nKeep going!",
+                "readOnly": false
+              }
+            ]
           }
         ],
-        "solutionCode": "with open('data.txt', 'r') as file:\n    content = file.read(10)\n    print(content)"
+        "solutionCode": "file = open('data/input.txt', 'r')\n\nwith open('data/input.txt', 'r') as file:\n    for line in file:\n        print(line.strip())"
       }
     }
   ]

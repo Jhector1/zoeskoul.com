@@ -1,5 +1,12 @@
 export type WorkspacePathKind = "file" | "folder";
 
+export type WorkspaceExpectations = {
+    entryFilePath?: string;
+    requiredFiles?: string[];
+    requiredFolders?: string[];
+    forbiddenFiles?: string[];
+};
+
 export function normalizeWorkspacePath(path: string): string {
     const raw = String(path ?? "");
     const trimmed = raw.trim();
@@ -75,4 +82,87 @@ export function workspaceFolderPathForFile(path: string): string | null {
 
 export function workspacePathDepth(path: string): number {
     return normalizeWorkspacePath(path).split("/").length;
+}
+
+function normalizeWorkspacePathList(
+    value: unknown,
+    label: string,
+): string[] | undefined {
+    if (typeof value === "undefined") return undefined;
+
+    if (!Array.isArray(value)) {
+        throw new Error(`${label} must be an array of workspace-relative paths.`);
+    }
+
+    const normalized = value.map((item, index) => {
+        if (typeof item !== "string" || !item.trim()) {
+            throw new Error(`${label}[${index}] must be a non-empty workspace-relative path.`);
+        }
+
+        return normalizeWorkspacePath(item);
+    });
+
+    return normalized.length > 0 ? [...new Set(normalized)] : undefined;
+}
+
+export function normalizeWorkspaceExpectations(
+    value: unknown,
+    label = "workspaceExpectations",
+): WorkspaceExpectations | undefined {
+    if (typeof value === "undefined" || value === null) return undefined;
+
+    if (!value || typeof value !== "object" || Array.isArray(value)) {
+        throw new Error(`${label} must be an object.`);
+    }
+
+    const record = value as Record<string, unknown>;
+    const allowedKeys = new Set([
+        "entryFilePath",
+        "requiredFiles",
+        "requiredFolders",
+        "forbiddenFiles",
+    ]);
+
+    const extraKeys = Object.keys(record).filter((key) => !allowedKeys.has(key));
+    if (extraKeys.length > 0) {
+        throw new Error(`${label} has unknown field(s): ${extraKeys.join(", ")}`);
+    }
+
+    let entryFilePath: string | undefined;
+    if (typeof record.entryFilePath !== "undefined") {
+        if (typeof record.entryFilePath !== "string" || !record.entryFilePath.trim()) {
+            throw new Error(`${label}.entryFilePath must be a non-empty workspace-relative path.`);
+        }
+
+        entryFilePath = normalizeWorkspacePath(record.entryFilePath);
+    }
+
+    const requiredFiles = normalizeWorkspacePathList(
+        record.requiredFiles,
+        `${label}.requiredFiles`,
+    );
+    const requiredFolders = normalizeWorkspacePathList(
+        record.requiredFolders,
+        `${label}.requiredFolders`,
+    );
+    const forbiddenFiles = normalizeWorkspacePathList(
+        record.forbiddenFiles,
+        `${label}.forbiddenFiles`,
+    );
+
+    if (
+        !entryFilePath &&
+        !requiredFiles?.length &&
+        !requiredFolders?.length &&
+        !forbiddenFiles?.length
+    ) {
+        return undefined;
+    }
+
+    return {
+        ...(entryFilePath ? { entryFilePath } : {}),
+        ...(requiredFiles?.length ? { requiredFiles } : {}),
+        ...(requiredFolders?.length ? { requiredFolders } : {}),
+        ...(forbiddenFiles?.length ? { forbiddenFiles } : {}),
+    };
 }

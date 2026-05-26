@@ -1,0 +1,19 @@
+{
+  "topicId": "simple-csv-processing",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz9",
+      "message": "Regenerated Python code_input expected stdout from solutionCode after applying file fixtures so golden validation matches the published tests."
+    }
+  ]
+}

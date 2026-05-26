@@ -7,7 +7,10 @@ import type { RecipeHandler } from "./types";
 import { buildSemanticExpected } from "@zoeskoul-code-input-expected";
 
 export const buildSemanticRecipe: RecipeHandler<any> = (def, args, resolved) => {
-    const expected = buildSemanticExpected(def.recipe);
+    const expected = buildSemanticExpected(
+        def.recipe,
+        def.workspaceExpectations ?? def.workspace?.workspaceExpectations,
+    );
 
     return makeCodeInputOut({
         archetype: def.id,

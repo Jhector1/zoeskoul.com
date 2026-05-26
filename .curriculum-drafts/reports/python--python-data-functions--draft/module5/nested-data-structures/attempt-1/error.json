@@ -1,0 +1,34 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Golden validation failed for topic \"nested-data-structures\"\nModule: python-5-lists-tuples-and-dictionaries\nSection: python-5-dictionaries\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python--python-data-functions--draft/module5/nested-data-structures\n- Exercise \"q9\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1.\n- Exercise \"q10\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1.\n- Exercise \"q11\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1.",
+  "stack": "RetryableTopicValidationError: Golden validation failed for topic \"nested-data-structures\"\nModule: python-5-lists-tuples-and-dictionaries\nSection: python-5-dictionaries\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python--python-data-functions--draft/module5/nested-data-structures\n- Exercise \"q9\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1.\n- Exercise \"q10\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1.\n- Exercise \"q11\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1.\n    at throwRetryableReportFailure (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:82:11)\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:452:25)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:25:17)\n    at async runCompileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-course.js:24:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:46:13)",
+  "code": "GOLDEN_VALIDATION_FAILED",
+  "retryable": true,
+  "details": {
+    "topicId": "nested-data-structures",
+    "ok": false,
+    "issues": [
+      {
+        "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
+        "category": "tests",
+        "severity": "error",
+        "exerciseId": "q9",
+        "message": "Exercise \"q9\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+      },
+      {
+        "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
+        "category": "tests",
+        "severity": "error",
+        "exerciseId": "q10",
+        "message": "Exercise \"q10\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+      },
+      {
+        "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
+        "category": "tests",
+        "severity": "error",
+        "exerciseId": "q11",
+        "message": "Exercise \"q11\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+      }
+    ]
+  }
+}

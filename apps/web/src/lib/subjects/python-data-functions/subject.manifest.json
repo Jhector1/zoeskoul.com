@@ -1,6 +1,7 @@
 {
   "subject": {
-    "slug": "python-data-functions",    "profileId": "python",
+    "slug": "python-data-functions",
+    "profileId": "python",
     "catalogSlug": "python",
     "genKey": "python_part1",
     "order": 30,
@@ -238,10 +239,32 @@
             ]
           },
           "topics": [
-            "reading-text-files"
+            "reading-text-files",
+            "writing-text-files",
+            "working-with-paths"
+          ]
+        },
+        {
+          "slug": "python--python-data-functions--draft-python-7-exceptions-and-cleaning",
+          "order": 2,
+          "titleKey": "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-exceptions-and-cleaning.title",
+          "descriptionKey": "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-exceptions-and-cleaning.description",
+          "meta": {
+            "module": 7,
+            "weeksKey": "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-exceptions-and-cleaning.weeks",
+            "bulletKeys": [
+              "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-exceptions-and-cleaning.bullets.0",
+              "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-exceptions-and-cleaning.bullets.1",
+              "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-exceptions-and-cleaning.bullets.2",
+              "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-exceptions-and-cleaning.bullets.3"
+            ]
+          },
+          "topics": [
+            "try-except-basics",
+            "validating-and-cleaning-input",
+            "simple-csv-processing"
           ]
         }
-
       ]
     }
   ]

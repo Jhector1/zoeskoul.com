@@ -2,7 +2,10 @@ import { buildTerminalExpectedExample } from "../expectedExample.js";
 import { buildFixedTestsExpected } from "../codeInputExpected.js";
 
 export const buildFixedTestsRecipe = (def: any, args: any, resolved: any) => {
-  const expected = buildFixedTestsExpected(def.recipe);
+  const expected = buildFixedTestsExpected(
+    def.recipe,
+    def.workspaceExpectations ?? def.workspace?.workspaceExpectations,
+  );
   const tests = expected.tests;
 
   const expectedExample = buildTerminalExpectedExample({ def, resolved, tests });

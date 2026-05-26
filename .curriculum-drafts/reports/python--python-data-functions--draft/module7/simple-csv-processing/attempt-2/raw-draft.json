@@ -1,0 +1,317 @@
+{
+  "title": "Simple CSV Processing",
+  "summary": "Read comma-separated rows and transform them into dictionaries.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding CSV Files",
+      "bodyMarkdown": "CSV (Comma-Separated Values) files are a common format for storing tabular data. Each line in a CSV file corresponds to a row in the table, and each value is separated by a comma. Here's a simple example:\n\n```\nname,age,city\nAlice,30,New York\nBob,25,Los Angeles\n```\n\nIn this example, the first line contains the headers: `name`, `age`, and `city`. The following lines contain the data.\n\nTry it yourself: Create a small CSV file with headers and a few rows of data. Open it in a text editor to see how the data is structured."
+    },
+    {
+      "id": "sketch2",
+      "title": "Reading CSV Files in Python",
+      "bodyMarkdown": "Python provides a built-in module called `csv` to handle CSV files. Here's a basic example of how to read a CSV file and convert each row into a dictionary:\n\n```python\nimport csv\n\nwith open('data.csv', mode='r') as file:\n    csv_reader = csv.DictReader(file)\n    for row in csv_reader:\n        print(row)\n```\n\nThis code opens a file named `data.csv`, reads it using `csv.DictReader`, and prints each row as a dictionary.\n\nTry it yourself: Modify the code to print only the names from the CSV file."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "CSV File Structure",
+      "prompt": "What does each line in a CSV file represent?",
+      "hint": "Think about how data is organized in a table.",
+      "help": {
+        "concept": "Each line in a CSV file corresponds to a row in a table.",
+        "hint_1": "Consider the structure of a table with rows and columns.",
+        "hint_2": "Each line represents a row of data."
+      },
+      "options": [
+        "A column of data",
+        "A row of data",
+        "A single value",
+        "A header"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "CSV Module Functions",
+      "prompt": "Which of the following are functions provided by Python's `csv` module?",
+      "hint": "Think about functions that help in reading and writing CSV files.",
+      "help": {
+        "concept": "The `csv` module provides functions to read and write CSV files.",
+        "hint_1": "Consider functions that handle CSV file operations.",
+        "hint_2": "Look for functions that involve reading and writing."
+      },
+      "options": [
+        "csv.read",
+        "csv.write",
+        "csv.DictReader",
+        "csv.DictWriter"
+      ],
+      "correctOptionIds": [
+        "c",
+        "d"
+      ]
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "CSV Reading Steps",
+      "prompt": "Arrange the steps to read a CSV file using Python's `csv` module.",
+      "hint": "Start from opening the file to processing each row.",
+      "help": {
+        "concept": "Reading a CSV file involves opening the file, creating a reader, and processing rows.",
+        "hint_1": "Begin with opening the file.",
+        "hint_2": "End with processing each row."
+      },
+      "tokens": [
+        "Open the CSV file",
+        "Create a CSV reader",
+        "Iterate over each row",
+        "Close the file"
+      ],
+      "correctOrder": [
+        "Open the CSV file",
+        "Create a CSV reader",
+        "Iterate over each row",
+        "Close the file"
+      ]
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "CSV Header Access",
+      "prompt": "In a CSV file, the first line usually contains the [blank1].",
+      "hint": "Think about what the first line in a CSV file typically represents.",
+      "help": {
+        "concept": "The first line in a CSV file usually contains the headers, which are the column names.",
+        "hint_1": "The first line defines the structure of the data.",
+        "hint_2": "It contains the names of the columns."
+      },
+      "template": "In a CSV file, the first line usually contains the [blank1].",
+      "choices": [
+        "data",
+        "headers",
+        "values",
+        "rows"
+      ],
+      "correctValue": "headers"
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Read and Print CSV",
+      "prompt": "Write a Python program that reads a CSV file named `students.csv` and prints each student's name and age.",
+      "hint": "Use the `csv.DictReader` to read the file and access the 'name' and 'age' fields.",
+      "help": {
+        "concept": "Use `csv.DictReader` to read the CSV file and iterate over each row to access specific fields.",
+        "hint_1": "Open the file and use `csv.DictReader` to read it.",
+        "hint_2": "Iterate over each row and print the 'name' and 'age' fields."
+      },
+      "starterCode": "import csv\n\n# Open the CSV file\nwith open('students.csv', mode='r') as file:\n    # Create a CSV reader\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the student's name and age\n        print(row['name'], row['age'])",
+      "solutionCode": "import csv\n\n# Open the CSV file\nwith open('students.csv', mode='r') as file:\n    # Create a CSV reader\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the student's name and age\n        print(row['name'], row['age'])",
+      "tests": [
+        {
+          "stdout": "Alice 30\nBob 25\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "students.csv",
+              "content": "name,age,city\nAlice,30,New York\nBob,25,Los Angeles\nCharlie,22,Chicago\nDavid,28,Houston\nEve,35,Seattle\nFrank,40,Miami\nGrace,29,San Francisco\nHank,33,Denver\nIvy,31,Boston\nJack,27,Atlanta\nKathy,26,Portland\nLeo,32,Las Vegas\nMona,34,San Diego\nNina,36,Orlando\nOscar,37,Philadelphia\nPaul,38,Phoenix\nQuincy,39,San Antonio\nRita,41,San Jose\nSteve,42,Columbus\nTina,43,Charlotte\nUma,44,Indianapolis\nVera,45,Detroit\nWalt,46,Memphis\nXena,47,Baltimore\nYara,48,Milwaukee\nZane,49,Albuquerque",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "students.csv",
+          "content": "name,age,city\nAlice,30,New York\nBob,25,Los Angeles\nCharlie,22,Chicago\nDavid,28,Houston\nEve,35,Seattle\nFrank,40,Miami\nGrace,29,San Francisco\nHank,33,Denver\nIvy,31,Boston\nJack,27,Atlanta\nKathy,26,Portland\nLeo,32,Las Vegas\nMona,34,San Diego\nNina,36,Orlando\nOscar,37,Philadelphia\nPaul,38,Phoenix\nQuincy,39,San Antonio\nRita,41,San Jose\nSteve,42,Columbus\nTina,43,Charlotte\nUma,44,Indianapolis\nVera,45,Detroit\nWalt,46,Memphis\nXena,47,Baltimore\nYara,48,Milwaukee\nZane,49,Albuquerque",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "quiz6",
+      "kind": "single_choice",
+      "title": "CSV File Extension",
+      "prompt": "What is the typical file extension for a CSV file?",
+      "hint": "Think about the common file extensions for text-based data files.",
+      "help": {
+        "concept": "CSV files typically have the `.csv` extension, indicating they contain comma-separated values.",
+        "hint_1": "Consider the extension that represents comma-separated values.",
+        "hint_2": "It's a three-letter extension starting with 'c'."
+      },
+      "options": [
+        ".txt",
+        ".csv",
+        ".xls",
+        ".json"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "quiz7",
+      "kind": "multi_choice",
+      "title": "CSV Data Characteristics",
+      "prompt": "Which of the following are characteristics of CSV data?",
+      "hint": "Think about how data is structured and separated in CSV files.",
+      "help": {
+        "concept": "CSV data is structured in rows and columns, with values separated by commas.",
+        "hint_1": "Consider the format and structure of CSV files.",
+        "hint_2": "Think about how data is organized and separated."
+      },
+      "options": [
+        "Data is separated by commas",
+        "Each row represents a record",
+        "Data is separated by tabs",
+        "Each column represents a field"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "title": "CSV Writing Steps",
+      "prompt": "Arrange the steps to write data to a CSV file using Python's `csv` module.",
+      "hint": "Start from opening the file to writing each row.",
+      "help": {
+        "concept": "Writing to a CSV file involves opening the file, creating a writer, and writing rows.",
+        "hint_1": "Begin with opening the file in write mode.",
+        "hint_2": "End with writing each row and closing the file."
+      },
+      "tokens": [
+        "Open the CSV file in write mode",
+        "Create a CSV writer",
+        "Write each row",
+        "Close the file"
+      ],
+      "correctOrder": [
+        "Open the CSV file in write mode",
+        "Create a CSV writer",
+        "Write each row",
+        "Close the file"
+      ]
+    },
+    {
+      "id": "quiz9",
+      "kind": "fill_blank_choice",
+      "title": "CSV Reader Function",
+      "prompt": "The function used to read CSV files as dictionaries in Python is [blank1].",
+      "hint": "Think about the function that reads CSV files and returns each row as a dictionary.",
+      "help": {
+        "concept": "The `csv.DictReader` function reads CSV files and returns each row as a dictionary.",
+        "hint_1": "It's a function from the `csv` module that reads rows as dictionaries.",
+        "hint_2": "The function name starts with 'Dict'."
+      },
+      "template": "The function used to read CSV files as dictionaries in Python is [blank1].",
+      "choices": [
+        "csv.reader",
+        "csv.writer",
+        "csv.DictReader",
+        "csv.DictWriter"
+      ],
+      "correctValue": "csv.DictReader"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Write CSV File",
+      "prompt": "Write a Python program that writes a list of dictionaries to a CSV file named `output.csv`. Each dictionary should have keys 'name' and 'age'.",
+      "hint": "Use the `csv.DictWriter` to write the dictionaries to the file.",
+      "help": {
+        "concept": "Use `csv.DictWriter` to write dictionaries to a CSV file, specifying the fieldnames.",
+        "hint_1": "Open the file in write mode and use `csv.DictWriter`.",
+        "hint_2": "Write the header first, then write each dictionary as a row."
+      },
+      "starterCode": "import csv\n\n# List of dictionaries to write\nstudents = [\n    {'name': 'Alice', 'age': 30},\n    {'name': 'Bob', 'age': 25}\n]\n\n# Open the CSV file in write mode\nwith open('output.csv', mode='w', newline='') as file:\n    # Create a CSV writer\n    csv_writer = csv.DictWriter(file, fieldnames=['name', 'age'])\n    # Write the header\n    csv_writer.writeheader()\n    # Write each dictionary as a row\n    for student in students:\n        csv_writer.writerow(student)",
+      "solutionCode": "import csv\n\n# List of dictionaries to write\nstudents = [\n    {'name': 'Alice', 'age': 30},\n    {'name': 'Bob', 'age': 25}\n]\n\n# Open the CSV file in write mode\nwith open('output.csv', mode='w', newline='') as file:\n    # Create a CSV writer\n    csv_writer = csv.DictWriter(file, fieldnames=['name', 'age'])\n    # Write the header\n    csv_writer.writeheader()\n    # Write each dictionary as a row\n    for student in students:\n        csv_writer.writerow(student)",
+      "tests": [
+        {
+          "stdout": "File 'output.csv' written successfully.\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "output.csv",
+              "content": "name,age\nAlice,30\nBob,25",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "output.csv",
+          "content": "name,age\nAlice,30\nBob,25",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "CSV Data Cleaning",
+      "prompt": "Write a Python program that reads a CSV file named `raw_data.csv`, removes rows with missing 'age' values, and writes the cleaned data to `cleaned_data.csv`.",
+      "hint": "Use `csv.DictReader` to read and filter rows, then `csv.DictWriter` to write the cleaned data.",
+      "help": {
+        "concept": "Use `csv.DictReader` to read the CSV file, filter out rows with missing 'age', and `csv.DictWriter` to write the cleaned data.",
+        "hint_1": "Read the file and filter rows where 'age' is not empty.",
+        "hint_2": "Write the filtered data to a new CSV file."
+      },
+      "starterCode": "import csv\n\n# Open the raw data CSV file\nwith open('raw_data.csv', mode='r') as infile:\n    # Create a CSV reader\n    csv_reader = csv.DictReader(infile)\n    # Filter rows with non-empty 'age'\n    cleaned_data = [row for row in csv_reader if row['age']]\n\n# Open the cleaned data CSV file in write mode\nwith open('cleaned_data.csv', mode='w', newline='') as outfile:\n    # Create a CSV writer\n    csv_writer = csv.DictWriter(outfile, fieldnames=['name', 'age', 'city'])\n    # Write the header\n    csv_writer.writeheader()\n    # Write the cleaned data\n    csv_writer.writerows(cleaned_data)",
+      "solutionCode": "import csv\n\n# Open the raw data CSV file\nwith open('raw_data.csv', mode='r') as infile:\n    # Create a CSV reader\n    csv_reader = csv.DictReader(infile)\n    # Filter rows with non-empty 'age'\n    cleaned_data = [row for row in csv_reader if row['age']]\n\n# Open the cleaned data CSV file in write mode\nwith open('cleaned_data.csv', mode='w', newline='') as outfile:\n    # Create a CSV writer\n    csv_writer = csv.DictWriter(outfile, fieldnames=['name', 'age', 'city'])\n    # Write the header\n    csv_writer.writeheader()\n    # Write the cleaned data\n    csv_writer.writerows(cleaned_data)",
+      "tests": [
+        {
+          "stdout": "File 'cleaned_data.csv' written successfully.\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "raw_data.csv",
+              "content": "name,age,city\nAlice,30,New York\nBob,,Los Angeles\nCharlie,22,Chicago\nDavid,28,Houston\nEve,,Seattle",
+              "readOnly": false
+            },
+            {
+              "path": "cleaned_data.csv",
+              "content": "name,age,city\nAlice,30,New York\nCharlie,22,Chicago\nDavid,28,Houston",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "raw_data.csv",
+          "content": "name,age,city\nAlice,30,New York\nBob,,Los Angeles\nCharlie,22,Chicago\nDavid,28,Houston\nEve,,Seattle",
+          "readOnly": false
+        },
+        {
+          "path": "cleaned_data.csv",
+          "content": "name,age,city\nAlice,30,New York\nCharlie,22,Chicago\nDavid,28,Houston",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests"
+    }
+  ],
+  "projectDraft": {
+    "title": "CSV Processing Project",
+    "stepIds": [
+      "quiz5",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

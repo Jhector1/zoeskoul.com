@@ -1,0 +1,13 @@
+{
+  "topicId": "scope-and-local-variables",
+  "ok": false,
+  "issues": [
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "pedagogy",
+      "severity": "error",
+      "exerciseId": "quiz11",
+      "message": "Exercise \"quiz11\" still has fewer than 2 meaningful fixed tests. Add distinct stdin/stdout cases or replace the exercise."
+    }
+  ]
+}

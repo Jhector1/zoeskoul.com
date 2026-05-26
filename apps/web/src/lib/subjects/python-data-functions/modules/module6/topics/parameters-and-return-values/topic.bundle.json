@@ -135,7 +135,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "c"
       }
     },
     {
@@ -174,7 +174,8 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b"
+          "b",
+          "d"
         ]
       }
     },
@@ -188,8 +189,7 @@
         "t1",
         "t2",
         "t3",
-        "t4",
-        "t5"
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
@@ -197,8 +197,7 @@
           "t1",
           "t2",
           "t3",
-          "t4",
-          "t5"
+          "t4"
         ]
       }
     },
@@ -211,14 +210,16 @@
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3"
+          "t3",
+          "t4"
         ]
       }
     },
@@ -228,10 +229,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz7",
-      "choiceCount": 3,
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "name"
+        "value": "add"
       }
     },
     {
@@ -240,10 +241,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz8",
-      "choiceCount": 3,
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "return"
+        "value": "x + y"
       }
     },
     {
@@ -253,15 +254,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz9",
       "language": "python",
-      "starterCode": "def calculate_area(width, height):\n    # Calculate the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+      "starterCode": "def sum_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def sum_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def calculate_area(width, height):\n    # Calculate the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+        "starterCode": "def sum_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def calculate_area(width, height):\n    # Calculate the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+            "content": "def sum_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -273,17 +283,22 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "5 10\n1\n",
-            "stdout": "5 10",
+            "stdin": "1\n1\n",
+            "stdout": "2",
             "match": "exact"
           },
           {
-            "stdin": "3 7\n1\n",
-            "stdout": "3 7",
+            "stdin": "1\n1\n",
+            "stdout": "2",
+            "match": "exact"
+          },
+          {
+            "stdin": "2\n2\n",
+            "stdout": "4\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "def calculate_area(width, height):\n    return width * height\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))"
+        "solutionCode": "def sum_numbers(a, b):\n    return a + b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))"
       }
     },
     {
@@ -293,15 +308,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz10",
       "language": "python",
-      "starterCode": "def celsius_to_fahrenheit(celsius):\n    # Convert to Fahrenheit\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ncelsius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(celsius_to_fahrenheit(celsius))",
+      "starterCode": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def celsius_to_fahrenheit(celsius):\n    # Convert to Fahrenheit\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ncelsius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(celsius_to_fahrenheit(celsius))",
+        "starterCode": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def celsius_to_fahrenheit(celsius):\n    # Convert to Fahrenheit\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ncelsius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(celsius_to_fahrenheit(celsius))",
+            "content": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -313,17 +337,22 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "0\n",
-            "stdout": "32.0",
+            "stdin": "1\n1\n",
+            "stdout": "1",
             "match": "exact"
           },
           {
-            "stdin": "100\n",
-            "stdout": "212.0",
+            "stdin": "1\n1\n",
+            "stdout": "1",
+            "match": "exact"
+          },
+          {
+            "stdin": "2\n2\n",
+            "stdout": "4\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "def celsius_to_fahrenheit(celsius):\n    return (celsius * 9/5) + 32\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ncelsius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(celsius_to_fahrenheit(celsius))"
+        "solutionCode": "def multiply(a, b):\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))"
       }
     },
     {
@@ -333,15 +362,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz11",
       "language": "python",
-      "starterCode": "import math\n\ndef calculate_circumference(radius):\n    # Calculate the circumference\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nradius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(calculate_circumference(radius))",
+      "starterCode": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "import math\n\ndef calculate_circumference(radius):\n    # Calculate the circumference\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nradius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(calculate_circumference(radius))",
+        "starterCode": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "import math\n\ndef calculate_circumference(radius):\n    # Calculate the circumference\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nradius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(calculate_circumference(radius))",
+            "content": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -353,17 +391,17 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "1\n",
-            "stdout": "6.283185307179586\n",
+            "stdin": "1\n1\n",
+            "stdout": "1.0",
             "match": "exact"
           },
           {
-            "stdin": "2\n",
-            "stdout": "12.566370614359172\n",
+            "stdin": "1\n1\n",
+            "stdout": "1.0",
             "match": "exact"
           }
         ],
-        "solutionCode": "import math\n\ndef calculate_circumference(radius):\n    return 2 * math.pi * radius\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nradius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(calculate_circumference(radius))"
+        "solutionCode": "def divide(a, b):\n    return a / b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))"
       }
     }
   ]

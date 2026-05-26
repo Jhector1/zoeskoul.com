@@ -118,7 +118,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "c"
       }
     },
     {
@@ -135,7 +135,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "c"
+        "optionId": "b"
       }
     },
     {
@@ -154,7 +154,7 @@
         "kind": "multi_choice",
         "optionIds": [
           "b",
-          "d"
+          "c"
         ]
       }
     },
@@ -174,7 +174,8 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b"
+          "c",
+          "d"
         ]
       }
     },
@@ -217,8 +218,8 @@
         "tokenIds": [
           "t1",
           "t2",
-          "t4",
-          "t3"
+          "t3",
+          "t4"
         ]
       }
     },
@@ -231,7 +232,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "add"
+        "value": "descriptive"
       }
     },
     {
@@ -243,7 +244,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "sum"
+        "value": "a single responsibility"
       }
     },
     {
@@ -253,15 +254,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz9",
       "language": "python",
-      "starterCode": "def calculate_circle_area(radius):\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nradius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(calculate_circle_area(radius))",
+      "starterCode": "def process_data(data):\n    total = 0\n    for item in data:\n        total += item['value']\n    average = total / len(data)\n    return average",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def process_data(data):\n    total = 0\n    for item in data:\n        total += item['value']\n    average = total / len(data)\n    return average",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def calculate_circle_area(radius):\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nradius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(calculate_circle_area(radius))",
+        "starterCode": "def process_data(data):\n    total = 0\n    for item in data:\n        total += item['value']\n    average = total / len(data)\n    return average",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def calculate_circle_area(radius):\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nradius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(calculate_circle_area(radius))",
+            "content": "def process_data(data):\n    total = 0\n    for item in data:\n        total += item['value']\n    average = total / len(data)\n    return average",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -273,17 +283,15 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "5\n",
-            "stdout": "78.5\n",
+            "stdout": "20.0",
             "match": "exact"
           },
           {
-            "stdin": "10\n",
-            "stdout": "314.0\n",
+            "stdout": "20.0",
             "match": "exact"
           }
         ],
-        "solutionCode": "def calculate_circle_area(radius):\n    return 3.14 * radius * radius\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nradius = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(calculate_circle_area(radius))"
+        "solutionCode": "def calculate_total(data):\n    total = 0\n    for item in data:\n        total += item['value']\n    return total\n\ndef calculate_average(data):\n    total = calculate_total(data)\n    return total / len(data)\n\n# Example usage\ndata = [{'value': 10}, {'value': 20}, {'value': 30}]\nprint(calculate_average(data))"
       }
     },
     {
@@ -293,15 +301,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz10",
       "language": "python",
-      "starterCode": "def sum_of_list(numbers):\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(sum_of_list(numbers))",
+      "starterCode": "def calculate_total(items):\n    # Calculate subtotal\n    # Calculate tax\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def calculate_total(items):\n    # Calculate subtotal\n    # Calculate tax\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def sum_of_list(numbers):\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(sum_of_list(numbers))",
+        "starterCode": "def calculate_total(items):\n    # Calculate subtotal\n    # Calculate tax\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def sum_of_list(numbers):\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(sum_of_list(numbers))",
+            "content": "def calculate_total(items):\n    # Calculate subtotal\n    # Calculate tax\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -313,17 +330,15 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "[1, 2, 3, 4]\n",
-            "stdout": "10\n",
+            "stdout": "40 4.0",
             "match": "exact"
           },
           {
-            "stdin": "[10, 20, 30]\n",
-            "stdout": "60\n",
+            "stdout": "40 4.0",
             "match": "exact"
           }
         ],
-        "solutionCode": "def sum_of_list(numbers):\n    total = 0\n    for number in numbers:\n        total += number\n    return total\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(sum_of_list(numbers))"
+        "solutionCode": "def calculate_subtotal(items):\n    subtotal = 0\n    for item in items:\n        subtotal += item['price'] * item['quantity']\n    return subtotal\n\ndef calculate_tax(subtotal, tax_rate):\n    return subtotal * tax_rate\n\n# Example usage\nitems = [{'price': 10, 'quantity': 2}, {'price': 20, 'quantity': 1}]\nsubtotal = calculate_subtotal(items)\ntax = calculate_tax(subtotal, 0.1)\nprint(subtotal, tax)"
       }
     },
     {
@@ -333,15 +348,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz11",
       "language": "python",
-      "starterCode": "def calculate_area(length, width):\n    # Write your code below\n    \n\n# Calculate areas\narea1 = calculate_area(5, 10)\narea2 = calculate_area(3, 4)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nlength = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nwidth = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(length, width))",
+      "starterCode": "def print_receipt(items):\n    total = 0\n    for item in items:\n        total += item['price'] * item['quantity']\n        print(f\"{item['name']}: {item['price']} x {item['quantity']}\")\n    print(f\"Total: {total}\")",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def print_receipt(items):\n    total = 0\n    for item in items:\n        total += item['price'] * item['quantity']\n        print(f\"{item['name']}: {item['price']} x {item['quantity']}\")\n    print(f\"Total: {total}\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def calculate_area(length, width):\n    # Write your code below\n    \n\n# Calculate areas\narea1 = calculate_area(5, 10)\narea2 = calculate_area(3, 4)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nlength = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nwidth = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(length, width))",
+        "starterCode": "def print_receipt(items):\n    total = 0\n    for item in items:\n        total += item['price'] * item['quantity']\n        print(f\"{item['name']}: {item['price']} x {item['quantity']}\")\n    print(f\"Total: {total}\")",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def calculate_area(length, width):\n    # Write your code below\n    \n\n# Calculate areas\narea1 = calculate_area(5, 10)\narea2 = calculate_area(3, 4)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nlength = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nwidth = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(length, width))",
+            "content": "def print_receipt(items):\n    total = 0\n    for item in items:\n        total += item['price'] * item['quantity']\n        print(f\"{item['name']}: {item['price']} x {item['quantity']}\")\n    print(f\"Total: {total}\")",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -353,17 +377,15 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "1\n1\n",
-            "stdout": "1",
+            "stdout": "apple: 1 x 3\nbanana: 2 x 2\nTotal: 7",
             "match": "exact"
           },
           {
-            "stdin": "2\n2\n",
-            "stdout": "4\n",
+            "stdout": "apple: 1 x 3\nbanana: 2 x 2\nTotal: 7",
             "match": "exact"
           }
         ],
-        "solutionCode": "def calculate_area(length, width):\n    return length * width\n\n# Calculate areas\narea1 = calculate_area(5, 10)\narea2 = calculate_area(3, 4)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nlength = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nwidth = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(length, width))"
+        "solutionCode": "def calculate_item_total(item):\n    return item['price'] * item['quantity']\n\ndef print_item(item):\n    print(f\"{item['name']}: {item['price']} x {item['quantity']}\")\n\ndef print_receipt(items):\n    total = 0\n    for item in items:\n        total += calculate_item_total(item)\n        print_item(item)\n    print(f\"Total: {total}\")\n\n# Example usage\nitems = [{'name': 'apple', 'price': 1, 'quantity': 3}, {'name': 'banana', 'price': 2, 'quantity': 2}]\nprint_receipt(items)"
       }
     }
   ]

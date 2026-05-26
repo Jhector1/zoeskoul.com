@@ -17,17 +17,17 @@
     },
     "codeInputs": 3,
     "projects": 3,
-    "capstones": 3,
+    "capstones": 0,
     "thinFixedTestCount": 0,
     "blockers": 0,
     "errors": 0,
-    "warnings": 4,
+    "warnings": 1,
     "infos": 0
   },
   "severityCounts": {
     "blocker": 0,
     "error": 0,
-    "warning": 4,
+    "warning": 1,
     "info": 0
   },
   "issues": [
@@ -39,36 +39,6 @@
       "moduleId": "python-7-files-exceptions-and-data-cleaning",
       "topicId": "reading-text-files",
       "message": "Topic \"reading-text-files\" has no learning goals on its seed metadata."
-    },
-    {
-      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
-      "severity": "warning",
-      "path": "python-7-files-exceptions-and-data-cleaning/python-7-file-io/reading-text-files",
-      "profileId": "python",
-      "moduleId": "python-7-files-exceptions-and-data-cleaning",
-      "topicId": "reading-text-files",
-      "exerciseId": "quiz5",
-      "message": "Exercise \"quiz5\" starterCode appears to contain most of the final solution structure."
-    },
-    {
-      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
-      "severity": "warning",
-      "path": "python-7-files-exceptions-and-data-cleaning/python-7-file-io/reading-text-files",
-      "profileId": "python",
-      "moduleId": "python-7-files-exceptions-and-data-cleaning",
-      "topicId": "reading-text-files",
-      "exerciseId": "quiz6",
-      "message": "Exercise \"quiz6\" starterCode appears to contain most of the final solution structure."
-    },
-    {
-      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
-      "severity": "warning",
-      "path": "python-7-files-exceptions-and-data-cleaning/python-7-file-io/reading-text-files",
-      "profileId": "python",
-      "moduleId": "python-7-files-exceptions-and-data-cleaning",
-      "topicId": "reading-text-files",
-      "exerciseId": "quiz7",
-      "message": "Exercise \"quiz7\" starterCode appears to contain most of the final solution structure."
     }
   ]
 }

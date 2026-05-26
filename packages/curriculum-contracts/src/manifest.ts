@@ -1,5 +1,6 @@
 import type { ManifestIdeServiceConfig } from "./ide-services.js";
 import type { SemanticCheck } from "@zoeskoul/practice-checks";
+import type { WorkspaceExpectations } from "./workspace-path.js";
 
 export type ExerciseKind =
   | "single_choice"
@@ -214,6 +215,8 @@ export type ManifestFileFixture = {
   readOnly?: boolean;
 };
 
+export type ManifestWorkspaceExpectations = WorkspaceExpectations;
+
 export type ManifestRecipe =
   | {
       type: "fixed_tests";
@@ -362,6 +365,12 @@ export type ManifestWorkspaceSeed = {
   files?: ManifestStarterFiles;
   initialFiles?: ManifestStarterFiles;
   workspaceFiles?: ManifestStarterFiles;
+
+  /**
+   * Optional workspace submission contract for project-style exercises.
+   * All paths must be safe workspace-relative POSIX paths.
+   */
+  workspaceExpectations?: ManifestWorkspaceExpectations;
 };
 export type ManifestCodeInput = ManifestBaseExercise & {
   kind: "code_input";
@@ -378,6 +387,7 @@ export type ManifestCodeInput = ManifestBaseExercise & {
   starterCode?: string;
 
   starterFiles?: ManifestStarterFiles;
+  workspaceExpectations?: ManifestWorkspaceExpectations;
   workspace?: ManifestWorkspaceSeed | null;
 };
 export type ManifestExercise =

@@ -25,10 +25,24 @@ const JsonValueSchema: z.ZodType<JsonValue> = z.lazy(() =>
         z.record(JsonValueSchema),
     ]),
 );
+const ProgrammingCodeFileSchema = z.object({
+    path: z.string().min(1),
+    content: z.string().default(""),
+    readOnly: z.boolean().optional(),
+});
+
 export const ProgrammingCodeTestSchema = z.object({
     stdin: z.string().optional().default(""),
     stdout: z.string().optional().default(""),
     match: z.enum(["exact", "includes"]).optional().default("exact"),
+    files: z.array(ProgrammingCodeFileSchema).optional(),
+});
+
+const WorkspaceExpectationsSchema = z.object({
+    entryFilePath: z.string().optional(),
+    requiredFiles: z.array(z.string()).optional(),
+    requiredFolders: z.array(z.string()).optional(),
+    forbiddenFiles: z.array(z.string()).optional(),
 });
 
 export const SemanticCheckSchema = z.discriminatedUnion("type", [
@@ -82,6 +96,7 @@ export const ProgrammingExpectedSchema = z
         stdout: z.string().optional(),
         match: z.enum(["exact", "includes"]).optional(),
         semanticChecks: z.array(SemanticCheckSchema).optional(),
+        workspaceExpectations: WorkspaceExpectationsSchema.optional(),
         solutionCode: z.string().optional(),
     })
     .transform((value): ProgrammingExpected => makeProgrammingExpected(value as ProgrammingExpectedInput))

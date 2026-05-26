@@ -2,8 +2,16 @@ import {
     SemanticCheckSchema,
     type SemanticCheck,
 } from "@zoeskoul/practice-checks";
-import type { ExerciseKind, ManifestFileFixture, WorkspaceLanguage } from "./manifest.js";
-import { normalizeWorkspacePath } from "./workspace-path.js";
+import type {
+    ExerciseKind,
+    ManifestFileFixture,
+    ManifestWorkspaceExpectations,
+    WorkspaceLanguage,
+} from "./manifest.js";
+import {
+    normalizeWorkspaceExpectations,
+    normalizeWorkspacePath,
+} from "./workspace-path.js";
 export type ExerciseHelpDraft = {
     concept: string;
     hint_1: string;
@@ -96,6 +104,7 @@ export type ProgrammingCodeInputStarterFileDraft = {
          * If omitted, starterCode is emitted as the default entry file.
          */
         starterFiles?: ProgrammingCodeInputStarterFileDraft[];
+        workspaceExpectations?: ManifestWorkspaceExpectations;
 
         solutionCode: string;
         tests?: ProgrammingCodeInputTestDraft[];
@@ -360,6 +369,25 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                                     },
                                 },
                             },
+                            workspaceExpectations: {
+                                type: "object",
+                                additionalProperties: false,
+                                properties: {
+                                    entryFilePath: { type: "string" },
+                                    requiredFiles: {
+                                        type: "array",
+                                        items: { type: "string" },
+                                    },
+                                    requiredFolders: {
+                                        type: "array",
+                                        items: { type: "string" },
+                                    },
+                                    forbiddenFiles: {
+                                        type: "array",
+                                        items: { type: "string" },
+                                    },
+                                },
+                            },
                             datasetId: { type: "string" },
                             recipeType: {
                                 type: "string",
@@ -437,6 +465,25 @@ function assertFileDraft(
         fail(`${label}.readOnly must be a boolean when provided`);
     }
 }
+
+function assertWorkspaceExpectations(value: unknown, label: string) {
+    if (!isRecord(value)) {
+        fail(`${label} must be an object`);
+    }
+
+    assertOnlyKeys(
+        value,
+        ["entryFilePath", "requiredFiles", "requiredFolders", "forbiddenFiles"],
+        label,
+    );
+
+    try {
+        normalizeWorkspaceExpectations(value, label);
+    } catch (error) {
+        fail((error as Error).message);
+    }
+}
+
 function assertOnlyKeys(
     value: Record<string, unknown>,
     allowedKeys: string[],
@@ -693,6 +740,7 @@ export function assertTopicAuthoringDraft(
                         "starterCode",
                         "entryFilePath",
                         "starterFiles",
+                        "workspaceExpectations",
                         "solutionCode",
                         "tests",
                         "files",
@@ -737,6 +785,13 @@ export function assertTopicAuthoringDraft(
 
             if (typeof exercise.entryFilePath !== "undefined") {
                 assertWorkspacePath(exercise.entryFilePath, `${label}.entryFilePath`);
+            }
+
+            if (typeof exercise.workspaceExpectations !== "undefined") {
+                assertWorkspaceExpectations(
+                    exercise.workspaceExpectations,
+                    `${label}.workspaceExpectations`,
+                );
             }
 
             if (typeof exercise.starterFiles !== "undefined") {

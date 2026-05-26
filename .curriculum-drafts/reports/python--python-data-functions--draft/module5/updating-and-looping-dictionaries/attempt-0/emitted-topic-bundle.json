@@ -1,0 +1,404 @@
+{
+  "topicId": "updating-and-looping-dictionaries",
+  "subjectSlug": "python--python-data-functions--draft",
+  "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+  "sectionSlug": "python--python-data-functions--draft-python-5-dictionaries",
+  "prefix": "py5",
+  "minutes": 26,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.label",
+    "summaryKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch1.title",
+      "sketchId": "sketch2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch2.title",
+      "sketchId": "sketch3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "quiz5",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.projectSteps.quiz5.title",
+            "exerciseKey": "quiz5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz10",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.projectSteps.quiz10.title",
+            "exerciseKey": "quiz10",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz11",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.projectSteps.quiz11.title",
+            "exerciseKey": "quiz11",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.sketch1.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.sketch2.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.sketch2.bodyMarkdown"
+    },
+    {
+      "id": "sketch3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.sketch3.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.sketch3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz1",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz3",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz4",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'grade'"
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz5",
+      "language": "python",
+      "starterCode": "def update_age(student, new_age):\n    # Update the age here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def update_age(student, new_age):\n    # Update the age here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def update_age(student, new_age):\n    # Update the age here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def update_age(student, new_age):\n    # Update the age here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "{'name': 'Alice', 'age': 25}\n30",
+            "stdout": "None",
+            "match": "exact"
+          },
+          {
+            "stdin": "{'name': 'Bob', 'age': 22}\n23",
+            "stdout": "None",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def update_age(student, new_age):\n    student['age'] = new_age\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))"
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz6",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz7",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz8",
+      "tokenIds": [
+        "t1",
+        "t2"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2"
+        ]
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz9",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "key"
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz10",
+      "language": "python",
+      "starterCode": "def add_course(student, course):\n    # Add the course to the courses list\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def add_course(student, course):\n    # Add the course to the courses list\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def add_course(student, course):\n    # Add the course to the courses list\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def add_course(student, course):\n    # Add the course to the courses list\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "{'name': 'Alice', 'age': 25, 'courses': ['Math']}\nScience",
+            "stdout": "None",
+            "match": "exact"
+          },
+          {
+            "stdin": "{'name': 'Bob', 'age': 22, 'courses': ['History']}\nArt",
+            "stdout": "None",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def add_course(student, course):\n    student['courses'].append(course)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))"
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.quiz11",
+      "language": "python",
+      "starterCode": "def remove_course(student, course):\n    # Remove the course from the courses list if it exists\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def remove_course(student, course):\n    # Remove the course from the courses list if it exists\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def remove_course(student, course):\n    # Remove the course from the courses list if it exists\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def remove_course(student, course):\n    # Remove the course from the courses list if it exists\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "{'name': 'Alice', 'age': 25, 'courses': ['Math', 'Science']}\nMath",
+            "stdout": "None",
+            "match": "exact"
+          },
+          {
+            "stdin": "{'name': 'Bob', 'age': 22, 'courses': ['History', 'Art']}\nArt",
+            "stdout": "None",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def remove_course(student, course):\n    if course in student['courses']:\n        student['courses'].remove(course)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))"
+      }
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "topicId": "validating-and-cleaning-input",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch1.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch3.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz9",
+      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+    },
+    {
+      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz10",
+      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+    },
+    {
+      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz11",
+      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz9",
+      "message": "Regenerated Python code_input expected stdout from solutionCode after applying file fixtures so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "recipe",
+      "severity": "low",
+      "field": "quiz9",
+      "message": "The repair step could not derive a second distinct stdin/stdout case from the current Python prompt and solution. Replace this with a non-code exercise or rewrite it as a stdin-based task with variable behavior."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz10",
+      "message": "Regenerated Python code_input expected stdout from solutionCode after applying file fixtures so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "recipe",
+      "severity": "low",
+      "field": "quiz10",
+      "message": "The repair step could not derive a second distinct stdin/stdout case from the current Python prompt and solution. Replace this with a non-code exercise or rewrite it as a stdin-based task with variable behavior."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz11",
+      "message": "Regenerated Python code_input expected stdout from solutionCode after applying file fixtures so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "recipe",
+      "severity": "low",
+      "field": "quiz11",
+      "message": "The repair step could not derive a second distinct stdin/stdout case from the current Python prompt and solution. Replace this with a non-code exercise or rewrite it as a stdin-based task with variable behavior."
+    }
+  ]
+}

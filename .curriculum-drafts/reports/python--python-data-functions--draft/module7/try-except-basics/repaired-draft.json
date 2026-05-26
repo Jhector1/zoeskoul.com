@@ -1,0 +1,300 @@
+{
+  "title": "Try/Except Basics",
+  "summary": "Learn how to handle exceptions in Python to prevent your programs from crashing.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Try/Except",
+      "bodyMarkdown": "In Python, exceptions are errors that occur during the execution of a program. Instead of letting the program crash, you can handle these exceptions using a `try/except` block. This allows your program to continue running or to handle the error gracefully.\n\nHere's a simple example:\n\n```python\ntry:\n    number = int(input(\"Enter a number: \"))\n    print(\"You entered:\", number)\nexcept ValueError:\n    print(\"That's not a valid number!\")\n```\n\nIn this example, if the user enters something that isn't a number, the program will catch the `ValueError` and print a friendly message instead of crashing.\n\n**Try it yourself:** Modify the code to handle a `ZeroDivisionError` when dividing two numbers.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "sketch2",
+      "title": "How Try/Except Works",
+      "bodyMarkdown": "The `try` block contains the code that might cause an exception. If an exception occurs, the rest of the `try` block is skipped, and the `except` block is executed.\n\nHere's a step-by-step breakdown:\n1. **Try Block:** The code inside the `try` block is executed.\n2. **Exception Occurs:** If an error occurs, Python looks for a matching `except` block.\n3. **Except Block:** If a matching `except` block is found, the code inside it is executed.\n4. **Continue Execution:** After the `except` block, the program continues with the next line of code after the `try/except` block.\n\n**Your turn:** Add another `except` block to handle a different type of error, such as `IndexError`."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Purpose of Try/Except",
+      "prompt": "What is the main purpose of using a try/except block in Python?",
+      "options": [
+        "To handle exceptions and prevent program crashes",
+        "To speed up program execution",
+        "To make code more readable",
+        "To automatically fix errors"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Common Exceptions",
+      "prompt": "Which of the following are common exceptions in Python? Choose all that apply.",
+      "options": [
+        "ValueError",
+        "SyntaxError",
+        "ZeroDivisionError",
+        "FileNotFoundError"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Think about errors that occur frequently in Python programs.",
+      "help": {
+        "concept": "Common exceptions include errors that occur frequently during program execution.",
+        "hint_1": "Consider errors related to invalid operations or data types.",
+        "hint_2": "Look for exceptions that are often encountered in beginner programs."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Order of Try/Except Execution",
+      "prompt": "Arrange the steps of try/except execution in the correct order.",
+      "tokens": [
+        "Execute try block",
+        "Catch exception",
+        "Execute except block",
+        "Continue program"
+      ],
+      "correctOrder": [
+        "Execute try block",
+        "Catch exception",
+        "Execute except block",
+        "Continue program"
+      ],
+      "hint": "Start with the try block and end with the continuation of the program.",
+      "help": {
+        "concept": "The try block is executed first, followed by the except block if an error occurs.",
+        "hint_1": "The try block is executed before any exceptions are caught.",
+        "hint_2": "After handling the exception, the program continues with the next line."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Handling Specific Exceptions",
+      "prompt": "Fill in the blank to handle a `ZeroDivisionError` in the following code:\n\n```python\ntry:\n    result = 10 / 0\nexcept [blank1]:\n    print(\"Cannot divide by zero!\")\n```",
+      "template": "try:\n    result = 10 / 0\nexcept [blank1]:\n    print(\"Cannot divide by zero!\")",
+      "choices": [
+        "ValueError",
+        "ZeroDivisionError",
+        "TypeError",
+        "IndexError"
+      ],
+      "correctValue": "ZeroDivisionError",
+      "hint": "Think about the specific error that occurs when dividing by zero.",
+      "help": {
+        "concept": "the missing term is raised when a division by zero is attempted.",
+        "hint_1": "The error raised when dividing by zero is called the missing term.",
+        "hint_2": "Use the missing term to catch division by zero errors."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Basic Try/Except Implementation",
+      "prompt": "Write a program that asks the user for a number and prints its reciprocal. Use a try/except block to handle division by zero errors.",
+      "starterCode": "number = input()\n# Your code here",
+      "solutionCode": "try:\n    number = float(input())\n    reciprocal = 1 / number\n    print(\"Reciprocal:\", reciprocal)\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero!\")",
+      "tests": [
+        {
+          "stdout": "Reciprocal: 0.2\n",
+          "stdin": "5\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "Cannot divide by zero!\n",
+          "stdin": "0\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "code_input",
+      "title": "Handling Multiple Exceptions",
+      "prompt": "Modify the program to handle both `ValueError` and `ZeroDivisionError`. Print appropriate messages for each exception.",
+      "starterCode": "number = input()\n# Your code here",
+      "solutionCode": "try:\n    number = float(input())\n    reciprocal = 1 / number\n    print(\"Reciprocal:\", reciprocal)\nexcept ValueError:\n    print(\"Please enter a valid number!\")\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero!\")",
+      "tests": [
+        {
+          "stdout": "Please enter a valid number!\n",
+          "stdin": "abc\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "Cannot divide by zero!\n",
+          "stdin": "0\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "File Reading with Exception Handling",
+      "prompt": "Write a program that reads a file named `data.txt` and prints its contents. Use a try/except block to handle `FileNotFoundError`.",
+      "starterCode": "# Your code here",
+      "solutionCode": "try:\n    with open('data.txt', 'r') as file:\n        contents = file.read()\n        print(contents)\nexcept FileNotFoundError:\n    print(\"File not found!\")",
+      "tests": [
+        {
+          "stdout": "File not found!\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data.txt",
+              "content": "File not found!",
+              "readOnly": true
+            }
+          ]
+        },
+        {
+          "stdout": "Hello, World!\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data.txt",
+              "content": "Hello, World!",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "data.txt",
+          "content": "Sample content",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"File Reading with Exception Handling\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"File Reading with Exception Handling\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "policy_single_choice_1",
+      "kind": "single_choice",
+      "title": "Identify the result of running code",
+      "prompt": "In \"Try/Except Basics\", what should you check after running a Python program?",
+      "options": [
+        "The output shown by the program",
+        "Only the file name",
+        "Whether Python deletes the code",
+        "Whether comments are printed automatically"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Running code lets you inspect what the program displays.",
+      "help": {
+        "concept": "When you run Python code, the most important feedback is usually the output or error message.",
+        "hint_1": "Look at the output panel.",
+        "hint_2": "Printed values appear after the program runs."
+      }
+    },
+    {
+      "id": "policy_multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Choose good run-and-check habits",
+      "prompt": "Which habits help when practicing \"Try/Except Basics\"?",
+      "options": [
+        "Run the code after writing it",
+        "Read the output carefully",
+        "Ignore error messages",
+        "Change many lines at once without testing"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Good practice means running code and checking what happened.",
+      "help": {
+        "concept": "Running small pieces of code and reading the output helps you understand Python behavior.",
+        "hint_1": "Output and errors both give useful feedback.",
+        "hint_2": "Testing small changes is easier than debugging many changes at once."
+      }
+    },
+    {
+      "id": "policy_drag_reorder_1",
+      "kind": "drag_reorder",
+      "title": "Order the run-and-check workflow",
+      "prompt": "Put the steps in order for practicing \"Try/Except Basics\".",
+      "tokens": [
+        "Write a small piece of Python code",
+        "Run the code",
+        "Read the output or error message"
+      ],
+      "correctOrder": [
+        "Write a small piece of Python code",
+        "Run the code",
+        "Read the output or error message"
+      ],
+      "hint": "You need code before you can run it.",
+      "help": {
+        "concept": "A basic Python workflow is write code, run it, then inspect the result.",
+        "hint_1": "The output appears after running.",
+        "hint_2": "Errors are also useful feedback."
+      }
+    },
+    {
+      "id": "policy_fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Choose the missing Python keyword",
+      "prompt": "Fill in the missing Python keyword so the statement is valid.",
+      "template": "___ value > 0:\n    print('positive')",
+      "choices": [
+        "if",
+        "for",
+        "def",
+        "class"
+      ],
+      "correctValue": "if",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Exception Handling Project",
+    "stepIds": [
+      "quiz5",
+      "quiz6",
+      "quiz7"
+    ]
+  }
+}

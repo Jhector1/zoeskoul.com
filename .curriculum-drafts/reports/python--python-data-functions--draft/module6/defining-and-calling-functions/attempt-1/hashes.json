@@ -1,9 +1,0 @@
-{
-  "seedHash": "7d1a4bdf5cc7791d11e76372ec1b622852bcf72b962db859b94a9f39b1d81250",
-  "promptHash": "d95cc11a70c548ae34f1dbabab5dd634a058a7df5c8f986d43e652b38c6c82b8",
-  "rawModelOutputHash": "95e5e7ab2e49aeff9f2295718993418f4d15efd9458db9c32a5cf0841eddb4fc",
-  "parsedOutputHash": "c60af4fcc177d877d271cbe45d1284094e38a21deb8a7925fbf3605fe647ef0f",
-  "normalizedDraftHash": "4ebb0618a90b8718964e781177c9d328bb7bd53f6e0ff4b03c8c400eb21a918c",
-  "repairedDraftHash": "925487633d1887cb33e60f722970a2f85c8211f7b7e04348a2d15e30c022fb98",
-  "compiledTopicBundleHash": "e2c3559b715f05939590e9d45bf1a2e4aed030669091f251eccdebcdd318ebdf"
-}

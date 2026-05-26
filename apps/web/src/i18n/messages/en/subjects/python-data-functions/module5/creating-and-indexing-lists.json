@@ -4,13 +4,16 @@
       "python-5-lists-tuples-and-dictionaries": {
         "creating-and-indexing-lists": {
           "label": "Creating and Indexing Lists",
-          "summary": "Create lists and access items by position.",
+          "summary": "Learn how to create lists in Python and access their elements using indexing.",
           "cards": {
             "sketch0": {
               "title": "Introduction to Lists"
             },
             "sketch1": {
-              "title": "Accessing List Items"
+              "title": "Accessing List Elements"
+            },
+            "sketch2": {
+              "title": "Modifying List Elements"
             },
             "quiz": {
               "title": "Quiz"
@@ -20,25 +23,25 @@
             }
           },
           "projectSteps": {
-            "quiz10": {
-              "title": "Modify a List"
+            "quiz5": {
+              "title": "Create and Print a List"
             },
-            "policy_code_input_1": {
-              "title": "Print whether a number is positive"
+            "quiz6": {
+              "title": "Modify List Elements"
             },
-            "policy_code_input_2": {
-              "title": "Print whether a number is even"
+            "quiz11": {
+              "title": "List Indexing Practice"
             }
           },
           "quiz": {
             "quiz1": {
               "title": "List Creation Syntax",
               "prompt": "Which of the following is the correct way to create a list in Python?",
-              "hint": "Lists are defined using square brackets.",
+              "hint": "Lists are created using square brackets.",
               "help": {
                 "concept": "Lists in Python are created using square brackets.",
                 "hint_1": "Look for the option that uses square brackets.",
-                "hint_2": "The correct syntax uses square brackets to enclose the list items."
+                "hint_2": "The correct syntax uses square brackets to enclose elements."
               },
               "options": {
                 "a": "list = (1, 2, 3)",
@@ -46,93 +49,47 @@
               }
             },
             "quiz2": {
-              "title": "Accessing List Elements",
-              "prompt": "What will be the output of the following code?\n\n```python\ncolors = ['red', 'green', 'blue']\nprint(colors[1])\n```",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "List Characteristics",
+              "prompt": "Which of the following are true about lists in Python? Select all that apply.",
+              "hint": "Consider the properties of lists such as mutability and indexing.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "Lists are mutable and support various operations like indexing and slicing.",
+                "hint_1": "Think about how lists can be modified and accessed.",
+                "hint_2": "Lists can hold multiple data types and are mutable."
               },
               "options": {
-                "a": "red",
-                "b": "green",
-                "c": "blue",
-                "d": "IndexError"
+                "a": "Lists are immutable.",
+                "b": "Lists can contain elements of different data types.",
+                "c": "Lists are indexed starting from 1.",
+                "d": "Lists can be modified after creation."
               }
             },
             "quiz3": {
-              "title": "List Characteristics",
-              "prompt": "Which of the following are true about lists in Python?",
-              "hint": "Consider the properties of lists such as mutability and order.",
+              "title": "Indexing Example",
+              "prompt": "Arrange the following code snippets to print the second element of the list `fruits`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
-                "concept": "Lists in Python are ordered, mutable, and can contain duplicate elements.",
-                "hint_1": "Lists can be changed after creation.",
-                "hint_2": "Lists maintain the order of elements and can have duplicates."
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
               },
-              "options": {
-                "a": "Lists are immutable",
-                "b": "Lists maintain order",
-                "c": "Lists can contain duplicates",
-                "d": "Lists are created using parentheses"
+              "tokens": {
+                "t1": "fruits = ['apple', 'banana', 'cherry']",
+                "t2": "print(",
+                "t3": "fruits[1]",
+                "t4": ")"
               }
             },
             "quiz4": {
-              "title": "List Indexing",
-              "prompt": "Select all correct statements about list indexing in Python.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
-              },
-              "options": {
-                "a": "Indices start at 1",
-                "b": "Negative indices access elements from the end",
-                "c": "The first element is at index 0",
-                "d": "Indices can be floats"
-              }
-            },
-            "quiz5": {
-              "title": "Reorder List Operations",
-              "prompt": "Arrange the steps to access the third element of a list named `items`.",
-              "hint": "Think about the order of operations needed to access an element by index.",
-              "help": {
-                "concept": "To access an element, you need to know the list name and the index.",
-                "hint_1": "Identify the list and then use the index.",
-                "hint_2": "Use the list name followed by the index in square brackets."
-              },
-              "tokens": {
-                "t1": "Identify the list `items`",
-                "t2": "Use square brackets",
-                "t3": "Use index 2"
-              }
-            },
-            "quiz6": {
-              "title": "Steps to Create a List",
-              "prompt": "Reorder the steps to create a list of numbers from 1 to 3.",
-              "hint": "Consider the syntax for creating a list in Python.",
-              "help": {
-                "concept": "Lists are created using square brackets with elements separated by commas.",
-                "hint_1": "Start with square brackets.",
-                "hint_2": "Place numbers inside the brackets separated by commas."
-              },
-              "tokens": {
-                "t1": "Open square brackets",
-                "t2": "Add numbers separated by commas",
-                "t3": "Close square brackets"
-              }
-            },
-            "quiz7": {
-              "title": "List Indexing Example",
-              "prompt": "Fill in the blank to access the first element of the list `fruits`.",
-              "hint": "Remember that list indices start at the missing term.",
+              "title": "Accessing List Elements",
+              "prompt": "Fill in the blank to access the first element of the list `colors`.",
+              "hint": "Remember that list indexing starts at the missing term.",
               "help": {
                 "concept": "The first element of a list is accessed using index the missing term.",
-                "hint_1": "Use the list name followed by index the missing term in square brackets.",
-                "hint_2": "The correct syntax is `fruits[the missing term]`."
+                "hint_1": "Use the list name followed by square brackets and the index.",
+                "hint_2": "The index for the first element is the missing term."
               },
-              "template": "fruits[[blank1]]",
+              "template": "first_color = colors[[blank1]]",
               "choices": [
                 "0",
                 "1",
@@ -140,55 +97,103 @@
                 "first"
               ]
             },
-            "quiz8": {
-              "title": "Creating a List",
-              "prompt": "Fill in the blank to create a list of three numbers: 4, 5, and 6.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
-              },
-              "template": "numbers = [[blank1]]",
-              "choices": [
-                "[4, 5, 6]",
-                "Lesson notes panel",
-                "Color theme picker",
-                "<4, 5, 6>"
-              ]
-            },
-            "quiz10": {
-              "title": "Modify a List",
-              "prompt": "Write a Python program that changes the first element of a list to 'orange' and prints the list.",
+            "quiz5": {
+              "title": "Create and Print a List",
+              "prompt": "Write a Python program that creates a list of three of your favorite fruits and prints them one by one.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Modify the first element of the list\nfruits = ['apple', 'banana', 'cherry']\n# Change the first element to 'orange'"
+              "starterCode": "# Create a list of your favorite fruits\nfruits = []\n\n# Print each fruit\nfor fruit in fruits:\n    print(fruit)"
             },
-            "policy_code_input_1": {
-              "title": "Print whether a number is positive",
-              "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
-              "hint": "Use a conditional check and return a boolean result.",
+            "quiz6": {
+              "title": "Modify List Elements",
+              "prompt": "Write a Python program that changes the second element of a list `fruits` to 'blueberry' and prints the updated list.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "A conditional can decide which boolean value to print based on a comparison.",
-                "hint_1": "Compare the number with zero inside an if statement.",
-                "hint_2": "Print True when the condition passes; otherwise print False."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "n = int(input())\n# Your code here"
+              "starterCode": "# Modify the second element of the list\nfruits = ['apple', 'banana', 'cherry']\n\n# Change the second element to 'blueberry'\n\n# Print the updated list"
             },
-            "policy_code_input_2": {
-              "title": "Print whether a number is even",
-              "prompt": "Read one integer. Print `True` when the number is even and `False` when it is odd.",
-              "hint": "Use the remainder after dividing by 2.",
+            "quiz7": {
+              "title": "Negative Indexing",
+              "prompt": "What does the index -1 refer to in a Python list?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Even numbers have remainder 0 when divided by 2.",
-                "hint_1": "Use % 2 to check the remainder.",
-                "hint_2": "Print True only for the even case."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "n = int(input())\n# Your code here"
+              "options": {
+                "a": "The first element",
+                "b": "The second element",
+                "c": "The last element",
+                "d": "The element before last"
+              }
+            },
+            "quiz8": {
+              "title": "List Indexing",
+              "prompt": "Which of the following statements about list indexing are true? Select all that apply.",
+              "hint": "Consider how indexing works in Python lists.",
+              "help": {
+                "concept": "List indexing allows access to elements using their position, starting from 0.",
+                "hint_1": "Remember that Python uses zero-based indexing.",
+                "hint_2": "Negative indices count from the end of the list."
+              },
+              "options": {
+                "a": "Indexing starts at 0.",
+                "b": "Negative indices are not allowed.",
+                "c": "Index -1 refers to the last element.",
+                "d": "Indexing can only be positive."
+              }
+            },
+            "quiz9": {
+              "title": "List Creation Order",
+              "prompt": "Arrange the steps to create a list and print its first element.",
+              "hint": "Start by creating the list, then access the first element.",
+              "help": {
+                "concept": "Creating a list involves defining it and then accessing elements using indices.",
+                "hint_1": "Define the list first, then use indexing to access elements.",
+                "hint_2": "Use index 0 to access the first element."
+              },
+              "tokens": {
+                "t1": "fruits = ['apple', 'banana', 'cherry']",
+                "t2": "print(",
+                "t3": "fruits[0]",
+                "t4": ")"
+              }
+            },
+            "quiz10": {
+              "title": "List Element Access",
+              "prompt": "Fill in the blank to access the last element of the list `numbers`.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "last_number = numbers[[blank1]]",
+              "choices": [
+                "-1",
+                "0",
+                "1",
+                "last"
+              ]
+            },
+            "quiz11": {
+              "title": "List Indexing Practice",
+              "prompt": "Write a Python program that creates a list of numbers and prints the first and last elements using indexing.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Create a list of numbers\nnumbers = []\n\n# Print the first and last elements"
             }
           }
         }
@@ -201,11 +206,15 @@
         "creating-and-indexing-lists": {
           "sketch1": {
             "title": "Introduction to Lists",
-            "bodyMarkdown": "Lists in Python are used to store multiple items in a single variable. They are ordered, changeable, and allow duplicate values. Lists are created using square brackets.\n\n```python\nfruits = ['apple', 'banana', 'cherry']\n```\n\nTry it yourself: Create a list of your favorite colors."
+            "bodyMarkdown": "Lists in Python are used to store multiple items in a single variable. They are one of the most versatile data types available in Python and can hold items of different data types. Lists are created using square brackets `[]`.\n\nExample:\n```python\nfruits = ['apple', 'banana', 'cherry']\n```\nThis creates a list named `fruits` containing three string elements.\n\nTry it yourself: Create a list of your favorite colors."
           },
           "sketch2": {
-            "title": "Accessing List Items",
-            "bodyMarkdown": "You can access list items by referring to the index number, starting from 0.\n\n```python\nfruits = ['apple', 'banana', 'cherry']\nprint(fruits[0])  # Output: apple\n```\n\nTry this: Access the second item in the list `['red', 'green', 'blue']`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "title": "Accessing List Elements",
+            "bodyMarkdown": "You can access elements in a list by their index. Python uses zero-based indexing, meaning the first element is at index 0.\n\nExample:\n```python\nfruits = ['apple', 'banana', 'cherry']\nprint(fruits[0])  # Output: apple\nprint(fruits[1])  # Output: banana\n```\n\nTry this: Access the last element of the list using negative indexing.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch3": {
+            "title": "Modifying List Elements",
+            "bodyMarkdown": "Lists are mutable, meaning you can change their content without changing their identity.\n\nExample:\n```python\nfruits = ['apple', 'banana', 'cherry']\nfruits[1] = 'blueberry'\nprint(fruits)  # Output: ['apple', 'blueberry', 'cherry']\n```\n\nYour turn: Change the first element of the list to 'kiwi'.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

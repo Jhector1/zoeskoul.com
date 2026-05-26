@@ -1,27 +1,5 @@
 {
   "topicId": "updating-and-looping-dictionaries",
-  "ok": false,
-  "issues": [
-    {
-      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
-      "category": "pedagogy",
-      "severity": "error",
-      "exerciseId": "quiz5",
-      "message": "Exercise \"quiz5\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
-    },
-    {
-      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
-      "category": "pedagogy",
-      "severity": "error",
-      "exerciseId": "quiz10",
-      "message": "Exercise \"quiz10\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
-    },
-    {
-      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
-      "category": "pedagogy",
-      "severity": "error",
-      "exerciseId": "quiz11",
-      "message": "Exercise \"quiz11\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
-    }
-  ]
+  "ok": true,
+  "issues": []
 }

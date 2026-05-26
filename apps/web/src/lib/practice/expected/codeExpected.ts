@@ -8,6 +8,7 @@ import {
     toSqlCodeTests,
     type ProgrammingCodeTest,
     type SemanticCheck,
+    type ProgrammingWorkspaceExpectations,
     type SqlExpectedTest,
     type SqlExpectedTable,
     type SqlRuntimeSpec as SharedSqlRuntimeSpec,
@@ -56,6 +57,7 @@ export type ProgrammingMakeCodeExpectedArgs = {
     match?: "exact" | "includes";
     tests?: ProgrammingCodeTest[];
     semanticChecks?: SemanticCheck[];
+    workspaceExpectations?: ProgrammingWorkspaceExpectations;
     solutionCode?: string;
 };
 
@@ -86,6 +88,7 @@ export function makeCodeExpected(
         match: args.match,
         tests: args.tests,
         semanticChecks: args.semanticChecks,
+        workspaceExpectations: args.workspaceExpectations,
         solutionCode: args.solutionCode,
     });
 }

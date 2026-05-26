@@ -1,6 +1,4 @@
 {
-  "ok": false,
-  "errors": [
-    "Invalid TopicAuthoringDraft: quizDraft[3] fill_blank_choice supports only 1 blank, but found 2"
-  ]
+  "ok": true,
+  "errors": []
 }

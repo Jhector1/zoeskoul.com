@@ -1,0 +1,454 @@
+{
+  "topicId": "simple-csv-processing",
+  "subjectSlug": "python--python-data-functions--draft",
+  "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
+  "sectionSlug": "python--python-data-functions--draft-python-7-exceptions-and-cleaning",
+  "prefix": "py7",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.label",
+    "summaryKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch1.title",
+      "sketchId": "sketch2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "quiz9",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.projectSteps.quiz9.title",
+            "exerciseKey": "quiz9",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz10",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.projectSteps.quiz10.title",
+            "exerciseKey": "quiz10",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "quiz11",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.projectSteps.quiz11.title",
+            "exerciseKey": "quiz11",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.sketch1.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.sketch2.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.sketch2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.quiz1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.quiz2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.quiz3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.quiz4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.quiz5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.quiz6",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.quiz7",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "header row"
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.quiz8",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "comma"
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.quiz9",
+      "language": "python",
+      "starterCode": "import csv\n\n# Open the CSV file\nwith open('people.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the name field\n        pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "import csv\n\n# Open the CSV file\nwith open('people.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the name field\n        pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "import csv\n\n# Open the CSV file\nwith open('people.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the name field\n        pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "import csv\n\n# Open the CSV file\nwith open('people.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the name field\n        pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "people.csv",
+            "content": "name,age,city\nAlice,30,New York\nBob,25,Los Angeles\nCharlie,22,Chicago\nDave,35,San Francisco\nEve,28,Seattle\nFrank,40,Miami\nGrace,27,Denver\nHank,33,Portland\nIvy,29,Las Vegas\nJack,31,San Diego\nKara,26,San Jose\nLeo,32,Austin\nMona,34,Atlanta\nNina,24,Orlando\nOscar,36,Charlotte\nPam,23,Columbus\nQuinn,37,Indianapolis\nRita,38,Detroit\nSam,39,Memphis\nTina,21,Milwaukee\nUma,20,New Orleans\nVera,19,St. Louis\nWill,18,Minneapolis\nXena,17,Newark\nYara,16,Fort Worth\nZane,15,El Paso",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "Alice\nBob\nCharlie\nDave\nEve\nFrank\nGrace\nHank\nIvy\nJack\nKara\nLeo\nMona\nNina\nOscar\nPam\nQuinn\nRita\nSam\nTina\nUma\nVera\nWill\nXena\nYara\nZane",
+            "match": "exact",
+            "files": [
+              {
+                "path": "people.csv",
+                "content": "name,age,city\nAlice,30,New York\nBob,25,Los Angeles\nCharlie,22,Chicago\nDave,35,San Francisco\nEve,28,Seattle\nFrank,40,Miami\nGrace,27,Denver\nHank,33,Portland\nIvy,29,Las Vegas\nJack,31,San Diego\nKara,26,San Jose\nLeo,32,Austin\nMona,34,Atlanta\nNina,24,Orlando\nOscar,36,Charlotte\nPam,23,Columbus\nQuinn,37,Indianapolis\nRita,38,Detroit\nSam,39,Memphis\nTina,21,Milwaukee\nUma,20,New Orleans\nVera,19,St. Louis\nWill,18,Minneapolis\nXena,17,Newark\nYara,16,Fort Worth\nZane,15,El Paso",
+                "readOnly": true
+              }
+            ]
+          },
+          {
+            "stdout": "Charlie\nDave\nEve",
+            "match": "exact",
+            "files": [
+              {
+                "path": "people.csv",
+                "content": "name,age,city\nCharlie,22,Chicago\nDave,35,San Francisco\nEve,28,Seattle",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "solutionCode": "import csv\n\n# Open the CSV file\nwith open('people.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the name field\n        print(row['name'])"
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.quiz10",
+      "language": "python",
+      "starterCode": "import csv\n\n# Open the CSV file\nwith open('data.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the row as a dictionary\n        pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "import csv\n\n# Open the CSV file\nwith open('data.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the row as a dictionary\n        pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "import csv\n\n# Open the CSV file\nwith open('data.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the row as a dictionary\n        pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "import csv\n\n# Open the CSV file\nwith open('data.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the row as a dictionary\n        pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "data.csv",
+            "content": "id,name,score\n1,Alice,85\n2,Bob,90",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "{'id': '1', 'name': 'Alice', 'score': '85'}\n{'id': '2', 'name': 'Bob', 'score': '90'}\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "data.csv",
+                "content": "id,name,score\n1,Alice,85\n2,Bob,90",
+                "readOnly": true
+              }
+            ]
+          },
+          {
+            "stdout": "{'id': '3', 'name': 'Charlie', 'score': '75'}\n{'id': '4', 'name': 'David', 'score': '80'}\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "data.csv",
+                "content": "id,name,score\n3,Charlie,75\n4,David,80",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "solutionCode": "import csv\n\n# Open the CSV file\nwith open('data.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the row as a dictionary\n        print(row)"
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.quiz11",
+      "language": "python",
+      "starterCode": "import csv\n\n# Open the CSV file\nwith open('scores.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Check if the score is above 80\n        pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "import csv\n\n# Open the CSV file\nwith open('scores.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Check if the score is above 80\n        pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "import csv\n\n# Open the CSV file\nwith open('scores.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Check if the score is above 80\n        pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "import csv\n\n# Open the CSV file\nwith open('scores.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Check if the score is above 80\n        pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "scores.csv",
+            "content": "name,score\nAlice,85\nBob,90\nCharlie,75\nDavid,80",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "Alice\nBob\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "scores.csv",
+                "content": "name,score\nAlice,85\nBob,90\nCharlie,75\nDavid,80",
+                "readOnly": true
+              }
+            ]
+          },
+          {
+            "stdout": "Eve\nFrank\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "scores.csv",
+                "content": "name,score\nEve,88\nFrank,92\nGrace,78\nHank,80",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "solutionCode": "import csv\n\n# Open the CSV file\nwith open('scores.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Check if the score is above 80\n        if int(row['score']) > 80:\n            print(row['name'])"
+      }
+    }
+  ]
+}

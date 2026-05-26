@@ -1,10 +1,20 @@
 {
   "name": "RetryableTopicValidationError",
-  "message": "Invalid TopicAuthoringDraft: quizDraft[3] fill_blank_choice supports only 1 blank, but found 2",
-  "stack": "RetryableTopicValidationError: Invalid TopicAuthoringDraft: quizDraft[3] fill_blank_choice supports only 1 blank, but found 2\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:268:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:25:17)\n    at async runCompileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-course.js:24:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:38:13)",
-  "code": "TOPIC_GENERATION_OUTPUT_INVALID",
+  "message": "Critique failed for topic \"scope-and-local-variables\"\nModule: python-6-functions-and-modularity\nSection: python-6-function-design\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python--python-data-functions--draft/module6/scope-and-local-variables\n- Exercise \"quiz11\" still has fewer than 2 meaningful fixed tests. Add distinct stdin/stdout cases or replace the exercise.",
+  "stack": "RetryableTopicValidationError: Critique failed for topic \"scope-and-local-variables\"\nModule: python-6-functions-and-modularity\nSection: python-6-function-design\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python--python-data-functions--draft/module6/scope-and-local-variables\n- Exercise \"quiz11\" still has fewer than 2 meaningful fixed tests. Add distinct stdin/stdout cases or replace the exercise.\n    at throwRetryableReportFailure (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:82:11)\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:367:25)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:25:17)\n    at async runCompileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-course.js:24:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:46:13)",
+  "code": "CRITIQUE_VALIDATION_FAILED",
   "retryable": true,
   "details": {
-    "topicId": "scope-and-local-variables"
+    "topicId": "scope-and-local-variables",
+    "ok": false,
+    "issues": [
+      {
+        "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+        "category": "pedagogy",
+        "severity": "error",
+        "exerciseId": "quiz11",
+        "message": "Exercise \"quiz11\" still has fewer than 2 meaningful fixed tests. Add distinct stdin/stdout cases or replace the exercise."
+      }
+    ]
   }
 }

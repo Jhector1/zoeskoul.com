@@ -1,20 +1,5 @@
 {
   "topicId": "reading-text-files",
-  "ok": false,
-  "issues": [
-    {
-      "code": "PYTHON_FILE_TESTS_NEED_PER_TEST_FIXTURES",
-      "category": "runtime",
-      "severity": "error",
-      "exerciseId": "quiz10",
-      "message": "Exercise \"quiz10\" has different expected stdout across file-based fixed tests, but it does not provide per-test file fixtures. Add tests[].files that match each expected output."
-    },
-    {
-      "code": "PYTHON_FILE_TESTS_NEED_PER_TEST_FIXTURES",
-      "category": "runtime",
-      "severity": "error",
-      "exerciseId": "quiz11",
-      "message": "Exercise \"quiz11\" has different expected stdout across file-based fixed tests, but it does not provide per-test file fixtures. Add tests[].files that match each expected output."
-    }
-  ]
+  "ok": true,
+  "issues": []
 }

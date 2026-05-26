@@ -232,4 +232,308 @@ describe("repairIncompleteExercises", () => {
             }),
         ).rejects.toThrow('Profile "math" does not support code_input exercises.');
     });
+
+
+    it("removes code_input tests with empty stdout after profile repair", async () => {
+        const draft = {
+            title: "Scope and local variables",
+            summary: "Practice local variables inside functions.",
+            minutes: 10,
+            sketchBlocks: [
+                {
+                    id: "try-it-yourself",
+                    title: "Try it yourself",
+                    bodyMarkdown:
+                        "Try it yourself: change one value, predict the output, then run the code to check.",
+                },
+            ],
+            quizDraft: [
+                {
+                    id: "q1",
+                    kind: "code_input",
+                    title: "Local variable output",
+                    prompt: "Complete the program so it prints the local value.",
+                    hint: "Use a variable inside the function.",
+                    help: {
+                        concept:
+                            "A local variable exists inside the function where it is created.",
+                        hint_1: "Create the value inside the function.",
+                        hint_2: "Print the value after assigning it.",
+                    },
+                    starterCode: "def show_value():\n    value = 3\n    # print value here\n\nshow_value()\n",
+                    solutionCode: "def show_value():\n    value = 3\n    print(value)\n\nshow_value()\n",
+                    recipeType: "fixed_tests",
+                    tests: [
+                        {
+                            stdin: "",
+                            stdout: "",
+                            match: "exact",
+                        },
+                        {
+                            stdin: "",
+                            stdout: "3\n",
+                            match: "exact",
+                        },
+                    ],
+                },
+            ],
+        } as any;
+
+        const repaired = await repairIncompleteExercises({
+            provider: {} as any,
+            seed: {
+                topicId: "scope-and-local-variables",
+                profileId: "python",
+            } as any,
+            draft,
+        });
+
+        const exercise = repaired.quizDraft[0] as any;
+
+        expect(exercise.tests).toEqual([
+            {
+                stdin: "",
+                stdout: "3\n",
+                match: "exact",
+            },
+        ]);
+    });
+    it("synthesizes fallback tests when fixed_tests only had empty stdout tests", async () => {
+        const draft = {
+            title: "Reading text files",
+            summary: "Practice reading text from a file.",
+            minutes: 10,
+            sketchBlocks: [
+                {
+                    id: "try-it-yourself",
+                    title: "Try it yourself",
+                    bodyMarkdown:
+                        "Try it yourself: change one value, predict the output, then run the code to check.",
+                },
+            ],
+            quizDraft: [
+                {
+                    id: "q1",
+                    kind: "code_input",
+                    title: "Read a text file",
+                    prompt: "Complete the program.",
+                    hint: "Read from the file and print the result.",
+                    help: {
+                        concept: "Python can read text from files using open().",
+                        hint_1: "Open the file before reading it.",
+                        hint_2: "Print the value you read.",
+                    },
+                    starterCode: "print('replace me')\n",
+                    solutionCode: "print(13)\n",
+                    recipeType: "fixed_tests",
+                    tests: [
+                        {
+                            stdin: "",
+                            stdout: "",
+                            match: "exact",
+                        },
+                    ],
+                },
+            ],
+        } as any;
+
+        const repaired = await repairIncompleteExercises({
+            provider: {} as any,
+            seed: {
+                topicId: "reading-text-files",
+                profileId: "python",
+            } as any,
+            draft,
+        });
+
+        const exercise = repaired.quizDraft[0] as any;
+
+        expect(exercise.recipeType).toBe("fixed_tests");
+        expect(exercise.tests).toBeDefined();
+        expect(exercise.tests.length).toBeGreaterThan(0);
+        expect(
+            exercise.tests.every((test: any) => test.stdout.trim().length > 0),
+        ).toBe(true);
+    });
+    it("removes empty-stdout code_input tests and keeps valid tests", async () => {
+        const draft = {
+            title: "Scope and local variables",
+            summary: "Practice local variables.",
+            minutes: 10,
+            sketchBlocks: [
+                {
+                    id: "try-it-yourself",
+                    title: "Try it yourself",
+                    bodyMarkdown:
+                        "Try it yourself: change one value, predict the output, then run the code to check.",
+                },
+            ],
+            quizDraft: [
+                {
+                    id: "quiz1",
+                    kind: "code_input",
+                    title: "Print a local value",
+                    prompt: "Complete the program.",
+                    hint: "Print the value.",
+                    help: {
+                        concept: "A local variable exists inside its function.",
+                        hint_1: "Assign the value.",
+                        hint_2: "Print it.",
+                    },
+                    starterCode: "def show():\n    value = 3\n    # print value\n\nshow()\n",
+                    solutionCode: "def show():\n    value = 3\n    print(value)\n\nshow()\n",
+                    recipeType: "fixed_tests",
+                    tests: [
+                        {
+                            stdin: "",
+                            stdout: "",
+                            match: "exact",
+                        },
+                        {
+                            stdin: "",
+                            stdout: "3\n",
+                            match: "exact",
+                        },
+                    ],
+                },
+            ],
+        } as any;
+
+        const repaired = await repairIncompleteExercises({
+            provider: {} as any,
+            seed: {
+                topicId: "scope-and-local-variables",
+                profileId: "python",
+            } as any,
+            draft,
+        });
+
+        const exercise = repaired.quizDraft[0] as any;
+
+        expect(exercise.recipeType).toBe("fixed_tests");
+        expect(exercise.tests).toEqual([
+            {
+                stdin: "",
+                stdout: "3\n",
+                match: "exact",
+            },
+        ]);
+    });
+
+    it("does not preserve fixed_tests when no valid tests remain before profile repair", async () => {
+        const draft = {
+            title: "Scope and local variables",
+            summary: "Practice local variables.",
+            minutes: 10,
+            sketchBlocks: [
+                {
+                    id: "try-it-yourself",
+                    title: "Try it yourself",
+                    bodyMarkdown:
+                        "Try it yourself: change one value, predict the output, then run the code to check.",
+                },
+            ],
+            quizDraft: [
+                {
+                    id: "quiz1",
+                    kind: "code_input",
+                    title: "Print a local value",
+                    prompt: "Complete the program.",
+                    hint: "Print the value.",
+                    help: {
+                        concept: "A local variable exists inside its function.",
+                        hint_1: "Assign the value.",
+                        hint_2: "Print it.",
+                    },
+                    starterCode: "def show():\n    value = 3\n    # print value\n\nshow()\n",
+                    solutionCode: "def show():\n    value = 3\n    print(value)\n\nshow()\n",
+                    recipeType: "fixed_tests",
+                    tests: [
+                        {
+                            stdin: "",
+                            stdout: "",
+                            match: "exact",
+                        },
+                    ],
+                },
+            ],
+        } as any;
+
+        const repaired = await repairIncompleteExercises({
+            provider: {} as any,
+            seed: {
+                topicId: "scope-and-local-variables",
+                profileId: "python",
+            } as any,
+            draft,
+        });
+
+        const exercise = repaired.quizDraft[0] as any;
+
+        expect(exercise.recipeType === "fixed_tests").toBe(
+            Array.isArray(exercise.tests) && exercise.tests.length > 0,
+        );
+    });
+    it("synthesizes valid fallback code_input tests when every authored test has empty stdout", async () => {
+        const draft = {
+            title: "Scope and local variables",
+            summary: "Practice local variables inside functions.",
+            minutes: 10,
+            sketchBlocks: [
+                {
+                    id: "try-it-yourself",
+                    title: "Try it yourself",
+                    bodyMarkdown:
+                        "Try it yourself: change one value, predict the output, then run the code to check.",
+                },
+            ],
+            quizDraft: [
+                {
+                    id: "quiz1",
+                    kind: "code_input",
+                    title: "Local variable output",
+                    prompt: "Complete the program so it prints the local value.",
+                    hint: "Use a variable inside the function.",
+                    help: {
+                        concept:
+                            "A local variable exists inside the function where it is created.",
+                        hint_1: "Create the value inside the function.",
+                        hint_2: "Print the value after assigning it.",
+                    },
+                    starterCode:
+                        "number = int(input())\n# Print the next number\n",
+                    solutionCode:
+                        "number = int(input())\nprint(number + 1)\n",
+                    recipeType: "fixed_tests",
+                    tests: [
+                        {
+                            stdin: "",
+                            stdout: "",
+                            match: "exact",
+                        },
+                    ],
+                },
+            ],
+        } as any;
+
+        const repaired = await repairIncompleteExercises({
+            provider: {} as any,
+            seed: {
+                topicId: "scope-and-local-variables",
+                profileId: "python",
+            } as any,
+            draft,
+        });
+
+        const exercise = repaired.quizDraft[0] as any;
+
+        expect(exercise.recipeType).toBe("fixed_tests");
+        expect(Array.isArray(exercise.tests)).toBe(true);
+        expect(exercise.tests.length).toBeGreaterThan(0);
+
+        for (const test of exercise.tests) {
+            expect(typeof test.stdout).toBe("string");
+            expect(test.stdout.trim().length).toBeGreaterThan(0);
+        }
+    });
 });

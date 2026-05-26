@@ -1,0 +1,267 @@
+{
+  "title": "Nested Data Structures",
+  "summary": "Represent real-world data with lists of dictionaries and nested containers.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Nested Data Structures",
+      "bodyMarkdown": "Nested data structures allow us to represent complex data by combining lists, dictionaries, and other containers. For example, a list of dictionaries can represent a collection of records, where each dictionary holds key-value pairs for a single record.\n\n```python\n# Example of a list of dictionaries\nstudents = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Accessing data\nfor student in students:\n    print(f\"{student['name']} is studying {student['major']}\")\n```\n\nTry it yourself: Modify the example to add a new student and print their details."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "single_choice",
+      "title": "Accessing Nested Data",
+      "prompt": "How do you access the 'major' of the second student in the list?",
+      "hint": "Use indexing to access the second dictionary and then the key.",
+      "help": {
+        "concept": "Accessing nested data involves using indices and keys.",
+        "hint_1": "First, access the second dictionary using an index.",
+        "hint_2": "Then, use the key 'major' to get the value."
+      },
+      "options": [
+        "students[1]['major']",
+        "students[2]['major']",
+        "students['major'][1]",
+        "students[1].major"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "q2",
+      "kind": "multi_choice",
+      "title": "Characteristics of Nested Data Structures",
+      "prompt": "Which of the following are true about nested data structures?",
+      "hint": "Consider how data is organized and accessed.",
+      "help": {
+        "concept": "Nested data structures can combine different types of containers.",
+        "hint_1": "Think about how lists and dictionaries can be combined.",
+        "hint_2": "Consider the flexibility of accessing data in nested structures."
+      },
+      "options": [
+        "They can contain lists within dictionaries.",
+        "They can contain dictionaries within lists.",
+        "They are limited to two levels of nesting.",
+        "They allow complex data representation."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "q3",
+      "kind": "drag_reorder",
+      "title": "Order of Accessing Nested Data",
+      "prompt": "Arrange the steps to access the 'age' of the first student in the list.",
+      "hint": "Start from the outermost structure and move inward.",
+      "help": {
+        "concept": "Accessing nested data requires moving through each layer of the structure.",
+        "hint_1": "Begin with the list index to access the first dictionary.",
+        "hint_2": "Use the key to access the value within the dictionary."
+      },
+      "tokens": [
+        "Access the list using index 0",
+        "Use the key 'age'"
+      ],
+      "correctOrder": [
+        "Access the list using index 0",
+        "Use the key 'age'"
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "fill_blank_choice",
+      "title": "Dictionary Key Access",
+      "prompt": "Complete the code to access the 'name' of the third student.",
+      "hint": "Use the correct index and key.",
+      "help": {
+        "concept": "Accessing a value in a nested dictionary requires the correct index and key.",
+        "hint_1": "Identify the index for the third student.",
+        "hint_2": "Use the key 'name' to access the value."
+      },
+      "template": "students[2][[blank1]]",
+      "choices": [
+        "name",
+        "age",
+        "major",
+        "students"
+      ],
+      "correctValue": "name"
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "title": "Modify Nested Data",
+      "prompt": "Add a new student to the list and print all student names.",
+      "hint": "Use the append method to add a new dictionary to the list.",
+      "help": {
+        "concept": "Adding a new dictionary to a list involves using the append method.",
+        "hint_1": "Create a dictionary for the new student with keys 'name', 'age', and 'major'.",
+        "hint_2": "Use the append method to add the new dictionary to the list."
+      },
+      "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\n# Print all student names\n",
+      "solutionCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\nstudents.append({'name': 'David', 'age': 21, 'major': 'Chemistry'})\n\n# Print all student names\nfor student in students:\n    print(student['name'])\n",
+      "tests": [
+        {
+          "stdout": "Alice\nBob\nCharlie\nDavid\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "Alice\nBob\nCharlie\nDavid\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "q6",
+      "kind": "single_choice",
+      "title": "Nested List Access",
+      "prompt": "What is the correct way to access the first element of the list stored in the 'courses' key of a dictionary?",
+      "hint": "Use the key to access the list, then index the list.",
+      "help": {
+        "concept": "Accessing a list within a dictionary requires using the key first, then indexing the list.",
+        "hint_1": "First, use the key to get the list.",
+        "hint_2": "Then, use an index to access the first element of the list."
+      },
+      "options": [
+        "dictionary['courses'][0]",
+        "dictionary[0]['courses']",
+        "dictionary['courses'].first()",
+        "dictionary.courses[0]"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "q7",
+      "kind": "multi_choice",
+      "title": "Benefits of Nested Structures",
+      "prompt": "What are the benefits of using nested data structures?",
+      "hint": "Consider how they help organize and access data.",
+      "help": {
+        "concept": "Nested data structures provide a way to organize complex data efficiently.",
+        "hint_1": "Think about how they allow for hierarchical data representation.",
+        "hint_2": "Consider the ease of accessing related data together."
+      },
+      "options": [
+        "They allow hierarchical data representation.",
+        "They simplify data access.",
+        "They reduce data redundancy.",
+        "They limit data flexibility."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "q8",
+      "kind": "drag_reorder",
+      "title": "Steps to Update Nested Data",
+      "prompt": "Arrange the steps to update the 'major' of the second student to 'Computer Science'.",
+      "hint": "Follow the steps to access and modify the nested data.",
+      "help": {
+        "concept": "Updating nested data involves accessing the correct element and modifying it.",
+        "hint_1": "Access the second student using the list index.",
+        "hint_2": "Use the key 'major' to update the value."
+      },
+      "tokens": [
+        "Access the list using index 1",
+        "Use the key 'major'",
+        "Assign 'Computer Science'"
+      ],
+      "correctOrder": [
+        "Access the list using index 1",
+        "Use the key 'major'",
+        "Assign 'Computer Science'"
+      ]
+    },
+    {
+      "id": "q9",
+      "kind": "fill_blank_choice",
+      "title": "Accessing Nested Dictionary",
+      "prompt": "Complete the code to access the 'age' of the first student.",
+      "hint": "Use the correct index and key.",
+      "help": {
+        "concept": "Accessing a value in a nested dictionary requires the correct index and key.",
+        "hint_1": "Identify the index for the first student.",
+        "hint_2": "Use the key 'age' to access the value."
+      },
+      "template": "students[0][[blank1]]",
+      "choices": [
+        "age",
+        "name",
+        "major",
+        "students"
+      ],
+      "correctValue": "age"
+    },
+    {
+      "id": "q10",
+      "kind": "code_input",
+      "title": "Calculate Average Age",
+      "prompt": "Calculate the average age of all students in the list.",
+      "hint": "Iterate through the list to sum the ages, then divide by the number of students.",
+      "help": {
+        "concept": "Calculating an average involves summing values and dividing by the count.",
+        "hint_1": "Use a loop to sum the ages of all students.",
+        "hint_2": "Divide the total sum by the number of students to get the average."
+      },
+      "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age\n",
+      "solutionCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age\nage_sum = sum(student['age'] for student in students)\naverage_age = age_sum / len(students)\nprint(average_age)\n",
+      "tests": [
+        {
+          "stdout": "23.0\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "23.0\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "q11",
+      "kind": "code_input",
+      "title": "Find Student by Major",
+      "prompt": "Write a function to find and return the name of the student studying a given major.",
+      "hint": "Iterate through the list and check each student's major.",
+      "help": {
+        "concept": "Finding a student by major involves iterating and checking each dictionary.",
+        "hint_1": "Use a loop to iterate through the list of students.",
+        "hint_2": "Check if the 'major' matches the given major and return the student's name."
+      },
+      "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    # Implement the function\n    pass\n\n# Example usage\n# print(find_student_by_major('Mathematics'))",
+      "solutionCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    for student in students:\n        if student['major'] == major:\n            return student['name']\n\n# Example usage\nprint(find_student_by_major('Mathematics'))\n",
+      "tests": [
+        {
+          "stdout": "Bob\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "Alice\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    }
+  ],
+  "projectDraft": {
+    "title": "Nested Data Structures Project",
+    "stepIds": [
+      "q5",
+      "q10",
+      "q11"
+    ]
+  }
+}

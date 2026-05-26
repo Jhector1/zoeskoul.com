@@ -154,7 +154,6 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
           "d"
         ]
       }
@@ -176,7 +175,7 @@
         "optionIds": [
           "a",
           "b",
-          "c"
+          "d"
         ]
       }
     },
@@ -195,8 +194,8 @@
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
-          "t2",
-          "t3"
+          "t3",
+          "t2"
         ]
       }
     },
@@ -215,8 +214,8 @@
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
-          "t3",
-          "t2"
+          "t2",
+          "t3"
         ]
       }
     },
@@ -226,10 +225,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz7",
-      "choiceCount": 3,
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "int"
+        "value": "double triple"
       }
     },
     {
@@ -238,10 +237,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz8",
-      "choiceCount": 3,
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "int"
+        "value": "number"
       }
     },
     {
@@ -251,15 +250,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz9",
       "language": "python",
-      "starterCode": "def subtract(a, b):\n    \"\"\"\n    Subtract the second number from the first and return the result.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The difference between a and b.\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(subtract(a, b))",
+      "starterCode": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef square(num):\n    # Write your docstring here\n    return num * num\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(square(num))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef square(num):\n    # Write your docstring here\n    return num * num\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(square(num))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def subtract(a, b):\n    \"\"\"\n    Subtract the second number from the first and return the result.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The difference between a and b.\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(subtract(a, b))",
+        "starterCode": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef square(num):\n    # Write your docstring here\n    return num * num\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(square(num))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def subtract(a, b):\n    \"\"\"\n    Subtract the second number from the first and return the result.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The difference between a and b.\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(subtract(a, b))",
+            "content": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef square(num):\n    # Write your docstring here\n    return num * num\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(square(num))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -271,17 +279,15 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "5 3\n1\n",
-            "stdout": "2\n",
+            "stdout": "4\n",
             "match": "exact"
           },
           {
-            "stdin": "10 4\n1\n",
-            "stdout": "6\n",
+            "stdout": "9\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "def subtract(a, b):\n    \"\"\"\n    Subtract the second number from the first and return the result.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The difference between a and b.\n    \"\"\"\n    return a - b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(subtract(a, b))"
+        "solutionCode": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef square(num):\n    \"\"\"Calculate the square of a number.\n\n    Parameters:\n    num (int): The number to square.\n\n    Returns:\n    int: The square of the number.\n    \"\"\"\n    return num * num\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(square(num))"
       }
     },
     {
@@ -291,15 +297,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz10",
       "language": "python",
-      "starterCode": "def divide(a, b):\n    \"\"\"\n    Divide the first number by the second and return the result.\n\n    Parameters:\n    a (int): The numerator.\n    b (int): The denominator.\n\n    Returns:\n    float: The quotient of a and b.\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+      "starterCode": "def multiply(a, b):\n    # Write your docstring here\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def multiply(a, b):\n    # Write your docstring here\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def divide(a, b):\n    \"\"\"\n    Divide the first number by the second and return the result.\n\n    Parameters:\n    a (int): The numerator.\n    b (int): The denominator.\n\n    Returns:\n    float: The quotient of a and b.\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+        "starterCode": "def multiply(a, b):\n    # Write your docstring here\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def divide(a, b):\n    \"\"\"\n    Divide the first number by the second and return the result.\n\n    Parameters:\n    a (int): The numerator.\n    b (int): The denominator.\n\n    Returns:\n    float: The quotient of a and b.\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+            "content": "def multiply(a, b):\n    # Write your docstring here\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -311,17 +326,22 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "8 2\n1\n",
-            "stdout": "4.0\n",
+            "stdin": "1\n1\n",
+            "stdout": "1",
             "match": "exact"
           },
           {
-            "stdin": "9 3\n1\n",
-            "stdout": "3.0\n",
+            "stdin": "1\n1\n",
+            "stdout": "1",
+            "match": "exact"
+          },
+          {
+            "stdin": "2\n2\n",
+            "stdout": "4\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "def divide(a, b):\n    \"\"\"\n    Divide the first number by the second and return the result.\n\n    Parameters:\n    a (int): The numerator.\n    b (int): The denominator.\n\n    Returns:\n    float: The quotient of a and b.\n    \"\"\"\n    return a / b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))"
+        "solutionCode": "def multiply(a, b):\n    \"\"\"Multiply two numbers and return the result.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The product of a and b.\n    \"\"\"\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))"
       }
     },
     {
@@ -331,15 +351,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz11",
       "language": "python",
-      "starterCode": "def multiply(a, b):\n    \"\"\"\n    Multiply two numbers and return the result.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The product of a and b.\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "starterCode": "def divide(x, y):\n    # Write your docstring here\n    return x / y\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nx = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ny = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(x, y))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def divide(x, y):\n    # Write your docstring here\n    return x / y\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nx = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ny = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(x, y))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def multiply(a, b):\n    \"\"\"\n    Multiply two numbers and return the result.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The product of a and b.\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+        "starterCode": "def divide(x, y):\n    # Write your docstring here\n    return x / y\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nx = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ny = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(x, y))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def multiply(a, b):\n    \"\"\"\n    Multiply two numbers and return the result.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The product of a and b.\n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+            "content": "def divide(x, y):\n    # Write your docstring here\n    return x / y\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nx = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ny = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(x, y))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -351,17 +380,17 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "3 4\n1\n",
-            "stdout": "3 4",
+            "stdin": "1\n1\n",
+            "stdout": "1.0",
             "match": "exact"
           },
           {
-            "stdin": "5 5\n1\n",
-            "stdout": "5 5",
+            "stdin": "1\n1\n",
+            "stdout": "1.0",
             "match": "exact"
           }
         ],
-        "solutionCode": "def multiply(a, b):\n    \"\"\"\n    Multiply two numbers and return the result.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:\n    int: The product of a and b.\n    \"\"\"\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))"
+        "solutionCode": "def divide(x, y):\n    \"\"\"Divide two numbers and return the result.\n\n    Parameters:\n    x (int): The numerator.\n    y (int): The denominator.\n\n    Returns:\n    float: The result of division.\n    \"\"\"\n    return x / y\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nx = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ny = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(x, y))"
       }
     }
   ]

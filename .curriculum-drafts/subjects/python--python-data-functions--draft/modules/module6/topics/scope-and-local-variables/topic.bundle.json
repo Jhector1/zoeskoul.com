@@ -118,7 +118,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "c"
+        "optionId": "b"
       }
     },
     {
@@ -154,8 +154,7 @@
         "kind": "multi_choice",
         "optionIds": [
           "b",
-          "c",
-          "d"
+          "c"
         ]
       }
     },
@@ -174,9 +173,8 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "b",
-          "c",
-          "d"
+          "a",
+          "c"
         ]
       }
     },
@@ -218,8 +216,8 @@
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
-          "t3",
           "t2",
+          "t3",
           "t4"
         ]
       }
@@ -230,10 +228,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz7",
-      "choiceCount": 3,
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "local_var"
+        "value": "local"
       }
     },
     {
@@ -242,10 +240,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz8",
-      "choiceCount": 3,
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "global_var"
+        "value": "global"
       }
     },
     {
@@ -255,15 +253,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz9",
       "language": "python",
-      "starterCode": "def calculate_sum(a, b):\n    # Calculate the sum of a and b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_sum(a, b))",
+      "starterCode": "def calculate_area(width, height):\n    # Calculate the area\n    \n    # Return the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def calculate_area(width, height):\n    # Calculate the area\n    \n    # Return the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def calculate_sum(a, b):\n    # Calculate the sum of a and b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_sum(a, b))",
+        "starterCode": "def calculate_area(width, height):\n    # Calculate the area\n    \n    # Return the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def calculate_sum(a, b):\n    # Calculate the sum of a and b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_sum(a, b))",
+            "content": "def calculate_area(width, height):\n    # Calculate the area\n    \n    # Return the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -276,12 +283,12 @@
         "tests": [
           {
             "stdin": "1\n1\n",
-            "stdout": "2",
+            "stdout": "1",
             "match": "exact"
           },
           {
             "stdin": "1\n1\n",
-            "stdout": "2",
+            "stdout": "1",
             "match": "exact"
           },
           {
@@ -290,7 +297,7 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "def calculate_sum(a, b):\n    result = a + b\n    return result\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_sum(a, b))"
+        "solutionCode": "def calculate_area(width, height):\n    area = width * height\n    return area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))"
       }
     },
     {
@@ -300,15 +307,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz10",
       "language": "python",
-      "starterCode": "counter = 0\n\ndef increment_global():\n    # Increment the global counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())",
+      "starterCode": "counter = 0\n\ndef increment_global():\n    # Use global keyword\n    \n    # Increment the counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "counter = 0\n\ndef increment_global():\n    # Use global keyword\n    \n    # Increment the counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "counter = 0\n\ndef increment_global():\n    # Increment the global counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())",
+        "starterCode": "counter = 0\n\ndef increment_global():\n    # Use global keyword\n    \n    # Increment the counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "counter = 0\n\ndef increment_global():\n    # Increment the global counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())",
+            "content": "counter = 0\n\ndef increment_global():\n    # Use global keyword\n    \n    # Increment the counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -338,15 +354,24 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz11",
       "language": "python",
-      "starterCode": "threshold = 10\n\ndef compare_scope(value):\n    # Compare value with threshold\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(compare_scope(value))",
+      "starterCode": "def greet_user(name):\n    # Create a greeting message\n    \n    # Return the message\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def greet_user(name):\n    # Create a greeting message\n    \n    # Return the message\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "threshold = 10\n\ndef compare_scope(value):\n    # Compare value with threshold\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(compare_scope(value))",
+        "starterCode": "def greet_user(name):\n    # Create a greeting message\n    \n    # Return the message\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "threshold = 10\n\ndef compare_scope(value):\n    # Compare value with threshold\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(compare_scope(value))",
+            "content": "def greet_user(name):\n    # Create a greeting message\n    \n    # Return the message\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -358,17 +383,17 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "12\n",
-            "stdout": "Above\n",
+            "stdin": "Alice\n",
+            "stdout": "Hello, Alice!\n",
             "match": "exact"
           },
           {
-            "stdin": "8\n",
-            "stdout": "Below\n",
+            "stdin": "Bob\n",
+            "stdout": "Hello, Bob!\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "threshold = 10\n\ndef compare_scope(value):\n    if value > threshold:\n        return 'Above'\n    elif value < threshold:\n        return 'Below'\n    else:\n        return 'Equal'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(compare_scope(value))"
+        "solutionCode": "def greet_user(name):\n    message = f\"Hello, {name}!\"\n    return message\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))"
       }
     }
   ]

@@ -1,7 +1,10 @@
 import { buildSemanticExpected } from "../codeInputExpected.js";
 
 export const buildSemanticRecipe = (def: any, args: any, resolved: any) => {
-  const expected = buildSemanticExpected(def.recipe);
+  const expected = buildSemanticExpected(
+    def.recipe,
+    def.workspaceExpectations ?? def.workspace?.workspaceExpectations,
+  );
 
   return {
     archetype: def.id,

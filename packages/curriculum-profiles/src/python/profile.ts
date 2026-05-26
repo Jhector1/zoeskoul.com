@@ -6,8 +6,10 @@ import {
     ManifestCodeInput,
     ManifestFileFixture,
     ManifestStarterFile,
+    ManifestWorkspaceExpectations,
     ProgrammingCodeInputTestDraft,
     ProgrammingCodeInputStarterFileDraft,
+    normalizeWorkspaceExpectations,
     normalizeWorkspacePath,
 } from "@zoeskoul/curriculum-contracts";
 import { SemanticCheckSchema } from "@zoeskoul/practice-checks";
@@ -198,6 +200,18 @@ function normalizePythonFixtureFiles(
         }));
 }
 
+function normalizePythonWorkspaceExpectations(
+    value: unknown,
+): ManifestWorkspaceExpectations | undefined {
+    if (typeof value === "undefined") return undefined;
+
+    try {
+        return normalizeWorkspaceExpectations(value, "workspaceExpectations");
+    } catch (error) {
+        throw new Error(`Invalid Python workspaceExpectations: ${(error as Error).message}`);
+    }
+}
+
 const pythonCodeInputCapability: CodeInputProfileCapability = {
     minimumFixedTests: PYTHON_MINIMUM_FIXED_TESTS,
     defaultStarter() {
@@ -274,6 +288,10 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             (args.exercise as { starterFiles?: ProgrammingCodeInputStarterFileDraft[] })
                 .starterFiles,
         );
+        const workspaceExpectations = normalizePythonWorkspaceExpectations(
+            (args.exercise as { workspaceExpectations?: ManifestWorkspaceExpectations })
+                .workspaceExpectations,
+        );
 
         const hasAuthoredStarterFiles = authoredStarterFiles.length > 0;
 
@@ -345,11 +363,13 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             language: "python",
             starterCode,
             starterFiles,
+            ...(workspaceExpectations ? { workspaceExpectations } : {}),
             workspace: {
                 language: "python",
                 entryFilePath: authoredEntryFilePath,
                 starterCode,
                 starterFiles,
+                ...(workspaceExpectations ? { workspaceExpectations } : {}),
                 ...(fixtureFiles.length > 0
                     ? {
                         files: fixtureFiles,
@@ -429,10 +449,14 @@ export const pythonProfile: CourseProfile = {
                 "- Online editor files support nested folders through workspace-relative POSIX paths.",
                 "- Use paths such as data/input.txt, src/main.py, helpers/utils.py, and tests/test_main.py.",
                 "- Do not use absolute paths, backslashes, drive letters, ../, or empty path segments.",
+                "- Function basics should usually stay single-file main.py exercises.",
+                "- Use provided starterFiles for small modularity exercises such as main.py plus helpers.py, or src/main.py plus src/helpers/formatting.py.",
                 "- starterFiles may include learner-editable files such as src/main.py or helpers/utils.py.",
                 "- files and tests[].files may include fixture files such as data/input.txt or data/students.csv.",
                 "- Set entryFilePath when the learner entry file is not main.py, for example entryFilePath: \"src/main.py\".",
-                "- If asking the learner to create files/folders, explicitly state the path they should create and only do this when createFiles/createFolders or filesystem capabilities are enabled.",
+                "- Do not ask learners to create new folders/files in normal graded exercises unless workspaceExpectations or equivalent required-path validation is available.",
+                "- If the exercise needs a helper module but the checker cannot validate newly created files, provide that helper file in starterFiles and ask the learner to edit it.",
+                "- If asking the learner to create files/folders, explicitly state the exact required path and only do this when createFiles/createFolders or filesystem capabilities are enabled.",
             );
         } else {
             lines.push(
@@ -482,6 +506,10 @@ export const pythonProfile: CourseProfile = {
                 "- Do not use stdin to vary file contents for file-reading exercises.",
                 "- Prefer simple relative file names like data.txt, names.txt, and scores.csv.",
                 "- Keep fixture contents short and deterministic, and avoid giant repeated blank lines.",
+                "- Use semantic checks when the learner must define a function, use parameters, return a value, avoid print-only solutions, or demonstrate local scope.",
+                "- Function basics should usually be single-file main.py exercises.",
+                "- For modularity/refactoring exercises, prefer provided starterFiles over asking learners to create helper files from scratch.",
+                "- If a project-style exercise asks learners to create files or folders, state the exact required paths and pair it with workspaceExpectations so grading can verify those paths.",
             );
         } else {
             lines.push(

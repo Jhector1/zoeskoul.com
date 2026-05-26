@@ -1,0 +1,61 @@
+{
+  "topicId": "nested-data-structures",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch1.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "q9",
+      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+    },
+    {
+      "code": "PYTHON_FUNCTION_STDIN_ARITY_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "q10",
+      "message": "Added safe missing stdin values for a wrapped Python function exercise whose tests provided fewer input lines than the function parameters."
+    },
+    {
+      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "q10",
+      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+    },
+    {
+      "code": "PYTHON_HARDCODED_FUNCTION_EXAMPLE_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "q11",
+      "message": "Replaced hardcoded example usage in a function exercise with a stdin/stdout wrapper so published tests validate the intended behavior."
+    },
+    {
+      "code": "PYTHON_FUNCTION_STDIN_ARITY_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "q11",
+      "message": "Added safe missing stdin values for a wrapped Python function exercise whose tests provided fewer input lines than the function parameters."
+    },
+    {
+      "code": "PYTHON_CROSS_EXERCISE_CLASS_CONTEXT_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "q9",
+      "message": "Prepended shared class/setup context needed by this code_input exercise so it can run independently."
+    },
+    {
+      "code": "PYTHON_CROSS_EXERCISE_CLASS_CONTEXT_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "q10",
+      "message": "Prepended shared class/setup context needed by this code_input exercise so it can run independently."
+    }
+  ]
+}

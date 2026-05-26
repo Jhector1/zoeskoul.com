@@ -1,0 +1,277 @@
+{
+  "title": "Decomposition and Refactoring",
+  "summary": "Break a larger task into clear helper functions.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Decomposition",
+      "bodyMarkdown": "Decomposition is the process of breaking down a complex problem or system into smaller, more manageable parts. In programming, this often means dividing a large function into several smaller functions, each responsible for a specific task. This makes your code easier to read, test, and maintain.\n\nFor example, consider a program that calculates the total price of items in a shopping cart, including tax and discounts. Instead of writing one large function, you can decompose it into smaller functions like `calculateSubtotal`, `applyDiscount`, and `calculateTax`. Each function handles a specific part of the calculation.\n\nTry it yourself: Think of a task you perform regularly and break it down into smaller steps. How would you write a function for each step?"
+    },
+    {
+      "id": "sketch2",
+      "title": "Refactoring for Clarity",
+      "bodyMarkdown": "Refactoring is the process of restructuring existing code without changing its external behavior. The goal is to improve the code's structure and readability. This often involves decomposing functions, renaming variables for clarity, and removing duplicate code.\n\nHere's a simple example:\n\n```python\ndef calculate_total_price(cart_items):\n    total = 0\n    for item in cart_items:\n        total += item['price'] * item['quantity']\n    return total\n```\n\nWe can refactor this by extracting the calculation into a helper function:\n\n```python\ndef calculate_item_total(item):\n    return item['price'] * item['quantity']\n\ndef calculate_total_price(cart_items):\n    total = 0\n    for item in cart_items:\n        total += calculate_item_total(item)\n    return total\n```\n\nYour turn: Try refactoring a piece of your own code by extracting a helper function."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Purpose of Decomposition",
+      "prompt": "What is the main purpose of decomposing a program into smaller functions?",
+      "hint": "Think about how decomposition affects code readability and maintenance.",
+      "help": {
+        "concept": "Decomposition helps in organizing code into smaller, manageable parts.",
+        "hint_1": "Decomposition improves code readability and maintainability.",
+        "hint_2": "Decomposition allows each function to handle a specific task, making the code easier to understand."
+      },
+      "options": [
+        "To make the code run faster",
+        "To reduce the number of lines of code",
+        "To improve code readability and maintainability",
+        "To make the code more complex"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Refactoring Benefits",
+      "prompt": "Which of the following is a benefit of refactoring code?",
+      "hint": "Consider how refactoring affects code quality.",
+      "help": {
+        "concept": "Refactoring improves the internal structure of the code without changing its behavior.",
+        "hint_1": "Refactoring makes the code easier to understand and maintain.",
+        "hint_2": "Refactoring can help remove duplicate code and improve clarity."
+      },
+      "options": [
+        "Increases code execution speed",
+        "Improves code readability and maintainability",
+        "Adds new features to the code",
+        "Reduces the need for testing"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Characteristics of Good Functions",
+      "prompt": "Which of the following are characteristics of well-designed functions? Select all that apply.",
+      "hint": "Think about what makes a function easy to use and understand.",
+      "help": {
+        "concept": "Good functions are clear, focused, and reusable.",
+        "hint_1": "A good function should have a clear purpose and a descriptive name.",
+        "hint_2": "A good function should perform a single task and be reusable in different contexts."
+      },
+      "options": [
+        "Performs multiple tasks",
+        "Has a clear and descriptive name",
+        "Is reusable in different contexts",
+        "Contains many lines of code"
+      ],
+      "correctOptionIds": [
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "When to Refactor",
+      "prompt": "When should you consider refactoring your code? Select all that apply.",
+      "hint": "Consider situations where code clarity and structure are important.",
+      "help": {
+        "concept": "Refactoring is useful when code needs to be clearer or more efficient.",
+        "hint_1": "Refactor when the code is difficult to understand or maintain.",
+        "hint_2": "Refactor when you notice duplicate code or when adding new features."
+      },
+      "options": [
+        "When the code is difficult to understand",
+        "When the code is running perfectly",
+        "When there is duplicate code",
+        "When adding new features"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Steps in Decomposition",
+      "prompt": "Arrange the steps in the process of decomposing a function.",
+      "hint": "Start with identifying the task and end with testing the new functions.",
+      "help": {
+        "concept": "Decomposition involves breaking down a task into smaller parts and testing them.",
+        "hint_1": "Begin by identifying the main task.",
+        "hint_2": "End with testing the smaller functions to ensure they work correctly."
+      },
+      "tokens": [
+        "Identify the main task",
+        "Break down into smaller tasks",
+        "Write functions for each task",
+        "Test the new functions"
+      ],
+      "correctOrder": [
+        "Identify the main task",
+        "Break down into smaller tasks",
+        "Write functions for each task",
+        "Test the new functions"
+      ]
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Refactoring Process",
+      "prompt": "Arrange the steps in the process of refactoring code.",
+      "hint": "Start with identifying areas for improvement and end with testing the refactored code.",
+      "help": {
+        "concept": "Refactoring involves improving code structure without changing its behavior.",
+        "hint_1": "Begin by identifying areas that need improvement.",
+        "hint_2": "End with testing to ensure the refactored code works as expected."
+      },
+      "tokens": [
+        "Identify areas for improvement",
+        "Refactor the code",
+        "Test the refactored code",
+        "Document changes"
+      ],
+      "correctOrder": [
+        "Identify areas for improvement",
+        "Refactor the code",
+        "Test the refactored code",
+        "Document changes"
+      ]
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Function Naming",
+      "prompt": "A good function name should be [blank1].",
+      "hint": "Think about what makes a function name clear and useful.",
+      "help": {
+        "concept": "A good function name clearly describes what the function does.",
+        "hint_1": "A good function name should be descriptive.",
+        "hint_2": "A good function name should indicate the function's purpose."
+      },
+      "template": "A good function name should be [blank1].",
+      "choices": [
+        "short",
+        "descriptive",
+        "generic",
+        "complex"
+      ],
+      "correctValue": "descriptive"
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Single Responsibility Principle",
+      "prompt": "A function should have [blank1].",
+      "hint": "Consider what makes a function focused and effective.",
+      "help": {
+        "concept": "A function should do one thing and do it well.",
+        "hint_1": "A function should focus on a single task.",
+        "hint_2": "A function should not try to do multiple unrelated tasks."
+      },
+      "template": "A function should have [blank1].",
+      "choices": [
+        "multiple responsibilities",
+        "a single responsibility",
+        "complex logic",
+        "many parameters"
+      ],
+      "correctValue": "a single responsibility"
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Refactor a Function",
+      "prompt": "Refactor the following function to improve its clarity and structure.",
+      "hint": "Consider breaking the function into smaller helper functions.",
+      "help": {
+        "concept": "Refactoring involves breaking down a function into smaller, more manageable parts.",
+        "hint_1": "Identify parts of the function that can be extracted into helper functions.",
+        "hint_2": "Ensure each helper function has a clear purpose."
+      },
+      "starterCode": "def process_data(data):\n    total = 0\n    for item in data:\n        total += item['value']\n    average = total / len(data)\n    return average",
+      "solutionCode": "def calculate_total(data):\n    total = 0\n    for item in data:\n        total += item['value']\n    return total\n\ndef calculate_average(data):\n    total = calculate_total(data)\n    return total / len(data)\n\n# Example usage\ndata = [{'value': 10}, {'value': 20}, {'value': 30}]\nprint(calculate_average(data))",
+      "tests": [
+        {
+          "stdout": "20.0\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "15.0\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "title": "Create Helper Functions",
+      "prompt": "Create helper functions to calculate the subtotal and tax for a list of items.",
+      "hint": "Think about separating the subtotal and tax calculations into different functions.",
+      "help": {
+        "concept": "Helper functions can simplify complex calculations by handling specific tasks.",
+        "hint_1": "Create a function to calculate the subtotal of items.",
+        "hint_2": "Create another function to calculate the tax based on the subtotal."
+      },
+      "starterCode": "def calculate_total(items):\n    # Calculate subtotal\n    # Calculate tax\n    pass",
+      "solutionCode": "def calculate_subtotal(items):\n    subtotal = 0\n    for item in items:\n        subtotal += item['price'] * item['quantity']\n    return subtotal\n\ndef calculate_tax(subtotal, tax_rate):\n    return subtotal * tax_rate\n\n# Example usage\nitems = [{'price': 10, 'quantity': 2}, {'price': 20, 'quantity': 1}]\nsubtotal = calculate_subtotal(items)\ntax = calculate_tax(subtotal, 0.1)\nprint(subtotal, tax)",
+      "tests": [
+        {
+          "stdout": "40 4.0\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "60 6.0\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "title": "Refactor for Reusability",
+      "prompt": "Refactor the following code to make it more reusable by extracting helper functions.",
+      "hint": "Identify repetitive code that can be extracted into a function.",
+      "help": {
+        "concept": "Reusability can be improved by extracting common code into functions.",
+        "hint_1": "Look for code that repeats and can be turned into a function.",
+        "hint_2": "Ensure the new function can be reused in different parts of the program."
+      },
+      "starterCode": "def print_receipt(items):\n    total = 0\n    for item in items:\n        total += item['price'] * item['quantity']\n        print(f\"{item['name']}: {item['price']} x {item['quantity']}\")\n    print(f\"Total: {total}\")",
+      "solutionCode": "def calculate_item_total(item):\n    return item['price'] * item['quantity']\n\ndef print_item(item):\n    print(f\"{item['name']}: {item['price']} x {item['quantity']}\")\n\ndef print_receipt(items):\n    total = 0\n    for item in items:\n        total += calculate_item_total(item)\n        print_item(item)\n    print(f\"Total: {total}\")\n\n# Example usage\nitems = [{'name': 'apple', 'price': 1, 'quantity': 3}, {'name': 'banana', 'price': 2, 'quantity': 2}]\nprint_receipt(items)",
+      "tests": [
+        {
+          "stdout": "apple: 1 x 3\nbanana: 2 x 2\nTotal: 7\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "orange: 3 x 1\ngrape: 2 x 4\nTotal: 11\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    }
+  ],
+  "projectDraft": {
+    "title": "Refactor and Decompose Functions",
+    "stepIds": [
+      "quiz9",
+      "quiz10",
+      "quiz11"
+    ]
+  }
+}

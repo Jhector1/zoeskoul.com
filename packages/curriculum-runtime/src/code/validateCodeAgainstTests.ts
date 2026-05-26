@@ -1,6 +1,8 @@
 import { runLocalCode } from "./localRunner.js";
-import { getCodeRunner } from "./runner.js";
+import { getCodeRunner, type RunCodeFn } from "./runner.js";
 import { stdoutMatches } from "@zoeskoul/practice-checks";
+
+export const DEFAULT_PROGRAMMING_MAX_TESTS = 12;
 
 export type RuntimeCodeFileFixture = {
     path: string;
@@ -8,16 +10,16 @@ export type RuntimeCodeFileFixture = {
     readOnly?: boolean;
 };
 
+export type RuntimeCodeWorkspaceFiles =
+    | RuntimeCodeFileFixture[]
+    | Record<string, string>;
+
 export type RuntimeCodeTest = {
     stdin?: string;
     stdout: string;
     match?: "exact" | "includes";
     files?: RuntimeCodeWorkspaceFiles;
 };
-
-export type RuntimeCodeWorkspaceFiles =
-    | RuntimeCodeFileFixture[]
-    | Record<string, string>;
 
 function normalizeWorkspaceFiles(
     files: RuntimeCodeWorkspaceFiles | undefined,
@@ -27,8 +29,10 @@ function normalizeWorkspaceFiles(
     if (Array.isArray(files)) {
         return files
             .map((file) => {
-                const path = typeof file.path === "string" ? file.path.trim() : "";
+                const path =
+                    typeof file.path === "string" ? file.path.trim() : "";
                 if (!path) return null;
+
                 return {
                     path,
                     content: String(file.content ?? ""),
@@ -66,35 +70,42 @@ function mergeWorkspaceFiles(
 export async function validateCodeAgainstTests(args: {
     language: string;
     solutionCode: string;
+    entry?: string;
     tests: RuntimeCodeTest[];
     files?: RuntimeCodeWorkspaceFiles;
-    limits?: {
-        timeoutMs?: number;
-    };
+    limits?: { timeoutMs?: number } & Record<string, unknown>;
+    maxTests?: number;
+    runner?: RunCodeFn;
 }): Promise<
     | {
-        ok: true;
-      }
+    ok: true;
+}
     | {
-        ok: false;
-        reason:
-            | "runner_unavailable"
-            | "execution_failed"
-            | "output_mismatch";
-        testIndex?: number;
-        message: string;
-        stdout?: string;
-        stderr?: string;
-      }
+    ok: false;
+    reason:
+        | "runner_unavailable"
+        | "execution_failed"
+        | "output_mismatch";
+    testIndex?: number;
+    message: string;
+    stdout?: string;
+    stderr?: string;
+}
 > {
-    const runner = getCodeRunner() ?? runLocalCode;
-    const trimmedTests = args.tests.slice(0, 8);
+    const runner = args.runner ?? getCodeRunner() ?? runLocalCode;
+    const maxTests = Math.max(
+        1,
+        Number(args.maxTests ?? DEFAULT_PROGRAMMING_MAX_TESTS),
+    );
+    const trimmedTests = args.tests.slice(0, maxTests);
 
     for (let index = 0; index < trimmedTests.length; index += 1) {
         const test = trimmedTests[index]!;
+
         const run = await runner({
             language: args.language,
             code: args.solutionCode,
+            entry: args.entry,
             stdin: test.stdin ?? "",
             files: mergeWorkspaceFiles(args.files, test.files),
             limits: args.limits,
@@ -104,7 +115,9 @@ export async function validateCodeAgainstTests(args: {
             return {
                 ok: false,
                 reason:
-                    run.error?.includes("No local compiler-side runner is implemented")
+                    run.error?.includes(
+                        "No local compiler-side runner is implemented",
+                    )
                         ? "runner_unavailable"
                         : "execution_failed",
                 testIndex: index,

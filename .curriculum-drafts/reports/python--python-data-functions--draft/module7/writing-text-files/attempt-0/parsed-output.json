@@ -1,17 +1,17 @@
 {
   "title": "Writing Text Files",
-  "summary": "Learn how to write data to text files safely using Python.",
+  "summary": "Learn how to write data to text files using Python, ensuring safe file handling and understanding file modes.",
   "minutes": 22,
   "sketchBlocks": [
     {
       "id": "sketch1",
       "title": "Introduction to Writing Files",
-      "bodyMarkdown": "Writing to files in Python is a common task when you need to save data for later use. The `open()` function is used to open a file, and you can specify the mode in which you want to open it. For writing, you typically use `'w'` for write mode, which will overwrite the file if it already exists, or `'a'` for append mode, which will add to the end of the file without deleting its contents.\n\n```python\n# Example: Writing to a file\nwith open('example.txt', 'w') as file:\n    file.write('Hello, world!\\n')\n```\n\nIn this example, we open a file named `example.txt` in write mode and write the string 'Hello, world!' to it. The `with` statement ensures that the file is properly closed after its suite finishes, even if an exception is raised.\n\n**Try it yourself:** Modify the code to append a new line to the file instead of overwriting it."
+      "bodyMarkdown": "Writing to files in Python is a common task when you need to save data for later use. You can write text to a file using the `open()` function with the appropriate mode. The most common modes are `w` for writing (which overwrites the file) and `a` for appending (which adds to the end of the file). Always remember to close the file after writing to ensure data is saved properly.\n\n```python\n# Example: Writing to a file\nwith open('output.txt', 'w') as file:\n    file.write('Hello, World!')\n```\n\nIn this example, we open `output.txt` in write mode and write 'Hello, World!' to it. The `with` statement ensures the file is properly closed after writing.\n\n**Try it yourself:** Modify the code to append a new line instead of overwriting the file."
     },
     {
       "id": "sketch2",
       "title": "File Modes Explained",
-      "bodyMarkdown": "When working with files, it's important to understand the different modes available:\n\n- `'r'`: Read mode (default). Opens a file for reading.\n- `'w'`: Write mode. Opens a file for writing, truncating the file first.\n- `'a'`: Append mode. Opens a file for writing, appending to the end of the file.\n- `'r+'`: Read and write mode. Opens a file for both reading and writing.\n\nEach mode serves a different purpose, and choosing the right one depends on your specific needs. For example, use `'a'` if you want to add data to an existing file without losing its current contents.\n\n**Your turn:** Try opening a file in `'r+'` mode and read its contents before writing new data."
+      "bodyMarkdown": "File modes determine how a file is opened and what operations can be performed on it. Here are some common modes:\n\n- `r`: Read mode. Opens a file for reading (default mode).\n- `w`: Write mode. Opens a file for writing, truncating the file first.\n- `a`: Append mode. Opens a file for writing, appending to the end of the file.\n- `r+`: Read and write mode. Opens a file for both reading and writing.\n\n**Your turn:** Try opening a file in append mode and add a new line of text."
     }
   ],
   "quizDraft": [
@@ -19,18 +19,18 @@
       "id": "quiz1",
       "kind": "single_choice",
       "title": "Understanding File Modes",
-      "prompt": "Which file mode should you use if you want to add data to the end of an existing file without deleting its contents?",
-      "hint": "Think about the mode that allows appending data.",
+      "prompt": "Which file mode should you use to add new content to the end of an existing file without deleting its current content?",
+      "hint": "Think about the mode that allows adding to the end of a file.",
       "help": {
-        "concept": "File modes determine how a file is opened and what operations can be performed.",
-        "hint_1": "Appending means adding to the end of the file.",
-        "hint_2": "The mode that appends data is not the default read mode."
+        "concept": "File modes determine how a file is accessed and modified.",
+        "hint_1": "Appending means adding to the end.",
+        "hint_2": "The mode that appends content is not the default read mode."
       },
       "options": [
-        "'r'",
-        "'w'",
-        "'a'",
-        "'r+'"
+        "r",
+        "w",
+        "a",
+        "r+"
       ],
       "correctOptionIds": [
         "c"
@@ -39,99 +39,88 @@
     {
       "id": "quiz2",
       "kind": "multi_choice",
-      "title": "File Mode Characteristics",
-      "prompt": "Select all characteristics of the 'w' file mode.",
-      "hint": "Consider what happens to the file when opened in 'w' mode.",
+      "title": "File Handling Best Practices",
+      "prompt": "Select all the best practices when writing to a file in Python.",
+      "hint": "Consider practices that ensure data integrity and resource management.",
       "help": {
-        "concept": "The 'w' mode is used for writing to files and has specific behaviors.",
-        "hint_1": "'w' mode can create a new file if it doesn't exist.",
-        "hint_2": "'w' mode will overwrite the file if it already exists."
+        "concept": "Best practices help ensure data is written correctly and resources are managed efficiently.",
+        "hint_1": "Think about how to ensure the file is closed properly.",
+        "hint_2": "Consider how to handle errors during file operations."
       },
       "options": [
-        "Creates a new file if it doesn't exist",
-        "Appends data to the end of the file",
-        "Overwrites the file if it exists",
-        "Opens the file for reading"
+        "Always close the file after writing",
+        "Use `with` statement for automatic file closure",
+        "Ignore exceptions during file operations",
+        "Overwrite files without checking"
       ],
       "correctOptionIds": [
         "a",
-        "c"
+        "b"
       ]
     },
     {
       "id": "quiz3",
       "kind": "drag_reorder",
       "title": "Steps to Write to a File",
-      "prompt": "Arrange the steps to write 'Hello, world!' to a file named 'greeting.txt'.",
+      "prompt": "Arrange the steps to write 'Hello, World!' to a file named 'greeting.txt'.",
       "hint": "Start with opening the file and end with closing it.",
       "help": {
-        "concept": "Writing to a file involves opening it, writing data, and then closing it.",
-        "hint_1": "Use the 'open' function to start.",
-        "hint_2": "Don't forget to close the file at the end."
+        "concept": "Writing to a file involves opening, writing, and closing the file.",
+        "hint_1": "Opening the file is the first step.",
+        "hint_2": "Closing the file is the last step."
       },
       "tokens": [
         "Open 'greeting.txt' in write mode",
-        "Write 'Hello, world!' to the file",
+        "Write 'Hello, World!' to the file",
         "Close the file"
       ],
       "correctOrder": [
         "Open 'greeting.txt' in write mode",
-        "Write 'Hello, world!' to the file",
+        "Write 'Hello, World!' to the file",
         "Close the file"
       ]
     },
     {
       "id": "quiz4",
       "kind": "fill_blank_choice",
-      "title": "File Writing Syntax",
-      "prompt": "Complete the code to write 'Data' to a file named 'output.txt'.\n\n```python\nwith open('output.txt', [blank1]) as file:\n    file.write('Data')\n```",
-      "hint": "Choose the mode that allows writing to a file.",
+      "title": "File Mode for Overwriting",
+      "prompt": "To overwrite a file's content, use the `[blank1]` mode.",
+      "hint": "This mode truncates the file before writing.",
       "help": {
-        "concept": "The mode determines how the file is accessed.",
-        "hint_1": "You need a mode that allows writing.",
-        "hint_2": "The mode should not append but overwrite."
+        "concept": "The write mode is used to overwrite files.",
+        "hint_1": "This mode is not for reading or appending.",
+        "hint_2": "It starts with 'w'."
       },
-      "template": "with open('output.txt', [blank1]) as file:\n    file.write('Data')",
+      "template": "To overwrite a file's content, use the `[blank1]` mode.",
       "choices": [
-        "'r'",
-        "'w'",
-        "'a'",
-        "'r+'"
+        "r",
+        "w",
+        "a",
+        "r+"
       ],
-      "correctValue": "'w'"
+      "correctValue": "w"
     },
     {
       "id": "quiz5",
       "kind": "code_input",
-      "title": "Write and Read a File",
-      "prompt": "Write a Python program that writes 'Hello, ZoeSkoul!' to a file named 'zoeskoul.txt' and then reads the content back to print it.",
-      "hint": "Use 'w' mode to write and 'r' mode to read.",
+      "title": "Write a List to a File",
+      "prompt": "Write a Python program that writes each item from a list of strings to a new line in a file named 'items.txt'.",
+      "hint": "Use a loop to iterate over the list and write each item to the file.",
       "help": {
-        "concept": "You need to write to a file and then read from it.",
-        "hint_1": "First, open the file in 'w' mode to write.",
-        "hint_2": "After writing, open the file in 'r' mode to read."
+        "concept": "You need to open the file in write mode and iterate over the list to write each item.",
+        "hint_1": "Use a `for` loop to iterate over the list.",
+        "hint_2": "Remember to open the file in write mode and close it after writing."
       },
-      "starterCode": "# Write to the file\nwith open('zoeskoul.txt', 'w') as file:\n    # Your code here\n\n# Read from the file\nwith open('zoeskoul.txt', 'r') as file:\n    # Your code here",
-      "solutionCode": "# Write to the file\nwith open('zoeskoul.txt', 'w') as file:\n    file.write('Hello, ZoeSkoul!')\n\n# Read from the file\nwith open('zoeskoul.txt', 'r') as file:\n    content = file.read()\n    print(content)",
+      "starterCode": "items = ['apple', 'banana', 'cherry']\n\n# Open the file in write mode\nwith open('items.txt', 'w') as file:\n    # Write each item to the file\n    pass",
+      "solutionCode": "items = ['apple', 'banana', 'cherry']\n\n# Open the file in write mode\nwith open('items.txt', 'w') as file:\n    # Write each item to the file\n    for item in items:\n        file.write(item + '\\n')",
       "tests": [
         {
-          "stdout": "Hello, ZoeSkoul!\n",
+          "stdout": "apple\nbanana\ncherry\n",
           "match": "exact",
           "files": [
             {
-              "path": "zoeskoul.txt",
-              "content": "Hello, ZoeSkoul!",
-              "readOnly": false
-            }
-          ]
-        },
-        {
-          "stdout": "Hello, ZoeSkoul!\n",
-          "match": "exact",
-          "files": [
-            {
-              "path": "zoeskoul.txt",
-              "content": "Hello, ZoeSkoul!",
+              "path": "items.txt",
+              "content": "apple\nbanana\ncherry\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
               "readOnly": false
             }
           ]
@@ -139,7 +128,7 @@
       ],
       "files": [
         {
-          "path": "zoeskoul.txt",
+          "path": "items.txt",
           "content": "",
           "readOnly": false
         }
@@ -148,204 +137,108 @@
     },
     {
       "id": "quiz6",
-      "kind": "single_choice",
-      "title": "File Closing Importance",
-      "prompt": "Why is it important to close a file after writing to it?",
-      "hint": "Consider what happens if a file remains open.",
+      "kind": "code_input",
+      "title": "Append to a File",
+      "prompt": "Modify the program to append a new item to 'items.txt' without overwriting the existing content.",
+      "hint": "Change the file mode to append and write the new item.",
       "help": {
-        "concept": "Closing a file ensures that all data is properly saved and resources are freed.",
-        "hint_1": "An open file can lock resources.",
-        "hint_2": "Data might not be saved if the file isn't closed."
+        "concept": "Appending to a file adds content to the end without removing existing data.",
+        "hint_1": "Use the append mode 'a' to add new content.",
+        "hint_2": "Ensure the new item is written on a new line."
       },
-      "options": [
-        "To free up system resources",
-        "To prevent data loss",
-        "To allow other programs to access the file",
-        "All of the above"
+      "starterCode": "new_item = 'date'\n\n# Open the file in append mode\nwith open('items.txt', 'a') as file:\n    # Append the new item to the file\n    pass",
+      "solutionCode": "new_item = 'date'\n\n# Open the file in append mode\nwith open('items.txt', 'a') as file:\n    # Append the new item to the file\n    file.write(new_item + '\\n')",
+      "tests": [
+        {
+          "stdout": "apple\nbanana\ncherry\ndate\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "items.txt",
+              "content": "apple\nbanana\ncherry\n\ndate\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+              "readOnly": false
+            }
+          ]
+        }
       ],
-      "correctOptionIds": [
-        "d"
-      ]
+      "files": [
+        {
+          "path": "items.txt",
+          "content": "apple\nbanana\ncherry\n",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests"
     },
     {
       "id": "quiz7",
-      "kind": "multi_choice",
-      "title": "Using 'with' Statement",
-      "prompt": "What are the benefits of using the 'with' statement when working with files?",
-      "hint": "Think about resource management and error handling.",
+      "kind": "single_choice",
+      "title": "Closing Files",
+      "prompt": "What is the main reason for closing a file after writing to it in Python?",
+      "hint": "Consider what happens to the data if the file is not closed.",
       "help": {
-        "concept": "The 'with' statement simplifies file handling by managing resources automatically.",
-        "hint_1": "It helps in automatically closing files.",
-        "hint_2": "It reduces the risk of resource leaks."
+        "concept": "Closing a file ensures that all data is properly saved and resources are freed.",
+        "hint_1": "Think about data integrity and resource management.",
+        "hint_2": "Closing a file ensures data is written and resources are released."
       },
       "options": [
-        "Automatically closes the file",
-        "Reduces the risk of resource leaks",
-        "Improves code readability",
-        "Allows multiple files to be opened simultaneously"
+        "To save changes and free resources",
+        "To delete the file",
+        "To lock the file",
+        "To encrypt the file"
       ],
       "correctOptionIds": [
-        "a",
-        "b",
-        "c"
+        "a"
       ]
     },
     {
       "id": "quiz8",
       "kind": "drag_reorder",
       "title": "File Writing Process",
-      "prompt": "Arrange the steps to write data to a file using the 'with' statement.",
-      "hint": "Start with opening the file and end with the automatic closing.",
+      "prompt": "Arrange the steps in the correct order for writing data to a file.",
+      "hint": "Start with opening the file and end with closing it.",
       "help": {
-        "concept": "The 'with' statement handles file opening and closing automatically.",
-        "hint_1": "Begin with the 'with' statement.",
-        "hint_2": "The file is closed automatically at the end of the block."
+        "concept": "The process involves opening, writing, and closing the file.",
+        "hint_1": "Opening the file is the first step.",
+        "hint_2": "Closing the file is the last step."
       },
       "tokens": [
-        "Open the file using 'with'",
+        "Open the file in the desired mode",
         "Write data to the file",
-        "Exit the 'with' block to close the file"
+        "Close the file"
       ],
       "correctOrder": [
-        "Open the file using 'with'",
+        "Open the file in the desired mode",
         "Write data to the file",
-        "Exit the 'with' block to close the file"
+        "Close the file"
       ]
     },
     {
       "id": "quiz9",
       "kind": "fill_blank_choice",
-      "title": "Appending to a File",
-      "prompt": "Complete the code to append 'More data' to a file named 'data.txt'.\n\n```python\nwith open('data.txt', [blank1]) as file:\n    file.write('More data')\n```",
-      "hint": "Choose the mode that allows appending to a file.",
+      "title": "Appending Mode",
+      "prompt": "To add content to the end of a file without removing existing content, use the `[blank1]` mode.",
+      "hint": "This mode allows adding to the end of a file.",
       "help": {
-        "concept": "Appending adds data to the end of a file without removing existing content.",
-        "hint_1": "You need a mode that doesn't overwrite.",
-        "hint_2": "The mode should add to the file's end."
+        "concept": "Appending mode is used to add content to the end of a file.",
+        "hint_1": "This mode is not for overwriting.",
+        "hint_2": "It starts with 'a'."
       },
-      "template": "with open('data.txt', [blank1]) as file:\n    file.write('More data')",
+      "template": "To add content to the end of a file without removing existing content, use the `[blank1]` mode.",
       "choices": [
-        "'r'",
-        "'w'",
-        "'a'",
-        "'r+'"
+        "r",
+        "w",
+        "a",
+        "r+"
       ],
-      "correctValue": "'a'"
-    },
-    {
-      "id": "quiz10",
-      "kind": "code_input",
-      "title": "Log File Writer",
-      "prompt": "Create a Python program that writes log entries to a file named 'log.txt'. Each entry should be on a new line.",
-      "hint": "Use 'a' mode to append each log entry.",
-      "help": {
-        "concept": "Appending allows adding new entries without removing existing ones.",
-        "hint_1": "Open the file in 'a' mode for appending.",
-        "hint_2": "Ensure each entry is written on a new line."
-      },
-      "starterCode": "# Append log entries to the file\nwith open('log.txt', 'a') as file:\n    # Your code here",
-      "solutionCode": "# Append log entries to the file\nwith open('log.txt', 'a') as file:\n    file.write('Log entry 1\\n')\n    file.write('Log entry 2\\n')",
-      "tests": [
-        {
-          "stdout": "",
-          "match": "exact",
-          "files": [
-            {
-              "path": "log.txt",
-              "content": "Log entry 1\nLog entry 2\n",
-              "readOnly": false
-            }
-          ]
-        },
-        {
-          "stdout": "",
-          "match": "exact",
-          "files": [
-            {
-              "path": "log.txt",
-              "content": "Log entry 1\nLog entry 2\n",
-              "readOnly": false
-            }
-          ]
-        }
-      ],
-      "files": [
-        {
-          "path": "log.txt",
-          "content": "",
-          "readOnly": false
-        }
-      ],
-      "recipeType": "fixed_tests"
-    },
-    {
-      "id": "quiz11",
-      "kind": "code_input",
-      "title": "Data Summary Writer",
-      "prompt": "Write a Python program that reads numbers from 'numbers.txt', calculates their sum, and writes the result to 'summary.txt'.",
-      "hint": "Read numbers, calculate the sum, and write the result.",
-      "help": {
-        "concept": "You need to read data, process it, and write the output.",
-        "hint_1": "Use 'r' mode to read and 'w' mode to write.",
-        "hint_2": "Calculate the sum before writing."
-      },
-      "starterCode": "# Read numbers and write their sum\nwith open('numbers.txt', 'r') as file:\n    # Your code here\n\nwith open('summary.txt', 'w') as file:\n    # Your code here",
-      "solutionCode": "# Read numbers and write their sum\nwith open('numbers.txt', 'r') as file:\n    numbers = file.readlines()\n    total = sum(int(number.strip()) for number in numbers)\n\nwith open('summary.txt', 'w') as file:\n    file.write(f'Sum: {total}')",
-      "tests": [
-        {
-          "stdout": "",
-          "match": "exact",
-          "files": [
-            {
-              "path": "numbers.txt",
-              "content": "1\n2\n3\n",
-              "readOnly": false
-            },
-            {
-              "path": "summary.txt",
-              "content": "Sum: 6",
-              "readOnly": false
-            }
-          ]
-        },
-        {
-          "stdout": "",
-          "match": "exact",
-          "files": [
-            {
-              "path": "numbers.txt",
-              "content": "4\n5\n6\n",
-              "readOnly": false
-            },
-            {
-              "path": "summary.txt",
-              "content": "Sum: 15",
-              "readOnly": false
-            }
-          ]
-        }
-      ],
-      "files": [
-        {
-          "path": "numbers.txt",
-          "content": "1\n2\n3\n",
-          "readOnly": false
-        },
-        {
-          "path": "summary.txt",
-          "content": "",
-          "readOnly": false
-        }
-      ],
-      "recipeType": "fixed_tests"
+      "correctValue": "a"
     }
   ],
   "projectDraft": {
-    "title": "File Writing Project",
+    "title": "Writing Text Files Project",
     "stepIds": [
       "quiz5",
-      "quiz10",
-      "quiz11"
+      "quiz6"
     ]
   }
 }

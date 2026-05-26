@@ -73,12 +73,29 @@
     }
   },
   "authoringGuidance": [
-    "This course must always use profileId python and subjectSlug python-data-functions-v2.",
+    "This course must always use profileId python, subjectSlug python, and courseSlug python-data-functions.",
     "Do not use SQL datasets, SQL tables, sql_query recipes, datasetId, fixedSqlDialect, resultShape, or checkSql in Python lessons.",
-    "Python code_input exercises should prefer recipeType fixed_tests and include explicit stdin/stdout tests.",
+    "Module 5 should mostly use fixed_tests for deterministic collection behavior.",
+    "Module 6 should prefer semantic checks for function structure, parameters, return behavior, print-vs-return, and local scope.",
+    "Module 7 should use fixed_tests with provided files / tests[].files fixtures and keep browser-python-files-runner behavior for file I/O lessons.",
+    "Use folders/files in Module 6 only when modularity or organization is the learning goal.",
+    "Prefer provided starterFiles over asking learners to create files from scratch on the first compile pass.",
     "Write code_input solutions as complete runnable programs or function-based exercises with deterministic tests.",
     "Keep examples focused on lists, dictionaries, functions, files, exceptions, and simple data cleaning."
   ],
+  "courseGenerationPolicy": {
+    "notes": [
+      "Function basics should usually be single-file main.py exercises.",
+      "Use semantic checks when the learner must define a function, use parameters, return a value, avoid print-only solutions, or demonstrate local scope.",
+      "Use provided starterFiles for small modularity exercises, for example main.py plus helpers.py, or src/main.py plus src/helpers/formatting.py.",
+      "Do not ask learners to create new folders/files in normal graded exercises unless workspaceExpectations or equivalent required-path validation is available.",
+      "If the exercise needs a helper module but the checker cannot validate newly created files, provide the helper file in starterFiles and ask the learner to edit it.",
+      "If asking learners to create folders/files in a project-style exercise, state the exact required paths and validate them.",
+      "Compile in this order: creating-and-indexing-lists; list-methods-and-mutation; looping-through-lists; dictionary-basics; updating-and-looping-dictionaries; nested-data-structures; defining-and-calling-functions; parameters-and-return-values; print-vs-return; scope-and-local-variables; decomposition-and-refactoring; docstrings-and-function-contracts; reading-text-files; writing-text-files; working-with-paths; try-except-basics; validating-and-cleaning-input; simple-csv-processing.",
+      "Use creating-and-indexing-lists as the first smoke topic.",
+      "Use reading-text-files as the first file/folder runtime proof topic."
+    ]
+  },
   "assessmentAndDelivery": {
     "suggestedBeginnerRhythm": "Two or three short lessons per week, with one module project after each module.",
     "recommendedCourseDeliverables": [
@@ -98,6 +115,12 @@
   },
   "modulePolicies": [
     {
+      "moduleNumber": 6,
+      "notes": [
+        "Use multi-file starter workspaces only for modularity/refactoring lessons where organization is the learning goal."
+      ]
+    },
+    {
       "moduleNumber": 7,
       "workspaceProfileId": "browser-python-files-runner",
       "notes": [
@@ -105,6 +128,102 @@
       ]
     }
   ],
+  "topicPolicies": {
+    "creating-and-indexing-lists": {
+      "notes": [
+        "Prefer fixed_tests for this topic."
+      ]
+    },
+    "list-methods-and-mutation": {
+      "notes": [
+        "Prefer fixed_tests for this topic."
+      ]
+    },
+    "looping-through-lists": {
+      "notes": [
+        "Prefer fixed_tests for this topic."
+      ]
+    },
+    "dictionary-basics": {
+      "notes": [
+        "Prefer fixed_tests for this topic."
+      ]
+    },
+    "updating-and-looping-dictionaries": {
+      "notes": [
+        "Prefer fixed_tests for this topic."
+      ]
+    },
+    "nested-data-structures": {
+      "notes": [
+        "Prefer fixed_tests for this topic.",
+        "Use semantic checks only when you need to verify nested-access structure rather than output."
+      ]
+    },
+    "defining-and-calling-functions": {
+      "notes": [
+        "Prefer semantic checks for function definition and calling structure.",
+        "Keep this as a single-file main.py exercise unless modularity is the actual lesson goal."
+      ]
+    },
+    "parameters-and-return-values": {
+      "notes": [
+        "Prefer semantic checks for parameters and return behavior."
+      ]
+    },
+    "print-vs-return": {
+      "notes": [
+        "Prefer semantic checks that require return behavior and reject print-only solutions."
+      ]
+    },
+    "scope-and-local-variables": {
+      "notes": [
+        "Prefer semantic checks for local scope behavior."
+      ]
+    },
+    "decomposition-and-refactoring": {
+      "notes": [
+        "Use semantic checks plus fixed_tests for behavior.",
+        "If multiple files help teach modularity, provide them in starterFiles instead of asking learners to create them from scratch."
+      ]
+    },
+    "docstrings-and-function-contracts": {
+      "notes": [
+        "Prefer semantic or static checks for docstrings and function contracts."
+      ]
+    },
+    "reading-text-files": {
+      "notes": [
+        "Use fixed_tests with provided files / tests[].files fixtures."
+      ]
+    },
+    "writing-text-files": {
+      "notes": [
+        "Use fixed_tests with provided files / tests[].files fixtures.",
+        "Check stdout summaries unless output-file assertions already cover the behavior."
+      ]
+    },
+    "working-with-paths": {
+      "notes": [
+        "Use fixed_tests with nested fixture paths such as data/input.txt."
+      ]
+    },
+    "try-except-basics": {
+      "notes": [
+        "Use fixed_tests and add an optional semantic check for try/except structure only if the checker supports it."
+      ]
+    },
+    "validating-and-cleaning-input": {
+      "notes": [
+        "Prefer fixed_tests for deterministic cleaning behavior."
+      ]
+    },
+    "simple-csv-processing": {
+      "notes": [
+        "Use fixed_tests with provided CSV fixture files."
+      ]
+    }
+  },
   "modules": [
     {
       "moduleNumber": 5,

@@ -1,6 +1,6 @@
 {
   "subjectSlug": "python--python-data-functions--draft",
-  "generatedAt": "2026-05-24T18:59:43.649Z",
+  "generatedAt": "2026-05-26T20:47:41.816Z",
   "topics": [
     {
       "moduleSlug": "python-5-lists-tuples-and-dictionaries",
@@ -110,12 +110,42 @@
       "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
       "sectionSlug": "python-7-file-io",
       "topicId": "writing-text-files",
-      "status": "failed",
-      "attempts": 3,
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
+      "sectionSlug": "python-7-file-io",
+      "topicId": "working-with-paths",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
+      "sectionSlug": "python-7-exceptions-and-cleaning",
+      "topicId": "try-except-basics",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
+      "sectionSlug": "python-7-exceptions-and-cleaning",
+      "topicId": "validating-and-cleaning-input",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
+      "sectionSlug": "python-7-exceptions-and-cleaning",
+      "topicId": "simple-csv-processing",
+      "status": "success",
+      "attempts": 2,
       "retryCodes": [
-        "TOPIC_GENERATION_OUTPUT_INVALID",
-        "INVALID_TOPIC_AUTHORING_DRAFT",
-        "INVALID_TOPIC_AUTHORING_DRAFT"
+        "CRITIQUE_VALIDATION_FAILED"
       ]
     }
   ]

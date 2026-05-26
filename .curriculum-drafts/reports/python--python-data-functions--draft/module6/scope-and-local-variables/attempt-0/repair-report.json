@@ -1,0 +1,54 @@
+{
+  "topicId": "scope-and-local-variables",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch1.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_HARDCODED_FUNCTION_EXAMPLE_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz9",
+      "message": "Replaced hardcoded example usage in a function exercise with a stdin/stdout wrapper so published tests validate the intended behavior."
+    },
+    {
+      "code": "PYTHON_HARDCODED_FUNCTION_EXAMPLE_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz10",
+      "message": "Replaced hardcoded example usage in a function exercise with a stdin/stdout wrapper so published tests validate the intended behavior."
+    },
+    {
+      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz11",
+      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz11",
+      "message": "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "recipe",
+      "severity": "low",
+      "field": "quiz11",
+      "message": "The repair step could not derive a second distinct stdin/stdout case from the current Python prompt and solution. Replace this with a non-code exercise or rewrite it as a stdin-based task with variable behavior."
+    }
+  ]
+}

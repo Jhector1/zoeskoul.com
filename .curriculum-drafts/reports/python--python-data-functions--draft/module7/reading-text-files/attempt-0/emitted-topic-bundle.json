@@ -34,6 +34,13 @@
       "height": 420
     },
     {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.sketch2.title",
+      "sketchId": "sketch3",
+      "height": 420
+    },
+    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.quiz.title",
@@ -59,27 +66,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz5",
-            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.projectSteps.quiz5.title",
-            "exerciseKey": "quiz5",
+            "id": "quiz9",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.projectSteps.quiz9.title",
+            "exerciseKey": "quiz9",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz6",
-            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.projectSteps.quiz6.title",
-            "exerciseKey": "quiz6",
+            "id": "quiz10",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.projectSteps.quiz10.title",
+            "exerciseKey": "quiz10",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz7",
-            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.projectSteps.quiz7.title",
-            "exerciseKey": "quiz7",
+            "id": "quiz11",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.projectSteps.quiz11.title",
+            "exerciseKey": "quiz11",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -101,6 +108,12 @@
       "archetype": "paragraph",
       "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch2.title",
       "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch2.bodyMarkdown"
+    },
+    {
+      "id": "sketch3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch3.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch3.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -118,7 +131,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
@@ -171,217 +184,27 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "f"
+        "value": "r"
       }
     },
     {
       "id": "quiz5",
-      "kind": "code_input",
-      "purpose": "project",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz5",
-      "language": "python",
-      "starterCode": "# Read and print the content of 'data.txt'\nwith open('data.txt', 'r') as file:\n    # Your code here",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "# Read and print the content of 'data.txt'\nwith open('data.txt', 'r') as file:\n    # Your code here",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "data.txt",
-          "content": "Hello, World!\nThis is a test file."
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "# Read and print the content of 'data.txt'\nwith open('data.txt', 'r') as file:\n    # Your code here",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "# Read and print the content of 'data.txt'\nwith open('data.txt', 'r') as file:\n    # Your code here",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "files": [
-          {
-            "path": "data.txt",
-            "content": "Hello, World!\nThis is a test file."
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdout": "Hello, World!\nThis is a test file.\n",
-            "match": "exact",
-            "files": [
-              {
-                "path": "data.txt",
-                "content": "Hello, World!\nThis is a test file.",
-                "readOnly": true
-              }
-            ]
-          },
-          {
-            "stdout": "Python is fun!\nLet's learn more.\n",
-            "match": "exact",
-            "files": [
-              {
-                "path": "data.txt",
-                "content": "Python is fun!\nLet's learn more.",
-                "readOnly": true
-              }
-            ]
-          }
-        ],
-        "solutionCode": "with open('data.txt', 'r') as file:\n    content = file.read()\n    print(content)"
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "close"
       }
     },
     {
       "id": "quiz6",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz6",
-      "language": "python",
-      "starterCode": "# Count the number of lines in 'data.txt'\nwith open('data.txt', 'r') as file:\n    # Your code here",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "# Count the number of lines in 'data.txt'\nwith open('data.txt', 'r') as file:\n    # Your code here",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "# Count the number of lines in 'data.txt'\nwith open('data.txt', 'r') as file:\n    # Your code here",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "# Count the number of lines in 'data.txt'\nwith open('data.txt', 'r') as file:\n    # Your code here",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdout": "3\n",
-            "match": "exact"
-          },
-          {
-            "stdout": "5\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "with open('data.txt', 'r') as file:\n    line_count = sum(1 for line in file)\n    print(line_count)"
-      }
-    },
-    {
-      "id": "quiz7",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz7",
-      "language": "python",
-      "starterCode": "# Check if 'Python' is in 'data.txt'\nwith open('data.txt', 'r') as file:\n    # Your code here",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "# Check if 'Python' is in 'data.txt'\nwith open('data.txt', 'r') as file:\n    # Your code here",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "# Check if 'Python' is in 'data.txt'\nwith open('data.txt', 'r') as file:\n    # Your code here",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "# Check if 'Python' is in 'data.txt'\nwith open('data.txt', 'r') as file:\n    # Your code here",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdout": "Found\n",
-            "match": "exact"
-          },
-          {
-            "stdout": "Not Found\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "with open('data.txt', 'r') as file:\n    content = file.read()\n    if 'Python' in content:\n        print('Found')\n    else:\n        print('Not Found')"
-      }
-    },
-    {
-      "id": "quiz8",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz8",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
-      }
-    },
-    {
-      "id": "quiz9",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz9",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "quiz10",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz10",
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz6",
       "tokenIds": [
         "t1",
         "t2",
@@ -397,15 +220,232 @@
       }
     },
     {
-      "id": "quiz11",
-      "kind": "fill_blank_choice",
+      "id": "quiz7",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz11",
-      "choiceCount": 4,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz7",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "f"
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz8",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz9",
+      "language": "python",
+      "starterCode": "# Read and print the content of 'example.txt'",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read and print the content of 'example.txt'",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read and print the content of 'example.txt'",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read and print the content of 'example.txt'",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "example.txt",
+            "content": "Hello, World!\nThis is a test file.",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "Hello, World!\nThis is a test file.",
+            "match": "exact",
+            "files": [
+              {
+                "path": "example.txt",
+                "content": "Hello, World!\nThis is a test file.",
+                "readOnly": true
+              }
+            ]
+          },
+          {
+            "stdout": "Python is fun!\nLet's learn more about it.",
+            "match": "exact",
+            "files": [
+              {
+                "path": "example.txt",
+                "content": "Python is fun!\nLet's learn more about it.",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "solutionCode": "with open('example.txt', 'r') as file:\n    content = file.read()\n    print(content)"
+      }
+    },
+    {
+      "id": "quiz10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz10",
+      "language": "python",
+      "starterCode": "# Count the number of lines in 'data.txt'",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Count the number of lines in 'data.txt'",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Count the number of lines in 'data.txt'",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Count the number of lines in 'data.txt'",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "data.txt",
+            "content": "Line 1\nLine 2\nLine 3\n",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "3\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "data.txt",
+                "content": "Line 1\nLine 2\nLine 3\n",
+                "readOnly": true
+              }
+            ]
+          },
+          {
+            "stdout": "5\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "data.txt",
+                "content": "First line\nSecond line\nThird line\nFourth line\nFifth line\n",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "solutionCode": "with open('data.txt', 'r') as file:\n    line_count = sum(1 for line in file)\nprint(line_count)"
+      }
+    },
+    {
+      "id": "quiz11",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz11",
+      "language": "python",
+      "starterCode": "# Attempt to read 'missing.txt' and handle errors",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Attempt to read 'missing.txt' and handle errors",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Attempt to read 'missing.txt' and handle errors",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Attempt to read 'missing.txt' and handle errors",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "missing.txt",
+            "content": "",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "13",
+            "match": "includes"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "21",
+            "match": "includes"
+          }
+        ],
+        "solutionCode": "try:\n    with open('missing.txt', 'r') as file:\n        content = file.read()\n        print(content)\nexcept FileNotFoundError:\n    print(\"File not found.\")"
       }
     }
   ]

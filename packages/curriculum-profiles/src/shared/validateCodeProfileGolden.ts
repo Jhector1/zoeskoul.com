@@ -208,23 +208,10 @@ export async function validateCodeProfileGolden(args: {
 
             continue;
         }
-
         const run = await validateCodeAgainstTests({
             language: exercise.language,
             solutionCode,
-            tests:
-                exercise.recipe.type === "fixed_tests"
-                    ? exercise.recipe.tests.map((test) => ({
-                        stdin: test.stdin,
-                        stdout: test.stdout ?? "",
-                        match: test.match ?? "exact",
-                        files: normalizeTestFiles(test.files),
-                    }))
-                    : expected.tests.map((test) => ({
-                        stdin: test.stdin,
-                        stdout: test.stdout ?? "",
-                        match: test.match ?? "exact",
-                    })),
+            tests: expected.tests,
             files: collectExerciseWorkspaceFiles(exercise),
             limits: { timeoutMs: 4000 },
         });

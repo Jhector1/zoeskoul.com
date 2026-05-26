@@ -1,27 +1,5 @@
 {
   "topicId": "writing-text-files",
-  "ok": false,
-  "issues": [
-    {
-      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
-      "category": "pedagogy",
-      "severity": "error",
-      "exerciseId": "exercise5",
-      "message": "Exercise \"exercise5\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
-    },
-    {
-      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
-      "category": "pedagogy",
-      "severity": "error",
-      "exerciseId": "exercise10",
-      "message": "Exercise \"exercise10\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
-    },
-    {
-      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
-      "category": "pedagogy",
-      "severity": "error",
-      "exerciseId": "exercise11",
-      "message": "Exercise \"exercise11\" is invalid as fixed_tests code_input because it does not read stdin and cannot support 2 meaningful fixed tests. Replace it with a non-code exercise or regenerate it as stdin-based code_input."
-    }
-  ]
+  "ok": true,
+  "issues": []
 }

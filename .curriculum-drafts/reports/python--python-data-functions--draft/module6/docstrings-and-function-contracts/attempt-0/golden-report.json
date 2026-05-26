@@ -6,15 +6,15 @@
       "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
       "category": "tests",
       "severity": "error",
-      "exerciseId": "quiz6",
-      "message": "Exercise \"quiz6\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+      "exerciseId": "quiz9",
+      "message": "Exercise \"quiz9\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
     },
     {
       "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
       "category": "tests",
       "severity": "error",
-      "exerciseId": "quiz7",
-      "message": "Exercise \"quiz7\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+      "exerciseId": "quiz11",
+      "message": "Exercise \"quiz11\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
     }
   ]
 }

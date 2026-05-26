@@ -1,4 +1,5 @@
 import {
+    normalizeWorkspaceExpectations,
     normalizeWorkspacePath,
     ProgrammingCodeInputFileDraft,
     ProgrammingCodeInputStarterFileDraft,
@@ -661,6 +662,13 @@ function normalizeCodeInput(
     const starterFiles = normalizeStarterFileDrafts(item.starterFiles);
     const files = normalizeFileDrafts(item.files);
     const entryFilePath = normalizeOptionalWorkspacePath(item.entryFilePath, "entryFilePath");
+    const workspaceExpectations =
+        typeof item.workspaceExpectations === "undefined"
+            ? undefined
+            : normalizeWorkspaceExpectations(
+                item.workspaceExpectations,
+                "workspaceExpectations",
+            );
     return {
         id: String(item.id ?? "").trim(),
         kind: "code_input",
@@ -669,6 +677,7 @@ function normalizeCodeInput(
         starterCode,
         ...(entryFilePath ? { entryFilePath } : {}),
         ...(starterFiles?.length ? { starterFiles } : {}),
+        ...(workspaceExpectations ? { workspaceExpectations } : {}),
         solutionCode:
             typeof item.solutionCode === "string" ? item.solutionCode : "",
         ...(tests?.length ? { tests } : {}),

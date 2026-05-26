@@ -21,13 +21,13 @@
     "thinFixedTestCount": 0,
     "blockers": 0,
     "errors": 0,
-    "warnings": 1,
+    "warnings": 4,
     "infos": 0
   },
   "severityCounts": {
     "blocker": 0,
     "error": 0,
-    "warning": 1,
+    "warning": 4,
     "info": 0
   },
   "issues": [
@@ -39,6 +39,36 @@
       "moduleId": "python-5-lists-tuples-and-dictionaries",
       "topicId": "dictionary-basics",
       "message": "Topic \"dictionary-basics\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-dictionaries/dictionary-basics",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "dictionary-basics",
+      "exerciseId": "quiz5",
+      "message": "Exercise \"quiz5\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-dictionaries/dictionary-basics",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "dictionary-basics",
+      "exerciseId": "quiz10",
+      "message": "Exercise \"quiz10\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-dictionaries/dictionary-basics",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "dictionary-basics",
+      "exerciseId": "quiz11",
+      "message": "Exercise \"quiz11\" starterCode appears to contain most of the final solution structure."
     }
   ]
 }

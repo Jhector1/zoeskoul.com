@@ -1,0 +1,223 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "validating-and-cleaning-input": {
+          "label": "Validating and Cleaning Input",
+          "summary": "Learn how to clean text, check for missing values, and reject invalid rows in data processing.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Data Cleaning"
+            },
+            "sketch1": {
+              "title": "Checking for Missing Values"
+            },
+            "sketch2": {
+              "title": "Rejecting Invalid Rows"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Data Cleaning Project"
+            }
+          },
+          "projectSteps": {
+            "quiz9": {
+              "title": "Cleaning User Input"
+            },
+            "quiz10": {
+              "title": "Validating Numeric Input"
+            },
+            "quiz11": {
+              "title": "Rejecting Invalid Rows"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Purpose of Data Cleaning",
+              "prompt": "What is the primary purpose of data cleaning?",
+              "hint": "Think about the goal of improving data quality.",
+              "help": {
+                "concept": "Data cleaning improves the quality of data by correcting errors and inconsistencies.",
+                "hint_1": "Data cleaning ensures data is accurate and usable.",
+                "hint_2": "The goal is to make data suitable for analysis."
+              },
+              "options": {
+                "a": "To improve data quality",
+                "b": "To increase data size",
+                "c": "To make data more complex",
+                "d": "To delete all data"
+              }
+            },
+            "quiz2": {
+              "title": "Handling Missing Values",
+              "prompt": "Which method is commonly used to handle missing values in a dataset?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Filling with a default value",
+                "b": "Ignoring them",
+                "c": "Duplicating them",
+                "d": "Converting them to strings"
+              }
+            },
+            "quiz3": {
+              "title": "Common Data Cleaning Tasks",
+              "prompt": "Which of the following are common tasks in data cleaning? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Removing duplicates",
+                "b": "Handling missing values",
+                "c": "Adding random data",
+                "d": "Correcting errors"
+              }
+            },
+            "quiz4": {
+              "title": "Identifying Invalid Data",
+              "prompt": "Which of the following criteria can be used to identify invalid data? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Missing values",
+                "b": "Correct data types",
+                "c": "Out-of-range values",
+                "d": "Proper formatting"
+              }
+            },
+            "quiz5": {
+              "title": "Steps in Data Cleaning",
+              "prompt": "Arrange the steps in the correct order for cleaning data.",
+              "hint": "Start with identifying issues and end with verifying corrections.",
+              "help": {
+                "concept": "Data cleaning involves identifying issues, correcting them, and verifying the results.",
+                "hint_1": "Begin by identifying what needs cleaning.",
+                "hint_2": "Finish by ensuring the data is now correct."
+              },
+              "tokens": {
+                "t1": "Identify issues",
+                "t2": "Correct errors",
+                "t3": "Verify corrections"
+              }
+            },
+            "quiz6": {
+              "title": "Data Cleaning Process",
+              "prompt": "Put the following data cleaning tasks in order.",
+              "hint": "Think about the logical sequence of cleaning tasks.",
+              "help": {
+                "concept": "Data cleaning tasks should follow a logical sequence from identifying to correcting issues.",
+                "hint_1": "Start with identifying problems.",
+                "hint_2": "End with ensuring data quality."
+              },
+              "tokens": {
+                "t1": "Identify missing values",
+                "t2": "Remove duplicates",
+                "t3": "Correct invalid entries"
+              }
+            },
+            "quiz7": {
+              "title": "Handling Missing Data",
+              "prompt": "In data cleaning, missing values are often replaced with a [blank1].",
+              "hint": "Consider a common placeholder for missing data.",
+              "help": {
+                "concept": "A common approach is to replace missing values with a default or placeholder value.",
+                "hint_1": "Think about a value that represents missing data.",
+                "hint_2": "A placeholder is often used to fill gaps."
+              },
+              "template": "In data cleaning, missing values are often replaced with a [blank1].",
+              "choices": [
+                "default value",
+                "random number",
+                "string",
+                "duplicate"
+              ]
+            },
+            "quiz8": {
+              "title": "Data Validation",
+              "prompt": "Data validation ensures that data meets [blank1] before processing.",
+              "hint": "Think about the the missing term data must meet.",
+              "help": {
+                "concept": "Data validation checks that data meets specific the missing term or standards.",
+                "hint_1": "Consider what data must satisfy to be valid.",
+                "hint_2": "Validation ensures data is suitable for use."
+              },
+              "template": "Data validation ensures that data meets [blank1] before processing.",
+              "choices": [
+                "criteria",
+                "errors",
+                "randomness",
+                "duplicates"
+              ]
+            },
+            "quiz9": {
+              "title": "Cleaning User Input",
+              "prompt": "Write a Python function `clean_input(data)` that takes a list of strings and returns a new list where all empty strings and `None` values are replaced with 'N/A'. Then read the input value, call the function, and print the returned result.",
+              "hint": "Use list comprehension to iterate and replace values.",
+              "help": {
+                "concept": "List comprehension can be used to iterate over the list and replace specific values.",
+                "hint_1": "Check each element and replace if it's empty or `None`.",
+                "hint_2": "Use a conditional expression within the list comprehension."
+              },
+              "starterCode": "def clean_input(data):\n    # Replace empty strings and None with 'N/A'\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ndata = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(clean_input(data))"
+            },
+            "quiz10": {
+              "title": "Validating Numeric Input",
+              "prompt": "Create a function `validate_numbers(numbers)` that takes a list of numbers and returns a list with only the valid numbers (non-negative). Then read the input value, call the function, and print the returned result.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "def validate_numbers(numbers):\n    # Return only non-negative numbers\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(validate_numbers(numbers))"
+            },
+            "quiz11": {
+              "title": "Rejecting Invalid Rows",
+              "prompt": "Write a function `filter_valid_rows(rows)` that takes a list of dictionaries and returns only those dictionaries where the 'age' key has a value greater than 18. Then read the input value, call the function, and print the returned result.",
+              "hint": "Use list comprehension to filter dictionaries based on a condition.",
+              "help": {
+                "concept": "Filtering dictionaries can be done by checking conditions on their values.",
+                "hint_1": "Check the 'age' value in each dictionary.",
+                "hint_2": "Include dictionaries where 'age' is greater than 18."
+              },
+              "starterCode": "def filter_valid_rows(rows):\n    # Return only rows with 'age' > 18\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nrows = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(filter_valid_rows(rows))"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "validating-and-cleaning-input": {
+          "sketch1": {
+            "title": "Introduction to Data Cleaning",
+            "bodyMarkdown": "Data cleaning is a crucial step in data processing. It involves identifying and correcting errors or inconsistencies in data to improve its quality. Common tasks include removing duplicates, handling missing values, and correcting invalid entries. \n\n**Example:**\nSuppose you have a list of user inputs where some entries are missing or incorrect. You can use Python to clean this data by checking for missing values and replacing them with a default value or removing them entirely.\n\n```python\n# Example of handling missing values\nuser_inputs = ['Alice', '', 'Bob', 'Charlie', None]\ncleaned_inputs = [name if name else 'Unknown' for name in user_inputs]\nprint(cleaned_inputs)  # Output: ['Alice', 'Unknown', 'Bob', 'Charlie', 'Unknown']\n```\n\n**Try it yourself:** Modify the code to replace 'Unknown' with 'N/A'.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch2": {
+            "title": "Checking for Missing Values",
+            "bodyMarkdown": "Missing values can lead to inaccurate analysis. In Python, you can check for missing values using conditions and handle them appropriately.\n\n**Example:**\n```python\n# Example of checking for missing values\nvalues = [10, None, 20, '', 30]\ncleaned_values = [v if v is not None and v != '' else 0 for v in values]\nprint(cleaned_values)  # Output: [10, 0, 20, 0, 30]\n```\n\n**Your turn:** Change the code to replace missing values with the average of the list instead of 0.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch3": {
+            "title": "Rejecting Invalid Rows",
+            "bodyMarkdown": "When processing data, it's important to identify and reject rows that do not meet certain criteria. This ensures that only valid data is used in analysis.\n\n**Example:**\n```python\n# Example of rejecting invalid rows\nrows = [{'name': 'Alice', 'age': 25}, {'name': 'Bob', 'age': None}, {'name': 'Charlie', 'age': 30}]\nvalid_rows = [row for row in rows if row['age'] is not None]\nprint(valid_rows)  # Output: [{'name': 'Alice', 'age': 25}, {'name': 'Charlie', 'age': 30}]\n```\n\n**Try this:** Modify the code to reject rows where the age is less than 18.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}
