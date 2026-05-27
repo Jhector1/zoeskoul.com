@@ -1,5 +1,9 @@
 // apps/runner/src/services/sessions/sessionStore.ts
-import type { RunEvent, RunEventInput, RunSessionState } from "@zoeskoul/code-contracts";
+import type {
+    RunEvent,
+    RunEventInput,
+    RunSessionState,
+} from "@zoeskoul/code-contracts";
 
 export type NodeJSStream = NodeJS.ReadWriteStream;
 
@@ -13,6 +17,8 @@ type SessionRecord = {
     events: RunEvent[];
     attachStream?: NodeJSStream | null;
     lastActivityAt: number;
+    finalizedAt?: number | null;
+    expiresAt?: number | null;
 };
 
 type SessionListener = (event: RunEvent) => void;
@@ -22,6 +28,15 @@ const listeners = new Map<string, Set<SessionListener>>();
 
 function nowIso() {
     return new Date().toISOString();
+}
+
+function isTerminalState(state: string) {
+    return (
+        state === "completed" ||
+        state === "failed" ||
+        state === "canceled" ||
+        state === "timed_out"
+    );
 }
 
 export function createSession(args: {
@@ -40,6 +55,8 @@ export function createSession(args: {
         events: [],
         attachStream: null,
         lastActivityAt: Date.now(),
+        finalizedAt: null,
+        expiresAt: null,
     };
 
     sessions.set(session.id, session);
@@ -48,6 +65,29 @@ export function createSession(args: {
 
 export function getSession(id: string) {
     return sessions.get(id) ?? null;
+}
+
+export function deleteSession(id: string) {
+    sessions.delete(id);
+    listeners.delete(id);
+}
+
+export function markSessionFinalized(
+    id: string,
+    args?: {
+        expiresAt?: number | null;
+    },
+) {
+    const session = sessions.get(id);
+    if (!session) return null;
+
+    const now = Date.now();
+    session.finalizedAt = session.finalizedAt ?? now;
+    session.expiresAt = args?.expiresAt ?? session.expiresAt ?? null;
+    session.lastActivityAt = now;
+    sessions.set(id, session);
+
+    return session;
 }
 
 export function setSessionStream(id: string, stream: NodeJSStream) {
@@ -70,6 +110,7 @@ export function touchSession(id: string) {
 
 export function subscribeSession(id: string, listener: SessionListener) {
     let set = listeners.get(id);
+
     if (!set) {
         set = new Set();
         listeners.set(id, set);
@@ -80,7 +121,9 @@ export function subscribeSession(id: string, listener: SessionListener) {
     return () => {
         const current = listeners.get(id);
         if (!current) return;
+
         current.delete(listener);
+
         if (current.size === 0) {
             listeners.delete(id);
         }
@@ -99,9 +142,14 @@ export function pushEvent(id: string, event: RunEventInput) {
 
     if (event.type === "status") {
         session.state = event.state;
+
+        if (isTerminalState(event.state)) {
+            session.finalizedAt = session.finalizedAt ?? Date.now();
+        }
     }
 
     session.events.push(full);
+
     if (session.events.length > 2000) {
         session.events.splice(0, session.events.length - 2000);
     }
@@ -110,11 +158,14 @@ export function pushEvent(id: string, event: RunEventInput) {
     sessions.set(id, session);
 
     const subs = listeners.get(id);
+
     if (subs) {
         for (const fn of subs) {
             try {
                 fn(full);
-            } catch {}
+            } catch {
+                // ignore listener errors
+            }
         }
     }
 

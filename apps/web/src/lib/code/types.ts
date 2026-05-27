@@ -12,7 +12,16 @@ export type FileEntry = {
     path: string;
     content: string;
 };
-
+export type WorkspaceSyncEntry =
+    | {
+    kind?: "file";
+    path: string;
+    content: string;
+}
+    | {
+    kind: "directory";
+    path: string;
+};
 export type RunLimits = {
     cpu_time_limit?: number;
     cpu_extra_time?: number;
@@ -37,14 +46,19 @@ export type CodeRunReq =
     code: string;
     stdin?: string;
     limits?: RunLimits;
+    captureWorkspace?: boolean;
 }
     | {
     kind?: "code";
     language: InteractiveLanguage;
+    code?: string;
     entry: string;
-    files: Array<{ path: string; content: string }> | Record<string, string>;
+    files:
+        | Array<{ path: string; content: string }>
+        | Record<string, string>;
     stdin?: string;
     limits?: RunLimits;
+    captureWorkspace?: boolean;
 };
 
 export type SqlRunReq = {
@@ -89,6 +103,7 @@ export type CodeRunResult = {
     time?: string | null;
     memory?: number | null;
     error?: string;
+    workspaceFiles?: WorkspaceSyncEntry[];
 };
 
 export type SqlRunSuccess = {

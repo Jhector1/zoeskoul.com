@@ -9,9 +9,11 @@ const runtimeDefaults = {
     language: "python",
 } as const;
 
-const serviceDefaults = {
+type DevRunnerBackend = "auto" | "judge0" | "pty";
+
+const defaultServiceDefaults = {
     preset: "runner",
-    runnerBackend: "judge0",
+    runnerBackend: "judge0" as DevRunnerBackend,
     requires: {
         files: true,
         multiFile: true,
@@ -20,6 +22,26 @@ const serviceDefaults = {
         cloudProjects: false,
     },
 } as const;
+
+function resolveDevRunnerBackend(
+    searchParams: Record<string, string | string[] | undefined>,
+): DevRunnerBackend {
+    const raw = searchParams.runnerBackend ?? searchParams.backend;
+    const value = Array.isArray(raw) ? raw[0] : raw;
+
+    if (value === "pty" || value === "judge0" || value === "auto") {
+        return value;
+    }
+
+    return "judge0";
+}
+
+function serviceDefaultsForBackend(backend: DevRunnerBackend) {
+    return {
+        ...defaultServiceDefaults,
+        runnerBackend: backend,
+    };
+}
 
 const exerciseAStarterFiles = {
     "main.py": "name = 'ZoeSkoul learner'\nprint('Hello, ' + name)\n",
@@ -301,7 +323,34 @@ const reviewClonePracticeQuizCard = {
         runtime: runtimeDefaults,
     },
 } satisfies ReviewCard;
+function cloneReviewModuleWithServiceDefaults(
+    mod: ReviewModule,
+    serviceDefaults: ReturnType<typeof serviceDefaultsForBackend>,
+): ReviewModule {
+    const topics = (mod.topics ?? []).map((topic) => {
+        if (topic.id !== "e2e-review-topic") return topic;
 
+        return {
+            ...topic,
+            meta: {
+                ...(topic.meta ?? {}),
+                serviceDefaults,
+            },
+        };
+    });
+
+    const topicById = new Map(topics.map((topic) => [topic.id, topic]));
+
+    return {
+        ...mod,
+        serviceDefaults,
+        topics,
+        sections: (mod.sections ?? []).map((section) => ({
+            ...section,
+            topics: section.topics.map((topic) => topicById.get(topic.id) ?? topic),
+        })),
+    };
+}
 const reviewCloneTopic = {
     id: "e2e-review-topic",
     label: "E2E Review Topic",
@@ -310,7 +359,7 @@ const reviewCloneTopic = {
         "A deterministic topic used to test the real review module page, route target sync, tools rail, progress save, and workspace restore.",
     meta: {
         runtimeDefaults,
-        serviceDefaults,
+        serviceDefaults: defaultServiceDefaults,
         rawManifest: {
             exercises: [
                 exerciseADefinition,
@@ -419,7 +468,7 @@ const reviewCloneModule: ReviewModule = {
         "Dev-only clone that uses the real ReviewModulePageClient and review runtime path.",
     startPracticeSectionSlug: "e2e-section",
     runtimeDefaults,
-    serviceDefaults,
+    serviceDefaults: defaultServiceDefaults,
     topics: [reviewCloneTopic],
     sections: [reviewCloneSection],
     contentVersion: null,
@@ -474,10 +523,21 @@ export default async function Page({
         resolvedParams.subjectSlug === "sql" ||
         resolvedParams.moduleSlug === "e2e-sql-review-clone";
 
+    const selectedServiceDefaults = serviceDefaultsForBackend(
+        resolveDevRunnerBackend(resolvedSearchParams),
+    );
+
+    const selectedModule = isSqlClone
+        ? sqlReviewCloneModule
+        : cloneReviewModuleWithServiceDefaults(
+            reviewCloneModule,
+            selectedServiceDefaults,
+        );
+
     return (
         <ReviewModulePageClient
             canUnlockAll={!progressiveLockMode}
-            mod={isSqlClone ? sqlReviewCloneModule : reviewCloneModule}
+            mod={selectedModule}
         />
     );
 }

@@ -34,7 +34,7 @@ type Props = {
         meta: { dirtyUiPaths: Set<string> },
     ) => void | Promise<void>;
     onChangeLanguage: (language: any) => void;
-    onChangeCode: (code: string) => void;
+    onChangeFileCode: (fileId: string, code: string) => void;
     onChangeSqlDialect: (dialect: any) => void;
     onBeforeRun?: () => void | Promise<void>;
     onRunResult?: (args: { result: any; runArgs: any }) => void;
@@ -93,7 +93,7 @@ export default function IdeEditorPane({
                                           terminalHistoryScopeKey,
                                           onApplyTerminalSnapshotFiles,
                                           onChangeLanguage,
-                                          onChangeCode,
+                                          onChangeFileCode,
                                           onChangeSqlDialect,
                                           onBeforeRun,
                                           onRunResult,
@@ -137,7 +137,18 @@ export default function IdeEditorPane({
         () => resolveEditorLanguage(language, activeFile?.name),
         [language, activeFile?.name],
     );
+    const handleBoundCodeChange = React.useCallback(
+        (nextCode: string) => {
+            const fileId = String(activeFile?.id ?? activeFileId ?? "");
 
+            if (!fileId) {
+                return;
+            }
+
+            onChangeFileCode(fileId, nextCode);
+        },
+        [activeFile?.id, activeFileId, onChangeFileCode],
+    );
     return (
         <div className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden">
             {services.editor.showTabs ? (
@@ -163,7 +174,7 @@ export default function IdeEditorPane({
                             editorLanguage={editorLanguage}
                             onChangeLanguage={onChangeLanguage}
                             code={activeFile.content}
-                            onChangeCode={onChangeCode}
+                            onChangeCode={handleBoundCodeChange}
                             sqlDialect={sqlDialect}
                             onChangeSqlDialect={onChangeSqlDialect}
                             sqlDatasetId={sqlDatasetId}
@@ -203,18 +214,22 @@ export default function IdeEditorPane({
                             isAuthenticated={isAuthenticated}
                             webPreviewEntries={workspaceEntries}
                             workspaceTerminal={
-                                services.runner.enableWorkspaceTerminal
+                                !isSql && !isWeb
                                     ? {
-                                          enabled: !isSql && !isWeb,
-                                          projectId: projectId ?? undefined,
-                                          cwd: "/workspace",
-                                          initialFiles: workspaceEntries,
-                                          getWorkspaceFiles: () => workspaceEntries,
-                                          onTerminalSnapshotFiles: onApplyTerminalSnapshotFiles,
-                                          lazy: true,
-                                          title: "Terminal",
-                                          historyScopeKey: terminalHistoryScopeKey,
-                                      }
+                                        // Important:
+                                        // `enabled` controls whether the PTY terminal tab is available.
+                                        // The workspace sync callbacks are still needed for Judge0 so
+                                        // returned workspaceFiles can update the Explorer.
+                                        enabled: services.runner.enableWorkspaceTerminal,
+                                        projectId: projectId ?? undefined,
+                                        cwd: "/workspace",
+                                        initialFiles: workspaceEntries,
+                                        getWorkspaceFiles: () => workspaceEntries,
+                                        onTerminalSnapshotFiles: onApplyTerminalSnapshotFiles,
+                                        lazy: true,
+                                        title: "Terminal",
+                                        historyScopeKey: terminalHistoryScopeKey,
+                                    }
                                     : undefined
                             }
 

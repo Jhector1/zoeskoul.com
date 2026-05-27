@@ -21,7 +21,11 @@ import {
 } from "../sessions/timeoutManager.js";
 import { resolveTimeoutPolicy } from "../sessions/timeoutPolicy.js";
 import { createWorkspace } from "../workspace/createWorkspace.js";
-import { cleanupWorkspace } from "../workspace/cleanupWorkspace.js";
+import {
+    cleanupWorkspaceNow,
+    scheduleWorkspaceCleanup,
+} from "../workspace/cleanupWorkspace.js";
+
 import { getExecutionPlan } from "../execution/executionPlan.js";
 import { docker } from "./dockerClient.js";
 
@@ -323,18 +327,24 @@ export async function startDockerSession(
                     });
                 }
 
-                await cleanupWorkspace(workspaceDir);
+                /**
+                 * Do not delete the workspace immediately.
+                 * The browser needs time to call /snapshot-workspace and merge
+                 * created/deleted files into the Explorer.
+                 */
+                scheduleWorkspaceCleanup(sessionId, workspaceDir);
             })
             .catch(async (err: Error) => {
                 clearAllTimeouts(sessionId);
 
                 const session = getSession(sessionId);
+
                 if (session && !isTerminalState(session.state)) {
                     pushEvent(sessionId, { type: "error", message: err.message });
                     pushEvent(sessionId, { type: "status", state: "failed" });
                 }
 
-                await cleanupWorkspace(workspaceDir);
+                scheduleWorkspaceCleanup(sessionId, workspaceDir);
             });
 
         return {
@@ -349,8 +359,7 @@ export async function startDockerSession(
             message: e?.message ?? "Failed to start container.",
         });
         pushEvent(sessionId, { type: "status", state: "failed" });
-        await cleanupWorkspace(workspaceDir);
-
+        await cleanupWorkspaceNow(workspaceDir);
         return {
             ok: false,
             error: e?.message ?? "Failed.",

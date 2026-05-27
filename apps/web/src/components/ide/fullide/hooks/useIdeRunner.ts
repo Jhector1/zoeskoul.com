@@ -43,6 +43,7 @@ type IdeRunArgs =
     language: InteractiveLanguage;
     code?: string;
     stdin?: string;
+    captureWorkspace?: boolean;
     signal?: AbortSignal;
 };
 
@@ -77,12 +78,14 @@ type ProjectCodeReq =
     kind: "code";
     language: InteractiveLanguage;
     code: string;
+    captureWorkspace?: boolean;
 }
     | {
     kind: "code";
     language: InteractiveLanguage;
     entry: string;
     files: ProjectFile[];
+    captureWorkspace?: boolean;
 };
 
 export function buildProjectRunRequest(args: {
@@ -254,10 +257,11 @@ export function useIdeRunner({
                 );
             }
 
-            return  runViaApi(
+            return runViaApi(
                 {
                     ...req,
                     stdin: args.stdin ?? "",
+                    captureWorkspace: args.captureWorkspace === true,
                 } as any,
                 args.signal,
             ) as Promise<RunResult>;

@@ -12,6 +12,16 @@ const envSchema = z.object({
     RUN_WALL_TIMEOUT_MS: z.coerce.number().int().positive().default(15000),
     RUN_IDLE_TIMEOUT_MS: z.coerce.number().int().positive().default(20000),
 
+    /**
+     * How long a completed/canceled run workspace stays available
+     * for snapshot after process exit.
+     */
+    RUNNER_WORKSPACE_TTL_MS: z.coerce
+        .number()
+        .int()
+        .positive()
+        .default(10 * 60 * 1000),
+
     RUNNER_SHARED_SECRET: z.string().min(1),
 
     RUNNER_EXEC_UID: z.coerce.number().int().nonnegative().default(1000),
@@ -37,6 +47,7 @@ export const env = {
 
     wallTimeoutMsDefault: parsed.RUN_WALL_TIMEOUT_MS,
     idleTimeoutMsDefault: parsed.RUN_IDLE_TIMEOUT_MS,
+    workspaceTtlMs: parsed.RUNNER_WORKSPACE_TTL_MS,
 
     runnerSharedSecret: parsed.RUNNER_SHARED_SECRET,
 

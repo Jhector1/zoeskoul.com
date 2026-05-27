@@ -203,7 +203,7 @@
         "language": "python",
         "supportsTerminal": false,
         "supportsMultiFile": true,
-        "supportsFileSystem": true,
+        "supportsFileSystem": false,
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },

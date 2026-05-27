@@ -94,13 +94,15 @@ function extForLang(lang: string) {
 }
 
 function sanitizePathPart(x: string) {
-    return String(x ?? "")
-        .trim()
-        .replace(/\\/g, "/")
-        .replace(/^\//, "")
-        .replace(/\.\./g, "")
-        .replace(/[^a-zA-Z0-9._/-]/g, "-")
-        .replace(/\/+/g, "/") || "scratch";
+    return (
+        String(x ?? "")
+            .trim()
+            .replace(/\\/g, "/")
+            .replace(/^\//, "")
+            .replace(/\.\./g, "")
+            .replace(/[^a-zA-Z0-9._/-]/g, "-")
+            .replace(/\/+/g, "/") || "scratch"
+    );
 }
 
 function buildModelPath(args: {
@@ -109,12 +111,10 @@ function buildModelPath(args: {
     instanceKey: string;
     lang: string;
 }) {
-    /**
-     * Never use a random instance key for review/practice editors if a modelKey exists.
-     * Random paths caused remounts to reload starter code like print("Hello Python!").
-     */
     const modelPart = sanitizePathPart(args.modelKey || args.instanceKey);
-    const scopePart = sanitizePathPart(args.exerciseStateKey || args.modelKey || modelPart);
+    const scopePart = sanitizePathPart(
+        args.exerciseStateKey || args.modelKey || modelPart,
+    );
 
     const base = scopePart ? `${scopePart}/${modelPart}` : modelPart;
     return `inmemory://zoeskoul-runner/${base}.${extForLang(args.lang)}`;
@@ -131,8 +131,11 @@ function isDisposedModel(model: any) {
 function getLiveEditorModel(ed: any) {
     try {
         if (!ed || ed.isDisposed?.() === true) return null;
+
         const model = ed.getModel?.();
+
         if (isDisposedModel(model)) return null;
+
         return model;
     } catch {
         return null;
@@ -142,7 +145,9 @@ function getLiveEditorModel(ed: any) {
 function safeEditorValue(ed: any, fallback = "") {
     try {
         const model = getLiveEditorModel(ed);
+
         if (!model) return fallback;
+
         return String(model.getValue?.() ?? fallback);
     } catch {
         return fallback;
@@ -158,9 +163,11 @@ function readCachedEditorValue(scope: string, path: string): string | null {
 
     try {
         const raw = window.sessionStorage.getItem(editorCacheKey(scope, path));
+
         if (!raw) return null;
 
         const parsed = JSON.parse(raw);
+
         return typeof parsed?.value === "string" ? parsed.value : null;
     } catch {
         return null;
@@ -186,6 +193,7 @@ function writeCachedEditorValue(scope: string, path: string, value: string) {
 function looksLikePythonHelloStarter(value: string) {
     return /^\s*print\((["'])Hello Python!\1\)\s*;?\s*$/.test(value);
 }
+
 function isBenignMonacoCanceledError(reason: unknown) {
     const message = String((reason as any)?.message ?? reason ?? "");
     const name = String((reason as any)?.name ?? "");
@@ -202,6 +210,7 @@ function isBenignMonacoCanceledError(reason: unknown) {
         message === "Canceled"
     );
 }
+
 export default function EditorPane(props: {
     lang: string;
     code: string;
@@ -226,30 +235,17 @@ export default function EditorPane(props: {
         onMount,
         modelKey,
         exerciseStateKey,
-        workspace,
         frame = "card",
         mobileEditMode = "auto",
     } = props;
 
     const reactId = useId();
+
     const instanceKeyRef = useRef(`editor-${reactId.replace(/[:]/g, "")}`);
     const editorRef = useRef<any>(null);
     const editorDisposablesRef = useRef<Array<{ dispose: () => void }>>([]);
+
     const mountedRef = useRef(false);
-
-    const disposeEditorListeners = useCallback(() => {
-        const disposables = editorDisposablesRef.current;
-        editorDisposablesRef.current = [];
-
-        for (const disposable of disposables) {
-            try {
-                disposable.dispose?.();
-            } catch {
-                // Ignore Monaco disposal races during card navigation.
-            }
-        }
-    }, []);
-
     const applyingExternalRef = useRef(false);
     const isEditorFocusedRef = useRef(false);
     const pendingExternalValueRef = useRef<string | null>(null);
@@ -259,10 +255,30 @@ export default function EditorPane(props: {
     const [isNarrowScreen, setIsNarrowScreen] = useState(false);
     const [mobileEditing, setMobileEditing] = useState(false);
     const [needsMobileEditToggle, setNeedsMobileEditToggle] = useState(false);
+
     const needsMobileEditToggleRef = useRef(false);
+
+    const disposeEditorListeners = useCallback(() => {
+        for (const disposable of editorDisposablesRef.current) {
+            try {
+                disposable.dispose();
+            } catch {
+                // Ignore Monaco disposal races.
+            }
+        }
+
+        editorDisposablesRef.current = [];
+    }, []);
+
+    const releaseApplyingExternalSoon = useCallback(() => {
+        window.setTimeout(() => {
+            applyingExternalRef.current = false;
+        }, 0);
+    }, []);
 
     const setNeedsMobileEditToggleIfChanged = useCallback((next: boolean) => {
         if (needsMobileEditToggleRef.current === next) return;
+
         needsMobileEditToggleRef.current = next;
         setNeedsMobileEditToggle(next);
     }, []);
@@ -285,35 +301,9 @@ export default function EditorPane(props: {
         !exerciseStateKey.startsWith("code-runner:");
 
     const cacheScope = useMemo(
-        () =>
-            hasRealExerciseScope
-                ? `${exerciseStateKey}`
-                : "",
+        () => (hasRealExerciseScope ? `${exerciseStateKey}` : ""),
         [hasRealExerciseScope, exerciseStateKey],
     );
-
-    useEffect(() => {
-        mountedRef.current = true;
-
-        const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
-            if (isBenignMonacoCanceledError(event.reason)) {
-                event.preventDefault();
-            }
-        };
-
-        window.addEventListener("unhandledrejection", handleUnhandledRejection);
-
-        return () => {
-            window.removeEventListener("unhandledrejection", handleUnhandledRejection);
-
-            mountedRef.current = false;
-            disposeEditorListeners();
-            editorRef.current = null;
-            pendingExternalValueRef.current = null;
-            isEditorFocusedRef.current = false;
-            applyingExternalRef.current = false;
-        };
-    }, [disposeEditorListeners]);
 
     const path = useMemo(() => {
         const p = buildModelPath({
@@ -341,27 +331,19 @@ export default function EditorPane(props: {
         }
 
         return p;
-    }, [effectiveModelKey, effectiveExerciseStateKey, exerciseStateKey, modelKey, normalizedLang]);
-
-    useEffect(() => {
-        if (typeof window === "undefined" || !window.matchMedia) return;
-
-        const mq = window.matchMedia("(max-width: 767px)");
-        const update = () => setIsNarrowScreen(mq.matches);
-
-        update();
-
-        if (typeof mq.addEventListener === "function") {
-            mq.addEventListener("change", update);
-            return () => mq.removeEventListener("change", update);
-        }
-
-        mq.addListener(update);
-        return () => mq.removeListener(update);
-    }, []);
+    }, [
+        effectiveModelKey,
+        effectiveExerciseStateKey,
+        exerciseStateKey,
+        modelKey,
+        normalizedLang,
+        lang,
+        code,
+    ]);
 
     const refreshMobileEditNeed = useCallback(() => {
         const ed = editorRef.current;
+
         if (!mountedRef.current || !ed || ed.isDisposed?.() === true) {
             setNeedsMobileEditToggleIfChanged(false);
             return;
@@ -381,7 +363,13 @@ export default function EditorPane(props: {
         } catch {
             setNeedsMobileEditToggleIfChanged(false);
         }
-    }, [frame, height, isNarrowScreen, mobileEditMode, setNeedsMobileEditToggleIfChanged]);
+    }, [
+        frame,
+        height,
+        isNarrowScreen,
+        mobileEditMode,
+        setNeedsMobileEditToggleIfChanged,
+    ]);
 
     const applyExternalValue = useCallback(
         (next: string) => {
@@ -389,9 +377,11 @@ export default function EditorPane(props: {
 
             const ed = editorRef.current;
             const model = getLiveEditorModel(ed);
+
             if (!ed || !model) return;
 
             const current = safeEditorValue(ed, "");
+
             if (current === next) {
                 lastLocalValueRef.current = next;
                 pendingExternalValueRef.current = null;
@@ -404,7 +394,9 @@ export default function EditorPane(props: {
             const selection = ed.getSelection?.();
 
             try {
-                if (isDisposedModel(model)) return;
+                if (isDisposedModel(model)) {
+                    return;
+                }
 
                 ed.pushUndoStop?.();
                 ed.executeEdits?.("external-sync", [
@@ -415,6 +407,18 @@ export default function EditorPane(props: {
                     },
                 ]);
                 ed.pushUndoStop?.();
+
+                try {
+                    if (viewState && ed.isDisposed?.() !== true) {
+                        ed.restoreViewState?.(viewState);
+                    }
+
+                    if (selection && ed.isDisposed?.() !== true) {
+                        ed.setSelection?.(selection);
+                    }
+                } catch {
+                    // Ignore view-state restore races after navigation.
+                }
             } catch {
                 try {
                     if (!isDisposedModel(model)) {
@@ -423,28 +427,66 @@ export default function EditorPane(props: {
                 } catch {
                     // Monaco can dispose models during sketch/card navigation.
                 }
+            } finally {
+                lastLocalValueRef.current = next;
+                pendingExternalValueRef.current = null;
+                refreshMobileEditNeed();
+                releaseApplyingExternalSoon();
             }
-
-            try {
-                if (viewState && ed.isDisposed?.() !== true) ed.restoreViewState?.(viewState);
-                if (selection && ed.isDisposed?.() !== true) ed.setSelection?.(selection);
-            } catch {
-                // Ignore view-state restore races after navigation.
-            }
-
-            applyingExternalRef.current = false;
-            lastLocalValueRef.current = next;
-            pendingExternalValueRef.current = null;
-            refreshMobileEditNeed();
         },
-        [refreshMobileEditNeed],
+        [refreshMobileEditNeed, releaseApplyingExternalSoon],
     );
 
     const flushPendingExternal = useCallback(() => {
         const pending = pendingExternalValueRef.current;
+
         if (pending == null) return;
+
         applyExternalValue(pending);
     }, [applyExternalValue]);
+
+    useEffect(() => {
+        mountedRef.current = true;
+
+        const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+            if (isBenignMonacoCanceledError(event.reason)) {
+                event.preventDefault();
+            }
+        };
+
+        window.addEventListener("unhandledrejection", handleUnhandledRejection);
+
+        return () => {
+            window.removeEventListener(
+                "unhandledrejection",
+                handleUnhandledRejection,
+            );
+
+            mountedRef.current = false;
+            disposeEditorListeners();
+            editorRef.current = null;
+            pendingExternalValueRef.current = null;
+            isEditorFocusedRef.current = false;
+            applyingExternalRef.current = false;
+        };
+    }, [disposeEditorListeners]);
+
+    useEffect(() => {
+        if (typeof window === "undefined" || !window.matchMedia) return;
+
+        const mq = window.matchMedia("(max-width: 767px)");
+        const update = () => setIsNarrowScreen(mq.matches);
+
+        update();
+
+        if (typeof mq.addEventListener === "function") {
+            mq.addEventListener("change", update);
+            return () => mq.removeEventListener("change", update);
+        }
+
+        mq.addListener(update);
+        return () => mq.removeListener(update);
+    }, []);
 
     useEffect(() => {
         if (disabled) {
@@ -457,9 +499,7 @@ export default function EditorPane(props: {
     }, [refreshMobileEditNeed, code, height, path]);
 
     const canUseMobileEditGuard =
-        frame === "card" &&
-        isNarrowScreen &&
-        mobileEditMode !== "never";
+        frame === "card" && isNarrowScreen && mobileEditMode !== "never";
 
     const useMobileScrollGuard =
         canUseMobileEditGuard &&
@@ -471,9 +511,7 @@ export default function EditorPane(props: {
         disabled || (useMobileScrollGuard && !mobileEditing);
 
     const passThroughOnMobile =
-        frame === "card" &&
-        isNarrowScreen &&
-        effectiveReadOnly;
+        frame === "card" && isNarrowScreen && effectiveReadOnly;
 
     useEffect(() => {
         if (!showMobileEditButton) {
@@ -483,6 +521,7 @@ export default function EditorPane(props: {
 
     useEffect(() => {
         const ed = editorRef.current;
+
         if (!mountedRef.current || !ed || ed.isDisposed?.() === true) return;
 
         try {
@@ -500,11 +539,6 @@ export default function EditorPane(props: {
         let next = String(code ?? "");
         const cached = cacheScope ? readCachedEditorValue(cacheScope, path) : null;
 
-        /**
-         * Safety net:
-         * If parent state remounts with the starter while this editor path has
-         * a newer local edit, keep the local edit and push it back upstream.
-         */
         if (
             cached != null &&
             cached !== next &&
@@ -518,6 +552,7 @@ export default function EditorPane(props: {
 
         const ed = editorRef.current;
         const model = getLiveEditorModel(ed);
+
         if (!mountedRef.current || !ed || !model) {
             lastLocalValueRef.current = next;
             return;
@@ -527,6 +562,7 @@ export default function EditorPane(props: {
         prevPathRef.current = path;
 
         const current = safeEditorValue(ed, "");
+
         if (current === next) {
             lastLocalValueRef.current = next;
             pendingExternalValueRef.current = null;
@@ -591,10 +627,12 @@ export default function EditorPane(props: {
                     language={normalizedLang}
                     defaultValue={(() => {
                         if (!cacheScope) return String(code ?? "");
+
                         const cached = readCachedEditorValue(cacheScope, path);
+
                         if (cached === null) return String(code ?? "");
-                        // Don't restore an empty cache over non-empty incoming code
                         if (cached === "" && code) return String(code);
+
                         return cached;
                     })()}
                     theme={theme}
@@ -607,7 +645,11 @@ export default function EditorPane(props: {
                         }
 
                         editorRef.current = ed;
-                        lastLocalValueRef.current = safeEditorValue(ed, String(code ?? ""));
+                        lastLocalValueRef.current = safeEditorValue(
+                            ed,
+                            String(code ?? ""),
+                        );
+
                         onMount?.(ed);
 
                         refreshMobileEditNeed();
@@ -615,48 +657,83 @@ export default function EditorPane(props: {
                         const disposables: Array<{ dispose: () => void }> = [];
 
                         const track = (disposable: any) => {
-                            if (disposable && typeof disposable.dispose === "function") {
+                            if (
+                                disposable &&
+                                typeof disposable.dispose === "function"
+                            ) {
                                 disposables.push(disposable);
                             }
                         };
 
                         track(
                             ed.onDidFocusEditorText?.(() => {
-                                if (!mountedRef.current || ed.isDisposed?.() === true) return;
+                                if (
+                                    !mountedRef.current ||
+                                    ed.isDisposed?.() === true
+                                ) {
+                                    return;
+                                }
+
                                 isEditorFocusedRef.current = true;
                             }),
                         );
 
                         track(
                             ed.onDidBlurEditorText?.(() => {
-                                if (!mountedRef.current || ed.isDisposed?.() === true) return;
+                                if (
+                                    !mountedRef.current ||
+                                    ed.isDisposed?.() === true
+                                ) {
+                                    return;
+                                }
+
                                 isEditorFocusedRef.current = false;
 
                                 if (isNarrowScreen) setMobileEditing(false);
+
                                 flushPendingExternal();
                             }),
                         );
 
                         track(
                             ed.onDidBlurEditorWidget?.(() => {
-                                if (!mountedRef.current || ed.isDisposed?.() === true) return;
+                                if (
+                                    !mountedRef.current ||
+                                    ed.isDisposed?.() === true
+                                ) {
+                                    return;
+                                }
+
                                 isEditorFocusedRef.current = false;
 
                                 if (isNarrowScreen) setMobileEditing(false);
+
                                 flushPendingExternal();
                             }),
                         );
 
                         track(
                             ed.onDidContentSizeChange?.(() => {
-                                if (!mountedRef.current || ed.isDisposed?.() === true) return;
+                                if (
+                                    !mountedRef.current ||
+                                    ed.isDisposed?.() === true
+                                ) {
+                                    return;
+                                }
+
                                 refreshMobileEditNeed();
                             }),
                         );
 
                         track(
                             ed.onDidLayoutChange?.(() => {
-                                if (!mountedRef.current || ed.isDisposed?.() === true) return;
+                                if (
+                                    !mountedRef.current ||
+                                    ed.isDisposed?.() === true
+                                ) {
+                                    return;
+                                }
+
                                 refreshMobileEditNeed();
                             }),
                         );
@@ -664,16 +741,32 @@ export default function EditorPane(props: {
                         editorDisposablesRef.current = disposables;
                     }}
                     onChange={(v) => {
-                        if (!mountedRef.current || applyingExternalRef.current) return;
+                        if (!mountedRef.current || applyingExternalRef.current) {
+                            return;
+                        }
 
                         const ed = editorRef.current;
+
                         if (ed?.isDisposed?.() === true) return;
 
+                        const model = getLiveEditorModel(ed);
+                        const modelUri = String(model?.uri?.toString?.() ?? "");
+
+                        if (
+                            modelUri.startsWith("inmemory://zoeskoul-runner/") &&
+                            modelUri !== path
+                        ) {
+                            return;
+                        }
+
                         const next = v ?? "";
+
                         lastLocalValueRef.current = next;
+
                         if (cacheScope) {
                             writeCachedEditorValue(cacheScope, path, next);
                         }
+
                         onChange(next);
                     }}
                     options={options}

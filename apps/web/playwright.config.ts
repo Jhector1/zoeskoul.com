@@ -23,9 +23,16 @@ export default defineConfig({
             url: "http://localhost:3000",
             reuseExistingServer: process.env.PLAYWRIGHT_REUSE_SERVER === "1",
             timeout: 120_000,
+
+
+
             env: {
+                NODE_ENV: "development",
                 E2E_ALLOW_DEV_ROUTES: "1",
-            }
+                RUNNER_SHARED_SECRET: "test-secret",
+                RUNNER_BASE_URL: "http://127.0.0.1:4001",
+                RUNNER_WS_BASE_URL: "ws://127.0.0.1:4001",
+            },
         },
     projects: [
         {

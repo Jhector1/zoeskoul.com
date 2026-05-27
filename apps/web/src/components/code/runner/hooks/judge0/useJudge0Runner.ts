@@ -20,6 +20,8 @@ export function useJudge0Runner(args: SharedRunnerArgs): CodeRunnerController {
         allowRun: args.allowRun,
         resetTerminalOnRun: args.resetTerminalOnRun,
         onRun: args.onRun!,
+        getWorkspaceFiles: args.getWorkspaceFiles,
+        onTerminalSnapshotFiles: args.onTerminalSnapshotFiles,
     });
 
     const isSql = args.lang === "sql";

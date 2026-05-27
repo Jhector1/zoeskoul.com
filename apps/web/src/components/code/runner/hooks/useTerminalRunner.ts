@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import type { RunResult } from "@/lib/code/types";
+import type {RunResult, WorkspaceSyncEntry} from "@/lib/code/types";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { TermLine, OnRun, RunnerState } from "../types";
 import { serializeWorkspaceForCodeRun } from "@/lib/code/workspaceSubmission";
@@ -200,7 +200,98 @@ function extractPreOutputForCCpp(
 }
 
 type AbortKind = "none" | "silent" | "user";
+function normalizeWorkspacePath(input: string) {
+    return String(input ?? "").replace(/\\/g, "/").trim();
+}
 
+function sortWorkspaceEntries(
+    entries: WorkspaceSyncEntry[] | undefined,
+): WorkspaceSyncEntry[] {
+    return [...(entries ?? [])]
+        .map((entry): WorkspaceSyncEntry | null => {
+            const path = normalizeWorkspacePath((entry as any).path);
+            if (!path) return null;
+
+            if ((entry as any).kind === "directory") {
+                return {
+                    kind: "directory",
+                    path,
+                };
+            }
+
+            return {
+                kind: "file",
+                path,
+                content: String((entry as any).content ?? ""),
+            };
+        })
+        .filter((entry): entry is WorkspaceSyncEntry => Boolean(entry))
+        .sort((a, b) => {
+            const pathCmp = a.path.localeCompare(b.path);
+            if (pathCmp !== 0) return pathCmp;
+
+            const ak = (a as any).kind === "directory" ? "directory" : "file";
+            const bk = (b as any).kind === "directory" ? "directory" : "file";
+
+            if (ak === bk) return 0;
+            return ak === "directory" ? -1 : 1;
+        });
+}
+
+function workspaceEntryKey(entry: WorkspaceSyncEntry) {
+    const kind = (entry as any).kind === "directory" ? "directory" : "file";
+    return `${kind}:${normalizeWorkspacePath((entry as any).path)}`;
+}
+
+function workspaceEntryEqual(a: WorkspaceSyncEntry, b: WorkspaceSyncEntry) {
+    const ak = (a as any).kind === "directory" ? "directory" : "file";
+    const bk = (b as any).kind === "directory" ? "directory" : "file";
+
+    if (ak !== bk) return false;
+    if (normalizeWorkspacePath((a as any).path) !== normalizeWorkspacePath((b as any).path)) {
+        return false;
+    }
+
+    if (ak === "directory") return true;
+
+    return String((a as any).content ?? "") === String((b as any).content ?? "");
+}
+
+function diffWorkspaceDirtyPaths(
+    current: WorkspaceSyncEntry[],
+    baseline: WorkspaceSyncEntry[],
+): Set<string> {
+    const dirty = new Set<string>();
+
+    const currentMap = new Map(
+        sortWorkspaceEntries(current).map((entry) => [workspaceEntryKey(entry), entry]),
+    );
+
+    const baselineMap = new Map(
+        sortWorkspaceEntries(baseline).map((entry) => [workspaceEntryKey(entry), entry]),
+    );
+
+    for (const [key, currentEntry] of currentMap) {
+        const baselineEntry = baselineMap.get(key);
+
+        if (!baselineEntry) {
+            dirty.add((currentEntry as any).path);
+            continue;
+        }
+
+        if (!workspaceEntryEqual(currentEntry, baselineEntry)) {
+            dirty.add((currentEntry as any).path);
+        }
+    }
+
+    for (const [key, baselineEntry] of baselineMap) {
+        if (!currentMap.has(key)) {
+            dirty.add((baselineEntry as any).path);
+        }
+    }
+
+    return dirty;
+}
 export function useTerminalRunner(args: {
     lang: RunnerLanguage;
     code: string;
@@ -217,6 +308,11 @@ export function useTerminalRunner(args: {
     allowRun: boolean;
     resetTerminalOnRun: boolean;
     onRun: OnRun;
+    getWorkspaceFiles?: () => WorkspaceSyncEntry[];
+    onTerminalSnapshotFiles?: (
+        files: WorkspaceSyncEntry[],
+        meta: { dirtyUiPaths: Set<string> },
+    ) => void | Promise<void>;
 }) {
     const {
         lang,
@@ -260,7 +356,7 @@ export function useTerminalRunner(args: {
     const abortRef = React.useRef<AbortController | null>(null);
     const abortKindRef = React.useRef<AbortKind>("none");
     const mountedRef = React.useRef(true);
-
+    const runBaselineWorkspaceEntriesRef = React.useRef<WorkspaceSyncEntry[]>([]);
     React.useEffect(() => {
         terminalRef.current = terminal;
     }, [terminal]);
@@ -426,7 +522,39 @@ export function useTerminalRunner(args: {
         },
         [lang, code],
     );
+    const syncWorkspaceFilesFromRun = React.useCallback(
+        async (result: RunResult | null | undefined) => {
+            if (isSql) return;
 
+            const workspaceFiles = (result as any)?.workspaceFiles;
+
+            if (!Array.isArray(workspaceFiles)) {
+                return;
+            }
+
+            if (typeof args.onTerminalSnapshotFiles !== "function") {
+                return;
+            }
+
+            const currentEntries =
+                typeof args.getWorkspaceFiles === "function"
+                    ? sortWorkspaceEntries(args.getWorkspaceFiles())
+                    : [];
+
+            const dirtyUiPaths = diffWorkspaceDirtyPaths(
+                currentEntries,
+                runBaselineWorkspaceEntriesRef.current,
+            );
+
+            await args.onTerminalSnapshotFiles(sortWorkspaceEntries(workspaceFiles), {
+                dirtyUiPaths,
+            });
+
+            runBaselineWorkspaceEntriesRef.current =
+                sortWorkspaceEntries(workspaceFiles);
+        },
+        [args, isSql],
+    );
     const runOnce = React.useCallback(
         async (stdinToUse: string): Promise<RunResult | null> => {
             if (runLockRef.current) return null;
@@ -462,7 +590,10 @@ export function useTerminalRunner(args: {
                     }
                     return data;
                 }
-
+                runBaselineWorkspaceEntriesRef.current =
+                    typeof args.getWorkspaceFiles === "function"
+                        ? sortWorkspaceEntries(args.getWorkspaceFiles())
+                        : [];
                 const data = isSql
                     ? await (() => {
                         if (process.env.NODE_ENV !== "production") {
@@ -494,16 +625,22 @@ export function useTerminalRunner(args: {
                         language: lang,
                         code,
                         stdin: stdinToUse,
-                        ...(workspaceSubmission ? {
-                            entry: workspaceSubmission.entry,
-                            files: workspaceSubmission.files,
-                        } : {}),
+                        captureWorkspace:
+                            typeof args.onTerminalSnapshotFiles === "function",
+                        ...(workspaceSubmission
+                            ? {
+                                entry: workspaceSubmission.entry,
+                                files: workspaceSubmission.files,
+                            }
+                            : {}),
                         signal: ctrl.signal,
                     });
 
                 if (mountedRef.current) {
                     setLastResult(data);
                 }
+
+                await syncWorkspaceFilesFromRun(data);
 
                 return data;
             } catch (e: unknown) {
@@ -572,6 +709,8 @@ export function useTerminalRunner(args: {
             resolvedSqlResultShape,
             exerciseStateKey,
             workspace,
+            syncWorkspaceFilesFromRun,
+            args,
         ],
     );
 

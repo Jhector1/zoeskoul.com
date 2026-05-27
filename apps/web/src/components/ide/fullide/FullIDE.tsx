@@ -192,36 +192,51 @@ function FullIDEInner({
         [onWorkspaceChange],
     );
 
-    const handleChangeCode = useCallback(
-        (nextCode: string) => {
-            actions.onChangeCode(nextCode);
-
+    const handleChangeFileCode = useCallback(
+        (fileId: string, nextCode: string) => {
             const current = currentWorkspaceRef.current;
 
-            if (!current || current.version !== 2 || !Array.isArray(current.nodes)) {
+            if (
+                !fileId ||
+                !current ||
+                current.version !== 2 ||
+                !Array.isArray(current.nodes)
+            ) {
                 return;
             }
 
-            const targetFileId = current.activeFileId || current.entryFileId;
+            let changed = false;
 
             const nextWorkspace: WorkspaceStateV2 = {
                 ...current,
-                nodes: current.nodes.map((node) =>
-                    node.kind === "file" && node.id === targetFileId
-                        ? {
-                            ...node,
-                            content: nextCode,
-                            updatedAt: Date.now(),
-                        }
-                        : node,
-                ),
+                nodes: current.nodes.map((node) => {
+                    if (node.kind !== "file" || node.id !== fileId) {
+                        return node;
+                    }
+
+                    if ((node.content ?? "") === nextCode) {
+                        return node;
+                    }
+
+                    changed = true;
+
+                    return {
+                        ...node,
+                        content: nextCode,
+                        updatedAt: Date.now(),
+                    };
+                }),
             };
 
+            if (!changed) {
+                return;
+            }
+
+            actions.replaceWorkspace(nextWorkspace);
             emitImmediateWorkspaceChange(nextWorkspace);
         },
         [actions, emitImmediateWorkspaceChange],
     );
-
     const handleChangeStdin = useCallback(
         (nextStdin: string) => {
             actions.setStdin(nextStdin);
@@ -454,7 +469,7 @@ function FullIDEInner({
             services={services}
             onChangeLanguage={setLangUI}
             isAuthenticated={access.hasUser}
-            onChangeCode={handleChangeCode}
+            onChangeFileCode={handleChangeFileCode}
             onChangeSqlDialect={setSqlDialect}
             onBeforeRun={onBeforeRun}
             onRunResult={onRunResult}

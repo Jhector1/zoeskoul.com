@@ -291,15 +291,22 @@ export function parseRunReq(input: unknown): RunReq {
     }
 
     const language = rawLanguage as InteractiveLanguage;
-
     if ("files" in input || "entry" in input) {
         return {
             kind: "code",
             language,
+            code:
+                typeof input.code === "string"
+                    ? asString(input.code, "code", 300_000)
+                    : undefined,
             entry: asString(input.entry, "entry", 512),
             files: parseFiles(input.files),
             stdin: asOptionalString(input.stdin, "stdin", 100_000),
             limits: parseRunLimits(input.limits),
+            captureWorkspace:
+                typeof input.captureWorkspace === "boolean"
+                    ? input.captureWorkspace
+                    : undefined,
         };
     }
 
@@ -309,6 +316,10 @@ export function parseRunReq(input: unknown): RunReq {
         code: asString(input.code, "code", 300_000),
         stdin: asOptionalString(input.stdin, "stdin", 100_000),
         limits: parseRunLimits(input.limits),
+        captureWorkspace:
+            typeof input.captureWorkspace === "boolean"
+                ? input.captureWorkspace
+                : undefined,
     };
 }
 

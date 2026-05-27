@@ -122,17 +122,103 @@ function sleep(ms: number) {
   });
 }
 
+function syntheticEntryFor(language: string) {
+  switch (language) {
+    case "python":
+      return "main.py";
+    case "javascript":
+      return "main.js";
+    case "java":
+      return "Main.java";
+    case "c":
+      return "main.c";
+    case "cpp":
+      return "main.cpp";
+    default:
+      return "main.txt";
+  }
+}
+
+function normalizeFileEntries(
+    files:
+        | Array<{ path: string; content: string }>
+        | Record<string, string>
+        | undefined,
+) {
+  if (!files) return [];
+
+  return Array.isArray(files)
+      ? files.map((file) => ({
+        path: file.path,
+        content: String(file.content ?? ""),
+      }))
+      : recordToFileEntries(files);
+}
+
+function replaceEntryContent(args: {
+  files: Array<{ path: string; content: string }>;
+  entry: string;
+  code: string;
+}) {
+  let replaced = false;
+
+  const next = args.files.map((file) => {
+    if (file.path !== args.entry) return file;
+
+    replaced = true;
+    return {
+      path: file.path,
+      content: args.code,
+    };
+  });
+
+  if (!replaced) {
+    next.push({
+      path: args.entry,
+      content: args.code,
+    });
+  }
+
+  return next;
+}
+
 async function buildSubmissionBody(req: CodeRunReq) {
   const stdinRaw = ("stdin" in req && req.stdin ? req.stdin : "") ?? "";
   const stdin = b64(stdinRaw);
   const limits = normalizeCodeLimits((req as any).limits);
 
-  if ("files" in req) {
-    const fileEntries = Array.isArray(req.files)
-        ? req.files
-        : recordToFileEntries(req.files as Record<string, string>);
+  const shouldUseProjectMode =
+      "files" in req || req.captureWorkspace === true;
 
-    const additional_files = await zipProject(req.language, req.entry, fileEntries);
+  if (shouldUseProjectMode) {
+    const entry =
+        "entry" in req && typeof req.entry === "string" && req.entry.trim()
+            ? req.entry
+            : syntheticEntryFor(req.language);
+
+    const baseFiles =
+        "files" in req ? normalizeFileEntries(req.files) : [];
+
+    const fileEntries =
+        typeof req.code === "string"
+            ? replaceEntryContent({
+              files: baseFiles,
+              entry,
+              code: req.code,
+            })
+            : baseFiles;
+
+    if (!fileEntries.some((file) => file.path === entry)) {
+      throw new Error(
+          "Project run requires either code or an entry file in files[].",
+      );
+    }
+
+    const additional_files = await zipProject(
+        req.language,
+        entry,
+        fileEntries,
+    );
 
     return {
       language_id: 89,
@@ -151,7 +237,6 @@ async function buildSubmissionBody(req: CodeRunReq) {
     ...limits,
   };
 }
-
 function normalizeSqlReq(req: RunReq): RunReq {
   if (!isSqlRunReq(req)) return req;
 

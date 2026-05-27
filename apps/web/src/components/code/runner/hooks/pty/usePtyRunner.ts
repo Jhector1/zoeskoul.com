@@ -302,7 +302,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
     const nextChunkIdRef = React.useRef(1);
     const runBaselineEntriesRef = React.useRef<WorkspaceSyncEntry[]>([]);
     const snapshottedSessionIdsRef = React.useRef<Set<string>>(new Set());
-
+    const snapshotInFlightSessionIdsRef = React.useRef<Set<string>>(new Set());
     const getCurrentWorkspaceEntries = React.useCallback((): WorkspaceSyncEntry[] => {
         if (typeof args.getWorkspaceFiles === "function") {
             return sortEntries(args.getWorkspaceFiles());
@@ -362,15 +362,19 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
         async (sessionId: string | null | undefined) => {
             if (!sessionId) return;
 
+            if (typeof args.onTerminalSnapshotFiles !== "function") {
+                return;
+            }
+
             if (snapshottedSessionIdsRef.current.has(sessionId)) {
                 return;
             }
 
-            snapshottedSessionIdsRef.current.add(sessionId);
-
-            if (typeof args.onTerminalSnapshotFiles !== "function") {
+            if (snapshotInFlightSessionIdsRef.current.has(sessionId)) {
                 return;
             }
+
+            snapshotInFlightSessionIdsRef.current.add(sessionId);
 
             try {
                 const snapshot = await snapshotSessionWorkspace(sessionId);
@@ -385,11 +389,28 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                 });
 
                 runBaselineEntriesRef.current = snapshot;
+                snapshottedSessionIdsRef.current.add(sessionId);
             } catch (e: any) {
+                const message = String(e?.message ?? "");
+
+                if (
+                    message.includes("ENOENT") ||
+                    message.includes("no such file or directory") ||
+                    message.includes("Workspace expired")
+                ) {
+                    pushChunk(
+                        "err",
+                        "\r\n[workspace sync failed: the runner workspace expired before files could be pulled back]\r\n",
+                    );
+                    return;
+                }
+
                 pushChunk(
                     "err",
-                    `\r\n${e?.message ?? "Failed to sync created files back to Explorer."}\r\n`,
+                    `\r\n${message || "Failed to sync created files back to Explorer."}\r\n`,
                 );
+            } finally {
+                snapshotInFlightSessionIdsRef.current.delete(sessionId);
             }
         },
         [args, getCurrentWorkspaceEntries, pushChunk],
@@ -451,15 +472,15 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                 exerciseStateKey,
             } as any);
 
-            if (typeof sessionId === "string") {
-                // useRunSession will also emit final events. This is only a fallback
-                // in case a runner completes before a final status event is observed.
-                setTimeout(() => {
-                    if (!busy) {
-                        void applySnapshotForSession(sessionId);
-                    }
-                }, 0);
-            }
+            // if (typeof sessionId === "string") {
+            //     // useRunSession will also emit final events. This is only a fallback
+            //     // in case a runner completes before a final status event is observed.
+            //     setTimeout(() => {
+            //         if (!busy) {
+            //             void applySnapshotForSession(sessionId);
+            //         }
+            //     }, 0);
+            // }
         } catch (e: any) {
             pushChunk("err", `${e?.message ?? "Failed to start session."}\r\n`);
             setBusy(false);

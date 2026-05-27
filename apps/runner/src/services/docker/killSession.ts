@@ -1,10 +1,13 @@
 import type { RunSessionState } from "@zoeskoul/code-contracts";
 import { getSession, pushEvent } from "../sessions/sessionStore.js";
 import { clearAllTimeouts } from "../sessions/timeoutManager.js";
-import { cleanupWorkspace } from "../workspace/cleanupWorkspace.js";
+import { scheduleWorkspaceCleanup } from "../workspace/cleanupWorkspace.js";
 import { docker } from "./dockerClient.js";
 
-type KillFinalState = Extract<RunSessionState, "canceled" | "timed_out" | "failed">;
+type KillFinalState = Extract<
+    RunSessionState,
+    "canceled" | "timed_out" | "failed"
+>;
 
 function isTerminalState(state: string) {
     return (
@@ -35,5 +38,9 @@ export async function killSession(
         pushEvent(sessionId, { type: "status", state: finalState });
     }
 
-    await cleanupWorkspace(session.workspaceDir);
+    /**
+     * Keep the workspace briefly even after cancel/timeout so the UI can
+     * pull back files that existed at termination time.
+     */
+    scheduleWorkspaceCleanup(sessionId, session.workspaceDir);
 }

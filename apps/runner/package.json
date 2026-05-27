@@ -6,8 +6,8 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc -p tsconfig.json --outDir dist",
     "start": "node dist/server.js",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
-  },
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --config vitest.config.ts"  },
   "keywords": [],
   "author": "info@zoeskoul.com",
   "license": "ISC",
@@ -15,7 +15,6 @@
   "dependencies": {
     "@zoeskoul/code-contracts": "workspace:*",
     "@zoeskoul/pty-auth": "workspace:*",
-
     "cors": "^2.8.6",
     "dockerode": "^4.0.10",
     "express": "^5.2.1",
@@ -30,6 +29,7 @@
     "@types/node": "^20.19.37",
     "@types/ws": "^8.18.1",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.5"
   }
 }

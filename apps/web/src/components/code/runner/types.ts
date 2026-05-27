@@ -20,6 +20,7 @@ export type OnRunArgs =
     stdin: string;
     entry?: string;
     files?: FileEntry[];
+    captureWorkspace?: boolean;
     signal?: AbortSignal;
 }
     | {

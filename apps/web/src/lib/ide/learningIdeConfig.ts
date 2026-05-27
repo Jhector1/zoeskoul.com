@@ -21,6 +21,7 @@ export type LearningIdeConfig = {
     preset?: LearningIdeServicePreset;
     runnerBackend?: LearningIdeRunnerBackend;
     requires?: LearningIdeServiceRequirements;
+    /** SQL result pane controls. Results/Tables are visible by default; ERD/Chen are opt-in. */
     sqlPane?: SqlPaneOptions;
 };
 
@@ -32,7 +33,6 @@ export function learningIdeFromRuntimeDefaults(
     const supportsFiles =
         runtimeDefaults.supportsFileSystem === true ||
         runtimeDefaults.supportsMultiFile === true;
-
     const supportsTerminal = runtimeDefaults.supportsTerminal === true;
 
     if (!supportsFiles && !supportsTerminal) {
@@ -55,20 +55,14 @@ export function mergeLearningIdeConfigs(
 
     for (const config of configs) {
         if (!config) continue;
-
-        const previousRequires: LearningIdeServiceRequirements =
-            merged?.requires ?? {};
+        const previousRequires: LearningIdeServiceRequirements = merged?.requires ?? {};
         const previousSqlPane: SqlPaneOptions = merged?.sqlPane ?? {};
 
         merged = {
             ...(merged ?? {}),
             ...(config.preset ? { preset: config.preset } : {}),
-            ...(config.runnerBackend
-                ? { runnerBackend: config.runnerBackend }
-                : {}),
-            ...(config.sqlPane
-                ? { sqlPane: { ...previousSqlPane, ...config.sqlPane } }
-                : {}),
+            ...(config.runnerBackend ? { runnerBackend: config.runnerBackend } : {}),
+            ...(config.sqlPane ? { sqlPane: { ...previousSqlPane, ...config.sqlPane } } : {}),
             requires: {
                 ...previousRequires,
                 ...(config.requires ?? {}),
@@ -106,16 +100,8 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
     const wantsProjectPersistence = requires.projectPersistence === true;
     const wantsCloudProjects = requires.cloudProjects === true;
     const runnerBackend = ideConfig?.runnerBackend ?? "auto";
-
-    /**
-     * Important:
-     * File-system lessons need the PTY/workspace runner even when the lesson
-     * does not expose a terminal tab. Judge0 cannot return created/deleted
-     * workspace files to the Explorer in the current app.
-     */
     const enableWorkspaceTerminal =
-        runnerBackend === "pty" ||
-        (runnerBackend === "auto" && (wantsTerminal || wantsFiles));
+        runnerBackend === "pty" || (runnerBackend === "auto" && wantsTerminal);
 
     const services: FullIDEServicesInput = {
         chrome: {

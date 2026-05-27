@@ -254,7 +254,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const setCode = (c: string) => {
         if (props.workspace && props.onChangeWorkspace) {
-            const preferredEntryId = props.workspace.entryFileId || props.workspace.activeFileId;
+            const preferredEntryId = props.workspace.activeFileId || props.workspace.entryFileId;
             const fallbackFile = props.workspace.nodes.find((node) => node.kind === "file");
             const entryId = props.workspace.nodes.some(
                 (node) => node.kind === "file" && node.id === preferredEntryId,
@@ -373,14 +373,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         if (args.language === "sql") {
             return runViaApi(
                 {
-                    kind: "sql",
-                    language: "sql",
-                    dialect: args.sqlDialect,
+                    kind: "code",
+                    language: args.language,
                     code: args.code,
-                    schemaSql: args.sqlSchemaSql ?? args.setupSql,
-                    seedSql: args.sqlSeedSql,
-                    datasetId: args.datasetId,
-                    resultShape: args.sqlResultShape,
+                    stdin: args.stdin,
                 },
                 args.signal,
             );
@@ -391,7 +387,14 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 kind: "code",
                 language: args.language,
                 code: args.code,
-                stdin: args.stdin,
+                stdin: args.stdin ?? "",
+                captureWorkspace: args.captureWorkspace === true,
+                ...(typeof args.entry === "string" && args.files
+                    ? {
+                        entry: args.entry,
+                        files: args.files,
+                    }
+                    : {}),
             },
             args.signal,
         );
@@ -403,8 +406,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const workspaceFileIdForIdentity =
         workspace && typeof workspace === "object"
             ? String(
-                (workspace as any).entryFileId ||
                 (workspace as any).activeFileId ||
+                (workspace as any).entryFileId ||
                 "",
             )
             : "";
