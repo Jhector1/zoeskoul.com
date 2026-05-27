@@ -23,7 +23,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.sketch2.title",
+      "sketchId": "sketch-3",
       "height": 420
     },
     {
@@ -52,27 +66,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "q5",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.q5.title",
-            "exerciseKey": "q5",
+            "id": "code_1",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.code_1.title",
+            "exerciseKey": "code-1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "q10",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.q10.title",
-            "exerciseKey": "q10",
+            "id": "code_2",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.code_2.title",
+            "exerciseKey": "code-2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "q11",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.q11.title",
-            "exerciseKey": "q11",
+            "id": "code_3",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.code_3.title",
+            "exerciseKey": "code-3",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -84,35 +98,65 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch1.title",
-      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch-1.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch-2.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch-3.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "q1",
+      "id": "sc-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q1",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.sc-1",
       "optionIds": [
         "a",
         "b",
-        "c"
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "q2",
+      "id": "sc-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.sc-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q2",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.mc-1",
       "optionIds": [
         "a",
         "b",
@@ -123,110 +167,16 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
-          "d"
+          "b"
         ]
       }
     },
     {
-      "id": "q3",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q3",
-      "tokenIds": [
-        "t1",
-        "t2"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2"
-        ]
-      }
-    },
-    {
-      "id": "q4",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q4",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "name"
-      }
-    },
-    {
-      "id": "q5",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q5",
-      "language": "python",
-      "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\n# Print all student names",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\n# Print all student names",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\n# Print all student names",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\n# Print all student names",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdout": "Alice\nBob\nCharlie\nDavid\n",
-            "match": "exact"
-          },
-          {
-            "stdout": "Alice\nBob\nCharlie\nDavid\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\nstudents.append({'name': 'David', 'age': 21, 'major': 'Chemistry'})\n\n# Print all student names\nfor student in students:\n    print(student['name'])"
-      }
-    },
-    {
-      "id": "q6",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q6",
-      "optionIds": [
-        "a",
-        "b",
-        "c"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "q7",
+      "id": "mc-2",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q7",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.mc-2",
       "optionIds": [
         "a",
         "b",
@@ -237,17 +187,16 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       }
     },
     {
-      "id": "q8",
+      "id": "dr-1",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q8",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.dr-1",
       "tokenIds": [
         "t1",
         "t2",
@@ -263,29 +212,59 @@
       }
     },
     {
-      "id": "q9",
+      "id": "dr-2",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.dr-2",
+      "tokenIds": [
+        "t1",
+        "t2"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2"
+        ]
+      }
+    },
+    {
+      "id": "fb-1",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q9",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.fb-1",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "age"
+        "value": "score"
       }
     },
     {
-      "id": "q10",
+      "id": "fb-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.fb-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "items"
+      }
+    },
+    {
+      "id": "code-1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q10",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1",
       "language": "python",
-      "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age",
+      "starterCode": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age",
+          "content": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -294,45 +273,102 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age",
+        "starterCode": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age",
+            "content": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def get_names(records):\n    names = []\n    for record in records:\n        names.append(record[\"name\"])\n    return names",
+        "semanticChecks": [
           {
-            "stdout": "23.0\n",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "get_names",
+            "args": [
+              [
+                [
+                  [
+                    "name",
+                    "Ava"
+                  ],
+                  [
+                    "score",
+                    10
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "Ben"
+                  ],
+                  [
+                    "score",
+                    8
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": [
+              "Ava",
+              "Ben"
+            ],
+            "expectedKind": "value"
           },
           {
-            "stdout": "23.0\n",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "get_names",
+            "args": [
+              [
+                [
+                  [
+                    "name",
+                    "Kai"
+                  ],
+                  [
+                    "score",
+                    5
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": [
+              "Kai"
+            ],
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age\nage_sum = sum(student['age'] for student in students)\naverage_age = age_sum / len(students)\nprint(average_age)"
+        ]
       }
     },
     {
-      "id": "q11",
+      "id": "code-2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q11",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2",
       "language": "python",
-      "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    # Implement the function\n    pass\n\n# Example usage\n# print(find_student_by_major('Mathematics'))",
+      "starterCode": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    # Implement the function\n    pass\n\n# Example usage\n# print(find_student_by_major('Mathematics'))",
+          "content": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -341,31 +377,222 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    # Implement the function\n    pass\n\n# Example usage\n# print(find_student_by_major('Mathematics'))",
+        "starterCode": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    # Implement the function\n    pass\n\n# Example usage\n# print(find_student_by_major('Mathematics'))",
+            "content": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def total_stock(items):\n    total = 0\n    for item in items:\n        total += item[\"stock\"]\n    return total",
+        "semanticChecks": [
           {
-            "stdout": "Bob",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "total_stock",
+            "args": [
+              [
+                [
+                  [
+                    "name",
+                    "Pen"
+                  ],
+                  [
+                    "stock",
+                    4
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "Book"
+                  ],
+                  [
+                    "stock",
+                    6
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 10,
+            "expectedKind": "value"
           },
           {
-            "stdout": "Bob",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "total_stock",
+            "args": [
+              [
+                [
+                  [
+                    "name",
+                    "Bag"
+                  ],
+                  [
+                    "stock",
+                    1
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "Box"
+                  ],
+                  [
+                    "stock",
+                    2
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "Cup"
+                  ],
+                  [
+                    "stock",
+                    3
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 6,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    for student in students:\n        if student['major'] == major:\n            return student['name']\n\n# Example usage\nprint(find_student_by_major('Mathematics'))"
+        ]
+      }
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3",
+      "language": "python",
+      "starterCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    for player in players:\n        if player[\"score\"] > best:\n            best = player[\"score\"]\n    return best",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "highest_score",
+            "args": [
+              [
+                [
+                  [
+                    "name",
+                    "Mia"
+                  ],
+                  [
+                    "score",
+                    7
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "Leo"
+                  ],
+                  [
+                    "score",
+                    11
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "Noor"
+                  ],
+                  [
+                    "score",
+                    9
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 11,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "highest_score",
+            "args": [
+              [
+                [
+                  [
+                    "name",
+                    "A"
+                  ],
+                  [
+                    "score",
+                    3
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "B"
+                  ],
+                  [
+                    "score",
+                    3
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 3,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
       }
     }
   ]

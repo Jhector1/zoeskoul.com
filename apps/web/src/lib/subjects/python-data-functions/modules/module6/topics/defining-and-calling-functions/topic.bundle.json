@@ -23,14 +23,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "sketch-1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.cards.sketch2.title",
+      "sketchId": "sketch-3",
       "height": 420
     },
     {
@@ -59,27 +66,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz9",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.projectSteps.quiz9.title",
-            "exerciseKey": "quiz9",
+            "id": "ci_make_greeting",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.projectSteps.ci_make_greeting.title",
+            "exerciseKey": "ci-make-greeting",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz10",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.projectSteps.quiz10.title",
-            "exerciseKey": "quiz10",
+            "id": "ci_square_number",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.projectSteps.ci_square_number.title",
+            "exerciseKey": "ci-square-number",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz11",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.projectSteps.quiz11.title",
-            "exerciseKey": "quiz11",
+            "id": "ci_full_name",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.projectSteps.ci_full_name.title",
+            "exerciseKey": "ci-full-name",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -91,25 +98,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch1.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch-1.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch-1.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch2.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch-2.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch-3.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-function-call",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.quiz1",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-function-call",
       "optionIds": [
         "a",
         "b",
@@ -122,43 +135,28 @@
       }
     },
     {
-      "id": "quiz2",
+      "id": "sc-parameter-meaning",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.sc-parameter-meaning",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "quiz3",
+      "id": "mc-valid-calls",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.quiz3",
-      "optionIds": [
-        "a",
-        "b"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a"
-        ]
-      }
-    },
-    {
-      "id": "quiz4",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.quiz4",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.mc-valid-calls",
       "optionIds": [
         "a",
         "b",
@@ -169,61 +167,76 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "d"
         ]
       }
     },
     {
-      "id": "quiz5",
+      "id": "mc-return-uses",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.mc-return-uses",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr-define-then-call",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.quiz5",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.dr-define-then-call",
       "tokenIds": [
         "t1",
         "t2",
-        "t3",
-        "t4"
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3",
-          "t4"
+          "t3"
         ]
       }
     },
     {
-      "id": "quiz6",
+      "id": "dr-call-with-argument",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.quiz6",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.dr-call-with-argument",
       "tokenIds": [
         "t1",
         "t2",
-        "t3",
-        "t4"
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3",
-          "t4"
+          "t3"
         ]
       }
     },
     {
-      "id": "quiz7",
+      "id": "fb-def-keyword",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.quiz7",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.fb-def-keyword",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -231,29 +244,29 @@
       }
     },
     {
-      "id": "quiz8",
+      "id": "fb-call-argument",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.quiz8",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.fb-call-argument",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "3, 5"
+        "value": "\"Ava\""
       }
     },
     {
-      "id": "quiz9",
+      "id": "ci-make-greeting",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.quiz9",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting",
       "language": "python",
-      "starterCode": "def square(number):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(square(number))",
+      "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def square(number):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(square(number))",
+          "content": "def make_greeting(name):\n    # return a greeting string\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -262,47 +275,65 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def square(number):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(square(number))",
+        "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def square(number):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(square(number))",
+            "content": "def make_greeting(name):\n    # return a greeting string\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name",
+        "semanticChecks": [
           {
-            "stdin": "4\n",
-            "stdout": "16\n",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "make_greeting",
+            "args": [
+              "Ava"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Hello, Ava",
+            "expectedKind": "value"
           },
           {
-            "stdin": "5\n",
-            "stdout": "25\n",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "make_greeting",
+            "args": [
+              "Leo"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Hello, Leo",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def square(number):\n    return number * number\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(square(number))"
+        ]
       }
     },
     {
-      "id": "quiz10",
+      "id": "ci-square-number",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.quiz10",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number",
       "language": "python",
-      "starterCode": "def multiply(a, b):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "starterCode": "def square(number):\n    # return the square of number\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def multiply(a, b):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+          "content": "def square(number):\n    # return the square of number\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -311,47 +342,65 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def multiply(a, b):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+        "starterCode": "def square(number):\n    # return the square of number\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def multiply(a, b):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+            "content": "def square(number):\n    # return the square of number\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def square(number):\n    return number * number",
+        "semanticChecks": [
           {
-            "stdin": "3 4\n1\n",
-            "stdout": "3 4",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "square",
+            "args": [
+              4
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 16,
+            "expectedKind": "value"
           },
           {
-            "stdin": "7 8\n1\n",
-            "stdout": "7 8",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "square",
+            "args": [
+              7
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 49,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def multiply(a, b):\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))"
+        ]
       }
     },
     {
-      "id": "quiz11",
+      "id": "ci-full-name",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name",
       "language": "python",
-      "starterCode": "def greet_user(name):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))",
+      "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def greet_user(name):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))",
+          "content": "def full_name(first, last):\n    # return the full name as one string\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -360,33 +409,55 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def greet_user(name):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))",
+        "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def greet_user(name):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))",
+            "content": "def full_name(first, last):\n    # return the full name as one string\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def full_name(first, last):\n    return first + \" \" + last",
+        "semanticChecks": [
           {
-            "stdin": "Alice\n",
-            "stdout": "Hello, Alice!\n",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "full_name",
+            "args": [
+              "Ada",
+              "Lovelace"
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Ada Lovelace",
+            "expectedKind": "value"
           },
           {
-            "stdin": "Bob\n",
-            "stdout": "Hello, Bob!\n",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "full_name",
+            "args": [
+              "Sam",
+              "Lee"
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Sam Lee",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def greet_user(name):\n    return f\"Hello, {name}!\"\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))"
+        ]
       }
     }
   ]

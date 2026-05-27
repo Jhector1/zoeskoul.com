@@ -23,14 +23,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "sketch-parameters-basics",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "sketch-return-vs-print",
       "height": 420
     },
     {
@@ -59,27 +59,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz9",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.projectSteps.quiz9.title",
-            "exerciseKey": "quiz9",
+            "id": "ci_make_label",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.projectSteps.ci_make_label.title",
+            "exerciseKey": "ci-make-label",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz10",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.projectSteps.quiz10.title",
-            "exerciseKey": "quiz10",
+            "id": "ci_calculate_tip",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.projectSteps.ci_calculate_tip.title",
+            "exerciseKey": "ci-calculate-tip",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz11",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.projectSteps.quiz11.title",
-            "exerciseKey": "quiz11",
+            "id": "ci_first_item",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.projectSteps.ci_first_item.title",
+            "exerciseKey": "ci-first-item",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -91,25 +91,42 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "sketch-parameters-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.sketch1.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.sketch-parameters-basics.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.sketch-parameters-basics.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sketch-return-vs-print",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.sketch2.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.sketch-return-vs-print.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.sketch-return-vs-print.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-parameter-role",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz1",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-parameter-role",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-return-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.sc-return-purpose",
       "optionIds": [
         "a",
         "b",
@@ -122,28 +139,11 @@
       }
     },
     {
-      "id": "quiz2",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz2",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "c"
-      }
-    },
-    {
-      "id": "quiz3",
+      "id": "mc-return-uses",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz3",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.mc-return-uses",
       "optionIds": [
         "a",
         "b",
@@ -154,16 +154,16 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "b"
         ]
       }
     },
     {
-      "id": "quiz4",
+      "id": "mc-print-vs-return",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz4",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.mc-print-vs-return",
       "optionIds": [
         "a",
         "b",
@@ -174,17 +174,16 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
-          "d"
+          "b"
         ]
       }
     },
     {
-      "id": "quiz5",
+      "id": "dr-function-flow",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz5",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.dr-function-flow",
       "tokenIds": [
         "t1",
         "t2",
@@ -202,11 +201,11 @@
       }
     },
     {
-      "id": "quiz6",
+      "id": "dr-build-function",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz6",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.dr-build-function",
       "tokenIds": [
         "t1",
         "t2",
@@ -224,41 +223,41 @@
       }
     },
     {
-      "id": "quiz7",
+      "id": "fb-call-argument",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz7",
-      "choiceCount": 4,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.fb-call-argument",
+      "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "add"
+        "value": "7"
       }
     },
     {
-      "id": "quiz8",
+      "id": "fb-return-expression",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz8",
-      "choiceCount": 4,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.fb-return-expression",
+      "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "x + y"
+        "value": "price + tax"
       }
     },
     {
-      "id": "quiz9",
+      "id": "ci-make-label",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz9",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label",
       "language": "python",
-      "starterCode": "def sum_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))",
+      "starterCode": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def sum_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))",
+          "content": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -267,52 +266,69 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def sum_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))",
+        "starterCode": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def sum_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))",
+            "content": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def make_label(item, count):\n    return item + \": \" + str(count)",
+        "semanticChecks": [
           {
-            "stdin": "1\n1\n",
-            "stdout": "2",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "make_label",
+            "args": [
+              "Apples",
+              3
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Apples: 3",
+            "expectedKind": "value"
           },
           {
-            "stdin": "1\n1\n",
-            "stdout": "2",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "make_label",
+            "args": [
+              "Pens",
+              12
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Pens: 12",
+            "expectedKind": "value"
           },
           {
-            "stdin": "2\n2\n",
-            "stdout": "4\n",
-            "match": "exact"
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def sum_numbers(a, b):\n    return a + b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))"
+        ]
       }
     },
     {
-      "id": "quiz10",
+      "id": "ci-calculate-tip",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz10",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip",
       "language": "python",
-      "starterCode": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "starterCode": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+          "content": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -321,52 +337,69 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+        "starterCode": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+            "content": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def calculate_tip(bill, percent):\n    return bill * percent / 100",
+        "semanticChecks": [
           {
-            "stdin": "1\n1\n",
-            "stdout": "1",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "calculate_tip",
+            "args": [
+              50,
+              20
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 10,
+            "expectedKind": "value"
           },
           {
-            "stdin": "1\n1\n",
-            "stdout": "1",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "calculate_tip",
+            "args": [
+              80,
+              15
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 12,
+            "expectedKind": "value"
           },
           {
-            "stdin": "2\n2\n",
-            "stdout": "4\n",
-            "match": "exact"
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def multiply(a, b):\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))"
+        ]
       }
     },
     {
-      "id": "quiz11",
+      "id": "ci-first-item",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item",
       "language": "python",
-      "starterCode": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+      "starterCode": "def first_item(items):\n    # return the first element from the list\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+          "content": "def first_item(items):\n    # return the first element from the list\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -375,33 +408,58 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+        "starterCode": "def first_item(items):\n    # return the first element from the list\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))",
+            "content": "def first_item(items):\n    # return the first element from the list\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def first_item(items):\n    return items[0]",
+        "semanticChecks": [
           {
-            "stdin": "1\n1\n",
-            "stdout": "1.0",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "first_item",
+            "args": [
+              [
+                4,
+                5,
+                6
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 4,
+            "expectedKind": "value"
           },
           {
-            "stdin": "1\n1\n",
-            "stdout": "1.0",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "first_item",
+            "args": [
+              [
+                "red",
+                "blue"
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "red",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def divide(a, b):\n    return a / b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))"
+        ]
       }
     }
   ]

@@ -7,33 +7,82 @@
           "summary": "Process each list item and build derived results.",
           "cards": {
             "sketch0": {
-              "title": "Introduction to Looping Through Lists"
+              "title": "What a list loop does"
             },
             "sketch1": {
-              "title": "Using List Comprehensions"
+              "title": "Using a loop to build a new list"
+            },
+            "sketch2": {
+              "title": "Choosing clear loop variable names"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Looping Through Lists Project"
+              "title": "Loop Through Lists Practice"
             }
           },
           "projectSteps": {
-            "quiz5": {
-              "title": "Sum of List Elements"
+            "ci_print_each_item": {
+              "title": "Print each item in a list"
             },
-            "quiz10": {
-              "title": "Filter Even Numbers"
+            "ci_double_list_function": {
+              "title": "Return a doubled list"
             },
-            "quiz11": {
-              "title": "List Transformation"
+            "ci_count_long_words": {
+              "title": "Count words longer than 4 letters"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "Basic Loop Structure",
-              "prompt": "What is the correct syntax to loop through a list in Python?",
+            "sc-loop-item-name": {
+              "title": "Pick the loop variable",
+              "prompt": "In this code, what does `fruit` represent?\n\n```python\nfruits = [\"apple\", \"banana\", \"pear\"]\nfor fruit in fruits:\n    print(fruit)\n```",
+              "hint": "Look at what comes after `for` and before `in`.",
+              "help": {
+                "concept": "In a `for item in list` loop, the variable after `for` stores one current item from the list during each loop.",
+                "hint_1": "`fruit` changes as the loop moves through `\"apple\"`, then `\"banana\"`, then `\"pear\"`.",
+                "hint_2": "It is not the whole list name. It is the single value being processed on each pass."
+              },
+              "options": {
+                "a": "The whole list of fruits",
+                "b": "One item from the list at a time",
+                "c": "The index number of each fruit",
+                "d": "A built-in Python keyword"
+              }
+            },
+            "sc-empty-list-start": {
+              "title": "Start a new result list",
+              "prompt": "You want to loop through a list and collect changed values into a new list. Which line correctly creates an empty list to start with?",
+              "hint": "You need the syntax for an empty list literal.",
+              "help": {
+                "concept": "When building a derived list, you usually begin with an empty list and add items with `append()` inside the loop.",
+                "hint_1": "An empty list uses square brackets with nothing inside.",
+                "hint_2": "Look for the choice that creates a list, not a string, number, or print call."
+              },
+              "options": {
+                "a": "result = ()",
+                "b": "print(result)"
+              }
+            },
+            "mc-loop-uses": {
+              "title": "What loops through a list can do",
+              "prompt": "Which actions are common reasons to loop through a list? Choose all that apply.",
+              "hint": "Think about tasks you repeat once for each item.",
+              "help": {
+                "concept": "List loops are used to process each item, such as printing values, checking conditions, or building a new list from transformed items.",
+                "hint_1": "A loop is useful when the same action should happen for every item in the list.",
+                "hint_2": "Look for choices about repeated processing of items, not choices about changing Python syntax itself."
+              },
+              "options": {
+                "a": "Print each item",
+                "b": "Build a new list from changed items",
+                "c": "Check whether items meet a condition",
+                "d": "Rename Python keywords"
+              }
+            },
+            "mc-good-loop-names": {
+              "title": "Choose clear loop variable names",
+              "prompt": "For the list `scores = [88, 91, 76]`, which loop variable names are clear and appropriate? Choose all that apply.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -41,157 +90,111 @@
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
               "options": {
-                "a": "for item in list:",
-                "b": "loop item in list",
-                "c": "while item in list:",
-                "d": "iterate item in list"
+                "a": "score",
+                "b": "item",
+                "c": "scores",
+                "d": "score_value"
               }
             },
-            "quiz2": {
-              "title": "List Comprehension Benefits",
-              "prompt": "Which of the following are benefits of using list comprehensions?",
-              "hint": "Consider the advantages of concise and readable code.",
+            "dr-build-derived-list": {
+              "title": "Order the steps to build a derived list",
+              "prompt": "Arrange these steps in the correct order for building a new list from an existing list.",
+              "hint": "Start by creating the new list before the loop begins.",
               "help": {
-                "concept": "List comprehensions provide a more concise and readable way to create lists.",
-                "hint_1": "Think about how list comprehensions reduce the need for multiple lines of code.",
-                "hint_2": "Consider how list comprehensions can make code more readable."
-              },
-              "options": {
-                "a": "More concise code",
-                "b": "Improved readability",
-                "c": "Faster execution",
-                "d": "Easier debugging"
-              }
-            },
-            "quiz3": {
-              "title": "Loop Execution Order",
-              "prompt": "Arrange the steps in the correct order for executing a loop over a list.",
-              "hint": "Start with initializing the loop, then iterate over each item.",
-              "help": {
-                "concept": "A loop iterates over each item in a sequence, executing the block of code for each item.",
-                "hint_1": "The loop starts by initializing the iteration variable.",
-                "hint_2": "The loop continues until all items have been processed."
+                "concept": "To build a derived list, first create an empty list, then loop through the original list, compute each new value, and append it.",
+                "hint_1": "The empty list setup happens before any items are processed.",
+                "hint_2": "Inside the loop, you first get the current item, then create the changed value, then add it to the result list."
               },
               "tokens": {
-                "t1": "Initialize loop variable",
-                "t2": "Check if more items exist",
-                "t3": "Execute loop body",
-                "t4": "Move to next item"
+                "t1": "Create an empty result list",
+                "t2": "Start a loop over the original list",
+                "t3": "Compute the changed value for the current item",
+                "t4": "Append the changed value to the result list"
               }
             },
-            "quiz4": {
-              "title": "List Comprehension Syntax",
-              "prompt": "Complete the list comprehension to create a list of squares from `numbers`.",
-              "hint": "Use the correct syntax for list comprehensions.",
+            "dr-read-loop-header": {
+              "title": "Read the loop in order",
+              "prompt": "Put these parts of the loop statement in the correct order to make a valid Python loop header.",
+              "hint": "Focus on the logical order of the parts.",
               "help": {
-                "concept": "List comprehensions use a specific syntax to create new lists from existing ones.",
-                "hint_1": "The syntax is `[expression for item in list]`.",
-                "hint_2": "The expression should calculate the square of the item."
-              },
-              "template": "squares = [number ** 2 for number in [blank1]]",
-              "choices": [
-                "numbers",
-                "squares",
-                "items",
-                "values"
-              ]
-            },
-            "quiz5": {
-              "title": "Sum of List Elements",
-              "prompt": "Write a Python program that calculates the sum of all elements in a list.",
-              "hint": "Use a loop to iterate through the list and accumulate the sum.",
-              "help": {
-                "concept": "To calculate the sum, iterate over the list and add each element to a total variable.",
-                "hint_1": "Initialize a variable to store the sum before the loop.",
-                "hint_2": "Add each element to the sum variable inside the loop."
-              },
-              "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Initialize sum variable\n# Loop through numbers and calculate sum"
-            },
-            "quiz6": {
-              "title": "Looping Through Lists",
-              "prompt": "What is the output of the following code?\n\n```python\nnumbers = [1, 2, 3]\nfor number in numbers:\n    print(number * 2)\n```",
-              "hint": "Consider what each number is multiplied by.",
-              "help": {
-                "concept": "The loop multiplies each number by 2 and prints the result.",
-                "hint_1": "Each number in the list is doubled.",
-                "hint_2": "The output will be each number multiplied by 2."
-              },
-              "options": {
-                "a": "2, 4, 6",
-                "b": "1, 2, 3",
-                "c": "3, 6, 9",
-                "d": "4, 8, 12"
-              }
-            },
-            "quiz7": {
-              "title": "Looping Techniques",
-              "prompt": "Which of the following are valid ways to loop through a list in Python?",
-              "hint": "Consider both traditional and Pythonic methods.",
-              "help": {
-                "concept": "Python offers several ways to loop through lists, including `for` loops and list comprehensions.",
-                "hint_1": "Think about the `for` loop and list comprehensions.",
-                "hint_2": "Both `for` loops and list comprehensions can be used to iterate over lists."
-              },
-              "options": {
-                "a": "Using a `for` loop",
-                "b": "Using a `while` loop",
-                "c": "Using list comprehension",
-                "d": "Using a `do-while` loop"
-              }
-            },
-            "quiz8": {
-              "title": "List Comprehension Steps",
-              "prompt": "Arrange the steps in the correct order to create a list comprehension that squares numbers.",
-              "hint": "Start with the expression, then the loop variable, and finally the list.",
-              "help": {
-                "concept": "List comprehensions follow a specific order: expression, loop variable, and list.",
-                "hint_1": "The expression comes first, followed by the loop variable.",
-                "hint_2": "The list being iterated over comes last."
+                "concept": "Arrange the pieces according to the structure of the statement.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Put the pieces in the order that makes the statement valid."
               },
               "tokens": {
-                "t1": "number ** 2",
-                "t2": "for number",
-                "t3": "in numbers"
+                "t1": "for",
+                "t2": "color",
+                "t3": "in",
+                "t4": "colors",
+                "t5": ":"
               }
             },
-            "quiz9": {
-              "title": "Loop Variable Name",
-              "prompt": "In the loop `for [blank1] in numbers:`, what is a common name for the loop variable?",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+            "fb-append-call": {
+              "title": "Complete the append line",
+              "prompt": "Fill in the missing method name to add each changed item to the result list.",
+              "hint": "Use the list method that adds one item to the end.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "When building a new list in a loop, `the missing term()` adds one value at a time to the end of the list.",
+                "hint_1": "The method is called on the list you are building, like `result.method(value)`.",
+                "hint_2": "It is the common list method used in beginner loops to collect new values."
               },
-              "template": "for [blank1] in numbers:",
+              "template": "result.[blank1](number * 2)",
               "choices": [
-                "number",
-                "num",
-                "item",
-                "element"
+                "append",
+                "add",
+                "insert",
+                "print"
               ]
             },
-            "quiz10": {
-              "title": "Filter Even Numbers",
-              "prompt": "Write a Python program that filters out even numbers from a list and prints them.",
+            "fb-loop-keyword": {
+              "title": "Complete the loop header",
+              "prompt": "Fill in the missing keyword to start a loop over a list.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "numbers = [1, 2, 3, 4, 5, 6]\n# Loop through numbers and filter even numbers"
+              "template": "[blank1] item in items:",
+              "choices": [
+                "for",
+                "if",
+                "while",
+                "def"
+              ]
             },
-            "quiz11": {
-              "title": "List Transformation",
-              "prompt": "Write a Python program that multiplies each element in a list by 3 and prints the new list.",
-              "hint": "Use a loop to iterate through the list and multiply each element.",
+            "ci-print-each-item": {
+              "title": "Print each item in a list",
+              "prompt": "Write a program that creates a list named `animals` with the values `\"cat\"`, `\"dog\"`, and `\"fox\"`. Then use a loop to print each item on its own line.",
+              "hint": "Read the task \"Print each item in a list\" and identify the required result.",
               "help": {
-                "concept": "To transform a list, iterate over it and apply the transformation to each element.",
-                "hint_1": "Initialize a new list to store the transformed elements.",
-                "hint_2": "Append each transformed element to the new list."
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print each item in a list\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Create a new list to store results\n# Loop through numbers and multiply each by 3"
+              "starterCode": "animals = [\"cat\", \"dog\", \"fox\"]\n\n# Loop through animals and print each one"
+            },
+            "ci-double-list-function": {
+              "title": "Return a doubled list",
+              "prompt": "Define a function named `double_numbers` that takes a list of numbers and returns a new list where each number is doubled. Do not print the result; return it.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass"
+            },
+            "ci-count-long-words": {
+              "title": "Count words longer than 4 letters",
+              "prompt": "Define a function named `count_long_words` that takes a list of words and returns how many words have more than 4 letters.",
+              "hint": "Read the task \"Count words longer than 4 letters\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Count words longer than 4 letters\".",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass"
             }
           }
         }
@@ -202,13 +205,17 @@
     "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "looping-through-lists": {
-          "sketch1": {
-            "title": "Introduction to Looping Through Lists",
-            "bodyMarkdown": "Looping through lists is a fundamental concept in Python that allows you to process each item in a list. This is useful for tasks like summing numbers, filtering items, or transforming data.\n\n### Example\nConsider a list of numbers:\n\n```python\nnumbers = [1, 2, 3, 4, 5]\n```\n\nTo print each number, you can use a `for` loop:\n\n```python\nfor number in numbers:\n    print(number)\n```\n\nThis loop will print each number in the list, one by one.\n\n### Try it yourself\nModify the loop to print the square of each number instead.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "loop-basics": {
+            "title": "What a list loop does",
+            "bodyMarkdown": "A `for` loop lets you visit each item in a list one at a time. This is useful when you want to print every value, count things, or build a new result from the original list.\n\nHere is a simple example:\n\n```python\ncolors = [\"red\", \"blue\", \"green\"]\n\nfor color in colors:\n    print(color)\n```\n\nStep by step:\n\n- `colors` stores three strings in a list.\n- `for color in colors:` means: take each item from the list, one by one.\n- On the first loop, `color` is `\"red\"`.\n- On the second loop, `color` is `\"blue\"`.\n- On the third loop, `color` is `\"green\"`.\n- `print(color)` runs each time, so all three items appear in the output panel.\n\nWorked example output:\n\n```python\nred\nblue\ngreen\n```\n\nTry it yourself: change the list to your own three favorite foods and run the code again."
           },
-          "sketch2": {
-            "title": "Using List Comprehensions",
-            "bodyMarkdown": "List comprehensions provide a concise way to create lists. They can often replace loops for simple transformations.\n\n### Example\nTo create a list of squares from the `numbers` list:\n\n```python\nsquares = [number ** 2 for number in numbers]\n```\n\nThis single line replaces the need for a loop to populate the `squares` list.\n\n### Your turn\nTry creating a list of even numbers from the `numbers` list using a list comprehension."
+          "loop-and-build": {
+            "title": "Using a loop to build a new list",
+            "bodyMarkdown": "Loops are not only for printing. You can also use them to create a new list from an existing one.\n\nExample:\n\n```python\nnumbers = [1, 2, 3, 4]\ndoubled = []\n\nfor number in numbers:\n    doubled.append(number * 2)\n\nprint(doubled)\n```\n\nLine by line:\n\n- `numbers` is the original list.\n- `doubled = []` starts an empty list.\n- The loop takes each `number` from `numbers`.\n- `doubled.append(number * 2)` calculates a new value and adds it to the new list.\n- At the end, `doubled` becomes `[2, 4, 6, 8]`.\n\nThis pattern is very common:\n\n1. Start with an empty list.\n2. Loop through the original list.\n3. Change each item.\n4. Append the changed item to the new list.\n\nYour turn: modify the example so it adds `10` to each number instead of doubling it."
+          },
+          "loop-variables": {
+            "title": "Choosing clear loop variable names",
+            "bodyMarkdown": "The loop variable should describe one item from the list.\n\nExample:\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\n\nfor animal in animals:\n    print(animal)\n```\n\n`animal` is a good name because each item in `animals` is one animal.\n\nLess clear code would be:\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\n\nfor x in animals:\n    print(x)\n```\n\nThis still works, but `x` does not explain what the value means.\n\nWorked example:\n\n- List name: `scores`\n- Good loop variable: `score`\n\n```python\nscores = [88, 91, 76]\n\nfor score in scores:\n    print(score)\n```\n\nTry this: write a list called `cities` and loop with a variable named `city`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

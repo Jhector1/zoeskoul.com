@@ -15,6 +15,7 @@ import type { CodeFeedback } from "@/lib/code/feedback/types";
 import { pickRunFeedbackFromResult } from "@/lib/code/feedback";
 import { runViaApi } from "@/lib/code/runClient";
 import CodeRunner, { CodeRunnerFrame } from "@/components/code/CodeRunner";
+import { resolveEditableWorkspaceFileId } from "@/components/code/runner/workspaceEditing";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
 import { useTaggedT } from "@/i18n/tagged";
 import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout";
@@ -257,7 +258,14 @@ export default function CodeInputExerciseUI({
             if (readOnly) return;
 
             if (workspace && onChangeWorkspace) {
-                const entryId = workspace.entryFileId || workspace.activeFileId;
+                const entryId = resolveEditableWorkspaceFileId(
+                    workspace,
+                    workspace.activeFileId,
+                );
+
+                if (!entryId) {
+                    return;
+                }
 
                 const nextWorkspace: WorkspaceStateV2 = {
                     ...workspace,
@@ -304,7 +312,10 @@ export default function CodeInputExerciseUI({
         (nextWorkspace: WorkspaceStateV2) => {
             if (readOnly) return;
 
-            const entryId = nextWorkspace.entryFileId || nextWorkspace.activeFileId;
+            const entryId = resolveEditableWorkspaceFileId(
+                nextWorkspace,
+                nextWorkspace.activeFileId,
+            );
             const entryNode = nextWorkspace.nodes.find(
                 (node) => node.kind === "file" && node.id === entryId,
             );
@@ -698,7 +709,7 @@ export default function CodeInputExerciseUI({
 
     const runnerEditorModelKey = [
         runnerExerciseKey,
-        workspace?.entryFileId || workspace?.activeFileId || "entry",
+        workspace?.activeFileId || workspace?.entryFileId || "entry",
     ].join(":");
 
     if (workspace && !isWorkspaceValid) {
@@ -750,6 +761,7 @@ export default function CodeInputExerciseUI({
                 code={code}
                 stdin={stdin}
                 workspace={workspace}
+                activeWorkspaceFileId={workspace?.activeFileId}
                 onChangeWorkspace={handleWorkspaceChange}
                 exerciseStateKey={runnerExerciseKey}
                 editorModelKey={runnerEditorModelKey}

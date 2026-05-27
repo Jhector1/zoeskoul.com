@@ -1,0 +1,456 @@
+{
+  "topicId": "writing-text-files",
+  "subjectSlug": "python--python-data-functions--draft",
+  "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
+  "sectionSlug": "python--python-data-functions--draft-python-7-file-io",
+  "prefix": "py7",
+  "minutes": 22,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.label",
+    "summaryKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch0.title",
+      "sketchId": "write-mode-basics",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch1.title",
+      "sketchId": "append-mode-basics",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch2.title",
+      "sketchId": "paths-and-newlines",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_write_summary_file",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.ci_write_summary_file.title",
+            "exerciseKey": "ci-write-summary-file",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_append_log_entry",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.ci_append_log_entry.title",
+            "exerciseKey": "ci-append-log-entry",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_write_two_lines",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.ci_write_two_lines.title",
+            "exerciseKey": "ci-write-two-lines",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "write-mode-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.write-mode-basics.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.write-mode-basics.bodyMarkdown"
+    },
+    {
+      "id": "append-mode-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.append-mode-basics.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.append-mode-basics.bodyMarkdown"
+    },
+    {
+      "id": "paths-and-newlines",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.paths-and-newlines.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.paths-and-newlines.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-write-mode-effect",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.sc-write-mode-effect",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc-append-mode-effect",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.sc-append-mode-effect",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-good-writing-practices",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.mc-good-writing-practices",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "mc-when-lines-join",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.mc-when-lines-join",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr-write-sequence",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.dr-write-sequence",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr-overwrite-vs-append",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.dr-overwrite-vs-append",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ]
+      }
+    },
+    {
+      "id": "fb-append-mode",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.fb-append-mode",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "\"a\""
+      }
+    },
+    {
+      "id": "fb-newline-char",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.fb-newline-char",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "\\n"
+      }
+    },
+    {
+      "id": "ci-write-summary-file",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-write-summary-file",
+      "language": "python",
+      "starterCode": "text = input()\n# Write the summary to summary.txt, then read it back and print it.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "text = input()\n# Write the summary to summary.txt, then read it back and print it.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "text = input()\n# Write the summary to summary.txt, then read it back and print it.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "text = input()\n# Write the summary to summary.txt, then read it back and print it.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "summary.txt",
+            "content": "example old content\n'}],",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "apples\n",
+            "stdout": "Summary: apples\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "summary.txt",
+                "content": "old text\nmore old text\n'}]},{",
+                "readOnly": false
+              }
+            ]
+          },
+          {
+            "stdin": "Bob\n",
+            "stdout": "Summary: Bob\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = input()\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(\"Summary: \" + text)\n\nwith open(\"summary.txt\", \"r\") as file:\n    print(file.read())"
+      }
+    },
+    {
+      "id": "ci-append-log-entry",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-append-log-entry",
+      "language": "python",
+      "starterCode": "entry = input()\n# Append the entry to log.txt, then print the whole file.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "entry = input()\n# Append the entry to log.txt, then print the whole file.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "entry = input()\n# Append the entry to log.txt, then print the whole file.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "entry = input()\n# Append the entry to log.txt, then print the whole file.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "log.txt",
+            "content": "start\n'}],",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "third\n",
+            "stdout": "first\nsecond\n'}]},{third",
+            "match": "exact",
+            "files": [
+              {
+                "path": "log.txt",
+                "content": "first\nsecond\n'}]},{",
+                "readOnly": false
+              }
+            ]
+          },
+          {
+            "stdin": "Bob\n",
+            "stdout": "StartContinueNew entryNew entryBob\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "entry = input()\nwith open(\"log.txt\", \"a\") as file:\n    file.write(entry + \"\\n\")\n\nwith open(\"log.txt\", \"r\") as file:\n    print(file.read(), end=\"\")"
+      }
+    },
+    {
+      "id": "ci-write-two-lines",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-write-two-lines",
+      "language": "python",
+      "starterCode": "name = input()\nscore = input()\n# Overwrite report.txt with two labeled lines, then print the file contents.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "name = input()\nscore = input()\n# Overwrite report.txt with two labeled lines, then print the file contents.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "name = input()\nscore = input()\n# Overwrite report.txt with two labeled lines, then print the file contents.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "name = input()\nscore = input()\n# Overwrite report.txt with two labeled lines, then print the file contents.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "report.txt",
+            "content": "placeholder\n'}],",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Ava\n9\n",
+            "stdout": "Name: Ava\nScore: 9\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "report.txt",
+                "content": "old report\n'}]},{",
+                "readOnly": false
+              }
+            ]
+          },
+          {
+            "stdin": "Bob\n10\n",
+            "stdout": "Name: Bob\nScore: 10\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "name = input()\nscore = input()\n\nwith open(\"report.txt\", \"w\") as file:\n    file.write(\"Name: \" + name + \"\\n\")\n    file.write(\"Score: \" + score)\n\nwith open(\"report.txt\", \"r\") as file:\n    print(file.read())"
+      }
+    }
+  ]
+}

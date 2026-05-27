@@ -1,0 +1,484 @@
+{
+  "topicId": "simple-csv-processing",
+  "subjectSlug": "python--python-data-functions--draft",
+  "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
+  "sectionSlug": "python--python-data-functions--draft-python-7-exceptions-and-cleaning",
+  "prefix": "py7",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.label",
+    "summaryKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch0.title",
+      "sketchId": "csv-dictreader-basics",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch1.title",
+      "sketchId": "csv-cleaning-values",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch2.title",
+      "sketchId": "csv-safe-processing",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_print_passing_names",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.projectSteps.ci_print_passing_names.title",
+            "exerciseKey": "ci-print-passing-names",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_write_passing_names",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.projectSteps.ci_write_passing_names.title",
+            "exerciseKey": "ci-write-passing-names",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_skip_invalid_scores",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.projectSteps.ci_skip_invalid_scores.title",
+            "exerciseKey": "ci-skip-invalid-scores",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "csv-dictreader-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-dictreader-basics.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-dictreader-basics.bodyMarkdown"
+    },
+    {
+      "id": "csv-cleaning-values",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-cleaning-values.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-cleaning-values.bodyMarkdown"
+    },
+    {
+      "id": "csv-safe-processing",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-safe-processing.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.csv-safe-processing.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-csv-module-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-csv-module-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-dictreader-header",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.sc-dictreader-header",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-cleaning-csv-values",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.mc-cleaning-csv-values",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "mc-safe-csv-loop",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.mc-safe-csv-loop",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-csv-processing-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.dr-csv-processing-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr-clean-score-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.dr-clean-score-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb-dictreader-import",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.fb-dictreader-import",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "csv"
+      }
+    },
+    {
+      "id": "fb-access-name-field",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.fb-access-name-field",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "name"
+      }
+    },
+    {
+      "id": "ci-print-passing-names",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-passing-names",
+      "language": "python",
+      "starterCode": "import csv\n\nwith open(\"scores.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    # Write your loop below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "import csv\n\nwith open(\"scores.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    # Write your loop below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "import csv\n\nwith open(\"scores.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    # Write your loop below",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "import csv\n\nwith open(\"scores.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    # Write your loop below",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "scores.csv",
+            "content": "name,score\n Ava , 8 \nBen,7\n Cara,10\nDrew,6\n'}],"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\nCara\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "scores.csv",
+                "content": "name,score\n Ava , 8 \nBen,7\n Cara,10\nDrew,6\n'}]},{"
+              }
+            ]
+          },
+          {
+            "stdin": "",
+            "stdout": "Omar\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "scores.csv",
+                "content": "name,score\nMia,3\nOmar,11\n",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "solutionCode": "import csv\n\nwith open(\"scores.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        name = row[\"name\"].strip()\n        score = int(row[\"score\"].strip())\n        if score >= 8:\n            print(name)"
+      }
+    },
+    {
+      "id": "ci-write-passing-names",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-passing-names",
+      "language": "python",
+      "starterCode": "import csv\n\nwith open(\"scores.csv\", \"r\") as source:\n    reader = csv.DictReader(source)\n    with open(\"passing.csv\", \"w\") as target:\n        # Write the header and passing names here\n        pass\n\n# Reopen passing.csv and print its contents",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "import csv\n\nwith open(\"scores.csv\", \"r\") as source:\n    reader = csv.DictReader(source)\n    with open(\"passing.csv\", \"w\") as target:\n        # Write the header and passing names here\n        pass\n\n# Reopen passing.csv and print its contents",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "import csv\n\nwith open(\"scores.csv\", \"r\") as source:\n    reader = csv.DictReader(source)\n    with open(\"passing.csv\", \"w\") as target:\n        # Write the header and passing names here\n        pass\n\n# Reopen passing.csv and print its contents",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "import csv\n\nwith open(\"scores.csv\", \"r\") as source:\n    reader = csv.DictReader(source)\n    with open(\"passing.csv\", \"w\") as target:\n        # Write the header and passing names here\n        pass\n\n# Reopen passing.csv and print its contents",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "scores.csv",
+            "content": "name,score\n Ava , 8 \nBen,7\n Cara,10\nDrew,6\n'}],"
+          },
+          {
+            "path": "passing.csv",
+            "content": "name\nAva\nCara\n",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "name\nAva\nCara\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "scores.csv",
+                "content": "name,score\n Ava , 8 \nBen,7\n Cara,10\nDrew,6\n'}]},{"
+              },
+              {
+                "path": "passing.csv",
+                "content": "name\nAva\nCara\n",
+                "readOnly": true
+              }
+            ]
+          },
+          {
+            "stdin": "",
+            "stdout": "name\nOmar\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "scores.csv",
+                "content": "name,score\nMia,3\nOmar,11\n",
+                "readOnly": true
+              },
+              {
+                "path": "passing.csv",
+                "content": "name\nAva\nCara\n",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "solutionCode": "import csv\n\nwith open(\"scores.csv\", \"r\") as source:\n    reader = csv.DictReader(source)\n    with open(\"passing.csv\", \"w\") as target:\n        target.write(\"name\\n\")\n        for row in reader:\n            name = row[\"name\"].strip()\n            score = int(row[\"score\"].strip())\n            if score >= 8:\n                target.write(name + \"\\n\")\n\nwith open(\"passing.csv\", \"r\") as target:\n    print(target.read(), end=\"\")"
+      }
+    },
+    {
+      "id": "ci-skip-invalid-scores",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-skip-invalid-scores",
+      "language": "python",
+      "starterCode": "import csv\n\nwith open(\"scores.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    # Process each row safely",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "import csv\n\nwith open(\"scores.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    # Process each row safely",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "import csv\n\nwith open(\"scores.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    # Process each row safely",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "import csv\n\nwith open(\"scores.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    # Process each row safely",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "scores.csv",
+            "content": "name,score\nAva,8\nBen,oops\nCara,10\n'}],"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava: 8\nSkipped: Ben\nCara: 10\nSkipped: '}]}",
+            "match": "exact",
+            "files": [
+              {
+                "path": "scores.csv",
+                "content": "name,score\nAva,8\nBen,oops\nCara,10\n'}]},{"
+              }
+            ]
+          },
+          {
+            "stdin": "",
+            "stdout": "Mia: 3\nOmar: 11\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "scores.csv",
+                "content": "name,score\nMia,3\nOmar,11\n",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "solutionCode": "import csv\n\nwith open(\"scores.csv\", \"r\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        name = row[\"name\"].strip()\n        try:\n            score = int(row[\"score\"].strip())\n            print(f\"{name}: {score}\")\n        except ValueError:\n            print(f\"Skipped: {name}\")"
+      }
+    }
+  ]
+}

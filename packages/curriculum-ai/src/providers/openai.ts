@@ -1,13 +1,39 @@
 import OpenAI from "openai";
-import {
-  validateTopicAuthoringDraft,
-} from "@zoeskoul/curriculum-contracts";
+
 import type { AiProvider, GenerateJsonArgs, GeneratedJsonResult } from "../types.js";
 import { GeneratedJsonError } from "../types.js";
 
 type JsonSchema = Record<string, unknown>;
 const OPENAI_DEFAULT_TEMPERATURE = 0;
 const OPENAI_DETERMINISTIC_SEED = 0;
+
+
+const OPENAI_JSON_SCALAR_SCHEMA = {
+  type: ["string", "number", "boolean", "null"],
+} satisfies JsonSchema;
+
+const OPENAI_JSON_VALUE_SCHEMA_DEPTH_1 = {
+  type: ["string", "number", "boolean", "array", "null"],
+  items: OPENAI_JSON_SCALAR_SCHEMA,
+} satisfies JsonSchema;
+
+const OPENAI_JSON_VALUE_SCHEMA_DEPTH_2 = {
+  type: ["string", "number", "boolean", "array", "null"],
+  items: OPENAI_JSON_VALUE_SCHEMA_DEPTH_1,
+} satisfies JsonSchema;
+
+const OPENAI_JSON_VALUE_SCHEMA_DEPTH_3 = {
+  type: ["string", "number", "boolean", "array", "null"],
+  items: OPENAI_JSON_VALUE_SCHEMA_DEPTH_2,
+} satisfies JsonSchema;
+
+const OPENAI_JSON_VALUE_SCHEMA = OPENAI_JSON_VALUE_SCHEMA_DEPTH_3;
+
+const OPENAI_SEMANTIC_VALUE_KIND_SCHEMA = {
+  type: "string",
+  enum: ["value", "dict_entries", "list_of_dict_entries"],
+} satisfies JsonSchema;
+
 const OPENAI_STRUCTURED_OUTPUT_UNSUPPORTED_KEYWORDS = [
   "oneOf",
   "anyOf",
@@ -130,12 +156,18 @@ const OPENAI_TOPIC_AUTHORING_EXERCISE_ITEM_SCHEMA = {
         additionalProperties: false,
         required: [
           "type",
+          "functionName",
+          "args",
+          "argKinds",
           "className",
           "constructorArgs",
+          "constructorArgKinds",
           "attributes",
           "methodName",
           "methodArgs",
+          "methodArgKinds",
           "expected",
+          "expectedKind",
           "min",
           "message",
         ],
@@ -143,20 +175,46 @@ const OPENAI_TOPIC_AUTHORING_EXERCISE_ITEM_SCHEMA = {
           type: {
             type: "string",
             enum: [
+              "function_returns",
               "defines_class",
               "constructible",
               "instance_attributes",
               "method_returns",
               "created_instances",
               "printed_line_count",
+              "no_stdout",
             ],
           },
+          argKinds: {
+            type: ["array", "null"],
+            items: OPENAI_SEMANTIC_VALUE_KIND_SCHEMA,
+          },
+
+          expectedKind: {
+            type: ["string", "null"],
+            enum: ["value", "dict_entries", "list_of_dict_entries", null],
+          },
+
+          constructorArgKinds: {
+            type: ["array", "null"],
+            items: OPENAI_SEMANTIC_VALUE_KIND_SCHEMA,
+          },
+
+          methodArgKinds: {
+            type: ["array", "null"],
+            items: OPENAI_SEMANTIC_VALUE_KIND_SCHEMA,
+          },
+
+          functionName: { type: ["string", "null"] },
+          args: {
+            type: ["array", "null"],
+            items: OPENAI_JSON_VALUE_SCHEMA,
+          },
+
           className: { type: ["string", "null"] },
           constructorArgs: {
             type: ["array", "null"],
-            items: {
-              type: ["string", "number", "boolean", "null"],
-            },
+            items: OPENAI_JSON_VALUE_SCHEMA,
           },
           attributes: {
             type: ["array", "null"],
@@ -165,11 +223,10 @@ const OPENAI_TOPIC_AUTHORING_EXERCISE_ITEM_SCHEMA = {
           methodName: { type: ["string", "null"] },
           methodArgs: {
             type: ["array", "null"],
-            items: {
-              type: ["string", "number", "boolean", "null"],
-            },
+            items: OPENAI_JSON_VALUE_SCHEMA,
           },
-          expected: { type: ["string", "number", "boolean", "null"] },
+
+          expected: OPENAI_JSON_VALUE_SCHEMA,
           min: { type: ["number", "null"] },
           message: { type: ["string", "null"] },
         },
@@ -329,16 +386,10 @@ function normalizeProviderJsonValue(
 
   return value;
 }
-
 function getRuntimeValidationErrors(
-  schemaName: GenerateJsonArgs["schemaName"],
-  value: unknown,
+    _schemaName: GenerateJsonArgs["schemaName"],
+    _value: unknown,
 ): string[] {
-  if (schemaName === "TopicAuthoringDraft") {
-    const result = validateTopicAuthoringDraft(value);
-    return result.ok ? [] : result.errors;
-  }
-
   return [];
 }
 

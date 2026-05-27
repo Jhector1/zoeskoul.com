@@ -23,7 +23,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "why-read-files",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.sketch1.title",
+      "sketchId": "read-vs-lines",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.sketch2.title",
+      "sketchId": "relative-paths-and-safety",
       "height": 420
     },
     {
@@ -52,27 +66,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz9",
-            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.projectSteps.quiz9.title",
-            "exerciseKey": "quiz9",
+            "id": "ci_read_and_print",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.projectSteps.ci_read_and_print.title",
+            "exerciseKey": "ci-read-and-print",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz10",
-            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.projectSteps.quiz10.title",
-            "exerciseKey": "quiz10",
+            "id": "ci_first_line",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.projectSteps.ci_first_line.title",
+            "exerciseKey": "ci-first-line",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz11",
-            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.projectSteps.quiz11.title",
-            "exerciseKey": "quiz11",
+            "id": "ci_count_lines",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.projectSteps.ci_count_lines.title",
+            "exerciseKey": "ci-count-lines",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -84,36 +98,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "why-read-files",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch1.title",
-      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.why-read-files.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.why-read-files.bodyMarkdown"
+    },
+    {
+      "id": "read-vs-lines",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.read-vs-lines.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.read-vs-lines.bodyMarkdown"
+    },
+    {
+      "id": "relative-paths-and-safety",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.relative-paths-and-safety.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.relative-paths-and-safety.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-read-mode",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz1",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
-      }
-    },
-    {
-      "id": "quiz2",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.sc-read-mode",
       "optionIds": [
         "a",
         "b",
@@ -126,11 +135,28 @@
       }
     },
     {
-      "id": "quiz3",
+      "id": "sc-relative-path",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.sc-relative-path",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-with-open-benefits",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz3",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.mc-with-open-benefits",
       "optionIds": [
         "a",
         "b",
@@ -141,17 +167,16 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c",
-          "d"
+          "b"
         ]
       }
     },
     {
-      "id": "quiz4",
+      "id": "mc-read-methods",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz4",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.mc-read-methods",
       "optionIds": [
         "a",
         "b",
@@ -162,17 +187,38 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c",
-          "d"
+          "b"
         ]
       }
     },
     {
-      "id": "quiz5",
+      "id": "dr-read-file-steps",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz5",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.dr-read-file-steps",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr-build-path",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.dr-build-path",
       "tokenIds": [
         "t1",
         "t2",
@@ -188,43 +234,11 @@
       }
     },
     {
-      "id": "quiz6",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz6",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "quiz7",
+      "id": "fb-read-call",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz7",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "r"
-      }
-    },
-    {
-      "id": "quiz8",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz8",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.fb-read-call",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -232,85 +246,29 @@
       }
     },
     {
-      "id": "quiz9",
-      "kind": "code_input",
-      "purpose": "project",
+      "id": "fb-open-mode",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz9",
-      "language": "python",
-      "starterCode": "# Write your code below",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "# Write your code below",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "# Write your code below",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "# Write your code below",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "files": [
-          {
-            "path": "data/input.txt",
-            "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
-            "readOnly": false
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdout": "Hello, World!\nThis is a test file.\n\nAnother line.",
-            "match": "exact",
-            "files": [
-              {
-                "path": "data/input.txt",
-                "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
-                "readOnly": false
-              }
-            ]
-          },
-          {
-            "stdout": "Python is fun!\nLet's learn more.\n\nKeep going!",
-            "match": "exact",
-            "files": [
-              {
-                "path": "data/input.txt",
-                "content": "Python is fun!\nLet's learn more.\n\nKeep going!",
-                "readOnly": false
-              }
-            ]
-          }
-        ],
-        "solutionCode": "file = open('data/input.txt', 'r')\ncontent = file.read()\nprint(content)\nfile.close()"
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.fb-open-mode",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "r"
       }
     },
     {
-      "id": "quiz10",
+      "id": "ci-read-and-print",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz10",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-read-and-print",
       "language": "python",
-      "starterCode": "file = open('data/input.txt', 'r')\ncontent = file.read()\n\n# Modify the code to use a context manager",
+      "starterCode": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "file = open('data/input.txt', 'r')\ncontent = file.read()\n\n# Modify the code to use a context manager",
+          "content": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -319,11 +277,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "file = open('data/input.txt', 'r')\ncontent = file.read()\n\n# Modify the code to use a context manager",
+        "starterCode": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "file = open('data/input.txt', 'r')\ncontent = file.read()\n\n# Modify the code to use a context manager",
+            "content": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -331,9 +289,8 @@
         ],
         "files": [
           {
-            "path": "data/input.txt",
-            "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
-            "readOnly": false
+            "path": "data/message.txt",
+            "content": "Hello from file reading!"
           }
         ]
       },
@@ -342,43 +299,43 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "Hello, World!\nThis is a test file.\n\nAnother line.",
+            "stdin": "",
+            "stdout": "Hello from file reading!\n",
             "match": "exact",
             "files": [
               {
-                "path": "data/input.txt",
-                "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
-                "readOnly": false
+                "path": "data/message.txt",
+                "content": "Hello from file reading!"
               }
             ]
           },
           {
-            "stdout": "Python is fun!\nLet's learn more.\n\nKeep going!",
+            "stdin": "",
+            "stdout": "Line one\nLine two\n",
             "match": "exact",
             "files": [
               {
-                "path": "data/input.txt",
-                "content": "Python is fun!\nLet's learn more.\n\nKeep going!",
-                "readOnly": false
+                "path": "data/message.txt",
+                "content": "Line one\nLine two"
               }
             ]
           }
         ],
-        "solutionCode": "file = open('data/input.txt', 'r')\ncontent = file.read()\n\nwith open('data/input.txt', 'r') as file:\n    content = file.read()\n    print(content)"
+        "solutionCode": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)"
       }
     },
     {
-      "id": "quiz11",
+      "id": "ci-first-line",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-first-line",
       "language": "python",
-      "starterCode": "file = open('data/input.txt', 'r')\n\n# Write your code below",
+      "starterCode": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "file = open('data/input.txt', 'r')\n\n# Write your code below",
+          "content": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -387,11 +344,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "file = open('data/input.txt', 'r')\n\n# Write your code below",
+        "starterCode": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "file = open('data/input.txt', 'r')\n\n# Write your code below",
+            "content": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -399,9 +356,8 @@
         ],
         "files": [
           {
-            "path": "data/input.txt",
-            "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
-            "readOnly": false
+            "path": "data/notes.txt",
+            "content": "Apples\nBananas\nCarrots"
           }
         ]
       },
@@ -410,29 +366,96 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "Hello, World!\nThis is a test file.\n\nAnother line.",
+            "stdin": "",
+            "stdout": "Apples\n",
             "match": "exact",
             "files": [
               {
-                "path": "data/input.txt",
-                "content": "Hello, World!\nThis is a test file.\n\nAnother line.",
-                "readOnly": false
+                "path": "data/notes.txt",
+                "content": "Apples\nBananas\nCarrots"
               }
             ]
           },
           {
-            "stdout": "Python is fun!\nLet's learn more.\n\nKeep going!",
+            "stdin": "",
+            "stdout": "Start here\n",
             "match": "exact",
             "files": [
               {
-                "path": "data/input.txt",
-                "content": "Python is fun!\nLet's learn more.\n\nKeep going!",
-                "readOnly": false
+                "path": "data/notes.txt",
+                "content": "Start here\nSecond line"
               }
             ]
           }
         ],
-        "solutionCode": "file = open('data/input.txt', 'r')\n\nwith open('data/input.txt', 'r') as file:\n    for line in file:\n        print(line.strip())"
+        "solutionCode": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)"
+      }
+    },
+    {
+      "id": "ci-count-lines",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-count-lines",
+      "language": "python",
+      "starterCode": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "data/list.txt",
+            "content": "red\nblue\ngreen"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "3\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "data/list.txt",
+                "content": "red\nblue\ngreen"
+              }
+            ]
+          },
+          {
+            "stdin": "",
+            "stdout": "1\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "data/list.txt",
+                "content": "only one line"
+              }
+            ]
+          }
+        ],
+        "solutionCode": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))"
       }
     }
   ]

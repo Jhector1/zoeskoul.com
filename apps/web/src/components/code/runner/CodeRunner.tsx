@@ -33,6 +33,7 @@ import { WorkspaceStateV2 } from "@/components/ide/types";
 import { cx } from "@/components/tools/utils/cx";
 import HeaderBar from "@/components/code/runner/components/HeaderBar";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
+import { resolveEditableWorkspaceFileId } from "@/components/code/runner/workspaceEditing";
 
 type MobilePane = "editor" | "output";
 type OutputTab = "output" | "terminal";
@@ -254,13 +255,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const setCode = (c: string) => {
         if (props.workspace && props.onChangeWorkspace) {
-            const preferredEntryId = props.workspace.activeFileId || props.workspace.entryFileId;
-            const fallbackFile = props.workspace.nodes.find((node) => node.kind === "file");
-            const entryId = props.workspace.nodes.some(
-                (node) => node.kind === "file" && node.id === preferredEntryId,
-            )
-                ? preferredEntryId
-                : fallbackFile?.id;
+            const entryId = resolveEditableWorkspaceFileId(
+                props.workspace,
+                props.activeWorkspaceFileId,
+            );
 
             if (entryId) {
                 const nextNodes = props.workspace.nodes.map((node) => {

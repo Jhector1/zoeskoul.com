@@ -26,7 +26,11 @@ const JsonValueSchema: z.ZodType<JsonValue> = z.lazy(() =>
         z.record(JsonValueSchema),
     ]),
 );
-
+const SemanticValueKindSchema = z.enum([
+    "value",
+    "dict_entries",
+    "list_of_dict_entries",
+]);
 const ProgrammingCodeFileSchema = z.object({
     path: z.string().min(1),
     content: z.string().default(""),
@@ -52,7 +56,13 @@ export const SemanticCheckSchema = z.discriminatedUnion("type", [
         type: z.literal("function_returns"),
         functionName: z.string().min(1),
         args: z.array(JsonValueSchema).optional().default([]),
+        argKinds: z.array(SemanticValueKindSchema).optional().default([]),
         expected: JsonValueSchema,
+        expectedKind: SemanticValueKindSchema.optional(),
+        message: z.string().optional(),
+    }),
+    z.object({
+        type: z.literal("no_stdout"),
         message: z.string().optional(),
     }),
     z.object({
@@ -77,9 +87,12 @@ export const SemanticCheckSchema = z.discriminatedUnion("type", [
         type: z.literal("method_returns"),
         className: z.string().min(1),
         constructorArgs: z.array(JsonValueSchema).optional().default([]),
+        constructorArgKinds: z.array(SemanticValueKindSchema).optional().default([]),
         methodName: z.string().min(1),
         methodArgs: z.array(JsonValueSchema).optional().default([]),
+        methodArgKinds: z.array(SemanticValueKindSchema).optional().default([]),
         expected: JsonValueSchema,
+        expectedKind: SemanticValueKindSchema.optional(),
         message: z.string().optional(),
     }),
     z.object({

@@ -1167,7 +1167,90 @@ function hasInputCalls(exercise: PythonCodeInputExercise): boolean {
     const haystack = `${exercise.starterCode}\n${exercise.solutionCode}`;
     return /\binput\s*\(/.test(haystack);
 }
+function hasAnyNonEmptyTestStdin(exercise: PythonCodeInputExercise): boolean {
+    const tests = Array.isArray(exercise.tests) ? exercise.tests : [];
 
+    return tests.some((test) => String(test.stdin ?? "").trim().length > 0);
+}
+
+function stripTopLevelInputLines(source: string): {
+    code: string;
+    removed: number;
+} {
+    const lines = String(source ?? "").split("\n");
+    let removed = 0;
+
+    const kept = lines.filter((line) => {
+        // Only remove top-level input calls. Do not touch indented input()
+        // inside loops, functions, classes, or try blocks.
+        if (/^\s/.test(line)) return true;
+
+        const trimmed = line.trim();
+
+        const isInputAssignment =
+            /^[A-Za-z_]\w*\s*=\s*input\s*\([^)]*\)\s*$/.test(trimmed);
+
+        const isBareInput =
+            /^input\s*\([^)]*\)\s*$/.test(trimmed);
+
+        if (isInputAssignment || isBareInput) {
+            removed += 1;
+            return false;
+        }
+
+        return true;
+    });
+
+    return {
+        code: kept.join("\n").replace(/\n{3,}/g, "\n\n").trimEnd(),
+        removed,
+    };
+}
+
+function repairNoStdinFileInputCalls(
+    exercise: PythonCodeInputExercise,
+): PythonCodeInputExercise | null {
+    if ((exercise.recipeType ?? "fixed_tests") !== "fixed_tests") {
+        return null;
+    }
+
+    const tests = Array.isArray(exercise.tests) ? exercise.tests : [];
+    if (tests.length < 1) return null;
+
+    // If tests intentionally provide stdin, keep input().
+    if (hasAnyNonEmptyTestStdin(exercise)) {
+        return null;
+    }
+
+    const solutionCode = String(exercise.solutionCode ?? "");
+    const starterCode = String(exercise.starterCode ?? "");
+
+    // Only do this for file-reading exercises.
+    if (referencedReadFiles(solutionCode).length < 1) {
+        return null;
+    }
+
+    if (!/\binput\s*\(/.test(`${starterCode}\n${solutionCode}`)) {
+        return null;
+    }
+
+    const strippedStarter = stripTopLevelInputLines(starterCode);
+    const strippedSolution = stripTopLevelInputLines(solutionCode);
+
+    if (strippedStarter.removed + strippedSolution.removed < 1) {
+        return null;
+    }
+
+    return {
+        ...exercise,
+        starterCode: strippedStarter.code,
+        solutionCode: strippedSolution.code,
+        tests: tests.map((test) => ({
+            ...test,
+            stdin: "",
+        })),
+    };
+}
 async function rewritePlaceholderTestsFromSolutionExecution(
     exercise: PythonCodeInputExercise,
 ): Promise<PythonCodeInputExercise | null> {
@@ -1821,10 +1904,74 @@ function referencesClass(source: string, className: string): boolean {
 function referencesName(source: string, name: string): boolean {
     return new RegExp(`\\b${name}\\b`).test(source);
 }
+function isSemanticCodeExercise(exercise: PythonDraftExercise): boolean {
+    return (
+        exercise.kind === "code_input" &&
+        (
+            exercise.recipeType === "semantic" ||
+            (
+                Array.isArray(exercise.semanticChecks) &&
+                exercise.semanticChecks.length > 0
+            )
+        )
+    );
+}
+
+function escapeRegExp(value: string): string {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+// function referencesName(source: string, name: string): boolean {
+//     return new RegExp(`\\b${escapeRegExp(name)}\\b`).test(source);
+// }
 
 function definesTopLevelName(source: string, name: string): boolean {
-    return new RegExp(`^${name}\\s*=`, "m").test(source);
+    return new RegExp(`^${escapeRegExp(name)}\\s*=`, "m").test(source);
 }
+
+function isUnsafeSharedSetupLine(line: string): boolean {
+    const trimmed = line.trim();
+
+    if (!trimmed) return true;
+
+    // Never share input/file setup between exercises.
+    if (/\binput\s*\(/.test(trimmed)) return true;
+    if (/\bopen\s*\(|\.read_text\s*\(|\.open\s*\(/.test(trimmed)) return true;
+
+    // Never share derived cleanup lines like:
+    // name = name.strip()
+    // parts = row.split(",")
+    // score_text = row["score"].strip()
+    // These depend on local function parameters or previous local variables.
+    if (/^[A-Za-z_]\w*\s*=\s*[A-Za-z_]\w*(?:\.|\[|\()/.test(trimmed)) {
+        return true;
+    }
+
+    // Avoid sharing common scratch variables across unrelated exercises.
+    if (/^(text|line|row|rows|parts|name|age|score|score_text|value|number|total|count)\s*=/.test(trimmed)) {
+        return true;
+    }
+
+    return false;
+}
+
+function isSafeSharedSetupAssignment(line: string): boolean {
+    const trimmed = line.trim();
+
+    if (isUnsafeSharedSetupLine(trimmed)) return false;
+
+    // Only allow simple independent literals/containers.
+    // Good examples:
+    // tax_rate = 0.08
+    // names = ["Ava", "Ben"]
+    // settings = {"debug": True}
+    return /^[A-Za-z_]\w*\s*=\s*(-?\d+(?:\.\d+)?|True|False|None|"[^"]*"|'[^']*'|\[.*\]|\{.*\}|\(.*\))\s*$/.test(
+        trimmed,
+    );
+}
+// function definesTopLevelName(source: string, name: string): boolean {
+//     return new RegExp(`^${name}\\s*=`, "m").test(source);
+// }
 
 function extractTopLevelSetupDefinitions(source: string): Map<string, string[]> {
     const lines = String(source ?? "").split("\n");
@@ -1850,13 +1997,16 @@ function extractTopLevelSetupDefinitions(source: string): Map<string, string[]> 
         const assignmentMatch = line.match(/^([A-Za-z_]\w*)\s*=/);
         if (!assignmentMatch) continue;
 
+        if (!isSafeSharedSetupAssignment(line)) {
+            continue;
+        }
+
         setupLines.push(line);
         definitions.set(assignmentMatch[1]!, [...setupLines]);
     }
 
     return definitions;
 }
-
 function mergeTopLevelSetupDefinitions(
     exercises: readonly PythonDraftExercise[],
 ): Map<string, string[]> {
@@ -2146,13 +2296,21 @@ async function repairCrossExerciseClassDependencies(args: {
                 classPrefixes.push(renderClassDefinition(definition));
             }
 
-            for (const [name, lines] of setupDefinitions) {
-                if (!referencesName(nextExercise.solutionCode, name)) continue;
-                if (definesTopLevelName(nextExercise.solutionCode, name)) continue;
+            // Semantic exercises should be self-contained.
+// Do not prepend random top-level setup into function/class semantic tasks.
+// It can crash before the semantic harness calls the function.
+            if (!isSemanticCodeExercise(nextExercise)) {
+                for (const [name, lines] of setupDefinitions) {
+                    if (!referencesName(nextExercise.solutionCode, name)) continue;
+                    if (definesTopLevelName(nextExercise.solutionCode, name)) continue;
 
-                for (const line of lines) {
-                    if (!setupPrefixLines.includes(line)) {
-                        setupPrefixLines.push(line);
+                    const safeLines = lines.filter(isSafeSharedSetupAssignment);
+                    if (safeLines.length < 1) continue;
+
+                    for (const line of safeLines) {
+                        if (!setupPrefixLines.includes(line)) {
+                            setupPrefixLines.push(line);
+                        }
                     }
                 }
             }
@@ -2286,11 +2444,32 @@ function normalizeFixedTestKey(test: {
     stdin?: unknown;
     stdout?: unknown;
     match?: unknown;
+    files?: unknown;
 }) {
+    const files = Array.isArray(test.files)
+        ? test.files
+            .map((file) => {
+                if (!file || typeof file !== "object") return null;
+
+                const item = file as {
+                    path?: unknown;
+                    content?: unknown;
+                };
+
+                return {
+                    path: String(item.path ?? ""),
+                    content: String(item.content ?? ""),
+                };
+            })
+            .filter(Boolean)
+            .sort((a, b) => String(a?.path).localeCompare(String(b?.path)))
+        : [];
+
     return JSON.stringify({
         stdin: String(test.stdin ?? ""),
         stdout: String(test.stdout ?? ""),
         match: test.match === "includes" ? "includes" : "exact",
+        files,
     });
 }
 
@@ -2882,7 +3061,174 @@ function repairPythonFileFixtures(
         alignedTests,
     };
 }
+function looksLikeCsvContent(content: string): boolean {
+    const lines = String(content ?? "")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean);
 
+    return lines.length >= 2 && lines[0]!.includes(",");
+}
+
+function buildAlternateCsvContents(content: string): string[] {
+    const lines = String(content ?? "")
+        .replace(/\r\n?/g, "\n")
+        .split("\n")
+        .map((line) => line.trimEnd())
+        .filter((line) => line.trim().length > 0);
+
+    const header = lines[0] ?? "";
+
+    if (!header.includes(",")) {
+        return [];
+    }
+
+    const lowerHeader = header.toLowerCase();
+    const candidates: string[] = [];
+
+    if (/\bname\b/.test(lowerHeader) && /\bscore\b/.test(lowerHeader)) {
+        candidates.push(
+            `${header}\nMia,3\nOmar,11\n`,
+            `${header}\n Zoe , 10 \n Max , 2 \n`,
+            `${header}\nLia,8\nNoah,ten\n`,
+            `${header}\nAva,5\nBen,7\nKai,bad\n`,
+        );
+    }
+
+    if (/\bname\b/.test(lowerHeader) && candidates.length < 1) {
+        candidates.push(
+            `${header}\nMia\nOmar\n`,
+            `${header}\n Zoe \n Max \n`,
+        );
+    }
+
+    if (candidates.length < 1) {
+        candidates.push(
+            `${header}\nalpha,beta\none,two\n`,
+            `${header}\nred,4\nblue,6\n`,
+        );
+    }
+
+    return candidates.filter((candidate) => candidate.trim() !== String(content ?? "").trim());
+}
+
+function buildAlternateTextFixtureContents(content: string): string[] {
+    const normalized = String(content ?? "").replace(/\r\n?/g, "\n");
+
+    if (looksLikeCsvContent(normalized)) {
+        return buildAlternateCsvContents(normalized);
+    }
+
+    return [
+        "Ava\nBen\nKai\n",
+        "10\n20\nbad\n",
+        " apple \n banana \n",
+    ].filter((candidate) => candidate.trim() !== normalized.trim());
+}
+
+async function repairThinFileFixtureFixedTests(
+    exercise: PythonCodeInputExercise,
+): Promise<ThinFixedTestRepairResult> {
+    if ((exercise.recipeType ?? "fixed_tests") !== "fixed_tests") {
+        return { status: "unchanged" };
+    }
+
+    const tests = Array.isArray(exercise.tests) ? [...exercise.tests] : [];
+
+    if (new Set(tests.map((test) => normalizeFixedTestKey(test))).size >= PYTHON_MINIMUM_FIXED_TESTS) {
+        return { status: "unchanged" };
+    }
+
+    const solutionCode = String(exercise.solutionCode ?? "").trim();
+    if (!solutionCode) {
+        return { status: "unchanged" };
+    }
+
+    const readFiles = referencedReadFiles(solutionCode);
+    if (readFiles.length < 1) {
+        return { status: "unchanged" };
+    }
+
+    const baseTest = tests[0];
+    if (!baseTest) {
+        return { status: "unchanged" };
+    }
+
+    // This repair is only for file-fixture tests, not stdin tests.
+    if (String(baseTest.stdin ?? "").trim().length > 0) {
+        return { status: "unchanged" };
+    }
+
+    const baseFiles = mergePythonFixtureFiles(exercise.files, baseTest.files);
+    if (!baseFiles || baseFiles.length < 1) {
+        return { status: "unchanged" };
+    }
+
+    const runner = getCodeRunner() ?? runLocalCode;
+    const seenKeys = new Set(tests.map((test) => normalizeFixedTestKey(test)));
+    const seenStdout = new Set(tests.map((test) => String(test.stdout ?? "").trimEnd()));
+
+    for (const filePath of readFiles) {
+        const baseFile = baseFiles.find((file) => file.path === filePath);
+        if (!baseFile) continue;
+
+        const candidateContents = buildAlternateTextFixtureContents(baseFile.content);
+
+        for (const content of candidateContents) {
+            const candidateFiles = baseFiles.map((file) =>
+                file.path === filePath
+                    ? {
+                        ...file,
+                        content,
+                        readOnly: file.readOnly ?? true,
+                    }
+                    : file,
+            );
+
+            const run = await runner({
+                language: "python",
+                code: solutionCode,
+                stdin: "",
+                files: candidateFiles,
+                limits: { timeoutMs: 4000 },
+            });
+
+            if (!run.ok) continue;
+
+            const stdout = String(run.stdout ?? "").trimEnd();
+            if (!stdout.trim()) continue;
+            if (seenStdout.has(stdout)) continue;
+
+            const nextTest = {
+                stdin: "",
+                stdout: `${stdout}\n`,
+                match: "exact" as const,
+                files: candidateFiles,
+            };
+
+            const key = normalizeFixedTestKey(nextTest);
+            if (seenKeys.has(key)) continue;
+
+            tests.push(nextTest);
+            seenKeys.add(key);
+            seenStdout.add(stdout);
+
+            if (seenKeys.size >= PYTHON_MINIMUM_FIXED_TESTS) {
+                return {
+                    status: "repaired",
+                    exercise: {
+                        ...exercise,
+                        recipeType: "fixed_tests",
+                        tests,
+                    },
+                    addedCount: tests.length - (exercise.tests?.length ?? 0),
+                };
+            }
+        }
+    }
+
+    return { status: "unchanged" };
+}
 
 async function repairThinFixedTests(
     exercise: PythonCodeInputExercise,
@@ -3762,13 +4108,31 @@ export async function repairPythonDraft(args: {
                 });
             }
 
-            const initialFileFixtureRepair = repairPythonFileFixtures(
+            const noStdinFileInputRepair = repairNoStdinFileInputCalls(
                 afterFixtureSanitizationRepair,
+            );
+
+            const afterNoStdinFileInputRepair =
+                noStdinFileInputRepair ?? afterFixtureSanitizationRepair;
+
+            if (noStdinFileInputRepair) {
+                report.repairs.push({
+                    code: "PYTHON_NO_STDIN_FILE_INPUT_REMOVED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Removed top-level input() from a file-based fixed_tests exercise whose tests provide file fixtures but no stdin.",
+                });
+            }
+
+            const initialFileFixtureRepair = repairPythonFileFixtures(
+                afterNoStdinFileInputRepair,
             );
 
             const afterInitialFileFixtureRepair = initialFileFixtureRepair.changed
                 ? initialFileFixtureRepair.exercise
-                : afterFixtureSanitizationRepair;
+                : afterNoStdinFileInputRepair;
 
             const goldenTestRepair = await rewriteTestsToMatchSolutionExecution(
                 afterInitialFileFixtureRepair,
@@ -3837,19 +4201,39 @@ export async function repairPythonDraft(args: {
                 });
             }
 
-            const thinFixedTestRepair = await repairThinFixedTests(afterFileFixtureRepair);
+            const fileFixtureThinFixedTestRepair =
+                await repairThinFileFixtureFixedTests(afterFileFixtureRepair);
+
+            const afterFileFixtureThinFixedTestRepair =
+                fileFixtureThinFixedTestRepair.status === "repaired"
+                    ? fileFixtureThinFixedTestRepair.exercise
+                    : afterFileFixtureRepair;
+
+            if (fileFixtureThinFixedTestRepair.status === "repaired") {
+                report.repairs.push({
+                    code: "PYTHON_FILE_FIXTURE_FIXED_TEST_ADDED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message: `Added ${fileFixtureThinFixedTestRepair.addedCount} distinct file-fixture fixed test case(s).`,
+                });
+            }
+
+            const thinFixedTestRepair = await repairThinFixedTests(
+                afterFileFixtureThinFixedTestRepair,
+            );
             const convertedStaticOutputExercise =
                 thinFixedTestRepair.status === "unsafe" &&
                 (
-                    afterFileFixtureRepair.recipeType === "fixed_tests" ||
+                    afterFileFixtureThinFixedTestRepair.recipeType === "fixed_tests" ||
                     (Array.isArray(exercise.tests) && exercise.tests.length > 0)
                 )
-                    ? convertStaticOutputExercise(afterFileFixtureRepair)
+                    ? convertStaticOutputExercise(afterFileFixtureThinFixedTestRepair)
                     : null;
             const afterThinFixedTestRepair =
                 thinFixedTestRepair.status === "repaired"
                     ? thinFixedTestRepair.exercise
-                    : convertedStaticOutputExercise ?? afterFileFixtureRepair;
+                    : convertedStaticOutputExercise ?? afterFileFixtureThinFixedTestRepair;
 
             if (thinFixedTestRepair.status === "repaired") {
                 report.repairs.push({

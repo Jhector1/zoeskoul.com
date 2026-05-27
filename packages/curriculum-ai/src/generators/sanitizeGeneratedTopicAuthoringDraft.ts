@@ -17,7 +17,92 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
 }
+const VALID_SEMANTIC_VALUE_KINDS = new Set([
+    "value",
+    "dict_entries",
+    "list_of_dict_entries",
+]);
 
+function looksLikeEntryPair(value: unknown): boolean {
+    return (
+        Array.isArray(value) &&
+        value.length === 2 &&
+        typeof value[0] === "string"
+    );
+}
+
+function looksLikeDictEntries(value: unknown): boolean {
+    return (
+        Array.isArray(value) &&
+        value.length > 0 &&
+        value.every(looksLikeEntryPair)
+    );
+}
+
+function looksLikeListOfDictEntries(value: unknown): boolean {
+    return (
+        Array.isArray(value) &&
+        value.length > 0 &&
+        value.every(looksLikeDictEntries)
+    );
+}
+
+function inferSemanticValueKind(
+    value: unknown,
+    explicitKind?: string,
+): string | undefined {
+    if (explicitKind && explicitKind !== "value") {
+        return explicitKind;
+    }
+
+    if (looksLikeListOfDictEntries(value)) {
+        return "list_of_dict_entries";
+    }
+
+    if (looksLikeDictEntries(value)) {
+        return "dict_entries";
+    }
+
+    return explicitKind;
+}
+
+function sanitizeSemanticValueKindForValue(
+    value: unknown,
+    rawKind: unknown,
+): string | undefined {
+    return inferSemanticValueKind(value, sanitizeSemanticValueKind(rawKind));
+}
+
+function sanitizeSemanticValueKindsForValues(
+    values: unknown[],
+    rawKinds: unknown,
+): string[] | undefined {
+    const sourceKinds = Array.isArray(rawKinds) ? rawKinds : [];
+
+    const kinds = values.map((value, index) =>
+        sanitizeSemanticValueKindForValue(value, sourceKinds[index]) ?? "value",
+    );
+
+    const hasMeaningfulKind =
+        kinds.some((kind) => kind !== "value") ||
+        sourceKinds.some((kind) => Boolean(sanitizeSemanticValueKind(kind)));
+
+    return hasMeaningfulKind ? kinds : undefined;
+}
+function sanitizeSemanticValueKind(value: unknown): string | undefined {
+    const normalized = normalizeText(value);
+    return VALID_SEMANTIC_VALUE_KINDS.has(normalized) ? normalized : undefined;
+}
+
+function sanitizeSemanticValueKindArray(value: unknown): string[] | undefined {
+    if (!Array.isArray(value)) return undefined;
+
+    const kinds = value
+        .map(sanitizeSemanticValueKind)
+        .filter((kind): kind is string => Boolean(kind));
+
+    return kinds.length ? kinds : undefined;
+}
 function isInvalidFixturePath(path: string): boolean {
     return (
         !path ||
@@ -70,7 +155,89 @@ function sanitizeFixtureContent(value: unknown): string {
         ? limited.join("\n")
         : trimmed.slice(0, PYTHON_MAX_FIXTURE_CONTENT_LENGTH).trimEnd();
 }
+function sanitizeHelp(value: unknown): Record<string, unknown> {
+    if (isRecord(value)) {
+        return {
+            concept: normalizeText(value.concept) || "Review the main idea in this lesson.",
+            hint_1: normalizeText(value.hint_1) || "Look for the option that matches the lesson example.",
+            hint_2: normalizeText(value.hint_2) || "Eliminate choices that do not match the required behavior.",
+        };
+    }
 
+    return {
+        concept: "Review the main idea in this lesson.",
+        hint_1: "Look for the option that matches the lesson example.",
+        hint_2: "Eliminate choices that do not match the required behavior.",
+    };
+}
+
+function sanitizeExerciseBase(exercise: Record<string, unknown>) {
+    return {
+        id: normalizeText(exercise.id) || "exercise",
+        kind: normalizeText(exercise.kind),
+        title: normalizeText(exercise.title) || "Practice",
+        prompt: normalizeText(exercise.prompt) || "Choose the best answer.",
+        hint: normalizeText(exercise.hint) || "Use the lesson examples to decide.",
+        help: sanitizeHelp(exercise.help),
+    };
+}
+
+function sanitizeNonCodeExercise(
+    exercise: Record<string, unknown>,
+): Record<string, unknown> {
+    const base = sanitizeExerciseBase(exercise);
+    const kind = base.kind;
+
+    if (kind === "single_choice" || kind === "multi_choice") {
+        return {
+            ...base,
+            kind,
+            options: Array.isArray(exercise.options)
+                ? exercise.options
+                    .map((option) => normalizeText(option))
+                    .filter(Boolean)
+                : [],
+            correctOptionIds: Array.isArray(exercise.correctOptionIds)
+                ? exercise.correctOptionIds
+                    .map((id) => normalizeText(id))
+                    .filter(Boolean)
+                : [],
+        };
+    }
+
+    if (kind === "drag_reorder") {
+        return {
+            ...base,
+            kind,
+            tokens: Array.isArray(exercise.tokens)
+                ? exercise.tokens
+                    .map((token) => normalizeText(token))
+                    .filter(Boolean)
+                : [],
+            correctOrder: Array.isArray(exercise.correctOrder)
+                ? exercise.correctOrder
+                    .map((token) => normalizeText(token))
+                    .filter(Boolean)
+                : [],
+        };
+    }
+
+    if (kind === "fill_blank_choice") {
+        return {
+            ...base,
+            kind,
+            template: normalizeText(exercise.template),
+            choices: Array.isArray(exercise.choices)
+                ? exercise.choices
+                    .map((choice) => normalizeText(choice))
+                    .filter(Boolean)
+                : [],
+            correctValue: normalizeText(exercise.correctValue),
+        };
+    }
+
+    return exercise;
+}
 function sanitizeFixtureList(
     files: unknown,
 ): Record<string, unknown>[] | undefined {
@@ -160,19 +327,34 @@ function sanitizeSemanticCheck(check: unknown): Record<string, unknown> | null {
     if (!type) return null;
 
     const message = normalizeText(check.message);
-
     if (type === "function_returns") {
-        const functionName = normalizeText(check.functionName);
+        const functionName =
+            normalizeText(check.functionName) ||
+            normalizeText(check.methodName);
 
         if (!functionName || !("expected" in check)) {
             return null;
         }
 
+        const args = Array.isArray(check.args)
+            ? check.args
+            : Array.isArray(check.methodArgs)
+                ? check.methodArgs
+                : [];
+
+        const argKinds = sanitizeSemanticValueKindsForValues(args, check.argKinds);
+        const expectedKind = sanitizeSemanticValueKindForValue(
+            check.expected,
+            check.expectedKind,
+        );
+
         return {
             type,
             functionName,
-            args: Array.isArray(check.args) ? check.args : [],
+            args,
+            ...(argKinds ? { argKinds } : {}),
             expected: check.expected,
+            ...(expectedKind ? { expectedKind } : {}),
             ...(message ? { message } : {}),
         };
     }
@@ -220,7 +402,31 @@ function sanitizeSemanticCheck(check: unknown): Record<string, unknown> | null {
             ...(message ? { message } : {}),
         };
     }
+    // Common model mistake:
+    // It sometimes uses method_returns for a plain function.
+    // If className is missing but methodName exists, treat it as function_returns.
+    if (type === "method_returns" && !normalizeText(check.className)) {
+        const functionName = normalizeText(check.methodName);
 
+        if (!functionName || !("expected" in check)) {
+            return null;
+        }
+
+        return {
+            type: "function_returns",
+            functionName,
+            args: Array.isArray(check.methodArgs) ? check.methodArgs : [],
+            expected: check.expected,
+            ...(message ? { message } : {}),
+        };
+    }
+
+    if (type === "no_stdout") {
+        return {
+            type,
+            ...(message ? { message } : {}),
+        };
+    }
     if (type === "method_returns") {
         const className = normalizeText(check.className);
         const methodName = normalizeText(check.methodName);
@@ -229,17 +435,39 @@ function sanitizeSemanticCheck(check: unknown): Record<string, unknown> | null {
             return null;
         }
 
+        const constructorArgs = Array.isArray(check.constructorArgs)
+            ? check.constructorArgs
+            : [];
+
+        const methodArgs = Array.isArray(check.methodArgs)
+            ? check.methodArgs
+            : [];
+
+        const constructorArgKinds = sanitizeSemanticValueKindsForValues(
+            constructorArgs,
+            check.constructorArgKinds,
+        );
+
+        const methodArgKinds = sanitizeSemanticValueKindsForValues(
+            methodArgs,
+            check.methodArgKinds,
+        );
+
+        const expectedKind = sanitizeSemanticValueKindForValue(
+            check.expected,
+            check.expectedKind,
+        );
+
         return {
             type,
             className,
-            constructorArgs: Array.isArray(check.constructorArgs)
-                ? check.constructorArgs
-                : [],
+            constructorArgs,
+            ...(constructorArgKinds ? { constructorArgKinds } : {}),
             methodName,
-            methodArgs: Array.isArray(check.methodArgs)
-                ? check.methodArgs
-                : [],
+            methodArgs,
+            ...(methodArgKinds ? { methodArgKinds } : {}),
             expected: check.expected,
+            ...(expectedKind ? { expectedKind } : {}),
             ...(message ? { message } : {}),
         };
     }
@@ -257,8 +485,15 @@ function sanitizeSemanticCheck(check: unknown): Record<string, unknown> | null {
             ...(message ? { message } : {}),
         };
     }
-
     if (type === "printed_line_count") {
+        const expected = Number(check.expected);
+        if (Number.isFinite(expected) && expected === 0) {
+            return {
+                type: "no_stdout",
+                ...(message ? { message } : {}),
+            };
+        }
+
         const min = Number(check.min ?? 1);
 
         return {
@@ -429,11 +664,13 @@ export function sanitizeGeneratedTopicAuthoringDraft(
         ? value.quizDraft.map((exercise) => {
             if (!isRecord(exercise)) return exercise;
 
-            if (exercise.kind === "code_input") {
+            const kind = normalizeText(exercise.kind);
+
+            if (kind === "code_input") {
                 return sanitizeCodeInputExercise(exercise);
             }
 
-            return exercise;
+            return sanitizeNonCodeExercise(exercise);
         })
         : value.quizDraft;
 

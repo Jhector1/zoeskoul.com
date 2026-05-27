@@ -7,192 +7,190 @@
           "summary": "Pass data into functions and return results.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Parameters"
+              "title": "Parameters let a function work with different values"
             },
             "sketch1": {
-              "title": "Return Values Explained"
+              "title": "Returning a value is different from printing it"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Function Implementation Project"
+              "title": "Practice returning values from functions"
             }
           },
           "projectSteps": {
-            "quiz9": {
-              "title": "Sum Function"
+            "ci_make_label": {
+              "title": "Return a label string"
             },
-            "quiz10": {
-              "title": "Multiply Function"
+            "ci_calculate_tip": {
+              "title": "Return a tip amount"
             },
-            "quiz11": {
-              "title": "Divide Function"
+            "ci_first_item": {
+              "title": "Return the first list item"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "Function Parameters",
-              "prompt": "What is the purpose of parameters in a function?",
-              "hint": "Parameters allow functions to accept input values.",
+            "sc-parameter-role": {
+              "title": "What a parameter does",
+              "prompt": "In `def greet(name):`, what is `name`?",
+              "hint": "Look at the value that gets passed into the function call.",
               "help": {
-                "concept": "Parameters are used to pass data into functions.",
-                "hint_1": "Parameters act as placeholders for input values.",
-                "hint_2": "Think about how functions use parameters to perform operations on input data."
+                "concept": "A parameter is a variable in a function definition that receives a value when the function is called.",
+                "hint_1": "`name` appears inside the parentheses of the function definition, so it is part of the function's input.",
+                "hint_2": "Ask which choice describes a placeholder that gets its value from a call like `greet(\"Ava\")`."
               },
               "options": {
-                "a": "To define the function's name",
-                "b": "To pass data into the function",
-                "c": "To return data from the function",
-                "d": "To print data to the output panel"
+                "a": "A parameter that receives an argument value",
+                "b": "A printed output line",
+                "c": "A list method",
+                "d": "A return statement"
               }
             },
-            "quiz2": {
-              "title": "Return Values",
-              "prompt": "What does a return statement do in a function?",
-              "hint": "The return statement sends a value back to the caller.",
+            "sc-return-purpose": {
+              "title": "Why use return",
+              "prompt": "What does `return` do in a Python function?",
+              "hint": "Think about how a function sends a result back to the code that called it.",
               "help": {
-                "concept": "Return statements provide output from a function.",
-                "hint_1": "Return statements end the function and send back a value.",
-                "hint_2": "Consider how return values can be used in further calculations."
+                "concept": "The `return` statement ends the function call and gives a value back to the caller.",
+                "hint_1": "Unlike `print`, `return` does not mainly display text in the output panel.",
+                "hint_2": "Choose the option about sending a result out of the function so it can be stored or used later."
               },
               "options": {
-                "a": "It prints a value to the output panel",
-                "b": "It stops the function from executing",
-                "c": "It sends a value back to the caller",
-                "d": "It defines a new function"
+                "a": "It repeats the function automatically",
+                "b": "It sends a value back to the caller",
+                "c": "It creates a new parameter",
+                "d": "It renames the function"
               }
             },
-            "quiz3": {
-              "title": "Using Parameters",
-              "prompt": "Which of the following are true about function parameters? Select all that apply.",
+            "mc-return-uses": {
+              "title": "Ways to use a returned value",
+              "prompt": "Which statements correctly use a function's returned value? Choose all that apply.",
+              "hint": "A returned value can be stored, printed, or used inside another expression.",
+              "help": {
+                "concept": "Returned values behave like regular values, so they can be assigned, printed, or combined in expressions.",
+                "hint_1": "Look for lines where the function call appears where a normal value could appear.",
+                "hint_2": "A function call that returns a number can go on the right side of `=` or inside `print(...)`."
+              },
+              "options": {
+                "a": "`total = add(2, 3)`",
+                "b": "`print(add(2, 3))`",
+                "c": "`return = add(2, 3)`",
+                "d": "`def add = (2, 3)`"
+              }
+            },
+            "mc-print-vs-return": {
+              "title": "Print versus return",
+              "prompt": "Which statements about `print` and `return` are true? Choose all that apply.",
+              "hint": "One shows output now, and the other gives a value back to the caller.",
+              "help": {
+                "concept": "`print` displays text in the output panel, while `return` passes a value back from the function.",
+                "hint_1": "Think about whether the result can be reused later in another variable or expression.",
+                "hint_2": "Choose the statements that match these roles: visible output for `print`, reusable result for `return`."
+              },
+              "options": {
+                "a": "`print` sends visible text to the output panel",
+                "b": "`return` can give a result back to the caller",
+                "c": "`print` and `return` always do exactly the same job",
+                "d": "`return` can only be used outside functions"
+              }
+            },
+            "dr-function-flow": {
+              "title": "Order of a function call",
+              "prompt": "Put these steps in the correct order for what happens when a function with parameters is called.",
+              "hint": "Start with the call, then think about values entering the function and a result coming back.",
+              "help": {
+                "concept": "A function call follows a sequence: call the function, pass arguments into parameters, run the body, then return a result.",
+                "hint_1": "The function body cannot run until the arguments have been matched to the parameters.",
+                "hint_2": "The returned value comes after the body finishes its calculation."
+              },
+              "tokens": {
+                "t1": "Call the function with argument values",
+                "t2": "Those values are assigned to the parameters",
+                "t3": "The function body runs using those parameter values",
+                "t4": "The function returns a result to the caller"
+              }
+            },
+            "dr-build-function": {
+              "title": "Build a simple return function",
+              "prompt": "Arrange these lines to make a function that takes one parameter and returns double the value.",
+              "hint": "The function header comes first, then the return line, then the call that uses the result.",
+              "help": {
+                "concept": "A basic function definition needs a header, an indented body, and then any code that calls the function.",
+                "hint_1": "The `return` line must be inside the function, so it belongs directly under the `def` line.",
+                "hint_2": "The line that prints the result should come after the function has been defined."
+              },
+              "tokens": {
+                "t1": "def double(number):",
+                "t2": "return number * 2",
+                "t3": "result = double(5)",
+                "t4": "print(result)"
+              }
+            },
+            "fb-call-argument": {
+              "title": "Fill the argument",
+              "prompt": "Complete the function call so the function receives the number 7.",
+              "hint": "The blank is the value being passed into the function call.",
+              "help": {
+                "concept": "An argument is the actual value you place inside the parentheses when calling a function.",
+                "hint_1": "The function name is already written, so the missing part is the value inside the parentheses.",
+                "hint_2": "Choose the number that would be passed into `show_score` as its input."
+              },
+              "template": "show_score([blank1])",
+              "choices": [
+                "show_score",
+                "7",
+                "return"
+              ]
+            },
+            "fb-return-expression": {
+              "title": "Complete the return line",
+              "prompt": "Choose the expression that makes the function return the sum of `price` and `tax`.",
+              "hint": "The blank should be the value expression after `return`.",
+              "help": {
+                "concept": "A return statement can send back the result of an expression, such as adding two parameters together.",
+                "hint_1": "Both `price` and `tax` are already available as parameter names in the function.",
+                "hint_2": "Pick the choice that adds the two parameter values instead of naming a keyword or only one variable."
+              },
+              "template": "return [blank1]",
+              "choices": [
+                "price + tax",
+                "def",
+                "price"
+              ]
+            },
+            "ci-make-label": {
+              "title": "Return a label string",
+              "prompt": "Write a function named `make_label` that takes two parameters, `item` and `count`, and returns a string in this format: `item: count`. For example, `make_label(\"Apples\", 3)` should return `\"Apples: 3\"`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "options": {
-                "a": "Parameters can be used to pass data into functions",
-                "b": "Parameters are optional in all functions",
-                "c": "Parameters can be used to perform operations on input data",
-                "d": "Parameters are always strings"
-              }
+              "starterCode": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass"
             },
-            "quiz4": {
-              "title": "Return Statement Characteristics",
-              "prompt": "Select all correct statements about the return statement in Python functions.",
-              "hint": "Return statements provide output from functions.",
+            "ci-calculate-tip": {
+              "title": "Return a tip amount",
+              "prompt": "Write a function named `calculate_tip` that takes `bill` and `percent`. Return the tip amount as `bill * percent / 100`. For example, `calculate_tip(50, 20)` should return `10.0`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Return statements end function execution and provide output.",
-                "hint_1": "Return statements can send back any data type.",
-                "hint_2": "Return statements end the function's execution."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "options": {
-                "a": "A return statement can return multiple values",
-                "b": "A return statement ends the function's execution",
-                "c": "A return statement can only return integers",
-                "d": "A return statement is optional in functions"
-              }
+              "starterCode": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass"
             },
-            "quiz5": {
-              "title": "Function Call Order",
-              "prompt": "Arrange the steps in the correct order to call a function and use its return value.",
-              "hint": "Consider the sequence from defining a function to using its return value.",
+            "ci-first-item": {
+              "title": "Return the first list item",
+              "prompt": "Write a function named `first_item` that takes one parameter, `items`, which will be a list. Return the first value in the list.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Function calls follow a specific sequence from definition to execution.",
-                "hint_1": "Start with defining the function.",
-                "hint_2": "End with using the return value."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "tokens": {
-                "t1": "Define the function",
-                "t2": "Call the function",
-                "t3": "Store the return value",
-                "t4": "Use the return value"
-              }
-            },
-            "quiz6": {
-              "title": "Return Statement Execution",
-              "prompt": "Arrange the steps in the correct order for executing a return statement in a function.",
-              "hint": "Think about what happens from entering the function to returning a value.",
-              "help": {
-                "concept": "Return statements follow a sequence from function entry to returning a value.",
-                "hint_1": "Start with entering the function.",
-                "hint_2": "End with returning the value."
-              },
-              "tokens": {
-                "t1": "Enter the function",
-                "t2": "Execute the function body",
-                "t3": "Reach the return statement",
-                "t4": "Return the value"
-              }
-            },
-            "quiz7": {
-              "title": "Function Definition",
-              "prompt": "Complete the function definition: `def [blank1](x, y): return x + y`",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
-              },
-              "template": "def [blank1](x, y): return x + y",
-              "choices": [
-                "add",
-                "subtract",
-                "multiply",
-                "divide"
-              ]
-            },
-            "quiz8": {
-              "title": "Return Statement",
-              "prompt": "Complete the return statement: `return [blank1]`",
-              "hint": "The return value should be the result of the function's operation.",
-              "help": {
-                "concept": "Return statements send back the result of a function's operation.",
-                "hint_1": "Consider what the function is supposed to return.",
-                "hint_2": "The function returns the sum of two numbers."
-              },
-              "template": "return [blank1]",
-              "choices": [
-                "x + y",
-                "x - y",
-                "x * y",
-                "x / y"
-              ]
-            },
-            "quiz9": {
-              "title": "Sum Function",
-              "prompt": "Write a function `sum_numbers` that takes two parameters and returns their sum. Then read the input values, call the function, and print the returned result.",
-              "hint": "Read the task \"Sum Function\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Sum Function\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
-              },
-              "starterCode": "def sum_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))"
-            },
-            "quiz10": {
-              "title": "Multiply Function",
-              "prompt": "Create a function `multiply` that takes two parameters and returns their product. Then read the input values, call the function, and print the returned result.",
-              "hint": "Read the task \"Multiply Function\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Multiply Function\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
-              },
-              "starterCode": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))"
-            },
-            "quiz11": {
-              "title": "Divide Function",
-              "prompt": "Write a function `divide` that takes two parameters and returns their quotient. Then read the input values, call the function, and print the returned result.",
-              "hint": "Read the task \"Divide Function\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Divide Function\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
-              },
-              "starterCode": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))"
+              "starterCode": "def first_item(items):\n    # return the first element from the list\n    pass"
             }
           }
         }
@@ -203,13 +201,13 @@
     "python-data-functions": {
       "python-6-functions-and-modularity": {
         "parameters-and-return-values": {
-          "sketch1": {
-            "title": "Understanding Parameters",
-            "bodyMarkdown": "Parameters are variables that allow you to pass data into functions. They act as placeholders for the actual values you provide when you call the function. For example:\n\n```python\ndef greet(name):\n    print(f\"Hello, {name}!\")\n\ngreet(\"Alice\")\n```\n\nIn this example, `name` is a parameter. When we call `greet(\"Alice\")`, the string \"Alice\" is passed to the function, and the output is `Hello, Alice!`. Try it yourself by changing the name to see different outputs.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "sketch-parameters-basics": {
+            "title": "Parameters let a function work with different values",
+            "bodyMarkdown": "A function becomes more useful when it can accept input. That input is called a **parameter**.\n\nHere is a simple example:\n\n```python\ndef greet(name):\n    return \"Hello, \" + name\n\nmessage = greet(\"Ava\")\nprint(message)\n```\n\nStep by step:\n\n- `def greet(name):` defines a function with one parameter named `name`.\n- When we call `greet(\"Ava\")`, the value `\"Ava\"` is passed into `name`.\n- The function builds a new string and **returns** it.\n- `print(message)` sends the returned value to the output panel.\n\nBecause the function uses a parameter, you can call it with different values:\n\n```python\nprint(greet(\"Ava\"))\nprint(greet(\"Leo\"))\n```\n\nThat gives different results without rewriting the function.\n\nTry it yourself: change the name in one function call, click Run, and predict the new output before you check the output panel."
           },
-          "sketch2": {
-            "title": "Return Values Explained",
-            "bodyMarkdown": "A return value is the result that a function sends back to the part of the program that called it. This allows you to use the result in further calculations or operations. Consider this example:\n\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(3, 4)\nprint(result)\n```\n\nHere, the function `add` takes two parameters, `a` and `b`, and returns their sum. The `result` variable stores the returned value, which is then printed as `7`. Try modifying the numbers to see how the return value changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "sketch-return-vs-print": {
+            "title": "Returning a value is different from printing it",
+            "bodyMarkdown": "`print()` shows something in the output panel. `return` sends a value back to the place where the function was called.\n\nCompare these two functions:\n\n```python\ndef show_total(price, tax):\n    print(price + tax)\n\ndef get_total(price, tax):\n    return price + tax\n```\n\nWhat happens?\n\n- `show_total(10, 2)` displays `12` in the output panel.\n- `get_total(10, 2)` does **not** display anything by itself.\n- But `get_total(10, 2)` gives back the value `12`, so you can store it or print it later.\n\nExample:\n\n```python\ntotal = get_total(10, 2)\nprint(total)\n```\n\nThis prints `12` because the returned value was saved in `total` first.\n\nA good rule:\n\n- Use **parameters** to send data **into** a function.\n- Use **return** to send a result **out of** a function.\n\nYour turn: change `price` or `tax` in the example, click Run, and explain which line produces visible output and which line only produces a returned value.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

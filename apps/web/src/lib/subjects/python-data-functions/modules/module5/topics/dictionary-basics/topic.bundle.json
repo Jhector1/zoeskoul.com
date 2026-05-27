@@ -23,7 +23,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "dict-idea",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch1.title",
+      "sketchId": "dict-lookup",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch2.title",
+      "sketchId": "dict-create-update",
       "height": 420
     },
     {
@@ -52,27 +66,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz5",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.projectSteps.quiz5.title",
-            "exerciseKey": "quiz5",
+            "id": "ci_make_dictionary",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.projectSteps.ci_make_dictionary.title",
+            "exerciseKey": "ci-make-dictionary",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz10",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.projectSteps.quiz10.title",
-            "exerciseKey": "quiz10",
+            "id": "ci_get_score",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.projectSteps.ci_get_score.title",
+            "exerciseKey": "ci-get-score",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz11",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.projectSteps.quiz11.title",
-            "exerciseKey": "quiz11",
+            "id": "ci_update_dictionary",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.projectSteps.ci_update_dictionary.title",
+            "exerciseKey": "ci-update-dictionary",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -84,19 +98,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "dict-idea",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.sketch1.title",
-      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-idea.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-idea.bodyMarkdown"
+    },
+    {
+      "id": "dict-lookup",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-lookup.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-lookup.bodyMarkdown"
+    },
+    {
+      "id": "dict-create-update",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-create-update.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.dict-create-update.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-dict-best-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz1",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.sc-dict-best-choice",
       "optionIds": [
         "a",
         "b",
@@ -105,15 +131,31 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "quiz2",
+      "id": "sc-dict-lookup",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.sc-dict-lookup",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-dict-parts",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.mc-dict-parts",
       "optionIds": [
         "a",
         "b",
@@ -124,112 +166,17 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "d"
+          "b",
+          "c"
         ]
       }
     },
     {
-      "id": "quiz3",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz3",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "quiz4",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz4",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "25"
-      }
-    },
-    {
-      "id": "quiz5",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz5",
-      "language": "python",
-      "starterCode": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5}\n\n# Add your code below",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5}\n\n# Add your code below",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5}\n\n# Add your code below",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5}\n\n# Add your code below",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdout": "{'apples': 10, 'bananas': 5, 'oranges': 7}\n",
-            "match": "exact"
-          },
-          {
-            "stdout": "{'apples': 10, 'bananas': 5, 'oranges': 7}\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5}\n\n# Add a new key-value pair\ninventory['oranges'] = 7\n\n# Print the updated dictionary\nprint(inventory)"
-      }
-    },
-    {
-      "id": "quiz6",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz6",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
-      }
-    },
-    {
-      "id": "quiz7",
+      "id": "mc-dict-operations",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz7",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.mc-dict-operations",
       "optionIds": [
         "a",
         "b",
@@ -239,18 +186,39 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "b",
-          "c",
-          "d"
+          "a",
+          "c"
         ]
       }
     },
     {
-      "id": "quiz8",
+      "id": "dr-dict-create-order",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz8",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.dr-dict-create-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr-dict-update-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.dr-dict-update-order",
       "tokenIds": [
         "t1",
         "t2",
@@ -266,29 +234,41 @@
       }
     },
     {
-      "id": "quiz9",
+      "id": "fb-dict-literal",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz9",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.fb-dict-literal",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "{}"
+        "value": "\"blue\""
       }
     },
     {
-      "id": "quiz10",
+      "id": "fb-dict-key-lookup",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.fb-dict-key-lookup",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "\"age\""
+      }
+    },
+    {
+      "id": "ci-make-dictionary",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz10",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary",
       "language": "python",
-      "starterCode": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5, 'oranges': 7}\n\n# Add your code below",
+      "starterCode": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5, 'oranges': 7}\n\n# Add your code below",
+          "content": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -297,45 +277,87 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5, 'oranges': 7}\n\n# Add your code below",
+        "starterCode": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5, 'oranges': 7}\n\n# Add your code below",
+            "content": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def make_book(title, pages):\n    return {\"title\": title, \"pages\": pages}",
+        "semanticChecks": [
           {
-            "stdout": "{'apples': 10, 'oranges': 7}\n",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "make_book",
+            "args": [
+              "Python Basics",
+              120
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": [
+              [
+                "title",
+                "Python Basics"
+              ],
+              [
+                "pages",
+                120
+              ]
+            ],
+            "expectedKind": "dict_entries"
           },
           {
-            "stdout": "{'apples': 10, 'oranges': 7}\n",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "make_book",
+            "args": [
+              "Stories",
+              45
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": [
+              [
+                "title",
+                "Stories"
+              ],
+              [
+                "pages",
+                45
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "# Existing dictionary\ninventory = {'apples': 10, 'bananas': 5, 'oranges': 7}\n\n# Remove a key\ndel inventory['bananas']\n\n# Print the updated dictionary\nprint(inventory)"
+        ]
       }
     },
     {
-      "id": "quiz11",
+      "id": "ci-get-score",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score",
       "language": "python",
-      "starterCode": "# Existing dictionary\ninventory = {'apples': 10, 'oranges': 7}\n\n# Add your code below",
+      "starterCode": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Existing dictionary\ninventory = {'apples': 10, 'oranges': 7}\n\n# Add your code below",
+          "content": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -344,31 +366,180 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Existing dictionary\ninventory = {'apples': 10, 'oranges': 7}\n\n# Add your code below",
+        "starterCode": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Existing dictionary\ninventory = {'apples': 10, 'oranges': 7}\n\n# Add your code below",
+            "content": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def get_score(scores, name):\n    return scores[name]",
+        "semanticChecks": [
           {
-            "stdout": "Bananas are not in stock.\n",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "get_score",
+            "args": [
+              [
+                [
+                  "Ava",
+                  10
+                ],
+                [
+                  "Ben",
+                  8
+                ]
+              ],
+              "Ava"
+            ],
+            "argKinds": [
+              "dict_entries",
+              "value"
+            ],
+            "expected": 10,
+            "expectedKind": "value"
           },
           {
-            "stdout": "Bananas are not in stock.\n",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "get_score",
+            "args": [
+              [
+                [
+                  "Mia",
+                  5
+                ],
+                [
+                  "Noah",
+                  9
+                ]
+              ],
+              "Noah"
+            ],
+            "argKinds": [
+              "dict_entries",
+              "value"
+            ],
+            "expected": 9,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "# Existing dictionary\ninventory = {'apples': 10, 'oranges': 7}\n\n# Check if 'bananas' is in the dictionary\nif 'bananas' in inventory:\n    print('Bananas are in stock.')\nelse:\n    print('Bananas are not in stock.')"
+        ]
+      }
+    },
+    {
+      "id": "ci-update-dictionary",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary",
+      "language": "python",
+      "starterCode": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def set_price(prices, item, amount):\n    prices[item] = amount\n    return prices",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "set_price",
+            "args": [
+              [
+                [
+                  "apple",
+                  2
+                ],
+                [
+                  "banana",
+                  3
+                ]
+              ],
+              "banana",
+              4
+            ],
+            "argKinds": [
+              "dict_entries",
+              "value",
+              "value"
+            ],
+            "expected": [
+              [
+                "apple",
+                2
+              ],
+              [
+                "banana",
+                4
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "set_price",
+            "args": [
+              [
+                [
+                  "apple",
+                  2
+                ]
+              ],
+              "orange",
+              5
+            ],
+            "argKinds": [
+              "dict_entries",
+              "value",
+              "value"
+            ],
+            "expected": [
+              [
+                "apple",
+                2
+              ],
+              [
+                "orange",
+                5
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
       }
     }
   ]

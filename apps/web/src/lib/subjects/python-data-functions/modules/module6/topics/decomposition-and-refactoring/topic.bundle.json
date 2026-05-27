@@ -23,14 +23,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "sketch-1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.cards.sketch2.title",
+      "sketchId": "sketch-3",
       "height": 420
     },
     {
@@ -59,27 +66,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz9",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.projectSteps.quiz9.title",
-            "exerciseKey": "quiz9",
+            "id": "ci_1",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.projectSteps.ci_1.title",
+            "exerciseKey": "ci-1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz10",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.projectSteps.quiz10.title",
-            "exerciseKey": "quiz10",
+            "id": "ci_2",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.projectSteps.ci_2.title",
+            "exerciseKey": "ci-2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz11",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.projectSteps.quiz11.title",
-            "exerciseKey": "quiz11",
+            "id": "ci_3",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.projectSteps.ci_3.title",
+            "exerciseKey": "ci-3",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -91,42 +98,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch1.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-1.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-1.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch2.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-2.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-3.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz1",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "c"
-      }
-    },
-    {
-      "id": "quiz2",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-1",
       "optionIds": [
         "a",
         "b",
@@ -139,11 +135,11 @@
       }
     },
     {
-      "id": "quiz3",
-      "kind": "multi_choice",
+      "id": "sc-2",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz3",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.sc-2",
       "optionIds": [
         "a",
         "b",
@@ -151,19 +147,16 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "b",
-          "c"
-        ]
+        "kind": "single_choice",
+        "optionId": "c"
       }
     },
     {
-      "id": "quiz4",
+      "id": "mc-1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz4",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.mc-1",
       "optionIds": [
         "a",
         "b",
@@ -174,17 +167,38 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c",
+          "b",
           "d"
         ]
       }
     },
     {
-      "id": "quiz5",
+      "id": "mc-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.mc-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-1",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz5",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.dr-1",
       "tokenIds": [
         "t1",
         "t2",
@@ -202,11 +216,11 @@
       }
     },
     {
-      "id": "quiz6",
+      "id": "dr-2",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz6",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.dr-2",
       "tokenIds": [
         "t1",
         "t2",
@@ -224,41 +238,41 @@
       }
     },
     {
-      "id": "quiz7",
+      "id": "fb-1",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz7",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.fb-1",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "descriptive"
+        "value": "clean_name(name)"
       }
     },
     {
-      "id": "quiz8",
+      "id": "fb-2",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz8",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.fb-2",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "a single responsibility"
+        "value": "return"
       }
     },
     {
-      "id": "quiz9",
+      "id": "ci-1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz9",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-1",
       "language": "python",
-      "starterCode": "def process_data(data):\n    total = 0\n    for item in data:\n        total += item['value']\n    average = total / len(data)\n    return average",
+      "starterCode": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def process_data(data):\n    total = 0\n    for item in data:\n        total += item['value']\n    average = total / len(data)\n    return average",
+          "content": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -267,45 +281,65 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def process_data(data):\n    total = 0\n    for item in data:\n        total += item['value']\n    average = total / len(data)\n    return average",
+        "starterCode": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def process_data(data):\n    total = 0\n    for item in data:\n        total += item['value']\n    average = total / len(data)\n    return average",
+            "content": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def clean_name(name):\n    return name.strip().title()",
+        "semanticChecks": [
           {
-            "stdout": "20.0",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "clean_name",
+            "args": [
+              "  aVA  "
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Ava",
+            "expectedKind": "value"
           },
           {
-            "stdout": "20.0",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "clean_name",
+            "args": [
+              "mARy ann"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Mary Ann",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def calculate_total(data):\n    total = 0\n    for item in data:\n        total += item['value']\n    return total\n\ndef calculate_average(data):\n    total = calculate_total(data)\n    return total / len(data)\n\n# Example usage\ndata = [{'value': 10}, {'value': 20}, {'value': 30}]\nprint(calculate_average(data))"
+        ]
       }
     },
     {
-      "id": "quiz10",
+      "id": "ci-2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz10",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-2",
       "language": "python",
-      "starterCode": "def calculate_total(items):\n    # Calculate subtotal\n    # Calculate tax\n    pass",
+      "starterCode": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def calculate_total(items):\n    # Calculate subtotal\n    # Calculate tax\n    pass",
+          "content": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -314,45 +348,77 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def calculate_total(items):\n    # Calculate subtotal\n    # Calculate tax\n    pass",
+        "starterCode": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def calculate_total(items):\n    # Calculate subtotal\n    # Calculate tax\n    pass",
+            "content": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def word_count(text):\n    return len(text.split())\n\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\"",
+        "semanticChecks": [
           {
-            "stdout": "40 4.0",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "word_count",
+            "args": [
+              "Python makes refactoring easier"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 4,
+            "expectedKind": "value"
           },
           {
-            "stdout": "40 4.0",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "summary",
+            "args": [
+              "One two"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Words: 2",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "summary",
+            "args": [
+              "split works here too"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Words: 4",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def calculate_subtotal(items):\n    subtotal = 0\n    for item in items:\n        subtotal += item['price'] * item['quantity']\n    return subtotal\n\ndef calculate_tax(subtotal, tax_rate):\n    return subtotal * tax_rate\n\n# Example usage\nitems = [{'price': 10, 'quantity': 2}, {'price': 20, 'quantity': 1}]\nsubtotal = calculate_subtotal(items)\ntax = calculate_tax(subtotal, 0.1)\nprint(subtotal, tax)"
+        ]
       }
     },
     {
-      "id": "quiz11",
+      "id": "ci-3",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-3",
       "language": "python",
-      "starterCode": "def print_receipt(items):\n    total = 0\n    for item in items:\n        total += item['price'] * item['quantity']\n        print(f\"{item['name']}: {item['price']} x {item['quantity']}\")\n    print(f\"Total: {total}\")",
+      "starterCode": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def print_receipt(items):\n    total = 0\n    for item in items:\n        total += item['price'] * item['quantity']\n        print(f\"{item['name']}: {item['price']} x {item['quantity']}\")\n    print(f\"Total: {total}\")",
+          "content": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -361,31 +427,79 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def print_receipt(items):\n    total = 0\n    for item in items:\n        total += item['price'] * item['quantity']\n        print(f\"{item['name']}: {item['price']} x {item['quantity']}\")\n    print(f\"Total: {total}\")",
+        "starterCode": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def print_receipt(items):\n    total = 0\n    for item in items:\n        total += item['price'] * item['quantity']\n        print(f\"{item['name']}: {item['price']} x {item['quantity']}\")\n    print(f\"Total: {total}\")",
+            "content": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def double(number):\n    return number * 2\n\n\ndef triple(number):\n    return number * 3\n\n\ndef combined_total(a, b):\n    return double(a) + triple(b)",
+        "semanticChecks": [
           {
-            "stdout": "apple: 1 x 3\nbanana: 2 x 2\nTotal: 7",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "double",
+            "args": [
+              4
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 8,
+            "expectedKind": "value"
           },
           {
-            "stdout": "apple: 1 x 3\nbanana: 2 x 2\nTotal: 7",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "triple",
+            "args": [
+              5
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 15,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "combined_total",
+            "args": [
+              2,
+              4
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 16,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "combined_total",
+            "args": [
+              0,
+              7
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 21,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def calculate_item_total(item):\n    return item['price'] * item['quantity']\n\ndef print_item(item):\n    print(f\"{item['name']}: {item['price']} x {item['quantity']}\")\n\ndef print_receipt(items):\n    total = 0\n    for item in items:\n        total += calculate_item_total(item)\n        print_item(item)\n    print(f\"Total: {total}\")\n\n# Example usage\nitems = [{'name': 'apple', 'price': 1, 'quantity': 3}, {'name': 'banana', 'price': 2, 'quantity': 2}]\nprint_receipt(items)"
+        ]
       }
     }
   ]

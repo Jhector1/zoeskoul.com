@@ -23,21 +23,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "list-creation-basics",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "indexing-basics",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch2.title",
-      "sketchId": "sketch3",
+      "sketchId": "using-lists-in-small-programs",
       "height": 420
     },
     {
@@ -66,27 +66,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz5",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.projectSteps.quiz5.title",
-            "exerciseKey": "quiz5",
+            "id": "ci_print_first_last",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.projectSteps.ci_print_first_last.title",
+            "exerciseKey": "ci-print-first-last",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz6",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.projectSteps.quiz6.title",
-            "exerciseKey": "quiz6",
+            "id": "ci_print_second_number",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.projectSteps.ci_print_second_number.title",
+            "exerciseKey": "ci-print-second-number",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz11",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.projectSteps.quiz11.title",
-            "exerciseKey": "quiz11",
+            "id": "ci_build_and_show_list",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.projectSteps.ci_build_and_show_list.title",
+            "exerciseKey": "ci-build-and-show-list",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -98,31 +98,48 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "list-creation-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch1.title",
-      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.list-creation-basics.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.list-creation-basics.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "indexing-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch2.title",
-      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.indexing-basics.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.indexing-basics.bodyMarkdown"
     },
     {
-      "id": "sketch3",
+      "id": "using-lists-in-small-programs",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch3.title",
-      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch3.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.using-lists-in-small-programs.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.using-lists-in-small-programs.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-first-index",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz1",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.sc-first-index",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-whole-list",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.sc-whole-list",
       "optionIds": [
         "a",
         "b"
@@ -133,176 +150,30 @@
       }
     },
     {
-      "id": "quiz2",
+      "id": "mc-valid-index-expressions",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.mc-valid-index-expressions",
       "optionIds": [
         "a",
         "b",
-        "c",
-        "d"
+        "c"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "b",
-          "d"
+          "a",
+          "b"
         ]
       }
     },
     {
-      "id": "quiz3",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz3",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "quiz4",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz4",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "0"
-      }
-    },
-    {
-      "id": "quiz5",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz5",
-      "language": "python",
-      "starterCode": "# Create a list of your favorite fruits\nfruits = []\n\n# Print each fruit\nfor fruit in fruits:\n    print(fruit)",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "# Create a list of your favorite fruits\nfruits = []\n\n# Print each fruit\nfor fruit in fruits:\n    print(fruit)",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "# Create a list of your favorite fruits\nfruits = []\n\n# Print each fruit\nfor fruit in fruits:\n    print(fruit)",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "# Create a list of your favorite fruits\nfruits = []\n\n# Print each fruit\nfor fruit in fruits:\n    print(fruit)",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdout": "apple\nbanana\ncherry\n",
-            "match": "exact"
-          },
-          {
-            "stdout": "apple\nbanana\ncherry\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "# Create a list of your favorite fruits\nfruits = ['apple', 'banana', 'cherry']\n\n# Print each fruit\nfor fruit in fruits:\n    print(fruit)"
-      }
-    },
-    {
-      "id": "quiz6",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz6",
-      "language": "python",
-      "starterCode": "# Modify the second element of the list\nfruits = ['apple', 'banana', 'cherry']\n\n# Change the second element to 'blueberry'\n\n# Print the updated list",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "# Modify the second element of the list\nfruits = ['apple', 'banana', 'cherry']\n\n# Change the second element to 'blueberry'\n\n# Print the updated list",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "# Modify the second element of the list\nfruits = ['apple', 'banana', 'cherry']\n\n# Change the second element to 'blueberry'\n\n# Print the updated list",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "# Modify the second element of the list\nfruits = ['apple', 'banana', 'cherry']\n\n# Change the second element to 'blueberry'\n\n# Print the updated list",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdout": "['apple', 'blueberry', 'cherry']\n",
-            "match": "exact"
-          },
-          {
-            "stdout": "['apple', 'blueberry', 'cherry']\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "# Modify the second element of the list\nfruits = ['apple', 'banana', 'cherry']\n\n# Change the second element to 'blueberry'\nfruits[1] = 'blueberry'\n\n# Print the updated list\nprint(fruits)"
-      }
-    },
-    {
-      "id": "quiz7",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz7",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "c"
-      }
-    },
-    {
-      "id": "quiz8",
+      "id": "mc-true-about-lists",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz8",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.mc-true-about-lists",
       "optionIds": [
         "a",
         "b",
@@ -313,21 +184,26 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "b",
+          "d"
         ]
       }
     },
     {
-      "id": "quiz9",
+      "id": "dr-build-list-line",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz9",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.dr-build-list-line",
       "tokenIds": [
         "t1",
         "t2",
         "t3",
-        "t4"
+        "t4",
+        "t5",
+        "t6",
+        "t7",
+        "t8"
       ],
       "expected": {
         "kind": "drag_reorder",
@@ -335,34 +211,70 @@
           "t1",
           "t2",
           "t3",
-          "t4"
+          "t4",
+          "t5",
+          "t6",
+          "t7",
+          "t8"
         ]
       }
     },
     {
-      "id": "quiz10",
-      "kind": "fill_blank_choice",
+      "id": "dr-index-output-order",
+      "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz10",
-      "choiceCount": 4,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.dr-index-output-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "-1"
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
-      "id": "quiz11",
+      "id": "fb-second-item",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.fb-second-item",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "1"
+      }
+    },
+    {
+      "id": "fb-list-name",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.fb-list-name",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "numbers"
+      }
+    },
+    {
+      "id": "ci-print-first-last",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last",
       "language": "python",
-      "starterCode": "# Create a list of numbers\nnumbers = []\n\n# Print the first and last elements",
+      "starterCode": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Create a list of numbers\nnumbers = []\n\n# Print the first and last elements",
+          "content": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -371,11 +283,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Create a list of numbers\nnumbers = []\n\n# Print the first and last elements",
+        "starterCode": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Create a list of numbers\nnumbers = []\n\n# Print the first and last elements",
+            "content": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -387,15 +299,115 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "10\n50\n",
+            "stdin": "apple\nbanana\ncherry\n",
+            "stdout": "apple\ncherry\n",
             "match": "exact"
           },
           {
-            "stdout": "10\n50\n",
+            "stdin": "sun\nmoon\nstar\n",
+            "stdout": "sun\nstar\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "# Create a list of numbers\nnumbers = [10, 20, 30, 40, 50]\n\n# Print the first and last elements\nprint(numbers[0])\nprint(numbers[-1])"
+        "solutionCode": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])"
+      }
+    },
+    {
+      "id": "ci-print-second-number",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number",
+      "language": "python",
+      "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "4\n9\n2\n",
+            "stdout": "9\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "15\n20\n25\n",
+            "stdout": "20\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])"
+      }
+    },
+    {
+      "id": "ci-build-and-show-list",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list",
+      "language": "python",
+      "starterCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "red\nblue\ngreen\n",
+            "stdout": "['red', 'blue', 'green']\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "black\nwhite\ngold\n",
+            "stdout": "['black', 'white', 'gold']\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)"
       }
     }
   ]

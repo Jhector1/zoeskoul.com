@@ -1,0 +1,61 @@
+{
+  "topicId": "simple-csv-processing",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.csv-safe-processing.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-skip-invalid-scores",
+      "message": "Regenerated Python code_input expected stdout from solutionCode after applying file fixtures so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_TEST_FILE_FIXTURE_ADDED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-write-passing-names",
+      "message": "Added 1 test-level Python file fixture set(s) so fixed_tests file I/O coverage matches each expected output."
+    },
+    {
+      "code": "PYTHON_EXERCISE_FILE_FIXTURE_ADDED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "ci-write-passing-names",
+      "message": "Added a learner-visible default file fixture for a Python file I/O code_input exercise."
+    },
+    {
+      "code": "PYTHON_FILE_FIXTURE_TESTS_ALIGNED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-write-passing-names",
+      "message": "Aligned Python fixed_tests file fixtures with their expected outputs so golden validation can run each case safely."
+    },
+    {
+      "code": "PYTHON_FILE_FIXTURE_FIXED_TEST_ADDED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-skip-invalid-scores",
+      "message": "Added 1 distinct file-fixture fixed test case(s)."
+    },
+    {
+      "code": "PYTHON_FILE_FIXTURE_FIXED_TEST_ADDED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-print-passing-names",
+      "message": "Added 1 distinct file-fixture fixed test case(s)."
+    },
+    {
+      "code": "PYTHON_FILE_FIXTURE_FIXED_TEST_ADDED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-write-passing-names",
+      "message": "Added 1 distinct file-fixture fixed test case(s)."
+    }
+  ]
+}

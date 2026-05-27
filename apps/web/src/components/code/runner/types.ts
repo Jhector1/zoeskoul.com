@@ -91,6 +91,7 @@ export type CommonProps = {
     toolScopeKey?: string;
     exerciseStateKey?: string;
     workspace?: WorkspaceStateV2 | null;
+    activeWorkspaceFileId?: string;
 
     preserveCodeOnLanguageSwitch?: boolean;
 

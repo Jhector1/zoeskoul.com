@@ -19,6 +19,7 @@ import docstringsAndFunctionContractsJson from "./modules/module6/topics/docstri
 import parametersAndReturnValuesJson from "./modules/module6/topics/parameters-and-return-values/topic.bundle.json";
 import printVsReturnJson from "./modules/module6/topics/print-vs-return/topic.bundle.json";
 import scopeAndLocalVariablesJson from "./modules/module6/topics/scope-and-local-variables/topic.bundle.json";
+import usingImportsAndHelperFilesJson from "./modules/module6/topics/using-imports-and-helper-files/topic.bundle.json";
 import readingTextFilesJson from "./modules/module7/topics/reading-text-files/topic.bundle.json";
 import simpleCsvProcessingJson from "./modules/module7/topics/simple-csv-processing/topic.bundle.json";
 import tryExceptBasicsJson from "./modules/module7/topics/try-except-basics/topic.bundle.json";
@@ -39,6 +40,7 @@ const docstringsAndFunctionContracts = docstringsAndFunctionContractsJson as Sli
 const parametersAndReturnValues = parametersAndReturnValuesJson as SlimTopicManifest;
 const printVsReturn = printVsReturnJson as SlimTopicManifest;
 const scopeAndLocalVariables = scopeAndLocalVariablesJson as SlimTopicManifest;
+const usingImportsAndHelperFiles = usingImportsAndHelperFilesJson as SlimTopicManifest;
 const readingTextFiles = readingTextFilesJson as SlimTopicManifest;
 const simpleCsvProcessing = simpleCsvProcessingJson as SlimTopicManifest;
 const tryExceptBasics = tryExceptBasicsJson as SlimTopicManifest;
@@ -59,6 +61,7 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "parameters-and-return-values": parametersAndReturnValues,
   "print-vs-return": printVsReturn,
   "scope-and-local-variables": scopeAndLocalVariables,
+  "using-imports-and-helper-files": usingImportsAndHelperFiles,
   "reading-text-files": readingTextFiles,
   "simple-csv-processing": simpleCsvProcessing,
   "try-except-basics": tryExceptBasics,

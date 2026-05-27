@@ -42,7 +42,11 @@ export async function validatePythonSemanticCode(args: {
                 run.error?.includes("No local compiler-side runner is implemented")
                     ? "runner_unavailable"
                     : "execution_failed",
-            message: run.error ?? "Semantic runner failed.",
+            message:
+                run.error ??
+                run.stderr ??
+                run.compile_output ??
+                "Semantic runner failed.",
         };
     }
 

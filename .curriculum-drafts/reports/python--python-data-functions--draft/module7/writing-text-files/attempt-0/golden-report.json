@@ -1,0 +1,13 @@
+{
+  "topicId": "writing-text-files",
+  "ok": false,
+  "issues": [
+    {
+      "code": "CODE_PROFILE_SOLUTION_OUTPUT_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "ci-append-log-entry",
+      "message": "Exercise \"ci-append-log-entry\" solutionCode does not satisfy its published tests."
+    }
+  ]
+}

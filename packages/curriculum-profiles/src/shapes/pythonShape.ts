@@ -84,9 +84,10 @@ export const pythonShape: SubjectShapePack = {
     pythonCodeRecipe: {
         kind: "code_input",
         language: "python",
-        recipeTypes: ["template_io", "fixed_tests"],
+        recipeTypes: ["template_io", "fixed_tests", "semantic"],
         templateIoRequiredFields: ["type", "vars", "tests", "solutionTemplate"],
         fixedTestsRequiredFields: ["type", "tests", "solutionCode"],
+        semanticRequiredFields: ["type", "language", "solutionCode", "semanticChecks"],
     },
 
     aiContract: {
@@ -96,8 +97,10 @@ export const pythonShape: SubjectShapePack = {
             "Use existing Python key namespaces.",
             "Use only sketch/project/quiz cards.",
             "Use paragraph sketches.",
-            "Use code_input with template_io or fixed_tests recipes for Python tasks.",
-        ],
+            'Use code_input with fixed_tests, template_io, or semantic recipes for Python tasks.',
+            'Use recipeType "semantic" for function-return tasks, class/object tasks, methods, attributes, and data-transformation behavior.',
+            'For semantic function tasks, use semanticChecks[] with type "function_returns".',
+            'For class methods, use semanticChecks[] with type "method_returns" and include className.',        ],
         doNotGenerate: [
             "subject.manifest.json directly",
             "topic.bundle.json directly",

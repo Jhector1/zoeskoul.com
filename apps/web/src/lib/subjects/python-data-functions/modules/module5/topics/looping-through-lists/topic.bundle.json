@@ -23,14 +23,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "loop-basics",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "loop-and-build",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.cards.sketch2.title",
+      "sketchId": "loop-variables",
       "height": 420
     },
     {
@@ -59,27 +66,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz5",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.projectSteps.quiz5.title",
-            "exerciseKey": "quiz5",
+            "id": "ci_print_each_item",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.projectSteps.ci_print_each_item.title",
+            "exerciseKey": "ci-print-each-item",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz10",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.projectSteps.quiz10.title",
-            "exerciseKey": "quiz10",
+            "id": "ci_double_list_function",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.projectSteps.ci_double_list_function.title",
+            "exerciseKey": "ci-double-list-function",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz11",
-            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.projectSteps.quiz11.title",
-            "exerciseKey": "quiz11",
+            "id": "ci_count_long_words",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.projectSteps.ci_count_long_words.title",
+            "exerciseKey": "ci-count-long-words",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -91,25 +98,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "loop-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.sketch1.title",
-      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-basics.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-basics.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "loop-and-build",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.sketch2.title",
-      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-and-build.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-and-build.bodyMarkdown"
+    },
+    {
+      "id": "loop-variables",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-variables.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.loop-variables.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-loop-item-name",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz1",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.sc-loop-item-name",
       "optionIds": [
         "a",
         "b",
@@ -118,15 +131,30 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "quiz2",
+      "id": "sc-empty-list-start",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.sc-empty-list-start",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-loop-uses",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.mc-loop-uses",
       "optionIds": [
         "a",
         "b",
@@ -137,16 +165,38 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b"
+          "b",
+          "c"
         ]
       }
     },
     {
-      "id": "quiz3",
+      "id": "mc-good-loop-names",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.mc-good-loop-names",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-build-derived-list",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz3",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.dr-build-derived-list",
       "tokenIds": [
         "t1",
         "t2",
@@ -164,152 +214,65 @@
       }
     },
     {
-      "id": "quiz4",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz4",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "numbers"
-      }
-    },
-    {
-      "id": "quiz5",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz5",
-      "language": "python",
-      "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Initialize sum variable\n# Loop through numbers and calculate sum",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "numbers = [1, 2, 3, 4, 5]\n# Initialize sum variable\n# Loop through numbers and calculate sum",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Initialize sum variable\n# Loop through numbers and calculate sum",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "numbers = [1, 2, 3, 4, 5]\n# Initialize sum variable\n# Loop through numbers and calculate sum",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdout": "15",
-            "match": "exact"
-          },
-          {
-            "stdout": "15",
-            "match": "exact",
-            "files": [
-              {
-                "path": "numbers.py",
-                "content": "numbers = [2, 3, 5]\nprint(sum(numbers))\n\n# Expected output: 10\n\n# Test case 2\nnumbers = [1, 2, 3, 4, 5]\nprint(sum(numbers))\n\n# Expected output: 15\n\n# Test case 3\nnumbers = [0, 0, 0]\nprint(sum(numbers))\n\n# Expected output: 0\n\n# Test case 4\nnumbers = [-1, -2, -3]\nprint(sum(numbers))\n\n# Expected output: -6\n\n# Test case 5\nnumbers = [1, -1, 1, -1]\nprint(sum(numbers))\n\n# Expected output: 0\n\n# Test case 6\nnumbers = [100, 200, 300]\nprint(sum(numbers))\n\n# Expected output: 600\n\n# Test case 7\nnumbers = [1.5, 2.5, 3.5]\nprint(sum(numbers))\n\n# Expected output: 7.5\n\n# Test case 8\nnumbers = [1, 2, 3, 4, 5, 6,",
-                "readOnly": true
-              }
-            ]
-          }
-        ],
-        "solutionCode": "numbers = [1, 2, 3, 4, 5]\nsum_total = 0\nfor number in numbers:\n    sum_total += number\nprint(sum_total)"
-      }
-    },
-    {
-      "id": "quiz6",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz6",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "quiz7",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz7",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "c"
-        ]
-      }
-    },
-    {
-      "id": "quiz8",
+      "id": "dr-read-loop-header",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz8",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.dr-read-loop-header",
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4",
+        "t5"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3"
+          "t3",
+          "t4",
+          "t5"
         ]
       }
     },
     {
-      "id": "quiz9",
+      "id": "fb-append-call",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz9",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.fb-append-call",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "number"
+        "value": "append"
       }
     },
     {
-      "id": "quiz10",
+      "id": "fb-loop-keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.fb-loop-keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "for"
+      }
+    },
+    {
+      "id": "ci-print-each-item",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz10",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item",
       "language": "python",
-      "starterCode": "numbers = [1, 2, 3, 4, 5, 6]\n# Loop through numbers and filter even numbers",
+      "starterCode": "animals = [\"cat\", \"dog\", \"fox\"]\n\n# Loop through animals and print each one",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "numbers = [1, 2, 3, 4, 5, 6]\n# Loop through numbers and filter even numbers",
+          "content": "animals = [\"cat\", \"dog\", \"fox\"]\n\n# Loop through animals and print each one",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -318,11 +281,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "numbers = [1, 2, 3, 4, 5, 6]\n# Loop through numbers and filter even numbers",
+        "starterCode": "animals = [\"cat\", \"dog\", \"fox\"]\n\n# Loop through animals and print each one",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "numbers = [1, 2, 3, 4, 5, 6]\n# Loop through numbers and filter even numbers",
+            "content": "animals = [\"cat\", \"dog\", \"fox\"]\n\n# Loop through animals and print each one",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -334,36 +297,31 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "2\n4\n6",
+            "stdin": "",
+            "stdout": "cat\ndog\nfox\n",
             "match": "exact"
           },
           {
-            "stdout": "2\n4\n6",
-            "match": "exact",
-            "files": [
-              {
-                "path": "numbers.py",
-                "content": "numbers = [8, 10, 15]\nfor number in numbers:\n    if number % 2 == 0:\n        print(number)\n\n# Expected output: 8\n10\n\n# Test case 2\nnumbers = [1, 2, 3, 4, 5, 6]\nfor number in numbers:\n    if number % 2 == 0:\n        print(number)\n\n# Expected output: 2\n4\n6\n\n# Test case 3\nnumbers = [0, 1, 2]\nfor number in numbers:\n    if number % 2 == 0:\n        print(number)\n\n# Expected output: 0\n2\n\n# Test case 4\nnumbers = [7, 9, 11]\nfor number in numbers:\n    if number % 2 == 0:\n        print(number)\n\n# Expected output: (no output)\n\n# Test case 5\nnumbers = [12, 14, 16]\nfor number in numbers:\n    if number % 2==",
-                "readOnly": true
-              }
-            ]
+            "stdin": "",
+            "stdout": "cat\ndog\nfox\n",
+            "match": "exact"
           }
         ],
-        "solutionCode": "numbers = [1, 2, 3, 4, 5, 6]\nfor number in numbers:\n    if number % 2 == 0:\n        print(number)"
+        "solutionCode": "animals = [\"cat\", \"dog\", \"fox\"]\n\nfor animal in animals:\n    print(animal)"
       }
     },
     {
-      "id": "quiz11",
+      "id": "ci-double-list-function",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-double-list-function",
       "language": "python",
-      "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Create a new list to store results\n# Loop through numbers and multiply each by 3",
+      "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "numbers = [1, 2, 3, 4, 5]\n# Create a new list to store results\n# Loop through numbers and multiply each by 3",
+          "content": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -372,38 +330,128 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "numbers = [1, 2, 3, 4, 5]\n# Create a new list to store results\n# Loop through numbers and multiply each by 3",
+        "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "numbers = [1, 2, 3, 4, 5]\n# Create a new list to store results\n# Loop through numbers and multiply each by 3",
+            "content": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def double_numbers(numbers):\n    result = []\n    for number in numbers:\n        result.append(number * 2)\n    return result",
+        "semanticChecks": [
           {
-            "stdout": "[3, 6, 9, 12, 15]",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "double_numbers",
+            "args": [
+              [
+                1,
+                2,
+                3
+              ]
+            ],
+            "expected": [
+              2,
+              4,
+              6
+            ]
           },
           {
-            "stdout": "[3, 6, 9, 12, 15]",
-            "match": "exact",
-            "files": [
-              {
-                "path": "numbers.py",
-                "content": "numbers = [2, 4, 6]\nnew_numbers = []\nfor number in numbers:\n    new_numbers.append(number * 3)\nprint(new_numbers)\n\n# Expected output: [6, 12, 18]\n\n# Test case 2\nnumbers = [1, 2, 3, 4, 5]\nnew_numbers = []\nfor number in numbers:\n    new_numbers.append(number * 3)\nprint(new_numbers)\n\n# Expected output: [3, 6, 9, 12, 15]\n\n# Test case 3\nnumbers = [0, 1, 2]\nnew_numbers = []\nfor number in numbers:\n    new_numbers.append(number * 3)\nprint(new_numbers)\n\n# Expected output: [0, 3, 6]\n\n# Test case 4\nnumbers = [-1, -2, -3]\nnew_numbers = []\nfor number in numbers:\n    new_numbers.append(number * 3)\nprint(new",
-                "readOnly": true
-              }
+            "type": "function_returns",
+            "functionName": "double_numbers",
+            "args": [
+              [
+                0,
+                5,
+                -1
+              ]
+            ],
+            "expected": [
+              0,
+              10,
+              -2
             ]
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "numbers = [1, 2, 3, 4, 5]\nnew_numbers = []\nfor number in numbers:\n    new_numbers.append(number * 3)\nprint(new_numbers)"
+        ]
+      }
+    },
+    {
+      "id": "ci-count-long-words",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-count-long-words",
+      "language": "python",
+      "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def count_long_words(words):\n    count = 0\n    for word in words:\n        if len(word) > 4:\n            count += 1\n    return count",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "count_long_words",
+            "args": [
+              [
+                "apple",
+                "fig",
+                "banana",
+                "pear"
+              ]
+            ],
+            "expected": 2
+          },
+          {
+            "type": "function_returns",
+            "functionName": "count_long_words",
+            "args": [
+              [
+                "sun",
+                "cloud",
+                "rain",
+                "storm"
+              ]
+            ],
+            "expected": 2
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
       }
     }
   ]

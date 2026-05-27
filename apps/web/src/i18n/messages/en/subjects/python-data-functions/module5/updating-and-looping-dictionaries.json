@@ -4,191 +4,196 @@
       "python-5-lists-tuples-and-dictionaries": {
         "updating-and-looping-dictionaries": {
           "label": "Updating and Looping Dictionaries",
-          "summary": "Learn how to add, update, remove, and loop through dictionary data in Python.",
+          "summary": "Add, update, remove, and loop through dictionary data.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Dictionaries"
+              "title": "Adding, changing, and removing dictionary entries"
             },
             "sketch1": {
-              "title": "Updating Dictionary Values"
+              "title": "Looping through keys and values"
             },
             "sketch2": {
-              "title": "Looping Through Dictionaries"
+              "title": "Common dictionary patterns"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Dictionary Operations Project"
+              "title": "Dictionary Update Practice"
             }
           },
           "projectSteps": {
-            "quiz5": {
-              "title": "Update Dictionary Value"
+            "ci_update_score": {
+              "title": "Update one score and return the dictionary"
             },
-            "quiz10": {
-              "title": "Add a New Key-Value Pair"
+            "ci_remove_key": {
+              "title": "Remove a key if it exists"
             },
-            "quiz11": {
-              "title": "Remove a Course"
+            "ci_format_items": {
+              "title": "Build lines from dictionary pairs"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "Accessing Dictionary Values",
-              "prompt": "How do you access the value associated with the key 'name' in the dictionary `student`?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "sc-dict-update-existing": {
+              "title": "Updating an existing key",
+              "prompt": "What happens in Python when you run `profile[\"age\"] = 13` and the key `\"age\"` is already in the dictionary?",
+              "hint": "Assignment with an existing key replaces that key's old value.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "Dictionary assignment uses the key to decide where the value goes. If the key already exists, Python keeps the key and changes only its stored value.",
+                "hint_1": "This is not a list index operation. Python looks up the key `\"age\"` in the dictionary.",
+                "hint_2": "Ask whether the key is new or already present. Existing keys are changed, not duplicated."
               },
               "options": {
-                "a": "student['name']",
-                "b": "student->name"
+                "a": "It updates the value stored for `\"age\"`",
+                "b": "It creates a second separate `\"age\"` entry",
+                "c": "It removes the `\"age\"` key",
+                "d": "It turns the dictionary into a list"
               }
             },
-            "quiz2": {
-              "title": "Dictionary Methods",
-              "prompt": "Which of the following are valid methods for dictionaries in Python?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "sc-loop-direct-dict": {
+              "title": "Looping over a dictionary directly",
+              "prompt": "If `colors = {\"red\": 1, \"blue\": 2}`, what does `for item in colors:` give you on each loop?",
+              "hint": "Looping over a dictionary by itself gives one part of each key-value pair, not both parts.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "A plain `for` loop over a dictionary iterates through its keys. To get both keys and values together, you use `.items()`.",
+                "hint_1": "Think about what `item` would be first: a color name or a number?",
+                "hint_2": "The loop variable matches the dictionary's lookup labels, the parts you use inside square brackets."
               },
               "options": {
-                "a": "keys()",
-                "b": "values()",
-                "c": "append()",
-                "d": "items()"
+                "a": "Each key, such as `\"red\"` and `\"blue\"`",
+                "b": "Each value, such as `1` and `2`",
+                "c": "Each key and value together automatically",
+                "d": "The dictionary length each time"
               }
             },
-            "quiz3": {
-              "title": "Looping Through a Dictionary",
-              "prompt": "Arrange the steps to loop through a dictionary and print each key-value pair.",
-              "hint": "Start with accessing items and then iterate.",
+            "mc-valid-dict-changes": {
+              "title": "Ways to change a dictionary",
+              "prompt": "Which statements can change the contents of a dictionary named `stock`? Choose all that apply.",
+              "hint": "Think about adding or updating with square brackets, and removing with `del`.",
               "help": {
-                "concept": "Use `items()` to get key-value pairs and loop through them.",
-                "hint_1": "Use `for key, value in dictionary.items():`.",
-                "hint_2": "Print each key-value pair inside the loop."
+                "concept": "Dictionaries can be changed by assigning to a key or deleting a key. Reading a value or printing the dictionary does not modify it.",
+                "hint_1": "Look for statements that either store a value into `stock[...]` or remove a key from `stock`.",
+                "hint_2": "One correct choice adds or updates a key, and another correct choice removes a key entirely."
+              },
+              "options": {
+                "a": "`stock[\"pens\"] = 12`",
+                "b": "`del stock[\"pens\"]`",
+                "c": "`print(stock[\"pens\"])`",
+                "d": "`len(stock)`"
+              }
+            },
+            "mc-items-loop": {
+              "title": "Using `.items()`",
+              "prompt": "Which statements about `for key, value in data.items():` are correct? Choose all that apply.",
+              "hint": "Focus on what `.items()` provides to the loop.",
+              "help": {
+                "concept": "The `.items()` method gives key-value pairs, so the loop can unpack each pair into two variables.",
+                "hint_1": "Check whether the loop receives one thing or two things from each dictionary entry.",
+                "hint_2": "Two statements are true: one about getting both parts of each entry, and one about the meaning of `key` and `value`."
+              },
+              "options": {
+                "a": "It lets you work with both the key and the value in each loop",
+                "b": "`key` stores the dictionary key for the current pair",
+                "c": "It only works for lists, not dictionaries",
+                "d": "It removes entries as it loops"
+              }
+            },
+            "dr-update-sequence": {
+              "title": "Order the dictionary changes",
+              "prompt": "Put these lines in the correct order to create a dictionary, update one value, add one new key, and print the result.",
+              "hint": "Start by creating the dictionary before trying to change it.",
+              "help": {
+                "concept": "A dictionary must exist before you can update or add entries. After the changes, printing shows the final state.",
+                "hint_1": "The dictionary literal line comes first, and `print` comes last.",
+                "hint_2": "Between those, update the existing `\"tea\"` key and add the new `\"juice\"` key."
               },
               "tokens": {
-                "t1": "Get key-value pairs using items()",
-                "t2": "Loop through each pair",
-                "t3": "Print key and value"
+                "t1": "drinks = {\"tea\": 2}",
+                "t2": "drinks[\"tea\"] = 3",
+                "t3": "drinks[\"juice\"] = 1",
+                "t4": "print(drinks)"
               }
             },
-            "quiz4": {
-              "title": "Adding a New Key-Value Pair",
-              "prompt": "Complete the code to add a new key-value pair to the dictionary `student`.",
-              "hint": "Use the assignment syntax with a new key.",
+            "dr-loop-items-order": {
+              "title": "Build a loop with `.items()`",
+              "prompt": "Arrange the tokens to make a loop that prints each key and value from `scores`.",
+              "hint": "The loop header comes first, then the indented print line.",
               "help": {
-                "concept": "Add new key-value pairs using assignment syntax.",
-                "hint_1": "Use `student['new_key'] = new_value`.",
-                "hint_2": "Assign a value to a new key using square brackets."
-              },
-              "template": "student[[blank1]] = 'B'",
-              "choices": [
-                "'grade'",
-                "'name'",
-                "'age'"
-              ]
-            },
-            "quiz5": {
-              "title": "Update Dictionary Value",
-              "prompt": "Write a function `update_age` that takes a dictionary `student` and an integer `new_age`, and updates the 'age' key with `new_age`. Then read the input values, call the function, and print the returned result.",
-              "hint": "Read the task \"Update Dictionary Value\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Update Dictionary Value\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
-              },
-              "starterCode": "def update_age(student, new_age):\n    # Update the age here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nnew_age = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(update_age(student, new_age))"
-            },
-            "quiz6": {
-              "title": "Removing a Key-Value Pair",
-              "prompt": "Which method is used to remove a key-value pair from a dictionary?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
-              },
-              "options": {
-                "a": "remove()",
-                "b": "delete()",
-                "c": "pop()",
-                "d": "discard()"
-              }
-            },
-            "quiz7": {
-              "title": "Dictionary Characteristics",
-              "prompt": "Which of the following statements about dictionaries are true?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
-              },
-              "options": {
-                "a": "Keys must be unique",
-                "b": "Values can be lists",
-                "c": "Keys can be lists",
-                "d": "Dictionaries are unordered"
-              }
-            },
-            "quiz8": {
-              "title": "Steps to Update a Dictionary",
-              "prompt": "Arrange the steps to update a dictionary value.",
-              "hint": "Start with accessing the key and then assign a new value.",
-              "help": {
-                "concept": "Access the key and assign a new value to update it.",
-                "hint_1": "Use the key to access the value.",
-                "hint_2": "Assign the new value to the key."
+                "concept": "A dictionary loop with `.items()` uses `for key, value in scores.items():` and then an indented statement inside the loop.",
+                "hint_1": "Use `.items()` in the loop header so both variables receive data.",
+                "hint_2": "After the colon, the next line should be indented and print both loop variables."
               },
               "tokens": {
-                "t1": "Access the key in the dictionary",
-                "t2": "Assign a new value to the key"
+                "t1": "for name, score in scores.items():",
+                "t2": "print(name, score)"
               }
             },
-            "quiz9": {
-              "title": "Looping Through Keys",
-              "prompt": "Complete the code to loop through the keys of the dictionary `student`.",
+            "fb-remove-key": {
+              "title": "Remove a dictionary entry",
+              "prompt": "Choose the missing code to remove the key `\"done\"` from the dictionary.",
               "hint": "Read the sentence around the blank and decide what role the missing word plays.",
               "help": {
                 "concept": "The blank should be filled with the term that makes the statement accurate.",
                 "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
                 "hint_2": "Pick the choice that completes the statement with the clearest meaning."
               },
-              "template": "for [blank1] in student:",
+              "template": "[blank1] tasks[\"done\"]",
               "choices": [
-                "key",
-                "value",
-                "item"
+                "del",
+                "print",
+                "return",
+                "for"
               ]
             },
-            "quiz10": {
-              "title": "Add a New Key-Value Pair",
-              "prompt": "Write a function `add_course` that takes a dictionary `student` and a string `course`, and adds the course to the 'courses' list in the dictionary. Then read the input values, call the function, and print the returned result.",
-              "hint": "Read the task \"Add a New Key-Value Pair\" and identify the required result.",
+            "fb-items-method": {
+              "title": "Complete the loop method",
+              "prompt": "Choose the missing method so the loop gets both keys and values.",
+              "hint": "Use the dictionary method that returns key-value pairs.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Add a New Key-Value Pair\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "The `.the missing term()` method returns each dictionary entry as a key-value pair, which can be unpacked into two loop variables.",
+                "hint_1": "Methods like `.keys()` and `.values()` give only one part each.",
+                "hint_2": "You need the method that matches `for key, value in ...`."
               },
-              "starterCode": "def add_course(student, course):\n    # Add the course to the courses list\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(add_course(student, course))"
+              "template": "for key, value in data.[blank1]():",
+              "choices": [
+                "items",
+                "keys",
+                "values",
+                "append"
+              ]
             },
-            "quiz11": {
-              "title": "Remove a Course",
-              "prompt": "Write a function `remove_course` that takes a dictionary `student` and a string `course`, and removes the course from the 'courses' list in the dictionary if it exists. Then read the input values, call the function, and print the returned result.",
+            "ci-update-score": {
+              "title": "Update one score and return the dictionary",
+              "prompt": "Write a function `update_score(scores, name, new_score)` that updates the given player's score in the dictionary and returns the dictionary. If the name is not already present, add it with the new score.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "def remove_course(student, course):\n    # Remove the course from the courses list if it exists\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nstudent = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ncourse = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(remove_course(student, course))"
+              "starterCode": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass"
+            },
+            "ci-remove-key": {
+              "title": "Remove a key if it exists",
+              "prompt": "Write a function `remove_item(data, key_name)` that removes `key_name` from the dictionary if it exists, then returns the dictionary.",
+              "hint": "Read the task \"Remove a key if it exists\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Remove a key if it exists\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass"
+            },
+            "ci-format-items": {
+              "title": "Build lines from dictionary pairs",
+              "prompt": "Write a function `format_inventory(items)` that returns a list of strings in the form `\"key: value\"` for each key-value pair in the dictionary. For example, `{\"pens\": 3}` should become `[\"pens: 3\"]`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result"
             }
           }
         }
@@ -199,17 +204,17 @@
     "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "updating-and-looping-dictionaries": {
-          "sketch1": {
-            "title": "Understanding Dictionaries",
-            "bodyMarkdown": "Dictionaries in Python are collections of key-value pairs. Each key is unique and is used to access its corresponding value. Here's a simple example:\n\n```python\n# Creating a dictionary\nstudent = {\n    'name': 'Alice',\n    'age': 25,\n    'courses': ['Math', 'Science']\n}\n```\n\nIn this dictionary, 'name', 'age', and 'courses' are keys, and 'Alice', 25, and ['Math', 'Science'] are their respective values. Try creating your own dictionary with different keys and values.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "dict-update-basics": {
+            "title": "Adding, changing, and removing dictionary entries",
+            "bodyMarkdown": "A dictionary stores data as **key-value pairs**. You can change a dictionary after creating it.\n\nHere is a simple example:\n\n```python\nscores = {\"Ava\": 8, \"Ben\": 5}\n\nscores[\"Cara\"] = 7\nscores[\"Ben\"] = 6\ndel scores[\"Ava\"]\n\nprint(scores)\n```\n\nStep by step:\n\n- `scores[\"Cara\"] = 7` adds a new key called `\"Cara\"`.\n- `scores[\"Ben\"] = 6` updates the existing value for `\"Ben\"`.\n- `del scores[\"Ava\"]` removes the key `\"Ava\"` and its value.\n\nThe output is:\n\n```python\n{'Ben': 6, 'Cara': 7}\n```\n\nA useful rule:\n\n- If the key does **not** exist, assignment adds it.\n- If the key **does** exist, assignment updates it.\n\nTry it yourself: change the value for `\"Cara\"`, add one more student, and run the code again to see the new dictionary."
           },
-          "sketch2": {
-            "title": "Updating Dictionary Values",
-            "bodyMarkdown": "You can update the value of a key in a dictionary by assigning a new value to it. For example:\n\n```python\n# Updating a value\nstudent['age'] = 26\n```\n\nThis changes the 'age' value from 25 to 26. You can also add new key-value pairs:\n\n```python\n# Adding a new key-value pair\nstudent['grade'] = 'A'\n```\n\nNow, the dictionary has a new key 'grade' with the value 'A'. Try updating and adding values to your dictionary.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "dict-looping": {
+            "title": "Looping through keys and values",
+            "bodyMarkdown": "You can loop through a dictionary to work with its data.\n\nIf you loop over the dictionary directly, you get its **keys**:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item in prices:\n    print(item)\n```\n\nThis prints the keys one at a time:\n\n```python\napple\nbanana\npear\n```\n\nIf you want both the key and the value together, use `.items()`:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item, price in prices.items():\n    print(item, price)\n```\n\nLine by line:\n\n- `prices.items()` gives each key-value pair.\n- `item, price` unpacks each pair into two variables.\n- `print(item, price)` shows both pieces of data.\n\nPossible output:\n\n```python\napple 2\nbanana 1\npear 3\n```\n\nYour turn: change the dictionary to store game scores or pet names, then loop with `.items()` and print each pair."
           },
-          "sketch3": {
-            "title": "Looping Through Dictionaries",
-            "bodyMarkdown": "To loop through a dictionary, you can use a `for` loop. You can loop through keys, values, or both:\n\n```python\n# Looping through keys\nfor key in student:\n    print(key)\n\n# Looping through values\nfor value in student.values():\n    print(value)\n\n# Looping through key-value pairs\nfor key, value in student.items():\n    print(f'{key}: {value}')\n```\n\nThis will print all keys, values, and key-value pairs in the dictionary. Try it yourself with different dictionaries.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "dict-common-patterns": {
+            "title": "Common dictionary patterns",
+            "bodyMarkdown": "A common pattern is to update values and then loop through the final result.\n\nExample:\n\n```python\ninventory = {\"pens\": 10, \"notebooks\": 4}\n\ninventory[\"pens\"] = inventory[\"pens\"] - 2\ninventory[\"erasers\"] = 6\n\nfor name, count in inventory.items():\n    print(name, count)\n```\n\nWhat happens here?\n\n- `inventory[\"pens\"]` starts at `10`.\n- `inventory[\"pens\"] - 2` gives `8`, so the value is updated.\n- `inventory[\"erasers\"] = 6` adds a new entry.\n- The loop prints each item and its count.\n\nThis kind of pattern is useful for contact books, scoreboards, and inventory trackers.\n\nTry this: start with a dictionary of two foods and quantities, update one quantity, add a new food, and print all entries.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

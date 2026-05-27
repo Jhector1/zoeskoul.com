@@ -2,7 +2,7 @@
   "subjects": {
     "python-data-functions": {
       "title": "Python Data and Functions",
-      "description": "",
+      "description": "Build practical Python skills with lists, tuples, dictionaries, functions, helper modules, files, exceptions, and simple data cleaning.",
       "moreComingSoon": "More Python Data and Functions lessons are coming soon."
     }
   },
@@ -23,11 +23,12 @@
       },
       "python-6-functions-and-modularity": {
         "title": "Functions and Modularity",
-        "description": "Help learners organize code into reusable functions with clear inputs and outputs.",
+        "description": "Help learners organize code into reusable functions, helper modules, and simple imports with clear inputs and outputs.",
         "outcomes": [
           "Define functions",
           "Use parameters and return values",
-          "Separate program logic into small pieces"
+          "Separate program logic into small pieces",
+          "Use simple imports and helper modules"
         ],
         "why": [
           "Builds confidence with functions and modularity.",
@@ -36,9 +37,11 @@
       },
       "python-7-files-exceptions-and-data-cleaning": {
         "title": "Files, Exceptions, and Data Cleaning",
-        "description": "Teach learners how to read/write files and handle messy data without crashing programs.",
+        "description": "Teach learners how to read files, create/write files, import standard-library data tools, and handle messy data without crashing programs.",
         "outcomes": [
-          "Read and write text files",
+          "Read text files",
+          "Create and write text files",
+          "Use relative paths safely",
           "Handle exceptions",
           "Clean structured text data"
         ],
@@ -86,11 +89,12 @@
         },
         "python-data-functions-python-6-function-design": {
           "title": "Function Design",
-          "description": "Learn scope and local variables, decomposition and refactoring, docstrings and function contracts through focused examples and practice.",
+          "description": "Learn scope and local variables, decomposition and refactoring, using imports and helper files through focused examples and practice.",
           "weeks": null,
           "bullets": [
             "Scope and Local Variables",
             "Decomposition and Refactoring",
+            "Using Imports and Helper Files",
             "Docstrings and Function Contracts"
           ]
         }

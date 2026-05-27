@@ -7,65 +7,68 @@
           "summary": "Understand where variables exist and why local scope matters.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Scope"
+              "title": "What local scope means"
             },
             "sketch1": {
-              "title": "Global vs Local Variables"
+              "title": "Inside a function is different from outside"
+            },
+            "sketch2": {
+              "title": "Parameters are local too"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Scope and Local Variables Project"
+              "title": "Practice local scope with small helper functions"
             }
           },
           "projectSteps": {
-            "quiz9": {
-              "title": "Local Scope Example"
+            "code_q1": {
+              "title": "Return a local calculation"
             },
-            "quiz10": {
-              "title": "Global and Local Variables"
+            "code_q2": {
+              "title": "Use a parameter as a local name"
             },
-            "quiz11": {
-              "title": "Function with Local Variables"
+            "code_q3": {
+              "title": "Compute with two local variables"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "Local Variable Access",
-              "prompt": "Where can a local variable be accessed?",
-              "hint": "Think about the scope of a local variable.",
+            "sc-q1": {
+              "title": "Find the local variable",
+              "prompt": "In this code, which name is local to the function?\n\n```python\ncolor = \"blue\"\n\ndef paint():\n    shade = \"dark\"\n    return color + \" \" + shade\n```",
+              "hint": "Look for the name created inside `paint()`.",
               "help": {
-                "concept": "Local variables are only accessible within the function they are defined in.",
-                "hint_1": "Local variables are confined to the function scope.",
-                "hint_2": "Local variables cannot be accessed outside their function."
+                "concept": "A local variable is created inside a function and is meant to be used only during that function call.",
+                "hint_1": "`color` is assigned before the function starts. Check which name is assigned inside the function body.",
+                "hint_2": "The local name is the one introduced on the line `... = \"dark\"` inside `paint()`."
               },
               "options": {
-                "a": "Anywhere in the program",
-                "b": "Only within the function it is defined",
-                "c": "Only outside the function it is defined",
-                "d": "In any function"
+                "a": "color",
+                "b": "paint",
+                "c": "shade",
+                "d": "return"
               }
             },
-            "quiz2": {
-              "title": "Global Variable Access",
-              "prompt": "Where can a global variable be accessed?",
-              "hint": "Consider the scope of a global variable.",
+            "sc-q2": {
+              "title": "Parameter scope",
+              "prompt": "What is true about a parameter like `name` in `def greet(name):`?",
+              "hint": "Think about where the parameter can be used directly.",
               "help": {
-                "concept": "Global variables are accessible throughout the entire program.",
-                "hint_1": "Global variables can be accessed from any function.",
-                "hint_2": "Global variables are not confined to a single function."
+                "concept": "Parameters are local names created for a function call, so they belong to that function's scope.",
+                "hint_1": "A parameter gets its value when the function is called, not everywhere in the program.",
+                "hint_2": "Ask whether `name` is meant to exist only inside `greet(...)` or in all code automatically."
               },
               "options": {
-                "a": "Only within the function it is defined",
-                "b": "Anywhere in the program",
-                "c": "Only outside the function it is defined",
-                "d": "In any function"
+                "a": "It exists only inside the function call unless returned or passed elsewhere.",
+                "b": "It automatically becomes a global variable.",
+                "c": "It can only store numbers.",
+                "d": "It disappears before the function starts."
               }
             },
-            "quiz3": {
-              "title": "Variable Scope",
-              "prompt": "Select all statements that are true about variable scope in Python.",
+            "mc-q1": {
+              "title": "Choose the local names",
+              "prompt": "Which names are local in this code? Choose all that apply.\n\n```python\ntax = 5\n\ndef total(price):\n    fee = 2\n    final_price = price + fee + tax\n    return final_price\n```",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -73,126 +76,126 @@
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
               "options": {
-                "a": "Local variables can be accessed anywhere in the program",
-                "b": "Global variables can be accessed anywhere in the program",
-                "c": "Local variables are confined to the function they are defined in",
-                "d": "Global variables are confined to the function they are defined in"
+                "a": "tax",
+                "b": "price",
+                "c": "fee",
+                "d": "final_price"
               }
             },
-            "quiz4": {
-              "title": "Function and Scope",
-              "prompt": "Which of the following statements are true about functions and scope?",
+            "mc-q2": {
+              "title": "Why local scope helps",
+              "prompt": "Why are local variables useful? Choose all correct answers.",
+              "hint": "Think about how functions stay organized and avoid name mix-ups.",
+              "help": {
+                "concept": "Local scope helps functions stay independent, readable, and safer because temporary names do not leak into the rest of the program.",
+                "hint_1": "A good answer should mention keeping function work separate or preventing accidental reuse of temporary names.",
+                "hint_2": "Look for benefits like reducing conflicts and making each function manage its own temporary data."
+              },
+              "options": {
+                "a": "They help prevent temporary names inside one function from interfering with other code.",
+                "b": "They make it easier for a function to keep its own working values.",
+                "c": "They force every variable in a program to have the same name.",
+                "d": "They automatically print returned values."
+              }
+            },
+            "dr-q1": {
+              "title": "Order a function call",
+              "prompt": "Put these steps in the correct order for what happens when `double(4)` runs in a function that returns `number * 2`.",
+              "hint": "Start with the call, then the parameter gets a value, then the calculation happens, then the result is returned.",
+              "help": {
+                "concept": "A function call gives values to parameters, runs the function body, computes a result, and then returns that result.",
+                "hint_1": "The parameter cannot be used until the function is called with an argument.",
+                "hint_2": "After `number` gets `4`, the multiplication happens before the value is sent back."
+              },
+              "tokens": {
+                "t1": "Call `double(4)`",
+                "t2": "Set local parameter `number` to `4`",
+                "t3": "Compute `number * 2`",
+                "t4": "Return the result"
+              }
+            },
+            "dr-q2": {
+              "title": "Trace local variable creation",
+              "prompt": "Arrange the steps to describe this function call correctly.\n\n```python\ndef greet(person):\n    message = \"Hi \" + person\n    return message\n```",
+              "hint": "The argument fills the parameter first, then the local variable is built, then the function returns it.",
+              "help": {
+                "concept": "During a function call, the argument becomes the parameter value, local variables are created from that value, and the return statement sends the final result back.",
+                "hint_1": "`person` gets its value before `message` can be created.",
+                "hint_2": "The returned value comes last, after the string has been built inside the function."
+              },
+              "tokens": {
+                "t1": "Pass an argument into `person`",
+                "t2": "Create local variable `message`",
+                "t3": "Build the text `\"Hi \" + person`",
+                "t4": "Return `message`"
+              }
+            },
+            "fb-q1": {
+              "title": "Complete the local assignment",
+              "prompt": "Choose the missing word to make `score` a local variable inside the function.",
+              "hint": "The blank should be the variable name being assigned inside the function.",
+              "help": {
+                "concept": "A variable assigned inside a function becomes local to that function call.",
+                "hint_1": "The line is creating a new name inside the function body.",
+                "hint_2": "Pick the name that matches the sentence about making `the missing term` local."
+              },
+              "template": "def show_score():\n    [blank1] = 10\n    return score",
+              "choices": [
+                "score",
+                "return",
+                "show_score",
+                "def"
+              ]
+            },
+            "fb-q2": {
+              "title": "Complete the parameter use",
+              "prompt": "Fill the blank with the correct local name.",
+              "hint": "Use the parameter name from the function header.",
+              "help": {
+                "concept": "A parameter is a local name, so code inside the function should use that parameter name directly.",
+                "hint_1": "The function header already tells you the local name to use.",
+                "hint_2": "Match the blank to the name inside `def triple(the missing term):`."
+              },
+              "template": "def triple(value):\n    return [blank1] * 3",
+              "choices": [
+                "value",
+                "triple",
+                "return",
+                "3"
+              ]
+            },
+            "code-q1": {
+              "title": "Return a local calculation",
+              "prompt": "Write a function `add_tax(price)` that returns `price + 5`.\n\nUse a local variable named `total` inside the function, then return it.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "options": {
-                "a": "Functions can access global variables",
-                "b": "Functions cannot access global variables",
-                "c": "Variables defined inside a function are local to that function",
-                "d": "Variables defined inside a function are global"
-              }
+              "starterCode": "def add_tax(price):\n    # store the result in a local variable named total\n    # then return it\n    pass"
             },
-            "quiz5": {
-              "title": "Order of Execution",
-              "prompt": "Arrange the steps in the correct order of execution for a function with local variables.",
-              "hint": "Consider how a function is called and executed.",
+            "code-q2": {
+              "title": "Use a parameter as a local name",
+              "prompt": "Write a function `make_label(word)` that returns a string in this format: `Item: ` followed by the given word.\n\nUse a local variable named `label` before returning the result.",
+              "hint": "Read the task \"Use a parameter as a local name\" and identify the required result.",
               "help": {
-                "concept": "Understanding the order of execution helps in understanding scope.",
-                "hint_1": "A function must be defined before it is called.",
-                "hint_2": "Local variables are created when the function is called."
-              },
-              "tokens": {
-                "t1": "Define the function",
-                "t2": "Call the function",
-                "t3": "Execute the function body",
-                "t4": "Return from the function"
-              }
-            },
-            "quiz6": {
-              "title": "Scope and Execution",
-              "prompt": "Arrange the following in the order they occur when a function with local variables is executed.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "Function is called",
-                "t2": "Local variables are initialized",
-                "t3": "Function body is executed",
-                "t4": "Function returns"
-              }
-            },
-            "quiz7": {
-              "title": "Local Variable Definition",
-              "prompt": "Complete the statement: A variable defined inside a function is called a [blank1] variable.",
-              "hint": "This type of variable is only accessible within the function.",
-              "help": {
-                "concept": "the missing term variables are defined within a function and are not accessible outside of it.",
-                "hint_1": "These variables are confined to the function scope.",
-                "hint_2": "They are not global."
-              },
-              "template": "A variable defined inside a function is called a [blank1] variable.",
-              "choices": [
-                "global",
-                "local",
-                "static",
-                "dynamic"
-              ]
-            },
-            "quiz8": {
-              "title": "Global Variable Definition",
-              "prompt": "Complete the statement: A variable defined outside any function is called a [blank1] variable.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
-              },
-              "template": "A variable defined outside any function is called a [blank1] variable.",
-              "choices": [
-                "global",
-                "local",
-                "static",
-                "dynamic"
-              ]
-            },
-            "quiz9": {
-              "title": "Local Scope Example",
-              "prompt": "Write a function `calculate_area` that calculates the area of a rectangle. The function should take two parameters, `width` and `height`, and return the area. Use local variables only. Then read the input values, call the function, and print the returned result.",
-              "hint": "Read the task \"Local Scope Example\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Local Scope Example\".",
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Use a parameter as a local name\".",
                 "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "def calculate_area(width, height):\n    # Calculate the area\n    \n    # Return the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))"
+              "starterCode": "def make_label(word):\n    # create a local variable named label\n    # return the finished string\n    pass"
             },
-            "quiz10": {
-              "title": "Global and Local Variables",
-              "prompt": "Write a function `increment_global` that increments a global variable `counter` by 1 each time it is called. Demonstrate the use of both global and local variables. Then read the input values, call the function, and print the returned result.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "code-q3": {
+              "title": "Compute with two local variables",
+              "prompt": "Write a function `rectangle_area(width, height)` that returns the area.\n\nInside the function, create a local variable named `area` and return it.",
+              "hint": "Read the task \"Compute with two local variables\" and identify the required result.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
-              },
-              "starterCode": "counter = 0\n\ndef increment_global():\n    # Use global keyword\n    \n    # Increment the counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())"
-            },
-            "quiz11": {
-              "title": "Function with Local Variables",
-              "prompt": "Write a function `greet_user` that takes a user's name as a parameter and returns a greeting message. Use a local variable to store the message. Then read the input values, call the function, and print the returned result.",
-              "hint": "Read the task \"Function with Local Variables\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Function with Local Variables\".",
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Compute with two local variables\".",
                 "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "def greet_user(name):\n    # Create a greeting message\n    \n    # Return the message\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))"
+              "starterCode": "def rectangle_area(width, height):\n    # create a local variable named area\n    # return the area\n    pass"
             }
           }
         }
@@ -203,13 +206,17 @@
     "python-data-functions": {
       "python-6-functions-and-modularity": {
         "scope-and-local-variables": {
-          "sketch1": {
-            "title": "Understanding Scope",
-            "bodyMarkdown": "In Python, the scope of a variable determines where that variable can be accessed. Variables defined inside a function are local to that function and cannot be accessed outside of it. This is known as local scope. Variables defined outside of any function are global and can be accessed anywhere in the code.\n\n```python\ndef my_function():\n    local_var = 10\n    print(local_var)\n\nmy_function()\n# print(local_var)  # This would cause an error because local_var is not defined outside the function.\n```\n\nTry it yourself: Modify the function to return the local variable and print it outside the function.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "scope-basics": {
+            "title": "What local scope means",
+            "bodyMarkdown": "A variable's **scope** is where that variable can be used.\n\nWhen you create a variable **inside a function**, it is usually a **local variable**. That means it exists only while that function is running.\n\n```python\ndef greet():\n    name = \"Ava\"\n    print(\"Hello\", name)\n\ngreet()\n```\n\nStep by step:\n\n- `def greet():` creates a function named `greet`.\n- `name = \"Ava\"` creates a local variable inside that function.\n- `print(\"Hello\", name)` uses that local variable.\n- After the function finishes, that local variable is no longer available outside the function.\n\nA helpful way to think about it: local variables are like notes used inside one small task. When the task ends, the note is gone.\n\n**Try it yourself:** change `\"Ava\"` to your own name, click Run, and check the output panel."
           },
-          "sketch2": {
-            "title": "Global vs Local Variables",
-            "bodyMarkdown": "Global variables are accessible throughout the entire program, whereas local variables are only accessible within the function they are defined in.\n\n```python\nglobal_var = 5\n\ndef my_function():\n    local_var = 10\n    print('Inside function:', local_var)\n    print('Inside function:', global_var)\n\nmy_function()\nprint('Outside function:', global_var)\n# print('Outside function:', local_var)  # This would cause an error.\n```\n\nTry this: Add a new global variable and access it inside the function.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "inside-vs-outside": {
+            "title": "Inside a function is different from outside",
+            "bodyMarkdown": "Code inside a function and code outside a function do not share every variable automatically.\n\n```python\ncity = \"Lima\"\n\ndef show_place():\n    country = \"Peru\"\n    print(city)\n    print(country)\n\nshow_place()\n```\n\nLine by line:\n\n- `city = \"Lima\"` is created outside the function.\n- Inside `show_place()`, a new local variable `country` is created.\n- `print(city)` works here because the function can read the outside variable.\n- `print(country)` also works here because `country` exists inside the function.\n- But `country` would not work outside the function, because it is local to `show_place()`.\n\nWorked example:\n\nIf you tried to use `country` after calling `show_place()`, Python would complain because that name only existed inside the function.\n\n**Your turn:** add another `print(city)` after `show_place()` and notice that `city` still exists outside the function."
+          },
+          "parameters-create-local-names": {
+            "title": "Parameters are local too",
+            "bodyMarkdown": "Function parameters also act like local variables.\n\n```python\ndef double(number):\n    result = number * 2\n    return result\n\nprint(double(5))\n```\n\nStep by step:\n\n- `number` is a parameter.\n- When you call `double(5)`, the value `5` is stored in the local name `number`.\n- `result` is another local variable created inside the function.\n- `return result` sends the answer back.\n\nBoth `number` and `result` belong to that function call.\n\nConcrete example:\n\n- In `double(5)`, `number` is `5`, so `result` becomes `10`.\n- In `double(8)`, `number` is `8`, so `result` becomes `16`.\n\nThe names are reused safely each time because they are local to each call.\n\n**Try this:** change `double(5)` to `double(8)` and then to `double(12)` to see how the returned value changes."
           }
         }
       }

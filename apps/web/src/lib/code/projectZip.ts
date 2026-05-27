@@ -2,7 +2,7 @@ import JSZip from "jszip";
 import type { FileEntry } from "./types";
 import type { InteractiveLanguage } from "@zoeskoul/code-contracts";
 
-type ProjectLanguage = InteractiveLanguage;
+type ProjectLanguage = InteractiveLanguage | "bash";
 
 const SNAPSHOT_SCRIPT = String.raw`#!/usr/bin/env python3
 import base64

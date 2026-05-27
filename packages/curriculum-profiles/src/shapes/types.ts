@@ -147,9 +147,10 @@ export type SqlCodeRecipeShape = {
 export type PythonCodeRecipeShape = {
     kind: "code_input";
     language: "python";
-    recipeTypes: readonly ["template_io", "fixed_tests"];
+    recipeTypes: readonly ["template_io", "fixed_tests", "semantic"];
     templateIoRequiredFields: readonly ["type", "vars", "tests", "solutionTemplate"];
     fixedTestsRequiredFields: readonly ["type", "tests", "solutionCode"];
+    semanticRequiredFields: readonly ["type", "language", "solutionCode", "semanticChecks"];
 };
 
 export type QuizShape = {

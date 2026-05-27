@@ -201,6 +201,7 @@ export default function IdeEditorPane({
                                     ? `${exerciseStateKey}:${activeFileId ?? "no-file"}`
                                     : activeFileId ?? "no-file"
                             }
+                            activeWorkspaceFileId={activeFile?.id ?? activeFileId ?? undefined}
                             onBeforeRun={onBeforeRun}
                             onRun={
                                 isAuthenticated && !isWeb

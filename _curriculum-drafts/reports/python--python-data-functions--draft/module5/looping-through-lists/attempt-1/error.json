@@ -1,0 +1,10 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "400 Invalid schema for response_format 'TopicAuthoringDraft': In context=('properties', 'quizDraft', 'items', 'properties', 'semanticChecks', 'type', '0', 'items', 'properties', 'args', 'type', '0', 'items', 'type', '3', 'items', 'type', '3', 'items', 'type', '4'), 'additionalProperties' is required to be supplied and to be false.",
+  "stack": "RetryableTopicValidationError: 400 Invalid schema for response_format 'TopicAuthoringDraft': In context=('properties', 'quizDraft', 'items', 'properties', 'semanticChecks', 'type', '0', 'items', 'properties', 'args', 'type', '0', 'items', 'type', '3', 'items', 'type', '3', 'items', 'type', '4'), 'additionalProperties' is required to be supplied and to be false.\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:268:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:25:17)\n    at async runCompileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-course.js:24:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:46:13)",
+  "code": "TOPIC_GENERATION_OUTPUT_INVALID",
+  "retryable": true,
+  "details": {
+    "topicId": "looping-through-lists"
+  }
+}

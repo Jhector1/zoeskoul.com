@@ -1,0 +1,330 @@
+{
+  "title": "Writing Text Files",
+  "summary": "Create or overwrite text files by opening paths in write or append mode and writing text that you can verify with printed output.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch-write-mode-basics",
+      "title": "Write mode creates or replaces text",
+      "bodyMarkdown": "When you open a path with write mode (`\"w\"`), Python prepares that path for new text. If the path already has text, write mode replaces the old contents.\n\n```python\nwith open(\"note.txt\", \"w\") as file:\n    file.write(\"Hello\\n\")\n\nwith open(\"note.txt\") as file:\n    print(file.read())\n```\n\nStep by step:\n\n- `open(\"note.txt\", \"w\")` opens the path for writing.\n- `file.write(\"Hello\\n\")` puts text into the file.\n- Opening the same path again in read mode lets you check what was saved.\n- `print(file.read())` sends the saved text to the output panel.\n\nIn this example, the output is:\n\n```python\nHello\n```\n\nTry it yourself: change `\"Hello\\n\"` to a different message, click Run, and check the new output."
+    },
+    {
+      "id": "sketch-append-mode-basics",
+      "title": "Append mode adds to the end",
+      "bodyMarkdown": "Append mode (`\"a\"`) keeps the existing text and adds new text at the end.\n\n```python\nwith open(\"log.txt\", \"w\") as file:\n    file.write(\"Start\\n\")\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"Next\\n\")\n\nwith open(\"log.txt\") as file:\n    print(file.read())\n```\n\nLine by line:\n\n- The first `with open(..., \"w\")` creates the starting text.\n- The second `with open(..., \"a\")` adds another line without removing `Start`.\n- Reading the file back shows both lines.\n\nThe output becomes:\n\n```python\nStart\nNext\n```\n\nYour turn: change the second written line, run the code, and predict what the full file text will be before you check the output panel."
+    },
+    {
+      "id": "sketch-newlines-and-verifying",
+      "title": "Use newline characters and verify what you wrote",
+      "bodyMarkdown": "When writing several lines, `\\n` starts a new line. It is also helpful to reopen the file and print its contents so you can verify the result.\n\n```python\nwith open(\"tasks.txt\", \"w\") as file:\n    file.write(\"Buy milk\\nWash dishes\\n\")\n\nwith open(\"tasks.txt\") as file:\n    saved_text = file.read()\n    print(saved_text)\n```\n\nWhat this does:\n\n- `Buy milk\\n` writes one line and moves to the next line.\n- `Wash dishes\\n` writes the second line.\n- `file.read()` gets the full saved text.\n- Printing `saved_text` lets you confirm the file contents in the output panel.\n\nWithout `\\n`, both tasks would appear on the same line.\n\nTry this: add a third task to the string, click Run, and check whether each task appears on its own line."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "sc-write-vs-append",
+      "kind": "single_choice",
+      "title": "Choose the mode that replaces old text",
+      "prompt": "Which file mode should you use when you want to overwrite any existing text in a file with new text?",
+      "options": [
+        "\"a\"",
+        "\"w\"",
+        "\"r\"",
+        "\"x\""
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about the mode used to create fresh contents from the start of the file.",
+      "help": {
+        "concept": "Write mode starts the file contents over, while append mode keeps existing contents and adds more text at the end.",
+        "hint_1": "Compare what `\"w\"` does to existing text with what `\"a\"` does.",
+        "hint_2": "Choose the mode that replaces old contents instead of preserving them."
+      }
+    },
+    {
+      "id": "sc-verify-written-text",
+      "kind": "single_choice",
+      "title": "Best way to confirm saved text",
+      "prompt": "After writing text to a file in this lesson, what is the best way to make the result visible in the output panel?",
+      "options": [
+        "Change the editor theme",
+        "Reopen the file and print its contents",
+        "Open the notes panel",
+        "Rename the variable"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about reopening the path and showing the saved contents.",
+      "help": {
+        "concept": "File-writing exercises should produce observable output, so a common pattern is to reopen the file and print what was written.",
+        "hint_1": "Writing changes the file, but the output panel only shows text you print.",
+        "hint_2": "Choose the option that reads the saved text back and displays it."
+      }
+    },
+    {
+      "id": "mc-append-true-statements",
+      "kind": "multi_choice",
+      "title": "Facts about append mode",
+      "prompt": "Choose all true statements about opening a file with append mode (`\"a\"`).",
+      "options": [
+        "It keeps the existing contents.",
+        "It adds new text at the end of the file.",
+        "It always removes everything already in the file.",
+        "It can be used to add another line to a log."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Append mode keeps old text and adds new text after it.",
+      "help": {
+        "concept": "Append mode writes at the end of existing contents instead of clearing the file first.",
+        "hint_1": "Look for statements that describe keeping existing text.",
+        "hint_2": "Reject any option that says append mode erases the file before writing."
+      }
+    },
+    {
+      "id": "mc-good-writing-patterns",
+      "kind": "multi_choice",
+      "title": "Useful patterns when writing text files",
+      "prompt": "Choose all practices that fit this topic's file-writing workflow.",
+      "options": [
+        "Use `with open(...)` so the file is handled cleanly.",
+        "Use `\\n` when you want the next text on a new line.",
+        "Print the saved contents after writing so the result is visible.",
+        "Change the notes panel before writing."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about writing text, then making the result observable.",
+      "help": {
+        "concept": "Beginner file-writing programs often use `with open(...)` for safe access, newline characters for line breaks, and printed verification after writing.",
+        "hint_1": "Look for patterns involving `with open`, `\\n`, and printing saved text.",
+        "hint_2": "Avoid choices unrelated to writing or checking file contents."
+      }
+    },
+    {
+      "id": "dr-write-file-steps",
+      "kind": "drag_reorder",
+      "title": "Order the write-and-check steps",
+      "prompt": "Put these steps in the correct order for a simple program that writes text and then verifies it.",
+      "tokens": [
+        "Open the path with mode \"w\"",
+        "Write the text",
+        "Open the same path for reading",
+        "Print the file contents"
+      ],
+      "correctOrder": [
+        "Open the path with mode \"w\"",
+        "Write the text",
+        "Open the same path for reading",
+        "Print the file contents"
+      ],
+      "hint": "Write first, then reopen and display the saved text.",
+      "help": {
+        "concept": "A common workflow is open in write mode, write text, reopen in read mode, then print the contents.",
+        "hint_1": "The file must be opened for writing before `write()` can happen.",
+        "hint_2": "Printing comes after reading the saved contents back."
+      }
+    },
+    {
+      "id": "dr-append-log-sequence",
+      "kind": "drag_reorder",
+      "title": "Order the append workflow",
+      "prompt": "Arrange these actions to show how a program can create a starting log entry, append another entry, and then display the full log.",
+      "tokens": [
+        "Open the log with mode \"w\" and write the first line",
+        "Open the log with mode \"a\" and add another line",
+        "Open the log for reading",
+        "Print the full log text"
+      ],
+      "correctOrder": [
+        "Open the log with mode \"w\" and write the first line",
+        "Open the log with mode \"a\" and add another line",
+        "Open the log for reading",
+        "Print the full log text"
+      ],
+      "hint": "The first write creates the starting text before append adds more.",
+      "help": {
+        "concept": "To demonstrate append mode clearly, first create initial contents, then append new text, then read the whole file back.",
+        "hint_1": "You need some starting text before the append step makes sense.",
+        "hint_2": "Reading and printing the full log should happen after both writes are finished."
+      }
+    },
+    {
+      "id": "fb-write-mode-code",
+      "kind": "fill_blank_choice",
+      "title": "Fill the write mode",
+      "prompt": "Complete the mode so this code opens the file for overwriting text.",
+      "template": "with open(\"report.txt\", [blank1]) as file:",
+      "choices": [
+        "\"r\"",
+        "\"a\"",
+        "\"w\"",
+        "\"x\""
+      ],
+      "correctValue": "\"w\"",
+      "hint": "Use the mode that replaces old contents.",
+      "help": {
+        "concept": "The mode string for overwriting text is `\"w\"`.",
+        "hint_1": "This is not append mode and not read mode.",
+        "hint_2": "Choose the single-letter mode used to write fresh contents."
+      }
+    },
+    {
+      "id": "fb-newline-choice",
+      "kind": "fill_blank_choice",
+      "title": "Fill the line break",
+      "prompt": "Choose the text that starts a new line after `First line`.",
+      "template": "file.write(\"First line[blank1]Second line\")",
+      "choices": [
+        "\\t",
+        "\\n",
+        "\\r"
+      ],
+      "correctValue": "\\n",
+      "hint": "Use the escape sequence for a newline.",
+      "help": {
+        "concept": "In Python strings, `\\n` represents a newline character.",
+        "hint_1": "The missing part is not a space and not a tab.",
+        "hint_2": "Pick the backslash sequence that moves the next text to a new line."
+      }
+    },
+    {
+      "id": "ci-write-greeting-file",
+      "kind": "code_input",
+      "title": "Write and show a greeting",
+      "prompt": "Write a program that opens `greeting.txt` in write mode, writes exactly `Hello, Zoe!` to it, then reopens the file and prints its contents.",
+      "starterCode": "# Write your code below\n",
+      "solutionCode": "with open(\"greeting.txt\", \"w\") as file:\n    file.write(\"Hello, Zoe!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())\n",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Hello, Zoe!\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "ignored input\n",
+          "stdout": "Hello, Zoe!\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use one `with open(..., \"w\")` block to write, then another `with open(...)` block to read and print.",
+      "help": {
+        "concept": "A complete file-writing program often writes text first, then reads the same path back so the result appears in the output panel.",
+        "hint_1": "After writing `Hello, Zoe!`, open `greeting.txt` again without write mode and call `read()`.",
+        "hint_2": "Print the text you read back from the file so the checker can observe the saved result."
+      }
+    },
+    {
+      "id": "ci-overwrite-shopping-list",
+      "kind": "code_input",
+      "title": "Overwrite a list with two lines",
+      "prompt": "Write a program that opens `shopping.txt` in write mode, writes exactly two lines: `Bread` and `Apples`, then reopens the file and prints the full contents.",
+      "starterCode": "# Write your code below\n",
+      "solutionCode": "with open(\"shopping.txt\", \"w\") as file:\n    file.write(\"Bread\\nApples\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")\n",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Bread\nApples\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "shopping.txt",
+              "content": "Old item\nMilk\nEggs",
+              "readOnly": false
+            }
+          ]
+        },
+        {
+          "stdin": "another run\n",
+          "stdout": "Bread\nApples\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "shopping.txt",
+              "content": "Nothing here yet",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "shopping.txt",
+          "content": "Old item\nMilk\nEggs",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use `\\n` between the two items so they appear on separate lines.",
+      "help": {
+        "concept": "Write mode replaces the file contents, and newline characters let you store multiple lines of text in one write operation.",
+        "hint_1": "The written text should contain `Bread`, then a newline, then `Apples`.",
+        "hint_2": "After writing, read the whole file back and print it so both lines appear in the output panel."
+      }
+    },
+    {
+      "id": "ci-append-log-entry",
+      "kind": "code_input",
+      "title": "Append a new log entry",
+      "prompt": "A file named `log.txt` is provided. Write a program that opens `log.txt` in append mode, adds the line `Checked sensors` with a newline, then reopens the file and prints the full contents.",
+      "starterCode": "# Append one new line to log.txt, then print the full file contents.\n",
+      "solutionCode": "with open(\"log.txt\", \"a\") as file:\n    file.write(\"Checked sensors\\n\")\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")\n",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Start shift\nChecked sensors\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "log.txt",
+              "content": "Start shift",
+              "readOnly": false
+            }
+          ]
+        },
+        {
+          "stdin": "unused\n",
+          "stdout": "Start shift\nDoors locked\nChecked sensors\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "log.txt",
+              "content": "Start shift\nDoors locked",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "log.txt",
+          "content": "Start shift",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Append should keep the existing lines and add the new line at the end.",
+      "help": {
+        "concept": "Append mode adds new text after the current contents instead of replacing them, so reading the file back should show both old and new lines.",
+        "hint_1": "Open `log.txt` with mode `\"a\"` and write `Checked sensors\\n`.",
+        "hint_2": "Then reopen `log.txt`, read the whole file, and print it exactly as stored."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Practice writing and appending text files",
+    "stepIds": [
+      "ci-write-greeting-file",
+      "ci-overwrite-shopping-list",
+      "ci-append-log-entry"
+    ]
+  }
+}

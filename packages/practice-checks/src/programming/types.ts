@@ -36,13 +36,20 @@ export type ProgrammingWorkspaceExpectations = {
     requiredFolders?: string[];
     forbiddenFiles?: string[];
 };
+export type SemanticValueKind =
+    | "value"
+    | "dict_entries"
+    | "list_of_dict_entries";
+
 
 export type SemanticCheck =
     | {
     type: "function_returns";
     functionName: string;
     args?: unknown[];
+    argKinds?: SemanticValueKind[];
     expected: unknown;
+    expectedKind?: SemanticValueKind;
     message?: string;
 }
     | {
@@ -67,9 +74,12 @@ export type SemanticCheck =
     type: "method_returns";
     className: string;
     constructorArgs?: unknown[];
+    constructorArgKinds?: SemanticValueKind[];
     methodName: string;
     methodArgs?: unknown[];
+    methodArgKinds?: SemanticValueKind[];
     expected: unknown;
+    expectedKind?: SemanticValueKind;
     message?: string;
 }
     | {
@@ -81,6 +91,9 @@ export type SemanticCheck =
     | {
     type: "printed_line_count";
     min?: number;
+    message?: string;
+}  | {
+    type: "no_stdout";
     message?: string;
 };
 

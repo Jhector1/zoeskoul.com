@@ -60,6 +60,23 @@ describe("Judge0 project zip workspace capture", () => {
         expect(run).toContain('node "$ENTRY"');
     });
 
+    it("supports bash project runs", async () => {
+        const encoded = await zipProject("bash", "main.sh", [
+            {
+                path: "main.sh",
+                content: 'echo "Hello from Bash!"\n',
+            },
+        ]);
+
+        const project = await unzipProject(encoded);
+        const run = await project.read("run");
+
+        expect(project.names).toContain(".zoe_capture_workspace.py");
+        expect(run).toContain("trap");
+        expect(run).toContain("__zoe_capture_workspace");
+        expect(run).toContain('bash "main.sh"');
+    });
+
     it("rejects unsafe project paths", async () => {
         await expect(
             zipProject("python", "../main.py", [

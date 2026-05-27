@@ -23,14 +23,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "docstrings-idea",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "good-docstrings",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.cards.sketch2.title",
+      "sketchId": "contracts-print-vs-return",
       "height": 420
     },
     {
@@ -59,27 +66,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz9",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.projectSteps.quiz9.title",
-            "exerciseKey": "quiz9",
+            "id": "ci_add_docstring",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.projectSteps.ci_add_docstring.title",
+            "exerciseKey": "ci-add-docstring",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz10",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.projectSteps.quiz10.title",
-            "exerciseKey": "quiz10",
+            "id": "ci_write_contract_function",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.projectSteps.ci_write_contract_function.title",
+            "exerciseKey": "ci-write-contract-function",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz11",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.projectSteps.quiz11.title",
-            "exerciseKey": "quiz11",
+            "id": "ci_fix_print_vs_return",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.projectSteps.ci_fix_print_vs_return.title",
+            "exerciseKey": "ci-fix-print-vs-return",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -91,25 +98,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "docstrings-idea",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.sketch1.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.docstrings-idea.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.docstrings-idea.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "good-docstrings",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.sketch2.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.good-docstrings.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.good-docstrings.bodyMarkdown"
+    },
+    {
+      "id": "contracts-print-vs-return",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.contracts-print-vs-return.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.contracts-print-vs-return.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-docstring-location",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz1",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-docstring-location",
       "optionIds": [
         "a",
         "b",
@@ -118,31 +131,32 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "quiz2",
+      "id": "sc-contract-purpose",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.sc-contract-purpose",
       "optionIds": [
         "a",
         "b",
-        "c"
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "c"
+        "optionId": "a"
       }
     },
     {
-      "id": "quiz3",
+      "id": "mc-good-docstring-features",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz3",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.mc-good-docstring-features",
       "optionIds": [
         "a",
         "b",
@@ -159,11 +173,11 @@
       }
     },
     {
-      "id": "quiz4",
+      "id": "mc-return-vs-print-contract",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz4",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.mc-return-vs-print-contract",
       "optionIds": [
         "a",
         "b",
@@ -174,49 +188,24 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c",
-          "d"
+          "b"
         ]
       }
     },
     {
-      "id": "quiz5",
+      "id": "dr-docstring-order",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz5",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.dr-docstring-order",
       "tokenIds": [
         "t1",
         "t2",
-        "t3",
-        "t4"
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
-      }
-    },
-    {
-      "id": "quiz6",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz6",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t4",
           "t1",
           "t2",
           "t3"
@@ -224,41 +213,61 @@
       }
     },
     {
-      "id": "quiz7",
+      "id": "dr-contract-reading",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.dr-contract-reading",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fb-return-word",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz7",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.fb-return-word",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "after"
+        "value": "Return"
       }
     },
     {
-      "id": "quiz8",
+      "id": "fb-docstring-position",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz8",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.fb-docstring-position",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "exceptions"
+        "value": "`\"\"\"Return the square of number.\"\"\"`"
       }
     },
     {
-      "id": "quiz9",
+      "id": "ci-add-docstring",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz9",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring",
       "language": "python",
-      "starterCode": "def multiply(a, b):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+      "starterCode": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def multiply(a, b):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+          "content": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -267,52 +276,65 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def multiply(a, b):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+        "starterCode": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def multiply(a, b):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))",
+            "content": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def make_lower(text):\n    \"\"\"Return the lowercase version of text.\"\"\"\n    return text.lower()",
+        "semanticChecks": [
           {
-            "stdin": "1\n1\n",
-            "stdout": "1",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "make_lower",
+            "args": [
+              "HELLO"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "hello",
+            "expectedKind": "value"
           },
           {
-            "stdin": "1\n1\n",
-            "stdout": "1",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "make_lower",
+            "args": [
+              "PyThOn"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "python",
+            "expectedKind": "value"
           },
           {
-            "stdin": "2\n2\n",
-            "stdout": "4\n",
-            "match": "exact"
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def multiply(a, b):\n    \"\"\"\n    Multiplies two numbers and returns the result.\n    \n    Parameters:\n    a (int or float): The first number.\n    b (int or float): The second number.\n    \n    Returns:\n    int or float: The product of a and b.\n    \"\"\"\n    return a * b\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))"
+        ]
       }
     },
     {
-      "id": "quiz10",
+      "id": "ci-write-contract-function",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz10",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function",
       "language": "python",
-      "starterCode": "def safe_divide(numerator, denominator):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumerator = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ndenominator = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(safe_divide(numerator, denominator))",
+      "starterCode": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def safe_divide(numerator, denominator):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumerator = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ndenominator = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(safe_divide(numerator, denominator))",
+          "content": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -321,47 +343,69 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def safe_divide(numerator, denominator):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumerator = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ndenominator = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(safe_divide(numerator, denominator))",
+        "starterCode": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def safe_divide(numerator, denominator):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumerator = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ndenominator = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(safe_divide(numerator, denominator))",
+            "content": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def repeat_word(word, times):\n    \"\"\"Return word repeated times times.\"\"\"\n    return word * times",
+        "semanticChecks": [
           {
-            "stdin": "1\n1\n",
-            "stdout": "1.0",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "repeat_word",
+            "args": [
+              "ha",
+              3
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "hahaha",
+            "expectedKind": "value"
           },
           {
-            "stdin": "1\n1\n",
-            "stdout": "1.0",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "repeat_word",
+            "args": [
+              "go",
+              1
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "go",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def safe_divide(numerator, denominator):\n    \"\"\"\n    Divides the numerator by the denominator, returning None if the denominator is zero.\n    \n    Parameters:\n    numerator (float): The number to be divided.\n    denominator (float): The number to divide by.\n    \n    Returns:\n    float or None: The result of the division, or None if division by zero occurs.\n    \"\"\"\n    if denominator == 0:\n        return None\n    return numerator / denominator\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumerator = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ndenominator = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(safe_divide(numerator, denominator))"
+        ]
       }
     },
     {
-      "id": "quiz11",
+      "id": "ci-fix-print-vs-return",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return",
       "language": "python",
-      "starterCode": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef calculate_area(width, height):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+      "starterCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef calculate_area(width, height):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+          "content": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -370,38 +414,55 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef calculate_area(width, height):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+        "starterCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef calculate_area(width, height):\n    \"\"\"\n    \n    \"\"\"\n    # Write your code below\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+            "content": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    return price + tax",
+        "semanticChecks": [
           {
-            "stdin": "1\n1\n",
-            "stdout": "1",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "total_price",
+            "args": [
+              10,
+              2
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 12,
+            "expectedKind": "value"
           },
           {
-            "stdin": "1\n1\n",
-            "stdout": "1",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "total_price",
+            "args": [
+              7,
+              0.5
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 7.5,
+            "expectedKind": "value"
           },
           {
-            "stdin": "2\n2\n",
-            "stdout": "4\n",
-            "match": "exact"
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "_inputs = []\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef calculate_area(width, height):\n    \"\"\"\n    Calculates the area of a rectangle given its width and height.\n    \n    Parameters:\n    width (float): The width of the rectangle.\n    height (float): The height of the rectangle.\n    \n    Returns:\n    float: The area of the rectangle.\n    \"\"\"\n    return width * height\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))"
+        ]
       }
     }
   ]

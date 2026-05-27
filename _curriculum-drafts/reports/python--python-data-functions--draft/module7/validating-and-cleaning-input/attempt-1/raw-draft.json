@@ -1,0 +1,338 @@
+{
+  "title": "Validating and Cleaning Input",
+  "summary": "Clean text, check missing values, and reject invalid rows.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "sb-why-cleaning-matters",
+      "title": "Cleaning data before you use it",
+      "bodyMarkdown": "Real input is often messy. A value might have extra spaces, missing text, or something that cannot be converted to a number.\n\nA common cleaning pattern is:\n\n1. remove extra spaces\n2. check for missing values\n3. try to convert to the type you need\n4. skip or reject bad rows\n\nExample:\n\n```python\nraw_age = \" 42 \"\ncleaned = raw_age.strip()\nage = int(cleaned)\nprint(age)\n```\n\nStep by step:\n\n- `strip()` removes spaces around the text.\n- `int(cleaned)` converts the cleaned text to a number.\n- `print(age)` shows the final usable value.\n\nIf the input were just spaces like `\"   \"`, then `strip()` would produce an empty string. That is a sign the value is missing.\n\nTry it yourself: change `raw_age` to `\"   \"` or `\"nine\"`, click Run, and predict what needs to happen before conversion."
+    },
+    {
+      "id": "sb-try-except-cleaning",
+      "title": "Using try/except while cleaning",
+      "bodyMarkdown": "When a program converts user input, bad data can cause an error. `try` and `except` let your program handle that case instead of crashing.\n\n```python\nraw_score = \" 88 \"\ntext = raw_score.strip()\n\ntry:\n    score = int(text)\n    print(\"valid\")\nexcept ValueError:\n    print(\"invalid\")\n```\n\nHow it works:\n\n- First, the code removes extra spaces.\n- Inside `try`, it attempts `int(text)`.\n- If the text is a valid whole number, the program prints `valid`.\n- If conversion fails, `except ValueError` runs and prints `invalid`.\n\nThis is useful when cleaning rows from a file or checking form-like input.\n\nTry this: change `raw_score` to `\"abc\"`, then to `\" 15 \"`, click Run, and compare the output panel."
+    },
+    {
+      "id": "sb-validating-rows",
+      "title": "Rejecting invalid rows",
+      "bodyMarkdown": "Sometimes one row has several pieces of data, and every piece must pass validation.\n\n```python\nrow = \" Ava , 19 \"\nparts = row.split(\",\")\nname = parts[0].strip()\nage_text = parts[1].strip()\n\nif name == \"\":\n    print(\"reject\")\nelse:\n    try:\n        age = int(age_text)\n        print(\"accept\")\n    except ValueError:\n        print(\"reject\")\n```\n\nLine by line:\n\n- `split(\",\")` separates the row into pieces.\n- `strip()` cleans spaces around each piece.\n- `name == \"\"` checks for a missing name.\n- `int(age_text)` checks whether the age is a valid number.\n- The row is accepted only if both checks succeed.\n\nThis same idea works for simple CSV-like text: clean each field, validate each field, then keep only the good rows.\n\nYour turn: change the row so the name is blank, then change it so the age is not a number, and predict whether the row should be accepted or rejected."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "sc-strip-purpose",
+      "kind": "single_choice",
+      "title": "Why use strip first?",
+      "prompt": "Why is `strip()` often used before validating text input?",
+      "hint": "Think about what extra spaces do to checks like empty-string tests or number conversion.",
+      "help": {
+        "concept": "`strip()` removes whitespace from the beginning and end of a string, which helps validation work on the real content instead of accidental spaces.",
+        "hint_1": "Imagine the input is `\" 42 \"` or `\"   \"`. What should validation look at: the spaces or the content after trimming?",
+        "hint_2": "Choose the option about removing surrounding whitespace so later checks like `== \"\"` or `int(...)` behave correctly."
+      },
+      "options": [
+        "It removes spaces around the text so validation checks use the cleaned value",
+        "It changes every letter to lowercase automatically",
+        "It splits the text into a list of words",
+        "It turns text into an integer"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "sc-except-flow",
+      "kind": "single_choice",
+      "title": "What runs after a failed conversion?",
+      "prompt": "If `int(cleaned_text)` raises a `ValueError` inside a `try` block, what should happen in a matching `except ValueError` block?",
+      "hint": "The goal is to handle bad input without stopping the whole program.",
+      "help": {
+        "concept": "A matching `except` block runs when code in `try` raises that specific exception, letting the program respond to invalid data safely.",
+        "hint_1": "Think about what `except ValueError` is for when text cannot be converted to an integer.",
+        "hint_2": "Pick the option where the program handles the bad value instead of crashing or pretending conversion succeeded."
+      },
+      "options": [
+        "The program can mark the value as invalid and continue",
+        "The conversion automatically succeeds on the second attempt",
+        "The `try` block is skipped and the value becomes 0 by default",
+        "Python deletes the bad variable from memory"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "mc-valid-row-checks",
+      "kind": "multi_choice",
+      "title": "Checks for a usable row",
+      "prompt": "A row should be accepted only if it has a non-empty name and a valid integer age. Which checks help enforce that? Choose all that apply.",
+      "hint": "One check is about missing text after trimming. Another is about safe number conversion.",
+      "help": {
+        "concept": "Row validation often combines string cleaning with multiple checks, such as rejecting blank fields and catching conversion errors.",
+        "hint_1": "Think about the name field after `strip()`, and think about what happens when age text is passed to `int(...)`.",
+        "hint_2": "Select the options that reject blank names and reject ages that cannot be converted to integers."
+      },
+      "options": [
+        "Use `name.strip() == \"\"` to detect a missing name",
+        "Wrap `int(age_text.strip())` in `try/except ValueError`",
+        "Assume every age field is valid if it contains any character",
+        "Keep rows even when the name becomes empty after trimming"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "mc-cleaning-actions",
+      "kind": "multi_choice",
+      "title": "Useful cleaning steps",
+      "prompt": "Which actions are common parts of cleaning messy text input before using it in a program? Choose all that apply.",
+      "hint": "Think about trimming text and checking whether conversion works.",
+      "help": {
+        "concept": "Cleaning input usually means normalizing text and validating it before the program depends on it.",
+        "hint_1": "Look for actions that make raw text safer to use, especially before comparisons or numeric conversion.",
+        "hint_2": "Choose the options about removing extra spaces and checking whether a conversion succeeds."
+      },
+      "options": [
+        "Remove surrounding whitespace with `strip()`",
+        "Use `try/except` around risky conversions like `int(...)`",
+        "Add random characters so every row has the same length",
+        "Skip validation and trust the raw input"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "dr-clean-number-order",
+      "kind": "drag_reorder",
+      "title": "Order the cleaning steps",
+      "prompt": "Put these steps in a sensible order for cleaning a text value that should become an integer.",
+      "hint": "You usually clean the text before checking whether conversion works.",
+      "help": {
+        "concept": "A good validation sequence first normalizes raw text, then checks for missing content, then attempts conversion, then uses the cleaned result.",
+        "hint_1": "Start with the raw string and remove extra spaces before deciding whether it is empty.",
+        "hint_2": "After trimming, check for missing text, then try `int(...)`, and only then use the numeric value."
+      },
+      "tokens": [
+        "Read the raw text value",
+        "Remove surrounding spaces with `strip()`",
+        "Check whether the cleaned text is empty",
+        "Try converting the cleaned text with `int(...)`"
+      ],
+      "correctOrder": [
+        "Read the raw text value",
+        "Remove surrounding spaces with `strip()`",
+        "Check whether the cleaned text is empty",
+        "Try converting the cleaned text with `int(...)`"
+      ]
+    },
+    {
+      "id": "dr-row-validation-flow",
+      "kind": "drag_reorder",
+      "title": "Validate a simple row",
+      "prompt": "Arrange these actions for validating a row like `\"Mia, 21\"`.",
+      "hint": "Split first, then clean each field, then validate the cleaned pieces.",
+      "help": {
+        "concept": "For CSV-like rows, the program usually separates fields first, cleans each field, and then validates required values and conversions.",
+        "hint_1": "You cannot validate the name and age separately until the row has been split into fields.",
+        "hint_2": "After splitting, trim the fields, reject a blank name, and then test whether the age converts to an integer."
+      },
+      "tokens": [
+        "Split the row by the comma",
+        "Trim spaces from the name and age text",
+        "Reject the row if the cleaned name is empty",
+        "Try converting the cleaned age text to an integer"
+      ],
+      "correctOrder": [
+        "Split the row by the comma",
+        "Trim spaces from the name and age text",
+        "Reject the row if the cleaned name is empty",
+        "Try converting the cleaned age text to an integer"
+      ]
+    },
+    {
+      "id": "fb-empty-after-strip",
+      "kind": "fill_blank_choice",
+      "title": "Check for missing cleaned text",
+      "prompt": "Complete the condition that detects a value containing only spaces after cleaning.",
+      "hint": "After `strip()`, a spaces-only string becomes an empty string.",
+      "help": {
+        "concept": "A common missing-value check is to trim whitespace first and then compare the result to the empty string.",
+        "hint_1": "If `name` is `\"   \"`, then `name.strip()` becomes what value?",
+        "hint_2": "Fill the blank with the string literal used to represent no characters."
+      },
+      "template": "if name.strip() == [blank1]:",
+      "choices": [
+        "\"\"",
+        "\" \"",
+        "None",
+        "0"
+      ],
+      "correctValue": "\"\""
+    },
+    {
+      "id": "fb-exception-name",
+      "kind": "fill_blank_choice",
+      "title": "Catch the right exception",
+      "prompt": "Fill in the exception type used when integer conversion fails.",
+      "hint": "This is the exception raised by `int()` when the text is not a valid integer.",
+      "help": {
+        "concept": "`int()` raises `ValueError` when a string cannot be interpreted as an integer.",
+        "hint_1": "Think about the exception name used for a bad value, not a missing variable name or syntax problem.",
+        "hint_2": "Choose the built-in exception commonly paired with `except` around `int(text)`."
+      },
+      "template": "except [blank1]:",
+      "choices": [
+        "ValueError",
+        "TypeError",
+        "IndexError",
+        "KeyError"
+      ],
+      "correctValue": "ValueError"
+    },
+    {
+      "id": "ci-clean-age-text",
+      "kind": "code_input",
+      "title": "Clean and convert an age",
+      "prompt": "Write a function named `clean_age` that takes one string. Remove surrounding spaces. If the cleaned text is empty or cannot be converted to an integer, return `None`. Otherwise return the integer value.",
+      "hint": "Trim first, then handle the empty-string case before trying `int(...)`.",
+      "help": {
+        "concept": "A cleaning helper function should return a usable value for valid input and a safe fallback like `None` for missing or invalid input.",
+        "hint_1": "Use `strip()` on the input text, then check whether the result is `\"\"`.",
+        "hint_2": "Only after that should you try `int(...)`, and if conversion fails, return `None` from the `except ValueError` block."
+      },
+      "starterCode": "def clean_age(text):\n    # return an int for valid input, or None for missing/invalid input\n    pass\n",
+      "solutionCode": "def clean_age(text):\n    cleaned = text.strip()\n    if cleaned == \"\":\n        return None\n    try:\n        return int(cleaned)\n    except ValueError:\n        return None\n",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "clean_age",
+          "args": [
+            " 42 "
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": 42,
+          "expectedKind": "value"
+        },
+        {
+          "type": "no_stdout"
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "ci-validate-row",
+      "kind": "code_input",
+      "title": "Validate a name and age row",
+      "prompt": "Write a function named `validate_row` that takes a row string in the form `name,age`. Split the row by the comma, trim both parts, and return `True` only when the name is not empty and the age is a valid integer. Return `False` for blank names, bad ages, or rows that do not have exactly two parts.",
+      "hint": "Check the number of parts first, then clean each field before validating.",
+      "help": {
+        "concept": "Row validation combines structure checks, whitespace cleaning, and safe conversion to decide whether a row is usable.",
+        "hint_1": "Use `split(\",\")` and make sure the result has exactly two items before unpacking.",
+        "hint_2": "After trimming, reject an empty name and wrap the age conversion in `try/except ValueError`; return `False` if any check fails."
+      },
+      "starterCode": "def validate_row(row):\n    # return True for a valid row and False otherwise\n    pass\n",
+      "solutionCode": "def validate_row(row):\n    parts = row.split(\",\")\n    if len(parts) != 2:\n        return False\n\n    name = parts[0].strip()\n    age_text = parts[1].strip()\n\n    if name == \"\":\n        return False\n\n    try:\n        int(age_text)\n        return True\n    except ValueError:\n        return False\n",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "validate_row",
+          "args": [
+            "Ava,19"
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": true,
+          "expectedKind": "value"
+        },
+        {
+          "type": "function_returns",
+          "functionName": "validate_row",
+          "args": [
+            "  ,19"
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": false,
+          "expectedKind": "value"
+        },
+        {
+          "type": "function_returns",
+          "functionName": "validate_row",
+          "args": [
+            "Mia,abc"
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": false,
+          "expectedKind": "value"
+        },
+        {
+          "type": "function_returns",
+          "functionName": "validate_row",
+          "args": [
+            "NoCommaHere"
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": false,
+          "expectedKind": "value"
+        },
+        {
+          "type": "no_stdout"
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "ci-clean-report-stdin",
+      "kind": "code_input",
+      "title": "Print a cleaning report",
+      "prompt": "Write a program that reads one line of input containing a name and age separated by a comma, like `Ava, 19`. Clean both parts with `strip()`. If the row does not have exactly two parts, print `invalid row`. If the name is empty, print `missing name`. If the age is not a valid integer, print `invalid age`. Otherwise print `accepted: NAME AGE` using the cleaned name and integer age.",
+      "hint": "Split the input first, then handle row shape, blank name, and age conversion in that order.",
+      "help": {
+        "concept": "A runnable validation script reads raw input, cleans fields, checks structure and missing values, then prints a clear result.",
+        "hint_1": "Use `input()` to read the row and `split(\",\")` to separate the fields. Check `len(parts)` before using the values.",
+        "hint_2": "After trimming, test for an empty name, then try `int(age_text)` inside `try/except ValueError`; print a different message for each failure case."
+      },
+      "starterCode": "row = input()\n\n# Write your validation and reporting code below\n",
+      "solutionCode": "row = input()\nparts = row.split(\",\")\n\nif len(parts) != 2:\n    print(\"invalid row\")\nelse:\n    name = parts[0].strip()\n    age_text = parts[1].strip()\n\n    if name == \"\":\n        print(\"missing name\")\n    else:\n        try:\n            age = int(age_text)\n            print(f\"accepted: {name} {age}\")\n        except ValueError:\n            print(\"invalid age\")\n",
+      "tests": [
+        {
+          "stdout": "accepted: Ava 19\n",
+          "stdin": "Ava, 19\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "missing name\n",
+          "stdin": "  , 19\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "invalid age\n",
+          "stdin": "Mia, abc\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a small input cleaner",
+    "stepIds": [
+      "ci-clean-age-text",
+      "ci-validate-row",
+      "ci-clean-report-stdin"
+    ]
+  }
+}

@@ -26,6 +26,7 @@ import {
     ReviewWorkspaceDraft,
     writeReviewWorkspaceDraft
 } from "@/components/tools/panes/reviewWorkspaceDrafts";
+import { extractRuntimeSnapshotFromWorkspace } from "@/components/tools/panes/workspaceSnapshot";
 
 const FullIDE = dynamic(() => import("@/components/ide/fullide/FullIDE"), {
     ssr: false,
@@ -843,27 +844,7 @@ function workspaceFilePathsForDebug(workspace: WorkspaceStateV2 | null | undefin
 }
 
 function extractWorkspaceSnapshot(workspace: WorkspaceStateV2 | null) {
-    if (!workspace) {
-        return {
-            code: "",
-            stdin: "",
-        };
-    }
-
-    const activeFile =
-        workspace.nodes.find(
-            (node) => node.kind === "file" && node.id === workspace.activeFileId,
-        ) ??
-        workspace.nodes.find(
-            (node) => node.kind === "file" && node.id === workspace.entryFileId,
-        ) ??
-        workspace.nodes.find((node) => node.kind === "file") ??
-        null;
-
-    return {
-        code: activeFile?.kind === "file" ? activeFile.content ?? "" : "",
-        stdin: workspace.stdin ?? "",
-    };
+    return extractRuntimeSnapshotFromWorkspace(workspace);
 }
 
 function isExerciseEditorScope(value: string | null | undefined) {

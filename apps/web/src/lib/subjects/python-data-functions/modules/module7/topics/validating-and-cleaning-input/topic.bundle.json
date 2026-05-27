@@ -23,21 +23,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "clean-basics",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "missing-invalid",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.sketch2.title",
-      "sketchId": "sketch3",
+      "sketchId": "cleaning-functions",
       "height": 420
     },
     {
@@ -66,27 +66,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz9",
-            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.projectSteps.quiz9.title",
-            "exerciseKey": "quiz9",
+            "id": "ci_clean_name",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.projectSteps.ci_clean_name.title",
+            "exerciseKey": "ci-clean-name",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz10",
-            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.projectSteps.quiz10.title",
-            "exerciseKey": "quiz10",
+            "id": "ci_parse_age",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.projectSteps.ci_parse_age.title",
+            "exerciseKey": "ci-parse-age",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz11",
-            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.projectSteps.quiz11.title",
-            "exerciseKey": "quiz11",
+            "id": "ci_clean_row",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.projectSteps.ci_clean_row.title",
+            "exerciseKey": "ci-clean-row",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -98,31 +98,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "clean-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.sketch1.title",
-      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.clean-basics.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.clean-basics.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "missing-invalid",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.sketch2.title",
-      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.missing-invalid.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.missing-invalid.bodyMarkdown"
     },
     {
-      "id": "sketch3",
+      "id": "cleaning-functions",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.sketch3.title",
-      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.sketch3.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cleaning-functions.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cleaning-functions.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-valid-row",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.quiz1",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-valid-row",
       "optionIds": [
         "a",
         "b",
@@ -135,11 +135,11 @@
       }
     },
     {
-      "id": "quiz2",
+      "id": "sc-except-flow",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-except-flow",
       "optionIds": [
         "a",
         "b",
@@ -152,11 +152,11 @@
       }
     },
     {
-      "id": "quiz3",
+      "id": "mc-clean-steps",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.quiz3",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.mc-clean-steps",
       "optionIds": [
         "a",
         "b",
@@ -167,107 +167,111 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "mc-reject-row",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.mc-reject-row",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
           "b",
+          "c",
           "d"
         ]
       }
     },
     {
-      "id": "quiz4",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.quiz4",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "c"
-        ]
-      }
-    },
-    {
-      "id": "quiz5",
+      "id": "dr-clean-order",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.quiz5",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.dr-clean-order",
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3"
+          "t3",
+          "t4"
         ]
       }
     },
     {
-      "id": "quiz6",
+      "id": "dr-try-except-order",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.quiz6",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.dr-try-except-order",
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3"
+          "t3",
+          "t4"
         ]
       }
     },
     {
-      "id": "quiz7",
+      "id": "fb-strip-name",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.quiz7",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.fb-strip-name",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "default value"
+        "value": "strip"
       }
     },
     {
-      "id": "quiz8",
+      "id": "fb-empty-check",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.quiz8",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.fb-empty-check",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "criteria"
+        "value": "0"
       }
     },
     {
-      "id": "quiz9",
+      "id": "ci-clean-name",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.quiz9",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-name",
       "language": "python",
-      "starterCode": "def clean_input(data):\n    # Replace empty strings and None with 'N/A'\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ndata = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(clean_input(data))",
+      "starterCode": "def clean_name(text):\n    # return the cleaned name\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def clean_input(data):\n    # Replace empty strings and None with 'N/A'\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ndata = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(clean_input(data))",
+          "content": "def clean_name(text):\n    # return the cleaned name\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -276,45 +280,65 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def clean_input(data):\n    # Replace empty strings and None with 'N/A'\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ndata = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(clean_input(data))",
+        "starterCode": "def clean_name(text):\n    # return the cleaned name\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def clean_input(data):\n    # Replace empty strings and None with 'N/A'\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ndata = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(clean_input(data))",
+            "content": "def clean_name(text):\n    # return the cleaned name\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def clean_name(text):\n    cleaned = text.strip()\n    return cleaned.title()",
+        "semanticChecks": [
           {
-            "stdout": "[]",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "clean_name",
+            "args": [
+              "  aVA  "
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Ava",
+            "expectedKind": "value"
           },
           {
-            "stdout": "[]",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "clean_name",
+            "args": [
+              "  liAM oNeIl "
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Liam Oneil",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def clean_input(data):\n    return ['N/A' if not item else item for item in data]\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ndata = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(clean_input(data))"
+        ]
       }
     },
     {
-      "id": "quiz10",
+      "id": "ci-parse-age",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.quiz10",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-parse-age",
       "language": "python",
-      "starterCode": "def validate_numbers(numbers):\n    # Return only non-negative numbers\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(validate_numbers(numbers))",
+      "starterCode": "def parse_age(text):\n    # return an int or None\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def validate_numbers(numbers):\n    # Return only non-negative numbers\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(validate_numbers(numbers))",
+          "content": "def parse_age(text):\n    # return an int or None\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -323,45 +347,65 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def validate_numbers(numbers):\n    # Return only non-negative numbers\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(validate_numbers(numbers))",
+        "starterCode": "def parse_age(text):\n    # return an int or None\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def validate_numbers(numbers):\n    # Return only non-negative numbers\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(validate_numbers(numbers))",
+            "content": "def parse_age(text):\n    # return an int or None\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def parse_age(text):\n    cleaned = text.strip()\n    try:\n        return int(cleaned)\n    except ValueError:\n        return None",
+        "semanticChecks": [
           {
-            "stdout": "[]",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "parse_age",
+            "args": [
+              " 12 "
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 12,
+            "expectedKind": "value"
           },
           {
-            "stdout": "[]",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "parse_age",
+            "args": [
+              " 0 "
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 0,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def validate_numbers(numbers):\n    return [num for num in numbers if num >= 0]\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumbers = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(validate_numbers(numbers))"
+        ]
       }
     },
     {
-      "id": "quiz11",
+      "id": "ci-clean-row",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-row",
       "language": "python",
-      "starterCode": "def filter_valid_rows(rows):\n    # Return only rows with 'age' > 18\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nrows = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(filter_valid_rows(rows))",
+      "starterCode": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def filter_valid_rows(rows):\n    # Return only rows with 'age' > 18\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nrows = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(filter_valid_rows(rows))",
+          "content": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -370,31 +414,51 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def filter_valid_rows(rows):\n    # Return only rows with 'age' > 18\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nrows = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(filter_valid_rows(rows))",
+        "starterCode": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def filter_valid_rows(rows):\n    # Return only rows with 'age' > 18\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nrows = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(filter_valid_rows(rows))",
+            "content": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def clean_row(row):\n    name = row[0].strip()\n    score_text = row[1].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    return {\"name\": name.title(), \"score\": score}",
+        "semanticChecks": [
           {
-            "stdout": "[]",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "clean_row",
+            "args": [
+              [
+                "  ava  ",
+                " 9 "
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              [
+                "name",
+                "Ava"
+              ],
+              [
+                "score",
+                9
+              ]
+            ],
+            "expectedKind": "dict_entries"
           },
           {
-            "stdout": "[]",
-            "match": "exact"
+            "type": "no_stdout"
           }
-        ],
-        "solutionCode": "def filter_valid_rows(rows):\n    return [row for row in rows if row.get('age', 0) > 18]\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nrows = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(filter_valid_rows(rows))"
+        ]
       }
     }
   ]

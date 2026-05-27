@@ -134,6 +134,8 @@ function syntheticEntryFor(language: string) {
       return "main.c";
     case "cpp":
       return "main.cpp";
+    case "bash":
+      return "main.sh";
     default:
       return "main.txt";
   }

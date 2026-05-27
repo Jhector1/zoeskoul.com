@@ -7,81 +7,84 @@
           "summary": "Understand relative paths and simple file organization.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Relative Paths"
+              "title": "Relative paths point to files from your current workspace"
             },
             "sketch1": {
-              "title": "Using Pathlib for Path Operations"
+              "title": "Folders help organize files clearly"
+            },
+            "sketch2": {
+              "title": "Use simple relative paths, not machine-specific ones"
             },
             "quiz": {
               "title": "Quiz"
             },
             "project": {
-              "title": "Working With Paths Project"
+              "title": "Practice reading and writing with relative paths"
             }
           },
           "projectSteps": {
-            "quiz9": {
-              "title": "Read File Content"
+            "ci_read_nested_file": {
+              "title": "Read from a nested relative path"
             },
-            "quiz10": {
-              "title": "Check File Existence"
+            "ci_copy_between_paths": {
+              "title": "Copy text to another relative path"
             },
-            "quiz11": {
-              "title": "Write to a File"
+            "ci_count_lines_in_folder": {
+              "title": "Count lines from a file path"
             }
           },
           "quiz": {
-            "quiz1": {
-              "title": "Understanding Relative Paths",
-              "prompt": "What is a relative path?",
-              "hint": "Think about how a relative path is defined in relation to the current directory.",
+            "sc-relative-path-folder": {
+              "title": "Choose the relative path",
+              "prompt": "A file named `input.txt` is inside a folder named `data`. Which path correctly refers to that file in this lesson?",
+              "hint": "Use the folder name first, then the file name.",
               "help": {
-                "concept": "A relative path specifies the location of a file or directory relative to the current working directory.",
-                "hint_1": "A relative path does not start with a root directory.",
-                "hint_2": "It is defined in relation to the current directory."
+                "concept": "A relative path names folders in order from the current workspace location to the target file.",
+                "hint_1": "The file is not in the same folder as the code; it is inside `data`.",
+                "hint_2": "Look for the choice that joins the folder and file with a forward slash."
               },
               "options": {
-                "a": "A path that starts from the root directory",
-                "b": "A path that is defined in relation to the current directory",
-                "c": "A path that includes the full URL",
-                "d": "A path that is only used in web development"
+                "a": "input.txt/data",
+                "b": "data/input.txt",
+                "c": "/data/input.txt",
+                "d": "data-input.txt"
               }
             },
-            "quiz2": {
-              "title": "Pathlib Module",
-              "prompt": "What is the primary use of the `pathlib` module in Python?",
-              "hint": "Consider what operations `pathlib` simplifies.",
+            "sc-same-folder-path": {
+              "title": "Path for a nearby file",
+              "prompt": "Your code and a file named `notes.txt` are in the same folder. Which path should you use to open that file?",
+              "hint": "If the file is in the same folder, you do not need to name another folder.",
               "help": {
-                "concept": "The `pathlib` module provides an object-oriented interface for handling filesystem paths.",
-                "hint_1": "It helps in managing paths more efficiently.",
-                "hint_2": "Think about path operations like checking existence, reading, and writing."
+                "concept": "A file in the same folder can be opened with just its file name as a relative path.",
+                "hint_1": "No extra folder name is needed here.",
+                "hint_2": "Choose the shortest valid path that names only the file itself."
               },
               "options": {
-                "a": "To manage database connections",
-                "b": "To handle HTTP requests",
-                "c": "To perform path operations",
-                "d": "To create graphical user interfaces"
+                "a": "data/notes.txt",
+                "b": "notes.txt",
+                "c": "./data/notes.txt",
+                "d": "folder/notes.txt"
               }
             },
-            "quiz3": {
-              "title": "Path Operations",
-              "prompt": "Which of the following are valid operations you can perform with the `pathlib` module?",
-              "hint": "Think about common file and directory operations.",
+            "mc-relative-path-benefits": {
+              "title": "Why use relative paths here?",
+              "prompt": "Choose all true statements about using relative paths in this lesson.",
+              "hint": "Think about paths that work inside the provided workspace and folders.",
               "help": {
-                "concept": "The `pathlib` module allows various operations on paths, such as checking existence, reading, and writing.",
-                "hint_1": "Consider operations related to file handling.",
-                "hint_2": "Think about what you can do with paths, like checking if they exist or reading from them."
+                "concept": "Relative paths are useful because they describe file locations within the project structure instead of depending on one specific machine setup.",
+                "hint_1": "Look for statements about project folders and portability inside the lesson workspace.",
+                "hint_2": "Select the choices that describe starting from the current workspace and avoiding machine-specific locations."
               },
               "options": {
-                "a": "Check if a path exists",
-                "b": "Read from a file",
-                "c": "Write to a file",
-                "d": "Send an email"
+                "a": "They can point to files in folders like `data/input.txt`.",
+                "b": "They depend on one specific computer's full location.",
+                "c": "They help organize files by folder.",
+                "d": "They always require a full machine-specific location."
               }
             },
-            "quiz4": {
-              "title": "File Path Types",
-              "prompt": "Select all the correct statements about file paths in Python.",
+            "mc-open-path-examples": {
+              "title": "Valid relative path examples",
+              "prompt": "Choose all paths that are valid relative path examples for this lesson's workspace style.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -89,108 +92,108 @@
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
               "options": {
-                "a": "Absolute paths start from the root directory",
-                "b": "Relative paths are defined in relation to the current directory",
-                "c": "Absolute paths are always shorter than relative paths",
-                "d": "Relative paths can be used to navigate within the current directory"
+                "a": "notes.txt",
+                "b": "data/input.txt",
+                "c": "folder -> input.txt",
+                "d": "name of the output panel"
               }
             },
-            "quiz5": {
-              "title": "Pathlib Usage Sequence",
-              "prompt": "Arrange the steps to check if a file exists using `pathlib`.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+            "dr-read-file-steps": {
+              "title": "Order the file-reading steps",
+              "prompt": "Put these steps in the correct order for reading a file with a relative path and showing its contents.",
+              "hint": "Open first, then read, then display.",
               "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "concept": "Reading a file follows a sequence: open the file, get its contents, then print the result.",
+                "hint_1": "You cannot read from the file before opening it.",
+                "hint_2": "After reading the text into a variable, the last step is to show it in the output panel."
               },
               "tokens": {
-                "t1": "Create a Path object",
-                "t2": "Use the exists() method",
-                "t3": "Print the result"
+                "t1": "Open `data/input.txt` in read mode",
+                "t2": "Store the contents in a variable",
+                "t3": "Print the variable"
               }
             },
-            "quiz6": {
-              "title": "File Reading Steps",
-              "prompt": "Order the steps to read a file using a relative path in Python.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+            "dr-build-nested-path": {
+              "title": "Build the path in order",
+              "prompt": "Arrange the tokens to make the relative path to `report.txt` inside the `data` folder.",
+              "hint": "Folder name comes before the slash and file name.",
               "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "concept": "A nested relative path is built as folder, slash, then file name.",
+                "hint_1": "Start with the folder that contains the file.",
+                "hint_2": "The slash separates the folder name from the file name."
               },
               "tokens": {
-                "t1": "Open the file",
-                "t2": "Read the content",
-                "t3": "Close the file"
+                "t1": "data",
+                "t2": "/",
+                "t3": "report.txt"
               }
             },
-            "quiz7": {
-              "title": "Pathlib Method",
-              "prompt": "Fill in the blank to complete the method that checks if a path exists using `pathlib`.",
-              "hint": "Consider the method used to verify the existence of a path.",
+            "fb-folder-part": {
+              "title": "Complete the folder path",
+              "prompt": "Fill in the missing folder name.",
+              "hint": "The file is inside the `the missing term` folder.",
               "help": {
-                "concept": "The `the missing term()` method in `pathlib` checks if a path the missing term.",
-                "hint_1": "The method is called on a Path object.",
-                "hint_2": "It returns a boolean indicating the existence of the path."
+                "concept": "A relative path to a file inside a folder includes the folder name before the slash.",
+                "hint_1": "The missing part is the folder that contains `input.txt`.",
+                "hint_2": "Use the folder name shown throughout the lesson examples."
               },
-              "template": "path.[blank1]()",
+              "template": "[blank1]/input.txt",
               "choices": [
-                "exists",
-                "check",
-                "validate",
-                "confirm"
+                "data",
+                "input",
+                "files",
+                "read"
               ]
             },
-            "quiz8": {
-              "title": "Relative Path Example",
-              "prompt": "Complete the code to open a file using a relative path.",
-              "hint": "Think about how to specify a relative path in the open function.",
+            "fb-same-folder-file": {
+              "title": "Complete the same-folder path",
+              "prompt": "Fill in the missing file name for a file in the same folder.",
+              "hint": "No folder name is needed here.",
               "help": {
-                "concept": "A relative path specifies the location of a file relative to the current directory.",
-                "hint_1": "Use a string to specify the path.",
-                "hint_2": "The path should not start with a slash."
+                "concept": "When a file is in the same folder, the relative path is just the file name.",
+                "hint_1": "The blank should be the exact file name, not a folder.",
+                "hint_2": "Choose the option that is a plain file name ending with `.txt`."
               },
-              "template": "open('[blank1]', 'r')",
+              "template": "[blank1]",
               "choices": [
-                "data/input.txt",
-                "/data/input.txt",
-                "C:\\data\\input.txt",
-                "http://data/input.txt"
+                "data/notes.txt",
+                "notes.txt",
+                "/notes.txt",
+                "folder/notes.txt"
               ]
             },
-            "quiz9": {
-              "title": "Read File Content",
-              "prompt": "Write a Python program to read the content of a file named `data/input.txt` and print it.",
-              "hint": "Read the task \"Read File Content\" and identify the required result.",
+            "ci-read-nested-file": {
+              "title": "Read from a nested relative path",
+              "prompt": "Write a program that opens `data/input.txt`, reads all its text, and prints that text exactly.",
+              "hint": "Read the task \"Read from a nested relative path\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Read File Content\".",
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Read from a nested relative path\".",
                 "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "# Write your code below"
+              "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass"
             },
-            "quiz10": {
-              "title": "Check File Existence",
-              "prompt": "Write a Python program using `pathlib` to check if a file named `data/input.txt` exists and print a message accordingly.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+            "ci-copy-between-paths": {
+              "title": "Copy text to another relative path",
+              "prompt": "Write a program that reads text from `data/source.txt`, writes the same text to `data/copy.txt`, and then prints the copied text.",
+              "hint": "Read the task \"Copy text to another relative path\" and identify the required result.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
-              },
-              "starterCode": "# Write your code below"
-            },
-            "quiz11": {
-              "title": "Write to a File",
-              "prompt": "Write a Python program to write 'Hello, Python!' to a file named `data/output.txt`.",
-              "hint": "Read the task \"Write to a File\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Write to a File\".",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Copy text to another relative path\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "# Write your code below"
+              "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text"
+            },
+            "ci-count-lines-in-folder": {
+              "title": "Count lines from a file path",
+              "prompt": "Write a program that opens `data/items.txt`, counts how many lines are in the file, and prints the count.",
+              "hint": "Read the task \"Count lines from a file path\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Count lines from a file path\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass"
             }
           }
         }
@@ -201,13 +204,17 @@
     "python-data-functions": {
       "python-7-files-exceptions-and-data-cleaning": {
         "working-with-paths": {
-          "sketch1": {
-            "title": "Understanding Relative Paths",
-            "bodyMarkdown": "In Python, paths are used to locate files and directories. A relative path is a way to specify the location of a file or directory relative to the current working directory. For example, if your current directory is `/home/user/`, a relative path to a file in a subdirectory might be `documents/report.txt`. This means the file is located in the `documents` folder inside the current directory.\n\n```python\n# Example of using a relative path\ndef read_file():\n    with open('data/input.txt', 'r') as file:\n        content = file.read()\n    return content\n```\n\nTry it yourself: Modify the path to read a different file in the same directory and observe the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "paths-relative-basics": {
+            "title": "Relative paths point to files from your current workspace",
+            "bodyMarkdown": "A **relative path** tells Python where a file is by starting from the current project folder, not from a full computer-specific location. In this lesson, that means paths like `notes.txt` or `data/input.txt`.\n\nHere is a simple example:\n\n```python\nwith open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)\n```\n\nStep by step:\n\n- `open(\"data/input.txt\", \"r\")` looks for a folder named `data` and then a file named `input.txt` inside it.\n- `\"r\"` means read mode.\n- `file.read()` gets the file's contents.\n- `print(text)` sends those contents to the output panel.\n\nIf the file is in the same folder as your code, the path can be shorter:\n\n```python\nwith open(\"notes.txt\", \"r\") as file:\n    print(file.read())\n```\n\nConcrete example:\n\n- `notes.txt` means “open the file named `notes.txt` right here.”\n- `data/notes.txt` means “go into the `data` folder, then open `notes.txt`.”\n\nTry it yourself: change `data/input.txt` to another provided relative path such as `data/message.txt`, then click Run and compare the output."
           },
-          "sketch2": {
-            "title": "Using Pathlib for Path Operations",
-            "bodyMarkdown": "The `pathlib` module in Python provides an object-oriented approach to handling paths. It allows you to perform various operations on paths easily.\n\n```python\nfrom pathlib import Path\n\n# Create a Path object\npath = Path('data/input.txt')\n\n# Check if the path exists\nif path.exists():\n    print(f\"The file {path} exists.\")\nelse:\n    print(f\"The file {path} does not exist.\")\n```\n\nTry this: Change the path to a non-existent file and see how the output changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "paths-folders-and-organization": {
+            "title": "Folders help organize files clearly",
+            "bodyMarkdown": "Projects often keep files in folders so related data stays together. A path like `data/scores.txt` is easier to understand than a random file name with no structure.\n\nExample:\n\n```python\nwith open(\"data/scores.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))\n```\n\nLine by line:\n\n- `open(\"data/scores.txt\", \"r\")` opens a file inside the `data` folder.\n- `readlines()` makes a list of lines from the file.\n- `len(lines)` counts how many lines were read.\n- `print(len(lines))` shows that count in the output panel.\n\nWorked example:\n\nIf `data/scores.txt` contains:\n\n```python\n90\n85\n100\n```\n\nthen `len(lines)` is `3`, so the output is:\n\n```python\n3\n```\n\nUsing folders also makes it easier to tell input files from output files, such as `data/input.txt` and `data/report.txt`.\n\nYour turn: imagine you want to read `names.txt` inside a `data` folder. What relative path would you use?"
+          },
+          "paths-safe-habits": {
+            "title": "Use simple relative paths, not machine-specific ones",
+            "bodyMarkdown": "A good beginner habit is to use **simple relative paths** that work inside the lesson workspace. These paths are portable because they do not depend on one specific computer.\n\nGood examples:\n\n```python\n\"notes.txt\"\n\"data/input.txt\"\n\"data/output.txt\"\n```\n\nAvoid machine-specific paths for this lesson. They are not needed here and often break when code runs somewhere else.\n\nWorked example:\n\nSuppose you want to copy text from one file to another:\n\n```python\nwith open(\"data/input.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/output.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)\n```\n\nWhat happens:\n\n- The first `with open(...)` reads from `data/input.txt`.\n- The second `with open(...)` writes to `data/output.txt`.\n- `print(text)` gives you visible output so you can confirm what was written.\n\nTry this: change the output path from `data/output.txt` to `data/copy.txt`. Then click Run and think about which folder the new file belongs in.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

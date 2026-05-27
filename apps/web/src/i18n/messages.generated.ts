@@ -60,6 +60,7 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/en/subjects/python-data-functions/module6/parameters-and-return-values.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/python-data-functions/module6/print-vs-return.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/python-data-functions/module6/scope-and-local-variables.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python-data-functions/module6/using-imports-and-helper-files.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/python-data-functions/module7/reading-text-files.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/python-data-functions/module7/simple-csv-processing.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/python-data-functions/module7/try-except-basics.json").then((m) => (m?.default ?? {}) as AnyObj),

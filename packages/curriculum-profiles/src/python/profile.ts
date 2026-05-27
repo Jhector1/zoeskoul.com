@@ -430,11 +430,18 @@ export const pythonProfile: CourseProfile = {
             "- Do not create fixed_tests code_input exercises that only print one fixed literal and do not read stdin.",
             "- For static output concepts, use single_choice, fill_blank_choice, or drag_reorder instead of code_input.",
             "- If you cannot write at least two meaningful fixed tests, replace the exercise with a non-code exercise or use semantic checks only when structure/behavior truly requires it.",
-
+            '- For nested data structures like a list of dictionaries, use argKinds: ["list_of_dict_entries"] or expectedKind: "list_of_dict_entries" as needed.',
             '- For Python code_input, use recipeType "fixed_tests" only when the exercise is a normal runnable program that reads stdin and/or prints exact output.',
             '- For Python code_input, use recipeType "semantic" for function-return tasks, class/object tasks, method tasks, attribute checks, local-scope tasks, and algorithm/data-transformation tasks.',
             '- For function-return exercises, include semanticChecks[] with type "function_returns"; do not create stdin/stdout wrappers with ast.literal_eval or _parse_arg.',
+            '- For dictionary return values in semanticChecks, encode the dictionary as [["key", value]] pairs and set expectedKind: "dict_entries".',
+            '- For dictionary arguments in semanticChecks.args, encode the dictionary as [["key", value]] pairs and set argKinds for that argument.',
+            '- no_stdout is only an extra check; it must not be the only semantic check for a function-return or method-return exercise.',
             '- For fixed_tests exercises, solutionCode must be a complete runnable program that reads stdin when needed and prints the final answer.',
+            '- For plain functions, never generate method_returns. Use function_returns with functionName, args, and expected.',
+            '- For method_returns, always include className, constructorArgs, methodName, methodArgs, and expected.',
+            "- File fixture exercises should not include input() unless the tests provide stdin. Prefer either stdin-based tests or file-based tests, not both.",
+            '- For semantic function tasks, keep parameter-dependent logic inside the function body, not above the def line.',
 
         ];
 
@@ -460,6 +467,8 @@ export const pythonProfile: CourseProfile = {
                 "- Do not ask learners to create new folders/files in normal graded exercises unless workspaceExpectations or equivalent required-path validation is available.",
                 "- If the exercise needs a helper module but the checker cannot validate newly created files, provide that helper file in starterFiles and ask the learner to edit it.",
                 "- If asking the learner to create files/folders, explicitly state the exact required path and only do this when createFiles/createFolders or filesystem capabilities are enabled.",
+                "- File-based fixed_tests need at least two meaningful tests with different tests[].files contents, even when stdin is empty.",
+                "- CSV file fixtures should contain only CSV text, such as `name,score\\nAva,9\\nBen,7\\n`.",
             );
         } else {
             lines.push(
@@ -489,11 +498,40 @@ export const pythonProfile: CourseProfile = {
             "Python code_input self-check:",
             '- Use recipeType "semantic" when the learner must define a function, use parameters, return a value, define a class, create methods, set attributes, or implement algorithm/data-transformation behavior.',
             '- For semantic function exercises, include semanticChecks[] using type "function_returns".',
+            '- Canonical function semantic check: {"type":"function_returns","functionName":"double_list","args":[[1,2,3]],"expected":[2,4,6]}.',
+
+            '- For dictionary return values, do not emit raw JSON objects in semanticChecks.expected.',
+            '- Encode dictionary expected values as arrays of [key, value] pairs and set expectedKind: "dict_entries".',
+            '- Example dictionary return check: {"type":"function_returns","functionName":"make_profile","args":["Ava",12],"expected":[["name","Ava"],["age",12]],"expectedKind":"dict_entries"}.',
+            '- For dictionary function arguments, encode the dictionary argument as [key, value] pairs and set argKinds for that argument.',
+            '- Example dictionary argument check: {"type":"function_returns","functionName":"get_score","args":[[["score",7]]],"argKinds":["dict_entries"],"expected":7}.',
+            '- A semantic return-value task must include at least one function_returns or method_returns check. no_stdout alone is not enough.',
+
+            '- Do not use method_returns for plain functions. method_returns is only for class instance methods and must include className.',
+            '- Canonical class semantic checks can use defines_class, constructible, instance_attributes, method_returns, created_instances, and printed_line_count.',
+            '- printed_line_count uses min, not expected. Example: {"type":"printed_line_count","min":2}.',
+            '- To require no printed output for return-value tasks, use {"type":"no_stdout"}.',
             '- For normal beginner input/print/output programs, set recipeType to "fixed_tests" and include tests[].',
             '- If recipeType is "semantic", do not include tests[] and do not rely on stdout.',
             '- If recipeType is "fixed_tests", do not include semanticChecks[].',
             `- If recipeType is "fixed_tests", include at least ${PYTHON_MINIMUM_FIXED_TESTS} meaningful stdin/stdout tests.`,
             '- Never expose hidden harness code such as import ast, _parse_arg, _inputs, or ast.literal_eval in starterCode or solutionCode.',
+
+            "- For file-reading fixed_tests exercises, do not call input() unless every test provides stdin. If the exercise reads from a fixture file, get data from the file only.",
+            "- Do not combine input() with open(...) in beginner file-reading exercises unless the prompt explicitly asks for both stdin and file input.",
+            "- For fixed_tests file I/O exercises, tests must provide tests[].files fixtures for each case, and solutionCode must run with stdin: \"\".",
+
+            "- For file-reading fixed_tests exercises, provide at least two tests. Each test must include its own tests[].files fixture with different file content and matching stdout.",
+            "- Do not rely on stdin to vary file-reading exercises. Vary the fixture file content instead.",
+            "- For CSV fixed_tests exercises, every tests[] case must include a CSV fixture file under tests[].files.",
+            "- Do not put JSON syntax, closing brackets, or object delimiters such as `}]},{` inside fixture file content. Fixture content must be only the exact text that belongs inside the learner-visible file.",
+            '- For semantic function exercises, starterCode and solutionCode must not contain top-level statements that use the function parameter before the function is called.',
+            '- Do not put lines such as row = ..., parts = row.split(...), name = name.strip(), or score_text = score_text.strip() before def validate_row(row).',
+            '- Put validation and cleaning logic inside the function body for function-return semantic exercises.',
+
+            '- For function arguments that are a list of dictionaries, encode each dictionary as [key, value] pairs and set argKinds: ["list_of_dict_entries"].',
+            '- Example list-of-dictionaries argument check: {"type":"function_returns","functionName":"total_stock","args":[[[["name","Pen"],["stock",4]],[["name","Book"],["stock",6]]]],"argKinds":["list_of_dict_entries"],"expected":10}.',
+            '- For expected return values that are a list of dictionaries, encode them the same way and set expectedKind: "list_of_dict_entries".',
         ];
 
         const terminalAvailable =

@@ -130,14 +130,15 @@
         "supportsPackageInstall": false
       },
       "meta": {
-        "estimatedMinutes": 146,
+        "estimatedMinutes": 170,
         "prereqKeys": [
           "modules.python-data-functions.python-5.title"
         ],
         "outcomeKeys": [
           "modules.python-data-functions.python-6-functions-and-modularity.outcomes.0",
           "modules.python-data-functions.python-6-functions-and-modularity.outcomes.1",
-          "modules.python-data-functions.python-6-functions-and-modularity.outcomes.2"
+          "modules.python-data-functions.python-6-functions-and-modularity.outcomes.2",
+          "modules.python-data-functions.python-6-functions-and-modularity.outcomes.3"
         ],
         "whyKeys": [
           "modules.python-data-functions.python-6-functions-and-modularity.why.0",
@@ -184,6 +185,7 @@
           "topics": [
             "scope-and-local-variables",
             "decomposition-and-refactoring",
+            "using-imports-and-helper-files",
             "docstrings-and-function-contracts"
           ]
         }
@@ -203,7 +205,7 @@
         "language": "python",
         "supportsTerminal": false,
         "supportsMultiFile": true,
-        "supportsFileSystem": false,
+        "supportsFileSystem": true,
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
@@ -215,7 +217,9 @@
         "outcomeKeys": [
           "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.outcomes.0",
           "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.outcomes.1",
-          "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.outcomes.2"
+          "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.outcomes.2",
+          "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.outcomes.3",
+          "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.outcomes.4"
         ],
         "whyKeys": [
           "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.why.0",

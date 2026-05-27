@@ -23,14 +23,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "sketch-write-mode-basics",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "sketch-append-mode-basics",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch2.title",
+      "sketchId": "sketch-newlines-and-verifying",
       "height": 420
     },
     {
@@ -59,27 +66,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz5",
-            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.quiz5.title",
-            "exerciseKey": "quiz5",
+            "id": "ci_write_greeting_file",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.ci_write_greeting_file.title",
+            "exerciseKey": "ci-write-greeting-file",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz10",
-            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.quiz10.title",
-            "exerciseKey": "quiz10",
+            "id": "ci_overwrite_shopping_list",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.ci_overwrite_shopping_list.title",
+            "exerciseKey": "ci-overwrite-shopping-list",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz11",
-            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.quiz11.title",
-            "exerciseKey": "quiz11",
+            "id": "ci_append_log_entry",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.ci_append_log_entry.title",
+            "exerciseKey": "ci-append-log-entry",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -91,25 +98,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "sketch-write-mode-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch1.title",
-      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch-write-mode-basics.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch-write-mode-basics.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sketch-append-mode-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch2.title",
-      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch-append-mode-basics.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch-append-mode-basics.bodyMarkdown"
+    },
+    {
+      "id": "sketch-newlines-and-verifying",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch-newlines-and-verifying.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch-newlines-and-verifying.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-write-vs-append",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz1",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.sc-write-vs-append",
       "optionIds": [
         "a",
         "b",
@@ -122,11 +135,28 @@
       }
     },
     {
-      "id": "quiz2",
+      "id": "sc-verify-written-text",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.sc-verify-written-text",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-append-true-statements",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.mc-append-true-statements",
       "optionIds": [
         "a",
         "b",
@@ -137,191 +167,112 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "mc-good-writing-patterns",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.mc-good-writing-patterns",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
           "c"
         ]
       }
     },
     {
-      "id": "quiz3",
+      "id": "dr-write-file-steps",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz3",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.dr-write-file-steps",
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3"
+          "t3",
+          "t4"
         ]
       }
     },
     {
-      "id": "quiz4",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz4",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "a"
-      }
-    },
-    {
-      "id": "quiz5",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz5",
-      "language": "python",
-      "starterCode": "# Write your code below\nwith open('data.txt', 'w') as file:\n    file.write('Data Science')\n\n# Now read the content back",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "# Write your code below\nwith open('data.txt', 'w') as file:\n    file.write('Data Science')\n\n# Now read the content back",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "# Write your code below\nwith open('data.txt', 'w') as file:\n    file.write('Data Science')\n\n# Now read the content back",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "# Write your code below\nwith open('data.txt', 'w') as file:\n    file.write('Data Science')\n\n# Now read the content back",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "files": [
-          {
-            "path": "data.txt",
-            "content": "Data Science\n",
-            "readOnly": false
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdout": "Data Science\n",
-            "match": "exact",
-            "files": [
-              {
-                "path": "data.txt",
-                "content": "Data Science\n",
-                "readOnly": false
-              }
-            ]
-          },
-          {
-            "stdout": "Data Science\n",
-            "match": "exact",
-            "files": [
-              {
-                "path": "data.txt",
-                "content": "Data Science\n",
-                "readOnly": false
-              }
-            ]
-          }
-        ],
-        "solutionCode": "with open('data.txt', 'w') as file:\n    file.write('Data Science')\n\nwith open('data.txt', 'r') as file:\n    content = file.read()\n    print(content)"
-      }
-    },
-    {
-      "id": "quiz6",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz6",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
-      }
-    },
-    {
-      "id": "quiz7",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz7",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "quiz8",
+      "id": "dr-append-log-sequence",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz8",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.dr-append-log-sequence",
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3"
+          "t3",
+          "t4"
         ]
       }
     },
     {
-      "id": "quiz9",
+      "id": "fb-write-mode-code",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz9",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.fb-write-mode-code",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "w"
+        "value": "\"w\""
       }
     },
     {
-      "id": "quiz10",
+      "id": "fb-newline-choice",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.fb-newline-choice",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "\\n"
+      }
+    },
+    {
+      "id": "ci-write-greeting-file",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz10",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-write-greeting-file",
       "language": "python",
-      "starterCode": "# Write your code below\nwith open('fun.txt', 'a') as file:\n    file.write('Python is fun!')\n\n# Now read the content back",
+      "starterCode": "# Write your code below",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your code below\nwith open('fun.txt', 'a') as file:\n    file.write('Python is fun!')\n\n# Now read the content back",
+          "content": "# Write your code below",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -330,11 +281,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your code below\nwith open('fun.txt', 'a') as file:\n    file.write('Python is fun!')\n\n# Now read the content back",
+        "starterCode": "# Write your code below",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your code below\nwith open('fun.txt', 'a') as file:\n    file.write('Python is fun!')\n\n# Now read the content back",
+            "content": "# Write your code below",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -342,8 +293,78 @@
         ],
         "files": [
           {
-            "path": "fun.txt",
-            "content": "Python is fun!\n",
+            "path": "greeting.txt",
+            "content": "Hello, Zoe!",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Hello, Zoe!\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "greeting.txt",
+                "content": "Hello, Zoe!",
+                "readOnly": true
+              }
+            ]
+          },
+          {
+            "stdin": "ignored input\n",
+            "stdout": "Hello, Zoe!\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "greeting.txt",
+                "content": "Hello, Zoe!",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "solutionCode": "with open(\"greeting.txt\", \"w\") as file:\n    file.write(\"Hello, Zoe!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())"
+      }
+    },
+    {
+      "id": "ci-overwrite-shopping-list",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-overwrite-shopping-list",
+      "language": "python",
+      "starterCode": "# Write your code below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Write your code below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Write your code below",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Write your code below",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "shopping.txt",
+            "content": "Old item\nMilk\nEggs",
             "readOnly": false
           }
         ]
@@ -353,43 +374,45 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "Python is fun!\nPython is fun!",
+            "stdin": "",
+            "stdout": "Bread\nApples\n",
             "match": "exact",
             "files": [
               {
-                "path": "fun.txt",
-                "content": "Python is fun!\n",
+                "path": "shopping.txt",
+                "content": "Old item\nMilk\nEggs",
                 "readOnly": false
               }
             ]
           },
           {
-            "stdout": "Python is fun!\nPython is fun!",
+            "stdin": "another run\n",
+            "stdout": "Bread\nApples\n",
             "match": "exact",
             "files": [
               {
-                "path": "fun.txt",
-                "content": "Python is fun!\n",
+                "path": "shopping.txt",
+                "content": "Nothing here yet",
                 "readOnly": false
               }
             ]
           }
         ],
-        "solutionCode": "with open('fun.txt', 'a') as file:\n    file.write('Python is fun!')\n\nwith open('fun.txt', 'r') as file:\n    content = file.read()\n    print(content)"
+        "solutionCode": "with open(\"shopping.txt\", \"w\") as file:\n    file.write(\"Bread\\nApples\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")"
       }
     },
     {
-      "id": "quiz11",
+      "id": "ci-append-log-entry",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-append-log-entry",
       "language": "python",
-      "starterCode": "# Write your code below\nwith open('notes.txt', 'w') as file:\n    file.write('Learning Python')\n\n# Now read the content back",
+      "starterCode": "# Append one new line to log.txt, then print the full file contents.",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your code below\nwith open('notes.txt', 'w') as file:\n    file.write('Learning Python')\n\n# Now read the content back",
+          "content": "# Append one new line to log.txt, then print the full file contents.",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -398,11 +421,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your code below\nwith open('notes.txt', 'w') as file:\n    file.write('Learning Python')\n\n# Now read the content back",
+        "starterCode": "# Append one new line to log.txt, then print the full file contents.",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your code below\nwith open('notes.txt', 'w') as file:\n    file.write('Learning Python')\n\n# Now read the content back",
+            "content": "# Append one new line to log.txt, then print the full file contents.",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -410,8 +433,8 @@
         ],
         "files": [
           {
-            "path": "notes.txt",
-            "content": "Learning Python\n",
+            "path": "log.txt",
+            "content": "Start shift",
             "readOnly": false
           }
         ]
@@ -421,29 +444,31 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdout": "Learning Python\n",
+            "stdin": "",
+            "stdout": "Start shiftChecked sensors",
             "match": "exact",
             "files": [
               {
-                "path": "notes.txt",
-                "content": "Learning Python\n",
+                "path": "log.txt",
+                "content": "Start shift",
                 "readOnly": false
               }
             ]
           },
           {
-            "stdout": "Learning Python\n",
+            "stdin": "unused\n",
+            "stdout": "Start shift\nDoors lockedChecked sensors",
             "match": "exact",
             "files": [
               {
-                "path": "notes.txt",
-                "content": "Learning Python\n",
+                "path": "log.txt",
+                "content": "Start shift\nDoors locked",
                 "readOnly": false
               }
             ]
           }
         ],
-        "solutionCode": "with open('notes.txt', 'w') as file:\n    file.write('Learning Python')\n\nwith open('notes.txt', 'r') as file:\n    content = file.read()\n    print(content)"
+        "solutionCode": "with open(\"log.txt\", \"a\") as file:\n    file.write(\"Checked sensors\\n\")\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")"
       }
     }
   ]

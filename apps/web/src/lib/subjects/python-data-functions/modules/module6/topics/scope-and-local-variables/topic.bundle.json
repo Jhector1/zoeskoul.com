@@ -23,14 +23,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "scope-basics",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "inside-vs-outside",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.cards.sketch2.title",
+      "sketchId": "parameters-create-local-names",
       "height": 420
     },
     {
@@ -59,27 +66,27 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "quiz9",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.projectSteps.quiz9.title",
-            "exerciseKey": "quiz9",
+            "id": "code_q1",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.projectSteps.code_q1.title",
+            "exerciseKey": "code-q1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz10",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.projectSteps.quiz10.title",
-            "exerciseKey": "quiz10",
+            "id": "code_q2",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.projectSteps.code_q2.title",
+            "exerciseKey": "code-q2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "quiz11",
-            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.projectSteps.quiz11.title",
-            "exerciseKey": "quiz11",
+            "id": "code_q3",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.projectSteps.code_q3.title",
+            "exerciseKey": "code-q3",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -91,25 +98,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "scope-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.sketch1.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.scope-basics.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.scope-basics.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "inside-vs-outside",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.sketch2.title",
-      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.inside-vs-outside.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.inside-vs-outside.bodyMarkdown"
+    },
+    {
+      "id": "parameters-create-local-names",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.parameters-create-local-names.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.parameters-create-local-names.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "sc-q1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz1",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-q1",
       "optionIds": [
         "a",
         "b",
@@ -118,15 +131,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "c"
       }
     },
     {
-      "id": "quiz2",
+      "id": "sc-q2",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.sc-q2",
       "optionIds": [
         "a",
         "b",
@@ -135,15 +148,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "quiz3",
+      "id": "mc-q1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz3",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.mc-q1",
       "optionIds": [
         "a",
         "b",
@@ -154,16 +167,17 @@
         "kind": "multi_choice",
         "optionIds": [
           "b",
-          "c"
+          "c",
+          "d"
         ]
       }
     },
     {
-      "id": "quiz4",
+      "id": "mc-q2",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz4",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.mc-q2",
       "optionIds": [
         "a",
         "b",
@@ -174,16 +188,16 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "b"
         ]
       }
     },
     {
-      "id": "quiz5",
+      "id": "dr-q1",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz5",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.dr-q1",
       "tokenIds": [
         "t1",
         "t2",
@@ -201,11 +215,11 @@
       }
     },
     {
-      "id": "quiz6",
+      "id": "dr-q2",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz6",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.dr-q2",
       "tokenIds": [
         "t1",
         "t2",
@@ -223,41 +237,41 @@
       }
     },
     {
-      "id": "quiz7",
+      "id": "fb-q1",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz7",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.fb-q1",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "local"
+        "value": "score"
       }
     },
     {
-      "id": "quiz8",
+      "id": "fb-q2",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz8",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.fb-q2",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "global"
+        "value": "value"
       }
     },
     {
-      "id": "quiz9",
+      "id": "code-q1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz9",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q1",
       "language": "python",
-      "starterCode": "def calculate_area(width, height):\n    # Calculate the area\n    \n    # Return the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+      "starterCode": "def add_tax(price):\n    # store the result in a local variable named total\n    # then return it\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def calculate_area(width, height):\n    # Calculate the area\n    \n    # Return the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+          "content": "def add_tax(price):\n    # store the result in a local variable named total\n    # then return it\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -266,52 +280,68 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def calculate_area(width, height):\n    # Calculate the area\n    \n    # Return the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+        "starterCode": "def add_tax(price):\n    # store the result in a local variable named total\n    # then return it\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def calculate_area(width, height):\n    # Calculate the area\n    \n    # Return the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))",
+            "content": "def add_tax(price):\n    # store the result in a local variable named total\n    # then return it\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def add_tax(price):\n    total = price + 5\n    return total",
+        "semanticChecks": [
           {
-            "stdin": "1\n1\n",
-            "stdout": "1",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "add_tax",
+            "args": [
+              10
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 15,
+            "expectedKind": "value",
+            "message": "add_tax should return price plus 5."
           },
           {
-            "stdin": "1\n1\n",
-            "stdout": "1",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "add_tax",
+            "args": [
+              23
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 28,
+            "expectedKind": "value",
+            "message": "add_tax should work for a different number too."
           },
           {
-            "stdin": "2\n2\n",
-            "stdout": "4\n",
-            "match": "exact"
+            "type": "no_stdout",
+            "message": "Return the value instead of printing it."
           }
-        ],
-        "solutionCode": "def calculate_area(width, height):\n    area = width * height\n    return area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))"
+        ]
       }
     },
     {
-      "id": "quiz10",
+      "id": "code-q2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz10",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q2",
       "language": "python",
-      "starterCode": "counter = 0\n\ndef increment_global():\n    # Use global keyword\n    \n    # Increment the counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())",
+      "starterCode": "def make_label(word):\n    # create a local variable named label\n    # return the finished string\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "counter = 0\n\ndef increment_global():\n    # Use global keyword\n    \n    # Increment the counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())",
+          "content": "def make_label(word):\n    # create a local variable named label\n    # return the finished string\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -320,45 +350,68 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "counter = 0\n\ndef increment_global():\n    # Use global keyword\n    \n    # Increment the counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())",
+        "starterCode": "def make_label(word):\n    # create a local variable named label\n    # return the finished string\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "counter = 0\n\ndef increment_global():\n    # Use global keyword\n    \n    # Increment the counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())",
+            "content": "def make_label(word):\n    # create a local variable named label\n    # return the finished string\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def make_label(word):\n    label = \"Item: \" + word\n    return label",
+        "semanticChecks": [
           {
-            "stdout": "None",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "make_label",
+            "args": [
+              "Book"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Item: Book",
+            "expectedKind": "value",
+            "message": "make_label should prefix the word with `Item: `."
           },
           {
-            "stdout": "None",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "make_label",
+            "args": [
+              "Pen"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Item: Pen",
+            "expectedKind": "value",
+            "message": "make_label should work with another input word."
+          },
+          {
+            "type": "no_stdout",
+            "message": "Return the string instead of printing it."
           }
-        ],
-        "solutionCode": "counter = 0\n\ndef increment_global():\n    global counter\n    counter += 1\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())"
+        ]
       }
     },
     {
-      "id": "quiz11",
+      "id": "code-q3",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q3",
       "language": "python",
-      "starterCode": "def greet_user(name):\n    # Create a greeting message\n    \n    # Return the message\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))",
+      "starterCode": "def rectangle_area(width, height):\n    # create a local variable named area\n    # return the area\n    pass",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def greet_user(name):\n    # Create a greeting message\n    \n    # Return the message\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))",
+          "content": "def rectangle_area(width, height):\n    # create a local variable named area\n    # return the area\n    pass",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -367,33 +420,58 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def greet_user(name):\n    # Create a greeting message\n    \n    # Return the message\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))",
+        "starterCode": "def rectangle_area(width, height):\n    # create a local variable named area\n    # return the area\n    pass",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def greet_user(name):\n    # Create a greeting message\n    \n    # Return the message\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))",
+            "content": "def rectangle_area(width, height):\n    # create a local variable named area\n    # return the area\n    pass",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def rectangle_area(width, height):\n    area = width * height\n    return area",
+        "semanticChecks": [
           {
-            "stdin": "Alice\n",
-            "stdout": "Hello, Alice!\n",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "rectangle_area",
+            "args": [
+              3,
+              4
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 12,
+            "expectedKind": "value",
+            "message": "rectangle_area should multiply width by height."
           },
           {
-            "stdin": "Bob\n",
-            "stdout": "Hello, Bob!\n",
-            "match": "exact"
+            "type": "function_returns",
+            "functionName": "rectangle_area",
+            "args": [
+              5,
+              2
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 10,
+            "expectedKind": "value",
+            "message": "rectangle_area should work for another pair of numbers."
+          },
+          {
+            "type": "no_stdout",
+            "message": "Return the area instead of printing it."
           }
-        ],
-        "solutionCode": "def greet_user(name):\n    message = f\"Hello, {name}!\"\n    return message\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))"
+        ]
       }
     }
   ]
