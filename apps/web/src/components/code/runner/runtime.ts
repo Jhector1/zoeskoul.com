@@ -53,6 +53,12 @@ export type SharedRunnerArgs = {
     resetTerminalOnRun: boolean;
     onRun?: OnRun;
     isAuthenticated?: boolean;
+
+    getWorkspaceFiles?: () => WorkspaceSyncEntry[];
+    onTerminalSnapshotFiles?: (
+        files: WorkspaceSyncEntry[],
+        meta: { dirtyUiPaths: Set<string> },
+    ) => void | Promise<void>;
 };
 
 export type WorkspaceTerminalConfig = {

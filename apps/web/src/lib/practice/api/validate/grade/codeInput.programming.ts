@@ -1,5 +1,4 @@
 // src/lib/practice/api/validate/grade/codeInput.programming.ts
-import { runCode } from "@/lib/code/runCode";
 import { ProgrammingExpected } from "@/lib/practice/api/validate/schemas";
 import {
     classifyProgrammingOutputMismatch,
@@ -7,9 +6,13 @@ import {
 } from "@/lib/code/feedback";
 import { gradeSemanticCodeInput } from "./codeInput.semantic";
 import { GradeResult } from "@/lib/practice/api/validate/grade/index";
-import { stdoutMatches } from "@zoeskoul/practice-checks";
 import type { FileEntry } from "@/lib/code/types";
-import { validateCodeAgainstTests } from "@zoeskoul/curriculum-runtime";
+import { replaceEntryFileContent } from "@/lib/code/workspaceSubmission";
+import {
+    createJudge0CodeRunnerFromEnv,
+    validateCodeAgainstTests,
+} from "@zoeskoul/curriculum-runtime";
+
 const DEFAULT_LIMITS = {
     cpu_time_limit: 2,
     wall_time_limit: 6,
@@ -28,11 +31,6 @@ function normalizeWorkspaceExpectationPath(path: unknown): string {
 
     if (!raw) return "";
 
-    /**
-     * Submitted workspace paths should already be safe POSIX-style paths
-     * because authoring/compiler validation rejects unsafe paths. This runtime
-     * normalization is intentionally defensive.
-     */
     if (
         raw.startsWith("/") ||
         raw.startsWith("\\") ||
@@ -146,6 +144,32 @@ function validateWorkspaceExpectations(args: {
     return null;
 }
 
+function filesWithCurrentEntryContent(args: {
+    entry?: string;
+    files?: FileEntry[];
+    code: string;
+}): FileEntry[] | undefined {
+    if (!args.entry || !args.files?.length) {
+        return args.files;
+    }
+
+    return replaceEntryFileContent({
+        entry: args.entry,
+        files: args.files,
+        content: args.code,
+    });
+}
+
+function debugRaw(value: unknown): string | null {
+    if (value == null) return null;
+
+    try {
+        return JSON.stringify(value, null, 2);
+    } catch {
+        return String(value);
+    }
+}
+
 export async function gradeProgrammingCodeInput(args: {
     expected: ProgrammingExpected;
     code: string;
@@ -176,51 +200,48 @@ export async function gradeProgrammingCodeInput(args: {
         });
     }
 
+    const sharedRunner = createJudge0CodeRunnerFromEnv();
+
+    if (!sharedRunner) {
+        const feedback = classifyProgrammingRunFailure(
+            language,
+            {
+                ok: false,
+                status: "Error",
+                error: "Missing JUDGE0_URL env var.",
+            } as any,
+            "check",
+            code,
+        );
+
+        return {
+            ok: false,
+            explanation: feedback.message,
+            feedback: showDebug ? feedback : { ...feedback, raw: null },
+        };
+    }
+
     const run = await validateCodeAgainstTests({
         language,
         solutionCode: code,
         entry,
-        files,
+        files: filesWithCurrentEntryContent({
+            entry,
+            files,
+            code,
+        }),
         tests: expected.tests,
-        limits: DEFAULT_LIMITS as any,
+        limits: DEFAULT_LIMITS,
         maxTests: 12,
-        runner: async (runnerArgs) => {
-            const runnerFiles = Array.isArray(runnerArgs.files)
-                ? runnerArgs.files.map((file) => ({
-                    path: file.path,
-                    content: file.content,
-                }))
-                : runnerArgs.files;
-
-            const result = await runCode({
-                language: runnerArgs.language as any,
-                ...(runnerArgs.entry && Array.isArray(runnerFiles) && runnerFiles.length
-                    ? {
-                        entry: runnerArgs.entry,
-                        files: runnerFiles,
-                    }
-                    : {
-                        code: runnerArgs.code,
-                    }),
-                stdin: runnerArgs.stdin ?? "",
-                limits: DEFAULT_LIMITS,
-            } as any);
-
-            return {
-                ok: Boolean(result?.ok),
-                stdout: String(result?.stdout ?? ""),
-                stderr: String(result?.stderr ?? result?.compile_output ?? ""),
-                error:
-                    result?.error ??
-                    result?.message ??
-                    result?.compile_output ??
-                    undefined,
-            };
-        },
+        runner: sharedRunner,
     });
 
     if (run.ok) {
-        return { ok: true, explanation: "Correct.", feedback: null };
+        return {
+            ok: true,
+            explanation: "Correct.",
+            feedback: null,
+        };
     }
 
     const failedTest = expected.tests[run.testIndex ?? 0];
@@ -245,9 +266,11 @@ export async function gradeProgrammingCodeInput(args: {
         language,
         {
             ok: false,
+            status: "Error",
             stdout: run.stdout,
             stderr: run.stderr,
             error: run.message,
+            raw: debugRaw(run),
         } as any,
         "check",
         code,
@@ -258,5 +281,4 @@ export async function gradeProgrammingCodeInput(args: {
         explanation: feedback.message,
         feedback: showDebug ? feedback : { ...feedback, raw: null },
     };
-
 }

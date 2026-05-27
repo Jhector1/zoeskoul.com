@@ -1,0 +1,206 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "nested-data-structures": {
+          "label": "Nested Data Structures",
+          "summary": "Represent real-world data with lists of dictionaries and nested containers.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Nested Data Structures"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Nested Data Structures Project"
+            }
+          },
+          "projectSteps": {
+            "q5": {
+              "title": "Modify Nested Data"
+            },
+            "q10": {
+              "title": "Calculate Average Age"
+            },
+            "q11": {
+              "title": "Find Student by Major"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Accessing Nested Data",
+              "prompt": "How do you access the 'major' of the second student in the list?",
+              "hint": "Use indexing to access the second dictionary and then the key.",
+              "help": {
+                "concept": "Accessing nested data involves using indices and keys.",
+                "hint_1": "First, access the second dictionary using an index.",
+                "hint_2": "Then, use the key 'major' to get the value."
+              },
+              "options": {
+                "a": "students[1]['major']",
+                "b": "students[2]['major']",
+                "c": "students['major'][1]"
+              }
+            },
+            "q2": {
+              "title": "Characteristics of Nested Data Structures",
+              "prompt": "Which of the following are true about nested data structures?",
+              "hint": "Consider how data is organized and accessed.",
+              "help": {
+                "concept": "Nested data structures can combine different types of containers.",
+                "hint_1": "Think about how lists and dictionaries can be combined.",
+                "hint_2": "Consider the flexibility of accessing data in nested structures."
+              },
+              "options": {
+                "a": "They can contain lists within dictionaries.",
+                "b": "They can contain dictionaries within lists.",
+                "c": "They are limited to two levels of nesting.",
+                "d": "They allow complex data representation."
+              }
+            },
+            "q3": {
+              "title": "Order of Accessing Nested Data",
+              "prompt": "Arrange the steps to access the 'age' of the first student in the list.",
+              "hint": "Start from the outermost structure and move inward.",
+              "help": {
+                "concept": "Accessing nested data requires moving through each layer of the structure.",
+                "hint_1": "Begin with the list index to access the first dictionary.",
+                "hint_2": "Use the key to access the value within the dictionary."
+              },
+              "tokens": {
+                "t1": "Access the list using index 0",
+                "t2": "Use the key 'age'"
+              }
+            },
+            "q4": {
+              "title": "Dictionary Key Access",
+              "prompt": "Complete the code to access the 'name' of the third student.",
+              "hint": "Use the correct index and key.",
+              "help": {
+                "concept": "Accessing a value in a nested dictionary requires the correct index and key.",
+                "hint_1": "Identify the index for the third student.",
+                "hint_2": "Use the key 'the missing term' to access the value."
+              },
+              "template": "students[2][[blank1]]",
+              "choices": [
+                "name",
+                "age",
+                "major",
+                "students"
+              ]
+            },
+            "q5": {
+              "title": "Modify Nested Data",
+              "prompt": "Add a new student to the list and print all student names.",
+              "hint": "Read the task \"Modify Nested Data\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Modify Nested Data\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\n# Print all student names"
+            },
+            "q6": {
+              "title": "Nested List Access",
+              "prompt": "What is the correct way to access the first element of the list stored in the 'courses' key of a dictionary?",
+              "hint": "Use the key to access the list, then index the list.",
+              "help": {
+                "concept": "Accessing a list within a dictionary requires using the key first, then indexing the list.",
+                "hint_1": "First, use the key to get the list.",
+                "hint_2": "Then, use an index to access the first element of the list."
+              },
+              "options": {
+                "a": "dictionary['courses'][0]",
+                "b": "dictionary[0]['courses']",
+                "c": "dictionary['courses'].first()"
+              }
+            },
+            "q7": {
+              "title": "Benefits of Nested Structures",
+              "prompt": "What are the benefits of using nested data structures?",
+              "hint": "Consider how they help organize and access data.",
+              "help": {
+                "concept": "Nested data structures provide a way to organize complex data efficiently.",
+                "hint_1": "Think about how they allow for hierarchical data representation.",
+                "hint_2": "Consider the ease of accessing related data together."
+              },
+              "options": {
+                "a": "They allow hierarchical data representation.",
+                "b": "They simplify data access.",
+                "c": "They reduce data redundancy.",
+                "d": "They limit data flexibility."
+              }
+            },
+            "q8": {
+              "title": "Steps to Update Nested Data",
+              "prompt": "Arrange the steps to update the 'major' of the second student to 'Computer Science'.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Access the list using index 1",
+                "t2": "Use the key 'major'",
+                "t3": "Assign 'Computer Science'"
+              }
+            },
+            "q9": {
+              "title": "Accessing Nested Dictionary",
+              "prompt": "Complete the code to access the 'age' of the first student.",
+              "hint": "Use the correct index and key.",
+              "help": {
+                "concept": "Accessing a value in a nested dictionary requires the correct index and key.",
+                "hint_1": "Identify the index for the first student.",
+                "hint_2": "Use the key 'the missing term' to access the value."
+              },
+              "template": "students[0][[blank1]]",
+              "choices": [
+                "age",
+                "name",
+                "major",
+                "students"
+              ]
+            },
+            "q10": {
+              "title": "Calculate Average Age",
+              "prompt": "Calculate the average age of all students in the list.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age"
+            },
+            "q11": {
+              "title": "Find Student by Major",
+              "prompt": "Write a function to find and return the name of the student studying a given major.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    # Implement the function\n    pass\n\n# Example usage\n# print(find_student_by_major('Mathematics'))"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "nested-data-structures": {
+          "sketch1": {
+            "title": "Understanding Nested Data Structures",
+            "bodyMarkdown": "Nested data structures allow us to represent complex data by combining lists, dictionaries, and other containers. For example, a list of dictionaries can represent a collection of records, where each dictionary holds key-value pairs for a single record.\n\n```python\n# Example of a list of dictionaries\nstudents = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Accessing data\nfor student in students:\n    print(f\"{student['name']} is studying {student['major']}\")\n```\n\nTry it yourself: Modify the example to add a new student and print their details.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

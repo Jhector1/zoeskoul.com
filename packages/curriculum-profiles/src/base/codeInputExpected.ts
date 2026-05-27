@@ -169,8 +169,11 @@ function normalizeRecipeTestFiles(
                     : {}),
             };
         })
-        .filter((file): file is NonNullable<ProgrammingCodeTest["files"]>[number] =>
-            Boolean(file),
+        .filter(
+            (
+                file,
+            ): file is NonNullable<ProgrammingCodeTest["files"]>[number] =>
+                Boolean(file),
         );
 
     return normalized.length > 0 ? normalized : undefined;

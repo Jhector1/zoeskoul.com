@@ -1,6 +1,6 @@
 {
   "topics": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-6-functions-and-modularity": {
         "defining-and-calling-functions": {
           "label": "Defining and Calling Functions",
@@ -196,7 +196,7 @@
     }
   },
   "sketches": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-6-functions-and-modularity": {
         "defining-and-calling-functions": {
           "sketch1": {

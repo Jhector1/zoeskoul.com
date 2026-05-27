@@ -1,8 +1,8 @@
 {
   "topicId": "working-with-paths",
-  "subjectSlug": "python--python-data-functions--draft",
+  "subjectSlug": "python-data-functions",
   "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
-  "sectionSlug": "python--python-data-functions--draft-python-7-file-io",
+  "sectionSlug": "python-data-functions-python-7-file-io",
   "prefix": "py7",
   "minutes": 18,
   "runtimeDefaults": {
@@ -15,28 +15,28 @@
     "supportsPackageInstall": false
   },
   "topic": {
-    "labelKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.label",
-    "summaryKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.summary"
+    "labelKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.label",
+    "summaryKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.sketch0.title",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.sketch0.title",
       "sketchId": "sketch1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.sketch1.title",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.sketch1.title",
       "sketchId": "sketch2",
       "height": 420
     },
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.quiz.title",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -51,7 +51,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.project.title",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -60,7 +60,7 @@
         "steps": [
           {
             "id": "quiz9",
-            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.projectSteps.quiz9.title",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.projectSteps.quiz9.title",
             "exerciseKey": "quiz9",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -69,7 +69,7 @@
           },
           {
             "id": "quiz10",
-            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.projectSteps.quiz10.title",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.projectSteps.quiz10.title",
             "exerciseKey": "quiz10",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -78,7 +78,7 @@
           },
           {
             "id": "quiz11",
-            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.projectSteps.quiz11.title",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.projectSteps.quiz11.title",
             "exerciseKey": "quiz11",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -93,14 +93,14 @@
     {
       "id": "sketch1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.sketch1.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.sketch1.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.sketch1.bodyMarkdown"
     },
     {
       "id": "sketch2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.sketch2.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.sketch2.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.sketch2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -109,7 +109,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz1",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz1",
       "optionIds": [
         "a",
         "b",
@@ -126,7 +126,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz2",
       "optionIds": [
         "a",
         "b",
@@ -143,7 +143,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz3",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz3",
       "optionIds": [
         "a",
         "b",
@@ -164,7 +164,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz4",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz4",
       "optionIds": [
         "a",
         "b",
@@ -185,7 +185,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz5",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz5",
       "tokenIds": [
         "t1",
         "t2",
@@ -205,7 +205,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz6",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz6",
       "tokenIds": [
         "t1",
         "t2",
@@ -225,7 +225,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz7",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz7",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -237,7 +237,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz8",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz8",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -249,7 +249,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz9",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz9",
       "language": "python",
       "starterCode": "# Write your code below",
       "starterFiles": [
@@ -317,7 +317,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz10",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz10",
       "language": "python",
       "starterCode": "# Write your code below",
       "starterFiles": [
@@ -378,7 +378,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.quiz11",
       "language": "python",
       "starterCode": "# Write your code below",
       "starterFiles": [

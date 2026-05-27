@@ -96,7 +96,9 @@ export function buildSubjectMessagesFromPlan(args: {
         subjects: {
             [subjectSlug]: {
                 title: blueprint.title,
-                description: blueprint.description ?? "",
+                description:
+                    cleanText(blueprint.description) ||
+                    `Build practical skills with ${blueprint.title}.`,
                 moreComingSoon: `More ${blueprint.title} lessons are coming soon.`,
             },
         },

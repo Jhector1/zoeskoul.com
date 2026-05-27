@@ -1,8 +1,8 @@
 {
   "topicId": "writing-text-files",
-  "subjectSlug": "python--python-data-functions--draft",
+  "subjectSlug": "python-data-functions",
   "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
-  "sectionSlug": "python--python-data-functions--draft-python-7-file-io",
+  "sectionSlug": "python-data-functions-python-7-file-io",
   "prefix": "py7",
   "minutes": 22,
   "runtimeDefaults": {
@@ -15,28 +15,28 @@
     "supportsPackageInstall": false
   },
   "topic": {
-    "labelKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.label",
-    "summaryKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.summary"
+    "labelKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.label",
+    "summaryKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch0.title",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch0.title",
       "sketchId": "sketch1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch1.title",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch1.title",
       "sketchId": "sketch2",
       "height": 420
     },
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.quiz.title",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -51,7 +51,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.project.title",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -60,7 +60,7 @@
         "steps": [
           {
             "id": "quiz5",
-            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.quiz5.title",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.quiz5.title",
             "exerciseKey": "quiz5",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -69,7 +69,7 @@
           },
           {
             "id": "quiz10",
-            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.quiz10.title",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.quiz10.title",
             "exerciseKey": "quiz10",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -78,7 +78,7 @@
           },
           {
             "id": "quiz11",
-            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.quiz11.title",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.projectSteps.quiz11.title",
             "exerciseKey": "quiz11",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -93,14 +93,14 @@
     {
       "id": "sketch1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch1.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch1.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch1.bodyMarkdown"
     },
     {
       "id": "sketch2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch2.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch2.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.sketch2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -109,7 +109,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz1",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz1",
       "optionIds": [
         "a",
         "b",
@@ -126,7 +126,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz2",
       "optionIds": [
         "a",
         "b",
@@ -146,7 +146,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz3",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz3",
       "tokenIds": [
         "t1",
         "t2",
@@ -166,7 +166,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz4",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz4",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -178,7 +178,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz5",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz5",
       "language": "python",
       "starterCode": "# Write your code below\nwith open('data.txt', 'w') as file:\n    file.write('Data Science')\n\n# Now read the content back",
       "starterFiles": [
@@ -246,7 +246,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz6",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz6",
       "optionIds": [
         "a",
         "b",
@@ -263,7 +263,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz7",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz7",
       "optionIds": [
         "a",
         "b",
@@ -283,7 +283,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz8",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz8",
       "tokenIds": [
         "t1",
         "t2",
@@ -303,7 +303,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz9",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz9",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -315,7 +315,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz10",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz10",
       "language": "python",
       "starterCode": "# Write your code below\nwith open('fun.txt', 'a') as file:\n    file.write('Python is fun!')\n\n# Now read the content back",
       "starterFiles": [
@@ -383,7 +383,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.quiz11",
       "language": "python",
       "starterCode": "# Write your code below\nwith open('notes.txt', 'w') as file:\n    file.write('Learning Python')\n\n# Now read the content back",
       "starterFiles": [

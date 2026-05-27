@@ -1,27 +1,48 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
-import { gradeProgrammingCodeInput } from "./codeInput.programming";
-import { gradeSemanticCodeInput } from "./codeInput.semantic";
-import type { ProgrammingExpected } from "@/lib/practice/api/validate/schemas";
 
 vi.mock("@/lib/code/runCode", () => ({
     runCode: vi.fn(),
 }));
 
+vi.mock("@zoeskoul/curriculum-runtime", async (importOriginal) => {
+    const actual =
+        await importOriginal<typeof import("@zoeskoul/curriculum-runtime")>();
+
+    return {
+        ...actual,
+        createJudge0CodeRunnerFromEnv: vi.fn(),
+    };
+});
+
+import { gradeProgrammingCodeInput } from "./codeInput.programming";
+import { gradeSemanticCodeInput } from "./codeInput.semantic";
+import type { ProgrammingExpected } from "@/lib/practice/api/validate/schemas";
 import { runCode } from "@/lib/code/runCode";
+import { createJudge0CodeRunnerFromEnv } from "@zoeskoul/curriculum-runtime";
 
 const mockedRunCode = vi.mocked(runCode);
+const mockedCreateJudge0CodeRunnerFromEnv = vi.mocked(
+    createJudge0CodeRunnerFromEnv,
+);
+
+const mockedSharedRunner = vi.fn();
 
 describe("gradeProgrammingCodeInput", () => {
     beforeEach(() => {
         mockedRunCode.mockReset();
+        mockedSharedRunner.mockReset();
+        mockedCreateJudge0CodeRunnerFromEnv.mockReset();
+        mockedCreateJudge0CodeRunnerFromEnv.mockReturnValue(
+            mockedSharedRunner as any,
+        );
     });
 
     it("passes stdout exercises with shared stdout matching", async () => {
-        mockedRunCode.mockResolvedValue({
+        mockedSharedRunner.mockResolvedValue({
             ok: true,
             stdout: "4\n",
             stderr: "",
-        } as any);
+        });
 
         const expected: ProgrammingExpected = {
             kind: "code_input",
@@ -40,14 +61,22 @@ describe("gradeProgrammingCodeInput", () => {
         });
 
         expect(result.ok).toBe(true);
+        expect(mockedSharedRunner).toHaveBeenCalledOnce();
+        expect(mockedSharedRunner).toHaveBeenCalledWith(
+            expect.objectContaining({
+                language: "python",
+                code: "n = int(input())\nprint(n + 1)\n",
+                stdin: "3\n",
+            }),
+        );
     });
 
     it("submits workspace files for file-enabled stdout checks", async () => {
-        mockedRunCode.mockResolvedValue({
+        mockedSharedRunner.mockResolvedValue({
             ok: true,
             stdout: "hello from file\n",
             stderr: "",
-        } as any);
+        });
 
         const expected: ProgrammingExpected = {
             kind: "code_input",
@@ -58,16 +87,17 @@ describe("gradeProgrammingCodeInput", () => {
             language: "python",
         };
 
+        const code = 'with open("data.txt") as file:\n    print(file.read())\n';
+
         const result = await gradeProgrammingCodeInput({
             expected,
-            code: 'with open("data.txt") as file:\n    print(file.read())\n',
+            code,
             language: "python",
             entry: "main.py",
             files: [
                 {
                     path: "main.py",
-                    content:
-                        'with open("data.txt") as file:\n    print(file.read())\n',
+                    content: code,
                 },
                 {
                     path: "data.txt",
@@ -78,17 +108,21 @@ describe("gradeProgrammingCodeInput", () => {
         });
 
         expect(result.ok).toBe(true);
-        expect(mockedRunCode).toHaveBeenCalledWith(
+        expect(mockedSharedRunner).toHaveBeenCalledWith(
             expect.objectContaining({
                 language: "python",
+                code,
                 entry: "main.py",
-                files: [
-                    expect.objectContaining({ path: "main.py" }),
+                files: expect.arrayContaining([
+                    expect.objectContaining({
+                        path: "main.py",
+                        content: code,
+                    }),
                     expect.objectContaining({
                         path: "data.txt",
                         content: "hello from file\n",
                     }),
-                ],
+                ]),
             }),
         );
     });
@@ -124,15 +158,16 @@ describe("gradeProgrammingCodeInput", () => {
         expect(result.explanation).toBe(
             "Missing required file: helpers/formatting.py",
         );
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
         expect(mockedRunCode).not.toHaveBeenCalled();
     });
 
     it("allows required workspace files and continues with normal grading", async () => {
-        mockedRunCode.mockResolvedValue({
+        mockedSharedRunner.mockResolvedValue({
             ok: true,
             stdout: "ok\n",
             stderr: "",
-        } as any);
+        });
 
         const expected: ProgrammingExpected = {
             kind: "code_input",
@@ -167,7 +202,7 @@ describe("gradeProgrammingCodeInput", () => {
         });
 
         expect(result.ok).toBe(true);
-        expect(mockedRunCode).toHaveBeenCalledOnce();
+        expect(mockedSharedRunner).toHaveBeenCalledOnce();
     });
 
     it("fails clearly when a required workspace folder is missing", async () => {
@@ -199,15 +234,16 @@ describe("gradeProgrammingCodeInput", () => {
 
         expect(result.ok).toBe(false);
         expect(result.explanation).toBe("Missing required folder: helpers");
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
         expect(mockedRunCode).not.toHaveBeenCalled();
     });
 
     it("allows required folders when a child file exists inside the folder", async () => {
-        mockedRunCode.mockResolvedValue({
+        mockedSharedRunner.mockResolvedValue({
             ok: true,
             stdout: "ok\n",
             stderr: "",
-        } as any);
+        });
 
         const expected: ProgrammingExpected = {
             kind: "code_input",
@@ -241,7 +277,7 @@ describe("gradeProgrammingCodeInput", () => {
         });
 
         expect(result.ok).toBe(true);
-        expect(mockedRunCode).toHaveBeenCalledOnce();
+        expect(mockedSharedRunner).toHaveBeenCalledOnce();
     });
 
     it("fails when a forbidden workspace file is present", async () => {
@@ -277,15 +313,16 @@ describe("gradeProgrammingCodeInput", () => {
 
         expect(result.ok).toBe(false);
         expect(result.explanation).toBe("Forbidden file present: solution.py");
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
         expect(mockedRunCode).not.toHaveBeenCalled();
     });
 
     it("fails stdout exercises when output is wrong", async () => {
-        mockedRunCode.mockResolvedValue({
+        mockedSharedRunner.mockResolvedValue({
             ok: true,
             stdout: "5\n",
             stderr: "",
-        } as any);
+        });
 
         const expected: ProgrammingExpected = {
             kind: "code_input",
@@ -304,19 +341,21 @@ describe("gradeProgrammingCodeInput", () => {
         });
 
         expect(result.ok).toBe(false);
+        expect(mockedSharedRunner).toHaveBeenCalledOnce();
     });
+
     it("applies per-test fixture files through the shared runtime validator", async () => {
-        mockedRunCode
+        mockedSharedRunner
             .mockResolvedValueOnce({
                 ok: true,
                 stdout: "Alice\nBob\n",
                 stderr: "",
-            } as any)
+            })
             .mockResolvedValueOnce({
                 ok: true,
                 stdout: "Charlie\n",
                 stderr: "",
-            } as any);
+            });
 
         const expected: ProgrammingExpected = {
             kind: "code_input",
@@ -350,16 +389,18 @@ describe("gradeProgrammingCodeInput", () => {
             ],
         } as any;
 
+        const code =
+            "import csv\nwith open('people.csv') as f:\n    for row in csv.DictReader(f):\n        print(row['name'])\n";
+
         const result = await gradeProgrammingCodeInput({
             expected,
-            code: "",
+            code,
             language: "python",
             entry: "main.py",
             files: [
                 {
                     path: "main.py",
-                    content:
-                        "import csv\nwith open('people.csv') as f:\n    for row in csv.DictReader(f):\n        print(row['name'])\n",
+                    content: code,
                 },
                 {
                     path: "people.csv",
@@ -370,10 +411,12 @@ describe("gradeProgrammingCodeInput", () => {
         });
 
         expect(result.ok).toBe(true);
-        expect(mockedRunCode).toHaveBeenCalledTimes(2);
+        expect(mockedSharedRunner).toHaveBeenCalledTimes(2);
 
-        expect(mockedRunCode.mock.calls[0]?.[0]).toEqual(
+        expect(mockedSharedRunner.mock.calls[0]?.[0]).toEqual(
             expect.objectContaining({
+                language: "python",
+                code,
                 entry: "main.py",
                 files: expect.arrayContaining([
                     expect.objectContaining({
@@ -384,8 +427,10 @@ describe("gradeProgrammingCodeInput", () => {
             }),
         );
 
-        expect(mockedRunCode.mock.calls[1]?.[0]).toEqual(
+        expect(mockedSharedRunner.mock.calls[1]?.[0]).toEqual(
             expect.objectContaining({
+                language: "python",
+                code,
                 entry: "main.py",
                 files: expect.arrayContaining([
                     expect.objectContaining({
@@ -396,6 +441,7 @@ describe("gradeProgrammingCodeInput", () => {
             }),
         );
     });
+
     it("passes semantic Book exercises with arbitrary book names", async () => {
         mockedRunCode.mockResolvedValue({
             ok: true,

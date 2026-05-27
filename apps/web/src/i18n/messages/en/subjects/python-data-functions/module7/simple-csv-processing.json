@@ -1,6 +1,6 @@
 {
   "topics": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-7-files-exceptions-and-data-cleaning": {
         "simple-csv-processing": {
           "label": "Simple CSV Processing",
@@ -200,7 +200,7 @@
     }
   },
   "sketches": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-7-files-exceptions-and-data-cleaning": {
         "simple-csv-processing": {
           "sketch1": {

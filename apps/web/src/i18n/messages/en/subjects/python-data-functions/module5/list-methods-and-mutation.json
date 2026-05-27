@@ -1,6 +1,6 @@
 {
   "topics": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "list-methods-and-mutation": {
           "label": "List Methods and Mutation",
@@ -198,7 +198,7 @@
     }
   },
   "sketches": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "list-methods-and-mutation": {
           "sketch1": {

@@ -1,8 +1,8 @@
 {
   "topicId": "nested-data-structures",
-  "subjectSlug": "python--python-data-functions--draft",
+  "subjectSlug": "python-data-functions",
   "moduleSlug": "python-5-lists-tuples-and-dictionaries",
-  "sectionSlug": "python--python-data-functions--draft-python-5-dictionaries",
+  "sectionSlug": "python-data-functions-python-5-dictionaries",
   "prefix": "py5",
   "minutes": 28,
   "runtimeDefaults": {
@@ -15,21 +15,21 @@
     "supportsPackageInstall": false
   },
   "topic": {
-    "labelKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.label",
-    "summaryKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.summary"
+    "labelKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.label",
+    "summaryKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.sketch0.title",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.sketch0.title",
       "sketchId": "sketch1",
       "height": 420
     },
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.quiz.title",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -44,7 +44,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.project.title",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -53,7 +53,7 @@
         "steps": [
           {
             "id": "q5",
-            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.q5.title",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.q5.title",
             "exerciseKey": "q5",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -62,7 +62,7 @@
           },
           {
             "id": "q10",
-            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.q10.title",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.q10.title",
             "exerciseKey": "q10",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -71,7 +71,7 @@
           },
           {
             "id": "q11",
-            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.q11.title",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.projectSteps.q11.title",
             "exerciseKey": "q11",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -86,8 +86,8 @@
     {
       "id": "sketch1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch1.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch1.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.sketch1.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -96,7 +96,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q1",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q1",
       "optionIds": [
         "a",
         "b",
@@ -112,7 +112,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q2",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q2",
       "optionIds": [
         "a",
         "b",
@@ -133,7 +133,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q3",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q3",
       "tokenIds": [
         "t1",
         "t2"
@@ -151,7 +151,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q4",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q4",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -163,7 +163,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q5",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q5",
       "language": "python",
       "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Add a new student\n# Print all student names",
       "starterFiles": [
@@ -210,7 +210,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q6",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q6",
       "optionIds": [
         "a",
         "b",
@@ -226,7 +226,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q7",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q7",
       "optionIds": [
         "a",
         "b",
@@ -247,7 +247,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q8",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q8",
       "tokenIds": [
         "t1",
         "t2",
@@ -267,7 +267,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q9",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q9",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -279,7 +279,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q10",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q10",
       "language": "python",
       "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\n# Calculate the average age",
       "starterFiles": [
@@ -326,7 +326,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q11",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.q11",
       "language": "python",
       "starterCode": "students = [\n    {'name': 'Alice', 'age': 24, 'major': 'Physics'},\n    {'name': 'Bob', 'age': 22, 'major': 'Mathematics'},\n    {'name': 'Charlie', 'age': 23, 'major': 'Biology'}\n]\n\ndef find_student_by_major(major):\n    # Implement the function\n    pass\n\n# Example usage\n# print(find_student_by_major('Mathematics'))",
       "starterFiles": [

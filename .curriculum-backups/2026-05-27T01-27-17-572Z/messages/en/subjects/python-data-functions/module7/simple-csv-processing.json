@@ -1,0 +1,218 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "simple-csv-processing": {
+          "label": "Simple CSV Processing",
+          "summary": "Read comma-separated rows and transform them into dictionaries.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding CSV Files"
+            },
+            "sketch1": {
+              "title": "Reading CSV Files in Python"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "CSV Processing Project"
+            }
+          },
+          "projectSteps": {
+            "quiz9": {
+              "title": "Read CSV and Print Names"
+            },
+            "quiz10": {
+              "title": "CSV to Dictionary Conversion"
+            },
+            "quiz11": {
+              "title": "Filter CSV Rows by Score"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "CSV File Structure",
+              "prompt": "What does each line in a CSV file represent?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "A column of data",
+                "b": "A row of data",
+                "c": "A cell of data",
+                "d": "A header of data"
+              }
+            },
+            "quiz2": {
+              "title": "CSV Module in Python",
+              "prompt": "Which Python module is commonly used to handle CSV files?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "json",
+                "b": "csv",
+                "c": "os",
+                "d": "sys"
+              }
+            },
+            "quiz3": {
+              "title": "CSV Reading Methods",
+              "prompt": "Which of the following are methods to read CSV files in Python?",
+              "hint": "Consider the methods provided by the `csv` module.",
+              "help": {
+                "concept": "The `csv` module provides different methods to read CSV files, such as `reader` and `DictReader`.",
+                "hint_1": "Think about methods that can iterate over rows in a CSV file.",
+                "hint_2": "Both `reader` and `DictReader` are used for reading CSV files."
+              },
+              "options": {
+                "a": "csv.reader",
+                "b": "csv.DictReader",
+                "c": "csv.writer",
+                "d": "csv.DictWriter"
+              }
+            },
+            "quiz4": {
+              "title": "CSV File Characteristics",
+              "prompt": "Select all characteristics of a CSV file.",
+              "hint": "Think about the structure and format of CSV files.",
+              "help": {
+                "concept": "CSV files are plain text files that use commas to separate values and often include a header row.",
+                "hint_1": "Consider how data is separated and organized in CSV files.",
+                "hint_2": "CSV files are text-based and use commas as delimiters."
+              },
+              "options": {
+                "a": "Plain text format",
+                "b": "Binary format",
+                "c": "Comma-separated values",
+                "d": "Tab-separated values"
+              }
+            },
+            "quiz5": {
+              "title": "CSV Reading Steps",
+              "prompt": "Arrange the steps to read a CSV file using Python's `csv` module.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Open the CSV file",
+                "t2": "Create a CSV reader object",
+                "t3": "Iterate over the rows",
+                "t4": "Process each row"
+              }
+            },
+            "quiz6": {
+              "title": "CSV Writing Steps",
+              "prompt": "Arrange the steps to write data to a CSV file using Python's `csv` module.",
+              "hint": "Think about the sequence of operations needed to write to a file.",
+              "help": {
+                "concept": "Writing to a CSV file involves opening the file, creating a writer object, and writing rows.",
+                "hint_1": "Start with opening the file, then create a writer object.",
+                "hint_2": "Finally, write the rows to the file."
+              },
+              "tokens": {
+                "t1": "Open the CSV file",
+                "t2": "Create a CSV writer object",
+                "t3": "Write rows to the file",
+                "t4": "Close the file"
+              }
+            },
+            "quiz7": {
+              "title": "CSV Header Row",
+              "prompt": "In a CSV file, the first row is typically known as the [blank1].",
+              "hint": "Think about what the first row usually contains.",
+              "help": {
+                "concept": "The first row in a CSV file usually contains the column names, known as the the missing term.",
+                "hint_1": "It's the row that defines the names of the columns.",
+                "hint_2": "This row is often referred to as the header."
+              },
+              "template": "In a CSV file, the first row is typically known as the [blank1].",
+              "choices": [
+                "header row",
+                "data row",
+                "footer row",
+                "summary row"
+              ]
+            },
+            "quiz8": {
+              "title": "CSV Delimiter",
+              "prompt": "The default delimiter in a CSV file is a [blank1].",
+              "hint": "Think about what separates values in a CSV file.",
+              "help": {
+                "concept": "The default delimiter in a CSV file is a the missing term, which separates the values.",
+                "hint_1": "It's the character that separates each value in a row.",
+                "hint_2": "This character is a the missing term."
+              },
+              "template": "The default delimiter in a CSV file is a [blank1].",
+              "choices": [
+                "comma",
+                "semicolon",
+                "tab",
+                "space"
+              ]
+            },
+            "quiz9": {
+              "title": "Read CSV and Print Names",
+              "prompt": "Write a Python program that reads a CSV file named `people.csv` and prints only the names from the file. Assume the CSV file has columns `name`, `age`, and `city`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "import csv\n\n# Open the CSV file\nwith open('people.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the name field\n        pass"
+            },
+            "quiz10": {
+              "title": "CSV to Dictionary Conversion",
+              "prompt": "Write a Python program that reads a CSV file named `data.csv` and converts each row into a dictionary. Print each dictionary. Assume the CSV file has columns `id`, `name`, and `score`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "import csv\n\n# Open the CSV file\nwith open('data.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Print the row as a dictionary\n        pass"
+            },
+            "quiz11": {
+              "title": "Filter CSV Rows by Score",
+              "prompt": "Write a Python program that reads a CSV file named `scores.csv` and prints the names of students who scored above 80. Assume the CSV file has columns `name` and `score`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "import csv\n\n# Open the CSV file\nwith open('scores.csv', mode='r') as file:\n    # Create a CSV reader object\n    csv_reader = csv.DictReader(file)\n    # Iterate over each row\n    for row in csv_reader:\n        # Check if the score is above 80\n        pass"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "simple-csv-processing": {
+          "sketch1": {
+            "title": "Understanding CSV Files",
+            "bodyMarkdown": "CSV (Comma-Separated Values) files are a common format for storing tabular data. Each line in a CSV file corresponds to a row in the table, and each value is separated by a comma. Here's a simple example:\n\n```\nname,age,city\nAlice,30,New York\nBob,25,Los Angeles\n```\n\nIn this example, the first line contains the headers: `name`, `age`, and `city`. The following lines contain the data for each person.\n\nTry it yourself: Create a small CSV file with your own data and open it in a text editor to see how it's structured."
+          },
+          "sketch2": {
+            "title": "Reading CSV Files in Python",
+            "bodyMarkdown": "Python provides a built-in module called `csv` to handle CSV files. Here's a basic example of how to read a CSV file and convert each row into a dictionary:\n\n```python\nimport csv\n\nwith open('data.csv', mode='r') as file:\n    csv_reader = csv.DictReader(file)\n    for row in csv_reader:\n        print(row)\n```\n\nThis code opens a file named `data.csv`, reads it using `csv.DictReader`, and prints each row as a dictionary.\n\nTry it yourself: Modify the code to print only the names from the CSV file.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

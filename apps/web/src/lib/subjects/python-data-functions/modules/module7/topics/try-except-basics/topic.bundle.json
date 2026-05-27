@@ -1,8 +1,8 @@
 {
   "topicId": "try-except-basics",
-  "subjectSlug": "python--python-data-functions--draft",
+  "subjectSlug": "python-data-functions",
   "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
-  "sectionSlug": "python--python-data-functions--draft-python-7-exceptions-and-cleaning",
+  "sectionSlug": "python-data-functions-python-7-exceptions-and-cleaning",
   "prefix": "py7",
   "minutes": 24,
   "runtimeDefaults": {
@@ -15,28 +15,28 @@
     "supportsPackageInstall": false
   },
   "topic": {
-    "labelKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.label",
-    "summaryKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.summary"
+    "labelKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.label",
+    "summaryKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.sketch0.title",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.sketch0.title",
       "sketchId": "sketch1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.sketch1.title",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.sketch1.title",
       "sketchId": "sketch2",
       "height": 420
     },
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.quiz.title",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -51,7 +51,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.project.title",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -60,7 +60,7 @@
         "steps": [
           {
             "id": "quiz5",
-            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.projectSteps.quiz5.title",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.projectSteps.quiz5.title",
             "exerciseKey": "quiz5",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -69,7 +69,7 @@
           },
           {
             "id": "quiz6",
-            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.projectSteps.quiz6.title",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.projectSteps.quiz6.title",
             "exerciseKey": "quiz6",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -78,7 +78,7 @@
           },
           {
             "id": "quiz7",
-            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.projectSteps.quiz7.title",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.projectSteps.quiz7.title",
             "exerciseKey": "quiz7",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -93,14 +93,14 @@
     {
       "id": "sketch1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.sketch1.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.sketch1.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.sketch1.bodyMarkdown"
     },
     {
       "id": "sketch2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.sketch2.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.sketch2.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.sketch2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -109,7 +109,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz1",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz1",
       "optionIds": [
         "a",
         "b",
@@ -126,7 +126,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz2",
       "optionIds": [
         "a",
         "b",
@@ -147,7 +147,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz3",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz3",
       "tokenIds": [
         "t1",
         "t2",
@@ -169,7 +169,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz4",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz4",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -181,7 +181,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz5",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz5",
       "language": "python",
       "starterCode": "number = input()\n# Your code here",
       "starterFiles": [
@@ -230,7 +230,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz6",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz6",
       "language": "python",
       "starterCode": "number = input()\n# Your code here",
       "starterFiles": [
@@ -279,7 +279,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz7",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.quiz7",
       "language": "python",
       "starterCode": "# Your code here",
       "starterFiles": [
@@ -347,7 +347,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.policy_single_choice_1",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.policy_single_choice_1",
       "optionIds": [
         "a",
         "b",
@@ -364,7 +364,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.policy_multi_choice_1",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.policy_multi_choice_1",
       "optionIds": [
         "a",
         "b",
@@ -384,7 +384,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.policy_drag_reorder_1",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.policy_drag_reorder_1",
       "tokenIds": [
         "t1",
         "t2",
@@ -404,7 +404,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.policy_fill_blank_choice_1",
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.policy_fill_blank_choice_1",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",

@@ -1,6 +1,6 @@
 {
   "topics": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "looping-through-lists": {
           "label": "Looping Through Lists",
@@ -199,7 +199,7 @@
     }
   },
   "sketches": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "looping-through-lists": {
           "sketch1": {

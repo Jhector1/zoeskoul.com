@@ -47,7 +47,11 @@ def _make_instance(class_name, args):
     if cls is None:
         raise AssertionError(f"Define a class named {class_name}.")
     return cls(*list(args or []))
-
+function _get_function(function_name):
+    value = _env.get(function_name)
+    if callable(value) and not isinstance(value, type):
+        return value
+    return None
 try:
     with contextlib.redirect_stdout(_user_stdout_buffer):
         exec(_USER_CODE, _env, _env)
@@ -63,7 +67,24 @@ for check in _CHECKS:
     ctype = check.get("type")
 
     try:
-        if ctype == "defines_class":
+        if ctype == "function_returns":
+            function_name = check.get("functionName")
+            function_args = check.get("args") or []
+            expected = check.get("expected")
+
+            fn = _get_function(function_name)
+
+            if fn is None:
+                _fail(check.get("message") or f"Define a function named {function_name}.")
+            else:
+                actual = fn(*list(function_args))
+                if actual != expected:
+                    _fail(
+                        check.get("message")
+                        or f"{function_name}() should return {expected!r}, but got {actual!r}."
+                    )
+
+        elif ctype == "defines_class":
             class_name = check.get("className")
             if _get_class(class_name) is None:
                 _fail(check.get("message") or f"Define a class named {class_name}.")

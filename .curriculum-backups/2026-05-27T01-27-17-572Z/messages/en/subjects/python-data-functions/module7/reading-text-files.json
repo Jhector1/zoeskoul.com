@@ -1,0 +1,209 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "reading-text-files": {
+          "label": "Reading Text Files",
+          "summary": "Open files, read text, and close resources safely.",
+          "cards": {
+            "sketch0": {
+              "title": "Reading a Text File in Python"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Reading Text Files Project"
+            }
+          },
+          "projectSteps": {
+            "quiz9": {
+              "title": "Read and Print File Contents"
+            },
+            "quiz10": {
+              "title": "Using Context Manager to Read Files"
+            },
+            "quiz11": {
+              "title": "Reading Lines from a File"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "File Modes in Python",
+              "prompt": "Which file mode should you use to read a file in Python?",
+              "hint": "Use the question wording and the lesson example to narrow the choices.",
+              "help": {
+                "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
+                "hint_1": "Compare each option to the exact topic named in the question.",
+                "hint_2": "Remove options that do not match the concept or evidence named in the question."
+              },
+              "options": {
+                "a": "w",
+                "b": "r",
+                "c": "a",
+                "d": "x"
+              }
+            },
+            "quiz2": {
+              "title": "Closing a File",
+              "prompt": "Why is it important to close a file after reading it in Python?",
+              "hint": "Think about resource management and system performance.",
+              "help": {
+                "concept": "Closing a file releases system resources and ensures data integrity.",
+                "hint_1": "Leaving files open can lead to resource leaks.",
+                "hint_2": "Closing a file ensures that all resources are freed and data is saved properly."
+              },
+              "options": {
+                "a": "To free up system resources",
+                "b": "To delete the file",
+                "c": "To encrypt the file",
+                "d": "To rename the file"
+              }
+            },
+            "quiz3": {
+              "title": "Reading Methods",
+              "prompt": "Which of the following methods can be used to read the contents of a file in Python? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "read()",
+                "b": "write()",
+                "c": "readline()",
+                "d": "readlines()"
+              }
+            },
+            "quiz4": {
+              "title": "Handling Exceptions",
+              "prompt": "Which of the following are good practices when handling file reading exceptions in Python? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Using try-except blocks",
+                "b": "Ignoring exceptions",
+                "c": "Using finally to close files",
+                "d": "Printing error messages"
+              }
+            },
+            "quiz5": {
+              "title": "Steps to Read a File",
+              "prompt": "Arrange the steps to read a file in Python in the correct order.",
+              "hint": "Start with opening the file and end with closing it.",
+              "help": {
+                "concept": "Reading a file involves opening it, reading its contents, and then closing it.",
+                "hint_1": "Opening the file is the first step.",
+                "hint_2": "Closing the file is the last step."
+              },
+              "tokens": {
+                "t1": "Open the file",
+                "t2": "Read the contents",
+                "t3": "Close the file"
+              }
+            },
+            "quiz6": {
+              "title": "File Reading with Context Manager",
+              "prompt": "Arrange the steps to read a file using a context manager in Python.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Use 'with' to open the file",
+                "t2": "Read the contents",
+                "t3": "File is automatically closed"
+              }
+            },
+            "quiz7": {
+              "title": "File Reading Syntax",
+              "prompt": "Complete the syntax to open a file for reading in Python.",
+              "hint": "Focus on the missing concept rather than the exact missing term.",
+              "help": {
+                "concept": "The blank should be completed with the term that fits the job being described.",
+                "hint_1": "Think about what the missing part needs to do in the statement.",
+                "hint_2": "Choose the term that best completes the meaning of the statement."
+              },
+              "template": "file = open('data.txt', [blank1])",
+              "choices": [
+                "r",
+                "w",
+                "a",
+                "x"
+              ]
+            },
+            "quiz8": {
+              "title": "Reading File Contents",
+              "prompt": "Fill in the blank to read the entire contents of a file in Python.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "template": "content = file.[blank1]()",
+              "choices": [
+                "read",
+                "write",
+                "readline",
+                "readlines"
+              ]
+            },
+            "quiz9": {
+              "title": "Read and Print File Contents",
+              "prompt": "Write a Python program to read the contents of 'data/input.txt' and print them.",
+              "hint": "Read the task \"Read and Print File Contents\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Read and Print File Contents\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# Write your code below"
+            },
+            "quiz10": {
+              "title": "Using Context Manager to Read Files",
+              "prompt": "Modify the program to use a context manager to read 'data/input.txt' and print its contents.",
+              "hint": "Read the task \"Using Context Manager to Read Files\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Using Context Manager to Read Files\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "file = open('data/input.txt', 'r')\ncontent = file.read()\n\n# Modify the code to use a context manager"
+            },
+            "quiz11": {
+              "title": "Reading Lines from a File",
+              "prompt": "Write a Python program to read and print each line from 'data/input.txt' separately.",
+              "hint": "Read the task \"Reading Lines from a File\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Reading Lines from a File\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "file = open('data/input.txt', 'r')\n\n# Write your code below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "reading-text-files": {
+          "sketch1": {
+            "title": "Reading a Text File in Python",
+            "bodyMarkdown": "To read a text file in Python, you can use the `open()` function to open the file, and then use the `read()` method to read its contents. Here's a simple example:\n\n```python\n# Open the file in read mode\nfile = open('data.txt', 'r')\n\n# Read the contents of the file\ncontent = file.read()\n\n# Print the contents\nprint(content)\n\n# Close the file\nfile.close()\n```\n\nThis code opens a file named `data.txt`, reads its contents, prints them, and then closes the file. \n\n**Try it yourself:** Modify the file name to read a different file and observe the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

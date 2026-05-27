@@ -1,6 +1,6 @@
 {
   "topics": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "nested-data-structures": {
           "label": "Nested Data Structures",
@@ -192,7 +192,7 @@
     }
   },
   "sketches": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "nested-data-structures": {
           "sketch1": {

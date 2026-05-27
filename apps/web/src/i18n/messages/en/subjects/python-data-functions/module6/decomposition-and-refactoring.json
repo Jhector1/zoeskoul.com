@@ -1,6 +1,6 @@
 {
   "topics": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-6-functions-and-modularity": {
         "decomposition-and-refactoring": {
           "label": "Decomposition and Refactoring",
@@ -200,7 +200,7 @@
     }
   },
   "sketches": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-6-functions-and-modularity": {
         "decomposition-and-refactoring": {
           "sketch1": {

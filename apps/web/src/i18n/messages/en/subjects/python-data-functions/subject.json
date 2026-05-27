@@ -1,13 +1,13 @@
 {
   "subjects": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "title": "Python Data and Functions",
       "description": "",
       "moreComingSoon": "More Python Data and Functions lessons are coming soon."
     }
   },
   "modules": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "title": "Lists, Tuples, and Dictionaries",
         "description": "Teach learners how to organize multiple values and choose the right collection type.",
@@ -50,9 +50,9 @@
     }
   },
   "sections": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
-        "python--python-data-functions--draft-python-5-list-basics": {
+        "python-data-functions-python-5-list-basics": {
           "title": "List Basics",
           "description": "Learn creating and indexing lists, list methods and mutation, looping through lists through focused examples and practice.",
           "weeks": null,
@@ -62,7 +62,7 @@
             "Looping Through Lists"
           ]
         },
-        "python--python-data-functions--draft-python-5-dictionaries": {
+        "python-data-functions-python-5-dictionaries": {
           "title": "Dictionaries",
           "description": "Learn dictionary basics, updating and looping dictionaries, nested data structures through focused examples and practice.",
           "weeks": null,
@@ -74,7 +74,7 @@
         }
       },
       "python-6-functions-and-modularity": {
-        "python--python-data-functions--draft-python-6-function-basics": {
+        "python-data-functions-python-6-function-basics": {
           "title": "Function Basics",
           "description": "Learn defining and calling functions, parameters and return values, print vs return through focused examples and practice.",
           "weeks": null,
@@ -84,7 +84,7 @@
             "Print vs Return"
           ]
         },
-        "python--python-data-functions--draft-python-6-function-design": {
+        "python-data-functions-python-6-function-design": {
           "title": "Function Design",
           "description": "Learn scope and local variables, decomposition and refactoring, docstrings and function contracts through focused examples and practice.",
           "weeks": null,
@@ -96,7 +96,7 @@
         }
       },
       "python-7-files-exceptions-and-data-cleaning": {
-        "python--python-data-functions--draft-python-7-file-io": {
+        "python-data-functions-python-7-file-io": {
           "title": "File Input and Output",
           "description": "Learn reading text files, writing text files, working with paths through focused examples and practice.",
           "weeks": null,
@@ -106,7 +106,7 @@
             "Working With Paths"
           ]
         },
-        "python--python-data-functions--draft-python-7-exceptions-and-cleaning": {
+        "python-data-functions-python-7-exceptions-and-cleaning": {
           "title": "Exceptions and Cleaning",
           "description": "Learn try/except basics, validating and cleaning input, simple csv processing through focused examples and practice.",
           "weeks": null,

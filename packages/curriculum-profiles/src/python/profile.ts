@@ -430,9 +430,12 @@ export const pythonProfile: CourseProfile = {
             "- Do not create fixed_tests code_input exercises that only print one fixed literal and do not read stdin.",
             "- For static output concepts, use single_choice, fill_blank_choice, or drag_reorder instead of code_input.",
             "- If you cannot write at least two meaningful fixed tests, replace the exercise with a non-code exercise or use semantic checks only when structure/behavior truly requires it.",
-            '- For Python code_input, use recipeType "semantic" only when semanticChecks are truly needed.',
-            "- For Python code_input, solutionCode must be a complete runnable program that reads stdin when needed and prints the final answer.",
-            "- For Python code_input, starterCode must stay as scaffolding and must not reveal the full solution.",
+
+            '- For Python code_input, use recipeType "fixed_tests" only when the exercise is a normal runnable program that reads stdin and/or prints exact output.',
+            '- For Python code_input, use recipeType "semantic" for function-return tasks, class/object tasks, method tasks, attribute checks, local-scope tasks, and algorithm/data-transformation tasks.',
+            '- For function-return exercises, include semanticChecks[] with type "function_returns"; do not create stdin/stdout wrappers with ast.literal_eval or _parse_arg.',
+            '- For fixed_tests exercises, solutionCode must be a complete runnable program that reads stdin when needed and prints the final answer.',
+
         ];
 
         const supportsFilesystem =
@@ -484,13 +487,13 @@ export const pythonProfile: CourseProfile = {
     renderAuthoringPromptRules(args) {
         const lines = [
             "Python code_input self-check:",
-            '- For normal beginner output exercises, set recipeType to "fixed_tests" and include tests[].',
-            '- For class, object, method, attribute, return-value, or structure-checking exercises, set recipeType to "semantic" and include semanticChecks[].',
-            '- If recipeType is "semantic", do not rely on stdout tests.',
+            '- Use recipeType "semantic" when the learner must define a function, use parameters, return a value, define a class, create methods, set attributes, or implement algorithm/data-transformation behavior.',
+            '- For semantic function exercises, include semanticChecks[] using type "function_returns".',
+            '- For normal beginner input/print/output programs, set recipeType to "fixed_tests" and include tests[].',
+            '- If recipeType is "semantic", do not include tests[] and do not rely on stdout.',
+            '- If recipeType is "fixed_tests", do not include semanticChecks[].',
             `- If recipeType is "fixed_tests", include at least ${PYTHON_MINIMUM_FIXED_TESTS} meaningful stdin/stdout tests.`,
-            '- Do not keep a fixed_tests code_input that only prints one fixed output without stdin variation.',
-            "- If a conceptual topic does not support two meaningful fixed tests, use a non-code exercise instead of forcing extra code_input.",
-            "- Hints explain the concept but do not reveal the final answer wording.",
+            '- Never expose hidden harness code such as import ast, _parse_arg, _inputs, or ast.literal_eval in starterCode or solutionCode.',
         ];
 
         const terminalAvailable =

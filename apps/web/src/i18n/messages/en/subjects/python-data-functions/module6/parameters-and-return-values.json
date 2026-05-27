@@ -1,6 +1,6 @@
 {
   "topics": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-6-functions-and-modularity": {
         "parameters-and-return-values": {
           "label": "Parameters and Return Values",
@@ -200,7 +200,7 @@
     }
   },
   "sketches": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-6-functions-and-modularity": {
         "parameters-and-return-values": {
           "sketch1": {

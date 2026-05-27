@@ -434,6 +434,9 @@ importers:
       '@zoeskoul/practice-checks':
         specifier: workspace:*
         version: link:../practice-checks
+      jszip:
+        specifier: ^3.10.1
+        version: 3.10.1
 
   packages/db:
     dependencies:

@@ -1,6 +1,6 @@
 {
   "topics": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "creating-and-indexing-lists": {
           "label": "Creating and Indexing Lists",
@@ -201,7 +201,7 @@
     }
   },
   "sketches": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "creating-and-indexing-lists": {
           "sketch1": {

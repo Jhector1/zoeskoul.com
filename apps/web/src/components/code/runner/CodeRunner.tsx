@@ -457,6 +457,9 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         resetTerminalOnRun,
         isAuthenticated,
         onRun: onRun ?? defaultOnRun,
+
+        getWorkspaceFiles: workspaceTerminal?.getWorkspaceFiles,
+        onTerminalSnapshotFiles: workspaceTerminal?.onTerminalSnapshotFiles,
     } as any);
 
     const workspaceTerminalEnabled =

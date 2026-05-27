@@ -8,8 +8,13 @@
     "tuples",
     "dictionaries",
     "nested data structures",
+    "imports",
+    "modules",
+    "helper files",
+    "standard library csv",
     "file input",
     "file output",
+    "file creation with write mode",
     "relative paths",
     "exceptions",
     "try except",
@@ -19,10 +24,15 @@
   "disallowedConcepts": [
     "classes",
     "external packages",
-    "advanced multi-file applications"
+    "advanced multi-file applications",
+    "absolute paths",
+    "manual workspace file creation without validation"
   ],
   "validationRequirements": {
     "goldenTestsRequired": true,
-    "requireFunctionFocusedChecks": true
+    "requireFunctionFocusedChecks": true,
+    "requireSemanticForFunctionReturnExercises": true,
+    "requireFixedTestsForFileIoExercises": true,
+    "requireExplicitImportTopicBeforeCsv": true
   }
 }

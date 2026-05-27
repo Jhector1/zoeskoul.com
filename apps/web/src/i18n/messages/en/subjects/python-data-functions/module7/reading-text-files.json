@@ -1,6 +1,6 @@
 {
   "topics": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-7-files-exceptions-and-data-cleaning": {
         "reading-text-files": {
           "label": "Reading Text Files",
@@ -195,7 +195,7 @@
     }
   },
   "sketches": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-7-files-exceptions-and-data-cleaning": {
         "reading-text-files": {
           "sketch1": {

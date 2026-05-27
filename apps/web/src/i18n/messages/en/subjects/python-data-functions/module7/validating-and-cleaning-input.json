@@ -1,6 +1,6 @@
 {
   "topics": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-7-files-exceptions-and-data-cleaning": {
         "validating-and-cleaning-input": {
           "label": "Validating and Cleaning Input",
@@ -201,7 +201,7 @@
     }
   },
   "sketches": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-7-files-exceptions-and-data-cleaning": {
         "validating-and-cleaning-input": {
           "sketch1": {

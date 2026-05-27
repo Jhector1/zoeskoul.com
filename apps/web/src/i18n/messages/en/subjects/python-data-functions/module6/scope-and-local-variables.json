@@ -1,6 +1,6 @@
 {
   "topics": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-6-functions-and-modularity": {
         "scope-and-local-variables": {
           "label": "Scope and Local Variables",
@@ -200,7 +200,7 @@
     }
   },
   "sketches": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-6-functions-and-modularity": {
         "scope-and-local-variables": {
           "sketch1": {

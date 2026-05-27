@@ -9,7 +9,13 @@ import { getCurriculumProfile } from "@zoeskoul/curriculum-profiles";
 function cleanString(value: unknown): string | undefined {
     return typeof value === "string" && value.trim() ? value.trim() : undefined;
 }
-
+function cleanCourseDescription(input: any): string | undefined {
+    return (
+        cleanString(input.description) ??
+        cleanString(input.courseOverview?.summary) ??
+        cleanString(input.subtitle)
+    );
+}
 function cleanStringArray(value: unknown): string[] | undefined {
     if (!Array.isArray(value)) return undefined;
 
@@ -438,6 +444,8 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
             ? input.targetLocales.filter((x: unknown): x is string => typeof x === "string")
             : [],
         title: String(input.title ?? "").trim(),
+        description: cleanCourseDescription(input),
+
         trackSlug: cleanString(input.trackSlug),
         courseNumber:
             typeof input.courseNumber === "number" && Number.isFinite(input.courseNumber)

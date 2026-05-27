@@ -6,6 +6,7 @@ import type {
     WorkspaceLanguage,
 } from "@zoeskoul/curriculum-contracts";
 import {
+    createJudge0CodeRunnerFromEnv,
     validateCodeAgainstTests,
     validateSemanticCode,
 } from "@zoeskoul/curriculum-runtime";
@@ -13,6 +14,11 @@ import {
     buildCodeInputExpected,
 } from "../base/codeInputExpected.js";
 import type { GoldenValidationIssue } from "./profileServices.js";
+
+
+
+
+
 
 function normalizeWorkspaceFiles(
     files: ManifestStarterFiles | undefined,
@@ -94,6 +100,23 @@ export async function validateCodeProfileGolden(args: {
     topicBundle: TopicBundleManifest;
 }): Promise<GoldenValidationIssue[]> {
     const issues: GoldenValidationIssue[] = [];
+
+
+
+    const sharedCodeRunner = createJudge0CodeRunnerFromEnv();
+
+    if (!sharedCodeRunner) {
+        issues.push({
+            code: "CODE_PROFILE_SHARED_RUNNER_UNAVAILABLE",
+            category: "runtime",
+            severity: "error",
+            message:
+                "JUDGE0_URL is required for code profile golden validation so curriculum golden and web grading use the same runtime.",
+        });
+
+        return issues;
+    }
+
 
     const runtime = args.topicBundle.runtimeDefaults;
     if (runtime?.kind === "sql") {
@@ -213,9 +236,9 @@ export async function validateCodeProfileGolden(args: {
             solutionCode,
             tests: expected.tests,
             files: collectExerciseWorkspaceFiles(exercise),
-            limits: { timeoutMs: 4000 },
+            limits: { cpu_time_limit: 2, wall_time_limit: 6, memory_limit: 256000 },
+            runner: sharedCodeRunner,
         });
-
         if (!run.ok) {
             const code =
                 run.reason === "runner_unavailable"

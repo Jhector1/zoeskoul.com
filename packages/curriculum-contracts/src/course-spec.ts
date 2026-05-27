@@ -144,6 +144,8 @@ export type CourseSpec = {
     moduleAccessOverrideDefault?: "free" | "paid" | null;
     profileId: string;
     title: string;
+    description?: string;
+
     sourceLocale: string;
     targetLocales: string[];
     trackSlug?: string;

@@ -1,6 +1,6 @@
 {
   "topics": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-7-files-exceptions-and-data-cleaning": {
         "try-except-basics": {
           "label": "Try/Except Basics",
@@ -199,7 +199,7 @@
     }
   },
   "sketches": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-7-files-exceptions-and-data-cleaning": {
         "try-except-basics": {
           "sketch1": {

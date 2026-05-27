@@ -1,8 +1,8 @@
 {
   "topicId": "creating-and-indexing-lists",
-  "subjectSlug": "python--python-data-functions--draft",
+  "subjectSlug": "python-data-functions",
   "moduleSlug": "python-5-lists-tuples-and-dictionaries",
-  "sectionSlug": "python--python-data-functions--draft-python-5-list-basics",
+  "sectionSlug": "python-data-functions-python-5-list-basics",
   "prefix": "py5",
   "minutes": 24,
   "runtimeDefaults": {
@@ -15,35 +15,35 @@
     "supportsPackageInstall": false
   },
   "topic": {
-    "labelKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.label",
-    "summaryKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.summary"
+    "labelKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.label",
+    "summaryKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch0.title",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch0.title",
       "sketchId": "sketch1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch1.title",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch1.title",
       "sketchId": "sketch2",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch2.title",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch2.title",
       "sketchId": "sketch3",
       "height": 420
     },
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.quiz.title",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -58,7 +58,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.project.title",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -67,7 +67,7 @@
         "steps": [
           {
             "id": "quiz5",
-            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.projectSteps.quiz5.title",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.projectSteps.quiz5.title",
             "exerciseKey": "quiz5",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -76,7 +76,7 @@
           },
           {
             "id": "quiz6",
-            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.projectSteps.quiz6.title",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.projectSteps.quiz6.title",
             "exerciseKey": "quiz6",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -85,7 +85,7 @@
           },
           {
             "id": "quiz11",
-            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.projectSteps.quiz11.title",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.projectSteps.quiz11.title",
             "exerciseKey": "quiz11",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -100,20 +100,20 @@
     {
       "id": "sketch1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch1.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch1.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch1.bodyMarkdown"
     },
     {
       "id": "sketch2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch2.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch2.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch2.bodyMarkdown"
     },
     {
       "id": "sketch3",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch3.title",
-      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch3.bodyMarkdown"
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch3.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.sketch3.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -122,7 +122,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz1",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz1",
       "optionIds": [
         "a",
         "b"
@@ -137,7 +137,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz2",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz2",
       "optionIds": [
         "a",
         "b",
@@ -157,7 +157,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz3",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz3",
       "tokenIds": [
         "t1",
         "t2",
@@ -179,7 +179,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz4",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz4",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -191,7 +191,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz5",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz5",
       "language": "python",
       "starterCode": "# Create a list of your favorite fruits\nfruits = []\n\n# Print each fruit\nfor fruit in fruits:\n    print(fruit)",
       "starterFiles": [
@@ -238,7 +238,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz6",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz6",
       "language": "python",
       "starterCode": "# Modify the second element of the list\nfruits = ['apple', 'banana', 'cherry']\n\n# Change the second element to 'blueberry'\n\n# Print the updated list",
       "starterFiles": [
@@ -285,7 +285,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz7",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz7",
       "optionIds": [
         "a",
         "b",
@@ -302,7 +302,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz8",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz8",
       "optionIds": [
         "a",
         "b",
@@ -322,7 +322,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz9",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz9",
       "tokenIds": [
         "t1",
         "t2",
@@ -344,7 +344,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz10",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz10",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -356,7 +356,7 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz11",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.quiz11",
       "language": "python",
       "starterCode": "# Create a list of numbers\nnumbers = []\n\n# Print the first and last elements",
       "starterFiles": [

@@ -1,0 +1,218 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "scope-and-local-variables": {
+          "label": "Scope and Local Variables",
+          "summary": "Understand where variables exist and why local scope matters.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Scope"
+            },
+            "sketch1": {
+              "title": "Global vs Local Variables"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Scope and Local Variables Project"
+            }
+          },
+          "projectSteps": {
+            "quiz9": {
+              "title": "Local Scope Example"
+            },
+            "quiz10": {
+              "title": "Global and Local Variables"
+            },
+            "quiz11": {
+              "title": "Function with Local Variables"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Local Variable Access",
+              "prompt": "Where can a local variable be accessed?",
+              "hint": "Think about the scope of a local variable.",
+              "help": {
+                "concept": "Local variables are only accessible within the function they are defined in.",
+                "hint_1": "Local variables are confined to the function scope.",
+                "hint_2": "Local variables cannot be accessed outside their function."
+              },
+              "options": {
+                "a": "Anywhere in the program",
+                "b": "Only within the function it is defined",
+                "c": "Only outside the function it is defined",
+                "d": "In any function"
+              }
+            },
+            "quiz2": {
+              "title": "Global Variable Access",
+              "prompt": "Where can a global variable be accessed?",
+              "hint": "Consider the scope of a global variable.",
+              "help": {
+                "concept": "Global variables are accessible throughout the entire program.",
+                "hint_1": "Global variables can be accessed from any function.",
+                "hint_2": "Global variables are not confined to a single function."
+              },
+              "options": {
+                "a": "Only within the function it is defined",
+                "b": "Anywhere in the program",
+                "c": "Only outside the function it is defined",
+                "d": "In any function"
+              }
+            },
+            "quiz3": {
+              "title": "Variable Scope",
+              "prompt": "Select all statements that are true about variable scope in Python.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Local variables can be accessed anywhere in the program",
+                "b": "Global variables can be accessed anywhere in the program",
+                "c": "Local variables are confined to the function they are defined in",
+                "d": "Global variables are confined to the function they are defined in"
+              }
+            },
+            "quiz4": {
+              "title": "Function and Scope",
+              "prompt": "Which of the following statements are true about functions and scope?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Functions can access global variables",
+                "b": "Functions cannot access global variables",
+                "c": "Variables defined inside a function are local to that function",
+                "d": "Variables defined inside a function are global"
+              }
+            },
+            "quiz5": {
+              "title": "Order of Execution",
+              "prompt": "Arrange the steps in the correct order of execution for a function with local variables.",
+              "hint": "Consider how a function is called and executed.",
+              "help": {
+                "concept": "Understanding the order of execution helps in understanding scope.",
+                "hint_1": "A function must be defined before it is called.",
+                "hint_2": "Local variables are created when the function is called."
+              },
+              "tokens": {
+                "t1": "Define the function",
+                "t2": "Call the function",
+                "t3": "Execute the function body",
+                "t4": "Return from the function"
+              }
+            },
+            "quiz6": {
+              "title": "Scope and Execution",
+              "prompt": "Arrange the following in the order they occur when a function with local variables is executed.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Function is called",
+                "t2": "Local variables are initialized",
+                "t3": "Function body is executed",
+                "t4": "Function returns"
+              }
+            },
+            "quiz7": {
+              "title": "Local Variable Definition",
+              "prompt": "Complete the statement: A variable defined inside a function is called a [blank1] variable.",
+              "hint": "This type of variable is only accessible within the function.",
+              "help": {
+                "concept": "the missing term variables are defined within a function and are not accessible outside of it.",
+                "hint_1": "These variables are confined to the function scope.",
+                "hint_2": "They are not global."
+              },
+              "template": "A variable defined inside a function is called a [blank1] variable.",
+              "choices": [
+                "global",
+                "local",
+                "static",
+                "dynamic"
+              ]
+            },
+            "quiz8": {
+              "title": "Global Variable Definition",
+              "prompt": "Complete the statement: A variable defined outside any function is called a [blank1] variable.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "A variable defined outside any function is called a [blank1] variable.",
+              "choices": [
+                "global",
+                "local",
+                "static",
+                "dynamic"
+              ]
+            },
+            "quiz9": {
+              "title": "Local Scope Example",
+              "prompt": "Write a function `calculate_area` that calculates the area of a rectangle. The function should take two parameters, `width` and `height`, and return the area. Use local variables only. Then read the input values, call the function, and print the returned result.",
+              "hint": "Read the task \"Local Scope Example\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Local Scope Example\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def calculate_area(width, height):\n    # Calculate the area\n    \n    # Return the area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))"
+            },
+            "quiz10": {
+              "title": "Global and Local Variables",
+              "prompt": "Write a function `increment_global` that increments a global variable `counter` by 1 each time it is called. Demonstrate the use of both global and local variables. Then read the input values, call the function, and print the returned result.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "counter = 0\n\ndef increment_global():\n    # Use global keyword\n    \n    # Increment the counter\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nprint(increment_global())"
+            },
+            "quiz11": {
+              "title": "Function with Local Variables",
+              "prompt": "Write a function `greet_user` that takes a user's name as a parameter and returns a greeting message. Use a local variable to store the message. Then read the input values, call the function, and print the returned result.",
+              "hint": "Read the task \"Function with Local Variables\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Function with Local Variables\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def greet_user(name):\n    # Create a greeting message\n    \n    # Return the message\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nname = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(greet_user(name))"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "scope-and-local-variables": {
+          "sketch1": {
+            "title": "Understanding Scope",
+            "bodyMarkdown": "In Python, the scope of a variable determines where that variable can be accessed. Variables defined inside a function are local to that function and cannot be accessed outside of it. This is known as local scope. Variables defined outside of any function are global and can be accessed anywhere in the code.\n\n```python\ndef my_function():\n    local_var = 10\n    print(local_var)\n\nmy_function()\n# print(local_var)  # This would cause an error because local_var is not defined outside the function.\n```\n\nTry it yourself: Modify the function to return the local variable and print it outside the function.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch2": {
+            "title": "Global vs Local Variables",
+            "bodyMarkdown": "Global variables are accessible throughout the entire program, whereas local variables are only accessible within the function they are defined in.\n\n```python\nglobal_var = 5\n\ndef my_function():\n    local_var = 10\n    print('Inside function:', local_var)\n    print('Inside function:', global_var)\n\nmy_function()\nprint('Outside function:', global_var)\n# print('Outside function:', local_var)  # This would cause an error.\n```\n\nTry this: Add a new global variable and access it inside the function.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

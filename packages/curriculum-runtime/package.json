@@ -17,7 +17,8 @@
     "./sql": {
       "types": "./dist/sql/index.d.ts",
       "default": "./dist/sql/index.js"
-    }, "./review": {
+    },
+    "./review": {
       "types": "./dist/review/index.d.ts",
       "default": "./dist/review/index.js"
     }
@@ -31,6 +32,7 @@
   "dependencies": {
     "@zoeskoul/curriculum-contracts": "workspace:*",
     "@zoeskoul/curriculum-core": "workspace:*",
-    "@zoeskoul/practice-checks": "workspace:*"
+    "@zoeskoul/practice-checks": "workspace:*",
+    "jszip": "^3.10.1"
   }
 }

@@ -48,7 +48,21 @@ function assertVersioning(args: {
         );
     }
 }
+function cleanText(value: unknown): string | undefined {
+    return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
 
+function resolveCourseDescription(args: {
+    spec: CourseSpec;
+    blueprint: CourseBlueprint;
+}): string | undefined {
+    return (
+        cleanText((args.spec as any).description) ??
+        cleanText(args.spec.courseOverview?.summary) ??
+        cleanText(args.spec.subtitle) ??
+        cleanText(args.blueprint.description)
+    );
+}
 function withLiveSubjectIdentity(args: {
     blueprint: CourseBlueprint;
     subjectPlan: SubjectPlan;
@@ -79,6 +93,10 @@ function withLiveSubjectIdentity(args: {
         sourceLocale: args.spec.sourceLocale as CourseBlueprint["sourceLocale"],
         targetLocales: args.spec.targetLocales as CourseBlueprint["targetLocales"],
         title: args.spec.title || args.blueprint.title,
+        description: resolveCourseDescription({
+            spec: args.spec,
+            blueprint: args.blueprint,
+        }),
         workspaceProfileId: args.spec.workspaceProfileId ?? args.blueprint.workspaceProfileId,
         workspacePolicyId: args.spec.workspacePolicyId ?? args.blueprint.workspacePolicyId,
         workspaceOverrides: args.spec.workspaceOverrides ?? args.blueprint.workspaceOverrides,

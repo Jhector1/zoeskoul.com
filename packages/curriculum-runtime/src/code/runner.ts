@@ -1,3 +1,16 @@
+export type RunCodeLimits = {
+    timeoutMs?: number;
+
+    cpu_time_limit?: number;
+    cpu_extra_time?: number;
+    wall_time_limit?: number;
+    memory_limit?: number;
+    stack_limit?: number;
+    max_processes_and_or_threads?: number;
+    enable_network?: boolean;
+    number_of_runs?: number;
+} & Record<string, unknown>;
+
 export type RunCodeFn = (args: {
     language: string;
     code: string;
@@ -10,11 +23,14 @@ export type RunCodeFn = (args: {
         readOnly?: boolean;
     }>
         | Record<string, string>;
-    limits?: { timeoutMs?: number } & Record<string, unknown>;
+    limits?: RunCodeLimits;
 }) => Promise<{
     ok: boolean;
-    stdout?: string;
-    stderr?: string;
+    stdout?: string | null;
+    stderr?: string | null;
+    compile_output?: string | null;
+    message?: string | null;
+    status?: string;
     exitCode?: number | null;
     error?: string;
     timedOut?: boolean;

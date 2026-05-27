@@ -1,0 +1,218 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "parameters-and-return-values": {
+          "label": "Parameters and Return Values",
+          "summary": "Pass data into functions and return results.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Parameters"
+            },
+            "sketch1": {
+              "title": "Return Values Explained"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Function Implementation Project"
+            }
+          },
+          "projectSteps": {
+            "quiz9": {
+              "title": "Sum Function"
+            },
+            "quiz10": {
+              "title": "Multiply Function"
+            },
+            "quiz11": {
+              "title": "Divide Function"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Function Parameters",
+              "prompt": "What is the purpose of parameters in a function?",
+              "hint": "Parameters allow functions to accept input values.",
+              "help": {
+                "concept": "Parameters are used to pass data into functions.",
+                "hint_1": "Parameters act as placeholders for input values.",
+                "hint_2": "Think about how functions use parameters to perform operations on input data."
+              },
+              "options": {
+                "a": "To define the function's name",
+                "b": "To pass data into the function",
+                "c": "To return data from the function",
+                "d": "To print data to the output panel"
+              }
+            },
+            "quiz2": {
+              "title": "Return Values",
+              "prompt": "What does a return statement do in a function?",
+              "hint": "The return statement sends a value back to the caller.",
+              "help": {
+                "concept": "Return statements provide output from a function.",
+                "hint_1": "Return statements end the function and send back a value.",
+                "hint_2": "Consider how return values can be used in further calculations."
+              },
+              "options": {
+                "a": "It prints a value to the output panel",
+                "b": "It stops the function from executing",
+                "c": "It sends a value back to the caller",
+                "d": "It defines a new function"
+              }
+            },
+            "quiz3": {
+              "title": "Using Parameters",
+              "prompt": "Which of the following are true about function parameters? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Parameters can be used to pass data into functions",
+                "b": "Parameters are optional in all functions",
+                "c": "Parameters can be used to perform operations on input data",
+                "d": "Parameters are always strings"
+              }
+            },
+            "quiz4": {
+              "title": "Return Statement Characteristics",
+              "prompt": "Select all correct statements about the return statement in Python functions.",
+              "hint": "Return statements provide output from functions.",
+              "help": {
+                "concept": "Return statements end function execution and provide output.",
+                "hint_1": "Return statements can send back any data type.",
+                "hint_2": "Return statements end the function's execution."
+              },
+              "options": {
+                "a": "A return statement can return multiple values",
+                "b": "A return statement ends the function's execution",
+                "c": "A return statement can only return integers",
+                "d": "A return statement is optional in functions"
+              }
+            },
+            "quiz5": {
+              "title": "Function Call Order",
+              "prompt": "Arrange the steps in the correct order to call a function and use its return value.",
+              "hint": "Consider the sequence from defining a function to using its return value.",
+              "help": {
+                "concept": "Function calls follow a specific sequence from definition to execution.",
+                "hint_1": "Start with defining the function.",
+                "hint_2": "End with using the return value."
+              },
+              "tokens": {
+                "t1": "Define the function",
+                "t2": "Call the function",
+                "t3": "Store the return value",
+                "t4": "Use the return value"
+              }
+            },
+            "quiz6": {
+              "title": "Return Statement Execution",
+              "prompt": "Arrange the steps in the correct order for executing a return statement in a function.",
+              "hint": "Think about what happens from entering the function to returning a value.",
+              "help": {
+                "concept": "Return statements follow a sequence from function entry to returning a value.",
+                "hint_1": "Start with entering the function.",
+                "hint_2": "End with returning the value."
+              },
+              "tokens": {
+                "t1": "Enter the function",
+                "t2": "Execute the function body",
+                "t3": "Reach the return statement",
+                "t4": "Return the value"
+              }
+            },
+            "quiz7": {
+              "title": "Function Definition",
+              "prompt": "Complete the function definition: `def [blank1](x, y): return x + y`",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "def [blank1](x, y): return x + y",
+              "choices": [
+                "add",
+                "subtract",
+                "multiply",
+                "divide"
+              ]
+            },
+            "quiz8": {
+              "title": "Return Statement",
+              "prompt": "Complete the return statement: `return [blank1]`",
+              "hint": "The return value should be the result of the function's operation.",
+              "help": {
+                "concept": "Return statements send back the result of a function's operation.",
+                "hint_1": "Consider what the function is supposed to return.",
+                "hint_2": "The function returns the sum of two numbers."
+              },
+              "template": "return [blank1]",
+              "choices": [
+                "x + y",
+                "x - y",
+                "x * y",
+                "x / y"
+              ]
+            },
+            "quiz9": {
+              "title": "Sum Function",
+              "prompt": "Write a function `sum_numbers` that takes two parameters and returns their sum. Then read the input values, call the function, and print the returned result.",
+              "hint": "Read the task \"Sum Function\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Sum Function\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def sum_numbers(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(sum_numbers(a, b))"
+            },
+            "quiz10": {
+              "title": "Multiply Function",
+              "prompt": "Create a function `multiply` that takes two parameters and returns their product. Then read the input values, call the function, and print the returned result.",
+              "hint": "Read the task \"Multiply Function\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Multiply Function\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def multiply(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(multiply(a, b))"
+            },
+            "quiz11": {
+              "title": "Divide Function",
+              "prompt": "Write a function `divide` that takes two parameters and returns their quotient. Then read the input values, call the function, and print the returned result.",
+              "hint": "Read the task \"Divide Function\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Divide Function\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def divide(a, b):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\na = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nb = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(divide(a, b))"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "parameters-and-return-values": {
+          "sketch1": {
+            "title": "Understanding Parameters",
+            "bodyMarkdown": "Parameters are variables that allow you to pass data into functions. They act as placeholders for the actual values you provide when you call the function. For example:\n\n```python\ndef greet(name):\n    print(f\"Hello, {name}!\")\n\ngreet(\"Alice\")\n```\n\nIn this example, `name` is a parameter. When we call `greet(\"Alice\")`, the string \"Alice\" is passed to the function, and the output is `Hello, Alice!`. Try it yourself by changing the name to see different outputs.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch2": {
+            "title": "Return Values Explained",
+            "bodyMarkdown": "A return value is the result that a function sends back to the part of the program that called it. This allows you to use the result in further calculations or operations. Consider this example:\n\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(3, 4)\nprint(result)\n```\n\nHere, the function `add` takes two parameters, `a` and `b`, and returns their sum. The `result` variable stores the returned value, which is then printed as `7`. Try modifying the numbers to see how the return value changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

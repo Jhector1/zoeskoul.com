@@ -1,6 +1,6 @@
 {
   "topics": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "updating-and-looping-dictionaries": {
           "label": "Updating and Looping Dictionaries",
@@ -196,7 +196,7 @@
     }
   },
   "sketches": {
-    "python--python-data-functions--draft": {
+    "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "updating-and-looping-dictionaries": {
           "sketch1": {

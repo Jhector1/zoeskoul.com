@@ -3,6 +3,7 @@
   "subjectSlug": "python",
   "profileId": "python",
   "title": "Python Data and Functions",
+  "description": "Build practical Python skills with lists, tuples, dictionaries, functions, helper modules, files, exceptions, and simple data cleaning.",
   "subtitle": "Organize data, write reusable code, and process files",
   "intendedFor": "Learners who know basic Python syntax and want to work with collections, functions, files, exceptions, and simple data-cleaning tasks.",
   "sourceLocale": "en",
@@ -75,23 +76,31 @@
   "authoringGuidance": [
     "This course must always use profileId python, subjectSlug python, and courseSlug python-data-functions.",
     "Do not use SQL datasets, SQL tables, sql_query recipes, datasetId, fixedSqlDialect, resultShape, or checkSql in Python lessons.",
-    "Module 5 should mostly use fixed_tests for deterministic collection behavior.",
-    "Module 6 should prefer semantic checks for function structure, parameters, return behavior, print-vs-return, and local scope.",
+    "Module 5 should mostly use fixed_tests for deterministic collection behavior unless the exercise is explicitly function-return based.",
+    "Module 6 should prefer semantic checks for function structure, parameters, return behavior, print-vs-return, local scope, helper functions, and import/helper-module behavior.",
+    "Module 6 must explicitly teach import statements and helper files in using-imports-and-helper-files before Module 7 assumes import csv.",
     "Module 7 should use fixed_tests with provided files / tests[].files fixtures and keep browser-python-files-runner behavior for file I/O lessons.",
-    "Use folders/files in Module 6 only when modularity or organization is the learning goal.",
+    "Module 7 should teach file creation as opening a path with write/append mode and writing content, not as manual workspace-file creation unless workspaceExpectations validates the required path.",
+    "Use folders/files in Module 6 only when modularity, helper files, or import organization is the learning goal.",
     "Prefer provided starterFiles over asking learners to create files from scratch on the first compile pass.",
-    "Write code_input solutions as complete runnable programs or function-based exercises with deterministic tests.",
-    "Keep examples focused on lists, dictionaries, functions, files, exceptions, and simple data cleaning."
+    "Write code_input solutions as complete runnable programs for fixed_tests or clean function/class definitions for semantic exercises.",
+    "For function-return tasks, do not expose hidden harness code such as import ast, _parse_arg, _inputs, or ast.literal_eval in starterCode or solutionCode.",
+    "Keep examples focused on lists, dictionaries, functions, imports, helper modules, files, exceptions, and simple data cleaning."
   ],
   "courseGenerationPolicy": {
     "notes": [
       "Function basics should usually be single-file main.py exercises.",
       "Use semantic checks when the learner must define a function, use parameters, return a value, avoid print-only solutions, or demonstrate local scope.",
+      "Use semantic function_returns checks for function-return exercises. Do not convert list/dict/function arguments through visible stdin parsing wrappers.",
+      "Use fixed_tests only when the learner is practicing input(), print(), exact terminal output, file reading, file writing, paths, exceptions, CSV scripts, or other runnable-program behavior.",
+      "Teach imports explicitly in using-imports-and-helper-files before any lesson expects learners to understand import helpers, from helpers import ..., or import csv.",
       "Use provided starterFiles for small modularity exercises, for example main.py plus helpers.py, or src/main.py plus src/helpers/formatting.py.",
       "Do not ask learners to create new folders/files in normal graded exercises unless workspaceExpectations or equivalent required-path validation is available.",
       "If the exercise needs a helper module but the checker cannot validate newly created files, provide the helper file in starterFiles and ask the learner to edit it.",
       "If asking learners to create folders/files in a project-style exercise, state the exact required paths and validate them.",
-      "Compile in this order: creating-and-indexing-lists; list-methods-and-mutation; looping-through-lists; dictionary-basics; updating-and-looping-dictionaries; nested-data-structures; defining-and-calling-functions; parameters-and-return-values; print-vs-return; scope-and-local-variables; decomposition-and-refactoring; docstrings-and-function-contracts; reading-text-files; writing-text-files; working-with-paths; try-except-basics; validating-and-cleaning-input; simple-csv-processing.",
+      "For writing-text-files, teach file creation through with open(path, \"w\") as file: file.write(...), then verify behavior through stdout summaries or validated fixture/output checks.",
+      "For simple-csv-processing, show import csv explicitly and prefer csv.DictReader examples that print selected fields or print dict(row) when dictionary display is required across Python versions.",
+      "Compile in this order: creating-and-indexing-lists; list-methods-and-mutation; looping-through-lists; dictionary-basics; updating-and-looping-dictionaries; nested-data-structures; defining-and-calling-functions; parameters-and-return-values; print-vs-return; scope-and-local-variables; decomposition-and-refactoring; using-imports-and-helper-files; docstrings-and-function-contracts; reading-text-files; writing-text-files; working-with-paths; try-except-basics; validating-and-cleaning-input; simple-csv-processing.",
       "Use creating-and-indexing-lists as the first smoke topic.",
       "Use reading-text-files as the first file/folder runtime proof topic."
     ]
@@ -102,6 +111,7 @@
       "Short concept sketches",
       "Collection practice",
       "Function-writing exercises",
+      "Helper-module/import exercises",
       "File-processing tasks",
       "Module projects",
       "Data utility final project"
@@ -117,47 +127,51 @@
     {
       "moduleNumber": 6,
       "notes": [
-        "Use multi-file starter workspaces only for modularity/refactoring lessons where organization is the learning goal."
+        "Use multi-file starter workspaces only for modularity/refactoring/import lessons where organization is the learning goal.",
+        "using-imports-and-helper-files must introduce import helpers and from helpers import clean_name style examples before Module 7 uses import csv.",
+        "Function-return exercises in this module should use semantic function_returns checks, not fixed stdout wrappers."
       ]
     },
     {
       "moduleNumber": 7,
       "workspaceProfileId": "browser-python-files-runner",
       "notes": [
-        "This module uses a browser files panel with provided fixture files for file I/O lessons."
+        "This module uses a browser files panel with provided fixture files for file I/O lessons.",
+        "Teach file creation through write/append modes and file.write(), with tests that verify observable behavior.",
+        "Use fixed_tests with tests[].files for reading/CSV/path lessons and avoid requiring manual file creation unless workspaceExpectations validates the required paths."
       ]
     }
   ],
   "topicPolicies": {
     "creating-and-indexing-lists": {
       "notes": [
-        "Prefer fixed_tests for this topic."
+        "Prefer fixed_tests for direct list scripts; use semantic if the learner is completing a function that returns a list value."
       ]
     },
     "list-methods-and-mutation": {
       "notes": [
-        "Prefer fixed_tests for this topic."
+        "Prefer fixed_tests for direct mutation scripts; use semantic when checking a function return value or mutated argument behavior."
       ]
     },
     "looping-through-lists": {
       "notes": [
-        "Prefer fixed_tests for this topic."
+        "Prefer fixed_tests for printed loop output; use semantic when the task is to return a derived list."
       ]
     },
     "dictionary-basics": {
       "notes": [
-        "Prefer fixed_tests for this topic."
+        "Prefer fixed_tests for direct dictionary scripts; use semantic when the learner completes a function that returns or updates dictionary data."
       ]
     },
     "updating-and-looping-dictionaries": {
       "notes": [
-        "Prefer fixed_tests for this topic."
+        "Prefer fixed_tests for printed dictionary loops; use semantic for dictionary transformation helper functions."
       ]
     },
     "nested-data-structures": {
       "notes": [
-        "Prefer fixed_tests for this topic.",
-        "Use semantic checks only when you need to verify nested-access structure rather than output."
+        "Prefer fixed_tests for observable nested-data scripts.",
+        "Use semantic checks when you need to verify returned nested data rather than output."
       ]
     },
     "defining-and-calling-functions": {
@@ -168,7 +182,8 @@
     },
     "parameters-and-return-values": {
       "notes": [
-        "Prefer semantic checks for parameters and return behavior."
+        "Prefer semantic function_returns checks for parameters and return behavior.",
+        "Do not use visible _parse_arg / ast.literal_eval wrappers for list or dictionary arguments."
       ]
     },
     "print-vs-return": {
@@ -183,8 +198,16 @@
     },
     "decomposition-and-refactoring": {
       "notes": [
-        "Use semantic checks plus fixed_tests for behavior.",
+        "Use semantic checks for helper-function behavior and fixed_tests only for final runnable-program output.",
         "If multiple files help teach modularity, provide them in starterFiles instead of asking learners to create them from scratch."
+      ]
+    },
+    "using-imports-and-helper-files": {
+      "notes": [
+        "Teach import helpers, from helpers import ..., and simple helper-module organization.",
+        "Use starterFiles such as main.py and helpers.py so learners focus on imports rather than manual file creation.",
+        "Use semantic checks for helper function return behavior and fixed_tests for full main.py output behavior.",
+        "This topic must come before simple-csv-processing assumes import csv."
       ]
     },
     "docstrings-and-function-contracts": {
@@ -194,18 +217,22 @@
     },
     "reading-text-files": {
       "notes": [
-        "Use fixed_tests with provided files / tests[].files fixtures."
+        "Use fixed_tests with provided files / tests[].files fixtures.",
+        "Do not require learners to create input files manually."
       ]
     },
     "writing-text-files": {
       "notes": [
-        "Use fixed_tests with provided files / tests[].files fixtures.",
-        "Check stdout summaries unless output-file assertions already cover the behavior."
+        "Use fixed_tests with provided files / tests[].files fixtures where needed.",
+        "Teach file creation through open(path, \"w\") or open(path, \"a\") and file.write().",
+        "Check stdout summaries unless output-file assertions already cover the behavior.",
+        "If asking learners to create a specific output file path, use workspaceExpectations or an output-file assertion path supported by the runner."
       ]
     },
     "working-with-paths": {
       "notes": [
-        "Use fixed_tests with nested fixture paths such as data/input.txt."
+        "Use fixed_tests with nested fixture paths such as data/input.txt.",
+        "Teach relative paths only; avoid absolute paths and OS-specific locations."
       ]
     },
     "try-except-basics": {
@@ -215,12 +242,15 @@
     },
     "validating-and-cleaning-input": {
       "notes": [
-        "Prefer fixed_tests for deterministic cleaning behavior."
+        "Use semantic checks when learners write cleaning helper functions that return cleaned data.",
+        "Use fixed_tests when the lesson is a runnable cleaning script that reads input or files and prints a report."
       ]
     },
     "simple-csv-processing": {
       "notes": [
-        "Use fixed_tests with provided CSV fixture files."
+        "Use fixed_tests with provided CSV fixture files.",
+        "Explicitly include import csv in explanation, starter code, or solution because imports are taught in using-imports-and-helper-files.",
+        "Use csv.DictReader for dictionary rows and prefer printing selected fields. When a full row dictionary must be printed, use print(dict(row)) for Python-version-safe output."
       ]
     }
   },
@@ -333,23 +363,26 @@
       "moduleSlug": "python-6-functions-and-modularity",
       "prefix": "py6",
       "title": "Functions and Modularity",
-      "purpose": "Help learners organize code into reusable functions with clear inputs and outputs.",
+      "purpose": "Help learners organize code into reusable functions, helper modules, and simple imports with clear inputs and outputs.",
       "learningObjectives": [
         "Define functions",
         "Use parameters and return values",
-        "Separate program logic into small pieces"
+        "Separate program logic into small pieces",
+        "Use simple imports and helper modules"
       ],
       "guidedExercises": [
         "Write helper functions",
         "Refactor repeated code",
+        "Import helper functions from another file",
         "Test return values"
       ],
       "quizFocus": [
         "function calls",
         "scope",
-        "return vs print"
+        "return vs print",
+        "imports and helper files"
       ],
-      "moduleProject": "Refactor a calculator or text utility into several reusable functions.",
+      "moduleProject": "Refactor a calculator or text utility into reusable functions, then optionally split safe helper logic into main.py and helpers.py.",
       "sections": [
         {
           "sectionSlug": "python-6-function-basics",
@@ -417,6 +450,18 @@
               ]
             },
             {
+              "topicId": "using-imports-and-helper-files",
+              "title": "Using Imports and Helper Files",
+              "summary": "Use import statements and small helper modules to organize reusable code.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Use import statements",
+                "Import helper functions from another file",
+                "Explain when helper modules make code easier to organize"
+              ]
+            },
+            {
               "topicId": "docstrings-and-function-contracts",
               "title": "Docstrings and Function Contracts",
               "summary": "Document what a function expects and returns.",
@@ -436,23 +481,29 @@
       "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
       "prefix": "py7",
       "title": "Files, Exceptions, and Data Cleaning",
-      "purpose": "Teach learners how to read/write files and handle messy data without crashing programs.",
+      "purpose": "Teach learners how to read files, create/write files, import standard-library data tools, and handle messy data without crashing programs.",
       "learningObjectives": [
-        "Read and write text files",
+        "Read text files",
+        "Create and write text files",
+        "Use relative paths safely",
         "Handle exceptions",
-        "Clean structured text data"
+        "Clean structured text data",
+        "Use the csv module for simple CSV processing"
       ],
       "guidedExercises": [
         "Read files",
+        "Create and write output files",
         "Catch conversion errors",
         "Clean CSV-like data"
       ],
       "quizFocus": [
         "file modes",
+        "relative paths",
         "exception flow",
+        "csv module basics",
         "data cleaning patterns"
       ],
-      "moduleProject": "Build a small log or CSV cleaner that reads a file, validates rows, and writes a summary.",
+      "moduleProject": "Build a small log or CSV cleaner that reads a file, validates rows, and writes a summary file.",
       "sections": [
         {
           "sectionSlug": "python-7-file-io",
@@ -472,12 +523,13 @@
             {
               "topicId": "writing-text-files",
               "title": "Writing Text Files",
-              "summary": "Write output to files using safe file modes.",
+              "summary": "Create or overwrite text files by opening paths in write/append mode and writing content.",
               "minutes": 22,
               "technical": true,
               "learningGoals": [
-                "Write files",
-                "Choose file modes"
+                "Create files with write mode",
+                "Write strings safely",
+                "Choose write vs append modes"
               ]
             },
             {
@@ -522,11 +574,12 @@
             {
               "topicId": "simple-csv-processing",
               "title": "Simple CSV Processing",
-              "summary": "Read comma-separated rows and transform them into dictionaries.",
+              "summary": "Use the csv module to read comma-separated rows and transform them into dictionaries.",
               "minutes": 28,
               "technical": true,
               "learningGoals": [
-                "Parse CSV-like text",
+                "Import and use csv",
+                "Read rows with csv.DictReader",
                 "Summarize row data"
               ]
             }

@@ -215,7 +215,12 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
     if (!isNonEmptyString(spec.title)) {
         issues.push("title is required");
     }
-
+    if (
+        !isNonEmptyString((spec as any).description) &&
+        !isNonEmptyString(spec.courseOverview?.summary)
+    ) {
+        issues.push("description or courseOverview.summary is required");
+    }
     if (!isNonEmptyString(spec.sourceLocale)) {
         issues.push("sourceLocale is required");
     }

@@ -33,6 +33,66 @@ async function readJsonValidated(filePath: string) {
   return raw;
 }
 
+function rewriteSubjectSlugDeep(
+    value: unknown,
+    draftSubjectSlug: string,
+    liveSubjectSlug: string,
+): unknown {
+  if (draftSubjectSlug === liveSubjectSlug) {
+    return value;
+  }
+
+  if (typeof value === "string") {
+    return value.split(draftSubjectSlug).join(liveSubjectSlug);
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) =>
+        rewriteSubjectSlugDeep(item, draftSubjectSlug, liveSubjectSlug),
+    );
+  }
+
+  if (value && typeof value === "object") {
+    const next: Record<string, unknown> = {};
+
+    for (const [key, childValue] of Object.entries(
+        value as Record<string, unknown>,
+    )) {
+      const nextKey = key.split(draftSubjectSlug).join(liveSubjectSlug);
+      next[nextKey] = rewriteSubjectSlugDeep(
+          childValue,
+          draftSubjectSlug,
+          liveSubjectSlug,
+      );
+    }
+
+    return next;
+  }
+
+  return value;
+}
+
+function rewriteJsonRawForLiveSubject(args: {
+  raw: string;
+  draftSubjectSlug: string;
+  liveSubjectSlug: string;
+}) {
+  JSON.parse(args.raw);
+
+  if (args.draftSubjectSlug === args.liveSubjectSlug) {
+    return args.raw;
+  }
+
+  const parsed = JSON.parse(args.raw);
+  const rewritten = rewriteSubjectSlugDeep(
+      parsed,
+      args.draftSubjectSlug,
+      args.liveSubjectSlug,
+  );
+
+  return `${JSON.stringify(rewritten, null, 2)}\n`;
+}
+
 async function writeRawAtomic(filePath: string, raw: string) {
   const tempPath = `${filePath}.tmp`;
   await ensureDir(filePath);
@@ -66,6 +126,20 @@ function getBackupSubjectMessagesPath(
   );
 }
 
+async function readDraftJsonForLive(args: {
+  filePath: string;
+  draftSubjectSlug: string;
+  liveSubjectSlug: string;
+}) {
+  const raw = await readJsonValidated(args.filePath);
+
+  return rewriteJsonRawForLiveSubject({
+    raw,
+    draftSubjectSlug: args.draftSubjectSlug,
+    liveSubjectSlug: args.liveSubjectSlug,
+  });
+}
+
 export async function publishDraft(args: { subjectSlug: string }) {
   return publishDraftToLive({
     draftSubjectSlug: args.subjectSlug,
@@ -94,12 +168,20 @@ export async function publishDraftToLive(args: {
       getBackupSubjectManifestPath(timestamp, args.liveSubjectSlug),
   );
 
-  const manifestRaw = await readJsonValidated(draftManifestPath);
+  const manifestRaw = await readDraftJsonForLive({
+    filePath: draftManifestPath,
+    draftSubjectSlug: args.draftSubjectSlug,
+    liveSubjectSlug: args.liveSubjectSlug,
+  });
+
   await writeRawAtomic(liveManifestPath, manifestRaw);
 
   const draftModulesRoot = path.join(draftSubjectRoot, "modules");
+
   if (await pathExists(draftModulesRoot)) {
-    const moduleDirs = await fs.readdir(draftModulesRoot, { withFileTypes: true });
+    const moduleDirs = await fs.readdir(draftModulesRoot, {
+      withFileTypes: true,
+    });
 
     for (const moduleDir of moduleDirs) {
       if (!moduleDir.isDirectory()) continue;
@@ -119,6 +201,7 @@ export async function publishDraftToLive(args: {
             moduleDir.name,
             topicId,
         );
+
         const liveBundlePath = getTopicBundlePath(
             args.liveSubjectSlug,
             moduleDir.name,
@@ -135,19 +218,27 @@ export async function publishDraftToLive(args: {
             ),
         );
 
-        const bundleRaw = await readJsonValidated(draftBundlePath);
+        const bundleRaw = await readDraftJsonForLive({
+          filePath: draftBundlePath,
+          draftSubjectSlug: args.draftSubjectSlug,
+          liveSubjectSlug: args.liveSubjectSlug,
+        });
+
         await writeRawAtomic(liveBundlePath, bundleRaw);
       }
     }
   }
 
   if (await pathExists(draftMessagesRoot)) {
-    const localeDirs = await fs.readdir(draftMessagesRoot, { withFileTypes: true });
+    const localeDirs = await fs.readdir(draftMessagesRoot, {
+      withFileTypes: true,
+    });
 
     for (const localeDir of localeDirs) {
       if (!localeDir.isDirectory()) continue;
 
       const locale = localeDir.name;
+
       const draftSubjectMessagesDir = path.join(
           draftMessagesRoot,
           locale,
@@ -176,14 +267,25 @@ export async function publishDraftToLive(args: {
       if (await pathExists(draftSubjectJsonPath)) {
         await backupIfExists(
             liveSubjectJsonPath,
-            getBackupSubjectMessagesPath(timestamp, locale, args.liveSubjectSlug),
+            getBackupSubjectMessagesPath(
+                timestamp,
+                locale,
+                args.liveSubjectSlug,
+            ),
         );
 
-        const subjectMessageRaw = await readJsonValidated(draftSubjectJsonPath);
+        const subjectMessageRaw = await readDraftJsonForLive({
+          filePath: draftSubjectJsonPath,
+          draftSubjectSlug: args.draftSubjectSlug,
+          liveSubjectSlug: args.liveSubjectSlug,
+        });
+
         await writeRawAtomic(liveSubjectJsonPath, subjectMessageRaw);
       }
 
-      const moduleDirs = await fs.readdir(draftSubjectMessagesDir, { withFileTypes: true });
+      const moduleDirs = await fs.readdir(draftSubjectMessagesDir, {
+        withFileTypes: true,
+      });
 
       for (const moduleDir of moduleDirs) {
         if (!moduleDir.isDirectory()) continue;
@@ -202,6 +304,7 @@ export async function publishDraftToLive(args: {
               moduleDir.name,
               topicId,
           );
+
           const liveMessagePath = getTopicMessagesPath(
               locale,
               args.liveSubjectSlug,
@@ -220,7 +323,12 @@ export async function publishDraftToLive(args: {
               ),
           );
 
-          const messageRaw = await readJsonValidated(draftMessagePath);
+          const messageRaw = await readDraftJsonForLive({
+            filePath: draftMessagePath,
+            draftSubjectSlug: args.draftSubjectSlug,
+            liveSubjectSlug: args.liveSubjectSlug,
+          });
+
           await writeRawAtomic(liveMessagePath, messageRaw);
         }
       }

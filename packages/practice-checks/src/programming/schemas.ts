@@ -7,6 +7,7 @@ import {
 } from "./types.js";
 
 export const ProgrammingLanguageSchema = z.enum(PROGRAMMING_LANGUAGES);
+
 type JsonValue =
     | string
     | number
@@ -25,6 +26,7 @@ const JsonValueSchema: z.ZodType<JsonValue> = z.lazy(() =>
         z.record(JsonValueSchema),
     ]),
 );
+
 const ProgrammingCodeFileSchema = z.object({
     path: z.string().min(1),
     content: z.string().default(""),
@@ -47,6 +49,13 @@ const WorkspaceExpectationsSchema = z.object({
 
 export const SemanticCheckSchema = z.discriminatedUnion("type", [
     z.object({
+        type: z.literal("function_returns"),
+        functionName: z.string().min(1),
+        args: z.array(JsonValueSchema).optional().default([]),
+        expected: JsonValueSchema,
+        message: z.string().optional(),
+    }),
+    z.object({
         type: z.literal("defines_class"),
         className: z.string().min(1),
         message: z.string().optional(),
@@ -54,13 +63,13 @@ export const SemanticCheckSchema = z.discriminatedUnion("type", [
     z.object({
         type: z.literal("constructible"),
         className: z.string().min(1),
-        constructorArgs: z.array(z.unknown()).optional().default([]),
+        constructorArgs: z.array(JsonValueSchema).optional().default([]),
         message: z.string().optional(),
     }),
     z.object({
         type: z.literal("instance_attributes"),
         className: z.string().min(1),
-        constructorArgs: z.array(z.unknown()).optional().default([]),
+        constructorArgs: z.array(JsonValueSchema).optional().default([]),
         attributes: z.array(z.string().min(1)).min(1),
         message: z.string().optional(),
     }),
@@ -99,14 +108,20 @@ export const ProgrammingExpectedSchema = z
         workspaceExpectations: WorkspaceExpectationsSchema.optional(),
         solutionCode: z.string().optional(),
     })
-    .transform((value): ProgrammingExpected => makeProgrammingExpected(value as ProgrammingExpectedInput))
+    .transform((value): ProgrammingExpected =>
+        makeProgrammingExpected(value as ProgrammingExpectedInput),
+    )
     .superRefine((value: ProgrammingExpected, ctx) => {
         if (value.checkMode === "semantic") {
-            if (!Array.isArray(value.semanticChecks) || value.semanticChecks.length < 1) {
+            if (
+                !Array.isArray(value.semanticChecks) ||
+                value.semanticChecks.length < 1
+            ) {
                 ctx.addIssue({
                     code: "custom",
                     path: ["semanticChecks"],
-                    message: "semantic code_input expected must include semanticChecks[].",
+                    message:
+                        "semantic code_input expected must include semanticChecks[].",
                 });
             }
             return;

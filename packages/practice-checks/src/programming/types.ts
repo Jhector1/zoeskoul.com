@@ -1,9 +1,3 @@
-
-
-
-
-
-
 export const PROGRAMMING_LANGUAGES = [
     "python",
     "java",
@@ -44,6 +38,13 @@ export type ProgrammingWorkspaceExpectations = {
 };
 
 export type SemanticCheck =
+    | {
+    type: "function_returns";
+    functionName: string;
+    args?: unknown[];
+    expected: unknown;
+    message?: string;
+}
     | {
     type: "defines_class";
     className: string;
@@ -122,7 +123,9 @@ export type ProgrammingExpectedInput = {
     solutionCode?: string;
 };
 
-function normalizeTestFiles(files: ProgrammingCodeFile[] | undefined) {
+function normalizeTestFiles(
+    files: ProgrammingCodeFile[] | undefined,
+): ProgrammingCodeFile[] | undefined {
     if (!Array.isArray(files) || files.length < 1) return undefined;
 
     const normalized = files

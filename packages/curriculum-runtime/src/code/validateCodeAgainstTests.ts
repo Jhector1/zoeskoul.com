@@ -1,5 +1,6 @@
 import { runLocalCode } from "./localRunner.js";
-import { getCodeRunner, type RunCodeFn } from "./runner.js";
+import { getCodeRunner, type RunCodeFn, type RunCodeLimits } from "./runner.js";
+import { createJudge0CodeRunnerFromEnv } from "./judge0Runner.js";
 import { stdoutMatches } from "@zoeskoul/practice-checks";
 
 export const DEFAULT_PROGRAMMING_MAX_TESTS = 12;
@@ -67,13 +68,17 @@ function mergeWorkspaceFiles(
     return merged.size > 0 ? [...merged.values()] : undefined;
 }
 
+function defaultRunner() {
+    return getCodeRunner() ?? createJudge0CodeRunnerFromEnv() ?? runLocalCode;
+}
+
 export async function validateCodeAgainstTests(args: {
     language: string;
     solutionCode: string;
     entry?: string;
     tests: RuntimeCodeTest[];
     files?: RuntimeCodeWorkspaceFiles;
-    limits?: { timeoutMs?: number } & Record<string, unknown>;
+    limits?: RunCodeLimits;
     maxTests?: number;
     runner?: RunCodeFn;
 }): Promise<
@@ -88,15 +93,17 @@ export async function validateCodeAgainstTests(args: {
         | "output_mismatch";
     testIndex?: number;
     message: string;
-    stdout?: string;
-    stderr?: string;
+    stdout?: string | null;
+    stderr?: string | null;
 }
 > {
-    const runner = args.runner ?? getCodeRunner() ?? runLocalCode;
+    const runner = args.runner ?? defaultRunner();
+
     const maxTests = Math.max(
         1,
         Number(args.maxTests ?? DEFAULT_PROGRAMMING_MAX_TESTS),
     );
+
     const trimmedTests = args.tests.slice(0, maxTests);
 
     for (let index = 0; index < trimmedTests.length; index += 1) {
@@ -117,12 +124,14 @@ export async function validateCodeAgainstTests(args: {
                 reason:
                     run.error?.includes(
                         "No local compiler-side runner is implemented",
-                    )
+                    ) || run.error?.includes("Missing Judge0")
                         ? "runner_unavailable"
                         : "execution_failed",
                 testIndex: index,
                 message:
                     run.error ??
+                    run.message ??
+                    run.compile_output ??
                     `Solution code failed to execute for test #${index + 1}.`,
                 stdout: run.stdout,
                 stderr: run.stderr,
