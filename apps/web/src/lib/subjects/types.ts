@@ -47,7 +47,7 @@ export type ReviewQuizSpec = {
     n?: number;
     allowReveal?: boolean;
     preferKind?: PracticeKind | null;
-    maxAttempts?: number;
+    maxAttempts?: number | null;
     runtime?: ManifestRuntimeDefaults | null;
 };
 
@@ -66,7 +66,7 @@ export type ReviewProjectStep = {
     preferKind?: PracticeKind | null;
     exerciseKey?: string;
     seedPolicy?: SeedPolicy;
-    maxAttempts?: number;
+    maxAttempts?: number | null;
     carryFromPrev?: boolean;
 };
 
@@ -80,9 +80,26 @@ export type ReviewProjectSpec = {
     difficulty?: Difficulty;
     preferKind?: PracticeKind | null;
     allowReveal?: boolean;
-    maxAttempts?: number;
+    maxAttempts?: number | null;
     steps: ReviewProjectStep[];
     runtime?: ManifestRuntimeDefaults | null;
+    tryIt?: boolean | string | null;
+    displayKind?: string | null;
+    uiKind?: string | null;
+};
+
+export type ReviewEmbeddedTryIt = {
+    id: string;
+    title?: string;
+    prompt?: string;
+    exerciseKey: string;
+    difficulty?: Difficulty;
+    preferKind?: PracticeKind | null;
+    seedPolicy?: SeedPolicy;
+    required?: boolean;
+    allowReveal?: boolean;
+    maxAttempts?: number | null;
+    spec: ReviewProjectSpec;
 };
 
 export type ReviewCardProgressMeta = {
@@ -108,6 +125,7 @@ export type ReviewCard =
     id: string;
     title?: string;
     markdown: string;
+    tryIt?: ReviewEmbeddedTryIt | null;
     spec?: any;
 })
     | (ReviewCardProgressMeta & {
@@ -115,6 +133,7 @@ export type ReviewCard =
     id: string;
     title?: string;
     sketchId: string;
+    tryIt?: ReviewEmbeddedTryIt | null;
     spec?: any;
     height?: number;
     props?: any;
@@ -131,6 +150,7 @@ export type ReviewCard =
     id: string;
     title?: string;
     passScore?: number;
+    tryIt?: boolean | string | null;
     spec: ReviewProjectSpec;
 })
     | ReviewVideoCard;

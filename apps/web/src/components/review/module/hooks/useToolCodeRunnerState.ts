@@ -355,6 +355,18 @@ function isExerciseToolKey(toolKey: string | null | undefined) {
     return typeof toolKey === "string" && toolKey.startsWith("exercise:");
 }
 
+function looksLikeExerciseStateKey(value: string | null | undefined) {
+    if (typeof value !== "string") return false;
+
+    const raw = value.trim();
+    if (!raw || raw.startsWith("exercise:") || raw.startsWith("card:")) return false;
+
+    const parts = raw.split(":").filter(Boolean);
+
+    // subject:module:section:topic:card:exercise...
+    return parts.length >= 6 && parts[parts.length - 1] !== "general";
+}
+
 function isCardToolKey(toolKey: string | null | undefined) {
     if (typeof toolKey !== "string" || !toolKey.trim()) return false;
     if (isExerciseToolKey(toolKey)) return false;
@@ -525,6 +537,7 @@ export function useToolCodeRunnerState(args: {
 
     const exercises = useReviewRuntimeStore((s) => s.exercises);
     const patchCard = useReviewRuntimeStore((s) => s.patchCard);
+    const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
 
     const versionStr = useMemo(() => {
         const moduleV = (progress as any)?.quizVersion ?? 0;
@@ -558,7 +571,12 @@ export function useToolCodeRunnerState(args: {
         setHydratedToolIdentity("");
     }, []);
 
-    const effectiveToolKey = effectiveBoundId ? `exercise:${effectiveBoundId}` : scopeKey;
+    const scopeKeyIsExercise = looksLikeExerciseStateKey(scopeKey);
+    const effectiveToolKey = effectiveBoundId
+        ? `exercise:${effectiveBoundId}`
+        : scopeKeyIsExercise
+            ? `exercise:${scopeKey}`
+            : scopeKey;
     const toolIdentity = useMemo(
         () => `${viewTid}::${effectiveToolKey}::${versionStr}`,
         [viewTid, effectiveToolKey, versionStr],
@@ -770,6 +788,16 @@ export function useToolCodeRunnerState(args: {
 
             const nextWorkspaceOrigin = latestWorkspaceIsUserWork ? "user" : "starter";
 
+            /**
+             * Passive starter/default hydration is not learner progress.
+             * It must not create DB/toolState rows for locked routes or overwrite
+             * saved user work. The live runtime exercise may still be registered
+             * by bindCodeInput/ensureExercise so Run/Check can read the contract.
+             */
+            if (!latestWorkspaceIsUserWork) {
+                return;
+            }
+
             if (exerciseKey && latest.workspace) {
                 const runtimeApi = useReviewRuntimeStore.getState();
                 const existingExercise = runtimeApi.exercises?.[exerciseKey] ?? null;
@@ -824,18 +852,18 @@ export function useToolCodeRunnerState(args: {
                             language: latest.lang,
                             lang: latest.lang,
                             workspace: latest.workspace,
-                            codeWorkspace: latest.workspace,
-                            ideWorkspace: latest.workspace,
+                                codeWorkspace: latest.workspace,
+                                ideWorkspace: latest.workspace,
                             stdin: latest.stdin,
                             codeStdin: latest.stdin,
                             code: nextCode,
                             source: nextCode,
 
-                            userEdited: latestWorkspaceIsUserWork,
-                            workspaceOrigin: nextWorkspaceOrigin,
+                                userEdited: latestWorkspaceIsUserWork,
+                                workspaceOrigin: nextWorkspaceOrigin,
 
                             workspaceStatus: "ready",
-                            starterHash: nextStarterHash,
+                                starterHash: nextStarterHash,
                             updatedAt: Date.now(),
 
                             subjectSlug: existingExercise?.subjectSlug,
@@ -897,16 +925,16 @@ export function useToolCodeRunnerState(args: {
                     stdin: latest.stdin,
                     workspace: latest.workspace ?? null,
 
-                    userEdited: latestWorkspaceIsUserWork,
-                    workspaceOrigin: nextWorkspaceOrigin as "user" | "starter",
+                        userEdited: latestWorkspaceIsUserWork,
+                        workspaceOrigin: nextWorkspaceOrigin as "user" | "starter",
                     updatedAt: Date.now(),
 
                     starterHash,
-                    sqlDialect: latest.sqlDialect,
-                    sqlDatasetId: latest.sqlDatasetId,
-                    sqlSchemaSql: latest.sqlSchemaSql,
-                    sqlSeedSql: latest.sqlSeedSql,
-                    sqlInitialTableSnapshots: latest.sqlInitialTableSnapshots,
+                        sqlDialect: latest.sqlDialect,
+                        sqlDatasetId: latest.sqlDatasetId,
+                        sqlSchemaSql: latest.sqlSchemaSql,
+                        sqlSeedSql: latest.sqlSeedSql,
+                        sqlInitialTableSnapshots: latest.sqlInitialTableSnapshots,
                 };
 
 
@@ -949,12 +977,37 @@ export function useToolCodeRunnerState(args: {
         await commitToolToProgress(latest);
     }, [cancel, prime, commitToolToProgress, progressHydrated, toolIdentity, versionStr, flushToolSnapshot]);
 
+    const preserveCurrentBoundContext = useCallback(() => {
+        if (!boundRef.current) return false;
+
+        /**
+         * Binding can legitimately change the right-rail scope from the quiz/card
+         * owner to the newly selected exercise owner. That scope flip must not
+         * clear the live bound snapshot; otherwise the pane falls back to the
+         * generic subject default even though the provider still considers the
+         * exercise bound.
+         */
+        boundContextRef.current = bindingContext;
+        setHydratedToolIdentity(toolIdentity);
+        return true;
+    }, [bindingContext, toolIdentity]);
+
     useEffect(() => {
         if (progressHydrated) {
             void commitToolToProgress(latestSnapRef.current);
         }
+        if (preserveCurrentBoundContext()) {
+            return;
+        }
         clearBoundState();
-    }, [viewTid, scopeKey, progressHydrated, commitToolToProgress, clearBoundState]);
+    }, [
+        viewTid,
+        scopeKey,
+        progressHydrated,
+        commitToolToProgress,
+        clearBoundState,
+        preserveCurrentBoundContext,
+    ]);
 
     const lastVersionRef = useRef<string | null>(null);
 
@@ -968,11 +1021,13 @@ export function useToolCodeRunnerState(args: {
 
         if (lastVersionRef.current !== versionStr) {
             void commitToolToProgress(latestSnapRef.current);
-            clearBoundState();
+            if (!preserveCurrentBoundContext()) {
+                clearBoundState();
+            }
         }
 
         lastVersionRef.current = versionStr;
-    }, [progressHydrated, versionStr, clearBoundState]);
+    }, [progressHydrated, versionStr, clearBoundState, preserveCurrentBoundContext]);
 
     useEffect(() => {
         if (!progressHydrated) return;
@@ -1149,6 +1204,8 @@ export function useToolCodeRunnerState(args: {
             sqlInitialTableSnapshots?: SqlTableSnapshots;
             exerciseKey?: string;
             preferSnapshot?: boolean;
+            userEdited?: boolean;
+            workspaceOrigin?: "user" | "saved" | "starter" | "empty" | string;
             onPatch: (patch: any) => void;
         }) => {
             if (boundRef.current && boundRef.current.id !== args2.id) {
@@ -1156,11 +1213,11 @@ export function useToolCodeRunnerState(args: {
             }
             const resolvedSql = resolveSqlRunnerConfig({
                 language: args2.lang,
-                sqlDialect: args2.sqlDialect ?? defaultSqlDialect,
-                sqlDatasetId: args2.sqlDatasetId,
-                sqlSchemaSql: args2.sqlSchemaSql,
-                sqlSeedSql: args2.sqlSeedSql,
-                sqlInitialTableSnapshots: args2.sqlInitialTableSnapshots,
+                    sqlDialect: args2.sqlDialect ?? defaultSqlDialect,
+                    sqlDatasetId: args2.sqlDatasetId,
+                    sqlSchemaSql: args2.sqlSchemaSql,
+                    sqlSeedSql: args2.sqlSeedSql,
+                    sqlInitialTableSnapshots: args2.sqlInitialTableSnapshots,
                 defaultSqlDialect,
             });
 
@@ -1322,13 +1379,46 @@ export function useToolCodeRunnerState(args: {
                     String(savedWorkspaceCode ?? "").trim() === "" &&
                     String(incomingWorkspaceCode ?? "").trim() !== ""
                 );
+            const existingExerciseForBind = exercises[targetKey] ?? null;
+            const existingExerciseForBindIsUserWork = isSavedUserWork(existingExerciseForBind);
+            const existingExerciseForBindWorkspaceKey = workspaceKeyOf(
+                existingExerciseForBind?.workspace ?? null,
+            );
+            const existingExerciseForBindCode =
+                deriveEntryCode(existingExerciseForBind?.workspace ?? null) ||
+                (typeof existingExerciseForBind?.code === "string"
+                    ? existingExerciseForBind.code
+                    : "");
+            const incomingBindHasContent = Boolean(
+                String(incomingWorkspaceCode ?? "").trim() ||
+                String(nextCode ?? "").trim(),
+            );
+            const existingRuntimeHasContent = Boolean(
+                String(existingExerciseForBindCode ?? "").trim(),
+            );
+            const shouldPreserveExistingRuntimeSnapshot =
+                !snapshotOverridesSaved &&
+                !existingExerciseForBindIsUserWork &&
+                !incomingBindHasContent &&
+                existingRuntimeHasContent &&
+                languageMatches(existingExerciseForBind);
 
-            const workspaceForBind = shouldUseSavedWorkspace
-                ? savedWorkspace
-                : nextWorkspace;
+            const workspaceForBind = shouldPreserveExistingRuntimeSnapshot
+                ? hydrateWorkspaceShellWithCode(
+                    existingExerciseForBind?.workspace ?? null,
+                    existingExerciseForBindCode,
+                )
+                : shouldUseSavedWorkspace
+                    ? savedWorkspace
+                    : nextWorkspace;
 
             const nextSnapCode =
                 deriveEntryCode(workspaceForBind) ||
+                (
+                    shouldPreserveExistingRuntimeSnapshot
+                        ? existingExerciseForBindCode
+                        : ""
+                ) ||
                 (typeof savedForBind?.code === "string" && savedForBind.code.trim() !== ""
                     ? savedForBind.code
                     : "") ||
@@ -1354,34 +1444,79 @@ export function useToolCodeRunnerState(args: {
                                 : "",
                 workspace: hydratedWorkspaceForBind,
                 workspaceKey: workspaceKeyOf(hydratedWorkspaceForBind),
-                sqlDialect:
+                    sqlDialect:
                     (savedForBind as any)?.sqlDialect ??
                     (savedForBind?.workspace as any)?.sqlDialect ??
                     resolvedSql.sqlDialect,
-                sqlDatasetId: firstNonBlank(
+                    sqlDatasetId: firstNonBlank(
                     (savedForBind as any)?.sqlDatasetId,
                     (savedForBind?.workspace as any)?.sqlDatasetId,
                     resolvedSql.sqlDatasetId,
                 ),
-                sqlSchemaSql: firstNonBlank(
+                    sqlSchemaSql: firstNonBlank(
                     (savedForBind as any)?.sqlSchemaSql,
                     (savedForBind?.workspace as any)?.sqlSchemaSql,
                     resolvedSql.sqlSchemaSql,
                 ),
-                sqlSeedSql: firstNonBlank(
+                    sqlSeedSql: firstNonBlank(
                     (savedForBind as any)?.sqlSeedSql,
                     (savedForBind?.workspace as any)?.sqlSeedSql,
                     resolvedSql.sqlSeedSql,
                 ),
-                starterHash:
+                    starterHash:
                     typeof savedForBind?.starterHash === "string"
                         ? savedForBind.starterHash
                         : currentStarterHash,
-                sqlInitialTableSnapshots:
+                    sqlInitialTableSnapshots:
                     (savedForBind as any)?.sqlInitialTableSnapshots ??
                     (savedForBind?.workspace as any)?.sqlInitialTableSnapshots ??
                     resolvedSql.sqlInitialTableSnapshots,
             };
+
+            const nextSnapIsLearnerOwned = Boolean(
+                isUserWork(savedForBind) ||
+                args2.userEdited === true ||
+                args2.workspaceOrigin === "user" ||
+                args2.workspaceOrigin === "saved"
+            );
+
+            /**
+             * Keep the runtime exercise store aligned with the actual Tools
+             * binding. This is what Check/Reveal/progress-save read from. Starter
+             * snapshots may establish a missing exercise contract, but they must
+             * not downgrade an existing runtime exercise or saved learner work.
+             */
+            const existingRuntimeDiffersFromBindContract =
+                existingExerciseForBind?.language !== nextSnap.lang ||
+                existingExerciseForBindWorkspaceKey !== nextSnap.workspaceKey ||
+                existingExerciseForBindCode !== nextSnap.code;
+            const shouldPatchRuntimeForBind =
+                nextSnapIsLearnerOwned ||
+                !existingExerciseForBind ||
+                (!existingExerciseForBindIsUserWork && existingRuntimeDiffersFromBindContract);
+
+            if (shouldPatchRuntimeForBind) {
+                patchExercise(targetKey, {
+                    language: nextSnap.lang,
+                    lang: nextSnap.lang,
+                    workspace: nextSnap.workspace ?? undefined,
+                    codeWorkspace: nextSnap.workspace ?? undefined,
+                    ideWorkspace: nextSnap.workspace ?? undefined,
+                    code: nextSnap.code,
+                    source: nextSnap.code,
+                    stdin: nextSnap.stdin,
+                    codeStdin: nextSnap.stdin,
+                    starterHash: nextSnap.starterHash,
+                    workspaceOrigin: nextSnapIsLearnerOwned ? "saved" : "starter",
+                    userEdited: nextSnapIsLearnerOwned,
+                    sqlDialect: nextSnap.sqlDialect,
+                    sqlDatasetId: nextSnap.sqlDatasetId,
+                    sqlSchemaSql: nextSnap.sqlSchemaSql,
+                    sqlSeedSql: nextSnap.sqlSeedSql,
+                    sqlInitialTableSnapshots: nextSnap.sqlInitialTableSnapshots,
+                    updatedAt: Date.now(),
+                } as any);
+            }
 
             if (
                 savedForBind &&
@@ -1451,10 +1586,9 @@ export function useToolCodeRunnerState(args: {
                     : nextSnap.sqlInitialTableSnapshots,
             );
 
-            if (snapshotOverridesSaved) {
+            prime(nextSnap);
+            if (nextSnapIsLearnerOwned && snapshotOverridesSaved) {
                 void commitToolToProgress(nextSnap);
-            } else {
-                prime(nextSnap);
             }
         },
         [
@@ -1468,6 +1602,7 @@ export function useToolCodeRunnerState(args: {
             hydratedToolIdentity,
             progress,
             exercises,
+            patchExercise,
             flushLatest,
         ],
     );
@@ -1581,8 +1716,8 @@ dismissFeedbackOnEdit: true,
                 toolLang: latestSnapRef.current.lang,
                 workspaceStatus: nextWorkspace ? "ready" : "pending",
                 workspaceSeedMode: nextWorkspace ? "restored" : undefined,
-                workspaceOrigin: "user",
-                userEdited: true,
+                    workspaceOrigin: "user",
+                    userEdited: true,
             } as any);
         }
 
@@ -1593,8 +1728,8 @@ dismissFeedbackOnEdit: true,
                 ...(nextWorkspace
                     ? {
                         workspace: nextWorkspace,
-                        codeWorkspace: nextWorkspace,
-                        ideWorkspace: nextWorkspace,
+                            codeWorkspace: nextWorkspace,
+                            ideWorkspace: nextWorkspace,
                     }
                     : {}),
                 code: c,
@@ -1602,8 +1737,8 @@ dismissFeedbackOnEdit: true,
                 feedbackDismissed: true,
 dismissFeedbackOnEdit: true,
                 updateOrigin: "user",
-                userEdited: true,
-                workspaceOrigin: "user",
+                    userEdited: true,
+                    workspaceOrigin: "user",
             });
         }
     }, [effectiveBoundId, bindingContext, viewTid, effectiveToolKey, patchCard]);
@@ -1646,8 +1781,8 @@ dismissFeedbackOnEdit: true,
                 toolLang: latestSnapRef.current.lang,
                 workspaceStatus: nextWorkspace ? "ready" : "pending",
                 workspaceSeedMode: nextWorkspace ? "restored" : undefined,
-                workspaceOrigin: "user",
-                userEdited: true,
+                    workspaceOrigin: "user",
+                    userEdited: true,
             } as any);
         }
 
@@ -1658,8 +1793,8 @@ dismissFeedbackOnEdit: true,
                 ...(nextWorkspace
                     ? {
                         workspace: nextWorkspace,
-                        codeWorkspace: nextWorkspace,
-                        ideWorkspace: nextWorkspace,
+                            codeWorkspace: nextWorkspace,
+                            ideWorkspace: nextWorkspace,
                     }
                     : {}),
                 codeStdin: s,
@@ -1668,8 +1803,8 @@ dismissFeedbackOnEdit: true,
                 feedbackDismissed: true,
 dismissFeedbackOnEdit: true,
                 updateOrigin: "user",
-                userEdited: true,
-                workspaceOrigin: "user",
+                    userEdited: true,
+                    workspaceOrigin: "user",
             });
         }
     }, [effectiveBoundId, bindingContext, viewTid, effectiveToolKey, patchCard]);
@@ -1744,8 +1879,8 @@ dismissFeedbackOnEdit: true,
                     toolLang: nextSnap.lang,
                     workspaceStatus: workspace ? "ready" : "pending",
                     workspaceSeedMode: workspace ? "restored" : undefined,
-                    workspaceOrigin: "user",
-                    userEdited: true,
+                        workspaceOrigin: "user",
+                        userEdited: true,
                 } as any);
             }
         }
@@ -1760,8 +1895,8 @@ dismissFeedbackOnEdit: true,
             boundDirtyRef.current = true;
             b.onPatch({
                 workspace,
-                codeWorkspace: workspace,
-                ideWorkspace: workspace,
+                    codeWorkspace: workspace,
+                    ideWorkspace: workspace,
                 code: nextSnap.code,
                 codeStdin: nextSnap.stdin,
                 stdin: nextSnap.stdin,
@@ -1769,8 +1904,8 @@ dismissFeedbackOnEdit: true,
                 feedbackDismissed: true,
 dismissFeedbackOnEdit: true,
                 updateOrigin: "user",
-                userEdited: true,
-                workspaceOrigin: "user",
+                    userEdited: true,
+                    workspaceOrigin: "user",
             });
         }
     }, [

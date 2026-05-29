@@ -477,6 +477,12 @@ function canonicalizeExerciseStateKey(
     );
 }
 
+function isScopedExerciseStateKey(value: string | null | undefined) {
+    const raw = String(value ?? "").trim();
+    if (!raw) return false;
+    return raw.split(":").filter(Boolean).length >= 6;
+}
+
 function summarizeSavedWorkspaceFiles(workspace: any) {
     if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
         return { fileCount: 0, contentLength: 0 };
@@ -663,12 +669,16 @@ export function useReviewProgress(args: {
                 return next;
             }
 
+            const prevBody = stableJson(withoutSaveRevision(prev));
+            const nextBody = stableJson(withoutSaveRevision(next));
+
+            if (prevBody === nextBody) {
+                progressRef.current = prev;
+                return prev;
+            }
+
             if (hydrationCompleteRef.current && !applyingRemoteRef.current) {
-                const prevBody = stableJson(withoutSaveRevision(prev));
-                const nextBody = stableJson(withoutSaveRevision(next));
-                if (prevBody !== nextBody) {
-                    localDirtyRef.current = true;
-                }
+                localDirtyRef.current = true;
             }
 
             progressRef.current = next;
@@ -1109,8 +1119,45 @@ export function useReviewProgress(args: {
 
                 const candidate = explicit || rawKey;
                 const canonicalCandidate = canonicalizeExerciseStateKey(candidate, tid);
-                if (canonicalCandidate.split(":").filter(Boolean).length >= 6) {
+                if (isScopedExerciseStateKey(canonicalCandidate)) {
                     return canonicalCandidate;
+                }
+
+                const canBuildScopedKey =
+                    Boolean(saved?.subjectSlug ?? subjectSlug) &&
+                    Boolean(saved?.moduleSlug ?? moduleSlug) &&
+                    Boolean(saved?.topicId ?? tid) &&
+                    Boolean(saved?.cardId ?? cardIdHint) &&
+                    Boolean(
+                        saved?.exerciseId ??
+                        saved?.stableExerciseId ??
+                        saved?.id ??
+                        saved?.key ??
+                        candidate,
+                    );
+
+                if (canBuildScopedKey) {
+                    const exerciseId =
+                        saved?.exerciseId ??
+                        saved?.stableExerciseId ??
+                        saved?.id ??
+                        saved?.key ??
+                        candidate;
+
+                    return getExerciseStateKey(
+                        {
+                            subjectSlug: saved?.subjectSlug ?? subjectSlug,
+                            moduleSlug: saved?.moduleSlug ?? moduleSlug,
+                            sectionSlug: saved?.sectionSlug,
+                            topicId: normalizeTopicProgressKey(saved?.topicId ?? tid),
+                            cardId: saved?.cardId ?? cardIdHint,
+                        },
+                        String(exerciseId),
+                    );
+                }
+
+                if (!isScopedExerciseStateKey(candidate)) {
+                    return "";
                 }
 
                 const existingMatch = Object.entries(
@@ -1166,12 +1213,16 @@ export function useReviewProgress(args: {
                 const savedHasEditorContent = hasSavedExerciseEditorContent(saved);
 
                 /**
-                 * Progress-only saved entries are still useful, but they must not
-                 * pre-seed a runtime exercise before the real manifest-backed
-                 * exercise registers. Otherwise a blank DB/local patch becomes the
-                 * initial "manifest" and starterCode never gets a chance to win.
+                 * Never restore saved editor/workspace content before the real
+                 * current exercise contract exists in runtime.
+                 *
+                 * For authored project steps, that contract is the compiled
+                 * manifest. For generated practice items, it is the live
+                 * /api/practice item registered by the rendered card. DB/local
+                 * progress may hydrate learner work only after one of those
+                 * authored sources has registered this exact exercise key.
                  */
-                if (!savedHasEditorContent && !existingExercise) {
+                if (!existingExercise) {
                     return;
                 }
 

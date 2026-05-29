@@ -167,9 +167,9 @@
               "prompt": "Write a function `make_book(title, pages)` that returns a dictionary with two keys: `\"title\"` and `\"pages\"`. Do not print anything.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "starterCode": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass"
             },

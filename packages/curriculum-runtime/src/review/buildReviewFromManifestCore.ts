@@ -25,6 +25,26 @@ type MakeTopicDefFn = (args: {
     description?: string | null;
 }) => any;
 
+function normalizeString(value: unknown) {
+    return typeof value === "string" ? value.trim().toLowerCase() : "";
+}
+
+function isTrueLike(value: unknown) {
+    const normalized = normalizeString(value);
+    return value === true || normalized === "true";
+}
+
+function hasTryItId(value: unknown) {
+    const normalized = normalizeString(value);
+    if (!normalized) return false;
+
+    return (
+        normalized.startsWith("try-") ||
+        normalized.startsWith("try_") ||
+        normalized.includes("-try-")
+    );
+}
+
 function inheritMaxAttempts(
     value: number | null | undefined,
     parent: number | null | undefined,
@@ -94,10 +114,22 @@ export function buildReviewFromManifestCore(args: {
             }
 
             if (card.kind === "project") {
+                const shouldUseAuthoredTryId = hasTryItId(card.id);
+                const projectTryIt = isTrueLike(card.project.tryIt);
+                const cardTryIt = isTrueLike(card.tryIt);
+                const displayKind = typeof card.project.displayKind === "string"
+                    ? card.project.displayKind
+                    : undefined;
+                const uiKind = typeof card.project.uiKind === "string"
+                    ? card.project.uiKind
+                    : undefined;
+
                 return makeProjectCard({
                     topicId: manifest.topicId,
                     index,
+                    id: shouldUseAuthoredTryId ? String(card.id).trim() : undefined,
                     title: tag(card.titleKey),
+                    tryIt: cardTryIt || projectTryIt || undefined,
                     spec: makeProjectSpec({
                         subject: manifest.subjectSlug,
                         module: manifest.moduleSlug,
@@ -108,6 +140,9 @@ export function buildReviewFromManifestCore(args: {
                         preferKind: card.project.preferKind ?? null,
                         maxAttempts: card.project.maxAttempts,
                         runtime: manifest.runtimeDefaults ?? null,
+                        tryIt: projectTryIt || undefined,
+                        displayKind,
+                        uiKind,
                         steps: card.project.steps.map((step: any) =>
                             makeProjectStep({
                                 id: step.id,

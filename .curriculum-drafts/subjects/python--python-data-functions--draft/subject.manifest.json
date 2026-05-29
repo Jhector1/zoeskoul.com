@@ -124,7 +124,7 @@
         "kind": "code",
         "language": "python",
         "supportsTerminal": false,
-        "supportsMultiFile": false,
+        "supportsMultiFile": true,
         "supportsFileSystem": false,
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false

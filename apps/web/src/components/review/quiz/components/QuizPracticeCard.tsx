@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { ReviewQuestion } from "@/lib/subjects/types";
 import type { PracticeState } from "@/components/review/quiz/hooks/useQuizPracticeBank";
 import { isEmptyPracticeAnswer } from "@/components/review/quiz/hooks/useQuizPracticeBank";
@@ -31,27 +31,46 @@ import {
   getNextPracticeHelpStepKey,
   PRACTICE_HELP_STEP_DEF_MAP,
 } from "@/lib/practice/help/steps";
+import { normalizeCurrentPracticeItem } from "@/lib/practice/runtime";
+import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 
 const LOADING_TIMEOUT_MS = 8000;
+
+function cleanPracticeSlotPart(value: unknown) {
+  return String(value ?? "")
+      .trim()
+      .replace(/[:\s]+/g, "-");
+}
 
 function getStableExerciseSlotId(
     q: Extract<ReviewQuestion, { kind: "practice" }>,
 ) {
   const anyQ = q as any;
+  const fetch = anyQ.fetch ?? {};
 
-  return (
-      anyQ.fetch?.exerciseKey ??
+  const scoped = [
+    cleanPracticeSlotPart(fetch.subjectSlug ?? fetch.subject ?? anyQ.subjectSlug),
+    cleanPracticeSlotPart(fetch.moduleSlug ?? fetch.module ?? anyQ.moduleSlug),
+    cleanPracticeSlotPart(fetch.sectionSlug ?? fetch.section ?? anyQ.sectionSlug),
+    cleanPracticeSlotPart(fetch.topicId ?? fetch.topic ?? anyQ.topicId),
+    cleanPracticeSlotPart(
+      fetch.exerciseKey ??
       anyQ.exerciseKey ??
       anyQ.item?.exerciseKey ??
       anyQ.exercise?.exerciseKey ??
       anyQ.exercise?.id ??
-      anyQ.fetch?.stepId ??
-      anyQ.item?.id ??
+      fetch.stepId ??
       anyQ.stepId ??
       anyQ.sourceStepId ??
+      anyQ.item?.id ??
       anyQ.key ??
-      q.id
-  );
+      q.id,
+    ),
+  ]
+      .filter(Boolean)
+      .join(":");
+
+  return scoped || String(q.id ?? "");
 }
 
 function getWorkspaceEntryCodeForPracticeCard(workspace: any) {
@@ -165,6 +184,16 @@ export default function QuizPracticeCard(props: {
     return resolveDeepTagged(ps.exercise, (key) => raw(key, "")) as Exercise;
   }, [ps?.exercise, raw]);
 
+  const livePracticeItem = useMemo(() => {
+    if (!ex || !ps?.item) return ps?.item ?? null;
+    return normalizeCurrentPracticeItem(ps.item, ex, ps.item);
+  }, [ex, ps?.item]);
+
+  const livePracticeManifest = useMemo(
+      () => (livePracticeItem?.exercise as Exercise | undefined) ?? ex,
+      [ex, livePracticeItem],
+  );
+
   const toolsEnabled = Boolean(toolsAny?.enabled);
   const isCodeInput = ex?.kind === "code_input";
   const codeRunnerMode: "embedded" | "tools" =
@@ -173,9 +202,6 @@ export default function QuizPracticeCard(props: {
   const codeTools = toolsEnabled && isCodeInput ? toolsAny : null;
 
   const stableExerciseSlotId = useMemo(() => getStableExerciseSlotId(q), [q]);
-
-  const effectiveToolId = toolScopedId ?? stableExerciseSlotId;
-  const codeInputId = toolsEnabled && isCodeInput ? effectiveToolId : undefined;
 
   const exerciseKeyForTools = useMemo(() => {
     return getExerciseStateKey(
@@ -190,27 +216,49 @@ export default function QuizPracticeCard(props: {
     );
   }, [q, ownerCardId, stableExerciseSlotId]);
 
+  const effectiveToolId = toolScopedId ?? stableExerciseSlotId;
+  const codeInputId =
+      toolsEnabled && isCodeInput ? exerciseKeyForTools : undefined;
+
   const runtimeExercise = useReviewRuntimeStore(
       (s) => s.exercises[exerciseKeyForTools] ?? null,
   );
   const ensureRuntimeExercise = useReviewRuntimeStore((s) => s.ensureExercise);
+  const patchRuntimeExercise = useReviewRuntimeStore((s) => s.patchExercise);
+  const patchEditorWorkspace = useReviewRuntimeStore((s) => s.patchEditorWorkspace);
   const fetchSubjectSlug = (q as any).fetch?.subject ?? "";
   const fetchModuleSlug = (q as any).fetch?.module ?? "";
   const fetchSectionSlug = (q as any).fetch?.section;
   const fetchTopicId = normalizeTopicProgressKey((q as any).fetch?.topic ?? "");
   const fetchOwnerCardId = ownerCardId ?? "";
-  const practiceExerciseKind = ex?.kind ?? "";
-  const practiceExerciseId = String((ex as any)?.id ?? "");
-  const practiceExerciseKey = String((ex as any)?.exerciseKey ?? "");
-  const practiceExerciseLanguage = String((ex as any)?.language ?? "");
+  const practiceExerciseKind = livePracticeManifest?.kind ?? "";
+  const practiceExerciseId = String((livePracticeManifest as any)?.id ?? "");
+  const practiceExerciseKey = String((livePracticeManifest as any)?.exerciseKey ?? "");
+  const practiceExerciseLanguage = String((livePracticeManifest as any)?.language ?? "");
   const practiceExerciseRuntimeDatasetId = String(
-      (ex as any)?.runtime?.datasetId ?? "",
+      (livePracticeManifest as any)?.runtime?.datasetId ?? "",
   );
-  const practiceExerciseSqlDatasetId = String((ex as any)?.sqlDatasetId ?? "");
+  const practiceExerciseSqlDatasetId = String((livePracticeManifest as any)?.sqlDatasetId ?? "");
   const practiceExerciseHasSqlSchema =
-      typeof (ex as any)?.sqlSchemaSql === "string";
-  const practiceExerciseHasSqlSeed = typeof (ex as any)?.sqlSeedSql === "string";
-  const practiceItemReady = Boolean(ps?.item);
+      typeof (livePracticeManifest as any)?.sqlSchemaSql === "string";
+  const practiceExerciseHasSqlSeed =
+      typeof (livePracticeManifest as any)?.sqlSeedSql === "string";
+  const practiceItemReady = Boolean(livePracticeItem);
+  const practiceStarterCode = String(
+      (livePracticeManifest as any)?.starterCode ??
+      (livePracticeItem as any)?.starterCode ??
+      "",
+  );
+  const practiceStarterFilesKey = JSON.stringify(
+      (livePracticeManifest as any)?.starterFiles ??
+      (livePracticeItem as any)?.starterFiles ??
+      null,
+  );
+  const practiceWorkspaceKey = JSON.stringify(
+      (livePracticeManifest as any)?.workspace ??
+      (livePracticeItem as any)?.workspace ??
+      null,
+  );
 
   const runtimeExerciseCode = useMemo(() => {
     return (
@@ -219,12 +267,12 @@ export default function QuizPracticeCard(props: {
     );
   }, [runtimeExercise]);
 
-  useEffect(() => {
-    if (!ex) return;
-    if (ex.kind !== "code_input") return;
-    if (!ps?.item) return;
+  useLayoutEffect(() => {
+    if (!livePracticeManifest) return;
+    if (livePracticeManifest.kind !== "code_input") return;
+    if (!livePracticeItem) return;
 
-    const manifestLanguage = getManifestExerciseLanguage(ex);
+    const manifestLanguage = getManifestExerciseLanguage(livePracticeManifest);
     const ensureKey = [
       exerciseKeyForTools,
       fetchSubjectSlug,
@@ -240,14 +288,29 @@ export default function QuizPracticeCard(props: {
       practiceExerciseSqlDatasetId,
       practiceExerciseHasSqlSchema ? "sql-schema" : "",
       practiceExerciseHasSqlSeed ? "sql-seed" : "",
+      practiceStarterCode,
+      practiceStarterFilesKey,
+      practiceWorkspaceKey,
     ].join("|");
 
-    if (lastEnsureRuntimeExerciseKeyRef.current === ensureKey) return;
-
     const existing = useReviewRuntimeStore.getState().exercises[exerciseKeyForTools];
+    const existingMatchesManifestLanguage =
+        existing &&
+        stateLanguageMatches(
+            existing,
+            manifestLanguage,
+            getWorkspaceFromAnyState(existing),
+        );
+
+    if (
+        lastEnsureRuntimeExerciseKeyRef.current === ensureKey &&
+        existingMatchesManifestLanguage
+    ) {
+      return;
+    }
     const manifestStarterWorkspace = resolveExerciseWorkspace({
       language: manifestLanguage,
-      manifest: ex,
+      manifest: livePracticeManifest,
     });
 
     if (
@@ -263,7 +326,7 @@ export default function QuizPracticeCard(props: {
               : null,
           manifestLanguage,
           manifestStarterWorkspace,
-          manifestStarterCode: (ex as any).starterCode,
+          manifestStarterCode: practiceStarterCode,
         })
     ) {
       lastEnsureRuntimeExerciseKeyRef.current = ensureKey;
@@ -279,11 +342,13 @@ export default function QuizPracticeCard(props: {
       sectionSlug: fetchSectionSlug,
       topicId: fetchTopicId,
       cardId: fetchOwnerCardId,
-      manifest: ex,
-      saved: ps.item,
+      manifest: livePracticeManifest,
+      saved: livePracticeItem,
     });
 
-    // Intentionally do not depend on full `ex`, `ps.item`, or `q`.
+    // Register the live dynamic practice contract before child tool-binding
+    // effects run so the Tools pane does not momentarily seed itself from the
+    // generic default workspace.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     ensureRuntimeExercise,
@@ -302,7 +367,70 @@ export default function QuizPracticeCard(props: {
     practiceExerciseHasSqlSchema,
     practiceExerciseHasSqlSeed,
     practiceItemReady,
+    practiceStarterCode,
+    practiceStarterFilesKey,
+    practiceWorkspaceKey,
   ]);
+
+  useLayoutEffect(() => {
+    if (!livePracticeManifest) return;
+    if (livePracticeManifest.kind !== "code_input") return;
+
+    const itemWorkspace = getWorkspaceFromAnyState(livePracticeItem);
+    if (!itemWorkspace) return;
+
+    const existingWorkspace = getWorkspaceFromAnyState(runtimeExercise);
+    const existingIsProtected =
+        runtimeExercise?.userEdited === true ||
+        runtimeExercise?.workspaceOrigin === "user" ||
+        runtimeExercise?.workspaceOrigin === "saved";
+
+    if (existingIsProtected) return;
+
+    const existingWorkspaceKey = JSON.stringify(existingWorkspace ?? null);
+    const liveWorkspaceKey = JSON.stringify(itemWorkspace);
+    if (existingWorkspaceKey === liveWorkspaceKey) return;
+
+    const code = deriveEntryCode(itemWorkspace) || "";
+    const stdin = typeof itemWorkspace.stdin === "string" ? itemWorkspace.stdin : "";
+    const language = getManifestExerciseLanguage(livePracticeManifest);
+
+    patchRuntimeExercise(exerciseKeyForTools, {
+      workspace: itemWorkspace,
+      codeWorkspace: itemWorkspace,
+      ideWorkspace: itemWorkspace,
+      code,
+      source: code,
+      stdin,
+      codeStdin: stdin,
+      language,
+      lang: language,
+      codeLang: language,
+      userEdited: false,
+      workspaceOrigin: "starter",
+      updatedAt: Date.now(),
+    });
+    patchEditorWorkspace(exerciseKeyForTools, itemWorkspace);
+  }, [
+    exerciseKeyForTools,
+    livePracticeItem,
+    livePracticeManifest,
+    patchEditorWorkspace,
+    patchRuntimeExercise,
+    runtimeExercise,
+  ]);
+
+  useEffect(() => {
+    if (toolsActive) return;
+
+    /**
+     * Practice quiz cards can stay mounted while their code editor child
+     * unregisters during card/topic navigation. When we return to the same card,
+     * we must allow both runtime ensure and Tools rebind to happen again.
+     */
+    lastToolsBindKeyRef.current = null;
+    lastEnsureRuntimeExerciseKeyRef.current = null;
+  }, [toolsActive]);
 
   const attemptsCapped = useMemo(() => {
     if (!ps) return false;
@@ -423,7 +551,11 @@ export default function QuizPracticeCard(props: {
     if (isFinalized) return;
 
     const bindKey = `${codeInputId}:${exerciseKeyForTools}`;
-    if (lastToolsBindKeyRef.current === bindKey) return;
+    const alreadyBoundToThisExercise =
+        toolsAny.boundId === codeInputId ||
+        toolsAny.boundId === exerciseKeyForTools;
+
+    if (lastToolsBindKeyRef.current === bindKey && alreadyBoundToThisExercise) return;
     lastToolsBindKeyRef.current = bindKey;
 
     const timer = window.setTimeout(() => {
@@ -441,6 +573,7 @@ export default function QuizPracticeCard(props: {
     Boolean(ps?.item),
     exerciseKeyForTools,
     isFinalized,
+    toolsAny.boundId,
   ]);
 
   const disableCheck =
@@ -660,14 +793,14 @@ export default function QuizPracticeCard(props: {
 
                 <ExerciseRenderer
                     key={stableExerciseSlotId}
-                    exercise={ex}
+                    exercise={(livePracticeManifest as Exercise) ?? ex}
                     current={
                       isCorrect || isCompleted
                           ? {
-                            ...ps.item,
+                            ...(livePracticeItem as any),
                             feedbackDismissed: true,
                           }
-                          : ps.item
+                          : (livePracticeItem as any)
                     }
                     exerciseStateId={stableExerciseSlotId}
                     busy={ps.busy || !unlocked || isCompleted || locked || isFinalized}
@@ -759,7 +892,7 @@ export default function QuizPracticeCard(props: {
               </div>
 
               <PracticeHelpPanel
-                  exercise={ex}
+                  exercise={(livePracticeManifest as Exercise) ?? ex}
                   current={ps.item}
                   help={ps.item.help}
                   helpPolicy={ps.helpPolicy}

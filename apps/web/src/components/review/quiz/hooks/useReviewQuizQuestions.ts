@@ -21,6 +21,7 @@ const specSnap = JSON.stringify(spec);
     const ctrl = new AbortController();
     setQuizLoading(true);
     setQuizError(null);
+    setQuestions([]);
 
     (async () => {
       try {

@@ -10,6 +10,8 @@
     "gen:subject-manifests": "tsx scripts/generate-subject-manifests.ts",
     "gen:catalog-manifests": "tsx scripts/generate-catalog-manifests.ts",
     "gen:manifests": "pnpm i18n:generate && pnpm gen:topic-manifests && pnpm gen:subject-manifests && pnpm gen:catalog-manifests",
+    "audit:project-manifests": "tsx scripts/audit-project-manifest-bindings.ts",
+    "audit:curriculum-project-integrity": "node scripts/audit-curriculum-project-manifest-integrity.mjs",
     "db:seed": "pnpm --dir ../.. --filter @zoeskoul/db db:seed",
     "sync:curriculum": "pnpm gen:manifests && pnpm db:seed",
     "predev": "pnpm gen:manifests",

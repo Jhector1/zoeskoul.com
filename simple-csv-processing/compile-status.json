@@ -1,8 +1,0 @@
-{
-  "reportDir": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python--python-data-functions--draft/module7/simple-csv-processing",
-  "status": "failed",
-  "attempts": 3,
-  "finalAttempt": 2,
-  "errorCode": "GOLDEN_VALIDATION_FAILED",
-  "errorMessage": "Golden validation failed for topic \"simple-csv-processing\"\nModule: python-7-files-exceptions-and-data-cleaning\nSection: python-7-exceptions-and-cleaning\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python--python-data-functions--draft/module7/simple-csv-processing\n- Exercise \"ci-print-passing-names\" solutionCode could not be validated against its published tests: Exited with error status 1\n- Exercise \"ci-write-passing-names\" solutionCode could not be validated against its published tests: Exited with error status 1"
-}

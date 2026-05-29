@@ -1046,6 +1046,7 @@ export default function CodeToolPane(props: {
         );
 
     const patchEditorWorkspace = useReviewRuntimeStore((s) => s.patchEditorWorkspace);
+    const patchExerciseRuntime = useReviewRuntimeStore((s) => s.patchExercise);
     /**
      * REVIEW DIRECT WORKSPACE MODE
      *
@@ -1350,7 +1351,14 @@ export default function CodeToolPane(props: {
         !effectiveLanguage ||
         languagesCompatible(finalReviewWorkspaceLanguage, effectiveLanguage);
     const reviewWorkspaceNeedsMultiFile = Boolean(
-        isReviewRouteMode && workspaceNeedsMultiFile(finalReviewWorkspace),
+        isReviewRouteMode &&
+        [
+            finalReviewWorkspace,
+            directRuntimeWorkspace,
+            canonicalReviewRuntime?.workspace,
+            normalizedToolWorkspace,
+            localWorkspaceDraft?.workspace ?? null,
+        ].some((workspace) => workspaceNeedsMultiFile(workspace)),
     );
     const runtimeWorkspacePending = Boolean(
         isReviewRouteMode &&
@@ -1696,6 +1704,23 @@ export default function CodeToolPane(props: {
             patchEditorWorkspace(ownerKey, nextWorkspace);
             writeReviewWorkspaceDraft(ownerKey, nextWorkspace);
             setLocalWorkspaceDraft({ savedAt: Date.now(), workspace: nextWorkspace });
+            patchExerciseRuntime(ownerKey, {
+                language: effectiveLanguage,
+                lang: effectiveLanguage,
+                workspace: nextWorkspace,
+                codeWorkspace: nextWorkspace,
+                ideWorkspace: nextWorkspace,
+                code: next.code,
+                source: next.code,
+                stdin: next.stdin,
+                codeStdin: next.stdin,
+                userEdited: true,
+                workspaceOrigin: "user",
+                submitted: false,
+                feedbackDismissed: true,
+                dismissFeedbackOnEdit: true,
+                updatedAt: Date.now(),
+            });
 
             onChangeWorkspace?.(nextWorkspace);
             onChangeCode(next.code);
@@ -1789,6 +1814,7 @@ export default function CodeToolPane(props: {
         onChangeCode,
         onChangeStdin,
         onChangeWorkspace,
+        patchExerciseRuntime,
         patchEditorWorkspace,
         resolvedEditorOwnerKey,
         syncCodeInputSnapshot,
@@ -1826,10 +1852,52 @@ export default function CodeToolPane(props: {
 
     const handleBeforeRun = useCallback(async () => {
         flushPendingWorkspace();
+
+        if (
+            isReviewRouteMode &&
+            resolvedEditorOwnerKey &&
+            finalReviewWorkspace &&
+            forceWorkspaceHasContent(finalReviewWorkspace)
+        ) {
+            const next = extractWorkspaceSnapshot(finalReviewWorkspace);
+
+            patchEditorWorkspace(resolvedEditorOwnerKey, finalReviewWorkspace);
+            writeReviewWorkspaceDraft(resolvedEditorOwnerKey, finalReviewWorkspace);
+            patchExerciseRuntime(resolvedEditorOwnerKey, {
+                language: effectiveLanguage,
+                lang: effectiveLanguage,
+                workspace: finalReviewWorkspace,
+                codeWorkspace: finalReviewWorkspace,
+                ideWorkspace: finalReviewWorkspace,
+                code: next.code,
+                source: next.code,
+                stdin: next.stdin,
+                codeStdin: next.stdin,
+                userEdited: true,
+                workspaceOrigin: "user",
+                submitted: false,
+                feedbackDismissed: true,
+                dismissFeedbackOnEdit: true,
+                updatedAt: Date.now(),
+            });
+        }
+
         setRunFeedback(null);
         if (boundId) clearRunFeedback?.(boundId);
         await onBeforeRun?.();
-    }, [boundId, clearRunFeedback, flushPendingWorkspace, onBeforeRun]);
+    }, [
+        boundId,
+        clearRunFeedback,
+        effectiveLanguage,
+        finalReviewWorkspace,
+        flushPendingWorkspace,
+        isReviewRouteMode,
+        onBeforeRun,
+        patchEditorWorkspace,
+        patchExerciseRuntime,
+        resolvedEditorOwnerKey,
+        writeReviewWorkspaceDraft,
+    ]);
 
     const handleRunResult = useCallback(({ result, runArgs }: { result: any; runArgs: any }) => {
         const feedback = pickRunFeedbackFromResult({

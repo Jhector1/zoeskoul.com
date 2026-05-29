@@ -11,6 +11,7 @@ import {
   coerceMaxAttempts,
   extractCodeLike,
   fetchResolvedPracticeItem,
+  normalizeCurrentPracticeItem,
   requestPracticeHelpItem,
   submitPracticeItem,
 } from "@/lib/practice/runtime";
@@ -32,9 +33,57 @@ import {
 } from "@/components/review/module/runtime/workspaceCodeSource";
 
 export { isEmptyPracticeAnswer } from "@/lib/practice/runtime";
-export type PracticeState = PracticeItemState;
+export type PracticeState = PracticeItemState & {
+  exerciseKey?: string;
+  topicId?: string;
+  subjectSlug?: string;
+  moduleSlug?: string;
+  sectionSlug?: string;
+};
 
 const LOAD_TIMEOUT_MS = 12000;
+
+function normalizePracticeKeyPart(value: unknown) {
+  return String(value ?? "")
+      .trim()
+      .replace(/[:\s]+/g, "-");
+}
+
+function buildScopedPracticeQuestionKey(q: Extract<ReviewQuestion, { kind: "practice" }>) {
+  const anyQ = q as any;
+  const fetch = anyQ.fetch ?? {};
+
+  const subjectSlug = normalizePracticeKeyPart(
+      fetch.subjectSlug ?? fetch.subject ?? anyQ.subjectSlug,
+  );
+  const moduleSlug = normalizePracticeKeyPart(
+      fetch.moduleSlug ?? fetch.module ?? anyQ.moduleSlug,
+  );
+  const sectionSlug = normalizePracticeKeyPart(
+      fetch.sectionSlug ?? fetch.section ?? anyQ.sectionSlug,
+  );
+  const topicId = normalizePracticeKeyPart(
+      fetch.topicId ?? fetch.topic ?? anyQ.topicId ?? anyQ.topic,
+  );
+  const exerciseKey = normalizePracticeKeyPart(
+      fetch.exerciseKey ??
+      anyQ.exerciseKey ??
+      anyQ.item?.exerciseKey ??
+      anyQ.exercise?.exerciseKey ??
+      anyQ.exercise?.id ??
+      fetch.stepId ??
+      anyQ.stepId ??
+      anyQ.sourceStepId ??
+      anyQ.item?.id ??
+      anyQ.key ??
+      q.id,
+  );
+
+  return [subjectSlug, moduleSlug, sectionSlug, topicId, exerciseKey]
+      .filter(Boolean)
+      .join(":");
+}
+
 
 function withTimeout<T>(promise: Promise<T>, ms: number, message: string) {
   return new Promise<T>((resolve, reject) => {
@@ -66,21 +115,136 @@ function isExpiredPracticeKeyError(error: unknown) {
 export function getStablePracticeQuestionKey(q: ReviewQuestion) {
   if (q.kind !== "practice") return q.id;
 
+  const scopedKey = buildScopedPracticeQuestionKey(q);
+  return scopedKey || String(q.id ?? "");
+}
+
+type PracticeQuestionIdentity = {
+  stableKey: string;
+  exerciseKey: string;
+  topicId: string;
+  subjectSlug: string;
+  moduleSlug: string;
+  sectionSlug: string;
+};
+
+type PracticeStateIdentity = {
+  exerciseKey: string;
+  topicId: string;
+  subjectSlug: string;
+  moduleSlug: string;
+  sectionSlug: string;
+};
+
+function normalizeIdentityValue(value: unknown) {
+  return String(value ?? "").trim();
+}
+
+export function getPracticeQuestionIdentity(
+    q: Extract<ReviewQuestion, { kind: "practice" }>,
+): PracticeQuestionIdentity {
   const anyQ = q as any;
 
-  return (
-      anyQ.fetch?.exerciseKey ??
-      anyQ.exerciseKey ??
-      anyQ.item?.exerciseKey ??
-      anyQ.exercise?.exerciseKey ??
-      anyQ.exercise?.id ??
-      anyQ.fetch?.stepId ??
-      anyQ.item?.id ??
-      anyQ.stepId ??
-      anyQ.sourceStepId ??
-      anyQ.key ??
-      q.id
-  );
+  return {
+    stableKey: getStablePracticeQuestionKey(q),
+    exerciseKey: normalizeIdentityValue(
+        anyQ.fetch?.exerciseKey ??
+        anyQ.exerciseKey ??
+        anyQ.item?.exerciseKey ??
+        anyQ.exercise?.exerciseKey ??
+        anyQ.exercise?.id ??
+        anyQ.item?.id,
+    ),
+    topicId: normalizeIdentityValue(
+        anyQ.fetch?.topic ??
+        anyQ.topicId ??
+        anyQ.topic,
+    ),
+    subjectSlug: normalizeIdentityValue(
+        anyQ.fetch?.subjectSlug ??
+        anyQ.fetch?.subject ??
+        anyQ.subjectSlug,
+    ),
+    moduleSlug: normalizeIdentityValue(
+        anyQ.fetch?.moduleSlug ??
+        anyQ.fetch?.module ??
+        anyQ.moduleSlug,
+    ),
+    sectionSlug: normalizeIdentityValue(
+        anyQ.fetch?.sectionSlug ??
+        anyQ.fetch?.section ??
+        anyQ.sectionSlug,
+    ),
+  };
+}
+
+export function getPracticeStateIdentity(state: PracticeState | null | undefined): PracticeStateIdentity {
+  const item = (state as any)?.item ?? null;
+  const exercise = (state as any)?.exercise ?? null;
+
+  return {
+    exerciseKey: normalizeIdentityValue(
+        (state as any)?.exerciseKey ??
+        item?.exerciseKey ??
+        exercise?.exerciseKey ??
+        exercise?.id ??
+        item?.id,
+    ),
+    topicId: normalizeIdentityValue(
+        (state as any)?.topicId ??
+        item?.topicId ??
+        exercise?.topic ??
+        exercise?.topicId,
+    ),
+    subjectSlug: normalizeIdentityValue(
+        (state as any)?.subjectSlug ??
+        item?.subjectSlug ??
+        exercise?.subjectSlug,
+    ),
+    moduleSlug: normalizeIdentityValue(
+        (state as any)?.moduleSlug ??
+        item?.moduleSlug ??
+        exercise?.moduleSlug,
+    ),
+    sectionSlug: normalizeIdentityValue(
+        (state as any)?.sectionSlug ??
+        item?.sectionSlug ??
+        exercise?.sectionSlug,
+    ),
+  };
+}
+
+export function doesPracticeStateMatchQuestion(
+    state: PracticeState | null | undefined,
+    q: Extract<ReviewQuestion, { kind: "practice" }>,
+) {
+  if (!state?.exercise || !state?.item) return false;
+
+  const current = getPracticeQuestionIdentity(q);
+  const existing = getPracticeStateIdentity(state);
+
+  const exerciseKeyMatches =
+      Boolean(current.exerciseKey) &&
+      Boolean(existing.exerciseKey) &&
+      current.exerciseKey === existing.exerciseKey;
+
+  if (!exerciseKeyMatches) return false;
+
+  const scopedFields: Array<keyof Omit<PracticeQuestionIdentity, "stableKey" | "exerciseKey">> = [
+    "topicId",
+    "subjectSlug",
+    "moduleSlug",
+    "sectionSlug",
+  ];
+
+  return scopedFields.every((field) => {
+    const currentValue = current[field];
+    const existingValue = existing[field];
+
+    if (!currentValue) return true;
+    if (!existingValue) return false;
+    return currentValue === existingValue;
+  });
 }
 
 
@@ -248,6 +412,14 @@ function getRuntimePracticePatchForQuestion(
         const valueModuleSlug = String(value.moduleSlug ?? "").trim();
         const valueSectionSlug = String(value.sectionSlug ?? "").trim();
 
+        const scopeMatches =
+            (!wantedTopic || valueTopicId === wantedTopic) &&
+            (!wantedSubject || valueSubjectSlug === wantedSubject) &&
+            (!wantedModule || valueModuleSlug === wantedModule) &&
+            (!wantedSection || valueSectionSlug === wantedSection);
+
+        if (!scopeMatches) return null;
+
         let score = 0;
 
         /**
@@ -414,7 +586,7 @@ function getRuntimePracticePatchForQuestion(
         : {}),
   };
 }
-function sanitizeSavedPracticePatch(savedPatch: any, exerciseKind?: string) {
+export function sanitizeSavedPracticePatch(savedPatch: any, exerciseKind?: string) {
     if (!savedPatch) return null;
 
     const next = { ...savedPatch };
@@ -425,6 +597,27 @@ function sanitizeSavedPracticePatch(savedPatch: any, exerciseKind?: string) {
      */
     delete next.key;
     delete next.sessionId;
+
+    // Never let saved progress replace the freshly resolved exercise contract.
+    // Old saved patches may contain an entire QItem, including item.exercise from
+    // another topic/project step. Merging that object is what caused a stale
+    // calculate_tip prompt to render while the editor had the new imports starter.
+    delete next.exercise;
+    delete next.title;
+    delete next.prompt;
+    delete next.hint;
+    delete next.options;
+    delete next.tokens;
+    delete next.expected;
+    delete next.starterCode;
+    delete next.starterFiles;
+    delete next.workspaceExpectations;
+    delete next.recipe;
+    delete next.help;
+    delete next.tests;
+    delete next.solutionCode;
+    delete next.solutionFiles;
+    delete next.messageBase;
 
     if (exerciseKind === "drag_reorder" && !next.ui?.reorderTouched) {
         delete next.reorder;
@@ -487,13 +680,35 @@ function getSavedPracticeMeta(
     q: Extract<ReviewQuestion, { kind: "practice" }>,
 ) {
     const stableKey = getStablePracticeQuestionKey(q);
-    const allowQuestionIdPatch = mayRestoreQuestionIdPatch(q, stableKey);
+    const practiceMeta = initialState?.practiceMeta ?? {};
+    const qAny = q as any;
 
-    return (
-        initialState?.practiceMeta?.[stableKey] ??
-        (allowQuestionIdPatch ? initialState?.practiceMeta?.[q.id] : null) ??
-        null
+    const restoreKeys = Array.from(
+        new Set(
+            [
+                stableKey,
+                mayRestoreQuestionIdPatch(q, stableKey) ? q.id : null,
+                qAny.fetch?.exerciseKey,
+                qAny.fetch?.stepId,
+                qAny.exerciseKey,
+                qAny.stepId,
+                qAny.sourceStepId,
+                qAny.item?.exerciseKey,
+                qAny.item?.id,
+                qAny.exercise?.exerciseKey,
+                qAny.exercise?.id,
+            ]
+                .map((value) => String(value ?? "").trim())
+                .filter(Boolean),
+        ),
     );
+
+    for (const key of restoreKeys) {
+        const found = practiceMeta[key];
+        if (found) return found;
+    }
+
+    return null;
 }
 
 function resolveQuestionByAnyId(
@@ -520,17 +735,9 @@ function setPracticeForQuestion(
 ) {
   const stableKey = getStablePracticeQuestionKey(q);
 
-  if (q.id === stableKey) {
-    return {
-      ...prev,
-      [stableKey]: nextState,
-    };
-  }
-
   return {
     ...prev,
     [stableKey]: nextState,
-    [q.id]: nextState,
   };
 }
 
@@ -560,9 +767,15 @@ function getPracticeExerciseLanguage(exercise: any) {
 function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
   if (!item || !savedPatch) return item;
 
-  const isCodeInput = item?.exercise?.kind === "code_input";
-  const starterCode = String(item?.exercise?.starterCode ?? "").trim();
-  const expectedLanguage = getPracticeExerciseLanguage(item?.exercise);
+  const currentItem = normalizeCurrentPracticeItem(
+      item,
+      item?.exercise,
+      item,
+  );
+
+  const isCodeInput = currentItem?.exercise?.kind === "code_input";
+  const starterCode = String(currentItem?.exercise?.starterCode ?? "").trim();
+  const expectedLanguage = getPracticeExerciseLanguage(currentItem?.exercise);
 
   const userEdited =
       savedPatch.userEdited === true ||
@@ -576,6 +789,7 @@ function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
      */
     delete patch.key;
     delete patch.sessionId;
+    delete patch.help;
   if (isCodeInput && expectedLanguage && !stateLanguageMatches(patch, expectedLanguage, patch.workspace)) {
       delete patch.code;
       delete patch.source;
@@ -626,7 +840,7 @@ function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
       null;
 
   const next = {
-    ...item,
+    ...currentItem,
     ...patch,
     ...(workspace
         ? {
@@ -637,7 +851,15 @@ function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
         : {}),
   };
 
-  return stablePracticeJson(next) === stablePracticeJson(item) ? item : next;
+  const normalizedNext = normalizeCurrentPracticeItem(
+      next,
+      currentItem?.exercise,
+      currentItem,
+  );
+
+  return stablePracticeJson(normalizedNext) === stablePracticeJson(currentItem)
+      ? currentItem
+      : normalizedNext;
 }
 
 export function useQuizPracticeBank(args: {
@@ -775,11 +997,12 @@ export function useQuizPracticeBank(args: {
         const cancelledRef = opts?.cancelledRef;
         const cycle = loadCycleRef.current;
         const stableKey = getStablePracticeQuestionKey(q);
+        const questionIdentity = getPracticeQuestionIdentity(q);
 
         const existing =
             practiceRef.current?.[stableKey] ?? practiceRef.current?.[q.id];
 
-        const alreadyResolved = Boolean(existing?.exercise && existing?.item);
+        const alreadyResolved = doesPracticeStateMatchQuestion(existing, q);
 
 
 
@@ -816,17 +1039,20 @@ export function useQuizPracticeBank(args: {
 
         setPractice((prev) => {
           const prevState = prev[stableKey] ?? prev[q.id];
+          const reusablePrevState = doesPracticeStateMatchQuestion(prevState, q)
+              ? prevState
+              : null;
 
           const nextState: PracticeState = {
             loading: true,
             error: null,
             busy: false,
-            exercise: prevState?.exercise ?? null,
-            item: prevState?.item ?? null,
-            attempts: initMeta?.attempts ?? prevState?.attempts ?? 0,
-            ok: initMeta?.ok ?? prevState?.ok ?? null,
-            maxAttempts: prevState?.maxAttempts ?? fallbackMax,
-            helpPolicy: prevState?.helpPolicy ?? DEFAULT_PRACTICE_HELP_POLICY,
+            exercise: reusablePrevState?.exercise ?? null,
+            item: reusablePrevState?.item ?? null,
+            attempts: initMeta?.attempts ?? reusablePrevState?.attempts ?? 0,
+            ok: initMeta?.ok ?? reusablePrevState?.ok ?? null,
+            maxAttempts: reusablePrevState?.maxAttempts ?? fallbackMax,
+            helpPolicy: reusablePrevState?.helpPolicy ?? DEFAULT_PRACTICE_HELP_POLICY,
           };
 
           return setPracticeForQuestion(prev, q, nextState);
@@ -858,10 +1084,19 @@ export function useQuizPracticeBank(args: {
                   salt: (q as any).fetch.salt ?? undefined,
                   preferPurpose: (q as any).fetch.preferPurpose ?? "mixed",
                   purposePolicy: "fallback",
+                  // Always trust the freshly generated review question fetch target first.
+                  // q.exercise/q.item may be stale saved objects from a previous
+                  // topic or from an older version of this same project slot.
+                  // If they win here, the card can fetch an old exercise prompt
+                  // such as rectangle_area while the Tools workspace binds to the
+                  // new imports exercise.
                   exerciseKey:
+                    (q as any).fetch.exerciseKey ??
+                    (q as any).exerciseKey ??
+                    (q as any).item?.exerciseKey ??
+                    (q as any).exercise?.exerciseKey ??
                     (q as any).exercise?.id ??
                     (q as any).item?.id ??
-                    (q as any).fetch.exerciseKey ??
                     undefined,
                   seedPolicy: (q as any).fetch.seedPolicy ?? undefined,
                 },
@@ -913,7 +1148,11 @@ export function useQuizPracticeBank(args: {
 
             const savedPatch = getSavedPracticePatch(initialState, q);
             const nextItem = mergeSavedPatchIntoPracticeItem(
-                loaded.item,
+                normalizeCurrentPracticeItem(
+                    loaded.item,
+                    loaded.exercise,
+                    loaded.item,
+                ),
                 savedPatch,
             );
 
@@ -921,6 +1160,11 @@ export function useQuizPracticeBank(args: {
               ...base,
               loading: false,
               error: null,
+              exerciseKey: questionIdentity.exerciseKey || stableKey,
+              topicId: questionIdentity.topicId,
+              subjectSlug: questionIdentity.subjectSlug,
+              moduleSlug: questionIdentity.moduleSlug,
+              sectionSlug: questionIdentity.sectionSlug,
               exercise: loaded.exercise,
               item: nextItem,
               attempts: meta?.attempts ?? base.attempts ?? 0,
@@ -1072,17 +1316,6 @@ export function useQuizPracticeBank(args: {
                 "result" in patchForItem && patchForItem.result != null
                     ? patchForItem.result
                     : (ps.item as any).result,
-
-            help: patchForItem.help
-                ? {
-                  ...ps.item.help,
-                  ...patchForItem.help,
-                  entries: {
-                    ...ps.item.help.entries,
-                    ...(patchForItem.help.entries ?? {}),
-                  },
-                }
-                : ps.item.help,
           };
 
           const nextState: PracticeState = {
@@ -1348,10 +1581,14 @@ export function useQuizPracticeBank(args: {
             const current = prev[key] ?? prev[q.id];
             if (!current?.item) return prev;
 
-            const prevHelp = current.item.help;
-            const openedKeys = prevHelp.openedStepKeys.includes(stepKey)
+            const prevHelp = current.item.help ?? {};
+            const prevOpenedStepKeys = Array.isArray(prevHelp.openedStepKeys)
                 ? prevHelp.openedStepKeys
-                : [...prevHelp.openedStepKeys, stepKey];
+                : [];
+
+            const openedKeys = prevOpenedStepKeys.includes(stepKey)
+                ? prevOpenedStepKeys
+                : [...prevOpenedStepKeys, stepKey];
 
             const nextState: PracticeState = {
               ...current,

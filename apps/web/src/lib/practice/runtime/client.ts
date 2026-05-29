@@ -26,6 +26,217 @@ import {
     normalizeWorkspaceLanguage,
     stateLanguageMatches,
 } from "@/components/review/module/runtime/workspaceCodeSource";
+import {
+    deriveEntryCode,
+    resolveExerciseWorkspace,
+} from "@/components/review/module/runtime/exerciseWorkspaceResolver";
+
+const PRACTICE_AUTHORED_CONTRACT_FIELDS = [
+    "help",
+    "prompt",
+    "title",
+    "hint",
+    "starterCode",
+    "starterFiles",
+    "workspace",
+    "files",
+    "initialFiles",
+    "workspaceFiles",
+    "fixtureFiles",
+    "fixtures",
+    "fileFixtures",
+    "workspaceExpectations",
+    "recipe",
+    "tests",
+    "solutionCode",
+    "solutionFiles",
+    "expected",
+    "messageBase",
+    "language",
+    "lang",
+] as const;
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+    return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function isTaggedPracticeAlias(value: unknown) {
+    return typeof value === "string" && value.trim().startsWith("@:");
+}
+
+function pickLivePracticeContractValue(args: {
+    resolvedValue: unknown;
+    currentValue: unknown;
+}) {
+    const { resolvedValue, currentValue } = args;
+
+    if (currentValue === undefined) {
+        return resolvedValue;
+    }
+
+    if (
+        isTaggedPracticeAlias(currentValue) &&
+        resolvedValue !== undefined &&
+        !isTaggedPracticeAlias(resolvedValue)
+    ) {
+        return resolvedValue;
+    }
+
+    return currentValue;
+}
+
+/**
+ * Saved DB/local patches are learner state only.
+ * The current /api/practice item is different: it is allowed to carry the live
+ * authored contract for dynamic practice exercises, including starter workspace
+ * fields that may not exist in a compiled manifest bundle.
+ */
+export function normalizeCurrentPracticeItem<T extends Partial<QItem>>(
+    item: T,
+    exercise: Exercise,
+    currentSource?: unknown,
+): T {
+    if (!item) return item;
+
+    const currentSourceRecord = isRecord(currentSource) ? currentSource : {};
+    const currentExerciseRecord = isRecord(currentSourceRecord.exercise)
+        ? currentSourceRecord.exercise
+        : {};
+    const exerciseRecord = isRecord(exercise) ? exercise : {};
+    const itemRecord = isRecord(item) ? item : {};
+    const normalizedExercise: Record<string, unknown> = {
+        ...currentExerciseRecord,
+        ...exerciseRecord,
+    };
+
+    const next: Record<string, unknown> = {
+        ...itemRecord,
+        exercise: normalizedExercise,
+    };
+
+    for (const field of PRACTICE_AUTHORED_CONTRACT_FIELDS) {
+        const liveValue = pickLivePracticeContractValue({
+            resolvedValue: normalizedExercise[field],
+            currentValue: currentSourceRecord[field] ?? currentExerciseRecord[field],
+        });
+
+        if (liveValue !== undefined) {
+            next[field] = liveValue;
+            if (isRecord(next.exercise)) {
+                next.exercise[field] = liveValue;
+            }
+        }
+    }
+
+    return hydrateCurrentPracticeRuntimeSnapshot(next as T, next.exercise as Exercise);
+}
+
+function isLearnerOwnedPracticeState(value: unknown) {
+    if (!isRecord(value)) return false;
+
+    return (
+        value.userEdited === true ||
+        value.workspaceOrigin === "user" ||
+        value.workspaceOrigin === "saved"
+    );
+}
+
+function hasNonBlankCodeValue(value: unknown) {
+    return typeof value === "string" && value.trim().length > 0;
+}
+
+function hydrateCurrentPracticeRuntimeSnapshot<T extends Partial<QItem>>(
+    item: T,
+    exercise: Exercise,
+): T {
+    if (!item || exercise.kind !== "code_input") return item;
+    if (isLearnerOwnedPracticeState(item)) return item;
+
+    const itemAny = item as any;
+    const nextLanguage = resolvedExerciseLanguage(exercise) ?? "python";
+    const existingWorkspace =
+        itemAny.workspace ??
+        itemAny.codeWorkspace ??
+        itemAny.ideWorkspace ??
+        null;
+    const existingStateLanguage = normalizeWorkspaceLanguage(
+        itemAny.codeLang ??
+        itemAny.lang ??
+        itemAny.language ??
+        nextLanguage,
+    );
+    const existingCode =
+        typeof itemAny.code === "string"
+            ? itemAny.code
+            : typeof itemAny.source === "string"
+                ? itemAny.source
+                : "";
+    const languageCompatibleExistingWorkspace =
+        isWorkspaceStateForPatch(existingWorkspace) &&
+        stateLanguageMatches(
+            {
+                language:
+                    itemAny.codeLang ??
+                    itemAny.lang ??
+                    itemAny.language ??
+                    nextLanguage,
+            },
+            nextLanguage,
+            existingWorkspace,
+        );
+
+    /**
+     * Dynamic /api/practice items may carry starterFiles/workspace only on the
+     * live response object. Tool/runtime hydration paths expect an actual
+     * workspace snapshot, so synthesize that starter-owned snapshot here before
+     * any learner patches are merged or any tool binding occurs.
+     */
+    const starterWorkspace = resolveExerciseWorkspace({
+        language: nextLanguage,
+        manifest: exercise,
+    });
+    const nextWorkspace = languageCompatibleExistingWorkspace
+        ? existingWorkspace
+        : starterWorkspace;
+    const canReuseExistingStarterCode =
+        hasNonBlankCodeValue(existingCode) &&
+        existingStateLanguage === nextLanguage &&
+        languageCompatibleExistingWorkspace;
+    const nextCode = canReuseExistingStarterCode
+        ? existingCode
+        : (
+            deriveEntryCode(nextWorkspace) ||
+            String((exercise as any)?.starterCode ?? "")
+        );
+    const nextStdin =
+        typeof nextWorkspace?.stdin === "string"
+            ? nextWorkspace.stdin
+            : typeof itemAny.codeStdin === "string"
+                ? itemAny.codeStdin
+                : typeof itemAny.stdin === "string"
+                    ? itemAny.stdin
+                    : String((exercise as any)?.starterStdin ?? "");
+
+    return {
+        ...itemAny,
+        ...(nextWorkspace
+            ? {
+                workspace: nextWorkspace,
+                codeWorkspace: nextWorkspace,
+                ideWorkspace: nextWorkspace,
+              }
+            : {}),
+        code: nextCode,
+        source: nextCode,
+        codeLang: nextLanguage,
+        language: nextLanguage,
+        lang: nextLanguage,
+        codeStdin: nextStdin,
+        stdin: nextStdin,
+        userEdited: false,
+        workspaceOrigin: itemAny.workspaceOrigin ?? "starter",
+    } as T;
+}
 
 function isWorkspaceStateForPatch(value: unknown) {
     return (
@@ -126,17 +337,89 @@ function isBlankWorkspacePatch(value: unknown) {
     return !content.trim();
 }
 
+function pickMutableSavedPracticePatch<T extends Partial<QItem> | null>(patch: T): T {
+    if (!patch) return patch;
+
+    const source = patch as any;
+    const next: any = {
+        single: source.single,
+        multi: source.multi,
+        num: source.num,
+        dragA: source.dragA,
+        dragB: source.dragB,
+        matRows: source.matRows,
+        matCols: source.matCols,
+        mat: source.mat,
+        result: source.result,
+        submitted: source.submitted,
+        attempts: source.attempts,
+        code: source.code,
+        source: source.source,
+        codeLang: source.codeLang,
+        language: source.language,
+        lang: source.lang,
+        codeStdin: source.codeStdin,
+        stdin: source.stdin,
+        workspace: source.workspace,
+        codeWorkspace: source.codeWorkspace,
+        ideWorkspace: source.ideWorkspace,
+        text: source.text,
+        reorder: source.reorder,
+        reorderIds: source.reorderIds,
+        feedbackDismissed: source.feedbackDismissed,
+        voiceTranscript: source.voiceTranscript,
+        voiceAudioId: source.voiceAudioId,
+        revealed: source.revealed,
+        codeRunOutput: source.codeRunOutput,
+        userEdited: source.userEdited,
+        workspaceOrigin: source.workspaceOrigin,
+        starterHash: source.starterHash,
+        updatedAt: source.updatedAt,
+    };
+
+    for (const key of Object.keys(next)) {
+        if (typeof next[key] === "undefined") {
+            delete next[key];
+        }
+    }
+
+    // Extra guard for old persisted QItem-shaped patches.
+    delete next.exercise;
+    delete next.key;
+    delete next.sessionId;
+    delete next.title;
+    delete next.prompt;
+    delete next.hint;
+    delete next.options;
+    delete next.tokens;
+    delete next.expected;
+    delete next.starterCode;
+    delete next.starterFiles;
+    delete next.workspaceExpectations;
+    delete next.recipe;
+    delete next.help;
+    delete next.tests;
+    delete next.solutionCode;
+    delete next.solutionFiles;
+    delete next.messageBase;
+
+    return next as T;
+}
+
 function sanitizeSavedPatchForResolvedExercise<T extends Partial<QItem> | null>(
     patch: T,
     exercise: Exercise,
 ): T {
     if (!patch) return patch;
-    if (exercise.kind !== "code_input") return patch;
+
+    const mutablePatch = pickMutableSavedPracticePatch(patch);
+
+    if (exercise.kind !== "code_input") return mutablePatch;
 
     const starterCode = getExerciseStarterCode(exercise);
     const expectedLanguage = resolvedExerciseLanguage(exercise);
 
-    const patchAny = patch as any;
+    const patchAny = mutablePatch as any;
 
     const userEdited =
         patchAny.userEdited === true ||
@@ -171,7 +454,7 @@ function sanitizeSavedPatchForResolvedExercise<T extends Partial<QItem> | null>(
         return next as T;
     }
 
-    if (userEdited) return patch;
+    if (userEdited) return mutablePatch;
     if (!starterCode) return patch;
 
     const next = { ...patchAny };
@@ -215,12 +498,20 @@ export async function fetchResolvedPracticeItem(args: {
         resolvers.raw,
     ) as Exercise;
 
-    let item = initItemFromExercise(resolvedExercise, key, {
-        resolveText: resolvers.resolveText,
-    });
+    let item = normalizeCurrentPracticeItem(
+        initItemFromExercise(resolvedExercise, key, {
+            resolveText: resolvers.resolveText,
+        }),
+        resolvedExercise,
+        response as Record<string, unknown>,
+    );
 
     if (transformItem) {
-        item = transformItem(item, resolvedExercise);
+        item = normalizeCurrentPracticeItem(
+            transformItem(item, resolvedExercise),
+            resolvedExercise,
+            response as Record<string, unknown>,
+        );
     }
 
     const resolvedPatch = sanitizeSavedPatchForResolvedExercise(
@@ -245,14 +536,6 @@ export async function fetchResolvedPracticeItem(args: {
         item = {
             ...item,
             ...safePatch,
-            help: {
-                ...item.help,
-                ...(safePatch.help ?? {}),
-                entries: {
-                    ...item.help.entries,
-                    ...(safePatch.help?.entries ?? {}),
-                },
-            },
         };
     }
     return {

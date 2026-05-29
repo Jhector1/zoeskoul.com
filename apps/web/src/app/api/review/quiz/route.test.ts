@@ -12,6 +12,8 @@ type ReviewQuizQuestion = {
         preferPurpose?: "quiz" | "project" | "mixed";
         preferKind?: string | null;
         exerciseKey?: string;
+        seedPolicy?: "actor" | "global";
+        salt?: string;
     };
 };
 
@@ -36,6 +38,13 @@ type ReviewQuizInstanceCreateArgs = {
     };
 };
 
+type ReviewQuizInstanceDeleteManyArgs = {
+    where: {
+        actorKey: string;
+        quizKey: string;
+    };
+};
+
 const mockDb = vi.hoisted(() => ({
     quizRows: new Map<string, StoredQuizRow>(),
     practiceTopicFindMany: vi.fn(async () => []),
@@ -54,7 +63,11 @@ vi.mock("@/lib/prisma", () => ({
                 mockDb.quizRows.set(key, { questions: data.questions });
                 return { id: "review-quiz-1", ...data };
             }),
-            deleteMany: vi.fn(async () => ({ count: 0 })),
+            deleteMany: vi.fn(async ({ where }: ReviewQuizInstanceDeleteManyArgs) => {
+                const key = `${where.actorKey}|${where.quizKey}`;
+                const existed = mockDb.quizRows.delete(key);
+                return { count: existed ? 1 : 0 };
+            }),
         },
         practiceTopic: {
             findMany: mockDb.practiceTopicFindMany,
@@ -187,6 +200,92 @@ describe("/api/review/quiz route", () => {
         expect(json.questions).toHaveLength(1);
         expect(json.questions[0].fetch.preferPurpose).toBe("project");
         expect(json.questions[0].fetch.preferKind).toBe("code_input");
+    });
+
+    it("returns a one-step try-it style project request through the normal project/code_input flow", async () => {
+        const route = await import("./route");
+
+        const req = new Request("http://localhost:3000/api/review/quiz", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+                subject: "sql",
+                moduleSlug: "sql-module-1",
+                mode: "project",
+                steps: [
+                    {
+                        id: "try_filter_one_table",
+                        topic: "sql.quiz-topic",
+                        preferKind: "code_input",
+                        exerciseKey: "project-code",
+                        seedPolicy: "global",
+                        maxAttempts: null,
+                    },
+                ],
+            }),
+        });
+
+        const res = await route.POST(req);
+        expect(res.status).toBe(200);
+
+        const json = await res.json();
+        expect(json.requested).toBe(1);
+        expect(json.generated).toBe(1);
+        expect(json.questions).toHaveLength(1);
+        expect(json.questions[0].fetch.preferPurpose).toBe("project");
+        expect(json.questions[0].fetch.preferKind).toBe("code_input");
+        expect(json.questions[0].fetch.exerciseKey).toBe("project-code");
+        expect(json.questions[0].fetch.seedPolicy).toBe("global");
+    });
+
+    it("discards a stale frozen project instance when its stored step topic no longer matches the spec", async () => {
+        const route = await import("./route");
+        const { buildReviewQuizKey } = await import("@/lib/review/api/quiz/keys");
+
+        const spec = ReviewQuizSpecSchema.parse({
+            subject: "sql",
+            moduleSlug: "sql-module-1",
+            mode: "project" as const,
+            steps: [
+                {
+                    id: "step-1",
+                    topic: "sql.quiz-topic",
+                    preferKind: "code_input",
+                },
+            ],
+        });
+
+        const quizKey = buildReviewQuizKey(spec);
+        mockDb.quizRows.set(`u:test-user|${quizKey}`, {
+            questions: [
+                {
+                    kind: "practice",
+                    id: "stale-step-1",
+                    fetch: {
+                        topic: "sql.wrong-topic",
+                        preferPurpose: "project",
+                        preferKind: "code_input",
+                        exerciseKey: "project-code",
+                        salt: `${quizKey}|step=step-1|slot=1`,
+                    },
+                },
+            ],
+        });
+
+        const req = new Request("http://localhost:3000/api/review/quiz", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(spec),
+        });
+
+        const res = await route.POST(req);
+        expect(res.status).toBe(200);
+
+        const json = await res.json();
+        expect(json.questions).toHaveLength(1);
+        expect(json.questions[0].fetch.topic).toBe("sql.quiz-topic");
+        expect(json.questions[0].fetch.preferPurpose).toBe("project");
+        expect(mockDb.quizRows.get(`u:test-user|${quizKey}`)?.questions[0]?.fetch.topic).toBe("sql.quiz-topic");
     });
 
     it("ignores stale purpose-v2 frozen rows and regenerates with purpose-v3", async () => {

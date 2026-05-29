@@ -302,6 +302,49 @@ export function resolvePreferredExerciseWorkspace(args: {
     return savedWorkspace;
 }
 
+function workspaceContentKeyForExerciseRenderer(workspace: WorkspaceStateV2 | null | undefined) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return JSON.stringify(workspace ?? null);
+    }
+
+    const folderPathById = new Map<string, string>();
+    let changed = true;
+    while (changed) {
+        changed = false;
+        for (const node of workspace.nodes as any[]) {
+            if (!node || node.kind !== "folder") continue;
+            const id = String(node.id ?? "");
+            if (!id || folderPathById.has(id)) continue;
+            const name = String(node.name ?? "");
+            const parentId = node.parentId == null ? null : String(node.parentId);
+            if (parentId && !folderPathById.has(parentId)) continue;
+            const parent = parentId ? folderPathById.get(parentId) || "" : "";
+            folderPathById.set(id, parent ? `${parent}/${name}` : name);
+            changed = true;
+        }
+    }
+
+    const nodePath = (node: any) => {
+        const name = String(node?.name ?? "");
+        const parentId = node?.parentId == null ? null : String(node.parentId);
+        const parent = parentId ? folderPathById.get(parentId) || "" : "";
+        return parent ? `${parent}/${name}` : name;
+    };
+
+    const files = (workspace.nodes as any[])
+        .filter((node) => node?.kind === "file")
+        .map((node) => ({
+            path: nodePath(node),
+            content: String(node.content ?? ""),
+        }))
+        .sort((a, b) => a.path.localeCompare(b.path));
+
+    return JSON.stringify({
+        language: workspace.language ?? null,
+        files,
+    });
+}
+
 export function shouldSkipEmbeddedEnsureExercise(args: {
     existing: any;
     manifestLanguage: string;
@@ -341,7 +384,10 @@ export function shouldSkipEmbeddedEnsureExercise(args: {
     }
 
     if (existingHasContent) {
-        return true;
+        return (
+            workspaceContentKeyForExerciseRenderer(existingWorkspace) ===
+            workspaceContentKeyForExerciseRenderer(manifestStarterWorkspace)
+        );
     }
 
     return !manifestHasStarter;
@@ -537,24 +583,6 @@ function CodeInputWithTools(props: {
     const curCode = (current as any).code ?? exercise.starterCode ?? "";
     const curStdin = (current as any).codeStdin ?? "";
 
-    const manifestStarterWorkspace = resolveExerciseWorkspace({
-        language: curLang as any,
-        manifest: exercise,
-    });
-    const currentWorkspaceRaw = getWorkspaceFromAnyState(current);
-    const currentWorkspace = stateLanguageMatches(
-        current,
-        manifestLanguage,
-        currentWorkspaceRaw,
-    )
-        ? currentWorkspaceRaw
-        : null;
-    const curWorkspace = resolvePreferredExerciseWorkspace({
-        savedState: current,
-        savedWorkspace: currentWorkspace,
-        starterWorkspace: manifestStarterWorkspace,
-    });
-
     const stableExerciseId = getStableExerciseId({
         exerciseStateId,
         exercise,
@@ -573,6 +601,43 @@ function CodeInputWithTools(props: {
     );
 
     const exerciseKey = commonExerciseKey;
+
+    const routeTargetEntry = useReviewRuntimeStore((s) => {
+        const registry = s.targetRegistry;
+        if (!registry) return null;
+
+        return (
+            registry.byKey[`exercise:${exerciseKey}`] ??
+            registry.byKey[exerciseKey] ??
+            Object.values(registry.byKey).find(
+                (entry: any) =>
+                    entry?.targetKind === "exercise" &&
+                    entry?.exerciseStateKey === exerciseKey,
+            ) ??
+            null
+        );
+    });
+
+    const exerciseManifest = ((routeTargetEntry as any)?.item ?? exercise) as any;
+
+    const manifestStarterWorkspace = resolveExerciseWorkspace({
+        language: curLang as any,
+        manifest: exerciseManifest,
+        entry: routeTargetEntry,
+    });
+    const currentWorkspaceRaw = getWorkspaceFromAnyState(current);
+    const currentWorkspace = stateLanguageMatches(
+        current,
+        manifestLanguage,
+        currentWorkspaceRaw,
+    )
+        ? currentWorkspaceRaw
+        : null;
+    const curWorkspace = resolvePreferredExerciseWorkspace({
+        savedState: current,
+        savedWorkspace: currentWorkspace,
+        starterWorkspace: manifestStarterWorkspace,
+    });
 
     const ensureExercise = useReviewRuntimeStore((s) => s.ensureExercise);
     const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
@@ -616,7 +681,8 @@ function CodeInputWithTools(props: {
 
         const manifestStarterWorkspace = resolveExerciseWorkspace({
             language: manifestLanguage,
-            manifest: exCode,
+            manifest: exerciseManifest,
+            entry: routeTargetEntry,
         });
 
         const ensureKey = [
@@ -659,7 +725,8 @@ function CodeInputWithTools(props: {
             sectionSlug,
             topicId: topicId || "",
             cardId: cardId || "",
-            manifest: exercise,
+            manifest: exerciseManifest,
+            entry: routeTargetEntry,
             saved: current,
         });
 
@@ -673,6 +740,8 @@ function CodeInputWithTools(props: {
         sectionSlug,
         topicId,
         cardId,
+        routeTargetEntry,
+        exerciseManifest,
     ]);
     const onPatch = useCallback(
         (patch: any) => {
@@ -717,7 +786,8 @@ function CodeInputWithTools(props: {
         targetKey: exerciseKey,
         targetKind: "exercise",
         language: manifestLanguage,
-        manifest: exercise,
+        manifest: exerciseManifest,
+        entry: routeTargetEntry,
         workspaceRequested: true,
         savedCandidates: [
             compatibleStoreExercise
@@ -819,7 +889,10 @@ function CodeInputWithTools(props: {
 
 
     const registerArgs = useMemo(
-        () => ({
+        () => {
+            const activeStateIsLearnerOwned = isUserOwnedWorkspaceState(activeState);
+
+            return {
             exerciseKey,
             lang: activeLanguage,
             code: normalizedActive.code,
@@ -827,7 +900,18 @@ function CodeInputWithTools(props: {
             stdin: activeStdin,
             ideConfig: exercise.ideConfig ?? null,
             ownerCardId,
-            preferSnapshot: false,
+            /**
+             * The current rendered exercise contract is authoritative for this
+             * registration. bindCodeInput may still preserve compatible learner
+             * workspace when activeState is user/saved, but it must not let a stale
+             * generic tool snapshot (for example Python main.py) beat the live
+             * dynamic practice item starter.
+             */
+            preferSnapshot: !activeStateIsLearnerOwned,
+            userEdited: activeStateIsLearnerOwned,
+            workspaceOrigin: activeStateIsLearnerOwned
+                ? ((activeState as any)?.workspaceOrigin ?? "saved")
+                : "starter",
             sqlDialect: activeLanguage === "sql" ? resolvedExerciseSql.sqlDialect : undefined,
             sqlDatasetId: activeLanguage === "sql" ? resolvedExerciseSql.sqlDatasetId : undefined,
             sqlSchemaSql: activeLanguage === "sql" ? resolvedExerciseSql.sqlSchemaSql : undefined,
@@ -836,7 +920,8 @@ function CodeInputWithTools(props: {
                 activeLanguage === "sql" ? resolvedExerciseSql.sqlInitialTableSnapshots : undefined,
             sqlPaneOptions: activeLanguage === "sql" ? resolvedExerciseSql.sqlPaneOptions : undefined,
             onPatch,
-        }),
+        };
+        },
         [
             exerciseKey,
             activeLanguage,
@@ -845,6 +930,7 @@ function CodeInputWithTools(props: {
             normalizedActive.code,
             normalizedActive.workspace,
             ownerCardId,
+            activeState,
             exerciseSqlDialect,
             exerciseSqlSchemaSql,
             exerciseSqlSeedSql,
@@ -870,7 +956,7 @@ function CodeInputWithTools(props: {
 
     useEffect(() => {
         registerCodeInput(codeInputId, registerArgs);
-    }, [registerCodeInput, codeInputId, registerArgs]);
+    }, [registerCodeInput, codeInputId, registerArgs, boundId]);
 
     /**
      * Critical:
@@ -1514,7 +1600,7 @@ export default function ExerciseRenderer({
                     ownerCardId={codeOwnerCardId}
                     updateCurrent={updateCurrent}
                     showPrompt={showPrompt}
-                    toolAutoOpen={codeToolsAutoOpen}
+                    toolAutoOpen={codeToolsAutoOpen && !lockInputs && !readOnly}
                     feedback={codeFeedback}
                     explanation={codeExplanation}
                     subjectSlug={subjectSlug}

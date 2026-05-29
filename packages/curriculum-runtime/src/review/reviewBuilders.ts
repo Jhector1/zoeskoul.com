@@ -65,15 +65,19 @@ export function makeProjectSpec(args: any) {
     maxAttempts: args.maxAttempts,
     steps: args.steps,
     runtime: args.runtime ?? null,
+    tryIt: args.tryIt,
+    displayKind: args.displayKind,
+    uiKind: args.uiKind,
   };
 }
 
 export function makeProjectCard(args: any) {
   return {
     type: "project",
-    id: `${args.topicId}_p${args.index}`,
+    id: args.id ?? `${args.topicId}_p${args.index}`,
     title: args.title,
     passScore: args.passScore ?? 0.75,
+    tryIt: args.tryIt,
     spec: args.spec,
   };
 }

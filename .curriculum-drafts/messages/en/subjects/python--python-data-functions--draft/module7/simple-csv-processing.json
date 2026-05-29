@@ -170,9 +170,9 @@
               "prompt": "Open the provided `students.csv` file, read it with `csv.DictReader`, and print each student's cleaned name on its own line. Remove spaces around the name with `.strip()`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "starterCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # print the cleaned name\n        pass"
             },
@@ -181,9 +181,9 @@
               "prompt": "Open the provided `scores.csv` file and read it with `csv.DictReader`. For each row, clean the `score` value with `.strip()`. If it can be converted to an integer, add it to a running total. If conversion fails, skip that row. At the end, print the total.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "starterCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # try to convert the cleaned score and add it to total\n        pass\n\nprint(total)"
             },
@@ -192,9 +192,9 @@
               "prompt": "Read the provided `scores.csv` file with `csv.DictReader`. Count how many rows have a valid integer score and compute the total of those valid scores. Then create `summary.txt` and write exactly two lines:\n`valid_rows: X`\n`total_score: Y`\nAfter writing the file, open `summary.txt` again and print its contents.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "starterCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # update valid_rows and total_score for rows with valid integer scores\n        pass\n\n# write summary.txt, then print its contents"
             }

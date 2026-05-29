@@ -269,6 +269,20 @@ export function useReviewModuleController({
     }, [store, flush]);
 
     const initialRouteTarget = useMemo<ReviewResolvedRouteTarget | null>(() => {
+        const resolved = resolveReviewRouteTarget({
+            mod,
+            subjectSlug,
+            moduleSlug,
+            route: {
+                sectionSlug: params?.sectionSlug,
+                topicId: params?.topicId,
+                topicSlug: params?.topicSlug,
+                targetKind: params?.targetKind,
+                targetSlug: params?.targetSlug,
+            },
+        });
+        if (resolved) return resolved;
+
         if (targetRegistry && params?.sectionSlug && params?.topicSlug && params?.targetKind && params?.targetSlug) {
             const routeKey = `${params.sectionSlug}/${params.topicSlug}/${params.targetKind}/${params.targetSlug}`;
             const targetKey = targetRegistry.byRoute[routeKey];
@@ -281,18 +295,7 @@ export function useReviewModuleController({
             }
         }
 
-        return resolveReviewRouteTarget({
-            mod,
-            subjectSlug,
-            moduleSlug,
-            route: {
-                sectionSlug: params?.sectionSlug,
-                topicId: params?.topicId,
-                topicSlug: params?.topicSlug,
-                targetKind: params?.targetKind,
-                targetSlug: params?.targetSlug,
-            },
-        });
+        return null;
     }, [
         mod,
         moduleSlug,
@@ -416,14 +419,22 @@ export function useReviewModuleController({
                             ],
                     )
                     : null;
-            let nextResolved = registryResolved ?? resolved;
+            let nextResolved = resolved ?? registryResolved;
 
             const nextTargetKey = getTargetKeyForRouteTarget(targetRegistry, nextResolved);
             const nextTargetTrustedBypass =
                 Boolean(nextTargetKey) &&
                 trustedProgressiveBypassTargetKeyRef.current === nextTargetKey;
 
+            const nextIsBrowserHistoryExercise =
+                nextResolved?.kind === "exercise" && Boolean(nextTargetKey);
+
+            if (nextIsBrowserHistoryExercise && nextTargetKey) {
+                trustedProgressiveBypassTargetKeyRef.current = nextTargetKey;
+            }
+
             const nextIsUnlocked =
+                nextIsBrowserHistoryExercise ||
                 nextTargetTrustedBypass ||
                 unlockAll ||
                 !progressHydrated ||
@@ -1245,12 +1256,29 @@ export function useReviewModuleController({
     const handleBindToToolsPanel = useCallback(
         async (args: Parameters<typeof tool.bindCodeInput>[0]) => {
             const ownerCardId = args.ownerCardId?.trim() || activeCard?.id || "general";
-            const targetExerciseKey = (args as any).exerciseKey ?? args.id;
+            const targetExerciseKey = String((args as any).exerciseKey ?? args.id ?? "");
             const activeRouteTarget = routeTargetRef.current;
-            const routeExerciseId =
-                typeof args.id === "string" && args.id.trim()
-                    ? args.id
-                    : targetExerciseKey;
+            const inputId = typeof args.id === "string" ? args.id.trim() : "";
+
+            const activeRouteOwnsThisExercise =
+                activeRouteTarget?.kind === "exercise" &&
+                activeRouteTarget.cardId === ownerCardId &&
+                (
+                    activeRouteTarget.exerciseStateKey === targetExerciseKey ||
+                    activeRouteTarget.exerciseStateKey === inputId ||
+                    activeRouteTarget.exerciseId === inputId
+                );
+
+            const routeExerciseId = activeRouteOwnsThisExercise
+                ? activeRouteTarget.exerciseId
+                : inputId && !inputId.includes(":")
+                    ? inputId
+                    : targetExerciseKey && !targetExerciseKey.includes(":")
+                        ? targetExerciseKey
+                        : activeRouteTarget?.kind === "exercise" && activeRouteTarget.cardId === ownerCardId
+                            ? activeRouteTarget.exerciseId
+                            : inputId || targetExerciseKey;
+
             const nextTarget = buildReviewExerciseRouteTarget({
                 mod,
                 topicId: viewTid,
@@ -1275,9 +1303,10 @@ export function useReviewModuleController({
             if (
                 activeRouteTarget?.cardId &&
                 ownerCardId &&
-                activeRouteTarget.cardId !== ownerCardId
+                activeRouteTarget.cardId !== ownerCardId &&
+                activeCard?.id !== ownerCardId
             ) {
-                return;
+                return false;
             }
 
             const currentExerciseStateKey =
@@ -1286,17 +1315,17 @@ export function useReviewModuleController({
                     : null;
 
             const routeAlreadyActive =
-                currentExerciseStateKey === nextTarget.exerciseStateKey;
+                currentExerciseStateKey === nextTarget.exerciseStateKey ||
+                currentExerciseStateKey === targetExerciseKey ||
+                currentExerciseStateKey === inputId;
 
             if (
                 activeRouteTarget?.kind === "exercise" &&
                 activeRouteTarget.cardId === ownerCardId &&
                 !routeAlreadyActive
             ) {
-                return;
+                return false;
             }
-
-            void tool.flushLatest();
 
             await tool.bindCodeInput(args as any);
 
@@ -1305,11 +1334,14 @@ export function useReviewModuleController({
                     bypassProgressiveLock: true,
                 });
             }
+
+            return true;
         },
         [
             tool.bindCodeInput,
             tool.flushLatest,
             tool.boundId,
+            activeCard?.id,
             navigateToResolvedTarget,
             mod,
             moduleSlug,
@@ -1335,8 +1367,17 @@ export function useReviewModuleController({
     const toolsProvider = useMemo(
         () => ({
             enabled: panels.toolsUiEnabled,
-            resetKey: `${viewTid}:${versionStr}`,
-            externalBoundId: activeExerciseTarget?.exerciseId ?? null,
+            /**
+             * Keep the registry stable across progress/version churn.
+             *
+             * Mounted practice/project exercise renderers do not automatically
+             * re-register just because quizVersion changed, so including
+             * versionStr here can clear the code-input registry while the
+             * global tool binding still points at the same exercise.
+             */
+            resetKey: viewTid,
+            externalBoundId:
+                activeExerciseTarget?.exerciseStateKey ?? activeExerciseTarget?.exerciseId ?? null,
             ensureVisible: handleEnsureToolsVisible,
             onBindToToolsPanel: handleBindToToolsPanel,
             onUnbindFromToolsPanel: handleUnbindFromToolsPanel,
@@ -1344,7 +1385,7 @@ export function useReviewModuleController({
         [
             panels.toolsUiEnabled,
             viewTid,
-            versionStr,
+            activeExerciseTarget?.exerciseStateKey,
             activeExerciseTarget?.exerciseId,
             handleEnsureToolsVisible,
             handleBindToToolsPanel,

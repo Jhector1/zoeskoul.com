@@ -184,6 +184,16 @@ async function expectExerciseShowsStarterWorkspace(page: Page) {
 }
 
 async function replaceMonacoText(page: Page, text: string) {
+    const e2eInput = page.getByTestId("code-editor-e2e-input").last();
+
+    if (await e2eInput.count()) {
+        await expect(e2eInput).toBeAttached({
+            timeout: 30_000,
+        });
+        await e2eInput.fill(text);
+        return;
+    }
+
     const editor = page.locator(".monaco-editor").first();
     const viewLines = page.locator(".monaco-editor .view-lines").first();
 

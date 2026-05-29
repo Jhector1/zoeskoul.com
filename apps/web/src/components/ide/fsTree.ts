@@ -22,7 +22,11 @@ function isSyntheticProjectRoot(nodes: FSNode[]) {
         (n): n is FileNode => n.kind === "file" && n.parentId === null,
     );
 
-    if (topFolders.length === 1 && topFiles.length === 0) {
+    if (
+        topFolders.length === 1 &&
+        topFiles.length === 0 &&
+        topFolders[0].name === "src"
+    ) {
         return topFolders[0];
     }
 
@@ -38,8 +42,6 @@ function relativeNodePathOf(
     const parts = full.split("/").filter(Boolean);
 
     if (syntheticRootName && parts[0] === syntheticRootName) {
-        parts.shift();
-    } else if (!syntheticRootName && parts.length > 1) {
         parts.shift();
     }
 
@@ -196,14 +198,9 @@ export function exportWorkspaceEntries(nodes: FSNode[]): WorkspaceSyncEntry[] {
 
     return [...folders, ...files];
 }
-
 export function relativeProjectPathOf(nodes: FSNode[], id: NodeId): string {
-    const full = pathOf(nodes, id);
-    const parts = full.split("/").filter(Boolean);
+    const syntheticRoot = isSyntheticProjectRoot(nodes);
+    const syntheticRootName = syntheticRoot?.name ?? null;
 
-    if (parts.length > 1) {
-        parts.shift();
-    }
-
-    return parts.join("/");
+    return relativeNodePathOf(nodes, id, syntheticRootName);
 }

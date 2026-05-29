@@ -268,11 +268,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-write-greeting-file",
       "language": "python",
-      "starterCode": "# Write your code below",
+      "starterCode": "name = input()\n\n# Write Hello, NAME! to greeting.txt.\n# Then open greeting.txt and print its contents.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your code below",
+          "content": "name = input()\n\n# Write Hello, NAME! to greeting.txt.\n# Then open greeting.txt and print its contents.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -281,21 +281,14 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your code below",
+        "starterCode": "name = input()\n\n# Write Hello, NAME! to greeting.txt.\n# Then open greeting.txt and print its contents.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your code below",
+            "content": "name = input()\n\n# Write Hello, NAME! to greeting.txt.\n# Then open greeting.txt and print its contents.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "files": [
-          {
-            "path": "greeting.txt",
-            "content": "Hello, Zoe!",
-            "readOnly": true
           }
         ]
       },
@@ -304,31 +297,17 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
+            "stdin": "zoe\n",
             "stdout": "Hello, Zoe!\n",
-            "match": "exact",
-            "files": [
-              {
-                "path": "greeting.txt",
-                "content": "Hello, Zoe!",
-                "readOnly": true
-              }
-            ]
+            "match": "exact"
           },
           {
-            "stdin": "ignored input\n",
-            "stdout": "Hello, Zoe!\n",
-            "match": "exact",
-            "files": [
-              {
-                "path": "greeting.txt",
-                "content": "Hello, Zoe!",
-                "readOnly": true
-              }
-            ]
+            "stdin": "Mina\n",
+            "stdout": "Hello, Mina!\n",
+            "match": "exact"
           }
         ],
-        "solutionCode": "with open(\"greeting.txt\", \"w\") as file:\n    file.write(\"Hello, Zoe!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())"
+        "solutionCode": "name = input().strip().title()\n\nwith open(\"greeting.txt\", \"w\") as file:\n    file.write(f\"Hello, {name}!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())\n"
       }
     },
     {
@@ -338,11 +317,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-overwrite-shopping-list",
       "language": "python",
-      "starterCode": "# Write your code below",
+      "starterCode": "first_item = input()\nsecond_item = input()\n\n# Write both items to shopping.txt, one per line.\n# Then print the file contents.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your code below",
+          "content": "first_item = input()\nsecond_item = input()\n\n# Write both items to shopping.txt, one per line.\n# Then print the file contents.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -351,21 +330,14 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your code below",
+        "starterCode": "first_item = input()\nsecond_item = input()\n\n# Write both items to shopping.txt, one per line.\n# Then print the file contents.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your code below",
+            "content": "first_item = input()\nsecond_item = input()\n\n# Write both items to shopping.txt, one per line.\n# Then print the file contents.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "files": [
-          {
-            "path": "shopping.txt",
-            "content": "Old item\nMilk\nEggs",
-            "readOnly": false
           }
         ]
       },
@@ -374,31 +346,17 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
+            "stdin": "bread\napples\n",
             "stdout": "Bread\nApples\n",
-            "match": "exact",
-            "files": [
-              {
-                "path": "shopping.txt",
-                "content": "Old item\nMilk\nEggs",
-                "readOnly": false
-              }
-            ]
+            "match": "exact"
           },
           {
-            "stdin": "another run\n",
-            "stdout": "Bread\nApples\n",
-            "match": "exact",
-            "files": [
-              {
-                "path": "shopping.txt",
-                "content": "Nothing here yet",
-                "readOnly": false
-              }
-            ]
+            "stdin": "milk\neggs\n",
+            "stdout": "Milk\nEggs\n",
+            "match": "exact"
           }
         ],
-        "solutionCode": "with open(\"shopping.txt\", \"w\") as file:\n    file.write(\"Bread\\nApples\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")"
+        "solutionCode": "first_item = input().strip().title()\nsecond_item = input().strip().title()\n\nwith open(\"shopping.txt\", \"w\") as file:\n    file.write(first_item + \"\\n\")\n    file.write(second_item + \"\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")\n"
       }
     },
     {
@@ -408,11 +366,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-append-log-entry",
       "language": "python",
-      "starterCode": "# Append one new line to log.txt, then print the full file contents.",
+      "starterCode": "entry = input()\n\n# Append the entry to log.txt on a new line, then print the full file.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Append one new line to log.txt, then print the full file contents.",
+          "content": "entry = input()\n\n# Append the entry to log.txt on a new line, then print the full file.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -421,11 +379,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Append one new line to log.txt, then print the full file contents.",
+        "starterCode": "entry = input()\n\n# Append the entry to log.txt on a new line, then print the full file.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Append one new line to log.txt, then print the full file contents.",
+            "content": "entry = input()\n\n# Append the entry to log.txt on a new line, then print the full file.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -444,8 +402,8 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "Start shiftChecked sensors",
+            "stdin": "Checked sensors\n",
+            "stdout": "Start shift\nChecked sensors",
             "match": "exact",
             "files": [
               {
@@ -456,19 +414,19 @@
             ]
           },
           {
-            "stdin": "unused\n",
-            "stdout": "Start shift\nDoors lockedChecked sensors",
+            "stdin": "Doors locked\n",
+            "stdout": "Start shift\nChecked sensors\nDoors locked",
             "match": "exact",
             "files": [
               {
                 "path": "log.txt",
-                "content": "Start shift\nDoors locked",
+                "content": "Start shift\nChecked sensors",
                 "readOnly": false
               }
             ]
           }
         ],
-        "solutionCode": "with open(\"log.txt\", \"a\") as file:\n    file.write(\"Checked sensors\\n\")\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")"
+        "solutionCode": "entry = input().strip()\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"\\n\" + entry)\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")\n"
       }
     }
   ]

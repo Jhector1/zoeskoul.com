@@ -68,6 +68,13 @@ export async function createPracticeInstance(args: {
         throw new Error(`Expected.kind "${expectedCanon.kind}" != instance kind "${kindEnum}".`);
     }
 
+    /**
+     * PracticeQuestionInstance.publicPayload snapshots the resolved exercise for
+     * validation/runtime APIs, but authored project content must still be
+     * re-resolved from the current compiled topic bundle on each fresh load.
+     * Persisted learner progress must never be treated as the source of truth
+     * for authored contract fields.
+     */
     const publicPayload = {
         ...(exercise as any),
         topic: dbTopicSlug,

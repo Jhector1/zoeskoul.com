@@ -11,11 +11,14 @@ const FILE_IO_EXERCISE_URL =
     "/en/catalog/python/subjects/python-data-functions/modules/python-7-files-exceptions-and-data-cleaning/learn/python--python-data-functions--draft-python-7-file-io/reading-text-files/exercise/quiz9?e2eUnlockAll=1";
 
 const SOLUTION_CODE = [
-    "with open('data.txt', 'r') as file:",
-    "    content = file.read()",
-    "    print(content)",
+    'with open("data/message.txt", "r") as file:',
+    "    text = file.read()",
+    "    print(text)",
 ].join("\n");
 
+const FIXTURE_PATH = "data/message.txt";
+const FIXTURE_NODE_TEST_ID = "tools-file-node-message.txt";
+const FIXTURE_FOLDER_TEST_ID = "tools-file-node-data";
 const FIXTURE_CONTENT = "Hello, World!\nThis is a test file.";
 const FIXTURE_OUTPUT = `${FIXTURE_CONTENT}\n`;
 const PRACTICE_FIXTURES = {
@@ -38,7 +41,7 @@ const PRACTICE_FIXTURES = {
             ],
             files: [
                 {
-                    path: "data.txt",
+                    path: FIXTURE_PATH,
                     content: FIXTURE_CONTENT,
                 },
             ],
@@ -127,13 +130,13 @@ function collectSubmittedFiles(value: unknown): SubmittedFile[] {
 
 function hasWorkspaceFixture(files: SubmittedFile[]) {
     return files.some(
-        (file) => file.path === "data.txt" && file.content === FIXTURE_CONTENT,
+        (file) => file.path === FIXTURE_PATH && file.content === FIXTURE_CONTENT,
     );
 }
 
 function hasWorkspaceEntry(files: SubmittedFile[]) {
     return files.some(
-        (file) => file.path === "main.py" && file.content.includes("open('data.txt'"),
+        (file) => file.path === "main.py" && file.content.includes('open("data/message.txt"'),
     );
 }
 
@@ -405,10 +408,10 @@ async function installWorkspacePayloadMocks(page: Page) {
             stdout: hasExpectedWorkspace ? FIXTURE_OUTPUT : "",
             stderr: hasExpectedWorkspace
                 ? ""
-                : "FileNotFoundError: [Errno 2] No such file or directory: 'data.txt'\n",
+                : `FileNotFoundError: [Errno 2] No such file or directory: '${FIXTURE_PATH}'\n`,
             output: hasExpectedWorkspace
                 ? FIXTURE_OUTPUT
-                : "FileNotFoundError: [Errno 2] No such file or directory: 'data.txt'\n",
+                : `FileNotFoundError: [Errno 2] No such file or directory: '${FIXTURE_PATH}'\n`,
         });
 
         await route.fulfill({
@@ -480,7 +483,7 @@ async function installWorkspacePayloadMocks(page: Page) {
                 finalized: hasExpectedWorkspace,
                 explanation: hasExpectedWorkspace
                     ? "Correct."
-                    : "FileNotFoundError: [Errno 2] No such file or directory: 'data.txt'",
+                    : 'FileNotFoundError: [Errno 2] No such file or directory: "data/message.txt"',
                 attempts: {
                     used: 1,
                     max: 3,
@@ -533,10 +536,12 @@ test("python file I/O exercise check uses the visible editor workspace and fixtu
 
     const editor = page.getByTestId("code-editor-e2e-input").last();
     const mainNode = page.getByTestId("tools-file-node-main.py");
-    const dataNode = page.getByTestId("tools-file-node-data.txt");
+    const dataFolderNode = page.getByTestId(FIXTURE_FOLDER_TEST_ID);
+    const dataNode = page.getByTestId(FIXTURE_NODE_TEST_ID);
     const runButton = page.getByTestId("code-runner-run-button").first();
 
     await expect(mainNode).toBeVisible({ timeout: 30_000 });
+    await expect(dataFolderNode).toBeVisible({ timeout: 30_000 });
     await expect(dataNode).toBeVisible({ timeout: 30_000 });
     await expect(mainNode).toHaveAttribute("data-node-active", "true");
     await expect(mainNode).toHaveAttribute("data-node-entry", "true");
@@ -562,7 +567,7 @@ test("python file I/O exercise check uses the visible editor workspace and fixtu
 
     await expect
         .poll(() => editor.inputValue(), { timeout: 10_000 })
-        .toContain("open('data.txt'");
+        .toContain('open("data/message.txt"');
 
     await expect(mainNode).toHaveAttribute("data-node-active", "true");
     await expect(dataNode).not.toHaveAttribute("data-node-active", "true");
@@ -599,10 +604,10 @@ test("python file I/O exercise check uses the visible editor workspace and fixtu
         expect.arrayContaining([
             expect.objectContaining({
                 path: "main.py",
-                content: expect.stringContaining("open('data.txt'"),
+                content: expect.stringContaining('open("data/message.txt"'),
             }),
             expect.objectContaining({
-                path: "data.txt",
+                path: FIXTURE_PATH,
                 content: FIXTURE_CONTENT,
             }),
         ]),
@@ -612,13 +617,13 @@ test("python file I/O exercise check uses the visible editor workspace and fixtu
     /**
      * Critical regression assertion:
      * after a correct Check, this test must still be on quiz9.
-     * Otherwise Run would execute quiz10 and the expected data.txt output
+     * Otherwise Run would execute quiz10 and the expected file output
      * would be invalid.
      */
     await expect(page).toHaveURL(/\/exercise\/quiz9(?:\?.*)?$/, {
         timeout: 10_000,
     });
-    await expect(page.getByTestId("tools-file-node-data.txt")).toBeVisible({
+    await expect(page.getByTestId(FIXTURE_NODE_TEST_ID)).toBeVisible({
         timeout: 10_000,
     });
     await expect(page.getByTestId("tools-file-node-main.py")).toHaveAttribute(
@@ -651,10 +656,10 @@ test("python file I/O exercise check uses the visible editor workspace and fixtu
         expect.arrayContaining([
             expect.objectContaining({
                 path: "main.py",
-                content: expect.stringContaining("open('data.txt'"),
+                content: expect.stringContaining('open("data/message.txt"'),
             }),
             expect.objectContaining({
-                path: "data.txt",
+                path: FIXTURE_PATH,
                 content: FIXTURE_CONTENT,
             }),
         ]),

@@ -66,6 +66,7 @@ export function isReviewTargetComplete(args: {
         {
             id: entry.cardId,
             type: entry.cardType,
+            tryIt: entry.tryIt ?? null,
         } as any,
         topic,
     );

@@ -187,20 +187,23 @@ const projectStep3SolutionFiles = {
         "values = [1, 2, 3]\nprint(sum_list(values))\n",
 };
 
+const fileIoFixtureText = "Hello, World!\nThis is a test file.";
+
 const fileIoStarterFiles = {
     "main.py": "# Write your answer below\n",
+    "data.txt": fileIoFixtureText,
 };
 
 const fileIoSolutionFiles = {
     "main.py":
         "with open('data.txt', 'r') as file:\n    content = file.read()\n    print(content)\n",
-    "data.txt": "Hello, World!\nThis is a test file.",
+    "data.txt": fileIoFixtureText,
 };
 
 const fileIoWorkspaceFiles = [
     {
         path: "data.txt",
-        content: "Hello, World!\nThis is a test file.",
+        content: fileIoFixtureText,
         readOnly: true,
     },
 ];
@@ -243,7 +246,20 @@ const fileIoDefinition = {
         starterFiles: fileIoStarterFiles,
         solutionFiles: fileIoSolutionFiles,
         files: fileIoWorkspaceFiles,
+        fixtureFiles: fileIoWorkspaceFiles,
+        initialFiles: fileIoWorkspaceFiles,
+        workspaceFiles: fileIoWorkspaceFiles,
+        fixtures: fileIoWorkspaceFiles,
+        fileFixtures: fileIoWorkspaceFiles,
     } as any,
+    starterFiles: fileIoStarterFiles,
+    solutionFiles: fileIoSolutionFiles,
+    files: fileIoWorkspaceFiles,
+    fixtureFiles: fileIoWorkspaceFiles,
+    initialFiles: fileIoWorkspaceFiles,
+    workspaceFiles: fileIoWorkspaceFiles,
+    fixtures: fileIoWorkspaceFiles,
+    fileFixtures: fileIoWorkspaceFiles,
     starterCode: fileIoStarterFiles["main.py"],
     solutionCode: fileIoSolutionFiles["main.py"],
 };
@@ -263,6 +279,11 @@ function makeProjectCard({
         starterCode: string;
         solutionCode: string;
         files?: Array<{ path: string; content: string; readOnly?: boolean }>;
+        fixtureFiles?: Array<{ path: string; content: string; readOnly?: boolean }>;
+        initialFiles?: Array<{ path: string; content: string; readOnly?: boolean }>;
+        workspaceFiles?: Array<{ path: string; content: string; readOnly?: boolean }>;
+        fixtures?: Array<{ path: string; content: string; readOnly?: boolean }>;
+        fileFixtures?: Array<{ path: string; content: string; readOnly?: boolean }>;
     }>;
 }): ReviewCard {
     return {
@@ -295,7 +316,16 @@ function makeProjectCard({
                         entryFile: "main.py",
                         starterFiles: step.starterFiles,
                         solutionFiles: step.solutionFiles,
-                        ...(step.files?.length ? { files: step.files } : {}),
+                        ...(step.files?.length
+                            ? {
+                                files: step.files,
+                                fixtureFiles: (step as any).fixtureFiles ?? step.files,
+                                initialFiles: (step as any).initialFiles ?? step.files,
+                                workspaceFiles: (step as any).workspaceFiles ?? step.files,
+                                fixtures: (step as any).fixtures ?? step.files,
+                                fileFixtures: (step as any).fileFixtures ?? step.files,
+                            }
+                            : {}),
                     },
                     starterCode: step.starterCode,
                     solutionCode: step.solutionCode,
@@ -416,6 +446,11 @@ const reviewCloneTopic = {
                     starterCode: fileIoStarterFiles["main.py"],
                     solutionCode: fileIoSolutionFiles["main.py"],
                     files: fileIoWorkspaceFiles,
+                    fixtureFiles: fileIoWorkspaceFiles,
+                    initialFiles: fileIoWorkspaceFiles,
+                    workspaceFiles: fileIoWorkspaceFiles,
+                    fixtures: fileIoWorkspaceFiles,
+                    fileFixtures: fileIoWorkspaceFiles,
                 },
             ],
         }),

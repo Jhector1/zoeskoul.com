@@ -116,11 +116,11 @@
             "dr-contract-reading": {
               "title": "Read a function contract in order",
               "prompt": "Arrange these ideas in a sensible order for understanding a function contract.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the code pieces in the order Python should run them.",
               "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "concept": "The pieces should form valid Python code in the order it should run.",
+                "hint_1": "Start with the line that sets up the Python action.",
+                "hint_2": "Place lines that depend on earlier values after those values exist."
               },
               "tokens": {
                 "t1": "Inputs the function expects",

@@ -40,7 +40,7 @@
               "hint": "Use the question wording and the lesson example to narrow the choices.",
               "help": {
                 "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
                 "hint_2": "Remove options that do not match the concept or evidence named in the question."
               },
               "options": {
@@ -136,7 +136,7 @@
               "hint": "Focus on the missing concept rather than the exact missing term.",
               "help": {
                 "concept": "The blank should be completed with the term that fits the job being described.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
                 "hint_2": "Choose the term that best completes the meaning of the statement."
               },
               "template": "with open(\"report.txt\", [blank1]) as file:",
@@ -164,37 +164,37 @@
               ]
             },
             "ci-write-greeting-file": {
-              "title": "Write and show a greeting",
-              "prompt": "Write a program that opens `greeting.txt` in write mode, writes exactly `Hello, Zoe!` to it, then reopens the file and prints its contents.",
-              "hint": "Read the task \"Write and show a greeting\" and identify the required result.",
+              "title": "Write a personalized greeting file",
+              "prompt": "Read a name, write `Hello, NAME!` to `greeting.txt`, then open the file and print its contents.",
+              "hint": "Use `input()` for the name, then write the formatted greeting into the file.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Write and show a greeting\".",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "Writing text files lets a program save results that can be opened again later.",
+                "hint_1": "Use a `with open(...) as file:` block for the write step.",
+                "hint_2": "Open the same file again for reading when you need to print the saved contents."
               },
-              "starterCode": "# Write your code below"
+              "starterCode": "name = input()\n\n# Write Hello, NAME! to greeting.txt.\n# Then open greeting.txt and print its contents.\n"
             },
             "ci-overwrite-shopping-list": {
-              "title": "Overwrite a list with two lines",
-              "prompt": "Write a program that opens `shopping.txt` in write mode, writes exactly two lines: `Bread` and `Apples`, then reopens the file and prints the full contents.",
-              "hint": "Read the task \"Overwrite a list with two lines\" and identify the required result.",
+              "title": "Overwrite a shopping list from input",
+              "prompt": "Read two shopping items, overwrite `shopping.txt` with one item per line, then print the file contents.",
+              "hint": "Opening a file with `\"w\"` replaces the old contents.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Overwrite a list with two lines\".",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "Writing text files lets a program save results that can be opened again later.",
+                "hint_1": "Use a `with open(...) as file:` block for the write step.",
+                "hint_2": "Open the same file again for reading when you need to print the saved contents."
               },
-              "starterCode": "# Write your code below"
+              "starterCode": "first_item = input()\nsecond_item = input()\n\n# Write both items to shopping.txt, one per line.\n# Then print the file contents.\n"
             },
             "ci-append-log-entry": {
-              "title": "Append a new log entry",
-              "prompt": "A file named `log.txt` is provided. Write a program that opens `log.txt` in append mode, adds the line `Checked sensors` with a newline, then reopens the file and prints the full contents.",
-              "hint": "Read the task \"Append a new log entry\" and identify the required result.",
+              "title": "Append a log entry",
+              "prompt": "Read one log entry, append it to `log.txt` on a new line, then print the full file contents.",
+              "hint": "Opening a file with `\"a\"` keeps the old contents and adds new text at the end.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Append a new log entry\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "Writing text files lets a program save results that can be opened again later.",
+                "hint_1": "Use a `with open(...) as file:` block for the write step.",
+                "hint_2": "Open the same file again for reading when you need to print the saved contents."
               },
-              "starterCode": "# Append one new line to log.txt, then print the full file contents."
+              "starterCode": "entry = input()\n\n# Append the entry to log.txt on a new line, then print the full file.\n"
             }
           }
         }

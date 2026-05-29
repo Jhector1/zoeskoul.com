@@ -295,7 +295,7 @@
         "files": [
           {
             "path": "students.csv",
-            "content": "name,score\n Ava ,9\nBen,7\n'}],",
+            "content": "name,score\n Ava ,9\nBen,7\n",
             "readOnly": false
           }
         ]
@@ -306,12 +306,12 @@
         "tests": [
           {
             "stdin": "",
-            "stdout": "Ava\nBen\n'}]}",
+            "stdout": "Ava\nBen\n",
             "match": "exact",
             "files": [
               {
                 "path": "students.csv",
-                "content": "name,score\n Ava ,9\nBen,7\n'}]},{",
+                "content": "name,score\n Ava ,9\nBen,7\n",
                 "readOnly": false
               }
             ]
@@ -365,7 +365,7 @@
         "files": [
           {
             "path": "scores.csv",
-            "content": "name,score\nAva,9\nBen,oops\nCara,7\n'}],",
+            "content": "name,score\nAva,9\nBen,oops\nCara,7\n",
             "readOnly": false
           }
         ]
@@ -381,7 +381,7 @@
             "files": [
               {
                 "path": "scores.csv",
-                "content": "name,score\nAva,9\nBen,oops\nCara,7\n'}]},{",
+                "content": "name,score\nAva,9\nBen,oops\nCara,7\n",
                 "readOnly": false
               }
             ]
@@ -435,13 +435,8 @@
         "files": [
           {
             "path": "scores.csv",
-            "content": "name,score\nAva,9\nBen,oops\nCara,7\n'}],",
+            "content": "name,score\nAva,9\nBen,oops\nCara,7\n",
             "readOnly": false
-          },
-          {
-            "path": "summary.txt",
-            "content": "valid_rows: 2\ntotal_score: 16\n",
-            "readOnly": true
           }
         ]
       },
@@ -456,13 +451,8 @@
             "files": [
               {
                 "path": "scores.csv",
-                "content": "name,score\nAva,9\nBen,oops\nCara,7\n'}]},{",
+                "content": "name,score\nAva,9\nBen,oops\nCara,7\n",
                 "readOnly": false
-              },
-              {
-                "path": "summary.txt",
-                "content": "valid_rows: 2\ntotal_score: 16\n",
-                "readOnly": true
               }
             ]
           },
@@ -475,11 +465,6 @@
                 "path": "scores.csv",
                 "content": "name,score\nMia,3\nOmar,11\n",
                 "readOnly": false
-              },
-              {
-                "path": "summary.txt",
-                "content": "valid_rows: 2\ntotal_score: 16\n",
-                "readOnly": true
               }
             ]
           }

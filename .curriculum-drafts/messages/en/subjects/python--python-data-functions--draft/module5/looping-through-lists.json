@@ -85,9 +85,9 @@
               "prompt": "For the list `scores = [88, 91, 76]`, which loop variable names are clear and appropriate? Choose all that apply.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "options": {
                 "a": "score",
@@ -118,7 +118,7 @@
               "hint": "Focus on the logical order of the parts.",
               "help": {
                 "concept": "Arrange the pieces according to the structure of the statement.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
                 "hint_2": "Put the pieces in the order that makes the statement valid."
               },
               "tokens": {
@@ -151,9 +151,9 @@
               "prompt": "Fill in the missing keyword to start a loop over a list.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "template": "[blank1] item in items:",
               "choices": [
@@ -165,23 +165,23 @@
             },
             "ci-print-each-item": {
               "title": "Print each item in a list",
-              "prompt": "Write a program that creates a list named `animals` with the values `\"cat\"`, `\"dog\"`, and `\"fox\"`. Then use a loop to print each item on its own line.",
-              "hint": "Read the task \"Print each item in a list\" and identify the required result.",
+              "prompt": "Read three animal names, store them in a list, then use a `for` loop to print each animal on its own line.",
+              "hint": "Build the list from the three input values before the loop starts.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print each item in a list\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "A `for` loop can visit every item in a list, no matter which values were typed into the input.",
+                "hint_1": "Create the list as `[first, second, third]`.",
+                "hint_2": "Inside the loop, print the loop variable."
               },
-              "starterCode": "animals = [\"cat\", \"dog\", \"fox\"]\n\n# Loop through animals and print each one"
+              "starterCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n"
             },
             "ci-double-list-function": {
               "title": "Return a doubled list",
               "prompt": "Define a function named `double_numbers` that takes a list of numbers and returns a new list where each number is doubled. Do not print the result; return it.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass"
             },
@@ -191,7 +191,7 @@
               "hint": "Read the task \"Count words longer than 4 letters\" and identify the required result.",
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Count words longer than 4 letters\".",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
               "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass"

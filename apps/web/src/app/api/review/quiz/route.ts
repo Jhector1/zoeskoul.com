@@ -74,6 +74,76 @@ function defaultPurposeForMode(mode: "quiz" | "project") {
   return mode === "project" ? "project" : "quiz";
 }
 
+function matchesProjectQuestionShape(args: {
+  question: ReviewQuizQuestion;
+  step: NonNullable<ReviewQuizRequestSpec["steps"]>[number];
+  quizKey: string;
+  index: number;
+}) {
+  const { question, step, quizKey, index } = args;
+  const expectedTopic = toDbTopicSlug(step.topic ?? "");
+  const expectedPurpose = defaultPurposeForMode("project");
+  const expectedSalt = `${quizKey}|step=${step.id}|slot=${index + 1}`;
+
+  return (
+    question.kind === "practice" &&
+    question.fetch?.topic === expectedTopic &&
+    question.fetch?.preferPurpose === expectedPurpose &&
+    (step.preferKind == null || question.fetch?.preferKind === step.preferKind) &&
+    (step.exerciseKey == null || question.fetch?.exerciseKey === step.exerciseKey) &&
+    question.fetch?.salt === expectedSalt
+  );
+}
+
+function matchesQuizQuestionShape(args: {
+  question: ReviewQuizQuestion;
+  spec: ReviewQuizRequestSpec;
+}) {
+  const { question, spec } = args;
+  const expectedTopic = spec.topic ? toDbTopicSlug(spec.topic) : "";
+  const expectedPurpose = defaultPurposeForMode("quiz");
+
+  return (
+    question.kind === "practice" &&
+    question.fetch?.preferPurpose === expectedPurpose &&
+    (!expectedTopic || question.fetch?.topic === expectedTopic) &&
+    (spec.preferKind == null || question.fetch?.preferKind === spec.preferKind)
+  );
+}
+
+function existingQuestionsMatchSpec(args: {
+  spec: ReviewQuizRequestSpec;
+  mode: "quiz" | "project";
+  quizKey: string;
+  questions: ReviewQuizQuestion[];
+}) {
+  const { spec, mode, quizKey, questions } = args;
+
+  if (mode === "project") {
+    const steps = spec.steps ?? [];
+    if (questions.length !== steps.length) return false;
+
+    return steps.every((step, index) =>
+      matchesProjectQuestionShape({
+        question: questions[index] as ReviewQuizQuestion,
+        step,
+        quizKey,
+        index,
+      }),
+    );
+  }
+
+  if (!questions.length) return false;
+  if (questions.length !== (spec.n ?? 4)) return false;
+
+  return questions.every((question) =>
+    matchesQuizQuestionShape({
+      question,
+      spec,
+    }),
+  );
+}
+
 type RegistrySection = {
   slug: string;
   subjectSlug: string;
@@ -282,20 +352,37 @@ export async function POST(req: Request) {
     },
   });
 
-  if (existing?.questions) {
+  const existingQuestions = asReviewQuizQuestions(existing?.questions);
+  const existingMatches =
+      existingQuestions &&
+      existingQuestionsMatchSpec({
+        spec,
+        mode,
+        quizKey,
+        questions: existingQuestions,
+      });
+
+  if (existingQuestions && existingMatches) {
     return bodyJsonWithGuestCookie(
         {
-          questions: existing.questions,
+          questions: existingQuestions,
           quizKey,
           requested: mode === "project" ? (spec.steps?.length ?? 0) : n,
-          generated: Array.isArray(existing.questions)
-              ? existing.questions.length
-              : undefined,
+          generated: existingQuestions.length,
           frozen: true,
         },
         200,
         setGuestId,
     );
+  }
+
+  if (existingQuestions && !existingMatches) {
+    await prisma.reviewQuizInstance.deleteMany({
+      where: {
+        actorKey,
+        quizKey,
+      },
+    });
   }
 
   const wantsAll = !spec.topic || spec.topic === "all";

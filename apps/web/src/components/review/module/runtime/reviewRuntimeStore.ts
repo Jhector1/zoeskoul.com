@@ -1744,6 +1744,18 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 target: manifest,
             });
 
+            const existingIsCorrect = Boolean(
+                (existing?.result as any)?.ok === true ||
+                (existing as any)?.correct === true ||
+                existing?.status === "completed"
+            );
+
+            const savedIsCorrect = Boolean(
+                (saved?.result as any)?.ok === true ||
+                (saved as any)?.correct === true ||
+                saved?.status === "completed"
+            );
+
             const resolvedWorkspace = resolveWorkspaceForTarget({
                 targetKey: exerciseKey,
                 targetKind: "exercise",
@@ -1759,8 +1771,14 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                             stdin: existing.stdin ?? existing.codeStdin ?? null,
                             language: existing.language ?? existing.lang ?? null,
                             lang: existing.lang ?? existing.language ?? null,
-                            userEdited: existing.userEdited,
-                            workspaceOrigin: existing.workspaceOrigin ?? null,
+                            userEdited: existing.userEdited === true || existingIsCorrect,
+                            workspaceOrigin:
+                                existing.workspaceOrigin === "user" ||
+                                existing.workspaceOrigin === "saved"
+                                    ? existing.workspaceOrigin
+                                    : existingIsCorrect
+                                        ? "saved"
+                                        : existing.workspaceOrigin ?? null,
                             starterHash: existing.starterHash ?? null,
                             updatedAt: existing.updatedAt ?? null,
                         }
@@ -1778,8 +1796,14 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                             stdin: saved?.stdin ?? saved?.codeStdin ?? null,
                             language: saved?.language ?? saved?.lang ?? null,
                             lang: saved?.lang ?? saved?.language ?? null,
-                            userEdited: saved?.userEdited,
-                            workspaceOrigin: saved?.workspaceOrigin ?? null,
+                            userEdited: saved?.userEdited === true || savedIsCorrect,
+                            workspaceOrigin:
+                                saved?.workspaceOrigin === "user" ||
+                                saved?.workspaceOrigin === "saved"
+                                    ? saved.workspaceOrigin
+                                    : savedIsCorrect
+                                        ? "saved"
+                                        : saved?.workspaceOrigin ?? null,
                             starterHash: saved?.starterHash ?? null,
                             updatedAt: saved?.updatedAt ?? null,
                         }
@@ -2970,13 +2994,21 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         const targetKey = targetRegistry?.byRoute?.[routeKey] ?? null;
         const registryEntry = targetKey ? targetRegistry?.byKey?.[targetKey] ?? null : null;
         if (!registryEntry) return;
+        const isLegacyExerciseAliasRoute =
+            target.kind === "exercise" &&
+            typeof registryEntry.exerciseId === "string" &&
+            registryEntry.exerciseId.trim().length > 0 &&
+            registryEntry.exerciseId !== target.exerciseId;
         const editorSource = resolveDeterministicEditorSource(registryEntry);
 
-        if (editorSource) {
+        if (editorSource && !isLegacyExerciseAliasRoute) {
             get().ensureEditorSource(editorSource);
         }
 
         if (target.kind === "exercise") {
+            if (isLegacyExerciseAliasRoute) {
+                return;
+            }
             const routeExerciseManifest = buildRouteExerciseManifestFromEntry(registryEntry);
             const existingExercise = get().exercises[target.exerciseStateKey] ?? null;
             const routeLanguage = resolveCourseLanguage({

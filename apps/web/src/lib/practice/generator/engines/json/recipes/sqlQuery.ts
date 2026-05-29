@@ -77,6 +77,12 @@ export const buildSqlQueryRecipe: RecipeHandler<any> = (def, args, resolved) => 
 
         workspace: def.workspace,
         starterFiles: def.starterFiles,
+        files: (def as any).files ?? def.workspace?.files,
+        initialFiles: (def as any).initialFiles ?? def.workspace?.initialFiles,
+        workspaceFiles: (def as any).workspaceFiles ?? def.workspace?.workspaceFiles,
+        fixtureFiles: (def as any).fixtureFiles ?? (def.workspace as any)?.fixtureFiles,
+        fixtures: (def as any).fixtures ?? (def.workspace as any)?.fixtures,
+        fileFixtures: (def as any).fileFixtures ?? (def.workspace as any)?.fileFixtures,
         initialStdin: def.initialStdin,
         entryFile:
             def.entryFile ??

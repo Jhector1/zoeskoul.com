@@ -167,8 +167,8 @@
               "prompt": "Write a function `update_score(scores, name, new_score)` that updates the given player's score in the dictionary and returns the dictionary. If the name is not already present, add it with the new score.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
               "starterCode": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass"
@@ -189,8 +189,8 @@
               "prompt": "Write a function `format_inventory(items)` that returns a list of strings in the form `\"key: value\"` for each key-value pair in the dictionary. For example, `{\"pens\": 3}` should become `[\"pens: 3\"]`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
               "starterCode": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result"

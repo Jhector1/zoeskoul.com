@@ -55,9 +55,9 @@
               "prompt": "Which exception type should you catch when `int(user_text)` might fail because the text is not a valid integer?",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "options": {
                 "a": "NameError",
@@ -101,11 +101,11 @@
             "q5": {
               "title": "Order of execution when conversion fails",
               "prompt": "Put these steps in the order they happen when `int(text)` raises `ValueError` inside a `try/except` block.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the code pieces in the order Python should run them.",
               "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "concept": "The pieces should form valid Python code in the order it should run.",
+                "hint_1": "Start with the line that sets up the Python action.",
+                "hint_2": "Place lines that depend on earlier values after those values exist."
               },
               "tokens": {
                 "t1": "Python enters the `try` block",
@@ -117,11 +117,11 @@
             "q6": {
               "title": "Build a basic try/except pattern",
               "prompt": "Arrange these code pieces into a correct basic pattern that converts input text to an integer and handles bad input.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the code pieces in the order Python should run them.",
               "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "concept": "The pieces should form valid Python code in the order it should run.",
+                "hint_1": "Start with the line that sets up the Python action.",
+                "hint_2": "Place lines that depend on earlier values after those values exist."
               },
               "tokens": {
                 "t1": "try:",
@@ -171,8 +171,8 @@
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Catch a bad integer input\".",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "starterCode": "text = input()\n\n# Convert the text to an integer inside try.\n# Print either the converted result or an invalid message."
             },
@@ -181,9 +181,9 @@
               "prompt": "Write a program that reads two lines of input. Each line should be treated as a number.\n\n- If both values convert to integers, print `Sum: X` where `X` is their sum.\n- If either conversion fails, print `Invalid input`.\n\nUse one `try/except` block.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "starterCode": "first_text = input()\nsecond_text = input()\n\n# Convert both values inside try.\n# Print the sum or an invalid message."
             },
@@ -192,9 +192,9 @@
               "prompt": "Write a program that reads one line of input containing values separated by commas, such as `3,7,bad,10`.\n\nCheck each piece one by one:\n- If a piece can be converted to an integer, count it as valid.\n- If conversion fails, skip it.\n\nAt the end, print `Valid count: X` where `X` is the number of valid integers found.\n\nUse `try/except` with `ValueError`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "starterCode": "parts = input().split(\",\")\nvalid_count = 0\n\n# Loop through each part.\n# Try to convert each one to int.\n# Count only the valid integers.\n# Print the final count."
             }

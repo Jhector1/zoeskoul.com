@@ -322,15 +322,31 @@ function collectManifestFixtureFileSources(manifest: UnknownRecord) {
   const workspace = isRecord(normalized.workspace) ? normalized.workspace : {};
   const recipe = isRecord(normalized.recipe) ? normalized.recipe : {};
 
+  const tests = Array.isArray(normalized.tests) ? normalized.tests : [];
+  const testFiles = tests.flatMap((test) => {
+    if (!isRecord(test)) return [];
+    return [test.files, test.fixtures, test.fixtureFiles, test.fileFixtures];
+  });
+
   return [
     workspace.files,
     workspace.initialFiles,
     workspace.workspaceFiles,
+    workspace.fixtureFiles,
+    workspace.fixtures,
+    workspace.fileFixtures,
     normalized.files,
     normalized.initialFiles,
     normalized.workspaceFiles,
+    normalized.fixtureFiles,
+    normalized.fixtures,
+    normalized.fileFixtures,
     recipe.files,
     recipe.initialFiles,
+    recipe.fixtureFiles,
+    recipe.fixtures,
+    recipe.fileFixtures,
+    ...testFiles,
   ];
 }
 

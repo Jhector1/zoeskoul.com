@@ -529,12 +529,43 @@ export function makeSubjectTopicGenerator(args: {
 
         const forceKey = String(anyCtx.meta?.forceKey ?? "").trim();
         const exerciseKey = String(anyCtx.exerciseKey ?? "").trim();
+        const requestedForcedKey = exerciseKey || forceKey;
 
-        const forced =
-            (exerciseKey && pool.some((p) => p.key === exerciseKey) ? exerciseKey : "") ||
-            (forceKey && pool.some((p) => p.key === forceKey) ? forceKey : "");
+        let chosen: string;
 
-        const chosen = forced || weightedKey(R, pool);
+        if (requestedForcedKey) {
+            const forcedItem = pool.find((p) => p.key === requestedForcedKey);
+
+            if (!forcedItem) {
+                const availableKeys = pool.map((p) => p.key);
+                const err = new Error(
+                    `${engineName}: requested exerciseKey="${requestedForcedKey}" was not found in topic="${topicSlugRaw}" base="${topicSlugBase}" after purpose/kind filters. available=[${availableKeys.join(", ")}]`,
+                );
+                (err as {
+                    code?: string;
+                    details?: Record<string, unknown>;
+                }).code = "MISSING_FORCED_EXERCISE_KEY";
+                (err as { details?: Record<string, unknown> }).details = {
+                    engineName,
+                    topicSlugRaw,
+                    topicSlugBase,
+                    requestedForcedKey,
+                    exerciseKey,
+                    forceKey,
+                    preferKind,
+                    preferPurpose,
+                    availableKeys,
+                    validKeys,
+                    metaPoolCount: metaPoolRaw.length,
+                    fallbackPoolCount: fallbackPoolRaw.length,
+                };
+                throw err;
+            }
+
+            chosen = requestedForcedKey;
+        } else {
+            chosen = weightedKey(R, pool);
+        }
 
         const handler = handlers[chosen];
         if (!handler) {
@@ -683,6 +714,12 @@ export function makeCodeInputOut(args: {
 
     workspace?: any;
     starterFiles?: any;
+    files?: any;
+    initialFiles?: any;
+    workspaceFiles?: any;
+    fixtureFiles?: any;
+    fixtures?: any;
+    fileFixtures?: any;
     initialStdin?: string;
     entryFile?: string;
 
@@ -714,6 +751,12 @@ export function makeCodeInputOut(args: {
 
         ...(args.workspace ? { workspace: args.workspace } : {}),
         ...(args.starterFiles ? { starterFiles: args.starterFiles } : {}),
+        ...(args.files ? { files: args.files } : {}),
+        ...(args.initialFiles ? { initialFiles: args.initialFiles } : {}),
+        ...(args.workspaceFiles ? { workspaceFiles: args.workspaceFiles } : {}),
+        ...(args.fixtureFiles ? { fixtureFiles: args.fixtureFiles } : {}),
+        ...(args.fixtures ? { fixtures: args.fixtures } : {}),
+        ...(args.fileFixtures ? { fileFixtures: args.fileFixtures } : {}),
         ...(args.initialStdin != null ? { initialStdin: args.initialStdin } : {}),
         ...(args.entryFile ? { entryFile: args.entryFile } : {}),
 

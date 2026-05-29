@@ -1,9 +1,10 @@
-import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
+import type {ReviewCard, ReviewEmbeddedTryIt, ReviewModule} from "@/lib/subjects/types";
 import type { UnknownRecord } from "./reviewRuntimeTypes";
 import { getCardStateKey, getExerciseStateKey } from "./exerciseKeys";
 import { resolveCourseLanguage, resolveCourseFileSeed, resolveRuntimeDefaultDataset } from "./courseProfiles";
 import {tag} from "@/lib/practice/generator/shared/i18n";
 import {isUsableStarterCode} from "@/components/review/module/runtime/starterContent";
+import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
 
 export type ReviewTargetKind = "sketch" | "exercise" | "quiz" | "card" | "project" | "text" | "video";
 export type LooseManifestRecord = UnknownRecord & {
@@ -66,6 +67,7 @@ export type ReviewTargetEntry = {
   item: LooseManifestRecord | null;
   profileId?: string | null;
   versionFamily?: string | null;
+  tryIt?: ReviewEmbeddedTryIt | null;
 };
 
 export type ReviewTargetRegistry = {
@@ -243,6 +245,24 @@ function mergeManifestParts(
         primaryRecord.workspaceFiles ??
         secondaryWorkspace.workspaceFiles ??
         secondaryRecord.workspaceFiles,
+
+    fixtureFiles:
+        primaryWorkspace.fixtureFiles ??
+        primaryRecord.fixtureFiles ??
+        secondaryWorkspace.fixtureFiles ??
+        secondaryRecord.fixtureFiles,
+
+    fixtures:
+        primaryWorkspace.fixtures ??
+        primaryRecord.fixtures ??
+        secondaryWorkspace.fixtures ??
+        secondaryRecord.fixtures,
+
+    fileFixtures:
+        primaryWorkspace.fileFixtures ??
+        primaryRecord.fileFixtures ??
+        secondaryWorkspace.fileFixtures ??
+        secondaryRecord.fileFixtures,
   };
 
   return {
@@ -476,27 +496,47 @@ function buildToolManifest(card: ReviewCard) {
   } as LooseManifestRecord;
 }
 
-function getProjectExerciseEntries(card: Extract<ReviewCard, { type: "project" }>) {
+function getProjectExerciseEntries(
+  card: Extract<ReviewCard, { type: "project" }>,
+  topicManifest?: { exercises?: unknown[] } | null,
+) {
   const steps = Array.isArray(card.spec?.steps) ? card.spec.steps : [];
-  return steps
-    .map((step) => {
-      const exerciseId =
-        typeof step?.exerciseKey === "string" && step.exerciseKey.trim()
-          ? step.exerciseKey.trim()
-          : typeof step?.id === "string" && step.id.trim()
-            ? step.id.trim()
-            : "";
+  const manifestExercises = Array.isArray(topicManifest?.exercises)
+    ? topicManifest.exercises
+    : [];
+  return steps.map((step) => {
+    const exerciseId =
+      typeof step?.exerciseKey === "string" && step.exerciseKey.trim()
+        ? step.exerciseKey.trim()
+        : "";
 
-      return {
-        step,
-        exerciseId,
-        routeSlug: cleanSegment(
-          typeof step?.id === "string" && step.id.trim() ? step.id : exerciseId,
-          "exercise",
-        ),
-      };
-    })
-    .filter((entry) => entry.exerciseId);
+    if (!exerciseId) {
+      throw new Error(
+        `Project step "${String(step?.id ?? "unknown")}" is missing exerciseKey.`,
+      );
+    }
+
+    const manifestExerciseIndex = manifestExercises.findIndex((candidate) => {
+      const candidateRecord = asRecord(candidate);
+      return typeof candidateRecord?.id === "string" && candidateRecord.id.trim() === exerciseId;
+    });
+
+    return {
+      step,
+      exerciseId,
+      routeSlug: cleanSegment(
+        typeof step?.id === "string" && step.id.trim() ? step.id : exerciseId,
+        "exercise",
+      ),
+      routeAliases:
+        manifestExerciseIndex >= 0
+          ? [
+              cleanSegment(`q${manifestExerciseIndex + 1}`, "exercise"),
+              cleanSegment(`quiz${manifestExerciseIndex + 1}`, "exercise"),
+            ]
+          : [],
+    };
+  });
 }
 
 export function buildReviewTargetRegistry(args: {
@@ -542,7 +582,6 @@ export function buildReviewTargetRegistry(args: {
         subjectSlug,
       );
       const rawSketches = Array.isArray(rawManifest?.sketches) ? rawManifest.sketches : [];
-      const rawExercises = Array.isArray(rawManifest?.exercises) ? rawManifest.exercises : [];
       const cards = Array.isArray(topic.cards) ? topic.cards : [];
 
       for (const card of cards) {
@@ -576,6 +615,14 @@ export function buildReviewTargetRegistry(args: {
           profileId,
           versionFamily,
         });
+
+
+        const embeddedTryIt =
+            (card.type === "text" || card.type === "sketch")
+                ? (card.tryIt ?? null)
+                : null;
+
+
         const cardEntry: ReviewTargetEntry = {
           targetKey: `card:${cardKey}`,
           routeKey: cardRouteKey,
@@ -589,6 +636,7 @@ export function buildReviewTargetRegistry(args: {
           ownerKind: "card",
           ownerKey: cardKey,
           cardKey,
+          tryIt: embeddedTryIt,
           toolScopeKey: `${cardKey}:general`,
           language: cardRuntimeContext.language,
           starterFiles: pickStarterFiles(mergedCardManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
@@ -621,11 +669,22 @@ export function buildReviewTargetRegistry(args: {
 
         if (card.type !== "project") continue;
 
-        for (const exercise of getProjectExerciseEntries(card)) {
-          const rawExercise =
-            rawExercises.find((item) => asRecord(item)?.id === exercise.exerciseId) ??
-            rawExercises.find((item) => asRecord(item)?.id === exercise.step?.id) ??
-            null;
+        for (const exercise of getProjectExerciseEntries(
+          card,
+          rawManifest as { exercises?: unknown[] } | null,
+        )) {
+          const rawManifestExercises = Array.isArray(rawManifest?.exercises)
+              ? rawManifest.exercises
+              : null;
+
+          const rawExercise = rawManifestExercises
+              ? asRecord(
+                  resolveManifestExercise({
+                    topicBundle: rawManifest,
+                    exerciseKey: exercise.exerciseId,
+                  }),
+              )
+              : null;
           const exerciseStateKey = getExerciseStateKey(
             {
               subjectSlug,
@@ -698,6 +757,14 @@ export function buildReviewTargetRegistry(args: {
 
           byKey[exerciseEntry.targetKey] = exerciseEntry;
           byRoute[exerciseRouteKey] = exerciseEntry.targetKey;
+          for (const alias of exercise.routeAliases ?? []) {
+            byRoute[buildRouteKey({
+              sectionSlug,
+              topicSlug,
+              targetKind: "exercise",
+              targetSlug: alias,
+            })] = exerciseEntry.targetKey;
+          }
           orderedKeys.push(exerciseEntry.targetKey);
         }
       }

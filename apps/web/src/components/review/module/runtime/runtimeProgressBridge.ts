@@ -87,12 +87,36 @@ function addAlias(set: Set<string>, value: unknown) {
   if (text) set.add(text);
 }
 
+function isScopedExerciseStateKey(value: unknown) {
+  if (typeof value !== "string") return false;
+  const raw = value.trim();
+  if (!raw) return false;
+  return raw.split(":").filter(Boolean).length >= 6;
+}
+
 function lastKeySegment(value: unknown) {
   if (typeof value !== "string") return "";
   const raw = value.trim();
   if (!raw) return "";
   const parts = raw.split(":").filter(Boolean);
   return parts[parts.length - 1] ?? raw;
+}
+
+function getLegacyExerciseAliasKeys(
+  exerciseKey: string,
+  estate: RuntimeExerciseLike,
+) {
+  const keys = new Set<string>();
+  addAlias(keys, lastKeySegment(exerciseKey));
+  addAlias(keys, estate?.exerciseId);
+  addAlias(keys, lastKeySegment(estate?.exerciseId));
+  addAlias(keys, lastKeySegment(estate?.exerciseKey));
+  addAlias(keys, lastKeySegment(estate?.stableExerciseId));
+  addAlias(keys, lastKeySegment(estate?.exerciseStateId));
+  addAlias(keys, lastKeySegment(estate?.slotId));
+  addAlias(keys, lastKeySegment(estate?.key));
+  addAlias(keys, lastKeySegment(estate?.id));
+  return [...keys].filter((key) => !isScopedExerciseStateKey(key));
 }
 
 function getExerciseAliasKeys(
@@ -102,19 +126,12 @@ function getExerciseAliasKeys(
   const keys = new Set<string>();
 
   addAlias(keys, exerciseKey);
-  addAlias(keys, lastKeySegment(exerciseKey));
-
-  addAlias(keys, estate?.exerciseId);
-  addAlias(keys, lastKeySegment(estate?.exerciseId));
-
-  addAlias(keys, estate?.exerciseKey);
-  addAlias(keys, lastKeySegment(estate?.exerciseKey));
-
-  addAlias(keys, estate?.stableExerciseId);
-  addAlias(keys, estate?.exerciseStateId);
-  addAlias(keys, estate?.slotId);
-  addAlias(keys, estate?.key);
-  addAlias(keys, estate?.id);
+  if (isScopedExerciseStateKey(estate?.exerciseKey)) addAlias(keys, estate?.exerciseKey);
+  if (isScopedExerciseStateKey(estate?.stableExerciseId)) addAlias(keys, estate?.stableExerciseId);
+  if (isScopedExerciseStateKey(estate?.exerciseStateId)) addAlias(keys, estate?.exerciseStateId);
+  if (isScopedExerciseStateKey(estate?.slotId)) addAlias(keys, estate?.slotId);
+  if (isScopedExerciseStateKey(estate?.key)) addAlias(keys, estate?.key);
+  if (isScopedExerciseStateKey(estate?.id)) addAlias(keys, estate?.id);
 
   return [...keys];
 }
@@ -173,6 +190,13 @@ function getExercisePatchForQuizState(
     estate.workspaceOrigin === "saved";
 
   const patch: ExercisePatchRecord = {
+    exerciseKey: estate.exerciseKey,
+    exerciseId: estate.exerciseId,
+    subjectSlug: estate.subjectSlug,
+    moduleSlug: estate.moduleSlug,
+    sectionSlug: estate.sectionSlug,
+    topicId: estate.topicId,
+    cardId: estate.cardId,
     userEdited,
     workspaceOrigin: estate.workspaceOrigin ?? (userEdited ? "saved" : undefined),
     starterHash: estate.starterHash,
@@ -314,10 +338,29 @@ export function mergeRuntimeIntoProgress(
       });
 
       const nextPracticePatch = { ...oldPracticePatch };
+      const legacyAliases = getLegacyExerciseAliasKeys(exerciseKey, estate);
 
       for (const alias of aliases) {
         nextPracticePatch[alias] = {
           ...(oldPracticePatch[alias] ?? {}),
+          ...patch,
+        };
+      }
+
+      /**
+       * Compatibility write:
+       *
+       * Keep the canonical scoped aliases above as the restore source of truth.
+       * Also mirror learner-owned patches onto short legacy ids so older save
+       * readers and E2E payload inspections can still find the active exercise
+       * workspace without depending on the scoped manifest key.
+       *
+       * Restore no longer trusts these short aliases for authored contract
+       * hydration, so this does not reopen the old cross-exercise collision.
+       */
+      for (const legacyAlias of legacyAliases) {
+        nextPracticePatch[legacyAlias] = {
+          ...(oldPracticePatch[legacyAlias] ?? {}),
           ...patch,
         };
       }

@@ -209,6 +209,28 @@ export function buildQuizPassProgress(
     };
 }
 
+export function buildEmbeddedTryItPassProgress(
+    progress: ReviewProgressState,
+    viewTid: string,
+    tryItId: string,
+) {
+    const tp0 = getTopicProgress(progress, viewTid);
+
+    return {
+        ...progress,
+        topics: {
+            ...(progress?.topics ?? {}),
+            [viewTid]: {
+                ...tp0,
+                quizzesDone: {
+                    ...(tp0.quizzesDone ?? {}),
+                    [tryItId]: true,
+                },
+            },
+        },
+    };
+}
+
 export function buildQuizStateProgress(
     progress: ReviewProgressState,
     viewTid: string,

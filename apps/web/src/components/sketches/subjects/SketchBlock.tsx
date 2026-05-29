@@ -34,6 +34,8 @@ export default function SketchBlock(props: {
     onMarkDone?: () => void;
     prereqsMet?: boolean;
     locked?: boolean;
+    markDoneDisabled?: boolean;
+    markDoneDisabledReason?: string;
 }) {
     const tt = useTaggedT();               // for tagged keys like "@:sketches...."
     const ui = useTaggedT("sketchBlockUi"); // for UI strings
@@ -51,6 +53,8 @@ export default function SketchBlock(props: {
         onMarkDone,
         prereqsMet = true,
         locked = false,
+        markDoneDisabled = false,
+        markDoneDisabledReason,
     } = props;
 
     const sketchStateKey = stateKey ?? cardId;
@@ -98,8 +102,10 @@ export default function SketchBlock(props: {
     }
 
     const footer = (
-        <div className="flex flex-wrap items-center justify-between gap-2">
-            {!prereqsMet ? (
+            <div className="flex flex-wrap items-center justify-between gap-2">
+            {markDoneDisabled && markDoneDisabledReason ? (
+                <div className="ui-sketch-muted font-extrabold">{markDoneDisabledReason}</div>
+            ) : !prereqsMet ? (
                 <div className="ui-sketch-muted font-extrabold">{ui.t("finishPrereqs")}</div>
             ) : locked ? (
                 <div className="ui-sketch-muted font-extrabold">{ui.t("locked")}</div>
@@ -117,9 +123,9 @@ export default function SketchBlock(props: {
                         type="button"
                         className={cn(SKETCH_BTN_PRIMARY, done && "opacity-70")}
                         onClick={onMarkDone}
-                        disabled={!prereqsMet}
+                        disabled={!prereqsMet || markDoneDisabled}
                         data-flow-focus="1"
-                        title={ui.t("markReadTitle")}
+                        title={markDoneDisabled ? markDoneDisabledReason : ui.t("markReadTitle")}
                     >
                         {done ? ui.t("markedRead") : ui.t("markRead")}
                     </button>

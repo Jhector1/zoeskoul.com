@@ -16,8 +16,14 @@ import { useReviewRuntimeStore } from "../../runtime/reviewRuntimeStore";
 import { mergeRuntimeIntoProgress } from "../../runtime/runtimeProgressBridge";
 import { reviewDebug } from "../../runtime/reviewDebug";
 
-import { isCardDoneFromState, isQuizLikeCard } from "../../progressKeys";
 import {
+  canAutoMarkReadingCardDone,
+  hasRequiredEmbeddedTryIt,
+  isCardDoneFromState,
+  isQuizLikeCard,
+} from "../../progressKeys";
+import {
+  buildEmbeddedTryItPassProgress,
   buildMarkCardDoneProgress,
   buildQuizPassProgress,
   buildQuizResetProgress,
@@ -152,7 +158,11 @@ export default function ReviewTopicCards({
 
           let next = prev;
 
-          if (fromCard && !isQuizLikeCard(fromCard)) {
+          if (
+            fromCard &&
+            !isQuizLikeCard(fromCard) &&
+            canAutoMarkReadingCardDone(fromCard, next?.topics?.[viewTid])
+          ) {
             next = buildMarkCardDoneProgress(next, viewTid, fromCard);
           }
 
@@ -187,7 +197,10 @@ export default function ReviewTopicCards({
   const activeCard = viewCards[activeCardIndex] ?? null;
   const activeCardDone = activeCard ? isCardDoneFromState(activeCard, tp) : false;
   const activeCardCanAdvance =
-      activeCardDone || (activeCard ? !isQuizLikeCard(activeCard) : false);
+      activeCardDone ||
+      (activeCard
+        ? !isQuizLikeCard(activeCard) && !hasRequiredEmbeddedTryIt(activeCard)
+        : false);
   const hasNextCard = activeCardIndex < Math.max(0, viewCards.length - 1);
   const nextCardUnlocked = activeCardIndex + 1 <= safeMaxUnlockedCardIndex;
   return (
@@ -216,7 +229,13 @@ export default function ReviewTopicCards({
             activeIndex={activeCardIndex}
             onActiveIndexChange={handleNavigate}
             reduceMotion={reduceMotion}
-            getKey={(card) => card.id}
+            getKey={(card) => getCardStateKey({
+              subjectSlug,
+              moduleSlug,
+              sectionSlug,
+              topicId: viewTid,
+              cardId: card.id,
+            })}
             getProgressLabel={(index, total) => `Item ${index + 1} of ${total}`}
             canGoPrev={activeCardIndex > 0}
             canGoNext={hasNextCard && activeCardCanAdvance && nextCardUnlocked}
@@ -246,7 +265,7 @@ export default function ReviewTopicCards({
                 : true;
 
               return (
-                <div key={card.id} ref={setCardEl(card.id)}>
+                <div key={cardKey} ref={setCardEl(card.id)}>
                   <CardRenderer
                     card={card}
                     cardKey={cardKey}
@@ -276,6 +295,15 @@ export default function ReviewTopicCards({
                           flushNow(next);
                           scrollToNextActionable(cardIndex, next);
                         });
+                        return next;
+                      });
+                    }}
+                    onEmbeddedTryItPass={(tryItId) => {
+                      onSubmit?.();
+
+                      setProgress((prev) => {
+                        const next = buildEmbeddedTryItPassProgress(prev, viewTid, tryItId);
+                        queueMicrotask(() => flushNow(next));
                         return next;
                       });
                     }}

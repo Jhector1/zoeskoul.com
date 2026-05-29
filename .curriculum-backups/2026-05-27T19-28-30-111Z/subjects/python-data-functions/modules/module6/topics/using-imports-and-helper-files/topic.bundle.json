@@ -1,0 +1,492 @@
+{
+  "topicId": "using-imports-and-helper-files",
+  "subjectSlug": "python-data-functions",
+  "moduleSlug": "python-6-functions-and-modularity",
+  "sectionSlug": "python-data-functions-python-6-function-design",
+  "prefix": "py6",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.label",
+    "summaryKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch0.title",
+      "sketchId": "sk1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch1.title",
+      "sketchId": "sk2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch2.title",
+      "sketchId": "sk3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "q9",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.projectSteps.q9.title",
+            "exerciseKey": "q9",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "q10",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.projectSteps.q10.title",
+            "exerciseKey": "q10",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "q11",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.projectSteps.q11.title",
+            "exerciseKey": "q11",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sk1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk1.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk1.bodyMarkdown"
+    },
+    {
+      "id": "sk2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk2.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk2.bodyMarkdown"
+    },
+    {
+      "id": "sk3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk3.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "q6",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q6",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "q7",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q7",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "helpers"
+      }
+    },
+    {
+      "id": "q8",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q8",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "from"
+      }
+    },
+    {
+      "id": "q9",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9",
+      "language": "python",
+      "starterCode": "from helpers.badges import clean_name, make_badge\n\nraw_name = input()\n# Clean the name, build a badge, and print it.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from helpers.badges import clean_name, make_badge\n\nraw_name = input()\n# Clean the name, build a badge, and print it.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "helpers/__init__.py",
+          "content": "# Helper package for this lesson.\n",
+          "language": "python",
+          "readOnly": true
+        },
+        {
+          "path": "helpers/badges.py",
+          "content": "def clean_name(text):\n    return text.strip().title()\n\ndef make_badge(name):\n    return f\"Explorer badge: {name}\"\n",
+          "language": "python",
+          "readOnly": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from helpers.badges import clean_name, make_badge\n\nraw_name = input()\n# Clean the name, build a badge, and print it.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from helpers.badges import clean_name, make_badge\n\nraw_name = input()\n# Clean the name, build a badge, and print it.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "helpers/__init__.py",
+            "content": "# Helper package for this lesson.\n",
+            "language": "python",
+            "readOnly": true
+          },
+          {
+            "path": "helpers/badges.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n\ndef make_badge(name):\n    return f\"Explorer badge: {name}\"\n",
+            "language": "python",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  aVA  \n",
+            "stdout": "Explorer badge: Ava\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "mARCO\n",
+            "stdout": "Explorer badge: Marco\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from helpers.badges import clean_name, make_badge\n\nraw_name = input()\nname = clean_name(raw_name)\nprint(make_badge(name))\n"
+      }
+    },
+    {
+      "id": "q10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10",
+      "language": "python",
+      "starterCode": "import helpers.score_tools as score_tools\n\nname = input().strip().title()\nscore = int(input())\n# Use score_tools.score_line(name, score), then print the result.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "import helpers.score_tools as score_tools\n\nname = input().strip().title()\nscore = int(input())\n# Use score_tools.score_line(name, score), then print the result.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "helpers/__init__.py",
+          "content": "# Helper package for this lesson.\n",
+          "language": "python",
+          "readOnly": true
+        },
+        {
+          "path": "helpers/score_tools.py",
+          "content": "def rank(score):\n    if score >= 90:\n        return \"gold\"\n    if score >= 70:\n        return \"silver\"\n    return \"bronze\"\n\ndef score_line(name, score):\n    return f\"{name}: {score} points ({rank(score)})\"\n",
+          "language": "python",
+          "readOnly": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "import helpers.score_tools as score_tools\n\nname = input().strip().title()\nscore = int(input())\n# Use score_tools.score_line(name, score), then print the result.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "import helpers.score_tools as score_tools\n\nname = input().strip().title()\nscore = int(input())\n# Use score_tools.score_line(name, score), then print the result.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "helpers/__init__.py",
+            "content": "# Helper package for this lesson.\n",
+            "language": "python",
+            "readOnly": true
+          },
+          {
+            "path": "helpers/score_tools.py",
+            "content": "def rank(score):\n    if score >= 90:\n        return \"gold\"\n    if score >= 70:\n        return \"silver\"\n    return \"bronze\"\n\ndef score_line(name, score):\n    return f\"{name}: {score} points ({rank(score)})\"\n",
+            "language": "python",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  ava \n95\n",
+            "stdout": "Ava: 95 points (gold)\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "ben\n72\n",
+            "stdout": "Ben: 72 points (silver)\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "import helpers.score_tools as score_tools\n\nname = input().strip().title()\nscore = int(input())\nprint(score_tools.score_line(name, score))\n"
+      }
+    },
+    {
+      "id": "q11",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11",
+      "language": "python",
+      "starterCode": "from helpers.badges import clean_name\nfrom helpers.score_tools import rank\n\nraw_name = input()\nscore = int(input())\n# Build and print: Mission report: NAME unlocked RANK status\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from helpers.badges import clean_name\nfrom helpers.score_tools import rank\n\nraw_name = input()\nscore = int(input())\n# Build and print: Mission report: NAME unlocked RANK status\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "helpers/__init__.py",
+          "content": "# Helper package for this lesson.\n",
+          "language": "python",
+          "readOnly": true
+        },
+        {
+          "path": "helpers/badges.py",
+          "content": "def clean_name(text):\n    return text.strip().title()\n\ndef make_badge(name):\n    return f\"Explorer badge: {name}\"\n",
+          "language": "python",
+          "readOnly": true
+        },
+        {
+          "path": "helpers/score_tools.py",
+          "content": "def rank(score):\n    if score >= 90:\n        return \"gold\"\n    if score >= 70:\n        return \"silver\"\n    return \"bronze\"\n\ndef score_line(name, score):\n    return f\"{name}: {score} points ({rank(score)})\"\n",
+          "language": "python",
+          "readOnly": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from helpers.badges import clean_name\nfrom helpers.score_tools import rank\n\nraw_name = input()\nscore = int(input())\n# Build and print: Mission report: NAME unlocked RANK status\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from helpers.badges import clean_name\nfrom helpers.score_tools import rank\n\nraw_name = input()\nscore = int(input())\n# Build and print: Mission report: NAME unlocked RANK status\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "helpers/__init__.py",
+            "content": "# Helper package for this lesson.\n",
+            "language": "python",
+            "readOnly": true
+          },
+          {
+            "path": "helpers/badges.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n\ndef make_badge(name):\n    return f\"Explorer badge: {name}\"\n",
+            "language": "python",
+            "readOnly": true
+          },
+          {
+            "path": "helpers/score_tools.py",
+            "content": "def rank(score):\n    if score >= 90:\n        return \"gold\"\n    if score >= 70:\n        return \"silver\"\n    return \"bronze\"\n\ndef score_line(name, score):\n    return f\"{name}: {score} points ({rank(score)})\"\n",
+            "language": "python",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  zoe \n91\n",
+            "stdout": "Mission report: Zoe unlocked gold status\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "max\n65\n",
+            "stdout": "Mission report: Max unlocked bronze status\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from helpers.badges import clean_name\nfrom helpers.score_tools import rank\n\nraw_name = input()\nscore = int(input())\nname = clean_name(raw_name)\nlevel = rank(score)\nprint(f\"Mission report: {name} unlocked {level} status\")\n"
+      }
+    }
+  ]
+}

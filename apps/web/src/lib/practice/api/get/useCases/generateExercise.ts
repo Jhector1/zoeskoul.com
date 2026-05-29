@@ -4,7 +4,12 @@ import type { Difficulty, Exercise, GenKey, TopicSlug } from "@/lib/practice/typ
 import type { TopicContext } from "@/lib/practice/generator/generatorTypes";
 import { DIFFICULTIES, rngFromActor } from "@/lib/practice/catalog";
 import { getExerciseWithExpected } from "@/lib/practice/generator";
+import { buildExerciseFromManifest } from "@/lib/practice/generator/engines/json/buildExerciseFromManifest";
 import { loadPracticeTopicI18n } from "@/i18n/loadPracticeTopicI18n";
+import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
+import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
+import type { SlimTopicManifest } from "@/lib/subjects/_core/subjectManifestTypes";
+import type { ManifestExercise } from "@/lib/subjects/_core/manifestTypes";
 
 import type { PracticeGetContext, PracticeGetResult } from "../types";
 import type { PracticePurposeDecision } from "../policies/purpose.policy";
@@ -40,6 +45,64 @@ function isGeneratorTopicMismatch(e: any) {
         msg.includes("EMPTY_POOL") ||
         msg.includes("empty_pool")
     );
+}
+
+function resolveAuthoredProjectExercise(args: {
+    subjectSlug: string;
+    topicSlug: string;
+    topicId: string;
+    exerciseKey: string;
+    diff: Difficulty;
+}) {
+    const manifestTopicRef = args.topicSlug || args.topicId;
+    const topicBundle = resolveTopicBundleManifest({
+        subjectSlug: args.subjectSlug,
+        topicSlugOrId: manifestTopicRef,
+    });
+
+    if (!topicBundle) {
+        throw new Error(
+            `Missing compiled topic bundle for topic "${manifestTopicRef}" in subject "${args.subjectSlug}".`,
+        );
+    }
+
+    const manifestExercise = resolveManifestExercise({
+        topicBundle,
+        exerciseKey: args.exerciseKey,
+    }) as ManifestExercise;
+
+    const built = buildExerciseFromManifest(
+        manifestExercise,
+        {
+            rng: rngFromActor({
+                userId: null,
+                guestId: null,
+                sessionId: null,
+                salt: `authored-project|${args.subjectSlug}|${args.topicSlug}|${args.exerciseKey}|${args.diff}`,
+            }) as any,
+            diff: args.diff,
+            id: args.exerciseKey,
+            topic: args.topicSlug,
+            ctx: {
+                topicSlug: args.topicSlug,
+                exerciseKey: args.exerciseKey,
+            } as TopicContext,
+        },
+        {
+            serviceDefaults: (topicBundle as SlimTopicManifest).serviceDefaults ?? null,
+            runtimeDefaults: topicBundle.runtimeDefaults ?? null,
+        },
+    );
+
+    return {
+        exercise: {
+            ...(built.exercise as any),
+            topic: args.topicSlug,
+            exerciseKey: args.exerciseKey,
+        } as Exercise,
+        expected: built.expected,
+        topicBundle,
+    };
 }
 
 export async function generatePracticeExercise(
@@ -82,10 +145,20 @@ export async function generatePracticeExercise(
     const purposeMode = decision.effective;
     const preferPurposeForGenerator: "quiz" | "project" | null =
         isTrial ? "quiz" : purposeMode === "mixed" ? null : purposeMode;
+    const effectiveSubjectSlug =
+        subject ??
+        session?.section?.subject?.slug ??
+        null;
 
     const moduleIdFromSession = session?.section?.moduleId ?? null;
     const assignmentIdFromSession = session?.assignmentId ?? null;
     const excludedTopicSlugs = new Set<string>();
+
+    const hasRequestedTopic = Boolean(topic && topic !== "all");
+    const hasRequestedExerciseKey = Boolean(exerciseKey);
+    const requiresExactTopicAndExercise =
+        hasRequestedTopic || hasRequestedExerciseKey;
+    const maxTopicResolveAttempts = requiresExactTopicAndExercise ? 1 : 6;
 
     const preferKindEnum: PracticeKind | null = preferKind
         ? toPracticeKindOrThrow(preferKind)
@@ -101,11 +174,110 @@ export async function generatePracticeExercise(
                 sessionId: session?.id ?? null,
             };
 
+    const canResolveExactAuthoredProjectExercise =
+        !isTrial &&
+        purposeMode === "project" &&
+        hasRequestedTopic &&
+        hasRequestedExerciseKey &&
+        Boolean(effectiveSubjectSlug);
+
+    if (canResolveExactAuthoredProjectExercise) {
+        const authoredResolved = await resolveTopicFromScope({
+            prisma,
+            subjectSlug: session ? undefined : subject,
+            moduleSlug: session ? undefined : module,
+            sectionSlug: session?.section?.slug ?? section,
+            rawTopic: topic,
+            subjectIdFromSession: session?.section?.subjectId ?? null,
+            moduleIdFromSession,
+            assignmentIdFromSession,
+            rngSeedParts: {
+                userId: actor.userId,
+                guestId: actor.guestId,
+                sessionId: session?.id ?? null,
+            },
+            topicPickSalt: `topic-pick|${reqSalt}`,
+            fallbackOnMissing: false,
+            excludeTopicSlugs: [],
+        } as any);
+
+        if (authoredResolved.kind !== "ok") {
+            return {
+                kind: "json",
+                status: 400,
+                body: {
+                    message: "Invalid topic/filters",
+                    explanation: authoredResolved.message,
+                },
+            };
+        }
+
+        const authored = resolveAuthoredProjectExercise({
+            subjectSlug: String(effectiveSubjectSlug),
+            topicSlug: String(authoredResolved.topicSlug),
+            topicId: String(authoredResolved.topicId),
+            exerciseKey: String(exerciseKey),
+            diff,
+        });
+
+        const instance = await createPracticeInstance({
+            prisma,
+            sessionId: session?.id ?? null,
+            exercise: authored.exercise,
+            expected: authored.expected,
+            topicSlug: authoredResolved.topicSlug as TopicSlug,
+            difficulty: diff,
+            topicIdHint: authoredResolved.topicId as string,
+            purpose: "project",
+        });
+
+        const key = signKey({
+            instanceId: instance.id,
+            sessionId: instance.sessionId ?? null,
+            userId: actor.userId ?? null,
+            guestId: actor.guestId ?? null,
+            allowReveal: allowRevealEffective,
+        });
+
+        const run = buildRunMeta({ session, diff, allowRevealEffective });
+
+        return {
+            kind: "json",
+            status: 200,
+            body: {
+                exercise: authored.exercise,
+                key,
+                sessionId: session?.id ?? null,
+                run,
+                meta: {
+                    genKey: authoredResolved.genKey as GenKey | null,
+                    topic: authoredResolved.topicSlug as TopicSlug,
+                    variant: authoredResolved.variant ?? null,
+                    allowReveal: allowRevealEffective,
+                    salt: reqSalt ?? null,
+                    purposeMode,
+                    preferPurposeForGenerator,
+                    chosenPurpose: "project",
+                    authored: true,
+                    source: "topic-bundle",
+                    purpose: {
+                        effective: decision.effective,
+                        requested: decision.requested,
+                        allowed: decision.allowed,
+                        policy: decision.policy,
+                        source: decision.source,
+                        reason: decision.reason ?? null,
+                    },
+                },
+            },
+        };
+    }
+
     let resolved: any = null;
     let out: any = null;
     let lastGenErr: any = null;
 
-    for (let attempt = 0; attempt < 6; attempt++) {
+    for (let attempt = 0; attempt < maxTopicResolveAttempts; attempt++) {
         resolved = await resolveTopicFromScope({
             prisma,
             subjectSlug: session ? undefined : subject,
@@ -121,7 +293,11 @@ export async function generatePracticeExercise(
                 sessionId: session?.id ?? null,
             },
             topicPickSalt: `topic-pick|${reqSalt}`,
-            fallbackOnMissing: true,
+            // A project/review step that asks for a specific topic or exerciseKey
+            // must never silently fall back to another topic. Silent fallback is
+            // how the UI can show an old prompt such as rectangle_area while the
+            // Tools pane is bound to the correct imports workspace.
+            fallbackOnMissing: !requiresExactTopicAndExercise,
             excludeTopicSlugs: Array.from(excludedTopicSlugs),
         } as any);
 
@@ -202,6 +378,15 @@ export async function generatePracticeExercise(
             break;
         } catch (e: any) {
             lastGenErr = e;
+
+            // If the caller requested an exact topic/exercise, do not recover by
+            // trying a different topic. A wrong exercise is worse than an explicit
+            // error because it corrupts the learner-facing card while the tool
+            // pane may still bind to the requested workspace.
+            if (requiresExactTopicAndExercise) {
+                break;
+            }
+
             if (isGeneratorTopicMismatch(e)) {
                 excludedTopicSlugs.add(String(topicSlug));
                 continue;

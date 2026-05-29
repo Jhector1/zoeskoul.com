@@ -15,7 +15,7 @@
     }
   },
   "cardUi": {
-    "kinds": { "quiz": "quiz", "project": "project" },
+    "kinds": { "quiz": "quiz", "project": "project", "tryIt": "try it yourself task" },
     "gateBanner": "Complete the topic items above (readings, videos, sketches) to unlock this {kind}.",
     "completed": "✓ Completed",
     "loadingSaved": "Loading saved {kind} state…",

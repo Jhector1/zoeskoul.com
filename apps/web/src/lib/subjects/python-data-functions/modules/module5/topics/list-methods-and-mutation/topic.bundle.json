@@ -24,7 +24,19 @@
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch0.title",
       "sketchId": "sketch-1",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-append-ten-to-list",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_append_ten_to_list.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_append_ten_to_list.prompt",
+        "exerciseKey": "try-append-ten-to-list",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
@@ -257,6 +269,50 @@
       "expected": {
         "kind": "fill_blank_choice",
         "value": "sort"
+      }
+    },
+    {
+      "id": "try-append-ten-to-list",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-append-ten-to-list",
+      "language": "python",
+      "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "[3, 1, 2, 10]\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)"
       }
     },
     {

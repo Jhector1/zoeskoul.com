@@ -93,12 +93,35 @@ describe("mergeRuntimeIntoProgress", () => {
         expect(practicePatch.workspace).toEqual(workspace);
         expect(practicePatch.codeWorkspace).toEqual(workspace);
         expect(practicePatch.ideWorkspace).toEqual(workspace);
+        expect(practicePatch.exerciseKey).toBe(exerciseKey);
+        expect(practicePatch.topicId).toBe("topic-a");
+        expect(practicePatch.cardId).toBe("q1");
         expect(practicePatch.stdin).toBe("9\n");
         expect(practicePatch.codeStdin).toBe("9\n");
         expect(practicePatch.language).toBe("python");
         expect(practicePatch.lang).toBe("python");
         expect(practicePatch.code).toBe("print('persist me')\n");
         expect(practicePatch.source).toBe("print('persist me')\n");
+        const legacyPatch = topic.quizState!.q1.practiceItemPatch!["q1"];
+
+        expect(legacyPatch).toMatchObject({
+            exerciseKey,
+            exerciseId: "q1",
+            topicId: "topic-a",
+            cardId: "q1",
+            code: "print('persist me')\n",
+            source: "print('persist me')\n",
+            stdin: "9\n",
+            codeStdin: "9\n",
+            language: "python",
+            lang: "python",
+            userEdited: true,
+            workspaceOrigin: "user",
+        });
+
+        expect(legacyPatch.workspace).toEqual(workspace);
+        expect(legacyPatch.codeWorkspace).toEqual(workspace);
+        expect(legacyPatch.ideWorkspace).toEqual(workspace);
     });
 
     it("persists sketch/card tool workspaces for refresh and navigation restore", () => {

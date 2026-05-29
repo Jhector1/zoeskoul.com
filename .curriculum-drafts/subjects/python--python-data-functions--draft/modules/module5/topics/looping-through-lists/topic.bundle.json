@@ -268,11 +268,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item",
       "language": "python",
-      "starterCode": "animals = [\"cat\", \"dog\", \"fox\"]\n\n# Loop through animals and print each one",
+      "starterCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "animals = [\"cat\", \"dog\", \"fox\"]\n\n# Loop through animals and print each one",
+          "content": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -281,11 +281,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "animals = [\"cat\", \"dog\", \"fox\"]\n\n# Loop through animals and print each one",
+        "starterCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "animals = [\"cat\", \"dog\", \"fox\"]\n\n# Loop through animals and print each one",
+            "content": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -297,17 +297,17 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
+            "stdin": "cat\ndog\nfox\n",
             "stdout": "cat\ndog\nfox\n",
             "match": "exact"
           },
           {
-            "stdin": "",
-            "stdout": "cat\ndog\nfox\n",
+            "stdin": "owl\neel\nyak\n",
+            "stdout": "owl\neel\nyak\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "animals = [\"cat\", \"dog\", \"fox\"]\n\nfor animal in animals:\n    print(animal)"
+        "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\nfor animal in animals:\n    print(animal)\n"
       }
     },
     {

@@ -9,6 +9,7 @@ import type {
 } from "@/lib/subjects/progressTypes";
 
 import {
+    buildEmbeddedTryItPassProgress,
     buildMarkCardDoneProgress,
     buildQuizPassProgress,
     buildQuizResetProgress, buildResetModuleProgress, buildResetTopicProgress,
@@ -22,7 +23,13 @@ import {
 import {
     countAnswered,
     isTopicComplete,
+    prereqsMetForAnyQuizOrProject,
 } from "./utils";
+import {
+    canAutoMarkReadingCardDone,
+    hasRequiredEmbeddedTryIt,
+    isCardDoneFromState,
+} from "./progressKeys";
 
 import ReviewTopicCompletion from "./components/content/ReviewTopicCompletion";
 
@@ -218,6 +225,241 @@ describe("review module completion/navigation source of truth", () => {
         });
 
         expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(true);
+    });
+
+    it("does not treat a reading card with required embedded try it as complete from readingDone alone", () => {
+        const topicId = "list-methods-and-mutation";
+        const cards = [
+            card({
+                id: "read-intro",
+                type: "text",
+                tryIt: {
+                    id: "try-append-ten-to-list",
+                    title: "Embedded Try It",
+                    exerciseKey: "try-append-ten-to-list",
+                    required: true,
+                    spec: {
+                        mode: "project",
+                        subject: "python-data-functions",
+                        moduleSlug: "module-5",
+                        steps: [
+                            {
+                                id: "try_append_ten_to_list",
+                                exerciseKey: "try-append-ten-to-list",
+                            },
+                        ],
+                    },
+                },
+            }),
+        ];
+
+        const progress: ReviewProgressState = {
+            topics: {
+                [topicId]: {
+                    readingDone: {
+                        "read-intro": true,
+                    },
+                },
+            },
+        };
+
+        expect(isCardDoneFromState(cards[0], progressTopic(progress, topicId))).toBe(false);
+        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(false);
+    });
+
+    it("requires embedded try it pass before a reading card can become complete", () => {
+        const topicId = "list-methods-and-mutation";
+        const tryItId = "try-append-ten-to-list";
+        const readingCard = card({
+            id: "read-intro",
+            type: "text",
+            tryIt: {
+                id: tryItId,
+                title: "Embedded Try It",
+                exerciseKey: "try-append-ten-to-list",
+                required: true,
+                spec: {
+                    mode: "project",
+                    subject: "python-data-functions",
+                    moduleSlug: "module-5",
+                    steps: [
+                        {
+                            id: "try_append_ten_to_list",
+                            exerciseKey: "try-append-ten-to-list",
+                        },
+                    ],
+                },
+            },
+        });
+
+        let progress: ReviewProgressState = { topics: {} };
+
+        progress = buildMarkCardDoneProgress(progress, topicId, readingCard);
+        expect(progress.topics?.[topicId]?.readingDone).toBeUndefined();
+        expect(isCardDoneFromState(readingCard, progressTopic(progress, topicId))).toBe(false);
+
+        progress = buildEmbeddedTryItPassProgress(progress, topicId, tryItId);
+        expect(progress.topics?.[topicId]?.quizzesDone).toMatchObject({
+            [tryItId]: true,
+        });
+        expect(progress.topics?.[topicId]?.readingDone).toBeUndefined();
+
+        progress = buildMarkCardDoneProgress(progress, topicId, readingCard);
+        expect(progress.topics?.[topicId]?.readingDone).toMatchObject({
+            "read-intro": true,
+        });
+        expect(isCardDoneFromState(readingCard, progressTopic(progress, topicId))).toBe(true);
+    });
+
+    it("buildEmbeddedTryItPassProgress only marks quizzesDone for the embedded try it id", () => {
+        const topicId = "list-methods-and-mutation";
+        const progress = buildEmbeddedTryItPassProgress(
+            { topics: {} },
+            topicId,
+            "try-append-ten-to-list",
+        );
+
+        expect(progress.topics?.[topicId]?.quizzesDone).toMatchObject({
+            "try-append-ten-to-list": true,
+        });
+        expect(progress.topics?.[topicId]?.readingDone).toBeUndefined();
+    });
+
+    it("does not allow required embedded try it cards to be treated as skippable reading cards", () => {
+        const readingCard = card({
+            id: "read-intro",
+            type: "text",
+            tryIt: {
+                id: "try-append-ten-to-list",
+                title: "Embedded Try It",
+                exerciseKey: "try-append-ten-to-list",
+                required: true,
+                spec: {
+                    mode: "project",
+                    subject: "python-data-functions",
+                    moduleSlug: "module-5",
+                    steps: [
+                        {
+                            id: "try_append_ten_to_list",
+                            exerciseKey: "try-append-ten-to-list",
+                        },
+                    ],
+                },
+            },
+        });
+
+        expect(hasRequiredEmbeddedTryIt(readingCard)).toBe(true);
+        expect(canAutoMarkReadingCardDone(readingCard, {})).toBe(false);
+
+        const passedState = {
+            quizzesDone: {
+                "try-append-ten-to-list": true,
+            },
+        };
+
+        expect(canAutoMarkReadingCardDone(readingCard, passedState)).toBe(true);
+        const activeCardCanAdvance =
+            isCardDoneFromState(readingCard, passedState) ||
+            (!false && !hasRequiredEmbeddedTryIt(readingCard));
+        expect(activeCardCanAdvance).toBe(false);
+    });
+
+    it("treats a one-step try project card as normal project completion in quizzesDone", () => {
+        const topicId = "write-mode-basics";
+        const tryCardId = "try-write-mode-basics";
+
+        const cards = [
+            card({ id: "read-intro", type: "text" }),
+            card({
+                id: tryCardId,
+                type: "project",
+                spec: {
+                    mode: "project",
+                    subject: "python-v2",
+                    moduleSlug: "module-1",
+                    steps: [
+                        {
+                            id: "try_write_note_file",
+                            topic: "python-v2.write-mode-basics",
+                            preferKind: "code_input",
+                            exerciseKey: "try-write-note-file",
+                            seedPolicy: "global",
+                        },
+                    ],
+                },
+            }),
+        ];
+
+        let progress: ReviewProgressState = {
+            topics: {},
+        };
+
+        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(false);
+        expect(prereqsMetForAnyQuizOrProject(cards, progressTopic(progress, topicId), topicId)).toBe(false);
+
+        progress = buildMarkCardDoneProgress(progress, topicId, cards[0]);
+
+        expect(prereqsMetForAnyQuizOrProject(cards, progressTopic(progress, topicId), topicId)).toBe(true);
+        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(false);
+
+        progress = buildQuizPassProgress(progress, topicId, tryCardId, cards);
+
+        expect(progress.topics?.[topicId]?.quizzesDone).toMatchObject({
+            [tryCardId]: true,
+        });
+        expect(progress.topics?.[topicId]?.readingDone).toMatchObject({
+            "read-intro": true,
+        });
+        expect(countAnswered(cards, progressTopic(progress, topicId), topicId)).toEqual({
+            answeredCount: 2,
+            sessionSize: 2,
+        });
+        expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(true);
+    });
+
+    it("marks earlier non-quiz cards done when a try project passes directly through buildQuizPassProgress", () => {
+        const topicId = "write-mode-basics";
+        const tryCardId = "try-write-mode-basics";
+
+        const cards = [
+            card({ id: "read-intro", type: "text" }),
+            card({
+                id: tryCardId,
+                type: "project",
+                spec: {
+                    mode: "project",
+                    subject: "python-v2",
+                    moduleSlug: "module-1",
+                    steps: [
+                        {
+                            id: "try_write_note_file",
+                            topic: "python-v2.write-mode-basics",
+                            preferKind: "code_input",
+                            exerciseKey: "try-write-note-file",
+                            seedPolicy: "global",
+                        },
+                    ],
+                },
+            }),
+        ];
+
+        const progress = buildQuizPassProgress(
+            { topics: {} },
+            topicId,
+            tryCardId,
+            cards,
+        );
+
+        expect(progress.topics?.[topicId]?.readingDone).toMatchObject({
+            "read-intro": true,
+        });
+        expect(progress.topics?.[topicId]?.quizzesDone).toMatchObject({
+            [tryCardId]: true,
+        });
+        expect(countAnswered(cards, progressTopic(progress, topicId), topicId)).toEqual({
+            answeredCount: 2,
+            sessionSize: 2,
+        });
     });
 
     it("marks module progress from topic completion only, not from quiz UI state alone", () => {

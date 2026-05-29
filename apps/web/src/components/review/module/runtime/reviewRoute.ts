@@ -1,5 +1,7 @@
 import type { ReviewCard, ReviewModule, ReviewModuleSection } from "@/lib/subjects/types";
 import { getExerciseStateKey } from "./exerciseKeys";
+import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
+import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
 
 export type ReviewResolvedRouteTarget =
     | {
@@ -32,6 +34,11 @@ type TopicLookup = {
     sectionSlug: string;
     topic: ReviewModule["topics"][number];
 };
+
+type RouteTopicManifest = {
+    exercises?: unknown[];
+    topicId?: string;
+} | null;
 
 function cleanSegment(value: unknown, fallback = "item") {
     const raw = typeof value === "string" ? value.trim() : "";
@@ -77,6 +84,24 @@ function getTopicRouteSlug(topicId: string) {
     return cleanSegment(topicId, "topic");
 }
 
+function getRouteTopicManifest(args: {
+    subjectSlug: string;
+    topicId: string;
+    topic: ReviewModule["topics"][number] | null | undefined;
+}): RouteTopicManifest {
+    const rawManifest =
+        args.topic?.meta && typeof args.topic.meta === "object"
+            ? ((args.topic.meta as { rawManifest?: RouteTopicManifest }).rawManifest ?? null)
+            : null;
+
+    if (rawManifest) return rawManifest;
+
+    return resolveTopicBundleManifest({
+        subjectSlug: args.subjectSlug,
+        topicSlugOrId: args.topicId,
+    });
+}
+
 function getTopicLookup(mod: ReviewModule): Map<string, TopicLookup> {
     const map = new Map<string, TopicLookup>();
 
@@ -104,15 +129,47 @@ function getTopicLookup(mod: ReviewModule): Map<string, TopicLookup> {
     return map;
 }
 
-function getProjectExerciseEntries(card: Extract<ReviewCard, { type: "project" }>) {
+function getProjectExerciseEntries(
+    card: Extract<ReviewCard, { type: "project" }>,
+    topicManifest?: { exercises?: unknown[]; topicId?: string } | null,
+) {
+    const rawManifestExercises = Array.isArray(topicManifest?.exercises)
+        ? topicManifest.exercises
+        : [];
+
     const steps = Array.isArray(card.spec?.steps) ? card.spec.steps : [];
     return steps.map((step) => {
         const exerciseId =
             typeof step?.exerciseKey === "string" && step.exerciseKey.trim()
                 ? step.exerciseKey.trim()
-                : typeof step?.id === "string" && step.id.trim()
-                    ? step.id.trim()
-                    : "";
+                : "";
+
+        if (!exerciseId) {
+            throw new Error(
+                `Project step "${String(step?.id ?? "unknown")}" is missing exerciseKey.`,
+            );
+        }
+
+        resolveManifestExercise({
+            topicBundle: topicManifest,
+            exerciseKey: exerciseId,
+        });
+
+        const manifestExerciseIndex = rawManifestExercises.findIndex((candidate) => {
+            const candidateRecord =
+                typeof candidate === "object" && candidate !== null
+                    ? (candidate as { id?: unknown })
+                    : null;
+            return typeof candidateRecord?.id === "string" && candidateRecord.id.trim() === exerciseId;
+        });
+
+        const routeAliases =
+            manifestExerciseIndex >= 0
+                ? [
+                    `q${manifestExerciseIndex + 1}`,
+                    `quiz${manifestExerciseIndex + 1}`,
+                ]
+                : [];
 
         return {
             exerciseId,
@@ -120,6 +177,7 @@ function getProjectExerciseEntries(card: Extract<ReviewCard, { type: "project" }
                 typeof step?.id === "string" && step.id.trim() ? step.id : exerciseId,
                 "exercise",
             ),
+            routeAliases: routeAliases.map((alias) => cleanSegment(alias, "exercise")),
         };
     }).filter((entry) => entry.exerciseId);
 }
@@ -171,8 +229,12 @@ export function resolveReviewRouteTarget(args: {
                 : "";
     const targetKind = typeof route.targetKind === "string" ? route.targetKind : "";
     const targetSlug = cleanSegment(route.targetSlug, "");
+    const hasExplicitRoute =
+        Boolean(topicSegment) &&
+        Boolean(targetKind) &&
+        Boolean(targetSlug);
 
-    if (!topicSegment || !targetKind || !targetSlug) {
+    if (!hasExplicitRoute) {
         return buildDefaultReviewRouteTarget(mod);
     }
 
@@ -182,16 +244,27 @@ export function resolveReviewRouteTarget(args: {
         ) ?? topicSegment;
 
     const lookup = topicMap.get(topicId);
-    if (!lookup) return buildDefaultReviewRouteTarget(mod);
+    if (!lookup) return null;
 
     const sectionSlug = lookup.sectionSlug;
     const cards = Array.isArray(lookup.topic.cards) ? lookup.topic.cards : [];
 
     if (targetKind === "exercise") {
+        const topicManifest =
+            getRouteTopicManifest({
+                subjectSlug,
+                topicId,
+                topic: lookup.topic,
+            });
+
         for (const card of cards) {
             if (card.type !== "project") continue;
-            for (const entry of getProjectExerciseEntries(card)) {
-                if (entry.routeSlug !== targetSlug) continue;
+            for (const entry of getProjectExerciseEntries(card, topicManifest)) {
+                const matchesLegacyAlias =
+                    Array.isArray(entry.routeAliases) &&
+                    entry.routeAliases.some((alias) => alias === targetSlug);
+                if (entry.routeSlug !== targetSlug && !matchesLegacyAlias) continue;
+                const routeExerciseId = matchesLegacyAlias ? targetSlug : entry.exerciseId;
                 return {
                     kind: "exercise" as const,
                     sectionSlug,
@@ -200,8 +273,8 @@ export function resolveReviewRouteTarget(args: {
                     cardId: card.id,
                     cardType: card.type,
                     targetKind: "exercise" as const,
-                    targetSlug: entry.routeSlug,
-                    exerciseId: entry.exerciseId,
+                    targetSlug,
+                    exerciseId: routeExerciseId,
                     exerciseStateKey: getExerciseStateKey(
                         {
                             subjectSlug,
@@ -210,7 +283,7 @@ export function resolveReviewRouteTarget(args: {
                             topicId,
                             cardId: card.id,
                         },
-                        entry.exerciseId,
+                        routeExerciseId,
                     ),
                 };
             }
@@ -232,7 +305,7 @@ export function resolveReviewRouteTarget(args: {
         };
     }
 
-    return buildDefaultReviewRouteTarget(mod);
+    return null;
 }
 
 export function buildReviewRoutePath(args: {
@@ -339,19 +412,34 @@ export function buildReviewExerciseRouteTarget(args: {
     const sectionSlug = args.sectionSlug ?? lookup?.sectionSlug ?? "general";
     const topic = lookup?.topic ?? null;
     const card = (topic?.cards ?? []).find((item) => item.id === args.cardId) ?? null;
+    const topicManifest = getRouteTopicManifest({
+        subjectSlug: args.subjectSlug,
+        topicId: args.topicId,
+        topic,
+    });
     const rawExerciseId = typeof args.exerciseId === "string" ? args.exerciseId.trim() : "";
     const exerciseToken = lastIdSegment(rawExerciseId);
     const projectCard = card?.type === "project" ? card : null;
     const matchedStep = projectCard
-        ? getProjectExerciseEntries(projectCard).find((entry) =>
+        ? getProjectExerciseEntries(projectCard, topicManifest).find((entry) =>
             entry.exerciseId === rawExerciseId ||
             entry.exerciseId === exerciseToken ||
             cleanSegment(entry.exerciseId, "exercise") === cleanSegment(exerciseToken, "exercise") ||
-            cleanSegment(entry.routeSlug, "exercise") === cleanSegment(exerciseToken, "exercise"),
+            cleanSegment(entry.routeSlug, "exercise") === cleanSegment(exerciseToken, "exercise") ||
+            entry.routeAliases?.some(
+                (alias) => cleanSegment(alias, "exercise") === cleanSegment(exerciseToken, "exercise"),
+            ),
         ) ?? null
         : null;
+    const matchedLegacyAlias = matchedStep?.routeAliases?.some(
+        (alias) => cleanSegment(alias, "exercise") === cleanSegment(exerciseToken, "exercise"),
+    ) ?? false;
     const canonicalExerciseId = matchedStep?.exerciseId ?? exerciseToken ?? rawExerciseId;
-    const routeSlug = matchedStep?.routeSlug ?? cleanSegment(exerciseToken || rawExerciseId, "exercise");
+    const routeExerciseId =
+        matchedStep && matchedLegacyAlias
+            ? exerciseToken || rawExerciseId
+            : canonicalExerciseId;
+    const routeSlug = cleanSegment(exerciseToken || rawExerciseId, "exercise");
 
     return {
         kind: "exercise" as const,
@@ -362,7 +450,7 @@ export function buildReviewExerciseRouteTarget(args: {
         cardType: card?.type ?? "project",
         targetKind: "exercise" as const,
         targetSlug: routeSlug,
-        exerciseId: canonicalExerciseId,
+        exerciseId: routeExerciseId,
         exerciseStateKey: getExerciseStateKey(
             {
                 subjectSlug: args.subjectSlug,
@@ -371,7 +459,7 @@ export function buildReviewExerciseRouteTarget(args: {
                 topicId: args.topicId,
                 cardId: args.cardId,
             },
-            canonicalExerciseId,
+            routeExerciseId,
         ),
     };
 }

@@ -22,6 +22,12 @@
               "title": "Practice List Mutation Programs"
             }
           },
+          "tryIt": {
+            "try_append_ten_to_list": {
+              "title": "Try it yourself",
+              "prompt": "Start with `numbers = [3, 1, 2]`. Add `10` to the end of the list, then print the updated list."
+            }
+          },
           "projectSteps": {
             "ci_1": {
               "title": "Add an item and print the list"
@@ -39,9 +45,9 @@
               "prompt": "Which list method adds one new item to the end of a list?",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "options": {
                 "a": "append()",
@@ -71,9 +77,9 @@
               "prompt": "Which of these operations change the original list? Choose all that apply.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "options": {
                 "a": "append(5)",
@@ -116,11 +122,11 @@
             "dr-2": {
               "title": "Remove, pop, then print",
               "prompt": "Arrange the lines to produce a program that removes `\"b\"`, then pops the last remaining item into `taken`, then prints `taken`.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the code pieces in the order Python should run them.",
               "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "concept": "The pieces should form valid Python code in the order it should run.",
+                "hint_1": "Start with the line that sets up the Python action.",
+                "hint_2": "Place lines that depend on earlier values after those values exist."
               },
               "tokens": {
                 "t1": "letters = [\"a\", \"b\", \"c\"]",
@@ -163,14 +169,25 @@
                 "pop"
               ]
             },
+            "try-append-ten-to-list": {
+              "title": "Append 10 to a list",
+              "prompt": "Start with `numbers = [3, 1, 2]`. Add `10` to the end of the list, then print the updated list.",
+              "hint": "Use the list method that adds one value to the end.",
+              "help": {
+                "concept": "`append(value)` mutates the original list by adding one item to the end.",
+                "hint_1": "Call `numbers.append(10)` before printing.",
+                "hint_2": "Your final line should print the changed list."
+              },
+              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list."
+            },
             "ci-1": {
               "title": "Add an item and print the list",
               "prompt": "Write a program that reads one word from input, starts with the list `[\"pen\", \"pencil\"]`, appends the input word, and prints the final list.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "starterCode": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list."
             },
@@ -180,8 +197,8 @@
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Remove a value and show the result\".",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "starterCode": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list."
             },
@@ -190,9 +207,9 @@
               "prompt": "Write a program that reads three integers from input, one per line, stores them in a list, sorts the list in ascending order, and prints the sorted list.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list."
             }

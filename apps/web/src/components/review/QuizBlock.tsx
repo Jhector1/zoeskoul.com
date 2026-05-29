@@ -136,32 +136,130 @@ function serializePracticeItemForSave(
   item: PracticeItemRecord | null | undefined,
   exercise: UnknownRecord | null | undefined,
 ) {
-  const { ui, ...rest } = item ?? {};
+  if (!item) return {};
+
+  const itemAny = item as UnknownRecord;
+  const ui = itemAny.ui as UnknownRecord | undefined;
+
+  const rest: UnknownRecord = {
+    single: itemAny.single,
+    multi: itemAny.multi,
+    num: itemAny.num,
+    dragA: itemAny.dragA,
+    dragB: itemAny.dragB,
+    matRows: itemAny.matRows,
+    matCols: itemAny.matCols,
+    mat: itemAny.mat,
+    result: itemAny.result,
+    submitted: itemAny.submitted,
+    attempts: itemAny.attempts,
+    code: itemAny.code,
+    source: itemAny.source,
+    codeLang: itemAny.codeLang,
+    language: itemAny.language,
+    lang: itemAny.lang,
+    codeStdin: itemAny.codeStdin,
+    stdin: itemAny.stdin,
+    workspace: itemAny.workspace,
+    codeWorkspace: itemAny.codeWorkspace,
+    ideWorkspace: itemAny.ideWorkspace,
+    text: itemAny.text,
+    reorder: itemAny.reorder,
+    reorderIds: itemAny.reorderIds,
+    feedbackDismissed: itemAny.feedbackDismissed,
+    voiceTranscript: itemAny.voiceTranscript,
+    voiceAudioId: itemAny.voiceAudioId,
+    revealed: itemAny.revealed,
+    codeRunOutput: itemAny.codeRunOutput,
+    userEdited: itemAny.userEdited,
+    workspaceOrigin: itemAny.workspaceOrigin,
+    starterHash: itemAny.starterHash,
+    updatedAt: itemAny.updatedAt,
+  };
+
+  // Never persist immutable authored exercise content inside the learner patch.
+  // A saved QItem from one exercise must not be able to replace prompt/title/
+  // exercise on a freshly loaded exercise with the same short slot id.
+  delete rest.exercise;
+  delete rest.key;
+  delete rest.title;
+  delete rest.prompt;
+  delete rest.hint;
+  delete rest.options;
+  delete rest.tokens;
+  delete rest.expected;
+  delete rest.starterCode;
+  delete rest.starterFiles;
+  delete rest.workspaceExpectations;
+  delete rest.recipe;
+  delete rest.help;
 
   if (exercise?.kind === "drag_reorder" && !ui?.reorderTouched) {
     delete rest.reorder;
     delete rest.reorderIds;
   }
 
+  for (const key of Object.keys(rest)) {
+    if (typeof rest[key] === "undefined") {
+      delete rest[key];
+    }
+  }
+
   return rest;
+}
+
+function cleanPracticeKeyPart(value: unknown) {
+  return String(value ?? "")
+      .trim()
+      .replace(/[:\s]+/g, "-");
 }
 
 function getStablePracticeQuestionKey(q: ReviewQuestion) {
   if (q.kind !== "practice") return q.id;
 
   const practiceQuestion = q as PracticeRuntimeQuestion;
-  return (
-      practiceQuestion.fetch?.exerciseKey ??
+  const fetch = practiceQuestion.fetch ?? {};
+
+  const scopedKey = [
+    cleanPracticeKeyPart((fetch as any).subjectSlug ?? fetch.subject ?? (practiceQuestion as any).subjectSlug),
+    cleanPracticeKeyPart((fetch as any).moduleSlug ?? fetch.module ?? (practiceQuestion as any).moduleSlug),
+    cleanPracticeKeyPart((fetch as any).sectionSlug ?? fetch.section ?? (practiceQuestion as any).sectionSlug),
+    cleanPracticeKeyPart((fetch as any).topicId ?? fetch.topic ?? (practiceQuestion as any).topicId),
+    cleanPracticeKeyPart(
+      fetch.exerciseKey ??
       practiceQuestion.exerciseKey ??
       practiceQuestion.item?.exerciseKey ??
       practiceQuestion.exercise?.exerciseKey ??
       practiceQuestion.exercise?.id ??
-      practiceQuestion.fetch?.stepId ??
-      practiceQuestion.item?.id ??
+      fetch.stepId ??
       practiceQuestion.stepId ??
       practiceQuestion.sourceStepId ??
+      practiceQuestion.item?.id ??
       practiceQuestion.key ??
-      q.id
+      q.id,
+    ),
+  ]
+      .filter(Boolean)
+      .join(":");
+
+  return scopedKey || String(q.id ?? "");
+}
+
+function getPracticeRouteExerciseId(q: ReviewQuestion) {
+  if (q.kind !== "practice") return q.id;
+
+  const practiceQuestion = q as PracticeRuntimeQuestion;
+  return (
+    practiceQuestion.fetch?.exerciseKey ??
+    practiceQuestion.fetch?.stepId ??
+    practiceQuestion.exerciseKey ??
+    practiceQuestion.stepId ??
+    practiceQuestion.sourceStepId ??
+    practiceQuestion.item?.exerciseKey ??
+    practiceQuestion.exercise?.exerciseKey ??
+    practiceQuestion.item?.id ??
+    practiceQuestion.exercise?.id ??
+    getStablePracticeQuestionKey(q)
   );
 }
 
@@ -231,6 +329,11 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
           .filter(Boolean),
   );
 
+  const wantedTopic = String(qAny.fetch?.topic ?? qAny.topicId ?? "").trim();
+  const wantedSubject = String(qAny.fetch?.subject ?? qAny.subjectSlug ?? "").trim();
+  const wantedModule = String(qAny.fetch?.module ?? qAny.moduleSlug ?? "").trim();
+  const wantedSection = String(qAny.fetch?.section ?? qAny.sectionSlug ?? "").trim();
+
   const activeExerciseKey = String(runtime.activeExerciseKey ?? "").trim();
   const boundExerciseKey = String(runtime.tool?.boundExerciseKey ?? "").trim();
 
@@ -240,6 +343,18 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
 
         const valueExerciseKey = String(value.exerciseKey ?? "").trim();
         const valueExerciseId = String(value.exerciseId ?? "").trim();
+        const valueTopicId = String(value.topicId ?? "").trim();
+        const valueSubjectSlug = String(value.subjectSlug ?? "").trim();
+        const valueModuleSlug = String(value.moduleSlug ?? "").trim();
+        const valueSectionSlug = String(value.sectionSlug ?? "").trim();
+
+        const scopeMatches =
+            (!wantedTopic || valueTopicId === wantedTopic) &&
+            (!wantedSubject || valueSubjectSlug === wantedSubject) &&
+            (!wantedModule || valueModuleSlug === wantedModule) &&
+            (!wantedSection || valueSectionSlug === wantedSection);
+
+        if (!scopeMatches) return null;
 
         let score = 0;
 
@@ -420,17 +535,17 @@ export default function QuizBlock({
   moduleRuntimeDefaults?: unknown;
   sectionRuntimeDefaults?: unknown;
   topicRuntimeDefaults?: unknown;
-  onNavigateToExerciseRoute?: (exerciseId: string) => Promise<void> | void;
+  onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
 }) {
   const initState = initialState ?? null;
 
-  const stableQuizKeyRef = useRef<string>("");
-  if (!stableQuizKeyRef.current) {
-    stableQuizKeyRef.current = quizKey?.trim()
-        ? quizKey.trim()
-        : buildReviewQuizKey(spec, quizCardId ?? quizId, 0);
-  }
-  const stableKey = stableQuizKeyRef.current;
+  const stableKey = useMemo(
+      () =>
+          quizKey?.trim()
+              ? quizKey.trim()
+              : buildReviewQuizKey(spec, quizCardId ?? quizId, 0),
+      [quizKey, spec, quizCardId, quizId],
+  );
 
   const [reloadNonce, setReloadNonce] = useState(0);
   const resetKey = `${stableKey}:${reloadNonce}`;
@@ -728,10 +843,8 @@ export default function QuizBlock({
 
         practiceMeta[stablePracticeKey] = nextMeta;
 
-        // Backward compatibility for older saved states that still read by q.id.
-        if (stablePracticeKey !== q.id) {
-          practiceMeta[q.id] = nextMeta;
-        }
+        // Do not also write by q.id. Project q.id values are slot identifiers and
+        // can remain stable after content changes, which causes cross-topic reuse.
       }
 
       if (ps?.item) {
@@ -797,10 +910,7 @@ export default function QuizBlock({
 
         practiceItemPatch[stablePracticeKey] = mergedSerialized;
 
-        // Backward compatibility for older saved states that still read by q.id.
-        if (stablePracticeKey !== q.id) {
-          practiceItemPatch[q.id] = mergedSerialized;
-        }
+        // Do not also write by q.id. Only the scoped practice key is safe.
       } else {
         /**
          * Important:
@@ -816,12 +926,7 @@ export default function QuizBlock({
             ...runtimePatch,
           };
 
-          if (stablePracticeKey !== q.id) {
-            practiceItemPatch[q.id] = {
-              ...(practiceItemPatch[q.id] ?? {}),
-              ...runtimePatch,
-            };
-          }
+          // Do not also write runtime patches by q.id. Only the scoped practice key is safe.
         }
       }
     }
@@ -1093,9 +1198,12 @@ export default function QuizBlock({
       nextQuestion.kind === "practice" &&
       onNavigateToExerciseRoute
     ) {
-      const nextExerciseId = getStablePracticeQuestionKey(nextQuestion);
+      const nextExerciseId = getPracticeRouteExerciseId(nextQuestion);
       if (nextExerciseId) {
-        onNavigateToExerciseRoute(nextExerciseId);
+        onNavigateToExerciseRoute({
+          cardId: quizCardId ?? quizId,
+          exerciseId: nextExerciseId,
+        });
         return true;
       }
     }

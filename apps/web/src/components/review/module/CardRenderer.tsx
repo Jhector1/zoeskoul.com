@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import type { ReviewCard } from "@/lib/subjects/types";
+import type { ReviewCard, ReviewEmbeddedTryIt } from "@/lib/subjects/types";
 import type {
     ReviewTopicProgress,
     SavedQuizState,
@@ -14,9 +14,13 @@ import { buildReviewQuizKey } from "@/lib/subjects/quizClient";
 import SketchBlock from "@/components/sketches/subjects/SketchBlock";
 import type { SavedSketchState } from "@/components/sketches/subjects/types";
 import { useTaggedT } from "@/i18n/tagged";
-import {FlowNavMode} from "@/components/review/navigation/FlowNavigator";
+import { FlowNavMode } from "@/components/review/navigation/FlowNavigator";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 import { buildQuizBlockRuntimeDefaultsProps } from "@/components/review/module/runtime/cardRuntimeDefaults";
+import {
+    getAssessmentDisplayKind,
+    type AssessmentDisplayKind,
+} from "@/components/review/module/tryItProjectCard";
 type ReviewCardSpecRecord = Record<string, unknown> | null | undefined;
 
 function GateBanner({ text }: { text: string }) {
@@ -35,6 +39,7 @@ export default function CardRenderer(props: {
 
     done: boolean;
     onMarkDone: () => void;
+    onEmbeddedTryItPass?: (tryItId: string) => void;
 
     prereqsMet: boolean;
     locked?: boolean;
@@ -76,6 +81,7 @@ export default function CardRenderer(props: {
         cardIndex = 0,
         done,
         onMarkDone,
+        onEmbeddedTryItPass,
         prereqsMet,
         locked = false,
         progressHydrated,
@@ -136,17 +142,93 @@ export default function CardRenderer(props: {
     const orderBase = cardIndex * 10000;
     const cardTitle = tt.resolve(card.title ?? null, {}, card.title ?? "");
 
-        const kindLabel = (kind: "quiz" | "project") =>
-        kind === "quiz" ? ui.t("kinds.quiz", {}, "quiz") : ui.t("kinds.project", {}, "project");
+    const kindLabel = (kind: AssessmentDisplayKind) => {
+        if (kind === "quiz") return ui.t("kinds.quiz", {}, "quiz");
+        if (kind === "tryIt") return ui.t("kinds.tryIt", {}, "try it yourself task");
+        return ui.t("kinds.project", {}, "project");
+    };
 
+    function getCardTryIt(nextCard: ReviewCard): ReviewEmbeddedTryIt | null {
+        const value = (nextCard as { tryIt?: unknown }).tryIt;
+        if (!value || typeof value !== "object") return null;
+
+        const record = value as Record<string, unknown>;
+        if (typeof record.id !== "string" || !record.id.trim()) return null;
+        if (!record.spec || typeof record.spec !== "object") return null;
+
+        return value as ReviewEmbeddedTryIt;
+    }
+
+    function renderEmbeddedTryIt() {
+        const tryIt = getCardTryIt(card);
+        if (!tryIt) return null;
+
+        const tryItId = tryIt.id;
+        const tryItDone = Boolean(tp?.quizzesDone?.[tryItId]);
+        const savedTryIt = (tp?.quizState?.[tryItId] ?? null) as SavedQuizState | null;
+
+        const title = tt.resolve(
+            tryIt.title ?? null,
+            {},
+            tryIt.title ?? "Try it yourself",
+        );
+
+        const key = buildReviewQuizKey(tryIt.spec, tryItId, versionStr);
+
+        const runtimeDefaultsProps = buildQuizBlockRuntimeDefaultsProps({
+            subjectRuntimeDefaults,
+            courseRuntimeDefaults,
+            moduleRuntimeDefaults,
+            sectionRuntimeDefaults,
+            topicRuntimeDefaults,
+        });
+
+        return (
+            <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50/40 p-3 dark:border-emerald-400/20 dark:bg-emerald-950/20">
+                <div className="ui-title-sm">{title || "Try it yourself"}</div>
+
+                {!progressHydrated ? (
+                    <div className="mt-2 ui-meta">
+                        Loading saved try it yourself state…
+                    </div>
+                ) : (
+                    <QuizBlock
+                        key={key}
+                        quizId={tryItId}
+                        quizCardId={card.id}
+                        toolsActive={active}
+                        spec={tryIt.spec}
+                        quizKey={key}
+                        passScore={1.0}
+                        prereqsMet={prereqsMet}
+                        locked={locked}
+                        isCompleted={tryItDone}
+                        initialState={savedTryIt}
+                        onPass={() => onEmbeddedTryItPass?.(tryItId)}
+                        onStateChange={(s: SavedQuizState) => onQuizStateChange(tryItId, s)}
+                        onReset={() => onQuizReset(tryItId)}
+                        sequential={true}
+                        strictSequential={true}
+                        unlimitedAttempts={true}
+                        orderBase={orderBase + 5000}
+                        navigationMode={quizNavMode}
+                        {...runtimeDefaultsProps}
+                        routeExerciseId={routeExerciseId}
+                        onNavigateToExerciseRoute={onNavigateToExerciseRoute}
+                    />
+                )}
+            </div>
+        );
+    }
     function renderQuizLike(kind: "quiz" | "project") {
         const quizCard = card as Extract<ReviewCard, { type: "quiz" | "project" }>;
         const key = buildReviewQuizKey(card.spec, card.id, versionStr);
+        const displayKind = getAssessmentDisplayKind(card, kind);
 
         const showGate = !done && !prereqsMet;
         const canMountQuizBlock = progressHydrated && (prereqsMet || done);
 
-        const kp = kindLabel(kind);
+        const kp = kindLabel(displayKind);
 
         const gateText = ui.t(
             "gateBanner",
@@ -168,12 +250,19 @@ export default function CardRenderer(props: {
                     strictSequential: undefined as boolean | undefined,
                     unlimitedAttempts: true,
                 }
-                : {
-                    passScore: 1.0,
-                    sequential: true,
-                    strictSequential: true,
-                    unlimitedAttempts: false,
-                };
+                : displayKind === "tryIt"
+                    ? {
+                        passScore: 1.0,
+                        sequential: true,
+                        strictSequential: true,
+                        unlimitedAttempts: true,
+                    }
+                    : {
+                        passScore: 1.0,
+                        sequential: true,
+                        strictSequential: true,
+                        unlimitedAttempts: false,
+                    };
         const runtimeDefaultsProps = buildQuizBlockRuntimeDefaultsProps({
             subjectRuntimeDefaults,
             courseRuntimeDefaults,
@@ -214,15 +303,7 @@ export default function CardRenderer(props: {
                             navigationMode={quizNavMode}
                             {...runtimeDefaultsProps}
                             routeExerciseId={routeExerciseId}
-                            onNavigateToExerciseRoute={
-                                onNavigateToExerciseRoute
-                                    ? (exerciseId: string) =>
-                                          onNavigateToExerciseRoute({
-                                              cardId: card.id,
-                                              exerciseId,
-                                          })
-                                    : undefined
-                            }
+                            onNavigateToExerciseRoute={onNavigateToExerciseRoute}
                         />
                     )
                 ) : null}
@@ -235,13 +316,29 @@ export default function CardRenderer(props: {
     if (card.type === "text") {
         const md = tt.resolve(card.markdown ?? "", {}, card.markdown ?? "");
         const btnText = done ? ui.t("actions.readDone", {}, "✓ Read") : ui.t("actions.read", {}, "Mark as read");
+        const tryIt = getCardTryIt(card);
+        const tryItRequired = Boolean(tryIt && tryIt.required !== false);
+        const tryItDone = tryIt ? Boolean(tp?.quizzesDone?.[tryIt.id]) : true;
+        const markReadDisabled = tryItRequired && !tryItDone;
 
         return (
             <div className={wrapCls}>
                 <CardTitle title={cardTitle} />
                 <MathMarkdown className="ui-math [&_.katex]:text-inherit" content={md} />
+                {renderEmbeddedTryIt()}
                 <div className="mt-3 flex justify-end">
-                    <button type="button" onClick={onMarkDone} className={actionBtn} data-flow-focus="1">
+                    <button
+                        type="button"
+                        onClick={onMarkDone}
+                        className={actionBtn}
+                        disabled={markReadDisabled}
+                        title={
+                            markReadDisabled
+                                ? "Complete the Try it yourself task to mark this lesson as read."
+                                : undefined
+                        }
+                        data-flow-focus="1"
+                    >
                         {btnText}
                     </button>
                 </div>
@@ -250,6 +347,11 @@ export default function CardRenderer(props: {
     }
 
     if (card.type === "sketch") {
+        const tryIt = getCardTryIt(card);
+        const tryItRequired = Boolean(tryIt && tryIt.required !== false);
+        const tryItDone = tryIt ? Boolean(tp?.quizzesDone?.[tryIt.id]) : true;
+        const markReadDisabled = tryItRequired && !tryItDone;
+
         return (
             <div>
                 <SketchBlock
@@ -266,7 +368,10 @@ export default function CardRenderer(props: {
                     onMarkDone={onMarkDone}
                     prereqsMet={prereqsMet}
                     locked={locked}
+                    markDoneDisabled={markReadDisabled}
+                    markDoneDisabledReason="Complete the Try it yourself task to mark this lesson as read."
                 />
+                {renderEmbeddedTryIt()}
             </div>
         );
     }

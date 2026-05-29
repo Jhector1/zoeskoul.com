@@ -117,11 +117,11 @@
             "dr-build-path": {
               "title": "Build a relative path",
               "prompt": "Arrange the tokens to make the relative path to `report.txt` inside the `data` folder.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Arrange the code pieces in the order Python should run them.",
               "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "concept": "The pieces should form valid Python code in the order it should run.",
+                "hint_1": "Start with the line that sets up the Python action.",
+                "hint_2": "Place lines that depend on earlier values after those values exist."
               },
               "tokens": {
                 "t1": "data",
@@ -134,9 +134,9 @@
               "prompt": "Fill in the missing method name to read all text from an open file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
               },
               "template": "text = file.[blank1]()",
               "choices": [

@@ -240,9 +240,10 @@ function registerArgsKey(args: RegisterArgs | undefined) {
     ideConfig: args.ideConfig ?? null,
     workspaceKey: workspaceKeyOf(args.workspace ?? null),
     ownerCardId: args.ownerCardId ?? null,
-    preferSnapshot: Boolean(args.preferSnapshot),
-    userEdited: Boolean(args.userEdited),
-    workspaceOrigin: args.workspaceOrigin ?? null,
+    // Deliberately exclude transient ownership flags from the registry key.
+    // They can flip during bind/progress reconciliation and otherwise cause
+    // register -> bind -> setProgress -> register update loops. Contract
+    // changes are represented by code/workspace/language/runtime fields above.
     sqlDialect: args.sqlDialect ?? null,
     sqlDatasetId: args.sqlDatasetId ?? null,
     sqlSchemaSql: args.sqlSchemaSql ?? null,
@@ -269,7 +270,7 @@ export function ReviewToolsProvider({
 }: {
   children: React.ReactNode;
   ensureVisible?: () => void;
-  onBindToToolsPanel: (args: { id: string } & RegisterArgs) => void;
+  onBindToToolsPanel: (args: { id: string } & RegisterArgs) => void | boolean | Promise<void | boolean>;
   onUnbindFromToolsPanel?: () => void;
   externalBoundId?: string | null;
   enabled?: boolean;
@@ -284,6 +285,8 @@ export function ReviewToolsProvider({
   const unbindTimersRef = useRef(new Map<string, number>());
 
   const [requestedId, setRequestedId] = useState<string | null>(null);
+  const lastRegisterAutoBindKeyRef = useRef<string | null>(null);
+  const lastExternalBoundBindKeyRef = useRef<string | null>(null);
   const [registryTick, setRegistryTick] = useState(0);
   const [metaTick, setMetaTick] = useState(0);
   const [runFeedbackById, setRunFeedbackById] = useState<Record<string, RunFeedbackEntry>>({});
@@ -450,7 +453,7 @@ export function ReviewToolsProvider({
   }, [externalBoundId, storeBoundId, flushByToolKey, setFlushToolSnapshotCallback]);
 
   const bindNow = useCallback(
-    (id: string) => {
+    async (id: string) => {
       if (!enabledRef.current) return;
       if (!id) return;
 
@@ -468,7 +471,20 @@ export function ReviewToolsProvider({
       }
 
       ensureVisible?.();
-      onBindToToolsPanel({ id, ...snap, exerciseKey: targetKey });
+
+      const accepted = await onBindToToolsPanel({ id, ...snap, exerciseKey: targetKey });
+
+      /**
+       * Do not mark the global Tools panel as bound when the route/controller
+       * rejected this registration as stale. Otherwise the header can say it is
+       * bound to the exercise while the editor is still the generic default
+       * workspace (for example Python main.py / print("Hello Python!")).
+       */
+      if (accepted === false) {
+        setRequestedId(null);
+        return;
+      }
+
       bindExerciseTool(targetKey);
       setRequestedId(null);
     },
@@ -662,7 +678,9 @@ export function ReviewToolsProvider({
 
             patchExercise(targetKey, runtimePatch);
 
-            const currentBound = useReviewRuntimeStore.getState().tool.boundExerciseKey;
+            const runtimeState = useReviewRuntimeStore.getState();
+            const currentBound = runtimeState.tool.boundExerciseKey;
+            const activeExerciseKey = runtimeState.activeExerciseKey;
 
             /**
              * Route/dynamic review editors can be keyed by more than one stable owner:
@@ -678,8 +696,6 @@ export function ReviewToolsProvider({
              * possible owner keys for this one explicit patch.
              */
             if (userEdited && next.workspace) {
-                const runtimeStore = useReviewRuntimeStore.getState();
-
                 const mirrorOwnerKeys = Array.from(
                     new Set(
                         [
@@ -687,20 +703,30 @@ export function ReviewToolsProvider({
                             typeof cur.exerciseKey === "string" ? cur.exerciseKey : null,
                             id,
                             typeof currentBound === "string" ? currentBound : null,
+                            typeof activeExerciseKey === "string" ? activeExerciseKey : null,
                         ].filter((key): key is string => Boolean(key && key.trim())),
                     ),
                 );
 
                 for (const ownerKey of mirrorOwnerKeys) {
-                    runtimeStore.patchEditorWorkspace(ownerKey, next.workspace);
+                    runtimeState.patchEditorWorkspace(ownerKey, next.workspace);
 
                     if (ownerKey !== targetKey) {
-                        runtimeStore.patchExercise(ownerKey, runtimePatch);
+                        runtimeState.patchExercise(ownerKey, runtimePatch);
                     }
                 }
             }
 
-            if (currentBound === targetKey) {
+            const shouldRebindVisibleEditor =
+                currentBound === targetKey ||
+                currentBound === cur.exerciseKey ||
+                currentBound === id ||
+                activeExerciseKey === targetKey ||
+                activeExerciseKey === cur.exerciseKey ||
+                activeExerciseKey === id ||
+                (userEdited && typeof currentBound === "string" && currentBound.trim().length > 0);
+
+            if (shouldRebindVisibleEditor) {
                 defer(() => bindNow(id));
             }
         },
@@ -712,6 +738,96 @@ export function ReviewToolsProvider({
             if (!id) return;
 
             clearRunFeedback(id);
+            const existing = registryRef.current.get(id);
+
+            if (!existing) {
+                const runtimeStore = useReviewRuntimeStore.getState();
+                const currentBound = runtimeStore.tool.boundExerciseKey;
+                const activeExerciseKey = runtimeStore.activeExerciseKey;
+                const ownerKeys = Array.from(
+                    new Set(
+                        [currentBound, activeExerciseKey].filter(
+                            (key): key is string => Boolean(key && key.trim()),
+                        ),
+                    ),
+                );
+
+                for (const ownerKey of ownerKeys) {
+                    const currentExercise = runtimeStore.exercises[ownerKey] ?? null;
+                    const incomingWorkspace =
+                        patch?.workspace && typeof patch.workspace === "object"
+                            ? (patch.workspace as WorkspaceStateV2)
+                            : patch?.codeWorkspace && typeof patch.codeWorkspace === "object"
+                                ? (patch.codeWorkspace as WorkspaceStateV2)
+                                : patch?.ideWorkspace && typeof patch.ideWorkspace === "object"
+                                    ? (patch.ideWorkspace as WorkspaceStateV2)
+                                    : runtimeStore.editorRuntimes[ownerKey]?.workspace ??
+                                    currentExercise?.workspace ??
+                                    runtimeStore.boundToolWorkspace ??
+                                    null;
+                    const incomingCode =
+                        typeof patch?.code === "string"
+                            ? patch.code
+                            : typeof patch?.source === "string"
+                                ? patch.source
+                                : typeof currentExercise?.code === "string"
+                                    ? currentExercise.code
+                                    : "";
+                    const incomingLang = String(
+                        patch?.codeLang ??
+                        patch?.language ??
+                        patch?.lang ??
+                        currentExercise?.language ??
+                        currentExercise?.lang ??
+                        "python",
+                    ) as WorkspaceLanguage;
+                    const incomingStdin =
+                        typeof patch?.codeStdin === "string"
+                            ? patch.codeStdin
+                            : typeof patch?.stdin === "string"
+                                ? patch.stdin
+                                : typeof currentExercise?.stdin === "string"
+                                    ? currentExercise.stdin
+                                    : "";
+
+                    const normalizedPair = normalizeCodeWorkspacePair({
+                        workspace:
+                            typeof incomingCode === "string" && incomingCode.trim()
+                                ? workspaceWithEntryCode(incomingWorkspace, incomingCode)
+                                : incomingWorkspace,
+                        code: incomingCode,
+                        language: incomingLang,
+                        stdin: incomingStdin,
+                        state: { userEdited: true, workspaceOrigin: "user" },
+                    });
+
+                    runtimeStore.patchExercise(ownerKey, {
+                        language: incomingLang,
+                        lang: incomingLang,
+                        workspace: normalizedPair.workspace ?? undefined,
+                        codeWorkspace: normalizedPair.workspace ?? undefined,
+                        ideWorkspace: normalizedPair.workspace ?? undefined,
+                        code: normalizedPair.code,
+                        source: normalizedPair.code,
+                        stdin: incomingStdin,
+                        codeStdin: incomingStdin,
+                        userEdited: true,
+                        workspaceOrigin: "user",
+                        submitted: false,
+                        feedbackDismissed: true,
+                        dismissFeedbackOnEdit: true,
+                        updatedAt: Date.now(),
+                    });
+
+                    if (normalizedPair.workspace) {
+                        runtimeStore.patchEditorWorkspace(ownerKey, normalizedPair.workspace);
+                    }
+                }
+
+                defer(() => bindNow(id));
+                return;
+            }
+
             syncCodeInputSnapshot(id, {
                 ...patch,
                 preferSnapshot: true,
@@ -725,7 +841,7 @@ export function ReviewToolsProvider({
         [bindNow, clearRunFeedback, syncCodeInputSnapshot],
     );
 
-  const requestBind = useCallback(
+    const requestBind = useCallback(
     (id: string) => {
       if (!enabledRef.current) return;
       if (!id) return;
@@ -739,13 +855,18 @@ export function ReviewToolsProvider({
       const targetKey = snap.exerciseKey ?? id;
       const current = useReviewRuntimeStore.getState().tool.boundExerciseKey;
 
+      /**
+       * Browser back/forward can leave the runtime bound to the same exercise key
+       * while the visible Tools editor still carries an older workspace snapshot.
+       * Same-key binding must therefore refresh the Tools panel instead of no-oping.
+       */
       if (current === targetKey) {
         setRequestedId(null);
-        bindNow(id);
+        void bindNow(id);
         return;
       }
 
-      bindNow(id);
+      void bindNow(id);
     },
     [bindNow],
   );
@@ -801,7 +922,7 @@ export function ReviewToolsProvider({
         const incomingIsExplicitUserSnapshot = Boolean(
             normalizedArgs.userEdited === true ||
             normalizedArgs.workspaceOrigin === "user" ||
-            normalizedArgs.preferSnapshot === true,
+            normalizedArgs.workspaceOrigin === "saved"
         );
 
         const prevIsProtectedUserSnapshot = Boolean(
@@ -890,9 +1011,14 @@ export function ReviewToolsProvider({
         const currentBound = useReviewRuntimeStore.getState().tool.boundExerciseKey;
 
         if (currentBound === targetKey && prevKey !== nextKey) {
-            defer(() => bindNow(id));
+            const autoRebindKey = `${id}::${targetKey}::${nextKey}`;
+            if (lastRegisterAutoBindKeyRef.current !== autoRebindKey) {
+                lastRegisterAutoBindKeyRef.current = autoRebindKey;
+                defer(() => bindNow(id));
+            }
         }
-      if (requestedId === id) {
+      if (requestedId === id || requestedId === targetKey) {
+        setRequestedId(null);
         defer(() => bindNow(id));
       }
     },
@@ -903,16 +1029,18 @@ export function ReviewToolsProvider({
     (id: string) => {
       if (!id) return;
 
-      const targetKeyBeforeDelete = getTargetKeyForInputId(id);
+      clearUnbindTimer(id);
 
-      registryRef.current.delete(id);
-      metaRef.current.delete(id);
-      setRegistryTick((x) => x + 1);
-      setMetaTick((x) => x + 1);
-      clearRunFeedback(id);
+      const targetKeyBeforeDelete = getTargetKeyForInputId(id);
 
       const timer = window.setTimeout(() => {
         unbindTimersRef.current.delete(id);
+
+        registryRef.current.delete(id);
+        metaRef.current.delete(id);
+        setRegistryTick((x) => x + 1);
+        setMetaTick((x) => x + 1);
+        clearRunFeedback(id);
 
         const currentBound = useReviewRuntimeStore.getState().tool.boundExerciseKey;
 
@@ -932,6 +1060,7 @@ export function ReviewToolsProvider({
       if (requestedId === id) setRequestedId(null);
     },
     [
+      clearUnbindTimer,
       getTargetKeyForInputId,
       clearRunFeedback,
       requestedId,
@@ -1058,15 +1187,49 @@ export function ReviewToolsProvider({
     const next = externalBoundId ?? null;
 
     if (!next) {
+      lastExternalBoundBindKeyRef.current = null;
       const current = useReviewRuntimeStore.getState().tool.boundExerciseKey;
       if (current) storeUnbindExerciseTool(current);
       setRequestedId(null);
       return;
     }
 
+    const entry = getRegistryEntryForToolKey(next);
+
+    if (entry) {
+      const externalBindKey = `${next}::${entry.id}::${entry.targetKey}`;
+
+      /**
+       * externalBoundId is route-owned. It must hydrate the actual registered
+       * code input through bindNow(), not only call bindExerciseTool().
+       *
+       * bindExerciseTool only changes the global key; it does not copy the
+       * currently mounted exercise snapshot into the Tools state. That is why
+       * Check could submit stale starter code and why fixture files like data.txt
+       * could be missing from the visible Tools workspace.
+       */
+      if (lastExternalBoundBindKeyRef.current !== externalBindKey) {
+        lastExternalBoundBindKeyRef.current = externalBindKey;
+        setRequestedId(null);
+        void bindNow(entry.id);
+      }
+
+      return;
+    }
+
+    lastExternalBoundBindKeyRef.current = null;
+    setRequestedId(next);
+
     const targetKey = getTargetKeyForInputId(next);
     if (targetKey) bindExerciseTool(targetKey);
-  }, [externalBoundId, getTargetKeyForInputId, bindExerciseTool, storeUnbindExerciseTool]);
+  }, [
+    externalBoundId,
+    getRegistryEntryForToolKey,
+    getTargetKeyForInputId,
+    bindNow,
+    bindExerciseTool,
+    storeUnbindExerciseTool,
+  ]);
 
   useEffect(() => {
     if (enabled) return;
