@@ -28,6 +28,7 @@ const CARD_IDS = [
     "review-clone-practice-quiz",
     "review-clone-project",
     "review-clone-project-b",
+    "review-clone-reveal-fill-multifile",
     "review-clone-project-blank",
 ] as const;
 
@@ -55,6 +56,7 @@ function completedTopicState(completedAt = "2026-05-16T12:00:00.000Z") {
             "review-clone-practice-quiz": true,
             "review-clone-project": true,
             "review-clone-project-b": true,
+            "review-clone-reveal-fill-multifile": true,
             "review-clone-project-blank": true,
         },
         quizState: {
@@ -73,6 +75,13 @@ function completedTopicState(completedAt = "2026-05-16T12:00:00.000Z") {
                 score: 1,
             },
             "review-clone-project-b": {
+                answers: {},
+                checkedById: {},
+                checked: true,
+                correct: true,
+                score: 1,
+            },
+            "review-clone-reveal-fill-multifile": {
                 answers: {},
                 checkedById: {},
                 checked: true,
@@ -526,6 +535,7 @@ test.describe("review reset completion regression using dev clone", () => {
             "review-clone-practice-quiz": true,
             "review-clone-project": true,
             "review-clone-project-b": true,
+            "review-clone-reveal-fill-multifile": true,
             "review-clone-project-blank": true,
         });
 
@@ -542,6 +552,7 @@ test.describe("review reset completion regression using dev clone", () => {
             "review-clone-practice-quiz": true,
             "review-clone-project": true,
             "review-clone-project-b": true,
+            "review-clone-reveal-fill-multifile": true,
             "review-clone-project-blank": true,
         });
     });

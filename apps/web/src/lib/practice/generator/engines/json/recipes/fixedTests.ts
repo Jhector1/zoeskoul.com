@@ -9,14 +9,34 @@ import { buildTerminalExpectedExample } from "./expectedExample";
 import { buildFixedTestsExpected } from "@zoeskoul-code-input-expected";
 
 export const buildFixedTestsRecipe: RecipeHandler<any> = (
-    def: ManifestCodeInput & { recipe: { type: "fixed_tests"; tests: any[]; solutionCode?: string } },
-    args,
+    def: ManifestCodeInput & {
+        recipe: {
+            type: "fixed_tests";
+            tests: any[];
+            solutionCode?: string;
+            solutionFiles?: unknown;
+        };
+    },    args,
     resolved,
 ) => {
     const expected = buildFixedTestsExpected(
         def.recipe,
         def.workspaceExpectations ?? def.workspace?.workspaceExpectations,
     );
+    const solutionFiles =
+        (def as any).solutionFiles ??
+        (def.recipe as any).solutionFiles ??
+        (def.workspace as any)?.solutionFiles;
+
+    const expectedWithRevealFiles = {
+        ...(expected as any),
+        ...(typeof (expected as any).solutionCode === "string"
+            ? {}
+            : typeof def.recipe.solutionCode === "string"
+                ? { solutionCode: def.recipe.solutionCode }
+                : {}),
+        ...(solutionFiles !== undefined ? { solutionFiles } : {}),
+    };
     const tests = expected.tests;
 
     const expectedExample = buildTerminalExpectedExample({
@@ -57,8 +77,7 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
         help: resolved.help,
         hint: resolved.hint,
         fixedSqlDialect: def.fixedSqlDialect,
-        expected: expected as any,
-        expectedExample,
+        expected: expectedWithRevealFiles as any,        expectedExample,
         ideConfig: def.serviceOverrides ?? null,
     });
 };

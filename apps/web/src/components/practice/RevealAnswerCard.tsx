@@ -3,9 +3,11 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { Exercise } from "@/lib/practice/types";
 import type { QItem } from "./practiceType";
+import type { FSNode, NodeId, WorkspaceStateV2 } from "@/components/ide/types";
 
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import MatrixInputPanel from "./MatrixInputPanel";
+import { defaultMainFile } from "@/components/ide/languageDefaults";
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
@@ -34,6 +36,272 @@ async function copyToClipboard(text: string) {
 
 function matrixToText(values: number[][]) {
     return values.map((r) => r.join(" ")).join("\n");
+}
+
+type NormalizedSolutionFile = {
+    path: string;
+    content: string;
+    entry?: boolean;
+};
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+    return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function stableSolutionNodeId(kind: "file" | "folder", path: string): NodeId {
+    const safe = String(path || "root")
+        .replace(/\\/g, "/")
+        .replace(/[^a-zA-Z0-9._/-]+/g, "-")
+        .replace(/^\/+/, "")
+        .replace(/\/+$/g, "")
+        .replace(/\//g, "__");
+
+    return `${kind}:${safe || "root"}`;
+}
+
+export function normalizeSolutionPath(input: unknown, fallback: string): string {
+    const raw = typeof input === "string" && input.trim() ? input : fallback;
+    const parts = raw
+        .replace(/\\/g, "/")
+        .replace(/^\/+/, "")
+        .split("/")
+        .map((part) => part.trim())
+        .filter((part) => part && part !== "." && part !== "..");
+
+    return parts.join("/") || fallback;
+}
+
+export function normalizeSolutionFiles(args: {
+    raw: unknown;
+    language: string;
+    entryFile: string;
+    solutionCode: string;
+}): NormalizedSolutionFile[] {
+    const normalizedLanguage = String(args.language || "python") as any;
+    const fallbackEntry = normalizeSolutionPath(
+        args.entryFile,
+        defaultMainFile(normalizedLanguage),
+    );
+    const filesByPath = new Map<string, NormalizedSolutionFile>();
+
+    const pushFile = (pathInput: unknown, value: unknown, entry = false) => {
+        const path = normalizeSolutionPath(pathInput, fallbackEntry);
+        const content =
+            typeof value === "string"
+                ? value
+                : isRecord(value) && typeof value.content === "string"
+                    ? value.content
+                    : isRecord(value) && typeof value.source === "string"
+                        ? value.source
+                        : isRecord(value) && typeof value.code === "string"
+                            ? value.code
+                            : isRecord(value) && typeof value.text === "string"
+                                ? value.text
+                                : "";
+
+        const existing = filesByPath.get(path);
+        filesByPath.set(path, {
+            path,
+            content,
+            entry: existing?.entry || entry || undefined,
+        });
+    };
+
+    if (Array.isArray(args.raw)) {
+        for (const item of args.raw) {
+            if (typeof item === "string") {
+                pushFile(item, "");
+                continue;
+            }
+
+            if (!isRecord(item)) continue;
+
+            pushFile(
+                item.path ?? item.filePath ?? item.filename ?? item.name,
+                item,
+                item.entry === true || item.isEntry === true || item.main === true,
+            );
+        }
+    } else if (isRecord(args.raw)) {
+        for (const [path, value] of Object.entries(args.raw)) {
+            pushFile(path, value);
+        }
+    }
+
+    return Array.from(filesByPath.values());
+}
+
+function workspacePathForNode(nodes: FSNode[], nodeId: NodeId): string {
+    const node = nodes.find((candidate) => candidate.id === nodeId);
+    if (!node) return "";
+
+    const names: string[] = [node.name];
+    let parentId = node.parentId ?? null;
+
+    while (parentId) {
+        const parent = nodes.find((candidate) => candidate.id === parentId);
+        if (!parent) break;
+        names.unshift(parent.name);
+        parentId = parent.parentId ?? null;
+    }
+
+    return names.join("/");
+}
+
+export function getWorkspaceEntryCode(
+    workspace: WorkspaceStateV2 | null | undefined,
+): string {
+    if (!workspace?.nodes?.length || !workspace.entryFileId) return "";
+
+    const entryNode = workspace.nodes.find(
+        (node) => node.kind === "file" && node.id === workspace.entryFileId,
+    );
+
+    return entryNode?.kind === "file" ? entryNode.content ?? "" : "";
+}
+
+function getWorkspaceFilePaths(
+    workspace: WorkspaceStateV2 | null | undefined,
+): string[] {
+    if (!workspace?.nodes?.length) return [];
+
+    return workspace.nodes
+        .filter((node) => node.kind === "file")
+        .map((node) => workspacePathForNode(workspace.nodes, node.id))
+        .filter(Boolean)
+        .sort((a, b) => a.localeCompare(b));
+}
+
+export function buildSolutionWorkspace(args: {
+    language: string;
+    solutionCode: string;
+    stdin: string;
+    solutionFiles: unknown;
+    entryFile?: string;
+}): WorkspaceStateV2 | null {
+    const language = String(args.language || "python") as any;
+    const defaultEntryFile = defaultMainFile(language);
+    const requestedEntryFile = normalizeSolutionPath(
+        args.entryFile,
+        defaultEntryFile,
+    );
+    const normalizedFiles = normalizeSolutionFiles({
+        raw: args.solutionFiles,
+        language,
+        entryFile: requestedEntryFile,
+        solutionCode: args.solutionCode,
+    });
+
+    const explicitEntryPath = normalizedFiles.find((file) => file.entry)?.path ?? null;
+    const pythonMainPath = normalizeSolutionPath("main.py", requestedEntryFile);
+    const defaultEntryPath = normalizeSolutionPath(defaultEntryFile, requestedEntryFile);
+
+    let entryPath =
+        explicitEntryPath ??
+        requestedEntryFile ??
+        (language === "python" ? pythonMainPath : defaultEntryPath);
+
+    if (!normalizedFiles.some((file) => file.path === entryPath)) {
+        if (
+            language === "python" &&
+            normalizedFiles.some((file) => file.path === pythonMainPath)
+        ) {
+            entryPath = pythonMainPath;
+        } else if (normalizedFiles.some((file) => file.path === defaultEntryPath)) {
+            entryPath = defaultEntryPath;
+        } else if (args.solutionCode.trim()) {
+            normalizedFiles.push({
+                path: entryPath,
+                content: args.solutionCode,
+                entry: true,
+            });
+        } else if (normalizedFiles[0]) {
+            entryPath = normalizedFiles[0].path;
+        } else {
+            return null;
+        }
+    }
+
+    const files = normalizedFiles.map((file) =>
+        file.path === entryPath
+            ? {
+                ...file,
+                content: args.solutionCode || file.content,
+                entry: true,
+            }
+            : file,
+    );
+
+    if (!files.length) return null;
+
+    const now = 0;
+    const nodes: FSNode[] = [];
+    const expanded = new Set<NodeId>();
+    const folderByPath = new Map<string, NodeId>();
+    const fileByPath = new Map<string, NodeId>();
+
+    const ensureFolder = (parts: string[]) => {
+        let parentId: NodeId | null = null;
+        let currentPath = "";
+
+        for (const part of parts) {
+            currentPath = currentPath ? `${currentPath}/${part}` : part;
+            const existing = folderByPath.get(currentPath);
+
+            if (existing) {
+                parentId = existing;
+                continue;
+            }
+
+            const id = stableSolutionNodeId("folder", currentPath);
+            nodes.push({
+                id,
+                kind: "folder",
+                name: part,
+                parentId,
+                createdAt: now,
+                updatedAt: now,
+            });
+            folderByPath.set(currentPath, id);
+            expanded.add(id);
+            parentId = id;
+        }
+
+        return parentId;
+    };
+
+    for (const file of files) {
+        const parts = file.path.split("/").filter(Boolean);
+        const name = parts.pop() || defaultEntryFile;
+        const parentId = ensureFolder(parts);
+        const id = stableSolutionNodeId("file", file.path);
+
+        nodes.push({
+            id,
+            kind: "file",
+            name,
+            parentId,
+            content: file.content,
+            createdAt: now,
+            updatedAt: now,
+        });
+        fileByPath.set(file.path, id);
+    }
+
+    const entryFileId = fileByPath.get(entryPath) ?? fileByPath.get(files[0]?.path ?? "") ?? "";
+    if (!entryFileId) return null;
+
+    return {
+        version: 2,
+        language,
+        nodes,
+        openTabs: [entryFileId],
+        activeFileId: entryFileId,
+        entryFileId,
+        stdin: args.stdin,
+        expanded: Array.from(expanded),
+        leftPct: 26,
+    };
 }
 
 
@@ -179,19 +447,42 @@ export default function RevealAnswerCard({
                 reveal.solutionCode ?? reveal.code ?? reveal.source ?? "",
             );
             const stdin = String(reveal.codeStdin ?? reveal.stdin ?? "");
-
-            const workspace =
+            const explicitWorkspace =
                 reveal.workspace && typeof reveal.workspace === "object"
                     ? reveal.workspace
                     : reveal.solutionWorkspace && typeof reveal.solutionWorkspace === "object"
                         ? reveal.solutionWorkspace
-                    : reveal.codeWorkspace && typeof reveal.codeWorkspace === "object"
+                        : reveal.codeWorkspace && typeof reveal.codeWorkspace === "object"
                             ? reveal.codeWorkspace
-                        : reveal.ideWorkspace && typeof reveal.ideWorkspace === "object"
+                            : reveal.ideWorkspace && typeof reveal.ideWorkspace === "object"
                             ? reveal.ideWorkspace
                             : null;
-
-            const copyText = code.trim() ? code : "";
+            const solutionFiles =
+                reveal.solutionFiles ??
+                (
+                    exercise && typeof exercise === "object"
+                        ? (exercise as any).solutionFiles
+                        : undefined
+                );
+            const entryFile =
+                typeof (exercise as any)?.workspace?.entryFilePath === "string"
+                    ? (exercise as any).workspace.entryFilePath
+                    : undefined;
+            const workspace =
+                explicitWorkspace ??
+                buildSolutionWorkspace({
+                    language: lang,
+                    solutionCode: code,
+                    stdin,
+                    solutionFiles,
+                    entryFile,
+                });
+            const workspaceFiles = getWorkspaceFilePaths(workspace);
+            const copyText = code.trim() ? code : getWorkspaceEntryCode(workspace);
+            const entryPath =
+                workspace && workspace.entryFileId
+                    ? workspacePathForNode(workspace.nodes, workspace.entryFileId)
+                    : entryFile ?? defaultMainFile(lang as any);
 
             return {
                 title: `Solution code (${lang})`,
@@ -221,9 +512,27 @@ export default function RevealAnswerCard({
                             <div className="ui-meta">Copy/paste into the editor, then Submit.</div>
                         </div>
 
+                        {workspaceFiles.length > 1 ? (
+                            <div className="border-b px-3 py-2 ui-border">
+                                <div className={REVEAL_SMALL_LABEL}>Files included</div>
+                                <div className="mt-2 flex flex-col gap-1 font-mono text-xs ui-text">
+                                    {workspaceFiles.map((path) => (
+                                        <span key={path}>{path}</span>
+                                    ))}
+                                </div>
+                            </div>
+                        ) : null}
+
                         <pre className="p-3 overflow-x-auto font-mono text-xs leading-relaxed ui-text">
-                            <code>{code?.trim() ? code : "// (no solutionCode provided)"}</code>
+                            <code>{copyText?.trim() ? copyText : "// (no solutionCode provided)"}</code>
                         </pre>
+
+                        {workspaceFiles.length > 1 ? (
+                            <div className="border-t px-3 py-2 ui-border">
+                                <div className={REVEAL_SMALL_LABEL}>Entry file</div>
+                                <div className="mt-1 font-mono text-xs ui-text">{entryPath}</div>
+                            </div>
+                        ) : null}
 
                         {stdin ? (
                             <div className="border-t px-3 py-2 ui-border">

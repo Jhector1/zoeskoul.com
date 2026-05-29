@@ -187,6 +187,28 @@ describe("review workspace ownership guards", () => {
         expect(deriveEntryCode(hydratedWorkspace)).toBe("");
     });
 
+    it("prefers starter fixture files over a non-user saved shell missing them", () => {
+        const savedWorkspace = makeWorkspace("print('saved runtime shell')\n");
+        const starterWorkspace = makeWorkspaceFromFiles([
+            { path: "main.py", content: "print('starter')\n" },
+            { path: "data/message.txt", content: "hello from fixture\n" },
+        ]);
+
+        const preferredWorkspace = resolvePreferredExerciseWorkspace({
+            savedState: {
+                workspaceOrigin: "starter",
+                userEdited: false,
+            },
+            savedWorkspace,
+            starterWorkspace,
+        });
+
+        expect(preferredWorkspace).toBe(starterWorkspace);
+        expect(getFileContent(preferredWorkspace, "data/message.txt")).toBe(
+            "hello from fixture\n",
+        );
+    });
+
     it("prefers a solved runtime workspace over starter or sync fallbacks", () => {
         const solvedWorkspace = makeWorkspace("print('solved')\n");
         const starterWorkspace = makeWorkspace("print('starter')\n");

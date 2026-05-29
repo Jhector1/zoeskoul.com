@@ -147,6 +147,25 @@ export default function CardRenderer(props: {
         if (kind === "tryIt") return ui.t("kinds.tryIt", {}, "try it yourself task");
         return ui.t("kinds.project", {}, "project");
     };
+    const tryItButtonCopy = (tryItRequired: boolean) => {
+        if (!tryItRequired) {
+            return {
+                buttonText: done
+                    ? ui.t("actions.readDone", {}, "✓ Read")
+                    : ui.t("actions.read", {}, "Mark as read"),
+                disabledReason: "Complete the Try it yourself task to mark this lesson as read.",
+                title: ui.t("actions.readTitle", {}, "Mark this lesson as read"),
+            };
+        }
+
+        return {
+            buttonText: done
+                ? ui.t("actions.doneDone", {}, "✓ Done")
+                : ui.t("actions.done", {}, "Mark as done"),
+            disabledReason: "Complete the Try it yourself task to mark this lesson as done.",
+            title: ui.t("actions.doneTitle", {}, "Mark this lesson as done"),
+        };
+    };
 
     function getCardTryIt(nextCard: ReviewCard): ReviewEmbeddedTryIt | null {
         const value = (nextCard as { tryIt?: unknown }).tryIt;
@@ -315,11 +334,11 @@ export default function CardRenderer(props: {
 
     if (card.type === "text") {
         const md = tt.resolve(card.markdown ?? "", {}, card.markdown ?? "");
-        const btnText = done ? ui.t("actions.readDone", {}, "✓ Read") : ui.t("actions.read", {}, "Mark as read");
         const tryIt = getCardTryIt(card);
         const tryItRequired = Boolean(tryIt && tryIt.required !== false);
         const tryItDone = tryIt ? Boolean(tp?.quizzesDone?.[tryIt.id]) : true;
         const markReadDisabled = tryItRequired && !tryItDone;
+        const tryItCopy = tryItButtonCopy(tryItRequired);
 
         return (
             <div className={wrapCls}>
@@ -334,12 +353,12 @@ export default function CardRenderer(props: {
                         disabled={markReadDisabled}
                         title={
                             markReadDisabled
-                                ? "Complete the Try it yourself task to mark this lesson as read."
+                                ? tryItCopy.disabledReason
                                 : undefined
                         }
                         data-flow-focus="1"
                     >
-                        {btnText}
+                        {tryItCopy.buttonText}
                     </button>
                 </div>
             </div>
@@ -351,6 +370,7 @@ export default function CardRenderer(props: {
         const tryItRequired = Boolean(tryIt && tryIt.required !== false);
         const tryItDone = tryIt ? Boolean(tp?.quizzesDone?.[tryIt.id]) : true;
         const markReadDisabled = tryItRequired && !tryItDone;
+        const tryItCopy = tryItButtonCopy(tryItRequired);
 
         return (
             <div>
@@ -369,7 +389,10 @@ export default function CardRenderer(props: {
                     prereqsMet={prereqsMet}
                     locked={locked}
                     markDoneDisabled={markReadDisabled}
-                    markDoneDisabledReason="Complete the Try it yourself task to mark this lesson as read."
+                    markDoneDisabledReason={tryItCopy.disabledReason}
+                    markDoneLabel={tryItRequired ? ui.t("actions.done", {}, "Mark as done") : undefined}
+                    markDoneDoneLabel={tryItRequired ? ui.t("actions.doneDone", {}, "✓ Done") : undefined}
+                    markDoneTitle={tryItRequired ? tryItCopy.title : undefined}
                 />
                 {renderEmbeddedTryIt()}
             </div>

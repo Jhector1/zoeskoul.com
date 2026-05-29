@@ -22,6 +22,10 @@
     "actions": {
       "read": "Mark as read",
       "readDone": "✓ Read",
+      "done": "Mark as done",
+      "doneDone": "✓ Done",
+      "doneTitle": "Mark this lesson as done",
+      "readTitle": "Mark this lesson as read",
       "watched": "Mark watched",
       "watchedDone": "✓ Watched"
     }

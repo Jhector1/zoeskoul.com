@@ -1921,7 +1921,7 @@ export default function CodeToolPane(props: {
      *
      * route target -> runtime store workspace -> FullIDE
      */
-    const fullIdeKey = `${workspaceOwnerKey}:${effectiveLanguage}:${usesWorkspaceShell ? "workspace" : "single"}`;
+    const fullIdeKey = `${workspaceOwnerKey}:${effectiveLanguage}:${usesWorkspaceShell ? "workspace" : "single"}:${reviewWorkspaceNeedsMultiFile ? "multi" : "mono"}`;
     const fullIdeLanguage = asWorkspaceLanguage(effectiveLanguage);
 
     useEffect(() => {

@@ -195,9 +195,16 @@ function hydrateCurrentPracticeRuntimeSnapshot<T extends Partial<QItem>>(
         language: nextLanguage,
         manifest: exercise,
     });
-    const nextWorkspace = languageCompatibleExistingWorkspace
-        ? existingWorkspace
-        : starterWorkspace;
+    const shouldPreferStarterWorkspace =
+        !languageCompatibleExistingWorkspace ||
+        !workspaceIncludesStarterFilesForPatch({
+            existingWorkspace,
+            starterWorkspace,
+        });
+    const nextWorkspace =
+        languageCompatibleExistingWorkspace && !shouldPreferStarterWorkspace
+            ? existingWorkspace
+            : starterWorkspace;
     const canReuseExistingStarterCode =
         hasNonBlankCodeValue(existingCode) &&
         existingStateLanguage === nextLanguage &&
@@ -245,6 +252,57 @@ function isWorkspaceStateForPatch(value: unknown) {
         (value as any).version === 2 &&
         Array.isArray((value as any).nodes)
     );
+}
+
+function workspaceFilePathsForPatch(workspace: unknown) {
+    if (!isWorkspaceStateForPatch(workspace)) return new Set<string>();
+
+    const nodes = (
+        Array.isArray((workspace as any).nodes) ? (workspace as any).nodes : []
+    ) as Array<Record<string, unknown>>;
+    const byId = new Map(nodes.map((node) => [String(node.id ?? ""), node] as const));
+
+    const pathForId = (nodeId: string | null | undefined) => {
+        if (!nodeId) return "";
+
+        const parts: string[] = [];
+        let currentId: string | null = String(nodeId);
+
+        while (currentId) {
+            const node = byId.get(currentId);
+            if (!node) break;
+
+            const name = String(node.name ?? "");
+            if (name) parts.unshift(name);
+            currentId = node.parentId == null ? null : String(node.parentId);
+        }
+
+        return parts.join("/");
+    };
+
+    return new Set(
+        nodes
+            .filter((node) => node.kind === "file")
+            .map((node) => pathForId(String(node.id ?? "")))
+            .filter(Boolean),
+    );
+}
+
+function workspaceIncludesStarterFilesForPatch(args: {
+    existingWorkspace: unknown;
+    starterWorkspace: unknown;
+}) {
+    const starterPaths = workspaceFilePathsForPatch(args.starterWorkspace);
+    if (starterPaths.size === 0) return true;
+
+    const existingPaths = workspaceFilePathsForPatch(args.existingWorkspace);
+    for (const path of starterPaths) {
+        if (!existingPaths.has(path)) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 function getWorkspaceEntryCodeForPatch(workspace: any) {

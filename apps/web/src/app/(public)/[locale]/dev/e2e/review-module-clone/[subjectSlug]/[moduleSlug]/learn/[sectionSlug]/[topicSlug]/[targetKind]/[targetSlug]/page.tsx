@@ -70,6 +70,36 @@ const blankFallbackSolutionFiles = {
     "main.py": "",
 };
 
+const revealMultiFileStarterFiles = {
+    "main.py":
+        "from tools.names import clean_name\n" +
+        "# TODO: import make_badge from tools.badges\n\n" +
+        "raw_name = input()\n" +
+        "role = input()\n" +
+        "name = clean_name(raw_name)\n" +
+        "# TODO: print the badge\n",
+    "tools/__init__.py": "",
+    "tools/names.py":
+        "def clean_name(value):\n" +
+        "    return value.strip().title()\n",
+};
+
+const revealMultiFileSolutionFiles = {
+    "main.py":
+        "from tools.names import clean_name\n" +
+        "from tools.badges import make_badge\n\n" +
+        "raw_name = input()\n" +
+        "role = input()\n" +
+        "name = clean_name(raw_name)\n" +
+        "print(make_badge(name, role))\n",
+    "tools/__init__.py": "",
+    "tools/names.py":
+        "def clean_name(value):\n" +
+        "    return value.strip().title()\n",
+    "tools/badges.py":
+        "def make_badge(name, role):\n" +
+        "    return f\"{role.upper()} badge: {name}\"\n",
+};
 
 const sqlRuntimeDefaults = {
     kind: "sql",
@@ -125,6 +155,7 @@ const sqlReviewCloneModule: ReviewModule = {
     sections: [sqlReviewCloneSection],
     contentVersion: null,
 };
+
 const exerciseADefinition = {
     id: "e2e-print-name",
     title: "Print a name",
@@ -165,6 +196,21 @@ const blankFallbackExerciseDefinition = {
     },
     starterCode: "",
     solutionCode: "",
+};
+
+const revealMultiFileDefinition = {
+    id: "e2e-reveal-fill-multifile",
+    title: "Reveal fill creates helper files",
+    runtime: runtimeDefaults,
+    workspace: {
+        language: "python",
+        entryFile: "main.py",
+        starterFiles: revealMultiFileStarterFiles,
+        solutionFiles: revealMultiFileSolutionFiles,
+    },
+    starterCode: revealMultiFileStarterFiles["main.py"],
+    solutionCode: revealMultiFileSolutionFiles["main.py"],
+    solutionFiles: revealMultiFileSolutionFiles,
 };
 
 const projectStep2StarterFiles = {
@@ -303,33 +349,34 @@ function makeProjectCard({
             maxAttempts: 3,
             runtime: runtimeDefaults,
             steps: steps.map((step) => ({
-                    id: step.id,
-                    title: step.title,
-                    exerciseKey: step.id,
-                    topic: "e2e-review-topic",
-                    difficulty: "easy",
-                    preferKind: "code_input",
-                    maxAttempts: 3,
-                    runtime: runtimeDefaults,
-                    workspace: {
-                        language: "python",
-                        entryFile: "main.py",
-                        starterFiles: step.starterFiles,
-                        solutionFiles: step.solutionFiles,
-                        ...(step.files?.length
-                            ? {
-                                files: step.files,
-                                fixtureFiles: (step as any).fixtureFiles ?? step.files,
-                                initialFiles: (step as any).initialFiles ?? step.files,
-                                workspaceFiles: (step as any).workspaceFiles ?? step.files,
-                                fixtures: (step as any).fixtures ?? step.files,
-                                fileFixtures: (step as any).fileFixtures ?? step.files,
-                            }
-                            : {}),
-                    },
-                    starterCode: step.starterCode,
-                    solutionCode: step.solutionCode,
-                } as any)),
+                id: step.id,
+                title: step.title,
+                exerciseKey: step.id,
+                topic: "e2e-review-topic",
+                difficulty: "easy",
+                preferKind: "code_input",
+                maxAttempts: 3,
+                runtime: runtimeDefaults,
+                workspace: {
+                    language: "python",
+                    entryFile: "main.py",
+                    starterFiles: step.starterFiles,
+                    solutionFiles: step.solutionFiles,
+                    ...(step.files?.length
+                        ? {
+                            files: step.files,
+                            fixtureFiles: (step as any).fixtureFiles ?? step.files,
+                            initialFiles: (step as any).initialFiles ?? step.files,
+                            workspaceFiles: (step as any).workspaceFiles ?? step.files,
+                            fixtures: (step as any).fixtures ?? step.files,
+                            fileFixtures: (step as any).fileFixtures ?? step.files,
+                        }
+                        : {}),
+                },
+                starterCode: step.starterCode,
+                solutionCode: step.solutionCode,
+                solutionFiles: step.solutionFiles,
+            } as any)),
         },
     };
 }
@@ -353,6 +400,7 @@ const reviewClonePracticeQuizCard = {
         runtime: runtimeDefaults,
     },
 } satisfies ReviewCard;
+
 function cloneReviewModuleWithServiceDefaults(
     mod: ReviewModule,
     serviceDefaults: ReturnType<typeof serviceDefaultsForBackend>,
@@ -381,6 +429,7 @@ function cloneReviewModuleWithServiceDefaults(
         })),
     };
 }
+
 const reviewCloneTopic = {
     id: "e2e-review-topic",
     label: "E2E Review Topic",
@@ -398,6 +447,7 @@ const reviewCloneTopic = {
                 projectStep2Definition,
                 projectStep3Definition,
                 fileIoDefinition,
+                revealMultiFileDefinition,
             ],
         },
     },
@@ -465,6 +515,20 @@ const reviewCloneTopic = {
                     solutionFiles: exerciseBSolutionFiles,
                     starterCode: exerciseBStarterFiles["main.py"],
                     solutionCode: exerciseBSolutionFiles["main.py"],
+                },
+            ],
+        }),
+        makeProjectCard({
+            id: "review-clone-reveal-fill-multifile",
+            title: "Reveal Fill Multi-File",
+            steps: [
+                {
+                    id: "e2e-reveal-fill-multifile",
+                    title: "Fill answer should create tools/badges.py",
+                    starterFiles: revealMultiFileStarterFiles,
+                    solutionFiles: revealMultiFileSolutionFiles,
+                    starterCode: revealMultiFileStarterFiles["main.py"],
+                    solutionCode: revealMultiFileSolutionFiles["main.py"],
                 },
             ],
         }),

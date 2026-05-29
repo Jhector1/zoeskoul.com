@@ -6,6 +6,18 @@ export async function buildRevealForInstance(args: {
     showDebug: boolean;
 }) {
     const { instance, expectedCanon } = args;
+    const publicPayload =
+        instance.publicPayload && typeof instance.publicPayload === "object"
+            ? (instance.publicPayload as Record<string, unknown>)
+            : {};
+    const publicRecipe =
+        publicPayload.recipe && typeof publicPayload.recipe === "object"
+            ? (publicPayload.recipe as Record<string, unknown>)
+            : null;
+    const solutionFiles =
+        expectedCanon?.solutionFiles ??
+        publicPayload.solutionFiles ??
+        publicRecipe?.solutionFiles;
 
     switch (instance.kind) {
         case "single_choice":
@@ -43,8 +55,14 @@ export async function buildRevealForInstance(args: {
             return {
                 revealAnswer: {
                     kind: "code_input",
-                    language: String(expectedCanon?.language ?? "python"),
-                    solutionCode: String(expectedCanon?.solutionCode ?? ""),
+                    language: String(expectedCanon?.language ?? publicPayload.language ?? "python"),
+                    solutionCode: String(
+                        expectedCanon?.solutionCode ??
+                        publicRecipe?.solutionCode ??
+                        publicPayload.solutionCode ??
+                        "",
+                    ),
+                    ...(solutionFiles !== undefined ? { solutionFiles } : {}),
                 },
                 explanation: "Solution shown.",
             };

@@ -249,7 +249,7 @@ describe("CardRenderer try it handling", () => {
         expect(projectGateHtml).not.toContain("try it yourself task");
     });
 
-    it("renders embedded try it inside a text card, disables Mark as read before pass, and stores state under the tryIt id", () => {
+    it("renders embedded try it inside a text card, disables Mark as done before pass, and stores state under the tryIt id", () => {
         const html = renderToStaticMarkup(
             React.createElement(
                 CardRenderer,
@@ -261,6 +261,7 @@ describe("CardRenderer try it handling", () => {
         );
 
         expect(html).toContain("Embedded Try It");
+        expect(html).toContain("Mark as done");
         expect(html).toContain("disabled");
         expect(mocked.quizBlockProps.at(-1)?.quizCardId).toBe("text-card");
         expect(mocked.quizBlockProps.at(-1)?.quizCardId).toBe("text-card");    });
@@ -295,6 +296,7 @@ describe("CardRenderer try it handling", () => {
         );
 
         expect(html).not.toContain("disabled");
+        expect(html).toContain("Mark as done");
         expect(mocked.quizBlockProps.at(-1)?.quizId).toBe("try-append-ten-to-list");
         expect(mocked.quizBlockProps.at(-1)?.quizCardId).toBe("text-card");
         expect(mocked.quizBlockProps.at(-1)?.unlimitedAttempts).toBe(true);
@@ -314,7 +316,9 @@ describe("CardRenderer try it handling", () => {
 
         expect(mocked.sketchBlockProps).toHaveLength(1);
         expect(mocked.sketchBlockProps[0]?.markDoneDisabled).toBe(true);
-        expect(String(mocked.sketchBlockProps[0]?.markDoneDisabledReason)).toContain("Complete the Try it yourself task");
+        expect(String(mocked.sketchBlockProps[0]?.markDoneDisabledReason)).toContain("mark this lesson as done");
+        expect(mocked.sketchBlockProps[0]?.markDoneLabel).toBe("Mark as done");
+        expect(mocked.sketchBlockProps[0]?.markDoneDoneLabel).toBe("✓ Done");
         expect(mocked.quizBlockProps.at(-1)?.quizId).toBe("try-append-ten-to-list");
     });
 });

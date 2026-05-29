@@ -302,8 +302,13 @@ export default function ReviewTopicCards({
                       onSubmit?.();
 
                       setProgress((prev) => {
-                        const next = buildEmbeddedTryItPassProgress(prev, viewTid, tryItId);
-                        queueMicrotask(() => flushNow(next));
+                        let next = buildEmbeddedTryItPassProgress(prev, viewTid, tryItId);
+                        next = buildMarkCardDoneProgress(next, viewTid, card);
+
+                        queueMicrotask(() => {
+                          flushNow(next);
+                          scrollToNextActionable(cardIndex, next);
+                        });
                         return next;
                       });
                     }}

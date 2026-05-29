@@ -36,6 +36,9 @@ export default function SketchBlock(props: {
     locked?: boolean;
     markDoneDisabled?: boolean;
     markDoneDisabledReason?: string;
+    markDoneLabel?: string;
+    markDoneDoneLabel?: string;
+    markDoneTitle?: string;
 }) {
     const tt = useTaggedT();               // for tagged keys like "@:sketches...."
     const ui = useTaggedT("sketchBlockUi"); // for UI strings
@@ -55,6 +58,9 @@ export default function SketchBlock(props: {
         locked = false,
         markDoneDisabled = false,
         markDoneDisabledReason,
+        markDoneLabel,
+        markDoneDoneLabel,
+        markDoneTitle,
     } = props;
 
     const sketchStateKey = stateKey ?? cardId;
@@ -125,9 +131,11 @@ export default function SketchBlock(props: {
                         onClick={onMarkDone}
                         disabled={!prereqsMet || markDoneDisabled}
                         data-flow-focus="1"
-                        title={markDoneDisabled ? markDoneDisabledReason : ui.t("markReadTitle")}
+                        title={markDoneDisabled ? markDoneDisabledReason : (markDoneTitle ?? ui.t("markReadTitle"))}
                     >
-                        {done ? ui.t("markedRead") : ui.t("markRead")}
+                        {done
+                            ? (markDoneDoneLabel ?? ui.t("markedRead"))
+                            : (markDoneLabel ?? ui.t("markRead"))}
                     </button>
                 ) : null}
             </div>

@@ -100,6 +100,7 @@ export function normalizeCodeExpectedForSave(
 ): ProgrammingCodeExpected | SqlCodeExpected {
     const language =
         typeof expected?.language === "string" ? expected.language : "python";
+    const solutionFiles = expected?.solutionFiles;
 
     if (language === "sql") {
         const normalized = makeSqlExpected(expected);
@@ -133,6 +134,7 @@ export function normalizeCodeExpectedForSave(
             ...normalized,
             tests: canonTests,
             solutionCode,
+            ...(solutionFiles !== undefined ? { solutionFiles } : {}),
         };
     }
 
@@ -149,7 +151,10 @@ export function normalizeCodeExpectedForSave(
             );
         }
 
-        return normalized;
+        return {
+            ...normalized,
+            ...(solutionFiles !== undefined ? { solutionFiles } : {}),
+        };
     }
 
     const canonTests = normalized.tests.slice(0, 12);
@@ -167,5 +172,6 @@ export function normalizeCodeExpectedForSave(
     return {
         ...normalized,
         tests: canonTests,
+        ...(solutionFiles !== undefined ? { solutionFiles } : {}),
     };
 }

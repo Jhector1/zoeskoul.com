@@ -256,6 +256,26 @@ function workspaceFilePaths(workspace: WorkspaceStateV2 | null | undefined) {
     );
 }
 
+function workspaceIncludesStarterFiles(args: {
+    savedWorkspace: WorkspaceStateV2 | null | undefined;
+    starterWorkspace: WorkspaceStateV2 | null | undefined;
+}) {
+    const { savedWorkspace, starterWorkspace } = args;
+    const starterPaths = workspaceFilePaths(starterWorkspace);
+
+    if (starterPaths.size === 0) return true;
+
+    const savedPaths = workspaceFilePaths(savedWorkspace);
+
+    for (const path of starterPaths) {
+        if (!savedPaths.has(path)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 function isUserOwnedWorkspaceState(value: any) {
     return (
         value?.userEdited === true ||
@@ -297,6 +317,21 @@ export function resolvePreferredExerciseWorkspace(args: {
      */
     if (starterHasContent && !savedHasContent) {
         return starterWorkspace ?? savedWorkspace;
+    }
+
+    /**
+     * Non-user hydration/sync snapshots must not hide starter fixture files.
+     * If the manifest workspace contains helper files/folders missing from the
+     * saved snapshot, prefer the manifest workspace so Tools mounts correctly.
+     */
+    if (
+        starterWorkspace &&
+        !workspaceIncludesStarterFiles({
+            savedWorkspace,
+            starterWorkspace,
+        })
+    ) {
+        return starterWorkspace;
     }
 
     return savedWorkspace;

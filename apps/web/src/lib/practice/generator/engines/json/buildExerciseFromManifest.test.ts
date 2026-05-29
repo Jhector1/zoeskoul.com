@@ -101,7 +101,51 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
       },
     });
   });
+  it("keeps solutionFiles in the secret expected payload without exposing them on the public exercise", () => {
+    const solutionFiles = [
+      {
+        path: "main.py",
+        content: "from tools.helper import value\nprint(value())\n",
+        language: "python",
+        isEntry: true,
+        entry: true,
+      },
+      {
+        path: "tools/helper.py",
+        content: "def value():\n    return 'ok'\n",
+        language: "python",
+      },
+    ];
 
+    const result = buildExerciseFromManifest(
+        makeCodeInputDef({
+          recipe: {
+            type: "fixed_tests",
+            tests: [{ stdout: "ok\n" }],
+            solutionCode: "from tools.helper import value\nprint(value())\n",
+          },
+          solutionFiles,
+        }),
+        makeArgs(),
+        {
+          runtimeDefaults: {
+            kind: "code",
+            language: "python",
+            supportsFileSystem: true,
+            supportsMultiFile: true,
+            supportsTerminal: false,
+          },
+        } as any,
+    );
+
+    expect((result.expected as any).solutionFiles).toEqual(solutionFiles);
+    expect((result.expected as any).solutionCode).toBe(
+        "from tools.helper import value\nprint(value())\n",
+    );
+
+    // Important: do not leak reveal-only files on the public exercise payload.
+    expect((result.exercise as any).solutionFiles).toBeUndefined();
+  });
   it("keeps terminal disabled when runtime defaults do not request it", () => {
     const result = buildExerciseFromManifest(
       makeCodeInputDef(),

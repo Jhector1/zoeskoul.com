@@ -211,4 +211,114 @@ describe("fetchResolvedPracticeItem localized starter code", () => {
         expect(paths).toEqual(expect.arrayContaining(["main.py", "data.txt"]));
         expect(deriveEntryCode((normalized as any).workspace)).toContain("with open('data.txt')");
     });
+
+    it("replaces a non-user single-file workspace when live starter workspace includes fixtures", () => {
+        const normalized = normalizeCurrentPracticeItem(
+            {
+                key: "signed-practice-key",
+                exercise: {
+                    id: "file-io-q2",
+                    kind: "code_input",
+                    language: "python",
+                },
+                workspace: {
+                    version: 2,
+                    language: "python",
+                    entryFileId: "file:main.py",
+                    activeFileId: "file:main.py",
+                    nodes: [
+                        {
+                            id: "file:main.py",
+                            kind: "file",
+                            name: "main.py",
+                            parentId: null,
+                            content: "# stale shell\n",
+                            createdAt: 0,
+                            updatedAt: 0,
+                        },
+                    ],
+                    openTabs: ["file:main.py"],
+                    expanded: [],
+                    stdin: "",
+                    leftPct: 40,
+                },
+                code: "# stale shell\n",
+                codeLang: "python",
+                codeStdin: "",
+                stdin: "",
+                userEdited: false,
+                workspaceOrigin: "starter",
+                single: "",
+                multi: [],
+                num: "",
+                dragA: { x: 0, y: 0, z: 0 },
+                dragB: { x: 0, y: 0, z: 0 },
+                matRows: 0,
+                matCols: 0,
+                mat: [],
+                result: null,
+                submitted: false,
+                text: "",
+                help: {
+                    openedStepKeys: [],
+                    activeStepKey: null,
+                    entries: {},
+                    busyStepKey: null,
+                    error: null,
+                },
+                voiceTranscript: "",
+            } as any,
+            {
+                id: "file-io-q2",
+                kind: "code_input",
+                language: "python",
+                starterCode: "with open('data/message.txt') as f:\n    print(f.read())\n",
+                workspace: {
+                    language: "python",
+                    entryFilePath: "main.py",
+                    starterFiles: [
+                        {
+                            path: "main.py",
+                            content: "with open('data/message.txt') as f:\n    print(f.read())\n",
+                            isEntry: true,
+                        },
+                    ],
+                    files: [
+                        {
+                            path: "data/message.txt",
+                            content: "hello fixture\n",
+                        },
+                    ],
+                },
+            } as any,
+            {
+                exercise: {
+                    workspace: {
+                        language: "python",
+                        entryFilePath: "main.py",
+                        starterFiles: [
+                            {
+                                path: "main.py",
+                                content: "with open('data/message.txt') as f:\n    print(f.read())\n",
+                                isEntry: true,
+                            },
+                        ],
+                        files: [
+                            {
+                                path: "data/message.txt",
+                                content: "hello fixture\n",
+                            },
+                        ],
+                    },
+                },
+            },
+        );
+
+        const paths = ((normalized as any).workspace?.nodes ?? [])
+            .filter((node: any) => node?.kind === "file")
+            .map((node: any) => String(node.name ?? ""));
+
+        expect(paths).toEqual(expect.arrayContaining(["main.py", "message.txt"]));
+        expect(deriveEntryCode((normalized as any).workspace)).toContain("data/message.txt");
+    });
 });
