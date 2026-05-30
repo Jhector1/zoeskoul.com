@@ -132,6 +132,7 @@ function getTopicLookup(mod: ReviewModule): Map<string, TopicLookup> {
 function getProjectExerciseEntries(
     card: Extract<ReviewCard, { type: "project" }>,
     topicManifest?: { exercises?: unknown[]; topicId?: string } | null,
+    options?: { strictManifestExerciseMatch?: boolean },
 ) {
     const rawManifestExercises = Array.isArray(topicManifest?.exercises)
         ? topicManifest.exercises
@@ -150,18 +151,26 @@ function getProjectExerciseEntries(
             );
         }
 
-        resolveManifestExercise({
-            topicBundle: topicManifest,
-            exerciseKey: exerciseId,
-        });
+        const manifestExercise = rawManifestExercises.length
+            ? rawManifestExercises.find((candidate) => {
+                const candidateRecord =
+                    typeof candidate === "object" && candidate !== null
+                        ? (candidate as { id?: unknown })
+                        : null;
+                return typeof candidateRecord?.id === "string" && candidateRecord.id.trim() === exerciseId;
+            })
+            : null;
 
-        const manifestExerciseIndex = rawManifestExercises.findIndex((candidate) => {
-            const candidateRecord =
-                typeof candidate === "object" && candidate !== null
-                    ? (candidate as { id?: unknown })
-                    : null;
-            return typeof candidateRecord?.id === "string" && candidateRecord.id.trim() === exerciseId;
-        });
+        if (options?.strictManifestExerciseMatch !== false) {
+            resolveManifestExercise({
+                topicBundle: topicManifest,
+                exerciseKey: exerciseId,
+            });
+        }
+
+        const manifestExerciseIndex = manifestExercise
+            ? rawManifestExercises.indexOf(manifestExercise)
+            : -1;
 
         const routeAliases =
             manifestExerciseIndex >= 0
@@ -256,10 +265,17 @@ export function resolveReviewRouteTarget(args: {
                 topicId,
                 topic: lookup.topic,
             });
+        const hasExplicitRawManifest = Boolean(
+            lookup.topic?.meta &&
+            typeof lookup.topic.meta === "object" &&
+            "rawManifest" in lookup.topic.meta,
+        );
 
         for (const card of cards) {
             if (card.type !== "project") continue;
-            for (const entry of getProjectExerciseEntries(card, topicManifest)) {
+            for (const entry of getProjectExerciseEntries(card, topicManifest, {
+                strictManifestExerciseMatch: hasExplicitRawManifest,
+            })) {
                 const matchesLegacyAlias =
                     Array.isArray(entry.routeAliases) &&
                     entry.routeAliases.some((alias) => alias === targetSlug);
@@ -417,11 +433,18 @@ export function buildReviewExerciseRouteTarget(args: {
         topicId: args.topicId,
         topic,
     });
+    const hasExplicitRawManifest = Boolean(
+        topic?.meta &&
+        typeof topic.meta === "object" &&
+        "rawManifest" in topic.meta,
+    );
     const rawExerciseId = typeof args.exerciseId === "string" ? args.exerciseId.trim() : "";
     const exerciseToken = lastIdSegment(rawExerciseId);
     const projectCard = card?.type === "project" ? card : null;
     const matchedStep = projectCard
-        ? getProjectExerciseEntries(projectCard, topicManifest).find((entry) =>
+        ? getProjectExerciseEntries(projectCard, topicManifest, {
+            strictManifestExerciseMatch: hasExplicitRawManifest,
+        }).find((entry) =>
             entry.exerciseId === rawExerciseId ||
             entry.exerciseId === exerciseToken ||
             cleanSegment(entry.exerciseId, "exercise") === cleanSegment(exerciseToken, "exercise") ||

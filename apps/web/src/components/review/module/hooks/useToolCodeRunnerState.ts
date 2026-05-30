@@ -145,21 +145,27 @@ function firstNonBlank(...values: Array<string | null | undefined>) {
     }
     return undefined;
 }
-
 function isSavedUserWork(value: any) {
     if (!value) return false;
 
+    const origin = String(value?.workspaceOrigin ?? "").trim().toLowerCase();
+
     if (
-        value.workspaceOrigin === "starter" ||
-        value.workspaceOrigin === "empty"
+        value.userEdited === false ||
+        origin === "starter" ||
+        origin === "manifest" ||
+        origin === "default" ||
+        origin === "empty" ||
+        origin === "seed"
     ) {
         return false;
     }
 
     return (
         value.userEdited === true ||
-        value.workspaceOrigin === "user" ||
-        value.workspaceOrigin === "saved" ||
+        origin === "user" ||
+        origin === "saved" ||
+        origin === "reveal-fill" ||
         value?.result?.ok === true ||
         value?.correct === true
     );
@@ -172,6 +178,74 @@ function getStateWorkspace(value: any): WorkspaceStateV2 | null {
     return null;
 }
 
+function resolveHydrationFallbackCode(args: {
+    toolKey: string | null | undefined;
+    defaultCode: string;
+}) {
+    return isExerciseToolKey(args.toolKey) ? "" : args.defaultCode;
+}
+
+function isGenericToolSampleCode(code: string | null | undefined) {
+    const normalized = String(code ?? "").trim();
+    if (!normalized) return false;
+
+    return [
+        'print("Hello Python!")',
+        'print("Hello World!")',
+        "SELECT 'Hello SQL' AS message;",
+        'console.log("Hello JavaScript!");',
+    ].includes(normalized);
+}
+function isExercisePlaceholderSeed(args: {
+    saved: any;
+    defaultCode: string;
+}) {
+    const value = args.saved;
+    if (!value || isSavedUserWork(value)) return false;
+
+    const origin = String(value?.workspaceOrigin ?? "").trim().toLowerCase();
+
+    const passiveOrigin =
+        origin === "starter" ||
+        origin === "manifest" ||
+        origin === "default" ||
+        origin === "empty" ||
+        origin === "seed";
+
+    const workspace = getStateWorkspace(value);
+    const entryCode = deriveEntryCode(workspace);
+    const code =
+        typeof entryCode === "string" && entryCode.trim()
+            ? entryCode
+            : typeof value?.code === "string"
+                ? value.code
+                : "";
+
+    const normalizedCode = String(code).trim();
+    const normalizedDefaultCode = String(args.defaultCode ?? "").trim();
+
+    /**
+     * Tool seed snapshots that came from starter/default are not learner work.
+     * They should not beat a fresh target's current starter/default.
+     */
+    if (passiveOrigin) {
+        return true;
+    }
+
+    /**
+     * Explicitly non-user snapshots are also passive unless they are marked as
+     * real saved/user work by isSavedUserWork().
+     */
+    if (value.userEdited === false) {
+        return true;
+    }
+
+    return (
+        (normalizedDefaultCode.length > 0 && normalizedCode === normalizedDefaultCode) ||
+        isGenericToolSampleCode(normalizedCode)
+    );
+}
+
 export function resolveToolStateSeed(args: {
     saved: any;
     defaultLang: WorkspaceLanguage;
@@ -181,6 +255,9 @@ export function resolveToolStateSeed(args: {
 }): ToolStateSeed {
     const compatibleSaved = (() => {
         if (!args.saved) return null;
+        if (isExercisePlaceholderSeed({ saved: args.saved, defaultCode: args.defaultCode })) {
+            return null;
+        }
         const savedWorkspace = getStateWorkspace(args.saved);
         return stateLanguageMatches(args.saved, args.defaultLang, savedWorkspace)
             ? args.saved
@@ -355,7 +432,7 @@ function isExerciseToolKey(toolKey: string | null | undefined) {
     return typeof toolKey === "string" && toolKey.startsWith("exercise:");
 }
 
-function looksLikeExerciseStateKey(value: string | null | undefined) {
+function matchesExerciseStateScopeKey(value: string | null | undefined) {
     if (typeof value !== "string") return false;
 
     const raw = value.trim();
@@ -571,12 +648,20 @@ export function useToolCodeRunnerState(args: {
         setHydratedToolIdentity("");
     }, []);
 
-    const scopeKeyIsExercise = looksLikeExerciseStateKey(scopeKey);
+    const scopeKeyIsExercise = matchesExerciseStateScopeKey(scopeKey);
     const effectiveToolKey = effectiveBoundId
         ? `exercise:${effectiveBoundId}`
         : scopeKeyIsExercise
             ? `exercise:${scopeKey}`
             : scopeKey;
+    const effectiveDefaultCode = useMemo(
+        () =>
+            resolveHydrationFallbackCode({
+                toolKey: effectiveToolKey,
+                defaultCode,
+            }),
+        [effectiveToolKey, defaultCode],
+    );
     const toolIdentity = useMemo(
         () => `${viewTid}::${effectiveToolKey}::${versionStr}`,
         [viewTid, effectiveToolKey, versionStr],
@@ -653,14 +738,23 @@ export function useToolCodeRunnerState(args: {
         const pendingExercise =
             pendingExerciseStoreKey ? exercises[pendingExerciseStoreKey] ?? null : null;
 
-        if (isUserWork(progressSaved) && !isUserWork(pendingExercise)) {
-            return progressSaved;
+        const resolvedSaved =
+            isUserWork(progressSaved) && !isUserWork(pendingExercise)
+                ? progressSaved
+                : pendingExercise ?? progressSaved;
+
+        if (
+            isExerciseToolKey(effectiveToolKey) &&
+            isExercisePlaceholderSeed({
+                saved: resolvedSaved,
+                defaultCode,
+            })
+        ) {
+            return null;
         }
 
-        if (pendingExercise) return pendingExercise;
-
-        return progressSaved;
-    }, [progress, viewTid, effectiveToolKey, effectiveBoundId, exercises, scopeKey]);
+        return resolvedSaved;
+    }, [progress, viewTid, effectiveToolKey, effectiveBoundId, exercises, scopeKey, defaultCode]);
 
     const {
         compatibleSaved,
@@ -675,11 +769,11 @@ export function useToolCodeRunnerState(args: {
             resolveToolStateSeed({
                 saved,
                 defaultLang,
-                defaultCode,
+                defaultCode: effectiveDefaultCode,
                 defaultStdin,
                 defaultSqlDialect,
             }),
-        [saved, defaultLang, defaultCode, defaultStdin, defaultSqlDialect],
+        [saved, defaultLang, effectiveDefaultCode, defaultStdin, defaultSqlDialect],
     );
 
     const [toolLang, setToolLang0] = useState<WorkspaceLanguage>(initialLang);
@@ -977,58 +1071,100 @@ export function useToolCodeRunnerState(args: {
         await commitToolToProgress(latest);
     }, [cancel, prime, commitToolToProgress, progressHydrated, toolIdentity, versionStr, flushToolSnapshot]);
 
-    const preserveCurrentBoundContext = useCallback(() => {
-        if (!boundRef.current) return false;
+    const canPreserveCurrentBoundContext = useCallback(() => {
+        const bound = boundRef.current;
+        if (!bound) return false;
+
+        const latest = latestSnapRef.current;
 
         /**
-         * Binding can legitimately change the right-rail scope from the quiz/card
-         * owner to the newly selected exercise owner. That scope flip must not
-         * clear the live bound snapshot; otherwise the pane falls back to the
-         * generic subject default even though the provider still considers the
-         * exercise bound.
+         * Critical:
+         * Never preserve a bound editor snapshot across topic changes.
+         *
+         * The old code was preserving the old boundRef whenever viewTid/scopeKey
+         * changed, then retagging it with the new bindingContext/toolIdentity.
+         * That made old editor code look like it belonged to the new exercise.
          */
+        if (latest.topicId !== viewTid) {
+            return false;
+        }
+
+        const targetKey = String(bound.exerciseKey ?? bound.id ?? "").trim();
+        if (!targetKey) return false;
+
+        if (effectiveToolKey === `exercise:${targetKey}`) {
+            return true;
+        }
+
+        if (scopeKey === targetKey) {
+            return true;
+        }
+
+        if (matchesExerciseStateScopeKey(scopeKey)) {
+            const normalizedScope = String(scopeKey).trim().toLowerCase();
+            const normalizedTarget = targetKey.toLowerCase();
+
+            return (
+                normalizedScope === normalizedTarget ||
+                normalizedScope.includes(normalizedTarget) ||
+                normalizedTarget.includes(normalizedScope)
+            );
+        }
+
+        return false;
+    }, [effectiveToolKey, scopeKey, viewTid]);
+
+    const preserveCurrentBoundContext = useCallback(() => {
+        if (!canPreserveCurrentBoundContext()) {
+            return false;
+        }
+
         boundContextRef.current = bindingContext;
         setHydratedToolIdentity(toolIdentity);
         return true;
-    }, [bindingContext, toolIdentity]);
+    }, [bindingContext, canPreserveCurrentBoundContext, toolIdentity]);
+
+    const lastNavigationContextRef = useRef<{
+        viewTid: string;
+        scopeKey: string;
+        versionStr: string;
+    } | null>(null);
 
     useEffect(() => {
-        if (progressHydrated) {
+        const previous = lastNavigationContextRef.current;
+
+        if (progressHydrated && previous) {
             void commitToolToProgress(latestSnapRef.current);
         }
-        if (preserveCurrentBoundContext()) {
+
+        const topicChanged = Boolean(previous && previous.viewTid !== viewTid);
+        const scopeChanged = Boolean(previous && previous.scopeKey !== scopeKey);
+        const versionChanged = Boolean(previous && previous.versionStr !== versionStr);
+
+        lastNavigationContextRef.current = {
+            viewTid,
+            scopeKey,
+            versionStr,
+        };
+
+        if (!previous) {
             return;
         }
-        clearBoundState();
+
+        if (topicChanged || scopeChanged || versionChanged) {
+            if (!preserveCurrentBoundContext()) {
+                clearBoundState();
+            }
+        }
     }, [
         viewTid,
         scopeKey,
+        versionStr,
         progressHydrated,
         commitToolToProgress,
         clearBoundState,
         preserveCurrentBoundContext,
     ]);
-
-    const lastVersionRef = useRef<string | null>(null);
-
-    useEffect(() => {
-        if (!progressHydrated) return;
-
-        if (lastVersionRef.current == null) {
-            lastVersionRef.current = versionStr;
-            return;
-        }
-
-        if (lastVersionRef.current !== versionStr) {
-            void commitToolToProgress(latestSnapRef.current);
-            if (!preserveCurrentBoundContext()) {
-                clearBoundState();
-            }
-        }
-
-        lastVersionRef.current = versionStr;
-    }, [progressHydrated, versionStr, clearBoundState, preserveCurrentBoundContext]);
-
     useEffect(() => {
         if (!progressHydrated) return;
         if (boundRef.current) return;
@@ -1066,6 +1202,16 @@ export function useToolCodeRunnerState(args: {
                 }
             }
         }
+        if (
+            isExerciseToolKey(effectiveToolKey) &&
+            isExercisePlaceholderSeed({
+                saved: s,
+                defaultCode,
+            })
+        ) {
+            s = null;
+        }
+
         /**
          * Important:
          * Even when there is no saved state for the current topic/tool yet,
@@ -1086,7 +1232,9 @@ export function useToolCodeRunnerState(args: {
                 ? s.starterHash
                 : "";
 
-        const nextCode = deriveEntryCode(nextWorkspace) || (typeof s?.code === "string" ? s.code : defaultCode);
+        const nextCode =
+            deriveEntryCode(nextWorkspace) ||
+            (typeof s?.code === "string" ? s.code : effectiveDefaultCode);
         const nextStdin =
             typeof nextWorkspace?.stdin === "string"
                 ? nextWorkspace.stdin
@@ -1179,7 +1327,7 @@ export function useToolCodeRunnerState(args: {
         toolIdentity,
         progress,
         defaultLang,
-        defaultCode,
+        effectiveDefaultCode,
         defaultStdin,
         defaultSqlDialect,
         prime,
@@ -1287,40 +1435,58 @@ export function useToolCodeRunnerState(args: {
                 );
             }
 
-            function starterMatches(value: any) {
+            function savedStarterMatchesCurrent(value: any) {
                 if (!value) return false;
                 if (!languageMatches(value)) return false;
 
                 const savedStarterHash =
                     typeof value?.starterHash === "string" ? value.starterHash : "";
 
-                if (savedStarterHash) {
-                    return savedStarterHash === workspaceKeyOf(nextWorkspace);
+                return Boolean(savedStarterHash && savedStarterHash === workspaceKeyOf(nextWorkspace));
+            }
+
+            function isPassiveSeedSnapshot(value: any) {
+                const origin = String(value?.workspaceOrigin ?? "").trim().toLowerCase();
+
+                return (
+                    value?.userEdited === false ||
+                    origin === "starter" ||
+                    origin === "manifest" ||
+                    origin === "default" ||
+                    origin === "empty" ||
+                    origin === "seed"
+                );
+            }
+
+            function belongsToCurrentExercise(value: any) {
+                if (!value) return false;
+
+                return (
+                    value.exerciseKey === targetKey ||
+                    value.exerciseId === inputId ||
+                    value.id === inputId ||
+                    String(targetKey).endsWith(`:${inputId}`)
+                );
+            }
+
+            function savedCanOverrideStarter(value: any) {
+                if (!value) return false;
+                if (!languageMatches(value)) return false;
+                if (isPassiveSeedSnapshot(value)) return false;
+
+                /**
+                 * Real learner work wins even if the manifest starter changed.
+                 * This is the saved > starter > default contract.
+                 */
+                if (isUserWork(value)) {
+                    return true;
                 }
 
                 /**
-                 * Legacy compatibility:
-                 * older saved SQL/progress payloads may not have starterHash.
-                 * If the saved item is clearly user work for this same exercise target,
-                 * do not throw it away just because starterHash is missing.
+                 * Non-user legacy snapshots only win when they still match the current
+                 * starter. Otherwise they are stale.
                  */
-                const sameExercise =
-                    value?.exerciseKey === targetKey ||
-                    value?.exerciseId === inputId ||
-                    value?.id === inputId ||
-                    String(targetKey).endsWith(`:${inputId}`);
-
-                const userWork = isUserWork(value);
-
-                const hasWorkspace =
-                    value?.workspace &&
-                    value.workspace.version === 2 &&
-                    Array.isArray(value.workspace.nodes);
-
-                const hasCode =
-                    typeof value?.code === "string" && value.code.trim() !== "";
-
-                return Boolean(sameExercise && userWork && (hasWorkspace || hasCode));
+                return savedStarterMatchesCurrent(value);
             }
 
             const progressSavedCandidates = [
@@ -1329,9 +1495,16 @@ export function useToolCodeRunnerState(args: {
             ].filter((candidate) => Boolean(candidate) && languageMatches(candidate));
 
             const progressSavedUserMatch =
-                progressSavedCandidates.find(
-                    (candidate) => isUserWork(candidate) && starterMatches(candidate),
-                ) ?? null;
+                progressSavedCandidates.find((candidate) => {
+                    if (!isUserWork(candidate)) return false;
+
+                    /**
+                     * runtimeStateV2 exercises have exercise identity.
+                     * toolState entries may not, but they were already read from the exact
+                     * current tool key, so they are allowed if they are real user work.
+                     */
+                    return belongsToCurrentExercise(candidate) || candidate === progressToolStateSaved;
+                }) ?? null;
 
             const progressSaved =
                 progressSavedUserMatch ??
@@ -1341,6 +1514,7 @@ export function useToolCodeRunnerState(args: {
 
             const compatibleRuntimeSaved =
                 languageMatches(runtimeSaved) ? runtimeSaved : null;
+
             const runtimeSavedIsUserWork = isUserWork(compatibleRuntimeSaved);
             const progressSavedIsUserWork = isUserWork(progressSaved);
 
@@ -1349,32 +1523,40 @@ export function useToolCodeRunnerState(args: {
                     ? null
                     : progressSaved &&
                     progressSavedIsUserWork &&
-                    starterMatches(progressSaved) &&
                     !runtimeSavedIsUserWork
                         ? progressSaved
                         : compatibleRuntimeSaved ?? progressSaved ?? null;
 
+            const effectiveSavedForBind =
+                isExercisePlaceholderSeed({
+                    saved: savedForBind,
+                    defaultCode,
+                })
+                    ? null
+                    : savedForBind;
+
             const savedWorkspace = hydrateWorkspaceShellWithCode(
-                savedForBind?.workspace && typeof savedForBind.workspace === "object"
-                    ? (savedForBind.workspace as WorkspaceStateV2)
+                effectiveSavedForBind?.workspace && typeof effectiveSavedForBind.workspace === "object"
+                    ? (effectiveSavedForBind.workspace as WorkspaceStateV2)
                     : null,
-                typeof savedForBind?.code === "string" ? savedForBind.code : "",
+                typeof effectiveSavedForBind?.code === "string" ? effectiveSavedForBind.code : "",
             );
 
             const savedWorkspaceCode = deriveEntryCode(savedWorkspace);
             const incomingWorkspaceCode = deriveEntryCode(nextWorkspace);
 
-            const savedStarterMatchesCurrent = starterMatches(savedForBind);
+            const effectiveSavedIsUserWork = Boolean(
+                effectiveSavedForBind &&
+                !isPassiveSeedSnapshot(effectiveSavedForBind) &&
+                isUserWork(effectiveSavedForBind),
+            );
 
-            /**
-             * Important:
-             * A saved workspace can only override the current exercise starter when it was
-             * saved against the same starter hash. This prevents old main.py content from
-             * sticking after curriculum/topic updates.
-             */
+            const effectiveSavedStarterMatchesCurrent =
+                savedStarterMatchesCurrent(effectiveSavedForBind);
+
             const shouldUseSavedWorkspace =
                 !!savedWorkspace &&
-                savedStarterMatchesCurrent &&
+                (effectiveSavedIsUserWork || effectiveSavedStarterMatchesCurrent) &&
                 !(
                     String(savedWorkspaceCode ?? "").trim() === "" &&
                     String(incomingWorkspaceCode ?? "").trim() !== ""
@@ -1383,6 +1565,13 @@ export function useToolCodeRunnerState(args: {
             const existingExerciseForBindIsUserWork = isSavedUserWork(existingExerciseForBind);
             const existingExerciseForBindWorkspaceKey = workspaceKeyOf(
                 existingExerciseForBind?.workspace ?? null,
+            );
+            const existingExerciseForBindMatchesTarget = Boolean(
+                existingExerciseForBind &&
+                (
+                    existingExerciseForBind.exerciseKey === targetKey ||
+                    existingExerciseForBind.exerciseId === inputId
+                ),
             );
             const existingExerciseForBindCode =
                 deriveEntryCode(existingExerciseForBind?.workspace ?? null) ||
@@ -1398,6 +1587,7 @@ export function useToolCodeRunnerState(args: {
             );
             const shouldPreserveExistingRuntimeSnapshot =
                 !snapshotOverridesSaved &&
+                existingExerciseForBindMatchesTarget &&
                 !existingExerciseForBindIsUserWork &&
                 !incomingBindHasContent &&
                 existingRuntimeHasContent &&
@@ -1419,8 +1609,8 @@ export function useToolCodeRunnerState(args: {
                         ? existingExerciseForBindCode
                         : ""
                 ) ||
-                (typeof savedForBind?.code === "string" && savedForBind.code.trim() !== ""
-                    ? savedForBind.code
+                (typeof effectiveSavedForBind?.code === "string" && effectiveSavedForBind.code.trim() !== ""
+                    ? effectiveSavedForBind.code
                     : "") ||
                 (typeof nextCode === "string" ? nextCode : "");
             const hydratedWorkspaceForBind = hydrateWorkspaceShellWithCode(
@@ -1437,49 +1627,48 @@ export function useToolCodeRunnerState(args: {
                 stdin:
                     typeof hydratedWorkspaceForBind?.stdin === "string"
                         ? hydratedWorkspaceForBind.stdin
-                        : typeof savedForBind?.stdin === "string"
-                            ? savedForBind.stdin
+                        : typeof effectiveSavedForBind?.stdin === "string"
+                            ? effectiveSavedForBind.stdin
                             : typeof args2.stdin === "string"
                                 ? args2.stdin
                                 : "",
                 workspace: hydratedWorkspaceForBind,
                 workspaceKey: workspaceKeyOf(hydratedWorkspaceForBind),
                     sqlDialect:
-                    (savedForBind as any)?.sqlDialect ??
-                    (savedForBind?.workspace as any)?.sqlDialect ??
+                    (effectiveSavedForBind as any)?.sqlDialect ??
+                    (effectiveSavedForBind?.workspace as any)?.sqlDialect ??
                     resolvedSql.sqlDialect,
                     sqlDatasetId: firstNonBlank(
-                    (savedForBind as any)?.sqlDatasetId,
-                    (savedForBind?.workspace as any)?.sqlDatasetId,
+                    (effectiveSavedForBind as any)?.sqlDatasetId,
+                    (effectiveSavedForBind?.workspace as any)?.sqlDatasetId,
                     resolvedSql.sqlDatasetId,
                 ),
                     sqlSchemaSql: firstNonBlank(
-                    (savedForBind as any)?.sqlSchemaSql,
-                    (savedForBind?.workspace as any)?.sqlSchemaSql,
+                    (effectiveSavedForBind as any)?.sqlSchemaSql,
+                    (effectiveSavedForBind?.workspace as any)?.sqlSchemaSql,
                     resolvedSql.sqlSchemaSql,
                 ),
                     sqlSeedSql: firstNonBlank(
-                    (savedForBind as any)?.sqlSeedSql,
-                    (savedForBind?.workspace as any)?.sqlSeedSql,
+                    (effectiveSavedForBind as any)?.sqlSeedSql,
+                    (effectiveSavedForBind?.workspace as any)?.sqlSeedSql,
                     resolvedSql.sqlSeedSql,
                 ),
                     starterHash:
-                    typeof savedForBind?.starterHash === "string"
-                        ? savedForBind.starterHash
+                    typeof effectiveSavedForBind?.starterHash === "string"
+                        ? effectiveSavedForBind.starterHash
                         : currentStarterHash,
                     sqlInitialTableSnapshots:
-                    (savedForBind as any)?.sqlInitialTableSnapshots ??
-                    (savedForBind?.workspace as any)?.sqlInitialTableSnapshots ??
+                    (effectiveSavedForBind as any)?.sqlInitialTableSnapshots ??
+                    (effectiveSavedForBind?.workspace as any)?.sqlInitialTableSnapshots ??
                     resolvedSql.sqlInitialTableSnapshots,
             };
 
             const nextSnapIsLearnerOwned = Boolean(
-                isUserWork(savedForBind) ||
+                effectiveSavedIsUserWork ||
                 args2.userEdited === true ||
                 args2.workspaceOrigin === "user" ||
                 args2.workspaceOrigin === "saved"
             );
-
             /**
              * Keep the runtime exercise store aligned with the actual Tools
              * binding. This is what Check/Reveal/progress-save read from. Starter
@@ -1519,7 +1708,7 @@ export function useToolCodeRunnerState(args: {
             }
 
             if (
-                savedForBind &&
+                effectiveSavedForBind &&
                 (nextSnap.code !== args2.code ||
                     nextSnap.stdin !== (args2.stdin ?? "") ||
                     nextSnap.lang !== args2.lang)

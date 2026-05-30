@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import {
   createManifestWorkspaceDefinition,
+  resolveWorkspaceForExerciseTarget,
   resolveWorkspaceForTarget,
 } from "./resolveWorkspaceForTarget";
 
@@ -146,7 +147,134 @@ describe("resolveWorkspaceForTarget", () => {
     expect(fileContent(resolved.workspace, "data.txt")).toBe("Hello fixture");
     expect(resolved.source).toBe("manifest");
   });
+  it("keeps real saved user workspace even when the starter hash changed", () => {
+    const oldStarter = resolveWorkspaceForTarget({
+      targetKey: "exercise:regen",
+      targetKind: "exercise",
+      language: "python",
+      manifest: {
+        workspace: {
+          entryFilePath: "main.py",
+          starterFiles: [
+            { path: "main.py", content: "# old starter\n", isEntry: true },
+          ],
+        },
+      },
+      workspaceRequested: true,
+    });
 
+    const savedWorkspace = JSON.parse(
+        JSON.stringify(oldStarter.workspace),
+    ) as WorkspaceStateV2;
+
+    const main = savedWorkspace.nodes.find(
+        (node) => node.kind === "file" && node.name === "main.py",
+    );
+
+    if (main && main.kind === "file") {
+      main.content = "print('real learner work')\n";
+    }
+
+    const resolved = resolveWorkspaceForTarget({
+      targetKey: "exercise:regen",
+      targetKind: "exercise",
+      language: "python",
+      manifest: {
+        workspace: {
+          entryFilePath: "main.py",
+          starterFiles: [
+            { path: "main.py", content: "# new starter after regen\n", isEntry: true },
+          ],
+        },
+      },
+      workspaceRequested: true,
+      savedCandidates: [
+        {
+          workspace: savedWorkspace,
+          userEdited: true,
+          workspaceOrigin: "user",
+          starterHash: oldStarter.starterHash,
+        },
+      ],
+    });
+
+    expect(resolved.source).toBe("saved");
+    expect(fileContent(resolved.workspace, "main.py")).toBe(
+        "print('real learner work')\n",
+    );
+  });
+
+  it("does not let an old passive starter snapshot beat a new manifest starter", () => {
+    const oldStarter = resolveWorkspaceForTarget({
+      targetKey: "exercise:starter-regen",
+      targetKind: "exercise",
+      language: "python",
+      manifest: {
+        workspace: {
+          entryFilePath: "main.py",
+          starterFiles: [
+            { path: "main.py", content: "# old starter\n", isEntry: true },
+          ],
+        },
+      },
+      workspaceRequested: true,
+    });
+
+    const resolved = resolveWorkspaceForTarget({
+      targetKey: "exercise:starter-regen",
+      targetKind: "exercise",
+      language: "python",
+      manifest: {
+        workspace: {
+          entryFilePath: "main.py",
+          starterFiles: [
+            { path: "main.py", content: "# new starter after regen\n", isEntry: true },
+          ],
+        },
+      },
+      workspaceRequested: true,
+      savedCandidates: [
+        {
+          workspace: oldStarter.workspace,
+          userEdited: false,
+          workspaceOrigin: "starter",
+          starterHash: oldStarter.starterHash,
+        },
+      ],
+    });
+
+    expect(resolved.source).toBe("manifest");
+    expect(fileContent(resolved.workspace, "main.py")).toBe(
+        "# new starter after regen\n",
+    );
+  });
+
+  it("keeps legacy saved code when it is not just a starter snapshot", () => {
+    const resolved = resolveWorkspaceForTarget({
+      targetKey: "exercise:legacy-real-work",
+      targetKind: "exercise",
+      language: "python",
+      manifest: {
+        workspace: {
+          entryFilePath: "main.py",
+          starterFiles: [
+            { path: "main.py", content: "# starter\n", isEntry: true },
+          ],
+        },
+      },
+      workspaceRequested: true,
+      savedCandidates: [
+        {
+          code: "print('legacy learner work')\n",
+        },
+      ],
+    });
+
+    expect(resolved.source).toBe("saved");
+    expect(fileContent(resolved.workspace, "main.py")).toBe(
+        "print('legacy learner work')\n",
+    );
+  });
   it("saved main.py keeps learner code and manifest fixture files merge in", () => {
     const savedWorkspace = workspaceFromResolved("print('saved learner')\n");
 
@@ -394,6 +522,157 @@ describe("resolveWorkspaceForTarget", () => {
 
     expect(filePaths(resolved.workspace)).toEqual(["data.txt", "main.py"]);
     expect(fileContent(resolved.workspace, "main.py")).toBe("# starter B\n");
+  });
+});
+
+describe("resolveWorkspaceForExerciseTarget", () => {
+  it("saved workspace beats starterFiles", () => {
+    const saved = workspaceFromResolved("print('saved wins')\n");
+
+    const resolved = resolveWorkspaceForExerciseTarget({
+      targetKey: "exercise:saved-beats-starter-files",
+      language: "python",
+      manifest: {
+        workspace: {
+          starterFiles: [
+            { path: "main.py", content: "print('starter loses')\n", isEntry: true },
+            { path: "helper.py", content: "VALUE = 1\n" },
+          ],
+        },
+      },
+      savedCandidates: [{ workspace: saved }],
+    });
+
+    expect(resolved.source).toBe("saved");
+    expect(fileContent(resolved.workspace, "main.py")).toBe("print('saved wins')\n");
+  });
+
+  it("saved legacy code beats starterCode", () => {
+    const resolved = resolveWorkspaceForExerciseTarget({
+      targetKey: "exercise:legacy-code",
+      language: "python",
+      manifest: { starterCode: "print('starter loses')\n" },
+      savedCandidates: [{ code: "print('legacy code wins')\n" }],
+    });
+
+    expect(resolved.source).toBe("saved");
+    expect(fileContent(resolved.workspace, "main.py")).toBe("print('legacy code wins')\n");
+  });
+
+  it("starterFiles beats default", () => {
+    const resolved = resolveWorkspaceForExerciseTarget({
+      targetKey: "exercise:starter-files",
+      language: "python",
+      manifest: {
+        workspace: {
+          starterFiles: [{ path: "main.py", content: "print('starter')\n", isEntry: true }],
+        },
+      },
+    });
+
+    expect(resolved.source).toBe("starter");
+    expect(fileContent(resolved.workspace, "main.py")).toBe("print('starter')\n");
+  });
+
+  it("starterCode becomes main.py when no starterFiles", () => {
+    const resolved = resolveWorkspaceForExerciseTarget({
+      targetKey: "exercise:starter-code",
+      language: "python",
+      manifest: { starterCode: "print('starter code only')\n" },
+    });
+
+    expect(resolved.entryFilePath).toBe("main.py");
+    expect(filePaths(resolved.workspace)).toEqual(["main.py"]);
+    expect(fileContent(resolved.workspace, "main.py")).toBe("print('starter code only')\n");
+  });
+
+  it("helper files are preserved from saved workspace", () => {
+    const saved = resolveWorkspaceForTarget({
+      targetKey: "exercise:saved-helper",
+      targetKind: "exercise",
+      language: "python",
+      manifest: {},
+      workspaceRequested: true,
+      savedCandidates: [
+        {
+          workspace: {
+            version: 2,
+            language: "python",
+            nodes: [
+              {
+                id: "file:main.py",
+                kind: "file",
+                name: "main.py",
+                parentId: null,
+                content: "from helper import value\nprint(value())\n",
+                createdAt: 0,
+                updatedAt: 0,
+              },
+              {
+                id: "file:helper.py",
+                kind: "file",
+                name: "helper.py",
+                parentId: null,
+                content: "def value():\n    return 42\n",
+                createdAt: 0,
+                updatedAt: 0,
+              },
+            ],
+            openTabs: ["file:main.py", "file:helper.py"],
+            activeFileId: "file:main.py",
+            entryFileId: "file:main.py",
+            stdin: "",
+            expanded: [],
+            leftPct: 26,
+          },
+        },
+      ],
+    }).workspace as WorkspaceStateV2;
+
+    const resolved = resolveWorkspaceForExerciseTarget({
+      targetKey: "exercise:saved-helper",
+      language: "python",
+      manifest: {
+        workspace: {
+          starterFiles: [{ path: "main.py", content: "# starter\n", isEntry: true }],
+        },
+      },
+      savedCandidates: [{ workspace: saved }],
+    });
+
+    expect(filePaths(resolved.workspace)).toEqual(["helper.py", "main.py"]);
+    expect(fileContent(resolved.workspace, "helper.py")).toContain("return 42");
+  });
+
+  it("helper files are preserved from starterFiles", () => {
+    const resolved = resolveWorkspaceForExerciseTarget({
+      targetKey: "exercise:starter-helper",
+      language: "python",
+      manifest: {
+        workspace: {
+          starterFiles: [
+            { path: "main.py", content: "from helper import value\n", isEntry: true },
+            { path: "helper.py", content: "def value():\n    return 1\n" },
+          ],
+        },
+      },
+    });
+
+    expect(filePaths(resolved.workspace)).toEqual(["helper.py", "main.py"]);
+    expect(fileContent(resolved.workspace, "helper.py")).toContain("return 1");
+  });
+
+  it("falls back to a blank starter shell when neither saved nor starter exists", () => {
+    const resolved = resolveWorkspaceForExerciseTarget({
+      targetKey: "exercise:default",
+      language: "python",
+      manifest: {},
+    });
+
+    expect(resolved.source).toBe("starter");
+    expect(resolved.entryFilePath).toBe("main.py");
+    expect(filePaths(resolved.workspace)).toEqual(["main.py"]);
+    expect(fileContent(resolved.workspace, "main.py")).toBe("");
   });
 });
 

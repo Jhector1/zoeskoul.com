@@ -36,7 +36,10 @@ import {
     normalizeWorkspaceLanguage,
     stateLanguageMatches,
 } from "@/components/review/module/runtime/workspaceCodeSource";
-import { resolveWorkspaceForTarget } from "@/components/review/module/runtime/resolveWorkspaceForTarget";
+import {
+    resolveWorkspaceForExerciseTarget,
+    resolveWorkspaceForTarget,
+} from "@/components/review/module/runtime/resolveWorkspaceForTarget";
 
 type SqlTableSnapshot = {
     name: string;
@@ -163,6 +166,117 @@ function codeWorkspacePatch(
         userEdited: true,
         workspaceOrigin: "user",
         updatedAt: Date.now(),
+    };
+}
+
+
+function isRecordLike(value: unknown): value is Record<string, unknown> {
+    return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function hasNonBlankStarterCodeLike(value: unknown) {
+    return typeof value === "string" && value.trim().length > 0;
+}
+
+function hasUsableStarterFilesLike(value: unknown): boolean {
+    if (Array.isArray(value)) {
+        return value.some((file) => {
+            if (!isRecordLike(file)) return false;
+            return typeof file.content === "string" && file.content.trim().length > 0;
+        });
+    }
+
+    if (isRecordLike(value)) {
+        return Object.entries(value).some(([key, entry]) => {
+            if (
+                [
+                    "entryFile",
+                    "entryFilePath",
+                    "mainFile",
+                    "mainFilePath",
+                    "language",
+                    "lang",
+                ].includes(key)
+            ) {
+                return false;
+            }
+
+            if (typeof entry === "string") return entry.trim().length > 0;
+            if (isRecordLike(entry) && typeof entry.content === "string") {
+                return entry.content.trim().length > 0;
+            }
+
+            return false;
+        });
+    }
+
+    return false;
+}
+
+function firstUsableStarterFilesLike(...values: unknown[]) {
+    for (const value of values) {
+        if (hasUsableStarterFilesLike(value)) return value;
+    }
+
+    return undefined;
+}
+
+function mergeRenderedExerciseWithRouteManifest(
+    renderedExercise: unknown,
+    routeManifest: unknown,
+) {
+    const rendered = isRecordLike(renderedExercise) ? renderedExercise : {};
+    const routed = isRecordLike(routeManifest) ? routeManifest : null;
+
+    if (!routed) return renderedExercise;
+
+    const renderedWorkspace = isRecordLike(rendered.workspace) ? rendered.workspace : {};
+    const routedWorkspace = isRecordLike(routed.workspace) ? routed.workspace : {};
+
+    const starterCode =
+        hasNonBlankStarterCodeLike(routed.starterCode)
+            ? routed.starterCode
+            : hasNonBlankStarterCodeLike(routedWorkspace.starterCode)
+                ? routedWorkspace.starterCode
+                : hasNonBlankStarterCodeLike(rendered.starterCode)
+                    ? rendered.starterCode
+                    : renderedWorkspace.starterCode;
+
+    const starterFiles = firstUsableStarterFilesLike(
+        routed.starterFiles,
+        routedWorkspace.starterFiles,
+        rendered.starterFiles,
+        renderedWorkspace.starterFiles,
+    );
+
+    return {
+        ...rendered,
+        ...routed,
+
+        starterCode,
+        starterFiles,
+
+        workspace: {
+            ...renderedWorkspace,
+            ...routedWorkspace,
+            starterCode,
+            starterFiles,
+            entryFile:
+                routedWorkspace.entryFile ??
+                routedWorkspace.entryFilePath ??
+                renderedWorkspace.entryFile ??
+                renderedWorkspace.entryFilePath,
+            entryFilePath:
+                routedWorkspace.entryFilePath ??
+                routedWorkspace.entryFile ??
+                renderedWorkspace.entryFilePath ??
+                renderedWorkspace.entryFile,
+            language:
+                routedWorkspace.language ??
+                routed.language ??
+                renderedWorkspace.language ??
+                rendered.language,
+        },
     };
 }
 
@@ -653,13 +767,10 @@ function CodeInputWithTools(props: {
         );
     });
 
-    const exerciseManifest = ((routeTargetEntry as any)?.item ?? exercise) as any;
-
-    const manifestStarterWorkspace = resolveExerciseWorkspace({
-        language: curLang as any,
-        manifest: exerciseManifest,
-        entry: routeTargetEntry,
-    });
+    const exerciseManifest = mergeRenderedExerciseWithRouteManifest(
+        exercise,
+        (routeTargetEntry as any)?.item,
+    ) as any;
     const currentWorkspaceRaw = getWorkspaceFromAnyState(current);
     const currentWorkspace = stateLanguageMatches(
         current,
@@ -668,12 +779,6 @@ function CodeInputWithTools(props: {
     )
         ? currentWorkspaceRaw
         : null;
-    const curWorkspace = resolvePreferredExerciseWorkspace({
-        savedState: current,
-        savedWorkspace: currentWorkspace,
-        starterWorkspace: manifestStarterWorkspace,
-    });
-
     const ensureExercise = useReviewRuntimeStore((s) => s.ensureExercise);
     const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
     const storeExercise = useReviewRuntimeStore((s) => s.exercises[exerciseKey]);
@@ -714,11 +819,11 @@ function CodeInputWithTools(props: {
 
         const manifestLanguage = getManifestExerciseLanguage(exCode);
 
-        const manifestStarterWorkspace = resolveExerciseWorkspace({
-            language: manifestLanguage,
-            manifest: exerciseManifest,
-            entry: routeTargetEntry,
-        });
+        // const manifestStarterWorkspace = resolveExerciseWorkspace({
+        //     language: manifestLanguage,
+        //     manifest: exerciseManifest,
+        //     entry: routeTargetEntry,
+        // });
 
         const ensureKey = [
             exerciseKey,
@@ -800,23 +905,32 @@ function CodeInputWithTools(props: {
     )
         ? current
         : null;
-    const activeState = compatibleStoreExercise ?? compatibleCurrentState ?? current;
+    const manifestStarterWorkspace = resolveExerciseWorkspace({
+        language: manifestLanguage,
+        manifest: exerciseManifest,
+        entry: routeTargetEntry,
+    });
 
+    const manifestStarterCode = deriveEntryCode(manifestStarterWorkspace);
+
+    const compatibleCurrentHasUserWork =
+        isUserOwnedWorkspaceState(compatibleCurrentState) &&
+        Boolean(
+            String(deriveEntryCode(getWorkspaceFromAnyState(compatibleCurrentState)) ?? "").trim() ||
+            String((compatibleCurrentState as any)?.code ?? "").trim(),
+        );
+
+    const activeState =
+        compatibleStoreExercise ??
+        (compatibleCurrentHasUserWork ? compatibleCurrentState : null) ??
+        current;
     const fallbackCode = firstNonBlankCode(
         compatibleStoreExercise?.code,
-        compatibleCurrentState?.code,
+        compatibleCurrentHasUserWork ? compatibleCurrentState?.code : "",
+        manifestStarterCode,
         exercise.starterCode,
     );
 
-    const preferredWorkspace = resolvePreferredExerciseWorkspace({
-        savedState: activeState,
-        savedWorkspace:
-            compatibleStoreExercise?.workspace ??
-            compatibleStoreExercise?.codeWorkspace ??
-            compatibleStoreExercise?.ideWorkspace ??
-            curWorkspace,
-        starterWorkspace: manifestStarterWorkspace,
-    });
     const resolvedTargetWorkspace = resolveWorkspaceForTarget({
         targetKey: exerciseKey,
         targetKind: "exercise",
@@ -845,7 +959,7 @@ function CodeInputWithTools(props: {
             compatibleCurrentState
                 ? {
                     targetKey: exerciseKey,
-                    workspace: curWorkspace,
+                    workspace: currentWorkspace,
                     code: compatibleCurrentState.code ?? null,
                     stdin: compatibleCurrentState.codeStdin ?? null,
                     language: manifestLanguage,
@@ -858,17 +972,15 @@ function CodeInputWithTools(props: {
         ].filter(Boolean) as any,
     });
 
-    const activeWorkspace = hydrateBlankWorkspaceFromStarter({
-        workspace: resolvedTargetWorkspace.workspace ?? preferredWorkspace,
-        fallbackCode: resolvedTargetWorkspace.code || fallbackCode,
-        state: activeState,
-    });
-
-    const activeCode = deriveCodeOrStarterFallback({
-        workspace: activeWorkspace,
-        fallbackCode: resolvedTargetWorkspace.code || fallbackCode,
-        state: activeState,
-    });
+    const activeWorkspace = resolvedTargetWorkspace.workspace ?? currentWorkspace;
+    const activeCode =
+        resolvedTargetWorkspace.source === "saved"
+            ? deriveEntryCode(activeWorkspace) ?? resolvedTargetWorkspace.code
+            : deriveCodeOrStarterFallback({
+                workspace: activeWorkspace,
+                fallbackCode: resolvedTargetWorkspace.code || fallbackCode,
+                state: activeState,
+            });
     const activeStdin =
         activeWorkspace?.stdin ??
         compatibleStoreExercise?.stdin ??
@@ -1670,11 +1782,6 @@ export default function ExerciseRenderer({
             ? current
             : null;
 
-        const starterWorkspace = resolveExerciseWorkspace({
-            language: manifestLanguage,
-            manifest: exCode,
-        });
-
         const activeState = compatibleStoreExercise ?? compatibleCurrentState ?? current;
 
         const fallbackCode = firstNonBlankCode(
@@ -1682,28 +1789,56 @@ export default function ExerciseRenderer({
             compatibleCurrentState?.code,
             (exCode as any).starterCode,
         );
-
-        const preferredWorkspace = resolvePreferredExerciseWorkspace({
-            savedState: activeState,
-            savedWorkspace:
-                compatibleStoreExercise?.workspace ??
-                compatibleStoreExercise?.codeWorkspace ??
-                compatibleStoreExercise?.ideWorkspace ??
-                getWorkspaceFromAnyState(compatibleCurrentState),
-            starterWorkspace,
+        const resolvedWorkspace = resolveWorkspaceForExerciseTarget({
+            targetKey: exerciseKey,
+            language: manifestLanguage,
+            manifest: exCode,
+            savedCandidates: [
+                compatibleStoreExercise
+                    ? {
+                        targetKey: exerciseKey,
+                        workspace:
+                            compatibleStoreExercise.workspace ??
+                            compatibleStoreExercise.codeWorkspace ??
+                            compatibleStoreExercise.ideWorkspace ??
+                            null,
+                        code: compatibleStoreExercise.code ?? null,
+                        stdin: compatibleStoreExercise.stdin ?? compatibleStoreExercise.codeStdin ?? null,
+                        language: manifestLanguage,
+                        userEdited: compatibleStoreExercise.userEdited,
+                        workspaceOrigin: compatibleStoreExercise.workspaceOrigin,
+                        starterHash: compatibleStoreExercise.starterHash,
+                        updatedAt: compatibleStoreExercise.updatedAt,
+                    }
+                    : null,
+                compatibleCurrentState
+                    ? {
+                        targetKey: exerciseKey,
+                        workspace: getWorkspaceFromAnyState(compatibleCurrentState),
+                        code: (compatibleCurrentState as any).code ?? null,
+                        stdin:
+                            (compatibleCurrentState as any).codeStdin ??
+                            (compatibleCurrentState as any).stdin ??
+                            null,
+                        language: manifestLanguage,
+                        userEdited: (compatibleCurrentState as any).userEdited,
+                        workspaceOrigin: (compatibleCurrentState as any).workspaceOrigin,
+                        starterHash: (compatibleCurrentState as any).starterHash,
+                        updatedAt: (compatibleCurrentState as any).updatedAt,
+                    }
+                    : null,
+            ].filter(Boolean) as any,
         });
 
-        const activeWorkspace = hydrateBlankWorkspaceFromStarter({
-            workspace: preferredWorkspace,
-            fallbackCode,
-            state: activeState,
-        });
-
-        const activeCode = deriveCodeOrStarterFallback({
-            workspace: activeWorkspace,
-            fallbackCode,
-            state: activeState,
-        });
+        const activeWorkspace = resolvedWorkspace.workspace;
+        const activeCode =
+            resolvedWorkspace.source === "saved"
+                ? deriveEntryCode(activeWorkspace) ?? ""
+                : deriveCodeOrStarterFallback({
+                    workspace: activeWorkspace,
+                    fallbackCode,
+                    state: activeState,
+                });
 
         const activeStdin =
             activeWorkspace?.stdin ??

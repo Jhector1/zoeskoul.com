@@ -8,7 +8,7 @@ import React, {
   useCallback,
   useRef,
 } from "react";
-import type { ReviewQuestion, ReviewQuizSpec } from "@/lib/subjects/types";
+import type {ReviewProjectSpec, ReviewProjectStep, ReviewQuestion, ReviewQuizSpec} from "@/lib/subjects/types";
 import type { SavedQuizState } from "@/lib/subjects/progressTypes";
 import type {
   ExerciseRuntimeState,
@@ -110,6 +110,91 @@ type RuntimeExerciseCandidate = {
   hasIdentityMatch: boolean;
   updatedAt: number;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function asProjectSpec(spec: ReviewQuizSpec): ReviewProjectSpec | null {
+    const value = spec as unknown as ReviewProjectSpec;
+
+    if (
+        value &&
+        value.mode === "project" &&
+        Array.isArray(value.steps)
+    ) {
+        return value;
+    }
+
+    return null;
+}
+
+function stringKey(value: unknown) {
+    return String(value ?? "").trim();
+}
+
+function getProjectStepManifestForQuestion(
+    spec: ReviewQuizSpec,
+    q: ReviewQuestion,
+    index: number,
+): ReviewProjectStep | null {
+    if (q.kind !== "practice") return null;
+
+    const projectSpec = asProjectSpec(spec);
+    if (!projectSpec) return null;
+
+    const anyQ = q as any;
+    const fetch = anyQ.fetch ?? {};
+
+    const candidates = new Set(
+        [
+            fetch.exerciseKey,
+            anyQ.exerciseKey,
+            fetch.stepId,
+            anyQ.stepId,
+            anyQ.sourceStepId,
+            anyQ.key,
+            anyQ.item?.exerciseKey,
+            anyQ.item?.id,
+            anyQ.exercise?.exerciseKey,
+            anyQ.exercise?.id,
+            q.id,
+        ]
+            .map(stringKey)
+            .filter(Boolean),
+    );
+
+    const matched =
+        projectSpec.steps.find((step) => {
+            const stepId = stringKey(step.id);
+            const exerciseKey = stringKey(step.exerciseKey);
+
+            return (
+                Boolean(stepId && candidates.has(stepId)) ||
+                Boolean(exerciseKey && candidates.has(exerciseKey)) ||
+                Boolean(exerciseKey && String(q.id).includes(exerciseKey)) ||
+                Boolean(stepId && String(q.id).includes(stepId))
+            );
+        }) ?? null;
+
+    /**
+     * Critical fallback:
+     * Project questions are generated in the same order as project steps.
+     * If an old/frozen question does not carry exerciseKey/stepId clearly,
+     * still pass the matching step by index so Tools has the authored starter.
+     */
+    return matched ?? projectSpec.steps[index] ?? null;
+}
 
 function readAutoAdvance(defaultVal = true) {
   try {
@@ -1425,7 +1510,10 @@ export default function QuizBlock({
       sectionRuntimeDefaults,
       topicRuntimeDefaults,
     });
-
+      const projectStepManifest =
+          q.kind === "practice"
+              ? getProjectStepManifestForQuestion(spec, q, idx)
+              : null;
     return (
         <div
             className="ui-page-surface"
@@ -1437,6 +1525,7 @@ export default function QuizBlock({
               <QuizPracticeCard
                   q={q}
                   ownerCardId={quizCardId ?? quizId}
+                  projectStepManifest={projectStepManifest}
                   ps={practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id]}
                   toolScopedId={stablePracticeKey}
                   toolsActive={canAutoBindToolsForExercise}

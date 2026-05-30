@@ -932,6 +932,7 @@ export default function CodeToolPane(props: {
 
     const tools = useReviewTools();
     const boundId = tools?.boundId ?? null;
+    const previewExerciseKey = tools?.previewExerciseKey ?? null;
     const clearRunFeedback = tools?.clearRunFeedback;
     const setRunFeedbackForCard = tools?.setRunFeedback;
     const syncCodeInputSnapshot = tools?.syncCodeInputSnapshot;
@@ -955,6 +956,13 @@ export default function CodeToolPane(props: {
         const scopedBoundId =
             boundId && isExerciseEditorScope(boundId)
                 ? boundId
+                : null;
+        const scopedPreviewExerciseKey =
+            !scopedToolKey &&
+            !scopedBoundId &&
+            previewExerciseKey &&
+            isExerciseEditorScope(previewExerciseKey)
+                ? previewExerciseKey
                 : null;
         const scopedRuntimeBoundKey =
             boundId &&
@@ -983,10 +991,11 @@ export default function CodeToolPane(props: {
         if (scopedToolKey) return scopedToolKey;
         if (scopedRuntimeBoundKey) return scopedRuntimeBoundKey;
         if (scopedBoundId) return scopedBoundId;
+        if (scopedPreviewExerciseKey) return scopedPreviewExerciseKey;
         if (rawToolScope) return rawToolScope;
 
         return "general";
-    }, [toolScopeKey, boundId, runtimeBoundExerciseKey]);
+    }, [toolScopeKey, boundId, previewExerciseKey, runtimeBoundExerciseKey]);
 
     const exerciseKey = isExerciseEditorScope(editorExerciseStateKey)
         ? editorExerciseStateKey

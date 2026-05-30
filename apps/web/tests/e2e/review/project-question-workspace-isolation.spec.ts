@@ -134,6 +134,8 @@ async function installDeterministicReviewCloneMocks(
         initialProgress?: any;
     } = {},
 ) {
+    let currentProgress = options.initialProgress ?? makeInitialProjectProgress();
+
     await page.route("**/api/review/progress**", async (route) => {
         const request = route.request();
 
@@ -142,7 +144,7 @@ async function installDeterministicReviewCloneMocks(
                 status: 200,
                 contentType: "application/json",
                 body: JSON.stringify({
-                    progress: options.initialProgress ?? makeInitialProjectProgress(),
+                    progress: currentProgress,
                 }),
             });
             return;
@@ -151,6 +153,7 @@ async function installDeterministicReviewCloneMocks(
         if (request.method() === "PUT") {
             const body = request.postDataJSON();
             options.savedBodies?.push(body);
+            currentProgress = body.state;
 
             await route.fulfill({
                 status: 200,
@@ -566,6 +569,41 @@ async function setEditorValue(editor: Locator, value: string) {
         textarea.dispatchEvent(new Event("input", { bubbles: true }));
         textarea.dispatchEvent(new Event("change", { bubbles: true }));
     }, value);
+}
+
+async function bindExerciseToTools(page: Page) {
+    const bindButton = page
+        .getByRole("button", {
+            name: /Open in Tools|Bind this question|Bound ✓|Bound/i,
+        })
+        .last();
+
+    if (await bindButton.isVisible().catch(() => false)) {
+        await bindButton.click();
+    }
+
+    await expect(page.getByTestId("tools-file-tree")).toBeVisible({
+        timeout: 15_000,
+    });
+}
+
+async function createWorkspaceFile(page: Page, path: string, content: string) {
+    const tree = page.getByTestId("tools-file-tree");
+    await expect(tree).toBeVisible({ timeout: 15_000 });
+
+    await tree.getByRole("button", { name: /new file/i }).click();
+
+    const nameInput = tree.locator("input").last();
+    await expect(nameInput).toBeVisible({ timeout: 15_000 });
+    await nameInput.fill(path);
+    await nameInput.press("Enter");
+
+    await expect(tree.getByRole("button", { name: new RegExp(path.replace(".", "\\."), "i") }).last()).toBeVisible({
+        timeout: 15_000,
+    });
+
+    const editor = await pickVisibleCodeEditor(page);
+    await setEditorValue(editor, content);
 }
 
 function savedExerciseFromPayload(body: any, exerciseKey: string) {
@@ -1406,6 +1444,130 @@ test("reset topic clears project exercise workspace drafts so old question code 
     );
 });
 
+test("project step bind is idempotent across save, refresh, rebind, and reset", async ({
+    page,
+}) => {
+    const savedBodies: any[] = [];
+    await installDeterministicReviewCloneMocks(page, { savedBodies });
+
+    await gotoReviewRoute(page, PROJECT_STEP_2_ROUTE);
+    await expect(projectQuestionCard(page)).toContainText(/Question 2 of 3/, {
+        timeout: 15_000,
+    });
+
+    await bindExerciseToTools(page);
+    await expectAnyVisibleEditorToContain(
+        page,
+        Q2_STARTER,
+        "Question 2 should hydrate its starter in the Tools editor before edits",
+    );
+
+    const mainMarker = "# WORKSPACE_SHOULD_SURVIVE_REFRESH";
+    const helperMarker = "def helper_total(total):\n    return total + 5\n";
+    const mainEditor = await pickVisibleCodeEditor(page);
+    await setEditorValue(
+        mainEditor,
+        [
+            "from helper import helper_total",
+            Q2_STARTER,
+            "print(f'Shipping = {helper_total(total)}')",
+            mainMarker,
+            "",
+        ].join("\n"),
+    );
+
+    await createWorkspaceFile(page, "helper.py", helperMarker);
+    await expectAnyVisibleEditorToContain(
+        page,
+        "return total + 5",
+        "The helper file should be editable in the bound Tools workspace",
+    );
+
+    await waitForSavedActiveTargetPayload(
+        savedBodies,
+        "python:e2e-review-clone:e2e-section:e2e-review-topic:review-clone-project:e2e-project-step-2",
+        "e2e-project-step-2",
+        mainMarker,
+    );
+    await waitForSavedActiveTargetPayload(
+        savedBodies,
+        "python:e2e-review-clone:e2e-section:e2e-review-topic:review-clone-project:e2e-project-step-2",
+        "e2e-project-step-2",
+        "return total + 5",
+    );
+
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await expect(projectQuestionCard(page)).toContainText(/Question 2 of 3/, {
+        timeout: 15_000,
+    });
+
+    await page
+        .getByTestId("tools-file-tree")
+        .getByRole("button", { name: /^main\.py$/i })
+        .first()
+        .click();
+    await expectAnyVisibleEditorToContain(
+        page,
+        mainMarker,
+        "Refresh should restore saved main.py from persisted review progress, not starter code",
+    );
+
+    await page
+        .getByTestId("tools-file-tree")
+        .getByRole("button", { name: /^helper\.py$/i })
+        .first()
+        .click();
+    await expectAnyVisibleEditorToContain(
+        page,
+        "return total + 5",
+        "Refresh should restore the saved helper file from persisted review progress",
+    );
+
+    await bindExerciseToTools(page);
+    await page
+        .getByTestId("tools-file-tree")
+        .getByRole("button", { name: /^main\.py$/i })
+        .first()
+        .click();
+    await expectAnyVisibleEditorToContain(
+        page,
+        mainMarker,
+        "Rebinding after refresh must not re-seed starter over the saved learner workspace",
+    );
+    await expectNoVisibleEditorToContain(
+        page,
+        Q2_STARTER_TODO,
+        "Rebinding after refresh must not bring back starter TODO text over saved code",
+    );
+
+    await page.getByRole("button", { name: /reset topic/i }).first().click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toBeVisible({ timeout: 15_000 });
+    await dialog.getByRole("button", { name: /^Reset$/i }).click();
+    await expect(dialog).not.toBeVisible({ timeout: 15_000 });
+
+    await gotoReviewRoute(page, PROJECT_STEP_2_ROUTE);
+    await expect(projectQuestionCard(page)).toContainText(/Question 2 of 3/, {
+        timeout: 15_000,
+    });
+
+    await expectAnyVisibleEditorToContain(
+        page,
+        Q2_STARTER,
+        "Reset should intentionally restore the starter workspace for the project step",
+    );
+    await expectAnyVisibleEditorToContain(
+        page,
+        Q2_STARTER_TODO,
+        "Reset should intentionally restore the starter TODO text",
+    );
+    await expectNoVisibleEditorToContain(
+        page,
+        mainMarker,
+        "Reset should clear the saved learner main.py snapshot",
+    );
+});
+
 test("reset module navigates to the first topic card instead of staying on the old exercise route", async ({
                                                                                                                page,
                                                                                                            }) => {
@@ -1795,6 +1957,16 @@ test("correct project check keeps solved workspace and next editor never mounts 
         Q3_STARTER_VALUES,
         "Auto-advanced Question 3 should show its starter body immediately",
     );
+    await expectNoVisibleEditorToContain(
+        page,
+        solvedMarker,
+        "Auto-advanced Question 3 must not reuse the solved Question 2 workspace",
+    );
+    await expectNoVisibleEditorToContain(
+        page,
+        "shipping_cost",
+        "Auto-advanced Question 3 must not carry helper code from Question 2",
+    );
 
     await page.goto(PROJECT_STEP_2_ROUTE);
 
@@ -1813,6 +1985,7 @@ test("correct project check keeps solved workspace and next editor never mounts 
         "Solved exercise should not visually fall back to starter TODO text after navigating back",
     );
 });
+
 
 test("wrong project check stays on current exercise under progressive lock", async ({ page }) => {
     await installDeterministicReviewCloneMocks(page, {

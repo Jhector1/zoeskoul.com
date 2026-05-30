@@ -5,6 +5,23 @@ import {
 
 export type ReviewModuleRow = ResolvedReviewModuleRow;
 
+const DEV_REVIEW_CLONE_MODULE_ROWS: Record<string, ReviewModuleRow[]> = {
+    python: [
+        {
+            slug: "e2e-review-clone",
+            order: 999_001,
+            title: "E2E Review Clone",
+        },
+    ],
+    sql: [
+        {
+            slug: "e2e-sql-review-clone",
+            order: 999_001,
+            title: "E2E SQL Review Clone",
+        },
+    ],
+};
+
 export async function loadReviewModulesForSubject(
     _unused: unknown,
     subjectSlug: string,
@@ -12,7 +29,22 @@ export async function loadReviewModulesForSubject(
     const modules = await getResolvedReviewModuleRows(subjectSlug);
     if (!modules) return null;
 
-    return { modules };
+    const devCloneModules = DEV_REVIEW_CLONE_MODULE_ROWS[subjectSlug] ?? [];
+    const bySlug = new Map<string, ReviewModuleRow>();
+
+    for (const module of modules) {
+        bySlug.set(module.slug, module);
+    }
+
+    for (const module of devCloneModules) {
+        bySlug.set(module.slug, module);
+    }
+
+    return {
+        modules: Array.from(bySlug.values()).sort(
+            (a, b) => a.order - b.order || a.slug.localeCompare(b.slug),
+        ),
+    };
 }
 
 export function findReviewModule(

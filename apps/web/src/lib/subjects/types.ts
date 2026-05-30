@@ -68,6 +68,27 @@ export type ReviewProjectStep = {
     seedPolicy?: SeedPolicy;
     maxAttempts?: number | null;
     carryFromPrev?: boolean;
+
+    /**
+     * Optional project-step authored workspace fallback.
+     *
+     * These fields are intentionally optional because normal published topics
+     * usually resolve the exercise through exerciseKey. Dev clones and capstone
+     * step-to-step projects can still carry a full starter snapshot here so
+     * Tools never falls back to blank/stale editor state while practice data is
+     * loading.
+     */
+    starterCode?: string;
+    solutionCode?: string;
+    starterFiles?: unknown;
+    solutionFiles?: unknown;
+    workspace?: unknown;
+    files?: unknown;
+    fixtureFiles?: unknown;
+    initialFiles?: unknown;
+    workspaceFiles?: unknown;
+    fixtures?: unknown;
+    fileFixtures?: unknown;
 };
 
 export type ReviewProjectSpec = {

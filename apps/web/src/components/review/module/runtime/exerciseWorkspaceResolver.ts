@@ -739,8 +739,10 @@ export function resolveExerciseWorkspace(args: {
             workspace: args.saved,
             language,
             lang: language,
-            userEdited: true,
-            workspaceOrigin: "saved",
+            userEdited: Boolean(String(deriveEntryCode(args.saved) ?? "").trim()),
+            workspaceOrigin: String(deriveEntryCode(args.saved) ?? "").trim()
+              ? "saved"
+              : null,
           },
         ]
       : [],

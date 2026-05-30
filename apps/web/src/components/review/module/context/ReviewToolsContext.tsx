@@ -107,6 +107,7 @@ export type ReviewToolsValue = {
   setCodeInputMeta: (id: string, meta: Partial<CodeInputMeta>) => void;
 
   boundId: string | null;
+  previewExerciseKey: string | null;
   isBound: (id: string) => boolean;
 
   ensureVisible?: () => void;
@@ -213,7 +214,18 @@ function getWorkspaceEntryCode(workspace: WorkspaceStateV2 | null | undefined) {
 
   return file && file.kind === "file" ? String(file.content ?? "") : null;
 }
+function workspaceHasAnyNonBlankFile(
+    workspace: WorkspaceStateV2 | null | undefined,
+) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return false;
+    }
 
+    return workspace.nodes.some((node) => {
+        if (node.kind !== "file") return false;
+        return String(node.content ?? "").trim().length > 0;
+    });
+}
 function firstNonBlank(...values: Array<string | null | undefined>) {
   for (const value of values) {
     if (typeof value === "string" && value.trim()) return value.trim();
@@ -295,6 +307,7 @@ export function ReviewToolsProvider({
   const bindExerciseTool = useReviewRuntimeStore((s) => s.bindExerciseTool);
   const storeUnbindExerciseTool = useReviewRuntimeStore((s) => s.unbindExerciseTool);
   const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
+  const patchEditorWorkspace = useReviewRuntimeStore((s) => s.patchEditorWorkspace);
   const setFlushToolSnapshotCallback = useReviewRuntimeStore((s) => s.setFlushToolSnapshotCallback);
 
   const sketch = useDebouncedSketchState({});
@@ -485,10 +498,44 @@ export function ReviewToolsProvider({
         return;
       }
 
+      const normalizedPair = normalizeCodeWorkspacePair({
+        workspace: snap.workspace ?? null,
+        code: snap.code,
+        state: snap,
+        language: snap.lang,
+        stdin: snap.stdin,
+      });
+      const boundWorkspace = normalizedPair.workspace;
+      const boundCode = normalizedPair.code;
+      const boundOrigin =
+        snap.userEdited === true ||
+        snap.workspaceOrigin === "user" ||
+        snap.workspaceOrigin === "saved"
+          ? (snap.workspaceOrigin ?? "saved")
+          : "starter";
+
+      patchExercise(targetKey, {
+        language: snap.lang,
+        lang: snap.lang,
+        workspace: boundWorkspace ?? undefined,
+        codeWorkspace: boundWorkspace ?? undefined,
+        ideWorkspace: boundWorkspace ?? undefined,
+        code: boundCode,
+        source: boundCode,
+        stdin: snap.stdin ?? "",
+        codeStdin: snap.stdin ?? "",
+        userEdited: boundOrigin === "user" || boundOrigin === "saved",
+        workspaceOrigin: boundOrigin,
+      });
+
+      if (boundWorkspace) {
+        patchEditorWorkspace(targetKey, boundWorkspace);
+      }
+
       bindExerciseTool(targetKey);
       setRequestedId(null);
     },
-    [ensureVisible, onBindToToolsPanel, bindExerciseTool, flushByToolKey],
+    [ensureVisible, onBindToToolsPanel, bindExerciseTool, flushByToolKey, patchEditorWorkspace, patchExercise],
   );
 
     const syncCodeInputSnapshot = useCallback(
@@ -925,6 +972,12 @@ export function ReviewToolsProvider({
             normalizedArgs.workspaceOrigin === "saved"
         );
 
+        const prevHasUserWorkspaceContent = Boolean(
+            hasNonBlankText(prevCode) ||
+            hasNonBlankText(prev?.code) ||
+            workspaceHasAnyNonBlankFile(prev?.workspace ?? null)
+        );
+
         const prevIsProtectedUserSnapshot = Boolean(
             prev &&
             sameExerciseTarget &&
@@ -934,7 +987,7 @@ export function ReviewToolsProvider({
                 prev.workspaceOrigin === "user" ||
                 prev.workspaceOrigin === "saved"
             ) &&
-            hasNonBlankText(prevCode),
+            prevHasUserWorkspaceContent
         );
 
         if (prevIsProtectedUserSnapshot && prev) {
@@ -1123,6 +1176,14 @@ export function ReviewToolsProvider({
     return orderRef.current.find((id) => registryRef.current.has(id)) ?? null;
   }, []);
 
+  const previewExerciseKey = useMemo(() => {
+    const firstRegistered = pickFirstRegistered();
+    if (!firstRegistered) return null;
+
+    const targetKey = getTargetKeyForInputId(firstRegistered);
+    return typeof targetKey === "string" && targetKey.trim() ? targetKey : null;
+  }, [registryTick, pickFirstRegistered, getTargetKeyForInputId]);
+
   const reconcileBinding = useCallback(() => {
     if (!enabledRef.current) return;
     if (mode === "manual") return;
@@ -1293,6 +1354,7 @@ export function ReviewToolsProvider({
       setCodeInputMeta,
 
       boundId,
+      previewExerciseKey,
       isBound,
       ensureVisible: enabled ? ensureVisible : undefined,
 
@@ -1313,6 +1375,7 @@ export function ReviewToolsProvider({
       unbindCodeInput,
       setCodeInputMeta,
       boundId,
+      previewExerciseKey,
       isBound,
       ensureVisible,
       getRunFeedbackEntry,

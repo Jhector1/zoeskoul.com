@@ -159,6 +159,58 @@ type RegistryTopic = {
   meta?: unknown;
 };
 
+const DEV_REVIEW_CLONE_TOPICS = {
+  python: {
+    "e2e-review-clone": {
+      "e2e-section": ["e2e-review-topic"],
+    },
+  },
+  sql: {
+    "e2e-sql-review-clone": {
+      "e2e-sql-section": ["e2e-sql-topic"],
+    },
+  },
+} as const;
+
+function getDevCloneTopicSlugs(args: {
+  subjectSlug: string;
+  moduleSlug: string;
+  sectionSlug?: string | null;
+}) {
+  const subjectEntry =
+    DEV_REVIEW_CLONE_TOPICS[
+      args.subjectSlug as keyof typeof DEV_REVIEW_CLONE_TOPICS
+    ];
+  const moduleEntry =
+    subjectEntry?.[
+      args.moduleSlug as keyof typeof subjectEntry
+    ] ?? null;
+
+  if (!moduleEntry) return null;
+
+  if (args.sectionSlug) {
+    const sectionTopics =
+      moduleEntry[
+        args.sectionSlug as keyof typeof moduleEntry
+      ] ?? null;
+
+    return sectionTopics ? [...sectionTopics] : null;
+  }
+
+  return (Object.values(moduleEntry) as ReadonlyArray<readonly string[]>).flatMap(
+    (topicSlugs) => topicSlugs.slice(),
+  );
+}
+
+function hasReviewModuleOrDevClone(subjectSlug: string, moduleSlug: string) {
+  return (
+    hasReviewModule(subjectSlug, moduleSlug) ||
+    Array.isArray(
+      getDevCloneTopicSlugs({ subjectSlug, moduleSlug, sectionSlug: null }),
+    )
+  );
+}
+
 function resolveMaxAttempts(
     stepMaxAttempts: number | null | undefined,
     parentMaxAttempts: number | null | undefined,
@@ -209,6 +261,14 @@ function getAllowedTopicSlugsFromRegistry(args: {
   sectionSlug?: string | null;
 }) {
   const { subjectSlug, moduleSlug, sectionSlug } = args;
+  const devCloneTopicSlugs = getDevCloneTopicSlugs(args);
+
+  if (devCloneTopicSlugs) {
+    return {
+      ok: true as const,
+      topicSlugs: devCloneTopicSlugs,
+    };
+  }
 
   if (sectionSlug) {
     const section = findRegistrySection({
@@ -321,7 +381,7 @@ export async function POST(req: Request) {
     return attachGuestCookie(gate.res as NextResponse, setGuestId);
   }
 
-  if (!hasReviewModule(gate.scope.subjectSlug, gate.scope.moduleSlug)) {
+  if (!hasReviewModuleOrDevClone(gate.scope.subjectSlug, gate.scope.moduleSlug)) {
     return reviewRegistryMissingResponse(
         gate.scope.subjectSlug,
         gate.scope.moduleSlug,
@@ -692,7 +752,7 @@ export async function DELETE(req: Request) {
     return attachGuestCookie(gate.res as NextResponse, setGuestId);
   }
 
-  if (!hasReviewModule(gate.scope.subjectSlug, gate.scope.moduleSlug)) {
+  if (!hasReviewModuleOrDevClone(gate.scope.subjectSlug, gate.scope.moduleSlug)) {
     return reviewRegistryMissingResponse(
         gate.scope.subjectSlug,
         gate.scope.moduleSlug,

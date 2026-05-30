@@ -60,7 +60,49 @@ import {
 } from "@/components/review/module/runtime/progressiveUnlock";
 import {resolveRightRailSqlProps} from "../runtime/resolveRightRailSqlProps";
 import { resolveTopicStageRuntimeDefaults } from "../runtime/topicStageRuntimeDefaults";
+function lastExerciseIdSegment(value: unknown) {
+    const raw = typeof value === "string" ? value.trim() : "";
+    if (!raw) return "";
 
+    const parts = raw.split(/[.:/]/).filter(Boolean);
+    return parts[parts.length - 1] ?? raw;
+}
+
+function pickRouteExerciseId(args: {
+    activeRouteTarget: ReviewResolvedRouteTarget | null;
+    ownerCardId: string;
+    inputId: string;
+    targetExerciseKey: string;
+}) {
+    const { activeRouteTarget, ownerCardId, inputId, targetExerciseKey } = args;
+
+    const activeExerciseRoute =
+        activeRouteTarget?.kind === "exercise" ? activeRouteTarget : null;
+
+    if (
+        activeExerciseRoute &&
+        activeExerciseRoute.cardId === ownerCardId &&
+        activeExerciseRoute.exerciseId
+    ) {
+        return activeExerciseRoute.exerciseId;
+    }
+
+    const rawInput = inputId && !inputId.includes(":") ? inputId : "";
+    if (rawInput) return rawInput;
+
+    const rawTarget =
+        targetExerciseKey && !targetExerciseKey.includes(":")
+            ? targetExerciseKey
+            : "";
+    if (rawTarget) return rawTarget;
+
+    return (
+        lastExerciseIdSegment(inputId) ||
+        lastExerciseIdSegment(targetExerciseKey) ||
+        inputId ||
+        targetExerciseKey
+    );
+}
 function registryEntryToRouteTarget(entry: any): ReviewResolvedRouteTarget | null {
     if (!entry) return null;
 
@@ -1271,13 +1313,12 @@ export function useReviewModuleController({
 
             const routeExerciseId = activeRouteOwnsThisExercise
                 ? activeRouteTarget.exerciseId
-                : inputId && !inputId.includes(":")
-                    ? inputId
-                    : targetExerciseKey && !targetExerciseKey.includes(":")
-                        ? targetExerciseKey
-                        : activeRouteTarget?.kind === "exercise" && activeRouteTarget.cardId === ownerCardId
-                            ? activeRouteTarget.exerciseId
-                            : inputId || targetExerciseKey;
+                : pickRouteExerciseId({
+                    activeRouteTarget,
+                    ownerCardId,
+                    inputId,
+                    targetExerciseKey,
+                });
 
             const nextTarget = buildReviewExerciseRouteTarget({
                 mod,
@@ -1313,7 +1354,6 @@ export function useReviewModuleController({
                 activeRouteTarget?.kind === "exercise"
                     ? activeRouteTarget.exerciseStateKey
                     : null;
-
             const routeAlreadyActive =
                 currentExerciseStateKey === nextTarget.exerciseStateKey ||
                 currentExerciseStateKey === targetExerciseKey ||
@@ -1401,9 +1441,18 @@ export function useReviewModuleController({
     const routeOwnsExercise = routeTarget?.kind === "exercise";
     const routeCanUseBoundExercise =
         routeOwnsExercise || activeCard?.type === "quiz" || activeCard?.type === "project";
+    const boundExerciseRuntime = useReviewRuntimeStore((s) =>
+        tool.boundId ? s.exercises[tool.boundId] ?? null : null,
+    );
+    const boundExerciseMatchesActiveCard = Boolean(
+        tool.boundId &&
+        activeCard?.id &&
+        boundExerciseRuntime?.cardId === activeCard.id,
+    );
 
     const rightRailExerciseKey = routeCanUseBoundExercise
-        ? activeExerciseTarget?.exerciseStateKey ?? tool.boundId ?? null
+        ? activeExerciseTarget?.exerciseStateKey ??
+          (boundExerciseMatchesActiveCard ? tool.boundId : null)
         : null;
     const rightRailSqlProps = resolveRightRailSqlProps({
         routeCanUseBoundExercise,

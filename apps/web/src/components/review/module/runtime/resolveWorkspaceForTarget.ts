@@ -22,6 +22,7 @@ export type ManifestWorkspaceDefinition = {
   requested: boolean;
   language: WorkspaceLanguage;
   entryFile: string;
+  seedSource: "starter" | "default" | "none";
   stdin: string;
   starterCode: string;
   starterFiles: Array<{ path: string; content: string }>;
@@ -73,6 +74,12 @@ export type ResolvedWorkspaceForTarget = {
   source: "manifest" | "saved" | "draft" | "empty" | "none";
   starterHash: string;
   manifest: ManifestWorkspaceDefinition;
+};
+
+export type ResolvedWorkspaceForExerciseTarget = {
+  workspace: WorkspaceStateV2;
+  source: "saved" | "starter";
+  entryFilePath: string;
 };
 
 type StarterFile =
@@ -831,11 +838,42 @@ function workspaceWithEntryContent(args: {
   return workspace;
 }
 
+
+
+
+
+
+
+
+
+
 function isUserWorkspaceState(value: SavedWorkspaceState | null | undefined) {
+  if (!value) return false;
+
+  const origin = String(value?.workspaceOrigin ?? "").trim().toLowerCase();
+
+  if (value.userEdited === false) {
+    return false;
+  }
+
   return (
-    value?.userEdited === true ||
-    value?.workspaceOrigin === "user" ||
-    value?.workspaceOrigin === "saved"
+      value.userEdited === true ||
+      origin === "user" ||
+      origin === "saved" ||
+      origin === "reveal-fill"
+  );
+}
+
+function isPassiveWorkspaceState(value: SavedWorkspaceState | null | undefined) {
+  const origin = String(value?.workspaceOrigin ?? "").trim().toLowerCase();
+
+  return (
+      value?.userEdited === false ||
+      origin === "starter" ||
+      origin === "manifest" ||
+      origin === "default" ||
+      origin === "empty" ||
+      origin === "seed"
   );
 }
 
@@ -849,57 +887,94 @@ function shouldUseSavedWorkspace(args: {
     return false;
   }
 
-  const expectedLanguage = String(args.language ?? workspaceLanguage(args.manifest.manifestWorkspace) ?? "").trim();
+  const expectedLanguage = String(
+      args.language ?? workspaceLanguage(args.manifest.manifestWorkspace) ?? "",
+  ).trim();
+
   const savedLanguage = String(
-    args.savedState?.language ??
+      args.savedState?.language ??
       args.savedState?.lang ??
       workspaceLanguage(args.savedWorkspace) ??
       "",
   ).trim();
 
-  if (expectedLanguage && savedLanguage && !languagesCompatible(savedLanguage, expectedLanguage)) {
-    return false;
-  }
-
-  const starterHasCode = workspaceHasNonBlankFile(args.manifest.manifestWorkspace);
-  const savedHasCode = workspaceHasNonBlankFile(args.savedWorkspace);
-
-  if (starterHasCode && !savedHasCode) {
-    return false;
-  }
-
-  const currentStarterHash = args.manifest.starterHash;
-  const savedStarterHash =
-    typeof args.savedState?.starterHash === "string"
-      ? args.savedState.starterHash
-      : "";
-
-  if (savedStarterHash && currentStarterHash && savedStarterHash !== currentStarterHash) {
-    return false;
-  }
-
   if (
-    args.savedState?.workspaceOrigin === "starter" ||
-    args.savedState?.workspaceOrigin === "empty" ||
-    args.savedState?.userEdited === false
+      expectedLanguage &&
+      savedLanguage &&
+      !languagesCompatible(savedLanguage, expectedLanguage)
   ) {
     return false;
   }
 
-  if (isUserWorkspaceState(args.savedState)) {
+  const userOwned = isUserWorkspaceState(args.savedState);
+
+  /**
+   * Real learner work must win even when the course was regenerated and the
+   * starter hash changed. This is the core saved > starter > default contract.
+   */
+  if (userOwned) {
     return true;
   }
 
-  if (savedStarterHash) {
-    return workspaceContentKey(args.savedWorkspace) !== savedStarterHash;
+  const savedHasCode = workspaceHasNonBlankFile(args.savedWorkspace);
+  const savedHasLegacyCode = Boolean(
+      typeof args.savedState.code === "string" && args.savedState.code.trim(),
+  );
+
+  if (!savedHasCode && !savedHasLegacyCode) {
+    return false;
   }
 
-  if (starterHasCode) {
+  const savedWorkspaceKey = workspaceContentKey(args.savedWorkspace);
+  const savedStarterHash =
+      typeof args.savedState.starterHash === "string"
+          ? args.savedState.starterHash
+          : "";
+  const currentStarterHash = args.manifest.starterHash;
+
+  /**
+   * Passive starter/default snapshots are not learner work.
+   * They should not beat a newer manifest starter.
+   */
+  if (isPassiveWorkspaceState(args.savedState)) {
+    return false;
+  }
+
+  /**
+   * Legacy saved states may not have workspaceOrigin/userEdited.
+   * Keep them only if they are not merely an old starter snapshot.
+   */
+  if (savedStarterHash && savedWorkspaceKey === savedStarterHash) {
+    return false;
+  }
+
+  if (currentStarterHash && savedWorkspaceKey === currentStarterHash) {
     return false;
   }
 
   return true;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function normalizeSavedCandidate(args: {
   candidate: SavedWorkspaceState;
@@ -915,10 +990,13 @@ function normalizeSavedCandidate(args: {
           ? args.candidate.source
           : null;
 
-    if (explicitCode != null || typeof args.candidate.stdin === "string") {
+    const shouldHydrateLegacyCode =
+      explicitCode != null && !String(deriveEntryCode(workspace) ?? "").trim();
+
+    if (shouldHydrateLegacyCode || typeof args.candidate.stdin === "string") {
       return workspaceWithEntryContent({
         workspace,
-        code: explicitCode,
+        code: shouldHydrateLegacyCode ? explicitCode : null,
         stdin: args.candidate.stdin ?? null,
       });
     }
@@ -1077,6 +1155,7 @@ export function createManifestWorkspaceDefinition(args: {
     requested,
     language,
     entryFile,
+    seedSource: hasStarterAssets ? "starter" : requested ? "default" : "none",
     stdin,
     starterCode,
     starterFiles,
@@ -1147,6 +1226,13 @@ export function resolveWorkspaceForTarget(args: {
   }
 
   for (const { candidate, workspace } of normalizedCandidates) {
+    const candidateTargetKey =
+      typeof candidate.targetKey === "string" ? candidate.targetKey.trim() : "";
+
+    if (candidateTargetKey && candidateTargetKey !== args.targetKey) {
+      continue;
+    }
+
     if (
       shouldUseSavedWorkspace({
         savedState: candidate,
@@ -1179,7 +1265,7 @@ export function resolveWorkspaceForTarget(args: {
       code: deriveEntryCode(manifest.manifestWorkspace),
       stdin: String(manifest.manifestWorkspace.stdin ?? manifest.stdin ?? ""),
       language,
-      source: "manifest",
+      source: manifest.seedSource === "starter" ? "manifest" : "empty",
       starterHash: manifest.starterHash,
       manifest,
     };
@@ -1212,5 +1298,37 @@ export function resolveWorkspaceForTarget(args: {
     source: "none",
     starterHash: manifest.starterHash,
     manifest,
+  };
+}
+
+export function resolveWorkspaceForExerciseTarget(args: {
+  targetKey: string;
+  language: WorkspaceLanguage | string;
+  manifest?: unknown;
+  entry?: EntryWorkspaceFallback | null;
+  savedCandidates?: SavedWorkspaceState[];
+  localDraft?: LocalDraftWorkspaceState | null;
+  draftMaxAgeMs?: number;
+}): ResolvedWorkspaceForExerciseTarget {
+  const resolved = resolveWorkspaceForTarget({
+    ...args,
+    targetKind: "exercise",
+    workspaceRequested: true,
+  });
+
+  const fallbackWorkspace = buildDefaultWorkspace({
+    language: resolved.language,
+    entryFile: resolved.manifest.entryFile,
+    code: "",
+    stdin: resolved.manifest.stdin,
+  });
+
+  return {
+    workspace: resolved.workspace ?? fallbackWorkspace,
+    source:
+      resolved.source === "saved" || resolved.source === "draft"
+        ? "saved"
+        : "starter",
+    entryFilePath: resolved.manifest.entryFile,
   };
 }

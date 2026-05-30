@@ -41,38 +41,49 @@ function cleanPracticeSlotPart(value: unknown) {
       .trim()
       .replace(/[:\s]+/g, "-");
 }
-
 function getStableExerciseSlotId(
     q: Extract<ReviewQuestion, { kind: "practice" }>,
+    projectStepManifest?: unknown,
 ) {
   const anyQ = q as any;
   const fetch = anyQ.fetch ?? {};
+  const step = isRecord(projectStepManifest) ? projectStepManifest : null;
 
-  const scoped = [
-    cleanPracticeSlotPart(fetch.subjectSlug ?? fetch.subject ?? anyQ.subjectSlug),
-    cleanPracticeSlotPart(fetch.moduleSlug ?? fetch.module ?? anyQ.moduleSlug),
-    cleanPracticeSlotPart(fetch.sectionSlug ?? fetch.section ?? anyQ.sectionSlug),
-    cleanPracticeSlotPart(fetch.topicId ?? fetch.topic ?? anyQ.topicId),
-    cleanPracticeSlotPart(
-      fetch.exerciseKey ??
-      anyQ.exerciseKey ??
-      anyQ.item?.exerciseKey ??
-      anyQ.exercise?.exerciseKey ??
-      anyQ.exercise?.id ??
-      fetch.stepId ??
-      anyQ.stepId ??
-      anyQ.sourceStepId ??
-      anyQ.item?.id ??
-      anyQ.key ??
-      q.id,
-    ),
-  ]
-      .filter(Boolean)
-      .join(":");
+  const stepExerciseKey =
+      typeof step?.exerciseKey === "string" && step.exerciseKey.trim()
+          ? step.exerciseKey.trim()
+          : "";
 
-  return scoped || String(q.id ?? "");
+  const stepId =
+      typeof step?.id === "string" && step.id.trim()
+          ? step.id.trim()
+          : "";
+
+  /**
+   * Return the raw exercise id only.
+   *
+   * Do NOT return subject:module:section:topic:exercise here because callers
+   * already wrap this value with getExerciseStateKey(...). Returning a scoped
+   * value here causes double-scoped exercise keys and breaks registry/route
+   * matching, which makes Tools fall back to blank/card starter state.
+   */
+  return String(
+      stepExerciseKey ||
+      fetch.exerciseKey ||
+      anyQ.exerciseKey ||
+      anyQ.item?.exerciseKey ||
+      anyQ.exercise?.exerciseKey ||
+      anyQ.exercise?.id ||
+      fetch.stepId ||
+      anyQ.stepId ||
+      anyQ.sourceStepId ||
+      stepId ||
+      anyQ.item?.id ||
+      anyQ.key ||
+      q.id ||
+      "",
+  ).trim();
 }
-
 function getWorkspaceEntryCodeForPracticeCard(workspace: any) {
   if (
       !workspace ||
@@ -114,11 +125,374 @@ function getManifestExerciseLanguage(exercise: Exercise | null | undefined) {
   if (isSqlExercise) return "sql";
 
   return normalizeWorkspaceLanguage(exAny?.language ?? "python");
+}function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
 
+function firstNonBlankString(...values: unknown[]) {
+  for (const value of values) {
+    if (typeof value === "string" && value.trim()) {
+      return value;
+    }
+  }
+
+  return "";
+}
+
+function pickEntryFileFromFiles(files: unknown, fallback = "main.py") {
+  if (Array.isArray(files)) {
+    const entry = files.find(
+        (file) =>
+            isRecord(file) &&
+            (file.entry === true || file.isEntry === true || file.main === true) &&
+            typeof file.path === "string" &&
+            file.path.trim(),
+    );
+
+    if (isRecord(entry) && typeof entry.path === "string") {
+      return entry.path.trim();
+    }
+
+    const first = files.find(
+        (file) => isRecord(file) && typeof file.path === "string" && file.path.trim(),
+    );
+
+    if (isRecord(first) && typeof first.path === "string") {
+      return first.path.trim();
+    }
+  }
+
+  if (isRecord(files)) {
+    const keys = Object.keys(files).filter(Boolean);
+    if (keys.includes(fallback)) return fallback;
+    if (keys.length) return keys[0] ?? fallback;
+  }
+
+  return fallback;
+}
+
+function fileContentFromFiles(files: unknown, path: string) {
+  if (Array.isArray(files)) {
+    const match = files.find(
+        (file) => isRecord(file) && file.path === path,
+    );
+
+    if (isRecord(match) && typeof match.content === "string") {
+      return match.content;
+    }
+  }
+
+  if (isRecord(files) && typeof files[path] === "string") {
+    return String(files[path]);
+  }
+
+  return "";
+}
+
+
+
+function hasUsableStarterFileSource(value: unknown): boolean {
+  if (Array.isArray(value)) {
+    return value.some((file) => {
+      if (!isRecord(file)) return false;
+      return typeof file.content === "string" && file.content.trim().length > 0;
+    });
+  }
+
+  if (isRecord(value)) {
+    return Object.entries(value).some(([key, entry]) => {
+      if (
+          [
+            "entryFile",
+            "entryFilePath",
+            "mainFile",
+            "mainFilePath",
+            "language",
+            "lang",
+          ].includes(key)
+      ) {
+        return false;
+      }
+
+      if (typeof entry === "string") return entry.trim().length > 0;
+      if (isRecord(entry) && typeof entry.content === "string") {
+        return entry.content.trim().length > 0;
+      }
+
+      return false;
+    });
+  }
+
+  return false;
+}
+
+function firstUsableStarterFiles(...values: unknown[]) {
+  for (const value of values) {
+    if (hasUsableStarterFileSource(value)) return value;
+  }
+
+  return undefined;
+}
+function buildWorkspaceFallbackFromProjectStep(step: unknown) {
+  if (!isRecord(step)) return null;
+
+  const rawWorkspace = isRecord(step.workspace) ? step.workspace : null;
+
+  const starterFiles =
+      step.starterFiles ??
+      rawWorkspace?.starterFiles ??
+      rawWorkspace?.files ??
+      step.files ??
+      step.initialFiles ??
+      step.workspaceFiles ??
+      null;
+
+  const entryFile =
+      firstNonBlankString(
+          rawWorkspace?.entryFilePath,
+          rawWorkspace?.entryFile,
+          rawWorkspace?.mainFile,
+          rawWorkspace?.mainFilePath,
+      ) || pickEntryFileFromFiles(starterFiles, "main.py");
+
+  const language =
+      firstNonBlankString(
+          step.language,
+          rawWorkspace?.language,
+          rawWorkspace?.lang,
+      ) || "python";
+
+  const starterCode =
+      firstNonBlankString(
+          step.starterCode,
+          rawWorkspace?.starterCode,
+          fileContentFromFiles(starterFiles, entryFile),
+      );
+
+  if (!starterCode && !starterFiles && !rawWorkspace) {
+    return null;
+  }
+
+  return {
+    language,
+    entryFile,
+    entryFilePath: entryFile,
+    starterCode,
+    starterFiles,
+    files: step.files ?? rawWorkspace?.files,
+    fixtureFiles: step.fixtureFiles ?? rawWorkspace?.fixtureFiles,
+    initialFiles: step.initialFiles ?? rawWorkspace?.initialFiles,
+    workspaceFiles: step.workspaceFiles ?? rawWorkspace?.workspaceFiles,
+    fixtures: step.fixtures ?? rawWorkspace?.fixtures,
+    fileFixtures: step.fileFixtures ?? rawWorkspace?.fileFixtures,
+  };
+}
+
+function mergeProjectStepFallbackExercise(
+    exercise: Exercise | null | undefined,
+    projectStepManifest: unknown,
+): Exercise | null {
+  if (!isRecord(projectStepManifest)) {
+    return exercise ?? null;
+  }
+
+  const fallbackWorkspace = buildWorkspaceFallbackFromProjectStep(projectStepManifest);
+  if (!fallbackWorkspace) {
+    return exercise ?? null;
+  }
+
+  const stepExerciseKey = firstNonBlankString(
+      projectStepManifest.exerciseKey,
+      projectStepManifest.id,
+  );
+
+  const fallbackExercise = {
+    id: stepExerciseKey,
+    exerciseKey: stepExerciseKey,
+    kind: "code_input",
+    purpose: "project",
+    title: firstNonBlankString(projectStepManifest.title) || "Project step",
+    prompt: firstNonBlankString(projectStepManifest.prompt),
+    language: fallbackWorkspace.language,
+    starterCode: fallbackWorkspace.starterCode,
+    starterFiles: fallbackWorkspace.starterFiles,
+    workspace: fallbackWorkspace,
+    solutionCode: firstNonBlankString(projectStepManifest.solutionCode),
+    solutionFiles:
+        projectStepManifest.solutionFiles ??
+        (isRecord(projectStepManifest.workspace)
+            ? projectStepManifest.workspace.solutionFiles
+            : undefined),
+  };
+
+  if (!exercise) {
+    return fallbackExercise as unknown as Exercise;
+  }
+
+  const exAny = exercise as any;
+  const exWorkspace = isRecord(exAny.workspace) ? exAny.workspace : null;
+
+  const mergedStarterCode = firstNonBlankString(
+      exAny.starterCode,
+      exWorkspace?.starterCode,
+      fallbackExercise.starterCode,
+  );
+
+  const mergedStarterFiles = firstUsableStarterFiles(
+      exAny.starterFiles,
+      exWorkspace?.starterFiles,
+      fallbackExercise.starterFiles,
+  );
+
+  const mergedWorkspaceStarterFiles = firstUsableStarterFiles(
+      exWorkspace?.starterFiles,
+      exAny.starterFiles,
+      fallbackWorkspace.starterFiles,
+  );
+
+  const mergedWorkspace = {
+    ...(fallbackWorkspace ?? {}),
+    ...(exWorkspace ?? {}),
+
+    language: firstNonBlankString(
+        exWorkspace?.language,
+        exAny.language,
+        fallbackWorkspace.language,
+    ),
+
+    entryFilePath: firstNonBlankString(
+        exWorkspace?.entryFilePath,
+        exWorkspace?.entryFile,
+        fallbackWorkspace.entryFilePath,
+    ),
+
+    entryFile: firstNonBlankString(
+        exWorkspace?.entryFile,
+        exWorkspace?.entryFilePath,
+        fallbackWorkspace.entryFile,
+    ),
+
+    starterCode: firstNonBlankString(
+        exWorkspace?.starterCode,
+        exAny.starterCode,
+        fallbackWorkspace.starterCode,
+    ),
+
+    starterFiles: mergedWorkspaceStarterFiles,
+  };
+
+  return {
+    ...fallbackExercise,
+    ...exAny,
+
+    id: firstNonBlankString(exAny.id, fallbackExercise.id),
+    exerciseKey: firstNonBlankString(exAny.exerciseKey, fallbackExercise.exerciseKey),
+    kind: exAny.kind ?? fallbackExercise.kind,
+    purpose: exAny.purpose ?? fallbackExercise.purpose,
+    title: firstNonBlankString(exAny.title, fallbackExercise.title),
+    prompt: firstNonBlankString(exAny.prompt, fallbackExercise.prompt),
+    language: firstNonBlankString(exAny.language, fallbackExercise.language),
+
+    starterCode: mergedStarterCode,
+    starterFiles: mergedStarterFiles,
+    workspace: mergedWorkspace,
+
+    solutionCode: firstNonBlankString(exAny.solutionCode, fallbackExercise.solutionCode),
+    solutionFiles: exAny.solutionFiles ?? fallbackExercise.solutionFiles,
+  } as Exercise;
+}
+
+
+
+
+
+function buildProjectStepFallbackPracticeItem(args: {
+  q: Extract<ReviewQuestion, { kind: "practice" }>;
+  exercise: Exercise | null;
+  projectStepManifest: unknown;
+}) {
+  const { q, exercise, projectStepManifest } = args;
+
+  if (!exercise || !isRecord(projectStepManifest)) {
+    return null;
+  }
+
+  const exAny = exercise as any;
+  const workspaceRecord = isRecord(exAny.workspace) ? exAny.workspace : {};
+  const language = firstNonBlankString(
+      exAny.language,
+      workspaceRecord.language,
+      "python",
+  );
+
+  const starterCode = firstNonBlankString(
+      exAny.starterCode,
+      workspaceRecord.starterCode,
+      fileContentFromFiles(exAny.starterFiles ?? workspaceRecord.starterFiles, "main.py"),
+  );
+
+  const starterWorkspace =
+      exercise.kind === "code_input"
+          ? resolveExerciseWorkspace({
+            language,
+            manifest: exercise,
+            entry: null,
+          })
+          : null;
+
+  const entryCode =
+      deriveEntryCode(starterWorkspace) ||
+      starterCode ||
+      "";
+
+  const id = firstNonBlankString(
+      exAny.id,
+      exAny.exerciseKey,
+      (projectStepManifest as any).exerciseKey,
+      (projectStepManifest as any).id,
+      q.id,
+  );
+
+  return {
+    id,
+    exerciseId: id,
+    exerciseKey: firstNonBlankString(
+        exAny.exerciseKey,
+        (projectStepManifest as any).exerciseKey,
+        id,
+    ),
+    kind: exercise.kind,
+    purpose: exAny.purpose ?? "project",
+    title: firstNonBlankString(
+        exAny.title,
+        (projectStepManifest as any).title,
+        "Project step",
+    ),
+    prompt: firstNonBlankString(exAny.prompt, (projectStepManifest as any).prompt),
+    exercise,
+    answer: null,
+
+    code: entryCode,
+    source: entryCode,
+    codeLang: language,
+    language,
+    lang: language,
+    codeStdin: "",
+    stdin: "",
+
+    workspace: starterWorkspace ?? undefined,
+    codeWorkspace: starterWorkspace ?? undefined,
+    ideWorkspace: starterWorkspace ?? undefined,
+
+    workspaceOrigin: "starter",
+    userEdited: false,
+    updateOrigin: "project-step-fallback",
+  } as any;
+}
 export default function QuizPracticeCard(props: {
   q: Extract<ReviewQuestion, { kind: "practice" }>;
   ownerCardId?: string;
+  projectStepManifest?: unknown;
   ps?: PracticeState;
   toolScopedId?: string;
   toolsActive?: boolean;
@@ -147,6 +521,7 @@ export default function QuizPracticeCard(props: {
   const {
     q,
     ownerCardId,
+    projectStepManifest,
     ps,
     toolScopedId,
     toolsActive = true,
@@ -180,18 +555,84 @@ export default function QuizPracticeCard(props: {
   const lastEnsureRuntimeExerciseKeyRef = useRef<string | null>(null);
 
   const ex: Exercise | null = useMemo(() => {
-    if (!ps?.exercise) return null;
-    return resolveDeepTagged(ps.exercise, (key) => raw(key, "")) as Exercise;
-  }, [ps?.exercise, raw]);
+    if (!ps?.exercise) {
+      return mergeProjectStepFallbackExercise(null, projectStepManifest);
+    }
+
+    const resolved = resolveDeepTagged(ps.exercise, (key) => raw(key, "")) as Exercise;
+    return mergeProjectStepFallbackExercise(resolved, projectStepManifest);
+  }, [ps?.exercise, raw, projectStepManifest]);
+
+  const projectStepFallbackItem = useMemo(
+      () =>
+          buildProjectStepFallbackPracticeItem({
+            q,
+            exercise: ex,
+            projectStepManifest,
+          }),
+      [q, ex, projectStepManifest],
+  );
+
+  const rawPracticeItem = ps?.item ?? projectStepFallbackItem;
 
   const livePracticeItem = useMemo(() => {
-    if (!ex || !ps?.item) return ps?.item ?? null;
-    return normalizeCurrentPracticeItem(ps.item, ex, ps.item);
-  }, [ex, ps?.item]);
+    if (!ex || !rawPracticeItem) return rawPracticeItem ?? null;
+
+    const normalized = normalizeCurrentPracticeItem(
+        rawPracticeItem,
+        ex,
+        rawPracticeItem,
+    );
+
+    if (!normalized || !isRecord(normalized)) {
+      return normalized;
+    }
+
+    const mergedExercise =
+        mergeProjectStepFallbackExercise(
+            (normalized as any).exercise as Exercise | undefined,
+            projectStepManifest,
+        ) ?? (normalized as any).exercise;
+
+    const mergedWorkspace =
+        getWorkspaceFromAnyState(normalized) ??
+        getWorkspaceFromAnyState(projectStepFallbackItem);
+
+    const mergedCode =
+        firstNonBlankString(
+            (normalized as any).code,
+            (normalized as any).source,
+            deriveEntryCode(mergedWorkspace),
+            (projectStepFallbackItem as any)?.code,
+            (projectStepFallbackItem as any)?.source,
+        );
+
+    return {
+      ...normalized,
+      exercise: mergedExercise,
+      code: mergedCode,
+      source: mergedCode,
+      codeWorkspace:
+          (normalized as any).codeWorkspace ??
+          (projectStepFallbackItem as any)?.codeWorkspace,
+      ideWorkspace:
+          (normalized as any).ideWorkspace ??
+          (projectStepFallbackItem as any)?.ideWorkspace,
+      workspace:
+          (normalized as any).workspace ??
+          (projectStepFallbackItem as any)?.workspace,
+      workspaceOrigin: (normalized as any).workspaceOrigin ?? "starter",
+      userEdited: (normalized as any).userEdited ?? false,
+    };
+  }, [ex, rawPracticeItem, projectStepManifest, projectStepFallbackItem]);
 
   const livePracticeManifest = useMemo(
-      () => (livePracticeItem?.exercise as Exercise | undefined) ?? ex,
-      [ex, livePracticeItem],
+      () =>
+          mergeProjectStepFallbackExercise(
+              (livePracticeItem?.exercise as Exercise | undefined) ?? ex,
+              projectStepManifest,
+          ),
+      [ex, livePracticeItem, projectStepManifest],
   );
 
   const toolsEnabled = Boolean(toolsAny?.enabled);
@@ -201,15 +642,19 @@ export default function QuizPracticeCard(props: {
 
   const codeTools = toolsEnabled && isCodeInput ? toolsAny : null;
 
-  const stableExerciseSlotId = useMemo(() => getStableExerciseSlotId(q), [q]);
-
+  const stableExerciseSlotId = useMemo(
+      () => getStableExerciseSlotId(q, projectStepManifest),
+      [q, projectStepManifest],
+  );
   const exerciseKeyForTools = useMemo(() => {
+    const fetch = (q as any).fetch ?? {};
+
     return getExerciseStateKey(
         {
-          subjectSlug: (q as any).fetch?.subject ?? "",
-          moduleSlug: (q as any).fetch?.module ?? "",
-          sectionSlug: (q as any).fetch?.section,
-          topicId: normalizeTopicProgressKey((q as any).fetch?.topic ?? ""),
+          subjectSlug: fetch.subjectSlug ?? fetch.subject ?? "",
+          moduleSlug: fetch.moduleSlug ?? fetch.module ?? "",
+          sectionSlug: fetch.sectionSlug ?? fetch.section,
+          topicId: normalizeTopicProgressKey(fetch.topicId ?? fetch.topic ?? ""),
           cardId: ownerCardId ?? "",
         },
         stableExerciseSlotId,
@@ -270,7 +715,7 @@ export default function QuizPracticeCard(props: {
   useLayoutEffect(() => {
     if (!livePracticeManifest) return;
     if (livePracticeManifest.kind !== "code_input") return;
-    if (!livePracticeItem) return;
+    if (!livePracticeItem && !projectStepManifest) return;
 
     const manifestLanguage = getManifestExerciseLanguage(livePracticeManifest);
     const ensureKey = [
@@ -343,7 +788,7 @@ export default function QuizPracticeCard(props: {
       topicId: fetchTopicId,
       cardId: fetchOwnerCardId,
       manifest: livePracticeManifest,
-      saved: livePracticeItem,
+      saved: livePracticeItem ?? livePracticeManifest,
     });
 
     // Register the live dynamic practice contract before child tool-binding
@@ -370,13 +815,17 @@ export default function QuizPracticeCard(props: {
     practiceStarterCode,
     practiceStarterFilesKey,
     practiceWorkspaceKey,
+    projectStepManifest,
   ]);
 
   useLayoutEffect(() => {
     if (!livePracticeManifest) return;
     if (livePracticeManifest.kind !== "code_input") return;
 
-    const itemWorkspace = getWorkspaceFromAnyState(livePracticeItem);
+    const itemWorkspace =
+        getWorkspaceFromAnyState(livePracticeItem) ??
+        getWorkspaceFromAnyState(livePracticeManifest);
+
     if (!itemWorkspace) return;
 
     const existingWorkspace = getWorkspaceFromAnyState(runtimeExercise);
@@ -514,7 +963,7 @@ export default function QuizPracticeCard(props: {
     const eligible =
         toolsActive && unlocked && !locked && !isCompleted && !excused && !isFinalized;
 
-    toolsAny.setCodeInputMeta?.(effectiveToolId, {
+    toolsAny.setCodeInputMeta?.(codeInputId ?? effectiveToolId, {
       order: seqOrder,
       eligible,
       done: doneForFlow,
@@ -523,7 +972,7 @@ export default function QuizPracticeCard(props: {
     toolsEnabled,
     toolsAny,
     ex,
-    ps,
+    ps,codeInputId,
     effectiveToolId,
     toolsActive,
     unlocked,
@@ -547,7 +996,7 @@ export default function QuizPracticeCard(props: {
     if (!isCodeInput) return;
     if (!codeInputId) return;
     if (!ex) return;
-    if (!ps?.item) return;
+    if (!livePracticeItem) return;
     if (isFinalized) return;
 
     const bindKey = `${codeInputId}:${exerciseKeyForTools}`;
@@ -570,7 +1019,7 @@ export default function QuizPracticeCard(props: {
     isCodeInput,
     codeInputId,
     ex,
-    Boolean(ps?.item),
+    Boolean(livePracticeItem),
     exerciseKeyForTools,
     isFinalized,
     toolsAny.boundId,
@@ -625,11 +1074,14 @@ export default function QuizPracticeCard(props: {
 
   const maxForRenderer = ps?.maxAttempts ?? Number.POSITIVE_INFINITY;
 
-  const hasExercise = Boolean(ex && ps?.item);
-  const isInitialLoading = Boolean(ps?.loading && !hasExercise && !ps?.error);
-  const isRefreshing = Boolean(ps?.loading && hasExercise);
-  const hasBlockingError = Boolean(ps?.error && !hasExercise);
-  const hasInlineError = Boolean(ps?.error && hasExercise);
+  const hasExercise = Boolean(ex && livePracticeItem);
+  const hasProjectStepFallback = Boolean(projectStepManifest && projectStepFallbackItem);
+  const isInitialLoading = Boolean(
+      ps?.loading && !hasExercise && !hasProjectStepFallback && !ps?.error,
+  );
+  const isRefreshing = Boolean(ps?.loading && hasExercise && !hasProjectStepFallback);
+  const hasBlockingError = Boolean(ps?.error && !hasExercise && !hasProjectStepFallback);
+  const hasInlineError = Boolean(ps?.error && hasExercise && !hasProjectStepFallback);
 
   useEffect(() => {
     setLoadTimedOut(false);
@@ -745,7 +1197,7 @@ export default function QuizPracticeCard(props: {
                 </button>
               </div>
             </div>
-        ) : ex && ps?.item ? (
+        ) : ex && livePracticeItem ? (
             <div className="mt-1">
               {isRefreshing ? (
                   <div className="mb-2 ui-quiz-status-soft flex items-center gap-2">
@@ -783,8 +1235,8 @@ export default function QuizPracticeCard(props: {
                   fetchStepId: (q as any).fetch?.stepId,
                   qExerciseKey: (q as any).exerciseKey,
                   qStepId: (q as any).stepId,
-                  psExerciseKind: ps.exercise?.kind,
-                  psItem: summarizeExercisePatch(ps.item),
+                  psExerciseKind: ps?.exercise?.kind,
+                  psItem: summarizeExercisePatch(ps?.item),
                   exKind: ex.kind,
                   exId: (ex as any).id,
                   exExerciseKey: (ex as any).exerciseKey,
@@ -803,7 +1255,7 @@ export default function QuizPracticeCard(props: {
                           : (livePracticeItem as any)
                     }
                     exerciseStateId={stableExerciseSlotId}
-                    busy={ps.busy || !unlocked || isCompleted || locked || isFinalized}
+                    busy={Boolean(ps?.busy) || !unlocked || isCompleted || locked || isFinalized}
                     isAssignmentRun={false}
                     maxAttempts={maxForRenderer as any}
                     padRef={padRef as any}
@@ -866,10 +1318,10 @@ export default function QuizPracticeCard(props: {
                 {ui.t(
                     "practice.attempts",
                     {
-                      n: ps.attempts,
-                      max: ps.maxAttempts == null ? "∞" : ps.maxAttempts,
+                      n: ps?.attempts ?? 0,
+                      max: ps?.maxAttempts == null ? "∞" : ps.maxAttempts,
                     },
-                    `Attempts: ${ps.attempts}/${ps.maxAttempts == null ? "∞" : ps.maxAttempts}`,
+                    `Attempts: ${ps?.attempts ?? 0}/${ps?.maxAttempts == null ? "∞" : ps.maxAttempts}`,
                 )}
               </span>
 
@@ -880,7 +1332,7 @@ export default function QuizPracticeCard(props: {
                       >
       ✓ Correct
     </span>
-                  ) : !feedbackDismissed && resultOk === false && ps.item?.result ? (
+                  ) : !feedbackDismissed && resultOk === false && ps?.item?.result ? (
                       <span
                           className="ml-2 whitespace-nowrap ui-quiz-status-danger"
                           data-testid="review-practice-result-incorrect"
@@ -893,9 +1345,9 @@ export default function QuizPracticeCard(props: {
 
               <PracticeHelpPanel
                   exercise={(livePracticeManifest as Exercise) ?? ex}
-                  current={ps.item}
-                  help={ps.item.help}
-                  helpPolicy={ps.helpPolicy}
+                  current={livePracticeItem as any}
+                  help={(livePracticeItem as any)?.help}
+                  helpPolicy={ps?.helpPolicy}
                   updateCurrent={updateItemSafe}
                   onOpenHelp={onHelp}
                   codeInputId={codeInputId}
