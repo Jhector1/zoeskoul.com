@@ -1,0 +1,287 @@
+{
+  "title": "List Methods and Mutation",
+  "summary": "Use common list methods like append, remove, pop, and sort, and learn how they change the original list.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "What mutation means for lists",
+      "bodyMarkdown": "A Python list is **mutable**, which means you can change the same list after you create it. Methods like `append()`, `remove()`, `pop()`, and `sort()` usually **mutate** the list instead of making a brand-new one.\n\nExample:\n\n```python\nnumbers = [3, 1, 2]\nnumbers.append(4)\nprint(numbers)\n```\n\nStep by step:\n- `numbers = [3, 1, 2]` creates a list.\n- `numbers.append(4)` adds `4` to the end of that same list.\n- `print(numbers)` shows the changed list.\n\nOutput:\n\n```python\n[3, 1, 2, 4]\n```\n\nThe important idea is that `append()` changes `numbers` itself.\n\nTry it yourself: change the value being appended from `4` to `10`, click Run, and check the output panel."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Using append, remove, and pop",
+      "bodyMarkdown": "These three methods all change a list, but they do different jobs:\n\n- `append(value)` adds one item to the end.\n- `remove(value)` removes the first matching value.\n- `pop(index)` removes and returns the item at an index.\n\nWorked example:\n\n```python\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfruits.remove(\"banana\")\nlast_item = fruits.pop(1)\nprint(fruits)\nprint(last_item)\n```\n\nLine by line:\n- The list starts as `['apple', 'banana', 'cherry']`.\n- `remove(\"banana\")` changes it to `['apple', 'cherry']`.\n- `pop(1)` removes the item at index `1`, which is `'cherry'`.\n- Now `fruits` becomes `['apple']`.\n- `last_item` stores the removed value `'cherry'`.\n\nSo the output is:\n\n```python\n['apple']\ncherry\n```\n\nYour turn: change `pop(1)` to `pop(0)`. What value gets removed, and what does the list look like after that?"
+    },
+    {
+      "id": "sketch-3",
+      "title": "Sorting lists and watching for common mistakes",
+      "bodyMarkdown": "`sort()` puts list items in order and mutates the list.\n\nExample:\n\n```python\nscores = [40, 10, 30, 20]\nscores.sort()\nprint(scores)\n```\n\nThis prints:\n\n```python\n[10, 20, 30, 40]\n```\n\nA common beginner mistake is expecting `sort()` to print something by itself or to leave the original list unchanged. But `sort()` changes the list directly.\n\nAnother useful pattern:\n\n```python\nnames = [\"Mia\", \"Ava\", \"Zoe\"]\nnames.sort()\nprint(names)\n```\n\nThis sorts strings in alphabetical order.\n\nTry this: start with `names = [\"Zoe\", \"Ava\", \"Mia\"]`, sort the list, and check the output panel. Then add one more name and sort again."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "sc-1",
+      "kind": "single_choice",
+      "title": "Which method adds to the end?",
+      "prompt": "Which list method adds one new item to the end of a list?",
+      "hint": "Think about the method used when you want a list to grow by one item at the back.",
+      "help": {
+        "concept": "`append()` is the standard list method for adding exactly one item to the end of an existing list.",
+        "hint_1": "Compare methods that add, remove by value, remove by index, and sort.",
+        "hint_2": "The correct method does not remove anything and does not reorder the list."
+      },
+      "options": [
+        "append()",
+        "remove()",
+        "pop()",
+        "sort()"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "sc-2",
+      "kind": "single_choice",
+      "title": "What does pop return?",
+      "prompt": "In Python, what does `items.pop(1)` return?",
+      "hint": "`pop()` both changes the list and gives you something back.",
+      "help": {
+        "concept": "`pop(index)` removes the item at the given index and returns that removed item.",
+        "hint_1": "Index `1` means the second item in the list.",
+        "hint_2": "The return value is not the shortened list itself; it is the element that was taken out."
+      },
+      "options": [
+        "The item that was removed at index 1",
+        "A copy of the whole list",
+        "The length of the list after removal",
+        "Nothing at all"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "mc-1",
+      "kind": "multi_choice",
+      "title": "Methods that mutate a list",
+      "prompt": "Which of these operations change the original list? Choose all that apply.",
+      "hint": "Look for methods that directly modify the list object you already have.",
+      "help": {
+        "concept": "List mutation means the existing list is changed in place rather than replaced by a separate result.",
+        "hint_1": "Adding, removing, and sorting are all common in-place list operations.",
+        "hint_2": "Think about which choices would leave the same variable pointing to updated contents."
+      },
+      "options": [
+        "append(5)",
+        "remove(5)",
+        "sort()",
+        "len(my_list)"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "mc-2",
+      "kind": "multi_choice",
+      "title": "Valid list method uses",
+      "prompt": "Which lines are valid ways to use common list methods on `numbers = [3, 1, 2]`? Choose all that apply.",
+      "hint": "Check whether each method name matches the kind of argument it expects.",
+      "help": {
+        "concept": "Different list methods expect different inputs: `append` takes a value, `remove` takes a value, and `pop` usually takes an index.",
+        "hint_1": "Ask whether the method is removing by value or by position.",
+        "hint_2": "One choice mixes up `remove` with index behavior, and one choice uses `sort` with an argument it does not need here."
+      },
+      "options": [
+        "numbers.append(4)",
+        "numbers.remove(1)",
+        "numbers.pop(0)",
+        "numbers.sort(2)"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "dr-1",
+      "kind": "drag_reorder",
+      "title": "Append then inspect",
+      "prompt": "Put these steps in the correct order to add `7` to a list and display the updated list.",
+      "hint": "First create the list, then change it, then print it.",
+      "help": {
+        "concept": "A short list program usually follows a sequence: create data, mutate data, then inspect the result with `print()`.",
+        "hint_1": "You cannot append to a list before the list exists.",
+        "hint_2": "Printing should happen after the append if you want to see the changed list."
+      },
+      "tokens": [
+        "numbers = [1, 2]",
+        "numbers.append(7)",
+        "print(numbers)"
+      ],
+      "correctOrder": [
+        "numbers = [1, 2]",
+        "numbers.append(7)",
+        "print(numbers)"
+      ]
+    },
+    {
+      "id": "dr-2",
+      "kind": "drag_reorder",
+      "title": "Remove, pop, then print",
+      "prompt": "Arrange the lines to produce a program that removes `\"b\"`, then pops the last remaining item into `taken`, then prints `taken`.",
+      "hint": "The list must exist first, and `taken` must be assigned before it can be printed.",
+      "help": {
+        "concept": "When several list mutations happen in sequence, each step changes what the next step sees.",
+        "hint_1": "After removing `\"b\"` from `[\"a\", \"b\", \"c\"]`, only two items remain.",
+        "hint_2": "The `pop()` assignment must happen before `print(taken)`."
+      },
+      "tokens": [
+        "letters = [\"a\", \"b\", \"c\"]",
+        "letters.remove(\"b\")",
+        "taken = letters.pop()",
+        "print(taken)"
+      ],
+      "correctOrder": [
+        "letters = [\"a\", \"b\", \"c\"]",
+        "letters.remove(\"b\")",
+        "taken = letters.pop()",
+        "print(taken)"
+      ]
+    },
+    {
+      "id": "fb-1",
+      "kind": "fill_blank_choice",
+      "title": "Complete an append call",
+      "prompt": "Choose the value that correctly completes the code.",
+      "hint": "`append()` needs the item you want to add inside the parentheses.",
+      "help": {
+        "concept": "To add one item to the end of a list, place that item as the argument to `append()`.",
+        "hint_1": "The blank is the new value being added, not the list name or method name.",
+        "hint_2": "Pick the choice that would make the list gain the number ten."
+      },
+      "template": "numbers = [1, 2]\nnumbers.append([blank1])",
+      "choices": [
+        "numbers",
+        "append",
+        "10",
+        "pop"
+      ],
+      "correctValue": "10"
+    },
+    {
+      "id": "fb-2",
+      "kind": "fill_blank_choice",
+      "title": "Complete a sort statement",
+      "prompt": "Choose the missing method name.",
+      "hint": "This method puts list items in order and changes the list itself.",
+      "help": {
+        "concept": "`sort()` is the built-in list method for ordering list items in place.",
+        "hint_1": "The blank should be a method that works directly on a list variable.",
+        "hint_2": "It is not a method for adding or removing items."
+      },
+      "template": "scores = [4, 1, 3]\nscores.[blank1]()",
+      "choices": [
+        "append",
+        "remove",
+        "sort",
+        "pop"
+      ],
+      "correctValue": "sort"
+    },
+    {
+      "id": "ci-1",
+      "kind": "code_input",
+      "title": "Add an item and print the list",
+      "prompt": "Write a program that reads one word from input, starts with the list `[\"pen\", \"pencil\"]`, appends the input word, and prints the final list.",
+      "hint": "Read one value with `input()`, append it to the list, then print the list.",
+      "help": {
+        "concept": "A list can be mutated during a running program by reading input, using `append()`, and printing the updated list.",
+        "hint_1": "Store the input in a variable before appending it.",
+        "hint_2": "Print the whole list after the append so the output panel shows the changed contents."
+      },
+      "starterCode": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list.\n",
+      "solutionCode": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)\n",
+      "tests": [
+        {
+          "stdout": "['pen', 'pencil', 'eraser']\n",
+          "stdin": "eraser\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "['pen', 'pencil', 'marker']\n",
+          "stdin": "marker\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "ci-2",
+      "kind": "code_input",
+      "title": "Remove a value and show the result",
+      "prompt": "Write a program that reads one word from input, starts with `['red', 'blue', 'green']`, removes the input word from the list, and prints the updated list. You may assume the input value is always in the list.",
+      "hint": "Use `remove()` because the input is a value, not an index.",
+      "help": {
+        "concept": "`remove(value)` deletes the first matching value from a list and mutates the original list.",
+        "hint_1": "Read the color with `input()` and pass that variable into `remove()`.",
+        "hint_2": "After removing the value, print the list itself to show what remains."
+      },
+      "starterCode": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list.\n",
+      "solutionCode": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)\n",
+      "tests": [
+        {
+          "stdout": "['red', 'green']\n",
+          "stdin": "blue\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "['blue', 'green']\n",
+          "stdin": "red\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "ci-3",
+      "kind": "code_input",
+      "title": "Sort numbers from input",
+      "prompt": "Write a program that reads three integers from input, one per line, stores them in a list, sorts the list in ascending order, and prints the sorted list.",
+      "hint": "Read each number with `input()`, convert to `int`, put them in a list, then call `sort()`.",
+      "help": {
+        "concept": "`sort()` mutates a list so its items are reordered from smallest to largest for numbers.",
+        "hint_1": "Build the list first from the three input values before sorting it.",
+        "hint_2": "After calling `sort()`, print the list variable to show the new order."
+      },
+      "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list.\n",
+      "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)\n",
+      "tests": [
+        {
+          "stdout": "[2, 5, 9]\n",
+          "stdin": "9\n2\n5\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "[1, 3, 3]\n",
+          "stdin": "3\n3\n1\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    }
+  ],
+  "projectDraft": {
+    "title": "Practice List Mutation Programs",
+    "stepIds": [
+      "ci-1",
+      "ci-2",
+      "ci-3"
+    ]
+  }
+}

@@ -164,36 +164,98 @@
             },
             "ci-update-score": {
               "title": "Update one score and return the dictionary",
-              "prompt": "Write a function `update_score(scores, name, new_score)` that updates the given player's score in the dictionary and returns the dictionary. If the name is not already present, add it with the new score.",
+              "prompt": "Complete this project step: Update one score and return the dictionary.\n\nRequirements:\n- update or add the score, then return the dictionary\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass"
             },
             "ci-remove-key": {
               "title": "Remove a key if it exists",
-              "prompt": "Write a function `remove_item(data, key_name)` that removes `key_name` from the dictionary if it exists, then returns the dictionary.",
+              "prompt": "Complete this project step: Remove a key if it exists.\n\nRequirements:\n- remove the key when it is present, then return the dictionary\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Remove a key if it exists\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Remove a key if it exists\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass"
             },
             "ci-format-items": {
               "title": "Build lines from dictionary pairs",
-              "prompt": "Write a function `format_inventory(items)` that returns a list of strings in the form `\"key: value\"` for each key-value pair in the dictionary. For example, `{\"pens\": 3}` should become `[\"pens: 3\"]`.",
+              "prompt": "Complete this project step: Build lines from dictionary pairs.\n\nRequirements:\n- return a list like [\"pens: 3\", \"paper: 2\"]\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result"
+            },
+            "try-updating-and-looping-dictionaries-checkpoint": {
+              "title": "Update and loop through scores",
+              "prompt": "Update Mia’s score to `91`, then print each name and score as `name: score`. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Assign to `scores[\"Mia\"]`, then loop with `.items()`.",
+              "help": {
+                "concept": "Dictionaries can be updated by assigning to an existing key.",
+                "hint_1": "Assign to `scores[\"Mia\"]`, then loop with `.items()`.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "scores = {\"Ava\": 88, \"Mia\": 79}\n\n# Update Mia to 91.\n# Print each name and score.\n"
+            },
+            "try-updating-and-looping-dictionaries-sketch0": {
+              "title": "Update a count",
+              "prompt": "Read, update, and store a dictionary value. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Adding, changing, and removing dictionary entries\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "counts = {'apples': 2, 'bananas': 1}\n\n# Increase apples by 3.\n# Then print counts.\n"
+            },
+            "try-updating-and-looping-dictionaries-sketch1": {
+              "title": "Print inventory lines",
+              "prompt": "Use `.items()` to loop through keys and values together. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Looping through keys and values\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "inventory = {'pens': 3, 'markers': 2}\n\n# Loop through inventory and print lines like: pens: 3\n"
+            },
+            "try-updating-and-looping-dictionaries-sketch2": {
+              "title": "Build a length dictionary",
+              "prompt": "Loop through a list and fill a dictionary. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Common dictionary patterns\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "words = ['red', 'blue']\nlengths = {}\n\n# Store each word's length in lengths.\n# Then print lengths.\n"
+            }
+          },
+          "tryIt": {
+            "try_updating_and_looping_dictionaries_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Update Mia’s score to `91`, then print each name and score as `name: score`."
+            },
+            "try_updating_and_looping_dictionaries_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Read, update, and store a dictionary value."
+            },
+            "try_updating_and_looping_dictionaries_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Use `.items()` to loop through keys and values together."
+            },
+            "try_updating_and_looping_dictionaries_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Loop through a list and fill a dictionary."
             }
           }
         }

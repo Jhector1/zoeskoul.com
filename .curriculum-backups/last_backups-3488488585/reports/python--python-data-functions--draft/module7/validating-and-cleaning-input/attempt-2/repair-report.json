@@ -1,0 +1,19 @@
+{
+  "topicId": "validating-and-cleaning-input",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sb-missing-values.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_CROSS_EXERCISE_CLASS_CONTEXT_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-validate-row",
+      "message": "Prepended shared class/setup context needed by this code_input exercise so it can run independently."
+    }
+  ]
+}

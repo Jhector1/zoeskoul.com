@@ -1,0 +1,92 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "module-7-clean-student-records": {
+          "label": "Module Project: Clean Student Records",
+          "summary": "Read, clean, validate, and write student records using files and exceptions.",
+          "cards": {
+            "sketch0": {
+              "title": "Clean student records step by step"
+            },
+            "project": {
+              "title": "Clean Student Records"
+            }
+          },
+          "projectSteps": {
+            "mp_1": {
+              "title": "Read the student file"
+            },
+            "mp_2": {
+              "title": "Clean and validate one row"
+            },
+            "mp_3": {
+              "title": "Skip bad rows and collect records"
+            },
+            "mp_4": {
+              "title": "Write cleaned records"
+            }
+          },
+          "quiz": {
+            "mp-1-read-student-file": {
+              "title": "Read the student file",
+              "prompt": "Module project step: Read the student file.",
+              "hint": "Build on the previous step and keep the data file in place.",
+              "help": {
+                "concept": "This file-processing project grows from reading raw text to writing cleaned output.",
+                "hint_1": "Use the starter code from the previous step.",
+                "hint_2": "Handle messy rows without crashing."
+              },
+              "starterCode": "# Read data/students.csv and print every line without extra blank lines.\n"
+            },
+            "mp-2-clean-one-row": {
+              "title": "Clean and validate one row",
+              "prompt": "Module project step: Clean and validate one row.",
+              "hint": "Build on the previous step and keep the data file in place.",
+              "help": {
+                "concept": "This file-processing project grows from reading raw text to writing cleaned output.",
+                "hint_1": "Use the starter code from the previous step.",
+                "hint_2": "Handle messy rows without crashing."
+              },
+              "starterCode": "def clean_row(line):\n    # TODO: split name and score, clean the name, and convert score to int.\n    pass\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        print(clean_row(line))\n"
+            },
+            "mp-3-skip-bad-rows": {
+              "title": "Skip bad rows and collect records",
+              "prompt": "Module project step: Skip bad rows and collect records.",
+              "hint": "Build on the previous step and keep the data file in place.",
+              "help": {
+                "concept": "This file-processing project grows from reading raw text to writing cleaned output.",
+                "hint_1": "Use the starter code from the previous step.",
+                "hint_2": "Handle messy rows without crashing."
+              },
+              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        # TODO: skip bad rows instead of printing bad row.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n"
+            },
+            "mp-4-write-clean-records": {
+              "title": "Write cleaned records",
+              "prompt": "Module project step: Write cleaned records.",
+              "hint": "Build on the previous step and keep the data file in place.",
+              "help": {
+                "concept": "This file-processing project grows from reading raw text to writing cleaned output.",
+                "hint_1": "Use the starter code from the previous step.",
+                "hint_2": "Handle messy rows without crashing."
+              },
+              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# TODO: write cleaned records to output/clean_students.csv.\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "module-7-clean-student-records": {
+          "sketch-1": {
+            "title": "Clean student records step by step",
+            "bodyMarkdown": "In this module project, you will turn messy file input into clean output. Each step begins from the previous canonical solution."
+          }
+        }
+      }
+    }
+  }
+}

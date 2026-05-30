@@ -68,6 +68,11 @@ docker compose -f docker-compose.prod.yml logs -f runner
 
 
 
+pnpm curr:course -- publish python python-data-functions --live-subject python-data-functions --force
+
+
+
+
 
 
 

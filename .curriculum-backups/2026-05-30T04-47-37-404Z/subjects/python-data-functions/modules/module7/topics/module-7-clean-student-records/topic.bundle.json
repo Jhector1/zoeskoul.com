@@ -1,0 +1,421 @@
+{
+  "topicId": "module-7-clean-student-records",
+  "subjectSlug": "python-data-functions",
+  "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
+  "sectionSlug": "python-data-functions-python-7-module-project",
+  "prefix": "py7",
+  "minutes": 70,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.label",
+    "summaryKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.cards.sketch0.title",
+      "sketchId": "module-7-clean-student-records-sketch-1",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.cards.project.title",
+      "project": {
+        "difficulty": "medium",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "mp_1",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.projectSteps.mp_1.title",
+            "exerciseKey": "mp-1-read-student-file",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_2",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.projectSteps.mp_2.title",
+            "exerciseKey": "mp-2-clean-one-row",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_3",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.projectSteps.mp_3.title",
+            "exerciseKey": "mp-3-skip-bad-rows",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_4",
+            "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.projectSteps.mp_4.title",
+            "exerciseKey": "mp-4-write-clean-records",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "module-7-clean-student-records-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.sketch-1.title",
+      "bodyKey": "sketches.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.sketch-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "mp-1-read-student-file",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Read data/students.csv and print every line without extra blank lines.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read data/students.csv and print every line without extra blank lines.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/students.csv",
+          "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+          "language": "csv"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read data/students.csv and print every line without extra blank lines.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read data/students.csv and print every line without extra blank lines.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava,92\nMia,not-a-score\nZoe,87\nleo  ,74\n",
+            "match": "includes"
+          }
+        ],
+        "solutionCode": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/students.csv",
+          "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+          "language": "csv"
+        }
+      ]
+    },
+    {
+      "id": "mp-2-clean-one-row",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "def clean_row(line):\n    # TODO: split name and score, clean the name, and convert score to int.\n    pass\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        print(clean_row(line))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_row(line):\n    # TODO: split name and score, clean the name, and convert score to int.\n    pass\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        print(clean_row(line))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/students.csv",
+          "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+          "language": "csv"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clean_row(line):\n    # TODO: split name and score, clean the name, and convert score to int.\n    pass\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        print(clean_row(line))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_row(line):\n    # TODO: split name and score, clean the name, and convert score to int.\n    pass\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        print(clean_row(line))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "{'name': 'Ava', 'score': 92}\nbad row\n{'name': 'Zoe', 'score': 87}\n{'name': 'Leo', 'score': 74}\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            print(clean_row(line))\n        except ValueError:\n            print(\"bad row\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            print(clean_row(line))\n        except ValueError:\n            print(\"bad row\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            print(clean_row(line))\n        except ValueError:\n            print(\"bad row\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/students.csv",
+          "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+          "language": "csv"
+        }
+      ]
+    },
+    {
+      "id": "mp-3-skip-bad-rows",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        # TODO: skip bad rows instead of printing bad row.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        # TODO: skip bad rows instead of printing bad row.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/students.csv",
+          "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+          "language": "csv"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        # TODO: skip bad rows instead of printing bad row.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        # TODO: skip bad rows instead of printing bad row.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "[{'name': 'Ava', 'score': 92}, {'name': 'Zoe', 'score': 87}, {'name': 'Leo', 'score': 74}]\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/students.csv",
+          "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+          "language": "csv"
+        }
+      ]
+    },
+    {
+      "id": "mp-4-write-clean-records",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# TODO: write cleaned records to output/clean_students.csv.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# TODO: write cleaned records to output/clean_students.csv.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/students.csv",
+          "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+          "language": "csv"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# TODO: write cleaned records to output/clean_students.csv.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# TODO: write cleaned records to output/clean_students.csv.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Wrote 3 clean records\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/students.csv",
+          "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+          "language": "csv"
+        }
+      ]
+    }
+  ]
+}

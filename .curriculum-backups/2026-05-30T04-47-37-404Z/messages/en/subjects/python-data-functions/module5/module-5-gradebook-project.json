@@ -1,0 +1,92 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "module-5-gradebook-project": {
+          "label": "Module Project: Build a Gradebook",
+          "summary": "Use lists and dictionaries together to build a small gradebook program.",
+          "cards": {
+            "sketch0": {
+              "title": "Build a gradebook step by step"
+            },
+            "project": {
+              "title": "Gradebook Builder"
+            }
+          },
+          "projectSteps": {
+            "mp_1": {
+              "title": "Create a student list"
+            },
+            "mp_2": {
+              "title": "Store scores in a dictionary"
+            },
+            "mp_3": {
+              "title": "Print high-scoring students"
+            },
+            "mp_4": {
+              "title": "Sort the grade summary"
+            }
+          },
+          "quiz": {
+            "mp-1-create-student-list": {
+              "title": "Create a student list",
+              "prompt": "Module project step: Create a student list.",
+              "hint": "Build on the starter code from the previous step.",
+              "help": {
+                "concept": "This project grows one clean program step by step.",
+                "hint_1": "Read the TODO comments carefully.",
+                "hint_2": "The starter code is the canonical solution from the previous step plus the next task."
+              },
+              "starterCode": "students = []\n\n# Add Ava, Mia, and Zoe to the list in that order.\n# Then print the list.\n"
+            },
+            "mp-2-store-scores": {
+              "title": "Store scores in a dictionary",
+              "prompt": "Module project step: Store scores in a dictionary.",
+              "hint": "Build on the starter code from the previous step.",
+              "help": {
+                "concept": "This project grows one clean program step by step.",
+                "hint_1": "Read the TODO comments carefully.",
+                "hint_2": "The starter code is the canonical solution from the previous step plus the next task."
+              },
+              "starterCode": "students = []\nstudents.append('Ava')\nstudents.append('Mia')\nstudents.append('Zoe')\nprint(students)\n\n# Now create a dictionary named scores for the same students.\n# Ava has 92, Mia has 85, and Zoe has 97.\n# Print the dictionary.\n"
+            },
+            "mp-3-print-passing-students": {
+              "title": "Print high-scoring students",
+              "prompt": "Module project step: Print high-scoring students.",
+              "hint": "Build on the starter code from the previous step.",
+              "help": {
+                "concept": "This project grows one clean program step by step.",
+                "hint_1": "Read the TODO comments carefully.",
+                "hint_2": "The starter code is the canonical solution from the previous step plus the next task."
+              },
+              "starterCode": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(students)\nprint(scores)\n\n# Print only students with scores of 90 or higher, one per line.\n"
+            },
+            "mp-4-sort-grade-summary": {
+              "title": "Sort the grade summary",
+              "prompt": "Module project step: Sort the grade summary.",
+              "hint": "Build on the starter code from the previous step.",
+              "help": {
+                "concept": "This project grows one clean program step by step.",
+                "hint_1": "Read the TODO comments carefully.",
+                "hint_2": "The starter code is the canonical solution from the previous step plus the next task."
+              },
+              "starterCode": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nfor name in students:\n    if scores[name] >= 90:\n        print(name)\n\n# Build a list of (name, score) pairs sorted by score from high to low.\n# Print each line as: name: score\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "module-5-gradebook-project": {
+          "sketch-1": {
+            "title": "Build a gradebook step by step",
+            "bodyMarkdown": "In this module project, you will combine the collection skills from this module. Each step starts from the previous canonical solution, then adds one new feature."
+          }
+        }
+      }
+    }
+  }
+}

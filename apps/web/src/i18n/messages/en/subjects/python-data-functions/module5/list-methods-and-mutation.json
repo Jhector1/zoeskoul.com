@@ -22,12 +22,6 @@
               "title": "Practice List Mutation Programs"
             }
           },
-          "tryIt": {
-            "try_append_ten_to_list": {
-              "title": "Try it yourself",
-              "prompt": "Start with `numbers = [3, 1, 2]`. Add `10` to the end of the list, then print the updated list."
-            }
-          },
           "projectSteps": {
             "ci_1": {
               "title": "Add an item and print the list"
@@ -169,49 +163,100 @@
                 "pop"
               ]
             },
-            "try-append-ten-to-list": {
-              "title": "Append 10 to a list",
-              "prompt": "Start with `numbers = [3, 1, 2]`. Add `10` to the end of the list, then print the updated list.",
-              "hint": "Use the list method that adds one value to the end.",
-              "help": {
-                "concept": "`append(value)` mutates the original list by adding one item to the end.",
-                "hint_1": "Call `numbers.append(10)` before printing.",
-                "hint_2": "Your final line should print the changed list."
-              },
-              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list."
-            },
             "ci-1": {
               "title": "Add an item and print the list",
-              "prompt": "Write a program that reads one word from input, starts with the list `[\"pen\", \"pencil\"]`, appends the input word, and prints the final list.",
+              "prompt": "Complete this project step: Add an item and print the list.\n\nRequirements:\n- Add the input item to the list.\n- Then print the updated list.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `eraser`, the output should be `['pen', 'pencil', 'eraser']`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list."
             },
             "ci-2": {
               "title": "Remove a value and show the result",
-              "prompt": "Write a program that reads one word from input, starts with `['red', 'blue', 'green']`, removes the input word from the list, and prints the updated list. You may assume the input value is always in the list.",
+              "prompt": "Complete this project step: Remove a value and show the result.\n\nRequirements:\n- Remove the input color from the list.\n- Then print the updated list.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `blue`, the output should be `['red', 'green']`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Remove a value and show the result\".",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list."
             },
             "ci-3": {
               "title": "Sort numbers from input",
-              "prompt": "Write a program that reads three integers from input, one per line, stores them in a list, sorts the list in ascending order, and prints the sorted list.",
+              "prompt": "Complete this project step: Sort numbers from input.\n\nRequirements:\n- Sort the list.\n- Then print the sorted list.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `9\n2\n5`, the output should be `[2, 5, 9]`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list."
+            },
+            "try-list-methods-and-mutation-checkpoint": {
+              "title": "Append 10 to a list",
+              "prompt": "Start with `numbers = [3, 1, 2]`. Add `10` to the end of the list, then print the updated list. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Use `append()` to add one item to the end.",
+              "help": {
+                "concept": "`append(value)` mutates the original list by adding one item to the end.",
+                "hint_1": "Use `append()` to add one item to the end.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n"
+            },
+            "try-list-methods-and-mutation-sketch0": {
+              "title": "Append 10 and print the list",
+              "prompt": "Use `append(10)` to mutate the list, then print the changed list. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"What mutation means for lists\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n"
+            },
+            "try-list-methods-and-mutation-sketch1": {
+              "title": "Remove banana and pop the last item",
+              "prompt": "Use `remove()` and `pop()` to change the list and show what remains. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Using append, remove, and pop\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "fruits = ['apple', 'banana', 'cherry']\n\n# Remove 'banana'.\n# Pop the last remaining item into last_item.\n# Print fruits, then print last_item.\n"
+            },
+            "try-list-methods-and-mutation-sketch2": {
+              "title": "Sort and print names",
+              "prompt": "Call `sort()` before printing so the original list is ordered. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Sorting lists and watching for common mistakes\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "names = ['Zoe', 'Ava', 'Mia']\n\n# Sort the list alphabetically.\n# Then print the sorted list.\n"
+            }
+          },
+          "tryIt": {
+            "try_list_methods_and_mutation_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Start with `numbers = [3, 1, 2]`. Add `10` to the end of the list, then print the updated list."
+            },
+            "try_list_methods_and_mutation_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Use `append(10)` to mutate the list, then print the changed list."
+            },
+            "try_list_methods_and_mutation_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Use `remove()` and `pop()` to change the list and show what remains."
+            },
+            "try_list_methods_and_mutation_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Call `sort()` before printing so the original list is ordered."
             }
           }
         }

@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.cards.sketch0.title",
       "sketchId": "sketch-1",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-decomposition-and-refactoring-sketch0",
+        "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.tryIt.try_decomposition_and_refactoring_sketch0.title",
+        "promptKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.tryIt.try_decomposition_and_refactoring_sketch0.prompt",
+        "exerciseKey": "try-decomposition-and-refactoring-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.cards.sketch1.title",
       "sketchId": "sketch-2",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-decomposition-and-refactoring-sketch1",
+        "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.tryIt.try_decomposition_and_refactoring_sketch1.title",
+        "promptKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.tryIt.try_decomposition_and_refactoring_sketch1.prompt",
+        "exerciseKey": "try-decomposition-and-refactoring-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.cards.sketch2.title",
       "sketchId": "sketch-3",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-decomposition-and-refactoring-sketch2",
+        "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.tryIt.try_decomposition_and_refactoring_sketch2.title",
+        "promptKey": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.tryIt.try_decomposition_and_refactoring_sketch2.prompt",
+        "exerciseKey": "try-decomposition-and-refactoring-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -262,6 +298,90 @@
       }
     },
     {
+      "id": "try-decomposition-and-refactoring-checkpoint",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-checkpoint",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_title(text):\n    return text.strip().title()\n\nprint(clean_title(\"  python helper  \"))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def clean_title(text):\n    return text.strip().title()\n\nprint(clean_title(\"  python helper  \"))\n",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "clean_title",
+            "args": [
+              "  python helper  "
+            ],
+            "expected": "Python Helper"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "clean_title",
+            "args": [
+              "DATA report"
+            ],
+            "expected": "Data Report"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_title(text):\n    return text.strip().title()\n\nprint(clean_title(\"  python helper  \"))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_title(text):\n    return text.strip().title()\n\nprint(clean_title(\"  python helper  \"))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
       "id": "ci-1",
       "kind": "code_input",
       "purpose": "project",
@@ -286,6 +406,15 @@
           {
             "path": "main.py",
             "content": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_name(name):\n    return name.strip().title()",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -325,8 +454,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_name(name):\n    return name.strip().title()",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_name(name):\n    return name.strip().title()",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-2",
@@ -353,6 +500,15 @@
           {
             "path": "main.py",
             "content": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def word_count(text):\n    return len(text.split())\n\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\"",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -404,8 +560,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def word_count(text):\n    return len(text.split())\n\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def word_count(text):\n    return len(text.split())\n\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-3",
@@ -432,6 +606,15 @@
           {
             "path": "main.py",
             "content": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def double(number):\n    return number * 2\n\n\ndef triple(number):\n    return number * 3\n\n\ndef combined_total(a, b):\n    return double(a) + triple(b)",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -498,6 +681,261 @@
           },
           {
             "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def double(number):\n    return number * 2\n\n\ndef triple(number):\n    return number * 3\n\n\ndef combined_total(a, b):\n    return double(a) + triple(b)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def double(number):\n    return number * 2\n\n\ndef triple(number):\n    return number * 3\n\n\ndef combined_total(a, b):\n    return double(a) + triple(b)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-decomposition-and-refactoring-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0",
+      "language": "python",
+      "starterCode": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_text(text):\n    return text.strip().lower()\n\nprint(clean_text('  HELLO  '))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_text(text):\n    return text.strip().lower()\n\nprint(clean_text('  HELLO  '))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def clean_text(text):\n    return text.strip().lower()\n\nprint(clean_text('  HELLO  '))\n",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "clean_text",
+            "args": [
+              "  HELLO  "
+            ],
+            "expected": "hello"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "clean_text",
+            "args": [
+              " MiXeD "
+            ],
+            "expected": "mixed"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_text(text):\n    return text.strip().lower()\n\nprint(clean_text('  HELLO  '))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-decomposition-and-refactoring-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1",
+      "language": "python",
+      "starterCode": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def get_first_name(full_name):\n    return full_name.split()[0]\n\nprint(get_first_name('Ava Smith'))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_first_name(full_name):\n    return full_name.split()[0]\n\nprint(get_first_name('Ava Smith'))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def get_first_name(full_name):\n    return full_name.split()[0]\n\nprint(get_first_name('Ava Smith'))\n",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "get_first_name",
+            "args": [
+              "Ava Smith"
+            ],
+            "expected": "Ava"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "get_first_name",
+            "args": [
+              "Mia Chen"
+            ],
+            "expected": "Mia"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_first_name(full_name):\n    return full_name.split()[0]\n\nprint(get_first_name('Ava Smith'))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-decomposition-and-refactoring-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2",
+      "language": "python",
+      "starterCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    return 'Badge: ' + clean(name)\n\nprint(badge('  ava  '))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    return 'Badge: ' + clean(name)\n\nprint(badge('  ava  '))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Badge: Ava\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    return 'Badge: ' + clean(name)\n\nprint(badge('  ava  '))\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    return 'Badge: ' + clean(name)\n\nprint(badge('  ava  '))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
           }
         ]
       }

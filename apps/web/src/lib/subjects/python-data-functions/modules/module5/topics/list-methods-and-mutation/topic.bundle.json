@@ -26,10 +26,10 @@
       "sketchId": "sketch-1",
       "height": 420,
       "tryIt": {
-        "id": "try-append-ten-to-list",
-        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_append_ten_to_list.title",
-        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_append_ten_to_list.prompt",
-        "exerciseKey": "try-append-ten-to-list",
+        "id": "try-list-methods-and-mutation-sketch0",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch0.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch0.prompt",
+        "exerciseKey": "try-list-methods-and-mutation-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -43,14 +43,38 @@
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch1.title",
       "sketchId": "sketch-2",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-list-methods-and-mutation-sketch1",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch1.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch1.prompt",
+        "exerciseKey": "try-list-methods-and-mutation-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch2.title",
       "sketchId": "sketch-3",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-list-methods-and-mutation-sketch2",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch2.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch2.prompt",
+        "exerciseKey": "try-list-methods-and-mutation-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -272,17 +296,18 @@
       }
     },
     {
-      "id": "try-append-ten-to-list",
+      "id": "try-list-methods-and-mutation-checkpoint",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-append-ten-to-list",
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-checkpoint",
       "language": "python",
-      "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.",
+      "entryFilePath": "main.py",
+      "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.",
+          "content": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -291,11 +316,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.",
+        "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.",
+            "content": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -312,8 +346,26 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)"
-      }
+        "solutionCode": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-1",
@@ -344,6 +396,15 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -361,8 +422,26 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)"
-      }
+        "solutionCode": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-2",
@@ -393,6 +472,15 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -410,8 +498,26 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)"
-      }
+        "solutionCode": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-3",
@@ -442,6 +548,15 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -459,7 +574,238 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)"
+        "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-list-methods-and-mutation-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0",
+      "language": "python",
+      "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "[3, 1, 2, 10]\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-list-methods-and-mutation-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1",
+      "language": "python",
+      "starterCode": "fruits = ['apple', 'banana', 'cherry']\n\n# Remove 'banana'.\n# Pop the last remaining item into last_item.\n# Print fruits, then print last_item.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "fruits = ['apple', 'banana', 'cherry']\n\n# Remove 'banana'.\n# Pop the last remaining item into last_item.\n# Print fruits, then print last_item.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "fruits = ['apple', 'banana', 'cherry']\n\n# Remove 'banana'.\n# Pop the last remaining item into last_item.\n# Print fruits, then print last_item.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "fruits = ['apple', 'banana', 'cherry']\n\n# Remove 'banana'.\n# Pop the last remaining item into last_item.\n# Print fruits, then print last_item.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "['apple']\ncherry\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-list-methods-and-mutation-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2",
+      "language": "python",
+      "starterCode": "names = ['Zoe', 'Ava', 'Mia']\n\n# Sort the list alphabetically.\n# Then print the sorted list.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "names = ['Zoe', 'Ava', 'Mia']\n\n# Sort the list alphabetically.\n# Then print the sorted list.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "names = ['Zoe', 'Ava', 'Mia']\nnames.sort()\nprint(names)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "names = ['Zoe', 'Ava', 'Mia']\n\n# Sort the list alphabetically.\n# Then print the sorted list.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "names = ['Zoe', 'Ava', 'Mia']\n\n# Sort the list alphabetically.\n# Then print the sorted list.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "names = ['Zoe', 'Ava', 'Mia']\nnames.sort()\nprint(names)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "['Ava', 'Mia', 'Zoe']\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "names = ['Zoe', 'Ava', 'Mia']\nnames.sort()\nprint(names)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "names = ['Zoe', 'Ava', 'Mia']\nnames.sort()\nprint(names)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
       }
     }
   ]

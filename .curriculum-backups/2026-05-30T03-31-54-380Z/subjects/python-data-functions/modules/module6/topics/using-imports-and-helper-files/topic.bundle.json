@@ -1,0 +1,597 @@
+{
+  "topicId": "using-imports-and-helper-files",
+  "subjectSlug": "python-data-functions",
+  "moduleSlug": "python-6-functions-and-modularity",
+  "sectionSlug": "python-data-functions-python-6-function-design",
+  "prefix": "py6",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.label",
+    "summaryKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch0.title",
+      "sketchId": "sk1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch1.title",
+      "sketchId": "sk2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch2.title",
+      "sketchId": "sk3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "using-imports-create-name-module",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.projectSteps.using-imports-create-name-module.title",
+            "exerciseKey": "using-imports-create-name-module",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "using-imports-add-badge-module",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.projectSteps.using-imports-add-badge-module.title",
+            "exerciseKey": "using-imports-add-badge-module",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "using-imports-build-report-module",
+            "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.projectSteps.using-imports-build-report-module.title",
+            "exerciseKey": "using-imports-build-report-module",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sk1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk1.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk1.bodyMarkdown"
+    },
+    {
+      "id": "sk2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk2.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk2.bodyMarkdown"
+    },
+    {
+      "id": "sk3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk3.title",
+      "bodyKey": "sketches.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.sk3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "q6",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q6",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "q7",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q7",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "clean_name"
+      }
+    },
+    {
+      "id": "q8",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q8",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "tools"
+      }
+    },
+    {
+      "id": "using-imports-create-name-module",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.using-imports-create-name-module",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Create a folder named tools.\n# Inside it, create tools/names.py.\n# Define clean_name(text) in that file.\n\nraw_name = input()\n\n# Import clean_name from tools.names.\n# Print the cleaned name.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Create a folder named tools.\n# Inside it, create tools/names.py.\n# Define clean_name(text) in that file.\n\nraw_name = input()\n\n# Import clean_name from tools.names.\n# Print the cleaned name.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "tools"
+        ],
+        "requiredFiles": [
+          "tools/names.py"
+        ]
+      },
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Create a folder named tools.\n# Inside it, create tools/names.py.\n# Define clean_name(text) in that file.\n\nraw_name = input()\n\n# Import clean_name from tools.names.\n# Print the cleaned name.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Create a folder named tools.\n# Inside it, create tools/names.py.\n# Define clean_name(text) in that file.\n\nraw_name = input()\n\n# Import clean_name from tools.names.\n# Print the cleaned name.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "tools"
+          ],
+          "requiredFiles": [
+            "tools/names.py"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  aVA  \n",
+            "stdout": "Ava\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "mARCO\n",
+            "stdout": "Marco\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "# Tools package for this mini app.\n",
+          "language": "python"
+        },
+        {
+          "path": "tools/names.py",
+          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "language": "python"
+        }
+      ]
+    },
+    {
+      "id": "using-imports-add-badge-module",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.using-imports-add-badge-module",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\n\n# Create tools/badges.py.\n# Import make_badge from tools.badges.\n# Clean the name, build the badge, and print it.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\n\n# Create tools/badges.py.\n# Import make_badge from tools.badges.\n# Clean the name, build the badge, and print it.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "# Tools package for this mini app.\n",
+          "language": "python",
+          "readOnly": true
+        },
+        {
+          "path": "tools/names.py",
+          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "language": "python",
+          "readOnly": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "tools"
+        ],
+        "requiredFiles": [
+          "tools/names.py",
+          "tools/badges.py"
+        ]
+      },
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\n\n# Create tools/badges.py.\n# Import make_badge from tools.badges.\n# Clean the name, build the badge, and print it.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\n\n# Create tools/badges.py.\n# Import make_badge from tools.badges.\n# Clean the name, build the badge, and print it.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "# Tools package for this mini app.\n",
+            "language": "python",
+            "readOnly": true
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python",
+            "readOnly": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "tools"
+          ],
+          "requiredFiles": [
+            "tools/names.py",
+            "tools/badges.py"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  lina  \nartist\n",
+            "stdout": "ARTIST badge: Lina\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "kai\ncoder\n",
+            "stdout": "CODER badge: Kai\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "# Tools package for this mini app.\n",
+          "language": "python"
+        },
+        {
+          "path": "tools/names.py",
+          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "language": "python"
+        },
+        {
+          "path": "tools/badges.py",
+          "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+          "language": "python"
+        }
+      ]
+    },
+    {
+      "id": "using-imports-build-report-module",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.using-imports-build-report-module",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\npoints = int(input())\n\n# Create tools/reports.py.\n# Import mission_report from tools.reports.\n# Print the final mission report.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\npoints = int(input())\n\n# Create tools/reports.py.\n# Import mission_report from tools.reports.\n# Print the final mission report.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "# Tools package for this mini app.\n",
+          "language": "python",
+          "readOnly": true
+        },
+        {
+          "path": "tools/names.py",
+          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "language": "python",
+          "readOnly": true
+        },
+        {
+          "path": "tools/badges.py",
+          "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+          "language": "python",
+          "readOnly": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "tools"
+        ],
+        "requiredFiles": [
+          "tools/names.py",
+          "tools/badges.py",
+          "tools/reports.py"
+        ]
+      },
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\npoints = int(input())\n\n# Create tools/reports.py.\n# Import mission_report from tools.reports.\n# Print the final mission report.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\npoints = int(input())\n\n# Create tools/reports.py.\n# Import mission_report from tools.reports.\n# Print the final mission report.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "# Tools package for this mini app.\n",
+            "language": "python",
+            "readOnly": true
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python",
+            "readOnly": true
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+            "language": "python",
+            "readOnly": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "tools"
+          ],
+          "requiredFiles": [
+            "tools/names.py",
+            "tools/badges.py",
+            "tools/reports.py"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  zoe  \nscout\n18\n",
+            "stdout": "Mission report: SCOUT badge: Zoe has 18 points\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "max\nbuilder\n25\n",
+            "stdout": "Mission report: BUILDER badge: Max has 25 points\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\nfrom tools.reports import mission_report\n\nraw_name = input()\nrole = input()\npoints = int(input())\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(mission_report(badge, points))\n"
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\nfrom tools.reports import mission_report\n\nraw_name = input()\nrole = input()\npoints = int(input())\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(mission_report(badge, points))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "# Tools package for this mini app.\n",
+          "language": "python"
+        },
+        {
+          "path": "tools/names.py",
+          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "language": "python"
+        },
+        {
+          "path": "tools/badges.py",
+          "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "tools/reports.py",
+          "content": "def mission_report(badge, points):\n    return f\"Mission report: {badge} has {points} points\"\n",
+          "language": "python"
+        }
+      ]
+    }
+  ]
+}

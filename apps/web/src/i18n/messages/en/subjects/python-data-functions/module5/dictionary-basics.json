@@ -164,36 +164,98 @@
             },
             "ci-make-dictionary": {
               "title": "Return a simple dictionary",
-              "prompt": "Write a function `make_book(title, pages)` that returns a dictionary with two keys: `\"title\"` and `\"pages\"`. Do not print anything.",
+              "prompt": "Complete this project step: Return a simple dictionary.\n\nRequirements:\n- return a dictionary with keys \"title\" and \"pages\"\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass"
             },
             "ci-get-score": {
               "title": "Look up a value in a dictionary",
-              "prompt": "Write a function `get_score(scores, name)` that returns the value stored for `name` in the `scores` dictionary. Do not print anything.",
+              "prompt": "Complete this project step: Look up a value in a dictionary.\n\nRequirements:\n- return the score for the given name\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Look up a value in a dictionary\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Look up a value in a dictionary\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def get_score(scores, name):\n    # return the score for the given name\n    pass"
             },
             "ci-update-dictionary": {
               "title": "Add or update a dictionary entry",
-              "prompt": "Write a function `set_price(prices, item, amount)` that updates the `prices` dictionary so `item` maps to `amount`, then returns the dictionary. Do not print anything.",
+              "prompt": "Complete this project step: Add or update a dictionary entry.\n\nRequirements:\n- update the dictionary and return it\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Add or update a dictionary entry\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Add or update a dictionary entry\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass"
+            },
+            "try-dictionary-basics-checkpoint": {
+              "title": "Create and read a dictionary",
+              "prompt": "Create a dictionary for `name` and `score`, then print the score. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Use the key `\"score\"` to read the value.",
+              "help": {
+                "concept": "A dictionary stores values under named keys.",
+                "hint_1": "Use the key `\"score\"` to read the value.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "student = {}\n\n# Store name Ava and score 92.\n# Then print the score.\n"
+            },
+            "try-dictionary-basics-sketch0": {
+              "title": "Print a dictionary value",
+              "prompt": "Use the key `'name'` to read a value from the dictionary. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"What a dictionary is\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "profile = {'name': 'Ava', 'age': 12}\n\n# Print the name from profile.\n"
+            },
+            "try-dictionary-basics-sketch1": {
+              "title": "Update an age",
+              "prompt": "Assign a new value to an existing dictionary key. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Looking up values by key\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "profile = {'name': 'Mia', 'age': 11}\n\n# Change age to 12.\n# Then print the profile dictionary.\n"
+            },
+            "try-dictionary-basics-sketch2": {
+              "title": "Create and print a score dictionary",
+              "prompt": "Build a dictionary with two key-value pairs, then print it. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Creating and updating dictionary entries\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "# Create a dictionary named scores with Ava: 92 and Mia: 85.\n# Then print scores.\n"
+            }
+          },
+          "tryIt": {
+            "try_dictionary_basics_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Create a dictionary for `name` and `score`, then print the score."
+            },
+            "try_dictionary_basics_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Use the key `'name'` to read a value from the dictionary."
+            },
+            "try_dictionary_basics_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Assign a new value to an existing dictionary key."
+            },
+            "try_dictionary_basics_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Build a dictionary with two key-value pairs, then print it."
             }
           }
         }

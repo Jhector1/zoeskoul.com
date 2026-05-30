@@ -165,36 +165,98 @@
             },
             "ci-read-and-print": {
               "title": "Print a file's contents",
-              "prompt": "Open the provided file `data/message.txt`, read all of its text, and print it exactly as it appears in the file.",
+              "prompt": "Complete this project step: Print a file's contents.\n\nRequirements:\n- read the file and print its contents\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `Hello from file reading!`.",
               "hint": "Read the task \"Print a file's contents\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print a file's contents\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass"
             },
             "ci-first-line": {
               "title": "Print only the first line",
-              "prompt": "Open the provided file `data/notes.txt`, read just the first line, remove the ending newline if there is one, and print that first line only.",
+              "prompt": "Complete this project step: Print only the first line.\n\nRequirements:\n- read the first line only\n- print it without the ending newline\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `Apples`.",
               "hint": "Read the task \"Print only the first line\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print only the first line\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass"
             },
             "ci-count-lines": {
               "title": "Count lines in a text file",
-              "prompt": "Open the provided file `data/list.txt`, count how many lines it contains, and print the count as a number.",
+              "prompt": "Complete this project step: Count lines in a text file.\n\nRequirements:\n- count the lines and print the number\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `3`.",
               "hint": "Read the task \"Count lines in a text file\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Count lines in a text file\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass"
+            },
+            "try-reading-text-files-checkpoint": {
+              "title": "Read a text file",
+              "prompt": "Read `data/note.txt` and print its contents without adding extra text. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Use `with open(\"data/note.txt\") as file:` and `file.read()`.",
+              "help": {
+                "concept": "File reading lets a program load text from disk.",
+                "hint_1": "Use `with open(\"data/note.txt\") as file:` and `file.read()`.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "# Read data/note.txt and print its contents.\n"
+            },
+            "try-reading-text-files-sketch0": {
+              "title": "Read and print a note file",
+              "prompt": "Open `note.txt`, read it, and print the saved text. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Why read text files?\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "# Read note.txt and print its contents without extra blank lines.\n"
+            },
+            "try-reading-text-files-sketch1": {
+              "title": "Print each line from a file",
+              "prompt": "Loop through a file one line at a time. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Reading all text or line by line\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "# Read names.txt and print each line without extra blank lines.\n"
+            },
+            "try-reading-text-files-sketch2": {
+              "title": "Count file lines",
+              "prompt": "Use a counter while reading a file. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Relative paths and safe file access\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "count = 0\n\n# Read names.txt, count the lines, and print count.\n"
+            }
+          },
+          "tryIt": {
+            "try_reading_text_files_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Read `data/note.txt` and print its contents without adding extra text."
+            },
+            "try_reading_text_files_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Open `note.txt`, read it, and print the saved text."
+            },
+            "try_reading_text_files_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Loop through a file one line at a time."
+            },
+            "try_reading_text_files_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Use a counter while reading a file."
             }
           }
         }

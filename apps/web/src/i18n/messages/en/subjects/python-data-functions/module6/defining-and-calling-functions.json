@@ -164,36 +164,98 @@
             },
             "ci-make-greeting": {
               "title": "Write a greeting function",
-              "prompt": "Define a function named `make_greeting` that takes one parameter `name` and returns the string `\"Hello, \"` followed by the name. Do not print inside the function.",
+              "prompt": "Complete this project step: Write a greeting function.\n\nRequirements:\n- return a greeting string\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Write a greeting function\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Write a greeting function\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass"
             },
             "ci-square-number": {
               "title": "Return the square",
-              "prompt": "Define a function named `square` that takes one parameter `number` and returns its square. For example, `square(4)` should return `16`.",
+              "prompt": "Complete this project step: Return the square.\n\nRequirements:\n- return the square of number\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def square(number):\n    # return the square of number\n    pass"
             },
             "ci-full-name": {
               "title": "Combine first and last name",
-              "prompt": "Define a function named `full_name` that takes two parameters, `first` and `last`, and returns them joined with a space in between. For example, `full_name(\"Ada\", \"Lovelace\")` should return `\"Ada Lovelace\"`.",
+              "prompt": "Complete this project step: Combine first and last name.\n\nRequirements:\n- return the full name as one string\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass"
+            },
+            "try-defining-and-calling-functions-checkpoint": {
+              "title": "Define and call a function",
+              "prompt": "Define `say_hello()` so it prints `Hello from a function!`, then call it.",
+              "hint": "Put the `print()` inside the function body, then call the function below it.",
+              "help": {
+                "concept": "A function groups statements that can be run by calling the function name.",
+                "hint_1": "Put the `print()` inside the function body, then call the function below it.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "# Define say_hello() below.\n\n"
+            },
+            "try-defining-and-calling-functions-sketch0": {
+              "title": "Define and call greet",
+              "prompt": "Define the function before you call it. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"What a function does\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "# Define greet(name) so it returns 'Hello, ' + name.\n# Then print greet('Ava').\n"
+            },
+            "try-defining-and-calling-functions-sketch1": {
+              "title": "Call a square function",
+              "prompt": "Call the function and print its return value. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Calling functions with arguments\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def square(number):\n    return number * number\n\n# Print square(5).\n"
+            },
+            "try-defining-and-calling-functions-sketch2": {
+              "title": "Use a helper function twice",
+              "prompt": "Reuse the same function for two different inputs. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Functions can return values\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def shout(text):\n    return text.upper()\n\n# Print shout('go') and shout('team'), one per line.\n"
+            }
+          },
+          "tryIt": {
+            "try_defining_and_calling_functions_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Define `say_hello()` so it prints `Hello from a function!`, then call it."
+            },
+            "try_defining_and_calling_functions_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Define the function before you call it."
+            },
+            "try_defining_and_calling_functions_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Call the function and print its return value."
+            },
+            "try_defining_and_calling_functions_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Reuse the same function for two different inputs."
             }
           }
         }

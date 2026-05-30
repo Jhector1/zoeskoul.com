@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch0.title",
       "sketchId": "csv-dictreader-basics",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-simple-csv-processing-sketch0",
+        "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.tryIt.try_simple_csv_processing_sketch0.title",
+        "promptKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.tryIt.try_simple_csv_processing_sketch0.prompt",
+        "exerciseKey": "try-simple-csv-processing-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch1.title",
       "sketchId": "csv-cleaning-values",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-simple-csv-processing-sketch1",
+        "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.tryIt.try_simple_csv_processing_sketch1.title",
+        "promptKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.tryIt.try_simple_csv_processing_sketch1.prompt",
+        "exerciseKey": "try-simple-csv-processing-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.cards.sketch2.title",
       "sketchId": "csv-safe-processing",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-simple-csv-processing-sketch2",
+        "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.tryIt.try_simple_csv_processing_sketch2.title",
+        "promptKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.tryIt.try_simple_csv_processing_sketch2.prompt",
+        "exerciseKey": "try-simple-csv-processing-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -263,6 +299,83 @@
       }
     },
     {
+      "id": "try-simple-csv-processing-checkpoint",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "row = input()\n\n# Split the row and print the name and score.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "row = input()\n\n# Split the row and print the name and score.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "row = input()\n\n# Split the row and print the name and score.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "row = input()\n\n# Split the row and print the name and score.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "row = input()\nname, score = row.split(\",\")\nprint(name.strip())\nprint(score.strip())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Ava,92\n",
+            "stdout": "Ava\n92\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Mia,85\n",
+            "stdout": "Mia\n85\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "row = input()\nname, score = row.split(\",\")\nprint(name.strip())\nprint(score.strip())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "row = input()\nname, score = row.split(\",\")\nprint(name.strip())\nprint(score.strip())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "row = input()\nname, score = row.split(\",\")\nprint(name.strip())\nprint(score.strip())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
       "id": "ci-print-clean-names",
       "kind": "code_input",
       "purpose": "project",
@@ -298,6 +411,15 @@
             "content": "name,score\n Ava ,9\nBen,7\n",
             "readOnly": false
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"].strip())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -329,8 +451,26 @@
             ]
           }
         ],
-        "solutionCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"].strip())"
-      }
+        "solutionCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"].strip())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"].strip())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"].strip())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-sum-valid-scores",
@@ -368,6 +508,15 @@
             "content": "name,score\nAva,9\nBen,oops\nCara,7\n",
             "readOnly": false
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            total += int(row[\"score\"].strip())\n        except ValueError:\n            pass\n\nprint(total)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -399,8 +548,26 @@
             ]
           }
         ],
-        "solutionCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            total += int(row[\"score\"].strip())\n        except ValueError:\n            pass\n\nprint(total)"
-      }
+        "solutionCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            total += int(row[\"score\"].strip())\n        except ValueError:\n            pass\n\nprint(total)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            total += int(row[\"score\"].strip())\n        except ValueError:\n            pass\n\nprint(total)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            total += int(row[\"score\"].strip())\n        except ValueError:\n            pass\n\nprint(total)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-write-summary-file",
@@ -438,6 +605,15 @@
             "content": "name,score\nAva,9\nBen,oops\nCara,7\n",
             "readOnly": false
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -469,7 +645,238 @@
             ]
           }
         ],
-        "solutionCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")"
+        "solutionCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-simple-csv-processing-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0",
+      "language": "python",
+      "starterCode": "row = 'Ava,92'\n\n# Split row into name and score. Print name, then score.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "row = 'Ava,92'\n\n# Split row into name and score. Print name, then score.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "row = 'Ava,92'\nname, score = row.split(',')\nprint(name)\nprint(score)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "row = 'Ava,92'\n\n# Split row into name and score. Print name, then score.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "row = 'Ava,92'\n\n# Split row into name and score. Print name, then score.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "row = 'Ava,92'\nname, score = row.split(',')\nprint(name)\nprint(score)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\n92\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "row = 'Ava,92'\nname, score = row.split(',')\nprint(name)\nprint(score)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "row = 'Ava,92'\nname, score = row.split(',')\nprint(name)\nprint(score)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-simple-csv-processing-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1",
+      "language": "python",
+      "starterCode": "rows = ['Ava,92', 'Mia,85']\n\n# Print each row as name: score.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "rows = ['Ava,92', 'Mia,85']\n\n# Print each row as name: score.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "rows = ['Ava,92', 'Mia,85']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name}: {score}')\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "rows = ['Ava,92', 'Mia,85']\n\n# Print each row as name: score.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "rows = ['Ava,92', 'Mia,85']\n\n# Print each row as name: score.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "rows = ['Ava,92', 'Mia,85']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name}: {score}')\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava: 92\nMia: 85\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "rows = ['Ava,92', 'Mia,85']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name}: {score}')\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "rows = ['Ava,92', 'Mia,85']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name}: {score}')\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-simple-csv-processing-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2",
+      "language": "python",
+      "starterCode": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\n\n# Add the numeric scores and print total.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\n\n# Add the numeric scores and print total.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\nfor row in rows:\n    name, score = row.split(',')\n    total += int(score)\nprint(total)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\n\n# Add the numeric scores and print total.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\n\n# Add the numeric scores and print total.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\nfor row in rows:\n    name, score = row.split(',')\n    total += int(score)\nprint(total)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "177\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\nfor row in rows:\n    name, score = row.split(',')\n    total += int(score)\nprint(total)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\nfor row in rows:\n    name, score = row.split(',')\n    total += int(score)\nprint(total)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
       }
     }
   ]

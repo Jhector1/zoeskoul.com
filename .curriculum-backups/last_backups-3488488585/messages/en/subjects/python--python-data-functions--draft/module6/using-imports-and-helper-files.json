@@ -1,0 +1,224 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "using-imports-and-helper-files": {
+          "label": "Building a Multi-File Python App",
+          "summary": "Create module files inside a folder, import your own functions into main.py, and connect the pieces into a small app.",
+          "cards": {
+            "sketch0": {
+              "title": "Your app can have more than one file"
+            },
+            "sketch1": {
+              "title": "Import from a file inside a folder"
+            },
+            "sketch2": {
+              "title": "Build a small tool folder"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Mission Control App Builder"
+            }
+          },
+          "projectSteps": {
+            "q9": {
+              "title": "Create a name-cleaning module"
+            },
+            "q10": {
+              "title": "Add a badge module"
+            },
+            "q11": {
+              "title": "Build a mission report module"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Why split code into files?",
+              "prompt": "Why would a Python project put reusable functions in files such as `tools/names.py` instead of putting every line in `main.py`?",
+              "hint": "Think about keeping the main app readable and reusing the same logic later.",
+              "help": {
+                "concept": "A module file can hold reusable functions. `main.py` can stay focused on the app flow: read input, call functions, and print results.",
+                "hint_1": "Look for the option about organization and reuse.",
+                "hint_2": "The goal is not to make more work. The goal is to keep each file responsible for a clear job."
+              },
+              "options": {
+                "a": "It keeps reusable code organized and lets `main.py` import it",
+                "b": "It makes Python ignore errors in the imported file",
+                "c": "It means the project can only run with one input value",
+                "d": "It prevents functions from returning values"
+              }
+            },
+            "q2": {
+              "title": "Choose the direct import",
+              "prompt": "You created `tools/names.py` with a function named `clean_name`. Which line imports that function into `main.py`?",
+              "hint": "The path uses the folder name, then the file name without `.py`, then the function name.",
+              "help": {
+                "concept": "To import from a module inside a folder, use `from folder.file import function`. For `tools/names.py`, the module path is `tools.names`.",
+                "hint_1": "Do not include `.py` in the import line.",
+                "hint_2": "The correct form starts with `from tools.names import ...`."
+              },
+              "options": {
+                "a": "from tools.names import clean_name",
+                "b": "from tools/names.py import clean_name",
+                "c": "import clean_name from tools.names",
+                "d": "from clean_name import tools.names"
+              }
+            },
+            "q3": {
+              "title": "Good module responsibilities",
+              "prompt": "Choose all examples that are good jobs for a small module file in this lesson.",
+              "hint": "Pick jobs that are reusable and focused.",
+              "help": {
+                "concept": "Good module files usually hold related functions, such as text cleanup, formatting, scoring, or report building.",
+                "hint_1": "A module should have a clear purpose.",
+                "hint_2": "Avoid choices that put unrelated random code into one file."
+              },
+              "options": {
+                "a": "`tools/names.py` cleans and formats names",
+                "b": "`tools/badges.py` builds badge text from a name and role",
+                "c": "`tools/random_everything.py` mixes unrelated code with no clear job",
+                "d": "`main.py` must copy every function from every module before it can run"
+              }
+            },
+            "q4": {
+              "title": "Valid imported calls",
+              "prompt": "Which calls are valid after the matching import? Choose all correct answers.",
+              "hint": "Match the call style to the import style.",
+              "help": {
+                "concept": "After `from tools.names import clean_name`, call `clean_name(...)` directly. After `import tools.badges as badges`, call `badges.make_badge(...)`.",
+                "hint_1": "Direct imports use the function name directly.",
+                "hint_2": "Alias imports use the alias before the dot."
+              },
+              "options": {
+                "a": "After `from tools.names import clean_name`, use `clean_name(\" ava \")`",
+                "b": "After `import tools.badges as badges`, use `badges.make_badge(\"Ava\", \"coder\")`",
+                "c": "After `from tools.names import clean_name`, use `tools.names.clean_name(\"Ava\")` without importing `tools`",
+                "d": "After `import tools.badges as badges`, use `make_badge.badges(\"Ava\")`"
+              }
+            },
+            "q5": {
+              "title": "Order the module workflow",
+              "prompt": "Put these steps in the order you would use when adding your own module file to a small app.",
+              "hint": "Create the file before importing from it.",
+              "help": {
+                "concept": "Python can import a module only after the file exists in the expected folder path. Then `main.py` can call functions from that file.",
+                "hint_1": "The folder and file come before the import.",
+                "hint_2": "The function call happens after the import line."
+              },
+              "tokens": {
+                "t1": "Create the `tools` folder",
+                "t2": "Create a module file such as `tools/names.py`",
+                "t3": "Define a function inside that module file",
+                "t4": "Import and call the function from `main.py`"
+              }
+            },
+            "q6": {
+              "title": "Build the import flow",
+              "prompt": "Arrange these lines so `main.py` imports a formatter and prints the returned result.",
+              "hint": "Import first, then call, then print.",
+              "help": {
+                "concept": "A main file usually imports the function it needs, calls it with data, and prints or stores the returned value.",
+                "hint_1": "The import line must run before the function call.",
+                "hint_2": "Print the stored message after the function returns it."
+              },
+              "tokens": {
+                "t1": "from tools.reports import mission_report",
+                "t2": "message = mission_report(\"SCOUT badge: Zoe\", 18)",
+                "t3": "print(message)"
+              }
+            },
+            "q7": {
+              "title": "Complete the function import",
+              "prompt": "Fill in the missing function name to import it from `tools.names`.",
+              "hint": "This is the function that cleans extra spaces and capitalization.",
+              "help": {
+                "concept": "`from tools.names import clean_name` imports the `clean_name` function from the `names.py` file inside the `tools` folder.",
+                "hint_1": "The missing word is the function name, not the folder name.",
+                "hint_2": "Choose the name that describes cleaning a name."
+              },
+              "template": "from tools.names import [blank1]",
+              "choices": [
+                "clean_name",
+                "tools",
+                "names.py",
+                "input"
+              ]
+            },
+            "q8": {
+              "title": "Complete the module path",
+              "prompt": "Fill in the missing folder name in this import line.",
+              "hint": "The module files for this project live inside one folder.",
+              "help": {
+                "concept": "The import path `tools.badges` means Python should look for `badges.py` inside the `tools` folder.",
+                "hint_1": "Do not type `.py` in the import path.",
+                "hint_2": "Choose the folder that contains `badges.py`."
+              },
+              "template": "from [blank1].badges import make_badge",
+              "choices": [
+                "tools",
+                "badges.py",
+                "main",
+                "print"
+              ]
+            },
+            "q9": {
+              "title": "Create a name-cleaning module",
+              "prompt": "Create a folder named `tools`. Inside it, create a file named `names.py`. In `tools/names.py`, define `clean_name(text)` so it removes extra spaces, title-cases the name, and returns the cleaned text. Then update `main.py` to import `clean_name` from `tools.names`, read one name with `input()`, and print the cleaned name.",
+              "hint": "The required path is `tools/names.py`. The import line in `main.py` should be `from tools.names import clean_name`.",
+              "help": {
+                "concept": "A module file is a normal Python file that another file can import from. Here, `main.py` imports a function from `tools/names.py`.",
+                "hint_1": "In `tools/names.py`, write `def clean_name(text):` and return `text.strip().title()`.",
+                "hint_2": "In `main.py`, import the function first, then call `clean_name(raw_name)` before printing."
+              },
+              "starterCode": "# Create a folder named tools.\n# Inside it, create tools/names.py.\n# Define clean_name(text) in that file.\n\nraw_name = input()\n\n# Import clean_name from tools.names.\n# Print the cleaned name.\n"
+            },
+            "q10": {
+              "title": "Add a badge module",
+              "prompt": "The project already has `tools/names.py`. Create `tools/badges.py`. In it, define `make_badge(name, role)` so it returns `ROLE badge: NAME`, with the role uppercased. Then update `main.py` to import `make_badge`, clean the input name, build the badge, and print it.",
+              "hint": "Create `tools/badges.py`, then import with `from tools.badges import make_badge`.",
+              "help": {
+                "concept": "A project can have several small module files. One file can clean names, another can format badge text, and `main.py` can connect them.",
+                "hint_1": "In `tools/badges.py`, return `f\"{role.upper()} badge: {name}\"`.",
+                "hint_2": "In `main.py`, use both `clean_name(raw_name)` and `make_badge(name, role)`."
+              },
+              "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\n\n# Create tools/badges.py.\n# Import make_badge from tools.badges.\n# Clean the name, build the badge, and print it.\n"
+            },
+            "q11": {
+              "title": "Build a mission report module",
+              "prompt": "Create `tools/reports.py`. In it, define `mission_report(badge, points)` so it returns `Mission report: BADGE has POINTS points`. Then update `main.py` to import `mission_report`, use the existing name and badge tools, and print the final mission report.",
+              "hint": "This step combines three files: `tools/names.py`, `tools/badges.py`, and your new `tools/reports.py`.",
+              "help": {
+                "concept": "A realistic app often has one main file and several focused utility modules. `main.py` should read input and connect the functions; the module files should do reusable jobs.",
+                "hint_1": "In `tools/reports.py`, return `f\"Mission report: {badge} has {points} points\"`.",
+                "hint_2": "In `main.py`, clean the name, build the badge, then pass the badge and points into `mission_report`."
+              },
+              "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\npoints = int(input())\n\n# Create tools/reports.py.\n# Import mission_report from tools.reports.\n# Print the final mission report.\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "using-imports-and-helper-files": {
+          "sk1": {
+            "title": "Your app can have more than one file",
+            "bodyMarkdown": "A Python project does not have to keep every function in `main.py`. When a program grows, it is cleaner to move focused functions into small module files.\n\nFor this lesson, imagine a tiny **Mission Control** app:\n\n```text\nmain.py\ntools/\n  names.py\n  badges.py\n  reports.py\n```\n\nEach file has a job:\n\n- `main.py` reads input and connects the pieces.\n- `tools/names.py` cleans names.\n- `tools/badges.py` builds badge text.\n- `tools/reports.py` formats the final report.\n\nThe folder name and file name become the import path. A function inside `tools/names.py` can be imported like this:\n\n```python\nfrom tools.names import clean_name\n```\n\nNotice that the import uses `tools.names`, not `tools/names.py`. Python import paths use dots and leave off `.py`.\n\nIn the project, you will create module files in a folder and import your own functions into `main.py`."
+          },
+          "sk2": {
+            "title": "Import from a file inside a folder",
+            "bodyMarkdown": "Suppose you create this file:\n\n```text\ntools/names.py\n```\n\nInside `tools/names.py`, you can define a function:\n\n```python\ndef clean_name(text):\n    return text.strip().title()\n```\n\nThen `main.py` can import and use it:\n\n```python\nfrom tools.names import clean_name\n\nraw_name = input()\nname = clean_name(raw_name)\nprint(name)\n```\n\nStep by step:\n\n1. Python looks inside the `tools` folder.\n2. It finds the `names.py` module.\n3. It imports the `clean_name` function.\n4. `main.py` calls that function like any other function.\n\nThis keeps your main app clean. Instead of filling `main.py` with every detail, you give each module a focused job."
+          },
+          "sk3": {
+            "title": "Build a small tool folder",
+            "bodyMarkdown": "A nice multi-file project is not just random files. Each module should have a clear purpose.\n\nExample:\n\n```text\ntools/\n  names.py     # clean and format names\n  badges.py    # build badge labels\n  reports.py   # format final messages\n```\n\nThe files can work together through imports:\n\n```python\nfrom tools.names import clean_name\nfrom tools.badges import make_badge\nfrom tools.reports import mission_report\n\nname = clean_name(\"  zoe  \")\nbadge = make_badge(name, \"scout\")\nprint(mission_report(badge, 18))\n```\n\nOutput:\n\n```python\nMission report: SCOUT badge: Zoe has 18 points\n```\n\nThis is the main idea of the project: create small module files, put reusable functions inside them, import those functions into `main.py`, and connect them into one clean app."
+          }
+        }
+      }
+    }
+  }
+}

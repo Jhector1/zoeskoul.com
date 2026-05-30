@@ -165,36 +165,98 @@
             },
             "ci-print-each-item": {
               "title": "Print each item in a list",
-              "prompt": "Read three animal names, store them in a list, then use a `for` loop to print each animal on its own line.",
+              "prompt": "Complete this project step: Print each item in a list.\n\nRequirements:\n- Loop through animals and print each one.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `cat\ndog\nfox`, the output should be `cat\ndog\nfox`.",
               "hint": "Build the list from the three input values before the loop starts.",
               "help": {
-                "concept": "A `for` loop can visit every item in a list, no matter which values were typed into the input.",
-                "hint_1": "Create the list as `[first, second, third]`.",
-                "hint_2": "Inside the loop, print the loop variable."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n"
             },
             "ci-double-list-function": {
               "title": "Return a doubled list",
-              "prompt": "Define a function named `double_numbers` that takes a list of numbers and returns a new list where each number is doubled. Do not print the result; return it.",
+              "prompt": "Complete this project step: Return a doubled list.\n\nRequirements:\n- build and return a new list\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass"
             },
             "ci-count-long-words": {
               "title": "Count words longer than 4 letters",
-              "prompt": "Define a function named `count_long_words` that takes a list of words and returns how many words have more than 4 letters.",
+              "prompt": "Complete this project step: Count words longer than 4 letters.\n\nRequirements:\n- return the number of words longer than 4 letters\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Count words longer than 4 letters\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Count words longer than 4 letters\".",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass"
+            },
+            "try-looping-through-lists-checkpoint": {
+              "title": "Loop through names",
+              "prompt": "Loop through `names = [\"Ava\", \"Mia\", \"Zoe\"]` and print each name on its own line. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Use a `for` loop.",
+              "help": {
+                "concept": "A `for` loop can visit each value in a list.",
+                "hint_1": "Use a `for` loop.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\n\n# Print each name on its own line.\n"
+            },
+            "try-looping-through-lists-sketch0": {
+              "title": "Print each animal",
+              "prompt": "Loop through the list and print each item. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"What a list loop does\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "animals = ['cat', 'dog', 'fox']\n\n# Use a for loop to print each animal on its own line.\n"
+            },
+            "try-looping-through-lists-sketch1": {
+              "title": "Total the scores",
+              "prompt": "Use a running total inside a loop. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Using a loop to build a new list\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "scores = [4, 6, 10]\ntotal = 0\n\n# Add each score to total using a loop.\n# Then print total.\n"
+            },
+            "try-looping-through-lists-sketch2": {
+              "title": "Build doubled numbers",
+              "prompt": "Append a derived result for each item in the input list. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Choosing clear loop variable names\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "numbers = [1, 2, 3]\ndoubled = []\n\n# Loop through numbers and append each doubled value.\n# Then print doubled.\n"
+            }
+          },
+          "tryIt": {
+            "try_looping_through_lists_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Loop through `names = [\"Ava\", \"Mia\", \"Zoe\"]` and print each name on its own line."
+            },
+            "try_looping_through_lists_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Loop through the list and print each item."
+            },
+            "try_looping_through_lists_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Use a running total inside a loop."
+            },
+            "try_looping_through_lists_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Append a derived result for each item in the input list."
             }
           }
         }

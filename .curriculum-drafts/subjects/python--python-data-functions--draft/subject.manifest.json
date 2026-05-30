@@ -13,8 +13,8 @@
     "descriptionKey": "subjects.python--python-data-functions--draft.description",
     "meta": {
       "curriculum": {
-        "plannedModuleCount": 3,
-        "isTerminalRelease": false,
+        "plannedModuleCount": 4,
+        "isTerminalRelease": true,
         "moreComingMessageKey": "subjects.python--python-data-functions--draft.moreComingSoon"
       },
       "completionPolicy": {
@@ -108,6 +108,24 @@
             "updating-and-looping-dictionaries",
             "nested-data-structures"
           ]
+        },
+        {
+          "slug": "python--python-data-functions--draft-python-5-module-project",
+          "order": 99,
+          "titleKey": "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.title",
+          "descriptionKey": "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.weeks",
+            "bulletKeys": [
+              "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.bullets.0",
+              "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.bullets.1",
+              "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.bullets.2"
+            ]
+          },
+          "topics": [
+            "module-5-gradebook-project"
+          ]
         }
       ]
     },
@@ -188,6 +206,24 @@
             "using-imports-and-helper-files",
             "docstrings-and-function-contracts"
           ]
+        },
+        {
+          "slug": "python--python-data-functions--draft-python-6-module-project",
+          "order": 99,
+          "titleKey": "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.title",
+          "descriptionKey": "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.description",
+          "meta": {
+            "module": 6,
+            "weeksKey": "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.weeks",
+            "bulletKeys": [
+              "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.bullets.0",
+              "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.bullets.1",
+              "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.bullets.2"
+            ]
+          },
+          "topics": [
+            "module-6-name-badge-package"
+          ]
         }
       ]
     },
@@ -267,6 +303,78 @@
             "try-except-basics",
             "validating-and-cleaning-input",
             "simple-csv-processing"
+          ]
+        },
+        {
+          "slug": "python--python-data-functions--draft-python-7-module-project",
+          "order": 99,
+          "titleKey": "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.title",
+          "descriptionKey": "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.description",
+          "meta": {
+            "module": 7,
+            "weeksKey": "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.weeks",
+            "bulletKeys": [
+              "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.bullets.0",
+              "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.bullets.1",
+              "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.bullets.2"
+            ]
+          },
+          "topics": [
+            "module-7-clean-student-records"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "python-8-real-world-project",
+      "prefix": "py8",
+      "order": 8,
+      "titleKey": "modules.python--python-data-functions--draft.python-8-real-world-project.title",
+      "descriptionKey": "modules.python--python-data-functions--draft.python-8-real-world-project.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "python",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "meta": {
+        "estimatedMinutes": 120,
+        "prereqKeys": [
+          "modules.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.title"
+        ],
+        "outcomeKeys": [
+          "modules.python--python-data-functions--draft.python-8-real-world-project.outcomes.0",
+          "modules.python--python-data-functions--draft.python-8-real-world-project.outcomes.1",
+          "modules.python--python-data-functions--draft.python-8-real-world-project.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.python--python-data-functions--draft.python-8-real-world-project.why.0",
+          "modules.python--python-data-functions--draft.python-8-real-world-project.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "python--python-data-functions--draft-python-8-course-capstone",
+          "order": 1,
+          "titleKey": "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.title",
+          "descriptionKey": "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.description",
+          "meta": {
+            "module": 8,
+            "weeksKey": "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.weeks",
+            "bulletKeys": [
+              "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.bullets.0",
+              "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.bullets.1",
+              "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.bullets.2"
+            ]
+          },
+          "topics": [
+            "class-roster-cleaner"
           ]
         }
       ]

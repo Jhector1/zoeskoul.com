@@ -1,0 +1,321 @@
+{
+  "title": "Try/Except Basics",
+  "summary": "Catch expected errors and keep programs usable.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "try-except-flow",
+      "title": "How try/except changes program flow",
+      "bodyMarkdown": "`try` lets Python attempt code that might fail. If an expected error happens, `except` runs instead of crashing the whole program.\n\nExample:\n\n```python\ntext = \"12a\"\n\ntry:\n    number = int(text)\n    print(\"Converted:\", number)\nexcept ValueError:\n    print(\"Please enter digits only.\")\n```\n\nStep by step:\n\n- `int(text)` tries to turn the text into a number.\n- Because `\"12a\"` is not a valid whole number, Python raises a `ValueError`.\n- The `except ValueError:` block catches that specific problem.\n- The program prints a helpful message and keeps going.\n\nIf `text` were `\"12\"`, the `try` block would succeed and the `except` block would be skipped.\n\nTry it yourself: change `text` to `\"45\"`, click Run, and compare the new output."
+    },
+    {
+      "id": "specific-errors",
+      "title": "Catch the error you expect",
+      "bodyMarkdown": "It is best to catch the specific error you are preparing for.\n\n```python\nvalue = input()\n\ntry:\n    print(int(value) * 2)\nexcept ValueError:\n    print(\"That was not a whole number.\")\n```\n\nWhy this is useful:\n\n- `int(value)` can fail when the input is not numeric.\n- `ValueError` matches that exact conversion problem.\n- Your message can explain what went wrong in plain language.\n\nThis pattern is common in data cleaning: try to convert messy text, and if conversion fails, handle the bad value safely.\n\nYour turn: change the input you imagine from `8` to `eight` and predict which block runs before you click Run.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "keep-program-usable",
+      "title": "Use exceptions to handle messy data safely",
+      "bodyMarkdown": "When data is messy, `try/except` helps you skip bad pieces and keep processing the good ones.\n\n```python\nitems = [\"10\", \"x\", \"25\"]\nclean_total = 0\n\nfor item in items:\n    try:\n        clean_total += int(item)\n    except ValueError:\n        print(\"Skipped:\", item)\n\nprint(\"Total:\", clean_total)\n```\n\nLine by line:\n\n- The loop checks each text item.\n- `int(item)` works for `\"10\"` and `\"25\"`.\n- It fails for `\"x\"`, so the `except` block prints `Skipped: x`.\n- The program still reaches the final total.\n\nThis is a beginner-friendly cleaning pattern: convert what you can, report what you cannot, and continue.\n\nTry this: replace `\"x\"` with `\"5\"`, click Run, and predict how both the skipped message and total will change."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "sc-try-block-success",
+      "kind": "single_choice",
+      "title": "When no error happens",
+      "prompt": "What happens when every line inside a `try` block runs without raising an exception?",
+      "options": [
+        "The matching `except` block is skipped",
+        "Python always runs `except` after `try`",
+        "The program stops before the next line",
+        "Python repeats the `try` block automatically"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about whether Python needs the `except` block if nothing failed.",
+      "help": {
+        "concept": "In Python, an `except` block only runs when a matching exception is raised inside the related `try` block.",
+        "hint_1": "If the risky code succeeds, Python continues normally after the `try` block.",
+        "hint_2": "Choose the option where the `except` block is skipped because no matching error occurred."
+      }
+    },
+    {
+      "id": "sc-valueerror-conversion",
+      "kind": "single_choice",
+      "title": "Choosing the right exception",
+      "prompt": "Which exception should you catch when `int(text)` fails because the text is not a valid whole number?",
+      "options": [
+        "TypeError",
+        "ValueError",
+        "NameError",
+        "IndexError"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "mc-good-try-except-goals",
+      "kind": "multi_choice",
+      "title": "Why use try/except here?",
+      "prompt": "Choose all true reasons to use `try/except` when converting messy text data to numbers.",
+      "options": [
+        "It can prevent one bad value from crashing the whole program",
+        "It can show a clearer message for invalid input",
+        "It automatically fixes every invalid value without any code",
+        "It can let the program continue to later data"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Look for benefits related to handling bad values without stopping everything.",
+      "help": {
+        "concept": "`try/except` is useful in data cleaning because it lets a program handle expected bad inputs gracefully and continue processing valid data.",
+        "hint_1": "Some answers should mention continuing the program or showing a helpful message.",
+        "hint_2": "Select the choices about catching expected conversion problems, not choices about making invalid text magically valid."
+      }
+    },
+    {
+      "id": "mc-what-belongs-in-except",
+      "kind": "multi_choice",
+      "title": "What belongs in an except block",
+      "prompt": "Choose all actions that make sense inside an `except ValueError:` block for beginner data cleaning.",
+      "options": [
+        "Print a message that the value was invalid",
+        "Use a fallback number like 0 in some situations",
+        "Skip the bad item and continue the loop",
+        "Assume the conversion worked and use the missing number anyway"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about safe responses after a failed conversion.",
+      "help": {
+        "concept": "An `except` block should handle the specific problem in a useful way, such as reporting the bad value, using a fallback, or skipping it.",
+        "hint_1": "Good answers respond to the failed conversion instead of pretending the conversion succeeded.",
+        "hint_2": "Pick the choices that either inform the user or safely continue processing after the bad value."
+      }
+    },
+    {
+      "id": "dr-try-except-order",
+      "kind": "drag_reorder",
+      "title": "Build a basic try/except structure",
+      "prompt": "Put these code parts in the correct order for a basic `try/except` that converts text to an integer and handles bad input.",
+      "tokens": [
+        "try:",
+        "number = int(text)",
+        "except ValueError:",
+        "print(\"Invalid number\")"
+      ],
+      "correctOrder": [
+        "try:",
+        "number = int(text)",
+        "except ValueError:",
+        "print(\"Invalid number\")"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "dr-cleaning-loop-order",
+      "kind": "drag_reorder",
+      "title": "Order the cleaning steps",
+      "prompt": "Arrange these steps for a loop that cleans a list of text values by converting valid numbers and skipping invalid ones.",
+      "tokens": [
+        "Read the next text item",
+        "Try to convert it with `int(...)`",
+        "If conversion works, use the number",
+        "If conversion fails, skip or report the bad item"
+      ],
+      "correctOrder": [
+        "Read the next text item",
+        "Try to convert it with `int(...)`",
+        "If conversion works, use the number",
+        "If conversion fails, skip or report the bad item"
+      ],
+      "hint": "You first attempt conversion, then react only if conversion fails, and finally continue to the next item.",
+      "help": {
+        "concept": "In a cleaning loop, the normal path is to try conversion and use the value; the error path only runs when conversion fails.",
+        "hint_1": "The attempt to convert comes before any decision about skipping bad data.",
+        "hint_2": "Place the skip/report step after the failed conversion path, not before the conversion attempt."
+      }
+    },
+    {
+      "id": "fb-except-keyword",
+      "kind": "fill_blank_choice",
+      "title": "Complete the handler line",
+      "prompt": "Fill in the missing keyword that starts the error-handling block after `try`.",
+      "template": "try:\n    number = int(text)\n[blank1] ValueError:\n    print(\"Bad input\")",
+      "choices": [
+        "except",
+        "return",
+        "while",
+        "import"
+      ],
+      "correctValue": "except",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "fb-cleaning-fallback",
+      "kind": "fill_blank_choice",
+      "title": "Choose the fallback value",
+      "prompt": "Fill in the value that makes this code use zero when conversion fails.",
+      "template": "try:\n    amount = int(text)\nexcept ValueError:\n    amount = [blank1]",
+      "choices": [
+        "0",
+        "text",
+        "except",
+        "Lesson notes panel"
+      ],
+      "correctValue": "0",
+      "hint": "The fallback should be a number, not a keyword.",
+      "help": {
+        "concept": "A common cleaning pattern is to assign a safe fallback value inside `except` so later code can continue using a valid number.",
+        "hint_1": "The line is inside `except ValueError:`, so it should assign a numeric default.",
+        "hint_2": "Choose the value that represents no amount added when conversion fails."
+      }
+    },
+    {
+      "id": "ci-safe-file-read",
+      "kind": "code_input",
+      "title": "Read a number safely from a file",
+      "prompt": "Open `number.txt`, read its contents, and try to convert the text to an integer. If conversion works, print `Number: X`. If it fails with `ValueError`, print `Invalid number`.",
+      "starterCode": "text = input()\n\nwith open(\"number.txt\") as file:\n    text = file.read().strip()\n\n# Add try/except below",
+      "solutionCode": "text = input()\n\nwith open(\"number.txt\") as file:\n    text = file.read().strip()\n\ntry:\n    number = int(text)\n    print(f\"Number: {number}\")\nexcept ValueError:\n    print(\"Invalid number\")",
+      "tests": [
+        {
+          "stdout": "Invalid number",
+          "match": "exact",
+          "files": [
+            {
+              "path": "number.txt",
+              "content": "42\n\n\nnonsense? no, just 42? wait\n42"
+            }
+          ]
+        },
+        {
+          "stdout": "Invalid number",
+          "match": "exact",
+          "files": [
+            {
+              "path": "number.txt",
+              "content": "12a\n\n\nbad"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "number.txt",
+          "content": "42"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Read a number safely from a file\".",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "ci-clean-lines",
+      "kind": "code_input",
+      "title": "Clean lines and total valid numbers",
+      "prompt": "Open `values.txt` and read it line by line. Each line should be stripped. Try to convert each cleaned line to an integer. Add valid numbers to a running total. If a line is invalid, ignore it. At the end, print `Total: X`.",
+      "starterCode": "text = input()\n\ntotal = 0\n\nwith open(\"values.txt\") as file:\n    # Write your loop here\n    pass\n\nprint(f\"Total: {total}\")",
+      "solutionCode": "text = input()\n\ntotal = 0\n\nwith open(\"values.txt\") as file:\n    for line in file:\n        text = line.strip()\n        try:\n            total += int(text)\n        except ValueError:\n            pass\n\nprint(f\"Total: {total}\")",
+      "tests": [
+        {
+          "stdout": "Total: 18\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "values.txt",
+              "content": "5\nx\n10\n3"
+            }
+          ]
+        },
+        {
+          "stdout": "Total: 7\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "values.txt",
+              "content": "2\nbad\n-1\n6\nskip"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "values.txt",
+          "content": "5\nx\n10\n3"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Clean lines and total valid numbers\".",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "ci-prompt-safe-double",
+      "kind": "code_input",
+      "title": "Double valid input safely",
+      "prompt": "Read one line of input. Try to convert it to an integer. If it works, print double the number. If it fails with `ValueError`, print `Please enter a whole number`.",
+      "starterCode": "text = input()\n\n# Add try/except here",
+      "solutionCode": "text = input()\n\ntry:\n    number = int(text)\n    print(number * 2)\nexcept ValueError:\n    print(\"Please enter a whole number\")",
+      "tests": [
+        {
+          "stdout": "16\n",
+          "stdin": "8\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "Please enter a whole number\n",
+          "stdin": "hello\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Double valid input safely\".",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Practice safe conversions with try/except",
+    "stepIds": [
+      "ci-safe-file-read",
+      "ci-clean-lines",
+      "ci-prompt-safe-double"
+    ]
+  }
+}

@@ -164,36 +164,98 @@
             },
             "ci-read-nested-file": {
               "title": "Read from a nested relative path",
-              "prompt": "Write a program that opens `data/input.txt`, reads all its text, and prints that text exactly.",
+              "prompt": "Complete this project step: Read from a nested relative path.\n\nRequirements:\n- read the text and print it\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `Hello paths!`.",
               "hint": "Read the task \"Read from a nested relative path\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Read from a nested relative path\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass"
             },
             "ci-copy-between-paths": {
               "title": "Copy text to another relative path",
-              "prompt": "Write a program that reads text from `data/source.txt`, writes the same text to `data/copy.txt`, and then prints the copied text.",
+              "prompt": "Complete this project step: Copy text to another relative path.\n\nRequirements:\n- Read from data/source.txt\n- Write the same text to data/copy.txt\n- Print the copied text\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `apple\nbanana`.",
               "hint": "Read the task \"Copy text to another relative path\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Copy text to another relative path\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text"
             },
             "ci-count-lines-in-folder": {
               "title": "Count lines from a file path",
-              "prompt": "Write a program that opens `data/items.txt`, counts how many lines are in the file, and prints the count.",
+              "prompt": "Complete this project step: Count lines from a file path.\n\nRequirements:\n- count the lines and print the result\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `3`.",
               "hint": "Read the task \"Count lines from a file path\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Count lines from a file path\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass"
+            },
+            "try-working-with-paths-checkpoint": {
+              "title": "Use a relative path",
+              "prompt": "Use `Path` to read `data/names.txt`, then print the text without extra characters. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Use `Path(\"data\") / \"names.txt\"`.",
+              "help": {
+                "concept": "Path objects make relative file locations easier to build and read.",
+                "hint_1": "Use `Path(\"data\") / \"names.txt\"`.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n"
+            },
+            "try-working-with-paths-sketch0": {
+              "title": "Build a relative path",
+              "prompt": "A relative path can combine a folder and a file name. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Relative paths point to files from your current workspace\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n"
+            },
+            "try-working-with-paths-sketch1": {
+              "title": "Use pathlib for a path",
+              "prompt": "`Path` can join path pieces safely. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Folders help organize files clearly\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n"
+            },
+            "try-working-with-paths-sketch2": {
+              "title": "Read from a folder path",
+              "prompt": "Use the full relative path when a file lives inside a folder. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Use simple relative paths, not machine-specific ones\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "# Open data/message.txt and print its text.\n"
+            }
+          },
+          "tryIt": {
+            "try_working_with_paths_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Use `Path` to read `data/names.txt`, then print the text without extra characters."
+            },
+            "try_working_with_paths_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "A relative path can combine a folder and a file name."
+            },
+            "try_working_with_paths_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "`Path` can join path pieces safely."
+            },
+            "try_working_with_paths_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Use the full relative path when a file lives inside a folder."
             }
           }
         }

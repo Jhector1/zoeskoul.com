@@ -1,0 +1,466 @@
+{
+  "topicId": "using-imports-and-helper-files",
+  "subjectSlug": "python--python-data-functions--draft",
+  "moduleSlug": "python-6-functions-and-modularity",
+  "sectionSlug": "python--python-data-functions--draft-python-6-function-design",
+  "prefix": "py6",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.label",
+    "summaryKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch0.title",
+      "sketchId": "sk1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch1.title",
+      "sketchId": "sk2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch2.title",
+      "sketchId": "sk3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "q9",
+            "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.projectSteps.q9.title",
+            "exerciseKey": "q9",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "q10",
+            "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.projectSteps.q10.title",
+            "exerciseKey": "q10",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "q11",
+            "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.projectSteps.q11.title",
+            "exerciseKey": "q11",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sk1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.sk1.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.sk1.bodyMarkdown"
+    },
+    {
+      "id": "sk2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.sk2.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.sk2.bodyMarkdown"
+    },
+    {
+      "id": "sk3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.sk3.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.sk3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "q6",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q6",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "q7",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q7",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "helpers"
+      }
+    },
+    {
+      "id": "q8",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q8",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "from"
+      }
+    },
+    {
+      "id": "q9",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9",
+      "language": "python",
+      "starterCode": "def clean_name(text):\n    # return the cleaned version of text\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_name(text):\n    # return the cleaned version of text\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clean_name(text):\n    # return the cleaned version of text\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_name(text):\n    # return the cleaned version of text\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def clean_name(text):\n    return text.strip().title()",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "clean_name",
+            "args": [
+              "  aVA  "
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Ava",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "clean_name",
+            "args": [
+              "mARCO"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Marco",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "q10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10",
+      "language": "python",
+      "starterCode": "def greet(name):\n    # return a greeting string\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def greet(name):\n    # return a greeting string\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def greet(name):\n    # return a greeting string\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def greet(name):\n    # return a greeting string\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def greet(name):\n    return f\"Hello, {name}!\"",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "greet",
+            "args": [
+              "Mina"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Hello, Mina!",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "greet",
+            "args": [
+              "Leo"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Hello, Leo!",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "q11",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11",
+      "language": "python",
+      "starterCode": "def make_label(name, score):\n    # return a label like \"Ava: 9\"\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def make_label(name, score):\n    # return a label like \"Ava: 9\"\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def make_label(name, score):\n    # return a label like \"Ava: 9\"\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_label(name, score):\n    # return a label like \"Ava: 9\"\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def make_label(name, score):\n    return f\"{name}: {score}\"",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "make_label",
+            "args": [
+              "Ava",
+              9
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Ava: 9",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "make_label",
+            "args": [
+              "Noah",
+              12
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Noah: 12",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    }
+  ]
+}

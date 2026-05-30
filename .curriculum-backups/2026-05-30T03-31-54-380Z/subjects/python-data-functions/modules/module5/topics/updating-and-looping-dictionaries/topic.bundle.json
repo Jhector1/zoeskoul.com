@@ -1,0 +1,555 @@
+{
+  "topicId": "updating-and-looping-dictionaries",
+  "subjectSlug": "python-data-functions",
+  "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+  "sectionSlug": "python-data-functions-python-5-dictionaries",
+  "prefix": "py5",
+  "minutes": 26,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.label",
+    "summaryKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch0.title",
+      "sketchId": "dict-update-basics",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch1.title",
+      "sketchId": "dict-looping",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch2.title",
+      "sketchId": "dict-common-patterns",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_update_score",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.projectSteps.ci_update_score.title",
+            "exerciseKey": "ci-update-score",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_remove_key",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.projectSteps.ci_remove_key.title",
+            "exerciseKey": "ci-remove-key",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_format_items",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.projectSteps.ci_format_items.title",
+            "exerciseKey": "ci-format-items",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "dict-update-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-update-basics.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-update-basics.bodyMarkdown"
+    },
+    {
+      "id": "dict-looping",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-looping.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-looping.bodyMarkdown"
+    },
+    {
+      "id": "dict-common-patterns",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-common-patterns.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.dict-common-patterns.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-dict-update-existing",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.sc-dict-update-existing",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-loop-direct-dict",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.sc-loop-direct-dict",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-valid-dict-changes",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.mc-valid-dict-changes",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "mc-items-loop",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.mc-items-loop",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr-update-sequence",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.dr-update-sequence",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr-loop-items-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.dr-loop-items-order",
+      "tokenIds": [
+        "t1",
+        "t2"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2"
+        ]
+      }
+    },
+    {
+      "id": "fb-remove-key",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.fb-remove-key",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "del"
+      }
+    },
+    {
+      "id": "fb-items-method",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.fb-items-method",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "items"
+      }
+    },
+    {
+      "id": "ci-update-score",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score",
+      "language": "python",
+      "starterCode": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def update_score(scores, name, new_score):\n    scores[name] = new_score\n    return scores",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "update_score",
+            "args": [
+              [
+                [
+                  "Ava",
+                  8
+                ],
+                [
+                  "Ben",
+                  5
+                ]
+              ],
+              "Ben",
+              6
+            ],
+            "argKinds": [
+              "dict_entries",
+              "value",
+              "value"
+            ],
+            "expected": [
+              [
+                "Ava",
+                8
+              ],
+              [
+                "Ben",
+                6
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "update_score",
+            "args": [
+              [
+                [
+                  "Ava",
+                  8
+                ]
+              ],
+              "Cara",
+              7
+            ],
+            "argKinds": [
+              "dict_entries",
+              "value",
+              "value"
+            ],
+            "expected": [
+              [
+                "Ava",
+                8
+              ],
+              [
+                "Cara",
+                7
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-remove-key",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key",
+      "language": "python",
+      "starterCode": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def remove_item(data, key_name):\n    if key_name in data:\n        del data[key_name]\n    return data",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "remove_item",
+            "args": [
+              [
+                [
+                  "pens",
+                  10
+                ],
+                [
+                  "paper",
+                  4
+                ]
+              ],
+              "pens"
+            ],
+            "argKinds": [
+              "dict_entries",
+              "value"
+            ],
+            "expected": [
+              [
+                "paper",
+                4
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "remove_item",
+            "args": [
+              [
+                [
+                  "pens",
+                  10
+                ],
+                [
+                  "paper",
+                  4
+                ]
+              ],
+              "eraser"
+            ],
+            "argKinds": [
+              "dict_entries",
+              "value"
+            ],
+            "expected": [
+              [
+                "pens",
+                10
+              ],
+              [
+                "paper",
+                4
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-format-items",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items",
+      "language": "python",
+      "starterCode": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def format_inventory(items):\n    result = []\n    for name, count in items.items():\n        result.append(f\"{name}: {count}\")\n    return result",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "format_inventory",
+            "args": [
+              [
+                [
+                  "pens",
+                  3
+                ],
+                [
+                  "paper",
+                  2
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": [
+              "pens: 3",
+              "paper: 2"
+            ],
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "format_inventory",
+            "args": [
+              [
+                [
+                  "apple",
+                  1
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": [
+              "apple: 1"
+            ],
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    }
+  ]
+}

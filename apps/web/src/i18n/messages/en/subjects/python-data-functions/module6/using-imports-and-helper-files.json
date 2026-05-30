@@ -23,13 +23,13 @@
             }
           },
           "projectSteps": {
-            "using-imports-create-name-module": {
+            "q9": {
               "title": "Create a name-cleaning module"
             },
-            "using-imports-add-badge-module": {
+            "q10": {
               "title": "Add a badge module"
             },
-            "using-imports-build-report-module": {
+            "q11": {
               "title": "Build a mission report module"
             }
           },
@@ -163,38 +163,100 @@
                 "print"
               ]
             },
-            "using-imports-create-name-module": {
+            "q9": {
               "title": "Create a name-cleaning module",
-              "prompt": "Create a folder named `tools`. Inside it, create a file named `names.py`. In `tools/names.py`, define `clean_name(text)` so it removes extra spaces, title-cases the name, and returns the cleaned text. Then update `main.py` to import `clean_name` from `tools.names`, read one name with `input()`, and print the cleaned name.",
+              "prompt": "Complete this project step: Create a name-cleaning module.\n\nRequirements:\n- Create a folder named tools.\n- Inside it, create tools/names.py.\n- Define clean_name(text) in that file.\n- Import clean_name from tools.names.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `aVA`, the output should be `Ava`.",
               "hint": "The required path is `tools/names.py`. The import line in `main.py` should be `from tools.names import clean_name`.",
               "help": {
-                "concept": "A module file is a normal Python file that another file can import from. Here, `main.py` imports a function from `tools/names.py`.",
-                "hint_1": "In `tools/names.py`, write `def clean_name(text):` and return `text.strip().title()`.",
-                "hint_2": "In `main.py`, import the function first, then call `clean_name(raw_name)` before printing."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "# Create a folder named tools.\n# Inside it, create tools/names.py.\n# Define clean_name(text) in that file.\n\nraw_name = input()\n\n# Import clean_name from tools.names.\n# Print the cleaned name.\n"
             },
-            "using-imports-add-badge-module": {
+            "q10": {
               "title": "Add a badge module",
-              "prompt": "The project already has `tools/names.py`. Create `tools/badges.py`. In it, define `make_badge(name, role)` so it returns `ROLE badge: NAME`, with the role uppercased. Then update `main.py` to import `make_badge`, clean the input name, build the badge, and print it.",
+              "prompt": "Complete this project step: Add a badge module.\n\nRequirements:\n- Create tools/badges.py.\n- Import make_badge from tools.badges.\n- Clean the name, build the badge, and print it.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `lina  \nartist`, the output should be `ARTIST badge: Lina`.",
               "hint": "Create `tools/badges.py`, then import with `from tools.badges import make_badge`.",
               "help": {
-                "concept": "A project can have several small module files. One file can clean names, another can format badge text, and `main.py` can connect them.",
-                "hint_1": "In `tools/badges.py`, return `f\"{role.upper()} badge: {name}\"`.",
-                "hint_2": "In `main.py`, use both `clean_name(raw_name)` and `make_badge(name, role)`."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\n\n# Create tools/badges.py.\n# Import make_badge from tools.badges.\n# Clean the name, build the badge, and print it.\n"
             },
-            "using-imports-build-report-module": {
+            "q11": {
               "title": "Build a mission report module",
-              "prompt": "Create `tools/reports.py`. In it, define `mission_report(badge, points)` so it returns `Mission report: BADGE has POINTS points`. Then update `main.py` to import `mission_report`, use the existing name and badge tools, and print the final mission report.",
+              "prompt": "Complete this project step: Build a mission report module.\n\nRequirements:\n- Create tools/reports.py.\n- Import mission_report from tools.reports.\n- Print the final mission report.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `zoe  \nscout\n18`, the output should be `Mission report: SCOUT badge: Zoe has 18 points`.",
               "hint": "This step combines three files: `tools/names.py`, `tools/badges.py`, and your new `tools/reports.py`.",
               "help": {
-                "concept": "A realistic app often has one main file and several focused utility modules. `main.py` should read input and connect the functions; the module files should do reusable jobs.",
-                "hint_1": "In `tools/reports.py`, return `f\"Mission report: {badge} has {points} points\"`.",
-                "hint_2": "In `main.py`, clean the name, build the badge, then pass the badge and points into `mission_report`."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\npoints = int(input())\n\n# Create tools/reports.py.\n# Import mission_report from tools.reports.\n# Print the final mission report.\n"
+            },
+            "try-using-imports-and-helper-files-checkpoint": {
+              "title": "Import from a helper file",
+              "prompt": "Create `tools/names.py` with `clean_name(text)`. Import it in `main.py`, clean one input name, and print it. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Use `from tools.names import clean_name` in `main.py`.",
+              "help": {
+                "concept": "A helper module lets one file reuse code from another file.",
+                "hint_1": "Use `from tools.names import clean_name` in `main.py`.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "raw_name = input()\n\n# Import clean_name from tools.names.\n# Print the cleaned name.\n"
+            },
+            "try-using-imports-and-helper-files-sketch0": {
+              "title": "Prepare an import-style helper",
+              "prompt": "This single-file checkpoint mirrors the helper function you will later import from another file. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Your app can have more than one file\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def clean_name(text):\n    return text.strip().title()\n\n# Print clean_name('  ava  ').\n"
+            },
+            "try-using-imports-and-helper-files-sketch1": {
+              "title": "Build a badge string",
+              "prompt": "Write the helper behavior before moving it into its own module. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Import from a file inside a folder\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def make_badge(name, role):\n    # Return ROLE badge: Name, with role uppercased.\n    pass\n\nprint(make_badge('Ava', 'student'))\n"
+            },
+            "try-using-imports-and-helper-files-sketch2": {
+              "title": "Connect helpers",
+              "prompt": "Use both helpers together the way a multi-file project will. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Build a small tool folder\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def clean_name(text):\n    return text.strip().title()\n\ndef make_badge(name, role):\n    return f'{role.upper()} badge: {name}'\n\n# Clean '  mia  ' and print a mentor badge.\n"
+            }
+          },
+          "tryIt": {
+            "try_using_imports_and_helper_files_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Create `tools/names.py` with `clean_name(text)`. Import it in `main.py`, clean one input name, and print it."
+            },
+            "try_using_imports_and_helper_files_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "This single-file checkpoint mirrors the helper function you will later import from another file."
+            },
+            "try_using_imports_and_helper_files_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Write the helper behavior before moving it into its own module."
+            },
+            "try_using_imports_and_helper_files_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Use both helpers together the way a multi-file project will."
             }
           }
         }

@@ -166,36 +166,98 @@
             },
             "ci-print-first-last": {
               "title": "Print the first and last list items",
-              "prompt": "Write a program that reads three words, stores them in a list, and prints the first item on one line and the last item on the next line.",
+              "prompt": "Complete this project step: Print the first and last list items.\n\nRequirements:\n- Store the words in a list.\n- Then print the first item and the last item on separate lines.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `apple\nbanana\ncherry`, the output should be `apple\ncherry`.",
               "hint": "Read the task \"Print the first and last list items\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print the first and last list items\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines."
             },
             "ci-print-second-number": {
               "title": "Print the second number",
-              "prompt": "Write a program that reads three numbers, stores them in a list, and prints only the second number.",
+              "prompt": "Complete this project step: Print the second number.\n\nRequirements:\n- Put the numbers into a list.\n- Print the second item.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `4\n9\n2`, the output should be `9`.",
               "hint": "The second item in a list is at index 1.",
               "help": {
-                "concept": "When values are stored in a list, the second value is accessed with index 1 because indexing starts at 0.",
-                "hint_1": "Read three inputs, convert them to integers, and place them in a list.",
-                "hint_2": "After building the list, print the item at index 1."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item."
             },
             "ci-build-and-show-list": {
               "title": "Build a list from input",
-              "prompt": "Write a program that reads three colors, stores them in a list, and prints the whole list.",
+              "prompt": "Complete this project step: Build a list from input.\n\nRequirements:\n- Create a list with the three colors.\n- Print the whole list.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `red\nblue\ngreen`, the output should be `['red', 'blue', 'green']`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list."
+            },
+            "try-creating-and-indexing-lists-checkpoint": {
+              "title": "Index and print list values",
+              "prompt": "Create the list `[\"Ava\", \"Mia\", \"Zoe\"]`. Print the first name, then print the last name. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Use index `0` for the first item and `-1` for the last item.",
+              "help": {
+                "concept": "List indexing lets you retrieve a value by position.",
+                "hint_1": "Use index `0` for the first item and `-1` for the last item.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "names = []\n\n# Create the list [\"Ava\", \"Mia\", \"Zoe\"].\n# Print the first name, then print the last name.\n"
+            },
+            "try-creating-and-indexing-lists-sketch0": {
+              "title": "Print the first and last list items",
+              "prompt": "Use list indexes to print the first and last values from `items`. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"What a list is\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "items = ['red', 'blue', 'green']\n\n# Print the first item.\n# Then print the last item.\n"
+            },
+            "try-creating-and-indexing-lists-sketch1": {
+              "title": "Print the second number",
+              "prompt": "Use index `1` to print the second value in `numbers`. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"How indexing works\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "numbers = [4, 9, 2]\n\n# Print the second number in the list.\n"
+            },
+            "try-creating-and-indexing-lists-sketch2": {
+              "title": "Build and print a list",
+              "prompt": "Create a list named `names` from the two variables, then print it. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Using list values in output\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "first = 'Ava'\nsecond = 'Mia'\n\n# Build a list named names with first and second.\n# Then print names.\n"
+            }
+          },
+          "tryIt": {
+            "try_creating_and_indexing_lists_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Create the list `[\"Ava\", \"Mia\", \"Zoe\"]`. Print the first name, then print the last name."
+            },
+            "try_creating_and_indexing_lists_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Use list indexes to print the first and last values from `items`."
+            },
+            "try_creating_and_indexing_lists_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Use index `1` to print the second value in `numbers`."
+            },
+            "try_creating_and_indexing_lists_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Create a list named `names` from the two variables, then print it."
             }
           }
         }

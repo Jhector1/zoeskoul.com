@@ -1,0 +1,223 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-6-functions-and-modularity": {
+        "defining-and-calling-functions": {
+          "label": "Defining and Calling Functions",
+          "summary": "Create functions and call them with arguments.",
+          "cards": {
+            "sketch0": {
+              "title": "What a function does"
+            },
+            "sketch1": {
+              "title": "Calling functions with arguments"
+            },
+            "sketch2": {
+              "title": "Functions can return values"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Function Practice Project"
+            }
+          },
+          "projectSteps": {
+            "ci_make_greeting": {
+              "title": "Write a greeting function"
+            },
+            "ci_square_number": {
+              "title": "Return the square"
+            },
+            "ci_full_name": {
+              "title": "Combine first and last name"
+            }
+          },
+          "quiz": {
+            "sc-function-call": {
+              "title": "Recognize a function call",
+              "prompt": "Which line calls a function named `greet`?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+              },
+              "options": {
+                "a": "def greet():",
+                "b": "greet()",
+                "c": "print = greet",
+                "d": "return greet"
+              }
+            },
+            "sc-parameter-meaning": {
+              "title": "Understand a parameter",
+              "prompt": "In `def greet(name):`, what is `name`?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+              },
+              "options": {
+                "a": "A printed message",
+                "b": "A parameter",
+                "c": "A return value",
+                "d": "A list"
+              }
+            },
+            "mc-valid-calls": {
+              "title": "Pick the valid function calls",
+              "prompt": "A function is defined as `def greet(name):`. Which calls are valid? Choose all correct answers.",
+              "hint": "The function expects exactly one argument.",
+              "help": {
+                "concept": "When a function has one parameter, each call must provide one argument inside the parentheses.",
+                "hint_1": "Check how many values each call passes to `greet(...)`.",
+                "hint_2": "Valid calls have exactly one value between the parentheses, not zero and not two."
+              },
+              "options": {
+                "a": "greet(\"Ava\")",
+                "b": "greet()",
+                "c": "greet(\"Ava\", \"Leo\")",
+                "d": "greet(\"Mina\")"
+              }
+            },
+            "mc-return-uses": {
+              "title": "Ways to use a returned value",
+              "prompt": "A function `double(x)` returns a number. Which lines use that returned value correctly? Choose all correct answers.",
+              "hint": "A returned value can be stored or printed.",
+              "help": {
+                "concept": "When a function returns a value, you can place the call anywhere a normal value can be used, such as in an assignment or inside `print(...)`.",
+                "hint_1": "Look for lines where `double(4)` is treated like a value.",
+                "hint_2": "The correct lines either store the result in a variable or pass the result into another function like `print`."
+              },
+              "options": {
+                "a": "result = double(4)",
+                "b": "print(double(4))",
+                "c": "return = double(4)",
+                "d": "def double(4):"
+              }
+            },
+            "dr-define-then-call": {
+              "title": "Order a simple function program",
+              "prompt": "Put these lines in the correct order to define a function and then call it.",
+              "hint": "The function must be defined before it is called.",
+              "help": {
+                "concept": "Python reads code from top to bottom. A function definition comes first, its body stays indented under it, and the call comes after the definition.",
+                "hint_1": "Start with the `def` line, then place the indented body line under it.",
+                "hint_2": "After the two definition lines are together, put the function call last."
+              },
+              "tokens": {
+                "t1": "def say_hi():",
+                "t2": "print(\"Hi\")",
+                "t3": "say_hi()"
+              }
+            },
+            "dr-call-with-argument": {
+              "title": "Order a function with one parameter",
+              "prompt": "Arrange the lines to define `show_name` and call it with `\"Ava\"`.",
+              "hint": "Arrange the code pieces in the order Python should run them.",
+              "help": {
+                "concept": "The pieces should form valid Python code in the order it should run.",
+                "hint_1": "Start with the line that sets up the Python action.",
+                "hint_2": "Place lines that depend on earlier values after those values exist."
+              },
+              "tokens": {
+                "t1": "def show_name(name):",
+                "t2": "print(name)",
+                "t3": "show_name(\"Ava\")"
+              }
+            },
+            "fb-def-keyword": {
+              "title": "Complete a function definition",
+              "prompt": "Choose the missing word.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "[blank1] greet():",
+              "choices": [
+                "def",
+                "print",
+                "call",
+                "return"
+              ]
+            },
+            "fb-call-argument": {
+              "title": "Fill in the argument",
+              "prompt": "Choose the value that completes the function call.",
+              "hint": "The function call should pass the name shown in quotes.",
+              "help": {
+                "concept": "An argument is the value placed inside the parentheses when calling a function.",
+                "hint_1": "Look at the quotes already shown in the call.",
+                "hint_2": "The missing part is the exact text value between the parentheses, including the capital letter."
+              },
+              "template": "greet([blank1])",
+              "choices": [
+                "\"Ava\"",
+                "name",
+                "greet",
+                "print"
+              ]
+            },
+            "ci-make-greeting": {
+              "title": "Write a greeting function",
+              "prompt": "Define a function named `make_greeting` that takes one parameter `name` and returns the string `\"Hello, \"` followed by the name. Do not print inside the function.",
+              "hint": "Read the task \"Write a greeting function\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Write a greeting function\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass"
+            },
+            "ci-square-number": {
+              "title": "Return the square",
+              "prompt": "Define a function named `square` that takes one parameter `number` and returns its square. For example, `square(4)` should return `16`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+              },
+              "starterCode": "def square(number):\n    # return the square of number\n    pass"
+            },
+            "ci-full-name": {
+              "title": "Combine first and last name",
+              "prompt": "Define a function named `full_name` that takes two parameters, `first` and `last`, and returns them joined with a space in between. For example, `full_name(\"Ada\", \"Lovelace\")` should return `\"Ada Lovelace\"`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+              },
+              "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-6-functions-and-modularity": {
+        "defining-and-calling-functions": {
+          "sketch-1": {
+            "title": "What a function does",
+            "bodyMarkdown": "A **function** is a named block of code that does a job. You define it once, then call it whenever you need that job again.\n\nIn Python, you define a function with `def`:\n\n```python\ndef greet():\n    print(\"Hello!\")\n\ngreet()\n```\n\nStep by step:\n\n- `def greet():` creates a function named `greet`\n- The indented line is the code that runs when the function is called\n- `greet()` calls the function\n- The output panel shows `Hello!`\n\nThis is useful because you can avoid repeating the same code many times.\n\nWorked example:\n\n```python\ndef cheer():\n    print(\"Go!\")\n\ncheer()\ncheer()\n```\n\nBecause `cheer()` is called twice, the output is:\n\n```python\nGo!\nGo!\n```\n\nTry it yourself: change the message inside `cheer()` and click Run again."
+          },
+          "sketch-2": {
+            "title": "Calling functions with arguments",
+            "bodyMarkdown": "Some functions need extra information to do their job. That information is passed in as **arguments**.\n\n```python\ndef greet(name):\n    print(\"Hello, \" + name)\n\ngreet(\"Ava\")\ngreet(\"Leo\")\n```\n\nLine by line:\n\n- `def greet(name):` defines a function with one parameter, `name`\n- `greet(\"Ava\")` sends the value `\"Ava\"` into the function\n- Inside the function, `name` becomes `\"Ava\"`\n- Then `greet(\"Leo\")` runs the same code with a different value\n\nThe output is:\n\n```python\nHello, Ava\nHello, Leo\n```\n\nA parameter is the variable in the function definition. An argument is the value you pass when calling the function.\n\nTry this: change one call to `greet(\"Mina\")` and see how the output changes."
+          },
+          "sketch-3": {
+            "title": "Functions can return values",
+            "bodyMarkdown": "A function can also **return** a result instead of printing it directly.\n\n```python\ndef double(number):\n    return number * 2\n\nresult = double(5)\nprint(result)\n```\n\nStep by step:\n\n- `double(number)` receives a value\n- `return number * 2` sends back the result\n- `result = double(5)` stores that returned value\n- `print(result)` shows it in the output panel\n\nThe output is:\n\n```python\n10\n```\n\nWorked example:\n\n```python\ndef make_label(text):\n    return \"Item: \" + text\n\nlabel = make_label(\"Book\")\nprint(label)\n```\n\nThis prints:\n\n```python\nItem: Book\n```\n\nWhy return instead of print? Returning lets you reuse the result later in your code.\n\nYour turn: change `\"Book\"` to another word and run the code again."
+          }
+        }
+      }
+    }
+  }
+}

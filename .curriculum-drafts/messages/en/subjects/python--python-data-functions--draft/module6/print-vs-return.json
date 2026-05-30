@@ -167,36 +167,98 @@
             },
             "pvrs-code-1": {
               "title": "Return a doubled value",
-              "prompt": "Write a function named `double_number` that takes one parameter `n` and returns double its value. Do not print inside the function.",
+              "prompt": "Complete this project step: Return a doubled value.\n\nRequirements:\n- return double the input\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def double_number(n):\n    # return double the input\n    pass"
             },
             "pvrs-code-2": {
               "title": "Return a greeting string",
-              "prompt": "Write a function named `make_greeting` that takes one parameter `name` and returns the string `Hello, ` followed by the name. Do not print inside the function.",
+              "prompt": "Complete this project step: Return a greeting string.\n\nRequirements:\n- return a greeting like Hello, Ava\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def make_greeting(name):\n    # return a greeting like Hello, Ava\n    pass"
             },
             "pvrs-code-3": {
               "title": "Return a total instead of printing it",
-              "prompt": "Write a function named `add_prices` that takes two parameters, `price1` and `price2`, and returns their sum. Do not print inside the function.",
+              "prompt": "Complete this project step: Return a total instead of printing it.\n\nRequirements:\n- return the total of the two prices\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def add_prices(price1, price2):\n    # return the total of the two prices\n    pass"
+            },
+            "try-print-vs-return-checkpoint": {
+              "title": "Return, then print",
+              "prompt": "Define `add(a, b)` so it returns the sum. Then print `add(3, 4)`. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "The function should return the value; the call site should print it.",
+              "help": {
+                "concept": "Returning a value and printing a value are separate actions.",
+                "hint_1": "The function should return the value; the call site should print it.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "def add(a, b):\n    # Return the sum.\n    pass\n\n# Print the result of add(3, 4).\n"
+            },
+            "try-print-vs-return-sketch0": {
+              "title": "Return then print",
+              "prompt": "The function returns the value; the caller prints it. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Printing shows a value; returning gives it back\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def make_message(name):\n    # Return 'Hi, ' + name instead of printing inside the function.\n    pass\n\nmessage = make_message('Ava')\nprint(message)\n"
+            },
+            "try-print-vs-return-sketch1": {
+              "title": "Use a returned number",
+              "prompt": "Returned values can be stored and used in more expressions. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"A worked comparison: same output, different usefulness\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def double(number):\n    return number * 2\n\n# Store double(6) in result, then print result + 1.\n"
+            },
+            "try-print-vs-return-sketch2": {
+              "title": "Avoid printing None",
+              "prompt": "Print the returned string, not the function object. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"When should you print, and when should you return?\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def label(name):\n    return name.upper()\n\n# Print label('zoe').\n"
+            }
+          },
+          "tryIt": {
+            "try_print_vs_return_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Define `add(a, b)` so it returns the sum. Then print `add(3, 4)`."
+            },
+            "try_print_vs_return_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "The function returns the value; the caller prints it."
+            },
+            "try_print_vs_return_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Returned values can be stored and used in more expressions."
+            },
+            "try_print_vs_return_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Print the returned string, not the function object."
             }
           }
         }

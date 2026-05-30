@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch0.title",
       "sketchId": "list-creation-basics",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-creating-and-indexing-lists-sketch0",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.tryIt.try_creating_and_indexing_lists_sketch0.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.tryIt.try_creating_and_indexing_lists_sketch0.prompt",
+        "exerciseKey": "try-creating-and-indexing-lists-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch1.title",
       "sketchId": "indexing-basics",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-creating-and-indexing-lists-sketch1",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.tryIt.try_creating_and_indexing_lists_sketch1.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.tryIt.try_creating_and_indexing_lists_sketch1.prompt",
+        "exerciseKey": "try-creating-and-indexing-lists-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch2.title",
       "sketchId": "using-lists-in-small-programs",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-creating-and-indexing-lists-sketch2",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.tryIt.try_creating_and_indexing_lists_sketch2.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.tryIt.try_creating_and_indexing_lists_sketch2.prompt",
+        "exerciseKey": "try-creating-and-indexing-lists-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -264,6 +300,78 @@
       }
     },
     {
+      "id": "try-creating-and-indexing-lists-checkpoint",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "names = []\n\n# Create the list [\"Ava\", \"Mia\", \"Zoe\"].\n# Print the first name, then print the last name.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "names = []\n\n# Create the list [\"Ava\", \"Mia\", \"Zoe\"].\n# Print the first name, then print the last name.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "names = []\n\n# Create the list [\"Ava\", \"Mia\", \"Zoe\"].\n# Print the first name, then print the last name.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "names = []\n\n# Create the list [\"Ava\", \"Mia\", \"Zoe\"].\n# Print the first name, then print the last name.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nprint(names[0])\nprint(names[-1])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\nZoe\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nprint(names[0])\nprint(names[-1])\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nprint(names[0])\nprint(names[-1])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nprint(names[0])\nprint(names[-1])\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
       "id": "ci-print-first-last",
       "kind": "code_input",
       "purpose": "project",
@@ -292,6 +400,15 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -309,8 +426,26 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])"
-      }
+        "solutionCode": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-print-second-number",
@@ -341,6 +476,15 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -358,8 +502,26 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])"
-      }
+        "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-build-and-show-list",
@@ -390,6 +552,15 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -407,7 +578,238 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)"
+        "solutionCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-creating-and-indexing-lists-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0",
+      "language": "python",
+      "starterCode": "items = ['red', 'blue', 'green']\n\n# Print the first item.\n# Then print the last item.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "items = ['red', 'blue', 'green']\n\n# Print the first item.\n# Then print the last item.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "items = ['red', 'blue', 'green']\nprint(items[0])\nprint(items[-1])\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "items = ['red', 'blue', 'green']\n\n# Print the first item.\n# Then print the last item.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "items = ['red', 'blue', 'green']\n\n# Print the first item.\n# Then print the last item.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "items = ['red', 'blue', 'green']\nprint(items[0])\nprint(items[-1])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "red\ngreen\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "items = ['red', 'blue', 'green']\nprint(items[0])\nprint(items[-1])\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "items = ['red', 'blue', 'green']\nprint(items[0])\nprint(items[-1])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-creating-and-indexing-lists-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1",
+      "language": "python",
+      "starterCode": "numbers = [4, 9, 2]\n\n# Print the second number in the list.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "numbers = [4, 9, 2]\n\n# Print the second number in the list.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "numbers = [4, 9, 2]\nprint(numbers[1])\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "numbers = [4, 9, 2]\n\n# Print the second number in the list.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [4, 9, 2]\n\n# Print the second number in the list.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [4, 9, 2]\nprint(numbers[1])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "9\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "numbers = [4, 9, 2]\nprint(numbers[1])\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [4, 9, 2]\nprint(numbers[1])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-creating-and-indexing-lists-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2",
+      "language": "python",
+      "starterCode": "first = 'Ava'\nsecond = 'Mia'\n\n# Build a list named names with first and second.\n# Then print names.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "first = 'Ava'\nsecond = 'Mia'\n\n# Build a list named names with first and second.\n# Then print names.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "first = 'Ava'\nsecond = 'Mia'\nnames = [first, second]\nprint(names)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "first = 'Ava'\nsecond = 'Mia'\n\n# Build a list named names with first and second.\n# Then print names.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "first = 'Ava'\nsecond = 'Mia'\n\n# Build a list named names with first and second.\n# Then print names.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "first = 'Ava'\nsecond = 'Mia'\nnames = [first, second]\nprint(names)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "['Ava', 'Mia']\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "first = 'Ava'\nsecond = 'Mia'\nnames = [first, second]\nprint(names)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "first = 'Ava'\nsecond = 'Mia'\nnames = [first, second]\nprint(names)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
       }
     }
   ]

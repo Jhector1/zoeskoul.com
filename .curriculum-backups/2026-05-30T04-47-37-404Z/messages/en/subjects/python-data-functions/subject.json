@@ -1,0 +1,181 @@
+{
+  "subjects": {
+    "python-data-functions": {
+      "title": "Python Data and Functions",
+      "description": "Build practical Python skills with lists, tuples, dictionaries, functions, helper modules, files, exceptions, and simple data cleaning.",
+      "moreComingSoon": "More Python Data and Functions lessons are coming soon."
+    }
+  },
+  "modules": {
+    "python-data-functions": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "title": "Lists, Tuples, and Dictionaries",
+        "description": "Teach learners how to organize multiple values and choose the right collection type.",
+        "outcomes": [
+          "Create and modify lists",
+          "Use tuples for fixed grouped values",
+          "Store key-value data in dictionaries"
+        ],
+        "why": [
+          "Builds confidence with lists, tuples, and dictionaries.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "python-6-functions-and-modularity": {
+        "title": "Functions and Modularity",
+        "description": "Help learners organize code into reusable functions, helper modules, and simple imports with clear inputs and outputs.",
+        "outcomes": [
+          "Define functions",
+          "Use parameters and return values",
+          "Separate program logic into small pieces",
+          "Use simple imports and helper modules"
+        ],
+        "why": [
+          "Builds confidence with functions and modularity.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "python-7-files-exceptions-and-data-cleaning": {
+        "title": "Files, Exceptions, and Data Cleaning",
+        "description": "Teach learners how to read files, create/write files, import standard-library data tools, and handle messy data without crashing programs.",
+        "outcomes": [
+          "Read text files",
+          "Create and write text files",
+          "Use relative paths safely",
+          "Handle exceptions",
+          "Clean structured text data"
+        ],
+        "why": [
+          "Builds confidence with files, exceptions, and data cleaning.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "python-8-real-world-project": {
+        "title": "Real-World Project",
+        "description": "Build a complete Python data-cleaning project from start to finish.",
+        "outcomes": [
+          "Build an incremental multi-file project",
+          "Clean and summarize messy data",
+          "Write clean output reports"
+        ],
+        "why": [
+          "Turns the course skills into a realistic portfolio project.",
+          "Shows how lists, dictionaries, functions, files, and exceptions work together."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "python-data-functions": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "python-data-functions-python-5-list-basics": {
+          "title": "List Basics",
+          "description": "Learn creating and indexing lists, list methods and mutation, looping through lists through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Creating and Indexing Lists",
+            "List Methods and Mutation",
+            "Looping Through Lists"
+          ]
+        },
+        "python-data-functions-python-5-dictionaries": {
+          "title": "Dictionaries",
+          "description": "Learn dictionary basics, updating and looping dictionaries, nested data structures through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Dictionary Basics",
+            "Updating and Looping Dictionaries",
+            "Nested Data Structures"
+          ]
+        },
+        "python-data-functions-python-5-module-project": {
+          "title": "Module Project",
+          "description": "Build a real program that combines lists and dictionaries from this module.",
+          "weeks": null,
+          "bullets": [
+            "Combine lists and dictionaries",
+            "Practice multi-step problem solving",
+            "Finish a realistic gradebook program"
+          ]
+        }
+      },
+      "python-6-functions-and-modularity": {
+        "python-data-functions-python-6-function-basics": {
+          "title": "Function Basics",
+          "description": "Learn defining and calling functions, parameters and return values, print vs return through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Defining and Calling Functions",
+            "Parameters and Return Values",
+            "Print vs Return"
+          ]
+        },
+        "python-data-functions-python-6-function-design": {
+          "title": "Function Design",
+          "description": "Learn scope and local variables, decomposition and refactoring, using imports and helper files through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Scope and Local Variables",
+            "Decomposition and Refactoring",
+            "Using Imports and Helper Files",
+            "Docstrings and Function Contracts"
+          ]
+        },
+        "python-data-functions-python-6-module-project": {
+          "title": "Module Project",
+          "description": "Build a real multi-file helper package using functions, imports, and docstrings.",
+          "weeks": null,
+          "bullets": [
+            "Combine functions and imports",
+            "Practice multi-file helper modules",
+            "Finish a name badge package"
+          ]
+        }
+      },
+      "python-7-files-exceptions-and-data-cleaning": {
+        "python-data-functions-python-7-file-io": {
+          "title": "File Input and Output",
+          "description": "Learn reading text files, writing text files, working with paths through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Reading Text Files",
+            "Writing Text Files",
+            "Working With Paths"
+          ]
+        },
+        "python-data-functions-python-7-exceptions-and-cleaning": {
+          "title": "Exceptions and Cleaning",
+          "description": "Learn try/except basics, validating and cleaning input, simple csv processing through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Try/Except Basics",
+            "Validating and Cleaning Input",
+            "Simple CSV Processing"
+          ]
+        },
+        "python-data-functions-python-7-module-project": {
+          "title": "Module Project",
+          "description": "Build a real file-cleaning program using files, exceptions, and data validation.",
+          "weeks": null,
+          "bullets": [
+            "Read and clean messy files",
+            "Handle bad rows safely",
+            "Write cleaned output"
+          ]
+        }
+      },
+      "python-8-real-world-project": {
+        "python-data-functions-python-8-course-capstone": {
+          "title": "Course Capstone",
+          "description": "Build one realistic data-cleaning project that uses the whole course.",
+          "weeks": null,
+          "bullets": [
+            "Read and clean a real-looking roster file",
+            "Organize helpers into modules",
+            "Write final output reports"
+          ]
+        }
+      }
+    }
+  }
+}

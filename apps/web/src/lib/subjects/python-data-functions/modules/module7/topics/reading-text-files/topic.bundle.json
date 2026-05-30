@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.sketch0.title",
       "sketchId": "why-read-files",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-reading-text-files-sketch0",
+        "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.tryIt.try_reading_text_files_sketch0.title",
+        "promptKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.tryIt.try_reading_text_files_sketch0.prompt",
+        "exerciseKey": "try-reading-text-files-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.sketch1.title",
       "sketchId": "read-vs-lines",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-reading-text-files-sketch1",
+        "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.tryIt.try_reading_text_files_sketch1.title",
+        "promptKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.tryIt.try_reading_text_files_sketch1.prompt",
+        "exerciseKey": "try-reading-text-files-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.cards.sketch2.title",
       "sketchId": "relative-paths-and-safety",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-reading-text-files-sketch2",
+        "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.tryIt.try_reading_text_files_sketch2.title",
+        "promptKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.tryIt.try_reading_text_files_sketch2.prompt",
+        "exerciseKey": "try-reading-text-files-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -258,6 +294,119 @@
       }
     },
     {
+      "id": "try-reading-text-files-checkpoint",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Read data/note.txt and print its contents.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read data/note.txt and print its contents.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/note.txt",
+          "content": "Hello from a file!\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read data/note.txt and print its contents.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read data/note.txt and print its contents.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/note.txt",
+            "content": "Hello from a file!\n",
+            "language": "text"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/note.txt\") as file:\n    print(file.read(), end=\"\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/note.txt",
+            "content": "Hello from a file!\n",
+            "language": "text"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data"
+          ],
+          "requiredFiles": [
+            "data/note.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Hello from a file!\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "with open(\"data/note.txt\") as file:\n    print(file.read(), end=\"\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/note.txt\") as file:\n    print(file.read(), end=\"\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/note.txt",
+            "content": "Hello from a file!\n",
+            "language": "text"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open(\"data/note.txt\") as file:\n    print(file.read(), end=\"\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/note.txt",
+          "content": "Hello from a file!\n",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/note.txt"
+        ]
+      }
+    },
+    {
       "id": "ci-read-and-print",
       "kind": "code_input",
       "purpose": "project",
@@ -292,6 +441,15 @@
             "path": "data/message.txt",
             "content": "Hello from file reading!"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -321,8 +479,26 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)"
-      }
+        "solutionCode": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-first-line",
@@ -359,6 +535,15 @@
             "path": "data/notes.txt",
             "content": "Apples\nBananas\nCarrots"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -388,8 +573,26 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)"
-      }
+        "solutionCode": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-count-lines",
@@ -426,6 +629,15 @@
             "path": "data/list.txt",
             "content": "red\nblue\ngreen"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -455,7 +667,379 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))"
+        "solutionCode": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-reading-text-files-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0",
+      "language": "python",
+      "starterCode": "# Read note.txt and print its contents without extra blank lines.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read note.txt and print its contents without extra blank lines.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "note.txt",
+          "content": "Hello from a file\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open('note.txt') as file:\n    print(file.read().strip())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "note.txt",
+          "content": "Hello from a file\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read note.txt and print its contents without extra blank lines.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read note.txt and print its contents without extra blank lines.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "note.txt",
+            "content": "Hello from a file\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open('note.txt') as file:\n    print(file.read().strip())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "note.txt",
+            "content": "Hello from a file\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "note.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Hello from a file\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "with open('note.txt') as file:\n    print(file.read().strip())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open('note.txt') as file:\n    print(file.read().strip())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "note.txt",
+            "content": "Hello from a file\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "note.txt"
+        ]
+      }
+    },
+    {
+      "id": "try-reading-text-files-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1",
+      "language": "python",
+      "starterCode": "# Read names.txt and print each line without extra blank lines.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read names.txt and print each line without extra blank lines.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "names.txt",
+          "content": "Ava\nMia\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "names.txt",
+          "content": "Ava\nMia\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read names.txt and print each line without extra blank lines.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read names.txt and print each line without extra blank lines.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.txt",
+            "content": "Ava\nMia\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.txt",
+            "content": "Ava\nMia\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "names.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\nMia\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.txt",
+            "content": "Ava\nMia\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "names.txt"
+        ]
+      }
+    },
+    {
+      "id": "try-reading-text-files-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2",
+      "language": "python",
+      "starterCode": "count = 0\n\n# Read names.txt, count the lines, and print count.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "count = 0\n\n# Read names.txt, count the lines, and print count.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "names.txt",
+          "content": "Ava\nMia\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "names.txt",
+          "content": "Ava\nMia\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "count = 0\n\n# Read names.txt, count the lines, and print count.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "count = 0\n\n# Read names.txt, count the lines, and print count.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.txt",
+            "content": "Ava\nMia\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.txt",
+            "content": "Ava\nMia\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "names.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "2\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "names.txt",
+            "content": "Ava\nMia\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "names.txt"
+        ]
       }
     }
   ]

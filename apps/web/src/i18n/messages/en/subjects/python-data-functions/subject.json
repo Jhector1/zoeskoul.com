@@ -49,6 +49,19 @@
           "Builds confidence with files, exceptions, and data cleaning.",
           "Prepares learners for the next skills in the course."
         ]
+      },
+      "python-8-real-world-project": {
+        "title": "Real-World Project",
+        "description": "A local school has a messy roster export and needs a clean Python tool that turns it into dependable reports.",
+        "outcomes": [
+          "Grow one project from raw file input into a clean multi-file app",
+          "Clean, validate, summarize, and report on messy roster data",
+          "Use lists, dictionaries, functions, modules, files, and exceptions together"
+        ],
+        "why": [
+          "Gives learners a portfolio-style project with a real client-style story.",
+          "Shows how every course skill fits together inside one useful data-cleaning workflow."
+        ]
       }
     }
   },
@@ -74,6 +87,16 @@
             "Updating and Looping Dictionaries",
             "Nested Data Structures"
           ]
+        },
+        "python-data-functions-python-5-module-project": {
+          "title": "Module Project",
+          "description": "A teacher wants to stop tracking scores on scraps of paper. Build a small gradebook that keeps names, scores, and summaries organized.",
+          "weeks": null,
+          "bullets": [
+            "Turn a messy class list into organized Python collections",
+            "Use lists and dictionaries to connect students with scores",
+            "Finish a gradebook summary the teacher can actually read"
+          ]
         }
       },
       "python-6-functions-and-modularity": {
@@ -97,6 +120,16 @@
             "Using Imports and Helper Files",
             "Docstrings and Function Contracts"
           ]
+        },
+        "python-data-functions-python-6-module-project": {
+          "title": "Module Project",
+          "description": "A campus club needs quick name badges for an event. Build a small helper package that cleans names, formats roles, and prints polished badges.",
+          "weeks": null,
+          "bullets": [
+            "Organize badge logic into helper functions",
+            "Split the app into clear multi-file modules",
+            "Finish a reusable name-badge package"
+          ]
         }
       },
       "python-7-files-exceptions-and-data-cleaning": {
@@ -118,6 +151,28 @@
             "Try/Except Basics",
             "Validating and Cleaning Input",
             "Simple CSV Processing"
+          ]
+        },
+        "python-data-functions-python-7-module-project": {
+          "title": "Module Project",
+          "description": "A student group sends you a messy file of records. Build a cleaner that reads the file, skips bad rows, and writes a usable output file.",
+          "weeks": null,
+          "bullets": [
+            "Read and clean a messy file from a real-looking workflow",
+            "Handle bad rows without crashing",
+            "Write a clean file someone else can use"
+          ]
+        }
+      },
+      "python-8-real-world-project": {
+        "python-data-functions-python-8-course-capstone": {
+          "title": "Course Capstone",
+          "description": "You have been asked to help a school office clean a roster export before report day. Build the tool they will use to clean names, validate scores, skip bad rows, and write final reports.",
+          "weeks": null,
+          "bullets": [
+            "Start with a messy roster file from a school office",
+            "Grow the project step by step into a multi-file tool",
+            "Deliver clean roster and summary reports"
           ]
         }
       }

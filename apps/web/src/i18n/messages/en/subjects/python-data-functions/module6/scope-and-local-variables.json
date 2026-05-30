@@ -166,36 +166,98 @@
             },
             "code-q1": {
               "title": "Return a local calculation",
-              "prompt": "Write a function `add_tax(price)` that returns `price + 5`.\n\nUse a local variable named `total` inside the function, then return it.",
+              "prompt": "Complete this project step: Return a local calculation.\n\nRequirements:\n- store the result in a local variable named total\n- then return it\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def add_tax(price):\n    # store the result in a local variable named total\n    # then return it\n    pass"
             },
             "code-q2": {
               "title": "Use a parameter as a local name",
-              "prompt": "Write a function `make_label(word)` that returns a string in this format: `Item: ` followed by the given word.\n\nUse a local variable named `label` before returning the result.",
+              "prompt": "Complete this project step: Use a parameter as a local name.\n\nRequirements:\n- create a local variable named label\n- return the finished string\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Use a parameter as a local name\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Use a parameter as a local name\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def make_label(word):\n    # create a local variable named label\n    # return the finished string\n    pass"
             },
             "code-q3": {
               "title": "Compute with two local variables",
-              "prompt": "Write a function `rectangle_area(width, height)` that returns the area.\n\nInside the function, create a local variable named `area` and return it.",
+              "prompt": "Complete this project step: Compute with two local variables.\n\nRequirements:\n- create a local variable named area\n- return the area\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Compute with two local variables\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Compute with two local variables\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def rectangle_area(width, height):\n    # create a local variable named area\n    # return the area\n    pass"
+            },
+            "try-scope-and-local-variables-checkpoint": {
+              "title": "Use a local variable",
+              "prompt": "Define `make_message(name)` with a local variable named `message`, then return it. Print the result for `Ava`. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Create the message inside the function.",
+              "help": {
+                "concept": "A local variable exists inside the function where it is created.",
+                "hint_1": "Create the message inside the function.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "def make_message(name):\n    # Create a local variable named message.\n    pass\n\nprint(make_message(\"Ava\"))\n"
+            },
+            "try-scope-and-local-variables-sketch0": {
+              "title": "Use a local variable",
+              "prompt": "A local variable exists inside the function that creates it. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"What local scope means\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def add_tax(price):\n    # Create local variable total = price + 2.\n    # Return total.\n    pass\n\nprint(add_tax(8))\n"
+            },
+            "try-scope-and-local-variables-sketch1": {
+              "title": "Pass data as a parameter",
+              "prompt": "Pass the outside value into the function as an argument. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Inside a function is different from outside\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "name = 'Ava'\n\ndef welcome(person):\n    # Return 'Welcome, ' + person.\n    pass\n\nprint(welcome(name))\n"
+            },
+            "try-scope-and-local-variables-sketch2": {
+              "title": "Keep variables separate",
+              "prompt": "A parameter can have the same name but still be local to the function. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Parameters are local too\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "count = 5\n\ndef add_one(count):\n    # Return count plus one.\n    pass\n\nprint(add_one(count))\nprint(count)\n"
+            }
+          },
+          "tryIt": {
+            "try_scope_and_local_variables_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Define `make_message(name)` with a local variable named `message`, then return it. Print the result for `Ava`."
+            },
+            "try_scope_and_local_variables_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "A local variable exists inside the function that creates it."
+            },
+            "try_scope_and_local_variables_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Pass the outside value into the function as an argument."
+            },
+            "try_scope_and_local_variables_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "A parameter can have the same name but still be local to the function."
             }
           }
         }

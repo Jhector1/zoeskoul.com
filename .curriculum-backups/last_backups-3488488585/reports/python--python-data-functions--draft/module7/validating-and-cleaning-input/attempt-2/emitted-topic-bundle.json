@@ -1,0 +1,485 @@
+{
+  "topicId": "validating-and-cleaning-input",
+  "subjectSlug": "python--python-data-functions--draft",
+  "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
+  "sectionSlug": "python--python-data-functions--draft-python-7-exceptions-and-cleaning",
+  "prefix": "py7",
+  "minutes": 26,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.label",
+    "summaryKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.sketch0.title",
+      "sketchId": "sb-clean-steps",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.sketch1.title",
+      "sketchId": "sb-missing-values",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.sketch2.title",
+      "sketchId": "sb-try-except-cleaning",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_clean_score",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.projectSteps.ci_clean_score.title",
+            "exerciseKey": "ci-clean-score",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_validate_row",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.projectSteps.ci_validate_row.title",
+            "exerciseKey": "ci-validate-row",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_clean_report",
+            "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.projectSteps.ci_clean_report.title",
+            "exerciseKey": "ci-clean-report",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sb-clean-steps",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.sb-clean-steps.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.sb-clean-steps.bodyMarkdown"
+    },
+    {
+      "id": "sb-missing-values",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.sb-missing-values.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.sb-missing-values.bodyMarkdown"
+    },
+    {
+      "id": "sb-try-except-cleaning",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.sb-try-except-cleaning.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.sb-try-except-cleaning.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-clean-before-int",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-clean-before-int",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-except-valueerror",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.sc-except-valueerror",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-missing-value-signs",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.mc-missing-value-signs",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "mc-valid-row-rules",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.mc-valid-row-rules",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr-cleaning-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.dr-cleaning-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr-try-except-flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.dr-try-except-flow",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb-strip-missing",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.fb-strip-missing",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "strip"
+      }
+    },
+    {
+      "id": "fb-empty-check",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.fb-empty-check",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "\"\""
+      }
+    },
+    {
+      "id": "ci-clean-score",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-score",
+      "language": "python",
+      "starterCode": "def clean_score(text):\n    # return an int or None\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_score(text):\n    # return an int or None\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clean_score(text):\n    # return an int or None\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_score(text):\n    # return an int or None\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def clean_score(text):\n    cleaned = text.strip()\n    if cleaned == \"\":\n        return None\n    try:\n        return int(cleaned)\n    except ValueError:\n        return None",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "clean_score",
+            "args": [
+              " 42 "
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 42,
+            "expectedKind": "value",
+            "message": "Returns an integer for valid numeric text with spaces."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This helper should return values instead of printing."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-validate-row",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-validate-row",
+      "language": "python",
+      "starterCode": "name = name.strip()\nscore_text = score_text.strip()\n\ndef validate_row(row):\n    # row contains \"name\" and \"score\"\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "name = name.strip()\nscore_text = score_text.strip()\n\ndef validate_row(row):\n    # row contains \"name\" and \"score\"\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "name = name.strip()\nscore_text = score_text.strip()\n\ndef validate_row(row):\n    # row contains \"name\" and \"score\"\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "name = name.strip()\nscore_text = score_text.strip()\n\ndef validate_row(row):\n    # row contains \"name\" and \"score\"\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "name = name.strip()\nscore_text = score_text.strip()\n\ndef validate_row(row):\n    name = row[\"name\"].strip()\n    score_text = row[\"score\"].strip()\n\n    if name == \"\":\n        return False\n\n    try:\n        int(score_text)\n        return True\n    except ValueError:\n        return False",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "validate_row",
+            "args": [
+              [
+                [
+                  "name",
+                  " Ava "
+                ],
+                [
+                  "score",
+                  " 9 "
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": true,
+            "expectedKind": "value",
+            "message": "Accepts a row with a non-empty cleaned name and a valid integer score."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "validate_row",
+            "args": [
+              [
+                [
+                  "name",
+                  "   "
+                ],
+                [
+                  "score",
+                  " 9 "
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "Rejects a row whose name is empty after stripping."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "validate_row",
+            "args": [
+              [
+                [
+                  "name",
+                  "Ava"
+                ],
+                [
+                  "score",
+                  "nine"
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "Rejects a row whose score cannot be converted to an integer."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This validator should return True or False without printing."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-clean-report",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-report",
+      "language": "python",
+      "starterCode": "line = input()\n\n# Split the line, clean both values,\n# and print either valid or invalid.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "line = input()\n\n# Split the line, clean both values,\n# and print either valid or invalid.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "line = input()\n\n# Split the line, clean both values,\n# and print either valid or invalid.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "line = input()\n\n# Split the line, clean both values,\n# and print either valid or invalid.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": " Ava , 12 \n",
+            "stdout": "valid\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "   , 12\n",
+            "stdout": "invalid\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Ava, nine\n",
+            "stdout": "invalid\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "line = input()\nname, score_text = line.split(\",\")\nname = name.strip()\nscore_text = score_text.strip()\n\nif name == \"\":\n    print(\"invalid\")\nelse:\n    try:\n        int(score_text)\n        print(\"valid\")\n    except ValueError:\n        print(\"invalid\")"
+      }
+    }
+  ]
+}

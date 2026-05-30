@@ -24,14 +24,38 @@
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.cards.sketch0.title",
       "sketchId": "sketch-parameters-basics",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-parameters-and-return-values-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.tryIt.try_parameters_and_return_values_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.tryIt.try_parameters_and_return_values_sketch0.prompt",
+        "exerciseKey": "try-parameters-and-return-values-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.cards.sketch1.title",
       "sketchId": "sketch-return-vs-print",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-parameters-and-return-values-sketch1",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.tryIt.try_parameters_and_return_values_sketch1.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.tryIt.try_parameters_and_return_values_sketch1.prompt",
+        "exerciseKey": "try-parameters-and-return-values-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -247,6 +271,90 @@
       }
     },
     {
+      "id": "try-parameters-and-return-values-checkpoint",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-checkpoint",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "def double(number):\n    # Return twice the number.\n    pass\n\nprint(double(7))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def double(number):\n    # Return twice the number.\n    pass\n\nprint(double(7))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def double(number):\n    # Return twice the number.\n    pass\n\nprint(double(7))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def double(number):\n    # Return twice the number.\n    pass\n\nprint(double(7))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def double(number):\n    return number * 2\n\nprint(double(7))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def double(number):\n    return number * 2\n\nprint(double(7))\n",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "double",
+            "args": [
+              7
+            ],
+            "expected": 14
+          },
+          {
+            "type": "function_returns",
+            "functionName": "double",
+            "args": [
+              -3
+            ],
+            "expected": -6
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def double(number):\n    return number * 2\n\nprint(double(7))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def double(number):\n    return number * 2\n\nprint(double(7))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
       "id": "ci-make-label",
       "kind": "code_input",
       "purpose": "project",
@@ -271,6 +379,15 @@
           {
             "path": "main.py",
             "content": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_label(item, count):\n    return item + \": \" + str(count)",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -314,8 +431,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_label(item, count):\n    return item + \": \" + str(count)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def make_label(item, count):\n    return item + \": \" + str(count)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-calculate-tip",
@@ -342,6 +477,15 @@
           {
             "path": "main.py",
             "content": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def calculate_tip(bill, percent):\n    return bill * percent / 100",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -385,8 +529,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def calculate_tip(bill, percent):\n    return bill * percent / 100",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def calculate_tip(bill, percent):\n    return bill * percent / 100",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-first-item",
@@ -413,6 +575,15 @@
           {
             "path": "main.py",
             "content": "def first_item(items):\n    # return the first element from the list\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def first_item(items):\n    return items[0]",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -458,6 +629,194 @@
           },
           {
             "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def first_item(items):\n    return items[0]",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def first_item(items):\n    return items[0]",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-parameters-and-return-values-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0",
+      "language": "python",
+      "starterCode": "def add(a, b):\n    # Return the sum of a and b.\n    pass\n\nprint(add(3, 4))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def add(a, b):\n    # Return the sum of a and b.\n    pass\n\nprint(add(3, 4))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def add(a, b):\n    # Return the sum of a and b.\n    pass\n\nprint(add(3, 4))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def add(a, b):\n    # Return the sum of a and b.\n    pass\n\nprint(add(3, 4))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "add",
+            "args": [
+              3,
+              4
+            ],
+            "expected": 7
+          },
+          {
+            "type": "function_returns",
+            "functionName": "add",
+            "args": [
+              -2,
+              5
+            ],
+            "expected": 3
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-parameters-and-return-values-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1",
+      "language": "python",
+      "starterCode": "def full_name(first, last):\n    # Return first and last with one space between them.\n    pass\n\nprint(full_name('Ava', 'Smith'))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def full_name(first, last):\n    # Return first and last with one space between them.\n    pass\n\nprint(full_name('Ava', 'Smith'))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def full_name(first, last):\n    return first + ' ' + last\n\nprint(full_name('Ava', 'Smith'))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def full_name(first, last):\n    # Return first and last with one space between them.\n    pass\n\nprint(full_name('Ava', 'Smith'))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def full_name(first, last):\n    # Return first and last with one space between them.\n    pass\n\nprint(full_name('Ava', 'Smith'))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def full_name(first, last):\n    return first + ' ' + last\n\nprint(full_name('Ava', 'Smith'))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def full_name(first, last):\n    return first + ' ' + last\n\nprint(full_name('Ava', 'Smith'))\n",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "full_name",
+            "args": [
+              "Ava",
+              "Smith"
+            ],
+            "expected": "Ava Smith"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "full_name",
+            "args": [
+              "Mia",
+              "Chen"
+            ],
+            "expected": "Mia Chen"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def full_name(first, last):\n    return first + ' ' + last\n\nprint(full_name('Ava', 'Smith'))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
           }
         ]
       }

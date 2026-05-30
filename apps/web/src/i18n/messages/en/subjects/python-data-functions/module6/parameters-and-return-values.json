@@ -161,36 +161,83 @@
             },
             "ci-make-label": {
               "title": "Return a label string",
-              "prompt": "Write a function named `make_label` that takes two parameters, `item` and `count`, and returns a string in this format: `item: count`. For example, `make_label(\"Apples\", 3)` should return `\"Apples: 3\"`.",
+              "prompt": "Complete this project step: Return a label string.\n\nRequirements:\n- return a string like \"Apples: 3\"\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass"
             },
             "ci-calculate-tip": {
               "title": "Return a tip amount",
-              "prompt": "Wrmnnnnnnite a function named `calculate_tip` that takes `bill` and `percent`. Return the tip amount as `bill * percent / 100`. For example, `calculate_tip(50, 20)` should return `10.0`.",
+              "prompt": "Complete this project step: Return a tip amount.\n\nRequirements:\n- return the tip amount\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def calcmulate_tip(bill, percent):\n    # return the tip amount\n    pass"
+              "starterCode": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass"
             },
             "ci-first-item": {
               "title": "Return the first list item",
-              "prompt": "Write a function named `first_item` that takes one parameter, `items`, which will be a list. Return the first value in the list.",
+              "prompt": "Complete this project step: Return the first list item.\n\nRequirements:\n- return the first element from the list\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def first_item(items):\n    # return the first element from the list\n    pass"
+            },
+            "try-parameters-and-return-values-checkpoint": {
+              "title": "Return a doubled number",
+              "prompt": "Define `double(number)` so it returns twice the input. Print `double(7)`. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Use `return number * 2`.",
+              "help": {
+                "concept": "A return value sends a result back to the caller.",
+                "hint_1": "Use `return number * 2`.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "def double(number):\n    # Return twice the number.\n    pass\n\nprint(double(7))\n"
+            },
+            "try-parameters-and-return-values-sketch0": {
+              "title": "Return a sum",
+              "prompt": "Use parameters to receive values and `return` to send back the result. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Parameters let a function work with different values\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def add(a, b):\n    # Return the sum of a and b.\n    pass\n\nprint(add(3, 4))\n"
+            },
+            "try-parameters-and-return-values-sketch1": {
+              "title": "Format a full name",
+              "prompt": "Return a string built from two parameters. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Returning a value is different from printing it\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def full_name(first, last):\n    # Return first and last with one space between them.\n    pass\n\nprint(full_name('Ava', 'Smith'))\n"
+            }
+          },
+          "tryIt": {
+            "try_parameters_and_return_values_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Define `double(number)` so it returns twice the input. Print `double(7)`."
+            },
+            "try_parameters_and_return_values_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Use parameters to receive values and `return` to send back the result."
+            },
+            "try_parameters_and_return_values_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Return a string built from two parameters."
             }
           }
         }

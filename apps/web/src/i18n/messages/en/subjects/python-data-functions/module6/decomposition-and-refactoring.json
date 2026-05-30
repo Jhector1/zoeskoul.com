@@ -166,36 +166,98 @@
             },
             "ci-1": {
               "title": "Extract a cleaning helper",
-              "prompt": "Write a function named `clean_name` that takes one parameter, `name`. It should remove extra spaces from both ends and return the text in title case. Do not print inside the function.",
+              "prompt": "Complete this project step: Extract a cleaning helper.\n\nRequirements:\n- return the cleaned version of name\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Extract a cleaning helper\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Extract a cleaning helper\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def clean_name(name):\n    # return the cleaned version of name\n    pass"
             },
             "ci-2": {
               "title": "Build a summary with helpers",
-              "prompt": "Write two functions.\n\n- `word_count(text)` should return the number of words in `text`.\n- `summary(text)` should call `word_count(text)` and return a string in this format: `Words: X`\n\nA word is any item produced by `text.split()`. Do not print inside the functions.",
+              "prompt": "Complete this project step: Build a summary with helpers.\n\nRequirements:\n- return the number of words\n- return a string like: Words: 3\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Build a summary with helpers\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Build a summary with helpers\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass"
             },
             "ci-3": {
               "title": "Refactor repeated math into helpers",
-              "prompt": "Write two helper functions and one main function.\n\n- `double(number)` should return `number * 2`\n- `triple(number)` should return `number * 3`\n- `combined_total(a, b)` should return the result of doubling `a` and tripling `b`, then adding those two results together\n\nDo not print inside the functions.",
+              "prompt": "Complete this project step: Refactor repeated math into helpers.\n\nRequirements:\n- use the helper functions here\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Refactor repeated math into helpers\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Refactor repeated math into helpers\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass"
+            },
+            "try-decomposition-and-refactoring-checkpoint": {
+              "title": "Use a helper function",
+              "prompt": "Define `clean_title(text)` that strips spaces and title-cases the text. Print the cleaned version of `\"  python helper  \"`. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Use `.strip().title()` inside a helper function.",
+              "help": {
+                "concept": "Decomposition means moving a small job into a helper function.",
+                "hint_1": "Use `.strip().title()` inside a helper function.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n"
+            },
+            "try-decomposition-and-refactoring-sketch0": {
+              "title": "Clean text with a helper",
+              "prompt": "Put one small job inside a helper function. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Why break a program into helper functions?\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n"
+            },
+            "try-decomposition-and-refactoring-sketch1": {
+              "title": "Split a full name",
+              "prompt": "A helper can hide a small string-processing step. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Spotting repeated code\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n"
+            },
+            "try-decomposition-and-refactoring-sketch2": {
+              "title": "Combine two helpers",
+              "prompt": "One helper can call another helper. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Make each function do one clear job\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n"
+            }
+          },
+          "tryIt": {
+            "try_decomposition_and_refactoring_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Define `clean_title(text)` that strips spaces and title-cases the text. Print the cleaned version of `\"  python helper  \"`."
+            },
+            "try_decomposition_and_refactoring_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Put one small job inside a helper function."
+            },
+            "try_decomposition_and_refactoring_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "A helper can hide a small string-processing step."
+            },
+            "try_decomposition_and_refactoring_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "One helper can call another helper."
             }
           }
         }

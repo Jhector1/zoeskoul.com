@@ -163,36 +163,98 @@
             },
             "code-1": {
               "title": "Return all names",
-              "prompt": "Write a function `get_names(records)` that takes a list of dictionaries. Each dictionary has a `\"name\"` key. Return a list of all the names in the same order.",
+              "prompt": "Complete this project step: Return all names.\n\nRequirements:\n- add each record's name to names\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names"
             },
             "code-2": {
               "title": "Count total stock",
-              "prompt": "Write a function `total_stock(items)` that takes a list of dictionaries. Each dictionary has a `\"stock\"` key with a number. Return the total stock.",
+              "prompt": "Complete this project step: Count total stock.\n\nRequirements:\n- update total using each item's stock\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total"
             },
             "code-3": {
               "title": "Find the highest score",
-              "prompt": "Write a function `highest_score(players)` that takes a list of dictionaries. Each dictionary has a `\"score\"` key. Return the largest score.",
+              "prompt": "Complete this project step: Find the highest score.\n\nRequirements:\n- compare later scores with best\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Find the highest score\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Find the highest score\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best"
+            },
+            "try-nested-data-structures-checkpoint": {
+              "title": "Read nested data",
+              "prompt": "Use a list of dictionaries. Print the second student’s name and score. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Use index `1`, then dictionary keys.",
+              "help": {
+                "concept": "Nested data combines containers, such as a list of dictionaries.",
+                "hint_1": "Use index `1`, then dictionary keys.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\n\n# Print Mia and her score on separate lines.\n"
+            },
+            "try-nested-data-structures-sketch0": {
+              "title": "Read a nested value",
+              "prompt": "Use a list index first, then a dictionary key. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"What nested data structures are\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Print the first student's name.\n"
+            },
+            "try-nested-data-structures-sketch1": {
+              "title": "Print names and scores",
+              "prompt": "Loop through a list of dictionaries. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Reading values from nested containers\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Loop through students and print: name: score\n"
+            },
+            "try-nested-data-structures-sketch2": {
+              "title": "Add a nested value",
+              "prompt": "Mutate a list that is stored inside a dictionary. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Looping through a list of dictionaries\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "course = {'title': 'Python', 'students': ['Ava']}\n\n# Add 'Mia' to the students list.\n# Then print course.\n"
+            }
+          },
+          "tryIt": {
+            "try_nested_data_structures_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Use a list of dictionaries. Print the second student’s name and score."
+            },
+            "try_nested_data_structures_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Use a list index first, then a dictionary key."
+            },
+            "try_nested_data_structures_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Loop through a list of dictionaries."
+            },
+            "try_nested_data_structures_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Mutate a list that is stored inside a dictionary."
             }
           }
         }

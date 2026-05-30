@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.sketch0.title",
       "sketchId": "paths-relative-basics",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-working-with-paths-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.tryIt.try_working_with_paths_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.tryIt.try_working_with_paths_sketch0.prompt",
+        "exerciseKey": "try-working-with-paths-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.sketch1.title",
       "sketchId": "paths-folders-and-organization",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-working-with-paths-sketch1",
+        "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.tryIt.try_working_with_paths_sketch1.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.tryIt.try_working_with_paths_sketch1.prompt",
+        "exerciseKey": "try-working-with-paths-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.sketch2.title",
       "sketchId": "paths-safe-habits",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-working-with-paths-sketch2",
+        "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.tryIt.try_working_with_paths_sketch2.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.tryIt.try_working_with_paths_sketch2.prompt",
+        "exerciseKey": "try-working-with-paths-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -256,6 +292,119 @@
       }
     },
     {
+      "id": "try-working-with-paths-checkpoint",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/names.txt",
+          "content": "Ava\nMia\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/names.txt",
+            "content": "Ava\nMia\n",
+            "language": "text"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/names.txt",
+            "content": "Ava\nMia\n",
+            "language": "text"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data"
+          ],
+          "requiredFiles": [
+            "data/names.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\nMia\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/names.txt",
+            "content": "Ava\nMia\n",
+            "language": "text"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/names.txt",
+          "content": "Ava\nMia\n",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/names.txt"
+        ]
+      }
+    },
+    {
       "id": "ci-read-nested-file",
       "kind": "code_input",
       "purpose": "project",
@@ -291,6 +440,15 @@
             "content": "Hello paths!",
             "readOnly": false
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -322,8 +480,26 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)"
-      }
+        "solutionCode": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-copy-between-paths",
@@ -361,6 +537,15 @@
             "content": "apple\nbanana",
             "readOnly": false
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -392,8 +577,26 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)"
-      }
+        "solutionCode": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-count-lines-in-folder",
@@ -431,6 +634,15 @@
             "content": "pen\nbook\neraser",
             "readOnly": false
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -462,7 +674,289 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))"
+        "solutionCode": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-working-with-paths-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0",
+      "language": "python",
+      "starterCode": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "folder = 'data'\nfilename = 'scores.txt'\npath = folder + '/' + filename\nprint(path)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "folder = 'data'\nfilename = 'scores.txt'\npath = folder + '/' + filename\nprint(path)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "data/scores.txt\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "folder = 'data'\nfilename = 'scores.txt'\npath = folder + '/' + filename\nprint(path)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "folder = 'data'\nfilename = 'scores.txt'\npath = folder + '/' + filename\nprint(path)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-working-with-paths-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1",
+      "language": "python",
+      "starterCode": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from pathlib import Path\npath = Path('data') / 'scores.txt'\nprint(path)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from pathlib import Path\npath = Path('data') / 'scores.txt'\nprint(path)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "data/scores.txt\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\npath = Path('data') / 'scores.txt'\nprint(path)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from pathlib import Path\npath = Path('data') / 'scores.txt'\nprint(path)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-working-with-paths-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2",
+      "language": "python",
+      "starterCode": "# Open data/message.txt and print its text.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Open data/message.txt and print its text.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/message.txt",
+          "content": "Nested hello\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open('data/message.txt') as file:\n    print(file.read().strip())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/message.txt",
+          "content": "Nested hello\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Open data/message.txt and print its text.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Open data/message.txt and print its text.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/message.txt",
+            "content": "Nested hello\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open('data/message.txt') as file:\n    print(file.read().strip())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/message.txt",
+            "content": "Nested hello\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data"
+          ],
+          "requiredFiles": [
+            "data/message.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Nested hello\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "with open('data/message.txt') as file:\n    print(file.read().strip())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open('data/message.txt') as file:\n    print(file.read().strip())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/message.txt",
+            "content": "Nested hello\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/message.txt"
+        ]
       }
     }
   ]

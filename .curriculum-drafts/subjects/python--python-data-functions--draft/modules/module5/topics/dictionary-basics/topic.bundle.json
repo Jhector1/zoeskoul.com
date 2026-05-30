@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch0.title",
       "sketchId": "dict-idea",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-dictionary-basics-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.tryIt.try_dictionary_basics_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.tryIt.try_dictionary_basics_sketch0.prompt",
+        "exerciseKey": "try-dictionary-basics-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch1.title",
       "sketchId": "dict-lookup",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-dictionary-basics-sketch1",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.tryIt.try_dictionary_basics_sketch1.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.tryIt.try_dictionary_basics_sketch1.prompt",
+        "exerciseKey": "try-dictionary-basics-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch2.title",
       "sketchId": "dict-create-update",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-dictionary-basics-sketch2",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.tryIt.try_dictionary_basics_sketch2.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.tryIt.try_dictionary_basics_sketch2.prompt",
+        "exerciseKey": "try-dictionary-basics-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -258,6 +294,78 @@
       }
     },
     {
+      "id": "try-dictionary-basics-checkpoint",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "student = {}\n\n# Store name Ava and score 92.\n# Then print the score.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "student = {}\n\n# Store name Ava and score 92.\n# Then print the score.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "student = {}\n\n# Store name Ava and score 92.\n# Then print the score.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "student = {}\n\n# Store name Ava and score 92.\n# Then print the score.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = {\"name\": \"Ava\", \"score\": 92}\nprint(student[\"score\"])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "92\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "student = {\"name\": \"Ava\", \"score\": 92}\nprint(student[\"score\"])\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = {\"name\": \"Ava\", \"score\": 92}\nprint(student[\"score\"])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "student = {\"name\": \"Ava\", \"score\": 92}\nprint(student[\"score\"])\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
       "id": "ci-make-dictionary",
       "kind": "code_input",
       "purpose": "project",
@@ -282,6 +390,15 @@
           {
             "path": "main.py",
             "content": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_book(title, pages):\n    return {\"title\": title, \"pages\": pages}",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -343,8 +460,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_book(title, pages):\n    return {\"title\": title, \"pages\": pages}",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def make_book(title, pages):\n    return {\"title\": title, \"pages\": pages}",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-get-score",
@@ -371,6 +506,15 @@
           {
             "path": "main.py",
             "content": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_score(scores, name):\n    return scores[name]",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -432,8 +576,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_score(scores, name):\n    return scores[name]",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def get_score(scores, name):\n    return scores[name]",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-update-dictionary",
@@ -460,6 +622,15 @@
           {
             "path": "main.py",
             "content": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def set_price(prices, item, amount):\n    prices[item] = amount\n    return prices",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -538,6 +709,237 @@
           },
           {
             "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def set_price(prices, item, amount):\n    prices[item] = amount\n    return prices",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def set_price(prices, item, amount):\n    prices[item] = amount\n    return prices",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-dictionary-basics-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0",
+      "language": "python",
+      "starterCode": "profile = {'name': 'Ava', 'age': 12}\n\n# Print the name from profile.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "profile = {'name': 'Ava', 'age': 12}\n\n# Print the name from profile.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "profile = {'name': 'Ava', 'age': 12}\nprint(profile['name'])\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "profile = {'name': 'Ava', 'age': 12}\n\n# Print the name from profile.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "profile = {'name': 'Ava', 'age': 12}\n\n# Print the name from profile.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "profile = {'name': 'Ava', 'age': 12}\nprint(profile['name'])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "profile = {'name': 'Ava', 'age': 12}\nprint(profile['name'])\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "profile = {'name': 'Ava', 'age': 12}\nprint(profile['name'])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-dictionary-basics-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1",
+      "language": "python",
+      "starterCode": "profile = {'name': 'Mia', 'age': 11}\n\n# Change age to 12.\n# Then print the profile dictionary.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "profile = {'name': 'Mia', 'age': 11}\n\n# Change age to 12.\n# Then print the profile dictionary.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "profile = {'name': 'Mia', 'age': 11}\nprofile['age'] = 12\nprint(profile)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "profile = {'name': 'Mia', 'age': 11}\n\n# Change age to 12.\n# Then print the profile dictionary.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "profile = {'name': 'Mia', 'age': 11}\n\n# Change age to 12.\n# Then print the profile dictionary.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "profile = {'name': 'Mia', 'age': 11}\nprofile['age'] = 12\nprint(profile)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "{'name': 'Mia', 'age': 12}\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "profile = {'name': 'Mia', 'age': 11}\nprofile['age'] = 12\nprint(profile)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "profile = {'name': 'Mia', 'age': 11}\nprofile['age'] = 12\nprint(profile)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-dictionary-basics-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2",
+      "language": "python",
+      "starterCode": "# Create a dictionary named scores with Ava: 92 and Mia: 85.\n# Then print scores.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Create a dictionary named scores with Ava: 92 and Mia: 85.\n# Then print scores.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "scores = {'Ava': 92, 'Mia': 85}\nprint(scores)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Create a dictionary named scores with Ava: 92 and Mia: 85.\n# Then print scores.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Create a dictionary named scores with Ava: 92 and Mia: 85.\n# Then print scores.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "scores = {'Ava': 92, 'Mia': 85}\nprint(scores)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "{'Ava': 92, 'Mia': 85}\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "scores = {'Ava': 92, 'Mia': 85}\nprint(scores)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "scores = {'Ava': 92, 'Mia': 85}\nprint(scores)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
           }
         ]
       }

@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch0.title",
       "sketchId": "sketch-write-mode-basics",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-writing-text-files-sketch0",
+        "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.tryIt.try_writing_text_files_sketch0.title",
+        "promptKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.tryIt.try_writing_text_files_sketch0.prompt",
+        "exerciseKey": "try-writing-text-files-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch1.title",
       "sketchId": "sketch-append-mode-basics",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-writing-text-files-sketch1",
+        "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.tryIt.try_writing_text_files_sketch1.title",
+        "promptKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.tryIt.try_writing_text_files_sketch1.prompt",
+        "exerciseKey": "try-writing-text-files-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.cards.sketch2.title",
       "sketchId": "sketch-newlines-and-verifying",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-writing-text-files-sketch2",
+        "titleKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.tryIt.try_writing_text_files_sketch2.title",
+        "promptKey": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.tryIt.try_writing_text_files_sketch2.prompt",
+        "exerciseKey": "try-writing-text-files-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -262,6 +298,78 @@
       }
     },
     {
+      "id": "try-writing-text-files-checkpoint",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-checkpoint",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Write Hello from a file! to note.txt.\n# Then read note.txt and print it.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Write Hello from a file! to note.txt.\n# Then read note.txt and print it.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Write Hello from a file! to note.txt.\n# Then read note.txt and print it.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Write Hello from a file! to note.txt.\n# Then read note.txt and print it.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"note.txt\", \"w\") as file:\n    file.write(\"Hello from a file!\")\n\nwith open(\"note.txt\") as file:\n    print(file.read())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Hello from a file!\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "with open(\"note.txt\", \"w\") as file:\n    file.write(\"Hello from a file!\")\n\nwith open(\"note.txt\") as file:\n    print(file.read())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"note.txt\", \"w\") as file:\n    file.write(\"Hello from a file!\")\n\nwith open(\"note.txt\") as file:\n    print(file.read())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open(\"note.txt\", \"w\") as file:\n    file.write(\"Hello from a file!\")\n\nwith open(\"note.txt\") as file:\n    print(file.read())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
       "id": "ci-write-greeting-file",
       "kind": "code_input",
       "purpose": "project",
@@ -290,6 +398,15 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = input().strip().title()\n\nwith open(\"greeting.txt\", \"w\") as file:\n    file.write(f\"Hello, {name}!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -307,8 +424,26 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "name = input().strip().title()\n\nwith open(\"greeting.txt\", \"w\") as file:\n    file.write(f\"Hello, {name}!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())\n"
-      }
+        "solutionCode": "name = input().strip().title()\n\nwith open(\"greeting.txt\", \"w\") as file:\n    file.write(f\"Hello, {name}!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = input().strip().title()\n\nwith open(\"greeting.txt\", \"w\") as file:\n    file.write(f\"Hello, {name}!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "name = input().strip().title()\n\nwith open(\"greeting.txt\", \"w\") as file:\n    file.write(f\"Hello, {name}!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-overwrite-shopping-list",
@@ -339,6 +474,15 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "first_item = input().strip().title()\nsecond_item = input().strip().title()\n\nwith open(\"shopping.txt\", \"w\") as file:\n    file.write(first_item + \"\\n\")\n    file.write(second_item + \"\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -356,8 +500,26 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "first_item = input().strip().title()\nsecond_item = input().strip().title()\n\nwith open(\"shopping.txt\", \"w\") as file:\n    file.write(first_item + \"\\n\")\n    file.write(second_item + \"\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")\n"
-      }
+        "solutionCode": "first_item = input().strip().title()\nsecond_item = input().strip().title()\n\nwith open(\"shopping.txt\", \"w\") as file:\n    file.write(first_item + \"\\n\")\n    file.write(second_item + \"\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "first_item = input().strip().title()\nsecond_item = input().strip().title()\n\nwith open(\"shopping.txt\", \"w\") as file:\n    file.write(first_item + \"\\n\")\n    file.write(second_item + \"\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "first_item = input().strip().title()\nsecond_item = input().strip().title()\n\nwith open(\"shopping.txt\", \"w\") as file:\n    file.write(first_item + \"\\n\")\n    file.write(second_item + \"\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-append-log-entry",
@@ -395,6 +557,15 @@
             "content": "Start shift",
             "readOnly": false
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "entry = input().strip()\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"\\n\" + entry)\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
       },
       "showExpectedExample": true,
@@ -426,7 +597,238 @@
             ]
           }
         ],
-        "solutionCode": "entry = input().strip()\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"\\n\" + entry)\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")\n"
+        "solutionCode": "entry = input().strip()\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"\\n\" + entry)\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "entry = input().strip()\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"\\n\" + entry)\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "entry = input().strip()\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"\\n\" + entry)\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-writing-text-files-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0",
+      "language": "python",
+      "starterCode": "# Write Done to note.txt.\n# Then open note.txt and print its contents.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Write Done to note.txt.\n# Then open note.txt and print its contents.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open('note.txt', 'w') as file:\n    file.write('Done')\n\nwith open('note.txt') as file:\n    print(file.read())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Write Done to note.txt.\n# Then open note.txt and print its contents.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Write Done to note.txt.\n# Then open note.txt and print its contents.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open('note.txt', 'w') as file:\n    file.write('Done')\n\nwith open('note.txt') as file:\n    print(file.read())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Done\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "with open('note.txt', 'w') as file:\n    file.write('Done')\n\nwith open('note.txt') as file:\n    print(file.read())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open('note.txt', 'w') as file:\n    file.write('Done')\n\nwith open('note.txt') as file:\n    print(file.read())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-writing-text-files-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1",
+      "language": "python",
+      "starterCode": "# Create log.txt with Start, then append End on a new line.\n# Print the final file contents.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Create log.txt with Start, then append End on a new line.\n# Print the final file contents.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open('log.txt', 'w') as file:\n    file.write('Start\\n')\nwith open('log.txt', 'a') as file:\n    file.write('End')\nwith open('log.txt') as file:\n    print(file.read())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Create log.txt with Start, then append End on a new line.\n# Print the final file contents.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Create log.txt with Start, then append End on a new line.\n# Print the final file contents.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open('log.txt', 'w') as file:\n    file.write('Start\\n')\nwith open('log.txt', 'a') as file:\n    file.write('End')\nwith open('log.txt') as file:\n    print(file.read())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Start\nEnd\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "with open('log.txt', 'w') as file:\n    file.write('Start\\n')\nwith open('log.txt', 'a') as file:\n    file.write('End')\nwith open('log.txt') as file:\n    print(file.read())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open('log.txt', 'w') as file:\n    file.write('Start\\n')\nwith open('log.txt', 'a') as file:\n    file.write('End')\nwith open('log.txt') as file:\n    print(file.read())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-writing-text-files-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2",
+      "language": "python",
+      "starterCode": "name = 'Ava'\nscore = 92\n\n# Write 'Ava: 92' to report.txt, then print the file.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "name = 'Ava'\nscore = 92\n\n# Write 'Ava: 92' to report.txt, then print the file.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "name = 'Ava'\nscore = 92\nwith open('report.txt', 'w') as file:\n    file.write(f'{name}: {score}')\nwith open('report.txt') as file:\n    print(file.read())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "name = 'Ava'\nscore = 92\n\n# Write 'Ava: 92' to report.txt, then print the file.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "name = 'Ava'\nscore = 92\n\n# Write 'Ava: 92' to report.txt, then print the file.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = 'Ava'\nscore = 92\nwith open('report.txt', 'w') as file:\n    file.write(f'{name}: {score}')\nwith open('report.txt') as file:\n    print(file.read())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava: 92\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "name = 'Ava'\nscore = 92\nwith open('report.txt', 'w') as file:\n    file.write(f'{name}: {score}')\nwith open('report.txt') as file:\n    print(file.read())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = 'Ava'\nscore = 92\nwith open('report.txt', 'w') as file:\n    file.write(f'{name}: {score}')\nwith open('report.txt') as file:\n    print(file.read())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
       }
     }
   ]

@@ -166,36 +166,98 @@
             },
             "ci-clean-name": {
               "title": "Write a name cleaning function",
-              "prompt": "Write a function `clean_name(text)` that returns the text with leading and trailing spaces removed, then converted to title case. For example, `'  aVA  '` should become `'Ava'`. Return the cleaned string instead of printing it.",
+              "prompt": "Complete this project step: Write a name cleaning function.\n\nRequirements:\n- return the cleaned name\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Write a name cleaning function\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Write a name cleaning function\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def clean_name(text):\n    # return the cleaned name\n    pass"
             },
             "ci-parse-age": {
               "title": "Parse an age safely",
-              "prompt": "Write a function `parse_age(text)` that cleans the text with `strip()`. If the cleaned text can be converted to an integer, return that integer. If conversion fails, return `None`. Do not print anything.",
+              "prompt": "Complete this project step: Parse an age safely.\n\nRequirements:\n- return an int or None\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Parse an age safely\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Parse an age safely\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def parse_age(text):\n    # return an int or None\n    pass"
             },
             "ci-clean-row": {
               "title": "Validate and clean one row",
-              "prompt": "Write a function `clean_row(row)` where `row` is a list like `[name_text, score_text]`. Clean both values with `strip()`. If the cleaned name is empty, return `None`. If the score cannot be converted to an integer, return `None`. Otherwise return a dictionary with keys `name` and `score`, using the cleaned name in title case and the integer score.",
+              "prompt": "Complete this project step: Validate and clean one row.\n\nRequirements:\n- row looks like [name_text, score_text]\n- return a cleaned dictionary or None\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
               "hint": "Read the task \"Validate and clean one row\" and identify the required result.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Validate and clean one row\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass"
+            },
+            "try-validating-and-cleaning-input-checkpoint": {
+              "title": "Clean and validate a name",
+              "prompt": "Read a name. Strip spaces and title-case it. If the cleaned name is empty, print `Missing`; otherwise print the cleaned name.",
+              "hint": "Use `.strip()` before checking whether the value is empty.",
+              "help": {
+                "concept": "Cleaning input before validation helps programs handle messy text.",
+                "hint_1": "Use `.strip()` before checking whether the value is empty.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "name = input()\n\n# Clean and validate the name.\n"
+            },
+            "try-validating-and-cleaning-input-sketch0": {
+              "title": "Clean a name",
+              "prompt": "Clean whitespace and capitalization before using user data. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"What validation and cleaning do\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "raw = '  aVA smith  '\n\n# Strip extra spaces, convert to title case, and print the result.\n"
+            },
+            "try-validating-and-cleaning-input-sketch1": {
+              "title": "Validate a score",
+              "prompt": "Check numeric ranges after conversion. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Missing values vs invalid values\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "score_text = '92'\n\n# Convert score_text to int. Print 'valid' if it is from 0 to 100.\n"
+            },
+            "try-validating-and-cleaning-input-sketch2": {
+              "title": "Clean several rows",
+              "prompt": "Split each row, strip each field, and format the cleaned result. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Put cleaning rules in functions\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "rows = [' ava , 92 ', ' mia , 85 ']\n\n# Print cleaned name:score lines like Ava:92.\n"
+            }
+          },
+          "tryIt": {
+            "try_validating_and_cleaning_input_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Read a name. Strip spaces and title-case it. If the cleaned name is empty, print `Missing`; otherwise print the cleaned name."
+            },
+            "try_validating_and_cleaning_input_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Clean whitespace and capitalization before using user data."
+            },
+            "try_validating_and_cleaning_input_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Check numeric ranges after conversion."
+            },
+            "try_validating_and_cleaning_input_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Split each row, strip each field, and format the cleaned result."
             }
           }
         }

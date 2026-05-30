@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.cards.sketch0.title",
       "sketchId": "scope-basics",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-scope-and-local-variables-sketch0",
+        "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.tryIt.try_scope_and_local_variables_sketch0.title",
+        "promptKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.tryIt.try_scope_and_local_variables_sketch0.prompt",
+        "exerciseKey": "try-scope-and-local-variables-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.cards.sketch1.title",
       "sketchId": "inside-vs-outside",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-scope-and-local-variables-sketch1",
+        "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.tryIt.try_scope_and_local_variables_sketch1.title",
+        "promptKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.tryIt.try_scope_and_local_variables_sketch1.prompt",
+        "exerciseKey": "try-scope-and-local-variables-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.cards.sketch2.title",
       "sketchId": "parameters-create-local-names",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-scope-and-local-variables-sketch2",
+        "titleKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.tryIt.try_scope_and_local_variables_sketch2.title",
+        "promptKey": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.tryIt.try_scope_and_local_variables_sketch2.prompt",
+        "exerciseKey": "try-scope-and-local-variables-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -261,6 +297,90 @@
       }
     },
     {
+      "id": "try-scope-and-local-variables-checkpoint",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-checkpoint",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "def make_message(name):\n    # Create a local variable named message.\n    pass\n\nprint(make_message(\"Ava\"))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def make_message(name):\n    # Create a local variable named message.\n    pass\n\nprint(make_message(\"Ava\"))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def make_message(name):\n    # Create a local variable named message.\n    pass\n\nprint(make_message(\"Ava\"))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_message(name):\n    # Create a local variable named message.\n    pass\n\nprint(make_message(\"Ava\"))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_message(name):\n    message = f\"Hello, {name}!\"\n    return message\n\nprint(make_message(\"Ava\"))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def make_message(name):\n    message = f\"Hello, {name}!\"\n    return message\n\nprint(make_message(\"Ava\"))\n",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "make_message",
+            "args": [
+              "Ava"
+            ],
+            "expected": "Hello, Ava!"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "make_message",
+            "args": [
+              "Mia"
+            ],
+            "expected": "Hello, Mia!"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_message(name):\n    message = f\"Hello, {name}!\"\n    return message\n\nprint(make_message(\"Ava\"))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def make_message(name):\n    message = f\"Hello, {name}!\"\n    return message\n\nprint(make_message(\"Ava\"))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
       "id": "code-q1",
       "kind": "code_input",
       "purpose": "project",
@@ -285,6 +405,15 @@
           {
             "path": "main.py",
             "content": "def add_tax(price):\n    # store the result in a local variable named total\n    # then return it\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def add_tax(price):\n    total = price + 5\n    return total",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -327,8 +456,26 @@
             "type": "no_stdout",
             "message": "Return the value instead of printing it."
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def add_tax(price):\n    total = price + 5\n    return total",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def add_tax(price):\n    total = price + 5\n    return total",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "code-q2",
@@ -355,6 +502,15 @@
           {
             "path": "main.py",
             "content": "def make_label(word):\n    # create a local variable named label\n    # return the finished string\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_label(word):\n    label = \"Item: \" + word\n    return label",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -397,8 +553,26 @@
             "type": "no_stdout",
             "message": "Return the string instead of printing it."
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_label(word):\n    label = \"Item: \" + word\n    return label",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def make_label(word):\n    label = \"Item: \" + word\n    return label",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "code-q3",
@@ -425,6 +599,15 @@
           {
             "path": "main.py",
             "content": "def rectangle_area(width, height):\n    # create a local variable named area\n    # return the area\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def rectangle_area(width, height):\n    area = width * height\n    return area",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -470,6 +653,273 @@
           {
             "type": "no_stdout",
             "message": "Return the area instead of printing it."
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def rectangle_area(width, height):\n    area = width * height\n    return area",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def rectangle_area(width, height):\n    area = width * height\n    return area",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-scope-and-local-variables-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch0",
+      "language": "python",
+      "starterCode": "def add_tax(price):\n    # Create local variable total = price + 2.\n    # Return total.\n    pass\n\nprint(add_tax(8))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def add_tax(price):\n    # Create local variable total = price + 2.\n    # Return total.\n    pass\n\nprint(add_tax(8))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def add_tax(price):\n    total = price + 2\n    return total\n\nprint(add_tax(8))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def add_tax(price):\n    # Create local variable total = price + 2.\n    # Return total.\n    pass\n\nprint(add_tax(8))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def add_tax(price):\n    # Create local variable total = price + 2.\n    # Return total.\n    pass\n\nprint(add_tax(8))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def add_tax(price):\n    total = price + 2\n    return total\n\nprint(add_tax(8))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def add_tax(price):\n    total = price + 2\n    return total\n\nprint(add_tax(8))\n",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "add_tax",
+            "args": [
+              8
+            ],
+            "expected": 10
+          },
+          {
+            "type": "function_returns",
+            "functionName": "add_tax",
+            "args": [
+              0
+            ],
+            "expected": 2
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def add_tax(price):\n    total = price + 2\n    return total\n\nprint(add_tax(8))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-scope-and-local-variables-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch1",
+      "language": "python",
+      "starterCode": "name = 'Ava'\n\ndef welcome(person):\n    # Return 'Welcome, ' + person.\n    pass\n\nprint(welcome(name))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "name = 'Ava'\n\ndef welcome(person):\n    # Return 'Welcome, ' + person.\n    pass\n\nprint(welcome(name))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "name = 'Ava'\n\ndef welcome(person):\n    return 'Welcome, ' + person\n\nprint(welcome(name))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "name = 'Ava'\n\ndef welcome(person):\n    # Return 'Welcome, ' + person.\n    pass\n\nprint(welcome(name))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "name = 'Ava'\n\ndef welcome(person):\n    # Return 'Welcome, ' + person.\n    pass\n\nprint(welcome(name))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = 'Ava'\n\ndef welcome(person):\n    return 'Welcome, ' + person\n\nprint(welcome(name))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "name = 'Ava'\n\ndef welcome(person):\n    return 'Welcome, ' + person\n\nprint(welcome(name))\n",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "welcome",
+            "args": [
+              "Ava"
+            ],
+            "expected": "Welcome, Ava"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "welcome",
+            "args": [
+              "Mia"
+            ],
+            "expected": "Welcome, Mia"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = 'Ava'\n\ndef welcome(person):\n    return 'Welcome, ' + person\n\nprint(welcome(name))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-scope-and-local-variables-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2",
+      "language": "python",
+      "starterCode": "count = 5\n\ndef add_one(count):\n    # Return count plus one.\n    pass\n\nprint(add_one(count))\nprint(count)\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "count = 5\n\ndef add_one(count):\n    # Return count plus one.\n    pass\n\nprint(add_one(count))\nprint(count)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "count = 5\n\ndef add_one(count):\n    return count + 1\n\nprint(add_one(count))\nprint(count)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "count = 5\n\ndef add_one(count):\n    # Return count plus one.\n    pass\n\nprint(add_one(count))\nprint(count)\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "count = 5\n\ndef add_one(count):\n    # Return count plus one.\n    pass\n\nprint(add_one(count))\nprint(count)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "count = 5\n\ndef add_one(count):\n    return count + 1\n\nprint(add_one(count))\nprint(count)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "count = 5\n\ndef add_one(count):\n    return count + 1\n\nprint(add_one(count))\nprint(count)\n",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "add_one",
+            "args": [
+              5
+            ],
+            "expected": 6
+          },
+          {
+            "type": "function_returns",
+            "functionName": "add_one",
+            "args": [
+              0
+            ],
+            "expected": 1
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "count = 5\n\ndef add_one(count):\n    return count + 1\n\nprint(add_one(count))\nprint(count)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
           }
         ]
       }

@@ -165,36 +165,98 @@
             },
             "ci-write-greeting-file": {
               "title": "Write a personalized greeting file",
-              "prompt": "Read a name, write `Hello, NAME!` to `greeting.txt`, then open the file and print its contents.",
+              "prompt": "Complete this project step: Write a personalized greeting file.\n\nRequirements:\n- Write Hello, NAME! to greeting.txt.\n- Then open greeting.txt and print its contents.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `zoe`, the output should be `Hello, Zoe!`.",
               "hint": "Use `input()` for the name, then write the formatted greeting into the file.",
               "help": {
-                "concept": "Writing text files lets a program save results that can be opened again later.",
-                "hint_1": "Use a `with open(...) as file:` block for the write step.",
-                "hint_2": "Open the same file again for reading when you need to print the saved contents."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "name = input()\n\n# Write Hello, NAME! to greeting.txt.\n# Then open greeting.txt and print its contents.\n"
             },
             "ci-overwrite-shopping-list": {
               "title": "Overwrite a shopping list from input",
-              "prompt": "Read two shopping items, overwrite `shopping.txt` with one item per line, then print the file contents.",
+              "prompt": "Complete this project step: Overwrite a shopping list from input.\n\nRequirements:\n- Write both items to shopping.txt, one per line.\n- Then print the file contents.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `bread\napples`, the output should be `Bread\nApples`.",
               "hint": "Opening a file with `\"w\"` replaces the old contents.",
               "help": {
-                "concept": "Writing text files lets a program save results that can be opened again later.",
-                "hint_1": "Use a `with open(...) as file:` block for the write step.",
-                "hint_2": "Open the same file again for reading when you need to print the saved contents."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "first_item = input()\nsecond_item = input()\n\n# Write both items to shopping.txt, one per line.\n# Then print the file contents.\n"
             },
             "ci-append-log-entry": {
               "title": "Append a log entry",
-              "prompt": "Read one log entry, append it to `log.txt` on a new line, then print the full file contents.",
+              "prompt": "Complete this project step: Append a log entry.\n\nRequirements:\n- Append the entry to log.txt on a new line, then print the full file.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `Checked sensors`, the output should be `Start shift\nChecked sensors`.",
               "hint": "Opening a file with `\"a\"` keeps the old contents and adds new text at the end.",
               "help": {
-                "concept": "Writing text files lets a program save results that can be opened again later.",
-                "hint_1": "Use a `with open(...) as file:` block for the write step.",
-                "hint_2": "Open the same file again for reading when you need to print the saved contents."
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
               "starterCode": "entry = input()\n\n# Append the entry to log.txt on a new line, then print the full file.\n"
+            },
+            "try-writing-text-files-checkpoint": {
+              "title": "Write and read a text file",
+              "prompt": "Write `Hello from a file!` to `note.txt`, then read the file and print the saved text. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Open the file in write mode first, then reopen it for reading.",
+              "help": {
+                "concept": "Write mode creates or replaces a file, and read mode loads the saved text.",
+                "hint_1": "Open the file in write mode first, then reopen it for reading.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "# Write Hello from a file! to note.txt.\n# Then read note.txt and print it.\n"
+            },
+            "try-writing-text-files-sketch0": {
+              "title": "Write and read a message",
+              "prompt": "Write text first, then read the same file to verify it. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Write mode creates or replaces text\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "# Write Done to note.txt.\n# Then open note.txt and print its contents.\n"
+            },
+            "try-writing-text-files-sketch1": {
+              "title": "Append a second line",
+              "prompt": "Use write mode first and append mode second. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Append mode adds to the end\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "# Create log.txt with Start, then append End on a new line.\n# Print the final file contents.\n"
+            },
+            "try-writing-text-files-sketch2": {
+              "title": "Write a simple report",
+              "prompt": "Format text before saving it to a file. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Use newline characters and verify what you wrote\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "name = 'Ava'\nscore = 92\n\n# Write 'Ava: 92' to report.txt, then print the file.\n"
+            }
+          },
+          "tryIt": {
+            "try_writing_text_files_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Write `Hello from a file!` to `note.txt`, then read the file and print the saved text."
+            },
+            "try_writing_text_files_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Write text first, then read the same file to verify it."
+            },
+            "try_writing_text_files_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Use write mode first and append mode second."
+            },
+            "try_writing_text_files_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Format text before saving it to a file."
             }
           }
         }

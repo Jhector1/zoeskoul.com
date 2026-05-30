@@ -1,0 +1,223 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "docstrings-and-function-contracts": {
+          "label": "Docstrings and Function Contracts",
+          "summary": "Document what a function expects, what it returns, and how to use it correctly.",
+          "cards": {
+            "sketch0": {
+              "title": "What a docstring and contract do"
+            },
+            "sketch1": {
+              "title": "Writing clear docstrings"
+            },
+            "sketch2": {
+              "title": "Contracts should say return vs print"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Document and align function behavior"
+            }
+          },
+          "projectSteps": {
+            "ci_add_docstring": {
+              "title": "Add a matching docstring"
+            },
+            "ci_write_contract_function": {
+              "title": "Write a documented function with a clear contract"
+            },
+            "ci_fix_print_vs_return": {
+              "title": "Fix the contract mismatch"
+            }
+          },
+          "quiz": {
+            "sc-docstring-location": {
+              "title": "Where a docstring goes",
+              "prompt": "Where should a function's docstring be placed?",
+              "hint": "Look for the string that appears immediately inside the function.",
+              "help": {
+                "concept": "A function docstring is the first string literal inside the function body, directly under the `def` line.",
+                "hint_1": "It is not placed before the function definition or after the return statement.",
+                "hint_2": "Choose the option where the triple-quoted string comes right after `def ...:`."
+              },
+              "options": {
+                "a": "Directly under the function definition as the first statement",
+                "b": "Inside the parameter list",
+                "c": "After the return statement",
+                "d": "Only at the end of the program"
+              }
+            },
+            "sc-contract-purpose": {
+              "title": "What a function contract explains",
+              "prompt": "What is the main purpose of a function contract?",
+              "hint": "Think about inputs and outputs.",
+              "help": {
+                "concept": "A function contract tells other programmers what values a function expects and what result or behavior it provides.",
+                "hint_1": "A contract is about how to use the function correctly, not about changing Python syntax.",
+                "hint_2": "Pick the option that mentions expected arguments and returned result."
+              },
+              "options": {
+                "a": "It explains what inputs the function expects and what it returns",
+                "b": "It automatically fixes bugs in the function",
+                "c": "It makes the function run faster",
+                "d": "It replaces the need for function names"
+              }
+            },
+            "mc-good-docstring-features": {
+              "title": "Features of a helpful docstring",
+              "prompt": "Which statements describe a helpful function docstring? Choose all that apply.",
+              "hint": "Look for statements that make the function easier to use correctly.",
+              "help": {
+                "concept": "Helpful docstrings are specific, match the code, and explain the function's behavior clearly enough for someone to call it correctly.",
+                "hint_1": "Good docstrings usually mention what the function returns or does with its inputs.",
+                "hint_2": "Select the choices that are clear and accurate, not vague or unrelated."
+              },
+              "options": {
+                "a": "It clearly says what the function returns or does",
+                "b": "It matches the actual behavior of the code",
+                "c": "It should be as vague as possible so it works for any function",
+                "d": "It can mention important input expectations"
+              }
+            },
+            "mc-return-vs-print-contract": {
+              "title": "Return vs print in a contract",
+              "prompt": "A docstring says a function returns a value. Which code patterns fit that contract? Choose all that apply.",
+              "hint": "Look for functions that send a value back to the caller.",
+              "help": {
+                "concept": "When a contract says a function returns a value, the function should use `return` so the caller can store or reuse the result.",
+                "hint_1": "Printing shows output, but it does not give the caller a reusable value.",
+                "hint_2": "Choose the options that use `return` to produce the result."
+              },
+              "options": {
+                "a": "`return a + b`",
+                "b": "`return name.upper()`",
+                "c": "`print(a + b)`",
+                "d": "`print(\"Done\")`"
+              }
+            },
+            "dr-docstring-order": {
+              "title": "Order of a documented function",
+              "prompt": "Put these parts in the correct order for a simple documented function.",
+              "hint": "Start with the function header, then the docstring, then the body.",
+              "help": {
+                "concept": "A documented function is written in a standard order: definition line first, docstring next, then the executable code.",
+                "hint_1": "The docstring belongs inside the function, not before the `def` line.",
+                "hint_2": "After the docstring, place the statement that computes or returns the result."
+              },
+              "tokens": {
+                "t1": "`def double(number):`",
+                "t2": "`\"\"\"Return twice number.\"\"\"`",
+                "t3": "`return number * 2`"
+              }
+            },
+            "dr-contract-reading": {
+              "title": "Read a function contract in order",
+              "prompt": "Arrange these ideas in a sensible order for understanding a function contract.",
+              "hint": "Arrange the code pieces in the order Python should run them.",
+              "help": {
+                "concept": "The pieces should form valid Python code in the order it should run.",
+                "hint_1": "Start with the line that sets up the Python action.",
+                "hint_2": "Place lines that depend on earlier values after those values exist."
+              },
+              "tokens": {
+                "t1": "Inputs the function expects",
+                "t2": "What the function does",
+                "t3": "Value the function returns"
+              }
+            },
+            "fb-return-word": {
+              "title": "Complete the docstring wording",
+              "prompt": "Choose the word that best completes the docstring.",
+              "hint": "The sentence describes giving a value back to the caller.",
+              "help": {
+                "concept": "Docstrings often use the word `the missing term` when a function sends a value back instead of printing it.",
+                "hint_1": "This blank should be a verb that matches `the missing term total` style behavior.",
+                "hint_2": "Pick the choice that means the function gives a result back to the caller."
+              },
+              "template": "`\"\"\"[blank1] the sum of two numbers.\"\"\"`",
+              "choices": [
+                "Return",
+                "Print",
+                "Loop through",
+                "Import"
+              ]
+            },
+            "fb-docstring-position": {
+              "title": "Complete the function example",
+              "prompt": "Choose the line that correctly fills the blank.",
+              "hint": "The missing line should be the docstring, not code that runs the calculation.",
+              "help": {
+                "concept": "The docstring is a descriptive string placed as the first statement inside the function body.",
+                "hint_1": "The blank comes right after the function header.",
+                "hint_2": "Choose the triple-quoted string that describes the function's result."
+              },
+              "template": "```python\ndef square(number):\n    [blank1]\n    return number * number\n```",
+              "choices": [
+                "`\"\"\"Return the square of number.\"\"\"`",
+                "`print(number * number)`",
+                "`number * number`",
+                "`square(number)`"
+              ]
+            },
+            "ci-add-docstring": {
+              "title": "Add a matching docstring",
+              "prompt": "Complete the function by adding a docstring and keeping the return behavior correct. The function should return the lowercase version of the input text.",
+              "hint": "Read the task \"Add a matching docstring\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Add a matching docstring\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()"
+            },
+            "ci-write-contract-function": {
+              "title": "Write a documented function with a clear contract",
+              "prompt": "Define a function named `repeat_word` that takes `word` and `times`, and returns the word repeated that many times. Add a docstring that explains the return value. Do not print inside the function.",
+              "hint": "Read the task \"Write a documented function with a clear contract\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Write a documented function with a clear contract\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass"
+            },
+            "ci-fix-print-vs-return": {
+              "title": "Fix the contract mismatch",
+              "prompt": "This function's docstring says it returns a value, but the code currently prints instead. Fix the function so the code matches the contract.",
+              "hint": "Read the task \"Fix the contract mismatch\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Fix the contract mismatch\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "docstrings-and-function-contracts": {
+          "docstrings-idea": {
+            "title": "What a docstring and contract do",
+            "bodyMarkdown": "A **docstring** is a short string placed right under a function definition. It explains what the function does.\n\nA **function contract** describes the function's inputs and output:\n- what arguments it expects\n- what kind of value it returns\n- any important assumptions\n\nHere is a simple example:\n\n```python\ndef square(number):\n    \"\"\"Return the square of number.\"\"\"\n    return number * number\n```\n\nLine by line:\n- `def square(number):` defines a function named `square` with one parameter.\n- The triple-quoted string is the docstring.\n- `return number * number` sends the result back to the caller.\n\nIf you call `square(4)`, the function returns `16`.\n\nA good beginner-friendly contract might answer questions like:\n- Should `number` be an integer or float?\n- Does the function print something, or return something?\n- What comes back after the call?\n\nTry it yourself: write a function called `double` with a one-line docstring that says it returns twice the input."
+          },
+          "good-docstrings": {
+            "title": "Writing clear docstrings",
+            "bodyMarkdown": "A useful docstring is short, specific, and matches the code.\n\nCompare these two versions:\n\n```python\ndef greet(name):\n    \"\"\"Does stuff.\"\"\"\n    return \"Hello, \" + name\n```\n\nThis is too vague. Now look at this:\n\n```python\ndef greet(name):\n    \"\"\"Return a greeting for the given name.\"\"\"\n    return \"Hello, \" + name\n```\n\nThis version is better because it tells you:\n- the function **returns** a greeting\n- the input is a `name`\n- the result is not printed directly by the function\n\nWorked example:\n\n```python\ndef is_even(number):\n    \"\"\"Return True if number is even, otherwise return False.\"\"\"\n    return number % 2 == 0\n```\n\nStep by step:\n- The docstring says exactly what the function returns.\n- The code checks whether the remainder after dividing by 2 is 0.\n- `is_even(8)` returns `True`.\n- `is_even(5)` returns `False`.\n\nTry this: improve the docstring `\"\"\"Checks number.\"\"\"` so it explains the real result of the function."
+          },
+          "contracts-print-vs-return": {
+            "title": "Contracts should say return vs print",
+            "bodyMarkdown": "One common mistake is mixing up **printing** and **returning**.\n\nLook at these two functions:\n\n```python\ndef show_total(a, b):\n    \"\"\"Print the total of a and b.\"\"\"\n    print(a + b)\n\n\ndef get_total(a, b):\n    \"\"\"Return the total of a and b.\"\"\"\n    return a + b\n```\n\nThese functions are different:\n- `show_total` sends text to the output panel.\n- `get_total` gives a value back to the caller.\n\nWorked example:\n\n```python\nresult = get_total(3, 4)\nprint(result)\n```\n\nStep by step:\n- `get_total(3, 4)` returns `7`.\n- That returned value is stored in `result`.\n- `print(result)` displays `7` in the output panel.\n\nIf a docstring says **return**, the function should usually use `return`, not only `print`.\n\nYour turn: read a function's docstring and check whether the code behavior matches it."
+          }
+        }
+      }
+    }
+  }
+}
