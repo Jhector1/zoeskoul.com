@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -338,7 +338,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -357,6 +357,13 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "names",
+            "message": "Use a for loop over names instead of printing each name manually."
+          }
         ]
       },
       "solutionFiles": [
@@ -366,6 +373,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "names",
+          "message": "Use a for loop over names instead of printing each name manually."
         }
       ]
     },
@@ -433,6 +447,13 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "animals",
+            "message": "Use a for loop over animals instead of printing each variable manually."
+          }
         ]
       },
       "solutionFiles": [
@@ -442,6 +463,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "animals",
+          "message": "Use a for loop over animals instead of printing each variable manually."
         }
       ]
     },
@@ -692,7 +720,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -711,8 +739,22 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "animals",
+            "message": "Use a for loop over animals instead of typing each animal directly."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "animals",
+          "message": "Use a for loop over animals instead of typing each animal directly."
+        }
+      ]
     },
     {
       "id": "try-looping-through-lists-sketch1",
@@ -763,7 +805,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -782,8 +824,40 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "total",
+            "expected": 20,
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "scores",
+            "message": "Loop through scores instead of typing the final total."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\btotal\\s*(\\+=\\s*score|=\\s*total\\s*\\+\\s*score)",
+            "message": "Add each score into total inside the loop."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "scores",
+          "message": "Loop through scores instead of typing the final total."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\btotal\\s*(\\+=\\s*score|=\\s*total\\s*\\+\\s*score)",
+          "message": "Add each score into total inside the loop."
+        }
+      ]
     },
     {
       "id": "try-looping-through-lists-sketch2",
@@ -834,7 +908,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -853,8 +927,46 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "doubled",
+            "expected": [
+              2,
+              4,
+              6
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "numbers",
+            "message": "Loop through numbers instead of typing the final doubled list."
+          },
+          {
+            "type": "uses_method",
+            "method": "append",
+            "message": "Use doubled.append(...) to build the list.",
+            "target": "doubled"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "numbers",
+          "message": "Loop through numbers instead of typing the final doubled list."
+        },
+        {
+          "type": "uses_method",
+          "method": "append",
+          "message": "Use doubled.append(...) to build the list.",
+          "target": "doubled"
+        }
+      ]
     }
   ]
 }

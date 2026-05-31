@@ -524,7 +524,7 @@
               "pens: 3",
               "paper: 2"
             ],
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -543,7 +543,7 @@
             "expected": [
               "apple: 1"
             ],
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"

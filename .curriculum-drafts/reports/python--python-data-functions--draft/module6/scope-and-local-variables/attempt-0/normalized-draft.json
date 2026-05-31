@@ -214,7 +214,7 @@
             "value"
           ],
           "expected": 15,
-          "expectedKind": "value",
+          "expectedKind": "json",
           "message": "add_tax should return price plus 5."
         },
         {
@@ -227,7 +227,7 @@
             "value"
           ],
           "expected": 28,
-          "expectedKind": "value",
+          "expectedKind": "json",
           "message": "add_tax should work for a different number too."
         },
         {
@@ -261,7 +261,7 @@
             "value"
           ],
           "expected": "Item: Book",
-          "expectedKind": "value",
+          "expectedKind": "json",
           "message": "make_label should prefix the word with `Item: `."
         },
         {
@@ -274,7 +274,7 @@
             "value"
           ],
           "expected": "Item: Pen",
-          "expectedKind": "value",
+          "expectedKind": "json",
           "message": "make_label should work with another input word."
         },
         {
@@ -310,7 +310,7 @@
             "value"
           ],
           "expected": 12,
-          "expectedKind": "value",
+          "expectedKind": "json",
           "message": "rectangle_area should multiply width by height."
         },
         {
@@ -325,7 +325,7 @@
             "value"
           ],
           "expected": 10,
-          "expectedKind": "value",
+          "expectedKind": "json",
           "message": "rectangle_area should work for another pair of numbers."
         },
         {

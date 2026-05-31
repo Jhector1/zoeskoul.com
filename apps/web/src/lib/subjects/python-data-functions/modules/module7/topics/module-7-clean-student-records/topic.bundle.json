@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -185,6 +185,14 @@
             "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
             "language": "csv"
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/students.csv",
+            "message": "Read data/students.csv instead of typing the file contents.",
+            "normalizeWhitespace": true
+          }
         ]
       },
       "solutionFiles": [
@@ -208,7 +216,15 @@
         "requiredFiles": [
           "data/students.csv"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/students.csv",
+          "message": "Read data/students.csv instead of typing the file contents.",
+          "normalizeWhitespace": true
+        }
+      ]
     },
     {
       "id": "mp-2-clean-one-row",
@@ -443,6 +459,13 @@
             "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
             "language": "csv"
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "Use try/except to skip bad rows."
+          }
         ]
       },
       "solutionFiles": [
@@ -466,7 +489,14 @@
         "requiredFiles": [
           "data/students.csv"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "Use try/except to skip bad rows."
+        }
+      ]
     },
     {
       "id": "mp-4-write-clean-records",
@@ -512,7 +542,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n",
+            "content": "from pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -525,10 +555,12 @@
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "data"
+            "data",
+            "output"
           ],
           "requiredFiles": [
-            "data/students.csv"
+            "data/students.csv",
+            "output/clean_students.csv"
           ]
         }
       },
@@ -542,11 +574,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n",
+        "solutionCode": "from pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n",
+            "content": "from pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -556,12 +588,25 @@
             "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
             "language": "csv"
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "output/clean_students.csv",
+            "message": "Write the clean records file.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "uses_method",
+            "method": "write",
+            "message": "Use file.write() to create the output CSV."
+          }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n",
+          "content": "from pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -574,12 +619,27 @@
       ],
       "workspaceExpectations": {
         "requiredFolders": [
-          "data"
+          "data",
+          "output"
         ],
         "requiredFiles": [
-          "data/students.csv"
+          "data/students.csv",
+          "output/clean_students.csv"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "output/clean_students.csv",
+          "message": "Write the clean records file.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "uses_method",
+          "method": "write",
+          "message": "Use file.write() to create the output CSV."
+        }
+      ]
     },
     {
       "id": "try-module-7-clean-student-records-sketch0",
@@ -630,7 +690,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -649,8 +709,42 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "split",
+            "message": "Split the row instead of typing Ava:92 directly."
+          },
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "message": "Strip spaces from the row parts."
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "message": "Title-case the student name."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "split",
+          "message": "Split the row instead of typing Ava:92 directly."
+        },
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "message": "Strip spaces from the row parts."
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "message": "Title-case the student name."
+        }
+      ]
     }
   ]
 }

@@ -259,7 +259,8 @@
             "try_try_except_basics_sketch2": {
               "title": "Try it yourself",
               "prompt": "Use try/except inside the loop so one bad value does not stop the program."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

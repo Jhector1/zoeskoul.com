@@ -259,7 +259,8 @@
             "try_print_vs_return_sketch2": {
               "title": "Try it yourself",
               "prompt": "Print the returned string, not the function object."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

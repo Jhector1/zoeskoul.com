@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -333,7 +333,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -432,7 +432,7 @@
               "value"
             ],
             "expected": "hello",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -444,7 +444,7 @@
               "value"
             ],
             "expected": "python",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -528,7 +528,7 @@
               "value"
             ],
             "expected": "hahaha",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -542,7 +542,7 @@
               "value"
             ],
             "expected": "go",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -626,7 +626,7 @@
               "value"
             ],
             "expected": 12,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -640,7 +640,7 @@
               "value"
             ],
             "expected": 7.5,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -715,7 +715,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -798,7 +798,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -881,7 +881,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",

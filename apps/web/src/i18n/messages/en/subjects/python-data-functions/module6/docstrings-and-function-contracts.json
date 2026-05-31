@@ -256,7 +256,8 @@
             "try_docstrings_and_function_contracts_sketch2": {
               "title": "Try it yourself",
               "prompt": "The implementation should follow the stated contract exactly."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

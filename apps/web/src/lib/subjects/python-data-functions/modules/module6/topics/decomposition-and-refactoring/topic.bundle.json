@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -338,7 +338,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -437,7 +437,7 @@
               "value"
             ],
             "expected": "Ava",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -449,7 +449,7 @@
               "value"
             ],
             "expected": "Mary Ann",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -531,7 +531,7 @@
               "value"
             ],
             "expected": 4,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -543,7 +543,7 @@
               "value"
             ],
             "expected": "Words: 2",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -555,7 +555,7 @@
               "value"
             ],
             "expected": "Words: 4",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -637,7 +637,7 @@
               "value"
             ],
             "expected": 8,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -649,7 +649,7 @@
               "value"
             ],
             "expected": 15,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -663,7 +663,7 @@
               "value"
             ],
             "expected": 16,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -677,7 +677,7 @@
               "value"
             ],
             "expected": 21,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -752,7 +752,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -835,7 +835,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -918,7 +918,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -937,8 +937,42 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_call",
+            "functionName": "clean",
+            "message": "Use clean(name) inside badge instead of hard-coding one example."
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "badge",
+            "args": [
+              "  mia  "
+            ],
+            "expected": "Badge: Mia",
+            "expectedKind": "json"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "badge",
+            "args": [
+              "zoe"
+            ],
+            "expected": "Badge: Zoe",
+            "expectedKind": "json"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_call",
+          "functionName": "clean",
+          "message": "Use clean(name) inside badge instead of hard-coding one example."
+        }
+      ]
     }
   ]
 }

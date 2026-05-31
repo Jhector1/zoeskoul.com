@@ -443,7 +443,13 @@
             "content": "valid_rows: 2\ntotal_score: 16\n",
             "readOnly": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "summary.txt"
+          ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
@@ -485,6 +491,12 @@
           }
         ],
         "solutionCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")"
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "summary.txt"
+        ]
       }
     }
   ]

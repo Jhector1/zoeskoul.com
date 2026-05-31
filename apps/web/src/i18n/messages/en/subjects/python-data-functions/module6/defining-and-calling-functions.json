@@ -256,7 +256,8 @@
             "try_defining_and_calling_functions_sketch2": {
               "title": "Try it yourself",
               "prompt": "Reuse the same function for two different inputs."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

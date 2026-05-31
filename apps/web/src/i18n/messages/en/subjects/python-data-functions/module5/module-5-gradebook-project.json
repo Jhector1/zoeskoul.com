@@ -88,7 +88,8 @@
             "try_module_5_gradebook_project_sketch0": {
               "title": "Try it yourself",
               "prompt": "Use `append()` to preview how the gradebook project will grow a student list."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

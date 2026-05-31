@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -330,7 +330,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -349,6 +349,24 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "students[1]",
+            "message": "Use students[1] to reach Mia instead of typing Mia directly.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "name",
+            "message": "Use the name key from the student dictionary."
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "score",
+            "message": "Use the score key from the student dictionary."
+          }
         ]
       },
       "solutionFiles": [
@@ -358,6 +376,24 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "students[1]",
+          "message": "Use students[1] to reach Mia instead of typing Mia directly.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "name",
+          "message": "Use the name key from the student dictionary."
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "score",
+          "message": "Use the score key from the student dictionary."
         }
       ]
     },
@@ -441,7 +477,7 @@
               "Ava",
               "Ben"
             ],
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -466,7 +502,7 @@
             "expected": [
               "Kai"
             ],
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -569,7 +605,7 @@
               "list_of_dict_entries"
             ],
             "expected": 10,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -612,7 +648,7 @@
               "list_of_dict_entries"
             ],
             "expected": 6,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -725,7 +761,7 @@
               "list_of_dict_entries"
             ],
             "expected": 11,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -758,7 +794,7 @@
               "list_of_dict_entries"
             ],
             "expected": 3,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -833,7 +869,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -852,8 +888,34 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "students[0]",
+            "message": "Use students[0] to reach the first student instead of typing Ava directly.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "name",
+            "message": "Use the name key from the student dictionary."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "students[0]",
+          "message": "Use students[0] to reach the first student instead of typing Ava directly.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "name",
+          "message": "Use the name key from the student dictionary."
+        }
+      ]
     },
     {
       "id": "try-nested-data-structures-sketch1",
@@ -904,7 +966,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -923,8 +985,42 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "students",
+            "message": "Loop through students instead of typing each line directly."
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "name",
+            "message": "Use the name key while building each line."
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "score",
+            "message": "Use the score key while building each line."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "students",
+          "message": "Loop through students instead of typing each line directly."
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "name",
+          "message": "Use the name key while building each line."
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "score",
+          "message": "Use the score key while building each line."
+        }
+      ]
     },
     {
       "id": "try-nested-data-structures-sketch2",
@@ -975,7 +1071,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -994,8 +1090,62 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "course",
+            "expected": [
+              [
+                "title",
+                "Python"
+              ],
+              [
+                "students",
+                [
+                  "Ava",
+                  "Mia"
+                ]
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_dict_key",
+            "key": "students",
+            "message": "Use the students key in the course dictionary."
+          },
+          {
+            "type": "uses_method",
+            "method": "append",
+            "message": "Append Mia to course['students'] instead of replacing the whole course."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bcourse\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\.append\\s*\\(\\s*['\\\"]Mia['\\\"]\\s*\\)",
+            "message": "Call course['students'].append('Mia')."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_dict_key",
+          "key": "students",
+          "message": "Use the students key in the course dictionary."
+        },
+        {
+          "type": "uses_method",
+          "method": "append",
+          "message": "Append Mia to course['students'] instead of replacing the whole course."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bcourse\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\.append\\s*\\(\\s*['\\\"]Mia['\\\"]\\s*\\)",
+          "message": "Call course['students'].append('Mia')."
+        }
+      ]
     }
   ]
 }

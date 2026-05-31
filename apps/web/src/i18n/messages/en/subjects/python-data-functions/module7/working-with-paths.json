@@ -256,7 +256,8 @@
             "try_working_with_paths_sketch2": {
               "title": "Try it yourself",
               "prompt": "Use the full relative path when a file lives inside a folder."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

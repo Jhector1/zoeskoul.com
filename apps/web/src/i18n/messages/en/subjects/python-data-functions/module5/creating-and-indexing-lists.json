@@ -258,7 +258,8 @@
             "try_creating_and_indexing_lists_sketch2": {
               "title": "Try it yourself",
               "prompt": "Create a list named `names` from the two variables, then print it."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

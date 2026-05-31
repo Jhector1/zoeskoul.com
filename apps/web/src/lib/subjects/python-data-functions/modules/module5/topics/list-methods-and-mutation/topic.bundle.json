@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -336,7 +336,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -355,6 +355,27 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "numbers",
+            "expected": [
+              3,
+              1,
+              2,
+              10
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "append",
+            "message": "Use numbers.append(10) so the list is really changed.",
+            "target": "numbers"
+          }
         ]
       },
       "solutionFiles": [
@@ -364,6 +385,14 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "append",
+          "message": "Use numbers.append(10) so the list is really changed.",
+          "target": "numbers"
         }
       ]
     },
@@ -431,6 +460,14 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "append",
+            "message": "Use items.append(item) so the list is really mutated.",
+            "target": "items"
+          }
         ]
       },
       "solutionFiles": [
@@ -440,6 +477,14 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "append",
+          "message": "Use items.append(item) so the list is really mutated.",
+          "target": "items"
         }
       ]
     },
@@ -507,6 +552,14 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "remove",
+            "message": "Use colors.remove(color) so the list is really mutated.",
+            "target": "colors"
+          }
         ]
       },
       "solutionFiles": [
@@ -516,6 +569,14 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "remove",
+          "message": "Use colors.remove(color) so the list is really mutated.",
+          "target": "colors"
         }
       ]
     },
@@ -583,6 +644,14 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "sort",
+            "message": "Use numbers.sort() so the list is really sorted in place.",
+            "target": "numbers"
+          }
         ]
       },
       "solutionFiles": [
@@ -592,6 +661,14 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "sort",
+          "message": "Use numbers.sort() so the list is really sorted in place.",
+          "target": "numbers"
         }
       ]
     },
@@ -644,7 +721,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -663,8 +740,37 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "numbers",
+            "expected": [
+              3,
+              1,
+              2,
+              10
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "append",
+            "message": "Use numbers.append(10) so the list is really changed.",
+            "target": "numbers"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "append",
+          "message": "Use numbers.append(10) so the list is really changed.",
+          "target": "numbers"
+        }
+      ]
     },
     {
       "id": "try-list-methods-and-mutation-sketch1",
@@ -715,7 +821,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -734,8 +840,68 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "fruits",
+            "expected": [
+              "apple"
+            ],
+            "expectedKind": "json"
+          },
+          {
+            "type": "variable_equals",
+            "name": "last_item",
+            "expected": "cherry",
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bfruits\\.remove\\s*\\(\\s*['\\\"]banana['\\\"]\\s*\\)",
+            "message": "Call fruits.remove('banana') instead of replacing the final list directly."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
+            "message": "Store the result of fruits.pop() in last_item instead of typing cherry directly."
+          },
+          {
+            "type": "ordered_regex",
+            "patterns": [
+              "\\bfruits\\.remove\\s*\\(\\s*['\\\"]banana['\\\"]\\s*\\)",
+              "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
+              "\\bprint\\s*\\(\\s*fruits\\s*\\)",
+              "\\bprint\\s*\\(\\s*last_item\\s*\\)"
+            ],
+            "message": "Use the real list variables in order: remove banana, pop into last_item, then print fruits and last_item."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bfruits\\.remove\\s*\\(\\s*['\\\"]banana['\\\"]\\s*\\)",
+          "message": "Call fruits.remove('banana') instead of replacing the final list directly."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
+          "message": "Store the result of fruits.pop() in last_item instead of typing cherry directly."
+        },
+        {
+          "type": "ordered_regex",
+          "patterns": [
+            "\\bfruits\\.remove\\s*\\(\\s*['\\\"]banana['\\\"]\\s*\\)",
+            "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
+            "\\bprint\\s*\\(\\s*fruits\\s*\\)",
+            "\\bprint\\s*\\(\\s*last_item\\s*\\)"
+          ],
+          "message": "Use the real list variables in order: remove banana, pop into last_item, then print fruits and last_item."
+        }
+      ]
     },
     {
       "id": "try-list-methods-and-mutation-sketch2",
@@ -786,7 +952,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -805,8 +971,36 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "names",
+            "expected": [
+              "Ava",
+              "Mia",
+              "Zoe"
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "sort",
+            "message": "Use names.sort() so the list is actually sorted.",
+            "target": "names"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "sort",
+          "message": "Use names.sort() so the list is actually sorted.",
+          "target": "names"
+        }
+      ]
     }
   ]
 }

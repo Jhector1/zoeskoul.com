@@ -257,7 +257,8 @@
             "try_list_methods_and_mutation_sketch2": {
               "title": "Try it yourself",
               "prompt": "Call `sort()` before printing so the original list is ordered."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

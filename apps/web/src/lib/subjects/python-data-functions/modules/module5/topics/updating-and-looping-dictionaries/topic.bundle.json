@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -332,7 +332,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -351,6 +351,30 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "scores",
+            "expected": [
+              [
+                "Ava",
+                88
+              ],
+              [
+                "Mia",
+                91
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bscores\\s*\\[\\s*['\\\"]Mia['\\\"]\\s*\\]\\s*=\\s*91",
+            "message": "Update scores['Mia'] to 91 instead of printing the final result directly."
+          }
         ]
       },
       "solutionFiles": [
@@ -360,6 +384,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bscores\\s*\\[\\s*['\\\"]Mia['\\\"]\\s*\\]\\s*=\\s*91",
+          "message": "Update scores['Mia'] to 91 instead of printing the final result directly."
         }
       ]
     },
@@ -695,7 +726,7 @@
               "pens: 3",
               "paper: 2"
             ],
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -714,7 +745,7 @@
             "expected": [
               "apple: 1"
             ],
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -789,7 +820,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -808,8 +839,39 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "counts",
+            "expected": [
+              [
+                "apples",
+                5
+              ],
+              [
+                "bananas",
+                1
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bcounts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]\\s*(\\+=\\s*3|=\\s*(counts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]\\s*\\+\\s*3|3\\s*\\+\\s*counts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]))",
+            "message": "Increase counts['apples'] by 3 instead of replacing the final dictionary."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bcounts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]\\s*(\\+=\\s*3|=\\s*(counts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]\\s*\\+\\s*3|3\\s*\\+\\s*counts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]))",
+          "message": "Increase counts['apples'] by 3 instead of replacing the final dictionary."
+        }
+      ]
     },
     {
       "id": "try-updating-and-looping-dictionaries-sketch1",
@@ -860,7 +922,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -879,8 +941,22 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "inventory",
+            "message": "Loop through inventory instead of typing the inventory lines directly."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "inventory",
+          "message": "Loop through inventory instead of typing the inventory lines directly."
+        }
+      ]
     },
     {
       "id": "try-updating-and-looping-dictionaries-sketch2",
@@ -931,7 +1007,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -950,8 +1026,59 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "lengths",
+            "expected": [
+              [
+                "red",
+                3
+              ],
+              [
+                "blue",
+                4
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "words",
+            "message": "Loop through words instead of typing the final lengths dictionary."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "len",
+            "message": "Use len(word) to calculate each word length."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\blengths\\s*\\[\\s*word\\s*\\]\\s*=\\s*len\\s*\\(\\s*word\\s*\\)",
+            "message": "Store each length with lengths[word] = len(word)."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "words",
+          "message": "Loop through words instead of typing the final lengths dictionary."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "len",
+          "message": "Use len(word) to calculate each word length."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\blengths\\s*\\[\\s*word\\s*\\]\\s*=\\s*len\\s*\\(\\s*word\\s*\\)",
+          "message": "Store each length with lengths[word] = len(word)."
+        }
+      ]
     }
   ]
 }

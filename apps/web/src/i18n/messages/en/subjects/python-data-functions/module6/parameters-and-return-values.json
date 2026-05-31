@@ -238,7 +238,8 @@
             "try_parameters_and_return_values_sketch1": {
               "title": "Try it yourself",
               "prompt": "Return a string built from two parameters."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -339,7 +339,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -363,6 +363,13 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "split",
+            "message": "Split the input row instead of hard-coding positions."
+          }
         ]
       },
       "solutionFiles": [
@@ -372,6 +379,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "split",
+          "message": "Split the input row instead of hard-coding positions."
         }
       ]
     },
@@ -460,6 +474,13 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "message": "Strip each CSV name before printing it."
+          }
         ]
       },
       "solutionFiles": [
@@ -469,6 +490,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "message": "Strip each CSV name before printing it."
         }
       ]
     },
@@ -557,6 +585,18 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "Use try/except for invalid score values."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "Convert score text with int()."
+          }
         ]
       },
       "solutionFiles": [
@@ -566,6 +606,18 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "Use try/except for invalid score values."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "Convert score text with int()."
         }
       ]
     },
@@ -614,7 +666,13 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "summary.txt"
+          ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
@@ -654,6 +712,19 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "Use try/except for invalid score values."
+          },
+          {
+            "type": "source_contains",
+            "pattern": "summary.txt",
+            "message": "Write the summary to summary.txt.",
+            "normalizeWhitespace": true
+          }
         ]
       },
       "solutionFiles": [
@@ -663,6 +734,25 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "summary.txt"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "Use try/except for invalid score values."
+        },
+        {
+          "type": "source_contains",
+          "pattern": "summary.txt",
+          "message": "Write the summary to summary.txt.",
+          "normalizeWhitespace": true
         }
       ]
     },
@@ -715,7 +805,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -734,8 +824,22 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "split",
+            "message": "Use row.split(\",\") instead of typing Ava and 92 directly."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "split",
+          "message": "Use row.split(\",\") instead of typing Ava and 92 directly."
+        }
+      ]
     },
     {
       "id": "try-simple-csv-processing-sketch1",
@@ -786,7 +890,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -805,8 +909,32 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "rows",
+            "message": "Loop through rows instead of typing both output lines directly."
+          },
+          {
+            "type": "uses_method",
+            "method": "split",
+            "message": "Split each row before printing name and score."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "rows",
+          "message": "Loop through rows instead of typing both output lines directly."
+        },
+        {
+          "type": "uses_method",
+          "method": "split",
+          "message": "Split each row before printing name and score."
+        }
+      ]
     },
     {
       "id": "try-simple-csv-processing-sketch2",
@@ -857,7 +985,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -876,8 +1004,60 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "total",
+            "expected": 177,
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "rows",
+            "message": "Loop through rows instead of typing the final total."
+          },
+          {
+            "type": "uses_method",
+            "method": "split",
+            "message": "Use split(',') to separate each row."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "Convert the score text with int()."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\btotal\\s*(\\+=\\s*int\\s*\\(\\s*score\\s*\\)|=\\s*total\\s*\\+\\s*int\\s*\\(\\s*score\\s*\\))",
+            "message": "Add each numeric score into total."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "rows",
+          "message": "Loop through rows instead of typing the final total."
+        },
+        {
+          "type": "uses_method",
+          "method": "split",
+          "message": "Use split(',') to separate each row."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "Convert the score text with int()."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\btotal\\s*(\\+=\\s*int\\s*\\(\\s*score\\s*\\)|=\\s*total\\s*\\+\\s*int\\s*\\(\\s*score\\s*\\))",
+          "message": "Add each numeric score into total."
+        }
+      ]
     }
   ]
 }

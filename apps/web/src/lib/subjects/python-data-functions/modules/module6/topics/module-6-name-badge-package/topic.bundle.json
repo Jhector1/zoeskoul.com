@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -186,6 +186,33 @@
             "content": "def clean_name(text):\n    return text.strip().title()\n",
             "language": "python"
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.names",
+            "message": "Import from tools.names.",
+            "importName": "clean_name",
+            "path": "main.py"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+            "message": "Define clean_name(text) inside tools/names.py.",
+            "path": "tools/names.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "message": "clean_name should strip whitespace.",
+            "path": "tools/names.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "message": "clean_name should title-case the name.",
+            "path": "tools/names.py"
+          }
         ]
       },
       "solutionFiles": [
@@ -215,7 +242,34 @@
           "tools/__init__.py",
           "tools/names.py"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.names",
+          "message": "Import from tools.names.",
+          "importName": "clean_name",
+          "path": "main.py"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+          "message": "Define clean_name(text) inside tools/names.py.",
+          "path": "tools/names.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "message": "clean_name should strip whitespace.",
+          "path": "tools/names.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "message": "clean_name should title-case the name.",
+          "path": "tools/names.py"
+        }
+      ]
     },
     {
       "id": "mp-2-add-badge-helper",
@@ -337,6 +391,27 @@
             "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
             "language": "python"
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.badges",
+            "message": "Import from tools.badges.",
+            "importName": "make_badge",
+            "path": "main.py"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+make_badge\\s*\\(",
+            "message": "Define make_badge in tools/badges.py.",
+            "path": "tools/badges.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "upper",
+            "message": "make_badge should uppercase the role.",
+            "path": "tools/badges.py"
+          }
         ]
       },
       "solutionFiles": [
@@ -372,7 +447,28 @@
           "tools/badges.py",
           "tools/names.py"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.badges",
+          "message": "Import from tools.badges.",
+          "importName": "make_badge",
+          "path": "main.py"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+make_badge\\s*\\(",
+          "message": "Define make_badge in tools/badges.py.",
+          "path": "tools/badges.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "upper",
+          "message": "make_badge should uppercase the role.",
+          "path": "tools/badges.py"
+        }
+      ]
     },
     {
       "id": "mp-3-document-badge-helper",
@@ -504,6 +600,29 @@
             "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
             "language": "python"
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains_any",
+            "patterns": [
+              "\"\"\"",
+              "'''"
+            ],
+            "message": "Add a docstring to make_badge in tools/badges.py.",
+            "path": "tools/badges.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "message": "Clean the role before uppercasing it.",
+            "path": "tools/badges.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "upper",
+            "message": "Uppercase the role in make_badge.",
+            "path": "tools/badges.py"
+          }
         ]
       },
       "solutionFiles": [
@@ -539,7 +658,30 @@
           "tools/badges.py",
           "tools/names.py"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains_any",
+          "patterns": [
+            "\"\"\"",
+            "'''"
+          ],
+          "message": "Add a docstring to make_badge in tools/badges.py.",
+          "path": "tools/badges.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "message": "Clean the role before uppercasing it.",
+          "path": "tools/badges.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "upper",
+          "message": "Uppercase the role in make_badge.",
+          "path": "tools/badges.py"
+        }
+      ]
     },
     {
       "id": "mp-4-package-welcome-message",
@@ -671,6 +813,20 @@
             "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
             "language": "python"
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_call",
+            "functionName": "make_badge",
+            "message": "Build the badge with make_badge() instead of hard-coding the final text.",
+            "path": "main.py"
+          },
+          {
+            "type": "source_contains",
+            "pattern": "Welcome!",
+            "message": "Print the final welcome message.",
+            "path": "main.py"
+          }
         ]
       },
       "solutionFiles": [
@@ -706,7 +862,21 @@
           "tools/badges.py",
           "tools/names.py"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_call",
+          "functionName": "make_badge",
+          "message": "Build the badge with make_badge() instead of hard-coding the final text.",
+          "path": "main.py"
+        },
+        {
+          "type": "source_contains",
+          "pattern": "Welcome!",
+          "message": "Print the final welcome message.",
+          "path": "main.py"
+        }
+      ]
     },
     {
       "id": "try-module-6-name-badge-package-sketch0",
@@ -757,7 +927,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",

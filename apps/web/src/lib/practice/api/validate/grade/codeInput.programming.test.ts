@@ -71,6 +71,267 @@ describe("gradeProgrammingCodeInput", () => {
         );
     });
 
+
+    it("runs semantic state checks after stdout tests pass", async () => {
+        mockedSharedRunner.mockResolvedValue({
+            ok: true,
+            stdout: "['Ava', 'Mia', 'Zoe']\n{'Ava': 92, 'Mia': 85, 'Zoe': 97}\n",
+            stderr: "",
+        });
+        mockedRunCode.mockResolvedValue({
+            ok: true,
+            stdout: `__ZOE_SEMANTIC_RESULT__${JSON.stringify({
+                ok: false,
+                errors: ["Variable scores was not defined."],
+                userStdout: "",
+            })}`,
+        } as any);
+
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            tests: [
+                {
+                    stdin: "",
+                    stdout: "['Ava', 'Mia', 'Zoe']\n{'Ava': 92, 'Mia': 85, 'Zoe': 97}\n",
+                    match: "exact",
+                },
+            ],
+            semanticChecks: [
+                {
+                    type: "variable_equals",
+                    name: "scores",
+                    expected: [
+                        ["Ava", 92],
+                        ["Mia", 85],
+                        ["Zoe", 97],
+                    ],
+                    expectedKind: "dict_entries",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: "print(['Ava', 'Mia', 'Zoe'])\nprint({'Ava': 92, 'Mia': 85, 'Zoe': 97})\n",
+            language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toContain("scores");
+        expect(mockedSharedRunner).toHaveBeenCalledOnce();
+        expect(mockedRunCode).toHaveBeenCalledOnce();
+    });
+
+    it("does not run semantic state checks when stdout already fails", async () => {
+        mockedSharedRunner.mockResolvedValue({
+            ok: true,
+            stdout: "wrong\n",
+            stderr: "",
+        });
+
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "right\n", match: "exact" }],
+            semanticChecks: [
+                {
+                    type: "variable_equals",
+                    name: "scores",
+                    expected: [["Ava", 92]],
+                    expectedKind: "dict_entries",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: "print('wrong')\n",
+            language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(mockedRunCode).not.toHaveBeenCalled();
+    });
+
+
+    it("fails source checks before stdout so hard-coded remove/pop output cannot pass", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            tests: [
+                {
+                    stdin: "",
+                    stdout: "['apple']\ncherry\n",
+                    match: "exact",
+                },
+            ],
+            semanticChecks: [],
+            sourceChecks: [
+                {
+                    type: "source_regex",
+                    pattern: '\\bfruits\\.remove\\s*\\(\\s*[\'"]banana[\'"]\\s*\\)',
+                    message: "Call fruits.remove('banana') instead of replacing the final list directly.",
+                },
+                {
+                    type: "source_regex",
+                    pattern: "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
+                    message: "Store the result of fruits.pop() in last_item.",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: "fruits = ['apple']\nlast_item = 'cherry'\nprint(\"['apple']\")\nprint('cherry')\n",
+            language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toContain("fruits.remove");
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
+    it("runs stdout after source checks pass", async () => {
+        mockedSharedRunner.mockResolvedValue({
+            ok: true,
+            stdout: "['apple']\ncherry\n",
+            stderr: "",
+        });
+
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            tests: [
+                {
+                    stdin: "",
+                    stdout: "['apple']\ncherry\n",
+                    match: "exact",
+                },
+            ],
+            semanticChecks: [],
+            sourceChecks: [
+                {
+                    type: "uses_method",
+                    target: "fruits",
+                    method: "remove",
+                    message: "Use remove().",
+                },
+                {
+                    type: "source_regex",
+                    pattern: "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
+                    message: "Store the result of fruits.pop() in last_item.",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
+            language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedSharedRunner).toHaveBeenCalledOnce();
+    });
+
+    it("fails ordered_regex source checks when required steps are out of order", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            tests: [
+                {
+                    stdin: "",
+                    stdout: "['apple']\ncherry\n",
+                    match: "exact",
+                },
+            ],
+            semanticChecks: [],
+            sourceChecks: [
+                {
+                    type: "ordered_regex",
+                    patterns: [
+                        '\\bfruits\\.remove\\s*\\(\\s*[\'"]banana[\'"]\\s*\\)',
+                        "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
+                        "\\bprint\\s*\\(\\s*fruits\\s*\\)",
+                        "\\bprint\\s*\\(\\s*last_item\\s*\\)",
+                    ],
+                    message: "Follow the required mutation and print order for this exercise.",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: "fruits = ['apple', 'banana', 'cherry']\nprint(['apple'])\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(last_item)\n",
+            language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toContain("required mutation and print order");
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
+    it("passes ordered_regex source checks when required steps are in order", async () => {
+        mockedSharedRunner.mockResolvedValue({
+            ok: true,
+            stdout: "['apple']\ncherry\n",
+            stderr: "",
+        });
+
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            tests: [
+                {
+                    stdin: "",
+                    stdout: "['apple']\ncherry\n",
+                    match: "exact",
+                },
+            ],
+            semanticChecks: [],
+            sourceChecks: [
+                {
+                    type: "ordered_regex",
+                    patterns: [
+                        '\\bfruits\\.remove\\s*\\(\\s*[\'"]banana[\'"]\\s*\\)',
+                        "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
+                        "\\bprint\\s*\\(\\s*fruits\\s*\\)",
+                        "\\bprint\\s*\\(\\s*last_item\\s*\\)",
+                    ],
+                    message: "Follow the required mutation and print order for this exercise.",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
+            language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedSharedRunner).toHaveBeenCalledOnce();
+    });
+
     it("submits workspace files for file-enabled stdout checks", async () => {
         mockedSharedRunner.mockResolvedValue({
             ok: true,

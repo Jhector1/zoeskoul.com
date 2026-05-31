@@ -57,6 +57,7 @@ export type ProgrammingMakeCodeExpectedArgs = {
     match?: "exact" | "includes";
     tests?: ProgrammingCodeTest[];
     semanticChecks?: SemanticCheck[];
+    sourceChecks?: unknown[];
     workspaceExpectations?: ProgrammingWorkspaceExpectations;
     solutionCode?: string;
 };
@@ -80,17 +81,22 @@ export function makeCodeExpected(
         return makeSqlExpected(args);
     }
 
-    return makeProgrammingExpected({
-        language: args.language,
-        checkMode: args.checkMode,
-        stdin: args.stdin,
-        stdout: args.stdout,
-        match: args.match,
-        tests: args.tests,
-        semanticChecks: args.semanticChecks,
-        workspaceExpectations: args.workspaceExpectations,
-        solutionCode: args.solutionCode,
-    });
+    return {
+        ...makeProgrammingExpected({
+            language: args.language,
+            checkMode: args.checkMode,
+            stdin: args.stdin,
+            stdout: args.stdout,
+            match: args.match,
+            tests: args.tests,
+            semanticChecks: args.semanticChecks,
+            workspaceExpectations: args.workspaceExpectations,
+            solutionCode: args.solutionCode,
+        }),
+        ...(Array.isArray(args.sourceChecks) && args.sourceChecks.length
+            ? { sourceChecks: args.sourceChecks }
+            : {}),
+    } as CodeExpectedInput;
 }
 
 export { toProgrammingCodeTests, toSqlCodeTests };
@@ -101,6 +107,9 @@ export function normalizeCodeExpectedForSave(
     const language =
         typeof expected?.language === "string" ? expected.language : "python";
     const solutionFiles = expected?.solutionFiles;
+    const sourceChecks = Array.isArray(expected?.sourceChecks)
+        ? expected.sourceChecks.filter(Boolean)
+        : [];
 
     if (language === "sql") {
         const normalized = makeSqlExpected(expected);
@@ -135,6 +144,7 @@ export function normalizeCodeExpectedForSave(
             tests: canonTests,
             solutionCode,
             ...(solutionFiles !== undefined ? { solutionFiles } : {}),
+            ...(sourceChecks.length ? { sourceChecks } : {}),
         };
     }
 
@@ -154,6 +164,7 @@ export function normalizeCodeExpectedForSave(
         return {
             ...normalized,
             ...(solutionFiles !== undefined ? { solutionFiles } : {}),
+            ...(sourceChecks.length ? { sourceChecks } : {}),
         };
     }
 
@@ -173,5 +184,6 @@ export function normalizeCodeExpectedForSave(
         ...normalized,
         tests: canonTests,
         ...(solutionFiles !== undefined ? { solutionFiles } : {}),
+        ...(sourceChecks.length ? { sourceChecks } : {}),
     };
 }

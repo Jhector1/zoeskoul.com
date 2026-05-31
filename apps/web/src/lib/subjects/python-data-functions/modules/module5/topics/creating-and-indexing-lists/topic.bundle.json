@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -340,7 +340,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -359,6 +359,40 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "names",
+            "expected": [
+              "Ava",
+              "Mia",
+              "Zoe"
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bnames\\s*=\\s*\\[\\s*['\\\"]Ava['\\\"]\\s*,\\s*['\\\"]Mia['\\\"]\\s*,\\s*['\\\"]Zoe['\\\"]\\s*\\]",
+            "message": "Create the names list instead of only printing the final answers."
+          },
+          {
+            "type": "source_contains",
+            "pattern": "names[0]",
+            "message": "Use names[0] to print the first name instead of typing Ava directly.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains_any",
+            "patterns": [
+              "names[-1]",
+              "names[2]"
+            ],
+            "message": "Use an index on names to print the last name instead of typing Zoe directly.",
+            "normalizeWhitespace": true
+          }
         ]
       },
       "solutionFiles": [
@@ -368,6 +402,28 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bnames\\s*=\\s*\\[\\s*['\\\"]Ava['\\\"]\\s*,\\s*['\\\"]Mia['\\\"]\\s*,\\s*['\\\"]Zoe['\\\"]\\s*\\]",
+          "message": "Create the names list instead of only printing the final answers."
+        },
+        {
+          "type": "source_contains",
+          "pattern": "names[0]",
+          "message": "Use names[0] to print the first name instead of typing Ava directly.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains_any",
+          "patterns": [
+            "names[-1]",
+            "names[2]"
+          ],
+          "message": "Use an index on names to print the last name instead of typing Zoe directly.",
+          "normalizeWhitespace": true
         }
       ]
     },
@@ -435,6 +491,22 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_subscript",
+            "index": 0,
+            "message": "Use index 0 to read the first item instead of printing the input directly."
+          },
+          {
+            "type": "source_contains_any",
+            "patterns": [
+              "[-1]",
+              "[2]"
+            ],
+            "message": "Use an index to read the last item from the list.",
+            "normalizeWhitespace": true
+          }
         ]
       },
       "solutionFiles": [
@@ -444,6 +516,22 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_subscript",
+          "index": 0,
+          "message": "Use index 0 to read the first item instead of printing the input directly."
+        },
+        {
+          "type": "source_contains_any",
+          "patterns": [
+            "[-1]",
+            "[2]"
+          ],
+          "message": "Use an index to read the last item from the list.",
+          "normalizeWhitespace": true
         }
       ]
     },
@@ -511,6 +599,13 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_subscript",
+            "index": 1,
+            "message": "Use index 1 to read the second item from the list."
+          }
         ]
       },
       "solutionFiles": [
@@ -520,6 +615,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_subscript",
+          "index": 1,
+          "message": "Use index 1 to read the second item from the list."
         }
       ]
     },
@@ -587,6 +689,13 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\[\\s*color1\\s*,\\s*color2\\s*,\\s*color3\\s*\\]",
+            "message": "Create a list with color1, color2, and color3 before printing it."
+          }
         ]
       },
       "solutionFiles": [
@@ -596,6 +705,13 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\[\\s*color1\\s*,\\s*color2\\s*,\\s*color3\\s*\\]",
+          "message": "Create a list with color1, color2, and color3 before printing it."
         }
       ]
     },
@@ -648,7 +764,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -667,8 +783,42 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "items[0]",
+            "message": "Use items[0] for the first item instead of typing red.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains_any",
+            "patterns": [
+              "items[-1]",
+              "items[2]"
+            ],
+            "message": "Use an index on items for the last item instead of typing green.",
+            "normalizeWhitespace": true
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "items[0]",
+          "message": "Use items[0] for the first item instead of typing red.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains_any",
+          "patterns": [
+            "items[-1]",
+            "items[2]"
+          ],
+          "message": "Use an index on items for the last item instead of typing green.",
+          "normalizeWhitespace": true
+        }
+      ]
     },
     {
       "id": "try-creating-and-indexing-lists-sketch1",
@@ -719,7 +869,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -738,8 +888,24 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "numbers[1]",
+            "message": "Use numbers[1] instead of typing 9 directly.",
+            "normalizeWhitespace": true
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "numbers[1]",
+          "message": "Use numbers[1] instead of typing 9 directly.",
+          "normalizeWhitespace": true
+        }
+      ]
     },
     {
       "id": "try-creating-and-indexing-lists-sketch2",
@@ -790,7 +956,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -809,8 +975,33 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "names",
+            "expected": [
+              "Ava",
+              "Mia"
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bnames\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*\\]",
+            "message": "Build names from the variables first and second, not by typing the final list directly."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bnames\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*\\]",
+          "message": "Build names from the variables first and second, not by typing the final list directly."
+        }
+      ]
     }
   ]
 }

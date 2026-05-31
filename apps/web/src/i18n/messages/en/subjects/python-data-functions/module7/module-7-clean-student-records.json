@@ -88,7 +88,8 @@
             "try_module_7_clean_student_records_sketch0": {
               "title": "Try it yourself",
               "prompt": "Clean one row before the full records project."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

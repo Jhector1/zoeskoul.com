@@ -256,7 +256,8 @@
             "try_updating_and_looping_dictionaries_sketch2": {
               "title": "Try it yourself",
               "prompt": "Loop through a list and fill a dictionary."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

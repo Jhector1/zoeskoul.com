@@ -215,7 +215,7 @@
             "value"
           ],
           "expected": "Ava",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -227,7 +227,7 @@
             "value"
           ],
           "expected": "Mary Ann",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"
@@ -259,7 +259,7 @@
             "value"
           ],
           "expected": 4,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -271,7 +271,7 @@
             "value"
           ],
           "expected": "Words: 2",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -283,7 +283,7 @@
             "value"
           ],
           "expected": "Words: 4",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"
@@ -315,7 +315,7 @@
             "value"
           ],
           "expected": 8,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -327,7 +327,7 @@
             "value"
           ],
           "expected": 15,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -341,7 +341,7 @@
             "value"
           ],
           "expected": 16,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -355,7 +355,7 @@
             "value"
           ],
           "expected": 21,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"

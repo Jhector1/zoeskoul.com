@@ -219,7 +219,7 @@
             "value"
           ],
           "expected": 42,
-          "expectedKind": "value",
+          "expectedKind": "json",
           "message": "Returns an integer for valid numeric text with spaces."
         },
         {
@@ -262,7 +262,7 @@
             "dict_entries"
           ],
           "expected": true,
-          "expectedKind": "value",
+          "expectedKind": "json",
           "message": "Accepts a row with a non-empty cleaned name and a valid integer score."
         },
         {
@@ -284,7 +284,7 @@
             "dict_entries"
           ],
           "expected": false,
-          "expectedKind": "value",
+          "expectedKind": "json",
           "message": "Rejects a row whose name is empty after stripping."
         },
         {
@@ -306,7 +306,7 @@
             "dict_entries"
           ],
           "expected": false,
-          "expectedKind": "value",
+          "expectedKind": "json",
           "message": "Rejects a row whose score cannot be converted to an integer."
         },
         {

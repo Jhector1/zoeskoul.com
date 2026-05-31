@@ -214,7 +214,7 @@
             "value"
           ],
           "expected": "Hello, Ava",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -226,7 +226,7 @@
             "value"
           ],
           "expected": "Hello, Leo",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"
@@ -258,7 +258,7 @@
             "value"
           ],
           "expected": 16,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -270,7 +270,7 @@
             "value"
           ],
           "expected": 49,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"
@@ -304,7 +304,7 @@
             "value"
           ],
           "expected": "Ada Lovelace",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -318,7 +318,7 @@
             "value"
           ],
           "expected": "Sam Lee",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"

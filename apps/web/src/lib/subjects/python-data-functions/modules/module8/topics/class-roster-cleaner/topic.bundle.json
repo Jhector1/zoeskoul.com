@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -203,6 +203,14 @@
             "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
             "language": "csv"
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/roster.csv",
+            "message": "Read data/roster.csv instead of typing the roster contents.",
+            "normalizeWhitespace": true
+          }
         ]
       },
       "solutionFiles": [
@@ -226,7 +234,15 @@
         "requiredFiles": [
           "data/roster.csv"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/roster.csv",
+          "message": "Read data/roster.csv instead of typing the roster contents.",
+          "normalizeWhitespace": true
+        }
+      ]
     },
     {
       "id": "cp-2-clean-one-row",
@@ -469,6 +485,47 @@
             "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
             "language": "csv"
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "records",
+            "expected": [
+              {
+                "name": "Ava Smith",
+                "score": 92,
+                "email": "ava@example.com"
+              },
+              {
+                "name": "Zoe Ray",
+                "score": 87,
+                "email": "zoe@example.com"
+              },
+              {
+                "name": "Leo West",
+                "score": 74,
+                "email": "leo@example.com"
+              }
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "Use try/except to skip bad roster rows."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bexcept\\s+ValueError\\s*:",
+            "message": "Catch ValueError for bad roster rows."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "clean_row",
+            "message": "Use clean_row(line) inside the loop."
+          }
         ]
       },
       "solutionFiles": [
@@ -492,7 +549,24 @@
         "requiredFiles": [
           "data/roster.csv"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "Use try/except to skip bad roster rows."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bexcept\\s+ValueError\\s*:",
+          "message": "Catch ValueError for bad roster rows."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "clean_row",
+          "message": "Use clean_row(line) inside the loop."
+        }
+      ]
     },
     {
       "id": "cp-4-move-cleaning-to-module",
@@ -625,6 +699,44 @@
             "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
             "language": "python"
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "records",
+            "expected": [
+              {
+                "name": "Ava Smith",
+                "score": 92,
+                "email": "ava@example.com"
+              },
+              {
+                "name": "Zoe Ray",
+                "score": 87,
+                "email": "zoe@example.com"
+              },
+              {
+                "name": "Leo West",
+                "score": 74,
+                "email": "leo@example.com"
+              }
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.cleaning",
+            "message": "Import clean_row from tools.cleaning.",
+            "importName": "clean_row",
+            "path": "main.py"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "clean_row",
+            "message": "Use clean_row(line) from the helper module."
+          }
         ]
       },
       "solutionFiles": [
@@ -661,7 +773,21 @@
           "tools/__init__.py",
           "tools/cleaning.py"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.cleaning",
+          "message": "Import clean_row from tools.cleaning.",
+          "importName": "clean_row",
+          "path": "main.py"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "clean_row",
+          "message": "Use clean_row(line) from the helper module."
+        }
+      ]
     },
     {
       "id": "cp-5-add-summary-functions",
@@ -815,6 +941,48 @@
             "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n",
             "language": "python"
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "records",
+            "expected": [
+              {
+                "name": "Ava Smith",
+                "score": 92,
+                "email": "ava@example.com"
+              },
+              {
+                "name": "Zoe Ray",
+                "score": 87,
+                "email": "zoe@example.com"
+              },
+              {
+                "name": "Leo West",
+                "score": 74,
+                "email": "leo@example.com"
+              }
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.scoring",
+            "message": "Import average_score and passing_count from tools.scoring.",
+            "path": "main.py"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "average_score",
+            "message": "Use average_score(records) to calculate the average."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "passing_count",
+            "message": "Use passing_count(records) to calculate passing count."
+          }
         ]
       },
       "solutionFiles": [
@@ -857,7 +1025,25 @@
           "tools/cleaning.py",
           "tools/scoring.py"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.scoring",
+          "message": "Import average_score and passing_count from tools.scoring.",
+          "path": "main.py"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "average_score",
+          "message": "Use average_score(records) to calculate the average."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "passing_count",
+          "message": "Use passing_count(records) to calculate passing count."
+        }
+      ]
     },
     {
       "id": "cp-6-write-final-reports",
@@ -943,7 +1129,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
+            "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\nfrom pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -970,7 +1156,7 @@
           },
           {
             "path": "tools/reports.py",
-            "content": "from tools.scoring import average_score, passing_count\n\ndef write_clean_roster(records, path):\n    with open(path, \"w\") as file:\n        file.write(\"name,score,email\\n\")\n        for record in records:\n            file.write(f\"{record['name']},{record['score']},{record['email']}\\n\")\n\ndef write_summary(records, path):\n    with open(path, \"w\") as file:\n        file.write(f\"records={len(records)}\\n\")\n        file.write(f\"average={average_score(records):.1f}\\n\")\n        file.write(f\"passing={passing_count(records)}\\n\")\n",
+            "content": "import os\nfrom tools.scoring import average_score, passing_count\n\ndef write_clean_roster(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(\"name,score,email\\n\")\n        for record in records:\n            file.write(f\"{record['name']},{record['score']},{record['email']}\\n\")\n\ndef write_summary(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(f\"records={len(records)}\\n\")\n        file.write(f\"average={average_score(records):.1f}\\n\")\n        file.write(f\"passing={passing_count(records)}\\n\")\n",
             "language": "python"
           }
         ],
@@ -998,11 +1184,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
+        "solutionCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\nfrom pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
+            "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\nfrom pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1029,15 +1215,63 @@
           },
           {
             "path": "tools/reports.py",
-            "content": "from tools.scoring import average_score, passing_count\n\ndef write_clean_roster(records, path):\n    with open(path, \"w\") as file:\n        file.write(\"name,score,email\\n\")\n        for record in records:\n            file.write(f\"{record['name']},{record['score']},{record['email']}\\n\")\n\ndef write_summary(records, path):\n    with open(path, \"w\") as file:\n        file.write(f\"records={len(records)}\\n\")\n        file.write(f\"average={average_score(records):.1f}\\n\")\n        file.write(f\"passing={passing_count(records)}\\n\")\n",
+            "content": "import os\nfrom tools.scoring import average_score, passing_count\n\ndef write_clean_roster(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(\"name,score,email\\n\")\n        for record in records:\n            file.write(f\"{record['name']},{record['score']},{record['email']}\\n\")\n\ndef write_summary(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(f\"records={len(records)}\\n\")\n        file.write(f\"average={average_score(records):.1f}\\n\")\n        file.write(f\"passing={passing_count(records)}\\n\")\n",
             "language": "python"
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "records",
+            "expected": [
+              {
+                "name": "Ava Smith",
+                "score": 92,
+                "email": "ava@example.com"
+              },
+              {
+                "name": "Zoe Ray",
+                "score": 87,
+                "email": "zoe@example.com"
+              },
+              {
+                "name": "Leo West",
+                "score": 74,
+                "email": "leo@example.com"
+              }
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_call",
+            "functionName": "write_clean_roster",
+            "message": "Use write_clean_roster(...) to create the clean roster report."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "write_summary",
+            "message": "Use write_summary(...) to create the summary report."
+          },
+          {
+            "type": "source_contains",
+            "pattern": "output/clean_roster.csv",
+            "message": "Write the clean roster to output/clean_roster.csv.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "output/summary.txt",
+            "message": "Write the summary to output/summary.txt.",
+            "normalizeWhitespace": true
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
+          "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\nfrom pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1064,7 +1298,7 @@
         },
         {
           "path": "tools/reports.py",
-          "content": "from tools.scoring import average_score, passing_count\n\ndef write_clean_roster(records, path):\n    with open(path, \"w\") as file:\n        file.write(\"name,score,email\\n\")\n        for record in records:\n            file.write(f\"{record['name']},{record['score']},{record['email']}\\n\")\n\ndef write_summary(records, path):\n    with open(path, \"w\") as file:\n        file.write(f\"records={len(records)}\\n\")\n        file.write(f\"average={average_score(records):.1f}\\n\")\n        file.write(f\"passing={passing_count(records)}\\n\")\n",
+          "content": "import os\nfrom tools.scoring import average_score, passing_count\n\ndef write_clean_roster(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(\"name,score,email\\n\")\n        for record in records:\n            file.write(f\"{record['name']},{record['score']},{record['email']}\\n\")\n\ndef write_summary(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(f\"records={len(records)}\\n\")\n        file.write(f\"average={average_score(records):.1f}\\n\")\n        file.write(f\"passing={passing_count(records)}\\n\")\n",
           "language": "python"
         }
       ],
@@ -1080,7 +1314,31 @@
           "tools/reports.py",
           "tools/scoring.py"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_call",
+          "functionName": "write_clean_roster",
+          "message": "Use write_clean_roster(...) to create the clean roster report."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "write_summary",
+          "message": "Use write_summary(...) to create the summary report."
+        },
+        {
+          "type": "source_contains",
+          "pattern": "output/clean_roster.csv",
+          "message": "Write the clean roster to output/clean_roster.csv.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "output/summary.txt",
+          "message": "Write the summary to output/summary.txt.",
+          "normalizeWhitespace": true
+        }
+      ]
     },
     {
       "id": "try-class-roster-cleaner-sketch0",
@@ -1131,7 +1389,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -1150,8 +1408,52 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "split",
+            "message": "Split the row into fields."
+          },
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "message": "Strip spaces from the fields."
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "message": "Title-case the student name."
+          },
+          {
+            "type": "uses_method",
+            "method": "lower",
+            "message": "Lowercase the email address."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "split",
+          "message": "Split the row into fields."
+        },
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "message": "Strip spaces from the fields."
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "message": "Title-case the student name."
+        },
+        {
+          "type": "uses_method",
+          "method": "lower",
+          "message": "Lowercase the email address."
+        }
+      ]
     }
   ]
 }

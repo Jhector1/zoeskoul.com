@@ -361,7 +361,15 @@
             "content": "apple\nbanana",
             "readOnly": false
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data"
+          ],
+          "requiredFiles": [
+            "data/copy.txt"
+          ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
@@ -393,6 +401,14 @@
           }
         ],
         "solutionCode": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)"
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/copy.txt"
+        ]
       }
     },
     {

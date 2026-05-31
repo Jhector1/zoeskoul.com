@@ -15,6 +15,8 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
             tests: any[];
             solutionCode?: string;
             solutionFiles?: unknown;
+            semanticChecks?: unknown;
+            sourceChecks?: unknown;
         };
     },    args,
     resolved,
@@ -27,6 +29,16 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
         (def as any).solutionFiles ??
         (def.recipe as any).solutionFiles ??
         (def.workspace as any)?.solutionFiles;
+    const semanticChecks = Array.isArray((def.recipe as any).semanticChecks)
+        ? (def.recipe as any).semanticChecks
+        : Array.isArray((def as any).semanticChecks)
+            ? (def as any).semanticChecks
+            : undefined;
+    const sourceChecks = Array.isArray((def.recipe as any).sourceChecks)
+        ? (def.recipe as any).sourceChecks
+        : Array.isArray((def as any).sourceChecks)
+            ? (def as any).sourceChecks
+            : undefined;
 
     const expectedWithRevealFiles = {
         ...(expected as any),
@@ -36,6 +48,8 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
                 ? { solutionCode: def.recipe.solutionCode }
                 : {}),
         ...(solutionFiles !== undefined ? { solutionFiles } : {}),
+        ...(semanticChecks?.length ? { semanticChecks } : {}),
+        ...(sourceChecks?.length ? { sourceChecks } : {}),
     };
     const tests = expected.tests;
 

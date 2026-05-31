@@ -218,7 +218,7 @@
             "value"
           ],
           "expected": 42,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"
@@ -250,7 +250,7 @@
             "value"
           ],
           "expected": true,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -262,7 +262,7 @@
             "value"
           ],
           "expected": false,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -274,7 +274,7 @@
             "value"
           ],
           "expected": false,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -286,7 +286,7 @@
             "value"
           ],
           "expected": false,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"

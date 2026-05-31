@@ -256,7 +256,8 @@
             "try_dictionary_basics_sketch2": {
               "title": "Try it yourself",
               "prompt": "Build a dictionary with two key-value pairs, then print it."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

@@ -617,10 +617,22 @@ export function buildReviewTargetRegistry(args: {
         });
 
 
-        const embeddedTryIt =
+        const rawEmbeddedTryIt =
             (card.type === "text" || card.type === "sketch")
                 ? (card.tryIt ?? null)
                 : null;
+        const embeddedTryIt = rawEmbeddedTryIt
+            ? {
+                ...rawEmbeddedTryIt,
+                allowReveal: true,
+                spec: rawEmbeddedTryIt.spec
+                    ? {
+                        ...rawEmbeddedTryIt.spec,
+                        allowReveal: true,
+                    }
+                    : rawEmbeddedTryIt.spec,
+              }
+            : null;
 
 
         const cardEntry: ReviewTargetEntry = {

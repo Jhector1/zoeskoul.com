@@ -236,7 +236,7 @@
             "Ava",
             "Ben"
           ],
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -261,7 +261,7 @@
           "expected": [
             "Kai"
           ],
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"
@@ -314,7 +314,7 @@
             "list_of_dict_entries"
           ],
           "expected": 10,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -357,7 +357,7 @@
             "list_of_dict_entries"
           ],
           "expected": 6,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"
@@ -420,7 +420,7 @@
             "list_of_dict_entries"
           ],
           "expected": 11,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -453,7 +453,7 @@
             "list_of_dict_entries"
           ],
           "expected": 3,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"

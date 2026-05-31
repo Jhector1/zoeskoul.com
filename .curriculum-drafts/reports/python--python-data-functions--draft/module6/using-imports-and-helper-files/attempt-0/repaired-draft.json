@@ -211,7 +211,7 @@
             "value"
           ],
           "expected": "Ava",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -223,7 +223,7 @@
             "value"
           ],
           "expected": "Marco",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"
@@ -255,7 +255,7 @@
             "value"
           ],
           "expected": "Hello, Mina!",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -267,7 +267,7 @@
             "value"
           ],
           "expected": "Hello, Leo!",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"
@@ -301,7 +301,7 @@
             "value"
           ],
           "expected": "Ava: 9",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -315,7 +315,7 @@
             "value"
           ],
           "expected": "Noah: 12",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"

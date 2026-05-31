@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -339,7 +339,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -368,6 +368,18 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "Use a try block for the conversion."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "Convert the text with int()."
+          }
         ]
       },
       "solutionFiles": [
@@ -377,6 +389,18 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "Use a try block for the conversion."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "Convert the text with int()."
         }
       ]
     },
@@ -444,6 +468,18 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "Use a try block for the conversion."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "Convert the text with int()."
+          }
         ]
       },
       "solutionFiles": [
@@ -453,6 +489,18 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "Use a try block for the conversion."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "Convert the text with int()."
         }
       ]
     },
@@ -520,6 +568,18 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "Use a try block for the conversion."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "Convert the text with int()."
+          }
         ]
       },
       "solutionFiles": [
@@ -529,6 +589,18 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "Use a try block for the conversion."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "Convert the text with int()."
         }
       ]
     },
@@ -596,6 +668,23 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "parts",
+            "message": "Loop through each part."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "Use try/except around the int conversion."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "Convert each value with int()."
+          }
         ]
       },
       "solutionFiles": [
@@ -605,6 +694,23 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "parts",
+          "message": "Loop through each part."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "Use try/except around the int conversion."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "Convert each value with int()."
         }
       ]
     },
@@ -657,7 +763,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -676,8 +782,32 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "Use a try block for the conversion."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "Convert the text with int()."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "Use a try block for the conversion."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "Convert the text with int()."
+        }
+      ]
     },
     {
       "id": "try-try-except-basics-sketch1",
@@ -728,7 +858,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -747,8 +877,32 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "Use a try block for the conversion."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "Convert the text with int()."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "Use a try block for the conversion."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "Convert the text with int()."
+        }
+      ]
     },
     {
       "id": "try-try-except-basics-sketch2",
@@ -799,7 +953,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -818,8 +972,42 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "values",
+            "message": "Loop through values instead of typing 10 and 3 directly."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "Use try/except around the int conversion."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "Convert each value with int()."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "values",
+          "message": "Loop through values instead of typing 10 and 3 directly."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "Use try/except around the int conversion."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "Convert each value with int()."
+        }
+      ]
     }
   ]
 }

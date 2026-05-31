@@ -258,7 +258,8 @@
             "try_validating_and_cleaning_input_sketch2": {
               "title": "Try it yourself",
               "prompt": "Split each row, strip each field, and format the cleaned result."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

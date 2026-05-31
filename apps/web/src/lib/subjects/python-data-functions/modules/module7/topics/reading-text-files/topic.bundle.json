@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -357,7 +357,7 @@
           ]
         }
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -380,6 +380,14 @@
             "path": "data/note.txt",
             "content": "Hello from a file!\n",
             "language": "text"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/note.txt",
+            "message": "Open data/note.txt instead of typing the file contents.",
+            "normalizeWhitespace": true
           }
         ]
       },
@@ -404,7 +412,15 @@
         "requiredFiles": [
           "data/note.txt"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/note.txt",
+          "message": "Open data/note.txt instead of typing the file contents.",
+          "normalizeWhitespace": true
+        }
+      ]
     },
     {
       "id": "ci-read-and-print",
@@ -488,6 +504,14 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/message.txt",
+            "message": "Open data/message.txt to read the file.",
+            "normalizeWhitespace": true
+          }
         ]
       },
       "solutionFiles": [
@@ -497,6 +521,14 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/message.txt",
+          "message": "Open data/message.txt to read the file.",
+          "normalizeWhitespace": true
         }
       ]
     },
@@ -582,6 +614,14 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/notes.txt",
+            "message": "Open data/notes.txt to read the file.",
+            "normalizeWhitespace": true
+          }
         ]
       },
       "solutionFiles": [
@@ -591,6 +631,14 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/notes.txt",
+          "message": "Open data/notes.txt to read the file.",
+          "normalizeWhitespace": true
         }
       ]
     },
@@ -676,6 +724,14 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/list.txt",
+            "message": "Open data/list.txt to count the lines.",
+            "normalizeWhitespace": true
+          }
         ]
       },
       "solutionFiles": [
@@ -685,6 +741,14 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/list.txt",
+          "message": "Open data/list.txt to count the lines.",
+          "normalizeWhitespace": true
         }
       ]
     },
@@ -771,7 +835,7 @@
           ]
         }
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -797,6 +861,14 @@
             "isEntry": false,
             "entry": false
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "note.txt",
+            "message": "Open note.txt instead of typing the file contents.",
+            "normalizeWhitespace": true
+          }
         ]
       },
       "workspaceExpectations": {
@@ -804,7 +876,15 @@
         "requiredFiles": [
           "note.txt"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "note.txt",
+          "message": "Open note.txt instead of typing the file contents.",
+          "normalizeWhitespace": true
+        }
+      ]
     },
     {
       "id": "try-reading-text-files-sketch1",
@@ -889,7 +969,7 @@
           ]
         }
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -915,6 +995,14 @@
             "isEntry": false,
             "entry": false
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "names.txt",
+            "message": "Open names.txt instead of typing the names directly.",
+            "normalizeWhitespace": true
+          }
         ]
       },
       "workspaceExpectations": {
@@ -922,7 +1010,15 @@
         "requiredFiles": [
           "names.txt"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "names.txt",
+          "message": "Open names.txt instead of typing the names directly.",
+          "normalizeWhitespace": true
+        }
+      ]
     },
     {
       "id": "try-reading-text-files-sketch2",
@@ -1007,7 +1103,7 @@
           ]
         }
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -1033,6 +1129,32 @@
             "isEntry": false,
             "entry": false
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "count",
+            "expected": 2,
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "names.txt",
+            "message": "Read names.txt instead of typing the final count.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "uses_for_loop",
+            "iterable": "file",
+            "message": "Loop through the file lines to count them."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bopen\\s*\\(",
+            "message": "Use open(...) to read the file."
+          }
         ]
       },
       "workspaceExpectations": {
@@ -1040,7 +1162,25 @@
         "requiredFiles": [
           "names.txt"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "names.txt",
+          "message": "Read names.txt instead of typing the final count.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "uses_for_loop",
+          "iterable": "file",
+          "message": "Loop through the file lines to count them."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bopen\\s*\\(",
+          "message": "Use open(...) to read the file."
+        }
+      ]
     }
   ]
 }

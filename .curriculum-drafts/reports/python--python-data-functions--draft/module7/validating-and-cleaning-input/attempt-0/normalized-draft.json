@@ -214,7 +214,7 @@
             "value"
           ],
           "expected": "Ava",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -226,7 +226,7 @@
             "value"
           ],
           "expected": "Liam Oneil",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"
@@ -258,7 +258,7 @@
             "value"
           ],
           "expected": 12,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -270,7 +270,7 @@
             "value"
           ],
           "expected": 0,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"

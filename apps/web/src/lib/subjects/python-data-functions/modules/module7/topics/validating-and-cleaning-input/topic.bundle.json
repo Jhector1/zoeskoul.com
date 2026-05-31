@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -337,7 +337,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -366,6 +366,18 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "message": "Strip whitespace from the name."
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "message": "Title-case the cleaned name."
+          }
         ]
       },
       "solutionFiles": [
@@ -375,6 +387,18 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "message": "Strip whitespace from the name."
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "message": "Title-case the cleaned name."
         }
       ]
     },
@@ -434,7 +458,7 @@
               "value"
             ],
             "expected": "Ava",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -446,7 +470,7 @@
               "value"
             ],
             "expected": "Liam Oneil",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -528,7 +552,7 @@
               "value"
             ],
             "expected": 12,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -540,7 +564,7 @@
               "value"
             ],
             "expected": 0,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -709,7 +733,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -728,8 +752,40 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "clean",
+            "expected": "Ava Smith",
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "message": "Use strip() to remove extra spaces."
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "message": "Use title() to normalize the name."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "message": "Use strip() to remove extra spaces."
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "message": "Use title() to normalize the name."
+        }
+      ]
     },
     {
       "id": "try-validating-and-cleaning-input-sketch1",
@@ -780,7 +836,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -799,8 +855,32 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "Convert score_text to an integer."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "0\\s*<=|<=\\s*100",
+            "message": "Check that the score is within 0 to 100."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "Convert score_text to an integer."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "0\\s*<=|<=\\s*100",
+          "message": "Check that the score is within 0 to 100."
+        }
+      ]
     },
     {
       "id": "try-validating-and-cleaning-input-sketch2",
@@ -851,7 +931,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -870,8 +950,52 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "rows",
+            "message": "Loop through rows instead of typing both cleaned lines."
+          },
+          {
+            "type": "uses_method",
+            "method": "split",
+            "message": "Split each row into name and score."
+          },
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "message": "Strip spaces from each part."
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "message": "Title-case each name."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "rows",
+          "message": "Loop through rows instead of typing both cleaned lines."
+        },
+        {
+          "type": "uses_method",
+          "method": "split",
+          "message": "Split each row into name and score."
+        },
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "message": "Strip spaces from each part."
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "message": "Title-case each name."
+        }
+      ]
     }
   ]
 }

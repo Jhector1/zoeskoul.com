@@ -294,7 +294,7 @@
             "value"
           ],
           "expected": 10,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -317,7 +317,7 @@
             "value"
           ],
           "expected": 9,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"

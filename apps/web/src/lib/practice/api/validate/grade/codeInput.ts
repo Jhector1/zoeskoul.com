@@ -6,6 +6,46 @@ import { gradeSqlCodeInput } from "./codeInput.sql";
 import {GradeResult} from "@/lib/practice/api/validate/grade/index";
 
 
+function normalizeSemanticChecksForSchema(value: unknown): unknown {
+  if (!Array.isArray(value)) return value;
+
+  return value.map((check) => {
+    if (!check || typeof check !== "object") return check;
+    const next: any = { ...(check as any) };
+    if (next.expectedKind === "value") next.expectedKind = "json";
+    if (Array.isArray(next.argKinds)) {
+      next.argKinds = next.argKinds.map((kind: unknown) =>
+        kind === "value" ? "json" : kind,
+      );
+    }
+    return next;
+  });
+}
+
+function prepareCodeExpectedForSchema(expectedCanon: unknown): {
+  expectedForSchema: unknown;
+  sourceChecks: unknown[];
+} {
+  if (!expectedCanon || typeof expectedCanon !== "object" || Array.isArray(expectedCanon)) {
+    return { expectedForSchema: expectedCanon, sourceChecks: [] };
+  }
+
+  const raw = expectedCanon as any;
+  const sourceChecks = Array.isArray(raw.sourceChecks)
+    ? raw.sourceChecks.filter(Boolean)
+    : [];
+  const { sourceChecks: _sourceChecks, ...expectedWithoutSourceChecks } = raw;
+  const semanticChecks = normalizeSemanticChecksForSchema(raw.semanticChecks);
+
+  return {
+    expectedForSchema: {
+      ...expectedWithoutSourceChecks,
+      ...(semanticChecks !== raw.semanticChecks ? { semanticChecks } : {}),
+    },
+    sourceChecks,
+  };
+}
+
 
 export async function gradeCodeInput(args: {
   instance: LoadedValidateInstance;
@@ -15,16 +55,28 @@ export async function gradeCodeInput(args: {
 }): Promise<GradeResult> {
   const { expectedCanon, answer, showDebug } = args;
 
-  const parsed = CodeExpectedSchema.safeParse(expectedCanon);
+  const { expectedForSchema, sourceChecks } = prepareCodeExpectedForSchema(expectedCanon);
+  const parsed = CodeExpectedSchema.safeParse(expectedForSchema);
   if (!parsed.success) {
     return {
       ok: false,
       explanation: "Server bug: invalid code_input expected payload.",
-      feedback: null,
+      feedback: {
+        area: "code",
+        source: "check",
+        kind: "runtime",
+        tone: "danger",
+        title: "Validation setup error",
+        message: "This exercise has an invalid validation contract. Fix the authored expected payload.",
+        raw: showDebug ? JSON.stringify(parsed.error.format(), null, 2) : null,
+      },
     };
   }
 
-  const expected = parsed.data;
+  const expected = {
+    ...(parsed.data as any),
+    ...(sourceChecks.length ? { sourceChecks } : {}),
+  };
   const ans: any = answer ?? {};
   const code = String(ans.code ?? ans.source ?? "").trimEnd();
   const submissionFiles = Array.isArray(ans.files)

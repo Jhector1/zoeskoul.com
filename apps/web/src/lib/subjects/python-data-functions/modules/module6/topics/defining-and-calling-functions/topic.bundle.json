@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -332,7 +332,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -351,6 +351,18 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+say_hello\\s*\\(\\s*\\)\\s*:",
+            "message": "Define a function named say_hello()."
+          },
+          {
+            "type": "uses_call",
+            "functionName": "say_hello",
+            "message": "Call say_hello() after defining it."
+          }
         ]
       },
       "solutionFiles": [
@@ -360,6 +372,18 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+say_hello\\s*\\(\\s*\\)\\s*:",
+          "message": "Define a function named say_hello()."
+        },
+        {
+          "type": "uses_call",
+          "functionName": "say_hello",
+          "message": "Call say_hello() after defining it."
         }
       ]
     },
@@ -419,7 +443,7 @@
               "value"
             ],
             "expected": "Hello, Ava",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -431,7 +455,7 @@
               "value"
             ],
             "expected": "Hello, Leo",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -513,7 +537,7 @@
               "value"
             ],
             "expected": 16,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -525,7 +549,7 @@
               "value"
             ],
             "expected": 49,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -609,7 +633,7 @@
               "value"
             ],
             "expected": "Ada Lovelace",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -623,7 +647,7 @@
               "value"
             ],
             "expected": "Sam Lee",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -698,7 +722,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -781,7 +805,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -864,7 +888,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",

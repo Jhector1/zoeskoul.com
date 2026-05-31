@@ -116,7 +116,8 @@
             "try_class_roster_cleaner_sketch0": {
               "title": "Try it yourself",
               "prompt": "Clean one roster row before building the full capstone app."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

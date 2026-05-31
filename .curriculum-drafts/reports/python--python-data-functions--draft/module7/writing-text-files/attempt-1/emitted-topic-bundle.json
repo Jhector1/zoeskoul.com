@@ -297,7 +297,13 @@
             "content": "Hello, Zoe!",
             "readOnly": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "greeting.txt"
+          ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
@@ -329,6 +335,12 @@
           }
         ],
         "solutionCode": "with open(\"greeting.txt\", \"w\") as file:\n    file.write(\"Hello, Zoe!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())"
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "greeting.txt"
+        ]
       }
     },
     {
@@ -367,7 +379,13 @@
             "content": "Old item\nMilk\nEggs",
             "readOnly": false
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "shopping.txt"
+          ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
@@ -399,6 +417,12 @@
           }
         ],
         "solutionCode": "with open(\"shopping.txt\", \"w\") as file:\n    file.write(\"Bread\\nApples\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")"
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "shopping.txt"
+        ]
       }
     },
     {
@@ -437,7 +461,13 @@
             "content": "Start shift",
             "readOnly": false
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "log.txt"
+          ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
@@ -469,6 +499,12 @@
           }
         ],
         "solutionCode": "with open(\"log.txt\", \"a\") as file:\n    file.write(\"Checked sensors\\n\")\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")"
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "log.txt"
+        ]
       }
     }
   ]

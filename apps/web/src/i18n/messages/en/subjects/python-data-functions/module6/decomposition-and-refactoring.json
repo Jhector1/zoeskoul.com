@@ -258,7 +258,8 @@
             "try_decomposition_and_refactoring_sketch2": {
               "title": "Try it yourself",
               "prompt": "One helper can call another helper."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

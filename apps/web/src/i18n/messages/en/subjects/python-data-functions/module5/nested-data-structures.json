@@ -255,7 +255,8 @@
             "try_nested_data_structures_sketch2": {
               "title": "Try it yourself",
               "prompt": "Mutate a list that is stored inside a dictionary."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

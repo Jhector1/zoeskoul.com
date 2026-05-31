@@ -208,7 +208,7 @@
             "value"
           ],
           "expected": "Apples: 3",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -222,7 +222,7 @@
             "value"
           ],
           "expected": "Pens: 12",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"
@@ -256,7 +256,7 @@
             "value"
           ],
           "expected": 10,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -270,7 +270,7 @@
             "value"
           ],
           "expected": 12,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"
@@ -306,7 +306,7 @@
             "value"
           ],
           "expected": 4,
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "function_returns",
@@ -321,7 +321,7 @@
             "value"
           ],
           "expected": "red",
-          "expectedKind": "value"
+          "expectedKind": "json"
         },
         {
           "type": "no_stdout"

@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -157,6 +157,41 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "students",
+            "expected": [
+              "Ava",
+              "Mia",
+              "Zoe"
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "append",
+            "message": "Use students.append(...) to add each student to the list.",
+            "target": "students"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "students\\.append\\s*\\(\\s*['\\\"]Ava['\\\"]\\s*\\)",
+            "message": "Append Ava to students."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "students\\.append\\s*\\(\\s*['\\\"]Mia['\\\"]\\s*\\)",
+            "message": "Append Mia to students."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "students\\.append\\s*\\(\\s*['\\\"]Zoe['\\\"]\\s*\\)",
+            "message": "Append Zoe to students."
+          }
         ]
       },
       "solutionFiles": [
@@ -166,6 +201,29 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "append",
+          "message": "Use students.append(...) to add each student to the list.",
+          "target": "students"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "students\\.append\\s*\\(\\s*['\\\"]Ava['\\\"]\\s*\\)",
+          "message": "Append Ava to students."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "students\\.append\\s*\\(\\s*['\\\"]Mia['\\\"]\\s*\\)",
+          "message": "Append Mia to students."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "students\\.append\\s*\\(\\s*['\\\"]Zoe['\\\"]\\s*\\)",
+          "message": "Append Zoe to students."
         }
       ]
     },
@@ -229,6 +287,49 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "scores",
+            "expected": [
+              [
+                "Ava",
+                92
+              ],
+              [
+                "Mia",
+                85
+              ],
+              [
+                "Zoe",
+                97
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bscores\\s*=",
+            "message": "Create a dictionary variable named scores."
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "Ava",
+            "message": "Use the Ava key in the scores dictionary."
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "Mia",
+            "message": "Use the Mia key in the scores dictionary."
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "Zoe",
+            "message": "Use the Zoe key in the scores dictionary."
+          }
         ]
       },
       "solutionFiles": [
@@ -238,6 +339,28 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bscores\\s*=",
+          "message": "Create a dictionary variable named scores."
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "Ava",
+          "message": "Use the Ava key in the scores dictionary."
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "Mia",
+          "message": "Use the Mia key in the scores dictionary."
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "Zoe",
+          "message": "Use the Zoe key in the scores dictionary."
         }
       ]
     },
@@ -301,6 +424,27 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "students",
+            "message": "Loop through students instead of typing Ava and Zoe directly."
+          },
+          {
+            "type": "source_contains_any",
+            "patterns": [
+              "scores[",
+              "scores.get("
+            ],
+            "message": "Look up each student in the scores dictionary.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": ">=\\s*90|90\\s*<=",
+            "message": "Check for scores of 90 or higher instead of hard-coding the names."
+          }
         ]
       },
       "solutionFiles": [
@@ -310,6 +454,27 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "students",
+          "message": "Loop through students instead of typing Ava and Zoe directly."
+        },
+        {
+          "type": "source_contains_any",
+          "patterns": [
+            "scores[",
+            "scores.get("
+          ],
+          "message": "Look up each student in the scores dictionary.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": ">=\\s*90|90\\s*<=",
+          "message": "Check for scores of 90 or higher instead of hard-coding the names."
         }
       ]
     },
@@ -373,6 +538,45 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "ranked",
+            "expected": [
+              [
+                "Zoe",
+                97
+              ],
+              [
+                "Ava",
+                92
+              ],
+              [
+                "Mia",
+                85
+              ]
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_call",
+            "functionName": "sorted",
+            "message": "Use sorted(...) to build the ranked grade summary."
+          },
+          {
+            "type": "source_contains",
+            "pattern": "scores.items()",
+            "message": "Sort scores.items() so each name stays paired with its score.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "reverse\\s*=\\s*True",
+            "message": "Sort in descending score order with reverse=True."
+          }
         ]
       },
       "solutionFiles": [
@@ -382,6 +586,24 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_call",
+          "functionName": "sorted",
+          "message": "Use sorted(...) to build the ranked grade summary."
+        },
+        {
+          "type": "source_contains",
+          "pattern": "scores.items()",
+          "message": "Sort scores.items() so each name stays paired with its score.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "reverse\\s*=\\s*True",
+          "message": "Sort in descending score order with reverse=True."
         }
       ]
     },
@@ -434,7 +656,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -453,8 +675,36 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "students",
+            "expected": [
+              "Ava",
+              "Mia",
+              "Zoe"
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "append",
+            "message": "Use students.append('Zoe') instead of replacing the final list.",
+            "target": "students"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "append",
+          "message": "Use students.append('Zoe') instead of replacing the final list.",
+          "target": "students"
+        }
+      ]
     }
   ]
 }

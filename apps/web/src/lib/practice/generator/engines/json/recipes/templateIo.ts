@@ -23,6 +23,15 @@ export const buildTemplateIoRecipe: RecipeHandler<any> = (def, args, resolved) =
             def.workspaceExpectations ?? def.workspace?.workspaceExpectations,
     });
 
+    const sourceChecks = Array.isArray((def.recipe as any)?.sourceChecks)
+        ? (def.recipe as any).sourceChecks
+        : Array.isArray((def as any).sourceChecks)
+            ? (def as any).sourceChecks
+            : undefined;
+    const expectedWithSourceChecks = {
+        ...(expected as any),
+        ...(sourceChecks?.length ? { sourceChecks } : {}),
+    };
     const tests = expected.tests;
 
     const expectedExample = buildTerminalExpectedExample({
@@ -63,7 +72,7 @@ export const buildTemplateIoRecipe: RecipeHandler<any> = (def, args, resolved) =
         help: resolved.help,
         hint: resolved.hint,
         fixedSqlDialect: def.fixedSqlDialect,
-        expected: expected as any,
+        expected: expectedWithSourceChecks as any,
         expectedExample,
         ideConfig: def.serviceOverrides ?? null,
     });

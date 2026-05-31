@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -353,7 +353,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -387,6 +387,33 @@
             "content": "def clean_name(text):\n    return text.strip().title()\n",
             "language": "python"
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.names",
+            "message": "Import from tools.names.",
+            "importName": "clean_name",
+            "path": "main.py"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+            "message": "Define clean_name(text) inside tools/names.py.",
+            "path": "tools/names.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "message": "clean_name should strip whitespace.",
+            "path": "tools/names.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "message": "clean_name should title-case the name.",
+            "path": "tools/names.py"
+          }
         ]
       },
       "solutionFiles": [
@@ -416,7 +443,34 @@
           "tools/__init__.py",
           "tools/names.py"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.names",
+          "message": "Import from tools.names.",
+          "importName": "clean_name",
+          "path": "main.py"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+          "message": "Define clean_name(text) inside tools/names.py.",
+          "path": "tools/names.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "message": "clean_name should strip whitespace.",
+          "path": "tools/names.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "message": "clean_name should title-case the name.",
+          "path": "tools/names.py"
+        }
+      ]
     },
     {
       "id": "q9",
@@ -521,6 +575,33 @@
             "content": "def clean_name(text):\n    return text.strip().title()\n",
             "language": "python"
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.names",
+            "message": "Import from tools.names.",
+            "importName": "clean_name",
+            "path": "main.py"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+            "message": "Define clean_name(text) inside tools/names.py.",
+            "path": "tools/names.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "message": "clean_name should strip whitespace.",
+            "path": "tools/names.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "message": "clean_name should title-case the name.",
+            "path": "tools/names.py"
+          }
         ]
       },
       "solutionFiles": [
@@ -540,6 +621,33 @@
           "path": "tools/names.py",
           "content": "def clean_name(text):\n    return text.strip().title()\n",
           "language": "python"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.names",
+          "message": "Import from tools.names.",
+          "importName": "clean_name",
+          "path": "main.py"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+          "message": "Define clean_name(text) inside tools/names.py.",
+          "path": "tools/names.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "message": "clean_name should strip whitespace.",
+          "path": "tools/names.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "message": "clean_name should title-case the name.",
+          "path": "tools/names.py"
         }
       ]
     },
@@ -682,6 +790,27 @@
             "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
             "language": "python"
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.badges",
+            "message": "Import from tools.badges.",
+            "importName": "make_badge",
+            "path": "main.py"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+make_badge\\s*\\(",
+            "message": "Define make_badge in tools/badges.py.",
+            "path": "tools/badges.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "upper",
+            "message": "make_badge should uppercase the role.",
+            "path": "tools/badges.py"
+          }
         ]
       },
       "solutionFiles": [
@@ -706,6 +835,27 @@
           "path": "tools/badges.py",
           "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
           "language": "python"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.badges",
+          "message": "Import from tools.badges.",
+          "importName": "make_badge",
+          "path": "main.py"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+make_badge\\s*\\(",
+          "message": "Define make_badge in tools/badges.py.",
+          "path": "tools/badges.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "upper",
+          "message": "make_badge should uppercase the role.",
+          "path": "tools/badges.py"
         }
       ]
     },
@@ -872,6 +1022,27 @@
             "content": "def mission_report(badge, points):\n    return f\"Mission report: {badge} has {points} points\"\n",
             "language": "python"
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.reports",
+            "message": "Import from tools.reports.",
+            "importName": "mission_report",
+            "path": "main.py"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+mission_report\\s*\\(",
+            "message": "Define mission_report in tools/reports.py.",
+            "path": "tools/reports.py"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "mission_report",
+            "message": "Call mission_report() from main.py.",
+            "path": "main.py"
+          }
         ]
       },
       "solutionFiles": [
@@ -901,6 +1072,27 @@
           "path": "tools/reports.py",
           "content": "def mission_report(badge, points):\n    return f\"Mission report: {badge} has {points} points\"\n",
           "language": "python"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.reports",
+          "message": "Import from tools.reports.",
+          "importName": "mission_report",
+          "path": "main.py"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+mission_report\\s*\\(",
+          "message": "Define mission_report in tools/reports.py.",
+          "path": "tools/reports.py"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "mission_report",
+          "message": "Call mission_report() from main.py.",
+          "path": "main.py"
         }
       ]
     },
@@ -953,7 +1145,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -1036,7 +1228,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -1121,7 +1313,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",

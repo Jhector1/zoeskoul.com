@@ -258,7 +258,8 @@
             "try_scope_and_local_variables_sketch2": {
               "title": "Try it yourself",
               "prompt": "A parameter can have the same name but still be local to the function."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

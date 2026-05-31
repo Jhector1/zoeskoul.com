@@ -11,6 +11,15 @@ export const buildSemanticRecipe: RecipeHandler<any> = (def, args, resolved) => 
         def.recipe,
         def.workspaceExpectations ?? def.workspace?.workspaceExpectations,
     );
+    const sourceChecks = Array.isArray((def.recipe as any)?.sourceChecks)
+        ? (def.recipe as any).sourceChecks
+        : Array.isArray((def as any).sourceChecks)
+            ? (def as any).sourceChecks
+            : undefined;
+    const expectedWithSourceChecks = {
+        ...(expected as any),
+        ...(sourceChecks?.length ? { sourceChecks } : {}),
+    };
 
     return makeCodeInputOut({
         archetype: def.id,
@@ -42,7 +51,7 @@ export const buildSemanticRecipe: RecipeHandler<any> = (def, args, resolved) => 
         help: resolved.help,
         hint: resolved.hint,
         fixedSqlDialect: def.fixedSqlDialect,
-        expected: expected as any,
+        expected: expectedWithSourceChecks as any,
         expectedExample: null,
         ideConfig: def.serviceOverrides ?? null,
     });

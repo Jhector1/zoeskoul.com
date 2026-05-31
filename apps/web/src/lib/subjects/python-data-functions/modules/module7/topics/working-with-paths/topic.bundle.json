@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -355,7 +355,7 @@
           ]
         }
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -378,6 +378,26 @@
             "path": "data/names.txt",
             "content": "Ava\nMia\n",
             "language": "text"
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "path",
+            "expected": "data/names.txt",
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_call",
+            "functionName": "Path",
+            "message": "Use Path(...) to build the path."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]names\\.txt['\\\"]",
+            "message": "Build the path with Path('data') / 'names.txt'."
           }
         ]
       },
@@ -402,7 +422,19 @@
         "requiredFiles": [
           "data/names.txt"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_call",
+          "functionName": "Path",
+          "message": "Use Path(...) to build the path."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]names\\.txt['\\\"]",
+          "message": "Build the path with Path('data') / 'names.txt'."
+        }
+      ]
     },
     {
       "id": "ci-read-nested-file",
@@ -489,6 +521,14 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/input.txt",
+            "message": "Open data/input.txt to read the nested file.",
+            "normalizeWhitespace": true
+          }
         ]
       },
       "solutionFiles": [
@@ -498,6 +538,14 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/input.txt",
+          "message": "Open data/input.txt to read the nested file.",
+          "normalizeWhitespace": true
         }
       ]
     },
@@ -546,7 +594,15 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data"
+          ],
+          "requiredFiles": [
+            "data/copy.txt"
+          ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
@@ -586,6 +642,25 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/source.txt",
+            "message": "Read from data/source.txt.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "data/copy.txt",
+            "message": "Write to data/copy.txt.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "uses_method",
+            "method": "write",
+            "message": "Use file.write() to create the copy."
+          }
         ]
       },
       "solutionFiles": [
@@ -595,6 +670,33 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/copy.txt"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/source.txt",
+          "message": "Read from data/source.txt.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "data/copy.txt",
+          "message": "Write to data/copy.txt.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "uses_method",
+          "method": "write",
+          "message": "Use file.write() to create the copy."
         }
       ]
     },
@@ -683,6 +785,14 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/items.txt",
+            "message": "Open data/items.txt to count its lines.",
+            "normalizeWhitespace": true
+          }
         ]
       },
       "solutionFiles": [
@@ -692,6 +802,14 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/items.txt",
+          "message": "Open data/items.txt to count its lines.",
+          "normalizeWhitespace": true
         }
       ]
     },
@@ -744,7 +862,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -763,8 +881,30 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "path",
+            "expected": "data/scores.txt",
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bfolder\\s*\\+\\s*['\\\"]/['\\\"]\\s*\\+\\s*filename",
+            "message": "Build the path from folder and filename instead of typing the final path."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bfolder\\s*\\+\\s*['\\\"]/['\\\"]\\s*\\+\\s*filename",
+          "message": "Build the path from folder and filename instead of typing the final path."
+        }
+      ]
     },
     {
       "id": "try-working-with-paths-sketch1",
@@ -815,7 +955,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -834,8 +974,40 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "path",
+            "expected": "data/scores.txt",
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_call",
+            "functionName": "Path",
+            "message": "Use Path(...) to build the path."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]scores\\.txt['\\\"]",
+            "message": "Build the path with Path('data') / 'scores.txt'."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_call",
+          "functionName": "Path",
+          "message": "Use Path(...) to build the path."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]scores\\.txt['\\\"]",
+          "message": "Build the path with Path('data') / 'scores.txt'."
+        }
+      ]
     },
     {
       "id": "try-working-with-paths-sketch2",
@@ -922,7 +1094,7 @@
           ]
         }
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -948,6 +1120,14 @@
             "isEntry": false,
             "entry": false
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/message.txt",
+            "message": "Open data/message.txt instead of typing Nested hello.",
+            "normalizeWhitespace": true
+          }
         ]
       },
       "workspaceExpectations": {
@@ -957,7 +1137,15 @@
         "requiredFiles": [
           "data/message.txt"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/message.txt",
+          "message": "Open data/message.txt instead of typing Nested hello.",
+          "normalizeWhitespace": true
+        }
+      ]
     }
   ]
 }

@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -336,9 +336,15 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "note.txt"
+          ]
+        }
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -357,6 +363,19 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "note.txt",
+            "message": "Write to note.txt instead of only printing the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "uses_method",
+            "method": "write",
+            "message": "Use file.write() to write the file."
+          }
         ]
       },
       "solutionFiles": [
@@ -366,6 +385,25 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "note.txt"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "note.txt",
+          "message": "Write to note.txt instead of only printing the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "uses_method",
+          "method": "write",
+          "message": "Use file.write() to write the file."
         }
       ]
     },
@@ -407,7 +445,13 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "greeting.txt"
+          ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
@@ -433,6 +477,19 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "greeting.txt",
+            "message": "Write to greeting.txt instead of only printing the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "uses_method",
+            "method": "write",
+            "message": "Use file.write() to write greeting.txt."
+          }
         ]
       },
       "solutionFiles": [
@@ -442,6 +499,25 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "greeting.txt"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "greeting.txt",
+          "message": "Write to greeting.txt instead of only printing the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "uses_method",
+          "method": "write",
+          "message": "Use file.write() to write greeting.txt."
         }
       ]
     },
@@ -483,7 +559,13 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "shopping.txt"
+          ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
@@ -509,6 +591,19 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "shopping.txt",
+            "message": "Write to shopping.txt instead of only printing the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "uses_method",
+            "method": "write",
+            "message": "Use file.write() to write shopping.txt."
+          }
         ]
       },
       "solutionFiles": [
@@ -518,6 +613,25 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "shopping.txt"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "shopping.txt",
+          "message": "Write to shopping.txt instead of only printing the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "uses_method",
+          "method": "write",
+          "message": "Use file.write() to write shopping.txt."
         }
       ]
     },
@@ -566,7 +680,13 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "log.txt"
+          ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
@@ -606,6 +726,19 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "log.txt",
+            "message": "Append to log.txt instead of only printing the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "['\\\"]a['\\\"]",
+            "message": "Open log.txt in append mode."
+          }
         ]
       },
       "solutionFiles": [
@@ -615,6 +748,25 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "log.txt"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "log.txt",
+          "message": "Append to log.txt instead of only printing the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "['\\\"]a['\\\"]",
+          "message": "Open log.txt in append mode."
         }
       ]
     },
@@ -665,9 +817,15 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "note.txt"
+          ]
+        }
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -686,8 +844,40 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "note.txt",
+            "message": "Write to note.txt instead of only printing Done.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "uses_method",
+            "method": "write",
+            "message": "Use file.write() to write note.txt."
+          }
         ]
-      }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "note.txt"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "note.txt",
+          "message": "Write to note.txt instead of only printing Done.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "uses_method",
+          "method": "write",
+          "message": "Use file.write() to write note.txt."
+        }
+      ]
     },
     {
       "id": "try-writing-text-files-sketch1",
@@ -736,9 +926,15 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "log.txt"
+          ]
+        }
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -757,8 +953,40 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "log.txt",
+            "message": "Create and append to log.txt.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "uses_method",
+            "method": "write",
+            "message": "Use file.write() to write the log file."
+          }
         ]
-      }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "log.txt"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "log.txt",
+          "message": "Create and append to log.txt.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "uses_method",
+          "method": "write",
+          "message": "Use file.write() to write the log file."
+        }
+      ]
     },
     {
       "id": "try-writing-text-files-sketch2",
@@ -807,9 +1035,15 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "report.txt"
+          ]
+        }
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -828,8 +1062,40 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "report.txt",
+            "message": "Write to report.txt instead of only printing the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "uses_method",
+            "method": "write",
+            "message": "Use file.write() to write report.txt."
+          }
         ]
-      }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "report.txt"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "report.txt",
+          "message": "Write to report.txt instead of only printing the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "uses_method",
+          "method": "write",
+          "message": "Use file.write() to write report.txt."
+        }
+      ]
     }
   ]
 }

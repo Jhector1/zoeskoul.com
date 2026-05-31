@@ -240,4 +240,66 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
     expect(fullIde.access.canUseMultiFile).toBe(true);
     expect(fullIde.services.runner?.enableWorkspaceTerminal).not.toBe(true);
   });
+  it("keeps semantic checks on fixed-test exercises for hybrid stdout plus state validation", () => {
+    const semanticChecks = [
+      {
+        type: "variable_equals",
+        name: "scores",
+        expected: [["Ava", 92]],
+        expectedKind: "dict_entries",
+      },
+    ];
+
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef({
+        recipe: {
+          type: "fixed_tests",
+          tests: [{ stdout: "{'Ava': 92}\n" }],
+          semanticChecks,
+        },
+      }),
+      makeArgs(),
+      {
+        runtimeDefaults: {
+          kind: "code",
+          language: "python",
+          supportsTerminal: false,
+        },
+      } as any,
+    );
+
+    expect((result.expected as any).semanticChecks).toEqual(semanticChecks);
+  });
+
+
+  it("keeps source checks on fixed-test exercises for anti-cheat validation", () => {
+    const sourceChecks = [
+      {
+        type: "source_regex",
+        pattern: "\\bfruits\\.remove\\s*\\(",
+        message: "Use remove().",
+      },
+    ];
+
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef({
+        recipe: {
+          type: "fixed_tests",
+          tests: [{ stdout: "ok\n" }],
+          sourceChecks,
+        },
+      }),
+      makeArgs(),
+      {
+        runtimeDefaults: {
+          kind: "code",
+          language: "python",
+          supportsTerminal: false,
+        },
+      } as any,
+    );
+
+    expect((result.expected as any).sourceChecks).toEqual(sourceChecks);
+  });
+
 });

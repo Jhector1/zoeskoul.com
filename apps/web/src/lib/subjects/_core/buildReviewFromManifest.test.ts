@@ -200,7 +200,7 @@ describe("buildReviewFromManifest try-it project cards", () => {
             prompt: "translated:tryIt.prompt",
             exerciseKey: "try-append-ten-to-list",
             required: true,
-            allowReveal: false,
+            allowReveal: true,
             spec: {
                 mode: "project",
                 subject: "python-data-functions",

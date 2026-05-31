@@ -1,0 +1,1313 @@
+{
+  "topicId": "class-roster-cleaner",
+  "subjectSlug": "python-data-functions",
+  "moduleSlug": "python-8-real-world-project",
+  "sectionSlug": "python-data-functions-python-8-course-capstone",
+  "prefix": "py8",
+  "minutes": 120,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.label",
+    "summaryKey": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.cards.sketch0.title",
+      "sketchId": "class-roster-cleaner-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-class-roster-cleaner-sketch0",
+        "titleKey": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.tryIt.try_class_roster_cleaner_sketch0.title",
+        "promptKey": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.tryIt.try_class_roster_cleaner_sketch0.prompt",
+        "exerciseKey": "try-class-roster-cleaner-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.cards.project.title",
+      "project": {
+        "difficulty": "medium",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "cp_1",
+            "titleKey": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.projectSteps.cp_1.title",
+            "exerciseKey": "cp-1-read-roster-file",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "cp_2",
+            "titleKey": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.projectSteps.cp_2.title",
+            "exerciseKey": "cp-2-clean-one-row",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "cp_3",
+            "titleKey": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.projectSteps.cp_3.title",
+            "exerciseKey": "cp-3-skip-bad-roster-rows",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "cp_4",
+            "titleKey": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.projectSteps.cp_4.title",
+            "exerciseKey": "cp-4-move-cleaning-to-module",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "cp_5",
+            "titleKey": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.projectSteps.cp_5.title",
+            "exerciseKey": "cp-5-add-summary-functions",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "cp_6",
+            "titleKey": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.projectSteps.cp_6.title",
+            "exerciseKey": "cp-6-write-final-reports",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "class-roster-cleaner-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-8-real-world-project.class-roster-cleaner.sketch-1.title",
+      "bodyKey": "sketches.python-data-functions.python-8-real-world-project.class-roster-cleaner.sketch-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "cp-1-read-roster-file",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.quiz.cp-1-read-roster-file",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Read data/roster.csv and print every raw line without extra blank lines.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read data/roster.csv and print every raw line without extra blank lines.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/roster.csv",
+          "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+          "language": "csv"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read data/roster.csv and print every raw line without extra blank lines.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read data/roster.csv and print every raw line without extra blank lines.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data"
+          ],
+          "requiredFiles": [
+            "data/roster.csv"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "name,score,email\nava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com\n",
+            "match": "includes"
+          }
+        ],
+        "solutionCode": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/roster.csv",
+            "message": "Read data/roster.csv instead of typing the roster contents.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/roster.csv",
+          "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+          "language": "csv"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/roster.csv"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/roster.csv",
+          "message": "Read data/roster.csv instead of typing the roster contents.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "cp-2-clean-one-row",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.quiz.cp-2-clean-one-row",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "def clean_row(line):\n    # TODO: split name, score, and email. Return a dictionary.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_row(line):\n    # TODO: split name, score, and email. Return a dictionary.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/roster.csv",
+          "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+          "language": "csv"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clean_row(line):\n    # TODO: split name, score, and email. Return a dictionary.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_row(line):\n    # TODO: split name, score, and email. Return a dictionary.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data"
+          ],
+          "requiredFiles": [
+            "data/roster.csv"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "clean_row",
+            "args": [
+              " ava smith ,92, AVA@EXAMPLE.COM "
+            ],
+            "expected": [
+              [
+                "name",
+                "Ava Smith"
+              ],
+              [
+                "score",
+                92
+              ],
+              [
+                "email",
+                "ava@example.com"
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "clean_row",
+            "args": [
+              "Zoe Ray,87,zoe@example.com"
+            ],
+            "expected": [
+              [
+                "name",
+                "Zoe Ray"
+              ],
+              [
+                "score",
+                87
+              ],
+              [
+                "email",
+                "zoe@example.com"
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/roster.csv",
+          "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+          "language": "csv"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/roster.csv"
+        ]
+      }
+    },
+    {
+      "id": "cp-3-skip-bad-roster-rows",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.quiz.cp-3-skip-bad-roster-rows",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # TODO: use try/except to skip bad rows.\n        records.append(clean_row(line))\n\nprint(records)\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # TODO: use try/except to skip bad rows.\n        records.append(clean_row(line))\n\nprint(records)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/roster.csv",
+          "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+          "language": "csv"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # TODO: use try/except to skip bad rows.\n        records.append(clean_row(line))\n\nprint(records)\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # TODO: use try/except to skip bad rows.\n        records.append(clean_row(line))\n\nprint(records)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data"
+          ],
+          "requiredFiles": [
+            "data/roster.csv"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "[{'name': 'Ava Smith', 'score': 92, 'email': 'ava@example.com'}, {'name': 'Zoe Ray', 'score': 87, 'email': 'zoe@example.com'}, {'name': 'Leo West', 'score': 74, 'email': 'leo@example.com'}]\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "records",
+            "expected": [
+              {
+                "name": "Ava Smith",
+                "score": 92,
+                "email": "ava@example.com"
+              },
+              {
+                "name": "Zoe Ray",
+                "score": 87,
+                "email": "zoe@example.com"
+              },
+              {
+                "name": "Leo West",
+                "score": 74,
+                "email": "leo@example.com"
+              }
+            ],
+            "expectedKind": "json"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/roster.csv",
+          "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+          "language": "csv"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/roster.csv"
+        ]
+      }
+    },
+    {
+      "id": "cp-4-move-cleaning-to-module",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.quiz.cp-4-move-cleaning-to-module",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/roster.csv",
+          "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+          "language": "csv"
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tools/cleaning.py",
+          "content": "# Move clean_row(line) here.\n",
+          "language": "python"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/cleaning.py",
+            "content": "# Move clean_row(line) here.\n",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/cleaning.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data",
+            "tools"
+          ],
+          "requiredFiles": [
+            "data/roster.csv",
+            "tools/__init__.py",
+            "tools/cleaning.py"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "[{'name': 'Ava Smith', 'score': 92, 'email': 'ava@example.com'}, {'name': 'Zoe Ray', 'score': 87, 'email': 'zoe@example.com'}, {'name': 'Leo West', 'score': 74, 'email': 'leo@example.com'}]\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/cleaning.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+            "language": "python"
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "records",
+            "expected": [
+              {
+                "name": "Ava Smith",
+                "score": 92,
+                "email": "ava@example.com"
+              },
+              {
+                "name": "Zoe Ray",
+                "score": 87,
+                "email": "zoe@example.com"
+              },
+              {
+                "name": "Leo West",
+                "score": 74,
+                "email": "leo@example.com"
+              }
+            ],
+            "expectedKind": "json"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/roster.csv",
+          "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+          "language": "csv"
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tools/cleaning.py",
+          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+          "language": "python"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data",
+          "tools"
+        ],
+        "requiredFiles": [
+          "data/roster.csv",
+          "tools/__init__.py",
+          "tools/cleaning.py"
+        ]
+      }
+    },
+    {
+      "id": "cp-5-add-summary-functions",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.quiz.cp-5-add-summary-functions",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: print the average score and passing count.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: print the average score and passing count.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/roster.csv",
+          "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+          "language": "csv"
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tools/cleaning.py",
+          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+          "language": "python"
+        },
+        {
+          "path": "tools/scoring.py",
+          "content": "# Define average_score(records) and passing_count(records).\n",
+          "language": "python"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: print the average score and passing count.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: print the average score and passing count.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/cleaning.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/scoring.py",
+            "content": "# Define average_score(records) and passing_count(records).\n",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/cleaning.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/scoring.py",
+            "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data",
+            "tools"
+          ],
+          "requiredFiles": [
+            "data/roster.csv",
+            "tools/__init__.py",
+            "tools/cleaning.py",
+            "tools/scoring.py"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Average: 84.3\nPassing: 3\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/cleaning.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/scoring.py",
+            "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n",
+            "language": "python"
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "records",
+            "expected": [
+              {
+                "name": "Ava Smith",
+                "score": 92,
+                "email": "ava@example.com"
+              },
+              {
+                "name": "Zoe Ray",
+                "score": 87,
+                "email": "zoe@example.com"
+              },
+              {
+                "name": "Leo West",
+                "score": 74,
+                "email": "leo@example.com"
+              }
+            ],
+            "expectedKind": "json"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/roster.csv",
+          "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+          "language": "csv"
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tools/cleaning.py",
+          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+          "language": "python"
+        },
+        {
+          "path": "tools/scoring.py",
+          "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n",
+          "language": "python"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data",
+          "tools"
+        ],
+        "requiredFiles": [
+          "data/roster.csv",
+          "tools/__init__.py",
+          "tools/cleaning.py",
+          "tools/scoring.py"
+        ]
+      }
+    },
+    {
+      "id": "cp-6-write-final-reports",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.quiz.cp-6-write-final-reports",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: write output/clean_roster.csv and output/summary.txt.\nprint(f\"Cleaned {len(records)} records\")\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: write output/clean_roster.csv and output/summary.txt.\nprint(f\"Cleaned {len(records)} records\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/roster.csv",
+          "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+          "language": "csv"
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tools/cleaning.py",
+          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+          "language": "python"
+        },
+        {
+          "path": "tools/scoring.py",
+          "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n",
+          "language": "python"
+        },
+        {
+          "path": "tools/reports.py",
+          "content": "# Define write_clean_roster(records, path) and write_summary(records, path).\n",
+          "language": "python"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: write output/clean_roster.csv and output/summary.txt.\nprint(f\"Cleaned {len(records)} records\")\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: write output/clean_roster.csv and output/summary.txt.\nprint(f\"Cleaned {len(records)} records\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/cleaning.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/scoring.py",
+            "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/reports.py",
+            "content": "# Define write_clean_roster(records, path) and write_summary(records, path).\n",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\nfrom pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/cleaning.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/scoring.py",
+            "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/reports.py",
+            "content": "import os\nfrom tools.scoring import average_score, passing_count\n\ndef write_clean_roster(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(\"name,score,email\\n\")\n        for record in records:\n            file.write(f\"{record['name']},{record['score']},{record['email']}\\n\")\n\ndef write_summary(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(f\"records={len(records)}\\n\")\n        file.write(f\"average={average_score(records):.1f}\\n\")\n        file.write(f\"passing={passing_count(records)}\\n\")\n",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data",
+            "tools"
+          ],
+          "requiredFiles": [
+            "data/roster.csv",
+            "tools/__init__.py",
+            "tools/cleaning.py",
+            "tools/reports.py",
+            "tools/scoring.py"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Cleaned 3 records\nAverage: 84.3\nPassing: 3\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\nfrom pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\nfrom pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/cleaning.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/scoring.py",
+            "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/reports.py",
+            "content": "import os\nfrom tools.scoring import average_score, passing_count\n\ndef write_clean_roster(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(\"name,score,email\\n\")\n        for record in records:\n            file.write(f\"{record['name']},{record['score']},{record['email']}\\n\")\n\ndef write_summary(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(f\"records={len(records)}\\n\")\n        file.write(f\"average={average_score(records):.1f}\\n\")\n        file.write(f\"passing={passing_count(records)}\\n\")\n",
+            "language": "python"
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "records",
+            "expected": [
+              {
+                "name": "Ava Smith",
+                "score": 92,
+                "email": "ava@example.com"
+              },
+              {
+                "name": "Zoe Ray",
+                "score": 87,
+                "email": "zoe@example.com"
+              },
+              {
+                "name": "Leo West",
+                "score": 74,
+                "email": "leo@example.com"
+              }
+            ],
+            "expectedKind": "json"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\nfrom pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwrite_clean_roster(records, \"output/clean_roster.csv\")\nwrite_summary(records, \"output/summary.txt\")\nprint(f\"Cleaned {len(records)} records\")\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/roster.csv",
+          "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+          "language": "csv"
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tools/cleaning.py",
+          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+          "language": "python"
+        },
+        {
+          "path": "tools/scoring.py",
+          "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n",
+          "language": "python"
+        },
+        {
+          "path": "tools/reports.py",
+          "content": "import os\nfrom tools.scoring import average_score, passing_count\n\ndef write_clean_roster(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(\"name,score,email\\n\")\n        for record in records:\n            file.write(f\"{record['name']},{record['score']},{record['email']}\\n\")\n\ndef write_summary(records, path):\n    os.makedirs(os.path.dirname(path) or \".\", exist_ok=True)\n    with open(path, \"w\") as file:\n        file.write(f\"records={len(records)}\\n\")\n        file.write(f\"average={average_score(records):.1f}\\n\")\n        file.write(f\"passing={passing_count(records)}\\n\")\n",
+          "language": "python"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data",
+          "tools"
+        ],
+        "requiredFiles": [
+          "data/roster.csv",
+          "tools/__init__.py",
+          "tools/cleaning.py",
+          "tools/reports.py",
+          "tools/scoring.py"
+        ]
+      }
+    },
+    {
+      "id": "try-class-roster-cleaner-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.quiz.try-class-roster-cleaner-sketch0",
+      "language": "python",
+      "starterCode": "row = ' ava smith ,92, AVA@EXAMPLE.COM '\n\n# Print the cleaned name and email.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "row = ' ava smith ,92, AVA@EXAMPLE.COM '\n\n# Print the cleaned name and email.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "row = ' ava smith ,92, AVA@EXAMPLE.COM '\nname, score, email = row.split(',')\nprint(name.strip().title())\nprint(email.strip().lower())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "row = ' ava smith ,92, AVA@EXAMPLE.COM '\n\n# Print the cleaned name and email.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "row = ' ava smith ,92, AVA@EXAMPLE.COM '\n\n# Print the cleaned name and email.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "row = ' ava smith ,92, AVA@EXAMPLE.COM '\nname, score, email = row.split(',')\nprint(name.strip().title())\nprint(email.strip().lower())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava Smith\nava@example.com\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "row = ' ava smith ,92, AVA@EXAMPLE.COM '\nname, score, email = row.split(',')\nprint(name.strip().title())\nprint(email.strip().lower())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "row = ' ava smith ,92, AVA@EXAMPLE.COM '\nname, score, email = row.split(',')\nprint(name.strip().title())\nprint(email.strip().lower())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "split",
+            "message": "Split the row into fields."
+          },
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "message": "Strip spaces from the fields."
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "message": "Title-case the student name."
+          },
+          {
+            "type": "uses_method",
+            "method": "lower",
+            "message": "Lowercase the email address."
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "split",
+          "message": "Split the row into fields."
+        },
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "message": "Strip spaces from the fields."
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "message": "Title-case the student name."
+        },
+        {
+          "type": "uses_method",
+          "method": "lower",
+          "message": "Lowercase the email address."
+        }
+      ]
+    }
+  ]
+}

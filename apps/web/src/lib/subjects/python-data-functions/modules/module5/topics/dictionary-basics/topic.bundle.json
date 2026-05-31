@@ -34,7 +34,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -53,7 +53,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -72,7 +72,7 @@
         "preferKind": "code_input",
         "seedPolicy": "global",
         "required": true,
-        "allowReveal": false,
+        "allowReveal": true,
         "maxAttempts": null
       }
     },
@@ -334,7 +334,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -353,6 +353,35 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "student",
+            "expected": [
+              [
+                "name",
+                "Ava"
+              ],
+              [
+                "score",
+                92
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bstudent\\s*=",
+            "message": "Create a dictionary variable named student."
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "score",
+            "message": "Use the score key to read the score from student."
+          }
         ]
       },
       "solutionFiles": [
@@ -362,6 +391,18 @@
           "language": "python",
           "isEntry": true,
           "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bstudent\\s*=",
+          "message": "Create a dictionary variable named student."
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "score",
+          "message": "Use the score key to read the score from student."
         }
       ]
     },
@@ -548,7 +589,7 @@
               "value"
             ],
             "expected": 10,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -571,7 +612,7 @@
               "value"
             ],
             "expected": 9,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -780,7 +821,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -799,8 +840,24 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_dict_key",
+            "key": "name",
+            "message": "Use profile[\"name\"] instead of typing Ava directly.",
+            "variable": "profile"
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_dict_key",
+          "key": "name",
+          "message": "Use profile[\"name\"] instead of typing Ava directly.",
+          "variable": "profile"
+        }
+      ]
     },
     {
       "id": "try-dictionary-basics-sketch1",
@@ -851,7 +908,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -870,8 +927,39 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "profile",
+            "expected": [
+              [
+                "name",
+                "Mia"
+              ],
+              [
+                "age",
+                12
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bprofile\\s*\\[\\s*['\\\"]age['\\\"]\\s*\\]\\s*=\\s*12",
+            "message": "Update profile['age'] to 12 instead of replacing the final dictionary."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bprofile\\s*\\[\\s*['\\\"]age['\\\"]\\s*\\]\\s*=\\s*12",
+          "message": "Update profile['age'] to 12 instead of replacing the final dictionary."
+        }
+      ]
     },
     {
       "id": "try-dictionary-basics-sketch2",
@@ -922,7 +1010,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -941,8 +1029,59 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "scores",
+            "expected": [
+              [
+                "Ava",
+                92
+              ],
+              [
+                "Mia",
+                85
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bscores\\s*=",
+            "message": "Create a dictionary variable named scores."
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "Ava",
+            "message": "Use Ava as a key in scores."
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "Mia",
+            "message": "Use Mia as a key in scores."
+          }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bscores\\s*=",
+          "message": "Create a dictionary variable named scores."
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "Ava",
+          "message": "Use Ava as a key in scores."
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "Mia",
+          "message": "Use Mia as a key in scores."
+        }
+      ]
     }
   ]
 }

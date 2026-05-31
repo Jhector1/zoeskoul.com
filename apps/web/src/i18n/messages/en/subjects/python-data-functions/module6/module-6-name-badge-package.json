@@ -88,7 +88,8 @@
             "try_module_6_name_badge_package_sketch0": {
               "title": "Try it yourself",
               "prompt": "Run a tiny helper function like the ones used in the module project."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

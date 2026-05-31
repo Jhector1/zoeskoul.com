@@ -259,7 +259,8 @@
             "try_simple_csv_processing_sketch2": {
               "title": "Try it yourself",
               "prompt": "Convert score strings to integers before adding them."
-            }
+            },
+            "allowReveal": true
           }
         }
       }

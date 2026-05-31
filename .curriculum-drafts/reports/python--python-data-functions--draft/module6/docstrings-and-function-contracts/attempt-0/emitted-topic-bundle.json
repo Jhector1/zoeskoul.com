@@ -303,7 +303,7 @@
               "value"
             ],
             "expected": "hello",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -315,7 +315,7 @@
               "value"
             ],
             "expected": "python",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -372,7 +372,7 @@
               "value"
             ],
             "expected": "hahaha",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -386,7 +386,7 @@
               "value"
             ],
             "expected": "go",
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"
@@ -443,7 +443,7 @@
               "value"
             ],
             "expected": 12,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "function_returns",
@@ -457,7 +457,7 @@
               "value"
             ],
             "expected": 7.5,
-            "expectedKind": "value"
+            "expectedKind": "json"
           },
           {
             "type": "no_stdout"

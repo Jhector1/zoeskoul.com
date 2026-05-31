@@ -82,7 +82,7 @@ export function buildReviewFromManifest(args: {
             topic: topicSlug,
             difficulty,
             preferKind,
-            allowReveal: rawTryIt.allowReveal === true,
+            allowReveal: true,
             maxAttempts,
             steps: [
                 {
@@ -110,7 +110,7 @@ export function buildReviewFromManifest(args: {
             preferKind,
             seedPolicy,
             required: rawTryIt.required !== false,
-            allowReveal: rawTryIt.allowReveal === true,
+            allowReveal: true,
             maxAttempts: maxAttempts ?? undefined,
             spec,
         };
