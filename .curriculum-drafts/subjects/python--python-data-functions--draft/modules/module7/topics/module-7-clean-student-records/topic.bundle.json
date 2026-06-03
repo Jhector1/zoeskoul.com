@@ -159,7 +159,14 @@
           "requiredFiles": [
             "data/students.csv"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -270,7 +277,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            print(clean_row(line))\n        except ValueError:\n            print(\"bad row\")\n",
+            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -288,13 +295,20 @@
           "requiredFiles": [
             "data/students.csv"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            print(clean_row(line))\n        except ValueError:\n            print(\"bad row\")\n",
+        "solutionCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -336,7 +350,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            print(clean_row(line))\n        except ValueError:\n            print(\"bad row\")\n",
+            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -351,7 +365,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            print(clean_row(line))\n        except ValueError:\n            print(\"bad row\")\n",
+          "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -433,7 +447,14 @@
           "requiredFiles": [
             "data/students.csv"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -555,14 +576,19 @@
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "data",
-            "output"
+            "data"
           ],
           "requiredFiles": [
-            "data/students.csv",
-            "output/clean_students.csv"
+            "data/students.csv"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -619,12 +645,10 @@
       ],
       "workspaceExpectations": {
         "requiredFolders": [
-          "data",
-          "output"
+          "data"
         ],
         "requiredFiles": [
-          "data/students.csv",
-          "output/clean_students.csv"
+          "data/students.csv"
         ]
       },
       "sourceChecks": [
@@ -648,11 +672,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0",
       "language": "python",
-      "starterCode": "row = ' ava , 92 '\n\n# Print Ava:92 after cleaning the row.\n",
+      "starterCode": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Clean the first row and print Ava:92.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "row = ' ava , 92 '\n\n# Print Ava:92 after cleaning the row.\n",
+          "content": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Clean the first row and print Ava:92.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -661,7 +685,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "row = ' ava , 92 '\nname, score = row.split(',')\nprint(f'{name.strip().title()}:{score.strip()}')\n",
+          "content": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\nname, score = first_row.split(\",\")\nprint(f\"{name.strip().title()}:{score.strip()}\")\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -670,11 +694,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "row = ' ava , 92 '\n\n# Print Ava:92 after cleaning the row.\n",
+        "starterCode": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Clean the first row and print Ava:92.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "row = ' ava , 92 '\n\n# Print Ava:92 after cleaning the row.\n",
+            "content": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Clean the first row and print Ava:92.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -683,10 +707,25 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "row = ' ava , 92 '\nname, score = row.split(',')\nprint(f'{name.strip().title()}:{score.strip()}')\n",
+            "content": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\nname, score = first_row.split(\",\")\nprint(f\"{name.strip().title()}:{score.strip()}\")\n",
             "language": "python",
             "isEntry": true,
             "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data"
+          ],
+          "requiredFiles": [
+            "data/students.csv"
+          ]
+        },
+        "files": [
+          {
+            "path": "data/students.csv",
+            "content": " ava , 92 \nMia,85\n",
+            "readOnly": false
           }
         ]
       },
@@ -697,14 +736,21 @@
           {
             "stdin": "",
             "stdout": "Ava:92\n",
-            "match": "exact"
+            "match": "exact",
+            "files": [
+              {
+                "path": "data/students.csv",
+                "content": " ava , 92 \nMia,85\n",
+                "readOnly": false
+              }
+            ]
           }
         ],
-        "solutionCode": "row = ' ava , 92 '\nname, score = row.split(',')\nprint(f'{name.strip().title()}:{score.strip()}')\n",
+        "solutionCode": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\nname, score = first_row.split(\",\")\nprint(f\"{name.strip().title()}:{score.strip()}\")\n",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "row = ' ava , 92 '\nname, score = row.split(',')\nprint(f'{name.strip().title()}:{score.strip()}')\n",
+            "content": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\nname, score = first_row.split(\",\")\nprint(f\"{name.strip().title()}:{score.strip()}\")\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -712,14 +758,20 @@
         ],
         "sourceChecks": [
           {
+            "type": "source_contains",
+            "pattern": "data/students.csv",
+            "message": "Read the row from data/students.csv.",
+            "normalizeWhitespace": true
+          },
+          {
             "type": "uses_method",
             "method": "split",
-            "message": "Split the row instead of typing Ava:92 directly."
+            "message": "Split the row into name and score."
           },
           {
             "type": "uses_method",
             "method": "strip",
-            "message": "Strip spaces from the row parts."
+            "message": "Strip spaces from the name and score."
           },
           {
             "type": "uses_method",
@@ -730,21 +782,35 @@
       },
       "sourceChecks": [
         {
+          "type": "source_contains",
+          "pattern": "data/students.csv",
+          "message": "Read the row from data/students.csv.",
+          "normalizeWhitespace": true
+        },
+        {
           "type": "uses_method",
           "method": "split",
-          "message": "Split the row instead of typing Ava:92 directly."
+          "message": "Split the row into name and score."
         },
         {
           "type": "uses_method",
           "method": "strip",
-          "message": "Strip spaces from the row parts."
+          "message": "Strip spaces from the name and score."
         },
         {
           "type": "uses_method",
           "method": "title",
           "message": "Title-case the student name."
         }
-      ]
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/students.csv"
+        ]
+      }
     }
   ]
 }

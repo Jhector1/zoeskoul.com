@@ -4,13 +4,13 @@
   "profileId": "python",
   "accessPolicy": "paid",
   "courseOrder": [
-    "python-for-beginners",
+    "python-v2",
     "python-data-functions",
     "applied-python-projects"
   ],
   "publishTarget": {
     "liveSubjectSlug": "python-v2",
-    "courseSlug": "python-for-beginners",
+    "courseSlug": "python-v2",
     "channel": "current"
   },
   "versioning": {
@@ -23,10 +23,10 @@
   },
   "courses": [
     {
-      "courseSlug": "python-for-beginners",
+      "courseSlug": "python-v2",
       "title": "Python for Beginners",
       "order": 1,
-      "path": "courses/python-for-beginners/course.spec.json"
+      "path": "courses/python-v2/course.spec.json"
     },
     {
       "courseSlug": "python-data-functions",

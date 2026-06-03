@@ -68,6 +68,202 @@ function makeFeedback(args: {
     };
 }
 
+function stripPythonLineComments(source: string): string {
+    return String(source ?? "")
+        .split(/\r?\n/)
+        .map((line) => {
+            const hashIndex = line.indexOf("#");
+            return hashIndex >= 0 ? line.slice(0, hashIndex) : line;
+        })
+        .join("\n");
+}
+
+function normalizeCompact(value: string): string {
+    return String(value ?? "").replace(/\s+/g, "");
+}
+
+function getPythonInputVariableNames(code: string): string[] {
+    const names = new Set<string>();
+    const source = stripPythonLineComments(code);
+    const re =
+        /\b([A-Za-z_]\w*)\s*=\s*(?:int\s*\(\s*input\s*\(|float\s*\(\s*input\s*\(|input\s*\()/g;
+
+    let match: RegExpExecArray | null = re.exec(source);
+    while (match) {
+        if (match[1]) names.add(match[1]);
+        match = re.exec(source);
+    }
+
+    return [...names];
+}
+
+function getListVariablesBuiltFromInputs(code: string): string[] {
+    const inputNames = new Set(getPythonInputVariableNames(code));
+    if (!inputNames.size) return [];
+
+    const source = stripPythonLineComments(code);
+    const listVariables: string[] = [];
+    const re = /\b([A-Za-z_]\w*)\s*=\s*\[([^\]]+)\]/g;
+
+    let match: RegExpExecArray | null = re.exec(source);
+    while (match) {
+        const variableName = match[1]?.trim();
+        const rawItems = match[2] ?? "";
+        const items = rawItems
+            .split(",")
+            .map((item) => item.trim())
+            .filter(Boolean);
+
+        if (
+            variableName &&
+            items.length >= 2 &&
+            items.every((item) => inputNames.has(item))
+        ) {
+            listVariables.push(variableName);
+        }
+
+        match = re.exec(source);
+    }
+
+    return listVariables;
+}
+
+function codePrintsVariable(code: string, variableName: string): boolean {
+    const source = stripPythonLineComments(code);
+    return new RegExp(
+        `\\bprint\\s*\\([^\\n]*\\b${variableName}\\b[^\\n]*\\)`,
+    ).test(source);
+}
+
+function codePrintsGotLiteral(code: string, got: string): boolean {
+    const source = stripPythonLineComments(code);
+    const compactGot = normalizeCompact(got);
+
+    if (!compactGot) return false;
+
+    const listPrints = source.match(/\bprint\s*\(\s*(\[[^\]]+\])\s*\)/g) ?? [];
+
+    for (const printCall of listPrints) {
+        const literalMatch = printCall.match(/\bprint\s*\(\s*(\[[^\]]+\])\s*\)/);
+        const literal = literalMatch?.[1] ?? "";
+
+        if (normalizeCompact(literal) === compactGot) {
+            return true;
+        }
+    }
+
+    const stringPrints =
+        source.match(/\bprint\s*\(\s*(['"])(?:\\.|(?!\1).)*\1\s*\)/g) ?? [];
+
+    for (const printCall of stringPrints) {
+        const literalMatch = printCall.match(
+            /\bprint\s*\(\s*((['"])(?:\\.|(?!\2).)*\2)\s*\)/,
+        );
+        const literal = literalMatch?.[1] ?? "";
+        const unwrapped = literal.replace(/^(['"])(.*)\1$/, "$2");
+
+        if (normalizeCompact(unwrapped) === compactGot) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function textLooksNumeric(value: string): boolean {
+    const trimmed = String(value ?? "").trim();
+
+    if (!trimmed) return false;
+
+    const numericPatterns = [
+        /^-?\d+(?:\.\d+)?$/,
+        /^\[\s*-?\d+(?:\.\d+)?(?:\s*,\s*-?\d+(?:\.\d+)?)*\s*\]$/,
+        /^\(\s*-?\d+(?:\.\d+)?(?:\s*,\s*-?\d+(?:\.\d+)?)*\s*\)$/,
+    ];
+
+    return numericPatterns.some((pattern) => pattern.test(trimmed));
+}
+
+function semanticChecksSuggestNumericWork(semanticChecks: unknown[]): boolean {
+    const seen = new Set<unknown>();
+
+    function visit(value: unknown): boolean {
+        if (typeof value === "number") return true;
+        if (value == null || typeof value === "boolean") return false;
+
+        if (typeof value === "string") {
+            return /\b(?:int|float|number|numeric)\b/i.test(value);
+        }
+
+        if (seen.has(value)) return false;
+        seen.add(value);
+
+        if (Array.isArray(value)) {
+            return value.some(visit);
+        }
+
+        if (typeof value === "object") {
+            return Object.values(value as Record<string, unknown>).some(visit);
+        }
+
+        return false;
+    }
+
+    return semanticChecks.some(visit);
+}
+
+function codeLikelyNeedsNumericConversion(code: string): boolean {
+    const inputNames = getPythonInputVariableNames(code);
+    if (!inputNames.length) return false;
+
+    const source = stripPythonLineComments(code);
+
+    for (const name of inputNames) {
+        const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const patterns = [
+            new RegExp(`\\b${escapedName}\\b\\s*[+\\-*/%]`),
+            new RegExp(`[+\\-*/%]\\s*\\b${escapedName}\\b`),
+            new RegExp(`\\b${escapedName}\\b\\s*(?:<|>|<=|>=)`),
+            new RegExp(`(?:<|>|<=|>=)\\s*\\b${escapedName}\\b`),
+        ];
+
+        if (patterns.some((pattern) => pattern.test(source))) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function shouldSuggestMissingConversion(args: {
+    code: string;
+    want: string;
+    semanticChecks?: unknown[];
+}): boolean {
+    const code = String(args.code ?? "");
+
+    if (
+        !code.includes("input(") ||
+        code.includes("int(input(") ||
+        code.includes("float(input(")
+    ) {
+        return false;
+    }
+
+    if (textLooksNumeric(args.want)) {
+        return true;
+    }
+
+    if (
+        Array.isArray(args.semanticChecks) &&
+        semanticChecksSuggestNumericWork(args.semanticChecks)
+    ) {
+        return true;
+    }
+
+    return codeLikelyNeedsNumericConversion(code);
+}
+
 function classifyPython(
     raw: string,
     source: FeedbackSource,
@@ -368,6 +564,7 @@ export function classifyProgrammingOutputMismatch(args: {
     language: string;
     code: string;
     source?: FeedbackSource;
+    semanticChecks?: unknown[];
 }): CodeFeedback {
     const got = String(args.got ?? "").replace(/\r\n/g, "\n").trimEnd();
     const want = String(args.want ?? "").replace(/\r\n/g, "\n").trimEnd();
@@ -409,7 +606,39 @@ export function classifyProgrammingOutputMismatch(args: {
     }
 
     if (lang === "python") {
-        if (code.includes("input(") && !code.includes("int(input(") && !code.includes("float(input(")) {
+        const listVariablesBuiltFromInputs = getListVariablesBuiltFromInputs(code);
+
+        if (
+            listVariablesBuiltFromInputs.some(
+                (variableName) => !codePrintsVariable(code, variableName),
+            )
+        ) {
+            return makeFeedback({
+                source,
+                kind: "logic",
+                tone: "warning",
+                title: "Print the list variable",
+                message: "You created the list, but the printed value is not using it. Try printing your list variable.",
+            });
+        }
+
+        if (code.includes("input(") && codePrintsGotLiteral(code, got)) {
+            return makeFeedback({
+                source,
+                kind: "logic",
+                tone: "warning",
+                title: "Hard-coded example output",
+                message: "You may be printing the example values directly. Build the list from the input variables, then print that list.",
+            });
+        }
+
+        if (
+            shouldSuggestMissingConversion({
+                code,
+                want,
+                semanticChecks: args.semanticChecks,
+            })
+        ) {
             return makeFeedback({
                 source,
                 kind: "logic",

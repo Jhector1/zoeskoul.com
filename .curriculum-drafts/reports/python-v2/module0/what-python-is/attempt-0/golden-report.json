@@ -1,0 +1,12 @@
+{
+  "topicId": "what-python-is",
+  "ok": false,
+  "issues": [
+    {
+      "code": "CODE_PROFILE_SHARED_RUNNER_UNAVAILABLE",
+      "category": "runtime",
+      "severity": "error",
+      "message": "JUDGE0_URL is required for code profile golden validation so curriculum golden and web grading use the same runtime."
+    }
+  ]
+}

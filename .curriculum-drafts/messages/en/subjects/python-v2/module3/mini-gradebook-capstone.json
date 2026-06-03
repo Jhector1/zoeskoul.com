@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-3": {
+        "mini-gradebook-capstone": {
+          "label": "Mini Gradebook Capstone",
+          "summary": "Build a small gradebook that reads scores, totals them, tracks the highest score, computes an average, and prints a clear report.",
+          "cards": {
+            "sketch0": {
+              "title": "Plan the gradebook"
+            },
+            "quiz": {
+              "title": "Capstone Check"
+            },
+            "project": {
+              "title": "Mini Gradebook"
+            }
+          },
+          "projectSteps": {
+            "capstone-mini-gradebook": {
+              "title": "Build the mini gradebook"
+            }
+          },
+          "quiz": {
+            "sc-capstone-input-count": {
+              "title": "Use the score count",
+              "prompt": "The program reads a student name, then reads a number called `count`. What should `count` control?",
+              "hint": "The next inputs are scores.",
+              "help": {
+                "concept": "`count` tells the loop how many score inputs to read.",
+                "hint_1": "If `count` is 3, the program should read 3 scores.",
+                "hint_2": "Use `range(count)` to repeat exactly that many times."
+              },
+              "options": {
+                "a": "How many status lines to print",
+                "b": "How many score inputs to read",
+                "c": "How many names to read",
+                "d": "How many decimal places to show"
+              }
+            },
+            "mc-capstone-tools": {
+              "title": "Pick the right tools",
+              "prompt": "Which tools belong in the Mini Gradebook solution? Choose all that apply.",
+              "hint": "Think about repeating input, adding scores, and checking for the highest value.",
+              "help": {
+                "concept": "This capstone combines a loop for repeated input, an accumulator for the total, and a comparison for the highest score.",
+                "hint_1": "The total should start at 0 and grow each time a score is read.",
+                "hint_2": "The highest score changes only when the new score is bigger than the old highest score."
+              },
+              "options": {
+                "a": "A loop that reads each score",
+                "b": "An accumulator variable for the total",
+                "c": "An `if` statement that updates the highest score",
+                "d": "A CSV file"
+              }
+            },
+            "dr-capstone-report-order": {
+              "title": "Order the report",
+              "prompt": "Arrange the output lines in the required report order.",
+              "hint": "The tests expect this order exactly.",
+              "help": {
+                "concept": "Exact-output exercises check the text and the line order. The report starts with the student, then the score count, then the highest score, then the average, then the status.",
+                "hint_1": "Start with the line that names the student.",
+                "hint_2": "The status is the final summary line."
+              },
+              "tokens": {
+                "t1": "`Student: <name>`",
+                "t2": "`Scores entered: <count>`",
+                "t3": "`Highest score: <highest>`",
+                "t4": "`Average: <average>`",
+                "t5": "`Status: <status>`"
+              }
+            },
+            "fb-capstone-average-format": {
+              "title": "Format the average",
+              "prompt": "Fill in the format specifier that shows an average with one digit after the decimal point.",
+              "hint": "`90.0` has one digit after the decimal point.",
+              "help": {
+                "concept": "In an f-string, `:.1f` formats a number with one digit after the decimal point.",
+                "hint_1": "The dot introduces the decimal precision.",
+                "hint_2": "The `f` means fixed-point number formatting."
+              },
+              "template": "print(f\"Average: {avg:____}\")",
+              "choices": [
+                ".1f",
+                ".2f",
+                "int",
+                "str"
+              ]
+            },
+            "capstone-mini-gradebook": {
+              "title": "Mini Gradebook",
+              "prompt": "Build a Mini Gradebook.\n\nInput format:\n1. Student name\n2. Number of scores\n3. That many score values, one per line\n\nRequirements:\n- Read exactly `count` scores using a `for` loop and `range(count)`.\n- Keep a running total of all scores.\n- Track the highest score with a comparison.\n- Calculate the average.\n- Print the average with one digit after the decimal point.\n- Print `excellent` when the average is at least 90, `passing` when it is at least 70, and `needs practice` otherwise.\n\nOutput format:\nStudent: <name>\nScores entered: <count>\nHighest score: <highest>\nAverage: <average>\nStatus: <status>",
+              "hint": "Use `range(count)` to read the scores. Add each score to `total`, update `highest` when the new score is bigger, then use an `if` / `elif` / `else` chain to choose the status.",
+              "help": {
+                "concept": "This capstone combines the main beginner tools: input, variables, strings, conditionals, loops, range, accumulators, comparisons, and formatted output.",
+                "hint_1": "Start with `total = 0` and `highest = 0`. Inside the loop, add the score to `total`.",
+                "hint_2": "After the loop, calculate `average = total / count`, then print it with `{average:.1f}`."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\ntotal = 0\nhighest = 0\n\nfor i in range(count):\n    score = int(input())\n    # TODO: add score to total\n    # TODO: update highest when this score is bigger\n\n# TODO: calculate the average\n# TODO: print the report"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-3": {
+        "mini-gradebook-capstone": {
+          "sketch_gradebook_plan": {
+            "title": "Plan the gradebook",
+            "bodyMarkdown": "The Mini Gradebook is a final practice project that pulls the beginner pieces together.\n\nYou will use:\n\n- `input()` to read the student name and scores\n- variables to remember values\n- strings and f-strings to build clear output lines\n- conditionals to choose the final status\n- a `for` loop with `range(count)` to read several scores\n- an accumulator to add up the total\n- a comparison to track the highest score\n\nThe tests check the exact output, so keep the labels, spaces, and newlines exactly as shown in the prompt."
+          }
+        }
+      }
+    }
+  }
+}

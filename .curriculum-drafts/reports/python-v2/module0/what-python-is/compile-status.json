@@ -1,0 +1,8 @@
+{
+  "reportDir": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python-v2/module0/what-python-is",
+  "status": "failed",
+  "attempts": 3,
+  "finalAttempt": 2,
+  "errorCode": "GOLDEN_VALIDATION_FAILED",
+  "errorMessage": "Golden validation failed for topic \"what-python-is\"\nModule: python-v2-0\nSection: python-v2-0-setup-and-first-programs\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python-v2/module0/what-python-is\n- JUDGE0_URL is required for code profile golden validation so curriculum golden and web grading use the same runtime."
+}

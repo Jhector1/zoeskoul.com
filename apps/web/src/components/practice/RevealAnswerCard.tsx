@@ -509,7 +509,7 @@ export default function RevealAnswerCard({
                     <div className="ui-surface-muted overflow-hidden">
                         <div className="flex items-center justify-between gap-2 border-b px-3 py-2 ui-border ui-bg-surface-soft">
                             <div className="ui-meta-strong">{lang.toUpperCase()}</div>
-                            <div className="ui-meta">Copy/paste into the editor, then Submit.</div>
+                            <div className="ui-meta">Copy it into the editor, run it, then check your answer.</div>
                         </div>
 
                         {workspaceFiles.length > 1 ? (

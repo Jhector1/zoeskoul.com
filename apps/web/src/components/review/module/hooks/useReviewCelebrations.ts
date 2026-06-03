@@ -198,10 +198,16 @@ export function useReviewCelebrations({
         return () => window.clearTimeout(t);
     }, [topicToast, topicToastPaused]);
 
+    function dismissTopicToast() {
+        setTopicToast(null);
+        setTopicToastPaused(false);
+    }
+
     return {
         topicToast,
         topicToastPaused,
         setTopicToastPaused,
+        dismissTopicToast,
         moduleCelebrateOpen,
         setModuleCelebrateOpen,
         courseCelebrateOpen,

@@ -164,7 +164,7 @@
             },
             "ci-read-nested-file": {
               "title": "Read from a nested relative path",
-              "prompt": "Complete this project step: Read from a nested relative path.\n\nRequirements:\n- read the text and print it\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `Hello paths!`.",
+              "prompt": "Open `data/input.txt`, read the text from that relative path, and print it.\n\nYour output should be exactly:\n`Hello paths!`.",
               "hint": "Read the task \"Read from a nested relative path\" and identify the required result.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -175,7 +175,7 @@
             },
             "ci-copy-between-paths": {
               "title": "Copy text to another relative path",
-              "prompt": "Complete this project step: Copy text to another relative path.\n\nRequirements:\n- Read from data/source.txt\n- Write the same text to data/copy.txt\n- Print the copied text\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `apple\nbanana`.",
+              "prompt": "Copy the text from `data/source.txt` into `data/copy.txt`, then print the copied text so we can confirm both files match.\n\nYour output should be exactly:\n`apple`\n`banana`.",
               "hint": "Read the task \"Copy text to another relative path\" and identify the required result.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -186,7 +186,7 @@
             },
             "ci-count-lines-in-folder": {
               "title": "Count lines from a file path",
-              "prompt": "Complete this project step: Count lines from a file path.\n\nRequirements:\n- count the lines and print the result\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `3`.",
+              "prompt": "Open `data/items.txt`, count how many lines it contains, and print the result.\n\nYour output should be exactly:\n`3`.",
               "hint": "Read the task \"Count lines from a file path\" and identify the required result.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -269,15 +269,15 @@
         "working-with-paths": {
           "paths-relative-basics": {
             "title": "Relative paths point to files from your current workspace",
-            "bodyMarkdown": "A **relative path** tells Python where a file is by starting from the current project folder, not from a full computer-specific location. In this lesson, that means paths like `notes.txt` or `data/input.txt`.\n\nHere is a simple example:\n\n```python\nwith open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)\n```\n\nStep by step:\n\n- `open(\"data/input.txt\", \"r\")` looks for a folder named `data` and then a file named `input.txt` inside it.\n- `\"r\"` means read mode.\n- `file.read()` gets the file's contents.\n- `print(text)` sends those contents to the output panel.\n\nIf the file is in the same folder as your code, the path can be shorter:\n\n```python\nwith open(\"notes.txt\", \"r\") as file:\n    print(file.read())\n```\n\nConcrete example:\n\n- `notes.txt` means “open the file named `notes.txt` right here.”\n- `data/notes.txt` means “go into the `data` folder, then open `notes.txt`.”\n\nTry it yourself: change `data/input.txt` to another provided relative path such as `data/message.txt`, then click Run and compare the output."
+            "bodyMarkdown": "A **relative path** tells Python where a file is by starting from the current project folder, not from a full computer-specific location. In this lesson, that means paths like `notes.txt` or `data/input.txt`.\n\nHere is a simple example:\n\n```python\nwith open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)\n```\n\nStep by step:\n\n- `open(\"data/input.txt\", \"r\")` looks for a folder named `data` and then a file named `input.txt` inside it.\n- `\"r\"` means read mode.\n- `file.read()` gets the file's contents.\n- `print(text)` sends those contents to the output panel.\n\nIf the file is in the same folder as your code, the path can be shorter:\n\n```python\nwith open(\"notes.txt\", \"r\") as file:\n    print(file.read())\n```\n\nConcrete example:\n\n- `notes.txt` means “open the file named `notes.txt` right here.”\n- `data/notes.txt` means “go into the `data` folder, then open `notes.txt`.”"
           },
           "paths-folders-and-organization": {
             "title": "Folders help organize files clearly",
-            "bodyMarkdown": "Projects often keep files in folders so related data stays together. A path like `data/scores.txt` is easier to understand than a random file name with no structure.\n\nExample:\n\n```python\nwith open(\"data/scores.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))\n```\n\nLine by line:\n\n- `open(\"data/scores.txt\", \"r\")` opens a file inside the `data` folder.\n- `readlines()` makes a list of lines from the file.\n- `len(lines)` counts how many lines were read.\n- `print(len(lines))` shows that count in the output panel.\n\nWorked example:\n\nIf `data/scores.txt` contains:\n\n```python\n90\n85\n100\n```\n\nthen `len(lines)` is `3`, so the output is:\n\n```python\n3\n```\n\nUsing folders also makes it easier to tell input files from output files, such as `data/input.txt` and `data/report.txt`.\n\nYour turn: imagine you want to read `names.txt` inside a `data` folder. What relative path would you use?"
+            "bodyMarkdown": "Projects often keep files in folders so related data stays together. A path like `data/scores.txt` is easier to understand than a random file name with no structure.\n\nExample:\n\n```python\nwith open(\"data/scores.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))\n```\n\nLine by line:\n\n- `open(\"data/scores.txt\", \"r\")` opens a file inside the `data` folder.\n- `readlines()` makes a list of lines from the file.\n- `len(lines)` counts how many lines were read.\n- `print(len(lines))` shows that count in the output panel.\n\nWorked example:\n\nIf `data/scores.txt` contains:\n\n```python\n90\n85\n100\n```\n\nthen `len(lines)` is `3`, so the output is:\n\n```python\n3\n```\n\nUsing folders also makes it easier to tell input files from output files, such as `data/input.txt` and `data/report.txt`."
           },
           "paths-safe-habits": {
             "title": "Use simple relative paths, not machine-specific ones",
-            "bodyMarkdown": "A good beginner habit is to use **simple relative paths** that work inside the lesson workspace. These paths are portable because they do not depend on one specific computer.\n\nGood examples:\n\n```python\n\"notes.txt\"\n\"data/input.txt\"\n\"data/output.txt\"\n```\n\nAvoid machine-specific paths for this lesson. They are not needed here and often break when code runs somewhere else.\n\nWorked example:\n\nSuppose you want to copy text from one file to another:\n\n```python\nwith open(\"data/input.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/output.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)\n```\n\nWhat happens:\n\n- The first `with open(...)` reads from `data/input.txt`.\n- The second `with open(...)` writes to `data/output.txt`.\n- `print(text)` gives you visible output so you can confirm what was written.\n\nTry this: change the output path from `data/output.txt` to `data/copy.txt`. Then click Run and think about which folder the new file belongs in.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "A good beginner habit is to use **simple relative paths** that work inside the lesson workspace. These paths are portable because they do not depend on one specific computer.\n\nGood examples:\n\n```python\n\"notes.txt\"\n\"data/input.txt\"\n\"data/output.txt\"\n```\n\nAvoid machine-specific paths for this lesson. They are not needed here and often break when code runs somewhere else.\n\nWorked example:\n\nSuppose you want to copy text from one file to another:\n\n```python\nwith open(\"data/input.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/output.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)\n```\n\nWhat happens:\n\n- The first `with open(...)` reads from `data/input.txt`.\n- The second `with open(...)` writes to `data/output.txt`.\n- `print(text)` gives you visible output so you can confirm what was written."
           }
         }
       }

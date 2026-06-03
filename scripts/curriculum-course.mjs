@@ -113,7 +113,7 @@ Flags:
   --resume                 Skip topics that already have completed draft artifacts
   --force                  Allow publish/publish-auto to overwrite an existing subject release
   --live-subject <slug>    Compile/publish a course into an explicit live subject slug override
-  --force-live-overwrite   Allow compile-course to overwrite the configured live publish target with a non-target course
+  --force-live-overwrite   Allow compile-course or publish to overwrite the configured live publish target with a non-target course
 
 Actions:
   compile
@@ -199,7 +199,44 @@ function getCourseSpecPath(resolvedCourseSlug) {
 function getCourseBlueprintPath(resolvedCourseSlug) {
   return path.join(getCourseRoot(resolvedCourseSlug), "course.blueprint.json");
 }
+function loadEnvFiles() {
+  for (const relativePath of [
+    ".env",
+    ".env.local",
+    "apps/web/.env.local",
+    "apps/runner/.env.local",
+  ]) {
+    const filePath = path.join(root, relativePath);
 
+    if (!existsSync(filePath)) continue;
+
+    const content = readFileSync(filePath, "utf8");
+
+    for (const line of content.split(/\r?\n/)) {
+      const trimmed = line.trim();
+
+      if (!trimmed || trimmed.startsWith("#")) continue;
+
+      const match = trimmed.match(/^([A-Za-z_][A-Za-z0-9_]*)=(.*)$/);
+      if (!match) continue;
+
+      const [, key, rawValue] = match;
+
+      if (process.env[key]) continue;
+
+      let value = rawValue.trim();
+
+      if (
+          (value.startsWith('"') && value.endsWith('"')) ||
+          (value.startsWith("'") && value.endsWith("'"))
+      ) {
+        value = value.slice(1, -1);
+      }
+
+      process.env[key] = value;
+    }
+  }
+}
 function assertSubjectExists() {
   if (!existsSync(subjectRoot)) {
     console.error(`Subject folder not found: authoring/subjects/${subjectSlug}`);
@@ -267,7 +304,11 @@ function assertCoursePublishSafe(resolvedCourseSlug, resolvedLiveSubjectSlug) {
   const selectedCourseIsConfiguredTarget =
       resolvedCourseSlug === configuredTargetCourseSlug;
 
-  if (publishingConfiguredLiveSubject && !selectedCourseIsConfiguredTarget) {
+  if (
+      publishingConfiguredLiveSubject &&
+      !selectedCourseIsConfiguredTarget &&
+      !forceLiveOverwrite
+  ) {
     console.error(`
 Refusing to publish course ${subjectSlug}/${resolvedCourseSlug} to configured live subject ${configuredLiveSubjectSlug}.
 
@@ -433,7 +474,31 @@ switch (action) {
     cli(["critique-subject-draft", getCourseBlueprintPath(resolvedCourseSlug)]);
     break;
   }
+  case "draft-goldens": {
+    const resolvedCourseSlug = resolveCourseSlug({ required: true });
+    assertCourseExists(resolvedCourseSlug);
 
+    loadEnvFiles();
+
+    if (!process.env.DRAFT_SUBJECT_SLUG) {
+      process.env.DRAFT_SUBJECT_SLUG = `${subjectSlug}--${resolvedCourseSlug}--draft`;
+    }
+
+    process.env.DRAFT_COURSE_SLUG = resolvedCourseSlug;
+
+    run("pnpm", [
+      "--filter",
+      "@zoeskoul/curriculum-compiler",
+      "exec",
+      "vitest",
+      "run",
+      "--root",
+      "../..",
+      "packages/curriculum-compiler/src/validate/draftSubjectCodeInputGoldens.test.ts",
+    ]);
+
+    break;
+  }
   case "check": {
     const resolvedCourseSlug = resolveCourseSlug({ required: false });
     assertCourseExists(resolvedCourseSlug);

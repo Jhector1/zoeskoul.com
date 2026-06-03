@@ -175,6 +175,39 @@ describe("subject version visibility", () => {
         ]);
     });
 
+    it("keeps non-versioned courses visible alongside a versioned family", () => {
+        const subjects: Subject[] = [
+            {
+                slug: "python",
+                enrolled: false,
+                versioning: {
+                    family: "python",
+                    status: "legacy",
+                    defaultForNewEnrollments: false,
+                },
+            },
+            {
+                slug: "python-v2",
+                enrolled: false,
+                versioning: {
+                    family: "python",
+                    status: "active",
+                    defaultForNewEnrollments: true,
+                },
+            },
+            {
+                slug: "python-data-functions",
+                enrolled: false,
+                versioning: null,
+            },
+        ];
+
+        expect(slugs(selectVisibleSubjectsForActor(subjects))).toEqual([
+            "python-v2",
+            "python-data-functions",
+        ]);
+    });
+
     it("does not double-count multiple versions from the same family", () => {
         const subjects: Subject[] = [
             {

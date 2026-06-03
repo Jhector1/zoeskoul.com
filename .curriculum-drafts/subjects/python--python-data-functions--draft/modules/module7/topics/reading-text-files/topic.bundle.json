@@ -355,7 +355,14 @@
           "requiredFiles": [
             "data/note.txt"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/note.txt",
+            "content": "Hello from a file!\n",
+            "language": "text"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -833,7 +840,16 @@
           "requiredFiles": [
             "note.txt"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "note.txt",
+            "content": "Hello from a file\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -967,7 +983,16 @@
           "requiredFiles": [
             "names.txt"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "names.txt",
+            "content": "Ava\nMia\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -1101,7 +1126,16 @@
           "requiredFiles": [
             "names.txt"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "names.txt",
+            "content": "Ava\nMia\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {

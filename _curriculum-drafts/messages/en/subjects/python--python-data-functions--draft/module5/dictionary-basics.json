@@ -164,7 +164,7 @@
             },
             "ci-make-dictionary": {
               "title": "Return a simple dictionary",
-              "prompt": "Complete this project step: Return a simple dictionary.\n\nRequirements:\n- return a dictionary with keys \"title\" and \"pages\"\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "prompt": "Write `make_book(title, pages)` so it returns one dictionary describing the book. The dictionary should use the keys `\"title\"` and `\"pages\"`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -175,7 +175,7 @@
             },
             "ci-get-score": {
               "title": "Look up a value in a dictionary",
-              "prompt": "Complete this project step: Look up a value in a dictionary.\n\nRequirements:\n- return the score for the given name\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "prompt": "Write `get_score(scores, name)` so it looks up `name` in the `scores` dictionary and returns that score.",
               "hint": "Read the task \"Look up a value in a dictionary\" and identify the required result.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -186,7 +186,7 @@
             },
             "ci-update-dictionary": {
               "title": "Add or update a dictionary entry",
-              "prompt": "Complete this project step: Add or update a dictionary entry.\n\nRequirements:\n- update the dictionary and return it\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "prompt": "Write `set_price(prices, item, amount)` so it updates the `prices` dictionary with the given item and amount, then returns the updated dictionary.",
               "hint": "Read the task \"Add or update a dictionary entry\" and identify the required result.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -269,15 +269,15 @@
         "dictionary-basics": {
           "dict-idea": {
             "title": "What a dictionary is",
-            "bodyMarkdown": "A **dictionary** stores data as **key-value pairs**. Each key helps you look up a value.\n\nThink of it like a labeled container:\n\n- `\"name\"` → `\"Ava\"`\n- `\"score\"` → `42`\n- `\"in_stock\"` → `True`\n\nIn Python, dictionaries use curly braces `{}`.\n\n```python\nstudent = {\n    \"name\": \"Ava\",\n    \"score\": 42,\n    \"in_stock\": True\n}\n\nprint(student)\n```\n\nThis creates one dictionary with three labeled pieces of information.\n\nLine by line:\n\n- `student = { ... }` creates the dictionary and stores it in `student`\n- `\"name\": \"Ava\"` means the key `\"name\"` has the value `\"Ava\"`\n- `\"score\": 42` means the key `\"score\"` has the value `42`\n- `print(student)` shows the whole dictionary in the output panel\n\nA dictionary is useful when each value has a clear label.\n\nWorked example:\n\n```python\nbook = {\n    \"title\": \"Python Basics\",\n    \"pages\": 120\n}\n\nprint(book[\"title\"])\n```\n\nThis prints `Python Basics` because the key `\"title\"` points to that value.\n\nTry it yourself: change the value for `\"title\"` or add a new key like `\"author\"` and click Run."
+            "bodyMarkdown": "A **dictionary** stores data as **key-value pairs**. Each key helps you look up a value.\n\nThink of it like a labeled container:\n\n- `\"name\"` → `\"Ava\"`\n- `\"score\"` → `42`\n- `\"in_stock\"` → `True`\n\nIn Python, dictionaries use curly braces `{}`.\n\n```python\nstudent = {\n    \"name\": \"Ava\",\n    \"score\": 42,\n    \"in_stock\": True\n}\n\nprint(student)\n```\n\nThis creates one dictionary with three labeled pieces of information.\n\nLine by line:\n\n- `student = { ... }` creates the dictionary and stores it in `student`\n- `\"name\": \"Ava\"` means the key `\"name\"` has the value `\"Ava\"`\n- `\"score\": 42` means the key `\"score\"` has the value `42`\n- `print(student)` shows the whole dictionary in the output panel\n\nA dictionary is useful when each value has a clear label.\n\nWorked example:\n\n```python\nbook = {\n    \"title\": \"Python Basics\",\n    \"pages\": 120\n}\n\nprint(book[\"title\"])\n```\n\nThis prints `Python Basics` because the key `\"title\"` points to that value."
           },
           "dict-lookup": {
             "title": "Looking up values by key",
-            "bodyMarkdown": "You get a value from a dictionary by writing the dictionary name, then the key in square brackets.\n\n```python\nprices = {\n    \"apple\": 2,\n    \"banana\": 3,\n    \"orange\": 4\n}\n\nprint(prices[\"banana\"])\n```\n\nThis prints `3`.\n\nStep by step:\n\n- `prices` is the dictionary\n- `\"banana\"` is the key you want to use\n- `prices[\"banana\"]` means “find the value stored under the key `\"banana\"`”\n\nWorked example:\n\n```python\nplayer = {\n    \"name\": \"Mina\",\n    \"level\": 5\n}\n\nprint(player[\"name\"])\nprint(player[\"level\"])\n```\n\nThis prints:\n\n```python\nMina\n5\n```\n\nNotice that dictionary lookup uses **keys**, not positions. Lists use indexes like `items[0]`, but dictionaries use labels like `player[\"name\"]`.\n\nYour turn: change the key inside `print(...)` to look up a different value."
+            "bodyMarkdown": "You get a value from a dictionary by writing the dictionary name, then the key in square brackets.\n\n```python\nprices = {\n    \"apple\": 2,\n    \"banana\": 3,\n    \"orange\": 4\n}\n\nprint(prices[\"banana\"])\n```\n\nThis prints `3`.\n\nStep by step:\n\n- `prices` is the dictionary\n- `\"banana\"` is the key you want to use\n- `prices[\"banana\"]` means “find the value stored under the key `\"banana\"`”\n\nWorked example:\n\n```python\nplayer = {\n    \"name\": \"Mina\",\n    \"level\": 5\n}\n\nprint(player[\"name\"])\nprint(player[\"level\"])\n```\n\nThis prints:\n\n```python\nMina\n5\n```\n\nNotice that dictionary lookup uses **keys**, not positions. Lists use indexes like `items[0]`, but dictionaries use labels like `player[\"name\"]`."
           },
           "dict-create-update": {
             "title": "Creating and updating dictionary entries",
-            "bodyMarkdown": "You can add a new key-value pair or change an existing value with assignment.\n\n```python\ninventory = {\n    \"pens\": 10,\n    \"notebooks\": 4\n}\n\ninventory[\"pens\"] = 12\ninventory[\"erasers\"] = 6\n\nprint(inventory)\n```\n\nWhat happens here:\n\n- `inventory[\"pens\"] = 12` updates the existing value for `\"pens\"`\n- `inventory[\"erasers\"] = 6` adds a brand new key-value pair\n\nWorked example:\n\n```python\nprofile = {\n    \"name\": \"Leo\",\n    \"age\": 14\n}\n\nprofile[\"age\"] = 15\nprofile[\"city\"] = \"Lima\"\n\nprint(profile[\"age\"])\nprint(profile[\"city\"])\n```\n\nThis prints:\n\n```python\n15\nLima\n```\n\nSo the same assignment pattern works for both updating and adding.\n\nTry this: start with a small dictionary, then update one value and add one new key before clicking Run.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "You can add a new key-value pair or change an existing value with assignment.\n\n```python\ninventory = {\n    \"pens\": 10,\n    \"notebooks\": 4\n}\n\ninventory[\"pens\"] = 12\ninventory[\"erasers\"] = 6\n\nprint(inventory)\n```\n\nWhat happens here:\n\n- `inventory[\"pens\"] = 12` updates the existing value for `\"pens\"`\n- `inventory[\"erasers\"] = 6` adds a brand new key-value pair\n\nWorked example:\n\n```python\nprofile = {\n    \"name\": \"Leo\",\n    \"age\": 14\n}\n\nprofile[\"age\"] = 15\nprofile[\"city\"] = \"Lima\"\n\nprint(profile[\"age\"])\nprint(profile[\"city\"])\n```\n\nThis prints:\n\n```python\n15\nLima\n```\n\nSo the same assignment pattern works for both updating and adding."
           }
         }
       }

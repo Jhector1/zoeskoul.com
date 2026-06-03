@@ -73,21 +73,21 @@
               "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# TODO: write cleaned records to output/clean_students.csv.\n"
             },
             "try-module-7-clean-student-records-sketch0": {
-              "title": "Preview a cleaned row",
-              "prompt": "Clean one row before the full records project. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "title": "Clean the first row from the file",
+              "prompt": "Open `data/students.csv`, read the first row, clean the name and score, and print `Ava:92`.",
+              "hint": "Read the first line from the file, split it, clean both pieces, and print them with a colon.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Clean student records step by step\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "This card practices cleaning a real row from the same file shape used in the project.",
+                "hint_1": "Use `with open(\"data/students.csv\") as file:` and `first_row = file.readline()`.",
+                "hint_2": "Split the row, use `.strip().title()` for the name, and print `name:score`."
               },
-              "starterCode": "row = ' ava , 92 '\n\n# Print Ava:92 after cleaning the row.\n"
+              "starterCode": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Clean the first row and print Ava:92.\n"
             }
           },
           "tryIt": {
             "try_module_7_clean_student_records_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Clean one row before the full records project."
+              "prompt": "Open `data/students.csv`, read the first row, clean the name and score, and print `Ava:92`."
             },
             "allowReveal": true
           }

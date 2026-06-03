@@ -1,0 +1,288 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "validating-and-cleaning-input": {
+          "label": "Validating and Cleaning Input",
+          "summary": "Clean text values, detect missing data, and reject invalid rows without crashing your program.",
+          "cards": {
+            "sketch0": {
+              "title": "What validation and cleaning do"
+            },
+            "sketch1": {
+              "title": "Missing values vs invalid values"
+            },
+            "sketch2": {
+              "title": "Put cleaning rules in functions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Build cleaning helpers for messy input"
+            }
+          },
+          "projectSteps": {
+            "ci_clean_name": {
+              "title": "Write a name cleaning function"
+            },
+            "ci_parse_age": {
+              "title": "Parse an age safely"
+            },
+            "ci_clean_row": {
+              "title": "Validate and clean one row"
+            }
+          },
+          "quiz": {
+            "sc-valid-row": {
+              "title": "Which row is valid after cleaning?",
+              "prompt": "A program strips spaces from both fields, then requires a non-empty name and an age that can be converted with `int()`. Which row would be accepted?",
+              "hint": "Look for a row where spaces can be removed and the age text still becomes a whole number.",
+              "help": {
+                "concept": "A row is valid only if cleaning with `strip()` leaves a real name and an age string that `int()` can convert.",
+                "hint_1": "Check each option after removing leading and trailing spaces from both values.",
+                "hint_2": "Reject rows with an empty cleaned name or an age like a word instead of digits."
+              },
+              "options": {
+                "a": "[' Ava ', ' 12 ']",
+                "b": "['   ', '9']",
+                "c": "['Leo', 'ten']",
+                "d": "['Mia', '4.5']"
+              }
+            },
+            "sc-except-flow": {
+              "title": "What does except catch here?",
+              "prompt": "In a `try`/`except ValueError` block, what kind of problem is the `except` meant to handle during `int(age_text)`?",
+              "hint": "Think about what happens when text cannot be turned into an integer.",
+              "help": {
+                "concept": "`ValueError` is raised when a conversion function like `int()` receives a value of the right general type but with unusable content.",
+                "hint_1": "`int()` works for strings like `'7'`, but not for strings that contain words or decimal text in this beginner context.",
+                "hint_2": "The problem is not a missing variable name or a syntax mistake in the code editor; it is bad input content during conversion."
+              },
+              "options": {
+                "a": "A text value such as 'ten' that cannot be converted to an integer",
+                "b": "A missing `print()` statement",
+                "c": "A list index being too large",
+                "d": "A file path always being relative"
+              }
+            },
+            "mc-clean-steps": {
+              "title": "Useful cleaning steps",
+              "prompt": "Choose all steps that help clean a text row before validation.",
+              "hint": "Think about operations that remove formatting noise or standardize text values.",
+              "help": {
+                "concept": "Cleaning prepares raw text for validation by removing extra spaces or making formatting more consistent before rule checks happen.",
+                "hint_1": "Methods like `strip()` and case normalization help; actions that only display data do not clean it.",
+                "hint_2": "Pick the options that change messy input into a more consistent form before checking whether it is valid."
+              },
+              "options": {
+                "a": "Use `strip()` to remove extra spaces around a value",
+                "b": "Convert a name like 'aVA' to a consistent case such as title case",
+                "c": "Print the row without changing it",
+                "d": "Keep all spaces exactly as they were so validation sees the mess"
+              }
+            },
+            "mc-reject-row": {
+              "title": "Which rows should be rejected?",
+              "prompt": "A cleaned row is valid only when the name is not empty and the score is an integer from 0 to 100. Choose all rows that should be rejected.",
+              "hint": "Check each row after trimming spaces, then test both rules.",
+              "help": {
+                "concept": "Validation can involve more than one rule: presence, type conversion, and allowed numeric range.",
+                "hint_1": "A row fails if the cleaned name is empty, if the score cannot become an integer, or if the integer is outside 0 to 100.",
+                "hint_2": "Look closely at the rows with only spaces for the name, word-based scores, and numbers above the allowed maximum."
+              },
+              "options": {
+                "a": "['Ava', '90']",
+                "b": "['   ', '75']",
+                "c": "['Leo', 'ten']",
+                "d": "['Mia', '105']"
+              }
+            },
+            "dr-clean-order": {
+              "title": "Order the cleaning process",
+              "prompt": "Put these steps in a sensible order for cleaning and validating one text value that should become an integer.",
+              "hint": "Clean formatting before conversion, and only use the number after conversion succeeds.",
+              "help": {
+                "concept": "A reliable cleaning flow removes extra spaces first, then attempts conversion, then uses the converted value for later checks.",
+                "hint_1": "If you try `int()` before removing spaces and checking the raw text, your code is harder to reason about.",
+                "hint_2": "Start with the original text, clean it, convert it, then continue with numeric validation."
+              },
+              "tokens": {
+                "t1": "Read the text value",
+                "t2": "Remove extra spaces with `strip()`",
+                "t3": "Convert the cleaned text with `int()`",
+                "t4": "Use the integer in later checks"
+              }
+            },
+            "dr-try-except-order": {
+              "title": "Order the try/except flow",
+              "prompt": "Arrange these parts to show the usual flow when converting cleaned text to an integer safely.",
+              "hint": "The risky conversion belongs inside `try`, and the error handling comes after it.",
+              "help": {
+                "concept": "`try` contains code that may fail, while `except` handles a specific error if that failure happens.",
+                "hint_1": "Place the conversion attempt after entering `try`, and place the fallback action inside `except ValueError`.",
+                "hint_2": "The successful path uses the converted number before the error-handling path appears."
+              },
+              "tokens": {
+                "t1": "Start `try:`",
+                "t2": "Attempt `age = int(age_text)`",
+                "t3": "Use `age` if conversion worked",
+                "t4": "Handle bad input in `except ValueError:`"
+              }
+            },
+            "fb-strip-name": {
+              "title": "Fill the cleaning method",
+              "prompt": "Complete the code so it removes extra spaces around the name.",
+              "hint": "Use the string method that trims spaces from both ends.",
+              "help": {
+                "concept": "`the missing term()` removes leading and trailing whitespace from a string, which is a common first cleaning step.",
+                "hint_1": "The missing value is a method name used like `name.[blank1]()` in Python.",
+                "hint_2": "It is the method that turns `'  Ava  '` into `'Ava'` without changing letters in the middle."
+              },
+              "template": "clean_name = name.[blank1]()",
+              "choices": [
+                "split",
+                "strip",
+                "append",
+                "write"
+              ]
+            },
+            "fb-empty-check": {
+              "title": "Fill the missing comparison",
+              "prompt": "Complete the condition so it detects a missing cleaned value.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "if cleaned_name == [blank1]:",
+              "choices": [
+                "0",
+                "None",
+                "\"\"",
+                "False"
+              ]
+            },
+            "ci-clean-name": {
+              "title": "Write a name cleaning function",
+              "prompt": "Complete this project step: Write a name cleaning function.\n\nRequirements:\n- return the cleaned name\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "hint": "Read the task \"Write a name cleaning function\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def clean_name(text):\n    # return the cleaned name\n    pass"
+            },
+            "ci-parse-age": {
+              "title": "Parse an age safely",
+              "prompt": "Complete this project step: Parse an age safely.\n\nRequirements:\n- return an int or None\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "hint": "Read the task \"Parse an age safely\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def parse_age(text):\n    # return an int or None\n    pass"
+            },
+            "ci-clean-row": {
+              "title": "Validate and clean one row",
+              "prompt": "Complete this project step: Validate and clean one row.\n\nRequirements:\n- row looks like [name_text, score_text]\n- return a cleaned dictionary or None\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "hint": "Read the task \"Validate and clean one row\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass"
+            },
+            "try-validating-and-cleaning-input-checkpoint": {
+              "title": "Clean and validate a name",
+              "prompt": "Read a name. Strip spaces and title-case it. If the cleaned name is empty, print `Missing`; otherwise print the cleaned name.",
+              "hint": "Use `.strip()` before checking whether the value is empty.",
+              "help": {
+                "concept": "Cleaning input before validation helps programs handle messy text.",
+                "hint_1": "Use `.strip()` before checking whether the value is empty.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "name = input()\n\n# Clean and validate the name.\n"
+            },
+            "try-validating-and-cleaning-input-sketch0": {
+              "title": "Clean a name",
+              "prompt": "Clean whitespace and capitalization before using user data. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"What validation and cleaning do\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "raw = '  aVA smith  '\n\n# Strip extra spaces, convert to title case, and print the result.\n"
+            },
+            "try-validating-and-cleaning-input-sketch1": {
+              "title": "Validate a score",
+              "prompt": "Check numeric ranges after conversion. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Missing values vs invalid values\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "score_text = '92'\n\n# Convert score_text to int. Print 'valid' if it is from 0 to 100.\n"
+            },
+            "try-validating-and-cleaning-input-sketch2": {
+              "title": "Clean several rows",
+              "prompt": "Split each row, strip each field, and format the cleaned result. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Put cleaning rules in functions\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "rows = [' ava , 92 ', ' mia , 85 ']\n\n# Print cleaned name:score lines like Ava:92.\n"
+            }
+          },
+          "tryIt": {
+            "try_validating_and_cleaning_input_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Read a name. Strip spaces and title-case it. If the cleaned name is empty, print `Missing`; otherwise print the cleaned name."
+            },
+            "try_validating_and_cleaning_input_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Clean whitespace and capitalization before using user data."
+            },
+            "try_validating_and_cleaning_input_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Check numeric ranges after conversion."
+            },
+            "try_validating_and_cleaning_input_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Split each row, strip each field, and format the cleaned result."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "validating-and-cleaning-input": {
+          "clean-basics": {
+            "title": "What validation and cleaning do",
+            "bodyMarkdown": "Validation checks whether data is acceptable. Cleaning fixes small problems so valid data becomes easier to use.\n\nFor example, imagine a row of text:\n\n```python\nname = \"  Ava  \"\nage_text = \" 12 \"\n```\n\nYou can clean it like this:\n\n```python\nname = name.strip()\nage_text = age_text.strip()\nage = int(age_text)\nprint(name)\nprint(age)\n```\n\nStep by step:\n\n- `strip()` removes extra spaces at the start and end.\n- `int(age_text)` converts the cleaned text into a number.\n- `print(name)` shows `Ava`.\n- `print(age)` shows `12`.\n\nValidation often happens after cleaning. If `age_text` were `\"twelve\"`, `int(age_text)` would fail, so that row should be rejected or handled with `try`/`except`.\n\nA simple rule is:\n\n1. Clean small formatting issues.\n2. Check for missing values.\n3. Reject values that still do not fit the rules.\n\nTry it yourself: change the text to `\"  Maya  \"` and `\" 9 \"`, then click Run and check the output panel."
+          },
+          "missing-invalid": {
+            "title": "Missing values vs invalid values",
+            "bodyMarkdown": "A missing value is absent or empty. An invalid value is present, but wrong for the rule you need.\n\nExample:\n\n```python\nrows = [\n    [\"Ava\", \"12\"],\n    [\"\", \"15\"],\n    [\"Leo\", \"ten\"]\n]\n```\n\nYou might read these rows like this:\n\n- `['Ava', '12']` → usable after conversion\n- `['', '15']` → missing name\n- `['Leo', 'ten']` → invalid age\n\nHere is a small checker:\n\n```python\nfor row in rows:\n    name = row[0].strip()\n    age_text = row[1].strip()\n\n    if name == \"\":\n        print(\"missing name\")\n    else:\n        try:\n            age = int(age_text)\n            print(name, age)\n        except ValueError:\n            print(\"invalid age\")\n```\n\nLine by line:\n\n- The loop checks one row at a time.\n- `strip()` cleans spaces before checking.\n- `if name == \"\"` catches an empty name.\n- `try` attempts the number conversion.\n- `except ValueError` handles text like `\"ten\"`.\n\nYour turn: add a row like `[\"  Nia  \", \" 8 \"]` and predict what prints before you run it."
+          },
+          "cleaning-functions": {
+            "title": "Put cleaning rules in functions",
+            "bodyMarkdown": "When the same cleaning logic is used many times, put it in a function. This makes your code easier to read and reuse.\n\nExample:\n\n```python\ndef clean_name(text):\n    cleaned = text.strip()\n    return cleaned.title()\n\nprint(clean_name(\"  aVA  \"))\n```\n\nThis prints `Ava`.\n\nStep by step:\n\n- The function receives some text.\n- `strip()` removes extra spaces.\n- `title()` changes the capitalization.\n- `return` sends the cleaned result back.\n\nYou can do the same for validation:\n\n```python\ndef is_missing(text):\n    return text.strip() == \"\"\n\nprint(is_missing(\"   \"))\nprint(is_missing(\"Mila\"))\n```\n\nThis prints:\n\n```python\nTrue\nFalse\n```\n\nFunctions are especially helpful when cleaning many rows from a file.\n\nTry this: change `\"  aVA  \"` to `\"  liAM  \"` and see what the function returns."
+          }
+        }
+      }
+    }
+  }
+}

@@ -74,12 +74,12 @@
             },
             "try-module-5-gradebook-project-sketch0": {
               "title": "Preview a gradebook list",
-              "prompt": "Use `append()` to preview how the gradebook project will grow a student list. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "prompt": "Use `append()` to preview how the gradebook project will grow a student list.",
+              "hint": "Add Zoe and print students.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Build a gradebook step by step\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "Add Zoe and print students.",
+                "hint_1": "Write the line for this step, then run the program to see what changes.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
               "starterCode": "students = ['Ava', 'Mia']\n\n# Add Zoe and print students.\n"
             }

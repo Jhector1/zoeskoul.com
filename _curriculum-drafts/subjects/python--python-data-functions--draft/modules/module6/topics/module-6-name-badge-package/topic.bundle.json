@@ -155,6 +155,18 @@
             "content": "def clean_name(text):\n    return text.strip().title()\n",
             "language": "python"
           }
+        ],
+        "files": [
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          }
         ]
       },
       "showExpectedExample": true,
@@ -340,6 +352,23 @@
             "isEntry": true,
             "entry": true
           },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+            "language": "python"
+          }
+        ],
+        "files": [
           {
             "path": "tools/__init__.py",
             "content": "",
@@ -564,6 +593,23 @@
             "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
             "language": "python"
           }
+        ],
+        "files": [
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
+            "language": "python"
+          }
         ]
       },
       "showExpectedExample": true,
@@ -762,6 +808,23 @@
             "isEntry": true,
             "entry": true
           },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
+            "language": "python"
+          }
+        ],
+        "files": [
           {
             "path": "tools/__init__.py",
             "content": "",

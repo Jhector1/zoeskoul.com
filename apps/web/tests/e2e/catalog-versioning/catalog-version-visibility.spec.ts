@@ -8,7 +8,7 @@ test.describe("catalog subject version visibility", () => {
         });
     });
 
-    test("new user sees only the default active course version in catalog counts and detail", async ({
+    test("new user sees the default active Python version plus separate non-versioned Python courses", async ({
                                                                                                          page,
                                                                                                      }) => {
         await page.goto("/en/catalogs");
@@ -19,9 +19,9 @@ test.describe("catalog subject version visibility", () => {
             timeout: 30_000,
         });
 
-        await expect(pythonCatalog).toContainText(/1 course/i);
+        await expect(pythonCatalog).toContainText(/2 courses/i);
         await expect(pythonCatalog).toContainText(/Python/i);
-        await expect(pythonCatalog).not.toContainText(/2 courses/i);
+        await expect(pythonCatalog).not.toContainText(/1 course/i);
 
         await expect(pythonCatalog).toHaveAttribute("href", "/en/catalogs/python");
         await page.goto("/en/catalogs/python");
@@ -32,18 +32,21 @@ test.describe("catalog subject version visibility", () => {
         await expect(body).toContainText(/Python/i);
 
         /**
-         * New users should see the current/default version, not both
-         * legacy + current versions from the same family.
+         * New users should see the current/default version from the versioned
+         * Python family, while still seeing distinct non-versioned Python
+         * courses such as Python Data and Functions.
          */
         await expect(body).not.toContainText(/Unavailable/i);
         await expect(body).not.toContainText(/Not seeded/i);
         await expect(body).not.toContainText(/Legacy/i);
         await expect(body).not.toContainText(/legacy track/i);
+        await expect(body).toContainText(/Python Data and Functions/i);
+        await expect(body).toContainText(/Python/i);
 
         /**
          * The exact title can change, so assert the important invariant:
-         * the page does not expose both python and python-v2 as separate
-         * enrollable choices.
+         * the page does not expose both python legacy and python-v2 as separate
+         * enrollable choices from the same version family.
          */
         await expect(body).not.toContainText(/python-v1/i);
     });
@@ -57,11 +60,7 @@ test.describe("catalog subject version visibility", () => {
             timeout: 30_000,
         });
 
-        /**
-         * The generated Python catalog contains python + python-v2,
-         * but learner/new-user visibility should count only the default active one.
-         */
-        await expect(pythonCatalog).toContainText(/1 course/i);
-        await expect(pythonCatalog).not.toContainText(/2 courses/i);
+        await expect(pythonCatalog).toContainText(/2 courses/i);
+        await expect(pythonCatalog).not.toContainText(/1 course/i);
     });
 });

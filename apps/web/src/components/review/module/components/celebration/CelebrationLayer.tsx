@@ -35,6 +35,7 @@ type Props = {
 
     topicToast: TopicCelebrateToastVm | null;
     setTopicToastPaused: (paused: boolean) => void;
+    dismissTopicToast: () => void;
 };
 
 export default function CelebrationLayer({
@@ -54,6 +55,7 @@ export default function CelebrationLayer({
                                              onModuleContinue,
                                              topicToast,
                                              setTopicToastPaused,
+                                             dismissTopicToast,
                                          }: Props) {
     return (
         <>
@@ -99,6 +101,7 @@ export default function CelebrationLayer({
                         reduceMotion={reduceMotion}
                         toast={topicToast}
                         onPauseChange={setTopicToastPaused}
+                        onDismiss={dismissTopicToast}
                     />
                 ) : null}
             </AnimatePresence>

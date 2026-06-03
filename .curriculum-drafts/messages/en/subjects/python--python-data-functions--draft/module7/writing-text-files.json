@@ -40,7 +40,7 @@
               "hint": "Use the question wording and the lesson example to narrow the choices.",
               "help": {
                 "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
                 "hint_2": "Remove options that do not match the concept or evidence named in the question."
               },
               "options": {
@@ -136,7 +136,7 @@
               "hint": "Focus on the missing concept rather than the exact missing term.",
               "help": {
                 "concept": "The blank should be completed with the term that fits the job being described.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
                 "hint_2": "Choose the term that best completes the meaning of the statement."
               },
               "template": "with open(\"report.txt\", [blank1]) as file:",
@@ -152,9 +152,9 @@
               "prompt": "Choose the text that starts a new line after `First line`.",
               "hint": "Read the sentence around the blank and decide what role the missing word plays.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "The blank needs the exact Python word or symbol that makes the line do what the prompt describes.",
+                "hint_1": "Look at the code around the blank to decide whether you need a keyword, a value, a method, or a key.",
+                "hint_2": "Choose the option that makes the full line valid Python and gives the result the prompt asks for."
               },
               "template": "file.write(\"First line[blank1]Second line\")",
               "choices": [
@@ -165,7 +165,7 @@
             },
             "ci-write-greeting-file": {
               "title": "Write a personalized greeting file",
-              "prompt": "Complete this project step: Write a personalized greeting file.\n\nRequirements:\n- Write Hello, NAME! to greeting.txt.\n- Then open greeting.txt and print its contents.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `zoe`, the output should be `Hello, Zoe!`.",
+              "prompt": "Write a greeting into `greeting.txt` using the input name in title case, then open `greeting.txt` and print its contents.\n\nFor example, if the input is `zoe`, your program should print:\n`Hello, Zoe!`.",
               "hint": "Use `input()` for the name, then write the formatted greeting into the file.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -176,7 +176,7 @@
             },
             "ci-overwrite-shopping-list": {
               "title": "Overwrite a shopping list from input",
-              "prompt": "Complete this project step: Overwrite a shopping list from input.\n\nRequirements:\n- Write both items to shopping.txt, one per line.\n- Then print the file contents.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `bread\napples`, the output should be `Bread\nApples`.",
+              "prompt": "A shopping list needs to be rewritten from fresh input. Write both items to `shopping.txt`, one per line and in title case, then print the file contents.\n\nFor example, if the inputs are `bread` and `apples`, your program should print:\n`Bread`\n`Apples`.",
               "hint": "Opening a file with `\"w\"` replaces the old contents.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -187,7 +187,7 @@
             },
             "ci-append-log-entry": {
               "title": "Append a log entry",
-              "prompt": "Complete this project step: Append a log entry.\n\nRequirements:\n- Append the entry to log.txt on a new line, then print the full file.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `Checked sensors`, the output should be `Start shift\nChecked sensors`.",
+              "prompt": "The log already starts with one line. Append the new input entry to `log.txt` on a new line, then print the full file.\n\nFor example, if the input is `Checked sensors`, your program should print:\n`Start shift`\n`Checked sensors`.",
               "hint": "Opening a file with `\"a\"` keeps the old contents and adds new text at the end.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -198,45 +198,45 @@
             },
             "try-writing-text-files-checkpoint": {
               "title": "Write and read a text file",
-              "prompt": "Write `Hello from a file!` to `note.txt`, then read the file and print the saved text. Finish the small program, run it, and check that the result fits the scenario.",
+              "prompt": "Write `Hello from a file!` to `note.txt`, then read the file and print the saved text.",
               "hint": "Open the file in write mode first, then reopen it for reading.",
               "help": {
-                "concept": "Write mode creates or replaces a file, and read mode loads the saved text.",
-                "hint_1": "Open the file in write mode first, then reopen it for reading.",
-                "hint_2": "Run your code and compare the output with the expected result."
+                "concept": "Write the file first, then reopen it so you can show exactly what was saved.",
+                "hint_1": "Open `note.txt` in write mode and save `Hello from a file!`.",
+                "hint_2": "Reopen `note.txt` in read mode and print the text you just wrote."
               },
               "starterCode": "# Write Hello from a file! to note.txt.\n# Then read note.txt and print it.\n"
             },
             "try-writing-text-files-sketch0": {
               "title": "Write and read a message",
-              "prompt": "Write text first, then read the same file to verify it. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "prompt": "Write `Done` to `note.txt`, then reopen `note.txt` and print the saved text.",
+              "hint": "Use write mode first, then read the same file back.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Write mode creates or replaces text\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "This card practices the full write-then-check workflow with one file.",
+                "hint_1": "Open `note.txt` with mode `\"w\"` and write `Done`.",
+                "hint_2": "Open `note.txt` again and print `file.read()`."
               },
               "starterCode": "# Write Done to note.txt.\n# Then open note.txt and print its contents.\n"
             },
             "try-writing-text-files-sketch1": {
               "title": "Append a second line",
-              "prompt": "Use write mode first and append mode second. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "prompt": "Create `log.txt` with `Start`, reopen it in append mode, add `End` on a new line, then print the full file.",
+              "hint": "Use write mode for the first line and append mode for the second line.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Append mode adds to the end\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "This card compares write mode and append mode in one short program.",
+                "hint_1": "First open `log.txt` with `\"w\"` and write `Start\n`.",
+                "hint_2": "Then open `log.txt` with `\"a\"`, write `End`, and print the full file."
               },
               "starterCode": "# Create log.txt with Start, then append End on a new line.\n# Print the final file contents.\n"
             },
             "try-writing-text-files-sketch2": {
               "title": "Write a simple report",
-              "prompt": "Format text before saving it to a file. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "prompt": "Write `Ava: 92` to `report.txt`, then reopen the file and print it.",
+              "hint": "Use the `name` and `score` variables to build the text before you write it.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Use newline characters and verify what you wrote\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "This card practices formatting a line of text before saving it to a file.",
+                "hint_1": "Build the text with `f\"{name}: {score}\"` and write it to `report.txt`.",
+                "hint_2": "Reopen `report.txt` and print the saved line."
               },
               "starterCode": "name = 'Ava'\nscore = 92\n\n# Write 'Ava: 92' to report.txt, then print the file.\n"
             }
@@ -248,15 +248,15 @@
             },
             "try_writing_text_files_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Write text first, then read the same file to verify it."
+              "prompt": "Write `Done` to `note.txt`, then reopen `note.txt` and print the saved text."
             },
             "try_writing_text_files_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Use write mode first and append mode second."
+              "prompt": "Create `log.txt` with `Start`, reopen it in append mode, add `End` on a new line, then print the full file."
             },
             "try_writing_text_files_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Format text before saving it to a file."
+              "prompt": "Write `Ava: 92` to `report.txt`, then reopen the file and print it."
             },
             "allowReveal": true
           }
@@ -270,15 +270,15 @@
         "writing-text-files": {
           "sketch-write-mode-basics": {
             "title": "Write mode creates or replaces text",
-            "bodyMarkdown": "When you open a path with write mode (`\"w\"`), Python prepares that path for new text. If the path already has text, write mode replaces the old contents.\n\n```python\nwith open(\"note.txt\", \"w\") as file:\n    file.write(\"Hello\\n\")\n\nwith open(\"note.txt\") as file:\n    print(file.read())\n```\n\nStep by step:\n\n- `open(\"note.txt\", \"w\")` opens the path for writing.\n- `file.write(\"Hello\\n\")` puts text into the file.\n- Opening the same path again in read mode lets you check what was saved.\n- `print(file.read())` sends the saved text to the output panel.\n\nIn this example, the output is:\n\n```python\nHello\n```\n\nTry it yourself: change `\"Hello\\n\"` to a different message, click Run, and check the new output."
+            "bodyMarkdown": "When you open a path with write mode (`\"w\"`), Python prepares that path for new text. If the path already has text, write mode replaces the old contents.\n\n```python\nwith open(\"note.txt\", \"w\") as file:\n    file.write(\"Hello\\n\")\n\nwith open(\"note.txt\") as file:\n    print(file.read())\n```\n\nStep by step:\n\n- `open(\"note.txt\", \"w\")` opens the path for writing.\n- `file.write(\"Hello\\n\")` puts text into the file.\n- Opening the same path again in read mode lets you check what was saved.\n- `print(file.read())` sends the saved text to the output panel.\n\nIn this example, the output is:\n\n```python\nHello\n```"
           },
           "sketch-append-mode-basics": {
             "title": "Append mode adds to the end",
-            "bodyMarkdown": "Append mode (`\"a\"`) keeps the existing text and adds new text at the end.\n\n```python\nwith open(\"log.txt\", \"w\") as file:\n    file.write(\"Start\\n\")\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"Next\\n\")\n\nwith open(\"log.txt\") as file:\n    print(file.read())\n```\n\nLine by line:\n\n- The first `with open(..., \"w\")` creates the starting text.\n- The second `with open(..., \"a\")` adds another line without removing `Start`.\n- Reading the file back shows both lines.\n\nThe output becomes:\n\n```python\nStart\nNext\n```\n\nYour turn: change the second written line, run the code, and predict what the full file text will be before you check the output panel."
+            "bodyMarkdown": "Append mode (`\"a\"`) keeps the existing text and adds new text at the end.\n\n```python\nwith open(\"log.txt\", \"w\") as file:\n    file.write(\"Start\\n\")\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"Next\\n\")\n\nwith open(\"log.txt\") as file:\n    print(file.read())\n```\n\nLine by line:\n\n- The first `with open(..., \"w\")` creates the starting text.\n- The second `with open(..., \"a\")` adds another line without removing `Start`.\n- Reading the file back shows both lines.\n\nThe output becomes:\n\n```python\nStart\nNext\n```"
           },
           "sketch-newlines-and-verifying": {
             "title": "Use newline characters and verify what you wrote",
-            "bodyMarkdown": "When writing several lines, `\\n` starts a new line. It is also helpful to reopen the file and print its contents so you can verify the result.\n\n```python\nwith open(\"tasks.txt\", \"w\") as file:\n    file.write(\"Buy milk\\nWash dishes\\n\")\n\nwith open(\"tasks.txt\") as file:\n    saved_text = file.read()\n    print(saved_text)\n```\n\nWhat this does:\n\n- `Buy milk\\n` writes one line and moves to the next line.\n- `Wash dishes\\n` writes the second line.\n- `file.read()` gets the full saved text.\n- Printing `saved_text` lets you confirm the file contents in the output panel.\n\nWithout `\\n`, both tasks would appear on the same line.\n\nTry this: add a third task to the string, click Run, and check whether each task appears on its own line."
+            "bodyMarkdown": "When writing several lines, `\\n` starts a new line. It is also helpful to reopen the file and print its contents so you can verify the result.\n\n```python\nwith open(\"tasks.txt\", \"w\") as file:\n    file.write(\"Buy milk\\nWash dishes\\n\")\n\nwith open(\"tasks.txt\") as file:\n    saved_text = file.read()\n    print(saved_text)\n```\n\nWhat this does:\n\n- `Buy milk\\n` writes one line and moves to the next line.\n- `Wash dishes\\n` writes the second line.\n- `file.read()` gets the full saved text.\n- Printing `saved_text` lets you confirm the file contents in the output panel.\n\nWithout `\\n`, both tasks would appear on the same line."
           }
         }
       }

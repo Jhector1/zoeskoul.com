@@ -39,6 +39,31 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
         ref,
     ) {
         const t = useTranslations("reviewNav");
+        const [dragOffset, setDragOffset] = React.useState({ x: 0, y: 0 });
+        const [isDragging, setIsDragging] = React.useState(false);
+        const dragStateRef = React.useRef<{
+            pointerId: number;
+            startX: number;
+            startY: number;
+            originX: number;
+            originY: number;
+            moved: boolean;
+        } | null>(null);
+        const didDragRef = React.useRef(false);
+
+        const clampOffset = React.useCallback((x: number, y: number) => {
+            if (typeof window === "undefined") return { x, y };
+
+            const maxX = Math.max(0, window.innerWidth * 0.4);
+            const minX = -maxX;
+            const minY = -Math.max(0, window.innerHeight * 0.6);
+            const maxY = Math.max(0, window.innerHeight * 0.18);
+
+            return {
+                x: Math.min(Math.max(x, minX), maxX),
+                y: Math.min(Math.max(y, minY), maxY),
+            };
+        }, []);
 
         const prevHref = prevModuleId
             ? `/${encodeURIComponent(locale)}/${ROUTES.learningPath(
@@ -68,6 +93,86 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
             Boolean(showCertificateCta) && Boolean(certificateHint) && !canGetCertificate;
         const showHint = showUnlockHint || showCertificateHint;
 
+        const handlePointerDown = React.useCallback(
+            (event: React.PointerEvent<HTMLDivElement>) => {
+                if (event.pointerType === "mouse" && event.button !== 0) return;
+                if (
+                    event.target instanceof Element &&
+                    event.target.closest(
+                        "button, a, input, textarea, select, [role='button'], [data-no-drag]",
+                    )
+                ) {
+                    return;
+                }
+
+                dragStateRef.current = {
+                    pointerId: event.pointerId,
+                    startX: event.clientX,
+                    startY: event.clientY,
+                    originX: dragOffset.x,
+                    originY: dragOffset.y,
+                    moved: false,
+                };
+                didDragRef.current = false;
+                setIsDragging(true);
+
+                event.currentTarget.setPointerCapture(event.pointerId);
+            },
+            [dragOffset],
+        );
+
+        const handlePointerMove = React.useCallback(
+            (event: React.PointerEvent<HTMLDivElement>) => {
+                const drag = dragStateRef.current;
+                if (!drag || drag.pointerId !== event.pointerId) return;
+
+                const nextX = drag.originX + (event.clientX - drag.startX);
+                const nextY = drag.originY + (event.clientY - drag.startY);
+                const movedEnough =
+                    Math.abs(event.clientX - drag.startX) > 6 ||
+                    Math.abs(event.clientY - drag.startY) > 6;
+
+                if (movedEnough && !drag.moved) {
+                    didDragRef.current = true;
+                    dragStateRef.current = { ...drag, moved: true };
+                }
+
+                setDragOffset(clampOffset(nextX, nextY));
+            },
+            [clampOffset],
+        );
+
+        const endDrag = React.useCallback((pointerId: number) => {
+            const drag = dragStateRef.current;
+            if (!drag || drag.pointerId !== pointerId) return;
+            dragStateRef.current = null;
+            setIsDragging(false);
+        }, []);
+
+        const handlePointerUp = React.useCallback(
+            (event: React.PointerEvent<HTMLDivElement>) => {
+                endDrag(event.pointerId);
+            },
+            [endDrag],
+        );
+
+        const handlePointerCancel = React.useCallback(
+            (event: React.PointerEvent<HTMLDivElement>) => {
+                endDrag(event.pointerId);
+            },
+            [endDrag],
+        );
+
+        const handleClickCapture = React.useCallback(
+            (event: React.MouseEvent<HTMLDivElement>) => {
+                if (!didDragRef.current) return;
+                event.preventDefault();
+                event.stopPropagation();
+                didDragRef.current = false;
+            },
+            [],
+        );
+
         return (
             <div
                 ref={ref}
@@ -80,7 +185,21 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
                     bottom: "max(1rem, env(safe-area-inset-bottom))",
                 }}
             >
-                <div className="pointer-events-auto ml-auto flex w-full max-w-[min(100%,28rem)] flex-col items-end gap-2">
+                <div
+                    className={cn(
+                        "pointer-events-auto ml-auto flex w-full max-w-[min(100%,28rem)] flex-col items-end gap-2",
+                        isDragging ? "cursor-grabbing" : "cursor-grab",
+                    )}
+                    style={{
+                        transform: `translate(${dragOffset.x}px, ${dragOffset.y}px)`,
+                        touchAction: "none",
+                    }}
+                    onPointerDown={handlePointerDown}
+                    onPointerMove={handlePointerMove}
+                    onPointerUp={handlePointerUp}
+                    onPointerCancel={handlePointerCancel}
+                    onClickCapture={handleClickCapture}
+                >
                     {showHint ? (
                         <div className="ui-surface-floating max-w-full rounded-2xl px-3 py-2 text-right">
                             <div className="ui-review-bottom-hint">

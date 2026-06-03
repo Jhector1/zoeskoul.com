@@ -1,0 +1,36 @@
+{
+  "subjectSlug": "python",
+  "catalogSlug": "python",
+  "profileId": "python",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "title": "Python for Beginners",
+  "description": "A practical beginner Python course from first program through functions, files, classes, testing, and a capstone project.",
+  "level": "beginner",
+  "audience": [
+    "absolute beginners",
+    "students learning programming fundamentals",
+    "tutoring students who need Python practice",
+    "learners preparing for data science, automation, or backend development"
+  ],
+  "goals": [
+    "Write and run beginner Python programs",
+    "Use variables, strings, numbers, conditionals, loops, collections, and functions",
+    "Read and write files safely",
+    "Handle common errors and debug simple programs",
+    "Build small projects with tests and clear organization"
+  ],
+  "teachingStyle": {
+    "tone": "friendly, practical, beginner-safe, and project-oriented",
+    "quizWeight": 0.35,
+    "projectWeight": 0.35,
+    "codeInputWeight": 0.5
+  },
+  "constraints": {
+    "moduleCount": 10,
+    "topicsPerModuleMin": 6,
+    "topicsPerModuleMax": 6
+  },
+  "courseSlug": "python-v2",
+  "trackSlug": "python"
+}

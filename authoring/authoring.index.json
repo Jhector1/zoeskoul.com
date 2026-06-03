@@ -24,14 +24,14 @@
       "subjectSlug": "python",
       "path": "subjects/python",
       "courseOrder": [
-        "python-for-beginners",
+        "python-v2",
         "python-data-functions",
         "applied-python-projects"
       ],
       "courses": [
         {
-          "courseSlug": "python-for-beginners",
-          "path": "subjects/python/courses/python-for-beginners/course.spec.json"
+          "courseSlug": "python-v2",
+          "path": "subjects/python/courses/python-v2/course.spec.json"
         },
         {
           "courseSlug": "python-data-functions",

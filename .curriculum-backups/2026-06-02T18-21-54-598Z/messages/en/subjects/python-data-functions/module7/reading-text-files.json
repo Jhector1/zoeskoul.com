@@ -1,0 +1,287 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "reading-text-files": {
+          "label": "Reading Text Files",
+          "summary": "Open files, read text, and close resources safely.",
+          "cards": {
+            "sketch0": {
+              "title": "Why read text files?"
+            },
+            "sketch1": {
+              "title": "Reading all text or line by line"
+            },
+            "sketch2": {
+              "title": "Relative paths and safe file access"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Reading text files practice"
+            }
+          },
+          "projectSteps": {
+            "ci_read_and_print": {
+              "title": "Print a file's contents"
+            },
+            "ci_first_line": {
+              "title": "Print only the first line"
+            },
+            "ci_count_lines": {
+              "title": "Count lines in a text file"
+            }
+          },
+          "quiz": {
+            "sc-read-mode": {
+              "title": "Read mode",
+              "prompt": "Which file mode is used to open a text file for reading?",
+              "hint": "Use the question wording and the lesson example to narrow the choices.",
+              "help": {
+                "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
+                "hint_1": "Compare each option to the exact topic named in the question.",
+                "hint_2": "Remove options that do not match the concept or evidence named in the question."
+              },
+              "options": {
+                "a": "r",
+                "b": "w",
+                "c": "a",
+                "d": "x"
+              }
+            },
+            "sc-relative-path": {
+              "title": "Relative path example",
+              "prompt": "Which path correctly refers to a file named `story.txt` inside a folder named `data`?",
+              "hint": "Use the folder name, then the file name.",
+              "help": {
+                "concept": "A relative path describes a file's location from the current workspace location using folder names separated by `/`.",
+                "hint_1": "The folder should come before the file name.",
+                "hint_2": "Choose the option that looks like folder slash file."
+              },
+              "options": {
+                "a": "story.txt/data",
+                "b": "data/story.txt",
+                "c": "/data/story.txt",
+                "d": "data-story.txt"
+              }
+            },
+            "mc-with-open-benefits": {
+              "title": "Why use with open",
+              "prompt": "Choose all true statements about using `with open(...) as file:` when reading text files.",
+              "hint": "Think about what `with` does for the file resource and how you access the file inside the block.",
+              "help": {
+                "concept": "`with open(...) as file:` creates a managed file block. You use the file variable inside the block, and Python handles closing the file afterward.",
+                "hint_1": "Look for statements about automatic closing and using the variable after `as`.",
+                "hint_2": "Two statements are correct: one about cleanup and one about the file variable name."
+              },
+              "options": {
+                "a": "It helps make sure the file is closed after the block ends.",
+                "b": "It creates a variable like `file` that you can call `.read()` on.",
+                "c": "It always writes new text into the file before reading.",
+                "d": "It only works for files in the same folder, not nested folders."
+              }
+            },
+            "mc-read-methods": {
+              "title": "Reading methods",
+              "prompt": "Choose all statements that are true about `read()` and `readlines()`.",
+              "hint": "One returns a single string, and the other returns a list of lines.",
+              "help": {
+                "concept": "`read()` gets the whole file as one string, while `readlines()` returns a list where each item is a line, often including newline characters.",
+                "hint_1": "Look for the options describing one big string and a list of lines.",
+                "hint_2": "Two options are correct: one mentions a single string, and one mentions newline characters in line items."
+              },
+              "options": {
+                "a": "`read()` can return the whole file as one string.",
+                "b": "`readlines()` returns a list of lines.",
+                "c": "`read()` always removes every newline character automatically.",
+                "d": "`readlines()` returns one number for each line."
+              }
+            },
+            "dr-read-file-steps": {
+              "title": "Order the reading steps",
+              "prompt": "Put these steps in the correct order for reading and printing a file's contents.",
+              "hint": "Start by opening the file, then read, then print.",
+              "help": {
+                "concept": "A basic file-reading flow is: open the file, read its contents into a variable, then use that value such as by printing it.",
+                "hint_1": "The file must be opened before `.read()` can be used.",
+                "hint_2": "After reading into a variable, the last step is showing the result in the output panel."
+              },
+              "tokens": {
+                "t1": "Open the file with `with open(..., \"r\") as file:`",
+                "t2": "Read the text with `file.read()`",
+                "t3": "Store the result in a variable",
+                "t4": "Print the variable"
+              }
+            },
+            "dr-build-path": {
+              "title": "Build a relative path",
+              "prompt": "Arrange the tokens to make the relative path to `report.txt` inside the `data` folder.",
+              "hint": "Arrange the code pieces in the order Python should run them.",
+              "help": {
+                "concept": "The pieces should form valid Python code in the order it should run.",
+                "hint_1": "Start with the line that sets up the Python action.",
+                "hint_2": "Place lines that depend on earlier values after those values exist."
+              },
+              "tokens": {
+                "t1": "data",
+                "t2": "/",
+                "t3": "report.txt"
+              }
+            },
+            "fb-read-call": {
+              "title": "Complete the read call",
+              "prompt": "Fill in the missing method name to read all text from an open file.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+              },
+              "template": "text = file.[blank1]()",
+              "choices": [
+                "read",
+                "write",
+                "close",
+                "open"
+              ]
+            },
+            "fb-open-mode": {
+              "title": "Complete the open mode",
+              "prompt": "Fill in the missing mode so the file is opened for reading.",
+              "hint": "Focus on the missing concept rather than the exact missing term.",
+              "help": {
+                "concept": "The blank should be completed with the term that fits the job being described.",
+                "hint_1": "Think about what the missing part needs to do in the statement.",
+                "hint_2": "Choose the term that best completes the meaning of the statement."
+              },
+              "template": "with open(\"notes.txt\", \"[blank1]\") as file:",
+              "choices": [
+                "r",
+                "w",
+                "a",
+                "x"
+              ]
+            },
+            "ci-read-and-print": {
+              "title": "Print a file's contents",
+              "prompt": "Open `data/message.txt`, read the file's contents, and print the text you find there.\n\nYour output should be exactly:\n`Hello from file reading!`.",
+              "hint": "Read the task \"Print a file's contents\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass"
+            },
+            "ci-first-line": {
+              "title": "Print only the first line",
+              "prompt": "Open `data/notes.txt`, read only the first line, and print it without the ending newline character.\n\nYour output should be exactly:\n`Apples`.",
+              "hint": "Read the task \"Print only the first line\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass"
+            },
+            "ci-count-lines": {
+              "title": "Count lines in a text file",
+              "prompt": "Open `data/list.txt`, count how many lines are in the file, and print that number.\n\nYour output should be exactly:\n`3`.",
+              "hint": "Read the task \"Count lines in a text file\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass"
+            },
+            "try-reading-text-files-checkpoint": {
+              "title": "Read a text file",
+              "prompt": "Read `data/note.txt` and print its contents without adding extra text. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Use `with open(\"data/note.txt\") as file:` and `file.read()`.",
+              "help": {
+                "concept": "File reading lets a program load text from disk.",
+                "hint_1": "Use `with open(\"data/note.txt\") as file:` and `file.read()`.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "# Read data/note.txt and print its contents.\n"
+            },
+            "try-reading-text-files-sketch0": {
+              "title": "Read and print a note file",
+              "prompt": "Open `note.txt`, read it, and print the saved text. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Why read text files?\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "# Read note.txt and print its contents without extra blank lines.\n"
+            },
+            "try-reading-text-files-sketch1": {
+              "title": "Print each line from a file",
+              "prompt": "Loop through a file one line at a time. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Reading all text or line by line\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "# Read names.txt and print each line without extra blank lines.\n"
+            },
+            "try-reading-text-files-sketch2": {
+              "title": "Count file lines",
+              "prompt": "Use a counter while reading a file. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Relative paths and safe file access\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "count = 0\n\n# Read names.txt, count the lines, and print count.\n"
+            }
+          },
+          "tryIt": {
+            "try_reading_text_files_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Read `data/note.txt` and print its contents without adding extra text."
+            },
+            "try_reading_text_files_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Open `note.txt`, read it, and print the saved text."
+            },
+            "try_reading_text_files_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Loop through a file one line at a time."
+            },
+            "try_reading_text_files_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Use a counter while reading a file."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "reading-text-files": {
+          "why-read-files": {
+            "title": "Why read text files?",
+            "bodyMarkdown": "Programs often need data that already exists in a file, such as notes, logs, or a list of names. Reading a text file lets your program bring that text into memory and use it.\n\nA beginner-friendly pattern is to use `with open(...)` so Python closes the file for you when you're done.\n\n```python\nwith open(\"notes.txt\", \"r\") as file:\n    text = file.read()\n    print(text)\n```\n\nStep by step:\n\n- `open(\"notes.txt\", \"r\")` opens the file in read mode.\n- `as file` gives that open file a variable name.\n- `file.read()` gets all the text from the file.\n- `print(text)` sends the text to the output panel.\n- `with` makes cleanup automatic.\n\nWorked example:\n\nIf `notes.txt` contains:\n\n```text\nBuy milk\nCall Sam\n```\n\nthen the program prints:\n\n```text\nBuy milk\nCall Sam\n```\n\nTry it yourself: imagine changing the file contents to three different lines. What would `print(text)` show?"
+          },
+          "read-vs-lines": {
+            "title": "Reading all text or line by line",
+            "bodyMarkdown": "You can read a whole file at once, or read its lines.\n\nReading the whole file:\n\n```python\nwith open(\"poem.txt\", \"r\") as file:\n    content = file.read()\n    print(content)\n```\n\nReading lines into a list:\n\n```python\nwith open(\"poem.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(lines)\n```\n\nWorked example:\n\nIf `poem.txt` contains:\n\n```text\nred\nblue\n```\n\nthen `file.read()` gives one string containing both lines, while `file.readlines()` gives a list like:\n\n```python\n['red\\n', 'blue\\n']\n```\n\nThat `\\n` means a newline character at the end of a line.\n\nYour turn: if a file has five short lines, which would be easier if you want the entire text as one block: `read()` or `readlines()`?\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "relative-paths-and-safety": {
+            "title": "Relative paths and safe file access",
+            "bodyMarkdown": "A relative path tells Python where a file is inside the lesson workspace, such as `data/story.txt`.\n\n```python\nwith open(\"data/story.txt\", \"r\") as file:\n    print(file.read())\n```\n\nHere:\n\n- `data/story.txt` means a file named `story.txt` inside the `data` folder.\n- You do not need an absolute computer-specific location.\n- In this lesson, use the provided files from the files panel.\n\nWorked example:\n\nIf the workspace includes a folder `data` and inside it a file `story.txt` with:\n\n```text\nChapter 1\n```\n\nthen the code prints:\n\n```text\nChapter 1\n```\n\nTry this: compare `story.txt` with `data/story.txt`. Which one works depends on where the file is located in the workspace.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

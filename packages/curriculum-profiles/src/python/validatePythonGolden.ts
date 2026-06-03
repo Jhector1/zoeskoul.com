@@ -56,6 +56,42 @@ function collectFixturePaths(exercise: ManifestCodeInput): Set<string> {
     return paths;
 }
 
+function collectWorkspaceProvidedPaths(
+    exercise: ManifestCodeInput,
+): Set<string> {
+    const files = [
+        exercise.starterFiles,
+        exercise.workspace?.starterFiles,
+        exercise.workspace?.files,
+        exercise.workspace?.initialFiles,
+        exercise.workspace?.workspaceFiles,
+    ];
+    const paths = new Set<string>();
+
+    for (const source of files) {
+        for (const file of normalizeWorkspaceFiles(source)) {
+            paths.add(file.path);
+        }
+    }
+
+    return paths;
+}
+
+function collectRequiredWorkspaceFiles(
+    exercise: ManifestCodeInput,
+): Set<string> {
+    const requiredFiles = [
+        ...(exercise.workspace?.workspaceExpectations?.requiredFiles ?? []),
+        ...(exercise.workspaceExpectations?.requiredFiles ?? []),
+    ];
+
+    return new Set(
+        requiredFiles
+            .map((filePath) => String(filePath ?? "").trim())
+            .filter(Boolean),
+    );
+}
+
 function normalizeFixtureFiles(
     files: ManifestFileFixture[] | undefined,
 ): Array<{ path: string; content: string }> {
@@ -209,6 +245,65 @@ function referencedReadFiles(source: string): string[] {
     return [...paths];
 }
 
+function referencedWriteFiles(source: string): string[] {
+    const paths = new Set<string>();
+    const pathVariables = new Map<string, string>();
+    const openPattern =
+        /open\s*\(\s*["'`]([^"'`]+)["'`]\s*(?:,\s*["'`]([^"'`]*)["'`])?/g;
+    const pathAssignmentPattern =
+        /\b([A-Za-z_]\w*)\s*=\s*Path\s*\(\s*["'`]([^"'`]+)["'`]\s*\)/g;
+    const pathOpenPattern =
+        /\bPath\s*\(\s*["'`]([^"'`]+)["'`]\s*\)\s*\.\s*open\s*\(\s*(?:["'`]([^"'`]*)["'`])?/g;
+    const variableOpenPattern =
+        /\b([A-Za-z_]\w*)\s*\.\s*open\s*\(\s*(?:["'`]([^"'`]*)["'`])?/g;
+    const writeTextPattern =
+        /Path\s*\(\s*["'`]([^"'`]+)["'`]\s*\)\.write_text\s*\(/g;
+
+    for (const match of source.matchAll(pathAssignmentPattern)) {
+        const variableName = match[1]?.trim();
+        const filePath = match[2]?.trim();
+        if (!variableName || !filePath) continue;
+        pathVariables.set(variableName, filePath);
+    }
+
+    for (const match of source.matchAll(openPattern)) {
+        if ((match.index ?? 0) > 0 && source[(match.index ?? 0) - 1] === ".") continue;
+        const filePath = match[1]?.trim();
+        const mode = (match[2] ?? "r").trim();
+        if (!filePath) continue;
+        if (!/[wax+]/.test(mode)) continue;
+        paths.add(filePath);
+    }
+
+    for (const match of source.matchAll(pathOpenPattern)) {
+        const filePath = match[1]?.trim();
+        const mode = (match[2] ?? "r").trim();
+        if (!filePath) continue;
+        if (!/[wax+]/.test(mode)) continue;
+        paths.add(filePath);
+    }
+
+    for (const match of source.matchAll(variableOpenPattern)) {
+        const variableName = match[1]?.trim();
+        const mode = (match[2] ?? "r").trim();
+        if (!variableName) continue;
+        if (!/[wax+]/.test(mode)) continue;
+        const filePath = pathVariables.get(variableName);
+        if (filePath) {
+            paths.add(filePath);
+        }
+    }
+
+    for (const match of source.matchAll(writeTextPattern)) {
+        const filePath = match[1]?.trim();
+        if (filePath) {
+            paths.add(filePath);
+        }
+    }
+
+    return [...paths];
+}
+
 function extractSolutionCode(exercise: ManifestCodeInput): string {
     switch (exercise.recipe.type) {
         case "fixed_tests":
@@ -253,8 +348,11 @@ export async function validatePythonGolden(args: {
         }
 
         const fixturePaths = collectFixturePaths(exercise);
+        const workspaceProvidedPaths = collectWorkspaceProvidedPaths(exercise);
+        const requiredWorkspaceFiles = collectRequiredWorkspaceFiles(exercise);
         const perTestFixturePaths = collectTestFixturePaths(exercise);
         const missingPaths = referencedReadFiles(code).filter((filePath) => !fixturePaths.has(filePath));
+        const writtenPaths = new Set(referencedWriteFiles(code));
         const invalidFixtures = [
             ...normalizeWorkspaceFiles(exercise.workspace?.files),
             ...normalizeWorkspaceFiles(exercise.workspace?.initialFiles),
@@ -277,6 +375,23 @@ export async function validatePythonGolden(args: {
                 exerciseId: exercise.id,
                 message:
                     `Exercise "${exercise.id}" has invalid file fixtures. Keep fixture paths relative and short, and keep fixture contents short without long blank-line runs.`,
+            });
+            continue;
+        }
+
+        const requiredOutputFiles = [...requiredWorkspaceFiles].filter((filePath) =>
+            !workspaceProvidedPaths.has(filePath) && writtenPaths.has(filePath)
+        );
+
+        if (requiredOutputFiles.length > 0) {
+            blockedExerciseIds.add(exercise.id);
+            report.issues.push({
+                code: "PYTHON_WORKSPACE_REQUIRED_FILE_IS_OUTPUT",
+                category: "runtime",
+                severity: "error",
+                exerciseId: exercise.id,
+                message:
+                    `Exercise "${exercise.id}" requiredFiles contains output file ${requiredOutputFiles.join(", ")}; browser will fail before runtime.`,
             });
             continue;
         }

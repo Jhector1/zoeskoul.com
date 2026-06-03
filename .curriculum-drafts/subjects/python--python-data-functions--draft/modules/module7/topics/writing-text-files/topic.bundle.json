@@ -339,9 +339,7 @@
         ],
         "workspaceExpectations": {
           "requiredFolders": [],
-          "requiredFiles": [
-            "note.txt"
-          ]
+          "requiredFiles": []
         }
       },
       "showExpectedExample": true,
@@ -351,7 +349,14 @@
           {
             "stdin": "",
             "stdout": "Hello from a file!\n",
-            "match": "exact"
+            "match": "exact",
+            "files": [
+              {
+                "path": "note.txt",
+                "content": "",
+                "readOnly": false
+              }
+            ]
           }
         ],
         "solutionCode": "with open(\"note.txt\", \"w\") as file:\n    file.write(\"Hello from a file!\")\n\nwith open(\"note.txt\") as file:\n    print(file.read())\n",
@@ -389,9 +394,7 @@
       ],
       "workspaceExpectations": {
         "requiredFolders": [],
-        "requiredFiles": [
-          "note.txt"
-        ]
+        "requiredFiles": []
       },
       "sourceChecks": [
         {
@@ -448,9 +451,7 @@
         ],
         "workspaceExpectations": {
           "requiredFolders": [],
-          "requiredFiles": [
-            "greeting.txt"
-          ]
+          "requiredFiles": []
         }
       },
       "showExpectedExample": true,
@@ -460,12 +461,26 @@
           {
             "stdin": "zoe\n",
             "stdout": "Hello, Zoe!\n",
-            "match": "exact"
+            "match": "exact",
+            "files": [
+              {
+                "path": "greeting.txt",
+                "content": "",
+                "readOnly": false
+              }
+            ]
           },
           {
             "stdin": "Mina\n",
             "stdout": "Hello, Mina!\n",
-            "match": "exact"
+            "match": "exact",
+            "files": [
+              {
+                "path": "greeting.txt",
+                "content": "",
+                "readOnly": false
+              }
+            ]
           }
         ],
         "solutionCode": "name = input().strip().title()\n\nwith open(\"greeting.txt\", \"w\") as file:\n    file.write(f\"Hello, {name}!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())\n",
@@ -503,9 +518,7 @@
       ],
       "workspaceExpectations": {
         "requiredFolders": [],
-        "requiredFiles": [
-          "greeting.txt"
-        ]
+        "requiredFiles": []
       },
       "sourceChecks": [
         {
@@ -562,9 +575,7 @@
         ],
         "workspaceExpectations": {
           "requiredFolders": [],
-          "requiredFiles": [
-            "shopping.txt"
-          ]
+          "requiredFiles": []
         }
       },
       "showExpectedExample": true,
@@ -574,12 +585,26 @@
           {
             "stdin": "bread\napples\n",
             "stdout": "Bread\nApples\n",
-            "match": "exact"
+            "match": "exact",
+            "files": [
+              {
+                "path": "shopping.txt",
+                "content": "",
+                "readOnly": false
+              }
+            ]
           },
           {
             "stdin": "milk\neggs\n",
             "stdout": "Milk\nEggs\n",
-            "match": "exact"
+            "match": "exact",
+            "files": [
+              {
+                "path": "shopping.txt",
+                "content": "",
+                "readOnly": false
+              }
+            ]
           }
         ],
         "solutionCode": "first_item = input().strip().title()\nsecond_item = input().strip().title()\n\nwith open(\"shopping.txt\", \"w\") as file:\n    file.write(first_item + \"\\n\")\n    file.write(second_item + \"\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")\n",
@@ -617,9 +642,7 @@
       ],
       "workspaceExpectations": {
         "requiredFolders": [],
-        "requiredFiles": [
-          "shopping.txt"
-        ]
+        "requiredFiles": []
       },
       "sourceChecks": [
         {
@@ -820,9 +843,7 @@
         ],
         "workspaceExpectations": {
           "requiredFolders": [],
-          "requiredFiles": [
-            "note.txt"
-          ]
+          "requiredFiles": []
         }
       },
       "showExpectedExample": true,
@@ -832,7 +853,14 @@
           {
             "stdin": "",
             "stdout": "Done\n",
-            "match": "exact"
+            "match": "exact",
+            "files": [
+              {
+                "path": "note.txt",
+                "content": "",
+                "readOnly": false
+              }
+            ]
           }
         ],
         "solutionCode": "with open('note.txt', 'w') as file:\n    file.write('Done')\n\nwith open('note.txt') as file:\n    print(file.read())\n",
@@ -861,9 +889,7 @@
       },
       "workspaceExpectations": {
         "requiredFolders": [],
-        "requiredFiles": [
-          "note.txt"
-        ]
+        "requiredFiles": []
       },
       "sourceChecks": [
         {
@@ -929,9 +955,7 @@
         ],
         "workspaceExpectations": {
           "requiredFolders": [],
-          "requiredFiles": [
-            "log.txt"
-          ]
+          "requiredFiles": []
         }
       },
       "showExpectedExample": true,
@@ -941,7 +965,14 @@
           {
             "stdin": "",
             "stdout": "Start\nEnd\n",
-            "match": "exact"
+            "match": "exact",
+            "files": [
+              {
+                "path": "log.txt",
+                "content": "",
+                "readOnly": false
+              }
+            ]
           }
         ],
         "solutionCode": "with open('log.txt', 'w') as file:\n    file.write('Start\\n')\nwith open('log.txt', 'a') as file:\n    file.write('End')\nwith open('log.txt') as file:\n    print(file.read())\n",
@@ -970,9 +1001,7 @@
       },
       "workspaceExpectations": {
         "requiredFolders": [],
-        "requiredFiles": [
-          "log.txt"
-        ]
+        "requiredFiles": []
       },
       "sourceChecks": [
         {
@@ -1038,9 +1067,7 @@
         ],
         "workspaceExpectations": {
           "requiredFolders": [],
-          "requiredFiles": [
-            "report.txt"
-          ]
+          "requiredFiles": []
         }
       },
       "showExpectedExample": true,
@@ -1050,7 +1077,14 @@
           {
             "stdin": "",
             "stdout": "Ava: 92\n",
-            "match": "exact"
+            "match": "exact",
+            "files": [
+              {
+                "path": "report.txt",
+                "content": "",
+                "readOnly": false
+              }
+            ]
           }
         ],
         "solutionCode": "name = 'Ava'\nscore = 92\nwith open('report.txt', 'w') as file:\n    file.write(f'{name}: {score}')\nwith open('report.txt') as file:\n    print(file.read())\n",
@@ -1079,9 +1113,7 @@
       },
       "workspaceExpectations": {
         "requiredFolders": [],
-        "requiredFiles": [
-          "report.txt"
-        ]
+        "requiredFiles": []
       },
       "sourceChecks": [
         {

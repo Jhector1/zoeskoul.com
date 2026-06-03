@@ -5,13 +5,13 @@
   "title": "Python",
   "summary": "A beginner Python path from first programs to functions, data structures, and applied projects.",
   "courseOrder": [
-    "python-for-beginners",
+    "python-v2",
     "python-data-functions",
     "applied-python-projects"
   ],
   "milestones": [
     {
-      "courseSlug": "python-for-beginners",
+      "courseSlug": "python-v2",
       "outcome": "Write small interactive Python programs with variables, input, conditionals, and loops."
     },
     {

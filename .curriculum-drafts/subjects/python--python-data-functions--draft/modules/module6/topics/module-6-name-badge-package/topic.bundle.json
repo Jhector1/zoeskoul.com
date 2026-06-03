@@ -155,6 +155,18 @@
             "content": "def clean_name(text):\n    return text.strip().title()\n",
             "language": "python"
           }
+        ],
+        "files": [
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          }
         ]
       },
       "showExpectedExample": true,
@@ -340,6 +352,23 @@
             "isEntry": true,
             "entry": true
           },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+            "language": "python"
+          }
+        ],
+        "files": [
           {
             "path": "tools/__init__.py",
             "content": "",
@@ -549,6 +578,23 @@
             "isEntry": true,
             "entry": true
           },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
+            "language": "python"
+          }
+        ],
+        "files": [
           {
             "path": "tools/__init__.py",
             "content": "",
@@ -777,6 +823,23 @@
             "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
             "language": "python"
           }
+        ],
+        "files": [
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
+            "language": "python"
+          }
         ]
       },
       "showExpectedExample": true,
@@ -885,11 +948,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0",
       "language": "python",
-      "starterCode": "def clean_name(text):\n    return text.strip().title()\n\n# Print clean_name('  ava  ').\n",
+      "starterCode": "# Create tools/names.py with clean_name(text).\n# Import clean_name from tools.names.\n# Print clean_name(\"  ava  \").\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def clean_name(text):\n    return text.strip().title()\n\n# Print clean_name('  ava  ').\n",
+          "content": "# Create tools/names.py with clean_name(text).\n# Import clean_name from tools.names.\n# Print clean_name(\"  ava  \").\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -898,20 +961,25 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def clean_name(text):\n    return text.strip().title()\n\nprint(clean_name('  ava  '))\n",
+          "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "tools/names.py",
+          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "language": "python"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def clean_name(text):\n    return text.strip().title()\n\n# Print clean_name('  ava  ').\n",
+        "starterCode": "# Create tools/names.py with clean_name(text).\n# Import clean_name from tools.names.\n# Print clean_name(\"  ava  \").\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n\n# Print clean_name('  ava  ').\n",
+            "content": "# Create tools/names.py with clean_name(text).\n# Import clean_name from tools.names.\n# Print clean_name(\"  ava  \").\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -920,46 +988,126 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n\nprint(clean_name('  ava  '))\n",
+            "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
           }
-        ]
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "tools"
+          ],
+          "requiredFiles": [
+            "tools/names.py"
+          ]
+        }
       },
       "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "def clean_name(text):\n    return text.strip().title()\n\nprint(clean_name('  ava  '))\n",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "clean_name",
-            "args": [
-              "  aVA smith  "
-            ],
-            "expected": "Ava Smith"
-          },
-          {
-            "type": "function_returns",
-            "functionName": "clean_name",
-            "args": [
-              "zoe"
-            ],
-            "expected": "Zoe"
+            "stdin": "",
+            "stdout": "Ava\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "tools/__init__.py",
+                "content": "# tools package\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/names.py",
+                "content": "def clean_name(text):\n    return text.strip().title()\n",
+                "language": "python"
+              }
+            ]
           }
         ],
+        "solutionCode": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n\nprint(clean_name('  ava  '))\n",
+            "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.names",
+            "importName": "clean_name",
+            "path": "main.py",
+            "message": "Import clean_name from tools.names."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+clean_name\\s*\\(",
+            "path": "tools/names.py",
+            "message": "Define clean_name in tools/names.py."
+          },
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "path": "tools/names.py",
+            "message": "clean_name should strip spaces."
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "path": "tools/names.py",
+            "message": "clean_name should title-case the name."
           }
         ]
-      }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "tools"
+        ],
+        "requiredFiles": [
+          "tools/names.py"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.names",
+          "importName": "clean_name",
+          "path": "main.py",
+          "message": "Import clean_name from tools.names."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+clean_name\\s*\\(",
+          "path": "tools/names.py",
+          "message": "Define clean_name in tools/names.py."
+        },
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "path": "tools/names.py",
+          "message": "clean_name should strip spaces."
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "path": "tools/names.py",
+          "message": "clean_name should title-case the name."
+        }
+      ]
     }
   ]
 }

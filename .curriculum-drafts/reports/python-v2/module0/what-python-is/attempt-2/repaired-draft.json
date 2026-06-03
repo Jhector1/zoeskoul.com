@@ -1,0 +1,221 @@
+{
+  "title": "What Python Is Used For",
+  "summary": "Understand Python's role in automation, web apps, data, beginner programming, and AI.",
+  "minutes": 12,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Python",
+      "bodyMarkdown": "Python is a versatile programming language used in various fields such as web development, data analysis, artificial intelligence, and automation. Its simple syntax makes it a great choice for beginners.\n\n```python\n# This is a simple Python program\nprint(\"Hello, World!\")\n```\n\nTry it yourself: Change the message inside the `print` function and run the code to see the new output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "sketch2",
+      "title": "Python in Data Science",
+      "bodyMarkdown": "Python is widely used in data science for data analysis and visualization. Libraries like Pandas and Matplotlib make it easy to manipulate and visualize data.\n\n```python\nimport pandas as pd\n\ndata = {'Name': ['John', 'Anna', 'Peter'], 'Age': [28, 24, 35]}\ndf = pd.DataFrame(data)\nprint(df)\n```\n\nTry this: Add a new column to the data dictionary and see how it changes the DataFrame.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Python Use Cases",
+      "prompt": "Which of the following is NOT a common use case for Python?",
+      "options": [
+        "Web development",
+        "Data analysis",
+        "Hardware design",
+        "Automation"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Python Syntax",
+      "prompt": "What is the correct way to print a message in Python?",
+      "options": [
+        "echo 'Hello, World!'",
+        "print('Hello, World!')",
+        "printf('Hello, World!')",
+        "System.out.println('Hello, World!')"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Remember the function used to display output.",
+      "help": {
+        "concept": "The `print` function is used to display output in Python.",
+        "hint_1": "The function name is `print`.",
+        "hint_2": "The message should be enclosed in parentheses."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Python Features",
+      "prompt": "Select all features that make Python popular.",
+      "options": [
+        "Easy to read syntax",
+        "Limited libraries",
+        "Strong community support",
+        "Difficult to learn"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Think about Python's syntax and libraries.",
+      "help": {
+        "concept": "Python is known for its readability and extensive libraries.",
+        "hint_1": "Consider Python's ease of use and community support.",
+        "hint_2": "Python has a large standard library and is easy to read."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Python Libraries",
+      "prompt": "Which of the following are popular Python libraries?",
+      "options": [
+        "Pandas",
+        "Flask",
+        "React",
+        "NumPy"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "drag_reorder",
+      "title": "Python Program Flow",
+      "prompt": "Arrange the steps to execute a Python program in the correct order.",
+      "tokens": [
+        "Write code in the code editor",
+        "Click Run",
+        "Check the output panel"
+      ],
+      "correctOrder": [
+        "Write code in the code editor",
+        "Click Run",
+        "Check the output panel"
+      ],
+      "hint": "Think about the sequence from writing code to seeing the output.",
+      "help": {
+        "concept": "The typical flow involves writing code, running it, and observing the output.",
+        "hint_1": "Start with writing the code.",
+        "hint_2": "End with checking the output."
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "drag_reorder",
+      "title": "Python Development Steps",
+      "prompt": "Order the steps involved in developing a Python script.",
+      "tokens": [
+        "Plan the script",
+        "Write the code",
+        "Test the script"
+      ],
+      "correctOrder": [
+        "Plan the script",
+        "Write the code",
+        "Test the script"
+      ],
+      "hint": "Consider the process from planning to execution.",
+      "help": {
+        "concept": "Developing a script involves planning, coding, and testing.",
+        "hint_1": "Start with planning the script.",
+        "hint_2": "End with testing the script."
+      }
+    },
+    {
+      "id": "quiz7",
+      "kind": "fill_blank_choice",
+      "title": "Python Variable Assignment",
+      "prompt": "Complete the code to assign a value to a variable.",
+      "template": "x = [blank1]",
+      "choices": [
+        "10",
+        "x",
+        "print"
+      ],
+      "correctValue": "10",
+      "hint": "Remember the syntax for variable assignment.",
+      "help": {
+        "concept": "Variable assignment in Python uses the `=` operator.",
+        "hint_1": "The variable name comes first, followed by `=`.",
+        "hint_2": "The value is assigned after the `=`."
+      }
+    },
+    {
+      "id": "quiz8",
+      "kind": "fill_blank_choice",
+      "title": "Python Print Statement",
+      "prompt": "Fill in the blank to complete the print statement.",
+      "template": "[blank1](\"Hello, World!\")",
+      "choices": [
+        "print",
+        "echo",
+        "printf"
+      ],
+      "correctValue": "print",
+      "hint": "Recall the function used to display text.",
+      "help": {
+        "concept": "The `the missing term` function is used to display text in Python.",
+        "hint_1": "The function name is `the missing term`.",
+        "hint_2": "The text should be enclosed in parentheses."
+      }
+    },
+    {
+      "id": "policy_code_input_1",
+      "kind": "code_input",
+      "title": "Print whether a number is positive",
+      "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+      "starterCode": "n = int(input())\n# Your code here",
+      "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
+      "tests": [
+        {
+          "stdout": "True\n",
+          "stdin": "5\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "False\n",
+          "stdin": "0\n",
+          "match": "exact"
+        }
+      ],
+      "hint": "Use a conditional check and return a boolean result.",
+      "help": {
+        "concept": "A conditional can decide which boolean value to print based on a comparison.",
+        "hint_1": "Compare the number with zero inside an if statement.",
+        "hint_2": "Print True when the condition passes; otherwise print False."
+      },
+      "recipeType": "fixed_tests"
+    }
+  ],
+  "projectDraft": {
+    "title": "Simple Python Program",
+    "stepIds": [
+      "quiz9"
+    ]
+  }
+}

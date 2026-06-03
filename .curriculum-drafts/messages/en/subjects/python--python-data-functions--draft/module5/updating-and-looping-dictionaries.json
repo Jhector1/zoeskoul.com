@@ -133,9 +133,9 @@
               "prompt": "Choose the missing code to remove the key `\"done\"` from the dictionary.",
               "hint": "Read the sentence around the blank and decide what role the missing word plays.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "The blank needs the exact Python word or symbol that makes the line do what the prompt describes.",
+                "hint_1": "Look at the code around the blank to decide whether you need a keyword, a value, a method, or a key.",
+                "hint_2": "Choose the option that makes the full line valid Python and gives the result the prompt asks for."
               },
               "template": "[blank1] tasks[\"done\"]",
               "choices": [
@@ -164,8 +164,8 @@
             },
             "ci-update-score": {
               "title": "Update one score and return the dictionary",
-              "prompt": "Complete this project step: Update one score and return the dictionary.\n\nRequirements:\n- update or add the score, then return the dictionary\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Write `update_score(scores, name, new_score)` so it updates the existing entry for `name` or adds it if it is missing, then returns the `scores` dictionary.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
@@ -175,7 +175,7 @@
             },
             "ci-remove-key": {
               "title": "Remove a key if it exists",
-              "prompt": "Complete this project step: Remove a key if it exists.\n\nRequirements:\n- remove the key when it is present, then return the dictionary\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "prompt": "Write `remove_item(data, key_name)` so it removes `key_name` from the dictionary when that key is present, then returns the dictionary.",
               "hint": "Read the task \"Remove a key if it exists\" and identify the required result.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -186,8 +186,8 @@
             },
             "ci-format-items": {
               "title": "Build lines from dictionary pairs",
-              "prompt": "Complete this project step: Build lines from dictionary pairs.\n\nRequirements:\n- return a list like [\"pens: 3\", \"paper: 2\"]\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Write `format_inventory(items)` so it builds and returns a list of strings in the format `\"name: count\"`, such as `\"pens: 3\"`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
@@ -197,7 +197,7 @@
             },
             "try-updating-and-looping-dictionaries-checkpoint": {
               "title": "Update and loop through scores",
-              "prompt": "Update Mia’s score to `91`, then print each name and score as `name: score`. Finish the small program, run it, and check that the result fits the scenario.",
+              "prompt": "Update Mia’s score to `91`, then print each name and score as `name: score`.",
               "hint": "Assign to `scores[\"Mia\"]`, then loop with `.items()`.",
               "help": {
                 "concept": "Dictionaries can be updated by assigning to an existing key.",
@@ -208,34 +208,34 @@
             },
             "try-updating-and-looping-dictionaries-sketch0": {
               "title": "Update a count",
-              "prompt": "Read, update, and store a dictionary value. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "prompt": "Read, update, and store a dictionary value.",
+              "hint": "Increase apples by 3.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Adding, changing, and removing dictionary entries\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "Increase apples by 3.",
+                "hint_1": "Increase apples by 3, then print counts.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
               "starterCode": "counts = {'apples': 2, 'bananas': 1}\n\n# Increase apples by 3.\n# Then print counts.\n"
             },
             "try-updating-and-looping-dictionaries-sketch1": {
               "title": "Print inventory lines",
-              "prompt": "Use `.items()` to loop through keys and values together. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "prompt": "Use `.items()` to loop through keys and values together.",
+              "hint": "Loop through inventory and print lines like: pens: 3.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Looping through keys and values\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "Loop through inventory and print lines like: pens: 3.",
+                "hint_1": "Write the line for this step, then run the program to see what changes.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
               "starterCode": "inventory = {'pens': 3, 'markers': 2}\n\n# Loop through inventory and print lines like: pens: 3\n"
             },
             "try-updating-and-looping-dictionaries-sketch2": {
               "title": "Build a length dictionary",
-              "prompt": "Loop through a list and fill a dictionary. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "prompt": "Loop through a list and fill a dictionary.",
+              "hint": "Store each word's length in lengths.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Common dictionary patterns\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "Store each word's length in lengths.",
+                "hint_1": "Store each word's length in lengths, then print lengths.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
               "starterCode": "words = ['red', 'blue']\nlengths = {}\n\n# Store each word's length in lengths.\n# Then print lengths.\n"
             }
@@ -269,15 +269,15 @@
         "updating-and-looping-dictionaries": {
           "dict-update-basics": {
             "title": "Adding, changing, and removing dictionary entries",
-            "bodyMarkdown": "A dictionary stores data as **key-value pairs**. You can change a dictionary after creating it.\n\nHere is a simple example:\n\n```python\nscores = {\"Ava\": 8, \"Ben\": 5}\n\nscores[\"Cara\"] = 7\nscores[\"Ben\"] = 6\ndel scores[\"Ava\"]\n\nprint(scores)\n```\n\nStep by step:\n\n- `scores[\"Cara\"] = 7` adds a new key called `\"Cara\"`.\n- `scores[\"Ben\"] = 6` updates the existing value for `\"Ben\"`.\n- `del scores[\"Ava\"]` removes the key `\"Ava\"` and its value.\n\nThe output is:\n\n```python\n{'Ben': 6, 'Cara': 7}\n```\n\nA useful rule:\n\n- If the key does **not** exist, assignment adds it.\n- If the key **does** exist, assignment updates it.\n\nTry it yourself: change the value for `\"Cara\"`, add one more student, and run the code again to see the new dictionary."
+            "bodyMarkdown": "A dictionary stores data as **key-value pairs**. You can change a dictionary after creating it.\n\nHere is a simple example:\n\n```python\nscores = {\"Ava\": 8, \"Ben\": 5}\n\nscores[\"Cara\"] = 7\nscores[\"Ben\"] = 6\ndel scores[\"Ava\"]\n\nprint(scores)\n```\n\nStep by step:\n\n- `scores[\"Cara\"] = 7` adds a new key called `\"Cara\"`.\n- `scores[\"Ben\"] = 6` updates the existing value for `\"Ben\"`.\n- `del scores[\"Ava\"]` removes the key `\"Ava\"` and its value.\n\nThe output is:\n\n```python\n{'Ben': 6, 'Cara': 7}\n```\n\nA useful rule:\n\n- If the key does **not** exist, assignment adds it.\n- If the key **does** exist, assignment updates it."
           },
           "dict-looping": {
             "title": "Looping through keys and values",
-            "bodyMarkdown": "You can loop through a dictionary to work with its data.\n\nIf you loop over the dictionary directly, you get its **keys**:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item in prices:\n    print(item)\n```\n\nThis prints the keys one at a time:\n\n```python\napple\nbanana\npear\n```\n\nIf you want both the key and the value together, use `.items()`:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item, price in prices.items():\n    print(item, price)\n```\n\nLine by line:\n\n- `prices.items()` gives each key-value pair.\n- `item, price` unpacks each pair into two variables.\n- `print(item, price)` shows both pieces of data.\n\nPossible output:\n\n```python\napple 2\nbanana 1\npear 3\n```\n\nYour turn: change the dictionary to store game scores or pet names, then loop with `.items()` and print each pair."
+            "bodyMarkdown": "You can loop through a dictionary to work with its data.\n\nIf you loop over the dictionary directly, you get its **keys**:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item in prices:\n    print(item)\n```\n\nThis prints the keys one at a time:\n\n```python\napple\nbanana\npear\n```\n\nIf you want both the key and the value together, use `.items()`:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item, price in prices.items():\n    print(item, price)\n```\n\nLine by line:\n\n- `prices.items()` gives each key-value pair.\n- `item, price` unpacks each pair into two variables.\n- `print(item, price)` shows both pieces of data.\n\nPossible output:\n\n```python\napple 2\nbanana 1\npear 3\n```"
           },
           "dict-common-patterns": {
             "title": "Common dictionary patterns",
-            "bodyMarkdown": "A common pattern is to update values and then loop through the final result.\n\nExample:\n\n```python\ninventory = {\"pens\": 10, \"notebooks\": 4}\n\ninventory[\"pens\"] = inventory[\"pens\"] - 2\ninventory[\"erasers\"] = 6\n\nfor name, count in inventory.items():\n    print(name, count)\n```\n\nWhat happens here?\n\n- `inventory[\"pens\"]` starts at `10`.\n- `inventory[\"pens\"] - 2` gives `8`, so the value is updated.\n- `inventory[\"erasers\"] = 6` adds a new entry.\n- The loop prints each item and its count.\n\nThis kind of pattern is useful for contact books, scoreboards, and inventory trackers.\n\nTry this: start with a dictionary of two foods and quantities, update one quantity, add a new food, and print all entries.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "A common pattern is to update values and then loop through the final result.\n\nExample:\n\n```python\ninventory = {\"pens\": 10, \"notebooks\": 4}\n\ninventory[\"pens\"] = inventory[\"pens\"] - 2\ninventory[\"erasers\"] = 6\n\nfor name, count in inventory.items():\n    print(name, count)\n```\n\nWhat happens here?\n\n- `inventory[\"pens\"]` starts at `10`.\n- `inventory[\"pens\"] - 2` gives `8`, so the value is updated.\n- `inventory[\"erasers\"] = 6` adds a new entry.\n- The loop prints each item and its count.\n\nThis kind of pattern is useful for contact books, scoreboards, and inventory trackers."
           }
         }
       }

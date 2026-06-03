@@ -167,8 +167,8 @@
             },
             "ci-print-clean-names": {
               "title": "Print cleaned names from a CSV file",
-              "prompt": "Complete this project step: Print cleaned names from a CSV file.\n\nRequirements:\n- print the cleaned name\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `Ava\nBen`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Read `students.csv` with `csv.DictReader`, clean each name as you loop through the rows, and print the cleaned names.\n\nYour output should be exactly:\n`Ava`\n`Ben`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
@@ -178,8 +178,8 @@
             },
             "ci-sum-valid-scores": {
               "title": "Sum valid scores from CSV",
-              "prompt": "Complete this project step: Sum valid scores from CSV.\n\nRequirements:\n- try to convert the cleaned score and add it to total\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `16`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Read `scores.csv`, clean each score, try to convert it to an integer, and add only the valid numbers to `total`. Print `total` after the loop.\n\nYour output should be exactly:\n`16`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
@@ -189,8 +189,8 @@
             },
             "ci-write-summary-file": {
               "title": "Write a CSV summary file",
-              "prompt": "Complete this project step: Write a CSV summary file.\n\nRequirements:\n- update valid_rows and total_score for rows with valid integer scores\n- write summary.txt, then print its contents\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `valid_rows: 2\ntotal_score: 16`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Build a short report from `scores.csv`. As you loop, update `valid_rows` and `total_score` for rows with valid integer scores, then write those results to `summary.txt` and print the file contents.\n\nYour output should be exactly:\n`valid_rows: 2`\n`total_score: 16`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
@@ -199,66 +199,66 @@
               "starterCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # update valid_rows and total_score for rows with valid integer scores\n        pass\n\n# write summary.txt, then print its contents"
             },
             "try-simple-csv-processing-checkpoint": {
-              "title": "Split a CSV row",
-              "prompt": "Read one CSV row like `Ava,92`. Print the name on one line and the score on the next line. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Use `.split(\",\")`.",
+              "title": "Read the first CSV row",
+              "prompt": "Open `scores.csv` with `csv.DictReader`, read the first row, and print the name on one line and the score on the next line.",
+              "hint": "Import `csv`, create `csv.DictReader(file)`, then use the first row.",
               "help": {
-                "concept": "CSV-style rows can be split into fields with a delimiter.",
-                "hint_1": "Use `.split(\",\")`.",
-                "hint_2": "Run your code and compare the output with the expected result."
+                "concept": "This card starts the lesson with a real CSV file instead of a hard-coded string row.",
+                "hint_1": "Use `import csv` and `with open(\"scores.csv\") as file:`.",
+                "hint_2": "Create `reader = csv.DictReader(file)`, get the first row, and print `row[\"name\"]` and `row[\"score\"]`."
               },
-              "starterCode": "row = input()\n\n# Split the row and print the name and score.\n"
+              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Print the first row name, then the first row score.\n"
             },
             "try-simple-csv-processing-sketch0": {
-              "title": "Split one CSV row",
-              "prompt": "Use `split(',')` to separate comma-delimited fields. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "title": "Clean one CSV row from a file",
+              "prompt": "Open `scores.csv` with `csv.DictReader`, read the first row, strip spaces from the `name` and `score`, and print each cleaned value on its own line.",
+              "hint": "Read the first row from `csv.DictReader`, then use `.strip()` on both values.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Reading CSV rows as dictionaries\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "This card practices cleaning text values after reading them from a CSV file.",
+                "hint_1": "Use `row[\"name\"].strip()` and `row[\"score\"].strip()`.",
+                "hint_2": "Print the cleaned name first, then the cleaned score."
               },
-              "starterCode": "row = 'Ava,92'\n\n# Split row into name and score. Print name, then score.\n"
+              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Read the first row, strip the name and score, and print them on separate lines.\n"
             },
             "try-simple-csv-processing-sketch1": {
-              "title": "Process CSV rows",
-              "prompt": "Loop through CSV-style rows and split each one. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "title": "Loop through CSV rows",
+              "prompt": "Open `scores.csv` with `csv.DictReader`, loop through every row, and print each one as `name: score`.",
+              "hint": "Loop through the reader and build one formatted line from each row.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Cleaning values from CSV rows\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "This card practices row-by-row CSV processing with named columns.",
+                "hint_1": "Use `for row in reader:` after you create `csv.DictReader(file)`.",
+                "hint_2": "Print `f\"{row[\"name\"]}: {row[\"score\"]}\"` for each row."
               },
-              "starterCode": "rows = ['Ava,92', 'Mia,85']\n\n# Print each row as name: score.\n"
+              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Loop through the rows and print each one as name: score.\n"
             },
             "try-simple-csv-processing-sketch2": {
-              "title": "Total CSV scores",
-              "prompt": "Convert score strings to integers before adding them. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "title": "Add CSV scores",
+              "prompt": "Open `scores.csv` with `csv.DictReader`, convert each score to an integer, add the scores into `total`, and print `total`.",
+              "hint": "Loop through the reader, convert `row[\"score\"]` with `int(...)`, and add it to `total`.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Skipping bad rows safely\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "This card practices the full CSV pattern: read rows, convert score text, and do math safely.",
+                "hint_1": "Start with `total = 0`, then loop through `csv.DictReader(file)`.",
+                "hint_2": "Use `int(row[\"score\"])` inside the loop before adding to `total`."
               },
-              "starterCode": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\n\n# Add the numeric scores and print total.\n"
+              "starterCode": "import csv\n\ntotal = 0\n\n# Open scores.csv with csv.DictReader.\n# Convert each score to int, add it into total, and print total.\n"
             }
           },
           "tryIt": {
             "try_simple_csv_processing_checkpoint": {
               "title": "Try it yourself",
-              "prompt": "Read one CSV row like `Ava,92`. Print the name on one line and the score on the next line."
+              "prompt": "Open `scores.csv` with `csv.DictReader`, read the first row, and print the name on one line and the score on the next line."
             },
             "try_simple_csv_processing_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Use `split(',')` to separate comma-delimited fields."
+              "prompt": "Open `scores.csv` with `csv.DictReader`, read the first row, strip spaces from the `name` and `score`, and print each cleaned value on its own line."
             },
             "try_simple_csv_processing_sketch1": {
               "title": "Try it yourself",
-              "prompt": "Loop through CSV-style rows and split each one."
+              "prompt": "Open `scores.csv` with `csv.DictReader`, loop through every row, and print each one as `name: score`."
             },
             "try_simple_csv_processing_sketch2": {
               "title": "Try it yourself",
-              "prompt": "Convert score strings to integers before adding them."
+              "prompt": "Open `scores.csv` with `csv.DictReader`, convert each score to an integer, add the scores into `total`, and print `total`."
             },
             "allowReveal": true
           }
@@ -272,15 +272,15 @@
         "simple-csv-processing": {
           "csv-dictreader-basics": {
             "title": "Reading CSV rows as dictionaries",
-            "bodyMarkdown": "The `csv` module helps Python read comma-separated data without you splitting each line by hand. A very useful tool is `csv.DictReader`, which turns each row into a dictionary.\n\n```python\nimport csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"], row[\"score\"])\n```\n\nIf `scores.csv` contains:\n\n```text\nname,score\nAva,9\nBen,7\n```\n\nthe output is:\n\n```text\nAva 9\nBen 7\n```\n\nStep by step:\n\n- `import csv` makes the standard library CSV tools available.\n- `open(\"scores.csv\")` opens the file for reading.\n- `csv.DictReader(file)` reads the header row first.\n- Each later row becomes a dictionary like `{\"name\": \"Ava\", \"score\": \"9\"}`.\n- `row[\"name\"]` gets the value from the `name` column.\n\nWorked example: if a row is `Cara,12`, then `row[\"name\"]` is `\"Cara\"` and `row[\"score\"]` is `\"12\"`.\n\nTry it yourself: change the printed columns, or print `dict(row)` to see the whole row dictionary."
+            "bodyMarkdown": "The `csv` module helps Python read comma-separated data without you splitting each line by hand. A very useful tool is `csv.DictReader`, which turns each row into a dictionary.\n\n```python\nimport csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"], row[\"score\"])\n```\n\nIf `scores.csv` contains:\n\n```text\nname,score\nAva,9\nBen,7\n```\n\nthe output is:\n\n```text\nAva 9\nBen 7\n```\n\nStep by step:\n\n- `import csv` makes the standard library CSV tools available.\n- `open(\"scores.csv\")` opens the file for reading.\n- `csv.DictReader(file)` reads the header row first.\n- Each later row becomes a dictionary like `{\"name\": \"Ava\", \"score\": \"9\"}`.\n- `row[\"name\"]` gets the value from the `name` column.\n\nWorked example: if a row is `Cara,12`, then `row[\"name\"]` is `\"Cara\"` and `row[\"score\"]` is `\"12\"`."
           },
           "csv-cleaning-values": {
             "title": "Cleaning values from CSV rows",
-            "bodyMarkdown": "CSV data often has extra spaces or values stored as text. Cleaning means fixing those values before using them.\n\n```python\nimport csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        name = row[\"name\"].strip()\n        score = int(row[\"score\"].strip())\n        print(name, score + 1)\n```\n\nSuppose the file contains:\n\n```text\nname,score\n Ava , 9\nBen, 7\n```\n\nLine by line:\n\n- `row[\"name\"]` gets the text from the `name` column.\n- `.strip()` removes spaces around the text.\n- `row[\"score\"]` is still text, not a number.\n- `int(...)` converts that cleaned text into an integer.\n- `print(name, score + 1)` prints the cleaned name and a changed numeric value.\n\nWorked example:\n\n- For the first row, `row[\"name\"]` is `\" Ava \"`, so `strip()` makes it `\"Ava\"`.\n- `row[\"score\"]` is `\" 9\"`, so after cleaning and converting it becomes `9`.\n\nYour turn: try removing `.strip()` and notice how the output changes."
+            "bodyMarkdown": "CSV data often has extra spaces or values stored as text. Cleaning means fixing those values before using them.\n\n```python\nimport csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        name = row[\"name\"].strip()\n        score = int(row[\"score\"].strip())\n        print(name, score + 1)\n```\n\nSuppose the file contains:\n\n```text\nname,score\n Ava , 9\nBen, 7\n```\n\nLine by line:\n\n- `row[\"name\"]` gets the text from the `name` column.\n- `.strip()` removes spaces around the text.\n- `row[\"score\"]` is still text, not a number.\n- `int(...)` converts that cleaned text into an integer.\n- `print(name, score + 1)` prints the cleaned name and a changed numeric value.\n\nWorked example:\n\n- For the first row, `row[\"name\"]` is `\" Ava \"`, so `strip()` makes it `\"Ava\"`.\n- `row[\"score\"]` is `\" 9\"`, so after cleaning and converting it becomes `9`."
           },
           "csv-safe-processing": {
             "title": "Skipping bad rows safely",
-            "bodyMarkdown": "Sometimes a CSV file has messy data. A score might be missing or contain text like `oops`. You can use `try` and `except` to skip rows that cannot be converted.\n\n```python\nimport csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            name = row[\"name\"].strip()\n            score = int(row[\"score\"].strip())\n            print(name, score)\n        except ValueError:\n            print(\"skipping bad score\")\n```\n\nIf the file contains:\n\n```text\nname,score\nAva,9\nBen,oops\nCara,12\n```\n\nthen the program prints:\n\n```text\nAva 9\nskipping bad score\nCara 12\n```\n\nWhat happens here:\n\n- Python reads one row at a time.\n- `int(...)` works for `\"9\"` and `\"12\"`.\n- `int(\"oops\")` raises a `ValueError`.\n- The `except ValueError:` block handles that problem so the program keeps going.\n\nTry this: change the `except` block so it prints the row's name along with the skip message.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "Sometimes a CSV file has messy data. A score might be missing or contain text like `oops`. You can use `try` and `except` to skip rows that cannot be converted.\n\n```python\nimport csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            name = row[\"name\"].strip()\n            score = int(row[\"score\"].strip())\n            print(name, score)\n        except ValueError:\n            print(\"skipping bad score\")\n```\n\nIf the file contains:\n\n```text\nname,score\nAva,9\nBen,oops\nCara,12\n```\n\nthen the program prints:\n\n```text\nAva 9\nskipping bad score\nCara 12\n```\n\nWhat happens here:\n\n- Python reads one row at a time.\n- `int(...)` works for `\"9\"` and `\"12\"`.\n- `int(\"oops\")` raises a `ValueError`.\n- The `except ValueError:` block handles that problem so the program keeps going."
           }
         }
       }

@@ -37,11 +37,11 @@
             "sc-first-index": {
               "title": "First item index",
               "prompt": "Which index gets the first item from a Python list?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
+                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
               },
               "options": {
                 "a": "0",
@@ -82,11 +82,11 @@
             "mc-true-about-lists": {
               "title": "Facts about lists",
               "prompt": "Choose all true statements about Python lists.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
+                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
               },
               "options": {
                 "a": "Lists keep items in order.",
@@ -98,11 +98,11 @@
             "dr-build-list-line": {
               "title": "Build the list line",
               "prompt": "Put the tokens in order to create a line of code that stores `\"pen\"`, `\"pencil\"`, and `\"eraser\"` in a list named `items`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
-                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
-                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
+                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
               },
               "tokens": {
                 "t1": "items",
@@ -166,7 +166,7 @@
             },
             "ci-print-first-last": {
               "title": "Print the first and last list items",
-              "prompt": "Complete this project step: Print the first and last list items.\n\nRequirements:\n- Store the words in a list.\n- Then print the first item and the last item on separate lines.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `apple\nbanana\ncherry`, the output should be `apple\ncherry`.",
+              "prompt": "Three fruit labels come in one at a time. Store the inputs in a list, then print the first fruit and the last fruit on separate lines.\n\nFor example, if the inputs are `apple`, `banana`, and `cherry`, your program should print:\n`apple`\n`cherry`.",
               "hint": "Read the task \"Print the first and last list items\" and identify the required result.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -177,7 +177,7 @@
             },
             "ci-print-second-number": {
               "title": "Print the second number",
-              "prompt": "Complete this project step: Print the second number.\n\nRequirements:\n- Put the numbers into a list.\n- Print the second item.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `4\n9\n2`, the output should be `9`.",
+              "prompt": "A scoreboard sends three numbers in order. Put them into a list, then print the second item from that list.\n\nFor example, if the inputs are `4`, `9`, and `2`, your program should print:\n`9`.",
               "hint": "The second item in a list is at index 1.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -188,8 +188,8 @@
             },
             "ci-build-and-show-list": {
               "title": "Build a list from input",
-              "prompt": "Complete this project step: Build a list from input.\n\nRequirements:\n- Create a list with the three colors.\n- Print the whole list.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `red\nblue\ngreen`, the output should be `['red', 'blue', 'green']`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "A paint shelf needs a quick inventory. Collect the three input colors into one list and print the finished list.\n\nFor example, if the inputs are `red`, `blue`, and `green`, your program should print:\n`['red', 'blue', 'green']`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
@@ -199,7 +199,7 @@
             },
             "try-creating-and-indexing-lists-checkpoint": {
               "title": "Index and print list values",
-              "prompt": "Create the list `[\"Ava\", \"Mia\", \"Zoe\"]`. Print the first name, then print the last name. Finish the small program, run it, and check that the result fits the scenario.",
+              "prompt": "Create the list `[\"Ava\", \"Mia\", \"Zoe\"]`. Print the first name, then print the last name.",
               "hint": "Use index `0` for the first item and `-1` for the last item.",
               "help": {
                 "concept": "List indexing lets you retrieve a value by position.",
@@ -210,34 +210,34 @@
             },
             "try-creating-and-indexing-lists-sketch0": {
               "title": "Print the first and last list items",
-              "prompt": "Use list indexes to print the first and last values from `items`. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "prompt": "Use list indexes to print the first and last values from `items`.",
+              "hint": "Lists keep their items in order. Start by printing the first item in items.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"What a list is\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "Lists keep their items in order. Start by printing the first item in items.",
+                "hint_1": "The first item is items[0]. The last item is items[-1].",
+                "hint_2": "Print each value on its own line: first red, then green."
               },
               "starterCode": "items = ['red', 'blue', 'green']\n\n# Print the first item.\n# Then print the last item.\n"
             },
             "try-creating-and-indexing-lists-sketch1": {
               "title": "Print the second number",
-              "prompt": "Use index `1` to print the second value in `numbers`. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "prompt": "Use index `1` to print the second value in `numbers`.",
+              "hint": "Print the second number in the list.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"How indexing works\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "Print the second number in the list.",
+                "hint_1": "Write the line for this step, then run the program to see what changes.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
               "starterCode": "numbers = [4, 9, 2]\n\n# Print the second number in the list.\n"
             },
             "try-creating-and-indexing-lists-sketch2": {
               "title": "Build and print a list",
-              "prompt": "Create a list named `names` from the two variables, then print it. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "prompt": "Create a list named `names` from the two variables, then print it.",
+              "hint": "Build a list named names with first and second.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Using list values in output\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "Build a list named names with first and second.",
+                "hint_1": "Build a list named names with first and second, then print names.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
               "starterCode": "first = 'Ava'\nsecond = 'Mia'\n\n# Build a list named names with first and second.\n# Then print names.\n"
             }
@@ -271,15 +271,15 @@
         "creating-and-indexing-lists": {
           "list-creation-basics": {
             "title": "What a list is",
-            "bodyMarkdown": "A **list** stores multiple values in one variable, in a specific order. In Python, you create a list with square brackets.\n\n```python\ncolors = [\"red\", \"blue\", \"green\"]\nprint(colors)\n```\n\nWhen you click **Run**, the output panel shows the whole list:\n\n```python\n['red', 'blue', 'green']\n```\n\nHere is what each part does:\n- `colors` is the variable name.\n- `[` and `]` mark the list.\n- Each item is separated by a comma.\n- The items stay in order.\n\nWorked example:\n\n```python\nnumbers = [10, 20, 30]\nprint(numbers)\nprint(numbers[0])\n```\n\nStep by step:\n- `numbers` stores three values.\n- `numbers[0]` means \"get the item at index 0.\"\n- The first item is `10`, so that line prints `10`.\n\nTry it yourself: make a list of three foods, then print the whole list."
+            "bodyMarkdown": "A **list** stores multiple values in one variable, in a specific order. In Python, you create a list with square brackets.\n\n```python\ncolors = [\"red\", \"blue\", \"green\"]\nprint(colors)\n```\n\nWhen you click **Run**, the output panel shows the whole list:\n\n```python\n['red', 'blue', 'green']\n```\n\nHere is what each part does:\n- `colors` is the variable name.\n- `[` and `]` mark the list.\n- Each item is separated by a comma.\n- The items stay in order.\n\nWorked example:\n\n```python\nnumbers = [10, 20, 30]\nprint(numbers)\nprint(numbers[0])\n```\n\nStep by step:\n- `numbers` stores three values.\n- `numbers[0]` means \"get the item at index 0.\"\n- The first item is `10`, so that line prints `10`."
           },
           "indexing-basics": {
             "title": "How indexing works",
-            "bodyMarkdown": "An **index** is the position of an item in a list. Python starts counting at **0**, not 1.\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\nprint(animals[0])\nprint(animals[1])\nprint(animals[2])\n```\n\nThis prints:\n\n```python\ncat\ndog\nfox\n```\n\nLine by line:\n- `animals[0]` gets the first item: `\"cat\"`\n- `animals[1]` gets the second item: `\"dog\"`\n- `animals[2]` gets the third item: `\"fox\"`\n\nA common beginner mistake is thinking the first item is index 1. In Python, the first item is always index 0.\n\nWorked example:\n\n```python\nscores = [88, 91, 75]\nprint(scores[1])\n```\n\nThis prints `91` because index `1` means the second item.\n\nYour turn: change the index in the example to print `75` instead."
+            "bodyMarkdown": "An **index** is the position of an item in a list. Python starts counting at **0**, not 1.\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\nprint(animals[0])\nprint(animals[1])\nprint(animals[2])\n```\n\nThis prints:\n\n```python\ncat\ndog\nfox\n```\n\nLine by line:\n- `animals[0]` gets the first item: `\"cat\"`\n- `animals[1]` gets the second item: `\"dog\"`\n- `animals[2]` gets the third item: `\"fox\"`\n\nA common beginner mistake is thinking the first item is index 1. In Python, the first item is always index 0.\n\nWorked example:\n\n```python\nscores = [88, 91, 75]\nprint(scores[1])\n```\n\nThis prints `91` because index `1` means the second item."
           },
           "using-lists-in-small-programs": {
             "title": "Using list values in output",
-            "bodyMarkdown": "You can take one item from a list and use it in `print()`.\n\n```python\ncities = [\"Lima\", \"Oslo\", \"Seoul\"]\nprint(\"First city:\", cities[0])\nprint(\"Last shown city:\", cities[2])\n```\n\nStep by step:\n- `cities` stores three strings.\n- `cities[0]` gets `\"Lima\"`.\n- `cities[2]` gets `\"Seoul\"`.\n- `print()` combines text and list values in the output panel.\n\nWorked example:\n\n```python\nitems = [\"pen\", \"book\", \"bag\"]\nprint(\"I packed a\", items[1])\n```\n\nThis prints:\n\n```python\nI packed a book\n```\n\nTry this: replace `items[1]` with another index and run it again to see how the output changes."
+            "bodyMarkdown": "You can take one item from a list and use it in `print()`.\n\n```python\ncities = [\"Lima\", \"Oslo\", \"Seoul\"]\nprint(\"First city:\", cities[0])\nprint(\"Last shown city:\", cities[2])\n```\n\nStep by step:\n- `cities` stores three strings.\n- `cities[0]` gets `\"Lima\"`.\n- `cities[2]` gets `\"Seoul\"`.\n- `print()` combines text and list values in the output panel.\n\nWorked example:\n\n```python\nitems = [\"pen\", \"book\", \"bag\"]\nprint(\"I packed a\", items[1])\n```\n\nThis prints:\n\n```python\nI packed a book\n```"
           }
         }
       }

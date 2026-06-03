@@ -1,0 +1,54 @@
+{
+  "ok": true,
+  "profileId": "python",
+  "subjectSlug": "python-v2",
+  "courseSlug": "python-v2",
+  "topicId": "what-python-is",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 9,
+    "exerciseKinds": {
+      "single_choice": 2,
+      "multi_choice": 2,
+      "drag_reorder": 2,
+      "fill_blank_choice": 2,
+      "code_input": 1
+    },
+    "codeInputs": 1,
+    "projects": 1,
+    "capstones": 0,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 2,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 2,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-v2-0/python-v2-0-setup-and-first-programs/what-python-is",
+      "profileId": "python",
+      "moduleId": "python-v2-0",
+      "topicId": "what-python-is",
+      "message": "Topic \"what-python-is\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-v2-0/python-v2-0-setup-and-first-programs/what-python-is",
+      "profileId": "python",
+      "moduleId": "python-v2-0",
+      "topicId": "what-python-is",
+      "exerciseId": "policy_code_input_1",
+      "message": "Exercise \"policy_code_input_1\" starterCode appears to contain most of the final solution structure."
+    }
+  ]
+}

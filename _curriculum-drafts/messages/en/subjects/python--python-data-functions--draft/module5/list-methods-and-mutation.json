@@ -165,7 +165,7 @@
             },
             "ci-1": {
               "title": "Add an item and print the list",
-              "prompt": "Complete this project step: Add an item and print the list.\n\nRequirements:\n- Add the input item to the list.\n- Then print the updated list.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `eraser`, the output should be `['pen', 'pencil', 'eraser']`.",
+              "prompt": "A pencil case already has `pen` and `pencil`. Read one more item from input, add it to `items`, and print the updated list.\n\nFor example, if the input is `eraser`, your program should print:\n`['pen', 'pencil', 'eraser']`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -176,7 +176,7 @@
             },
             "ci-2": {
               "title": "Remove a value and show the result",
-              "prompt": "Complete this project step: Remove a value and show the result.\n\nRequirements:\n- Remove the input color from the list.\n- Then print the updated list.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `blue`, the output should be `['red', 'green']`.",
+              "prompt": "The list `colors` starts as `['red', 'blue', 'green']`. Read one color from input, remove that value from the list, and print the updated list.\n\nFor example, if the input is `blue`, your program should print:\n`['red', 'green']`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -187,7 +187,7 @@
             },
             "ci-3": {
               "title": "Sort numbers from input",
-              "prompt": "Complete this project step: Sort numbers from input.\n\nRequirements:\n- Sort the list.\n- Then print the sorted list.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `9\n2\n5`, the output should be `[2, 5, 9]`.",
+              "prompt": "Three quiz scores arrive out of order. Put the input numbers into `numbers`, sort the list from smallest to largest, and print the sorted list.\n\nFor example, if the inputs are `9`, `2`, and `5`, your program should print:\n`[2, 5, 9]`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -270,15 +270,15 @@
         "list-methods-and-mutation": {
           "sketch-1": {
             "title": "What mutation means for lists",
-            "bodyMarkdown": "A Python list is **mutable**, which means you can change the same list after you create it. Methods like `append()`, `remove()`, `pop()`, and `sort()` usually **mutate** the list instead of making a brand-new one.\n\nExample:\n\n```python\nnumbers = [3, 1, 2]\nnumbers.append(4)\nprint(numbers)\n```\n\nStep by step:\n- `numbers = [3, 1, 2]` creates a list.\n- `numbers.append(4)` adds `4` to the end of that same list.\n- `print(numbers)` shows the changed list.\n\nOutput:\n\n```python\n[3, 1, 2, 4]\n```\n\nThe important idea is that `append()` changes `numbers` itself.\n\nTry it yourself: change the value being appended from `4` to `10`, click Run, and check the output panel."
+            "bodyMarkdown": "A Python list is **mutable**, which means you can change the same list after you create it. Methods like `append()`, `remove()`, `pop()`, and `sort()` usually **mutate** the list instead of making a brand-new one.\n\nExample:\n\n```python\nnumbers = [3, 1, 2]\nnumbers.append(4)\nprint(numbers)\n```\n\nStep by step:\n- `numbers = [3, 1, 2]` creates a list.\n- `numbers.append(4)` adds `4` to the end of that same list.\n- `print(numbers)` shows the changed list.\n\nOutput:\n\n```python\n[3, 1, 2, 4]\n```\n\nThe important idea is that `append()` changes `numbers` itself."
           },
           "sketch-2": {
             "title": "Using append, remove, and pop",
-            "bodyMarkdown": "These three methods all change a list, but they do different jobs:\n\n- `append(value)` adds one item to the end.\n- `remove(value)` removes the first matching value.\n- `pop(index)` removes and returns the item at an index.\n\nWorked example:\n\n```python\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfruits.remove(\"banana\")\nlast_item = fruits.pop(1)\nprint(fruits)\nprint(last_item)\n```\n\nLine by line:\n- The list starts as `['apple', 'banana', 'cherry']`.\n- `remove(\"banana\")` changes it to `['apple', 'cherry']`.\n- `pop(1)` removes the item at index `1`, which is `'cherry'`.\n- Now `fruits` becomes `['apple']`.\n- `last_item` stores the removed value `'cherry'`.\n\nSo the output is:\n\n```python\n['apple']\ncherry\n```\n\nYour turn: change `pop(1)` to `pop(0)`. What value gets removed, and what does the list look like after that?"
+            "bodyMarkdown": "These three methods all change a list, but they do different jobs:\n\n- `append(value)` adds one item to the end.\n- `remove(value)` removes the first matching value.\n- `pop(index)` removes and returns the item at an index.\n\nWorked example:\n\n```python\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfruits.remove(\"banana\")\nlast_item = fruits.pop(1)\nprint(fruits)\nprint(last_item)\n```\n\nLine by line:\n- The list starts as `['apple', 'banana', 'cherry']`.\n- `remove(\"banana\")` changes it to `['apple', 'cherry']`.\n- `pop(1)` removes the item at index `1`, which is `'cherry'`.\n- Now `fruits` becomes `['apple']`.\n- `last_item` stores the removed value `'cherry'`.\n\nSo the output is:\n\n```python\n['apple']\ncherry\n```"
           },
           "sketch-3": {
             "title": "Sorting lists and watching for common mistakes",
-            "bodyMarkdown": "`sort()` puts list items in order and mutates the list.\n\nExample:\n\n```python\nscores = [40, 10, 30, 20]\nscores.sort()\nprint(scores)\n```\n\nThis prints:\n\n```python\n[10, 20, 30, 40]\n```\n\nA common beginner mistake is expecting `sort()` to print something by itself or to leave the original list unchanged. But `sort()` changes the list directly.\n\nAnother useful pattern:\n\n```python\nnames = [\"Mia\", \"Ava\", \"Zoe\"]\nnames.sort()\nprint(names)\n```\n\nThis sorts strings in alphabetical order.\n\nTry this: start with `names = [\"Zoe\", \"Ava\", \"Mia\"]`, sort the list, and check the output panel. Then add one more name and sort again.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "`sort()` puts list items in order and mutates the list.\n\nExample:\n\n```python\nscores = [40, 10, 30, 20]\nscores.sort()\nprint(scores)\n```\n\nThis prints:\n\n```python\n[10, 20, 30, 40]\n```\n\nA common beginner mistake is expecting `sort()` to print something by itself or to leave the original list unchanged. But `sort()` changes the list directly.\n\nAnother useful pattern:\n\n```python\nnames = [\"Mia\", \"Ava\", \"Zoe\"]\nnames.sort()\nprint(names)\n```\n\nThis sorts strings in alphabetical order."
           }
         }
       }

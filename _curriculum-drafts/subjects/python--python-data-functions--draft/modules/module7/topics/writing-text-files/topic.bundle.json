@@ -342,7 +342,13 @@
           "requiredFiles": [
             "note.txt"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "note.txt",
+            "content": ""
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -451,7 +457,13 @@
           "requiredFiles": [
             "greeting.txt"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "greeting.txt",
+            "content": ""
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -565,7 +577,13 @@
           "requiredFiles": [
             "shopping.txt"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "shopping.txt",
+            "content": ""
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -823,7 +841,13 @@
           "requiredFiles": [
             "note.txt"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "note.txt",
+            "content": ""
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -932,7 +956,13 @@
           "requiredFiles": [
             "log.txt"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "log.txt",
+            "content": ""
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -1041,7 +1071,13 @@
           "requiredFiles": [
             "report.txt"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "report.txt",
+            "content": ""
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {

@@ -200,7 +200,65 @@ describe("gradeProgrammingCodeInput", () => {
         expect(result.explanation).toContain("fruits.remove");
         expect(mockedSharedRunner).not.toHaveBeenCalled();
     });
+    it("accepts a single-name from import for multi-file source checks", async () => {
+        mockedSharedRunner.mockResolvedValue({
+            ok: true,
+            stdout: "Ava\n",
+            stderr: "",
+        });
 
+        const code =
+            "from tools.names import clean_name\n\n" +
+            "raw_name = input()\n" +
+            "print(clean_name(raw_name))\n";
+
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "  aVA  \n", stdout: "Ava\n", match: "exact" }],
+            semanticChecks: [],
+            language: "python",
+            workspaceExpectations: {
+                requiredFiles: ["tools/__init__.py", "tools/names.py"],
+                requiredFolders: ["tools"],
+            },
+            sourceChecks: [
+                {
+                    type: "uses_import",
+                    module: "tools.names",
+                    importName: "clean_name",
+                    path: "main.py",
+                    message: "Import from tools.names.",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code,
+            language: "python",
+            entry: "main.py",
+            files: [
+                {
+                    path: "main.py",
+                    content: code,
+                },
+                {
+                    path: "tools/__init__.py",
+                    content: "",
+                },
+                {
+                    path: "tools/names.py",
+                    content: "def clean_name(text):\n    return text.strip().title()\n",
+                },
+            ],
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedSharedRunner).toHaveBeenCalledOnce();
+    });
     it("runs stdout after source checks pass", async () => {
         mockedSharedRunner.mockResolvedValue({
             ok: true,
@@ -240,6 +298,73 @@ describe("gradeProgrammingCodeInput", () => {
             expected,
             code: "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
             language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedSharedRunner).toHaveBeenCalledOnce();
+    });
+
+
+    it("accepts uses_method when the method call is inside an f-string expression", async () => {
+        mockedSharedRunner.mockResolvedValue({
+            ok: true,
+            stdout: "POL badge: Opil\n",
+            stderr: "",
+        });
+
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            tests: [
+                {
+                    stdin: "opil\npol\n",
+                    stdout: "POL badge: Opil\n",
+                    match: "exact",
+                },
+            ],
+            semanticChecks: [],
+            sourceChecks: [
+                {
+                    type: "uses_method",
+                    method: "upper",
+                    message: "make_badge should uppercase the role.",
+                    path: "tools/badges.py",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code:
+                "from tools.badges import make_badge\n\n" +
+                "name = input().strip().title()\n" +
+                "role = input()\n" +
+                "print(make_badge(name, role))\n",
+            language: "python",
+            entry: "main.py",
+            files: [
+                {
+                    path: "main.py",
+                    content:
+                        "from tools.badges import make_badge\n\n" +
+                        "name = input().strip().title()\n" +
+                        "role = input()\n" +
+                        "print(make_badge(name, role))\n",
+                },
+                {
+                    path: "tools/__init__.py",
+                    content: "",
+                },
+                {
+                    path: "tools/badges.py",
+                    content:
+                        "def make_badge(name, role):\n" +
+                        "    return f\"{role.upper()} badge: {name}\"\n",
+                },
+            ],
             showDebug: false,
         });
 
@@ -419,6 +544,57 @@ describe("gradeProgrammingCodeInput", () => {
         expect(result.explanation).toBe(
             "Missing required file: helpers/formatting.py",
         );
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+        expect(mockedRunCode).not.toHaveBeenCalled();
+    });
+
+    it("fails clearly when the authored entry file path is missing from the workspace", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "ok\n", match: "exact" }],
+            semanticChecks: [],
+            language: "python",
+            workspaceExpectations: {
+                entryFilePath: "main.py",
+                requiredFiles: ["tools/__init__.py", "tools/names.py"],
+            },
+            sourceChecks: [
+                {
+                    type: "uses_import",
+                    module: "tools.names",
+                    importName: "clean_name",
+                    path: "main.py",
+                    message: "Import from tools.names.",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: "from tools.names import clean_name\nprint(clean_name(input()))\n",
+            language: "python",
+            entry: "tools/main.py",
+            files: [
+                {
+                    path: "tools/main.py",
+                    content: "from tools.names import clean_name\nprint(clean_name(input()))\n",
+                },
+                {
+                    path: "tools/__init__.py",
+                    content: "",
+                },
+                {
+                    path: "tools/names.py",
+                    content: "def clean_name(text):\n    return text.strip().title()\n",
+                },
+            ],
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toBe("Missing required file: main.py");
         expect(mockedSharedRunner).not.toHaveBeenCalled();
         expect(mockedRunCode).not.toHaveBeenCalled();
     });
@@ -761,5 +937,102 @@ for book in books:
         });
 
         expect(result.ok).toBe(true);
+    });
+
+    it("shows hard-coded-output feedback instead of conversion feedback for ci-build-and-show-list", async () => {
+        mockedSharedRunner
+            .mockResolvedValueOnce({
+                ok: true,
+                stdout: "['red', 'blue', 'green']\n",
+                stderr: "",
+            })
+            .mockResolvedValueOnce({
+                ok: true,
+                stdout: "['red', 'blue', 'green']\n",
+                stderr: "",
+            });
+
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            tests: [
+                {
+                    stdin: "red\nblue\ngreen\n",
+                    stdout: "['red', 'blue', 'green']\n",
+                    match: "exact",
+                },
+                {
+                    stdin: "black\nwhite\ngold\n",
+                    stdout: "['black', 'white', 'gold']\n",
+                    match: "exact",
+                },
+            ],
+            semanticChecks: [],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code:
+                "color1 = input()\n" +
+                "color2 = input()\n" +
+                "color3 = input()\n" +
+                "lyst = [color1, color2, color3]\n" +
+                "print(['red','blue','green'])\n",
+            language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toMatch(
+            /printing the example values directly|printed value is not using it/i,
+        );
+        expect(result.explanation).not.toMatch(
+            /conversion|math|int\(\)|input\(\) returns text/i,
+        );
+        expect(result.feedback?.message).toBe(result.explanation);
+    });
+
+    it("tells the learner to print the list variable when they build it but print something else", async () => {
+        mockedSharedRunner.mockResolvedValue({
+            ok: true,
+            stdout: "['red', 'blue', 'green']\n",
+            stderr: "",
+        });
+
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            tests: [
+                {
+                    stdin: "black\nwhite\ngold\n",
+                    stdout: "['black', 'white', 'gold']\n",
+                    match: "exact",
+                },
+            ],
+            semanticChecks: [],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code:
+                "color1 = input()\n" +
+                "color2 = input()\n" +
+                "color3 = input()\n" +
+                "lyst = [color1, color2, color3]\n" +
+                "example = ['red', 'blue', 'green']\n" +
+                "print(example)\n",
+            language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toBe(
+            "You created the list, but the printed value is not using it. Try printing your list variable.",
+        );
+        expect(result.feedback?.title).toBe("Print the list variable");
     });
 });

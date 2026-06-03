@@ -1,0 +1,215 @@
+{
+  "title": "What Python Is Used For",
+  "summary": "Understand Python's role in automation, web apps, data, beginner programming, and AI.",
+  "minutes": 12,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Python",
+      "bodyMarkdown": "Python is a versatile programming language used in various fields such as web development, data analysis, artificial intelligence, and automation. Its simple syntax makes it a great choice for beginners.\n\n```python\n# This is a simple Python program\nprint(\"Hello, World!\")\n```\n\nTry it yourself: Change the message inside the `print` function and run the code to see the new output."
+    },
+    {
+      "id": "sketch2",
+      "title": "Python in Data Science",
+      "bodyMarkdown": "Python is widely used in data science for data analysis and visualization. Libraries like Pandas and Matplotlib make it easy to manipulate and visualize data.\n\n```python\nimport pandas as pd\n\ndata = {'Name': ['John', 'Anna', 'Peter'], 'Age': [28, 24, 35]}\ndf = pd.DataFrame(data)\nprint(df)\n```\n\nTry it yourself: Add a new column to the data frame and print it."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Python Use Cases",
+      "prompt": "Which of the following is NOT a common use case for Python?",
+      "hint": "Think about areas where Python is typically applied.",
+      "help": {
+        "concept": "Python is commonly used in web development, data analysis, and automation.",
+        "hint_1": "Consider areas where Python's simplicity and libraries are beneficial.",
+        "hint_2": "Python is not typically used for low-level system programming."
+      },
+      "options": [
+        "Web development",
+        "Data analysis",
+        "System programming",
+        "Automation"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Python Features",
+      "prompt": "Select all features that make Python popular among developers.",
+      "hint": "Think about Python's characteristics that attract developers.",
+      "help": {
+        "concept": "Python is known for its readability, extensive libraries, and community support.",
+        "hint_1": "Consider Python's syntax and available resources.",
+        "hint_2": "Python's simplicity and library support are key features."
+      },
+      "options": [
+        "Easy to read syntax",
+        "Limited library support",
+        "Strong community support",
+        "Complex syntax"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ]
+    },
+    {
+      "id": "quiz3",
+      "kind": "drag_reorder",
+      "title": "Python Program Flow",
+      "prompt": "Arrange the steps to execute a Python program in the correct order.",
+      "hint": "Consider the typical flow from writing to executing code.",
+      "help": {
+        "concept": "The typical flow involves writing code, running it, and observing the output.",
+        "hint_1": "Think about what you do first when you start coding.",
+        "hint_2": "Running the code comes after writing it."
+      },
+      "tokens": [
+        "Write code in the code editor",
+        "Click Run",
+        "Check the output panel"
+      ],
+      "correctOrder": [
+        "Write code in the code editor",
+        "Click Run",
+        "Check the output panel"
+      ]
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Python Syntax",
+      "prompt": "Complete the Python statement to print a message.",
+      "hint": "Use the correct function to display text.",
+      "help": {
+        "concept": "The `print` function is used to display output in Python.",
+        "hint_1": "The function starts with 'p' and ends with 't'.",
+        "hint_2": "It's a common function used to show output."
+      },
+      "template": "[blank1](\"Hello, World!\")",
+      "choices": [
+        "print",
+        "echo",
+        "display"
+      ],
+      "correctValue": "print"
+    },
+    {
+      "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "title": "Variable Assignment",
+      "prompt": "Fill in the blank to assign the value 10 to the variable `x`.",
+      "hint": "Use the assignment operator to set a value.",
+      "help": {
+        "concept": "The assignment operator `=` is used to assign values to variables.",
+        "hint_1": "The operator is a single character.",
+        "hint_2": "It's used to set the value of a variable."
+      },
+      "template": "x [blank1] 10",
+      "choices": [
+        "=",
+        "==",
+        "+="
+      ],
+      "correctValue": "="
+    },
+    {
+      "id": "quiz6",
+      "kind": "multi_choice",
+      "title": "Python Libraries",
+      "prompt": "Which of the following are popular Python libraries for data analysis?",
+      "hint": "Think about libraries commonly used in data science.",
+      "help": {
+        "concept": "Pandas and NumPy are widely used for data manipulation and analysis.",
+        "hint_1": "These libraries help in handling and analyzing data efficiently.",
+        "hint_2": "They are often used together in data science projects."
+      },
+      "options": [
+        "Pandas",
+        "NumPy",
+        "Requests",
+        "BeautifulSoup"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "quiz7",
+      "kind": "drag_reorder",
+      "title": "Python Code Execution",
+      "prompt": "Order the steps to execute a Python script in a browser-based environment.",
+      "hint": "Consider the sequence from writing to observing results.",
+      "help": {
+        "concept": "The process involves writing, running, and checking output.",
+        "hint_1": "Start with writing the code.",
+        "hint_2": "Running the code is followed by checking the output."
+      },
+      "tokens": [
+        "Write code in the code editor",
+        "Click Run",
+        "Observe the output panel"
+      ],
+      "correctOrder": [
+        "Write code in the code editor",
+        "Click Run",
+        "Observe the output panel"
+      ]
+    },
+    {
+      "id": "quiz8",
+      "kind": "single_choice",
+      "title": "Python's Simplicity",
+      "prompt": "Why is Python considered a good language for beginners?",
+      "hint": "Think about Python's syntax and readability.",
+      "help": {
+        "concept": "Python's simple syntax and readability make it accessible for beginners.",
+        "hint_1": "Consider how easy it is to read and write Python code.",
+        "hint_2": "Python's syntax is often compared to plain English."
+      },
+      "options": [
+        "Complex syntax",
+        "Simple syntax",
+        "Limited documentation",
+        "Difficult to learn"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Simple Python Program",
+      "prompt": "Write a Python program that prints 'Welcome to Python programming!'",
+      "hint": "Use the print function to display the message.",
+      "help": {
+        "concept": "The `print` function is used to output text in Python.",
+        "hint_1": "The function starts with 'p' and ends with 't'.",
+        "hint_2": "It's a common function used to show output."
+      },
+      "starterCode": "# Write your code below\n",
+      "solutionCode": "print('Welcome to Python programming!')",
+      "tests": [
+        {
+          "stdout": "Welcome to Python programming!\n",
+          "stdin": "",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    }
+  ],
+  "projectDraft": {
+    "title": "Simple Python Program",
+    "stepIds": [
+      "quiz9"
+    ]
+  }
+}

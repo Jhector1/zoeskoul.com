@@ -351,6 +351,18 @@
             "content": "def clean_name(text):\n    return text.strip().title()\n",
             "language": "python"
           }
+        ],
+        "files": [
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          }
         ]
       },
       "showExpectedExample": true,
@@ -529,6 +541,18 @@
             "isEntry": true,
             "entry": true
           },
+          {
+            "path": "tools/__init__.py",
+            "content": "# Tools package for this mini app.\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          }
+        ],
+        "files": [
           {
             "path": "tools/__init__.py",
             "content": "# Tools package for this mini app.\n",
@@ -734,6 +758,23 @@
             "isEntry": true,
             "entry": true
           },
+          {
+            "path": "tools/__init__.py",
+            "content": "# Tools package for this mini app.\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+            "language": "python"
+          }
+        ],
+        "files": [
           {
             "path": "tools/__init__.py",
             "content": "# Tools package for this mini app.\n",
@@ -956,6 +997,28 @@
             "isEntry": true,
             "entry": true
           },
+          {
+            "path": "tools/__init__.py",
+            "content": "# Tools package for this mini app.\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/reports.py",
+            "content": "def mission_report(badge, points):\n    return f\"Mission report: {badge} has {points} points\"\n",
+            "language": "python"
+          }
+        ],
+        "files": [
           {
             "path": "tools/__init__.py",
             "content": "# Tools package for this mini app.\n",

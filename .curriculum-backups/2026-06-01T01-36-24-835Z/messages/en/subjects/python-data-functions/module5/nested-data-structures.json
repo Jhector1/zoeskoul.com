@@ -1,0 +1,285 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "nested-data-structures": {
+          "label": "Nested Data Structures",
+          "summary": "Represent real-world data with lists of dictionaries and nested containers.",
+          "cards": {
+            "sketch0": {
+              "title": "What nested data structures are"
+            },
+            "sketch1": {
+              "title": "Reading values from nested containers"
+            },
+            "sketch2": {
+              "title": "Looping through a list of dictionaries"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice nested data with functions"
+            }
+          },
+          "projectSteps": {
+            "code_1": {
+              "title": "Return all names"
+            },
+            "code_2": {
+              "title": "Count total stock"
+            },
+            "code_3": {
+              "title": "Find the highest score"
+            }
+          },
+          "quiz": {
+            "sc-1": {
+              "title": "Choose the best structure",
+              "prompt": "You want to store several products, and each product has a name and a price. Which structure is the best fit?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Compare the prompt with the lesson example and remove choices that do not match the Python behavior.",
+                "hint_2": "Match the code in the prompt to the Python behavior described in the lesson."
+              },
+              "options": {
+                "a": "A single string with all product names",
+                "b": "A list of dictionaries",
+                "c": "One number for each product",
+                "d": "A tuple with only one product"
+              }
+            },
+            "sc-2": {
+              "title": "Read a nested value",
+              "prompt": "Given `item = {\"name\": \"Pen\", \"info\": {\"price\": 2, \"stock\": 9}}`, which expression gets the value `9`?",
+              "hint": "First access the inner dictionary stored at `\"info\"`.",
+              "help": {
+                "concept": "To read a nested dictionary value, access the outer key first, then the inner key.",
+                "hint_1": "`\"stock\"` is not at the top level of `item`; it is inside `item[\"info\"]`.",
+                "hint_2": "The correct expression uses two bracket lookups in order: outer key, then inner key."
+              },
+              "options": {
+                "a": "item[\"stock\"]",
+                "b": "item[\"info\"][\"stock\"]",
+                "c": "item[\"name\"][\"stock\"]",
+                "d": "item[0][\"stock\"]"
+              }
+            },
+            "mc-1": {
+              "title": "Valid nested structures",
+              "prompt": "Which of these are examples of nested data structures in Python? Choose all that apply.",
+              "hint": "A structure is nested when one collection is stored inside another.",
+              "help": {
+                "concept": "Nested data structures contain collections inside collections, such as a list inside a dictionary or dictionaries inside a list.",
+                "hint_1": "Check whether each option includes one container placed inside another container.",
+                "hint_2": "A plain number or plain string alone is not nested; combinations like list-of-dicts or dict-with-list are."
+              },
+              "options": {
+                "a": "[{\"name\": \"Ava\"}, {\"name\": \"Ben\"}]",
+                "b": "{\"scores\": [10, 20, 30]}",
+                "c": "42",
+                "d": "\"hello\""
+              }
+            },
+            "mc-2": {
+              "title": "Useful access patterns",
+              "prompt": "Suppose `players = [{\"name\": \"Mia\", \"points\": 7}, {\"name\": \"Leo\", \"points\": 5}]`. Which expressions are valid ways to read data from this structure? Choose all that apply.",
+              "hint": "Start by deciding whether you need a list index first or a dictionary key first.",
+              "help": {
+                "concept": "For a list of dictionaries, you use a numeric index to choose one dictionary, then a string key to read a value from that dictionary.",
+                "hint_1": "`players` is a list first, so expressions that begin with a string key on `players` are not correct.",
+                "hint_2": "Look for expressions that use `[0]` or `[1]` before `['name']` or `['points']`."
+              },
+              "options": {
+                "a": "players[0][\"name\"]",
+                "b": "players[1][\"points\"]",
+                "c": "players[\"name\"]",
+                "d": "players[0][0]"
+              }
+            },
+            "dr-1": {
+              "title": "Access a city name",
+              "prompt": "Put these tokens in order to build the expression that gets `\"Paris\"` from `trip = {\"destination\": {\"city\": \"Paris\"}}`.",
+              "hint": "Arrange the code pieces in the order Python should run them.",
+              "help": {
+                "concept": "The pieces should form valid Python code in the order it should run.",
+                "hint_1": "Start with the line that sets up the Python action.",
+                "hint_2": "Place lines that depend on earlier values after those values exist."
+              },
+              "tokens": {
+                "t1": "trip",
+                "t2": "[\"destination\"]",
+                "t3": "[\"city\"]"
+              }
+            },
+            "dr-2": {
+              "title": "Build a loop over records",
+              "prompt": "Arrange these lines to make a loop that prints each student's name from `students`, a list of dictionaries.",
+              "hint": "The loop header comes first, and the indented print line comes after it.",
+              "help": {
+                "concept": "To loop through a list of dictionaries, write a `for` loop that takes one dictionary at a time, then access a key from that dictionary inside the loop.",
+                "hint_1": "Use `student` as the loop variable for each dictionary in `students`.",
+                "hint_2": "After the loop header, the print line should use `student[\"name\"]`."
+              },
+              "tokens": {
+                "t1": "for student in students:",
+                "t2": "print(student[\"name\"])"
+              }
+            },
+            "fb-1": {
+              "title": "Fill the missing key",
+              "prompt": "Complete the expression so it reads the score from the first dictionary in the list.",
+              "hint": "The first part `records[0]` gives you one dictionary.",
+              "help": {
+                "concept": "After selecting one dictionary from a list, use the correct key name to read the needed value.",
+                "hint_1": "You already have the first record. Now choose the key that stores the numeric result.",
+                "hint_2": "The missing value should be the dictionary key for the the missing term, not the list index or variable name."
+              },
+              "template": "records[0][\"[blank1]\"]",
+              "choices": [
+                "score",
+                "records",
+                "0",
+                "name"
+              ]
+            },
+            "fb-2": {
+              "title": "Fill the missing outer key",
+              "prompt": "Complete the expression so it reads the list stored inside the dictionary `data = {\"items\": [1, 2, 3]}`.",
+              "hint": "You need the key that points to the inner list.",
+              "help": {
+                "concept": "When a dictionary stores a list, you use the dictionary key first to get that list.",
+                "hint_1": "The list `[1, 2, 3]` is stored under one named key in `data`.",
+                "hint_2": "Choose the key that matches the label attached to the list value."
+              },
+              "template": "data[\"[blank1]\"]",
+              "choices": [
+                "items",
+                "data",
+                "list",
+                "0"
+              ]
+            },
+            "code-1": {
+              "title": "Return all names",
+              "prompt": "Complete this project step: Return all names.\n\nRequirements:\n- add each record's name to names\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names"
+            },
+            "code-2": {
+              "title": "Count total stock",
+              "prompt": "Complete this project step: Count total stock.\n\nRequirements:\n- update total using each item's stock\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total"
+            },
+            "code-3": {
+              "title": "Find the highest score",
+              "prompt": "Complete this project step: Find the highest score.\n\nRequirements:\n- compare later scores with best\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "hint": "Read the task \"Find the highest score\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best"
+            },
+            "try-nested-data-structures-checkpoint": {
+              "title": "Read nested data",
+              "prompt": "Use a list of dictionaries. Print the second student’s name and score. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Use index `1`, then dictionary keys.",
+              "help": {
+                "concept": "Nested data combines containers, such as a list of dictionaries.",
+                "hint_1": "Use index `1`, then dictionary keys.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\n\n# Print Mia and her score on separate lines.\n"
+            },
+            "try-nested-data-structures-sketch0": {
+              "title": "Read a nested value",
+              "prompt": "Use a list index first, then a dictionary key. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"What nested data structures are\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Print the first student's name.\n"
+            },
+            "try-nested-data-structures-sketch1": {
+              "title": "Print names and scores",
+              "prompt": "Loop through a list of dictionaries. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Reading values from nested containers\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Loop through students and print: name: score\n"
+            },
+            "try-nested-data-structures-sketch2": {
+              "title": "Add a nested value",
+              "prompt": "Mutate a list that is stored inside a dictionary. Finish the small program, run it, and check that the result fits the scenario.",
+              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "help": {
+                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Looping through a list of dictionaries\" with a small runnable program.",
+                "hint_1": "Use the TODO comments as your checklist for this small job.",
+                "hint_2": "Make sure the final program shows the result the scenario needs."
+              },
+              "starterCode": "course = {'title': 'Python', 'students': ['Ava']}\n\n# Add 'Mia' to the students list.\n# Then print course.\n"
+            }
+          },
+          "tryIt": {
+            "try_nested_data_structures_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Use a list of dictionaries. Print the second student’s name and score."
+            },
+            "try_nested_data_structures_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Use a list index first, then a dictionary key."
+            },
+            "try_nested_data_structures_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Loop through a list of dictionaries."
+            },
+            "try_nested_data_structures_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Mutate a list that is stored inside a dictionary."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "nested-data-structures": {
+          "sketch-1": {
+            "title": "What nested data structures are",
+            "bodyMarkdown": "Nested data structures are collections inside other collections. In Python, a very common pattern is a **list of dictionaries**.\n\nThis is useful when you have many items that all share the same kinds of details.\n\n```python\nstudents = [\n    {\"name\": \"Ava\", \"score\": 92},\n    {\"name\": \"Ben\", \"score\": 85},\n    {\"name\": \"Cara\", \"score\": 97}\n]\n\nprint(students[0][\"name\"])\n```\n\nThis prints `Ava`.\n\nStep by step:\n\n- `students[0]` gets the first dictionary in the list.\n- `students[0][\"name\"]` gets the value stored under the key `\"name\"` in that dictionary.\n\nA list keeps the whole group together, and each dictionary stores details about one item.\n\nTry it yourself: change `\"Ava\"` to your name, click Run, and check the output panel."
+          },
+          "sketch-2": {
+            "title": "Reading values from nested containers",
+            "bodyMarkdown": "When data is nested, you read it one layer at a time.\n\n```python\nproduct = {\n    \"name\": \"Notebook\",\n    \"details\": {\n        \"price\": 4,\n        \"stock\": 12\n    }\n}\n\nprint(product[\"details\"][\"stock\"])\n```\n\nThis prints `12`.\n\nLine by line:\n\n- `product[\"details\"]` gets the inner dictionary.\n- `product[\"details\"][\"stock\"]` gets the `stock` value from that inner dictionary.\n\nYou can think of it as opening one box, then opening the smaller box inside it.\n\nWorked example: if you changed `\"stock\"` to `\"price\"`, the output would be `4`.\n\nYour turn: add a new key like `\"color\": \"blue\"` inside `details`, then print it."
+          },
+          "sketch-3": {
+            "title": "Looping through a list of dictionaries",
+            "bodyMarkdown": "A loop is a great way to work with every dictionary in a list.\n\n```python\nbooks = [\n    {\"title\": \"Sky\", \"pages\": 120},\n    {\"title\": \"River\", \"pages\": 95}\n]\n\nfor book in books:\n    print(book[\"title\"])\n```\n\nThis prints:\n\n```python\nSky\nRiver\n```\n\nStep by step:\n\n- `for book in books:` takes one dictionary at a time from the list.\n- On the first loop, `book` is `{\"title\": \"Sky\", \"pages\": 120}`.\n- On the second loop, `book` is `{\"title\": \"River\", \"pages\": 95}`.\n- `book[\"title\"]` reads the title from each dictionary.\n\nThis pattern is useful for contact books, inventories, and score lists.\n\nTry this: change the loop so it prints `pages` instead of `title`."
+          }
+        }
+      }
+    }
+  }
+}

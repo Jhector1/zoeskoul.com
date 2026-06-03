@@ -101,21 +101,21 @@
               "starterCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: write output/clean_roster.csv and output/summary.txt.\nprint(f\"Cleaned {len(records)} records\")\n"
             },
             "try-class-roster-cleaner-sketch0": {
-              "title": "Preview a roster row",
-              "prompt": "Clean one roster row before building the full capstone app. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "title": "Clean the first roster record",
+              "prompt": "Open `data/roster.csv`, skip the header row, clean the first student record, and print `Ava Smith <ava@example.com>`.",
+              "hint": "Skip the header, then clean the first data row before you print it.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Build a real data-cleaning project\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "This card uses the real roster file shape from the capstone instead of a hard-coded row string.",
+                "hint_1": "Open `data/roster.csv`, use `next(file)` once to skip the header, then read the first data row.",
+                "hint_2": "Split the row, title-case the name, lowercase the email, and print `Name <email>`."
               },
-              "starterCode": "row = ' ava smith ,92, AVA@EXAMPLE.COM '\n\n# Print the cleaned name and email.\n"
+              "starterCode": "with open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\n# Clean the first student record and print Ava Smith <ava@example.com>.\n"
             }
           },
           "tryIt": {
             "try_class_roster_cleaner_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Clean one roster row before building the full capstone app."
+              "prompt": "Open `data/roster.csv`, skip the header row, clean the first student record, and print `Ava Smith <ava@example.com>`."
             },
             "allowReveal": true
           }

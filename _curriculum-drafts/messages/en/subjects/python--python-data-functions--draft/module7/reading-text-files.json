@@ -165,7 +165,7 @@
             },
             "ci-read-and-print": {
               "title": "Print a file's contents",
-              "prompt": "Complete this project step: Print a file's contents.\n\nRequirements:\n- read the file and print its contents\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `Hello from file reading!`.",
+              "prompt": "Open `data/message.txt`, read the file's contents, and print the text you find there.\n\nYour output should be exactly:\n`Hello from file reading!`.",
               "hint": "Read the task \"Print a file's contents\" and identify the required result.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -176,7 +176,7 @@
             },
             "ci-first-line": {
               "title": "Print only the first line",
-              "prompt": "Complete this project step: Print only the first line.\n\nRequirements:\n- read the first line only\n- print it without the ending newline\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `Apples`.",
+              "prompt": "Open `data/notes.txt`, read only the first line, and print it without the ending newline character.\n\nYour output should be exactly:\n`Apples`.",
               "hint": "Read the task \"Print only the first line\" and identify the required result.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -187,7 +187,7 @@
             },
             "ci-count-lines": {
               "title": "Count lines in a text file",
-              "prompt": "Complete this project step: Count lines in a text file.\n\nRequirements:\n- count the lines and print the number\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- The output should be exactly `3`.",
+              "prompt": "Open `data/list.txt`, count how many lines are in the file, and print that number.\n\nYour output should be exactly:\n`3`.",
               "hint": "Read the task \"Count lines in a text file\" and identify the required result.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -270,15 +270,15 @@
         "reading-text-files": {
           "why-read-files": {
             "title": "Why read text files?",
-            "bodyMarkdown": "Programs often need data that already exists in a file, such as notes, logs, or a list of names. Reading a text file lets your program bring that text into memory and use it.\n\nA beginner-friendly pattern is to use `with open(...)` so Python closes the file for you when you're done.\n\n```python\nwith open(\"notes.txt\", \"r\") as file:\n    text = file.read()\n    print(text)\n```\n\nStep by step:\n\n- `open(\"notes.txt\", \"r\")` opens the file in read mode.\n- `as file` gives that open file a variable name.\n- `file.read()` gets all the text from the file.\n- `print(text)` sends the text to the output panel.\n- `with` makes cleanup automatic.\n\nWorked example:\n\nIf `notes.txt` contains:\n\n```text\nBuy milk\nCall Sam\n```\n\nthen the program prints:\n\n```text\nBuy milk\nCall Sam\n```\n\nTry it yourself: imagine changing the file contents to three different lines. What would `print(text)` show?"
+            "bodyMarkdown": "Programs often need data that already exists in a file, such as notes, logs, or a list of names. Reading a text file lets your program bring that text into memory and use it.\n\nA beginner-friendly pattern is to use `with open(...)` so Python closes the file for you when you're done.\n\n```python\nwith open(\"notes.txt\", \"r\") as file:\n    text = file.read()\n    print(text)\n```\n\nStep by step:\n\n- `open(\"notes.txt\", \"r\")` opens the file in read mode.\n- `as file` gives that open file a variable name.\n- `file.read()` gets all the text from the file.\n- `print(text)` sends the text to the output panel.\n- `with` makes cleanup automatic.\n\nWorked example:\n\nIf `notes.txt` contains:\n\n```text\nBuy milk\nCall Sam\n```\n\nthen the program prints:\n\n```text\nBuy milk\nCall Sam\n```"
           },
           "read-vs-lines": {
             "title": "Reading all text or line by line",
-            "bodyMarkdown": "You can read a whole file at once, or read its lines.\n\nReading the whole file:\n\n```python\nwith open(\"poem.txt\", \"r\") as file:\n    content = file.read()\n    print(content)\n```\n\nReading lines into a list:\n\n```python\nwith open(\"poem.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(lines)\n```\n\nWorked example:\n\nIf `poem.txt` contains:\n\n```text\nred\nblue\n```\n\nthen `file.read()` gives one string containing both lines, while `file.readlines()` gives a list like:\n\n```python\n['red\\n', 'blue\\n']\n```\n\nThat `\\n` means a newline character at the end of a line.\n\nYour turn: if a file has five short lines, which would be easier if you want the entire text as one block: `read()` or `readlines()`?\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "You can read a whole file at once, or read its lines.\n\nReading the whole file:\n\n```python\nwith open(\"poem.txt\", \"r\") as file:\n    content = file.read()\n    print(content)\n```\n\nReading lines into a list:\n\n```python\nwith open(\"poem.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(lines)\n```\n\nWorked example:\n\nIf `poem.txt` contains:\n\n```text\nred\nblue\n```\n\nthen `file.read()` gives one string containing both lines, while `file.readlines()` gives a list like:\n\n```python\n['red\\n', 'blue\\n']\n```\n\nThat `\\n` means a newline character at the end of a line."
           },
           "relative-paths-and-safety": {
             "title": "Relative paths and safe file access",
-            "bodyMarkdown": "A relative path tells Python where a file is inside the lesson workspace, such as `data/story.txt`.\n\n```python\nwith open(\"data/story.txt\", \"r\") as file:\n    print(file.read())\n```\n\nHere:\n\n- `data/story.txt` means a file named `story.txt` inside the `data` folder.\n- You do not need an absolute computer-specific location.\n- In this lesson, use the provided files from the files panel.\n\nWorked example:\n\nIf the workspace includes a folder `data` and inside it a file `story.txt` with:\n\n```text\nChapter 1\n```\n\nthen the code prints:\n\n```text\nChapter 1\n```\n\nTry this: compare `story.txt` with `data/story.txt`. Which one works depends on where the file is located in the workspace.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "A relative path tells Python where a file is inside the lesson workspace, such as `data/story.txt`.\n\n```python\nwith open(\"data/story.txt\", \"r\") as file:\n    print(file.read())\n```\n\nHere:\n\n- `data/story.txt` means a file named `story.txt` inside the `data` folder.\n- You do not need an absolute computer-specific location.\n- In this lesson, use the provided files from the files panel.\n\nWorked example:\n\nIf the workspace includes a folder `data` and inside it a file `story.txt` with:\n\n```text\nChapter 1\n```\n\nthen the code prints:\n\n```text\nChapter 1\n```"
           }
         }
       }

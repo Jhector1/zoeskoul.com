@@ -92,6 +92,7 @@ function submittedFolderExists(
 
 function validateWorkspaceExpectations(args: {
     expected: ProgrammingExpected;
+    entry?: string;
     files?: FileEntry[];
 }): GradeResult | null {
     const expectations = args.expected
@@ -110,6 +111,28 @@ function validateWorkspaceExpectations(args: {
     const requiredFiles = asWorkspacePathArray(expectations.requiredFiles);
     const requiredFolders = asWorkspacePathArray(expectations.requiredFolders);
     const forbiddenFiles = asWorkspacePathArray(expectations.forbiddenFiles);
+    const expectedEntryFilePath = normalizeWorkspaceExpectationPath(
+        expectations.entryFilePath,
+    );
+
+    if (expectedEntryFilePath) {
+        if (!submittedFilePaths.has(expectedEntryFilePath)) {
+            return {
+                ok: false,
+                explanation: `Missing required file: ${expectedEntryFilePath}`,
+                feedback: null,
+            };
+        }
+
+        const submittedEntryPath = normalizeSubmittedFilePath(args.entry);
+        if (submittedEntryPath && submittedEntryPath !== expectedEntryFilePath) {
+            return {
+                ok: false,
+                explanation: `Use ${expectedEntryFilePath} as the entry file.`,
+                feedback: null,
+            };
+        }
+    }
 
     for (const requiredFile of requiredFiles) {
         if (!submittedFilePaths.has(requiredFile)) {
@@ -227,6 +250,84 @@ function stripPythonComments(source: string): string {
         .join("\n");
 }
 
+function isPythonStringPrefix(value: string): boolean {
+    return /^[rRuUbBfF]{0,4}$/.test(value);
+}
+
+function getPythonStringPrefixBeforeQuote(source: string, quoteIndex: number): string {
+    let start = quoteIndex;
+
+    while (start > 0 && /[A-Za-z]/.test(source[start - 1] ?? "")) {
+        start -= 1;
+    }
+
+    const prefix = source.slice(start, quoteIndex);
+    const hasTokenBoundary =
+        start === 0 || !/[A-Za-z0-9_]/.test(source[start - 1] ?? "");
+
+    if (!hasTokenBoundary || !isPythonStringPrefix(prefix)) return "";
+
+    return prefix;
+}
+
+function maskPythonStringContent(args: {
+    source: string;
+    start: number;
+    end: number;
+    preserveFStringExpressions: boolean;
+}): string {
+    const { source, start, end, preserveFStringExpressions } = args;
+
+    if (!preserveFStringExpressions) {
+        let masked = "";
+        for (let i = start; i < end; i += 1) {
+            masked += source[i] === "\n" ? "\n" : " ";
+        }
+        return masked;
+    }
+
+    let masked = "";
+    let expressionDepth = 0;
+
+    for (let i = start; i < end; i += 1) {
+        const ch = source[i];
+        const next = source[i + 1];
+
+        if (expressionDepth === 0) {
+            if (ch === "{" && next === "{") {
+                masked += "  ";
+                i += 1;
+                continue;
+            }
+
+            if (ch === "}" && next === "}") {
+                masked += "  ";
+                i += 1;
+                continue;
+            }
+
+            if (ch === "{") {
+                expressionDepth = 1;
+                masked += ch;
+                continue;
+            }
+
+            masked += ch === "\n" ? "\n" : " ";
+            continue;
+        }
+
+        masked += ch;
+
+        if (ch === "{") {
+            expressionDepth += 1;
+        } else if (ch === "}") {
+            expressionDepth -= 1;
+        }
+    }
+
+    return masked;
+}
+
 function stripPythonStringLiterals(source: string): string {
     let out = "";
     let i = 0;
@@ -234,37 +335,56 @@ function stripPythonStringLiterals(source: string): string {
     while (i < source.length) {
         const ch = source[i];
         const next3 = source.slice(i, i + 3);
+        const isTripleQuote = next3 === "'''" || next3 === '"""';
+        const isSingleQuote = ch === "'" || ch === '"';
 
-        if (next3 === "'''" || next3 === '"""') {
-            const quote = next3;
-            out += "   ";
-            i += 3;
-            while (i < source.length && source.slice(i, i + 3) !== quote) {
-                out += source[i] === "\n" ? "\n" : " ";
-                i += 1;
-            }
-            if (i < source.length) {
-                out += "   ";
-                i += 3;
-            }
-            continue;
-        }
+        if (isTripleQuote || isSingleQuote) {
+            const quote = isTripleQuote ? next3 : ch;
+            const delimiterLength = isTripleQuote ? 3 : 1;
+            const prefix = getPythonStringPrefixBeforeQuote(source, i);
+            const preserveFStringExpressions = /f/i.test(prefix);
 
-        if (ch === "'" || ch === '"') {
-            const quote = ch;
-            out += " ";
-            i += 1;
-            while (i < source.length) {
-                const current = source[i];
-                if (current === "\\") {
-                    out += "  ";
-                    i += 2;
-                    continue;
+            out += " ".repeat(delimiterLength);
+
+            const bodyStart = i + delimiterLength;
+            let bodyEnd = bodyStart;
+
+            if (isTripleQuote) {
+                while (
+                    bodyEnd < source.length &&
+                    source.slice(bodyEnd, bodyEnd + delimiterLength) !== quote
+                    ) {
+                    bodyEnd += 1;
                 }
-                out += current === "\n" ? "\n" : " ";
-                i += 1;
-                if (current === quote) break;
+            } else {
+                while (bodyEnd < source.length) {
+                    const current = source[bodyEnd];
+
+                    if (current === "\\") {
+                        bodyEnd += 2;
+                        continue;
+                    }
+
+                    if (current === quote) break;
+
+                    bodyEnd += 1;
+                }
             }
+
+            out += maskPythonStringContent({
+                source,
+                start: bodyStart,
+                end: Math.min(bodyEnd, source.length),
+                preserveFStringExpressions,
+            });
+
+            if (bodyEnd < source.length) {
+                out += " ".repeat(delimiterLength);
+                i = bodyEnd + delimiterLength;
+            } else {
+                i = bodyEnd;
+            }
+
             continue;
         }
 
@@ -274,7 +394,6 @@ function stripPythonStringLiterals(source: string): string {
 
     return out;
 }
-
 function getSubmittedSourceForCheck(args: {
     check: SourceCheckInput;
     code: string;
@@ -419,6 +538,12 @@ function checkUsesDictKey(source: string, check: SourceCheckInput): boolean {
     return new RegExp(subscriptPattern).test(commentFree) || new RegExp(literalKeyPattern).test(commentFree);
 }
 
+
+
+
+
+
+
 function checkUsesImport(source: string, check: SourceCheckInput): boolean {
     const moduleName = typeof check.module === "string" ? check.module.trim() : "";
     if (!moduleName) return false;
@@ -428,16 +553,35 @@ function checkUsesImport(source: string, check: SourceCheckInput): boolean {
     const modulePattern = escapeRegex(moduleName);
 
     if (importName) {
+        const importNamePattern = escapeRegex(importName);
+
         const fromImport = new RegExp(
-            `\\bfrom\\s+${modulePattern}\\s+import\\s+([^\\n]+\\b${escapeRegex(importName)}\\b[^\\n]*)`,
+            [
+                `\\bfrom\\s+${modulePattern}\\s+import\\s+`,
+                `(?:`,
+                `\\([^)]*\\b${importNamePattern}\\b[^)]*\\)`,
+                `|`,
+                `[^\\n]*\\b${importNamePattern}\\b[^\\n]*`,
+                `)`,
+            ].join(""),
         );
-        const directImport = new RegExp(`\\bimport\\s+${modulePattern}(\\s+as\\s+\\w+)?\\b`);
+
+        const directImport = new RegExp(
+            `\\bimport\\s+${modulePattern}(?:\\s+as\\s+\\w+)?\\b`,
+        );
 
         return fromImport.test(codeOnly) || directImport.test(codeOnly);
     }
 
-    return new RegExp(`\\b(from\\s+${modulePattern}\\s+import|import\\s+${modulePattern})\\b`).test(codeOnly);
+    return new RegExp(
+        `\\b(from\\s+${modulePattern}\\s+import|import\\s+${modulePattern})\\b`,
+    ).test(codeOnly);
 }
+
+
+
+
+
 
 function sourceCheckPasses(source: string, check: SourceCheckInput): boolean {
     switch (check.type) {
@@ -597,6 +741,7 @@ export async function gradeProgrammingCodeInput(args: {
 
     const workspaceValidation = validateWorkspaceExpectations({
         expected,
+        entry,
         files,
     });
 
@@ -693,6 +838,7 @@ export async function gradeProgrammingCodeInput(args: {
             language,
             code,
             source: "check",
+            semanticChecks: getSemanticChecks(expected),
         });
 
         return {

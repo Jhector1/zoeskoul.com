@@ -1,0 +1,18 @@
+{
+  "subjectSlug": "python-v2",
+  "generatedAt": "2026-06-03T07:12:48.961Z",
+  "topics": [
+    {
+      "moduleSlug": "python-v2-0",
+      "sectionSlug": "python-v2-0-setup-and-first-programs",
+      "topicId": "what-python-is",
+      "status": "failed",
+      "attempts": 3,
+      "retryCodes": [
+        "GOLDEN_VALIDATION_FAILED",
+        "GOLDEN_VALIDATION_FAILED",
+        "GOLDEN_VALIDATION_FAILED"
+      ]
+    }
+  ]
+}

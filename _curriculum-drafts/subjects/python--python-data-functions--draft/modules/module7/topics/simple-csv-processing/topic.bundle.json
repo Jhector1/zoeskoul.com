@@ -653,9 +653,8 @@
         ],
         "files": [
           {
-            "path": "scores.csv",
-            "content": "name,score\nAva,9\nBen,oops\nCara,7\n",
-            "readOnly": false
+            "path": "summary.txt",
+            "content": ""
           }
         ],
         "solutionFiles": [

@@ -167,8 +167,8 @@
             },
             "pvrs-code-1": {
               "title": "Return a doubled value",
-              "prompt": "Complete this project step: Return a doubled value.\n\nRequirements:\n- return double the input\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Write `double_number(n)` so it returns double the input instead of printing it.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
@@ -178,8 +178,8 @@
             },
             "pvrs-code-2": {
               "title": "Return a greeting string",
-              "prompt": "Complete this project step: Return a greeting string.\n\nRequirements:\n- return a greeting like Hello, Ava\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Write `make_greeting(name)` so it returns a greeting string like `Hello, Ava`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
@@ -189,8 +189,8 @@
             },
             "pvrs-code-3": {
               "title": "Return a total instead of printing it",
-              "prompt": "Complete this project step: Return a total instead of printing it.\n\nRequirements:\n- return the total of the two prices\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Write `add_prices(price1, price2)` so it returns the total of the two prices instead of printing it.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
@@ -200,7 +200,7 @@
             },
             "try-print-vs-return-checkpoint": {
               "title": "Return, then print",
-              "prompt": "Define `add(a, b)` so it returns the sum. Then print `add(3, 4)`. Finish the small program, run it, and check that the result fits the scenario.",
+              "prompt": "Define `add(a, b)` so it returns the sum. Then print `add(3, 4)`.",
               "hint": "The function should return the value; the call site should print it.",
               "help": {
                 "concept": "Returning a value and printing a value are separate actions.",
@@ -211,34 +211,34 @@
             },
             "try-print-vs-return-sketch0": {
               "title": "Return then print",
-              "prompt": "The function returns the value; the caller prints it. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "prompt": "The function returns the value; the caller prints it.",
+              "hint": "Return 'Hi, ' + name instead of printing inside the function.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Printing shows a value; returning gives it back\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "Return 'Hi, ' + name instead of printing inside the function.",
+                "hint_1": "Write the line for this step, then run the program to see what changes.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
               "starterCode": "def make_message(name):\n    # Return 'Hi, ' + name instead of printing inside the function.\n    pass\n\nmessage = make_message('Ava')\nprint(message)\n"
             },
             "try-print-vs-return-sketch1": {
               "title": "Use a returned number",
-              "prompt": "Returned values can be stored and used in more expressions. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "prompt": "Returned values can be stored and used in more expressions.",
+              "hint": "Store double(6) in result, then print result + 1.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"A worked comparison: same output, different usefulness\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "Store double(6) in result, then print result + 1.",
+                "hint_1": "Write the line for this step, then run the program to see what changes.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
               "starterCode": "def double(number):\n    return number * 2\n\n# Store double(6) in result, then print result + 1.\n"
             },
             "try-print-vs-return-sketch2": {
               "title": "Avoid printing None",
-              "prompt": "Print the returned string, not the function object. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "prompt": "Print the returned string, not the function object.",
+              "hint": "Print label('zoe').",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"When should you print, and when should you return?\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "Print label('zoe').",
+                "hint_1": "Write the line for this step, then run the program to see what changes.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
               "starterCode": "def label(name):\n    return name.upper()\n\n# Print label('zoe').\n"
             }
@@ -272,15 +272,15 @@
         "print-vs-return": {
           "print-vs-return-idea": {
             "title": "Printing shows a value; returning gives it back",
-            "bodyMarkdown": "`print()` and `return` do different jobs.\n\n- `print()` sends text or values to the **output panel** so a person can see them.\n- `return` sends a value back from a function so the rest of your code can use it.\n\nHere is a simple example:\n\n```python\ndef double_number(n):\n    return n * 2\n\nresult = double_number(5)\nprint(result)\n```\n\nStep by step:\n\n1. `double_number(5)` runs the function.\n2. `return n * 2` sends back `10`.\n3. That returned value is stored in `result`.\n4. `print(result)` displays `10` in the output panel.\n\nThe important idea: the function itself **returns** the value, and then another line **prints** it.\n\nIf you only print inside a function, the value appears on screen, but other code may not be able to reuse it.\n\nTry it yourself: change `5` to `8`, click Run, and check the output panel."
+            "bodyMarkdown": "`print()` and `return` do different jobs.\n\n- `print()` sends text or values to the **output panel** so a person can see them.\n- `return` sends a value back from a function so the rest of your code can use it.\n\nHere is a simple example:\n\n```python\ndef double_number(n):\n    return n * 2\n\nresult = double_number(5)\nprint(result)\n```\n\nStep by step:\n\n1. `double_number(5)` runs the function.\n2. `return n * 2` sends back `10`.\n3. That returned value is stored in `result`.\n4. `print(result)` displays `10` in the output panel.\n\nThe important idea: the function itself **returns** the value, and then another line **prints** it.\n\nIf you only print inside a function, the value appears on screen, but other code may not be able to reuse it."
           },
           "print-vs-return-compare": {
             "title": "A worked comparison: same output, different usefulness",
-            "bodyMarkdown": "These two functions may look similar, but they behave differently.\n\n```python\ndef show_total(a, b):\n    print(a + b)\n\ndef get_total(a, b):\n    return a + b\n```\n\nNow compare how they are used:\n\n```python\nshow_total(2, 3)\nvalue = get_total(2, 3)\nprint(value)\n```\n\nWhat happens?\n\n- `show_total(2, 3)` prints `5` right away.\n- `get_total(2, 3)` does **not** display anything by itself.\n- Instead, it returns `5`, which gets stored in `value`.\n- Then `print(value)` displays `5`.\n\nWhy does this matter?\n\nWith `return`, you can keep working with the result:\n\n```python\ntotal = get_total(2, 3)\nprint(total * 10)\n```\n\nThis prints `50` because the returned value can be reused in another calculation.\n\nYour turn: change the last line to `print(total + 7)` and predict the output before you click Run.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "These two functions may look similar, but they behave differently.\n\n```python\ndef show_total(a, b):\n    print(a + b)\n\ndef get_total(a, b):\n    return a + b\n```\n\nNow compare how they are used:\n\n```python\nshow_total(2, 3)\nvalue = get_total(2, 3)\nprint(value)\n```\n\nWhat happens?\n\n- `show_total(2, 3)` prints `5` right away.\n- `get_total(2, 3)` does **not** display anything by itself.\n- Instead, it returns `5`, which gets stored in `value`.\n- Then `print(value)` displays `5`.\n\nWhy does this matter?\n\nWith `return`, you can keep working with the result:\n\n```python\ntotal = get_total(2, 3)\nprint(total * 10)\n```\n\nThis prints `50` because the returned value can be reused in another calculation."
           },
           "print-vs-return-when": {
             "title": "When should you print, and when should you return?",
-            "bodyMarkdown": "A good beginner rule is:\n\n- Use **`print()`** when you want to **show** something to the user.\n- Use **`return`** when you want a function to **produce a result** for other code to use.\n\nExample:\n\n```python\ndef make_greeting(name):\n    return \"Hello, \" + name\n\ngreeting = make_greeting(\"Ava\")\nprint(greeting)\n```\n\nLine by line:\n\n- The function builds a greeting.\n- `return` sends that greeting back.\n- The returned text is stored in `greeting`.\n- `print(greeting)` shows it in the output panel.\n\nIf the function used `print(\"Hello, \" + name)` instead, you would see the text, but you could not easily combine it with other strings later.\n\nFor example, this works well with `return`:\n\n```python\nmessage = make_greeting(\"Ava\")\nprint(message + \"!\")\n```\n\nTry this: change the name to your own name, then add more punctuation or words after the returned greeting."
+            "bodyMarkdown": "A good beginner rule is:\n\n- Use **`print()`** when you want to **show** something to the user.\n- Use **`return`** when you want a function to **produce a result** for other code to use.\n\nExample:\n\n```python\ndef make_greeting(name):\n    return \"Hello, \" + name\n\ngreeting = make_greeting(\"Ava\")\nprint(greeting)\n```\n\nLine by line:\n\n- The function builds a greeting.\n- `return` sends that greeting back.\n- The returned text is stored in `greeting`.\n- `print(greeting)` shows it in the output panel.\n\nIf the function used `print(\"Hello, \" + name)` instead, you would see the text, but you could not easily combine it with other strings later.\n\nFor example, this works well with `return`:\n\n```python\nmessage = make_greeting(\"Ava\")\nprint(message + \"!\")\n```"
           }
         }
       }

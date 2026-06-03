@@ -21,12 +21,14 @@ type Props = {
     reduceMotion: boolean;
     toast: TopicCelebrateToastVm;
     onPauseChange: (paused: boolean) => void;
+    onDismiss: () => void;
 };
 
 export default function TopicCelebrateToast({
                                                 reduceMotion,
                                                 toast,
                                                 onPauseChange,
+                                                onDismiss,
                                             }: Props) {
     return (
         <motion.div
@@ -47,7 +49,16 @@ export default function TopicCelebrateToast({
                     boxShadow: "0 0 0 1px rgb(var(--ui-accent) / 0.08), var(--ui-shadow-lg)",
                 }}
             >
-                <div className="flex items-start gap-3 pl-2">
+                <button
+                    type="button"
+                    onClick={onDismiss}
+                    aria-label="Dismiss progress saved message"
+                    className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold text-[rgb(var(--ui-text-muted)/0.8)] transition hover:bg-[rgb(var(--ui-accent)/0.1)] hover:text-[rgb(var(--ui-text)/0.96)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--ui-accent)/0.28)]"
+                >
+                    <span aria-hidden>x</span>
+                </button>
+
+                <div className="flex items-start gap-3 pl-2 pr-10">
                     <div className="ui-celebrate-icon ui-celebrate-icon-success" aria-hidden>
                         ✓
                     </div>

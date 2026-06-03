@@ -159,7 +159,14 @@
           "requiredFiles": [
             "data/students.csv"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -270,7 +277,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            print(clean_row(line))\n        except ValueError:\n            print(\"bad row\")\n",
+            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -288,13 +295,20 @@
           "requiredFiles": [
             "data/students.csv"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            print(clean_row(line))\n        except ValueError:\n            print(\"bad row\")\n",
+        "solutionCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -336,7 +350,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            print(clean_row(line))\n        except ValueError:\n            print(\"bad row\")\n",
+            "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -351,7 +365,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            print(clean_row(line))\n        except ValueError:\n            print(\"bad row\")\n",
+          "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -433,7 +447,14 @@
           "requiredFiles": [
             "data/students.csv"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -562,7 +583,14 @@
             "data/students.csv",
             "output/clean_students.csv"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/students.csv",
+            "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n",
+            "language": "csv"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {

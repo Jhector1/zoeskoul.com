@@ -449,6 +449,87 @@ describe("validatePythonGolden", () => {
         expect(calls).toBe(0);
     });
 
+    it("fails before execution when requiredFiles contains an output file created at runtime", async () => {
+        let calls = 0;
+        setCodeRunner(async () => {
+            calls += 1;
+            return {
+                ok: true,
+                stdout: "apple\nbanana\n",
+                stderr: "",
+                exitCode: 0,
+            };
+        });
+
+        const result = await validatePythonGolden({
+            seed: { topicId: "working-with-paths" } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "working-with-paths",
+                subjectSlug: "python",
+                moduleSlug: "python-7-files-exceptions-and-data-cleaning",
+                sectionSlug: "python-7-file-io",
+                prefix: "topics.python.python-7.working-with-paths",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                runtimeDefaults: {
+                    kind: "code",
+                    language: "python",
+                    supportsFileSystem: true,
+                    supportsMultiFile: true,
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "ci-copy-between-paths",
+                        kind: "code_input",
+                        messageBase: "quiz.ci-copy-between-paths",
+                        language: "python",
+                        workspaceExpectations: {
+                            requiredFolders: ["data"],
+                            requiredFiles: ["data/copy.txt"],
+                        },
+                        workspace: {
+                            entryFilePath: "main.py",
+                            files: [
+                                {
+                                    path: "data/source.txt",
+                                    content: "apple\nbanana",
+                                },
+                            ],
+                            workspaceExpectations: {
+                                requiredFolders: ["data"],
+                                requiredFiles: ["data/copy.txt"],
+                            },
+                        },
+                        recipe: {
+                            type: "fixed_tests",
+                            tests: [{ stdout: "apple\nbanana\n", match: "exact" }],
+                            solutionCode:
+                                "with open('data/source.txt', 'r') as source:\n" +
+                                "    text = source.read()\n\n" +
+                                "with open('data/copy.txt', 'w') as target:\n" +
+                                "    target.write(text)\n\n" +
+                                "print(text)\n",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(result.issues.map((issue) => issue.code)).toContain(
+            "PYTHON_WORKSPACE_REQUIRED_FILE_IS_OUTPUT",
+        );
+        expect(result.issues.map((issue) => issue.message)).toContain(
+            'Exercise "ci-copy-between-paths" requiredFiles contains output file data/copy.txt; browser will fail before runtime.',
+        );
+        expect(calls).toBe(0);
+    });
+
     it("rejects filesystem code when the Python runtime does not support files", async () => {
         let calls = 0;
         setCodeRunner(async () => {

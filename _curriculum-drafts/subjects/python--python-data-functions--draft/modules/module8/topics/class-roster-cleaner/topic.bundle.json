@@ -177,7 +177,14 @@
           "requiredFiles": [
             "data/roster.csv"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -288,7 +295,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -306,13 +313,20 @@
           "requiredFiles": [
             "data/roster.csv"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+        "solutionCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -362,7 +376,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -377,7 +391,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -459,7 +473,14 @@
           "requiredFiles": [
             "data/roster.csv"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -663,7 +684,24 @@
             "tools/__init__.py",
             "tools/cleaning.py"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/cleaning.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+            "language": "python"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -900,7 +938,29 @@
             "tools/cleaning.py",
             "tools/scoring.py"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/cleaning.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/scoring.py",
+            "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n",
+            "language": "python"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {
@@ -1172,7 +1232,34 @@
             "tools/reports.py",
             "tools/scoring.py"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/roster.csv",
+            "content": "name,score,email\n ava smith ,92, AVA@EXAMPLE.COM\nMia Chen,not-a-score,mia@example.com\nZoe Ray,87,zoe@example.com\nLeo West,74, leo@example.com \n",
+            "language": "csv"
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/cleaning.py",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/scoring.py",
+            "content": "def average_score(records):\n    total = 0\n    for record in records:\n        total += record[\"score\"]\n    return total / len(records)\n\ndef passing_count(records):\n    count = 0\n    for record in records:\n        if record[\"score\"] >= 70:\n            count += 1\n    return count\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/reports.py",
+            "content": "import os\nfrom tools.scoring import average_score,passing_count\ndef write_clean_roster(records,path):\n    os.makedirs(os.path.dirname(path) or \".\",exist_ok=True)\n    with open(path,\"w\") as f:\n        f.write(\"name,score,email\\n\")\n        for r in records:f.write(f\"{r['name']},{r['score']},{r['email']}\\n\")\ndef write_summary(records,path):\n    os.makedirs(os.path.dirname(path) or \".\",exist_ok=True)\n    with open(path,\"w\") as f:\n        f.write(f\"records={len(records)}\\naverage={average_score(records):.1f}\\npassing={passing_count(records)}\\n\")\n",
+            "language": "python"
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {

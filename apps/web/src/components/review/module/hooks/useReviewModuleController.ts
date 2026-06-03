@@ -1779,6 +1779,7 @@ export function useReviewModuleController({
             onModuleContinue: handleModuleCelebrateContinue,
             topicToast: celebrations.topicToast,
             setTopicToastPaused: celebrations.setTopicToastPaused,
+            dismissTopicToast: celebrations.dismissTopicToast,
         },
 
         resetDialog: {

@@ -1,0 +1,710 @@
+{
+  "topicId": "module-5-gradebook-project",
+  "subjectSlug": "python-data-functions",
+  "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+  "sectionSlug": "python-data-functions-python-5-module-project",
+  "prefix": "py5",
+  "minutes": 55,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.label",
+    "summaryKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.cards.sketch0.title",
+      "sketchId": "module-5-gradebook-project-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-5-gradebook-project-sketch0",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.tryIt.try_module_5_gradebook_project_sketch0.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.tryIt.try_module_5_gradebook_project_sketch0.prompt",
+        "exerciseKey": "try-module-5-gradebook-project-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.cards.project.title",
+      "project": {
+        "difficulty": "medium",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "mp_1",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.projectSteps.mp_1.title",
+            "exerciseKey": "mp-1-create-student-list",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_2",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.projectSteps.mp_2.title",
+            "exerciseKey": "mp-2-store-scores",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_3",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.projectSteps.mp_3.title",
+            "exerciseKey": "mp-3-print-passing-students",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_4",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.projectSteps.mp_4.title",
+            "exerciseKey": "mp-4-sort-grade-summary",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "module-5-gradebook-project-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.sketch-1.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.sketch-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "mp-1-create-student-list",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.mp-1-create-student-list",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "students = []\n\n# Add Ava, Mia, and Zoe to the list in that order.\n# Then print the list.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "students = []\n\n# Add Ava, Mia, and Zoe to the list in that order.\n# Then print the list.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "students = []\n\n# Add Ava, Mia, and Zoe to the list in that order.\n# Then print the list.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "students = []\n\n# Add Ava, Mia, and Zoe to the list in that order.\n# Then print the list.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "students = []\nstudents.append('Ava')\nstudents.append('Mia')\nstudents.append('Zoe')\nprint(students)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "['Ava', 'Mia', 'Zoe']\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "students = []\nstudents.append('Ava')\nstudents.append('Mia')\nstudents.append('Zoe')\nprint(students)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "students = []\nstudents.append('Ava')\nstudents.append('Mia')\nstudents.append('Zoe')\nprint(students)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "students",
+            "expected": [
+              "Ava",
+              "Mia",
+              "Zoe"
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "append",
+            "message": "Use students.append(...) to add each student to the list.",
+            "target": "students"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "students\\.append\\s*\\(\\s*['\\\"]Ava['\\\"]\\s*\\)",
+            "message": "Append Ava to students."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "students\\.append\\s*\\(\\s*['\\\"]Mia['\\\"]\\s*\\)",
+            "message": "Append Mia to students."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "students\\.append\\s*\\(\\s*['\\\"]Zoe['\\\"]\\s*\\)",
+            "message": "Append Zoe to students."
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "students = []\nstudents.append('Ava')\nstudents.append('Mia')\nstudents.append('Zoe')\nprint(students)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "append",
+          "message": "Use students.append(...) to add each student to the list.",
+          "target": "students"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "students\\.append\\s*\\(\\s*['\\\"]Ava['\\\"]\\s*\\)",
+          "message": "Append Ava to students."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "students\\.append\\s*\\(\\s*['\\\"]Mia['\\\"]\\s*\\)",
+          "message": "Append Mia to students."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "students\\.append\\s*\\(\\s*['\\\"]Zoe['\\\"]\\s*\\)",
+          "message": "Append Zoe to students."
+        }
+      ]
+    },
+    {
+      "id": "mp-2-store-scores",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.mp-2-store-scores",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "students = []\nstudents.append('Ava')\nstudents.append('Mia')\nstudents.append('Zoe')\nprint(students)\n\n# Now create a dictionary named scores for the same students.\n# Ava has 92, Mia has 85, and Zoe has 97.\n# Print the dictionary.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "students = []\nstudents.append('Ava')\nstudents.append('Mia')\nstudents.append('Zoe')\nprint(students)\n\n# Now create a dictionary named scores for the same students.\n# Ava has 92, Mia has 85, and Zoe has 97.\n# Print the dictionary.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "students = []\nstudents.append('Ava')\nstudents.append('Mia')\nstudents.append('Zoe')\nprint(students)\n\n# Now create a dictionary named scores for the same students.\n# Ava has 92, Mia has 85, and Zoe has 97.\n# Print the dictionary.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "students = []\nstudents.append('Ava')\nstudents.append('Mia')\nstudents.append('Zoe')\nprint(students)\n\n# Now create a dictionary named scores for the same students.\n# Ava has 92, Mia has 85, and Zoe has 97.\n# Print the dictionary.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(students)\nprint(scores)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "['Ava', 'Mia', 'Zoe']\n{'Ava': 92, 'Mia': 85, 'Zoe': 97}\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(students)\nprint(scores)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(students)\nprint(scores)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "scores",
+            "expected": [
+              [
+                "Ava",
+                92
+              ],
+              [
+                "Mia",
+                85
+              ],
+              [
+                "Zoe",
+                97
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bscores\\s*=",
+            "message": "Create a dictionary variable named scores."
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "Ava",
+            "message": "Use the Ava key in the scores dictionary."
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "Mia",
+            "message": "Use the Mia key in the scores dictionary."
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "Zoe",
+            "message": "Use the Zoe key in the scores dictionary."
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(students)\nprint(scores)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bscores\\s*=",
+          "message": "Create a dictionary variable named scores."
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "Ava",
+          "message": "Use the Ava key in the scores dictionary."
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "Mia",
+          "message": "Use the Mia key in the scores dictionary."
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "Zoe",
+          "message": "Use the Zoe key in the scores dictionary."
+        }
+      ]
+    },
+    {
+      "id": "mp-3-print-passing-students",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.mp-3-print-passing-students",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(students)\nprint(scores)\n\n# Print only students with scores of 90 or higher, one per line.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(students)\nprint(scores)\n\n# Print only students with scores of 90 or higher, one per line.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(students)\nprint(scores)\n\n# Print only students with scores of 90 or higher, one per line.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(students)\nprint(scores)\n\n# Print only students with scores of 90 or higher, one per line.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nfor name in students:\n    if scores[name] >= 90:\n        print(name)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\nZoe\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nfor name in students:\n    if scores[name] >= 90:\n        print(name)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nfor name in students:\n    if scores[name] >= 90:\n        print(name)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "students",
+            "message": "Loop through students instead of typing Ava and Zoe directly."
+          },
+          {
+            "type": "source_contains_any",
+            "patterns": [
+              "scores[",
+              "scores.get("
+            ],
+            "message": "Look up each student in the scores dictionary.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": ">=\\s*90|90\\s*<=",
+            "message": "Check for scores of 90 or higher instead of hard-coding the names."
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nfor name in students:\n    if scores[name] >= 90:\n        print(name)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "students",
+          "message": "Loop through students instead of typing Ava and Zoe directly."
+        },
+        {
+          "type": "source_contains_any",
+          "patterns": [
+            "scores[",
+            "scores.get("
+          ],
+          "message": "Look up each student in the scores dictionary.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": ">=\\s*90|90\\s*<=",
+          "message": "Check for scores of 90 or higher instead of hard-coding the names."
+        }
+      ]
+    },
+    {
+      "id": "mp-4-sort-grade-summary",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.mp-4-sort-grade-summary",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nfor name in students:\n    if scores[name] >= 90:\n        print(name)\n\n# Build a list of (name, score) pairs sorted by score from high to low.\n# Print each line as: name: score\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nfor name in students:\n    if scores[name] >= 90:\n        print(name)\n\n# Build a list of (name, score) pairs sorted by score from high to low.\n# Print each line as: name: score\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nfor name in students:\n    if scores[name] >= 90:\n        print(name)\n\n# Build a list of (name, score) pairs sorted by score from high to low.\n# Print each line as: name: score\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nfor name in students:\n    if scores[name] >= 90:\n        print(name)\n\n# Build a list of (name, score) pairs sorted by score from high to low.\n# Print each line as: name: score\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nranked = sorted(scores.items(), key=lambda item: item[1], reverse=True)\nfor name, score in ranked:\n    print(f'{name}: {score}')\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Zoe: 97\nAva: 92\nMia: 85\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nranked = sorted(scores.items(), key=lambda item: item[1], reverse=True)\nfor name, score in ranked:\n    print(f'{name}: {score}')\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nranked = sorted(scores.items(), key=lambda item: item[1], reverse=True)\nfor name, score in ranked:\n    print(f'{name}: {score}')\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "ranked",
+            "expected": [
+              [
+                "Zoe",
+                97
+              ],
+              [
+                "Ava",
+                92
+              ],
+              [
+                "Mia",
+                85
+              ]
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_call",
+            "functionName": "sorted",
+            "message": "Use sorted(...) to build the ranked grade summary."
+          },
+          {
+            "type": "source_contains",
+            "pattern": "scores.items()",
+            "message": "Sort scores.items() so each name stays paired with its score.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "reverse\\s*=\\s*True",
+            "message": "Sort in descending score order with reverse=True."
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nranked = sorted(scores.items(), key=lambda item: item[1], reverse=True)\nfor name, score in ranked:\n    print(f'{name}: {score}')\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_call",
+          "functionName": "sorted",
+          "message": "Use sorted(...) to build the ranked grade summary."
+        },
+        {
+          "type": "source_contains",
+          "pattern": "scores.items()",
+          "message": "Sort scores.items() so each name stays paired with its score.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "reverse\\s*=\\s*True",
+          "message": "Sort in descending score order with reverse=True."
+        }
+      ]
+    },
+    {
+      "id": "try-module-5-gradebook-project-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.try-module-5-gradebook-project-sketch0",
+      "language": "python",
+      "starterCode": "students = ['Ava', 'Mia']\n\n# Add Zoe and print students.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "students = ['Ava', 'Mia']\n\n# Add Zoe and print students.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "students = ['Ava', 'Mia']\nstudents.append('Zoe')\nprint(students)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "students = ['Ava', 'Mia']\n\n# Add Zoe and print students.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "students = ['Ava', 'Mia']\n\n# Add Zoe and print students.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "students = ['Ava', 'Mia']\nstudents.append('Zoe')\nprint(students)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "['Ava', 'Mia', 'Zoe']\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "students = ['Ava', 'Mia']\nstudents.append('Zoe')\nprint(students)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "students = ['Ava', 'Mia']\nstudents.append('Zoe')\nprint(students)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "students",
+            "expected": [
+              "Ava",
+              "Mia",
+              "Zoe"
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "append",
+            "message": "Use students.append('Zoe') instead of replacing the final list.",
+            "target": "students"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "append",
+          "message": "Use students.append('Zoe') instead of replacing the final list.",
+          "target": "students"
+        }
+      ]
+    }
+  ]
+}

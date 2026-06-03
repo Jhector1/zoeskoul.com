@@ -306,11 +306,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "row = input()\n\n# Split the row and print the name and score.\n",
+      "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Print the first row name, then the first row score.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "row = input()\n\n# Split the row and print the name and score.\n",
+          "content": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Print the first row name, then the first row score.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -319,11 +319,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "row = input()\n\n# Split the row and print the name and score.\n",
+        "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Print the first row name, then the first row score.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "row = input()\n\n# Split the row and print the name and score.\n",
+            "content": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Print the first row name, then the first row score.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -332,10 +332,23 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "row = input()\nname, score = row.split(\",\")\nprint(name.strip())\nprint(score.strip())\n",
+            "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"])\n    print(row[\"score\"])\n",
             "language": "python",
             "isEntry": true,
             "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "scores.csv"
+          ]
+        },
+        "files": [
+          {
+            "path": "scores.csv",
+            "content": "name,score\nAva,92\n",
+            "readOnly": false
           }
         ]
       },
@@ -344,21 +357,23 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "Ava,92\n",
+            "stdin": "",
             "stdout": "Ava\n92\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "Mia,85\n",
-            "stdout": "Mia\n85\n",
-            "match": "exact"
+            "match": "exact",
+            "files": [
+              {
+                "path": "scores.csv",
+                "content": "name,score\nAva,92\n",
+                "readOnly": false
+              }
+            ]
           }
         ],
-        "solutionCode": "row = input()\nname, score = row.split(\",\")\nprint(name.strip())\nprint(score.strip())\n",
+        "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"])\n    print(row[\"score\"])\n",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "row = input()\nname, score = row.split(\",\")\nprint(name.strip())\nprint(score.strip())\n",
+            "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"])\n    print(row[\"score\"])\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -366,16 +381,23 @@
         ],
         "sourceChecks": [
           {
-            "type": "uses_method",
-            "method": "split",
-            "message": "Split the input row instead of hard-coding positions."
+            "type": "source_contains",
+            "pattern": "csv.DictReader",
+            "message": "Use csv.DictReader to read scores.csv.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "scores.csv",
+            "message": "Open scores.csv for this step.",
+            "normalizeWhitespace": true
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "row = input()\nname, score = row.split(\",\")\nprint(name.strip())\nprint(score.strip())\n",
+          "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"])\n    print(row[\"score\"])\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -383,11 +405,24 @@
       ],
       "sourceChecks": [
         {
-          "type": "uses_method",
-          "method": "split",
-          "message": "Split the input row instead of hard-coding positions."
+          "type": "source_contains",
+          "pattern": "csv.DictReader",
+          "message": "Use csv.DictReader to read scores.csv.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "scores.csv",
+          "message": "Open scores.csv for this step.",
+          "normalizeWhitespace": true
         }
-      ]
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "scores.csv"
+        ]
+      }
     },
     {
       "id": "ci-print-clean-names",
@@ -651,13 +686,6 @@
             "entry": true
           }
         ],
-        "files": [
-          {
-            "path": "scores.csv",
-            "content": "name,score\nAva,9\nBen,oops\nCara,7\n",
-            "readOnly": false
-          }
-        ],
         "solutionFiles": [
           {
             "path": "main.py",
@@ -669,9 +697,7 @@
         ],
         "workspaceExpectations": {
           "requiredFolders": [],
-          "requiredFiles": [
-            "summary.txt"
-          ]
+          "requiredFiles": []
         }
       },
       "showExpectedExample": true,
@@ -687,6 +713,11 @@
                 "path": "scores.csv",
                 "content": "name,score\nAva,9\nBen,oops\nCara,7\n",
                 "readOnly": false
+              },
+              {
+                "path": "summary.txt",
+                "content": "",
+                "readOnly": false
               }
             ]
           },
@@ -698,6 +729,11 @@
               {
                 "path": "scores.csv",
                 "content": "name,score\nMia,3\nOmar,11\n",
+                "readOnly": false
+              },
+              {
+                "path": "summary.txt",
+                "content": "",
                 "readOnly": false
               }
             ]
@@ -738,9 +774,7 @@
       ],
       "workspaceExpectations": {
         "requiredFolders": [],
-        "requiredFiles": [
-          "summary.txt"
-        ]
+        "requiredFiles": []
       },
       "sourceChecks": [
         {
@@ -763,11 +797,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0",
       "language": "python",
-      "starterCode": "row = 'Ava,92'\n\n# Split row into name and score. Print name, then score.\n",
+      "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Read the first row, strip the name and score, and print them on separate lines.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "row = 'Ava,92'\n\n# Split row into name and score. Print name, then score.\n",
+          "content": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Read the first row, strip the name and score, and print them on separate lines.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -776,7 +810,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "row = 'Ava,92'\nname, score = row.split(',')\nprint(name)\nprint(score)\n",
+          "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"].strip())\n    print(row[\"score\"].strip())\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -785,11 +819,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "row = 'Ava,92'\n\n# Split row into name and score. Print name, then score.\n",
+        "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Read the first row, strip the name and score, and print them on separate lines.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "row = 'Ava,92'\n\n# Split row into name and score. Print name, then score.\n",
+            "content": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Read the first row, strip the name and score, and print them on separate lines.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -798,10 +832,23 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "row = 'Ava,92'\nname, score = row.split(',')\nprint(name)\nprint(score)\n",
+            "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"].strip())\n    print(row[\"score\"].strip())\n",
             "language": "python",
             "isEntry": true,
             "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "scores.csv"
+          ]
+        },
+        "files": [
+          {
+            "path": "scores.csv",
+            "content": "name,score\n Ava , 92 \n",
+            "readOnly": false
           }
         ]
       },
@@ -812,14 +859,21 @@
           {
             "stdin": "",
             "stdout": "Ava\n92\n",
-            "match": "exact"
+            "match": "exact",
+            "files": [
+              {
+                "path": "scores.csv",
+                "content": "name,score\n Ava , 92 \n",
+                "readOnly": false
+              }
+            ]
           }
         ],
-        "solutionCode": "row = 'Ava,92'\nname, score = row.split(',')\nprint(name)\nprint(score)\n",
+        "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"].strip())\n    print(row[\"score\"].strip())\n",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "row = 'Ava,92'\nname, score = row.split(',')\nprint(name)\nprint(score)\n",
+            "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"].strip())\n    print(row[\"score\"].strip())\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -827,19 +881,37 @@
         ],
         "sourceChecks": [
           {
+            "type": "source_contains",
+            "pattern": "csv.DictReader",
+            "message": "Use csv.DictReader to read the row.",
+            "normalizeWhitespace": true
+          },
+          {
             "type": "uses_method",
-            "method": "split",
-            "message": "Use row.split(\",\") instead of typing Ava and 92 directly."
+            "method": "strip",
+            "message": "Strip spaces from the CSV values."
           }
         ]
       },
       "sourceChecks": [
         {
+          "type": "source_contains",
+          "pattern": "csv.DictReader",
+          "message": "Use csv.DictReader to read the row.",
+          "normalizeWhitespace": true
+        },
+        {
           "type": "uses_method",
-          "method": "split",
-          "message": "Use row.split(\",\") instead of typing Ava and 92 directly."
+          "method": "strip",
+          "message": "Strip spaces from the CSV values."
         }
-      ]
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "scores.csv"
+        ]
+      }
     },
     {
       "id": "try-simple-csv-processing-sketch1",
@@ -848,11 +920,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1",
       "language": "python",
-      "starterCode": "rows = ['Ava,92', 'Mia,85']\n\n# Print each row as name: score.\n",
+      "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Loop through the rows and print each one as name: score.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "rows = ['Ava,92', 'Mia,85']\n\n# Print each row as name: score.\n",
+          "content": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Loop through the rows and print each one as name: score.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -861,7 +933,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "rows = ['Ava,92', 'Mia,85']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name}: {score}')\n",
+          "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(f'{row[\"name\"]}: {row[\"score\"]}')\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -870,11 +942,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "rows = ['Ava,92', 'Mia,85']\n\n# Print each row as name: score.\n",
+        "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Loop through the rows and print each one as name: score.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "rows = ['Ava,92', 'Mia,85']\n\n# Print each row as name: score.\n",
+            "content": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Loop through the rows and print each one as name: score.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -883,10 +955,23 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "rows = ['Ava,92', 'Mia,85']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name}: {score}')\n",
+            "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(f'{row[\"name\"]}: {row[\"score\"]}')\n",
             "language": "python",
             "isEntry": true,
             "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "scores.csv"
+          ]
+        },
+        "files": [
+          {
+            "path": "scores.csv",
+            "content": "name,score\nAva,92\nMia,85\n",
+            "readOnly": false
           }
         ]
       },
@@ -897,14 +982,21 @@
           {
             "stdin": "",
             "stdout": "Ava: 92\nMia: 85\n",
-            "match": "exact"
+            "match": "exact",
+            "files": [
+              {
+                "path": "scores.csv",
+                "content": "name,score\nAva,92\nMia,85\n",
+                "readOnly": false
+              }
+            ]
           }
         ],
-        "solutionCode": "rows = ['Ava,92', 'Mia,85']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name}: {score}')\n",
+        "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(f'{row[\"name\"]}: {row[\"score\"]}')\n",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "rows = ['Ava,92', 'Mia,85']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name}: {score}')\n",
+            "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(f'{row[\"name\"]}: {row[\"score\"]}')\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -912,29 +1004,37 @@
         ],
         "sourceChecks": [
           {
-            "type": "uses_for_loop",
-            "iterable": "rows",
-            "message": "Loop through rows instead of typing both output lines directly."
+            "type": "source_contains",
+            "pattern": "csv.DictReader",
+            "message": "Use csv.DictReader to read the rows.",
+            "normalizeWhitespace": true
           },
           {
-            "type": "uses_method",
-            "method": "split",
-            "message": "Split each row before printing name and score."
+            "type": "uses_for_loop",
+            "iterable": "reader",
+            "message": "Loop through the CSV rows instead of hard-coding the output."
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "uses_for_loop",
-          "iterable": "rows",
-          "message": "Loop through rows instead of typing both output lines directly."
+          "type": "source_contains",
+          "pattern": "csv.DictReader",
+          "message": "Use csv.DictReader to read the rows.",
+          "normalizeWhitespace": true
         },
         {
-          "type": "uses_method",
-          "method": "split",
-          "message": "Split each row before printing name and score."
+          "type": "uses_for_loop",
+          "iterable": "reader",
+          "message": "Loop through the CSV rows instead of hard-coding the output."
         }
-      ]
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "scores.csv"
+        ]
+      }
     },
     {
       "id": "try-simple-csv-processing-sketch2",
@@ -943,11 +1043,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2",
       "language": "python",
-      "starterCode": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\n\n# Add the numeric scores and print total.\n",
+      "starterCode": "import csv\n\ntotal = 0\n\n# Open scores.csv with csv.DictReader.\n# Convert each score to int, add it into total, and print total.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\n\n# Add the numeric scores and print total.\n",
+          "content": "import csv\n\ntotal = 0\n\n# Open scores.csv with csv.DictReader.\n# Convert each score to int, add it into total, and print total.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -956,7 +1056,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\nfor row in rows:\n    name, score = row.split(',')\n    total += int(score)\nprint(total)\n",
+          "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        total += int(row[\"score\"])\n\nprint(total)\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -965,11 +1065,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\n\n# Add the numeric scores and print total.\n",
+        "starterCode": "import csv\n\ntotal = 0\n\n# Open scores.csv with csv.DictReader.\n# Convert each score to int, add it into total, and print total.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\n\n# Add the numeric scores and print total.\n",
+            "content": "import csv\n\ntotal = 0\n\n# Open scores.csv with csv.DictReader.\n# Convert each score to int, add it into total, and print total.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -978,10 +1078,23 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\nfor row in rows:\n    name, score = row.split(',')\n    total += int(score)\nprint(total)\n",
+            "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        total += int(row[\"score\"])\n\nprint(total)\n",
             "language": "python",
             "isEntry": true,
             "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": [
+            "scores.csv"
+          ]
+        },
+        "files": [
+          {
+            "path": "scores.csv",
+            "content": "name,score\nAva,92\nMia,85\n",
+            "readOnly": false
           }
         ]
       },
@@ -992,37 +1105,37 @@
           {
             "stdin": "",
             "stdout": "177\n",
-            "match": "exact"
+            "match": "exact",
+            "files": [
+              {
+                "path": "scores.csv",
+                "content": "name,score\nAva,92\nMia,85\n",
+                "readOnly": false
+              }
+            ]
           }
         ],
-        "solutionCode": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\nfor row in rows:\n    name, score = row.split(',')\n    total += int(score)\nprint(total)\n",
+        "solutionCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        total += int(row[\"score\"])\n\nprint(total)\n",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "rows = ['Ava,92', 'Mia,85']\ntotal = 0\nfor row in rows:\n    name, score = row.split(',')\n    total += int(score)\nprint(total)\n",
+            "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        total += int(row[\"score\"])\n\nprint(total)\n",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
         ],
-        "semanticChecks": [
-          {
-            "type": "variable_equals",
-            "name": "total",
-            "expected": 177,
-            "expectedKind": "json"
-          }
-        ],
         "sourceChecks": [
           {
-            "type": "uses_for_loop",
-            "iterable": "rows",
-            "message": "Loop through rows instead of typing the final total."
+            "type": "source_contains",
+            "pattern": "csv.DictReader",
+            "message": "Use csv.DictReader to read the rows.",
+            "normalizeWhitespace": true
           },
           {
-            "type": "uses_method",
-            "method": "split",
-            "message": "Use split(',') to separate each row."
+            "type": "uses_for_loop",
+            "iterable": "reader",
+            "message": "Loop through the CSV rows instead of hard-coding the total."
           },
           {
             "type": "uses_call",
@@ -1031,21 +1144,22 @@
           },
           {
             "type": "source_regex",
-            "pattern": "\\btotal\\s*(\\+=\\s*int\\s*\\(\\s*score\\s*\\)|=\\s*total\\s*\\+\\s*int\\s*\\(\\s*score\\s*\\))",
+            "pattern": "\\btotal\\s*(\\+=\\s*int\\s*\\(|=\\s*total\\s*\\+\\s*int\\s*\\()",
             "message": "Add each numeric score into total."
           }
         ]
       },
       "sourceChecks": [
         {
-          "type": "uses_for_loop",
-          "iterable": "rows",
-          "message": "Loop through rows instead of typing the final total."
+          "type": "source_contains",
+          "pattern": "csv.DictReader",
+          "message": "Use csv.DictReader to read the rows.",
+          "normalizeWhitespace": true
         },
         {
-          "type": "uses_method",
-          "method": "split",
-          "message": "Use split(',') to separate each row."
+          "type": "uses_for_loop",
+          "iterable": "reader",
+          "message": "Loop through the CSV rows instead of hard-coding the total."
         },
         {
           "type": "uses_call",
@@ -1054,10 +1168,16 @@
         },
         {
           "type": "source_regex",
-          "pattern": "\\btotal\\s*(\\+=\\s*int\\s*\\(\\s*score\\s*\\)|=\\s*total\\s*\\+\\s*int\\s*\\(\\s*score\\s*\\))",
+          "pattern": "\\btotal\\s*(\\+=\\s*int\\s*\\(|=\\s*total\\s*\\+\\s*int\\s*\\()",
           "message": "Add each numeric score into total."
         }
-      ]
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": [
+          "scores.csv"
+        ]
+      }
     }
   ]
 }

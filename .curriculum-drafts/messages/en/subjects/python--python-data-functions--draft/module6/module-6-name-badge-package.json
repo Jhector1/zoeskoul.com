@@ -73,21 +73,21 @@
               "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\n# TODO: print a final welcome line using the badge.\n"
             },
             "try-module-6-name-badge-package-sketch0": {
-              "title": "Preview a badge helper",
-              "prompt": "Run a tiny helper function like the ones used in the module project. Finish the small program, run it, and check that the result fits the scenario.",
-              "hint": "Finish the small program in `main.py`, then run it to check that it behaves like the task asks.",
+              "title": "Create the first badge helper file",
+              "prompt": "Set up the first helper for the badge app.\n\n1. Create a folder named `tools`.\n2. Create `tools/names.py`.\n3. In `tools/names.py`, define `clean_name(text)`.\n4. In `main.py`, import `clean_name`.\n5. Print the cleaned version of `\"  ava  \"`.",
+              "hint": "Put `clean_name` in `tools/names.py`, then import it in `main.py`.",
               "help": {
-                "concept": "This Try it yourself checkpoint turns the lesson idea from \"Build a reusable badge package\" with a small runnable program.",
-                "hint_1": "Use the TODO comments as your checklist for this small job.",
-                "hint_2": "Make sure the final program shows the result the scenario needs."
+                "concept": "The badge project starts by moving name-cleaning into its own helper file.",
+                "hint_1": "In `tools/names.py`, return `text.strip().title()` from `clean_name(text)`.",
+                "hint_2": "In `main.py`, import `clean_name` and print `clean_name(\"  ava  \")`."
               },
-              "starterCode": "def clean_name(text):\n    return text.strip().title()\n\n# Print clean_name('  ava  ').\n"
+              "starterCode": "# Create a folder named tools.\n# Create tools/names.py with clean_name(text).\n# Then import clean_name from tools.names and print clean_name(\"  ava  \").\n"
             }
           },
           "tryIt": {
             "try_module_6_name_badge_package_sketch0": {
               "title": "Try it yourself",
-              "prompt": "Run a tiny helper function like the ones used in the module project."
+              "prompt": "Set up the first helper for the badge app.\n\n1. Create a folder named `tools`.\n2. Create `tools/names.py`.\n3. In `tools/names.py`, define `clean_name(text)`.\n4. In `main.py`, import `clean_name`.\n5. Print the cleaned version of `\"  ava  \"`."
             },
             "allowReveal": true
           }

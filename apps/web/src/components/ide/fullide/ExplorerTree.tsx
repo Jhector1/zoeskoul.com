@@ -411,6 +411,16 @@ function Tree(props: TreeProps) {
                     ? [...moveAction, ...baseFolderActions]
                     : [...moveAction, ...baseFileActions];
 
+                const activateNode = () => {
+                    if (pendingMoveId != null && isFolder && canTapMoveHere) {
+                        finishMove(n.id);
+                        return;
+                    }
+
+                    if (isFolder) toggleFolder(n.id);
+                    else openFile(n.id);
+                };
+
                 if (isRenaming) {
                     return (
                         <div key={n.id}>
@@ -465,6 +475,18 @@ function Tree(props: TreeProps) {
                         <div
                             data-tree-node-row="true"
                             onContextMenu={(e) => openContextMenu(e, actions)}
+                            onClick={(e) => {
+                                const target = e.target as HTMLElement | null;
+                                if (
+                                    target?.closest(
+                                        "button, a, input, textarea, select, [role='menu'], [data-tree-no-open='true']",
+                                    )
+                                ) {
+                                    return;
+                                }
+
+                                activateNode();
+                            }}
                             onDragOver={(e) => {
                                 if (draggingId == null) return;
                                 e.stopPropagation();
@@ -495,7 +517,9 @@ function Tree(props: TreeProps) {
                                 clearAutoExpand();
                             }}
                             className={cn(
-                                "group flex min-h-[36px] items-center rounded-md border border-transparent px-2",                                "hover:bg-neutral-50 hover:border-neutral-200 dark:hover:bg-white/[0.06] dark:hover:border-white/10",
+                                "group flex min-h-[36px] items-center rounded-md border border-transparent px-2",
+                                "hover:bg-neutral-50 hover:border-neutral-200 dark:hover:bg-white/[0.06] dark:hover:border-white/10",
+                                "cursor-pointer",
                                 isActive && "bg-neutral-50 border-neutral-200 dark:bg-white/[0.08] dark:border-white/10",
                                 isDropTarget &&
                                 "border-emerald-400 bg-emerald-50/80 dark:border-emerald-300/50 dark:bg-emerald-400/10",
@@ -509,6 +533,7 @@ function Tree(props: TreeProps) {
                             <IndentGuides depth={depth} />
 
                             <div
+                                data-tree-no-open="true"
                                 draggable={!isTouchLike}
                                 onDragStart={(e) => {
                                     if (isTouchLike) return;
@@ -539,14 +564,7 @@ function Tree(props: TreeProps) {
                                 onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
-
-                                    if (pendingMoveId != null && isFolder && canTapMoveHere) {
-                                        finishMove(n.id);
-                                        return;
-                                    }
-
-                                    if (isFolder) toggleFolder(n.id);
-                                    else openFile(n.id);
+                                    activateNode();
                                 }}
                                 className={cn(
                                     "grid h-7 w-7 place-items-center rounded-lg",
@@ -583,14 +601,7 @@ function Tree(props: TreeProps) {
                                 onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
-
-                                    if (pendingMoveId != null && isFolder && canTapMoveHere) {
-                                        finishMove(n.id);
-                                        return;
-                                    }
-
-                                    if (isFolder) toggleFolder(n.id);
-                                    else openFile(n.id);
+                                    activateNode();
                                 }}
                             >
                                 <div className="truncate text-[12px] font-medium text-neutral-900 dark:text-white/85">                                    {n.name}

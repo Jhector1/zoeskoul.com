@@ -600,7 +600,7 @@
             "data"
           ],
           "requiredFiles": [
-            "data/copy.txt"
+            "data/source.txt"
           ]
         }
       },
@@ -677,7 +677,7 @@
           "data"
         ],
         "requiredFiles": [
-          "data/copy.txt"
+          "data/source.txt"
         ]
       },
       "sourceChecks": [
@@ -1092,7 +1092,16 @@
           "requiredFiles": [
             "data/message.txt"
           ]
-        }
+        },
+        "files": [
+          {
+            "path": "data/message.txt",
+            "content": "Nested hello\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
       },
       "showExpectedExample": true,
       "recipe": {

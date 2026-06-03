@@ -1,0 +1,35 @@
+{
+  "subjectSlug": "python",
+  "courseSlug": "python-v2",
+  "catalogSlug": "python",
+  "profileId": "python",
+  "title": "Python for Beginners",
+  "moduleOrder": [
+    "python-v2-0",
+    "python-v2-1",
+    "python-v2-2",
+    "python-v2-3"
+  ],
+  "modules": [
+    {
+      "moduleSlug": "python-v2-0",
+      "moduleNumber": 0,
+      "title": "Getting Started with Python"
+    },
+    {
+      "moduleSlug": "python-v2-1",
+      "moduleNumber": 1,
+      "title": "Variables, Input, and Strings"
+    },
+    {
+      "moduleSlug": "python-v2-2",
+      "moduleNumber": 2,
+      "title": "Conditions and Logic"
+    },
+    {
+      "moduleSlug": "python-v2-3",
+      "moduleNumber": 3,
+      "title": "Loops and Iteration"
+    }
+  ]
+}

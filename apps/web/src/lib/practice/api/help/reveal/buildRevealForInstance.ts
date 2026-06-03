@@ -64,7 +64,7 @@ export async function buildRevealForInstance(args: {
                     ),
                     ...(solutionFiles !== undefined ? { solutionFiles } : {}),
                 },
-                explanation: "Solution shown.",
+                explanation: "Here is a working solution.",
             };
 
         default:

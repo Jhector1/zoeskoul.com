@@ -44,6 +44,8 @@ export default function TabsBar(props: {
                     const active = f.id === activeFileId;
                     const panelId = `ide-tabpanel-${f.id}`;
                     const tabId = `ide-tab-${f.id}`;
+                    const filePath = pathOf(nodes, f.id);
+                    const tabLabel = filePath.includes("/") ? filePath : f.name;
 
                     return (
                         <div
@@ -97,17 +99,17 @@ export default function TabsBar(props: {
                                         setActiveFileId(tabFiles[last].id);
                                     }
                                 }}
-                                title={pathOf(nodes, f.id)}
+                                title={filePath}
                                 className="min-w-0 flex-1 truncate text-left outline-none"
                             >
-                                {f.name}
+                                {tabLabel}
                             </button>
 
                             <button
                                 type="button"
                                 onClick={() => closeTab(f.id)}
-                                aria-label={`Close ${f.name}`}
-                                title={`Close ${f.name}`}
+                                aria-label={`Close ${tabLabel}`}
+                                title={`Close ${tabLabel}`}
                                 className="grid h-4 w-4 shrink-0 place-items-center rounded text-[10px] font-medium text-neutral-400 hover:bg-black/5 hover:text-neutral-700 dark:text-white/40 dark:hover:bg-white/10 dark:hover:text-white/75"
                             >
                                 ×

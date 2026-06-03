@@ -164,7 +164,7 @@
             },
             "ci-make-greeting": {
               "title": "Write a greeting function",
-              "prompt": "Complete this project step: Write a greeting function.\n\nRequirements:\n- return a greeting string\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "prompt": "Write `make_greeting(name)` so it returns a greeting string for that name.",
               "hint": "Read the task \"Write a greeting function\" and identify the required result.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -175,7 +175,7 @@
             },
             "ci-square-number": {
               "title": "Return the square",
-              "prompt": "Complete this project step: Return the square.\n\nRequirements:\n- return the square of number\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "prompt": "Write `square(number)` so it returns the square of `number`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -186,7 +186,7 @@
             },
             "ci-full-name": {
               "title": "Combine first and last name",
-              "prompt": "Complete this project step: Combine first and last name.\n\nRequirements:\n- return the full name as one string\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "prompt": "Write `full_name(first, last)` so it returns the first and last name joined into one string.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -269,15 +269,15 @@
         "defining-and-calling-functions": {
           "sketch-1": {
             "title": "What a function does",
-            "bodyMarkdown": "A **function** is a named block of code that does a job. You define it once, then call it whenever you need that job again.\n\nIn Python, you define a function with `def`:\n\n```python\ndef greet():\n    print(\"Hello!\")\n\ngreet()\n```\n\nStep by step:\n\n- `def greet():` creates a function named `greet`\n- The indented line is the code that runs when the function is called\n- `greet()` calls the function\n- The output panel shows `Hello!`\n\nThis is useful because you can avoid repeating the same code many times.\n\nWorked example:\n\n```python\ndef cheer():\n    print(\"Go!\")\n\ncheer()\ncheer()\n```\n\nBecause `cheer()` is called twice, the output is:\n\n```python\nGo!\nGo!\n```\n\nTry it yourself: change the message inside `cheer()` and click Run again."
+            "bodyMarkdown": "A **function** is a named block of code that does a job. You define it once, then call it whenever you need that job again.\n\nIn Python, you define a function with `def`:\n\n```python\ndef greet():\n    print(\"Hello!\")\n\ngreet()\n```\n\nStep by step:\n\n- `def greet():` creates a function named `greet`\n- The indented line is the code that runs when the function is called\n- `greet()` calls the function\n- The output panel shows `Hello!`\n\nThis is useful because you can avoid repeating the same code many times.\n\nWorked example:\n\n```python\ndef cheer():\n    print(\"Go!\")\n\ncheer()\ncheer()\n```\n\nBecause `cheer()` is called twice, the output is:\n\n```python\nGo!\nGo!\n```"
           },
           "sketch-2": {
             "title": "Calling functions with arguments",
-            "bodyMarkdown": "Some functions need extra information to do their job. That information is passed in as **arguments**.\n\n```python\ndef greet(name):\n    print(\"Hello, \" + name)\n\ngreet(\"Ava\")\ngreet(\"Leo\")\n```\n\nLine by line:\n\n- `def greet(name):` defines a function with one parameter, `name`\n- `greet(\"Ava\")` sends the value `\"Ava\"` into the function\n- Inside the function, `name` becomes `\"Ava\"`\n- Then `greet(\"Leo\")` runs the same code with a different value\n\nThe output is:\n\n```python\nHello, Ava\nHello, Leo\n```\n\nA parameter is the variable in the function definition. An argument is the value you pass when calling the function.\n\nTry this: change one call to `greet(\"Mina\")` and see how the output changes."
+            "bodyMarkdown": "Some functions need extra information to do their job. That information is passed in as **arguments**.\n\n```python\ndef greet(name):\n    print(\"Hello, \" + name)\n\ngreet(\"Ava\")\ngreet(\"Leo\")\n```\n\nLine by line:\n\n- `def greet(name):` defines a function with one parameter, `name`\n- `greet(\"Ava\")` sends the value `\"Ava\"` into the function\n- Inside the function, `name` becomes `\"Ava\"`\n- Then `greet(\"Leo\")` runs the same code with a different value\n\nThe output is:\n\n```python\nHello, Ava\nHello, Leo\n```\n\nA parameter is the variable in the function definition. An argument is the value you pass when calling the function."
           },
           "sketch-3": {
             "title": "Functions can return values",
-            "bodyMarkdown": "A function can also **return** a result instead of printing it directly.\n\n```python\ndef double(number):\n    return number * 2\n\nresult = double(5)\nprint(result)\n```\n\nStep by step:\n\n- `double(number)` receives a value\n- `return number * 2` sends back the result\n- `result = double(5)` stores that returned value\n- `print(result)` shows it in the output panel\n\nThe output is:\n\n```python\n10\n```\n\nWorked example:\n\n```python\ndef make_label(text):\n    return \"Item: \" + text\n\nlabel = make_label(\"Book\")\nprint(label)\n```\n\nThis prints:\n\n```python\nItem: Book\n```\n\nWhy return instead of print? Returning lets you reuse the result later in your code.\n\nYour turn: change `\"Book\"` to another word and run the code again."
+            "bodyMarkdown": "A function can also **return** a result instead of printing it directly.\n\n```python\ndef double(number):\n    return number * 2\n\nresult = double(5)\nprint(result)\n```\n\nStep by step:\n\n- `double(number)` receives a value\n- `return number * 2` sends back the result\n- `result = double(5)` stores that returned value\n- `print(result)` shows it in the output panel\n\nThe output is:\n\n```python\n10\n```\n\nWorked example:\n\n```python\ndef make_label(text):\n    return \"Item: \" + text\n\nlabel = make_label(\"Book\")\nprint(label)\n```\n\nThis prints:\n\n```python\nItem: Book\n```\n\nWhy return instead of print? Returning lets you reuse the result later in your code."
           }
         }
       }

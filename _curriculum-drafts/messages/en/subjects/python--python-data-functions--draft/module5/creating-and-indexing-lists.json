@@ -166,7 +166,7 @@
             },
             "ci-print-first-last": {
               "title": "Print the first and last list items",
-              "prompt": "Complete this project step: Print the first and last list items.\n\nRequirements:\n- Store the words in a list.\n- Then print the first item and the last item on separate lines.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `apple\nbanana\ncherry`, the output should be `apple\ncherry`.",
+              "prompt": "Three fruit labels come in one at a time. Store the inputs in a list, then print the first fruit and the last fruit on separate lines.\n\nFor example, if the inputs are `apple`, `banana`, and `cherry`, your program should print:\n`apple`\n`cherry`.",
               "hint": "Read the task \"Print the first and last list items\" and identify the required result.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -177,7 +177,7 @@
             },
             "ci-print-second-number": {
               "title": "Print the second number",
-              "prompt": "Complete this project step: Print the second number.\n\nRequirements:\n- Put the numbers into a list.\n- Print the second item.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `4\n9\n2`, the output should be `9`.",
+              "prompt": "A scoreboard sends three numbers in order. Put them into a list, then print the second item from that list.\n\nFor example, if the inputs are `4`, `9`, and `2`, your program should print:\n`9`.",
               "hint": "The second item in a list is at index 1.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -188,7 +188,7 @@
             },
             "ci-build-and-show-list": {
               "title": "Build a list from input",
-              "prompt": "Complete this project step: Build a list from input.\n\nRequirements:\n- Create a list with the three colors.\n- Print the whole list.\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.\n- For input `red\nblue\ngreen`, the output should be `['red', 'blue', 'green']`.",
+              "prompt": "A paint shelf needs a quick inventory. Collect the three input colors into one list and print the finished list.\n\nFor example, if the inputs are `red`, `blue`, and `green`, your program should print:\n`['red', 'blue', 'green']`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -271,15 +271,15 @@
         "creating-and-indexing-lists": {
           "list-creation-basics": {
             "title": "What a list is",
-            "bodyMarkdown": "A **list** stores multiple values in one variable, in a specific order. In Python, you create a list with square brackets.\n\n```python\ncolors = [\"red\", \"blue\", \"green\"]\nprint(colors)\n```\n\nWhen you click **Run**, the output panel shows the whole list:\n\n```python\n['red', 'blue', 'green']\n```\n\nHere is what each part does:\n- `colors` is the variable name.\n- `[` and `]` mark the list.\n- Each item is separated by a comma.\n- The items stay in order.\n\nWorked example:\n\n```python\nnumbers = [10, 20, 30]\nprint(numbers)\nprint(numbers[0])\n```\n\nStep by step:\n- `numbers` stores three values.\n- `numbers[0]` means \"get the item at index 0.\"\n- The first item is `10`, so that line prints `10`.\n\nTry it yourself: make a list of three foods, then print the whole list."
+            "bodyMarkdown": "A **list** stores multiple values in one variable, in a specific order. In Python, you create a list with square brackets.\n\n```python\ncolors = [\"red\", \"blue\", \"green\"]\nprint(colors)\n```\n\nWhen you click **Run**, the output panel shows the whole list:\n\n```python\n['red', 'blue', 'green']\n```\n\nHere is what each part does:\n- `colors` is the variable name.\n- `[` and `]` mark the list.\n- Each item is separated by a comma.\n- The items stay in order.\n\nWorked example:\n\n```python\nnumbers = [10, 20, 30]\nprint(numbers)\nprint(numbers[0])\n```\n\nStep by step:\n- `numbers` stores three values.\n- `numbers[0]` means \"get the item at index 0.\"\n- The first item is `10`, so that line prints `10`."
           },
           "indexing-basics": {
             "title": "How indexing works",
-            "bodyMarkdown": "An **index** is the position of an item in a list. Python starts counting at **0**, not 1.\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\nprint(animals[0])\nprint(animals[1])\nprint(animals[2])\n```\n\nThis prints:\n\n```python\ncat\ndog\nfox\n```\n\nLine by line:\n- `animals[0]` gets the first item: `\"cat\"`\n- `animals[1]` gets the second item: `\"dog\"`\n- `animals[2]` gets the third item: `\"fox\"`\n\nA common beginner mistake is thinking the first item is index 1. In Python, the first item is always index 0.\n\nWorked example:\n\n```python\nscores = [88, 91, 75]\nprint(scores[1])\n```\n\nThis prints `91` because index `1` means the second item.\n\nYour turn: change the index in the example to print `75` instead."
+            "bodyMarkdown": "An **index** is the position of an item in a list. Python starts counting at **0**, not 1.\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\nprint(animals[0])\nprint(animals[1])\nprint(animals[2])\n```\n\nThis prints:\n\n```python\ncat\ndog\nfox\n```\n\nLine by line:\n- `animals[0]` gets the first item: `\"cat\"`\n- `animals[1]` gets the second item: `\"dog\"`\n- `animals[2]` gets the third item: `\"fox\"`\n\nA common beginner mistake is thinking the first item is index 1. In Python, the first item is always index 0.\n\nWorked example:\n\n```python\nscores = [88, 91, 75]\nprint(scores[1])\n```\n\nThis prints `91` because index `1` means the second item."
           },
           "using-lists-in-small-programs": {
             "title": "Using list values in output",
-            "bodyMarkdown": "You can take one item from a list and use it in `print()`.\n\n```python\ncities = [\"Lima\", \"Oslo\", \"Seoul\"]\nprint(\"First city:\", cities[0])\nprint(\"Last shown city:\", cities[2])\n```\n\nStep by step:\n- `cities` stores three strings.\n- `cities[0]` gets `\"Lima\"`.\n- `cities[2]` gets `\"Seoul\"`.\n- `print()` combines text and list values in the output panel.\n\nWorked example:\n\n```python\nitems = [\"pen\", \"book\", \"bag\"]\nprint(\"I packed a\", items[1])\n```\n\nThis prints:\n\n```python\nI packed a book\n```\n\nTry this: replace `items[1]` with another index and run it again to see how the output changes."
+            "bodyMarkdown": "You can take one item from a list and use it in `print()`.\n\n```python\ncities = [\"Lima\", \"Oslo\", \"Seoul\"]\nprint(\"First city:\", cities[0])\nprint(\"Last shown city:\", cities[2])\n```\n\nStep by step:\n- `cities` stores three strings.\n- `cities[0]` gets `\"Lima\"`.\n- `cities[2]` gets `\"Seoul\"`.\n- `print()` combines text and list values in the output panel.\n\nWorked example:\n\n```python\nitems = [\"pen\", \"book\", \"bag\"]\nprint(\"I packed a\", items[1])\n```\n\nThis prints:\n\n```python\nI packed a book\n```"
           }
         }
       }

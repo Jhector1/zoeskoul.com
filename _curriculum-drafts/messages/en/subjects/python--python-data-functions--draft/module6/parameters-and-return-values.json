@@ -161,7 +161,7 @@
             },
             "ci-make-label": {
               "title": "Return a label string",
-              "prompt": "Complete this project step: Return a label string.\n\nRequirements:\n- return a string like \"Apples: 3\"\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "prompt": "Write `make_label(item, count)` so it returns a label string like `Apples: 3`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -172,7 +172,7 @@
             },
             "ci-calculate-tip": {
               "title": "Return a tip amount",
-              "prompt": "Complete this project step: Return a tip amount.\n\nRequirements:\n- return the tip amount\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "prompt": "Write `calculate_tip(bill, percent)` so it returns just the tip amount for that bill and percent.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -183,7 +183,7 @@
             },
             "ci-first-item": {
               "title": "Return the first list item",
-              "prompt": "Complete this project step: Return the first list item.\n\nRequirements:\n- return the first element from the list\n- Keep the existing file names and variable/function names unless the instructions tell you to create a helper file.",
+              "prompt": "Write `first_item(items)` so it returns the first element from the list.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
@@ -251,11 +251,11 @@
         "parameters-and-return-values": {
           "sketch-parameters-basics": {
             "title": "Parameters let a function work with different values",
-            "bodyMarkdown": "A function becomes more useful when it can accept input. That input is called a **parameter**.\n\nHere is a simple example:\n\n```python\ndef greet(name):\n    return \"Hello, \" + name\n\nmessage = greet(\"Ava\")\nprint(message)\n```\n\nStep by step:\n\n- `def greet(name):` defines a function with one parameter named `name`.\n- When we call `greet(\"Ava\")`, the value `\"Ava\"` is passed into `name`.\n- The function builds a new string and **returns** it.\n- `print(message)` sends the returned value to the output panel.\n\nBecause the function uses a parameter, you can call it with different values:\n\n```python\nprint(greet(\"Ava\"))\nprint(greet(\"Leo\"))\n```\n\nThat gives different results without rewriting the function.\n\nTry it yourself: change the name in one function call, click Run, and predict the new output before you check the output panel."
+            "bodyMarkdown": "A function becomes more useful when it can accept input. That input is called a **parameter**.\n\nHere is a simple example:\n\n```python\ndef greet(name):\n    return \"Hello, \" + name\n\nmessage = greet(\"Ava\")\nprint(message)\n```\n\nStep by step:\n\n- `def greet(name):` defines a function with one parameter named `name`.\n- When we call `greet(\"Ava\")`, the value `\"Ava\"` is passed into `name`.\n- The function builds a new string and **returns** it.\n- `print(message)` sends the returned value to the output panel.\n\nBecause the function uses a parameter, you can call it with different values:\n\n```python\nprint(greet(\"Ava\"))\nprint(greet(\"Leo\"))\n```\n\nThat gives different results without rewriting the function."
           },
           "sketch-return-vs-print": {
             "title": "Returning a value is different from printing it",
-            "bodyMarkdown": "`print()` shows something in the output panel. `return` sends a value back to the place where the function was called.\n\nCompare these two functions:\n\n```python\ndef show_total(price, tax):\n    print(price + tax)\n\ndef get_total(price, tax):\n    return price + tax\n```\n\nWhat happens?\n\n- `show_total(10, 2)` displays `12` in the output panel.\n- `get_total(10, 2)` does **not** display anything by itself.\n- But `get_total(10, 2)` gives back the value `12`, so you can store it or print it later.\n\nExample:\n\n```python\ntotal = get_total(10, 2)\nprint(total)\n```\n\nThis prints `12` because the returned value was saved in `total` first.\n\nA good rule:\n\n- Use **parameters** to send data **into** a function.\n- Use **return** to send a result **out of** a function.\n\nYour turn: change `price` or `tax` in the example, click Run, and explain which line produces visible output and which line only produces a returned value.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "`print()` shows something in the output panel. `return` sends a value back to the place where the function was called.\n\nCompare these two functions:\n\n```python\ndef show_total(price, tax):\n    print(price + tax)\n\ndef get_total(price, tax):\n    return price + tax\n```\n\nWhat happens?\n\n- `show_total(10, 2)` displays `12` in the output panel.\n- `get_total(10, 2)` does **not** display anything by itself.\n- But `get_total(10, 2)` gives back the value `12`, so you can store it or print it later.\n\nExample:\n\n```python\ntotal = get_total(10, 2)\nprint(total)\n```\n\nThis prints `12` because the returned value was saved in `total` first.\n\nA good rule:\n\n- Use **parameters** to send data **into** a function.\n- Use **return** to send a result **out of** a function."
           }
         }
       }
