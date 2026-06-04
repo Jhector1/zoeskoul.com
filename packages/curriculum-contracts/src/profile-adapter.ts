@@ -17,6 +17,7 @@ export type BuildTopicSeedArgs = {
     guidedExercises?: TopicSeed["guidedExercises"];
     quizFocus?: TopicSeed["quizFocus"];
     moduleProject?: TopicSeed["moduleProject"];
+    role?: TopicSeed["moduleRole"];
     runtimeDefaults?: TopicSeed["moduleRuntimeDefaults"];
     exercisePolicy?: ResolvedExercisePolicy;
   };
@@ -24,6 +25,7 @@ export type BuildTopicSeedArgs = {
     slug: string;
     title: string;
     order: number;
+    role?: TopicSeed["sectionRole"];
   };
   topic: {
     topicId: string;
@@ -32,6 +34,7 @@ export type BuildTopicSeedArgs = {
     summary: string;
     minutes: number;
     technical?: boolean;
+    practice?: TopicSeed["practice"];
   };
 };
 

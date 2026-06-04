@@ -1,0 +1,579 @@
+{
+  "topicId": "module-2-study-checker-project",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-2",
+  "sectionSlug": "python-v2-2-module-project",
+  "prefix": "pyv2_2",
+  "minutes": 45,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.label",
+    "summaryKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-2-study-checker-project-sketch0",
+        "titleKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.tryIt.try_module_2_study_checker_project_sketch0.title",
+        "promptKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.tryIt.try_module_2_study_checker_project_sketch0.prompt",
+        "exerciseKey": "try-module-2-study-checker-project-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "mp_1",
+            "titleKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.projectSteps.mp_1.title",
+            "exerciseKey": "mp-1-check-pass-fail",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_2",
+            "titleKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.projectSteps.mp_2.title",
+            "exerciseKey": "mp-2-check-join-rule",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_3",
+            "titleKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.projectSteps.mp_3.title",
+            "exerciseKey": "mp-3-handle-missing-text",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_4",
+            "titleKey": "topics.python-v2.python-v2-2.module-2-study-checker-project.projectSteps.mp_4.title",
+            "exerciseKey": "mp-4-build-final-study-checker",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.module-2-study-checker-project.sketch-1.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.module-2-study-checker-project.sketch-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-module-2-study-checker-project-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Read one score and print Ready or Keep going.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read one score and print Ready or Keep going.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read one score and print Ready or Keep going.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read one score and print Ready or Keep going.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "score = int(input())\nif score >= 50:\n    print(\"Ready\")\nelse:\n    print(\"Keep going\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "60\n",
+            "stdout": "Ready\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Keep going\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "score = int(input())\nif score >= 50:\n    print(\"Ready\")\nelse:\n    print(\"Keep going\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "score = int(input())\nif score >= 50:\n    print(\"Ready\")\nelse:\n    print(\"Keep going\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "if ",
+            "message": "Use an if statement for the check.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "score = int(input())\nif score >= 50:\n    print(\"Ready\")\nelse:\n    print(\"Keep going\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "if ",
+          "message": "Use an if statement for the check.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "mp-1-check-pass-fail",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Read one score and print Pass or Try again.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read one score and print Pass or Try again.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read one score and print Pass or Try again.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read one score and print Pass or Try again.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "72\n",
+            "stdout": "Pass\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "50\n",
+            "stdout": "Try again\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert the score to an integer before comparing it.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert the score to an integer before comparing it.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "mp-2-check-join-rule",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Read age and member.\n# Print Join only when both rules pass.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read age and member.\n# Print Join only when both rules pass.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read age and member.\n# Print Join only when both rules pass.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read age and member.\n# Print Join only when both rules pass.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "age = int(input())\nmember = input()\nif age >= 13 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "14\nyes\n",
+            "stdout": "Join\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "12\nyes\n",
+            "stdout": "Wait\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "age = int(input())\nmember = input()\nif age >= 13 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "age = int(input())\nmember = input()\nif age >= 13 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\band\\b",
+            "message": "Use and so both join rules must pass."
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "age = int(input())\nmember = input()\nif age >= 13 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\band\\b",
+          "message": "Use and so both join rules must pass."
+        }
+      ]
+    },
+    {
+      "id": "mp-3-handle-missing-text",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Read code and handle the empty-string case.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read code and handle the empty-string case.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read code and handle the empty-string case.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read code and handle the empty-string case.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "code = input()\nif code == \"\":\n    print(\"Missing code\")\nelse:\n    print(\"Code received\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "\n",
+            "stdout": "Missing code\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "A12\n",
+            "stdout": "Code received\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "code = input()\nif code == \"\":\n    print(\"Missing code\")\nelse:\n    print(\"Code received\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "code = input()\nif code == \"\":\n    print(\"Missing code\")\nelse:\n    print(\"Code received\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "==\\s*['\\\"]{2}",
+            "message": "Check for the empty-string case in this step."
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "code = input()\nif code == \"\":\n    print(\"Missing code\")\nelse:\n    print(\"Code received\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "==\\s*['\\\"]{2}",
+          "message": "Check for the empty-string case in this step."
+        }
+      ]
+    },
+    {
+      "id": "mp-4-build-final-study-checker",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Read the code and score.\n# Check missing and invalid cases first.\n# Then print the final study status.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read the code and score.\n# Check missing and invalid cases first.\n# Then print the final study status.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read the code and score.\n# Check missing and invalid cases first.\n# Then print the final study status.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read the code and score.\n# Check missing and invalid cases first.\n# Then print the final study status.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "code = input()\nscore = int(input())\nif code == \"\":\n    print(\"Missing code\")\nelif score < 0:\n    print(\"Invalid score\")\nelif score >= 90:\n    print(\"Excellent\")\nelif score >= 70:\n    print(\"Passing\")\nelse:\n    print(\"Needs practice\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "\n80\n",
+            "stdout": "Missing code\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "A1\n92\n",
+            "stdout": "Excellent\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "A1\n65\n",
+            "stdout": "Needs practice\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "code = input()\nscore = int(input())\nif code == \"\":\n    print(\"Missing code\")\nelif score < 0:\n    print(\"Invalid score\")\nelif score >= 90:\n    print(\"Excellent\")\nelif score >= 70:\n    print(\"Passing\")\nelse:\n    print(\"Needs practice\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "code = input()\nscore = int(input())\nif code == \"\":\n    print(\"Missing code\")\nelif score < 0:\n    print(\"Invalid score\")\nelif score >= 90:\n    print(\"Excellent\")\nelif score >= 70:\n    print(\"Passing\")\nelse:\n    print(\"Needs practice\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "elif ",
+            "message": "Use elif branches for the score rules.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "else:",
+            "message": "Include an else branch for the remaining case.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "code = input()\nscore = int(input())\nif code == \"\":\n    print(\"Missing code\")\nelif score < 0:\n    print(\"Invalid score\")\nelif score >= 90:\n    print(\"Excellent\")\nelif score >= 70:\n    print(\"Passing\")\nelse:\n    print(\"Needs practice\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "elif ",
+          "message": "Use elif branches for the score rules.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "else:",
+          "message": "Include an else branch for the remaining case.",
+          "normalizeWhitespace": true
+        }
+      ]
+    }
+  ]
+}

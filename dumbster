@@ -120,5 +120,11 @@ pnpm --filter @zoeskoul/web build
 
 
 
+ssh -p 2222 jean@127.0.0.1
 
+sudo docker compose down
 
+cd ~/Documents/judge0-masyg/infra/judge0
+sudo docker compose up -d db redis
+sudo docker compose ps
+sudo docker compose up -d judge0 worker

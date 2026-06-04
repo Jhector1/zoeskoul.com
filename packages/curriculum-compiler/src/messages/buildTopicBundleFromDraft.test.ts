@@ -459,6 +459,167 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
             },
         });
     });
+
+    it("embeds try-it metadata on the requested sketch card when authoring asks for it", () => {
+        const bundle = buildTopicBundleFromDraft({
+            shape: makePythonShapePack(),
+            seed: {
+                ...makePythonSeed(),
+                practice: {
+                    tryIt: true,
+                    tryItExerciseId: "code-1",
+                    tryItSketchIndex: 0,
+                },
+            } as any,
+            draft: {
+                title: "Read and add",
+                summary: "Read input and add one.",
+                minutes: 15,
+                sketchBlocks: [
+                    {
+                        id: "sketch-1",
+                        title: "Sketch 1",
+                        bodyMarkdown: "Body 1",
+                    },
+                ],
+                quizDraft: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        title: "Try it",
+                        prompt: "Read a number and print one more.",
+                        starterCode: "n = int(input())\n",
+                        solutionCode: "n = int(input())\nprint(n + 1)\n",
+                        tests: [
+                            { stdin: "1\n", stdout: "2\n", match: "exact" },
+                            { stdin: "4\n", stdout: "5\n", match: "exact" },
+                        ],
+                        hint: "Convert the input.",
+                        help: {
+                            concept: "Use int(input()) for number input.",
+                            hint_1: "Read the number first.",
+                            hint_2: "Print the new value.",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        const sketchCard = bundle.cards.find((card) => card.id === "sketch0") as any;
+        expect(sketchCard?.tryIt).toMatchObject({
+            exerciseKey: "code-1",
+            difficulty: "easy",
+            preferKind: "code_input",
+            required: true,
+        });
+        expect(sketchCard?.tryIt?.titleKey).toBe(
+            "topics.python-for-beginners.python-1.read-and-add.tryIt.try_read_and_add_sketch0.title",
+        );
+        expect(sketchCard?.tryIt?.promptKey).toBe(
+            "topics.python-for-beginners.python-1.read-and-add.tryIt.try_read_and_add_sketch0.prompt",
+        );
+    });
+
+    it("marks later project steps as carry-forward when project flow is progressive", () => {
+        const bundle = buildTopicBundleFromDraft({
+            shape: makePythonShapePack(),
+            seed: {
+                ...makePythonSeed(),
+                practice: {
+                    projectFlow: "progressive",
+                },
+            } as any,
+            draft: {
+                title: "Read and add",
+                summary: "Read input and add one.",
+                minutes: 15,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "step-1",
+                        kind: "code_input",
+                        title: "Step 1",
+                        prompt: "Step 1",
+                        starterCode: "print('one')\n",
+                        solutionCode: "print('one')\n",
+                        tests: [
+                            { stdout: "one\n", match: "exact" },
+                            { stdout: "one\n", match: "exact" },
+                        ],
+                        hint: "Hint",
+                        help: {
+                            concept: "Concept",
+                            hint_1: "Hint 1",
+                            hint_2: "Hint 2",
+                        },
+                    },
+                    {
+                        id: "step-2",
+                        kind: "code_input",
+                        title: "Step 2",
+                        prompt: "Step 2",
+                        starterCode: "print('two')\n",
+                        solutionCode: "print('two')\n",
+                        tests: [
+                            { stdout: "two\n", match: "exact" },
+                            { stdout: "two\n", match: "exact" },
+                        ],
+                        hint: "Hint",
+                        help: {
+                            concept: "Concept",
+                            hint_1: "Hint 1",
+                            hint_2: "Hint 2",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        const projectCard = bundle.cards.find((card) => card.id === "project") as any;
+        expect(projectCard?.project?.steps).toHaveLength(2);
+        expect(projectCard?.project?.steps[0]?.carryFromPrev).toBeUndefined();
+        expect(projectCard?.project?.steps[1]?.carryFromPrev).toBe(true);
+    });
+
+    it("marks capstone projects in manifest metadata", () => {
+        const bundle = buildTopicBundleFromDraft({
+            shape: makePythonShapePack(),
+            seed: {
+                ...makePythonSeed(),
+                moduleRole: "capstone",
+            } as any,
+            draft: {
+                title: "Capstone",
+                summary: "Final project",
+                minutes: 30,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "capstone-step",
+                        kind: "code_input",
+                        title: "Build it",
+                        prompt: "Build it",
+                        starterCode: "print('done')\n",
+                        solutionCode: "print('done')\n",
+                        tests: [
+                            { stdout: "done\n", match: "exact" },
+                            { stdout: "done\n", match: "exact" },
+                        ],
+                        hint: "Hint",
+                        help: {
+                            concept: "Concept",
+                            hint_1: "Hint 1",
+                            hint_2: "Hint 2",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        const projectCard = bundle.cards.find((card) => card.id === "project") as any;
+        expect(projectCard?.project?.displayKind).toBe("capstone");
+        expect(projectCard?.project?.uiKind).toBe("capstone");
+    });
     it("preserves nested starter files and fixture files for online editor folders", () => {
         const bundle = buildTopicBundleFromDraft({
             shape: makePythonShapePack(),

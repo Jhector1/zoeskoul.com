@@ -56,6 +56,20 @@ export type ManifestProjectStep = {
   preferKind?: ExerciseKind | null;
   seedPolicy?: "global" | "step";
   maxAttempts?: number | null;
+  carryFromPrev?: boolean;
+};
+
+export type ManifestEmbeddedTryIt = {
+  id: string;
+  titleKey: string;
+  promptKey: string;
+  exerciseKey: string;
+  difficulty?: "easy" | "medium" | "hard";
+  preferKind?: ExerciseKind | null;
+  seedPolicy?: "global" | "step";
+  required?: boolean;
+  allowReveal?: boolean;
+  maxAttempts?: number | null;
 };
 
 export type ManifestCard =
@@ -65,6 +79,7 @@ export type ManifestCard =
       titleKey: string;
       sketchId: string;
       height?: number;
+      tryIt?: ManifestEmbeddedTryIt;
     }
   | {
       id: string;
@@ -85,11 +100,15 @@ export type ManifestCard =
       id: string;
       kind: "project";
       titleKey: string;
+      tryIt?: boolean;
   project: {
     difficulty: "easy" | "medium" | "hard";
     allowReveal?: boolean;
     preferKind?: ExerciseKind | null;
     maxAttempts?: number | null;
+    tryIt?: boolean;
+    displayKind?: string;
+    uiKind?: string;
     steps: ManifestProjectStep[];
   };
     };
@@ -227,6 +246,8 @@ export type ManifestRecipe =
         files?: ManifestFileFixture[];
       }>;
       solutionCode?: string;
+      solutionFiles?: ManifestStarterFiles;
+      sourceChecks?: unknown[];
     }
   | {
       type: "sql_query";
@@ -252,6 +273,8 @@ export type ManifestRecipe =
       type: "semantic";
       language: Exclude<WorkspaceLanguage, "sql" | "bash" | "web">;
       solutionCode: string;
+      solutionFiles?: ManifestStarterFiles;
+      sourceChecks?: unknown[];
       semanticChecks: SemanticCheck[];
     };
 
@@ -387,6 +410,8 @@ export type ManifestCodeInput = ManifestBaseExercise & {
   starterCode?: string;
 
   starterFiles?: ManifestStarterFiles;
+  solutionFiles?: ManifestStarterFiles;
+  sourceChecks?: unknown[];
   workspaceExpectations?: ManifestWorkspaceExpectations;
   workspace?: ManifestWorkspaceSeed | null;
 };

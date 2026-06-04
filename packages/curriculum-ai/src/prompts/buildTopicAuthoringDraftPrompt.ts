@@ -190,6 +190,44 @@ function renderAuthoringPolicy(seed: TopicSeed) {
 
     return lines.join("\n");
 }
+
+function renderStructuredLessonIntent(seed: TopicSeed) {
+    const lines: string[] = [];
+
+    if (seed.practice?.tryIt === true) {
+        lines.push("Structured lesson intent for this topic:");
+        lines.push("- This topic should support a real embedded Try it yourself exercise.");
+        lines.push("- Use sketchBlocks to teach the idea clearly, then make the first suitable code_input exercise work as the embedded try-it task.");
+        if (seed.practice.tryItExerciseId) {
+            lines.push(`- Preferred try-it exercise id: ${seed.practice.tryItExerciseId}.`);
+        }
+        if (typeof seed.practice.tryItSketchIndex === "number") {
+            lines.push(`- Preferred try-it sketch index: ${seed.practice.tryItSketchIndex}.`);
+        }
+    }
+
+    if (seed.practice?.projectFlow === "progressive") {
+        if (lines.length === 0) lines.push("Structured lesson intent for this topic:");
+        lines.push("- Project-style code_input exercises should flow step to step.");
+        lines.push("- Each later starterCode should begin from the previous working solution, then add focused TODO comments for the new change.");
+        lines.push("- Do not make project steps feel like unrelated standalone drills.");
+    }
+
+    if (seed.sectionRole === "module_project") {
+        if (lines.length === 0) lines.push("Structured lesson intent for this topic:");
+        lines.push("- This topic belongs to a module project section.");
+        lines.push("- Use a small story, one connected build, and step titles that sound like project milestones.");
+    }
+
+    if (seed.sectionRole === "capstone" || seed.moduleRole === "capstone") {
+        if (lines.length === 0) lines.push("Structured lesson intent for this topic:");
+        lines.push("- This topic is the final capstone/final project for the course.");
+        lines.push("- Make it feel like a full project, not a normal practice card.");
+        lines.push("- Use stronger project framing, integrated skills, and a polished final-output goal.");
+    }
+
+    return lines.join("\n");
+}
 export function buildTopicAuthoringDraftPrompt(args: {
     seed: TopicSeed;
     locale: string;
@@ -211,6 +249,7 @@ export function buildTopicAuthoringDraftPrompt(args: {
             seed: args.seed,
             shape: args.shape,
         }) ?? [];
+    const structuredLessonIntent = renderStructuredLessonIntent(args.seed);
 
     return {
         system: [
@@ -318,6 +357,7 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "- You may include projectDraft, but the compiler will also create a project card automatically for code_input exercises.",
             "",
             ...profileAuthoringRules,
+            ...(structuredLessonIntent ? ["", structuredLessonIntent] : []),
             "",
             renderAuthoringPolicy(args.seed),
             "",

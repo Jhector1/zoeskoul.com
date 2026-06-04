@@ -288,10 +288,17 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             (args.exercise as { starterFiles?: ProgrammingCodeInputStarterFileDraft[] })
                 .starterFiles,
         );
+        const authoredSolutionFiles = normalizePythonStarterFiles(
+            (args.exercise as { solutionFiles?: ProgrammingCodeInputStarterFileDraft[] })
+                .solutionFiles,
+        );
         const workspaceExpectations = normalizePythonWorkspaceExpectations(
             (args.exercise as { workspaceExpectations?: ManifestWorkspaceExpectations })
                 .workspaceExpectations,
         );
+        const sourceChecks = Array.isArray((args.exercise as { sourceChecks?: unknown[] }).sourceChecks)
+            ? (args.exercise as { sourceChecks?: unknown[] }).sourceChecks
+            : undefined;
 
         const hasAuthoredStarterFiles = authoredStarterFiles.length > 0;
 
@@ -354,6 +361,18 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                 ? entryStarterFile.content
                 : fallbackStarterCode;
 
+        const solutionFiles = authoredSolutionFiles.length > 0
+            ? authoredSolutionFiles
+            : [
+                {
+                    path: authoredEntryFilePath,
+                    content: solutionCode,
+                    language: "python",
+                    isEntry: true,
+                    entry: true,
+                },
+            ];
+
         return {
             id: args.exercise.id,
             kind: "code_input",
@@ -363,12 +382,15 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             language: "python",
             starterCode,
             starterFiles,
+            solutionFiles,
+            ...(sourceChecks?.length ? { sourceChecks } : {}),
             ...(workspaceExpectations ? { workspaceExpectations } : {}),
             workspace: {
                 language: "python",
                 entryFilePath: authoredEntryFilePath,
                 starterCode,
                 starterFiles,
+                solutionFiles,
                 ...(workspaceExpectations ? { workspaceExpectations } : {}),
                 ...(fixtureFiles.length > 0
                     ? {
@@ -382,6 +404,8 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                     type: "semantic",
                     language: "python",
                     solutionCode,
+                    solutionFiles,
+                    ...(sourceChecks?.length ? { sourceChecks } : {}),
                     semanticChecks: requireSemanticChecks(
                         args.exercise.semanticChecks,
                         args.exercise.id,
@@ -391,6 +415,8 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                     type: "fixed_tests",
                     tests: requireProgrammingTests(args.exercise, args.seed.topicId),
                     solutionCode,
+                    solutionFiles,
+                    ...(sourceChecks?.length ? { sourceChecks } : {}),
                 },
         };
     },};

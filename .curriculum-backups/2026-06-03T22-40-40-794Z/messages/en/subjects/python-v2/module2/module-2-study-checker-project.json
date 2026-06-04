@@ -1,0 +1,110 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-2": {
+        "module-2-study-checker-project": {
+          "label": "Module Project: Build a Study Checker",
+          "summary": "A study coach needs a small checker that explains student status clearly. Build a program that handles missing data, invalid values, and score rules in the right order.",
+          "cards": {
+            "sketch0": {
+              "title": "Your first rules-based client"
+            },
+            "project": {
+              "title": "Study Checker Builder"
+            }
+          },
+          "projectSteps": {
+            "mp_1": {
+              "title": "Check pass or try again"
+            },
+            "mp_2": {
+              "title": "Check a join rule with and"
+            },
+            "mp_3": {
+              "title": "Handle missing text"
+            },
+            "mp_4": {
+              "title": "Build the final study checker"
+            }
+          },
+          "quiz": {
+            "mp-1-check-pass-fail": {
+              "title": "Check pass or try again",
+              "prompt": "Read one whole-number score. Print `Pass` if the score is at least 70. Otherwise print `Try again`.",
+              "hint": "Convert the input to an integer, then use an `if` / `else` choice.",
+              "help": {
+                "concept": "A rules-based program starts by reading input, comparing it to a threshold, and choosing the matching message.",
+                "hint_1": "Use `int(input())` so the comparison uses numbers.",
+                "hint_2": "There are only two outputs in this step."
+              },
+              "starterCode": "# Read one score and print Pass or Try again.\n"
+            },
+            "mp-2-check-join-rule": {
+              "title": "Check a join rule with and",
+              "prompt": "Read two inputs in this order:\n1. age\n2. member\n\nPrint `Join` only when the age is at least 13 and `member` is exactly `yes`. Otherwise print `Wait`.",
+              "hint": "Use `and` so both conditions must be true.",
+              "help": {
+                "concept": "Boolean operators help a checker handle rules that depend on more than one condition at the same time.",
+                "hint_1": "Convert the age to an integer before comparing it.",
+                "hint_2": "Both the age rule and the member rule must pass."
+              },
+              "starterCode": "# Read age and member.\n# Print Join only when both rules pass.\n"
+            },
+            "mp-3-handle-missing-text": {
+              "title": "Handle missing text",
+              "prompt": "Read one line of text into `code`. If `code` is an empty string, print `Missing code`. Otherwise print `Code received`.",
+              "hint": "Use an `if` statement to check whether the text is empty.",
+              "help": {
+                "concept": "Some checks are about missing data instead of number ranges, so empty strings need their own branch.",
+                "hint_1": "The empty string is written as `\"\"`.",
+                "hint_2": "Only one of the two messages should print."
+              },
+              "starterCode": "# Read code and handle the empty-string case.\n"
+            },
+            "mp-4-build-final-study-checker": {
+              "title": "Build the final study checker",
+              "prompt": "Build the final study checker.\n\nRead two inputs in this order:\n1. code\n2. score\n\nThen print exactly one of these messages:\n- `Missing code` if `code` is empty\n- `Invalid score` if the score is less than 0\n- `Excellent` if the score is at least 90\n- `Passing` if the score is at least 70\n- `Needs practice` otherwise\n\nCheck the missing and invalid cases before the normal score ranges.",
+              "hint": "Start with the special cases, then move to the broader score checks.",
+              "help": {
+                "concept": "A clear checker puts narrow or invalid cases first so later branches only handle the normal situations that are left.",
+                "hint_1": "Use an `if` / `elif` / `else` chain so only one message prints.",
+                "hint_2": "The missing code case should be checked before the score ranges."
+              },
+              "starterCode": "# Read the code and score.\n# Check missing and invalid cases first.\n# Then print the final study status.\n"
+            },
+            "try-module-2-study-checker-project-sketch0": {
+              "title": "Preview the checker",
+              "prompt": "Read one score. Print `Ready` if it is at least 50. Otherwise print `Keep going`.",
+              "hint": "Use `int(input())` and an `if` / `else` choice.",
+              "help": {
+                "concept": "This quick preview shows the basic pattern behind the larger project: read a value, test a rule, and print one matching result.",
+                "hint_1": "There are only two possible outputs.",
+                "hint_2": "Compare the score to 50."
+              },
+              "starterCode": "# Read one score and print Ready or Keep going.\n"
+            }
+          },
+          "tryIt": {
+            "try_module_2_study_checker_project_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Read one score. Print `Ready` if it is at least 50. Otherwise print `Keep going`."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-2": {
+        "module-2-study-checker-project": {
+          "sketch-1": {
+            "title": "Your first rules-based client",
+            "bodyMarkdown": "A study coach keeps making the same decisions by hand: is a score high enough, is information missing, or does something need extra attention? She wants a small Python checker that makes those decisions clearly and consistently.\n\nThis module project turns comparisons and conditionals into one practical tool. Each step adds one new rule so the final checker feels like one connected program instead of separate exercises."
+          }
+        }
+      }
+    }
+  }
+}

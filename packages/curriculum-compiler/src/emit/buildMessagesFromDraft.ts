@@ -63,6 +63,20 @@ function buildProjectStepIds(draft: TopicAuthoringDraft) {
     return uniqueNonEmpty([...explicit, ...codeInputIds]);
 }
 
+function resolveTryItExerciseId(args: {
+    draft: TopicAuthoringDraft;
+    seed: TopicSeed;
+}) {
+    const explicitId = args.seed.practice?.tryItExerciseId?.trim();
+    if (explicitId) {
+        const hasExercise = args.draft.quizDraft.some((exercise) => exercise.id === explicitId);
+        if (hasExercise) return explicitId;
+    }
+
+    const firstCodeInput = args.draft.quizDraft.find((exercise) => exercise.kind === "code_input");
+    return firstCodeInput?.id;
+}
+
 function hasQuizExercises(draft: TopicAuthoringDraft) {
     return draft.quizDraft.some((exercise) => exercise.kind !== "code_input");
 }
@@ -98,10 +112,17 @@ export function buildMessagesFromDraft(args: {
     }
 
     if (projectStepIds.length > 0) {
+        const projectTitle =
+            draft.projectDraft?.title ||
+            (seed.sectionRole === "capstone" || seed.moduleRole === "capstone"
+                ? "Final Project"
+                : seed.sectionRole === "module_project"
+                    ? "Module Project"
+                    : "Practice");
         setNested(
             out,
             [...topicPath, "cards", "project", "title"],
-            draft.projectDraft?.title || "Practice",
+            projectTitle,
         );
 
         for (const exerciseId of projectStepIds) {
@@ -112,6 +133,37 @@ export function buildMessagesFromDraft(args: {
                 out,
                 [...topicPath, "projectSteps", stepId, "title"],
                 exercise?.title ?? stepId,
+            );
+        }
+    }
+
+    if (seed.practice?.tryIt === true) {
+        const sketchIndex = seed.practice.tryItSketchIndex ?? 0;
+        const exerciseId = resolveTryItExerciseId({ draft, seed });
+        const exercise = exerciseId
+            ? draft.quizDraft.find((item) => item.id === exerciseId)
+            : undefined;
+
+        if (exercise) {
+            setNested(
+                out,
+                [
+                    ...topicPath,
+                    "tryIt",
+                    `try_${seed.topicId.replace(/-/g, "_")}_sketch${sketchIndex}`,
+                    "title",
+                ],
+                "Try it yourself",
+            );
+            setNested(
+                out,
+                [
+                    ...topicPath,
+                    "tryIt",
+                    `try_${seed.topicId.replace(/-/g, "_")}_sketch${sketchIndex}`,
+                    "prompt",
+                ],
+                exercise.prompt,
             );
         }
     }

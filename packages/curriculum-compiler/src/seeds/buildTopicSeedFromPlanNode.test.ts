@@ -272,4 +272,55 @@ describe("buildTopicSeedFromPlanNode", () => {
 
         expect(stableJsonStringify(first)).toBe(stableJsonStringify(second));
     });
+
+    it("passes authored module, section, and practice metadata through to the topic seed", () => {
+        const seed = buildTopicSeedFromPlanNode({
+            blueprint: {
+                profileId: "python",
+                teachingStyle: {
+                    quizWeight: 0.5,
+                    codeInputWeight: 0.2,
+                },
+            } as any,
+            spec: {
+                modules: [],
+            } as any,
+            module: {
+                moduleSlug: "python-v2-4",
+                title: "Capstone",
+                order: 4,
+                role: "capstone",
+                purpose: "Build the final project",
+                learningObjectives: ["Obj 1"],
+            } as any,
+            section: {
+                sectionSlug: "final-project",
+                title: "Final Project",
+                order: 1,
+                role: "capstone",
+            } as any,
+            topic: {
+                topicId: "mini-gradebook",
+                order: 1,
+                title: "Mini Gradebook",
+                summary: "Build the final program.",
+                minutes: 30,
+                practice: {
+                    tryIt: true,
+                    tryItExerciseId: "cp-1",
+                    tryItSketchIndex: 0,
+                    projectFlow: "progressive",
+                },
+            } as any,
+        });
+
+        expect(seed.moduleRole).toBe("capstone");
+        expect(seed.sectionRole).toBe("capstone");
+        expect(seed.practice).toEqual({
+            tryIt: true,
+            tryItExerciseId: "cp-1",
+            tryItSketchIndex: 0,
+            projectFlow: "progressive",
+        });
+    });
 });

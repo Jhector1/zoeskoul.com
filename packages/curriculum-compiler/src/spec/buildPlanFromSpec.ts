@@ -37,6 +37,7 @@ export function buildPlanFromSpec(args: {
                         topic.learningGoals ??
                         module.learningObjectives ??
                         [],
+                    practice: topic.practice,
                 }));
 
                 return {
@@ -44,6 +45,7 @@ export function buildPlanFromSpec(args: {
                     order: sectionIndex + 1,
                     title: section.title,
                     description: section.description,
+                    role: section.role,
 
                     weekStart: module.weekStart ?? schedule?.weekStart ?? null,
                     weekEnd: module.weekEnd ?? schedule?.weekEnd ?? null,
@@ -69,6 +71,7 @@ export function buildPlanFromSpec(args: {
                 moduleSlug: module.moduleSlug,
                 prefix: module.prefix ?? buildModulePrefix(args.blueprint.subjectSlug, logicalIndex),
                 order: normalizedOrder,
+                role: module.role,
                 accessOverride: module.accessOverride ?? null,
                 title: module.title,
                 description: module.description ?? module.purpose ?? "",

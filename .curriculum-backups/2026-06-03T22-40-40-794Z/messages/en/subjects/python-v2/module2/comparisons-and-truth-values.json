@@ -1,0 +1,249 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-2": {
+        "comparisons-and-truth-values": {
+          "label": "Comparisons and Truth Values",
+          "summary": "Use comparison operators and understand True and False results.",
+          "cards": {
+            "sketch0": {
+              "title": "What comparison operators do"
+            },
+            "sketch1": {
+              "title": "Using True and False in decisions"
+            },
+            "sketch2": {
+              "title": "Truthiness of numbers, strings, and None"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Truth value practice project"
+            }
+          },
+          "projectSteps": {
+            "ci_print_comparisons": {
+              "title": "Print two comparison results"
+            },
+            "ci_age_check": {
+              "title": "Adult or minor"
+            },
+            "ci_number_sign": {
+              "title": "Positive, zero, or negative"
+            },
+            "ci_name_truthy": {
+              "title": "Check whether a name was entered"
+            },
+            "ci_max_of_two": {
+              "title": "Print the larger number"
+            }
+          },
+          "quiz": {
+            "sc-compare-equal": {
+              "title": "Equal comparison",
+              "prompt": "Which expression checks whether `score` is equal to `10`?",
+              "hint": "Use the equality comparison operator, not assignment.",
+              "help": {
+                "concept": "In Python, `==` compares two values, while `=` assigns a value to a variable.",
+                "hint_1": "You want an expression that asks a question about `score`, not one that changes `score`.",
+                "hint_2": "Look for the option with the double equals operator between `score` and `10`."
+              },
+              "options": {
+                "a": "score = 10",
+                "b": "score == 10",
+                "c": "10 = score"
+              }
+            },
+            "sc-truthy-string": {
+              "title": "Truthy value",
+              "prompt": "Which value is truthy in Python?",
+              "hint": "Read the question and connect it to the specific lesson example.",
+              "help": {
+                "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "\"\"",
+                "b": "0",
+                "c": "None",
+                "d": "\"hi\""
+              }
+            },
+            "mc-true-comparisons": {
+              "title": "Choose all true comparisons",
+              "prompt": "Which expressions evaluate to `True`? Choose all that apply.",
+              "hint": "Check each comparison one by one.",
+              "help": {
+                "concept": "A comparison returns `True` only when the relationship between the two values is correct.",
+                "hint_1": "Test each option mentally: compare the numbers exactly as written.",
+                "hint_2": "Look for the statements where the left side really is greater, equal, or not equal in the stated way."
+              },
+              "options": {
+                "a": "4 < 2",
+                "b": "6 >= 6",
+                "c": "3 != 5",
+                "d": "7 == 8"
+              }
+            },
+            "mc-falsey-values": {
+              "title": "Falsy values",
+              "prompt": "Which values are falsy in Python? Choose all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "0",
+                "b": "\"\"",
+                "c": "\"False\"",
+                "d": "None"
+              }
+            },
+            "dr-check-age-order": {
+              "title": "Order the age check",
+              "prompt": "Put these lines in the correct order to make a program that prints `adult` when `age` is at least 18.",
+              "hint": "Arrange the pieces in the order Python uses them.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "age = 20",
+                "t2": "if age >= 18:",
+                "t3": "print(\"adult\")"
+              }
+            },
+            "dr-compare-then-print": {
+              "title": "Build a comparison output",
+              "prompt": "Arrange the lines to print the result of checking whether `5` is less than `9`.",
+              "hint": "Create the variable first, then print it.",
+              "help": {
+                "concept": "You can store a comparison result in a variable and then print that boolean value.",
+                "hint_1": "The comparison must happen before the program can print its result.",
+                "hint_2": "The line with `print` should come after the line that assigns the comparison result."
+              },
+              "tokens": {
+                "t1": "result = 5 < 9",
+                "t2": "print(result)"
+              }
+            },
+            "fb-greater-equal": {
+              "title": "Complete the operator",
+              "prompt": "Choose the operator that makes the condition true when `age` is 18 or more.",
+              "hint": "Look at the blank, then choose the word or symbol that makes the idea correct.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "if age [blank1] 18:",
+              "choices": [
+                ">",
+                ">=",
+                "==",
+                "!="
+              ]
+            },
+            "fb-empty-string": {
+              "title": "Fill the falsy value",
+              "prompt": "Choose the value that makes this condition false.",
+              "hint": "An empty string is falsy.",
+              "help": {
+                "concept": "In Python, an empty string is falsy, so an `if` condition using it directly will not run the `if` block.",
+                "hint_1": "You need the string with no characters inside it.",
+                "hint_2": "Pick the option that shows quotation marks with nothing between them."
+              },
+              "template": "name = [blank1]",
+              "choices": [
+                "\"Ava\"",
+                "\"hello\"",
+                "\"\"",
+                "\"0\""
+              ]
+            },
+            "ci-print-comparisons": {
+              "title": "Print two comparison results",
+              "prompt": "Write Python code that prints the result of `8 > 3` on one line and `8 == 10` on the next line.",
+              "hint": "Use `print` with each comparison expression.",
+              "help": {
+                "concept": "A comparison expression evaluates to `True` or `False`, and `print` shows that result in the output panel.",
+                "hint_1": "You need two separate output lines, so use two `print` calls or equivalent line-separated output.",
+                "hint_2": "One comparison should check greater than, and the other should check equality with 10."
+              },
+              "starterCode": "# TODO: print the result of 8 > 3\n# TODO: print the result of 8 == 10"
+            },
+            "ci-age-check": {
+              "title": "Adult or minor",
+              "prompt": "Write Python code that reads one integer age from input. Print `adult` if the age is 18 or more. Otherwise print `minor`.",
+              "hint": "Read the task \"Adult or minor\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Adult or minor\".",
+                "hint_1": "Write the code that creates exactly the requested output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "age = int(input())\n\n# TODO: print adult or minor"
+            },
+            "ci-number-sign": {
+              "title": "Positive, zero, or negative",
+              "prompt": "Write Python code that reads one integer. Print `positive` if it is greater than 0, `zero` if it is exactly 0, and `negative` otherwise.",
+              "hint": "Read the task \"Positive, zero, or negative\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Positive, zero, or negative\".",
+                "hint_1": "Write the code that creates exactly the requested output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print positive, zero, or negative"
+            },
+            "ci-name-truthy": {
+              "title": "Check whether a name was entered",
+              "prompt": "Write Python code that reads one line of input into `name`. If `name` is non-empty, print `Hello`. Otherwise print `No name`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "name = input()\n\n# TODO: print Hello or No name"
+            },
+            "ci-max-of-two": {
+              "title": "Print the larger number",
+              "prompt": "Write Python code that reads two integers, one per line. Print the larger value. If they are equal, print either one of them.",
+              "hint": "Compare the two numbers with `>=` or `>`.",
+              "help": {
+                "concept": "A comparison can decide which of two values should be printed based on their size.",
+                "hint_1": "Read both integers first, then compare them.",
+                "hint_2": "One branch should print the first number when it is at least as large as the second; the other branch prints the second."
+              },
+              "starterCode": "a = int(input())\nb = int(input())\n\n# TODO: print the larger number"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-2": {
+        "comparisons-and-truth-values": {
+          "compare-operators": {
+            "title": "What comparison operators do",
+            "bodyMarkdown": "This is the first module where Python starts making decisions with comparison and boolean logic.\n\nComparison operators check whether one value relates to another value in a certain way. The result is always a boolean value: `True` or `False`.\n\nCommon comparison operators in Python:\n\n- `==` means equal to\n- `!=` means not equal to\n- `>` means greater than\n- `<` means less than\n- `>=` means greater than or equal to\n- `<=` means less than or equal to\n\nExample:\n\n```python\nprint(5 > 3)\nprint(5 == 3)\nprint(7 != 7)\n```\n\nWalk through it:\n\n- `5 > 3` is `True` because 5 is larger than 3.\n- `5 == 3` is `False` because 5 and 3 are not the same.\n- `7 != 7` is `False` because 7 is equal to 7, so it is not \"not equal\".\n\nWhen you click Run, the output panel would show:\n\n```python\nTrue\nFalse\nFalse\n```"
+          },
+          "truth-values-in-conditions": {
+            "title": "Using True and False in decisions",
+            "bodyMarkdown": "A comparison is often used inside an `if` statement. If the comparison is `True`, Python runs that block. If it is `False`, Python skips it.\n\nExample:\n\n```python\nage = 16\n\nif age >= 13:\n    print(\"teen or older\")\nelse:\n    print(\"child\")\n```\n\nStep through it:\n\n- `age = 16` stores a number.\n- `age >= 13` checks whether age is at least 13.\n- Because `16 >= 13` is `True`, Python prints `teen or older`.\n- The `else` block does not run.\n\nThis is useful for rules like age checks, score checks, and input validation."
+          },
+          "truthiness-basics": {
+            "title": "Truthiness of numbers, strings, and None",
+            "bodyMarkdown": "In Python, some values can be used directly in conditions. This is called truthiness.\n\nBeginner-friendly rules:\n\n- `0` is falsy\n- non-zero numbers are truthy\n- `\"\"` (empty string) is falsy\n- non-empty strings are truthy\n- `None` is falsy\n\nExample:\n\n```python\nname = \"\"\n\nif name:\n    print(\"You entered a name\")\nelse:\n    print(\"Name is empty\")\n```\n\nWalk through it:\n\n- `name` stores an empty string.\n- In `if name:`, Python checks whether the string is truthy.\n- An empty string is falsy, so the `else` block runs.\n\nAnother quick example:\n\n```python\ncount = 2\nprint(bool(count))\n```\n\nThis prints `True` because `2` is a non-zero number."
+          }
+        }
+      }
+    }
+  }
+}

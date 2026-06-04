@@ -295,6 +295,25 @@ function normalizeTopic(
             ? topic.tags.filter((x: unknown): x is string => typeof x === "string")
             : [],
         learningGoals: cleanStringArray(topic?.learningGoals),
+        practice:
+            topic?.practice && typeof topic.practice === "object"
+                ? {
+                    ...(typeof topic.practice.tryIt === "boolean"
+                        ? { tryIt: topic.practice.tryIt }
+                        : {}),
+                    ...(cleanString(topic.practice.tryItExerciseId)
+                        ? { tryItExerciseId: cleanString(topic.practice.tryItExerciseId) }
+                        : {}),
+                    ...(typeof topic.practice.tryItSketchIndex === "number" &&
+                        Number.isFinite(topic.practice.tryItSketchIndex)
+                        ? { tryItSketchIndex: topic.practice.tryItSketchIndex }
+                        : {}),
+                    ...(topic.practice.projectFlow === "progressive" ||
+                        topic.practice.projectFlow === "standalone"
+                        ? { projectFlow: topic.practice.projectFlow }
+                        : {}),
+                }
+                : undefined,
     };
 }
 
@@ -329,6 +348,12 @@ function normalizeModule(
                     : sectionIndex + 1,
             title: String(section?.title ?? "").trim(),
             description: cleanString(section?.description),
+            role:
+                section?.role === "module_project" || section?.role === "capstone"
+                    ? section.role
+                    : section?.role === "lesson"
+                        ? "lesson"
+                        : undefined,
 
             weekStart: cleanNumberOrNull(section?.weekStart),
             weekEnd: cleanNumberOrNull(section?.weekEnd),
@@ -359,6 +384,12 @@ function normalizeModule(
         moduleNumber,
         moduleSlug: String(module?.moduleSlug ?? "").trim(),
         prefix: cleanString(module?.prefix),
+        role:
+            module?.role === "capstone"
+                ? "capstone"
+                : module?.role === "standard"
+                    ? "standard"
+                    : undefined,
         accessOverride:
             module?.accessOverride === "free" || module?.accessOverride === "paid"
                 ? module.accessOverride

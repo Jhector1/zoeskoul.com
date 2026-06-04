@@ -260,6 +260,53 @@ describe("TopicAuthoringDraft canonical validation", () => {
         expect(result.ok).toBe(true);
     });
 
+    it("accepts code_input solutionFiles and sourceChecks", () => {
+        const result = validateTopicAuthoringDraft({
+            ...makeValidMinimalDraft(),
+            quizDraft: [
+                {
+                    id: "code-1",
+                    kind: "code_input" as const,
+                    title: "Build a helper project",
+                    prompt: "Import the helper and print the cleaned name.",
+                    hint: "Create the helper module first.",
+                    help: {
+                        concept: "Multi-file exercises can require exact helper files and import lines.",
+                        hint_1: "Put the helper in its own file.",
+                        hint_2: "Import it into main.py.",
+                    },
+                    starterCode: "# start\n",
+                    solutionCode: "from tools.names import clean_name\nprint(clean_name(' ava '))\n",
+                    solutionFiles: [
+                        {
+                            path: "main.py",
+                            content: "from tools.names import clean_name\nprint(clean_name(' ava '))\n",
+                            isEntry: true,
+                        },
+                        {
+                            path: "tools/names.py",
+                            content: "def clean_name(text):\n    return text.strip().title()\n",
+                        },
+                    ],
+                    sourceChecks: [
+                        {
+                            type: "source_contains",
+                            pattern: "from tools.names import clean_name",
+                            message: "Import clean_name from tools.names.",
+                        },
+                    ],
+                    recipeType: "fixed_tests" as const,
+                    tests: [
+                        { stdout: "Ava\n" },
+                        { stdout: "Ava\n" },
+                    ],
+                },
+            ],
+        });
+
+        expect(result.ok).toBe(true);
+    });
+
     it("accepts per-test file fixtures for code_input", () => {
         const result = validateTopicAuthoringDraft({
             ...makeValidMinimalDraft(),

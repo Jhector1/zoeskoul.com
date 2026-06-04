@@ -79,6 +79,12 @@ export type CourseSpecTopic = {
     technical?: boolean;
     tags?: string[];
     learningGoals?: string[];
+    practice?: {
+        tryIt?: boolean;
+        tryItExerciseId?: string;
+        tryItSketchIndex?: number;
+        projectFlow?: "standalone" | "progressive";
+    };
 };
 
 export type CourseSpecSection = {
@@ -86,6 +92,7 @@ export type CourseSpecSection = {
     sectionSlug: string;
     title: string;
     description?: string;
+    role?: "lesson" | "module_project" | "capstone";
 
     weekStart?: number | null;
     weekEnd?: number | null;
@@ -101,6 +108,7 @@ export type CourseSpecModule = {
     moduleSlug: string;
     order?: number;
     prefix?: string;
+    role?: "standard" | "capstone";
     accessOverride?: "free" | "paid" | null;
     title: string;
     description?: string;

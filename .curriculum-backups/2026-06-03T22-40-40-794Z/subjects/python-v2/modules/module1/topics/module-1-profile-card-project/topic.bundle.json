@@ -1,0 +1,594 @@
+{
+  "topicId": "module-1-profile-card-project",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-1",
+  "sectionSlug": "python-v2-1-module-project",
+  "prefix": "pyv2_1",
+  "minutes": 45,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-1.module-1-profile-card-project.label",
+    "summaryKey": "topics.python-v2.python-v2-1.module-1-profile-card-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-1.module-1-profile-card-project.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-1-profile-card-project-sketch0",
+        "titleKey": "topics.python-v2.python-v2-1.module-1-profile-card-project.tryIt.try_module_1_profile_card_project_sketch0.title",
+        "promptKey": "topics.python-v2.python-v2-1.module-1-profile-card-project.tryIt.try_module_1_profile_card_project_sketch0.prompt",
+        "exerciseKey": "try-module-1-profile-card-project-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-1.module-1-profile-card-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "mp_1",
+            "titleKey": "topics.python-v2.python-v2-1.module-1-profile-card-project.projectSteps.mp_1.title",
+            "exerciseKey": "mp-1-store-profile-values",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_2",
+            "titleKey": "topics.python-v2.python-v2-1.module-1-profile-card-project.projectSteps.mp_2.title",
+            "exerciseKey": "mp-2-read-and-label-input",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_3",
+            "titleKey": "topics.python-v2.python-v2-1.module-1-profile-card-project.projectSteps.mp_3.title",
+            "exerciseKey": "mp-3-clean-typed-name",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_4",
+            "titleKey": "topics.python-v2.python-v2-1.module-1-profile-card-project.projectSteps.mp_4.title",
+            "exerciseKey": "mp-4-build-full-profile-card",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-1.module-1-profile-card-project.sketch-1.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.module-1-profile-card-project.sketch-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-module-1-profile-card-project-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Store Ava in name.\n# Then print name.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Store Ava in name.\n# Then print name.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Store Ava in name.\n# Then print name.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Store Ava in name.\n# Then print name.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = \"Ava\"\nprint(name)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "Ava\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "name = \"Ava\"\nprint(name)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = \"Ava\"\nprint(name)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bname\\b",
+            "message": "Use the variable name `name` in this preview."
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "name = \"Ava\"\nprint(name)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bname\\b",
+          "message": "Use the variable name `name` in this preview."
+        }
+      ]
+    },
+    {
+      "id": "mp-1-store-profile-values",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Store the student name and level.\n# Then print both values on separate lines.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Store the student name and level.\n# Then print both values on separate lines.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Store the student name and level.\n# Then print both values on separate lines.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Store the student name and level.\n# Then print both values on separate lines.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student_name = \"Maya\"\nlevel = 7\nprint(student_name)\nprint(level)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Maya\n7\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "Maya\n7\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "student_name = \"Maya\"\nlevel = 7\nprint(student_name)\nprint(level)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student_name = \"Maya\"\nlevel = 7\nprint(student_name)\nprint(level)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bstudent_name\\b",
+            "message": "Store the name in `student_name`."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\blevel\\b",
+            "message": "Store the level in `level`."
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "student_name = \"Maya\"\nlevel = 7\nprint(student_name)\nprint(level)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bstudent_name\\b",
+          "message": "Store the name in `student_name`."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\blevel\\b",
+          "message": "Store the level in `level`."
+        }
+      ]
+    },
+    {
+      "id": "mp-2-read-and-label-input",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Read the student's name and city.\n# Then print the two labeled lines.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read the student's name and city.\n# Then print the two labeled lines.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read the student's name and city.\n# Then print the two labeled lines.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read the student's name and city.\n# Then print the two labeled lines.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = input()\ncity = input()\nprint(\"Name:\", name)\nprint(\"City:\", city)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Ava\nLima\n",
+            "stdout": "Name: Ava\nCity: Lima\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Mia\nTokyo\n",
+            "stdout": "Name: Mia\nCity: Tokyo\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "name = input()\ncity = input()\nprint(\"Name:\", name)\nprint(\"City:\", city)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = input()\ncity = input()\nprint(\"Name:\", name)\nprint(\"City:\", city)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the name and city with input().",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "name = input()\ncity = input()\nprint(\"Name:\", name)\nprint(\"City:\", city)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the name and city with input().",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "mp-3-clean-typed-name",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Read a raw name, clean it, and print it.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read a raw name, clean it, and print it.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read a raw name, clean it, and print it.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read a raw name, clean it, and print it.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "raw_name = input()\nclean_name = raw_name.strip().title()\nprint(clean_name)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  ava  \n",
+            "stdout": "Ava\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "mIA jOnes\n",
+            "stdout": "Mia Jones\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "raw_name = input()\nclean_name = raw_name.strip().title()\nprint(clean_name)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "raw_name = input()\nclean_name = raw_name.strip().title()\nprint(clean_name)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": ".strip(",
+            "message": "Use .strip() to remove extra outside spaces.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": ".title(",
+            "message": "Use .title() to format the name cleanly.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "raw_name = input()\nclean_name = raw_name.strip().title()\nprint(clean_name)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": ".strip(",
+          "message": "Use .strip() to remove extra outside spaces.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": ".title(",
+          "message": "Use .title() to format the name cleanly.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "mp-4-build-full-profile-card",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "# Read the name, age, and city.\n# Clean the name, update the age for next year, and print the profile card.\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read the name, age, and city.\n# Clean the name, update the age for next year, and print the profile card.\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read the name, age, and city.\n# Clean the name, update the age for next year, and print the profile card.\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read the name, age, and city.\n# Clean the name, update the age for next year, and print the profile card.\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = input().strip().title()\nage = int(input())\ncity = input()\nprint(f\"Profile for {name}\")\nprint(f\"Age next year: {age + 1}\")\nprint(f\"City: {city}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  ava  \n14\nLima\n",
+            "stdout": "Profile for Ava\nAge next year: 15\nCity: Lima\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "mia\n11\nTokyo\n",
+            "stdout": "Profile for Mia\nAge next year: 12\nCity: Tokyo\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "name = input().strip().title()\nage = int(input())\ncity = input()\nprint(f\"Profile for {name}\")\nprint(f\"Age next year: {age + 1}\")\nprint(f\"City: {city}\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = input().strip().title()\nage = int(input())\ncity = input()\nprint(f\"Profile for {name}\")\nprint(f\"Age next year: {age + 1}\")\nprint(f\"City: {city}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert the age to an integer before adding 1.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "f[\"\\']",
+            "message": "Use at least one f-string in the profile card."
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "name = input().strip().title()\nage = int(input())\ncity = input()\nprint(f\"Profile for {name}\")\nprint(f\"Age next year: {age + 1}\")\nprint(f\"City: {city}\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert the age to an integer before adding 1.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "f[\"\\']",
+          "message": "Use at least one f-string in the profile card."
+        }
+      ]
+    }
+  ]
+}

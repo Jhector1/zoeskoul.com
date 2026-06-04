@@ -12,6 +12,12 @@ export type PlannedTopic = {
   minutes: number;
   technical?: boolean;
   learningGoals: string[];
+  practice?: {
+    tryIt?: boolean;
+    tryItExerciseId?: string;
+    tryItSketchIndex?: number;
+    projectFlow?: "standalone" | "progressive";
+  };
 };
 
 export type PlannedSection = {
@@ -19,6 +25,7 @@ export type PlannedSection = {
   order: number;
   title: string;
   description?: string;
+  role?: "lesson" | "module_project" | "capstone";
 
   weekStart?: number | null;
   weekEnd?: number | null;
@@ -35,6 +42,7 @@ export type PlannedModule = {
   moduleSlug: string;
   prefix: string;
   order: number;
+  role?: "standard" | "capstone";
   accessOverride?: "free" | "paid" | null;
   title: string;
   description?: string;

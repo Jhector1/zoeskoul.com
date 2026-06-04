@@ -49,7 +49,16 @@ export type ProgrammingCodeInputStarterFileDraft = {
     isEntry?: boolean;
     entry?: boolean;
     readOnly?: boolean;
-};export type TopicAuthoringDraft = {
+};
+
+export type ProgrammingCodeInputSourceCheckDraft = {
+    type: "source_contains" | "source_regex";
+    pattern: string;
+    message: string;
+    normalizeWhitespace?: boolean;
+};
+
+export type TopicAuthoringDraft = {
     title: string;
     summary: string;
     minutes: number;
@@ -105,6 +114,8 @@ export type ProgrammingCodeInputStarterFileDraft = {
          */
         starterFiles?: ProgrammingCodeInputStarterFileDraft[];
         workspaceExpectations?: ManifestWorkspaceExpectations;
+        solutionFiles?: ProgrammingCodeInputStarterFileDraft[];
+        sourceChecks?: ProgrammingCodeInputSourceCheckDraft[];
 
         solutionCode: string;
         tests?: ProgrammingCodeInputTestDraft[];
@@ -366,6 +377,39 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                                         isEntry: { type: "boolean" },
                                         entry: { type: "boolean" },
                                         readOnly: { type: "boolean" },
+                                    },
+                                },
+                            },
+                            solutionFiles: {
+                                type: "array",
+                                items: {
+                                    type: "object",
+                                    additionalProperties: false,
+                                    required: ["path", "content"],
+                                    properties: {
+                                        path: { type: "string" },
+                                        content: { type: "string" },
+                                        language: { type: "string" },
+                                        isEntry: { type: "boolean" },
+                                        entry: { type: "boolean" },
+                                        readOnly: { type: "boolean" },
+                                    },
+                                },
+                            },
+                            sourceChecks: {
+                                type: "array",
+                                items: {
+                                    type: "object",
+                                    additionalProperties: false,
+                                    required: ["type", "pattern", "message"],
+                                    properties: {
+                                        type: {
+                                            type: "string",
+                                            enum: ["source_contains", "source_regex"],
+                                        },
+                                        pattern: { type: "string" },
+                                        message: { type: "string" },
+                                        normalizeWhitespace: { type: "boolean" },
                                     },
                                 },
                             },
@@ -740,6 +784,8 @@ export function assertTopicAuthoringDraft(
                         "starterCode",
                         "entryFilePath",
                         "starterFiles",
+                        "solutionFiles",
+                        "sourceChecks",
                         "workspaceExpectations",
                         "solutionCode",
                         "tests",
@@ -827,6 +873,85 @@ export function assertTopicAuthoringDraft(
                         typeof record.entry !== "boolean"
                     ) {
                         fail(`${label} starterFiles[${fileIndex}].entry must be a boolean when provided`);
+                    }
+                });
+            }
+
+            if (typeof exercise.solutionFiles !== "undefined") {
+                if (!Array.isArray(exercise.solutionFiles)) {
+                    fail(`${label} code_input solutionFiles must be an array when provided`);
+                }
+
+                exercise.solutionFiles.forEach((file, fileIndex) => {
+                    assertFileDraft(
+                        file,
+                        `${label} solutionFiles[${fileIndex}]`,
+                        ["path", "content", "language", "isEntry", "entry", "readOnly"],
+                    );
+
+                    const record = file as Record<string, unknown>;
+
+                    if (
+                        typeof record.language !== "undefined" &&
+                        typeof record.language !== "string"
+                    ) {
+                        fail(`${label} solutionFiles[${fileIndex}].language must be a string when provided`);
+                    }
+
+                    if (
+                        typeof record.isEntry !== "undefined" &&
+                        typeof record.isEntry !== "boolean"
+                    ) {
+                        fail(`${label} solutionFiles[${fileIndex}].isEntry must be a boolean when provided`);
+                    }
+
+                    if (
+                        typeof record.entry !== "undefined" &&
+                        typeof record.entry !== "boolean"
+                    ) {
+                        fail(`${label} solutionFiles[${fileIndex}].entry must be a boolean when provided`);
+                    }
+                });
+            }
+
+            if (typeof exercise.sourceChecks !== "undefined") {
+                if (!Array.isArray(exercise.sourceChecks)) {
+                    fail(`${label} code_input sourceChecks must be an array when provided`);
+                }
+
+                exercise.sourceChecks.forEach((check, checkIndex) => {
+                    if (!check || typeof check !== "object" || Array.isArray(check)) {
+                        fail(`${label} sourceChecks[${checkIndex}] must be an object`);
+                        return;
+                    }
+
+                    const record = check as Record<string, unknown>;
+                    assertOnlyKeys(
+                        record,
+                        ["type", "pattern", "message", "normalizeWhitespace"],
+                        `${label}.sourceChecks[${checkIndex}]`,
+                    );
+
+                    if (
+                        record.type !== "source_contains" &&
+                        record.type !== "source_regex"
+                    ) {
+                        fail(`${label} sourceChecks[${checkIndex}].type must be "source_contains" or "source_regex"`);
+                    }
+
+                    if (!isNonEmptyString(record.pattern)) {
+                        fail(`${label} sourceChecks[${checkIndex}].pattern must be non-empty`);
+                    }
+
+                    if (!isNonEmptyString(record.message)) {
+                        fail(`${label} sourceChecks[${checkIndex}].message must be non-empty`);
+                    }
+
+                    if (
+                        typeof record.normalizeWhitespace !== "undefined" &&
+                        typeof record.normalizeWhitespace !== "boolean"
+                    ) {
+                        fail(`${label} sourceChecks[${checkIndex}].normalizeWhitespace must be a boolean when provided`);
                     }
                 });
             }

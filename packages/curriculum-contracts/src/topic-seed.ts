@@ -54,12 +54,14 @@ export type TopicSeed = {
     summary: string;
     minutes: number;
     moduleTitle: string;
+    moduleRole?: "standard" | "capstone";
     modulePurpose?: string;
     moduleObjectives: string[];
     guidedExercises: string[];
     quizFocus: string[];
     moduleProject?: string;
     sectionTitle: string;
+    sectionRole?: "lesson" | "module_project" | "capstone";
     sourceLocale: string;
     targetLocales: string[];
     exercisePolicy?: ResolvedExercisePolicy;
@@ -68,6 +70,12 @@ export type TopicSeed = {
     modulePrefix: string;
     moduleOrder: number;
     sectionOrder: number;
+    practice?: {
+        tryIt?: boolean;
+        tryItExerciseId?: string;
+        tryItSketchIndex?: number;
+        projectFlow?: "standalone" | "progressive";
+    };
     generationTargets?: {
         quizBankMin: number;
         quizBankTarget: number;

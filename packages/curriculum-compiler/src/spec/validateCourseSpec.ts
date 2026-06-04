@@ -114,6 +114,15 @@ function validateSection(
         issues.push(`${path}.description must not be blank if provided`);
     }
 
+    if (
+        section.role != null &&
+        section.role !== "lesson" &&
+        section.role !== "module_project" &&
+        section.role !== "capstone"
+    ) {
+        issues.push(`${path}.role must be "lesson", "module_project", or "capstone" when provided`);
+    }
+
     if (section.weeksLabel != null && !String(section.weeksLabel).trim()) {
         issues.push(`${path}.weeksLabel must not be blank if provided`);
     }
@@ -183,6 +192,45 @@ function validateSection(
                 topic.minutes <= 0)
         ) {
             issues.push(`${topicPath}.minutes must be a positive number`);
+        }
+
+        if (topic.practice != null) {
+            if (!topic.practice || typeof topic.practice !== "object") {
+                issues.push(`${topicPath}.practice must be an object when provided`);
+            } else {
+                if (
+                    typeof topic.practice.tryIt !== "undefined" &&
+                    typeof topic.practice.tryIt !== "boolean"
+                ) {
+                    issues.push(`${topicPath}.practice.tryIt must be a boolean when provided`);
+                }
+
+                if (
+                    typeof topic.practice.tryItExerciseId !== "undefined" &&
+                    !isNonEmptyString(topic.practice.tryItExerciseId)
+                ) {
+                    issues.push(`${topicPath}.practice.tryItExerciseId must be non-empty when provided`);
+                }
+
+                if (
+                    typeof topic.practice.tryItSketchIndex !== "undefined" &&
+                    (
+                        typeof topic.practice.tryItSketchIndex !== "number" ||
+                        !Number.isFinite(topic.practice.tryItSketchIndex) ||
+                        topic.practice.tryItSketchIndex < 0
+                    )
+                ) {
+                    issues.push(`${topicPath}.practice.tryItSketchIndex must be a non-negative number when provided`);
+                }
+
+                if (
+                    typeof topic.practice.projectFlow !== "undefined" &&
+                    topic.practice.projectFlow !== "standalone" &&
+                    topic.practice.projectFlow !== "progressive"
+                ) {
+                    issues.push(`${topicPath}.practice.projectFlow must be "standalone" or "progressive" when provided`);
+                }
+            }
         }
     }
 }
@@ -291,6 +339,14 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
 
         if (!isNonEmptyString(module.title)) {
             issues.push(`${modulePath}.title is required`);
+        }
+
+        if (
+            module.role != null &&
+            module.role !== "standard" &&
+            module.role !== "capstone"
+        ) {
+            issues.push(`${modulePath}.role must be "standard" or "capstone" when provided`);
         }
 
         if (!Array.isArray(module.sections) || !module.sections.length) {

@@ -73,11 +73,13 @@ export function buildTopicSeedFromPlanNode(args: {
             moduleProject: args.module.moduleProject,
             runtimeDefaults: moduleRuntimeDefaults,
             exercisePolicy,
+            role: args.module.role,
         },
         section: {
             slug: args.section.sectionSlug,
             title: args.section.title,
             order: args.section.order,
+            role: args.section.role,
         },
         topic: {
             topicId: args.topic.topicId,
@@ -86,6 +88,7 @@ export function buildTopicSeedFromPlanNode(args: {
             summary: args.topic.summary,
             minutes: args.topic.minutes,
             technical: args.topic.technical,
+            practice: args.topic.practice,
         },
     });
     const workspacePolicy = resolveWorkspacePolicy({
@@ -193,5 +196,8 @@ export function buildTopicSeedFromPlanNode(args: {
         generationTargets,
         plannedExerciseCounts,
         moduleRuntimeDefaults: mergedRuntimeDefaults,
+        moduleRole: args.module.role,
+        sectionRole: args.section.role,
+        practice: args.topic.practice,
     };
 }

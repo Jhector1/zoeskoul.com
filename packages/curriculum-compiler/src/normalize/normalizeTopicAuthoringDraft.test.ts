@@ -111,6 +111,73 @@ describe("normalizeTopicAuthoringDraft", () => {
         });
     });
 
+    it("preserves authored solutionFiles and sourceChecks for code_input exercises", () => {
+        const normalized = normalizeTopicAuthoringDraft({
+            title: "Topic",
+            summary: "Summary",
+            minutes: 20,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "code-1",
+                    kind: "code_input",
+                    title: "Code",
+                    prompt: "Prompt",
+                    starterCode: "# start\n",
+                    solutionCode: "print('ok')\n",
+                    solutionFiles: [
+                        {
+                            path: "main.py",
+                            content: "from helpers.names import clean_name\nprint(clean_name(' ava '))\n",
+                            isEntry: true,
+                        },
+                        {
+                            path: "helpers/names.py",
+                            content: "def clean_name(text):\n    return text.strip().title()\n",
+                        },
+                    ],
+                    sourceChecks: [
+                        {
+                            type: "source_contains",
+                            pattern: "from helpers.names import clean_name",
+                            message: "Import clean_name from helpers.names.",
+                        },
+                    ],
+                    tests: [
+                        { stdout: "ok\n", match: "exact" },
+                        { stdout: "ok\n", match: "exact" },
+                    ],
+                    hint: "Hint",
+                    help: {
+                        concept: "Concept",
+                        hint_1: "Hint 1",
+                        hint_2: "Hint 2",
+                    },
+                },
+            ],
+        } as any);
+
+        const exercise = normalized.quizDraft[0] as any;
+        expect(exercise.solutionFiles).toEqual([
+            {
+                path: "main.py",
+                content: "from helpers.names import clean_name\nprint(clean_name(' ava '))\n",
+                isEntry: true,
+            },
+            {
+                path: "helpers/names.py",
+                content: "def clean_name(text):\n    return text.strip().title()\n",
+            },
+        ]);
+        expect(exercise.sourceChecks).toEqual([
+            {
+                type: "source_contains",
+                pattern: "from helpers.names import clean_name",
+                message: "Import clean_name from helpers.names.",
+            },
+        ]);
+    });
+
     it("throws on unsafe workspaceExpectations paths", () => {
         expect(() =>
             normalizeTopicAuthoringDraft({

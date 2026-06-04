@@ -95,6 +95,44 @@ function normalizeStarterFileDrafts(
 
     return files.length > 0 ? files : undefined;
 }
+
+function normalizeSourceChecks(
+    value: unknown,
+): Array<{
+    type: "source_contains" | "source_regex";
+    pattern: string;
+    message: string;
+    normalizeWhitespace?: boolean;
+}> | undefined {
+    if (!Array.isArray(value)) return undefined;
+
+    const checks = value
+        .filter((item): item is Record<string, unknown> =>
+            Boolean(item) && typeof item === "object" && !Array.isArray(item),
+        )
+        .map((item) => {
+            const type =
+                item.type === "source_regex" ? "source_regex" : item.type === "source_contains"
+                    ? "source_contains"
+                    : null;
+            const pattern = asOptionalString(item.pattern);
+            const message = asOptionalString(item.message);
+
+            if (!type || !pattern || !message) return null;
+
+            return {
+                type,
+                pattern,
+                message,
+                ...(typeof item.normalizeWhitespace === "boolean"
+                    ? { normalizeWhitespace: item.normalizeWhitespace }
+                    : {}),
+            };
+        })
+        .filter((check): check is NonNullable<typeof check> => Boolean(check));
+
+    return checks.length > 0 ? checks : undefined;
+}
 function normalizeOptionText(value: unknown): string {
     if (typeof value === "string") return value.trim();
 
@@ -660,7 +698,9 @@ function normalizeCodeInput(
             ? semanticChecksResult.data
             : undefined;
     const starterFiles = normalizeStarterFileDrafts(item.starterFiles);
+    const solutionFiles = normalizeStarterFileDrafts(item.solutionFiles);
     const files = normalizeFileDrafts(item.files);
+    const sourceChecks = normalizeSourceChecks(item.sourceChecks);
     const entryFilePath = normalizeOptionalWorkspacePath(item.entryFilePath, "entryFilePath");
     const workspaceExpectations =
         typeof item.workspaceExpectations === "undefined"
@@ -677,6 +717,8 @@ function normalizeCodeInput(
         starterCode,
         ...(entryFilePath ? { entryFilePath } : {}),
         ...(starterFiles?.length ? { starterFiles } : {}),
+        ...(solutionFiles?.length ? { solutionFiles } : {}),
+        ...(sourceChecks?.length ? { sourceChecks } : {}),
         ...(workspaceExpectations ? { workspaceExpectations } : {}),
         solutionCode:
             typeof item.solutionCode === "string" ? item.solutionCode : "",

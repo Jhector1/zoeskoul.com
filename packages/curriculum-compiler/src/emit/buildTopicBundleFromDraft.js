@@ -25,12 +25,25 @@ function buildProjectStepIds(draft, maxSteps = 5) {
 function quizExercises(draft) {
     return draft.quizDraft.filter((exercise) => exercise.kind !== "code_input");
 }
+function resolveTryItExerciseId(args) {
+    const explicitId = args.seed.practice?.tryItExerciseId?.trim();
+    if (explicitId) {
+        const hasExercise = args.draft.quizDraft.some((exercise) => exercise.id === explicitId);
+        if (hasExercise)
+            return explicitId;
+    }
+    const firstCodeInput = args.draft.quizDraft.find((exercise) => exercise.kind === "code_input");
+    return firstCodeInput?.id;
+}
 function projectStepIdFromExerciseId(id) {
     return id
         .trim()
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "_")
         .replace(/^_+|_+$/g, "");
+}
+function topicMessageRoot(subjectSlug, moduleSlug, topicId) {
+    return `topics.${subjectSlug}.${moduleSlug}.${topicId}`;
 }
 export function buildTopicBundleFromDraft(args) {
     const { shape, seed, draft } = args;
@@ -51,13 +64,36 @@ export function buildTopicBundleFromDraft(args) {
     const quizVisibleDefault = targets?.quizVisibleDefault ?? 4;
     const quizVisibleMax = targets?.quizVisibleMax ?? 6;
     const maxAttempts = targets?.maxAttempts ?? null;
-    const sketchCards = draft.sketchBlocks.map((block, index) => ({
-        id: `sketch${index}`,
-        kind: "sketch",
-        titleKey: kp.topicCardTitleKey(seed.subjectSlug, logicalModuleSlug, seed.topicId, `sketch${index}`),
-        sketchId: block.id,
-        height: 420,
-    }));
+    const sketchCards = draft.sketchBlocks.map((block, index) => {
+        const tryItEnabled = seed.practice?.tryIt === true;
+        const tryItSketchIndex = seed.practice?.tryItSketchIndex ?? 0;
+        const tryItExerciseId = tryItEnabled && index === tryItSketchIndex
+            ? resolveTryItExerciseId({ draft, seed })
+            : undefined;
+        return {
+            id: `sketch${index}`,
+            kind: "sketch",
+            titleKey: kp.topicCardTitleKey(seed.subjectSlug, logicalModuleSlug, seed.topicId, `sketch${index}`),
+            sketchId: block.id,
+            height: 420,
+            ...(tryItExerciseId
+                ? {
+                    tryIt: {
+                        id: `try-${seed.topicId}-sketch${index}`,
+                        titleKey: `${topicMessageRoot(seed.subjectSlug, logicalModuleSlug, seed.topicId)}.tryIt.try_${seed.topicId.replace(/-/g, "_")}_sketch${index}.title`,
+                        promptKey: `${topicMessageRoot(seed.subjectSlug, logicalModuleSlug, seed.topicId)}.tryIt.try_${seed.topicId.replace(/-/g, "_")}_sketch${index}.prompt`,
+                        exerciseKey: tryItExerciseId,
+                        difficulty: "easy",
+                        preferKind: "code_input",
+                        seedPolicy: "global",
+                        required: true,
+                        allowReveal: true,
+                        maxAttempts,
+                    },
+                }
+                : {}),
+        };
+    });
     const quizCard = quizOnlyExercises.length > 0
         ? [
             {
@@ -87,6 +123,9 @@ export function buildTopicBundleFromDraft(args) {
                     difficulty: "easy",
                     allowReveal: true,
                     preferKind: "code_input",
+                    ...(seed.sectionRole === "capstone" || seed.moduleRole === "capstone"
+                        ? { displayKind: "capstone", uiKind: "capstone" }
+                        : {}),
                     maxAttempts,
                     steps: projectStepIds.map((exerciseId) => {
                         const stepId = projectStepIdFromExerciseId(exerciseId);
@@ -98,6 +137,10 @@ export function buildTopicBundleFromDraft(args) {
                             preferKind: "code_input",
                             seedPolicy: "global",
                             maxAttempts,
+                            ...(seed.practice?.projectFlow === "progressive" &&
+                                exerciseId !== projectStepIds[0]
+                                ? { carryFromPrev: true }
+                                : {}),
                         };
                     }),
                 },

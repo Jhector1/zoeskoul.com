@@ -3,22 +3,22 @@
     "python-v2": {
       "python-v2-3": {
         "mini-gradebook-capstone": {
-          "label": "Mini Gradebook Capstone",
-          "summary": "Build a small gradebook that reads scores, totals them, tracks the highest score, computes an average, and prints a clear report.",
+          "label": "Course Capstone: Build a Mini Gradebook",
+          "summary": "A tutor needs a quick grade summary before parent check-ins. Build a small gradebook that reads scores, totals them, finds the highest score, computes an average, and prints a clean report.",
           "cards": {
             "sketch0": {
               "title": "Plan the gradebook"
             },
             "quiz": {
-              "title": "Capstone Check"
+              "title": "Capstone Warm-Up"
             },
             "project": {
-              "title": "Mini Gradebook"
+              "title": "Gradebook Report Builder"
             }
           },
           "projectSteps": {
             "capstone-mini-gradebook": {
-              "title": "Build the mini gradebook"
+              "title": "Build the final gradebook report"
             }
           },
           "quiz": {
@@ -89,15 +89,15 @@
               ]
             },
             "capstone-mini-gradebook": {
-              "title": "Mini Gradebook",
-              "prompt": "Build a Mini Gradebook.\n\nInput format:\n1. Student name\n2. Number of scores\n3. That many score values, one per line\n\nRequirements:\n- Read exactly `count` scores using a `for` loop and `range(count)`.\n- Keep a running total of all scores.\n- Track the highest score with a comparison.\n- Calculate the average.\n- Print the average with one digit after the decimal point.\n- Print `excellent` when the average is at least 90, `passing` when it is at least 70, and `needs practice` otherwise.\n\nOutput format:\nStudent: <name>\nScores entered: <count>\nHighest score: <highest>\nAverage: <average>\nStatus: <status>",
-              "hint": "Use `range(count)` to read the scores. Add each score to `total`, update `highest` when the new score is bigger, then use an `if` / `elif` / `else` chain to choose the status.",
+              "title": "Build the final gradebook report",
+              "prompt": "A tutor wants one quick report for each student before parent check-ins.\n\nBuild the final Mini Gradebook program.\n\nInput format:\n1. Student name\n2. Number of scores\n3. That many score values, one per line\n\nYour program should:\n- read exactly `count` scores with a `for` loop and `range(count)`\n- keep a running total of the scores\n- track the highest score seen so far\n- calculate the average after the loop\n- print the average with one digit after the decimal point\n- print `excellent` when the average is at least 90, `passing` when it is at least 70, and `needs practice` otherwise\n\nPrint this report exactly:\nStudent: <name>\nScores entered: <count>\nHighest score: <highest>\nAverage: <average>\nStatus: <status>",
+              "hint": "Start by reading the name and count, then let the loop do the repeated work. Inside the loop, add each score to `total` and update `highest` when needed.",
               "help": {
-                "concept": "This capstone combines the main beginner tools: input, variables, strings, conditionals, loops, range, accumulators, comparisons, and formatted output.",
-                "hint_1": "Start with `total = 0` and `highest = 0`. Inside the loop, add the score to `total`.",
-                "hint_2": "After the loop, calculate `average = total / count`, then print it with `{average:.1f}`."
+                "concept": "This capstone feels like one small real tool: it reads repeated input, keeps track of totals and best scores, then turns the results into a report someone can read quickly.",
+                "hint_1": "Keep `total` and `highest` as running values. Each new score changes `total`, and only larger scores should replace `highest`.",
+                "hint_2": "After the loop, compute `average = total / count`, choose the status with an `if` / `elif` / `else` chain, and print the final lines in the exact order shown."
               },
-              "starterCode": "student = input()\ncount = int(input())\n\ntotal = 0\nhighest = 0\n\nfor i in range(count):\n    score = int(input())\n    # TODO: add score to total\n    # TODO: update highest when this score is bigger\n\n# TODO: calculate the average\n# TODO: print the report"
+              "starterCode": "student = input()\ncount = int(input())\n\ntotal = 0\nhighest = 0\n\nfor i in range(count):\n    score = int(input())\n    # TODO: add this score to total\n    # TODO: if this score is higher than highest, update highest\n\n# TODO: calculate average\n# TODO: decide the status line\n# TODO: print the full report in the required order"
             }
           }
         }
@@ -110,7 +110,7 @@
         "mini-gradebook-capstone": {
           "sketch_gradebook_plan": {
             "title": "Plan the gradebook",
-            "bodyMarkdown": "The Mini Gradebook is a final practice project that pulls the beginner pieces together.\n\nYou will use:\n\n- `input()` to read the student name and scores\n- variables to remember values\n- strings and f-strings to build clear output lines\n- conditionals to choose the final status\n- a `for` loop with `range(count)` to read several scores\n- an accumulator to add up the total\n- a comparison to track the highest score\n\nThe tests check the exact output, so keep the labels, spaces, and newlines exactly as shown in the prompt."
+            "bodyMarkdown": "Imagine a tutor getting ready for parent check-ins. She does not need a giant school system yet. She just needs one dependable Python program that can read a student name, collect a set of scores, and print a clean summary she can talk through quickly.\n\nThat is what this capstone builds.\n\nYou will use:\n\n- `input()` to read the student name and scores\n- variables to remember totals and the highest score\n- a `for` loop with `range(count)` to read repeated score input\n- an accumulator to build the total\n- a comparison to track the best score so far\n- conditionals to choose the final status line\n- clear print output so the finished report is easy to read\n\nThis project is meant to feel like one small real tool, not a pile of separate drills. Keep the final labels, spacing, and line order exactly as shown in the prompt so the report prints in the format the tutor expects."
           }
         }
       }
