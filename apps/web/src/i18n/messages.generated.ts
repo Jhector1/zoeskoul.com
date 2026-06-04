@@ -100,6 +100,7 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/en/subjects/python-v2/module3/mini-gradebook-capstone.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/python-v2/module3/range-and-counting.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/python-v2/module3/while-loop-basics.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python-v2/module4/mini-gradebook-capstone.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/python-v2/subject.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/python/module0/comments_intro.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/python/module0/computer_intro.json").then((m) => (m?.default ?? {}) as AnyObj),
