@@ -105,11 +105,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "raw_name = input()\n\n# Create tools/names.py with clean_name(text).\n# Import clean_name and print the cleaned name.\n",
+      "starterCode": "raw_name = input()\n\n# Start the badge app by moving name cleanup into tools/names.py.\n# Import clean_name, then print the cleaned version of raw_name.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "raw_name = input()\n\n# Create tools/names.py with clean_name(text).\n# Import clean_name and print the cleaned name.\n",
+          "content": "raw_name = input()\n\n# Start the badge app by moving name cleanup into tools/names.py.\n# Import clean_name, then print the cleaned version of raw_name.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -118,11 +118,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "raw_name = input()\n\n# Create tools/names.py with clean_name(text).\n# Import clean_name and print the cleaned name.\n",
+        "starterCode": "raw_name = input()\n\n# Start the badge app by moving name cleanup into tools/names.py.\n# Import clean_name, then print the cleaned version of raw_name.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "raw_name = input()\n\n# Create tools/names.py with clean_name(text).\n# Import clean_name and print the cleaned name.\n",
+            "content": "raw_name = input()\n\n# Start the badge app by moving name cleanup into tools/names.py.\n# Import clean_name, then print the cleaned version of raw_name.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -291,11 +291,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "from tools.names import clean_name\n# TODO: import make_badge from tools.badges\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n# TODO: print the badge\n",
+      "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n\n# Keep the name cleaner working, then add tools.badges.\n# Import make_badge and print the finished badge for this cleaned name and role.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "from tools.names import clean_name\n# TODO: import make_badge from tools.badges\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n# TODO: print the badge\n",
+          "content": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n\n# Keep the name cleaner working, then add tools.badges.\n# Import make_badge and print the finished badge for this cleaned name and role.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -309,16 +309,21 @@
           "path": "tools/names.py",
           "content": "def clean_name(text):\n    return text.strip().title()\n",
           "language": "python"
+        },
+        {
+          "path": "tools/badges.py",
+          "content": "# Add make_badge(name, role) here.\n# Return one formatted string for the badge.\n",
+          "language": "python"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "from tools.names import clean_name\n# TODO: import make_badge from tools.badges\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n# TODO: print the badge\n",
+        "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n\n# Keep the name cleaner working, then add tools.badges.\n# Import make_badge and print the finished badge for this cleaned name and role.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "from tools.names import clean_name\n# TODO: import make_badge from tools.badges\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n# TODO: print the badge\n",
+            "content": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n\n# Keep the name cleaner working, then add tools.badges.\n# Import make_badge and print the finished badge for this cleaned name and role.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -331,6 +336,11 @@
           {
             "path": "tools/names.py",
             "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "# Add make_badge(name, role) here.\n# Return one formatted string for the badge.\n",
             "language": "python"
           }
         ],
@@ -507,11 +517,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
+      "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Keep this badge flow working.\n# Add the next improvement inside tools/badges.py.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
+          "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Keep this badge flow working.\n# Add the next improvement inside tools/badges.py.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -528,18 +538,18 @@
         },
         {
           "path": "tools/badges.py",
-          "content": "def make_badge(name, role):\n    # TODO: add a docstring, clean the role, and return the badge text.\n    return f\"{role.upper()} badge: {name}\"\n",
+          "content": "def make_badge(name, role):\n    # Add a docstring that explains what this helper returns.\n    # Then clean role before uppercasing it so extra spaces do not reach the badge.\n    return f\"{role.upper()} badge: {name}\"\n",
           "language": "python"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
+        "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Keep this badge flow working.\n# Add the next improvement inside tools/badges.py.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
+            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Keep this badge flow working.\n# Add the next improvement inside tools/badges.py.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -556,7 +566,7 @@
           },
           {
             "path": "tools/badges.py",
-            "content": "def make_badge(name, role):\n    # TODO: add a docstring, clean the role, and return the badge text.\n    return f\"{role.upper()} badge: {name}\"\n",
+            "content": "def make_badge(name, role):\n    # Add a docstring that explains what this helper returns.\n    # Then clean role before uppercasing it so extra spaces do not reach the badge.\n    return f\"{role.upper()} badge: {name}\"\n",
             "language": "python"
           }
         ],
@@ -737,11 +747,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\n# TODO: print a final welcome line using the badge.\n",
+      "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Replace the line above with one polished welcome message.\n# Store the badge in a variable, then print a line that starts with Welcome!.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\n# TODO: print a final welcome line using the badge.\n",
+          "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Replace the line above with one polished welcome message.\n# Store the badge in a variable, then print a line that starts with Welcome!.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -765,11 +775,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\n# TODO: print a final welcome line using the badge.\n",
+        "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Replace the line above with one polished welcome message.\n# Store the badge in a variable, then print a line that starts with Welcome!.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\n# TODO: print a final welcome line using the badge.\n",
+            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Replace the line above with one polished welcome message.\n# Store the badge in a variable, then print a line that starts with Welcome!.\n",
             "language": "python",
             "isEntry": true,
             "entry": true

@@ -229,6 +229,28 @@ describe("buildSubjectManifestFromPlan", () => {
         });
     });
 
+    it("emits authored module and section roles into the subject manifest", () => {
+        const manifest = buildSubjectManifestFromPlan(
+            makeArgs({
+                modules: [
+                    {
+                        ...makeArgs().plan.modules[0],
+                        role: "capstone",
+                        sections: [
+                            {
+                                ...makeArgs().plan.modules[0].sections[0],
+                                role: "capstone",
+                            },
+                        ],
+                    },
+                ],
+            }),
+        );
+
+        expect(manifest.modules[0]?.role).toBe("capstone");
+        expect(manifest.modules[0]?.sections[0]?.role).toBe("capstone");
+    });
+
     it("enables filesystem and multifile only for the module with a file-runner workspace policy", () => {
         const manifest = buildSubjectManifestFromPlan(
             makeArgs({

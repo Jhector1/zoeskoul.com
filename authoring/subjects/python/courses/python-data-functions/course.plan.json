@@ -7,7 +7,8 @@
   "moduleOrder": [
     "python-5-lists-tuples-and-dictionaries",
     "python-6-functions-and-modularity",
-    "python-7-files-exceptions-and-data-cleaning"
+    "python-7-files-exceptions-and-data-cleaning",
+    "python-8-real-world-project"
   ],
   "modules": [
     {
@@ -24,6 +25,11 @@
       "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
       "moduleNumber": 7,
       "title": "Files, Exceptions, and Data Cleaning"
+    },
+    {
+      "moduleSlug": "python-8-real-world-project",
+      "moduleNumber": 8,
+      "title": "Real-World Project"
     }
   ]
 }

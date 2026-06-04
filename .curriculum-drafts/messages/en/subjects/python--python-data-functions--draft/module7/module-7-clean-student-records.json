@@ -4,7 +4,7 @@
       "python-7-files-exceptions-and-data-cleaning": {
         "module-7-clean-student-records": {
           "label": "Module Project: Clean Student Records",
-          "summary": "A student group sends you a messy file of records. Build a cleaner that reads the file, handles bad rows, and writes a usable output.",
+          "summary": "Grow one small cleaner from a raw file preview into a shareable cleaned output file.",
           "cards": {
             "sketch0": {
               "title": "A messy student file lands in your inbox"
@@ -41,36 +41,36 @@
             },
             "mp-2-clean-one-row": {
               "title": "Clean and validate one row",
-              "prompt": "Now clean one record at a time. Write `clean_row(line)` so it splits a CSV row into name and score, strips spaces, title-cases the name, converts the score to an integer, and prints cleaned dictionaries while showing `bad row` for invalid rows.",
-              "hint": "Make one function responsible for turning raw text into one clean dictionary.",
+              "prompt": "Start from the raw-file preview you already built. Keep that context, then add `clean_row(line)` so one row becomes a dictionary with a cleaned name and integer score. Read the first row again and print the cleaned dictionary.",
+              "hint": "Leave the file shape familiar: define one helper, then reuse the file to test it on the first row.",
               "help": {
                 "concept": "A cleaning function gives the rest of the program one dependable shape for each valid row.",
-                "hint_1": "Split the line with `line.strip().split(\",\")`.",
-                "hint_2": "Use `try`/`except` around calls that might fail so invalid rows can show `bad row`."
+                "hint_1": "Split the row with `line.strip().split(\",\")`.",
+                "hint_2": "Return `{\"name\": ..., \"score\": ...}` with a title-cased name and an integer score."
               },
-              "starterCode": "def clean_row(line):\n    # TODO: split name and score, clean the name, and convert score to int.\n    pass\n\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        print(clean_row(line))\n"
+              "starterCode": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw-file preview above as your starting point.\n# Next, write clean_row(line) so one row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split the row, clean the name, and convert the score to int.\n    pass\n\nwith open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Print the cleaned first row dictionary.\nprint(clean_row(first_row))\n"
             },
             "mp-3-skip-bad-rows": {
               "title": "Skip bad rows and collect records",
-              "prompt": "The group only wants usable records in the final list. Start from `clean_row`, build a list named `records` containing only valid cleaned rows, and skip invalid rows without crashing.",
-              "hint": "Use `try`/`except` inside the file loop and append only successful rows.",
+              "prompt": "Keep `clean_row(line)` from the last step. Now build a list named `records` by looping through the file, appending valid cleaned rows, and skipping `ValueError` rows so the cleaner keeps moving.",
+              "hint": "Reuse `clean_row(line)` inside the loop instead of re-cleaning the pieces by hand.",
               "help": {
                 "concept": "In real data files, some rows are broken. A cleaner should keep good rows and quietly move past bad ones.",
                 "hint_1": "Start with `records = []` before the loop.",
-                "hint_2": "Put `records.append(clean_row(line))` inside `try`, and use `continue` or `pass` in `except ValueError`."
+                "hint_2": "Append inside `try`, then skip `ValueError` rows in `except`."
               },
-              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        # TODO: skip bad rows instead of printing bad row.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n"
+              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        # Keep using clean_row(line), but only save the rows that work.\n        # Skip ValueError rows so the project keeps moving.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n"
             },
             "mp-4-write-clean-records": {
               "title": "Write cleaned records",
-              "prompt": "The student group needs a clean file they can share. Start from the cleaned `records` list, write the valid records to `output/clean_students.csv`, and print how many clean records were written.",
-              "hint": "Create the output file from the cleaned list, then print a short confirmation.",
+              "prompt": "Start from the cleaned-record builder you already have. Keep that logic, then write the valid rows to `output/clean_students.csv` and replace the preview print with a short completion message.",
+              "hint": "Turn the working `records` list into a deliverable file and a quick confirmation.",
               "help": {
                 "concept": "The final step of a cleaning job is delivering a clean artifact, not just printing data to the screen.",
-                "hint_1": "Open `output/clean_students.csv` in write mode.",
-                "hint_2": "Write one cleaned record per line, then print the count of records written."
+                "hint_1": "Create `output/` if needed, then open `output/clean_students.csv` in write mode.",
+                "hint_2": "Write one cleaned record per line, then print how many clean records were saved."
               },
-              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# TODO: write cleaned records to output/clean_students.csv.\n"
+              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# Replace the preview print with the shareable output file.\n# Create output/, write output/clean_students.csv, and print how many clean records were saved.\n"
             },
             "try-module-7-clean-student-records-sketch0": {
               "title": "Clean the first row from the file",

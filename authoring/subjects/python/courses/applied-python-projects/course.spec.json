@@ -198,6 +198,28 @@
               ]
             }
           ]
+        },
+        {
+          "sectionSlug": "python-8-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-8-class-model-project",
+              "title": "Module 8 Class Model Project",
+              "summary": "Build a class-based project in small steps so each new method and object behavior grows from the previous working version.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Extend a working class design without restarting the project",
+                "Model state and behavior in one small object-oriented tool"
+              ],
+              "practice": {
+                "tryIt": true,
+                "projectFlow": "progressive"
+              }
+            }
+          ]
         }
       ]
     },
@@ -301,6 +323,28 @@
               ]
             }
           ]
+        },
+        {
+          "sectionSlug": "python-9-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-9-debug-and-polish-project",
+              "title": "Module 9 Debug and Polish Project",
+              "summary": "Improve a buggy utility in focused steps so tests, fixes, and readability improvements build on the previous working version.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Use tests and debugging to improve a working program step by step",
+                "Polish readability while keeping behavior stable"
+              ],
+              "practice": {
+                "tryIt": true,
+                "projectFlow": "progressive"
+              }
+            }
+          ]
         }
       ]
     },
@@ -309,6 +353,7 @@
       "moduleSlug": "python-10-capstone-automation-project",
       "prefix": "py10",
       "title": "Capstone Automation Project",
+      "role": "capstone",
       "purpose": "Guide learners through a complete beginner Python project that combines core skills.",
       "learningObjectives": [
         "Plan a small program",
@@ -402,6 +447,29 @@
                 "Document usage",
                 "Explain project decisions"
               ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-10-capstone-project",
+          "title": "Final Project",
+          "role": "capstone",
+          "topics": [
+            {
+              "topicId": "capstone-automation-project",
+              "title": "Capstone Automation Project",
+              "summary": "Complete a final automation project that carries a working solution through implementation, testing, and presentation.",
+              "minutes": 40,
+              "technical": true,
+              "learningGoals": [
+                "Grow one final Python project through several focused changes",
+                "Integrate planning, implementation, testing, and polish",
+                "Finish with a complete portfolio-style capstone"
+              ],
+              "practice": {
+                "tryIt": true,
+                "projectFlow": "progressive"
+              }
             }
           ]
         }

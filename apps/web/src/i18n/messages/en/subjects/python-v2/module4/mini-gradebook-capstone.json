@@ -5,101 +5,120 @@
       "python-v2-4": {
         "mini-gradebook-capstone": {
           "label": "Final Project: Build a Mini Gradebook",
-          "summary": "Finish the course with one complete gradebook program that reads several scores, tracks the results, and prints a clean report.",
+          "summary": "Finish the course with a longer gradebook capstone that grows step by step from basic report lines into a complete final summary.",
           "cards": {
             "sketch0": {
               "title": "Plan the gradebook"
-            },
-            "quiz": {
-              "title": "Capstone Warm-Up"
             },
             "project": {
               "title": "Mini Gradebook Builder"
             }
           },
           "projectSteps": {
-            "capstone-mini-gradebook": {
-              "title": "Build the full gradebook report"
+            "cp_1": {
+              "title": "Read the gradebook header"
+            },
+            "cp_2": {
+              "title": "Add the score total"
+            },
+            "cp_3": {
+              "title": "Track the highest score"
+            },
+            "cp_4": {
+              "title": "Calculate the average"
+            },
+            "cp_5": {
+              "title": "Choose the status line"
+            },
+            "cp_6": {
+              "title": "Build the final gradebook report"
             }
           },
           "quiz": {
-            "sc-capstone-input-count": {
-              "title": "Use the score count",
-              "prompt": "The program reads a student name, then reads a number called `count`. What should `count` control?",
-              "hint": "The next inputs are scores.",
-              "help": {
-                "concept": "`count` tells the loop how many score inputs to read.",
-                "hint_1": "If `count` is 3, the program should read 3 scores.",
-                "hint_2": "Use `range(count)` to repeat exactly that many times."
-              },
-              "options": {
-                "a": "How many status lines to print",
-                "b": "How many score inputs to read",
-                "c": "How many names to read",
-                "d": "How many decimal places to show"
-              }
-            },
-            "mc-capstone-tools": {
-              "title": "Pick the right tools",
-              "prompt": "Which tools belong in the Mini Gradebook solution? Choose all that apply.",
-              "hint": "Think about repeating input, adding scores, and checking for the highest value.",
-              "help": {
-                "concept": "This capstone combines a loop for repeated input, an accumulator for the total, and a comparison for the highest score.",
-                "hint_1": "The total should start at 0 and grow each time a score is read.",
-                "hint_2": "The highest score changes only when the new score is bigger than the old highest score."
-              },
-              "options": {
-                "a": "A loop that reads each score",
-                "b": "An accumulator variable for the total",
-                "c": "An `if` statement that updates the highest score",
-                "d": "A CSV file"
-              }
-            },
-            "dr-capstone-report-order": {
-              "title": "Order the report",
-              "prompt": "Arrange the output lines in the required report order.",
-              "hint": "The tests expect this order exactly.",
-              "help": {
-                "concept": "Exact-output exercises check the text and the line order. The report starts with the student, then the score count, then the highest score, then the average, then the status.",
-                "hint_1": "Start with the line that names the student.",
-                "hint_2": "The status is the final summary line."
-              },
-              "tokens": {
-                "t1": "`Student: <name>`",
-                "t2": "`Scores entered: <count>`",
-                "t3": "`Highest score: <highest>`",
-                "t4": "`Average: <average>`",
-                "t5": "`Status: <status>`"
-              }
-            },
-            "fb-capstone-average-format": {
-              "title": "Format the average",
-              "prompt": "Fill in the format specifier that shows an average with one digit after the decimal point.",
-              "hint": "`90.0` has one digit after the decimal point.",
-              "help": {
-                "concept": "In an f-string, `:.1f` formats a number with one digit after the decimal point.",
-                "hint_1": "The dot introduces the decimal precision.",
-                "hint_2": "The `f` means fixed-point number formatting."
-              },
-              "template": "print(f\"Average: {avg:____}\")",
-              "choices": [
-                ".1f",
-                ".2f",
-                "int",
-                "str"
-              ]
-            },
             "capstone-mini-gradebook": {
               "title": "Build the final gradebook report",
-              "prompt": "A tutor wants one quick report for each student before parent check-ins.\n\nBuild the final Mini Gradebook program.\n\nInput format:\n1. Student name\n2. Number of scores\n3. That many score values, one per line\n\nYour program should:\n- read exactly `count` scores with a `for` loop and `range(count)`\n- keep a running total of the scores\n- track the highest score seen so far\n- calculate the average after the loop\n- print the average with one digit after the decimal point\n- print `excellent` when the average is at least 90, `passing` when it is at least 70, and `needs practice` otherwise\n\nPrint this report exactly:\nStudent: <name>\nScores entered: <count>\nHighest score: <highest>\nAverage: <average>\nStatus: <status>",
-              "hint": "Start by reading the name and count, then let the loop do the repeated work. Inside the loop, add each score to `total` and update `highest` when needed.",
+              "prompt": "Start from the working gradebook preview you just built. Keep the loop, highest-score tracking, average calculation, and status logic, but replace the preview-style version with the final exact report.\n\nInput format:\n1. Student name\n2. Number of scores\n3. That many score values, one per line\n\nFinal required output:\nStudent: <name>\nScores entered: <count>\nHighest score: <highest>\nAverage: <average>\nStatus: <status>",
+              "hint": "The last step is a cleanup step: keep the calculations, remove the preview Total line, and print only the final report order.",
               "help": {
-                "concept": "This capstone feels like one small real tool: it reads repeated input, keeps track of totals and best scores, then turns the results into a report someone can read quickly.",
-                "hint_1": "Keep `total` and `highest` as running values. Each new score changes `total`, and only larger scores should replace `highest`.",
-                "hint_2": "After the loop, compute `average = total / count`, choose the status with an `if` / `elif` / `else` chain, and print the final lines in the exact order shown."
+                "concept": "A smooth capstone ends by polishing a working program instead of starting over. Keep the same logic and shape the output into the final handoff format.",
+                "hint_1": "Read the scores with `for i in range(count)`, update `total` and `highest`, then compute `average = total / count`.",
+                "hint_2": "Print the final lines in the exact order shown, and choose the status with `if` / `elif` / `else`."
               },
-              "starterCode": "student = input()\ncount = int(input())\n\ntotal = 0\nhighest = 0\n\nfor i in range(count):\n    score = int(input())\n    # TODO: add this score to total\n    # TODO: if this score is higher than highest, update highest\n\n# TODO: calculate average\n# TODO: decide the status line\n# TODO: print the full report in the required order"
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n\n# Replace the preview-style version with the final report.\n# Remove the Total line and keep only the required final output order.\n"
+            },
+            "try-mini-gradebook-capstone-sketch0": {
+              "title": "Print the first gradebook line",
+              "prompt": "Start the capstone with one tiny report preview. Read a student name and print `Student: <name>`.",
+              "hint": "Use `input()` for the name, then print the labeled line with an f-string.",
+              "help": {
+                "concept": "The capstone grows one report line at a time, so the first preview only needs the student label.",
+                "hint_1": "Store the name from `input()` in `student`.",
+                "hint_2": "Print `f\"Student: {student}\"`."
+              },
+              "starterCode": "student = input()\n\n# Print the first report line as Student: <name>\n"
+            },
+            "cp-1-read-gradebook-header": {
+              "title": "Read the gradebook header",
+              "prompt": "A tutor wants the gradebook report to start with the student name and the score count. Read `student` and `count`, then print the first two report lines.",
+              "hint": "This step only builds the report header: read the two inputs and label them clearly.",
+              "help": {
+                "concept": "A report often starts with identifying information before any calculations happen.",
+                "hint_1": "Use `student = input()` and `count = int(input())`.",
+                "hint_2": "Print `Student: ...` and `Scores entered: ...` with f-strings."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\n# Start the gradebook report.\n# Print the student line and the scores-entered line.\n"
+            },
+            "cp-2-add-score-total": {
+              "title": "Add the score total",
+              "prompt": "Keep the working header lines. Now read exactly `count` scores with a `for` loop, add them into `total`, and print a preview line showing the total.",
+              "hint": "Let the loop do the repeated input work, and update `total` each time through.",
+              "help": {
+                "concept": "An accumulator starts at 0 and grows a little each time the loop reads a new value.",
+                "hint_1": "Start with `total = 0` before the loop.",
+                "hint_2": "Inside the loop, use `total = total + score`, then print `Total: ...` after the loop."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nfor i in range(count):\n    score = int(input())\n    # Add each score to total.\n\n# Print a preview line: Total: <total>\n"
+            },
+            "cp-3-track-highest-score": {
+              "title": "Track the highest score",
+              "prompt": "Keep the header and total logic working. Now add `highest` so the program remembers the biggest score seen so far, then print that new preview line too.",
+              "hint": "Only replace `highest` when the current score is bigger than the old one.",
+              "help": {
+                "concept": "A running maximum keeps the best value found so far as the loop moves through the input.",
+                "hint_1": "Start with `highest = 0` before the loop.",
+                "hint_2": "Inside the loop, use `if score > highest:` before updating `highest`."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    # Keep total working, then update highest when this score is bigger.\n\nprint(f\"Total: {total}\")\n# Print Highest score: <highest>\n"
+            },
+            "cp-4-calculate-average": {
+              "title": "Calculate the average",
+              "prompt": "Keep the running total and highest score. After the loop, calculate the average and add the formatted average line to the preview report.",
+              "hint": "Do the division after the loop, then print the result with one digit after the decimal point.",
+              "help": {
+                "concept": "The loop collects the information first, and the average is computed once the total and count are both ready.",
+                "hint_1": "Use `average = total / count` after the loop finishes.",
+                "hint_2": "Print `Average: ...` with `:.1f` inside an f-string."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\n\n# Calculate average after the loop.\n# Print Average: <average> with one digit after the decimal point.\n"
+            },
+            "cp-5-choose-status": {
+              "title": "Choose the status line",
+              "prompt": "Keep the working preview report, then add the final status line: `excellent` for averages at least 90, `passing` for averages at least 70, and `needs practice` otherwise.",
+              "hint": "Use an `if` / `elif` / `else` chain after the average is ready.",
+              "help": {
+                "concept": "Once a program has the final score summary, conditionals can turn it into a simple human-friendly judgment.",
+                "hint_1": "Check `average >= 90` first.",
+                "hint_2": "Use `elif average >= 70` for the middle case, and `else` for the remaining case."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\n# Add the status line.\n# Print excellent for averages 90+, passing for 70+, and needs practice otherwise.\n"
             }
+          },
+          "tryIt": {
+            "try_mini_gradebook_capstone_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Read one student name and print the first report line as `Student: <name>`."
+            },
+            "allowReveal": true
           }
         }
       }
@@ -112,7 +131,7 @@
         "mini-gradebook-capstone": {
           "sketch_gradebook_plan": {
             "title": "Plan the gradebook",
-            "bodyMarkdown": "Imagine a tutor getting ready for parent check-ins. She does not need a giant school system yet. She just needs one dependable Python program that can read a student name, collect a set of scores, and print a clean summary she can talk through quickly.\n\nThat is what this capstone builds.\n\nYou will use:\n\n- `input()` to read the student name and scores\n- variables to remember totals and the highest score\n- a `for` loop with `range(count)` to read repeated score input\n- an accumulator to build the total\n- a comparison to track the best score so far\n- conditionals to choose the final status line\n- clear print output so the finished report is easy to read\n\nThis project is meant to feel like one small real tool, not a pile of separate drills. Keep the final labels, spacing, and line order exactly as shown in the prompt so the report prints in the format the tutor expects."
+            "bodyMarkdown": "Imagine a tutor getting ready for parent check-ins. She does not need a giant school system yet. She needs one dependable Python program that can read a student name, collect scores, and turn them into a report she can read quickly.\n\nThis capstone now grows in a clear sequence: first the header, then the total, then the highest score, then the average, then the status, and finally the polished final report. Each step starts from the previous working version so the whole project feels like one small real tool instead of one giant jump."
           }
         }
       }

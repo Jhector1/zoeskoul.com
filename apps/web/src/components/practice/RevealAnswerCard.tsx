@@ -506,10 +506,12 @@ export default function RevealAnswerCard({
                     } as Partial<QItem>)
                     : null,
                 node: (
-                    <div className="ui-surface-muted overflow-hidden">
-                        <div className="flex items-center justify-between gap-2 border-b px-3 py-2 ui-border ui-bg-surface-soft">
+                    <div className="ui-surface-muted overflow-hidden @container">
+                        <div className="flex flex-col gap-1.5 border-b px-3 py-2 ui-border ui-bg-surface-soft @md:flex-row @md:items-center @md:justify-between">
                             <div className="ui-meta-strong">{lang.toUpperCase()}</div>
-                            <div className="ui-meta">Copy it into the editor, run it, then check your answer.</div>
+                            <div className="min-w-0 ui-meta [overflow-wrap:anywhere]">
+                                Copy it into the editor, run it, then check your answer.
+                            </div>
                         </div>
 
                         {workspaceFiles.length > 1 ? (
@@ -829,15 +831,15 @@ export default function RevealAnswerCard({
         window.setTimeout(() => setFilled(false), 1200);
     }
     return (
-        <div ref={rootRef} className="mt-3 min-w-0">
-            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+        <div ref={rootRef} className="mt-3 min-w-0 @container">
+            <div className="flex flex-col gap-2 @md:flex-row @md:flex-wrap @md:items-center @md:justify-between">
                 <div className="min-w-0 ui-meta-strong">{title}</div>
 
-                <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
+                <div className="flex w-full flex-wrap gap-2 @md:w-auto @md:justify-end">
                     <button
                         onClick={onCopy}
                         disabled={!m.copyText}
-                        className="ui-btn-secondary w-full justify-center sm:w-auto"
+                        className="ui-btn-secondary min-w-[8.5rem] flex-1 justify-center whitespace-normal px-3 text-center @sm:flex-none"
                     >
                         {copied ? "Copied ✓" : "Copy"}
                     </button>
@@ -845,7 +847,7 @@ export default function RevealAnswerCard({
                     <button
                         onClick={onFill}
                         disabled={!m.fillPatch}
-                        className="ui-btn-secondary w-full justify-center sm:w-auto"
+                        className="ui-btn-secondary min-w-[8.5rem] flex-1 justify-center whitespace-normal px-3 text-center @sm:flex-none"
                         title="Fill the input with the revealed answer"
                     >
                         {filled ? "Filled ✓" : "Fill answer"}

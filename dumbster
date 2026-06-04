@@ -50,11 +50,21 @@ docker system prune -af --volumes
 pnpm --filter @zoeskoul/runner build
 
 
+sudo docker compose -f docker-compose.local.yml --profile build-only build runtime-image
+sudo docker compose -f docker-compose.local.yml build runner
+sudo docker compose -f docker-compose.local.yml up -d postgres redis runner
+sudo docker compose -f docker-compose.local.yml ps
+sudo docker compose -f docker-compose.local.yml logs -f runner
+
+
+
+
 docker compose -f docker-compose.local.yml --profile build-only build runtime-image
 docker compose -f docker-compose.local.yml build runner
 docker compose -f docker-compose.local.yml up -d postgres redis runner
 docker compose -f docker-compose.local.yml ps
 docker compose -f docker-compose.local.yml logs -f runner
+
 
 
 cd /opt/zoeskoul.com/infra
@@ -122,9 +132,14 @@ pnpm --filter @zoeskoul/web build
 
 ssh -p 2222 jean@127.0.0.1
 
-sudo docker compose down
+
 
 cd ~/Documents/judge0-masyg/infra/judge0
+sudo docker compose down
 sudo docker compose up -d db redis
 sudo docker compose ps
 sudo docker compose up -d judge0 worker
+
+
+
+pnpm curr:course -- draft-goldens python python-data-functions

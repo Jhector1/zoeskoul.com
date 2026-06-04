@@ -5,8 +5,17 @@ import {
     getDraftSubjectManifestPath,
     getDraftSubjectRoot,
 } from "@zoeskoul/curriculum-core";
+import { loadCourseSpec } from "../spec/loadCourseSpec.js";
+import { validateProjectTopicStructure } from "./validateProjectTopicStructure.js";
 
 type JsonObject = Record<string, unknown>;
+type AuthoredTopicRoleMap = Map<
+    string,
+    {
+        moduleRole?: string | null;
+        sectionRole?: string | null;
+    }
+>;
 
 async function pathExists(filePath: string) {
     try {
@@ -30,6 +39,54 @@ function asObject(value: unknown): JsonObject | null {
 
 function asString(value: unknown): string | null {
     return typeof value === "string" ? value : null;
+}
+
+function resolveDraftAuthoringSource(subjectSlug: string) {
+    const parts = subjectSlug.split("--");
+    if (parts.length < 3 || parts.at(-1) !== "draft") {
+        return null;
+    }
+
+    const [authoringSubjectSlug, ...rest] = parts;
+    const courseSlug = rest.slice(0, -1).join("--");
+
+    if (!authoringSubjectSlug || !courseSlug) {
+        return null;
+    }
+
+    return {
+        subjectSlug: authoringSubjectSlug,
+        courseSlug,
+    };
+}
+
+async function loadAuthoredTopicRoles(
+    draftSubjectSlug: string,
+): Promise<AuthoredTopicRoleMap> {
+    const source = resolveDraftAuthoringSource(draftSubjectSlug);
+    if (!source) {
+        return new Map();
+    }
+
+    const spec = await loadCourseSpec(source.subjectSlug, source.courseSlug);
+    if (!spec) {
+        return new Map();
+    }
+
+    const topicRoles: AuthoredTopicRoleMap = new Map();
+
+    for (const module of spec.modules) {
+        for (const section of module.sections) {
+            for (const topic of section.topics) {
+                topicRoles.set(topic.topicId, {
+                    moduleRole: module.role ?? null,
+                    sectionRole: section.role ?? null,
+                });
+            }
+        }
+    }
+
+    return topicRoles;
 }
 
 function collectTopicExerciseIds(topicBundle: JsonObject): Set<string> {
@@ -276,6 +333,7 @@ function validateHintsAgainstMessageFile(messages: JsonObject, filePath: string)
 
 export async function validateDraftSubject(subjectSlug: string) {
     const issues: string[] = [];
+    const authoredTopicRoles = await loadAuthoredTopicRoles(subjectSlug);
 
     const subjectManifestPath = getDraftSubjectManifestPath(subjectSlug);
     if (!(await pathExists(subjectManifestPath))) {
@@ -304,12 +362,14 @@ export async function validateDraftSubject(subjectSlug: string) {
 
         const moduleDir = `module${moduleOrder}`;
         const sections = Array.isArray(moduleObj.sections) ? moduleObj.sections : [];
+        const manifestModuleRole = asString(moduleObj.role);
 
         for (const sec of sections) {
             const sectionObj = asObject(sec);
             const topics = sectionObj && Array.isArray(sectionObj.topics)
                 ? sectionObj.topics
                 : [];
+            const manifestSectionRole = sectionObj ? asString(sectionObj.role) : null;
 
             for (const topicIdValue of topics) {
                 const topicId = asString(topicIdValue);
@@ -330,8 +390,19 @@ export async function validateDraftSubject(subjectSlug: string) {
                 }
 
                 const topicBundle = await readJson(topicBundlePath);
+                const authoredRoles = authoredTopicRoles.get(topicId);
                 issues.push(...validateTopicBundleShape(topicBundle, topicBundlePath));
                 issues.push(...validateProjectStepRefs(topicBundle, topicBundlePath));
+                issues.push(
+                    ...validateProjectTopicStructure({
+                        topicBundle,
+                        filePath: topicBundlePath,
+                        moduleRole:
+                            authoredRoles?.moduleRole ?? manifestModuleRole ?? null,
+                        sectionRole:
+                            authoredRoles?.sectionRole ?? manifestSectionRole ?? null,
+                    }),
+                );
             }
         }
     }

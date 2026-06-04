@@ -9,7 +9,7 @@
   "targetLocales": [],
   "courseOverview": {
     "recommendedSequence": "Complete modules in order. Each module adds one core beginner programming skill and ends with a small project-style outcome.",
-    "summary": "This course teaches the core foundations of Python: running code, values, variables, input, strings, conditions, and loops.",
+    "summary": "This course teaches the core foundations of Python: running code, values, variables, input, strings, conditions, loops, and a final step-by-step beginner capstone.",
     "moduleSummary": [
       {
         "moduleNumber": 0,
@@ -34,6 +34,12 @@
         "title": "Loops and Iteration",
         "coreSkill": "Teach learners to repeat actions, process sequences, and control loop behavior.",
         "outputFocus": "Build a mini number game or text analyzer that repeats until a condition is met."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Mini Gradebook Capstone",
+        "coreSkill": "Pull together input, loops, totals, comparisons, and formatted output into one smoother final beginner project.",
+        "outputFocus": "Build a mini gradebook report that grows from a simple header into a polished final summary."
       }
     ]
   },
@@ -41,13 +47,13 @@
     "currentRelease": {
       "name": "python-v2",
       "startModuleNumber": 0,
-      "endModuleNumber": 3
+      "endModuleNumber": 4
     },
     "releases": [
       {
         "name": "python-v2",
         "startModuleNumber": 0,
-        "endModuleNumber": 3
+        "endModuleNumber": 4
       }
     ]
   },
@@ -219,6 +225,28 @@
               ]
             }
           ]
+        },
+        {
+          "sectionSlug": "python-v2-0-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-0-welcome-board-project",
+              "title": "Module 0 Welcome Board Project",
+              "summary": "Build a welcome board one small print step at a time until the full event sign is complete.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Keep a small Python project growing from one working step to the next",
+                "Print a short multi-line result with clear labels"
+              ],
+              "practice": {
+                "tryIt": true,
+                "projectFlow": "progressive"
+              }
+            }
+          ]
         }
       ]
     },
@@ -320,6 +348,28 @@
                 "Write f-strings",
                 "Format numeric output"
               ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-v2-1-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-1-profile-card-project",
+              "title": "Module 1 Profile Card Project",
+              "summary": "Build a profile card in small steps that keep the previous working version and add one formatting change at a time.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Carry forward working code while improving string and input handling",
+                "Print a clearer formatted profile result"
+              ],
+              "practice": {
+                "tryIt": true,
+                "projectFlow": "progressive"
+              }
             }
           ]
         }
@@ -426,6 +476,28 @@
               ]
             }
           ]
+        },
+        {
+          "sectionSlug": "python-v2-2-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-2-study-checker-project",
+              "title": "Module 2 Study Checker Project",
+              "summary": "Build a study checker in focused stages so each new condition grows from the previous working version.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Extend branching logic without restarting the whole program",
+                "Explain why a simple status was selected"
+              ],
+              "practice": {
+                "tryIt": true,
+                "projectFlow": "progressive"
+              }
+            }
+          ]
         }
       ]
     },
@@ -528,6 +600,55 @@
                 "Debug loop state",
                 "Find loop boundary issues"
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "python-v2-4",
+      "prefix": "pyv2_4",
+      "title": "Mini Gradebook Capstone",
+      "role": "capstone",
+      "purpose": "Help learners finish with one smoother beginner project that combines input, loops, accumulators, comparisons, and polished output.",
+      "learningObjectives": [
+        "Read a short sequence of inputs and summarize them in a report",
+        "Track totals, averages, and running maximums in a loop",
+        "Polish a beginner program into a final formatted result"
+      ],
+      "guidedExercises": [
+        "Preview report lines",
+        "Accumulate scores",
+        "Polish final output"
+      ],
+      "quizFocus": [
+        "input flow",
+        "accumulators",
+        "report formatting"
+      ],
+      "moduleProject": "Build a mini gradebook report that grows step by step from a simple header into a polished final summary.",
+      "sections": [
+        {
+          "sectionSlug": "python-v2-4-capstone-project",
+          "title": "Final Project",
+          "role": "capstone",
+          "topics": [
+            {
+              "topicId": "mini-gradebook-capstone",
+              "title": "Mini Gradebook Capstone",
+              "summary": "Finish the course with a longer gradebook capstone that grows step by step from basic report lines into a complete final summary.",
+              "minutes": 35,
+              "technical": true,
+              "learningGoals": [
+                "Grow one working project through several focused edits",
+                "Use loops and conditionals to build a simple final report",
+                "Finish with a polished output format"
+              ],
+              "practice": {
+                "tryIt": true,
+                "projectFlow": "progressive"
+              }
             }
           ]
         }

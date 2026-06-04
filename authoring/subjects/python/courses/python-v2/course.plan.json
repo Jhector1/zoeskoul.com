@@ -8,7 +8,8 @@
     "python-v2-0",
     "python-v2-1",
     "python-v2-2",
-    "python-v2-3"
+    "python-v2-3",
+    "python-v2-4"
   ],
   "modules": [
     {
@@ -30,6 +31,11 @@
       "moduleSlug": "python-v2-3",
       "moduleNumber": 3,
       "title": "Loops and Iteration"
+    },
+    {
+      "moduleSlug": "python-v2-4",
+      "moduleNumber": 4,
+      "title": "Mini Gradebook Capstone"
     }
   ]
 }

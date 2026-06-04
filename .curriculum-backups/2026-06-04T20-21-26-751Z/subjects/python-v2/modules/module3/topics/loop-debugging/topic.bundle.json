@@ -1,0 +1,870 @@
+{
+  "topicId": "loop-debugging",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-3",
+  "sectionSlug": "python-v2-3-while-loops",
+  "prefix": "pyv2_3",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-3.loop-debugging.label",
+    "summaryKey": "topics.python-v2.python-v2-3.loop-debugging.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.loop-debugging.cards.sketch0.title",
+      "sketchId": "trace-while-state",
+      "height": 420,
+      "tryIt": {
+        "id": "try-loop-debugging-sketch0",
+        "titleKey": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1.title",
+        "promptKey": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1.prompt",
+        "exerciseKey": "loop-debug-code-1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.loop-debugging.cards.sketch1.title",
+      "sketchId": "find-off-by-one",
+      "height": 420,
+      "tryIt": {
+        "id": "try-loop-debugging-sketch1",
+        "titleKey": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2.title",
+        "promptKey": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2.prompt",
+        "exerciseKey": "loop-debug-code-2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-3.loop-debugging.cards.sketch2.title",
+      "sketchId": "avoid-stuck-loops",
+      "height": 420,
+      "tryIt": {
+        "id": "try-loop-debugging-sketch2",
+        "titleKey": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3.title",
+        "promptKey": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3.prompt",
+        "exerciseKey": "loop-debug-code-3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-3.loop-debugging.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-3.loop-debugging.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "loop_debug_code_1",
+            "titleKey": "topics.python-v2.python-v2-3.loop-debugging.projectSteps.loop_debug_code_1.title",
+            "exerciseKey": "loop-debug-code-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "loop_debug_code_2",
+            "titleKey": "topics.python-v2.python-v2-3.loop-debugging.projectSteps.loop_debug_code_2.title",
+            "exerciseKey": "loop-debug-code-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "loop_debug_code_3",
+            "titleKey": "topics.python-v2.python-v2-3.loop-debugging.projectSteps.loop_debug_code_3.title",
+            "exerciseKey": "loop-debug-code-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "loop_debug_code_4",
+            "titleKey": "topics.python-v2.python-v2-3.loop-debugging.projectSteps.loop_debug_code_4.title",
+            "exerciseKey": "loop-debug-code-4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "loop_debug_code_5",
+            "titleKey": "topics.python-v2.python-v2-3.loop-debugging.projectSteps.loop_debug_code_5.title",
+            "exerciseKey": "loop-debug-code-5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "trace-while-state",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.loop-debugging.trace-while-state.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.loop-debugging.trace-while-state.bodyMarkdown"
+    },
+    {
+      "id": "find-off-by-one",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.loop-debugging.find-off-by-one.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.loop-debugging.find-off-by-one.bodyMarkdown"
+    },
+    {
+      "id": "avoid-stuck-loops",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-3.loop-debugging.avoid-stuck-loops.title",
+      "bodyKey": "sketches.python-v2.python-v2-3.loop-debugging.avoid-stuck-loops.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "loop-debug-sc-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-sc-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "loop-debug-sc-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-sc-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "loop-debug-mc-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-mc-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "loop-debug-mc-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-mc-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "loop-debug-dr-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-dr-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "loop-debug-dr-2",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-dr-2",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "loop-debug-fb-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-fb-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "3"
+      }
+    },
+    {
+      "id": "loop-debug-fb-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-fb-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "count + 1"
+      }
+    },
+    {
+      "id": "loop-debug-code-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1",
+      "language": "python",
+      "starterCode": "# TODO: print 1, 2, 3 using a while loop\ncount = 1",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1\n2\n3\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "1\n2\n3\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "count = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "count = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "while ",
+            "message": "Use a while loop for this exercise.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# TODO: print 1, 2, 3 using a while loop\ncount = 1",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "count = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# TODO: print 1, 2, 3 using a while loop\ncount = 1",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# TODO: print 1, 2, 3 using a while loop\ncount = 1",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "count = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "while ",
+          "message": "Use a while loop for this exercise.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "loop-debug-code-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2",
+      "language": "python",
+      "starterCode": "# TODO: print 0, 1, 2 with a while loop\nn = 0",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "0\n1\n2\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "0\n1\n2\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = 0\nwhile n < 3:\n    print(n)\n    n = n + 1",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = 0\nwhile n < 3:\n    print(n)\n    n = n + 1",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "while ",
+            "message": "Use a while loop for this exercise.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# TODO: print 0, 1, 2 with a while loop\nn = 0",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "n = 0\nwhile n < 3:\n    print(n)\n    n = n + 1",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# TODO: print 0, 1, 2 with a while loop\nn = 0",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# TODO: print 0, 1, 2 with a while loop\nn = 0",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = 0\nwhile n < 3:\n    print(n)\n    n = n + 1",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "while ",
+          "message": "Use a while loop for this exercise.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "loop-debug-code-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3",
+      "language": "python",
+      "starterCode": "# TODO: print 3, 2, 1 using a while loop\nn = 3",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "3\n2\n1\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "3\n2\n1\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = 3\nwhile n >= 1:\n    print(n)\n    n = n - 1",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = 3\nwhile n >= 1:\n    print(n)\n    n = n - 1",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "while ",
+            "message": "Use a while loop for this exercise.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# TODO: print 3, 2, 1 using a while loop\nn = 3",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "n = 3\nwhile n >= 1:\n    print(n)\n    n = n - 1",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# TODO: print 3, 2, 1 using a while loop\nn = 3",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# TODO: print 3, 2, 1 using a while loop\nn = 3",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = 3\nwhile n >= 1:\n    print(n)\n    n = n - 1",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "while ",
+          "message": "Use a while loop for this exercise.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "loop-debug-code-4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-4",
+      "language": "python",
+      "starterCode": "word = input()\n# TODO: print word exactly 3 times using a while loop",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "hi\n",
+            "stdout": "hi\nhi\nhi\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "loop\n",
+            "stdout": "loop\nloop\nloop\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "word = input()\ncount = 0\nwhile count < 3:\n    print(word)\n    count = count + 1",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "word = input()\ncount = 0\nwhile count < 3:\n    print(word)\n    count = count + 1",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "while ",
+            "message": "Use a while loop for this exercise.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "word = input()\n# TODO: print word exactly 3 times using a while loop",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "word = input()\ncount = 0\nwhile count < 3:\n    print(word)\n    count = count + 1",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "word = input()\n# TODO: print word exactly 3 times using a while loop",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "word = input()\n# TODO: print word exactly 3 times using a while loop",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "word = input()\ncount = 0\nwhile count < 3:\n    print(word)\n    count = count + 1",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "while ",
+          "message": "Use a while loop for this exercise.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "loop-debug-code-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-5",
+      "language": "python",
+      "starterCode": "n = int(input())\n# TODO: use a while loop to compute the sum from 1 to n",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "3\n",
+            "stdout": "6\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "5\n",
+            "stdout": "15\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\ntotal = 0\ncount = 1\nwhile count <= n:\n    total = total + count\n    count = count + 1\nprint(total)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\ntotal = 0\ncount = 1\nwhile count <= n:\n    total = total + count\n    count = count + 1\nprint(total)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "while ",
+            "message": "Use a while loop for this exercise.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert the input to an integer before doing the number work.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "n = int(input())\n# TODO: use a while loop to compute the sum from 1 to n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "n = int(input())\ntotal = 0\ncount = 1\nwhile count <= n:\n    total = total + count\n    count = count + 1\nprint(total)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "n = int(input())\n# TODO: use a while loop to compute the sum from 1 to n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\n# TODO: use a while loop to compute the sum from 1 to n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\ntotal = 0\ncount = 1\nwhile count <= n:\n    total = total + count\n    count = count + 1\nprint(total)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "while ",
+          "message": "Use a while loop for this exercise.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert the input to an integer before doing the number work.",
+          "normalizeWhitespace": true
+        }
+      ]
+    }
+  ]
+}

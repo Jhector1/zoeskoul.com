@@ -317,10 +317,25 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
         spec.policy?.qualityPolicy?.requireModuleProject === true;
     const maxModuleProjectLength =
         spec.policy?.qualityPolicy?.maxModuleProjectLength ?? 320;
+    const minProjectsBeforeCapstone =
+        spec.policy?.projectPolicy?.minProjectsBeforeCapstone ?? 0;
+    const capstoneRequired =
+        spec.policy?.projectPolicy?.capstoneRequired === true;
 
     const moduleSlugSet = new Set<string>();
     const sectionSlugSet = new Set<string>();
     const topicIdSet = new Set<string>();
+    const moduleStructure = spec.modules.map((module, moduleIndex) => ({
+        moduleIndex,
+        modulePath: `modules[${moduleIndex}]`,
+        isCapstoneModule: module.role === "capstone",
+        moduleProjectSectionCount: module.sections.filter(
+            (section) => section.role === "module_project",
+        ).length,
+        capstoneSectionCount: module.sections.filter(
+            (section) => section.role === "capstone",
+        ).length,
+    }));
 
     spec.modules.forEach((module, moduleIndex) => {
         const modulePath = `modules[${moduleIndex}]`;
@@ -412,7 +427,83 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
                 issues,
             );
         }
+
+        const moduleProjectSections = module.sections.filter(
+            (section) => section.role === "module_project",
+        );
+        const capstoneSections = module.sections.filter(
+            (section) => section.role === "capstone",
+        );
+
+        if (moduleProjectSections.length > 1) {
+            issues.push(`${modulePath}: only one module_project section is allowed`);
+        }
+
+        if (capstoneSections.length > 1) {
+            issues.push(`${modulePath}: only one capstone section is allowed`);
+        }
+
+        if (moduleProjectSections.length > 0 && capstoneSections.length > 0) {
+            issues.push(`${modulePath}: cannot mix module_project and capstone sections`);
+        }
+
+        if (module.role === "capstone" && capstoneSections.length === 0) {
+            issues.push(
+                `${modulePath}: capstone modules must include a capstone section`,
+            );
+        }
+
+        if (module.role !== "capstone" && capstoneSections.length > 0) {
+            issues.push(
+                `${modulePath}: capstone sections require module.role="capstone"`,
+            );
+        }
+
+        for (const [sectionIndex, section] of module.sections.entries()) {
+            if (
+                section.role !== "module_project" &&
+                section.role !== "capstone"
+            ) {
+                continue;
+            }
+
+            if (section.topics.length !== 1) {
+                issues.push(
+                    `${modulePath}.sections[${sectionIndex}]: ${section.role} sections must contain exactly one topic`,
+                );
+            }
+        }
     });
+
+    const firstCapstoneModuleIndex = moduleStructure.findIndex(
+        (entry) => entry.isCapstoneModule || entry.capstoneSectionCount > 0,
+    );
+    const modulesBeforeCapstone =
+        firstCapstoneModuleIndex === -1
+            ? moduleStructure
+            : moduleStructure.slice(0, firstCapstoneModuleIndex);
+    const moduleProjectsBeforeCapstone = modulesBeforeCapstone.reduce(
+        (sum, entry) => sum + entry.moduleProjectSectionCount,
+        0,
+    );
+    const hasCapstone = moduleStructure.some(
+        (entry) => entry.isCapstoneModule || entry.capstoneSectionCount > 0,
+    );
+
+    if (
+        minProjectsBeforeCapstone > 0 &&
+        moduleProjectsBeforeCapstone < minProjectsBeforeCapstone
+    ) {
+        issues.push(
+            `policy.projectPolicy.minProjectsBeforeCapstone requires at least ${minProjectsBeforeCapstone} authored module_project section(s) before the capstone, but found ${moduleProjectsBeforeCapstone}`,
+        );
+    }
+
+    if (capstoneRequired && !hasCapstone) {
+        issues.push(
+            "policy.projectPolicy.capstoneRequired requires an authored capstone module or capstone section",
+        );
+    }
 
     return issues;
 }

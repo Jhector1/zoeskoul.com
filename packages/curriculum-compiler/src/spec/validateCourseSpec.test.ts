@@ -100,7 +100,7 @@ describe("validateCourseSpec", () => {
                         {
                             sectionSlug: "python-1-project",
                             title: "Project",
-                            role: "module_project",
+                            role: "capstone",
                             topics: [
                                 {
                                     topicId: "helper-modules",
@@ -180,5 +180,132 @@ describe("validateCourseSpec", () => {
         expect(issues).toContain(
             'modules[0].sections[0].topics[0].practice.projectFlow must be "standalone" or "progressive" when provided',
         );
+    });
+
+    it("requires explicit authored project sections before a required capstone", () => {
+        const issues = validateCourseSpec({
+            authoringFormatVersion: "2.0",
+            subjectSlug: "python",
+            courseSlug: "python-v2",
+            catalogSlug: "python",
+            profileId: "python",
+            title: "Python",
+            description: "Learn Python.",
+            sourceLocale: "en",
+            targetLocales: [],
+            policy: {
+                projectPolicy: {
+                    minProjectsBeforeCapstone: 2,
+                    capstoneRequired: true,
+                },
+            },
+            modules: [
+                {
+                    moduleNumber: 0,
+                    moduleSlug: "python-v2-0",
+                    title: "Intro",
+                    sections: [
+                        {
+                            sectionSlug: "python-v2-0-core",
+                            title: "Core",
+                            topics: [{ topicId: "intro", title: "Intro" }],
+                        },
+                    ],
+                },
+                {
+                    moduleNumber: 1,
+                    moduleSlug: "python-v2-1",
+                    title: "Strings",
+                    sections: [
+                        {
+                            sectionSlug: "python-v2-1-core",
+                            title: "Core",
+                            topics: [{ topicId: "strings", title: "Strings" }],
+                        },
+                    ],
+                },
+            ],
+        } as any);
+
+        expect(issues).toContain(
+            "policy.projectPolicy.minProjectsBeforeCapstone requires at least 2 authored module_project section(s) before the capstone, but found 0",
+        );
+        expect(issues).toContain(
+            "policy.projectPolicy.capstoneRequired requires an authored capstone module or capstone section",
+        );
+    });
+
+    it("accepts authored module projects and a capstone separated into their own sections", () => {
+        const issues = validateCourseSpec({
+            authoringFormatVersion: "2.0",
+            subjectSlug: "python",
+            courseSlug: "python-v2",
+            catalogSlug: "python",
+            profileId: "python",
+            title: "Python",
+            description: "Learn Python.",
+            sourceLocale: "en",
+            targetLocales: [],
+            policy: {
+                projectPolicy: {
+                    minProjectsBeforeCapstone: 2,
+                    capstoneRequired: true,
+                },
+            },
+            modules: [
+                {
+                    moduleNumber: 0,
+                    moduleSlug: "python-v2-0",
+                    title: "Intro",
+                    sections: [
+                        {
+                            sectionSlug: "python-v2-0-core",
+                            title: "Core",
+                            topics: [{ topicId: "intro", title: "Intro" }],
+                        },
+                        {
+                            sectionSlug: "python-v2-0-project",
+                            title: "Project",
+                            role: "module_project",
+                            topics: [{ topicId: "project-0", title: "Project 0" }],
+                        },
+                    ],
+                },
+                {
+                    moduleNumber: 1,
+                    moduleSlug: "python-v2-1",
+                    title: "Strings",
+                    sections: [
+                        {
+                            sectionSlug: "python-v2-1-core",
+                            title: "Core",
+                            topics: [{ topicId: "strings", title: "Strings" }],
+                        },
+                        {
+                            sectionSlug: "python-v2-1-project",
+                            title: "Project",
+                            role: "module_project",
+                            topics: [{ topicId: "project-1", title: "Project 1" }],
+                        },
+                    ],
+                },
+                {
+                    moduleNumber: 2,
+                    moduleSlug: "python-v2-2",
+                    title: "Capstone",
+                    role: "capstone",
+                    sections: [
+                        {
+                            sectionSlug: "python-v2-2-capstone",
+                            title: "Final Project",
+                            role: "capstone",
+                            topics: [{ topicId: "capstone", title: "Capstone" }],
+                        },
+                    ],
+                },
+            ],
+        } as any);
+
+        expect(issues).toEqual([]);
     });
 });

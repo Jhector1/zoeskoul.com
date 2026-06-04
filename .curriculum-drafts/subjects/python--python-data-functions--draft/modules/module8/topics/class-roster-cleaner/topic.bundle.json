@@ -44,6 +44,8 @@
       "titleKey": "topics.python--python-data-functions--draft.python-8-real-world-project.class-roster-cleaner.cards.project.title",
       "project": {
         "difficulty": "medium",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
         "allowReveal": true,
         "preferKind": "code_input",
         "maxAttempts": null,
@@ -259,11 +261,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-8-real-world-project.class-roster-cleaner.quiz.cp-2-clean-one-row",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "def clean_row(line):\n    # TODO: split name, score, and email. Return a dictionary.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+      "starterCode": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw roster preview above as your starting point.\n# Next, write clean_row(line) so one data row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split name, score, and email, then return the cleaned record.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\n# Print the cleaned first data row.\nprint(clean_row(first_row))\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def clean_row(line):\n    # TODO: split name, score, and email. Return a dictionary.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+          "content": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw roster preview above as your starting point.\n# Next, write clean_row(line) so one data row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split name, score, and email, then return the cleaned record.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\n# Print the cleaned first data row.\nprint(clean_row(first_row))\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -277,11 +279,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def clean_row(line):\n    # TODO: split name, score, and email. Return a dictionary.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+        "starterCode": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw roster preview above as your starting point.\n# Next, write clean_row(line) so one data row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split name, score, and email, then return the cleaned record.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\n# Print the cleaned first data row.\nprint(clean_row(first_row))\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(line):\n    # TODO: split name, score, and email. Return a dictionary.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+            "content": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw roster preview above as your starting point.\n# Next, write clean_row(line) so one data row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split name, score, and email, then return the cleaned record.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\n# Print the cleaned first data row.\nprint(clean_row(first_row))\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -295,7 +297,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+            "content": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -326,7 +328,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+        "solutionCode": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -376,7 +378,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+            "content": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -391,7 +393,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n",
+          "content": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -419,11 +421,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-8-real-world-project.class-roster-cleaner.quiz.cp-3-skip-bad-roster-rows",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # TODO: use try/except to skip bad rows.\n        records.append(clean_row(line))\n\nprint(records)\n",
+      "starterCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # Keep using clean_row(line), but only save rows with valid scores.\n        # Skip ValueError rows so the roster cleaner can finish the file.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # TODO: use try/except to skip bad rows.\n        records.append(clean_row(line))\n\nprint(records)\n",
+          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # Keep using clean_row(line), but only save rows with valid scores.\n        # Skip ValueError rows so the roster cleaner can finish the file.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -437,11 +439,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # TODO: use try/except to skip bad rows.\n        records.append(clean_row(line))\n\nprint(records)\n",
+        "starterCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # Keep using clean_row(line), but only save rows with valid scores.\n        # Skip ValueError rows so the roster cleaner can finish the file.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # TODO: use try/except to skip bad rows.\n        records.append(clean_row(line))\n\nprint(records)\n",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # Keep using clean_row(line), but only save rows with valid scores.\n        # Skip ValueError rows so the roster cleaner can finish the file.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -597,11 +599,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-8-real-world-project.class-roster-cleaner.quiz.cp-4-move-cleaning-to-module",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+      "starterCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n# Move clean_row(line) into tools/cleaning.py.\n# Then import it back here so main.py keeps only the roster workflow.\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+          "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n# Move clean_row(line) into tools/cleaning.py.\n# Then import it back here so main.py keeps only the roster workflow.\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -618,18 +620,18 @@
         },
         {
           "path": "tools/cleaning.py",
-          "content": "# Move clean_row(line) here.\n",
+          "content": "# Move clean_row(line) here and keep the same cleaned record shape.\n",
           "language": "python"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+        "starterCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n# Move clean_row(line) into tools/cleaning.py.\n# Then import it back here so main.py keeps only the roster workflow.\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
+            "content": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n# Move clean_row(line) into tools/cleaning.py.\n# Then import it back here so main.py keeps only the roster workflow.\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -646,7 +648,7 @@
           },
           {
             "path": "tools/cleaning.py",
-            "content": "# Move clean_row(line) here.\n",
+            "content": "# Move clean_row(line) here and keep the same cleaned record shape.\n",
             "language": "python"
           }
         ],
@@ -835,11 +837,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-8-real-world-project.class-roster-cleaner.quiz.cp-5-add-summary-functions",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: print the average score and passing count.\n",
+      "starterCode": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# Replace the raw records preview with summary helpers.\n# Add average_score(records) and passing_count(records) in tools/scoring.py, then print both summary lines here.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: print the average score and passing count.\n",
+          "content": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# Replace the raw records preview with summary helpers.\n# Add average_score(records) and passing_count(records) in tools/scoring.py, then print both summary lines here.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -861,18 +863,18 @@
         },
         {
           "path": "tools/scoring.py",
-          "content": "# Define average_score(records) and passing_count(records).\n",
+          "content": "# Add average_score(records) and passing_count(records) here.\n",
           "language": "python"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: print the average score and passing count.\n",
+        "starterCode": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# Replace the raw records preview with summary helpers.\n# Add average_score(records) and passing_count(records) in tools/scoring.py, then print both summary lines here.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: print the average score and passing count.\n",
+            "content": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# Replace the raw records preview with summary helpers.\n# Add average_score(records) and passing_count(records) in tools/scoring.py, then print both summary lines here.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -894,7 +896,7 @@
           },
           {
             "path": "tools/scoring.py",
-            "content": "# Define average_score(records) and passing_count(records).\n",
+            "content": "# Add average_score(records) and passing_count(records) here.\n",
             "language": "python"
           }
         ],
@@ -1113,11 +1115,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-8-real-world-project.class-roster-cleaner.quiz.cp-6-write-final-reports",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: write output/clean_roster.csv and output/summary.txt.\nprint(f\"Cleaned {len(records)} records\")\n",
+      "starterCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n\n# Finish the handoff by adding tools/reports.py.\n# Write output/clean_roster.csv and output/summary.txt, then print the cleaned record count too.\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: write output/clean_roster.csv and output/summary.txt.\nprint(f\"Cleaned {len(records)} records\")\n",
+          "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n\n# Finish the handoff by adding tools/reports.py.\n# Write output/clean_roster.csv and output/summary.txt, then print the cleaned record count too.\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1144,18 +1146,18 @@
         },
         {
           "path": "tools/reports.py",
-          "content": "# Define write_clean_roster(records, path) and write_summary(records, path).\n",
+          "content": "# Add write_clean_roster(records, path) and write_summary(records, path) here.\n",
           "language": "python"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: write output/clean_roster.csv and output/summary.txt.\nprint(f\"Cleaned {len(records)} records\")\n",
+        "starterCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n\n# Finish the handoff by adding tools/reports.py.\n# Write output/clean_roster.csv and output/summary.txt, then print the cleaned record count too.\n",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\nfrom tools.reports import write_clean_roster, write_summary\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\n# TODO: write output/clean_roster.csv and output/summary.txt.\nprint(f\"Cleaned {len(records)} records\")\n",
+            "content": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n\n# Finish the handoff by adding tools/reports.py.\n# Write output/clean_roster.csv and output/summary.txt, then print the cleaned record count too.\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1182,7 +1184,7 @@
           },
           {
             "path": "tools/reports.py",
-            "content": "# Define write_clean_roster(records, path) and write_summary(records, path).\n",
+            "content": "# Add write_clean_roster(records, path) and write_summary(records, path) here.\n",
             "language": "python"
           }
         ],

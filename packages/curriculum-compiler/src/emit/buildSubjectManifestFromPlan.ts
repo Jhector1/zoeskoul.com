@@ -135,6 +135,7 @@ export function buildSubjectManifestFromPlan(args: {
                 return {
                     slug: sectionSlug,
                     order: section.order,
+                    role: section.role,
                     titleKey: kp.sectionTitleKey(
                         blueprint.subjectSlug,
                         logicalModuleSlug,
@@ -171,6 +172,7 @@ export function buildSubjectManifestFromPlan(args: {
             slug: logicalModuleSlug,
             prefix: module.prefix,
             order: moduleIndex,
+            role: module.role,
             titleKey: kp.moduleTitleKey(
                 blueprint.subjectSlug,
                 logicalModuleSlug,

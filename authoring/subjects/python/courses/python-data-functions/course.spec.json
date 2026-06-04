@@ -9,8 +9,8 @@
   "sourceLocale": "en",
   "targetLocales": [],
   "courseOverview": {
-    "recommendedSequence": "Complete modules in order. This course builds from collections, to functions, to file-based data processing.",
-    "summary": "This course teaches learners how to organize multiple values, write reusable functions, read and write files, handle exceptions, and clean simple data.",
+    "recommendedSequence": "Complete modules in order. This course builds from collections, to functions, to file-based data processing, and then into a longer capstone cleaner.",
+    "summary": "This course teaches learners how to organize multiple values, write reusable functions, read and write files, handle exceptions, clean simple data, and finish with a step-by-step capstone.",
     "moduleSummary": [
       {
         "moduleNumber": 1,
@@ -29,6 +29,12 @@
         "title": "Files, Exceptions, and Data Cleaning",
         "coreSkill": "Teach learners how to read/write files and handle messy data without crashing programs.",
         "outputFocus": "Build a small log or CSV cleaner that reads a file, validates rows, and writes a summary."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Class Roster Cleaner Capstone",
+        "coreSkill": "Pull lists, dictionaries, helper functions, files, and cleaning logic together into one final workflow.",
+        "outputFocus": "Build a class-roster cleaner that reads, cleans, summarizes, and writes a polished final report."
       }
     ]
   },
@@ -36,13 +42,13 @@
     "currentRelease": {
       "name": "python-data-functions-v2",
       "startModuleNumber": 5,
-      "endModuleNumber": 7
+      "endModuleNumber": 8
     },
     "releases": [
       {
         "name": "python-data-functions-v2",
         "startModuleNumber": 5,
-        "endModuleNumber": 7
+        "endModuleNumber": 8
       }
     ]
   },
@@ -355,6 +361,28 @@
               ]
             }
           ]
+        },
+        {
+          "sectionSlug": "python-5-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-5-gradebook-project",
+              "title": "Module 5 Gradebook Project",
+              "summary": "Build a small gradebook project in focused steps that keep the previous working version and add one collection idea at a time.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Extend a working collections program without starting over",
+                "Use lists and dictionaries together in a small summary tool"
+              ],
+              "practice": {
+                "tryIt": true,
+                "projectFlow": "progressive"
+              }
+            }
+          ]
         }
       ]
     },
@@ -473,6 +501,28 @@
               ]
             }
           ]
+        },
+        {
+          "sectionSlug": "python-6-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-6-name-badge-package",
+              "title": "Module 6 Name Badge Package",
+              "summary": "Refactor a small badge builder step by step so helper functions and helper files grow from the previous working version.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Carry forward working function code while refactoring into helpers",
+                "Use a small helper-module workflow confidently"
+              ],
+              "practice": {
+                "tryIt": true,
+                "projectFlow": "progressive"
+              }
+            }
+          ]
         }
       ]
     },
@@ -582,6 +632,77 @@
                 "Read rows with csv.DictReader",
                 "Summarize row data"
               ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-7-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-7-clean-student-records",
+              "title": "Module 7 Clean Student Records Project",
+              "summary": "Build a student-record cleaner in small file-based steps that keep the previous working solution and add one cleaning behavior at a time.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Extend a working file-processing script one behavior at a time",
+                "Handle invalid rows and produce a cleaned output summary"
+              ],
+              "practice": {
+                "tryIt": true,
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 8,
+      "moduleSlug": "python-8-real-world-project",
+      "prefix": "py8",
+      "title": "Real-World Project",
+      "role": "capstone",
+      "purpose": "Guide learners through a longer beginner data-cleaning project that combines lists, dictionaries, helper functions, files, and summaries.",
+      "learningObjectives": [
+        "Read and clean a structured file line by line",
+        "Refactor cleaning and summary logic into helper functions",
+        "Write final output files and summaries from one complete workflow"
+      ],
+      "guidedExercises": [
+        "Preview the roster file",
+        "Clean rows",
+        "Write final reports"
+      ],
+      "quizFocus": [
+        "file workflow",
+        "cleaning logic",
+        "summary functions"
+      ],
+      "moduleProject": "Build a class-roster cleaner that reads messy data, cleans valid rows, and writes polished final reports.",
+      "sections": [
+        {
+          "sectionSlug": "python-8-course-capstone",
+          "title": "Final Project",
+          "role": "capstone",
+          "topics": [
+            {
+              "topicId": "class-roster-cleaner",
+              "title": "Class Roster Cleaner",
+              "summary": "Finish the course with a class-roster cleaner capstone that grows from a raw-file preview into a complete cleaned report workflow.",
+              "minutes": 36,
+              "technical": true,
+              "learningGoals": [
+                "Carry one working project across several focused changes",
+                "Clean, summarize, and write structured file output",
+                "Finish with a polished final workflow"
+              ],
+              "practice": {
+                "tryIt": true,
+                "projectFlow": "progressive"
+              }
             }
           ]
         }

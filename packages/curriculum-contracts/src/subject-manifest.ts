@@ -49,6 +49,7 @@ export type SubjectModuleManifest = {
   slug: string;
   prefix: string;
   order: number;
+  role?: "standard" | "capstone";
   titleKey: string;
   descriptionKey?: string | null;
   weekStart?: number | null;
@@ -68,6 +69,7 @@ export type SubjectModuleManifest = {
 export type SubjectSectionManifest = {
   slug: string;
   order: number;
+  role?: "lesson" | "module_project" | "capstone";
   titleKey: string;
   descriptionKey?: string | null;
   serviceDefaults?: ManifestIdeServiceConfig | null;
