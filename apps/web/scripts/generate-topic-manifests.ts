@@ -20,6 +20,16 @@ const subjectsRoot = path.join(projectRoot, "src", "lib", "subjects");
 
 type TopicBundleJson = {
     topicId?: string;
+    moduleSlug?: string;
+};
+
+type SubjectManifestJson = {
+    modules?: Array<{
+        slug?: string;
+        sections?: Array<{
+            topics?: string[];
+        }>;
+    }>;
 };
 
 async function buildSubjectRegistry(
@@ -32,6 +42,7 @@ async function buildSubjectRegistry(
     const modulesDir = path.join(subjectDir, "modules");
     if (!(await exists(modulesDir))) return;
 
+    const subjectManifest = await readJsonFile<SubjectManifestJson>(subjectManifestFile);
     const topicBundleFiles = await walkFiles(
         modulesDir,
         (_full, name) => name === "topic.bundle.json",
@@ -46,6 +57,9 @@ async function buildSubjectRegistry(
         typedImportName: string;
         importPath: string;
     }> = [];
+    const bundlesByModuleAndTopic = new Map<string, typeof topicEntries[number]>();
+    const duplicateBundleKeys = new Set<string>();
+    const manifestModules = subjectManifest.modules ?? [];
 
     for (const file of topicBundleFiles) {
         const json = await readJsonFile<TopicBundleJson>(file);
@@ -61,13 +75,70 @@ async function buildSubjectRegistry(
         }
 
         const safe = toSafeIdentifier(topicId, "topicManifest", "t");
+        const moduleDirName = path.basename(
+            path.dirname(path.dirname(path.dirname(file))),
+        );
+        const legacyModuleIndexMatch = /^module(\d+)$/.exec(moduleDirName);
+        const derivedModuleSlug = legacyModuleIndexMatch
+            ? manifestModules[Number(legacyModuleIndexMatch[1])]?.slug
+            : null;
+        const moduleSlug =
+            typeof json.moduleSlug === "string" && json.moduleSlug.length > 0
+                ? json.moduleSlug
+                : derivedModuleSlug ?? null;
 
-        topicEntries.push({
+        if (!moduleSlug) {
+            throw new Error(
+                `Missing moduleSlug in ${file} and could not derive it from ${subjectManifestFile}`,
+            );
+        }
+
+        const key = `${moduleSlug}::${topicId}`;
+        if (bundlesByModuleAndTopic.has(key)) {
+            duplicateBundleKeys.add(key);
+        }
+
+        bundlesByModuleAndTopic.set(key, {
             topicId,
             rawImportName: `${safe}Json`,
             typedImportName: safe,
             importPath: toPosixImportPath(outputDir, file),
         });
+    }
+
+    if (duplicateBundleKeys.size > 0) {
+        throw new Error(
+            `Duplicate topic bundle entries found while generating ${outputFile}: ${Array.from(duplicateBundleKeys).sort().join(", ")}`,
+        );
+    }
+
+    const referencedTopics = (subjectManifest.modules ?? []).flatMap((module) =>
+        (module.sections ?? []).flatMap((section) =>
+            (section.topics ?? []).map((topicId) => ({
+                moduleSlug: String(module.slug ?? ""),
+                topicId,
+            })),
+        ),
+    );
+
+    assertUnique(
+        referencedTopics.map((entry) => entry.topicId),
+        "topicId",
+        `${subjectManifestFile} referenced topics`,
+    );
+
+    for (const referencedTopic of referencedTopics) {
+        const entry = bundlesByModuleAndTopic.get(
+            `${referencedTopic.moduleSlug}::${referencedTopic.topicId}`,
+        );
+
+        if (!entry) {
+            throw new Error(
+                `Topic "${referencedTopic.topicId}" for module "${referencedTopic.moduleSlug}" was not found under ${subjectDir}.`,
+            );
+        }
+
+        topicEntries.push(entry);
     }
 
     assertUnique(

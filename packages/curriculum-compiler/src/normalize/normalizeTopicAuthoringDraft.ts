@@ -2,6 +2,7 @@ import {
     normalizeWorkspaceExpectations,
     normalizeWorkspacePath,
     ProgrammingCodeInputFileDraft,
+    ProgrammingCodeInputSourceCheckDraft,
     ProgrammingCodeInputStarterFileDraft,
     TopicAuthoringDraft
 } from "@zoeskoul/curriculum-contracts";
@@ -98,19 +99,14 @@ function normalizeStarterFileDrafts(
 
 function normalizeSourceChecks(
     value: unknown,
-): Array<{
-    type: "source_contains" | "source_regex";
-    pattern: string;
-    message: string;
-    normalizeWhitespace?: boolean;
-}> | undefined {
+): ProgrammingCodeInputSourceCheckDraft[] | undefined {
     if (!Array.isArray(value)) return undefined;
 
     const checks = value
         .filter((item): item is Record<string, unknown> =>
             Boolean(item) && typeof item === "object" && !Array.isArray(item),
         )
-        .map((item) => {
+        .map((item): ProgrammingCodeInputSourceCheckDraft | null => {
             const type =
                 item.type === "source_regex" ? "source_regex" : item.type === "source_contains"
                     ? "source_contains"
@@ -129,7 +125,7 @@ function normalizeSourceChecks(
                     : {}),
             };
         })
-        .filter((check): check is NonNullable<typeof check> => Boolean(check));
+        .filter((check): check is ProgrammingCodeInputSourceCheckDraft => Boolean(check));
 
     return checks.length > 0 ? checks : undefined;
 }

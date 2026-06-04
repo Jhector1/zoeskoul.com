@@ -390,7 +390,6 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                 entryFilePath: authoredEntryFilePath,
                 starterCode,
                 starterFiles,
-                solutionFiles,
                 ...(workspaceExpectations ? { workspaceExpectations } : {}),
                 ...(fixtureFiles.length > 0
                     ? {
