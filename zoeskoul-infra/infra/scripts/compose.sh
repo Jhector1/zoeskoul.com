@@ -24,11 +24,14 @@ export INFRA_DIR
 export MONOREPO_ROOT="${MONOREPO_ROOT:-$(cd "$INFRA_DIR/.." && pwd)}"
 export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-zoeskoul}"
 
+# Important:
+# The main Compose stack must use normal Docker storage under /var/lib/docker.
+# Rootless Docker is only for the runner's internal execution socket.
+unset DOCKER_CONTEXT
+export DOCKER_HOST="${ROOTFUL_DOCKER_HOST:-unix:///var/run/docker.sock}"
+
 COMPOSE_FILES=()
 
-# Runner + Judge0-only mode should not start the app database.
-# When ENABLE_WEB=1, the app compose supplies Postgres + Redis + web.
-# Otherwise, use a small Redis-only compose because the runner depends on Redis.
 if [[ "${ENABLE_WEB:-0}" == "1" ]]; then
   COMPOSE_FILES+=(
     -f "$INFRA_DIR/compose/app/compose.prod.yml"
@@ -45,13 +48,26 @@ COMPOSE_FILES+=(
 )
 
 if [[ "${EXPOSE_RUNNER_LOCAL:-0}" == "1" ]]; then
-  COMPOSE_FILES+=(-f "$INFRA_DIR/compose/runner/compose.expose-local.yml")
+  COMPOSE_FILES+=(
+    -f "$INFRA_DIR/compose/runner/compose.expose-local.yml"
+  )
 fi
 
 if [[ "${ENABLE_JUDGE0:-0}" == "1" ]]; then
-  COMPOSE_FILES+=(--env-file "$JUDGE0_ENV_FILE" -f "$INFRA_DIR/compose/judge0/compose.preview.yml")
+  if [[ ! -f "$JUDGE0_ENV_FILE" ]]; then
+    echo "Missing $JUDGE0_ENV_FILE. Run ./scripts/generate-env.sh first." >&2
+    exit 1
+  fi
+
+  COMPOSE_FILES+=(
+    --env-file "$JUDGE0_ENV_FILE"
+    -f "$INFRA_DIR/compose/judge0/compose.preview.yml"
+  )
+
   if [[ "${EXPOSE_JUDGE0_LOCAL:-0}" == "1" ]]; then
-    COMPOSE_FILES+=(-f "$INFRA_DIR/compose/judge0/compose.expose-local.yml")
+    COMPOSE_FILES+=(
+      -f "$INFRA_DIR/compose/judge0/compose.expose-local.yml"
+    )
   fi
 fi
 
@@ -60,4 +76,8 @@ if [[ "${ENABLE_WEB:-0}" == "1" ]]; then
   PROFILE_ARGS+=(--profile web)
 fi
 
-exec docker compose --env-file "$ENV_FILE" "${COMPOSE_FILES[@]}" "${PROFILE_ARGS[@]}" "$@"
+exec docker compose \
+  --env-file "$ENV_FILE" \
+  "${COMPOSE_FILES[@]}" \
+  "${PROFILE_ARGS[@]}" \
+  "$@"
