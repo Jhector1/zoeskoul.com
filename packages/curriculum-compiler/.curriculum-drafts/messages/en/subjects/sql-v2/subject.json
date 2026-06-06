@@ -2,7 +2,7 @@
   "subjects": {
     "sql-v2": {
       "title": "SQL Foundations",
-      "description": "",
+      "description": "Learn to read tables, write SELECT queries, filter rows, sort results, and handle real-world beginner data.",
       "moreComingSoon": "More SQL Foundations lessons are coming soon."
     }
   },

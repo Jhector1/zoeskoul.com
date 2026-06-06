@@ -1,0 +1,152 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-programming": {
+        "module-8-class-model-project": {
+          "label": "Module 8 Class Model Project",
+          "summary": "Build a small multi-file account tracker that uses a model file, imported class methods, and account data from a text file before printing a final portfolio summary.",
+          "cards": {
+            "sketch0": {
+              "title": "Give the project a real model file"
+            },
+            "sketch1": {
+              "title": "Teach the model how an account behaves"
+            },
+            "sketch2": {
+              "title": "Use the model to turn saved rows into a useful summary"
+            },
+            "project": {
+              "title": "Build the account tracker project"
+            }
+          },
+          "projectSteps": {
+            "account_project_step_1_create_model_file": {
+              "title": "Step 1: Create models/account.py"
+            },
+            "account_project_step_2_add_init": {
+              "title": "Step 2: Store owner and balance"
+            },
+            "account_project_step_3_add_methods": {
+              "title": "Step 3: Add deposit, withdraw, and summary methods"
+            },
+            "account_project_step_4_import_in_main": {
+              "title": "Step 4: Import the model into main.py"
+            },
+            "account_project_step_5_load_account_data": {
+              "title": "Step 5: Load accounts from data/accounts.txt"
+            },
+            "account_project_step_6_print_portfolio_summary": {
+              "title": "Step 6: Print the final portfolio summary"
+            }
+          },
+          "quiz": {
+            "account-project-step-1-create-model-file": {
+              "title": "Step 1: Create models/account.py",
+              "prompt": "You are starting a tiny account tracker, and the first job is giving the project a real model file. Open `models/account.py` and create an `Account` class there. Leave `main.py` importing that class so the project already has the right file structure.",
+              "hint": "The class belongs in `models/account.py`, not in `main.py`.",
+              "help": {
+                "concept": "A helper module lets one file hold the class definition while another file imports and uses it.",
+                "hint_1": "Add `class Account:` in `models/account.py`, then give it a `pass` body for now.",
+                "hint_2": "Do not move the class into `main.py`; the project is checking that the import path stays in place."
+              },
+              "starterCode": "# Create the Account class here.\n"
+            },
+            "account-project-step-2-add-init": {
+              "title": "Step 2: Store owner and balance",
+              "prompt": "Now the class needs enough information to represent one real account. In `models/account.py`, add `__init__(self, owner, balance)` and store those values on the object so `main.py` can create `Account(\"Ava\", 125)` successfully.",
+              "hint": "Store both incoming values on `self` inside `__init__`.",
+              "help": {
+                "concept": "`__init__` gives each new object its own starting state.",
+                "hint_1": "The parameter names should match the data you want each account to remember: `owner` and `balance`.",
+                "hint_2": "Inside the constructor, assign `self.owner = owner` and `self.balance = balance`."
+              },
+              "starterCode": "class Account:\n    pass\n"
+            },
+            "account-project-step-3-add-methods": {
+              "title": "Step 3: Add deposit, withdraw, and summary methods",
+              "prompt": "Your model can store data, but it still cannot do account work. Add `deposit(self, amount)`, `withdraw(self, amount)`, and `summary(self)` in `models/account.py`. The first two should update `self.balance` and return the new balance. `summary()` should return text like `Ava: $125`.",
+              "hint": "Two methods change the balance, and one method turns the current state into a readable label.",
+              "help": {
+                "concept": "Methods let an object both change its own data and describe its current state.",
+                "hint_1": "Use `self.balance += amount` in `deposit` and `self.balance -= amount` in `withdraw`.",
+                "hint_2": "Build the summary string from `self.owner` and `self.balance` with an f-string."
+              },
+              "starterCode": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    # Add deposit, withdraw, and summary here.\n"
+            },
+            "account-project-step-4-import-in-main": {
+              "title": "Step 4: Import the model into main.py",
+              "prompt": "The helper class is ready, so wire it into the app. In `main.py`, use the imported `Account` class to turn each `(owner, balance)` row in `seed_rows` into an object. Store those objects in `accounts`, then print one summary line for each account.",
+              "hint": "Loop through `seed_rows`, build an `Account` for each tuple, and append it to a list.",
+              "help": {
+                "concept": "Main programs often import a model class, create objects from raw rows, and then call model methods for output.",
+                "hint_1": "Each tuple gives you `owner` and `balance`, so unpack them in the loop.",
+                "hint_2": "After the list is built, loop through `accounts` and print `account.summary()`."
+              },
+              "starterCode": "from models.account import Account\n\nseed_rows = [\n    (\"Ava\", 125),\n    (\"Ben\", 80)\n]\n\n# Build one Account for each row.\n# Store them in a list named accounts.\n# Then print each account summary on its own line.\n"
+            },
+            "account-project-step-5-load-account-data": {
+              "title": "Step 5: Load accounts from data/accounts.txt",
+              "prompt": "Replace the hard-coded starter list with saved data. Read `data/accounts.txt`, split each line with `owner|balance`, create an `Account` object for every row, and print the summaries in the same order as the file.",
+              "hint": "Each line becomes one `Account(owner, int(balance_text))`.",
+              "help": {
+                "concept": "File input lets a project load rows first, then hand each row to the class that knows how to represent it.",
+                "hint_1": "Use `line.strip().split(\"|\")` so you get the owner name and the balance text separately.",
+                "hint_2": "Convert the balance text to `int` before you pass it into `Account`."
+              },
+              "starterCode": "from models.account import Account\n\naccounts = []\n\nwith open(\"data/accounts.txt\", \"r\") as source:\n    # Turn each line into an Account object.\n    # Each line uses owner|balance.\n    pass\n\nfor account in accounts:\n    print(account.summary())\n"
+            },
+            "account-project-step-6-print-portfolio-summary": {
+              "title": "Step 6: Print the final portfolio summary",
+              "prompt": "Finish the tracker so it feels like one connected tool. Keep printing each account summary, then add two final lines: `Total accounts: X` and `Total balance: $Y`. Calculate the totals from the `Account` objects you already loaded.",
+              "hint": "Count the objects in `accounts`, then add up each object's `balance`.",
+              "help": {
+                "concept": "Once your file rows have become objects, you can still loop over those objects to build report totals.",
+                "hint_1": "Use `len(accounts)` for the number of loaded accounts.",
+                "hint_2": "Start `total_balance` at `0`, then add `account.balance` inside a loop before printing the final line."
+              },
+              "starterCode": "from models.account import Account\n\naccounts = []\n\nwith open(\"data/accounts.txt\", \"r\") as source:\n    for line in source:\n        owner, balance_text = line.strip().split(\"|\")\n        accounts.append(Account(owner, int(balance_text)))\n\n# Print each account summary.\n# Then print:\n# Total accounts: X\n# Total balance: $Y\n"
+            },
+            "account-project-try-profile-model": {
+              "title": "Try the model-file pattern",
+              "prompt": "Practice the model-file pattern with a fresh helper file. In `models/profile.py`, define an empty `Profile` class. Leave `main.py` importing `Profile` and creating one sample object.",
+              "hint": "Define `Profile` in `models/profile.py` and keep the import in `main.py` unchanged.",
+              "help": {
+                "concept": "A helper model file lets one file hold the class definition while `main.py` imports and uses it.",
+                "hint_1": "Add `class Profile:` in `models/profile.py` and use `pass` for the empty body.",
+                "hint_2": "Do not move the class into `main.py`; the import path is part of the exercise."
+              },
+              "starterCode": "# Create the Profile class here.\n"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_module_8_class_model_project_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Practice the model-file pattern with a fresh helper file. In `models/profile.py`, define an empty `Profile` class. Leave `main.py` importing `Profile` and creating one sample object."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-programming": {
+        "module-8-class-model-project": {
+          "sketch-1": {
+            "title": "Give the project a real model file",
+            "bodyMarkdown": "A class project feels more real when the model lives in its own file instead of being mixed into everything else.\n\nFor this module project, you are building a tiny account tracker with this shape:\n\n```python\nmain.py\nmodels/account.py\ndata/accounts.txt\n```\n\nThat layout gives each part one job:\n\n- `models/account.py` defines the `Account` class.\n- `main.py` imports the class and runs the program flow.\n- `data/accounts.txt` stores simple account rows.\n\nA small starting version looks like this:\n\n```python\n# models/account.py\nclass Account:\n    pass\n```\n\n```python\n# main.py\nfrom models.account import Account\n\nsample = Account()\n```\n\nLine by line:\n\n- `class Account:` starts the blueprint in its own helper file.\n- `from models.account import Account` pulls that blueprint into `main.py`.\n- `sample = Account()` creates one object from the imported class."
+          },
+          "sketch-2": {
+            "title": "Teach the model how an account behaves",
+            "bodyMarkdown": "A useful class does more than store values. It also gives those values behavior that belongs together.\n\nFor an account model, that often means:\n\n```python\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n```\n\nStep by step:\n\n- `__init__` gives each account its own owner and balance.\n- `deposit` changes the balance on that same object.\n- returning the new balance makes the method easy to test.\n\nYou can add a matching `withdraw` method and a `summary()` method to turn the object into readable output.\n\nWorked example:\n\n```python\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\nprint(account.summary())\n```\n\nAfter the deposit, the same object should describe itself with the updated balance."
+          },
+          "sketch-3": {
+            "title": "Use the model to turn saved rows into a useful summary",
+            "bodyMarkdown": "Once your class is ready, `main.py` can focus on project flow instead of low-level account details.\n\nA simple file-driven flow looks like this:\n\n```python\nfrom models.account import Account\n\naccounts = []\nwith open(\"data/accounts.txt\", \"r\") as source:\n    for line in source:\n        owner, balance_text = line.strip().split(\"|\")\n        accounts.append(Account(owner, int(balance_text)))\n```\n\nWhy this works well:\n\n- the file stores plain text rows\n- `main.py` turns each row into an `Account` object\n- the `Account` class already knows how to summarize itself\n\nThat means the final reporting loop can stay short and readable."
+          }
+        }
+      }
+    }
+  }
+}

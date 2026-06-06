@@ -7,6 +7,7 @@ import type {
 } from "@zoeskoul/curriculum-contracts";
 import {
     createJudge0CodeRunnerFromEnv,
+    getCodeRunner,
     validateCodeAgainstTests,
     validateSemanticCode,
 } from "@zoeskoul/curriculum-runtime";
@@ -103,19 +104,8 @@ export async function validateCodeProfileGolden(args: {
 
 
 
-    const sharedCodeRunner = createJudge0CodeRunnerFromEnv();
+    const sharedCodeRunner = getCodeRunner() ?? createJudge0CodeRunnerFromEnv();
 
-    if (!sharedCodeRunner) {
-        issues.push({
-            code: "CODE_PROFILE_SHARED_RUNNER_UNAVAILABLE",
-            category: "runtime",
-            severity: "error",
-            message:
-                "JUDGE0_URL is required for code profile golden validation so curriculum golden and web grading use the same runtime.",
-        });
-
-        return issues;
-    }
 
 
     const runtime = args.topicBundle.runtimeDefaults;
@@ -207,6 +197,7 @@ export async function validateCodeProfileGolden(args: {
                 language: exercise.language,
                 solutionCode,
                 expected,
+                files: collectExerciseWorkspaceFiles(exercise),
             });
 
             if (!run.ok) {
@@ -237,7 +228,7 @@ export async function validateCodeProfileGolden(args: {
             tests: expected.tests,
             files: collectExerciseWorkspaceFiles(exercise),
             limits: { cpu_time_limit: 2, wall_time_limit: 6, memory_limit: 256000 },
-            runner: sharedCodeRunner,
+            ...(sharedCodeRunner ? { runner: sharedCodeRunner } : {}),
         });
         if (!run.ok) {
             const code =

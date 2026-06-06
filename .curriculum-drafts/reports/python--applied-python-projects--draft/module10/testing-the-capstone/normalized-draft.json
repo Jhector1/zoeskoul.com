@@ -1,0 +1,460 @@
+{
+  "title": "Testing the Capstone",
+  "summary": "Test the most important parts of a small automation project by checking helper functions, file loading, object behavior, and a realistic end-to-end flow.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "capstone-testing-overview",
+      "title": "Test the project in small pieces, then as a whole",
+      "bodyMarkdown": "When a capstone project grows, testing one giant script all at once becomes hard. A better approach is:\n\n1. test small helper functions\n2. test class behavior\n3. test file-reading logic\n4. test one realistic user path from start to finish\n\nFor example, imagine a simple task tracker project with a `Task` class and helper functions.\n\n```python\nclass Task:\n    def __init__(self, name, done=False):\n        self.name = name\n        self.done = done\n\n    def mark_done(self):\n        self.done = True\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n```\n\nStep by step:\n\n- `Task(...)` creates one task object.\n- `self.name` stores the task name.\n- `self.done` stores whether the task is finished.\n- `mark_done()` changes the task state.\n- `count_done(tasks)` loops through a list of task objects and counts finished ones.\n\nA good test plan would check both the small parts and the combined behavior. For example:\n\n- Does `mark_done()` really change `done` to `True`?\n- Does `count_done()` return the right number for mixed tasks?\n- If tasks are loaded from a file, do they become the right objects?\n\nTry it yourself: in the first project step, you will build a small test helper that checks whether a `Task` object formats itself correctly. Then you will keep extending that tested project piece by piece."
+    },
+    {
+      "id": "assert-and-realistic-paths",
+      "title": "Use assert to catch mistakes early",
+      "bodyMarkdown": "`assert` is a simple way to check that your code behaves as expected.\n\nHere is a small example:\n\n```python\ndef add(a, b):\n    return a + b\n\nassert add(2, 3) == 5\nassert add(0, 4) == 4\nprint(\"tests passed\")\n```\n\nLine by line:\n\n- `def add(a, b):` defines a function.\n- `return a + b` sends back the result.\n- `assert add(2, 3) == 5` checks one case.\n- `assert add(0, 4) == 4` checks another case.\n- If both checks are true, the program reaches `print(\"tests passed\")`.\n\nIn a capstone project, assertions are useful for helper functions and object methods. They are also useful for checking a realistic flow, such as:\n\n- load tasks from a file\n- mark one task done\n- save or summarize the result\n\nTry this: after you read a file into objects, add one or two `assert` lines to confirm the number of objects and one important attribute value."
+    },
+    {
+      "id": "polishing-with-refactoring",
+      "title": "Refactor without changing behavior",
+      "bodyMarkdown": "Refactoring means improving code structure without changing what the program does.\n\nSuppose you start with repeated counting logic in two places. You can move that logic into one helper function.\n\n```python\ndef count_open(tasks):\n    total = 0\n    for task in tasks:\n        if not task.done:\n            total += 1\n    return total\n```\n\nThis is easier to test than copying the same loop in several places.\n\nA worked example:\n\n- Before refactoring, your summary code might count open tasks directly inside `main()`.\n- After refactoring, `main()` can call `count_open(tasks)` instead.\n- If your tests still pass, the refactor likely kept the same behavior.\n\nYour turn: when you notice repeated logic in your capstone, move it into a helper function or method, then rerun your tests to make sure the output still matches."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "task-format-method",
+      "kind": "code_input",
+      "title": "Add a tested formatting method",
+      "prompt": "You are building a small task-tracker capstone. Complete the `label` method so it returns a display string for one task.\n\nRules:\n- If the task is done, start with `[x] `.\n- If the task is not done, start with `[ ] `.\n- Then add the task name.\n\nDo not print inside the method. Return the string.\n\nThis is the first tested project step, so keep the class simple and focused.",
+      "starterCode": "class Task:\n    def __init__(self, name, done=False):\n        self.name = name\n        self.done = done\n\n    def label(self):\n        # TODO: return a string like \"[x] Wash dishes\" or \"[ ] Study\"\n        pass\n",
+      "solutionCode": "class Task:\n    def __init__(self, name, done=False):\n        self.name = name\n        self.done = done\n\n    def label(self):\n        if self.done:\n            prefix = \"[x] \"\n        else:\n            prefix = \"[ ] \"\n        return prefix + self.name\n",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Task",
+          "message": "Define a class named Task."
+        },
+        {
+          "type": "constructible",
+          "className": "Task",
+          "constructorArgs": [
+            "Wash dishes",
+            true
+          ],
+          "message": "Task should be constructible with a name and optional done value."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Task",
+          "constructorArgs": [
+            "Study",
+            false
+          ],
+          "attributes": [
+            "name",
+            "done"
+          ],
+          "message": "A Task instance should store name and done attributes."
+        },
+        {
+          "type": "method_returns",
+          "className": "Task",
+          "constructorArgs": [
+            "Wash dishes",
+            true
+          ],
+          "constructorArgKinds": [],
+          "methodName": "label",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": "[x] Wash dishes",
+          "expectedKind": "value",
+          "message": "label() should format a completed task correctly."
+        },
+        {
+          "type": "method_returns",
+          "className": "Task",
+          "constructorArgs": [
+            "Study",
+            false
+          ],
+          "constructorArgKinds": [],
+          "methodName": "label",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": "[ ] Study",
+          "expectedKind": "value",
+          "message": "label() should format an incomplete task correctly."
+        },
+        {
+          "type": "no_stdout",
+          "message": "Return the label instead of printing it."
+        }
+      ],
+      "hint": "Build the returned string from the `done` attribute and the `name` attribute.",
+      "help": {
+        "concept": "A method can use `self` to read an object's attributes and return a value based on that state.",
+        "hint_1": "Choose one prefix when `self.done` is `True` and a different prefix when it is `False`.",
+        "hint_2": "After deciding the prefix, combine it with `self.name` and return the full label string."
+      }
+    },
+    {
+      "id": "count-open-tasks",
+      "kind": "code_input",
+      "title": "Count unfinished tasks",
+      "prompt": "Continue the same task-tracker project. The `Task` class already works. Complete the `count_open(tasks)` function so it returns how many tasks are not done.\n\nEach item in `tasks` is a `Task` object.\n\nDo not print. Return the count.",
+      "starterCode": "class Task:\n    def __init__(self, name, done=False):\n        self.name = name\n        self.done = done\n\n    def label(self):\n        if self.done:\n            prefix = \"[x] \"\n        else:\n            prefix = \"[ ] \"\n        return prefix + self.name\n\n\ndef count_open(tasks):\n    # TODO: return the number of tasks whose done value is False\n    pass\n",
+      "solutionCode": "class Task:\n    def __init__(self, name, done=False):\n        self.name = name\n        self.done = done\n\n    def label(self):\n        if self.done:\n            prefix = \"[x] \"\n        else:\n            prefix = \"[ ] \"\n        return prefix + self.name\n\n\ndef count_open(tasks):\n    total = 0\n    for task in tasks:\n        if not task.done:\n            total += 1\n    return total\n",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "count_open",
+          "args": [
+            [
+              [
+                [
+                  "name",
+                  "Wash dishes"
+                ],
+                [
+                  "done",
+                  true
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Study"
+                ],
+                [
+                  "done",
+                  false
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Read"
+                ],
+                [
+                  "done",
+                  false
+                ]
+              ]
+            ]
+          ],
+          "argKinds": [
+            "list_of_dict_entries"
+          ],
+          "expected": 2,
+          "expectedKind": "value",
+          "message": "count_open should count unfinished tasks in a mixed list."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "count_open",
+          "args": [
+            [
+              [
+                [
+                  "name",
+                  "Email"
+                ],
+                [
+                  "done",
+                  true
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Clean"
+                ],
+                [
+                  "done",
+                  true
+                ]
+              ]
+            ]
+          ],
+          "argKinds": [
+            "list_of_dict_entries"
+          ],
+          "expected": 0,
+          "expectedKind": "value",
+          "message": "count_open should return 0 when all tasks are done."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "count_open",
+          "args": [
+            [
+              [
+                [
+                  "name",
+                  "Plan"
+                ],
+                [
+                  "done",
+                  false
+                ]
+              ]
+            ]
+          ],
+          "argKinds": [
+            "list_of_dict_entries"
+          ],
+          "expected": 1,
+          "expectedKind": "value",
+          "message": "count_open should work for a one-item list."
+        },
+        {
+          "type": "no_stdout",
+          "message": "Return the count instead of printing it."
+        }
+      ],
+      "hint": "Loop through the task objects and count the ones where `done` is `False`.",
+      "help": {
+        "concept": "A function can process a list of objects by reading one attribute from each object and updating a running total.",
+        "hint_1": "Start a counter at 0, then inspect `task.done` for each task in the list.",
+        "hint_2": "Only increase the counter when the task is still open, then return the final total."
+      }
+    },
+    {
+      "id": "load-tasks-from-file",
+      "kind": "code_input",
+      "title": "Load task objects from a file",
+      "prompt": "Now test file input for the capstone. Complete `load_tasks(path)`.\n\nThe file contains one task per line in this format:\n- `task name|open`\n- `task name|done`\n\nYour function should:\n- open the file at `path`\n- read each non-empty line\n- create a `Task` object for each line\n- set `done` to `True` only when the status text is `done`\n- return the list of `Task` objects\n\nDo not print inside the function.",
+      "starterCode": "class Task:\n    def __init__(self, name, done=False):\n        self.name = name\n        self.done = done\n\n    def label(self):\n        if self.done:\n            prefix = \"[x] \"\n        else:\n            prefix = \"[ ] \"\n        return prefix + self.name\n\n\ndef count_open(tasks):\n    total = 0\n    for task in tasks:\n        if not task.done:\n            total += 1\n    return total\n\n\ndef load_tasks(path):\n    # TODO: read the file and return a list of Task objects\n    pass\n",
+      "solutionCode": "class Task:\n    def __init__(self, name, done=False):\n        self.name = name\n        self.done = done\n\n    def label(self):\n        if self.done:\n            prefix = \"[x] \"\n        else:\n            prefix = \"[ ] \"\n        return prefix + self.name\n\n\ndef count_open(tasks):\n    total = 0\n    for task in tasks:\n        if not task.done:\n            total += 1\n    return total\n\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, \"r\") as file:\n        for line in file:\n            line = line.strip()\n            if line == \"\":\n                continue\n            name, status = line.split(\"|\")\n            done = status == \"done\"\n            tasks.append(Task(name, done))\n    return tasks\n",
+      "files": [
+        {
+          "path": "data/tasks.txt",
+          "content": "Wash dishes|done\nStudy|open\nRead|open\n\nEmail|done"
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "load_tasks",
+          "args": [
+            "data/tasks.txt"
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": [
+            [
+              [
+                "name",
+                "Wash dishes"
+              ],
+              [
+                "done",
+                true
+              ]
+            ],
+            [
+              [
+                "name",
+                "Study"
+              ],
+              [
+                "done",
+                false
+              ]
+            ],
+            [
+              [
+                "name",
+                "Read"
+              ],
+              [
+                "done",
+                false
+              ]
+            ],
+            [
+              [
+                "name",
+                "Email"
+              ],
+              [
+                "done",
+                true
+              ]
+            ]
+          ],
+          "expectedKind": "list_of_dict_entries",
+          "message": "load_tasks should turn each non-empty line into a Task object with the correct done value."
+        },
+        {
+          "type": "no_stdout",
+          "message": "load_tasks should return data without printing."
+        }
+      ],
+      "hint": "Split each line at `|`, then turn the status text into a Boolean.",
+      "help": {
+        "concept": "File-reading functions often transform text lines into structured objects by splitting strings and mapping text values to attributes.",
+        "hint_1": "After reading a line, remove surrounding whitespace and skip it if it becomes empty.",
+        "hint_2": "Use the text before `|` as the task name, and set `done` based on whether the text after `|` equals `done`."
+      }
+    },
+    {
+      "id": "build-summary-report",
+      "kind": "code_input",
+      "title": "Build a summary report string",
+      "prompt": "Keep extending the same capstone. Complete `build_report(tasks)` so it returns a three-line summary string in exactly this format:\n\n`Total: N`\n`Done: N`\n`Open: N`\n\nUse the task list to calculate the numbers.\nReturn the full string with newline characters between lines.\nDo not print inside the function.",
+      "starterCode": "class Task:\n    def __init__(self, name, done=False):\n        self.name = name\n        self.done = done\n\n    def label(self):\n        if self.done:\n            prefix = \"[x] \"\n        else:\n            prefix = \"[ ] \"\n        return prefix + self.name\n\n\ndef count_open(tasks):\n    total = 0\n    for task in tasks:\n        if not task.done:\n            total += 1\n    return total\n\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, \"r\") as file:\n        for line in file:\n            line = line.strip()\n            if line == \"\":\n                continue\n            name, status = line.split(\"|\")\n            done = status == \"done\"\n            tasks.append(Task(name, done))\n    return tasks\n\n\ndef build_report(tasks):\n    # TODO: return the 3-line summary string\n    pass\n",
+      "solutionCode": "class Task:\n    def __init__(self, name, done=False):\n        self.name = name\n        self.done = done\n\n    def label(self):\n        if self.done:\n            prefix = \"[x] \"\n        else:\n            prefix = \"[ ] \"\n        return prefix + self.name\n\n\ndef count_open(tasks):\n    total = 0\n    for task in tasks:\n        if not task.done:\n            total += 1\n    return total\n\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, \"r\") as file:\n        for line in file:\n            line = line.strip()\n            if line == \"\":\n                continue\n            name, status = line.split(\"|\")\n            done = status == \"done\"\n            tasks.append(Task(name, done))\n    return tasks\n\n\ndef build_report(tasks):\n    total = len(tasks)\n    done_count = 0\n    for task in tasks:\n        if task.done:\n            done_count += 1\n    open_count = count_open(tasks)\n    return f\"Total: {total}\\nDone: {done_count}\\nOpen: {open_count}\"\n",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "build_report",
+          "args": [
+            [
+              [
+                [
+                  "name",
+                  "Wash dishes"
+                ],
+                [
+                  "done",
+                  true
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Study"
+                ],
+                [
+                  "done",
+                  false
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Read"
+                ],
+                [
+                  "done",
+                  false
+                ]
+              ]
+            ]
+          ],
+          "argKinds": [
+            "list_of_dict_entries"
+          ],
+          "expected": "Total: 3\nDone: 1\nOpen: 2",
+          "expectedKind": "value",
+          "message": "build_report should summarize a mixed task list in the required format."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "build_report",
+          "args": [
+            [
+              [
+                [
+                  "name",
+                  "Email"
+                ],
+                [
+                  "done",
+                  true
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Clean"
+                ],
+                [
+                  "done",
+                  true
+                ]
+              ]
+            ]
+          ],
+          "argKinds": [
+            "list_of_dict_entries"
+          ],
+          "expected": "Total: 2\nDone: 2\nOpen: 0",
+          "expectedKind": "value",
+          "message": "build_report should handle a list where every task is done."
+        },
+        {
+          "type": "no_stdout",
+          "message": "Return the report string instead of printing it."
+        }
+      ],
+      "hint": "You need the total number of tasks, the number done, and the number open.",
+      "help": {
+        "concept": "A summary function can combine several computed values into one formatted multi-line string.",
+        "hint_1": "`len(tasks)` gives the total. You can count done tasks in a loop and use `count_open(tasks)` for open tasks.",
+        "hint_2": "Create three separate line strings, then join them with `\\n` in the correct order."
+      }
+    },
+    {
+      "id": "run-end-to-end-report",
+      "kind": "code_input",
+      "title": "Run the tested capstone flow",
+      "prompt": "Finish the capstone by connecting the tested pieces into one runnable program.\n\nThe provided file `data/tasks.txt` contains task data. Your program should:\n- load the tasks from `data/tasks.txt`\n- build the summary report\n- print the report exactly once\n\nKeep the helper code working from earlier steps. This final step checks a realistic user path from file input to final output.",
+      "starterCode": "class Task:\n    def __init__(self, name, done=False):\n        self.name = name\n        self.done = done\n\n    def label(self):\n        if self.done:\n            prefix = \"[x] \"\n        else:\n            prefix = \"[ ] \"\n        return prefix + self.name\n\n\ndef count_open(tasks):\n    total = 0\n    for task in tasks:\n        if not task.done:\n            total += 1\n    return total\n\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, \"r\") as file:\n        for line in file:\n            line = line.strip()\n            if line == \"\":\n                continue\n            name, status = line.split(\"|\")\n            done = status == \"done\"\n            tasks.append(Task(name, done))\n    return tasks\n\n\ndef build_report(tasks):\n    total = len(tasks)\n    done_count = 0\n    for task in tasks:\n        if task.done:\n            done_count += 1\n    open_count = count_open(tasks)\n    return f\"Total: {total}\\nDone: {done_count}\\nOpen: {open_count}\"\n\n\n# TODO: load tasks from data/tasks.txt\n# TODO: build the report\n# TODO: print the report exactly once\n",
+      "solutionCode": "class Task:\n    def __init__(self, name, done=False):\n        self.name = name\n        self.done = done\n\n    def label(self):\n        if self.done:\n            prefix = \"[x] \"\n        else:\n            prefix = \"[ ] \"\n        return prefix + self.name\n\n\ndef count_open(tasks):\n    total = 0\n    for task in tasks:\n        if not task.done:\n            total += 1\n    return total\n\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, \"r\") as file:\n        for line in file:\n            line = line.strip()\n            if line == \"\":\n                continue\n            name, status = line.split(\"|\")\n            done = status == \"done\"\n            tasks.append(Task(name, done))\n    return tasks\n\n\ndef build_report(tasks):\n    total = len(tasks)\n    done_count = 0\n    for task in tasks:\n        if task.done:\n            done_count += 1\n    open_count = count_open(tasks)\n    return f\"Total: {total}\\nDone: {done_count}\\nOpen: {open_count}\"\n\n\ntasks = load_tasks(\"data/tasks.txt\")\nreport = build_report(tasks)\nprint(report)\n",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Total: 3\nDone: 1\nOpen: 2\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/tasks.txt",
+              "content": "Wash dishes|done\nStudy|open\nRead|open"
+            }
+          ]
+        },
+        {
+          "stdin": "",
+          "stdout": "Total: 4\nDone: 3\nOpen: 1\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/tasks.txt",
+              "content": "Email|done\nClean|done\nPlan trip|open\nPay bill|done"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "data/tasks.txt",
+          "content": "Wash dishes|done\nStudy|open\nRead|open"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Call your helper functions in order, then print the returned report string.",
+      "help": {
+        "concept": "An end-to-end program uses smaller tested parts together: file input, object creation, summary logic, and final output.",
+        "hint_1": "First get the task list from `load_tasks(\"data/tasks.txt\")`, then pass that list into `build_report(...)`.",
+        "hint_2": "Store the returned report in a variable and print that variable once at the end."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Capstone Testing Flow",
+    "stepIds": [
+      "task-format-method",
+      "count-open-tasks",
+      "load-tasks-from-file",
+      "build-summary-report",
+      "run-end-to-end-report"
+    ]
+  }
+}

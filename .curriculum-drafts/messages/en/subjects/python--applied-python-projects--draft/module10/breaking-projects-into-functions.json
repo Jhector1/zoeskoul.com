@@ -1,0 +1,120 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-10-capstone-automation-project": {
+        "breaking-projects-into-functions": {
+          "label": "Breaking Projects Into Functions",
+          "summary": "Plan a capstone project by splitting one larger automation idea into small functions with clear inputs, outputs, and data flow.",
+          "cards": {
+            "sketch0": {
+              "title": "Turn one big project into small jobs"
+            },
+            "sketch1": {
+              "title": "Plan the data flow before coding everything"
+            },
+            "project": {
+              "title": "Capstone Function Plan: Study Session Summary"
+            }
+          },
+          "projectSteps": {
+            "project_step_1": {
+              "title": "Create the first helper function"
+            },
+            "project_step_2": {
+              "title": "Add a total function"
+            },
+            "project_step_3": {
+              "title": "Add an average function"
+            },
+            "project_step_4": {
+              "title": "Build the report line"
+            },
+            "project_step_5": {
+              "title": "Finish the capstone summary function"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_breaking_projects_into_functions_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "You are starting a capstone project that summarizes study sessions. Define a function named `parse_minutes` that takes one string like `\"15, 20, 10\"` and returns a list of integers like `[15, 20, 10]`. Keep all parsing logic inside the function and return the list instead of printing it."
+            }
+          },
+          "quiz": {
+            "project-step-1": {
+              "title": "Create the first helper function",
+              "prompt": "Start the final capstone project. In step 1 of 5, You are starting a capstone project that summarizes study sessions. Define a function named `parse_minutes` that takes one string like `\"15, 20, 10\"` and returns a list of integers like `[15, 20, 10]`. Keep all parsing logic inside the function and return the list instead of printing it.",
+              "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def parse_minutes(text):\n    # Convert a comma-separated string into a list of integers.\n    # Example: \"15, 20, 10\" -> [15, 20, 10]\n    pass"
+            },
+            "project-step-2": {
+              "title": "Add a total function",
+              "prompt": "Continue the final capstone project from the previous working step. In step 2 of 5, Continue the study-session capstone. Define a function named `total_minutes` that takes a list of integers and returns the total number of minutes. This helper should do one job only: add the values and return the result.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n# Capstone step 2: Add a total function\n# Keep the working code above from the previous step.\n# Next, Continue the study-session capstone\n# Add only the focused change for this step below or inside the existing work.\n"
+            },
+            "project-step-3": {
+              "title": "Add an average function",
+              "prompt": "Continue the final capstone project from the previous working step. In step 3 of 5, Build the next helper for the same capstone project. Define a function named `average_minutes` that takes a list of integers and returns the average as a number. You may assume the list is not empty.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "def total_minutes(minutes_list):\n    return sum(minutes_list)\n# Capstone step 3: Add an average function\n# Keep the working code above from the previous step.\n# Next, Build the next helper for the same capstone project\n# Add only the focused change for this step below or inside the existing work.\n"
+            },
+            "project-step-4": {
+              "title": "Build the report line",
+              "prompt": "Continue the final capstone project from the previous working step. In step 4 of 5, Now connect the project pieces. Define a function named `build_report` that takes two arguments: `title` and `minutes_text`. Inside the function, call `parse_minutes`, `total_minutes`, and `average_minutes`. Return one string in this exact format: `Study Plan | total: 45 | average: 15.0`.\n\nUse the helper functions inside `build_report` instead of repeating their logic.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "def average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n# Capstone step 4: Build the report line\n# Keep the working code above from the previous step.\n# Next, Now connect the project pieces\n# Add only the focused change for this step below or inside the existing work.\n"
+            },
+            "project-step-5": {
+              "title": "Finish the capstone summary function",
+              "prompt": "Continue the final capstone project from the previous working step. In step 5 of 5, Complete the polished capstone step. Define a function named `project_summary` that takes `title` and `minutes_text`. It should use the earlier helper functions and return a dictionary with three entries:\n\n- `title` mapped to the project title\n- `total` mapped to the total minutes\n- `report` mapped to the full report string\n\nFor example, calling `project_summary(\"Study Plan\", \"15, 20, 10\")` should return a dictionary containing the title, the total `45`, and the report line built from the helper functions.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n\n\ndef total_minutes(minutes_list):\n    return sum(minutes_list)\n\n\ndef average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n\n\ndef build_report(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    average = average_minutes(minutes_list)\n    return f\"{title} | total: {total} | average: {average}\"\n# Capstone step 5: Finish the capstone summary function\n# Keep the working code above from the previous step.\n# Next, Complete the polished capstone step\n# Add only the focused change for this step below or inside the existing work.\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-10-capstone-automation-project": {
+        "breaking-projects-into-functions": {
+          "functions-plan-overview": {
+            "title": "Turn one big project into small jobs",
+            "bodyMarkdown": "When a project starts to feel too big, break it into **functions**. Each function should do one clear job.\n\nFor example, imagine a simple study-note analyzer. Instead of writing everything in one long block, you can plan functions like this:\n\n```python\ndef clean_text(text):\n    return text.strip().lower()\n\n\ndef count_words(text):\n    words = text.split()\n    return len(words)\n\n\ndef make_report(title, word_count):\n    return f\"{title}: {word_count} words\"\n```\n\nLine by line:\n\n- `clean_text(text)` takes raw text and returns a cleaned version.\n- `count_words(text)` takes text and returns a number.\n- `make_report(title, word_count)` combines values into a final message.\n\nThis is useful because each function has a clear **input** and **output**. That makes the project easier to test, debug, and improve.\n\nA good planning question is: **What should this function receive, and what should it return?**"
+          },
+          "data-flow-between-functions": {
+            "title": "Plan the data flow before coding everything",
+            "bodyMarkdown": "Functions become easier to write when you sketch the data flow first.\n\nHere is a small example plan for a reading tracker summary:\n\n```python\ndef parse_pages(text):\n    parts = text.split(\",\")\n    return [int(part) for part in parts]\n\n\ndef total_pages(page_list):\n    return sum(page_list)\n\n\ndef average_pages(page_list):\n    return sum(page_list) / len(page_list)\n```\n\nThe flow is:\n\n1. `parse_pages` turns one text value into a list of numbers.\n2. `total_pages` uses that list to compute a total.\n3. `average_pages` uses the same list to compute another result.\n\nNotice that one function's return value becomes another function's input. That is the core idea of project planning with functions.\n\nBefore you code a capstone project, write down:\n\n- the main goal\n- the helper functions you need\n- what each function receives\n- what each function returns\n- which function should run first, second, and last\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

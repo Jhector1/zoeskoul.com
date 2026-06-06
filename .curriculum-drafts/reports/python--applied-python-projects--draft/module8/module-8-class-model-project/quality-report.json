@@ -1,0 +1,50 @@
+{
+  "ok": true,
+  "profileId": "python",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "courseSlug": "applied-python-projects",
+  "topicId": "module-8-class-model-project",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 3,
+    "exerciseKinds": {
+      "code_input": 3
+    },
+    "codeInputs": 3,
+    "projects": 3,
+    "capstones": 3,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 2,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 2,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-8-object-oriented-programming/python-8-module-project/module-8-class-model-project",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-programming",
+      "topicId": "module-8-class-model-project",
+      "message": "Topic \"module-8-class-model-project\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-8-object-oriented-programming/python-8-module-project/module-8-class-model-project",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-programming",
+      "topicId": "module-8-class-model-project",
+      "exerciseId": "project-step-3-account-methods",
+      "message": "Exercise \"project-step-3-account-methods\" starterCode appears to contain most of the final solution structure."
+    }
+  ]
+}

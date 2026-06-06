@@ -1,0 +1,27 @@
+{
+  "topicId": "implementing-the-core-loop",
+  "ok": false,
+  "issues": [
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "step2-parse-line",
+      "message": "Exercise \"step2-parse-line\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "step3-build-summary",
+      "message": "Exercise \"step3-build-summary\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "step4-format-report",
+      "message": "Exercise \"step4-format-report\" solutionCode does not satisfy its semantic checks."
+    }
+  ]
+}

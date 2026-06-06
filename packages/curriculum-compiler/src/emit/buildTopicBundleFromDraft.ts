@@ -1,4 +1,5 @@
 import type {
+    ExerciseKind,
     ManifestCard,
     ManifestExercise,
     ManifestSketch,
@@ -13,6 +14,11 @@ import {
 } from "@zoeskoul/curriculum-profiles";
 import { buildExerciseMessageKeys } from "../messages/buildMessageKeys.js";
 import { validateTopicMessageBases } from "../messages/validateTopicMessageBases.js";
+import { applyProgressiveProjectFlow } from "./progressiveProjectFlow.js";
+import {
+    resolveTryItExerciseIdForSketch,
+    resolveTryItSketchIndexes,
+} from "./projectTopicEmission.js";
 import { resolveLogicalSectionSlug } from "./resolveLogicalSectionSlug.js";
 type DraftExercise = TopicAuthoringDraft["quizDraft"][number];
 
@@ -28,42 +34,23 @@ function uniqueNonEmpty(values: string[]) {
     return Array.from(new Set(values.map((x) => x.trim()).filter(Boolean)));
 }
 
-function codeInputIds(draft: TopicAuthoringDraft) {
-    return draft.quizDraft
-        .filter((exercise) => exercise.kind === "code_input")
-        .map((exercise) => exercise.id);
-}
-
 function buildProjectStepIds(
     draft: TopicAuthoringDraft,
+    sourceExercises: DraftExercise[],
     maxSteps = 5,
 ) {
-    const codeIds = codeInputIds(draft);
-    const codeIdSet = new Set(codeIds);
+    const sourceIds = sourceExercises.map((exercise) => exercise.id);
+    const sourceIdSet = new Set(sourceIds);
 
     const explicitStepIds = (draft.projectDraft?.stepIds ?? []).filter((id) =>
-        codeIdSet.has(id),
+        sourceIdSet.has(id),
     );
 
-    return uniqueNonEmpty([...explicitStepIds, ...codeIds]).slice(0, maxSteps);
+    return uniqueNonEmpty([...explicitStepIds, ...sourceIds]).slice(0, maxSteps);
 }
 
 function quizExercises(draft: TopicAuthoringDraft) {
     return draft.quizDraft.filter((exercise) => exercise.kind !== "code_input");
-}
-
-function resolveTryItExerciseId(args: {
-    draft: TopicAuthoringDraft;
-    seed: TopicSeed;
-}) {
-    const explicitId = args.seed.practice?.tryItExerciseId?.trim();
-    if (explicitId) {
-        const hasExercise = args.draft.quizDraft.some((exercise) => exercise.id === explicitId);
-        if (hasExercise) return explicitId;
-    }
-
-    const firstCodeInput = args.draft.quizDraft.find((exercise) => exercise.kind === "code_input");
-    return firstCodeInput?.id;
 }
 
 function projectStepIdFromExerciseId(id: string) {
@@ -78,6 +65,10 @@ function topicMessageRoot(subjectSlug: string, moduleSlug: string, topicId: stri
     return `topics.${subjectSlug}.${moduleSlug}.${topicId}`;
 }
 
+function manifestPreferredKind(value: string | null | undefined): ExerciseKind | null {
+    return value ? (value as ExerciseKind) : null;
+}
+
 export function buildTopicBundleFromDraft(args: {
     shape: SubjectShapePack;
     seed: TopicSeed;
@@ -90,6 +81,20 @@ export function buildTopicBundleFromDraft(args: {
             ? assertProfileSupportsCodeInput(profile)
             : null;
     const kp = shape.subjectManifest.keyPatterns;
+    const topicKind =
+        seed.moduleRole === "capstone" || seed.sectionRole === "capstone"
+            ? "capstone"
+            : seed.sectionRole === "module_project"
+                ? "module_project"
+                : null;
+    const isProjectOnlyTopic = topicKind !== null && !!profile.project;
+    const projectConfig =
+        isProjectOnlyTopic && topicKind
+            ? profile.project?.getProjectConfig({
+                seed,
+                topicKind,
+            }) ?? null
+            : null;
 
     const logicalModuleSlug = seed.moduleSlug;
     const logicalSectionSlug = resolveLogicalSectionSlug({
@@ -99,22 +104,44 @@ export function buildTopicBundleFromDraft(args: {
     const prefix = seed.modulePrefix;
 
     const targets = seed.generationTargets;
+    const sourceProjectExercises = isProjectOnlyTopic && topicKind
+        ? draft.quizDraft.filter((exercise) =>
+            profile.project?.isProjectExercise({
+                exercise,
+                seed,
+                topicKind,
+            }) === true,
+        )
+        : draft.quizDraft.filter((exercise) => exercise.kind === "code_input");
     const projectStepIds = buildProjectStepIds(
         draft,
+        sourceProjectExercises,
         targets?.projectCodeInputTarget ?? 3,
     );
+    const tryItExercises = sourceProjectExercises;
 
-    const quizOnlyExercises = quizExercises(draft);
+    const quizOnlyExercises = isProjectOnlyTopic ? [] : quizExercises(draft);
 
     const quizVisibleDefault = targets?.quizVisibleDefault ?? 4;
     const quizVisibleMax = targets?.quizVisibleMax ?? 6;
     const maxAttempts = targets?.maxAttempts ?? null;
+    const preferredTryItKind =
+        projectConfig?.preferredProjectExerciseKind ??
+        profile.practice?.preferredTryItExerciseKind ??
+        null;
+    const tryItSketchIndexes = new Set(resolveTryItSketchIndexes(draft, seed, profile));
     const sketchCards: ManifestCard[] = draft.sketchBlocks.map((block, index) => {
         const tryItEnabled = seed.practice?.tryIt === true;
-        const tryItSketchIndex = seed.practice?.tryItSketchIndex ?? 0;
         const tryItExerciseId =
-            tryItEnabled && index === tryItSketchIndex
-                ? resolveTryItExerciseId({ draft, seed })
+            tryItEnabled && tryItSketchIndexes.has(index)
+                ? resolveTryItExerciseIdForSketch({
+                    draft,
+                    exercises: tryItExercises,
+                    preferredKind: preferredTryItKind,
+                    profile,
+                    seed,
+                    sketchIndex: index,
+                })
                 : undefined;
 
         return {
@@ -144,10 +171,14 @@ export function buildTopicBundleFromDraft(args: {
                         )}.tryIt.try_${seed.topicId.replace(/-/g, "_")}_sketch${index}.prompt`,
                         exerciseKey: tryItExerciseId,
                         difficulty: "easy" as const,
-                        preferKind: "code_input" as const,
+                        preferKind: manifestPreferredKind(preferredTryItKind),
                         seedPolicy: "global" as const,
                         required: true,
-                        allowReveal: true,
+                        allowReveal:
+                            projectConfig?.tryItDefault?.allowReveal ??
+                            projectConfig?.allowReveal ??
+                            profile.practice?.tryItDefault.allowReveal ??
+                            true,
                         maxAttempts,
                     },
                 }
@@ -156,7 +187,7 @@ export function buildTopicBundleFromDraft(args: {
     });
 
     const quizCard: ManifestCard[] =
-        quizOnlyExercises.length > 0
+        !isProjectOnlyTopic && quizOnlyExercises.length > 0
             ? [
                 {
                     id: "quiz",
@@ -195,9 +226,13 @@ export function buildTopicBundleFromDraft(args: {
                     ),
                     project: {
                         difficulty: "easy",
-                        allowReveal: true,
-                        preferKind: "code_input",
-                        ...(seed.sectionRole === "capstone" || seed.moduleRole === "capstone"
+                        allowReveal: projectConfig?.allowReveal ?? true,
+                        preferKind: manifestPreferredKind(
+                            projectConfig?.preferredProjectExerciseKind ??
+                            profile.practice?.preferredTryItExerciseKind ??
+                            null,
+                        ),
+                        ...(topicKind === "capstone"
                             ? { displayKind: "capstone", uiKind: "capstone" }
                             : {}),
                         maxAttempts,
@@ -214,7 +249,11 @@ export function buildTopicBundleFromDraft(args: {
                                 ),
                                 exerciseKey: exerciseId,
                                 difficulty: "easy",
-                                preferKind: "code_input",
+                                preferKind: manifestPreferredKind(
+                                    projectConfig?.preferredProjectExerciseKind ??
+                                    profile.practice?.preferredTryItExerciseKind ??
+                                    null,
+                                ),
                                 seedPolicy: "global",
                                 maxAttempts,
                                 ...(seed.practice?.projectFlow === "progressive" &&
@@ -245,16 +284,26 @@ export function buildTopicBundleFromDraft(args: {
         ),
     }));
 
+    const projectStepIdSet = new Set(projectStepIds);
+
+    const emittedDraftExercises = isProjectOnlyTopic
+        ? draft.quizDraft.filter((exercise) => projectStepIdSet.has(exercise.id))
+        : draft.quizDraft;
+
     validateTopicMessageBases(
-        draft.quizDraft.map((exercise) => ({
+        emittedDraftExercises.map((exercise) => ({
             id: exercise.id,
             messageBase: (exercise as { messageBase?: string }).messageBase,
         })),
     );
+    const progressiveExercises = applyProgressiveProjectFlow({
+        exercises: emittedDraftExercises,
+        projectStepIds,
+        projectConfig,
+        seed,
+    });
 
-    const projectStepIdSet = new Set(projectStepIds);
-
-    const exercises: ManifestExercise[] = draft.quizDraft.map((exercise) => {
+    const exercises: ManifestExercise[] = progressiveExercises.map((exercise) => {
         const optionIdsForKeys =
             exercise.kind === "single_choice" || exercise.kind === "multi_choice"
                 ? optionIdsFromCount(exercise.options.length)
@@ -273,13 +322,7 @@ export function buildTopicBundleFromDraft(args: {
 
         const messageBase = messageKeys.qualifiedBase;
 
-        /**
-         * Final rule:
-         * - code_input is project.
-         * - non-code is quiz.
-         */
-        const isProjectExercise =
-            exercise.kind === "code_input" || projectStepIdSet.has(exercise.id);
+        const isProjectExercise = projectStepIdSet.has(exercise.id);
 
         if (exercise.kind === "single_choice") {
             const optionIds = optionIdsFromCount(exercise.options.length);
@@ -298,7 +341,7 @@ export function buildTopicBundleFromDraft(args: {
             return {
                 id: exercise.id,
                 kind: "single_choice" as const,
-                purpose: "quiz" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
                 weight: 1,
                 messageBase,
                 optionIds,
@@ -328,7 +371,7 @@ export function buildTopicBundleFromDraft(args: {
             return {
                 id: exercise.id,
                 kind: "multi_choice" as const,
-                purpose: "quiz" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
                 weight: 1,
                 messageBase,
                 optionIds,
@@ -367,7 +410,7 @@ export function buildTopicBundleFromDraft(args: {
             return {
                 id: exercise.id,
                 kind: "drag_reorder" as const,
-                purpose: "quiz" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
                 weight: 1,
                 messageBase,
                 tokenIds,
@@ -398,7 +441,7 @@ export function buildTopicBundleFromDraft(args: {
             return {
                 id: exercise.id,
                 kind: "fill_blank_choice" as const,
-                purpose: "quiz" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
                 weight: 1,
                 messageBase,
                 choiceCount: exercise.choices.length,

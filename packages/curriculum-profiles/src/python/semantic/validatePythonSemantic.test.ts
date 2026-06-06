@@ -2,6 +2,78 @@ import { describe, expect, it } from "vitest";
 import { validatePythonSemantic } from "./validatePythonSemantic.js";
 
 describe("validatePythonSemantic", () => {
+    it("does not treat class methods as standalone function-return exercises", async () => {
+        const result = await validatePythonSemantic({
+            seed: { topicId: "encapsulation-and-responsibility" } as any,
+            draft: {
+                title: "Encapsulation and Responsibility",
+                summary: "Practice object attributes and methods.",
+                minutes: 10,
+                sketchBlocks: [
+                    {
+                        id: "sketch-1",
+                        title: "Example",
+                        bodyMarkdown:
+                            "Example:\n\n```python\nclass Book:\n    def get_info(self):\n        return 'info'\n```\n\nLine by line: the class owns the method, and the method returns information.",
+                    },
+                    {
+                        id: "try-it-yourself",
+                        title: "Try it yourself",
+                        bodyMarkdown:
+                            "Try it yourself: change one method return value, predict the result, then run the code.",
+                    },
+                ],
+                quizDraft: [
+                    {
+                        id: "code-class-method",
+                        kind: "code_input",
+                        title: "Use a class method",
+                        prompt:
+                            "Create a `Book` object, update its title attribute, and print the result of `get_info()`.",
+                        hint: "Call the method on the object.",
+                        help: {
+                            concept:
+                                "Methods can return values that describe object state.",
+                            hint_1: "Create the object first.",
+                            hint_2: "Print the method result.",
+                        },
+                        starterCode:
+                            "class Book:\n" +
+                            "    def __init__(self, title, author):\n" +
+                            "        self.title = title\n" +
+                            "        self.author = author\n" +
+                            "\n" +
+                            "    def get_info(self):\n" +
+                            "        return f\"{self.title} by {self.author}\"\n",
+                        solutionCode:
+                            "class Book:\n" +
+                            "    def __init__(self, title, author):\n" +
+                            "        self.title = title\n" +
+                            "        self.author = author\n" +
+                            "\n" +
+                            "    def get_info(self):\n" +
+                            "        return f\"{self.title} by {self.author}\"\n" +
+                            "\n" +
+                            "book = Book(\"1984\", \"George Orwell\")\n" +
+                            "book.title = \"Animal Farm\"\n" +
+                            "print(book.get_info())\n",
+                        tests: [
+                            {
+                                stdin: "",
+                                stdout: "Animal Farm by George Orwell\n",
+                                match: "exact",
+                            },
+                        ],
+                        recipeType: "fixed_tests",
+                    },
+                ],
+            } as any,
+        });
+
+        expect(result.issues.map((issue) => issue.code)).not.toContain(
+            "PYTHON_FUNCTION_RETURN_MUST_BE_SEMANTIC",
+        );
+    });
     it("flags SQL recipe/runtime fields inside Python code_input exercises", async () => {
         const result = await validatePythonSemantic({
             seed: { topicId: "python-topic" } as any,

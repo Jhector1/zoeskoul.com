@@ -1,0 +1,12 @@
+{
+  "subjectSlug": "python",
+  "courseSlug": "applied-python-projects",
+  "catalogSlug": "python",
+  "trackSlug": "python",
+  "profileId": "python",
+  "workspaceProfileId": "browser-python-files-runner",
+  "workspacePolicyId": "python-browser-workspace",
+  "title": "Applied Python Projects",
+  "level": "beginner",
+  "moduleCount": 3
+}

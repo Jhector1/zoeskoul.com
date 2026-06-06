@@ -1,0 +1,239 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-9-testing-debugging-and-style": {
+        "assertions-and-expected-results": {
+          "label": "Assertions and Expected Results",
+          "summary": "Use assertions to compare actual results with the values you expect, so you can spot bugs quickly and test functions with confidence.",
+          "cards": {
+            "sketch0": {
+              "title": "What an assertion checks"
+            },
+            "sketch1": {
+              "title": "Actual result vs expected result"
+            },
+            "sketch2": {
+              "title": "Using several assertions as simple tests"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice Writing and Checking Assertions"
+            }
+          },
+          "projectSteps": {
+            "ci_assert_1": {
+              "title": "Test a discount function with assertions"
+            },
+            "ci_assert_2": {
+              "title": "Return a label that matches expected text"
+            },
+            "ci_assert_3": {
+              "title": "Fix a function so all assertions pass"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_assertions_and_expected_results_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Complete the `discount_price` function so it returns the price after subtracting the discount amount. Then keep the assertions passing. For example, a price of 20 with a discount of 5 should return 15."
+            },
+            "try_assertions_and_expected_results_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Complete the `status_label` function so it returns the exact string `\"Status: \"` followed by the given word. The assertions should pass for both test cases."
+            },
+            "try_assertions_and_expected_results_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "The function should return the larger of two numbers. Complete `larger(a, b)` so the assertions pass."
+            }
+          },
+          "quiz": {
+            "ci-assert-1": {
+              "title": "Test a discount function with assertions",
+              "prompt": "Complete the `discount_price` function so it returns the price after subtracting the discount amount. Then keep the assertions passing. For example, a price of 20 with a discount of 5 should return 15.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "def discount_price(price, discount):\n    # return the final price after subtracting the discount\n    pass\n\nassert discount_price(20, 5) == 15\nassert discount_price(9, 2) == 7"
+            },
+            "sc-assert-meaning": {
+              "title": "What does an assertion compare?",
+              "prompt": "In a simple test like `assert add(2, 3) == 5`, what is being compared?",
+              "hint": "Look at the value produced by the function and the value written after `==`.",
+              "help": {
+                "concept": "An assertion checks whether the actual result from code matches the expected result you wrote in the test.",
+                "hint_1": "`add(2, 3)` produces one value, and `5` is the expected value for that call.",
+                "hint_2": "The assertion passes only when the function's returned value is exactly equal to the expected value."
+              },
+              "options": {
+                "a": "The function's actual result and the expected value",
+                "b": "Two different variable names",
+                "c": "The code editor and the output panel",
+                "d": "A comment and a string"
+              }
+            },
+            "mc-good-tests": {
+              "title": "Choose good assertion checks",
+              "prompt": "Which assertions are good ways to test a function named `square(n)` that should return `n * n`? Choose all that apply.",
+              "hint": "Pick checks that compare the function's returned value to the correct expected result.",
+              "help": {
+                "concept": "Useful assertions call the function with a specific input and compare its actual return value to the correct expected output for that input.",
+                "hint_1": "A good test for `square` should use `square(...) == ...` with the right result for that input.",
+                "hint_2": "Think about normal cases and edge cases such as zero, but avoid checks that compare unrelated values."
+              },
+              "options": {
+                "a": "assert square(3) == 9",
+                "b": "assert square(0) == 0",
+                "c": "assert 3 == 9",
+                "d": "assert square(4) == 8"
+              }
+            },
+            "dr-test-order": {
+              "title": "Build a basic assertion test",
+              "prompt": "Put these steps in the order that matches a simple actual-versus-expected test.",
+              "hint": "First run the function, then store what you expect, then compare them.",
+              "help": {
+                "concept": "A clear test often follows a sequence: get the actual result, define the expected result, then assert they are equal.",
+                "hint_1": "The function call must happen before you can compare its result.",
+                "hint_2": "The assertion belongs at the end because it checks the values after they are prepared."
+              },
+              "tokens": {
+                "t1": "actual = add(2, 3)",
+                "t2": "expected = 5",
+                "t3": "assert actual == expected"
+              }
+            },
+            "fb-assert-keyword": {
+              "title": "Complete the test keyword",
+              "prompt": "Fill in the missing Python keyword used for a simple check.",
+              "hint": "Use the keyword that raises an error when a condition is false.",
+              "help": {
+                "concept": "Python uses the `the missing term` keyword to verify that a condition is true during testing.",
+                "hint_1": "The missing word comes before a condition like `total == 10`.",
+                "hint_2": "It is the standard testing check keyword, not `return` or `print`."
+              },
+              "template": "[blank1] total == 10",
+              "choices": [
+                "assert",
+                "return",
+                "print",
+                "input"
+              ]
+            },
+            "ci-assert-2": {
+              "title": "Return a label that matches expected text",
+              "prompt": "Complete the `status_label` function so it returns the exact string `\"Status: \"` followed by the given word. The assertions should pass for both test cases.",
+              "hint": "Read the task \"Return a label that matches expected text\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Return a label that matches expected text\".",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "def status_label(word):\n    # return the exact label text\n    pass\n\nassert status_label(\"Ready\") == \"Status: Ready\"\nassert status_label(\"Done\") == \"Status: Done\""
+            },
+            "sc-fail-case": {
+              "title": "Why would this assertion fail?",
+              "prompt": "Suppose `greet(\"Ava\")` returns `\"HelloAva\"`. Why would `assert greet(\"Ava\") == \"Hello Ava\"` fail?",
+              "hint": "Compare the two strings character by character.",
+              "help": {
+                "concept": "String assertions require exact equality, so even one missing space makes the actual and expected results different.",
+                "hint_1": "Look closely between `Hello` and `Ava` in both strings.",
+                "hint_2": "The function output and the expected text differ by one character position, so they are not equal."
+              },
+              "options": {
+                "a": "The returned string is missing a space",
+                "b": "Assertions cannot compare strings",
+                "c": "The function must print instead of return",
+                "d": "The expected result should be a number"
+              }
+            },
+            "mc-edge-cases": {
+              "title": "Pick useful extra test cases",
+              "prompt": "A function `is_even(n)` already has `assert is_even(2) == True`. Which additional assertions would be especially useful to broaden the test coverage? Choose all that apply.",
+              "hint": "Look for inputs that check a different kind of behavior, not just another easy even number.",
+              "help": {
+                "concept": "Good test coverage includes different categories of input, such as odd numbers and edge cases like zero.",
+                "hint_1": "One useful extra case should show what happens for an odd number.",
+                "hint_2": "Another useful extra case checks a boundary-like value that beginners often forget."
+              },
+              "options": {
+                "a": "assert is_even(5) == False",
+                "b": "assert is_even(0) == True",
+                "c": "assert is_even(2) == True",
+                "d": "assert True == True"
+              }
+            },
+            "dr-assert-parts": {
+              "title": "Order the parts of an assertion",
+              "prompt": "Arrange these pieces to form a valid assertion that checks whether `double(4)` returns `8`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "assert",
+                "t2": "double(4)",
+                "t3": "==",
+                "t4": "8"
+              }
+            },
+            "fb-expected-value": {
+              "title": "Fill the expected result",
+              "prompt": "Choose the expected value that makes this test correct for a function that adds two numbers.",
+              "hint": "Work out the result of `add(4, 1)` first.",
+              "help": {
+                "concept": "The expected value in an assertion should be the exact result the function should return for that input.",
+                "hint_1": "Adding 4 and 1 gives a small whole number.",
+                "hint_2": "The correct choice is the sum, not one of the inputs or the equality operator."
+              },
+              "template": "assert add(4, 1) == [blank1]",
+              "choices": [
+                "5",
+                "4",
+                "1",
+                "=="
+              ]
+            },
+            "ci-assert-3": {
+              "title": "Fix a function so all assertions pass",
+              "prompt": "The function should return the larger of two numbers. Complete `larger(a, b)` so the assertions pass.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "def larger(a, b):\n    # return the larger number\n    pass\n\nassert larger(8, 3) == 8\nassert larger(2, 9) == 9\nassert larger(5, 5) == 5"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-9-testing-debugging-and-style": {
+        "assertions-and-expected-results": {
+          "sketch-1": {
+            "title": "What an assertion checks",
+            "bodyMarkdown": "An `assert` statement checks whether something is true right now in your code. If the condition is true, the program keeps going. If it is false, Python raises an error so you know something did not match your expectation.\n\nA common testing pattern is:\n\n```python\ndef double(n):\n    return n * 2\n\nresult = double(4)\nassert result == 8\n```\n\nHere is what happens step by step:\n\n- `double(4)` returns `8`\n- `result` stores that actual value\n- `assert result == 8` compares the actual value to the expected value\n- Because `8 == 8` is true, the check passes\n\nYou can also write the comparison directly:\n\n```python\nassert double(4) == 8\n```\n\nThat means: “I expect `double(4)` to produce `8`.”\n\nWorked example with a bug:\n\n```python\ndef greet(name):\n    return \"Hello\" + name\n\nassert greet(\"Mia\") == \"Hello Mia\"\n```\n\nLine by line:\n\n- The function joins two pieces of text\n- But it forgets the space after `Hello`\n- The actual result becomes `\"HelloMia\"`\n- The expected result is `\"Hello Mia\"`\n- The assertion fails because the strings are not exactly the same\n\nTry it yourself: write a small function in the code editor, then add one `assert` that should pass and one that would fail if the function had a bug."
+          },
+          "sketch-2": {
+            "title": "Actual result vs expected result",
+            "bodyMarkdown": "Good tests compare two clear things:\n\n- **actual result**: what the code really returns or prints\n- **expected result**: what you believe it should return or print\n\nExample:\n\n```python\ndef add(a, b):\n    return a + b\n\nactual = add(2, 3)\nexpected = 5\nassert actual == expected\n```\n\nThis is useful because it makes your thinking visible. You are not just running code and hoping it looks right. You are stating the exact result you expect.\n\nBe careful with exact matches. For strings, spaces and punctuation matter.\n\n```python\ndef label(score):\n    return \"Score: \" + str(score)\n\nassert label(7) == \"Score: 7\"\n```\n\nIf the function returned `\"Score:7\"` instead, the assertion would fail because the space is missing.\n\nYour turn: change the expected string to a wrong value and predict whether the assertion will pass or fail before you click Run.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch-3": {
+            "title": "Using several assertions as simple tests",
+            "bodyMarkdown": "One assertion checks one case. Several assertions can test a function more thoroughly.\n\n```python\ndef is_even(n):\n    return n % 2 == 0\n\nassert is_even(2) == True\nassert is_even(5) == False\nassert is_even(0) == True\n```\n\nWhy these cases?\n\n- `2` is a normal even number\n- `5` is an odd number\n- `0` is a useful edge case that people sometimes forget\n\nThis helps you catch bugs that only appear for certain inputs.\n\nYou can also add a message to make failures clearer:\n\n```python\nassert is_even(5) == False, \"5 should not be even\"\n```\n\nThat message appears if the assertion fails.\n\nTry this: after writing one passing assertion, add a second assertion with a different input value. Then ask yourself whether you tested only the easy case or also a tricky one.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

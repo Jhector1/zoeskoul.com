@@ -40,7 +40,7 @@ describe("resolveAuthoringPolicyChain", () => {
     it("resolves subject shared profile/workspace/validation and Python course validation policy in order", async () => {
         const policy = await resolveAuthoringPolicyChain({
             subjectSlug: "python",
-            courseSlug: "python-for-beginners",
+            courseSlug: "python-v2",
             includeProjectPolicy: true,
         });
 
@@ -49,7 +49,7 @@ describe("resolveAuthoringPolicyChain", () => {
                 expect.stringContaining("authoring/subjects/python/shared/profile.json"),
                 expect.stringContaining("authoring/subjects/python/shared/workspace.policy.json"),
                 expect.stringContaining("authoring/subjects/python/shared/validation.policy.json"),
-                expect.stringContaining("authoring/subjects/python/courses/python-for-beginners/validation.policy.json"),
+                expect.stringContaining("authoring/subjects/python/courses/python-v2/validation.policy.json"),
             ]),
         );
         expect(policy.workspaceProfileId).toBe("browser-code-runner");

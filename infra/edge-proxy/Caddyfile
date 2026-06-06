@@ -1,0 +1,143 @@
+{
+	servers {
+		# Trust Cloudflare proxies so Caddy can accept CF-Connecting-IP as the real client IP
+
+		# Cloudflare IPv4
+		trusted_proxies static 173.245.48.0/20
+		trusted_proxies static 103.21.244.0/22
+		trusted_proxies static 103.22.200.0/22
+		trusted_proxies static 103.31.4.0/22
+		trusted_proxies static 141.101.64.0/18
+		trusted_proxies static 108.162.192.0/18
+		trusted_proxies static 190.93.240.0/20
+		trusted_proxies static 188.114.96.0/20
+		trusted_proxies static 197.234.240.0/22
+		trusted_proxies static 198.41.128.0/17
+		trusted_proxies static 162.158.0.0/15
+		trusted_proxies static 104.16.0.0/13
+		trusted_proxies static 104.24.0.0/14
+		trusted_proxies static 172.64.0.0/13
+		trusted_proxies static 131.0.72.0/22
+
+		# Cloudflare IPv6
+		trusted_proxies static 2400:cb00::/32
+		trusted_proxies static 2606:4700::/32
+		trusted_proxies static 2803:f800::/32
+		trusted_proxies static 2405:b500::/32
+		trusted_proxies static 2405:8100::/32
+		trusted_proxies static 2a06:98c0::/29
+		trusted_proxies static 2c0f:f248::/32
+
+		# Which header to trust as the client IP (since we trust Cloudflare)
+		client_ip_headers CF-Connecting-IP
+	}
+}
+
+# ----------------------------
+# Reusable snippets
+# ----------------------------
+
+(common) {
+	encode zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+		X-Frame-Options "SAMEORIGIN"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+	}
+}
+
+(log_json) {
+	log {
+		output file /var/log/caddy/access.log
+		format json
+	}
+}
+
+# ----------------------------
+# Sites
+# ----------------------------
+
+ziledigital.com, www.ziledigital.com {
+	import common
+	import log_json
+
+	reverse_proxy ziledigital-app:3003 {
+		# Optional: provide a single “real ip” header apps commonly read
+		header_up X-Real-IP {http.request.header.CF-Connecting-IP}
+	}
+}
+
+admin.ziledigital.com {
+	import common
+	import log_json
+
+	reverse_proxy admin-app:3002 {
+		header_up X-Real-IP {http.request.header.CF-Connecting-IP}
+	}
+}
+
+jeanyveshector.com {
+	import common
+	import log_json
+
+	reverse_proxy jeanyvesart-app:3001 {
+		header_up X-Real-IP {http.request.header.CF-Connecting-IP}
+	}
+}
+
+server.jeanyveshector.com {
+	import common
+	import log_json
+
+	reverse_proxy jeanyvesart-server-app:8080 {
+		header_up X-Real-IP {http.request.header.CF-Connecting-IP}
+	}
+}
+
+art.jeanyveshector.com {
+	import common
+	import log_json
+
+	reverse_proxy jeanart-app:3005 {
+		header_up X-Real-IP {http.request.header.CF-Connecting-IP}
+	}
+}
+
+server.masyglink.com {
+	import common
+	import log_json
+
+	reverse_proxy masyg-extractor-app:5000 {
+		header_up X-Real-IP {http.request.header.CF-Connecting-IP}
+	}
+}
+
+accounts.ziledigital.com {
+	import common
+	import log_json
+
+	reverse_proxy keycloak:8080 {
+		header_up X-Real-IP {http.request.header.CF-Connecting-IP}
+	}
+}
+
+judge0.masyglink.com {
+	import common
+	import log_json
+
+	reverse_proxy judge0:2358 {
+		header_up X-Real-IP {http.request.header.CF-Connecting-IP}
+	}
+}
+
+runner.zoeskoul.com {
+	import common
+	import log_json
+
+	reverse_proxy runner:4001 {
+		header_up X-Real-IP {http.request.header.CF-Connecting-IP}
+	}
+}
+

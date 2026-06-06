@@ -278,11 +278,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(students)\nprint(scores)\n",
+        "solutionCode": "students = []\nstudents.append('Ava')\nstudents.append('Mia')\nstudents.append('Zoe')\nprint(students)\n\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(scores)\n",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(students)\nprint(scores)\n",
+            "content": "students = []\nstudents.append('Ava')\nstudents.append('Mia')\nstudents.append('Zoe')\nprint(students)\n\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(scores)\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -335,7 +335,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "students = ['Ava', 'Mia', 'Zoe']\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(students)\nprint(scores)\n",
+          "content": "students = []\nstudents.append('Ava')\nstudents.append('Mia')\nstudents.append('Zoe')\nprint(students)\n\nscores = {'Ava': 92, 'Mia': 85, 'Zoe': 97}\nprint(scores)\n",
           "language": "python",
           "isEntry": true,
           "entry": true

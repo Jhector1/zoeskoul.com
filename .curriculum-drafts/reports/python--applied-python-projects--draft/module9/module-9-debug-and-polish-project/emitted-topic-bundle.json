@@ -1,0 +1,484 @@
+{
+  "topicId": "module-9-debug-and-polish-project",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-9-testing-debugging-and-style",
+  "sectionSlug": "python--applied-python-projects--draft-python-9-module-project",
+  "prefix": "py9",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.cards.sketch0.title",
+      "sketchId": "debug-polish-overview",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-9-debug-and-polish-project-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.tryIt.try_module_9_debug_and_polish_project_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.tryIt.try_module_9_debug_and_polish_project_sketch0.prompt",
+        "exerciseKey": "score-report-step-1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.cards.sketch1.title",
+      "sketchId": "debugging-with-small-checks",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-9-debug-and-polish-project-sketch1",
+        "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.tryIt.try_module_9_debug_and_polish_project_sketch1.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.tryIt.try_module_9_debug_and_polish_project_sketch1.prompt",
+        "exerciseKey": "score-report-step-2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.cards.sketch2.title",
+      "sketchId": "polish-for-readability",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-9-debug-and-polish-project-sketch2",
+        "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.tryIt.try_module_9_debug_and_polish_project_sketch2.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.tryIt.try_module_9_debug_and_polish_project_sketch2.prompt",
+        "exerciseKey": "score-report-step-3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "score_report_step_1",
+            "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.projectSteps.score_report_step_1.title",
+            "exerciseKey": "score-report-step-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "score_report_step_2",
+            "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.projectSteps.score_report_step_2.title",
+            "exerciseKey": "score-report-step-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "score_report_step_3",
+            "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.projectSteps.score_report_step_3.title",
+            "exerciseKey": "score-report-step-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "debug-polish-overview",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.debug-polish-overview.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.debug-polish-overview.bodyMarkdown"
+    },
+    {
+      "id": "debugging-with-small-checks",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.debugging-with-small-checks.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.debugging-with-small-checks.bodyMarkdown"
+    },
+    {
+      "id": "polish-for-readability",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.polish-for-readability.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.polish-for-readability.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "score-report-step-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.quiz.score-report-step-1",
+      "language": "python",
+      "starterCode": "class ScoreReport:\n    def __init__(self, name, scores):\n        # TODO: fix these assignments so the object stores the right data\n        self.name = scores\n        self.scores = name",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class ScoreReport:\n    def __init__(self, name, scores):\n        # TODO: fix these assignments so the object stores the right data\n        self.name = scores\n        self.scores = name",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class ScoreReport:\n    def __init__(self, name, scores):\n        # TODO: fix these assignments so the object stores the right data\n        self.name = scores\n        self.scores = name",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class ScoreReport:\n    def __init__(self, name, scores):\n        # TODO: fix these assignments so the object stores the right data\n        self.name = scores\n        self.scores = name",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "ScoreReport",
+            "message": "Define a class named ScoreReport."
+          },
+          {
+            "type": "constructible",
+            "className": "ScoreReport",
+            "constructorArgs": [
+              "Ava",
+              [
+                80,
+                90,
+                100
+              ]
+            ],
+            "message": "ScoreReport should be constructible with a name and a list of scores."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "ScoreReport",
+            "constructorArgs": [
+              "Ava",
+              [
+                80,
+                90,
+                100
+              ]
+            ],
+            "attributes": [
+              "name",
+              "scores"
+            ],
+            "message": "The instance should store both name and scores attributes."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "ScoreReport",
+            "constructorArgs": [
+              "Leo",
+              [
+                70,
+                75
+              ]
+            ],
+            "attributes": [
+              "name",
+              "scores"
+            ],
+            "message": "The instance should also store the same attributes for a different input."
+          },
+          {
+            "type": "no_stdout",
+            "message": "Do not print output for this step."
+          }
+        ]
+      }
+    },
+    {
+      "id": "score-report-step-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.quiz.score-report-step-2",
+      "language": "python",
+      "starterCode": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n# Project step 2: Project Step 2: Fix the average method\n# Keep the working code above from the previous step.\n# Next, Continue the score-report project\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n# Project step 2: Project Step 2: Fix the average method\n# Keep the working code above from the previous step.\n# Next, Continue the score-report project\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n\n    def average_score(self):\n        total = sum(self.scores)\n        count = len(self.scores)\n        return total / count",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n# Project step 2: Project Step 2: Fix the average method\n# Keep the working code above from the previous step.\n# Next, Continue the score-report project\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n# Project step 2: Project Step 2: Fix the average method\n# Keep the working code above from the previous step.\n# Next, Continue the score-report project\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n\n    def average_score(self):\n        total = sum(self.scores)\n        count = len(self.scores)\n        return total / count",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n\n    def average_score(self):\n        total = sum(self.scores)\n        count = len(self.scores)\n        return total / count",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "ScoreReport",
+            "message": "Define a class named ScoreReport."
+          },
+          {
+            "type": "method_returns",
+            "className": "ScoreReport",
+            "constructorArgs": [
+              "Ava",
+              [
+                80,
+                90,
+                100
+              ]
+            ],
+            "constructorArgKinds": [],
+            "methodName": "average_score",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 90,
+            "expectedKind": "value",
+            "message": "average_score() should return the mean for three scores."
+          },
+          {
+            "type": "method_returns",
+            "className": "ScoreReport",
+            "constructorArgs": [
+              "Leo",
+              [
+                70,
+                75
+              ]
+            ],
+            "constructorArgKinds": [],
+            "methodName": "average_score",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 72.5,
+            "expectedKind": "value",
+            "message": "average_score() should return the mean for two scores."
+          },
+          {
+            "type": "no_stdout",
+            "message": "Do not print output for this step."
+          }
+        ]
+      }
+    },
+    {
+      "id": "score-report-step-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.module-9-debug-and-polish-project.quiz.score-report-step-3",
+      "language": "python",
+      "starterCode": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n\n    def average_score(self):\n        total = sum(self.scores)\n        count = len(self.scores)\n        return total / count\n# Project step 3: Project Step 3: Polish the summary output\n# Keep the working code above from the previous step.\n# Next, Finish the score-report project by adding a `summary()` method\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n\n    def average_score(self):\n        total = sum(self.scores)\n        count = len(self.scores)\n        return total / count\n# Project step 3: Project Step 3: Polish the summary output\n# Keep the working code above from the previous step.\n# Next, Finish the score-report project by adding a `summary()` method\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n\n    def average_score(self):\n        total = sum(self.scores)\n        count = len(self.scores)\n        return total / count\n\n    def summary(self):\n        average = self.average_score()\n        return f\"{self.name}: {average:.1f}\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n\n    def average_score(self):\n        total = sum(self.scores)\n        count = len(self.scores)\n        return total / count\n# Project step 3: Project Step 3: Polish the summary output\n# Keep the working code above from the previous step.\n# Next, Finish the score-report project by adding a `summary()` method\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n\n    def average_score(self):\n        total = sum(self.scores)\n        count = len(self.scores)\n        return total / count\n# Project step 3: Project Step 3: Polish the summary output\n# Keep the working code above from the previous step.\n# Next, Finish the score-report project by adding a `summary()` method\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n\n    def average_score(self):\n        total = sum(self.scores)\n        count = len(self.scores)\n        return total / count\n\n    def summary(self):\n        average = self.average_score()\n        return f\"{self.name}: {average:.1f}\"",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class ScoreReport:\n    def __init__(self, name, scores):\n        self.name = name\n        self.scores = scores\n\n    def average_score(self):\n        total = sum(self.scores)\n        count = len(self.scores)\n        return total / count\n\n    def summary(self):\n        average = self.average_score()\n        return f\"{self.name}: {average:.1f}\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "ScoreReport",
+            "message": "Define a class named ScoreReport."
+          },
+          {
+            "type": "method_returns",
+            "className": "ScoreReport",
+            "constructorArgs": [
+              "Ava",
+              [
+                80,
+                90,
+                100
+              ]
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Ava: 90.0",
+            "expectedKind": "value",
+            "message": "summary() should format the name and average for three scores."
+          },
+          {
+            "type": "method_returns",
+            "className": "ScoreReport",
+            "constructorArgs": [
+              "Mina",
+              [
+                88,
+                92
+              ]
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Mina: 90.0",
+            "expectedKind": "value",
+            "message": "summary() should format the name and average for two scores."
+          },
+          {
+            "type": "method_returns",
+            "className": "ScoreReport",
+            "constructorArgs": [
+              "Kai",
+              [
+                100,
+                100,
+                80
+              ]
+            ],
+            "constructorArgKinds": [],
+            "methodName": "average_score",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 93.33333333333333,
+            "expectedKind": "value",
+            "message": "summary() should rely on a working average_score() method."
+          },
+          {
+            "type": "no_stdout",
+            "message": "Do not print output for this step."
+          }
+        ]
+      }
+    }
+  ]
+}

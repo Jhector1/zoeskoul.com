@@ -4,6 +4,7 @@ import type {
     ReviewTopicShape,
 } from "@/lib/subjects/types";
 import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
+import { TOPIC_MANIFESTS as APPLIED_PYTHON_PROJECTS_TOPIC_MANIFESTS } from "@/lib/subjects/applied-python-projects/topics.generated";
 import { TOPIC_MANIFESTS as PYTHON_TOPIC_MANIFESTS } from "@/lib/subjects/python/topics.generated";
 import { TOPIC_MANIFESTS as PYTHON_V2_TOPIC_MANIFESTS } from "@/lib/subjects/python-v2/topics.generated";
 import { TOPIC_MANIFESTS as PYTHON_DATA_FUNCTIONS_TOPIC_MANIFESTS } from "@/lib/subjects/python-data-functions/topics.generated";
@@ -59,6 +60,8 @@ function getTopicManifestForSubject(
     if (!topicId) return null;
 
     switch (subjectSlug) {
+        case "applied-python-projects":
+            return APPLIED_PYTHON_PROJECTS_TOPIC_MANIFESTS[topicId] ?? null;
         case "python":
             return PYTHON_TOPIC_MANIFESTS[topicId] ?? null;
         case "python-v2":

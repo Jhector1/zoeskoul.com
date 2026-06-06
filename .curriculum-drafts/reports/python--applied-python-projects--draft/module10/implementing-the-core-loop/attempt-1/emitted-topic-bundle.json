@@ -1,0 +1,691 @@
+{
+  "topicId": "implementing-the-core-loop",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-10-capstone-automation-project",
+  "sectionSlug": "python--applied-python-projects--draft-python-10-building-and-polishing",
+  "prefix": "py10",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.cards.sketch0.title",
+      "sketchId": "core-loop-overview",
+      "height": 420,
+      "tryIt": {
+        "id": "try-implementing-the-core-loop-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.tryIt.try_implementing_the_core_loop_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.tryIt.try_implementing_the_core_loop_sketch0.prompt",
+        "exerciseKey": "step1-read-lines",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.cards.sketch1.title",
+      "sketchId": "project-flow",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "step1_read_lines",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.projectSteps.step1_read_lines.title",
+            "exerciseKey": "step1-read-lines",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "step2_parse_line",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.projectSteps.step2_parse_line.title",
+            "exerciseKey": "step2-parse-line",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step3_build_summary",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.projectSteps.step3_build_summary.title",
+            "exerciseKey": "step3-build-summary",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step4_format_report",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.projectSteps.step4_format_report.title",
+            "exerciseKey": "step4-format-report",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step5_connect_workflow",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.projectSteps.step5_connect_workflow.title",
+            "exerciseKey": "step5-connect-workflow",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "core-loop-overview",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.core-loop-overview.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.core-loop-overview.bodyMarkdown"
+    },
+    {
+      "id": "project-flow",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.project-flow.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.project-flow.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "step1-read-lines",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.quiz.step1-read-lines",
+      "language": "python",
+      "starterCode": "def read_entries(text):\n    # Return a list of cleaned, non-empty lines.\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def read_entries(text):\n    # Return a list of cleaned, non-empty lines.\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def read_entries(text):\n    cleaned_lines = []\n\n    for line in text.splitlines():\n        stripped = line.strip()\n        if stripped:\n            cleaned_lines.append(stripped)\n\n    return cleaned_lines",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def read_entries(text):\n    # Return a list of cleaned, non-empty lines.\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def read_entries(text):\n    # Return a list of cleaned, non-empty lines.\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def read_entries(text):\n    cleaned_lines = []\n\n    for line in text.splitlines():\n        stripped = line.strip()\n        if stripped:\n            cleaned_lines.append(stripped)\n\n    return cleaned_lines",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def read_entries(text):\n    cleaned_lines = []\n\n    for line in text.splitlines():\n        stripped = line.strip()\n        if stripped:\n            cleaned_lines.append(stripped)\n\n    return cleaned_lines",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "read_entries",
+            "args": [
+              " food, 12\\n\\n travel, 8 \\n"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              "food, 12",
+              "travel, 8"
+            ],
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "read_entries",
+            "args": [
+              "books, 5\\nmovies, 11\\n   \\n games, 7"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              "books, 5",
+              "movies, 11",
+              "games, 7"
+            ],
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "step2-parse-line",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.quiz.step2-parse-line",
+      "language": "python",
+      "starterCode": "def read_entries(text):\n    cleaned_lines = []\n\n    for line in text.splitlines():\n        stripped = line.strip()\n        if stripped:\n            cleaned_lines.append(stripped)\n\n    return cleaned_lines\n# Capstone step 2: Parse one project line\n# Keep the working code above from the previous step.\n# Next, Create a function named `parse_entry(line)` that reads one line in the format `category, amount` and returns a dictionary with keys `category` and `amount`\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def read_entries(text):\n    cleaned_lines = []\n\n    for line in text.splitlines():\n        stripped = line.strip()\n        if stripped:\n            cleaned_lines.append(stripped)\n\n    return cleaned_lines\n# Capstone step 2: Parse one project line\n# Keep the working code above from the previous step.\n# Next, Create a function named `parse_entry(line)` that reads one line in the format `category, amount` and returns a dictionary with keys `category` and `amount`\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def parse_entry(line):\n    category_text, amount_text = line.split(\",\", 1)\n    category = category_text.strip()\n    amount = int(amount_text.strip())\n    return {\"category\": category, \"amount\": amount}",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def read_entries(text):\n    cleaned_lines = []\n\n    for line in text.splitlines():\n        stripped = line.strip()\n        if stripped:\n            cleaned_lines.append(stripped)\n\n    return cleaned_lines\n# Capstone step 2: Parse one project line\n# Keep the working code above from the previous step.\n# Next, Create a function named `parse_entry(line)` that reads one line in the format `category, amount` and returns a dictionary with keys `category` and `amount`\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def read_entries(text):\n    cleaned_lines = []\n\n    for line in text.splitlines():\n        stripped = line.strip()\n        if stripped:\n            cleaned_lines.append(stripped)\n\n    return cleaned_lines\n# Capstone step 2: Parse one project line\n# Keep the working code above from the previous step.\n# Next, Create a function named `parse_entry(line)` that reads one line in the format `category, amount` and returns a dictionary with keys `category` and `amount`\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def parse_entry(line):\n    category_text, amount_text = line.split(\",\", 1)\n    category = category_text.strip()\n    amount = int(amount_text.strip())\n    return {\"category\": category, \"amount\": amount}",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def parse_entry(line):\n    category_text, amount_text = line.split(\",\", 1)\n    category = category_text.strip()\n    amount = int(amount_text.strip())\n    return {\"category\": category, \"amount\": amount}",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "parse_entry",
+            "args": [
+              " travel, 18 "
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              [
+                "category",
+                "travel"
+              ],
+              [
+                "amount",
+                18
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "parse_entry",
+            "args": [
+              "food,7"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              [
+                "category",
+                "food"
+              ],
+              [
+                "amount",
+                7
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "step3-build-summary",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.quiz.step3-build-summary",
+      "language": "python",
+      "starterCode": "def parse_entry(line):\n    category_text, amount_text = line.split(\",\", 1)\n    category = category_text.strip()\n    amount = int(amount_text.strip())\n    return {\"category\": category, \"amount\": amount}\n# Capstone step 3: Build totals from parsed entries\n# Keep the working code above from the previous step.\n# Next, Create a function named `build_summary(entries)` that takes a list of entry dictionaries\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def parse_entry(line):\n    category_text, amount_text = line.split(\",\", 1)\n    category = category_text.strip()\n    amount = int(amount_text.strip())\n    return {\"category\": category, \"amount\": amount}\n# Capstone step 3: Build totals from parsed entries\n# Keep the working code above from the previous step.\n# Next, Create a function named `build_summary(entries)` that takes a list of entry dictionaries\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_summary(entries):\n    summary = {}\n\n    for entry in entries:\n        category = entry[\"category\"]\n        amount = entry[\"amount\"]\n\n        if category not in summary:\n            summary[category] = 0\n\n        summary[category] += amount\n\n    return summary",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def parse_entry(line):\n    category_text, amount_text = line.split(\",\", 1)\n    category = category_text.strip()\n    amount = int(amount_text.strip())\n    return {\"category\": category, \"amount\": amount}\n# Capstone step 3: Build totals from parsed entries\n# Keep the working code above from the previous step.\n# Next, Create a function named `build_summary(entries)` that takes a list of entry dictionaries\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def parse_entry(line):\n    category_text, amount_text = line.split(\",\", 1)\n    category = category_text.strip()\n    amount = int(amount_text.strip())\n    return {\"category\": category, \"amount\": amount}\n# Capstone step 3: Build totals from parsed entries\n# Keep the working code above from the previous step.\n# Next, Create a function named `build_summary(entries)` that takes a list of entry dictionaries\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def build_summary(entries):\n    summary = {}\n\n    for entry in entries:\n        category = entry[\"category\"]\n        amount = entry[\"amount\"]\n\n        if category not in summary:\n            summary[category] = 0\n\n        summary[category] += amount\n\n    return summary",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_summary(entries):\n    summary = {}\n\n    for entry in entries:\n        category = entry[\"category\"]\n        amount = entry[\"amount\"]\n\n        if category not in summary:\n            summary[category] = 0\n\n        summary[category] += amount\n\n    return summary",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_summary",
+            "args": [
+              [
+                [
+                  [
+                    "category",
+                    "food"
+                  ],
+                  [
+                    "amount",
+                    12
+                  ]
+                ],
+                [
+                  [
+                    "category",
+                    "travel"
+                  ],
+                  [
+                    "amount",
+                    8
+                  ]
+                ],
+                [
+                  [
+                    "category",
+                    "food"
+                  ],
+                  [
+                    "amount",
+                    3
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": [
+              [
+                "food",
+                15
+              ],
+              [
+                "travel",
+                8
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_summary",
+            "args": [
+              [
+                [
+                  [
+                    "category",
+                    "books"
+                  ],
+                  [
+                    "amount",
+                    5
+                  ]
+                ],
+                [
+                  [
+                    "category",
+                    "games"
+                  ],
+                  [
+                    "amount",
+                    7
+                  ]
+                ],
+                [
+                  [
+                    "category",
+                    "books"
+                  ],
+                  [
+                    "amount",
+                    10
+                  ]
+                ],
+                [
+                  [
+                    "category",
+                    "games"
+                  ],
+                  [
+                    "amount",
+                    1
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": [
+              [
+                "books",
+                15
+              ],
+              [
+                "games",
+                8
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "step4-format-report",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.quiz.step4-format-report",
+      "language": "python",
+      "starterCode": "def build_summary(entries):\n    summary = {}\n\n    for entry in entries:\n        category = entry[\"category\"]\n        amount = entry[\"amount\"]\n\n        if category not in summary:\n            summary[category] = 0\n\n        summary[category] += amount\n\n    return summary\n# Capstone step 4: Format the final report\n# Keep the working code above from the previous step.\n# Next, Create a function named `format_report(summary)` that takes a summary dictionary and returns a multi-line string\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_summary(entries):\n    summary = {}\n\n    for entry in entries:\n        category = entry[\"category\"]\n        amount = entry[\"amount\"]\n\n        if category not in summary:\n            summary[category] = 0\n\n        summary[category] += amount\n\n    return summary\n# Capstone step 4: Format the final report\n# Keep the working code above from the previous step.\n# Next, Create a function named `format_report(summary)` that takes a summary dictionary and returns a multi-line string\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def format_report(summary):\n    lines = [\"Project Summary\"]\n\n    for category in sorted(summary):\n        lines.append(f\"{category}: {summary[category]}\")\n\n    return \"\\n\".join(lines)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def build_summary(entries):\n    summary = {}\n\n    for entry in entries:\n        category = entry[\"category\"]\n        amount = entry[\"amount\"]\n\n        if category not in summary:\n            summary[category] = 0\n\n        summary[category] += amount\n\n    return summary\n# Capstone step 4: Format the final report\n# Keep the working code above from the previous step.\n# Next, Create a function named `format_report(summary)` that takes a summary dictionary and returns a multi-line string\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_summary(entries):\n    summary = {}\n\n    for entry in entries:\n        category = entry[\"category\"]\n        amount = entry[\"amount\"]\n\n        if category not in summary:\n            summary[category] = 0\n\n        summary[category] += amount\n\n    return summary\n# Capstone step 4: Format the final report\n# Keep the working code above from the previous step.\n# Next, Create a function named `format_report(summary)` that takes a summary dictionary and returns a multi-line string\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def format_report(summary):\n    lines = [\"Project Summary\"]\n\n    for category in sorted(summary):\n        lines.append(f\"{category}: {summary[category]}\")\n\n    return \"\\n\".join(lines)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def format_report(summary):\n    lines = [\"Project Summary\"]\n\n    for category in sorted(summary):\n        lines.append(f\"{category}: {summary[category]}\")\n\n    return \"\\n\".join(lines)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "format_report",
+            "args": [
+              [
+                [
+                  "travel",
+                  8
+                ],
+                [
+                  "food",
+                  15
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": "Project Summary\nfood: 15\ntravel: 8",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "format_report",
+            "args": [
+              [
+                [
+                  "books",
+                  5
+                ],
+                [
+                  "games",
+                  12
+                ],
+                [
+                  "art",
+                  3
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": "Project Summary\nart: 3\nbooks: 5\ngames: 12",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "step5-connect-workflow",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.quiz.step5-connect-workflow",
+      "language": "python",
+      "starterCode": "def format_report(summary):\n    lines = [\"Project Summary\"]\n\n    for category in sorted(summary):\n        lines.append(f\"{category}: {summary[category]}\")\n\n    return \"\\n\".join(lines)\n# Capstone step 5: Connect the full workflow\n# Keep the working code above from the previous step.\n# Next, Finish the capstone workflow by creating a function named `run_project(text)`\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def format_report(summary):\n    lines = [\"Project Summary\"]\n\n    for category in sorted(summary):\n        lines.append(f\"{category}: {summary[category]}\")\n\n    return \"\\n\".join(lines)\n# Capstone step 5: Connect the full workflow\n# Keep the working code above from the previous step.\n# Next, Finish the capstone workflow by creating a function named `run_project(text)`\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def read_entries(text):\n    cleaned_lines = []\n    for line in text.splitlines():\n        stripped = line.strip()\n        if stripped:\n            cleaned_lines.append(stripped)\n    return cleaned_lines\n\n\ndef parse_entry(line):\n    category_text, amount_text = line.split(\",\", 1)\n    category = category_text.strip()\n    amount = int(amount_text.strip())\n    return {\"category\": category, \"amount\": amount}\n\n\ndef build_summary(entries):\n    summary = {}\n    for entry in entries:\n        category = entry[\"category\"]\n        amount = entry[\"amount\"]\n        if category not in summary:\n            summary[category] = 0\n        summary[category] += amount\n    return summary\n\n\ndef format_report(summary):\n    lines = [\"Project Summary\"]\n    for category in sorted(summary):\n        lines.append(f\"{category}: {summary[category]}\")\n    return \"\\n\".join(lines)\n\n\ndef run_project(text):\n    lines = read_entries(text)\n    entries = []\n\n    for line in lines:\n        entries.append(parse_entry(line))\n\n    summary = build_summary(entries)\n    return format_report(summary)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def format_report(summary):\n    lines = [\"Project Summary\"]\n\n    for category in sorted(summary):\n        lines.append(f\"{category}: {summary[category]}\")\n\n    return \"\\n\".join(lines)\n# Capstone step 5: Connect the full workflow\n# Keep the working code above from the previous step.\n# Next, Finish the capstone workflow by creating a function named `run_project(text)`\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def format_report(summary):\n    lines = [\"Project Summary\"]\n\n    for category in sorted(summary):\n        lines.append(f\"{category}: {summary[category]}\")\n\n    return \"\\n\".join(lines)\n# Capstone step 5: Connect the full workflow\n# Keep the working code above from the previous step.\n# Next, Finish the capstone workflow by creating a function named `run_project(text)`\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def read_entries(text):\n    cleaned_lines = []\n    for line in text.splitlines():\n        stripped = line.strip()\n        if stripped:\n            cleaned_lines.append(stripped)\n    return cleaned_lines\n\n\ndef parse_entry(line):\n    category_text, amount_text = line.split(\",\", 1)\n    category = category_text.strip()\n    amount = int(amount_text.strip())\n    return {\"category\": category, \"amount\": amount}\n\n\ndef build_summary(entries):\n    summary = {}\n    for entry in entries:\n        category = entry[\"category\"]\n        amount = entry[\"amount\"]\n        if category not in summary:\n            summary[category] = 0\n        summary[category] += amount\n    return summary\n\n\ndef format_report(summary):\n    lines = [\"Project Summary\"]\n    for category in sorted(summary):\n        lines.append(f\"{category}: {summary[category]}\")\n    return \"\\n\".join(lines)\n\n\ndef run_project(text):\n    lines = read_entries(text)\n    entries = []\n\n    for line in lines:\n        entries.append(parse_entry(line))\n\n    summary = build_summary(entries)\n    return format_report(summary)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def read_entries(text):\n    cleaned_lines = []\n    for line in text.splitlines():\n        stripped = line.strip()\n        if stripped:\n            cleaned_lines.append(stripped)\n    return cleaned_lines\n\n\ndef parse_entry(line):\n    category_text, amount_text = line.split(\",\", 1)\n    category = category_text.strip()\n    amount = int(amount_text.strip())\n    return {\"category\": category, \"amount\": amount}\n\n\ndef build_summary(entries):\n    summary = {}\n    for entry in entries:\n        category = entry[\"category\"]\n        amount = entry[\"amount\"]\n        if category not in summary:\n            summary[category] = 0\n        summary[category] += amount\n    return summary\n\n\ndef format_report(summary):\n    lines = [\"Project Summary\"]\n    for category in sorted(summary):\n        lines.append(f\"{category}: {summary[category]}\")\n    return \"\\n\".join(lines)\n\n\ndef run_project(text):\n    lines = read_entries(text)\n    entries = []\n\n    for line in lines:\n        entries.append(parse_entry(line))\n\n    summary = build_summary(entries)\n    return format_report(summary)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "run_project",
+            "args": [
+              "food, 12\ntravel, 8\nfood, 3"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Project Summary\nfood: 15\ntravel: 8",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "run_project",
+            "args": [
+              " books, 5 \n\n games, 2\nbooks, 4\nart, 1 "
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Project Summary\nart: 1\nbooks: 9\ngames: 2",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -367,6 +367,50 @@ describe("normalizeTopicAuthoringDraft", () => {
         expect((normalized.quizDraft[0] as any).starterCode).toBe("custom starter\n");
     });
 
+    it("drops fixed tests from semantic code_input exercises", () => {
+        const normalized = normalizeTopicAuthoringDraft({
+            title: "Topic",
+            summary: "Summary",
+            minutes: 20,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "code-1",
+                    kind: "code_input",
+                    title: "Code",
+                    prompt: "Prompt",
+                    starterCode: "class Car:\n    pass\n",
+                    solutionCode: "class Car:\n    pass\n",
+                    recipeType: "semantic",
+                    tests: [
+                        {
+                            stdin: "",
+                            stdout: "ok\n",
+                            match: "exact",
+                        },
+                    ],
+                    semanticChecks: [
+                        {
+                            type: "defines_class",
+                            className: "Car",
+                        },
+                    ],
+                    hint: "Hint",
+                    help: {
+                        concept: "Concept",
+                        hint_1: "Hint 1",
+                        hint_2: "Hint 2",
+                    },
+                },
+            ],
+        } as any);
+
+        const exercise = normalized.quizDraft[0] as any;
+        expect(exercise.recipeType).toBe("semantic");
+        expect(exercise.semanticChecks).toHaveLength(1);
+        expect(exercise.tests).toBeUndefined();
+    });
+
     it("throws when blank starterCode is normalized without profile context", () => {
         expect(() =>
             normalizeTopicAuthoringDraft({

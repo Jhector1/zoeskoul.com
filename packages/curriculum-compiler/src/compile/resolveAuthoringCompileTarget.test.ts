@@ -35,7 +35,7 @@ describe("authoring compile target resolution", () => {
         );
 
         expect(target.authoringSubjectSlug).toBe("python");
-        expect(target.courseSlug).toBe("python-for-beginners");
+        expect(target.courseSlug).toBe("python-v2");
         expect(target.liveSubjectSlug).toBe("python-v2");
         expect(target.blueprint.subjectSlug).toBe("python-v2");
         expect(manifest.subject.slug).toBe("python-v2");
@@ -46,12 +46,13 @@ describe("authoring compile target resolution", () => {
 
         expect(target.subjectPlan.courseOrder).toEqual(
             expect.arrayContaining([
-                "python-for-beginners",
+                "python-v2",
                 "python-data-functions",
                 "applied-python-projects",
             ]),
         );
-        expect(target.spec.courseSlug).toBe("python-for-beginners");
+        expect(target.spec.courseSlug).toBe("python-v2");
+
     });
 
     it("compileCourse refuses to publish non-target course without explicit liveSubjectSlug", async () => {

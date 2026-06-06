@@ -1,0 +1,138 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-8-real-world-project": {
+        "class-roster-cleaner": {
+          "label": "Course Capstone: Class Roster Cleaner",
+          "summary": "Build the roster cleaner in one continuous flow: inspect the export, clean rows, modularize the logic, summarize the class, and ship the final reports.",
+          "cards": {
+            "sketch0": {
+              "title": "Your capstone client: the school office"
+            },
+            "project": {
+              "title": "Class Roster Cleaner"
+            }
+          },
+          "projectSteps": {
+            "cp_1": {
+              "title": "Read the roster file"
+            },
+            "cp_2": {
+              "title": "Clean one roster row"
+            },
+            "cp_3": {
+              "title": "Skip bad rows safely"
+            },
+            "cp_4": {
+              "title": "Move cleaning into a helper module"
+            },
+            "cp_5": {
+              "title": "Add summary functions"
+            },
+            "cp_6": {
+              "title": "Write final reports"
+            }
+          },
+          "quiz": {
+            "cp-1-read-roster-file": {
+              "title": "Read the roster file",
+              "prompt": "The school office sends you `data/roster.csv` and says, “Before we trust this file, can you show us exactly what it contains?” Read the file and print every raw line without extra blank lines, including the header row.",
+              "hint": "Start by inspecting the raw export exactly as it arrived.",
+              "help": {
+                "concept": "A careful data-cleaning project begins with visibility: read the source file before transforming it.",
+                "hint_1": "Open `data/roster.csv` with a `with open(...)` block.",
+                "hint_2": "Loop through the file and print `line.strip()`."
+              },
+              "starterCode": "# Read data/roster.csv and print every raw line without extra blank lines.\n"
+            },
+            "cp-2-clean-one-row": {
+              "title": "Clean one roster row",
+              "prompt": "Start from the roster preview you already built. Keep that context, then add `clean_row(line)` so one data row becomes a dictionary with cleaned `name`, integer `score`, and lowercase `email`. Read the first data row again and print the cleaned dictionary.",
+              "hint": "Inspect first, then reuse that same file shape to test the helper on one row.",
+              "help": {
+                "concept": "Once one row has a dependable shape, the whole project can reuse that same cleaning logic for every row.",
+                "hint_1": "Split the row into `name`, `score`, and `email`.",
+                "hint_2": "Use `.strip().title()` for names, `int(...)` for scores, and `.strip().lower()` for emails."
+              },
+              "starterCode": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw roster preview above as your starting point.\n# Next, write clean_row(line) so one data row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split name, score, and email, then return the cleaned record.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\n# Print the cleaned first data row.\nprint(clean_row(first_row))\n"
+            },
+            "cp-3-skip-bad-roster-rows": {
+              "title": "Skip bad rows safely",
+              "prompt": "Keep the working `clean_row(line)` helper from the last step. Now loop through the data rows, collect valid cleaned records, and skip `ValueError` rows so the roster cleaner stays usable.",
+              "hint": "Use the same helper for every row instead of redoing the cleaning inline.",
+              "help": {
+                "concept": "Real files are rarely perfect. A useful data tool protects the workflow by collecting valid records and skipping rows it cannot clean.",
+                "hint_1": "Create `records = []`, then loop through the rows after the header.",
+                "hint_2": "Append inside `try`, and skip invalid rows in `except ValueError`."
+              },
+              "starterCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        # Keep using clean_row(line), but only save rows with valid scores.\n        # Skip ValueError rows so the roster cleaner can finish the file.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n"
+            },
+            "cp-4-move-cleaning-to-module": {
+              "title": "Move cleaning into a helper module",
+              "prompt": "Start from the working roster cleaner in `main.py`. Move `clean_row(line)` into `tools/cleaning.py`, import it back into `main.py`, and keep the cleaned-record output exactly the same.",
+              "hint": "This step is a refactor, not a rewrite: the workflow stays in `main.py`, and the cleaning details move into the helper module.",
+              "help": {
+                "concept": "When a project grows, helper modules keep the main file focused on the workflow instead of the details.",
+                "hint_1": "Create `tools/cleaning.py` and move `clean_row(line)` there.",
+                "hint_2": "In `main.py`, replace the local function with `from tools.cleaning import clean_row`."
+              },
+              "starterCode": "def clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n# Move clean_row(line) into tools/cleaning.py.\n# Then import it back here so main.py keeps only the roster workflow.\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n"
+            },
+            "cp-5-add-summary-functions": {
+              "title": "Add summary functions",
+              "prompt": "Keep the helper-based cleaner from the last step. Now add `tools/scoring.py` so the project can print the average score rounded to one decimal place and the passing count.",
+              "hint": "Add the score math in helpers, then replace the raw-record preview with the two summary lines.",
+              "help": {
+                "concept": "Reports usually need summaries, not just cleaned rows. Helper functions make those calculations easy to test and reuse.",
+                "hint_1": "Add `average_score(records)` and `passing_count(records)` in `tools/scoring.py`.",
+                "hint_2": "Import both helpers in `main.py`, then print `Average: ...` and `Passing: ...`."
+              },
+              "starterCode": "from tools.cleaning import clean_row\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# Replace the raw records preview with summary helpers.\n# Add average_score(records) and passing_count(records) in tools/scoring.py, then print both summary lines here.\n"
+            },
+            "cp-6-write-final-reports": {
+              "title": "Write final reports",
+              "prompt": "Start from the cleaner that already prints the average and passing count. Finish the handoff by adding report helpers, writing `output/clean_roster.csv` and `output/summary.txt`, and printing the cleaned-count line with the final summary.",
+              "hint": "Turn the working summary into deliverables: write both files, then print the cleaned count plus the summary lines.",
+              "help": {
+                "concept": "A real project ends with deliverables: cleaned files and a summary someone else can use.",
+                "hint_1": "Add `write_clean_roster(records, path)` and `write_summary(records, path)` in `tools/reports.py`.",
+                "hint_2": "Call those helpers for the two output paths, then print the cleaned record count along with the average and passing lines."
+              },
+              "starterCode": "from tools.cleaning import clean_row\nfrom tools.scoring import average_score, passing_count\n\nrecords = []\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(f\"Average: {average_score(records):.1f}\")\nprint(f\"Passing: {passing_count(records)}\")\n\n# Finish the handoff by adding tools/reports.py.\n# Write output/clean_roster.csv and output/summary.txt, then print the cleaned record count too.\n"
+            },
+            "try-class-roster-cleaner-sketch0": {
+              "title": "Clean the first roster record",
+              "prompt": "Open `data/roster.csv`, skip the header row, clean the first student record, and print `Ava Smith <ava@example.com>`.",
+              "hint": "Skip the header, then clean the first data row before you print it.",
+              "help": {
+                "concept": "This card uses the real roster file shape from the capstone instead of a hard-coded row string.",
+                "hint_1": "Open `data/roster.csv`, use `next(file)` once to skip the header, then read the first data row.",
+                "hint_2": "Split the row, title-case the name, lowercase the email, and print `Name <email>`."
+              },
+              "starterCode": "with open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\n# Clean the first student record and print Ava Smith <ava@example.com>.\n"
+            }
+          },
+          "tryIt": {
+            "try_class_roster_cleaner_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Open `data/roster.csv`, skip the header row, clean the first student record, and print `Ava Smith <ava@example.com>`."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-8-real-world-project": {
+        "class-roster-cleaner": {
+          "sketch-1": {
+            "title": "Your capstone client: the school office",
+            "bodyMarkdown": "Report day is coming, and the school office has a roster export that is not ready to use. Names have inconsistent spacing and capitalization, scores include bad values, and the staff needs clean files they can trust.\n\nIn this capstone, you will build the tool they asked for. The project grows smoothly from one raw file reader into a multi-file cleaner with helper modules, summary functions, and final report files. Each step starts from the previous canonical solution so the work feels like one real project, not a pile of disconnected exercises."
+          }
+        }
+      }
+    }
+  }
+}

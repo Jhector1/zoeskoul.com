@@ -1,0 +1,587 @@
+{
+  "topicId": "testing-edge-cases",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-9-testing-debugging-and-style",
+  "sectionSlug": "python--applied-python-projects--draft-python-9-testing-basics",
+  "prefix": "py9",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-edge-cases-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.tryIt.try_testing_edge_cases_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.tryIt.try_testing_edge_cases_sketch0.prompt",
+        "exerciseKey": "ci-edge-blank-lines",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-edge-cases-sketch1",
+        "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.tryIt.try_testing_edge_cases_sketch1.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.tryIt.try_testing_edge_cases_sketch1.prompt",
+        "exerciseKey": "ci-edge-clamp",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-edge-cases-sketch2",
+        "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.tryIt.try_testing_edge_cases_sketch2.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.tryIt.try_testing_edge_cases_sketch2.prompt",
+        "exerciseKey": "ci-edge-first-char",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_edge_blank_lines",
+            "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.projectSteps.ci_edge_blank_lines.title",
+            "exerciseKey": "ci-edge-blank-lines",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_edge_clamp",
+            "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.projectSteps.ci_edge_clamp.title",
+            "exerciseKey": "ci-edge-clamp",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_edge_first_char",
+            "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.projectSteps.ci_edge_first_char.title",
+            "exerciseKey": "ci-edge-first-char",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.sketch-1.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.sketch-2.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.sketch-3.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ci-edge-blank-lines",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.quiz.ci-edge-blank-lines",
+      "language": "python",
+      "starterCode": "def count_non_empty(lines):\n    # return the number of lines that still contain text after stripping spaces\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def count_non_empty(lines):\n    # return the number of lines that still contain text after stripping spaces\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def count_non_empty(lines):\n    count = 0\n    for line in lines:\n        if line.strip() != \"\":\n            count += 1\n    return count",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def count_non_empty(lines):\n    # return the number of lines that still contain text after stripping spaces\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def count_non_empty(lines):\n    # return the number of lines that still contain text after stripping spaces\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def count_non_empty(lines):\n    count = 0\n    for line in lines:\n        if line.strip() != \"\":\n            count += 1\n    return count",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def count_non_empty(lines):\n    count = 0\n    for line in lines:\n        if line.strip() != \"\":\n            count += 1\n    return count",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "count_non_empty",
+            "args": [
+              [
+                [
+                  "apple",
+                  " ",
+                  "banana",
+                  ""
+                ]
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 2,
+            "expectedKind": "value",
+            "message": "Counts text lines and ignores empty or space-only lines."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "count_non_empty",
+            "args": [
+              [
+                [
+                  "   ",
+                  "\t",
+                  "pear"
+                ]
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 1,
+            "expectedKind": "value",
+            "message": "Treats whitespace-only strings as empty."
+          },
+          {
+            "type": "no_stdout",
+            "message": "Return the result instead of printing it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "sc-edge-empty-input",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.quiz.sc-edge-empty-input",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-edge-boundaries",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.quiz.mc-edge-boundaries",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr-test-order-basic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.quiz.dr-test-order-basic",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fb-strip-empty",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.quiz.fb-strip-empty",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "strip()"
+      }
+    },
+    {
+      "id": "ci-edge-clamp",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.quiz.ci-edge-clamp",
+      "language": "python",
+      "starterCode": "def clamp_score(score):\n    # return a value from 0 to 100 inclusive\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clamp_score(score):\n    # return a value from 0 to 100 inclusive\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clamp_score(score):\n    if score < 0:\n        return 0\n    elif score > 100:\n        return 100\n    else:\n        return score",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clamp_score(score):\n    # return a value from 0 to 100 inclusive\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clamp_score(score):\n    # return a value from 0 to 100 inclusive\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def clamp_score(score):\n    if score < 0:\n        return 0\n    elif score > 100:\n        return 100\n    else:\n        return score",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clamp_score(score):\n    if score < 0:\n        return 0\n    elif score > 100:\n        return 100\n    else:\n        return score",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "clamp_score",
+            "args": [
+              -5
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 0,
+            "expectedKind": "value",
+            "message": "Values below the minimum should become 0."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "clamp_score",
+            "args": [
+              100
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 100,
+            "expectedKind": "value",
+            "message": "The exact upper boundary should stay unchanged."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "clamp_score",
+            "args": [
+              145
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 100,
+            "expectedKind": "value",
+            "message": "Values above the maximum should become 100."
+          },
+          {
+            "type": "no_stdout",
+            "message": "Return the result instead of printing it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "sc-edge-spaces",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.quiz.sc-edge-spaces",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-edge-small-collections",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.quiz.mc-edge-small-collections",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr-boundary-values",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.quiz.dr-boundary-values",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t3",
+          "t2",
+          "t1"
+        ]
+      }
+    },
+    {
+      "id": "fb-boundary-operator",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.quiz.fb-boundary-operator",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": ">="
+      }
+    },
+    {
+      "id": "ci-edge-first-char",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.testing-edge-cases.quiz.ci-edge-first-char",
+      "language": "python",
+      "starterCode": "def safe_first_char(text):\n    # return the first character, or \"\" for empty text\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def safe_first_char(text):\n    # return the first character, or \"\" for empty text\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def safe_first_char(text):\n    if text == \"\":\n        return \"\"\n    return text[0]",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def safe_first_char(text):\n    # return the first character, or \"\" for empty text\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def safe_first_char(text):\n    # return the first character, or \"\" for empty text\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def safe_first_char(text):\n    if text == \"\":\n        return \"\"\n    return text[0]",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def safe_first_char(text):\n    if text == \"\":\n        return \"\"\n    return text[0]",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "safe_first_char",
+            "args": [
+              "Python"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "P",
+            "expectedKind": "value",
+            "message": "Returns the first character for normal text."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "safe_first_char",
+            "args": [
+              ""
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "",
+            "expectedKind": "value",
+            "message": "Handles the empty-string edge case safely."
+          },
+          {
+            "type": "no_stdout",
+            "message": "Return the result instead of printing it."
+          }
+        ]
+      }
+    }
+  ]
+}

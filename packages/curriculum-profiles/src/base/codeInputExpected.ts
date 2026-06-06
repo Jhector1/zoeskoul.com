@@ -233,6 +233,82 @@ export function buildTemplateIoExpected(args: {
     }), args.workspaceExpectations);
 }
 
+function isPlainRecord(value: unknown): value is Record<string, unknown> {
+    return (
+        Boolean(value) &&
+        typeof value === "object" &&
+        !Array.isArray(value)
+    );
+}
+
+function encodeDictEntriesIfNeeded(value: unknown): unknown {
+    if (!isPlainRecord(value)) return value;
+
+    return Object.entries(value).map(([key, entryValue]) => [key, entryValue]);
+}
+
+function encodeListOfDictEntriesIfNeeded(value: unknown): unknown {
+    if (!Array.isArray(value)) return value;
+
+    return value.map((entry) => encodeDictEntriesIfNeeded(entry));
+}
+
+function normalizeSemanticValueByKind(value: unknown, kind: unknown): unknown {
+    switch (kind) {
+        case "dict_entries":
+            return encodeDictEntriesIfNeeded(value);
+
+        case "list_of_dict_entries":
+            return encodeListOfDictEntriesIfNeeded(value);
+
+        default:
+            return value;
+    }
+}
+
+function normalizeSemanticArgs(args: unknown, kinds: unknown): unknown[] {
+    const normalizedArgs = Array.isArray(args) ? args : [];
+    const normalizedKinds = Array.isArray(kinds) ? kinds : [];
+
+    return normalizedArgs.map((arg, index) =>
+        normalizeSemanticValueByKind(arg, normalizedKinds[index]),
+    );
+}
+
+function normalizeSemanticCheck(check: SemanticCheck): SemanticCheck {
+    switch (check.type) {
+        case "function_returns":
+            return {
+                ...check,
+                args: normalizeSemanticArgs(check.args, check.argKinds),
+                expected: normalizeSemanticValueByKind(
+                    check.expected,
+                    check.expectedKind,
+                ),
+            };
+
+        case "method_returns":
+            return {
+                ...check,
+                constructorArgs: normalizeSemanticArgs(
+                    check.constructorArgs,
+                    check.constructorArgKinds,
+                ),
+                methodArgs: normalizeSemanticArgs(
+                    check.methodArgs,
+                    check.methodArgKinds,
+                ),
+                expected: normalizeSemanticValueByKind(
+                    check.expected,
+                    check.expectedKind,
+                ),
+            };
+
+        default:
+            return check;
+    }
+}
+
 export function buildSemanticExpected(
     recipe: SemanticRecipe,
     workspaceExpectations?: ManifestWorkspaceExpectations,
@@ -248,7 +324,7 @@ export function buildSemanticExpected(
     return withWorkspaceExpectations(makeProgrammingExpected({
         language: recipe.language as Parameters<typeof makeProgrammingExpected>[0]["language"],
         checkMode: "semantic",
-        semanticChecks: semanticChecks as SemanticCheck[],
+        semanticChecks: (semanticChecks as SemanticCheck[]).map(normalizeSemanticCheck),
         solutionCode: recipe.solutionCode,
     }), workspaceExpectations);
 }

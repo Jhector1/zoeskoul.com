@@ -1,4 +1,4 @@
-import type { TopicAuthoringDraft, TopicSeed } from "@zoeskoul/curriculum-contracts";
+import {replaceStandaloneUnderscoreBlanks, TopicAuthoringDraft, TopicSeed} from "@zoeskoul/curriculum-contracts";
 import {
     assertProfileSupportsCodeInput,
     getCurriculumProfile,
@@ -408,29 +408,33 @@ function rewriteInvalidFillBlankAsSingleBlank(args: {
 }) {
     const safe = makeSafeFillBlankHelp();
 
-    const cleanedPrompt = normalizeText(args.base.prompt)
-        .replace(/\[blank\d*\]/gi, "the missing choice")
-        .replace(/_{2,}/g, "the missing choice");
+    const cleanedPrompt = replaceStandaloneUnderscoreBlanks(
+        normalizeText(args.base.prompt)
+            .replace(/\[blank\d*\]/gi, "the missing choice"),
+        "the missing choice",
+    );
 
     let sawBlank = false;
 
-    let repairedTemplate = normalizeText(args.template)
-        .replace(/\[blank\d*\]/gi, () => {
+    let repairedTemplate = replaceStandaloneUnderscoreBlanks(
+        normalizeText(args.template)
+            .replace(/\[blank\d*\]/gi, () => {
+                if (!sawBlank) {
+                    sawBlank = true;
+                    return "[blank1]";
+                }
+
+                return args.correctValue || "value";
+            }),
+        () => {
             if (!sawBlank) {
                 sawBlank = true;
                 return "[blank1]";
             }
 
             return args.correctValue || "value";
-        })
-        .replace(/_{2,}/g, () => {
-            if (!sawBlank) {
-                sawBlank = true;
-                return "[blank1]";
-            }
-
-            return args.correctValue || "value";
-        });
+        },
+    );
 
     if (!sawBlank) {
         repairedTemplate = repairedTemplate

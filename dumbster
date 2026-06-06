@@ -78,7 +78,7 @@ docker compose -f docker-compose.prod.yml logs -f runner
 
 
 
-pnpm curr:course -- publish python python-data-functions --live-subject python-data-functions --force
+pnpm curr:course -- publish python applied-python-projects --live-subject applied-python-projects --force
 
 
 
@@ -142,4 +142,7 @@ sudo docker compose up -d judge0 worker
 
 
 
-pnpm curr:course -- draft-goldens python python-data-functions
+pnpm curr:course -- draft-goldens python applied-python-projects
+
+
+sudo scp -r deploy@5.78.159.224:/opt/edge-proxy ~/Downloads/

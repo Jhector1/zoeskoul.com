@@ -106,8 +106,9 @@ function renderRetryGuidance(seed: TopicSeed, retry?: TopicRetryContext) {
             ? [
                 "- These exercise ids were invalid as fixed_tests code_input:",
                 ...unsafeFixedTestIssues.map((issue) => `  - ${issue.exerciseId ?? "unknown"}`),
-                "- Replace them with non-code exercises or regenerate them as stdin-based code_input with at least 2 tests.",
+                "- Replace them with non-code exercises, regenerate them as stdin-based code_input with at least 2 tests, or switch them to semantic code_input when the task is about functions, classes, objects, methods, attributes, or return values.",
                 "- Do not produce static print-only code_input tasks with one test.",
+                "- For class/object/method tasks, prefer semantic checks such as defines_class, constructible, instance_attributes, function_returns, or method_returns instead of stdout tests.",
             ]
             : []),
         "",

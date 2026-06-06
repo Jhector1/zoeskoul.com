@@ -1,0 +1,135 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-10-capstone-automation-project": {
+        "capstone-automation-project": {
+          "label": "Capstone Automation Project",
+          "summary": "Complete a polished task-report automation project by building it step by step: load task data, count completed work, create a readable report, save the report, and run the full workflow.",
+          "cards": {
+            "sketch0": {
+              "title": "Build one project in clear steps"
+            },
+            "sketch1": {
+              "title": "Let each function do one job"
+            },
+            "sketch2": {
+              "title": "A finished project should produce a clear result"
+            },
+            "project": {
+              "title": "Task Report Automation Capstone"
+            }
+          },
+          "projectSteps": {
+            "capstone_step_1_parse_task_lines": {
+              "title": "Step 1: Parse task lines into dictionaries"
+            },
+            "capstone_step_2_load_tasks": {
+              "title": "Step 2: Count completed tasks"
+            },
+            "capstone_step_3_build_report_text": {
+              "title": "Step 3: Build the report text"
+            },
+            "capstone_step_4_write_report_file": {
+              "title": "Step 4: Save the report and show the result"
+            },
+            "capstone_step_5_run_full_project": {
+              "title": "Step 5: Run the full capstone workflow"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_capstone_automation_project_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Create a function named `load_tasks(text)` that converts task lines into a list of dictionaries.\n\nEach line in `text` uses this format:\n\n`title|status`\n\nRules:\n- Split the text into lines.\n- For each line, create a dictionary with keys `title` and `done`.\n- `done` should be `True` when the status is `done`.\n- `done` should be `False` for any other status.\n- Return the full list.\n\nExample input text:\n`Write outline|done\\nRecord demo|pending`\n\nExpected return value:\n`[{\"title\": \"Write outline\", \"done\": True}, {\"title\": \"Record demo\", \"done\": False}]`"
+            },
+            "try_capstone_automation_project_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Continue the project by adding a function named `count_done(tasks)`.\n\nThe function should:\n- take a list of task dictionaries\n- count how many have `done` set to `True`\n- return that count\n\nKeep the earlier `load_tasks(text)` function working too, because later steps will build on both functions."
+            },
+            "try_capstone_automation_project_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Add a function named `build_report(tasks)` that returns a formatted multi-line report string.\n\nThe report must follow this exact layout:\n\n`Task Report`\n`-----------`\n`Total tasks: X`\n`Completed: Y`\n`Remaining: Z`\n`- title: done or pending`\n\nRules:\n- Use `count_done(tasks)` to get the completed count.\n- `Remaining` is total minus completed.\n- For each task, add one line.\n- Show `done` when the task is complete and `pending` when it is not.\n- Return the full string.\n\nKeep `load_tasks` and `count_done` working too."
+            }
+          },
+          "quiz": {
+            "capstone-step-1-parse-task-lines": {
+              "title": "Step 1: Parse task lines into dictionaries",
+              "prompt": "Start the final capstone project. In step 1 of 5, Create a function named `load_tasks(text)` that converts task lines into a list of dictionaries.\n\nEach line in `text` uses this format:\n\n`title|status`\n\nRules:\n- Split the text into lines.\n- For each line, create a dictionary with keys `title` and `done`.\n- `done` should be `True` when the status is `done`.\n- `done` should be `False` for any other status.\n- Return the full list.\n\nExample input text:\n`Write outline|done\\nRecord demo|pending`\n\nExpected return value:\n`[{\"title\": \"Write outline\", \"done\": True}, {\"title\": \"Record demo\", \"done\": False}]`",
+              "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "def load_tasks(text):\n    tasks = []\n    # TODO: split the text into lines\n    # TODO: split each line into title and status\n    # TODO: append a dictionary like {\"title\": ..., \"done\": ...}\n    return tasks"
+            },
+            "capstone-step-2-load-tasks": {
+              "title": "Step 2: Count completed tasks",
+              "prompt": "Continue the final capstone project from the previous working step. In step 2 of 5, Continue the project by adding a function named `count_done(tasks)`.\n\nThe function should:\n- take a list of task dictionaries\n- count how many have `done` set to `True`\n- return that count\n\nKeep the earlier `load_tasks(text)` function working too, because later steps will build on both functions.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n# Capstone step 2: Step 2: Count completed tasks\n# Keep the working code above from the previous step.\n# Next, Continue the project by adding a function named `count_done(tasks)`\n# Add only the focused change for this step below or inside the existing work.\n"
+            },
+            "capstone-step-3-build-report-text": {
+              "title": "Step 3: Build the report text",
+              "prompt": "Continue the final capstone project from the previous working step. In step 3 of 5, Add a function named `build_report(tasks)` that returns a formatted multi-line report string.\n\nThe report must follow this exact layout:\n\n`Task Report`\n`-----------`\n`Total tasks: X`\n`Completed: Y`\n`Remaining: Z`\n`- title: done or pending`\n\nRules:\n- Use `count_done(tasks)` to get the completed count.\n- `Remaining` is total minus completed.\n- For each task, add one line.\n- Show `done` when the task is complete and `pending` when it is not.\n- Return the full string.\n\nKeep `load_tasks` and `count_done` working too.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n# Capstone step 3: Step 3: Build the report text\n# Keep the working code above from the previous step.\n# Next, Add a function named `build_report(tasks)` that returns a formatted multi-line report string\n# Add only the focused change for this step below or inside the existing work.\n"
+            },
+            "capstone-step-4-write-report-file": {
+              "title": "Step 4: Save the report and show the result",
+              "prompt": "Continue the final capstone project from the previous working step. In step 4 of 5, Finish the automation workflow by adding a function named `save_report(report_text)`.\n\nRequirements:\n- Write `report_text` to `report.txt`.\n- Return the text you read back from `report.txt` after saving.\n- Keep `load_tasks`, `count_done`, and `build_report` working.\n\nUse the provided fixture file path exactly: `report.txt`.\n\nThis step is about making the project produce a saved final result, not just a calculated string.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n\n    return \"\\n\".join(lines)\n# Capstone step 4: Step 4: Save the report and show the result\n# Keep the working code above from the previous step.\n# Next, Finish the automation workflow by adding a function named `save_report(report_text)`\n# Add only the focused change for this step below or inside the existing work.\n"
+            },
+            "capstone-step-5-run-full-project": {
+              "title": "Step 5: Run the full capstone workflow",
+              "prompt": "Continue the final capstone project from the previous working step. In step 5 of 5, Complete the final project by adding a function named `run_project(task_text)`.\n\nThe function should:\n- call `load_tasks(task_text)`\n- build the report with `build_report(tasks)`\n- save it with `save_report(report_text)`\n- return the saved report text\n\nKeep all earlier functions in place. The final result should feel like one connected automation project, not separate pieces.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n    return \"\\n\".join(lines)\n\n\ndef save_report(report_text):\n    with open(\"report.txt\", \"w\") as file:\n        file.write(report_text)\n\n    with open(\"report.txt\", \"r\") as file:\n        saved_text = file.read()\n\n    return saved_text\n# Capstone step 5: Step 5: Run the full capstone workflow\n# Keep the working code above from the previous step.\n# Next, Complete the final project by adding a function named `run_project(task_text)`\n# Add only the focused change for this step below or inside the existing work.\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-10-capstone-automation-project": {
+        "capstone-automation-project": {
+          "capstone-overview": {
+            "title": "Build one project in clear steps",
+            "bodyMarkdown": "In this capstone, you will build a small automation project that turns task data into a finished report. Instead of writing one giant block of code, you will create a few focused functions and connect them.\n\nA good beginner project plan looks like this:\n\n1. **Load data** into a useful Python structure.\n2. **Process the data** with helper functions.\n3. **Format the result** into readable text.\n4. **Save the result** so the project produces a final artifact.\n\nHere is the kind of data structure you will use:\n\n```python\ntasks = [\n    {\"title\": \"Write outline\", \"done\": True},\n    {\"title\": \"Record demo\", \"done\": False},\n    {\"title\": \"Review notes\", \"done\": True}\n]\n```\n\nEach item is a dictionary. The `title` tells you the task name, and `done` tells you whether it is finished.\n\nA helper function can process that list:\n\n```python\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\nprint(count_done(tasks))\n```\n\nStep by step:\n\n- `total = 0` starts the counter.\n- The `for` loop visits each task.\n- `if task[\"done\"]:` checks whether that task is complete.\n- `total += 1` adds one for each completed task.\n- `return total` sends the answer back.\n\nTry it yourself: change one task from `False` to `True`, click Run, and predict how the completed count changes."
+          },
+          "capstone-functions-flow": {
+            "title": "Let each function do one job",
+            "bodyMarkdown": "Projects are easier to test when each function has one clear responsibility.\n\nFor this capstone, a clean flow is:\n\n```python\ndef load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    return f\"Completed {done_count} of {len(tasks)} tasks\"\n```\n\nWhy this design helps:\n\n- `load_tasks()` converts raw text into structured data.\n- `count_done()` focuses only on counting.\n- `build_report()` creates the final message.\n\nThat means you can test each part separately before combining them.\n\nTry this: read the three functions and identify which one is responsible for **formatting text for the final output**.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "capstone-polish": {
+            "title": "A finished project should produce a clear result",
+            "bodyMarkdown": "A capstone should feel complete. That means the project should not only calculate values, but also present them clearly.\n\nFor example, a polished report might look like this:\n\n```python\nTask Report\n-----------\nTotal tasks: 3\nCompleted: 2\nRemaining: 1\n- Write outline: done\n- Record demo: pending\n- Review notes: done\n```\n\nThis output is useful because it includes:\n\n- a title\n- summary numbers\n- a readable task list\n\nWhen you save a report, it is also helpful to print something observable so you can confirm the project worked.\n\nExample:\n\n```python\nreport = \"Task Report\\n-----------\\nTotal tasks: 1\"\n\nwith open(\"report.txt\", \"w\") as file:\n    file.write(report)\n\nwith open(\"report.txt\", \"r\") as file:\n    print(file.read())\n```\n\nThe project writes the report and then prints the saved contents to the output panel.\n\nYour turn: after building your report function, think about what details make the output feel finished instead of unfinished.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

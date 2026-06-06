@@ -1,0 +1,285 @@
+{
+  "title": "Writing Test Cases",
+  "summary": "Design examples that prove a function works by checking normal cases, edge cases, and expected outputs.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "sk1",
+      "title": "What makes a useful test case?",
+      "bodyMarkdown": "A **test case** is one specific example you use to check whether code behaves the way you expect. Good test cases do more than show the happy path. They also check tricky inputs and boundary values.\n\nHere is a small function:\n\n```python\ndef add_tax(price):\n    return price * 1.1\n```\n\nYou could test it with a normal value:\n\n```python\nassert add_tax(10) == 11.0\n```\n\nThat checks a common case. But one test is not enough. You should also think about values like `0` or decimal prices.\n\n```python\nassert add_tax(0) == 0.0\nassert add_tax(2.5) == 2.75\n```\n\nStep by step:\n- `10` checks a typical price.\n- `0` checks a boundary case.\n- `2.5` checks that decimals still work correctly.\n\nA strong set of tests asks: **What should happen for common input? What should happen at the edges?**\n\nTry it yourself: write a function called `is_even(n)` and add a few `assert` lines that test an even number, an odd number, and `0`."
+    },
+    {
+      "id": "sk2",
+      "title": "Normal cases and edge cases",
+      "bodyMarkdown": "When writing tests, it helps to group examples into categories.\n\n- **Normal cases**: inputs you expect most often\n- **Edge cases**: unusual or boundary inputs that still should work\n\nExample:\n\n```python\ndef first_letter(text):\n    return text[0]\n```\n\nPossible tests:\n\n```python\nassert first_letter(\"cat\") == \"c\"\nassert first_letter(\"A\") == \"A\"\n```\n\nWhy these help:\n- `\"cat\"` is a normal case with several letters.\n- `\"A\"` is an edge case because the string has only one character.\n\nIf you only test `\"cat\"`, you might miss problems with very short input.\n\nTry this: think of one more test for a function that counts items in a list. What input would check an edge case?"
+    },
+    {
+      "id": "sk3",
+      "title": "Using assert to express expected behavior",
+      "bodyMarkdown": "In Python, `assert` is a simple way to state what should be true.\n\n```python\ndef square(n):\n    return n * n\n\nassert square(3) == 9\n```\n\nLine by line:\n- `def square(n):` defines the function.\n- `return n * n` computes the result.\n- `assert square(3) == 9` checks that the function returns the expected value.\n\nIf the result is wrong, the assertion fails. That gives you a clear signal that the code or the test expectation needs attention.\n\nYou can write several assertions for one function:\n\n```python\nassert square(0) == 0\nassert square(2) == 4\nassert square(-3) == 9\n```\n\nThis is better than checking only one input because it covers more behavior.\n\nYour turn: pick a simple function you know, such as doubling a number or greeting a name, and write three `assert` statements for it."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "ex1",
+      "kind": "code_input",
+      "title": "Add tests for an even-number function",
+      "prompt": "Complete the function `is_even(n)` so it returns `True` for even numbers and `False` for odd numbers. Then keep the provided `assert` tests passing. Add one more useful `assert` of your own below the existing tests.",
+      "starterCode": "def is_even(n):\n    # return True if n is even, otherwise False\n    pass\n\nassert is_even(4) == True\nassert is_even(5) == False\nassert is_even(0) == True\n\n# Add one more assert below\n",
+      "solutionCode": "def is_even(n):\n    return n % 2 == 0\n\nassert is_even(4) == True\nassert is_even(5) == False\nassert is_even(0) == True\nassert is_even(12) == True\n\nprint(\"All tests passed\")\n",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "All tests passed\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "",
+          "stdout": "All tests passed\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use `% 2` to check whether a number divides evenly by 2.",
+      "help": {
+        "concept": "A good test set checks more than one input. For an even-number function, useful cases include a typical even number, a typical odd number, and a boundary like 0.",
+        "hint_1": "Return a Boolean expression based on `n % 2`. Then make sure the existing assertions still match that behavior.",
+        "hint_2": "If `n % 2` is 0, the number is even. After that works, add another assertion with a different input such as a larger even or odd number."
+      }
+    },
+    {
+      "id": "ex2",
+      "kind": "single_choice",
+      "title": "Pick the strongest test set",
+      "prompt": "A function `double(n)` should return `n * 2`. Which test set gives the best basic coverage?",
+      "options": [
+        "`assert double(2) == 4`",
+        "`assert double(2) == 4` and `assert double(5) == 10`",
+        "`assert double(2) == 4`, `assert double(0) == 0`, and `assert double(-3) == -6`",
+        "`assert double(100) == 200`"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Look for a set that checks more than one kind of input, not just one typical value.",
+      "help": {
+        "concept": "Useful test cases cover different behaviors, such as a normal positive number, zero, and a negative number when the function should handle all integers.",
+        "hint_1": "Compare the choices by asking which one checks the widest range of valid inputs for `double(n)`.",
+        "hint_2": "The strongest set includes a positive number, 0, and a negative number so you can catch more mistakes."
+      }
+    },
+    {
+      "id": "ex3",
+      "kind": "multi_choice",
+      "title": "Choose the edge cases",
+      "prompt": "A function `first_item(items)` returns the first element of a non-empty list. Which test inputs are edge cases? Choose all that apply.",
+      "options": [
+        "`[10]`",
+        "`[1, 2, 3]`",
+        "`[\"apple\"]`",
+        "`[5, 6]`"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Edge cases are valid inputs near a boundary, such as the smallest allowed size.",
+      "help": {
+        "concept": "An edge case is a valid input near a limit. For a non-empty list, the smallest valid size is 1 item.",
+        "hint_1": "Think about list length. Which choices are still valid but close to the minimum allowed input?",
+        "hint_2": "A one-item list is the key boundary here. Different element types can also matter if the function should work for any list contents."
+      }
+    },
+    {
+      "id": "ex4",
+      "kind": "fill_blank_choice",
+      "title": "Complete an assertion",
+      "prompt": "Fill in the missing expected value.",
+      "template": "`assert triple(4) == [blank1]`",
+      "choices": [
+        "7",
+        "8",
+        "12",
+        "16"
+      ],
+      "correctValue": "12",
+      "hint": "Work out what the function should return before choosing the value.",
+      "help": {
+        "concept": "An assertion compares the actual result of a function call with the expected result for that exact input.",
+        "hint_1": "If a function triples a number, input `4` should become three groups of 4.",
+        "hint_2": "Multiply 4 by 3, then choose the value that makes the assertion true."
+      }
+    },
+    {
+      "id": "ex5",
+      "kind": "drag_reorder",
+      "title": "Build a simple test plan",
+      "prompt": "Put these steps in a sensible order for writing test cases for a function.",
+      "tokens": [
+        "Read what the function is supposed to do",
+        "Choose a normal input",
+        "Choose an edge input",
+        "Write assertions with expected results"
+      ],
+      "correctOrder": [
+        "Read what the function is supposed to do",
+        "Choose a normal input",
+        "Choose an edge input",
+        "Write assertions with expected results"
+      ],
+      "hint": "Start by understanding the function, then choose inputs, then write checks.",
+      "help": {
+        "concept": "Writing tests is easier when you move from understanding expected behavior to selecting examples and then expressing those examples as assertions.",
+        "hint_1": "You need to know what the function should do before picking test inputs.",
+        "hint_2": "After choosing normal and edge inputs, the last step is to turn them into actual assertions."
+      }
+    },
+    {
+      "id": "ex6",
+      "kind": "code_input",
+      "title": "Write tests for a greeting function",
+      "prompt": "Define a function `greet(name)` that returns the string `\"Hello, \"` followed by the name. Keep the provided assertions passing, and add one more assertion that tests a different name.",
+      "starterCode": "def greet(name):\n    # return a greeting string\n    pass\n\nassert greet(\"Ava\") == \"Hello, Ava\"\nassert greet(\"Ben\") == \"Hello, Ben\"\n\n# Add one more assert below\n",
+      "solutionCode": "def greet(name):\n    return \"Hello, \" + name\n\nassert greet(\"Ava\") == \"Hello, Ava\"\nassert greet(\"Ben\") == \"Hello, Ben\"\nassert greet(\"Mia\") == \"Hello, Mia\"\n\nprint(\"All tests passed\")\n",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "All tests passed\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "",
+          "stdout": "All tests passed\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Return a string, do not print it inside the function.",
+      "help": {
+        "concept": "When testing a function that returns text, each assertion should compare the returned string to the exact expected text, including spaces and punctuation.",
+        "hint_1": "The function should build one string from `\"Hello, \"` and the `name` parameter.",
+        "hint_2": "Make sure your assertions check exact returned values like a greeting for one name and then another different name."
+      }
+    },
+    {
+      "id": "ex7",
+      "kind": "single_choice",
+      "title": "Find the missing kind of case",
+      "prompt": "A learner tests `count_letters(text)` with `\"dog\"` and `\"cat\"`. What important kind of test case is still missing?",
+      "options": [
+        "Another three-letter word",
+        "A one-character string",
+        "A different variable name",
+        "A comment above the function"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Both current tests are normal multi-letter words.",
+      "help": {
+        "concept": "If all tests are similar normal cases, you may miss bugs that appear at boundaries such as very short input.",
+        "hint_1": "Think about a string length that is still valid but much smaller than `\"dog\"` or `\"cat\"`.",
+        "hint_2": "A one-character string checks a boundary that the current tests do not cover."
+      }
+    },
+    {
+      "id": "ex8",
+      "kind": "multi_choice",
+      "title": "Spot good assertions",
+      "prompt": "A function `square(n)` should return `n * n`. Which assertions are correct tests for that behavior? Choose all that apply.",
+      "options": [
+        "`assert square(3) == 9`",
+        "`assert square(0) == 0`",
+        "`assert square(-2) == -4`",
+        "`assert square(5) == 10`"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Check whether each expected value really matches squaring the input.",
+      "help": {
+        "concept": "A correct assertion must match the exact expected output for the given input. For squaring, negative inputs still produce positive results.",
+        "hint_1": "Evaluate each call: `square(3)`, `square(0)`, `square(-2)`, and `square(5)`.",
+        "hint_2": "Look for the assertions where the expected value equals input multiplied by itself, not doubled or left unchanged."
+      }
+    },
+    {
+      "id": "ex9",
+      "kind": "fill_blank_choice",
+      "title": "Choose the boundary input",
+      "prompt": "Fill in the blank with the smallest valid input for this test idea: testing a function that returns the first character of a non-empty string.",
+      "template": "A useful boundary test input is `[blank1]`.",
+      "choices": [
+        "\"\"",
+        "\"A\"",
+        "\"Hi\"",
+        "\"Test\""
+      ],
+      "correctValue": "\"A\"",
+      "hint": "The input must be valid and as small as possible.",
+      "help": {
+        "concept": "A boundary test uses the smallest or largest valid input. For a non-empty string, the smallest valid length is 1.",
+        "hint_1": "You cannot use an empty string because the function requires non-empty input.",
+        "hint_2": "Pick the choice with exactly one character."
+      }
+    },
+    {
+      "id": "ex10",
+      "kind": "drag_reorder",
+      "title": "Order the assertions from broad coverage",
+      "prompt": "Arrange these test cases for `is_positive(n)` from a typical case toward more boundary-focused coverage.",
+      "tokens": [
+        "`assert is_positive(5) == True`",
+        "`assert is_positive(0) == False`",
+        "`assert is_positive(-2) == False`"
+      ],
+      "correctOrder": [
+        "`assert is_positive(5) == True`",
+        "`assert is_positive(0) == False`",
+        "`assert is_positive(-2) == False`"
+      ],
+      "hint": "Start with the common positive case, then move toward values near the boundary and beyond it.",
+      "help": {
+        "concept": "A balanced test set often starts with a normal case, then checks the boundary, then checks behavior on the other side of that boundary.",
+        "hint_1": "For positivity, the key boundary is around zero.",
+        "hint_2": "A positive number is the normal case, zero is the boundary, and a negative number checks the opposite side."
+      }
+    },
+    {
+      "id": "ex11",
+      "kind": "code_input",
+      "title": "Test a list-counting function",
+      "prompt": "Write a function `count_items(items)` that returns how many items are in a list. Keep the provided assertions passing, and add one more assertion that checks a different list.",
+      "starterCode": "def count_items(items):\n    # return the number of items in the list\n    pass\n\nassert count_items([1, 2, 3]) == 3\nassert count_items([]) == 0\n\n# Add one more assert below\n",
+      "solutionCode": "def count_items(items):\n    return len(items)\n\nassert count_items([1, 2, 3]) == 3\nassert count_items([]) == 0\nassert count_items([\"a\"]) == 1\n\nprint(\"All tests passed\")\n",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "All tests passed\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "",
+          "stdout": "All tests passed\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Python already has a built-in way to get the length of a list.",
+      "help": {
+        "concept": "A good test set for counting items should include a normal list and an edge case like an empty list, because both are valid inputs.",
+        "hint_1": "Use the built-in length of the list as the return value.",
+        "hint_2": "After making the existing tests pass, add another assertion with a list of a different size so the function is checked again."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Practice Writing Test Cases",
+    "stepIds": [
+      "ex1",
+      "ex6",
+      "ex11"
+    ]
+  }
+}

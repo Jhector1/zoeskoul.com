@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
 import {
     mathShape,
     registerCurriculumProfile,
@@ -300,6 +301,213 @@ describe("validateCourseSpec", () => {
                             title: "Final Project",
                             role: "capstone",
                             topics: [{ topicId: "capstone", title: "Capstone" }],
+                        },
+                    ],
+                },
+            ],
+        } as any);
+
+        expect(issues).toEqual([]);
+    });
+
+    it("accepts the current applied-python-projects authored structure", () => {
+        const spec = JSON.parse(
+            readFileSync(
+                "/Users/admin/Documents/NextJSProject/zoeskoul.com/authoring/subjects/python/courses/applied-python-projects/course.spec.json",
+                "utf8",
+            ),
+        );
+
+        expect(validateCourseSpec(spec)).toEqual([]);
+    });
+
+    it("fails clearly when project policy requires a final capstone module", () => {
+        const issues = validateCourseSpec({
+            authoringFormatVersion: "2.0",
+            subjectSlug: "python",
+            courseSlug: "python-v2",
+            catalogSlug: "python",
+            profileId: "python",
+            title: "Python",
+            description: "Learn Python.",
+            sourceLocale: "en",
+            targetLocales: [],
+            policy: {
+                projectPolicy: {
+                    minProjectsBeforeCapstone: 1,
+                    capstoneRequired: true,
+                },
+            },
+            modules: [
+                {
+                    moduleNumber: 1,
+                    moduleSlug: "python-v2-1",
+                    title: "Module 1",
+                    sections: [
+                        {
+                            sectionSlug: "python-v2-1-core",
+                            title: "Core",
+                            topics: [{ topicId: "intro", title: "Intro" }],
+                        },
+                        {
+                            sectionSlug: "python-v2-1-project",
+                            title: "Project",
+                            role: "module_project",
+                            topics: [{ topicId: "project-1", title: "Project 1" }],
+                        },
+                    ],
+                },
+            ],
+        } as any);
+
+        expect(issues).toContain(
+            "policy.projectPolicy.capstoneRequired requires an authored capstone module or capstone section",
+        );
+        expect(issues).toContain(
+            'policy.projectPolicy.capstoneRequired requires the final module to use role="capstone"',
+        );
+        expect(issues).toContain(
+            "policy.projectPolicy.capstoneRequired requires the final module to contain exactly one capstone section",
+        );
+    });
+
+    it("fails clearly when the final capstone module has multiple capstone sections", () => {
+        const issues = validateCourseSpec({
+            authoringFormatVersion: "2.0",
+            subjectSlug: "python",
+            courseSlug: "python-v2",
+            catalogSlug: "python",
+            profileId: "python",
+            title: "Python",
+            description: "Learn Python.",
+            sourceLocale: "en",
+            targetLocales: [],
+            policy: {
+                projectPolicy: {
+                    minProjectsBeforeCapstone: 1,
+                    capstoneRequired: true,
+                },
+            },
+            modules: [
+                {
+                    moduleNumber: 1,
+                    moduleSlug: "python-v2-1",
+                    title: "Module 1",
+                    sections: [
+                        {
+                            sectionSlug: "python-v2-1-project",
+                            title: "Project",
+                            role: "module_project",
+                            topics: [{ topicId: "project-1", title: "Project 1" }],
+                        },
+                    ],
+                },
+                {
+                    moduleNumber: 2,
+                    moduleSlug: "python-v2-2",
+                    title: "Capstone",
+                    role: "capstone",
+                    sections: [
+                        {
+                            sectionSlug: "python-v2-2-capstone-a",
+                            title: "Capstone A",
+                            role: "capstone",
+                            topics: [{ topicId: "capstone-a", title: "Capstone A" }],
+                        },
+                        {
+                            sectionSlug: "python-v2-2-capstone-b",
+                            title: "Capstone B",
+                            role: "capstone",
+                            topics: [{ topicId: "capstone-b", title: "Capstone B" }],
+                        },
+                    ],
+                },
+            ],
+        } as any);
+
+        expect(issues).toContain("modules[1]: only one capstone section is allowed");
+        expect(issues).toContain(
+            "policy.projectPolicy.capstoneRequired requires the final module to contain exactly one capstone section",
+        );
+    });
+
+    it("fails clearly when the capstone section has multiple topics", () => {
+        const issues = validateCourseSpec({
+            authoringFormatVersion: "2.0",
+            subjectSlug: "python",
+            courseSlug: "python-v2",
+            catalogSlug: "python",
+            profileId: "python",
+            title: "Python",
+            description: "Learn Python.",
+            sourceLocale: "en",
+            targetLocales: [],
+            policy: {
+                projectPolicy: {
+                    minProjectsBeforeCapstone: 1,
+                    capstoneRequired: true,
+                },
+            },
+            modules: [
+                {
+                    moduleNumber: 1,
+                    moduleSlug: "python-v2-1",
+                    title: "Module 1",
+                    sections: [
+                        {
+                            sectionSlug: "python-v2-1-project",
+                            title: "Project",
+                            role: "module_project",
+                            topics: [{ topicId: "project-1", title: "Project 1" }],
+                        },
+                    ],
+                },
+                {
+                    moduleNumber: 2,
+                    moduleSlug: "python-v2-2",
+                    title: "Capstone",
+                    role: "capstone",
+                    sections: [
+                        {
+                            sectionSlug: "python-v2-2-capstone",
+                            title: "Capstone",
+                            role: "capstone",
+                            topics: [
+                                { topicId: "capstone-a", title: "Capstone A" },
+                                { topicId: "capstone-b", title: "Capstone B" },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        } as any);
+
+        expect(issues).toContain(
+            "modules[1].sections[0]: capstone sections must contain exactly one topic",
+        );
+    });
+
+    it("does not force capstone structure when project policy does not require it", () => {
+        const issues = validateCourseSpec({
+            authoringFormatVersion: "2.0",
+            subjectSlug: "math",
+            courseSlug: "math-foundations",
+            catalogSlug: "math",
+            profileId: "math",
+            title: "Math Foundations",
+            description: "Learn math.",
+            sourceLocale: "en",
+            targetLocales: [],
+            modules: [
+                {
+                    moduleNumber: 1,
+                    moduleSlug: "math-1",
+                    title: "Module 1",
+                    sections: [
+                        {
+                            sectionSlug: "math-1-core",
+                            title: "Core",
+                            topics: [{ topicId: "counting", title: "Counting" }],
                         },
                     ],
                 },

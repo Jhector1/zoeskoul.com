@@ -73,6 +73,88 @@ describe("profile code_input capabilities", () => {
         expect(validateProfileShapeConsistency(getCurriculumProfile("sql"))).toEqual([]);
     });
 
+    it("exposes a project capability for the Python profile", () => {
+        const pythonProfile = getCurriculumProfile("python");
+
+        expect(pythonProfile.project).toBeDefined();
+    });
+
+    it("exposes a practice capability for the Python profile and leaves SQL opted out", () => {
+        const pythonProfile = getCurriculumProfile("python");
+        const sqlProfile = getCurriculumProfile("sql");
+
+        expect(pythonProfile.practice?.tryItDefault).toEqual({
+            enabled: true,
+            sketchIndex: 0,
+            allowReveal: true,
+        });
+        expect(pythonProfile.practice?.preferredTryItExerciseKind).toBe("code_input");
+        expect(sqlProfile.practice).toBeUndefined();
+    });
+
+    it("returns the expected Python module_project config defaults", () => {
+        const pythonProfile = getCurriculumProfile("python");
+        const config = pythonProfile.project?.getProjectConfig({
+            seed: {} as any,
+            topicKind: "module_project",
+        });
+
+        expect(config).toBeDefined();
+        expect(config?.targetStepCount).toBe(3);
+        expect(config?.allowReveal).toBe(true);
+    });
+
+    it("returns the expected Python capstone config defaults", () => {
+        const pythonProfile = getCurriculumProfile("python");
+        const config = pythonProfile.project?.getProjectConfig({
+            seed: {} as any,
+            topicKind: "capstone",
+        });
+
+        expect(config).toBeDefined();
+        expect(config?.targetStepCount).toBe(5);
+        expect(config?.allowReveal).toBe(true);
+    });
+
+    it("classifies Python project exercises through profile.project", () => {
+        const pythonProfile = getCurriculumProfile("python");
+
+        expect(
+            pythonProfile.project?.isProjectExercise({
+                exercise: {
+                    kind: "code_input",
+                } as any,
+                seed: {} as any,
+                topicKind: "module_project",
+            }),
+        ).toBe(true);
+
+        expect(
+            pythonProfile.project?.isProjectExercise({
+                exercise: {
+                    kind: "single_choice",
+                } as any,
+                seed: {} as any,
+                topicKind: "module_project",
+            }),
+        ).toBe(false);
+    });
+
+    it("keeps the SQL profile project capability available", () => {
+        const sqlProfile = getCurriculumProfile("sql");
+
+        expect(sqlProfile.project).toBeDefined();
+        expect(
+            sqlProfile.project?.isProjectExercise({
+                exercise: {
+                    kind: "code_input",
+                } as any,
+                seed: {} as any,
+                topicKind: "module_project",
+            }),
+        ).toBe(true);
+    });
+
     it("keeps sqlShape allowedDatasetIds aligned with the canonical SQL dataset registry", () => {
         const canonicalDatasetIds = listSqlDatasetIds().slice().sort();
         const shapeDatasetIds = [...(sqlShape.sqlCodeRecipe?.allowedDatasetIds ?? [])].sort();

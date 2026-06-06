@@ -1,0 +1,4 @@
+services:
+  runner:
+    ports:
+      - "${RUNNER_HOST_BIND:-127.0.0.1}:${RUNNER_HOST_PORT:-4001}:4001"

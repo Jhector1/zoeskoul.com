@@ -1,0 +1,50 @@
+{
+  "ok": true,
+  "profileId": "python",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "courseSlug": "applied-python-projects",
+  "topicId": "implementing-the-core-loop",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 5,
+    "exerciseKinds": {
+      "code_input": 5
+    },
+    "codeInputs": 5,
+    "projects": 5,
+    "capstones": 5,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 2,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 2,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-10-capstone-automation-project/python-10-building-and-polishing/implementing-the-core-loop",
+      "profileId": "python",
+      "moduleId": "python-10-capstone-automation-project",
+      "topicId": "implementing-the-core-loop",
+      "message": "Topic \"implementing-the-core-loop\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-10-capstone-automation-project/python-10-building-and-polishing/implementing-the-core-loop",
+      "profileId": "python",
+      "moduleId": "python-10-capstone-automation-project",
+      "topicId": "implementing-the-core-loop",
+      "exerciseId": "step2-repeat-until-quit",
+      "message": "Exercise \"step2-repeat-until-quit\" starterCode appears to contain most of the final solution structure."
+    }
+  ]
+}

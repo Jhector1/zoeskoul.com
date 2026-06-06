@@ -2,8 +2,16 @@ import type {
     TopicAuthoringDraft,
     TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
-import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
+import {
+    getCurriculumProfile,
+    type SubjectShapePack,
+} from "@zoeskoul/curriculum-profiles";
 import { buildExerciseMessageKeys } from "../messages/buildMessageKeys.js";
+import { applyProgressiveProjectFlow } from "./progressiveProjectFlow.js";
+import {
+    resolveTryItExerciseIdForSketch,
+    resolveTryItSketchIndexes,
+} from "./projectTopicEmission.js";
 
 function optionIdFromIndex(index: number) {
     return String.fromCharCode(97 + index);
@@ -49,32 +57,19 @@ function projectStepIdFromExerciseId(id: string) {
         .replace(/^_+|_+$/g, "");
 }
 
-function buildProjectStepIds(draft: TopicAuthoringDraft) {
-    const codeInputIds = draft.quizDraft
-        .filter((exercise) => exercise.kind === "code_input")
-        .map((exercise) => exercise.id);
-
-    const codeInputSet = new Set(codeInputIds);
+function buildProjectStepIds(
+    draft: TopicAuthoringDraft,
+    sourceExercises: TopicAuthoringDraft["quizDraft"],
+    maxSteps = 5,
+) {
+    const sourceIds = sourceExercises.map((exercise) => exercise.id);
+    const sourceIdSet = new Set(sourceIds);
 
     const explicit = (draft.projectDraft?.stepIds ?? []).filter((id) =>
-        codeInputSet.has(id),
+        sourceIdSet.has(id),
     );
 
-    return uniqueNonEmpty([...explicit, ...codeInputIds]);
-}
-
-function resolveTryItExerciseId(args: {
-    draft: TopicAuthoringDraft;
-    seed: TopicSeed;
-}) {
-    const explicitId = args.seed.practice?.tryItExerciseId?.trim();
-    if (explicitId) {
-        const hasExercise = args.draft.quizDraft.some((exercise) => exercise.id === explicitId);
-        if (hasExercise) return explicitId;
-    }
-
-    const firstCodeInput = args.draft.quizDraft.find((exercise) => exercise.kind === "code_input");
-    return firstCodeInput?.id;
+    return uniqueNonEmpty([...explicit, ...sourceIds]).slice(0, maxSteps);
 }
 
 function hasQuizExercises(draft: TopicAuthoringDraft) {
@@ -87,6 +82,21 @@ export function buildMessagesFromDraft(args: {
     draft: TopicAuthoringDraft;
 }) {
     const { seed, draft } = args;
+    const profile = getCurriculumProfile(seed.profileId);
+    const topicKind =
+        seed.moduleRole === "capstone" || seed.sectionRole === "capstone"
+            ? "capstone"
+            : seed.sectionRole === "module_project"
+                ? "module_project"
+                : null;
+    const isProjectOnlyTopic = topicKind !== null && !!profile.project;
+    const projectConfig =
+        isProjectOnlyTopic && topicKind
+            ? profile.project?.getProjectConfig({
+                seed,
+                topicKind,
+            }) ?? null
+            : null;
 
     const logicalModuleSlug = seed.moduleSlug;
 
@@ -105,20 +115,45 @@ export function buildMessagesFromDraft(args: {
         setNested(out, [...topicPath, "cards", `sketch${index}`, "title"], block.title);
     });
 
-    const projectStepIds = buildProjectStepIds(draft);
+    const sourceProjectExercises =
+        isProjectOnlyTopic && topicKind
+            ? draft.quizDraft.filter((exercise) =>
+                profile.project?.isProjectExercise({
+                    exercise,
+                    seed,
+                    topicKind,
+                }) === true,
+            )
+            : draft.quizDraft.filter((exercise) => exercise.kind === "code_input");
+    const projectStepIds = buildProjectStepIds(
+        draft,
+        sourceProjectExercises,
+        seed.generationTargets?.projectCodeInputTarget ??
+        projectConfig?.targetStepCount ??
+        3,
+    );
 
-    if (hasQuizExercises(draft)) {
+
+    const tryItExercises = sourceProjectExercises;
+    const emittedDraftExercises = isProjectOnlyTopic
+        ? draft.quizDraft.filter((exercise) => projectStepIds.includes(exercise.id))
+        : draft.quizDraft;
+    const progressiveExercises = applyProgressiveProjectFlow({
+        exercises: emittedDraftExercises,
+        projectStepIds,
+        projectConfig,
+        seed,
+    });
+
+    if (!isProjectOnlyTopic && hasQuizExercises(draft)) {
         setNested(out, [...topicPath, "cards", "quiz", "title"], "Quiz");
     }
 
     if (projectStepIds.length > 0) {
         const projectTitle =
             draft.projectDraft?.title ||
-            (seed.sectionRole === "capstone" || seed.moduleRole === "capstone"
-                ? "Final Project"
-                : seed.sectionRole === "module_project"
-                    ? "Module Project"
-                    : "Practice");
+            projectConfig?.projectTitle ||
+            "Practice";
         setNested(
             out,
             [...topicPath, "cards", "project", "title"],
@@ -138,13 +173,34 @@ export function buildMessagesFromDraft(args: {
     }
 
     if (seed.practice?.tryIt === true) {
-        const sketchIndex = seed.practice.tryItSketchIndex ?? 0;
-        const exerciseId = resolveTryItExerciseId({ draft, seed });
-        const exercise = exerciseId
-            ? draft.quizDraft.find((item) => item.id === exerciseId)
-            : undefined;
+        const sketchIndexes = resolveTryItSketchIndexes(draft, seed, profile);
+        const preferredTryItKind =
+            projectConfig?.preferredProjectExerciseKind ??
+            profile.practice?.preferredTryItExerciseKind ??
+            null;
+        for (const sketchIndex of sketchIndexes) {
+            const exerciseId = resolveTryItExerciseIdForSketch({
+                draft,
+                exercises: tryItExercises,
+                preferredKind: preferredTryItKind,
+                profile,
+                seed,
+                sketchIndex,
+            });
+            const exercise = exerciseId
+                ? draft.quizDraft.find((item) => item.id === exerciseId)
+                : undefined;
 
-        if (exercise) {
+            if (!exercise) continue;
+
+            setNested(
+                out,
+                [...topicPath, "tryIt", "allowReveal"],
+                projectConfig?.tryItDefault?.allowReveal ??
+                    projectConfig?.allowReveal ??
+                    profile.practice?.tryItDefault.allowReveal ??
+                    true,
+            );
             setNested(
                 out,
                 [
@@ -173,7 +229,7 @@ export function buildMessagesFromDraft(args: {
         setNested(out, [...sketchPath, block.id, "bodyMarkdown"], block.bodyMarkdown);
     }
 
-    for (const exercise of draft.quizDraft) {
+    for (const exercise of progressiveExercises) {
         const optionIds =
             exercise.kind === "single_choice" || exercise.kind === "multi_choice"
                 ? exercise.options.map((_, index) => optionIdFromIndex(index))

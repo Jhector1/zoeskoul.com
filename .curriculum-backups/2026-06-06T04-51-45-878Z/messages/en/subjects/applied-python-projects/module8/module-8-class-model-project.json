@@ -1,0 +1,107 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-8-object-oriented-programming": {
+        "module-8-class-model-project": {
+          "label": "Module 8 Class Model Project",
+          "summary": "Build a small class-based bank account project in three connected steps: create the class, store account data with attributes, and add methods that change and report the balance.",
+          "cards": {
+            "sketch0": {
+              "title": "Start the project with one class"
+            },
+            "sketch1": {
+              "title": "Use __init__ to give each object its own data"
+            },
+            "sketch2": {
+              "title": "Add methods to model account behavior"
+            },
+            "project": {
+              "title": "Build a BankAccount class project"
+            }
+          },
+          "projectSteps": {
+            "project_step_1_bankaccount_class": {
+              "title": "Project Step 1: Create the BankAccount blueprint"
+            },
+            "project_step_2_account_attributes": {
+              "title": "Project Step 2: Store owner and balance"
+            },
+            "project_step_3_account_methods": {
+              "title": "Project Step 3: Add deposit and summary methods"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_module_8_class_model_project_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Create a class named `BankAccount`. For now, the class does not need any attributes or methods. Just define the class so Python can create instances from it."
+            },
+            "try_module_8_class_model_project_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Build on the previous step. Add an `__init__` method to `BankAccount` that takes `owner` and `balance`, then stores them as `self.owner` and `self.balance`."
+            },
+            "try_module_8_class_model_project_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Continue the same project. Keep the `BankAccount` class with its `__init__` method, then add:\n\n- a `deposit(self, amount)` method that increases `self.balance` by `amount` and returns the new balance\n- a `summary(self)` method that returns a string in this format: `Owner: $Balance`\n\nFor example, an account with owner `Ava` and balance `125` should return `Ava: $125`."
+            }
+          },
+          "quiz": {
+            "project-step-1-bankaccount-class": {
+              "title": "Project Step 1: Create the BankAccount blueprint",
+              "prompt": "Start the module project. In step 1 of 3, Create a class named `BankAccount`. For now, the class does not need any attributes or methods. Just define the class so Python can create instances from it.",
+              "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+              "help": {
+                "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Step 1: define the BankAccount class below."
+            },
+            "project-step-2-account-attributes": {
+              "title": "Project Step 2: Store owner and balance",
+              "prompt": "Continue the same module project from the previous working step. In step 2 of 3, Build on the previous step. Add an `__init__` method to `BankAccount` that takes `owner` and `balance`, then stores them as `self.owner` and `self.balance`.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "class BankAccount:\n    pass\n# Project step 2: Project Step 2: Store owner and balance\n# Keep the working code above from the previous step.\n# Next, Build on the previous step\n# Add only the focused change for this step below or inside the existing work.\n"
+            },
+            "project-step-3-account-methods": {
+              "title": "Project Step 3: Add deposit and summary methods",
+              "prompt": "Continue the same module project from the previous working step. In step 3 of 3, Continue the same project. Keep the `BankAccount` class with its `__init__` method, then add:\n\n- a `deposit(self, amount)` method that increases `self.balance` by `amount` and returns the new balance\n- a `summary(self)` method that returns a string in this format: `Owner: $Balance`\n\nFor example, an account with owner `Ava` and balance `125` should return `Ava: $125`.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n# Project step 3: Project Step 3: Add deposit and summary methods\n# Keep the working code above from the previous step.\n# Next, Continue the same project\n# Add only the focused change for this step below or inside the existing work.\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-8-object-oriented-programming": {
+        "module-8-class-model-project": {
+          "sketch-1": {
+            "title": "Start the project with one class",
+            "bodyMarkdown": "A class is a blueprint for making objects. In a project, that means you can group related data and behavior in one place instead of scattering variables everywhere.\n\nFor this mini-project, you'll build a simple **bank account** model. First, make a class. Then you'll give each account its own data. After that, you'll add methods that do useful work.\n\nHere is the smallest starting point:\n\n```python\nclass BankAccount:\n    pass\n```\n\nLine by line:\n\n- `class BankAccount:` starts a new class named `BankAccount`.\n- `pass` means \"nothing is here yet,\" but the class is still valid Python.\n\nOnce the class exists, Python can create objects from it. Later, each object can hold its own account owner's name and balance.\n\nWorked example:\n\n```python\nclass BankAccount:\n    pass\n\nchecking = BankAccount()\nsavings = BankAccount()\n```\n\nIn this example, `checking` and `savings` are two different instances of the same class. They come from the same blueprint, but they can store different values once you add attributes.\n\nTry it yourself: in the next step, create the `BankAccount` class in the code editor and click Run. Then extend it by adding a constructor so each account starts with an owner name and a balance."
+          },
+          "sketch-2": {
+            "title": "Use __init__ to give each object its own data",
+            "bodyMarkdown": "The `__init__` method runs when you create a new instance. It is the usual place to set up attributes.\n\nExample:\n\n```python\nclass BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n```\n\nStep by step:\n\n- `def __init__(self, owner, balance):` defines the constructor.\n- `self` refers to the specific object being created.\n- `self.owner = owner` stores the owner's name on that object.\n- `self.balance = balance` stores the starting balance on that object.\n\nWorked example:\n\n```python\naccount = BankAccount(\"Ava\", 100)\n```\n\nAfter this line:\n\n- `account.owner` is `\"Ava\"`\n- `account.balance` is `100`\n\nThat means each instance can carry its own state.\n\nTry this: after adding `__init__`, create two accounts with different names and balances. Predict what each object's attributes should be before you run the code."
+          },
+          "sketch-3": {
+            "title": "Add methods to model account behavior",
+            "bodyMarkdown": "Methods are functions inside a class. They let objects do things with their own data.\n\nFor a bank account, useful methods might include depositing money and showing a summary.\n\nExample:\n\n```python\nclass BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n```\n\nLine by line for the new methods:\n\n- `def deposit(self, amount):` defines a method that receives the object and an amount.\n- `self.balance += amount` updates that object's balance.\n- `return self.balance` sends back the new balance.\n- `def summary(self):` defines another method.\n- `return f\"{self.owner}: ${self.balance}\"` builds a readable string from the object's attributes.\n\nWorked example:\n\n```python\naccount = BankAccount(\"Ava\", 100)\naccount.deposit(25)\nprint(account.summary())\n```\n\nThis would describe the same account after its balance changes.\n\nYour turn: add one method at a time. Run after each change so you can catch mistakes early and see how methods use `self` to work with the current object."
+          }
+        }
+      }
+    }
+  }
+}

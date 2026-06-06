@@ -7,6 +7,8 @@ import type {
   TopicManifestRefMap,
 } from "@/lib/subjects/_core/subjectManifestTypes";
 
+import appliedPythonProjects from "./applied-python-projects/subject.manifest.json";
+import { TOPIC_MANIFESTS as appliedPythonProjectsTopicManifests } from "./applied-python-projects/topics.generated";
 import python from "./python/subject.manifest.json";
 import { TOPIC_MANIFESTS as pythonTopicManifests } from "./python/topics.generated";
 import pythonDataFunctions from "./python-data-functions/subject.manifest.json";
@@ -22,6 +24,7 @@ import { TOPIC_MANIFESTS as sqlV2TopicManifests } from "./sql-v2/topics.generate
 export type GeneratedSubjectGenKey = "python_part1" | "sql_for_beginners";
 
 export const SUBJECT_MANIFESTS: Record<string, SubjectManifest> = {
+  "applied-python-projects": appliedPythonProjects as SubjectManifest,
   "python": python as SubjectManifest,
   "python-data-functions": pythonDataFunctions as SubjectManifest,
   "python-v2": pythonV2 as SubjectManifest,
@@ -38,6 +41,12 @@ export const SUBJECT_GENERATOR_SOURCES: Record<
     topicManifests: TopicManifestRefMap;
   }
 > = {
+  "applied-python-projects": {
+    subjectSlug: "applied-python-projects",
+    genKey: "python_part1",
+    manifest: appliedPythonProjects as SubjectManifest,
+    topicManifests: appliedPythonProjectsTopicManifests as TopicManifestRefMap,
+  },
   "python": {
     subjectSlug: "python",
     genKey: "python_part1",
@@ -74,6 +83,6 @@ export const SUBJECT_GENERATOR_SOURCES_BY_GENKEY: Record<
   GeneratedSubjectGenKey,
   Array<(typeof SUBJECT_GENERATOR_SOURCES)[keyof typeof SUBJECT_GENERATOR_SOURCES]>
 > = {
-  "python_part1": [SUBJECT_GENERATOR_SOURCES["python"], SUBJECT_GENERATOR_SOURCES["python-data-functions"], SUBJECT_GENERATOR_SOURCES["python-v2"]],
+  "python_part1": [SUBJECT_GENERATOR_SOURCES["applied-python-projects"], SUBJECT_GENERATOR_SOURCES["python"], SUBJECT_GENERATOR_SOURCES["python-data-functions"], SUBJECT_GENERATOR_SOURCES["python-v2"]],
   "sql_for_beginners": [SUBJECT_GENERATOR_SOURCES["sql"], SUBJECT_GENERATOR_SOURCES["sql-v2"]],
 };

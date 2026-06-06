@@ -1,0 +1,152 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-10-capstone-automation-project": {
+        "capstone-automation-project": {
+          "label": "Capstone Automation Project",
+          "summary": "Build a full multi-file task-summary automation app with a model, storage helper, report helper, saved output file, and README documentation.",
+          "cards": {
+            "sketch0": {
+              "title": "Start the capstone with a real project layout"
+            },
+            "sketch1": {
+              "title": "Let each helper file own one part of the workflow"
+            },
+            "sketch2": {
+              "title": "A finished capstone should save output and explain itself"
+            },
+            "project": {
+              "title": "Build the task summary automation capstone"
+            }
+          },
+          "projectSteps": {
+            "capstone_project_step_1_task_model": {
+              "title": "Step 1: Create the Task model"
+            },
+            "capstone_project_step_2_load_tasks": {
+              "title": "Step 2: Load tasks from data/tasks.txt"
+            },
+            "capstone_project_step_3_build_report": {
+              "title": "Step 3: Build the summary report"
+            },
+            "capstone_project_step_4_save_report": {
+              "title": "Step 4: Save reports/summary.txt"
+            },
+            "capstone_project_step_5_wire_workflow": {
+              "title": "Step 5: Wire the full workflow in main.py"
+            },
+            "capstone_project_step_6_document_project": {
+              "title": "Step 6: Document the finished project"
+            }
+          },
+          "quiz": {
+            "capstone-project-step-1-task-model": {
+              "title": "Step 1: Create the Task model",
+              "prompt": "Start the capstone by giving the project a real model file. In `tasks/model.py`, create a `Task` class that stores `title` and `done`, then add a `label()` method that returns text like `Write outline: done` or `Record demo: pending`.",
+              "hint": "The class belongs in `tasks/model.py`, and `label()` should read from the object's own attributes.",
+              "help": {
+                "concept": "A model class gives the rest of the project one clear object to pass around instead of loose dictionaries.",
+                "hint_1": "Use `__init__(self, title, done)` to store the task state.",
+                "hint_2": "Inside `label()`, choose either `done` or `pending` based on `self.done`, then return one formatted string."
+              },
+              "starterCode": "# Create the Task class here.\n"
+            },
+            "capstone-project-step-2-load-tasks": {
+              "title": "Step 2: Load tasks from data/tasks.txt",
+              "prompt": "Now teach the project how to read its saved task rows. In `tasks/storage.py`, write `load_tasks(path)` so it opens `data/tasks.txt`, turns each `title|status` line into a `Task` object, and returns the full list.",
+              "hint": "Each row becomes `Task(title, status == \"done\")`.",
+              "help": {
+                "concept": "A storage helper keeps file-reading logic separate from the model and the final report.",
+                "hint_1": "Split each trimmed line into `title` and `status` with `split(\"|\")`.",
+                "hint_2": "Append `Task(title, status == \"done\")` to the list so the `done` field becomes a real boolean."
+              },
+              "starterCode": "from tasks.model import Task\n\ndef load_tasks(path):\n    # Read title|status rows and return Task objects.\n    pass\n"
+            },
+            "capstone-project-step-3-build-report": {
+              "title": "Step 3: Build the summary report",
+              "prompt": "With task objects loading correctly, create the reporting helper. In `tasks/report.py`, write `build_report(tasks)` so it returns a multi-line summary with a title, one bullet for each task label, and final `Completed` and `Remaining` lines.",
+              "hint": "Use each task object's `label()` method instead of rebuilding the status text by hand.",
+              "help": {
+                "concept": "A report helper should assemble readable output from the model objects it receives.",
+                "hint_1": "Start `lines` with the heading text, then append one `- {task.label()}` line per task.",
+                "hint_2": "Count the finished tasks while you loop so you can append `Completed` and `Remaining` at the end."
+              },
+              "starterCode": "def build_report(tasks):\n    # Return the full summary text.\n    pass\n"
+            },
+            "capstone-project-step-4-save-report": {
+              "title": "Step 4: Save reports/summary.txt",
+              "prompt": "Make the project produce a real artifact. In `tasks/report.py`, add `save_report(report_text, path)` so it writes the report to `reports/summary.txt`, reopens the file, and returns the saved text.",
+              "hint": "Write first, then read the same path back so the result is observable in the output panel.",
+              "help": {
+                "concept": "File-writing steps need a visible confirmation, so reopening the saved file is a good beginner-friendly pattern.",
+                "hint_1": "Use one `with open(path, \"w\")` block to save the text.",
+                "hint_2": "Use a second `with open(path, \"r\")` block to return the saved contents."
+              },
+              "starterCode": "def build_report(tasks):\n    done_count = 0\n    lines = [\"Task Summary\", \"------------\"]\n\n    for task in tasks:\n        if task.done:\n            done_count += 1\n        lines.append(f\"- {task.label()}\")\n\n    lines.append(f\"Completed: {done_count}\")\n    lines.append(f\"Remaining: {len(tasks) - done_count}\")\n    return \"\\n\".join(lines)\n\n# Add save_report(report_text, path).\n"
+            },
+            "capstone-project-step-5-wire-workflow": {
+              "title": "Step 5: Wire the full workflow in main.py",
+              "prompt": "The helpers are ready. Update `main.py` so it loads tasks from `data/tasks.txt`, builds the report, saves it to `reports/summary.txt`, and prints the saved report text.",
+              "hint": "Call the helpers in the same order a real user would expect the workflow to happen.",
+              "help": {
+                "concept": "The main file is the place where separate helpers get connected into one complete automation flow.",
+                "hint_1": "First call `load_tasks`, then pass that list into `build_report`.",
+                "hint_2": "Store the return value from `save_report(...)` and print that saved text at the end."
+              },
+              "starterCode": "from tasks.report import build_report, save_report\nfrom tasks.storage import load_tasks\n\n# Load the tasks, build the report, save it to reports/summary.txt,\n# and print the saved text.\n"
+            },
+            "capstone-project-step-6-document-project": {
+              "title": "Step 6: Document the finished project",
+              "prompt": "Finish the capstone with a short README that would help a teammate understand the app. Update `README.md` so it explains what the project does, names the important files, and mentions that the saved output goes to `reports/summary.txt`. Keep the working Python workflow intact.",
+              "hint": "A good README here should mention the model, storage helper, report helper, main flow, and saved report path.",
+              "help": {
+                "concept": "Documentation is part of a production-ready project because it explains the structure and the output to someone new.",
+                "hint_1": "Include a short overview paragraph, then a small section that lists the role of each main file.",
+                "hint_2": "Make sure `README.md` explicitly names `data/tasks.txt` and `reports/summary.txt` so the project flow is easy to follow."
+              },
+              "starterCode": "# Task Summary Automation\n\nDescribe what this project does, which files matter most,\nand how the report gets created.\n"
+            },
+            "capstone-project-try-report-helper": {
+              "title": "Try a capstone helper file",
+              "prompt": "Set up one small capstone-style helper file. In `tasks/report.py`, define `save_message(text)` so it returns `Saved: ...` using the incoming text. Leave `main.py` importing and calling that helper.",
+              "hint": "Define the helper in `tasks/report.py` and return one formatted string from the incoming text.",
+              "help": {
+                "concept": "A capstone helper file should hold one reusable function while `main.py` imports and uses it.",
+                "hint_1": "Write `def save_message(text):` in `tasks/report.py`.",
+                "hint_2": "Return `f\"Saved: {text}\"` so `main.py` can reuse the helper output."
+              },
+              "starterCode": "# Add save_message(text) here.\n"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_capstone_automation_project_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Set up one small capstone-style helper file. In `tasks/report.py`, define `save_message(text)` so it returns `Saved: ...` using the incoming text. Leave `main.py` importing and calling that helper."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-10-capstone-automation-project": {
+        "capstone-automation-project": {
+          "capstone-overview": {
+            "title": "Start the capstone with a real project layout",
+            "bodyMarkdown": "A capstone feels more believable when it uses several small files that each do one job.\n\nThis project is headed toward a layout like this:\n\n```python\nmain.py\ntasks/model.py\ntasks/storage.py\ntasks/report.py\ndata/tasks.txt\nreports/summary.txt\nREADME.md\n```\n\nThat structure gives you clear responsibilities:\n\n- the model file defines a `Task`\n- the storage file loads saved rows\n- the report file builds and saves the output\n- `main.py` wires the whole workflow together"
+          },
+          "capstone-functions-flow": {
+            "title": "Let each helper file own one part of the workflow",
+            "bodyMarkdown": "The easiest way to keep a capstone readable is to let each helper file own one kind of work.\n\nA clean flow looks like this:\n\n```python\nfrom tasks.storage import load_tasks\nfrom tasks.report import build_report, save_report\n\ntasks = load_tasks(\"data/tasks.txt\")\nreport_text = build_report(tasks)\nprint(save_report(report_text, \"reports/summary.txt\"))\n```\n\nLine by line:\n\n- `load_tasks(...)` reads the file and returns `Task` objects\n- `build_report(...)` turns those objects into readable text\n- `save_report(...)` writes and reopens the saved summary\n\nBecause each helper has one job, each piece is easier to test and easier to replace later."
+          },
+          "capstone-polish": {
+            "title": "A finished capstone should save output and explain itself",
+            "bodyMarkdown": "Production-ready beginner projects do two extra things beyond just calculating values:\n\n- they create a visible output file\n- they explain themselves in a README\n\nThat means someone else can open the project and understand both **what it makes** and **how it is organized**.\n\nA strong beginner README for this capstone should answer:\n\n- What does the project automate?\n- Which files are most important?\n- Where is the final saved report written?"
+          }
+        }
+      }
+    }
+  }
+}

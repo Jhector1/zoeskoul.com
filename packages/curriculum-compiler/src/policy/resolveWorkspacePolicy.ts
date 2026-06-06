@@ -17,6 +17,49 @@ export type ResolvedWorkspacePolicy = {
     avoidTerms: string[];
     notes: string[];
 };
+
+function filterAvoidTermsForWorkspace(args: {
+    workspace: WorkspaceProfile;
+    avoidTerms: string[];
+}) {
+    const { workspace, avoidTerms } = args;
+    const allowed = new Set<string>();
+    const capabilities = workspace.capabilities;
+    const createFilesEnabled = capabilities.createFiles?.enabled === true;
+    const createFoldersEnabled = capabilities.createFolders?.enabled === true;
+
+    if (
+        capabilities.filesystem.enabled ||
+        createFilesEnabled ||
+        createFoldersEnabled
+    ) {
+        allowed.add("file creation");
+    }
+
+    if (createFilesEnabled || capabilities.multiFileProjects.enabled) {
+        allowed.add(".py");
+        allowed.add("Python file");
+        allowed.add("save this as main.py");
+    }
+
+    if (capabilities.multiFileProjects.enabled) {
+        allowed.add("multi-file project");
+    }
+
+    if (capabilities.terminal.enabled) {
+        allowed.add("terminal");
+        allowed.add("command line");
+        allowed.add("shell");
+    }
+
+    if (capabilities.packageInstall.enabled) {
+        allowed.add("pip install");
+        allowed.add("package installation");
+    }
+
+    return avoidTerms.filter((term) => !allowed.has(term));
+}
+
 function deepMergeWorkspace<T>(base: T, override?: Partial<T>): T {
     if (!override) return structuredClone(base);
 
@@ -78,7 +121,10 @@ export function resolveWorkspacePolicy(args: {
             ...(modulePolicy?.forbiddenActions ?? []),
         ],
         preferredTerms: args.blueprint.courseGenerationPolicy?.preferredTerms ?? {},
-        avoidTerms: args.blueprint.courseGenerationPolicy?.avoidTerms ?? [],
+        avoidTerms: filterAvoidTermsForWorkspace({
+            workspace: topicWorkspace,
+            avoidTerms: args.blueprint.courseGenerationPolicy?.avoidTerms ?? [],
+        }),
         notes: [
             ...(args.blueprint.courseGenerationPolicy?.notes ?? []),
             ...(modulePolicy?.notes ?? []),

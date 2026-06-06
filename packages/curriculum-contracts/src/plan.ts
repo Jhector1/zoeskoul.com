@@ -3,6 +3,7 @@ import type {
   CourseProfileId,
   CourseVersionStatus,
 } from "./blueprint.js";
+import type { PracticeConfig } from "./practice.js";
 
 export type PlannedTopic = {
   topicId: string;
@@ -12,12 +13,7 @@ export type PlannedTopic = {
   minutes: number;
   technical?: boolean;
   learningGoals: string[];
-  practice?: {
-    tryIt?: boolean;
-    tryItExerciseId?: string;
-    tryItSketchIndex?: number;
-    projectFlow?: "standalone" | "progressive";
-  };
+  practice?: PracticeConfig;
 };
 
 export type PlannedSection = {
@@ -32,6 +28,7 @@ export type PlannedSection = {
   weeksLabel?: string | null;
 
   bullets?: string[];
+  practiceDefaults?: PracticeConfig;
 
   topics: PlannedTopic[];
 };
@@ -54,6 +51,7 @@ export type PlannedModule = {
   weekStart?: number | null;
   weekEnd?: number | null;
   runtimePolicy?: PlannedModuleRuntimePolicy;
+  practiceDefaults?: PracticeConfig;
   sections: PlannedSection[];
 };
 

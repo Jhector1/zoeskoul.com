@@ -1,4 +1,5 @@
 import type { CourseProfileId } from "./blueprint.js";
+import type { PracticeConfig } from "./practice.js";
 import type { SqlDatasetArtifact } from "./sql-dataset.js";
 import { ExerciseKindKey, ResolvedExercisePolicy } from "./exercise-policy.js";
 import {
@@ -70,12 +71,7 @@ export type TopicSeed = {
     modulePrefix: string;
     moduleOrder: number;
     sectionOrder: number;
-    practice?: {
-        tryIt?: boolean;
-        tryItExerciseId?: string;
-        tryItSketchIndex?: number;
-        projectFlow?: "standalone" | "progressive";
-    };
+    practice?: PracticeConfig;
     generationTargets?: {
         quizBankMin: number;
         quizBankTarget: number;

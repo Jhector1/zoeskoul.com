@@ -213,6 +213,23 @@ function validateSection(
                 }
 
                 if (
+                    typeof topic.practice.tryItPlacement !== "undefined" &&
+                    topic.practice.tryItPlacement !== "first_sketch" &&
+                    topic.practice.tryItPlacement !== "all_sketches" &&
+                    topic.practice.tryItPlacement !== "none"
+                ) {
+                    issues.push(`${topicPath}.practice.tryItPlacement must be "first_sketch", "all_sketches", or "none" when provided`);
+                }
+
+                if (
+                    typeof topic.practice.tryItExerciseIds !== "undefined" &&
+                    (!Array.isArray(topic.practice.tryItExerciseIds) ||
+                        topic.practice.tryItExerciseIds.some((value) => !isNonEmptyString(value)))
+                ) {
+                    issues.push(`${topicPath}.practice.tryItExerciseIds must be an array of non-empty strings when provided`);
+                }
+
+                if (
                     typeof topic.practice.tryItSketchIndex !== "undefined" &&
                     (
                         typeof topic.practice.tryItSketchIndex !== "number" ||
@@ -321,6 +338,8 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
         spec.policy?.projectPolicy?.minProjectsBeforeCapstone ?? 0;
     const capstoneRequired =
         spec.policy?.projectPolicy?.capstoneRequired === true;
+    const enforceAuthoredProjectStructure =
+        capstoneRequired || minProjectsBeforeCapstone > 0;
 
     const moduleSlugSet = new Set<string>();
     const sectionSlugSet = new Set<string>();
@@ -489,8 +508,11 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
     const hasCapstone = moduleStructure.some(
         (entry) => entry.isCapstoneModule || entry.capstoneSectionCount > 0,
     );
+    const lastModule = spec.modules[spec.modules.length - 1];
+    const lastModulePath = `modules[${spec.modules.length - 1}]`;
 
     if (
+        enforceAuthoredProjectStructure &&
         minProjectsBeforeCapstone > 0 &&
         moduleProjectsBeforeCapstone < minProjectsBeforeCapstone
     ) {
@@ -499,10 +521,47 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
         );
     }
 
-    if (capstoneRequired && !hasCapstone) {
+    if (enforceAuthoredProjectStructure && capstoneRequired && !hasCapstone) {
         issues.push(
             "policy.projectPolicy.capstoneRequired requires an authored capstone module or capstone section",
         );
+    }
+
+    if (enforceAuthoredProjectStructure && capstoneRequired) {
+        if (lastModule?.role !== "capstone") {
+            issues.push(
+                'policy.projectPolicy.capstoneRequired requires the final module to use role="capstone"',
+            );
+        }
+
+        const lastModuleCapstoneSections =
+            lastModule?.sections.filter((section) => section.role === "capstone") ?? [];
+
+        if (lastModuleCapstoneSections.length !== 1) {
+            issues.push(
+                "policy.projectPolicy.capstoneRequired requires the final module to contain exactly one capstone section",
+            );
+        }
+
+        if (lastModuleCapstoneSections.length === 1) {
+            const capstoneSection = lastModuleCapstoneSections[0];
+            const capstoneSectionIndex = lastModule.sections.findIndex(
+                (section) => section === capstoneSection,
+            );
+            const capstoneSectionPath = `${lastModulePath}.sections[${capstoneSectionIndex}]`;
+
+            if (capstoneSection.role !== "capstone") {
+                issues.push(
+                    `${capstoneSectionPath}.role must be "capstone" for the final capstone section`,
+                );
+            }
+
+            if (capstoneSection.topics.length !== 1) {
+                issues.push(
+                    `${capstoneSectionPath}: capstone sections must contain exactly one topic`,
+                );
+            }
+        }
     }
 
     return issues;

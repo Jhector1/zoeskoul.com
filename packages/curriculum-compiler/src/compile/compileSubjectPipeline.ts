@@ -35,6 +35,7 @@ import { writeTopicReports } from "../reports/writeTopicReports.js";
 import { writeTopicAttemptReport } from "../reports/writeTopicAttemptReport.js";
 import { writeTopicCompileStatus } from "../reports/writeTopicCompileStatus.js";
 import { writeCourseQualityReport } from "../reports/writeCourseQualityReport.js";
+import { buildCourseQualityReportFromArtifacts } from "../reports/buildCourseQualityReportFromArtifacts.js";
 import {
     buildTopicAttemptHashes,
     buildTopicAttemptMetadata,
@@ -232,12 +233,6 @@ export async function compileSubjectPipeline(args: {
         attempts: number;
         retryCodes: string[];
     }> = [];
-    const qualityTopics: Array<{
-        seed: any;
-        draft?: TopicAuthoringDraft;
-        topicBundle?: any;
-    }> = [];
-
     args.onProgress?.({
         current: completedTopics,
         total: totalTopics,
@@ -758,12 +753,6 @@ export async function compileSubjectPipeline(args: {
                     attempts: attempt + 1,
                     retryCodes,
                 });
-                qualityTopics.push({
-                    seed,
-                    draft,
-                    topicBundle,
-                });
-
                 completedTopics += 1;
 
                 args.onProgress?.({
@@ -863,14 +852,9 @@ export async function compileSubjectPipeline(args: {
 
     await writeCourseQualityReport({
         subjectSlug: args.blueprint.subjectSlug,
-        report: buildCurriculumQualityReport({
-            profileId: args.blueprint.profileId,
-            subjectSlug: args.blueprint.subjectSlug,
-            courseSlug: args.blueprint.courseSlug,
-            topics: qualityTopics,
-            requireFinalCapstone:
-                args.spec?.policy?.projectPolicy?.capstoneRequired ??
-                args.blueprint.level === "beginner",
+        report: await buildCourseQualityReportFromArtifacts({
+            blueprint: args.blueprint,
+            plan: args.plan,
             spec: args.spec ?? null,
         }),
     });

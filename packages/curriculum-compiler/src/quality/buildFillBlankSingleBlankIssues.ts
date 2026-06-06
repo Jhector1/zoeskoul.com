@@ -1,16 +1,7 @@
-import type { TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
+import {countFillBlanks, TopicAuthoringDraft} from "@zoeskoul/curriculum-contracts";
 import type { CritiqueIssue } from "@zoeskoul/curriculum-profiles";
 
-function countFillBlanks(template: string, prompt: string): number {
-    const t = String(template ?? "");
-    const p = String(prompt ?? "");
 
-    const templateBracketBlanks = (t.match(/\[blank\d*\]/gi) ?? []).length;
-    const templateUnderscoreBlanks = (t.match(/_{2,}/g) ?? []).length;
-    const promptUnderscoreBlanks = (p.match(/_{2,}/g) ?? []).length;
-
-    return templateBracketBlanks + templateUnderscoreBlanks + promptUnderscoreBlanks;
-}
 
 export function buildFillBlankSingleBlankIssues(args: {
     draft: TopicAuthoringDraft;

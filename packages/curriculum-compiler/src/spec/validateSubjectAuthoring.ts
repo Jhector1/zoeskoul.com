@@ -180,6 +180,7 @@ async function validateCoursePlanModuleAlignment(args: {
     );
 
     if (!(await pathExists(planPath))) {
+        args.issues.push(`${planPath}: course.plan.json is required`);
         return;
     }
 

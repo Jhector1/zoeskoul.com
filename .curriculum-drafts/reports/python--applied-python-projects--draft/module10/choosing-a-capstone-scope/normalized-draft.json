@@ -1,0 +1,183 @@
+{
+  "title": "Choosing a Capstone Scope",
+  "summary": "Choose a capstone idea that is useful, small enough to finish, and easy to test with clear inputs and outputs.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "scope-basics",
+      "title": "Pick a project that is small, useful, and testable",
+      "bodyMarkdown": "A good capstone project is **not** the biggest idea you can imagine. It is a project you can actually finish.\n\nA strong beginner capstone usually has three qualities:\n\n1. **Useful**: it solves a real small problem.\n2. **Small enough**: you can build a first working version with a few features.\n3. **Testable**: you can clearly check whether it works.\n\nFor example, compare these two ideas:\n\n- **Too big:** \"Build a full personal finance app with charts, accounts, reminders, and cloud sync.\"\n- **Better scope:** \"Read expense amounts from a file, total them by category, and save a summary report.\"\n\nThe second idea is better because it has clear inputs and outputs:\n\n- input file with expense lines\n- Python code that reads and processes data\n- output file with a summary\n\nHere is a tiny planning example in Python terms:\n\n```python\nexpenses = [12, 8, 5]\ntotal = sum(expenses)\nprint(total)\n```\n\nStep by step:\n\n- `expenses = [12, 8, 5]` stores sample data in a list.\n- `sum(expenses)` adds the numbers.\n- `print(total)` shows the result in the output panel.\n\nThat small example hints at a real project: read values, process them, and show a result.\n\n**Try it yourself:** In the code editor, change the numbers in the list and click Run. Then ask yourself: could this become a small project with file input, a helper function, and a saved report?"
+    },
+    {
+      "id": "scope-checklist",
+      "title": "Use a simple scope checklist",
+      "bodyMarkdown": "When choosing a capstone, use a short checklist:\n\n- **What problem does it solve?**\n- **What is the smallest useful version?**\n- **What files, functions, or classes might it need?**\n- **How will I test it?**\n\nA beginner-friendly capstone often fits into a plan like this:\n\n- one main program\n- one or two helper functions or helper files\n- optional class if it makes the data clearer\n- input from a small file\n- output printed and/or written to a file\n\nWorked example: a **text analyzer**\n\nPossible features:\n\n- count lines\n- count words\n- find the longest word\n- save results to a report file\n\nThis is a better scope than \"build an AI writing assistant\" because each feature is concrete and testable.\n\nYou can even plan tests before building:\n\n- If the file contains `hello world`, word count should be `2`.\n- If the file contains three lines, line count should be `3`.\n\n**Your turn:** Pick one capstone idea from this module, then write its smallest useful version in one sentence."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "capstone-scope-planner",
+      "kind": "code_input",
+      "title": "Plan a realistic capstone scope",
+      "prompt": "Build a small planning helper for capstone ideas. Complete the function `evaluate_scope(project)`.\n\nThe function receives one dictionary encoded by the checker with these keys:\n\n- `name`: project name\n- `features`: number of planned features\n- `uses_files`: whether the project reads or writes files\n- `has_test_plan`: whether the learner already knows how to test it\n- `problem_clear`: whether the project solves a clear problem\n\nReturn a new dictionary with these keys:\n\n- `name`: same project name\n- `scope`: `\"good\"` if the project is realistic, otherwise `\"too_big\"`\n- `next_step`: a short planning message\n\nRules:\n\n- A project is `\"good\"` when `problem_clear` is `True`, `has_test_plan` is `True`, and `features` is **4 or fewer**.\n- Otherwise it is `\"too_big\"`.\n- If the scope is `\"good\"` and `uses_files` is `True`, `next_step` should be `\"Build the smallest file-based version first.\"`\n- If the scope is `\"good\"` and `uses_files` is `False`, `next_step` should be `\"Build the smallest working version first.\"`\n- If the scope is `\"too_big\"`, `next_step` should be `\"Cut features and define a simple test plan.\"`\n\nWrite only the function. Do not print anything.",
+      "starterCode": "def evaluate_scope(project):\n    # project is a dictionary with keys:\n    # name, features, uses_files, has_test_plan, problem_clear\n    \n    # TODO: decide whether the scope is \"good\" or \"too_big\"\n    # TODO: choose the correct next_step message\n    # TODO: return a new dictionary with name, scope, and next_step\n    pass\n",
+      "solutionCode": "def evaluate_scope(project):\n    is_good = (\n        project[\"problem_clear\"]\n        and project[\"has_test_plan\"]\n        and project[\"features\"] <= 4\n    )\n\n    if is_good:\n        scope = \"good\"\n        if project[\"uses_files\"]:\n            next_step = \"Build the smallest file-based version first.\"\n        else:\n            next_step = \"Build the smallest working version first.\"\n    else:\n        scope = \"too_big\"\n        next_step = \"Cut features and define a simple test plan.\"\n\n    return {\n        \"name\": project[\"name\"],\n        \"scope\": scope,\n        \"next_step\": next_step,\n    }\n",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "evaluate_scope",
+          "args": [
+            [
+              [
+                "name",
+                "Expense Summary"
+              ],
+              [
+                "features",
+                3
+              ],
+              [
+                "uses_files",
+                true
+              ],
+              [
+                "has_test_plan",
+                true
+              ],
+              [
+                "problem_clear",
+                true
+              ]
+            ]
+          ],
+          "argKinds": [
+            "dict_entries"
+          ],
+          "expected": [
+            [
+              "name",
+              "Expense Summary"
+            ],
+            [
+              "scope",
+              "good"
+            ],
+            [
+              "next_step",
+              "Build the smallest file-based version first."
+            ]
+          ],
+          "expectedKind": "dict_entries"
+        },
+        {
+          "type": "function_returns",
+          "functionName": "evaluate_scope",
+          "args": [
+            [
+              [
+                "name",
+                "Quiz Game"
+              ],
+              [
+                "features",
+                4
+              ],
+              [
+                "uses_files",
+                false
+              ],
+              [
+                "has_test_plan",
+                true
+              ],
+              [
+                "problem_clear",
+                true
+              ]
+            ]
+          ],
+          "argKinds": [
+            "dict_entries"
+          ],
+          "expected": [
+            [
+              "name",
+              "Quiz Game"
+            ],
+            [
+              "scope",
+              "good"
+            ],
+            [
+              "next_step",
+              "Build the smallest working version first."
+            ]
+          ],
+          "expectedKind": "dict_entries"
+        },
+        {
+          "type": "function_returns",
+          "functionName": "evaluate_scope",
+          "args": [
+            [
+              [
+                "name",
+                "Mega App"
+              ],
+              [
+                "features",
+                7
+              ],
+              [
+                "uses_files",
+                true
+              ],
+              [
+                "has_test_plan",
+                false
+              ],
+              [
+                "problem_clear",
+                true
+              ]
+            ]
+          ],
+          "argKinds": [
+            "dict_entries"
+          ],
+          "expected": [
+            [
+              "name",
+              "Mega App"
+            ],
+            [
+              "scope",
+              "too_big"
+            ],
+            [
+              "next_step",
+              "Cut features and define a simple test plan."
+            ]
+          ],
+          "expectedKind": "dict_entries"
+        },
+        {
+          "type": "no_stdout"
+        }
+      ],
+      "hint": "Check the three conditions for a realistic scope first, then choose the message based on whether files are used.",
+      "help": {
+        "concept": "This question practices turning a project-planning checklist into code: inspect dictionary values, decide whether the scope is realistic, and return a new dictionary with the result.",
+        "hint_1": "Use the values from `project` to compute one boolean such as `is_good`. The feature limit is 4 or fewer, and both `problem_clear` and `has_test_plan` must be true.",
+        "hint_2": "After deciding the scope label, build and return a dictionary with exactly three keys. The `next_step` message depends on the scope first, then on `uses_files` only when the scope is good."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Capstone Scope Planner",
+    "stepIds": [
+      "capstone-scope-planner"
+    ]
+  }
+}

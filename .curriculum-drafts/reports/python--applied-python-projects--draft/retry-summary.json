@@ -1,0 +1,176 @@
+{
+  "subjectSlug": "python--applied-python-projects--draft",
+  "generatedAt": "2026-06-06T04:45:25.125Z",
+  "topics": [
+    {
+      "moduleSlug": "python-8-object-oriented-programming",
+      "sectionSlug": "python-8-class-basics",
+      "topicId": "classes-and-instances",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-8-object-oriented-programming",
+      "sectionSlug": "python-8-class-basics",
+      "topicId": "attributes-and-init",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-8-object-oriented-programming",
+      "sectionSlug": "python-8-class-basics",
+      "topicId": "methods-and-self",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-8-object-oriented-programming",
+      "sectionSlug": "python-8-design-with-objects",
+      "topicId": "encapsulation-and-responsibility",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-8-object-oriented-programming",
+      "sectionSlug": "python-8-design-with-objects",
+      "topicId": "lists-of-objects",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-8-object-oriented-programming",
+      "sectionSlug": "python-8-design-with-objects",
+      "topicId": "class-debugging-patterns",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-8-object-oriented-programming",
+      "sectionSlug": "python-8-module-project",
+      "topicId": "module-8-class-model-project",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-9-testing-debugging-and-style",
+      "sectionSlug": "python-9-testing-basics",
+      "topicId": "writing-test-cases",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-9-testing-debugging-and-style",
+      "sectionSlug": "python-9-testing-basics",
+      "topicId": "assertions-and-expected-results",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-9-testing-debugging-and-style",
+      "sectionSlug": "python-9-testing-basics",
+      "topicId": "testing-edge-cases",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-9-testing-debugging-and-style",
+      "sectionSlug": "python-9-debugging-and-style",
+      "topicId": "debugging-with-print-and-trace",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-9-testing-debugging-and-style",
+      "sectionSlug": "python-9-debugging-and-style",
+      "topicId": "readable-python-style",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-9-testing-debugging-and-style",
+      "sectionSlug": "python-9-debugging-and-style",
+      "topicId": "refactoring-safely",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-9-testing-debugging-and-style",
+      "sectionSlug": "python-9-module-project",
+      "topicId": "module-9-debug-and-polish-project",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-10-capstone-automation-project",
+      "sectionSlug": "python-10-project-planning",
+      "topicId": "choosing-a-capstone-scope",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-10-capstone-automation-project",
+      "sectionSlug": "python-10-project-planning",
+      "topicId": "breaking-projects-into-functions",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-10-capstone-automation-project",
+      "sectionSlug": "python-10-project-planning",
+      "topicId": "data-model-for-a-small-app",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-10-capstone-automation-project",
+      "sectionSlug": "python-10-building-and-polishing",
+      "topicId": "implementing-the-core-loop",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-10-capstone-automation-project",
+      "sectionSlug": "python-10-building-and-polishing",
+      "topicId": "testing-the-capstone",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-10-capstone-automation-project",
+      "sectionSlug": "python-10-building-and-polishing",
+      "topicId": "presenting-and-documenting-the-project",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-10-capstone-automation-project",
+      "sectionSlug": "python-10-capstone-project",
+      "topicId": "capstone-automation-project",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "SEMANTIC_VALIDATION_FAILED"
+      ]
+    }
+  ]
+}

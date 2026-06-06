@@ -1,0 +1,399 @@
+{
+  "title": "Implementing the Core Loop",
+  "summary": "Build the main workflow for a small automation project by connecting file input, helper functions, object creation, looping, summaries, and saved output.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "core-loop-overview",
+      "title": "Connect the whole project in one loop",
+      "bodyMarkdown": "In a capstone project, the **core loop** is the part that ties everything together. It usually does these jobs in order:\n\n1. read input data\n2. turn raw data into useful objects or values\n3. loop through those items\n4. update totals or results\n5. save or print a final summary\n\nA small automation project might read tasks from a file, create `Task` objects, count how many are complete, and write a report.\n\nHere is a worked example:\n\n```python\nfrom helpers import parse_task_line\nfrom task import Task\n\nlines = [\n    \"Email client,done\",\n    \"Write report,todo\"\n]\n\ntasks = []\nfor line in lines:\n    name, status = parse_task_line(line)\n    tasks.append(Task(name, status))\n\ncompleted = 0\nfor task in tasks:\n    if task.is_done():\n        completed += 1\n\nprint(f\"Completed: {completed}/{len(tasks)}\")\n```\n\nStep by step:\n\n- `parse_task_line(line)` splits each text line into useful pieces.\n- `Task(name, status)` creates an object for each task.\n- The first loop builds a list of objects.\n- The second loop checks each object and updates `completed`.\n- The final `print()` shows the summary.\n\nThis is the heart of many beginner projects: **read, build, loop, summarize**.\n\nTry it yourself:\n\n- Change one status from `todo` to `done`.\n- Click Run.\n- Check how the completed count changes in the output panel.\n- Then imagine replacing the hard-coded `lines` list with lines read from a file."
+    },
+    {
+      "id": "breaking-the-loop-into-parts",
+      "title": "Build the loop in small reliable steps",
+      "bodyMarkdown": "A full project feels easier when you build the core loop one piece at a time.\n\nA good order is:\n\n1. make sure file reading works\n2. parse one line correctly\n3. create objects from the parsed data\n4. loop through all objects\n5. calculate totals\n6. write the final report\n\nFor example, this smaller step only reads and cleans lines:\n\n```python\nwith open(\"data/tasks.txt\", \"r\") as file:\n    lines = []\n    for line in file:\n        cleaned = line.strip()\n        if cleaned:\n            lines.append(cleaned)\n\nprint(lines)\n```\n\nLine by line:\n\n- `open(...)` reads the file.\n- `line.strip()` removes the newline and extra spaces.\n- `if cleaned:` skips blank lines.\n- `lines.append(cleaned)` keeps only useful rows.\n\nOnce this works, you can safely add parsing and object creation.\n\nTry this:\n\n- Add one blank line to the file data.\n- Run the code.\n- Confirm that the blank line is ignored."
+    },
+    {
+      "id": "polishing-the-final-workflow",
+      "title": "Make the final workflow clear and reusable",
+      "bodyMarkdown": "A polished core loop should be easy to read. That usually means:\n\n- helper functions do small jobs\n- class methods describe object behavior\n- the main script focuses on workflow\n- output is formatted clearly\n\nFor example, instead of putting every detail in one long loop, you can separate responsibilities:\n\n```python\nfrom helpers import load_task_lines, build_summary\nfrom task import Task\n\nlines = load_task_lines(\"data/tasks.txt\")\ntasks = []\nfor line in lines:\n    name, status = line.split(\",\")\n    tasks.append(Task(name, status))\n\nsummary = build_summary(tasks)\nprint(summary)\n```\n\nThis version is easier to debug because each part has one job.\n\nYour turn:\n\n- Look at a long block of code in your project.\n- Ask: which lines belong in a helper function?\n- Ask: which behavior belongs inside a class method?\n- Then rename one variable or function to make the workflow easier to understand.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "step1-load-lines",
+      "kind": "code_input",
+      "title": "Load task lines from a file",
+      "prompt": "You are building a capstone task-report project. Complete `load_task_lines(path)` so it opens the file, removes surrounding whitespace from each line, skips blank lines, and returns a list of cleaned task lines. Keep the function focused on file reading only.",
+      "starterCode": "def load_task_lines(path):\n    # Return a list of cleaned, non-empty lines from the file.\n    # TODO: write your code here\n    pass",
+      "solutionCode": "def load_task_lines(path):\n    lines = []\n    with open(path, \"r\") as file:\n        for line in file:\n            cleaned = line.strip()\n            if cleaned:\n                lines.append(cleaned)\n    return lines",
+      "files": [
+        {
+          "path": "data/tasks.txt",
+          "content": "Email client,done\n\nWrite report,todo\nCall supplier,done\n  \nReview notes,todo\n\n\nCheck inventory,done\n\nPlan meeting,todo\n\nArchive files,done\n\nSend invoice,todo\n\nUpdate tracker,done\n\nPrepare slides,todo\n\nConfirm booking,done\n\nDraft summary,todo\n\nClean desk,done\n\nReply to team,todo\n\nBackup folder,done\n\nSchedule review,todo\n\nPrint labels,done\n\nOrganize receipts,todo\n\nClose project,done\n\nFollow up,todo\n\nSort samples,done\n\nRefill forms,todo\n\nLabel boxes,done\n\nReview budget,todo\n\nTest script,done\n\nFix typo,todo\n\nShare notes,done\n\nPlan next step,todo\n\nMerge updates,done\n\nCheck status,todo\n\nWrap package"
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "load_task_lines",
+          "args": [
+            "data/tasks.txt"
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": [
+            "Email client,done",
+            "Write report,todo",
+            "Call supplier,done",
+            "Review notes,todo",
+            "Check inventory,done",
+            "Plan meeting,todo",
+            "Archive files,done",
+            "Send invoice,todo",
+            "Update tracker,done",
+            "Prepare slides,todo",
+            "Confirm booking,done",
+            "Draft summary,todo",
+            "Clean desk,done",
+            "Reply to team,todo",
+            "Backup folder,done",
+            "Schedule review,todo",
+            "Print labels,done",
+            "Organize receipts,todo",
+            "Close project,done",
+            "Follow up,todo",
+            "Sort samples,done",
+            "Refill forms,todo",
+            "Label boxes,done",
+            "Review budget,todo",
+            "Test script,done",
+            "Fix typo,todo",
+            "Share notes,done",
+            "Plan next step,todo",
+            "Merge updates,done",
+            "Check status,todo",
+            "Wrap package"
+          ],
+          "expectedKind": "value"
+        },
+        {
+          "type": "no_stdout"
+        }
+      ],
+      "hint": "Read the task \"Load task lines from a file\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Load task lines from a file\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "step2-parse-line",
+      "kind": "code_input",
+      "title": "Parse one task line into a Task object",
+      "prompt": "Now connect file data to your class. Complete the `Task` class and `parse_task_line(line)` so the function returns a `Task` object. A line may be either `name,status` or just `name`. If the status is missing, store `\"todo\"`. Strip extra spaces around both parts. The `is_done()` method should return `True` only when the status is `\"done\"`.",
+      "starterCode": "class Task:\n    def __init__(self, name, status):\n        # TODO: store the task name and status\n        pass\n\n    def is_done(self):\n        # TODO: return True only when status is \"done\"\n        pass\n\n\ndef parse_task_line(line):\n    # TODO: return a Task object built from the line\n    pass",
+      "solutionCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Task"
+        },
+        {
+          "type": "constructible",
+          "className": "Task",
+          "constructorArgs": [
+            "Email client",
+            "done"
+          ]
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Task",
+          "constructorArgs": [
+            "Write report",
+            "todo"
+          ],
+          "attributes": [
+            "name",
+            "status"
+          ]
+        },
+        {
+          "type": "method_returns",
+          "className": "Task",
+          "constructorArgs": [
+            "Call supplier",
+            "done"
+          ],
+          "constructorArgKinds": [
+            "value",
+            "value"
+          ],
+          "methodName": "is_done",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": true,
+          "expectedKind": "value"
+        },
+        {
+          "type": "method_returns",
+          "className": "Task",
+          "constructorArgs": [
+            "Review notes",
+            "todo"
+          ],
+          "constructorArgKinds": [
+            "value",
+            "value"
+          ],
+          "methodName": "is_done",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": false,
+          "expectedKind": "value"
+        },
+        {
+          "type": "created_instances",
+          "className": "Task",
+          "min": 1
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "step3-build-summary",
+      "kind": "code_input",
+      "title": "Build a summary from a list of Task objects",
+      "prompt": "Continue the same project. Write `build_summary(tasks)` so it returns a dictionary with three keys: `\"total\"`, `\"done\"`, and `\"todo\"`. Count how many tasks are in the list, how many return `True` from `is_done()`, and how many are still not done.",
+      "starterCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    # Return a dictionary with keys: total, done, todo\n    # TODO: write your code here\n    pass",
+      "solutionCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "build_summary",
+          "args": [
+            [
+              [
+                "Email client",
+                "done"
+              ],
+              [
+                "Write report",
+                "todo"
+              ],
+              [
+                "Call supplier",
+                "done"
+              ]
+            ]
+          ],
+          "argKinds": [
+            "dict_entries"
+          ],
+          "expected": [
+            [
+              "total",
+              3
+            ],
+            [
+              "done",
+              2
+            ],
+            [
+              "todo",
+              1
+            ]
+          ],
+          "expectedKind": "dict_entries",
+          "message": "build_summary should return the correct counts for mixed task statuses."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "build_summary",
+          "args": [
+            [
+              [
+                "Draft summary",
+                "todo"
+              ],
+              [
+                "Plan meeting",
+                "todo"
+              ]
+            ]
+          ],
+          "argKinds": [
+            "dict_entries"
+          ],
+          "expected": [
+            [
+              "total",
+              2
+            ],
+            [
+              "done",
+              0
+            ],
+            [
+              "todo",
+              2
+            ]
+          ],
+          "expectedKind": "dict_entries",
+          "message": "build_summary should handle a list with no completed tasks."
+        },
+        {
+          "type": "no_stdout"
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "step4-format-report",
+      "kind": "code_input",
+      "title": "Format the final report text",
+      "prompt": "Add the next project step. Write `format_report(summary)` so it returns exactly this three-line report pattern using the values from the summary dictionary:\n\nTask Report\nDone: X\nTodo: Y/Z\n\nHere, `X` is the done count, `Y` is the todo count, and `Z` is the total count. Return the string instead of printing it.",
+      "starterCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    # Return the final three-line report string.\n    # TODO: write your code here\n    pass",
+      "solutionCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    return (\n        f\"Task Report\\n\"\n        f\"Done: {summary['done']}\\n\"\n        f\"Todo: {summary['todo']}/{summary['total']}\"\n    )",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "format_report",
+          "args": [
+            [
+              [
+                [
+                  "total",
+                  5
+                ],
+                [
+                  "done",
+                  3
+                ],
+                [
+                  "todo",
+                  2
+                ]
+              ]
+            ]
+          ],
+          "argKinds": [
+            "dict_entries"
+          ],
+          "expected": "Task Report\nDone: 3\nTodo: 2/5",
+          "expectedKind": "value",
+          "message": "format_report should return the report text in the required three-line format."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "format_report",
+          "args": [
+            [
+              [
+                [
+                  "total",
+                  2
+                ],
+                [
+                  "done",
+                  0
+                ],
+                [
+                  "todo",
+                  2
+                ]
+              ]
+            ]
+          ],
+          "argKinds": [
+            "dict_entries"
+          ],
+          "expected": "Task Report\nDone: 0\nTodo: 2/2",
+          "expectedKind": "value",
+          "message": "format_report should work for a summary with no completed tasks."
+        },
+        {
+          "type": "no_stdout"
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "step5-run-project",
+      "kind": "code_input",
+      "title": "Run the full project workflow and save the report",
+      "prompt": "Finish the capstone workflow. Complete `run_project(input_path, output_path)` so it:\n\n1. loads cleaned lines from the input file\n2. turns each line into a `Task` object\n3. builds the summary\n4. formats the report text\n5. writes the report to the output file\n6. returns the report text\n\nDo not print inside the function. Keep using the earlier project pieces.",
+      "starterCode": "def load_task_lines(path):\n    lines = []\n    with open(path, \"r\") as file:\n        for line in file:\n            cleaned = line.strip()\n            if cleaned:\n                lines.append(cleaned)\n    return lines\n\n\nclass Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    return (\n        f\"Task Report\\n\"\n        f\"Done: {summary['done']}\\n\"\n        f\"Todo: {summary['todo']}/{summary['total']}\"\n    )\n\n\ndef run_project(input_path, output_path):\n    # TODO: connect the full workflow here\n    pass",
+      "solutionCode": "def load_task_lines(path):\n    lines = []\n    with open(path, \"r\") as file:\n        for line in file:\n            cleaned = line.strip()\n            if cleaned:\n                lines.append(cleaned)\n    return lines\n\n\nclass Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    return (\n        f\"Task Report\\n\"\n        f\"Done: {summary['done']}\\n\"\n        f\"Todo: {summary['todo']}/{summary['total']}\"\n    )\n\n\ndef run_project(input_path, output_path):\n    lines = load_task_lines(input_path)\n    tasks = []\n    for line in lines:\n        tasks.append(parse_task_line(line))\n    summary = build_summary(tasks)\n    report = format_report(summary)\n    with open(output_path, \"w\") as file:\n        file.write(report)\n    return report",
+      "files": [
+        {
+          "path": "data/tasks.txt",
+          "content": "Email client,done\nWrite report,todo\nCall supplier,done\nReview notes,todo\nCheck inventory,done"
+        },
+        {
+          "path": "reports/latest.txt",
+          "content": ""
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "run_project",
+          "args": [
+            "data/tasks.txt",
+            "reports/latest.txt"
+          ],
+          "argKinds": [
+            "value",
+            "value"
+          ],
+          "expected": "Task Report\nDone: 3\nTodo: 2/5",
+          "expectedKind": "value",
+          "message": "run_project should return the final report text after processing the input file."
+        },
+        {
+          "type": "no_stdout"
+        }
+      ],
+      "hint": "Read the task \"Run the full project workflow and save the report\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Run the full project workflow and save the report\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Capstone Task Report Workflow",
+    "stepIds": [
+      "step1-load-lines",
+      "step2-parse-line",
+      "step3-build-summary",
+      "step4-format-report",
+      "step5-run-project"
+    ]
+  }
+}

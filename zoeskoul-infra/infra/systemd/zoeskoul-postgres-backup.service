@@ -1,0 +1,11 @@
+[Unit]
+Description=Zoeskoul Postgres backup
+Wants=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/zoeskoul.com/infra
+ExecStart=/opt/zoeskoul.com/infra/scripts/backup-postgres.sh
+User=deploy
+Group=deploy

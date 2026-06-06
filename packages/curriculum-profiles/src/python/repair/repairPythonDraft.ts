@@ -6,6 +6,7 @@ import { getCodeRunner, runLocalCode } from "@zoeskoul/curriculum-runtime";
 import type { RepairReport } from "../../shared/profileServices.js";
 import { makeEmptyRepairReport } from "../../shared/noopReports.js";
 import { PYTHON_MINIMUM_FIXED_TESTS } from "../profile.js";
+import {SemanticCheck} from "@zoeskoul/practice-checks";
 function hasTryItYourselfSketch(draft: TopicAuthoringDraft): boolean {
     return draft.sketchBlocks.some((block) =>
         /\btry it yourself\b|\btry this\b|\byour turn\b|\btry on your own\b/i.test(
@@ -13,7 +14,147 @@ function hasTryItYourselfSketch(draft: TopicAuthoringDraft): boolean {
         ),
     );
 }
+function hasTopLevelPrintCall(source: string): boolean {
+    return String(source ?? "")
+        .split("\n")
+        .some((line) => {
+            if (/^\s/.test(line)) return false;
+            const trimmed = line.trim();
+            if (!trimmed || trimmed.startsWith("#")) return false;
+            return /\bprint\s*\(/.test(trimmed);
+        });
+}
 
+function looksLikeRunnableProjectProgram(exercise: PythonCodeInputExercise): boolean {
+    const prompt = String(exercise.prompt ?? "").toLowerCase();
+    const solutionCode = String(exercise.solutionCode ?? "");
+
+    return (
+        hasTopLevelPrintCall(solutionCode) &&
+        (
+            /\bopen\s*\(/.test(solutionCode) ||
+            /\bfile\b/.test(prompt) ||
+            /\breport\b/.test(prompt) ||
+            /\bvisible output\b/.test(prompt) ||
+            /\bprint\b/.test(prompt) ||
+            /\brunnable part\b/.test(prompt) ||
+            /\bat the bottom\b/.test(prompt)
+        )
+    );
+}
+
+function cleanPipeDelimitedFixtureContent(content: string): string {
+    const normalized = String(content ?? "").replace(/\r\n?/g, "\n");
+    const lines = normalized.split("\n");
+
+    const nonEmpty = lines
+        .map((line) => line.trim())
+        .filter(Boolean);
+
+    const pipeLines = nonEmpty.filter((line) => line.includes("|"));
+
+    if (pipeLines.length < 2) {
+        return normalized.trimEnd();
+    }
+
+    const expectedPipeCount = (pipeLines[0]?.match(/\|/g) ?? []).length;
+
+    if (expectedPipeCount < 1) {
+        return normalized.trimEnd();
+    }
+
+    const cleanedLines = lines.filter((line) => {
+        const trimmed = line.trim();
+        if (!trimmed) return false;
+
+        const pipeCount = (trimmed.match(/\|/g) ?? []).length;
+        return pipeCount === expectedPipeCount;
+    });
+
+    if (cleanedLines.length < 1) {
+        return normalized.trimEnd();
+    }
+
+    return cleanedLines.join("\n");
+}
+
+function cleanPipeDelimitedFixtureGarbage(
+    exercise: PythonCodeInputExercise,
+): PythonCodeInputExercise {
+    const files = normalizeDraftFixtureFiles(exercise.files);
+
+    if (files.length < 1) return exercise;
+
+    let changed = false;
+
+    const cleanedFiles = files.map((file) => {
+        const cleanedContent = cleanPipeDelimitedFixtureContent(file.content);
+
+        if (cleanedContent !== file.content) {
+            changed = true;
+        }
+
+        return {
+            ...file,
+            content: cleanedContent,
+        };
+    });
+
+    return changed
+        ? {
+            ...exercise,
+            files: cleanedFiles,
+        }
+        : exercise;
+}
+
+async function convertSemanticRunnableProjectToFixedTests(
+    exercise: PythonCodeInputExercise,
+): Promise<PythonCodeInputExercise | null> {
+    if (!isSemanticCodeExercise(exercise)) return null;
+    if (!looksLikeRunnableProjectProgram(exercise)) return null;
+
+    const cleanedExercise = cleanPipeDelimitedFixtureGarbage(exercise);
+    const solutionCode = String(cleanedExercise.solutionCode ?? "").trim();
+
+    if (!solutionCode) return null;
+
+    const files = normalizeDraftFixtureFiles(cleanedExercise.files);
+    const runner = getCodeRunner() ?? runLocalCode;
+
+    const run = await runner({
+        language: "python",
+        code: solutionCode,
+        stdin: "",
+        files: files.length > 0 ? files : undefined,
+        limits: { timeoutMs: 4000 },
+    });
+
+    if (!run.ok) return null;
+
+    const stdout = String(run.stdout ?? "");
+
+    if (!stdout.trim()) return null;
+
+    const {
+        semanticChecks: _removedSemanticChecks,
+        tests: _removedTests,
+        ...rest
+    } = cleanedExercise;
+
+    return {
+        ...rest,
+        recipeType: "fixed_tests",
+        tests: [
+            {
+                stdin: "",
+                stdout,
+                match: "exact",
+                ...(files.length > 0 ? { files } : {}),
+            },
+        ],
+    };
+}
 function ensureTryItYourselfSketch(draft: TopicAuthoringDraft): TopicAuthoringDraft {
     if (hasTryItYourselfSketch(draft)) return draft;
 
@@ -1406,6 +1547,43 @@ function rewriteHardcodedPromptAlignedExercise(
     return null;
 }
 
+function parseFunctionParams(raw: string): string[] {
+    return String(raw ?? "")
+        .split(",")
+        .map((part) => part.trim())
+        .filter(Boolean)
+        .map((part) => part.split("=")[0]?.trim() ?? "")
+        .map((part) => part.split(":")[0]?.trim() ?? "")
+        .filter(Boolean);
+}
+
+function extractTopLevelFunctionSignaturesFromSource(source: string): Array<{
+    name: string;
+    params: string[];
+}> {
+    return Array.from(
+        String(source ?? "").matchAll(/^def\s+([A-Za-z_]\w*)\s*\(([^)]*)\)\s*:/gm),
+    )
+        .map((match) => ({
+            name: String(match[1] ?? "").trim(),
+            params: parseFunctionParams(String(match[2] ?? "")),
+        }))
+        .filter((signature) => Boolean(signature.name));
+}
+
+function extractTopLevelFunctionNames(exercise: PythonCodeInputExercise): string[] {
+    const names = [
+        ...extractTopLevelFunctionSignaturesFromSource(
+            String(exercise.starterCode ?? ""),
+        ).map((signature) => signature.name),
+        ...extractTopLevelFunctionSignaturesFromSource(
+            String(exercise.solutionCode ?? ""),
+        ).map((signature) => signature.name),
+    ];
+
+    return Array.from(new Set(names)).filter((name) => !name.startsWith("_"));
+}
+
 function extractFunctionSignature(exercise: PythonCodeInputExercise): {
     name: string;
     params: string[];
@@ -1413,27 +1591,15 @@ function extractFunctionSignature(exercise: PythonCodeInputExercise): {
     const sources = [exercise.starterCode, exercise.solutionCode, exercise.prompt];
 
     for (const source of sources) {
-        const match = String(source ?? "").match(
-            /def\s+([A-Za-z_]\w*)\s*\(([^)]*)\)\s*:/,
-        );
-        if (!match) continue;
+        const match = extractTopLevelFunctionSignaturesFromSource(
+            String(source ?? ""),
+        )[0];
 
-        const name = match[1]?.trim();
-        const params = String(match[2] ?? "")
-            .split(",")
-            .map((part) => part.trim())
-            .filter(Boolean)
-            .map((part) => part.split("=")[0]?.trim() ?? "")
-            .map((part) => part.split(":")[0]?.trim() ?? "")
-            .filter(Boolean);
-
-        if (!name) continue;
-        return { name, params };
+        if (match) return match;
     }
 
     return null;
 }
-
 function looksLikeFunctionReturnExercise(exercise: PythonCodeInputExercise): boolean {
     const prompt = String(exercise.prompt ?? "").toLowerCase();
     const starterCode = String(exercise.starterCode ?? "");
@@ -1571,7 +1737,171 @@ function stripTrailingFunctionExampleUsage(args: {
 
     return lines.slice(0, cutIndex).join("\n").trimEnd();
 }
+function normalizePythonLiteralText(raw: string): string {
+    return String(raw ?? "")
+        .trim()
+        .replace(/\bTrue\b/g, "true")
+        .replace(/\bFalse\b/g, "false")
+        .replace(/\bNone\b/g, "null")
+        .replace(/'/g, '"');
+}
 
+function parsePythonLiteralForSemantic(raw: string): unknown {
+    const text = String(raw ?? "").trim();
+
+    if (!text) return "";
+
+    if (text === "True") return true;
+    if (text === "False") return false;
+    if (text === "None") return null;
+
+    if (/^-?\d+$/.test(text)) {
+        return Number.parseInt(text, 10);
+    }
+
+    if (/^-?\d+\.\d+$/.test(text)) {
+        return Number.parseFloat(text);
+    }
+
+    if (
+        (text.startsWith('"') && text.endsWith('"')) ||
+        (text.startsWith("'") && text.endsWith("'"))
+    ) {
+        try {
+            return JSON.parse(text.replace(/^'/, '"').replace(/'$/, '"'));
+        } catch {
+            return text.slice(1, -1);
+        }
+    }
+
+    if (
+        (text.startsWith("[") && text.endsWith("]")) ||
+        (text.startsWith("{") && text.endsWith("}"))
+    ) {
+        try {
+            return JSON.parse(normalizePythonLiteralText(text));
+        } catch {
+            return text;
+        }
+    }
+
+    return text;
+}
+
+function splitSemanticFunctionArgs(stdin: string, paramCount: number): unknown[] {
+    const raw = String(stdin ?? "");
+
+    if (paramCount < 1) return [];
+
+    if (paramCount === 1) {
+        return [parsePythonLiteralForSemantic(raw)];
+    }
+
+    const lines = raw
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean);
+
+    while (lines.length < paramCount) {
+        // Match the old fixed-test repair behavior:
+        // when generated tests provide too few stdin values for a function,
+        // use 1 as a safe default because it works for arithmetic/int examples
+        // and avoids division-by-zero edge cases.
+        lines.push("1");
+    }
+
+    return lines
+        .slice(0, paramCount)
+        .map((line) => parsePythonLiteralForSemantic(line));
+}
+
+function parseSemanticExpectedFromStdout(stdout: string): unknown {
+    return parsePythonLiteralForSemantic(String(stdout ?? "").trimEnd());
+}
+
+function convertFunctionReturnFixedTestsToSemantic(
+    exercise: PythonCodeInputExercise,
+): PythonCodeInputExercise | null {
+    if ((exercise.recipeType ?? "fixed_tests") === "semantic") return null;
+    if (Array.isArray(exercise.semanticChecks) && exercise.semanticChecks.length > 0) {
+        return null;
+    }
+
+    if (hasInputCalls(exercise)) return null;
+
+    const topLevelFunctionNames = extractTopLevelFunctionNames(exercise);
+
+// This repair is only for one focused return-value function.
+// Multi-function project steps should stay runnable programs, not semantic
+// function_returns exercises.
+    if (topLevelFunctionNames.length !== 1) return null;
+
+    const signature = extractFunctionSignature(exercise);
+    if (!signature) return null;
+    const tests = Array.isArray(exercise.tests) ? exercise.tests : [];
+    if (tests.length < 1) return null;
+
+    const usableTests = tests.filter((test) => {
+        const stdout = String(test.stdout ?? "").trim();
+        if (!stdout) return false;
+        if (looksLikePlaceholderStdout(stdout)) return false;
+        return true;
+    });
+
+    if (usableTests.length < 1) return null;
+
+    const prompt = String(exercise.prompt ?? "").toLowerCase();
+    const starterCode = String(exercise.starterCode ?? "");
+    const solutionCode = String(exercise.solutionCode ?? "");
+
+    const looksLikeReturnTask =
+        /\breturn\b/.test(prompt) ||
+        /\bwrite\s+a\s+function\b/.test(prompt) ||
+        /\bcreate\s+a\s+function\b/.test(prompt) ||
+        /\bdefine\s+a\s+function\b/.test(prompt) ||
+        starterCode.trimStart().startsWith("def ");
+
+    if (!looksLikeReturnTask) return null;
+
+    if (/\b_parse_arg\b|\bast\.literal_eval\b/.test(`${starterCode}\n${solutionCode}`)) {
+        return null;
+    }
+
+    const strippedStarter = stripTrailingFunctionExampleUsage({
+        source: starterCode,
+        functionName: signature.name,
+    });
+
+    const strippedSolution = stripTrailingFunctionExampleUsage({
+        source: solutionCode,
+        functionName: signature.name,
+    });
+
+    if (!/\breturn\b/.test(strippedSolution)) return null;
+
+    const semanticChecks: SemanticCheck[] = usableTests.map((test): SemanticCheck => ({
+        type: "function_returns",
+        functionName: signature.name,
+        args: splitSemanticFunctionArgs(String(test.stdin ?? ""), signature.params.length),
+        expected: parseSemanticExpectedFromStdout(String(test.stdout ?? "")),
+        message: `Return the expected result for ${signature.name}(${signature.params.join(", ")}).`,
+    }));
+
+    semanticChecks.push({
+        type: "no_stdout",
+        message: "This task should return a value instead of printing output.",
+    });
+
+    const { tests: _removedTests, ...rest } = exercise;
+
+    return {
+        ...rest,
+        recipeType: "semantic",
+        starterCode: strippedStarter.trimEnd(),
+        solutionCode: strippedSolution.trimEnd(),
+        semanticChecks,
+    };
+}
 function rewriteHardcodedFunctionExampleExercise(
     exercise: PythonCodeInputExercise,
 ): PythonCodeInputExercise | null {
@@ -1917,6 +2247,33 @@ function isSemanticCodeExercise(exercise: PythonDraftExercise): boolean {
     );
 }
 
+function stripFixedTestsFromSemanticCodeExercise(
+    exercise: PythonCodeInputExercise,
+): {
+    exercise: PythonCodeInputExercise;
+    removedCount: number;
+} {
+    if (!isSemanticCodeExercise(exercise)) {
+        return { exercise, removedCount: 0 };
+    }
+
+    const removedCount = Array.isArray(exercise.tests) ? exercise.tests.length : 0;
+
+    if (removedCount < 1 && exercise.recipeType === "semantic") {
+        return { exercise, removedCount: 0 };
+    }
+
+    const { tests: _fixedStdoutTests, ...rest } = exercise;
+
+    return {
+        exercise: {
+            ...rest,
+            recipeType: "semantic",
+        },
+        removedCount,
+    };
+}
+
 function escapeRegExp(value: string): string {
     return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -1943,7 +2300,18 @@ function isUnsafeSharedSetupLine(line: string): boolean {
     // parts = row.split(",")
     // score_text = row["score"].strip()
     // These depend on local function parameters or previous local variables.
-    if (/^[A-Za-z_]\w*\s*=\s*[A-Za-z_]\w*(?:\.|\[|\()/.test(trimmed)) {
+    // Reject derived expressions such as:
+// name = name.strip()
+// item = rows[0]
+// value = helper(...)
+//
+// But allow safe object construction like:
+// book1 = Book('1984', 'George Orwell')
+    if (/^[A-Za-z_]\w*\s*=\s*[A-Za-z_]\w*(?:\.|\[)/.test(trimmed)) {
+        return true;
+    }
+
+    if (/^[A-Za-z_]\w*\s*=\s*[a-z_]\w*\s*\(/.test(trimmed)) {
         return true;
     }
 
@@ -1954,20 +2322,29 @@ function isUnsafeSharedSetupLine(line: string): boolean {
 
     return false;
 }
-
 function isSafeSharedSetupAssignment(line: string): boolean {
     const trimmed = line.trim();
 
     if (isUnsafeSharedSetupLine(trimmed)) return false;
 
-    // Only allow simple independent literals/containers.
-    // Good examples:
-    // tax_rate = 0.08
-    // names = ["Ava", "Ben"]
-    // settings = {"debug": True}
-    return /^[A-Za-z_]\w*\s*=\s*(-?\d+(?:\.\d+)?|True|False|None|"[^"]*"|'[^']*'|\[.*\]|\{.*\}|\(.*\))\s*$/.test(
-        trimmed,
-    );
+    const simpleLiteralOrContainer =
+        /^[A-Za-z_]\w*\s*=\s*(-?\d+(?:\.\d+)?|True|False|None|"[^"]*"|'[^']*'|\[.*\]|\{.*\}|\(.*\))\s*$/.test(
+            trimmed,
+        );
+
+    if (simpleLiteralOrContainer) return true;
+
+    // Allow safe constructor setup that depends only on literal arguments.
+    // Example:
+    // book1 = Book('1984', 'George Orwell')
+    const safeConstructorAssignment =
+        /^[A-Za-z_]\w*\s*=\s*[A-Z][A-Za-z_]\w*\s*\(\s*(?:(?:-?\d+(?:\.\d+)?|True|False|None|"[^"]*"|'[^']*')\s*,\s*)*(?:-?\d+(?:\.\d+)?|True|False|None|"[^"]*"|'[^']*')?\s*\)\s*$/.test(
+            trimmed,
+        );
+
+    if (safeConstructorAssignment) return true;
+
+    return false;
 }
 // function definesTopLevelName(source: string, name: string): boolean {
 //     return new RegExp(`^${name}\\s*=`, "m").test(source);
@@ -2353,12 +2730,14 @@ async function repairCrossExerciseClassDependencies(args: {
                     "Prepended shared class/setup context needed by this code_input exercise so it can run independently.",
             });
 
-            if (hasMissingOrBooleanishTests(nextExercise)) {
+            if (!isSemanticCodeExercise(nextExercise) && hasMissingOrBooleanishTests(nextExercise)) {
                 const testRepair =
                     (await makeTestsFromNoInputSolution(nextExercise)) ??
                     (await rewriteNoInputFinalExpressionExercise(nextExercise));
+
                 if (testRepair) {
                     nextExercise = testRepair;
+
                     args.report.repairs.push({
                         code: "PYTHON_CROSS_EXERCISE_TESTS_REPAIRED",
                         category: "recipe",
@@ -3377,6 +3756,59 @@ function convertStaticCommentExercise(
     };
 }
 
+
+
+
+function isOriginalSingleStaticOutputFixedTest(
+    exercise: PythonCodeInputExercise,
+): boolean {
+    if ((exercise.recipeType ?? "fixed_tests") !== "fixed_tests") return false;
+    if (hasInputCalls(exercise)) return false;
+
+    const tests = Array.isArray(exercise.tests) ? exercise.tests : [];
+    if (tests.length !== 1) return false;
+
+    const onlyTest = tests[0];
+    if (!onlyTest) return false;
+
+    if (String(onlyTest.stdin ?? "").trim().length > 0) return false;
+    if (Array.isArray(onlyTest.files) && onlyTest.files.length > 0) return false;
+    if (Array.isArray(exercise.files) && exercise.files.length > 0) return false;
+
+    const stdout = String(onlyTest.stdout ?? "").trim();
+    if (!stdout) return false;
+
+    // Placeholder/narrative tests are repairable. Do not convert them to concept questions.
+    if (looksLikePlaceholderStdout(stdout)) return false;
+
+    const normalizedStdout = stdout.toLowerCase();
+
+    // Boolean placeholders are also repairable by the existing OOP/list repair passes.
+    if (normalizedStdout === "true" || normalizedStdout === "false") {
+        return false;
+    }
+
+    const solutionCode = String(exercise.solutionCode ?? "");
+
+    // A static-output tracing conversion only makes sense when the original program
+    // already prints something. No-output OOP/list exercises have dedicated repair passes.
+    if (!/\bprint\s*\(/.test(solutionCode)) return false;
+
+    // Some generated OOP tasks print a getter before defining it. Those should be repaired
+    // by rewriteMissingOopSupportMethods(), not converted into single_choice.
+    if (
+        /\.get_balance\s*\(/.test(solutionCode) &&
+        !/^    def\s+get_balance\b/m.test(solutionCode) &&
+        /self\.__balance\b/.test(solutionCode)
+    ) {
+        return false;
+    }
+
+    return true;
+}
+
+
+
 function convertStaticOutputExercise(
     exercise: PythonCodeInputExercise,
 ): PythonDraftExercise | null {
@@ -3384,23 +3816,56 @@ function convertStaticOutputExercise(
     if (tests.length < 1) return null;
     if (hasInputCalls(exercise)) return null;
 
+    const hasNonEmptyStdin = tests.some((test) =>
+        String(test.stdin ?? "").trim().length > 0,
+    );
+    if (hasNonEmptyStdin) return null;
+
+    const hasFileFixtures =
+        (Array.isArray(exercise.files) && exercise.files.length > 0) ||
+        tests.some((test) => Array.isArray(test.files) && test.files.length > 0);
+
+    // File I/O tasks should be repaired with distinct file fixtures, not converted
+    // into concept-only questions.
+    if (hasFileFixtures) return null;
+
     const stdout = String(tests[0]?.stdout ?? "");
     if (!stdout.trim()) return null;
 
+    const code = String(exercise.solutionCode ?? "").trim();
+    if (!code) return null;
+
     const haystack = `${exercise.title} ${exercise.prompt} ${exercise.solutionCode}`.toLowerCase();
-    const code = String(exercise.solutionCode ?? "");
+
     const simpleCodeLines = code
         .split("\n")
         .map((line) => line.trim())
         .filter((line) => line.length > 0 && !line.startsWith("#"));
-    const looksLikeSimpleStaticOutput =
-        !/\bclass\s+[A-Za-z_]\w*|^def\s+[A-Za-z_]\w*\s*\(/m.test(code) &&
+
+    const hasClassOrFunctionDefinition =
+        /\bclass\s+[A-Za-z_]\w*\b|^def\s+[A-Za-z_]\w*\s*\(/m.test(code);
+
+    const hasPrintedOutput = /\bprint\s*\(/.test(code);
+
+    const looksLikeTinyPrintExercise =
+        !hasClassOrFunctionDefinition &&
         simpleCodeLines.length <= 2 &&
         /\b(print|output|comment|calculate|message|name)\b/.test(haystack);
 
-    if (!looksLikeSimpleStaticOutput) return null;
+    const looksLikeNoInputOopDemo =
+        hasClassOrFunctionDefinition &&
+        hasPrintedOutput &&
+        simpleCodeLines.length <= 18 &&
+        /\b(class|object|instance|attribute|method|responsibility|encapsulation)\b/.test(
+            haystack,
+        );
 
-    if (/\bcomment\b/.test(haystack)) {
+    const looksLikeStaticOutput =
+        looksLikeTinyPrintExercise || looksLikeNoInputOopDemo;
+
+    if (!looksLikeStaticOutput) return null;
+
+    if (!hasClassOrFunctionDefinition && /\bcomment\b/.test(haystack)) {
         return convertStaticCommentExercise(exercise);
     }
 
@@ -3414,21 +3879,25 @@ function convertStaticOutputExercise(
         options.push(`Different output ${options.length + 1}`);
     }
 
+    const promptIntro = looksLikeNoInputOopDemo
+        ? "A learner already wrote this no-input object-oriented program. What does it print?"
+        : "What is the output of this Python code?";
+
     return {
         id: exercise.id,
         kind: "single_choice",
         title: exercise.title,
-        prompt: `What is the output of this Python code?\n\n\`\`\`python\n${String(exercise.solutionCode ?? "").trim()}\n\`\`\``,
+        prompt: `${promptIntro}\n\n\`\`\`python\n${code}\n\`\`\``,
         options,
         correctOptionIds: ["a"],
-        hint: "Trace what print sends to the output panel.",
+        hint: "Trace the code until you reach the print statement.",
         help: {
             concept:
-                "A print statement shows the final value or text that the code produces.",
+                "A hardcoded no-input program always prints the same result, so it is better checked as a tracing question than as a code_input with fake duplicate tests.",
             hint_1:
-                "Read the expression inside print and decide what value it becomes.",
+                "Follow the object or variable changes before the final print call.",
             hint_2:
-                "Choose the option that exactly matches the printed output, including punctuation.",
+                "Choose the option that exactly matches the printed output.",
         },
     };
 }
@@ -3828,15 +4297,49 @@ export async function repairPythonDraft(args: {
         quizDraft: await Promise.all(args.draft.quizDraft.map(async (exercise) => {
             if (exercise.kind !== "code_input") return exercise;
 
-            const missingTestsRepair = synthesizeMissingTestsForExercise(exercise);
+            const semanticTestRepair = stripFixedTestsFromSemanticCodeExercise(exercise);
+
+            if (semanticTestRepair.removedCount > 0) {
+                report.repairs.push({
+                    code: "PYTHON_SEMANTIC_STDOUT_TESTS_REMOVED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        `Removed ${semanticTestRepair.removedCount} fixed stdout test(s) from a semantic Python code_input exercise. Semantic exercises must be graded by semanticChecks[] only.`,
+                });
+            }
+
+            const semanticRunnableProjectRepair =
+                await convertSemanticRunnableProjectToFixedTests(semanticTestRepair.exercise);
+
+            if (semanticRunnableProjectRepair) {
+                report.repairs.push({
+                    code: "PYTHON_SEMANTIC_RUNNABLE_PROJECT_CONVERTED_TO_FIXED_TESTS",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Converted a semantic runnable project step into fixed stdout tests because it has top-level file/report execution and printed output.",
+                });
+
+                return semanticRunnableProjectRepair;
+            }
+
+            if (isSemanticCodeExercise(semanticTestRepair.exercise)) {
+                return semanticTestRepair.exercise;
+            }
+
+            const workingExercise = semanticTestRepair.exercise;
+            const missingTestsRepair = synthesizeMissingTestsForExercise(workingExercise);
             const hasAuthoredTests =
-                Array.isArray(exercise.tests) && exercise.tests.length > 0;
+                Array.isArray(workingExercise.tests) && workingExercise.tests.length > 0;
             const derivedMissingTestsRepair =
                 !missingTestsRepair && !hasAuthoredTests
-                    ? await makeTestsFromNoInputSolution(exercise)
+                    ? await makeTestsFromNoInputSolution(workingExercise)
                     : null;
             const withTests =
-                missingTestsRepair ?? derivedMissingTestsRepair ?? exercise;
+                missingTestsRepair ?? derivedMissingTestsRepair ?? workingExercise;
 
             if (missingTestsRepair) {
                 report.repairs.push({
@@ -3923,6 +4426,22 @@ export async function repairPythonDraft(args: {
                     message:
                         "Removed interactive input prompts from Python code_input starter and solution code so fixed tests only validate program output.",
                 });
+            }
+
+            const semanticFunctionReturnRepair =
+                convertFunctionReturnFixedTestsToSemantic(afterPromptedInputRepair);
+
+            if (semanticFunctionReturnRepair) {
+                report.repairs.push({
+                    code: "PYTHON_FUNCTION_RETURN_FIXED_TESTS_CONVERTED_TO_SEMANTIC",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Converted a function-return fixed stdout exercise into semantic function_returns checks so learner code does not expose stdin parsing harnesses.",
+                });
+
+                return semanticFunctionReturnRepair;
             }
 
             const hardcodedFunctionExampleRepair =
@@ -4224,10 +4743,7 @@ export async function repairPythonDraft(args: {
             );
             const convertedStaticOutputExercise =
                 thinFixedTestRepair.status === "unsafe" &&
-                (
-                    afterFileFixtureThinFixedTestRepair.recipeType === "fixed_tests" ||
-                    (Array.isArray(exercise.tests) && exercise.tests.length > 0)
-                )
+                isOriginalSingleStaticOutputFixedTest(exercise)
                     ? convertStaticOutputExercise(afterFileFixtureThinFixedTestRepair)
                     : null;
             const afterThinFixedTestRepair =

@@ -1,6 +1,7 @@
 import type {
     CourseSpec,
     CourseSpecModule,
+    PracticeConfig,
     CourseSpecTopic,
     ExerciseKindMix,
 } from "@zoeskoul/curriculum-contracts";
@@ -25,6 +26,41 @@ function cleanStringArray(value: unknown): string[] | undefined {
         .filter(Boolean);
 
     return items.length ? items : undefined;
+}
+
+function normalizePractice(value: unknown): PracticeConfig | undefined {
+    if (!value || typeof value !== "object") return undefined;
+
+    const practice = value as Record<string, unknown>;
+    const result: PracticeConfig = {
+        ...(typeof practice.tryIt === "boolean" ? { tryIt: practice.tryIt } : {}),
+        ...(practice.tryItPlacement === "first_sketch" ||
+        practice.tryItPlacement === "all_sketches" ||
+        practice.tryItPlacement === "none"
+            ? { tryItPlacement: practice.tryItPlacement }
+            : {}),
+        ...(cleanString(practice.tryItExerciseId)
+            ? { tryItExerciseId: cleanString(practice.tryItExerciseId) }
+            : {}),
+        ...(Array.isArray(practice.tryItExerciseIds)
+            ? {
+                tryItExerciseIds: practice.tryItExerciseIds
+                    .filter((item): item is string => typeof item === "string")
+                    .map((item) => item.trim())
+                    .filter(Boolean),
+            }
+            : {}),
+        ...(typeof practice.tryItSketchIndex === "number" &&
+        Number.isFinite(practice.tryItSketchIndex)
+            ? { tryItSketchIndex: practice.tryItSketchIndex }
+            : {}),
+        ...(practice.projectFlow === "progressive" ||
+        practice.projectFlow === "standalone"
+            ? { projectFlow: practice.projectFlow }
+            : {}),
+    };
+
+    return Object.keys(result).length > 0 ? result : undefined;
 }
 
 function cleanNumberOrNull(value: unknown): number | null {
@@ -295,25 +331,7 @@ function normalizeTopic(
             ? topic.tags.filter((x: unknown): x is string => typeof x === "string")
             : [],
         learningGoals: cleanStringArray(topic?.learningGoals),
-        practice:
-            topic?.practice && typeof topic.practice === "object"
-                ? {
-                    ...(typeof topic.practice.tryIt === "boolean"
-                        ? { tryIt: topic.practice.tryIt }
-                        : {}),
-                    ...(cleanString(topic.practice.tryItExerciseId)
-                        ? { tryItExerciseId: cleanString(topic.practice.tryItExerciseId) }
-                        : {}),
-                    ...(typeof topic.practice.tryItSketchIndex === "number" &&
-                        Number.isFinite(topic.practice.tryItSketchIndex)
-                        ? { tryItSketchIndex: topic.practice.tryItSketchIndex }
-                        : {}),
-                    ...(topic.practice.projectFlow === "progressive" ||
-                        topic.practice.projectFlow === "standalone"
-                        ? { projectFlow: topic.practice.projectFlow }
-                        : {}),
-                }
-                : undefined,
+        practice: normalizePractice(topic?.practice),
     };
 }
 
@@ -358,6 +376,7 @@ function normalizeModule(
             weekStart: cleanNumberOrNull(section?.weekStart),
             weekEnd: cleanNumberOrNull(section?.weekEnd),
             weeksLabel: cleanString(section?.weeksLabel) ?? null,
+            practiceDefaults: normalizePractice(section?.practiceDefaults),
 
             bullets: cleanStringArray(section?.bullets),
 
@@ -406,6 +425,7 @@ function normalizeModule(
         guidedExercises: cleanStringArray(module?.guidedExercises) ?? [],
         quizFocus: cleanStringArray(module?.quizFocus) ?? [],
         moduleProject: cleanModuleProject(module?.moduleProject),
+        practiceDefaults: normalizePractice(module?.practiceDefaults),
 
         weekStart: cleanNumberOrNull(module?.weekStart),
         weekEnd: cleanNumberOrNull(module?.weekEnd),
@@ -498,6 +518,7 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
             input.validationPolicy && typeof input.validationPolicy === "object"
                 ? input.validationPolicy
                 : undefined,
+        practiceDefaults: normalizePractice(input.practiceDefaults),
         intendedFor: Array.isArray(input.intendedFor)
             ? cleanStringArray(input.intendedFor)
             : cleanString(input.intendedFor),

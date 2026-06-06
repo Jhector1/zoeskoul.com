@@ -1,11 +1,12 @@
 import type {
     CourseBlueprint,
     CourseSpec, ManifestRuntimeDefaults,
+    PracticeConfig,
     PlannedModule,
     PlannedSection,
     PlannedTopic,
 } from "@zoeskoul/curriculum-contracts";
-import { getProfileAdapter } from "@zoeskoul/curriculum-profiles";
+import { getCurriculumProfile, getProfileAdapter } from "@zoeskoul/curriculum-profiles";
 import { resolveExercisePolicy } from "../spec/resolveExercisePolicy.js";
 import { planExerciseCounts } from "../policy/planExerciseCounts.js";
 import {
@@ -14,7 +15,44 @@ import {
 } from "../spec/resolveModuleRuntimePolicy.js";
 import {resolveWorkspacePolicy} from "../policy/resolveWorkspacePolicy.js";
 import {workspaceToRuntimeDefaults} from "../policy/workspaceToRuntimeDefaults.js";
+function findSpecModule(args: {
+    spec?: CourseSpec | null;
+    moduleSlug: string;
+}) {
+    return args.spec?.modules.find(
+        (module) => module.moduleSlug === args.moduleSlug,
+    );
+}
 
+function findSpecSection(args: {
+    spec?: CourseSpec | null;
+    moduleSlug: string;
+    sectionSlug: string;
+}) {
+    const specModule = findSpecModule({
+        spec: args.spec,
+        moduleSlug: args.moduleSlug,
+    });
+
+    return specModule?.sections.find(
+        (section) => section.sectionSlug === args.sectionSlug,
+    );
+}
+
+function findSpecTopic(args: {
+    spec?: CourseSpec | null;
+    moduleSlug: string;
+    sectionSlug: string;
+    topicId: string;
+}) {
+    const specSection = findSpecSection({
+        spec: args.spec,
+        moduleSlug: args.moduleSlug,
+        sectionSlug: args.sectionSlug,
+    });
+
+    return specSection?.topics.find((topic) => topic.topicId === args.topicId);
+}
 export function buildTopicSeedFromPlanNode(args: {
     blueprint: CourseBlueprint;
     spec?: CourseSpec | null;
@@ -23,8 +61,25 @@ export function buildTopicSeedFromPlanNode(args: {
     topic: PlannedTopic;
 }) {
     const adapter = getProfileAdapter(args.blueprint.profileId);
+    const profile = getCurriculumProfile(args.blueprint.profileId);
     const topicPolicy = args.spec?.topicPolicies?.[args.topic.topicId];
+    const specModule = findSpecModule({
+        spec: args.spec,
+        moduleSlug: args.module.moduleSlug,
+    });
 
+    const specSection = findSpecSection({
+        spec: args.spec,
+        moduleSlug: args.module.moduleSlug,
+        sectionSlug: args.section.sectionSlug,
+    });
+
+    const specTopic = findSpecTopic({
+        spec: args.spec,
+        moduleSlug: args.module.moduleSlug,
+        sectionSlug: args.section.sectionSlug,
+        topicId: args.topic.topicId,
+    });
     const exercisePolicy = resolveExercisePolicy({
         blueprint: args.blueprint,
         spec: args.spec ?? null,
@@ -114,6 +169,20 @@ export function buildTopicSeedFromPlanNode(args: {
 
     const policyTargets = args.spec?.policy?.exercisePolicy?.generationTargets ?? {};
     const topicTargets = topicPolicy?.generationTargets ?? {};
+    const topicKind =
+        args.module.role === "capstone" || args.section.role === "capstone"
+            ? "capstone"
+            : args.section.role === "module_project"
+                ? "module_project"
+                : null;
+    const projectConfig =
+        topicKind && profile.project
+            ? profile.project.getProjectConfig({
+                seed: baseSeed,
+                topicKind,
+            })
+            : null;
+    const defaultPractice = profile.practice;
 
     const generationTargets = {
         quizBankMin: topicTargets.quizBankMin ?? policyTargets.quizBankMin ?? 6,
@@ -133,6 +202,32 @@ export function buildTopicSeedFromPlanNode(args: {
 
         maxAttempts: topicTargets.maxAttempts ?? policyTargets.maxAttempts ?? null,
     };
+
+    if (topicKind && projectConfig) {
+        generationTargets.quizBankMin = 0;
+        generationTargets.quizBankTarget = 0;
+        generationTargets.quizVisibleDefault = 0;
+        generationTargets.quizVisibleMax = 0;
+
+        if (typeof projectConfig.minStepCount === "number") {
+            generationTargets.projectCodeInputMin = Math.max(
+                generationTargets.projectCodeInputMin,
+                projectConfig.minStepCount,
+            );
+        }
+
+        if (typeof projectConfig.targetStepCount === "number") {
+            generationTargets.projectCodeInputTarget = Math.max(
+                generationTargets.projectCodeInputTarget,
+                projectConfig.targetStepCount,
+            );
+        }
+
+        generationTargets.projectCodeInputMax = Math.max(
+            generationTargets.projectCodeInputMax,
+            generationTargets.projectCodeInputTarget,
+        );
+    }
 
     const hasExplicitTopicCodeInputTargets =
         typeof topicTargets.projectCodeInputMin === "number" ||
@@ -172,6 +267,26 @@ export function buildTopicSeedFromPlanNode(args: {
             },
         },
     });
+    const inheritedPractice = mergePracticeDefaults(
+        args.spec?.practiceDefaults,
+        specModule?.practiceDefaults,
+        args.module.practiceDefaults,
+        specSection?.practiceDefaults,
+        args.section.practiceDefaults,
+    );
+
+    const topicPractice = mergePracticeDefaults(
+        specTopic?.practice,
+        args.topic.practice,
+    );
+
+    const resolvedPractice = resolvePractice({
+        inheritedPractice,
+        topicPractice,
+        defaultPractice,
+        projectConfig,
+    });
+
     return {
         ...baseSeed,
 
@@ -198,6 +313,64 @@ export function buildTopicSeedFromPlanNode(args: {
         moduleRuntimeDefaults: mergedRuntimeDefaults,
         moduleRole: args.module.role,
         sectionRole: args.section.role,
-        practice: args.topic.practice,
+        practice: resolvedPractice,
     };
+}
+
+function mergePracticeDefaults(...values: Array<PracticeConfig | undefined>): PracticeConfig | undefined {
+    const merged = values.reduce<PracticeConfig>(
+        (acc, value) => ({
+            ...acc,
+            ...(value ?? {}),
+        }),
+        {},
+    );
+
+    return Object.keys(merged).length > 0 ? merged : undefined;
+}
+
+function resolvePractice(args: {
+    inheritedPractice?: PracticeConfig;
+    topicPractice?: PracticeConfig;
+    defaultPractice?: {
+        tryItDefault: {
+            enabled?: boolean;
+            placement?: "first_sketch" | "all_sketches" | "none";
+            sketchIndex?: number;
+        };
+    } | null;
+    projectConfig?: {
+        tryItDefault?: {
+            enabled?: boolean;
+            placement?: "first_sketch" | "all_sketches" | "none";
+            sketchIndex?: number;
+        };
+        projectFlowDefault?: "standalone" | "progressive";
+    } | null;
+}): PracticeConfig | undefined {
+    const merged = {
+        ...(args.inheritedPractice ?? {}),
+        ...(args.topicPractice ?? {}),
+    } as PracticeConfig;
+
+    const tryItDefault = args.projectConfig?.tryItDefault ?? args.defaultPractice?.tryItDefault;
+    const tryIt = merged.tryIt ?? tryItDefault?.enabled;
+    const placement =
+        merged.tryItPlacement ?? (tryIt === true ? tryItDefault?.placement ?? "first_sketch" : undefined);
+    const effectiveTryIt = placement === "none" ? false : tryIt;
+    const tryItSketchIndex =
+        effectiveTryIt === true || typeof merged.tryItSketchIndex === "number"
+            ? merged.tryItSketchIndex ?? tryItDefault?.sketchIndex ?? 0
+            : undefined;
+    const projectFlow = merged.projectFlow ?? args.projectConfig?.projectFlowDefault;
+
+    const resolved: PracticeConfig = {
+        ...merged,
+        ...(typeof effectiveTryIt === "boolean" ? { tryIt: effectiveTryIt } : {}),
+        ...(placement ? { tryItPlacement: placement } : {}),
+        ...(typeof tryItSketchIndex === "number" ? { tryItSketchIndex } : {}),
+        ...(projectFlow ? { projectFlow } : {}),
+    };
+
+    return Object.keys(resolved).length > 0 ? resolved : undefined;
 }

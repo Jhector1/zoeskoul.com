@@ -1,0 +1,1058 @@
+{
+  "topicId": "capstone-automation-project",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-10-capstone-automation-project",
+  "sectionSlug": "applied-python-projects-python-10-capstone-project",
+  "prefix": "py10",
+  "minutes": 40,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.label",
+    "summaryKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.cards.sketch0.title",
+      "sketchId": "capstone-overview",
+      "height": 420,
+      "tryIt": {
+        "id": "try-capstone-automation-project-sketch0",
+        "titleKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.tryIt.try_capstone_automation_project_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.tryIt.try_capstone_automation_project_sketch0.prompt",
+        "exerciseKey": "capstone-step-1-parse-task-lines",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.cards.sketch1.title",
+      "sketchId": "capstone-functions-flow",
+      "height": 420,
+      "tryIt": {
+        "id": "try-capstone-automation-project-sketch1",
+        "titleKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.tryIt.try_capstone_automation_project_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.tryIt.try_capstone_automation_project_sketch1.prompt",
+        "exerciseKey": "capstone-step-2-load-tasks",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.cards.sketch2.title",
+      "sketchId": "capstone-polish",
+      "height": 420,
+      "tryIt": {
+        "id": "try-capstone-automation-project-sketch2",
+        "titleKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.tryIt.try_capstone_automation_project_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.tryIt.try_capstone_automation_project_sketch2.prompt",
+        "exerciseKey": "capstone-step-3-build-report-text",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "capstone_step_1_parse_task_lines",
+            "titleKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.projectSteps.capstone_step_1_parse_task_lines.title",
+            "exerciseKey": "capstone-step-1-parse-task-lines",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "capstone_step_2_load_tasks",
+            "titleKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.projectSteps.capstone_step_2_load_tasks.title",
+            "exerciseKey": "capstone-step-2-load-tasks",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_step_3_build_report_text",
+            "titleKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.projectSteps.capstone_step_3_build_report_text.title",
+            "exerciseKey": "capstone-step-3-build-report-text",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_step_4_write_report_file",
+            "titleKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.projectSteps.capstone_step_4_write_report_file.title",
+            "exerciseKey": "capstone-step-4-write-report-file",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_step_5_run_full_project",
+            "titleKey": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.projectSteps.capstone_step_5_run_full_project.title",
+            "exerciseKey": "capstone-step-5-run-full-project",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "capstone-overview",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.capstone-overview.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.capstone-overview.bodyMarkdown"
+    },
+    {
+      "id": "capstone-functions-flow",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.capstone-functions-flow.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.capstone-functions-flow.bodyMarkdown"
+    },
+    {
+      "id": "capstone-polish",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.capstone-polish.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.capstone-polish.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "capstone-step-1-parse-task-lines",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.quiz.capstone-step-1-parse-task-lines",
+      "language": "python",
+      "starterCode": "def load_tasks(text):\n    tasks = []\n    # TODO: split the text into lines\n    # TODO: split each line into title and status\n    # TODO: append a dictionary like {\"title\": ..., \"done\": ...}\n    return tasks",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_tasks(text):\n    tasks = []\n    # TODO: split the text into lines\n    # TODO: split each line into title and status\n    # TODO: append a dictionary like {\"title\": ..., \"done\": ...}\n    return tasks",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def load_tasks(text):\n    tasks = []\n    # TODO: split the text into lines\n    # TODO: split each line into title and status\n    # TODO: append a dictionary like {\"title\": ..., \"done\": ...}\n    return tasks",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_tasks(text):\n    tasks = []\n    # TODO: split the text into lines\n    # TODO: split each line into title and status\n    # TODO: append a dictionary like {\"title\": ..., \"done\": ...}\n    return tasks",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "load_tasks",
+            "args": [
+              "Write outline|done\nRecord demo|pending"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              [
+                [
+                  "title",
+                  "Write outline"
+                ],
+                [
+                  "done",
+                  true
+                ]
+              ],
+              [
+                [
+                  "title",
+                  "Record demo"
+                ],
+                [
+                  "done",
+                  false
+                ]
+              ]
+            ],
+            "expectedKind": "list_of_dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "load_tasks",
+            "args": [
+              "Review notes|pending\nSend update|done\nFix typo|done"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              [
+                [
+                  "title",
+                  "Review notes"
+                ],
+                [
+                  "done",
+                  false
+                ]
+              ],
+              [
+                [
+                  "title",
+                  "Send update"
+                ],
+                [
+                  "done",
+                  true
+                ]
+              ],
+              [
+                [
+                  "title",
+                  "Fix typo"
+                ],
+                [
+                  "done",
+                  true
+                ]
+              ]
+            ],
+            "expectedKind": "list_of_dict_entries"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-step-2-load-tasks",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.quiz.capstone-step-2-load-tasks",
+      "language": "python",
+      "starterCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n# Capstone step 2: Step 2: Count completed tasks\n# Keep the working code above from the previous step.\n# Next, Continue the project by adding a function named `count_done(tasks)`\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n# Capstone step 2: Step 2: Count completed tasks\n# Keep the working code above from the previous step.\n# Next, Continue the project by adding a function named `count_done(tasks)`\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n# Capstone step 2: Step 2: Count completed tasks\n# Keep the working code above from the previous step.\n# Next, Continue the project by adding a function named `count_done(tasks)`\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n# Capstone step 2: Step 2: Count completed tasks\n# Keep the working code above from the previous step.\n# Next, Continue the project by adding a function named `count_done(tasks)`\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "load_tasks",
+            "args": [
+              "Write outline|done\nRecord demo|pending"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              [
+                [
+                  "title",
+                  "Write outline"
+                ],
+                [
+                  "done",
+                  true
+                ]
+              ],
+              [
+                [
+                  "title",
+                  "Record demo"
+                ],
+                [
+                  "done",
+                  false
+                ]
+              ]
+            ],
+            "expectedKind": "list_of_dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "count_done",
+            "args": [
+              [
+                [
+                  [
+                    "title",
+                    "Write outline"
+                  ],
+                  [
+                    "done",
+                    true
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Record demo"
+                  ],
+                  [
+                    "done",
+                    false
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Review notes"
+                  ],
+                  [
+                    "done",
+                    true
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 2,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "count_done",
+            "args": [
+              [
+                [
+                  [
+                    "title",
+                    "Plan slides"
+                  ],
+                  [
+                    "done",
+                    false
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Send invite"
+                  ],
+                  [
+                    "done",
+                    false
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 0,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-step-3-build-report-text",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.quiz.capstone-step-3-build-report-text",
+      "language": "python",
+      "starterCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n# Capstone step 3: Step 3: Build the report text\n# Keep the working code above from the previous step.\n# Next, Add a function named `build_report(tasks)` that returns a formatted multi-line report string\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n# Capstone step 3: Step 3: Build the report text\n# Keep the working code above from the previous step.\n# Next, Add a function named `build_report(tasks)` that returns a formatted multi-line report string\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n\n    return \"\\n\".join(lines)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n# Capstone step 3: Step 3: Build the report text\n# Keep the working code above from the previous step.\n# Next, Add a function named `build_report(tasks)` that returns a formatted multi-line report string\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n# Capstone step 3: Step 3: Build the report text\n# Keep the working code above from the previous step.\n# Next, Add a function named `build_report(tasks)` that returns a formatted multi-line report string\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n\n    return \"\\n\".join(lines)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n\n    return \"\\n\".join(lines)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "load_tasks",
+            "args": [
+              "Write outline|done\nRecord demo|pending"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              [
+                [
+                  "title",
+                  "Write outline"
+                ],
+                [
+                  "done",
+                  true
+                ]
+              ],
+              [
+                [
+                  "title",
+                  "Record demo"
+                ],
+                [
+                  "done",
+                  false
+                ]
+              ]
+            ],
+            "expectedKind": "list_of_dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "count_done",
+            "args": [
+              [
+                [
+                  [
+                    "title",
+                    "Write outline"
+                  ],
+                  [
+                    "done",
+                    true
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Record demo"
+                  ],
+                  [
+                    "done",
+                    false
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Review notes"
+                  ],
+                  [
+                    "done",
+                    true
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 2,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_report",
+            "args": [
+              [
+                [
+                  [
+                    "title",
+                    "Write outline"
+                  ],
+                  [
+                    "done",
+                    true
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Record demo"
+                  ],
+                  [
+                    "done",
+                    false
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": "Task Report\n-----------\nTotal tasks: 2\nCompleted: 1\nRemaining: 1\n- Write outline: done\n- Record demo: pending",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_report",
+            "args": [
+              [
+                [
+                  [
+                    "title",
+                    "Review notes"
+                  ],
+                  [
+                    "done",
+                    true
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": "Task Report\n-----------\nTotal tasks: 1\nCompleted: 1\nRemaining: 0\n- Review notes: done",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-step-4-write-report-file",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.quiz.capstone-step-4-write-report-file",
+      "language": "python",
+      "starterCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n\n    return \"\\n\".join(lines)\n# Capstone step 4: Step 4: Save the report and show the result\n# Keep the working code above from the previous step.\n# Next, Finish the automation workflow by adding a function named `save_report(report_text)`\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n\n    return \"\\n\".join(lines)\n# Capstone step 4: Step 4: Save the report and show the result\n# Keep the working code above from the previous step.\n# Next, Finish the automation workflow by adding a function named `save_report(report_text)`\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n    return \"\\n\".join(lines)\n\n\ndef save_report(report_text):\n    with open(\"report.txt\", \"w\") as file:\n        file.write(report_text)\n\n    with open(\"report.txt\", \"r\") as file:\n        saved_text = file.read()\n\n    return saved_text",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n\n    return \"\\n\".join(lines)\n# Capstone step 4: Step 4: Save the report and show the result\n# Keep the working code above from the previous step.\n# Next, Finish the automation workflow by adding a function named `save_report(report_text)`\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n\n    return \"\\n\".join(lines)\n# Capstone step 4: Step 4: Save the report and show the result\n# Keep the working code above from the previous step.\n# Next, Finish the automation workflow by adding a function named `save_report(report_text)`\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "report.txt",
+            "content": "Old report text"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n    return \"\\n\".join(lines)\n\n\ndef save_report(report_text):\n    with open(\"report.txt\", \"w\") as file:\n        file.write(report_text)\n\n    with open(\"report.txt\", \"r\") as file:\n        saved_text = file.read()\n\n    return saved_text",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n    return \"\\n\".join(lines)\n\n\ndef save_report(report_text):\n    with open(\"report.txt\", \"w\") as file:\n        file.write(report_text)\n\n    with open(\"report.txt\", \"r\") as file:\n        saved_text = file.read()\n\n    return saved_text",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "load_tasks",
+            "args": [
+              "Write outline|done\nRecord demo|pending"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              [
+                [
+                  "title",
+                  "Write outline"
+                ],
+                [
+                  "done",
+                  true
+                ]
+              ],
+              [
+                [
+                  "title",
+                  "Record demo"
+                ],
+                [
+                  "done",
+                  false
+                ]
+              ]
+            ],
+            "expectedKind": "list_of_dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "count_done",
+            "args": [
+              [
+                [
+                  [
+                    "title",
+                    "Write outline"
+                  ],
+                  [
+                    "done",
+                    true
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Record demo"
+                  ],
+                  [
+                    "done",
+                    false
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 1,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_report",
+            "args": [
+              [
+                [
+                  [
+                    "title",
+                    "Write outline"
+                  ],
+                  [
+                    "done",
+                    true
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": "Task Report\n-----------\nTotal tasks: 1\nCompleted: 1\nRemaining: 0\n- Write outline: done",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "save_report",
+            "args": [
+              "Task Report\n-----------\nTotal tasks: 2"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Task Report\n-----------\nTotal tasks: 2",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "save_report",
+            "args": [
+              "Completed: 3\nRemaining: 1"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Completed: 3\nRemaining: 1",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-step-5-run-full-project",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-capstone-automation-project.capstone-automation-project.quiz.capstone-step-5-run-full-project",
+      "language": "python",
+      "starterCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n    return \"\\n\".join(lines)\n\n\ndef save_report(report_text):\n    with open(\"report.txt\", \"w\") as file:\n        file.write(report_text)\n\n    with open(\"report.txt\", \"r\") as file:\n        saved_text = file.read()\n\n    return saved_text\n# Capstone step 5: Step 5: Run the full capstone workflow\n# Keep the working code above from the previous step.\n# Next, Complete the final project by adding a function named `run_project(task_text)`\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n    return \"\\n\".join(lines)\n\n\ndef save_report(report_text):\n    with open(\"report.txt\", \"w\") as file:\n        file.write(report_text)\n\n    with open(\"report.txt\", \"r\") as file:\n        saved_text = file.read()\n\n    return saved_text\n# Capstone step 5: Step 5: Run the full capstone workflow\n# Keep the working code above from the previous step.\n# Next, Complete the final project by adding a function named `run_project(task_text)`\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n    return \"\\n\".join(lines)\n\n\ndef save_report(report_text):\n    with open(\"report.txt\", \"w\") as file:\n        file.write(report_text)\n    with open(\"report.txt\", \"r\") as file:\n        saved_text = file.read()\n    return saved_text\n\n\ndef run_project(task_text):\n    tasks = load_tasks(task_text)\n    report_text = build_report(tasks)\n    saved_text = save_report(report_text)\n    return saved_text",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n    return \"\\n\".join(lines)\n\n\ndef save_report(report_text):\n    with open(\"report.txt\", \"w\") as file:\n        file.write(report_text)\n\n    with open(\"report.txt\", \"r\") as file:\n        saved_text = file.read()\n\n    return saved_text\n# Capstone step 5: Step 5: Run the full capstone workflow\n# Keep the working code above from the previous step.\n# Next, Complete the final project by adding a function named `run_project(task_text)`\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n    return \"\\n\".join(lines)\n\n\ndef save_report(report_text):\n    with open(\"report.txt\", \"w\") as file:\n        file.write(report_text)\n\n    with open(\"report.txt\", \"r\") as file:\n        saved_text = file.read()\n\n    return saved_text\n# Capstone step 5: Step 5: Run the full capstone workflow\n# Keep the working code above from the previous step.\n# Next, Complete the final project by adding a function named `run_project(task_text)`\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "report.txt",
+            "content": "Starter report"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n    return \"\\n\".join(lines)\n\n\ndef save_report(report_text):\n    with open(\"report.txt\", \"w\") as file:\n        file.write(report_text)\n    with open(\"report.txt\", \"r\") as file:\n        saved_text = file.read()\n    return saved_text\n\n\ndef run_project(task_text):\n    tasks = load_tasks(task_text)\n    report_text = build_report(tasks)\n    saved_text = save_report(report_text)\n    return saved_text",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_tasks(text):\n    tasks = []\n    for line in text.strip().split(\"\\n\"):\n        title, status = line.split(\"|\")\n        tasks.append({\"title\": title, \"done\": status == \"done\"})\n    return tasks\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task[\"done\"]:\n            total += 1\n    return total\n\n\ndef build_report(tasks):\n    done_count = count_done(tasks)\n    remaining = len(tasks) - done_count\n    lines = [\n        \"Task Report\",\n        \"-----------\",\n        f\"Total tasks: {len(tasks)}\",\n        f\"Completed: {done_count}\",\n        f\"Remaining: {remaining}\"\n    ]\n    for task in tasks:\n        status_text = \"done\" if task[\"done\"] else \"pending\"\n        lines.append(f\"- {task['title']}: {status_text}\")\n    return \"\\n\".join(lines)\n\n\ndef save_report(report_text):\n    with open(\"report.txt\", \"w\") as file:\n        file.write(report_text)\n    with open(\"report.txt\", \"r\") as file:\n        saved_text = file.read()\n    return saved_text\n\n\ndef run_project(task_text):\n    tasks = load_tasks(task_text)\n    report_text = build_report(tasks)\n    saved_text = save_report(report_text)\n    return saved_text",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "load_tasks",
+            "args": [
+              "Write outline|done\nRecord demo|pending"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              [
+                [
+                  "title",
+                  "Write outline"
+                ],
+                [
+                  "done",
+                  true
+                ]
+              ],
+              [
+                [
+                  "title",
+                  "Record demo"
+                ],
+                [
+                  "done",
+                  false
+                ]
+              ]
+            ],
+            "expectedKind": "list_of_dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "count_done",
+            "args": [
+              [
+                [
+                  [
+                    "title",
+                    "Write outline"
+                  ],
+                  [
+                    "done",
+                    true
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Record demo"
+                  ],
+                  [
+                    "done",
+                    false
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Review notes"
+                  ],
+                  [
+                    "done",
+                    true
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 2,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_report",
+            "args": [
+              [
+                [
+                  [
+                    "title",
+                    "Write outline"
+                  ],
+                  [
+                    "done",
+                    true
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Record demo"
+                  ],
+                  [
+                    "done",
+                    false
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": "Task Report\n-----------\nTotal tasks: 2\nCompleted: 1\nRemaining: 1\n- Write outline: done\n- Record demo: pending",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "save_report",
+            "args": [
+              "Task Report\n-----------\nTotal tasks: 1"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Task Report\n-----------\nTotal tasks: 1",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "run_project",
+            "args": [
+              "Write outline|done\nRecord demo|pending"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Task Report\n-----------\nTotal tasks: 2\nCompleted: 1\nRemaining: 1\n- Write outline: done\n- Record demo: pending",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "run_project",
+            "args": [
+              "Review notes|done\nSend update|done\nFix typo|pending"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Task Report\n-----------\nTotal tasks: 3\nCompleted: 2\nRemaining: 1\n- Review notes: done\n- Send update: done\n- Fix typo: pending",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import type {
+    ExerciseKind,
     ManifestCodeInput,
     ManifestRuntimeDefaults,
     PlannedModule,
@@ -36,6 +37,56 @@ export type CodeInputHelpFallback = {
     };
 };
 
+export type ProjectTopicKind = "module_project" | "capstone";
+
+export type ProjectExerciseCandidate = TopicAuthoringDraft["quizDraft"][number];
+
+export type ProjectProfileConfig = {
+    preferredProjectExerciseKind?: ExerciseKind | null;
+
+    minStepCount: number;
+    targetStepCount: number;
+
+    allowReveal: boolean;
+
+    tryItDefault: {
+        enabled: boolean;
+        placement?: "first_sketch" | "all_sketches" | "none";
+        sketchIndex: number;
+        allowReveal: boolean;
+    };
+
+    projectFlowDefault: "standalone" | "progressive";
+
+    projectTitle: string;
+    projectStepLabel: string;
+
+    startPromptPrefix: string;
+    continuePromptPrefix: string;
+    helpConcept: string;
+};
+export type ProjectProfileCapability = {
+    getProjectConfig(args: {
+        seed: TopicSeed;
+        topicKind: ProjectTopicKind;
+    }): ProjectProfileConfig;
+    isProjectExercise(args: {
+        exercise: ProjectExerciseCandidate;
+        seed: TopicSeed;
+        topicKind: ProjectTopicKind;
+    }): boolean;
+};
+
+export type PracticeProfileConfig = {
+    tryItDefault: {
+        enabled: boolean;
+        placement?: "first_sketch" | "all_sketches" | "none";
+        sketchIndex: number;
+        allowReveal: boolean;
+    };
+    preferredTryItExerciseKind?: ExerciseKind | null;
+};
+
 export type RecipeHandler<TDef = unknown, TArgs = unknown, TResult = unknown> = (
     def: TDef,
     args: TArgs,
@@ -62,6 +113,11 @@ export type CodeInputProfileCapability = {
         prompt: string;
         seed?: TopicSeed;
     }): CodeInputHelpFallback;
+    showExpectedExample?(args: {
+        exercise: ProfileCodeInputDraft;
+        seed: TopicSeed;
+        recipeType?: ProfileCodeInputDraft["recipeType"] | undefined;
+    }): boolean;
     buildManifest(args: {
         exercise: ProfileCodeInputDraft;
         seed: TopicSeed;
@@ -94,6 +150,8 @@ export type CourseProfile = {
         repeatedExerciseTextThreshold?: number;
     };
     codeInput?: CodeInputProfileCapability;
+    practice?: PracticeProfileConfig;
+    project?: ProjectProfileCapability;
     getRecipeRegistry(): Record<string, RecipeHandler>;
     validateTopicBundle(bundle: TopicBundleManifest): string[];
 };

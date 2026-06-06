@@ -1,4 +1,5 @@
 import type { SlimTopicManifest } from "@/lib/subjects/_core/subjectManifestTypes";
+import { TOPIC_MANIFESTS as APPLIED_PYTHON_PROJECTS_TOPIC_MANIFESTS } from "@/lib/subjects/applied-python-projects/topics.generated";
 import { TOPIC_MANIFESTS as PYTHON_TOPIC_MANIFESTS } from "@/lib/subjects/python/topics.generated";
 import { TOPIC_MANIFESTS as PYTHON_V2_TOPIC_MANIFESTS } from "@/lib/subjects/python-v2/topics.generated";
 import { TOPIC_MANIFESTS as PYTHON_DATA_FUNCTIONS_TOPIC_MANIFESTS } from "@/lib/subjects/python-data-functions/topics.generated";
@@ -18,6 +19,8 @@ export function resolveTopicBundleManifest(args: {
   if (!topicId) return null;
 
   switch (args.subjectSlug) {
+    case "applied-python-projects":
+      return APPLIED_PYTHON_PROJECTS_TOPIC_MANIFESTS[topicId] ?? null;
     case "python":
       return PYTHON_TOPIC_MANIFESTS[topicId] ?? null;
     case "python-v2":

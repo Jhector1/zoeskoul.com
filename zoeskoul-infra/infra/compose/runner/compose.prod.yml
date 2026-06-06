@@ -1,0 +1,92 @@
+services:
+  runtime-image:
+    image: ${RUNTIME_IMAGE:-zoeskoul-runtime:preview}
+    build:
+      context: ${MONOREPO_ROOT:?required}
+      dockerfile: apps/runtime/Dockerfile
+    profiles:
+      - build-only
+
+  runner:
+    image: ${RUNNER_SERVICE_IMAGE:-zoeskoul-runner:preview}
+    build:
+      context: ${MONOREPO_ROOT:?required}
+      dockerfile: apps/runner/Dockerfile
+    container_name: zoeskoul-runner
+    restart: unless-stopped
+    user: ${RUNNER_CONTAINER_USER:-1000:1000}
+    group_add:
+      - "${RUNNER_DOCKER_SOCKET_GID:?required}"
+    environment:
+      NODE_ENV: production
+      PORT: 4001
+      # The runner should talk to the rootless Docker daemon through this mounted socket.
+      DOCKER_SOCKET: ${RUNNER_DOCKER_SOCKET_IN_CONTAINER:-/run/runner-docker/docker.sock}
+      DOCKER_HOST: unix://${RUNNER_DOCKER_SOCKET_IN_CONTAINER:-/run/runner-docker/docker.sock}
+      RUNNER_IMAGE: ${RUNTIME_IMAGE:-zoeskoul-runtime:preview}
+      RUNNER_SHARED_SECRET: ${RUNNER_SHARED_SECRET:?required}
+      PTY_ATTACH_SECRET: ${PTY_ATTACH_SECRET:?required}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      RUNNER_WORKSPACE_ROOT: ${RUNNER_WORKSPACE_ROOT:?required}
+      RUN_WALL_TIMEOUT_MS: ${RUN_WALL_TIMEOUT_MS:-15000}
+      RUN_IDLE_TIMEOUT_MS: ${RUN_IDLE_TIMEOUT_MS:-20000}
+      RUNNER_EXEC_UID: ${RUNNER_EXEC_UID:-1000}
+      RUNNER_EXEC_GID: ${RUNNER_EXEC_GID:-1000}
+      RUNNER_MAX_FILES: ${RUNNER_MAX_FILES:-32}
+      RUNNER_MAX_TOTAL_BYTES: ${RUNNER_MAX_TOTAL_BYTES:-262144}
+      RUNNER_MAX_CONCURRENT_PER_ACTOR: ${RUNNER_MAX_CONCURRENT_PER_ACTOR:-3}
+      RUNNER_CHILD_NETWORK: ${RUNNER_CHILD_NETWORK:-none}
+      RUNNER_DISABLE_NETWORK: ${RUNNER_DISABLE_NETWORK:-1}
+      RUNNER_MEMORY_LIMIT_MB: ${RUNNER_MEMORY_LIMIT_MB:-128}
+      RUNNER_CPU_QUOTA: ${RUNNER_CPU_QUOTA:-50000}
+      RUNNER_PIDS_LIMIT: ${RUNNER_PIDS_LIMIT:-128}
+    depends_on:
+      redis:
+        condition: service_healthy
+    expose:
+      - "4001"
+    volumes:
+      # Hardened preview default: rootless Docker socket, not /var/run/docker.sock.
+      - type: bind
+        source: ${RUNNER_DOCKER_SOCKET_HOST:?required}
+        target: ${RUNNER_DOCKER_SOCKET_IN_CONTAINER:-/run/runner-docker/docker.sock}
+      - type: bind
+        source: ${RUNNER_WORKSPACE_ROOT:?required}
+        target: ${RUNNER_WORKSPACE_ROOT:?required}
+        read_only: false
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+      - /run:rw,noexec,nosuid,size=16m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 256
+    mem_limit: ${RUNNER_SERVICE_MEM_LIMIT:-512m}
+    cpus: ${RUNNER_SERVICE_CPUS:-1.0}
+    stop_grace_period: 20s
+    networks:
+      backend:
+      edge_runner:
+        aliases:
+          - runner
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:4001/health >/dev/null 2>&1 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  backend:
+    name: ${BACKEND_NETWORK:-zoeskoul-backend}
+    external: true
+  edge_runner:
+    name: ${EDGE_RUNNER_NETWORK:-zoeskoul-edge-runner}
+    external: true

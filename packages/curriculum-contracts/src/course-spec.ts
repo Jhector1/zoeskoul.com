@@ -1,5 +1,6 @@
 import type { BlueprintRuntimePolicy, CourseVersionStatus } from "./blueprint.js";
 import type { ExerciseKindMix } from "./exercise-policy.js";
+import type { PracticeConfig } from "./practice.js";
 import type {
     CourseGenerationPolicy,
     ModulePedagogyPolicy,
@@ -79,12 +80,7 @@ export type CourseSpecTopic = {
     technical?: boolean;
     tags?: string[];
     learningGoals?: string[];
-    practice?: {
-        tryIt?: boolean;
-        tryItExerciseId?: string;
-        tryItSketchIndex?: number;
-        projectFlow?: "standalone" | "progressive";
-    };
+    practice?: PracticeConfig;
 };
 
 export type CourseSpecSection = {
@@ -99,6 +95,7 @@ export type CourseSpecSection = {
     weeksLabel?: string | null;
 
     bullets?: string[];
+    practiceDefaults?: PracticeConfig;
 
     topics: CourseSpecTopic[];
 };
@@ -127,6 +124,7 @@ export type CourseSpecModule = {
         mix?: ExerciseKindMix;
     };
     runtimePolicy?: CourseSpecRuntimePolicy;
+    practiceDefaults?: PracticeConfig;
     sections: CourseSpecSection[];
 };
 
@@ -176,6 +174,7 @@ export type CourseSpec = {
         supersededBy?: string | null;
     };
     validationPolicy?: unknown;
+    practiceDefaults?: PracticeConfig;
     intendedFor?: string | string[];
     courseOverview?: {
         recommendedSequence?: string;

@@ -1,0 +1,485 @@
+{
+  "topicId": "data-model-for-a-small-app",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-10-capstone-automation-project",
+  "sectionSlug": "python--applied-python-projects--draft-python-10-project-planning",
+  "prefix": "py10",
+  "minutes": 25,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.cards.sketch0.title",
+      "sketchId": "data-model-overview",
+      "height": 420,
+      "tryIt": {
+        "id": "try-data-model-for-a-small-app-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.tryIt.try_data_model_for_a_small_app_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.tryIt.try_data_model_for_a_small_app_sketch0.prompt",
+        "exerciseKey": "project-step-1-task-class",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.cards.sketch1.title",
+      "sketchId": "project-planning-note",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "project_step_1_task_class",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.projectSteps.project_step_1_task_class.title",
+            "exerciseKey": "project-step-1-task-class",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "project_step_2_task_methods",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.projectSteps.project_step_2_task_methods.title",
+            "exerciseKey": "project-step-2-task-methods",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_step_3_build_task_list",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.projectSteps.project_step_3_build_task_list.title",
+            "exerciseKey": "project-step-3-build-task-list",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_step_4_count_completed",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.projectSteps.project_step_4_count_completed.title",
+            "exerciseKey": "project-step-4-count-completed",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_step_5_save_task_report",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.projectSteps.project_step_5_save_task_report.title",
+            "exerciseKey": "project-step-5-save-task-report",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "data-model-overview",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.data-model-overview.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.data-model-overview.bodyMarkdown"
+    },
+    {
+      "id": "project-planning-note",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.project-planning-note.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.project-planning-note.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "project-step-1-task-class",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.quiz.project-step-1-task-class",
+      "language": "python",
+      "starterCode": "class Task:\n    def __init__(self, title):\n        # TODO: store the title\n        # TODO: set done to False\n        pass\n\n# Read a title, create a Task, and print its attributes",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, title):\n        # TODO: store the title\n        # TODO: set done to False\n        pass\n\n# Read a title, create a Task, and print its attributes",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n\ntitle = input()\ntask = Task(title)\nprint(task.title)\nprint(task.done)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class Task:\n    def __init__(self, title):\n        # TODO: store the title\n        # TODO: set done to False\n        pass\n\n# Read a title, create a Task, and print its attributes",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, title):\n        # TODO: store the title\n        # TODO: set done to False\n        pass\n\n# Read a title, create a Task, and print its attributes",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Plan project\n",
+            "stdout": "Plan project\nFalse\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Review notes\n",
+            "stdout": "Review notes\nFalse\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n\ntitle = input()\ntask = Task(title)\nprint(task.title)\nprint(task.done)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n\ntitle = input()\ntask = Task(title)\nprint(task.title)\nprint(task.done)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-2-task-methods",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.quiz.project-step-2-task-methods",
+      "language": "python",
+      "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n\ntitle = input()\ntask = Task(title)\nprint(task.title)\nprint(task.done)\n# Capstone step 2: Add task behavior methods\n# Keep the working code above from the previous step.\n# Next, Build on the Task model by adding two methods: `mark_done()` should change `done` to `True`, and `summary()` should return text in this format: `title - done: status`\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n\ntitle = input()\ntask = Task(title)\nprint(task.title)\nprint(task.done)\n# Capstone step 2: Add task behavior methods\n# Keep the working code above from the previous step.\n# Next, Build on the Task model by adding two methods: `mark_done()` should change `done` to `True`, and `summary()` should return text in this format: `title - done: status`\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle = input()\ncommand = input()\ntask = Task(title)\n\nif command == \"done\":\n    task.mark_done()\n\nprint(task.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n\ntitle = input()\ntask = Task(title)\nprint(task.title)\nprint(task.done)\n# Capstone step 2: Add task behavior methods\n# Keep the working code above from the previous step.\n# Next, Build on the Task model by adding two methods: `mark_done()` should change `done` to `True`, and `summary()` should return text in this format: `title - done: status`\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n\ntitle = input()\ntask = Task(title)\nprint(task.title)\nprint(task.done)\n# Capstone step 2: Add task behavior methods\n# Keep the working code above from the previous step.\n# Next, Build on the Task model by adding two methods: `mark_done()` should change `done` to `True`, and `summary()` should return text in this format: `title - done: status`\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Plan project\ndone\n",
+            "stdout": "Plan project - done: True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Plan project\nkeep\n",
+            "stdout": "Plan project - done: False\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle = input()\ncommand = input()\ntask = Task(title)\n\nif command == \"done\":\n    task.mark_done()\n\nprint(task.summary())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle = input()\ncommand = input()\ntask = Task(title)\n\nif command == \"done\":\n    task.mark_done()\n\nprint(task.summary())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-3-build-task-list",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.quiz.project-step-3-build-task-list",
+      "language": "python",
+      "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle = input()\ncommand = input()\ntask = Task(title)\n\nif command == \"done\":\n    task.mark_done()\n\nprint(task.summary())\n# Capstone step 3: Store multiple tasks in a list\n# Keep the working code above from the previous step.\n# Next, Now model a small collection of tasks\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle = input()\ncommand = input()\ntask = Task(title)\n\nif command == \"done\":\n    task.mark_done()\n\nprint(task.summary())\n# Capstone step 3: Store multiple tasks in a list\n# Keep the working code above from the previous step.\n# Next, Now model a small collection of tasks\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[1].mark_done()\n\nfor task in tasks:\n    print(task.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle = input()\ncommand = input()\ntask = Task(title)\n\nif command == \"done\":\n    task.mark_done()\n\nprint(task.summary())\n# Capstone step 3: Store multiple tasks in a list\n# Keep the working code above from the previous step.\n# Next, Now model a small collection of tasks\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle = input()\ncommand = input()\ntask = Task(title)\n\nif command == \"done\":\n    task.mark_done()\n\nprint(task.summary())\n# Capstone step 3: Store multiple tasks in a list\n# Keep the working code above from the previous step.\n# Next, Now model a small collection of tasks\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Plan\nBuild\nTest\n",
+            "stdout": "Plan - done: False\nBuild - done: True\nTest - done: False\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Draft\nReview\nShare\n",
+            "stdout": "Draft - done: False\nReview - done: True\nShare - done: False\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[1].mark_done()\n\nfor task in tasks:\n    print(task.summary())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[1].mark_done()\n\nfor task in tasks:\n    print(task.summary())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-4-count-completed",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.quiz.project-step-4-count-completed",
+      "language": "python",
+      "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[1].mark_done()\n\nfor task in tasks:\n    print(task.summary())\n# Capstone step 4: Count completed tasks with a helper function\n# Keep the working code above from the previous step.\n# Next, Extend the project by adding a function named `count_done(tasks)` that returns how many Task objects are completed\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[1].mark_done()\n\nfor task in tasks:\n    print(task.summary())\n# Capstone step 4: Count completed tasks with a helper function\n# Keep the working code above from the previous step.\n# Next, Extend the project by adding a function named `count_done(tasks)` that returns how many Task objects are completed\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[0].mark_done()\ntasks[2].mark_done()\n\nprint(count_done(tasks))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[1].mark_done()\n\nfor task in tasks:\n    print(task.summary())\n# Capstone step 4: Count completed tasks with a helper function\n# Keep the working code above from the previous step.\n# Next, Extend the project by adding a function named `count_done(tasks)` that returns how many Task objects are completed\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[1].mark_done()\n\nfor task in tasks:\n    print(task.summary())\n# Capstone step 4: Count completed tasks with a helper function\n# Keep the working code above from the previous step.\n# Next, Extend the project by adding a function named `count_done(tasks)` that returns how many Task objects are completed\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Plan\nBuild\nTest\n",
+            "stdout": "2\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Write\nCheck\nShip\n",
+            "stdout": "2\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[0].mark_done()\ntasks[2].mark_done()\n\nprint(count_done(tasks))",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[0].mark_done()\ntasks[2].mark_done()\n\nprint(count_done(tasks))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-5-save-task-report",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.data-model-for-a-small-app.quiz.project-step-5-save-task-report",
+      "language": "python",
+      "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[0].mark_done()\ntasks[2].mark_done()\n\nprint(count_done(tasks))\n# Capstone step 5: Save a task report to a file\n# Keep the working code above from the previous step.\n# Next, Finish the capstone data model with simple file output\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[0].mark_done()\ntasks[2].mark_done()\n\nprint(count_done(tasks))\n# Capstone step 5: Save a task report to a file\n# Keep the working code above from the previous step.\n# Next, Finish the capstone data model with simple file output\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[1].mark_done()\n\nlines = []\nfor task in tasks:\n    lines.append(task.summary())\nlines.append(f\"Completed: {count_done(tasks)}\")\nreport_text = \"\\n\".join(lines)\n\nwith open(\"report.txt\", \"w\") as file:\n    file.write(report_text)\n\nwith open(\"report.txt\", \"r\") as file:\n    print(file.read())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[0].mark_done()\ntasks[2].mark_done()\n\nprint(count_done(tasks))\n# Capstone step 5: Save a task report to a file\n# Keep the working code above from the previous step.\n# Next, Finish the capstone data model with simple file output\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[0].mark_done()\ntasks[2].mark_done()\n\nprint(count_done(tasks))\n# Capstone step 5: Save a task report to a file\n# Keep the working code above from the previous step.\n# Next, Finish the capstone data model with simple file output\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "report.txt",
+            "content": "Plan - done: False\nBuild - done: True\nTest - done: False\nCompleted: 1",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Plan\nBuild\nTest\n",
+            "stdout": "Plan - done: False\nBuild - done: True\nTest - done: False\nCompleted: 1\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "report.txt",
+                "content": "Plan - done: False\nBuild - done: True\nTest - done: False\nCompleted: 1",
+                "readOnly": true
+              }
+            ]
+          },
+          {
+            "stdin": "Draft\nReview\nShare\n",
+            "stdout": "Draft - done: False\nReview - done: True\nShare - done: False\nCompleted: 1\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "report.txt",
+                "content": "Draft - done: False\nReview - done: True\nShare - done: False\nCompleted: 1",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "solutionCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[1].mark_done()\n\nlines = []\nfor task in tasks:\n    lines.append(task.summary())\nlines.append(f\"Completed: {count_done(tasks)}\")\nreport_text = \"\\n\".join(lines)\n\nwith open(\"report.txt\", \"w\") as file:\n    file.write(report_text)\n\nwith open(\"report.txt\", \"r\") as file:\n    print(file.read())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[1].mark_done()\n\nlines = []\nfor task in tasks:\n    lines.append(task.summary())\nlines.append(f\"Completed: {count_done(tasks)}\")\nreport_text = \"\\n\".join(lines)\n\nwith open(\"report.txt\", \"w\") as file:\n    file.write(report_text)\n\nwith open(\"report.txt\", \"r\") as file:\n    print(file.read())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

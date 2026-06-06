@@ -105,4 +105,65 @@ describe("normalizeLegacyCourseSpec", () => {
 
         expect(spec.modules[0]?.moduleProject).toBe("Build a query project.");
     });
+
+    it("normalizes course, module, section, and topic practice settings", () => {
+        const spec = normalizeLegacyCourseSpec({
+            authoringFormatVersion: "2.0",
+            subjectSlug: "python",
+            profileId: "python",
+            title: "Python",
+            practiceDefaults: {
+                tryIt: true,
+                tryItPlacement: "first_sketch",
+            },
+            modules: [
+                {
+                    moduleNumber: 0,
+                    moduleSlug: "m0",
+                    title: "Intro",
+                    practiceDefaults: {
+                        tryItPlacement: "all_sketches",
+                    },
+                    sections: [
+                        {
+                            sectionSlug: "s0",
+                            title: "Section",
+                            practiceDefaults: {
+                                tryItPlacement: "none",
+                            },
+                            topics: [
+                                {
+                                    topicId: "t0",
+                                    title: "Topic",
+                                    practice: {
+                                        tryIt: true,
+                                        tryItPlacement: "all_sketches",
+                                        tryItExerciseIds: ["ex-1", "ex-2"],
+                                        tryItSketchIndex: 1,
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        });
+
+        expect(spec.practiceDefaults).toEqual({
+            tryIt: true,
+            tryItPlacement: "first_sketch",
+        });
+        expect(spec.modules[0]?.practiceDefaults).toEqual({
+            tryItPlacement: "all_sketches",
+        });
+        expect(spec.modules[0]?.sections[0]?.practiceDefaults).toEqual({
+            tryItPlacement: "none",
+        });
+        expect(spec.modules[0]?.sections[0]?.topics[0]?.practice).toEqual({
+            tryIt: true,
+            tryItPlacement: "all_sketches",
+            tryItExerciseIds: ["ex-1", "ex-2"],
+            tryItSketchIndex: 1,
+        });
+    });
 });

@@ -228,6 +228,38 @@ describe("buildCurriculumQualityReport", () => {
         expect(report.issues.some((issue) => issue.code === "MISSING_FINAL_CAPSTONE" && issue.severity === "error")).toBe(true);
     });
 
+    it("counts emitted bundle exercises when they are more complete than the saved draft", () => {
+        const pySeed = seed();
+        const draft = pythonDraft();
+        const bundle = buildTopicBundleFromDraft({
+            shape: pythonShape,
+            seed: pySeed,
+            draft,
+        });
+        const extraBundleExercise = {
+            ...bundle.exercises[0],
+            id: "code-2",
+        };
+        const report = buildCurriculumQualityReport({
+            profileId: "python",
+            subjectSlug: "python-for-beginners",
+            topics: [
+                {
+                    seed: pySeed,
+                    draft,
+                    topicBundle: {
+                        ...bundle,
+                        exercises: [...bundle.exercises, extraBundleExercise],
+                    },
+                },
+            ],
+        });
+
+        expect(report.summary.exercises).toBe(2);
+        expect(report.summary.codeInputs).toBe(2);
+        expect(report.summary.exerciseKinds.code_input).toBe(2);
+    });
+
     it("warns on repeated exercise wording", () => {
         const pySeed = seed();
         const draft = pythonDraft();

@@ -1,0 +1,414 @@
+{
+  "topicId": "module-8-class-model-project",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-8-object-oriented-programming",
+  "sectionSlug": "applied-python-projects-python-8-module-project",
+  "prefix": "py8",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.label",
+    "summaryKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-8-class-model-project-sketch0",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.tryIt.try_module_8_class_model_project_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.tryIt.try_module_8_class_model_project_sketch0.prompt",
+        "exerciseKey": "project-step-1-bankaccount-class",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-8-class-model-project-sketch1",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.tryIt.try_module_8_class_model_project_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.tryIt.try_module_8_class_model_project_sketch1.prompt",
+        "exerciseKey": "project-step-2-account-attributes",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-8-class-model-project-sketch2",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.tryIt.try_module_8_class_model_project_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.tryIt.try_module_8_class_model_project_sketch2.prompt",
+        "exerciseKey": "project-step-3-account-methods",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "project_step_1_bankaccount_class",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.projectSteps.project_step_1_bankaccount_class.title",
+            "exerciseKey": "project-step-1-bankaccount-class",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "project_step_2_account_attributes",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.projectSteps.project_step_2_account_attributes.title",
+            "exerciseKey": "project-step-2-account-attributes",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_step_3_account_methods",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.projectSteps.project_step_3_account_methods.title",
+            "exerciseKey": "project-step-3-account-methods",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.sketch-1.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.sketch-2.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.sketch-3.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "project-step-1-bankaccount-class",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.quiz.project-step-1-bankaccount-class",
+      "language": "python",
+      "starterCode": "# Step 1: define the BankAccount class below.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Step 1: define the BankAccount class below.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class BankAccount:\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Step 1: define the BankAccount class below.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Step 1: define the BankAccount class below.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class BankAccount:\n    pass",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class BankAccount:\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "BankAccount",
+            "message": "Define a class named BankAccount."
+          },
+          {
+            "type": "constructible",
+            "className": "BankAccount",
+            "constructorArgs": [],
+            "message": "BankAccount should be constructible with no arguments at this step."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-2-account-attributes",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.quiz.project-step-2-account-attributes",
+      "language": "python",
+      "starterCode": "class BankAccount:\n    pass\n# Project step 2: Project Step 2: Store owner and balance\n# Keep the working code above from the previous step.\n# Next, Build on the previous step\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class BankAccount:\n    pass\n# Project step 2: Project Step 2: Store owner and balance\n# Keep the working code above from the previous step.\n# Next, Build on the previous step\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class BankAccount:\n    pass\n# Project step 2: Project Step 2: Store owner and balance\n# Keep the working code above from the previous step.\n# Next, Build on the previous step\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class BankAccount:\n    pass\n# Project step 2: Project Step 2: Store owner and balance\n# Keep the working code above from the previous step.\n# Next, Build on the previous step\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "BankAccount",
+            "message": "Define a class named BankAccount."
+          },
+          {
+            "type": "constructible",
+            "className": "BankAccount",
+            "constructorArgs": [
+              "Ava",
+              100
+            ],
+            "message": "BankAccount should accept owner and balance when created."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "BankAccount",
+            "constructorArgs": [
+              "Ava",
+              100
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "A new BankAccount should store owner and balance as instance attributes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-3-account-methods",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-programming.module-8-class-model-project.quiz.project-step-3-account-methods",
+      "language": "python",
+      "starterCode": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n# Project step 3: Project Step 3: Add deposit and summary methods\n# Keep the working code above from the previous step.\n# Next, Continue the same project\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n# Project step 3: Project Step 3: Add deposit and summary methods\n# Keep the working code above from the previous step.\n# Next, Continue the same project\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n# Project step 3: Project Step 3: Add deposit and summary methods\n# Keep the working code above from the previous step.\n# Next, Continue the same project\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n# Project step 3: Project Step 3: Add deposit and summary methods\n# Keep the working code above from the previous step.\n# Next, Continue the same project\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "BankAccount",
+            "message": "Define a class named BankAccount."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "BankAccount",
+            "constructorArgs": [
+              "Ava",
+              100
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "The class should still store owner and balance on each instance."
+          },
+          {
+            "type": "method_returns",
+            "className": "BankAccount",
+            "constructorArgs": [
+              "Ava",
+              100
+            ],
+            "constructorArgKinds": [
+              "value",
+              "value"
+            ],
+            "methodName": "deposit",
+            "methodArgs": [
+              25
+            ],
+            "methodArgKinds": [
+              "value"
+            ],
+            "expected": 125,
+            "expectedKind": "value",
+            "message": "deposit should add the amount to the balance and return the updated balance."
+          },
+          {
+            "type": "method_returns",
+            "className": "BankAccount",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [
+              "value",
+              "value"
+            ],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Ava: $125",
+            "expectedKind": "value",
+            "message": "summary should return the owner and balance in the required format."
+          }
+        ]
+      }
+    }
+  ]
+}

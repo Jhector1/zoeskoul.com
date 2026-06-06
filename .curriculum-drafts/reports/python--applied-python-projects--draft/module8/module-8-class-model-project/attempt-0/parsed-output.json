@@ -1,0 +1,178 @@
+{
+  "title": "Module 8 Class Model Project",
+  "summary": "Build a small class-based bank account project in three connected steps: create the class, store account data with attributes, and add methods that change and report the balance.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Start the project with one class",
+      "bodyMarkdown": "A class is a blueprint for making objects. In a project, that means you can group related data and behavior in one place instead of scattering variables everywhere.\n\nFor this mini-project, you'll build a simple **bank account** model. First, make a class. Then you'll give each account its own data. After that, you'll add methods that do useful work.\n\nHere is the smallest starting point:\n\n```python\nclass BankAccount:\n    pass\n```\n\nLine by line:\n\n- `class BankAccount:` starts a new class named `BankAccount`.\n- `pass` means \"nothing is here yet,\" but the class is still valid Python.\n\nOnce the class exists, Python can create objects from it. Later, each object can hold its own account owner's name and balance.\n\nWorked example:\n\n```python\nclass BankAccount:\n    pass\n\nchecking = BankAccount()\nsavings = BankAccount()\n```\n\nIn this example, `checking` and `savings` are two different instances of the same class. They come from the same blueprint, but they can store different values once you add attributes.\n\nTry it yourself: in the next step, create the `BankAccount` class in the code editor and click Run. Then extend it by adding a constructor so each account starts with an owner name and a balance."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Use __init__ to give each object its own data",
+      "bodyMarkdown": "The `__init__` method runs when you create a new instance. It is the usual place to set up attributes.\n\nExample:\n\n```python\nclass BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n```\n\nStep by step:\n\n- `def __init__(self, owner, balance):` defines the constructor.\n- `self` refers to the specific object being created.\n- `self.owner = owner` stores the owner's name on that object.\n- `self.balance = balance` stores the starting balance on that object.\n\nWorked example:\n\n```python\naccount = BankAccount(\"Ava\", 100)\n```\n\nAfter this line:\n\n- `account.owner` is `\"Ava\"`\n- `account.balance` is `100`\n\nThat means each instance can carry its own state.\n\nTry this: after adding `__init__`, create two accounts with different names and balances. Predict what each object's attributes should be before you run the code."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Add methods to model account behavior",
+      "bodyMarkdown": "Methods are functions inside a class. They let objects do things with their own data.\n\nFor a bank account, useful methods might include depositing money and showing a summary.\n\nExample:\n\n```python\nclass BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n```\n\nLine by line for the new methods:\n\n- `def deposit(self, amount):` defines a method that receives the object and an amount.\n- `self.balance += amount` updates that object's balance.\n- `return self.balance` sends back the new balance.\n- `def summary(self):` defines another method.\n- `return f\"{self.owner}: ${self.balance}\"` builds a readable string from the object's attributes.\n\nWorked example:\n\n```python\naccount = BankAccount(\"Ava\", 100)\naccount.deposit(25)\nprint(account.summary())\n```\n\nThis would describe the same account after its balance changes.\n\nYour turn: add one method at a time. Run after each change so you can catch mistakes early and see how methods use `self` to work with the current object."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "project-step-1-bankaccount-class",
+      "kind": "code_input",
+      "title": "Project Step 1: Create the BankAccount blueprint",
+      "prompt": "Create a class named `BankAccount`. For now, the class does not need any attributes or methods. Just define the class so Python can create instances from it.",
+      "hint": "Use the `class` keyword and a class body placeholder.",
+      "help": {
+        "concept": "A class definition creates a new blueprint that Python can use to make instances. Even an empty class is valid if its body contains `pass`.",
+        "hint_1": "Start with `class BankAccount:` and remember that Python needs an indented body.",
+        "hint_2": "If the class has no behavior yet, use a single placeholder statement inside the class body."
+      },
+      "starterCode": "# Step 1: define the BankAccount class below.\n\n",
+      "solutionCode": "class BankAccount:\n    pass\n",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "BankAccount",
+          "message": "Define a class named BankAccount."
+        },
+        {
+          "type": "constructible",
+          "className": "BankAccount",
+          "constructorArgs": [],
+          "message": "BankAccount should be constructible with no arguments at this step."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "project-step-2-account-attributes",
+      "kind": "code_input",
+      "title": "Project Step 2: Store owner and balance",
+      "prompt": "Build on the previous step. Add an `__init__` method to `BankAccount` that takes `owner` and `balance`, then stores them as `self.owner` and `self.balance`.",
+      "hint": "The constructor should copy each parameter onto the object with `self`.",
+      "help": {
+        "concept": "`__init__` runs when an instance is created. It is used to attach starting attribute values to that specific object.",
+        "hint_1": "Define `__init__(self, owner, balance)` inside the class.",
+        "hint_2": "Inside `__init__`, assign the incoming values to attributes with `self.owner = owner` and `self.balance = balance`."
+      },
+      "starterCode": "# Step 2: build on the working class from step 1.\n\nclass BankAccount:\n    # TODO: add __init__(self, owner, balance)\n    # TODO: store owner and balance on the instance\n    pass\n",
+      "solutionCode": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "BankAccount",
+          "message": "Define a class named BankAccount."
+        },
+        {
+          "type": "constructible",
+          "className": "BankAccount",
+          "constructorArgs": [
+            "Ava",
+            100
+          ],
+          "message": "BankAccount should accept owner and balance when created."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "BankAccount",
+          "constructorArgs": [
+            "Ava",
+            100
+          ],
+          "attributes": [
+            "owner",
+            "balance"
+          ],
+          "message": "A new BankAccount should store owner and balance as instance attributes."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "project-step-3-account-methods",
+      "kind": "code_input",
+      "title": "Project Step 3: Add deposit and summary methods",
+      "prompt": "Continue the same project. Keep the `BankAccount` class with its `__init__` method, then add:\n\n- a `deposit(self, amount)` method that increases `self.balance` by `amount` and returns the new balance\n- a `summary(self)` method that returns a string in this format: `Owner: $Balance`\n\nFor example, an account with owner `Ava` and balance `125` should return `Ava: $125`.",
+      "hint": "One method updates the balance, and the other builds a string from the current attributes.",
+      "help": {
+        "concept": "Methods use `self` to read or change the data stored on one specific instance. A method can both update attributes and return a result.",
+        "hint_1": "In `deposit`, add the amount to `self.balance` before returning the updated value.",
+        "hint_2": "In `summary`, use an f-string that combines `self.owner` and `self.balance` in the exact `Owner: $Balance` pattern."
+      },
+      "starterCode": "# Step 3: continue from the working class in step 2.\n\nclass BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    # TODO: add deposit(self, amount)\n    # It should update self.balance and return the new balance.\n\n    # TODO: add summary(self)\n    # It should return a string like: Ava: $125\n",
+      "solutionCode": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "BankAccount",
+          "message": "Define a class named BankAccount."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "BankAccount",
+          "constructorArgs": [
+            "Ava",
+            100
+          ],
+          "attributes": [
+            "owner",
+            "balance"
+          ],
+          "message": "The class should still store owner and balance on each instance."
+        },
+        {
+          "type": "method_returns",
+          "className": "BankAccount",
+          "constructorArgs": [
+            "Ava",
+            100
+          ],
+          "constructorArgKinds": [
+            "value",
+            "value"
+          ],
+          "methodName": "deposit",
+          "methodArgs": [
+            25
+          ],
+          "methodArgKinds": [
+            "value"
+          ],
+          "expected": 125,
+          "expectedKind": "value",
+          "message": "deposit should add the amount to the balance and return the updated balance."
+        },
+        {
+          "type": "method_returns",
+          "className": "BankAccount",
+          "constructorArgs": [
+            "Ava",
+            125
+          ],
+          "constructorArgKinds": [
+            "value",
+            "value"
+          ],
+          "methodName": "summary",
+          "methodArgs": [],
+          "expected": "Ava: $125",
+          "expectedKind": "value",
+          "message": "summary should return the owner and balance in the required format."
+        }
+      ],
+      "recipeType": "semantic"
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a BankAccount class project",
+    "stepIds": [
+      "project-step-1-bankaccount-class",
+      "project-step-2-account-attributes",
+      "project-step-3-account-methods"
+    ]
+  }
+}

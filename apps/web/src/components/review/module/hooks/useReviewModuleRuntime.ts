@@ -53,7 +53,7 @@ export function resolveReviewModuleToolDefaults(args: {
 export function useReviewModuleRuntime({ subjectSlug, mod, viewTopic }: Args) {
     const { codeEnabled } = useMemo(() => {
         const meta = (mod as ReviewModuleWithMeta).meta;
-        return toolsPolicyForSubject(subjectSlug, meta);
+        return toolsPolicyForSubject(subjectSlug, meta, mod.profileId);
     }, [subjectSlug, mod]);
 
     const moduleRuntime =

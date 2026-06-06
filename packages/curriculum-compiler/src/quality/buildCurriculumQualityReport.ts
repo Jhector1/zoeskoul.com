@@ -204,6 +204,7 @@ export function buildCurriculumQualityReport(args: {
         const topicId = topic.seed.topicId;
         const draftExercises = topic.draft?.quizDraft ?? [];
         const bundleExercises = topic.topicBundle?.exercises ?? [];
+        const countedExercises = bundleExercises.length > 0 ? bundleExercises : draftExercises;
         const path = topicPath(topic.seed);
         const repeatedThreshold =
             profile.qualityPolicy?.repeatedExerciseTextThreshold ?? 2;
@@ -230,8 +231,7 @@ export function buildCurriculumQualityReport(args: {
             });
         }
 
-        const repeatedTexts = new Map<string, string[]>();
-        for (const exercise of draftExercises) {
+        for (const exercise of countedExercises) {
             exercises += 1;
             exerciseCountsByKind[exercise.kind] = (exerciseCountsByKind[exercise.kind] ?? 0) + 1;
 
@@ -248,6 +248,13 @@ export function buildCurriculumQualityReport(args: {
                 });
             }
 
+            if (exercise.kind === "code_input") {
+                codeInputCount += 1;
+            }
+        }
+
+        const repeatedTexts = new Map<string, string[]>();
+        for (const exercise of draftExercises) {
             const repeatedKey = collapseText(`${exercise.prompt} ${exercise.hint}`);
             if (repeatedKey.length > 24) {
                 const ids = repeatedTexts.get(repeatedKey) ?? [];
@@ -256,8 +263,6 @@ export function buildCurriculumQualityReport(args: {
             }
 
             if (exercise.kind === "code_input") {
-                codeInputCount += 1;
-
                 if (!supportsCodeInput) {
                     addIssue(issues, {
                         code: "PROFILE_DOES_NOT_SUPPORT_CODE_INPUT",

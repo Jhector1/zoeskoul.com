@@ -209,8 +209,9 @@ describe("buildTopicAuthoringDraftPrompt", () => {
         });
 
         expect(prompt.system).toContain("These exercise ids were invalid as fixed_tests code_input:");
-        expect(prompt.system).toContain("Replace them with non-code exercises or regenerate them as stdin-based code_input with at least 2 tests.");
+        expect(prompt.system).toContain("Replace them with non-code exercises, regenerate them as stdin-based code_input with at least 2 tests, or switch them to semantic code_input when the task is about functions, classes, objects, methods, attributes, or return values.");
         expect(prompt.system).toContain("Do not produce static print-only code_input tasks with one test.");
+        expect(prompt.system).toContain("For class/object/method tasks, prefer semantic checks such as defines_class, constructible, instance_attributes, function_returns, or method_returns instead of stdout tests.");
     });
 
     it("does not inject SQL or Python code_input rules into a profile that does not opt in", () => {

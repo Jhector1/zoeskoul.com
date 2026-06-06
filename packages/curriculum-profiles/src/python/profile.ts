@@ -17,6 +17,7 @@ import type {
     CodeInputHelpFallback,
     CodeInputProfileCapability,
     CourseProfile,
+    ProjectProfileCapability,
 } from "../types.js";
 import { pythonShape } from "../shapes/pythonShape.js";
 
@@ -233,21 +234,23 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
         return undefined;
     },
     repairDraft(args) {
-        const exercise = args.exercise;
+        const { tests: _discardTests, ...exercise } = args.exercise;
         const hasSemanticChecks =
             Array.isArray(exercise.semanticChecks) &&
             exercise.semanticChecks.length > 0;
         const hasTests =
-            Array.isArray(exercise.tests) && exercise.tests.length > 0;
+            Array.isArray(args.exercise.tests) && args.exercise.tests.length > 0;
 
         const recipeType =
             pythonCodeInputCapability.defaultRecipeType(args) ??
             (hasSemanticChecks ? "semantic" : "fixed_tests");
 
         const repairedTests =
-            hasTests || hasSemanticChecks
-                ? exercise.tests
-                : [
+            recipeType === "semantic"
+                ? undefined
+                : hasTests
+                    ? args.exercise.tests
+                    : [
                     {
                         stdin: "12\n",
                         stdout: "13",
@@ -268,6 +271,9 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
     },
     getHelpFallback(args) {
         return makePythonCodeHelpFallback(args);
+    },
+    showExpectedExample() {
+        return true;
     },
     buildManifest(args): ManifestCodeInput {
         const recipeType = pythonCodeInputCapability.defaultRecipeType(args);
@@ -397,7 +403,12 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                     }
                     : {}),
             },
-            showExpectedExample: useSemantic ? false : true,
+            showExpectedExample:
+                pythonCodeInputCapability.showExpectedExample?.({
+                    exercise: args.exercise,
+                    seed: args.seed,
+                    recipeType,
+                }) ?? true,
             recipe: useSemantic
                 ? {
                     type: "semantic",
@@ -420,6 +431,55 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
         };
     },};
 
+const pythonProjectCapability: ProjectProfileCapability = {
+    getProjectConfig(args) {
+        if (args.topicKind === "capstone") {
+            return {
+                preferredProjectExerciseKind: "code_input",
+                minStepCount: 5,
+                targetStepCount: 5,
+                allowReveal: true,
+                tryItDefault: {
+                    enabled: true,
+                    sketchIndex: 0,
+                    allowReveal: true,
+                },
+                projectFlowDefault: "progressive",
+                projectTitle: "Final Capstone Project",
+                projectStepLabel: "Capstone step",
+                startPromptPrefix: "Start the final capstone project.",
+                continuePromptPrefix:
+                    "Continue the final capstone project from the previous working step.",
+                helpConcept:
+                    "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+            };
+        }
+
+        return {
+            preferredProjectExerciseKind: "code_input",
+            minStepCount: 3,
+            targetStepCount: 3,
+            allowReveal: true,
+            tryItDefault: {
+                enabled: true,
+                sketchIndex: 0,
+                allowReveal: true,
+            },
+            projectFlowDefault: "progressive",
+            projectTitle: "Module Project",
+            projectStepLabel: "Project step",
+            startPromptPrefix: "Start the module project.",
+            continuePromptPrefix:
+                "Continue the same module project from the previous working step.",
+            helpConcept:
+                "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+        };
+    },
+    isProjectExercise(args) {
+        return args.exercise.kind === "code_input";
+    },
+};
+
 export const pythonProfile: CourseProfile = {
     id: "python",
     shape: pythonShape,
@@ -437,6 +497,15 @@ export const pythonProfile: CourseProfile = {
     buildModuleRuntimeDefaults() {
         return { kind: "code", language: "python" };
     },
+    practice: {
+        tryItDefault: {
+            enabled: true,
+            sketchIndex: 0,
+            allowReveal: true,
+        },
+        preferredTryItExerciseKind: "code_input",
+    },
+    project: pythonProjectCapability,
     renderExerciseKindPromptRules(args) {
         const introTopicHaystack = `${args.seed.title} ${args.seed.summary}`.toLowerCase();
         const looksLikeIntroTopic =

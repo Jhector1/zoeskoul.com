@@ -44,6 +44,8 @@
       "titleKey": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.cards.project.title",
       "project": {
         "difficulty": "medium",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
         "allowReveal": true,
         "preferKind": "code_input",
         "maxAttempts": null,
@@ -259,11 +261,11 @@
       "messageBase": "topics.python-data-functions.python-8-real-world-project.class-roster-cleaner.quiz.cp-2-clean-one-row",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw roster preview above as your starting point.\n# Next, write clean_row(line) so one data row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split name, score, and email, then return the cleaned record.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\n# Print the cleaned first data row.\nprint(clean_row(first_row))\n",
+      "starterCode": "try:\n    with open(\"data/roster.csv\") as file:\n        for line in file:\n            print(line.strip())\nexcept FileNotFoundError:\n    pass\n\n# Keep the raw roster preview above as your starting point.\n# Next, write clean_row(line) so one data row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split name, score, and email, then return the cleaned record.\n    pass\n\ntry:\n    with open(\"data/roster.csv\") as file:\n        next(file)\n        first_row = next(file)\n\n    # Print the cleaned first data row.\n    print(clean_row(first_row))\nexcept FileNotFoundError:\n    pass\n",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw roster preview above as your starting point.\n# Next, write clean_row(line) so one data row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split name, score, and email, then return the cleaned record.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\n# Print the cleaned first data row.\nprint(clean_row(first_row))\n",
+          "content": "try:\n    with open(\"data/roster.csv\") as file:\n        for line in file:\n            print(line.strip())\nexcept FileNotFoundError:\n    pass\n\n# Keep the raw roster preview above as your starting point.\n# Next, write clean_row(line) so one data row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split name, score, and email, then return the cleaned record.\n    pass\n\ntry:\n    with open(\"data/roster.csv\") as file:\n        next(file)\n        first_row = next(file)\n\n    # Print the cleaned first data row.\n    print(clean_row(first_row))\nexcept FileNotFoundError:\n    pass\n",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -277,7 +279,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw roster preview above as your starting point.\n# Next, write clean_row(line) so one data row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split name, score, and email, then return the cleaned record.\n    pass\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\n# Print the cleaned first data row.\nprint(clean_row(first_row))\n",
+        "starterCode": "try:\n    with open(\"data/roster.csv\") as file:\n        for line in file:\n            print(line.strip())\nexcept FileNotFoundError:\n    pass\n\n# Keep the raw roster preview above as your starting point.\n# Next, write clean_row(line) so one data row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split name, score, and email, then return the cleaned record.\n    pass\n\ntry:\n    with open(\"data/roster.csv\") as file:\n        next(file)\n        first_row = next(file)\n\n    # Print the cleaned first data row.\n    print(clean_row(first_row))\nexcept FileNotFoundError:\n    pass\n",
         "starterFiles": [
           {
             "path": "main.py",
@@ -295,7 +297,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+            "content": "try:\n    with open(\"data/roster.csv\") as file:\n        for line in file:\n            print(line.strip())\nexcept FileNotFoundError:\n    pass\n\n\ndef clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n\ntry:\n    with open(\"data/roster.csv\") as file:\n        next(file)\n        first_row = next(file)\n\n    print(clean_row(first_row))\nexcept FileNotFoundError:\n    pass\n",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -326,7 +328,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+        "solutionCode": "try:\n    with open(\"data/roster.csv\") as file:\n        for line in file:\n            print(line.strip())\nexcept FileNotFoundError:\n    pass\n\n\ndef clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n\ntry:\n    with open(\"data/roster.csv\") as file:\n        next(file)\n        first_row = next(file)\n\n    print(clean_row(first_row))\nexcept FileNotFoundError:\n    pass\n",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -376,7 +378,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/roster.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n\nwith open(\"data/roster.csv\") as file:\n    next(file)\n    first_row = next(file)\n\nprint(clean_row(first_row))\n",
+            "content": "try:\n    with open(\"data/roster.csv\") as file:\n        for line in file:\n            print(line.strip())\nexcept FileNotFoundError:\n    pass\n\n\ndef clean_row(line):\n    name, score, email = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score), \"email\": email.strip().lower()}\n\n\ntry:\n    with open(\"data/roster.csv\") as file:\n        next(file)\n        first_row = next(file)\n\n    print(clean_row(first_row))\nexcept FileNotFoundError:\n    pass\n",
             "language": "python",
             "isEntry": true,
             "entry": true

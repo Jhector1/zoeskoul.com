@@ -1,0 +1,109 @@
+services:
+  postgres:
+    image: ${POSTGRES_IMAGE:-postgres:16.8}
+    container_name: zoeskoul-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?required}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?required}
+      POSTGRES_DB: ${POSTGRES_DB:?required}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+    logging: &default_logging
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    security_opt:
+      - no-new-privileges:true
+
+  redis:
+    image: ${REDIS_IMAGE:-redis:7.4-alpine}
+    container_name: zoeskoul-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--save", "60", "1000", "--protected-mode", "yes"]
+    volumes:
+      - redis-data:/data
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    logging: *default_logging
+    security_opt:
+      - no-new-privileges:true
+
+  # Optional. Enable with ENABLE_WEB=1 ./scripts/deploy-preview.sh
+  # Requires apps/web/Dockerfile in your monorepo.
+  web:
+    profiles: ["web"]
+    image: ${WEB_IMAGE:-zoeskoul-web:preview}
+    build:
+      context: ${MONOREPO_ROOT:?required}
+      dockerfile: apps/web/Dockerfile
+    container_name: zoeskoul-web
+    restart: unless-stopped
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: ${WEB_PORT:-3000}
+      DATABASE_URL: ${DATABASE_URL:?required}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:?required}
+      AUTH_SECRET: ${AUTH_SECRET:?required}
+      RUNNER_URL: http://runner:4001
+      RUNNER_SHARED_SECRET: ${RUNNER_SHARED_SECRET:?required}
+      JUDGE0_URL: ${JUDGE0_URL:-http://judge0:2358}
+      JUDGE0_AUTHN_HEADER: ${JUDGE0_AUTHN_HEADER:-X-Judge0-Token}
+      JUDGE0_AUTHN_TOKEN: ${JUDGE0_AUTHN_TOKEN:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      backend:
+      edge_web:
+        aliases:
+          - web
+      judge0_internal:
+    expose:
+      - "${WEB_PORT:-3000}"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:${WEB_PORT:-3000}/api/health >/dev/null 2>&1 || wget -qO- http://127.0.0.1:${WEB_PORT:-3000}/ >/dev/null 2>&1"]
+      interval: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    logging: *default_logging
+    read_only: false
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 512
+
+volumes:
+  postgres-data:
+  redis-data:
+
+networks:
+  backend:
+    name: ${BACKEND_NETWORK:-zoeskoul-backend}
+    external: true
+  edge_web:
+    name: ${EDGE_WEB_NETWORK:-zoeskoul-edge-web}
+    external: true
+  judge0_internal:
+    name: ${JUDGE0_NETWORK:-zoeskoul-judge0-internal}
+    external: true

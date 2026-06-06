@@ -1,0 +1,13 @@
+{
+  "topicId": "testing-edge-cases",
+  "ok": false,
+  "issues": [
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "ci-edge-blank-lines",
+      "message": "Exercise \"ci-edge-blank-lines\" solutionCode does not satisfy its semantic checks."
+    }
+  ]
+}

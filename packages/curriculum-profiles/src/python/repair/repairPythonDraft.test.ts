@@ -4,6 +4,169 @@ import { validatePythonGolden } from "../validatePythonGolden.js";
 import { repairPythonDraft } from "./repairPythonDraft.js";
 
 describe("repairPythonDraft", () => {
+    it("converts no-input hardcoded OOP output demos instead of leaving one-test fixed_tests code_input", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "encapsulation-and-responsibility",
+                title: "Encapsulation and Responsibility",
+            } as any,
+            draft: {
+                title: "Encapsulation and Responsibility",
+                summary: "Practice object attributes and methods.",
+                minutes: 10,
+                sketchBlocks: [
+                    {
+                        id: "try-it-yourself",
+                        title: "Try it yourself",
+                        bodyMarkdown:
+                            "Try it yourself: change one object attribute, predict the output, then run the code to check.",
+                    },
+                ],
+                quizDraft: [
+                    {
+                        id: "code3",
+                        kind: "code_input",
+                        title: "Modify an Attribute",
+                        prompt:
+                            "Modify the `title` attribute of a `Book` instance and print the updated information.",
+                        starterCode:
+                            "class Book:\n" +
+                            "    def __init__(self, title, author):\n" +
+                            "        self.title = title\n" +
+                            "        self.author = author\n" +
+                            "\n" +
+                            "    def get_info(self):\n" +
+                            "        return f\"{self.title} by {self.author}\"\n" +
+                            "\n" +
+                            "# Create an instance of Book\n" +
+                            "# Modify the title attribute\n" +
+                            "# Print updated information",
+                        solutionCode:
+                            "class Book:\n" +
+                            "    def __init__(self, title, author):\n" +
+                            "        self.title = title\n" +
+                            "        self.author = author\n" +
+                            "\n" +
+                            "    def get_info(self):\n" +
+                            "        return f\"{self.title} by {self.author}\"\n" +
+                            "\n" +
+                            "book = Book(\"1984\", \"George Orwell\")\n" +
+                            "book.title = \"Animal Farm\"\n" +
+                            "print(book.get_info())",
+                        tests: [
+                            {
+                                stdin: "",
+                                stdout: "Animal Farm by George Orwell\n",
+                                match: "exact",
+                            },
+                        ],
+                        recipeType: "fixed_tests",
+                        hint: "Access the attribute directly to modify it.",
+                        help: {
+                            concept:
+                                "Attributes can be modified directly using dot notation.",
+                            hint_1:
+                                "Use the instance name followed by a dot and the attribute name.",
+                            hint_2:
+                                "After modification, call the method to see the updated information.",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+
+        expect(exercise.kind).toBe("single_choice");
+        expect(exercise.prompt).toContain("class Book");
+        expect(exercise.prompt).toContain("book.title = \"Animal Farm\"");
+        expect(exercise.options).toContain("Animal Farm by George Orwell");
+
+        expect(result.report.repairs).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    code: "PYTHON_STATIC_OUTPUT_CODE_INPUT_CONVERTED_TO_CONCEPT_EXERCISE",
+                    field: "code3",
+                }),
+            ]),
+        );
+    });
+    it("does not add fixed stdout tests to semantic class exercises", async () => {
+        const result = await repairPythonDraft({
+            seed: { topicId: "classes-and-instances" } as any,
+            draft: {
+                title: "Classes and Instances",
+                summary: "Define classes and create objects.",
+                minutes: 10,
+                sketchBlocks: [
+                    {
+                        id: "try-it-yourself",
+                        title: "Try it yourself",
+                        bodyMarkdown:
+                            "Try it yourself: change one class attribute, predict the result, then run the code to check.",
+                    },
+                ],
+                quizDraft: [
+                    {
+                        id: "quiz9",
+                        kind: "code_input",
+                        title: "Define a Simple Class",
+                        prompt:
+                            "Define a class `Car` with attributes `make` and `model`. Include a method `description` that returns the car description.",
+                        hint: "Use a class and a method.",
+                        help: {
+                            concept: "Classes group state and behavior.",
+                            hint_1: "Store make and model on self.",
+                            hint_2: "Return the formatted description from the method.",
+                        },
+                        starterCode:
+                            "class Car:\n    def __init__(self, make, model):\n        # Initialize attributes\n\n    def description(self):\n        # Return description\n",
+                        solutionCode:
+                            "class Car:\n    def __init__(self, make, model):\n        self.make = make\n        self.model = model\n\n    def description(self):\n        return f'{self.make} {self.model}'\n",
+                        recipeType: "semantic",
+                        semanticChecks: [
+                            {
+                                type: "defines_class",
+                                className: "Car",
+                            },
+                            {
+                                type: "method_returns",
+                                className: "Car",
+                                constructorArgs: ["Toyota", "Corolla"],
+                                constructorArgKinds: [],
+                                methodName: "description",
+                                methodArgs: [],
+                                methodArgKinds: [],
+                                expected: "Toyota Corolla",
+                            },
+                        ],
+                        tests: [
+                            {
+                                stdin: "",
+                                stdout: "Toyota Corolla\n",
+                                match: "exact",
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+
+        expect(exercise.recipeType).toBe("semantic");
+        expect(exercise.semanticChecks).toHaveLength(2);
+        expect(exercise.tests).toBeUndefined();
+
+        expect(result.report.repairs).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    code: "PYTHON_SEMANTIC_STDOUT_TESTS_REMOVED",
+                    field: "quiz9",
+                }),
+            ]),
+        );
+    });
     it("rewrites stock SQL-flavored hints into Python guidance", async () => {
         const result = await repairPythonDraft({
             seed: { topicId: "python-topic" } as any,
@@ -1113,7 +1276,7 @@ describe("repairPythonDraft", () => {
         ).toBe(false);
     });
 
-    it("rewrites function-return tasks into runnable stdin/stdout programs", async () => {
+    it("converts function-return fixed stdout tasks into semantic checks instead of visible stdin parsing wrappers", async () => {
         const result = await repairPythonDraft({
             seed: {
                 topicId: "comparisons-and-truth-values",
@@ -1152,20 +1315,39 @@ describe("repairPythonDraft", () => {
         });
 
         const exercise = result.draft.quizDraft[0] as any;
-        expect(exercise.prompt).toContain("print the returned result");
-        expect(exercise.starterCode).toContain("import ast");
-        expect(exercise.starterCode).toContain("print(is_greater_than_ten(num))");
-        expect(exercise.solutionCode).toContain("return num > 10");
-        expect(exercise.solutionCode).toContain("print(is_greater_than_ten(num))");
+
+        expect(exercise.recipeType).toBe("semantic");
+        expect(exercise.tests).toBeUndefined();
+        expect(exercise.semanticChecks).toEqual([
+            expect.objectContaining({
+                type: "function_returns",
+                functionName: "is_greater_than_ten",
+                args: [15],
+                expected: true,
+            }),
+            expect.objectContaining({
+                type: "function_returns",
+                functionName: "is_greater_than_ten",
+                args: [5],
+                expected: false,
+            }),
+            expect.objectContaining({
+                type: "no_stdout",
+            }),
+        ]);
+
+        expect(exercise.starterCode).not.toContain("_parse_arg");
+        expect(exercise.starterCode).not.toContain("ast.literal_eval");
+        expect(exercise.solutionCode).not.toContain("_parse_arg");
+        expect(exercise.solutionCode).not.toContain("ast.literal_eval");
+
         expect(
             result.report.repairs.some(
                 (repair) =>
-                    repair.code === "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED" ||
-                    repair.code === "PYTHON_HARDCODED_FUNCTION_EXAMPLE_REPAIRED",
+                    repair.code === "PYTHON_FUNCTION_RETURN_FIXED_TESTS_CONVERTED_TO_SEMANTIC",
             ),
         ).toBe(true);
     });
-
     it("synthesizes tests for a missing positive-negative-zero beginner exercise", async () => {
         const result = await repairPythonDraft({
             seed: {
@@ -1200,14 +1382,45 @@ describe("repairPythonDraft", () => {
         });
 
         const exercise = result.draft.quizDraft[0] as any;
-        expect(exercise.tests).toEqual([
-            { stdin: "5\n", stdout: "Positive\n", match: "exact" },
-            { stdin: "-2\n", stdout: "Negative\n", match: "exact" },
-            { stdin: "0\n", stdout: "Zero\n", match: "exact" },
+
+        expect(exercise.recipeType).toBe("semantic");
+        expect(exercise.tests).toBeUndefined();
+        expect(exercise.solutionCode).toContain("return 'Positive'");
+        expect(exercise.solutionCode).toContain("return 'Negative'");
+        expect(exercise.solutionCode).toContain("return 'Zero'");
+        expect(exercise.solutionCode).not.toContain("print(check_number(num))");
+        expect(exercise.solutionCode).not.toContain("_parse_arg");
+        expect(exercise.solutionCode).not.toContain("ast.literal_eval");
+
+        expect(exercise.semanticChecks).toEqual([
+            expect.objectContaining({
+                type: "function_returns",
+                functionName: "check_number",
+                args: [5],
+                expected: "Positive",
+            }),
+            expect.objectContaining({
+                type: "function_returns",
+                functionName: "check_number",
+                args: [-2],
+                expected: "Negative",
+            }),
+            expect.objectContaining({
+                type: "function_returns",
+                functionName: "check_number",
+                args: [0],
+                expected: "Zero",
+            }),
+            expect.objectContaining({
+                type: "no_stdout",
+            }),
         ]);
-        expect(exercise.solutionCode).toContain("print(check_number(num))");
+
         expect(
-            result.report.repairs.some((repair) => repair.code === "PYTHON_TESTS_SYNTHESIZED"),
+            result.report.repairs.some(
+                (repair) =>
+                    repair.code === "PYTHON_FUNCTION_RETURN_FIXED_TESTS_CONVERTED_TO_SEMANTIC",
+            ),
         ).toBe(true);
     });
 
@@ -1787,17 +2000,115 @@ describe("repairPythonDraft", () => {
         });
 
         const exercise = result.draft.quizDraft[0] as any;
-        expect(exercise.solutionCode).toContain("import ast");
-        expect(exercise.solutionCode).toContain("print(calculate_area(width, height))");
+
+        expect(exercise.recipeType).toBe("semantic");
+        expect(exercise.tests).toBeUndefined();
+        expect(exercise.solutionCode).toContain("return area");
         expect(exercise.solutionCode).not.toContain("# Example usage:");
+        expect(exercise.solutionCode).not.toContain("print(calculate_area(5, 10))");
+        expect(exercise.solutionCode).not.toContain("_parse_arg");
+        expect(exercise.solutionCode).not.toContain("ast.literal_eval");
+
+        expect(exercise.semanticChecks).toEqual([
+            expect.objectContaining({
+                type: "function_returns",
+                functionName: "calculate_area",
+                args: [5, 10],
+                expected: 50,
+            }),
+            expect.objectContaining({
+                type: "function_returns",
+                functionName: "calculate_area",
+                args: [7, 3],
+                expected: 21,
+            }),
+            expect.objectContaining({
+                type: "no_stdout",
+            }),
+        ]);
+
         expect(
             result.report.repairs.some(
                 (repair) =>
-                    repair.code === "PYTHON_HARDCODED_FUNCTION_EXAMPLE_REPAIRED",
+                    repair.code === "PYTHON_FUNCTION_RETURN_FIXED_TESTS_CONVERTED_TO_SEMANTIC",
             ),
         ).toBe(true);
     });
+    it("converts testing edge-case function-return exercises to semantic checks without parse_arg harnesses", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "testing-edge-cases",
+                title: "Testing Edge Cases",
+                summary: "Test empty, boundary, and negative inputs.",
+            } as any,
+            draft: {
+                title: "Testing Edge Cases",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "quiz9",
+                        kind: "code_input",
+                        title: "Check Empty Input",
+                        prompt:
+                            "Write a function `check_empty` that returns `True` if the input list is empty and `False` otherwise.",
+                        hint: "Use the `not` keyword to check for emptiness.",
+                        help: {
+                            concept:
+                                "The function should return `True` if the list is empty, otherwise `False`.",
+                            hint_1: "Use `not` to check if the list is empty.",
+                            hint_2: "Return `True` for an empty list and `False` otherwise.",
+                        },
+                        starterCode:
+                            "def check_empty(lst):\n    # Write your code below\n    pass",
+                        solutionCode:
+                            "def check_empty(lst):\n    return not lst",
+                        tests: [
+                            {
+                                stdout: "True\n",
+                                stdin: "[]",
+                                match: "exact",
+                            },
+                            {
+                                stdout: "False\n",
+                                stdin: "[1, 2, 3]",
+                                match: "exact",
+                            },
+                        ],
+                        recipeType: "fixed_tests",
+                    },
+                ],
+            } as any,
+        });
 
+        const exercise = result.draft.quizDraft[0] as any;
+
+        expect(exercise.recipeType).toBe("semantic");
+        expect(exercise.tests).toBeUndefined();
+        expect(exercise.starterCode).not.toContain("_parse_arg");
+        expect(exercise.solutionCode).not.toContain("_parse_arg");
+        expect(exercise.starterCode).not.toContain("ast.literal_eval");
+        expect(exercise.solutionCode).not.toContain("ast.literal_eval");
+
+        expect(exercise.semanticChecks).toEqual([
+            expect.objectContaining({
+                type: "function_returns",
+                functionName: "check_empty",
+                args: [[]],
+                expected: true,
+            }),
+            expect.objectContaining({
+                type: "function_returns",
+                functionName: "check_empty",
+                args: [[1, 2, 3]],
+                expected: false,
+            }),
+            expect.objectContaining({
+                type: "no_stdout",
+            }),
+        ]);
+    });
     it("removes input prompt text from fixed-test python programs", async () => {
         const result = await repairPythonDraft({
             seed: {
@@ -1983,8 +2294,30 @@ describe("repairPythonDraft", () => {
 
         const exercise = result.draft.quizDraft[0] as any;
 
-        expect(exercise.tests[0].stdin).toBe("12\n1\n");
-        expect(exercise.tests[0].stdout.trim()).toBe("13");
+        expect(exercise.recipeType).toBe("semantic");
+        expect(exercise.tests).toBeUndefined();
+        expect(exercise.solutionCode).toContain("return a + int(b)");
+        expect(exercise.solutionCode).not.toContain("_parse_arg");
+        expect(exercise.solutionCode).not.toContain("ast.literal_eval");
+
+        expect(exercise.semanticChecks).toEqual([
+            expect.objectContaining({
+                type: "function_returns",
+                functionName: "add_numbers",
+                args: [12, 1],
+                expected: 13,
+            }),
+            expect.objectContaining({
+                type: "no_stdout",
+            }),
+        ]);
+
+        expect(
+            result.report.repairs.some(
+                (repair) =>
+                    repair.code === "PYTHON_FUNCTION_RETURN_FIXED_TESTS_CONVERTED_TO_SEMANTIC",
+            ),
+        ).toBe(true);
     });
 
     it("normalizes repaired drafts to the planned exercise policy mix", async () => {

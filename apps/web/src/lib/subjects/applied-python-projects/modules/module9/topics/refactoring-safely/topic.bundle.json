@@ -1,0 +1,595 @@
+{
+  "topicId": "refactoring-safely",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-9-testing-debugging-and-style",
+  "sectionSlug": "applied-python-projects-python-9-debugging-and-style",
+  "prefix": "py9",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.label",
+    "summaryKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-refactoring-safely-sketch0",
+        "titleKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.tryIt.try_refactoring_safely_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.tryIt.try_refactoring_safely_sketch0.prompt",
+        "exerciseKey": "ci-refactor-helper",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-refactoring-safely-sketch1",
+        "titleKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.tryIt.try_refactoring_safely_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.tryIt.try_refactoring_safely_sketch1.prompt",
+        "exerciseKey": "ci-preserve-output",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-refactoring-safely-sketch2",
+        "titleKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.tryIt.try_refactoring_safely_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.tryIt.try_refactoring_safely_sketch2.prompt",
+        "exerciseKey": "ci-refactor-loop-helper",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_refactor_helper",
+            "titleKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.projectSteps.ci_refactor_helper.title",
+            "exerciseKey": "ci-refactor-helper",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_preserve_output",
+            "titleKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.projectSteps.ci_preserve_output.title",
+            "exerciseKey": "ci-preserve-output",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_refactor_loop_helper",
+            "titleKey": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.projectSteps.ci_refactor_loop_helper.title",
+            "exerciseKey": "ci-refactor-loop-helper",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.sketch-1.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.sketch-2.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.sketch-3.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ci-refactor-helper",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.quiz.ci-refactor-helper",
+      "language": "python",
+      "starterCode": "def format_pair(first, second):\n    # Refactor this function to use clean_name(name)\n    clean_first = first.strip().title()\n    clean_second = second.strip().title()\n    return clean_first + \" & \" + clean_second",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def format_pair(first, second):\n    # Refactor this function to use clean_name(name)\n    clean_first = first.strip().title()\n    clean_second = second.strip().title()\n    return clean_first + \" & \" + clean_second",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_name(name):\n    return name.strip().title()\n\n\ndef format_pair(first, second):\n    clean_first = clean_name(first)\n    clean_second = clean_name(second)\n    return clean_first + \" & \" + clean_second",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def format_pair(first, second):\n    # Refactor this function to use clean_name(name)\n    clean_first = first.strip().title()\n    clean_second = second.strip().title()\n    return clean_first + \" & \" + clean_second",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def format_pair(first, second):\n    # Refactor this function to use clean_name(name)\n    clean_first = first.strip().title()\n    clean_second = second.strip().title()\n    return clean_first + \" & \" + clean_second",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def clean_name(name):\n    return name.strip().title()\n\n\ndef format_pair(first, second):\n    clean_first = clean_name(first)\n    clean_second = clean_name(second)\n    return clean_first + \" & \" + clean_second",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_name(name):\n    return name.strip().title()\n\n\ndef format_pair(first, second):\n    clean_first = clean_name(first)\n    clean_second = clean_name(second)\n    return clean_first + \" & \" + clean_second",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "format_pair",
+            "args": [
+              "  ava",
+              "leo  "
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Ava & Leo",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "format_pair",
+            "args": [
+              "mIA",
+              "  noah"
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Mia & Noah",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "clean_name",
+            "args": [
+              "  eLLA "
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Ella",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sc-safe-change",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.quiz.sc-safe-change",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-refactor-benefits",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.quiz.mc-refactor-benefits",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-safe-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.quiz.dr-safe-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb-helper-name",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.quiz.fb-helper-name",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "clean_name"
+      }
+    },
+    {
+      "id": "ci-preserve-output",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.quiz.ci-preserve-output",
+      "language": "python",
+      "starterCode": "def build_label(item, count):\n    # Rewrite this using clearer variables.\n    return item.strip().title() + \": \" + str(count)",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_label(item, count):\n    # Rewrite this using clearer variables.\n    return item.strip().title() + \": \" + str(count)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_label(item, count):\n    clean_item = item.strip().title()\n    count_text = str(count)\n    return clean_item + \": \" + count_text",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def build_label(item, count):\n    # Rewrite this using clearer variables.\n    return item.strip().title() + \": \" + str(count)",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_label(item, count):\n    # Rewrite this using clearer variables.\n    return item.strip().title() + \": \" + str(count)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def build_label(item, count):\n    clean_item = item.strip().title()\n    count_text = str(count)\n    return clean_item + \": \" + count_text",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_label(item, count):\n    clean_item = item.strip().title()\n    count_text = str(count)\n    return clean_item + \": \" + count_text",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_label",
+            "args": [
+              " pencil ",
+              3
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Pencil: 3",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_label",
+            "args": [
+              "NOTEBOOK",
+              12
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Notebook: 12",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sc-assert-role",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.quiz.sc-assert-role",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-safe-vs-risky",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.quiz.mc-safe-vs-risky",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-refactor-example-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.quiz.dr-refactor-example-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb-refactor-goal",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.quiz.fb-refactor-goal",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "behavior"
+      }
+    },
+    {
+      "id": "ci-refactor-loop-helper",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-testing-debugging-and-style.refactoring-safely.quiz.ci-refactor-loop-helper",
+      "language": "python",
+      "starterCode": "def join_words(words):\n    cleaned = []\n    for word in words:\n        cleaned.append(word.strip().title())\n    return \", \".join(cleaned)",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def join_words(words):\n    cleaned = []\n    for word in words:\n        cleaned.append(word.strip().title())\n    return \", \".join(cleaned)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def format_word(word):\n    return word.strip().title()\n\n\ndef join_words(words):\n    cleaned = []\n    for word in words:\n        cleaned.append(format_word(word))\n    return \", \".join(cleaned)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def join_words(words):\n    cleaned = []\n    for word in words:\n        cleaned.append(word.strip().title())\n    return \", \".join(cleaned)",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def join_words(words):\n    cleaned = []\n    for word in words:\n        cleaned.append(word.strip().title())\n    return \", \".join(cleaned)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def format_word(word):\n    return word.strip().title()\n\n\ndef join_words(words):\n    cleaned = []\n    for word in words:\n        cleaned.append(format_word(word))\n    return \", \".join(cleaned)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def format_word(word):\n    return word.strip().title()\n\n\ndef join_words(words):\n    cleaned = []\n    for word in words:\n        cleaned.append(format_word(word))\n    return \", \".join(cleaned)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "join_words",
+            "args": [
+              [
+                "  red",
+                "BLUE "
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Red, Blue",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "join_words",
+            "args": [
+              [
+                " green ",
+                "yellow",
+                "PURPLE"
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Green, Yellow, Purple",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "format_word",
+            "args": [
+              "  siLVer "
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Silver",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    }
+  ]
+}

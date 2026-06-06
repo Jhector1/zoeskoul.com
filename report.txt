@@ -1,2 +1,4 @@
-Name: Bob
-Score: 10
+Daily Tasks
+- Buy milk [home] - todo
+- Read chapter 3 [school] - done
+- Walk dog [home] - todo

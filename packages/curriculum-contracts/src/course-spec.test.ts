@@ -28,4 +28,29 @@ describe("curriculum contracts", () => {
             };
         }>();
     });
+
+    it("exposes authoring practice defaults and overrides", () => {
+        expectTypeOf<CourseSpec>().toMatchTypeOf<{
+            practiceDefaults?: {
+                tryIt?: boolean;
+                tryItPlacement?: "first_sketch" | "all_sketches" | "none";
+            };
+            modules: Array<{
+                practiceDefaults?: {
+                    tryItPlacement?: "first_sketch" | "all_sketches" | "none";
+                };
+                sections: Array<{
+                    practiceDefaults?: {
+                        tryItPlacement?: "first_sketch" | "all_sketches" | "none";
+                    };
+                    topics: Array<{
+                        practice?: {
+                            tryItExerciseIds?: string[];
+                            tryItPlacement?: "first_sketch" | "all_sketches" | "none";
+                        };
+                    }>;
+                }>;
+            }>;
+        }>();
+    });
 });

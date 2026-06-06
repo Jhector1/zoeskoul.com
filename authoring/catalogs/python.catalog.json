@@ -11,7 +11,9 @@
     "subjectSlugs": [
       "python",
       "python-v2",
-      "python-data-functions"
+      "python-data-functions",
+      "applied-python-projects"
+
     ],
     "meta": {
       "family": "programming",

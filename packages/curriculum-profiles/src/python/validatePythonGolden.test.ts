@@ -6,6 +6,91 @@ describe("validatePythonGolden", () => {
     afterEach(() => {
         clearCodeRunner();
     });
+    it("counts created class instances stored inside lists for semantic Python goldens", async () => {
+        const result = await validatePythonGolden({
+            seed: {
+                topicId: "lists-of-objects-semantic",
+                moduleSlug: "python-8-object-oriented-programming",
+                sectionSlug: "python-8-design-with-objects",
+                topicSlug: "lists-of-objects",
+                title: "Lists of Objects",
+            } as any,
+            draft: {
+                title: "Lists of Objects",
+                summary: "Practice creating objects and storing them in a list.",
+                minutes: 10,
+                sketchBlocks: [
+                    {
+                        id: "worked-example",
+                        title: "Worked example",
+                        bodyMarkdown:
+                            "Example:\n\n```python\nclass Book:\n    def __init__(self, title):\n        self.title = title\n\nbooks = [Book('1984'), Book('Animal Farm')]\n```\n\nLine by line: the class creates objects, and the list stores those objects together.",
+                    },
+                    {
+                        id: "try-it-yourself",
+                        title: "Try it yourself",
+                        bodyMarkdown:
+                            "Try it yourself: create two objects, put them in a list, and print the list length.",
+                    },
+                ],
+                quizDraft: [],
+            } as any,
+            topicBundle: {
+                id: "lists-of-objects-semantic",
+                title: "Lists of Objects",
+                summary: "Practice creating objects and storing them in a list.",
+                runtimeDefaults: {
+                    kind: "code",
+                    language: "python",
+                },
+                exercises: [
+                    {
+                        id: "quiz-list-objects",
+                        kind: "code_input",
+                        title: "Create a list of Book objects",
+                        prompt:
+                            "Define a Book class, create at least three Book objects, and store them in a list named books.",
+                        language: "python",
+                        starterCode:
+                            "class Book:\n" +
+                            "    def __init__(self, title, author):\n" +
+                            "        self.title = title\n" +
+                            "        self.author = author\n\n" +
+                            "books = []\n",
+                        recipe: {
+                            type: "semantic",
+                            language: "python",
+                            solutionCode:
+                                "class Book:\n" +
+                                "    def __init__(self, title, author):\n" +
+                                "        self.title = title\n" +
+                                "        self.author = author\n\n" +
+                                "books = [\n" +
+                                "    Book('1984', 'George Orwell'),\n" +
+                                "    Book('Animal Farm', 'George Orwell'),\n" +
+                                "    Book('The Hobbit', 'J.R.R. Tolkien'),\n" +
+                                "]\n",
+                            semanticChecks: [
+                                {
+                                    type: "defines_class",
+                                    className: "Book",
+                                },
+                                {
+                                    type: "created_instances",
+                                    className: "Book",
+                                    min: 3,
+                                },
+                            ],
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(result.issues).toEqual([]);
+    });
+
 
     it("requires explicit python language and forbids SQL recipe/runtime fields", async () => {
         const result = await validatePythonGolden({

@@ -12,11 +12,13 @@ import { validateProgrammingTeachingSketches } from "../../shared/validateProgra
 import { validatePythonPromptBoundary } from "./validatePythonPromptBoundary.js";
 
 function extractDefinedFunctionNames(code: string): string[] {
-    return Array.from(code.matchAll(/^\s*def\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(/gm))
+    // Only top-level functions should count as function-return exercises.
+    // Indented methods like `def get_info(self):` inside a class are class/method tasks,
+    // not standalone function-return tasks.
+    return Array.from(code.matchAll(/^def\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(/gm))
         .map((match) => String(match[1] ?? ""))
         .filter((name) => name && !name.startsWith("_"));
 }
-
 function hasParseArgHarness(code: string): boolean {
     return (
         /\bdef\s+_parse_arg\s*\(/.test(code) ||
@@ -228,13 +230,18 @@ function validatePythonExerciseShape(args: {
             });
         }
 
-        if (functionReturnExercise && !isSemanticRecipe) {
+        if (
+            functionReturnExercise &&
+            isFixedTestsRecipe &&
+            tests.length > 0 &&
+            !solutionLooksLikeRunnableStdoutProgram(solutionCode)
+        ) {
             issues.push({
-                code: "PYTHON_FUNCTION_RETURN_MUST_BE_SEMANTIC",
+                code: "PYTHON_FUNCTION_STDOUT_MISMATCH",
                 category: "tests",
                 severity: "error",
                 exerciseId: exercise.id,
-                message: `Exercise "${exercise.id}" is a function-return task. Use recipeType "semantic" with function_returns checks instead of fixed_tests/stdout wrappers.`,
+                message: `Exercise "${exercise.id}" defines a function that returns a value, but its fixed stdout tests expect printed output. Use semantic function_returns checks, or rewrite the solution as a runnable stdin/stdout program that prints.`,
             });
         }
 

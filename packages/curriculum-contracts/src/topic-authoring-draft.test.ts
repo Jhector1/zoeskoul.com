@@ -112,7 +112,28 @@ describe("TopicAuthoringDraft workspace file paths", () => {
             assertTopicAuthoringDraft(validDraftWithPath("fixtures/case-1/input.txt")),
         ).not.toThrow();
     });
+    it("does not count Python dunder method names as fill blanks", () => {
+        const draft = makeValidMinimalDraft();
 
+        draft.quizDraft[0] = {
+            id: "fill-dunder",
+            kind: "fill_blank_choice" as const,
+            title: "Initialize an attribute",
+            prompt: "Complete the __init__ method by choosing the missing attribute name.",
+            hint: "The blank is the instance attribute after self.",
+            help: {
+                concept: "The __init__ method initializes instance attributes.",
+                hint_1: "Look after self.",
+                hint_2: "Choose the attribute name.",
+            },
+            template: "class Person:\n    def __init__(self, name):\n        self.[blank1] = name",
+            choices: ["name", "age"],
+            correctValue: "name",
+        };
+
+        expect(validateTopicAuthoringDraft(draft).ok).toBe(true);
+        expect(() => assertTopicAuthoringDraft(draft)).not.toThrow();
+    });
     it("rejects unsafe workspace paths", () => {
         for (const badPath of [
             "../secret.txt",

@@ -145,6 +145,50 @@ describe("validateWorkspacePolicy", () => {
         expect(policy.workspace.capabilities.packageInstall.enabled).toBe(false);
     });
 
+    it("allows file and module language when the Python workspace supports files", () => {
+        const policy = resolveWorkspacePolicy({
+            blueprint: makeBlueprint({
+                subjectSlug: "python--applied-python-projects--draft",
+                courseSlug: "applied-python-projects",
+                catalogSlug: "python",
+                profileId: "python",
+                workspaceProfileId: "browser-python-files-runner",
+                workspacePolicyId: "python-browser-workspace",
+                courseGenerationPolicy: {
+                    avoidTerms: [
+                        "terminal",
+                        "command line",
+                        "shell",
+                        ".py",
+                        "Python file",
+                        "save this as main.py",
+                        "file creation",
+                        "multi-file project",
+                        "pip install",
+                    ],
+                },
+            }),
+        });
+
+        expect(policy.avoidTerms).toEqual(
+            expect.not.arrayContaining([
+                ".py",
+                "Python file",
+                "save this as main.py",
+                "file creation",
+                "multi-file project",
+            ]),
+        );
+
+        expect(() =>
+            validateWorkspacePolicy({
+                text: "Open main.py in the files panel, create helpers.py, import the helper, and click Run.",
+                policy,
+                location: "python/files",
+            }),
+        ).not.toThrow();
+    });
+
     it("passes Python workspace validation after deterministic repair removes Terminal", async () => {
         const repaired = await repairPythonDraft({
             seed: {

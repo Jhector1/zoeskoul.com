@@ -2,6 +2,8 @@
   "authoringFormatVersion": "2.0",
   "subjectSlug": "python",
   "profileId": "python",
+  "workspaceProfileId": "browser-python-files-runner",
+  "workspacePolicyId": "python-browser-workspace",
   "title": "Applied Python Projects",
   "subtitle": "Build cleaner Python projects with classes, testing, debugging, and capstone structure",
   "intendedFor": "Learners who know Python fundamentals and want to build more complete beginner projects using classes, testing, debugging, and readable project structure.",
@@ -74,9 +76,15 @@
   },
   "authoringGuidance": [
     "This course must always use profileId python and subjectSlug applied-python-projects-v2.",
+    "This course should use the browser-python-files-runner workspace across the full course.",
+    "Because learners already know imports and modules here, exercises may use starter files, helper modules, folders, and filesystem paths when that supports the lesson goal.",
+    "Prefer files-panel language such as main.py, helpers.py, src/, data/, and tests/ over single-file-only framing.",
     "Do not use SQL datasets, SQL tables, sql_query recipes, datasetId, fixedSqlDialect, resultShape, or checkSql in Python lessons.",
     "Python code_input exercises should prefer recipeType fixed_tests and include explicit stdin/stdout tests or function/class behavior checks.",
     "Use semanticChecks only when validating classes, methods, attributes, or return values.",
+    "Module 8 class topics should prefer recipeType semantic for class/object/method behavior instead of fixed_tests stdout wrappers.",
+    "For classes-and-instances, attributes-and-init, and methods-and-self, use semantic checks such as defines_class, constructible, instance_attributes, and method_returns when the learner is returning values from methods.",
+    "Do not expose ast.literal_eval, _parse_arg, or visible stdin-parsing harness code in class or method exercises.",
     "For method_returns semantic checks, always include expected.",
     "Keep examples focused on classes, objects, testing, debugging, style, refactoring, and capstone projects."
   ],
@@ -96,6 +104,37 @@
       "Simple test runner for function-based and class-based exercises"
     ],
     "closingNote": "Learners finish with a polished beginner Python project and a stronger foundation for automation, data science, web backends, scripting, or algorithms."
+  },
+  "modulePolicies": [
+    {
+      "moduleNumber": 8,
+      "notes": [
+        "Use semantic code_input exercises for class definition, constructor, attribute, and method-return tasks in this module.",
+        "Avoid fixed_tests stdout wrappers when the learner is defining a class or returning values from instance methods.",
+        "Prefer semantic checks like defines_class, constructible, instance_attributes, and method_returns for module 8 class topics."
+      ]
+    }
+  ],
+  "topicPolicies": {
+    "classes-and-instances": {
+      "notes": [
+        "Prefer semantic checks for class construction and simple method behavior.",
+        "Do not generate fixed_tests that expect stdout from a class-return task.",
+        "Treat create-an-instance-and-call-a-method tasks as semantic class behavior tasks, not print-output tasks."
+      ]
+    },
+    "attributes-and-init": {
+      "notes": [
+        "Use semantic checks for constructor arguments and instance attributes.",
+        "Do not use stdin/stdout wrappers for __init__ attribute tasks."
+      ]
+    },
+    "methods-and-self": {
+      "notes": [
+        "Use semantic method_returns checks when learners define instance methods that return values.",
+        "Do not expose visible parser harness code or ast.literal_eval wrappers."
+      ]
+    }
   },
   "modules": [
     {
@@ -124,6 +163,10 @@
         {
           "sectionSlug": "python-8-class-basics",
           "title": "Class Basics",
+          "practiceDefaults": {
+            "tryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
           "topics": [
             {
               "topicId": "classes-and-instances",
@@ -132,8 +175,8 @@
               "minutes": 28,
               "technical": true,
               "learningGoals": [
-                "Define a class",
-                "Instantiate objects"
+                "Create simple Python classes from real examples.",
+                "Create separate objects from the same class."
               ]
             },
             {
@@ -143,8 +186,8 @@
               "minutes": 28,
               "technical": true,
               "learningGoals": [
-                "Use __init__",
-                "Set attributes"
+                "Create small Python classes that store state with **init**.",
+                "Pass starting data into a new object."
               ]
             },
             {
@@ -154,8 +197,8 @@
               "minutes": 26,
               "technical": true,
               "learningGoals": [
-                "Write methods",
-                "Use self correctly"
+                "Use methods to make objects perform useful actions.",
+                "Use `self` to read and update object state."
               ]
             }
           ]
@@ -163,6 +206,10 @@
         {
           "sectionSlug": "python-8-design-with-objects",
           "title": "Design With Objects",
+          "practiceDefaults": {
+            "tryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
           "topics": [
             {
               "topicId": "encapsulation-and-responsibility",
@@ -171,8 +218,8 @@
               "minutes": 22,
               "technical": true,
               "learningGoals": [
-                "Describe class responsibility",
-                "Avoid scattered state"
+                "Keep related data and behavior inside one class.",
+                "Give each class one clear responsibility."
               ]
             },
             {
@@ -182,8 +229,8 @@
               "minutes": 24,
               "technical": true,
               "learningGoals": [
-                "Store objects in lists",
-                "Loop over objects"
+                "Store multiple objects in a list and loop through them.",
+                "Use object data to build small summaries."
               ]
             },
             {
@@ -193,8 +240,8 @@
               "minutes": 22,
               "technical": true,
               "learningGoals": [
-                "Debug AttributeError",
-                "Trace method calls"
+                "Find and fix common class mistakes.",
+                "Trace constructor, attribute, and method bugs."
               ]
             }
           ]
@@ -211,11 +258,12 @@
               "minutes": 28,
               "technical": true,
               "learningGoals": [
-                "Extend a working class design without restarting the project",
-                "Model state and behavior in one small object-oriented tool"
+                "Extend one class-based project in small working steps.",
+                "Use objects to model state and behavior in a small tool."
               ],
               "practice": {
                 "tryIt": true,
+                "tryItPlacement": "all_sketches",
                 "projectFlow": "progressive"
               }
             }
@@ -249,6 +297,10 @@
         {
           "sectionSlug": "python-9-testing-basics",
           "title": "Testing Basics",
+          "practiceDefaults": {
+            "tryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
           "topics": [
             {
               "topicId": "writing-test-cases",
@@ -257,8 +309,8 @@
               "minutes": 25,
               "technical": true,
               "learningGoals": [
-                "Write test cases",
-                "Pick edge cases"
+                "Write simple tests for normal cases and edge cases.",
+                "Choose examples that prove a function works."
               ]
             },
             {
@@ -268,8 +320,8 @@
               "minutes": 22,
               "technical": true,
               "learningGoals": [
-                "Use assert",
-                "Explain expected results"
+                "Use `assert` to compare actual and expected results.",
+                "Read a failing assertion to spot what broke."
               ]
             },
             {
@@ -279,8 +331,8 @@
               "minutes": 24,
               "technical": true,
               "learningGoals": [
-                "Identify edge cases",
-                "Improve confidence with tests"
+                "Test empty inputs, boundary values, and unusual cases.",
+                "Use edge cases to catch hidden bugs."
               ]
             }
           ]
@@ -288,6 +340,10 @@
         {
           "sectionSlug": "python-9-debugging-and-style",
           "title": "Debugging and Style",
+          "practiceDefaults": {
+            "tryIt": true,
+            "tryItPlacement": "all_sketches"
+          },
           "topics": [
             {
               "topicId": "debugging-with-print-and-trace",
@@ -296,8 +352,8 @@
               "minutes": 22,
               "technical": true,
               "learningGoals": [
-                "Trace variable values",
-                "Narrow down bugs"
+                "Use print tracing to follow code step by step.",
+                "Narrow a bug down to the exact failing step."
               ]
             },
             {
@@ -307,8 +363,8 @@
               "minutes": 20,
               "technical": true,
               "learningGoals": [
-                "Use clear names",
-                "Apply basic PEP 8 style"
+                "Use clear names and spacing to make code easier to read.",
+                "Break long logic into small readable helpers."
               ]
             },
             {
@@ -318,8 +374,8 @@
               "minutes": 24,
               "technical": true,
               "learningGoals": [
-                "Refactor small steps",
-                "Use tests to protect behavior"
+                "Refactor small pieces without changing behavior.",
+                "Use tests to confirm a refactor stayed correct."
               ]
             }
           ]
@@ -336,11 +392,12 @@
               "minutes": 28,
               "technical": true,
               "learningGoals": [
-                "Use tests and debugging to improve a working program step by step",
-                "Polish readability while keeping behavior stable"
+                "Use tests, tracing, and cleanup to improve one program step by step.",
+                "Keep behavior stable while you fix bugs and readability."
               ],
               "practice": {
                 "tryIt": true,
+                "tryItPlacement": "all_sketches",
                 "projectFlow": "progressive"
               }
             }
@@ -383,8 +440,8 @@
               "minutes": 20,
               "technical": false,
               "learningGoals": [
-                "Define project scope",
-                "Choose core features"
+                "Choose a project idea that is small, useful, and testable.",
+                "Cut a big idea down to a realistic first version."
               ]
             },
             {
@@ -394,8 +451,8 @@
               "minutes": 25,
               "technical": true,
               "learningGoals": [
-                "Design function boundaries",
-                "Plan data flow"
+                "Split a small automation project into helper functions.",
+                "Plan what each function receives and returns."
               ]
             },
             {
@@ -405,8 +462,8 @@
               "minutes": 25,
               "technical": true,
               "learningGoals": [
-                "Choose data structures",
-                "Explain tradeoffs"
+                "Choose simple data structures for a small app.",
+                "Match your data model to the features you want to build."
               ]
             }
           ]
@@ -422,8 +479,8 @@
               "minutes": 28,
               "technical": true,
               "learningGoals": [
-                "Write a main workflow",
-                "Handle user choices"
+                "Build the main loop or workflow for a small project.",
+                "Handle repeated user choices in a clear order."
               ]
             },
             {
@@ -433,8 +490,8 @@
               "minutes": 26,
               "technical": true,
               "learningGoals": [
-                "Test project features",
-                "Fix integration bugs"
+                "Test the most important paths in your capstone.",
+                "Find and fix bugs across several working pieces."
               ]
             },
             {
@@ -444,8 +501,8 @@
               "minutes": 20,
               "technical": false,
               "learningGoals": [
-                "Document usage",
-                "Explain project decisions"
+                "Explain what your project does and how to run it.",
+                "Write short notes that help another learner use the project."
               ]
             }
           ]
@@ -462,12 +519,13 @@
               "minutes": 40,
               "technical": true,
               "learningGoals": [
-                "Grow one final Python project through several focused changes",
-                "Integrate planning, implementation, testing, and polish",
-                "Finish with a complete portfolio-style capstone"
+                "Grow one final Python project through several focused changes.",
+                "Combine planning, building, testing, and polish in one workflow.",
+                "Finish with a complete beginner portfolio project."
               ],
               "practice": {
                 "tryIt": true,
+                "tryItPlacement": "all_sketches",
                 "projectFlow": "progressive"
               }
             }

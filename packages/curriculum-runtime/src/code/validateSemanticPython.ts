@@ -13,6 +13,7 @@ const DEFAULT_LIMITS = {
 export async function validatePythonSemanticCode(args: {
     expected: ProgrammingExpected;
     solutionCode: string;
+    files?: Array<{ path: string; content: string }>;
 }): Promise<
     | { ok: true }
     | {
@@ -32,6 +33,7 @@ export async function validatePythonSemanticCode(args: {
             semanticChecks,
         }),
         stdin: "",
+        files: args.files,
         limits: DEFAULT_LIMITS,
     });
 

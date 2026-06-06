@@ -18,6 +18,7 @@ async function makeAuthoringFixture(overrides: {
     coursePlan?: Record<string, unknown>;
     authoringIndex?: Record<string, unknown>;
     omitCourseSpec?: boolean;
+    omitCoursePlan?: boolean;
 } = {}) {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), "curriculum-authoring-"));
     const authoringRoot = path.join(root, "authoring");
@@ -106,22 +107,24 @@ async function makeAuthoringFixture(overrides: {
         },
         ...overrides.subjectPlan,
     });
-    await writeJson(path.join(courseRoot, "course.plan.json"), {
-        subjectSlug: "sql",
-        courseSlug: "sql-foundations",
-        catalogSlug: "sql",
-        profileId: "sql",
-        title: "SQL Foundations",
-        moduleOrder: ["intro"],
-        modules: [
-            {
-                moduleSlug: "intro",
-                moduleNumber: 1,
-                title: "Intro",
-            },
-        ],
-        ...overrides.coursePlan,
-    });
+    if (!overrides.omitCoursePlan) {
+        await writeJson(path.join(courseRoot, "course.plan.json"), {
+            subjectSlug: "sql",
+            courseSlug: "sql-foundations",
+            catalogSlug: "sql",
+            profileId: "sql",
+            title: "SQL Foundations",
+            moduleOrder: ["intro"],
+            modules: [
+                {
+                    moduleSlug: "intro",
+                    moduleNumber: 1,
+                    title: "Intro",
+                },
+            ],
+            ...overrides.coursePlan,
+        });
+    }
 
     if (!overrides.omitCourseSpec) {
         await writeJson(path.join(courseRoot, "course.spec.json"), {
@@ -131,6 +134,7 @@ async function makeAuthoringFixture(overrides: {
             catalogSlug: "sql",
             profileId: "sql",
             title: "SQL Foundations",
+            description: "Learn SQL basics.",
             sourceLocale: "en",
             targetLocales: [],
             releasePlan: {
@@ -213,6 +217,20 @@ describe("validateSubjectAuthoring", () => {
             expect.arrayContaining([
                 expect.stringContaining(
                     'publishTarget.courseSlug "missing-course" must be listed in courseOrder',
+                ),
+            ]),
+        );
+    });
+
+    it("fails when course.plan.json is missing", async () => {
+        const authoringRoot = await makeAuthoringFixture({
+            omitCoursePlan: true,
+        });
+
+        await expect(validateSubjectAuthoring("sql", { authoringRoot })).resolves.toEqual(
+            expect.arrayContaining([
+                expect.stringContaining(
+                    "course.plan.json: course.plan.json is required",
                 ),
             ]),
         );

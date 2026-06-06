@@ -26,6 +26,49 @@ vi.mock("@zoeskoul/curriculum-profiles", async (importOriginal) => {
 
 import { buildTopicSeedFromPlanNode } from "./buildTopicSeedFromPlanNode.js";
 
+function makeBaseArgs(overrides: Partial<any> = {}) {
+    return {
+        blueprint: {
+            profileId: "python",
+            teachingStyle: {
+                quizWeight: 0.5,
+                codeInputWeight: 0.2,
+            },
+            ...overrides.blueprint,
+        } as any,
+        spec: {
+            modules: [],
+            ...overrides.spec,
+        } as any,
+        module: {
+            moduleSlug: "m0",
+            title: "Module 0",
+            order: 1,
+            purpose: "Intro",
+            learningObjectives: ["Obj 1"],
+            guidedExercises: ["Ex 1"],
+            quizFocus: ["Focus 1"],
+            moduleProject: "Proj",
+            ...overrides.module,
+        } as any,
+        section: {
+            sectionSlug: "s0",
+            title: "Section 0",
+            order: 1,
+            ...overrides.section,
+        } as any,
+        topic: {
+            topicId: "t0",
+            order: 1,
+            title: "Topic 0",
+            summary: "Summary",
+            minutes: 15,
+            learningGoals: ["Goal 1"],
+            ...overrides.topic,
+        } as any,
+    };
+}
+
 describe("buildTopicSeedFromPlanNode", () => {
     it("attaches exercisePolicy and plannedExerciseCounts", () => {
         const seed = buildTopicSeedFromPlanNode({
@@ -230,6 +273,149 @@ describe("buildTopicSeedFromPlanNode", () => {
         expect(seed.plannedExerciseCounts?.counts.code_input).toBe(1);
     });
 
+    it("uses profile.project defaults for module_project topics", () => {
+        const seed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                section: {
+                    role: "module_project",
+                },
+            }),
+        );
+
+        expect(seed.generationTargets.quizBankMin).toBe(0);
+        expect(seed.generationTargets.quizBankTarget).toBe(0);
+        expect(seed.generationTargets.quizVisibleDefault).toBe(0);
+        expect(seed.generationTargets.quizVisibleMax).toBe(0);
+        expect(seed.generationTargets.projectCodeInputTarget).toBe(3);
+        expect(seed.practice).toEqual({
+            tryIt: true,
+            tryItPlacement: "first_sketch",
+            tryItSketchIndex: 0,
+            projectFlow: "progressive",
+        });
+    });
+
+    it("uses profile.project defaults for capstone topics", () => {
+        const seed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                module: {
+                    role: "capstone",
+                },
+            }),
+        );
+
+        expect(seed.generationTargets.quizBankMin).toBe(0);
+        expect(seed.generationTargets.quizBankTarget).toBe(0);
+        expect(seed.generationTargets.projectCodeInputTarget).toBe(5);
+        expect(seed.generationTargets.projectCodeInputMax).toBeGreaterThanOrEqual(5);
+        expect(seed.practice).toEqual({
+            tryIt: true,
+            tryItPlacement: "first_sketch",
+            tryItSketchIndex: 0,
+            projectFlow: "progressive",
+        });
+    });
+
+    it("keeps normal lesson topics on quiz targets", () => {
+        const seed = buildTopicSeedFromPlanNode(makeBaseArgs());
+
+        expect(seed.generationTargets.quizBankTarget).toBe(8);
+        expect(seed.generationTargets.projectCodeInputTarget).toBe(3);
+    });
+
+    it("uses profile.practice defaults for normal Python lesson topics", () => {
+        const seed = buildTopicSeedFromPlanNode(makeBaseArgs());
+
+        expect(seed.practice).toEqual({
+            tryIt: true,
+            tryItPlacement: "first_sketch",
+            tryItSketchIndex: 0,
+        });
+    });
+
+    it("flows section practiceDefaults tryItPlacement into topic seed practice", () => {
+        const seed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                section: {
+                    practiceDefaults: {
+                        tryIt: true,
+                        tryItPlacement: "all_sketches",
+                    },
+                },
+            }),
+        );
+
+        expect(seed.practice).toEqual({
+            tryIt: true,
+            tryItPlacement: "all_sketches",
+            tryItSketchIndex: 0,
+        });
+    });
+
+    it("lets topic.practice.tryItPlacement override section defaults", () => {
+        const seed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                section: {
+                    practiceDefaults: {
+                        tryIt: true,
+                        tryItPlacement: "all_sketches",
+                    },
+                },
+                topic: {
+                    practice: {
+                        tryItPlacement: "first_sketch",
+                    },
+                },
+            }),
+        );
+
+        expect(seed.practice).toEqual({
+            tryIt: true,
+            tryItPlacement: "first_sketch",
+            tryItSketchIndex: 0,
+        });
+    });
+
+    it("lets topic.practice.tryIt false disable inherited section tryIt", () => {
+        const seed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                section: {
+                    practiceDefaults: {
+                        tryIt: true,
+                        tryItPlacement: "all_sketches",
+                    },
+                },
+                topic: {
+                    practice: {
+                        tryIt: false,
+                    },
+                },
+            }),
+        );
+
+        expect(seed.practice).toEqual({
+            tryIt: false,
+            tryItPlacement: "all_sketches",
+        });
+    });
+
+    it("preserves old behavior when the profile has no project capability", () => {
+        const seed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                blueprint: {
+                    profileId: "math",
+                },
+                section: {
+                    role: "module_project",
+                },
+            }),
+        );
+
+        expect(seed.generationTargets.quizBankTarget).toBe(8);
+        expect(seed.generationTargets.projectCodeInputTarget).toBe(3);
+        expect(seed.practice).toBeUndefined();
+    });
+
     it("builds stable topic seeds for the same inputs", () => {
         const args = {
             blueprint: {
@@ -319,8 +505,33 @@ describe("buildTopicSeedFromPlanNode", () => {
         expect(seed.practice).toEqual({
             tryIt: true,
             tryItExerciseId: "cp-1",
+            tryItPlacement: "first_sketch",
             tryItSketchIndex: 0,
             projectFlow: "progressive",
+        });
+    });
+
+    it("keeps old topic practice tryIt and projectFlow behavior for module project topics", () => {
+        const seed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                section: {
+                    role: "module_project",
+                },
+                topic: {
+                    practice: {
+                        tryIt: true,
+                        tryItSketchIndex: 2,
+                        projectFlow: "standalone",
+                    },
+                },
+            }),
+        );
+
+        expect(seed.practice).toEqual({
+            tryIt: true,
+            tryItPlacement: "first_sketch",
+            tryItSketchIndex: 2,
+            projectFlow: "standalone",
         });
     });
 });

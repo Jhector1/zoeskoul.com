@@ -1,7 +1,48 @@
 {
   "policyId": "applied-python-projects-validation",
+  "allowedConcepts": [
+    "classes",
+    "instances",
+    "__init__",
+    "attributes",
+    "methods",
+    "self",
+    "imports",
+    "modules",
+    "helper files",
+    "filesystem paths",
+    "file input",
+    "file output",
+    "lists of objects",
+    "assert",
+    "testing",
+    "debugging",
+    "refactoring",
+    "project planning"
+  ],
+  "disallowedConcepts": [
+    "external packages",
+    "terminal-first workflows"
+  ],
+  "moduleRules": {
+    "8": {
+      "notes": [
+        "For classes-and-instances, attributes-and-init, and methods-and-self, prefer recipeType semantic instead of fixed_tests.",
+        "Use semantic class/object checks such as defines_class, constructible, instance_attributes, and method_returns for class behavior tasks.",
+        "Treat create-an-instance-and-call-a-method exercises as semantic class behavior checks too, even if the prompt mentions printing the result.",
+        "Do not wrap class-return or method-return tasks in stdin/stdout harness code.",
+        "Do not expose helper harness code such as ast.literal_eval, _parse_arg, or hidden parser utilities in starterCode or solutionCode."
+      ],
+      "validationRequirements": {
+        "requireSemanticForClassExercises": true,
+        "requireSemanticForMethodReturnExercises": true
+      }
+    }
+  },
   "validationRequirements": {
     "goldenTestsRequired": true,
+    "requireSemanticForClassExercises": true,
+    "requireSemanticForMethodReturnExercises": true,
     "requireProjectRubric": true,
     "requireCapstoneRubric": true,
     "requireDeliverableChecklist": true

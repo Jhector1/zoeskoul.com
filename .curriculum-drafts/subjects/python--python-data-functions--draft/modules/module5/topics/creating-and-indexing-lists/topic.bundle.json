@@ -340,16 +340,10 @@
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Ava\nZoe\n",
-            "match": "exact"
-          }
-        ],
+        "type": "semantic",
+        "language": "python",
         "solutionCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nprint(names[0])\nprint(names[-1])\n",
         "solutionFiles": [
           {
@@ -362,14 +356,8 @@
         ],
         "semanticChecks": [
           {
-            "type": "variable_equals",
-            "name": "names",
-            "expected": [
-              "Ava",
-              "Mia",
-              "Zoe"
-            ],
-            "expectedKind": "json"
+            "type": "printed_line_count",
+            "min": 2
           }
         ],
         "sourceChecks": [

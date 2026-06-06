@@ -1,0 +1,579 @@
+{
+  "topicId": "breaking-projects-into-functions",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-10-capstone-automation-project",
+  "sectionSlug": "python--applied-python-projects--draft-python-10-project-planning",
+  "prefix": "py10",
+  "minutes": 25,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-breaking-projects-into-functions-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.tryIt.try_breaking_projects_into_functions_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.tryIt.try_breaking_projects_into_functions_sketch0.prompt",
+        "exerciseKey": "project-step-1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "project_step_1",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_1.title",
+            "exerciseKey": "project-step-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "project_step_2",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_2.title",
+            "exerciseKey": "project-step-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_step_3",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_3.title",
+            "exerciseKey": "project-step-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_step_4",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_4.title",
+            "exerciseKey": "project-step-4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_step_5",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_5.title",
+            "exerciseKey": "project-step-5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.sketch-1.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.sketch-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "project-step-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-1",
+      "language": "python",
+      "starterCode": "def clean_tasks(lines):\n    # Return a cleaned list of task names.\n    # Remove extra spaces and skip blank items.\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_tasks(lines):\n    # Return a cleaned list of task names.\n    # Remove extra spaces and skip blank items.\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clean_tasks(lines):\n    # Return a cleaned list of task names.\n    # Remove extra spaces and skip blank items.\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_tasks(lines):\n    # Return a cleaned list of task names.\n    # Remove extra spaces and skip blank items.\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "clean_tasks",
+            "args": [
+              [
+                " email client ",
+                "",
+                "write report  ",
+                "  plan meeting"
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              "email client",
+              "write report",
+              "plan meeting"
+            ],
+            "expectedKind": "value",
+            "message": "clean_tasks should strip spaces and remove blank entries."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "clean_tasks",
+            "args": [
+              [
+                "  ",
+                "Call team",
+                " review notes "
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              "Call team",
+              "review notes"
+            ],
+            "expectedKind": "value",
+            "message": "clean_tasks should keep the original order of remaining tasks."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This function should return a value instead of printing during checks."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-2",
+      "language": "python",
+      "starterCode": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n# Capstone step 2: Count completed tasks\n# Keep the working code above from the previous step.\n# Next, Build the next project function\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n# Capstone step 2: Count completed tasks\n# Keep the working code above from the previous step.\n# Next, Build the next project function\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n# Capstone step 2: Count completed tasks\n# Keep the working code above from the previous step.\n# Next, Build the next project function\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n# Capstone step 2: Count completed tasks\n# Keep the working code above from the previous step.\n# Next, Build the next project function\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "count_completed",
+            "args": [
+              [
+                "[done] email client",
+                "write report",
+                "[done] plan meeting"
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 2,
+            "expectedKind": "value",
+            "message": "count_completed should count every task that starts with [done]."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "count_completed",
+            "args": [
+              [
+                "review notes",
+                "draft summary"
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 0,
+            "expectedKind": "value",
+            "message": "count_completed should return 0 when no tasks are marked done."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This function should return the count."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-3",
+      "language": "python",
+      "starterCode": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n# Capstone step 3: Build the summary text\n# Keep the working code above from the previous step.\n# Next, Now connect the project pieces\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n# Capstone step 3: Build the summary text\n# Keep the working code above from the previous step.\n# Next, Now connect the project pieces\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n# Capstone step 3: Build the summary text\n# Keep the working code above from the previous step.\n# Next, Now connect the project pieces\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n# Capstone step 3: Build the summary text\n# Keep the working code above from the previous step.\n# Next, Now connect the project pieces\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_summary",
+            "args": [
+              [
+                "[done] email client",
+                "write report",
+                "[done] plan meeting"
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Total tasks: 3\nCompleted tasks: 2",
+            "expectedKind": "value",
+            "message": "build_summary should return the exact two-line summary text."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_summary",
+            "args": [
+              [
+                "review notes"
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Total tasks: 1\nCompleted tasks: 0",
+            "expectedKind": "value",
+            "message": "build_summary should work for a one-item list too."
+          },
+          {
+            "type": "no_stdout",
+            "message": "Return the summary string instead of printing during checks."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-4",
+      "language": "python",
+      "starterCode": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"\n# Capstone step 4: Read tasks and save a report\n# Keep the working code above from the previous step.\n# Next, Finish the project flow with files\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"\n# Capstone step 4: Read tasks and save a report\n# Keep the working code above from the previous step.\n# Next, Finish the project flow with files\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"\n\nwith open(\"data/tasks.txt\", \"r\") as source:\n    lines = source.readlines()\n\ncleaned_tasks = clean_tasks(lines)\nsummary = build_summary(cleaned_tasks)\n\nwith open(\"data/report.txt\", \"w\") as target:\n    target.write(summary)\n\nprint(summary)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"\n# Capstone step 4: Read tasks and save a report\n# Keep the working code above from the previous step.\n# Next, Finish the project flow with files\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"\n# Capstone step 4: Read tasks and save a report\n# Keep the working code above from the previous step.\n# Next, Finish the project flow with files\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "data/tasks.txt",
+            "content": "[done] email client\nwrite report\n\n [done] plan meeting \n\n\n'}],"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"\n\nwith open(\"data/tasks.txt\", \"r\") as source:\n    lines = source.readlines()\n\ncleaned_tasks = clean_tasks(lines)\nsummary = build_summary(cleaned_tasks)\n\nwith open(\"data/report.txt\", \"w\") as target:\n    target.write(summary)\n\nprint(summary)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"\n\nwith open(\"data/tasks.txt\", \"r\") as source:\n    lines = source.readlines()\n\ncleaned_tasks = clean_tasks(lines)\nsummary = build_summary(cleaned_tasks)\n\nwith open(\"data/report.txt\", \"w\") as target:\n    target.write(summary)\n\nprint(summary)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "clean_tasks",
+            "args": [
+              ""
+            ],
+            "argKinds": [],
+            "expected": "Total tasks: 3\nCompleted tasks: 2",
+            "message": "Return the expected result for clean_tasks(lines)."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This task should return a value instead of printing output."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-5",
+      "language": "python",
+      "starterCode": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"\n\nwith open(\"data/tasks.txt\", \"r\") as source:\n    lines = source.readlines()\n\ncleaned_tasks = clean_tasks(lines)\nsummary = build_summary(cleaned_tasks)\n\nwith open(\"data/report.txt\", \"w\") as target:\n    target.write(summary)\n\nprint(summary)\n# Capstone step 5: Add a final status line\n# Keep the working code above from the previous step.\n# Next, Polish the capstone output\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"\n\nwith open(\"data/tasks.txt\", \"r\") as source:\n    lines = source.readlines()\n\ncleaned_tasks = clean_tasks(lines)\nsummary = build_summary(cleaned_tasks)\n\nwith open(\"data/report.txt\", \"w\") as target:\n    target.write(summary)\n\nprint(summary)\n# Capstone step 5: Add a final status line\n# Keep the working code above from the previous step.\n# Next, Polish the capstone output\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    if total_tasks == completed_tasks:\n        status = \"complete\"\n    else:\n        status = \"in progress\"\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\\nProject status: {status}\"\n\nwith open(\"data/tasks.txt\", \"r\") as source:\n    lines = source.readlines()\n\ncleaned_tasks = clean_tasks(lines)\nsummary = build_summary(cleaned_tasks)\n\nwith open(\"data/report.txt\", \"w\") as target:\n    target.write(summary)\n\nprint(summary)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"\n\nwith open(\"data/tasks.txt\", \"r\") as source:\n    lines = source.readlines()\n\ncleaned_tasks = clean_tasks(lines)\nsummary = build_summary(cleaned_tasks)\n\nwith open(\"data/report.txt\", \"w\") as target:\n    target.write(summary)\n\nprint(summary)\n# Capstone step 5: Add a final status line\n# Keep the working code above from the previous step.\n# Next, Polish the capstone output\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"\n\nwith open(\"data/tasks.txt\", \"r\") as source:\n    lines = source.readlines()\n\ncleaned_tasks = clean_tasks(lines)\nsummary = build_summary(cleaned_tasks)\n\nwith open(\"data/report.txt\", \"w\") as target:\n    target.write(summary)\n\nprint(summary)\n# Capstone step 5: Add a final status line\n# Keep the working code above from the previous step.\n# Next, Polish the capstone output\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "data/tasks.txt",
+            "content": "[done] email client\nwrite report\nplan meeting\n},{"
+          },
+          {
+            "path": "data/report.txt",
+            "content": ""
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    if total_tasks == completed_tasks:\n        status = \"complete\"\n    else:\n        status = \"in progress\"\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\\nProject status: {status}\"\n\nwith open(\"data/tasks.txt\", \"r\") as source:\n    lines = source.readlines()\n\ncleaned_tasks = clean_tasks(lines)\nsummary = build_summary(cleaned_tasks)\n\nwith open(\"data/report.txt\", \"w\") as target:\n    target.write(summary)\n\nprint(summary)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    if total_tasks == completed_tasks:\n        status = \"complete\"\n    else:\n        status = \"in progress\"\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\\nProject status: {status}\"\n\nwith open(\"data/tasks.txt\", \"r\") as source:\n    lines = source.readlines()\n\ncleaned_tasks = clean_tasks(lines)\nsummary = build_summary(cleaned_tasks)\n\nwith open(\"data/report.txt\", \"w\") as target:\n    target.write(summary)\n\nprint(summary)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "clean_tasks",
+            "args": [
+              ""
+            ],
+            "argKinds": [],
+            "expected": "Total tasks: 2\nCompleted tasks: 2\nProject status: complete",
+            "message": "Return the expected result for clean_tasks(lines)."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "clean_tasks",
+            "args": [
+              ""
+            ],
+            "argKinds": [],
+            "expected": "Total tasks: 3\nCompleted tasks: 1\nProject status: in progress",
+            "message": "Return the expected result for clean_tasks(lines)."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This task should return a value instead of printing output."
+          }
+        ]
+      }
+    }
+  ]
+}

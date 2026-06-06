@@ -718,7 +718,7 @@ function normalizeCodeInput(
         ...(workspaceExpectations ? { workspaceExpectations } : {}),
         solutionCode:
             typeof item.solutionCode === "string" ? item.solutionCode : "",
-        ...(tests?.length ? { tests } : {}),
+        ...(recipeType !== "semantic" && tests?.length ? { tests } : {}),
         ...(files?.length ? { files } : {}),
         datasetId:
             typeof item.datasetId === "string"
