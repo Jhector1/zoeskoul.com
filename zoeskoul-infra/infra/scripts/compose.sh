@@ -24,8 +24,22 @@ export INFRA_DIR
 export MONOREPO_ROOT="${MONOREPO_ROOT:-$(cd "$INFRA_DIR/.." && pwd)}"
 export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-zoeskoul}"
 
-COMPOSE_FILES=(
-  -f "$INFRA_DIR/compose/app/compose.prod.yml"
+COMPOSE_FILES=()
+
+# Runner + Judge0-only mode should not start the app database.
+# When ENABLE_WEB=1, the app compose supplies Postgres + Redis + web.
+# Otherwise, use a small Redis-only compose because the runner depends on Redis.
+if [[ "${ENABLE_WEB:-0}" == "1" ]]; then
+  COMPOSE_FILES+=(
+    -f "$INFRA_DIR/compose/app/compose.prod.yml"
+  )
+else
+  COMPOSE_FILES+=(
+    -f "$INFRA_DIR/compose/runner/compose.redis.yml"
+  )
+fi
+
+COMPOSE_FILES+=(
   -f "$INFRA_DIR/compose/runner/compose.prod.yml"
   -f "$INFRA_DIR/compose/edge/compose.yml"
 )
