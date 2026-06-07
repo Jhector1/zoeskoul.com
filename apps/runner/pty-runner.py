@@ -86,7 +86,12 @@ def assert_safe_rel_path(p: str) -> str:
 def ensure_prepare_dirs(dirs: list[str]) -> None:
     for d in dirs:
         safe = assert_safe_rel_path(d)
-        os.makedirs(os.path.join("/workspace", safe), exist_ok=True)
+        target = os.path.join("/workspace", safe)
+        os.makedirs(target, exist_ok=True)
+        try:
+            os.chmod(target, 0o777)
+        except Exception:
+            pass
 
 
 def set_winsize(fd: int, rows: int, cols: int) -> None:

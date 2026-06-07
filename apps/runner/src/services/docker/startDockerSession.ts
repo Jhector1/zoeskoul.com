@@ -20,7 +20,10 @@ import {
     clearAllTimeouts,
 } from "../sessions/timeoutManager.js";
 import { resolveTimeoutPolicy } from "../sessions/timeoutPolicy.js";
-import { createWorkspace } from "../workspace/createWorkspace.js";
+import {
+    createWorkspace,
+    ensureWorkspaceRuntimeFiles,
+} from "../workspace/createWorkspace.js";
 import {
     cleanupWorkspaceNow,
     scheduleWorkspaceCleanup,
@@ -198,6 +201,8 @@ export async function startDockerSession(
 
     const sessionId = `sess_${crypto.randomUUID()}`;
     const containerName = `zoeskoul_${sessionId}`;
+
+    await ensureWorkspaceRuntimeFiles(workspaceDir, plan.prepareDirs ?? []);
 
     const container = await docker.createContainer({
         Image: env.runnerImage,

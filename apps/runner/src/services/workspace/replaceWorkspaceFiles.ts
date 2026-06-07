@@ -5,6 +5,7 @@ import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 const MAX_ENTRIES = 400;
 const MAX_TOTAL_BYTES = 5 * 1024 * 1024;
 const RUNNER_MANAGED_FILES = new Set([".bash_history"]);
+const RUNNER_MANAGED_DIRS = new Set(["build"]);
 const ALLOWED_EXTENSIONS = new Set([
     ".py",
     ".js",
@@ -167,7 +168,8 @@ export async function replaceWorkspaceFiles(
         }),
     );
 
-    await fs.mkdir(workspaceDir, { recursive: true });
+    await fs.mkdir(workspaceDir, { recursive: true, mode: 0o777 });
+    await fs.chmod(workspaceDir, 0o777).catch(() => {});
 
     const currentEntries: CurrentEntry[] = [];
     await walkCurrentEntries(workspaceDir, workspaceDir, currentEntries);
@@ -209,7 +211,8 @@ export async function replaceWorkspaceFiles(
             currentFiles.delete(relPath);
         }
 
-        await fs.mkdir(abs, { recursive: true });
+        await fs.mkdir(abs, { recursive: true, mode: 0o777 });
+        await fs.chmod(abs, 0o777).catch(() => {});
         currentDirs.add(relPath);
     }
 
@@ -224,6 +227,7 @@ export async function replaceWorkspaceFiles(
 
         await fs.mkdir(path.dirname(abs), { recursive: true });
         await fs.writeFile(abs, content, "utf8");
+        await fs.chmod(abs, 0o666).catch(() => {});
         currentFiles.add(relPath);
     }
 
@@ -244,6 +248,7 @@ export async function replaceWorkspaceFiles(
 
     const dirsToDelete = [...currentDirs]
         .filter((relPath) => !keepDirs.has(relPath))
+        .filter((relPath) => !RUNNER_MANAGED_DIRS.has(relPath))
         .sort((a, b) => {
             const da = a.split("/").length;
             const db = b.split("/").length;
@@ -258,6 +263,13 @@ export async function replaceWorkspaceFiles(
     const historyPath = path.join(workspaceDir, ".bash_history");
     const handle = await fs.open(historyPath, "a");
     await handle.close();
-    await fs.chmod(historyPath, 0o600).catch(() => {});
+    await fs.chmod(historyPath, 0o666).catch(() => {});
+
+    for (const dir of RUNNER_MANAGED_DIRS) {
+        const abs = path.join(workspaceDir, dir);
+        await fs.mkdir(abs, { recursive: true, mode: 0o777 });
+        await fs.chmod(abs, 0o777).catch(() => {});
+    }
+
     return { fileCount: normalized.length };
 }
