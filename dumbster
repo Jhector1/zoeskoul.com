@@ -133,7 +133,11 @@ pnpm --filter @zoeskoul/web build
 ssh -p 2222 jean@127.0.0.1
 cd ~/Documents/zoeskoul.com/zoeskoul-infra/infra
 
+ssh tunnel
 
+ssh -p 2222 \
+  -L 8080:127.0.0.1:80 \
+  jean@127.0.0.1
 
 cd ~/Documents/judge0-masyg/infra/judge0
 sudo docker compose down

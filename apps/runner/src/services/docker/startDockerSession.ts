@@ -209,7 +209,7 @@ export async function startDockerSession(
         AttachStdout: true,
         AttachStderr: true,
         WorkingDir: "/workspace",
-        User: `${env.execUid}:${env.execGid}`,
+        User: "0:0",
         Env: [
             `PREPARE_DIRS_JSON=${JSON.stringify(plan.prepareDirs ?? [])}`,
             `COMPILE_CMD_JSON=${JSON.stringify(plan.compileCmd ?? null)}`,

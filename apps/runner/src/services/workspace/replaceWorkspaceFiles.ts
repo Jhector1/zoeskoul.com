@@ -4,7 +4,7 @@ import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 
 const MAX_ENTRIES = 400;
 const MAX_TOTAL_BYTES = 5 * 1024 * 1024;
-
+const RUNNER_MANAGED_FILES = new Set([".bash_history"]);
 const ALLOWED_EXTENSIONS = new Set([
     ".py",
     ".js",
@@ -231,6 +231,9 @@ export async function replaceWorkspaceFiles(
     for (const relPath of [...currentFiles]) {
         if (desiredFiles.has(relPath)) continue;
 
+        // Keep terminal history even when the editor replaces the workspace.
+        if (RUNNER_MANAGED_FILES.has(relPath)) continue;
+
         const abs = path.join(workspaceDir, relPath);
         await fs.rm(abs, { force: true });
         currentFiles.delete(relPath);
@@ -252,6 +255,9 @@ export async function replaceWorkspaceFiles(
         const abs = path.join(workspaceDir, relPath);
         await fs.rm(abs, { recursive: true, force: true });
     }
-
+    const historyPath = path.join(workspaceDir, ".bash_history");
+    const handle = await fs.open(historyPath, "a");
+    await handle.close();
+    await fs.chmod(historyPath, 0o600).catch(() => {});
     return { fileCount: normalized.length };
 }

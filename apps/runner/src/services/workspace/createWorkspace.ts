@@ -8,6 +8,10 @@ export type WorkspaceSyncEntry =
     | (FileEntry & { kind?: "file" })
     | { kind: "directory"; path: string };
 
+const DIR_MODE = 0o770;
+const FILE_MODE = 0o660;
+const HISTORY_MODE = 0o600;
+
 function normalizePath(input: string) {
     return String(input ?? "").replace(/\\/g, "/").trim();
 }
@@ -28,9 +32,29 @@ function assertSafeRelPath(p: string) {
     return normalized;
 }
 
-async function ensureWritableDir(dir: string) {
-    await fs.mkdir(dir, { recursive: true, mode: 0o777 });
-    await fs.chmod(dir, 0o777).catch(() => {});
+async function ensureWorkspaceRoot(dir: string) {
+    await fs.mkdir(dir, { recursive: true, mode: 0o770 });
+    await fs.chmod(dir, 0o770).catch(() => {});
+}
+
+async function ensureWorkspaceDir(dir: string) {
+    await fs.mkdir(dir, { recursive: true, mode: DIR_MODE });
+    await fs.chmod(dir, DIR_MODE).catch(() => {});
+}
+
+async function writeWorkspaceFile(abs: string, content: string) {
+    await ensureWorkspaceDir(path.dirname(abs));
+    await fs.writeFile(abs, content, "utf8");
+    await fs.chmod(abs, FILE_MODE).catch(() => {});
+}
+
+async function ensureBashHistory(workspaceDir: string) {
+    const historyPath = path.join(workspaceDir, ".bash_history");
+
+    const handle = await fs.open(historyPath, "a");
+    await handle.close();
+
+    await fs.chmod(historyPath, HISTORY_MODE).catch(() => {});
 }
 
 function entryKind(entry: WorkspaceSyncEntry) {
@@ -52,10 +76,10 @@ function sortEntries(entries: WorkspaceSyncEntry[]) {
 export async function createWorkspace(files: WorkspaceSyncEntry[]) {
     const rootBase = env.workspaceRoot;
 
-    await ensureWritableDir(rootBase);
+    await ensureWorkspaceRoot(rootBase);
 
     const root = path.join(rootBase, `zoeskoul-run-${crypto.randomUUID()}`);
-    await ensureWritableDir(root);
+    await ensureWorkspaceDir(root);
 
     const seenPaths = new Set<string>();
 
@@ -66,6 +90,7 @@ export async function createWorkspace(files: WorkspaceSyncEntry[]) {
             if (seenPaths.has(safePath)) {
                 throw new Error(`Duplicate path: ${safePath}`);
             }
+
             seenPaths.add(safePath);
 
             if (entry.kind === "directory") {
@@ -87,15 +112,14 @@ export async function createWorkspace(files: WorkspaceSyncEntry[]) {
         const abs = path.join(root, entry.path);
 
         if (entry.kind === "directory") {
-            await ensureWritableDir(abs);
+            await ensureWorkspaceDir(abs);
             continue;
         }
 
-        const parent = path.dirname(abs);
-        await ensureWritableDir(parent);
-        await fs.writeFile(abs, entry.content, "utf8");
-        await fs.chmod(abs, 0o666).catch(() => {});
+        await writeWorkspaceFile(abs, entry.content);
     }
+
+    await ensureBashHistory(root);
 
     return root;
 }
