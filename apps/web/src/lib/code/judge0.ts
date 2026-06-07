@@ -3,7 +3,7 @@ import type {
     RunSubmitResult,
     WorkspaceSyncEntry,
 } from "./types";
-
+import { buildJudge0Headers } from "@zoeskoul/curriculum-runtime";
 const SNAPSHOT_RE =
     /\r?\n?__ZOE_WORKSPACE_SNAPSHOT_B64__([A-Za-z0-9+/=]+)__END_ZOE_WORKSPACE_SNAPSHOT_B64__\r?\n?/g;
 
@@ -113,13 +113,20 @@ export async function createJudge0Submission(
 ): Promise<RunSubmitResult> {
     const res = await fetch(url, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: buildJudge0Headers({ json: true }),
         body: JSON.stringify(body),
     });
 
     const text = await res.text();
     let data: any;
-
+    if (process.env.NODE_ENV !== "production") {
+        console.log("[judge0 submit env]", {
+            url,
+            judge0Url: process.env.JUDGE0_URL,
+            hasEdgeSecret: Boolean(process.env.JUDGE0_EDGE_SECRET),
+            edgeSecretLength: process.env.JUDGE0_EDGE_SECRET?.length ?? 0,
+        });
+    }
     try {
         data = JSON.parse(text);
     } catch {
@@ -147,7 +154,10 @@ export async function createJudge0Submission(
 }
 
 export async function getJudge0Submission(url: string): Promise<RunPollResult> {
-    const res = await fetch(url, { method: "GET" });
+    const res = await fetch(url, {
+        method: "GET",
+        headers: buildJudge0Headers(),
+    });
     const text = await res.text();
 
     if (!res.ok) {

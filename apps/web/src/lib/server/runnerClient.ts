@@ -1,5 +1,6 @@
+import { buildRunnerHeaders } from "@zoeskoul/curriculum-runtime";
+
 const RUNNER_BASE_URL = process.env.RUNNER_BASE_URL!;
-const RUNNER_SHARED_SECRET = process.env.RUNNER_SHARED_SECRET!;
 
 export class RunnerHttpError extends Error {
     status: number;
@@ -10,14 +11,6 @@ export class RunnerHttpError extends Error {
     }
 }
 
-function runnerHeaders(actorKey: string) {
-    return {
-        "content-type": "application/json",
-        "x-runner-secret": RUNNER_SHARED_SECRET,
-        "x-actor-key": actorKey,
-    };
-}
-
 export async function runnerPost<T>(
     path: string,
     actorKey: string,
@@ -25,7 +18,7 @@ export async function runnerPost<T>(
 ): Promise<T> {
     const res = await fetch(`${RUNNER_BASE_URL}${path}`, {
         method: "POST",
-        headers: runnerHeaders(actorKey),
+        headers: buildRunnerHeaders({ actorKey }),
         body: body == null ? undefined : JSON.stringify(body),
         cache: "no-store",
     });

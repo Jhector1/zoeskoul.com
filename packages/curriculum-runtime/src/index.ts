@@ -18,3 +18,4 @@ export * from "./sql/index.js";
 export * from "./review/buildReviewFromManifestCore.js";
 export * from "./runtime/resolveEffectiveExerciseRuntime.js";
 export * from "./code/judge0Runner.js";
+export * from "./code/serviceAuthHeaders.js";

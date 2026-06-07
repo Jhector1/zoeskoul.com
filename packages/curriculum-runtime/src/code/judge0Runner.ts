@@ -1,5 +1,6 @@
 import JSZip from "jszip";
 import type { RunCodeFn, RunCodeLimits } from "./runner.js";
+import {buildJudge0Headers} from "./serviceAuthHeaders.js";
 
 type FileEntry = {
     path: string;
@@ -455,7 +456,7 @@ async function createJudge0Submission(args: {
         `${args.baseUrl}/submissions?base64_encoded=true`,
         {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: buildJudge0Headers({ json: true }),
             body: JSON.stringify(args.body),
         },
     );
@@ -498,6 +499,7 @@ async function pollJudge0Submission(args: {
         `${args.baseUrl}/submissions/${safeToken}?base64_encoded=true`,
         {
             method: "GET",
+            headers: buildJudge0Headers(),
         },
     );
 
