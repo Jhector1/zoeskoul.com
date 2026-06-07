@@ -47,14 +47,35 @@ done
 
 echo
 echo "== Runner health =="
-if docker exec zoeskoul-runner wget -qO- http://127.0.0.1:4001/health; then
-  echo
-  echo "Runner health OK"
-else
-  echo "Runner health failed. Showing runner logs:"
-  docker logs --tail=120 zoeskoul-runner || true
-  exit 1
-fi
+for i in {1..30}; do
+  if docker exec -i zoeskoul-runner node <<'NODE'
+const http = require("http");
+const req = http.get("http://127.0.0.1:4001/health", (res) => {
+  console.log("runner health status", res.statusCode);
+  process.exit(res.statusCode < 500 ? 0 : 1);
+});
+req.on("error", (err) => {
+  console.error(err.message);
+  process.exit(1);
+});
+req.setTimeout(3000, () => {
+  req.destroy();
+  process.exit(1);
+});
+NODE
+  then
+    echo "Runner health OK"
+    break
+  fi
+
+  if [[ "$i" == "30" ]]; then
+    echo "Runner health failed. Showing runner logs:"
+    docker logs --tail=160 zoeskoul-runner || true
+    exit 1
+  fi
+
+  sleep 2
+done
 
 if [[ "${ENABLE_JUDGE0:-0}" == "1" ]]; then
   echo
