@@ -27,14 +27,14 @@ const ALLOWED_EXTENSIONS = new Set([
     ".csv",
     ".sql",
 ]);
-
 const ALLOWED_BASENAMES = new Set([
     "Makefile",
     "README",
     "README.md",
     "readme.md",
-    ".bash_history",
 ]);
+
+
 
 type CurrentEntry = {
     kind: "file" | "directory";

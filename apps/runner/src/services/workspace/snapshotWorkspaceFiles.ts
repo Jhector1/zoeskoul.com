@@ -33,6 +33,9 @@ const ALLOWED_BASENAMES = new Set([
     "README",
     "README.md",
     "readme.md",
+
+]);
+const RUNNER_MANAGED_FILES = new Set([
     ".bash_history",
 ]);
 
@@ -90,6 +93,7 @@ async function walkEntries(
             await walkEntries(root, abs, dirs, files);
             continue;
         }
+        if (RUNNER_MANAGED_FILES.has(entry.name)) continue;
 
         if (!entry.isFile()) continue;
         if (!isAllowedFile(rel)) continue;
