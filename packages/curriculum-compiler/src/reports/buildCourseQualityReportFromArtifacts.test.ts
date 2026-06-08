@@ -212,6 +212,7 @@ describe("buildCourseQualityReportFromArtifacts", () => {
             plan,
             spec,
         });
+        //po
 
         expect(report.summary.modules).toBe(2);
         expect(report.summary.topicsTotal).toBe(3);
