@@ -1,0 +1,46 @@
+{
+    email {$CADDY_EMAIL}
+}
+
+(common_headers) {
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        X-Frame-Options "SAMEORIGIN"
+        Permissions-Policy "camera=(), microphone=(), geolocation=()"
+        -Server
+    }
+}
+
+{$RUNNER_DOMAIN} {
+    encode zstd gzip
+    import common_headers
+
+    # Intentionally no access log on this site.
+    # PTY websocket URLs can contain short-lived ?token=... attach tokens.
+
+    reverse_proxy runner:4001 {
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Forwarded-Host {host}
+        header_up X-Real-IP {remote_host}
+    }
+}
+
+{$JUDGE0_DOMAIN} {
+    encode zstd gzip
+    import common_headers
+
+    # Public subdomain, protected by the same token Judge0 requires.
+    # Vercel/server-side web code must send this header.
+    @authorized header X-Judge0-Token {$JUDGE0_AUTHN_TOKEN}
+    handle @authorized {
+        reverse_proxy judge0:2358 {
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Host {host}
+            header_up X-Real-IP {remote_host}
+        }
+    }
+
+    respond "Forbidden" 403
+}

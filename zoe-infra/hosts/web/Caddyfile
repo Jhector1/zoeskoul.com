@@ -1,0 +1,58 @@
+{
+    email {$CADDY_EMAIL}
+}
+
+(common_headers) {
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        X-Frame-Options "SAMEORIGIN"
+        Permissions-Policy "camera=(), microphone=(), geolocation=()"
+        -Server
+    }
+}
+
+{$DOMAIN}, www.{$DOMAIN} {
+    encode zstd gzip
+    import common_headers
+
+    request_body {
+        max_size 10MB
+    }
+
+    log {
+        output stdout
+        format json
+    }
+
+    reverse_proxy web:3000 {
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Forwarded-Host {host}
+        header_up X-Real-IP {remote_host}
+    }
+}
+
+{$RUNNER_DOMAIN} {
+    encode zstd gzip
+    import common_headers
+
+    # Intentionally no access log on this site.
+    # PTY websocket URLs can contain short-lived ?token=... attach tokens.
+
+    @health path /healthz
+    handle @health {
+        reverse_proxy {$RUNNER_PRIVATE_URL}
+    }
+
+    @pty_ws path_regexp ptyws ^/sessions/[^/]+/ws$
+    handle @pty_ws {
+        reverse_proxy {$RUNNER_PRIVATE_URL} {
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Host {host}
+            header_up X-Real-IP {remote_host}
+        }
+    }
+
+    respond 404
+}

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+rand() { openssl rand -hex 32; }
+
+cat <<EOF
+POSTGRES_PASSWORD=$(rand)
+REDIS_PASSWORD=$(rand)
+NEXTAUTH_SECRET=$(rand)
+AUTH_SECRET=$(rand)
+RUNNER_SECRET=$(rand)
+RUNNER_SHARED_SECRET=<copy RUNNER_SECRET>
+PTY_ATTACH_SECRET=$(rand)
+RUNNER_ATTACH_TOKEN_SECRET=<copy PTY_ATTACH_SECRET>
+JUDGE0_AUTHN_TOKEN=$(rand)
+JUDGE0_AUTHZ_TOKEN=$(rand)
+JUDGE0_POSTGRES_PASSWORD=$(rand)
+JUDGE0_REDIS_PASSWORD=$(rand)
+RUNNER_EDGE_SECRET=$(rand)
+EOF

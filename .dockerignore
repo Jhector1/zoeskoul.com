@@ -36,16 +36,19 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# env files
-infra/.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# keep example envs
+# env files / secrets
+.env
+.env.*
 !.env.example
 !.env*.example
+
+infra/.env
+infra/**/.env
+infra/hosts/*/.env
+
+zoe-infra/.env
+zoe-infra/**/.env
+zoe-infra/hosts/*/.env
 
 # OS / editor
 .DS_Store
@@ -67,10 +70,12 @@ temp/
 playwright-report/
 test-results/
 
-# prisma
+# prisma local db
 prisma/dev.db
 prisma/*.db-journal
 
 # local infra data
 infra/postgres-data
 infra/redis-data
+zoe-infra/postgres-data
+zoe-infra/redis-data
