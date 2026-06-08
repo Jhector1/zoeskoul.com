@@ -127,6 +127,11 @@ export default function XtermTerminal(props: {
         onResize,
     } = props;
 
+    const transcriptText = useMemo(
+        () => terminalFeed.map((chunk) => chunk.data ?? "").join(""),
+        [terminalFeed],
+    );
+
     const hostRef = useRef<HTMLDivElement | null>(null);
     const probeRef = useRef<HTMLSpanElement | null>(null);
 
@@ -495,10 +500,12 @@ export default function XtermTerminal(props: {
                     "bg-white/60 dark:bg-black/30",
                     "border-neutral-200 dark:border-white/10",
                 ].join(" ")}
+                data-testid="interactive-terminal-panel"
             >
                 <div
                     ref={hostRef}
                     className="relative h-full min-h-0 w-full px-2 pb-2"
+                    data-testid="interactive-terminal"
                     aria-label="Interactive terminal"
                     onMouseDown={(e) => {
                         e.preventDefault();
@@ -506,6 +513,14 @@ export default function XtermTerminal(props: {
                     }}
                 />
             </div>
+
+            <pre
+                data-testid="interactive-terminal-transcript"
+                aria-live="polite"
+                className="sr-only"
+            >
+                {transcriptText}
+            </pre>
 
             <span
                 ref={probeRef}

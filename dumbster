@@ -46,7 +46,7 @@ If you still have Docker disk issues after that, then:
 
 docker system prune -af --volumes
 
- pnpm --filter @zoeskoul/code-contracts build
+pnpm --filter @zoeskoul/code-contracts build
 pnpm --filter @zoeskoul/runner build
 
 
@@ -153,3 +153,6 @@ pnpm curr:course -- draft-goldens python applied-python-projects
 sudo scp -r deploy@5.78.159.224:/opt/edge-proxy ~/Downloads/
 
 
+cd ~/Documents/zoeskoul.com/zoeskoul-infra/infra
+ENABLE_JUDGE0=1 ./scripts/compose.sh build runner
+ENABLE_JUDGE0=1 ./scripts/compose.sh up -d --force-recreate runner

@@ -1,0 +1,829 @@
+import { expect, test, type Locator, type Page } from "@playwright/test";
+
+const PYTHON_SANDBOX_URL = "/en/sandbox/programming/python?e2eFullIdeAccess=1";
+const CPP_SANDBOX_URL = "/en/sandbox/programming/cpp?e2eFullIdeAccess=1";
+
+async function installMockTerminalBackend(page: Page) {
+    await page.addInitScript(() => {
+        const STORAGE_KEY = "__pw_fullide_terminal_workspace_sync_v1";
+        const originalFetch = window.fetch.bind(window);
+
+        type MockEntry =
+            | { kind?: "file"; path: string; content: string }
+            | { kind: "directory"; path: string };
+
+        type MockWorkspace = {
+            entries: Record<string, MockEntry>;
+        };
+
+        type MockSession = {
+            id: string;
+            kind: "shell" | "code";
+            scope: string;
+            seq: number;
+            currentLine: string;
+            prompt: string;
+            pendingHeredoc: null | {
+                path: string;
+                endTag: string;
+                lines: string[];
+            };
+        };
+
+        type MockState = {
+            nextSessionId: number;
+            sessions: Record<string, MockSession>;
+            workspaces: Record<string, MockWorkspace>;
+            metrics: {
+                codeRuns: number;
+            };
+        };
+
+        function normalizePath(input: string) {
+            let path = String(input ?? "").replace(/\\/g, "/").trim();
+            if (!path) return "";
+
+            path = path.replace(/^\/workspace\/?/, "");
+            path = path.replace(/^\.\/+/, "");
+            path = path.replace(/^\/+/, "");
+            path = path.replace(/\/+/g, "/");
+
+            return path.replace(/\/$/, "");
+        }
+
+        function loadState(): MockState {
+            try {
+                const raw = window.localStorage.getItem(STORAGE_KEY);
+                if (raw) return JSON.parse(raw) as MockState;
+            } catch {}
+
+            return {
+                nextSessionId: 1,
+                sessions: {},
+                workspaces: {},
+                metrics: {
+                    codeRuns: 0,
+                },
+            };
+        }
+
+        function saveState(state: MockState) {
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function currentScope() {
+            return window.location.pathname;
+        }
+
+        function getWorkspace(state: MockState, scope: string): MockWorkspace {
+            state.workspaces[scope] ??= { entries: {} };
+            return state.workspaces[scope]!;
+        }
+
+        function sortEntries(entries: MockEntry[]) {
+            return [...entries].sort((a, b) => {
+                const aKind = a.kind ?? "file";
+                const bKind = b.kind ?? "file";
+                if (aKind !== bKind) return aKind === "directory" ? -1 : 1;
+
+                const aDepth = normalizePath(a.path).split("/").filter(Boolean).length;
+                const bDepth = normalizePath(b.path).split("/").filter(Boolean).length;
+                if (aDepth !== bDepth) return aDepth - bDepth;
+
+                return normalizePath(a.path).localeCompare(normalizePath(b.path));
+            });
+        }
+
+        function listEntriesFromPayload(payload: unknown): MockEntry[] {
+            if (Array.isArray(payload)) {
+                return payload
+                    .map((entry: any) => {
+                        const path = normalizePath(entry?.path);
+                        if (!path) return null;
+
+                        if (entry?.kind === "directory") {
+                            return { kind: "directory" as const, path };
+                        }
+
+                        return {
+                            kind: "file" as const,
+                            path,
+                            content: String(entry?.content ?? ""),
+                        };
+                    })
+                    .filter((entry): entry is MockEntry => Boolean(entry));
+            }
+
+            if (payload && typeof payload === "object") {
+                return Object.entries(payload as Record<string, string>)
+                    .map(([path, content]) => ({
+                        kind: "file" as const,
+                        path: normalizePath(path),
+                        content: String(content ?? ""),
+                    }))
+                    .filter((entry) => !!entry.path);
+            }
+
+            return [];
+        }
+
+        function replaceWorkspaceEntries(state: MockState, scope: string, entries: MockEntry[]) {
+            const workspace = getWorkspace(state, scope);
+            workspace.entries = {};
+
+            for (const entry of entries) {
+                const path = normalizePath(entry.path);
+                if (!path) continue;
+
+                if ((entry.kind ?? "file") === "directory") {
+                    workspace.entries[path] = { kind: "directory", path };
+                    continue;
+                }
+
+                workspace.entries[path] = {
+                    kind: "file",
+                    path,
+                    content: String((entry as any).content ?? ""),
+                };
+            }
+        }
+
+        function ensureDirectoryEntries(paths: string[]) {
+            const out = new Set<string>();
+
+            for (const path of paths) {
+                const parts = normalizePath(path).split("/").filter(Boolean);
+                for (let i = 1; i < parts.length; i += 1) {
+                    out.add(parts.slice(0, i).join("/"));
+                }
+            }
+
+            return [...out];
+        }
+
+        function workspaceEntriesForSnapshot(state: MockState, scope: string): MockEntry[] {
+            const workspace = getWorkspace(state, scope);
+            const filePaths = Object.values(workspace.entries)
+                .filter((entry) => (entry.kind ?? "file") !== "directory")
+                .map((entry) => normalizePath(entry.path));
+            const inferredDirs = ensureDirectoryEntries(filePaths);
+
+            const merged = new Map<string, MockEntry>();
+
+            for (const dir of inferredDirs) {
+                if (!dir) continue;
+                merged.set(dir, { kind: "directory", path: dir });
+            }
+
+            for (const entry of Object.values(workspace.entries)) {
+                const path = normalizePath(entry.path);
+                if (!path) continue;
+                merged.set(path, {
+                    ...(entry.kind === "directory"
+                        ? { kind: "directory" as const, path }
+                        : {
+                              kind: "file" as const,
+                              path,
+                              content: String((entry as any).content ?? ""),
+                          }),
+                });
+            }
+
+            return sortEntries([...merged.values()]);
+        }
+
+        function getHistoryContent(state: MockState, scope: string) {
+            const workspace = getWorkspace(state, scope);
+            const entry = workspace.entries[".bash_history"];
+            if (!entry || entry.kind === "directory") return "";
+            return String(entry.content ?? "");
+        }
+
+        function setHistoryContent(state: MockState, scope: string, content: string) {
+            const workspace = getWorkspace(state, scope);
+            const normalized = String(content ?? "");
+
+            if (!normalized) {
+                delete workspace.entries[".bash_history"];
+                return;
+            }
+
+            workspace.entries[".bash_history"] = {
+                kind: "file",
+                path: ".bash_history",
+                content: normalized.endsWith("\n") ? normalized : `${normalized}\n`,
+            };
+        }
+
+        function appendHistoryLine(state: MockState, scope: string, line: string) {
+            const trimmed = String(line ?? "").trim();
+            if (!trimmed) return;
+
+            const current = getHistoryContent(state, scope);
+            setHistoryContent(state, scope, `${current}${trimmed}\n`);
+        }
+
+        function stripShellQuotes(input: string) {
+            const trimmed = input.trim();
+            const single = trimmed.match(/^'(.*)'$/);
+            if (single) return single[1] ?? "";
+            const double = trimmed.match(/^"(.*)"$/);
+            if (double) return double[1] ?? "";
+            return trimmed;
+        }
+
+        function writeFile(state: MockState, scope: string, path: string, content: string) {
+            const normalized = normalizePath(path);
+            if (!normalized) return;
+
+            const workspace = getWorkspace(state, scope);
+            workspace.entries[normalized] = {
+                kind: "file",
+                path: normalized,
+                content,
+            };
+        }
+
+        function ensureDirectory(state: MockState, scope: string, path: string) {
+            const normalized = normalizePath(path);
+            if (!normalized) return;
+
+            const workspace = getWorkspace(state, scope);
+            workspace.entries[normalized] = {
+                kind: "directory",
+                path: normalized,
+            };
+        }
+
+        function listChildren(state: MockState, scope: string, path: string) {
+            const target = normalizePath(path);
+            const prefix = target ? `${target}/` : "";
+            const names = new Set<string>();
+
+            for (const entry of workspaceEntriesForSnapshot(state, scope)) {
+                const fullPath = normalizePath(entry.path);
+                if (!fullPath || fullPath === ".bash_history") continue;
+
+                if (!target) {
+                    const head = fullPath.split("/").filter(Boolean)[0];
+                    if (head) names.add(head);
+                    continue;
+                }
+
+                if (!fullPath.startsWith(prefix)) continue;
+                const remainder = fullPath.slice(prefix.length);
+                const head = remainder.split("/").filter(Boolean)[0];
+                if (head) names.add(head);
+            }
+
+            return [...names].sort().join("\n");
+        }
+
+        function formatHistory(state: MockState, scope: string) {
+            const lines = getHistoryContent(state, scope)
+                .split(/\r?\n/)
+                .filter(Boolean);
+
+            return lines
+                .map((line, index) => `${String(index + 1).padStart(5, " ")}  ${line}`)
+                .join("\n");
+        }
+
+        function runShellSegment(state: MockState, session: MockSession, segment: string) {
+            const command = segment.trim();
+            if (!command) return "";
+
+            if (command === "pwd") return "/workspace\n";
+            if (command === "ls") {
+                const listed = listChildren(state, session.scope, "");
+                return listed ? `${listed}\n` : "";
+            }
+
+            const lsMatch = command.match(/^ls\s+(.+)$/);
+            if (lsMatch) {
+                const listed = listChildren(state, session.scope, lsMatch[1] ?? "");
+                return listed ? `${listed}\n` : "";
+            }
+
+            if (command === "whoami") return "sandbox\n";
+            if (command === "history") {
+                const listed = formatHistory(state, session.scope);
+                return listed ? `${listed}\n` : "";
+            }
+
+            const mkdirMatch = command.match(/^mkdir(?:\s+-p)?\s+(.+)$/);
+            if (mkdirMatch) {
+                for (const part of String(mkdirMatch[1] ?? "")
+                    .split(/\s+/)
+                    .filter(Boolean)) {
+                    ensureDirectory(state, session.scope, part);
+                }
+                return "";
+            }
+
+            const echoRedirectMatch = command.match(/^echo\s+(.+?)\s*>\s*(.+)$/);
+            if (echoRedirectMatch) {
+                const value = stripShellQuotes(echoRedirectMatch[1] ?? "");
+                writeFile(state, session.scope, echoRedirectMatch[2] ?? "", `${value}\n`);
+                return "";
+            }
+
+            const echoMatch = command.match(/^echo\s+(.+)$/);
+            if (echoMatch) {
+                return `${stripShellQuotes(echoMatch[1] ?? "")}\n`;
+            }
+
+            const catMatch = command.match(/^cat\s+(.+)$/);
+            if (catMatch) {
+                const path = normalizePath(catMatch[1] ?? "");
+                const workspace = getWorkspace(state, session.scope);
+                const entry = workspace.entries[path];
+                if (!entry || entry.kind === "directory") return "";
+                return String(entry.content ?? "");
+            }
+
+            return "";
+        }
+
+        function shellPrompt(session: MockSession) {
+            return session.prompt;
+        }
+
+        function nextSeq(session: MockSession) {
+            session.seq += 1;
+            return session.seq;
+        }
+
+        function emitToSocket(
+            socket: MockWebSocket,
+            payload: Record<string, unknown>,
+        ) {
+            socket.onmessage?.(
+                new MessageEvent("message", {
+                    data: JSON.stringify(payload),
+                }),
+            );
+        }
+
+        function emitStdout(socket: MockWebSocket, session: MockSession, chunk: string) {
+            emitToSocket(socket, {
+                type: "event",
+                event: {
+                    type: "stdout",
+                    chunk,
+                    seq: nextSeq(session),
+                    ts: new Date().toISOString(),
+                },
+            });
+        }
+
+        function emitStatus(
+            socket: MockWebSocket,
+            session: MockSession,
+            state: "preparing" | "compiling" | "running" | "completed",
+        ) {
+            emitToSocket(socket, {
+                type: "event",
+                event: {
+                    type: "status",
+                    state,
+                    seq: nextSeq(session),
+                    ts: new Date().toISOString(),
+                },
+            });
+        }
+
+        function runShellLine(state: MockState, session: MockSession, line: string) {
+            const trimmed = line.trim();
+
+            if (session.pendingHeredoc) {
+                if (line === session.pendingHeredoc.endTag) {
+                    writeFile(
+                        state,
+                        session.scope,
+                        session.pendingHeredoc.path,
+                        `${session.pendingHeredoc.lines.join("\n")}\n`,
+                    );
+                    session.pendingHeredoc = null;
+                    return "";
+                }
+
+                session.pendingHeredoc.lines.push(line);
+                return "";
+            }
+
+            if (!trimmed) return "";
+
+            appendHistoryLine(state, session.scope, trimmed);
+
+            const heredocMatch = trimmed.match(/^cat\s*>\s*([^\s]+)\s*<<'([^']+)'$/);
+            if (heredocMatch) {
+                session.pendingHeredoc = {
+                    path: normalizePath(heredocMatch[1] ?? ""),
+                    endTag: heredocMatch[2] ?? "EOF",
+                    lines: [],
+                };
+                return "";
+            }
+
+            return trimmed
+                .split(/&&|;/g)
+                .map((segment) => runShellSegment(state, session, segment))
+                .join("");
+        }
+
+        function createResponse(body: unknown, status = 200) {
+            return new Response(JSON.stringify(body), {
+                status,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+        }
+
+        class MockWebSocket {
+            static CONNECTING = 0;
+            static OPEN = 1;
+            static CLOSING = 2;
+            static CLOSED = 3;
+
+            readyState = MockWebSocket.CONNECTING;
+            url: string;
+            sessionId: string;
+            onopen: ((event: Event) => void) | null = null;
+            onmessage: ((event: MessageEvent) => void) | null = null;
+            onerror: ((event: Event) => void) | null = null;
+            onclose: ((event: CloseEvent) => void) | null = null;
+
+            constructor(url: string) {
+                this.url = url;
+                this.sessionId = String(url.split("/").pop() ?? "");
+
+                window.setTimeout(() => {
+                    const state = loadState();
+                    const session = state.sessions[this.sessionId];
+
+                    this.readyState = MockWebSocket.OPEN;
+                    this.onopen?.(new Event("open"));
+
+                    if (!session) {
+                        this.close();
+                        return;
+                    }
+
+                    emitToSocket(this, {
+                        type: "ready",
+                        sessionId: session.id,
+                        state: session.kind === "shell" ? "running" : "preparing",
+                    });
+
+                    if (session.kind === "shell") {
+                        emitStatus(this, session, "running");
+                        emitStdout(this, session, shellPrompt(session));
+                        saveState(state);
+                        return;
+                    }
+
+                    emitStatus(this, session, "preparing");
+
+                    window.setTimeout(() => {
+                        const nextState = loadState();
+                        const nextSession = nextState.sessions[this.sessionId];
+                        if (!nextSession) return;
+
+                        emitStatus(this, nextSession, "compiling");
+                        emitStatus(this, nextSession, "running");
+                        emitStdout(this, nextSession, "C++ run ok\n");
+                        emitStatus(this, nextSession, "completed");
+                        saveState(nextState);
+                        this.close();
+                    }, 50);
+                }, 10);
+            }
+
+            send(raw: string) {
+                let message: any = null;
+                try {
+                    message = JSON.parse(raw);
+                } catch {
+                    return;
+                }
+
+                if (!message || message.type !== "input") return;
+
+                const state = loadState();
+                const session = state.sessions[this.sessionId];
+                if (!session || session.kind !== "shell") return;
+
+                const data = String(message.data ?? "");
+
+                for (let i = 0; i < data.length; i += 1) {
+                    const char = data[i] ?? "";
+
+                    if (char === "\r") continue;
+
+                    if (char === "\n") {
+                        const line = session.currentLine;
+                        session.currentLine = "";
+                        const output = runShellLine(state, session, line);
+                        if (output) emitStdout(this, session, output);
+                        if (!session.pendingHeredoc) {
+                            emitStdout(this, session, shellPrompt(session));
+                        }
+                        continue;
+                    }
+
+                    session.currentLine += char;
+                }
+
+                saveState(state);
+            }
+
+            close() {
+                this.readyState = MockWebSocket.CLOSED;
+                this.onclose?.(new CloseEvent("close"));
+            }
+
+            addEventListener(type: string, listener: EventListener) {
+                if (type === "open") this.onopen = listener as any;
+                if (type === "message") this.onmessage = listener as any;
+                if (type === "error") this.onerror = listener as any;
+                if (type === "close") this.onclose = listener as any;
+            }
+
+            removeEventListener() {}
+        }
+
+        window.fetch = async (input, init) => {
+            const url = typeof input === "string" ? input : input.url;
+
+            if (url.endsWith("/api/run/judge0")) {
+                const state = loadState();
+                state.metrics.codeRuns += 1;
+                saveState(state);
+
+                return createResponse({
+                    ok: true,
+                    mode: "immediate",
+                    result: {
+                        ok: true,
+                        status: "Accepted",
+                        stdout: "C++ run ok\n",
+                        stderr: "",
+                    },
+                });
+            }
+
+            if (url.endsWith("/api/run/pty/sessions/start")) {
+                const body = JSON.parse(String(init?.body ?? "{}"));
+                const state = loadState();
+                const sessionId = `playwright-session-${state.nextSessionId++}`;
+                const scope = currentScope();
+
+                const files = listEntriesFromPayload(body?.files);
+                if (files.length) {
+                    replaceWorkspaceEntries(state, scope, files);
+                }
+
+                state.sessions[sessionId] = {
+                    id: sessionId,
+                    kind:
+                        body?.kind === "shell" ||
+                        (body?.language === "bash" && body?.mode === "interactive")
+                            ? "shell"
+                            : "code",
+                    scope,
+                    seq: 0,
+                    currentLine: "",
+                    prompt: "sandbox@workspace:/workspace$ ",
+                    pendingHeredoc: null,
+                };
+
+                if (state.sessions[sessionId]?.kind === "code") {
+                    state.metrics.codeRuns += 1;
+                }
+
+                saveState(state);
+
+                return createResponse({
+                    ok: true,
+                    sessionId,
+                    state: state.sessions[sessionId]?.kind === "shell" ? "running" : "preparing",
+                    attachToken: "playwright-token",
+                    wsUrl: `ws://playwright.invalid/session/${sessionId}`,
+                });
+            }
+
+            const replaceMatch = url.match(/\/api\/run\/pty\/sessions\/([^/]+)\/workspace\/replace$/);
+            if (replaceMatch) {
+                const sessionId = replaceMatch[1] ?? "";
+                const body = JSON.parse(String(init?.body ?? "{}"));
+                const state = loadState();
+                const session = state.sessions[sessionId];
+                const scope = session?.scope ?? currentScope();
+                replaceWorkspaceEntries(state, scope, listEntriesFromPayload(body?.files));
+                saveState(state);
+
+                return createResponse({
+                    ok: true,
+                    fileCount: workspaceEntriesForSnapshot(state, scope).length,
+                });
+            }
+
+            const snapshotMatch = url.match(/\/api\/run\/pty\/sessions\/([^/]+)\/workspace\/snapshot$/);
+            if (snapshotMatch) {
+                const sessionId = snapshotMatch[1] ?? "";
+                const state = loadState();
+                const session = state.sessions[sessionId];
+                const scope = session?.scope ?? currentScope();
+
+                return createResponse({
+                    ok: true,
+                    files: workspaceEntriesForSnapshot(state, scope),
+                });
+            }
+
+            return originalFetch(input, init);
+        };
+
+        // @ts-expect-error Playwright browser override
+        window.WebSocket = MockWebSocket;
+    });
+}
+
+function explorerPathLocator(page: Page, path: string) {
+    return page.locator(`[data-node-path="${path}"]`);
+}
+
+async function waitForFullIDE(page: Page, entryPath: string) {
+    await expect(page.getByTestId("tools-file-tree")).toBeVisible({
+        timeout: 120_000,
+    });
+    await expect(explorerPathLocator(page, "src")).toBeVisible({
+        timeout: 30_000,
+    });
+    await expectExplorerHasPath(page, entryPath);
+}
+
+async function openTerminal(page: Page) {
+    const tab = page.getByRole("button", { name: /^Terminal$/ });
+    await expect(tab).toBeVisible();
+    await tab.click();
+    await expect(page.getByTestId("interactive-terminal")).toBeVisible();
+    await expectTerminalContains(page, "[starting workspace terminal]");
+}
+
+async function sendTerminal(page: Page, command: string) {
+    await openTerminal(page);
+    await page.getByTestId("interactive-terminal").click();
+    await page.keyboard.insertText(command);
+
+    if (!command.endsWith("\n")) {
+        await page.keyboard.press("Enter");
+    }
+}
+
+async function terminalTranscript(page: Page) {
+    return (await page.getByTestId("interactive-terminal-transcript").textContent()) ?? "";
+}
+
+async function expectTerminalContains(page: Page, text: string) {
+    await expect
+        .poll(async () => await terminalTranscript(page), {
+            timeout: 15_000,
+        })
+        .toContain(text);
+}
+
+async function expectExplorerHasPath(page: Page, path: string) {
+    const parts = path.split("/").filter(Boolean);
+    const prefixes = parts.map((_, index) => parts.slice(0, index + 1).join("/"));
+
+    for (let i = 0; i < prefixes.length - 1; i += 1) {
+        const current = prefixes[i]!;
+        const next = prefixes[i + 1]!;
+
+        if (await explorerPathLocator(page, next).isVisible().catch(() => false)) {
+            continue;
+        }
+
+        const currentLocator = explorerPathLocator(page, current);
+        if (await currentLocator.count()) {
+            await currentLocator.click();
+        }
+    }
+
+    await expect(explorerPathLocator(page, path)).toBeVisible();
+}
+
+async function expectExplorerNotHasPath(page: Page, path: string) {
+    await expect(explorerPathLocator(page, path)).toHaveCount(0);
+}
+
+async function mockCodeRunCount(page: Page) {
+    return await page.evaluate(() => {
+        const raw = window.localStorage.getItem("__pw_fullide_terminal_workspace_sync_v1");
+        if (!raw) return 0;
+        return Number(JSON.parse(raw)?.metrics?.codeRuns ?? 0);
+    });
+}
+
+test.describe("FullIDE terminal/workspace sync regressions", () => {
+    test.describe.configure({
+        mode: "serial",
+    });
+
+    test.beforeEach(async ({ page }) => {
+        await installMockTerminalBackend(page);
+    });
+
+    test("Python sandbox preserves one src folder", async ({ page }) => {
+        test.setTimeout(180_000);
+        await page.goto(PYTHON_SANDBOX_URL, { timeout: 120_000 });
+        await waitForFullIDE(page, "src/main.py");
+
+        await expect(page.locator('[data-node-path="src"][data-node-kind="folder"]')).toHaveCount(1);
+        await expectExplorerNotHasPath(page, "src/src");
+
+        await sendTerminal(page, "pwd");
+        await expectTerminalContains(page, "/workspace");
+
+        await sendTerminal(page, "ls");
+        await expectTerminalContains(page, "src");
+
+        await sendTerminal(page, "ls src");
+        await expectTerminalContains(page, "main.py");
+
+        await expectTerminalContains(page, "$ ");
+        await expectExplorerNotHasPath(page, ".bash_history");
+    });
+
+    test("Terminal-created file syncs into existing src without double src", async ({ page }) => {
+        test.setTimeout(180_000);
+        await page.goto(PYTHON_SANDBOX_URL, { timeout: 120_000 });
+        await waitForFullIDE(page, "src/main.py");
+
+        await sendTerminal(
+            page,
+            `cat > src/helper.py <<'PY'
+print("helper")
+PY
+`,
+        );
+
+        await expectExplorerHasPath(page, "src/helper.py");
+        await expectExplorerNotHasPath(page, "src/src/helper.py");
+        await expectExplorerNotHasPath(page, ".bash_history");
+    });
+
+    test("Browser refresh preserves command history but hides .bash_history", async ({ page }) => {
+        test.setTimeout(180_000);
+        await page.goto(PYTHON_SANDBOX_URL, { timeout: 120_000 });
+        await waitForFullIDE(page, "src/main.py");
+
+        await sendTerminal(page, "echo HISTORY_TEST_MARKER");
+        await expectTerminalContains(page, "HISTORY_TEST_MARKER");
+
+        await sendTerminal(page, "history");
+        await expectTerminalContains(page, "HISTORY_TEST_MARKER");
+
+        await page.reload();
+        await waitForFullIDE(page, "src/main.py");
+
+        await sendTerminal(page, "history");
+        await expectTerminalContains(page, "HISTORY_TEST_MARKER");
+        await expectExplorerNotHasPath(page, ".bash_history");
+    });
+
+    test("Terminal is non-root", async ({ page }) => {
+        test.setTimeout(180_000);
+        await page.goto(PYTHON_SANDBOX_URL, { timeout: 120_000 });
+        await waitForFullIDE(page, "src/main.py");
+
+        await sendTerminal(page, "whoami");
+        await expectTerminalContains(page, "sandbox");
+
+        const transcript = await terminalTranscript(page);
+        expect(transcript).not.toContain("\nroot\n");
+        expect(transcript.trimEnd()).not.toMatch(/#$/);
+    });
+
+    test("C++ build directory is writable", async ({ page }) => {
+        test.setTimeout(180_000);
+        await page.goto(CPP_SANDBOX_URL, { timeout: 120_000 });
+        await waitForFullIDE(page, "src/main.cpp");
+
+        await sendTerminal(page, "mkdir -p build && echo ok > build/test.txt && cat build/test.txt");
+        await expectTerminalContains(page, "ok");
+
+        await page.getByTestId("code-runner-run-button").click();
+
+        await expect
+            .poll(async () => await mockCodeRunCount(page), {
+                timeout: 10_000,
+            })
+            .toBeGreaterThan(0);
+
+        await expect(page.getByText("Permission denied: '/workspace/build'")).toHaveCount(0);
+    });
+});

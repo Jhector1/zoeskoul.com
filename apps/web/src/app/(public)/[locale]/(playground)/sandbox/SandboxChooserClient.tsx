@@ -106,7 +106,7 @@ export default function SandboxChooserClient({ locale }: { locale: string }) {
                 slug: "tools",
                 title: "More Tools",
                 description:
-                    "Extra sandboxes you’ll add over time.",
+                    "Extra sandboxes.",
                 icon: <Sparkles className="h-4 w-4" />,
                 tags: ["Coming soon", "Extensible"],
                 path: "programming/python",

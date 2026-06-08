@@ -48,6 +48,10 @@ function explorerTestIdForNode(name: string) {
         .replace(/[^a-zA-Z0-9._-]+/g, "-")}`;
 }
 
+function explorerPathAttr(path: string) {
+    return String(path ?? "").replace(/\\/g, "/");
+}
+
 function IndentGuides({ depth }: { depth: number }) {
     if (depth <= 0) return null;
     return (
@@ -294,6 +298,7 @@ function Tree(props: TreeProps) {
                 const isEntry = !isSql && n.kind === "file" && n.id === entryFileId;
                 const hasChildren = isFolder && childrenOf(nodes, n.id).length > 0;
                 const isRenaming = inlineEdit?.mode === "rename" && inlineEdit?.targetId === n.id;
+                const nodePath = pathOf(nodes, n.id);
 
                 const disableDelete =
                     !isSql &&
@@ -595,6 +600,7 @@ function Tree(props: TreeProps) {
                                 type="button"
                                 className="min-w-0 flex-1 text-left"
                                 data-testid={explorerTestIdForNode(n.name)}
+                                data-node-path={explorerPathAttr(nodePath)}
                                 data-node-kind={n.kind}
                                 data-node-active={isActive ? "true" : "false"}
                                 data-node-entry={isEntry ? "true" : "false"}

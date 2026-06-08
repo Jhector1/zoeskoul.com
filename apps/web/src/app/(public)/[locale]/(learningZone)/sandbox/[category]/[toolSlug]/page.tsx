@@ -19,7 +19,31 @@ type PageProps = {
         category: string;
         toolSlug: string;
     }>;
+    searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
+
+function searchParamIsTrue(
+    searchParams: Record<string, string | string[] | undefined>,
+    key: string,
+) {
+    const value = searchParams[key];
+
+    if (Array.isArray(value)) {
+        return value.includes("1") || value.includes("true");
+    }
+
+    return value === "1" || value === "true";
+}
+
+function allowE2eFullIdeAccess(
+    searchParams: Record<string, string | string[] | undefined>,
+) {
+    if (process.env.E2E_ALLOW_DEV_ROUTES !== "1") {
+        return false;
+    }
+
+    return searchParamIsTrue(searchParams, "e2eFullIdeAccess");
+}
 
 export async function generateMetadata(
     { params }: PageProps,
@@ -72,8 +96,10 @@ async function getSandboxAccessForActor(
 
 export default async function SandboxToolPage({
                                                   params,
+                                                  searchParams,
                                               }: PageProps) {
     const { locale, category, toolSlug } = await params;
+    const resolvedSearchParams = (await searchParams) ?? {};
 
     const entry = resolveSandboxToolEntry(category, toolSlug);
     if (!entry) notFound();
@@ -101,11 +127,20 @@ export default async function SandboxToolPage({
                 canCreateProjects: false,
             };
 
+    const effectiveAccess = allowE2eFullIdeAccess(resolvedSearchParams)
+        ? {
+              hasUser: true,
+              canUseMultiFile: true,
+              canSaveCloud: true,
+              canCreateProjects: true,
+          }
+        : access;
+
     return (
         <SandboxToolClient
             locale={locale}
             entry={entry}
-            access={access}
+            access={effectiveAccess}
         />
     );
 }

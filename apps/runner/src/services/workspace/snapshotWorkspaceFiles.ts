@@ -1,6 +1,10 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
+import {
+    isRunnerManagedDirPath,
+    isRunnerManagedFilePath,
+} from "./runnerManagedWorkspace.js";
 
 const MAX_ENTRIES = 400;
 const MAX_TOTAL_BYTES = 5 * 1024 * 1024;
@@ -33,10 +37,6 @@ const ALLOWED_BASENAMES = new Set([
     "README",
     "README.md",
     "readme.md",
-
-]);
-const RUNNER_MANAGED_FILES = new Set([
-    ".bash_history",
 ]);
 
 const IGNORED_DIRS = new Set([
@@ -82,7 +82,7 @@ async function walkEntries(
         if (!isSafeRelativePath(rel)) continue;
 
         if (entry.isDirectory()) {
-            if (IGNORED_DIRS.has(entry.name)) continue;
+            if (IGNORED_DIRS.has(entry.name) || isRunnerManagedDirPath(rel)) continue;
 
             dirs.push(rel);
 
@@ -93,7 +93,7 @@ async function walkEntries(
             await walkEntries(root, abs, dirs, files);
             continue;
         }
-        if (RUNNER_MANAGED_FILES.has(entry.name)) continue;
+        if (isRunnerManagedFilePath(rel)) continue;
 
         if (!entry.isFile()) continue;
         if (!isAllowedFile(rel)) continue;

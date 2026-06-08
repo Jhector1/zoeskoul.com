@@ -1,4 +1,10 @@
 import type { FSNode, FileNode, FolderNode, NodeId } from "./types";
+import {
+    detectSyntheticSrcRoot,
+    normalizeSafeRelativePath,
+    normalizeUiProjectPath,
+    splitSafeRelativePath,
+} from "@/lib/projects/workspacePathMapping";
 
 export type WorkspaceSyncEntry =
     | { kind?: "file"; path: string; content: string }
@@ -14,40 +20,30 @@ function sortNodes(a: FSNode, b: FSNode) {
     return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
 }
 
-function isSyntheticProjectRoot(nodes: FSNode[]) {
-    const topFolders = nodes.filter(
-        (n): n is FolderNode => n.kind === "folder" && n.parentId === null,
-    );
-    const topFiles = nodes.filter(
-        (n): n is FileNode => n.kind === "file" && n.parentId === null,
-    );
-
-    if (
-        topFolders.length === 1 &&
-        topFiles.length === 0 &&
-        topFolders[0].name === "src"
-    ) {
-        return topFolders[0];
-    }
-
-    return null;
-}
+export type ProjectPathOptions = {
+    /**
+     * Legacy mode for callers that intentionally want the single top-level src
+     * folder treated as a virtual project root. Full IDE workspace/terminal
+     * synchronization should keep this false so the Explorer and the runner see
+     * the same paths.
+     */
+    stripSyntheticRoot?: boolean;
+};
 
 function relativeNodePathOf(
     nodes: FSNode[],
     id: NodeId,
-    syntheticRootName?: string | null,
+    options?: ProjectPathOptions,
 ): string {
-    const full = pathOf(nodes, id);
-    const parts = full.split("/").filter(Boolean);
+    const rawPath = normalizeSafeRelativePath(pathOf(nodes, id));
 
-    if (syntheticRootName && parts[0] === syntheticRootName) {
-        parts.shift();
+    if (!options?.stripSyntheticRoot) {
+        return rawPath;
     }
 
-    return parts.join("/");
+    const syntheticRoot = detectSyntheticSrcRoot(nodes);
+    return normalizeUiProjectPath(rawPath, syntheticRoot?.name ?? null);
 }
-
 export function buildFsIndex(nodes: FSNode[]): FsIndex {
     const byId = new Map<NodeId, FSNode>();
     const childrenByParent = new Map<NodeId | null, FSNode[]>();
@@ -122,13 +118,7 @@ export function subtreeIds(nodes: FSNode[], rootId: NodeId) {
 }
 
 export function isSafeRelPath(p: string) {
-    const normalized = String(p ?? "").replace(/\\/g, "/").trim();
-    if (!normalized) return false;
-    if (normalized.startsWith("/")) return false;
-    if (normalized.includes("\0")) return false;
-
-    const parts = normalized.split("/");
-    return parts.every((part) => !!part && part !== "." && part !== "..");
+    return splitSafeRelativePath(p).length > 0;
 }
 
 export function pathOf(nodes: FSNode[], id: NodeId): string {
@@ -152,11 +142,12 @@ export function pathOf(nodes: FSNode[], id: NodeId): string {
 
 export function exportProjectFiles(
     nodes: FSNode[],
+    options?: ProjectPathOptions,
 ): Array<{ path: string; content: string }> {
     const files = nodes.filter((n): n is FileNode => n.kind === "file");
 
     const out = files.map((f) => ({
-        path: relativeProjectPathOf(nodes, f.id),
+        path: relativeProjectPathOf(nodes, f.id, options),
         content: f.content ?? "",
     }));
 
@@ -170,15 +161,11 @@ export function exportProjectFiles(
 }
 
 export function exportWorkspaceEntries(nodes: FSNode[]): WorkspaceSyncEntry[] {
-    const syntheticRoot = isSyntheticProjectRoot(nodes);
-    const syntheticRootName = syntheticRoot?.name ?? null;
-
     const folders = nodes
         .filter((n): n is FolderNode => n.kind === "folder")
-        .filter((n) => !syntheticRoot || n.id !== syntheticRoot.id)
         .map((folder) => ({
             kind: "directory" as const,
-            path: relativeNodePathOf(nodes, folder.id, syntheticRootName),
+            path: rawNodePathOf(nodes, folder.id),
         }))
         .filter((entry) => !!entry.path && isSafeRelPath(entry.path))
         .sort((a, b) => {
@@ -188,19 +175,25 @@ export function exportWorkspaceEntries(nodes: FSNode[]): WorkspaceSyncEntry[] {
             return a.path.localeCompare(b.path);
         });
 
-    const files = exportProjectFiles(nodes)
+    const files = nodes
+        .filter((n): n is FileNode => n.kind === "file")
         .map((file) => ({
             kind: "file" as const,
-            path: file.path,
-            content: file.content,
+            path: rawNodePathOf(nodes, file.id),
+            content: file.content ?? "",
         }))
+        .filter((entry) => !!entry.path && isSafeRelPath(entry.path))
         .sort((a, b) => a.path.localeCompare(b.path));
 
     return [...folders, ...files];
 }
-export function relativeProjectPathOf(nodes: FSNode[], id: NodeId): string {
-    const syntheticRoot = isSyntheticProjectRoot(nodes);
-    const syntheticRootName = syntheticRoot?.name ?? null;
-
-    return relativeNodePathOf(nodes, id, syntheticRootName);
+function rawNodePathOf(nodes: FSNode[], id: NodeId): string {
+    return normalizeSafeRelativePath(pathOf(nodes, id));
+}
+export function relativeProjectPathOf(
+    nodes: FSNode[],
+    id: NodeId,
+    options?: ProjectPathOptions,
+): string {
+    return relativeNodePathOf(nodes, id, options);
 }

@@ -1,11 +1,14 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
+import {
+    isRunnerManagedDirPath,
+    isRunnerManagedFilePath,
+    RUNNER_MANAGED_DIRS,
+} from "./runnerManagedWorkspace.js";
 
 const MAX_ENTRIES = 400;
 const MAX_TOTAL_BYTES = 5 * 1024 * 1024;
-const RUNNER_MANAGED_FILES = new Set([".bash_history"]);
-const RUNNER_MANAGED_DIRS = new Set(["build"]);
 const ALLOWED_EXTENSIONS = new Set([
     ".py",
     ".js",
@@ -135,6 +138,10 @@ export async function replaceWorkspaceFiles(
                 throw new Error(`Unsafe path: ${relPath}`);
             }
 
+            if (isRunnerManagedFilePath(relPath) || isRunnerManagedDirPath(relPath)) {
+                return null;
+            }
+
             if (seenPaths.has(relPath)) {
                 throw new Error(`Duplicate path: ${relPath}`);
             }
@@ -165,7 +172,7 @@ export async function replaceWorkspaceFiles(
                 path: relPath,
                 content,
             };
-        }),
+        }).filter((entry): entry is NonNullable<typeof entry> => entry !== null),
     );
 
     await fs.mkdir(workspaceDir, { recursive: true, mode: 0o777 });
@@ -236,7 +243,7 @@ export async function replaceWorkspaceFiles(
         if (desiredFiles.has(relPath)) continue;
 
         // Keep terminal history even when the editor replaces the workspace.
-        if (RUNNER_MANAGED_FILES.has(relPath)) continue;
+        if (isRunnerManagedFilePath(relPath)) continue;
 
         const abs = path.join(workspaceDir, relPath);
         await fs.rm(abs, { force: true });
@@ -248,7 +255,7 @@ export async function replaceWorkspaceFiles(
 
     const dirsToDelete = [...currentDirs]
         .filter((relPath) => !keepDirs.has(relPath))
-        .filter((relPath) => !RUNNER_MANAGED_DIRS.has(relPath))
+        .filter((relPath) => !isRunnerManagedDirPath(relPath))
         .sort((a, b) => {
             const da = a.split("/").length;
             const db = b.split("/").length;

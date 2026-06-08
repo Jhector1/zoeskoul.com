@@ -1,66 +1,36 @@
 import type {
-    WorkspaceStateV2,
     FSNode,
-    FileNode,
     FolderNode,
+    WorkspaceStateV2,
+    FileNode,
     NodeId,
 } from "@/components/ide/types";
 import { uid } from "@/components/ide/utils";
 import { pathOf, relativeProjectPathOf } from "@/components/ide/fsTree";
+import {
+    isRunnerManagedWorkspacePath,
+    normalizeSafeRelativePath,
+    normalizeUiProjectPath,
+} from "@/lib/projects/workspacePathMapping";
 
 export type TerminalSnapshotFile = {
     path: string;
     content: string;
 };
 
-function normalizeParts(input: string) {
-    return String(input ?? "")
-        .replace(/\\/g, "/")
-        .split("/")
-        .map((x) => x.trim())
-        .filter((x) => !!x && x !== "." && x !== "..");
-}
-
-function detectSyntheticRoot(prior: WorkspaceStateV2) {
-    if (prior.language === "sql") return null;
-
-    const topFolders = prior.nodes.filter(
-        (n): n is FolderNode => n.kind === "folder" && n.parentId === null,
-    );
-    const topFiles = prior.nodes.filter(
-        (n): n is FileNode => n.kind === "file" && n.parentId === null,
-    );
-
-    if (topFiles.length === 0 && topFolders.length === 1 && topFolders[0].name === "src") {
-        return "src";
-    }
-
+function detectSyntheticRoot(_prior: WorkspaceStateV2) {
+    // Keep Explorer paths and runner paths identical. "src" is a real folder,
+    // not a virtual root, for terminal/cloud synchronization.
     return null;
-}
-
-function relativeNodePath(
-    nodes: FSNode[],
-    id: NodeId,
-    syntheticRoot: string | null,
-) {
-    const full = pathOf(nodes, id);
-    const parts = full.split("/").filter(Boolean);
-
-    if (syntheticRoot && parts[0] === syntheticRoot) {
-        parts.shift();
-    }
-
-    return parts.join("/");
 }
 
 function filePathIfAny(
     ws: WorkspaceStateV2,
     id: NodeId,
-    syntheticRoot: string | null,
 ) {
     const node = ws.nodes.find((n) => n.id === id);
     if (!node || node.kind !== "file") return null;
-    return relativeProjectPathOf(ws.nodes, id) || relativeNodePath(ws.nodes, id, syntheticRoot);
+    return relativeProjectPathOf(ws.nodes, id);
 }
 
 function folderPathIfAny(
@@ -70,16 +40,20 @@ function folderPathIfAny(
 ) {
     const node = ws.nodes.find((n) => n.id === id);
     if (!node || node.kind !== "folder") return null;
-    return relativeNodePath(ws.nodes, id, syntheticRoot);
+    return normalizeUiProjectPath(pathOf(ws.nodes, id), syntheticRoot);
 }
 
-function uniqueSnapshotFiles(files: TerminalSnapshotFile[]) {
+function uniqueSnapshotFiles(
+    files: TerminalSnapshotFile[],
+    syntheticRoot?: string | null,
+) {
     const byPath = new Map<string, string>();
 
     for (const file of files) {
-        const parts = normalizeParts(file.path);
-        if (!parts.length) continue;
-        byPath.set(parts.join("/"), String(file.content ?? ""));
+        const path = normalizeUiProjectPath(file.path, syntheticRoot);
+        if (!path) continue;
+        if (isRunnerManagedWorkspacePath(path, syntheticRoot)) continue;
+        byPath.set(path, String(file.content ?? ""));
     }
 
     return Array.from(byPath.entries())
@@ -92,11 +66,11 @@ export function mergeWorkspaceWithTerminalSnapshot(args: {
     files: TerminalSnapshotFile[];
 }): WorkspaceStateV2 {
     const { prior } = args;
-    const snapshotFiles = uniqueSnapshotFiles(args.files);
-
-    if (!snapshotFiles.length) return prior;
 
     const syntheticRoot = detectSyntheticRoot(prior);
+    const snapshotFiles = uniqueSnapshotFiles(args.files, syntheticRoot);
+
+    if (!snapshotFiles.length) return prior;
     const timestamp = Date.now();
 
     const nodes: FSNode[] = [];
@@ -148,7 +122,7 @@ export function mergeWorkspaceWithTerminalSnapshot(args: {
     };
 
     for (const file of snapshotFiles) {
-        const parts = normalizeParts(file.path);
+        const parts = normalizeSafeRelativePath(file.path).split("/").filter(Boolean);
         if (!parts.length) continue;
 
         const name = parts[parts.length - 1]!;
@@ -172,8 +146,8 @@ export function mergeWorkspaceWithTerminalSnapshot(args: {
     const firstFileId =
         nodes.find((n): n is FileNode => n.kind === "file")?.id ?? "";
 
-    const prevActivePath = filePathIfAny(prior, prior.activeFileId, syntheticRoot);
-    const prevEntryPath = filePathIfAny(prior, prior.entryFileId, syntheticRoot);
+    const prevActivePath = filePathIfAny(prior, prior.activeFileId);
+    const prevEntryPath = filePathIfAny(prior, prior.entryFileId);
 
     const activeFileId =
         (prevActivePath ? filePathToId.get(prevActivePath) : undefined) ?? firstFileId;
@@ -184,7 +158,7 @@ export function mergeWorkspaceWithTerminalSnapshot(args: {
     const openTabs = Array.from(
         new Set(
             prior.openTabs
-                .map((id) => filePathIfAny(prior, id, syntheticRoot))
+                .map((id) => filePathIfAny(prior, id))
                 .filter((p): p is string => !!p)
                 .map((p) => filePathToId.get(p))
                 .filter((id): id is string => !!id),
@@ -212,7 +186,7 @@ export function mergeWorkspaceWithTerminalSnapshot(args: {
     for (const path of [prevActivePath, prevEntryPath]) {
         if (!path) continue;
 
-        const parts = normalizeParts(path);
+        const parts = normalizeSafeRelativePath(path).split("/").filter(Boolean);
         let rel = "";
 
         for (const part of parts.slice(0, -1)) {

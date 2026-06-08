@@ -7,10 +7,13 @@ import type {
 } from "@/components/ide/types";
 import { uid } from "@/components/ide/utils";
 import {
-    isSafeRelPath,
     pathOf,
 } from "@/components/ide/fsTree";
 import { repairWorkspaceStateV2 } from "@/components/ide/storage";
+import {
+    isRunnerManagedWorkspacePath,
+    normalizeUiProjectPath,
+} from "@/lib/projects/workspacePathMapping";
 
 type SnapshotEntry =
     | { kind?: "file"; path: string; content: string }
@@ -26,11 +29,11 @@ function now() {
     return Date.now();
 }
 
-function normalizeRelPath(input: string) {
-    const p = String(input ?? "").replace(/\\/g, "/").trim();
-    if (!p) return "";
-    const clean = p.split("/").filter(Boolean).join("/");
-    return isSafeRelPath(clean) ? clean : "";
+function normalizeRelPath(
+    input: string,
+    syntheticRootName?: string | null,
+) {
+    return normalizeUiProjectPath(input, syntheticRootName);
 }
 
 function sortByDepthThenName(paths: string[]) {
@@ -42,18 +45,10 @@ function sortByDepthThenName(paths: string[]) {
     });
 }
 
-function detectSyntheticRoot(prior: WorkspaceStateV2): FolderNode | null {
-    const topFolders = prior.nodes.filter(
-        (n): n is FolderNode => n.kind === "folder" && n.parentId === null,
-    );
-    const topFiles = prior.nodes.filter(
-        (n): n is FileNode => n.kind === "file" && n.parentId === null,
-    );
-
-    if (topFolders.length === 1 && topFiles.length === 0) {
-        return topFolders[0];
-    }
-
+function detectSyntheticRoot(_prior: WorkspaceStateV2): FolderNode | null {
+    // The Explorer path is the real workspace path. A top-level "src" folder must
+    // stay a real folder so terminal commands such as `touch ft.txt` at
+    // /workspace create a root-level file beside src, not a file inside src.
     return null;
 }
 
@@ -62,16 +57,7 @@ function relativeNodePathOf(
     id: NodeId,
     syntheticRootName?: string | null,
 ) {
-    const full = pathOf(nodes, id);
-    const parts = full.split("/").filter(Boolean);
-
-    if (syntheticRootName && parts[0] === syntheticRootName) {
-        parts.shift();
-    } else if (!syntheticRootName && parts.length > 1) {
-        parts.shift();
-    }
-
-    return normalizeRelPath(parts.join("/"));
+    return normalizeRelPath(pathOf(nodes, id), syntheticRootName);
 }
 
 function priorFilePathMap(
@@ -109,12 +95,16 @@ function priorFolderPathMap(
     return out;
 }
 
-function normalizeSnapshotEntries(entries: SnapshotEntry[]) {
+function normalizeSnapshotEntries(
+    entries: SnapshotEntry[],
+    syntheticRootName?: string | null,
+) {
     const out = new Map<string, SnapshotEntry>();
 
     for (const entry of entries ?? []) {
-        const rel = normalizeRelPath(entry?.path);
+        const rel = normalizeRelPath(entry?.path, syntheticRootName);
         if (!rel) continue;
+        if (isRunnerManagedWorkspacePath(rel, syntheticRootName)) continue;
 
         if ((entry as any)?.kind === "directory") {
             out.set(rel, { kind: "directory", path: rel });
@@ -129,14 +119,17 @@ function normalizeSnapshotEntries(entries: SnapshotEntry[]) {
 
     return out;
 }
-
 function buildDesiredEntries(args: {
     snapshotFiles: SnapshotEntry[];
     priorFiles: Map<string, FileNode>;
     priorFolders: Map<string, FolderNode>;
     dirtyUiPaths: Set<string>;
+    syntheticRootName?: string | null;
 }) {
-    const map = normalizeSnapshotEntries(args.snapshotFiles);
+    const map = normalizeSnapshotEntries(
+        args.snapshotFiles,
+        args.syntheticRootName,
+    );
 
     for (const rel of args.dirtyUiPaths) {
         const priorFile = args.priorFiles.get(rel);
@@ -222,24 +215,26 @@ export function mergeTerminalSnapshotIntoWorkspace(
     args: MergeArgs,
 ): WorkspaceStateV2 {
     const { prior, snapshotFiles } = args;
-    const dirtyUiPaths = new Set(
-        [...(args.dirtyUiPaths ?? [])]
-            .map(normalizeRelPath)
-            .filter(Boolean),
-    );
 
     const syntheticRoot = detectSyntheticRoot(prior);
     const syntheticRootId = syntheticRoot?.id ?? null;
     const syntheticRootName = syntheticRoot?.name ?? null;
 
+    const dirtyUiPaths = new Set(
+        [...(args.dirtyUiPaths ?? [])]
+            .map((path) => normalizeRelPath(path, syntheticRootName))
+            .filter((path) => !isRunnerManagedWorkspacePath(path, syntheticRootName))
+            .filter(Boolean),
+    );
+
     const priorFiles = priorFilePathMap(prior, syntheticRootName);
     const priorFolders = priorFolderPathMap(prior, syntheticRootId, syntheticRootName);
-
     const desiredEntries = buildDesiredEntries({
         snapshotFiles,
         priorFiles,
         priorFolders,
         dirtyUiPaths,
+        syntheticRootName,
     });
 
     const desiredFolderRelPaths = new Set<string>();

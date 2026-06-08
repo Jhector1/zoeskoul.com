@@ -220,7 +220,9 @@ function appendHistoryLine(existing: string, line: string) {
 }
 
 function isHiddenHistoryEntry(entry: WorkspaceSyncEntry) {
-    return entry.kind !== "directory" && normalizePath(entry.path) === HISTORY_FILE_PATH;
+    if (entry.kind === "directory") return false;
+    const parts = normalizePath(entry.path).split("/").filter(Boolean);
+    return parts[parts.length - 1] === HISTORY_FILE_PATH;
 }
 
 function augmentEntriesWithHistory(

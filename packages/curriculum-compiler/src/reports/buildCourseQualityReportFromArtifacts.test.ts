@@ -86,7 +86,7 @@ afterEach(async () => {
 
 describe("buildCourseQualityReportFromArtifacts", () => {
     it("counts every available topic artifact instead of only the current-run subset", async () => {
-        const blueprint = {
+        const blueprint: CourseBlueprint = {
             subjectSlug,
             courseSlug: "artifact-aggregation",
             profileId: "python",
@@ -96,11 +96,20 @@ describe("buildCourseQualityReportFromArtifacts", () => {
             targetLocales: [],
             level: "beginner",
             title: "Artifact Aggregation",
-        } as CourseBlueprint;
+            audience: ["Beginning Python learners"],
+            goals: ["Practice basic helper functions across multiple topics."],
+            constraints: {
+                moduleCount: 2,
+                topicsPerModuleMin: 1,
+                topicsPerModuleMax: 2,
+            },
+        };
 
-        const spec = {
+        const spec: CourseSpec = {
+            authoringFormatVersion: "1.0",
             subjectSlug: "python",
             courseSlug: "artifact-aggregation",
+            catalogSlug: "python",
             profileId: "python",
             workspaceProfileId: "browser-python-files-runner",
             workspacePolicyId: "python-browser-workspace",
@@ -169,7 +178,7 @@ describe("buildCourseQualityReportFromArtifacts", () => {
                     ],
                 },
             ],
-        } as CourseSpec;
+        };
 
         const plan = buildPlanFromSpec({ blueprint, spec });
         const nodes = listTopicPlanNodes({ plan });

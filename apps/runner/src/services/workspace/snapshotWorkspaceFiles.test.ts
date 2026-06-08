@@ -108,4 +108,42 @@ describe("snapshotWorkspaceFiles", () => {
             ]),
         );
     });
+
+    it("does not include runner-managed metadata files", async () => {
+        await fs.mkdir(path.join(root, "src"), { recursive: true });
+        await fs.writeFile(path.join(root, "src", "main.py"), "print('ok')\n");
+        await fs.writeFile(path.join(root, ".bash_history"), "python src/main.py\n");
+        await fs.writeFile(path.join(root, "src", ".bash_history"), "bad nested history\n");
+
+        const snapshot = await snapshotWorkspaceFiles(root);
+
+        expect(snapshot).toEqual(
+            expect.arrayContaining([
+                {
+                    kind: "directory",
+                    path: "src",
+                },
+                {
+                    kind: "file",
+                    path: "src/main.py",
+                    content: "print('ok')\n",
+                },
+            ]),
+        );
+
+        expect(snapshot).not.toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    path: ".bash_history",
+                }),
+            ]),
+        );
+        expect(snapshot).not.toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    path: "src/.bash_history",
+                }),
+            ]),
+        );
+    });
 });
