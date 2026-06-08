@@ -1,12 +1,42 @@
+x-logging: &default_logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
 services:
+  caddy:
+    image: ${CADDY_IMAGE:-caddy:2-alpine}
+    restart: unless-stopped
+    depends_on:
+      runner:
+        condition: service_healthy
+      judge0:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      CADDY_EMAIL: ${CADDY_EMAIL:?required}
+      RUNNER_DOMAIN: ${RUNNER_DOMAIN:?required}
+      JUDGE0_DOMAIN: ${JUDGE0_DOMAIN:?required}
+      JUDGE0_AUTHN_TOKEN: ${JUDGE0_AUTHN_TOKEN:?required}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - runnernet
+    logging: *default_logging
+
   runner:
     image: ghcr.io/${GHCR_OWNER:?required}/zoeskoul-runner:${IMAGE_TAG:-prod}
     restart: unless-stopped
     user: ${RUNNER_CONTAINER_USER:-1000:1000}
     env_file:
       - .env
-    ports:
-      - "${RUNNER_PRIVATE_IP:?required}:4001:4001"
+    expose:
+      - "4001"
     environment:
       NODE_ENV: production
       PORT: 4001
@@ -34,11 +64,7 @@ services:
     pids_limit: 256
     mem_limit: ${RUNNER_SERVICE_MEM_LIMIT:-512m}
     cpus: ${RUNNER_SERVICE_CPUS:-1.0}
-    logging: &default_logging
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "5"
+    logging: *default_logging
     healthcheck:
       test: ["CMD-SHELL", "node -e \"const http=require('http'); const req=http.get('http://127.0.0.1:4001/healthz',res=>process.exit(res.statusCode===200?0:1)); req.on('error',()=>process.exit(1)); req.setTimeout(3000,()=>{req.destroy();process.exit(1)});\""]
       interval: 15s
@@ -179,5 +205,7 @@ networks:
     driver: bridge
 
 volumes:
+  caddy_data:
+  caddy_config:
   judge0_db:
   judge0_redis:
