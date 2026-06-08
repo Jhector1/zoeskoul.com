@@ -11,8 +11,8 @@ RUN corepack enable
 
 COPY . .
 
-RUN pnpm install --frozen-lockfile
-RUN pnpm --filter @zoeskoul/web... build
+RUN DATABASE_URL="postgresql://zoeskoul:zoeskoul@localhost:5432/zoeskoul?schema=public" pnpm install --frozen-lockfile
+RUN DATABASE_URL="postgresql://zoeskoul:zoeskoul@localhost:5432/zoeskoul?schema=public" pnpm --filter @zoeskoul/web... build
 
 EXPOSE 3000
 
