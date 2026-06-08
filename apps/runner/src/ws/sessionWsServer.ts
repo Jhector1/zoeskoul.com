@@ -176,8 +176,7 @@ export function attachSessionWsServer() {
             console.error("RUNNER WS forbidden", {
                 sessionId,
                 hasSession: !!session,
-                ownerKey: session?.ownerKey,
-                actor: claims.actor,
+                ownerMatches: session?.ownerKey === claims.actor,
             });
             safeDeny(socket, 403, "Forbidden");
             return true;

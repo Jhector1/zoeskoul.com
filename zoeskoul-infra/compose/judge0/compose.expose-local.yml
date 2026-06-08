@@ -1,0 +1,4 @@
+services:
+  judge0:
+    ports:
+      - "${JUDGE0_HOST_BIND:-127.0.0.1}:${JUDGE0_HOST_PORT:-2358}:2358"

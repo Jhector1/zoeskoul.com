@@ -1,36 +1,51 @@
 import { buildRunnerHeaders } from "@zoeskoul/curriculum-runtime";
 
-const RUNNER_BASE_URL = process.env.RUNNER_BASE_URL!;
+function getRunnerBaseUrl() {
+  const base =
+    process.env.RUNNER_BASE_URL?.trim() || process.env.RUNNER_URL?.trim();
+  if (!base) {
+    throw new Error("Missing RUNNER_BASE_URL");
+  }
+
+  const normalized = base.replace(/\/+$/, "");
+  if (!/^https?:\/\//i.test(normalized)) {
+    throw new Error(
+      `RUNNER_BASE_URL must start with http:// or https://. Got: ${normalized}`,
+    );
+  }
+
+  return normalized;
+}
 
 export class RunnerHttpError extends Error {
-    status: number;
+  status: number;
 
-    constructor(status: number, message: string) {
-        super(message);
-        this.status = status;
-    }
+  constructor(status: number, message: string) {
+    super(message);
+    this.status = status;
+  }
 }
 
 export async function runnerPost<T>(
-    path: string,
-    actorKey: string,
-    body?: unknown,
+  path: string,
+  actorKey: string,
+  body?: unknown,
 ): Promise<T> {
-    const res = await fetch(`${RUNNER_BASE_URL}${path}`, {
-        method: "POST",
-        headers: buildRunnerHeaders({ actorKey }),
-        body: body == null ? undefined : JSON.stringify(body),
-        cache: "no-store",
-    });
+  const res = await fetch(`${getRunnerBaseUrl()}${path}`, {
+    method: "POST",
+    headers: buildRunnerHeaders({ actorKey }),
+    body: body == null ? undefined : JSON.stringify(body),
+    cache: "no-store",
+  });
 
-    const data = await res.json().catch(() => ({}));
+  const data = await res.json().catch(() => ({}));
 
-    if (!res.ok) {
-        throw new RunnerHttpError(
-            res.status,
-            (data as any)?.error ?? `Runner error: ${res.status}`,
-        );
-    }
+  if (!res.ok) {
+    throw new RunnerHttpError(
+      res.status,
+      (data as any)?.error ?? `Runner error: ${res.status}`,
+    );
+  }
 
-    return data as T;
+  return data as T;
 }

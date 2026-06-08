@@ -2,22 +2,34 @@ import { createServer } from "node:http";
 import { app } from "./app.js";
 import { env } from "./lib/env.js";
 import { attachSessionWsServer } from "./ws/sessionWsServer.js";
+import { cleanupRunnerOrphansOnStartup } from "./services/docker/runnerReaper.js";
+import { pruneStartRateLimitBuckets } from "./services/sessions/startRateLimit.js";
 
-const server = createServer(app);
-const handleSessionUpgrade = attachSessionWsServer();
+async function main() {
+  const server = createServer(app);
+  const handleSessionUpgrade = attachSessionWsServer();
 
-server.on("upgrade", (req, socket, head) => {
+  server.on("upgrade", (req, socket, head) => {
     const handled = handleSessionUpgrade(req, socket, head);
     if (handled) return;
 
     socket.destroy();
-});
+  });
 
-server.listen(env.port, "0.0.0.0", () => {
-    const publicUrl = process.env.NEXTAUTH_URL?.trim();
-    console.log(
-        publicUrl
-            ? `runner listening on ${publicUrl}`
-            : `runner listening on 0.0.0.0:${env.port}`,
-    );
-});
+  await cleanupRunnerOrphansOnStartup().catch((err) => {
+    console.error("RUNNER startup orphan cleanup failed", {
+      message: err instanceof Error ? err.message : String(err),
+    });
+  });
+
+  const rateLimitPruneTimer = setInterval(pruneStartRateLimitBuckets, 60_000);
+  if (typeof rateLimitPruneTimer.unref === "function") {
+    rateLimitPruneTimer.unref();
+  }
+
+  server.listen(env.port, "0.0.0.0", () => {
+    console.log(`runner listening on 0.0.0.0:${env.port}`);
+  });
+}
+
+void main();

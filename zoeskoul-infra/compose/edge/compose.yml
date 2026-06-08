@@ -1,0 +1,60 @@
+services:
+  caddy:
+    image: ${CADDY_IMAGE:-caddy:2.9.1}
+    container_name: zoeskoul-edge-caddy
+    restart: unless-stopped
+    environment:
+      CADDY_WEB_SITE: ${CADDY_WEB_SITE:-http://localhost}
+      CADDY_RUNNER_SITE: ${CADDY_RUNNER_SITE:-http://runner.localhost}
+      CADDY_JUDGE0_SITE: ${CADDY_JUDGE0_SITE:-http://judge0.localhost}
+      WEB_UPSTREAM: ${WEB_UPSTREAM:-web:3000}
+      RUNNER_UPSTREAM: ${RUNNER_UPSTREAM:-runner:4001}
+      JUDGE0_UPSTREAM: ${JUDGE0_UPSTREAM:-judge0:2358}
+      RUNNER_EDGE_SECRET: ${RUNNER_EDGE_SECRET:?required}
+      JUDGE0_EDGE_SECRET: ${JUDGE0_EDGE_SECRET:?required}
+      JUDGE0_AUTHN_HEADER: ${JUDGE0_AUTHN_HEADER:-X-Judge0-Token}
+      JUDGE0_AUTHN_TOKEN: ${JUDGE0_AUTHN_TOKEN:-}
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - edge_web
+      - edge_runner
+      - judge0_internal
+    volumes:
+      - ${INFRA_DIR:?required}/compose/edge/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+      - ${INFRA_DIR:?required}/logs/caddy:/var/log/caddy
+    healthcheck:
+      test: ["CMD-SHELL", "caddy validate --config /etc/caddy/Caddyfile >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 256
+
+volumes:
+  caddy-data:
+  caddy-config:
+
+networks:
+  edge_web:
+    name: ${EDGE_WEB_NETWORK:-zoeskoul-edge-web}
+    external: true
+  edge_runner:
+    name: ${EDGE_RUNNER_NETWORK:-zoeskoul-edge-runner}
+    external: true
+  judge0_internal:
+    name: ${JUDGE0_NETWORK:-zoeskoul-judge0-internal}
+    external: true

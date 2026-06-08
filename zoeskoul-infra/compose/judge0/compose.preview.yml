@@ -1,0 +1,150 @@
+services:
+  judge0-db:
+    image: ${JUDGE0_POSTGRES_IMAGE:-postgres:16.8}
+    container_name: zoeskoul-judge0-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${JUDGE0_POSTGRES_USER:?required}
+      POSTGRES_PASSWORD: ${JUDGE0_POSTGRES_PASSWORD:?required}
+      POSTGRES_DB: ${JUDGE0_POSTGRES_DB:?required}
+    volumes:
+      - judge0-postgres-data:/var/lib/postgresql/data
+    networks:
+      - judge0_internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+    logging: &default_logging
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    security_opt:
+      - no-new-privileges:true
+
+  judge0-redis:
+    image: ${JUDGE0_REDIS_IMAGE:-redis:7.4-alpine}
+    container_name: zoeskoul-judge0-redis
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --requirepass
+      - ${JUDGE0_REDIS_PASSWORD:?required}
+    volumes:
+      - judge0-redis-data:/data
+    networks:
+      - judge0_internal
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a $$JUDGE0_REDIS_PASSWORD ping | grep PONG"]
+      interval: 10s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+    environment:
+      JUDGE0_REDIS_PASSWORD: ${JUDGE0_REDIS_PASSWORD:?required}
+    logging: *default_logging
+    security_opt:
+      - no-new-privileges:true
+
+  judge0:
+    image: ${JUDGE0_IMAGE:-judge0/judge0:1.13.1}
+    container_name: zoeskoul-judge0-api
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    tmpfs:
+      - /run:rw,nosuid,size=64m
+      - /tmp:rw,nosuid,size=512m
+    environment: &judge0_env
+      POSTGRES_HOST: judge0-db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${JUDGE0_POSTGRES_DB:?required}
+      POSTGRES_USER: ${JUDGE0_POSTGRES_USER:?required}
+      POSTGRES_PASSWORD: ${JUDGE0_POSTGRES_PASSWORD:?required}
+      REDIS_HOST: judge0-redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${JUDGE0_REDIS_PASSWORD:?required}
+      RAILS_ENV: ${JUDGE0_RAILS_ENV:-production}
+      ENABLE_WAIT_RESULT: ${JUDGE0_ENABLE_WAIT_RESULT:-true}
+      DISABLE_MEMORY_LIMIT: ${JUDGE0_DISABLE_MEMORY_LIMIT:-false}
+      AUTHN_HEADER: ${JUDGE0_AUTHN_HEADER:-X-Judge0-Token}
+      AUTHN_TOKEN: ${JUDGE0_AUTHN_TOKEN:?required}
+      AUTHZ_HEADER: ${JUDGE0_AUTHZ_HEADER:-X-Judge0-Admin}
+      AUTHZ_TOKEN: ${JUDGE0_AUTHZ_TOKEN:?required}
+      ALLOW_ORIGIN: ${JUDGE0_ALLOW_ORIGIN:-}
+      ENABLE_COMPILER_OPTIONS: ${JUDGE0_ENABLE_COMPILER_OPTIONS:-false}
+      ENABLE_COMMAND_LINE_ARGUMENTS: ${JUDGE0_ENABLE_COMMAND_LINE_ARGUMENTS:-false}
+      ENABLE_SUBMISSION_DELETE: ${JUDGE0_ENABLE_SUBMISSION_DELETE:-false}
+      ENABLE_BATCHED_SUBMISSIONS: ${JUDGE0_ENABLE_BATCHED_SUBMISSIONS:-false}
+      ENABLE_CALLBACKS: ${JUDGE0_ENABLE_CALLBACKS:-false}
+      MAX_QUEUE_SIZE: ${JUDGE0_MAX_QUEUE_SIZE:-50}
+      CPU_TIME_LIMIT: ${JUDGE0_CPU_TIME_LIMIT:-2}
+      MAX_CPU_TIME_LIMIT: ${JUDGE0_MAX_CPU_TIME_LIMIT:-5}
+      WALL_TIME_LIMIT: ${JUDGE0_WALL_TIME_LIMIT:-5}
+      MAX_WALL_TIME_LIMIT: ${JUDGE0_MAX_WALL_TIME_LIMIT:-10}
+      MEMORY_LIMIT: ${JUDGE0_MEMORY_LIMIT:-128000}
+      MAX_MEMORY_LIMIT: ${JUDGE0_MAX_MEMORY_LIMIT:-256000}
+      STACK_LIMIT: ${JUDGE0_STACK_LIMIT:-64000}
+      MAX_STACK_LIMIT: ${JUDGE0_MAX_STACK_LIMIT:-128000}
+      MAX_FILE_SIZE: ${JUDGE0_MAX_FILE_SIZE:-1024}
+      MAX_PROCESSES_AND_OR_THREADS: ${JUDGE0_MAX_PROCESSES_AND_OR_THREADS:-64}
+    depends_on:
+      judge0-db:
+        condition: service_healthy
+      judge0-redis:
+        condition: service_healthy
+    networks:
+      judge0_internal:
+        aliases:
+          - judge0
+    expose:
+      - "2358"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- --header='${JUDGE0_AUTHN_HEADER:-X-Judge0-Token}: ${JUDGE0_AUTHN_TOKEN}' http://127.0.0.1:2358/about >/dev/null 2>&1 || exit 1"]
+      interval: 20s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+    logging: *default_logging
+    pids_limit: 2048
+    mem_limit: ${JUDGE0_API_MEM_LIMIT:-2g}
+    cpus: ${JUDGE0_API_CPUS:-2.0}
+
+  judge0-worker:
+    image: ${JUDGE0_IMAGE:-judge0/judge0:1.13.1}
+    container_name: zoeskoul-judge0-worker
+    restart: unless-stopped
+    command: ["./scripts/workers"]
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    tmpfs:
+      - /run:rw,nosuid,size=64m
+      - /tmp:rw,nosuid,size=1g
+    environment: *judge0_env
+    depends_on:
+      judge0-db:
+        condition: service_healthy
+      judge0-redis:
+        condition: service_healthy
+    networks:
+      - judge0_internal
+    logging: *default_logging
+    pids_limit: 4096
+    mem_limit: ${JUDGE0_WORKER_MEM_LIMIT:-3g}
+    cpus: ${JUDGE0_WORKER_CPUS:-2.0}
+
+volumes:
+  judge0-postgres-data:
+  judge0-redis-data:
+
+networks:
+  judge0_internal:
+    name: ${JUDGE0_NETWORK:-zoeskoul-judge0-internal}
+    external: true
