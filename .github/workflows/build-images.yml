@@ -4,7 +4,17 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
+    inputs:
+      build_web:
+        description: "Also build and push the web Docker image"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
 
 permissions:
   contents: read
@@ -34,7 +44,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      # Web image is kept for later, but skipped on normal pushes.
+      # Vercel builds apps/web now, so this should not block runner deployment.
       - name: Build and push web image
+        if: github.event_name == 'workflow_dispatch' && inputs.build_web == 'true'
         uses: docker/build-push-action@v6
         with:
           context: .
