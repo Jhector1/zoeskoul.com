@@ -156,3 +156,21 @@ sudo scp -r deploy@5.78.159.224:/opt/edge-proxy ~/Downloads/
 cd ~/Documents/zoeskoul.com/zoeskoul-infra/infra
 ENABLE_JUDGE0=1 ./scripts/compose.sh build runner
 ENABLE_JUDGE0=1 ./scripts/compose.sh up -d --force-recreate runner
+
+
+
+sudo mkdir -p /opt/zoeskoul
+sudo chown -R $USER:$USER /opt/zoeskoul
+
+cd /opt/zoeskoul
+git clone --filter=blob:none --sparse https://github.com/Jhector1/zoeskoul.com.git .
+git sparse-checkout set zoe-infra/hosts/runner
+
+
+cd /opt/zoeskoul
+git status --short
+git pull --ff-only
+git sparse-checkout set zoe-infra/hosts/runner
+
+
+curl -H "X-Judge0-Token: f5c4b25d71d4199ddd4f7aa05b6a6a3c0b2cb9e1a52209844eab359248b5779b" http://judge0.localhost:8080/about

@@ -50,7 +50,7 @@ services:
       HOME: /tmp
     volumes:
       - ${RUNNER_DOCKER_SOCKET_HOST:-/run/user/1000/docker.sock}:${RUNNER_DOCKER_SOCKET_IN_CONTAINER:-/docker.sock}
-      - /var/lib/zoeskoul-runner/workspaces:/workspaces
+      - /workspaces:/workspaces
     depends_on:
       judge0:
         condition: service_healthy
