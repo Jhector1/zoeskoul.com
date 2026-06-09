@@ -45,6 +45,9 @@ services:
       RUNNER_WORKSPACE_ROOT: /workspaces
       RUNNER_IMAGE: ghcr.io/${GHCR_OWNER:?required}/zoeskoul-runtime:${IMAGE_TAG:-prod}
       JUDGE0_URL: http://judge0:2358
+      COREPACK_HOME: /tmp/corepack
+      XDG_CACHE_HOME: /tmp/.cache
+      HOME: /tmp
     volumes:
       - ${RUNNER_DOCKER_SOCKET_HOST:-/run/user/1000/docker.sock}:${RUNNER_DOCKER_SOCKET_IN_CONTAINER:-/docker.sock}
       - /var/lib/zoeskoul-runner/workspaces:/workspaces
@@ -55,7 +58,7 @@ services:
       - runnernet
     read_only: true
     tmpfs:
-      - /tmp:rw,noexec,nosuid,size=64m
+      - /tmp:rw,nosuid,size=128m
       - /run:rw,noexec,nosuid,size=16m
     cap_drop:
       - ALL
