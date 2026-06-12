@@ -8,9 +8,12 @@ type Args = {
   showMobileExplorer: boolean;
   forceDesktopLayout?: boolean;
   isDesktopForcedOff?: boolean;
+  rootRef: React.RefObject<HTMLDivElement | null>;
   editorHostRef: React.RefObject<HTMLDivElement | null>;
   onCloseMobileExplorer: () => void;
 };
+
+const DESKTOP_IDE_MIN_WIDTH = 900;
 
 function safeHeight(value: number, fallback: number) {
   if (!Number.isFinite(value)) return fallback;
@@ -24,6 +27,7 @@ export function useIdeViewport({
   showMobileExplorer,
   forceDesktopLayout = false,
   isDesktopForcedOff = false,
+  rootRef,
   editorHostRef,
   onCloseMobileExplorer,
 }: Args) {
@@ -62,22 +66,32 @@ export function useIdeViewport({
       return;
     }
 
-    const mq = window.matchMedia("(min-width: 1024px)");
     const apply = () => {
-      const next = mq.matches;
+      const rootWidth = rootRef.current?.getBoundingClientRect().width ?? 0;
+      const viewportWidth = window.innerWidth || 0;
+      const next = Math.max(rootWidth, viewportWidth) >= DESKTOP_IDE_MIN_WIDTH;
       setIsDesktop((prev) => (prev === next ? prev : next));
     };
 
     apply();
 
-    if (mq.addEventListener) {
-      mq.addEventListener("change", apply);
-      return () => mq.removeEventListener("change", apply);
+    if (typeof ResizeObserver !== "undefined" && rootRef.current) {
+      const ro = new ResizeObserver(() => {
+        apply();
+      });
+
+      ro.observe(rootRef.current);
+      window.addEventListener("resize", apply);
+
+      return () => {
+        ro.disconnect();
+        window.removeEventListener("resize", apply);
+      };
     }
 
-    mq.addListener(apply);
-    return () => mq.removeListener(apply);
-  }, [forceDesktopLayout, isDesktopForcedOff]);
+    window.addEventListener("resize", apply);
+    return () => window.removeEventListener("resize", apply);
+  }, [forceDesktopLayout, isDesktopForcedOff, rootRef]);
 
   useEffect(() => {
     if (isDesktop) onCloseMobileExplorerRef.current();

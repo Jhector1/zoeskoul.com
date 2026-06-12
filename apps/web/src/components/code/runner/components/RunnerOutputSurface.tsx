@@ -10,7 +10,7 @@ import TerminalPane from "./TerminalPane";
 
 function IdlePane(props: { label: string }) {
     return (
-        <div className="ui-terminal-surface p-3">
+        <div className="ui-terminal-surface flex h-full min-h-0 flex-col justify-end p-3">
             <div className="ui-meta">{props.label} idle</div>
         </div>
     );
@@ -53,21 +53,23 @@ export default function RunnerOutputSurface(props: {
         if (!t) return <IdlePane label="Output" />;
 
         return (
-            <TerminalPane
-                terminal={t.terminal}
-                stdinBuffer={t.stdinBuffer}
-                awaitingInput={t.awaitingInput}
-                inputPrompt={t.inputPrompt}
-                inputLine={t.inputLine}
-                setInputLine={t.setInputLine}
-                inputRef={t.inputRef}
-                busy={controller.busy}
-                runState={controller.runState}
-                disabled={disabled}
-                lastResult={controller.lastResult as any}
-                onSubmitInput={t.submitInput}
-                typedLines={t.typedLines}
-            />
+            <div className="h-full min-h-0">
+                <TerminalPane
+                    terminal={t.terminal}
+                    stdinBuffer={t.stdinBuffer}
+                    awaitingInput={t.awaitingInput}
+                    inputPrompt={t.inputPrompt}
+                    inputLine={t.inputLine}
+                    setInputLine={t.setInputLine}
+                    inputRef={t.inputRef}
+                    busy={controller.busy}
+                    runState={controller.runState}
+                    disabled={disabled}
+                    lastResult={controller.lastResult as any}
+                    onSubmitInput={t.submitInput}
+                    typedLines={t.typedLines}
+                />
+            </div>
         );
     }
 
@@ -76,14 +78,16 @@ export default function RunnerOutputSurface(props: {
         if (!s) return <IdlePane label="Output" />;
 
         return (
-            <PlainTerminal
-                terminalFeed={s.terminalFeed}
-                inputEnabled={s.inputEnabled}
-                busy={controller.busy}
-                disabled={disabled}
-                lastResult={controller.lastResult as any}
-                onSendData={s.sendTerminalData}
-            />
+            <div className="h-full min-h-0">
+                <PlainTerminal
+                    terminalFeed={s.terminalFeed}
+                    inputEnabled={s.inputEnabled}
+                    busy={controller.busy}
+                    disabled={disabled}
+                    lastResult={controller.lastResult as any}
+                    onSendData={s.sendTerminalData}
+                />
+            </div>
         );
     }
 
@@ -91,14 +95,16 @@ export default function RunnerOutputSurface(props: {
     if (!s) return <IdlePane label="Output" />;
 
     return (
-        <XtermTerminal
-            terminalFeed={s.terminalFeed}
-            inputEnabled={s.inputEnabled}
-            busy={controller.busy}
-            disabled={disabled}
-            lastResult={controller.lastResult as any}
-            onSendData={s.sendTerminalData}
-            onResize={s.sendTerminalResize}
-        />
+        <div className="h-full min-h-0">
+            <XtermTerminal
+                terminalFeed={s.terminalFeed}
+                inputEnabled={s.inputEnabled}
+                busy={controller.busy}
+                disabled={disabled}
+                lastResult={controller.lastResult as any}
+                onSendData={s.sendTerminalData}
+                onResize={s.sendTerminalResize}
+            />
+        </div>
     );
 }

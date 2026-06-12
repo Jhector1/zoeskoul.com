@@ -635,18 +635,35 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         showEditor &&
         showTerminal;
 
-    const outerCls = frame === "plain" ? "w-full" : "ui-card w-full p-4";
+    const outerCls =
+        frame === "plain"
+            ? "flex h-full min-h-0 w-full flex-col"
+            : "ui-card flex min-h-0 w-full flex-col p-4";
 
-    const regionStyle: React.CSSProperties | undefined =
+    const shouldFillParentHeight = frame === "plain" && height === "auto";
+    const needsBoundedRunnerHeight = showEditor && showTerminal && !shouldFillParentHeight;
+    const fallbackRegionHeight = isNarrowScreen
+        ? "min(72dvh, 680px)"
+        : "min(68dvh, 760px)";
+    const resolvedRootHeight =
         typeof height === "number"
-            ? {
-                height: isNarrowScreen ? `min(${numericHeight}px, 78dvh)` : numericHeight,
-            }
-            : undefined;
+            ? isNarrowScreen
+                ? `min(${numericHeight}px, 78dvh)`
+                : `${numericHeight}px`
+            : needsBoundedRunnerHeight
+                ? fallbackRegionHeight
+                : undefined;
+
+    const rootStyle: React.CSSProperties | undefined = resolvedRootHeight
+        ? { height: resolvedRootHeight }
+        : undefined;
+    const regionStyle: React.CSSProperties | undefined =
+        typeof height === "number" ? undefined : rootStyle;
 
     const outputLabel = isWeb ? "Preview" : lang === "sql" ? "Results" : "Output";
     const mobileTabAttention = !isWeb && (term.runState !== "idle" || !!term.lastResult);
     const mobileBodyHeight = Math.max(240, (split.mainH || numericHeight) - 48);
+    const surfaceBodyHeight = Math.max(240, split.mainH || numericHeight);
 
     const showStdinEditorUI = showStdinEditor && showEditor && lang !== "sql" && !isWeb;
     const showWorkspaceTerminalTab = workspaceTerminalEnabled;
@@ -777,20 +794,6 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             className={PANEL_EDITOR}
             style={{ touchAction: isNarrowScreen ? "pan-y" : "auto", height: "100%" }}
         >
-            {process.env.NODE_ENV === "development"
-                ? (console.log("[CodeRunner before EditorPane]", {
-                    title,
-                    toolScopeKey,
-                    exerciseStateKey,
-                    effectiveExerciseStateKey,
-                    editorModelKey,
-                    effectiveEditorModelKey,
-                    hasWorkspace: !!workspace,
-                    workspaceEntryFileId: (workspace as any)?.entryFileId,
-                    workspaceActiveFileId: (workspace as any)?.activeFileId,
-                    codePreview: String(code ?? "").slice(0, 120),
-                }) as any)
-                : null}
             {process.env.NODE_ENV !== "production" ? (
                 <textarea
                     data-testid="code-editor-e2e-input"
@@ -827,7 +830,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     );
 
     return (
-        <div className={outerCls} data-testid={testId}>
+        <div className={outerCls} data-testid={testId} style={rootStyle}>
             {showHeaderBar ? (
                 <div className="relative px-2 z-20 overflow-visible @container">
                     <HeaderBar
@@ -922,11 +925,12 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     className={[
                         "relative z-0 mt-3 min-h-0",
                         RUNNER_SURFACE,
+                        "flex-1",
                         isNarrowScreen ? "overscroll-y-auto touch-pan-y" : "overscroll-contain",
-                        height === "auto" ? "h-auto" : "",
+                        rootStyle ? "" : shouldFillParentHeight ? "" : height === "auto" ? "h-auto" : "",
                     ].join(" ")}
                 >
-                    {showEditor && !showTerminal ? renderEditorPane(numericHeight) : null}
+                    {showEditor && !showTerminal ? renderEditorPane(surfaceBodyHeight) : null}
 
                     {!showEditor && showTerminal ? renderOutputPane() : null}
 

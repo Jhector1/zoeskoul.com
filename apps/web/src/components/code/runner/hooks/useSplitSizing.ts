@@ -195,19 +195,12 @@ export function useSplitSizing(args: {
         })
         : termW;
 
-    const autoHalfH = (totalH - splitPx) / 2;
-    const autoHalfW = (totalW - splitPx) / 2;
-
     const effectiveTermH = hasSplit
-        ? userResizedRef.current
-            ? clamp(termH, hardMinTermH, bottomMaxTerm)
-            : clamp(autoHalfH, hardMinTermH, bottomMaxTerm)
+        ? clamp(termH, hardMinTermH, bottomMaxTerm)
         : 0;
 
     const effectiveTermW = hasSplit
-        ? userResizedRef.current
-            ? clamp(termW, hardMinTermW, rightMaxTerm)
-            : clamp(autoHalfW, hardMinTermW, rightMaxTerm)
+        ? clamp(termW, hardMinTermW, rightMaxTerm)
         : clamp(termW, hardMinTermW, rightMaxTerm);
 
     const bottomTermH = effectiveTermH;

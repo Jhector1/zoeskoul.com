@@ -16,7 +16,7 @@ type Props = {
     tabFiles: any[];
     activeFileId: string | null;
     activeFile: any | null;
-    runnerHeight: number;
+    runnerHeight: number | "auto";
     title: string;
     isSql: boolean;
     language: any;
