@@ -10,6 +10,7 @@ import { inferInputPlan } from "../utils/input";
 import { expandPrompts, prettyPrompt, splitStdoutByPrompts } from "../utils/prompts";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import {RunnerLanguage} from "@zoeskoul/code-contracts";
+import { pathOf } from "@/components/ide/fsTree";
 
 function needsMoreInput(lang: RunnerLanguage, r: RunResult) {
     const blob = cleanTermText(
@@ -292,9 +293,50 @@ function diffWorkspaceDirtyPaths(
 
     return dirty;
 }
+
+function patchWorkspaceEntriesWithRunCode(args: {
+    entries: WorkspaceSyncEntry[];
+    workspace?: WorkspaceStateV2 | null;
+    runCode: string;
+}) {
+    const { entries, workspace, runCode } = args;
+
+    if (
+        !workspace ||
+        workspace.version !== 2 ||
+        !Array.isArray((workspace as any).nodes)
+    ) {
+        return sortWorkspaceEntries(entries);
+    }
+
+    const activeFileId = String(
+        (workspace as any).activeFileId || (workspace as any).entryFileId || "",
+    );
+    if (!activeFileId) return sortWorkspaceEntries(entries);
+
+    const activePath = normalizeWorkspacePath(pathOf((workspace as any).nodes, activeFileId));
+    if (!activePath) return sortWorkspaceEntries(entries);
+
+    let changed = false;
+    const patchedEntries = entries.map((entry) => {
+        if ((entry as any).kind === "directory") return entry;
+        if (normalizeWorkspacePath((entry as any).path) !== activePath) return entry;
+        if (String((entry as any).content ?? "") === runCode) return entry;
+
+        changed = true;
+        return {
+            kind: "file" as const,
+            path: activePath,
+            content: runCode,
+        };
+    });
+
+    return sortWorkspaceEntries(changed ? patchedEntries : entries);
+}
 export function useTerminalRunner(args: {
     lang: RunnerLanguage;
     code: string;
+    getLatestCode?: () => string;
     stdin?: string;
     sqlDialect?: SqlDialect;
     sqlSchemaSql?: string;
@@ -331,6 +373,10 @@ export function useTerminalRunner(args: {
         resetTerminalOnRun,
         onRun,
     } = args;
+
+    const getRunCode = React.useCallback(() => {
+        return args.getLatestCode?.() ?? code;
+    }, [args.getLatestCode, code]);
 
     const [stdinBuffer, setStdinBuffer] = React.useState("");
     const [terminal, setTerminal] = React.useState<TermLine[]>([]);
@@ -377,12 +423,12 @@ export function useTerminalRunner(args: {
     }, [abortActiveRun]);
 
     const inputPlan = React.useMemo(() => {
-        const raw = inferInputPlan(lang, code);
+        const raw = inferInputPlan(lang, getRunCode());
         return {
             ...raw,
             prompts: normalizePromptList(raw.prompts),
         };
-    }, [lang, code]);
+    }, [lang, getRunCode]);
 
     const normalizedSeedStdin = React.useMemo(() => {
         const raw = String(stdin ?? "").replace(/\r\n/g, "\n");
@@ -487,7 +533,11 @@ export function useTerminalRunner(args: {
     }, [abortActiveRun, clearInputUi]);
 
     const buildCompletedRunLines = React.useCallback(
-        (r: RunResult, echoedInput: string[] = []): TermLine[] => {
+        (
+            r: RunResult,
+            runCode: string,
+            echoedInput: string[] = [],
+        ): TermLine[] => {
             const lines: TermLine[] = [];
 
             for (const value of echoedInput) {
@@ -504,7 +554,7 @@ export function useTerminalRunner(args: {
                     lang === "python"
                         ? normalizePythonSyntaxErrorForLearners({
                             stderr: r.stderr,
-                            code,
+                            code: runCode,
                             filename: "main.py",
                         })
                         : r.stderr;
@@ -520,7 +570,7 @@ export function useTerminalRunner(args: {
 
             return lines;
         },
-        [lang, code],
+        [lang],
     );
     const syncWorkspaceFilesFromRun = React.useCallback(
         async (result: RunResult | null | undefined) => {
@@ -571,6 +621,7 @@ export function useTerminalRunner(args: {
             }
 
             try {
+                const runCode = getRunCode();
                 const workspaceSubmission = serializeWorkspaceForCodeRun(workspace);
 
                 if (mountedRef.current) {
@@ -592,7 +643,11 @@ export function useTerminalRunner(args: {
                 }
                 runBaselineWorkspaceEntriesRef.current =
                     typeof args.getWorkspaceFiles === "function"
-                        ? sortWorkspaceEntries(args.getWorkspaceFiles())
+                        ? patchWorkspaceEntriesWithRunCode({
+                            entries: args.getWorkspaceFiles(),
+                            workspace,
+                            runCode,
+                        })
                         : [];
                 const data = isSql
                     ? await (() => {
@@ -612,7 +667,7 @@ export function useTerminalRunner(args: {
 
                         return onRun({
                             language: "sql",
-                            code,
+                            code: runCode,
                             sqlDialect: resolvedSqlDialect,
                             sqlSchemaSql: resolvedSchemaSql,
                             sqlSeedSql,
@@ -623,7 +678,7 @@ export function useTerminalRunner(args: {
                     })()
                     : await onRun({
                         language: lang,
-                        code,
+                        code: runCode,
                         stdin: stdinToUse,
                         captureWorkspace:
                             typeof args.onTerminalSnapshotFiles === "function",
@@ -701,7 +756,7 @@ export function useTerminalRunner(args: {
             onRun,
             isSql,
             lang,
-            code,
+            getRunCode,
             resolvedSqlDialect,
             resolvedSchemaSql,
             sqlSeedSql,
@@ -719,6 +774,7 @@ export function useTerminalRunner(args: {
             runId: number,
             lines: string[],
             r: RunResult,
+            runCode: string,
             showWaiting: boolean,
             probePrefix?: string,
         ) => {
@@ -741,7 +797,7 @@ export function useTerminalRunner(args: {
                     lang === "python"
                         ? normalizePythonSyntaxErrorForLearners({
                             stderr: r.stderr,
-                            code,
+                            code: runCode,
                             filename: "main.py",
                         })
                         : r.stderr;
@@ -844,7 +900,7 @@ export function useTerminalRunner(args: {
             setInputPrompt("");
             setRunState("idle");
         },
-        [code, getRunLines, inputPlan.prompts, lang, replaceRunLines, stripTrailingProcessing],
+        [getRunLines, inputPlan.prompts, lang, replaceRunLines, stripTrailingProcessing],
     );
 
     const cancelRun = React.useCallback(() => {
@@ -878,6 +934,7 @@ export function useTerminalRunner(args: {
         if (disabled || runLockRef.current || busy || !allowRun) return;
 
         const runId = runIdRef.current + 1;
+        const runCode = getRunCode();
 
         try {
             setRunState("starting");
@@ -941,7 +998,7 @@ export function useTerminalRunner(args: {
                     return;
                 }
 
-                replaceRunLines(runId, buildCompletedRunLines(r, seedStdinLines));
+                replaceRunLines(runId, buildCompletedRunLines(r, runCode, seedStdinLines));
                 setRunState("idle");
                 return;
             }
@@ -964,7 +1021,7 @@ export function useTerminalRunner(args: {
                     return;
                 }
 
-                rebuildInteractiveTranscript(runId, [], r, false);
+                rebuildInteractiveTranscript(runId, [], r, runCode, false);
                 return;
             }
 
@@ -984,15 +1041,16 @@ export function useTerminalRunner(args: {
                 }
 
                 const more = needsMoreInput(lang, r);
-                rebuildInteractiveTranscript(runId, [], r, more, "");
+                rebuildInteractiveTranscript(runId, [], r, runCode, more, "");
                 probeStdoutRef.current = more ? cleanTermText(r.stdout ?? "") : "";
                 return;
             }
 
             const preOut =
                 lang === "c" || lang === "cpp"
-                    ? extractPreOutputForCCpp(lang, code, inputPlan.prompts)
-                    : [];            const firstPrompt = inputPlan.prompts[0] ? prettyPrompt(inputPlan.prompts[0]) : "";
+                    ? extractPreOutputForCCpp(lang, runCode, inputPlan.prompts)
+                    : [];
+            const firstPrompt = inputPlan.prompts[0] ? prettyPrompt(inputPlan.prompts[0]) : "";
 
             setAwaitingInput(true);
             setInputPrompt(firstPrompt);
@@ -1017,7 +1075,7 @@ export function useTerminalRunner(args: {
         clearInputUi,
         isSql,
         lang,
-        code,
+        getRunCode,
         inputPlan,
         runOnce,
         replaceRunLines,
@@ -1031,8 +1089,9 @@ export function useTerminalRunner(args: {
     const submitInput = React.useCallback(async () => {
         if (isSql || disabled || runLockRef.current || busy) return;
 
-        const runId = activeRunIdRef.current;
-        if (!runId) return;
+            const runId = activeRunIdRef.current;
+            if (!runId) return;
+            const runCode = getRunCode();
 
         try {
             const typed = String(inputLine ?? "");
@@ -1068,7 +1127,7 @@ export function useTerminalRunner(args: {
             if (expectsInput && !probeSafe && next.length < inputPlan.expected) {
                 const preOut =
                     lang === "c" || lang === "cpp"
-                        ? extractPreOutputForCCpp(lang, code, inputPlan.prompts)
+                        ? extractPreOutputForCCpp(lang, runCode, inputPlan.prompts)
                         : [];
                 const rawNextPrompt = promptSlots[next.length] || promptSlots[0] || "";
                 const nextPrompt = rawNextPrompt ? prettyPrompt(rawNextPrompt) : "";
@@ -1114,7 +1173,7 @@ export function useTerminalRunner(args: {
             const more = (probeSafe && needsMoreInput(lang, r)) || false;
             const probePrefix = probeSafe ? probeStdoutRef.current : "";
 
-            rebuildInteractiveTranscript(runId, next, r, more, probePrefix);
+            rebuildInteractiveTranscript(runId, next, r, runCode, more, probePrefix);
             probeStdoutRef.current = probeSafe && more ? cleanTermText(r.stdout ?? "") : "";
         } catch (e) {
             const msg = errorMessage(e);
@@ -1131,6 +1190,7 @@ export function useTerminalRunner(args: {
         typedLines,
         lang,
         inputPlan,
+        getRunCode,
         runOnce,
         replaceRunLines,
         rebuildInteractiveTranscript,
@@ -1138,7 +1198,6 @@ export function useTerminalRunner(args: {
         appendImmediateInputLine,
         appendProcessingLine,
         clearInputUi,
-        code,
     ]);
 
     return {

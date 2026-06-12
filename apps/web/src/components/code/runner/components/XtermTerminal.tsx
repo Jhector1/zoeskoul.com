@@ -184,6 +184,15 @@ export default function XtermTerminal(props: {
         [busy, inputEnabled, lastResult],
     );
 
+    const scrollTerminalToBottom = useCallback(() => {
+        const term = termRef.current;
+        if (!term || !openedRef.current) return;
+
+        try {
+            term.scrollToBottom();
+        } catch {}
+    }, []);
+
     const focusTerminal = useCallback(() => {
         requestAnimationFrame(() => {
             const term = termRef.current;
@@ -211,10 +220,10 @@ export default function XtermTerminal(props: {
             const cell = measureCell(probe);
 
             const horizontalPadding = 16;
-            const verticalPadding = 16;
+            const verticalPadding = 24;
 
             const cols = Math.max(20, Math.floor((rect.width - horizontalPadding) / cell.width));
-            const rows = Math.max(8, Math.floor((rect.height - verticalPadding) / cell.height) - 1);
+            const rows = Math.max(6, Math.floor((rect.height - verticalPadding) / cell.height) - 2);
 
             const prev = lastSizeRef.current;
             if (prev && prev.cols === cols && prev.rows === rows) return;
@@ -224,6 +233,7 @@ export default function XtermTerminal(props: {
             try {
                 term.resize(cols, rows);
                 onResizeRef.current(cols, rows);
+                term.scrollToBottom();
             } catch {}
         };
 
@@ -420,9 +430,10 @@ export default function XtermTerminal(props: {
         term.options.disableStdin = !ready;
 
         if (ready) {
+            scrollTerminalToBottom();
             focusTerminal();
         }
-    }, [inputEnabled, disabled, focusTerminal]);
+    }, [inputEnabled, disabled, focusTerminal, scrollTerminalToBottom]);
 
     useEffect(() => {
         const term = termRef.current;
@@ -473,8 +484,9 @@ export default function XtermTerminal(props: {
             }
         }
 
+        scrollTerminalToBottom();
         prevFeedRef.current = terminalFeed;
-    }, [terminalFeed]);
+    }, [terminalFeed, scrollTerminalToBottom]);
 
     return (
         <div
@@ -496,7 +508,7 @@ export default function XtermTerminal(props: {
 
             <div
                 className={[
-                    "mt-2 flex-1 min-h-[260px] overflow-hidden border-t py-2",
+                    "mt-2 flex-1 min-h-0 overflow-hidden border-t py-2",
                     "bg-white/60 dark:bg-black/30",
                     "border-neutral-200 dark:border-white/10",
                 ].join(" ")}

@@ -557,6 +557,7 @@ export function useWorkspaceTerminalController(
 
     const reset = React.useCallback(() => {
         clearQuietTimer();
+        void cancel().catch(() => {});
         closeSocket();
         lastHandledSeqRef.current = 0;
         nextChunkIdRef.current = 1;
@@ -572,7 +573,7 @@ export function useWorkspaceTerminalController(
         setStarted(false);
         setStarting(false);
         setSyncStatus("idle");
-    }, [clearQuietTimer, closeSocket]);
+    }, [cancel, clearQuietTimer, closeSocket]);
 
     const replaceFiles = React.useCallback(
         async (files: WorkspaceSyncEntry[]): Promise<boolean> => {

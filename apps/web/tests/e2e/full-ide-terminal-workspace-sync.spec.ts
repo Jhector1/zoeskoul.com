@@ -37,6 +37,11 @@ async function installMockTerminalBackend(page: Page) {
             metrics: {
                 codeRuns: number;
             };
+            lastRunRequest: null | {
+                backend: "judge0" | "pty";
+                code?: string;
+                files?: MockEntry[];
+            };
         };
 
         function normalizePath(input: string) {
@@ -64,6 +69,7 @@ async function installMockTerminalBackend(page: Page) {
                 metrics: {
                     codeRuns: 0,
                 },
+                lastRunRequest: null,
             };
         }
 
@@ -558,8 +564,14 @@ async function installMockTerminalBackend(page: Page) {
             const url = typeof input === "string" ? input : input.url;
 
             if (url.endsWith("/api/run/judge0")) {
+                const body = JSON.parse(String(init?.body ?? "{}"));
                 const state = loadState();
                 state.metrics.codeRuns += 1;
+                state.lastRunRequest = {
+                    backend: "judge0",
+                    code: typeof body?.code === "string" ? body.code : undefined,
+                    files: listEntriesFromPayload(body?.files),
+                };
                 saveState(state);
 
                 return createResponse({
@@ -584,6 +596,12 @@ async function installMockTerminalBackend(page: Page) {
                 if (files.length) {
                     replaceWorkspaceEntries(state, scope, files);
                 }
+
+                state.lastRunRequest = {
+                    backend: "pty",
+                    code: typeof body?.code === "string" ? body.code : undefined,
+                    files,
+                };
 
                 state.sessions[sessionId] = {
                     id: sessionId,
@@ -728,6 +746,22 @@ async function mockCodeRunCount(page: Page) {
     });
 }
 
+async function setEditorCode(page: Page, value: string) {
+    await page.getByTestId("code-editor-e2e-input").fill(value);
+}
+
+async function currentEditorCode(page: Page) {
+    return await page.getByTestId("code-editor-e2e-input").inputValue();
+}
+
+async function lastRunRequest(page: Page) {
+    return await page.evaluate(() => {
+        const raw = window.localStorage.getItem("__pw_fullide_terminal_workspace_sync_v1");
+        if (!raw) return null;
+        return JSON.parse(raw)?.lastRunRequest ?? null;
+    });
+}
+
 test.describe("FullIDE terminal/workspace sync regressions", () => {
     test.describe.configure({
         mode: "serial",
@@ -825,5 +859,103 @@ PY
             .toBeGreaterThan(0);
 
         await expect(page.getByText("Permission denied: '/workspace/build'")).toHaveCount(0);
+    });
+
+    test("C++ immediate run keeps edited main.cpp content after the run finishes", async ({
+        page,
+    }) => {
+        test.setTimeout(180_000);
+        await page.goto(CPP_SANDBOX_URL, { timeout: 120_000 });
+        await waitForFullIDE(page, "src/main.cpp");
+
+        const editedCode = `#include <iostream>
+int main() {
+    std::cout << "line 1\\n";
+    std::cout << "line 2\\n";
+    return 0;
+}
+`;
+
+        await setEditorCode(page, editedCode);
+        await page.getByTestId("code-runner-run-button").click();
+
+        await expect
+            .poll(async () => await mockCodeRunCount(page), {
+                timeout: 10_000,
+            })
+            .toBeGreaterThan(0);
+
+        await expect
+            .poll(async () => await currentEditorCode(page), {
+                timeout: 10_000,
+            })
+            .toBe(editedCode);
+    });
+
+    test("C++ repeated runs do not alternate the editor back to stale content", async ({
+        page,
+    }) => {
+        test.setTimeout(180_000);
+        await page.goto(CPP_SANDBOX_URL, { timeout: 120_000 });
+        await waitForFullIDE(page, "src/main.cpp");
+
+        const editedCode = `#include <iostream>
+int main() {
+    std::cout << "fresh a\\n";
+    std::cout << "fresh b\\n";
+    return 0;
+}
+`;
+
+        await setEditorCode(page, editedCode);
+        await page.getByTestId("code-runner-run-button").click();
+        await expect
+            .poll(async () => await currentEditorCode(page), {
+                timeout: 10_000,
+            })
+            .toBe(editedCode);
+
+        await page.getByTestId("code-runner-run-button").click();
+        await expect
+            .poll(async () => await currentEditorCode(page), {
+                timeout: 10_000,
+            })
+            .toBe(editedCode);
+    });
+
+    test("C++ multi-file run serializes the latest active editor content", async ({ page }) => {
+        test.setTimeout(180_000);
+        await page.goto(CPP_SANDBOX_URL, { timeout: 120_000 });
+        await waitForFullIDE(page, "src/main.cpp");
+
+        await sendTerminal(
+            page,
+            `cat > src/helper.txt <<'TXT'
+helper
+TXT
+`,
+        );
+        await expectExplorerHasPath(page, "src/helper.txt");
+
+        const editedCode = `#include <iostream>
+int main() {
+    std::cout << "serialized latest\\n";
+    return 0;
+}
+`;
+
+        await setEditorCode(page, editedCode);
+        await page.getByTestId("code-runner-run-button").click();
+
+        await expect
+            .poll(async () => {
+                const request = await lastRunRequest(page);
+                const files = Array.isArray(request?.files) ? request.files : [];
+                const mainFile = files.find((entry: any) =>
+                    String(entry?.path ?? "").endsWith("main.cpp"),
+                );
+                return mainFile?.content ?? null;
+            }, { timeout: 10_000 })
+            .toBe(editedCode);
     });
 });

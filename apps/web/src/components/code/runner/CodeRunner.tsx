@@ -326,6 +326,20 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const monacoEditorRef = useRef<any>(null);
     const terminalAutoOpenRequestedRef = useRef(false);
+    const readLiveEditorCode = useCallback(() => {
+        const editor = monacoEditorRef.current;
+
+        try {
+            const model = editor?.getModel?.();
+            const live = model?.getValue?.();
+
+            if (typeof live === "string") {
+                return live;
+            }
+        } catch {}
+
+        return code;
+    }, [code]);
 
     const layoutRafRef = useRef<number | null>(null);
 
@@ -444,6 +458,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         runtime,
         lang: runnerLang,
         code,
+        getLatestCode: readLiveEditorCode,
         stdin,
         sqlDialect,
         sqlSchemaSql,
@@ -509,8 +524,21 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [lang, isWeb, outputTab]);
 
     useEffect(() => {
+        terminalAutoOpenRequestedRef.current = false;
+    }, [
+        effectiveExerciseStateKey,
+        workspaceTerminalEnabled,
+        workspaceTerminal?.projectId,
+        workspaceTerminal?.cwd,
+    ]);
+
+    useEffect(() => {
         if (outputTab !== "terminal" || !workspaceTerminalEnabled) {
             terminalAutoOpenRequestedRef.current = false;
+            return;
+        }
+
+        if (workspaceTerm.state === "failed") {
             return;
         }
 
@@ -527,16 +555,14 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         }
 
         terminalAutoOpenRequestedRef.current = true;
-
-        void workspaceTerm.open().catch(() => {
-            terminalAutoOpenRequestedRef.current = false;
-        });
+        void workspaceTerm.open().catch(() => {});
     }, [
         outputTab,
         workspaceTerminalEnabled,
         workspaceTerm.sessionId,
         workspaceTerm.started,
         workspaceTerm.starting,
+        workspaceTerm.state,
         workspaceTerm.open,
     ]);
 
@@ -846,6 +872,11 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
                             if (isNarrowScreen && showEditor && showTerminal) {
                                 setMobilePane("output");
+                            }
+
+                            const liveCode = readLiveEditorCode();
+                            if (liveCode !== code) {
+                                setCode(liveCode);
                             }
 
                             await onBeforeRun?.();

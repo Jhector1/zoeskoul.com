@@ -15,7 +15,7 @@ import {
     RunSessionState,
     type InteractiveLanguage,
 } from "@zoeskoul/code-contracts";
-import { exportWorkspaceEntries } from "@/components/ide/fsTree";
+import { exportWorkspaceEntries, pathOf } from "@/components/ide/fsTree";
 
 type StartedInteractiveSession = {
     ok?: true;
@@ -157,6 +157,46 @@ function diffDirtyUiPaths(
     }
 
     return dirty;
+}
+
+function patchWorkspaceEntriesWithRunCode(args: {
+    entries: WorkspaceSyncEntry[];
+    workspace?: SharedRunnerArgs["workspace"];
+    runCode: string;
+}) {
+    const { entries, workspace, runCode } = args;
+
+    if (
+        !workspace ||
+        workspace.version !== 2 ||
+        !Array.isArray((workspace as any).nodes)
+    ) {
+        return sortEntries(entries);
+    }
+
+    const activeFileId = String(
+        (workspace as any).activeFileId || (workspace as any).entryFileId || "",
+    );
+    if (!activeFileId) return sortEntries(entries);
+
+    const activePath = normalizePath(pathOf((workspace as any).nodes, activeFileId));
+    if (!activePath) return sortEntries(entries);
+
+    let changed = false;
+    const patchedEntries = entries.map((entry) => {
+        if ((entry as any).kind === "directory") return entry;
+        if (normalizePath((entry as any).path) !== activePath) return entry;
+        if (String((entry as any).content ?? "") === runCode) return entry;
+
+        changed = true;
+        return {
+            kind: "file" as const,
+            path: activePath,
+            content: runCode,
+        };
+    });
+
+    return sortEntries(changed ? patchedEntries : entries);
 }
 
 async function postJson<T>(url: string, body: unknown): Promise<T> {
@@ -418,6 +458,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
 
     const startRun = React.useCallback(async () => {
         if (disabled || !allowRun || busy) return;
+        const runCode = args.getLatestCode?.() ?? code;
 
         if (!isInteractiveLanguage(lang)) {
             pushChunk(
@@ -437,7 +478,11 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
             setInputEnabled(false);
         }
 
-        runBaselineEntriesRef.current = getCurrentWorkspaceEntries();
+        runBaselineEntriesRef.current = patchWorkspaceEntriesWithRunCode({
+            entries: getCurrentWorkspaceEntries(),
+            workspace,
+            runCode,
+        });
 
         setBusy(true);
         setRunState("starting");
@@ -447,7 +492,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
             if (onRun) {
                 const started = await onRun({
                     language: lang,
-                    code,
+                    code: runCode,
                     workspace,
                     exerciseStateKey,
                     stdin: "",
@@ -467,7 +512,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                 kind: "code",
                 mode: "interactive",
                 language: lang,
-                code,
+                code: runCode,
                 workspace,
                 exerciseStateKey,
             } as any);
@@ -496,6 +541,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
         session,
         lang,
         code,
+        args.getLatestCode,
         workspace,
         exerciseStateKey,
         onRun,
