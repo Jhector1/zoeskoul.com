@@ -54,6 +54,39 @@ type ProjectFile = {
     content: string;
 };
 
+function patchNodesWithAuthoritativeCode(args: {
+    nodes: any[];
+    activeFileId: string | null;
+    code?: string;
+}) {
+    const { nodes, activeFileId, code } = args;
+
+    if (!activeFileId || typeof code !== "string") {
+        return nodes;
+    }
+
+    let changed = false;
+
+    const patchedNodes = nodes.map((node) => {
+        if (node.kind !== "file" || node.id !== activeFileId) {
+            return node;
+        }
+
+        if (String(node.content ?? "") === code) {
+            return node;
+        }
+
+        changed = true;
+
+        return {
+            ...node,
+            content: code,
+        };
+    });
+
+    return changed ? patchedNodes : nodes;
+}
+
 type ProjectSqlReq = {
     kind: "sql";
     mode: "batch";
@@ -121,7 +154,12 @@ export function buildProjectRunRequest(args: {
         code,
     } = args;
 
-    const files = exportProjectFiles(nodes) as ProjectFile[];
+    const patchedNodes = patchNodesWithAuthoritativeCode({
+        nodes,
+        activeFileId,
+        code,
+    });
+    const files = exportProjectFiles(patchedNodes) as ProjectFile[];
 
     if (language === "sql") {
         const schemaFile = files.find((f) =>
@@ -143,7 +181,7 @@ export function buildProjectRunRequest(args: {
 
         const activeQuery =
             !activeIsSchema && !activeIsSeed
-                ? (activeFile?.content ?? "")
+                ? (code ?? activeFile?.content ?? "")
                 : (queryFile?.content ?? code ?? "");
 
         return {
@@ -171,14 +209,14 @@ export function buildProjectRunRequest(args: {
         return {
             kind: "code",
             language,
-            code: activeFile?.content ?? entryFile?.content ?? code ?? "",
+            code: code ?? activeFile?.content ?? entryFile?.content ?? "",
         };
     }
 
     const workspaceSubmission = serializeWorkspaceForCodeRun({
         version: 2,
         language: language as WorkspaceLanguage,
-        nodes,
+        nodes: patchedNodes,
         openTabs: [],
         activeFileId: (activeFileId ?? "") as string,
         entryFileId: (entryFileId ?? activeFileId ?? "") as string,
@@ -191,7 +229,7 @@ export function buildProjectRunRequest(args: {
         return {
             kind: "code",
             language,
-            code: activeFile?.content ?? entryFile?.content ?? code ?? "",
+            code: code ?? activeFile?.content ?? entryFile?.content ?? "",
         };
     }
 

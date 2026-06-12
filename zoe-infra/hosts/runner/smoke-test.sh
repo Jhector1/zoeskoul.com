@@ -60,4 +60,30 @@ if docker compose logs caddy 2>/dev/null | grep -q 'token='; then
   exit 1
 fi
 
+
+
+echo "Checking Judge0 Python execution..."
+CODE_B64="$(printf 'print(90)\n' | base64 -w0)"
+
+result="$(
+  sudo docker compose exec -T -e CODE_B64="$CODE_B64" runner sh -lc '
+    timeout 20 curl -fsS -X POST "$JUDGE0_URL/submissions?base64_encoded=true&wait=true" \
+      -H "Content-Type: application/json" \
+      -H "${JUDGE0_AUTHN_HEADER:-X-Judge0-Token}: ${JUDGE0_AUTHN_TOKEN}" \
+      --data-binary "{\"language_id\":71,\"source_code\":\"$CODE_B64\"}"
+  '
+)"
+
+echo "$result" | jq
+
+status_id="$(printf '%s' "$result" | jq -r '.status.id')"
+stdout_decoded="$(printf '%s' "$result" | jq -r '.stdout // empty' | base64 -d)"
+
+if [ "$status_id" != "3" ] || [ "$stdout_decoded" != "90" ]; then
+  echo "ERROR: Judge0 Python execution failed" >&2
+  exit 1
+fi
+
+echo "Judge0 Python execution OK."
+
 echo "Smoke test passed."

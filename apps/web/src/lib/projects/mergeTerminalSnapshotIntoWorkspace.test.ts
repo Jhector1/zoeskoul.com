@@ -130,6 +130,31 @@ describe("mergeTerminalSnapshotIntoWorkspace", () => {
         expect(contentAtPath(next, "src/main.py")).toBe("print('dirty ui')");
     });
 
+    it("does not overwrite a dirty active file with a stale runner snapshot", () => {
+        const prior = workspaceWithSyntheticSrc([
+            {
+                id: "file:main",
+                name: "main.py",
+                content: "print('edited in ui')\nprint('still dirty')",
+            },
+            { id: "file:helper", name: "helper.py", content: "print('helper')" },
+        ]);
+
+        const next = mergeTerminalSnapshotIntoWorkspace({
+            prior,
+            snapshotFiles: [
+                { kind: "file", path: "src/main.py", content: "print('stale runner copy')" },
+                { kind: "file", path: "src/helper.py", content: "print('helper updated')" },
+            ],
+            dirtyUiPaths: ["src/main.py"],
+        });
+
+        expect(contentAtPath(next, "src/main.py")).toBe(
+            "print('edited in ui')\nprint('still dirty')",
+        );
+        expect(contentAtPath(next, "src/helper.py")).toBe("print('helper updated')");
+    });
+
 
     it("keeps terminal-created root files at the workspace root beside src", () => {
         const prior = workspaceWithSyntheticSrc([

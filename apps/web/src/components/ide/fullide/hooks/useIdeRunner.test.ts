@@ -76,6 +76,48 @@ describe("buildProjectRunRequest", () => {
         });
     });
 
+    it("treats the passed code as authoritative for the active file in multi-file runs", () => {
+        const nodes = [
+            {
+                ...baseFile,
+                id: "file:main.cpp",
+                name: "main.cpp",
+                content: '#include <iostream>\nint main() { std::cout << "stale"; }\n',
+            },
+            {
+                ...baseFile,
+                id: "file:helper.txt",
+                name: "helper.txt",
+                content: "supporting file\n",
+            },
+        ];
+
+        const liveCode =
+            '#include <iostream>\nint main() {\n    std::cout << "fresh";\n    std::cout << "again";\n}\n';
+
+        const req = buildProjectRunRequest({
+            language: "cpp",
+            nodes,
+            activeFile: nodes[0],
+            entryFile: nodes[0],
+            activeFileId: "file:main.cpp",
+            entryFileId: "file:main.cpp",
+            sqlDialect: "sqlite",
+            canUseMultiFile: true,
+            code: liveCode,
+        });
+
+        expect(req).toMatchObject({
+            kind: "code",
+            language: "cpp",
+            entry: "main.cpp",
+            files: expect.arrayContaining([
+                { path: "main.cpp", content: liveCode },
+                { path: "helper.txt", content: "supporting file\n" },
+            ]),
+        });
+    });
+
     it("keeps sql requests on the sql payload path", () => {
         const queryFile = {
             ...baseFile,

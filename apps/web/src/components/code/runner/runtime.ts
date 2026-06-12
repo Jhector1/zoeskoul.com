@@ -40,6 +40,7 @@ export type SharedRunnerArgs = {
     runtime?: CodeRunnerRuntime | ResolvedCodeRunnerRuntime;
     lang: RunnerLanguage;
     code: string;
+    getLatestCode?: () => string;
     sqlDialect?: SqlDialect;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
