@@ -361,7 +361,7 @@ export default function ProgrammingIdeSandbox({
                     )}
                 </div>
 
-                <div className="min-h-[100vh] min-w-0 lg:flex">
+                <div className="flex h-full min-h-0 min-w-0 flex-col lg:flex-row">
                     {surfaceMode === "code" ? (
                         <aside
                             className={cn(

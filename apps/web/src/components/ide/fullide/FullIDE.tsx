@@ -37,6 +37,7 @@ type FullIDEInnerProps = {
     actorKey: string;
     title: string;
     height: number;
+    fullHeight: boolean;
     lessonHref?: string;
     lessonLabel: string;
     access: FullIDEProps["access"];
@@ -48,6 +49,7 @@ type FullIDEInnerProps = {
     projectScope: FullIDEProps["projectScope"];
     router: ReturnType<typeof useRouter>;
     splitRef: React.RefObject<HTMLDivElement | null>;
+    rootRef: React.RefObject<HTMLDivElement | null>;
     editorHostRef: React.RefObject<HTMLDivElement | null>;
     showMobileExplorer: boolean;
     setShowMobileExplorer: React.Dispatch<React.SetStateAction<boolean>>;
@@ -133,6 +135,7 @@ function FullIDEInner({
                           actorKey,
                           title,
                           height,
+                          fullHeight,
                           lessonHref,
                           lessonLabel,
                           access,
@@ -145,6 +148,7 @@ function FullIDEInner({
                           exerciseStateKey,
                           router,
                           splitRef,
+                          rootRef,
                           editorHostRef,
                           showMobileExplorer,
                           setShowMobileExplorer,
@@ -303,6 +307,7 @@ function FullIDEInner({
         activeFileId,
         showMobileExplorer: services.explorer.enabled && showMobileExplorer,
         forceDesktopLayout,
+        rootRef,
         editorHostRef,
         onCloseMobileExplorer: handleCloseMobileExplorer,
     });
@@ -335,10 +340,13 @@ function FullIDEInner({
         backend: runnerRuntime.backend,
     });
 
-    const runnerHeight = Math.max(
-        viewport.isDesktop ? 360 : 320,
-        viewport.editorHeight || height,
-    );
+    const measuredRunnerHeight = viewport.editorHeight || height;
+    const runnerHeight: number | "auto" = fullHeight
+        ? "auto"
+        : Math.max(
+              viewport.isDesktop ? 360 : 320,
+              Math.min(height, measuredRunnerHeight),
+          );
     const shouldShowUpgradeText =
         services.projects.showSaveControls ||
         services.projects.showCloudProjects ||
@@ -742,6 +750,7 @@ export default function FullIDE(props: FullIDEProps) {
     const { data: session } = useSession();
 
     const splitRef = useRef<HTMLDivElement | null>(null);
+    const rootRef = useRef<HTMLDivElement | null>(null);
     const editorHostRef = useRef<HTMLDivElement | null>(null);
 
     const [showMobileExplorer, setShowMobileExplorer] = useState(false);
@@ -982,6 +991,7 @@ export default function FullIDE(props: FullIDEProps) {
 
     return (
         <div
+            ref={rootRef}
             className={cn(
                 "relative flex h-full min-h-0 w-full flex-col overflow-hidden rounded-none border border-neutral-200 bg-white dark:border-white/10 dark:bg-white/[0.04]",
                 className,
@@ -993,6 +1003,7 @@ export default function FullIDE(props: FullIDEProps) {
                 actorKey={actorKey}
                 title={title}
                 height={height}
+                fullHeight={fullHeight}
                 lessonHref={lessonHref}
                 lessonLabel={lessonLabel}
                 access={access}
@@ -1005,6 +1016,7 @@ export default function FullIDE(props: FullIDEProps) {
                 exerciseStateKey={props.exerciseStateKey}
                 router={router}
                 splitRef={splitRef}
+                rootRef={rootRef}
                 editorHostRef={editorHostRef}
                 showMobileExplorer={showMobileExplorer}
                 setShowMobileExplorer={setShowMobileExplorer}

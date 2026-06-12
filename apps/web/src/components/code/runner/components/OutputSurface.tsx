@@ -43,25 +43,33 @@ export default function OutputSurface(props: {
     switch (model.kind) {
         case "sql":
             return (
-                <SqlOutputSurface
-                    controller={model.controller}
-                    sqlSchemaSql={model.sqlSchemaSql}
-                    sqlInitialTableSnapshots={model.sqlInitialTableSnapshots}
-                    sqlViewKey={model.sqlViewKey}
-                    sqlPaneOptions={model.sqlPaneOptions}
-                />
+                <div className="h-full min-h-0">
+                    <SqlOutputSurface
+                        controller={model.controller}
+                        sqlSchemaSql={model.sqlSchemaSql}
+                        sqlInitialTableSnapshots={model.sqlInitialTableSnapshots}
+                        sqlViewKey={model.sqlViewKey}
+                        sqlPaneOptions={model.sqlPaneOptions}
+                    />
+                </div>
             );
 
         case "web-preview":
-            return <WebPreview entries={model.entries} title={model.title} />;
+            return (
+                <div className="h-full min-h-0">
+                    <WebPreview entries={model.entries} title={model.title} />
+                </div>
+            );
 
         case "runner":
         default:
             return (
-                <RunnerOutputSurface
-                    controller={model.controller}
-                    disabled={disabled}
-                />
+                <div className="h-full min-h-0">
+                    <RunnerOutputSurface
+                        controller={model.controller}
+                        disabled={disabled}
+                    />
+                </div>
             );
     }
 }
