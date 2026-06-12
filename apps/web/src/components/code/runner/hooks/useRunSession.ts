@@ -27,6 +27,10 @@ type ServerToClientMessage =
     | { type: "pong" }
     | { type: "error"; message: string };
 
+type CancelSessionResult =
+    | { ok: true }
+    | { ok: false; error: string };
+
 async function parseJsonSafe<T>(
     res: Response,
     fallbackPrefix: string,
@@ -62,11 +66,40 @@ export function useRunSession() {
 
     const wsRef = React.useRef<WebSocket | null>(null);
     const pendingRef = React.useRef<string[]>([]);
+    const sessionIdRef = React.useRef<string | null>(null);
+    const stateRef = React.useRef<RunSessionState>("queued");
 
     const closeSocket = React.useCallback(() => {
         wsRef.current?.close();
         wsRef.current = null;
         pendingRef.current = [];
+    }, []);
+
+    const cancelServerSession = React.useCallback(async (targetSessionId: string) => {
+        const res = await fetch(
+            `/api/run/pty/sessions/${encodeURIComponent(targetSessionId)}/cancel`,
+            {
+                method: "POST",
+            },
+        );
+
+        const parsed = await parseJsonSafe<CancelSessionResult>(
+            res,
+            "Non-JSON PTY cancel response",
+        );
+
+        if (!parsed.ok) {
+            throw new Error(parsed.error);
+        }
+
+        const data = parsed.data;
+        if (!res.ok || !data.ok) {
+            throw new Error(
+                data.ok === false
+                    ? data.error
+                    : `Failed to cancel session (${res.status})`,
+            );
+        }
     }, []);
 
     const sendOrQueue = React.useCallback((payload: unknown) => {
@@ -91,7 +124,9 @@ export function useRunSession() {
 
             setEvents([]);
             setSessionId(nextSessionId);
+            sessionIdRef.current = nextSessionId;
             setState(nextState);
+            stateRef.current = nextState;
 
             const finalWsUrl = toWebSocketUrl(rawWsUrl);
             const ws = new WebSocket(finalWsUrl);
@@ -126,6 +161,7 @@ export function useRunSession() {
                             if (wsRef.current === ws) {
                                 wsRef.current = null;
                             }
+                            sessionIdRef.current = null;
                         }
                     }
                     return;
@@ -133,6 +169,7 @@ export function useRunSession() {
 
                 if (msg.type === "error") {
                     setState("failed");
+                    stateRef.current = "failed";
                     console.error("PTY WS error:", msg.message);
                 }
             };
@@ -191,14 +228,35 @@ export function useRunSession() {
     }, [sendOrQueue]);
 
     const cancel = React.useCallback(async () => {
-        sendOrQueue({ type: "cancel" });
-    }, [sendOrQueue]);
+        const currentSessionId = sessionIdRef.current;
+        if (!currentSessionId) return;
+
+        const ws = wsRef.current;
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({ type: "cancel" }));
+            return;
+        }
+
+        await cancelServerSession(currentSessionId);
+    }, [cancelServerSession]);
+
+    React.useEffect(() => {
+        sessionIdRef.current = sessionId;
+    }, [sessionId]);
+
+    React.useEffect(() => {
+        stateRef.current = state;
+    }, [state]);
 
     React.useEffect(() => {
         return () => {
+            const currentSessionId = sessionIdRef.current;
+            if (currentSessionId && !isFinalSessionState(stateRef.current)) {
+                void cancelServerSession(currentSessionId).catch(() => {});
+            }
             closeSocket();
         };
-    }, [closeSocket]);
+    }, [cancelServerSession, closeSocket]);
 
     return React.useMemo(
         () => ({

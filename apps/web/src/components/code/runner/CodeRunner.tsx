@@ -524,8 +524,21 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [lang, isWeb, outputTab]);
 
     useEffect(() => {
+        terminalAutoOpenRequestedRef.current = false;
+    }, [
+        effectiveExerciseStateKey,
+        workspaceTerminalEnabled,
+        workspaceTerminal?.projectId,
+        workspaceTerminal?.cwd,
+    ]);
+
+    useEffect(() => {
         if (outputTab !== "terminal" || !workspaceTerminalEnabled) {
             terminalAutoOpenRequestedRef.current = false;
+            return;
+        }
+
+        if (workspaceTerm.state === "failed") {
             return;
         }
 
@@ -542,16 +555,14 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         }
 
         terminalAutoOpenRequestedRef.current = true;
-
-        void workspaceTerm.open().catch(() => {
-            terminalAutoOpenRequestedRef.current = false;
-        });
+        void workspaceTerm.open().catch(() => {});
     }, [
         outputTab,
         workspaceTerminalEnabled,
         workspaceTerm.sessionId,
         workspaceTerm.started,
         workspaceTerm.starting,
+        workspaceTerm.state,
         workspaceTerm.open,
     ]);
 
