@@ -78,7 +78,7 @@ docker compose -f docker-compose.prod.yml logs -f runner
 
 
 
-pnpm curr:course -- publish python applied-python-projects --live-subject applied-python-projects --force
+pnpm curr:course -- publish sql sql-v2 --live-subject sql-v2  --force
 
 
 
@@ -168,3 +168,50 @@ cd /opt/zoeskoul/zoe-infra/hosts/runner
 docker compose up -d
 sleep 30
 ./smoke-test.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Resume the curriculum draft work from where we left off.
+
+First:
+- inspect the current authoring course, draft subject, draft messages, and any recent changes before editing
+- infer the current state from the files instead of assuming
+- preserve existing ids, keys, slugs, exercise wiring, and validation expectations unless a change is truly required
+
+What I want:
+- review the learner-facing copy for the relevant draft content
+- rewrite anything that sounds robotic, repetitive, meta, over-explained, or like internal curriculum machinery
+- avoid wording that explains the exercise structure to the learner unless it is truly necessary
+- avoid phrases like:
+  - “keep one query alive”
+  - “working version”
+  - “progressive project”
+  - “isolated drill”
+  - “this step builds on the previous step”
+  - or any similar process-heavy language
+- make the writing feel smooth, clear, practical, and natural
+- prefer story-based or real-task framing when appropriate
+- keep prompts concise
+- do not break message keys, topic ids, section slugs, exercise ids, or project wiring
+
+If the work involves projects or capstones:
+- make each project feel like a real task with a clean learner-facing setup
+- keep step instructions focused on the task outcome, not the mechanics
+- make the sequence feel natural and cumulative without saying that explicitly over and over
+
+After edits:
+- run the relevant validation and golden tests for that subject/course
+- fix any issues caused by the copy changes
+- summarize what changed
+- point out any remaining awkward copy that may still need a second pass

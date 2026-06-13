@@ -1,50 +1,10 @@
 // src/lib/practice/api/validate/grade/codeInput.ts
-import { CodeExpectedSchema, type SubmitAnswer } from "../schemas";
+import { parseCodeExpected, prepareCodeExpectedForSchema } from "@zoeskoul/practice-checks";
+import { type SubmitAnswer } from "../schemas";
 import type { LoadedValidateInstance } from "@/lib/practice/api/validate/repositories/instance.repo";
 import { gradeProgrammingCodeInput } from "./codeInput.programming";
 import { gradeSqlCodeInput } from "./codeInput.sql";
 import {GradeResult} from "@/lib/practice/api/validate/grade/index";
-
-
-function normalizeSemanticChecksForSchema(value: unknown): unknown {
-  if (!Array.isArray(value)) return value;
-
-  return value.map((check) => {
-    if (!check || typeof check !== "object") return check;
-    const next: any = { ...(check as any) };
-    if (next.expectedKind === "value") next.expectedKind = "json";
-    if (Array.isArray(next.argKinds)) {
-      next.argKinds = next.argKinds.map((kind: unknown) =>
-        kind === "value" ? "json" : kind,
-      );
-    }
-    return next;
-  });
-}
-
-function prepareCodeExpectedForSchema(expectedCanon: unknown): {
-  expectedForSchema: unknown;
-  sourceChecks: unknown[];
-} {
-  if (!expectedCanon || typeof expectedCanon !== "object" || Array.isArray(expectedCanon)) {
-    return { expectedForSchema: expectedCanon, sourceChecks: [] };
-  }
-
-  const raw = expectedCanon as any;
-  const sourceChecks = Array.isArray(raw.sourceChecks)
-    ? raw.sourceChecks.filter(Boolean)
-    : [];
-  const { sourceChecks: _sourceChecks, ...expectedWithoutSourceChecks } = raw;
-  const semanticChecks = normalizeSemanticChecksForSchema(raw.semanticChecks);
-
-  return {
-    expectedForSchema: {
-      ...expectedWithoutSourceChecks,
-      ...(semanticChecks !== raw.semanticChecks ? { semanticChecks } : {}),
-    },
-    sourceChecks,
-  };
-}
 
 
 export async function gradeCodeInput(args: {
@@ -56,7 +16,7 @@ export async function gradeCodeInput(args: {
   const { expectedCanon, answer, showDebug } = args;
 
   const { expectedForSchema, sourceChecks } = prepareCodeExpectedForSchema(expectedCanon);
-  const parsed = CodeExpectedSchema.safeParse(expectedForSchema);
+  const parsed = parseCodeExpected(expectedForSchema);
   if (!parsed.success) {
     return {
       ok: false,

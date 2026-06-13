@@ -1,0 +1,271 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-2": {
+        "filter_by_number": {
+          "label": "Filter by Number",
+          "summary": "Learn how to use WHERE with numeric columns like price and stock to keep only the rows you need.",
+          "cards": {
+            "sketch0": {
+              "title": "Use WHERE to compare numbers"
+            },
+            "sketch1": {
+              "title": "Filtering with whole numbers like stock"
+            },
+            "sketch2": {
+              "title": "Choose the right numeric condition"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Number Filter Practice"
+            }
+          },
+          "projectSteps": {
+            "q9": {
+              "title": "Query products above a price"
+            },
+            "q10": {
+              "title": "Find low-stock products"
+            },
+            "q11": {
+              "title": "Match an exact numeric value"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Pick the operator for more than",
+              "prompt": "Which operator should you use in a WHERE clause to keep rows where `price` is greater than 20?",
+              "hint": "Use the comparison symbol for strictly more than, not equal to.",
+              "help": {
+                "concept": "A numeric WHERE condition compares a column value to a number. 'Greater than' means the value must be above the number, not equal to it.",
+                "hint_1": "Compare the meanings of `>`, `>=`, `<`, and `=` for the column `price`.",
+                "hint_2": "You want rows where 21 matches but 20 does not."
+              },
+              "options": {
+                "a": "price = 20",
+                "b": "price > 20",
+                "c": "price < 20",
+                "d": "price <= 20"
+              }
+            },
+            "q2": {
+              "title": "Find the exact match query",
+              "prompt": "Which query returns products whose `stock` is exactly 10?",
+              "hint": "Look for the condition that matches one exact number.",
+              "help": {
+                "concept": "Use `=` in SQL when you want an exact numeric match instead of a range above or below a value.",
+                "hint_1": "A row with stock 10 should match, but stock 9 and stock 11 should not.",
+                "hint_2": "Choose the option that uses `WHERE stock` with the equality operator."
+              },
+              "options": {
+                "a": "SELECT name FROM products WHERE stock > 10;",
+                "b": "SELECT name FROM products WHERE stock < 10;",
+                "c": "SELECT name FROM products WHERE stock = 10;",
+                "d": "SELECT name FROM products WHERE stock >= 10;"
+              }
+            },
+            "q3": {
+              "title": "Rows that match price under 20",
+              "prompt": "Choose all products that would be returned by `WHERE price < 20`.",
+              "hint": "Check each product's price and keep only values below 20.",
+              "help": {
+                "concept": "A `<` condition keeps rows with values strictly smaller than the number. Values equal to or above the number are excluded.",
+                "hint_1": "Compare these prices to 20: 12.99, 24.50, 39.99, 6.75, 18.00, and 129.00.",
+                "hint_2": "The matching rows are the ones priced 12.99, 6.75, and 18.00."
+              },
+              "options": {
+                "a": "Sketchbook",
+                "b": "Acrylic Paint Set",
+                "c": "Notebook",
+                "d": "Fountain Pen"
+              }
+            },
+            "q4": {
+              "title": "Conditions that include stock 10",
+              "prompt": "Choose all WHERE conditions that would include a row where `stock` is 10.",
+              "hint": "Test the number 10 against each condition.",
+              "help": {
+                "concept": "To decide whether a row is included, substitute the row's value into each comparison and see whether the statement is true.",
+                "hint_1": "Ask: is 10 equal to 10, greater than 10, less than or equal to 10, and greater than or equal to 10?",
+                "hint_2": "The true conditions are the ones where 10 is allowed as an exact match or boundary value."
+              },
+              "options": {
+                "a": "stock = 10",
+                "b": "stock > 10",
+                "c": "stock <= 10",
+                "d": "stock >= 10"
+              }
+            },
+            "q5": {
+              "title": "Build a numeric filter query",
+              "prompt": "Put these SQL parts in the correct order to return product names with stock less than 10.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT name",
+                "t2": "FROM products",
+                "t3": "WHERE stock < 10"
+              }
+            },
+            "q6": {
+              "title": "Order the parts of an exact price query",
+              "prompt": "Arrange the tokens to make a query that shows `name` and `price` for products priced exactly 18.",
+              "hint": "The WHERE condition comes after the table name.",
+              "help": {
+                "concept": "SQL clauses have a fixed order. After choosing columns and table, add the numeric condition in the WHERE clause.",
+                "hint_1": "You need both selected columns first, then the source table, then the exact-match condition.",
+                "hint_2": "The condition should compare `price` to 18 using the equality operator."
+              },
+              "tokens": {
+                "t1": "SELECT name, price",
+                "t2": "FROM products",
+                "t3": "WHERE price = 18"
+              }
+            },
+            "q7": {
+              "title": "Complete a greater-than filter",
+              "prompt": "Fill in the missing number so the query keeps products with price greater than 100.",
+              "hint": "Only one product in the dataset costs more than this value.",
+              "help": {
+                "concept": "In a numeric comparison, the number after the operator sets the cutoff point for which rows are included.",
+                "hint_1": "Look at the prices in the table and find a threshold that still includes Office Chair at 129.00.",
+                "hint_2": "The missing value is a whole number just below 129 and above the other prices."
+              },
+              "template": "SELECT name FROM products WHERE price > [blank1];",
+              "choices": [
+                "10",
+                "20",
+                "100",
+                "130"
+              ]
+            },
+            "q8": {
+              "title": "Complete a stock condition",
+              "prompt": "Fill in the missing value to return products with stock less than 8.",
+              "hint": "Check which stock counts are smaller than the target number.",
+              "help": {
+                "concept": "A `<` comparison keeps values strictly below the number, so the chosen value sets the upper limit.",
+                "hint_1": "In the dataset, stock values include 25, 10, the missing term, 50, 15, and 3.",
+                "hint_2": "You want a condition where stock 3 matches but stock the missing term does not."
+              },
+              "template": "SELECT name FROM products WHERE stock < [blank1];",
+              "choices": [
+                "3",
+                "8",
+                "10",
+                "15"
+              ]
+            },
+            "q9": {
+              "title": "Query products above a price",
+              "prompt": "Write a query that returns the `name` and `price` of all products with `price > 20`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \n  name,\n  price\nFROM products\nWHERE ;"
+            },
+            "q10": {
+              "title": "Find low-stock products",
+              "prompt": "Write a query that returns the `name` and `stock` of products where `stock <= 10`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \n  name,\n  stock\nFROM products\nWHERE ;"
+            },
+            "q11": {
+              "title": "Match an exact numeric value",
+              "prompt": "Write a query that returns the `name` and `price` of products where `price = 18`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \n  name,\n  price\nFROM products\nWHERE ;"
+            },
+            "try-filter_by_number-sketch0": {
+              "title": "Query products above a price",
+              "prompt": "Write a query that returns the `name` and `price` of all products with `price > 20`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \n  name,\n  price\nFROM products\nWHERE ;"
+            },
+            "try-filter_by_number-sketch1": {
+              "title": "Find low-stock products",
+              "prompt": "Write a query that returns the `name` and `stock` of products where `stock <= 10`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \n  name,\n  stock\nFROM products\nWHERE ;"
+            },
+            "try-filter_by_number-sketch2": {
+              "title": "Match an exact numeric value",
+              "prompt": "Write a query that returns the `name` and `price` of products where `price = 18`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \n  name,\n  price\nFROM products\nWHERE ;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_filter_by_number_sketch0": {
+              "title": "Query products above a price",
+              "prompt": "Write a query that returns the `name` and `price` of all products with `price > 20`. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_filter_by_number_sketch1": {
+              "title": "Find low-stock products",
+              "prompt": "Write a query that returns the `name` and `stock` of products where `stock <= 10`. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_filter_by_number_sketch2": {
+              "title": "Match an exact numeric value",
+              "prompt": "Write a query that returns the `name` and `price` of products where `price = 18`. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-2": {
+        "filter_by_number": {
+          "sk1": {
+            "title": "Use WHERE to compare numbers",
+            "bodyMarkdown": "When a column stores numbers, you can use `WHERE` to keep rows that match a numeric condition. Common comparison operators are `=`, `>`, `<`, `>=`, and `<=`.\n\nHere is a simple example using the `products` table:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price > 20;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` says which table to read.\n- `WHERE price > 20` keeps only products with a price greater than 20.\n\nWith the dataset in this lesson, that query returns products such as `Acrylic Paint Set`, `Desk Lamp`, and `Office Chair` because their prices are above 20.\n\nWorked example:\n- `Notebook` has price `6.75`, so it is not included.\n- `Fountain Pen` has price `18.00`, so it is not included.\n- `Desk Lamp` has price `39.99`, so it is included.\n\nTry it yourself: write the query in the SQL editor, click Run query, and then change `> 20` to `>= 20` or `> 100` to see how the results table changes."
+          },
+          "sk2": {
+            "title": "Filtering with whole numbers like stock",
+            "bodyMarkdown": "Numeric filtering also works with whole-number columns such as `stock`.\n\nExample:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock <= 10;\n```\n\nLine by line:\n- `SELECT name, stock` shows each product name and its stock count.\n- `FROM products` reads from the products table.\n- `WHERE stock <= 10` keeps rows where stock is 10 or less.\n\nIn this dataset:\n- `Acrylic Paint Set` has stock `10`, so it matches.\n- `Desk Lamp` has stock `8`, so it matches.\n- `Office Chair` has stock `3`, so it matches.\n- `Sketchbook` has stock `25`, so it does not match.\n\nThis is useful when you want to find low-stock items or products above a certain quantity.\n\nYour turn: run the example, then change the condition to `stock < 10` and compare the results table."
+          },
+          "sk3": {
+            "title": "Choose the right numeric condition",
+            "bodyMarkdown": "The operator matters because each one keeps a different set of rows.\n\n```sql\nSELECT name, price\nFROM products\nWHERE price = 18;\n```\n\nThis query looks for rows where the price is exactly 18. In the dataset, `Fountain Pen` has price `18.00`, so it matches.\n\nCompare these ideas:\n- `price = 18` means exactly 18\n- `price > 18` means more than 18\n- `price >= 18` means 18 or more\n- `price < 18` means less than 18\n\nWorked example:\n- If you want products costing at least 18, `price >= 18` includes `Fountain Pen`.\n- If you use `price > 18`, `Fountain Pen` is left out because 18 is not greater than 18.\n\nTry this: in the SQL editor, start with `price = 18`, click Run query, then change it to `price >= 18` and notice which extra rows appear in the results table."
+          }
+        }
+      }
+    }
+  }
+}

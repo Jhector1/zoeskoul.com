@@ -1,0 +1,225 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-3": {
+        "top_rows_only": {
+          "label": "Top Rows Only",
+          "summary": "Learn how LIMIT keeps query results short by returning only the first rows after sorting.",
+          "cards": {
+            "sketch0": {
+              "title": "What LIMIT does"
+            },
+            "sketch1": {
+              "title": "Use LIMIT after ORDER BY"
+            },
+            "sketch2": {
+              "title": "Why LIMIT is useful"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Top Products Mini Project"
+            }
+          },
+          "projectSteps": {
+            "ci_cheapest_three": {
+              "title": "Query the 3 cheapest products"
+            },
+            "ci_most_expensive_two": {
+              "title": "Query the 2 most expensive products"
+            },
+            "ci_newest_two": {
+              "title": "Query the 2 newest products"
+            }
+          },
+          "quiz": {
+            "sc_limit_meaning": {
+              "title": "What LIMIT controls",
+              "prompt": "What does `LIMIT 3` do in a SQL query?",
+              "hint": "Think about how many rows appear in the results table.",
+              "help": {
+                "concept": "`LIMIT` controls the maximum number of rows returned by the query result.",
+                "hint_1": "It does not choose columns or sort rows by itself.",
+                "hint_2": "Look for the option about showing only a certain number of rows."
+              },
+              "options": {
+                "a": "It returns only 3 columns.",
+                "b": "It returns at most 3 rows.",
+                "c": "It sorts rows into 3 groups.",
+                "d": "It changes every value to 3."
+              }
+            },
+            "sc_limit_without_order": {
+              "title": "LIMIT without sorting",
+              "prompt": "If a query uses `LIMIT 2` but does not use `ORDER BY`, what is the main issue?",
+              "hint": "Think about whether SQL has been told what \"top\" means.",
+              "help": {
+                "concept": "`LIMIT` only trims the result size; without `ORDER BY`, the query does not clearly define which rows should count as top, lowest, or newest.",
+                "hint_1": "The query still returns 2 rows, but not based on a chosen sort rule.",
+                "hint_2": "Look for the option that says the result is limited but not intentionally ranked."
+              },
+              "options": {
+                "a": "The query cannot run at all.",
+                "b": "The query returns 2 rows, but they are not guaranteed to be the highest or lowest by a chosen column.",
+                "c": "The query automatically sorts by `id DESC`.",
+                "d": "The query returns every row except 2."
+              }
+            },
+            "mc_limit_good_uses": {
+              "title": "When LIMIT is helpful",
+              "prompt": "Choose all situations where `LIMIT` is especially useful.",
+              "hint": "Think about cases where you want only a short list from a larger result.",
+              "help": {
+                "concept": "`LIMIT` is useful for showing only a small number of rows, especially after sorting for top, bottom, newest, or quick-preview results.",
+                "hint_1": "Look for options about showing just a few rows, not changing table structure.",
+                "hint_2": "Two or more options describe keeping results short after filtering or sorting."
+              },
+              "options": {
+                "a": "Showing the 3 most expensive products",
+                "b": "Previewing only the first few rows of a result",
+                "c": "Adding a new column to the table",
+                "d": "Showing only the 2 newest products after sorting by date"
+              }
+            },
+            "mc_limit_query_parts": {
+              "title": "Parts of a top-rows query",
+              "prompt": "Choose all clauses that are commonly used together when you want the cheapest 2 products.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare each option to the exact topic named in the question.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "SELECT",
+                "b": "FROM",
+                "c": "ORDER BY",
+                "d": "LIMIT"
+              }
+            },
+            "dr_top_expensive_order": {
+              "title": "Build a most-expensive query",
+              "prompt": "Put these SQL parts in the correct order to show product names and prices for the 2 most expensive products.",
+              "hint": "Start with selecting columns, then the table, then sorting, then limiting.",
+              "help": {
+                "concept": "A basic SQL query follows the clause order `SELECT`, `FROM`, `ORDER BY`, then `LIMIT`.",
+                "hint_1": "The sorting clause must come before the row limit.",
+                "hint_2": "After naming the table, place the descending price sort before keeping only 2 rows."
+              },
+              "tokens": {
+                "t1": "SELECT name, price",
+                "t2": "FROM products",
+                "t3": "ORDER BY price DESC",
+                "t4": "LIMIT 2"
+              }
+            },
+            "dr_newest_products_order": {
+              "title": "Build a newest-products query",
+              "prompt": "Arrange these SQL parts to show the 3 newest product names.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT name, created_at",
+                "t2": "FROM products",
+                "t3": "ORDER BY created_at DESC",
+                "t4": "LIMIT 3"
+              }
+            },
+            "fb_limit_number": {
+              "title": "Complete a LIMIT clause",
+              "prompt": "Fill in the missing value to keep only two rows.",
+              "hint": "The missing part is the number of rows to return.",
+              "help": {
+                "concept": "In `LIMIT`, the number tells SQL how many rows to keep in the final result.",
+                "hint_1": "You want exactly two rows, so the blank should be a row count.",
+                "hint_2": "Choose the numeric value that matches 'two rows'."
+              },
+              "template": "SELECT name FROM products LIMIT [blank1];",
+              "choices": [
+                "1",
+                "2",
+                "3",
+                "price"
+              ]
+            },
+            "fb_limit_keyword": {
+              "title": "Choose the right clause",
+              "prompt": "Fill in the missing SQL keyword to keep only the first 4 rows after sorting.",
+              "hint": "You need the clause that restricts row count.",
+              "help": {
+                "concept": "The SQL clause used to restrict how many rows are returned is `the missing term`.",
+                "hint_1": "It comes after `ORDER BY` when you want only a few rows.",
+                "hint_2": "Choose the keyword that means 'show no more than this many rows'."
+              },
+              "template": "SELECT name, price FROM products ORDER BY price DESC [blank1] 4;",
+              "choices": [
+                "WHERE",
+                "FROM",
+                "LIMIT",
+                "SELECT"
+              ]
+            },
+            "ci_cheapest_three": {
+              "title": "Query the 3 cheapest products",
+              "prompt": "Write a query that shows `name` and `price` from `products` for the 3 cheapest products. Sort by `price` from lowest to highest, then keep only 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT\n  name,\n  price\nFROM products\n-- TODO: sort by the lowest price first\n-- TODO: keep only 3 rows\n;"
+            },
+            "ci_most_expensive_two": {
+              "title": "Query the 2 most expensive products",
+              "prompt": "Write a query that shows `name`, `category`, and `price` for the 2 most expensive products in `products`. Sort by `price` from highest to lowest, then keep only 2 rows.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT\n  name,\n  category,\n  price\nFROM products\n-- TODO: sort so the highest price comes first\n-- TODO: keep only 2 rows\n;"
+            },
+            "ci_newest_two": {
+              "title": "Query the 2 newest products",
+              "prompt": "Write a query that shows `name` and `created_at` for the 2 newest products. Sort by `created_at` so the newest dates come first, then keep only 2 rows.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT\n  name,\n  created_at\nFROM products\n-- TODO: sort by newest date first\n-- TODO: keep only 2 rows\n;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-3": {
+        "top_rows_only": {
+          "limit_basics": {
+            "title": "What LIMIT does",
+            "bodyMarkdown": "Sometimes a query returns more rows than you want to read at once. `LIMIT` tells SQL to show only a certain number of rows.\n\nA basic pattern is:\n\n```sql\nSELECT name, price\nFROM products\nLIMIT 3;\n```\n\nThis asks for the `name` and `price` columns from the `products` table, but only the first 3 rows in the current result order.\n\nImportant idea: `LIMIT` does **not** decide which rows are \"top\" by itself. It only cuts the result down to a number of rows.\n\nWorked example:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 2;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` reads from the `products` table.\n- `ORDER BY price DESC` sorts from highest price to lowest price.\n- `LIMIT 2` keeps only the first 2 rows after that sorting.\n\nWith this dataset, the result would be the two most expensive products: `Office Chair` and `Desk Lamp`.\n\nTry it yourself: write the query in the SQL editor, click Run query, then change `LIMIT 2` to `LIMIT 4` and see how the results table changes."
+          },
+          "limit_with_sorting": {
+            "title": "Use LIMIT after ORDER BY",
+            "bodyMarkdown": "When people say \"top 3\" or \"lowest 5,\" they usually mean:\n1. sort the rows\n2. keep only the first few\n\nThat is why `ORDER BY` and `LIMIT` are often used together.\n\nExample for the cheapest products:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price ASC\nLIMIT 3;\n```\n\nLine by line:\n- `ORDER BY price ASC` puts the lowest prices first.\n- `LIMIT 3` keeps only the first 3 rows from that sorted list.\n\nIn this dataset, the first rows would start with `Notebook`, then `Sketchbook`, then `Fountain Pen`.\n\nIf you removed `ORDER BY`, `LIMIT 3` would still return 3 rows, but not necessarily the cheapest 3 rows.\n\nYour turn: run the query above, then switch `ASC` to `DESC`. Check how the results table changes from cheapest items to most expensive items."
+          },
+          "limit_for_readable_results": {
+            "title": "Why LIMIT is useful",
+            "bodyMarkdown": "`LIMIT` is useful when you want short, readable answers.\n\nFor example, if you only want a quick look at the newest products, you can sort by date and keep a small number of rows:\n\n```sql\nSELECT name, created_at\nFROM products\nORDER BY created_at DESC\nLIMIT 2;\n```\n\nWhat this does:\n- `created_at DESC` puts the newest dates first.\n- `LIMIT 2` shows only the two newest products.\n\nIn this table, the newest rows are `Notebook` and `Acrylic Paint Set` because they have the latest `created_at` values.\n\nA common beginner mistake is to think `LIMIT 2` means \"pick any 2 rows I want.\" It really means \"return the first 2 rows from the current ordered result.\"\n\nTry this: in the SQL editor, run the query above. Then change it to `LIMIT 1` and check which single row stays in the results table."
+          }
+        }
+      }
+    }
+  }
+}

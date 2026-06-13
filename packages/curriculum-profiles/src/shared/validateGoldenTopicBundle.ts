@@ -4,6 +4,7 @@ import type {
     TopicBundleManifest,
     TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
+import { parseCodeExpected } from "@zoeskoul/practice-checks";
 import {
     buildCodeInputExpected,
 } from "../base/codeInputExpected.js";
@@ -33,7 +34,13 @@ function validateCodeInputRecipe(
     exercise: ManifestCodeInput,
 ): string | null {
     try {
-        buildCodeInputExpected(exercise);
+        const expected = buildCodeInputExpected(exercise);
+        const parsed = parseCodeExpected(expected);
+
+        if (!parsed.success) {
+            return JSON.stringify(parsed.error.format(), null, 2);
+        }
+
         return null;
     } catch (error) {
         return error instanceof Error ? error.message : "Unknown golden validation failure.";

@@ -1,0 +1,202 @@
+{
+  "topicId": "one_table_vs_multiple_tables",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-0",
+  "sectionSlug": "sql-v2-0-3",
+  "prefix": "sqlv2_0",
+  "minutes": 15,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "students_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-0.one_table_vs_multiple_tables.label",
+    "summaryKey": "topics.sql-v2.sql-v2-0.one_table_vs_multiple_tables.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.one_table_vs_multiple_tables.cards.sketch0.title",
+      "sketchId": "single-table-start",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.one_table_vs_multiple_tables.cards.sketch1.title",
+      "sketchId": "why-multiple-tables",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.one_table_vs_multiple_tables.cards.sketch2.title",
+      "sketchId": "choosing-structure",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-0.one_table_vs_multiple_tables.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "single-table-start",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.one_table_vs_multiple_tables.single-table-start.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.one_table_vs_multiple_tables.single-table-start.bodyMarkdown"
+    },
+    {
+      "id": "why-multiple-tables",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.one_table_vs_multiple_tables.why-multiple-tables.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.one_table_vs_multiple_tables.why-multiple-tables.bodyMarkdown"
+    },
+    {
+      "id": "choosing-structure",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.one_table_vs_multiple_tables.choosing-structure.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.one_table_vs_multiple_tables.choosing-structure.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-one-row-represents",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.one_table_vs_multiple_tables.quiz.sc-one-row-represents",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-when-multiple-tables",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.one_table_vs_multiple_tables.quiz.sc-when-multiple-tables",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-single-table-signs",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.one_table_vs_multiple_tables.quiz.mc-single-table-signs",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "mc-reasons-split-tables",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.one_table_vs_multiple_tables.quiz.mc-reasons-split-tables",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-read-simple-query",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.one_table_vs_multiple_tables.quiz.dr-read-simple-query",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr-think-about-structure",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.one_table_vs_multiple_tables.quiz.dr-think-about-structure",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    }
+  ]
+}

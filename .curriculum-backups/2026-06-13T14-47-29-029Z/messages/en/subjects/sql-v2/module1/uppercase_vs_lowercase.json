@@ -1,0 +1,222 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "uppercase_vs_lowercase": {
+          "label": "Uppercase vs Lowercase",
+          "summary": "Learn when SQL keywords can be uppercase or lowercase, and why consistent casing helps you read beginner SELECT queries more easily.",
+          "cards": {
+            "sketch0": {
+              "title": "SQL keywords work the same in uppercase and lowercase"
+            },
+            "sketch1": {
+              "title": "Case style helps readability"
+            },
+            "sketch2": {
+              "title": "Keywords are different from text values"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Case style practice with SELECT"
+            }
+          },
+          "projectSteps": {
+            "ci_select_name_uppercase": {
+              "title": "Write an uppercase-keyword query"
+            },
+            "ci_select_name_lowercase": {
+              "title": "Write the lowercase version"
+            },
+            "ci_select_two_columns_readable": {
+              "title": "Use readable uppercase style with two columns"
+            }
+          },
+          "quiz": {
+            "sc_case_same_result": {
+              "title": "Uppercase and lowercase keywords",
+              "prompt": "Which statement is true for this SQLite lesson workspace?",
+              "hint": "Think about whether `SELECT` and `select` are treated differently here.",
+              "help": {
+                "concept": "In this beginner SQLite environment, SQL keywords such as `SELECT` and `FROM` are not case-sensitive, so changing their letter case does not change the query meaning.",
+                "hint_1": "Compare the behavior of `SELECT name FROM products;` and the same query written with lowercase keywords.",
+                "hint_2": "The matching choice says the keyword case can change while the query still returns the same result."
+              },
+              "options": {
+                "a": "Changing `SELECT` to `select` changes which rows are returned.",
+                "b": "Changing `FROM` to `from` causes an error in this workspace.",
+                "c": "Uppercase and lowercase SQL keywords work the same in these beginner queries.",
+                "d": "SQL keywords must always be written in all caps to run."
+              }
+            },
+            "sc_best_style_readability": {
+              "title": "Most readable style",
+              "prompt": "Which query style is usually easiest for beginners to read?",
+              "hint": "Look for the version where SQL command words stand out clearly from table and column names.",
+              "help": {
+                "concept": "Readability improves when SQL keywords are visually separated from identifiers, and a common convention is uppercase keywords with lowercase table and column names.",
+                "hint_1": "The best choice is not about what runs differently; it is about which style makes the command words easiest to spot.",
+                "hint_2": "Choose the option that uses uppercase for the SQL keywords and keeps the table and column names in normal lowercase style."
+              },
+              "options": {
+                "a": "`SeLeCt name FrOm products;`",
+                "b": "A command"
+              }
+            },
+            "mc_keywords_in_query": {
+              "title": "Pick the SQL keywords",
+              "prompt": "In the query `SELECT name, price FROM products;`, which parts are SQL keywords? Choose all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare each option to the exact topic named in the question.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "SELECT",
+                "b": "name",
+                "c": "price",
+                "d": "FROM"
+              }
+            },
+            "mc_same_meaning_queries": {
+              "title": "Queries with the same meaning",
+              "prompt": "Which queries mean the same thing as `SELECT name FROM products;` in this lesson workspace? Choose all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "select name from products;",
+                "b": "SELECT price FROM products;",
+                "c": "SELECT name FROM product;"
+              }
+            },
+            "dr_readable_query_order": {
+              "title": "Build a readable query",
+              "prompt": "Arrange the tokens to form a readable query that returns the `name` column from `products` using common uppercase-keyword style.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "name",
+                "t3": "FROM",
+                "t4": "products;"
+              }
+            },
+            "dr_lowercase_query_order": {
+              "title": "Build the lowercase version",
+              "prompt": "Arrange the tokens to form the lowercase version of a query that returns `id` from `products`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Think about which part must come first.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "tokens": {
+                "t1": "from",
+                "t2": "products;",
+                "t3": "id",
+                "t4": "select"
+              }
+            },
+            "fb_keyword_case": {
+              "title": "Complete the keyword",
+              "prompt": "Fill in the missing SQL keyword.",
+              "hint": "This keyword comes before the table name.",
+              "help": {
+                "concept": "In a basic query, `the missing term` introduces the table that the query reads the missing term.",
+                "hint_1": "The missing word is the source clause keyword, not a column name.",
+                "hint_2": "It is the keyword that appears right before `products` in `SELECT name the missing term products;`."
+              },
+              "template": "SELECT name [blank1] products;",
+              "choices": [
+                "FROM",
+                "name",
+                "SELECT",
+                "price"
+              ]
+            },
+            "fb_lowercase_style": {
+              "title": "Complete the lowercase query",
+              "prompt": "Fill in the missing lowercase keyword so the query is valid.",
+              "hint": "This is the first command word in the query.",
+              "help": {
+                "concept": "A query begins with the keyword `the missing term`, which tells SQL which columns to return.",
+                "hint_1": "The missing word comes before the column name `category`.",
+                "hint_2": "It is the lowercase form of the keyword used to start a basic query."
+              },
+              "template": "[blank1] category from products;",
+              "choices": [
+                "select",
+                "products",
+                "from",
+                "category"
+              ]
+            },
+            "ci_select_name_uppercase": {
+              "title": "Write an uppercase-keyword query",
+              "prompt": "Write a query that returns only the `name` column from the `products` table. Use uppercase SQL keywords. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT\n  -- choose one column here\nFROM\n  products;"
+            },
+            "ci_select_name_lowercase": {
+              "title": "Write the lowercase version",
+              "prompt": "Write a query that returns only the `name` column from the `products` table, but this time use lowercase SQL keywords. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "select\n  -- choose one column here\nfrom\n  products;"
+            },
+            "ci_select_two_columns_readable": {
+              "title": "Use readable uppercase style with two columns",
+              "prompt": "Write a query that returns the `name` and `category` columns from the `products` table using common readable style with uppercase SQL keywords. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT\n  -- add two columns here\nFROM products;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "uppercase_vs_lowercase": {
+          "case_keywords_same_meaning": {
+            "title": "SQL keywords work the same in uppercase and lowercase",
+            "bodyMarkdown": "In SQL, keywords like `SELECT` and `FROM` are usually **not case-sensitive** in SQLite. That means these queries do the same thing:\n\n```sql\nSELECT name FROM products;\n```\n\n```sql\nselect name from products;\n```\n\nBoth return the `name` column from the `products` table.\n\nA common style is to write **keywords in uppercase** and table or column names in lowercase, because it makes the query easier to scan.\n\nWorked example:\n\n```sql\nSELECT name, price\nFROM products;\n```\n\nStep by step:\n- `SELECT` tells SQL which columns you want.\n- `name, price` are the columns to show.\n- `FROM products` tells SQL which table to read.\n\nYou could also write:\n\n```sql\nselect name, price\nfrom products;\n```\n\nThe result is the same in this course workspace.\n\nTry it yourself: write both versions in the SQL editor, click Run query, and compare the results table."
+          },
+          "style_readability": {
+            "title": "Case style helps readability",
+            "bodyMarkdown": "Even though uppercase and lowercase often behave the same for SQL keywords, **consistent style** helps people read queries faster.\n\nFor example, this is valid:\n\n```sql\nSeLeCt name, category FrOm products;\n```\n\nBut this is easier to read:\n\n```sql\nSELECT name, category\nFROM products;\n```\n\nWorked example using the course dataset:\n\n```sql\nSELECT id, name, stock\nFROM products;\n```\n\nLine by line:\n- `SELECT` stands out as the command.\n- `id, name, stock` shows the columns being returned.\n- `FROM products` clearly shows the source table.\n\nMany teams choose uppercase for SQL keywords because it separates the command words from the table and column names.\n\nYour turn: rewrite a lowercase query into uppercase-keyword style, then click Run query and check that the results table stays the same."
+          },
+          "identifiers_and_strings": {
+            "title": "Keywords are different from text values",
+            "bodyMarkdown": "Be careful: SQL **keywords** like `SELECT` and `FROM` are different from **text values** stored in the table.\n\nIn this dataset, the `category` column contains values like `Art`, `Home`, and `Stationery`.\n\nExample query:\n\n```sql\nSELECT name, category\nFROM products;\n```\n\nThis returns product names and their category text.\n\nImportant idea:\n- `SELECT` is a SQL keyword.\n- `products` is a table name.\n- `category` is a column name.\n- `Art` is a text value stored in a row.\n\nSo when we talk about uppercase vs lowercase in this lesson, we mainly mean the **SQL command words**. Style choices for keywords do not change what rows are returned in these beginner `SELECT` queries.\n\nTry this: run the query above, then change `SELECT` and `FROM` to lowercase and run it again. Notice that the results table is unchanged."
+          }
+        }
+      }
+    }
+  }
+}

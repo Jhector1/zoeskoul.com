@@ -1,0 +1,223 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-4": {
+        "search_names": {
+          "label": "Search Names with LIKE",
+          "summary": "Learn how to find names by matching part of a text value with LIKE and wildcards in the customers table.",
+          "cards": {
+            "sketch0": {
+              "title": "Find names that contain certain letters"
+            },
+            "sketch1": {
+              "title": "Starts with and ends with patterns"
+            },
+            "sketch2": {
+              "title": "Combine name search with other filters"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Name Search Practice"
+            }
+          },
+          "projectSteps": {
+            "ci_search_contains_a": {
+              "title": "Query names containing a letter"
+            },
+            "ci_search_starts_o": {
+              "title": "Query names starting with O"
+            },
+            "ci_search_active_e": {
+              "title": "Search names and keep only active rows"
+            }
+          },
+          "quiz": {
+            "sc_like_contains": {
+              "title": "Choose the contains pattern",
+              "prompt": "Which `LIKE` pattern finds names that contain `ia` anywhere in `full_name`?",
+              "hint": "Use `%` on both sides when the text can appear anywhere.",
+              "help": {
+                "concept": "`LIKE` uses `%` as a wildcard for any number of characters. To match text anywhere inside a value, place `%` before and after the target text.",
+                "hint_1": "A pattern for 'contains' is different from 'starts with' and 'ends with'.",
+                "hint_2": "Look for the option with `%` on both sides of `ia`."
+              },
+              "options": {
+                "a": "LIKE 'ia%'",
+                "b": "LIKE '%ia%'",
+                "c": "LIKE '%ia'",
+                "d": "LIKE '_ia_'"
+              }
+            },
+            "sc_like_prefix": {
+              "title": "Choose the starts-with query",
+              "prompt": "Which query returns customers whose `full_name` starts with `O`?",
+              "hint": "For a starts-with search, the wildcard goes after the letter.",
+              "help": {
+                "concept": "A prefix search with `LIKE` keeps the known starting text first, then uses `%` for any remaining characters.",
+                "hint_1": "Check which side of the pattern should stay fixed and where the wildcard should allow extra characters.",
+                "hint_2": "Find the query using `LIKE 'O%'` in the `WHERE` clause."
+              },
+              "options": {
+                "a": "SELECT full_name FROM customers WHERE full_name LIKE '%O';",
+                "b": "SELECT full_name FROM customers WHERE full_name LIKE '%O%';",
+                "c": "SELECT full_name FROM customers WHERE full_name LIKE 'O%';",
+                "d": "SELECT full_name FROM customers WHERE full_name = '%O';"
+              }
+            },
+            "mc_like_true_statements": {
+              "title": "Recognize true LIKE statements",
+              "prompt": "Choose all true statements about `LIKE` and `%` in this lesson.",
+              "hint": "Think about what `%text%`, `text%`, and `%text` each mean.",
+              "help": {
+                "concept": "The `%` wildcard stands for any number of characters. Its position changes whether the pattern means contains, starts with, or ends with.",
+                "hint_1": "`%a%` means contains `a`, while `A%` means starts with `A`.",
+                "hint_2": "Check each statement by imagining where unknown characters are allowed before or after the known text."
+              },
+              "options": {
+                "a": "`'%ia%'` can match a name with `ia` in the middle.",
+                "b": "`'O%'` can match a name that starts with `O`.",
+                "c": "`'%Grant'` can match a name that ends with `Grant`.",
+                "d": "`'M%'` only matches names that end with `M`."
+              }
+            },
+            "mc_like_and_filters": {
+              "title": "Combine pattern search with filters",
+              "prompt": "Which queries correctly search `full_name` with `LIKE` and also filter to active customers? Choose all that apply.",
+              "hint": "A matching answer should include both a `LIKE` condition on `full_name` and `status = 'active'`.",
+              "help": {
+                "concept": "You can combine a text pattern condition and another filter with `AND` so both conditions must be true.",
+                "hint_1": "Look for queries that use `WHERE full_name LIKE ... AND status = 'active'`.",
+                "hint_2": "Reject options that use `OR` when the query should require both conditions, or that compare `full_name` without `LIKE`."
+              },
+              "options": {
+                "a": "SELECT full_name FROM customers WHERE full_name LIKE '%a%' AND status = 'active';",
+                "b": "SELECT full_name FROM customers WHERE full_name LIKE 'O%' AND status = 'active';",
+                "c": "SELECT full_name FROM customers WHERE full_name = '%a%' AND status = 'active';",
+                "d": "SELECT full_name FROM customers WHERE full_name LIKE '%a%' OR status = 'active';"
+              }
+            },
+            "dr_like_contains_order": {
+              "title": "Build a contains search query",
+              "prompt": "Arrange the SQL parts to make a query that shows `id` and `full_name` for customers whose names contain `ia`.",
+              "hint": "Start with `SELECT`, then `FROM`, then the `WHERE` condition.",
+              "help": {
+                "concept": "A basic filtered query follows the order `SELECT ... FROM ... WHERE ...`.",
+                "hint_1": "The columns come right after `SELECT`.",
+                "hint_2": "Place the table name after `FROM`, and the `LIKE` condition after `WHERE`."
+              },
+              "tokens": {
+                "t1": "SELECT id, full_name",
+                "t2": "FROM customers",
+                "t3": "WHERE full_name LIKE '%ia%'"
+              }
+            },
+            "dr_like_active_order": {
+              "title": "Build a filtered name search",
+              "prompt": "Arrange the SQL parts to make a query that shows `full_name` for active customers whose names start with `L`.",
+              "hint": "The `AND` condition belongs inside the `WHERE` clause after the first condition.",
+              "help": {
+                "concept": "When a query has two filters, both conditions stay in the `WHERE` clause and are connected with `AND`.",
+                "hint_1": "Use `LIKE 'L%'` for the name pattern, then add the status condition.",
+                "hint_2": "The full sequence is `SELECT`, `FROM`, then one `WHERE` clause containing both conditions."
+              },
+              "tokens": {
+                "t1": "SELECT full_name",
+                "t2": "FROM customers",
+                "t3": "WHERE full_name LIKE 'L%' AND status = 'active'"
+              }
+            },
+            "fb_like_contains_blank": {
+              "title": "Fill the contains wildcard",
+              "prompt": "Complete the pattern so it finds names containing `Chen` anywhere.",
+              "hint": "A contains pattern needs wildcards before and after the text.",
+              "help": {
+                "concept": "To search for text anywhere inside a value, wrap the target text with `%` on both sides.",
+                "hint_1": "Starts-with uses only one `%`, but contains uses two.",
+                "hint_2": "The missing value should include `Chen` with a wildcard before it and after it."
+              },
+              "template": "WHERE full_name LIKE [blank1]",
+              "choices": [
+                "'Chen%'",
+                "'%Chen%'",
+                "'%Chen'",
+                "'Chen'"
+              ]
+            },
+            "fb_like_prefix_blank": {
+              "title": "Fill the starts-with pattern",
+              "prompt": "Complete the pattern so it finds names starting with `M`.",
+              "hint": "Put the known first letter before the wildcard.",
+              "help": {
+                "concept": "A starts-with search keeps the known beginning text first and places `%` after it.",
+                "hint_1": "You want names that begin with `M`, not names that merely contain `M` somewhere.",
+                "hint_2": "Choose the value where `M` comes first and `%` comes after it."
+              },
+              "template": "WHERE full_name LIKE [blank1]",
+              "choices": [
+                "'%M%'",
+                "'%M'",
+                "'M%'",
+                "'M'"
+              ]
+            },
+            "ci_search_contains_a": {
+              "title": "Query names containing a letter",
+              "prompt": "Write a query that returns `id` and `full_name` from `customers` for rows where `full_name` contains the letter `a`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM customers\nWHERE ;"
+            },
+            "ci_search_starts_o": {
+              "title": "Query names starting with O",
+              "prompt": "Write a query that returns `full_name` and `status` for customers whose `full_name` starts with `O`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT full_name, status\nFROM customers\nWHERE full_name LIKE ;"
+            },
+            "ci_search_active_e": {
+              "title": "Search names and keep only active rows",
+              "prompt": "Write a query that returns `full_name`, `city`, and `status` for customers whose `full_name` contains the letter `e` and whose `status` is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT full_name, city, status\nFROM customers\nWHERE full_name LIKE \n  AND ;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-4": {
+        "search_names": {
+          "sketch_like_basics": {
+            "title": "Find names that contain certain letters",
+            "bodyMarkdown": "When you do not know the full text value, `LIKE` helps you search for part of it.\n\nIn this topic, the `customers` table has a `full_name` column. You can search for names that contain a pattern.\n\n```sql\nSELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%ia%';\n```\n\nWhat this does:\n- `SELECT id, full_name` shows the columns you want.\n- `FROM customers` reads from the `customers` table.\n- `WHERE full_name LIKE '%ia%'` keeps rows where `full_name` contains `ia` anywhere in the text.\n\nIn the sample data, this matches names like `Mia Lopez` and `Liam Scott` because both contain the letters `ia`.\n\nThe `%` symbol is a wildcard:\n- `%ia%` = contains `ia`\n- `M%` = starts with `M`\n- `%son` = ends with `son`\n\nTry it yourself: write the query in the SQL editor, click Run query, and then change `%ia%` to `%Chen%` or `O%` to see how the results change."
+          },
+          "sketch_prefix_suffix": {
+            "title": "Starts with and ends with patterns",
+            "bodyMarkdown": "You can use `LIKE` to search for the beginning or end of a name.\n\n```sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE 'O%';\n```\n\nStep by step:\n- `O%` means the text starts with `O`.\n- So this query finds names whose first visible letter is `O`.\n- In the sample data, `Olivia Chen` matches.\n\nHere is an ending pattern:\n\n```sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE '%Grant';\n```\n\nThis means:\n- `%Grant` = any text before `Grant`\n- so it finds names that end with `Grant`\n\nA useful detail: `LIKE` matches text patterns, not numeric ranges.\n\nYour turn: run one query that finds names starting with `L`, then another that finds names ending with `Reed`. Check the results table after each run."
+          },
+          "sketch_like_with_filters": {
+            "title": "Combine name search with other filters",
+            "bodyMarkdown": "You can combine `LIKE` with other conditions using `AND`.\n\n```sql\nSELECT full_name, status, city\nFROM customers\nWHERE full_name LIKE '%a%'\n  AND status = 'active';\n```\n\nLine by line:\n- `SELECT full_name, status, city` shows the name and a little extra context.\n- `FROM customers` chooses the table.\n- `WHERE full_name LIKE '%a%'` keeps names containing the letter `a`.\n- `AND status = 'active'` keeps only active customers from that smaller set.\n\nThis is helpful in real cleanup work. You might want names matching a pattern, but only for active records or only for non-test rows.\n\nFor example, you could also exclude test accounts:\n\n```sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE '%Test%'\n  AND is_test = 1;\n```\n\nTry this: modify the first query so it only shows active customers whose names contain `o`. Write it in the SQL editor, click Run query, and compare the rows you get."
+          }
+        }
+      }
+    }
+  }
+}

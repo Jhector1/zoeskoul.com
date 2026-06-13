@@ -1,0 +1,221 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-2": {
+        "filter_by_text": {
+          "label": "filter by text",
+          "summary": "Learn how to keep only rows whose text matches a word, phrase, or pattern by using WHERE with text values and LIKE.",
+          "cards": {
+            "sketch0": {
+              "title": "Filtering exact text values"
+            },
+            "sketch1": {
+              "title": "Using LIKE to match part of a word"
+            },
+            "sketch2": {
+              "title": "Combining text conditions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Text filter practice set"
+            }
+          },
+          "projectSteps": {
+            "ci_art_products": {
+              "title": "Show Art product names"
+            },
+            "ci_name_contains_book": {
+              "title": "Find names containing book"
+            },
+            "ci_stationery_pen": {
+              "title": "Filter by category and name text"
+            }
+          },
+          "quiz": {
+            "sc-text-quotes": {
+              "title": "Text values need quotes",
+              "prompt": "Which WHERE condition correctly filters rows where the category is Art?",
+              "hint": "Text values in SQL are written inside single quotes.",
+              "help": {
+                "concept": "When you compare a text column in SQL, the text value must be written as a string literal using single quotes.",
+                "hint_1": "Look for the option that compares `category` to a quoted text value.",
+                "hint_2": "The correct condition uses `=` and puts Art inside single quotes."
+              },
+              "options": {
+                "a": "WHERE category = 'Art'",
+                "b": "WHERE category LIKE Art"
+              }
+            },
+            "sc-like-contains": {
+              "title": "Pattern for contains",
+              "prompt": "Which pattern finds product names that contain the text `book` anywhere in the name?",
+              "hint": "Use `%` before and after the text when it can appear anywhere.",
+              "help": {
+                "concept": "In a LIKE pattern, `%` stands for any number of characters. Putting `%` on both sides means the text can appear anywhere inside the value.",
+                "hint_1": "A contains search is different from starts with or ends with.",
+                "hint_2": "Choose the pattern with `book` in the middle and `%` on both sides."
+              },
+              "options": {
+                "a": "'book%'",
+                "b": "'%book'",
+                "c": "'%book%'",
+                "d": "'book'"
+              }
+            },
+            "mc-like-matches": {
+              "title": "Rows matched by a LIKE filter",
+              "prompt": "Choose all product names from this dataset that would match `WHERE name LIKE '%book%'`.",
+              "hint": "The pattern matches names containing the letters `book` anywhere.",
+              "help": {
+                "concept": "A LIKE pattern with `%book%` matches any text value that includes the substring `book`, even if other letters appear before or after it.",
+                "hint_1": "Check each product name for the exact letter sequence `book`.",
+                "hint_2": "Two names in the dataset include `book` as part of the product name."
+              },
+              "options": {
+                "a": "Sketchbook",
+                "b": "Notebook",
+                "c": "Desk Lamp",
+                "d": "Fountain Pen"
+              }
+            },
+            "mc-text-filters-valid": {
+              "title": "Valid text filter conditions",
+              "prompt": "Choose all WHERE conditions that correctly filter text in this lesson.",
+              "hint": "Look for correct use of quotes and valid text operators.",
+              "help": {
+                "concept": "Text filtering in this topic uses exact comparison with `=` and pattern matching with `LIKE`, both with quoted text values.",
+                "hint_1": "A valid condition should compare a real column like `name` or `category` to quoted text.",
+                "hint_2": "Two options are valid: one exact match and one pattern match."
+              },
+              "options": {
+                "a": "category = 'Home'",
+                "b": "name LIKE '%Pen%'",
+                "c": "price = 'Art'",
+                "d": "stock LIKE '%5%'"
+              }
+            },
+            "dr-query-order-like": {
+              "title": "Build a text filter query",
+              "prompt": "Arrange the SQL parts to make a query that shows product names containing `Pen`.",
+              "hint": "A basic query goes SELECT, FROM, then WHERE.",
+              "help": {
+                "concept": "A SELECT query follows a standard clause order: choose columns, name the table, then add the filter condition.",
+                "hint_1": "Start with the clause that says what to display.",
+                "hint_2": "The filter using `LIKE '%Pen%'` belongs after the table name."
+              },
+              "tokens": {
+                "t1": "SELECT name",
+                "t2": "FROM products",
+                "t3": "WHERE name LIKE '%Pen%'"
+              }
+            },
+            "dr-query-order-exact": {
+              "title": "Order an exact text match query",
+              "prompt": "Arrange the SQL parts to return all columns for products in the Stationery category.",
+              "hint": "Put the filter after the table clause.",
+              "help": {
+                "concept": "Exact text matching uses `WHERE column = 'text'`, and that condition comes after `FROM` in a simple SELECT query.",
+                "hint_1": "The query begins by selecting columns from the table.",
+                "hint_2": "Use the condition with `category = 'Stationery'` as the final clause."
+              },
+              "tokens": {
+                "t1": "SELECT *",
+                "t2": "FROM products",
+                "t3": "WHERE category = 'Stationery'"
+              }
+            },
+            "fb-like-keyword": {
+              "title": "Choose the text-matching keyword",
+              "prompt": "Complete the query so it matches names by pattern.",
+              "hint": "This keyword is used with `%` wildcards.",
+              "help": {
+                "concept": "SQL uses `the missing term` for pattern matching, especially when `%` wildcards are part of the comparison.",
+                "hint_1": "This is not the exact-match operator.",
+                "hint_2": "Choose the keyword used in `name ... '%Pen%'`."
+              },
+              "template": "SELECT name FROM products WHERE name [blank1] '%Pen%';",
+              "choices": [
+                "=",
+                "LIKE",
+                "FROM",
+                "ORDER BY"
+              ]
+            },
+            "fb-text-literal": {
+              "title": "Fill the category text",
+              "prompt": "Complete the filter so it returns only Home products.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
+              },
+              "template": "SELECT name FROM products WHERE category = [blank1];",
+              "choices": [
+                "'Home'",
+                "Home",
+                "'name'",
+                "'products'"
+              ]
+            },
+            "ci-art-products": {
+              "title": "Show Art product names",
+              "prompt": "Write a query that returns the `name` and `category` columns for products whose category is `Art`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products\nWHERE ;"
+            },
+            "ci-name-contains-book": {
+              "title": "Find names containing book",
+              "prompt": "Write a query that returns the `name` column for products whose name contains the text `book`. Use a text pattern filter, then click Run query and inspect the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT name\nFROM products\nWHERE name ;"
+            },
+            "ci-stationery-pen": {
+              "title": "Filter by category and name text",
+              "prompt": "Write a query that returns the `name` and `price` columns for products that are in the `Stationery` category and whose name contains `Pen`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT name, price\nFROM products\nWHERE ;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-2": {
+        "filter_by_text": {
+          "text-equality": {
+            "title": "Filtering exact text values",
+            "bodyMarkdown": "Text filters let you keep rows where a text column matches a specific value. In SQL, text values go inside single quotes.\n\nFor example, this query returns only products in the `Art` category:\n\n```sql\nSELECT name, category\nFROM products\nWHERE category = 'Art';\n```\n\nStep by step:\n- `SELECT name, category` chooses the columns to show.\n- `FROM products` says which table to read.\n- `WHERE category = 'Art'` keeps only rows whose `category` text is exactly `Art`.\n\nWith this dataset, the results include `Sketchbook` and `Acrylic Paint Set`.\n\nA common mistake is forgetting the quotes around text. `Art` is text, so write `'Art'`, not `Art`.\n\nTry it yourself: in the SQL editor, change `'Art'` to `'Home'`, click Run query, and check which product names appear in the results table."
+          },
+          "like-patterns": {
+            "title": "Using LIKE to match part of a word",
+            "bodyMarkdown": "Sometimes you do not want an exact text match. You want rows where text contains certain letters. Use `LIKE` with `%` as a wildcard.\n\nExample:\n\n```sql\nSELECT name\nFROM products\nWHERE name LIKE '%Pen%';\n```\n\nHow it works:\n- `LIKE` compares text by pattern instead of exact equality.\n- `%Pen%` means: any text before `Pen`, and any text after `Pen`.\n- So this finds names that contain `Pen` anywhere inside the text.\n\nIn this dataset, `Fountain Pen` matches that pattern.\n\nYou can also place `%` in different positions:\n- `'Note%'` = starts with `Note`\n- `'%Lamp'` = ends with `Lamp`\n- `'%book%'` = contains `book`\n\nTry this: write a query that finds product names containing `book`, run it, and compare the results table with your prediction."
+          },
+          "combining-text-filters": {
+            "title": "Combining text conditions",
+            "bodyMarkdown": "You can combine text filters with `AND`, `OR`, and `NOT`.\n\nWorked example:\n\n```sql\nSELECT name, category\nFROM products\nWHERE category = 'Stationery'\n  AND name LIKE '%Pen%';\n```\n\nLine by line:\n- `SELECT name, category` shows the product name and category.\n- `FROM products` reads from the products table.\n- `WHERE category = 'Stationery'` keeps only stationery items.\n- `AND name LIKE '%Pen%'` narrows that set to names containing `Pen`.\n\nIn this dataset, that returns `Fountain Pen`.\n\nYou can also use `OR` when either condition is allowed:\n\n```sql\nSELECT name, category\nFROM products\nWHERE category = 'Art'\n   OR category = 'Home';\n```\n\nThat returns products from either category.\n\nYour turn: in the SQL editor, change `AND` to `OR` in the first query, click Run query, and notice how many more rows appear in the results table."
+          }
+        }
+      }
+    }
+  }
+}

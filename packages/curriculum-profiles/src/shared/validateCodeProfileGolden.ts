@@ -11,6 +11,7 @@ import {
     validateCodeAgainstTests,
     validateSemanticCode,
 } from "@zoeskoul/curriculum-runtime";
+import { parseCodeExpected } from "@zoeskoul/practice-checks";
 import {
     buildCodeInputExpected,
 } from "../base/codeInputExpected.js";
@@ -174,7 +175,21 @@ export async function validateCodeProfileGolden(args: {
             continue;
         }
 
-        const expected = buildCodeInputExpected(exercise);
+        const rawExpected = buildCodeInputExpected(exercise);
+        const parsedExpected = parseCodeExpected(rawExpected);
+
+        if (!parsedExpected.success) {
+            issues.push({
+                code: "CODE_PROFILE_EXPECTED_SCHEMA_INVALID",
+                category: "recipe",
+                severity: "error",
+                exerciseId: exercise.id,
+                message: `Exercise "${exercise.id}" produced a code_input expected payload that the shared validator rejects.`,
+            });
+            continue;
+        }
+
+        const expected = parsedExpected.data;
         const solutionCode = String(expected.solutionCode ?? "").trim();
 
         if (!solutionCode) {

@@ -1,0 +1,167 @@
+{
+  "topicId": "module-3-sales-leaderboard-project",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-3",
+  "sectionSlug": "sql-v2-3-module-project",
+  "prefix": "sqlv2_3",
+  "minutes": 32,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "products_catalog",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.label",
+    "summaryKey": "topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.cards.sketch0.title",
+      "sketchId": "sketch_project_brief",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "mp_1",
+            "titleKey": "topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.projectSteps.mp_1.title",
+            "exerciseKey": "mp-1-rank-by-price",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_2",
+            "titleKey": "topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.projectSteps.mp_2.title",
+            "exerciseKey": "mp-2-add-stock-tiebreaker",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_3",
+            "titleKey": "topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.projectSteps.mp_3.title",
+            "exerciseKey": "mp-3-finish-leaderboard",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_project_brief",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.sketch_project_brief.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.sketch_project_brief.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "mp-1-rank-by-price",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price",
+      "language": "sql",
+      "starterCode": "-- Start the leaderboard by sorting expensive products first.\nSELECT\n  name,\n  price\nFROM products\nORDER BY price ASC;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;"
+      }
+    },
+    {
+      "id": "mp-2-add-stock-tiebreaker",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker",
+      "language": "sql",
+      "starterCode": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;\n\n-- Keep the ranking above.\n-- Add stock to the result and sort stock ASC after price DESC.\n",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;"
+      }
+    },
+    {
+      "id": "mp-3-finish-leaderboard",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard",
+      "language": "sql",
+      "starterCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;\n\n-- Keep the ranking above.\n-- Limit the leaderboard to 5 rows.\n",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC\nLIMIT 5;"
+      }
+    }
+  ]
+}

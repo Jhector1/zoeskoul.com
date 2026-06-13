@@ -1,0 +1,202 @@
+{
+  "topicId": "records_and_fields",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-0",
+  "sectionSlug": "sql-v2-0-2",
+  "prefix": "sqlv2_0",
+  "minutes": 15,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "students_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-0.records_and_fields.label",
+    "summaryKey": "topics.sql-v2.sql-v2-0.records_and_fields.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.records_and_fields.cards.sketch0.title",
+      "sketchId": "records-vs-fields",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.records_and_fields.cards.sketch1.title",
+      "sketchId": "reading-specific-fields",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.records_and_fields.cards.sketch2.title",
+      "sketchId": "table-reading-mental-model",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-0.records_and_fields.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "records-vs-fields",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.records_and_fields.records-vs-fields.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.records_and_fields.records-vs-fields.bodyMarkdown"
+    },
+    {
+      "id": "reading-specific-fields",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.records_and_fields.reading-specific-fields.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.records_and_fields.reading-specific-fields.bodyMarkdown"
+    },
+    {
+      "id": "table-reading-mental-model",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.records_and_fields.table-reading-mental-model.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.records_and_fields.table-reading-mental-model.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-record-definition",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.sc-record-definition",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-field-definition",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.sc-field-definition",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-identify-fields",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.mc-identify-fields",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "mc-identify-record-values",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.mc-identify-record-values",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr-query-order-all-fields",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.dr-query-order-all-fields",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t2",
+          "t3",
+          "t4",
+          "t1"
+        ]
+      }
+    },
+    {
+      "id": "dr-query-order-specific-fields",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.records_and_fields.quiz.dr-query-order-specific-fields",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t3",
+          "t4",
+          "t1",
+          "t2"
+        ]
+      }
+    }
+  ]
+}

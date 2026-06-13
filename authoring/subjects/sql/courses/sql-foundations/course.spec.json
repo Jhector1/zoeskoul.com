@@ -34,7 +34,7 @@
     "Find missing values using IS NULL and IS NOT NULL.",
     "Read query results and explain them in plain English."
   ],
-  "moduleCount": 5,
+  "moduleCount": 6,
   "modules": [
     {
       "moduleNumber": 0,
@@ -247,6 +247,27 @@
                 "Describe reading query results in plain language.",
                 "Identify a beginner SQL scenario that depends on understanding reading query results."
               ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-0-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-0-student-roster-project",
+              "title": "Module 0 Student Roster Project",
+              "summary": "Build a simple student roster snapshot one safe SELECT step at a time until the final table is ready to share.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Keep a small SQL project growing from one working query to the next.",
+                "Read a student table by selecting the columns needed for a clear roster view."
+              ],
+              "practice": {
+                "projectFlow": "progressive"
+              }
             }
           ]
         }
@@ -465,6 +486,27 @@
                 "Use Predicting Result Output in a simple SQL query or workflow.",
                 "Explain what result or output predicting result output should produce."
               ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-1-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-1-product-starter-sheet-project",
+              "title": "Module 1 Product Starter Sheet Project",
+              "summary": "Build a clean product starter sheet by growing one SELECT query into a simple reference report.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Carry a product query forward from one finished step to the next.",
+                "Select only the product columns that make a report easier to read."
+              ],
+              "practice": {
+                "projectFlow": "progressive"
+              }
             }
           ]
         }
@@ -707,6 +749,27 @@
               ]
             }
           ]
+        },
+        {
+          "sectionSlug": "sql-v2-2-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-2-inventory-watchlist-project",
+              "title": "Module 2 Inventory Watchlist Project",
+              "summary": "Build an inventory watchlist by adding one practical filter at a time to the same working query.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Refine one inventory query through multiple filtering steps.",
+                "Use comparisons and logical conditions to isolate the products that need attention."
+              ],
+              "practice": {
+                "projectFlow": "progressive"
+              }
+            }
+          ]
         }
       ],
       "moduleProject": "Create a data-detective worksheet with filtering prompts and SQL answers.",
@@ -923,6 +986,27 @@
                 "Use Build Clear Result Sets in a simple SQL query or workflow.",
                 "Explain what result or output build clear result sets should produce."
               ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-3-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-3-sales-leaderboard-project",
+              "title": "Module 3 Sales Leaderboard Project",
+              "summary": "Turn a rough product query into a ranked leaderboard by layering sorting and limiting steps one by one.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Grow a ranking query from a plain result set into a focused leaderboard.",
+                "Use ORDER BY and LIMIT to make a product report easy to scan."
+              ],
+              "practice": {
+                "projectFlow": "progressive"
+              }
             }
           ]
         }
@@ -1143,10 +1227,70 @@
               ]
             }
           ]
+        },
+        {
+          "sectionSlug": "sql-v2-4-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-4-customer-cleanup-project",
+              "title": "Module 4 Customer Cleanup Project",
+              "summary": "Build a customer cleanup worksheet by combining text, list, range, and NULL filters in one steady project flow.",
+              "minutes": 30,
+              "technical": true,
+              "learningGoals": [
+                "Carry a customer cleanup query through several realistic filtering revisions.",
+                "Combine LIKE, IN, BETWEEN, and NULL checks in one report."
+              ],
+              "practice": {
+                "projectFlow": "progressive"
+              }
+            }
+          ]
         }
       ],
       "moduleProject": "Create a search-and-cleanup worksheet for a customer table with missing or inconsistent information.",
       "prefix": "sqlv2_4"
+    },
+    {
+      "moduleNumber": 5,
+      "moduleSlug": "sql-v2-5",
+      "role": "capstone",
+      "title": "Capstone: Customer Follow-Up Report",
+      "purpose": "Pull the course skills together in one final reporting task that feels like a beginner analyst handoff.",
+      "datasetId": "customers_cleanup",
+      "coreSkill": "Integrated SQL reporting",
+      "learningObjectives": [
+        "Combine selection, filtering, ordering, and limiting in one practical query flow.",
+        "Revise a working query without losing earlier progress.",
+        "Build a clean report that highlights real customer follow-up needs."
+      ],
+      "sections": [
+        {
+          "sectionSlug": "sql-v2-5-capstone-project",
+          "title": "Capstone Project",
+          "role": "capstone",
+          "topics": [
+            {
+              "topicId": "module-5-customer-follow-up-capstone",
+              "title": "Module 5 Customer Follow-Up Capstone",
+              "summary": "Build a real-world customer follow-up report by improving one working query step by step until the final handoff is ready.",
+              "minutes": 36,
+              "technical": true,
+              "learningGoals": [
+                "Sustain one SQL project through several realistic revisions.",
+                "Ship a final customer report that combines the core SQL foundations skills from the course."
+              ],
+              "practice": {
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ],
+      "moduleProject": "Create a final customer follow-up report that surfaces the most important real records for a teammate to review.",
+      "prefix": "sqlv2_5"
     }
   ],
   "topicPolicies": {

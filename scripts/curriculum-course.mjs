@@ -176,16 +176,49 @@ function resolveConfiguredLiveSubjectSlug() {
   return liveSubjectSlug;
 }
 
-function resolveCourseSlug({ required }) {
+function normalizeDraftLikeSlug(value) {
+  return String(value ?? "")
+      .trim()
+      .toLowerCase()
+      .replace(/--draft$/, "")
+      .replace(new RegExp(`^${subjectSlug}--`), "")
+      .replace(/--/g, "-");
+}
+
+function resolveRequestedCourseSlug() {
   if (courseSlug) return courseSlug;
 
-  if (required) {
+  return resolvePublishTargetCourseSlug();
+}
+
+function resolveAuthoringCourseSlug(requestedCourseSlug) {
+  if (existsSync(getCourseSpecPath(requestedCourseSlug))) {
+    return requestedCourseSlug;
+  }
+
+  const configuredCourseSlug = resolvePublishTargetCourseSlug();
+  const configuredLiveSubjectSlug = resolveConfiguredLiveSubjectSlug();
+  const normalizedRequested = normalizeDraftLikeSlug(requestedCourseSlug);
+  const normalizedLiveSubject = normalizeDraftLikeSlug(configuredLiveSubjectSlug);
+
+  if (
+      normalizedRequested === normalizedLiveSubject &&
+      existsSync(getCourseSpecPath(configuredCourseSlug))
+  ) {
+    return configuredCourseSlug;
+  }
+
+  return requestedCourseSlug;
+}
+
+function resolveCourseSlug({ required }) {
+  if (!courseSlug && required) {
     console.error(`Action "${action}" requires a courseSlug.`);
     printUsage();
     process.exit(1);
   }
 
-  return resolvePublishTargetCourseSlug();
+  return resolveAuthoringCourseSlug(resolveRequestedCourseSlug());
 }
 
 function getCourseRoot(resolvedCourseSlug) {
@@ -199,6 +232,54 @@ function getCourseSpecPath(resolvedCourseSlug) {
 function getCourseBlueprintPath(resolvedCourseSlug) {
   return path.join(getCourseRoot(resolvedCourseSlug), "course.blueprint.json");
 }
+
+function draftSubjectRootExists(slug) {
+  return existsSync(
+      path.join(root, ".curriculum-drafts", "subjects", slug),
+  );
+}
+
+function resolveDraftSubjectTarget() {
+  const requestedCourseSlug = resolveRequestedCourseSlug();
+  const resolvedCourseSlug = resolveAuthoringCourseSlug(requestedCourseSlug);
+  const configuredCourseSlug = resolvePublishTargetCourseSlug();
+  const configuredLiveSubjectSlug = resolveConfiguredLiveSubjectSlug();
+  const normalizedRequested = normalizeDraftLikeSlug(requestedCourseSlug);
+  const normalizedLiveSubject = normalizeDraftLikeSlug(configuredLiveSubjectSlug);
+  const requestedCourseExists = existsSync(getCourseSpecPath(resolvedCourseSlug));
+
+  if (requestedCourseExists) {
+    const conventionalDraftSlug = `${subjectSlug}--${requestedCourseSlug}--draft`;
+    const shouldUseLiveSubjectDraft =
+        resolvedCourseSlug === configuredCourseSlug &&
+        !draftSubjectRootExists(conventionalDraftSlug) &&
+        draftSubjectRootExists(configuredLiveSubjectSlug);
+
+    return {
+      courseSlug: resolvedCourseSlug,
+      draftSubjectSlug: shouldUseLiveSubjectDraft
+          ? configuredLiveSubjectSlug
+          : conventionalDraftSlug,
+    };
+  }
+
+  if (
+      configuredCourseSlug &&
+      normalizedRequested === normalizedLiveSubject &&
+      existsSync(getCourseSpecPath(configuredCourseSlug))
+  ) {
+    return {
+      courseSlug: configuredCourseSlug,
+      draftSubjectSlug: configuredLiveSubjectSlug,
+    };
+  }
+
+  return {
+    courseSlug: requestedCourseSlug,
+    draftSubjectSlug: `${subjectSlug}--${requestedCourseSlug}--draft`,
+  };
+}
+
 function loadEnvFiles() {
   for (const relativePath of [
     ".env",
@@ -420,11 +501,16 @@ switch (action) {
   case "publish": {
     const resolvedCourseSlug = resolveCourseSlug({ required: true });
     assertCourseExists(resolvedCourseSlug);
+    const draftSubjectTarget = resolveDraftSubjectTarget();
 
     const resolvedLiveSubjectSlug =
         liveSubjectSlugFlag ?? resolveConfiguredLiveSubjectSlug();
 
     assertCoursePublishSafe(resolvedCourseSlug, resolvedLiveSubjectSlug);
+
+    if (!process.env.DRAFT_SUBJECT_SLUG) {
+      process.env.DRAFT_SUBJECT_SLUG = draftSubjectTarget.draftSubjectSlug;
+    }
 
     const cliPlan = buildPublishCliPlan({
       subjectSlug,
@@ -475,13 +561,14 @@ switch (action) {
     break;
   }
   case "draft-goldens": {
-    const resolvedCourseSlug = resolveCourseSlug({ required: true });
+    const draftGoldensTarget = resolveDraftSubjectTarget();
+    const resolvedCourseSlug = draftGoldensTarget.courseSlug;
     assertCourseExists(resolvedCourseSlug);
 
     loadEnvFiles();
 
     if (!process.env.DRAFT_SUBJECT_SLUG) {
-      process.env.DRAFT_SUBJECT_SLUG = `${subjectSlug}--${resolvedCourseSlug}--draft`;
+      process.env.DRAFT_SUBJECT_SLUG = draftGoldensTarget.draftSubjectSlug;
     }
 
     process.env.DRAFT_COURSE_SLUG = resolvedCourseSlug;

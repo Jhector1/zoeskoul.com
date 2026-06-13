@@ -9,7 +9,8 @@
     "sql-v2-1",
     "sql-v2-2",
     "sql-v2-3",
-    "sql-v2-4"
+    "sql-v2-4",
+    "sql-v2-5"
   ],
   "modules": [
     {
@@ -36,6 +37,11 @@
       "moduleSlug": "sql-v2-4",
       "moduleNumber": 4,
       "title": "Working with Text, Lists, Ranges, and NULL"
+    },
+    {
+      "moduleSlug": "sql-v2-5",
+      "moduleNumber": 5,
+      "title": "Capstone: Customer Follow-Up Report"
     }
   ]
 }

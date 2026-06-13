@@ -1,6 +1,8 @@
 import { z } from "zod";
 import {
     CodeExpectedSchema as SharedCodeExpectedSchema,
+    type CodeExpected as SharedCodeExpected,
+    type CodeExpectedInput as SharedCodeExpectedInput,
     ProgrammingExpectedSchema as SharedProgrammingExpectedSchema,
     SqlExpectedSchema as SharedSqlExpectedSchema,
     SqlRuntimeSchema,
@@ -42,9 +44,9 @@ export const ProgrammingExpectedSchema = SharedProgrammingExpectedSchema;
 export const SqlExpectedSchema = SharedSqlExpectedSchema;
 export const CodeExpectedSchema = SharedCodeExpectedSchema;
 
-export type CodeExpected = ProgrammingExpected | SqlExpected;
+export type CodeExpected = SharedCodeExpected;
 export type { ProgrammingExpected, SqlExpected, SqlRuntime, SqlTest };
-export type CodeExpectedInput = ProgrammingExpectedInput | SqlExpectedInput;
+export type CodeExpectedInput = SharedCodeExpectedInput;
 
 /* -------------------------------------------------------------------------- */
 /*                                   keys                                     */
