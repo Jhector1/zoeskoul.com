@@ -1,0 +1,146 @@
+{
+  "subjects": {
+    "applied-python-projects": {
+      "title": "Applied Python Projects",
+      "description": "This course helps learners build polished beginner Python projects using classes, objects, tests, debugging techniques, style habits, and capstone planning.",
+      "moreComingSoon": "More Applied Python Projects lessons are coming soon."
+    }
+  },
+  "modules": {
+    "applied-python-projects": {
+      "python-8-object-oriented-programming": {
+        "title": "Object-Oriented Programming",
+        "description": "Introduce classes and objects as a way to model related state and behavior.",
+        "outcomes": [
+          "Define simple classes",
+          "Create instances",
+          "Use methods and attributes"
+        ],
+        "why": [
+          "Builds confidence with object-oriented programming.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "python-9-testing-debugging-and-style": {
+        "title": "Testing, Debugging, and Style",
+        "description": "Help learners verify code behavior, debug systematically, and write readable Python.",
+        "outcomes": [
+          "Write simple tests",
+          "Use debugging techniques",
+          "Apply Python style conventions"
+        ],
+        "why": [
+          "Builds confidence with testing, debugging, and style.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "python-10-capstone-automation-project": {
+        "title": "Capstone Automation Project",
+        "description": "Guide learners through a complete beginner Python project that combines core skills.",
+        "outcomes": [
+          "Plan a small program",
+          "Build and test multiple functions",
+          "Present a finished Python project"
+        ],
+        "why": [
+          "Builds confidence with capstone automation project.",
+          "Prepares learners for the next skills in the course."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "applied-python-projects": {
+      "python-8-object-oriented-programming": {
+        "applied-python-projects-python-8-class-basics": {
+          "title": "Class Basics",
+          "description": "Learn classes and instances, attributes and __init__, methods and self through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Classes and Instances",
+            "Attributes and __init__",
+            "Methods and self"
+          ]
+        },
+        "applied-python-projects-python-8-design-with-objects": {
+          "title": "Design With Objects",
+          "description": "Learn encapsulation and responsibility, lists of objects, class debugging patterns through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Encapsulation and Responsibility",
+            "Lists of Objects",
+            "Class Debugging Patterns"
+          ]
+        },
+        "applied-python-projects-python-8-module-project": {
+          "title": "Module Project",
+          "description": "Learn module 8 class model project through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Module 8 Class Model Project"
+          ]
+        }
+      },
+      "python-9-testing-debugging-and-style": {
+        "applied-python-projects-python-9-testing-basics": {
+          "title": "Testing Basics",
+          "description": "Learn writing test cases, assertions and expected results, testing edge cases through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Writing Test Cases",
+            "Assertions and Expected Results",
+            "Testing Edge Cases"
+          ]
+        },
+        "applied-python-projects-python-9-debugging-and-style": {
+          "title": "Debugging and Style",
+          "description": "Learn debugging with print and trace, readable python style, refactoring safely through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Debugging With Print and Trace",
+            "Readable Python Style",
+            "Refactoring Safely"
+          ]
+        },
+        "applied-python-projects-python-9-module-project": {
+          "title": "Module Project",
+          "description": "Learn module 9 debug and polish project through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Module 9 Debug and Polish Project"
+          ]
+        }
+      },
+      "python-10-capstone-automation-project": {
+        "applied-python-projects-python-10-project-planning": {
+          "title": "Project Planning",
+          "description": "Learn choosing a capstone scope, breaking projects into functions, data model for a small app through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Choosing a Capstone Scope",
+            "Breaking Projects Into Functions",
+            "Data Model for a Small App"
+          ]
+        },
+        "applied-python-projects-python-10-building-and-polishing": {
+          "title": "Building and Polishing",
+          "description": "Learn implementing the core loop, testing the capstone, presenting and documenting the project through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Implementing the Core Loop",
+            "Testing the Capstone",
+            "Presenting and Documenting the Project"
+          ]
+        },
+        "applied-python-projects-python-10-capstone-project": {
+          "title": "Final Project",
+          "description": "Learn capstone automation project through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Capstone Automation Project"
+          ]
+        }
+      }
+    }
+  }
+}

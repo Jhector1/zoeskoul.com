@@ -1,0 +1,220 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "table_names_and_column_names": {
+          "label": "Table Names and Column Names",
+          "summary": "Learn how to recognize table names and column names before writing longer SQL queries.",
+          "cards": {
+            "sketch0": {
+              "title": "Tables hold rows, and columns label each kind of data"
+            },
+            "sketch1": {
+              "title": "Use the exact table and column names"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Recognize table and column names"
+            }
+          },
+          "projectSteps": {
+            "ci_select_all_columns": {
+              "title": "Guided check: show every column"
+            },
+            "ci_select_name_column": {
+              "title": "Guided check: show just the names"
+            },
+            "ci_select_id_and_city": {
+              "title": "Guided check: show two columns"
+            }
+          },
+          "quiz": {
+            "sc_table_name_students": {
+              "title": "Pick the table name",
+              "prompt": "In this lesson's dataset, what is the table name that stores the student records?",
+              "hint": "Look for the name that appears after FROM in the example queries.",
+              "help": {
+                "concept": "A table name identifies the whole collection of rows. In this topic, the student records are stored in one table, and queries read from that table with FROM.",
+                "hint_1": "Check the schema or the worked example that starts with SELECT and then names the source table.",
+                "hint_2": "It is the plural word used in `FROM ...` in the lesson examples."
+              },
+              "options": {
+                "a": "student",
+                "b": "students",
+                "c": "name",
+                "d": "grade"
+              }
+            },
+            "sc_column_name_city": {
+              "title": "Pick a real column name",
+              "prompt": "Which of these is a real column name in the `students` table?",
+              "hint": "Compare the choices to the schema columns shown in the lesson.",
+              "help": {
+                "concept": "Column names label the fields inside a table. A valid answer must match one of the exact column names in the `students` schema.",
+                "hint_1": "The table columns are `id`, `name`, `grade`, `age`, and one more location-related column.",
+                "hint_2": "Choose the option that names where a student lives, not a made-up variation."
+              },
+              "options": {
+                "a": "student_name",
+                "b": "classroom",
+                "c": "city",
+                "d": "years_old"
+              }
+            },
+            "mc_valid_students_columns": {
+              "title": "Choose all valid columns",
+              "prompt": "Which of these are valid column names in the `students` table? Choose all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "name",
+                "b": "student_id",
+                "c": "age",
+                "d": "student_city"
+              }
+            },
+            "mc_queries_with_real_names": {
+              "title": "Find queries that use real names",
+              "prompt": "Which queries use a real table name and real column names from this dataset? Choose all that apply.",
+              "hint": "Check whether both the SELECT part and the FROM part use names from the schema.",
+              "help": {
+                "concept": "A basic SELECT query needs valid column names after SELECT and a valid table name after FROM. Both parts must match the schema exactly.",
+                "hint_1": "The only table in this topic is `students`, and valid columns include `id`, `name`, `grade`, `age`, and `city`.",
+                "hint_2": "Look for queries that use `students` as the table and avoid made-up names like `student_name` or `student`."
+              },
+              "options": {
+                "a": "SELECT name FROM students;",
+                "b": "SELECT student_name FROM students;",
+                "c": "SELECT city, age FROM students;",
+                "d": "SELECT name FROM student;"
+              }
+            },
+            "dr_query_order_one_column": {
+              "title": "Build a one-column query",
+              "prompt": "Arrange the tokens to make a query that shows the `name` column from the `students` table.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "students",
+                "t2": "FROM",
+                "t3": "name",
+                "t4": "SELECT",
+                "t5": ";"
+              }
+            },
+            "dr_query_order_two_columns": {
+              "title": "Build a two-column query",
+              "prompt": "Arrange the tokens to make a query that shows `id` and `city` from the `students` table.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "FROM",
+                "t2": "students",
+                "t3": "SELECT",
+                "t4": "id, city",
+                "t5": ";"
+              }
+            },
+            "fb_from_table_name": {
+              "title": "Complete the FROM clause",
+              "prompt": "Fill in the missing table name.",
+              "hint": "Use the table that contains all the student rows in this topic.",
+              "help": {
+                "concept": "The FROM clause names the table SQL should read. In this lesson, all starter queries read from the same student table.",
+                "hint_1": "The correct value is the plural table name shown in the schema browser.",
+                "hint_2": "It is the same word used in `FROM the missing term` in the examples."
+              },
+              "template": "SELECT name FROM [blank1];",
+              "choices": [
+                "students",
+                "student",
+                "name",
+                "city"
+              ]
+            },
+            "fb_select_column_name": {
+              "title": "Complete the SELECT column",
+              "prompt": "Fill in the missing column name so the query shows student cities.",
+              "hint": "Choose the column that stores where each student lives.",
+              "help": {
+                "concept": "The SELECT part names which column to display. To show locations, you need the location column from the schema.",
+                "hint_1": "The correct column is one of the five schema fields and is not `name` or `grade`.",
+                "hint_2": "It is the column used in the lesson when switching the query from names to locations."
+              },
+              "template": "SELECT [blank1] FROM students;",
+              "choices": [
+                "grade",
+                "city",
+                "students",
+                "id"
+              ]
+            },
+            "ci_select_all_columns": {
+              "title": "Guided check: show every column",
+              "prompt": "Complete a simple SELECT query that returns all columns from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
+              "help": {
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
+              },
+              "starterCode": "SELECT \nFROM students;"
+            },
+            "ci_select_name_column": {
+              "title": "Guided check: show just the names",
+              "prompt": "Complete a simple SELECT query that returns only the `name` column from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
+              "help": {
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
+              },
+              "starterCode": "SELECT \nFROM students;"
+            },
+            "ci_select_id_and_city": {
+              "title": "Guided check: show two columns",
+              "prompt": "Complete a simple SELECT query that returns the `id` and `city` columns from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
+              "help": {
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
+              },
+              "starterCode": "SELECT \nFROM students;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "table_names_and_column_names": {
+          "sketch_1": {
+            "title": "Tables hold rows, and columns label each kind of data",
+            "bodyMarkdown": "A **table** is like a grid of information. In this lesson, the table name is `students`.\n\nInside that table, each **column name** tells you what kind of data appears in that column. The `students` table has these columns:\n\n- `id`\n- `name`\n- `grade`\n- `age`\n- `city`\n\nA row is one student's record. For example, one row is:\n\n- `id` = 1\n- `name` = Noor\n- `grade` = A\n- `age` = 15\n- `city` = Chicago\n\nSo if you want student names, you use the column name `name`. If you want cities, you use the column name `city`.\n\n**Worked example:**\n\n```sql\nSELECT name\nFROM students;\n```\n\nStep by step:\n\n- `SELECT name` means \"show the values from the `name` column\"\n- `FROM students` means \"get them from the `students` table\"\n\nThis query would return the student names from the table.\n\n**Guided check:** Write the query in the SQL editor, click **Run query**, and then change `name` to `city` to see a different column in the results table."
+          },
+          "sketch_2": {
+            "title": "Use the exact table and column names",
+            "bodyMarkdown": "SQL needs the correct names from the schema. If the table is called `students`, then `FROM students` works. If you write a different table name, the query will fail.\n\nThe same idea is true for columns. In this dataset, `name` is a valid column, but `student_name` is not.\n\n**Worked example:**\n\n```sql\nSELECT id, name, city\nFROM students;\n```\n\nLine by line:\n\n- `SELECT id, name, city` asks for three columns\n- `FROM students` tells SQL which table to read\n\nThe results table would show each student's id, name, and city.\n\nYou can also read the schema browser to check the exact spellings before you run a query.\n\n**Guided check:** In the SQL editor, run the example above. Then remove `city` so the query shows only `id` and `name`."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,273 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-3": {
+        "show_top_5_records": {
+          "label": "Show Top 5 Records",
+          "summary": "Learn how LIMIT works with ORDER BY so you can show only the first few rows, such as the top 5 most expensive or newest products.",
+          "cards": {
+            "sketch0": {
+              "title": "Use LIMIT to show only a few rows"
+            },
+            "sketch1": {
+              "title": "Sort first, then keep the top rows"
+            },
+            "sketch2": {
+              "title": "What happens when the table has fewer than 5 rows?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Top 5 Product Views"
+            }
+          },
+          "projectSteps": {
+            "ci_top5_expensive_products": {
+              "title": "Write a query for the 5 most expensive products"
+            },
+            "ci_newest_5_products": {
+              "title": "Write a query for the newest 5 products"
+            },
+            "ci_low_stock_top5": {
+              "title": "Show up to 5 products with the lowest stock"
+            }
+          },
+          "quiz": {
+            "sc_limit_keyword": {
+              "title": "Pick the clause for showing only 5 rows",
+              "prompt": "Which SQL clause is used to return only 5 rows from a result?",
+              "hint": "Look for the clause that sets the maximum number of rows returned.",
+              "help": {
+                "concept": "The `LIMIT` clause restricts how many rows appear in the final result set.",
+                "hint_1": "This clause usually appears near the end of a SELECT query and uses a number like 5.",
+                "hint_2": "It does not sort rows or filter conditions; it only caps the row count."
+              },
+              "options": {
+                "a": "WHERE 5",
+                "b": "LIMIT 5",
+                "c": "FROM 5",
+                "d": "ORDER BY 5"
+              }
+            },
+            "sc_top5_price_desc": {
+              "title": "Choose the best query for top 5 highest prices",
+              "prompt": "Which query returns the 5 most expensive products from the `products` table?",
+              "hint": "To get the most expensive rows, sort prices from high to low before limiting.",
+              "help": {
+                "concept": "Top records come from combining `ORDER BY` with `DESC` for highest values, then `LIMIT` to keep only the first few rows.",
+                "hint_1": "Check which option sorts by `price` in descending order before applying the row limit.",
+                "hint_2": "An option with `ASC` would put the cheapest products first, not the most expensive ones."
+              },
+              "options": {
+                "a": "SELECT name, price FROM products ORDER BY price ASC LIMIT 5;",
+                "b": "SELECT name, price FROM products LIMIT 5 ORDER BY price DESC;",
+                "c": "SELECT name, price FROM products ORDER BY price DESC LIMIT 5;",
+                "d": "SELECT name, price FROM products WHERE price DESC LIMIT 5;"
+              }
+            },
+            "mc_limit_true_statements": {
+              "title": "Find the true statements about LIMIT",
+              "prompt": "Choose all correct statements about `LIMIT`.",
+              "hint": "Think about what LIMIT controls and what it does not control.",
+              "help": {
+                "concept": "`LIMIT` controls the maximum number of rows returned, but it does not decide sort order by itself.",
+                "hint_1": "Look for statements about row count versus row order.",
+                "hint_2": "A query can return fewer than the limit if fewer rows match, and meaningful top results usually need `ORDER BY` too."
+              },
+              "options": {
+                "a": "LIMIT can be used to cap the number of rows returned.",
+                "b": "LIMIT automatically sorts rows from highest to lowest.",
+                "c": "LIMIT 5 can still return fewer than 5 rows if only fewer rows match.",
+                "d": "LIMIT is often combined with ORDER BY to show top records."
+              }
+            },
+            "mc_top5_patterns": {
+              "title": "Identify queries that really show a top 5",
+              "prompt": "Choose all queries that correctly produce a meaningful top 5 result.",
+              "hint": "A meaningful top 5 needs a clear sort order before the row limit.",
+              "help": {
+                "concept": "A top 5 query should sort rows by the ranking column and then apply `LIMIT 5`.",
+                "hint_1": "Look for queries that use `ORDER BY` on a real column together with `LIMIT 5`.",
+                "hint_2": "A query with only `LIMIT 5` returns five rows, but not necessarily the top five by any measure."
+              },
+              "options": {
+                "a": "SELECT name, price FROM products ORDER BY price DESC LIMIT 5;",
+                "b": "SELECT name, created_at FROM products ORDER BY created_at DESC LIMIT 5;",
+                "c": "SELECT name FROM products LIMIT 5;",
+                "d": "SELECT name, stock FROM products WHERE stock > 0;"
+              }
+            },
+            "dr_query_order_top5": {
+              "title": "Build a top 5 price query",
+              "prompt": "Arrange these SQL parts to make a query that shows product names and prices, sorted from highest price to lowest, limited to 5 rows.",
+              "hint": "Start with SELECT and FROM, then sort, then limit.",
+              "help": {
+                "concept": "A SELECT query follows a clause order: choose columns, name the table, sort the rows, then limit the result.",
+                "hint_1": "The sorting clause comes before the limiting clause.",
+                "hint_2": "Use the table name right after FROM, then place the descending price sort before the final row cap."
+              },
+              "tokens": {
+                "t1": "SELECT name, price",
+                "t2": "FROM products",
+                "t3": "ORDER BY price DESC",
+                "t4": "LIMIT 5;"
+              }
+            },
+            "dr_newest5_order": {
+              "title": "Sequence the newest 5 query",
+              "prompt": "Arrange the tokens to create a query that shows the newest 5 products using `created_at`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT name, created_at",
+                "t2": "FROM products",
+                "t3": "ORDER BY created_at DESC",
+                "t4": "LIMIT 5;"
+              }
+            },
+            "fb_limit_number": {
+              "title": "Complete the row limit",
+              "prompt": "Fill in the missing value to return only 5 rows.",
+              "hint": "The blank should be the number of rows you want back.",
+              "help": {
+                "concept": "In `LIMIT`, the number tells SQL the maximum number of rows to return.",
+                "hint_1": "The topic is about showing the top the missing term records.",
+                "hint_2": "Choose the number that matches five rows, not a clause name."
+              },
+              "template": "SELECT name FROM products LIMIT [blank1];",
+              "choices": [
+                "3",
+                "5",
+                "price",
+                "DESC"
+              ]
+            },
+            "fb_desc_for_top": {
+              "title": "Complete the sort direction",
+              "prompt": "Fill in the missing keyword so the highest prices appear first.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
+              },
+              "template": "SELECT name, price FROM products ORDER BY price [blank1] LIMIT 5;",
+              "choices": [
+                "ASC",
+                "DESC",
+                "WHERE",
+                "FROM"
+              ]
+            },
+            "ci_top5_expensive_products": {
+              "title": "Write a query for the 5 most expensive products",
+              "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` from highest to lowest, and returns only the top 5 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products\nORDER BY \nLIMIT ;"
+            },
+            "ci_newest_5_products": {
+              "title": "Write a query for the newest 5 products",
+              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted from newest to oldest using `created_at`, and returns only 5 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products\nORDER BY \nLIMIT ;"
+            },
+            "ci_low_stock_top5": {
+              "title": "Show up to 5 products with the lowest stock",
+              "prompt": "Write a query that shows `name` and `stock` from `products`, sorts by `stock` from smallest to largest, and returns up to 5 rows. This should show the lowest-stock products first. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products\nORDER BY \nLIMIT ;"
+            },
+            "try-show_top_5_records-sketch0": {
+              "title": "Write a query for the 5 most expensive products",
+              "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` from highest to lowest, and returns only the top 5 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products\nORDER BY \nLIMIT ;"
+            },
+            "try-show_top_5_records-sketch1": {
+              "title": "Write a query for the newest 5 products",
+              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted from newest to oldest using `created_at`, and returns only 5 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products\nORDER BY \nLIMIT ;"
+            },
+            "try-show_top_5_records-sketch2": {
+              "title": "Show up to 5 products with the lowest stock",
+              "prompt": "Write a query that shows `name` and `stock` from `products`, sorts by `stock` from smallest to largest, and returns up to 5 rows. This should show the lowest-stock products first. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products\nORDER BY \nLIMIT ;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_show_top_5_records_sketch0": {
+              "title": "Write a query for the 5 most expensive products",
+              "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` from highest to lowest, and returns only the top 5 rows. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_show_top_5_records_sketch1": {
+              "title": "Write a query for the newest 5 products",
+              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted from newest to oldest using `created_at`, and returns only 5 rows. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_show_top_5_records_sketch2": {
+              "title": "Show up to 5 products with the lowest stock",
+              "prompt": "Write a query that shows `name` and `stock` from `products`, sorts by `stock` from smallest to largest, and returns up to 5 rows. This should show the lowest-stock products first. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-3": {
+        "show_top_5_records": {
+          "sketch_limit_basics": {
+            "title": "Use LIMIT to show only a few rows",
+            "bodyMarkdown": "Sometimes a query returns more rows than you want to read at once. `LIMIT` tells SQL to stop after a certain number of rows.\n\n```sql\nSELECT name, price\nFROM products\nLIMIT 5;\n```\n\nThis query means:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` reads from the `products` table.\n- `LIMIT 5` returns only the first 5 rows from the result.\n\nIn this dataset, the table has 6 products, so `LIMIT 5` would show 5 of them and leave 1 out.\n\nWorked example:\n\n```sql\nSELECT id, name\nFROM products\nLIMIT 3;\n```\n\nThis shows only the first 3 rows from the current result set.\n\nImportant: if you use `LIMIT` by itself, the rows are not guaranteed to be in a meaningful ranking order. If you want the top 5 by price or the newest 5 by date, combine `LIMIT` with `ORDER BY`.\n\nTry it yourself: Write the query in the SQL editor, click Run query, and change `LIMIT 3` to `LIMIT 5`. Check how many rows appear in the results table."
+          },
+          "sketch_order_then_limit": {
+            "title": "Sort first, then keep the top rows",
+            "bodyMarkdown": "To get the **top 5** records, first sort the rows, then limit them.\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 5;\n```\n\nStep by step:\n- `SELECT name, price` shows the product name and price.\n- `FROM products` uses the `products` table.\n- `ORDER BY price DESC` sorts from highest price to lowest price.\n- `LIMIT 5` keeps only the first 5 rows after sorting.\n\nWith the sample data, the highest price is `129.00` for `Office Chair`, so that row would appear near the top of the results table.\n\nAnother worked example:\n\n```sql\nSELECT name, created_at\nFROM products\nORDER BY created_at DESC\nLIMIT 5;\n```\n\nThis sorts by date from newest to oldest, then shows the newest 5 products.\n\nYour turn: In the SQL editor, run the price query first. Then change `price DESC` to `created_at DESC` and compare how the top 5 rows change in the results table."
+          },
+          "sketch_small_dataset_note": {
+            "title": "What happens when the table has fewer than 5 rows?",
+            "bodyMarkdown": "A useful detail: `LIMIT 5` means **up to 5 rows**, not always exactly 5 rows.\n\nIf your filtered result has only 2 rows, SQL returns those 2 rows.\n\nExample:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock < 10\nORDER BY stock ASC\nLIMIT 5;\n```\n\nLine by line:\n- `WHERE stock < 10` keeps only products with stock below 10.\n- `ORDER BY stock ASC` sorts from smallest stock to largest stock.\n- `LIMIT 5` returns at most 5 matching rows.\n\nIn this dataset, only a few products have stock below 10, so the results table may show fewer than 5 rows.\n\nTry this: Change the condition from `stock < 10` to `stock < 20`, click Run query, and see whether the results table gets closer to 5 rows."
+          }
+        }
+      }
+    }
+  }
+}

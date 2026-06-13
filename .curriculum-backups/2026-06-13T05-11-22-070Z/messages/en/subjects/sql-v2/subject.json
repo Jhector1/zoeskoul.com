@@ -1,0 +1,317 @@
+{
+  "subjects": {
+    "sql-v2": {
+      "title": "SQL Foundations",
+      "description": "A beginner-friendly SQL Foundations course that teaches learners how databases store information, how to read tables, and how to write safe SELECT queries for filtering, sorting, text matching, ranges, and missing values.",
+      "moreComingSoon": "More SQL Foundations lessons are coming soon."
+    }
+  },
+  "modules": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "title": "Getting Started with SQL and Databases",
+        "description": "Build the learner's mental model before syntax: what SQL is, how databases organize information, and how questions become queries.",
+        "outcomes": [
+          "Explain what SQL is used for in real applications.",
+          "Identify tables, rows, columns, records, and fields.",
+          "Read simple table data and describe what it means.",
+          "Use the browser SQL workspace to run a beginner query."
+        ],
+        "why": [
+          "Builds the mental model learners need before SQL syntax gets more detailed.",
+          "Shows how tables, rows, columns, and simple read-only queries work together."
+        ]
+      },
+      "sql-v2-1": {
+        "title": "Your First Queries with SELECT",
+        "description": "Teach learners to retrieve data confidently with SELECT and FROM before filtering or joining tables.",
+        "outcomes": [
+          "Write SELECT queries that retrieve data from one table.",
+          "Choose specific columns instead of always selecting every column.",
+          "Use FROM to identify the table being queried.",
+          "Read a query result table and explain what was returned."
+        ],
+        "why": [
+          "Gives learners a confident first pattern for reading data from one table.",
+          "Prepares learners to choose columns intentionally before adding filters."
+        ]
+      },
+      "sql-v2-2": {
+        "title": "Filtering Data with WHERE",
+        "description": "Introduce decision-making in queries by teaching learners to keep only the rows they actually need.",
+        "outcomes": [
+          "Use WHERE to return only rows that match a condition.",
+          "Compare text and numbers with beginner SQL operators.",
+          "Combine conditions with AND, OR, and NOT.",
+          "Debug common filtering mistakes in simple SQL queries."
+        ],
+        "why": [
+          "Shows how WHERE turns a full table into a focused answer.",
+          "Builds the comparison and logic skills needed for real SQL questions."
+        ]
+      },
+      "sql-v2-3": {
+        "title": "Sorting and Limiting Results",
+        "description": "Help beginners control output so answers are easier to read, rank, and compare.",
+        "outcomes": [
+          "Sort query results with ORDER BY.",
+          "Use ASC and DESC to control sort direction.",
+          "Use LIMIT to show a smaller result set.",
+          "Combine filtering, sorting, and limiting in one query."
+        ],
+        "why": [
+          "Helps learners control result order and size so answers are easier to inspect.",
+          "Prepares learners to combine filtering, sorting, and limiting in practical reports."
+        ]
+      },
+      "sql-v2-4": {
+        "title": "Working with Text, Lists, Ranges, and NULL",
+        "description": "Expand filtering to real-world cases like partial text, multiple choices, ranges, and missing values.",
+        "outcomes": [
+          "Search partial text with LIKE and wildcards.",
+          "Filter multiple values with IN and NOT IN.",
+          "Filter ranges with BETWEEN.",
+          "Find missing and present values with IS NULL and IS NOT NULL."
+        ],
+        "why": [
+          "Expands filtering to real-world data issues like partial text, lists, ranges, and missing values.",
+          "Builds confidence with the common conditions learners will see in everyday SQL."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "sql-v2-0-1": {
+          "title": "What SQL Is",
+          "description": "Learn what SQL means, what a database is, why SQL is useful through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "what SQL means",
+            "what a database is",
+            "why SQL is useful",
+            "real world examples of databases"
+          ]
+        },
+        "sql-v2-0-2": {
+          "title": "Understanding Tables",
+          "description": "Learn rows AND columns, records AND fields, table names AND column names through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "rows AND columns",
+            "records AND fields",
+            "table names AND column names",
+            "reading data LIKE a spreadsheet"
+          ]
+        },
+        "sql-v2-0-3": {
+          "title": "Database Thinking",
+          "description": "Learn how data is organized, one table vs multiple tables, intro to keys through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "how data is organized",
+            "one table vs multiple tables",
+            "intro to keys",
+            "thinking IN questions AND answers"
+          ]
+        },
+        "sql-v2-0-4": {
+          "title": "First SQL Environment",
+          "description": "Learn WHERE SQL runs, SQL editor basics, running your first query through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "WHERE SQL runs",
+            "SQL editor basics",
+            "running your first query",
+            "reading query results"
+          ]
+        }
+      },
+      "sql-v2-1": {
+        "sql-v2-1-1": {
+          "title": "Intro to SELECT",
+          "description": "Learn what SELECT does, selecting all columns with star, selecting specific columns through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "what SELECT does",
+            "selecting all columns with star",
+            "selecting specific columns",
+            "query structure basics"
+          ]
+        },
+        "sql-v2-1-2": {
+          "title": "Reading Data from a Table",
+          "description": "Learn from AND table names, choosing the right columns, viewing clean results through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "from AND table names",
+            "choosing the right columns",
+            "viewing clean results",
+            "writing simple readable queries"
+          ]
+        },
+        "sql-v2-1-3": {
+          "title": "SQL Syntax Basics",
+          "description": "Learn keywords, semicolons, uppercase vs lowercase through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "keywords",
+            "semicolons",
+            "uppercase vs lowercase",
+            "common beginner syntax mistakes"
+          ]
+        },
+        "sql-v2-1-4": {
+          "title": "Practice with Basic Queries",
+          "description": "Learn query one column, query multiple columns, query full tables through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "query one column",
+            "query multiple columns",
+            "query full tables",
+            "predicting result output"
+          ]
+        }
+      },
+      "sql-v2-2": {
+        "sql-v2-2-1": {
+          "title": "Intro to Filtering",
+          "description": "Learn why filtering matters, the WHERE clause, matching exact values through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "why filtering matters",
+            "the WHERE clause",
+            "matching exact values",
+            "filtering numbers AND text"
+          ]
+        },
+        "sql-v2-2-2": {
+          "title": "Comparison Operators",
+          "description": "Learn equals comparison, NOT equal comparison, greater than comparison through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "equals comparison",
+            "NOT equal comparison",
+            "greater than comparison",
+            "less than comparison"
+          ]
+        },
+        "sql-v2-2-3": {
+          "title": "Filtering with Multiple Conditions",
+          "description": "Learn AND conditions, OR conditions, NOT conditions through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "AND conditions",
+            "OR conditions",
+            "NOT conditions",
+            "combining conditions safely"
+          ]
+        },
+        "sql-v2-2-4": {
+          "title": "Beginner Filtering Practice",
+          "description": "Learn filter by number, filter by text, filter by more than one rule through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "filter by number",
+            "filter by text",
+            "filter by more than one rule",
+            "avoiding filtering mistakes"
+          ]
+        }
+      },
+      "sql-v2-3": {
+        "sql-v2-3-1": {
+          "title": "Sorting Data",
+          "description": "Learn why sorting matters, ORDER BY, ascending order through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "why sorting matters",
+            "ORDER BY",
+            "ascending order",
+            "descending order"
+          ]
+        },
+        "sql-v2-3-2": {
+          "title": "Sorting by Multiple Columns",
+          "description": "Learn primary sort, secondary sort, sorting text through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "primary sort",
+            "secondary sort",
+            "sorting text",
+            "sorting numbers AND dates"
+          ]
+        },
+        "sql-v2-3-3": {
+          "title": "Limiting Output",
+          "description": "Learn why LIMIT results, LIMIT clause, top rows only through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "why LIMIT results",
+            "LIMIT clause",
+            "top rows only",
+            "combining ORDER BY with LIMIT"
+          ]
+        },
+        "sql-v2-3-4": {
+          "title": "Practice with Output Control",
+          "description": "Learn find highest values, find lowest values, show top 5 records through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "find highest values",
+            "find lowest values",
+            "show top 5 records",
+            "build clear result sets"
+          ]
+        }
+      },
+      "sql-v2-4": {
+        "sql-v2-4-1": {
+          "title": "Text Matching",
+          "description": "Learn intro to LIKE, percent wildcard, underscore wildcard through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "intro to LIKE",
+            "percent wildcard",
+            "underscore wildcard",
+            "searching partial text"
+          ]
+        },
+        "sql-v2-4-2": {
+          "title": "Lists and Ranges",
+          "description": "Learn IN list filter, NOT IN list filter, BETWEEN range filter through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "IN list filter",
+            "NOT IN list filter",
+            "BETWEEN range filter",
+            "range filtering practice"
+          ]
+        },
+        "sql-v2-4-3": {
+          "title": "Missing Data",
+          "description": "Learn what NULL means, is NULL, is NOT NULL through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "what NULL means",
+            "is NULL",
+            "is NOT NULL",
+            "common NULL mistakes"
+          ]
+        },
+        "sql-v2-4-4": {
+          "title": "Search and Cleanup Practice",
+          "description": "Learn search names, filter statuses, find missing data through focused examples AND practice.",
+          "weeks": null,
+          "bullets": [
+            "search names",
+            "filter statuses",
+            "find missing data",
+            "combine text AND NULL filters"
+          ]
+        }
+      }
+    }
+  }
+}

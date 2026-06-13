@@ -4,6 +4,7 @@ import type { SqlDialect } from "@/lib/practice/types";
 import {
     makeProgrammingExpected,
     makeSqlExpected,
+    parseCodeExpected,
     toProgrammingCodeTests,
     toSqlCodeTests,
     type ProgrammingCodeTest,
@@ -139,13 +140,30 @@ export function normalizeCodeExpectedForSave(
             );
         }
 
-        return {
+        const persisted = {
             ...normalized,
             tests: canonTests,
             solutionCode,
             ...(solutionFiles !== undefined ? { solutionFiles } : {}),
             ...(sourceChecks.length ? { sourceChecks } : {}),
         };
+        const parsed = parseCodeExpected(persisted);
+
+        if (!parsed.success) {
+            throw new Error(
+                `Generator bug: invalid code_input expected payload. expected=${JSON.stringify(
+                    expected,
+                    null,
+                    2,
+                )} parsedError=${JSON.stringify(parsed.error.format(), null, 2)}`,
+            );
+        }
+
+        return {
+            ...parsed.data,
+            ...(solutionFiles !== undefined ? { solutionFiles } : {}),
+            ...(sourceChecks.length ? { sourceChecks } : {}),
+        } as SqlCodeExpected;
     }
 
     const normalized = makeProgrammingExpected(expected);
@@ -161,11 +179,28 @@ export function normalizeCodeExpectedForSave(
             );
         }
 
-        return {
+        const persisted = {
             ...normalized,
             ...(solutionFiles !== undefined ? { solutionFiles } : {}),
             ...(sourceChecks.length ? { sourceChecks } : {}),
         };
+        const parsed = parseCodeExpected(persisted);
+
+        if (!parsed.success) {
+            throw new Error(
+                `Generator bug: invalid semantic code_input expected payload. expected=${JSON.stringify(
+                    expected,
+                    null,
+                    2,
+                )} parsedError=${JSON.stringify(parsed.error.format(), null, 2)}`,
+            );
+        }
+
+        return {
+            ...parsed.data,
+            ...(solutionFiles !== undefined ? { solutionFiles } : {}),
+            ...(sourceChecks.length ? { sourceChecks } : {}),
+        } as ProgrammingCodeExpected;
     }
 
     const canonTests = normalized.tests.slice(0, 12);
@@ -180,10 +215,27 @@ export function normalizeCodeExpectedForSave(
         );
     }
 
-    return {
+    const persisted = {
         ...normalized,
         tests: canonTests,
         ...(solutionFiles !== undefined ? { solutionFiles } : {}),
         ...(sourceChecks.length ? { sourceChecks } : {}),
     };
+    const parsed = parseCodeExpected(persisted);
+
+    if (!parsed.success) {
+        throw new Error(
+            `Generator bug: invalid stdout code_input expected payload. expected=${JSON.stringify(
+                expected,
+                null,
+                2,
+            )} parsedError=${JSON.stringify(parsed.error.format(), null, 2)}`,
+        );
+    }
+
+    return {
+        ...parsed.data,
+        ...(solutionFiles !== undefined ? { solutionFiles } : {}),
+        ...(sourceChecks.length ? { sourceChecks } : {}),
+    } as ProgrammingCodeExpected;
 }

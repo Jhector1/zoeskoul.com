@@ -261,6 +261,42 @@ function resolveDraftSubjectRoot(): string {
     return candidates[0];
 }
 
+function resolveDraftProfileId(subjectRoot: string): string {
+    const manifestPath = path.join(subjectRoot, "subject.manifest.json");
+
+    if (fs.existsSync(manifestPath)) {
+        const manifest = readJson(manifestPath);
+        const manifestProfileId = manifest?.subject?.profileId;
+
+        if (
+            typeof manifestProfileId === "string" &&
+            manifestProfileId.trim().length > 0
+        ) {
+            return manifestProfileId;
+        }
+    }
+
+    for (const bundlePath of findTopicBundlePaths(subjectRoot)) {
+        try {
+            const bundle = readJson(bundlePath);
+            const bundleProfileId = bundle?.profileId;
+
+            if (
+                typeof bundleProfileId === "string" &&
+                bundleProfileId.trim().length > 0
+            ) {
+                return bundleProfileId;
+            }
+        } catch {
+            // Ignore malformed bundle JSON here; the main test reports it later.
+        }
+    }
+
+    throw new Error(
+        `Could not resolve a profileId for draft subject root ${path.relative(repoRoot, subjectRoot)}.`,
+    );
+}
+
 function inferModuleDir(bundlePath: string, subjectRoot: string): string {
     const relative = path.relative(subjectRoot, bundlePath);
     const parts = relative.split(path.sep);
@@ -500,12 +536,13 @@ describe("draft subject code_input goldens", () => {
     it("runs every generated draft code_input solution against its own contract", async () => {
         const subjectRoot = resolveDraftSubjectRoot();
         const subjectFolderName = path.basename(subjectRoot);
+        const profileId = resolveDraftProfileId(subjectRoot);
         const bundlePaths = findTopicBundlePaths(subjectRoot);
 
         const rows: GoldenRow[] = [];
         let codeInputCount = 0;
 
-        const services = getProfileServices("python");
+        const services = getProfileServices(profileId);
 
         for (const bundlePath of bundlePaths) {
             const relativeBundlePath = path.relative(repoRoot, bundlePath);
@@ -542,7 +579,7 @@ describe("draft subject code_input goldens", () => {
             try {
                 report = await services.validateGolden({
                     seed: {
-                        profileId: "python",
+                        profileId,
                         subjectSlug:
                             typeof bundle.subjectSlug === "string"
                                 ? bundle.subjectSlug
