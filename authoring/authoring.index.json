@@ -42,6 +42,19 @@
           "path": "subjects/python/courses/applied-python-projects/course.spec.json"
         }
       ]
+    },
+    {
+      "subjectSlug": "linux",
+      "path": "subjects/linux",
+      "courseOrder": [
+        "linux-terminal-fundamentals"
+      ],
+      "courses": [
+        {
+          "courseSlug": "linux-terminal-fundamentals",
+          "path": "subjects/linux/courses/linux-terminal-fundamentals/course.spec.json"
+        }
+      ]
     }
   ]
 }

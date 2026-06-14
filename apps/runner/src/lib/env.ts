@@ -38,7 +38,8 @@ const envSchema = z.object({
   RUNNER_MAX_TOTAL_BYTES: intEnv(262144),
   RUNNER_MAX_FILE_BYTES: intEnv(65536),
   RUNNER_MAX_ENTRIES: intEnv(200),
-  RUNNER_MAX_CONCURRENT_PER_ACTOR: intEnv(3),
+  RUNNER_MAX_CONCURRENT_PER_ACTOR: z.coerce.number().int().positive().optional(),
+  MAX_ACTIVE_SESSIONS_PER_USER: intEnv(4),
   RUNNER_MAX_CONCURRENT_GLOBAL: intEnv(40),
   RUNNER_STARTS_PER_MINUTE_PER_ACTOR: intEnv(12),
 
@@ -53,6 +54,9 @@ const envSchema = z.object({
 
   PTY_ATTACH_TOKEN_TTL_SECONDS: intEnv(60),
   PTY_ATTACH_REPLAY_TTL_MS: intEnv(5 * 60 * 1000),
+  PTY_IDLE_TIMEOUT_MS: intEnv(15 * 60 * 1000),
+  PTY_MAX_LIFETIME_MS: intEnv(2 * 60 * 60 * 1000),
+  PTY_CLEANUP_INTERVAL_MS: intEnv(60 * 1000),
 
   ALLOWED_WEB_ORIGINS: z.string().optional(),
   WEB_URL: z.string().optional(),
@@ -81,7 +85,9 @@ export const env = {
   maxTotalBytes: parsed.RUNNER_MAX_TOTAL_BYTES,
   maxFileBytes: parsed.RUNNER_MAX_FILE_BYTES,
   maxEntries: parsed.RUNNER_MAX_ENTRIES,
-  maxConcurrentPerActor: parsed.RUNNER_MAX_CONCURRENT_PER_ACTOR,
+  maxConcurrentPerActor:
+    parsed.RUNNER_MAX_CONCURRENT_PER_ACTOR ??
+    parsed.MAX_ACTIVE_SESSIONS_PER_USER,
   maxConcurrentGlobal: parsed.RUNNER_MAX_CONCURRENT_GLOBAL,
   startsPerMinutePerActor: parsed.RUNNER_STARTS_PER_MINUTE_PER_ACTOR,
 
@@ -98,6 +104,9 @@ export const env = {
 
   attachTokenTtlSeconds: parsed.PTY_ATTACH_TOKEN_TTL_SECONDS,
   attachReplayTtlMs: parsed.PTY_ATTACH_REPLAY_TTL_MS,
+  ptyIdleTimeoutMs: parsed.PTY_IDLE_TIMEOUT_MS,
+  ptyMaxLifetimeMs: parsed.PTY_MAX_LIFETIME_MS,
+  ptyCleanupIntervalMs: parsed.PTY_CLEANUP_INTERVAL_MS,
 
   allowedWebOriginsRaw: parsed.ALLOWED_WEB_ORIGINS,
   webUrl: parsed.WEB_URL,

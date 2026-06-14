@@ -17,7 +17,10 @@ export type SessionRecord = {
   seq: number;
   events: RunEvent[];
   attachStream?: NodeJSStream | null;
+  createdAt: number;
   lastActivityAt: number;
+  idleTimeoutMs?: number | null;
+  hardLifetimeMs?: number | null;
   finalizedAt?: number | null;
   expiresAt?: number | null;
 };
@@ -124,7 +127,10 @@ export function createSession(args: {
   ownerKey?: string;
   containerId: string;
   workspaceDir: string;
+  idleTimeoutMs?: number | null;
+  hardLifetimeMs?: number | null;
 }) {
+  const now = Date.now();
   const session: SessionRecord = {
     id: args.id,
     ownerKey: args.ownerKey,
@@ -134,12 +140,21 @@ export function createSession(args: {
     seq: 0,
     events: [],
     attachStream: null,
-    lastActivityAt: Date.now(),
+    createdAt: now,
+    lastActivityAt: now,
+    idleTimeoutMs: args.idleTimeoutMs ?? null,
+    hardLifetimeMs: args.hardLifetimeMs ?? null,
     finalizedAt: null,
     expiresAt: null,
   };
 
   sessions.set(session.id, session);
+  console.info("RUNNER session created", {
+    sessionId: session.id,
+    ownerKey: session.ownerKey ?? "anonymous",
+    idleTimeoutMs: session.idleTimeoutMs ?? null,
+    hardLifetimeMs: session.hardLifetimeMs ?? null,
+  });
   return session;
 }
 
@@ -152,8 +167,17 @@ export function getAllSessions() {
 }
 
 export function deleteSession(id: string) {
+  const session = sessions.get(id);
   sessions.delete(id);
   listeners.delete(id);
+  if (session) {
+    console.info("RUNNER session registry removed", {
+      sessionId: id,
+      ownerKey: session.ownerKey ?? "anonymous",
+      state: session.state,
+      finalizedAt: session.finalizedAt ?? null,
+    });
+  }
 }
 
 export function markSessionFinalized(
@@ -228,7 +252,15 @@ export function pushEvent(id: string, event: RunEventInput) {
     session.state = event.state;
 
     if (isTerminalState(event.state)) {
+      const firstFinalization = session.finalizedAt == null;
       session.finalizedAt = session.finalizedAt ?? Date.now();
+      if (firstFinalization) {
+        console.info("RUNNER session closed", {
+          sessionId: id,
+          ownerKey: session.ownerKey ?? "anonymous",
+          state: event.state,
+        });
+      }
     }
   }
 

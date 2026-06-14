@@ -7,6 +7,7 @@ import type {
 } from "@/lib/practice/types";
 import type { QItem } from "@/lib/practice/uiTypes";
 import { serializeWorkspaceForCodeRun } from "@/lib/code/workspaceSubmission";
+import { exportWorkspaceEntries } from "@/components/ide/fsTree";
 
 function getWorkspaceEntryContent(args: {
     entry: string;
@@ -214,10 +215,10 @@ export function buildSubmitAnswerFromItem(item: QItem): SubmitAnswer | undefined
             language,
             code,
             stdin,
-            ...(workspaceSubmission && workspaceSubmission.files.length > 1
+            ...(workspaceSubmission
                 ? {
                     entry: workspaceSubmission.entry,
-                    files: workspaceSubmission.files,
+                    files: exportWorkspaceEntries(workspace.nodes),
                   }
                 : {}),
         };

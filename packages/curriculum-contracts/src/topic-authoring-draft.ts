@@ -102,6 +102,7 @@ export type TopicAuthoringDraft = {
         | (DraftCommon & {
         kind: "code_input";
         starterCode: string;
+        fixedLanguage?: WorkspaceLanguage;
 
         /**
          * Optional explicit entry file. Use this when starterFiles contains
@@ -123,7 +124,9 @@ export type TopicAuthoringDraft = {
         files?: ProgrammingCodeInputFileDraft[];
         semanticChecks?: SemanticCheck[];
         datasetId?: string;
-        recipeType?: "sql_query" | "template_io" | "fixed_tests" | "semantic";
+        recipeType?: "sql_query" | "template_io" | "fixed_tests" | "semantic" | "shell_task";
+        mode?: "terminal_workspace" | "stdout" | "workspace_and_stdout";
+        instructions?: string;
         checkSql?: string;
 
     })
@@ -156,6 +159,7 @@ const RECIPE_TYPE_ENUM = [
     "template_io",
     "fixed_tests",
     "semantic",
+    "shell_task",
 ] as const;
 
 const helpSchema = {
@@ -315,6 +319,7 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                             kind: { const: "code_input" },
                             starterCode: { type: "string" },
                             solutionCode: { type: "string" },
+                            fixedLanguage: { type: "string" },
                             tests: {
                                 type: "array",
                                 items: {
@@ -438,6 +443,11 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                                 type: "string",
                                 enum: RECIPE_TYPE_ENUM,
                             },
+                            mode: {
+                                type: "string",
+                                enum: ["terminal_workspace", "stdout", "workspace_and_stdout"],
+                            },
+                            instructions: { type: "string" },
                             checkSql: { type: "string" },
                         },
                     },
@@ -774,6 +784,7 @@ export function assertTopicAuthoringDraft(
                         "hint",
                         "help",
                         "starterCode",
+                        "fixedLanguage",
                         "entryFilePath",
                         "starterFiles",
                         "solutionFiles",
@@ -785,6 +796,8 @@ export function assertTopicAuthoringDraft(
                         "semanticChecks",
                         "datasetId",
                         "recipeType",
+                        "mode",
+                        "instructions",
                         "checkSql",
                 ],
                 label,
@@ -817,6 +830,22 @@ export function assertTopicAuthoringDraft(
                 !RECIPE_TYPE_ENUM.includes(exercise.recipeType)
             ) {
                 fail(`${label} code_input recipeType is invalid`);
+            }
+
+            if (
+                typeof exercise.mode !== "undefined" &&
+                exercise.mode !== "terminal_workspace" &&
+                exercise.mode !== "stdout" &&
+                exercise.mode !== "workspace_and_stdout"
+            ) {
+                fail(`${label} code_input mode is invalid`);
+            }
+
+            if (
+                typeof exercise.instructions !== "undefined" &&
+                !isNonEmptyString(exercise.instructions)
+            ) {
+                fail(`${label} code_input instructions must be non-empty when provided`);
             }
 
 
@@ -1049,7 +1078,12 @@ export function assertTopicAuthoringDraft(
                 fail(`${label} fixed_tests code_input needs tests`);
             }
 
-            if (exercise.recipeType !== "sql_query" && !hasTests && !hasSemanticChecks) {
+            if (
+                exercise.recipeType !== "sql_query" &&
+                exercise.recipeType !== "shell_task" &&
+                !hasTests &&
+                !hasSemanticChecks
+            ) {
                 fail(`${label} code_input needs either tests or semanticChecks`);
             }
 

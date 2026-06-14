@@ -1,5 +1,8 @@
 import type { InteractiveLanguage } from "@zoeskoul/code-contracts";
 
+// Keep bash out of single-file Judge0 language ids for now. Course 1 shell labs
+// grade via terminal workspace snapshots, and any future bash execution should
+// go through PTY/project mode intentionally rather than this single-file path.
 type Judge0Language = Exclude<InteractiveLanguage, "bash">;
 
 function envInt(name: string) {

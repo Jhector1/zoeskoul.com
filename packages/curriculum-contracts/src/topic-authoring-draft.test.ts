@@ -187,6 +187,35 @@ describe("TopicAuthoringDraft canonical validation", () => {
         expect(() => assertTopicAuthoringDraft(draft)).not.toThrow();
     });
 
+    it("accepts shell_task code_input without tests or semantic checks", () => {
+        const draft = {
+            ...makeValidMinimalDraft(),
+            quizDraft: [
+                {
+                    id: "shell-1",
+                    kind: "code_input" as const,
+                    title: "Inspect the workspace",
+                    prompt: "Use the terminal to inspect the workspace.",
+                    hint: "Start with pwd and ls.",
+                    help: {
+                        concept: "Terminal-first tasks can rely on the workspace shell.",
+                        hint_1: "Run a simple shell command first.",
+                        hint_2: "Inspect the workspace before editing files.",
+                    },
+                    starterCode: "#!/usr/bin/env bash\n",
+                    solutionCode: "pwd\nls\n",
+                    fixedLanguage: "bash" as const,
+                    recipeType: "shell_task" as const,
+                    mode: "terminal_workspace" as const,
+                    instructions: "Inspect the workspace and run shell commands.",
+                },
+            ],
+        };
+
+        expect(validateTopicAuthoringDraft(draft).ok).toBe(true);
+        expect(() => assertTopicAuthoringDraft(draft)).not.toThrow();
+    });
+
     it("rejects unknown top-level fields", () => {
         const result = validateTopicAuthoringDraft({
             ...makeValidMinimalDraft(),

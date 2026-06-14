@@ -15,6 +15,7 @@ type StartBrowserSessionResult =
     state: RunSessionState;
     attachToken: string;
     wsUrl: string;
+    reused?: boolean;
 }
     | {
     ok: false;
@@ -65,12 +66,16 @@ export function useRunSession() {
     const [events, setEvents] = React.useState<RunEvent[]>([]);
 
     const wsRef = React.useRef<WebSocket | null>(null);
+    const expectedSocketClosuresRef = React.useRef(new Set<WebSocket>());
     const pendingRef = React.useRef<string[]>([]);
     const sessionIdRef = React.useRef<string | null>(null);
     const stateRef = React.useRef<RunSessionState>("queued");
 
     const closeSocket = React.useCallback(() => {
-        wsRef.current?.close();
+        if (wsRef.current) {
+            expectedSocketClosuresRef.current.add(wsRef.current);
+            wsRef.current.close();
+        }
         wsRef.current = null;
         pendingRef.current = [];
     }, []);
@@ -130,10 +135,12 @@ export function useRunSession() {
 
             const finalWsUrl = toWebSocketUrl(rawWsUrl);
             const ws = new WebSocket(finalWsUrl);
+            let socketOpened = false;
 
 
 
             ws.onopen = () => {
+                socketOpened = true;
                 for (const msg of pendingRef.current.splice(0)) {
                     if (ws.readyState === WebSocket.OPEN) {
                         ws.send(msg);
@@ -157,6 +164,7 @@ export function useRunSession() {
                         setState(parsedEvent.state);
 
                         if (isFinalSessionState(parsedEvent.state)) {
+                            expectedSocketClosuresRef.current.add(ws);
                             ws.close();
                             if (wsRef.current === ws) {
                                 wsRef.current = null;
@@ -174,8 +182,34 @@ export function useRunSession() {
                 }
             };
 
-            ws.onerror = (ev) => {
-                console.error("PTY WS failed:", finalWsUrl, ev);
+            ws.onerror = () => {
+                if (
+                    expectedSocketClosuresRef.current.has(ws) ||
+                    (wsRef.current !== ws && ws.readyState !== WebSocket.OPEN)
+                ) {
+                    return;
+                }
+            };
+
+            ws.onclose = () => {
+                const expected = expectedSocketClosuresRef.current.has(ws);
+                expectedSocketClosuresRef.current.delete(ws);
+
+                if (wsRef.current === ws) {
+                    wsRef.current = null;
+                }
+
+                if (expected || isFinalSessionState(stateRef.current)) {
+                    return;
+                }
+
+                setState("failed");
+                stateRef.current = "failed";
+
+                console.warn("PTY WS closed unexpectedly:", finalWsUrl, {
+                    opened: socketOpened,
+                    readyState: ws.readyState,
+                });
             };
 
 
@@ -186,7 +220,7 @@ export function useRunSession() {
 
     const start = React.useCallback(
         async (req: InteractiveRunReq) => {
-            const res = await fetch("/api/run/pty/sessions/start", {
+            const res = await fetch("/api/run/pty/sessions/ensure", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -232,13 +266,89 @@ export function useRunSession() {
         if (!currentSessionId) return;
 
         const ws = wsRef.current;
-        if (ws && ws.readyState === WebSocket.OPEN) {
-            ws.send(JSON.stringify({ type: "cancel" }));
-            return;
+
+        try {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: "cancel" }));
+            }
+        } catch {
+            // Ignore websocket send errors. The HTTP cancel below is authoritative.
         }
 
+        closeSocket();
+
+        sessionIdRef.current = null;
+        setSessionId(null);
+        setState("canceled");
+        stateRef.current = "canceled";
+
         await cancelServerSession(currentSessionId);
-    }, [cancelServerSession]);
+    }, [cancelServerSession, closeSocket]);
+    React.useEffect(() => {
+        if (!sessionId) return;
+        if (isFinalSessionState(state)) return;
+
+        const beat = () => {
+            void fetch("/api/run/pty/sessions/heartbeat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ sessionId }),
+            }).catch(() => {});
+        };
+
+        beat();
+
+        const timer = window.setInterval(beat, 25_000);
+
+        return () => {
+            window.clearInterval(timer);
+        };
+    }, [sessionId, state]);
+
+
+
+    React.useEffect(() => {
+        const cancelOnPageExit = () => {
+            const currentSessionId = sessionIdRef.current;
+            if (!currentSessionId) return;
+
+            const url = `/api/run/pty/sessions/${encodeURIComponent(
+                currentSessionId,
+            )}/cancel`;
+
+            try {
+                if (navigator.sendBeacon) {
+                    const body = new Blob(["{}"], {
+                        type: "application/json",
+                    });
+                    navigator.sendBeacon(url, body);
+                    return;
+                }
+            } catch {
+                // Fall through to fetch keepalive.
+            }
+
+            try {
+                void fetch(url, {
+                    method: "POST",
+                    keepalive: true,
+                });
+            } catch {
+                // Browser is closing; nothing else to do.
+            }
+        };
+
+        window.addEventListener("pagehide", cancelOnPageExit);
+        window.addEventListener("beforeunload", cancelOnPageExit);
+
+        return () => {
+            window.removeEventListener("pagehide", cancelOnPageExit);
+            window.removeEventListener("beforeunload", cancelOnPageExit);
+        };
+    }, []);
+
 
     React.useEffect(() => {
         sessionIdRef.current = sessionId;

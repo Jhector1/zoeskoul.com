@@ -1,0 +1,16 @@
+{
+  "subjectSlug": "linux",
+  "catalogSlug": "linux",
+  "profileId": "bash",
+  "title": "Linux",
+  "summary": "A practical Linux path starting with terminal navigation and file workflow, then growing into permissions, Bash, developer tools, and server basics.",
+  "courseOrder": [
+    "linux-terminal-fundamentals"
+  ],
+  "milestones": [
+    {
+      "courseSlug": "linux-terminal-fundamentals",
+      "outcome": "Use the terminal to navigate folders, create and organize files, inspect text, and complete workspace-checked Linux tasks."
+    }
+  ]
+}

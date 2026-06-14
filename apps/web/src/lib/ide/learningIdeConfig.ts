@@ -1,3 +1,4 @@
+import type { TerminalSessionScope } from "@/components/code/runner/runtime";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import type {
     FullIDEServicePreset,
@@ -8,7 +9,9 @@ import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes
 export type LearningIdeServicePreset = FullIDEServicePreset;
 
 export type LearningIdeRunnerBackend = "auto" | "judge0" | "pty";
-
+export type LearningIdeLayoutMode =
+    | "default"
+    | "terminal_workspace";
 export type LearningIdeServiceRequirements = {
     files?: boolean;
     terminal?: boolean;
@@ -21,10 +24,10 @@ export type LearningIdeConfig = {
     preset?: LearningIdeServicePreset;
     runnerBackend?: LearningIdeRunnerBackend;
     requires?: LearningIdeServiceRequirements;
-    /** SQL result pane controls. Results/Tables are visible by default; ERD/Chen are opt-in. */
+    layoutMode?: LearningIdeLayoutMode;
+    terminalSessionScope?: TerminalSessionScope;
     sqlPane?: SqlPaneOptions;
 };
-
 export function learningIdeFromRuntimeDefaults(
     runtimeDefaults?: ManifestRuntimeDefaults | null,
 ): LearningIdeConfig | null {
@@ -63,6 +66,10 @@ export function mergeLearningIdeConfigs(
             ...(config.preset ? { preset: config.preset } : {}),
             ...(config.runnerBackend ? { runnerBackend: config.runnerBackend } : {}),
             ...(config.sqlPane ? { sqlPane: { ...previousSqlPane, ...config.sqlPane } } : {}),
+            ...(config.layoutMode ? { layoutMode: config.layoutMode } : {}),
+            ...(config.terminalSessionScope
+                ? { terminalSessionScope: config.terminalSessionScope }
+                : {}),
             requires: {
                 ...previousRequires,
                 ...(config.requires ?? {}),
@@ -93,7 +100,10 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
 } {
     const ideConfig = args?.ideConfig ?? null;
     const requires = ideConfig?.requires ?? {};
-
+    const layoutMode = ideConfig?.layoutMode ?? "default";
+    // Course 1 terminal labs intentionally hide the Monaco editor only when
+    // layoutMode explicitly opts into terminal_workspace.
+    const terminalWorkspaceMode = layoutMode === "terminal_workspace";
     const wantsFiles = requires.files === true;
     const wantsMultiFile = requires.multiFile === true || wantsFiles;
     const wantsTerminal = requires.terminal === true;
@@ -102,6 +112,9 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
     const runnerBackend = ideConfig?.runnerBackend ?? "auto";
     const enableWorkspaceTerminal =
         runnerBackend === "pty" || (runnerBackend === "auto" && wantsTerminal);
+    const terminalSessionScope =
+        ideConfig?.terminalSessionScope ??
+        (terminalWorkspaceMode ? "topic" : "exercise");
 
     const services: FullIDEServicesInput = {
         chrome: {
@@ -112,7 +125,10 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
             showStatus: false,
             showTopLanguageButtons: false,
         },
-        ...(wantsFiles
+        runner: {
+            terminalSessionScope,
+        },
+        ...(wantsFiles || terminalWorkspaceMode
             ? {
                 explorer: {
                     enabled: true,
@@ -125,16 +141,22 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
                     showStdin: false,
                 },
                 editor: {
-                    showTabs: true,
+                    showTabs: !terminalWorkspaceMode,
+                    showEditor: !terminalWorkspaceMode,
                 },
             }
             : {}),
-        ...(wantsTerminal || enableWorkspaceTerminal
+        ...(wantsTerminal || enableWorkspaceTerminal || terminalWorkspaceMode
             ? {
                 runner: {
                     showTerminal: true,
-                    enableWorkspaceTerminal,
-                    showTerminalDockToggle: enableWorkspaceTerminal,
+                    // Terminal-workspace labs are graded from the synced
+                    // workspace snapshot, so learners should not see a normal
+                    // Run button for this layout.
+                    enableWorkspaceTerminal: true,
+                    showTerminalDockToggle: false,
+                    allowRun: false,
+                    terminalSessionScope,
                 },
             }
             : {}),

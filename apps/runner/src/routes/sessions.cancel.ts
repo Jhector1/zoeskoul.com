@@ -1,7 +1,7 @@
 import type { RequestHandler } from "express";
 import { getRequiredActorKey } from "../middleware/serviceAuth.js";
-import { getSession, pushEvent } from "../services/sessions/sessionStore.js";
-import { killContainer } from "../services/executor/dockerCliExecutor.js";
+import { getSession } from "../services/sessions/sessionStore.js";
+import { killSession } from "../services/docker/killSession.js";
 
 export const cancelSessionRoute: RequestHandler = async (req, res) => {
     try {
@@ -12,8 +12,7 @@ export const cancelSessionRoute: RequestHandler = async (req, res) => {
         if (!session) return res.json({ ok: true });
         if (session.ownerKey !== actorKey) throw new Error("Forbidden.");
 
-        pushEvent(sessionId, { type: "status", state: "canceled" });
-        await killContainer(session.containerId);
+        await killSession(sessionId, "canceled");
 
         return res.json({ ok: true });
     } catch (e: any) {

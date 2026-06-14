@@ -28,7 +28,11 @@ import { useCodeRunnerController } from "@/components/code/runner/hooks/controll
 import { resolveRuntime } from "@/components/code/runner/hooks/controller/useResolvedRuntime";
 import XtermTerminal from "@/components/code/runner/components/XtermTerminal";
 import { useWorkspaceTerminalController } from "@/components/code/runner/hooks/pty/useWorkspaceTerminalController";
-import type { WorkspaceSyncEntry, WorkspaceTerminalConfig } from "@/components/code/runner/runtime";
+import {
+    buildTerminalAutoOpenKey,
+    type WorkspaceSyncEntry,
+    type WorkspaceTerminalConfig,
+} from "@/components/code/runner/runtime";
 import { WorkspaceStateV2 } from "@/components/ide/types";
 import { cx } from "@/components/tools/utils/cx";
 import HeaderBar from "@/components/code/runner/components/HeaderBar";
@@ -95,6 +99,18 @@ const SPLIT_BAR_IDLE =
     "bg-neutral-200/50 outline-none dark:bg-white/[0.04] dark:hover:bg-white/[0.09] dark:focus:bg-white/[0.09]";
 
 const SPLIT_BAR_ACTIVE = "hover:bg-neutral-300/60 focus:bg-neutral-300/60";
+
+export async function restartWorkspaceTerminalSession(args: {
+    resetAutoOpen: () => void;
+    workspaceTerm: {
+        stop: () => Promise<void>;
+        open: () => Promise<void>;
+    };
+}) {
+    args.resetAutoOpen();
+    await args.workspaceTerm.stop();
+    await args.workspaceTerm.open();
+}
 
 function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const {
@@ -166,7 +182,6 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const [editorTheme, setEditorTheme] = useState<"vs" | "vs-dark">("vs-dark");
     const [isNarrowScreen, setIsNarrowScreen] = useState(false);
     const [mobilePane, setMobilePane] = useState<MobilePane>("editor");
-    const [outputTab, setOutputTab] = useState<OutputTab>("output");
 
     useEffect(() => {
         if (!showEditorThemeToggle) {
@@ -246,6 +261,15 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const stdinControlled = typeof controlledStdin === "string";
     const stdin: string = stdinControlled ? String(controlledStdin ?? "") : uStdin;
+    const workspaceTerminalEnabled =
+        Boolean(workspaceTerminal?.enabled) &&
+        isAuthenticated === true &&
+        lang !== "sql" &&
+        !isWeb;
+    const terminalOnlyMode = !showEditor && showTerminal && workspaceTerminalEnabled;
+    const [outputTab, setOutputTab] = useState<OutputTab>(
+        terminalOnlyMode ? "terminal" : "output",
+    );
 
     const setLang = (l: WorkspaceLanguage) => {
         if (fixedLanguage) return;
@@ -325,7 +349,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     };
 
     const monacoEditorRef = useRef<any>(null);
-    const terminalAutoOpenRequestedRef = useRef(false);
+    const terminalAutoOpenRequestedKeyRef = useRef<string | null>(null);
+
+
+
     const readLiveEditorCode = useCallback(() => {
         const editor = monacoEditorRef.current;
 
@@ -478,16 +505,11 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         onTerminalSnapshotFiles: workspaceTerminal?.onTerminalSnapshotFiles,
     } as any);
 
-    const workspaceTerminalEnabled =
-        Boolean(workspaceTerminal?.enabled) &&
-        isAuthenticated === true &&
-        lang !== "sql" &&
-        !isWeb;
-
     const workspaceTerm = useWorkspaceTerminalController({
         enabled: workspaceTerminalEnabled,
         projectId: workspaceTerminal?.projectId,
         cwd: workspaceTerminal?.cwd,
+        workspaceKey: workspaceTerminal?.workspaceKey ?? effectiveExerciseStateKey,
         initialFiles: workspaceTerminal?.initialFiles,
         getWorkspaceFiles: workspaceTerminal?.getWorkspaceFiles,
         onTerminalSnapshotFiles: workspaceTerminal?.onTerminalSnapshotFiles,
@@ -495,6 +517,14 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         title: workspaceTerminal?.title,
         historyScopeKey: workspaceTerminal?.historyScopeKey,
         exerciseStateKey: effectiveExerciseStateKey,
+    });
+
+
+    const terminalAutoOpenKey = buildTerminalAutoOpenKey({
+        workspaceKey: workspaceTerminal?.workspaceKey,
+        exerciseStateKey: effectiveExerciseStateKey,
+        projectId: workspaceTerminal?.projectId,
+        cwd: workspaceTerminal?.cwd,
     });
 
     useEffect(() => {
@@ -518,23 +548,26 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [workspaceTerminalEnabled, outputTab]);
 
     useEffect(() => {
+        if (terminalOnlyMode && outputTab !== "terminal") {
+            setOutputTab("terminal");
+        }
+    }, [terminalOnlyMode, outputTab]);
+
+    useEffect(() => {
         if ((lang === "sql" || isWeb) && outputTab === "terminal") {
             setOutputTab("output");
         }
     }, [lang, isWeb, outputTab]);
 
     useEffect(() => {
-        terminalAutoOpenRequestedRef.current = false;
+        terminalAutoOpenRequestedKeyRef.current = null;
     }, [
-        effectiveExerciseStateKey,
+        terminalAutoOpenKey,
         workspaceTerminalEnabled,
-        workspaceTerminal?.projectId,
-        workspaceTerminal?.cwd,
     ]);
 
     useEffect(() => {
         if (outputTab !== "terminal" || !workspaceTerminalEnabled) {
-            terminalAutoOpenRequestedRef.current = false;
             return;
         }
 
@@ -550,12 +583,16 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             return;
         }
 
-        if (terminalAutoOpenRequestedRef.current) {
+        if (terminalAutoOpenRequestedKeyRef.current === terminalAutoOpenKey) {
             return;
         }
 
-        terminalAutoOpenRequestedRef.current = true;
-        void workspaceTerm.open().catch(() => {});
+        terminalAutoOpenRequestedKeyRef.current = terminalAutoOpenKey;
+
+        void workspaceTerm.open().catch(() => {
+            // Allow manual retry after a failed start.
+            terminalAutoOpenRequestedKeyRef.current = null;
+        });
     }, [
         outputTab,
         workspaceTerminalEnabled,
@@ -564,17 +601,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         workspaceTerm.starting,
         workspaceTerm.state,
         workspaceTerm.open,
+        terminalAutoOpenKey,
     ]);
 
-    useEffect(() => {
-        if (workspaceTerm.sessionId || workspaceTerm.started || workspaceTerm.starting) {
-            terminalAutoOpenRequestedRef.current = false;
-        }
-    }, [
-        workspaceTerm.sessionId,
-        workspaceTerm.started,
-        workspaceTerm.starting,
-    ]);
+
 
     useEffect(() => {
         if (!isNarrowScreen) return;
@@ -601,8 +631,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 setMobilePane("editor");
             }
 
-            setOutputTab("output");
-            terminalAutoOpenRequestedRef.current = false;
+            setOutputTab(terminalOnlyMode ? "terminal" : "output");
+            terminalAutoOpenRequestedKeyRef.current = null;
             term.resetTerminal();
         },
         [
@@ -614,6 +644,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             isNarrowScreen,
             showEditor,
             showTerminal,
+            terminalOnlyMode,
             term,
         ],
     );
@@ -625,7 +656,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         !fixedSqlDialect &&
         allowedDialects.length > 1;
 
-    const showEditorThemeToggleUI = showEditorThemeToggle && showHeaderBar;
+    const showEditorThemeToggleUI =
+        showEditorThemeToggle && showHeaderBar && showEditor && !terminalOnlyMode;
 
     const showDockToggleUI =
         !isNarrowScreen &&
@@ -634,6 +666,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         showHeaderBar &&
         showEditor &&
         showTerminal;
+    const showRestartWorkspaceTerminalUI =
+        showHeaderBar && workspaceTerminalEnabled && !isWeb && lang !== "sql";
 
     const outerCls =
         frame === "plain"
@@ -665,7 +699,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const mobileBodyHeight = Math.max(240, (split.mainH || numericHeight) - 48);
     const surfaceBodyHeight = Math.max(240, split.mainH || numericHeight);
 
-    const showStdinEditorUI = showStdinEditor && showEditor && lang !== "sql" && !isWeb;
+    const showStdinEditorUI =
+        showStdinEditor && showEditor && !terminalOnlyMode && lang !== "sql" && !isWeb;
     const showWorkspaceTerminalTab = workspaceTerminalEnabled;
     const effectiveEditorLanguage = editorLanguage ?? (isWeb ? "html" : lang);
 
@@ -736,13 +771,16 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         return (
             <div
                 data-testid={outputTestId}
-                className="min-h-0 flex flex-col"
+                className={cx(
+                    "min-h-0 flex flex-col",
+                    terminalOnlyMode ? "h-full flex-1" : "",
+                )}
                 style={{
                     ...(typeof panelHeight === "number" ? { height: panelHeight } : {}),
                     ...(typeof panelWidth === "number" ? { width: panelWidth } : {}),
                 }}
             >
-                {showWorkspaceTerminalTab ? (
+                {showWorkspaceTerminalTab && !terminalOnlyMode ? (
                     <div className={cx("p-2", PANEL_TABS)}>
                         <div className="flex items-center gap-2">
                             <button
@@ -763,7 +801,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                             <button
                                 type="button"
                                 onClick={() => {
-                                    terminalAutoOpenRequestedRef.current = false;
+                                    terminalAutoOpenRequestedKeyRef.current = null;
                                     setOutputTab("terminal");
                                 }}
                                 className={cx(
@@ -860,18 +898,27 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         allowReset={allowReset}
                         onReset={() => {
                             setCode(DEFAULT_CODE[lang]);
-                            setOutputTab("output");
-                            terminalAutoOpenRequestedRef.current = false;
+                            setOutputTab(terminalOnlyMode ? "terminal" : "output");
+                            terminalAutoOpenRequestedKeyRef.current = null;
                             term.resetTerminal();
                             if (isNarrowScreen && showEditor && showTerminal) {
                                 setMobilePane("editor");
                             }
                         }}
-                        allowRun={effectiveAllowRun}
+                        showRestartTerminal={showRestartWorkspaceTerminalUI}
+                        onRestartTerminal={() =>
+                            restartWorkspaceTerminalSession({
+                                resetAutoOpen: () => {
+                                    terminalAutoOpenRequestedKeyRef.current = null;
+                                },
+                                workspaceTerm,
+                            })
+                        }
+                        allowRun={effectiveAllowRun && !terminalOnlyMode}
                         onRun={async () => {
                             if (isWeb) return;
 
-                            setOutputTab("output");
+                            setOutputTab(terminalOnlyMode ? "terminal" : "output");
 
                             if (isNarrowScreen && showEditor && showTerminal) {
                                 setMobilePane("output");
@@ -932,7 +979,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 >
                     {showEditor && !showTerminal ? renderEditorPane(surfaceBodyHeight) : null}
 
-                    {!showEditor && showTerminal ? renderOutputPane() : null}
+                    {!showEditor && showTerminal ? renderOutputPane(surfaceBodyHeight) : null}
 
                     {showEditor && showTerminal ? (
                         isNarrowScreen ? (

@@ -1,0 +1,20 @@
+{
+  "catalog": {
+    "slug": "linux",
+    "order": 30,
+    "defaultSubjectSlug": "linux",
+    "title": "Linux",
+    "defaultSubjectSlug": "linux-terminal-fundamentals",
+    "description": "Linux courses focused on terminal fluency, files, permissions, Bash, developer workflows, and server basics.",
+    "imagePublicId": null,
+    "imageAlt": "Linux catalog cover",
+    "status": "active",
+    "subjectSlugs": [
+      "linux-terminal-fundamentals"
+    ],
+    "meta": {
+      "family": "systems",
+      "featured": true
+    }
+  }
+}

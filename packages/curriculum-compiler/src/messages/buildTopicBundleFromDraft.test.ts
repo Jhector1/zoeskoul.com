@@ -415,6 +415,60 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         expect((exercise as any)?.recipe?.type).toBe("fixed_tests");
     });
 
+    it("builds bash shell_task manifests additively", () => {
+        const bundle = buildTopicBundleFromDraft({
+            shape: makePythonShapePack(),
+            seed: makePythonSeed(),
+            draft: makeDraftWithExercise({
+                id: "linux-course-1-terminal-lab",
+                kind: "code_input",
+                title: "Create the Linux lab folders",
+                prompt: "Use the terminal to create linux-lab/notes/today.txt.",
+                starterCode: "#!/usr/bin/env bash\n",
+                solutionCode: "mkdir -p linux-lab/notes\ntouch linux-lab/notes/today.txt\n",
+                fixedLanguage: "bash",
+                recipeType: "shell_task",
+                mode: "terminal_workspace",
+                instructions: "Use the terminal to create linux-lab/notes/today.txt.",
+                entryFilePath: "README.md",
+                starterFiles: [
+                    {
+                        path: "README.md",
+                        content: "Use the terminal to create linux-lab/notes/today.txt",
+                        entry: true,
+                    },
+                ],
+                workspaceExpectations: {
+                    requiredFolders: ["linux-lab", "linux-lab/notes"],
+                    requiredFiles: ["linux-lab/notes/today.txt"],
+                },
+            } as any),
+        });
+
+        const exercise = bundle.exercises[0] as any;
+        expect(exercise.kind).toBe("code_input");
+        expect(exercise.language).toBe("bash");
+        expect(exercise.recipe).toEqual({
+            type: "shell_task",
+            mode: "terminal_workspace",
+            instructions: "Use the terminal to create linux-lab/notes/today.txt.",
+        });
+        expect(exercise.workspace).toMatchObject({
+            entryFilePath: "README.md",
+            starterFiles: [
+                {
+                    path: "README.md",
+                    content: "Use the terminal to create linux-lab/notes/today.txt",
+                    entry: true,
+                },
+            ],
+        });
+        expect(exercise.workspaceExpectations).toEqual({
+            requiredFolders: ["linux-lab", "linux-lab/notes"],
+            requiredFiles: ["linux-lab/notes/today.txt"],
+        });
+    });
+
     it("throws if two exercises in the same topic reuse the same local messageBase", () => {
         const draft = {
             title: "What SQL Means",

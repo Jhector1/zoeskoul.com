@@ -1,0 +1,30 @@
+{
+  "subjectSlug": "linux",
+  "catalogSlug": "linux",
+  "profileId": "bash",
+  "accessPolicy": "paid",
+  "courseOrder": [
+    "linux-terminal-fundamentals"
+  ],
+  "publishTarget": {
+    "liveSubjectSlug": "linux",
+    "courseSlug": "linux-terminal-fundamentals",
+    "channel": "current"
+  },
+  "versioning": {
+    "family": "linux",
+    "version": 1,
+    "status": "active",
+    "defaultForNewEnrollments": true,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "courses": [
+    {
+      "courseSlug": "linux-terminal-fundamentals",
+      "title": "Linux Terminal Fundamentals",
+      "order": 1,
+      "path": "courses/linux-terminal-fundamentals/course.spec.json"
+    }
+  ]
+}

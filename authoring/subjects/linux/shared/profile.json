@@ -1,0 +1,13 @@
+{
+  "profileId": "bash",
+  "language": "bash",
+  "runtime": {
+    "kind": "shell",
+    "backend": "pty"
+  },
+  "workspaceProfileId": "terminal-workspace-runner",
+  "workspacePolicyId": "linux-terminal-workspace",
+  "checker": {
+    "defaultRecipe": "workspace_expectations"
+  }
+}

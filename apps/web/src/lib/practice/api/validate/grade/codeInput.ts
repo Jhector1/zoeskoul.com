@@ -6,6 +6,75 @@ import { gradeProgrammingCodeInput } from "./codeInput.programming";
 import { gradeSqlCodeInput } from "./codeInput.sql";
 import {GradeResult} from "@/lib/practice/api/validate/grade/index";
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function hasWorkspaceExpectations(value: unknown) {
+  if (!isRecord(value)) return false;
+
+  const expectations = value.workspaceExpectations;
+
+  if (!isRecord(expectations)) return false;
+
+  return (
+      Array.isArray(expectations.requiredFiles) ||
+      Array.isArray(expectations.requiredFolders) ||
+      Array.isArray(expectations.forbiddenFiles)
+  );
+}
+
+function hasBlankShellTaskTest(value: unknown) {
+  if (!isRecord(value)) return false;
+
+  const tests = value.tests;
+
+  if (!Array.isArray(tests)) return true;
+  if (tests.length === 0) return true;
+
+  return tests.every((test) => {
+    if (!isRecord(test)) return false;
+
+    const stdout = String(test.stdout ?? "");
+    const match = String(test.match ?? "includes");
+
+    return stdout === "" && match === "includes";
+  });
+}
+
+function isTerminalWorkspaceShellTask(expectedCanon: unknown): boolean {
+  if (!isRecord(expectedCanon)) {
+    return false;
+  }
+
+  const raw = expectedCanon;
+
+  const recipeType =
+      typeof raw.recipeType === "string"
+          ? raw.recipeType
+          : isRecord(raw.recipe) && typeof raw.recipe.type === "string"
+              ? raw.recipe.type
+              : "";
+
+  const shellTaskMode =
+      typeof raw.shellTaskMode === "string"
+          ? raw.shellTaskMode
+          : isRecord(raw.recipe) && typeof raw.recipe.mode === "string"
+              ? raw.recipe.mode
+              : "";
+
+  if (recipeType === "shell_task" && shellTaskMode === "terminal_workspace") {
+    return true;
+  }
+
+  // Backward-compatible fallback for already-created instances whose
+  // recipeType/shellTaskMode metadata was stripped by expected normalization.
+  return (
+      String(raw.language ?? "") === "bash" &&
+      hasWorkspaceExpectations(raw) &&
+      hasBlankShellTaskTest(raw)
+  );
+}
 
 export async function gradeCodeInput(args: {
   instance: LoadedValidateInstance;
@@ -15,9 +84,39 @@ export async function gradeCodeInput(args: {
 }): Promise<GradeResult> {
   const { expectedCanon, answer, showDebug } = args;
 
-  const { expectedForSchema, sourceChecks } = prepareCodeExpectedForSchema(expectedCanon);
-  const parsed = parseCodeExpected(expectedForSchema);
-  if (!parsed.success) {
+  const terminalWorkspaceShellTask =
+      isTerminalWorkspaceShellTask(expectedCanon);
+
+  const expected = terminalWorkspaceShellTask
+      ? {
+        ...(isRecord(expectedCanon) ? expectedCanon : {}),
+        kind: "code_input",
+        strategy: "programming",
+        language: "bash",
+        checkMode: "stdout",
+        recipeType: "shell_task",
+        shellTaskMode: "terminal_workspace",
+      }
+      : (() => {
+        const { expectedForSchema, sourceChecks } =
+            prepareCodeExpectedForSchema(expectedCanon);
+
+        const parsed = parseCodeExpected(expectedForSchema);
+
+        if (!parsed.success) {
+          return {
+            __parseFailed: true,
+            __parseError: parsed.error.format(),
+          };
+        }
+
+        return {
+          ...(parsed.data as any),
+          ...(sourceChecks.length ? { sourceChecks } : {}),
+        };
+      })();
+
+  if ((expected as any).__parseFailed) {
     return {
       ok: false,
       explanation: "Server bug: invalid code_input expected payload.",
@@ -27,25 +126,35 @@ export async function gradeCodeInput(args: {
         kind: "runtime",
         tone: "danger",
         title: "Validation setup error",
-        message: "This exercise has an invalid validation contract. Fix the authored expected payload.",
-        raw: showDebug ? JSON.stringify(parsed.error.format(), null, 2) : null,
+        message:
+            "This exercise has an invalid validation contract. Fix the authored expected payload.",
+        raw: showDebug
+            ? JSON.stringify((expected as any).__parseError, null, 2)
+            : null,
       },
     };
   }
-
-  const expected = {
-    ...(parsed.data as any),
-    ...(sourceChecks.length ? { sourceChecks } : {}),
-  };
   const ans: any = answer ?? {};
   const code = String(ans.code ?? ans.source ?? "").trimEnd();
   const submissionFiles = Array.isArray(ans.files)
       ? ans.files
-          .filter((file: any) => file && typeof file.path === "string" && typeof file.content === "string")
-          .map((file: any) => ({
-              path: file.path,
-              content: file.content,
-          }))
+          .filter((file: any) => {
+            if (!file || typeof file.path !== "string") return false;
+            if (file.kind === "directory") return true;
+            return typeof file.content === "string";
+          })
+          .map((file: any) =>
+              file.kind === "directory"
+                  ? {
+                      kind: "directory" as const,
+                      path: file.path,
+                    }
+                  : {
+                      kind: "file" as const,
+                      path: file.path,
+                      content: file.content,
+                    },
+          )
       : undefined;
   const submissionEntry =
       typeof ans.entry === "string" && ans.entry.trim().length > 0
@@ -81,6 +190,7 @@ export async function gradeCodeInput(args: {
 
   return gradeProgrammingCodeInput({
     expected,
+    terminalWorkspaceShellTask,
     code,
     language,
     entry: submissionEntry,

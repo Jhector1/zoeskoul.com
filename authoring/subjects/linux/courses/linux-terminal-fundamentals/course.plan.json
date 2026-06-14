@@ -1,0 +1,23 @@
+{
+  "subjectSlug": "linux",
+  "courseSlug": "linux-terminal-fundamentals",
+  "catalogSlug": "linux",
+  "profileId": "bash",
+  "title": "Linux Terminal Fundamentals",
+  "moduleOrder": [
+    "linux-1-terminal-navigation",
+    "linux-2-files-and-folders"
+  ],
+  "modules": [
+    {
+      "moduleSlug": "linux-1-terminal-navigation",
+      "moduleNumber": 1,
+      "title": "Terminal Navigation Basics"
+    },
+    {
+      "moduleSlug": "linux-2-files-and-folders",
+      "moduleNumber": 2,
+      "title": "Files, Folders, and Viewing Content"
+    }
+  ]
+}

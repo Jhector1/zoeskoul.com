@@ -27,9 +27,7 @@
     "test:unit:watch": "vitest",
     "test:e2e:sql-review": "playwright test tests/e2e/sql-review --workers=1",
     "test:e2e": "playwright test --workers=1",
-
     "test:e2e:review-practice": "playwright test tests/e2e/review-practice --workers=1",
-
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:harness": "playwright test tests/e2e/harness",
     "test:e2e:manual": "playwright test tests/e2e/manual",
@@ -42,7 +40,6 @@
     "postinstall": "prisma generate --schema ../../packages/db/prisma/schema.prisma",
     "cleanup:onboarding": "tsx scripts/cleanup-guest-onboarding.ts"
   },
-
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
     "@monaco-editor/react": "^4.7.0",
@@ -65,6 +62,7 @@
     "framer-motion": "^12.34.0",
     "highlight.js": "^11.11.1",
     "image-size": "^2.0.2",
+    "ioredis": "^5.11.1",
     "jszip": "^3.10.1",
     "katex": "^0.16.27",
     "lucide-react": "^0.563.0",

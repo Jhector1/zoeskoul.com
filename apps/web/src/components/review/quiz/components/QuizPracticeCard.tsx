@@ -34,6 +34,12 @@ import {
 import { normalizeCurrentPracticeItem } from "@/lib/practice/runtime";
 import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 
+export async function flushReviewToolsBeforeSubmit(
+    tools: { flushLatest?: () => void | Promise<void> } | null | undefined,
+) {
+  await tools?.flushLatest?.();
+}
+
 const LOADING_TIMEOUT_MS = 8000;
 
 function cleanPracticeSlotPart(value: unknown) {
@@ -1285,7 +1291,10 @@ export default function QuizPracticeCard(props: {
                 <div className="flex flex-wrap items-center gap-2">
                   <button
                       type="button"
-                      onClick={onSubmit}
+                      onClick={async () => {
+                        await flushReviewToolsBeforeSubmit(toolsAny);
+                        await Promise.resolve(onSubmit());
+                      }}
                       disabled={disableCheck}
                       data-testid="review-practice-submit-button"
                       data-flow-focus="1"

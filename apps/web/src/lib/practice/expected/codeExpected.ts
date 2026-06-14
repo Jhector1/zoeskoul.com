@@ -73,6 +73,88 @@ ${stdout.trimEnd()}
 ~~~`;
 }
 
+
+function getShellTaskExpectedMeta(expected: any) {
+    const recipeType =
+        typeof expected?.recipeType === "string"
+            ? expected.recipeType
+            : typeof expected?.recipe?.type === "string"
+                ? expected.recipe.type
+                : "";
+
+    const shellTaskMode =
+        typeof expected?.shellTaskMode === "string"
+            ? expected.shellTaskMode
+            : typeof expected?.recipe?.mode === "string"
+                ? expected.recipe.mode
+                : "";
+
+    if (recipeType !== "shell_task") {
+        return {};
+    }
+
+    return {
+        recipeType: "shell_task",
+        ...(shellTaskMode ? { shellTaskMode } : {}),
+    };
+}
+function isTerminalWorkspaceShellTaskExpected(expected: any) {
+    const recipeType =
+        typeof expected?.recipeType === "string"
+            ? expected.recipeType
+            : typeof expected?.recipe?.type === "string"
+                ? expected.recipe.type
+                : "";
+
+    const shellTaskMode =
+        typeof expected?.shellTaskMode === "string"
+            ? expected.shellTaskMode
+            : typeof expected?.recipe?.mode === "string"
+                ? expected.recipe.mode
+                : "";
+
+    return recipeType === "shell_task" && shellTaskMode === "terminal_workspace";
+}
+
+function normalizeTerminalWorkspaceShellTaskExpectedForSave(expected: any) {
+    if (!isTerminalWorkspaceShellTaskExpected(expected)) {
+        return null;
+    }
+
+    const workspaceExpectations =
+        expected?.workspaceExpectations ??
+        expected?.workspace?.workspaceExpectations ??
+        null;
+
+    if (!workspaceExpectations || typeof workspaceExpectations !== "object") {
+        throw new Error(
+            `Generator bug: shell_task terminal_workspace expected is missing workspaceExpectations. expected=${JSON.stringify(
+                expected,
+                null,
+                2,
+            )}`,
+        );
+    }
+
+    return {
+        kind: "code_input",
+        strategy: "programming",
+        language: "bash",
+        checkMode: "stdout",
+        recipeType: "shell_task",
+        shellTaskMode: "terminal_workspace",
+        workspaceExpectations,
+        tests: [
+            {
+                stdout: "",
+                match: "includes",
+            },
+        ],
+        ...(Array.isArray(expected?.sourceChecks) && expected.sourceChecks.length
+            ? { sourceChecks: expected.sourceChecks.filter(Boolean) }
+            : {}),
+    };
+}
 export function makeCodeExpected(args: ProgrammingMakeCodeExpectedArgs): CodeExpectedInput;
 export function makeCodeExpected(args: SqlMakeCodeExpectedArgs): CodeExpectedInput;
 export function makeCodeExpected(
@@ -105,13 +187,22 @@ export { toProgrammingCodeTests, toSqlCodeTests };
 export function normalizeCodeExpectedForSave(
     expected: any,
 ): ProgrammingCodeExpected | SqlCodeExpected {
+
+    const terminalWorkspaceShellTask =
+        normalizeTerminalWorkspaceShellTaskExpectedForSave(expected);
+
+    if (terminalWorkspaceShellTask) {
+        return terminalWorkspaceShellTask as any;
+    }
+
+
     const language =
         typeof expected?.language === "string" ? expected.language : "python";
     const solutionFiles = expected?.solutionFiles;
     const sourceChecks = Array.isArray(expected?.sourceChecks)
         ? expected.sourceChecks.filter(Boolean)
         : [];
-
+    const shellTaskMeta = getShellTaskExpectedMeta(expected);
     if (language === "sql") {
         const normalized = makeSqlExpected(expected);
         const canonTests = normalized.tests.slice(0, 12);
@@ -218,6 +309,7 @@ export function normalizeCodeExpectedForSave(
     const persisted = {
         ...normalized,
         tests: canonTests,
+        ...shellTaskMeta,
         ...(solutionFiles !== undefined ? { solutionFiles } : {}),
         ...(sourceChecks.length ? { sourceChecks } : {}),
     };
@@ -235,6 +327,7 @@ export function normalizeCodeExpectedForSave(
 
     return {
         ...parsed.data,
+        ...shellTaskMeta,
         ...(solutionFiles !== undefined ? { solutionFiles } : {}),
         ...(sourceChecks.length ? { sourceChecks } : {}),
     } as ProgrammingCodeExpected;

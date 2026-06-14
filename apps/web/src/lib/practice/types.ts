@@ -207,7 +207,13 @@ export type SubmitAnswer =
     code: string;
     stdin?: string;
     entry?: string;
-    files?: FileEntry[];
+    files?: Array<
+        | FileEntry
+        | {
+            kind: "directory";
+            path: string;
+        }
+    >;
 }
     | TextInputSubmitAnswer
     | DragReorderSubmitAnswer

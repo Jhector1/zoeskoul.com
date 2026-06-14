@@ -1,0 +1,28 @@
+{
+  "policyId": "linux-terminal-workspace",
+  "workspaceProfileId": "terminal-workspace-runner",
+  "workspacePolicyId": "linux-terminal-workspace",
+  "uiTerms": {
+    "terminal": "terminal",
+    "explorer": "file explorer",
+    "checkButton": "Check Answer"
+  },
+  "preferredTerms": {
+    "editor": "terminal",
+    "run button": "terminal command",
+    "output panel": "terminal output"
+  },
+  "learnerInstructions": [
+    "Use the terminal to complete the task.",
+    "Use pwd and ls to inspect your current location.",
+    "Use the file explorer to confirm folders and files appear.",
+    "Click Check Answer when the workspace matches the goal."
+  ],
+  "forbiddenActions": [
+    "Use rm -rf /",
+    "Install packages",
+    "Use sudo",
+    "Change system directories",
+    "Depend on external network access"
+  ]
+}

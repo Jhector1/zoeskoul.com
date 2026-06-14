@@ -17,6 +17,7 @@ import {
 } from "../sessions/sessionStore.js";
 import {
   armIdleTimeout,
+  armHardLifetimeTimeout,
   armWallTimeout,
   clearAllTimeouts,
 } from "../sessions/timeoutManager.js";
@@ -196,6 +197,11 @@ export async function startDockerSession(
 
   try {
     const normalized = normalizeRequest(req);
+    const timeouts = resolveTimeoutPolicy({
+      kind: normalized.kind,
+      requestedIdleTimeoutMs: normalized.idleTimeoutMs,
+      requestedWallTimeoutMs: normalized.wallTimeoutMs,
+    });
     workspaceDir = await createWorkspace(normalized.files);
 
     const plan =
@@ -284,6 +290,8 @@ export async function startDockerSession(
       ownerKey,
       containerId: container.id,
       workspaceDir,
+      idleTimeoutMs: timeouts.idleTimeoutMs,
+      hardLifetimeMs: timeouts.hardLifetimeMs,
     });
     releaseReservedSlot();
 
@@ -306,14 +314,13 @@ export async function startDockerSession(
         state: normalized.kind === "shell" ? "waiting_for_input" : "running",
       });
 
-      const timeouts = resolveTimeoutPolicy({
-        kind: normalized.kind,
-        requestedIdleTimeoutMs: normalized.idleTimeoutMs,
-        requestedWallTimeoutMs: normalized.wallTimeoutMs,
-      });
-
-      armWallTimeout(sessionId, timeouts.wallTimeoutMs);
+      if (typeof timeouts.wallTimeoutMs === "number") {
+        armWallTimeout(sessionId, timeouts.wallTimeoutMs);
+      }
       armIdleTimeout(sessionId, timeouts.idleTimeoutMs);
+      if (typeof timeouts.hardLifetimeMs === "number") {
+        armHardLifetimeTimeout(sessionId, timeouts.hardLifetimeMs);
+      }
 
       let startupChunkBudget = 6;
 

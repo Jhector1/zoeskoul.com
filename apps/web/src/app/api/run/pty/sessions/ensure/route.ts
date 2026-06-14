@@ -1,0 +1,319 @@
+import { NextRequest, NextResponse } from "next/server";
+import type {
+    InteractiveRunReq,
+    RunSessionState,
+    StartSessionResult,
+} from "@zoeskoul/code-contracts";
+import { createAttachToken } from "@/lib/server/ptyAttachToken";
+import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
+import { RunnerHttpError, runnerPost } from "@/lib/server/runnerClient";
+import {
+    acquirePtyLeaseLock,
+    getPtyLeaseByWorkspace,
+    normalizeWorkspaceKey,
+    releasePtyLeaseLock,
+    rememberPtyLease,
+    waitForPtyLeaseByWorkspace,
+} from "@/lib/server/ptySessionLeases";
+import {
+    isRedisUnavailableError,
+    redisUnavailableMessage,
+} from "@/lib/server/redis";
+export const runtime = "nodejs";
+
+type WorkspaceSyncEntry =
+    | { kind?: "file"; path: string; content: string }
+    | { kind: "directory"; path: string };
+
+type ShellEnsureReq = Extract<InteractiveRunReq, { kind: "shell" }> & {
+    files?: WorkspaceSyncEntry[];
+    workspaceKey?: string;
+    leaseKey?: string;
+    forceNew?: boolean;
+};
+
+type EnsureBrowserSessionResult =
+    | {
+    ok: true;
+    sessionId: string;
+    state: RunSessionState;
+    attachToken: string;
+    wsUrl: string;
+    reused: boolean;
+}
+    | {
+    ok: false;
+    error: string;
+};
+
+function isShellRequest(body: unknown): body is ShellEnsureReq {
+    if (!body || typeof body !== "object") return false;
+    return (body as { kind?: unknown }).kind === "shell";
+}
+
+function getRunnerWsBase() {
+    const explicit =
+        process.env.RUNNER_WS_BASE_URL?.trim() ||
+        process.env.NEXT_PUBLIC_RUNNER_WS_BASE_URL?.trim();
+
+    if (explicit) {
+        const normalized = explicit.replace(/\/+$/, "");
+        if (!/^wss?:\/\//i.test(normalized)) {
+            throw new Error(
+                `RUNNER_WS_BASE_URL must start with ws:// or wss://. Got: ${normalized}`,
+            );
+        }
+        return normalized;
+    }
+
+    const runnerBase =
+        process.env.RUNNER_BASE_URL?.trim() || process.env.RUNNER_URL?.trim();
+
+    if (runnerBase) {
+        const normalized = runnerBase.replace(/\/+$/, "");
+
+        if (/^https:\/\//i.test(normalized)) {
+            return normalized.replace(/^https:/i, "wss:");
+        }
+
+        if (/^http:\/\//i.test(normalized)) {
+            return normalized.replace(/^http:/i, "ws:");
+        }
+
+        throw new Error(
+            `RUNNER_BASE_URL must start with http:// or https://. Got: ${normalized}`,
+        );
+    }
+
+    throw new Error("Missing RUNNER_WS_BASE_URL or RUNNER_BASE_URL");
+}
+
+function buildWsUrl(sessionId: string, attachToken: string) {
+    const runnerWsBase = getRunnerWsBase();
+
+    return (
+        `${runnerWsBase}/sessions/${encodeURIComponent(sessionId)}/ws` +
+        `?token=${encodeURIComponent(attachToken)}`
+    );
+}
+
+function buildSessionResponse(args: {
+    sessionId: string;
+    state: RunSessionState;
+    actorKey: string;
+    reused: boolean;
+}): EnsureBrowserSessionResult {
+    const attachToken = createAttachToken({
+        sessionId: args.sessionId,
+        actorKey: args.actorKey,
+    });
+
+    return {
+        ok: true,
+        sessionId: args.sessionId,
+        state: args.state,
+        attachToken,
+        wsUrl: buildWsUrl(args.sessionId, attachToken),
+        reused: args.reused,
+    };
+}
+
+function stripLeaseFields(body: ShellEnsureReq): InteractiveRunReq {
+    const {
+        workspaceKey: _workspaceKey,
+        leaseKey: _leaseKey,
+        forceNew: _forceNew,
+        ...runnerBody
+    } = body as any;
+
+    return runnerBody as InteractiveRunReq;
+}
+
+export async function POST(req: NextRequest) {
+    let lock: { key: string; token: string } | null = null;
+
+    try {
+        const actorKey = await requireRunnerActorKey();
+        const body = (await req.json()) as InteractiveRunReq | ShellEnsureReq;
+
+        if (!isShellRequest(body)) {
+            const out = await runnerPost<StartSessionResult>(
+                "/sessions/start",
+                actorKey,
+                body,
+            );
+
+            if (!out.ok) {
+                return NextResponse.json<EnsureBrowserSessionResult>(out, {
+                    status: 400,
+                });
+            }
+
+            return NextResponse.json<EnsureBrowserSessionResult>(
+                buildSessionResponse({
+                    sessionId: out.sessionId,
+                    state: out.state,
+                    actorKey,
+                    reused: false,
+                }),
+            );
+        }
+
+        const workspaceKey = normalizeWorkspaceKey(
+            body.workspaceKey ?? body.leaseKey,
+        );
+
+        if (!workspaceKey) {
+            const out = await runnerPost<StartSessionResult>(
+                "/sessions/start",
+                actorKey,
+                stripLeaseFields(body),
+            );
+
+            if (!out.ok) {
+                return NextResponse.json<EnsureBrowserSessionResult>(out, {
+                    status: 400,
+                });
+            }
+
+            return NextResponse.json<EnsureBrowserSessionResult>(
+                buildSessionResponse({
+                    sessionId: out.sessionId,
+                    state: out.state,
+                    actorKey,
+                    reused: false,
+                }),
+            );
+        }
+
+        if (!body.forceNew) {
+            const existing = await getPtyLeaseByWorkspace({
+                actorKey,
+                workspaceKey,
+            });
+
+            if (existing) {
+                return NextResponse.json<EnsureBrowserSessionResult>(
+                    buildSessionResponse({
+                        sessionId: existing.sessionId,
+                        state: existing.state,
+                        actorKey,
+                        reused: true,
+                    }),
+                );
+            }
+        }
+
+        lock = await acquirePtyLeaseLock({
+            actorKey,
+            workspaceKey,
+        });
+
+        if (!lock) {
+            const existing = await waitForPtyLeaseByWorkspace({
+                actorKey,
+                workspaceKey,
+                attempts: 15,
+                delayMs: 150,
+            });
+
+            if (existing) {
+                return NextResponse.json<EnsureBrowserSessionResult>(
+                    buildSessionResponse({
+                        sessionId: existing.sessionId,
+                        state: existing.state,
+                        actorKey,
+                        reused: true,
+                    }),
+                );
+            }
+
+            return NextResponse.json<EnsureBrowserSessionResult>(
+                {
+                    ok: false,
+                    error: "Terminal is already starting. Please retry in a moment.",
+                },
+                { status: 409 },
+            );
+        }
+
+        if (!body.forceNew) {
+            const existingAfterLock = await getPtyLeaseByWorkspace({
+                actorKey,
+                workspaceKey,
+            });
+
+            if (existingAfterLock) {
+                return NextResponse.json<EnsureBrowserSessionResult>(
+                    buildSessionResponse({
+                        sessionId: existingAfterLock.sessionId,
+                        state: existingAfterLock.state,
+                        actorKey,
+                        reused: true,
+                    }),
+                );
+            }
+        }
+
+        const out = await runnerPost<StartSessionResult>(
+            "/sessions/start",
+            actorKey,
+            stripLeaseFields(body),
+        );
+
+        if (!out.ok) {
+            return NextResponse.json<EnsureBrowserSessionResult>(out, {
+                status: 400,
+            });
+        }
+
+        await rememberPtyLease({
+            actorKey,
+            workspaceKey,
+            sessionId: out.sessionId,
+            state: out.state,
+        });
+
+        return NextResponse.json<EnsureBrowserSessionResult>(
+            buildSessionResponse({
+                sessionId: out.sessionId,
+                state: out.state,
+                actorKey,
+                reused: false,
+            }),
+        );
+    } catch (e: any) {
+        console.error("PTY ensure route failed", {
+            message: e?.message,
+            stack: e?.stack,
+        });
+
+        if (isRedisUnavailableError(e)) {
+            return NextResponse.json<EnsureBrowserSessionResult>(
+                {
+                    ok: false,
+                    error: redisUnavailableMessage(e),
+                },
+                { status: 503 },
+            );
+        }
+
+        if (e instanceof RunnerHttpError) {
+            return NextResponse.json<EnsureBrowserSessionResult>(
+                { ok: false, error: e.message },
+                { status: e.status },
+            );
+        }
+
+        const status = e?.message === "Unauthorized" ? 401 : 500;
+
+        return NextResponse.json<EnsureBrowserSessionResult>(
+            { ok: false, error: e?.message ?? "Failed." },
+            { status },
+        );
+    } finally {
+        if (lock) {
+            await releasePtyLeaseLock(lock).catch(() => {});
+        }
+    }
+}

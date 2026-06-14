@@ -711,6 +711,9 @@ function normalizeCodeInput(
         title,
         prompt,
         starterCode,
+        ...(typeof item.fixedLanguage === "string" && item.fixedLanguage.trim()
+            ? { fixedLanguage: item.fixedLanguage.trim() }
+            : {}),
         ...(entryFilePath ? { entryFilePath } : {}),
         ...(starterFiles?.length ? { starterFiles } : {}),
         ...(solutionFiles?.length ? { solutionFiles } : {}),
@@ -728,9 +731,18 @@ function normalizeCodeInput(
             recipeType === "sql_query" ||
             recipeType === "template_io" ||
             recipeType === "fixed_tests" ||
-            recipeType === "semantic"
+            recipeType === "semantic" ||
+            recipeType === "shell_task"
                 ? recipeType
                 : undefined,
+        ...(item.mode === "terminal_workspace" ||
+        item.mode === "stdout" ||
+        item.mode === "workspace_and_stdout"
+            ? { mode: item.mode }
+            : {}),
+        ...(typeof item.instructions === "string" && item.instructions.trim()
+            ? { instructions: item.instructions.trim() }
+            : {}),
         ...(semanticChecks?.length ? { semanticChecks } : {}),
         checkSql:
             typeof item.checkSql === "string"

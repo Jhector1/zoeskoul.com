@@ -31,6 +31,7 @@ export const ProgrammingLanguageSchema = z.enum([
     "javascript",
     "c",
     "cpp",
+    "bash",
 ]);
 
 export const SqlDialectSchema = z.enum([
@@ -99,7 +100,7 @@ const CodeInputAnswerSchema = z
     .object({
         kind: z.literal("code_input"),
         language: z
-            .enum(["python", "java", "javascript", "c", "cpp", "sql"])
+            .enum(["python", "java", "javascript", "c", "cpp", "bash", "sql"])
             .optional(),
         code: z.string().optional(),
         source: z.string().optional(),
@@ -107,10 +108,17 @@ const CodeInputAnswerSchema = z
         entry: z.string().optional(),
         files: z
             .array(
-                z.object({
-                    path: z.string().min(1),
-                    content: z.string(),
-                }),
+                z.union([
+                    z.object({
+                        kind: z.literal("directory"),
+                        path: z.string().min(1),
+                    }),
+                    z.object({
+                        kind: z.literal("file").optional(),
+                        path: z.string().min(1),
+                        content: z.string(),
+                    }),
+                ]),
             )
             .optional(),
     })

@@ -14,6 +14,7 @@ export type { WorkspaceSyncEntry };
 
 export type ExecutionBackend = "pty" | "judge0";
 export type TerminalView = "plain" | "xterm" | "auto";
+export type TerminalSessionScope = "exercise" | "topic" | "module" | "project";
 
 export type CodeRunnerRuntime = {
     backend: ExecutionBackend;
@@ -66,6 +67,14 @@ export type WorkspaceTerminalConfig = {
     enabled?: boolean;
     projectId?: string;
     cwd?: string;
+    terminalSessionScope?: TerminalSessionScope;
+
+    /**
+     * Stable PTY lease key. This can intentionally be broader than the current
+     * exercise binding so terminal_workspace lessons can reuse one shell across
+     * multiple practice cards in the same topic.
+     */
+    workspaceKey?: string;
     initialFiles?: WorkspaceSyncEntry[] | Record<string, string>;
     lazy?: boolean;
     title?: string;
@@ -142,6 +151,113 @@ export type CodeRunnerController = {
     transcript: TranscriptState | null;
     stream: StreamState | null;
 };
+
+function normalizeTerminalKeyPart(value: string | null | undefined) {
+    return typeof value === "string" && value.trim() ? value.trim() : "";
+}
+
+function isDirectScopedKey(value: string) {
+    return value.length > 0 && !value.includes("::");
+}
+
+function isTopicOrModuleHistoryScopeKey(value: string) {
+    if (!isDirectScopedKey(value) || value.startsWith("project:")) {
+        return false;
+    }
+
+    const segments = value.split(":").filter(Boolean);
+    return segments.length >= 2 && segments.length <= 3;
+}
+
+function deriveTopicScopedKeyFromExerciseStateKey(exerciseStateKey: string) {
+    const segments = exerciseStateKey.split(":").filter(Boolean);
+
+    if (segments.length >= 4) {
+        return [segments[0], segments[1], segments[3]].join(":");
+    }
+
+    if (segments.length >= 2) {
+        return segments.slice(0, segments.length - 1).join(":");
+    }
+
+    return undefined;
+}
+
+function deriveModuleScopedKeyFromExerciseStateKey(exerciseStateKey: string) {
+    const segments = exerciseStateKey.split(":").filter(Boolean);
+
+    if (segments.length >= 2) {
+        return [segments[0], segments[1]].join(":");
+    }
+
+    return undefined;
+}
+
+export function resolveTerminalWorkspaceKey(args: {
+    exerciseStateKey?: string | null;
+    terminalHistoryScopeKey?: string | null;
+    projectId?: string | null;
+    terminalSessionScope?: TerminalSessionScope;
+}): string | undefined {
+    const exerciseStateKey = normalizeTerminalKeyPart(args.exerciseStateKey);
+    const terminalHistoryScopeKey = normalizeTerminalKeyPart(args.terminalHistoryScopeKey);
+    const projectId = normalizeTerminalKeyPart(args.projectId);
+    const scope = args.terminalSessionScope ?? "exercise";
+    const projectKey = projectId ? `project:${projectId}` : "";
+
+    if (scope === "project") {
+        return projectKey || terminalHistoryScopeKey || exerciseStateKey || undefined;
+    }
+
+    if (scope === "exercise") {
+        return exerciseStateKey || projectKey || terminalHistoryScopeKey || undefined;
+    }
+
+    if (scope === "module") {
+        const moduleScopedKey = exerciseStateKey
+            ? deriveModuleScopedKeyFromExerciseStateKey(exerciseStateKey)
+            : undefined;
+
+        if (moduleScopedKey) {
+            return moduleScopedKey;
+        }
+
+        return terminalHistoryScopeKey || exerciseStateKey || projectKey || undefined;
+    }
+
+    if (scope === "topic") {
+        if (isTopicOrModuleHistoryScopeKey(terminalHistoryScopeKey)) {
+            return terminalHistoryScopeKey;
+        }
+
+        const topicScopedKey = exerciseStateKey
+            ? deriveTopicScopedKeyFromExerciseStateKey(exerciseStateKey)
+            : undefined;
+
+        if (topicScopedKey) {
+            return topicScopedKey;
+        }
+
+        return exerciseStateKey || terminalHistoryScopeKey || projectKey || undefined;
+    }
+
+    return exerciseStateKey || projectKey || terminalHistoryScopeKey || undefined;
+}
+
+export function buildTerminalAutoOpenKey(args: {
+    workspaceKey?: string | null;
+    exerciseStateKey?: string | null;
+    projectId?: string | null;
+    cwd?: string | null;
+}) {
+    return [
+        normalizeTerminalKeyPart(args.workspaceKey) ||
+        normalizeTerminalKeyPart(args.exerciseStateKey) ||
+        "workspace",
+        normalizeTerminalKeyPart(args.projectId),
+        normalizeTerminalKeyPart(args.cwd),
+    ].join("::");
+}
 
 export function resolveSurfaceKind(controller: CodeRunnerController): SurfaceKind {
     if (controller.backend === "sql") return "sql";

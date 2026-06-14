@@ -1,0 +1,21 @@
+{
+  "rubricId": "linux-terminal-capstone",
+  "criteria": [
+    {
+      "name": "Workspace completeness",
+      "weight": 0.4
+    },
+    {
+      "name": "File organization",
+      "weight": 0.25
+    },
+    {
+      "name": "Safe command habits",
+      "weight": 0.2
+    },
+    {
+      "name": "Explanation of workflow",
+      "weight": 0.15
+    }
+  ]
+}

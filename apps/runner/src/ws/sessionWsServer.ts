@@ -1,7 +1,11 @@
 import type { IncomingMessage } from "node:http";
 import type { Duplex } from "node:stream";
 import { WebSocketServer, WebSocket } from "ws";
-import { getSession, subscribeSession } from "../services/sessions/sessionStore.js";
+import {
+    getSession,
+    subscribeSession,
+    touchSession,
+} from "../services/sessions/sessionStore.js";
 import { writeInput } from "../services/docker/writeInput.js";
 import { killSession } from "../services/docker/killSession.js";
 import { resizeSession } from "../services/docker/resizeSession.js";
@@ -54,6 +58,43 @@ function safeDeny(socket: Duplex, statusCode: number, message: string) {
     socket.destroy();
 }
 
+const sessionSockets = new Map<string, Set<WebSocket>>();
+
+function registerSessionSocket(sessionId: string, ws: WebSocket) {
+    let set = sessionSockets.get(sessionId);
+    if (!set) {
+        set = new Set();
+        sessionSockets.set(sessionId, set);
+    }
+    set.add(ws);
+}
+
+function unregisterSessionSocket(sessionId: string, ws: WebSocket) {
+    const set = sessionSockets.get(sessionId);
+    if (!set) return;
+    set.delete(ws);
+    if (set.size === 0) {
+        sessionSockets.delete(sessionId);
+    }
+}
+
+export function closeSessionSockets(
+    sessionId: string,
+    code = 1012,
+    reason = "Session closed",
+) {
+    const sockets = sessionSockets.get(sessionId);
+    if (!sockets) return;
+
+    for (const ws of sockets) {
+        try {
+            ws.close(code, reason);
+        } catch {}
+    }
+
+    sessionSockets.delete(sessionId);
+}
+
 function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
     const session = getSession(sessionId);
     if (!session || session.ownerKey !== actorKey) {
@@ -67,6 +108,8 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
         sessionId,
         state: session.state,
     });
+    registerSessionSocket(sessionId, ws);
+    touchSession(sessionId);
 
     for (const ev of session.events) {
         safeSend(ws, { type: "event", event: ev });
@@ -95,6 +138,7 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
             }
 
             if (msg.type === "ping") {
+                touchSession(sessionId);
                 safeSend(ws, { type: "pong" });
                 return;
             }
@@ -130,10 +174,12 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
 
     ws.on("close", () => {
         unsubscribe();
+        unregisterSessionSocket(sessionId, ws);
     });
 
     ws.on("error", () => {
         unsubscribe();
+        unregisterSessionSocket(sessionId, ws);
     });
 }
 

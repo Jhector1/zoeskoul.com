@@ -276,6 +276,11 @@ export type ManifestRecipe =
       solutionFiles?: ManifestStarterFiles;
       sourceChecks?: unknown[];
       semanticChecks: SemanticCheck[];
+    }
+  | {
+      type: "shell_task";
+      mode?: "terminal_workspace" | "stdout" | "workspace_and_stdout";
+      instructions?: string;
     };
 
 export type ManifestCodeInputExpectedExample =

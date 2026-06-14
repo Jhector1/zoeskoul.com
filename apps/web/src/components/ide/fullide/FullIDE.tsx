@@ -388,17 +388,25 @@ function FullIDEInner({
             const prior = currentWorkspaceRef.current;
             if (!prior) return;
 
-            actions.replaceWorkspace(
-                mergeTerminalSnapshotIntoWorkspace({
-                    prior,
-                    snapshotFiles: files,
-                    dirtyUiPaths: meta.dirtyUiPaths,
-                }),
-            );
-        },
-        [actions],
-    );
+            const nextWorkspace = mergeTerminalSnapshotIntoWorkspace({
+                prior,
+                snapshotFiles: files,
+                dirtyUiPaths: meta.dirtyUiPaths,
+            });
 
+            actions.replaceWorkspace(nextWorkspace);
+
+            /**
+             * Terminal commands are learner edits.
+             *
+             * Without this immediate user-origin emission, FullIDE shows the new
+             * terminal-created files in Explorer, but review/practice submission
+             * still reads the old workspace and reports required files as missing.
+             */
+            emitImmediateWorkspaceChange(nextWorkspace);
+        },
+        [actions, emitImmediateWorkspaceChange],
+    );
     const explorerPane = (
         <IdeExplorerPane
             isSql={isSql}

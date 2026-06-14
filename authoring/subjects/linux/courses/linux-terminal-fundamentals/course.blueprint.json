@@ -1,0 +1,35 @@
+{
+  "subjectSlug": "linux",
+  "catalogSlug": "linux",
+  "profileId": "bash",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "title": "Linux Terminal Fundamentals",
+  "description": "A beginner-friendly Linux course focused on terminal navigation, files, folders, safe command habits, and workspace-based practice.",
+  "level": "beginner",
+  "audience": [
+    "absolute beginners",
+    "programming students",
+    "developer beginners",
+    "cybersecurity students who need Linux basics"
+  ],
+  "goals": [
+    "Use the Linux terminal safely for navigation and file workflow",
+    "Create, copy, move, rename, delete, and inspect files/folders",
+    "Connect terminal commands to visible workspace changes",
+    "Prepare for permissions, Bash scripting, Git, SSH, and server basics"
+  ],
+  "teachingStyle": {
+    "tone": "friendly, practical, beginner-safe, terminal-first, and project-oriented",
+    "quizWeight": 0.25,
+    "projectWeight": 0.4,
+    "codeInputWeight": 0.5
+  },
+  "constraints": {
+    "moduleCount": 2,
+    "topicsPerModuleMin": 4,
+    "topicsPerModuleMax": 4
+  },
+  "courseSlug": "linux-terminal-fundamentals",
+  "trackSlug": "linux"
+}

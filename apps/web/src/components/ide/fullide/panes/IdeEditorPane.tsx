@@ -2,7 +2,10 @@
 
 import React from "react";
 import CodeRunner from "@/components/code/CodeRunner";
-import type { CodeRunnerRuntime } from "@/components/code/runner/runtime";
+import {
+    resolveTerminalWorkspaceKey,
+    type CodeRunnerRuntime,
+} from "@/components/code/runner/runtime";
 import type { FullIDEServices } from "@/components/ide/fullide/services";
 
 import TabsBar from "../TabsBar";
@@ -149,6 +152,22 @@ export default function IdeEditorPane({
         },
         [activeFile?.id, activeFileId, onChangeFileCode],
     );
+    const terminalWorkspaceKey = React.useMemo(
+        () =>
+            resolveTerminalWorkspaceKey({
+                exerciseStateKey,
+                terminalHistoryScopeKey,
+                projectId,
+                terminalSessionScope: services.runner.terminalSessionScope,
+            }),
+        [
+            exerciseStateKey,
+            terminalHistoryScopeKey,
+            projectId,
+            services.runner.terminalSessionScope,
+        ],
+    );
+
     return (
         <div className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden">
             {services.editor.showTabs ? (
@@ -201,6 +220,7 @@ export default function IdeEditorPane({
                                     ? `${exerciseStateKey}:${activeFileId ?? "no-file"}`
                                     : activeFileId ?? "no-file"
                             }
+                            showEditor={services.editor.showEditor !== false}
                             activeWorkspaceFileId={activeFile?.id ?? activeFileId ?? undefined}
                             onBeforeRun={onBeforeRun}
                             onRun={
@@ -217,13 +237,14 @@ export default function IdeEditorPane({
                             workspaceTerminal={
                                 !isSql && !isWeb
                                     ? {
-                                        // Important:
-                                        // `enabled` controls whether the PTY terminal tab is available.
-                                        // The workspace sync callbacks are still needed for Judge0 so
-                                        // returned workspaceFiles can update the Explorer.
                                         enabled: services.runner.enableWorkspaceTerminal,
                                         projectId: projectId ?? undefined,
                                         cwd: "/workspace",
+                                        // Keep the visible exercise binding unchanged while
+                                        // allowing PTY reuse to widen to topic/module scope.
+                                        workspaceKey: terminalWorkspaceKey,
+                                        terminalSessionScope:
+                                            services.runner.terminalSessionScope,
                                         initialFiles: workspaceEntries,
                                         getWorkspaceFiles: () => workspaceEntries,
                                         onTerminalSnapshotFiles: onApplyTerminalSnapshotFiles,

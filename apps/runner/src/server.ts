@@ -4,6 +4,7 @@ import { env } from "./lib/env.js";
 import { attachSessionWsServer } from "./ws/sessionWsServer.js";
 import { cleanupRunnerOrphansOnStartup } from "./services/docker/runnerReaper.js";
 import { pruneStartRateLimitBuckets } from "./services/sessions/startRateLimit.js";
+import { startSessionCleanupLoop } from "./services/sessions/timeoutManager.js";
 
 async function main() {
   const server = createServer(app);
@@ -26,6 +27,8 @@ async function main() {
   if (typeof rateLimitPruneTimer.unref === "function") {
     rateLimitPruneTimer.unref();
   }
+
+  startSessionCleanupLoop();
 
   server.listen(env.port, "0.0.0.0", () => {
     console.log(`runner listening on 0.0.0.0:${env.port}`);
