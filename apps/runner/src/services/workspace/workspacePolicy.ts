@@ -39,6 +39,7 @@ const ALLOWED_BASENAMES = new Set([
   "README",
   "README.md",
   "readme.md",
+  ".keep",
 ]);
 
 export const IGNORED_SNAPSHOT_DIRS = new Set([
