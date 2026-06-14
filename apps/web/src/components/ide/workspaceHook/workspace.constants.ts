@@ -5,6 +5,7 @@ export const ALL_LANGUAGES: WorkspaceLanguage[] = [
   "python",
   "java",
   "javascript",
+  "bash",
   "web",
   "c",
   "cpp",

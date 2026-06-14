@@ -5,9 +5,11 @@ vi.mock("server-only", () => ({}));
 const {
     createJudge0SubmissionMock,
     zipProjectMock,
+    getSingleFileLanguageIdMock,
 } = vi.hoisted(() => ({
     createJudge0SubmissionMock: vi.fn(),
     zipProjectMock: vi.fn(),
+    getSingleFileLanguageIdMock: vi.fn(() => 71),
 }));
 
 vi.mock("./judge0", () => ({
@@ -20,7 +22,7 @@ vi.mock("./projectZip", () => ({
 }));
 
 vi.mock("./langIds", () => ({
-    getSingleFileLanguageId: vi.fn(() => 71),
+    getSingleFileLanguageId: getSingleFileLanguageIdMock,
 }));
 
 vi.mock("./sql/executeSql", () => ({
@@ -94,6 +96,26 @@ describe("submitRun", () => {
             "http://judge0.test/submissions?base64_encoded=true",
             expect.objectContaining({
                 enable_network: false,
+            }),
+        );
+    });
+
+    it("routes bash project runs through project mode without asking for a single-file Judge0 lang id", async () => {
+        await submitRun({
+            language: "bash",
+            entry: "main.sh",
+            files: [{ path: "main.sh", content: 'echo "Hello from Bash!"\n' }],
+        } as any);
+
+        expect(getSingleFileLanguageIdMock).not.toHaveBeenCalled();
+        expect(zipProjectMock).toHaveBeenCalledWith("bash", "main.sh", [
+            { path: "main.sh", content: 'echo "Hello from Bash!"\n' },
+        ]);
+        expect(createJudge0SubmissionMock).toHaveBeenCalledWith(
+            "http://judge0.test/submissions?base64_encoded=true",
+            expect.objectContaining({
+                language_id: 89,
+                additional_files: "zip-b64",
             }),
         );
     });

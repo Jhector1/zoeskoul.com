@@ -144,11 +144,32 @@ describe("python-v2 course content", () => {
 
               if (exercise.kind === "code_input") {
                 const recipe = exercise.recipe ?? {};
+                const isTerminalWorkspaceShellTask =
+                  recipe.type === "shell_task" &&
+                  recipe.mode === "terminal_workspace";
                 const tests = Array.isArray(recipe.tests)
                   ? recipe.tests
                   : Array.isArray(expected.tests)
                     ? expected.tests
                     : [];
+
+                if (isTerminalWorkspaceShellTask) {
+                  const workspaceExpectations =
+                    exercise.workspaceExpectations ??
+                    exercise.workspace?.workspaceExpectations ??
+                    expected.workspaceExpectations ??
+                    {};
+                  const hasWorkspaceExpectation =
+                    Array.isArray(workspaceExpectations.requiredFiles) ||
+                    Array.isArray(workspaceExpectations.requiredFolders) ||
+                    Array.isArray(workspaceExpectations.forbiddenFiles);
+
+                  expect(
+                    hasWorkspaceExpectation,
+                    `${exerciseRef} terminal_workspace shell_task must define workspaceExpectations`,
+                  ).toBe(true);
+                  continue;
+                }
 
                 expect(
                   tests.length >= 2,

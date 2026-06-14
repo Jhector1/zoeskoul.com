@@ -310,6 +310,8 @@ function extractSolutionCode(exercise: ManifestCodeInput): string {
         case "sql_query":
         case "semantic":
             return String(exercise.recipe.solutionCode ?? "");
+        case "shell_task":
+            return "";
         case "template_io":
             return String(exercise.recipe.solutionTemplate ?? "");
     }
@@ -444,7 +446,7 @@ export async function validatePythonGolden(args: {
     const codeGolden = await validateCodeProfileGolden({
         profileId: "python",
         expectedLanguage: "python",
-        allowedRecipeTypes: ["fixed_tests", "template_io", "semantic"],
+        allowedRecipeTypes: ["fixed_tests", "template_io", "semantic", "shell_task"],
         topicBundle: {
             ...args.topicBundle,
             exercises: args.topicBundle.exercises.filter(

@@ -1,0 +1,39 @@
+{
+  "policyId": "linux-terminal-fundamentals-validation",
+  "allowedConcepts": [
+    "terminal",
+    "pwd",
+    "ls",
+    "cd",
+    ".",
+    "..",
+    "~",
+    "mkdir",
+    "mkdir -p",
+    "touch",
+    "cp",
+    "mv",
+    "rm",
+    "cat",
+    "head",
+    "tail",
+    "wc"
+  ],
+  "disallowedConcepts": [
+    "sudo",
+    "chmod",
+    "chown",
+    "package installation",
+    "system services",
+    "external SSH",
+    "network scanning",
+    "Bash conditionals",
+    "Bash loops"
+  ],
+  "validationRequirements": {
+    "usesShellTaskRecipe": true,
+    "usesTerminalWorkspaceLayout": true,
+    "workspaceExpectationsRequired": true,
+    "judge0NotRequired": true
+  }
+}

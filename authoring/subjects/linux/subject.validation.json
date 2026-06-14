@@ -1,0 +1,18 @@
+{
+  "validationSuite": "linuxSubjectValidation",
+  "appliesTo": "linux_courses",
+  "runtime": {
+    "language": "bash"
+  },
+  "rules": {
+    "executionValidation": [
+      "Course 1 terminal tasks must use shell_task terminal_workspace and validate workspaceExpectations.",
+      "Course 1 must not require Judge0 Bash execution.",
+      "Terminal workspace tasks should keep the editor hidden and the terminal visible."
+    ],
+    "pedagogy": [
+      "Beginner Linux topics should be terminal-first, short, safe, and workspace-checked.",
+      "Teach destructive commands only with guardrails and clear safe paths."
+    ]
+  }
+}

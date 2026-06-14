@@ -22,6 +22,7 @@ type CodeInputRecipeType =
     | "fixed_tests"
     | "semantic"
     | "template_io"
+    | "shell_task"
     | undefined;
 
 type NormalizedCodeInputTest = {
@@ -212,6 +213,10 @@ function isCodeInputValid(exercise: any): boolean {
         return hasSemanticChecks;
     }
 
+    if (exercise.recipeType === "shell_task") {
+        return true;
+    }
+
     return hasTests || hasSemanticChecks;
 }
 
@@ -255,12 +260,14 @@ function applySeedDefaults(seed: TopicSeed, draft: TopicAuthoringDraft): TopicAu
                 exercise.recipeType === "sql_query" ||
                 exercise.recipeType === "fixed_tests" ||
                 exercise.recipeType === "semantic" ||
-                exercise.recipeType === "template_io"
+                exercise.recipeType === "template_io" ||
+                exercise.recipeType === "shell_task"
                     ? exercise.recipeType
                     : defaultRecipeType === "sql_query" ||
                     defaultRecipeType === "fixed_tests" ||
                     defaultRecipeType === "semantic" ||
-                    defaultRecipeType === "template_io"
+                    defaultRecipeType === "template_io" ||
+                    defaultRecipeType === "shell_task"
                         ? defaultRecipeType
                         : undefined;
 
@@ -366,10 +373,12 @@ export async function repairIncompleteExercises(args: {
                     ? "semantic"
                     : authoredRecipeType === "fixed_tests" && normalizedTests
                         ? "fixed_tests"
-                        : authoredRecipeType === "sql_query"
+                    : authoredRecipeType === "sql_query"
                             ? "sql_query"
                             : authoredRecipeType === "template_io"
                                 ? "template_io"
+                                : authoredRecipeType === "shell_task"
+                                    ? "shell_task"
                                 : hasSemanticChecks
                                     ? "semantic"
                                     : normalizedTests

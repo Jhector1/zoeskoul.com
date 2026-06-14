@@ -19,6 +19,27 @@ const DEFAULT_LIMITS = {
     memory_limit: 256000,
 } as const;
 
+type WorkspaceSubmissionEntry =
+    | FileEntry
+    | {
+    kind: "directory";
+    path: string;
+};
+
+function isDirectorySubmissionEntry(
+    entry: WorkspaceSubmissionEntry,
+): entry is { kind: "directory"; path: string } {
+    return "kind" in entry && entry.kind === "directory";
+}
+
+function toSubmittedFileEntries(
+    files?: WorkspaceSubmissionEntry[],
+): FileEntry[] | undefined {
+    return files?.filter(
+        (file): file is FileEntry => !isDirectorySubmissionEntry(file),
+    );
+}
+
 type WorkspaceExpectationInput = {
     entryFilePath?: unknown;
     requiredFiles?: unknown;
@@ -78,7 +99,12 @@ function normalizeSubmittedFilePath(path: unknown): string {
 function submittedFolderExists(
     folderPath: string,
     submittedFilePaths: Set<string>,
+    submittedFolderPaths: Set<string>,
 ): boolean {
+    if (submittedFolderPaths.has(folderPath)) {
+        return true;
+    }
+
     const prefix = `${folderPath}/`;
 
     for (const filePath of submittedFilePaths) {
@@ -93,7 +119,7 @@ function submittedFolderExists(
 function validateWorkspaceExpectations(args: {
     expected: ProgrammingExpected;
     entry?: string;
-    files?: FileEntry[];
+    files?: WorkspaceSubmissionEntry[];
 }): GradeResult | null {
     const expectations = args.expected
         .workspaceExpectations as WorkspaceExpectationInput | undefined;
@@ -102,11 +128,28 @@ function validateWorkspaceExpectations(args: {
         return null;
     }
 
-    const submittedFilePaths = new Set(
-        (args.files ?? [])
-            .map((file) => normalizeSubmittedFilePath(file.path))
-            .filter(Boolean),
-    );
+    const submittedFilePaths = new Set<string>();
+    const submittedFolderPaths = new Set<string>();
+
+    for (const file of args.files ?? []) {
+        const normalizedPath = normalizeSubmittedFilePath(file.path);
+        if (!normalizedPath) continue;
+
+        if (isDirectorySubmissionEntry(file)) {
+            submittedFolderPaths.add(normalizedPath);
+            continue;
+        }
+
+        submittedFilePaths.add(normalizedPath);
+
+        const parts = normalizedPath.split("/");
+        let current = "";
+
+        for (const part of parts.slice(0, -1)) {
+            current = current ? `${current}/${part}` : part;
+            submittedFolderPaths.add(current);
+        }
+    }
 
     const requiredFiles = asWorkspacePathArray(expectations.requiredFiles);
     const requiredFolders = asWorkspacePathArray(expectations.requiredFolders);
@@ -119,7 +162,7 @@ function validateWorkspaceExpectations(args: {
         if (!submittedFilePaths.has(expectedEntryFilePath)) {
             return {
                 ok: false,
-                explanation: `Missing required file: ${expectedEntryFilePath}`,
+                explanation: `Missing file: ${expectedEntryFilePath}`,
                 feedback: null,
             };
         }
@@ -138,17 +181,17 @@ function validateWorkspaceExpectations(args: {
         if (!submittedFilePaths.has(requiredFile)) {
             return {
                 ok: false,
-                explanation: `Missing required file: ${requiredFile}`,
+                explanation: `Missing file: ${requiredFile}`,
                 feedback: null,
             };
         }
     }
 
     for (const requiredFolder of requiredFolders) {
-        if (!submittedFolderExists(requiredFolder, submittedFilePaths)) {
+        if (!submittedFolderExists(requiredFolder, submittedFilePaths, submittedFolderPaths)) {
             return {
                 ok: false,
-                explanation: `Missing required folder: ${requiredFolder}`,
+                explanation: `Missing folder: ${requiredFolder}`,
                 feedback: null,
             };
         }
@@ -158,7 +201,7 @@ function validateWorkspaceExpectations(args: {
         if (submittedFilePaths.has(forbiddenFile)) {
             return {
                 ok: false,
-                explanation: `Forbidden file present: ${forbiddenFile}`,
+                explanation: `Remove forbidden file: ${forbiddenFile}`,
                 feedback: null,
             };
         }
@@ -398,10 +441,10 @@ function getSubmittedSourceForCheck(args: {
     check: SourceCheckInput;
     code: string;
     entry?: string;
-    files?: FileEntry[];
+    files?: WorkspaceSubmissionEntry[];
 }): string {
     const requestedPath = typeof args.check.path === "string" ? normalizeSubmittedFilePath(args.check.path) : "";
-    const files = args.files ?? [];
+    const files = toSubmittedFileEntries(args.files) ?? [];
 
     if (requestedPath) {
         const file = files.find((candidate) => normalizeSubmittedFilePath(candidate.path) === requestedPath);
@@ -628,7 +671,7 @@ function validateSourceChecks(args: {
     expected: ProgrammingExpected;
     code: string;
     entry?: string;
-    files?: FileEntry[];
+    files?: WorkspaceSubmissionEntry[];
     showDebug: boolean;
 }): GradeResult | null {
     const sourceChecks = getSourceChecks(args.expected);
@@ -679,7 +722,7 @@ async function gradeAdditionalSemanticChecks(args: {
     code: string;
     language: string;
     entry?: string;
-    files?: FileEntry[];
+    files?: WorkspaceSubmissionEntry[];
     showDebug: boolean;
 }): Promise<GradeResult | null> {
     const semanticChecks = getSemanticChecks(args.expected);
@@ -698,23 +741,25 @@ async function gradeAdditionalSemanticChecks(args: {
         code: args.code,
         language: args.language,
         entry: args.entry,
-        files: args.files,
+        files: toSubmittedFileEntries(args.files),
         showDebug: args.showDebug,
     });
 }
 
 function filesWithCurrentEntryContent(args: {
     entry?: string;
-    files?: FileEntry[];
+    files?: WorkspaceSubmissionEntry[];
     code: string;
 }): FileEntry[] | undefined {
-    if (!args.entry || !args.files?.length) {
-        return args.files;
+    const files = toSubmittedFileEntries(args.files);
+
+    if (!args.entry || !files?.length) {
+        return files;
     }
 
     return replaceEntryFileContent({
         entry: args.entry,
-        files: args.files,
+        files,
         content: args.code,
     });
 }
@@ -731,13 +776,22 @@ function debugRaw(value: unknown): string | null {
 
 export async function gradeProgrammingCodeInput(args: {
     expected: ProgrammingExpected;
+    terminalWorkspaceShellTask?: boolean;
     code: string;
     language: string;
     entry?: string;
-    files?: FileEntry[];
+    files?: WorkspaceSubmissionEntry[];
     showDebug: boolean;
 }): Promise<GradeResult> {
-    const { expected, code, language, entry, files, showDebug } = args;
+    const {
+        expected,
+        terminalWorkspaceShellTask,
+        code,
+        language,
+        entry,
+        files,
+        showDebug,
+    } = args;
 
     const workspaceValidation = validateWorkspaceExpectations({
         expected,
@@ -761,13 +815,23 @@ export async function gradeProgrammingCodeInput(args: {
         return sourceValidation;
     }
 
+    if (terminalWorkspaceShellTask) {
+        // Course 1 shell tasks validate the learner's synced workspace
+        // directly, so we stop here instead of requiring stdout or Judge0.
+        return {
+            ok: true,
+            explanation: "Correct.",
+            feedback: null,
+        };
+    }
+
     if (expected.checkMode === "semantic") {
         return gradeSemanticCodeInput({
             expected,
             code,
             language,
             entry,
-            files,
+            files: toSubmittedFileEntries(files),
             showDebug,
         });
     }

@@ -54,6 +54,35 @@ function makeCodeInputDef(overrides: Record<string, unknown> = {}) {
   } as any;
 }
 
+const LINUX_COURSE1_TERMINAL_FIXTURE = {
+  id: "linux-course-1-terminal-lab",
+  kind: "code_input",
+  messageBase: "quiz.linux_course_1_terminal_lab",
+  language: "bash",
+  recipe: {
+    type: "shell_task",
+    mode: "terminal_workspace",
+  },
+  workspace: {
+    entryFile: "README.md",
+    starterFiles: [
+      {
+        path: "README.md",
+        content: "Use the terminal to create linux-lab/notes/today.txt",
+      },
+    ],
+  },
+  workspaceExpectations: {
+    requiredFolders: [
+      "linux-lab",
+      "linux-lab/notes",
+    ],
+    requiredFiles: [
+      "linux-lab/notes/today.txt",
+    ],
+  },
+} as const;
+
 describe("buildExerciseFromManifest runtime IDE mapping", () => {
   it("maps runtimeDefaults.supportsFileSystem to ideConfig.requires.files", () => {
     const result = buildExerciseFromManifest(
@@ -165,6 +194,8 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
     });
 
     expect(fullIde.services.explorer?.enabled).toBe(true);
+    expect(fullIde.services.editor?.showEditor).toBe(true);
+    expect(fullIde.services.editor?.showTabs).toBe(true);
     expect(fullIde.access.canUseMultiFile).toBe(true);
     expect(fullIde.services.runner?.showTerminal).not.toBe(true);
   });
@@ -239,6 +270,115 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
     expect(fullIde.services.explorer?.enabled).toBe(true);
     expect(fullIde.access.canUseMultiFile).toBe(true);
     expect(fullIde.services.runner?.enableWorkspaceTerminal).not.toBe(true);
+  });
+
+  it("maps shell_task terminal_workspace manifests to bash code_input with PTY IDE config", () => {
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef(LINUX_COURSE1_TERMINAL_FIXTURE as any),
+      makeArgs(),
+      {
+        runtimeDefaults: {
+          kind: "code",
+          language: "python",
+          supportsTerminal: false,
+          supportsFileSystem: false,
+          supportsMultiFile: false,
+        },
+      } as any,
+    );
+
+    expect(result.exercise.kind).toBe("code_input");
+    expect((result.exercise as any).language).toBe("bash");
+    expect((result.exercise as any).workspace).toEqual({
+      entryFile: "README.md",
+      starterFiles: [
+        {
+          path: "README.md",
+          content: "Use the terminal to create linux-lab/notes/today.txt",
+        },
+      ],
+    });
+    expect((result.exercise as any).ideConfig).toMatchObject({
+      runnerBackend: "pty",
+      layoutMode: "terminal_workspace",
+      terminalSessionScope: "topic",
+      requires: {
+        files: true,
+        multiFile: true,
+        terminal: true,
+      },
+    });
+    const fullIde = resolveFullIDEConfigFromLearningIde({
+      ideConfig: (result.exercise as any).ideConfig ?? null,
+    });
+
+    expect(fullIde.services.explorer?.enabled).toBe(true);
+    expect(fullIde.services.editor?.showEditor).toBe(false);
+    expect(fullIde.services.runner?.showTerminal).toBe(true);
+    expect(fullIde.services.runner?.allowRun).toBe(false);
+    expect((result.expected as any)).toMatchObject({
+      recipeType: "shell_task",
+      shellTaskMode: "terminal_workspace",
+      workspaceExpectations: {
+        requiredFolders: [
+          "linux-lab",
+          "linux-lab/notes",
+        ],
+        requiredFiles: [
+          "linux-lab/notes/today.txt",
+        ],
+      },
+    });
+  });
+
+  it("preserves an authored terminalSessionScope override for terminal shell tasks", () => {
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef({
+        ...LINUX_COURSE1_TERMINAL_FIXTURE,
+        serviceOverrides: {
+          terminalSessionScope: "project",
+        },
+      } as any),
+      makeArgs(),
+      {
+        runtimeDefaults: {
+          kind: "code",
+          language: "python",
+          supportsTerminal: false,
+          supportsFileSystem: false,
+          supportsMultiFile: false,
+        },
+      } as any,
+    );
+
+    expect((result.exercise as any).ideConfig).toMatchObject({
+      runnerBackend: "pty",
+      layoutMode: "terminal_workspace",
+      terminalSessionScope: "project",
+      requires: {
+        files: true,
+        multiFile: true,
+        terminal: true,
+      },
+    });
+  });
+
+  it("does not add terminalSessionScope to normal Python code_input exercises", () => {
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef(),
+      makeArgs(),
+      {
+        runtimeDefaults: {
+          kind: "code",
+          language: "python",
+          supportsTerminal: false,
+          supportsFileSystem: false,
+          supportsMultiFile: false,
+        },
+      } as any,
+    );
+
+    expect((result.exercise as any).ideConfig?.terminalSessionScope).toBeUndefined();
   });
   it("keeps semantic checks on fixed-test exercises for hybrid stdout plus state validation", () => {
     const semanticChecks = [

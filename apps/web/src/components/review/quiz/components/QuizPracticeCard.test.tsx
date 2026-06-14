@@ -1,7 +1,7 @@
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import QuizPracticeCard from "./QuizPracticeCard";
+import QuizPracticeCard, { flushReviewToolsBeforeSubmit } from "./QuizPracticeCard";
 
 vi.mock("@/i18n/tagged", () => ({
     useTaggedT: () => ({
@@ -36,6 +36,22 @@ vi.mock("@/components/review/module/context/ReviewToolsContext", () => ({
 }));
 
 describe("QuizPracticeCard project-step fallback", () => {
+    it("awaits the latest tools flush before practice submit", async () => {
+        const steps: string[] = [];
+
+        await flushReviewToolsBeforeSubmit({
+            flushLatest: async () => {
+                steps.push("flush:start");
+                await Promise.resolve();
+                steps.push("flush:end");
+            },
+        });
+
+        steps.push("submit");
+
+        expect(steps).toEqual(["flush:start", "flush:end", "submit"]);
+    });
+
     it("renders a project step starter even before a fetched practice item exists", () => {
         const props = {
             q: {

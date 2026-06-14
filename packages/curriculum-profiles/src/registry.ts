@@ -8,12 +8,14 @@ import type { ExerciseKind } from "@zoeskoul/curriculum-contracts";
 import { buildFixedTestsRecipe } from "./base/recipes/buildFixedTestsRecipe.js";
 import { buildSemanticRecipe } from "./base/recipes/buildSemanticRecipe.js";
 import { buildTemplateIoRecipe } from "./base/recipes/buildTemplateIoRecipe.js";
+import { bashProfile, bashProfileAdapter } from "./bash/index.js";
 import { sqlProfile, sqlProfileAdapter } from "./sql/index.js";
 import { pythonProfile, pythonProfileAdapter } from "./python/index.js";
 import { mathProfile, mathProfileAdapter } from "./math/index.js";
 
-const builtinProfiles = [sqlProfile, pythonProfile, mathProfile] satisfies CourseProfile[];
+const builtinProfiles = [bashProfile, sqlProfile, pythonProfile, mathProfile] satisfies CourseProfile[];
 const builtinAdapters = [
+    bashProfileAdapter,
     sqlProfileAdapter,
     pythonProfileAdapter,
     mathProfileAdapter,

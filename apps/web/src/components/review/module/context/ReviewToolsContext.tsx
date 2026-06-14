@@ -111,6 +111,7 @@ export type ReviewToolsValue = {
   isBound: (id: string) => boolean;
 
   ensureVisible?: () => void;
+  flushLatest?: () => void | Promise<void>;
 
   getRunFeedbackEntry: (id: string) => RunFeedbackEntry | null;
   setRunFeedback: (id: string, feedback: CodeFeedback | null) => void;
@@ -309,6 +310,7 @@ export function ReviewToolsProvider({
   const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
   const patchEditorWorkspace = useReviewRuntimeStore((s) => s.patchEditorWorkspace);
   const setFlushToolSnapshotCallback = useReviewRuntimeStore((s) => s.setFlushToolSnapshotCallback);
+  const flushToolSnapshot = useReviewRuntimeStore((s) => s.flushToolSnapshot);
 
   const sketch = useDebouncedSketchState({});
 
@@ -1357,6 +1359,11 @@ export function ReviewToolsProvider({
       previewExerciseKey,
       isBound,
       ensureVisible: enabled ? ensureVisible : undefined,
+      flushLatest: enabled
+          ? async () => {
+              flushToolSnapshot();
+          }
+          : undefined,
 
       getRunFeedbackEntry,
       setRunFeedback,
@@ -1378,6 +1385,7 @@ export function ReviewToolsProvider({
       previewExerciseKey,
       isBound,
       ensureVisible,
+      flushToolSnapshot,
       getRunFeedbackEntry,
       setRunFeedback,
       clearRunFeedback,

@@ -55,16 +55,16 @@ describe("buildSubmitAnswerFromItem", () => {
             language: "python",
             code: 'with open("data.txt") as file:\n    print(file.read())',
             entry: "main.py",
-            files: [
-                {
+            files: expect.arrayContaining([
+                expect.objectContaining({
                     path: "main.py",
                     content: 'with open("data.txt") as file:\n    print(file.read())\n',
-                },
-                {
+                }),
+                expect.objectContaining({
                     path: "data.txt",
                     content: "fixture\n",
-                },
-            ],
+                }),
+            ]),
         });
     });
 

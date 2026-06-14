@@ -5,6 +5,25 @@
 import type { CatalogManifest } from "@/lib/subjects/_core/subjectManifestTypes";
 
 export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
+  "linux": {
+    "catalog": {
+      "slug": "linux",
+      "order": 30,
+      "title": "Linux",
+      "description": "Linux courses focused on terminal fluency, files, permissions, Bash, developer workflows, and server basics.",
+      "imagePublicId": null,
+      "imageAlt": "Linux catalog cover",
+      "defaultSubjectSlug": "linux-terminal-fundamentals",
+      "status": "active",
+      "subjectSlugs": [
+        "linux-terminal-fundamentals"
+      ],
+      "meta": {
+        "family": "systems",
+        "featured": true
+      }
+    }
+  },
   "python": {
     "catalog": {
       "slug": "python",
@@ -50,6 +69,7 @@ export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
 
 export const SUBJECT_CATALOG_SLUGS: Record<string, string> = {
   "applied-python-projects": "python",
+  "linux-terminal-fundamentals": "linux",
   "python": "python",
   "python-data-functions": "python",
   "python-v2": "python",

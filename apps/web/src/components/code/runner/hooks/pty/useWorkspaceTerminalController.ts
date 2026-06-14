@@ -335,7 +335,25 @@ export function useWorkspaceTerminalController(
         cancel,
         closeSocket,
     } = useRunSession();
+    const terminalLeaseKey = React.useMemo(() => {
+        const explicit = String((args as any).workspaceKey ?? "").trim();
+        if (explicit) return explicit;
 
+        const exerciseKey = String(args.exerciseStateKey ?? "").trim();
+        if (exerciseKey) return exerciseKey;
+
+        return [
+            args.projectId ?? "lesson",
+            args.cwd ?? "/workspace",
+            args.historyScopeKey ?? "terminal",
+        ].join(":");
+    }, [
+        (args as any).workspaceKey,
+        args.exerciseStateKey,
+        args.projectId,
+        args.cwd,
+        args.historyScopeKey,
+    ]);
     const [terminalFeed, setTerminalFeed] = React.useState<TerminalChunk[]>([]);
     const [inputEnabled, setInputEnabled] = React.useState(false);
     const [busy, setBusy] = React.useState(false);
@@ -356,7 +374,8 @@ export function useWorkspaceTerminalController(
     const awaitingPostEnterSnapshotRef = React.useRef(false);
     const snapshotInFlightRef = React.useRef<Promise<boolean> | null>(null);
     const openInFlightRef = React.useRef<Promise<void> | null>(null);
-
+    const openedLeaseKeyRef = React.useRef<string | null>(null);
+    const previousLeaseKeyRef = React.useRef<string | null>(null);
     const startedRef = React.useRef(started);
     const startingRef = React.useRef(starting);
     const stateRef = React.useRef<RunSessionState | "idle">(state);
@@ -555,10 +574,7 @@ export function useWorkspaceTerminalController(
         }
     }, []);
 
-    const reset = React.useCallback(() => {
-        clearQuietTimer();
-        void cancel().catch(() => {});
-        closeSocket();
+    const clearLocalTerminalState = React.useCallback(() => {
         lastHandledSeqRef.current = 0;
         nextChunkIdRef.current = 1;
         awaitingPostEnterSnapshotRef.current = false;
@@ -573,7 +589,14 @@ export function useWorkspaceTerminalController(
         setStarted(false);
         setStarting(false);
         setSyncStatus("idle");
-    }, [cancel, clearQuietTimer, closeSocket]);
+    }, []);
+
+    const reset = React.useCallback(() => {
+        clearQuietTimer();
+        void cancel().catch(() => {});
+        closeSocket();
+        clearLocalTerminalState();
+    }, [cancel, clearLocalTerminalState, clearQuietTimer, closeSocket]);
 
     const replaceFiles = React.useCallback(
         async (files: WorkspaceSyncEntry[]): Promise<boolean> => {
@@ -718,8 +741,31 @@ export function useWorkspaceTerminalController(
 
         if (startingRef.current) return;
 
-        if (startedRef.current && !isFinalSessionState(stateRef.current)) {
+        if (
+            startedRef.current &&
+            openedLeaseKeyRef.current === terminalLeaseKey &&
+            !isFinalSessionState(stateRef.current)
+        ) {
             return;
+        }
+
+        if (
+            startedRef.current &&
+            openedLeaseKeyRef.current !== terminalLeaseKey &&
+            !isFinalSessionState(stateRef.current)
+        ) {
+            try {
+                await cancel();
+            } catch {
+                // Ignore stale cancel failures; the next ensure call is authoritative.
+            }
+
+            closeSocket();
+            openedLeaseKeyRef.current = null;
+            setStarted(false);
+            setStarting(false);
+            setBusy(false);
+            setInputEnabled(false);
         }
 
         const run = (async (): Promise<void> => {
@@ -742,14 +788,17 @@ export function useWorkspaceTerminalController(
             pushChunk("sys", "[starting workspace terminal]\r\n");
 
             try {
+                openedLeaseKeyRef.current = terminalLeaseKey;
+
                 await start({
                     kind: "shell",
                     mode: "interactive",
                     language: "bash",
                     projectId: args.projectId,
                     cwd: args.cwd,
+                    workspaceKey: terminalLeaseKey,
                     ...(fullEntries.length ? { files: fullEntries as any } : {}),
-                });
+                } as any);
 
                 lastPushedEntriesRef.current = visibleEntries;
                 setStarted(true);
@@ -759,6 +808,10 @@ export function useWorkspaceTerminalController(
                 setInputEnabled(false);
                 setState("failed");
                 setStarted(false);
+
+                if (openedLeaseKeyRef.current === terminalLeaseKey) {
+                    openedLeaseKeyRef.current = null;
+                }
                 throw e;
             } finally {
                 setStarting(false);
@@ -776,6 +829,9 @@ export function useWorkspaceTerminalController(
         ensureHistoryLoaded,
         start,
         pushChunk,
+        terminalLeaseKey,
+        cancel,
+        closeSocket,
     ]);
 
     const stop = React.useCallback(async (): Promise<void> => {
@@ -783,18 +839,66 @@ export function useWorkspaceTerminalController(
 
         try {
             await cancel();
-            pushChunk("sys", "\r\n[workspace terminal stopped]\r\n");
         } finally {
             clearQuietTimer();
-            openInFlightRef.current = null;
-            pendingInputLineRef.current = "";
-            escapeSequenceRef.current = "";
-            setBusy(false);
-            setInputEnabled(false);
-            setStarted(false);
-            setStarting(false);
+            openedLeaseKeyRef.current = null;
+            clearLocalTerminalState();
         }
-    }, [cancel, pushChunk, clearQuietTimer]);
+    }, [cancel, clearLocalTerminalState, clearQuietTimer]);
+
+    React.useEffect(() => {
+        const previousLeaseKey = previousLeaseKeyRef.current;
+        previousLeaseKeyRef.current = terminalLeaseKey;
+
+        if (!previousLeaseKey || previousLeaseKey === terminalLeaseKey) {
+            return;
+        }
+
+        const hadSessionForPreviousLease =
+            openedLeaseKeyRef.current === previousLeaseKey &&
+            (startedRef.current ||
+                startingRef.current ||
+                openInFlightRef.current !== null);
+
+        clearQuietTimer();
+        openInFlightRef.current = null;
+        pendingInputLineRef.current = "";
+        escapeSequenceRef.current = "";
+        setBusy(false);
+        setInputEnabled(false);
+        setStarted(false);
+        setStarting(false);
+
+        if (openedLeaseKeyRef.current === previousLeaseKey) {
+            openedLeaseKeyRef.current = null;
+        }
+
+        if (hadSessionForPreviousLease) {
+            void cancel().catch(() => {});
+        }
+
+        closeSocket();
+    }, [terminalLeaseKey, cancel, clearQuietTimer, closeSocket]);
+
+    React.useEffect(() => {
+        return () => {
+            const hadSession =
+                startedRef.current ||
+                startingRef.current ||
+                openInFlightRef.current !== null;
+
+            previousLeaseKeyRef.current = null;
+            openInFlightRef.current = null;
+            openedLeaseKeyRef.current = null;
+            clearQuietTimer();
+
+            if (hadSession) {
+                void cancel().catch(() => {});
+            }
+
+            closeSocket();
+        };
+    }, [cancel, clearQuietTimer, closeSocket]);
 
     const sendData = React.useCallback(
         (data: string) => {

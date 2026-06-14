@@ -196,6 +196,36 @@ function asWorkspaceLanguage(language: string | null | undefined): WorkspaceLang
     return "python";
 }
 
+export function resolveCodeToolPaneFullIdeMode(args: {
+    ideConfig?: LearningIdeConfig | null;
+    reviewDirectWorkspaceReady: boolean;
+    effectiveLanguage?: string | null;
+}) {
+    const ideShell = resolveFullIDEConfigFromLearningIde({
+        ideConfig: args.ideConfig ?? null,
+    });
+    const terminalWorkspaceMode = args.ideConfig?.layoutMode === "terminal_workspace";
+    const usesWorkspaceShell =
+        args.reviewDirectWorkspaceReady ||
+        ideShell.services.explorer?.enabled === true ||
+        ideShell.access.canUseMultiFile;
+
+    const fullIdeTitle = terminalWorkspaceMode
+        ? args.effectiveLanguage === "bash"
+            ? "Linux terminal"
+            : "Terminal lab"
+        : args.effectiveLanguage === "sql"
+            ? "Run SQL"
+            : "Run code";
+
+    return {
+        ideShell,
+        usesWorkspaceShell,
+        forceDesktopLayout: usesWorkspaceShell,
+        fullIdeTitle,
+    };
+}
+
 type SqlTableSnapshot = {
     name: string;
     columns: Array<{
@@ -1184,18 +1214,22 @@ export default function CodeToolPane(props: {
         ],
     );
     const reviewDirectWorkspaceReady = !!reviewDirectWorkspace;
-    const ideShell = useMemo(
-        () => resolveFullIDEConfigFromLearningIde({ ideConfig }),
-        [ideConfig],
+    const paneIdeMode = useMemo(
+        () =>
+            resolveCodeToolPaneFullIdeMode({
+                ideConfig,
+                reviewDirectWorkspaceReady,
+                effectiveLanguage,
+            }),
+        [effectiveLanguage, ideConfig, reviewDirectWorkspaceReady],
     );
-    const shouldForceDesktopLayout = ideShell.services.explorer?.enabled === true;
+    const ideShell = paneIdeMode.ideShell;
 
 // Important:
 // Review runtime always passes a WorkspaceStateV2, even for one-file starters.
 // So force workspace shell whenever review runtime has a ready workspace.
 // Otherwise single-file starter can get stuck in the legacy "single" loading path.
-    const usesWorkspaceShell =
-        reviewDirectWorkspaceReady || shouldForceDesktopLayout || ideShell.access.canUseMultiFile;
+    const usesWorkspaceShell = paneIdeMode.usesWorkspaceShell;
     const workspaceOwnerKey = resolvedEditorOwnerKey ?? editorExerciseStateKey ?? toolScopeKey ?? boundId ?? "general";
 
     const workspaceContextKey = useMemo(
@@ -1966,7 +2000,7 @@ export default function CodeToolPane(props: {
                 {canRenderEditor ? (
                     <FullIDE
                         key={fullIdeKey}
-                        title={isSql ? "Run SQL" : "Run code"}
+                        title={paneIdeMode.fullIdeTitle}
                         height={runnerH - 50}
                         fullHeight
                         language={fullIdeLanguage}
@@ -1992,8 +2026,7 @@ export default function CodeToolPane(props: {
                         billingHref="/billing"
                         draftStorageMode="off"
                         servicePreset={ideShell.servicePreset}
-                        // forceDesktopLayout={shouldForceDesktopLayout}
-                        forceDesktopLayout={usesWorkspaceShell}
+                        forceDesktopLayout={paneIdeMode.forceDesktopLayout}
                         services={{
                             ...ideShell.services,
                             runner: {

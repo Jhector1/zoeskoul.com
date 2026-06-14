@@ -244,6 +244,14 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
         const recipeType =
             pythonCodeInputCapability.defaultRecipeType(args) ??
             (hasSemanticChecks ? "semantic" : "fixed_tests");
+        const recipeTypeValue = String(recipeType ?? "");
+
+        if (recipeTypeValue === "shell_task") {
+            return {
+                ...exercise,
+                recipeType,
+            };
+        }
 
         const repairedTests =
             recipeType === "semantic"
@@ -277,8 +285,14 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
     },
     buildManifest(args): ManifestCodeInput {
         const recipeType = pythonCodeInputCapability.defaultRecipeType(args);
+        const recipeTypeValue = String(recipeType ?? "");
+        const fixedLanguage =
+            typeof (args.exercise as { fixedLanguage?: unknown }).fixedLanguage === "string"
+                ? String((args.exercise as { fixedLanguage?: unknown }).fixedLanguage).trim()
+                : "";
+        const manifestLanguage = fixedLanguage === "bash" ? "bash" : "python";
         const useSemantic =
-            recipeType === "semantic" ||
+            recipeTypeValue === "semantic" ||
             (Array.isArray(args.exercise.semanticChecks) &&
                 args.exercise.semanticChecks.length > 0);
 
@@ -286,7 +300,8 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
         const solutionCode = normalizeText(args.exercise.solutionCode);
 
         const authoredEntryFilePath = safeNormalizeWorkspacePath(
-            (args.exercise as { entryFilePath?: string }).entryFilePath ?? "main.py",
+            (args.exercise as { entryFilePath?: string }).entryFilePath ??
+                (manifestLanguage === "bash" ? "main.sh" : "main.py"),
             "Invalid Python entryFilePath",
         );
 
@@ -314,7 +329,7 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                 {
                     path: authoredEntryFilePath,
                     content: fallbackStarterCode,
-                    language: "python",
+                    language: manifestLanguage,
                     isEntry: true,
                     entry: true,
                 },
@@ -329,7 +344,7 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                 {
                     path: authoredEntryFilePath,
                     content: fallbackStarterCode,
-                    language: "python",
+                    language: manifestLanguage,
                     isEntry: true,
                     entry: true,
                 },
@@ -341,13 +356,13 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             file.path === authoredEntryFilePath
                 ? {
                     ...file,
-                    language: file.language ?? "python",
+                    language: file.language ?? manifestLanguage,
                     isEntry: true,
                     entry: true,
                 }
                 : {
                     ...file,
-                    language: file.language ?? "python",
+                    language: file.language ?? manifestLanguage,
                     isEntry: file.isEntry === true ? false : file.isEntry,
                     entry: file.entry === true ? false : file.entry,
                 },
@@ -373,7 +388,7 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                 {
                     path: authoredEntryFilePath,
                     content: solutionCode,
-                    language: "python",
+                    language: manifestLanguage,
                     isEntry: true,
                     entry: true,
                 },
@@ -385,14 +400,14 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             purpose: "project",
             weight: 1,
             messageBase: args.messageBase,
-            language: "python",
+            language: manifestLanguage,
             starterCode,
             starterFiles,
             solutionFiles,
             ...(sourceChecks?.length ? { sourceChecks } : {}),
             ...(workspaceExpectations ? { workspaceExpectations } : {}),
             workspace: {
-                language: "python",
+                language: manifestLanguage,
                 entryFilePath: authoredEntryFilePath,
                 starterCode,
                 starterFiles,
@@ -409,7 +424,22 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                     seed: args.seed,
                     recipeType,
                 }) ?? true,
-            recipe: useSemantic
+            recipe: recipeTypeValue === "shell_task"
+                ? ({
+                    type: "shell_task",
+                    ...((args.exercise as { mode?: unknown }).mode === "terminal_workspace" ||
+                    (args.exercise as { mode?: unknown }).mode === "stdout" ||
+                    (args.exercise as { mode?: unknown }).mode === "workspace_and_stdout"
+                        ? {
+                            mode: (args.exercise as { mode?: "terminal_workspace" | "stdout" | "workspace_and_stdout" }).mode,
+                        }
+                        : {}),
+                    ...(typeof (args.exercise as { instructions?: unknown }).instructions === "string" &&
+                    String((args.exercise as { instructions?: unknown }).instructions).trim()
+                        ? { instructions: String((args.exercise as { instructions?: unknown }).instructions).trim() }
+                        : {}),
+                } as ManifestCodeInput["recipe"])
+                : useSemantic
                 ? {
                     type: "semantic",
                     language: "python",
@@ -493,7 +523,7 @@ export const pythonProfile: CourseProfile = {
         "fill_blank_choice",
         "code_input",
     ],
-    allowedRecipeTypes: ["fixed_tests", "template_io", "semantic"],
+    allowedRecipeTypes: ["fixed_tests", "template_io", "semantic", "shell_task"],
     buildModuleRuntimeDefaults() {
         return { kind: "code", language: "python" };
     },

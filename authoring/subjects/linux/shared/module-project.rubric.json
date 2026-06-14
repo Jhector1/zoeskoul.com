@@ -1,0 +1,21 @@
+{
+  "rubricId": "linux-terminal-module-project",
+  "criteria": [
+    {
+      "name": "Correct workspace structure",
+      "weight": 0.45
+    },
+    {
+      "name": "Safe command use",
+      "weight": 0.25
+    },
+    {
+      "name": "Readable organization",
+      "weight": 0.2
+    },
+    {
+      "name": "Verification with pwd/ls",
+      "weight": 0.1
+    }
+  ]
+}

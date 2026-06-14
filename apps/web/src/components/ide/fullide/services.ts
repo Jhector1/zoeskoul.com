@@ -1,3 +1,5 @@
+import type { TerminalSessionScope } from "@/components/code/runner/runtime";
+
 export type FullIDEExplorerServices = {
     enabled: boolean;
     allowMobileDrawer: boolean;
@@ -11,6 +13,7 @@ export type FullIDEExplorerServices = {
 
 export type FullIDEEditorServices = {
     showTabs: boolean;
+    showEditor: boolean;
 };
 
 export type FullIDERunnerServices = {
@@ -20,6 +23,7 @@ export type FullIDERunnerServices = {
     showThemeToggle: boolean;
     showSqlDialectPicker: boolean;
     enableWorkspaceTerminal: boolean;
+    terminalSessionScope: TerminalSessionScope;
 };
 
 export type FullIDEProjectServices = {
@@ -75,6 +79,7 @@ const WORKSPACE_PRESET: FullIDEServices = {
     },
     editor: {
         showTabs: true,
+        showEditor: true,
     },
     runner: {
         allowRun: true,
@@ -83,6 +88,7 @@ const WORKSPACE_PRESET: FullIDEServices = {
         showThemeToggle: false,
         showSqlDialectPicker: true,
         enableWorkspaceTerminal: true,
+        terminalSessionScope: "exercise",
     },
     projects: {
         showProjectSwitcher: true,
@@ -105,6 +111,7 @@ const LESSON_PRESET: FullIDEServices = {
     editor: {
         ...WORKSPACE_PRESET.editor,
         showTabs: false,
+        showEditor: true,
     },
     runner: {
         ...WORKSPACE_PRESET.runner,
@@ -139,6 +146,7 @@ const RUNNER_PRESET: FullIDEServices = {
     },
     editor: {
         showTabs: false,
+        showEditor: true,
     },
     runner: {
         ...WORKSPACE_PRESET.runner,
@@ -215,6 +223,8 @@ export function resolveFullIDEServices(args?: {
         merged.runner.showTerminalDockToggle = false;
         merged.runner.enableWorkspaceTerminal = false;
     }
-
+    if (!merged.editor.showEditor) {
+        merged.editor.showTabs = false;
+    }
     return merged;
 }

@@ -541,9 +541,7 @@ describe("gradeProgrammingCodeInput", () => {
         });
 
         expect(result.ok).toBe(false);
-        expect(result.explanation).toBe(
-            "Missing required file: helpers/formatting.py",
-        );
+        expect(result.explanation).toBe("Missing file: helpers/formatting.py");
         expect(mockedSharedRunner).not.toHaveBeenCalled();
         expect(mockedRunCode).not.toHaveBeenCalled();
     });
@@ -594,7 +592,7 @@ describe("gradeProgrammingCodeInput", () => {
         });
 
         expect(result.ok).toBe(false);
-        expect(result.explanation).toBe("Missing required file: main.py");
+        expect(result.explanation).toBe("Missing file: main.py");
         expect(mockedSharedRunner).not.toHaveBeenCalled();
         expect(mockedRunCode).not.toHaveBeenCalled();
     });
@@ -670,7 +668,7 @@ describe("gradeProgrammingCodeInput", () => {
         });
 
         expect(result.ok).toBe(false);
-        expect(result.explanation).toBe("Missing required folder: helpers");
+        expect(result.explanation).toBe("Missing folder: helpers");
         expect(mockedSharedRunner).not.toHaveBeenCalled();
         expect(mockedRunCode).not.toHaveBeenCalled();
     });
@@ -749,9 +747,149 @@ describe("gradeProgrammingCodeInput", () => {
         });
 
         expect(result.ok).toBe(false);
-        expect(result.explanation).toBe("Forbidden file present: solution.py");
+        expect(result.explanation).toBe("Remove forbidden file: solution.py");
         expect(mockedSharedRunner).not.toHaveBeenCalled();
         expect(mockedRunCode).not.toHaveBeenCalled();
+    });
+
+    it("passes terminal_workspace shell tasks from the workspace snapshot without running Judge0", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            workspaceExpectations: {
+                requiredFolders: ["linux-lab/notes"],
+                requiredFiles: ["linux-lab/notes/today.txt"],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            entry: "linux-lab/notes/today.txt",
+            files: [
+                {
+                    kind: "directory",
+                    path: "linux-lab",
+                },
+                {
+                    kind: "directory",
+                    path: "linux-lab/notes",
+                },
+                {
+                    kind: "file",
+                    path: "linux-lab/notes/today.txt",
+                    content: "checked from terminal\n",
+                },
+            ] as any,
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+        expect(mockedRunCode).not.toHaveBeenCalled();
+    });
+
+    it("fails terminal_workspace shell tasks when a required folder is missing", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            workspaceExpectations: {
+                requiredFolders: ["linux-lab/notes"],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            files: [
+                {
+                    kind: "directory",
+                    path: "linux-lab",
+                },
+            ] as any,
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toBe("Missing folder: linux-lab/notes");
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
+    it("fails terminal_workspace shell tasks when a required file is missing", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            workspaceExpectations: {
+                requiredFiles: ["linux-lab/notes/today.txt"],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            files: [
+                {
+                    kind: "directory",
+                    path: "linux-lab",
+                },
+                {
+                    kind: "directory",
+                    path: "linux-lab/notes",
+                },
+            ] as any,
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toBe("Missing file: linux-lab/notes/today.txt");
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
+    it("fails terminal_workspace shell tasks when a forbidden file exists", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            workspaceExpectations: {
+                forbiddenFiles: ["notes.txt"],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            files: [
+                {
+                    kind: "file",
+                    path: "notes.txt",
+                    content: "wrong place\n",
+                },
+            ] as any,
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toBe("Remove forbidden file: notes.txt");
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
     });
 
     it("fails stdout exercises when output is wrong", async () => {

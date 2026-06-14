@@ -3,6 +3,7 @@ import { getSession, pushEvent } from "../sessions/sessionStore.js";
 import { clearAllTimeouts } from "../sessions/timeoutManager.js";
 import { scheduleWorkspaceCleanup } from "../workspace/cleanupWorkspace.js";
 import { docker } from "./dockerClient.js";
+import { closeSessionSockets } from "../../ws/sessionWsServer.js";
 
 type KillFinalState = Extract<
     RunSessionState,
@@ -26,6 +27,8 @@ export async function killSession(
     if (!session) return;
 
     clearAllTimeouts(sessionId);
+    closeSessionSockets(sessionId, 1012, `Session ${finalState}`);
+    (session.attachStream as { destroy?: () => void } | null | undefined)?.destroy?.();
 
     if (!isTerminalState(session.state)) {
         try {
@@ -37,6 +40,12 @@ export async function killSession(
 
         pushEvent(sessionId, { type: "status", state: finalState });
     }
+
+    console.info("RUNNER session cleanup scheduled", {
+        sessionId,
+        ownerKey: session.ownerKey ?? "anonymous",
+        finalState,
+    });
 
     /**
      * Keep the workspace briefly even after cancel/timeout so the UI can

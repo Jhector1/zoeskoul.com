@@ -1,0 +1,27 @@
+{
+  "policyId": "linux-shared-validation",
+  "extendsValidation": [
+    "course-structure",
+    "versioning",
+    "workspace-language"
+  ],
+  "runtime": {
+    "language": "bash"
+  },
+  "validationRequirements": {
+    "terminalWorkspaceUsesPty": true,
+    "workspaceExpectationsRequiredForShellTasks": true,
+    "judge0BashNotRequiredForCourse1": true
+  },
+  "rules": {
+    "executionValidation": [
+      "shell_task terminal_workspace exercises validate folders/files from the workspace snapshot.",
+      "Do not require stdout tests for terminal navigation tasks.",
+      "Do not call Judge0 for Course 1 shell_task terminal_workspace checks."
+    ],
+    "pedagogy": [
+      "Keep tasks visible in the file explorer.",
+      "Prefer mkdir, touch, cp, mv, cat, head, tail, wc, pwd, ls, and cd for Course 1."
+    ]
+  }
+}

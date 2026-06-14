@@ -102,7 +102,7 @@ async function installMockTerminalBackend(page: Page) {
 
         function listEntriesFromPayload(payload: unknown): MockEntry[] {
             if (Array.isArray(payload)) {
-                return payload
+                const entries: Array<MockEntry | null> = payload
                     .map((entry: any) => {
                         const path = normalizePath(entry?.path);
                         if (!path) return null;
@@ -116,8 +116,9 @@ async function installMockTerminalBackend(page: Page) {
                             path,
                             content: String(entry?.content ?? ""),
                         };
-                    })
-                    .filter((entry): entry is MockEntry => Boolean(entry));
+                    });
+
+                return entries.filter((entry): entry is MockEntry => entry !== null);
             }
 
             if (payload && typeof payload === "object") {
@@ -561,7 +562,12 @@ async function installMockTerminalBackend(page: Page) {
         }
 
         window.fetch = async (input, init) => {
-            const url = typeof input === "string" ? input : input.url;
+            const url =
+                typeof input === "string"
+                    ? input
+                    : input instanceof URL
+                        ? input.toString()
+                        : input.url;
 
             if (url.endsWith("/api/run/judge0")) {
                 const body = JSON.parse(String(init?.body ?? "{}"));

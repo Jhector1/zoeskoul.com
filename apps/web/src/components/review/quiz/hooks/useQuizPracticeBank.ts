@@ -1069,35 +1069,42 @@ export function useQuizPracticeBank(args: {
             existingItem: summarizeExercisePatch(existing?.item),
           });
 
+          const fetchSpec = ((q as any).fetch ?? {}) as Record<string, any>;
+
+          const resolvedExerciseKey =
+              fetchSpec.exerciseKey ??
+              (q as any).exerciseKey ??
+              (q as any).item?.exerciseKey ??
+              (q as any).exercise?.exerciseKey ??
+              (q as any).exercise?.id ??
+              (q as any).item?.id ??
+              undefined;
+
+          const resolvedPreferKind = fetchSpec.preferKind ?? undefined;
+
+          const resolvedPreferPurpose =
+              fetchSpec.preferPurpose ??
+              (resolvedExerciseKey && resolvedPreferKind === "code_input"
+                  ? "project"
+                  : "mixed");
+
           const loaded = await withTimeout(
               fetchResolvedPracticeItem({
                 request: {
-                  subject: (q as any).fetch.subject,
-                  module: (q as any).fetch.module,
-                  section: (q as any).fetch.section,
-                  topic: (q as any).fetch.topic
-                      ? String((q as any).fetch.topic)
-                      : "",
-                  difficulty: (q as any).fetch.difficulty,
-                  allowReveal: (q as any).fetch.allowReveal ? true : undefined,
-                  preferKind: (q as any).fetch.preferKind ?? undefined,
-                  salt: (q as any).fetch.salt ?? undefined,
-                  preferPurpose: (q as any).fetch.preferPurpose ?? "mixed",
+                  subject: fetchSpec.subject,
+                  module: fetchSpec.module,
+                  section: fetchSpec.section,
+                  topic: fetchSpec.topic ? String(fetchSpec.topic) : "",
+                  difficulty: fetchSpec.difficulty,
+                  allowReveal: fetchSpec.allowReveal ? true : undefined,
+                  preferKind: resolvedPreferKind,
+                  salt: fetchSpec.salt ?? undefined,
+                  preferPurpose: resolvedPreferPurpose,
                   purposePolicy: "fallback",
-                  // Always trust the freshly generated review question fetch target first.
-                  // q.exercise/q.item may be stale saved objects from a previous
-                  // topic or from an older version of this same project slot.
-                  // If they win here, the card can fetch an old exercise prompt
-                  // such as rectangle_area while the Tools workspace binds to the
-                  // new imports exercise.
-                  exerciseKey:
-                    (q as any).fetch.exerciseKey ??
-                    (q as any).exerciseKey ??
-                    (q as any).item?.exerciseKey ??
-                    (q as any).exercise?.exerciseKey ??
-                    (q as any).exercise?.id ??
-                    (q as any).item?.id ??
-                    undefined,
+
+                  // Exact authored Try-it/code_input exercises must resolve from the
+                  // topic bundle instead of falling through to random/generated practice.
+                  exerciseKey: resolvedExerciseKey,
                   seedPolicy: (q as any).fetch.seedPolicy ?? undefined,
                 },
                 resolvers: {
