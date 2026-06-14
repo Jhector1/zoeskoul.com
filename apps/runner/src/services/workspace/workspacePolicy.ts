@@ -32,6 +32,10 @@ const ALLOWED_EXTENSIONS = new Set([
   ".xml",
   ".csv",
   ".sql",
+
+  // Linux terminal labs use these as safe text files.
+  ".tmp",
+  ".log",
 ]);
 
 const ALLOWED_BASENAMES = new Set([

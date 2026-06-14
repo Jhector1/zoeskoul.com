@@ -39,6 +39,7 @@ ALLOWED_EXTENSIONS = {
     ".h", ".hh", ".hpp",
     ".sh", ".txt", ".md", ".json",
     ".yaml", ".yml", ".xml", ".csv", ".sql",
+    ".tmp", ".log",
 }
 
 ALLOWED_BASENAMES = {
