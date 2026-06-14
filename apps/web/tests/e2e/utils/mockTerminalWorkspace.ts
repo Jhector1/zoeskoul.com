@@ -16,6 +16,8 @@ export async function installMockTerminalWorkspaceBackend(page: Page) {
         type MockSession = {
             id: string;
             scope: string;
+            workspaceKey: string;
+            closed?: boolean;
             seq: number;
             prompt: string;
         };
@@ -24,6 +26,10 @@ export async function installMockTerminalWorkspaceBackend(page: Page) {
             nextSessionId: number;
             sessions: Record<string, MockSession>;
             workspaces: Record<string, MockWorkspace>;
+            metrics: {
+                ensureCalls: number;
+                reusedEnsureCalls: number;
+            };
         };
 
         function normalizePath(input: string) {
@@ -48,6 +54,10 @@ export async function installMockTerminalWorkspaceBackend(page: Page) {
                 nextSessionId: 1,
                 sessions: {},
                 workspaces: {},
+                metrics: {
+                    ensureCalls: 0,
+                    reusedEnsureCalls: 0,
+                },
             };
         }
 
@@ -57,6 +67,10 @@ export async function installMockTerminalWorkspaceBackend(page: Page) {
 
         function currentScope() {
             return window.location.pathname;
+        }
+
+        function currentWorkspaceKey() {
+            return `scope:${currentScope()}`;
         }
 
         function getWorkspace(state: MockState, scope: string): MockWorkspace {
@@ -269,12 +283,19 @@ export async function installMockTerminalWorkspaceBackend(page: Page) {
                     type?: string;
                     input?: string;
                 };
-                if (payload.type !== "input") return;
-
                 const sessionId = new URL(this.url, window.location.origin).searchParams.get("sessionId") ?? "";
                 const state = loadState();
                 const session = state.sessions[sessionId];
                 if (!session) return;
+
+                if (payload.type === "cancel") {
+                    session.closed = true;
+                    saveState(state);
+                    this.close();
+                    return;
+                }
+
+                if (payload.type !== "input") return;
 
                 const command = String(payload.input ?? "").trim();
                 if (!command) return;
@@ -344,21 +365,55 @@ export async function installMockTerminalWorkspaceBackend(page: Page) {
                       : String(input);
             const method = String(init?.method ?? (input instanceof Request ? input.method : "GET")).toUpperCase();
 
-            if (url.includes("/api/run/pty/sessions") && method === "POST" && /\/api\/run\/pty\/sessions$/.test(url)) {
+            if (
+                url.includes("/api/run/pty/sessions") &&
+                method === "POST" &&
+                (/\/api\/run\/pty\/sessions$/.test(url) || /\/api\/run\/pty\/sessions\/ensure$/.test(url))
+            ) {
                 const rawBody =
                     typeof init?.body === "string"
                         ? init.body
-                        : input instanceof Request
+                          : input instanceof Request
                           ? await input.text()
                           : "{}";
                 const body = JSON.parse(rawBody || "{}");
                 const state = loadState();
+                const workspaceKey =
+                    typeof body?.workspaceKey === "string" && body.workspaceKey.trim()
+                        ? body.workspaceKey.trim()
+                        : currentWorkspaceKey();
+                const scope = workspaceKey;
+
+                state.metrics.ensureCalls += 1;
+
+                const reusableSession = Object.values(state.sessions).find(
+                    (session) => session.workspaceKey === workspaceKey && session.closed !== true,
+                );
+
+                if (reusableSession) {
+                    state.metrics.reusedEnsureCalls += 1;
+
+                    if (Array.isArray(body?.files) || (body?.files && typeof body.files === "object")) {
+                        replaceWorkspaceEntries(state, scope, listEntriesFromPayload(body.files));
+                    }
+
+                    saveState(state);
+
+                    return createResponse({
+                        ok: true,
+                        reused: true,
+                        sessionId: reusableSession.id,
+                        state: "running",
+                        wsUrl: `ws://mock-terminal?sessionId=${encodeURIComponent(reusableSession.id)}`,
+                    });
+                }
+
                 const sessionId = `mock-session-${state.nextSessionId++}`;
-                const scope = currentScope();
 
                 state.sessions[sessionId] = {
                     id: sessionId,
                     scope,
+                    workspaceKey,
                     seq: 0,
                     prompt: "$ ",
                 };
@@ -371,10 +426,22 @@ export async function installMockTerminalWorkspaceBackend(page: Page) {
 
                 return createResponse({
                     ok: true,
+                    reused: false,
                     sessionId,
                     state: "running",
                     wsUrl: `ws://mock-terminal?sessionId=${encodeURIComponent(sessionId)}`,
                 });
+            }
+
+            const cancelMatch = url.match(/\/api\/run\/pty\/sessions\/([^/]+)\/cancel$/);
+            if (cancelMatch && method === "POST") {
+                const sessionId = cancelMatch[1] ?? "";
+                const state = loadState();
+                if (state.sessions[sessionId]) {
+                    state.sessions[sessionId]!.closed = true;
+                }
+                saveState(state);
+                return createResponse({ ok: true });
             }
 
             const replaceMatch = url.match(/\/api\/run\/pty\/sessions\/([^/]+)\/workspace\/replace$/);
@@ -457,4 +524,31 @@ export async function sendTerminal(page: Page, command: string) {
     if (!command.endsWith("\n")) {
         await page.keyboard.press("Enter");
     }
+}
+
+export async function readMockTerminalWorkspaceMetrics(page: Page) {
+    return await page.evaluate(() => {
+        const raw = window.localStorage.getItem("__pw_terminal_workspace_smoke_v1");
+        if (!raw) {
+            return {
+                ensureCalls: 0,
+                reusedEnsureCalls: 0,
+                sessionIds: [] as string[],
+            };
+        }
+
+        const state = JSON.parse(raw) as {
+            sessions?: Record<string, unknown>;
+            metrics?: {
+                ensureCalls?: number;
+                reusedEnsureCalls?: number;
+            };
+        };
+
+        return {
+            ensureCalls: Number(state.metrics?.ensureCalls ?? 0),
+            reusedEnsureCalls: Number(state.metrics?.reusedEnsureCalls ?? 0),
+            sessionIds: Object.keys(state.sessions ?? {}),
+        };
+    });
 }

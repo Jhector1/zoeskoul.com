@@ -66,12 +66,16 @@ export function useRunSession() {
     const [events, setEvents] = React.useState<RunEvent[]>([]);
 
     const wsRef = React.useRef<WebSocket | null>(null);
+    const expectedSocketClosuresRef = React.useRef(new Set<WebSocket>());
     const pendingRef = React.useRef<string[]>([]);
     const sessionIdRef = React.useRef<string | null>(null);
     const stateRef = React.useRef<RunSessionState>("queued");
 
     const closeSocket = React.useCallback(() => {
-        wsRef.current?.close();
+        if (wsRef.current) {
+            expectedSocketClosuresRef.current.add(wsRef.current);
+            wsRef.current.close();
+        }
         wsRef.current = null;
         pendingRef.current = [];
     }, []);
@@ -131,10 +135,12 @@ export function useRunSession() {
 
             const finalWsUrl = toWebSocketUrl(rawWsUrl);
             const ws = new WebSocket(finalWsUrl);
+            let socketOpened = false;
 
 
 
             ws.onopen = () => {
+                socketOpened = true;
                 for (const msg of pendingRef.current.splice(0)) {
                     if (ws.readyState === WebSocket.OPEN) {
                         ws.send(msg);
@@ -158,6 +164,7 @@ export function useRunSession() {
                         setState(parsedEvent.state);
 
                         if (isFinalSessionState(parsedEvent.state)) {
+                            expectedSocketClosuresRef.current.add(ws);
                             ws.close();
                             if (wsRef.current === ws) {
                                 wsRef.current = null;
@@ -175,8 +182,34 @@ export function useRunSession() {
                 }
             };
 
-            ws.onerror = (ev) => {
-                console.error("PTY WS failed:", finalWsUrl, ev);
+            ws.onerror = () => {
+                if (
+                    expectedSocketClosuresRef.current.has(ws) ||
+                    (wsRef.current !== ws && ws.readyState !== WebSocket.OPEN)
+                ) {
+                    return;
+                }
+            };
+
+            ws.onclose = () => {
+                const expected = expectedSocketClosuresRef.current.has(ws);
+                expectedSocketClosuresRef.current.delete(ws);
+
+                if (wsRef.current === ws) {
+                    wsRef.current = null;
+                }
+
+                if (expected || isFinalSessionState(stateRef.current)) {
+                    return;
+                }
+
+                setState("failed");
+                stateRef.current = "failed";
+
+                console.warn("PTY WS closed unexpectedly:", finalWsUrl, {
+                    opened: socketOpened,
+                    readyState: ws.readyState,
+                });
             };
 
 
