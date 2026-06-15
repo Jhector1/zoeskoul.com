@@ -1,6 +1,8 @@
 import {
+    type HiddenShellCheck,
     SemanticCheckSchema,
     type SemanticCheck,
+    type TerminalExpectations,
 } from "@zoeskoul/practice-checks";
 import type {
     ExerciseKind,
@@ -116,6 +118,8 @@ export type TopicAuthoringDraft = {
          */
         starterFiles?: ProgrammingCodeInputStarterFileDraft[];
         workspaceExpectations?: ManifestWorkspaceExpectations;
+        terminalExpectations?: TerminalExpectations;
+        hiddenShellCheck?: HiddenShellCheck;
         solutionFiles?: ProgrammingCodeInputStarterFileDraft[];
         sourceChecks?: ProgrammingCodeInputSourceCheckDraft[];
 
@@ -438,6 +442,55 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                                     },
                                 },
                             },
+                            terminalExpectations: {
+                                type: "object",
+                                additionalProperties: false,
+                                properties: {
+                                    requiredCommands: {
+                                        type: "array",
+                                        items: {
+                                            type: "object",
+                                            additionalProperties: false,
+                                            required: ["pattern"],
+                                            properties: {
+                                                pattern: { type: "string" },
+                                                message: { type: "string" },
+                                            },
+                                        },
+                                    },
+                                    forbiddenCommands: {
+                                        type: "array",
+                                        items: {
+                                            type: "object",
+                                            additionalProperties: false,
+                                            required: ["pattern"],
+                                            properties: {
+                                                pattern: { type: "string" },
+                                                message: { type: "string" },
+                                            },
+                                        },
+                                    },
+                                    outputContains: {
+                                        type: "array",
+                                        items: { type: "string" },
+                                    },
+                                    outputRegex: {
+                                        type: "array",
+                                        items: { type: "string" },
+                                    },
+                                    cwdContains: { type: "string" },
+                                    cwdEndsWith: { type: "string" },
+                                },
+                            },
+                            hiddenShellCheck: {
+                                type: "object",
+                                additionalProperties: false,
+                                required: ["script"],
+                                properties: {
+                                    script: { type: "string" },
+                                    timeoutMs: { type: "number" },
+                                },
+                            },
                             datasetId: { type: "string" },
                             recipeType: {
                                 type: "string",
@@ -536,6 +589,118 @@ function assertWorkspaceExpectations(value: unknown, label: string) {
         normalizeWorkspaceExpectations(value, label);
     } catch (error) {
         fail((error as Error).message);
+    }
+}
+
+function assertTerminalCommandExpectations(
+    value: unknown,
+    label: string,
+) {
+    if (!Array.isArray(value)) {
+        fail(`${label} must be an array when provided`);
+    }
+
+    value.forEach((entry, index) => {
+        if (!isRecord(entry)) {
+            fail(`${label}[${index}] must be an object`);
+        }
+
+        assertOnlyKeys(entry, ["pattern", "message"], `${label}[${index}]`);
+
+        if (!isNonEmptyString(entry.pattern)) {
+            fail(`${label}[${index}].pattern must be a non-empty string`);
+        }
+
+        if (
+            typeof entry.message !== "undefined" &&
+            !isNonEmptyString(entry.message)
+        ) {
+            fail(`${label}[${index}].message must be a non-empty string when provided`);
+        }
+    });
+}
+
+function assertTerminalExpectations(value: unknown, label: string) {
+    if (!isRecord(value)) {
+        fail(`${label} must be an object`);
+    }
+
+    assertOnlyKeys(
+        value,
+        [
+            "requiredCommands",
+            "forbiddenCommands",
+            "outputContains",
+            "outputRegex",
+            "cwdContains",
+            "cwdEndsWith",
+        ],
+        label,
+    );
+
+    if (typeof value.requiredCommands !== "undefined") {
+        assertTerminalCommandExpectations(
+            value.requiredCommands,
+            `${label}.requiredCommands`,
+        );
+    }
+
+    if (typeof value.forbiddenCommands !== "undefined") {
+        assertTerminalCommandExpectations(
+            value.forbiddenCommands,
+            `${label}.forbiddenCommands`,
+        );
+    }
+
+    if (
+        typeof value.outputContains !== "undefined" &&
+        (!Array.isArray(value.outputContains) ||
+            value.outputContains.some((entry) => !isNonEmptyString(entry)))
+    ) {
+        fail(`${label}.outputContains must be an array of non-empty strings when provided`);
+    }
+
+    if (
+        typeof value.outputRegex !== "undefined" &&
+        (!Array.isArray(value.outputRegex) ||
+            value.outputRegex.some((entry) => !isNonEmptyString(entry)))
+    ) {
+        fail(`${label}.outputRegex must be an array of non-empty strings when provided`);
+    }
+
+    if (
+        typeof value.cwdContains !== "undefined" &&
+        !isNonEmptyString(value.cwdContains)
+    ) {
+        fail(`${label}.cwdContains must be a non-empty string when provided`);
+    }
+
+    if (
+        typeof value.cwdEndsWith !== "undefined" &&
+        !isNonEmptyString(value.cwdEndsWith)
+    ) {
+        fail(`${label}.cwdEndsWith must be a non-empty string when provided`);
+    }
+}
+
+function assertHiddenShellCheck(value: unknown, label: string) {
+    if (!isRecord(value)) {
+        fail(`${label} must be an object`);
+    }
+
+    assertOnlyKeys(value, ["script", "timeoutMs"], label);
+
+    if (!isNonEmptyString(value.script)) {
+        fail(`${label}.script must be a non-empty string`);
+    }
+
+    if (
+        typeof value.timeoutMs !== "undefined" &&
+        (typeof value.timeoutMs !== "number" ||
+            !Number.isInteger(value.timeoutMs) ||
+            value.timeoutMs < 1)
+    ) {
+        fail(`${label}.timeoutMs must be a positive integer when provided`);
     }
 }
 
@@ -790,6 +955,8 @@ export function assertTopicAuthoringDraft(
                         "solutionFiles",
                         "sourceChecks",
                         "workspaceExpectations",
+                        "terminalExpectations",
+                        "hiddenShellCheck",
                         "solutionCode",
                         "tests",
                         "files",
@@ -859,6 +1026,38 @@ export function assertTopicAuthoringDraft(
                     exercise.workspaceExpectations,
                     `${label}.workspaceExpectations`,
                 );
+            }
+
+            if (typeof exercise.terminalExpectations !== "undefined") {
+                assertTerminalExpectations(
+                    exercise.terminalExpectations,
+                    `${label}.terminalExpectations`,
+                );
+
+                if (
+                    exercise.recipeType !== "shell_task" ||
+                    exercise.mode !== "terminal_workspace"
+                ) {
+                    fail(
+                        `${label} terminalExpectations is only supported for shell_task terminal_workspace exercises`,
+                    );
+                }
+            }
+
+            if (typeof exercise.hiddenShellCheck !== "undefined") {
+                assertHiddenShellCheck(
+                    exercise.hiddenShellCheck,
+                    `${label}.hiddenShellCheck`,
+                );
+
+                if (
+                    exercise.recipeType !== "shell_task" ||
+                    exercise.mode !== "terminal_workspace"
+                ) {
+                    fail(
+                        `${label} hiddenShellCheck is only supported for shell_task terminal_workspace exercises`,
+                    );
+                }
             }
 
             if (typeof exercise.starterFiles !== "undefined") {

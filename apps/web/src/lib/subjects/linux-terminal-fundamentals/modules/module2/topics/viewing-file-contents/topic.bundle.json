@@ -17,6 +17,7 @@
   "serviceDefaults": {
     "runnerBackend": "pty",
     "layoutMode": "terminal_workspace",
+    "terminalSessionScope": "topic",
     "requires": {
       "files": true,
       "multiFile": true,
@@ -257,13 +258,18 @@
           "language": "text"
         },
         {
-          "path": "logs/app.log",
-          "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
+          "path": "notes/message.txt",
+          "content": "Linux is powerful.\nUse the terminal with care.\n",
           "language": "text"
         },
         {
-          "path": "notes/tasks.txt",
-          "content": "review commands\npractice ls\npractice cd\npractice cat\n",
+          "path": "notes/story.txt",
+          "content": "Chapter 1: Linux basics\nCommands help you move quickly.\nPractice builds confidence.\nSmall steps add up.\n",
+          "language": "text"
+        },
+        {
+          "path": "logs/app.log",
+          "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
           "language": "text"
         }
       ],
@@ -285,23 +291,27 @@
             "language": "text"
           },
           {
-            "path": "logs/app.log",
-            "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
+            "path": "notes/message.txt",
+            "content": "Linux is powerful.\nUse the terminal with care.\n",
             "language": "text"
           },
           {
-            "path": "notes/tasks.txt",
-            "content": "review commands\npractice ls\npractice cd\npractice cat\n",
+            "path": "notes/story.txt",
+            "content": "Chapter 1: Linux basics\nCommands help you move quickly.\nPractice builds confidence.\nSmall steps add up.\n",
+            "language": "text"
+          },
+          {
+            "path": "logs/app.log",
+            "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "logs"
+            "notes"
           ],
           "requiredFiles": [
-            "logs/app.log",
-            "logs/reviewed.txt"
+            "notes/message.txt"
           ]
         }
       },
@@ -309,15 +319,25 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Inspect `logs/app.log`, then create `logs/reviewed.txt` to mark that you reviewed it."
+        "instructions": "Run `cat notes/message.txt` and read the full message in the terminal."
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cat\\s+notes/message\\.txt$",
+            "message": "Run: cat notes/message.txt"
+          }
+        ],
+        "outputContains": [
+          "Linux is powerful."
+        ]
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "logs"
+          "notes"
         ],
         "requiredFiles": [
-          "logs/app.log",
-          "logs/reviewed.txt"
+          "notes/message.txt"
         ]
       }
     },
@@ -344,13 +364,18 @@
           "language": "text"
         },
         {
-          "path": "logs/app.log",
-          "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
+          "path": "notes/message.txt",
+          "content": "Linux is powerful.\nUse the terminal with care.\n",
           "language": "text"
         },
         {
-          "path": "notes/tasks.txt",
-          "content": "review commands\npractice ls\npractice cd\npractice cat\n",
+          "path": "notes/story.txt",
+          "content": "Chapter 1: Linux basics\nCommands help you move quickly.\nPractice builds confidence.\nSmall steps add up.\n",
+          "language": "text"
+        },
+        {
+          "path": "logs/app.log",
+          "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
           "language": "text"
         }
       ],
@@ -372,23 +397,29 @@
             "language": "text"
           },
           {
-            "path": "logs/app.log",
-            "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
+            "path": "notes/message.txt",
+            "content": "Linux is powerful.\nUse the terminal with care.\n",
             "language": "text"
           },
           {
-            "path": "notes/tasks.txt",
-            "content": "review commands\npractice ls\npractice cd\npractice cat\n",
+            "path": "notes/story.txt",
+            "content": "Chapter 1: Linux basics\nCommands help you move quickly.\nPractice builds confidence.\nSmall steps add up.\n",
+            "language": "text"
+          },
+          {
+            "path": "logs/app.log",
+            "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "notes"
+            "notes",
+            "logs"
           ],
           "requiredFiles": [
-            "notes/tasks.txt",
-            "notes/summary.txt"
+            "notes/story.txt",
+            "logs/app.log"
           ]
         }
       },
@@ -396,15 +427,32 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Use `cat` or `head` on `notes/tasks.txt`, then create `notes/summary.txt`."
+        "instructions": "Run `head notes/story.txt` to preview the beginning, then run `tail logs/app.log` to inspect the ending of the log."
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^head\\s+notes/story\\.txt$",
+            "message": "Run: head notes/story.txt"
+          },
+          {
+            "pattern": "^tail\\s+logs/app\\.log$",
+            "message": "Run: tail logs/app.log"
+          }
+        ],
+        "outputContains": [
+          "Chapter 1: Linux basics",
+          "INFO stopped"
+        ]
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "notes"
+          "notes",
+          "logs"
         ],
         "requiredFiles": [
-          "notes/tasks.txt",
-          "notes/summary.txt"
+          "notes/story.txt",
+          "logs/app.log"
         ]
       }
     },
@@ -431,13 +479,18 @@
           "language": "text"
         },
         {
-          "path": "logs/app.log",
-          "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
+          "path": "notes/message.txt",
+          "content": "Linux is powerful.\nUse the terminal with care.\n",
           "language": "text"
         },
         {
-          "path": "notes/tasks.txt",
-          "content": "review commands\npractice ls\npractice cd\npractice cat\n",
+          "path": "notes/story.txt",
+          "content": "Chapter 1: Linux basics\nCommands help you move quickly.\nPractice builds confidence.\nSmall steps add up.\n",
+          "language": "text"
+        },
+        {
+          "path": "logs/app.log",
+          "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
           "language": "text"
         }
       ],
@@ -459,13 +512,18 @@
             "language": "text"
           },
           {
-            "path": "logs/app.log",
-            "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
+            "path": "notes/message.txt",
+            "content": "Linux is powerful.\nUse the terminal with care.\n",
             "language": "text"
           },
           {
-            "path": "notes/tasks.txt",
-            "content": "review commands\npractice ls\npractice cd\npractice cat\n",
+            "path": "notes/story.txt",
+            "content": "Chapter 1: Linux basics\nCommands help you move quickly.\nPractice builds confidence.\nSmall steps add up.\n",
+            "language": "text"
+          },
+          {
+            "path": "logs/app.log",
+            "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
             "language": "text"
           }
         ],
@@ -474,8 +532,7 @@
             "notes"
           ],
           "requiredFiles": [
-            "notes/tasks.txt",
-            "notes/line-count-done.txt"
+            "notes/story.txt"
           ]
         }
       },
@@ -483,15 +540,25 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run `wc -l notes/tasks.txt`, then create `notes/line-count-done.txt`."
+        "instructions": "Run `wc -l notes/story.txt` and look for the line count in the terminal output."
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^wc\\s+-l\\s+notes/story\\.txt$",
+            "message": "Run: wc -l notes/story.txt"
+          }
+        ],
+        "outputRegex": [
+          "^\\s*4\\s+notes/story\\.txt$"
+        ]
       },
       "workspaceExpectations": {
         "requiredFolders": [
           "notes"
         ],
         "requiredFiles": [
-          "notes/tasks.txt",
-          "notes/line-count-done.txt"
+          "notes/story.txt"
         ]
       }
     }

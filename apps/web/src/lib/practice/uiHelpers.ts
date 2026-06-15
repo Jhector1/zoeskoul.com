@@ -17,6 +17,34 @@ function getWorkspaceEntryContent(args: {
     return match ? String(match.content ?? "") : "";
 }
 
+function getTerminalEvidence(value: unknown) {
+    if (!value || typeof value !== "object" || Array.isArray(value)) {
+        return undefined;
+    }
+
+    const record = value as Record<string, unknown>;
+    const commands = Array.isArray(record.commands)
+        ? record.commands
+              .map((entry) => String(entry ?? "").trim())
+              .filter(Boolean)
+        : [];
+    const outputText = typeof record.outputText === "string" ? record.outputText : "";
+    const cwd =
+        typeof record.cwd === "string" && record.cwd.trim().length > 0
+            ? record.cwd.trim()
+            : undefined;
+
+    if (!commands.length && !outputText.trim() && !cwd) {
+        return undefined;
+    }
+
+    return {
+        commands,
+        outputText,
+        ...(cwd ? { cwd } : {}),
+    };
+}
+
 export function resizeGrid(prev: string[][], rows: number, cols: number) {
     const r = Math.max(1, Math.floor(rows));
     const c = Math.max(1, Math.floor(cols));
@@ -207,14 +235,16 @@ export function buildSubmitAnswerFromItem(item: QItem): SubmitAnswer | undefined
             workspaceCode ||
             String((item as any).code ?? (item as any).source ?? "")
         ).trimEnd();
+        const terminalEvidence = getTerminalEvidence((item as any).terminalEvidence);
 
-        if (!code.trim() && !workspaceSubmission) return undefined;
+        if (!code.trim() && !workspaceSubmission && !terminalEvidence) return undefined;
 
         return {
             kind: "code_input",
             language,
             code,
             stdin,
+            ...(terminalEvidence ? { terminalEvidence } : {}),
             ...(workspaceSubmission
                 ? {
                     entry: workspaceSubmission.entry,

@@ -892,6 +892,255 @@ describe("gradeProgrammingCodeInput", () => {
         expect(mockedSharedRunner).not.toHaveBeenCalled();
     });
 
+    it("passes terminal_workspace shell tasks when required commands are present", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            terminalExpectations: {
+                requiredCommands: [
+                    {
+                        pattern: "^cat\\s+notes/message\\.txt$",
+                        message: "Run: cat notes/message.txt",
+                    },
+                ],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            terminalEvidence: {
+                commands: ["pwd", "cat notes/message.txt"],
+                outputText: "Linux is powerful.\n",
+            },
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
+    it("fails terminal_workspace shell tasks when a required command is missing", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            terminalExpectations: {
+                requiredCommands: [
+                    {
+                        pattern: "^cat\\s+notes/message\\.txt$",
+                        message: "Run: cat notes/message.txt",
+                    },
+                ],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            terminalEvidence: {
+                commands: ["ls", "pwd"],
+                outputText: "",
+            },
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toBe("Run: cat notes/message.txt");
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
+    it("fails terminal_workspace shell tasks when a forbidden command is used", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            terminalExpectations: {
+                forbiddenCommands: [
+                    {
+                        pattern: "^rm\\b",
+                        message: "Do not use rm for this task.",
+                    },
+                ],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            terminalEvidence: {
+                commands: ["rm notes/message.txt"],
+                outputText: "",
+            },
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toBe("Do not use rm for this task.");
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
+    it("passes terminal_workspace shell tasks when outputContains matches terminal output", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            terminalExpectations: {
+                outputContains: ["Linux is powerful."],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            terminalEvidence: {
+                commands: ["cat notes/message.txt"],
+                outputText: "Linux is powerful.\n",
+            },
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
+    it("fails terminal_workspace shell tasks when outputContains is missing", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            terminalExpectations: {
+                outputContains: ["Linux is powerful."],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            terminalEvidence: {
+                commands: ["cat notes/message.txt"],
+                outputText: "Nothing useful here\n",
+            },
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toBe(
+            "The terminal output should include: Linux is powerful.",
+        );
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
+    it("passes terminal_workspace shell tasks when outputRegex matches terminal output", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            terminalExpectations: {
+                outputRegex: ["^draft\\.txt$"],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            terminalEvidence: {
+                commands: ["ls inbox"],
+                outputText: "draft.txt\nkeep.txt\n",
+            },
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
+    it("fails terminal_workspace shell tasks when outputRegex is missing", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            terminalExpectations: {
+                outputRegex: ["^notes$"],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            terminalEvidence: {
+                commands: ["ls"],
+                outputText: "linux-start\nREADME.md\n",
+            },
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toBe(
+            "The terminal output did not match the expected pattern: ^notes$",
+        );
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
+    it("returns a setup error when terminal expectation regex is invalid", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            terminalExpectations: {
+                requiredCommands: [{ pattern: "(", message: "Run pwd." }],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            terminalEvidence: {
+                commands: ["pwd"],
+                outputText: "",
+            },
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toBe("Validation setup error");
+        expect(result.feedback?.title).toBe("Validation setup error");
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
     it("fails stdout exercises when output is wrong", async () => {
         mockedSharedRunner.mockResolvedValue({
             ok: true,

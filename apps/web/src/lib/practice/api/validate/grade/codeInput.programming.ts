@@ -47,6 +47,26 @@ type WorkspaceExpectationInput = {
     forbiddenFiles?: unknown;
 };
 
+type TerminalEvidenceInput = {
+    commands?: unknown;
+    outputText?: unknown;
+    cwd?: unknown;
+};
+
+type TerminalExpectationCommandInput = {
+    pattern?: unknown;
+    message?: unknown;
+};
+
+type TerminalExpectationInput = {
+    requiredCommands?: unknown;
+    forbiddenCommands?: unknown;
+    outputContains?: unknown;
+    outputRegex?: unknown;
+    cwdContains?: unknown;
+    cwdEndsWith?: unknown;
+};
+
 function normalizeWorkspaceExpectationPath(path: unknown): string {
     const raw = String(path ?? "").trim();
 
@@ -205,6 +225,253 @@ function validateWorkspaceExpectations(args: {
                 feedback: null,
             };
         }
+    }
+
+    return null;
+}
+
+function createTerminalSetupError(args: {
+    showDebug: boolean;
+    pattern: string;
+    area: "commands" | "output";
+}): GradeResult {
+    return {
+        ok: false,
+        explanation: "Validation setup error",
+        feedback: {
+            area: "code",
+            source: "check",
+            kind: "runtime",
+            tone: "danger",
+            title: "Validation setup error",
+            message:
+                "This exercise has an invalid terminal validation rule. Please tell your instructor or try another exercise.",
+            raw: args.showDebug
+                ? JSON.stringify(
+                    {
+                        issue: "invalid_terminal_expectation_regex",
+                        area: args.area,
+                        pattern: args.pattern,
+                    },
+                    null,
+                    2,
+                )
+                : null,
+        },
+    };
+}
+
+function asTerminalCommandExpectations(value: unknown): TerminalExpectationCommandInput[] {
+    if (!Array.isArray(value)) return [];
+
+    return value.filter(
+        (item): item is TerminalExpectationCommandInput =>
+            Boolean(item) && typeof item === "object",
+    );
+}
+
+function asStringArray(value: unknown): string[] {
+    if (!Array.isArray(value)) return [];
+
+    return value.filter((item): item is string => typeof item === "string");
+}
+
+function compileExpectationRegex(args: {
+    pattern: string;
+    showDebug: boolean;
+    area: "commands" | "output";
+}): RegExp | GradeResult {
+    try {
+        return new RegExp(args.pattern, "m");
+    } catch {
+        return createTerminalSetupError(args);
+    }
+}
+
+function terminalFeedback(args: {
+    explanation: string;
+    message: string;
+    tone?: "warning" | "danger";
+    raw?: string | null;
+}): GradeResult {
+    return {
+        ok: false,
+        explanation: args.explanation,
+        feedback: {
+            area: "code",
+            source: "check",
+            kind: "logic",
+            tone: args.tone ?? "warning",
+            title: "Not correct yet",
+            message: args.message,
+            raw: args.raw ?? null,
+        },
+    };
+}
+
+function validateTerminalExpectations(args: {
+    expected: ProgrammingExpected;
+    terminalEvidence?: TerminalEvidenceInput;
+    showDebug: boolean;
+}): GradeResult | null {
+    const expectations = (args.expected as any)
+        ?.terminalExpectations as TerminalExpectationInput | undefined;
+
+    if (!expectations || typeof expectations !== "object") {
+        return null;
+    }
+
+    const commands = Array.isArray(args.terminalEvidence?.commands)
+        ? args.terminalEvidence?.commands
+            .filter((entry): entry is string => typeof entry === "string")
+            .map((entry) => entry.trim())
+            .filter(Boolean)
+        : [];
+    const outputText = String(args.terminalEvidence?.outputText ?? "");
+    const cwd =
+        typeof args.terminalEvidence?.cwd === "string"
+            ? args.terminalEvidence.cwd
+            : "";
+
+    for (const expectation of asTerminalCommandExpectations(
+        expectations.requiredCommands,
+    )) {
+        const pattern = typeof expectation.pattern === "string"
+            ? expectation.pattern.trim()
+            : "";
+        if (!pattern) continue;
+
+        const compiled = compileExpectationRegex({
+            pattern,
+            showDebug: args.showDebug,
+            area: "commands",
+        });
+
+        if (compiled instanceof RegExp === false) {
+            return compiled;
+        }
+
+        const matched = commands.some((command) => compiled.test(command));
+
+        if (!matched) {
+            const message =
+                typeof expectation.message === "string" && expectation.message.trim()
+                    ? expectation.message.trim()
+                    : `Run a terminal command matching: ${pattern}`;
+
+            return terminalFeedback({
+                explanation: message,
+                message,
+                raw: args.showDebug ? debugRaw({ kind: "requiredCommands", pattern }) : null,
+            });
+        }
+    }
+
+    for (const expectation of asTerminalCommandExpectations(
+        expectations.forbiddenCommands,
+    )) {
+        const pattern = typeof expectation.pattern === "string"
+            ? expectation.pattern.trim()
+            : "";
+        if (!pattern) continue;
+
+        const compiled = compileExpectationRegex({
+            pattern,
+            showDebug: args.showDebug,
+            area: "commands",
+        });
+
+        if (compiled instanceof RegExp === false) {
+            return compiled;
+        }
+
+        const matched = commands.some((command) => compiled.test(command));
+
+        if (matched) {
+            const message =
+                typeof expectation.message === "string" && expectation.message.trim()
+                    ? expectation.message.trim()
+                    : `Do not use a terminal command matching: ${pattern}`;
+
+            return terminalFeedback({
+                explanation: message,
+                message,
+                raw: args.showDebug ? debugRaw({ kind: "forbiddenCommands", pattern }) : null,
+            });
+        }
+    }
+
+    for (const requiredText of asStringArray(expectations.outputContains)) {
+        if (!outputText.includes(requiredText)) {
+            const message = `The terminal output should include: ${requiredText}`;
+
+            return terminalFeedback({
+                explanation: message,
+                message,
+                raw: args.showDebug
+                    ? debugRaw({ kind: "outputContains", value: requiredText })
+                    : null,
+            });
+        }
+    }
+
+    for (const pattern of asStringArray(expectations.outputRegex)) {
+        const trimmedPattern = pattern.trim();
+        if (!trimmedPattern) continue;
+
+        const compiled = compileExpectationRegex({
+            pattern: trimmedPattern,
+            showDebug: args.showDebug,
+            area: "output",
+        });
+
+        if (compiled instanceof RegExp === false) {
+            return compiled;
+        }
+
+        if (!compiled.test(outputText)) {
+            const message = `The terminal output did not match the expected pattern: ${trimmedPattern}`;
+
+            return terminalFeedback({
+                explanation: message,
+                message,
+                raw: args.showDebug
+                    ? debugRaw({ kind: "outputRegex", pattern: trimmedPattern })
+                    : null,
+            });
+        }
+    }
+
+    if (
+        typeof expectations.cwdContains === "string" &&
+        expectations.cwdContains &&
+        !cwd.includes(expectations.cwdContains)
+    ) {
+        const message = `Run pwd after moving into a folder containing: ${expectations.cwdContains}`;
+
+        return terminalFeedback({
+            explanation: message,
+            message,
+            raw: args.showDebug
+                ? debugRaw({ kind: "cwdContains", value: expectations.cwdContains })
+                : null,
+        });
+    }
+
+    if (
+        typeof expectations.cwdEndsWith === "string" &&
+        expectations.cwdEndsWith &&
+        !cwd.endsWith(expectations.cwdEndsWith)
+    ) {
+        const message = `Run pwd after moving into ${expectations.cwdEndsWith}.`;
+
+        return terminalFeedback({
+            explanation: message,
+            message,
+            raw: args.showDebug
+                ? debugRaw({ kind: "cwdEndsWith", value: expectations.cwdEndsWith })
+                : null,
+        });
     }
 
     return null;
@@ -779,6 +1046,7 @@ export async function gradeProgrammingCodeInput(args: {
     terminalWorkspaceShellTask?: boolean;
     code: string;
     language: string;
+    terminalEvidence?: TerminalEvidenceInput;
     entry?: string;
     files?: WorkspaceSubmissionEntry[];
     showDebug: boolean;
@@ -788,6 +1056,7 @@ export async function gradeProgrammingCodeInput(args: {
         terminalWorkspaceShellTask,
         code,
         language,
+        terminalEvidence,
         entry,
         files,
         showDebug,
@@ -801,6 +1070,16 @@ export async function gradeProgrammingCodeInput(args: {
 
     if (workspaceValidation) {
         return workspaceValidation;
+    }
+
+    const terminalValidation = validateTerminalExpectations({
+        expected,
+        terminalEvidence,
+        showDebug,
+    });
+
+    if (terminalValidation) {
+        return terminalValidation;
     }
 
     const sourceValidation = validateSourceChecks({

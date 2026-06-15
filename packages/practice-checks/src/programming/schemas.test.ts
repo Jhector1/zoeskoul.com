@@ -50,6 +50,34 @@ describe("ProgrammingExpectedSchema", () => {
         expect(parsed.semanticChecks).toHaveLength(1);
     });
 
+    it("preserves terminal expectations when provided", () => {
+        const parsed = ProgrammingExpectedSchema.parse({
+            kind: "code_input",
+            tests: [{ stdout: "" }],
+            terminalExpectations: {
+                requiredCommands: [
+                    {
+                        pattern: "^pwd$",
+                        message: "Run pwd.",
+                    },
+                ],
+                outputContains: ["/workspace"],
+                cwdEndsWith: "linux-lab",
+            },
+        });
+
+        expect(parsed.terminalExpectations).toEqual({
+            requiredCommands: [
+                {
+                    pattern: "^pwd$",
+                    message: "Run pwd.",
+                },
+            ],
+            outputContains: ["/workspace"],
+            cwdEndsWith: "linux-lab",
+        });
+    });
+
     it("fails when semantic expected has no semanticChecks", () => {
         const parsed = ProgrammingExpectedSchema.safeParse({
             kind: "code_input",

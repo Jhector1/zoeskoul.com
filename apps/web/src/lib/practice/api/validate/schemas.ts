@@ -96,6 +96,12 @@ const VoiceInputAnswerSchema = z.object({
     audioId: z.string().optional(),
 });
 
+const TerminalEvidenceSchema = z.object({
+    commands: z.array(z.string()).default([]),
+    outputText: z.string().default(""),
+    cwd: z.string().optional(),
+});
+
 const CodeInputAnswerSchema = z
     .object({
         kind: z.literal("code_input"),
@@ -105,6 +111,7 @@ const CodeInputAnswerSchema = z
         code: z.string().optional(),
         source: z.string().optional(),
         stdin: z.string().optional(), // optional UI field; programming grader uses tests' stdin, SQL ignores it
+        terminalEvidence: TerminalEvidenceSchema.optional(),
         entry: z.string().optional(),
         files: z
             .array(
@@ -129,12 +136,19 @@ const CodeInputAnswerSchema = z
             v.entry.trim().length > 0 &&
             Array.isArray(v.files) &&
             v.files.length > 0;
+        const hasTerminalEvidence =
+            !!v.terminalEvidence &&
+            (
+                v.terminalEvidence.commands.length > 0 ||
+                v.terminalEvidence.outputText.trim().length > 0 ||
+                typeof v.terminalEvidence.cwd === "string"
+            );
 
-        if (!code && !hasWorkspaceFiles) {
+        if (!code && !hasWorkspaceFiles && !hasTerminalEvidence) {
             ctx.addIssue({
                 code: "custom",
                 path: ["code"],
-                message: "Missing code or workspace files.",
+                message: "Missing code, workspace files, or terminal evidence.",
             });
         }
     });

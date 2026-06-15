@@ -4,7 +4,11 @@ import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useSta
 import dynamic from "next/dynamic";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
-import type { SqlDialect, WorkspaceLanguage } from "@/lib/practice/types";
+import type {
+    SqlDialect,
+    TerminalEvidence,
+    WorkspaceLanguage,
+} from "@/lib/practice/types";
 import { useElementSize } from "@/components/tools/hooks/useElementSize";
 import { pickRunFeedbackFromResult } from "@/lib/code/feedback";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
@@ -129,6 +133,10 @@ function workspaceMatchesLanguage(
     if (!workspaceLanguage || !targetLanguage) return true;
 
     return languagesCompatible(workspaceLanguage, targetLanguage);
+}
+
+function terminalEvidenceKeyOf(evidence: TerminalEvidence | null | undefined) {
+    return JSON.stringify(evidence ?? null);
 }
 
 export function shouldUseLocalReviewDraft(args: {
@@ -1260,6 +1268,8 @@ export default function CodeToolPane(props: {
     const lastIncomingRef = useRef<{ code: string; stdin: string } | null>(null);
     const persistTimerRef = useRef<number | null>(null);
     const pendingWorkspaceRef = useRef<WorkspaceStateV2 | null | undefined>(undefined);
+    const pendingTerminalEvidenceRef = useRef<TerminalEvidence | null | undefined>(undefined);
+    const lastTerminalEvidenceKeyRef = useRef<string>("");
     const lastHandledWorkspaceKeyRef = useRef<string>("");
     const lastHandledStructureKeyRef = useRef<string>("");
     const lastUpstreamWorkspaceKeyRef = useRef<string>("");
@@ -1655,6 +1665,21 @@ export default function CodeToolPane(props: {
     }, [emitWorkspaceUpstream]);
 
     const flushPendingWorkspace = useCallback(() => {
+        if (typeof pendingTerminalEvidenceRef.current !== "undefined" && boundId) {
+            const nextEvidence = pendingTerminalEvidenceRef.current ?? null;
+            pendingTerminalEvidenceRef.current = undefined;
+
+            const nextKey = terminalEvidenceKeyOf(nextEvidence);
+            if (lastTerminalEvidenceKeyRef.current !== nextKey) {
+                lastTerminalEvidenceKeyRef.current = nextKey;
+
+                syncCodeInputSnapshot?.(boundId, {
+                    terminalEvidence: nextEvidence ?? undefined,
+                    updatedAt: Date.now(),
+                });
+            }
+        }
+
         if (persistTimerRef.current != null) {
             window.clearTimeout(persistTimerRef.current);
             persistTimerRef.current = null;
@@ -1667,7 +1692,15 @@ export default function CodeToolPane(props: {
         const pending = pendingWorkspaceRef.current;
         pendingWorkspaceRef.current = undefined;
         emitWorkspaceUpstreamRef.current(pending);
-    }, []);
+    }, [boundId, syncCodeInputSnapshot]);
+
+    const handleTerminalEvidenceChange = useCallback(
+        (evidence: TerminalEvidence) => {
+            pendingTerminalEvidenceRef.current = evidence;
+            flushPendingWorkspace();
+        },
+        [flushPendingWorkspace],
+    );
 
     const handleWorkspaceChange = useCallback((
         workspace: WorkspaceStateV2 | null,
@@ -2054,6 +2087,7 @@ export default function CodeToolPane(props: {
                         sqlSeedSql={sqlSeedSql}
                         sqlSetupSql={sqlSetupSql}
                         sqlInitialTableSnapshots={sqlInitialTableSnapshots}
+                        onTerminalEvidenceChange={handleTerminalEvidenceChange}
                     />
                 ) : null}
 

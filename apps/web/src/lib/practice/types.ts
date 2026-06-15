@@ -179,6 +179,12 @@ export type FillBlankChoiceSubmitAnswer = {
     value: string;
 };
 
+export type TerminalEvidence = {
+    commands: string[];
+    outputText: string;
+    cwd?: string;
+};
+
 export type Exercise =
     | SingleChoiceExercise
     | MultiChoiceExercise
@@ -206,6 +212,7 @@ export type SubmitAnswer =
     language?: WorkspaceLanguage;
     code: string;
     stdin?: string;
+    terminalEvidence?: TerminalEvidence;
     entry?: string;
     files?: Array<
         | FileEntry

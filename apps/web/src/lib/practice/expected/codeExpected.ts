@@ -2,13 +2,17 @@ import type { CodeExpectedInput } from "@/lib/practice/api/validate/schemas";
 import type { InteractiveLanguage } from "@zoeskoul/code-contracts";
 import type { SqlDialect } from "@/lib/practice/types";
 import {
+    getShellTaskExpectedMode,
+    isShellTaskExpectedLike,
     makeProgrammingExpected,
+    makeShellTaskExpected,
     makeSqlExpected,
     parseCodeExpected,
     toProgrammingCodeTests,
     toSqlCodeTests,
     type ProgrammingCodeTest,
     type SemanticCheck,
+    type TerminalExpectations,
     type ProgrammingWorkspaceExpectations,
     type SqlExpectedTest,
     type SqlExpectedTable,
@@ -60,6 +64,7 @@ export type ProgrammingMakeCodeExpectedArgs = {
     semanticChecks?: SemanticCheck[];
     sourceChecks?: unknown[];
     workspaceExpectations?: ProgrammingWorkspaceExpectations;
+    terminalExpectations?: TerminalExpectations;
     solutionCode?: string;
 };
 
@@ -74,86 +79,25 @@ ${stdout.trimEnd()}
 }
 
 
-function getShellTaskExpectedMeta(expected: any) {
-    const recipeType =
-        typeof expected?.recipeType === "string"
-            ? expected.recipeType
-            : typeof expected?.recipe?.type === "string"
-                ? expected.recipe.type
-                : "";
-
-    const shellTaskMode =
-        typeof expected?.shellTaskMode === "string"
-            ? expected.shellTaskMode
-            : typeof expected?.recipe?.mode === "string"
-                ? expected.recipe.mode
-                : "";
-
-    if (recipeType !== "shell_task") {
-        return {};
-    }
-
-    return {
-        recipeType: "shell_task",
-        ...(shellTaskMode ? { shellTaskMode } : {}),
-    };
-}
-function isTerminalWorkspaceShellTaskExpected(expected: any) {
-    const recipeType =
-        typeof expected?.recipeType === "string"
-            ? expected.recipeType
-            : typeof expected?.recipe?.type === "string"
-                ? expected.recipe.type
-                : "";
-
-    const shellTaskMode =
-        typeof expected?.shellTaskMode === "string"
-            ? expected.shellTaskMode
-            : typeof expected?.recipe?.mode === "string"
-                ? expected.recipe.mode
-                : "";
-
-    return recipeType === "shell_task" && shellTaskMode === "terminal_workspace";
-}
-
-function normalizeTerminalWorkspaceShellTaskExpectedForSave(expected: any) {
-    if (!isTerminalWorkspaceShellTaskExpected(expected)) {
+function normalizeShellTaskExpectedForSave(expected: any) {
+    if (!isShellTaskExpectedLike(expected)) {
         return null;
     }
 
-    const workspaceExpectations =
-        expected?.workspaceExpectations ??
-        expected?.workspace?.workspaceExpectations ??
-        null;
-
-    if (!workspaceExpectations || typeof workspaceExpectations !== "object") {
-        throw new Error(
-            `Generator bug: shell_task terminal_workspace expected is missing workspaceExpectations. expected=${JSON.stringify(
-                expected,
-                null,
-                2,
-            )}`,
-        );
-    }
-
-    return {
-        kind: "code_input",
-        strategy: "programming",
-        language: "bash",
-        checkMode: "stdout",
-        recipeType: "shell_task",
-        shellTaskMode: "terminal_workspace",
-        workspaceExpectations,
-        tests: [
-            {
-                stdout: "",
-                match: "includes",
-            },
-        ],
-        ...(Array.isArray(expected?.sourceChecks) && expected.sourceChecks.length
-            ? { sourceChecks: expected.sourceChecks.filter(Boolean) }
-            : {}),
-    };
+    return makeShellTaskExpected({
+        mode: getShellTaskExpectedMode(expected) ?? "terminal_workspace",
+        workspaceExpectations:
+            expected?.workspaceExpectations ??
+            expected?.workspace?.workspaceExpectations,
+        terminalExpectations: expected?.terminalExpectations,
+        hiddenShellCheck: expected?.hiddenShellCheck,
+        sourceChecks: expected?.sourceChecks,
+        tests: Array.isArray(expected?.tests) ? expected.tests : undefined,
+        solutionCode:
+            typeof expected?.solutionCode === "string"
+                ? expected.solutionCode
+                : undefined,
+    }) as any;
 }
 export function makeCodeExpected(args: ProgrammingMakeCodeExpectedArgs): CodeExpectedInput;
 export function makeCodeExpected(args: SqlMakeCodeExpectedArgs): CodeExpectedInput;
@@ -174,6 +118,7 @@ export function makeCodeExpected(
             tests: args.tests,
             semanticChecks: args.semanticChecks,
             workspaceExpectations: args.workspaceExpectations,
+            terminalExpectations: args.terminalExpectations,
             solutionCode: args.solutionCode,
         }),
         ...(Array.isArray(args.sourceChecks) && args.sourceChecks.length
@@ -188,11 +133,10 @@ export function normalizeCodeExpectedForSave(
     expected: any,
 ): ProgrammingCodeExpected | SqlCodeExpected {
 
-    const terminalWorkspaceShellTask =
-        normalizeTerminalWorkspaceShellTaskExpectedForSave(expected);
+    const shellTaskExpected = normalizeShellTaskExpectedForSave(expected);
 
-    if (terminalWorkspaceShellTask) {
-        return terminalWorkspaceShellTask as any;
+    if (shellTaskExpected) {
+        return shellTaskExpected as any;
     }
 
 
@@ -202,7 +146,14 @@ export function normalizeCodeExpectedForSave(
     const sourceChecks = Array.isArray(expected?.sourceChecks)
         ? expected.sourceChecks.filter(Boolean)
         : [];
-    const shellTaskMeta = getShellTaskExpectedMeta(expected);
+    const shellTaskMeta = isShellTaskExpectedLike(expected)
+        ? {
+            recipeType: "shell_task" as const,
+            ...(getShellTaskExpectedMode(expected)
+                ? { shellTaskMode: getShellTaskExpectedMode(expected) }
+                : {}),
+        }
+        : {};
     if (language === "sql") {
         const normalized = makeSqlExpected(expected);
         const canonTests = normalized.tests.slice(0, 12);

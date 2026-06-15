@@ -1,5 +1,9 @@
 import type { ManifestIdeServiceConfig } from "./ide-services.js";
-import type { SemanticCheck } from "@zoeskoul/practice-checks";
+import type {
+  HiddenShellCheck,
+  SemanticCheck,
+  TerminalExpectations,
+} from "@zoeskoul/practice-checks";
 import type { WorkspaceExpectations } from "./workspace-path.js";
 
 export type ExerciseKind =
@@ -21,6 +25,15 @@ export type WorkspaceLanguage =
   | "web"
   | (string & {});
 
+export type ManifestFileActions = {
+  enabled?: boolean;
+  createFile?: boolean;
+  createFolder?: boolean;
+  rename?: boolean;
+  delete?: boolean;
+  dragDrop?: boolean;
+};
+
 export type ManifestSqlRuntimeDefaults = {
   kind: "sql";
   datasetId?: string;
@@ -32,6 +45,7 @@ export type ManifestSqlRuntimeDefaults = {
   supportsTerminal?: boolean;
   supportsMultiFile?: boolean;
   supportsFileSystem?: boolean;
+  fileActions?: ManifestFileActions;
 };
 
 export type ManifestCodeRuntimeDefaults = {
@@ -42,6 +56,7 @@ export type ManifestCodeRuntimeDefaults = {
   supportsFileSystem?: boolean;
   supportsStdInStdOut?: boolean;
   supportsPackageInstall?: boolean;
+  fileActions?: ManifestFileActions;
 };
 
 export type ManifestRuntimeDefaults =
@@ -160,6 +175,7 @@ export type ManifestBaseExercise = {
   purpose?: "quiz" | "project";
   weight?: number;
   messageBase: string;
+  runtime?: ManifestRuntimeDefaults | null;
   serviceOverrides?: ManifestIdeServiceConfig | null;
 };
 
@@ -418,6 +434,8 @@ export type ManifestCodeInput = ManifestBaseExercise & {
   solutionFiles?: ManifestStarterFiles;
   sourceChecks?: unknown[];
   workspaceExpectations?: ManifestWorkspaceExpectations;
+  terminalExpectations?: TerminalExpectations;
+  hiddenShellCheck?: HiddenShellCheck;
   workspace?: ManifestWorkspaceSeed | null;
 };
 export type ManifestExercise =

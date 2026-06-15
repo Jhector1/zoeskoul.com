@@ -5,6 +5,11 @@ import type {
     FullIDEServicesInput,
 } from "@/components/ide/fullide/services";
 import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
+import type {
+    IdeFileActionsConfig,
+    ResolvedIdeFileActions,
+} from "@/lib/ide/workspacePolicy";
+import { resolveIdeFileActions } from "@/lib/ide/workspacePolicy";
 
 export type LearningIdeServicePreset = FullIDEServicePreset;
 
@@ -20,12 +25,15 @@ export type LearningIdeServiceRequirements = {
     cloudProjects?: boolean;
 };
 
+export type LearningIdeFileActions = IdeFileActionsConfig;
+
 export type LearningIdeConfig = {
     preset?: LearningIdeServicePreset;
     runnerBackend?: LearningIdeRunnerBackend;
     requires?: LearningIdeServiceRequirements;
     layoutMode?: LearningIdeLayoutMode;
     terminalSessionScope?: TerminalSessionScope;
+    fileActions?: LearningIdeFileActions;
     sqlPane?: SqlPaneOptions;
 };
 export function learningIdeFromRuntimeDefaults(
@@ -37,17 +45,25 @@ export function learningIdeFromRuntimeDefaults(
         runtimeDefaults.supportsFileSystem === true ||
         runtimeDefaults.supportsMultiFile === true;
     const supportsTerminal = runtimeDefaults.supportsTerminal === true;
+    const hasFileActions = runtimeDefaults.fileActions != null;
 
-    if (!supportsFiles && !supportsTerminal) {
+    if (!supportsFiles && !supportsTerminal && !hasFileActions) {
         return null;
     }
 
     return {
-        requires: {
-            files: supportsFiles,
-            multiFile: runtimeDefaults.supportsMultiFile === true,
-            terminal: supportsTerminal,
-        },
+        ...(supportsFiles || supportsTerminal
+            ? {
+                requires: {
+                    files: supportsFiles,
+                    multiFile: runtimeDefaults.supportsMultiFile === true,
+                    terminal: supportsTerminal,
+                },
+            }
+            : {}),
+        ...(runtimeDefaults.fileActions
+            ? { fileActions: runtimeDefaults.fileActions }
+            : {}),
     };
 }
 
@@ -60,6 +76,7 @@ export function mergeLearningIdeConfigs(
         if (!config) continue;
         const previousRequires: LearningIdeServiceRequirements = merged?.requires ?? {};
         const previousSqlPane: SqlPaneOptions = merged?.sqlPane ?? {};
+        const previousFileActions: LearningIdeFileActions = merged?.fileActions ?? {};
 
         merged = {
             ...(merged ?? {}),
@@ -69,6 +86,9 @@ export function mergeLearningIdeConfigs(
             ...(config.layoutMode ? { layoutMode: config.layoutMode } : {}),
             ...(config.terminalSessionScope
                 ? { terminalSessionScope: config.terminalSessionScope }
+                : {}),
+            ...(config.fileActions
+                ? { fileActions: { ...previousFileActions, ...config.fileActions } }
                 : {}),
             requires: {
                 ...previousRequires,
@@ -115,6 +135,17 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
     const terminalSessionScope =
         ideConfig?.terminalSessionScope ??
         (terminalWorkspaceMode ? "topic" : "exercise");
+    const requestedFileActions = resolveIdeFileActions(ideConfig?.fileActions ?? null);
+    const fileActions: ResolvedIdeFileActions = terminalWorkspaceMode
+        ? {
+            enabled: false,
+            createFile: false,
+            createFolder: false,
+            rename: false,
+            delete: false,
+            dragDrop: false,
+        }
+        : requestedFileActions;
 
     const services: FullIDEServicesInput = {
         chrome: {
@@ -139,6 +170,7 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
                     showHistoryControls: false,
                     showFooter: false,
                     showStdin: false,
+                    fileActions,
                 },
                 editor: {
                     showTabs: !terminalWorkspaceMode,

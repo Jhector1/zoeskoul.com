@@ -13,7 +13,11 @@ import React, {
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
-import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
+import type {
+  WorkspaceLanguage,
+  SqlDialect,
+  TerminalEvidence,
+} from "@/lib/practice/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import type {
   UnknownRecord,
@@ -51,6 +55,7 @@ type CodeInputPatch = UnknownRecord & {
   code?: string;
   codeStdin?: string;
   stdin?: string;
+  terminalEvidence?: TerminalEvidence;
   ideConfig?: LearningIdeConfig | null;
   codeSqlDialect?: SqlDialect;
   sqlDialect?: SqlDialect;
@@ -65,6 +70,7 @@ export type RegisterArgs = {
   lang: WorkspaceLanguage;
   code: string;
   stdin?: string;
+  terminalEvidence?: TerminalEvidence;
   ideConfig?: LearningIdeConfig | null;
   workspace?: WorkspaceStateV2 | null;
   ownerCardId?: string | null;
@@ -250,6 +256,7 @@ function registerArgsKey(args: RegisterArgs | undefined) {
     lang: args.lang,
     code: args.code,
     stdin: args.stdin ?? "",
+    terminalEvidence: args.terminalEvidence ?? null,
     ideConfig: args.ideConfig ?? null,
     workspaceKey: workspaceKeyOf(args.workspace ?? null),
     ownerCardId: args.ownerCardId ?? null,
@@ -644,6 +651,7 @@ export function ReviewToolsProvider({
                 lang: patch?.codeLang ?? patch?.language ?? cur.lang,
                 code: nextCode,
                 stdin: nextStdin,
+                terminalEvidence: patch?.terminalEvidence ?? cur.terminalEvidence,
                 ideConfig: patch?.ideConfig ?? cur.ideConfig,
                 workspace,
                 preferSnapshot:
@@ -712,6 +720,7 @@ export function ReviewToolsProvider({
 
                 stdin: next.stdin ?? "",
                 codeStdin: next.stdin ?? "",
+                terminalEvidence: next.terminalEvidence,
                 code: hasNonBlankText(getWorkspaceEntryCode(next.workspace))
                     ? getWorkspaceEntryCode(next.workspace)!
                     : next.code,

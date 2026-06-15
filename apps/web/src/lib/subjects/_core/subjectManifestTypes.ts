@@ -40,6 +40,7 @@ export type SubjectManifest = {
         titleKey: string;
         descriptionKey?: string | null;
         serviceDefaults?: LearningIdeConfig | null;
+        runtimeDefaults?: ManifestRuntimeDefaults | null;
         meta?: {
             versioning?: SubjectVersioningManifestMeta;
             curriculum?: SubjectCurriculumManifestMeta;
@@ -75,6 +76,7 @@ export type SubjectSectionManifest = {
     titleKey: string;
     descriptionKey?: string | null;
     serviceDefaults?: LearningIdeConfig | null;
+    runtimeDefaults?: ManifestRuntimeDefaults | null;
     meta?: {
         module?: number;
         weeksKey?: string;

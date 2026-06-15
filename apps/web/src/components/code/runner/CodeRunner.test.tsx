@@ -60,9 +60,12 @@ vi.mock("@/components/code/runner/hooks/pty/useWorkspaceTerminalController", () 
     useWorkspaceTerminalController: (args: any) => {
         mockedWorkspaceTerminalControllerCalls.push(args);
         return {
+            available: true,
             terminalFeed: [],
+            terminalEvidence: { commands: [], outputText: "" },
             inputEnabled: true,
             busy: false,
+            syncStatus: "idle",
             sendData: vi.fn(),
             resize: vi.fn(),
             beforeSubmitEnter: vi.fn(),
@@ -72,6 +75,10 @@ vi.mock("@/components/code/runner/hooks/pty/useWorkspaceTerminalController", () 
             starting: false,
             state: "ready",
             open: vi.fn(),
+            stop: vi.fn(),
+            reset: vi.fn(),
+            replaceFiles: vi.fn(),
+            snapshotFiles: vi.fn(),
         };
     },
 }));

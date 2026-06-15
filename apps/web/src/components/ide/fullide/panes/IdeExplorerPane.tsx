@@ -146,9 +146,15 @@ export default function IdeExplorerPane({
 
     const showNewFile = policy.canCreateFiles;
     const showNewFolder = policy.canCreateFolders;
-    const showOpenFile = services.explorer.showFooter && policy.canUploadFiles;
+    const showOpenFile =
+        services.explorer.showFooter &&
+        services.explorer.fileActions.enabled &&
+        policy.canUploadFiles;
     const showOpenFolder =
-        services.explorer.showFooter && policy.canUploadFiles && policy.canCreateFolders;
+        services.explorer.showFooter &&
+        services.explorer.fileActions.enabled &&
+        policy.canUploadFiles &&
+        policy.canCreateFolders;
 
     const uploadHint = useMemo(() => {
         if (!policy.canUploadFiles) {
@@ -429,6 +435,7 @@ export default function IdeExplorerPane({
                     activeFileId={activeFileId}
                     entryFileId={entryFileId}
                     isSql={language === "sql"}
+                    allowSetEntry={services.editor.showEditor}
                     filter={filter}
                     inlineEdit={inlineEdit}
                     policy={policy}

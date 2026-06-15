@@ -9,6 +9,14 @@ export type FullIDEExplorerServices = {
     showHistoryControls: boolean;
     showFooter: boolean;
     showStdin: boolean;
+    fileActions: {
+        enabled: boolean;
+        createFile: boolean;
+        createFolder: boolean;
+        rename: boolean;
+        delete: boolean;
+        dragDrop: boolean;
+    };
 };
 
 export type FullIDEEditorServices = {
@@ -76,6 +84,14 @@ const WORKSPACE_PRESET: FullIDEServices = {
         showHistoryControls: true,
         showFooter: true,
         showStdin: true,
+        fileActions: {
+            enabled: true,
+            createFile: true,
+            createFolder: true,
+            rename: true,
+            delete: true,
+            dragDrop: true,
+        },
     },
     editor: {
         showTabs: true,
@@ -176,6 +192,10 @@ function mergeServices(base: FullIDEServices, overrides?: FullIDEServicesInput):
         explorer: {
             ...base.explorer,
             ...overrides?.explorer,
+            fileActions: {
+                ...base.explorer.fileActions,
+                ...overrides?.explorer?.fileActions,
+            },
         },
         editor: {
             ...base.editor,
@@ -213,6 +233,14 @@ export function resolveFullIDEServices(args?: {
         merged.explorer.showHistoryControls = false;
         merged.explorer.showFooter = false;
         merged.explorer.showStdin = false;
+        merged.explorer.fileActions = {
+            enabled: false,
+            createFile: false,
+            createFolder: false,
+            rename: false,
+            delete: false,
+            dragDrop: false,
+        };
     }
 
     if (!merged.projects.showSaveControls) {

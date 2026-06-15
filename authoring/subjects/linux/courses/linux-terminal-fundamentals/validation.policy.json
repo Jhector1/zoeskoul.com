@@ -34,6 +34,7 @@
     "usesShellTaskRecipe": true,
     "usesTerminalWorkspaceLayout": true,
     "workspaceExpectationsRequired": true,
+    "terminalExpectationsAllowedForOutputChecks": true,
     "judge0NotRequired": true
   }
 }

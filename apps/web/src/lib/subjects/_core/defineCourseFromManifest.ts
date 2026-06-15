@@ -33,8 +33,10 @@ export function defineCourseFromManifest(args: {
                         sectionSlug: sectionManifest.slug,
                         prefix: moduleManifest.prefix,
                         subjectServiceDefaults: manifest.subject.serviceDefaults ?? null,
+                        subjectRuntimeDefaults: manifest.subject.runtimeDefaults ?? null,
                         moduleRuntimeDefaults: moduleManifest.runtimeDefaults ?? null,
                         moduleServiceDefaults: moduleManifest.serviceDefaults ?? null,
+                        sectionRuntimeDefaults: sectionManifest.runtimeDefaults ?? null,
                         sectionServiceDefaults: sectionManifest.serviceDefaults ?? null,
                     }),
                 );

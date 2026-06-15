@@ -51,6 +51,25 @@ const WorkspaceExpectationsSchema = z.object({
     forbiddenFiles: z.array(z.string()).optional(),
 });
 
+const TerminalCommandExpectationSchema = z.object({
+    pattern: z.string().min(1),
+    message: z.string().optional(),
+});
+
+const TerminalExpectationsSchema = z.object({
+    requiredCommands: z.array(TerminalCommandExpectationSchema).optional(),
+    forbiddenCommands: z.array(TerminalCommandExpectationSchema).optional(),
+    outputContains: z.array(z.string()).optional(),
+    outputRegex: z.array(z.string()).optional(),
+    cwdContains: z.string().optional(),
+    cwdEndsWith: z.string().optional(),
+});
+
+const HiddenShellCheckSchema = z.object({
+    script: z.string().min(1),
+    timeoutMs: z.number().int().min(1).max(30_000).optional(),
+});
+
 export const SemanticCheckSchema = z.discriminatedUnion("type", [
     z.object({
         type: z.literal("function_returns"),
@@ -119,6 +138,8 @@ export const ProgrammingExpectedSchema = z
         match: z.enum(["exact", "includes"]).optional(),
         semanticChecks: z.array(SemanticCheckSchema).optional(),
         workspaceExpectations: WorkspaceExpectationsSchema.optional(),
+        terminalExpectations: TerminalExpectationsSchema.optional(),
+        hiddenShellCheck: HiddenShellCheckSchema.optional(),
         solutionCode: z.string().optional(),
     })
     .transform((value): ProgrammingExpected =>

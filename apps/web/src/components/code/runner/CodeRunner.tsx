@@ -166,6 +166,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         sqlPaneOptions,
         stdinPlaceholder = "Type stdin here. Each new line becomes one input line.",
         workspaceTerminal,
+        onTerminalEvidenceChange,
 
         testId,
         editorTestId,
@@ -518,6 +519,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         historyScopeKey: workspaceTerminal?.historyScopeKey,
         exerciseStateKey: effectiveExerciseStateKey,
     });
+
+    useEffect(() => {
+        onTerminalEvidenceChange?.(workspaceTerm.terminalEvidence);
+    }, [onTerminalEvidenceChange, workspaceTerm.terminalEvidence]);
 
 
     const terminalAutoOpenKey = buildTerminalAutoOpenKey({

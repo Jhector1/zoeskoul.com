@@ -1,5 +1,9 @@
 import type { FileEntry, RunResult } from "@/lib/code/types";
-import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
+import type {
+    WorkspaceLanguage,
+    SqlDialect,
+    TerminalEvidence,
+} from "@/lib/practice/types";
 import { CodeRunnerRuntime } from "@/components/code/runner/runtime";
 import { InteractiveLanguage } from "@zoeskoul/code-contracts";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
@@ -127,6 +131,7 @@ export type CommonProps = {
     showTerminalDockToggle?: boolean;
     onBeforeRun?: BeforeRunFn;
     onRun?: OnRun;
+    onTerminalEvidenceChange?: (evidence: TerminalEvidence) => void;
 };
 
 export type CodeRunnerProps =

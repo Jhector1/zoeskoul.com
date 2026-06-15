@@ -126,5 +126,41 @@ describe("buildSubmitAnswerFromItem", () => {
             ]),
         });
         expect((answer as any).code).not.toContain("stale code");
+        expect((answer as any).terminalEvidence).toBeUndefined();
+    });
+
+    it("includes terminal evidence for terminal_workspace shell_task answers", () => {
+        const answer = buildSubmitAnswerFromItem({
+            exercise: {
+                kind: "code_input",
+                language: "bash",
+                id: "ex-shell-1",
+                topic: "linux.terminal",
+                difficulty: "easy",
+                title: "Use pwd",
+                prompt: "Run pwd",
+            },
+            code: "",
+            source: "",
+            codeLang: "bash",
+            codeStdin: "",
+            terminalEvidence: {
+                commands: ["pwd"],
+                outputText: "/workspace\n",
+                cwd: "/workspace",
+            },
+        } as any);
+
+        expect(answer).toEqual({
+            kind: "code_input",
+            language: "bash",
+            code: "",
+            stdin: "",
+            terminalEvidence: {
+                commands: ["pwd"],
+                outputText: "/workspace\n",
+                cwd: "/workspace",
+            },
+        });
     });
 });

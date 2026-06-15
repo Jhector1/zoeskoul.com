@@ -7,6 +7,7 @@ import {
     type LearningIdeConfig,
     mergeLearningIdeConfigs,
 } from "@/lib/ide/learningIdeConfig";
+import { mergeManifestRuntimeDefaults } from "./runtimeDefaults";
 
 export function withTopicParentContext(args: {
     manifest: SlimTopicManifest;
@@ -15,8 +16,10 @@ export function withTopicParentContext(args: {
     sectionSlug: string;
     prefix: string;
     subjectServiceDefaults?: LearningIdeConfig | null;
+    subjectRuntimeDefaults?: ManifestRuntimeDefaults | null;
     moduleRuntimeDefaults?: ManifestRuntimeDefaults | null;
     moduleServiceDefaults?: LearningIdeConfig | null;
+    sectionRuntimeDefaults?: ManifestRuntimeDefaults | null;
     sectionServiceDefaults?: LearningIdeConfig | null;
 }): FullTopicManifest {
     return {
@@ -31,6 +34,11 @@ export function withTopicParentContext(args: {
             args.sectionServiceDefaults,
             args.manifest.serviceDefaults,
         ),
-        runtimeDefaults: args.manifest.runtimeDefaults ?? args.moduleRuntimeDefaults ?? null,
+        runtimeDefaults: mergeManifestRuntimeDefaults(
+            args.subjectRuntimeDefaults,
+            args.moduleRuntimeDefaults,
+            args.sectionRuntimeDefaults,
+            args.manifest.runtimeDefaults,
+        ),
     };
 }

@@ -119,7 +119,7 @@
       "guidedExercises": [
         "Use terminal commands to change the workspace file tree",
         "Verify progress with pwd and ls",
-        "Pass workspaceExpectations checks"
+        "Use terminal output checks for inspection commands and workspace checks for file-changing tasks"
       ],
       "quizFocus": [
         "command purpose",
@@ -199,7 +199,7 @@
       "guidedExercises": [
         "Use terminal commands to change the workspace file tree",
         "Verify progress with pwd and ls",
-        "Pass workspaceExpectations checks"
+        "Use terminal output checks for viewing commands and workspace checks for file-changing tasks"
       ],
       "quizFocus": [
         "command purpose",

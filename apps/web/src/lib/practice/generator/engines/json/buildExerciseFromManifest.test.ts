@@ -81,6 +81,16 @@ const LINUX_COURSE1_TERMINAL_FIXTURE = {
       "linux-lab/notes/today.txt",
     ],
   },
+  terminalExpectations: {
+    requiredCommands: [
+      {
+        pattern: "^pwd$",
+        message: "Run pwd.",
+      },
+    ],
+    outputContains: ["/workspace"],
+    cwdEndsWith: "linux-lab",
+  },
 } as const;
 
 describe("buildExerciseFromManifest runtime IDE mapping", () => {
@@ -302,6 +312,9 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
       runnerBackend: "pty",
       layoutMode: "terminal_workspace",
       terminalSessionScope: "topic",
+      fileActions: {
+        enabled: false,
+      },
       requires: {
         files: true,
         multiFile: true,
@@ -313,6 +326,14 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
     });
 
     expect(fullIde.services.explorer?.enabled).toBe(true);
+    expect(fullIde.services.explorer?.fileActions).toEqual({
+      enabled: false,
+      createFile: false,
+      createFolder: false,
+      rename: false,
+      delete: false,
+      dragDrop: false,
+    });
     expect(fullIde.services.editor?.showEditor).toBe(false);
     expect(fullIde.services.runner?.showTerminal).toBe(true);
     expect(fullIde.services.runner?.allowRun).toBe(false);
@@ -327,6 +348,16 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
         requiredFiles: [
           "linux-lab/notes/today.txt",
         ],
+      },
+      terminalExpectations: {
+        requiredCommands: [
+          {
+            pattern: "^pwd$",
+            message: "Run pwd.",
+          },
+        ],
+        outputContains: ["/workspace"],
+        cwdEndsWith: "linux-lab",
       },
     });
   });
@@ -379,7 +410,51 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
     );
 
     expect((result.exercise as any).ideConfig?.terminalSessionScope).toBeUndefined();
+    expect((result.expected as any).terminalExpectations).toBeUndefined();
   });
+
+  it("lets exercise runtime fileActions override topic runtime defaults", () => {
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef({
+        runtime: {
+          kind: "code",
+          fileActions: {
+            createFile: false,
+            createFolder: false,
+          },
+        },
+      }),
+      makeArgs(),
+      {
+        runtimeDefaults: {
+          kind: "code",
+          language: "python",
+          supportsFileSystem: true,
+          supportsMultiFile: true,
+          supportsTerminal: false,
+          fileActions: {
+            enabled: true,
+            rename: false,
+          },
+        },
+      } as any,
+    );
+
+    expect((result.exercise as any).ideConfig).toMatchObject({
+      requires: {
+        files: true,
+        multiFile: true,
+        terminal: false,
+      },
+      fileActions: {
+        enabled: true,
+        createFile: false,
+        createFolder: false,
+        rename: false,
+      },
+    });
+  });
+
   it("keeps semantic checks on fixed-test exercises for hybrid stdout plus state validation", () => {
     const semanticChecks = [
       {

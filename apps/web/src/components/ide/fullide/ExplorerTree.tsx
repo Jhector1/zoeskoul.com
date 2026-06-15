@@ -202,6 +202,7 @@ type TreeProps = {
     setEntry: (id: NodeId) => void;
     requestDelete: (id: NodeId) => void;
     moveNode: (id: NodeId, parentId: NodeId | null) => void;
+    allowSetEntry: boolean;
 
     commitInlineEdit: () => void;
     cancelInlineEdit: () => void;
@@ -247,6 +248,7 @@ function Tree(props: TreeProps) {
         setEntry,
         requestDelete,
         moveNode,
+        allowSetEntry,
         commitInlineEdit,
         cancelInlineEdit,
         openContextMenu,
@@ -326,7 +328,7 @@ function Tree(props: TreeProps) {
                     });
 
                 const baseFileActions: MenuAction[] = [
-                    ...(!isSql
+                    ...(!isSql && allowSetEntry
                         ? [
                             {
                                 label: isEntry ? "Entry file" : "Set as Entry",
@@ -460,6 +462,7 @@ function Tree(props: TreeProps) {
                                         startNewFolder={startNewFolder}
                                         startRename={startRename}
                                         setEntry={setEntry}
+                                        allowSetEntry={allowSetEntry}
                                         policy={policy}
                                         requestDelete={requestDelete}
                                         moveNode={moveNode}
@@ -479,7 +482,10 @@ function Tree(props: TreeProps) {
                     <div key={n.id}>
                         <div
                             data-tree-node-row="true"
-                            onContextMenu={(e) => openContextMenu(e, actions)}
+                            onContextMenu={(e) => {
+                                if (!actions.length) return;
+                                openContextMenu(e, actions);
+                            }}
                             onClick={(e) => {
                                 const target = e.target as HTMLElement | null;
                                 if (
@@ -539,9 +545,9 @@ function Tree(props: TreeProps) {
 
                             <div
                                 data-tree-no-open="true"
-                                draggable={!isTouchLike}
+                                draggable={!isTouchLike && policy.canMoveNodes}
                                 onDragStart={(e) => {
-                                    if (isTouchLike) return;
+                                    if (isTouchLike || !policy.canMoveNodes) return;
                                     e.stopPropagation();
                                     setDraggingId(n.id);
                                     e.dataTransfer.effectAllowed = "move";
@@ -556,11 +562,24 @@ function Tree(props: TreeProps) {
                                 className={cn(
                                     "mr-1 grid h-7 w-7 shrink-0 place-items-center rounded-lg text-neutral-400",
                                     "cursor-grab hover:bg-neutral-100 hover:text-neutral-700 active:cursor-grabbing dark:hover:bg-white/[0.06] dark:hover:text-white/80",
-                                    isTouchLike && "opacity-40",
+                                    (isTouchLike || !policy.canMoveNodes) && "opacity-40",
+                                    !policy.canMoveNodes && "pointer-events-none opacity-0",
                                     draggingId === n.id && "opacity-50",
                                 )}
-                                title={isTouchLike ? "Use Move to… from the menu" : "Drag to move"}
-                                aria-label={isTouchLike ? "Use Move to action" : "Drag handle"}
+                                title={
+                                    !policy.canMoveNodes
+                                        ? ""
+                                        : isTouchLike
+                                            ? "Use Move to… from the menu"
+                                            : "Drag to move"
+                                }
+                                aria-label={
+                                    !policy.canMoveNodes
+                                        ? "Move disabled"
+                                        : isTouchLike
+                                            ? "Use Move to action"
+                                            : "Drag handle"
+                                }
                             >
                                 <span className="select-none text-[12px] font-medium leading-none">⋮⋮</span>                            </div>
 
@@ -621,9 +640,11 @@ function Tree(props: TreeProps) {
                                 </div>
                             ) : null}
 
-                            <div className="ml-1 flex items-center">
-                                <NodeMenu actions={actions} />
-                            </div>
+                            {actions.length ? (
+                                <div className="ml-1 flex items-center">
+                                    <NodeMenu actions={actions} />
+                                </div>
+                            ) : null}
                         </div>
 
                         {isFolder && isOpen ? (
@@ -647,6 +668,7 @@ function Tree(props: TreeProps) {
                                     startNewFolder={startNewFolder}
                                     startRename={startRename}
                                     setEntry={setEntry}
+                                    allowSetEntry={allowSetEntry}
                                     requestDelete={requestDelete}
                                     moveNode={moveNode}
                                     commitInlineEdit={commitInlineEdit}
@@ -686,6 +708,7 @@ export default function ExplorerTree(props: {
     setEntry: (id: NodeId) => void;
     requestDelete: (id: NodeId) => void;
     moveNode: (id: NodeId, parentId: NodeId | null) => void;
+    allowSetEntry?: boolean;
 
     commitInlineEdit: () => void;
     cancelInlineEdit: () => void;
@@ -709,6 +732,7 @@ export default function ExplorerTree(props: {
         setEntry,
         requestDelete,
         moveNode,
+        allowSetEntry = true,
         commitInlineEdit,
         cancelInlineEdit,
         policy
@@ -974,6 +998,7 @@ export default function ExplorerTree(props: {
                     startNewFolder={startNewFolder}
                     startRename={startRename}
                     setEntry={setEntry}
+                    allowSetEntry={allowSetEntry}
                     requestDelete={requestDelete}
                     moveNode={moveNode}
                     commitInlineEdit={commitInlineEdit}

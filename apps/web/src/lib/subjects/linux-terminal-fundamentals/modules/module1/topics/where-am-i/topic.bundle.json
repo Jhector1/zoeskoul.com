@@ -17,6 +17,7 @@
   "serviceDefaults": {
     "runnerBackend": "pty",
     "layoutMode": "terminal_workspace",
+    "terminalSessionScope": "topic",
     "requires": {
       "files": true,
       "multiFile": true,
@@ -255,6 +256,16 @@
           "path": "README.md",
           "content": "# Where Am I? pwd and ls\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
           "language": "text"
+        },
+        {
+          "path": "terminal-map/README.txt",
+          "content": "map notes\n",
+          "language": "text"
+        },
+        {
+          "path": ".hidden-map",
+          "content": "secret route\n",
+          "language": "text"
         }
       ],
       "workspace": {
@@ -273,15 +284,25 @@
             "path": "README.md",
             "content": "# Where Am I? pwd and ls\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
             "language": "text"
+          },
+          {
+            "path": "terminal-map/README.txt",
+            "content": "map notes\n",
+            "language": "text"
+          },
+          {
+            "path": ".hidden-map",
+            "content": "secret route\n",
+            "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "navigation-lab",
-            "navigation-lab/current"
+            "terminal-map"
           ],
           "requiredFiles": [
-            "navigation-lab/current/place.txt"
+            "README.md",
+            "terminal-map/README.txt"
           ]
         }
       },
@@ -289,15 +310,26 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `navigation-lab/current/place.txt` using terminal commands."
+        "instructions": "Run `pwd` to show the folder you are currently in."
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^pwd$",
+            "message": "Run: pwd"
+          }
+        ],
+        "outputRegex": [
+          "/workspace"
+        ]
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "navigation-lab",
-          "navigation-lab/current"
+          "terminal-map"
         ],
         "requiredFiles": [
-          "navigation-lab/current/place.txt"
+          "README.md",
+          "terminal-map/README.txt"
         ]
       }
     },
@@ -322,6 +354,16 @@
           "path": "README.md",
           "content": "# Where Am I? pwd and ls\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
           "language": "text"
+        },
+        {
+          "path": "terminal-map/README.txt",
+          "content": "map notes\n",
+          "language": "text"
+        },
+        {
+          "path": ".hidden-map",
+          "content": "secret route\n",
+          "language": "text"
         }
       ],
       "workspace": {
@@ -340,14 +382,25 @@
             "path": "README.md",
             "content": "# Where Am I? pwd and ls\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
             "language": "text"
+          },
+          {
+            "path": "terminal-map/README.txt",
+            "content": "map notes\n",
+            "language": "text"
+          },
+          {
+            "path": ".hidden-map",
+            "content": "secret route\n",
+            "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "list-practice"
+            "terminal-map"
           ],
           "requiredFiles": [
-            "list-practice/visible.txt"
+            "README.md",
+            "terminal-map/README.txt"
           ]
         }
       },
@@ -355,14 +408,27 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `list-practice/visible.txt`. Then use `ls` to confirm it appears."
+        "instructions": "Run `ls` to list what is in the current folder. Make sure `README.md` and `terminal-map` appear."
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls(\\s+[-a-zA-Z]+)?$",
+            "message": "Run: ls"
+          }
+        ],
+        "outputContains": [
+          "README.md",
+          "terminal-map"
+        ]
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "list-practice"
+          "terminal-map"
         ],
         "requiredFiles": [
-          "list-practice/visible.txt"
+          "README.md",
+          "terminal-map/README.txt"
         ]
       }
     },
@@ -387,6 +453,16 @@
           "path": "README.md",
           "content": "# Where Am I? pwd and ls\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
           "language": "text"
+        },
+        {
+          "path": "terminal-map/README.txt",
+          "content": "map notes\n",
+          "language": "text"
+        },
+        {
+          "path": ".hidden-map",
+          "content": "secret route\n",
+          "language": "text"
         }
       ],
       "workspace": {
@@ -405,14 +481,25 @@
             "path": "README.md",
             "content": "# Where Am I? pwd and ls\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
             "language": "text"
+          },
+          {
+            "path": "terminal-map/README.txt",
+            "content": "map notes\n",
+            "language": "text"
+          },
+          {
+            "path": ".hidden-map",
+            "content": "secret route\n",
+            "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "long-list-lab"
+            "terminal-map"
           ],
           "requiredFiles": [
-            "long-list-lab/details.txt"
+            ".hidden-map",
+            "terminal-map/README.txt"
           ]
         }
       },
@@ -420,14 +507,26 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `long-list-lab/details.txt` so you can inspect it with `ls -l`."
+        "instructions": "Run `ls -a` so hidden files appear too. Look for `.hidden-map` in the output."
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls(\\s+[-a-zA-Z]+)?$",
+            "message": "Run: ls -a"
+          }
+        ],
+        "outputContains": [
+          ".hidden-map"
+        ]
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "long-list-lab"
+          "terminal-map"
         ],
         "requiredFiles": [
-          "long-list-lab/details.txt"
+          ".hidden-map",
+          "terminal-map/README.txt"
         ]
       }
     }

@@ -138,4 +138,52 @@ describe("validateGoldenTopicBundle", () => {
 
         expect(report.ok).toBe(true);
     });
+
+    it("accepts bash shell_task terminal workspace recipes through the shared expected builder", async () => {
+        const report = await validateGoldenTopicBundle({
+            seed: {
+                topicId: "linux-topic",
+                subjectSlug: "linux--linux-terminal-fundamentals--draft",
+                courseSlug: "linux-terminal-fundamentals",
+            } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "linux-topic",
+                subjectSlug: "linux--linux-terminal-fundamentals--draft",
+                moduleSlug: "module1",
+                sectionSlug: "terminal-basics",
+                prefix: "topics.linux.module1.linux-topic",
+                minutes: 10,
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "ci-create-navigation-lab",
+                        kind: "code_input",
+                        messageBase: "quiz.ci-create-navigation-lab",
+                        language: "bash",
+                        recipe: {
+                            type: "shell_task",
+                            mode: "terminal_workspace",
+                        },
+                        workspaceExpectations: {
+                            requiredFolders: ["linux-lab"],
+                            requiredFiles: ["linux-lab/notes/today.txt"],
+                        },
+                        terminalExpectations: {
+                            requiredCommands: [{ pattern: "^pwd$" }],
+                            outputContains: ["/workspace"],
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(report.ok).toBe(true);
+    });
+
 });

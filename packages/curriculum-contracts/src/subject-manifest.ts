@@ -21,6 +21,7 @@ export type SubjectManifest = {
     titleKey: string;
     descriptionKey?: string | null;
     serviceDefaults?: ManifestIdeServiceConfig | null;
+    runtimeDefaults?: ManifestRuntimeDefaults | null;
     meta?: {
       curriculum?: {
         plannedModuleCount?: number;
@@ -73,6 +74,7 @@ export type SubjectSectionManifest = {
   titleKey: string;
   descriptionKey?: string | null;
   serviceDefaults?: ManifestIdeServiceConfig | null;
+  runtimeDefaults?: ManifestRuntimeDefaults | null;
   meta?: {
     module?: number;
     weeksKey?: string;

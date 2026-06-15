@@ -1,6 +1,7 @@
 import { makeCodeInputOut, starterCodeForGeneratedExercise } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
 import { mergeLearningIdeConfigs } from "@/lib/ide/learningIdeConfig";
+import { makeShellTaskExpected } from "@zoeskoul/practice-checks";
 
 export const buildShellTaskRecipe: RecipeHandler<any> = (def, args, resolved) => {
     const terminalWorkspaceIdeConfig =
@@ -9,6 +10,9 @@ export const buildShellTaskRecipe: RecipeHandler<any> = (def, args, resolved) =>
                 runnerBackend: "pty" as const,
                 layoutMode: "terminal_workspace" as const,
                 terminalSessionScope: "topic" as const,
+                fileActions: {
+                    enabled: false,
+                },
                 requires: {
                     files: true,
                     multiFile: true,
@@ -46,22 +50,14 @@ export const buildShellTaskRecipe: RecipeHandler<any> = (def, args, resolved) =>
             def.workspace?.mainFilePath,
         help: resolved.help,
         hint: resolved.hint,
-        expected: {
-            kind: "code_input",
-            language: "bash",
-            recipeType: "shell_task",
-            shellTaskMode: def.recipe?.mode,
+        expected: makeShellTaskExpected({
+            mode: def.recipe?.mode ?? "terminal_workspace",
             workspaceExpectations:
                 def.workspaceExpectations ?? def.workspace?.workspaceExpectations,
-            // Keep the existing programming-expected shape intact so shell
-            // tasks stay additive to the current manifest/runtime contract.
-            tests: [
-                {
-                    stdout: "",
-                    match: "includes",
-                },
-            ],
-        } as any,
+            terminalExpectations: (def as any).terminalExpectations,
+            hiddenShellCheck: (def as any).hiddenShellCheck,
+            sourceChecks: (def as any).sourceChecks,
+        }) as any,
         expectedExample: null,
         ideConfig: mergeLearningIdeConfigs(
             terminalWorkspaceIdeConfig,

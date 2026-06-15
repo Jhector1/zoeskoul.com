@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
+    DEFAULT_IDE_FILE_ACTIONS,
+    resolveIdeFileActions,
     resolveWorkspacePolicy,
     validateWorkspaceState,
 } from "@/lib/ide/workspacePolicy";
@@ -29,6 +31,88 @@ function buildWorkspace(overrides?: Partial<WorkspaceStateV2>): WorkspaceStateV2
         ...overrides,
     };
 }
+
+describe("resolveIdeFileActions", () => {
+    it("defaults every file action to enabled when config is missing", () => {
+        expect(resolveIdeFileActions()).toEqual(DEFAULT_IDE_FILE_ACTIONS);
+    });
+
+    it("disables all actions when enabled is false", () => {
+        expect(resolveIdeFileActions({ enabled: false })).toEqual({
+            enabled: false,
+            createFile: false,
+            createFolder: false,
+            rename: false,
+            delete: false,
+            dragDrop: false,
+        });
+    });
+});
+
+describe("resolveWorkspacePolicy", () => {
+    it("keeps file actions enabled by default for a normal multi-file workspace", () => {
+        const policy = resolveWorkspacePolicy(
+            {
+                hasUser: true,
+                canUseMultiFile: true,
+                canSaveCloud: true,
+                canCreateProjects: true,
+            },
+            "python",
+        );
+
+        expect(policy.canCreateFiles).toBe(true);
+        expect(policy.canCreateFolders).toBe(true);
+        expect(policy.canRenameNodes).toBe(true);
+        expect(policy.canDeleteNodes).toBe(true);
+        expect(policy.canMoveNodes).toBe(true);
+    });
+
+    it("disables only the requested explorer actions", () => {
+        const policy = resolveWorkspacePolicy(
+            {
+                hasUser: true,
+                canUseMultiFile: true,
+                canSaveCloud: true,
+                canCreateProjects: true,
+            },
+            "python",
+            {
+                createFile: false,
+                createFolder: false,
+                dragDrop: false,
+            },
+        );
+
+        expect(policy.canCreateFiles).toBe(false);
+        expect(policy.canCreateFolders).toBe(false);
+        expect(policy.canMoveNodes).toBe(false);
+        expect(policy.canRenameNodes).toBe(true);
+        expect(policy.canDeleteNodes).toBe(true);
+    });
+
+    it("disables all explorer write actions when file actions are fully disabled", () => {
+        const policy = resolveWorkspacePolicy(
+            {
+                hasUser: true,
+                canUseMultiFile: true,
+                canSaveCloud: true,
+                canCreateProjects: true,
+            },
+            "bash",
+            {
+                enabled: false,
+            },
+        );
+
+        expect(policy.canCreateFiles).toBe(false);
+        expect(policy.canCreateFolders).toBe(false);
+        expect(policy.canRenameNodes).toBe(false);
+        expect(policy.canDeleteNodes).toBe(false);
+        expect(policy.canMoveNodes).toBe(false);
+        expect(policy.canUploadFiles).toBe(false);
+    });
+});
 
 describe("validateWorkspaceState", () => {
     it("accepts a valid multi-file workspace", () => {

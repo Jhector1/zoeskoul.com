@@ -6,11 +6,12 @@ import type {
 } from "@zoeskoul/code-contracts";
 import type { RunResult } from "@/lib/code/types";
 import type { BatchRunResult } from "@/lib/code/types/batch";
-import type { SqlDialect } from "@/lib/practice/types";
+import type { SqlDialect, TerminalEvidence } from "@/lib/practice/types";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { OnRun, RunnerState, TermLine } from "./types";
 
 export type { WorkspaceSyncEntry };
+export type { TerminalEvidence };
 
 export type ExecutionBackend = "pty" | "judge0";
 export type TerminalView = "plain" | "xterm" | "auto";
@@ -34,6 +35,9 @@ export type TerminalChunk = {
     kind: "pty" | "err" | "sys";
     data: string;
 };
+
+const MAX_TERMINAL_EVIDENCE_COMMANDS = 50;
+const MAX_TERMINAL_EVIDENCE_OUTPUT_CHARS = 20_000;
 
 export type RunnerLastResult = RunResult | BatchRunResult | null;
 
@@ -118,6 +122,7 @@ export type WorkspaceTerminalController = {
     sessionId: string | null;
     state: RunSessionState | "idle";
     terminalFeed: TerminalChunk[];
+    terminalEvidence: TerminalEvidence;
     syncStatus: "idle" | "pushing" | "pulling" | "error";
 
     open: () => Promise<void>;
@@ -132,6 +137,51 @@ export type WorkspaceTerminalController = {
     beforeSubmitEnter: () => Promise<void>;
     afterSubmitEnter: () => Promise<void>;
 };
+
+export function createTerminalEvidence(cwd?: string): TerminalEvidence {
+    return {
+        commands: [],
+        outputText: "",
+        ...(typeof cwd === "string" && cwd.trim() ? { cwd: cwd.trim() } : {}),
+    };
+}
+
+export function appendTerminalEvidenceCommand(
+    evidence: TerminalEvidence,
+    command: string,
+    cwd?: string,
+): TerminalEvidence {
+    const trimmed = String(command ?? "").trim();
+    const commands = trimmed
+        ? [...(evidence.commands ?? []), trimmed].slice(-MAX_TERMINAL_EVIDENCE_COMMANDS)
+        : [...(evidence.commands ?? [])];
+
+    return {
+        ...evidence,
+        commands,
+        ...(typeof cwd === "string" && cwd.trim()
+            ? { cwd: cwd.trim() }
+            : evidence.cwd
+                ? { cwd: evidence.cwd }
+                : {}),
+    };
+}
+
+export function appendTerminalEvidenceOutput(
+    evidence: TerminalEvidence,
+    chunk: string,
+): TerminalEvidence {
+    const combined = `${evidence.outputText ?? ""}${String(chunk ?? "")}`;
+    const outputText =
+        combined.length > MAX_TERMINAL_EVIDENCE_OUTPUT_CHARS
+            ? combined.slice(-MAX_TERMINAL_EVIDENCE_OUTPUT_CHARS)
+            : combined;
+
+    return {
+        ...evidence,
+        outputText,
+    };
+}
 
 export type CodeRunnerController = {
     backend: RunnerBackend;

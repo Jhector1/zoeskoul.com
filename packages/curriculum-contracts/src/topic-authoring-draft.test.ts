@@ -179,6 +179,42 @@ describe("TopicAuthoringDraft workspace file paths", () => {
             }),
         ).not.toThrow();
     });
+
+    it("accepts terminalExpectations on shell_task terminal_workspace exercises", () => {
+        expect(() =>
+            assertTopicAuthoringDraft({
+                ...makeValidMinimalDraft(),
+                quizDraft: [
+                    {
+                        id: "code-terminal-1",
+                        kind: "code_input" as const,
+                        title: "Terminal command check",
+                        prompt: "Use pwd.",
+                        hint: "Run pwd in the terminal.",
+                        help: {
+                            concept: "Some terminal exercises validate commands and output.",
+                            hint_1: "Use the required command pattern.",
+                            hint_2: "Match the expected terminal output.",
+                        },
+                        starterCode: "echo \"Hello from Bash!\"\n",
+                        solutionCode: "pwd\n",
+                        recipeType: "shell_task" as const,
+                        mode: "terminal_workspace" as const,
+                        terminalExpectations: {
+                            requiredCommands: [
+                                {
+                                    pattern: "^pwd$",
+                                    message: "Run pwd.",
+                                },
+                            ],
+                            outputContains: ["/workspace"],
+                            cwdEndsWith: "linux-lab",
+                        },
+                    },
+                ],
+            }),
+        ).not.toThrow();
+    });
 });
 describe("TopicAuthoringDraft canonical validation", () => {
     it("accepts a valid minimal draft", () => {

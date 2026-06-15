@@ -74,6 +74,7 @@ export function buildExerciseFromManifest(
     const resolved = resolveBase(def.messageBase);
     const ideConfig = mergeLearningIdeConfigs(
         learningIdeFromRuntimeDefaults(manifest?.runtimeDefaults ?? null),
+        learningIdeFromRuntimeDefaults(def.runtime ?? null),
         manifest?.serviceDefaults ?? null,
         def.serviceOverrides ?? null,
     );

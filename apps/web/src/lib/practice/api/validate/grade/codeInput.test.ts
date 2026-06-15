@@ -91,4 +91,79 @@ describe("gradeCodeInput", () => {
         );
         expect(gradeSqlCodeInputMock).not.toHaveBeenCalled();
     });
+
+    it("accepts terminal evidence submissions without code or workspace files", async () => {
+        await gradeCodeInput({
+            instance: {} as any,
+            expectedCanon: {
+                kind: "code_input",
+                recipeType: "shell_task",
+                shellTaskMode: "terminal_workspace",
+                tests: [
+                    {
+                        stdout: "",
+                        match: "includes",
+                    },
+                ],
+                workspaceExpectations: {},
+            },
+            answer: {
+                kind: "code_input",
+                language: "bash",
+                code: "",
+                terminalEvidence: {
+                    commands: ["pwd"],
+                    outputText: "/workspace\n",
+                    cwd: "/workspace",
+                },
+            },
+            showDebug: false,
+        });
+
+        expect(gradeProgrammingCodeInputMock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                language: "bash",
+                code: "",
+                entry: undefined,
+                files: undefined,
+            }),
+        );
+    });
+
+    it("returns helpful feedback when terminal expectations exist but terminal evidence is missing", async () => {
+        const result = await gradeCodeInput({
+            instance: {} as any,
+            expectedCanon: {
+                kind: "code_input",
+                recipeType: "shell_task",
+                shellTaskMode: "terminal_workspace",
+                tests: [
+                    {
+                        stdout: "",
+                        match: "includes",
+                    },
+                ],
+                workspaceExpectations: {},
+                terminalExpectations: {
+                    requiredCommands: [
+                        {
+                            pattern: "^pwd$",
+                            message: "Run pwd.",
+                        },
+                    ],
+                },
+            },
+            answer: {
+                kind: "code_input",
+                language: "bash",
+                code: "",
+            },
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toContain("Run the required terminal command");
+        expect(result.feedback?.title).toBe("Terminal activity missing");
+        expect(gradeProgrammingCodeInputMock).not.toHaveBeenCalled();
+    });
 });

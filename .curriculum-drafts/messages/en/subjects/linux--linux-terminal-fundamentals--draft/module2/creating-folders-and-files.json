@@ -1,0 +1,173 @@
+{
+  "topics": {
+    "linux--linux-terminal-fundamentals--draft": {
+      "linux-2-files-and-folders": {
+        "creating-folders-and-files": {
+          "label": "Creating Folders and Files",
+          "summary": "Use mkdir, mkdir -p, and touch to create a useful project structure.",
+          "cards": {
+            "sketch0": {
+              "title": "mkdir creates folders"
+            },
+            "sketch1": {
+              "title": "mkdir -p creates nested folders"
+            },
+            "sketch2": {
+              "title": "touch creates empty files"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Terminal practice project"
+            }
+          },
+          "projectSteps": {
+            "ci_create_school_notes": {
+              "title": "Create a school notes structure"
+            },
+            "ci_create_project_folders": {
+              "title": "Create project folders"
+            },
+            "ci_create_multiple_files": {
+              "title": "Create multiple files"
+            }
+          },
+          "tryIt": {
+            "try_creating_folders_and_files_sketch0": {
+              "title": "Create a school notes structure",
+              "prompt": "Create `school/notes/week1/today.txt`."
+            },
+            "try_creating_folders_and_files_sketch1": {
+              "title": "Create project folders",
+              "prompt": "Create folders `project/src`, `project/docs`, and `project/tests`."
+            },
+            "try_creating_folders_and_files_sketch2": {
+              "title": "Create multiple files",
+              "prompt": "Create `project/docs/plan.txt` and `project/tests/checklist.txt`."
+            }
+          },
+          "quiz": {
+            "sc-mkdir": {
+              "title": "Which command creates a folder named notes?",
+              "prompt": "Use mkdir with the folder name.",
+              "hint": "Use mkdir with the folder name.",
+              "help": {
+                "concept": "Use mkdir with the folder name.",
+                "hint_1": "Use mkdir with the folder name.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "touch notes",
+                "b": "mkdir notes",
+                "c": "cat notes",
+                "d": "pwd notes"
+              }
+            },
+            "sc-touch": {
+              "title": "Which command creates an empty file named todo.txt?",
+              "prompt": "touch can create an empty file.",
+              "hint": "touch can create an empty file.",
+              "help": {
+                "concept": "touch can create an empty file.",
+                "hint_1": "touch can create an empty file.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "touch todo.txt",
+                "b": "mkdir todo.txt",
+                "c": "cd todo.txt",
+                "d": "ls todo.txt"
+              }
+            },
+            "sc-mkdir-p": {
+              "title": "Why use mkdir -p?",
+              "prompt": "It helps when parent folders may not exist yet.",
+              "hint": "It helps when parent folders may not exist yet.",
+              "help": {
+                "concept": "It helps when parent folders may not exist yet.",
+                "hint_1": "It helps when parent folders may not exist yet.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "To create nested folders safely",
+                "b": "To delete nested folders",
+                "c": "To print the current directory",
+                "d": "To view file contents"
+              }
+            },
+            "mc-create-commands": {
+              "title": "Choose commands that can create workspace items.",
+              "prompt": "Think folder and file creation.",
+              "hint": "Think folder and file creation.",
+              "help": {
+                "concept": "Think folder and file creation.",
+                "hint_1": "Think folder and file creation.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "mkdir projects",
+                "b": "mkdir -p school/notes",
+                "c": "touch notes/today.txt",
+                "d": "pwd"
+              }
+            },
+            "ci-create-school-notes": {
+              "title": "Create a school notes structure",
+              "prompt": "Create `school/notes/week1/today.txt`.\n\nUse the terminal. The editor is hidden on purpose for this task.",
+              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "help": {
+                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
+                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
+                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+              },
+              "placeholder": "Use the terminal to complete this task."
+            },
+            "ci-create-project-folders": {
+              "title": "Create project folders",
+              "prompt": "Create folders `project/src`, `project/docs`, and `project/tests`.\n\nUse the terminal. The editor is hidden on purpose for this task.",
+              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "help": {
+                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
+                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
+                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+              },
+              "placeholder": "Use the terminal to complete this task."
+            },
+            "ci-create-multiple-files": {
+              "title": "Create multiple files",
+              "prompt": "Create `project/docs/plan.txt` and `project/tests/checklist.txt`.\n\nUse the terminal. The editor is hidden on purpose for this task.",
+              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "help": {
+                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
+                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
+                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+              },
+              "placeholder": "Use the terminal to complete this task."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux--linux-terminal-fundamentals--draft": {
+      "linux-2-files-and-folders": {
+        "creating-folders-and-files": {
+          "mkdir-creates-folders": {
+            "title": "mkdir creates folders",
+            "bodyMarkdown": "`mkdir` creates a folder.\n\n```bash\nmkdir notes\n```\n\nIf the folder already exists, Linux may show an error. That is normal protection."
+          },
+          "mkdir-p-nested": {
+            "title": "mkdir -p creates nested folders",
+            "bodyMarkdown": "`mkdir -p` creates parent folders as needed.\n\n```bash\nmkdir -p school/notes/week1\n```\n\nThis is useful because many tasks require folders inside folders."
+          },
+          "touch-creates-files": {
+            "title": "touch creates empty files",
+            "bodyMarkdown": "`touch` creates an empty file if it does not already exist.\n\n```bash\ntouch school/notes/week1/today.txt\n```\n\nLater you can edit or write into that file, but for many organization tasks, creating it in the right place is the first win."
+          }
+        }
+      }
+    }
+  }
+}

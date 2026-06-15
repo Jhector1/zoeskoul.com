@@ -10,6 +10,7 @@ import type {
   WorkspaceStateV2,
 } from "../types";
 import type { IdeWorkspacePolicy, ImportedWorkspaceFile } from "./workspace.policy";
+import type { IdeFileActionsConfig } from "@/lib/ide/workspacePolicy";
 
 export type IdeWorkspaceAccess = {
   hasUser: boolean;
@@ -37,6 +38,7 @@ export type UseIdeWorkspaceOpts = {
   localWorkspaceId?: string | null;
 
   policy?: IdeWorkspacePolicy;
+  fileActions?: IdeFileActionsConfig | null;
 };
 
 export type WorkspaceMeta = {

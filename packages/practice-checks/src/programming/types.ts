@@ -4,6 +4,7 @@ export const PROGRAMMING_LANGUAGES = [
     "javascript",
     "c",
     "cpp",
+    "bash",
 ] as const;
 
 export type ProgrammingLanguage = (typeof PROGRAMMING_LANGUAGES)[number];
@@ -35,6 +36,26 @@ export type ProgrammingWorkspaceExpectations = {
     requiredFiles?: string[];
     requiredFolders?: string[];
     forbiddenFiles?: string[];
+};
+
+export type TerminalExpectations = {
+    requiredCommands?: Array<{
+        pattern: string;
+        message?: string;
+    }>;
+    forbiddenCommands?: Array<{
+        pattern: string;
+        message?: string;
+    }>;
+    outputContains?: string[];
+    outputRegex?: string[];
+    cwdContains?: string;
+    cwdEndsWith?: string;
+};
+
+export type HiddenShellCheck = {
+    script: string;
+    timeoutMs?: number;
 };
 export type SemanticValueKind =
     | "value"
@@ -105,6 +126,8 @@ export type StdoutProgrammingExpected = {
     tests: NormalizedProgrammingCodeTest[];
     semanticChecks: [];
     workspaceExpectations?: ProgrammingWorkspaceExpectations;
+    terminalExpectations?: TerminalExpectations;
+    hiddenShellCheck?: HiddenShellCheck;
     solutionCode?: string;
 };
 
@@ -116,6 +139,8 @@ export type SemanticProgrammingExpected = {
     tests: [];
     semanticChecks: SemanticCheck[];
     workspaceExpectations?: ProgrammingWorkspaceExpectations;
+    terminalExpectations?: TerminalExpectations;
+    hiddenShellCheck?: HiddenShellCheck;
     solutionCode?: string;
 };
 
@@ -133,6 +158,8 @@ export type ProgrammingExpectedInput = {
     tests?: ProgrammingCodeTest[];
     semanticChecks?: SemanticCheck[];
     workspaceExpectations?: ProgrammingWorkspaceExpectations;
+    terminalExpectations?: TerminalExpectations;
+    hiddenShellCheck?: HiddenShellCheck;
     solutionCode?: string;
 };
 
@@ -178,6 +205,12 @@ export function makeProgrammingExpected(
             ...(input.workspaceExpectations
                 ? { workspaceExpectations: input.workspaceExpectations }
                 : {}),
+            ...(input.terminalExpectations
+                ? { terminalExpectations: input.terminalExpectations }
+                : {}),
+            ...(input.hiddenShellCheck
+                ? { hiddenShellCheck: input.hiddenShellCheck }
+                : {}),
             solutionCode: input.solutionCode,
         };
     }
@@ -211,6 +244,12 @@ export function makeProgrammingExpected(
         semanticChecks: [],
         ...(input.workspaceExpectations
             ? { workspaceExpectations: input.workspaceExpectations }
+            : {}),
+        ...(input.terminalExpectations
+            ? { terminalExpectations: input.terminalExpectations }
+            : {}),
+        ...(input.hiddenShellCheck
+            ? { hiddenShellCheck: input.hiddenShellCheck }
             : {}),
         solutionCode: input.solutionCode,
     };

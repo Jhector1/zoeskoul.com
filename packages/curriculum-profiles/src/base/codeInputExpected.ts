@@ -8,6 +8,7 @@ import type {
 } from "@zoeskoul/curriculum-contracts";
 import {
     makeProgrammingExpected,
+    makeShellTaskExpected,
     makeSqlExpected,
     type ProgrammingCodeTest,
     type ProgrammingExpected,
@@ -28,6 +29,7 @@ type TemplateIoRecipe = Extract<ManifestRecipe, { type: "template_io" }>;
 type FixedTestsRecipe = Extract<ManifestRecipe, { type: "fixed_tests" }>;
 type SqlQueryRecipe = Extract<ManifestRecipe, { type: "sql_query" }>;
 type SemanticRecipe = Extract<ManifestRecipe, { type: "semantic" }>;
+type ShellTaskRecipe = Extract<ManifestRecipe, { type: "shell_task" }>;
 
 function withWorkspaceExpectations<T extends object>(
     expected: T,
@@ -469,10 +471,33 @@ export function buildSqlQueryExpected(args: {
     });
 }
 
+
+export function buildShellTaskExpected(args: {
+    recipe: ShellTaskRecipe;
+    workspaceExpectations?: ManifestWorkspaceExpectations;
+    terminalExpectations?: ManifestCodeInput["terminalExpectations"];
+    hiddenShellCheck?: ManifestCodeInput["hiddenShellCheck"];
+    sourceChecks?: ManifestCodeInput["sourceChecks"];
+}): TerminalCodeInputExpectedPayload {
+    return makeShellTaskExpected({
+        mode: args.recipe.mode ?? "terminal_workspace",
+        workspaceExpectations: args.workspaceExpectations,
+        terminalExpectations: args.terminalExpectations,
+        hiddenShellCheck: args.hiddenShellCheck,
+        sourceChecks: args.sourceChecks,
+    }) as TerminalCodeInputExpectedPayload;
+}
+
 export function buildCodeInputExpected(
     exercise: Pick<
         ManifestCodeInput,
-        "recipe" | "fixedSqlDialect" | "workspaceExpectations" | "workspace"
+        | "recipe"
+        | "fixedSqlDialect"
+        | "workspaceExpectations"
+        | "workspace"
+        | "terminalExpectations"
+        | "hiddenShellCheck"
+        | "sourceChecks"
     >,
 ): CodeInputExpectedPayload {
     const workspaceExpectations =
@@ -492,6 +517,14 @@ export function buildCodeInputExpected(
             return buildSqlQueryExpected({
                 recipe: exercise.recipe,
                 fixedSqlDialect: exercise.fixedSqlDialect,
+            });
+        case "shell_task":
+            return buildShellTaskExpected({
+                recipe: exercise.recipe,
+                workspaceExpectations,
+                terminalExpectations: exercise.terminalExpectations,
+                hiddenShellCheck: exercise.hiddenShellCheck,
+                sourceChecks: exercise.sourceChecks,
             });
         default:
             throw new Error(

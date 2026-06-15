@@ -220,8 +220,8 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     );
 
     const policy = useMemo<IdeWorkspacePolicy>(
-        () => opts?.policy ?? resolveWorkspacePolicy(access, language),
-        [opts?.policy, access, language],
+        () => opts?.policy ?? resolveWorkspacePolicy(access, language, opts?.fileActions ?? null),
+        [opts?.policy, opts?.fileActions, access, language],
     );
 
     const draftStorageMode = opts?.draftStorageMode ?? "local";

@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
+    appendTerminalEvidenceCommand,
+    appendTerminalEvidenceOutput,
     buildTerminalAutoOpenKey,
+    createTerminalEvidence,
     resolveTerminalWorkspaceKey,
 } from "@/components/code/runner/runtime";
 
@@ -104,5 +107,44 @@ describe("buildTerminalAutoOpenKey", () => {
                 cwd: "/workspace",
             }),
         ).toBe("exercise-a::::/workspace");
+    });
+});
+
+describe("terminal evidence helpers", () => {
+    it("records typed commands", () => {
+        const evidence = appendTerminalEvidenceCommand(
+            createTerminalEvidence("/workspace"),
+            "pwd",
+            "/workspace",
+        );
+
+        expect(evidence).toEqual({
+            commands: ["pwd"],
+            outputText: "",
+            cwd: "/workspace",
+        });
+    });
+
+    it("appends output chunks to outputText", () => {
+        const evidence = appendTerminalEvidenceOutput(
+            createTerminalEvidence(),
+            "/workspace\n",
+        );
+
+        expect(evidence.outputText).toBe("/workspace\n");
+    });
+
+    it("caps the evidence buffers", () => {
+        let evidence = createTerminalEvidence();
+
+        for (let i = 0; i < 60; i += 1) {
+            evidence = appendTerminalEvidenceCommand(evidence, `cmd-${i}`);
+        }
+
+        evidence = appendTerminalEvidenceOutput(evidence, "x".repeat(25_000));
+
+        expect(evidence.commands).toHaveLength(50);
+        expect(evidence.commands[0]).toBe("cmd-10");
+        expect(evidence.outputText).toHaveLength(20_000);
     });
 });

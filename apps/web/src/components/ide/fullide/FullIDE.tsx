@@ -65,6 +65,7 @@ type FullIDEInnerProps = {
     sqlSeedSql?: FullIDEProps["sqlSeedSql"];
     sqlSetupSql?: FullIDEProps["sqlSetupSql"];
     onWorkspaceChange?: FullIDEProps["onWorkspaceChange"];
+    onTerminalEvidenceChange?: FullIDEProps["onTerminalEvidenceChange"];
     sqlInitialTableSnapshots?: FullIDEProps["sqlInitialTableSnapshots"];
     sqlDialect: any;
     setSqlDialect: React.Dispatch<React.SetStateAction<any>>;
@@ -171,6 +172,7 @@ function FullIDEInner({
                           history,
                           actions,
                           onWorkspaceChange,
+                          onTerminalEvidenceChange,
                       }: FullIDEInnerProps) {
     const {
         language,
@@ -497,6 +499,7 @@ function FullIDEInner({
             exerciseStateKey={exerciseStateKey}
             terminalHistoryScopeKey={terminalHistoryScopeKey}
             onApplyTerminalSnapshotFiles={applyTerminalSnapshotFiles}
+            onTerminalEvidenceChange={onTerminalEvidenceChange}
             sqlDatasetId={sqlDatasetId}
             sqlResultShape={sqlResultShape}
             sqlPaneOptions={sqlPaneOptions}
@@ -741,6 +744,7 @@ export default function FullIDE(props: FullIDEProps) {
         initialWorkspace,
         externalWorkspace,
         onWorkspaceChange,
+        onTerminalEvidenceChange,
         onBeforeRun,
         onRunResult,
         initialSqlDialect = DEFAULT_SQL_DIALECT,
@@ -823,6 +827,7 @@ export default function FullIDE(props: FullIDEProps) {
         forcedLanguage,
         resetOnForcedLanguageChange,
         access,
+        fileActions: services.explorer.fileActions,
         initialWorkspace,
         actorKey,
         projectId: effectiveDraftStorageMode === "local" ? null : initialProjectId,
@@ -1047,6 +1052,7 @@ export default function FullIDE(props: FullIDEProps) {
                 derived={workspace.derived}
                 actions={workspace.actions}
                 onWorkspaceChange={onWorkspaceChange}
+                onTerminalEvidenceChange={onTerminalEvidenceChange}
             />
         </div>
     );

@@ -1,6 +1,7 @@
 import type {
     WorkspaceLanguage,
     Exercise,
+    TerminalEvidence,
     TopicSlug,
     ValidateResponse,
     Vec3,
@@ -52,6 +53,7 @@ export type QItem = {
     codeLang: WorkspaceLanguage;
     codeStdin: string;
     stdin?: string;
+    terminalEvidence?: TerminalEvidence;
 
     text: string;
 

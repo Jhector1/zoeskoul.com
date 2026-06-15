@@ -1,5 +1,11 @@
 // src/lib/practice/api/validate/grade/codeInput.ts
-import { parseCodeExpected, prepareCodeExpectedForSchema } from "@zoeskoul/practice-checks";
+import {
+  hasTerminalEvidence,
+  hasTerminalExpectations,
+  isTerminalWorkspaceShellTaskExpectedLike,
+  parseCodeExpected,
+  prepareCodeExpectedForSchema,
+} from "@zoeskoul/practice-checks";
 import { type SubmitAnswer } from "../schemas";
 import type { LoadedValidateInstance } from "@/lib/practice/api/validate/repositories/instance.repo";
 import { gradeProgrammingCodeInput } from "./codeInput.programming";
@@ -8,72 +14,6 @@ import {GradeResult} from "@/lib/practice/api/validate/grade/index";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
-}
-
-function hasWorkspaceExpectations(value: unknown) {
-  if (!isRecord(value)) return false;
-
-  const expectations = value.workspaceExpectations;
-
-  if (!isRecord(expectations)) return false;
-
-  return (
-      Array.isArray(expectations.requiredFiles) ||
-      Array.isArray(expectations.requiredFolders) ||
-      Array.isArray(expectations.forbiddenFiles)
-  );
-}
-
-function hasBlankShellTaskTest(value: unknown) {
-  if (!isRecord(value)) return false;
-
-  const tests = value.tests;
-
-  if (!Array.isArray(tests)) return true;
-  if (tests.length === 0) return true;
-
-  return tests.every((test) => {
-    if (!isRecord(test)) return false;
-
-    const stdout = String(test.stdout ?? "");
-    const match = String(test.match ?? "includes");
-
-    return stdout === "" && match === "includes";
-  });
-}
-
-function isTerminalWorkspaceShellTask(expectedCanon: unknown): boolean {
-  if (!isRecord(expectedCanon)) {
-    return false;
-  }
-
-  const raw = expectedCanon;
-
-  const recipeType =
-      typeof raw.recipeType === "string"
-          ? raw.recipeType
-          : isRecord(raw.recipe) && typeof raw.recipe.type === "string"
-              ? raw.recipe.type
-              : "";
-
-  const shellTaskMode =
-      typeof raw.shellTaskMode === "string"
-          ? raw.shellTaskMode
-          : isRecord(raw.recipe) && typeof raw.recipe.mode === "string"
-              ? raw.recipe.mode
-              : "";
-
-  if (recipeType === "shell_task" && shellTaskMode === "terminal_workspace") {
-    return true;
-  }
-
-  // Backward-compatible fallback for already-created instances whose
-  // recipeType/shellTaskMode metadata was stripped by expected normalization.
-  return (
-      String(raw.language ?? "") === "bash" &&
-      hasWorkspaceExpectations(raw) &&
-      hasBlankShellTaskTest(raw)
-  );
 }
 
 export async function gradeCodeInput(args: {
@@ -85,7 +25,7 @@ export async function gradeCodeInput(args: {
   const { expectedCanon, answer, showDebug } = args;
 
   const terminalWorkspaceShellTask =
-      isTerminalWorkspaceShellTask(expectedCanon);
+      isTerminalWorkspaceShellTaskExpectedLike(expectedCanon);
 
   const expected = terminalWorkspaceShellTask
       ? {
@@ -162,8 +102,29 @@ export async function gradeCodeInput(args: {
           : undefined;
   const hasWorkspaceSubmission =
       Boolean(submissionEntry) && Boolean(submissionFiles?.length);
+  const submissionHasTerminalEvidence = hasTerminalEvidence(ans);
 
-  if (!code.trim() && !hasWorkspaceSubmission) {
+  if (
+      terminalWorkspaceShellTask &&
+      hasTerminalExpectations(expectedCanon) &&
+      !submissionHasTerminalEvidence
+  ) {
+    return {
+      ok: false,
+      explanation: "Run the required terminal command(s) before checking your answer.",
+      feedback: {
+        area: "code",
+        source: "check",
+        kind: "logic",
+        tone: "warning",
+        title: "Terminal activity missing",
+        message:
+            "This Linux terminal task needs terminal command/output evidence. Run the required command in the terminal, then check again.",
+      },
+    };
+  }
+
+  if (!code.trim() && !hasWorkspaceSubmission && !submissionHasTerminalEvidence) {
     return {
       ok: false,
       explanation: "You have not written any code yet.",
@@ -193,6 +154,19 @@ export async function gradeCodeInput(args: {
     terminalWorkspaceShellTask,
     code,
     language,
+    terminalEvidence: isRecord(ans.terminalEvidence)
+        ? {
+            commands: Array.isArray(ans.terminalEvidence.commands)
+                ? ans.terminalEvidence.commands
+                    .filter((entry): entry is string => typeof entry === "string")
+                : [],
+            outputText: String(ans.terminalEvidence.outputText ?? ""),
+            cwd:
+                typeof ans.terminalEvidence.cwd === "string"
+                    ? ans.terminalEvidence.cwd
+                    : undefined,
+          }
+        : undefined,
     entry: submissionEntry,
     files: submissionFiles,
     showDebug,

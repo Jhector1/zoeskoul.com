@@ -42,6 +42,32 @@ describe("mergeLearningIdeConfigs", () => {
             },
         });
     });
+
+    it("merges fileActions additively across overrides", () => {
+        const merged = mergeLearningIdeConfigs(
+            {
+                fileActions: {
+                    enabled: true,
+                    createFile: false,
+                    createFolder: false,
+                },
+            },
+            {
+                fileActions: {
+                    rename: false,
+                },
+            },
+        );
+
+        expect(merged).toEqual({
+            fileActions: {
+                enabled: true,
+                createFile: false,
+                createFolder: false,
+                rename: false,
+            },
+        });
+    });
 });
 
 describe("resolveFullIDEConfigFromLearningIde", () => {
@@ -58,6 +84,14 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
         expect(resolved.services.explorer?.enabled).toBe(true);
         expect(resolved.services.editor?.showEditor).toBe(true);
         expect(resolved.services.editor?.showTabs).toBe(true);
+        expect(resolved.services.explorer?.fileActions).toEqual({
+            enabled: true,
+            createFile: true,
+            createFolder: true,
+            rename: true,
+            delete: true,
+            dragDrop: true,
+        });
         expect(resolved.services.runner?.terminalSessionScope).toBe("exercise");
         expect(resolved.services.runner?.showTerminal).not.toBe(true);
         expect(resolved.access.canUseMultiFile).toBe(true);
@@ -76,6 +110,14 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
         expect(resolved.services.explorer?.enabled).toBe(true);
         expect(resolved.services.editor?.showEditor).toBe(false);
         expect(resolved.services.editor?.showTabs).toBe(false);
+        expect(resolved.services.explorer?.fileActions).toEqual({
+            enabled: false,
+            createFile: false,
+            createFolder: false,
+            rename: false,
+            delete: false,
+            dragDrop: false,
+        });
         expect(resolved.services.runner?.terminalSessionScope).toBe("topic");
         expect(resolved.access.canUseMultiFile).toBe(true);
     });
@@ -103,5 +145,30 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
         });
 
         expect(resolved.services.runner?.terminalSessionScope).toBe("project");
+    });
+
+    it("respects explicit fileActions overrides in normal editor mode", () => {
+        const resolved = resolveFullIDEConfigFromLearningIde({
+            ideConfig: {
+                requires: {
+                    files: true,
+                    multiFile: true,
+                },
+                fileActions: {
+                    createFile: false,
+                    createFolder: false,
+                    dragDrop: false,
+                },
+            },
+        });
+
+        expect(resolved.services.explorer?.fileActions).toEqual({
+            enabled: true,
+            createFile: false,
+            createFolder: false,
+            rename: true,
+            delete: true,
+            dragDrop: false,
+        });
     });
 });

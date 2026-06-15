@@ -6,7 +6,8 @@
   },
   "rules": {
     "executionValidation": [
-      "Course 1 terminal tasks must use shell_task terminal_workspace and validate workspaceExpectations.",
+      "Course 1 terminal tasks must use shell_task terminal_workspace.",
+      "File-changing tasks validate workspaceExpectations, and output-only command tasks may validate terminalExpectations.",
       "Course 1 must not require Judge0 Bash execution.",
       "Terminal workspace tasks should keep the editor hidden and the terminal visible."
     ],

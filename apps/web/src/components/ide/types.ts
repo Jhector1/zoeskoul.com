@@ -1,4 +1,5 @@
 import {WorkspaceLanguage} from "@/lib/practice/types";
+import type { TerminalEvidence } from "@/lib/practice/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 
 
@@ -114,6 +115,7 @@ export type FullIDEProps = {
         workspace: WorkspaceStateV2 | null,
         meta?: { origin?: "user" | "sync" | "programmatic" },
     ) => void;
+    onTerminalEvidenceChange?: (evidence: TerminalEvidence) => void;
     onBeforeRun?: () => void | Promise<void>;
     onRunResult?: (args: { result: RunResult; runArgs: any }) => void;
     initialSqlDialect?: SqlDialect;

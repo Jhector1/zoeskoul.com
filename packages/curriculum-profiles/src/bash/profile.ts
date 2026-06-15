@@ -1,4 +1,5 @@
 import {
+    type HiddenShellCheck,
     ManifestCodeInput,
     ManifestStarterFile,
     ManifestWorkspaceExpectations,
@@ -69,6 +70,41 @@ function normalizeBashWorkspaceExpectations(
     } catch (error) {
         throw new Error(`Invalid Bash workspaceExpectations: ${(error as Error).message}`);
     }
+}
+
+function normalizeBashHiddenShellCheck(
+    value: unknown,
+): HiddenShellCheck | undefined {
+    if (typeof value === "undefined") return undefined;
+
+    if (!value || typeof value !== "object" || Array.isArray(value)) {
+        throw new Error("Invalid Bash hiddenShellCheck: expected an object.");
+    }
+
+    const record = value as Record<string, unknown>;
+    const script = typeof record.script === "string" ? record.script.trim() : "";
+
+    if (!script) {
+        throw new Error("Invalid Bash hiddenShellCheck: script must be non-empty.");
+    }
+
+    if (
+        typeof record.timeoutMs !== "undefined" &&
+        (typeof record.timeoutMs !== "number" ||
+            !Number.isInteger(record.timeoutMs) ||
+            record.timeoutMs < 1)
+    ) {
+        throw new Error(
+            "Invalid Bash hiddenShellCheck: timeoutMs must be a positive integer when provided.",
+        );
+    }
+
+    return {
+        script,
+        ...(typeof record.timeoutMs === "number"
+            ? { timeoutMs: record.timeoutMs }
+            : {}),
+    };
 }
 
 function makeBashCodeHelpFallback(args: {
@@ -156,6 +192,9 @@ const bashCodeInputCapability: CodeInputProfileCapability = {
         const workspaceExpectations = normalizeBashWorkspaceExpectations(
             args.exercise.workspaceExpectations,
         );
+        const hiddenShellCheck = normalizeBashHiddenShellCheck(
+            (args.exercise as { hiddenShellCheck?: unknown }).hiddenShellCheck,
+        );
         const mode =
             args.exercise.mode === "stdout" ||
             args.exercise.mode === "workspace_and_stdout" ||
@@ -163,6 +202,12 @@ const bashCodeInputCapability: CodeInputProfileCapability = {
                 ? args.exercise.mode
                 : "terminal_workspace";
         const instructions = normalizeText(args.exercise.instructions || args.exercise.prompt);
+
+        if (hiddenShellCheck && mode !== "terminal_workspace") {
+            throw new Error(
+                `Bash code_input exercise "${args.exercise.id}" may only use hiddenShellCheck with mode "terminal_workspace".`,
+            );
+        }
 
         return {
             id: args.exercise.id,
@@ -174,6 +219,7 @@ const bashCodeInputCapability: CodeInputProfileCapability = {
             starterCode,
             starterFiles: normalizedStarterFiles,
             ...(workspaceExpectations ? { workspaceExpectations } : {}),
+            ...(hiddenShellCheck ? { hiddenShellCheck } : {}),
             workspace: {
                 language: "bash",
                 entryFilePath: authoredEntryFilePath,

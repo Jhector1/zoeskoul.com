@@ -103,7 +103,19 @@ export function isEmptyPracticeAnswer(
 
     if (ex.kind === "code_input") {
         const { code } = extractCodeLike(item as any);
-        return !(code && String(code).trim().length > 0);
+        const terminalEvidence = (item as any).terminalEvidence;
+        const hasTerminalEvidence =
+            !!terminalEvidence &&
+            (
+                (Array.isArray(terminalEvidence.commands) &&
+                    terminalEvidence.commands.some((entry: unknown) => String(entry ?? "").trim().length > 0)) ||
+                (typeof terminalEvidence.outputText === "string" &&
+                    terminalEvidence.outputText.trim().length > 0) ||
+                (typeof terminalEvidence.cwd === "string" &&
+                    terminalEvidence.cwd.trim().length > 0)
+            );
+
+        return !((code && String(code).trim().length > 0) || hasTerminalEvidence);
     }
 
     if (ex.kind === "text_input") {
@@ -168,6 +180,9 @@ export function applyAnswerPayloadToItem(item: QItem, payload: any) {
             if (lang) (item as any).codeLang = lang;
             (item as any).code = code;
             (item as any).codeStdin = stdin;
+            if (payload.terminalEvidence && typeof payload.terminalEvidence === "object") {
+                (item as any).terminalEvidence = payload.terminalEvidence;
+            }
             break;
         }
 

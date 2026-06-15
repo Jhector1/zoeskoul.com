@@ -3,10 +3,16 @@
 import * as React from "react";
 import type { RunSessionState } from "@zoeskoul/code-contracts";
 import type {
+    TerminalEvidence,
     TerminalChunk,
     WorkspaceSyncEntry,
     WorkspaceTerminalController,
     WorkspaceTerminalConfig,
+} from "../../runtime";
+import {
+    appendTerminalEvidenceCommand,
+    appendTerminalEvidenceOutput,
+    createTerminalEvidence,
 } from "../../runtime";
 import { useRunSession } from "../useRunSession";
 import {
@@ -326,6 +332,10 @@ type UseWorkspaceTerminalArgs = WorkspaceTerminalConfig & {
 export function useWorkspaceTerminalController(
     args: UseWorkspaceTerminalArgs,
 ): WorkspaceTerminalController {
+    const initialEvidenceCwd = React.useMemo(() => {
+        const cwd = normalizePath(args.cwd ?? "");
+        return cwd || undefined;
+    }, [args.cwd]);
     const {
         sessionId,
         events,
@@ -355,6 +365,9 @@ export function useWorkspaceTerminalController(
         args.historyScopeKey,
     ]);
     const [terminalFeed, setTerminalFeed] = React.useState<TerminalChunk[]>([]);
+    const [terminalEvidence, setTerminalEvidence] = React.useState<TerminalEvidence>(
+        () => createTerminalEvidence(initialEvidenceCwd),
+    );
     const [inputEnabled, setInputEnabled] = React.useState(false);
     const [busy, setBusy] = React.useState(false);
     const [state, setState] = React.useState<RunSessionState | "idle">("idle");
@@ -395,6 +408,7 @@ export function useWorkspaceTerminalController(
     const historyLoadPromiseRef = React.useRef<Promise<string> | null>(null);
     const pendingInputLineRef = React.useRef("");
     const escapeSequenceRef = React.useRef("");
+    const currentCwdRef = React.useRef<string | undefined>(initialEvidenceCwd);
 
     const ensureHistoryLoaded = React.useCallback(async (): Promise<string> => {
         if (historyLoadPromiseRef.current) {
@@ -457,6 +471,10 @@ export function useWorkspaceTerminalController(
 
         const trimmed = line.trim();
         if (!trimmed) return;
+
+        setTerminalEvidence((prev) =>
+            appendTerminalEvidenceCommand(prev, trimmed, currentCwdRef.current),
+        );
 
         if (isPersistentHistoryClearCommand(trimmed)) {
             await persistHistoryContent("");
@@ -529,8 +547,10 @@ export function useWorkspaceTerminalController(
         historyLoadPromiseRef.current = null;
         pendingInputLineRef.current = "";
         escapeSequenceRef.current = "";
+        currentCwdRef.current = initialEvidenceCwd;
+        setTerminalEvidence(createTerminalEvidence(initialEvidenceCwd));
         void ensureHistoryLoaded();
-    }, [ensureHistoryLoaded]);
+    }, [ensureHistoryLoaded, initialEvidenceCwd]);
 
     React.useEffect(() => {
         startedRef.current = started;
@@ -559,6 +579,7 @@ export function useWorkspaceTerminalController(
         (kind: TerminalChunk["kind"], data: string) => {
             if (!data) return;
 
+            setTerminalEvidence((prev) => appendTerminalEvidenceOutput(prev, data));
             setTerminalFeed((prev) => [
                 ...prev,
                 { id: nextChunkIdRef.current++, kind, data },
@@ -582,14 +603,16 @@ export function useWorkspaceTerminalController(
         openInFlightRef.current = null;
         pendingInputLineRef.current = "";
         escapeSequenceRef.current = "";
+        currentCwdRef.current = initialEvidenceCwd;
         setTerminalFeed([]);
+        setTerminalEvidence(createTerminalEvidence(initialEvidenceCwd));
         setInputEnabled(false);
         setBusy(false);
         setState("idle");
         setStarted(false);
         setStarting(false);
         setSyncStatus("idle");
-    }, []);
+    }, [initialEvidenceCwd]);
 
     const reset = React.useCallback(() => {
         clearQuietTimer();
@@ -1055,6 +1078,7 @@ export function useWorkspaceTerminalController(
         sessionId,
         state,
         terminalFeed,
+        terminalEvidence,
         syncStatus,
 
         open,

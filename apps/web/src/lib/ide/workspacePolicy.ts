@@ -2,6 +2,24 @@ import type { FSNode, WorkspaceStateV2 } from "@/components/ide/types";
 import type { IdeWorkspaceAccess } from "@/components/ide/workspaceHook/workspace.types";
 import type { WorkspaceLanguage } from "@/lib/practice/types";
 
+export type IdeFileActionsConfig = {
+    enabled?: boolean;
+    createFile?: boolean;
+    createFolder?: boolean;
+    rename?: boolean;
+    delete?: boolean;
+    dragDrop?: boolean;
+};
+
+export type ResolvedIdeFileActions = {
+    enabled: boolean;
+    createFile: boolean;
+    createFolder: boolean;
+    rename: boolean;
+    delete: boolean;
+    dragDrop: boolean;
+};
+
 export type IdeWorkspacePolicy = {
     canCreateFiles: boolean;
     canCreateFolders: boolean;
@@ -26,6 +44,36 @@ export type ImportedWorkspaceFile = {
 
 export const DEFAULT_WORKSPACE_FILE_CONTENT_BYTES = 1 * 1024 * 1024;
 export const DEFAULT_WORKSPACE_STDIN_BYTES = 64 * 1024;
+export const DEFAULT_IDE_FILE_ACTIONS: ResolvedIdeFileActions = {
+    enabled: true,
+    createFile: true,
+    createFolder: true,
+    rename: true,
+    delete: true,
+    dragDrop: true,
+};
+
+export function resolveIdeFileActions(
+    config?: IdeFileActionsConfig | null,
+): ResolvedIdeFileActions {
+    const merged: ResolvedIdeFileActions = {
+        ...DEFAULT_IDE_FILE_ACTIONS,
+        ...(config ?? {}),
+    };
+
+    if (!merged.enabled) {
+        return {
+            enabled: false,
+            createFile: false,
+            createFolder: false,
+            rename: false,
+            delete: false,
+            dragDrop: false,
+        };
+    }
+
+    return merged;
+}
 
 export function bytesOfText(input: string) {
     return new TextEncoder().encode(String(input ?? "")).length;
@@ -34,10 +82,22 @@ export function bytesOfText(input: string) {
 export function resolveWorkspacePolicy(
     access: IdeWorkspaceAccess,
     lang: WorkspaceLanguage,
+    fileActions?: IdeFileActionsConfig | null,
 ): IdeWorkspacePolicy {
+    const resolvedFileActions = resolveIdeFileActions(fileActions);
+    const applyFileActions = (policy: IdeWorkspacePolicy): IdeWorkspacePolicy => ({
+        ...policy,
+        canCreateFiles: policy.canCreateFiles && resolvedFileActions.createFile,
+        canCreateFolders: policy.canCreateFolders && resolvedFileActions.createFolder,
+        canRenameNodes: policy.canRenameNodes && resolvedFileActions.rename,
+        canDeleteNodes: policy.canDeleteNodes && resolvedFileActions.delete,
+        canMoveNodes: policy.canMoveNodes && resolvedFileActions.dragDrop,
+        canUploadFiles: policy.canUploadFiles && resolvedFileActions.enabled,
+    });
+
     if (!access.hasUser) {
         if (lang === "web" || lang === "sql") {
-            return {
+            return applyFileActions({
                 canCreateFiles: false,
                 canCreateFolders: false,
                 canRenameNodes: false,
@@ -52,10 +112,10 @@ export function resolveWorkspacePolicy(
                 maxDepth: 1,
                 maxFileContentBytes: 256 * 1024,
                 maxStdinBytes: 16 * 1024,
-            };
+            });
         }
 
-        return {
+        return applyFileActions({
             canCreateFiles: false,
             canCreateFolders: false,
             canRenameNodes: false,
@@ -70,11 +130,11 @@ export function resolveWorkspacePolicy(
             maxDepth: 1,
             maxFileContentBytes: 256 * 1024,
             maxStdinBytes: 16 * 1024,
-        };
+        });
     }
 
     if (!access.canUseMultiFile) {
-        return {
+        return applyFileActions({
             canCreateFiles: true,
             canCreateFolders: false,
             canRenameNodes: true,
@@ -89,10 +149,10 @@ export function resolveWorkspacePolicy(
             maxDepth: 1,
             maxFileContentBytes: 512 * 1024,
             maxStdinBytes: 32 * 1024,
-        };
+        });
     }
 
-    return {
+    return applyFileActions({
         canCreateFiles: true,
         canCreateFolders: true,
         canRenameNodes: true,
@@ -107,7 +167,7 @@ export function resolveWorkspacePolicy(
         maxDepth: 8,
         maxFileContentBytes: DEFAULT_WORKSPACE_FILE_CONTENT_BYTES,
         maxStdinBytes: DEFAULT_WORKSPACE_STDIN_BYTES,
-    };
+    });
 }
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {

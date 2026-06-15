@@ -1,5 +1,6 @@
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SavedSketchState } from "@/components/sketches/subjects/types";
+import type { TerminalEvidence } from "@/lib/practice/types";
 
 import type { ReviewTargetEntry } from "./reviewTargetRegistry";
 export type CardStateKey = string;
@@ -53,6 +54,7 @@ export type ExerciseRuntimeState = {
     solutionCode?: string;
     solutionFiles?: Record<string, string>;
   };
+  terminalEvidence?: TerminalEvidence;
 
   sketch?: SketchState | null;
   status: ExerciseRuntimeStatus;
@@ -133,6 +135,7 @@ export type EditorRuntimeState = {
   workspace: WorkspaceStateV2 | null;
   code: string;
   stdin: string;
+  terminalEvidence?: TerminalEvidence;
   updatedAt: number;
 };
 
