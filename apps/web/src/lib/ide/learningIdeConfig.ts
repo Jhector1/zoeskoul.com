@@ -162,11 +162,15 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
         ...(wantsFiles || terminalWorkspaceMode
             ? {
                 explorer: {
-                    enabled: true,
+                    // Terminal-workspace lessons intentionally hide the visual file
+                    // tree so Linux learners practice `ls`, `cd`, `cat`, `touch`,
+                    // `mkdir`, `rm`, `mv`, and `cp` in the shell instead of using
+                    // Explorer buttons.
+                    enabled: !terminalWorkspaceMode,
                     allowMobileDrawer: false,
-                    allowResize: true,
+                    allowResize: !terminalWorkspaceMode,
                     showFilter: false,
-                    showActions: true,
+                    showActions: !terminalWorkspaceMode,
                     showHistoryControls: false,
                     showFooter: false,
                     showStdin: false,

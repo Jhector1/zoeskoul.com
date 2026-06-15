@@ -36,6 +36,12 @@ export type TerminalChunk = {
     data: string;
 };
 
+export type TerminalRecoverState =
+    | "none"
+    | "restart_available"
+    | "starting"
+    | "blocked_too_many_sessions";
+
 const MAX_TERMINAL_EVIDENCE_COMMANDS = 50;
 const MAX_TERMINAL_EVIDENCE_OUTPUT_CHARS = 20_000;
 
@@ -124,10 +130,14 @@ export type WorkspaceTerminalController = {
     terminalFeed: TerminalChunk[];
     terminalEvidence: TerminalEvidence;
     syncStatus: "idle" | "pushing" | "pulling" | "error";
+    recoverState: TerminalRecoverState;
+    recoverMessage: string | null;
+    restarting: boolean;
 
     open: () => Promise<void>;
     stop: () => Promise<void>;
     reset: () => void;
+    restart: () => Promise<void>;
 
     sendData: (data: string) => void;
     resize: (cols: number, rows: number) => void;

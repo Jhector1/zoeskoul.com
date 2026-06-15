@@ -183,6 +183,25 @@ const PRESETS: Record<FullIDEServicePreset, FullIDEServices> = {
     runner: RUNNER_PRESET,
 };
 
+function disableExplorerServices(explorer: FullIDEExplorerServices) {
+    explorer.enabled = false;
+    explorer.allowMobileDrawer = false;
+    explorer.allowResize = false;
+    explorer.showFilter = false;
+    explorer.showActions = false;
+    explorer.showHistoryControls = false;
+    explorer.showFooter = false;
+    explorer.showStdin = false;
+    explorer.fileActions = {
+        enabled: false,
+        createFile: false,
+        createFolder: false,
+        rename: false,
+        delete: false,
+        dragDrop: false,
+    };
+}
+
 function mergeServices(base: FullIDEServices, overrides?: FullIDEServicesInput): FullIDEServices {
     return {
         chrome: {
@@ -225,34 +244,27 @@ export function resolveFullIDEServices(args?: {
         merged.chrome.showTopLanguageButtons = false;
     }
 
-    if (!merged.explorer.enabled) {
-        merged.explorer.allowMobileDrawer = false;
-        merged.explorer.allowResize = false;
-        merged.explorer.showFilter = false;
-        merged.explorer.showActions = false;
-        merged.explorer.showHistoryControls = false;
-        merged.explorer.showFooter = false;
-        merged.explorer.showStdin = false;
-        merged.explorer.fileActions = {
-            enabled: false,
-            createFile: false,
-            createFolder: false,
-            rename: false,
-            delete: false,
-            dragDrop: false,
-        };
+    if (!merged.runner.showTerminal) {
+        merged.runner.showTerminalDockToggle = false;
+        merged.runner.enableWorkspaceTerminal = false;
+    }
+
+    if (!merged.editor.showEditor) {
+        merged.editor.showTabs = false;
+    }
+
+    const terminalOnlyWorkspace =
+        !merged.editor.showEditor &&
+        merged.runner.showTerminal &&
+        merged.runner.enableWorkspaceTerminal;
+
+    if (!merged.explorer.enabled || terminalOnlyWorkspace) {
+        disableExplorerServices(merged.explorer);
     }
 
     if (!merged.projects.showSaveControls) {
         merged.projects.showSaveAs = false;
     }
 
-    if (!merged.runner.showTerminal) {
-        merged.runner.showTerminalDockToggle = false;
-        merged.runner.enableWorkspaceTerminal = false;
-    }
-    if (!merged.editor.showEditor) {
-        merged.editor.showTabs = false;
-    }
     return merged;
 }

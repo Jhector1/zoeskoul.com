@@ -105,9 +105,14 @@ export async function restartWorkspaceTerminalSession(args: {
     workspaceTerm: {
         stop: () => Promise<void>;
         open: () => Promise<void>;
+        restart?: () => Promise<void>;
     };
 }) {
     args.resetAutoOpen();
+    if (typeof args.workspaceTerm.restart === "function") {
+        await args.workspaceTerm.restart();
+        return;
+    }
     await args.workspaceTerm.stop();
     await args.workspaceTerm.open();
 }
@@ -576,7 +581,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             return;
         }
 
-        if (workspaceTerm.state === "failed") {
+        if (workspaceTerm.state === "failed" || workspaceTerm.recoverState !== "none") {
             return;
         }
 
@@ -605,6 +610,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         workspaceTerm.started,
         workspaceTerm.starting,
         workspaceTerm.state,
+        workspaceTerm.recoverState,
         workspaceTerm.open,
         terminalAutoOpenKey,
     ]);
@@ -765,6 +771,17 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     onResize={workspaceTerm.resize}
                     onBeforeSubmitEnter={workspaceTerm.beforeSubmitEnter}
                     onAfterSubmitEnter={workspaceTerm.afterSubmitEnter}
+                    recoverState={workspaceTerm.recoverState}
+                    recoverMessage={workspaceTerm.recoverMessage}
+                    restarting={workspaceTerm.restarting}
+                    onRestart={() =>
+                        restartWorkspaceTerminalSession({
+                            resetAutoOpen: () => {
+                                terminalAutoOpenRequestedKeyRef.current = null;
+                            },
+                            workspaceTerm,
+                        })
+                    }
                 />
             );
         }

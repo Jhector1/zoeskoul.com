@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import "xterm/css/xterm.css";
 import type { RunResult } from "@/lib/code/types";
-import type { TerminalChunk } from "@/components/code/runner/runtime";
+import type { TerminalChunk, TerminalRecoverState } from "@/components/code/runner/runtime";
 
 type XTermModule = typeof import("xterm");
 type XTerm = import("xterm").Terminal;
@@ -105,6 +105,18 @@ function splitInputByEnter(data: string) {
     return parts;
 }
 
+function terminalRecoveryText(state: TerminalRecoverState, message?: string | null) {
+    if (state === "none") return null;
+    if (state === "starting") return message ?? "Terminal is starting…";
+    if (state === "blocked_too_many_sessions") {
+        return (
+            message ??
+            "Too many active terminal sessions. Close another terminal or wait a moment, then restart."
+        );
+    }
+    return message ?? "Terminal session stopped. Restart the terminal to continue.";
+}
+
 export default function XtermTerminal(props: {
     terminalFeed: TerminalChunk[];
     inputEnabled: boolean;
@@ -116,6 +128,10 @@ export default function XtermTerminal(props: {
     optimisticLocalEcho?: boolean;
     onBeforeSubmitEnter?: () => Promise<void>;
     onAfterSubmitEnter?: () => Promise<void>;
+    recoverState?: TerminalRecoverState;
+    recoverMessage?: string | null;
+    restarting?: boolean;
+    onRestart?: () => void | Promise<void>;
 }) {
     const {
         terminalFeed,
@@ -126,6 +142,20 @@ export default function XtermTerminal(props: {
         onSendData,
         onResize,
     } = props;
+    const recoverState = props.recoverState ?? "none";
+    const recoverMessage = props.recoverMessage ?? null;
+    const restarting = props.restarting === true;
+    const onRestart = props.onRestart;
+    const recoveryText = terminalRecoveryText(recoverState, recoverMessage);
+    const canRestart =
+        recoverState === "restart_available" ||
+        recoverState === "blocked_too_many_sessions";
+    const restartDisabled = disabled || restarting || !onRestart;
+
+    const handleRestart = useCallback(() => {
+        if (!canRestart || restartDisabled) return;
+        void onRestart?.();
+    }, [canRestart, restartDisabled, onRestart]);
 
     const transcriptText = useMemo(
         () => terminalFeed.map((chunk) => chunk.data ?? "").join(""),
@@ -508,15 +538,48 @@ export default function XtermTerminal(props: {
 
             <div
                 className={[
-                    "mt-2 flex-1 min-h-0 overflow-hidden border-t py-2",
+                    "mt-2 flex min-h-0 flex-1 flex-col overflow-hidden border-t py-2",
                     "bg-white/60 dark:bg-black/30",
                     "border-neutral-200 dark:border-white/10",
                 ].join(" ")}
                 data-testid="interactive-terminal-panel"
             >
+                {recoveryText ? (
+                    <div
+                        className={[
+                            "mx-2 mb-2 flex flex-wrap items-center justify-between gap-2 rounded-lg border px-3 py-2",
+                            recoverState === "blocked_too_many_sessions"
+                                ? "border-amber-200 bg-amber-50 text-amber-950 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-100"
+                                : "border-red-200 bg-red-50 text-red-950 dark:border-red-400/20 dark:bg-red-400/10 dark:text-red-100",
+                        ].join(" ")}
+                        data-testid="interactive-terminal-recovery"
+                    >
+                        <div className="min-w-0 flex-1 text-xs font-semibold">
+                            {recoveryText}
+                        </div>
+
+                        {canRestart ? (
+                            <button
+                                type="button"
+                                onClick={handleRestart}
+                                disabled={restartDisabled}
+                                className={[
+                                    "inline-flex h-8 items-center justify-center rounded-md border px-3 text-xs font-extrabold transition-colors",
+                                    restartDisabled
+                                        ? "cursor-not-allowed border-neutral-200 bg-neutral-100 text-neutral-400 dark:border-white/10 dark:bg-white/[0.03] dark:text-white/30"
+                                        : "border-neutral-300 bg-white text-neutral-900 hover:bg-neutral-50 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/90 dark:hover:bg-white/[0.12]",
+                                ].join(" ")}
+                                aria-label="Restart terminal"
+                            >
+                                {restarting ? "Restarting…" : "Restart terminal"}
+                            </button>
+                        ) : null}
+                    </div>
+                ) : null}
+
                 <div
                     ref={hostRef}
-                    className="relative h-full min-h-0 w-full px-2 pb-2"
+                    className="relative min-h-0 w-full flex-1 px-2 pb-2"
                     data-testid="interactive-terminal"
                     aria-label="Interactive terminal"
                     onMouseDown={(e) => {

@@ -66,6 +66,9 @@ vi.mock("@/components/code/runner/hooks/pty/useWorkspaceTerminalController", () 
             inputEnabled: true,
             busy: false,
             syncStatus: "idle",
+            recoverState: "none",
+            recoverMessage: null,
+            restarting: false,
             sendData: vi.fn(),
             resize: vi.fn(),
             beforeSubmitEnter: vi.fn(),
@@ -77,6 +80,7 @@ vi.mock("@/components/code/runner/hooks/pty/useWorkspaceTerminalController", () 
             open: vi.fn(),
             stop: vi.fn(),
             reset: vi.fn(),
+            restart: vi.fn(),
             replaceFiles: vi.fn(),
             snapshotFiles: vi.fn(),
         };

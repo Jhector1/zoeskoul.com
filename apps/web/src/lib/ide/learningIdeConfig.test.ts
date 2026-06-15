@@ -97,7 +97,7 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
         expect(resolved.access.canUseMultiFile).toBe(true);
     });
 
-    it("hides editor and tabs in terminal_workspace mode", () => {
+    it("hides explorer, editor, and tabs in terminal_workspace mode", () => {
         const resolved = resolveFullIDEConfigFromLearningIde({
             ideConfig: {
                 layoutMode: "terminal_workspace",
@@ -107,7 +107,8 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
             },
         });
 
-        expect(resolved.services.explorer?.enabled).toBe(true);
+        expect(resolved.services.explorer?.enabled).toBe(false);
+        expect(resolved.services.explorer?.showActions).toBe(false);
         expect(resolved.services.editor?.showEditor).toBe(false);
         expect(resolved.services.editor?.showTabs).toBe(false);
         expect(resolved.services.explorer?.fileActions).toEqual({
@@ -129,7 +130,7 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
             },
         });
 
-        expect(resolved.services.explorer?.enabled).toBe(true);
+        expect(resolved.services.explorer?.enabled).toBe(false);
         expect(resolved.services.runner?.showTerminal).toBe(true);
         expect(resolved.services.runner?.enableWorkspaceTerminal).toBe(true);
         expect(resolved.services.runner?.allowRun).toBe(false);
